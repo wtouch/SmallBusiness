@@ -1,5 +1,8 @@
 'use strict';
-/* Controllers */
+define([
+	'angular',
+	'angularRoute', 'css!../css/style.css'
+], function(angular) {
 angular.module('realEstate.controllers',[]).
 controller('responseCtrl', function($scope,$http, $routeParams, $location) {
 	if(!$routeParams.type && !$routeParams.status){
@@ -168,26 +171,7 @@ controller('registerCtrl', function($scope,$http,$routeParams) {
 		})
 	}
 });
-/*.
-controller('loginCtrl', function($scope,$http) {
-		//Add data
-	$scope.update = function(){
-		console.log($scope.login);
-		$http.post("server-api/index.php/login/", $scope.login)
-		.success(function(response) {
-			alert(response);
-			//$scope.reset();
-		})
-	}
-	//Get data
-	$http.get("server-api/index.php/login")
-		.success(function(response) {$scope.properties = response;
-			console.log($scope.properties);
-		});
-	
 });
-*/
-
 
 
 
