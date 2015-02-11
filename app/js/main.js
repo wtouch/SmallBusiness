@@ -7,8 +7,9 @@ require.config({
 		angularRoute: '../lib/angular/angular-route',
 		angularMocks: '../lib/angular/angular-mocks',
 		text: '../lib/requirejs-text/text',
-		bootstrap: '../lib/bootstrap/bootstrap.min',
-		css: '../lib/css.min'
+		bootstrap: '../lib/bootstrap/ui-bootstrap',
+		css: '../lib/css/css.min',
+		modules: '../modules',
 	},
 	shim: {
 		'angular' : {'exports' : 'angular'},
@@ -25,18 +26,12 @@ require.config({
 	
 	
 });
-function loadCss(url) {
-    var link = document.createElement("link");
-    link.type = "text/css";
-    link.rel = "stylesheet";
-    link.href = url;
-    document.getElementsByTagName("head")[0].appendChild(link);
-}
 
 require([
 	'angular',
+	'angularRoute',
 	'app'
-	], function(angular, app) {
+	], function(angular, angularRoute, app) {
 		var $html = angular.element(document.getElementsByTagName('html')[0]);
 		angular.element().ready(function() {
 			// bootstrap the app manually
