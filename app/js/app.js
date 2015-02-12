@@ -38,8 +38,8 @@ define(['angular',
                 //The second parameter allows for putting related controllers/views into subfolders to better organize large projects
                 //Thanks to Ton Yeung for the idea and contribution
 				
-                .when('/home', route.resolve('Home', 'home/'))
-                .when('/users', route.resolve('Users', 'users/'))
+                .when('/home', route.resolve({controller:'home', template: 'home', directive: 'vilas'}, 'home/'))
+                .when('/users', route.resolve('users', 'users/'))
                 .otherwise({ redirectTo: '/home' });
 	}]);
 	app.run(['$location', '$rootScope', function($location, $rootScope) {

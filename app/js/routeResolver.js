@@ -9,43 +9,91 @@ define([], function () {
         };
 
         this.routeConfig = function () {
-            var viewsDirectory = '/app/customersApp/views/',
-                controllersDirectory = '/app/customersApp/controllers/',
+            var viewsDirectory = '/app/views/',
+                controllersDirectory = '/app/controllers/',
+				directivesDirectory = '/app/directives/',
+				servicesDirectory = '/app/services/',
 
-            setBaseDirectories = function (viewsDir, controllersDir) {
+            setBaseDirectories = function (viewsDir, controllersDir, directivesDir, servicesDir) {
                 viewsDirectory = viewsDir;
-                controllersDirectory = controllersDir;
+                controllersDirectory = (controllersDir) ? controllersDir : viewsDir;
+				directivesDirectory = (directivesDir) ? directivesDir : viewsDir;
+				servicesDirectory = (servicesDir) ? servicesDir : viewsDir;
             },
 
             getViewsDirectory = function () {
                 return viewsDirectory;
             },
-
-            getControllersDirectory = function () {
+			
+			getControllersDirectory = function () {
                 return controllersDirectory;
-            };
+            },
 
+            getDirectivesDirectory = function () {
+                return directivesDirectory;
+            },
+			
+			getServicesDirectory = function () {
+                return servicesDirectory;
+            };
+			
+			
             return {
                 setBaseDirectories: setBaseDirectories,
                 getControllersDirectory: getControllersDirectory,
-                getViewsDirectory: getViewsDirectory
+                getViewsDirectory: getViewsDirectory,
+				getDirectivesDirectory : getDirectivesDirectory,
+				getServicesDirectory : getServicesDirectory
             };
         }();
 
         this.route = function (routeConfig) {
 
             var resolve = function (baseName, path, controllerAs, secure) {
-                if (!path) path = '';
-
+                //baseName = {};
+				var ctrl, temp, dir, serv, dependencies = [];
+				
+				if(angular.isObject(baseName)){
+					var fName;
+					for(fName in baseName){
+						if(fName == 'template'){
+							temp = routeConfig.getViewsDirectory() + path + baseName[fName] + '.html';
+						}
+						if(fName == 'controller') {
+							ctrl = baseName[fName]+"Controller";
+							dependencies.push(routeConfig.getControllersDirectory() + path + ctrl+".js");
+						}
+						if(fName == 'directive'){
+							dir = baseName[fName];
+							dependencies.push(routeConfig.getDirectivesDirectory() + path + dir+".js");
+						}
+						if(fName == 'service'){
+							serv = baseName[fName];
+							dependencies.push(routeConfig.getServicesDirectory() + path + serv+".js");
+						}
+					}
+				}else{
+					temp = routeConfig.getViewsDirectory() + path + baseName + '.html';
+					ctrl = baseName+"Controller";
+					dependencies.push(routeConfig.getControllersDirectory() + path + ctrl+".js");
+					console.log("not an object");
+				}
+				
+				if (!path) path = '';
+				
+				var fileName = baseName.ctrl;
+				
                 var routeDef = {};
-                var baseFileName = baseName.charAt(0).toLowerCase() + baseName.substr(1);
-                routeDef.templateUrl = routeConfig.getViewsDirectory() + path + baseFileName + '.html';
-                routeDef.controller = baseName + 'Controller';
+                
+                routeDef.templateUrl = temp;
+                routeDef.controller = ctrl;
                 if (controllerAs) routeDef.controllerAs = controllerAs;
                 routeDef.secure = (secure) ? secure : false;
                 routeDef.resolve = {
                     load: ['$q', '$rootScope', function ($q, $rootScope) {
-                        var dependencies = [routeConfig.getControllersDirectory() + path + baseFileName + 'Controller.js'];
+						//var controller = routeConfig.getControllersDirectory() + path + baseFileName + 'Controller.js';
+						//var dire = (fileName.dir) ? routeConfig.getControllersDirectory() + path + fileName.dir +'.js' : "";
+                        //var dependencies1 = [controller, dire];
                         return resolveDependencies($q, $rootScope, dependencies);
                     }]
                 };

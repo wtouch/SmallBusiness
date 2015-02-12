@@ -4,7 +4,7 @@ define(['app', 'css!modules/users/users'], function (app) {
     var injectParams = ['$scope', '$injector','data'];
 
     // This is controller for this view
-	var UsersController = function ($scope, $injector, data) {
+	var usersController = function ($scope, $injector, data) {
 		$scope.page = data.page;
 		
     };
@@ -15,10 +15,10 @@ define(['app', 'css!modules/users/users'], function (app) {
     };
     
 	// Inject controller's dependencies
-	UsersController.$inject = injectParams;
+	usersController.$inject = injectParams;
 	
 	// Register/apply controller dynamically
-    app.register.controller('UsersController', UsersController);
+    app.register.controller('usersController', usersController);
 	
 	// Register service to controller/module dynamically
 	app.register.service('data', HomeService);

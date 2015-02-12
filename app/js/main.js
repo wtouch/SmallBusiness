@@ -3,6 +3,7 @@
 require.config({
 	paths: {
 		angular: '../lib/angular/angular',
+		routeResolver: '../js/routeResolver',
 		jquery: '../lib/jquery/jquery',
 		angularRoute: '../lib/angular/angular-route',
 		angularMocks: '../lib/angular/angular-mocks',
@@ -13,6 +14,7 @@ require.config({
 	},
 	shim: {
 		'angular' : {'exports' : 'angular'},
+		'routeResolver': { "deps": ['angular', 'angularRoute'] },
 		'bootstrap': { "deps": ['jquery'] },
 		'angularRoute': ['angular'],
 		'angularMocks': {
