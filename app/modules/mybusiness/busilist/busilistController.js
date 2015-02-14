@@ -3,7 +3,7 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','data'];
+    var injectParams = ['$scope', '$injector'];
 
     // This is controller for this view
 	var busilistController = function ($scope, $injector) {
