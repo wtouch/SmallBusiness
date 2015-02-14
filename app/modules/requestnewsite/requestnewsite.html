@@ -1,0 +1,75 @@
+
+
+<section>
+    <!--<div class="container">-->
+        <div class="row">
+	        <div class="col-md-9 center-block">
+				
+				<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
+					
+					
+					<hr></hr>
+					
+					<label  for="name" class="col-md-3 control-label">Name</label>	
+					<div class="form-group">
+							
+						<div class="col-md-4">
+                            <input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="name" required >
+							<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
+							<span ng-show="myForm.name.$error.required">Name is required.</span>
+							</span>
+                        </div>						
+                    </div>
+			
+					<label  for="domain" class="col-md-3 control-label">Domain Name</label>	
+					<div class="form-group">	
+						<div class="col-md-4">
+                            <input type="text" id="domain" class="form-control" name="domain" placeholder="Domain Name" ng-model="domain" required >
+							<span style="color:red" ng-show="myForm.domain.$dirty && myForm.domain.$invalid">
+							<span ng-show="myForm.domain.$error.required">Domain Name is required.</span>
+							</span>
+                        </div>						
+                    </div>
+					
+					<label  for="contact" class="col-md-3 control-label">Contact Number</label>	
+					<div class="form-group">	
+						<div class="col-md-4">
+                            <input type="text" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="contact" required >
+							<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
+							<span ng-show="myForm.contact.$error.required">Contact is required.</span>
+							</span>
+                        </div>						
+                    </div>
+					
+					<label  for="product" class="col-md-3 control-label">Product/Services</label>	
+					<div class="form-group">
+							
+						<div class="col-md-4">
+                            <input type="textarea" id="product" class="form-control" name="product" placeholder="Product/Services" ng-model="address" required >
+							<span style="color:red" ng-show="myForm.product.$dirty && myForm.product.$invalid">
+							<span ng-show="myForm.product.$error.required">Product/Services is Required.</span>
+							</span>
+                        </div>						
+                    </div>
+					
+					<label for="custom" class="col-sm-3 control-label pull-left">Required Custom</label>	
+					<div class="form-group">			
+						<div class="col-sm-4">
+							<input type="radio" name="custom" value="Yes" checked="true">Yes
+							<input type="radio" name="custom" value="No">No							
+						</div>
+					</div>
+				
+	              	<div class="form-group" > 
+                        <div class="col-md-3">
+							<button type="submit" class="btn btn-primary" name="submit" value="submit">Save</button>		
+						</div>
+						<div class="col-md-3">
+							<button type="reset" class="btn btn-primary" name="reset" value="reset">Reset</button>		
+						</div>
+					</div>				
+				</form>
+			</div>
+        </div>
+	<!--/div-->	
+</section>

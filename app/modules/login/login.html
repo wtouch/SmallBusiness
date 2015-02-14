@@ -1,0 +1,51 @@
+
+
+<section>
+    <!--<div class="container">-->
+        <div class="row">
+	        <div class="col-md-9 center-block">
+				
+				<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
+					
+					
+					<hr></hr>
+					
+					<label  for="uname" class="col-md-3 control-label">User Name</label>	
+					<div class="form-group">
+							
+						<div class="col-md-4">
+                            <input type="text" id="uname" class="form-control" name="uname" placeholder="User Name" ng-model="uname" required >
+							<span style="color:red" ng-show="myForm.uname.$dirty && myForm.uname.$invalid">
+							<span ng-show="myForm.uname.$error.required">User Name is required.</span>
+							</span>
+                        </div>						
+                    </div>
+
+					<label  for="password" class="col-md-3 control-label">Password</label>	
+					<div class="form-group">	
+						<div class="col-md-4">
+                            <input type="text" id="password" class="form-control" name="password" placeholder="Password" ng-model="password" required >
+							<span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+							<span ng-show="myForm.password.$error.required">Password is required.</span>
+							</span>
+                        </div>						
+                    </div>	
+					
+				<div class="col-md-4">
+					<div class="checkbox">
+						<input type="checkbox" id="blankCheckbox" value="option1" aria-label="..."> Remember Me
+					</div>
+				</div>
+	              	<div class="form-group" > 
+                        <div class="col-md-3">
+							<button type="submit" class="btn btn-primary" name="submit" value="submit">Save</button>		
+						</div>
+						<div class="col-md-3">
+							<button type="reset" class="btn btn-primary" name="reset" value="reset">Reset</button>		
+						</div>
+					</div>			
+				</form>
+			</div>
+        </div>
+	<!--/div-->	
+</section>
