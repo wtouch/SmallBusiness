@@ -32,7 +32,6 @@ define(['angular',
 				
 				$routeProvider
                 
-				
                 .when('/home', route.resolve({controller:'home', template: 'home', directive: 'vilas'}, 'home/'))
 				.when('/newbusi', route.resolve({controller:'newbusi', template: 'newbusi'}, 'newbusi/'))
 				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist', }, 'busilist/'))
