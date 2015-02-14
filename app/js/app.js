@@ -15,7 +15,7 @@ define(['angular',
 				function($routeProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider) {
 				
 				//Change default views and controllers directory using the following:
-				routeResolverProvider.routeConfig.setBaseDirectories('/app/modules/', '/app/modules/');
+				routeResolverProvider.routeConfig.setBaseDirectories('modules/', 'modules/');
 				
 				app.register =
 				{
