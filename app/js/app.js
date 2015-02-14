@@ -39,7 +39,7 @@ define(['angular',
                 //Thanks to Ton Yeung for the idea and contribution
 				
                 .when('/home', route.resolve({controller:'home', template: 'home', directive: 'vilas'}, 'home/'))
-                .when('/users', route.resolve('users', 'users/'))
+                .when('/users', route.resolve({controller:'users', template:'users'}, 'users/'))
                 .otherwise({ redirectTo: '/home' });
 	}]);
 	app.run(['$location', '$rootScope', function($location, $rootScope) {

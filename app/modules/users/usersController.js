@@ -1,18 +1,15 @@
 'use strict';
 
 define(['app', 'css!modules/users/users'], function (app) {
-    var injectParams = ['$scope', '$injector','data'];
+    var injectParams = ['$scope', '$injector'];
 
     // This is controller for this view
-	var usersController = function ($scope, $injector, data) {
-		$scope.page = data.page;
+	var usersController = function ($scope, $injector) {
+		$scope.page = "this is page";
 		
     };
 	
-	// This is service for this controller/view
-	var HomeService = function () {
-		this.page = "This is USERS Page!";
-    };
+	
     
 	// Inject controller's dependencies
 	usersController.$inject = injectParams;
@@ -20,6 +17,5 @@ define(['app', 'css!modules/users/users'], function (app) {
 	// Register/apply controller dynamically
     app.register.controller('usersController', usersController);
 	
-	// Register service to controller/module dynamically
-	app.register.service('data', HomeService);
+	
 });
