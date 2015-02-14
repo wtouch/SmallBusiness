@@ -38,7 +38,7 @@ define(['angular',
 				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist', }, 'busilist/'))
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				.when('/mailbox', route.resolve({controller:'mailbox', template: 'mailbox'}, 'mailbox/'))
-				.when('/businessprofile', route.resolve({controller:'businessprofile', template: 'businessprofile'}, 'Mybusiness/'))
+				.when('/businessprofile', route.resolve({controller:'contactprofile', template: 'businessprofile'}, 'addnewbusi/'))
                 .otherwise({ redirectTo: '/home' });
 	}]);
 	app.run(['$location', '$rootScope', function($location, $rootScope) {
