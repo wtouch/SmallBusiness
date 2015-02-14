@@ -3,7 +3,7 @@
 define(['angular',
 	'angularRoute',
 	'routeResolver',
-	'css!../css/bootstrap.min'
+	'css!../css/bootstrap.min','css!../css/style'
 ], function(angular, angularRoute) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
