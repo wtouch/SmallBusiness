@@ -42,6 +42,8 @@ define(['angular',
 				.when('/contactprofile', route.resolve({controller:'contactprofile', template: 'contactprofile'}, 'mybusiness/addnewbusi/contactprofile'))
 				.when('/testimonials', route.resolve({controller:'contactprofile', template: 'testimonials'}, 'mybusiness/addnewbusi/testimonials'))
 				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist'}, 'mybusiness/busilist'))
+				.when('/requestnewsite', route.resolve({controller:'requestnewsite', template: 'requestnewsite'}, '/mywebsite'))
+				.when('/websitelist', route.resolve({controller:'requestnewsite', template: 'websitelist'}, '/mywebsite/websitelist'))
                 .otherwise({ redirectTo: '/home' });
 	}]);
 	app.run(['$location', '$rootScope', function($location, $rootScope) {
