@@ -6,15 +6,15 @@ define(['app'], function (app) {
     var injectParams = ['$scope', '$injector','data'];
 
     // This is controller for this view
-	var homeController = function ($scope, $injector, data) {
+	var contactprofileController = function ($scope, $injector, data) {
 		console.log("this is home ctrl " + data.value);
     };
 	
     
 	// Inject controller's dependencies
-	homeController.$inject = injectParams;
+	contactprofileController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('homeController', homeController);
+    app.register.controller('contactprofileController', contactprofileController);
 	
 	
 });
