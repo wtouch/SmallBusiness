@@ -38,7 +38,10 @@ define(['angular',
 				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist', }, 'busilist/'))
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				.when('/mailbox', route.resolve({controller:'mailbox', template: 'mailbox'}, 'mailbox/'))
-				.when('/businessprofile', route.resolve({controller:'contactprofile', template: 'businessprofile'}, 'addnewbusi/'))
+				.when('/businessprofile', route.resolve({controller:'contactprofile', template: 'businessprofile'}, 'mybusiness/addnewbusi/'))
+				.when('/contactprofile', route.resolve({controller:'contactprofile', template: 'contactprofile'}, 'mybusiness/addnewbusi/contactprofile'))
+				.when('/testimonials', route.resolve({controller:'contactprofile', template: 'testimonials'}, 'mybusiness/addnewbusi/testimonials'))
+				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist'}, 'mybusiness/busilist'))
                 .otherwise({ redirectTo: '/home' });
 	}]);
 	app.run(['$location', '$rootScope', function($location, $rootScope) {
