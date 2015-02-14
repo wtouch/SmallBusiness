@@ -37,7 +37,7 @@ require([
 		var $html = angular.element(document.getElementsByTagName('html')[0]);
 		angular.element().ready(function() {
 			// bootstrap the app manually
-			angular.bootstrap(document, ['realEstate']);
+			angular.bootstrap(document, ['smallBusiness']);
 		});
 	}
 );

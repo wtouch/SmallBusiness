@@ -34,11 +34,15 @@ define(['angular',
                 
 				
                 .when('/home', route.resolve({controller:'home', template: 'home', directive: 'vilas'}, 'home/'))
+<<<<<<< HEAD
+                .when('/users', route.resolve({controller:'users', template:'users'}, 'users/'))
+=======
 				.when('/newbusi', route.resolve({controller:'newbusi', template: 'newbusi'}, 'newbusi/'))
 				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist', }, 'busilist/'))
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				.when('/mailbox', route.resolve({controller:'mailbox', template: 'mailbox'}, 'mailbox/'))
 				.when('/businessprofile', route.resolve({controller:'businessprofile', template: 'businessprofile'}, 'businessprofile/'))
+>>>>>>> style.css,app.js,main.js edited
                 .otherwise({ redirectTo: '/home' });
 	}]);
 	app.run(['$location', '$rootScope', function($location, $rootScope) {
