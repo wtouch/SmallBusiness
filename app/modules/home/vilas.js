@@ -1,6 +1,6 @@
 'use strict';
 
-define(['app', 'css!modules/home/home'], function (app) {
+define(['app'], function (app) {
     
 	// This is service for this controller/view
 	var HomeService = function () {
