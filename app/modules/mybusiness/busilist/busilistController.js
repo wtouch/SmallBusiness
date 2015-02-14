@@ -13,7 +13,7 @@ define(['app'], function (app) {
 	
     
 	// Inject controller's dependencies
-	homeController.$inject = injectParams;
+	busilistController.$inject = injectParams;
 	// Register/apply controller dynamically
     app.register.controller('busilistController', busilistController);
 	
