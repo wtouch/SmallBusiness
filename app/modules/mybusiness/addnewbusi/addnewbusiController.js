@@ -6,15 +6,15 @@ define(['app'], function (app) {
     var injectParams = ['$scope', '$injector'];
 
     // This is controller for this view
-	var busilistController = function ($scope, $injector) {
-		console.log("Business List ");
+	var addnewbusiController = function ($scope, $injector) {
+		console.log("this is addnewbusi ctrl ");
     };
 	
     
 	// Inject controller's dependencies
-	busilistController.$inject = injectParams;
+	addnewbusiController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('busilistController', busilistController);
+    app.register.controller('addnewbusiController', addnewbusiController);
 	
 	
 });

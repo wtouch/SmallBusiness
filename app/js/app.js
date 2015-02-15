@@ -38,11 +38,11 @@ define(['angular',
                 .when('/home', route.resolve({controller:'home', template: 'home', directive: 'vilas'}, 'home/'))				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				
-				.when('/businessprofile', route.resolve({controller:'contactprofile', template: 'businessprofile'}, 'mybusiness/addnewbusi/'))
-				.when('/contactprofile', route.resolve({controller:'contactprofile', template: 'contactprofile'}, 'mybusiness/addnewbusi/contactprofile'))
-				.when('/testimonials', route.resolve({controller:'contactprofile', template: 'testimonials'}, 'mybusiness/addnewbusi/testimonials'))
-				.when('/newbusi', route.resolve({controller:'contactprofile', template: 'newbusi'}, 'mybusiness/addnewbusi/'))
-				.when('/infrastructure', route.resolve({controller:'contactprofile', template: 'infrastructure'}, 'mybusiness/addnewbusi/'))
+				.when('/businessprofile', route.resolve({controller:'addnewbusi', template: 'businessprofile'}, 'mybusiness/addnewbusi/'))
+				.when('/contactprofile', route.resolve({controller:'addnewbusi', template: 'contactprofile'}, 'mybusiness/addnewbusi/'))
+				.when('/testimonials', route.resolve({controller:'addnewbusi', template: 'testimonials'}, 'mybusiness/addnewbusi/'))
+				.when('/newbusi', route.resolve({controller:'addnewbusi', template: 'newbusi'}, 'mybusiness/addnewbusi/'))
+				.when('/infrastructure', route.resolve({controller:'addnewbusi', template: 'infrastructure'}, 'mybusiness/addnewbusi/'))
 				
 				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist'}, 'mybusiness/list/'))
 				
