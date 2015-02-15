@@ -53,6 +53,8 @@ define(['angular',
 				.when('/requestedsitelist', route.resolve({controller:'mywebsite', template: 'requestedsitelist'}, 'mywebsite/'))
                 .otherwise({ redirectTo: '/home' });
 	}]);
+	
+		
 	app.run(['$location', '$rootScope', function($location, $rootScope) {
 		$rootScope.title = "DEFAULT Title";
 	}]);
