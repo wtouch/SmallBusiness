@@ -42,11 +42,13 @@ define(['angular',
 				.when('/contactprofile', route.resolve({controller:'contactprofile', template: 'contactprofile'}, 'mybusiness/addnewbusi/contactprofile'))
 				.when('/testimonials', route.resolve({controller:'contactprofile', template: 'testimonials'}, 'mybusiness/addnewbusi/testimonials'))
 				.when('/newbusi', route.resolve({controller:'contactprofile', template: 'newbusi'}, 'mybusiness/addnewbusi/'))
+				.when('/infrastructure', route.resolve({controller:'contactprofile', template: 'infrastructure'}, 'mybusiness/addnewbusi/'))
 				
 				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist'}, 'mybusiness/list/'))
 				
 				.when('/requestnewsite', route.resolve({controller:'mywebsite', template: 'requestnewsite'}, 'mywebsite/'))
 				.when('/websitelist', route.resolve({controller:'mywebsite', template: 'websitelist'}, 'mywebsite/'))
+				.when('/requestedsitelist', route.resolve({controller:'mywebsite', template: 'requestedsitelist'}, 'mywebsite/'))
                 .otherwise({ redirectTo: '/home' });
 	}]);
 	app.run(['$location', '$rootScope', function($location, $rootScope) {
