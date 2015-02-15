@@ -5,12 +5,13 @@
 define(['angular',
 	'angularRoute',
 	'routeResolver',
+	'bootstrap',
 	'css!../css/bootstrap.min','css!../css/style'
 ], function(angular, angularRoute) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
 	  'ngRoute',
-	  'routeResolverServices'
+	   'routeResolverServices','ui.bootstrap'
 	]);
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
                 '$compileProvider', '$filterProvider', '$provide', '$httpProvider',

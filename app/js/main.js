@@ -15,7 +15,7 @@ require.config({
 	shim: {
 		'angular' : {'exports' : 'angular'},
 		'routeResolver': { "deps": ['angular', 'angularRoute'] },
-		'bootstrap': { "deps": ['jquery'] },
+		'bootstrap': { "deps": ['angular'] },
 		'angularRoute': ['angular'],
 		'angularMocks': {
 			deps:['angular'],
