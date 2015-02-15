@@ -43,6 +43,8 @@ define(['angular',
 				.when('/testimonials', route.resolve({controller:'addnewbusi', template: 'testimonials'}, 'mybusiness/addnewbusi/'))
 				.when('/newbusi', route.resolve({controller:'addnewbusi', template: 'newbusi'}, 'mybusiness/addnewbusi/'))
 				.when('/infrastructure', route.resolve({controller:'addnewbusi', template: 'infrastructure'}, 'mybusiness/addnewbusi/'))
+				.when('/jobsandcareers', route.resolve({controller:'addnewbusi', template: 'jobsandcareers'}, 'mybusiness/addnewbusi/'))
+				.when('/products', route.resolve({controller:'addnewbusi', template: 'products'}, 'mybusiness/addnewbusi/'))
 				
 				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist'}, 'mybusiness/list/'))
 				
