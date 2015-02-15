@@ -1,5 +1,3 @@
-
-
 'use strict';
 
 define(['angular',
@@ -34,18 +32,18 @@ define(['angular',
 				
 				$routeProvider
                 
-                .when('/home', route.resolve({controller:'home', template: 'home', directive: 'vilas'}, 'home/'))				
-                .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				
+                .when('/home', route.resolve({controller:'home', template: 'home', directive: 'vilas'}, 'home/'))
+				.when('/newbusi', route.resolve({controller:'newbusi', template: 'newbusi'}, 'newbusi/'))
+				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist', }, 'busilist/'))
+                .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
+				.when('/mailbox', route.resolve({controller:'mailbox', template: 'mailbox'}, 'mailbox/'))
 				.when('/businessprofile', route.resolve({controller:'contactprofile', template: 'businessprofile'}, 'mybusiness/addnewbusi/'))
 				.when('/contactprofile', route.resolve({controller:'contactprofile', template: 'contactprofile'}, 'mybusiness/addnewbusi/contactprofile'))
 				.when('/testimonials', route.resolve({controller:'contactprofile', template: 'testimonials'}, 'mybusiness/addnewbusi/testimonials'))
-				.when('/newbusi', route.resolve({controller:'contactprofile', template: 'newbusi'}, 'mybusiness/addnewbusi/'))
-				
-				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist'}, 'mybusiness/list/'))
-				
-				.when('/requestnewsite', route.resolve({controller:'mywebsite', template: 'requestnewsite'}, 'mywebsite/'))
-				.when('/websitelist', route.resolve({controller:'mywebsite', template: 'websitelist'}, 'mywebsite/'))
+				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist'}, 'mybusiness/busilist'))
+				.when('/requestnewsite', route.resolve({controller:'requestnewsite', template: 'requestnewsite'}, '/mywebsite'))
+				.when('/websitelist', route.resolve({controller:'requestnewsite', template: 'websitelist'}, '/mywebsite/websitelist'))
                 .otherwise({ redirectTo: '/home' });
 	}]);
 	app.run(['$location', '$rootScope', function($location, $rootScope) {
