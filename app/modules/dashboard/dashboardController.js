@@ -6,9 +6,13 @@ define(['app'], function (app) {
     // This is controller for this view
 	var dashboardController = function ($scope, $injector) {
 		console.log("this is dashboard Controller");
+		$scope.goBack = function() 
+		{
+			window.history.back();
+		};
+	
     };
 	
-    
 	// Inject controller's dependencies
 	dashboardController.$inject = injectParams;
 	// Register/apply controller dynamically

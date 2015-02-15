@@ -8,6 +8,11 @@ define(['app'], function (app) {
     // This is controller for this view
 	var addnewbusiController = function ($scope, $injector) {
 		console.log("this is addnewbusi ctrl ");
+		$scope.goBack = function() 
+		{
+			window.history.back();
+		};
+	
     };
 	
     
