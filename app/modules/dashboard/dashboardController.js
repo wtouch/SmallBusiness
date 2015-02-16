@@ -1,7 +1,7 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routParams','$http'];
+    var injectParams = ['$scope', '$injector'];
 
     // This is controller for this view
 	var dashboardController = function ($scope, $injector) {

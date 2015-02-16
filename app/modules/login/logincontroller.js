@@ -6,7 +6,7 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var loginController = function ($scope,$injector) {
-		console.log("this is login ctrl");
+	//	console.log("this is login ctrl");
 		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/dashboard/dashboard.html';
     };
 	// Inject controller's dependencies

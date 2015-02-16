@@ -8,6 +8,10 @@ define(['app'], function (app) {
     // This is controller for this view
 	var busilistController = function ($scope, $injector) {
 		console.log("Business List ");
+		$scope.goBack = function() 
+		{
+			window.history.back();
+		};
     };
 	
     
