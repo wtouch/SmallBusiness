@@ -1,77 +1,74 @@
-
-
 <section>
-    <!--<div class="container">-->
-        <div class="row">
-	        <div class="col-md-9 center-block">
-				
-				<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
-					
-					
-					<hr></hr>
-					
-					<label  for="name" class="col-md-3 control-label">Name</label>	
-					<div class="form-group">
-							
-						<div class="col-md-4">
-                            <input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="cname" required >
-							<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
-							<span ng-show="myForm.name.$error.required">Name is required.</span>
-							</span>
-                        </div>						
-                    </div>
-					
-					<label  for="email" class="col-md-3 control-label">Email Id </label>	
-					<div class="form-group">	
-						<div class="col-md-4">
-                            <input type="text" id="email" class="form-control" name="email" placeholder="Email Id" ng-model="email" required >
-							<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
-							<span ng-show="myForm.email.$error.required">Email Id is required.</span>
-							</span>
-                        </div>						
-                    </div>
-					
-					<label  for="contact" class="col-md-3 control-label">Contact Number</label>	
-					<div class="form-group">	
-						<div class="col-md-4">
-                            <input type="text" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="contact" required >
-							<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
-							<span ng-show="myForm.contact.$error.required">Contact is required.</span>
-							</span>
-                        </div>						
-                    </div>
-					
-					<label  for="address" class="col-md-3 control-label">Address</label>	
-					<div class="form-group">
-							
-						<div class="col-md-4">
-                            <input type="textarea" id="address" class="form-control" name="address" placeholder="Address" ng-model="address" required >
-							<span style="color:red" ng-show="myForm.address.$dirty && myForm.address.$invalid">
-							<span ng-show="myForm.address.$error.required">Address Required.</span>
-							</span>
-                        </div>						
-                    </div>
-					
-					<label  for="dob" class="col-md-3 control-label">Date Of Birth</label>	
-					<div class="form-group">	
-						<div class="col-md-4">
-                            <input type="text" id="dob" class="form-control" name="dob" placeholder="Date Of Birth" ng-model="dob" required >
-							<span style="color:red" ng-show="myForm.dob.$dirty && myForm.dob.$invalid">
-							<span ng-show="myForm.dob.$error.required">Date Of Birth is required.</span>
-							</span>
-                        </div>						
-                    </div>
-			
-	              	<div class="form-group" > 
-                        <div class="col-md-3">
-							<button type="submit" class="btn btn-primary" name="submit" value="submit">Save</button>		
-						</div>
-						<div class="col-md-3">
-							<button type="reset" class="btn btn-primary" name="reset" value="reset">Reset</button>		
-						</div>
-					</div>			
-				</form>
+	<div class="row">
+		<div class="col-md-12 main-content">	
+			<div class="row border-bottom">
+				<div class="col-md-10" ng-include="'modules/component/breadcrumb.html'"></div>
+				<div class="col-md-2" ng-include="'modules/component/menu-back.html'"></div>
 			</div>
-        </div>
-	<!--/div-->	
+			<div class="row">
+				<div class="col-md-9 center-block">					
+					<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
+						<label  for="name" class="col-md-3 control-label">Name</label>	
+						<div class="form-group">								
+							<div class="col-md-4">
+								<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="cname" required >
+								<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
+								<span ng-show="myForm.name.$error.required">Name is required.</span>
+								</span>
+							</div>						
+						</div>
+						
+						<label  for="email" class="col-md-3 control-label">Email Id </label>	
+						<div class="form-group">	
+							<div class="col-md-4">
+								<input type="text" id="email" class="form-control" name="email" placeholder="Email Id" ng-model="email" required >
+								<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+								<span ng-show="myForm.email.$error.required">Email Id is required.</span>
+								</span>
+							</div>						
+						</div>
+						
+						<label  for="contact" class="col-md-3 control-label">Contact Number</label>	
+						<div class="form-group">	
+							<div class="col-md-4">
+								<input type="text" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="contact" required >
+								<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
+								<span ng-show="myForm.contact.$error.required">Contact is required.</span>
+								</span>
+							</div>						
+						</div>
+						
+						<label  for="address" class="col-md-3 control-label">Address</label>	
+						<div class="form-group">								
+							<div class="col-md-4">
+								<input type="textarea" id="address" class="form-control" name="address" placeholder="Address" ng-model="address" required >
+								<span style="color:red" ng-show="myForm.address.$dirty && myForm.address.$invalid">
+								<span ng-show="myForm.address.$error.required">Address Required.</span>
+								</span>
+							</div>						
+						</div>
+						
+						<label  for="dob" class="col-md-3 control-label">Date Of Birth</label>	
+						<div class="form-group">	
+							<div class="col-md-4">
+								<input type="text" id="dob" class="form-control" name="dob" placeholder="Date Of Birth" ng-model="dob" required >
+								<span style="color:red" ng-show="myForm.dob.$dirty && myForm.dob.$invalid">
+								<span ng-show="myForm.dob.$error.required">Date Of Birth is required.</span>
+								</span>
+							</div>						
+						</div>
+				
+						<div class="form-group" > 
+							<div class="col-md-3">
+								<button type="submit" class="btn btn-primary" name="submit" value="submit">Save</button>		
+							</div>
+							<div class="col-md-3">
+								<button type="reset" class="btn btn-primary" name="reset" value="reset">Reset</button>		
+							</div>
+						</div>			
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
