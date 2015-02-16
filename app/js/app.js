@@ -45,6 +45,8 @@ define(['angular',
 				
 				.when('/contactprofile', route.resolve({controller:'addnewbusi', template: 'contactprofile'}, 'mybusiness/addnewbusi/'))
 				
+				.when('/editprofile', route.resolve({controller:'addnewbusi', template: 'editprofile'}, 'mybusiness/addnewbusi/'))
+				
 				.when('/testimonials', route.resolve({controller:'addnewbusi', template: 'testimonials'}, 'mybusiness/addnewbusi/'))
 				
 				.when('/newbusi', route.resolve({controller:'addnewbusi', template: 'newbusi'}, 'mybusiness/addnewbusi/'))
@@ -66,7 +68,6 @@ define(['angular',
 				.when('/managetemp', route.resolve({controller:'managetemp', template: 'managetemp'}, 'managetemp/'))
 				
 				.when('/template', route.resolve({controller:'managetemp', template: 'template'}, 'managetemp/'))
-				
 				
 				.when('/requestedsitelist', route.resolve({controller:'mywebsite', template: 'requestedsitelist'}, 'mywebsite/'))
                 .otherwise({ redirectTo: '/home' });
