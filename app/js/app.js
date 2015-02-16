@@ -6,15 +6,16 @@ define(['angular',
 	'angularRoute',
 	'routeResolver',
 	'bootstrap',
+	'breadcrumbs',
 	'css!../css/bootstrap.min','css!../css/style'
 ], function(angular, angularRoute) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
 	  'ngRoute',
-	   'routeResolverServices','ui.bootstrap'
+	   'routeResolverServices','ui.bootstrap','ng-breadcrumbs'
 	]);
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
-                '$compileProvider', '$filterProvider', '$provide', '$httpProvider',
+                '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 
 				function($routeProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider) {
 				
 				//Change default views and controllers directory using the following:
@@ -35,13 +36,12 @@ define(['angular',
 				
 				$routeProvider
                 
-                .when('/home', route.resolve({controller:'home', template: 'home', directive: 'vilas'}, 'home/'))
-				
-				 .when('/login', route.resolve({controller:'login', template: 'login'}, 'login/'))
+                .when('/', route.resolve({controller:'login', template: 'login', label: 'Home'}, 'login/'))
+				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'login/'))
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				
-				.when('/businessprofile', route.resolve({controller:'addnewbusi', template: 'businessprofile'}, 'mybusiness/addnewbusi/'))
+				.when('/dashboard/businessprofile', route.resolve({controller:'addnewbusi', template: 'businessprofile'}, 'mybusiness/addnewbusi/'))
 				
 				.when('/contactprofile', route.resolve({controller:'addnewbusi', template: 'contactprofile'}, 'mybusiness/addnewbusi/'))
 				
@@ -49,7 +49,7 @@ define(['angular',
 				
 				.when('/testimonials', route.resolve({controller:'addnewbusi', template: 'testimonials'}, 'mybusiness/addnewbusi/'))
 				
-				.when('/newbusi', route.resolve({controller:'addnewbusi', template: 'newbusi'}, 'mybusiness/addnewbusi/'))
+				.when('/newbusi/:new?', route.resolve({controller:'addnewbusi', template: 'newbusi', label: "New Business"}, 'mybusiness/addnewbusi/'))
 				
 				.when('/infrastructure', route.resolve({controller:'addnewbusi', template: 'infrastructure'}, 'mybusiness/addnewbusi/'))
 				
@@ -70,11 +70,12 @@ define(['angular',
 				.when('/template', route.resolve({controller:'managetemp', template: 'template'}, 'managetemp/'))
 				
 				.when('/requestedsitelist', route.resolve({controller:'mywebsite', template: 'requestedsitelist'}, 'mywebsite/'))
-                .otherwise({ redirectTo: '/home' });
+                .otherwise({ redirectTo: '/' });
 	}]);
 	
 		
-	app.run(['$location', '$rootScope', function($location, $rootScope) {
+	app.run(['$location', '$rootScope', 'breadcrumbs', function($location, $rootScope, breadcrumbs) {
+		$rootScope.breadcrumbs = breadcrumbs;
 		$rootScope.title = "DEFAULT Title";
 	}]);
 	return app;

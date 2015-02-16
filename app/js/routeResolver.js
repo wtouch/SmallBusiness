@@ -81,19 +81,17 @@ define([], function () {
 				
 				if (!path) path = '';
 				
-				var fileName = baseName.ctrl;
+				var labelName = baseName.controller.substring(0,1).toUpperCase()+baseName.controller.substring(1);
 				
                 var routeDef = {};
                 
                 routeDef.templateUrl = temp;
                 routeDef.controller = ctrl;
+				routeDef.label = (baseName.label) ? baseName.label : labelName;
                 if (controllerAs) routeDef.controllerAs = controllerAs;
                 routeDef.secure = (secure) ? secure : false;
                 routeDef.resolve = {
                     load: ['$q', '$rootScope', function ($q, $rootScope) {
-						//var controller = routeConfig.getControllersDirectory() + path + baseFileName + 'Controller.js';
-						//var dire = (fileName.dir) ? routeConfig.getControllersDirectory() + path + fileName.dir +'.js' : "";
-                        //var dependencies1 = [controller, dire];
                         return resolveDependencies($q, $rootScope, dependencies);
                     }]
                 };
