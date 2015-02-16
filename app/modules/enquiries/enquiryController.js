@@ -6,7 +6,7 @@ define(['app'], function (app) {
     // This is controller for this view
 	var enquiryController = function ($scope, $injector) {
 		console.log("this is enqury Controller");
-		$scope.goInbox = function()
+		$scope.goBack = function() 
 		{
 			window.history.back();
 		};

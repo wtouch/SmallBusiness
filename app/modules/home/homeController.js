@@ -7,7 +7,7 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var homeController = function ($scope, $injector, data) {
-		console.log("this is home ctrl " + data.value);
+		//console.log("this is home ctrl " + data.value);
 		$scope.value = data.value;
     };
 	
