@@ -11,6 +11,11 @@ define(['app'], function (app) {
 			window.history.back();
 		};
 		
+		$scope.newPage = function (){
+			location.href = '#/template.html';
+			consol.log("Hiii");
+		};
+		
     };
 	
 	// Inject controller's dependencies
