@@ -36,7 +36,7 @@ define(['angular',
 				
 				$routeProvider
                 
-                .when('/', route.resolve({controller:'login', template: 'login', label: 'Home'}, 'login/'))
+                .when('/', route.resolve({controller:'login', template: 'login', label:"home"}, 'login/'))
 				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'login/'))
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
@@ -59,7 +59,7 @@ define(['angular',
 				
 				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist'}, 'mybusiness/list/'))
 				
-				.when('/enquiry', route.resolve({controller:'enquiry', template: 'enquiry'}, 'enquiries/'))
+				.when('/dashboard/enquiry/:id?', route.resolve({controller:'enquiry', template: 'enquiry'}, 'enquiries/'))
 				
 				.when('/requestnewsite', route.resolve({controller:'mywebsite', template: 'requestnewsite'}, 'mywebsite/'))
 				
