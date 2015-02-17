@@ -61,7 +61,7 @@ define(['angular',
 				
 				.when('/dashboard/enquiry/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
 				
-				.when('/dashboard/enquiry/mailview', route.resolve({controller:'enquiry', template: 'mailview',label:"MailView"}, 'enquiries/'))
+				.when('/dashboard/enquiry/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
 				
 				.when('/requestnewsite', route.resolve({controller:'mywebsites', template: 'requestnewsite',label:"Requst New Website"}, 'websites/'))
 				
