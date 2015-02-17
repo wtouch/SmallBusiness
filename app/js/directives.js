@@ -5,10 +5,8 @@
 define(['app'], function (app) {
 	
 	var app =  angular.module('customDirectives', []);
-	app.directive('goBack', function () 
-	{
-		return 
-		{
+	app.directive('goBack', function () {
+		return {
 			restrict: 'A',
 			link: function(scope, element, attrs) {
 				element.on('click', function() {

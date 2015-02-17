@@ -5,8 +5,7 @@
 				<div class="row"> 
 					<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'">
 					</div>
-					<div class="col-md-6" ng-include="'modules/component/menu-back.html'">
-					</div>
+					<div class="col-md-6" ng-include="'modules/component/menu-back.html'"></div>
 				</div>
 			</div>
 		</div>
@@ -33,7 +32,23 @@
 					<div class="col-md-6 text-right">
 						<!--<a href="#" class="glyphicon glyphicon-arrow-left btn btn-default" aria-hidden="true" ng-click="goBack()"></a>-->
 						<a href="#" class="glyphicon glyphicon-paperclip btn btn-default" aria-hidden="true" ng-click="newPage()"></a>
+						
 						<a href="#" class="glyphicon glyphicon-cog btn btn-default" aria-hidden="true"></a>
+				
+						<!--For setting dropdown-->
+						<!--<div class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							Action <span class="caret"></span>
+							</button>
+								<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+								</ul>
+						</div><!--Dropdoun end-->
+						
 					</div>
 				</div>
 				<div class="row">
@@ -43,7 +58,7 @@
 						<ng-include ng-if="!MailView" src="'modules/enquiries/mails.html'"></ng-include> 
 						<!-- if mailId set in url this html includes in view -->
 						<ng-include ng-if="MailView" src="'modules/enquiries/mailview.html'"></ng-include>
-						
+
 					</div>
 				</div>
 			</div>
