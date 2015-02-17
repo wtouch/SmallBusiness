@@ -6,7 +6,7 @@ define(['app'], function (app) {
     var injectParams = ['$scope', '$injector'];
 
     // This is controller for this view
-	var busilistController = function ($scope, $injector) {
+	var businesslistController = function ($scope, $injector) {
 		console.log("Business List ");
 		$scope.goBack = function() 
 		{
@@ -16,9 +16,9 @@ define(['app'], function (app) {
 	
     
 	// Inject controller's dependencies
-	busilistController.$inject = injectParams;
+	businesslistController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('busilistController', busilistController);
+    app.register.controller('businesslistController', businesslistController);
 	
 	
 });

@@ -2,12 +2,12 @@
 
 'use strict';
 
-define(['app', 'css!modules/mybusiness/addnewbusi/addnewbusi.css'], function (app) {
+define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (app) {
     var injectParams = ['$scope', '$injector'];
 
     // This is controller for this view
-	var addnewbusiController = function ($scope, $injector) {
-		console.log("this is addnewbusi ctrl ");
+	var addbusinessController = function ($scope, $injector) {
+		console.log("this is addbusiness ctrl ");
 		$scope.goBack = function() 
 		{
 			window.history.back();
@@ -15,11 +15,10 @@ define(['app', 'css!modules/mybusiness/addnewbusi/addnewbusi.css'], function (ap
 	
     };
 	
-    
 	// Inject controller's dependencies
-	addnewbusiController.$inject = injectParams;
+	addbusinessController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('addnewbusiController', addnewbusiController);
+    app.register.controller('addbusinessController', addbusinessController);
 	
 	
 });

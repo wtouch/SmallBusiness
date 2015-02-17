@@ -37,37 +37,37 @@ define(['angular',
 				$routeProvider
                 
                 .when('/', route.resolve({controller:'login', template: 'login', label:"home"}, 'login/'))
-				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'login/'))
+				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/login/'))
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				
-				.when('/dashboard/businessprofile', route.resolve({controller:'addnewbusi', template: 'businessprofile'}, 'mybusiness/addnewbusi/'))
+				.when('/businessprofile', route.resolve({controller:'addbusiness', template: 'businessprofile',label:"Business Profile"}, 'mybusiness/addbusiness/'))
 				
-				.when('/contactprofile', route.resolve({controller:'addnewbusi', template: 'contactprofile'}, 'mybusiness/addnewbusi/'))
+				.when('/contactprofile', route.resolve({controller:'addbusiness', template: 'contactprofile',label:"Contact Profile"}, 'mybusiness/addbusiness/'))
 				
-				.when('/editprofile', route.resolve({controller:'addnewbusi', template: 'editprofile'}, 'mybusiness/addnewbusi/'))
+				.when('/editprofile', route.resolve({controller:'addbusiness', template: 'editprofile',label:"Edit Profile"}, 'mybusiness/addbusiness/'))
 				
-				.when('/testimonials', route.resolve({controller:'addnewbusi', template: 'testimonials'}, 'mybusiness/addnewbusi/'))
+				.when('/testimonials', route.resolve({controller:'addbusiness', template: 'testimonials',label:"Testimonials"}, 'mybusiness/addbusiness/'))
 				
-				.when('/newbusi/:new?', route.resolve({controller:'addnewbusi', template: 'newbusi', label: "New Business"}, 'mybusiness/addnewbusi/'))
+				.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
 				
-				.when('/infrastructure', route.resolve({controller:'addnewbusi', template: 'infrastructure'}, 'mybusiness/addnewbusi/'))
+				.when('/infrastructure', route.resolve({controller:'addbusiness', template: 'infrastructure',label:"Infrastructure & Facilities"}, 'mybusiness/addbusiness/'))
 				
-				.when('/jobsandcareers', route.resolve({controller:'addnewbusi', template: 'jobsandcareers'}, 'mybusiness/addnewbusi/'))
+				.when('/jobsandcareers', route.resolve({controller:'addbusiness', template: 'jobsandcareers' ,label:"Jobs & Careers"}, 'mybusiness/addbusiness/'))
 				
-				.when('/products', route.resolve({controller:'addnewbusi', template: 'products'}, 'mybusiness/addnewbusi/'))
+				.when('/products', route.resolve({controller:'addnewbusi', template: 'products',label:"Products"}, 'mybusiness/addnewbusi/'))
 				
-				.when('/busilist', route.resolve({controller:'busilist', template: 'busilist'}, 'mybusiness/list/'))
+				.when('/dashboard/businesslist', route.resolve({controller:'businesslist', template: 'businesslist',label:"Business List"}, 'mybusiness/'))
 				
-				.when('/dashboard/enquiry/:id?', route.resolve({controller:'enquiry', template: 'enquiry'}, 'enquiries/'))
+				.when('/dashboard/enquiry/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
 				
-				.when('/requestnewsite', route.resolve({controller:'mywebsite', template: 'requestnewsite'}, 'mywebsite/'))
+				.when('/requestnewsite', route.resolve({controller:'mywebsite', template: 'requestnewsite',label:"Requst New Website"}, 'mywebsite/'))
 				
-				.when('/websitelist', route.resolve({controller:'mywebsite', template: 'websitelist'}, 'mywebsite/'))
+				.when('/dashboard/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Websites List"}, 'websites/'))
 				
-				.when('/managetemp', route.resolve({controller:'managetemp', template: 'managetemp'}, 'managetemp/'))
+				.when('/dashboard/templates', route.resolve({controller:'templates', template: 'templates',label:"Templates"}, 'templates/'))
 				
-				.when('/template', route.resolve({controller:'managetemp', template: 'template'}, 'managetemp/'))
+				//.when('/template', route.resolve({controller:'managetemp', template: 'template'}, 'managetemp/'))
 				
 				.when('/requestedsitelist', route.resolve({controller:'mywebsite', template: 'requestedsitelist'}, 'mywebsite/'))
                 .otherwise({ redirectTo: '/' });
