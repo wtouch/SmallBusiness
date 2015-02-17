@@ -1,10 +1,12 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector'];
+    var injectParams = ['$scope', '$injector', '$routeParams']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var enquiryController = function ($scope, $injector) {
+	var enquiryController = function ($scope, $injector, $routeParams) {
 		console.log("this is enqury Controller");
+		$scope.MailView = $routeParams.mailId; /* this object will check list of mails show or single mail show */
+		
 		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/dashboard/dashboard/enquiry/mailview.html';
 		$scope.goBack = function() 
 		{
