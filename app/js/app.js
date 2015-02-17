@@ -61,15 +61,16 @@ define(['angular',
 				
 				.when('/dashboard/enquiry/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
 				
-				.when('/requestnewsite', route.resolve({controller:'mywebsite', template: 'requestnewsite',label:"Requst New Website"}, 'mywebsite/'))
+				.when('/dashboard/enquiry/mailview', route.resolve({controller:'enquiry', template: 'mailview',label:"MailView"}, 'enquiries/'))
+				
+				.when('/requestnewsite', route.resolve({controller:'mywebsites', template: 'requestnewsite',label:"Requst New Website"}, 'websites/'))
 				
 				.when('/dashboard/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Websites List"}, 'websites/'))
 				
 				.when('/dashboard/templates', route.resolve({controller:'templates', template: 'templates',label:"Templates"}, 'templates/'))
 				
-				//.when('/template', route.resolve({controller:'managetemp', template: 'template'}, 'managetemp/'))
 				
-				.when('/requestedsitelist', route.resolve({controller:'mywebsite', template: 'requestedsitelist'}, 'mywebsite/'))
+				.when('/requestedsitelist', route.resolve({controller:'mywebsites', template: 'requestedsitelist'}, 'websites/'))
                 .otherwise({ redirectTo: '/' });
 	}]);
 	
