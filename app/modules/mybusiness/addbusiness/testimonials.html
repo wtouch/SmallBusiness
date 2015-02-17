@@ -6,165 +6,157 @@
 		</div>
         <div class="row">
 			<div class="col-md-3" ng-include="'modules/component/sidebar.html'"></div>
-			<div class="col-md-9">
-				<div class="row">
-					<div class="col-md-9 center-block">				
-						<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
-							<label  for="date" class="col-md-3 control-label">Date</label>	
-							<div class="form-group">
-									
-								<div class="col-md-4">
-									<input type="text" id="date" class="form-control" name="date" ng-model="date" required >
-									<span style="color:red" ng-show="myForm.date.$dirty && myForm.date.$invalid">
-									<span ng-show="myForm.date.$error.required">Date is required.</span>
-									</span>
-								</div>						
-							</div>
-
-							<label  for="testi" class="col-md-3 control-label">Testimonial Given By</label>	
-							<div class="form-group">
-									
-								<div class="col-md-4">
-									<input type="text" id="testi" class="form-control" name="testi" ng-model="testi" required >
-									<span style="color:red" ng-show="myForm.testi.$dirty && myForm.testi.$invalid">
-									<span ng-show="myForm.testi.$error.required">Tesimonial is required.</span>
-									</span>
-								</div>						
-							</div>
-							
-							<label  for="testi" class="col-md-3 control-label">Testimonial Given By</label>	
-							<div class="form-group">
-									
-								<div class="col-md-4">
-									<input type="text" id="testi" class="form-control" name="testi" ng-model="testi" required >
-									<span style="color:red" ng-show="myForm.testi.$dirty && myForm.testi.$invalid">
-									<span ng-show="myForm.testi.$error.required">Tesimonial is required.</span>
-									</span>
-								</div>						
-							</div>
-							
-							<label  for="email" class="col-md-3 control-label">Sender Email</label>	
-							<div class="form-group">	
-								<div class="col-md-4">
-									<input type="text" id="email" class="form-control" name="email" placeholder="Sender Email" ng-model="email" required >
-									<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
-									<span ng-show="myForm.email.$error.required">Sender Email is required.</span>
-									</span>
-								</div>						
-							</div>
-							
-							<label for="country" class="col-md-3 control-label">Sender Country</label>
-							<div class="form-group">	
-								<div class="col-sm-4">
-									<select name="country" id="country" class="form-control" required="required">
-										<option selected="selected">Select Country</option>
-										<option value="resprop">Residential Property</option>
-										<option value="comprop">Commercial Property</option>
-										<option value="agriland">Agricultural Land</option>
-										<option value="indprop">Industrial Property</option>
-									</select>								
-								</div>
-							</div>
-							
-							<label for="city" class="col-md-3 control-label">Sender Country</label>
-							<div class="form-group">	
-								<div class="col-sm-3">
-									<select name="city" id="city" class="form-control" required="required">
-										<option selected="selected">Select City</option>
-										<option value="resprop">Residential Property</option>
-										<option value="comprop">Commercial Property</option>
-										<option value="agriland">Agricultural Land</option>
-										<option value="indprop">Industrial Property</option>
-									</select>								
-								</div>
-								<div class="col-sm-3">
-									<select name="city" id="city" class="form-control" required="required">
-										<option selected="selected">Select State</option>
-										<option value="resprop">Residential Property</option>
-										<option value="comprop">Commercial Property</option>
-										<option value="agriland">Agricultural Land</option>
-										<option value="indprop">Industrial Property</option>
-									</select>								
-								</div>
-							</div>
-							
-							<label  for="telephone1" class="col-md-3 control-label">Sender Phone</label>	
-							<div class="form-group">
-									
-								<div class="col-md-4">
-									<input type="text" id="telephone1" class="form-control" name="telephone1" ng-model="Sender Phone" placeholder="Telephone1"required >
-									<span style="color:red" ng-show="myForm.telephone1.$dirty && myForm.telephone1.$invalid">
-									<span ng-show="myForm.telephone1.$error.required">Sender Phone Required.</span>
-									</span>
-								</div>						
-							</div>
-							
-							<label  for="title" class="col-md-3 control-label">Testimonial Title</label>	
-							<div class="form-group">	
-								<div class="col-md-4">
-									<input type="text" id="title" class="form-control" name="title" placeholder="Testimonial Title" ng-model="title" required >
-									<span style="color:red" ng-show="myForm.title.$dirty && myForm.title.$invalid">
-									<span ng-show="myForm.title.$error.required">Testimonial Title is required.</span>
-									</span>
-								</div>						
-							</div>
-							
-							<label  for="desc" class="col-md-3 control-label">Testimonial Description</label>	
-							<div class="form-group">
-									
-								<div class="col-md-4">
-									<input type="textarea" id="desc" class="form-control" name="desc" placeholder="Testimonial Description" ng-model="desc" required >
-									<span style="color:red" ng-show="myForm.desc.$dirty && myForm.desc.$invalid">
-									<span ng-show="myForm.desc.$error.required">Testimonial Description is Required.</span>
-									</span>
-								</div>						 
-							</div>
-							
-							
-							<label  for="clogo" class="col-md-3 control-label">Add Image</label>
-							<div class="form-group" > 
-								<div class="col-md-3">
-									<input type="file" id="clogo" name="clogo">	
-								</div>
-								<div class="col-md-3">
-									<input type="file" id="clogo" name="clogo">	
-								</div>
-							</div>
-						
-						</form>
+			<div class="col-md-9">		
+				<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
+			
+					<div class="form-group">
+						<label  for="date" class="col-md-3 control-label">Date</label>	
+						<div class="col-md-8">
+							<input type="text" id="date" class="form-control" name="date" ng-model="date" placeholder="Date" required >
+							<span style="color:red" ng-show="myForm.date.$dirty && myForm.date.$invalid">
+							<span ng-show="myForm.date.$error.required">Date is required.</span>
+							</span>
+						</div>						
 					</div>
-				</div>
+
+					<div class="form-group">
+						<label  for="testi" class="col-md-3 control-label">Testimonial Given By</label>	<div class="col-md-8">
+							<input type="text" id="testi" class="form-control" name="testi" ng-model="testi" required >
+							<span style="color:red" ng-show="myForm.testi.$dirty && myForm.testi.$invalid">
+							<span ng-show="myForm.testi.$error.required">Tesimonial is required.</span>
+							</span>
+						</div>						
+					</div>
+					
+					<div class="form-group">	
+						<label  for="testi" class="col-md-3 control-label">Testimonial Given By</label>	<div class="col-md-8">
+							<input type="text" id="testi" class="form-control" name="testi" ng-model="testi" required >
+							<span style="color:red" ng-show="myForm.testi.$dirty && myForm.testi.$invalid">
+							<span ng-show="myForm.testi.$error.required">Tesimonial is required.</span>
+							</span>
+						</div>						
+					</div>
+					
+					<div class="form-group">	
+						<label  for="email" class="col-md-3 control-label">Sender Email</label>	
+						<div class="col-md-8">
+                            <input type="Email" class="form-control" id="email" ng-model="login.email" name="email" placeholder="Enter Email" required >
+							<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+							<span ng-show="myForm.email.$error.required">Sender Email is required.</span>
+							<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
+							</span>
+                        </div>					
+					</div>
+					
+					<div class="form-group">
+						<label for="country" class="col-md-3 control-label">Sender Country</label>
+						<div class="col-sm-8">
+							<select name="country" id="country" class="form-control" required="required">
+								<option selected="selected">Select Country</option>
+								<option value="resprop">Residential Property</option>
+								<option value="comprop">Commercial Property</option>
+								<option value="agriland">Agricultural Land</option>
+								<option value="indprop">Industrial Property</option>
+							</select>								
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="city" class="col-md-3 control-label">Sender Country</label>
+						<div class="col-sm-4">
+							<select name="city" id="city" class="form-control" required="required">
+								<option selected="selected">Select City</option>
+								<option value="resprop">Residential Property</option>
+								<option value="comprop">Commercial Property</option>
+								<option value="agriland">Agricultural Land</option>
+								<option value="indprop">Industrial Property</option>
+							</select>								
+						</div>
+						<div class="col-sm-4">
+							<select name="city" id="city" class="form-control" required="required">
+								<option selected="selected">Select State</option>
+								<option value="resprop">Residential Property</option>
+								<option value="comprop">Commercial Property</option>
+								<option value="agriland">Agricultural Land</option>
+								<option value="indprop">Industrial Property</option>
+							</select>								
+						</div>
+					</div>
+						
+					<div class="form-group">
+						<label  for="telephone1" class="col-md-3 control-label">Sender Phone</label>	
+						<div class="col-md-8">
+							<input type="number" id="telephone1" class="form-control" name="telephone1" ng-model="Sender Phone" placeholder="Telephone1"required >
+							<span style="color:red" ng-show="myForm.telephone1.$dirty && myForm.telephone1.$invalid">
+							<span ng-show="myForm.telephone1.$error.required">Sender Phone Required.</span>
+							</span>
+						</div>						
+					</div>
+									
+					<div class="form-group">
+						<label  for="title" class="col-sm-3 control-label">Tesimonial Title</label>
+						<div class="col-sm-8">
+							<input type="text" id="title" class="form-control" name="title" placeholder="title" ng-model="Tesimonial Title" required >
+							<span style="color:red" ng-show="myForm.title.$dirty && myForm.title.$invalid">
+							<span ng-show="myForm.title.$error.required">Tesimonial Title is required.</span>
+							</span>
+						</div>						
+					</div>
+	
+					<div class="form-group">
+						<label  for="desc" class="col-md-3 control-label">Testimonial Description</label>	
+						<div class="col-md-8">
+							<textarea  class="form-control" id="desc" ng-model="desc" name="desc" placeholder="Testimonial Description" required></textarea>
+							<span style="color:red" ng-show="myForm.desc.$dirty && 	myForm.desc.$invalid">
+							<span ng-show="myForm.desc.$error.required">Testimonial Description is required.</span>
+							</span>
+						</div>						 
+					</div>
+								
+					<div class="form-group" > 
+						<label  for="clogo" class="col-md-3 control-label">Add Image</label>
+						<div class="col-md-4">
+							<input type="file" id="clogo" name="clogo">	
+						</div>
+						<div class="col-md-4">
+							<input type="file" id="clogo" name="clogo">	
+						</div>
+					</div>
+				
+				</form>
+			</div>
+		</div>
 		
-				<div class="row">	
-					<div class="col-md-9">
-						<button type="button" class="btn btn-primary center-block" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add Testimonials/Recommendation</button>
-						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title" id="exampleModalLabel">All Courses</h4>
+		<div class="row">	
+			<div class="col-md-12">
+				<button type="button" class="btn btn-success center-block" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add Testimonials/Recommendation</button>
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="exampleModalLabel">All Courses</h4>
+							</div>
+							<div class="modal-body">
+								<div class="row">
+									<div class="col-md-12" ng-include="'modules/components/row.html'">
 									</div>
-									<div class="modal-body">
-										<div class="row">
-											<div class="col-md-12" ng-include="'modules/components/row.html'">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="pull-right">
-													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-primary">New Testimonials/Recommendation</button>	
-												</div>
-											</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="pull-right">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+											<button type="button" class="btn btn-primary">New Testimonials/Recommendation</button>	
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>			
+					</div>
 				</div>
-			</div>
-        </div>
-	</div>	
+			</div>			
+		</div>
+	</div>
 </div>
+
+

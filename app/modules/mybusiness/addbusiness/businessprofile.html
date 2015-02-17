@@ -1,30 +1,30 @@
-<div class="row">		
-	<div class="col-md-12 main-content">
-		<div class ="row border-bottom">
-			<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'">
+<section>
+	<div class="row">		
+		<div class="col-sm-12 main-content">
+			<div class ="row border-bottom">
+				<div class="col-sm-6" ng-include="'modules/component/breadcrumb.html'">
+				</div>
+				<div class="col-sm-6" ng-include="'modules/component/menu-back.html'">
+				</div>
 			</div>
-			<div class="col-md-6" ng-include="'modules/component/menu-back.html'">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-3 col-md-3" ng-include="'modules/component/sidebar.html'">
-			</div>
-			<div class="col-sm-9 center-block">
-				<div class="row">
-					<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">								
+			<div class="row">
+				<div class="col-sm-3 col-md-3" ng-include="'modules/component/sidebar.html'">
+				</div>
+				<div class="col-sm-9 center-block">
+					<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
 						<div class="form-group">
 							<label  for="cname" class="col-sm-3 control-label">Company Name</label>	
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<input type="text" id="cname" class="form-control" name="cname" placeholder="Company Name" ng-model="cname" required >
 								<span style="color:red" ng-show="myForm.cname.$dirty && myForm.cname.$invalid">
-								<span ng-show="myForm.cname.$error.required">Property Facing is required.</span>
+								<span ng-show="myForm.cname.$error.required">Company Name is required.</span>
 								</span>
 							</div>						
 						</div>	
 						
 						<div class="form-group">
 							<label for="primary" class="col-sm-3 control-label">Primary Business Type</label>
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<select name="primary" id="primary" class="form-control" required="required">
 									<option selected="selected">Select Type</option>
 									<option value="resprop">Residential Property</option>
@@ -34,38 +34,37 @@
 								</select>								
 							</div>
 						</div>
-						
-						<label  for="clogo" class="col-sm-3 control-label">Company Logo</label>
-						<div class="form-group" > 
-							<div class="col-sm-6">
+					
+						<div class="form-group" >
+							<label  for="clogo" class="col-sm-3 control-label">Company Logo</label>
+							<div class="col-sm-8">
 								<input type="file" id="clogo" name="clogo">	
 							</div>
 						</div>
-						
-						<label  for="catalog" class="col-sm-3 control-label">Small Business Catalog</label>	
-						
-						<div class="form-group">	
-							<div class="col-sm-6">
-								<input type="text" id="catalog" class="form-control" name="catalog" placeholder="Company Name" ng-model="catalog" required >
+									
+						<div class="form-group">
+							<label  for="catalog" class="col-sm-3 control-label">Small Business Catalog</label>
+							<div class="col-sm-8">
+								<input type="text" id="catalog" class="form-control" name="catalog" placeholder="Small Business Catalog" ng-model="catalog" required >
 								<span style="color:red" ng-show="myForm.catalog.$dirty && myForm.catalog.$invalid">
-								<span ng-show="myForm.catalog.$error.required">Property Facing is required.</span>
+								<span ng-show="myForm.catalog.$error.required">Small Business Catalog is required.</span>
 								</span>
 							</div>						
 						</div>
 						
+						<div class="form-group">						
 						<label  for="website" class="col-sm-3 control-label">Alternate Website</label>	
-						<div class="form-group">	
-							<div class="col-sm-6">
-								<input type="text" id="website" class="form-control" name="website" placeholder="Company Name" ng-model="website" required >
+							<div class="col-sm-8">
+								<input type="text" id="website" class="form-control" name="website" placeholder="Alternate Website" ng-model="website" required >
 								<span style="color:red" ng-show="myForm.website.$dirty && myForm.website.$invalid">
-								<span ng-show="myForm.website.$error.required">Property Facing is required.</span>
+								<span ng-show="myForm.website.$error.required">Alternate Website is required.</span>
 								</span>
 							</div>						
 						</div>
-						
-						<label for="year" class="col-sm-3 control-label">Year Of Establishment</label>
+											
 						<div class="form-group">	
-							<div class="col-sm-6">
+							<label for="year" class="col-sm-3 control-label">Year Of Establishment</label>
+							<div class="col-sm-8">
 								<select name="year" id="year" class="form-control" required="required">
 									<option selected="selected">Select Establish Year</option>
 									<option value="resprop">Residential Property</option>
@@ -76,19 +75,19 @@
 							</div>
 						</div>
 						
-						<label  for="employees" class="col-sm-3 control-label">No. Of Employees</label>	
 						<div class="form-group">	
-							<div class="col-sm-6">
-								<input type="text" id="employees" class="form-control" name="employees" placeholder="Company Name" ng-model="employees" required >
+							<label  for="employees" class="col-sm-3 control-label">No. Of Employees</label>	
+							<div class="col-sm-8">
+								<input type="text" id="employees" class="form-control" name="employees" placeholder="No. Of Employees" ng-model="employees" required >
 								<span style="color:red" ng-show="myForm.employees.$dirty && myForm.employees.$invalid">
-								<span ng-show="myForm.employees.$error.required">Property Facing is required.</span>
+								<span ng-show="myForm.employees.$error.required">No. Of Employees is required.</span>
 								</span>
 							</div>						
 						</div>
 						
-						<label for="ownership" class="col-sm-3 control-label">Ownership Type</label>
 						<div class="form-group">	
-							<div class="col-sm-6">
+							<label for="ownership" class="col-sm-3 control-label">Ownership Type</label>
+							<div class="col-sm-8">
 								<select name="ownership" id="ownership" class="form-control" required="required">
 									<option selected="selected">Select</option>
 									<option value="resprop">Residential Property</option>
@@ -98,28 +97,30 @@
 								</select>								
 							</div>
 						</div>
-						
-						<label for="ownership" class="col-sm-3 control-label">Additional Business</label>
+								
 						<div class="form-group">
-							<div class="col-sm-3">
+							<label for="ownership" class="col-sm-3 control-label">Additional Business</label>
+							<div class="col-sm-2 control-label">
 								<div class="checkbox">
 									<input type="checkbox"s id="hotProduct"> <label for="hotProduct">Trader</label>	
 								</div>
 							</div>						
-							<div class="col-sm-3">
+							<div class="col-sm-2 control-label">
 								<div class="checkbox">
-									<input type="checkbox"s id="hotProduct"> <label for="hotProduct">Trader</label>
+									<input type="checkbox"s id="hotProduct"> <label for="hotProduct">Wholesaler</label>
 								</div>
 							</div>
 						</div>
+										
 						<div class="form-group" > 
-							<div class="col-sm-5">
+							<div class="col-sm-7">
 								<button type="submit" class="btn btn-primary pull-right" name="submit" value="submit">Save</button>
 							</div>
-						</div>			
+						</div>				
+						
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</section>
