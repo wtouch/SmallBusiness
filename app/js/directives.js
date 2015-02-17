@@ -1,6 +1,6 @@
 'use strict';
 
-// Directives goes here
+// Directives goes here 
 
 define(['app'], function (app) {
 	

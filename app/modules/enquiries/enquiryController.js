@@ -1,6 +1,6 @@
 'use strict';
 
-define(['app'], function (app) {
+define(['app'], function (app) { 
     var injectParams = ['$scope', '$injector', '$routeParams']; /* Added $routeParams to access route parameters */
     // This is controller for this view
 	var enquiryController = function ($scope, $injector, $routeParams) {

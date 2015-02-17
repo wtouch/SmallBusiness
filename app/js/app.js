@@ -1,6 +1,6 @@
 
 
-'use strict';
+'use strict'; 
 
 define(['angular',
 	'angularRoute',
@@ -60,10 +60,9 @@ define(['angular',
 				
 				.when('/dashboard/businesslist', route.resolve({controller:'businesslist', template: 'businesslist',label:"Business List"}, 'mybusiness/'))
 				
-				.when('/dashboard/enquiry/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
-				
-				.when('/dashboard/enquiry/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
-				
+				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
+				/* Deleted mail view route we don't want that */
+								
 				.when('/requestnewsite', route.resolve({controller:'mywebsites', template: 'requestnewsite',label:"Requst New Website"}, 'websites/'))
 				
 				.when('/dashboard/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Websites List"}, 'websites/'))

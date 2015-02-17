@@ -5,7 +5,7 @@ require.config({
 		angular: '../lib/angular/angular',
 		breadcrumbs: '../lib/angular/ng-breadcrumbs',
 		routeResolver: '../js/routeResolver',
-		directives: '../js/directives',
+		directives: '../js/directives', 
 		services: '../js/services',
 		filters: '../js/filters',
 		jquery: '../lib/jquery/jquery',
