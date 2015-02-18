@@ -40,6 +40,8 @@ define(['angular',
                 .when('/login', route.resolve({controller:'login', template: 'login', label:"home"}, 'login/'))
 				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/login/'))
 				
+				.when('/login/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/forgotpass/'))
+				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				
 				.when('/businessprofile', route.resolve({controller:'addbusiness', template: 'businessprofile',label:"Business Profile"}, 'mybusiness/addbusiness/'))
