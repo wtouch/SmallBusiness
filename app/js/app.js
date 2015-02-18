@@ -37,7 +37,7 @@ define(['angular',
 				
 				$routeProvider
                 
-                .when('/', route.resolve({controller:'login', template: 'login', label:"home"}, 'login/'))
+                .when('/login', route.resolve({controller:'login', template: 'login', label:"home"}, 'login/'))
 				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/login/'))
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
@@ -71,7 +71,7 @@ define(['angular',
 				
 				
 				.when('/requestedsitelist', route.resolve({controller:'mywebsites', template: 'requestedsitelist'}, 'websites/'))
-                .otherwise({ redirectTo: '/' });
+                .otherwise({ redirectTo: '/login' });
 	}]);
 	
 		
