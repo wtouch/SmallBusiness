@@ -78,7 +78,7 @@ define(['angular',
 		
 	app.run(['$location', '$rootScope', 'breadcrumbs', function($location, $rootScope, breadcrumbs) {
 		$rootScope.breadcrumbs = breadcrumbs;
-		$rootScope.title = "DEFAULT Title";
+		$rootScope.metaTitle = "Small Business";
 	}]);
 	return app;
 });
