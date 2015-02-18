@@ -69,8 +69,9 @@ define(['angular',
 				
 				.when('/dashboard/templates', route.resolve({controller:'templates', template: 'templates',label:"Templates"}, 'templates/'))
 				
+				.when('/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Website List"}, 'websites/'))
 				
-				.when('/requestedsitelist', route.resolve({controller:'mywebsites', template: 'requestedsitelist'}, 'websites/'))
+				.when('/requestedsitelist', route.resolve({controller:'mywebsites', template: 'requestedsitelist',label:"Requsted Sit List"}, 'websites/'))
                 .otherwise({ redirectTo: '/login' });
 	}]);
 	
