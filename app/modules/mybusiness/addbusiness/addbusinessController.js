@@ -34,6 +34,22 @@ define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (
 
 		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
+		
+		
+		$scope.Businessprofile = $routeParams.mailId; /* this object will check list of mails show or single mail show */
+		
+		templateUrl:'http://localhost/sonali/SmallBusiness/app/modules/mybusiness/addbusiness/businessprofile.html';
+		$scope.goBack = function() 
+		{
+			window.history.back();
+		};
+		
+		$scope.newPage = function (){
+			location.href = '#/template.html';
+			consol.log("Hiii");
+		};*/
+		
+		
     };
 	
 	// Inject controller's dependencies

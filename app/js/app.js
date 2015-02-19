@@ -44,13 +44,13 @@ define(['angular',
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				
-				.when('/businessprofile', route.resolve({controller:'addbusiness', template: 'businessprofile',label:"Business Profile"}, 'mybusiness/addbusiness/'))
+				.when('/addbusiness/businessprofile', route.resolve({controller:'addbusiness', template: 'businessprofile',label:"Business Profile"}, 'mybusiness/addbusiness/'))
 				
-				.when('/contactprofile', route.resolve({controller:'addbusiness', template: 'contactprofile',label:"Contact Profile"}, 'mybusiness/addbusiness/'))
+				.when('/addbusiness/contactprofile', route.resolve({controller:'addbusiness', template: 'contactprofile',label:"Contact Profile"}, 'mybusiness/addbusiness/'))
 				
 				.when('/editprofile', route.resolve({controller:'addbusiness', template: 'editprofile',label:"Edit Profile"}, 'mybusiness/addbusiness/'))
 				
-				.when('/testimonials', route.resolve({controller:'addbusiness', template: 'testimonials',label:"Testimonials"}, 'mybusiness/addbusiness/'))
+				.when('/addbusiness/testimonials', route.resolve({controller:'addbusiness', template: 'testimonials',label:"Testimonials"}, 'mybusiness/addbusiness/'))
 				
 				.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
 				
