@@ -1,96 +1,88 @@
 <section>
-	<div class="row">
-		<div class="col-sm-12 main-content">	
+	<div class="row main-content">
+		<div class="col-sm-12">	
 			<div class="row border-bottom">
 				<div class="col-sm-10" ng-include="'modules/component/breadcrumb.html'"></div>
 				<div class="col-sm-2" ng-include="'modules/component/menu-back.html'"></div>
 			</div>
+			
 			<div class="row">
-				<div class="col-sm-3 col-sm-3">
+				<div class="col-sm-3">
 					<img src="img/user.jpg">
 				</div>
-				<div class="col-sm-9 center-block">
+				
+				<div class="col-sm-9">
+				<h3 class="text-center">Edit Profile</h3>
 					<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
 							
 						<div class="form-group">
 							<label  for="name" class="col-sm-3 control-label">Name</label>
-							<div class="col-sm-8">
+							<div class="col-sm-9">
 								<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="cname" required >
 								<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
 								<span ng-show="myForm.name.$error.required">Name is required.</span>
 								</span>
 							</div>	
-							<a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+					
 						</div>
 					
 							
 						<div class="form-group">	
 							<label  for="email" class="col-sm-3 control-label">Email Id </label>
-							<div class="col-md-8">
+							<div class="col-md-9">
 								<input type="Email" class="form-control" id="email" ng-model="login.email" name="email" placeholder="Enter Email" required >
 								<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
 								<span ng-show="myForm.email.$error.required">Email is required.</span>
 								<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
 								</span>
 							</div>	
-							<a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+							
 						</div>
 					
 							
 						<div class="form-group">
 							<label  for="contact" class="col-sm-3 control-label">Contact Number</label>
-							<div class="col-sm-8">
+							<div class="col-sm-9">
 								<input type="number" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="contact" required >
 								<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
 								<span ng-show="myForm.contact.$error.required">Contact is required.</span>
 								</span>
 							</div>	
-							<a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+							
 						</div>
 								
 						<div class="form-group">
 							<label  for="address" class="col-sm-3 control-label">Address</label>
-							<div class="col-sm-8">
+							<div class="col-sm-9">
 								<input type="textarea" id="address" class="form-control" name="address" placeholder="Address" ng-model="address" required >
 								<span style="color:red" ng-show="myForm.address.$dirty && myForm.address.$invalid">
 								<span ng-show="myForm.address.$error.required">Address Required.</span>
 								</span>
 							</div>	
-							<a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+							
 						</div>
 							
 							
-						<div>
+						<div class="form-group">
 							<label  for="date" class="col-sm-3 control-label">Date</label>
-							<div class="col-md-8">
+							<div class="col-md-9">
 								<p class="input-group">
-								  <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+								  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
 								  <span class="input-group-btn">
 									<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 								  </span>
 								</p>
+								
 							</div>
-							<hr/>
-						</div>	
-											
 							
-						<!--div class="form-group">	
-							<label  for="dob" class="col-sm-3 control-label">Date Of Birth</label>
-							<div class="col-sm-8">
-								<input type="text" id="dob" class="form-control" name="dob" placeholder="Date Of Birth" ng-model="dob" required >
-								<span style="color:red" ng-show="myForm.dob.$dirty && myForm.dob.$invalid">
-								<span ng-show="myForm.dob.$error.required">Date Of Birth is required.</span>
-								</span>
-							</div>
-							<a href="#"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-						</div-->
-						
-						<div class="form-group" > 
-							<div class="col-sm-6">
-								<button type="submit" class="btn btn-primary pull-right" name="submit" value="submit">Save</button>	
+						</div>												
+					
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-3">
+							  <button type="submit" class="btn btn-primary">Save</button>
 							</div>
 							<div class="col-sm-6">
-								<button type="reset" class="btn btn-primary" name="reset" value="reset">Reset</button>	
+							  <button type="reset" class="btn btn-primary">Reset</button>
 							</div>
 						</div>						
 					</form>
