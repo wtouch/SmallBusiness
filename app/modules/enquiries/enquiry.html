@@ -1,60 +1,25 @@
-<div class="row">	 	
-	<div class="col-md-12 main-content">	
-		<div class="row">
-			<div class="col-md-12 border-bottom">
-				<div class="row"> 
-					<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'">
-					</div>
-					<div class="col-md-6" ng-include="'modules/component/menu-back.html'"></div>
-				</div>
-			</div>
+<div class="row main-content">	 	
+	<div class="col-md-12 border-bottom">
+		<div class="row"> 
+			<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'"></div>
+			<div class="col-md-6" ng-include="'modules/component/menu-back.html'"></div>
 		</div>
-		
-		<div class="row">
-			<div class="col-md-12 border-bottom">
-				<div class="row"> 
-					<div class="col-md-12" ng-include="'modules/enquiries/toolbars.html'"></div>
-				</div>
-			</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-3" ng-include="'modules/enquiries/sidebar.html'">
 		</div>
-		<div class="row">
-			<div class="col-md-3" ng-include="'modules/enquiries/sidebar.html'">
-			</div>
-			<div class="col-md-9">
-				<div class="row">
-					<!--<div class="col-md-12 text-right">
-						<a href="#" class="glyphicon glyphicon-arrow-left btn btn-default" aria-hidden="true" ng-click="goInbox()"></a>
-						<a href="#" class="glyphicon glyphicon-trash btn btn-default" aria-hidden="true">
-						</a>
-						<a type="file" class="glyphicon glyphicon-paperclip btn btn-default" aria-hidden="true" ng-click="newPage()"></a>
-						<div class="btn-group" dropdown>
-							<a class="btn btn-default dropdown-toggle"><span class="glyphicon glyphicon-cog dropdown-toggle"></span></a>
-							<a class="btn btn-default dropdown-toggle" dropdown-toggle>
-								<span class="caret"></span>
-								<span class="sr-only">Split button!</span>
-							</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Action</a></li>
-									<li><a href="#">Another action</a></li>
-									<li><a href="#">Something else here</a></li>
-									<li><input type="checkbox" value="from">From</input></li>
-									<li><a href="#">Separated link</a></li>
-								</ul>
-						</div>
-					</div>-->
-				</div>
-				<div class="row">
-					<div class="col-md-12">
+		<div class="col-md-9">
+			<div ng-include="'modules/enquiries/toolbars.html'"></div>
 						<!-- This is conditional include 
 							if not mailId set in url this html includes in view -->
 						<ng-include ng-if="!MailView" src="'modules/enquiries/mails.html'"></ng-include> 
 						<!-- if mailId set in url this html includes in view -->
 						<ng-include ng-if="MailView" src="'modules/enquiries/mailview.html'"></ng-include>
 
-					</div>
-				</div>
-			</div>
+					
 		</div>
 	</div>
+</div>
 </div>
 
