@@ -10,9 +10,20 @@
 				<div ng-include="'modules/enquiries/toolbars.html'"></div>
 						<!-- This is conditional include 
 							if not mailId set in url this html includes in view-->
-						<ng-include ng-if="!Businessprofile" src="'modules/mybusiness/addbusiness/buzdesc.html'"></ng-include> 
+						<ng-include ng-show="formPart=='home'" src="'modules/mybusiness/addbusiness/buzdesc.html'"></ng-include> 
 						<!-- if mailId set in url this html includes in view -->
-						<ng-include ng-if="Businessprofile" src="'modules/mybusiness/addbusiness/businessprofile.html'"></ng-include>					
+						<ng-include ng-show="formPart=='business'" src="'modules/mybusiness/addbusiness/businessprofile.html'"></ng-include>	
+						
+						<ng-include ng-show="formPart=='contact'" src="'modules/mybusiness/addbusiness/contactprofile.html'"></ng-include>		
+						<ng-include ng-show="formPart=='infrastructure'" src="'modules/mybusiness/addbusiness/infrastructure.html'"></ng-include>	
+						<ng-include ng-show="formPart=='testimonials'" src="'modules/mybusiness/addbusiness/testimonials.html'"></ng-include>	
+						<ng-include ng-show="formPart=='job'" src="'modules/mybusiness/addbusiness/jobsandcareers.html'"></ng-include>	
+						<ng-include ng-show="formPart=='product'" src="'modules/mybusiness/products/products.html'"></ng-include>	
+						
+						<ng-include ng-show="formPart=='services'" src="'modules/mybusiness/addbusiness/testimonials.html'"></ng-include>	
+						<ng-include ng-show="formPart=='new'" src="'modules/mybusiness/addbusiness/newcoverage.html'"></ng-include>	
+						
+						
 			</div>
 		</div>
 	</div>

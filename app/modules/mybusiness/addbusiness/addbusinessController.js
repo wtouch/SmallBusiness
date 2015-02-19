@@ -36,8 +36,8 @@ define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (
 		$scope.format = $scope.formats[0];
 		
 		
-		$scope.Businessprofile = $routeParams; /* this object will check list of mails show or single mail show */
-		
+		$scope.formPart = $routeParams.formPart; /* this object will check list of mails show or single mail show */
+	
 		templateUrl:'http://localhost/sonali/SmallBusiness/app/modules/mybusiness/addbusiness/businessprofile.html';
 		$scope.goBack = function() 
 		{
