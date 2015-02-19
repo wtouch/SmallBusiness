@@ -3,10 +3,10 @@
 'use strict';
 
 define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (app) {
-    var injectParams = ['$scope', '$injector'];
+    var injectParams = ['$scope', '$injector','$routeParams'];
 
     // This is controller for this view
-	var addbusinessController = function ($scope, $injector)
+	var addbusinessController = function ($scope, $injector, $routeParams)
 	{
 		console.log("this is addbusiness ctrl ");
 		$scope.goBack = function() 
@@ -36,7 +36,7 @@ define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (
 		$scope.format = $scope.formats[0];
 		
 		
-		$scope.Businessprofile = $routeParams.mailId; /* this object will check list of mails show or single mail show */
+		$scope.Businessprofile = $routeParams; /* this object will check list of mails show or single mail show */
 		
 		templateUrl:'http://localhost/sonali/SmallBusiness/app/modules/mybusiness/addbusiness/businessprofile.html';
 		$scope.goBack = function() 
@@ -47,7 +47,7 @@ define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (
 		$scope.newPage = function (){
 			location.href = '#/template.html';
 			consol.log("Hiii");
-		};*/
+		};
 		
 		
     };
