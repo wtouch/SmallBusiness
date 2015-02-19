@@ -1,5 +1,5 @@
 <div class="row main-content">
-	<form class="form-horizontal text-center form-content">
+	<form class="form-horizontal text-center form-content" name="myForm">
 		<h3>Login</h3>
 			<div class="form-group">
 				<div class="col-md-12">
@@ -8,16 +8,19 @@
 			</div>											
 			<div class="form-group">
 				<div class="col-sm-12">
-					<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-					<span style="color:red" ng-show="myForm.u_email.$dirty && myForm.u_email.$invalid">
-							<span ng-show="myForm.u_email.$error.required">Email is required.</span>
-							<span ng-show="myForm.u_email.$error.email">Invalid Email address.</span>
-							</span>
+					<input type="Email" class="form-control" id="inputEmail3" placeholder="Email" name="u_mail" ng-model="u_name" required>
+						<span style="color:red" ng-show="myForm.u_mail.$dirty && myForm.u_mail.$invalid">
+						<span ng-show="myForm.u_mail.$error.required">Email is required.</span>
+						<span ng-show="myForm.u_mail.$error.email">Invalid Email address.</span>
+						</span>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-12">
-					<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+					<input type="password" class="form-control" id="inputPassword3" name="pass" ng-model="pass" placeholder="Password" required>
+						<span style="color:red" ng-show="myForm.pass.$dirty && myForm.pass.$invalid">
+							<span ng-show="myForm.pass.$error.required">Password is required.</span>
+						</span>
 				</div>
 			</div>
 			<div class="form-group">
