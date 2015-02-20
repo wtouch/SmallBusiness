@@ -1,6 +1,8 @@
 <div class="row">
+	<div  class="breadcrumb-back" ng-include="'modules/component/breadcrumb.html'"></div>
+	<div class="col-md-2" ng-include="'modules/component/mainnav.html'"></div>
 	<div class="col-md-10">
-			<form class="form-horizontal" role="form" name="myForm"  novalidate="novalidate">
+			<form class="form-horizontal" role="form" name="myForm"  novalidate>
 				<h3>Forgot Password</h3>
 				<hr>
 				<p>If you have forgot the account password, you can reset password and a new password will be sent to your email address..</p>
@@ -8,32 +10,13 @@
 						<label for="mail" class="col-md-2 control-label">Email</label>
 						<div class="col-md-8">
                             <input type="Email" class="form-control" id="mail" ng-model="forget.user_email" name="Email" placeholder="Enter Email" required>
-							<span style="color:red" ng-show="myForm.Email.$dirty && 	myForm.Email.$invalid">
-							<span ng-show="myForm.Email.$error.required">Email is required.</span>
-							<span ng-show="myForm.Email.$error.email">Invalid Email address.
-							</span>
-							</span>
-                        </div>						
+								<span style="color:red" ng-show="myForm.Email.$dirty && 	myForm.Email.$invalid">
+									<span ng-show="myForm.Email.$error.required">Email is required.</span>
+									<span ng-show="myForm.Email.$error.email">Invalid Email address.</span>
+								</span>
+                        </div>			
 				</div>
 			</form>
-		<button type="submit" class="btn btn-success center-block" name="btn1"  ng-click="forgotPass(forget)">Reset</button>
-  <br>
+		<button type="submit" class="btn btn-success center-block" name="btn1"  ng-click="forgotPass(forget)">Reset</button>  
     </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	<!--<p>The New Password will be sent on your Email Address</p>
-$("#hide").click(function(){
- $("myForm").hide();
-});
-
-$("#show").click(function(){
-  $("p").show();
-});-->
-	
-</div>
+</div>	
