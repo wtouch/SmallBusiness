@@ -34,8 +34,11 @@ define(['angular',
 				$routeProvider
                 
                 .when('/login', route.resolve({controller:'login', template: 'login', label:"home"}, 'login/'))
+				
 				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/login/'))
 				
+				.when('/editprofile', route.resolve({controller:'editprofile', template: 'editprofile',label:"Edit Profile"}, 'users/editprofile/'))
+	
 				.when('/login/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/forgotpass/'))
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
@@ -43,8 +46,6 @@ define(['angular',
 				.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
 				
 				.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
-				
-				.when('/editprofile', route.resolve({controller:'addbusiness', template: 'editprofile',label:"Edit Profile"}, 'mybusiness/addbusiness/'))
 				
 				.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
 				
