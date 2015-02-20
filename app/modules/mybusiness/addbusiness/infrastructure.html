@@ -1,27 +1,35 @@
 <div class="form-group">
-    <a href="#" class="btn btn-default pull-right">Add New Infrastucture</a>
+	<div class="col-sm-offset-4 col-sm-8">
+		<a href="#" class="btn btn-default pull-right">Add New Infrastucture</a>
+	</div>
 </div>
 <div class="form-group">
-	<label for="infrastuctureHeading" class="col-md-4">Infrastucture Heading :</label>
-	<select class="form-control col-md-8" id="infrastuctureHeading">
-		<option value="Select Heading">Select Heading</option>
-		<option value="abc">abc</option>
-		<option value="xyz">xyz</option>
-		<option value="pqr">pqr</option>
-		<option value="stu">stu</option>
-	</select>
+	<label for="infrastuctureHeading" class="col-sm-4 control-label">Infrastucture Heading :</label>
+	<div class="col-sm-8">
+		<select class="form-control" id="infrastuctureHeading">
+			<option value="Select Heading">Select Heading</option>
+			<option value="abc">abc</option>
+			<option value="xyz">xyz</option>
+			<option value="pqr">pqr</option>
+			<option value="stu">stu</option>
+		</select>
+	</div>
 </div>
 <div class="form-group">
-	<label for="infraDesc" class="col-md-4">Infrastucture Description :</label>
-	<textarea id="infraDesc" name="infraDesc" class="form-control col-md-8" rows="3" ng-model="infraDesc">
-		<span style="color:red" ng-show="myForm.infraDesc.$dirty && myForm.infraDesc.$invalid">
-			<span ng-show="myForm.infraDesc.$error.required">Plz Enter Description for Infrastucture</span>
-		</span>
-	</textarea>
+	<label for="infraDesc" class="col-sm-4 control-label">Infrastucture Description :</label>
+	<div class="col-sm-8">
+		<textarea id="infraDesc" name="infraDesc" class="form-control" rows="3" ng-model="infraDesc" required ng-minlength="5" ng-maxlength="10"></textarea>
+			<span style="color:red" ng-show="myForm.infraDesc.$dirty && myForm.infraDesc.$invalid">
+				<span ng-show="myForm.infraDesc.$error.required" class="required">Plz Enter Description for Infrastucture</span>
+				<span ng-show="myForm.infraDesc.$error.minlength">Plz Enter minimum 5 character</span>
+				<span ng-show="myForm.infraDesc.$error.maxlength">You have exceed limit</span>
+			</span>
+	</div>
 </div>
 <div class="form-group">
     <div class="col-sm-offset-4 col-sm-8">
       <button type="submit" class="btn btn-default">Save</button>
     </div>
 </div>
+
 
