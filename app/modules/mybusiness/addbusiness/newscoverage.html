@@ -1,0 +1,87 @@
+
+
+<div class="form-group">
+	<label  for="date" class="col-sm-3 control-label">Date</label>
+	<div class="col-sm-9">
+		<p class="input-group">
+		  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="addbusiness.testimonials.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+		  <span class="input-group-btn">
+			<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+		  </span>
+		</p>
+	</div>
+</div>	
+
+	
+<div class="form-group">
+	<label  for="medianame" class="col-md-3 control-label">Media Name</label>	
+	<div class="col-md-9">
+		<input type="text" id="medianame" class="form-control" ng-model="medianame" name="medianame" required>
+		<span style="color:red" ng-show="myForm.medianame.$dirty && 	myForm.medianame.$invalid">
+		<span ng-show="myForm.medianame.$error.required">Media Name is required.</span>
+		</span>
+	</div>						
+</div>
+
+<div class="form-group">	
+	<label for="mediatype" class="col-sm-3 control-label">Media Type</label>
+	<div class="col-sm-9">
+		<select name="mediatype" id="mediatype" class="form-control" required="required">
+			<option selected="selected">Select Media Type</option>
+			<option value="resprop">Residential Property</option>
+			<option value="comprop">Commercial Property</option>
+			<option value="agriland">Agricultural Land</option>
+			<option value="indprop">Industrial Property</option>
+		</select>								
+	</div>
+</div>
+
+<div class="form-group">
+	<label  for="headline" class="col-md-3 control-label">Headline</label>		
+	<div class="col-md-9">
+		<input type="text" id="headline" class="form-control" ng-model="headline" name="headline" required>
+		<span style="color:red" ng-show="myForm.headline.$dirty && 	myForm.headline.$invalid">
+		<span ng-show="myForm.headline.$error.required">Headline is required.</span>
+		</span>
+	</div>						
+</div>
+
+	
+<div class="form-group">
+	<label  for="url" class="col-md-3 control-label">News Coverage URL</label>	
+	<div class="col-md-9">
+		<input type="text" class="form-control" ng-model="url" id="url" name="url" required>
+		<span style="color:red" ng-show="myForm.url.$dirty && myForm.url.$invalid">
+		<span ng-show="myForm.url.$error.required">News Coverage URL is required.</span>
+		</span>
+	</div>						
+</div>
+
+<div class="form-group">
+	<label for="details" class="col-md-3 control-label">News Coverage Details</label>
+	<div class="col-sm-9">
+		<textarea class="form-control" name="details" id="details" rows="3" ng-model="details" required ng-minlength="1" ng-maxlength="256"></textarea>
+			<span style="color:red" ng-show="myForm.details.$dirty && myForm.details.$invalid">
+				<span ng-show="myForm.details.$error.required">Plz Enter Description for Jobs</span>
+				<span ng-show="myForm.details.$error.minlength">Plz Enter minimum 5 character</span>
+				<span ng-show="myForm.details.$error.maxlength">You have exceed limit</span>
+			</span>		
+	</div>
+</div> 
+
+<div class="form-group" > 
+	<label  for="clogo" class="col-sm-3 control-label">Add Image</label>
+	<div class="col-sm-4">
+		<input type="file" id="clogo" name="clogo">	
+	</div>
+	<div class="col-sm-4">
+		<input type="file" id="clogo" name="clogo">	
+	</div>
+</div>
+<div class="form-group">
+	<div class="col-sm-offset-3 col-sm-9">
+	  <button type="submit" class="btn btn-primary" title="Add News/Press Release">Add News/Press Release</button>
+	</div>
+</div>							
+
+
