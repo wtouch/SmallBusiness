@@ -1,9 +1,9 @@
 
 <div class="form-group">
 	<label  for="date" class="col-sm-3 control-label">Date</label>
-	<div class="col-md-9">
+	<div class="col-sm-9">
 		<p class="input-group">
-		  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+		  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="addbusiness.testimonials.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
 		  <span class="input-group-btn">
 			<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 		  </span>
@@ -14,7 +14,7 @@
 <div class="form-group">
 	<label  for="testimonial" class="col-sm-3 control-label">Testimonial Given By</label>
 	<div class="col-sm-9">
-		<input type="text" id="testimonial" class="form-control" name="testimonial" placeholder="Testimonial Given By" ng-model="testimonial" required >
+		<input type="text" id="testimonial" class="form-control" name="testimonial" placeholder="Testimonial Given By" ng-model="addbusiness.testimonials.testimonial" required >
 		<span style="color:red" ng-show="myForm.testimonial.$dirty && myForm.testimonial.$invalid">
 		<span ng-show="myForm.testimonial.$error.required">Testimonial Given By is required.</span>
 		</span>
@@ -24,7 +24,7 @@
 <div class="form-group">	
 	<label  for="email" class="col-sm-3 control-label">Sender Email</label>	
 	<div class="col-sm-9">
-		<input type="Email" class="form-control" id="email" ng-model="email" name="email" placeholder="Enter Email" required >
+		<input type="Email" class="form-control" id="email" ng-model="addbusiness.testimonials.email" name="email" placeholder="Enter Email" required >
 		<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
 		<span ng-show="myForm.email.$error.required">Sender Email is required.</span>
 		<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
@@ -70,7 +70,7 @@
 <div class="form-group">
 	<label  for="contact" class="col-sm-3 control-label">Senders Phone</label>
 	<div class="col-sm-9">
-		<input type="number" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="contact" required >
+		<input type="number" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="addbusiness.testimonials.contact" required >
 		<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
 		<span ng-show="myForm.contact.$error.required">Senders Phone is required.</span>
 		</span>
@@ -80,7 +80,7 @@
 <div class="form-group">
 	<label  for="testi" class="col-sm-3 control-label">Testimonial Title </label>
 	<div class="col-sm-9">
-		<input type="text" id="testi" class="form-control" name="testi" placeholder="Tesimonial Title" ng-model="testi" required >
+		<input type="text" id="testi" class="form-control" name="testi" placeholder="Tesimonial Title" ng-model="addbusiness.testimonials.testi" required >
 		<span style="color:red" ng-show="myForm.testi.$dirty && myForm.testi.$invalid">
 		<span ng-show="myForm.testi.$error.required">Testimonial Title is required.</span>
 		</span>
@@ -92,7 +92,7 @@
 <div class="form-group">
 	<label  for="desc" class="col-sm-3 control-label">Testimonial Description</label>	
 	<div class="col-sm-9">
-		<textarea  class="form-control" id="desc" ng-model="desc" name="desc" placeholder="Testimonial Description"  rows="3" required></textarea>
+		<textarea  class="form-control" id="desc" ng-model="addbusiness.testimonials.desc" name="desc" placeholder="Testimonial Description"  rows="3" required></textarea>
 		<span style="color:red" ng-show="myForm.desc.$dirty && 	myForm.desc.$invalid">
 		<span ng-show="myForm.desc.$error.required">Testimonial Description is required.</span>
 		</span>
