@@ -1,5 +1,3 @@
-
-
 'use strict'; 
 
 define(['angular',
@@ -21,7 +19,6 @@ define(['angular',
 				
 				//Change default views and controllers directory using the following:
 				routeResolverProvider.routeConfig.setBaseDirectories('modules/', 'modules/');
-				
 				app.register =
 				{
 					controller: $controllerProvider.register,
@@ -34,7 +31,6 @@ define(['angular',
 				//Define routes - controllers will be loaded dynamically
 				var route = routeResolverProvider.route;
 				
-				
 				$routeProvider
                 
                 .when('/login', route.resolve({controller:'login', template: 'login', label:"home"}, 'login/'))
@@ -43,24 +39,14 @@ define(['angular',
 				.when('/login/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/forgotpass/'))
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
-				
-				//.when('/businessprofile', route.resolve({controller:'addbusiness', template: 'businessprofile',label:"Business Profile"}, 'mybusiness/addbusiness/'))
+	
+				.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
 				
 				.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
 				
-				.when('/addbusiness/contactprofile', route.resolve({controller:'addbusiness', template: 'contactprofile',label:"Contact Profile"}, 'mybusiness/addbusiness/'))
-				
 				.when('/editprofile', route.resolve({controller:'addbusiness', template: 'editprofile',label:"Edit Profile"}, 'mybusiness/addbusiness/'))
 				
-				.when('/addbusiness/testimonials', route.resolve({controller:'addbusiness', template: 'testimonials',label:"Testimonials"}, 'mybusiness/addbusiness/'))
-				
 				.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
-				
-				.when('/infrastructure', route.resolve({controller:'addbusiness', template: 'infrastructure',label:"Infrastructure & Facilities"}, 'mybusiness/addbusiness/'))
-				
-				.when('/jobsandcareers', route.resolve({controller:'addbusiness', template: 'jobsandcareers' ,label:"Jobs & Careers"}, 'mybusiness/addbusiness/'))
-				
-				.when('/products', route.resolve({controller:'addnewbusi', template: 'products',label:"Products"}, 'mybusiness/addnewbusi/'))
 				
 				.when('/dashboard/businesslist', route.resolve({controller:'businesslist', template: 'businesslist',label:"Business List"}, 'mybusiness/'))
 				
