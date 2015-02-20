@@ -5,12 +5,12 @@ define(['app'], function (app) {
     var injectParams = ['$scope', '$injector'];
 
     // This is controller for this view
-	var loginController = function ($scope,$injector) {
-	//	console.log("this is login ctrl");
-		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/dashboard/dashboard.html';
+	var forgotpassController = function ($scope,$injector) {
+		console.log("this is forgot ctrl");
+		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/forgotpass/forgotpass.html';
     };
 	// Inject controller's dependencies
-	loginController.$inject = injectParams;
+	forgotpassController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('loginController', loginController);
+    app.register.controller('forgotpassController', forgotpassController);
 });
