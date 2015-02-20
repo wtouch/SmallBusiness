@@ -88,8 +88,18 @@
 </div>
 
 
-
 <div class="form-group">
+	<label for="desc" class="col-md-3 control-label">Testimonial Description</label>
+	<div class="col-sm-9">
+		<textarea class="form-control" name="desc" id="desc" rows="3" ng-model="addbusiness.testimonials.desc" required ng-minlength="1" ng-maxlength="256"></textarea>
+			<span style="color:red" ng-show="myForm.desc.$dirty && myForm.desc.$invalid">
+				<span ng-show="myForm.desc.$error.required">Plz Enter Description for Jobs</span>
+				<span ng-show="myForm.desc.$error.minlength">Plz Enter minimum 5 character</span>
+				<span ng-show="myForm.desc.$error.maxlength">You have exceed limit</span>
+			</span>		
+	</div>
+</div> 
+<!--div class="form-group">
 	<label  for="desc" class="col-sm-3 control-label">Testimonial Description</label>	
 	<div class="col-sm-9">
 		<textarea  class="form-control" id="desc" ng-model="addbusiness.testimonials.desc" name="desc" placeholder="Testimonial Description"  rows="3" required></textarea>
@@ -97,7 +107,7 @@
 		<span ng-show="myForm.desc.$error.required">Testimonial Description is required.</span>
 		</span>
 	</div>						 
-</div>
+</div-->
 			
 <div class="form-group" > 
 	<label  for="clogo" class="col-sm-3 control-label">Add Image</label>
