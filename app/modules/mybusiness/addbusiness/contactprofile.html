@@ -109,19 +109,25 @@
 						<label for="email" class="col-md-3 control-label">Email</label>
 						<div class="col-md-9">
                             <input type="Email" class="form-control" id="email" ng-model="addbusiness.contactprofile.email" name="email" placeholder="Enter Email" required >
+							
 							<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
-							<span ng-show="myForm.email.$error.required">Email is required.</span>
-							<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
+								<span ng-show="myForm.email.$error.required">Email is required.</span>
+								<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
 							</span>
+								
+							
+						
+						
                         </div>						
 					</div>
 						
 					<div class="form-group">	
 						<label  for="aemail" class="col-md-3 control-label">Alternate Email</label>	
 						<div class="col-md-9">
-							<input type="text" id="aemail" class="form-control" name="aemail" ng-model="addbusiness.contactprofile.aemail" placeholder="Alternate Email" required >
+							<input type="email" id="aemail" class="form-control" name="aemail" ng-model="addbusiness.contactprofile.aemail" placeholder="Alternate Email" required >
 							<span style="color:red" ng-show="myForm.aemail.$dirty && myForm.aemail.$invalid">
 							<span ng-show="myForm.aemail.$error.required">Alternate Email Required.</span>
+							<span ng-show="myForm.aemail.$error.email">Invalid Email address.</span>
 							</span>
 						</div>						
 					</div>
