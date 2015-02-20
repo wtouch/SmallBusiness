@@ -42,7 +42,9 @@ define(['angular',
 				.when('/login/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/forgotpass/'))
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
-	
+				
+				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
+				
 				.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
 				
 				.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
