@@ -39,7 +39,7 @@ define(['angular',
 				
 				.when('/editprofile', route.resolve({controller:'editprofile', template: 'editprofile',label:"Edit Profile"}, 'users/editprofile/'))
 	
-				.when('/login/forgotpass', route.resolve({controller:'forgotpass', template: 'forgotpass', label: 'Forgot Password'}, 'users/forgotpass/'))
+				.when('/forgotpass', route.resolve({controller:'forgotpass', template: 'forgotpass', label: 'Forgot Password'}, 'users/forgotpass/'))
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				
