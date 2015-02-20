@@ -1,133 +1,130 @@
-<div class="row form-horizontal">		
-	<div class="col-sm-12">
-						<div class="form-group">
-							<label  for="cname" class="col-sm-3 control-label">Company Name</label>	
-							<div class="col-sm-9">
-						<input type="text" id="cname" class="form-control" name="cname" placeholder="Company Name" ng-model="addbusiness.bizprofile.companyname" required >
-								<span style="color:red" ng-show="myForm.cname.$dirty && myForm.cname.$invalid">
-								<span ng-show="myForm.cname.$error.required">Company Name is required.</span>
-								</span>
-							</div>						
-						</div>	
-						<div class="form-group">
-							<label for="primary" class="col-sm-3 control-label">Primary Business Type</label>
-							<div class="col-sm-9">
-								<select name="primary" id="primary" class="form-control" required="required">
-									<option selected="selected">Select Type</option>
-									<option value="resprop">Residential Property</option>
-									<option value="comprop">Commercial Property</option>
-									<option value="agriland">Agricultural Land</option>
-									<option value="indprop">Industrial Property</option>
-								</select>								
-							</div>
-						</div>
-						<div class="form-group" >
-							<label  for="clogo" class="col-sm-3 control-label">Company Logo</label>
-							<div class="col-sm-9">
-								<input type="file" id="clogo" name="clogo">	
-							</div>
-						</div>	
-						<div class="form-group">
-							<label  for="catalog" class="col-sm-3 control-label">Small Business Catalog</label>
-							<div class="col-sm-9">
-								<input type="text" id="catalog" class="form-control" name="catalog" placeholder="Small Business Catalog" ng-model="catalog" required >
-								<span style="color:red" ng-show="myForm.catalog.$dirty && myForm.catalog.$invalid">
-								<span ng-show="myForm.catalog.$error.required">Small Business Catalog is required.</span>
-								</span>
-							</div>						
-						</div>
-						<div class="form-group">						
-						<label  for="website" class="col-sm-3 control-label">Alternate Website</label>	
-							<div class="col-sm-9">
-								<input type="text" id="website" class="form-control" name="website" placeholder="Alternate Website" ng-model="website" required >
-								<span style="color:red" ng-show="myForm.website.$dirty && myForm.website.$invalid">
-								<span ng-show="myForm.website.$error.required">Alternate Website is required.</span>
-								</span>
-							</div>						
-						</div>			
-						<div class="form-group">	
-							<label for="year" class="col-sm-3 control-label">Year Of Establishment</label>
-							<div class="col-sm-9">
-								<select name="year" id="year" class="form-control" required="required">
-									<option selected="selected">Select Establish Year</option>
-									<option value="resprop">Residential Property</option>
-									<option value="comprop">Commercial Property</option>
-									<option value="agriland">Agricultural Land</option>
-									<option value="indprop">Industrial Property</option>
-								</select>								
-							</div>
-						</div>
-						<div class="form-group">	
-							<label  for="employees" class="col-sm-3 control-label">No. Of Employees</label>	
-							<div class="col-sm-9">
-								<input type="text" id="employees" class="form-control" name="employees" placeholder="No. Of Employees" ng-model="employees" required >
-								<span style="color:red" ng-show="myForm.employees.$dirty && myForm.employees.$invalid">
-								<span ng-show="myForm.employees.$error.required">No. Of Employees is required.</span>
-								</span>
-							</div>						
-						</div>
-						<div class="form-group">	
-							<label for="ownership" class="col-sm-3 control-label">Ownership Type</label>
-							<div class="col-sm-9">
-								<select name="ownership" id="ownership" class="form-control" required="required">
-									<option selected="selected">Select</option>
-									<option value="resprop">Residential Property</option>
-									<option value="comprop">Commercial Property</option>
-									<option value="agriland">Agricultural Land</option>
-									<option value="indprop">Industrial Property</option>
-								</select>								
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Additional Business</label>
-							<div class="col-sm-9">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="checkbox">
-											<label>
-											<input type="checkbox">Trader
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-											  <input type="checkbox"> Manufacturer
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-											  <input type="checkbox"> Retailer
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-											  <input type="checkbox"> Buying House
-											</label>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="checkbox">
-											<label>
-												<input type="checkbox">Wholesaler
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-												<input type="checkbox"> Exporter
-											</label>
-										</div>
-										<div class="checkbox">
-											<label>
-											  <input type="checkbox"> Service Provider
-											</label>
-										</div>
-									</div>						 				
-								</div>
-							</div>
-						</div>																
-						<div class="form-group">
-							<div class="col-sm-offset-3 col-sm-9">
-							  <button type="submit" class="btn btn-primary">Save</button>
-							</div>
-						</div>
+<div class="form-group">
+	<label  for="companyname" class="col-sm-3 control-label">Company Name</label>
+	<div class="col-sm-9">
+		<input type="text" id="companyname" class="form-control" name="companyname" placeholder="Company Name" ng-model="companyname" required >
+		<span style="color:red" ng-show="myForm.companyname.$dirty && myForm.companyname.$invalid">
+		<span ng-show="myForm.companyname.$error.required">Company Name is required.</span>
+		</span>
+	</div>						
+</div>
+<div class="form-group">
+	<label for="primary" class="col-sm-3 control-label">Primary Business Type</label>
+	<div class="col-sm-9">
+		<select name="primary" id="primary" class="form-control" required="required">
+			<option selected="selected">Select Type</option>
+			<option value="resprop">Residential Property</option>
+			<option value="comprop">Commercial Property</option>
+			<option value="agriland">Agricultural Land</option>
+			<option value="indprop">Industrial Property</option>
+		</select>								
+	</div>
+</div>
+<div class="form-group" >
+	<label  for="clogo" class="col-sm-3 control-label">Company Logo</label>
+	<div class="col-sm-9">
+		<input type="file" id="clogo" name="clogo">	
+	</div>
+</div>	
+<div class="form-group">
+	<label  for="catalog" class="col-sm-3 control-label">Small Business Catalog</label>
+	<div class="col-sm-9">
+		<input type="text" id="catalog" class="form-control" name="catalog" placeholder="Small Business Catalog" ng-model="catalog" required >
+		<span style="color:red" ng-show="myForm.catalog.$dirty && myForm.catalog.$invalid">
+		<span ng-show="myForm.catalog.$error.required">Small Business Catalog is required.</span>
+		</span>
+	</div>						
+</div>
+<div class="form-group">						
+<label  for="website" class="col-sm-3 control-label">Alternate Website</label>	
+	<div class="col-sm-9">
+		<input type="text" id="website" class="form-control" name="website" placeholder="Alternate Website" ng-model="website" required >
+		<span style="color:red" ng-show="myForm.website.$dirty && myForm.website.$invalid">
+		<span ng-show="myForm.website.$error.required">Alternate Website is required.</span>
+		</span>
+	</div>						
+</div>			
+<div class="form-group">	
+	<label for="year" class="col-sm-3 control-label">Year Of Establishment</label>
+	<div class="col-sm-9">
+		<select name="year" id="year" class="form-control" required="required">
+			<option selected="selected">Select Establish Year</option>
+			<option value="resprop">Residential Property</option>
+			<option value="comprop">Commercial Property</option>
+			<option value="agriland">Agricultural Land</option>
+			<option value="indprop">Industrial Property</option>
+		</select>								
+	</div>
+</div>
+<div class="form-group">	
+	<label  for="employees" class="col-sm-3 control-label">No. Of Employees</label>	
+	<div class="col-sm-9">
+		<input type="text" id="employees" class="form-control" name="employees" placeholder="No. Of Employees" ng-model="employees" required >
+		<span style="color:red" ng-show="myForm.employees.$dirty && myForm.employees.$invalid">
+		<span ng-show="myForm.employees.$error.required">No. Of Employees is required.</span>
+		</span>
+	</div>						
+</div>
+<div class="form-group">	
+	<label for="ownership" class="col-sm-3 control-label">Ownership Type</label>
+	<div class="col-sm-9">
+		<select name="ownership" id="ownership" class="form-control" required="required">
+			<option selected="selected">Select</option>
+			<option value="resprop">Residential Property</option>
+			<option value="comprop">Commercial Property</option>
+			<option value="agriland">Agricultural Land</option>
+			<option value="indprop">Industrial Property</option>
+		</select>								
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-3 control-label">Additional Business</label>
+	<div class="col-sm-9">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="checkbox">
+					<label>
+					<input type="checkbox">Trader
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+					  <input type="checkbox"> Manufacturer
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+					  <input type="checkbox"> Retailer
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+					  <input type="checkbox"> Buying House
+					</label>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox">Wholesaler
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox"> Exporter
+					</label>
+				</div>
+				<div class="checkbox">
+					<label>
+					  <input type="checkbox"> Service Provider
+					</label>
+				</div>
+			</div>						 				
 		</div>
 	</div>
+</div>																
+<div class="form-group">
+	<div class="col-sm-offset-3 col-sm-9">
+	  <button type="submit" class="btn btn-primary">Save</button>
+	</div>
+</div>
+

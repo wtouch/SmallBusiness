@@ -1,14 +1,19 @@
-<div class="row">
+
 <div class="form-group">
-    <label for="area1" class="col-sm-12 control-label">Key Description of your Company (Visible of your website and Small Busi search)</label>
-    <div class="col-sm-12">
-      <textarea type="email" class="form-control" id="area1" placeholder="Key Description of your Company."></textarea>
+    <label for="area1" class="col-sm-4 control-label">Key Description of your Company (Visible of your website and Small Busi search)</label>
+    <div class="col-sm-8">
+      <textarea type="email" class="form-control" id="area1" name="area1" placeholder="Key Description of your Company." rows="3"></textarea>
+		<span style="color:red" ng-show="myForm.area1.$dirty && myForm.area1.$invalid">
+		<span ng-show="myForm.area1.$error.required">Key Description is required.</span>
+		</span>
     </div>
 </div>
 <div class="form-group">
-    <label for="area2" class="col-sm-12 control-label">Detailed Description of your Website Home Page</label>
-    <div class="col-sm-12">
-      <textarea type="email" class="form-control" id="area2" placeholder="Detailed Description of your Website Home Page"></textarea>
+    <label for="area2" class="col-sm-4 control-label">Detailed Description of your Website Home Page</label>
+    <div class="col-sm-8">
+      <textarea type="email" class="form-control" id="area2"  name="area2" rows="3" placeholder="Detailed Description of your Website Home Page"></textarea>
+	  <span style="color:red" ng-show="myForm.area2.$dirty && myForm.area2.$invalid">
+		<span ng-show="myForm.area2.$error.required">Key Description is required.</span>
+		</span>
     </div>
-</div>
 </div>

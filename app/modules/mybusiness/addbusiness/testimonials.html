@@ -1,122 +1,117 @@
-	        <div class="row form-horizontal">
-			<div class="col-sm-9">		
-				<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
+
+<div class="form-group">
+	<label  for="date" class="col-sm-3 control-label">Date</label>
+	<div class="col-md-9">
+		<p class="input-group">
+		  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+		  <span class="input-group-btn">
+			<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+		  </span>
+		</p>
+	</div>
+</div>	
+		
+<div class="form-group">
+	<label  for="testimonial" class="col-sm-3 control-label">Testimonial Given By</label>
+	<div class="col-sm-9">
+		<input type="text" id="testimonial" class="form-control" name="testimonial" placeholder="Testimonial Given By" ng-model="testimonial" required >
+		<span style="color:red" ng-show="myForm.testimonial.$dirty && myForm.testimonial.$invalid">
+		<span ng-show="myForm.testimonial.$error.required">Testimonial Given By is required.</span>
+		</span>
+	</div>						
+</div>
+	
+<div class="form-group">	
+	<label  for="email" class="col-sm-3 control-label">Sender Email</label>	
+	<div class="col-sm-9">
+		<input type="Email" class="form-control" id="email" ng-model="email" name="email" placeholder="Enter Email" required >
+		<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+		<span ng-show="myForm.email.$error.required">Sender Email is required.</span>
+		<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
+		</span>
+	</div>					
+</div>
+
+<div class="form-group">	
+	<label for="Country" class="col-sm-3 control-label">Sender Country</label>
+	<div class="col-sm-9">
+		<select name="Country" id="Country" class="form-control" required="required">
+			<option selected="selected">Sender Country</option>
+			<option value="resprop">Residential Property</option>
+			<option value="comprop">Commercial Property</option>
+			<option value="agriland">Agricultural Land</option>
+			<option value="indprop">Industrial Property</option>
+		</select>								
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="city" class="col-sm-3 control-label">Sender City / State</label>
+	<div class="col-sm-4">
+		<select name="city" id="city" class="form-control" required="required">
+			<option selected="selected">Select City</option>
+			<option value="resprop">Residential Property</option>
+			<option value="comprop">Commercial Property</option>
+			<option value="agriland">Agricultural Land</option>
+			<option value="indprop">Industrial Property</option>
+		</select>								
+	</div>
+	<div class="col-sm-offset-1 col-sm-4">
+		<select name="city" id="city" class="form-control" required="required">
+			<option selected="selected">Select State</option>
+			<option value="resprop">Residential Property</option>
+			<option value="comprop">Commercial Property</option>
+			<option value="agriland">Agricultural Land</option>
+			<option value="indprop">Industrial Property</option>
+		</select>								
+	</div>
+</div>
+	
+<div class="form-group">
+	<label  for="contact" class="col-sm-3 control-label">Senders Phone</label>
+	<div class="col-sm-9">
+		<input type="number" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="contact" required >
+		<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
+		<span ng-show="myForm.contact.$error.required">Senders Phone is required.</span>
+		</span>
+	</div>					
+</div>
+
+<div class="form-group">
+	<label  for="testi" class="col-sm-3 control-label">Testimonial Title </label>
+	<div class="col-sm-9">
+		<input type="text" id="testi" class="form-control" name="testi" placeholder="Tesimonial Title" ng-model="testi" required >
+		<span style="color:red" ng-show="myForm.testi.$dirty && myForm.testi.$invalid">
+		<span ng-show="myForm.testi.$error.required">Testimonial Title is required.</span>
+		</span>
+	</div>					
+</div>
+
+
+
+<div class="form-group">
+	<label  for="desc" class="col-sm-3 control-label">Testimonial Description</label>	
+	<div class="col-sm-9">
+		<textarea  class="form-control" id="desc" ng-model="desc" name="desc" placeholder="Testimonial Description"  rows="3" required></textarea>
+		<span style="color:red" ng-show="myForm.desc.$dirty && 	myForm.desc.$invalid">
+		<span ng-show="myForm.desc.$error.required">Testimonial Description is required.</span>
+		</span>
+	</div>						 
+</div>
 			
-					<div class="form-group">
-							<label  for="date" class="col-sm-3 control-label">Date</label>
-							<div class="col-md-9">
-								<p class="input-group">
-								  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-								  <span class="input-group-btn">
-									<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-								  </span>
-								</p>
-							</div>
-					</div>	
-																										
-					<div class="form-group">
-						<label  for="testi" class="col-sm-3 control-label">Testimonial Given By</label>	<div class="col-sm-9">
-							<input type="text" id="testi" class="form-control" name="testi" ng-model="testi" placeholder="Testimonial Given By" required >
-							<span style="color:red" ng-show="myForm.testi.$dirty && myForm.testi.$invalid">
-							<span ng-show="myForm.testi.$error.required">Tesimonial is required.</span>
-							</span>
-						</div>						
-					</div>
-					
-					<div class="form-group">	
-						<label  for="email" class="col-sm-3 control-label">Sender Email</label>	
-						<div class="col-sm-9">
-                            <input type="Email" class="form-control" id="email" ng-model="login.email" name="email" placeholder="Enter Email" required >
-							<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
-							<span ng-show="myForm.email.$error.required">Sender Email is required.</span>
-							<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
-							</span>
-                        </div>					
-					</div>
-					
-					<div class="form-group">
-						<label for="country" class="col-sm-3 control-label">Sender Country</label>
-						<div class="col-sm-9">
-							<select name="country" id="country" class="form-control" required="required">
-								<option selected="selected">Select Country</option>
-								<option value="resprop">Residential Property</option>
-								<option value="comprop">Commercial Property</option>
-								<option value="agriland">Agricultural Land</option>
-								<option value="indprop">Industrial Property</option>
-							</select>								
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="city" class="col-sm-3 control-label">Sender City / State</label>
-						<div class="col-sm-4">
-							<select name="city" id="city" class="form-control" required="required">
-								<option selected="selected">Select City</option>
-								<option value="resprop">Residential Property</option>
-								<option value="comprop">Commercial Property</option>
-								<option value="agriland">Agricultural Land</option>
-								<option value="indprop">Industrial Property</option>
-							</select>								
-						</div>
-						<div class="col-sm-offset-1 col-sm-4">
-							<select name="city" id="city" class="form-control" required="required">
-								<option selected="selected">Select State</option>
-								<option value="resprop">Residential Property</option>
-								<option value="comprop">Commercial Property</option>
-								<option value="agriland">Agricultural Land</option>
-								<option value="indprop">Industrial Property</option>
-							</select>								
-						</div>
-					</div>
-						
-					<div class="form-group">
-						<label  for="contact" class="col-sm-3 control-label">Senders Phone</label>
-						<div class="col-sm-9">
-							<input type="number" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="contact" required >
-							<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
-							<span ng-show="myForm.contact.$error.required">Senders Phone is required.</span>
-							</span>
-						</div>					
-					</div>
-					
-					<div class="form-group">
-						<label  for="testimonial" class="col-sm-3 control-label">Testimonial Title </label>
-						<div class="col-sm-9">
-							<input type="text" id="testimonial" class="form-control" name="testimonial" placeholder="Tesimonial Title" ng-model="testimonial" required >
-							<span style="color:red" ng-show="myForm.testimonial.$dirty && myForm.testimonial.$invalid">
-							<span ng-show="myForm.testimonial.$error.required">Testimonial Title is required.</span>
-							</span>
-						</div>					
-					</div>
-					
-					
-					
-					<div class="form-group">
-						<label  for="desc" class="col-sm-3 control-label">Testimonial Description</label>	
-						<div class="col-sm-9">
-							<textarea  class="form-control" id="desc" ng-model="desc" name="desc" placeholder="Testimonial Description"  rows="3" required></textarea>
-							<span style="color:red" ng-show="myForm.desc.$dirty && 	myForm.desc.$invalid">
-							<span ng-show="myForm.desc.$error.required">Testimonial Description is required.</span>
-							</span>
-						</div>						 
-					</div>
-								
-					<div class="form-group" > 
-						<label  for="clogo" class="col-sm-3 control-label">Add Image</label>
-						<div class="col-sm-4">
-							<input type="file" id="clogo" name="clogo">	
-						</div>
-						<div class="col-sm-4">
-							<input type="file" id="clogo" name="clogo">	
-						</div>
-					</div>
-					<div class="form-group">
-							<div class="col-sm-offset-3 col-sm-9">
-							  <button type="submit" class="btn btn-primary">Add Testimonials / Recomendation</button>
-							</div>
-					</div>
-				</form>
-			</div>
+<div class="form-group" > 
+	<label  for="clogo" class="col-sm-3 control-label">Add Image</label>
+	<div class="col-sm-4">
+		<input type="file" id="clogo" name="clogo">	
+	</div>
+	<div class="col-sm-4">
+		<input type="file" id="clogo" name="clogo">	
+	</div>
+</div>
+<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-9">
+		  <button type="submit" class="btn btn-primary">Add Testimonials / Recomendation</button>
 		</div>
+</div>
 
 
