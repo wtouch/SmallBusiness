@@ -8,6 +8,7 @@ define(['app'], function (app) {
     // This is controller for this view
 	var businesslistController = function ($scope, $injector) {
 		console.log("Business List ");
+		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/mybusiness/addbusiness/businessprofile.html';
 		$scope.goBack = function() 
 		{
 			window.history.back();

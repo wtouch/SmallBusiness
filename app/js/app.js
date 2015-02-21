@@ -45,13 +45,14 @@ define(['angular',
 				
 				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
 				
-				.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
+				//.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
 				
-				.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
+				.when('/dashboard/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
 				
 				.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
 				
 				.when('/dashboard/businesslist', route.resolve({controller:'businesslist', template: 'businesslist',label:"Business List"}, 'mybusiness/'))
+				
 				
 				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
 				/* Deleted mail view route we don't want that */
@@ -61,6 +62,8 @@ define(['angular',
 				.when('/dashboard/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Websites List"}, 'websites/'))
 				
 				.when('/dashboard/templates', route.resolve({controller:'templates', template: 'mytemplates',label:"Templates"}, 'templates/'))
+				
+				.when('/dashboard/addproducts', route.resolve({controller:'addbusiness', template: 'addproducts',label:"Products"}, 'products/'))
 				
 				.when('/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Website List"}, 'websites/'))
 				

@@ -40,7 +40,7 @@ define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (
 		
 		/*For display by default home*/
 		if(!$routeParams.formPart) {
-		$location.path('/addbusiness/home');
+		$location.path('/dashboard/addbusiness/home');
 		}
 	
 		templateUrl:'http://localhost/sonali/SmallBusiness/app/modules/mybusiness/addbusiness/businessprofile.html';
