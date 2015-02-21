@@ -45,8 +45,6 @@ define(['angular',
 				
 				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
 				
-				//.when('/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
-				
 				.when('/dashboard/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
 				
 				.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
