@@ -9,10 +9,7 @@ define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (
 	var addbusinessController = function ($scope, $injector, $routeParams,$location)
 	{
 		console.log("this is addbusiness ctrl ");
-		$scope.goBack = function() 
-		{
-			window.history.back();
-		};
+		
 	
 	
 		$scope.today = function() 
@@ -36,12 +33,14 @@ define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (
 		$scope.format = $scope.formats[0];
 		
 		
-		$scope.formPart = $routeParams.formPart; /* this object will check list of mails show or single mail show */
-		console.log($scope.formPart);
-		/*For display by default home*/
-		if(!$routeParams.formPart) {
-		$location.path('/dashboard/addbusiness/home');
+		$scope.formPart = 'home'; /* this object will check list of mails show or single mail show */
+		$scope.showFormPart = function(formPart){
+			$scope.formPart = formPart;
 		}
+		console.log($scope.formPart);
+		
+		
+		
 	
 		templateUrl:'http://localhost/sonali/SmallBusiness/app/modules/mybusiness/addbusiness/businessprofile.html';
 		$scope.goBack = function() 

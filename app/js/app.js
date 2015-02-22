@@ -33,38 +33,31 @@ define(['angular',
 				
 				$routeProvider
                 
-                .when('/login', route.resolve({controller:'login', template: 'login', label:"home"}, 'login/'))
+                .when('/', route.resolve({controller:'login', template: 'login', label:"Home"}, 'users/login/')) 
+				// Always home url is '/' so please don't change this. In future home view can be changed.
 				
 				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/login/'))
 				
+				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
+				
+				.when('/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/login/'))
+				
 				.when('/editprofile', route.resolve({controller:'editprofile', template: 'editprofile',label:"Edit Profile"}, 'users/editprofile/'))
 	
-				.when('/forgotpass', route.resolve({controller:'forgotpass', template: 'forgotpass', label: 'Forgot Password'}, 'users/forgotpass/'))
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
 				
-				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
+				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"Mail Box"}, 'enquiry/'))
 				
-				.when('/dashboard/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
-				
-				.when('/dashboard/businesslist', route.resolve({controller:'businesslist', template: 'businesslist',label:"Business List"}, 'mybusiness/'))
-		
-				//.when('/dashboard/business/addbusiness/:busiPart?', route.resolve({controller:'addbusiness', template: 'businesslist',label:"Business List"}, 'mybusiness/businesslist/'))
-				
-				.when('/dashboard/manageprodserv', route.resolve({controller:'businesslist', template: 'manageprodserv',label:"Manage Product-Service"}, 'mybusiness/'))
-				
-				//.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
-				
-				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
-				/* Deleted mail view route we don't want that */
-								
 				.when('/dashboard/templates/:tempPart?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
 				
-				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
-		
-				.when('/dashboard/addproducts', route.resolve({controller:'addbusiness', template: 'addproducts',label:"Products"}, 'products/'))
+				.when('/dashboard/business/:businessView?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
 				
-                .otherwise({ redirectTo: '/login' });
+				.when('/dashboard/business/products', route.resolve({controller:'products', template: 'products',label:"Products & Services"}, 'business/products/'))
+				
+				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
+				
+                .otherwise({ redirectTo: '/' });
 	}]);
 	
 		
