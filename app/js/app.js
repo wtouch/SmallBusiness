@@ -59,7 +59,11 @@ define(['angular',
 				
 				.when('/dashboard/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Websites List"}, 'websites/'))
 				
-				.when('/dashboard/templates', route.resolve({controller:'templates', template: 'mytemplates',label:"Templates"}, 'templates/'))
+				.when('/dashboard/templates', route.resolve({controller:'templates', template: 'templates',label:"Templates"}, 'templates/'))
+				
+				.when('/dashboard/mytemplates', route.resolve({controller:'templates', template: 'mytemplates',label:"My Templates"}, 'templates/'))
+				
+				.when('/mytemplate', route.resolve({controller:'mywebsites', template: 'requestnewsite',label:"Requst New Website"}, 'websites/'))
 				
 				.when('/dashboard/addproducts', route.resolve({controller:'addbusiness', template: 'addproducts',label:"Products"}, 'products/'))
 				
