@@ -46,37 +46,23 @@ define(['angular',
 				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
 				
 				.when('/dashboard/addbusiness/:formPart?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Business Profile"}, 'mybusiness/addbusiness/'))
-		
+				
 				.when('/dashboard/businesslist', route.resolve({controller:'businesslist', template: 'businesslist',label:"Business List"}, 'mybusiness/'))
+		
+				//.when('/dashboard/business/addbusiness/:busiPart?', route.resolve({controller:'addbusiness', template: 'businesslist',label:"Business List"}, 'mybusiness/businesslist/'))
 				
 				.when('/dashboard/manageprodserv', route.resolve({controller:'businesslist', template: 'manageprodserv',label:"Manage Product-Service"}, 'mybusiness/'))
 				
-				.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
+				//.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
 				
 				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
 				/* Deleted mail view route we don't want that */
 								
-				//.when('/requestnewsite', route.resolve({controller:'mywebsites', template: 'requestnewsite',label:"Requst New Website"}, 'websites/'))
-				
-				//.when('/dashboard/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Websites List"}, 'websites/'))
-				
 				.when('/dashboard/templates/:tempPart?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
 				
 				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
 		
-				//.when('/dashboard/templates', route.resolve({controller:'templates', template: 'templates',label:"Templates"}, 'templates/'))
-				
-				//.when('/dashboard/mytemplates', route.resolve({controller:'templates', template: 'mytemplates',label:"My Templates"}, 'templates/'))
-				
-				//.when('/dashboard/requestcustomtemplates', route.resolve({controller:'templates', template: 'requestcustomtemplates',label:"Requset Custom Templates"}, 'templates/'))
-				
-				//.when('/dashboard/custometemplates', route.resolve({controller:'templates', template: 'custometemplates',label:"Custom Templates"}, 'templates/'))
-				
 				.when('/dashboard/addproducts', route.resolve({controller:'addbusiness', template: 'addproducts',label:"Products"}, 'products/'))
-				
-				//.when('/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Website List"}, 'websites/'))
-				
-				//.when('/requestedsitelist', route.resolve({controller:'mywebsites', template: 'requestedsitelist',label:"Requsted Sit List"}, 'websites/'))
 				
                 .otherwise({ redirectTo: '/login' });
 	}]);

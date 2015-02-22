@@ -12,7 +12,15 @@
 				<a href="#/deletebiz" class="btn btn-default">Deleted Business</a>
 			</div>
 			<div class="col-md-12">
-				<table class="table table-bordered table-responsive">
+				<ng-include ng-if="busiPart=='addbusiness'" src="'modules/templates/addbusiness.html'"></ng-include>
+				
+				<ng-include ng-if="busiPart=='busilist'" src="'modules/templates/busilist.html'"></ng-include>	
+				
+				<ng-include ng-if="busiPart=='manageprodserv'" src="'modules/templates/manageprodserv.html'"></ng-include>	
+				
+				<ng-include ng-if="busiPart=='deletebiz'" src="'modules/templates/deletebiz.html'"></ng-include>	
+				
+				<!--<table class="table table-bordered table-responsive">
 					<thead>
 						<th>Sr.No</th>
 						<th>Business Name</th>
@@ -39,7 +47,7 @@
 							</td>
 						</tr>
 					</tbody>					
-				</table>
+				</table>-->
 			</div>
 		</div>
 	</div>
