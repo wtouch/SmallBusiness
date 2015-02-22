@@ -1,0 +1,80 @@
+<div class="row">		
+	<div class="col-md-12 main-content">	
+		<div class="row border-bottom">
+			<div class="col-md-10" ng-include="'modules/component/breadcrumb.html'"> </div>
+			<div class="col-md-2" ng-include="'modules/component/menu-back.html'"> </div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">				
+				<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
+					<h3 class="center-block">Request For Custom Template</h3>
+					<div class="form-group">
+						<label  for="name" class="col-sm-3 control-label">Name</label>		
+						<div class="col-sm-9">
+                            <input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="name" required >
+							<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
+							<span ng-show="myForm.name.$error.required">Name is required.</span>
+							</span>
+                        </div>						
+                    </div>
+				
+					<div class="form-group">	
+						<label  for="domain" class="col-sm-3 control-label">Domain Name</label>
+						<div class="col-sm-9">
+                            <input type="text" id="domain" class="form-control" name="domain" placeholder="Domain Name" ng-model="domain" required >
+							<span style="color:red" ng-show="myForm.domain.$dirty && myForm.domain.$invalid">
+							<span ng-show="myForm.domain.$error.required">Domain Name is required.</span>
+							</span>
+                        </div>						
+                    </div>
+									
+					<div class="form-group">	
+						<label  for="contact" class="col-sm-3 control-label">Contact Number</label>	
+						<div class="col-sm-9">
+                            <input type="number" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="contact" required >
+							<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
+							<span ng-show="myForm.contact.$error.required">Contact is required.</span>
+							</span>
+                        </div>						
+                    </div>
+						
+					<div class="form-group">
+						<label for="requirement" class="col-sm-3 control-label">Custom Requirement</label>	
+						<div class="col-sm-9">
+                            <textarea  class="form-control" id="requirement" ng-model="requirement" name="requirement" placeholder="Your Custom Requirement" rows="3" required ng-minlength="10" ng-maxlength="30">
+							</textarea>
+							<span style="color:red" ng-show="myForm.requirement.$dirty && myForm.requirement.$invalid">
+								<span ng-show="myForm.requirement.$error.required">Custom Requirement are Required.</span>
+								<span ng-show="myForm.requirement.$error.minlength">Plz Enter minimum 10 character</span>
+								<span ng-show="myForm.requirement.$error.maxlength">You have exceed limit</span>
+							</span>
+                        </div>					
+                    </div>
+						
+					<div class="form-group">
+						<label for="custom" class="col-sm-3 control-label pull-left">Make it</label>
+						<div class="col-sm-3">
+							<label class="radio-inline">
+								<input type="radio" name="radio" id="Yes" value="Yes">Private
+							</label>
+						</div>
+						<div class="col-sm-6">
+							<label class="radio-inline">
+							  <input type="radio" name="radio" id=" No" value=" No">Public
+							</label>
+						</div>
+					</div>
+				
+	              	<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-3">
+							  <button type="submit" class="btn btn-primary">Save</button>
+							</div>
+							<div class="col-sm-6">
+							  <button type="reset" class="btn btn-primary">Reset</button>
+							</div>
+						</div>					
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
