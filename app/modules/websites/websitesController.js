@@ -14,7 +14,7 @@ define(['app'], function (app) {
 		console.log($scope.websitePart);
 		/*For display by default templ.html page*/
 		if(!$routeParams.websitePart) {
-		$location.path('/dashboard/websites/home');
+		$location.path('/dashboard/websites/websiteslist');
 		}
 	
 		templateUrl:'http://localhost/aarti/SmallBusiness/app/modules/websites/mywebsites.html';
