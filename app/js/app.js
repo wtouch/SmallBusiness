@@ -56,12 +56,13 @@ define(['angular',
 				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
 				/* Deleted mail view route we don't want that */
 								
-				.when('/requestnewsite', route.resolve({controller:'mywebsites', template: 'requestnewsite',label:"Requst New Website"}, 'websites/'))
+				//.when('/requestnewsite', route.resolve({controller:'mywebsites', template: 'requestnewsite',label:"Requst New Website"}, 'websites/'))
 				
-				.when('/dashboard/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Websites List"}, 'websites/'))
+				//.when('/dashboard/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Websites List"}, 'websites/'))
 				
 				.when('/dashboard/templates/:tempPart?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
-		
+				
+				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
 		
 				//.when('/dashboard/templates', route.resolve({controller:'templates', template: 'templates',label:"Templates"}, 'templates/'))
 				
@@ -73,9 +74,10 @@ define(['angular',
 				
 				.when('/dashboard/addproducts', route.resolve({controller:'addbusiness', template: 'addproducts',label:"Products"}, 'products/'))
 				
-				.when('/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Website List"}, 'websites/'))
+				//.when('/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Website List"}, 'websites/'))
 				
-				.when('/requestedsitelist', route.resolve({controller:'mywebsites', template: 'requestedsitelist',label:"Requsted Sit List"}, 'websites/'))
+				//.when('/requestedsitelist', route.resolve({controller:'mywebsites', template: 'requestedsitelist',label:"Requsted Sit List"}, 'websites/'))
+				
                 .otherwise({ redirectTo: '/login' });
 	}]);
 	
