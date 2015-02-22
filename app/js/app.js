@@ -68,6 +68,8 @@ define(['angular',
 				
 				.when('/dashboard/addproducts', route.resolve({controller:'addbusiness', template: 'addproducts',label:"Products"}, 'products/'))
 				
+				//.when('/dashboard/addbusiness/addproducts', route.resolve({controller:'addbusiness', template: 'addproducts',label:"Products"}, 'products/'))
+				
 				.when('/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Website List"}, 'websites/'))
 				
 				.when('/requestedsitelist', route.resolve({controller:'mywebsites', template: 'requestedsitelist',label:"Requsted Sit List"}, 'websites/'))

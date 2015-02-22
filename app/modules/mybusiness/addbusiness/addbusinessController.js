@@ -37,7 +37,7 @@ define(['app', 'css!modules/mybusiness/addbusiness/addbusiness.css'], function (
 		
 		
 		$scope.formPart = $routeParams.formPart; /* this object will check list of mails show or single mail show */
-		
+		console.log($scope.formPart);
 		/*For display by default home*/
 		if(!$routeParams.formPart) {
 		$location.path('/dashboard/addbusiness/home');
