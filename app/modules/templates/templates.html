@@ -5,14 +5,22 @@
 			<div class="col-md-2" ng-include="'modules/component/menu-back.html'"> </div>
 		</div>
 		<div class="row">
-			<div class="col-md-12 text-right">
+			<div class="col-md-12 text-right bottomspace">
 				<a href="#/dashboard/templates" class="btn btn-default">List of Templates</a>
-				<a href="#/dashboard/mytemplates" class="btn btn-default">My Templates</a>
-				<a href="#/dashboard/requestcustomtemplates" class="btn btn-default">Request Custom Template</a>
-				<a href="#/dashboard/custometemplates" class="btn btn-default">Custom Templates</a>
+				<a href="#/dashboard/templates/mytemplates" class="btn btn-default">My Templates</a>
+				<a href="#/dashboard/templates/requestcustomtemplates" class="btn btn-default">Request Custom Template</a>
+				<a href="#/dashboard/templates/custometemplates" class="btn btn-default">Custom Templates</a>
 			</div>
 			<div class="col-md-12">
-				<table class="table table-bordered table-hover table-responsive">
+				<ng-include ng-show="tempPart=='home'" src="'modules/templates/templ.html'"></ng-include>	
+				
+				<ng-include ng-show="tempPart=='mytemplates'" src="'modules/templates/mytemplates.html'"></ng-include>	
+				
+				<ng-include ng-show="tempPart=='requestcustomtemplates'" src="'modules/templates/requestcustomtemplates.html'"></ng-include>	
+				
+				<ng-include ng-show="tempPart=='custometemplates'" src="'modules/templates/custometemplates.html'"></ng-include>	
+			
+				<!--<table class="table table-bordered table-hover table-responsive">
 					<thead>
 						<th>Sr.No.</th>
 						<th>Template Name</th>
@@ -31,7 +39,7 @@
 							<a href="#" class="btn btn-default">Preview</a></td>
 						</tr>
 					</tbody>					
-				</table>
+				</table>-->
 			</div>
 		</div>
 	</div>

@@ -49,7 +49,7 @@ define(['angular',
 		
 				.when('/dashboard/businesslist', route.resolve({controller:'businesslist', template: 'businesslist',label:"Business List"}, 'mybusiness/'))
 				
-				.when('/dashboard/manageproducts', route.resolve({controller:'businesslist', template: 'manageprodserv',label:"Manage Product-Service"}, 'mybusiness/'))
+				.when('/dashboard/manageprodserv', route.resolve({controller:'businesslist', template: 'manageprodserv',label:"Manage Product-Service"}, 'mybusiness/'))
 				
 				.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
 				
@@ -60,13 +60,16 @@ define(['angular',
 				
 				.when('/dashboard/mywebsites', route.resolve({controller:'mywebsites', template: 'mywebsites',label:"Websites List"}, 'websites/'))
 				
-				.when('/dashboard/templates', route.resolve({controller:'templates', template: 'templates',label:"Templates"}, 'templates/'))
+				.when('/dashboard/templates/:tempPart?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
+		
+		
+				//.when('/dashboard/templates', route.resolve({controller:'templates', template: 'templates',label:"Templates"}, 'templates/'))
 				
-				.when('/dashboard/mytemplates', route.resolve({controller:'templates', template: 'mytemplates',label:"My Templates"}, 'templates/'))
+				//.when('/dashboard/mytemplates', route.resolve({controller:'templates', template: 'mytemplates',label:"My Templates"}, 'templates/'))
 				
-				.when('/dashboard/requestcustomtemplates', route.resolve({controller:'templates', template: 'requestcustomtemplates',label:"Requset Custom Templates"}, 'templates/'))
+				//.when('/dashboard/requestcustomtemplates', route.resolve({controller:'templates', template: 'requestcustomtemplates',label:"Requset Custom Templates"}, 'templates/'))
 				
-				.when('/dashboard/custometemplates', route.resolve({controller:'templates', template: 'custometemplates',label:"Custom Templates"}, 'templates/'))
+				//.when('/dashboard/custometemplates', route.resolve({controller:'templates', template: 'custometemplates',label:"Custom Templates"}, 'templates/'))
 				
 				.when('/dashboard/addproducts', route.resolve({controller:'addbusiness', template: 'addproducts',label:"Products"}, 'products/'))
 				
