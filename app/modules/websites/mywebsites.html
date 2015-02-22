@@ -11,28 +11,9 @@
 				<a href="#/requestedsitelist" class="btn btn-default">Requested Site List</a>
 			</div>
 			<div class="col-md-12">
-				<table class="table table-responsive table-bordered table-striped table-hover">
-					<thead>
-						<th>Sr.No.</th>
-						<th>Site Names</th>
-						<th>Start Date</th>
-						<th>Exp Date</th>
-						<th>Manage</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>
-							<button href="#" class="glyphicon glyphicon-refresh btn btn-default" aria-hidden="true" tooltip-placement="top" tooltip="Renew Site"></button>
-							<button href="#" class="glyphicon glyphicon-search btn btn-default" aria-hidden="true" tooltip-placement="top" tooltip="Review Site"></button>
-							<button href="#" class="glyphicon glyphicon-remove btn btn-default" aria-hidden="true" tooltip-placement="top" tooltip="Delete Site"></button>
-							</td>
-						</tr>
-					</tbody>					
-				</table>
+				<ng-include ng-if="formPart=='websitelist'" src="'modules/websites/websites.html'"></ng-include>
+				<ng-include ng-if="formPart=='requestnewsite'" src="'modules/websites/requestnewsite.html'"></ng-include>
+				<ng-include ng-if="formPart=='requestedsitelist'" src="'modules/websites/requestedsitelist.html'"></ng-include>
 			</div>
 		</div>
 	</div>
