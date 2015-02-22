@@ -49,6 +49,8 @@ define(['angular',
 		
 				.when('/dashboard/businesslist', route.resolve({controller:'businesslist', template: 'businesslist',label:"Business List"}, 'mybusiness/'))
 				
+				.when('/dashboard/manageproducts', route.resolve({controller:'businesslist', template: 'manageprodserv',label:"Manage Product-Service"}, 'mybusiness/'))
+				
 				.when('/addbusiness/:new?', route.resolve({controller:'addbusiness', template: 'addbusiness', label: "New Business"}, 'mybusiness/addbusiness/'))
 				
 				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"MailBox"}, 'enquiries/'))
