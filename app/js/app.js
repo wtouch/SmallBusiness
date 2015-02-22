@@ -53,6 +53,8 @@ define(['angular',
 				
 				.when('/dashboard/business/:businessView?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
 				
+				
+				
 				.when('/dashboard/business/products', route.resolve({controller:'products', template: 'products',label:"Products & Services"}, 'business/products/'))
 				
 				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))

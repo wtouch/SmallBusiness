@@ -9,6 +9,7 @@ require.config({
 		services: '../js/services',
 		filters: '../js/filters',
 		jquery: '../lib/jquery/jquery',
+		tinymce: '../lib/tinymce/tinymce.min',
 		angularRoute: '../lib/angular/angular-route',
 		angularMocks: '../lib/angular/angular-mocks',
 		text: '../lib/requirejs-text/text',
