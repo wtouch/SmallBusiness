@@ -6,6 +6,8 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var editprofileController = function ($scope,$injector) {
+		
+		
 	console.log("this is editprofile ctrl");
 		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/mybusiness/addbusiness/editprofile.html';
     };
