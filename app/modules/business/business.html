@@ -6,10 +6,10 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12 text-right bottomspace">
-				<a href="#/dashboard/addbusiness" class="btn btn-default">Add Business</a>
-				<a href="#/dashboard/businesslist" class="btn btn-default">Business List</a>
-				<a href="#/dashboard/manageprodserv" class="btn btn-default">Manage Products/Services</a>
-				<a href="#/deletebiz" class="btn btn-default">Deleted Business</a>
+				<a href="#/dashboard/business" class="btn btn-default">Add Business</a>
+				<a href="#/dashboard/business/businesslist" class="btn btn-default">Business List</a>
+				<a href="#/dashboard/business/manageprodserv" class="btn btn-default">Manage Products/Services</a>
+				<a href="#/dashboard/business/deletedbusiness" class="btn btn-default">Deleted Business</a>
 			</div>
 			<div class="col-md-12">
 				<ng-include ng-if="businessPart=='addbusiness'" src="'modules/business/addbusiness/addbusiness.html'"></ng-include>
@@ -18,7 +18,7 @@
 				
 				<ng-include ng-if="businessPart=='manageprodserv'" src="'modules/business/manageprodserv.html'"></ng-include>	
 				
-				<ng-include ng-if="businessPart=='deletebiz'" src="'modules/templates/deletebiz.html'"></ng-include>
+				<ng-include ng-if="businessPart=='deletedbusiness'" src="'modules/business/deletedbusiness.html'"></ng-include>
 			</div>
 		</div>
 	</div>
