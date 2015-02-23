@@ -52,8 +52,8 @@ define(['angular',
 				.when('/dashboard/templates/:tempPart?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
 				
 				.when('/dashboard/business/:businessPart?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
-				
-				
+			
+				.when('/dashboard/business/addbusiness/:formpart', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Add Business"}, 'business/addbusiness/'))
 				
 				.when('/dashboard/business/products', route.resolve({controller:'products', template: 'products',label:"Products & Services"}, 'business/products/'))
 				
