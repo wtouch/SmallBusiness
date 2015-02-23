@@ -1,22 +1,18 @@
-<div class="row main-content">	 	
-	<div class="col-md-12 border-bottom">
-		<div class="row"> 
-			<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'"></div>
-			<div class="col-md-6" ng-include="'modules/component/menu-back.html'"></div>
-		</div>
+<div class="main-content">	 	
+	<div class="row border-bottom"> 
+		<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'"></div>
+		<div class="col-md-6" ng-include="'modules/component/menu-back.html'"></div>
 	</div>
 	
 	<div class="row">
-		<div class="col-md-3" ng-include="'modules/enquiries/sidebar.html'">
-		</div>
+		<div class="col-md-3" ng-include="'modules/enquiry/sidebar.html'"></div>
 		<div class="col-md-9">
-			<div class="bottomspace" ng-include="'modules/enquiries/toolbars.html'"></div>
-						<!-- This is conditional include 
-							if not mailId set in url this html includes in view -->
-						<ng-include ng-if="!MailView" src="'modules/enquiries/mails.html'"></ng-include> 
-						<!-- if mailId set in url this html includes in view -->
-						<ng-include ng-if="MailView" src="'modules/enquiries/mailview.html'"></ng-include>
-					
+			<div class="bottomspace" ng-include="'modules/enquiry/toolbars.html'"></div>
+			<!-- This is conditional include 
+				if not mailId set in url this html includes in view -->
+			<ng-include ng-if="!MailView" src="'modules/enquiry/mails.html'"></ng-include> 
+			<!-- if mailId set in url this html includes in view -->
+			<ng-include ng-if="MailView" src="'modules/enquiry/mailview.html'"></ng-include>
 		</div>
 	</div>
 </div>
