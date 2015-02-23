@@ -2,48 +2,33 @@
 	<div class="col-md-12">	
 		<div class="main-content">
 			<ng-include src="'modules/business/toolbar.html'"></ng-include>
-
-			<div class="btn-group" dropdown>
-				  <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-					Business Names <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu">
-					<li><a href="#">Business1</a></li>
-					<li class="divider"></li>
-					<li><a href="#">Business2</a></li>
-				  </ul>
+			<div class="row bottomspace">
+				<div class="col-md-2">
+					<select id="sort" class="form-control" ng-model="id"> 
+						<option value="">Select Business</option>			
+						<option value="-id">Business1</option>
+						<option value="id">Business2</option>  
+					</select>
 				</div>
-
-				<!-- Split button -->
-				<div class="btn-group" dropdown>
-				  <button type="button" class="btn btn-primary">Product/Services</button>
-				  <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
-					<span class="caret"></span>
-					<span class="sr-only">Split button!</span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu">
-					<li><a href="#">Product</a></li>
-					<li class="divider"></li>
-					<li><a href="#">Services</a></li>
-				  </ul>
+				<div class="col-md-2">
+					<select id="sort" class="form-control" ng-model="id"> 
+						<option value="">Product/Services</option>			
+						<option value="-id">Product</option>
+						<option value="id">Services</option>  
+					</select>
 				</div>
-				<div class="btn-group" dropdown>
-				  <button type="button" class="btn btn-primary">Add Product/Services</button>
-				  <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
-					<span class="caret"></span>
-					<span class="sr-only">Split button!</span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu">
-					<li><a href="#">Product</a></li>
-					<li class="divider"></li>
-					<li><a href="#">Services</a></li>
-				  </ul>
+				<div class="col-md-2">
+					<select id="sort" class="form-control" ng-model="id"> 
+						<option value="">Add Product/Services</option>			
+						<option value="-id">Product</option>
+						<option value="id">Services</option>  
+					</select>
 				</div>
-			<div class="text-right">
-				<a href="#/products/addproducts" title="Add Product" class="btn btn-default">Add Product</a>
-				<a href="#" title="Manage Product" class="btn btn-default">Manage Product Group</a>
+				<div class="text-right">
+					<a href="#/products/addproducts" title="Add Product" class="btn btn-default">Add Product</a>
+					<a href="#" title="Manage Product" class="btn btn-default">Manage Product Group</a>
+				</div>
 			</div>
-
 			<div class="row product">
 				<div class="col-sm-9">
 					<h3>Product with photo receives 5 times more enquiries from buyers</h3>
