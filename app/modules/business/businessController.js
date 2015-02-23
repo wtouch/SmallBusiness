@@ -29,15 +29,21 @@ define(['app', 'css!modules/business/business.css'], function (app) {
 		/* Date Picker Ended here --------------------------------------------------------------------------------------*/
 		
 		// This will change businessView dynamically from 'business.html' {Vilas}
+		
 		$scope.businessView = $routeParams.businessView;
 		console.log($scope.businessView );
+		
+		//for display default businesslist.html{trupti}
+		if(!$routeParams.businessView) {
+			$location.path('/dashboard/business/businesslist');
+		}
 		
 		// Add Business multi part form show/hide operation from here! {Vilas}
 		$scope.formPart = 'home';
 		console.log($scope.formPart);
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
-		};
+		};     
     };
 	
 	// Inject controller's dependencies

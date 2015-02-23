@@ -9,7 +9,6 @@ define(['app'], function (app) {
 	var templatesController = function ($scope, $injector,$location,$routeParams) {
 		console.log("this is templates ctrl ");
 		
-			
 		$scope.tempPart = $routeParams.tempPart; 
 		
 		console.log($scope.tempPart);
