@@ -10,7 +10,7 @@ define(['app', 'css!modules/business/business.css'], function (app) {
 	{
 		// This code for Date Picker {Vilas}
 		$scope.today = function(){
-			$scope.dt = new Date();
+			$scope.date = new Date();
 		};
 		$scope.today();
 		$scope.open = function($event)
