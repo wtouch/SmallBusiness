@@ -51,7 +51,7 @@ define(['angular',
 				
 				.when('/dashboard/templates/:tempPart?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
 				
-				.when('/dashboard/business/:businessView?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
+				.when('/dashboard/business/:businessPart?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
 				
 				
 				

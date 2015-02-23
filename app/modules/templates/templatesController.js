@@ -15,10 +15,10 @@ define(['app'], function (app) {
 		console.log($scope.tempPart);
 		/*For display by default templ.html page*/
 		if(!$routeParams.tempPart) {
-		$location.path('/dashboard/templates/home');
+		$location.path('/dashboard/templates/listoftemplates');
 		}
 	
-		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/templates/templ.html';
+		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/templates/templates.html';
     };
 	
     
