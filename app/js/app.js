@@ -36,13 +36,13 @@ define(['angular',
                 .when('/', route.resolve({controller:'login', template: 'login', label:"Home"}, 'users/login/')) 
 				// Always home url is '/' so please don't change this. In future home view can be changed.
 				
-				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/login/'))
+				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/'))
 				
-				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
+				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/'))
 				
-				.when('/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/login/'))
+				.when('/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/'))
 				
-				.when('/editprofile', route.resolve({controller:'editprofile', template: 'editprofile',label:"Edit Profile"}, 'users/editprofile/'))
+				.when('/editprofile', route.resolve({controller:'editprofile', template: 'editprofile',label:"Edit Profile"}, 'users/'))
 	
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
