@@ -30,9 +30,12 @@
 	<div class="form-group">
 		<label  for="product" class="col-sm-3 control-label">Product/Services</label>	
 		<div class="col-sm-9">
-			<textarea  class="form-control" id="product" ng-model="product" name="product" placeholder="Product/Services" rows="3" required></textarea>
+			<textarea  class="form-control" id="product" ng-model="product" name="product" placeholder="Product/Services" rows="3" required ui-tinymce ng-minlength="10" ng-maxlength="30">
+			</textarea>
 			<span style="color:red" ng-show="myForm.product.$dirty && myForm.product.$invalid">
-			<span ng-show="myForm.product.$error.required">Product/Services is Required.</span>
+				<span ng-show="myForm.product.$error.required">Product/Services is Required.</span>
+				<span ng-show="myForm.product.$error.minlength">Plz Enter minimum 10 character</span>
+				<span ng-show="myForm.product.$error.maxlength">You have exceed limit</span>
 			</span>
 		</div>						
 	</div>	
@@ -40,17 +43,17 @@
 		<label for="custom" class="col-sm-3 control-label pull-left">Required Custom</label>
 		<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="radio" id="Yes" value="Yes"> Yes
+				<input type="radio" name="radio" id="Yes" value="Yes">Yes
 			</label>
 			<label class="radio-inline">
-			  <input type="radio" name="radio" id=" No" value=" No"> No
+			  <input type="radio" name="radio" id=" No" value=" No">No
 			</label>
 		</div>
 	</div>
 	<div class="form-group">
 			<div class="col-sm-offset-3 col-sm-9">
-			  <button type="submit" class="btn btn-primary">Save</button>
-			  <button type="reset" class="btn btn-primary">Reset</button>
+			  <button type="submit" class="btn btn-primary" tooltip="Send Request">Send Request</button>
+			  <button type="reset" class="btn btn-danger" tooltip="Cancle">Reset</button>
 			</div>
 	</div>					
 </form>
