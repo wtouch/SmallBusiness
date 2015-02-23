@@ -38,7 +38,6 @@ define(['app', 'css!modules/business/business.css'], function (app) {
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
 		};
-		
     };
 	
 	// Inject controller's dependencies
