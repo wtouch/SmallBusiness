@@ -33,7 +33,7 @@ define(['angular',
 				
 				$routeProvider
                 
-                .when('/', route.resolve({controller:'login', template: 'login', label:"Home"}, 'users/login/')) 
+                .when('/', route.resolve({controller:'login', template: 'login', label:"Home"}, 'users/')) 
 				// Always home url is '/' so please don't change this. In future home view can be changed.
 				
 				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/'))
