@@ -1,22 +1,16 @@
-<div class="row">		
-	<div class="col-md-12">
-		<div class="main-content">
-			<div class="row border-bottom">
-				<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'"></div>
-				<div class="col-md-6" ng-include="'modules/component/menu-back.html'"></div>
+<div class="main-content">
+	<ng-include src="'modules/component/toolbar.html'"></ng-include>
+		<div class="row">
+			<div class="col-md-12 text-right bottomspace">
+				<a href="#/dashboard/websites" class="btn btn-default">Website List</a>
+				<a href="#/dashboard/websites/requestnewsite" class="btn btn-default">Request New Site</a>
+				<a href="#/dashboard/websites/requestedsitelist" class="btn btn-default">Requested Site List</a>
 			</div>
-			<div class="row">
-				<div class="col-md-12 text-right bottomspace">
-					<a href="#/dashboard/websites" class="btn btn-default">Website List</a>
-					<a href="#/dashboard/websites/requestnewsite" class="btn btn-default">Request New Site</a>
-					<a href="#/dashboard/websites/requestedsitelist" class="btn btn-default">Requested Site List</a>
-				</div>
-				<div class="col-md-12">	
-					<ng-include ng-if="websitePart=='websiteslist'" src="'modules/websites/websiteslist.html'"></ng-include>
-					<ng-include ng-if="websitePart=='requestnewsite'" src="'modules/websites/requestnewsite.html'"></ng-include>
-					<ng-include ng-if="websitePart=='requestedsitelist'" src="'modules/websites/requestedsitelist.html'"></ng-include>
-				</div>
+			<div class="col-md-12">	
+				<ng-include ng-if="websitePart=='websiteslist'" src="'modules/websites/websiteslist.html'"></ng-include>
+				<ng-include ng-if="websitePart=='requestnewsite'" src="'modules/websites/requestnewsite.html'"></ng-include>
+				<ng-include ng-if="websitePart=='requestedsitelist'" src="'modules/websites/requestedsitelist.html'"></ng-include>
 			</div>
 		</div>
-	</div>
 </div>
+	
