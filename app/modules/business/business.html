@@ -1,24 +1,19 @@
 <div class="row">		
 	<div class="col-md-12">	
-	<div class="main-content">
-		<div class="row border-bottom">
-			<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'"></div>
-			<div class="col-md-6" ng-include="'modules/component/menu-back.html'"></div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 text-right bottomspace border-bottom">
-				<a href="#/dashboard/business/addbusiness" class="btn btn-default">Add Business</a>
-				<a href="#/dashboard/business/businesslist" class="btn btn-default">Business List</a>
-				<a href="#/dashboard/business/manageprodserv" class="btn btn-default">Manage Products/Services</a>
-				<a href="#/dashboard/business/deletedbusiness" class="btn btn-default">Deleted Business</a>
-			</div>
-			<div class="col-md-12">
-				<ng-include ng-if="businessPart=='businesslist'" src="'modules/business/businesslist.html'"></ng-include>	
-				
-				<ng-include ng-if="businessPart=='deletedbusiness'" src="'modules/business/deletedbusiness.html'"></ng-include>
-			</div>
+		<div class="main-content">
+			<!-- This is Business View Toolbar -->
+			<ng-include src="'modules/business/toolbar.html'"></ng-include>
+
+			<!-- If view = add business addbusiness.html will load -->
+			<ng-include ng-if="businessView=='addbusiness'" src="'modules/business/addbusiness/addbusiness.html'"></ng-include>
+			
+			<ng-include ng-if="businessView=='businesslist'" src="'modules/business/businesslist.html'"></ng-include>	
+			
+			<ng-include ng-if="businessView=='products'" src="'modules/business/manageprodserv.html'"></ng-include>
+			
+			<ng-include ng-if="businessView=='deletedbusiness'" src="'modules/business/deletedbusiness.html'"></ng-include>
+
 		</div>
 	</div>
-</div>
 </div>
 	

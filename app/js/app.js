@@ -33,16 +33,16 @@ define(['angular',
 				
 				$routeProvider
                 
-                .when('/', route.resolve({controller:'login', template: 'login', label:"Home"}, 'users/')) 
+                .when('/', route.resolve({controller:'login', template: 'login', label:"Home"}, 'users/login/')) 
 				// Always home url is '/' so please don't change this. In future home view can be changed.
 				
-				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/'))
+				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/login/'))
 				
-				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/'))
+				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
 				
-				.when('/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/'))
+				.when('/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/login/'))
 				
-				.when('/editprofile', route.resolve({controller:'editprofile', template: 'editprofile',label:"Edit Profile"}, 'users/'))
+				.when('/editprofile', route.resolve({controller:'editprofile', template: 'editprofile',label:"Edit Profile"}, 'users/editprofile/'))
 	
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
@@ -51,11 +51,10 @@ define(['angular',
 				
 				.when('/dashboard/templates/:tempPart?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
 				
-				.when('/dashboard/business/:businessPart?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
-			
-				.when('/dashboard/business/addbusiness/:formpart', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Add Business"}, 'business/addbusiness/'))
-				
+				// Always Add Static Route before dynamic route/dynamic parameter
 				.when('/dashboard/business/products', route.resolve({controller:'products', template: 'products',label:"Products & Services"}, 'business/products/'))
+				
+				.when('/dashboard/business/:businessView?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
 				
 				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
 				
