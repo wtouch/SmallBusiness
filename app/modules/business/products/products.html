@@ -3,99 +3,32 @@
 		<div class="main-content">
 			<ng-include src="'modules/business/toolbar.html'"></ng-include>
 			<div class="row bottomspace">
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<select id="biz" class="form-control" ng-model="biz"> 
 						<option value="">Select Business</option>			
 						<option value="-id">Business1</option>
 						<option value="id">Business2</option>  
 					</select>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<select id="view" class="form-control" ng-model="view"> 
 						<option value="">Product/Services</option>			
 						<option value="-id">Product</option>
 						<option value="id">Services</option>  
 					</select>
 				</div>
-				<div class="col-md-2">
-					<select id="add" class="form-control" ng-model="add"> 
-						<option value="">Add Product/Services</option>			
-						<option value="-id">Product</option>
-						<option value="id">Services</option>  
-					</select>
-				</div>
 				<div class="col-md-6 text-right">
-					<a href="#/products/addproducts" title="Add Product" class="btn btn-default">Add Product</a>
-					<a href="#" title="Manage Product" class="btn btn-default">Manage Product Group</a>
+					<a href="#" class="btn btn-default">Add Product</a>
+					<a href="#" class="btn btn-default">Add Service</a>
 				</div>
 			</div>
-			<div class="row product">
-				<div class="col-sm-9">
-					<h3>Product with photo receives 5 times more enquiries from buyers</h3>
-					<div class="media">
-						<div class="media-left">
-							<img class="media-object" src="img/m4.jpg"/>
-						</div>
-						<div class="media-body">
-							<h3>Website Design</h3>
-							<label for="prodDesc">Website Description :</label>
-							<textarea id="prodDesc" name="prodDesc" class="form-control" rows="3" ng-model="prodDesc" required ng-minlength="10" ng-maxlength="15"placeholder="Your Website Description"></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<a href="#" class="btn btn-default add-prod">Add Product Photo</a>
-						
-					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"></span> Push to Top</button>
-					
-					<div class="hot-product">
-						<input type="checkbox"s id="hotProduct"> <label for="hotProduct">Hot Product</label>
-					</div>
-					
-					<div class="edit-btns">	
-						<a href="#">
-						<span class="btn btn-default glyphicon glyphicon-pencil"></span> Edit</a>
-							
-						<a href="#">
-						<span class="btn btn-default glyphicon glyphicon-remove-sign"></span> Delete</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="row product">
-				<div class="col-sm-9">
-					<h3>Product with photo receives 5 times more enquiries from buyers</h3>
-					<div class="media">
-						<div class="media-left">
-							<img class="media-object" src="img/m4.jpg"/>
-						</div>
-						<div class="media-body">
-							<h3>Website Design</h3>
-							<label for="prodDesc">All printing Designing</label>
-							<textarea id="prodDesc" name="prodDesc" class="form-control" rows="3" ng-model="prodDesc" required ng-minlength="10" ng-maxlength="15"placeholder="Your Website Description"></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<a href="#" class="btn btn-default add-prod">Add Product Photo</a>
-					
-					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"></span> Push to Top</button>
-					
-					<div class="hot-product">
-						<input type="checkbox"s id="hotProduct"> <label for="hotProduct">Hot Product</label>
-					</div>
-					<div class="edit-btns">	
-						<a href="#">
-						<span class="btn btn-default glyphicon glyphicon-pencil"></span> Edit</a>
-							
-						<a href="#">
-						<span class="btn btn-default glyphicon glyphicon-remove-sign"></span> Delete</a>
-					</div>
-				</div>
-			</div>
+			<ng-include src="'modules/business/products/addproducts.html'"></ng-include>
+			<ng-include src="'modules/business/products/addservices.html'"></ng-include>
+			<ng-include src="'modules/business/products/productlist.html'"></ng-include>
 		</div>
 	</div>
 </div>
+
 
 
 	
