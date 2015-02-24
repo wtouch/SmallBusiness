@@ -30,11 +30,11 @@
 	<div class="form-group">
 		<label  for="product" class="col-sm-3 control-label">Product/Services</label>	
 		<div class="col-sm-9">
-			<textarea  class="form-control" id="product" ng-model="product" name="product" placeholder="Product/Services" rows="3" required ui-tinymce ng-minlength="10" ng-maxlength="30">
+			<textarea  class="form-control" id="product" ng-model="product" name="product" placeholder="Product/Services" rows="3" required ui-tinymce ng-minlength="3" ng-maxlength="5">
 			</textarea>
 			<span style="color:red" ng-show="myForm.product.$dirty && myForm.product.$invalid">
 				<span ng-show="myForm.product.$error.required">Product/Services is Required.</span>
-				<span ng-show="myForm.product.$error.minlength">Plz Enter minimum 10 character</span>
+				<span ng-show="myForm.product.$error.minlength">Plz Enter minimum 3 character</span>
 				<span ng-show="myForm.product.$error.maxlength">You have exceed limit</span>
 			</span>
 		</div>						

@@ -1,57 +1,55 @@
 <div class="row bottomspace">
 	<div class="col-md-12">
 		<div class="product">
-			<div class="row">
-				<div class="col-sm-3">
-					<img src="img/user.png"/>
-						<input type="file" id="prodLogo" name="prodLogo">
-				</div>
-			<div class="col-sm-9">
+			<form class="form-horizontal" role="form" novalidate="novalidate" name="myForm">
 				<div class="form-group">
-					<label for="prodName" class="col-sm-3 control-label">Product Name:</label>
+					<label for="productlogo" class="col-sm-3 control-label">Select Image :</label>
+					<div class="col-sm-9">
+						<img src="img/user.png"/>
+						<input type="file" id="prodLogo" name="prodLogo">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="prodName" class="col-sm-3 control-label">Product Name :</label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control" id="prodName" placeholder="Enter Product Name here" required ng-modal="prodName" name="prodName">
 							<span style="color:red" ng-show="myForm.prodName.$dirty && myForm.prodName.$invalid">
-							<span ng-show="myForm.prodName.$error.required">Product name is required</span>
+								<span ng-show="myForm.prodName.$error.required">Product  name is required</span>
 							</span>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="prodGroup" class="col-sm-3 control-label">Product Group :</label>
-						<div class="col-sm-9">
-							<select class="form-control" id="prodGroup" ng-model="prodGroup" required>
-								<option value="Group Items">Select Heading</option>
-								<option value="abc">abc</option>
-								<option value="xyz">xyz</option>
-								<option value="pqr">pqr</option>
-								<option value="stu">stu</option>
-							</select>
-						</div>
+					<div class="col-sm-9">
+						<select class="form-control" id="prodGroup" ng-model="prodGroup" required>
+							<option value="Group Items">Select Heading</option>
+							<option value="abc">abc</option>
+							<option value="xyz">xyz</option>
+							<option value="pqr">pqr</option>
+							<option value="stu">stu</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="servDescp">Product Description :
+					</label>
+					<div  class="col-sm-9">
+						<textarea id="productDescp" name="productDescp" ng-model="productDescp" rows="3" required ng-minlength="5" ng-maxlength="10" class="form-control" ui-tinymce>
+						</textarea>
+						<span style="color:red" ng-show="myForm.productDescp.$dirty && myForm.productDescp.$invalid">
+						<span ng-show="myForm.productDescp.$error.required" class="required">Plz Enter Description for Product.</span>
+						<span ng-show="myForm.productDescp.$error.minlength">Plz Enter minimum 5 character</span>
+						<span ng-show="myForm.productDescp.$error.maxlength">You have exceed limit</span>
+						</span>
+					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
-						<a href="#/products/products" class="btn btn-default btn-success pull-right" title="submit">Add Product</a>
+						<a href="#/products/products" class="btn btn-default btn-success" title="submit">
+						Add Product</a>
 					</div>
 				</div>
-			</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="form-group">
-						<label class="col-sm-3" for="prodDescp">Product Description :
-						</label>
-					<div  class="col-sm-9">
-						<textarea id="prodDescp" name="prodDescp" ng-model="prodDescp" rows="3" required ng-minlength="5" ng-maxlength="10" class="form-control" ui-tinymce>
-						</textarea>
-						<span style="color:red" ng-show="myForm.prodDescp.$dirty && myForm.prodDescp.$invalid">
-						<span ng-show="myForm.prodDescp.$error.required" class="required">Plz Enter Description for Infrastucture</span>
-						<span ng-show="myForm.prodDescp.$error.minlength">Plz Enter minimum 5 character</span>
-						<span ng-show="myForm.prodDescp.$error.maxlength">You have exceed limit</span>
-						</span>
-					</div>
-					</div>
-				</div>
-			</div>
-</div>
-</div>
+			</form>
+		</div>
+	</div>
 </div>
