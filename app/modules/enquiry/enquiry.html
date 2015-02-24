@@ -2,14 +2,16 @@
 	<ng-include src="'modules/component/toolbar.html'"></ng-include>
 		<div class="row">
 			<div class="col-md-3" ng-include="'modules/enquiry/sidebar.html'"></div>
-				<div class="col-md-9">
-					<div class="bottomspace" ng-include="'modules/enquiry/toolbars.html'"></div>
-					<!-- This is conditional include 
-						if not mailId set in url this html includes in view -->
-					<ng-include ng-if="!MailView" src="'modules/enquiry/mails.html'"></ng-include> 
-					<!-- if mailId set in url this html includes in view -->
-					<ng-include ng-if="MailView" src="'modules/enquiry/mailview.html'"></ng-include>
-				</div>
+			<div class="col-md-9">
+				 <!--This is conditional include if not mailId set in url this html includes in view -->
+					
+				<ng-include src="'modules/enquiry/toolbars.html'"></ng-include>
+				<ng-include ng-if="!MailView" src="'modules/enquiry/mails.html'"></ng-include> 
+				<!-- if mailId set in url this html includes in view -->
+				<ng-include ng-if="MailView" src="'modules/enquiry/mailview.html'"></ng-include>
+				<ng-include src="'modules/enquiry/composemailview.html'"></ng-include>
+				
+			</div>
 		</div>
 </div>
 
