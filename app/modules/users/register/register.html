@@ -33,8 +33,8 @@
 				<div class="form-group">
 					<label for="Country" class="col-md-3 control-label" name="Country" >Country</label>
 					<div class="col-md-9">
-						<select class="form-control" name="Country" id="Country"  ng-model="reg.country" required>
-							
+						<select class="form-control" name="Country" id="Country"  ng-model="reg.country" required>		
+							<option value="">Select Country</option>
 							<option value="">India</option>
 							<option value="Australia">Australia</option>
 							<option value="China">China</option>
@@ -47,15 +47,15 @@
 					</div>
 				</div>				
 				<div class="form-group">
-					<label for="Tel" class="col-md-3 control-label">Phone </label>
+					<label for="contactno" class="col-md-3 control-label">Phone </label>
 					<div class="col-md-9">
-						<input type="Number" class="form-control" min="10" max="10" id="Tel" ng-model="reg.tel" name="Tel" placeholder="Enter Phone" required>
-						<span style="color:red" ng-show="myForm.Tel.$dirty && myForm.Tel.$invalid">
-							<span ng-show="myForm.Tel.$error.required">Phone is required.</span>
-							<span ng-show="myForm.Tel.$error.number">Enter Number.</span>
+						<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+						<span style="color:red" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
+							<span ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)" class="help-block">Enter a valid contactno.</span>
 						</span>
 					</div>						
-				</div>				
+				</div>
+				
 				<div class="form-group">
 					<label for="Fax" class="col-md-3 control-label">Fax </label>
 					<div class="col-md-9">
@@ -73,6 +73,7 @@
 							<span ng-show="myForm.Website.$error.required">Website  is required.</span>
 							<span ng-show="myForm.Website.$error.url">Invalid Web Site.</span>
 						</span>
+						<span>e.g http://www.google.com</span>
 					</div>						
 				</div>			
 				<h4>Login Details</h4>
@@ -80,31 +81,28 @@
 				<div class="form-group">
 					<label for="username" class="col-md-3 control-label">UserName*</label>
 					<div class="col-md-6">
-						<input type="UserName " class="form-control" ng-model="reg.user_name" id="username" name="username" placeholder="Enter UserName " required>
-						<span style="color:red" ng-show="myForm.username.$dirty && 	myForm.username.$invalid">
-						<span ng-show="myForm.username.$error.required">UserName  is required.</span>
-						</span>
+						<input type="text" name="username" class="form-control" ng-model="reg.username" placeholder="Your Username" minlength="6" maxlength="12" ng-required="true">
+							<span ng-show="myForm.username.$error.required && (myForm.username.$dirty || submitted)" class="help-block">You username is required.</span>
+							<span ng-show="myForm.username.$error.minlength && (myForm.username.$dirty || submitted)" class="help-block">Username is too short.</span>
 					</div>						
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success">Check Availability</button>
 					</div>
 				</div>
+				
 				<div class="form-group">
-					<label for="pass" class="col-md-3 control-label">Password* </label>
+					<label for="password" class="col-md-3 control-label">Password* </label>
 					<div class="col-md-9">
-						<input type="Password" class="form-control" id="pass" ng-model="reg.pwd " name="pass" placeholder="Enter Password " required>
-						<span style="color:red" ng-show="myForm.pass.$dirty && 	myForm.pass.$invalid">
-						<span ng-show="myForm.pass.$error.required">Password is required.</span>
-						</span>
+						<input type="Password" name="password" class="form-control" ng-model="user.password" placeholder="Your Password" ng-required="true">
+							<p ng-show="myForm.password.$error.required && (myForm.password.$dirty || submitted)" class="help-block">Your password is required.</p>
 					</div>						
 				</div>				
 				<div class="form-group">
-					<label for="rpwd" class="col-md-3 control-label">Retype Password *</label>
+					<label for="confirmPassword" class="col-md-3 control-label">Retype Password *</label>
 					<div class="col-md-9">
-						<input type="Password" class="form-control" id="rpwd" ng-model="rpwd" name="rpwd" placeholder="Enter Password " required>
-						<span style="color:red" ng-show="myForm.rpwd.$dirty && 	myForm.rpwd.$invalid">
-						<span ng-show="myForm.rpwd.$error.required">Password is required.</span>
-						</span>
+						<input type="Password" name="confirmPassword" class="form-control" ng-model="user.confirmPassword" placeholder="Confirm Your Password" ng-compare="password" ng-required="true">
+							<p ng-show="myForm.confirmPassword.$error.required && (myForm.confirmPassword.$dirty || submitted)" class="help-block">Your confirm password is required.</p>
+							<p ng-show="myForm.confirmPassword.$error.compare && (myForm.confirmPassword.$dirty || submitted)" class="help-block">Confirm password doesnot match.</p>
 					</div>						
 				</div>				
 				<div class="form-group">
