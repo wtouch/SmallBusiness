@@ -3,8 +3,8 @@
 define(['app'], function (app) { 
     var injectParams = ['$scope', '$injector', '$routeParams']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var manageController = function ($scope, $injector, $routeParams) {
-	//	console.log("this is manageuserController ctrl");
+	var manageuserController = function ($scope, $injector, $routeParams) {
+		console.log("this is manageuserController ctrl");
 	
 	//datepicker {sonali}	
 		$scope.today = function() 
@@ -26,22 +26,13 @@ define(['app'], function (app) {
 		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 	/* Date Picker Ended here --------------------------------------------------------------------------------------*/
-	
-		
-		
 		};
-		
-		$scope.newPage = function (){
-			location.href = '#/template.html';
-			consol.log("Hiii");
-		};
-		
     };
 	
 	// Inject controller's dependencies
-	enquiryController.$inject = injectParams;
+	manageuserController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('enquiryController', enquiryController);
+    app.register.controller('manageuserController', manageuserController);
 	
 	
 });
