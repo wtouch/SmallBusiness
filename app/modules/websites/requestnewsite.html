@@ -1,7 +1,7 @@
-<h3 class="text-center">Request For New Site</h3>	
+<h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>	
 <form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
 	<div class="form-group">
-		<label  for="name" class="col-sm-3 control-label">Name</label>		
+		<label  for="name" class="col-sm-2 control-label">Name</label>		
 		<div class="col-sm-9">
 			<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="name" required >
 			<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
@@ -10,7 +10,7 @@
 		</div>						
 	</div>
 	<div class="form-group">	
-		<label  for="domain" class="col-sm-3 control-label">Domain Name</label>
+		<label  for="domain" class="col-sm-2 control-label">Domain Name</label>
 		<div class="col-sm-9">
 			<input type="text" id="domain" class="form-control" name="domain" placeholder="Domain Name" ng-model="domain" required >
 			<span style="color:red" ng-show="myForm.domain.$dirty && myForm.domain.$invalid">
@@ -18,29 +18,28 @@
 			</span>
 		</div>						
 	</div>			
-	<div class="form-group">	
-		<label  for="contact" class="col-sm-3 control-label">Contact Number</label>	
-		<div class="col-sm-9">
-			<input type="number" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="contact" required >
-			<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
-			<span ng-show="myForm.contact.$error.required">Contact is required.</span>
+	<div class="form-group">
+		<label for="contactno" class="col-md-2 control-label">Contact Number </label>
+		<div class="col-md-9">
+			<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[799]\d{9}$/" maxlength="10" required>
+			<span style="color:red" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
+				<span ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)" class="help-block">Enter a valid Contact Number .</span>
 			</span>
 		</div>						
 	</div>
 	<div class="form-group">
-		<label  for="product" class="col-sm-3 control-label">Product/Services</label>	
+		<label  for="product" class="col-sm-2 control-label">Product/Services</label>		
 		<div class="col-sm-9">
-			<textarea  class="form-control" id="product" ng-model="product" name="product" placeholder="Product/Services" rows="3" required ui-tinymce ng-minlength="3" ng-maxlength="5">
-			</textarea>
+			<textarea class="form-control" name="product" id="product" rows="3" ui-tinymce ng-model="product" required ng-minlength="1" ng-maxlength="256"></textarea><br>
 			<span style="color:red" ng-show="myForm.product.$dirty && myForm.product.$invalid">
 				<span ng-show="myForm.product.$error.required">Product/Services is Required.</span>
-				<span ng-show="myForm.product.$error.minlength">Plz Enter minimum 3 character</span>
+				<span ng-show="myForm.product.$error.minlength">Plz Enter minimum 2 character</span>
 				<span ng-show="myForm.product.$error.maxlength">You have exceed limit</span>
 			</span>
 		</div>						
 	</div>	
 	<div class="form-group">
-		<label for="custom" class="col-sm-3 control-label pull-left">Required Custom</label>
+		<label for="custom" class="col-sm-2 control-label pull-left">Required Custom</label>
 		<div class="col-sm-9">
 			<label class="radio-inline">
 				<input type="radio" name="radio" id="Yes" value="Yes">Yes
@@ -51,8 +50,8 @@
 		</div>
 	</div>
 	<div class="form-group">
-			<div class="col-sm-offset-3 col-sm-9">
-			  <button type="submit" class="btn btn-primary" tooltip="Send Request">Send Request</button>
+			<div class="col-sm-offset-2 col-sm-9">
+			  <button type="submit" class="btn btn-success" tooltip="Send Request">Send Request</button>
 			  <button type="reset" class="btn btn-danger" tooltip="Cancle">Reset</button>
 			</div>
 	</div>					
