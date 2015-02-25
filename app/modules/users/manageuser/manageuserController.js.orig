@@ -3,7 +3,23 @@
 define(['app'], function (app) { 
     var injectParams = ['$scope', '$injector', '$routeParams']; /* Added $routeParams to access route parameters */
     // This is controller for this view
+<<<<<<< HEAD
 	var manageController = function ($scope, $injector, $routeParams) {
+		console.log("this is manage Controller");
+		$scope.MailView = $routeParams.mailId; /* this object will check list of mails show or single mail show */
+		
+		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/dashboard/dashboard/enquiry/mailview.html';
+		$scope.goBack = function() 
+		{
+			window.history.back();
+		};
+		
+		$scope.newPage = function (){
+			location.href = '#/template.html';
+			consol.log("Hiii");
+		};
+=======
+	var manageuserController = function ($scope,$injector) {
 	//	console.log("this is manageuserController ctrl");
 	
 	//datepicker {sonali}	
@@ -27,14 +43,9 @@ define(['app'], function (app) {
 		$scope.format = $scope.formats[0];
 	/* Date Picker Ended here --------------------------------------------------------------------------------------*/
 	
+		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/dashboard/dashboard.html';
 		
-		
-		};
-		
-		$scope.newPage = function (){
-			location.href = '#/template.html';
-			consol.log("Hiii");
-		};
+>>>>>>> dtpicker controller added in manageuser
 		
     };
 	
