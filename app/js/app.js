@@ -45,7 +45,11 @@ define(['angular',
 				.when('/editprofile', route.resolve({controller:'editprofile', template: 'editprofile',label:"Edit Profile"}, 'users/editprofile/'))
 	
 				
-                .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard'}, 'dashboard/'))
+                .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard', label: "Dashboard"}, 'dashboard/'))
+				
+				.when('/dashboard/users', route.resolve({controller:'users', template: 'users', label: 'Users'}, 'users/'))
+				
+				.when('/dashboard/users/:userViews?', route.resolve({controller:'users', template: 'users'}, 'users/'))
 				
 				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"Mail Box"}, 'enquiry/'))
 				
