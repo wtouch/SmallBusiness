@@ -22,15 +22,24 @@ define(['app'], function (app) {
 		//Code For Pagination
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
-		$scope.currentPage = 1;
+		$scope.webListCurrentPage = 1;
+		$scope.reqestSiteCurrentPage = 1;
 		$scope.pageItems = 10;
-		$scope.numPages = "";		
+		$scope.numPages = "";	
 
 		$scope.pageChanged = function() {
 			//$log.log('Page changed to: ' + $scope.currentPage);
-			$http.get("../server-api/index.php/properties/"+$scope.currentPage+"/"+$scope.pageItems)
-			.success(function(response) {
-				$scope.properties = response.properties;
+			//get request for website list
+			$http.get("../server-api/index.php/properties/"+$scope.webListCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) { //fuction for wesitelist response
+				$scope.websites.webListCurrentPage = response.webListCurrentPage;
+				//$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});
+			//get request for requestedSite list
+			$http.get("../server-api/index.php/properties/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) { //fuction for requestedsite list response
+				$scope.websites.reqestSiteCurrentPage = response.reqestSiteCurrentPage;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);
 			});

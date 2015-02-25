@@ -49,15 +49,24 @@ define(['app'], function (app) {
 		//Code For Pagination
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
-		$scope.currentPage = 1;
+		$scope.bizListCurrentPage = 1;
+		$scope.delBizCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
 
 		$scope.pageChanged = function() {
 			//$log.log('Page changed to: ' + $scope.currentPage);
-			$http.get("../server-api/index.php/properties/"+$scope.currentPage+"/"+$scope.pageItems)
-			.success(function(response) {
-				$scope.properties = response.properties;
+			//get request for businesslist
+			$http.get("../server-api/index.php/properties/"+$scope.bizListCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) { //function for businesslist response
+				$scope.business.bizListCurrentPage = response.business.bizListCurrentPages;
+				//$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});
+			//get request for delete bizlist 
+			$http.get("../server-api/index.php/properties/"+$scope.delBizCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) { //function for deltebiz response
+				$scope.business.delBizCurrentPage = response.business.delBizCurrentPage;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);
 			});

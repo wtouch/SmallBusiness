@@ -1,5 +1,4 @@
 
-
 'use strict';
 
 define(['app'], function (app) {
@@ -22,22 +21,37 @@ define(['app'], function (app) {
 		//Code For Pagination
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
-		$scope.currentPage = 1;
+		$scope.tempListCurrentPage = 1;
+		$scope.myTempCurrentPage = 1;
+		$scope.customTempCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
-
-		$scope.pageChanged = function() {
+		$scope.pageChanged = function() { 
 			//$log.log('Page changed to: ' + $scope.currentPage);
-			$http.get("../server-api/index.php/properties/"+$scope.currentPage+"/"+$scope.pageItems)
-			.success(function(response) {
-				$scope.properties = response.properties;
+			//get request for templatelist 
+			$http.get("../server-api/index.php/properties/"+$scope.tempListCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) {  //function for templatelist response
+				$scope.templates.tempListCurrentPage = response.templates.tempListCurrentPage;
+				//$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});
+			//get request for mytemplate
+			$http.get("../server-api/index.php/properties/"+$scope.myTempCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) {  //function for mytemplate response
+				$scope.templates.myTempCurrentPage = response.templates.myTempCurrentPage;
+				//$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});
+			//get request for customtemplate 
+			$http.get("../server-api/index.php/properties/"+$scope.customTempCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) {  //function for customtemplate response
+				$scope.templates.customTempCurrentPage = response.templates.customTempCurrentPage;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);
 			});
 		};	//End of pagination
     };
 	
-    
 	// Inject controller's dependencies
 	templatesController.$inject = injectParams;
 	// Register/apply controller dynamically
