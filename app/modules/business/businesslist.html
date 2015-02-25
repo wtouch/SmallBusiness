@@ -43,7 +43,7 @@
 				<td>
 				<div class="btn-toolbar" role="toolbar" aria-label="...">
 					<div class="btn-group" role="group" aria-label="...">
-						<button type="button" class="btn btn-default glyphicon glyphicon-plus btn btn-default" tooltip="Add Product/service">
+						<button type="button" class="btn btn-default glyphicon glyphicon-plus btn btn-default" tooltip="Add Business">
 						</button>
 						<button type="button" class="btn btn-default glyphicon glyphicon-ok btn btn-default" tooltip="Publish">
 						</button>
@@ -62,3 +62,7 @@
 		</tbody>					
 	</table>
 </div>
+<div class="text-center">				
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>				
+				<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			</div>	

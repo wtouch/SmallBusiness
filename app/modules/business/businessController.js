@@ -43,7 +43,25 @@ define(['app'], function (app) {
 		console.log($scope.formPart);
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
-		};     
+		};  
+
+
+		//Code For Pagination
+		$scope.maxSize = 5;
+		$scope.totalRecords = "";
+		$scope.currentPage = 1;
+		$scope.pageItems = 10;
+		$scope.numPages = "";		
+
+		$scope.pageChanged = function() {
+			//$log.log('Page changed to: ' + $scope.currentPage);
+			$http.get("../server-api/index.php/properties/"+$scope.currentPage+"/"+$scope.pageItems)
+			.success(function(response) {
+				$scope.properties = response.properties;
+				//$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});
+		};//End of pagination
     };
 	
 	// Inject controller's dependencies

@@ -56,11 +56,28 @@
 				<td></td>
 				<td></td>
 				<td>
-				<button href="#" class="glyphicon glyphicon-refresh btn btn-default" aria-hidden="true" tooltip-placement="top" tooltip="Renew Site"></button>
-				<button href="#" class="glyphicon glyphicon-search btn btn-default" aria-hidden="true" tooltip-placement="top" tooltip="Review Site"></button>
-				<button href="#" class="glyphicon glyphicon-remove btn btn-default" aria-hidden="true" tooltip-placement="top" tooltip="Delete Site"></button>
+				<div class="btn-toolbar" role="toolbar" aria-label="...">
+					<div class="btn-group" role="group" aria-label="...">
+						<button type="button" class="btn btn-default glyphicon glyphicon-plus btn btn-default" tooltip="Add Website">
+						</button>
+						<button type="button" class="btn btn-default glyphicon glyphicon-ok btn btn-default" tooltip="Publish">
+						</button>
+					</div>
+					<div class="btn-group" role="group" aria-label="...">
+						<button type="button" class="btn btn-default glyphicon glyphicon-star btn btn-default" tooltip="Preview">
+						</button>
+						<button type="button" class="btn btn-default glyphicon glyphicon-pencil btn btn-default" tooltip="Edit">
+						</button>
+						<button type="button" class="btn btn-default glyphicon glyphicon-remove btn btn-default" tooltip="Delete">
+						</button>
+					</div>
+				</div>
 				</td>
 			</tr>
 		</tbody>					
 	</table>
 </div>
+<div class="text-center">				
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>				
+				<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			</div>	
