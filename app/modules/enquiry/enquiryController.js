@@ -21,17 +21,15 @@ define(['app'], function (app) {
 		//Code For Pagination
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
-		$scope.tempListCurrentPage = 1;
-		$scope.myTempCurrentPage = 1;
-		$scope.customTempCurrentPage = 1;
+		$scope.mailListCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
 		$scope.pageChanged = function() { 
 			//$log.log('Page changed to: ' + $scope.currentPage);
 			//get request for templatelist 
-			$http.get("../server-api/index.php/properties/"+$scope.tempListCurrentPage+"/"+$scope.pageItems)
-			.success(function(response) {  //function for templatelist response
-				$scope.templates.tempListCurrentPage = response.templates.tempListCurrentPage;
+			$http.get("../server-api/index.php/properties/"+$scope.mailListCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) {  //function for maillatelist response
+				$scope.mails.mailListCurrentPage = response.mails.mailListCurrentPage;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);
 			});
