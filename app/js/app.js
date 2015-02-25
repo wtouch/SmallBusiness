@@ -47,9 +47,9 @@ define(['angular',
 				
                 .when('/dashboard', route.resolve({controller:'dashboard', template: 'dashboard', label: "Dashboard"}, 'dashboard/'))
 				
-				.when('/dashboard/users', route.resolve({controller:'manageuser', template: 'manageuser', label: 'Users'}, 'users/'))
+				.when('/dashboard/users', route.resolve({controller:'manageuser', template: 'manageuser', label: 'Users'}, 'users/manageuser/'))
 				
-				.when('/dashboard/users/:userViews?', route.resolve({controller:'manageuser', template: 'manageuser'}, 'users/'))
+				.when('/dashboard/users/:userViews?', route.resolve({controller:'manageuser', template: 'manageuser'}, 'users/manageuser/'))
 				
 				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"Mail Box"}, 'enquiry/'))
 				
