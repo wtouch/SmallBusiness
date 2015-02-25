@@ -5,14 +5,14 @@
 			<div  class="breadcrumb-back" ng-include="'modules/component/toolbar.html'"></div>
 			
 		<div class="col-md-2" ng-include="'modules/component/mainnav.html'"></div>
-		<div class="col-md-10">
+		<div class="col-md-12">
 			<form class="form-horizontal center-block" role="form" name="myForm" novalidate="novalidate" >
 				<h3>Free Registration / Sign up</h3>
 				<hr>
 				<p>Please register a free account, before you can start posting your ads. Registration is quick and free! Please note that fields marked * are required.</p>	
 					
 				<div class="form-group">
-					<label for="fullname" class="col-md-3 control-label">Name* </label>
+					<label for="fullname" class="col-md-2 control-label">Name* </label>
 					<div class="col-md-9">
 						<input type="char" class="form-control" id="fullname" ng-model="reg.full_name" name="fullname" placeholder="Enter Name" required>
 							<span style="color:red" ng-show="myForm.fullname.$dirty && myForm.fullname.$invalid">
@@ -21,7 +21,7 @@
 					</div>						
 				</div>				
 				<div class="form-group">
-					<label for="Address" class="col-md-3 control-label">Address*</label>
+					<label for="Address" class="col-md-2 control-label">Address*</label>
 					<div class="col-md-9">
 						<textarea  class="form-control" id="Address" ng-model="reg.address" name="Address" placeholder="Enter address" required>
 						</textarea>
@@ -31,11 +31,11 @@
 					</div>						
 				</div>		
 				<div class="form-group">
-					<label for="Country" class="col-md-3 control-label" name="Country" >Country</label>
+					<label for="Country" class="col-md-2 control-label" name="Country" >Country</label>
 					<div class="col-md-9">
 						<select class="form-control" name="Country" id="Country"  ng-model="reg.country" required>		
 							<option value="">Select Country</option>
-							<option value="">India</option>
+							<option value="India">India</option>
 							<option value="Australia">Australia</option>
 							<option value="China">China</option>
 							<option value="America">America</option>
@@ -47,9 +47,9 @@
 					</div>
 				</div>				
 				<div class="form-group">
-					<label for="contactno" class="col-md-3 control-label">Phone </label>
+					<label for="contactno" class="col-md-2 control-label">Phone </label>
 					<div class="col-md-9">
-						<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+						<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[799]\d{9}$/" maxlength="10" required>
 						<span style="color:red" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
 							<span ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)" class="help-block">Enter a valid contactno.</span>
 						</span>
@@ -57,16 +57,18 @@
 				</div>
 				
 				<div class="form-group">
-					<label for="Fax" class="col-md-3 control-label">Fax </label>
+					<label for="Fax" class="col-md-2 control-label">Fax </label>
 					<div class="col-md-9">
-						<input type="fax " class="form-control" id="Fax" ng-model="reg.fax " name="fax " placeholder="Enter Fax " required>
-						<span style="color:red" ng-show="myForm.Fax.$dirty && myForm.Fax.$invalid">
-						<span ng-show="myForm.Fax.$error.required">Fax  is required.</span>
+						<input type="text" id="fax" name="fax" class="form-control" ng-model="reg.fax" placeholder="Your Fax " ng-pattern=" /^\d-\d{2}-\d{2}-\d{4}$/" required>
+						<span style="color:red" ng-show="myForm.fax.$dirty && myForm.fax.$invalid">
+							<span ng-show="myForm.fax.$error.pattern && (myForm.fax.$dirty || submitted)" class="help-block">Enter a valid Fax.</span>
 						</span>
+						<span>e.g +12245679910</span>
+
 					</div>						
 				</div>				
 				<div class="form-group">
-					<label for="Website" class="col-md-3 control-label">Website </label>
+					<label for="Website" class="col-md-2 control-label">Website </label>
 					<div class="col-md-9">
 						<input type="url" class="form-control" id="Website" ng-model="reg.website" name="Website" placeholder="Enter Website " required>
 						<span style="color:red" ng-show="myForm.Website.$dirty && 	myForm.Website.$invalid">
@@ -79,26 +81,26 @@
 				<h4>Login Details</h4>
 				<hr>
 				<div class="form-group">
-					<label for="username" class="col-md-3 control-label">UserName*</label>
+					<label for="username" class="col-md-2 control-label">UserName*</label>
 					<div class="col-md-6">
 						<input type="text" name="username" class="form-control" ng-model="reg.username" placeholder="Your Username" minlength="6" maxlength="12" ng-required="true">
 							<span ng-show="myForm.username.$error.required && (myForm.username.$dirty || submitted)" class="help-block">You username is required.</span>
 							<span ng-show="myForm.username.$error.minlength && (myForm.username.$dirty || submitted)" class="help-block">Username is too short.</span>
 					</div>						
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<button type="submit" class="btn btn-success">Check Availability</button>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label for="password" class="col-md-3 control-label">Password* </label>
+					<label for="password" class="col-md-2 control-label">Password* </label>
 					<div class="col-md-9">
 						<input type="Password" name="password" class="form-control" ng-model="user.password" placeholder="Your Password" ng-required="true">
 							<p ng-show="myForm.password.$error.required && (myForm.password.$dirty || submitted)" class="help-block">Your password is required.</p>
 					</div>						
 				</div>				
 				<div class="form-group">
-					<label for="confirmPassword" class="col-md-3 control-label">Retype Password *</label>
+					<label for="confirmPassword" class="col-md-2 control-label">Retype Password *</label>
 					<div class="col-md-9">
 						<input type="Password" name="confirmPassword" class="form-control" ng-model="user.confirmPassword" placeholder="Confirm Your Password" ng-compare="password" ng-required="true">
 							<p ng-show="myForm.confirmPassword.$error.required && (myForm.confirmPassword.$dirty || submitted)" class="help-block">Your confirm password is required.</p>
@@ -106,13 +108,13 @@
 					</div>						
 				</div>				
 				<div class="form-group">
-					<label for="requesteddomain" class="col-md-3 control-label">Request For Domain</label>
+					<label for="requesteddomain" class="col-md-2 control-label">Request For Domain</label>
 					<div class="col-md-9">
-					<textarea class="form-control" rows="3" name="requesteddomain" id="requesteddomain" placeholder="Request" ng-model="reg.requested_domains"></textarea>
+					<textarea class="form-control" rows="2" name="requesteddomain" id="requesteddomain" placeholder="Request" ng-model="reg.requested_domains"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-3 col-sm-12">
+					<div class="col-sm-offset-2 col-sm-12">
 						<button type="submit" ng-click="insert()" class="btn btn-primary">Register</button>
 					</div>
 				</div>
