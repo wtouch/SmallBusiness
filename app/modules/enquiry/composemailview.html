@@ -4,27 +4,23 @@
 			<form class="form-horizontal" name="myForm">
 				<div class="form-group">
 					<label for="from" class="col-sm-2 control-label">From</label>
-					<div class="col-sm-6">
+					<div class="col-sm-10">
 						<p class="form-control-static">aarti@wtouch.in</p>
-					</div>
-					<div class="col-sm-4">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="button" tooltip="Search Personal Address">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</span>
-						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="to" class="col-sm-2 control-label">To</label>
-					<div class="col-sm-10">
+					<div class="col-sm-8">
 						<input type="email" class="form-control" id="to" name="to" placeholder="To" ng-model="to" required>
 						<span style="color:red" ng-show="myForm.to.$dirty && myForm.to.$invalid">
 							<span ng-show="myForm.to.$error.required" class="required">Email is required to send mail</span>
 						</span>
+					</div>
+					<div class="col-sm-2">
+						<div class="input-group">
+							<button class="btn btn-default" type="button" tooltip="Search Personal Address"><span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
