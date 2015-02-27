@@ -8,11 +8,11 @@ define(['app'], function (app) {
 		
 		$scope.userPart = $routeParams.userPart; 
 		console.log($scope.userPart);
-		//For display by default usersgroup.html page{trupti}
+		//For display by default userslist.html page{trupti}
 		if(!$routeParams.userPart) {
-		$location.path('/dashboard/users/usersgroup');
+		$location.path('/dashboard/users/userslist');
 		}
-		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/users/manageuser/usersgroup.html';
+		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/users/manageuser/userslist.html';
 		
 	//datepicker {sonali}	
 		$scope.today = function() 
