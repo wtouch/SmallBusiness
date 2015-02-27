@@ -14,6 +14,32 @@ define(['app'], function (app) {
 		}
 		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/users/manageuser/userslist.html';
 		
+		//Code For Pagination
+		$scope.maxSize = 5;
+		$scope.totalRecords = "";
+		$scope.usersGroupCurrentPage = 1;
+		$scope.usersListCurrentPage = 1;
+		$scope.pageItems = 10;
+		$scope.numPages = "";		
+		$scope.pageChanged = function() { 
+			//$log.log('Page changed to: ' + $scope.currentPage);
+			
+			//get request for usersGroup
+			$http.get("../server-api/index.php/properties/"+$scope.usersGroupCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) {  //function for templatelist response
+				$scope.manageusers.usersGroupCurrentPage = response.manageusers.usersGroupCurrentPage;
+				//$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});
+			//get request for usersList
+			$http.get("../server-api/index.php/properties/"+$scope.usersListCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) {  //function for mytemplate response
+				$scope.manageusers.usersListCurrentPage = response.manageusers.usersListCurrentPage;
+				//$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});
+		};	//End of pagination
+		
 	//datepicker {sonali}	
 		$scope.today = function() 
 		{
@@ -34,6 +60,7 @@ define(['app'], function (app) {
 		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 	/* Date Picker Ended here --------------------------------------------------------------------------------------*/
+	
 	};
 
 	// Inject controller's dependencies
