@@ -1,21 +1,20 @@
 <div class="row bottomspace">
 	<div class="col-md-12">
 		<div class="product">
-			<form class="form-horizontal" role="form" novalidate="novalidate" name="myForm">
-				<div class="form-group">
-					<label for="servicelogo" class="col-sm-3 control-label">Select Image :</label>
-					<div class="col-sm-9">
-						<img src="img/user.png"/>
-						<input type="file" id="servicelogo" name="servicelogo">
-					</div>
-				</div>
+			<form class="form-horizontal" role="form" name="myForm" novalidate="novalidate">
 				<div class="form-group">
 					<label for="serviceName" class="col-sm-3 control-label">Service Name :</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" id="serviceName" placeholder="Enter Service Name here" required ng-modal="serviceName" name="serviceName">
+						<input type="text" class="form-control" id="serviceName" name="serviceName"placeholder="Enter Service Name here" ng-model="serviceName" required>
 							<span style="color:red" ng-show="myForm.serviceName.$dirty && myForm.serviceName.$invalid">
 								<span ng-show="myForm.serviceName.$error.required">Service name is required</span>
 							</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="servicelogo" class="col-sm-3 control-label">Select Image :</label>
+					<div class="col-sm-9">
+						<input type="file" id="servicelogo" name="servicelogo">
 					</div>
 				</div>
 				<div class="form-group">
