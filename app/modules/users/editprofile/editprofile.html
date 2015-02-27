@@ -29,23 +29,35 @@
 								</span>
 							</div>
 						</div>	
+						
+						<!--div class="form-group">
+						   <label for="Contact_No" class="col-md-2 control-label"> * Contact No:</label>
+						   <div class="col-md-9">
+							<input type="text"  id="Contact_No" class="form-control"  name="Contact" ng-model="property.contact" placeholder="Enter Your Phno" maxlength="10" ng-pattern="/^\d{0,9}[0-9]$/" required >       
+							<p style="color:red" ng-show="myForm.Contact.$error.pattern && (myForm.Contact.$dirty || submitted)" class="help-block">Enter a valid contact no.</p>
+						   </div>      
+						</div-->						
 						<div class="form-group">
 							<label for="contactno" class="col-md-3 control-label">Contact Number </label>
 							<div class="col-md-8">
 								<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
-								<span style="color:red" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
+								<span class="text-danger" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
 									<span ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)" class="help-block">Enter a valid Contact Number</span>
 								</span>
 							</div>						
 						</div>	
 						<div class="form-group">
-							<label  for="address" class="col-sm-3 control-label">Address</label>
+							<label for="Address" class="col-md-3 control-label">Address</label>
 							<div class="col-sm-8">
-								<textarea class="form-control" rows="3" name="address" id="address" placeholder="Address" ng-model="reg.address"></textarea>
-								<span style="color:red" ng-show="myForm.address.$dirty && myForm.address.$invalid">
-								<span ng-show="myForm.address.$error.required">Address Required.</span>
-								</span>
-							</div>	
+								<textarea  class="form-control" id="Address" ng-model="Address" name="Address" placeholder="Enter Address" required>
+								</textarea>
+								 <p>{{ 256 - Address.length + " Characters left"}}</p>
+								<span style="color:red" ng-show="myForm.Address.$dirty &&  myForm.Address.$invalid">
+									<span style="color:red" ng-show="myForm.reg.Address.$error.maxlength">
+										Sorry You are Exceeding the Limit</span>
+									<span ng-show="myForm.Address.$error.required">Address is required.</span>
+								</span>	
+							</div>
 						</div>	
 						<div class="form-group">
 							<label  for="date" class="col-sm-3 control-label">Date</label>

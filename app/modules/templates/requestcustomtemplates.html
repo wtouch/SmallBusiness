@@ -1,7 +1,7 @@
 <h3 class="col-sm-offset-2 col-sm-9">Request For Custom Template</h3>
 <form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">
 	<div class="form-group">
-		<label for="name" class="col-sm-2 control-label">Name</label>		
+		<label for="name" class="col-sm-2 control-label">Template Name</label>		
 		<div class="col-sm-9">
             <input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="name" required >
 			<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
@@ -32,8 +32,9 @@
 	<div class="form-group">
 		<label for="requirement" class="col-sm-2 control-label">Custom Requirement</label>	
 		<div class="col-sm-9">
-			<textarea  class="form-control" id="requirement" ng-model="requirement" name="requirement" placeholder="Your Custom Requirement" rows="2" ng-minlength="10" ng-maxlength="20" ui-tinymce required>
+			<textarea  class="form-control" id="requirement" ng-model="requirement" name="requirement" placeholder="Your Custom Requirement" rows="2" maxlength="20" ui-tinymce required>
 			</textarea>
+			<div>{{ 20 - requirement.length + " Chars left" }}</div>
 			<span style="color:red" ng-show="myForm.requirement.$dirty && myForm.requirement.$invalid">
 				<span ng-show="myForm.requirement.$error.required">Custom Requirement are Required.</span>
 				<span ng-show="myForm.requirement.$error.minlength">Plz Enter minimum 10 character</span>
@@ -43,11 +44,9 @@
 	</div>
 	<div class="form-group">
 		<label for="custom" class="col-sm-2 control-label">Sketch</label>
-		<!--div class="col-sm-2">
-			<img src="img/n4.jpg">
-		</div-->
+		
 		<div class="col-sm-9">
-			<input type="file" id="sketch" name="sketch">	
+			<input type="file" id="sketch" name="sketch"><img src="">	
 		</div>
 	</div>					
 	<div class="form-group">

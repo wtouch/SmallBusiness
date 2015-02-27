@@ -2,7 +2,7 @@
 	<label  for="date" class="col-sm-3 control-label">Date</label>
 	<div class="col-md-9">
 		<p class="input-group">
-		  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+		  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="date" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
 		  <span class="input-group-btn">
 			<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 		  </span>
@@ -45,37 +45,34 @@
 		</span>				
 	</div>
 </div>		
-<div class="form-group">	
-	<label for="Country" class="col-sm-3 control-label">Sender Country</label>
-	<div class="col-sm-9">
-		<select name="Country" id="Country" class="form-control" required="required">
-			<option selected="selected">Sender Country</option>
-			<option value="resprop">Residential Property</option>
-			<option value="comprop">Commercial Property</option>
-			<option value="agriland">Agricultural Land</option>
-			<option value="indprop">Industrial Property</option>
-		</select>								
-	</div>
-</div>
 <div class="form-group">
-	<label for="city" class="col-sm-3 control-label">Sender City / State</label>
-	<div class="col-sm-4">
-		<select name="city" id="city" class="form-control" required="required">
-			<option selected="selected">Select City</option>
-			<option value="resprop">Residential Property</option>
-			<option value="comprop">Commercial Property</option>
-			<option value="agriland">Agricultural Land</option>
-			<option value="indprop">Industrial Property</option>
-		</select>								
+	<label for="city/state" class="col-sm-3 control-label">Sender City / State</label>
+	<div class="col-md-4">
+		<select class="form-control" name="State" id="State"  ng-model="State" required>		
+			<option value="">Select State</option>
+			<option value="India">India</option>
+			<option value="Australia">Australia</option>
+			<option value="China">China</option>
+			<option value="America">America</option>
+			<option value="Belgium">Belgium</option>
+		</select>
+		<span style="color:red" ng-show="myForm.State.$dirty && myForm.State.$invalid">
+		<span ng-show="myForm.State.$error.required">Sender State is required.</span>
+		</span>				
 	</div>
-	<div class="col-sm-offset-1 col-sm-4">
-		<select name="city" id="city" class="form-control" required="required">
-			<option selected="selected">Select State</option>
-			<option value="resprop">Residential Property</option>
-			<option value="comprop">Commercial Property</option>
-			<option value="agriland">Agricultural Land</option>
-			<option value="indprop">Industrial Property</option>
-		</select>								
+
+	<div class="col-sm-offset-1 col-md-4">
+		<select class="form-control" name="City" id="City"  ng-model="City" required>		
+			<option value="">Select City</option>
+			<option value="India">India</option>
+			<option value="Australia">Australia</option>
+			<option value="China">China</option>
+			<option value="America">America</option>
+			<option value="Belgium">Belgium</option>
+		</select>
+		<span style="color:red" ng-show="myForm.City.$dirty && myForm.City.$invalid">
+		<span ng-show="myForm.City.$error.required">Sender City is required.</span>
+		</span>				
 	</div>
 </div>
 
@@ -98,27 +95,30 @@
 		</span>
 	</div>					
 </div>
+
 <div class="form-group">
 	<label for="desc" class="col-md-3 control-label">Testimonial Description</label>
 	<div class="col-sm-9">
-		<textarea class="form-control" name="desc" id="desc" rows="3" ng-model="addbusiness.testimonials.desc" required ng-minlength="1" ng-maxlength="256"></textarea>
-			<span style="color:red" ng-show="myForm.desc.$dirty && myForm.desc.$invalid">
-				<span ng-show="myForm.desc.$error.required">Plz Enter Description for Jobs</span>
-				<span ng-show="myForm.desc.$error.minlength">Plz Enter minimum 5 character</span>
-				<span ng-show="myForm.desc.$error.maxlength">You have exceed limit</span>
-			</span>		
+		<textarea  class="form-control" id="desc" ng-model="desc" name="desc" placeholder="Enter Testimonial Description" required>
+      </textarea>
+		 <p>{{ 256 - desc.length + " Characters left"}}</p>
+		<span style="color:red" ng-show="myForm.desc.$dirty &&  myForm.desc.$invalid">
+      <span style="color:red" ng-show="myForm.reg.desc.$error.maxlength">
+      Sorry You are Exceeding the Limit</span>
+      <span ng-show="myForm.desc.$error.required">Testimonial Description is required.</span>
+      </span>	
 	</div>
-</div> 
+</div>
 
 <div class="form-group" > 
 	<label  for="clogo" class="col-sm-3 control-label">Add Image</label>
 	<div class="col-sm-8">
-		<input type="file" id="clogo" name="clogo">	
+		<input type="file" id="clogo" name="clogo"><img src="">
 	</div>
 </div>
 <div class="form-group">
 		<div class="col-sm-offset-3 col-sm-9">
-		  <button type="submit" class="btn btn-primary btn-default" title="next" ng-click="showFormPart('job')">Next</button>
+		  <button type="submit" class="btn btn-success btn-default" title="Add Testimonials/ Recommendation" ng-click="showFormPart('job')">Add Testimonials/ Recommendation</button>
 		</div>
 </div>
 

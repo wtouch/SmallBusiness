@@ -57,7 +57,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label for="Fax" class="col-md-2 control-label">Fax </label>
+					<label for="fax" class="col-md-2 control-label">Fax </label>
 					<div class="col-md-9">
 						<input type="text" id="fax" name="fax" class="form-control" ng-model="reg.fax" placeholder="Your Fax " ng-pattern=" /^\d-\d{2}-\d{2}-\d{4}$/" required>
 						<span style="color:red" ng-show="myForm.fax.$dirty && myForm.fax.$invalid">
@@ -83,9 +83,11 @@
 				<div class="form-group">
 					<label for="username" class="col-md-2 control-label">UserName*</label>
 					<div class="col-md-6">
-						<input type="text" name="username" class="form-control" ng-model="reg.username" placeholder="Your Username" minlength="6" maxlength="12" ng-required="true">
+						<input type="text" id="username" name="username" class="form-control" ng-model="reg.username" placeholder="Your Username" minlength="6" maxlength="12" ng-required="true">
+						<span style="color:red" ng-show="myForm.username.$dirty && myForm.username.$invalid">
 							<span ng-show="myForm.username.$error.required && (myForm.username.$dirty || submitted)" class="help-block">You username is required.</span>
 							<span ng-show="myForm.username.$error.minlength && (myForm.username.$dirty || submitted)" class="help-block">Username is too short.</span>
+						</span>
 					</div>						
 					<div class="col-md-2">
 						<button type="submit" class="btn btn-success">Check Availability</button>
@@ -95,16 +97,20 @@
 				<div class="form-group">
 					<label for="password" class="col-md-2 control-label">Password* </label>
 					<div class="col-md-9">
-						<input type="Password" name="password" class="form-control" ng-model="user.password" placeholder="Your Password" ng-required="true">
-							<p ng-show="myForm.password.$error.required && (myForm.password.$dirty || submitted)" class="help-block">Your password is required.</p>
+						<input type="Password" id="password" name="password" class="form-control" ng-model="user.password" placeholder="Your Password" ng-required="true">
+						<span style="color:red" ng-show="myForm.username.$dirty && myForm.username.$invalid">
+							<span ng-show="myForm.password.$error.required && (myForm.password.$dirty || submitted)" class="help-block">Your password is required.</span>
+						</span>
 					</div>						
 				</div>				
 				<div class="form-group">
 					<label for="confirmPassword" class="col-md-2 control-label">Retype Password *</label>
 					<div class="col-md-9">
-						<input type="Password" name="confirmPassword" class="form-control" ng-model="user.confirmPassword" placeholder="Confirm Your Password" ng-compare="password" ng-required="true">
-							<p ng-show="myForm.confirmPassword.$error.required && (myForm.confirmPassword.$dirty || submitted)" class="help-block">Your confirm password is required.</p>
-							<p ng-show="myForm.confirmPassword.$error.compare && (myForm.confirmPassword.$dirty || submitted)" class="help-block">Confirm password doesnot match.</p>
+						<input type="Password" id="confirmPassword" name="confirmPassword" class="form-control" ng-model="user.confirmPassword" placeholder="Confirm Your Password" ng-compare="password" ng-required="true">
+						<span style="color:red" ng-show="myForm.username.$dirty && myForm.username.$invalid">
+							<span ng-show="myForm.confirmPassword.$error.required && (myForm.confirmPassword.$dirty || submitted)" class="help-block">Your confirm password is required.</span>
+							<span ng-show="myForm.confirmPassword.$error.compare && (myForm.confirmPassword.$dirty || submitted)" class="help-block">Confirm password doesnot match.</span>
+						</span>
 					</div>						
 				</div>				
 				<div class="form-group">

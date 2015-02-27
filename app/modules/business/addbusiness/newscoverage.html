@@ -18,18 +18,24 @@
 		</span>
 	</div>						
 </div>
-<div class="form-group">	
-	<label for="mediatype" class="col-sm-3 control-label">Media Type</label>
-	<div class="col-sm-9">
-		<select name="mediatype" id="mediatype" class="form-control" required="required">
-			<option selected="selected" value="">Select Media Type</option>
-			<option value="resprop">Residential Property</option>
-			<option value="comprop">Commercial Property</option>
-			<option value="agriland">Agricultural Land</option>
-			<option value="indprop">Industrial Property</option>
-		</select>								
+
+<div class="form-group">
+	<label for="mediatype" class="col-md-3 control-label" name="mediatype" >Media Type</label>
+	<div class="col-md-9">
+		<select class="form-control" name="mediatype" id="mediatype"  ng-model="Country" required>		
+			<option value="">Select Media Type</option>
+			<option value="India">India</option>
+			<option value="Australia">Australia</option>
+			<option value="China">China</option>
+			<option value="America">America</option>
+			<option value="Belgium">Belgium</option>
+		</select>
+		<span style="color:red" ng-show="myForm.mediatype.$dirty && myForm.mediatype.$invalid">
+		<span ng-show="myForm.mediatype.$error.required">Media Typeis required.</span>
+		</span>				
 	</div>
-</div>
+</div>	
+
 <div class="form-group">
 	<label  for="headline" class="col-md-3 control-label">Headline</label>		
 	<div class="col-md-9">
@@ -40,37 +46,39 @@
 	</div>						
 </div>
 <div class="form-group">
-	<label  for="url" class="col-md-3 control-label">News Coverage URL</label>	
+	<label for="Website" class="col-md-3 control-label">News Coverage URL</label>
 	<div class="col-md-9">
-		<input type="text" class="form-control" ng-model="url" id="url" name="url" required>
-		<span style="color:red" ng-show="myForm.url.$dirty && myForm.url.$invalid">
-		<span ng-show="myForm.url.$error.required">News Coverage URL is required.</span>
+		<input type="url" class="form-control" id="Website" ng-model="reg.website" name="Website" placeholder="Enter News Coverage URL" required>
+		<span style="color:red" ng-show="myForm.Website.$dirty && 	myForm.Website.$invalid">
+			<span ng-show="myForm.Website.$error.required">Website  is required.</span>
+			<span ng-show="myForm.Website.$error.url">Invalid Web Site.</span>
 		</span>
+		<span>e.g http://www.google.com</span>
 	</div>						
 </div>
+
 <div class="form-group">
 	<label for="details" class="col-md-3 control-label">News Coverage Details</label>
 	<div class="col-sm-9">
-		<textarea class="form-control" name="details" id="details" rows="3" ng-model="details" required ng-minlength="1" ng-maxlength="256"></textarea>
-			<span style="color:red" ng-show="myForm.details.$dirty && myForm.details.$invalid">
-				<span ng-show="myForm.details.$error.required">Plz Enter Description for Jobs</span>
-				<span ng-show="myForm.details.$error.minlength">Plz Enter minimum 5 character</span>
-				<span ng-show="myForm.details.$error.maxlength">You have exceed limit</span>
-			</span>		
+		<textarea  class="form-control" id="details" ng-model="details" name="details" placeholder="Enter Details" required>
+      </textarea>
+		 <p>{{ 256 - details.length + " Characters left"}}</p>
+		<span style="color:red" ng-show="myForm.Details.$dirty &&  myForm.Details.$invalid">
+      <span style="color:red" ng-show="myForm.reg.Details.$error.maxlength">
+      Sorry You are Exceeding the Limit</span>
+      <span ng-show="myForm.Details.$error.required">News Coverage Details is required.</span>
+      </span>	
 	</div>
 </div> 
 <div class="form-group" > 
 	<label  for="clogo" class="col-sm-3 control-label">Add Image</label>
 	<div class="col-sm-4">
-		<input type="file" id="clogo" name="clogo">	
-	</div>
-	<div class="col-sm-4">
-		<input type="file" id="clogo" name="clogo">	
+		<input type="file" id="clogo" name="clogo">	<img src="">
 	</div>
 </div>
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-	  <button type="submit" class="btn btn-primary" title="submit">Submit</button>
+	  <button type="submit" class="btn btn-success" title="Save">Save</button>
 	</div>
 </div>							
 
