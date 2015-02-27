@@ -57,5 +57,4 @@ define(['app'], function (app) {
 	// Register/apply controller dynamically
     app.register.controller('templatesController', templatesController);
 	
-	
 });
