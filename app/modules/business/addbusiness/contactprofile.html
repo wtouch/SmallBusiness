@@ -46,14 +46,18 @@
 					</div>
 						
 					<div class="form-group">
-						<label  for="address" class="col-md-3 control-label">Address</label>
-						<div class="col-md-9">
-							<input type="text" id="address" class="form-control" name="address" placeholder="Address" ng-model="addbusiness.contactprofile.address" required >
-							<span style="color:red" ng-show="myForm.address.$dirty && myForm.address.$invalid">
-							<span ng-show="myForm.address.$error.required">Address Required.</span>
-							</span>
-						</div>						
-					</div>
+						<label for="Address" class="col-md-3 control-label">Address</label>
+						<div class="col-sm-9">
+							<textarea  class="form-control" id="Address" ng-model="Address" name="Address" placeholder="Enter Address" required>
+						  </textarea>
+							 <p>{{ 256 - Address.length + " Characters left"}}</p>
+							<span style="color:red" ng-show="myForm.Address.$dirty &&  myForm.Address.$invalid">
+						  <span style="color:red" ng-show="myForm.reg.Address.$error.maxlength">
+						  Sorry You are Exceeding the Limit</span>
+						  <span ng-show="myForm.Address.$error.required">Address is required.</span>
+						  </span>	
+						</div>
+					</div>	
 					
 					<div class="form-group">	
 						<label  for="city" class="col-md-3 control-label">City,State,ZIP Code</label>	
@@ -149,7 +153,7 @@
 					
 					<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-9">
-							  <button type="submit" class="btn btn-primary btn-default" title="next" ng-click="showFormPart('infrastructure')">Next</button>
+							  <button type="submit" class="btn btn-success btn-default" title="+Add More Contacts" ng-click="showFormPart('infrastructure')">+Add More Contacts</button>
 							</div>
 					</div>
 			
