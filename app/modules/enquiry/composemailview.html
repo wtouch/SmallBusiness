@@ -10,10 +10,11 @@
 				</div>
 				<div class="form-group">
 					<label for="to" class="col-sm-2 control-label">To</label>
-					<div class="col-sm-6">
-						<input type="email" class="form-control" id="to" name="to" placeholder="To" ng-model="to" required>
+					<div class="col-md-6">
+						<input type="Email" class="form-control" id="to" ng-model="to" name="to" placeholder="Enter Email" required >
 						<span style="color:red" ng-show="myForm.to.$dirty && myForm.to.$invalid">
-							<span ng-show="myForm.to.$error.required" class="required">Email is required to send mail</span>
+						<span ng-show="myForm.to.$error.required">Email is required.</span>
+						<span ng-show="myForm.to.$error.email">Invalid Email address.</span>
 						</span>
 					</div>
 					<div class="col-sm-4">
@@ -27,8 +28,12 @@
 				</div>
 				<div class="form-group">
 					<label for="cc" class="col-sm-2 control-label">Cc</label>
-					<div class="col-sm-10">
-						<input type="email" class="form-control" id="cc" name="cc" placeholder="Cc">
+					<div class="col-md-10">
+						<input type="Email" class="form-control" id="cc" ng-model="cc" name="cc" placeholder="Enter Email" required >
+						<span style="color:red" ng-show="myForm.cc.$dirty && myForm.cc.$invalid">
+						<span ng-show="myForm.cc.$error.required">Email is required.</span>
+						<span ng-show="myForm.cc.$error.email">Invalid Email address.</span>
+						</span>
 					</div>
 				</div>
 				<div class="form-group">
