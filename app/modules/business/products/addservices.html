@@ -33,15 +33,13 @@
 					<label class="col-sm-3 control-label" for="servDescp">Service Description :
 					</label>
 					<div  class="col-sm-9">
-						<textarea id="servDescp" name="servDescp" ng-model="servDescp" rows="3" required ng-minlength="5" ng-maxlength="10" class="form-control" ui-tinymce>
+						<textarea id="servDescp" name="servDescp" ng-model="servDescp" rows="3" required maxlength="30" class="form-control" ui-tinymce>
 						</textarea>
-						<span style="color:red" ng-show="myForm.servDescp.$dirty && myForm.servDescp.$invalid">
-						<span ng-show="myForm.servDescp.$error.required" class="required">Plz Enter Description for Service</span>
-						<span ng-show="myForm.servDescp.$error.minlength">Plz Enter minimum 5 character</span>
-						<span ng-show="myForm.servDescp.$error.maxlength">You have exceed limit</span>
-						</span>
+						<div>{{ 20 - servDescp.length + " Chars left" }}</div>
+						<span style="color:red" ng-show="form1.servDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
 					</div>
 				</div>
+				
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
 						<a href="#/products/products" class="btn btn-default btn-success" title="submit">

@@ -1,6 +1,6 @@
 <<div class="form-group">
 	<label  for="date" class="col-sm-3 control-label">Date</label>
-	<div class="col-md-8">
+	<div class="col-md-9">
 		<p class="input-group">
 		  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
 		  <span class="input-group-btn">
@@ -28,6 +28,23 @@
 		</span>
 	</div>					
 </div>
+
+<div class="form-group">
+	<label for="Country" class="col-md-3 control-label" name="Country" >Sender Country</label>
+	<div class="col-md-9">
+		<select class="form-control" name="Country" id="Country"  ng-model="Country" required>		
+			<option value="">Select Type</option>
+			<option value="India">India</option>
+			<option value="Australia">Australia</option>
+			<option value="China">China</option>
+			<option value="America">America</option>
+			<option value="Belgium">Belgium</option>
+		</select>
+		<span style="color:red" ng-show="myForm.Country.$dirty && myForm.Country.$invalid">
+		<span ng-show="myForm.Country.$error.required">Sender Country is required.</span>
+		</span>				
+	</div>
+</div>		
 <div class="form-group">	
 	<label for="Country" class="col-sm-3 control-label">Sender Country</label>
 	<div class="col-sm-9">
@@ -61,15 +78,17 @@
 		</select>								
 	</div>
 </div>
+
 <div class="form-group">
-	<label  for="contact" class="col-sm-3 control-label">Senders Phone</label>
-	<div class="col-sm-9">
-		<input type="number" id="contact" class="form-control" name="contact" placeholder="Contact" ng-model="addbusiness.testimonials.contact" required >
-		<span style="color:red" ng-show="myForm.contact.$dirty && myForm.contact.$invalid">
-		<span ng-show="myForm.contact.$error.required">Senders Phone is required.</span>
+	<label for="mobile" class="col-md-3 control-label">Senders Phone</label>
+	<div class="col-md-9">
+		<input type="text" id="mobile" name="mobile" class="form-control" ng-model="mobile" placeholder="Your Contact No" ng-pattern="/^[799]\d{9}$/" maxlength="10" required>
+		<span style="color:red" ng-show="myForm.mobile.$dirty && myForm.mobile.$invalid">
+			<span ng-show="myForm.mobile.$error.pattern && (myForm.mobile.$dirty || submitted)" class="help-block">Enter a valid Contact Number</span>
 		</span>
-	</div>					
+	</div>						
 </div>
+
 <div class="form-group">
 	<label  for="testi" class="col-sm-3 control-label">Testimonial Title </label>
 	<div class="col-sm-9">
