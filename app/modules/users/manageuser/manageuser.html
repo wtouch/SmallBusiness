@@ -2,16 +2,16 @@
 	<ng-include src="'modules/users/manageuser/userstoolbar.html'"></ng-include>
 		<div class="row">
 			<div class="col-md-12 text-right bottomspace">
-				<a href="#/dashboard/users/usersgroup" class="btn btn-default">User Group</a>
-				<a href="#/dashboard/users/createusergroup" class="btn btn-default">Create User Group</a>
-				<a href="#/dashboard/users/userslist" class="btn btn-default">Users List</a>
-				<a href="#/dashboard/users/adduser" class="btn btn-default">Add New User</a>
+				<a href="#/dashboard/users/manageuser/usersgroup" class="btn btn-default">User Group</a>
+				<a href="#/dashboard/users/manageuser/createusergroup" class="btn btn-default">Create User Group</a>
+				<a href="#/dashboard/users/manageuser/userslist" class="btn btn-default">Users List</a>
+				<a href="#/dashboard/users/manageuser/adduser" class="btn btn-default">Add New User</a>
 			</div>
 			<div class="col-md-12">	
+				<ng-include ng-if="userPart=='userslist'" src="'modules/users/manageuser/userslist.html'"></ng-include>
 				<ng-include ng-if="userPart=='usersgroup'" src="'modules/users/manageuser/usersgroup.html'"></ng-include>
 				<ng-include ng-if="userPart=='adduser'" src="'modules/users/manageuser/adduser.html'"></ng-include>
 				<ng-include ng-if="userPart=='createusergroup'" src="'modules/users/manageuser/createusergroup.html'"></ng-include>
-				<ng-include ng-if="userPart=='userslist'" src="'modules/users/manageuser/userslist.html'"></ng-include>
 			</div>
 		</div>
 </div>
