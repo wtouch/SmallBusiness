@@ -12,7 +12,6 @@ define(['app'], function (app) {
 		if(!$routeParams.userViews) {
 		$location.path('/dashboard/users/userslist');
 		}
-		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/users/manageuser/userslist.html';
 		
 		//Code For Pagination
 		$scope.maxSize = 5;
