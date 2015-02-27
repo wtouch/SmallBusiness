@@ -42,7 +42,7 @@ define(['app'], function (app) {
 	//datepicker {sonali}	
 		$scope.today = function() 
 		{
-			$scope.dt = new Date();
+			$scope.date = new Date();
 		};
 		$scope.today();
 		$scope.open = function($event)
