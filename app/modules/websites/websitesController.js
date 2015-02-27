@@ -8,9 +8,7 @@ define(['app'], function (app) {
     // This is controller for this view
 	var websitesController = function ($scope, $injector,$routeParams,$location) {
 		console.log("this is mywebsites ctrl ");
-		
 		$scope.websitePart = $routeParams.websitePart; 
-		
 		console.log($scope.websitePart);
 		/*For display by default templ.html page*/
 		if(!$routeParams.websitePart) {
