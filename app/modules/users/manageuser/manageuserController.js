@@ -6,10 +6,10 @@ define(['app'], function (app) {
 	var manageuserController = function ($scope, $injector, $routeParams,$location) {
 		console.log("this is manageuserController");
 		
-		$scope.userPart = $routeParams.userPart; 
-		console.log($scope.userPart);
+		$scope.userViews = $routeParams.userViews; 
+		console.log($scope.userViews);
 		//For display by default userslist.html page{trupti}
-		if(!$routeParams.userPart) {
+		if(!$routeParams.userViews) {
 		$location.path('/dashboard/users/userslist');
 		}
 		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/users/manageuser/userslist.html';
