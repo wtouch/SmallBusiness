@@ -75,22 +75,23 @@
 						</div>						
 					</div>
 					
-					<div class="form-group">		
-						<label  for="telephone1" class="col-md-3 control-label">Telephone1</label>	
+					
+					<div class="form-group">
+						<label for="telephone1" class="col-md-3 control-label">Telephone1</label>
 						<div class="col-md-9">
-							<input type="number" id="telephone1" class="form-control" name="telephone1" ng-model="addbusiness.contactprofile.telephone1" placeholder="Telephone1"required >
+							<input type="text" id="telephone1" name="telephone1" class="form-control" ng-model="telephone1" placeholder="Your Contact No" ng-pattern="/^[\d\.\-]+$/" maxlength="9" required>
 							<span style="color:red" ng-show="myForm.telephone1.$dirty && myForm.telephone1.$invalid">
-							<span ng-show="myForm.telephone1.$error.required">Telephone Required.</span>
+								<span ng-show="myForm.telephone1.$error.pattern && (myForm.telephone1.$dirty || submitted)" class="help-block">Enter a valid Contact Number</span>
 							</span>
 						</div>						
 					</div>
-						
-					<div class="form-group">	
-						<label  for="mobile" class="col-md-3 control-label">Mobile/Cell Phone1</label>
+					
+					<div class="form-group">
+						<label for="mobile" class="col-md-3 control-label">Mobile/Cell Phone1</label>
 						<div class="col-md-9">
-							<input type="number" id="mobile" class="form-control" name="mobile" ng-model="addbusiness.contactprofile.mobile" placeholder="Mobile/Cell Phone1" required >
+							<input type="text" id="mobile" name="mobile" class="form-control" ng-model="mobile" placeholder="Your Contact No" ng-pattern="/^[799]\d{9}$/" maxlength="10" required>
 							<span style="color:red" ng-show="myForm.mobile.$dirty && myForm.mobile.$invalid">
-							<span ng-show="myForm.mobile.$error.required">Mobile Number Required.</span>
+								<span ng-show="myForm.mobile.$error.pattern && (myForm.mobile.$dirty || submitted)" class="help-block">Enter a valid Contact Number</span>
 							</span>
 						</div>						
 					</div>
@@ -104,33 +105,26 @@
 							</span>
 						</div>						
 					</div>
-					
-					<div class="form-group">
-						<label for="email" class="col-md-3 control-label">Email</label>
-						<div class="col-md-9">
-                            <input type="Email" class="form-control" id="email" ng-model="addbusiness.contactprofile.email" name="email" placeholder="Enter Email" required >
-							
-							<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+					<div class="form-group">	
+							<label  for="email" class="col-sm-3 control-label">Email</label>
+							<div class="col-md-9">
+								<input type="Email" class="form-control" id="email" ng-model="login.email" name="email" placeholder="Enter Email" required >
+								<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
 								<span ng-show="myForm.email.$error.required">Email is required.</span>
 								<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
-							</span>
-								
-							
-						
-						
-                        </div>						
-					</div>
-						
+								</span>
+							</div>
+						</div>	
 					<div class="form-group">	
-						<label  for="aemail" class="col-md-3 control-label">Alternate Email</label>	
-						<div class="col-md-9">
-							<input type="email" id="aemail" class="form-control" name="aemail" ng-model="addbusiness.contactprofile.aemail" placeholder="Alternate Email" required >
-							<span style="color:red" ng-show="myForm.aemail.$dirty && myForm.aemail.$invalid">
-							<span ng-show="myForm.aemail.$error.required">Alternate Email Required.</span>
-							<span ng-show="myForm.aemail.$error.email">Invalid Email address.</span>
-							</span>
-						</div>						
-					</div>
+							<label  for="aemail" class="col-sm-3 control-label">Alternate Email</label>
+							<div class="col-md-9">
+								<input type="Email" class="form-control" id="aemail" ng-model="aemail" name="aemail" placeholder="Enter Email" required >
+								<span style="color:red" ng-show="myForm.aemail.$dirty && myForm.aemail.$invalid">
+								<span ng-show="myForm.aemail.$error.required">Email is required.</span>
+								<span ng-show="myForm.aemail.$error.email">Invalid Email address.</span>
+								</span>
+							</div>
+						</div>	
 					
 					<div class="form-group">
 						<label  for="indiamart" class="col-md-3 control-label">Indiamart Catalog</label>	
@@ -141,14 +135,15 @@
 							</span>
 						</div>						
 					</div>
-					
-					<div class="form-group">		
-						<label  for="web" class="col-md-3 control-label">Alternate Website</label>	
+					<div class="form-group">
+						<label for="Website" class="col-md-3 control-label">Website </label>
 						<div class="col-md-9">
-							<input type="text" id="web" class="form-control" name="web" ng-model="addbusiness.contactprofile.web" placeholder="Alternate Website" required >
-							<span style="color:red" ng-show="myForm.web.$dirty && myForm.web.$invalid">
-							<span ng-show="myForm.web.$error.required">Alternate Website Required.</span>
+							<input type="url" class="form-control" id="Website" ng-model="reg.website" name="Website" placeholder="Enter Website " required>
+							<span style="color:red" ng-show="myForm.Website.$dirty && 	myForm.Website.$invalid">
+								<span ng-show="myForm.Website.$error.required">Website  is required.</span>
+								<span ng-show="myForm.Website.$error.url">Invalid Web Site.</span>
 							</span>
+							<span>e.g http://www.google.com</span>
 						</div>						
 					</div>	
 					

@@ -12,10 +12,12 @@
 	<div class="form-group">	
 		<label  for="domain" class="col-sm-2 control-label">Domain Name</label>
 		<div class="col-sm-9">
-			<input type="text" id="domain" class="form-control" name="domain" placeholder="Domain Name" ng-model="domain" required >
-			<span style="color:red" ng-show="myForm.domain.$dirty && myForm.domain.$invalid">
-			<span ng-show="myForm.domain.$error.required">Domain Name is required.</span>
+			<input type="url" class="form-control" id="domain" ng-model="domain" name="domain" placeholder="Enter Domain " required>
+			<span style="color:red" ng-show="myForm.domain.$dirty && 	myForm.domain.$invalid">
+				<span ng-show="myForm.domain.$error.required">Domain  is required.</span>
+				<span ng-show="myForm.domain.$error.url">Invalid Web Site.</span>
 			</span>
+			<span>e.g http://www.google.com</span>
 		</div>						
 	</div>			
 	<div class="form-group">
@@ -42,7 +44,7 @@
 		<label for="custom" class="col-sm-2 control-label pull-left">Required Custom</label>
 		<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="radio" id="Yes" value="Yes">Yes
+				<input type="radio" name="radio" id="Yes" value="Yes" checked>Yes
 			</label>
 			<label class="radio-inline">
 			  <input type="radio" name="radio" id=" No" value=" No">No
