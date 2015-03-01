@@ -1,13 +1,13 @@
 <div class="row bottomspace">
 	<div class="col-md-12">
 		<div class="product">
-			<form class="form-horizontal" role="form" name="myForm" novalidate="novalidate">
+			<form class="form-horizontal" role="form" name="addserviceForm" novalidate="novalidate">
 				<div class="form-group">
 					<label for="serviceName" class="col-sm-3 control-label">Service Name :</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" id="serviceName" name="serviceName"placeholder="Enter Service Name here" ng-model="serviceName" required>
-							<span style="color:red" ng-show="myForm.serviceName.$dirty && myForm.serviceName.$invalid">
-								<span ng-show="myForm.serviceName.$error.required">Service name is required</span>
+						<input type="text" class="form-control" id="serviceName" name="serviceName" ng-model="service.serviceName" placeholder="Enter Service Name here" required>
+							<span style="color:red" ng-show="addserviceForm.serviceName.$dirty && addserviceForm.serviceName.$invalid">
+								<span ng-show="addserviceForm.serviceName.$error.required">Service name is required</span>
 							</span>
 					</div>
 				</div>
@@ -20,7 +20,7 @@
 				<div class="form-group">
 					<label for="serviceGroup" class="col-sm-3 control-label">Service Group :</label>
 					<div class="col-sm-9">
-						<select class="form-control" id="serviceGroup" ng-model="serviceGroup" required>
+						<select class="form-control" id="serviceGroup" ng-model="service.serviceGroup" required>
 							<option value="Group Items">Select Heading</option>
 							<option value="abc">abc</option>
 							<option value="xyz">xyz</option>
@@ -33,7 +33,7 @@
 					<label class="col-sm-3 control-label" for="servDescp">Service Description :
 					</label>
 					<div  class="col-sm-9">
-						<textarea id="servDescp" name="servDescp" ng-model="servDescp" rows="3" required maxlength="30" class="form-control" ui-tinymce>
+						<textarea id="servDescp" name="servDescp" ng-model="service.servDescp" rows="3" required maxlength="30" class="form-control" ui-tinymce>
 						</textarea>
 						<div>{{ 20 - servDescp.length + " Chars left" }}</div>
 						<span style="color:red" ng-show="form1.servDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>

@@ -1,26 +1,26 @@
-<div class="row main-content">
-	
-	<!--div class="col-md-2" ng-include="'modules/components/menu-back.html'"></div--->
-	<div class="col-md-12">
-			<form class="form-horizontal " role="form" name="myForm"  novalidate>
+<div class="main-content">
+	<div class="row">
+		<div class="col-md-12">
+			<form class="form-horizontal " role="form" name="forgotpassForm"  novalidate>
 				<h3>Forgot Password</h3>
 				<hr>
 				<p class="text-center">If you have forgot the account password, you can reset password and a new password will be sent to your email address..</p>
 				<div class="form-group">
-						<label for="mail" class="col-md-3 control-label">Email</label>
+						<label for="user_mail" class="col-md-3 control-label">Email</label>
 						<div class="col-md-6">
-                            <input type="Email" class="form-control" id="mail" ng-model="forget.user_email" name="Email" placeholder="Enter Email" required>
-								<span style="color:red" ng-show="myForm.Email.$dirty && 	myForm.Email.$invalid">
-									<span ng-show="myForm.Email.$error.required">Email is required.</span>
-									<span ng-show="myForm.Email.$error.email">Invalid Email address.</span>
+                            <input type="Email" class="form-control" id="user_mail" name="user_mail" ng-model="forgot.user_mail" placeholder="Enter Email" required>
+								<span style="color:red" ng-show="forgotpassForm.user_mail.$dirty && 	forgotpassForm.user_mail.$invalid">
+									<span ng-show="forgotpassForm.user_mail.$error.required">Email is required.</span>
+									<span ng-show="forgotpassForm.user_mail.$error.email">Invalid Email address.</span>
 								</span>
                         </div>			
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-1">
-						<button type="submit" class="btn btn-success" name="btn1"  ng-click="forgotPass(forget)">Reset</button>
+						<button type="submit" class="btn btn-success" name="btn1"  ng-click="forgotpassForm(forget)">Reset</button>
 					</div>
 				</div>		
 			</form>
-		
-</div>	
+		</div>
+	</div>	
+</div>

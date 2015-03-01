@@ -1,32 +1,32 @@
-<div class="row main-content">
+<div class="row">
 	<div class="col-sm-12">	
 		<h3 class="col-sm-offset-2 col-sm-9"> Add New User</h3>
-		<form name="myForm" class="form-horizontal" role="form" novalidate="novalidate">	
+		<form class="form-horizontal" name="adduserForm" role="form" novalidate="novalidate">	
 			<div class="form-group">
 				<label  for="name" class="col-sm-2 control-label">Name</label>
 				<div class="col-sm-9">
-					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="name" required >
-					<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
-					<span ng-show="myForm.name.$error.required">Name is required.</span>
+					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="adduser.name" required >
+					<span style="color:red" ng-show="adduserForm.name.$dirty && adduserForm.name.$invalid">
+					<span ng-show="adduserForm.name.$error.required">Name is required.</span>
 					</span>
 				</div>
 			</div>
 			<div class="form-group">	
 				<label  for="email" class="col-sm-2 control-label">Email Id </label>
 				<div class="col-md-9">
-					<input type="Email" class="form-control" id="email" ng-model="login.email" name="email" placeholder="Enter Email" required >
-					<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
-					<span ng-show="myForm.email.$error.required">Email is required.</span>
-					<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
+					<input type="Email" class="form-control" id="email" ng-model="adduser.email" name="email" placeholder="Enter Email" required >
+					<span style="color:red" ng-show="adduserForm.email.$dirty && adduserForm.email.$invalid">
+					<span ng-show="adduserForm.email.$error.required">Email is required.</span>
+					<span ng-show="adduserForm.email.$error.email">Invalid Email address.</span>
 					</span>
 				</div>
 			</div>	
 			<div class="form-group">
 				<label for="contactno" class="col-md-2 control-label">Phone</label>
 				<div class="col-md-9">
-					<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[799]\d{9}$/" maxlength="10" required>
-					<span style="color:red" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
-						<span ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)" class="help-block">Enter a valid Contact Number</span>
+					<input type="text" id="contactno" name="contactno" class="form-control" ng-model="adduser.contactno" placeholder="Your Contact No" ng-pattern="/^[799]\d{9}$/" maxlength="10" required>
+					<span style="color:red" ng-show="adduserForm.contactno.$dirty && adduserForm.contactno.$invalid">
+						<span ng-show="adduserForm.contactno.$error.pattern && (adduserForm.contactno.$dirty || submitted)" class="help-block">Enter a valid Contact Number</span>
 					</span>
 				</div>						
 			</div>	
@@ -35,7 +35,7 @@
 				<label  for="birthdate" class="col-sm-2 control-label">Birth Date</label>
 				<div class="col-md-9">
 					<p class="input-group">
-					  <input type="text" id="birthdate" name="birthdate" class="form-control" datepicker-popup="{{format}}" ng-model="birthdate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+					  <input type="text" id="birthdate" name="birthdate" class="form-control" datepicker-popup="{{format}}" ng-model="adduser.birthdate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
 					  <span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 					  </span>
@@ -46,9 +46,9 @@
 			<div class="form-group">
 				<label  for="username" class="col-sm-2 control-label">User Name</label>
 				<div class="col-sm-9">
-					<input type="text" id="username" class="form-control" name="username" placeholder="User Name" ng-model="cname" required >
-					<span style="color:red" ng-show="myForm.username.$dirty && myForm.username.$invalid">
-					<span ng-show="myForm.username.$error.required">User Name is required.</span>
+					<input type="text" id="username" class="form-control" name="username" ng-model="adduser.username" placeholder="User Name"  required>
+					<span style="color:red" ng-show="adduserForm.username.$dirty && adduserForm.username.$invalid">
+					<span ng-show="adduserForm.username.$error.required">User Name is required.</span>
 					</span>
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 			<div class="form-group">
 				<label for="group" class="col-md-2 control-label" name="group" >User Name</label>
 				<div class="col-md-9">
-					<select class="form-control" name="group" id="group"  ng-model="group" required>		
+					<select class="form-control" name="group" id="group"  ng-model="adduser.group" required>		
 						<option value="">Select User Group</option>
 						<option value="India">India</option>
 						<option value="Australia">Australia</option>
@@ -64,8 +64,8 @@
 						<option value="America">America</option>
 						<option value="Belgium">Belgium</option>
 					</select>
-					<span style="color:red" ng-show="myForm.group.$dirty && myForm.group.$invalid">
-					<span ng-show="myForm.group.$error.required">User Name Group is required.</span>
+					<span style="color:red" ng-show="adduserForm.group.$dirty && adduserForm.group.$invalid">
+					<span ng-show="adduserForm.group.$error.required">User Name Group is required.</span>
 					</span>				
 				</div>
 			</div>		
@@ -73,7 +73,7 @@
 			<div class="form-group">
 				<label for="Address" class="col-md-2 control-label" name="Address" >Address</label>
 				<div class="col-md-2">
-					<select class="form-control" name="Country" id="Country"  ng-model="Country" required>		
+					<select class="form-control" name="Country" id="Country"  ng-model="adduser.Country" required>		
 						<option value="">Select Country</option>
 						<option value="India">India</option>
 						<option value="Australia">Australia</option>
@@ -81,12 +81,12 @@
 						<option value="America">America</option>
 						<option value="Belgium">Belgium</option>
 					</select>
-					<span style="color:red" ng-show="myForm.Country.$dirty && myForm.Country.$invalid">
-					<span ng-show="myForm.Country.$error.required">Country is required.</span>
+					<span style="color:red" ng-show="adduserForm.Country.$dirty && adduserForm.Country.$invalid">
+					<span ng-show="adduserForm.Country.$error.required">Country is required.</span>
 					</span>				
 				</div>
 				<div class="col-md-2">
-					<select class="form-control" name="State" id="State"  ng-model="State" required>		
+					<select class="form-control" name="State" id="State"  ng-model="adduser.State" required>		
 						<option value="">Select State</option>
 						<option value="India">India</option>
 						<option value="Australia">Australia</option>
@@ -94,12 +94,12 @@
 						<option value="America">America</option>
 						<option value="Belgium">Belgium</option>
 					</select>
-					<span style="color:red" ng-show="myForm.State.$dirty && myForm.State.$invalid">
-					<span ng-show="myForm.State.$error.required">State is required.</span>
+					<span style="color:red" ng-show="adduserForm.State.$dirty && adduserForm.State.$invalid">
+					<span ng-show="adduserForm.State.$error.required">State is required.</span>
 					</span>				
 				</div>
 				<div class="col-md-2">
-					<select class="form-control" name="City" id="City"  ng-model="City" required>		
+					<select class="form-control" name="City" id="City"  ng-model="adduser.City" required>		
 						<option value="">Select City</option>
 						<option value="India">India</option>
 						<option value="Australia">Australia</option>
@@ -107,12 +107,11 @@
 						<option value="America">America</option>
 						<option value="Belgium">Belgium</option>
 					</select>
-					<span style="color:red" ng-show="myForm.City.$dirty && myForm.City.$invalid">
-					<span ng-show="myForm.City.$error.required">City is required.</span>
+					<span style="color:red" ng-show="adduserForm.City.$dirty && adduserForm.City.$invalid">
+					<span ng-show="adduserForm.City.$error.required">City is required.</span>
 					</span>				
 				</div>
-			</div>	
-					
+			</div>			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
 				  <button type="submit" class="btn btn-success" title="Add User">Add User</button>

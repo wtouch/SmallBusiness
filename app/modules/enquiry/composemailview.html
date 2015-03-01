@@ -1,7 +1,7 @@
 <div class="main-content">	
 	<div class="row">
 		<div class="col-md-12" >
-			<form class="form-horizontal" name="myForm">
+			<form class="form-horizontal" role="form" name="composemailviewForm" novalidate="novalidate">
 				<div class="form-group">
 					<label for="from" class="col-sm-2 control-label">From</label>
 					<div class="col-sm-10">
@@ -11,10 +11,10 @@
 				<div class="form-group">
 					<label for="to" class="col-sm-2 control-label">To</label>
 					<div class="col-md-6">
-						<input type="Email" class="form-control" id="to" ng-model="to" name="to" placeholder="Enter Email" required >
-						<span style="color:red" ng-show="myForm.to.$dirty && myForm.to.$invalid">
-						<span ng-show="myForm.to.$error.required">Email is required.</span>
-						<span ng-show="myForm.to.$error.email">Invalid Email address.</span>
+						<input type="Email" class="form-control" id="to" ng-model="composemail.to" name="to" placeholder="Enter Email" required>
+						<span style="color:red" ng-show="composemailviewForm.to.$dirty && composemailviewForm.to.$invalid">
+						<span ng-show="composemailviewForm.to.$error.required">Email is required.</span>
+						<span ng-show="composemailviewForm.to.$error.email">Invalid Email address.</span>
 						</span>
 					</div>
 					<div class="col-sm-4">
@@ -29,25 +29,25 @@
 				<div class="form-group">
 					<label for="cc" class="col-sm-2 control-label">Cc</label>
 					<div class="col-md-10">
-						<input type="Email" class="form-control" id="cc" ng-model="cc" name="cc" placeholder="Enter Email" required >
-						<span style="color:red" ng-show="myForm.cc.$dirty && myForm.cc.$invalid">
-						<span ng-show="myForm.cc.$error.required">Email is required.</span>
-						<span ng-show="myForm.cc.$error.email">Invalid Email address.</span>
+						<input type="Email" class="form-control" id="cc" ng-model="composemail.cc" name="cc" placeholder="Enter Email" required >
+						<span style="color:red" ng-show="composemailviewForm.cc.$dirty && composemailviewForm.cc.$invalid">
+						<span ng-show="composemailviewForm.cc.$error.required">Email is required.</span>
+						<span ng-show="composemailviewForm.cc.$error.email">Invalid Email address.</span>
 						</span>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="subject" class="col-sm-2 control-label">Subject</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" ng-model="subject" required>
-						<span style="color:red" ng-show="myForm.subject.$dirty && myForm.subject.$invalid">
-							<span ng-show="myForm.subject.$error.required" class="required">Please Enter subject.</span>
+						<input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" ng-model="composemail.subject" required>
+						<span style="color:red" ng-show="composemailviewForm.subject.$dirty && composemailviewForm.subject.$invalid">
+							<span ng-show="composemailviewForm.subject.$error.required" class="required">Please Enter subject.</span>
 						</span>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<textarea id="textformail" name="textformail" class="form-control" rows="3" ng-model="textformail" ng-minlength="5" ng-maxlength="10" ui-tinymce required>
+						<textarea id="textformail" name="textformail" class="form-control" rows="3" ng-model="composemail.textformail" ng-minlength="5" ng-maxlength="10" ui-tinymce required>
 						</textarea>
 					</div>
 				</div>
