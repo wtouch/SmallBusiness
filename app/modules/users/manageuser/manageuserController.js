@@ -45,11 +45,13 @@ define(['app'], function (app) {
 			$scope.date = new Date();
 		};
 		$scope.today();
-		$scope.open = function($event)
+		$scope.open = function($event,opened)
 		{
 			$event.preventDefault();
 			$event.stopPropagation();
-			$scope.opened = true;
+			//$scope.opened = true;
+			//$scope.opened = ($scope.opened==true)?false:true;
+			$scope[opened]= ($scope[opened]==true)?false:true;
 		};
 		$scope.dateOptions = {
 			formatYear: 'yy',
