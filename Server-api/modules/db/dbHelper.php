@@ -15,7 +15,7 @@ class dbHelper {
             exit;
         }
     }
-    function select($table, $where){
+    function select($table, $where, $limit=null){
         try{
             $a = array();
             $w = "";
@@ -23,18 +23,26 @@ class dbHelper {
                 $w .= " and " .$key. " like :".$key;
                 $a[":".$key] = $value;
             }
+			$lmt = ($limit['pageNo'] == 0 ) ? $limit['pageNo'] : $limit['pageNo'] - 1;
+			$startLimit = $lmt * $limit['records']; // start on record $startLimit
+			$dbLimit = ($limit===null) ? "" : " LIMIT ".$startLimit.", ".$limit['records'];
 			
-            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w);
+            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w ." ".$dbLimit);
             $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+			/* $res = $this->db->query('SELECT COUNT(*) FROM '.$table);
+			$totalRecords = $res->fetchColumn(); */
+			
             if(count($rows)<=0){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
             }else{
+				//$response['totalRecords']= $totalRecords;
                 $response["status"] = "success";
-                $response["message"] = "Data selected from database";
+				$response["data"] = $rows;
             }
-                $response["data"] = $rows;
+                
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = 'Select Failed: ' .$e->getMessage();
@@ -42,22 +50,25 @@ class dbHelper {
         }
         return $response;
     }
-    function insert($table, $columnsArray, $requiredColumnsArray) {
-        $this->verifyRequiredParams($columnsArray, $requiredColumnsArray);
-        
+    function insert($table, $inputData) {
+
         try{
-            $a = array();
-            $c = "";
-            $v = "";
-            foreach ($columnsArray as $key => $value) {
-                $c .= $key. ", ";
-                $v .= ":".$key. ", ";
-                $a[":".$key] = $value;
-            }
-            $c = rtrim($c,', ');
-            $v = rtrim($v,', ');
-            $stmt =  $this->db->prepare("INSERT INTO $table($c) VALUES($v)");
-            $stmt->execute($a);
+		
+			$inputData = json_decode($inputData);
+			
+			$dataKey = [];
+			$dataValue = [];
+			foreach($inputData as $key => $val) // $inputData holds input json data
+			{
+				$value = (is_object($val)) ? json_encode($val) : mysql_real_escape_string($val) ;
+				array_push($dataKey,$key);
+				array_push($dataValue,"'".$value."'");
+			}
+			$colNames = implode(",",$dataKey);
+			$colValues = implode(",",$dataValue);
+		
+		    $stmt =  $this->db->prepare("INSERT INTO $table($colNames) VALUES($colValues)");
+            $stmt->execute();
             $affected_rows = $stmt->rowCount();
             $response["status"] = "success";
             $response["message"] = $affected_rows." row inserted into database";
@@ -67,23 +78,27 @@ class dbHelper {
         }
         return $response;
     }
-    function update($table, $columnsArray, $where, $requiredColumnsArray){ 
-        $this->verifyRequiredParams($columnsArray, $requiredColumnsArray);
+	
+    function update($table, $inputData, $where){
+        
         try{
             $a = array();
             $w = "";
-            $c = "";
             foreach ($where as $key => $value) {
                 $w .= " and " .$key. " = :".$key;
                 $a[":".$key] = $value;
             }
-            foreach ($columnsArray as $key => $value) {
-                $c .= $key. " = :".$key.", ";
-                $a[":".$key] = $value;
-            }
-                $c = rtrim($c,", ");
+            $inputData = json_decode($inputData);
+			$updateTable = [];
+			foreach($inputData as $key => $val) // $inputData holds input json data
+			{
+				$value = (is_object($val)) ? mysql_real_escape_string(json_encode($val)) : mysql_real_escape_string($val) ;
+				array_push($updateTable,$key." = '".$value."'");
+				
+			}
+			$updateFields = implode(",",$updateTable);
 
-            $stmt =  $this->db->prepare("UPDATE $table SET $c WHERE 1=1 ".$w);
+            $stmt =  $this->db->prepare("UPDATE $table SET $updateFields WHERE 1=1 ".$w);
             $stmt->execute($a);
             $affected_rows = $stmt->rowCount();
             if($affected_rows<=0){
@@ -99,6 +114,7 @@ class dbHelper {
         }
         return $response;
     }
+	
     function delete($table, $where){
         if(count($where)<=0){
             $response["status"] = "warning";
@@ -129,24 +145,6 @@ class dbHelper {
         return $response;
     }
   
-    function verifyRequiredParams($inArray, $requiredColumns) {
-        $error = false;
-        $errorColumns = "";
-        foreach ($requiredColumns as $field) {
-            if (!isset($inArray[$field]) || strlen(trim($inArray[$field])) <= 0) {
-                $error = true;
-                $errorColumns .= $field . ', ';
-            }
-        }
-
-        if ($error) {
-            $response = array();
-            $response["status"] = "error";
-            $response["message"] = 'Required field(s) ' . rtrim($errorColumns, ', ') . ' is missing or empty';
-            print_r($response);
-            exit;
-        }
-    }
 }
 
 ?>
