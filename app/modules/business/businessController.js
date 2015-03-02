@@ -10,14 +10,14 @@ define(['app'], function (app) {
 	{
 		// This code for Date Picker {Vilas}
 		$scope.today = function(){
-			$scope.date = new Date();
+			$scope.newsDate = new Date();
 		};
 		$scope.today();
-		$scope.open = function($event)
+		$scope.open = function($event,opened)
 		{
 			$event.preventDefault();
 			$event.stopPropagation();
-			$scope.opened = ($scope.opened==true)?false:true;
+			$scope[opened] = ($scope[opened]===true) ? false : true;
 		};
 		$scope.dateOptions ={
 			formatYear: 'yy',

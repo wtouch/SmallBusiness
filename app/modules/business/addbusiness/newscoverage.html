@@ -2,9 +2,10 @@
 	<label  for="date1" class="col-sm-3 control-label">Date</label>
 	<div class="col-sm-9">
 		<p class="input-group">
-		  <input type="text" id="date1" name="date1" class="form-control" datepicker-popup="{{format}}" ng-model="addbusiness.newcoverage.date" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)"/>
+		  <input type="text" class="form-control" id="newsDate" name="newsDate" ng-model="newsDate" ng-click="open($event,'newsDate')" is-open="newsDate" datepicker-popup="{{format}}" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
 		  <span class="input-group-btn">
-			<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			<button type="button" class="btn btn-default" ng-click="open($event,'newsDate')">
+			<i class="glyphicon glyphicon-calendar"></i></button>
 		  </span>
 		</p>
 	</div>
