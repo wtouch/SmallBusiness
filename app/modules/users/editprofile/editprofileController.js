@@ -16,7 +16,7 @@ define(['app'], function (app) {
 		{
 			$event.preventDefault();
 			$event.stopPropagation();
-			$scope.opened = true;
+			$scope.opened = ($scope.opened==true)?false:true;
 		};
 		$scope.dateOptions = {
 			formatYear: 'yy',
