@@ -1,21 +1,18 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope', '$injector', '$routeParams']; /* Added $routeParams to access route parameters */
+    var injectParams = ['$scope', '$injector', '$routeParams','$location']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var enquiryController = function ($scope, $injector, $routeParams) {
+	var enquiryController = function ($scope, $injector, $routeParams,$location) {
 		console.log("this is enqury Controller");
-		$scope.MailView = $routeParams.mailId; /* this object will check list of mails show or single mail show */
-		
-		
-		
-		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/dashboard/dashboard/enquiry/mailview.html';
-		
-		$scope.Composemail = $routeParams.mailId;
-		
-		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/dashboard/dashboard/enquiry/composemailview.html';
-		
-		
+		//$scope.MailView = $routeParams.mailId; /* this object will check list of mails show or single mail show */
+		$scope.mailId = $routeParams.mailId; 
+		console.log($scope.mailId);
+		//For display by default mails.html page{trupti}
+		if(!$routeParams.mailId) {
+		$location.path('/dashboard/enquiry/mails');
+		}
+	
 		$scope.goBack = function() 
 		{
 			window.history.back();
@@ -44,11 +41,10 @@ define(['app'], function (app) {
 		};	//End of pagination
 		
     };
-	
+
 	// Inject controller's dependencies
 	enquiryController.$inject = injectParams;
 	// Register/apply controller dynamically
     app.register.controller('enquiryController', enquiryController);
-	
 	
 });
