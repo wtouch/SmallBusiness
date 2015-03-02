@@ -7,7 +7,15 @@ define(['app'], function (app) {
 		console.log("this is enqury Controller");
 		$scope.MailView = $routeParams.mailId; /* this object will check list of mails show or single mail show */
 		
+		
+		
 		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/dashboard/dashboard/enquiry/mailview.html';
+		
+		$scope.Composemail = $routeParams.mailId;
+		
+		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/dashboard/dashboard/enquiry/composemailview.html';
+		
+		
 		$scope.goBack = function() 
 		{
 			window.history.back();

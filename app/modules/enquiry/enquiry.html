@@ -3,13 +3,22 @@
 		<div class="row">
 			<div class="col-md-3" ng-include="'modules/enquiry/sidebar.html'"></div>
 			<div class="col-md-9">
-				 <!--This is conditional include if not mailId set in url this html includes in view -->
-					
 				<ng-include src="'modules/enquiry/toolbars.html'"></ng-include>
+				 <!--This is conditional include if not mailId set in url this html includes in view -->
 				<ng-include ng-if="!MailView" src="'modules/enquiry/mails.html'"></ng-include> 
 				<!-- if mailId set in url this html includes in view -->
 				<ng-include ng-if="MailView" src="'modules/enquiry/mailview.html'"></ng-include>
-				<ng-include src="'modules/enquiry/composemailview.html'"></ng-include>
+				
+				<!--this conditional include for composemailview{trupti}-->
+				<ng-include ng-if="!Composemail" src="'modules/enquiry/mails.html'"></ng-include> 
+				<!-- if mailId set in url this html includes in view -->
+				<ng-include ng-if="Composemail" src="'modules/enquiry/composemailview.html'"></ng-include>
+				
+				<!--this is conditional include for sentmailview-->
+				<ng-include ng-if="!Sentmail" src="'modules/enquiry/mails.html'"></ng-include> 
+				<ng-include ng-if="Sentmail" src="'modules/enquiry/Sentmail.html'"></ng-include>
+				
+				
 				
 			</div>
 		</div>
