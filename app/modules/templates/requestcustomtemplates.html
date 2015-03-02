@@ -5,7 +5,7 @@
 		<div class="col-sm-9">
             <input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="name" required >
 			<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
-				<span ng-show="myForm.name.$error.required">Template Name is required.</span>
+			<span ng-show="myForm.name.$error.required">Template Name is required.</span>
 			</span>
 		</div>						
 	</div>
@@ -13,7 +13,7 @@
 		<label  for="domain" class="col-sm-2 control-label">Domain Name</label>
 		<div class="col-sm-9">
 			<input type="url" class="form-control" id="domain" ng-model="domain" name="domain" placeholder="Enter Domain " required>
-			<span style="color:red" ng-show="myForm.domain.$dirty && 	myForm.domain.$invalid">
+			<span style="color:red" ng-show="myForm.domain.$dirty && myForm.domain.$invalid">
 				<span ng-show="myForm.domain.$error.required">Domain  is required.</span>
 				<span ng-show="myForm.domain.$error.url">Invalid Web Site.</span>
 			</span>
@@ -21,8 +21,8 @@
 		</div>						
 	</div>	
 	<div class="form-group">
-		<label for="contactno" class="col-md-2 control-label">Contact Number</label>
-		<div class="col-md-9">
+		<label for="contactno" class="col-sm-2 control-label">Contact Number</label>
+		<div class="col-sm-9">
 			<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 			<span class="help-block" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
 				<span ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)" style="color:red">Enter a valid contact Number.</span>
@@ -34,7 +34,7 @@
 		<div class="col-sm-9">
 			<div ng-hide="myForm.requirement.$error.maxlength">{{ 20 - requirement.length + " Chars left" }}
 			</div>
-				<textarea id="requirement" name="requirement" class="form-control ng-model="requirement" maxlength="20" placeholder="Your Custom Requirement" rows="2"></textarea>
+				<textarea id="requirement" name="requirement" class="form-control" ng-model="requirement" maxlength="20" placeholder="Your Custom Requirement" rows="2"></textarea>
 				<span style="color:red" ng-show="myForm.requirement.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 		</div>  
