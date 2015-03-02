@@ -23,23 +23,30 @@
 	<div class="form-group">
 		<label for="contactno" class="col-md-2 control-label">Contact Number</label>
 		<div class="col-md-9">
-			<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[799]\d{9}$/" maxlength="10" required>
-			<span style="color:red" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
-				<span ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)" class="help-block">Enter a valid contactno.</span>
+			<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+			<span class="help-block" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
+				<span ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)" style="color:red">Enter a valid contact Number.</span>
 			</span>
 		</div>						
 	</div>
 	<div class="form-group">
 		<label for="requirement" class="col-sm-2 control-label">Custom Requirement</label>	
 		<div class="col-sm-9">
-			<textarea  class="form-control" id="requirement" ng-model="requirement" name="requirement" placeholder="Your Custom Requirement" rows="2" maxlength="20" ui-tinymce required>
+			<div ng-hide="myForm.requirement.$error.maxlength">{{ 20 - requirement.length + " Chars left" }}
+			</div>
+				<textarea id="requirement" name="requirement" class="form-control ng-model="requirement" maxlength="20" placeholder="Your Custom Requirement" rows="2"></textarea>
+				<span style="color:red" ng-show="myForm.requirement.$error.maxlength">
+				Sorry You are Exceeding the Limit</span>
+		</div>  
+		
+			<!--textarea  class="form-control" id="requirement" ng-model="requirement" name="requirement" placeholder="Your Custom Requirement" rows="2" maxlength="20" ui-tinymce required>
 			</textarea>
 			<div>{{ 20 - requirement.length + " Chars left" }}</div>
 			<span style="color:red" ng-show="myForm.requirement.$dirty && myForm.requirement.$invalid">
 				<span ng-show="myForm.requirement.$error.required">Custom Requirement are Required.</span>
 				<span ng-show="myForm.requirement.$error.minlength">Plz Enter minimum 10 character</span>
 				<span ng-show="myForm.requirement.$error.maxlength">You have exceed limit</span>
-			</span>
+			</span-->
 		</div>					
 	</div>
 	<div class="form-group">
