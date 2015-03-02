@@ -13,7 +13,7 @@
 			</div>
 			<div class="form-group">	
 				<label  for="email" class="col-sm-2 control-label">Email Id </label>
-				<div class="col-md-9">
+				<div class="col-sm-9">
 					<input type="Email" class="form-control" id="email" ng-model="adduser.email" name="email" placeholder="Enter Email" required >
 					<span style="color:red" ng-show="adduserForm.email.$dirty && adduserForm.email.$invalid">
 					<span ng-show="adduserForm.email.$error.required">Email is required.</span>
@@ -22,18 +22,26 @@
 				</div>
 			</div>	
 			<div class="form-group">
+<<<<<<< HEAD
 				<label for="contactno" class="col-md-2 control-label">Phone</label>
 				<div class="col-md-9">
 					<input type="text" id="contactno" name="contactno" class="form-control" ng-model="adduser.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 					<span class="help-block" ng-show="adduserForm.contactno.$dirty && adduserForm.contactno.$invalid">
 						<span ng-show="adduserForm.contactno.$error.pattern && (adduserForm.contactno.$dirty || submitted)" style="color:red">Enter a valid Contact Number</span>
+=======
+				<label for="contactno" class="col-sm-2 control-label">Phone</label>
+				<div class="col-sm-9">
+					<input type="text" id="contactno" name="contactno" class="form-control" ng-model="adduser.contactno" placeholder="Your Contact No" ng-pattern="/^[799]\d{9}$/" maxlength="10" required>
+					<span style="color:red" ng-show="adduserForm.contactno.$dirty && adduserForm.contactno.$invalid">
+						<span ng-show="adduserForm.contactno.$error.pattern && (adduserForm.contactno.$dirty || submitted)" class="help-block">Enter a valid Contact Number</span>
+>>>>>>> adduser updated
 					</span>
 				</div>						
 			</div>	
 			
 			<div class="form-group">
 				<label  for="birthdate" class="col-sm-2 control-label">Birth Date</label>
-				<div class="col-md-9">
+				<div class="col-sm-9">
 					<p class="input-group">
 					  <input type="text" id="birthdate" name="birthdate" class="form-control" datepicker-popup="{{format}}" ng-model="adduser.birthdate" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)" />
 					  <span class="input-group-btn">
@@ -55,8 +63,8 @@
 			</div>
 			
 			<div class="form-group">
-				<label for="group" class="col-md-2 control-label" name="group" >Group Name</label>
-				<div class="col-md-9">
+				<label for="group" class="col-sm-2 control-label" name="group" >Group Name</label>
+				<div class="col-sm-9">
 					<select class="form-control" name="group" id="group"  ng-model="adduser.group" required>		
 						<option value="">Select User Group</option>
 						<option value="India">India</option>
@@ -72,8 +80,8 @@
 			</div>		
 			
 			<div class="form-group">
-				<label for="Address" class="col-md-2 control-label" name="Address" >Address</label>
-				<div class="col-md-2">
+				<label for="Address" class="col-sm-2 control-label" name="Address" >Address</label>
+				<div class="col-sm-2">
 					<select class="form-control" name="Country" id="Country"  ng-model="adduser.Country" required>		
 						<option value="">Select Country</option>
 						<option value="India">India</option>
@@ -86,7 +94,7 @@
 					<span ng-show="adduserForm.Country.$error.required">Country is required.</span>
 					</span>				
 				</div>
-				<div class="col-md-2">
+				<div class="col-sm-2">
 					<select class="form-control" name="State" id="State"  ng-model="adduser.State" required>		
 						<option value="">Select State</option>
 						<option value="India">India</option>
@@ -99,7 +107,7 @@
 					<span ng-show="adduserForm.State.$error.required">State is required.</span>
 					</span>				
 				</div>
-				<div class="col-md-2">
+				<div class="col-sm-2">
 					<select class="form-control" name="City" id="City"  ng-model="adduser.City" required>		
 						<option value="">Select City</option>
 						<option value="India">India</option>
