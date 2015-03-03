@@ -48,9 +48,9 @@
 					<div class="form-group">
 						<label for="Address" class="col-sm-3 control-label">Address</label>
 						<div class="col-sm-9">
-							<textarea type="text" class="form-control" id="address" name="address" ng-model="contact.address" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Address" ui-tinymce required></textarea>
+							<textarea type="text" class="form-control" id="address" name="address" ng-model="contact.address" cols="30" rows="4" ng-maxlength="75" placeholder="Enter Address"  required></textarea>
 							<p ng-hide="addbusinessForm.address.$error.maxlength">
-								{{ 20 - contact.address.length + " Chars left" }}
+								{{ 75 - contact.address.length + " Chars left" }}
 							</p>
 							<span style="color:red" ng-show="addbusinessForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
 							<span style="color:red" ng-show="addbusinessForm.address.$dirty && addbusinessForm.address.$invalid">
