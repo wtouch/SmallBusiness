@@ -2,6 +2,7 @@
 	<div class="col-sm-12">
 	<div class="bottomspace">
 		<div class="product">
+			<h3 class="col-sm-offset-2 col-sm-9">Add New Products</h3>
 			<form class="form-horizontal" role="form" name="addproductForm" novalidate="novalidate">
 				<div class="form-group">
 					<label for="prodName" class="col-sm-2 control-label">Product Name :</label>
@@ -34,10 +35,15 @@
 					<label class="col-sm-2 control-label" for="productDescp">Product Description :
 					</label>
 					<div  class="col-sm-9">
-						<textarea id="productDescp" name="productDescp" ng-model="addproduct.productDescp" rows="3" required maxlength="30" class="form-control" ui-tinymce>
+						<textarea type="text" class="form-control" id="productDescp" name="productDescp" ng-model="addproduct.productDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Product Description" ui-tinymce required>
 						</textarea>
-						<div>{{ 20 - productDescp.length + " Chars left" }}</div>
-						<span style="color:red" ng-show="form1.productDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+							<p ng-hide="addproductForm.productDescp.$error.maxlength">
+								{{ 20 - addproduct.productDescp.length + " Chars left" }}
+							</p>
+							<span style="color:red" ng-show="addproductForm.productDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+							<span style="color:red" ng-show="addproductForm.productDescp.$dirty && addproductForm.productDescp.$invalid">
+								<span ng-show="addproductForm.productDescp.$error.required">Product Description is required.</span>
+							</span>
 					</div>
 				</div>
 				<div class="form-group">
