@@ -1,58 +1,66 @@
 <h3>Template List</h3>
-<div class="row bottomspace">
-	<div class="col-md-3"> 
-		<label for="search" class="control-label">Search </label>		
-		<input id="search" type="text" class="form-control" ng-model="searchProp" placeholder="search"/>
-	</div>			 				  
-	<div class="col-md-3">
-		<label for="sort" class="control-label">Sort by Order</label>
-		<select id="sort" class="form-control" ng-model="id"> 
-			<option value="">Select Order</option>		<!-- added value & selected attr -->	
-			<option value="-id">Desending</option>
-			<option value="id">Asending</option>  
-		</select>
+	<div class="row">
+		<div class="col-sm-3"> 
+			<div class="bottomspace">
+				<label for="search" class="control-label">Search </label>		
+					<input id="search" type="text" class="form-control" ng-model="searchProp" placeholder="search"/>
+			</div>
+		</div>			 				  
+		<div class="col-sm-3">
+			<div class="bottomspace">
+				<label for="sort" class="control-label">Sort by Order</label>
+					<select id="sort" class="form-control" ng-model="id"> 
+						<option value="">Select Order</option>		<!-- added value & selected attr -->	
+						<option value="-id">Desending</option>
+						<option value="id">Asending</option>  
+					</select>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="bottomspace">
+				<label for="status" class="control-label">Select Status</label>
+					<select id="status" class="form-control" ng-model="status">
+						<option value="" selected>Select Status</option> <!-- add value attribute empty & selected for initial selected option -->
+						<option value="1">Active</option>
+						<option value="0">Deleted</option>
+					</select>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="bottomspace">
+				<label for="featured" class="control-label">Filter By Create Date</label>
+					<select id="featured" class="form-control" ng-model="featured">
+						<option value="" selected>Select Featured</option> <!-- added value & selected attr -->
+						<option value="1" >Featured</option>
+						<option value="0">Not Featured</option> 
+					</select>
+			</div>
+		</div>
 	</div>
-	<div class="col-md-3">
-		<label for="status" class="control-label">Select Status</label>
-		<select id="status" class="form-control" ng-model="status">
-			<option value="" selected>Select Status</option> <!-- add value attribute empty & selected for initial selected option -->
-			<option value="1">Active</option>
-			<option value="0">Deleted</option>
-		</select>
+	<div class="table-responsive">		
+		<table class="table table-bordered">
+			<thead>
+				<th>Sr.No.</th>
+				<th>Template Name</th>
+				<th>Create Date</th>
+				<th>Price</th>
+				<th>Select Template</th>
+			</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>abc</td>
+						<td>02/01/2015</td>
+						<td>1000/-</td>
+						<td><a href="#" class="btn btn-default">Apply</a>
+							<a href="#" class="btn btn-default">Buy</a>
+							<a href="#" class="btn btn-default">Preview</a>
+						</td>
+					</tr>
+				</tbody>					
+		</table>
 	</div>
-	<div class="col-md-3">
-		<label for="featured" class="control-label">Filter By Create Date</label>
-			<select id="featured" class="form-control" ng-model="featured">
-				<option value="" selected>Select Featured</option> <!-- added value & selected attr -->
-				<option value="1" >Featured</option>
-				<option value="0">Not Featured</option> 
-			</select>
-	</div>
-</div>
-<div class="table-responsive">		
-	<table class="table table-bordered">
-		<thead>
-			<th>Sr.No.</th>
-			<th>Template Name</th>
-			<th>Create Date</th>
-			<th>Price</th>
-			<th>Select Template</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td>1</td>
-				<td>abc</td>
-				<td>02/01/2015</td>
-				<td>1000/-</td>
-				<td><a href="#" class="btn btn-default">Apply</a>
-					<a href="#" class="btn btn-default">Buy</a>
-					<a href="#" class="btn btn-default">Preview</a>
-				</td>
-			</tr>
-		</tbody>					
-	</table>
-</div>
-<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="templates.tempListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>				
-				<pre>Page: {{currentPage}} / {{numPages}}</pre>
-</div>		
+	<div class="text-center">				
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="templates.tempListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>				
+		<pre>Page: {{currentPage}} / {{numPages}}</pre>
+	</div>		
