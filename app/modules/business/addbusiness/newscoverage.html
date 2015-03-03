@@ -14,8 +14,8 @@
 	<label  for="medianame" class="col-sm-3 control-label">Media Name</label>	
 	<div class="col-sm-9">
 		<input type="text" id="medianame" class="form-control" ng-model="medianame" name="medianame" placeholder="Media Name" required>
-		<span style="color:red" ng-show="myForm.medianame.$dirty && myForm.medianame.$invalid">
-			<span ng-show="myForm.medianame.$error.required">Media Name is required.</span>
+		<span style="color:red" ng-show="addbusinessForm.medianame.$dirty && addbusinessForm.medianame.$invalid">
+			<span ng-show="addbusinessForm.medianame.$error.required">Media Name is required.</span>
 		</span>
 	</div>						
 </div>
@@ -31,8 +31,8 @@
 			<option value="America">America</option>
 			<option value="Belgium">Belgium</option>
 		</select>
-		<span style="color:red" ng-show="myForm.mediatype.$dirty && myForm.mediatype.$invalid">
-		<span ng-show="myForm.mediatype.$error.required">Media Typeis required.</span>
+		<span style="color:red" ng-show="addbusinessForm.mediatype.$dirty && addbusinessForm.mediatype.$invalid">
+		<span ng-show="addbusinessForm.mediatype.$error.required">Media Typeis required.</span>
 		</span>				
 	</div>
 </div>	
@@ -41,8 +41,8 @@
 	<label  for="headline" class="col-sm-3 control-label">Headline</label>		
 	<div class="col-sm-9">
 		<input type="text" id="headline" class="form-control" ng-model="headline" name="headline" placeholder="Headline" required>
-		<span style="color:red" ng-show="myForm.headline.$dirty && 	myForm.headline.$invalid">
-		<span ng-show="myForm.headline.$error.required">Headline is required.</span>
+		<span style="color:red" ng-show="addbusinessForm.headline.$dirty && 	addbusinessForm.headline.$invalid">
+		<span ng-show="addbusinessForm.headline.$error.required">Headline is required.</span>
 		</span>
 	</div>						
 </div>
@@ -50,25 +50,25 @@
 	<label for="News" class="col-sm-3 control-label">News Coverage URL</label>
 	<div class="col-sm-9">
 		<input type="url" class="form-control" id="News" ng-model="News" name="News" placeholder="News Coverage URL" required>
-		<span style="color:red" ng-show="myForm.News.$dirty && 	myForm.News.$invalid">
-			<span ng-show="myForm.News.$error.required">News Coverage URL is required.</span>
-			<span ng-show="myForm.News.$error.url">Invalid News Coverage URL.</span>
+		<span style="color:red" ng-show="addbusinessForm.News.$dirty && 	addbusinessForm.News.$invalid">
+			<span ng-show="addbusinessForm.News.$error.required">News Coverage URL is required.</span>
+			<span ng-show="addbusinessForm.News.$error.url">Invalid News Coverage URL.</span>
 		</span>
 		<span>e.g http://www.google.com</span>
 	</div>						
 </div>
 
 <div class="form-group">
-	<label for="details" class="col-sm-3 control-label">News Coverage Details</label>
+	<label for="newsdetails" class="col-sm-3 control-label">News Coverage Details</label>
 	<div class="col-sm-9">
-		<textarea  class="form-control" id="details" ng-model="details" name="details" placeholder="Enter Details" required>
-      </textarea>
-		 <p>{{ 256 - details.length + " Characters left"}}</p>
-		<span style="color:red" ng-show="myForm.Details.$dirty &&  myForm.Details.$invalid">
-      <span style="color:red" ng-show="myForm.reg.Details.$error.maxlength">
-      Sorry You are Exceeding the Limit</span>
-      <span ng-show="myForm.Details.$error.required">News Coverage Details is required.</span>
-      </span>	
+		<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="newscover.newsdetails" cols="30" rows="4" ng-maxlength="20" placeholder="News Coverage Details" ui-tinymce required></textarea>
+			<p ng-hide="addbusinessForm.newsdetails.$error.maxlength">
+				{{ 20 - newscover.newsdetails.length + " Chars left" }}
+			</p>
+			<span style="color:red" ng-show="addbusinessForm.newsdetails.$error.maxlength">Sorry You are Exceeding the Limit</span>
+			<span style="color:red" ng-show="addbusinessForm.newsdetails.$dirty && addbusinessForm.newsdetails.$invalid">
+				<span ng-show="addbusinessForm.newsdetails.$error.required">News Coverage Details is required.</span>
+			</span>	
 	</div>
 </div> 
 <div class="form-group" > 

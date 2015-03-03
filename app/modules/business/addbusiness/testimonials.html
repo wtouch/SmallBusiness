@@ -11,11 +11,11 @@
 	</div>
 </div>	
 <div class="form-group">
-	<label  for="testimonial" class="col-sm-3 control-label">Testimonial Given By</label>
+	<label for="testimonial" class="col-sm-3 control-label">Testimonial Given By</label>
 	<div class="col-sm-9">
 		<input type="text" id="testimonial" class="form-control" name="testimonial" placeholder="Testimonial Given By" ng-model="addbusiness.testimonials.testimonial" required >
-		<span style="color:red" ng-show="myForm.testimonial.$dirty && myForm.testimonial.$invalid">
-		<span ng-show="myForm.testimonial.$error.required">Testimonial Given By is required.</span>
+		<span style="color:red" ng-show="addbusinessForm.testimonial.$dirty && addbusinessForm.testimonial.$invalid">
+			<span ng-show="addbusinessForm.testimonial.$error.required">Testimonial Given By is required.</span>
 		</span>
 	</div>						
 </div>
@@ -23,9 +23,9 @@
 	<label  for="senderemail" class="col-sm-3 control-label">Sender Email</label>	
 	<div class="col-sm-9">
 		<input type="Email" class="form-control" id="senderemail" ng-model="addbusiness.testimonials.senderemail" name="senderemail" placeholder="Enter Email" required >
-		<span style="color:red" ng-show="myForm.senderemail.$dirty && myForm.senderemail.$invalid">
-		<span ng-show="myForm.senderemail.$error.required">Sender Email is required.</span>
-		<span ng-show="myForm.senderemail.$error.email">Invalid Email address.</span>
+		<span style="color:red" ng-show="addbusinessForm.senderemail.$dirty && addbusinessForm.senderemail.$invalid">
+		<span ng-show="addbusinessForm.senderemail.$error.required">Sender Email is required.</span>
+		<span ng-show="addbusinessForm.senderemail.$error.email">Invalid Email address.</span>
 		</span>
 	</div>					
 </div>
@@ -41,8 +41,8 @@
 			<option value="America">America</option>
 			<option value="Belgium">Belgium</option>
 		</select>
-		<span style="color:red" ng-show="myForm.Country.$dirty && myForm.Country.$invalid">
-		<span ng-show="myForm.Country.$error.required">Sender Country is required.</span>
+		<span style="color:red" ng-show="addbusinessForm.Country.$dirty && addbusinessForm.Country.$invalid">
+		<span ng-show="addbusinessForm.Country.$error.required">Sender Country is required.</span>
 		</span>				
 	</div>
 </div>		
@@ -57,8 +57,8 @@
 			<option value="America">America</option>
 			<option value="Belgium">Belgium</option>
 		</select>
-		<span style="color:red" ng-show="myForm.State.$dirty && myForm.State.$invalid">
-		<span ng-show="myForm.State.$error.required">Sender State is required.</span>
+		<span style="color:red" ng-show="addbusinessForm.State.$dirty && addbusinessForm.State.$invalid">
+		<span ng-show="addbusinessForm.State.$error.required">Sender State is required.</span>
 		</span>				
 	</div>
 
@@ -71,8 +71,8 @@
 			<option value="America">America</option>
 			<option value="Belgium">Belgium</option>
 		</select>
-		<span style="color:red" ng-show="myForm.City.$dirty && myForm.City.$invalid">
-		<span ng-show="myForm.City.$error.required">Sender City is required.</span>
+		<span style="color:red" ng-show="addbusinessForm.City.$dirty && addbusinessForm.City.$invalid">
+		<span ng-show="addbusinessForm.City.$error.required">Sender City is required.</span>
 		</span>				
 	</div>
 </div>
@@ -81,8 +81,8 @@
 	<label for="phone" class="col-sm-3 control-label">Senders Phone</label>
 	<div class="col-sm-9">
 		<input type="text" id="phone" name="phone" class="form-control" ng-model="phone" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
-		<span class="help-block" ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
-			<span ng-show="myForm.phone.$error.pattern && (myForm.phone.$dirty || submitted)" style="color:red">Enter a valid Contact Number</span>
+		<span class="help-block" ng-show="addbusinessForm.phone.$dirty && addbusinessForm.phone.$invalid">
+			<span ng-show="addbusinessForm.phone.$error.pattern && (addbusinessForm.phone.$dirty || submitted)" style="color:red">Enter a valid Contact Number</span>
 		</span>
 	</div>
 </div>
@@ -91,23 +91,26 @@
 	<label  for="testi" class="col-sm-3 control-label">Testimonial Title </label>
 	<div class="col-sm-9">
 		<input type="text" id="testi" class="form-control" name="testi" placeholder="Tesimonial Title" ng-model="addbusiness.testimonials.testi" required >
-		<span style="color:red" ng-show="myForm.testi.$dirty && myForm.testi.$invalid">
-		<span ng-show="myForm.testi.$error.required">Testimonial Title is required.</span>
+		<span style="color:red" ng-show="addbusinessForm.testi.$dirty && addbusinessForm.testi.$invalid">
+		<span ng-show="addbusinessForm.testi.$error.required">Testimonial Title is required.</span>
 		</span>
 	</div>					
 </div>
 
 <div class="form-group">
-	<label for="desc" class="col-sm-3 control-label">Testimonial Description</label>
+	<label for="testDescp" class="col-sm-3 control-label">Testimonial Description</label>
 	<div class="col-sm-9">
-		<textarea  class="form-control" id="desc" ng-model="desc" name="desc" placeholder="Enter Testimonial Description" required>
-      </textarea>
-		 <p>{{ 256 - desc.length + " Characters left"}}</p>
-		<span style="color:red" ng-show="myForm.desc.$dirty &&  myForm.desc.$invalid">
-      <span style="color:red" ng-show="myForm.reg.desc.$error.maxlength">
-      Sorry You are Exceeding the Limit</span>
-      <span ng-show="myForm.desc.$error.required">Testimonial Description is required.</span>
-      </span>	
+		<textarea type="text" class="form-control" id="testDescp" name="testDescp" ng-model="testimonial.testDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
+			<p ng-hide="addbusinessForm.testDescp.$error.maxlength">
+				{{ 20 - testimonial.testDescp.length + " Chars left" }}
+			</p>
+			<span style="color:red" ng-show="addbusinessForm.testDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+			<span style="color:red" ng-show="addbusinessForm.testDescp.$dirty && addbusinessForm.testDescp.$invalid">
+				<span ng-show="addbusinessForm.testDescp.$error.required">Testimonial Title is required.</span>
+			</span>
+			<!--<textarea class="form-control"  id="req" name="req" ng-model="templates.req" cols="30" rows="4" ng-maxlength="20" placeholder="Custom Template Requirement"></textarea>
+			<p ng-hide="reqCustTemplate.req.$error.maxlength">{{ 20 - templates.req.length + " Chars left" }}</p>
+			-->
 	</div>
 </div>
 
