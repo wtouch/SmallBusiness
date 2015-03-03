@@ -32,11 +32,15 @@
 		<div class="form-group">
 			<label for="requirement" class="col-sm-2 control-label">Custom Requirement</label>	
 			<div class="col-sm-9">
-				<div ng-hide="requestcustomtempForm.requirement.$error.maxlength">{{ 20 - requirement.length + " Chars left" }}
-				</div>
-					<textarea id="requirement" name="requirement" class="form-control" ng-model="requirement" maxlength="20" placeholder="Your Custom Requirement" rows="2"></textarea>
-					<span style="color:red" ng-show="requestcustomtempForm.requirement.$error.maxlength">
-					Sorry You are Exceeding the Limit</span>
+				<textarea type="text" class="form-control" id="requirement" name="requirement" ng-model="custreq.requirement" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Product Description" ui-tinymce required>
+					</textarea>
+						<p ng-hide="requestcustomtempForm.requirement.$error.maxlength">
+							{{ 256 - custreq.requirement.length + " Chars left" }}
+						</p>
+						<span style="color:red" ng-show="requestcustomtempForm.requirement.$error.maxlength">Sorry You are Exceeding the Limit</span>
+						<span style="color:red" ng-show="requestcustomtempForm.requirement.$dirty && requestcustomtempForm.requirement.$invalid">
+							<span ng-show="requestcustomtempForm.requirement.$error.required">Product Description is required.</span>
+						</span>
 			</div>  
 		</div>					
 		<div class="form-group">
