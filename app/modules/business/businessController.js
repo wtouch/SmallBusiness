@@ -8,6 +8,16 @@ define(['app'], function (app) {
     // This is controller for this view
 	var businessController = function ($scope, $injector, $routeParams,$location)
 	{
+		//method for insert data of add business form{trupti}
+		$scope.insert = function(addbusiness){
+			console.log($scope.addbusiness);
+			$http.post("../server-api/index.php/post/business",$scope.addbusiness)
+			.success(function(response) {
+				alert(response);
+				console.log(response);
+			})
+		}	//end of insert
+		
 		// This code for Date Picker {Vilas}
 		$scope.today = function(){
 			$scope.newsDate = new Date();

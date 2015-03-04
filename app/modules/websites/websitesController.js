@@ -2,16 +2,16 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location'];
+    var injectParams = ['$scope', '$injector','$routeParams','$location','$http'];
 
     // This is controller for this view
-	var websitesController = function ($scope, $injector,$routeParams,$location) {
+	var websitesController = function ($scope, $injector,$routeParams,$location,$http) {
 		console.log("this is mywebsites ctrl ");
 		
 		//insert method for add data{trupti}
-		$scope.insert = function(reqnewsite){
+		$scope.insert = function(){
 			//console.log($scope.user);
-			console.log($scope.reqnewsite);
+			console.log("hello");
 			$http.post("../server-api/index.php/post/website",$scope.reqnewsite)
 			.success(function(response) {
 				//alert(response);

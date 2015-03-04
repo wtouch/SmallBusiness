@@ -8,9 +8,8 @@ define(['app'], function (app) {
 	var templatesController = function ($scope, $injector,$location,$routeParams,$http) {
 		console.log("this is templates ctrl ");
 		
-		//method for insert data
+		//method for insert data{trupti}
 		$scope.insert = function(reqtemp){
-			//console.log($scope.user);
 			console.log($scope.reqtemp);
 			$http.post("../server-api/index.php/post/template",$scope.reqtemp)
 			.success(function(response) {

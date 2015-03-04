@@ -28,9 +28,10 @@
 	}//end get
 	
 	if($reqMethod=="POST"){
-		echo $reqMethod;
-		echo $body;
+		$insert = $db->insert("product", $body);
+		echo json_encode($insert);
 	}
+	
 	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		echo $reqMethod;

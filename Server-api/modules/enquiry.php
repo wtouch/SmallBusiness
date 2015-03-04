@@ -27,10 +27,6 @@
 		}
 	}//end get
 	
-	/*if($reqMethod=="POST"){
-		echo $reqMethod;
-		echo $body;
-	}*/
 	if($reqMethod=="POST"){
 		$insert = $db->insert("enquiry", $body);
 		echo json_encode($insert);

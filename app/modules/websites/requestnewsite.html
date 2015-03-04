@@ -3,7 +3,7 @@
 		<div class="form-group">
 			<label  for="name" class="col-sm-2 control-label">Website Name</label>		
 				<div class="col-sm-9">
-					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="reqnewsite.name" required >
+					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="name" required >
 						<span style="color:red" ng-show="requestsiteForm.name.$dirty && requestsiteForm.name.$invalid">
 						<span ng-show="requestsiteForm.name.$error.required">Website Name is required.</span>
 						</span>
@@ -23,7 +23,7 @@
 		<div class="form-group">
 			<label for="contactno" class="col-md-2 control-label">Contact Number </label>
 				<div class="col-md-9">
-					<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reqnewsite.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+					<input type="text" id="contactno" name="contactno" class="form-control" ng-model="contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 						<span class="help-block" ng-show="requestsiteForm.contactno.$dirty && requestsiteForm.contactno.$invalid">
 						<span ng-show="requestsiteForm.contactno.$error.pattern && (requestsiteForm.contactno.$dirty || submitted)" style="color:red">Enter a valid Contact Number .</span>
 						</span>
@@ -32,7 +32,7 @@
 		<div class="form-group">
 			<label for="product_service_name" class="col-sm-2 control-label">Product/Services</label>		
 				<div class="col-sm-9">
-					<textarea type="text" class="form-control" id="product_service_name" name="product_service_name" ng-model="reqnewsite.product_service_name" cols="30" rows="4" ng-maxlength="20" placeholder="Product/Services" ui-tinymce required></textarea>
+					<textarea type="text" class="form-control" id="product_service_name" name="product_service_name" ng-model="product_service_name" cols="30" rows="4" ng-maxlength="20" placeholder="Product/Services" ui-tinymce required></textarea>
 						<p ng-hide="requestsiteForm.product_service_name.$error.maxlength">
 						{{ 20 - requestsite.product.length + " Chars left" }}
 						</p>
@@ -55,7 +55,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
-				<button type="submit" class="btn btn-success" tooltip="Send Request">Send Request</button>
+				<button type="submit" class="btn btn-success" ng-click="insert()" tooltip="Send Request">Send Request</button>
 				<button type="reset" class="btn btn-danger" tooltip="Cancle">Reset</button>
 			</div>
 		</div>					
