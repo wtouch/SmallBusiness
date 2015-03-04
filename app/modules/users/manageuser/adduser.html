@@ -27,6 +27,13 @@
 					<input type="text" id="contactno" name="contactno" class="form-control" ng-model="adduser.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 					<span class="help-block" ng-show="adduserForm.contactno.$dirty && adduserForm.contactno.$invalid">
 						<span ng-show="adduserForm.contactno.$error.pattern && (adduserForm.contactno.$dirty || submitted)" style="color:red">Enter a valid Contact Number</span>
+=======
+				<label for="contactno" class="col-sm-2 control-label">Phone</label>
+				<div class="col-sm-9">
+					<input type="text" id="contactno" name="contactno" class="form-control" ng-model="adduser.contactno" placeholder="Your Contact No" ng-pattern="/^[799]\d{9}$/" maxlength="10" required>
+					<span style="color:red" ng-show="adduserForm.contactno.$dirty && adduserForm.contactno.$invalid">
+						<span ng-show="adduserForm.contactno.$error.pattern && (adduserForm.contactno.$dirty || submitted)" class="help-block">Enter a valid Contact Number</span>
+>>>>>>> adduser updated
 					</span>
 				</div>						
 			</div>	

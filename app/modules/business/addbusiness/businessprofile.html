@@ -1,9 +1,9 @@
 <div class="form-group">
-	<label  for="compname" class="col-sm-3 control-label">Company Name</label>
+	<label  for="business_name" class="col-sm-3 control-label">Company Name</label>
 	<div class="col-sm-9">
-		<input type="text" id="compname" class="form-control" name="compname" placeholder="Company Name" ng-model="addbusiness.businessprofile.companyname" required >
-		<span style="color:red" ng-show="myForm.compname.$dirty && myForm.compname.$invalid">
-			<span ng-show="myForm.compname.$error.required">Company Name is required.</span>
+		<input type="text" id="business_name" class="form-control" name="business_name" placeholder="Company Name" ng-model="addbusiness.businessprofile.business_name" required >
+		<span style="color:red" ng-show="myForm.business_name.$dirty && myForm.business_name.$invalid">
+			<span ng-show="myForm.business_name.$error.required">Company Name is required.</span>
 		</span>
 	</div>						
 </div>
@@ -24,9 +24,9 @@
 	</div>
 </div>			
 <div class="form-group" >
-	<label  for="clogo" class="col-sm-3 control-label">Company Logo</label>
+	<label  for="business_logo" class="col-sm-3 control-label">Company Logo</label>
 	<div class="col-sm-9">
-		<input type="file" id="clogo" name="clogo"><img src="">	
+		<input type="file" id="business_logo" name="business_logo" ng-model="addbusiness.businessprofile.business_logo"><img src="">	
 	</div>
 </div>	
 <div class="form-group">
@@ -78,7 +78,7 @@
 <div class="form-group">
 	<label for="ownership" class="col-sm-3 control-label" name="ownership" >Ownership Type</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="ownership" id="ownership"  ng-model="ownership" required>		
+		<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.businessprofile.ownership" required>		
 			<option value="">Select Ownership Type</option>
 			<option value="India">India</option>
 			<option value="Australia">Australia</option>
@@ -98,39 +98,39 @@
 			<div class="col-sm-6">
 				<div class="checkbox">
 					<label>
-					<input type="checkbox">Trader
+					<input type="checkbox" name="trader" value="trader" ng-model="addbusiness.businessprofile.trader">Trader
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-					  <input type="checkbox"> Manufacturer
+					  <input type="checkbox" name="manufacturer" value="manufacturer" ng-model="addbusiness.businessprofile.manufacturer"> Manufacturer
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-					  <input type="checkbox"> Retailer
+					  <input type="checkbox" name="retailer" value="retailer" ng-model="addbusiness.businessprofile.retailer"> Retailer
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-					  <input type="checkbox"> Buying House
+					  <input type="checkbox" name="buyinghouse" value="buyinghouse" ng-model="addbusiness.businessprofile.buyinghouse"> Buying House
 					</label>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox">Wholesaler
+						<input type="checkbox" name="wholesaler" value="wholesaler" ng-model="addbusiness.businessprofile.wholesaler">Wholesaler
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox"> Exporter
+						<input type="checkbox" name="exporter" value="exporter" ng-model="addbusiness.businessprofile.exporter"> Exporter
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-					  <input type="checkbox"> Service Provider
+					  <input type="checkbox" name="serviceprovider" value="serviceprovider" ng-model="addbusiness.businessprofile.serviceprovider"> Service Provider
 					</label>
 				</div>
 			</div>						 				
