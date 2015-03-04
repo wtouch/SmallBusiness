@@ -4,8 +4,8 @@
 	$reqMethod = $app->request->getMethod();
 	
 	if($reqMethod=="POST"){
-		echo $reqMethod;
-		echo $body;
+		$insert = $db->insert("users", $body);
+		echo json_encode($insert);
 	}
 	
  ?>

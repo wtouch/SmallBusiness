@@ -3,8 +3,9 @@
 	$db = new dbHelper();
 	$reqMethod = $app->request->getMethod();
 	
-	if($reqMethod=="POST"){
-		echo $reqMethod;
-		echo $body;
+	
+			if($reqMethod=="POST"){
+		$insert = $db->insert("users", $body);
+		echo json_encode($insert);
 	}
  ?>
