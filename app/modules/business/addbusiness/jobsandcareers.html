@@ -15,12 +15,14 @@
 <div class="form-group">
 	<label for="jobDes" class="col-sm-3 control-label">Job Description :</label>
 	<div class="col-sm-9">
-		<textarea class="form-control" name="jobDes" id="jobDes" rows="3" ng-model="jobDes" required ng-minlength="5" ng-maxlength="10" ui-tinymce> </textarea>
-			<span style="color:red" ng-show="myForm.jobDes.$dirty && myForm.jobDes.$invalid">
-				<span ng-show="myForm.jobDes.$error.required">Plz Enter Description for Jobs</span>
-				<span ng-show="myForm.jobDes.$error.minlength">Plz Enter minimum 5 character</span>
-				<span ng-show="myForm.jobDes.$error.maxlength">You have exceed limit</span>
-			</span>		
+		<textarea type="text" class="form-control" id="jobDes" name="jobDes" ng-model="jobs.jobDes" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Job Description" ui-tinymce required></textarea>
+			<p ng-hide="addbusinessForm.jobDes.$error.maxlength">
+				{{ 20 - jobs.jobDes.length + " Chars left" }}
+			</p>
+			<span style="color:red" ng-show="addbusinessForm.jobDes.$error.maxlength">Sorry You are Exceeding the Limit</span>
+			<span style="color:red" ng-show="addbusinessForm.jobDes.$dirty && addbusinessForm.jobDes.$invalid">
+				<span ng-show="addbusinessForm.jobDes.$error.required">Job Description is required.</span>
+			</span>	
 	</div>
 </div>
 <div class="form-group">

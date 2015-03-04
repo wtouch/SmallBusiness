@@ -1,6 +1,8 @@
-<div class="row bottomspace">
-	<div class="col-md-12">
+<div class="row">
+	<div class="col-sm-12">
+	<div class="bottomspace">
 		<div class="product">
+			<h3 class="col-sm-offset-2 col-sm-9">Add New Services</h3>
 			<form class="form-horizontal" role="form" name="addserviceForm" novalidate="novalidate">
 				<div class="form-group">
 					<label for="serviceName" class="col-sm-2 control-label">Service Name :</label>
@@ -33,13 +35,17 @@
 					<label class="col-sm-2 control-label" for="servDescp">Service Description :
 					</label>
 					<div  class="col-sm-9">
-						<textarea id="servDescp" name="servDescp" ng-model="service.servDescp" rows="3" required maxlength="30" class="form-control" ui-tinymce>
+						<textarea type="text" class="form-control" id="servDescp" name="servDescp" ng-model="addserv.servDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Service Description" ui-tinymce required>
 						</textarea>
-						<div>{{ 20 - servDescp.length + " Chars left" }}</div>
-						<span style="color:red" ng-show="form1.servDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+							<p ng-hide="addserviceForm.servDescp.$error.maxlength">
+								{{ 20 - addserv.servDescp.length + " Chars left" }}
+							</p>
+							<span style="color:red" ng-show="addserviceForm.servDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+							<span style="color:red" ng-show="addserviceForm.servDescp.$dirty && addserviceForm.servDescp.$invalid">
+								<span ng-show="addserviceForm.servDescp.$error.required">Service Description is required.</span>
+							</span>
 					</div>
 				</div>
-				
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-9">
 						<a href="#/products/products" class="btn btn-default btn-success" title="submit">
@@ -48,5 +54,6 @@
 				</div>
 			</form>
 		</div>
+	</div>
 	</div>
 </div>

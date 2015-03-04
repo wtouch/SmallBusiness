@@ -1,22 +1,27 @@
 <div class="form-group">
 	<label for="keyDes" class="col-sm-3 control-label">Key Description of your Company (Visible of your website and Small Busi search)</label>
 	<div class="col-sm-9">
-		<textarea class="form-control" name="keyDes" id="keyDes" rows="3" ui-tinymce ng-model="keyDes" required ng-minlength="1" ng-maxlength="256"></textarea>
-			<span style="color:red" ng-show="myForm.keyDes.$dirty && myForm.keyDes.$invalid">
-				<span ng-show="myForm.keyDes.$error.required">Plz Enter Description for Jobs</span>
-				<span ng-show="myForm.keyDes.$error.minlength">Plz Enter minimum 5 character</span>
-				<span ng-show="myForm.keyDes.$error.maxlength">You have exceed limit</span>
-			</span>		
+		<textarea type="text" class="form-control" id="keyDescp" name="keyDescp" ng-model="buzdesc.keyDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Key Description of company" ui-tinymce required>
+		</textarea>
+			<p ng-hide="addbusinessForm.keyDescp.$error.maxlength">
+				{{ 20 - buzdesc.keyDescp.length + " Chars left" }}
+			</p>
+			<span style="color:red" ng-show="addbusinessForm.keyDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+			<span style="color:red" ng-show="addbusinessForm.keyDescp.$dirty && addbusinessForm.keyDescp.$invalid">
+				<span ng-show="addbusinessForm.keyDescp.$error.required">Key Description of company is required.</span>
+			</span>	
 	</div>
 </div>  
 <div class="form-group">
 	<label for="detailDes" class="col-sm-3 control-label">Detailed Description of your Website Home Page</label>
 	<div class="col-sm-9">
-		<textarea class="form-control" name="detailDes" id="detailDes" rows="3" ui-tinymce ng-model="detailDes" required ng-minlength="1" ng-maxlength="256"></textarea><br>
-			<span style="color:red" ng-show="myForm.detailDes.$dirty && myForm.detailDes.$invalid">
-				<span ng-show="myForm.detailDes.$error.required">Plz Enter Description for Jobs</span>
-				<span ng-show="myForm.detailDes.$error.minlength">Plz Enter minimum 5 character</span>
-				<span ng-show="myForm.detailDes.$error.maxlength">You have exceed limit</span>
+		<textarea type="text" class="form-control" id="detailDescp" name="detailDescp" ng-model="buzdesc.detailDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Detailed Description of website" ui-tinymce required></textarea>
+			<p ng-hide="addbusinessForm.detailDescp.$error.maxlength">
+				{{ 20 - buzdesc.detailDescp.length + " Chars left" }}
+			</p>
+			<span style="color:red" ng-show="addbusinessForm.detailDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+			<span style="color:red" ng-show="addbusinessForm.detailDescp.$dirty && addbusinessForm.detailDescp.$invalid">
+				<span ng-show="addbusinessForm.detailDescp.$error.required">Detailed Description of website is required.</span>
 			</span>		
 	</div>
 </div>  

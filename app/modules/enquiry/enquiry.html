@@ -1,8 +1,8 @@
 <div class="main-content">	 	
 	<ng-include src="'modules/component/toolbar.html'"></ng-include>
 		<div class="row">
-			<div class="col-md-3" ng-include="'modules/enquiry/sidebar.html'"></div>
-			<div class="col-md-9">
+			<div class="col-sm-3" ng-include="'modules/enquiry/sidebar.html'"></div>
+			<div class="col-sm-9">
 				<ng-include src="'modules/enquiry/toolbars.html'"></ng-include>
 				 <!--This is conditional include if not mailId set in url this html includes in view 
 				
@@ -16,11 +16,9 @@
 				
 				<ng-include ng-if="mailId=='sentmail'" src="'modules/enquiry/sentmail.html'"></ng-include> 
 				
-				<ng-include ng-if="mailId=='trash'" src="'modules/enquiry/trash.html'"></ng-include> 
+				<ng-include ng-if="mailId=='delete'" src="'modules/enquiry/delete.html'"></ng-include> 
 				
 				<ng-include ng-if="mailId=='inbox'" src="'modules/enquiry/mails.html'"></ng-include>
-				
-				
 			</div>
 		</div>
 </div>

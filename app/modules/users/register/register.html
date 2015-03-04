@@ -19,11 +19,14 @@
 				<div class="form-group">
 					<label for="Address" class="col-md-2 control-label">Address*</label>
 					<div class="col-md-9">
-						<textarea  class="form-control" id="Address" name="address" ng-model="reg.address" placeholder="Enter address" required>
-						</textarea>
-						<span style="color:red" ng-show="registerForm.Address.$dirty && 	registerForm.Address.$invalid">
-								<span ng-show="registerForm.Address.$error.required">Address is required.</span>
-						</span>
+						<textarea  class="form-control" id="Address" ng-model="Address" name="Address" placeholder="Enter Address" ng-maxlength="75" required>
+								</textarea>
+								 <p ng-hide="registerForm.Address.$error.maxlength">{{ 75 - Address.length + " Characters left"}}</p>
+								<span style="color:red" ng-show="registerForm.Address.$dirty &&  registerForm.Address.$invalid">
+									<span style="color:red" ng-show="registerForm.Address.$error.maxlength">
+										Sorry You are Exceeding the Limit</span>
+									<span ng-show="registerForm.Address.$error.required">Address is required.</span>
+								</span>
 					</div>						
 				</div>		
 				<div class="form-group">

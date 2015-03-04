@@ -21,12 +21,14 @@
 <div class="form-group">
 	<label for="infraDesc" class="col-sm-3 control-label">Infrastucture Description :</label>
 	<div class="col-sm-9">
-		<textarea id="infraDesc" name="infraDesc" class="form-control" rows="3" ng-model="infraDesc" required ng-minlength="5" ng-maxlength="10" ui-tinymce></textarea>
-			<span style="color:red" ng-show="myForm.infraDesc.$dirty && myForm.infraDesc.$invalid">
-				<span ng-show="myForm.infraDesc.$error.required" class="required">Plz Enter Description for Infrastucture</span>
-				<span ng-show="myForm.infraDesc.$error.minlength">Plz Enter minimum 5 character</span>
-				<span ng-show="myForm.infraDesc.$error.maxlength">You have exceed limit</span>
-			</span>
+		<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastruct.infraDesc" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
+			<p ng-hide="addbusinessForm.infraDesc.$error.maxlength">
+				{{ 20 - infrastruct.infraDesc.length + " Chars left" }}
+			</p>
+			<span style="color:red" ng-show="addbusinessForm.infraDesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
+			<span style="color:red" ng-show="addbusinessForm.infraDesc.$dirty && addbusinessForm.infraDesc.$invalid">
+				<span ng-show="addbusinessForm.infraDesc.$error.required">Infrastucture Description is required.</span>
+			</span>	
 	</div>
 </div>
 <div class="form-group">
