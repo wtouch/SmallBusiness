@@ -46,9 +46,9 @@
 					</div>
 						
 					<div class="form-group">
-						<label for="Address" class="col-sm-3 control-label">Address</label>
+						<label for="address" class="col-sm-3 control-label">Address</label>
 						<div class="col-sm-9">
-							<textarea type="text" class="form-control" id="address" name="address" ng-model="contact.address" cols="30" rows="4" ng-maxlength="75" placeholder="Enter Address"  required></textarea>
+							<textarea type="text" class="form-control" id="address" name="address" ng-model="contact.address" cols="30" rows="4" ng-maxlength="75" placeholder="Enter address"  required></textarea>
 							<p ng-hide="addbusinessForm.address.$error.maxlength">
 								{{ 75 - contact.address.length + " Chars left" }}
 							</p>
@@ -82,7 +82,7 @@
 					<div class="form-group">
 						<label for="telephone1" class="col-sm-3 control-label">Telephone</label>
 						<div class="col-sm-9">
-							<input type="text" id="telephone1" name="telephone1" class="form-control" ng-model="telephone1" placeholder="Your Contact No" ng-pattern="/^[\d\.\-]+$/" maxlength="12" required>
+							<input type="text" id="telephone1" name="telephone1" class="form-control" ng-model="addbusiness.contactprofile.telephone1" placeholder="Your Contact No" ng-pattern="/^[\d\.\-]+$/" maxlength="12" required>
 							<span class="help-block" ng-show="addbusinessForm.telephone1.$dirty && addbusinessForm.telephone1.$invalid">
 								<span ng-show="addbusinessForm.telephone1.$error.pattern && (addbusinessForm.telephone1.$dirty || submitted)" style="color:red">Enter a valid Contact Number</span>
 							</span>
@@ -100,7 +100,7 @@
 					</div>
 						
 					<div class="form-group">
-						<label  for="fax" class="col-sm-3 control-label">Fax1</label>
+						<label  for="fax" class="col-sm-3 control-label">Fax</label>
 						<div class="col-sm-9">
 							<input type="text" id="fax" class="form-control" name="fax" ng-model="addbusiness.contactprofile.fax" placeholder="Fax1" required >
 							<span style="color:red" ng-show="addbusinessForm.fax.$dirty && addbusinessForm.fax.$invalid">
@@ -111,7 +111,7 @@
 					<div class="form-group">	
 							<label  for="email" class="col-sm-3 control-label">Email</label>
 							<div class="col-sm-9">
-								<input type="Email" class="form-control" id="email" ng-model="login.email" name="email" placeholder="Enter Email" required >
+								<input type="Email" class="form-control" id="email" ng-model="addbusiness.contactprofile.email" name="email" placeholder="Enter Email" required >
 								<span style="color:red" ng-show="addbusinessForm.email.$dirty && addbusinessForm.email.$invalid">
 								<span ng-show="addbusinessForm.email.$error.required">Email is required.</span>
 								<span ng-show="addbusinessForm.email.$error.email">Invalid Email address.</span>
@@ -130,18 +130,18 @@
 						</div>	
 					
 					<div class="form-group">
-						<label  for="indiamart" class="col-sm-3 control-label">Indiamart Catalog</label>	
+						<label  for="catalog" class="col-sm-3 control-label">Indiamart Catalog</label>	
 						<div class="col-sm-9">
-							<input type="text" id="indiamart" class="form-control" name="indiamart" ng-model="addbusiness.contactprofile.indiamart" placeholder="Indiamart Ctatalog" required >
-							<span style="color:red" ng-show="addbusinessForm.indiamart.$dirty && addbusinessForm.indiamart.$invalid">
-							<span ng-show="addbusinessForm.indiamart.$error.required">Indiamart Catalog Required.</span>
+							<input type="text" id="catalog" class="form-control" name="catalog" ng-model="addbusiness.contactprofile.catalog" placeholder="Indiamart Ctatalog" required >
+							<span style="color:red" ng-show="addbusinessForm.catalog.$dirty && addbusinessForm.catalog.$invalid">
+							<span ng-show="addbusinessForm.catalog.$error.required">Indiamart Catalog Required.</span>
 							</span>
 						</div>						
 					</div>
 					<div class="form-group">
 						<label for="Web" class="col-sm-3 control-label">Website </label>
 						<div class="col-sm-9">
-							<input type="url" class="form-control" id="Web" ng-model="Web" name="Web" placeholder="Enter Website " required>
+							<input type="url" class="form-control" id="Web" ng-model="addbusiness.contactprofile.Web" name="Web" placeholder="Enter Website " required>
 							<span style="color:red" ng-show="addbusinessForm.Web.$dirty && 	addbusinessForm.Web.$invalid">
 								<span ng-show="addbusinessForm.Web.$error.required">Website  is required.</span>
 								<span ng-show="addbusinessForm.Web.$error.url">Invalid Web Site.</span>
