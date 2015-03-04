@@ -1,5 +1,4 @@
 
-
 'use strict';
 
 define(['app'], function (app) {
@@ -10,7 +9,7 @@ define(['app'], function (app) {
 		console.log("this is mywebsites ctrl ");
 		$scope.websitePart = $routeParams.websitePart; 
 		console.log($scope.websitePart);
-		/*For display by default templ.html page*/
+		/*For display by default websitelist.html page*/
 		if(!$routeParams.websitePart) {
 		$location.path('/dashboard/websites/websiteslist');
 		}
@@ -24,18 +23,18 @@ define(['app'], function (app) {
 		$scope.reqestSiteCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
-
+	
 		$scope.pageChanged = function() {
 			//$log.log('Page changed to: ' + $scope.currentPage);
 			//get request for website list
-			$http.get("../server-api/index.php/properties/"+$scope.webListCurrentPage+"/"+$scope.pageItems)
+			$http.get("../server-api/index.php/getsingle/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems)
 			.success(function(response) { //fuction for wesitelist response
 				$scope.websites.webListCurrentPage = response.webListCurrentPage;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);
 			});
 			//get request for requestedSite list
-			$http.get("../server-api/index.php/properties/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems)
+			$http.get("../server-api/index.php/getsingle/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems)
 			.success(function(response) { //fuction for requestedsite list response
 				$scope.websites.reqestSiteCurrentPage = response.reqestSiteCurrentPage;
 				//$scope.totalRecords = response.totalRecords;
