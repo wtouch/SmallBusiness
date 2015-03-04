@@ -7,7 +7,7 @@
 		echo $reqMethod;
 		if(isset($id)){
 			$where['id'] = $id;
-			$data = $db->select("2_real_property", $where);
+			$data = $db->select("website", $where);
 			echo json_encode($data);
 			
 		}else{
@@ -15,7 +15,7 @@
 			echo $records;
 			$where=[];
 			$limit = $pageNo.",".$records;
-			$data = $db->select("2_real_property", $where, $limit);
+			$data = $db->select("website", $where, $limit);
 			echo json_encode($data);
 		}
 	}
