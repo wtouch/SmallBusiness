@@ -2,11 +2,22 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$location','$routeParams'];
+    var injectParams = ['$scope', '$injector','$location','$routeParams','$http'];
 
     // This is controller for this view
-	var templatesController = function ($scope, $injector,$location,$routeParams) {
+	var templatesController = function ($scope, $injector,$location,$routeParams,$http) {
 		console.log("this is templates ctrl ");
+		
+		//method for insert data
+		$scope.insert = function(reqtemp){
+			//console.log($scope.user);
+			console.log($scope.reqtemp);
+			$http.post("../server-api/index.php/post/template",$scope.reqtemp)
+			.success(function(response) {
+				//alert(response);
+				//console.log(response);
+			})
+		}	//end of insert
 		
 		$scope.tempPart = $routeParams.tempPart; 
 		

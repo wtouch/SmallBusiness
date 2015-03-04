@@ -7,6 +7,18 @@ define(['app'], function (app) {
     // This is controller for this view
 	var websitesController = function ($scope, $injector,$routeParams,$location) {
 		console.log("this is mywebsites ctrl ");
+		
+		//insert method for add data{trupti}
+		$scope.insert = function(reqnewsite){
+			//console.log($scope.user);
+			console.log($scope.reqnewsite);
+			$http.post("../server-api/index.php/post/website",$scope.reqnewsite)
+			.success(function(response) {
+				//alert(response);
+				console.log(response);
+			})
+		}	//end of insert
+	
 		$scope.websitePart = $routeParams.websitePart; 
 		console.log($scope.websitePart);
 		/*For display by default websitelist.html page*/

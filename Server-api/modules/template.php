@@ -28,8 +28,8 @@
 	}//end get
 	
 	if($reqMethod=="POST"){
-		echo $reqMethod;
-		echo $body;
+		$insert = $db->insert("template", $body);
+		echo json_encode($insert);
 	}
 	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){

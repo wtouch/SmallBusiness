@@ -8,13 +8,12 @@ define(['app'], function (app) {
 	var registerController = function ($scope,$injector,$http) {
 		console.log("this is register ctrl");
 		//templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/users/register/register.html';
-		$scope.insert = function(){
+		$scope.insert = function(reg){
 			//console.log($scope.user);
 			console.log($scope.reg);
 			$http.post("../server-api/index.php/post/user",$scope.reg)
 			.success(function(response) {
 				//alert(response);
-				//$scope.reset();
 				console.log(response);
 			})
 		}	
