@@ -4,19 +4,19 @@
 			<label for="template_name" class="col-sm-2 control-label">Template Name</label>		
 			<div class="col-sm-9">
 				<input type="text" id="template_name" class="form-control" name="template_name" placeholder="Name" ng-model="reqtemp.template_name" required >
-					<span style="color:red" ng-show="requestcustomtempForm.template_name.$dirty && requestcustomtempForm.template_name.$invalid">
-					<span ng-show="requestcustomtempForm.template_name.$error.required">Template Name is required.</span>
-					</span>
+				<span class="help-block" ng-show="requestcustomtempForm.template_name.$dirty && requestcustomtempForm.template_name.$invalid">
+					<span class="text-danger" ng-show="requestcustomtempForm.template_name.$error.required">Template Name is required.</span>
+				</span>
 			</div>						
 		</div>
 		<div class="form-group">	
 			<label  for="domain_name" class="col-sm-2 control-label">Domain Name</label>
 			<div class="col-sm-9">
 				<input type="url" class="form-control" id="domain_name" ng-model="reqtemp.domain_name" name="domain_name" placeholder="Enter Domain " required>
-					<span style="color:red" ng-show="requestcustomtempForm.domain_name.$dirty && requestcustomtempForm.domain_name.$invalid">
+				<span class="help-block" ng-show="requestcustomtempForm.domain_name.$dirty && requestcustomtempForm.domain_name.$invalid">
 					<span ng-show="requestcustomtempForm.domain_name.$error.required">Domain  is required.</span>
 					<span ng-show="requestcustomtempForm.domain_name.$error.url">Invalid Web Site.</span>
-					</span>
+				</span>
 					<span>e.g http://www.google.com</span>
 			</div>						
 		</div>	
@@ -24,23 +24,21 @@
 			<label for="contactno" class="col-sm-2 control-label">Contact Number</label>
 			<div class="col-sm-9">
 				<input type="text" id="contactno" name="contactno" class="form-control" ng-model="contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
-					<span class="help-block" ng-show="requestcustomtempForm.contactno.$dirty && requestcustomtempForm.contactno.$invalid">
-					<span ng-show="requestcustomtempForm.contactno.$error.pattern && (requestcustomtempForm.contactno.$dirty || submitted)" style="color:red">Enter a valid contact Number.</span>
-					</span>
+				<span class="help-block" ng-show="requestcustomtempForm.contactno.$dirty && requestcustomtempForm.contactno.$invalid">
+					<span ng-show="requestcustomtempForm.contactno.$error.pattern && (requestcustomtempForm.contactno.$dirty || submitted)">Enter a valid contact Number.</span>
+				</span>
 			</div>						
 		</div>
 		<div class="form-group">
 			<label for="requirement" class="col-sm-2 control-label">Custom Requirement</label>	
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="requirement" name="requirement" ng-model="requirement" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Product Description" ui-tinymce required>
-					</textarea>
-						<p ng-hide="requestcustomtempForm.requirement.$error.maxlength">
-							{{ 256 - reqtemp.requirement.length + " Chars left" }}
-						</p>
-						<span style="color:red" ng-show="requestcustomtempForm.requirement.$error.maxlength">Sorry You are Exceeding the Limit</span>
-						<span style="color:red" ng-show="requestcustomtempForm.requirement.$dirty && requestcustomtempForm.requirement.$invalid">
-							<span ng-show="requestcustomtempForm.requirement.$error.required">Product Description is required.</span>
-						</span>
+				<textarea type="text" class="form-control" id="requirement" name="requirement" ng-model="requirement" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Product Description" ui-tinymce required></textarea>
+				<p ng-hide="requestcustomtempForm.requirement.$error.maxlength">{{ 256 - reqtemp.requirement.length + " Chars left" }}
+				</p>
+				<span class="help-block" ng-show="requestcustomtempForm.requirement.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span ng-show="requestcustomtempForm.requirement.$dirty && requestcustomtempForm.requirement.$invalid">
+					<span ng-show="requestcustomtempForm.requirement.$error.required">Product Description is required.</span>
+				</span>
 			</div>  
 		</div>					
 		<div class="form-group">
