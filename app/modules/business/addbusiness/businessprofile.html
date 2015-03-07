@@ -2,8 +2,8 @@
 	<label  for="business_name" class="col-sm-3 control-label">Company Name</label>
 	<div class="col-sm-9">
 		<input type="text" id="business_name" class="form-control" name="business_name" placeholder="Company Name" ng-model="addbusiness.businessprofile.business_name" required >
-		<span style="color:red" ng-show="myForm.business_name.$dirty && myForm.business_name.$invalid">
-			<span ng-show="myForm.business_name.$error.required">Company Name is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.business_name.$dirty && addbusinessForm.business_name.$invalid">
+			<span ng-show="addbusinessForm.business_name.$error.required" class="text-danger">Company Name is required.</span>
 		</span>
 	</div>						
 </div>
@@ -18,8 +18,8 @@
 			<option value="America">America</option>
 			<option value="Belgium">Belgium</option>
 		</select>
-		<span style="color:red" ng-show="myForm.primary.$dirty && myForm.primary.$invalid">
-			<span ng-show="myForm.primary.$error.required">Primary Business Type is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.primary.$dirty && addbusinessForm.primary.$invalid">
+			<span ng-show="addbusinessForm.primary.$error.required" class="text-danger">Primary Business Type is required.</span>
 		</span>				
 	</div>
 </div>			
@@ -30,11 +30,11 @@
 	</div>
 </div>	
 <div class="form-group">
-	<label  for="catalog" class="col-sm-3 control-label">Small Business Catalog</label>
+	<label  for="buzcatalog" class="col-sm-3 control-label">Small Business Catalog</label>
 	<div class="col-sm-9">
-		<input type="text" id="catalog" class="form-control" name="catalog" placeholder="Small Business Catalog" ng-model="addbusiness.businessprofile.catalog" required >
-		<span style="color:red" ng-show="myForm.catalog.$dirty && myForm.catalog.$invalid">
-		<span ng-show="myForm.catalog.$error.required">Small Business Catalog is required.</span>
+		<input type="text" id="buzcatalog" class="form-control" name="buzcatalog" placeholder="Small Business Catalog" ng-model="addbusiness.businessprofile.catalog" required >
+		<span class="help-block" ng-show="addbusinessForm.buzcatalog.$dirty && addbusinessForm.buzcatalog.$invalid">
+		<span ng-show="addbusinessForm.buzcatalog.$error.required" class="text-danger">Small Business Catalog is required.</span>
 		</span>
 	</div>						
 </div>
@@ -42,9 +42,9 @@
 	<label for="Website" class="col-sm-3 control-label">Alternate Website </label>
 	<div class="col-sm-9">
 		<input type="url" class="form-control" id="Website" ng-model="reg.website" name="Website" placeholder="Enter Website " required>
-		<span style="color:red" ng-show="myForm.Website.$dirty && 	myForm.Website.$invalid">
-			<span ng-show="myForm.Website.$error.required">Website  is required.</span>
-			<span ng-show="myForm.Website.$error.url">Invalid Web Site.</span>
+		<span class="help-block" ng-show="addbusinessForm.Website.$dirty && 	addbusinessForm.Website.$invalid">
+			<span ng-show="addbusinessForm.Website.$error.required" class="text-danger">Website  is required.</span>
+			<span ng-show="addbusinessForm.Website.$error.url" class="text-danger">Invalid Web Site.</span>
 		</span>
 		<span>e.g http://www.google.com</span>
 	</div>						
@@ -61,8 +61,8 @@
 			<option value="America">America</option>
 			<option value="Belgium">Belgium</option>
 		</select>
-		<span style="color:red" ng-show="myForm.year.$dirty && myForm.year.$invalid">
-		<span ng-show="myForm.year.$error.required">Year Of Establishment is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.year.$dirty && addbusinessForm.year.$invalid">
+		<span ng-show="addbusinessForm.year.$error.required" class="text-danger">Year Of Establishment is required.</span>
 		</span>				
 	</div>
 </div>	
@@ -70,8 +70,8 @@
 	<label  for="employees" class="col-sm-3 control-label">No. Of Employees</label>	
 	<div class="col-sm-9">
 		<input type="number" id="employees" class="form-control" name="employees" placeholder="No. Of Employees" ng-model="addbusiness.businessprofile.employees" required >
-		<span style="color:red" ng-show="myForm.employees.$dirty && myForm.employees.$invalid">
-		<span ng-show="myForm.employees.$error.required">No. Of Employees is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.employees.$dirty && addbusinessForm.employees.$invalid">
+		<span ng-show="addbusinessForm.employees.$error.required" class="text-danger">No. Of Employees is required.</span>
 		</span>
 	</div>						
 </div>
@@ -86,8 +86,8 @@
 			<option value="America">America</option>
 			<option value="Belgium">Belgium</option>
 		</select>
-		<span style="color:red" ng-show="myForm.ownership.$dirty && myForm.ownership.$invalid">
-		<span ng-show="myForm.ownership.$error.required">Ownership Type is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.ownership.$dirty && addbusinessForm.ownership.$invalid">
+		<span ng-show="addbusinessForm.ownership.$error.required" class="text-danger">Ownership Type is required.</span>
 		</span>				
 	</div>
 </div>	

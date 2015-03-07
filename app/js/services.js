@@ -230,9 +230,15 @@ define(['app'], function (app) {
 			obj.setBase = function(path){
 				serviceBase = path;
 			};
-			obj.get = function (q) {
-				return $http.get(serviceBase + q).then(function (results) {
+			obj.get = function (q, where) {
+				console.log(where);
+				return $http({
+				url: serviceBase + q,
+				method: "GET",
+				params: where
+				}).then(function (results) {
 					return results.data;
+					
 				});
 			};
 			obj.post = function (q, object) {

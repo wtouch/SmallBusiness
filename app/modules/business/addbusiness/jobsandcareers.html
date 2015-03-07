@@ -7,8 +7,8 @@
 	<label for="jobTitle" class="col-sm-3 control-label">Job Title :</label>
 	<div class="col-sm-9">
 		<input type="text" class="form-control" id="jobTitle" name="jobTitle" ng-model="jobTitle" required>
-		<span style="color:red" ng-show="myForm.jobTitle.$dirty && myForm.jobTitle.$invalid">
-			<span ng-show="myForm.jobTitle.$error.required">Plz Enter Title for Jobs</span>
+		<span class="help-block" ng-show="addbusinessForm.jobTitle.$dirty && addbusinessForm.jobTitle.$invalid">
+			<span ng-show="addbusinessForm.jobTitle.$error.required" class="text-danger">Plz Enter Title for Jobs</span>
 		</span>
 	</div>
 </div>
@@ -19,9 +19,10 @@
 			<p ng-hide="addbusinessForm.jobDes.$error.maxlength">
 				{{ 20 - jobs.jobDes.length + " Chars left" }}
 			</p>
-			<span style="color:red" ng-show="addbusinessForm.jobDes.$error.maxlength">Sorry You are Exceeding the Limit</span>
-			<span style="color:red" ng-show="addbusinessForm.jobDes.$dirty && addbusinessForm.jobDes.$invalid">
-				<span ng-show="addbusinessForm.jobDes.$error.required">Job Description is required.</span>
+			
+			<span class="help-block" ng-show="addbusinessForm.jobDes.$dirty && addbusinessForm.jobDes.$invalid">
+				<span  ng-show="addbusinessForm.jobDes.$error.maxlength" class="text-danger">Sorry You are Exceeding the Limit</span>
+				<span ng-show="addbusinessForm.jobDes.$error.required" class="text-danger">Job Description is required.</span>
 			</span>	
 	</div>
 </div>

@@ -3,21 +3,24 @@
 		<a href="#" class="btn btn-default btn-primary pull-right" title="Add more Infrastucture">Add New Infrastucture</a>
 	</div>
 </div>
+
 <div class="form-group">
-	<label for="infraHead" class="col-sm-3 control-label">Infrastucture Heading :</label>
+	<label for="infraHead" class="col-sm-3 control-label" name="infraHead" >Infrastucture Heading</label>
 	<div class="col-sm-9">
-		<select class="form-control" id="infraHead" ng-model="infraHead" required>
-			<option value="Select Heading">Select Heading</option>
-			<option value="abc">abc</option>
-			<option value="xyz">xyz</option>
-			<option value="pqr">pqr</option>
-			<option value="stu">stu</option>
+		<select class="form-control" name="infraHead" id="infraHead"  ng-model="infraHead" required>		
+			<option value="">Select Heading</option>
+			<option value="India">India</option>
+			<option value="Australia">Australia</option>
+			<option value="China">China</option>
+			<option value="America">America</option>
+			<option value="Belgium">Belgium</option>
 		</select>
-		<span style="color:red" ng-show="myForm.infraHead.$dirty && myForm.infraHead.$invalid">
-			<span ng-show="myForm.infraHead.$error.required" class="required">Plz Select Infrastucture Title</span>
-		</span>
+		<span class="help-block" ng-show="addbusinessForm.infraHead.$dirty && addbusinessForm.infraHead.$invalid">
+		<span ng-show="addbusinessForm.infraHead.$error.required" class="text-danger">Sender Country is required.</span>
+		</span>				
 	</div>
-</div>
+</div>	
+
 <div class="form-group">
 	<label for="infraDesc" class="col-sm-3 control-label">Infrastucture Description :</label>
 	<div class="col-sm-9">
@@ -25,9 +28,10 @@
 			<p ng-hide="addbusinessForm.infraDesc.$error.maxlength">
 				{{ 20 - infrastruct.infraDesc.length + " Chars left" }}
 			</p>
-			<span style="color:red" ng-show="addbusinessForm.infraDesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
-			<span style="color:red" ng-show="addbusinessForm.infraDesc.$dirty && addbusinessForm.infraDesc.$invalid">
-				<span ng-show="addbusinessForm.infraDesc.$error.required">Infrastucture Description is required.</span>
+			
+			<span class="help-block" ng-show="addbusinessForm.infraDesc.$dirty && addbusinessForm.infraDesc.$invalid">
+				<span class="text-danger" ng-show="addbusinessForm.infraDesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				<span ng-show="addbusinessForm.infraDesc.$error.required" class="text-danger">Infrastucture Description is required.</span>
 			</span>	
 	</div>
 </div>

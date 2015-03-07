@@ -5,44 +5,50 @@
 			<h3 class="col-sm-offset-2 col-sm-9">Add New Services</h3>
 			<form class="form-horizontal" role="form" name="addserviceForm" novalidate="novalidate">
 				<div class="form-group">
-					<label for="serviceName" class="col-sm-2 control-label">Service Name :</label>
+					<label for="serviceName" class="col-sm-2 control-label">Service Name </label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control" id="serviceName" name="serviceName" ng-model="service.serviceName" placeholder="Enter Service Name here" required>
-							<span style="color:red" ng-show="addserviceForm.serviceName.$dirty && addserviceForm.serviceName.$invalid">
-								<span ng-show="addserviceForm.serviceName.$error.required">Service name is required</span>
+							<span class="help-block" ng-show="addserviceForm.serviceName.$dirty && addserviceForm.serviceName.$invalid">
+								<span ng-show="addserviceForm.serviceName.$error.required" class="text-danger">Service name is required</span>
 							</span>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="servicelogo" class="col-sm-2 control-label">Select Image :</label>
+					<label for="servicelogo" class="col-sm-2 control-label">Select Image </label>
 					<div class="col-sm-9">
 						<input type="file" id="servicelogo" name="servicelogo"><img src="">
 					</div>
 				</div>
+				
 				<div class="form-group">
-					<label for="serviceGroup" class="col-sm-2 control-label">Service Group :</label>
+					<label for="serviceGroup" class="col-sm-2 control-label" name="serviceGroup" >Service Group</label>
 					<div class="col-sm-9">
-						<select class="form-control" id="serviceGroup" ng-model="service.serviceGroup" required>
-							<option value="Group Items">Select Heading</option>
-							<option value="abc">abc</option>
-							<option value="xyz">xyz</option>
-							<option value="pqr">pqr</option>
-							<option value="stu">stu</option>
+						<select class="form-control" name="serviceGroup" id="serviceGroup"  ng-model="serviceGroup" required>		
+							<option value="">Select Service Group </option>
+							<option value="India">India</option>
+							<option value="Australia">Australia</option>
+							<option value="China">China</option>
+							<option value="America">America</option>
+							<option value="Belgium">Belgium</option>
 						</select>
+						<span class="help-block" ng-show="addserviceForm.serviceGroup.$dirty && addserviceForm.serviceGroup.$invalid">
+						<span ng-show="addserviceForm.serviceGroup.$error.required" class="text-danger">Sender Service Group </span>
+						</span>				
 					</div>
-				</div>
+				</div>	
+							
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="servDescp">Service Description :
+					<label class="col-sm-2 control-label" for="servDescp">Service Description 
 					</label>
 					<div  class="col-sm-9">
 						<textarea type="text" class="form-control" id="servDescp" name="servDescp" ng-model="addserv.servDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Service Description" ui-tinymce required>
 						</textarea>
 							<p ng-hide="addserviceForm.servDescp.$error.maxlength">
 								{{ 20 - addserv.servDescp.length + " Chars left" }}
-							</p>
-							<span style="color:red" ng-show="addserviceForm.servDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
-							<span style="color:red" ng-show="addserviceForm.servDescp.$dirty && addserviceForm.servDescp.$invalid">
-								<span ng-show="addserviceForm.servDescp.$error.required">Service Description is required.</span>
+							</p>							
+							<span class="help-block" ng-show="addserviceForm.servDescp.$dirty && addserviceForm.servDescp.$invalid">
+								<span class="text-danger" ng-show="addserviceForm.servDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+								<span ng-show="addserviceForm.servDescp.$error.required" class="text-danger"> Service Description is required.</span>
 							</span>
 					</div>
 				</div>
