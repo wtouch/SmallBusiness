@@ -17,6 +17,26 @@ define(['app', 'tinymce'], function (app) {
 	});
 	/* go-back directive ends here */
 	
+	app.directive('filePreview', ['$compile','upload',function ($compile,upload) {
+		return {
+			restrict: 'EA',
+			require: "?ngModel",
+			template: "<ul class='list-inline'><li ng-repeat='img in url'><img ng-src='{{img.dataUrl}}' class='img-thumbnail' width='50' ng-click='click(img)'><div class='progress'> <div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='{{img.progress}}' aria-valuemin='0' aria-valuemax='100' style='width: {{img.progress}}%'></div></div></li></ul>",
+			scope: {
+				url : "="
+			},
+			link: function(scope, element, attrs, ngModel) {
+				scope.click = function(ind){
+					console.log(ind);
+				};
+			},
+			replace:true
+			
+		};
+	}]);
+	
+	
+	
 	app.value('uiTinymceConfig', {});
 	app.directive('uiTinymce', ['uiTinymceConfig', function (uiTinymceConfig) {
 		uiTinymceConfig = uiTinymceConfig || {};
@@ -88,6 +108,12 @@ define(['app', 'tinymce'], function (app) {
 				}
 			  },
 			  mode: 'exact',
+			  theme: "modern",
+			  plugins: [
+					 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+					 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+					 "save table contextmenu directionality emoticons template paste textcolor"
+			  ],
 			  elements: attrs.id
 			};
 			// extend options with initial uiTinymceConfig and options from directive attribute value
