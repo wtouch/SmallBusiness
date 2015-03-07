@@ -14,8 +14,8 @@
 							<label  for="name" class="col-sm-2 control-label">Name</label>
 							<div class="col-sm-9">
 								<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="cname" required >
-								<span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
-								<span ng-show="myForm.name.$error.required">Name is required.</span>
+								<span class="help-block" ng-show="myForm.name.$dirty && myForm.name.$invalid">
+									<span class="text-danger" ng-show="myForm.name.$error.required">Name is required.</span>
 								</span>
 							</div>
 						</div>
@@ -23,9 +23,9 @@
 							<label  for="email" class="col-sm-2 control-label">Email Id </label>
 							<div class="col-sm-9">
 								<input type="Email" class="form-control" id="email" ng-model="login.email" name="email" placeholder="Enter Email" required >
-								<span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
-								<span ng-show="myForm.email.$error.required">Email is required.</span>
-								<span ng-show="myForm.email.$error.email">Invalid Email address.</span>
+								<span class="help-block" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+									<span class="text-danger" ng-show="myForm.email.$error.required">Email is required.</span>
+									<span class="text-danger" ng-show="myForm.email.$error.email">Invalid Email address.</span>
 								</span>
 							</div>
 						</div>	
@@ -42,7 +42,7 @@
 							<div class="col-sm-9">
 								<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reg.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 								<span class="help-block" ng-show="myForm.contactno.$dirty && myForm.contactno.$invalid">
-									<span ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)" style="color:red">Enter a valid Contact Number</span>
+									<span class="text-danger" ng-show="myForm.contactno.$error.pattern && (myForm.contactno.$dirty || submitted)">Enter a valid Contact Number</span>
 								</span>
 							</div>						
 						</div>	
@@ -52,10 +52,9 @@
 								<textarea  class="form-control" id="Address" ng-model="Address" name="Address" placeholder="Enter Address" ng-maxlength="75" required>
 								</textarea>
 								 <p ng-hide="myForm.Address.$error.maxlength">{{ 75 - Address.length + " Characters left"}}</p>
-								<span style="color:red" ng-show="myForm.Address.$dirty &&  myForm.Address.$invalid">
-									<span style="color:red" ng-show="myForm.Address.$error.maxlength">
-										Sorry You are Exceeding the Limit</span>
-									<span ng-show="myForm.Address.$error.required">Address is required.</span>
+								<span class="help-block" ng-show="myForm.Address.$dirty &&  myForm.Address.$invalid">
+									<span class="text-danger" ng-show="myForm.Address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+									<span class="text-danger" ng-show="myForm.Address.$error.required">Address is required.</span>
 								</span>	
 							</div>
 						</div>	
@@ -63,10 +62,10 @@
 							<label  for="date" class="col-sm-2 control-label">Date</label>
 							<div class="col-sm-9">
 								<p class="input-group">
-								  <input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)"/>
-								  <span class="input-group-btn">
-									<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-								  </span>
+									<input type="text" id="date" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)"/>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+									</span>
 								</p>
 							</div>
 						</div>											

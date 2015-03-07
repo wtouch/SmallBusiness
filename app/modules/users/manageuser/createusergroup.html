@@ -6,8 +6,8 @@
 				<label  for="groupname" class="col-sm-2 control-label">Group Name</label>
 				<div class="col-sm-9">
 					<input type="text" id="groupname" class="form-control" name="groupname" ng-model="createuser.groupname" placeholder="Group Name"required >
-					<span style="color:red" ng-show="createusergroupForm.groupname.$dirty && createusergroupForm.groupname.$invalid">
-					<span ng-show="createusergroupForm.groupname.$error.required">Group Name is required.</span>
+					<span class="help-block" ng-show="createusergroupForm.groupname.$dirty && createusergroupForm.groupname.$invalid">
+						<span class="text-danger" ng-show="createusergroupForm.groupname.$error.required">Group Name is required.</span>
 					</span>
 				</div>
 			</div>
@@ -15,8 +15,8 @@
 				<label  for="groupdesc" class="col-sm-2 control-label">Group Description </label>
 				<div class="col-sm-9">
 					<input type="text" id="groupdesc" class="form-control" name="groupdesc" ng-model="createuser.groupdesc" placeholder="Group Description" required >
-					<span style="color:red" ng-show="createusergroupForm.groupdesc.$dirty && createusergroupForm.groupdesc.$invalid">
-					<span ng-show="createusergroupForm.groupdesc.$error.required">Group Description is required.</span>
+					<span class="help-block" ng-show="createusergroupForm.groupdesc.$dirty && createusergroupForm.groupdesc.$invalid">
+						<span class="text-danger" ng-show="createusergroupForm.groupdesc.$error.required">Group Description is required.</span>
 					</span>
 				</div>
 			</div>	
@@ -24,10 +24,10 @@
 				<label  for="date" class="col-sm-2 control-label">Date</label>
 				<div class="col-sm-9">
 					<p class="input-group">
-					  <input type="text" id="date" name="date" class="form-control" datepicker-popup="{{format}}" ng-model="createuser.date" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-					  <span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-					  </span>
+						<input type="text" id="date" name="date" class="form-control" datepicker-popup="{{format}}" ng-model="createuser.date" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)"/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
 					</p>
 				</div>
 			</div>		

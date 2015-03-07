@@ -4,20 +4,20 @@
 			<label  for="name" class="col-sm-2 control-label">Website Name</label>		
 				<div class="col-sm-9">
 					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="name" required >
-						<span style="color:red" ng-show="requestsiteForm.name.$dirty && requestsiteForm.name.$invalid">
-						<span ng-show="requestsiteForm.name.$error.required">Website Name is required.</span>
-						</span>
+					<span class="help-block" ng-show="requestsiteForm.name.$dirty && requestsiteForm.name.$invalid">
+						<span class="text-danger" ng-show="requestsiteForm.name.$error.required">Website Name is required.</span>
+					</span>
 				</div>						
 		</div>
 		<div class="form-group">	
 			<label  for="domain_name" class="col-sm-2 control-label">Domain Name</label>
 				<div class="col-sm-9">
 					<input type="url" class="form-control" id="domain_name" ng-model="reqnewsite.domain_name" name="domain_name" placeholder="Enter Domain " required>
-						<span style="color:red" ng-show="requestsiteForm.domain.$dirty && 	requestsiteForm.domain_name.$invalid">
-						<span ng-show="requestsiteForm.domain_name.$error.required">Domain  is required.</span>
-						<span ng-show="requestsiteForm.domain_name.$error.url">Invalid Web Site.</span>
-						</span>
-						<span>e.g http://www.google.com</span>
+					<span class="help-block" ng-show="requestsiteForm.domain_name.$dirty && requestsiteForm.domain_name.$invalid">
+						<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.required">Domain  is required.</span>
+						<span class="text-danger"ng-show="requestsiteForm.domain_name.$error.url">Invalid Web Site.</span>
+					</span>
+					<span>e.g http://www.google.com</span>
 				</div>						
 		</div>			
 		<div class="form-group">
@@ -25,7 +25,7 @@
 				<div class="col-md-9">
 					<input type="text" id="contactno" name="contactno" class="form-control" ng-model="contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 						<span class="help-block" ng-show="requestsiteForm.contactno.$dirty && requestsiteForm.contactno.$invalid">
-						<span ng-show="requestsiteForm.contactno.$error.pattern && (requestsiteForm.contactno.$dirty || submitted)" style="color:red">Enter a valid Contact Number .</span>
+							<span ng-show="requestsiteForm.contactno.$error.pattern && (requestsiteForm.contactno.$dirty || submitted)" class="text-danger">Enter a valid Contact Number .</span>
 						</span>
 				</div>						
 		</div>
@@ -34,11 +34,11 @@
 				<div class="col-sm-9">
 					<textarea type="text" class="form-control" id="product_service_name" name="product_service_name" ng-model="product_service_name" cols="30" rows="4" ng-maxlength="20" placeholder="Product/Services" ui-tinymce required></textarea>
 						<p ng-hide="requestsiteForm.product_service_name.$error.maxlength">
-						{{ 20 - requestsite.product.length + " Chars left" }}
+						{{ 20 - product_service_name.length + " Chars left" }}
 						</p>
-						<span style="color:red" ng-show="requestsiteForm.product_service_name.$error.maxlength">Sorry You are Exceeding the Limit</span>
-						<span style="color:red" ng-show="requestsiteForm.product_service_name.$dirty && requestsiteForm.product_service_name.$invalid">
-						<span ng-show="requestsiteForm.product_service_name.$error.required">Please enter Product/Services.</span>
+						<span class="help-block" ng-show="requestsiteForm.product_service_name.$dirty && requestsiteForm.product_service_name.$invalid">
+							<span class="text-danger" ng-show="requestsiteForm.product_service_name.$error.maxlength">Sorry You are Exceeding the Limit</span>
+							<span class="text-danger" ng-show="requestsiteForm.product_service_name.$error.required">Please enter Product/Services.</span>
 						</span>
 				</div>						
 		</div>	
