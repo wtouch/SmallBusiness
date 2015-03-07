@@ -10,7 +10,7 @@
 						<hr>
 						<p>Please register a free account, before you can start posting your ads. Registration is quick and free! Please note that fields marked * are required.</p>		
 						<div class="form-group">
-							<label for="name" class="col-sm-2 control-label">Name* </label>
+							<label for="name" class="col-sm-2 control-label">Name </label>
 							<div class="col-sm-9">
 								<input type="char" class="form-control" id="fullname" ng-model="reg.name" name="name" placeholder="Enter Name" required>
 									<span class="help-block" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">
@@ -19,7 +19,7 @@
 							</div>						
 						</div>				
 						<div class="form-group">
-							<label for="address" class="col-sm-2 control-label">Address*</label>
+							<label for="address" class="col-sm-2 control-label">Address</label>
 							<div class="col-sm-9">
 								<textarea  class="form-control" id="address" ng-model="reg.address" name="address" placeholder="Enter address" ng-maxlength="75" required></textarea>
 								<p ng-hide="registerForm.address.$error.maxlength">{{ 75 - reg.address.length + " Characters left"}}</p>
@@ -62,7 +62,6 @@
 								<span class="help-block" ng-show="registerForm.fax.$dirty && registerForm.fax.$invalid">
 									<span class="text-danger" ng-show="registerForm.fax.$error.pattern && (registerForm.fax.$dirty || submitted)">Enter a valid Fax.</span>
 								</span>
-								<span>e.g +12245679910</span>
 							</div>						
 						</div>				
 						<div class="form-group">
