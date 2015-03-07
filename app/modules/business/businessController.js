@@ -1,16 +1,16 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location'];
+    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService'];
 
     // This is controller for this view
-	var businessController = function ($scope, $injector, $routeParams,$location)
+	var businessController = function ($scope, $injector, $routeParams,$location,dataService)
 	{
 		//method for insert data of add business form{trupti}
 		$scope.insert = function(addbusiness){
 			console.log($scope.addbusiness);
-			$http.post("../server-api/index.php/post/business",$scope.addbusiness)
-			.success(function(response) {
+			dataService.post("../server-api/index.php/post/business",$scope.addbusiness)
+			.then(function(response) {
 				alert(response);
 				console.log(response);
 			})
@@ -65,20 +65,34 @@ define(['app'], function (app) {
 		$scope.pageChanged = function() {
 			//$log.log('Page changed to: ' + $scope.currentPage);
 			//get request for businesslist
-			$http.get("../server-api/index.php/properties/"+$scope.bizListCurrentPage+"/"+$scope.pageItems)
-			.success(function(response) { //function for businesslist response
-				$scope.business.bizListCurrentPage = response.business.bizListCurrentPages;
+			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems)
+			.then(function(response) { //function for businesslist response
+				$scope.bizList = response.data;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);
 			});
 			//get request for delete bizlist 
-			$http.get("../server-api/index.php/properties/"+$scope.delBizCurrentPage+"/"+$scope.pageItems)
-			.success(function(response) { //function for deltebiz response
-				$scope.business.delBizCurrentPage = response.business.delBizCurrentPage;
+			dataService.get("/getmultiple/business/"+$scope.delBizCurrentPage+"/"+$scope.pageItems)
+			.then(function(response) { //function for deltebiz response
+				$scope.delBiz = response.data;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);
 			});
-		};//End of pagination
+		};
+		
+		dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems)
+		.then(function(response){
+			$scope.totalRecords=response.totalRecords;
+			$scope.bizList=response.data;
+			console.log(response.data);
+		});
+		
+		dataService.get("/getmultiple/business/"+$scope.delBizCurrentPage+"/"+$scope.pageItems)
+		.then(function(response){
+			$scope.totalRecords=response.totalRecords;
+			$scope.delBiz=response.data;
+			console.log(response.data);
+		});
     };
 	
 	// Inject controller's dependencies
