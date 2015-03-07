@@ -1,44 +1,48 @@
-<div class="row main-content">
-	<form class="form-horizontal text-center form-content" name="loginForm">
-		<h3>Login</h3>
-			<div class="form-group">
-				<div class="col-md-12">
-					<a href="#"><span class="glyphicon glyphicon-user dropimage1 borderimg"></span></a>
-				</div>	
-			</div>											
-			<div class="form-group">
-				<div class="col-md-12">
-					<input type="Email" class="form-control" id="inputEmail3" placeholder="Email" name="u_mail" ng-model="login.u_mail" required>
-						<span style="color:red" ng-show="loginForm.u_mail.$dirty && loginForm.u_mail.$invalid">
-						<span ng-show="loginForm.u_mail.$error.required">Email is required.</span>
-						<span ng-show="loginForm.u_mail.$error.email">Invalid Email address.</span>
-						</span>
+<div class="row">
+	<div class="col-sm-12">	
+		<div class="main-content">
+			<form class="form-horizontal text-center form-content" name="loginForm">
+				<h3>Login</h3>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<a href="#"><span class="glyphicon glyphicon-user dropimage1 borderimg"></span></a>
+					</div>	
+				</div>											
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="Email" class="form-control" id="inputEmail3" placeholder="Email" name="u_mail" ng-model="login.u_mail" required>
+							<span class="help-block" ng-show="loginForm.u_mail.$dirty && loginForm.u_mail.$invalid">
+								<span class="text-danger" ng-show="loginForm.u_mail.$error.required">Email is required.</span>
+								<span class="text-danger" ng-show="loginForm.u_mail.$error.email">Invalid Email address.</span>
+							</span>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<input type="password" class="form-control" id="inputPassword3" name="pass" ng-model="login.pass" placeholder="Password" required>
-						<span style="color:red" ng-show="loginForm.pass.$dirty && loginForm.pass.$invalid">
-							<span ng-show="loginForm.pass.$error.required">Password is required.</span>
-						</span>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<input type="password" class="form-control" id="inputPassword3" name="pass" ng-model="login.pass" placeholder="Password" required>
+							<span class="help-block" ng-show="loginForm.pass.$dirty && loginForm.pass.$invalid">
+								<span class="text-danger" ng-show="loginForm.pass.$error.required">Password is required.</span>
+							</span>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<div class="checkbox">
-						<label>
-							<input type="checkbox">Remember me
-						</label>
-					</div> 
-						<a href="#/forgotpass">Forgot Password</a>|
-						<a name="btn1" href="#/register">Register</a>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox">Remember me
+							</label>
+						</div> 
+							<a href="#/forgotpass">Forgot Password</a>|
+							<a name="btn1" href="#/register">Register</a>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-md-12">
-					<a type="submit" class="btn btn-default" name="btn1" ng-model="login.btn1" ng-click="insert(login)"
-					href="#dashboard" title="login">Login</a>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<a type="submit" class="btn btn-default" name="btn1" ng-model="login.btn1" ng-click="insert(login)"
+						href="#dashboard" title="login">Login</a>
+					</div>
 				</div>
-			</div>
-	</form>
+			</form>
+		</div>
+	</div>
 </div>
