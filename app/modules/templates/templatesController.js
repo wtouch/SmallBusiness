@@ -57,6 +57,7 @@ define(['app'], function (app) {
 			});
 			
 		};	//End of pagination
+		
 		dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems)
 		.then(function(response) {  //function for templatelist response
 			$scope.totalRecords = response.totalRecords;

@@ -12,7 +12,7 @@ define(['app'], function (app) {
 		$scope.insert = function(){
 			//console.log($scope.user);
 			console.log("hello");
-			dataService.post("../server-api/index.php/post/website",$scope.reqnewsite)
+			dataService.post("post/website",$scope.reqnewsite)
 			.then(function(response) {
 				//alert(response);
 				console.log(response);
@@ -37,23 +37,29 @@ define(['app'], function (app) {
 		$scope.pageChanged = function() {
 			//$log.log('Page changed to: ' + $scope.currentPage);
 			//get request for website list
-			dataService.get("/getmultiple/websites/"+$scope.webListCurrentPage+"/"+$scope.pageItems)
+			dataService.get("/getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems)
 			.then(function(response) {  //function for websitelist response
 				$scope.webListCurrentPage = response.data;
-				//console.log($scope.properties);
+				//console.log($scope.data);
+				console.log(response);
 			});
-			
-			
+		
 			//get request for requestedSite list
 			$http.get("../server-api/index.php/getsingle/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems)
 			.success(function(response) { //fuction for requestedsite list response
 				$scope.websites.reqestSiteCurrentPage = response.reqestSiteCurrentPage;
 				//$scope.totalRecords = response.totalRecords;
-				//console.log($scope.properties);
+				console.log(response);
 			});
 			
 			
-		};//End of pagination	
+		};//End of pagination
+		dataService.get("/getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems)
+		.then(function(response) {  //function for websitelist response
+			$scope.totalRecords = response.totalRecords;
+			console.log(response);
+		});
+		
     };
 	
     
