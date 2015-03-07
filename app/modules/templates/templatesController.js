@@ -14,7 +14,17 @@ define(['app'], function (app) {
 		if(!$routeParams.tempPart) {
 			$location.path('/dashboard/templates/listoftemplates');
 		}
-				
+			
+		//post method for insert data in request template form{trupti}
+		$scope.postData = function() { 
+			dataService.post("/post/template",$scope.reqtemp)
+			.then(function(response) {  //function for response of request temp
+				$scope.reqtemp = response.reqtemp;
+				console.log(response.reqtemp);
+			});
+		}
+		//end of post method
+	
 		//Code For Pagination{trupti}
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -24,8 +34,6 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		
-		
-		
 		$scope.pageChanged = function() { 
 			//get request for templatelist 
 			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems)
@@ -33,10 +41,6 @@ define(['app'], function (app) {
 				$scope.templates = response.data;
 				//console.log($scope.properties);
 			});
-			
-			/* //method for filter template
-			
-			//end of filter method
 			
 			//get request for  mytemplate{trupti}
 			dataService.get("/getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems)
@@ -49,7 +53,7 @@ define(['app'], function (app) {
 			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems)
 			.then(function(response) {  //function for custom templates response
 				$scope.templates = response.data;
-			}); */
+			}); 
 			
 		};//End of pagination
 		dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems)
@@ -59,6 +63,13 @@ define(['app'], function (app) {
 			console.log(response.data);
 		});
 		
+		//for custom templtae
+		dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems)
+		.then(function(response) {  //function for templatelist response
+			$scope.totalRecords = response.totalRecords;
+			$scope.templates = response.data;
+			console.log(response.data);
+		});
     };
 	
 	// Inject controller's dependencies
