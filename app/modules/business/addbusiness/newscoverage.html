@@ -14,8 +14,8 @@
 	<label  for="medianame" class="col-sm-3 control-label">Media Name</label>	
 	<div class="col-sm-9">
 		<input type="text" id="medianame" class="form-control" ng-model="medianame" name="medianame" placeholder="Media Name" required>
-		<span style="color:red" ng-show="addbusinessForm.medianame.$dirty && addbusinessForm.medianame.$invalid">
-			<span ng-show="addbusinessForm.medianame.$error.required">Media Name is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.medianame.$dirty && addbusinessForm.medianame.$invalid">
+			<span ng-show="addbusinessForm.medianame.$error.required" class="text-danger">Media Name is required.</span>
 		</span>
 	</div>						
 </div>
@@ -31,8 +31,8 @@
 			<option value="America">America</option>
 			<option value="Belgium">Belgium</option>
 		</select>
-		<span style="color:red" ng-show="addbusinessForm.mediatype.$dirty && addbusinessForm.mediatype.$invalid">
-		<span ng-show="addbusinessForm.mediatype.$error.required">Media Typeis required.</span>
+		<span class="help-block" ng-show="addbusinessForm.mediatype.$dirty && addbusinessForm.mediatype.$invalid">
+		<span ng-show="addbusinessForm.mediatype.$error.required" class="text-danger">Media Typeis required.</span>
 		</span>				
 	</div>
 </div>	
@@ -41,8 +41,8 @@
 	<label  for="headline" class="col-sm-3 control-label">Headline</label>		
 	<div class="col-sm-9">
 		<input type="text" id="headline" class="form-control" ng-model="headline" name="headline" placeholder="Headline" required>
-		<span style="color:red" ng-show="addbusinessForm.headline.$dirty && 	addbusinessForm.headline.$invalid">
-		<span ng-show="addbusinessForm.headline.$error.required">Headline is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.headline.$dirty && 	addbusinessForm.headline.$invalid">
+		<span ng-show="addbusinessForm.headline.$error.required" class="text-danger">Headline is required.</span>
 		</span>
 	</div>						
 </div>
@@ -50,9 +50,9 @@
 	<label for="News" class="col-sm-3 control-label">News Coverage URL</label>
 	<div class="col-sm-9">
 		<input type="url" class="form-control" id="News" ng-model="News" name="News" placeholder="News Coverage URL" required>
-		<span style="color:red" ng-show="addbusinessForm.News.$dirty && 	addbusinessForm.News.$invalid">
-			<span ng-show="addbusinessForm.News.$error.required">News Coverage URL is required.</span>
-			<span ng-show="addbusinessForm.News.$error.url">Invalid News Coverage URL.</span>
+		<span class="help-block" ng-show="addbusinessForm.News.$dirty && 	addbusinessForm.News.$invalid">
+			<span ng-show="addbusinessForm.News.$error.required" class="text-danger">News Coverage URL is required.</span>
+			<span ng-show="addbusinessForm.News.$error.url" class="text-danger">Invalid News Coverage URL.</span>
 		</span>
 		<span>e.g http://www.google.com</span>
 	</div>						
@@ -64,9 +64,9 @@
 		<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="newscover.newsdetails" cols="30" rows="4" ng-maxlength="20" placeholder="News Coverage Details" ui-tinymce required></textarea>
 			<p ng-hide="addbusinessForm.newsdetails.$error.maxlength">
 				{{ 20 - newscover.newsdetails.length + " Chars left" }}
-			</p>
-			<span style="color:red" ng-show="addbusinessForm.newsdetails.$error.maxlength">Sorry You are Exceeding the Limit</span>
-			<span style="color:red" ng-show="addbusinessForm.newsdetails.$dirty && addbusinessForm.newsdetails.$invalid">
+			</p>		
+			<span class="help-block" ng-show="addbusinessForm.newsdetails.$dirty && addbusinessForm.newsdetails.$invalid">
+				<span class="text-danger" ng-show="addbusinessForm.newsdetails.$error.maxlength">Sorry You are Exceeding the Limit</span>
 				<span ng-show="addbusinessForm.newsdetails.$error.required">News Coverage Details is required.</span>
 			</span>	
 	</div>

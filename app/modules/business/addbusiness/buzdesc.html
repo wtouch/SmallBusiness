@@ -6,9 +6,10 @@
 			<p ng-hide="addbusinessForm.keyDescp.$error.maxlength">
 				{{ 20 - buzdesc.keyDescp.length + " Chars left" }}
 			</p>
-			<span style="color:red" ng-show="addbusinessForm.keyDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
-			<span style="color:red" ng-show="addbusinessForm.keyDescp.$dirty && addbusinessForm.keyDescp.$invalid">
-				<span ng-show="addbusinessForm.keyDescp.$error.required">Key Description of company is required.</span>
+			
+			<span class="help-block" ng-show="addbusinessForm.keyDescp.$dirty && addbusinessForm.keyDescp.$invalid">
+				<span class="text-danger" ng-show="addbusinessForm.keyDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				<span ng-show="addbusinessForm.keyDescp.$error.required" class="text-danger">Key Description of company is required.</span>
 			</span>	
 	</div>
 </div>  
@@ -19,9 +20,10 @@
 			<p ng-hide="addbusinessForm.detailDescp.$error.maxlength">
 				{{ 20 - buzdesc.detailDescp.length + " Chars left" }}
 			</p>
-			<span style="color:red" ng-show="addbusinessForm.detailDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
-			<span style="color:red" ng-show="addbusinessForm.detailDescp.$dirty && addbusinessForm.detailDescp.$invalid">
-				<span ng-show="addbusinessForm.detailDescp.$error.required">Detailed Description of website is required.</span>
+			
+			<span class="help-block" ng-show="addbusinessForm.detailDescp.$dirty && addbusinessForm.detailDescp.$invalid">
+				<span class="text-danger" ng-show="addbusinessForm.detailDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				<span ng-show="addbusinessForm.detailDescp.$error.required" class="text-danger">Detailed Description of website is required.</span>
 			</span>		
 	</div>
 </div>  
