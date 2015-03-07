@@ -6,62 +6,57 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var templatesController = function ($scope, $injector,$location,$routeParams,dataService) {
-		console.log("this is templates ctrl ");
-		
-		//method for insert data{trupti}
-		$scope.insert = function(reqtemp){
-			console.log($scope.reqtemp);
-			dataService.post("../server-api/index.php/post/template",$scope.reqtemp)
-			.then(function(response) {
-				
-				console.log(response);
-			})
-		}//end of insert
-		
+			
+		//to show parts of the templates form{trupti}
 		$scope.tempPart = $routeParams.tempPart; 
-		console.log($scope.tempPart);
-		/*For display by default templ.html page*/
+		
+		/*For display by default templatelist page {trupti}*/
 		if(!$routeParams.tempPart) {
-		$location.path('/dashboard/templates/listoftemplates');
+			$location.path('/dashboard/templates/listoftemplates');
 		}
 				
-		//Code For Pagination
+		//Code For Pagination{trupti}
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.tempListCurrentPage = 1;
 		$scope.myTempCurrentPage = 1;
 		$scope.customTempCurrentPage = 1;
 		$scope.pageItems = 10;
-		$scope.numPages = "";		
+		$scope.numPages = "";
+		
+		
+		
 		$scope.pageChanged = function() { 
-			//$log.log('Page changed to: ' + $scope.currentPage);
 			//get request for templatelist 
 			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems)
 			.then(function(response) {  //function for templatelist response
-				$scope.tempListCurrentPage = response.data;
+				$scope.templates = response.data;
 				//console.log($scope.properties);
 			});
+			
+			/* //method for filter template
+			
+			//end of filter method
 			
 			//get request for  mytemplate{trupti}
 			dataService.get("/getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems)
-			.then(function(response) {  //function for mytemplates response
-				$scope.myTempCurrentPage = response.data;
-				//console.log($scope.properties);
-			});
-			
-			//get request for  mytemplate{trupti}
-			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems)
 			.then(function(response) {  //function for my templates response
-				$scope.customTempCurrentPage = response.data;
+				$scope.templates = response.data;
 				//console.log($scope.properties);
 			});
 			
-		};	//End of pagination
-		
+			//get request for  custom template{trupti}
+			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems)
+			.then(function(response) {  //function for custom templates response
+				$scope.templates = response.data;
+			}); */
+			
+		};//End of pagination
 		dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems)
 		.then(function(response) {  //function for templatelist response
 			$scope.totalRecords = response.totalRecords;
-			console.log(response);
+			$scope.templates = response.data;
+			console.log(response.data);
 		});
 		
     };

@@ -62,7 +62,6 @@ define(['app'], function (app) {
 		
     };
 	
-    
 	// Inject controller's dependencies
 	websitesController.$inject = injectParams;
 	// Register/apply controller dynamically
