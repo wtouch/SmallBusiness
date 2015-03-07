@@ -16,16 +16,14 @@ define(['app'], function (app) {
 				
 				console.log(response);
 			})
-		}	//end of insert
+		}//end of insert
 		
 		$scope.tempPart = $routeParams.tempPart; 
-		
 		console.log($scope.tempPart);
 		/*For display by default templ.html page*/
 		if(!$routeParams.tempPart) {
 		$location.path('/dashboard/templates/listoftemplates');
 		}
-		
 				
 		//Code For Pagination
 		$scope.maxSize = 5;
@@ -43,20 +41,21 @@ define(['app'], function (app) {
 				$scope.tempListCurrentPage = response.data;
 				//console.log($scope.properties);
 			});
-			//get request for mytemplate
-			$http.get("../server-api/index.php/properties/"+$scope.myTempCurrentPage+"/"+$scope.pageItems)
-			.success(function(response) {  //function for mytemplate response
-				$scope.templates.myTempCurrentPage = response.templates.myTempCurrentPage;
-				//$scope.totalRecords = response.totalRecords;
+			
+			//get request for  mytemplate{trupti}
+			dataService.get("/getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems)
+			.then(function(response) {  //function for mytemplates response
+				$scope.myTempCurrentPage = response.data;
 				//console.log($scope.properties);
 			});
-			//get request for customtemplate 
-			$http.get("../server-api/index.php/properties/"+$scope.customTempCurrentPage+"/"+$scope.pageItems)
-			.success(function(response) {  //function for customtemplate response
-				$scope.templates.customTempCurrentPage = response.templates.customTempCurrentPage;
-				//$scope.totalRecords = response.totalRecords;
+			
+			//get request for  mytemplate{trupti}
+			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems)
+			.then(function(response) {  //function for my templates response
+				$scope.customTempCurrentPage = response.data;
 				//console.log($scope.properties);
 			});
+			
 		};	//End of pagination
 		dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems)
 		.then(function(response) {  //function for templatelist response
