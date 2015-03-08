@@ -39,9 +39,9 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		
-		$scope.pageChanged = function() { 
+		$scope.pageChanged = function(page) { 
 			//get request for templatelist 
-			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems)
+			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems)
 			.then(function(response) {  //function for templatelist response
 				$scope.templates = response.data;
 				//console.log($scope.properties);
@@ -49,7 +49,7 @@ define(['app'], function (app) {
 			//this is conditional if for open my template list{trupti}
 			if($routeParams.tempPart=='mytemplates') {
 			//get request for  mytemplate{trupti}
-			dataService.get("/getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems)
+			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems)
 			.then(function(response) {  //function for my templates response
 				$scope.templates = response.data;
 				//console.log($scope.properties);
