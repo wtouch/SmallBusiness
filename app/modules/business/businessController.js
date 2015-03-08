@@ -16,6 +16,35 @@ define(['app'], function (app) {
 			})
 		}	//end of insert
 		
+		//This code for publish unpublish button{sonali}
+			
+			 $scope.verify = function(id, verified){
+				$scope.veryfiedData = {verified : verified};
+				console.log($scope.veryfiedData);
+				dataService.put("put/business/"+id, $scope.veryfiedData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			} 
+			
+		//This code for featured unfeatured button {sonali}
+			 $scope.feature = function(id, featured){
+				$scope.featuredData = {featured : featured};
+				console.log($scope.featuredData);
+				dataService.put("put/business/"+id, $scope.featuredData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			} 
+			$scope.radioModel = 'Middle';
+
+			  $scope.checkModel = {
+				left: false,
+				//middle: true,
+				right: true
+			  };
+		//end of code
+		
 		// This code for Date Picker {Vilas}
 		$scope.today = function(){
 			$scope.newsDate = new Date();
@@ -62,17 +91,17 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
 
-		$scope.pageChanged = function() {
+		$scope.pageChanged = function(page) {
 			//$log.log('Page changed to: ' + $scope.currentPage);
 			//get request for businesslist
-			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems)
+			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems)
 			.then(function(response) { //function for businesslist response
 				$scope.bizList = response.data;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);
 			});
 			//get request for delete bizlist 
-			dataService.get("/getmultiple/business/"+$scope.delBizCurrentPage+"/"+$scope.pageItems)
+			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems)
 			.then(function(response) { //function for deltebiz response
 				$scope.delBiz = response.data;
 				//$scope.totalRecords = response.totalRecords;
