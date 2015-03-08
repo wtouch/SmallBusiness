@@ -231,7 +231,6 @@ define(['app'], function (app) {
 				serviceBase = path;
 			};
 			obj.get = function (q, where) {
-				console.log(where);
 				return $http({
 				url: serviceBase + q,
 				method: "GET",
