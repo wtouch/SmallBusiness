@@ -36,6 +36,17 @@ define(['app'], function (app) {
 					console.log(response);
 				});
 			} 
+			
+			if($routeParams.id){
+			//Update Property
+			$scope.update = function(){
+				dataService.put("put/business/"+$routeParams.id,$scope.business)
+				.success(function(response) {
+					alert(response);
+				});
+			};
+		}
+		
 			$scope.radioModel = 'Middle';
 
 			  $scope.checkModel = {
@@ -122,7 +133,7 @@ define(['app'], function (app) {
 			$scope.delBiz=response.data;
 			console.log(response.data);
 		});
-    };
+    }
 	
 	// Inject controller's dependencies
 	businessController.$inject = injectParams;
