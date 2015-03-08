@@ -9,10 +9,10 @@
 				</span>
 			</div>						
 		</div>
-		<div class="form-group">	
+		<!--<div class="form-group">	
 			<label  for="domain_name" class="col-sm-2 control-label">Domain Name</label>
 			<div class="col-sm-9">
-				<input type="url" class="form-control" id="domain_name" ng-model="reqtemp.domain_name" name="domain_name" placeholder="Enter Domain " required>
+				<input type="url" class="form-control" id="domain_name" ng-model="domain_name" name="domain_name" placeholder="Enter Domain " required>
 				<span class="help-block" ng-show="requestcustomtempForm.domain_name.$dirty && requestcustomtempForm.domain_name.$invalid">
 					<span class="text-danger" ng-show="requestcustomtempForm.domain_name.$error.required">Domain  is required.</span>
 					<span class="text-danger" ng-show="requestcustomtempForm.domain_name.$error.url">Invalid Web Site.</span>
@@ -23,12 +23,12 @@
 		<div class="form-group">
 			<label for="contactno" class="col-sm-2 control-label">Contact Number</label>
 			<div class="col-sm-9">
-				<input type="text" id="contactno" name="contactno" class="form-control" ng-model="contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+				<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reqtemp.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 				<span class="help-block" ng-show="requestcustomtempForm.contactno.$dirty && requestcustomtempForm.contactno.$invalid">
 					<span class="text-danger" ng-show="requestcustomtempForm.contactno.$error.pattern && (requestcustomtempForm.contactno.$dirty || submitted)">Enter a valid contact Number.</span>
 				</span>
 			</div>						
-		</div>
+		</div>-->
 		<div class="form-group">
 			<label for="requirement" class="col-sm-2 control-label">Custom Requirement</label>	
 			<div class="col-sm-9">
@@ -50,6 +50,8 @@
 		<div class="form-group">
 			<label for="custom" class="col-sm-2 control-label">Make it</label>
 			<div class="col-sm-9">
+			
+			
 				<label class="radio-inline">
 					<input type="radio" name="radio" id="Public" value="Public" checked>Public
 				</label>
@@ -60,7 +62,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
-				<button type="submit" class="btn btn-success" ng-click="insert(reqtemp)" tooltip="Send Request">Send Request</button>
+				<button type="submit" class="btn btn-success" ng-click="postData(reqtemp)" tooltip="Send Request">Send Request</button>
 				<button type="reset" class="btn btn-danger" tooltip="Cancle">Reset</button>
 			</div>
 		</div>					
