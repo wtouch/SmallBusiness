@@ -38,14 +38,23 @@ define(['app'], function (app) {
 			} 
 			
 			if($routeParams.id){
-			//Update Property
-			$scope.update = function(){
-				dataService.put("put/business/"+$routeParams.id,$scope.business)
-				.success(function(response) {
-					alert(response);
-				});
-			};
-		}
+			//Update business
+				dataService.get("getsingle/business/"+$routeParams.id)
+				.then(function(response) {
+						$scope.business = response;
+						$scope.reset = function() {
+							$scope.business = angular.copy($scope.business);
+						};
+						$scope.reset();
+						console.log($scope.business);			
+				});	
+				$scope.update = function(){
+					dataService.put("put/business/"+$routeParams.id,$scope.business)
+					.success(function(response) {
+						alert(response);
+					});
+				};
+			}
 		
 			$scope.radioModel = 'Middle';
 
