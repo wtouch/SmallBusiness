@@ -29,7 +29,7 @@ define(['app'], function (app) {
 			$scope.formPart = formPart;
 		};  
 		
-		//for display default businesslist.html{trupti}
+		//for display default businesslist.html{sonali}
 		if(!$routeParams.businessView) {
 			$location.path('/dashboard/business/businesslist');
 		}
@@ -61,9 +61,13 @@ define(['app'], function (app) {
 			});	
 			//This code for publish unpublish button{sonali}
 			
+			$scope.dynamicTooltip = function(status, active, notActive){
+				return (status==1) ? active : notActive;
+			};
+			
 			$scope.verify = function(id, verified){
 				$scope.veryfiedData = {verified : verified};
-				console.log($scope.veryfiedData);
+				
 				dataService.put("put/business/"+id, $scope.veryfiedData)
 				.then(function(response) { //function for businesslist response
 					console.log(response);
@@ -78,32 +82,22 @@ define(['app'], function (app) {
 					console.log(response);
 				});
 			};
-			$scope.radioModel = 'Middle';
-
-				$scope.checkModel = {
-				left: false,
-				//middle: true,
-				right: true
-			};	
+			//Update business edit button {sonali}
+			$scope.editBusiness = function(id){
+				$location.path('/dashboard/business/addbusiness/'+id);
+			};
 				
-			if($routeParams.id){
-			//Update business
-				dataService.get("getsingle/business/"+$routeParams.id)
-				.then(function(response) {
-						$scope.business = response;
-						$scope.reset = function() {
-							$scope.business = angular.copy($scope.business);
-						};
-						$scope.reset();
-						console.log($scope.business);			
-				});	
-				$scope.update = function(){
-					dataService.put("put/business/"+$routeParams.id,$scope.business)
-					.success(function(response) {
-						alert(response);
-					});
-				};
-			}		
+			//delete button {sonali}
+			$scope.deleted = function(id, status){
+				$scope.deletedData = {status : status};
+				console.log($scope.deletedData);
+				dataService.put("put/business/"+id, $scope.deletedData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			};
+			
+			
 			
 		};
 		
