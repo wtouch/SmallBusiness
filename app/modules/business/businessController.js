@@ -13,9 +13,8 @@ define(['app'], function (app) {
 		$scope.delBizCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
-		$scope.user_id = {user_id : 2}; // these are URL parameters
+		$scope.user_id = {user_id : 2, name:"vilas"}; // these are URL parameters
 		$scope.formPart = $routeParams.formPart;
-		
 		
 		// This will change businessView dynamically from 'business.html' {Vilas}
 		
@@ -37,14 +36,14 @@ define(['app'], function (app) {
 		$scope.pageChanged = function(page) {
 			//$log.log('Page changed to: ' + $scope.currentPage);
 			//get request for businesslist
-			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems)
+			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) { //function for businesslist response
 				$scope.bizList = response.data;
 				//$scope.totalRecords = response.totalRecords;
 				
 			});
 			//get request for delete bizlist 
-			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems)
+			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) { //function for deltebiz response
 				$scope.delBiz = response.data;
 				//$scope.totalRecords = response.totalRecords;
@@ -53,7 +52,7 @@ define(['app'], function (app) {
 		};
 		
 		var businesslist = function(){
-			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems)
+			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response){
 				$scope.totalRecords=response.totalRecords;
 				$scope.bizList=response.data;
@@ -102,7 +101,7 @@ define(['app'], function (app) {
 		};
 		
 		var deletedbusiness = function(){
-			dataService.get("/getmultiple/business/"+$scope.delBizCurrentPage+"/"+$scope.pageItems)
+			dataService.get("/getmultiple/business/"+$scope.delBizCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response){
 				$scope.totalRecords=response.totalRecords;
 				$scope.delBiz=response.data;

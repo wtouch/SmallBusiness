@@ -11,7 +11,8 @@
 			echo json_encode($data);
 			
 		}else{
-			$where=[]; // this will used for user specific data selection.
+			$where['user_id'] = $_GET['user_id']; // this will used for user specific data selection.
+			
 			$limit['pageNo'] = $pageNo; // from which record to select
 			$limit['records'] = $records; // how many records to select
 			
