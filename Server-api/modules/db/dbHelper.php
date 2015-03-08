@@ -37,6 +37,7 @@ class dbHelper {
             if(count($rows)<=0){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
+				$response["data"] = null;
             }else{
 				//$response['totalRecords']= $totalRecords;
                 $response["status"] = "success";
