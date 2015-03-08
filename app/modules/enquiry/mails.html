@@ -9,9 +9,9 @@
 			
 		</thead>
 		<tbody>
-			<tr ng-repeat="mail in mailList | filter : {status : status}">
+			<tr ng-repeat="mail in mailList">
 				<td></td>
-				<td>{{$index + 1}}</td>
+				<td>{{((mailListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
 					<!--<a href="#/dashboard/enquiry/mailview">Interviews for Freshers in Syntel </a>  inside {{}} we can add dynamic value of mail's id -->
 				
 				<td>{{mail.subject}}</td>
@@ -22,6 +22,6 @@
 	</table>
 </div>
 <div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="mailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>Total Records:{{totalRecords}}			
-	<pre>Page: {{currentPage}} / {{numPages}}</pre>
+	<pagination total-items="totalRecords" items-per-page="pageItems" ng-model="mailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(mailListCurrentPage)"></pagination>Total Records:{{totalRecords}}			
+	<pre>Page: {{mailListCurrentPage}} / {{numPages}}</pre>
 </div>

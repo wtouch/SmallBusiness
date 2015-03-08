@@ -18,9 +18,10 @@ define(['app'], function (app) {
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.mailListCurrentPage = 1;
+		$scope.sentmailListCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
-		$scope.pageChanged = function() { 
+		$scope.pageChanged = function(page) { 
 			//$log.log('Page changed to: ' + $scope.currentPage);
 			//get request for templatelist 
 			/*$http.get("../server-api/index.php/properties/"+$scope.mailListCurrentPage+"/"+$scope.pageItems)
@@ -28,20 +29,20 @@ define(['app'], function (app) {
 				$scope.mails.mailListCurrentPage = response.mails.mailListCurrentPage;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);*/
-				dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems).then(function(response){
+				dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems).then(function(response){
 					$scope.mailList = response.data;
 					console.log(response.data);
 				});
 				
-				dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems).then(function(response){
+				dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems).then(function(response){
 					$scope.sentmailList = response.data;
 					console.log(response.data);
 				});
 		};
 		//End of pagination
 	
-		dataService.get("/getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems)
-		.then(function(response) {  //function for templatelist response
+		dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems)
+		.then(function(response) {  
 			$scope.mailList = response.data;
 			$scope.totalRecords = response.totalRecords;
 			console.log(response.data);

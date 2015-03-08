@@ -4,11 +4,11 @@
 			<th></th>
 			<th>Sr.No.</th>
 			<th>Subject</th>
-			<th>From</th>
+			<th>To</th>
 			<th>Date</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="mail in sentmailList | filter :{status : status}">
+			<tr ng-repeat="mail in sentmailList | filter :{status : 3}">
 				<td><input type="checkbox"></td>
 				<td>{{$index + 1}}</td>
 				<td>{{mail.subject}}</td>
@@ -19,6 +19,6 @@
 	</table>
 </div>
 <div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="mails.mailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>				
-	<pre>Page: {{currentPage}} / {{numPages}}</pre>
+	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="sentmailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(sentmailListCurrentPage)"></pagination>				
+	<pre>Page: {{sentmailListCurrentPage}} / {{numPages}}</pre>
 </div>
