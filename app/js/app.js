@@ -1,17 +1,18 @@
 'use strict'; 
 
 define(['angular',
-	'angularRoute',
-	'routeResolver',
-	'bootstrap',
-	'directives',
-	'services', 
+ 'angularRoute',
+ 'routeResolver',
+ 'bootstrap',
+ 'directives',
+ 'services', 
+ 'filters',
+ 'upload','uploadShim',
 	'css!../css/bootstrap.min','css!../css/style'
 ], function(angular, angularRoute) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
-	  'ngRoute',
-	   'routeResolverServices','ui.bootstrap', 'customDirectives', 'customServices'
+	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload'
 	]);
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
                 '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 

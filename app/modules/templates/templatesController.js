@@ -1,28 +1,23 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$location','$routeParams','dataService'];
-
+    var injectParams = ['$scope', '$injector','$location','$routeParams','dataService','upload'];
+    
     // This is controller for this view
-	var templatesController = function ($scope, $injector,$location,$routeParams,dataService) {
-
+	var templatesController = function ($scope,$injector,$location,$routeParams,dataService,upload) {
+		//for display form parts
+		$scope.tempPart = $routeParams.tempPart;
 		// all $scope object goes here
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.tempListCurrentPage = 1;
 		$scope.myTempCurrentPage = 1;
 		$scope.customTempCurrentPage = 1;
-		$scope.pageItems = 10;
+		$scope.pageItems = 5;
 		$scope.numPages = "";
 		$scope.user_id = {user_id : 2}; // these are URL parameters
-		$scope.tempPart = $routeParams.tempPart;
-		
-		/*For display by default templatelist page {trupti}*/
-		if(!$routeParams.tempPart) {
-			$location.path('/dashboard/templates/listoftemplates');
-		}
-		
 		// All $scope methods
+
 		$scope.pageChanged = function(page) { // Pagination page changed
 			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) {  //function for templatelist response
@@ -30,6 +25,31 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
+		
+		/*For display by default templatelist page {trupti}*/
+		if(!$routeParams.tempPart) {
+			$location.path('/dashboard/templates/listoftemplates');
+		}
+		
+		//Upload Function for uploading files {Vilas}
+		$scope.reqtemp={}; // this is form object
+		$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
+		$scope.path = "template/"; // path to store images on server
+		$scope.reqtemp.scrible  = []; // uploaded images will store in this array
+		$scope.upload = function(files,path,userinfo){ // this function for uploading files
+			upload.upload(files,path,userinfo,function(data){
+				if(data.status !== 'error'){
+					$scope.reqtemp.scrible.push(JSON.stringify(data.details));
+					console.log(data.message);
+				}else{
+					alert(data.message);
+				}
+				
+			});
+		};
+		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
+			upload.generateThumbs(files);
+		};// End upload function
 		
 		// switch functions
 		var listoftemplates = function(){
@@ -71,7 +91,6 @@ define(['app'], function (app) {
 					console.log(response);
 					$scope.reset();
 				});
-				
 			}//end of post method{trupti}
 		}
 		switch($scope.tempPart) {

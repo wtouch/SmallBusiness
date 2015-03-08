@@ -38,7 +38,7 @@
 			</thead>
 				<tbody>
 					<tr ng-repeat="x in templates">
-						<td>{{ $index + 1 }}</td>
+						<td>{{((myTempCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 						<td>{{x.template_name}}</td>
 						<td>{{x.date | date:'MM/dd/yyyy'}}</td>
 						<td>{{x.modified_date}}</td>
@@ -48,7 +48,7 @@
 		</table>
 	</div>
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="templates.myTempCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="myTempCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(myTempCurrentPage)"></pagination>
 		Records:{{totalRecords}}
 		<pre>Page: {{myTempCurrentPage}} / {{numPages}}</pre>
-	</div>					
+	</div>	
