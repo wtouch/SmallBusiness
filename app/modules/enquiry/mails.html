@@ -6,23 +6,22 @@
 			<th>Subject</th>
 			<th>From</th>
 			<th>Date</th>
-			<th>Status</th>
+			
 		</thead>
 		<tbody>
-			<tr ng-repeat="x in mailList">
+			<tr ng-repeat="mail in mailList | filter : {status : status}">
 				<td></td>
 				<td>{{$index + 1}}</td>
 					<!--<a href="#/dashboard/enquiry/mailview">Interviews for Freshers in Syntel </a>  inside {{}} we can add dynamic value of mail's id -->
 				
-				<td>{{x.subject}}</td>
-				<td>{{x.from_email}}</td>
-				<td>{{x.date}}</td>
-				<td>Read</td>
+				<td>{{mail.subject}}</td>
+				<td>{{mail.from_email}}</td>
+				<td>{{mail.date}}</td>
 			</tr>
 		</tbody>					
 	</table>
 </div>
 <div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="mails.mailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>				
-	<pre>Page: {{mailListCurrentPage}} / {{numPages}}</pre>
+	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="mailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>Total Records:{{totalRecords}}			
+	<pre>Page: {{currentPage}} / {{numPages}}</pre>
 </div>

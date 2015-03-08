@@ -28,8 +28,13 @@ define(['app'], function (app) {
 				$scope.mails.mailListCurrentPage = response.mails.mailListCurrentPage;
 				//$scope.totalRecords = response.totalRecords;
 				//console.log($scope.properties);*/
-				dataService.get("/getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems).then(function(response){
+				dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems).then(function(response){
 					$scope.mailList = response.data;
+					console.log(response.data);
+				});
+				
+				dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems).then(function(response){
+					$scope.sentmailList = response.data;
 					console.log(response.data);
 				});
 		};
@@ -37,8 +42,8 @@ define(['app'], function (app) {
 	
 		dataService.get("/getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems)
 		.then(function(response) {  //function for templatelist response
-			$scope.totalRecords = response.totalRecords;
 			$scope.mailList = response.data;
+			$scope.totalRecords = response.totalRecords;
 			console.log(response.data);
 		});
 	 };
