@@ -10,6 +10,7 @@ define(['app'], function (app) {
             backdrop: true,
             keyboard: true,
             modalFade: true,
+			size : 'md',
             templateUrl: '../app/modules/component/modal.html'
         };
 

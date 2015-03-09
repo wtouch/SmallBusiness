@@ -15,6 +15,45 @@ class dbHelper {
             exit;
         }
     }
+	
+	function selectJoin($table, $where, $limit=null){
+		try{
+            $a = array();
+            $w = "";
+            foreach ($where as $key => $value) {
+                $w .= " and " .$key. " like :".$key;
+                $a[":".$key] = $value;
+            }
+			$lmt = ($limit['pageNo'] == 0 ) ? $limit['pageNo'] : $limit['pageNo'] - 1;
+			$startLimit = $lmt * $limit['records']; // start on record $startLimit
+			$dbLimit = ($limit===null) ? "" : " LIMIT ".$startLimit.", ".$limit['records'];
+			
+            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w ." ".$dbLimit);
+            $stmt->execute($a);
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+			/* $res = $this->db->query('SELECT COUNT(*) FROM '.$table);
+			$totalRecords = $res->fetchColumn(); */
+			
+            if(count($rows)<=0){
+                $response["status"] = "warning";
+                $response["message"] = "No data found.";
+				$response["data"] = null;
+            }else{
+				//$response['totalRecords']= $totalRecords;
+				$response["message"] = count($rows)." rows selected.";
+                $response["status"] = "success";
+				$response["data"] = $rows;
+            }
+                
+        }catch(PDOException $e){
+            $response["status"] = "error";
+            $response["message"] = 'Select Failed: ' .$e->getMessage();
+            $response["data"] = null;
+        }
+        return $response;
+	}
+	
     function select($table, $where, $limit=null){
         try{
             $a = array();
@@ -40,6 +79,7 @@ class dbHelper {
 				$response["data"] = null;
             }else{
 				//$response['totalRecords']= $totalRecords;
+				$response["message"] = count($rows)." rows selected.";
                 $response["status"] = "success";
 				$response["data"] = $rows;
             }
@@ -54,7 +94,6 @@ class dbHelper {
     function insert($table, $inputData) {
 
         try{
-		
 			$inputData = json_decode($inputData);
 			
 			$dataKey = [];
@@ -73,9 +112,11 @@ class dbHelper {
             $affected_rows = $stmt->rowCount();
             $response["status"] = "success";
             $response["message"] = $affected_rows." row inserted into database";
+			$response["data"] = null;
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = 'Insert Failed: ' .$e->getMessage();
+			$response["data"] = null;
         }
         return $response;
     }
@@ -105,13 +146,16 @@ class dbHelper {
             if($affected_rows<=0){
                 $response["status"] = "warning";
                 $response["message"] = "No row updated";
+				$response["data"] = null;
             }else{
                 $response["status"] = "success";
                 $response["message"] = $affected_rows." row(s) updated in database";
+				$response["data"] = null;
             }
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = "Update Failed: " .$e->getMessage();
+			$response["data"] = null;
         }
         return $response;
     }
@@ -120,6 +164,7 @@ class dbHelper {
         if(count($where)<=0){
             $response["status"] = "warning";
             $response["message"] = "Delete Failed: At least one condition is required";
+			$response["data"] = null;
         }else{
             try{
                 $a = array();
@@ -134,13 +179,16 @@ class dbHelper {
                 if($affected_rows<=0){
                     $response["status"] = "warning";
                     $response["message"] = "No row deleted";
+					$response["data"] = null;
                 }else{
                     $response["status"] = "success";
                     $response["message"] = $affected_rows." row(s) deleted from database";
+					$response["data"] = null;
                 }
             }catch(PDOException $e){
                 $response["status"] = "error";
                 $response["message"] = 'Delete Failed: ' .$e->getMessage();
+				$response["data"] = null;
             }
         }
         return $response;

@@ -12,10 +12,12 @@ define(['app'], function (app) {
 			.then(function(response) {
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
+					size : 'lg'
 				};
 				var modalOptions = {
-					bizList: response  // assign data to modal
+					bizList: response.data[0]  // assign data to modal
 				};
+				console.log(response.data[0]);
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
 				});
@@ -37,7 +39,7 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
 		$scope.user_id = {user_id : 1}; // these are URL parameters
-		$scope.formPart = $routeParams.formPart;
+		
 		
 		
 		//function for close alert
@@ -50,12 +52,7 @@ define(['app'], function (app) {
 		$scope.businessView = $routeParams.businessView;
 		console.log($scope.businessView );
 				
-		// Add Business multi part form show/hide operation from here! {Vilas}
-		$scope.formPart = 'home';
-		console.log($scope.formPart);
-		$scope.showFormPart = function(formPart){
-			$scope.formPart = formPart;
-		};  
+		
 		
 		//for display default businesslist.html{sonali}
 		if(!$routeParams.businessView) {
@@ -154,38 +151,6 @@ define(['app'], function (app) {
 			});		
 		};
 		
-		//method for insert data of add business form{trupti}
-		$scope.insert = function(addbusiness){
-			console.log($scope.addbusiness);
-			dataService.post("../server-api/index.php/post/business",$scope.addbusiness)
-			.then(function(response) {
-				alert(response);
-				console.log(response);
-			})
-		}	//end of insert
-		
-		
-		
-		
-		/*/ This code for Date Picker {Vilas}
-		$scope.today = function(){
-			$scope.newsDate = new Date();
-		};
-		$scope.today();
-		$scope.open = function($event,opened)
-		{
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope[opened] = ($scope[opened]===true) ? false : true;
-		};
-		$scope.dateOptions ={
-			formatYear: 'yy',
-			startingDay: 1
-		};
-
-		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-		$scope.format = $scope.formats[0];
-		/* Date Picker Ended here --------------------------------------------------------------------------------------*/
 		
 		switch($scope.formPart) {
 			case 'businesslist':
