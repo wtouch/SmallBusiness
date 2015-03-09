@@ -53,14 +53,23 @@ define(['app'], function (app) {
 		};
 		//End of pagination
 		
+		//function for close alert
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
+		
 		var inboxmailList = function(){
 			$scope.status = {status : 1};
 			//`angular.extend($scope.status, $scope.user_id);
 			
 			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.status)
-			.then(function(response) {  
-				$scope.mailList = response.data;
-				$scope.totalRecords = response.totalRecords;
+			.then(function(response) { 
+				if(response.status == 'success'){
+					$scope.mailList = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
 			});
 		}
 		
