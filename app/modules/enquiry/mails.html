@@ -3,7 +3,6 @@
 		<thead> 
 			<th></th>
 			<th>Sr.No.</th>
-			<th>Status</th>
 			<th>Subject</th>
 			<th>From</th>
 			<th>Date</th>
@@ -13,9 +12,8 @@
 			<tr ng-repeat="mail in mailList">
 				<td></td>
 				<td>{{((mailListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
-					<!--<a href="#/dashboard/enquiry/mailview">Interviews for Freshers in Syntel </a>  inside {{}} we can add dynamic value of mail's id -->
-				<td><button type="button" class="btn btn-default">Read</button></td>
-				<td>{{mail.subject}}</td>
+					<!--Interviews for Freshers in Syntel   inside {{}} we can add dynamic value of mail's id -->
+				<td><a href="#/dashboard/enquiry/mailview">{{mail.subject}}</a></td>
 				<td>{{mail.from_email}}</td>
 				<td>{{mail.date}}</td>
 			</tr>

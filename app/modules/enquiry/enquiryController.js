@@ -47,6 +47,7 @@ define(['app'], function (app) {
 			$scope.status = {status : 3};
 			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response){
 				$scope.mailList = response.data;
+				$scope.totalRecords = response.totalRecords;
 				console.log(response.data);
 			});
 		}
@@ -55,12 +56,13 @@ define(['app'], function (app) {
 			$scope.status = {status : 0};
 			dataService.get("getmultiple/enquiry/"+$scope.delmailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response){
 				$scope.mailList = response.data;
+				$scope.totalRecords = response.totalRecords;
 				console.log(response.data);
 			});
 		}
 		
 		/*var composeMail = function(){
-			//reset function{trupti}
+			//reset function
 			$scope.reset = function() {
 				$scope.compose = {};
 			};
