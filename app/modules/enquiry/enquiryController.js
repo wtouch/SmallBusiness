@@ -13,8 +13,8 @@ define(['app'], function (app) {
 		$scope.delmailListCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
-		//$scope.status = {status : 3};
-		//$scope.user_id = {user_id : 2};
+		
+		$scope.user_id = {user_id : 2};
 		// this object will check list of mails show or single mail show 
 		$scope.mailId = $routeParams.mailId; 
 		
@@ -23,8 +23,9 @@ define(['app'], function (app) {
 			$location.path('/dashboard/enquiry/mails');
 		}
 		
-		$scope.pageChanged = function(page) { 
-			dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems).then(function(response){
+		$scope.pageChanged = function(page, where) {
+			angular.extend(where, $scope.user_id);
+			dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems, where).then(function(response){
 				$scope.mailList = response.data;
 				//console.log(response.data);
 			});
@@ -32,7 +33,10 @@ define(['app'], function (app) {
 		//End of pagination
 		
 		var inboxmailList = function(){
-			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems)
+			$scope.status = {status : 1};
+			angular.extend($scope.status, $scope.user_id);
+			
+			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.status)
 			.then(function(response) {  
 				$scope.mailList = response.data;
 				$scope.totalRecords = response.totalRecords;
@@ -40,14 +44,16 @@ define(['app'], function (app) {
 		}
 		
 		var sentmailList = function(){
-			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems).then(function(response){
+			$scope.status = {status : 3};
+			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response){
 				$scope.mailList = response.data;
 				console.log(response.data);
 			});
 		}
 		
 		var deletemailList = function(){
-			dataService.get("getmultiple/enquiry/"+$scope.delmailListCurrentPage+"/"+$scope.pageItems).then(function(response){
+			$scope.status = {status : 0};
+			dataService.get("getmultiple/enquiry/"+$scope.delmailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response){
 				$scope.mailList = response.data;
 				console.log(response.data);
 			});
@@ -71,15 +77,15 @@ define(['app'], function (app) {
 		}*/
 		
 		switch($scope.mailId) {
-			case 'inboxmailList':
+			case 'mails':
 				inboxmailList();
 				break;
 				
-			case 'sentmailList':
+			case 'sentmail':
 				sentmailList();
 				break;
 				
-			case 'deletemailList':
+			case 'delete':
 				deletemailList();
 				break;
 				
