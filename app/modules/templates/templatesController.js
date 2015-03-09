@@ -110,6 +110,7 @@ define(['app'], function (app) {
 
 			});
 		}
+		
 		var requestcustomtemplates = function(){
 			//reset function{trupti}
 			$scope.reset = function() {
@@ -142,7 +143,6 @@ define(['app'], function (app) {
 			default:
 				listoftemplates();
 		};
-
     };
 	
 	// Inject controller's dependencies

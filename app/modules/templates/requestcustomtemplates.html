@@ -11,17 +11,38 @@
 		</div>
 	
 		<div class="form-group">
-			<label for="requirement" class="col-sm-2 control-label">Custom Requirement</label>	
+			<label for="custome_requirement" class="col-sm-2 control-label">Custom Requirement</label>	
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="requirement" name="requirement" ng-model="reqtemp.requirement" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Product Description" ui-tinymce required></textarea>
-				<p ng-hide="requestcustomtempForm.requirement.$error.maxlength">{{ 256 - requirement.length + " Chars left" }}
+				<textarea type="text" class="form-control" id="custome_requirement" name="custome_requirement" ng-model="reqtemp.custome_requirement.req" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Product Description" ui-tinymce required></textarea>
+				<p ng-hide="requestcustomtempForm.custome_requirement.$error.maxlength">{{ 256 - custome_requirement.length + " Chars left" }}
 				</p>
-				<span class="help-block" ng-show="requestcustomtempForm.requirement.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="requestcustomtempForm.requirement.$dirty && requestcustomtempForm.requirement.$invalid">
-					<span class="text-danger" ng-show="requestcustomtempForm.requirement.$error.required">Product Description is required.</span>
-				</span>
+				<span class="help-block" ng-show="requestcustomtempForm.custome_requirement.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="requestcustomtempForm.custome_requirement.$dirty && requestcustomtempForm.custome_requirement.$invalid">
+					<span class="text-danger" ng-show="requestcustomtempForm.custome_requirement.$error.required">Product Description is required.</span>
+					</span>
 			</div>  
-		</div>					
+		</div>	
+		<div class="form-group">	
+			<label  for="date" class="col-sm-2 control-label">Date</label>
+			<div class="col-sm-9">
+				<input type="date" class="form-control" id="date" ng-model="reqnewsite.date" name="date" placeholder="Enter Domain " required>
+				<span class="help-block" ng-show="requestcustomtempForm.date.$dirty && requestsiteForm.date.$invalid">
+					<span class="text-danger" ng-show="requestsiteForm.date.$error.required">Domain  is required.</span>
+					<span class="text-danger"ng-show="requestsiteForm.date.$error.url">Invalid Web Site.</span>
+				</span>
+			</div>						
+		</div>			
+		
+		<div class="form-group">
+			<label for="contactno" class="col-md-2 control-label">Contact Number </label>
+			<div class="col-md-9">
+				<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reqtemp.req.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+					<span class="help-block" ng-show="requestcustomtempForm.contactno.$dirty && requestcustomtempForm.contactno.$invalid">
+						<span ng-show="requestcustomtempForm.contactno.$error.pattern && (requestcustomtempForm.contactno.$dirty || submitted)" class="text-danger">Enter a valid Contact Number .</span>
+					</span>
+			</div>						
+		</div>	
+		
 		<div class="form-group">
 			<label for="tempImages" class="col-sm-2 control-label">Scrible</label>
 			<div class="col-sm-9">

@@ -100,7 +100,7 @@ class dbHelper {
 			$dataValue = [];
 			foreach($inputData as $key => $val) // $inputData holds input json data
 			{
-				$value = (is_object($val)) ? json_encode($val) : mysql_real_escape_string($val) ;
+				$value = (is_object($val) || is_array($val)) ? mysql_real_escape_string(json_encode($val)) : mysql_real_escape_string($val);
 				array_push($dataKey,$key);
 				array_push($dataValue,"'".$value."'");
 			}
@@ -134,7 +134,8 @@ class dbHelper {
 			$updateTable = [];
 			foreach($inputData as $key => $val) // $inputData holds input json data
 			{
-				$value = (is_object($val)) ? mysql_real_escape_string(json_encode($val)) : mysql_real_escape_string($val) ;
+			
+				$value = (is_object($val) || is_array($val)) ? mysql_real_escape_string(json_encode($val)) : mysql_real_escape_string($val);
 				array_push($updateTable,$key." = '".$value."'");
 				
 			}
