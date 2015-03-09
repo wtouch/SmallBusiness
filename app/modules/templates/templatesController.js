@@ -14,7 +14,7 @@ define(['app'], function (app) {
 		$scope.tempListCurrentPage = 1;
 		$scope.myTempCurrentPage = 1;
 		$scope.customTempCurrentPage = 1;
-		$scope.pageItems = 5;
+		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.user_id = {user_id : 2}; // these are URL parameters
 		// All $scope methods
@@ -93,7 +93,7 @@ define(['app'], function (app) {
 		};
 		
 		var custometemplates = function(){
-			$scope.template_type = {template_type : 'private',status:0 };
+			$scope.template_type = {template_type : 'private',status:1 };
 			//$scope.status = {status : 1};
 			angular.extend($scope.template_type, $scope.user_id);
 			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems, $scope.template_type)

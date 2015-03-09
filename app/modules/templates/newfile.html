@@ -1,0 +1,29 @@
+<div class="form-group"> 
+  <label  for="domain" class="col-sm-2 control-label">Domain Name</label>
+  <div class="col-sm-9">
+            <input type="text" id="domain" class="form-control" name="domain" placeholder="Domain Name" ng-model="template.custom_requirement.domain" required >
+   <span class="text-danger" ng-show="reqCustTemplate.domain.$dirty && reqCustTemplate.domain.$invalid">
+    <span ng-show="reqCustTemplate.domain.$error.required">Domain Name is required.</span>
+   </span>
+  </div>      
+ </div> 
+ <div class="form-group" ng-class="{ 'has-error' : reqCustTemplate.contact.$invalid && (reqCustTemplate.contact.$dirty || submitted) }"> 
+  <label  for="contact" class="col-sm-2 control-label">Contact Number</label> 
+  <div class="col-sm-9">
+            <input type="text" id="contact" class="form-control" name="contact" placeholder="Enter Your Phno" ng-model="template.custom_requirement.contact" maxlength="10" ng-pattern="/^\d{0,9}[0-9]$/" required >       
+     <p ng-show="reqCustTemplate.contact.$error.pattern && (reqCustTemplate.contact.$dirty || submitted)" class="help-block">Enter a valid contact no.</p>
+        </div>      
+ </div>  
+ <div class="form-group">
+  <label for="req" class="col-sm-2 control-label">Custom Requirement</label> 
+  <div class="col-sm-9">   
+   <textarea class="form-control" ng-model="template.custom_requirement.req" id="req" name="req" cols="30" rows="4" ng-maxlength="356" placeholder="Custom Template Requirement"></textarea>
+         
+   <p ng-hide="reqCustTemplate.req.$error.maxlength">{{ 356 - template.custom_requirement.req.length + " Chars left" }}</p>   
+   <span class="text-danger" ng-show="reqCustTemplate.req.$error.maxlength">Sorry You are Exceeding the Limit</span>
+   <span class="text-danger" ng-show="reqCustTemplate.req.$dirty && reqCustTemplate.custom_requirement.$invalid"></span>
+   <span  ng-show="reqCustTemplate.req.$error.required">Custom Requirement are Required.</span>
+   <span class="text-danger" ng-show="reqCustTemplate.req.$error.minlength">Please Enter minimum 10 character</span>
+   
+  </div>     
+ </div>

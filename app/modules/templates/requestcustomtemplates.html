@@ -9,11 +9,42 @@
 				</span>
 			</div>						
 		</div>
-	
+		
+		<!--<div class="form-group">	
+		<label  for="date" class="col-sm-2 control-label">Date</label>
+		<div class="col-sm-9">
+            <p class="input-group">
+				  <input class="form-control" type="text" datepicker-popup="dd-MMMM-yyyy"  ng-model="reqtemp.date" is-open="opened1" ng-click="open($event,'opened1')" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" />
+				  <span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+				  </span>
+			</p>
+		</div>						
+		</div>-->
+		<div class="form-group">	
+			<label  for="domain" class="col-sm-2 control-label">Domain Name</label>
+				<div class="col-sm-9">
+					<input type="text" id="domain" class="form-control" name="domain" placeholder="Domain Name" ng-model="reqtemp.custome_requirement.domain" required >
+					<span class="text-danger" ng-show="reqCustTemplate.domain.$dirty && reqCustTemplate.domain.$invalid">
+					<span ng-show="reqCustTemplate.domain.$error.required">Domain Name is required.</span>
+					</span>
+				</div>						
+		</div>	
+		
 		<div class="form-group">
-			<label for="custome_requirement" class="col-sm-2 control-label">Custom Requirement</label>	
+			<label for="contact" class="col-md-2 control-label">Contact Number </label>
+			<div class="col-md-9">
+				<input type="text" id="contact" name="contact" class="form-control" ng-model="reqtemp.custome_requirement.contact" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+					<span class="help-block" ng-show="requestcustomtempForm.contact.$dirty && requestcustomtempForm.contact.$invalid">
+						<span ng-show="requestcustomtempForm.contact.$error.pattern && (requestcustomtempForm.contact.$dirty || submitted)" class="text-danger">Enter a valid Contact Number .</span>
+					</span>
+			</div>						
+		</div>
+		
+		<div class="form-group">
+			<label for="requirement" class="col-sm-2 control-label">Custom Requirement</label>	
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="custome_requirement" name="custome_requirement" ng-model="reqtemp.custome_requirement.req" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Product Description" ui-tinymce required></textarea>
+				<textarea type="text" class="form-control" id="custome_requirement" name="custome_requirement" ng-model="reqtemp.custome_requirement.requirement" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Product Description" ui-tinymce required></textarea>
 				<p ng-hide="requestcustomtempForm.custome_requirement.$error.maxlength">{{ 256 - custome_requirement.length + " Chars left" }}
 				</p>
 				<span class="help-block" ng-show="requestcustomtempForm.custome_requirement.$error.maxlength">Sorry You are Exceeding the Limit</span>
@@ -21,26 +52,6 @@
 					<span class="text-danger" ng-show="requestcustomtempForm.custome_requirement.$error.required">Product Description is required.</span>
 					</span>
 			</div>  
-		</div>	
-		<div class="form-group">	
-			<label  for="date" class="col-sm-2 control-label">Date</label>
-			<div class="col-sm-9">
-				<input type="date" class="form-control" id="date" ng-model="reqnewsite.date" name="date" placeholder="Enter Domain " required>
-				<span class="help-block" ng-show="requestcustomtempForm.date.$dirty && requestsiteForm.date.$invalid">
-					<span class="text-danger" ng-show="requestsiteForm.date.$error.required">Domain  is required.</span>
-					<span class="text-danger"ng-show="requestsiteForm.date.$error.url">Invalid Web Site.</span>
-				</span>
-			</div>						
-		</div>			
-		
-		<div class="form-group">
-			<label for="contactno" class="col-md-2 control-label">Contact Number </label>
-			<div class="col-md-9">
-				<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reqtemp.req.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
-					<span class="help-block" ng-show="requestcustomtempForm.contactno.$dirty && requestcustomtempForm.contactno.$invalid">
-						<span ng-show="requestcustomtempForm.contactno.$error.pattern && (requestcustomtempForm.contactno.$dirty || submitted)" class="text-danger">Enter a valid Contact Number .</span>
-					</span>
-			</div>						
 		</div>	
 		
 		<div class="form-group">
