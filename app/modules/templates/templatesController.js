@@ -81,7 +81,7 @@ define(['app'], function (app) {
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
 					$scope.templates=response.data;
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;
 					
 				}
@@ -100,7 +100,7 @@ define(['app'], function (app) {
 			.then(function(response) {  //function for template list response
 				if(response.status == 'success'){
 					$scope.templates=response.data;
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;
 				}
 				else
