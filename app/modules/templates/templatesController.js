@@ -17,7 +17,7 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.user_id = {user_id : 2}; // these are URL parameters
 		// All $scope methods
-
+		$scope.template_type = {template_type: public};
 		$scope.pageChanged = function(page) { // Pagination page changed
 			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) {  //function for templatelist response
@@ -100,7 +100,6 @@ define(['app'], function (app) {
 			case 'mytemplates':
 				mytemplates();
 				break;
-				
 			case 'custometemplates':
 				custometemplates();
 				break;
