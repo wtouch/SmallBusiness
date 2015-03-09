@@ -14,6 +14,27 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		
+		//Upload Function for uploading files {Vilas}
+		$scope.composemail={}; // this is form object
+		$scope.userinfo = {user_id:1}; // this is for uploading credentials
+		$scope.path = "mail/"; // path to store images on server
+		$scope.composemail.attach_files = []; // uploaded images will store in this array
+		$scope.upload = function(files,path,userinfo){ // this function for uploading files
+			upload.upload(files,path,userinfo,function(data){
+				if(data.status !== 'error'){
+					$scope.composemail.attach_files.push(JSON.stringify(data.details));
+					console.log(data.message);
+				}else{
+					alert(data.message);
+				}
+				
+			});
+		};
+		
+		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
+			upload.generateThumbs(files);
+		};
+		
 		$scope.user_id = {user_id : 2};
 		// this object will check list of mails show or single mail show 
 		$scope.mailId = $routeParams.mailId; 
@@ -67,8 +88,9 @@ define(['app'], function (app) {
 				$scope.composemail = {};
 			};
 			//post method for insert data of compose mail
-			$scope.postData = function(composemail) { 
-				dataService.post("/post/enquiry",composemail)
+			$scope.postData = function(composemail) {
+				console.log(composemail);
+				dataService.post("/post/enquiry",$scope.composemail)
 				.then(function(response) {  
 					$scope.composemail = response.data;
 					console.log(response);
@@ -91,33 +113,14 @@ define(['app'], function (app) {
 				deletemailList();
 				break;
 			
-			case 'composemailview' :
+			case 'composemailview':
 				composeMail();
 				break;
 				
 			default:
 				inboxmailList();
 		};
-		//Upload Function for uploading files {Vilas}
-		$scope.composemail={}; // this is form object
-		$scope.userinfo = {user_id:1}; // this is for uploading credentials
-		$scope.path = "enquiry/"; // path to store images on server
-		$scope.composemail.attach_files = []; // uploaded images will store in this array
-		$scope.upload = function(files,path,userinfo){ // this function for uploading files
-			upload.upload(files,path,userinfo,function(data){
-				if(data.status !== 'error'){
-					$scope.composemail.attach_files.push(JSON.stringify(data.details));
-					console.log(data.message);
-				}else{
-					alert(data.message);
-				}
-				
-			});
-		};
 		
-		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
-			upload.generateThumbs(files);
-		};
 		// End upload function
 		
 	};
