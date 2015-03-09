@@ -47,7 +47,7 @@
 						<td>{{x.ownership}}</td>
 						<td>{{x.salesman}}</td>
 						<td>{{x.manager}}</td>
-						<td>
+						<td class="tdwidth">
 							<div class="btn-toolbar" role="toolbar" aria-label="...">
 							
 								<div class="btn-group">
@@ -69,9 +69,9 @@
 										<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-remove"></span></button>								
 								</div>
 								
-							<div class="btn-group">
-								<a ng-click="open('modules/business/viewBusiness.html', x.id)" class="btn btn-primary responsive" tooltip="Priview"> Prieview</a>
-							</div>	
+								<div class="btn-group">
+									<a ng-click="open('modules/business/viewBusiness.html', x.id)" class="btn btn-primary responsive" tooltip="Priview"> Prieview</a>
+								</div>	
 								
 						
 						</td>

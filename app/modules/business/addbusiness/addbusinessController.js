@@ -26,7 +26,7 @@ define(['app'], function (app) {
 		
 		
 		
-		/*/ This code for Date Picker {Vilas}
+		// This code for Date Picker {Vilas}
 		$scope.today = function(){
 			$scope.newsDate = new Date();
 		};

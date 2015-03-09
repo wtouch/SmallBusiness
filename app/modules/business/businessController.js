@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$http','$routeParams','$location','dataService','modalService'];
+    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','modalService'];
 
     // This is controller for this view
-	var businessController = function ($scope, $injector,$http, $routeParams,$location,dataService,modalService)
+	var businessController = function ($scope, $injector, $routeParams,$location,dataService,modalService)
 	{
 		
 		$scope.open = function (url, buzId) {
@@ -82,7 +82,7 @@ define(['app'], function (app) {
 			.then(function(response){
 				if(response.status == 'success'){	
 					$scope.bizList=response.data;
-					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords=response.totalRecords;									
 					//console.log(response.data);
 				}
@@ -135,20 +135,36 @@ define(['app'], function (app) {
 		};
 		
 		var deletedbusiness = function(){
+			
 			dataService.get("/getmultiple/business/"+$scope.delBizCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response){
-				if(response.status == 'success'){
+				if(response.status == 'success'){	
 					$scope.delBiz=response.data;
-					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
-					$scope.totalRecords=response.totalRecords;				
-				//console.log(response.data);			
+					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					$scope.totalRecords=response.totalRecords;									
+					//console.log(response.data);
 				}
 				else
 				{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
 				$scope.delBiz=response.data;
-			});		
+			});	
+			//This code for publish unpublish button{sonali}
+			
+			$scope.dynamicTooltip = function(status, active, notActive){
+				return (status==1) ? active : notActive;
+			};
+			
+			//delete button {sonali}
+			$scope.deleted = function(id, status){
+				$scope.deletedData = {status : status};
+				console.log($scope.deletedData);
+				dataService.put("put/business/"+id, $scope.deletedData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			};
 		};
 		
 		

@@ -24,7 +24,7 @@
 	</div>
 </div>			
 <div class="form-group" >
-	<label  for="business_logo" class="col-sm-3 control-label">Company Logo</label>
+	<label  for="business_logo" class="col-sm-3 control-label">Business Logo</label>
 	<div class="col-sm-9">
 		<input type="file" id="business_logo" name="business_logo" ng-model="addbusiness.businessprofile.business_logo"><img src="">	
 	</div>
@@ -69,7 +69,7 @@
 <div class="form-group">	
 	<label  for="employees" class="col-sm-3 control-label">No. Of Employees</label>	
 	<div class="col-sm-9">
-		<input type="number" id="employees" class="form-control" name="employees" placeholder="No. Of Employees" ng-model="addbusiness.businessprofile.employees" required >
+		<input type="text" id="employees" class="form-control" name="employees" placeholder="No. Of Employees" ng-model="addbusiness.businessprofile.employees" required >
 		<span class="help-block" ng-show="addbusinessForm.employees.$dirty && addbusinessForm.employees.$invalid">
 		<span ng-show="addbusinessForm.employees.$error.required" class="text-danger">No. Of Employees is required.</span>
 		</span>
@@ -80,11 +80,8 @@
 	<div class="col-sm-9">
 		<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.businessprofile.ownership" required>		
 			<option value="">Select Ownership Type</option>
-			<option value="India">India</option>
-			<option value="Australia">Australia</option>
-			<option value="China">China</option>
-			<option value="America">America</option>
-			<option value="Belgium">Belgium</option>
+			<option value="Partnership">Partnership Firm</option>
+			<option value="Proprietory">Proprietory Firm</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.ownership.$dirty && addbusinessForm.ownership.$invalid">
 		<span ng-show="addbusinessForm.ownership.$error.required" class="text-danger">Ownership Type is required.</span>
