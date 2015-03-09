@@ -29,6 +29,7 @@ define(['app'], function (app) {
 		
 		
 		//all $scope object goes here
+		$scope.alerts = [];
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.bizListCurrentPage = 1;
@@ -37,6 +38,12 @@ define(['app'], function (app) {
 		$scope.numPages = "";	
 		$scope.user_id = {user_id : 1}; // these are URL parameters
 		$scope.formPart = $routeParams.formPart;
+		
+		
+		//function for close alert
+			$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+			};
 		
 		// This will change businessView dynamically from 'business.html' {Vilas}
 		
@@ -76,9 +83,17 @@ define(['app'], function (app) {
 		var businesslist = function(){
 			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response){
-				$scope.totalRecords=response.totalRecords;
+				if(response.status == 'success'){	
+					$scope.bizList=response.data;
+					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					$scope.totalRecords=response.totalRecords;									
+					//console.log(response.data);
+				}
+				else
+				{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
 				$scope.bizList=response.data;
-				console.log(response.data);
 			});	
 			//This code for publish unpublish button{sonali}
 			
@@ -125,9 +140,17 @@ define(['app'], function (app) {
 		var deletedbusiness = function(){
 			dataService.get("/getmultiple/business/"+$scope.delBizCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response){
-				$scope.totalRecords=response.totalRecords;
+				if(response.status == 'success'){
+					$scope.delBiz=response.data;
+					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					$scope.totalRecords=response.totalRecords;				
+				//console.log(response.data);			
+				}
+				else
+				{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
 				$scope.delBiz=response.data;
-				console.log(response.data);
 			});		
 		};
 		
