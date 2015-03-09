@@ -3,17 +3,18 @@
 		<div class="clearfix">
 			<div class="toolbar pull-left">
 				<div class="btn-group" role="group" aria-label="first group">
-					<button class="btn btn-default" tooltip-animation="true" tooltip="Back" go-back><span  class="glyphicon glyphicon-arrow-left"></span></button>
-					<span ng-if="mailId!='composemailview'">
-						<!--a class="btn btn-default" href="#/dashboard/enquiry/composemailview" tooltip-animation="true" tooltip="compose"><span class="glyphicon glyphicon-envelope"></span></a-->
-						<button class="btn btn-default" ng-click="mailId('composemailview')" tooltip-animation="true" tooltip="compose"><span class="glyphicon glyphicon-envelope" disabled></span></button>
+					<span ng-if="mailId!='mails'">
+						<button class="btn btn-default" tooltip-animation="true" tooltip="Back" go-back><span  class="glyphicon glyphicon-arrow-left"></span></button>
 					</span>
-					<button class="btn btn-default" tooltip-animation="true" tooltip="refresh"><span class=" glyphicon glyphicon-refresh"></span></button>
+					<span ng-if="mailId!='composemailview'">
+						<a class="btn btn-default" href="#/dashboard/enquiry/composemailview" tooltip-animation="true" tooltip="compose"><span class="glyphicon glyphicon-envelope"></span></a>
+					</span>
 				</div>
 				<div class="btn-group" role="group" aria-label="Fourth group">
-					<button class="btn btn-default" href="#/dashboard/enquiry/delete" tooltip="delete"><span class="glyphicon glyphicon-trash"></span></button>
-					<span ng-if="mailId!='composemailview'">
-						<button class="btn btn-default" tooltip-animation="true" tooltip="Send" ng-click="postData(composemail)" disabled><span class="glyphicon glyphicon-send"></span></button>
+					<button class="btn btn-default" tooltip="delete"><span class="glyphicon glyphicon-trash"></span></button>
+					<button class="btn btn-default" tooltip-animation="true" tooltip="refresh"><span class=" glyphicon glyphicon-refresh"></span></button>
+					<span ng-if="mailId=='composemailview'">
+						<button class="btn btn-default" tooltip-animation="true" tooltip="Send" ng-click="postData(composemail)"><span class="glyphicon glyphicon-send"></span></button>
 					</span>
 				</div>
 				<div class="btn-group" role="group" aria-label="Fifth group">
@@ -22,12 +23,12 @@
 			</div>
 			<div class="toolbar pull-right">
 				<span ng-if="mailId=='mailview'">
-				<div class="btn-group" role="group" aria-label="Sixth group" abled>
-					<button class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Previous Message"><span class=" glyphicon glyphicon-arrow-left" name="prevmsg" value="prevmsg"></span>
-					</button>
-					<button class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Next Message"><span class="glyphicon glyphicon-arrow-right" name="nextmsg" value="nextmsg"></span>
-					</button>
-				</div>
+					<div class="btn-group" role="group" aria-label="Sixth group">
+						<button class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Previous Message"><span class=" glyphicon glyphicon-arrow-left" name="prevmsg" value="prevmsg"></span></button>
+						
+						<button class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Next Message"><span class="glyphicon glyphicon-arrow-right" name="nextmsg" value="nextmsg"></span>
+						</button>
+					</div>
 				</span>
 				<form class="form-inline">
 					<div class="input-group">
