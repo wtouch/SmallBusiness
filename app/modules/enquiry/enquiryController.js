@@ -66,6 +66,7 @@ define(['app'], function (app) {
 			.then(function(response) { 
 				if(response.status == 'success'){
 					$scope.mailList = response.data;
+					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -76,9 +77,14 @@ define(['app'], function (app) {
 		var sentmailList = function(){
 			$scope.status = {status : 3};
 			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response){
-				$scope.mailList = response.data;
-				$scope.totalRecords = response.totalRecords;
-				console.log(response.data);
+				if(response.status == 'success'){
+					$scope.mailList = response.data;
+					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					$scope.totalRecords = response.totalRecords;
+					console.log(response.data);
+				}else{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
 			});
 		}
 		
@@ -108,6 +114,14 @@ define(['app'], function (app) {
 				
 			}
 		}
+		
+		/*var mailView = function(){
+			dataService.get("getsingle/enquiry/").then(function(response){
+				$scope.mailList = response.data;
+				$scope.totalRecords = response.totalRecords;
+				console.log(response.data);
+			});
+		}*/
 		
 		switch($scope.mailId) {
 			case 'mails':
