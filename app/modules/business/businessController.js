@@ -38,16 +38,16 @@ define(['app'], function (app) {
 			//get request for businesslist
 			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) { //function for businesslist response
+				
 				$scope.bizList = response.data;
-				//$scope.totalRecords = response.totalRecords;
+				
 				
 			});
 			//get request for delete bizlist 
 			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) { //function for deltebiz response
 				$scope.delBiz = response.data;
-				//$scope.totalRecords = response.totalRecords;
-				//console.log($scope.properties);
+				$scope.totalRecords = response.totalRecords;
 			});
 		};
 		
