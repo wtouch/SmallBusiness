@@ -9,9 +9,10 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="to" class="col-sm-2 control-label">To</label>
+					<label for="to_email" class="col-sm-2 control-label">To</label>
 					<div class="col-sm-6">
-						<input type="Email" class="form-control" id="to" ng-model="composemail.to" name="to" placeholder="Enter Email" required>
+						<!--pre>{{selected | json}}</pre-->
+						<input type="Email" class="form-control" id="to_email" ng-model="composemail.to_email" name="to" placeholder="Enter Email" required>
 						<span class="help-block" ng-show="composemailviewForm.to.$dirty && composemailviewForm.to.$invalid">
 							<span class="text-danger" ng-show="composemailviewForm.to.$error.required">Email is required.</span>
 							<span class="text-danger" ng-show="composemailviewForm.to.$error.email">Invalid Email address.</span>
@@ -29,7 +30,7 @@
 				<div class="form-group">
 					<label for="cc" class="col-sm-2 control-label">Cc</label>
 					<div class="col-sm-9">
-						<input type="Email" class="form-control" id="cc" ng-model="composemail.cc" name="cc" placeholder="Enter Email" required >
+						<input type="Email" class="form-control" id="cc" ng-model="cc" name="cc" placeholder="Enter Email" required >
 						<span class="help-block" ng-show="composemailviewForm.cc.$dirty && composemailviewForm.cc.$invalid">
 							<span class="text-danger" ng-show="composemailviewForm.cc.$error.required">Email is required.</span>
 							<span class="text-danger" ng-show="composemailviewForm.cc.$error.email">Invalid Email address.</span>
@@ -47,25 +48,25 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<textarea id="textformail" name="textformail" class="form-control" rows="3" ng-model="composemail.textformail" ng-minlength="5" ng-maxlength="10" ui-tinymce required>
+						<textarea id="message" name="message" class="form-control" rows="3" ng-model="composemail.message" ng-minlength="5" ng-maxlength="10" ui-tinymce required>
 						</textarea>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="propImages" class="col-sm-2" >* Property Images </label>
-					<div class="col-sm-9">
-						<input type="file" name="attachfile" value="Attach File">
+					<!-- <label for="propImages" class="col-sm-2" >Select File </label>-->
+					<div class="col-sm-offset-2 col-sm-9">
+						<input type="file" id="attachment" name="attachment" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="attachment">
 						<!-- This is file input for select images -->
 						<!--<input type="file" id="propImages" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="propImages">
 						
 						<!-- This will show thumbnails & progress of images -->
-						<!-- <file-preview url="propImages" ng-model="property.prop_image"></file-preview>-->
+						<file-preview url="attachment" ng-model="composemail.attach_files"></file-preview>
 						
 						<!-- This button will show if file/s selected -->
-						<!--<button ng-show="propImages" ng-click="upload(propImages,path,userinfo)" type="button">Upload</button>-->
+						<button ng-show="attachment" ng-click="upload(attachment,path,userinfo)" type="button">Upload</button>
 						
 						<!-- This hidden input will store image path in array after successful uploading -->
-						<!--<input type="hidden" ng-model="property.prop_image">-->
+						<input type="hidden" ng-model="composemail.attach_files">
 					</div>
 				</div>
 			</form>

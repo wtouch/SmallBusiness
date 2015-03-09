@@ -1,9 +1,9 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService']; /* Added $routeParams to access route parameters */
+    var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService','upload']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var enquiryController = function ($scope, $injector, $routeParams,$location,dataService) {
+	var enquiryController = function ($scope, $injector, $routeParams,$location,dataService,upload) {
 		
 		//Code For Pagination
 		$scope.maxSize = 5;
@@ -24,7 +24,7 @@ define(['app'], function (app) {
 		}
 		
 		$scope.pageChanged = function(page, where) {
-			angular.extend(where, $scope.user_id);
+			//angular.extend(where, $scope.user_id);
 			dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems, where).then(function(response){
 				$scope.mailList = response.data;
 				//console.log(response.data);
@@ -34,7 +34,7 @@ define(['app'], function (app) {
 		
 		var inboxmailList = function(){
 			$scope.status = {status : 1};
-			angular.extend($scope.status, $scope.user_id);
+			//`angular.extend($scope.status, $scope.user_id);
 			
 			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.status)
 			.then(function(response) {  
@@ -61,16 +61,16 @@ define(['app'], function (app) {
 			});
 		}
 		
-		/*var composeMail = function(){
+		var composeMail = function(){
 			//reset function
 			$scope.reset = function() {
-				$scope.compose = {};
+				$scope.composemail = {};
 			};
-			//post method for insert data in request template form{trupti}
-			$scope.postData = function(reqtemp) { 
-				dataService.post("/post/template",reqtemp)
-				.then(function(response) {  //function for response of request temp
-					$scope.reqtemp = response.data;
+			//post method for insert data of compose mail
+			$scope.postData = function(composemail) { 
+				dataService.post("/post/enquiry",composemail)
+				.then(function(response) {  
+					$scope.composemail = response.data;
 					console.log(response);
 					$scope.reset();
 				});
@@ -90,10 +90,35 @@ define(['app'], function (app) {
 			case 'delete':
 				deletemailList();
 				break;
+			
+			case 'composemailview' :
+				composeMail();
+				break;
 				
 			default:
 				inboxmailList();
 		};
+		//Upload Function for uploading files {Vilas}
+		$scope.composemail={}; // this is form object
+		$scope.userinfo = {user_id:1}; // this is for uploading credentials
+		$scope.path = "enquiry/"; // path to store images on server
+		$scope.composemail.attach_files = []; // uploaded images will store in this array
+		$scope.upload = function(files,path,userinfo){ // this function for uploading files
+			upload.upload(files,path,userinfo,function(data){
+				if(data.status !== 'error'){
+					$scope.composemail.attach_files.push(JSON.stringify(data.details));
+					console.log(data.message);
+				}else{
+					alert(data.message);
+				}
+				
+			});
+		};
+		
+		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
+			upload.generateThumbs(files);
+		};
+		// End upload function
 		
 	};
 
