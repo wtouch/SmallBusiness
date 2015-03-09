@@ -1,11 +1,33 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService'];
+    var injectParams = ['$scope', '$injector','$http','$routeParams','$location','dataService','modalService'];
 
     // This is controller for this view
-	var businessController = function ($scope, $injector, $routeParams,$location,dataService)
+	var businessController = function ($scope, $injector,$http, $routeParams,$location,dataService,modalService)
 	{
+		
+		$scope.open = function (url, buzId) {
+			dataService.get("getsingle/business/"+buzId)
+			.then(function(response) {
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+				};
+				var modalOptions = {
+					bizList: response  // assign data to modal
+				};
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log("modalOpened");
+				});
+			});
+			
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+
+		
+		
 		//all $scope object goes here
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -118,9 +140,11 @@ define(['app'], function (app) {
 				console.log(response);
 			})
 		}	//end of insert
-	
 		
-		// This code for Date Picker {Vilas}
+		
+		
+		
+		/*/ This code for Date Picker {Vilas}
 		$scope.today = function(){
 			$scope.newsDate = new Date();
 		};
