@@ -44,7 +44,7 @@ define(['app'], function (app) {
 		$scope.reqtemp.scrible  = []; // uploaded images will store in this array
 		$scope.upload = function(files,path,userinfo){ // this function for uploading files
 			upload.upload(files,path,userinfo,function(data){
-				if(data.status !== 'error'){
+				if(data.status === 'success'){
 					$scope.reqtemp.scrible.push(JSON.stringify(data.details));
 					console.log(data.message);
 				}else{

@@ -14,6 +14,7 @@ $body = $app->request->getBody();
 	echo "Not Found";
 }); */
 //use these uri for all get requests {Vilas}
+$app->post('/upload', 'uploadFiles' );
 //Use this uri for multiple records with limit {Vilas}
 $app->get('/getmultiple/:getRequest/:pageNo(/:records)','getRecords');
 // use thi uri for single record {Vilas}
@@ -96,6 +97,23 @@ function postRecord($getRequest){
     }
 };
 
+function uploadFiles(){
+	$app = new \Slim\Slim();
+	$body = $app->request->getBody();
+
+	try{
+		if(!isset($_FILES)){
+				throw new Exception('There is no file input!');
+		}else{
+			include 'modules/upload.php';
+		}
+	}
+	catch(Exception $e) {
+		echo "Error: '".$e->getMessage()."'";
+        //return $app->response()->redirect($baseUrl.'/notfound');
+    }
+}
+
 function putRecord($getRequest, $id){
 	$app = new \Slim\Slim();
 	$body = $app->request->getBody();
@@ -145,7 +163,16 @@ function deleteRecord($getRequest, $id){
         echo "Error: '".$e->getMessage()."'";
     }
 };
+function echoResponse($status_code, $response) {
+    $app = \Slim\Slim::getInstance();
+    // Http response code
+    $app->status($status_code);
 
+    // setting response content type to json
+    $app->contentType('application/json');
+
+    echo json_encode($response);
+}
 
 $app->run();
  ?>
