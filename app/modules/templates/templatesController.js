@@ -17,9 +17,10 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.user_id = {user_id : 2}; // these are URL parameters
 		// All $scope methods
-		$scope.template_type = {template_type: public};
+		//$scope.template_type = {template_type: public};
 		$scope.pageChanged = function(page) { // Pagination page changed
-			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, $scope.user_id)
+		angular.extend(where, $scope.user_id);
+			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, where)
 			.then(function(response) {  //function for templatelist response
 				$scope.templates = response.data;
 				//console.log($scope.properties);
@@ -53,6 +54,8 @@ define(['app'], function (app) {
 		
 		// switch functions
 		var listoftemplates = function(){
+			//$scope.status = {status : 1};
+			//angular.extend($scope.status, $scope.user_id);
 			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 				.then(function(response) {  //function for templatelist response
 				$scope.totalRecords = response.totalRecords;

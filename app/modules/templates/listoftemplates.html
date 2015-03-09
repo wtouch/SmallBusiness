@@ -47,7 +47,8 @@
 				<th>Select Template</th>
 			</thead>
 				<tbody>
-					<tr ng-repeat="x in templates | filter : { status: status}">
+					<tr ng-repeat="x in templates  | filter :
+					{template_type : type } | filter : { status : status }">
 						<td>{{((tempListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 						<td>{{x.template_name}}</td>
 						<td>{{x.date | date:'MM/dd/yyyy'}}</td>
@@ -61,6 +62,6 @@
 		</table>
 	</div>
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="tempListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(tempListCurrentPage)"></pagination>Records:{{totalRecords}}
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="tempListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(tempListCurrentPage,type)"></pagination>Records:{{totalRecords}}
 		<pre>Page: {{tempListCurrentPage}} / {{numPages}}</pre>
 	</div>		
