@@ -8,6 +8,7 @@ define(['app'], function (app) {
 		//for display form parts
 		$scope.tempPart = $routeParams.tempPart;
 		// all $scope object goes here
+		$scope.alerts = [];
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.tempListCurrentPage = 1;
@@ -17,8 +18,7 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.user_id = {user_id : 2}; // these are URL parameters
 		// All $scope methods
-		//$scope.template_type = {template_type: public};
-		$scope.pageChanged = function(page) { // Pagination page changed
+		$scope.pageChanged = function(page,where) { // Pagination page changed
 		angular.extend(where, $scope.user_id);
 			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, where)
 			.then(function(response) {  //function for templatelist response
@@ -26,6 +26,11 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
+		
+		//function for close alert
+			$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+			};
 		
 		/*For display by default templatelist page {trupti}*/
 		if(!$routeParams.tempPart) {
@@ -53,34 +58,58 @@ define(['app'], function (app) {
 		};// End upload function
 		
 		// switch functions
-		var listoftemplates = function(){
-			//$scope.status = {status : 1};
-			//angular.extend($scope.status, $scope.user_id);
-			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.user_id)
-				.then(function(response) {  //function for templatelist response
-				$scope.totalRecords = response.totalRecords;
-				$scope.templates = response.data;
-			});//end of by default templist
-		};
-		
 		var mytemplates = function(){
 			//function for mytemplate{trupti}
 			dataService.get("/getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) {  //function for my templates response
+			if(response.status == 'success'){
+					$scope.templates=response.data;
+					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					$scope.totalRecords = response.totalRecords;	
+				}
+				else
+				{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				};
 				$scope.templates = response.data;
 			});
 		};
 		
+		var listoftemplates = function(){
+			$scope.template_type = {template_type : 'public'};
+			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+				.then(function(response) {  //function for templatelist response
+					if(response.status == 'success'){
+					$scope.templates=response.data;
+					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					$scope.totalRecords = response.totalRecords;
+					
+				}
+				else
+				{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				};
+			});//end of by default templist
+		};
+		
 		var custometemplates = function(){
-			//for custom templtae
-			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems, $scope.user_id)
-			.then(function(response) {  //function for templatelist response
-				$scope.totalRecords = response.totalRecords;
-				$scope.templates = response.data;
-				
+			$scope.template_type = {template_type : 'private',status:0 };
+			//$scope.status = {status : 1};
+			angular.extend($scope.template_type, $scope.user_id);
+			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+			.then(function(response) {  //function for template list response
+				if(response.status == 'success'){
+					$scope.templates=response.data;
+					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					$scope.totalRecords = response.totalRecords;
+				}
+				else
+				{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				};
+
 			});
 		}
-		
 		var requestcustomtemplates = function(){
 			//reset function{trupti}
 			$scope.reset = function() {
@@ -96,6 +125,7 @@ define(['app'], function (app) {
 				});
 			}//end of post method{trupti}
 		}
+		
 		switch($scope.tempPart) {
 			case 'listoftemplates':
 				listoftemplates();
