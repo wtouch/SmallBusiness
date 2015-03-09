@@ -85,7 +85,7 @@ define(['app'], function (app) {
 			.then(function(response){
 				if(response.status == 'success'){	
 					$scope.bizList=response.data;
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords=response.totalRecords;									
 					//console.log(response.data);
 				}
@@ -142,7 +142,7 @@ define(['app'], function (app) {
 			.then(function(response){
 				if(response.status == 'success'){
 					$scope.delBiz=response.data;
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords=response.totalRecords;				
 				//console.log(response.data);			
 				}
