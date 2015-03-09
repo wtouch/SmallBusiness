@@ -16,19 +16,65 @@ class dbHelper {
         }
     }
 	
-	function selectJoin($table, $where, $limit=null){
+	function selectJoin($table,$where, $limit=null, $innerJoin = null, $selectInnerJoinCols = null, $leftJoin = null, $selectLeftJoinCols = null){
 		try{
             $a = array();
             $w = "";
             foreach ($where as $key => $value) {
-                $w .= " and " .$key. " like :".$key;
+                $w .= " and " .$table.".".$key. " like :".$key;
                 $a[":".$key] = $value;
             }
 			$lmt = ($limit['pageNo'] == 0 ) ? $limit['pageNo'] : $limit['pageNo'] - 1;
 			$startLimit = $lmt * $limit['records']; // start on record $startLimit
 			$dbLimit = ($limit===null) ? "" : " LIMIT ".$startLimit.", ".$limit['records'];
 			
-            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w ." ".$dbLimit);
+			$selectQuery = "";
+			$innerJoinQuery = "";
+			$no=null;
+			if(isset($innerJoin)){
+				foreach($innerJoin as $tableName=> $columnArray ){
+					
+					 foreach($columnArray as  $leftColumn => $rightColumn){
+						$no += 1;
+						$tableAlias = "inr".$no; 
+						 
+						$innerJoinQuery .= "INNER JOIN ".$tableName." as ".$tableAlias." ";
+						$innerJoinQuery .= "ON ".$table.".".$leftColumn." = ".$tableAlias.".".$rightColumn." ";
+						
+						foreach($selectInnerJoinCols[$tableName][$leftColumn] as $colName => $colAs){
+							$colAs = ($colAs==="") ? ", " : " as ".$colAs.", ";
+							$selectQuery .= " ".$tableAlias.".".$colName.$colAs;
+						}
+					}
+
+				}
+			}
+
+			$leftJoinQuery = "";
+			$no=null;
+			if(isset($innerJoin)){
+				foreach($leftJoin as $tableName=> $columnArray ){
+					
+					 foreach($columnArray as  $leftColumn => $rightColumn){
+						 $no += 1;
+						 $tableAlias = "lft".$no;
+						$leftJoinQuery .= "LEFT JOIN ".$tableName." as ".$tableAlias." ";
+						$leftJoinQuery .= "ON ".$table.".".$leftColumn." = ".$tableAlias.".".$rightColumn." ";
+						
+						foreach($selectLeftJoinCols[$tableName][$leftColumn] as $colName => $colAs){
+							$colAs = ($colAs==="") ? ", " : " as ".$colAs.", ";
+							$selectQuery .= " ".$tableAlias.".".$colName.$colAs;
+						}
+						
+					}
+					
+				}
+			}
+			$finalSelectQuery = substr("SELECT ".$table.".*, ".$selectQuery, 0, -2);
+			$finalQueryString = $finalSelectQuery." FROM ".$table." ".$innerJoinQuery.$leftJoinQuery;
+			//echo $finalQueryString;
+			
+            $stmt = $this->db->prepare($finalQueryString." where 1=1 ". $w ." ".$dbLimit);
             $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
@@ -49,7 +95,7 @@ class dbHelper {
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = 'Select Failed: ' .$e->getMessage();
-            $response["data"] = null;
+            $response["data"] = null; //$finalQueryString." where 1=1 ". $w ." ".$dbLimit;
         }
         return $response;
 	}
