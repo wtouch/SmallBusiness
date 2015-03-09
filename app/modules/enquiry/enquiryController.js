@@ -76,7 +76,7 @@ define(['app'], function (app) {
 				});
 				
 			}
-		}*/
+		}
 		
 		switch($scope.mailId) {
 			case 'mails':
