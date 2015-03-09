@@ -13,7 +13,7 @@ define(['app'], function (app) {
 		$scope.delBizCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
-		$scope.user_id = {user_id : 2}; // these are URL parameters
+		$scope.user_id = {user_id : 1}; // these are URL parameters
 		$scope.formPart = $routeParams.formPart;
 		
 		// This will change businessView dynamically from 'business.html' {Vilas}

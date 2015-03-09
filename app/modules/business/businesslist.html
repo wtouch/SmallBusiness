@@ -52,23 +52,26 @@
 							
 								<div class="btn-group">
 								
-										<button type="button" tooltip="{{dynamicTooltip(x.verified, 'No Verify', 'Verify')}}" ng-class="(x.verified==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.verified" ng-change="verify(x.id, x.verified)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-ok"></span></button>
+										<button type="button" tooltip="{{dynamicTooltip(x.verified, 'No Verify', 'Verify')}}" ng-class="(x.verified==1) ? 'btn btn-primary' : 'btn btn-warning'" ng-model="x.verified" ng-change="verify(x.id, x.verified)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-ok"></span></button>
 										
 								</div>
 								
 								<div class="btn-group">
-										<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Non Featured', 'Featured')}}" ng-class="(x.featured==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-star"></span></button>
+										<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Non Featured', 'Featured')}}" ng-class="(x.featured==1) ? 'btn btn-info' : 'btn btn-danger'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-star"></span></button>
 										
 								</div>
-								
-								<div class="btn-group" role="group" aria-label="...">
-									<button type="button" class="btn btn-default glyphicon glyphicon-pencil btn btn-default" tooltip="Edit" ng-click="update(x.id)">
-									</button>
+								<div class="btn-group">
+										<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Non Featured', 'Featured')}}" ng-class="(x.featured==1) ? 'btn btn-warning' : 'btn btn-primary'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-star"></span></button>
+										
 								</div>
-								
+										
 								<div class="btn-group">
 										<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-remove"></span></button>								
-								</div>						
+								</div>
+								<div class="btn-group">
+									<button type="button" class="btn btn-default" tooltip="Priview">Priview
+									</button>
+								</div>
 							</div>
 						</td>
 					</tr>
