@@ -1,7 +1,7 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$location','$routeParams','dataService','upload'];
+    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload'];
 
     // This is controller for this view
 	var websitesController = function ($scope, $injector,$routeParams,$location,dataService,upload) {
@@ -22,17 +22,17 @@ define(['app'], function (app) {
 			dataService.get("/getmultiple/website/"+page+"/"+$scope.pageItems, where)
 			.then(function(response) {  //function for websitelist response
 				$scope.website = response.data;
-				//console.log($scope.properties);
+				
 			});
 		};
         
         //function for close alert
 			$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
+				$scope.alerts.splice(index, 1);
 			};
         /*For display by default websitelist.html page*/
-		if(!$routeParams.websitePart) {
-		$location.path('/dashboard/websites/websiteslist');
+		if($scope.websitePart!=='websiteslist') {
+			$location.path('/dashboard/websites/websiteslist');
 		}
         
         // switch functions
@@ -58,6 +58,7 @@ define(['app'], function (app) {
 			.then(function(response) {  //function for websiteslist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
+					console.log($scope.website);
 					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;	
 				}
@@ -65,7 +66,7 @@ define(['app'], function (app) {
 				{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				};
-				$scope.website = response.data;
+				//$scope.website = response.data;
 			});
 		};
         
