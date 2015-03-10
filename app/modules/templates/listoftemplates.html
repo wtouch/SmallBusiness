@@ -19,7 +19,8 @@
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="status" class="control-label">Select Status</label>
-					<select id="status" class="form-control" ng-change="changeStatus(showStatus)" ng-model="showStatus">
+					<select id="status" class="form-control" 
+					ng-change="changeStatus(showStatus)" ng-model="showStatus">
 						<option value="" selected>Select Status</option> <!-- add value attribute empty & selected for initial selected option -->
 						<option value="1" >Active</option>
 						<option value="0">Deleted</option>
@@ -29,17 +30,18 @@
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="status" class="control-label">Filter By Temp Type</label>
-					<select id="status" class="form-control" ng-model="status">
+					<select id="status" class="form-control" ng-model="type" ng-change="changeStatus(type)" >
 						<option value="" selected>Select type</option> <!-- add value attribute empty & selected for initial selected option -->
-						<option value="1">Public</option>
-						<option value="0">Private</option>
+						<option value="0">Public</option>
+						<option value="1">Private</option>
 					</select>
 			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="bottomspace">
 				<label for="featured" class="control-label">Filter By Category</label>
-					<select id="featured" class="form-control" ng-model="featured">
+					<select id="featured" class="form-control" ng-model="featured" 
+					ng-change="changeStatus(featured)">
 						<option value="" selected>Select Category</option> <!-- added value & selected attr -->
 						<option value="1" >Mobile</option>
 						<option value="0">Tab</option> 

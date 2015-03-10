@@ -48,6 +48,7 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
+		//this is global method for filter 
 		$scope.changeStatus = function(showStatus) {
 			console.log($scope.template_type);
 			$scope.filterStatus = {status : showStatus};
@@ -59,6 +60,7 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
+		
 		//function for close alert
 			$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
@@ -106,13 +108,12 @@ define(['app'], function (app) {
 		};
 		
 		var listoftemplates = function(){
-			$scope.template_type = {template_type : 'public',status:1};
+			$scope.template_type = {template_type : 'public',status:1 ,category:'Mobile'};
 			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
 					$scope.templates=response.data;
 					$scope.totalRecords = response.totalRecords;
-					
 				}
 				else
 				{
