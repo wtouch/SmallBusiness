@@ -61,11 +61,11 @@
 				<th>status</th>
 			</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td></td>
-						<td></td>
-						<td></td>
+					<tr ng-repeat="x in website">
+				    <td>{{((webListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
+					<td>{{x.domain_name}}</td>
+					<td>{{x.registered_date}}</td>
+					<td>{{x.expiry_date}}</td>
 						<td>
 						<div class="btn-toolbar" role="toolbar" aria-label="...">
 							<div class="btn-group" role="group" aria-label="...">
@@ -83,6 +83,7 @@
 								</button>
 							</div>
 						</div>
+                        </td>
 						<td>Active</td>
 					</tr>
 				</tbody>					
