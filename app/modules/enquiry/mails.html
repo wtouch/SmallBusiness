@@ -6,21 +6,33 @@
 			<th>Subject</th>
 			<th>From</th>
 			<th>Date</th>
+			<th>Status</th>
 			
 		</thead>
 		<tbody>
 			<tr ng-repeat="mail in mailList">
-				<td><input type="checkbox"></td>
+				<td><button class="btn btn-danger" tooltip="delete" ng-change="deleted(mail.id,mail.read_status, $index)"><span class="glyphicon glyphicon-remove"></span></button></td>
 				<td>{{((mailListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
-					<!--Interviews for Freshers in Syntel   inside {{}} we can add dynamic value of mail's id -->
-				<td><a href="#/dashboard/enquiry/mailview">{{mail.subject}}</a></td>
+					
+				<td>
+					<a href="#/dashboard/enquiry/mailview"ng-if="mail.read_status==0"><b>{{mail.subject}}</b></a>
+					<a href="#/dashboard/enquiry/mailview"ng-if="mail.read_status==1">{{mail.subject}}</a>
+				</td>
 				<td>{{mail.from_email}}</td>
 				<td>{{mail.date}}</td>
+				<td>
+					<button type="button" ng-if="(mail.read_status==1)" ng-model="mail.read_status" >
+						<span>Read</span>
+					</button> 
+					<button type="button" ng-if="(mail.read_status==0)" ng-model="mail.read_status" ng-click="changestatus(mail.id,mail.read_status, $index)">
+						<span>Unread</span>
+					</button>  
+				</td>
 			</tr>
 		</tbody>					
 	</table>
 </div>
 <div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems" ng-model="mailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(mailListCurrentPage, status)"></pagination>Total Mails:{{totalRecords}}			
+	<pagination total-items="totalRecords" items-per-page="pageItems" ng-model="mailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(mailListCurrentPage, status)"></pagination>			
 	<pre>Page: {{mailListCurrentPage}} / {{numPages}}</pre>
 </div>
