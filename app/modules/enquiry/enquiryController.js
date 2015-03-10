@@ -59,25 +59,26 @@ define(['app'], function (app) {
 		};
 		
 		$scope.changestatus = function(id, read_status, index){
-				if(read_status==0){
-					$scope.status = {read_status : 1};
-					
-					
-					dataService.put("put/enquiry/"+id, $scope.status)
-					.then(function(response) { 
-						console.log(response.message);
-						$scope.mailList[index].read_status = 1
-						//$scope.readStatus = 1;
-						
-					});
-				}
-			};
+			if(read_status==0){
+				$scope.status = {read_status : 1};
+				dataService.put("put/enquiry/"+id, $scope.status).then(function(response) { 
+					console.log(response.message);
+					$scope.mailList[index].read_status = 1
+					//$scope.readStatus = 1;
+				});
+			}
+		};
+		
+		/*$scope.deleted = function(id, status){
+				$scope.deletedData = {status : status};
+				console.log($scope.deletedData);
+				dataService.put("put/business/"+id, $scope.deletedData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			};*/
+			
 		var inboxmailList = function(){
-			//$scope.status = {read : 1, new : 1};
-			//$scope.status1 = {status :2};
-			//angular.extend($scope.status, $scope.status1);
-			
-			
 			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems).then(function(response) { 
 				if(response.status == 'success'){
 					$scope.mailList = response.data;
@@ -90,7 +91,7 @@ define(['app'], function (app) {
 		}
 		
 		var sentmailList = function(){
-			$scope.status = {status : 3};
+			$scope.status = {status : 2};
 			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response){
 				if(response.status == 'success'){
 					$scope.mailList = response.data;
