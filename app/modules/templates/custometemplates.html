@@ -44,7 +44,8 @@
 				<thead>
 					<th>Sr.No.</th>
 					<th>Template Name</th>
-					<th>Status</th>
+					<th>custom</th>
+					<th>Development Status</th>
 					<th>Create Date</th>
 					<th>Modified Date</th>
 					<th>Manage</th>
@@ -53,17 +54,24 @@
 						<tr ng-repeat="x in templates">
 							<td>{{((customTempCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 							<td>{{x.template_name}}</td>
-							<td>{{x.status}}</td>
+							<td>{{x.custom}}</td>
+							<td>
+							<button type="button" ng-show="x.development_status=='rejected'"tooltip="{{dynamicTooltip(x.development_status, 'rejected', 'order_placed')}}" ng-class="(x.development_status==rejected) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.development_status" ng-change="reject(x.id, x.development_status)" btn-checkbox btn-checkbox-true="'rejected'" btn-checkbox-false="'order_placed'"><span class="glyphicon glyphicon-refresh">Resend Request</span></button>
+							<span ng-show="x.development_status!='rejected'">{{x.development_status}}</span>
+							</td>
 							<td>{{x.date | date:'MM/dd/yyyy'}}</td>
 							<td>{{x.modified_date}}</td>
-							<td><a href="#" class="btn btn-default">Renew</a></td>
+							<td>
+							<a class="btn btn-success" ng-show="x.status==1" title="Active">Active</a>
+							<a class="btn btn-warning" ng-show="x.status==0" title="Delete">Delete</a>
+							<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Delete', 'Active')}}" ng-class="(x.featured==1) ? 'btn btn-info' : 'btn btn-danger'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-remove"></span></button>
+							</td>
 						</tr>		
 					</tbody>					
 			</table>
 	</div>
 	<div class="text-center">				
 		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="customTempCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(customTempCurrentPage,type,status,user_id)"></pagination>
-		Records:{{totalRecords}}
 		<pre>Page: {{customTempCurrentPage}} / {{numPages}}</pre>
 	</div>		
 

@@ -9,7 +9,6 @@
 				</span>
 			</div>						
 		</div>
-		
 		<!--<div class="form-group">	
 		<label  for="date" class="col-sm-2 control-label">Date</label>
 		<div class="col-sm-9">
@@ -21,6 +20,14 @@
 			</p>
 		</div>						
 		</div>-->
+		
+		<div class="form-group">	
+		<label  for="date" class="col-sm-2 control-label">Date</label>
+		<div class="col-sm-9">
+				  <input type="date" id="date" class="form-control" name="dateInput" ng-model="reqtemp.custome_requirement.date" required  placeholder="date" ng-model="date"> 
+		</div>						
+		</div>
+		
 		<div class="form-group">	
 			<label  for="domain" class="col-sm-2 control-label">Domain Name</label>
 				<div class="col-sm-9">
@@ -30,7 +37,6 @@
 					</span>
 				</div>						
 		</div>	
-		
 		<div class="form-group">
 			<label for="contact" class="col-md-2 control-label">Contact Number </label>
 			<div class="col-md-9">
@@ -40,7 +46,6 @@
 					</span>
 			</div>						
 		</div>
-		
 		<div class="form-group">
 			<label for="requirement" class="col-sm-2 control-label">Custom Requirement</label>	
 			<div class="col-sm-9">
@@ -53,7 +58,6 @@
 					</span>
 			</div>  
 		</div>	
-		
 		<div class="form-group">
 			<label for="tempImages" class="col-sm-2 control-label">Scrible</label>
 			<div class="col-sm-9">
@@ -81,8 +85,8 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
-				<button type="submit" class="btn btn-success" ng-click="postData(reqtemp)" tooltip="Send Request">Send Request</button>
-				<button type="reset" class="btn btn-danger" tooltip="Cancle">Reset</button>
+				<button type="submit" class="btn btn-success" ng-disabled="requestcustomtempForm.$dirty && requestcustomtempForm.$invalid" ng-click="postData(reqtemp)">Send Request</button>
+				<button type="reset" class="btn btn-danger">Reset</button>
 			</div>
 		</div>					
 	</form>

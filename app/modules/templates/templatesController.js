@@ -1,10 +1,32 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$location','$routeParams','dataService','upload'];
+    var injectParams = ['$scope', '$injector','$location','$routeParams','dataService','upload','modalService'];
     
     // This is controller for this view
-	var templatesController = function ($scope,$injector,$location,$routeParams,dataService,upload) {
+	var templatesController = function ($scope,$injector,$location,$routeParams,dataService,upload,modalService) {
+		//this code block for modal{trupti}
+		$scope.open = function (url, tempId) {
+			dataService.get("getsingle/template/"+tempId)
+			.then(function(response) {
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+					size : 'lg'
+				};
+				var modalOptions = {
+					tempList: response.data[0]  // assign data to modal
+				};
+				console.log(response.data[0]);
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log("modalOpened");
+				});
+			});
+			
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+		
 		//for display form parts
 		$scope.tempPart = $routeParams.tempPart;
 		// all $scope object goes here
@@ -59,12 +81,10 @@ define(['app'], function (app) {
 		
 		// switch functions
 		var mytemplates = function(){
-			//function for mytemplate{trupti}
 			dataService.get("/getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) {  //function for my templates response
 			if(response.status == 'success'){
 					$scope.templates=response.data;
-					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;	
 				}
 				else
@@ -76,12 +96,11 @@ define(['app'], function (app) {
 		};
 		
 		var listoftemplates = function(){
-			$scope.template_type = {template_type : 'public'};
+			$scope.template_type = {template_type : 'public',status:1};
 			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
 					$scope.templates=response.data;
-					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;
 					
 				}
@@ -90,17 +109,30 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 				};
 			});//end of by default templist
+			
+			//This code for apply/buy button{trupti}
+			
+			$scope.dynamicTooltip = function(status, active, notActive){
+				return (status==1) ? active : notActive;
+			};
+			
+			$scope.apply = function(id, applied){
+				$scope.appliedData = {applied : applied};
+				
+				dataService.put("put/template/"+id, $scope.appliedData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			} ;
 		};
 		
 		var custometemplates = function(){
-			$scope.template_type = {template_type : 'private',status:1 };
-			//$scope.status = {status : 1};
+			$scope.template_type = {template_type : 'private',status:1,custom:1};
 			angular.extend($scope.template_type, $scope.user_id);
 			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for template list response
 				if(response.status == 'success'){
 					$scope.templates=response.data;
-					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;
 				}
 				else
@@ -109,6 +141,40 @@ define(['app'], function (app) {
 				};
 
 			});
+			//This code for apply/buy button{trupti}
+			
+			$scope.dynamicTooltip = function(status, active, notActive){
+				return (status==1) ? active : notActive;
+			};
+			
+			//This code for active/delete button 
+			$scope.feature = function(id, featured){
+				$scope.featuredData = {featured : featured};
+				console.log($scope.featuredData);
+				dataService.put("put/template/"+id, $scope.featuredData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			};
+			
+			//This code for reject/order_placed button 
+			$scope.reject = function(id, development_status){
+				$scope.featuredData = {development_status : development_status};
+				console.log($scope.featuredData);
+				dataService.put("put/template/"+id, $scope.featuredData)
+				.then(function(response) { 
+					console.log(response);
+				});
+			};
+			
+			$scope.apply = function(id, applied){
+				$scope.appliedData = {applied : applied};
+				
+				dataService.put("put/template/"+id, $scope.appliedData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			} ;
 		}
 		
 		var requestcustomtemplates = function(){

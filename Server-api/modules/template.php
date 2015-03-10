@@ -15,6 +15,7 @@
 			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
 			(isset($_GET['template_type'])) ? $where['template_type'] = $_GET['template_type'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
+			(isset($_GET['custom'])) ? $where['custom'] = $_GET['custom'] : "";
 			$limit['pageNo'] = $pageNo; // from which record to select
 			$limit['records'] = $records; // how many records to select
 			
