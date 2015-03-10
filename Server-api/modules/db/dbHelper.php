@@ -89,7 +89,7 @@ class dbHelper {
 				//$response['totalRecords']= $totalRecords;
 				$response["message"] = count($rows)." rows selected.";
                 $response["status"] = "success";
-				$response["data"] = $rows;
+				$response["data"] = (count($rows)==1) ? $rows[0] : $rows;
             }
                 
         }catch(PDOException $e){
@@ -116,9 +116,6 @@ class dbHelper {
             $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
-			/* $res = $this->db->query('SELECT COUNT(*) FROM '.$table);
-			$totalRecords = $res->fetchColumn(); */
-			
             if(count($rows)<=0){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
@@ -127,7 +124,7 @@ class dbHelper {
 				//$response['totalRecords']= $totalRecords;
 				$response["message"] = count($rows)." rows selected.";
                 $response["status"] = "success";
-				$response["data"] = $rows;
+				$response["data"] = (count($rows)==1) ? $rows[0] : $rows;
             }
                 
         }catch(PDOException $e){
@@ -138,7 +135,7 @@ class dbHelper {
         return $response;
     }
     function insert($table, $inputData) {
-
+	
         try{
 			$inputData = json_decode($inputData);
 			
@@ -146,13 +143,18 @@ class dbHelper {
 			$dataValue = [];
 			foreach($inputData as $key => $val) // $inputData holds input json data
 			{
-				$value = (is_object($val) || is_array($val)) ? mysql_real_escape_string(json_encode($val)) : mysql_real_escape_string($val);
+				$value = ($key!=='password')
+						? (is_object($val) || is_array($val))
+							? mysql_real_escape_string(json_encode($val))
+							: mysql_real_escape_string($val)
+						: passwordHash::hash($val);
+				//echo ($key=='password')	? passwordHash::hash($val) : "not pass";
 				array_push($dataKey,$key);
 				array_push($dataValue,"'".$value."'");
 			}
 			$colNames = implode(",",$dataKey);
 			$colValues = implode(",",$dataValue);
-		
+
 		    $stmt =  $this->db->prepare("INSERT INTO $table($colNames) VALUES($colValues)");
             $stmt->execute();
             $affected_rows = $stmt->rowCount();
