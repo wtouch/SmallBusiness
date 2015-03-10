@@ -31,7 +31,7 @@ define(['app'], function (app) {
 				$scope.alerts.splice(index, 1);
 			};
         /*For display by default websitelist.html page*/
-		if($scope.websitePart!=='websiteslist') {
+		if(!$scope.websitePart) {
 			$location.path('/dashboard/websites/websiteslist');
 		}
         
