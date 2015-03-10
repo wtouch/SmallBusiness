@@ -19,9 +19,9 @@
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="status" class="control-label">Select Status</label>
-					<select id="status" class="form-control" ng-model="status">
+					<select id="status" class="form-control" ng-change="changeStatus(showStatus)" ng-model="showStatus">
 						<option value="" selected>Select Status</option> <!-- add value attribute empty & selected for initial selected option -->
-						<option value="1">Active</option>
+						<option value="1" >Active</option>
 						<option value="0">Deleted</option>
 					</select>
 			</div>
@@ -83,6 +83,6 @@
 		</table>
 	</div>
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="tempListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(tempListCurrentPage,type)"></pagination>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="tempListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(tempListCurrentPage,template_type)"></pagination>
 		<pre>Page: {{tempListCurrentPage}} / {{numPages}}</pre>
 	</div>		

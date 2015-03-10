@@ -40,15 +40,25 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.user_id = {user_id : 2}; // these are URL parameters
 		// All $scope methods
-		$scope.pageChanged = function(page,where) { // Pagination page changed
-		angular.extend(where, $scope.user_id);
-			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, where)
+		$scope.pageChanged = function(page) { // Pagination page changed
+			angular.extend($scope.template_type, $scope.user_id);
+			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for templatelist response
 				$scope.templates = response.data;
 				//console.log($scope.properties);
 			});
 		};
-		
+		$scope.changeStatus = function(showStatus) {
+			console.log($scope.template_type);
+			$scope.filterStatus = {status : showStatus};
+			angular.extend($scope.template_type, $scope.filterStatus);
+			dataService.get("/getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
+			.then(function(response) {  //function for templatelist response
+				$scope.templates = response.data;
+				$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});
+		};
 		//function for close alert
 			$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
@@ -110,6 +120,26 @@ define(['app'], function (app) {
 				};
 			});//end of by default templist
 			
+			//function for active button
+			var showActive= function(status){
+				$scope.template_type = {template_type : 'public',status:1};
+				dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+				.then(function(response) {  //function for templatelist response
+						if(response.status == 'success'){
+						$scope.templates=response.data;
+						$scope.totalRecords = response.totalRecords;
+						
+					}
+					else
+					{
+						$scope.alerts.push({type: response.status, msg: response.message});
+					};
+				});
+			//end of active button function
+			}
+			
+			
+			
 			//This code for apply/buy button{trupti}
 			
 			$scope.dynamicTooltip = function(status, active, notActive){
@@ -141,10 +171,12 @@ define(['app'], function (app) {
 				};
 
 			});
+			
+			
 			//This code for apply/buy button{trupti}
 			
-			$scope.dynamicTooltip = function(status, active, notActive){
-				return (status==1) ? active : notActive;
+			$scope.dynamicTooltip = function(development_status, rejected, order_placed){
+				return (development_status==rejected) ? rejected : order_placed;
 			};
 			
 			//This code for active/delete button 
@@ -166,7 +198,7 @@ define(['app'], function (app) {
 					console.log(response);
 				});
 			};
-			
+		
 			$scope.apply = function(id, applied){
 				$scope.appliedData = {applied : applied};
 				
