@@ -16,10 +16,11 @@
 					</select>
 			</div>
 		</div>
+		
 		<div class="col-sm-4">
 			<div class="bottomspace">
-				<label for="featured" class="control-label">Filter By Created Date</label>
-					<select id="featured" class="form-control" ng-model="featured">
+				<label for="featured" class="control-label">Filter By Featured</label>
+					<select id="featured" class="form-control" ng-model="featuredFilter" ng-change="changeStatus('featured',featuredFilter)">
 						<option value="" selected>Select Featured</option><!-- added value & selected attr -->
 						<option value="1" >Featured</option>
 						<option value="0">Not Featured</option> 
@@ -81,6 +82,6 @@
 		</div>
 	</div>
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="bizListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(bizListCurrentPage)"></pagination>				
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="bizListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(bizListCurrentPage,featured)"></pagination>				
 		<pre>Page: {{bizListCurrentPage}} / {{numPages}}</pre>
 	</div>	

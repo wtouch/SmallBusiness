@@ -58,10 +58,12 @@ define(['app'], function (app) {
 		if(!$routeParams.businessView) {
 			$location.path('/dashboard/business/businesslist');
 		}
-				
+			
+		
 		$scope.pageChanged = function(page) {
 			//$log.log('Page changed to: ' + $scope.currentPage);
 			//get request for businesslist
+			angular.extend($scope.featured, $scope.user_id);
 			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) { //function for businesslist response
 				
@@ -76,6 +78,29 @@ define(['app'], function (app) {
 				$scope.totalRecords = response.totalRecords;
 			});
 		};
+		
+		//this is global method for filter 
+		$scope.changeStatus = function(statusCol, showStatus) {
+			console.log($scope.featured);
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.featured[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.featured, $scope.filterStatus);
+			dataService.get("/getmultiple/business/1/"+$scope.pageItems, $scope.featured)
+			.then(function(response) {  //function for templatelist response
+				if(response.status == 'success'){
+					$scope.bizList = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.bizList = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				//console.log($scope.properties);
+			});
+		};
+		
+		
+		
 		
 		var businesslist = function(){
 			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.user_id)
