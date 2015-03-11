@@ -16,17 +16,13 @@
 			
 			<div class="toolbar pull-right">
 				<div class="btn-group" role="group" aria-label="Sixth group" ng-if="mailId=='mailview'">
-					<button class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Previous Message"><span class=" glyphicon glyphicon-arrow-left" name="prevmsg" value="prevmsg"></span></button>
-					
-					<button class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Next Message"><span class="glyphicon glyphicon-arrow-right" name="nextmsg" value="nextmsg"></span>
-					</button>
+					<a class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Previous Message" ng-click="prevmail()" ><span class=" glyphicon glyphicon-arrow-left" name="prevmsg" value="prevmsg"></span></a>
+     
+					<a class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Next Message" ng-click="nextmail()"><span class="glyphicon glyphicon-arrow-right" name="nextmsg" value="nextmsg"></span></a>
 				</div>
 				<form class="form-inline">
 					<div class="input-group">
-						<input type="text" class="form-control iconback" placeholder="Search">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search iconsearch"></span></button>
-						</span>
+						<input id="search" type="text" class="form-control" ng-change="searchFilter('subject', searchProp)" ng-model="searchProp" placeholder="search" ng-if="mailId!='composemailview' && mailId!='mailview'"/>
 					</div>
 				</form>
 			</div>

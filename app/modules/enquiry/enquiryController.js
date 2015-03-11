@@ -14,29 +14,54 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.mailList = [];
+		$scope.mailId = $routeParams.mailId;
+		$scope.user_id = {user_id : 2};
+		$scope.alerts = [];
+		$scope.tinymceConfig = {};
+		$scope.currentDate = dataService.currentDate;
+		console.log($scope.currentDate);
+		$scope.hideDeleted = "";//hide deleted mails from inbox
+		
+		//For display by default mails.html page{trupti}
+		if(!$routeParams.mailId) {
+			$location.path('/dashboard/enquiry/mails');
+		}
+		
+		//function for close alert
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
 		
 		// code for refresh page
 		$scope.refreshpage=function(){
 			$route.reload();
 		}
 		
-		//Upload Function for uploading files {Vilas}
-		$scope.composemail={}; // this is form object
-		$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
-		$scope.path = "mail/"; // path to store images on server
-		$scope.composemail.Attachment = []; // uploaded images will store in this array
-		$scope.upload = function(files,path,userinfo){ // this function for uploading files
-			upload.upload(files,path,userinfo,function(data){
-				if(data.status !== 'error'){
-					$scope.composemail.Attachment.push(JSON.stringify(data.details));
-					console.log(data.message);
-				}else{
-					alert(data.message);
-				}
-				
-			});
+		//reset function
+		$scope.reset = function() {
+			$scope.composemail = {};
 		};
+			
+		//pagination
+		$scope.pageChanged = function(page, where) {
+			//angular.extend(where, $scope.user_id);
+			dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems, where).then(function(response){
+				$scope.mailList = response.data;
+				//console.log(response.data);
+			});
+		};//End of pagination
 		
+		//to change status of read and unread mails
+		$scope.changestatus = function(id, read_status, index){
+			if(read_status==0){
+				$scope.statusParam = {read_status : 1};
+				dataService.put("put/enquiry/"+id, $scope.statusParam).then(function(response) { 
+					console.log(response.message);
+					$scope.mailList[index].read_status = 1
+				});
+			}
+		};
+
 		//code for delete single mail
 		$scope.deletemail = function(id, status, index){
 			if(status==1){
@@ -45,54 +70,37 @@ define(['app'], function (app) {
 				.then(function(response) { 
 					console.log(response.message);
 					$scope.mailList[index].status = 0
+					$scope.hideDeleted = 1;
+ 				});
+			}
+		};
+		
+		//code for search filter
+		$scope.searchFilter = function(statusCol, colValue) {
+			$scope.searchObj = {search: true, subject : colValue};
+			angular.extend($scope.searchObj, $scope.statusParam);
+			if(colValue.length >= 4){
+				dataService.get("/getmultiple/enquiry/1/"+$scope.pageItems, $scope.searchObj)
+				.then(function(response) {  //function for templatelist response
+					if(response.status=="warning" || response.status=='error' ){
+						//$scope.alerts.push({type: response.status, msg: response.message});
+						$scope.mailList = response.data;
+						$scope.totalRecords = response.totalRecords;
+					}else{
+						$scope.mailList = response.data;
+						$scope.totalRecords = response.totalRecords;
+						console.log($scope.mailList);
+					}
 				});
 			}
 		};
 		
-		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
-			upload.generateThumbs(files);
-		};
-		
-		$scope.user_id = {user_id : 2};
-		// this object will check list of mails show or single mail show 
-		$scope.mailId = $routeParams.mailId; 
-		
-		//For display by default mails.html page{trupti}
-		if(!$routeParams.mailId) {
-			$location.path('/dashboard/enquiry/mails');
-		}
-		
-		$scope.pageChanged = function(page, where) {
-			//angular.extend(where, $scope.user_id);
-			dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems, where).then(function(response){
-				$scope.mailList = response.data;
-				//console.log(response.data);
-			});
-		};
-		//End of pagination
-		
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
-		
-		$scope.changestatus = function(id, read_status, index){
-			if(read_status==0){
-				$scope.status = {read_status : 1};
-				dataService.put("put/enquiry/"+id, $scope.status).then(function(response) { 
-					console.log(response.message);
-					$scope.mailList[index].read_status = 1
-					//$scope.readStatus = 1;
-				});
-			}
-		};
-		
+		//view inbox list
 		var inboxmailList = function(){
-			$scope.status = {status : 1};
-			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response) { 
+			$scope.statusParam = {status : 1};
+			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response) { 
 				if(response.status == 'success'){
 					$scope.mailList = response.data;
-					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -100,23 +108,64 @@ define(['app'], function (app) {
 			});
 		}
 		
+		var sentmailList = function(){
+			$scope.statusParam = {status : 2};
+			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response){
+				if(response.status=="success"){
+						$scope.mailList = response.data;
+						$scope.totalRecords = response.totalRecords;
+					}else{
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}
+			});
+		}
+		
+		var deletemailList = function(){
+			$scope.statusParam = {status : 0};
+			dataService.get("getmultiple/enquiry/"+$scope.delmailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response){
+				if(response.status=="warning" || response.status=='error' ){
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}else{
+					$scope.mailList = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}
+			});
+		}
+		
+		// this object will check list of mails show or single mail show 
+		
+		//view single mail 
 		var mailview= function(){
-			console.log($routeParams.id);
-			if($routeParams.id){
-				dataService.get("getsingle/enquiry/"+$routeParams.id)
+			$scope.mailSingleId = ($routeParams.id) ? $routeParams.id : "";
+			$scope.prevmail=function(){
+				$scope.mailSingleId = $scope.mailSingleId - 1;
+				console.log('/mailview/'+$scope.mailSingleId);
+				$location.path('/dashboard/enquiry/mailview/'+$scope.mailSingleId);
+			  }
+			$scope.nextmail=function(){
+				$scope.mailSingleId = parseInt($scope.mailSingleId)  + 1;
+				console.log('/mailview/'+$scope.mailSingleId );
+				$location.path('/dashboard/enquiry/mailview/'+$scope.mailSingleId  );
+			}
+			if($scope.mailSingleId != ""){
+				dataService.get("getsingle/enquiry/"+$scope.mailSingleId)
 				.then(function(response) {
 					$scope.singlemail = response.data;
+					$scope.totalRecords = response.totalRecords;
 					$scope.replyMail = {};
 					$scope.replyMail.reply_message ={};
 					$scope.replyMail.to_email = $scope.singlemail.from_email;
 					$scope.replyMail.from_email = $scope.singlemail.to_email;
 					$scope.replyMail.reply_message.subject = "RE: "+$scope.singlemail.subject;
-					$scope.replyMsg = ($scope.singlemail.reply_message!="")? JSON.parse($scope.singlemail.reply_message) : {message:""};
+					$scope.replyMsg = ($scope.singlemail.reply_message!="") ? JSON.parse($scope.singlemail.reply_message) : {message:""};
 					$scope.replyMail.reply_message.message = $scope.replyMsg.message;
 					
 					if($scope.singlemail.reply_status == 1){
 						$scope.tinymceConfig = {
 							readonly: true,
+							//toolbar: false,
+							//menubar: false,
+							//statusbar: false
 						  }
 					}
 					
@@ -126,8 +175,6 @@ define(['app'], function (app) {
 							console.log(response);
 						});
 					};
-					console.log($scope.replyMail);
-					
 				},function(error) {
 					console.log(error);
 				});
@@ -135,54 +182,49 @@ define(['app'], function (app) {
 			}	
 		}
 		
-		var sentmailList = function(){
-			$scope.status = {status : 2};
-			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response){
-				if(response.status == 'success'){
-					$scope.mailList = response.data;
-					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
-					$scope.totalRecords = response.totalRecords;
-					console.log(response.data);
-				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
-				}
-			});
-		}
 		
-		var deletemailList = function(){
-			$scope.status = {status : 0};
-			dataService.get("getmultiple/enquiry/"+$scope.delmailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response){
-				$scope.mailList = response.data;
-				$scope.totalRecords = response.totalRecords;
-				console.log(response.data);
-			});
-		}
+		
+		
 		
 		var composeMail = function(){
-			//reset function
-			$scope.reset = function() {
-				$scope.composemail = {};
+			
+			//Upload Function for uploading files {Vilas}
+			$scope.composemail = {user_id: 1, from_email : "vilas@wtouch.in", first_name : "Vilas", last_name : "Shetkar" };
+			$scope.composemail.date = $scope.currentDate;
+			$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
+			$scope.path = "mail/"; // path to store images on server
+			$scope.composemail.Attachment = []; // uploaded images will store in this array
+			$scope.upload = function(files,path,userinfo){ // this function for uploading files
+				upload.upload(files,path,userinfo,function(data){
+					if(data.status !== 'error'){
+						$scope.composemail.Attachment.push(JSON.stringify(data.details));
+						console.log(data.message);
+					}else{
+						alert(data.message);
+					}
+					
+				});
 			};
+			$scope.generateThumb = function(files){  // this function will generate thumbnails of images
+				upload.generateThumbs(files);
+			};
+			
+	
 			//post method for insert data of compose mail
 			$scope.postData = function(composemail) {
 				console.log(composemail);
 				dataService.post("/post/enquiry",composemail)
 				.then(function(response) {  
-					$scope.composemail = response.data;
-					console.log(response);
+					if(response.status=="success"){
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}else{
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}
 					$scope.reset();
 				});
 				
 			}
 		}
-		
-		/*var mailView = function(){
-			dataService.get("getsingle/enquiry/").then(function(response){
-				$scope.mailList = response.data;
-				$scope.totalRecords = response.totalRecords;
-				console.log(response.data);
-			});
-		}*/
 		
 		switch($scope.mailId) {
 			case 'mails':
@@ -204,7 +246,6 @@ define(['app'], function (app) {
 			case 'mailview':
 				//console.log(id);
 				mailview();
-				
 				break;
 				
 			default:

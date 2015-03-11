@@ -9,14 +9,14 @@
 		<tbody>
 			<tr ng-repeat="mail in mailList">
 				<td>{{$index + 1}}</td>
-				<td><a href="#/dashboard/enquiry/mailview">{{mail.subject}}</a></td>
-				<td>{{mail.to_email}}</td>
+				<td><a href="#/dashboard/enquiry/mailview/{{mail.id}}">{{mail.subject}}</a></td>
+				<td><a>{{mail.to_email}}</a></td>
 				<td>{{mail.date}}</td>
 			</tr>
 		</tbody>					
 	</table>
 </div>
 <div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="sentmailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(sentmailListCurrentPage)"></pagination>				
+	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="sentmailListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(sentmailListCurrentPage,statusParam)"></pagination>				
 	<pre>Page: {{sentmailListCurrentPage}} / {{numPages}}</pre>
 </div>
