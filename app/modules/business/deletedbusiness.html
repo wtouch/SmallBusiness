@@ -39,7 +39,7 @@
 					<th>Manage</th>
 				</thead>
 				<tbody>
-					<tr ng-repeat="x in delBiz">
+					<tr ng-repeat="x in bizList | filter: { status : hideDeleted}">
 						<td>{{ ((delBizCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 						<td>{{x.business_name}}</td>
 						<td>{{x.created_date}}</td>

@@ -16,7 +16,7 @@ class dbHelper {
         }
     }
 	
-	function selectJoin($table,$where, $limit=null, $innerJoin = null, $selectInnerJoinCols = null, $leftJoin = null, $selectLeftJoinCols = null){
+	function selectJoin($table,$where, $limit=null, $likeFilter=null, $innerJoin = null, $selectInnerJoinCols = null, $leftJoin = null, $selectLeftJoinCols = null){
 		try{
             $a = array();
             $w = "";
@@ -27,6 +27,13 @@ class dbHelper {
 			$lmt = ($limit['pageNo'] == 0 ) ? $limit['pageNo'] : $limit['pageNo'] - 1;
 			$startLimit = $lmt * $limit['records']; // start on record $startLimit
 			$dbLimit = ($limit===null) ? "" : " LIMIT ".$startLimit.", ".$limit['records'];
+			
+			$l = "";
+			if($likeFilter!=null){
+				foreach ($likeFilter as $key => $value) {
+					$l .= " and " .$key. " like '%". $value . "%'";
+				}
+			}
 			
 			$selectQuery = "";
 			$innerJoinQuery = "";
@@ -74,7 +81,7 @@ class dbHelper {
 			$finalQueryString = $finalSelectQuery." FROM ".$table." ".$innerJoinQuery.$leftJoinQuery;
 			//echo $finalQueryString;
 			
-            $stmt = $this->db->prepare($finalQueryString." where 1=1 ". $w ." ".$dbLimit);
+            $stmt = $this->db->prepare($finalQueryString." where 1=1 ". $w ." ".$l." ".$dbLimit);
             $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
@@ -89,7 +96,7 @@ class dbHelper {
 				//$response['totalRecords']= $totalRecords;
 				$response["message"] = count($rows)." rows selected.";
                 $response["status"] = "success";
-				$response["data"] = (count($rows)==1) ? $rows[0] : $rows;
+				$response["data"] = $rows;
             }
                 
         }catch(PDOException $e){
@@ -130,7 +137,7 @@ class dbHelper {
 				//$response['totalRecords']= $totalRecords;
 				$response["message"] = count($rows)." rows selected.";
                 $response["status"] = "success";
-				$response["data"] = (count($rows)==1) ? $rows[0] : $rows;
+				$response["data"] = $rows;
             }
                 
         }catch(PDOException $e){
