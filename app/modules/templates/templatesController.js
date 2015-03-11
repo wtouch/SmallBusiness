@@ -89,9 +89,9 @@ define(['app'], function (app) {
 		};
 		
 		//function for close alert
-			$scope.closeAlert = function(index) {
+		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
-			};
+		};
 		
 		/*For display by default templatelist page {trupti}*/
 		if(!$routeParams.tempPart) {

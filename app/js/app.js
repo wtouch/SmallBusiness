@@ -39,6 +39,8 @@ define(['angular',
 				
 				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/login/'))
 				
+				.when('/logout', route.resolve({controller:'login', template: 'logout', label: 'Logout'}, 'users/login/'))
+				
 				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
 				
 				.when('/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/login/'))
@@ -70,10 +72,33 @@ define(['angular',
 	}]);
 	
 		
-	app.run(['$location', '$rootScope', 'breadcrumbs', function($location, $rootScope, breadcrumbs) {
-		$rootScope.breadcrumbs = breadcrumbs;
-		console.log(breadcrumbs);
-		$rootScope.metaTitle = "Small Business";
+	app.run(['$location', '$rootScope', 'breadcrumbs','dataService', function($location, $rootScope, breadcrumbs, dataService) {
+		$rootScope.$on("$routeChangeStart", function (event, next, current) {
+			$rootScope.breadcrumbs = breadcrumbs;
+			$rootScope.metaTitle = "Small Business";
+			var nextUrl = next.$$route.originalPath;
+			if(nextUrl == '/logout'){
+				dataService.get('/login/logout').then(function(response){
+					$rootScope.LogoutMsg = response;
+				});
+			}
+			dataService.get('/login/session').then(function(response){
+				if(response.id==""){
+                    if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout') {
+
+                    } else {
+                        $location.path("/login");
+						$rootScope.alerts = [{type: "warning", msg: "You are not logged in!"}];
+                    }
+				}else{
+					if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/') {
+						$location.path("/dashboard");
+					}
+					$rootScope.userDetails = response;
+				};
+			})
+			
+		});
 	}]);
 	return app;
 });
