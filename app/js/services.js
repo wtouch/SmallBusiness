@@ -226,8 +226,15 @@ define(['app'], function (app) {
 		function ($http) { // This service connects to our REST API
 
 			var serviceBase = '../server-api/index.php/';
-
+			var today = new Date();
+			var year = today.getFullYear();
+			var month = today.getMonth() + 1;
+			var date = today.getDate();
+			var hour = today.getHours();
+			var min = today.getMinutes();
+			var sec = today.getSeconds();
 			var obj = {};
+			obj.currentDate = year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec;
 			obj.setBase = function(path){
 				serviceBase = path;
 			};

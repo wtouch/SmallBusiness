@@ -1,13 +1,13 @@
 'use strict'; 
 
 define(['angular',
- 'angularRoute',
- 'routeResolver',
- 'bootstrap',
- 'directives',
- 'services', 
- 'filters',
- 'upload','uploadShim',
+	'angularRoute',
+	'routeResolver',
+	'bootstrap',
+	'directives',
+	'services', 
+	'filters',
+	'upload','uploadShim',
 	'css!../css/bootstrap.min','css!../css/style'
 ], function(angular, angularRoute) {
 	// Declare app level module which depends on views, and components
@@ -70,6 +70,7 @@ define(['angular',
 		
 	app.run(['$location', '$rootScope', 'breadcrumbs', function($location, $rootScope, breadcrumbs) {
 		$rootScope.breadcrumbs = breadcrumbs;
+		console.log(breadcrumbs);
 		$rootScope.metaTitle = "Small Business";
 	}]);
 	return app;

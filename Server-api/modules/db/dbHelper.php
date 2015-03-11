@@ -140,6 +140,38 @@ class dbHelper {
         }
         return $response;
     }
+	function selectSingle($table, $where, $limit=1){
+        try{
+            $a = array();
+            $w = "";
+            foreach ($where as $key => $value) {
+                $w .= " and " .$key. " like :".$key;
+                $a[":".$key] = $value;
+            }
+			$dbLimit = " LIMIT ".$limit;
+			
+            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w ." ".$dbLimit);
+            $stmt->execute($a);
+            $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+			
+            if(count($rows)<=0){
+                $response["status"] = "warning";
+                $response["message"] = "No data found.";
+				$response["data"] = null;
+            }else{
+				//$response['totalRecords']= $totalRecords;
+				$response["message"] = count($rows)." rows selected.";
+                $response["status"] = "success";
+				$response["data"] = $rows; //(count($rows)==1) ? $rows[0] : $rows;
+            }
+                
+        }catch(PDOException $e){
+            $response["status"] = "error";
+            $response["message"] = 'Select Failed: ' .$e->getMessage();
+            $response["data"] = null;
+        }
+        return $response;
+    }
     function insert($table, $inputData) {
 	
         try{

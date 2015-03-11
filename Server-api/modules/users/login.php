@@ -17,8 +17,6 @@
 		
 		$data = $db->select("users", $where, $limit);
 		
-		
-		
 		// password check with hash encode
 		if(passwordHash::check_password($data['data']['password'],$password)){
 			$sessionObj->setSession($data['data']);
