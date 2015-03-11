@@ -100,7 +100,7 @@ class dbHelper {
         return $response;
 	}
 	
-    function select($table, $where, $limit=null){
+    function select($table, $where, $limit=null, $likeFilter=null){
         try{
             $a = array();
             $w = "";
@@ -111,8 +111,14 @@ class dbHelper {
 			$lmt = ($limit['pageNo'] == 0 ) ? $limit['pageNo'] : $limit['pageNo'] - 1;
 			$startLimit = $lmt * $limit['records']; // start on record $startLimit
 			$dbLimit = ($limit===null) ? "" : " LIMIT ".$startLimit.", ".$limit['records'];
+			$l = "";
+			if($likeFilter!=null){
+				foreach ($likeFilter as $key => $value) {
+					$l .= " and " .$key. " like '%". $value . "%'";
+				}
+			}
 			
-            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w ." ".$dbLimit);
+            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w . " ". $l. " ".$dbLimit);
             $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			

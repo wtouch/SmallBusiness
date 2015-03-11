@@ -11,17 +11,26 @@
 			echo json_encode($data);
 			
 		}else{
-			 $where = []; // this will used for user specific data selection.
+			 // This is for search
+			 $like = [];
+			 if(isset($_GET['search']) && $_GET['search'] == true){
+				 
+				 (isset($_GET['template_name'])) ? $like['template_name'] = $_GET['template_name'] : "";
+			 }
+			$where = []; // this will used for user specific data selection.
+			$limit['pageNo'] = $pageNo; // from which record to select
+			$limit['records'] = $records; // how many records to select
+			
 			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
 			(isset($_GET['template_type'])) ? $where['template_type'] = $_GET['template_type'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			(isset($_GET['development_status'])) ? $where['development_status'] = $_GET['development_status'] : "";
+			(isset($_GET['category'])) ? $where['category'] = $_GET['category'] : "";
 			(isset($_GET['custom'])) ? $where['custom'] = $_GET['custom'] : "";
-			$limit['pageNo'] = $pageNo; // from which record to select
-			$limit['records'] = $records; // how many records to select
 			
-			// this is used to select data with LIMIT & where clause
-			$data = $db->select("template", $where, $limit);
+			
+			// this is used to select data with LIMIT & where clause with like filter
+			$data = $db->select("template", $where, $limit,$like);
 			
 			// this is used to count totalRecords with only where clause
 			$totalRecords['totalRecords'] = count($db->select("template", $where)['data']);		

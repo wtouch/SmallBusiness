@@ -49,14 +49,41 @@ define(['app'], function (app) {
 			});
 		};
 		//this is global method for filter 
-		$scope.changeStatus = function(showStatus) {
+		$scope.changeStatus = function(statusCol, showStatus) {
 			console.log($scope.template_type);
-			$scope.filterStatus = {status : showStatus};
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.template_type[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.template_type, $scope.filterStatus);
 			dataService.get("/getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for templatelist response
-				$scope.templates = response.data;
-				$scope.totalRecords = response.totalRecords;
+				if(response.status == 'success'){
+					$scope.templates = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.templates = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				//console.log($scope.properties);
+			});
+		};
+		
+		$scope.searchFilter = function(statusCol, showStatus) {
+			$scope.search = {search: true};
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.template_type[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.template_type, $scope.filterStatus);
+			angular.extend($scope.template_type, $scope.search);
+			dataService.get("/getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
+			.then(function(response) {  //function for templatelist response
+				if(response.status == 'success'){
+					$scope.templates = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.templates = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
 				//console.log($scope.properties);
 			});
 		};
@@ -82,7 +109,7 @@ define(['app'], function (app) {
 					$scope.reqtemp.scrible.push(JSON.stringify(data.details));
 					console.log(data.message);
 				}else{
-					alert(data.message);
+					$scope.alerts.push({type: response.status, msg: response.message});
 				}
 				
 			});
@@ -108,7 +135,7 @@ define(['app'], function (app) {
 		};
 		
 		var listoftemplates = function(){
-			$scope.template_type = {template_type : 'public',status:1 ,category:'Mobile'};
+			$scope.template_type = {template_type : 'public', status:1};
 			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
