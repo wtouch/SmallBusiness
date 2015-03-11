@@ -12,8 +12,13 @@
 			
 		}else{
 			$where=[]; // this will used for user specific data selection.
+			
+			
 			(isset($_GET['user_id'])) ? $where['user_id'] = $_GET['user_id'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
+			(isset($_GET['read_status'])) ? $where['read_status'] = $_GET['read_status'] : "";
+			
+			
 			$limit['pageNo'] = $pageNo; // from which record to select
 			$limit['records'] = $records; // how many records to select
 			

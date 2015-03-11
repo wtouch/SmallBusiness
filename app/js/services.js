@@ -231,28 +231,43 @@ define(['app'], function (app) {
 			obj.setBase = function(path){
 				serviceBase = path;
 			};
-			obj.get = function (q, where) {
+			obj.get = function (q, params) {
 				return $http({
-				url: serviceBase + q,
-				method: "GET",
-				params: where
+					url: serviceBase + q,
+					method: "GET",
+					params: params
 				}).then(function (results) {
 					return results.data;
 					
 				});
 			};
-			obj.post = function (q, object) {
-				return $http.post(serviceBase + q, object).then(function (results) {
+			obj.post = function (q, object, params) {
+				return $http({
+					url: serviceBase + q,
+					method: "POST",
+					data: object,
+					params: params
+				}).then(function (results) {
 					return results.data;
 				});
 			};
-			obj.put = function (q, object) {
-				return $http.put(serviceBase + q, object).then(function (results) {
+			obj.put = function (q, object, params) {
+				return $http({
+					url: serviceBase + q,
+					method: "PUT",
+					data: object,
+					params: params
+				}).then(function (results) {
 					return results.data;
 				});
 			};
-			obj.delete = function (q, object) {
-				return $http.delete(serviceBase + q, object).then(function (results) {
+			obj.delete = function (q, object, params) {
+				return $http({
+					url: serviceBase + q,
+					method: "DELETE",
+					data: object,
+					params: params
+				}).then(function (results) {
 					return results.data;
 				});
 			};

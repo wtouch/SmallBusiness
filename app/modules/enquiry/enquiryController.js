@@ -13,16 +13,16 @@ define(['app'], function (app) {
 		$scope.delmailListCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
-		
+		$scope.mailList = [];
 		//Upload Function for uploading files {Vilas}
 		$scope.composemail={}; // this is form object
-		$scope.userinfo = {user_id:1}; // this is for uploading credentials
+		$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
 		$scope.path = "mail/"; // path to store images on server
-		$scope.composemail.attach_files = []; // uploaded images will store in this array
+		$scope.composemail.Attachment = []; // uploaded images will store in this array
 		$scope.upload = function(files,path,userinfo){ // this function for uploading files
 			upload.upload(files,path,userinfo,function(data){
 				if(data.status !== 'error'){
-					$scope.composemail.attach_files.push(JSON.stringify(data.details));
+					$scope.composemail.Attachment.push(JSON.stringify(data.details));
 					console.log(data.message);
 				}else{
 					alert(data.message);
@@ -58,12 +58,28 @@ define(['app'], function (app) {
 			$scope.alerts.splice(index, 1);
 		};
 		
-		var inboxmailList = function(){
-			$scope.status = {status : 1};
-			//`angular.extend($scope.status, $scope.user_id);
+		$scope.changestatus = function(id, read_status, index){
+			if(read_status==0){
+				$scope.status = {read_status : 1};
+				dataService.put("put/enquiry/"+id, $scope.status).then(function(response) { 
+					console.log(response.message);
+					$scope.mailList[index].read_status = 1
+					//$scope.readStatus = 1;
+				});
+			}
+		};
+		
+		/*$scope.deleted = function(id, status){
+				$scope.deletedData = {status : status};
+				console.log($scope.deletedData);
+				dataService.put("put/business/"+id, $scope.deletedData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			};*/
 			
-			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.status)
-			.then(function(response) { 
+		var inboxmailList = function(){
+			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems).then(function(response) { 
 				if(response.status == 'success'){
 					$scope.mailList = response.data;
 					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
@@ -75,7 +91,7 @@ define(['app'], function (app) {
 		}
 		
 		var sentmailList = function(){
-			$scope.status = {status : 3};
+			$scope.status = {status : 2};
 			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response){
 				if(response.status == 'success'){
 					$scope.mailList = response.data;
@@ -105,7 +121,7 @@ define(['app'], function (app) {
 			//post method for insert data of compose mail
 			$scope.postData = function(composemail) {
 				console.log(composemail);
-				dataService.post("/post/enquiry",$scope.composemail)
+				dataService.post("/post/enquiry",composemail)
 				.then(function(response) {  
 					$scope.composemail = response.data;
 					console.log(response);

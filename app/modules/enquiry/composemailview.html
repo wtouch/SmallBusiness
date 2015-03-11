@@ -30,7 +30,7 @@
 				<div class="form-group">
 					<label for="cc" class="col-sm-2 control-label">Cc</label>
 					<div class="col-sm-9">
-						<input type="Email" class="form-control" id="cc" ng-model="cc" name="cc" placeholder="Enter Email">
+						<input type="Email" class="form-control" id="cc" name="cc" ng-model="cc" placeholder="Enter Email">
 						<span class="help-block" ng-show="composemailviewForm.cc.$dirty && composemailviewForm.cc.$invalid">
 							<span class="text-danger" ng-show="composemailviewForm.cc.$error.email">Invalid Email address.</span>
 						</span>
@@ -54,18 +54,28 @@
 				<div class="form-group">
 					<!-- <label for="propImages" class="col-sm-2" >Select File </label>-->
 					<div class="col-sm-offset-2 col-sm-9">
-						<input type="file" id="attachment" name="attachment" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="attachment">
+						<input type="file" id="attach_files" name="attach_files" ng-file-select ng-multiple="true" accept="image/jpeg, image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="attach_files">
 						<!-- This is file input for select images -->
 						<!--<input type="file" id="propImages" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="propImages">
 						
 						<!-- This will show thumbnails & progress of images -->
-						<file-preview url="attachment" ng-model="composemail.attach_files"></file-preview>
+						<file-preview url="attach_files"></file-preview>
 						
 						<!-- This button will show if file/s selected -->
-						<button ng-show="attachment" ng-click="upload(attachment,path,userinfo)" type="button">Upload</button>
+						<button ng-show="attach_files" ng-click="upload(attach_files,path,userinfo)" type="button">Upload</button>
 						
 						<!-- This hidden input will store image path in array after successful uploading -->
-						<input type="hidden" ng-model="composemail.attach_files">
+						<input type="hidden" ng-model="composemail.Attachment">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-9">
+						<input type="hidden" name="status" ng-model="composemail.status" ng-init="composemail.status = 3" value="{{composemail.status}}">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-9">
+						<button type="button" class="btn btn-primary" ng-click="postData(composemail)" ng-disabled="composemailviewForm.$dirty && composemailviewForm.$invalid">Send</button>
 					</div>
 				</div>
 			</form>
