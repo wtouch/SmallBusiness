@@ -65,11 +65,8 @@ define(['app'], function (app) {
 			//get request for businesslist
 			angular.extend($scope.featured, $scope.user_id);
 			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
-			.then(function(response) { //function for businesslist response
-				
-				$scope.bizList = response.data;
-				
-				
+			.then(function(response) { //function for businesslist response			
+				$scope.bizList = response.data;			
 			});
 			//get request for delete bizlist 
 			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
@@ -98,7 +95,27 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
+			
 		
+		$scope.searchFilter = function(statusCol, showStatus) {
+			$scope.search = {search: true};
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.searchObj[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.searchObj, $scope.filterStatus);
+			angular.extend($scope.searchObj, $scope.search);
+			dataService.get("/getmultiple/business/1/"+$scope.pageItems, $scope.searchObj)
+			.then(function(response) {  //function for templatelist response
+				if(response.status == 'success'){
+					$scope.bizList = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.bizList = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				//console.log($scope.properties);
+			});
+		};
 		
 		
 		
@@ -107,7 +124,7 @@ define(['app'], function (app) {
 			.then(function(response){
 				if(response.status == 'success'){	
 					$scope.bizList=response.data;
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+				//	$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords=response.totalRecords;									
 					//console.log(response.data);
 				}
@@ -145,16 +162,30 @@ define(['app'], function (app) {
 				$location.path('/dashboard/business/addbusiness/'+id);
 			};
 				
-			//delete button {sonali}
+			/*/delete button {sonali}
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
-				console.log($scope.deletedData);
+				//console.log($scope.deletedData);
 				dataService.put("put/business/"+id, $scope.deletedData)
 				.then(function(response) { //function for businesslist response
-					console.log(response);
+					if(response.status == '1'){
+						
+						console.log(response);
+					}
 				});
+			};*/
+			$scope.deleted = function(id, status){
+				if(response.status == '1'){
+					$scope.deletedData = {status : status};
+					dataService.put("put/business/"+id, $scope.deletedData)
+					.then(function(response) {
+						$scope.bizList = response.data;
+					});
+				}	
+				else{
+					
+				}
 			};
-			
 			
 			
 		};
