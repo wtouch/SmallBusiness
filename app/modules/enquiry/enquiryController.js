@@ -1,9 +1,9 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService','upload']; /* Added $routeParams to access route parameters */
+    var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService','upload','$route']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var enquiryController = function ($scope, $injector, $routeParams,$location,dataService,upload) {
+	var enquiryController = function ($scope, $injector, $routeParams,$location,dataService,upload,$route) {
 		
 		//Code For Pagination
 		$scope.maxSize = 5;
@@ -14,6 +14,12 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.mailList = [];
+		
+		// code for refresh page
+		$scope.refreshpage=function(){
+			$route.reload();
+		}
+		
 		//Upload Function for uploading files {Vilas}
 		$scope.composemail={}; // this is form object
 		$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
@@ -29,6 +35,18 @@ define(['app'], function (app) {
 				}
 				
 			});
+		};
+		
+		//code for delete single mail
+		$scope.deletemail = function(id, status, index){
+			if(status==1){
+				$scope.status = {status : 0};
+				dataService.put("put/enquiry/"+id, $scope.status)
+				.then(function(response) { 
+					console.log(response.message);
+					$scope.mailList[index].status = 0
+				});
+			}
 		};
 		
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
@@ -69,17 +87,9 @@ define(['app'], function (app) {
 			}
 		};
 		
-		/*$scope.deleted = function(id, status){
-				$scope.deletedData = {status : status};
-				console.log($scope.deletedData);
-				dataService.put("put/business/"+id, $scope.deletedData)
-				.then(function(response) { //function for businesslist response
-					console.log(response);
-				});
-			};*/
-			
 		var inboxmailList = function(){
-			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems).then(function(response) { 
+			$scope.status = {status : 1};
+			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.status).then(function(response) { 
 				if(response.status == 'success'){
 					$scope.mailList = response.data;
 					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
@@ -88,6 +98,41 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
 			});
+		}
+		
+		var mailview= function(){
+			console.log($routeParams.id);
+			if($routeParams.id){
+				dataService.get("getsingle/enquiry/"+$routeParams.id)
+				.then(function(response) {
+					$scope.singlemail = response.data;
+					$scope.replyMail = {};
+					$scope.replyMail.reply_message ={};
+					$scope.replyMail.to_email = $scope.singlemail.from_email;
+					$scope.replyMail.from_email = $scope.singlemail.to_email;
+					$scope.replyMail.reply_message.subject = "RE: "+$scope.singlemail.subject;
+					$scope.replyMsg = ($scope.singlemail.reply_message!="")? JSON.parse($scope.singlemail.reply_message) : {message:""};
+					$scope.replyMail.reply_message.message = $scope.replyMsg.message;
+					
+					if($scope.singlemail.reply_status == 1){
+						$scope.tinymceConfig = {
+							readonly: true,
+						  }
+					}
+					
+					$scope.update = function(id,replyMail){
+						dataService.put("put/enquiry/"+id,replyMail)
+						.then(function(response) {
+							console.log(response);
+						});
+					};
+					console.log($scope.replyMail);
+					
+				},function(error) {
+					console.log(error);
+				});
+				
+			}	
 		}
 		
 		var sentmailList = function(){
@@ -154,6 +199,12 @@ define(['app'], function (app) {
 			
 			case 'composemailview':
 				composeMail();
+				break;
+				
+			case 'mailview':
+				//console.log(id);
+				mailview();
+				
 				break;
 				
 			default:

@@ -52,7 +52,9 @@ define(['angular',
 				
 				.when('/dashboard/users/:userViews?', route.resolve({controller:'manageuser', template: 'manageuser'}, 'users/manageuser/'))
 				
-				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"Mail Box"}, 'enquiry/'))
+				
+				
+				.when('/dashboard/enquiry/:mailId?/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"Mail Box"}, 'enquiry/'))
 				
 				.when('/dashboard/templates/:tempPart?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
 				

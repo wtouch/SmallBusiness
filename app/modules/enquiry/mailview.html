@@ -4,25 +4,25 @@
 			<div class="table-responsive">
 				<table>
 					<thead>
-						<th colspan="3">{{mail.subject}}</th>
+						<th colspan="3">{{singlemail.subject}}</th>
 					</thead>
 					<tbody>
 						<tr>
 							<td rowspan="4"><img src="img/user.jpg"/></td>
 							<td>From</td>
-							<td><a>{{mail.from_email}}</a></td>
+							<td><a>{{singlemail.from_email}}</a></td>
 						</tr>
 						<tr>
 							<td>To </td>
-							<td><a>aarti@wtouch.in</a></td>
+							<td><a>{{singlemail.first_name}}</a></td>
 						</tr>
 						<tr>
 							<td>Reply-To </td>
-							<td><a>{{mail.from_email}}</a></td>
+							<td><a>{{singlemail.from_email}}</a></td>
 						</tr>
 						<tr>
 							<td>Date </td>
-							<td>{{mail.date}}</td>
+							<td>{{singlemail.date}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -30,8 +30,62 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
-			<textarea class="form-control" rows="3" placeholder="Text of Mail"></textarea>
-		</div>
+		<p>
+			{{singlemail.message}}
+		</p>
 	</div>			
 </div>	
+<div class="row">
+	<div class="col-sm-12">
+	<div ng-if="singlemail" class="main-content">
+		<h4> Reply </h4>
+			<form class="form-horizontal" name="replymailView" ng-submit="replymailView.$valid"  novalidate>
+				<div class="form-group">
+					<label for="subject" class="col-sm-2 control-label">Subject</label>
+					<div class="col-sm-10">
+						<input readonly type="text" class="form-control" id="subject" name="subject" placeholder="Subject" ng-model="replyMail.reply_message.subject" ng-required="true">
+						<span class="text-danger" ng-show="replymailView.subject.$dirty && replymailView.subject.$invalid">
+						  <span ng-show="replymailView.subject.$error.required">Message is required .</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="to_email" class="col-sm-2 control-label">To</label>
+					<div class="col-sm-10">
+						<input readonly type="email" class="form-control" id="to_email" name="to_email" placeholder="example@gmail.com" ng-model="replyMail.to_email" required>
+						<span  ng-show="replymailView.to_email.$dirty && replymailView.to_email.$invalid">
+							<span class="text-danger" ng-show="replymailView.to_email.$error.required">Email is required.</span>
+							<span class="text-danger" ng-show="replymailView.to_email.$error.email">Invalid Email address.</span>
+						</span>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="reply_message" class="col-sm-2 control-label"> Message</label>
+					<div class="col-sm-10">
+						<textarea id="reply_message" class="form-control" name="reply_message" ng-model="replyMail.reply_message.message"  cols="30" rows="3" ng-maxlength="256" ui-tinymce="tinymceConfig"  ng-required="true"></textarea>
+						<p>{{ 256 - replyMail.reply_message.length + " Chars left" }}</p>
+						 <span class="text-danger" ng-show="replymailView.reply_message.$error.maxlength">
+							Sorry You are Exceeding the Limit</span>
+							<span class="text-danger" ng-show="replymailView.reply_message.$dirty && replymailView.reply_message.$invalid">
+								<span ng-show="replymailView.reply_message.$error.required">Message is required .</span>
+							</span>
+					</div>
+				</div>
+				<div class="form-group">	
+					<div class="col-sm-offset-2 col-sm-4">
+						<input type="hidden" name="reply_status" ng-model="replyMail.reply_status" ng-init="replyMail.reply_status = 1" value="{{replyMail.reply_status}}">
+					</div>
+				</div>
+				<!--div class="from-group">
+					<input type="hidden" name="reply_date" ng-model="replyMail.reply_date" ng-init="replyMail.reply_date = 1" value="{{replyMail.reply_date}}">
+				</div-->
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary" title="Send replay" ng-click="update(singlemail.id, replyMail)" ng-disabled="replymailView.$invalid" ng-disabled="true">Send Reply</button>
+						<button type="reset" class="btn btn-danger" title="Cancel Sending">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
