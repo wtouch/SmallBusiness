@@ -2,7 +2,8 @@
 
 require.config({
 	paths: {
-		angular: '../lib/angular/angular',
+		angular: '../lib/angular/angular.min',
+		ngCookies: '../lib/angular/angular-cookies.min',
 		upload: '../lib/upload/angular-file-upload.min',
 		uploadShim: '../lib/upload/angular-file-upload-shim.min',
 		breadcrumbs: '../lib/angular/ng-breadcrumbs',
@@ -30,6 +31,7 @@ require.config({
 		'upload':  { "deps": ['angular'] },
 		'uploadShim':  { "deps": ['angular'] },
 		'angularRoute': ['angular'],
+		'ngCookies': ['angular'],
 		'angularMocks': {
 			deps:['angular'],
 			'exports':'angular.mock'
