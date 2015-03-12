@@ -10,15 +10,23 @@
 						<tr>
 							<td rowspan="4"><img src="img/user.jpg"/></td>
 							<td>From</td>
-							<td><a>{{singlemail.from_email}}</a></td>
+							<td>{{singlemail.from_email.from}}</td>
+						</tr>
+						<tr ng-if="singlemail.to_email.cc!=''">
+							<td>Cc </td>
+							<td><a>{{singlemail.to_email.cc}}</a></td>
+						</tr>
+						<tr ng-if="singlemail.from_email.cc!=''">
+							<td>Cc </td>
+							<td><a>{{singlemail.from_email.cc}}</a></td>
 						</tr>
 						<tr>
 							<td>To </td>
-							<td><a>{{singlemail.first_name}}</a></td>
+							<td><a>{{singlemail.to_email.to}}</a></td>
 						</tr>
 						<tr>
 							<td>Reply-To </td>
-							<td><a>{{singlemail.from_email}}</a></td>
+							<td><a>{{singlemail.from_email.from}}</a></td>
 						</tr>
 						<tr>
 							<td>Date </td>
@@ -43,6 +51,7 @@
 				<div class="form-group">
 					<label for="subject" class="col-sm-2 control-label">Subject</label>
 					<div class="col-sm-10">
+						<input type="hidden" ng-model="replyMail.user_id">
 						<input readonly type="text" class="form-control" id="subject" name="subject" placeholder="Subject" ng-model="replyMail.reply_message.subject" ng-required="true">
 						<span class="text-danger" ng-show="replymailView.subject.$dirty && replymailView.subject.$invalid">
 						  <span ng-show="replymailView.subject.$error.required">Message is required .</span>

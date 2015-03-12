@@ -151,6 +151,8 @@ define(['app'], function (app) {
 				dataService.get("getsingle/enquiry/"+$scope.mailSingleId)
 				.then(function(response) {
 					$scope.singlemail = response.data;
+					$scope.singlemail.to_email = JSON.parse($scope.singlemail.to_email);
+					$scope.singlemail.from_email = JSON.parse($scope.singlemail.from_email);	
 					$scope.totalRecords = response.totalRecords;
 					$scope.replyMail = {};
 					$scope.replyMail.reply_message ={};
@@ -159,7 +161,7 @@ define(['app'], function (app) {
 					$scope.replyMail.reply_message.subject = "RE: "+$scope.singlemail.subject;
 					$scope.replyMsg = ($scope.singlemail.reply_message!="") ? JSON.parse($scope.singlemail.reply_message) : {message:""};
 					$scope.replyMail.reply_message.message = $scope.replyMsg.message;
-					
+					console.log(response);
 					if($scope.singlemail.reply_status == 1){
 						$scope.tinymceConfig = {
 							readonly: true,
@@ -182,14 +184,10 @@ define(['app'], function (app) {
 			}	
 		}
 		
-		
-		
-		
-		
 		var composeMail = function(){
 			
 			//Upload Function for uploading files {Vilas}
-			$scope.composemail = {user_id: 1, from_email : "vilas@wtouch.in", first_name : "Vilas", last_name : "Shetkar" };
+			$scope.composemail = {user_id: 1, from_email : {from : "vilas@wtouch.in",cc : ""}, first_name : "Vilas", last_name : "Shetkar"} ;
 			$scope.composemail.date = $scope.currentDate;
 			$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
 			$scope.path = "mail/"; // path to store images on server
