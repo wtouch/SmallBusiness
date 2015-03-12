@@ -38,7 +38,7 @@ define(['app'], function (app) {
 		$scope.customTempCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
-		$scope.user_id = {user_id : 2}; // these are URL parameters
+		$scope.user_id = {user_id : 1}; // these are URL parameters
 		// All $scope methods
 		$scope.pageChanged = function(page) { // Pagination page changed
 			angular.extend($scope.template_type, $scope.user_id);
@@ -136,6 +136,7 @@ define(['app'], function (app) {
 		
 		var listoftemplates = function(){
 			$scope.template_type = {template_type : 'public', status:1};
+			//angular.extend($scope.template_type, $scope.user_id);
 			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
@@ -156,7 +157,6 @@ define(['app'], function (app) {
 						if(response.status == 'success'){
 						$scope.templates=response.data;
 						$scope.totalRecords = response.totalRecords;
-						
 					}
 					else
 					{
@@ -200,11 +200,10 @@ define(['app'], function (app) {
 
 			});
 			
-			
 			//This code for apply/buy button{trupti}
 			
-			$scope.dynamicTooltip = function(development_status, rejected, order_placed){
-				return (development_status==rejected) ? rejected : order_placed;
+			$scope.dynamicTooltip = function(status, active, notActive){
+				return (status==1) ? active : notActive;
 			};
 			
 			//This code for active/delete button 
