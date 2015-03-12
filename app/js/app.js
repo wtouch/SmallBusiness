@@ -52,8 +52,7 @@ define(['angular',
 				
 				.when('/dashboard/users', route.resolve({controller:'manageuser', template: 'manageuser', label: 'Users'}, 'users/manageuser/'))
 				
-				.when('/dashboard/users/:userViews?', route.resolve({controller:'manageuser', template: 'manageuser'}, 'users/manageuser/'))
-				
+				.when('/dashboard/users/:userViews?', route.resolve({controller:'manageuser', template: 'manageuser', label: "Manage Users"}, 'users/manageuser/'))
 				
 				
 				.when('/dashboard/enquiry/:mailId?/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"Mail Box"}, 'enquiry/'))
@@ -76,6 +75,9 @@ define(['angular',
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
 			$rootScope.breadcrumbs = breadcrumbs;
 			$rootScope.metaTitle = "Small Business";
+			$rootScope.headerTitle = next.$$route.label;
+			$rootScope.subTitle = next.$$route.label;
+			console.log($rootScope.headerTitle);
 			var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout'){
 				dataService.get('/login/logout').then(function(response){
