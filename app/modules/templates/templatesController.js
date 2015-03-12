@@ -1,10 +1,13 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$location','$routeParams','dataService','upload','modalService'];
+    var injectParams = ['$scope','$rootScope', '$injector','$location','$routeParams','dataService','upload','modalService'];
     
     // This is controller for this view
-	var templatesController = function ($scope,$injector,$location,$routeParams,dataService,upload,modalService) {
+	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
+		
+		
+		//console.log($rootScope.userDetails);
 		//this code block for modal{trupti}
 		$scope.open = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
@@ -21,7 +24,6 @@ define(['app'], function (app) {
 					console.log("modalOpened");
 				});
 			});
-			
 		};
 		$scope.ok = function () {
 			$modalOptions.close('ok');
@@ -38,12 +40,13 @@ define(['app'], function (app) {
 		$scope.customTempCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
-		$scope.user_id = {user_id : 1}; // these are URL parameters
+		$scope.user_id = {user_id : 2};// these are URL parameters
 		// All $scope methods
-		$scope.pageChanged = function(page) { // Pagination page changed
-			angular.extend($scope.template_type, $scope.user_id);
+		
+		$scope.pageChanged = function(page, template_type) { // Pagination page changed
+			angular.extend(template_type, $scope.user_id);
 			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
-			.then(function(response) {  //function for templatelist response
+			.then(function(response){  //function for templatelist response
 				$scope.templates = response.data;
 				//console.log($scope.properties);
 			});
@@ -111,7 +114,7 @@ define(['app'], function (app) {
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				
+	
 			});
 		};
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
@@ -136,7 +139,7 @@ define(['app'], function (app) {
 		
 		var listoftemplates = function(){
 			$scope.template_type = {template_type : 'public', status:1};
-			//angular.extend($scope.template_type, $scope.user_id);
+			angular.extend($scope.template_type, $scope.user_id);
 			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
@@ -165,7 +168,6 @@ define(['app'], function (app) {
 				});
 			//end of active button function
 			}
-			
 			
 			
 			//This code for apply/buy button{trupti}
@@ -199,6 +201,23 @@ define(['app'], function (app) {
 				};
 
 			});
+			
+			//function for active button
+			var showActive= function(status){
+				$scope.template_type = {template_type : 'private',status:1,custom:1};
+				dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+				.then(function(response) {  //function for templatelist response
+						if(response.status == 'success'){
+						$scope.templates=response.data;
+						$scope.totalRecords = response.totalRecords;
+					}
+					else
+					{
+						$scope.alerts.push({type: response.status, msg: response.message});
+					};
+				});
+			//end of active button function
+			}
 			
 			//This code for apply/buy button{trupti}
 			
@@ -241,9 +260,12 @@ define(['app'], function (app) {
 			$scope.reset = function() {
 				$scope.reqtemp = {};
 			};
+			//$scope.userid={user_id : 1};
 			//post method for insert data in request template form{trupti}
 			$scope.postData = function(reqtemp) { 
-				dataService.post("/post/template",reqtemp)
+			reqtemp.user_id=$scope.user_id.user_id;
+			//console.log(user_id);
+				dataService.post("/post/template",reqtemp,$scope.user_id)
 				.then(function(response) {  //function for response of request temp
 					$scope.reqtemp = response.data;
 					console.log(response);

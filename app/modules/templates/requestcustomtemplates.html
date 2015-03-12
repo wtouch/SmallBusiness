@@ -68,17 +68,18 @@
 						<!-- This hidden input will store image path in array after successful uploading -->
 						<input type="hidden" ng-model="reqtemp.scrible">
 			</div>
-		</div>		
+		</div>	
+<div>
+	<input type="hidden" ng-model="reqtemp.user_id">
+</div>		
 		<div class="form-group">
 			<label for="custom" class="col-sm-2 control-label">Make it</label>
 			<div class="col-sm-9">
-			
-			
 				<label class="radio-inline">
-					<input type="radio" name="radio" id="Public" value="Public" checked>Public
+					<input type="radio" name="radio" id="Public" value="Public" ng-model="reqtemp.template_type" checked>Public
 				</label>
 				<label class="radio-inline">
-					<input type="radio" name="radio" id="Private" value="Private">Private
+					<input type="radio" name="radio" id="Private" value="Private" ng-model="reqtemp.template_type">Private
 				</label>
 			</div>
 		</div>
