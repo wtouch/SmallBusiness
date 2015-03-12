@@ -1,18 +1,19 @@
 'use strict'; 
 
 define(['angular',
- 'angularRoute',
- 'routeResolver',
- 'bootstrap',
- 'directives',
- 'services', 
- 'filters',
- 'upload','uploadShim',
+	'angularRoute',
+	'ngCookies',
+	'routeResolver',
+	'bootstrap',
+	'directives',
+	'services', 
+	'filters',
+	'upload','uploadShim',
 	'css!../css/bootstrap.min','css!../css/style'
-], function(angular, angularRoute) {
+], function(angular, angularRoute, ngCookies) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
-	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload'
+	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies'
 	]);
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
                 '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 
@@ -39,6 +40,8 @@ define(['angular',
 				
 				.when('/login', route.resolve({controller:'login', template: 'login', label: 'Login'}, 'users/login/'))
 				
+				.when('/logout', route.resolve({controller:'login', template: 'logout', label: 'Logout'}, 'users/login/'))
+				
 				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
 				
 				.when('/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/login/'))
@@ -50,9 +53,10 @@ define(['angular',
 				
 				.when('/dashboard/users', route.resolve({controller:'manageuser', template: 'manageuser', label: 'Users'}, 'users/manageuser/'))
 				
-				.when('/dashboard/users/:userViews?', route.resolve({controller:'manageuser', template: 'manageuser'}, 'users/manageuser/'))
+				.when('/dashboard/users/:userViews?', route.resolve({controller:'manageuser', template: 'manageuser', label: "Manage Users"}, 'users/manageuser/'))
 				
-				.when('/dashboard/enquiry/:mailId?', route.resolve({controller:'enquiry', template: 'enquiry',label:"Mail Box"}, 'enquiry/'))
+				
+				.when('/dashboard/enquiry/:mailId?/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"Mail Box"}, 'enquiry/'))
 				
 				.when('/dashboard/templates/:tempPart?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
 				
@@ -68,9 +72,41 @@ define(['angular',
 	}]);
 	
 		
-	app.run(['$location', '$rootScope', 'breadcrumbs', function($location, $rootScope, breadcrumbs) {
-		$rootScope.breadcrumbs = breadcrumbs;
-		$rootScope.metaTitle = "Small Business";
+	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookie) {
+		$rootScope.$on("$routeChangeStart", function (event, next, current) {
+			$rootScope.breadcrumbs = breadcrumbs;
+			$rootScope.appConfig = {
+				metaTitle : "Small Business",
+				headerTitle : next.$$route.label,
+				subTitle : next.$$route.label
+			};
+			var nextUrl = next.$$route.originalPath;
+			if(nextUrl == '/logout'){
+				dataService.get('/login/logout').then(function(response){
+					$rootScope.LogoutMsg = response;
+					$rootScope.userDetails = {};
+					angular.forEach($cookies, function (v, k) {
+						$cookieStore.remove(k);
+					});
+				});
+			}
+			dataService.get('/login/session').then(function(response){
+				if(response.id==""){
+                    if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout') {
+
+                    } else {
+                        $location.path("/login");
+						$rootScope.alerts = [{type: "warning", msg: "You are not logged in!"}];
+                    }
+				}else{
+					if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/') {
+						$location.path("/dashboard");
+					}
+					$rootScope.userDetails = response;
+				};
+			})
+			
+		});
 	}]);
 	return app;
 });

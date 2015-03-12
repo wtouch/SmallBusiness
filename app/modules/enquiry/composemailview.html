@@ -5,14 +5,16 @@
 				<div class="form-group">
 					<label for="from" class="col-sm-2 control-label">From</label>
 					<div class="col-sm-9">
-						<p class="form-control-static">aarti@wtouch.in</p>
+						<input type="text" value="{{composemail.from_email}}" class="form-control"  readonly ng-model="composemail.from_email.from">
+						<input type="hidden" class="form-control" ng-model="composemail.from_email.cc">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="to_email" class="col-sm-2 control-label">To</label>
 					<div class="col-sm-6">
-						<!--pre>{{selected | json}}</pre-->
-						<input type="Email" class="form-control" id="to_email" ng-model="composemail.to_email" name="to_email" placeholder="Enter Email" required>
+						<input type="hidden" ng-model="composemail.date">
+						<input type="hidden" ng-model="composemail.user_id">
+						<input type="Email" class="form-control" id="to_email" ng-model="composemail.to_email.to" name="to_email" placeholder="Enter Email" required>
 						<span class="help-block" ng-show="composemailviewForm.to_email.$dirty && composemailviewForm.to_email.$invalid">
 							<span class="text-danger" ng-show="composemailviewForm.to_email.$error.required">Email is required.</span>
 							<span class="text-danger" ng-show="composemailviewForm.to_email.$error.email">Invalid Email address.</span>
@@ -30,7 +32,7 @@
 				<div class="form-group">
 					<label for="cc" class="col-sm-2 control-label">Cc</label>
 					<div class="col-sm-9">
-						<input type="Email" class="form-control" id="cc" name="cc" ng-model="cc" placeholder="Enter Email">
+						<input type="Email" class="form-control" id="cc" name="cc" ng-model="composemail.to_email.cc" placeholder="Enter Email">
 						<span class="help-block" ng-show="composemailviewForm.cc.$dirty && composemailviewForm.cc.$invalid">
 							<span class="text-danger" ng-show="composemailviewForm.cc.$error.email">Invalid Email address.</span>
 						</span>
@@ -47,7 +49,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<textarea id="message" name="message" class="form-control" rows="3" ng-model="composemail.message" ui-tinymce required>
+						<textarea id="message" name="message" class="form-control" rows="3" ng-model="composemail.message" ng-minlength="2" ng-maxlength="356" ui-tinymce required>
 						</textarea>
 					</div>
 				</div>
@@ -70,12 +72,16 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-9">
-						<input type="hidden" name="status" ng-model="composemail.status" ng-init="composemail.status = 3" value="{{composemail.status}}">
+						<input type="hidden" name="status" ng-model="composemail.status" ng-init="composemail.status = 2" value="{{composemail.status}}">
 					</div>
+				</div>
+				<div class="from-group">
+					<input type="hidden" name="reply_date" ng-model="composemail.date" value="composemail.date =  today.date()" value="{{composemail.date}}">
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-9">
 						<button type="button" class="btn btn-primary" ng-click="postData(composemail)" ng-disabled="composemailviewForm.$dirty && composemailviewForm.$invalid">Send</button>
+						<button type="reset" class="btn btn-danger" title="Cancel Sending">Cancel</button>
 					</div>
 				</div>
 			</form>

@@ -12,13 +12,16 @@ define(['app'], function (app) {
 			$scope.pass = (pass1===pass2) ? true : false;
 			//alert($scope.pass);
 		}
-		
+		$scope.submitted = false;
 		$scope.insert = function(register){
 			$scope.params = {url:'login'};
+			console.log(register);
 			//angular.extend($scope.register, register)
-			dataService.post("post/user", register, $scope.params)
+			dataService.post("post/user/register", register)
 			.then(function(response) {
-				//alert(response);
+				if(response.status == 'success'){
+					$scope.submitted = true;
+				}
 				console.log(response);
 			},function(err){
 				console.log(err);

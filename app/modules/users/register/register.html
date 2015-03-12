@@ -5,7 +5,10 @@
 				<div class="breadcrumb-back" ng-include="'modules/component/toolbar.html'"></div>
 				<!--div class="col-sm-2" ng-include="'modules/component/mainnav.html'"></div-->
 				<!--div class="col-sm-12"-->
-					<form class="form-horizontal center-block" role="form" name="registerForm" ng-submit="registerForm.$valid" novalidate="novalidate" >
+				<div ng-show="submitted"><h2>You have registered successfully!</h2>
+					<p><a href="#/login">Click here</a> to login!</p>
+				</div>
+					<form ng-hide="submitted" class="form-horizontal center-block" role="form" name="registerForm" ng-submit="registerForm.$valid" novalidate="novalidate" >
 						<h3>Free Registration / Sign up</h3>
 						<hr>
 						<p>Please register a free account, before you can start posting your ads. Registration is quick and free! Please note that fields marked * are required.</p>		
@@ -120,7 +123,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" ng-click="insert(reg)" ng-disabled="registerForm.$invalid" class="btn btn-primary">Register</button>
+								<button type="submit" ng-click="insert(register)" ng-disabled="registerForm.$invalid" class="btn btn-primary">Register</button>
 							</div>
 						</div>
 					</form>

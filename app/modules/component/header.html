@@ -2,17 +2,24 @@
 	<div class="container">
 		<div class="row">		
 			<div class="col-sm-2">	
-				<a href="#" title="Welcome To Small Business"><img id="brand" src="img/sb1.jpg"class="img-responsive"></a>	
+				<a href="#" title="Welcome To Small Business"><img id="brand" src="img/sb1.jpg" class="img-responsive"></a>	
 			</div>			
 			<div class="col-sm-8">
 				<h1 class="text-center">Welcome To My Business</h1>
+				<h2 class="text-center">{{subTitle}}</h2>
 			</div>		
-			<div class="col-sm-2">			
-				<div class="btn-group btn1" dropdown>
+			<div class="col-sm-2">
+				<div ng-show="!userDetails.username">
+				<a  class="btn btn-primary" href="#login">Login</a> | 
+				<a  class="btn btn-primary" href="#register">Register</a>
+				</div>
+				<div class="user-dropdown" ng-show="userDetails.username" dropdown>
 					<a class="btn btn-link">
 						UserName
-					
-					<span dropdown-toggle><img src="img/user1.png" class="img-responsive img-circle pull-right im1" tooltip-placement="right" tooltip="Your Photo"></span></a>
+					</a>
+					<span dropdown-toggle class="user-img">
+						<img src="img/user1.png" class="img-responsive img-circle pull-right">
+					</span>
 					<ul class="dropdown-menu " role="menu">
 						<li role="presentation">
 							<a role="menuitem" tabindex="-1" href="#/editprofile">
@@ -20,7 +27,7 @@
 							</a>
 						</li>
 						<li role="presentation">
-								<a role="menuitem" tabindex="-1" href="#/login"> 
+								<a role="menuitem" tabindex="-1" href="#/logout">
 								<span class="glyphicon glyphicon-off"></span> Sign Out
 								</a>
 						</li>

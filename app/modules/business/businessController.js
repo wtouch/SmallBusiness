@@ -38,19 +38,22 @@ define(['app'], function (app) {
 		$scope.delBizCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
-		$scope.user_id = {user_id : 1}; // these are URL parameters
+		$scope.userInfo = {user_id : 1}; // these are URL parameters
+		$scope.hideDeleted = "";
 		
 		
 		
 		//function for close alert
-			$scope.closeAlert = function(index) {
+		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
-			};
-		
+		};
+		$scope.dynamicTooltip = function(status, active, notActive){
+			return (status==1) ? active : notActive;
+		};
 		// This will change businessView dynamically from 'business.html' {Vilas}
 		
 		$scope.businessView = $routeParams.businessView;
-		console.log($scope.businessView );
+		
 				
 		
 		
@@ -58,16 +61,14 @@ define(['app'], function (app) {
 		if(!$routeParams.businessView) {
 			$location.path('/dashboard/business/businesslist');
 		}
-				
+			
+		
 		$scope.pageChanged = function(page) {
-			//$log.log('Page changed to: ' + $scope.currentPage);
-			//get request for businesslist
+			
+			angular.extend($scope.featured, $scope.user_id);
 			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
-			.then(function(response) { //function for businesslist response
-				
-				$scope.bizList = response.data;
-				
-				
+			.then(function(response) { //function for businesslist response			
+				$scope.bizList = response.data;			
 			});
 			//get request for delete bizlist 
 			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
@@ -77,27 +78,73 @@ define(['app'], function (app) {
 			});
 		};
 		
+		//this is global method for filter 
+		$scope.changeStatus = function(statusCol, colValue) {
+			console.log($scope.businessParams);
+			$scope.filterStatus= {};
+			(colValue =="") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
+			angular.extend($scope.businessParams, $scope.filterStatus);
+			dataService.get("/getmultiple/business/1/"+$scope.pageItems, $scope.businessParams)
+			.then(function(response) {  //function for templatelist response
+				if(response.status == 'success'){
+					$scope.bizList = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.bizList = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				//console.log($scope.properties);
+			});
+		};
+			
+		
+		$scope.searchFilter = function(statusCol, colValue) {
+			$scope.search = {search: true};
+			$scope.filterStatus= {};
+			(colValue =="") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
+			angular.extend($scope.businessParams, $scope.filterStatus);
+			angular.extend($scope.businessParams, $scope.search);
+			
+			if(colValue.length >= 4 || colValue ==""){
+				dataService.get("/getmultiple/business/1/"+$scope.pageItems, $scope.businessParams)
+				.then(function(response) {  //function for templatelist response
+					if(response.status == 'success'){
+						$scope.bizList = response.data;
+						$scope.totalRecords = response.totalRecords;
+					}else{
+						$scope.bizList = {};
+						$scope.totalRecords = {};
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}
+					//console.log($scope.properties);
+				});
+			}
+		};
+		
+		
+		
 		var businesslist = function(){
-			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.user_id)
+			$scope.businessParams = {status: 1};
+			angular.extend($scope.businessParams, $scope.userInfo);
+			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response){
 				if(response.status == 'success'){	
 					$scope.bizList=response.data;
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords=response.totalRecords;									
-					//console.log(response.data);
 				}
-				else
-				{
+				else{
+					$scope.bizList = {};
+					$scope.totalRecords = {};	
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				$scope.bizList=response.data;
 			});	
-			//This code for publish unpublish button{sonali}
 			
-			$scope.dynamicTooltip = function(status, active, notActive){
-				return (status==1) ? active : notActive;
+			//Update business edit button {sonali}
+			$scope.editBusiness = function(id){
+				$location.path('/dashboard/business/addbusiness/'+id);
 			};
-			
+				
 			$scope.verify = function(id, verified){
 				$scope.veryfiedData = {verified : verified};
 				
@@ -123,56 +170,69 @@ define(['app'], function (app) {
 			//delete button {sonali}
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
-				console.log($scope.deletedData);
+				//console.log($scope.deletedData);
 				dataService.put("put/business/"+id, $scope.deletedData)
 				.then(function(response) { //function for businesslist response
-					console.log(response);
+					if(response.status == 'success'){
+						$scope.hideDeleted = 1;
+						console.log(response);
+					}
 				});
 			};
-			
+			/*$scope.deleted = function(id, status){
+				if(response.status == '1'){
+					$scope.deletedData = {status : status};
+					dataService.put("put/business/"+id, $scope.deletedData)
+					.then(function(response) {
+						$scope.bizList = response.data;
+					});
+				}	
+				else{
+					
+				}
+			};*/
 			
 			
 		};
 		
 		var deletedbusiness = function(){
-			
-			dataService.get("/getmultiple/business/"+$scope.delBizCurrentPage+"/"+$scope.pageItems, $scope.user_id)
+			console.log("del : "+$scope.businessParams);
+			$scope.businessParams = {status: 0};
+			angular.extend($scope.businessParams, $scope.userInfo);
+			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response){
 				if(response.status == 'success'){	
-					$scope.delBiz=response.data;
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					$scope.bizList = response.data;
 					$scope.totalRecords=response.totalRecords;									
-					//console.log(response.data);
 				}
-				else
-				{
+				else{
+					$scope.bizList = {};
+					$scope.totalRecords = {};	
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				$scope.delBiz=response.data;
-			});	
-			//This code for publish unpublish button{sonali}
-			
-			$scope.dynamicTooltip = function(status, active, notActive){
-				return (status==1) ? active : notActive;
-			};
-			
-			//delete button {sonali}
+			});
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
-				console.log($scope.deletedData);
+				//console.log($scope.deletedData);
 				dataService.put("put/business/"+id, $scope.deletedData)
 				.then(function(response) { //function for businesslist response
-					console.log(response);
+					if(response.status == 'success'){
+						$scope.hideDeleted = 0;
+						console.log(response);
+					}
 				});
 			};
+
 		};
 		
 		
-		switch($scope.formPart) {
+		switch($scope.businessView) {
 			case 'businesslist':
+			console.log("businesslist");
 				businesslist();
 				break;
 			case 'deletedbusiness':
+			console.log("deletedbusiness");
 				deletedbusiness();
 				break;
 			default:

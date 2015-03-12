@@ -7,12 +7,16 @@
 	if($reqMethod=="GET"){
 		if(isset($id)){
 			$where['id'] = $id;
-			$data = $db->select("enquiry", $where);
+			$data = $db->selectSingle("enquiry", $where);
 			echo json_encode($data);
 			
 		}else{
 			$where=[]; // this will used for user specific data selection.
-			
+			 $like = [];
+			 if(isset($_GET['search']) && $_GET['search'] == true){
+				 
+				 (isset($_GET['subject'])) ? $like['subject'] = $_GET['subject'] : "";
+			 }
 			
 			(isset($_GET['user_id'])) ? $where['user_id'] = $_GET['user_id'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
@@ -23,10 +27,10 @@
 			$limit['records'] = $records; // how many records to select
 			
 			// this is used to select data with LIMIT & where clause
-			$data = $db->select("enquiry", $where, $limit);
+			$data = $db->select("enquiry", $where, $limit,$like);
 			
 			// this is used to count totalRecords with only where clause
-			$totalRecords['totalRecords'] = count($db->select("enquiry", $where)['data']);		
+			$totalRecords['totalRecords'] = count($db->select("enquiry", $where,null, $like)['data']);	
 			
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
 			$data = array_merge($totalRecords,$data);

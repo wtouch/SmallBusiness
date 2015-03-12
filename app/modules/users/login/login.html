@@ -1,7 +1,8 @@
 <div class="row">
 	<div class="col-sm-12">	
 		<div class="main-content">
-			<form class="form-horizontal text-center form-content" name="loginForm">
+			<form autocomplete="off" novalidate class="form-horizontal text-center form-content" name="loginForm" ng-submit="loginForm.$valid">
+			<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 				<h3>Login</h3>
 				<div class="form-group">
 					<div class="col-sm-12">
@@ -10,16 +11,16 @@
 				</div>											
 				<div class="form-group">
 					<div class="col-sm-12">
-						<input type="Email" class="form-control" id="inputEmail3" placeholder="Email" name="u_mail" ng-model="login.u_mail" required>
-							<span class="help-block" ng-show="loginForm.u_mail.$dirty && loginForm.u_mail.$invalid">
-								<span class="text-danger" ng-show="loginForm.u_mail.$error.required">Email is required.</span>
-								<span class="text-danger" ng-show="loginForm.u_mail.$error.email">Invalid Email address.</span>
+						<input type="text" autocomplete="off" class="form-control" id="username" placeholder="User Name" name="username" ng-model="login.username" required>
+							<span class="help-block" ng-show="loginForm.username.$dirty && loginForm.username.$invalid">
+								<span class="text-danger" ng-show="loginForm.username.$error.required">Email is required.</span>
+								<span class="text-danger" ng-show="loginForm.username.$error.email">Invalid Email address.</span>
 							</span>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<input type="password" class="form-control" id="inputPassword3" name="pass" ng-model="login.pass" placeholder="Password" required>
+						<input type="password" class="form-control" id="inputPassword3" name="pass" ng-model="login.password" placeholder="Password" required>
 							<span class="help-block" ng-show="loginForm.pass.$dirty && loginForm.pass.$invalid">
 								<span class="text-danger" ng-show="loginForm.pass.$error.required">Password is required.</span>
 							</span>
@@ -38,8 +39,8 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<a type="submit" class="btn btn-default" name="btn1" ng-model="login.btn1" ng-click="insert(login)"
-						href="#dashboard" title="login">Login</a>
+						<button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary" name="btn1" ng-model="login.btn1" ng-click="insert(login)"
+						title="login">Login</submit>
 					</div>
 				</div>
 			</form>

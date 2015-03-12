@@ -13,10 +13,18 @@
 		}else{
 			$table = "business";
 			
+			$like = [];
+			if(isset($_GET['search']) && $_GET['search'] == true){
+				(isset($_GET['business_name'])) ? $like['business_name'] = $_GET['business_name'] : "";
+			}
+			 
 			// this will used for user specific data selection.
 			$where=[];
 			(isset($_GET['user_id'])) ? $where['user_id'] = $_GET['user_id'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
+			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";
+			(isset($_GET['verified'])) ? $where['verified'] = $_GET['verified'] : "";
+			
 			
 			// inner join [table name][column name]
 			$innerJoin['users']['user_id'] = "id";
@@ -26,7 +34,7 @@
 			$leftJoin['users']['manager_id'] = "id";
 			
 			// inner join select column [table name][join col name][column to select] = column alias
-			$selectInnerJoinCols['users']['user_id']['name'] = "UserName";
+			$selectInnerJoinCols['users']['user_id']['name'] = "user_name";
 			
 			// left join select column [table name][join col name][column to select] = column alias
 			$selectLeftJoinCols['users']['salseman_id']['name'] = "salseman";
@@ -37,7 +45,7 @@
 			$limit['records'] = $records; // how many records to select
 			
 			// this is used to select data with LIMIT & where clause & inner/left join with join columns
-			$data = $db->selectJoin($table, $where, $limit, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols);
+			$data = $db->selectJoin($table, $where, $limit,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols);
 			
 			// this is used to count totalRecords with only where clause
 			$totalRecords['totalRecords'] = count($db->select("business", $where)['data']);		
