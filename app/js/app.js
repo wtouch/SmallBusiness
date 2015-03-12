@@ -82,6 +82,7 @@ define(['angular',
 			if(nextUrl == '/logout'){
 				dataService.get('/login/logout').then(function(response){
 					$rootScope.LogoutMsg = response;
+					$rootScope.userDetails = {};
 				});
 			}
 			dataService.get('/login/session').then(function(response){
