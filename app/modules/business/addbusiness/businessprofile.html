@@ -1,25 +1,24 @@
 <div class="form-group">
-	<label  for="business_name" class="col-sm-3 control-label">Company Name</label>
+	<label  for="business_name" class="col-sm-3 control-label">Business Name</label>
 	<div class="col-sm-9">
-		<input type="text" id="business_name" class="form-control" name="business_name" placeholder="Company Name" ng-model="addbusiness.businessprofile.business_name" required >
+		<input type="text" id="business_name" class="form-control" name="business_name" placeholder="Company Name" ng-model="addbusiness.business_name" required >
 		<span class="help-block" ng-show="addbusinessForm.business_name.$dirty && addbusinessForm.business_name.$invalid">
-			<span ng-show="addbusinessForm.business_name.$error.required" class="text-danger">Company Name is required.</span>
+			<span ng-show="addbusinessForm.business_name.$error.required" class="text-danger">Business Name is required.</span>
 		</span>
 	</div>						
 </div>
 <div class="form-group">
-	<label for="primary" class="col-sm-3 control-label" name="primary" >Primary Business Type</label>
+	<label for="business_type" class="col-sm-3 control-label" name="business_type" >Primary Business Type</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="primary" id="primary"  ng-model="primary" required>		
+		<select class="form-control" name="business_type" id="business_type"  ng-model="addbusiness.business_profile.business_type" required>		
 			<option value="">Select Type</option>
-			<option value="India">India</option>
-			<option value="Australia">Australia</option>
-			<option value="China">China</option>
-			<option value="America">America</option>
-			<option value="Belgium">Belgium</option>
+			<option value="Trader">Trader</option>
+			<option value="Retailer">Retailer</option>
+			<option value="Exporter">Exporter</option>
+			<option value="Buying House">Buying House</option>
 		</select>
-		<span class="help-block" ng-show="addbusinessForm.primary.$dirty && addbusinessForm.primary.$invalid">
-			<span ng-show="addbusinessForm.primary.$error.required" class="text-danger">Primary Business Type is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.business_type.$dirty && addbusinessForm.business_type.$invalid">
+			<span ng-show="addbusinessForm.business_type.$error.required" class="text-danger">Primary Business Type is required.</span>
 		</span>				
 	</div>
 </div>		
@@ -32,26 +31,25 @@
 		<!-- This will show thumbnails & progress of images -->
 			<file-preview url="business_logo"></file-preview>
 			<!-- This button will show if file/s selected -->
-			<button ng-show="business_logo" ng-click="upload(business_logo,path,userinfo)" type="button">Upload</button>
+			<button ng-show="business_logo" ng-click="upload(business_logo,path,userinfo, addbusiness.business_logo)" type="button">Upload</button>
 			<!-- This hidden input will store image path in array after successful uploading -->
-			<input type="hidden" ng-model="businessprofile.business_logo">
-		
+			<input type="hidden" ng-model="addbusiness.business_logo">		
 	</div>
 </div>	
 <div class="form-group">
-	<label  for="buzcatalog" class="col-sm-3 control-label">Small Business Catalog</label>
+	<label  for="biz_catalog" class="col-sm-3 control-label">Small Business Catalog</label>
 	<div class="col-sm-9">
-		<input type="text" id="buzcatalog" class="form-control" name="buzcatalog" placeholder="Small Business Catalog" ng-model="addbusiness.businessprofile.catalog" required >
-		<span class="help-block" ng-show="addbusinessForm.buzcatalog.$dirty && addbusinessForm.buzcatalog.$invalid">
-		<span ng-show="addbusinessForm.buzcatalog.$error.required" class="text-danger">Small Business Catalog is required.</span>
+		<input type="text" id="biz_catalog" class="form-control" name="biz_catalog" placeholder="Small Business Catalog" ng-model="addbusiness.business_profile.catalog" required >
+		<span class="help-block" ng-show="addbusinessForm.biz_catalog.$dirty && addbusinessForm.biz_catalog.$invalid">
+		<span ng-show="addbusinessForm.biz_catalog.$error.required" class="text-danger">Small Business Catalog is required.</span>
 		</span>
 	</div>						
 </div>
 <div class="form-group">
 	<label for="Website" class="col-sm-3 control-label">Alternate Website </label>
 	<div class="col-sm-9">
-		<input type="url" class="form-control" id="Website" ng-model="reg.website" name="Website" placeholder="Enter Website " required>
-		<span class="help-block" ng-show="addbusinessForm.Website.$dirty && 	addbusinessForm.Website.$invalid">
+		<input type="url" class="form-control" id="Website" ng-model="addbusiness.business_profile.website" name="Website" placeholder="Enter Website " required>
+		<span class="help-block" ng-show="addbusinessForm.Website.$dirty && addbusinessForm.Website.$invalid">
 			<span ng-show="addbusinessForm.Website.$error.required" class="text-danger">Website  is required.</span>
 			<span ng-show="addbusinessForm.Website.$error.url" class="text-danger">Invalid Web Site.</span>
 		</span>
@@ -60,25 +58,25 @@
 </div>	
 
 <div class="form-group">
-	<label for="year" class="col-sm-3 control-label" name="year" >Year Of Establishment</label>
+	<label for="establishment" class="col-sm-3 control-label">Year Of Establishment</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="year" id="year"  ng-model="year" required>		
+		<select class="form-control" name="establishment" id="establishment"  ng-model="addbusiness.business_profile.establishment" required>		
 			<option value="">Select Establish Year</option>
-			<option value="India">India</option>
-			<option value="Australia">Australia</option>
-			<option value="China">China</option>
-			<option value="America">America</option>
-			<option value="Belgium">Belgium</option>
+			<option value="2010">2010</option>
+			<option value="2011">2011</option>
+			<option value="2012">2012</option>
+			<option value="2013">2013</option>
+			
 		</select>
-		<span class="help-block" ng-show="addbusinessForm.year.$dirty && addbusinessForm.year.$invalid">
-		<span ng-show="addbusinessForm.year.$error.required" class="text-danger">Year Of Establishment is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.establishment.$dirty && addbusinessForm.establishment.$invalid">
+		<span ng-show="addbusinessForm.establishment.$error.required" class="text-danger">Year Of Establishment is required.</span>
 		</span>				
 	</div>
 </div>	
 <div class="form-group">	
 	<label  for="employees" class="col-sm-3 control-label">No. Of Employees</label>	
 	<div class="col-sm-9">
-		<input type="text" id="employees" class="form-control" name="employees" placeholder="No. Of Employees" ng-model="addbusiness.businessprofile.employees" required >
+		<input type="text" id="employees" class="form-control" name="employees" placeholder="No. Of Employees" ng-model="addbusiness.business_profile.employees" required >
 		<span class="help-block" ng-show="addbusinessForm.employees.$dirty && addbusinessForm.employees.$invalid">
 		<span ng-show="addbusinessForm.employees.$error.required" class="text-danger">No. Of Employees is required.</span>
 		</span>
@@ -87,7 +85,7 @@
 <div class="form-group">
 	<label for="ownership" class="col-sm-3 control-label" name="ownership" >Ownership Type</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.businessprofile.ownership" required>		
+		<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.ownership" required>		
 			<option value="">Select Ownership Type</option>
 			<option value="Partnership">Partnership Firm</option>
 			<option value="Proprietory">Proprietory Firm</option>
@@ -104,39 +102,39 @@
 			<div class="col-sm-6">
 				<div class="checkbox">
 					<label>
-					<input type="checkbox" name="trader" value="trader" ng-model="addbusiness.businessprofile.trader">Trader
+					<input type="checkbox" name="trader" value="trader" ng-model="addbusiness.business_profile.additional_business.trader">Trader
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-					  <input type="checkbox" name="manufacturer" value="manufacturer" ng-model="addbusiness.businessprofile.manufacturer"> Manufacturer
+					  <input type="checkbox" name="manufacturer" value="manufacturer" ng-model="addbusiness.business_profile.additional_business.manufacturer"> Manufacturer
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-					  <input type="checkbox" name="retailer" value="retailer" ng-model="addbusiness.businessprofile.retailer"> Retailer
+					  <input type="checkbox" name="retailer" value="retailer" ng-model="addbusiness.business_profile.additional_business.retailer"> Retailer
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-					  <input type="checkbox" name="buyinghouse" value="buyinghouse" ng-model="addbusiness.businessprofile.buyinghouse"> Buying House
+					  <input type="checkbox" name="buyinghouse" value="buyinghouse" ng-model="addbusiness.business_profile.additional_business.buyinghouse"> Buying House
 					</label>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" name="wholesaler" value="wholesaler" ng-model="addbusiness.businessprofile.wholesaler">Wholesaler
+						<input type="checkbox" name="wholesaler" value="wholesaler" ng-model="addbusiness.business_profile.additional_business.wholesaler">Wholesaler
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" name="exporter" value="exporter" ng-model="addbusiness.businessprofile.exporter"> Exporter
+						<input type="checkbox" name="exporter" value="exporter" ng-model="addbusiness.business_profile.additional_business.exporter"> Exporter
 					</label>
 				</div>
 				<div class="checkbox">
 					<label>
-					  <input type="checkbox" name="serviceprovider" value="serviceprovider" ng-model="addbusiness.businessprofile.serviceprovider"> Service Provider
+					  <input type="checkbox" name="serviceprovider" value="serviceprovider" ng-model="addbusiness.business_profile.additional_business.serviceprovider"> Service Provider
 					</label>
 				</div>
 			</div>						 				

@@ -1,13 +1,13 @@
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<a href="#" class="btn btn-default btn-primary pull-right" title="Add more Infrastucture">Add New Infrastucture</a>
+		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(infrastructure, addbusiness.infrastructure)" title="Add Infrastucture">Add Infrastucture</button>
 	</div>
 </div>
-
+{{addbusiness.infrastructure | json}}
 <div class="form-group">
-	<label for="infraHead" class="col-sm-3 control-label" name="infraHead" >Infrastucture Heading</label>
+	<label for="infraHeading" class="col-sm-3 control-label" name="infraHeading" >Infrastucture Heading</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="infraHead" id="infraHead"  ng-model="infraHead" required>		
+		<select class="form-control" name="infraHeading" id="infraHeading"  ng-model="infrastructure.infraHeading" required>
 			<option value="">Select Heading</option>
 			<option value="India">India</option>
 			<option value="Australia">Australia</option>
@@ -15,8 +15,8 @@
 			<option value="America">America</option>
 			<option value="Belgium">Belgium</option>
 		</select>
-		<span class="help-block" ng-show="addbusinessForm.infraHead.$dirty && addbusinessForm.infraHead.$invalid">
-		<span ng-show="addbusinessForm.infraHead.$error.required" class="text-danger">Sender Country is required.</span>
+		<span class="help-block" ng-show="addbusinessForm.infraHeading.$dirty && addbusinessForm.infraHeading.$invalid">
+		<span ng-show="addbusinessForm.infraHeading.$error.required" class="text-danger">Sender Country is required.</span>
 		</span>				
 	</div>
 </div>	
@@ -24,7 +24,7 @@
 <div class="form-group">
 	<label for="infraDesc" class="col-sm-3 control-label">Infrastucture Description :</label>
 	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastruct.infraDesc" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
+		<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastructure.infraDesc" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
 			<p ng-hide="addbusinessForm.infraDesc.$error.maxlength">
 				{{ 20 - infrastruct.infraDesc.length + " Chars left" }}
 			</p>
@@ -35,9 +35,28 @@
 			</span>	
 	</div>
 </div>
+		<input type="hidden" required name="infrastructure" ng-model="addbusiness.infrastructure" />
+		<span class="help-block" ng-show="addbusinessForm.infrastructure.$dirty && addbusinessForm.infrastructure.$invalid">
+			<span ng-show="addbusinessForm.infrastructure.$error.required" class="text-danger">Infrastucture Description is required.</span>
+		</span>
+<div>
+	<table ng-if="addbusiness.infrastructure">
+		<tr>
+			<th>Infrastucture Heading</th>
+			<th>Infrastucture Description</th>
+			<th>Remove </th>
+		</tr>
+		<tr ng-repeat="(key, value) in addbusiness.infrastructure">
+			<td>{{key}}</td>
+			<td>{{value}}</td>
+			<td><button ng-click="removeObject(key,addbusiness.infrastructure)">Remove</button></td>
+			
+		</tr>
+	</table>
+</div>
 <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-default btn-primary" title="next" ng-click="showFormPart('testimonials')">Next</button>
+      <button type="button" class="btn btn-default btn-primary" title="next">Next</button>
     </div>
 </div>
 
