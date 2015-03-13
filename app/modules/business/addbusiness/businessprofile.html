@@ -1,7 +1,7 @@
 <div class="form-group">
 	<label  for="business_name" class="col-sm-3 control-label">Business Name</label>
 	<div class="col-sm-9">
-		<input type="text" id="business_name" class="form-control" name="business_name" placeholder="Company Name" ng-model="addbusiness.business_name" required >
+		<input type="text" id="business_name" class="form-control" name="business_name" placeholder="Business Name" ng-model="addbusiness.business_name" required >
 		<span class="help-block" ng-show="addbusinessForm.business_name.$dirty && addbusinessForm.business_name.$invalid">
 			<span ng-show="addbusinessForm.business_name.$error.required" class="text-danger">Business Name is required.</span>
 		</span>
@@ -39,12 +39,82 @@
 <div class="form-group">
 	<label  for="biz_catalog" class="col-sm-3 control-label">Small Business Catalog</label>
 	<div class="col-sm-9">
-		<input type="text" id="biz_catalog" class="form-control" name="biz_catalog" placeholder="Small Business Catalog" ng-model="addbusiness.business_profile.catalog" required >
+		<input type="text" id="biz_catalog" class="form-control" name="biz_catalog" placeholder="Small Business Catalog" ng-model="addbusiness.business_profile.biz_catalog" required >
 		<span class="help-block" ng-show="addbusinessForm.biz_catalog.$dirty && addbusinessForm.biz_catalog.$invalid">
 		<span ng-show="addbusinessForm.biz_catalog.$error.required" class="text-danger">Small Business Catalog is required.</span>
 		</span>
 	</div>						
 </div>
+
+<div class="form-group">
+	<label for="category" class="col-sm-3 control-label" name="category" >Category</label>
+	<div class="col-sm-9">
+		<select class="form-control" name="category" id="category"  ng-model="addbusiness.category" required>		
+			<option value="">Select Category</option>
+			<option value="Gems">Gems & Jewelry</option>
+			<option value="Arts">Arts & Crafts</option>
+			<option value="Leather">Leather Products</option>
+			<option value="Hand">Hand & Machine Tools</option>
+			<option value="Natural">Natural Stones</option>
+			<option value="Medical">Medical Products</option>
+			<option value="Furniture">Furniture Products</option>
+			<option value="Office">Office & School Supplies</option>
+			<option value="Computers">Computers & Software</option>
+			<option value="Cosmetics">Cosmetics</option>
+			<option value="Electronics">Electronics & Electrical</option>
+			<option value="Industrial">Industrial Supplies</option>
+			<option value="Food">Food & Beverages</option>
+			<option value="Metals">Metals & Minerals</option>
+			<option value="Packaging">Packaging Materials & Machines</option>
+			<option value="Printing">Printing & Publishing</option>
+			<option value="Plant">Plant & Machinery</option>
+			<option value="Sporting">Sporting Goods, Toys & Games</option>
+			<option value="Telecom">Telecom Products</option>
+			<option value="Embassies">Embassies, Consulates & Councils</option>
+			<option value="HR">HR Consultants</option>
+			<option value="Hotels">Hotels & Resorts</option>
+			<option value="Travel">Travel Agents & Tour Operators</option>
+			<option value="HomeSupplies">Home Supplies</option>
+			<option value="Paper">Paper & Paper Products</option>
+			<option value="Transportation">Transportation & Shipping</option>
+			<option value="Engineering">Engineering Services</option>
+			<option value="Miscellaneous">Miscellaneous</option>
+			<option value="Advertising">Advertising</option>
+			<option value="TravelTourism">Travel & Tourism</option>
+			<option value="Travel">Research & Development</option>
+			<option value="Business">Business Services</option>
+			<option value="Architectural">Architectural Services</option>
+			<option value="Real">Real Estate</option>
+			<option value="Educational">Educational & Training Institutes</option>
+			<option value="Medical">Medical Services</option>
+			<option value="IT">IT & Telecom Services</option>
+			<option value="Call">Call Centers & BPO Services</option>
+			<option value="Product">Product Rental Services</option>
+			<option value="Small">Small Businesses</option>
+			<option value="Financial">Financial & Legal Services</option>
+			<option value="Fashion">Fashion Accessories</option>
+			<option value="HomeGarden">Home & Garden</option>
+			<option value="Mechanical">Mechanical Components</option>
+			<option value="Apparel">Apparel & Garments</option>
+			<option value="Automobile">Automobile</option>
+			<option value="Bicycles">Bicycles & Rickshaws</option>
+			<option value="Building">Building & Construction</option>
+			<option value="Dyes">Dyes & Chemicals</option>
+			<option value="Ayurvedic">Ayurvedic & Herbal Products</option>
+			<option value="Event">Event Management Services</option>
+			<option value="Textile">Textile, Yarn & Fabrics</option>
+			<option value="Scientific">Scientific Instruments & Supplies</option>
+			<option value="Rubber">Rubber & Rubber Products</option>
+			<option value="Plastic">Plastic & Plastic Products</option>
+			<option value="Railway">Railway, Shipping & Aviation</option>
+			<option value="HomeTextiles">Home Textiles & Furnishings</option>
+		</select>
+		<span class="help-block" ng-show="addbusinessForm.category.$dirty && addbusinessForm.category.$invalid">
+		<span ng-show="addbusinessForm.category.$error.required" class="text-danger">Category Type is required.</span>
+		</span>				
+	</div>
+</div>	
+
 <div class="form-group">
 	<label for="Website" class="col-sm-3 control-label">Alternate Website </label>
 	<div class="col-sm-9">
@@ -74,11 +144,11 @@
 	</div>
 </div>	
 <div class="form-group">	
-	<label  for="employees" class="col-sm-3 control-label">No. Of Employees</label>	
+	<label  for="no_of_employees" class="col-sm-3 control-label">No. Of Employees</label>	
 	<div class="col-sm-9">
-		<input type="text" id="employees" class="form-control" name="employees" placeholder="No. Of Employees" ng-model="addbusiness.business_profile.employees" required >
-		<span class="help-block" ng-show="addbusinessForm.employees.$dirty && addbusinessForm.employees.$invalid">
-		<span ng-show="addbusinessForm.employees.$error.required" class="text-danger">No. Of Employees is required.</span>
+		<input type="text" id="no_of_employees" class="form-control" name="no_of_employees" placeholder="No. Of Employees" ng-model="addbusiness.business_profile.no_of_employees"  ng-pattern="/^[\d\.\-]+$/" required >
+		<span class="help-block" ng-show="addbusinessForm.no_of_employees.$dirty && addbusinessForm.no_of_employees.$invalid">
+			<span ng-show="addbusinessForm.no_of_employees.$error.pattern && (addbusinessForm.no_of_employees.$dirty || submitted)" class="text-danger">Enter a valid Data</span>
 		</span>
 	</div>						
 </div>

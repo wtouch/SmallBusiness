@@ -10,7 +10,7 @@
 					</div>
 					
 					<div class="form-group" > 
-						<label  for="contact_photo" class="col-sm-3 control-label">Add Image</label>
+						<label  for="contact_photo" class="col-sm-3 control-label">Contact Person Photo</label>
 						<div class="col-sm-9">
 							<input type="file" id="contact_photo" name="contact_photo" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="contact_photo">
 							<!-- This will show thumbnails & progress of images -->
@@ -23,11 +23,11 @@
 					</div>
 						
 					<div class="form-group">
-						<label  for="jobtitle" class="col-sm-3 control-label">Designation/Job Title</label>
+						<label  for="Designation" class="col-sm-3 control-label">Designation/Job Title</label>
 						<div class="col-sm-9">
-							<input type="text" id="jobtitle" class="form-control" name="jobtitle" placeholder="Designation/Job Title" ng-model="addbusiness.contact_profile.jobtitle" required >
-							<span class="help-block" ng-show="addbusinessForm.jobtitle.$dirty && addbusinessForm.jobtitle.$invalid">
-							<span ng-show="addbusinessForm.jobtitle.$error.required" class="text-danger">Designation Required.</span>
+							<input type="text" id="Designation" class="form-control" name="Designation" placeholder="Designation/Job Title" ng-model="addbusiness.contact_profile.Designation" required >
+							<span class="help-block" ng-show="addbusinessForm.Designation.$dirty && addbusinessForm.Designation.$invalid">
+							<span ng-show="addbusinessForm.Designation.$error.required" class="text-danger">Designation Required.</span>
 							</span>
 						</div>						
 					</div>
@@ -55,9 +55,9 @@
 					<div class="form-group">
 						<label for="address" class="col-sm-3 control-label">Address</label>
 						<div class="col-sm-9">
-							<textarea type="text" class="form-control" id="address" name="address" ng-model="addbusiness.contact_profile.address" cols="30" rows="4" ng-maxlength="75" placeholder="Enter address"  required></textarea>
+							<textarea type="text" class="form-control" id="address" name="address" ng-model="addbusiness.contact_profile.address" cols="30" rows="3" ng-maxlength="256" placeholder="Enter address"  required></textarea>
 							<p ng-hide="addbusinessForm.address.$error.maxlength">
-								{{ 75 - contact_profile.address.length + " Chars left" }}
+								{{ 256 - addbusiness.contact_profile.address.length + " Chars left" }}
 							</p>
 							
 							<span class="help-block" ng-show="addbusinessForm.address.$dirty && addbusinessForm.address.$invalid">
@@ -66,26 +66,63 @@
 							</span>					
 						</div>
 					</div>	
-					<!-- add combo boxes for city, state, country & add text input for zip code & validation with number max-char 6 -->
+					<!-- add combo boxes for city, state, country & add text input for zip code & validation with number max-char 6 -->		
+					
+					<div class="form-group">
+						<label for="Country" class="col-sm-3 control-label">Country</label>
+						<div class="col-sm-9">
+							<select class="form-control" name="Country" id="Country"  ng-model="addbusiness.testimonials.Country" required>		
+								<option value="">Select Country</option>
+								<option value="India">India</option>
+								<option value="Australia">Australia</option>
+								<option value="China">China</option>
+								<option value="America">America</option>
+								<option value="Belgium">Belgium</option>
+							</select>
+							<span class="help-block" ng-show="addbusinessForm.Country.$dirty && addbusinessForm.Country.$invalid">
+							<span ng-show="addbusinessForm.Country.$error.required" class="text-danger">Country is required.</span>
+							</span>				
+						</div>
+					</div>		
+					<div class="form-group">
+						<label for="state" class="col-sm-3 control-label">State</label>
+						<div class="col-sm-4">
+							<select class="form-control" name="State" id="State"  ng-model="addbusiness.testimonials.State" required>		
+								<option value="">Select State</option>
+								<option value="Maharashtra">Maharashtra</option>
+								<option value="Gujarat">Gujarat</option>
+								<option value="Kerala">Kerala</option>
+								<option value="Karnatka">Karnatka</option>
+							</select>
+							<span class="help-block" ng-show="addbusinessForm.State.$dirty && addbusinessForm.State.$invalid">
+							<span ng-show="addbusinessForm.State.$error.required" class="text-danger">State is required.</span>
+							</span>				
+						</div>
+
+						<div class="col-sm-offset-1 col-sm-4">
+							<select class="form-control" name="City" id="City"  ng-model="addbusiness.testimonials.City" required>		
+								<option value="">Select City</option>
+								<option value="Ahmednagar">Ahmednagar</option>
+								<option value="Pune">Pune</option>
+								<option value="Mumbai">Mumbai</option>
+								<option value="Nasik">Nasik</option>
+							</select>
+							<span class="help-block" ng-show="addbusinessForm.City.$dirty && addbusinessForm.City.$invalid">
+							<span ng-show="addbusinessForm.City.$error.required" class="text-danger">City is required.</span>
+							</span>				
+						</div>
+					</div>
+					
 					<div class="form-group">	
-						<label  for="city" class="col-sm-3 control-label">City,State,ZIP Code</label>	
+						<label  for="ZIP_Code" class="col-sm-3 control-label">ZIP Code</label>	
 						<div class="col-sm-9">
-							<input type="text" id="city" class="form-control" name="city" placeholder="City,State,ZIP Code" ng-model="addbusiness.contact_profile.city" required >
-							<span class="help-block" ng-show="addbusinessForm.city.$dirty && addbusinessForm.city.$invalid">
-							<span ng-show="addbusinessForm.city.$error.required" class="text-danger">City,State,ZIP Code Required.</span>
+							<input type="text" id="ZIP_Code" class="form-control" name="ZIP_Code" placeholder="ZIP Code" ng-pattern="/^[\d\.\-]+$/" maxlength="6" ng-model="addbusiness.contact_profile.ZIP_Code">
+							<span class="help-block" ng-show="addbusinessForm.ZIP_Code.$dirty && addbusinessForm.ZIP_Code.$invalid">
+								<span ng-show="addbusinessForm.ZIP_Code.$error.pattern && (addbusinessForm.ZIP_Code.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
 							</span>
 						</div>						
 					</div>
-						
-					<div class="form-group">		
-						<label  for="country" class="col-sm-3 control-label">Country</label>
-						<div class="col-sm-9">
-							<input type="text" id="country" class="form-control" name="country" placeholder="Country" ng-model="addbusiness.contact_profile.country" required >
-							<span class="help-block" ng-show="addbusinessForm.country.$dirty && addbusinessForm.country.$invalid">
-							<span ng-show="addbusinessForm.country.$error.required" class="text-danger">Country Required.</span>
-							</span>
-						</div>						
-					</div>
+					
 					
 					<div class="form-group">
 						<label for="telephone" class="col-sm-3 control-label">Telephone</label>
@@ -110,9 +147,9 @@
 					<div class="form-group">
 						<label  for="fax" class="col-sm-3 control-label">Fax</label>
 						<div class="col-sm-9">
-							<input type="text" id="fax" class="form-control" name="fax" ng-model="addbusiness.contact_profile.fax" placeholder="Fax">
+							<input type="text" id="fax" class="form-control" name="fax" ng-model="addbusiness.contact_profile.fax" ng-pattern="/^[\d\.\-]+$/" maxlength="10" placeholder="Fax">
 							<span class="help-block" ng-show="addbusinessForm.fax.$dirty && addbusinessForm.fax.$invalid">
-							<span ng-show="addbusinessForm.fax.$error.required" class="text-danger">Fax Required.</span>
+								<span ng-show="addbusinessForm.fax.$error.pattern && (addbusinessForm.fax.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
 							</span>
 						</div>						
 					</div>
@@ -140,7 +177,7 @@
 					<div class="form-group">
 						<label  for="SmallBusinessCatalog" class="col-sm-3 control-label" class="text-danger">Small Business Catalog</label>	
 						<div class="col-sm-9">
-							<input type="text" id="SmallBusinessCatalog" class="form-control" name="SmallBusinessCatalog" ng-model="addbusiness.contact_profile.SmallBusinessCatalog" placeholder="Indiamart Ctatalog" required >
+							<input type="text" id="SmallBusinessCatalog" class="form-control" name="SmallBusinessCatalog" ng-model="addbusiness.contact_profile.SmallBusinessCatalog" placeholder="Small Business Catalog" required >
 							<span class="help-block" ng-show="addbusinessForm.SmallBusinessCatalog.$dirty && addbusinessForm.SmallBusinessCatalog.$invalid">
 							<span ng-show="addbusinessForm.SmallBusinessCatalog.$error.required" class="text-danger">Small Business Catalog Required.</span>
 							</span>
@@ -160,7 +197,7 @@
 					
 					<div class="form-group">
 							<div class="col-sm-offset-3 col-sm-9">
-							  <button type="submit" class="btn btn-primary btn-default" title="Next" ng-click="postData(addbusiness)">Next</button>
+							  <button type="submit" class="btn btn-primary btn-default" title="Next" ng-click="showFormPart('infrastructure')">Next</button>
 							</div>
 					</div>
 			

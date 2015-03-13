@@ -1,5 +1,11 @@
 <div class="form-group">
-	<label  for="date1" class="col-sm-3 control-label">Date</label>
+	<div class="col-sm-offset-3 col-sm-9">
+		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(news_coverage, addbusiness.news_coverage)" title="Add News Coverage">Add News Coverage</button>
+	</div>
+</div>
+
+<div class="form-group">
+	<label  for="newsDate" class="col-sm-3 control-label">Date</label>
 	<div class="col-sm-9">
 		<p class="input-group">
 		  <input type="text" class="form-control" id="newsDate" name="newsDate" ng-model="addbusiness.news_coverage.newsDate" ng-click="open($event,'newsDate')" is-open="newsDate" datepicker-popup="{{format}}" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"/>
@@ -25,14 +31,11 @@
 	<div class="col-sm-9">
 		<select class="form-control" name="mediatype" id="mediatype"  ng-model="addbusiness.news_coverage.Country" required>		
 			<option value="">Select Media Type</option>
-			<option value="India">India</option>
-			<option value="Australia">Australia</option>
-			<option value="China">China</option>
-			<option value="America">America</option>
-			<option value="Belgium">Belgium</option>
+			<option value="Newspaper">Newspaper</option>
+			<option value="Television">Television</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.mediatype.$dirty && addbusinessForm.mediatype.$invalid">
-		<span ng-show="addbusinessForm.mediatype.$error.required" class="text-danger">Media Typeis required.</span>
+		<span ng-show="addbusinessForm.mediatype.$error.required" class="text-danger">Media Type is required.</span>
 		</span>				
 	</div>
 </div>	
@@ -86,8 +89,8 @@
 </div>
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-	  <button type="submit" class="btn btn-success" ng-disabled="addbusinessForm.$invalid" title="Save" ng-click="postData(addbusiness)">Submit</button>
+	  <button type="submit" class="btn btn-success"  title="Save" ng-click="postData(addbusiness)">Submit</button>
 	</div>
 </div>							
-
+<!--ng-disabled="addbusinessForm.$invalid"-->
 

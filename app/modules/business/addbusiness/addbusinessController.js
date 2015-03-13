@@ -26,6 +26,12 @@ define(['app'], function (app) {
 		$scope.addToObject = function(data, object){
 			object[data.infraHeading] = data.infraDesc;
 		}
+		
+		$scope.job_careers = {};
+		$scope.addToObject = function(data, object){
+			object[data.jobTitle] = data.jobDescription;
+		}
+		
 		$scope.removeObject = function(key, object){
 			delete object[key];
 		}
@@ -43,6 +49,7 @@ define(['app'], function (app) {
 		$scope.addbusiness.testimonials.testimage  = [];
 		$scope.addbusiness.news_coverage = {};
 		$scope.addbusiness.news_coverage.news_image  = [];
+		$scope.addbusiness.infrastructure.infra_image  = [];	
 		
 		$scope.upload = function(files,path,userinfo, picArr){ // this function for uploading files
 			upload.upload(files,path,userinfo,function(data){
@@ -74,25 +81,16 @@ define(['app'], function (app) {
 		//post method for insert data in request businessprofile form{sonali}
 		$scope.postData = function(addbusiness) { 
 			$scope.addbusiness.user_id = $scope.userDetails.user_id;
-			console.log(addbusiness);
+			dataService.post("post/business",addbusiness,$scope.user_id)
+				.then(function(response) {  //function for response of request temp
+					$scope.addbusiness = response.data;
+					console.log(response);
+					$scope.reset();
+				});
+			//console.log(addbusiness);
 		}//end of post method{sonali}
 		
-		
-		
-		
-		/*$scope.insert = function(addbusiness){
-			console.log($scope.addbusiness);
-			dataService.post("../server-api/index.php/post/business",$scope.addbusiness)
-			.then(function(response) {
-				alert(response);
-				console.log(response);
-			})
-		}	//end of insert*/
-		
-		
-		
-		
-		// This code for Date Picker {Vilas}
+		//datepicker {sonali}
 		$scope.today = function(){
 			$scope.newsDate = new Date();
 		};
