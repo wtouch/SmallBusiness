@@ -38,7 +38,7 @@ define(['app'], function (app) {
 		$scope.delBizCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
-		$scope.userInfo = {user_id : 1}; // these are URL parameters
+		$scope.userInfo = {user_id : 2}; // these are URL parameters
 		$scope.hideDeleted = "";
 		
 		

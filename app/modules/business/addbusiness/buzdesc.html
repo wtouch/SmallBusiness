@@ -1,29 +1,29 @@
 <div class="form-group">
 	<label for="keyDes" class="col-sm-3 control-label">Key Description of your Company (Visible of your website and Small Busi search)</label>
 	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="keyDescp" name="keyDescp" ng-model="buzdesc.keyDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Key Description of company" ui-tinymce required>
+		<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="addbusiness.business_info.keywords" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Key Description of company" ui-tinymce required>
 		</textarea>
-			<p ng-hide="addbusinessForm.keyDescp.$error.maxlength">
-				{{ 20 - buzdesc.keyDescp.length + " Chars left" }}
+			<p ng-hide="addbusinessForm.keywords.$error.maxlength">
+				{{ 256 - buzdesc.keyDescp.length + " Chars left" }}
 			</p>
 			
-			<span class="help-block" ng-show="addbusinessForm.keyDescp.$dirty && addbusinessForm.keyDescp.$invalid">
-				<span class="text-danger" ng-show="addbusinessForm.keyDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
-				<span ng-show="addbusinessForm.keyDescp.$error.required" class="text-danger">Key Description of company is required.</span>
+			<span class="help-block" ng-show="addbusinessForm.keywords.$dirty && addbusinessForm.keywords.$invalid">
+				<span class="text-danger" ng-show="addbusinessForm.keywords.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				<span ng-show="addbusinessForm.keywords.$error.required" class="text-danger">Key Description of company is required.</span>
 			</span>	
 	</div>
 </div>  
 <div class="form-group">
-	<label for="detailDes" class="col-sm-3 control-label">Detailed Description of your Website Home Page</label>
+	<label for="description" class="col-sm-3 control-label">Detailed Description of your Website Home Page</label>
 	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="detailDescp" name="detailDescp" ng-model="buzdesc.detailDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Detailed Description of website" ui-tinymce required></textarea>
-			<p ng-hide="addbusinessForm.detailDescp.$error.maxlength">
-				{{ 20 - buzdesc.detailDescp.length + " Chars left" }}
+		<textarea type="text" class="form-control" id="description" name="description" ng-model="addbusiness.business_info.description" cols="30" rows="4" ng-maxlength="256" placeholder="Detailed Description of website" ui-tinymce required></textarea>
+			<p ng-hide="addbusinessForm.description.$error.maxlength">
+				{{ 256 - buzdesc.description.length + " Chars left" }}
 			</p>
 			
-			<span class="help-block" ng-show="addbusinessForm.detailDescp.$dirty && addbusinessForm.detailDescp.$invalid">
-				<span class="text-danger" ng-show="addbusinessForm.detailDescp.$error.maxlength">Sorry You are Exceeding the Limit</span>
-				<span ng-show="addbusinessForm.detailDescp.$error.required" class="text-danger">Detailed Description of website is required.</span>
+			<span class="help-block" ng-show="addbusinessForm.description.$dirty && addbusinessForm.description.$invalid">
+				<span class="text-danger" ng-show="addbusinessForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				<span ng-show="addbusinessForm.description.$error.required" class="text-danger">Detailed Description of website is required.</span>
 			</span>		
 	</div>
 </div>  

@@ -7,7 +7,7 @@ define(['app'], function (app) {
 	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
 		
 		
-		//console.log($rootScope.userDetails);
+		console.log($rootScope.userDetails);
 		//this code block for modal{trupti}
 		$scope.open = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)

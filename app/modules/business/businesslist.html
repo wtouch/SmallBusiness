@@ -1,26 +1,30 @@
 <h3>Business List</h3>
-	<div class="row">
+	<div class="row">	
 		<div class="col-sm-3">
-			<div class="bottomspace">
-				<label for="search" class="control-label">Search </label>		
-					<input id="search" type="text" class="form-control" ng-change="searchFilter('business_name', searchProp)" ng-model="searchProp" placeholder="search"/>
+		<label for="search" class="control-label">Search </label>
+			<div class="input-group bottomspace">		
+				<input id="search" type="text" class="form-control" ng-change="searchFilter('business_name', searchProp)" ng-model="searchProp" placeholder="search"/>
+				<span class="input-group-btn">
+				<button class="btn btn-success" type="button">
+					<span class="glyphicon glyphicon-search iconsearch"></span>
+				</span>	
 			</div>	
 		</div>			
 		<div class="col-sm-3">
 			<div class="bottomspace">
-				<label for="sort" class="control-label">Sort by Order</label>
-					<select id="sort" class="form-control" ng-model="id"> 
+				<label for="id" class="control-label">Sort by Order</label>
+					<select id="id" class="form-control" ng-model="id"> 
 						<option value="">Select Order</option>		<!-- added value & selected attr -->	
-						<option value="-id">Desending</option>
-						<option value="id">Asending</option>  
+						<option value="-business_name">Desending</option>
+						<option value="business_name">Asending</option>  
 					</select>
 			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="bottomspace">
-				<label for="verified" class="control-label">Filter By Featured</label>
+				<label for="verified" class="control-label">Filter By Verified</label>
 					<select id="verified" class="form-control" ng-model="verifiedFilter" ng-change="changeStatus('verified',verifiedFilter)">
-						<option value="" selected>Select Featured</option><!-- added value & selected attr -->
+						<option value="" selected>Select Verified</option><!-- added value & selected attr -->
 						<option value="1" >Verified</option>
 						<option value="0">Not Verified</option>
 					</select>
@@ -50,7 +54,7 @@
 					<th>Manage</th>
 				</thead>
 				<tbody>
-					<tr ng-repeat="x in bizList | filter: { status : hideDeleted}">
+					<tr ng-repeat="x in bizList | orderBy:id | filter: { status : hideDeleted}">
 						<td>{{ ((bizListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 						<td>{{x.business_name}}</td>
 						<td>{{x.created_date}}</td>

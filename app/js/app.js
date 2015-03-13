@@ -62,7 +62,7 @@ define(['angular',
 				
 				// Always Add Static Route before dynamic route/dynamic parameter
 				.when('/dashboard/business/addbusiness/:id?', route.resolve({controller:'addbusiness', template: 'addbusiness',label:"Add New Business"}, 'business/addbusiness/'))
-				.when('/dashboard/business/products', route.resolve({controller:'products', template: 'products',label:"Products & Services"}, 'business/products/'))
+				.when('/dashboard/business/products/:productView?', route.resolve({controller:'products', template: 'products',label:"Products & Services"}, 'business/products/'))
 				
 				.when('/dashboard/business/:businessView?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
 				
@@ -72,7 +72,7 @@ define(['angular',
 	}]);
 	
 		
-	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookie) {
+	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies) {
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
 			$rootScope.breadcrumbs = breadcrumbs;
 			$rootScope.appConfig = {
@@ -80,31 +80,38 @@ define(['angular',
 				headerTitle : next.$$route.label,
 				subTitle : next.$$route.label
 			};
+			
 			var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout'){
 				dataService.get('/login/logout').then(function(response){
 					$rootScope.LogoutMsg = response;
 					$rootScope.userDetails = {};
+					console.log("logout");
+					sessionStorage.clear();
 					angular.forEach($cookies, function (v, k) {
 						$cookieStore.remove(k);
 					});
 				});
 			}
-			dataService.get('/login/session').then(function(response){
-				if(response.id==""){
-                    if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout') {
+			//if(!$cookies.userDetails==""){
+				dataService.get('/login/session').then(function(response){
+					if(response.id===""){
+						if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout') {
 
-                    } else {
-                        $location.path("/login");
-						$rootScope.alerts = [{type: "warning", msg: "You are not logged in!"}];
-                    }
-				}else{
-					if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/') {
-						$location.path("/dashboard");
-					}
-					$rootScope.userDetails = response;
-				};
-			})
+						} else {
+							$location.path("/login");
+							$rootScope.alerts = [{type: "warning", msg: "You are not logged in!"}];
+						}
+					}else{
+						if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/') {
+							$location.path("/dashboard");
+						}
+						
+						sessionStorage.userDetails = JSON.stringify(response);
+					};
+				})
+				$rootScope.userDetails = JSON.parse(sessionStorage.userDetails);
+			//}
 			
 		});
 	}]);
