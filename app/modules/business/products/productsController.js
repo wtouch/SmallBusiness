@@ -8,6 +8,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		console.log("Product Controller"); // Just Added for testing {Vilas}
 		
     };
+	//for display form parts of product & service
+		//$scope.prodPart = $routeParams.prodPart;
     
 	// Inject controller's dependencies
 	productsController.$inject = injectParams;

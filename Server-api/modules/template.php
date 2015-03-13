@@ -7,7 +7,7 @@
 	if($reqMethod=="GET"){
 		if(isset($id)){
 			$where['id'] = $id;
-			$data = $db->select("template", $where);
+			$data = $db->selectSingle("template", $where);
 			echo json_encode($data);
 			
 		}else{

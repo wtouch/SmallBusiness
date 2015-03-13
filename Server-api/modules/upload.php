@@ -51,10 +51,13 @@
 				echoResponse(200,$response);
 			}               
 			else{
+				$fileDetails = [];
+				$fileDetails['file_name'] = $path . $file_name;
+				$fileDetails['url'] = $file_name;
 				move_uploaded_file($file_tmp,"uploads/images/".$file_name);
 				$response["status"] = "success";
 				$response["message"] = $file_name." uploaded successfully!";
-				$response['details'] = $path . $file_name;
+				$response['details'] = $fileDetails;
 				echoResponse(200,$response);
 			}
 		}
