@@ -25,18 +25,11 @@ define(['app'], function (app) {
 		$scope.infrastructure = {};
 		$scope.addToObject = function(data, object){
 			object[data.infraHeading] = data.infraDesc;
-		}
-		
-		$scope.job_careers = {};
-		$scope.addToObject = function(data, object){
-			object[data.jobTitle] = data.jobDescription;
-		}
-		
+		}	
 		$scope.removeObject = function(key, object){
 			delete object[key];
 		}
-		
-		
+
 		//Upload Function for uploading files {Vilas}
 		$scope.addbusiness={}; // this is form object
 		$scope.addbusiness.infrastructure = {};

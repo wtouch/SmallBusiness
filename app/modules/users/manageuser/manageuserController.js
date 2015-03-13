@@ -1,10 +1,30 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope', '$injector', '$routeParams','$location']; /* Added $routeParams to access route parameters */
+    var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var manageuserController = function ($scope, $injector, $routeParams,$location) {
-		//console.log("this is manageuserController");
+	var manageuserController = function ($scope, $injector, $routeParams,$location,dataService) {
+		
+		$scope.open = function (url, buzId) {
+			dataService.get("getsingle/business/"+buzId)
+			.then(function(response) {
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+					size : 'lg'
+				};
+				var modalOptions = {
+					bizList: response.data[0]  // assign data to modal
+				};
+				console.log(response.data[0]);
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log("modalOpened");
+				});
+			});
+			
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
 		
 		//For display by default userslist.html page{trupti}
 		$scope.userViews = $routeParams.userViews; 
@@ -104,15 +124,28 @@ define(['app'], function (app) {
 		
 		var usersList = function(){
 			//$scope.statusParam = {status : 1};
+			
 			dataService.get("getmultiple/user/"+$scope.usersListCurrentPage+"/"+$scope.pageItems).then(function(response) { 
+				
 				if(response.status == 'success'){
 					$scope.userList = response.data;
+					console.log(response.data);
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
 			});
+			
+			$scope.verify = function(id, status){
+				$scope.veryfiedData = {status : status};
+				
+				dataService.put("put/user/"+id, $scope.veryfiedData)
+				.then(function(response) { //function for businesslist response
+					console.log(response);
+				});
+			} ;
 		}
+		
 		switch($scope.userViews) {
 			case 'adduser':
 				addUsers();
@@ -122,8 +155,12 @@ define(['app'], function (app) {
 				usersGroup();
 				break;
 				
+			case 'userslist':
+				usersList();
+				break;
+				
 			default:
-				usersGroup();
+				usersList();
 		};
 			
 		
