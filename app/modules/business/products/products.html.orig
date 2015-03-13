@@ -6,10 +6,8 @@
 				<div class="bottomspace">
 					<div class="row">
 						<div class="col-sm-3">
-							<select id="biz" class="form-control" ng-model="biz"> 
-								<option value="">Select Business</option>			
-								<option value="">{{product.business_name}}</option>	
-								
+							<select id="selectBusiness" class="form-control" ng-change="changeScope(selectBusiness)" ng-model="selectBusiness" ng-options="item as item.business_name for item in businessList"> 
+								<option value="">Select Business</option>
 							</select>
 						</div>
 						<!--<div class="col-sm-3">
@@ -17,14 +15,13 @@
 								<option value="">{{product.business_name}}</option>			
 							</select>
 						</div>-->
-						<div class="col-sm-3">
-							<select id="view" class="form-control" ng-model="view"> 
-								<option value="">Product/Services</option>			
-								<option value="-id">Product</option>
-								<option value="id">Services</option>  
+						<div class="col-sm-3" ng-show="selectBusiness">
+							<select id="view" class="form-control" ng-model="productType" ng-init="productType = 'product'"> 
+								<option value="product">Product</option>
+								<option value="service">Services</option>
 							</select>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-6" ng-show="selectBusiness">
 							<div class="text-right">
 								<a href="#/dashboard/business/products/addproducts" class="btn btn-default">Add Product</a>
 								<a href="#/dashboard/business/products/addservices" class="btn btn-default">Add Service</a>
@@ -33,17 +30,21 @@
 					</div>
 				</div>
 <<<<<<< HEAD
-				<ng-include ng-if="prodPart=='addproducts'" src="'modules/business/addproducts.html'"></ng-include>	
+				<ng-include ng-if="productView=='addproducts'" src="'modules/business/addproducts.html'"></ng-include>	
+				<ng-include ng-if="productView=='addservices'" src="'modules/business/addservices.html'"></ng-include>	
+				<!--<ng-include ng-if="productView=='addservices'" src="'modules/business/products/addservices.html'"></ng-include>-->
+=======
+				<ng-include ng-if="productView=='addproducts'" src="'modules/business/products/addproducts.html'"></ng-include>	
+				<ng-include ng-if="productView=='addservices'" src="'modules/business/products/addservices.html'"></ng-include>	
+			
+				<ng-include ng-if="selectBusiness && productType=='product'"  src="'modules/business/products/productlist.html'"></ng-include>
+				<ng-include ng-show="selectBusiness && productType=='service'"  src="'modules/business/products/servicelist.html'"></ng-include>
+>>>>>>> addproducts.html
+					
 					<!--<ng-include src="'modules/business/products/addproducts.html'"></ng-include>
 					<ng-include src="'modules/business/products/addservices.html'"></ng-include>
 					<ng-include src="'modules/business/products/productlist.html'"></ng-include>
 					<ng-include src="'modules/business/products/servicelist.html'"></ng-include>-->
-=======
-				<ng-include ng-if="productView=='addproducts'" src="'modules/business/products/addproducts.html'"></ng-include>	
-				<ng-include ng-if="productView=='addservices'" src="'modules/business/products/addservices.html'"></ng-include>	
-				<!--<ng-include ng-if="productView=='addservices'" src="'modules/business/products/addservices.html'"></ng-include>-->
-					
->>>>>>> products.html
 		</div>
 		</div>
 	</div>
