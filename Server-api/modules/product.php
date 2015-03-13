@@ -32,9 +32,10 @@
 		echo json_encode($insert);
 	}
 	
-	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
-		echo $reqMethod;
-		echo $body;
+		$where['id'] = $id; // need where clause to update/delete record
+		$update = $db->update("product", $body, $where);
+		echo json_encode($update);
 	}
+
  ?>
