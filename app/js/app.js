@@ -2,6 +2,7 @@
 
 define(['angular',
 	'angularRoute',
+	'ngCookies',
 	'routeResolver',
 	'bootstrap',
 	'directives',
@@ -9,10 +10,10 @@ define(['angular',
 	'filters',
 	'upload','uploadShim',
 	'css!../css/bootstrap.min','css!../css/style'
-], function(angular, angularRoute) {
+], function(angular, angularRoute, ngCookies) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
-	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload'
+	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies'
 	]);
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
                 '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 
@@ -71,18 +72,22 @@ define(['angular',
 	}]);
 	
 		
-	app.run(['$location', '$rootScope', 'breadcrumbs','dataService', function($location, $rootScope, breadcrumbs, dataService) {
+	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookie) {
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
 			$rootScope.breadcrumbs = breadcrumbs;
-			$rootScope.metaTitle = "Small Business";
-			$rootScope.headerTitle = next.$$route.label;
-			$rootScope.subTitle = next.$$route.label;
-			console.log($rootScope.headerTitle);
+			$rootScope.appConfig = {
+				metaTitle : "Small Business",
+				headerTitle : next.$$route.label,
+				subTitle : next.$$route.label
+			};
 			var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout'){
 				dataService.get('/login/logout').then(function(response){
 					$rootScope.LogoutMsg = response;
 					$rootScope.userDetails = {};
+					angular.forEach($cookies, function (v, k) {
+						$cookieStore.remove(k);
+					});
 				});
 			}
 			dataService.get('/login/session').then(function(response){

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-12">	
 		<div class="main-content">
-			<form class="form-horizontal text-center form-content" name="loginForm">
+			<form autocomplete="off" novalidate class="form-horizontal text-center form-content" name="loginForm" ng-submit="loginForm.$valid">
 			<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 				<h3>Login</h3>
 				<div class="form-group">
@@ -11,7 +11,7 @@
 				</div>											
 				<div class="form-group">
 					<div class="col-sm-12">
-						<input type="text" class="form-control" id="username" placeholder="User Name" name="username" ng-model="login.username" required>
+						<input type="text" autocomplete="off" class="form-control" id="username" placeholder="User Name" name="username" ng-model="login.username" required>
 							<span class="help-block" ng-show="loginForm.username.$dirty && loginForm.username.$invalid">
 								<span class="text-danger" ng-show="loginForm.username.$error.required">Email is required.</span>
 								<span class="text-danger" ng-show="loginForm.username.$error.email">Invalid Email address.</span>
@@ -39,8 +39,8 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<a type="submit" class="btn btn-default" name="btn1" ng-model="login.btn1" ng-click="insert(login)"
-						title="login">Login</a>
+						<button type="submit" ng-disabled="loginForm.$invalid" class="btn btn-primary" name="btn1" ng-model="login.btn1" ng-click="insert(login)"
+						title="login">Login</submit>
 					</div>
 				</div>
 			</form>

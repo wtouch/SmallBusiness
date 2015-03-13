@@ -12,7 +12,7 @@ define(['app'], function (app) {
 			$scope.pass = (pass1===pass2) ? true : false;
 			//alert($scope.pass);
 		}
-		$scope.submitted = true;
+		$scope.submitted = false;
 		$scope.insert = function(register){
 			$scope.params = {url:'login'};
 			console.log(register);
