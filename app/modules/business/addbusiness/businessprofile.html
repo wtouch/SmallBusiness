@@ -82,7 +82,7 @@
 			<option value="Advertising">Advertising</option>
 			<option value="TravelTourism">Travel & Tourism</option>
 			<option value="Travel">Research & Development</option>
-			<option value="Business">Business Services</option>
+			<option value="Research">Business Services</option>
 			<option value="Architectural">Architectural Services</option>
 			<option value="Real">Real Estate</option>
 			<option value="Educational">Educational & Training Institutes</option>
@@ -135,30 +135,43 @@
 			<option value="2010">2010</option>
 			<option value="2011">2011</option>
 			<option value="2012">2012</option>
-			<option value="2013">2013</option>
-			
+			<option value="2013">2013</option>			
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.establishment.$dirty && addbusinessForm.establishment.$invalid">
 		<span ng-show="addbusinessForm.establishment.$error.required" class="text-danger">Year Of Establishment is required.</span>
 		</span>				
 	</div>
 </div>	
-<div class="form-group">	
-	<label  for="no_of_employees" class="col-sm-3 control-label">No. Of Employees</label>	
+
+<div class="form-group">
+	<label for="no_of_employees" class="col-sm-3 control-label">No. Of Employees</label>
 	<div class="col-sm-9">
-		<input type="text" id="no_of_employees" class="form-control" name="no_of_employees" placeholder="No. Of Employees" ng-model="addbusiness.business_profile.no_of_employees"  ng-pattern="/^[\d\.\-]+$/" required >
+		<select class="form-control" name="no_of_employees" id="no_of_employees"  ng-model="addbusiness.business_profile.no_of_employees" required>		
+			<option value="">--Choose One--</option>
+			<option value="10">Upto 10 People</option>
+			<option value="25">11 To 25 People</option>
+			<option value="50">26 To 50 People</option>
+			<option value="100">51 To 100 People</option>
+			<option value="500">101 To 500 People</option>
+			<option value="501">501 To 1000 People</option>
+			<option value="1000">More Than 1000 People</option>			
+		</select>
 		<span class="help-block" ng-show="addbusinessForm.no_of_employees.$dirty && addbusinessForm.no_of_employees.$invalid">
-			<span ng-show="addbusinessForm.no_of_employees.$error.pattern && (addbusinessForm.no_of_employees.$dirty || submitted)" class="text-danger">Enter a valid Data</span>
-		</span>
-	</div>						
-</div>
+		<span ng-show="addbusinessForm.no_of_employees.$error.required" class="text-danger">No. Of Employees is required.</span>
+		</span>				
+	</div>
+</div>	
+
 <div class="form-group">
 	<label for="ownership" class="col-sm-3 control-label" name="ownership" >Ownership Type</label>
 	<div class="col-sm-9">
 		<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.ownership" required>		
 			<option value="">Select Ownership Type</option>
-			<option value="Partnership">Partnership Firm</option>
-			<option value="Proprietory">Proprietory Firm</option>
+			<option value="Proprietory">Sole Proprietory(Individual)</option>
+			<option value="Partnership">Partnership</option>
+			<option value="Professional">Professional Association</option>
+			<option value="Private">Private Limited Company</option>
+			<option value="Public">Public Limited Company</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.ownership.$dirty && addbusinessForm.ownership.$invalid">
 		<span ng-show="addbusinessForm.ownership.$error.required" class="text-danger">Ownership Type is required.</span>
