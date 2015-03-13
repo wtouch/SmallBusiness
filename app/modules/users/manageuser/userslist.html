@@ -9,9 +9,9 @@
 			<th>Manage</th>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td>Aarti</td>
+			<tr ng-repeate="users in userList">
+				<td>{{((usersListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
+				<td>{{users.username}}</td>
 				<td>
 					<p>Salseman
 						<button type="button"  tooltip-animation="true" tooltip="Change Group" class="btn btn-default glyphicon glyphicon-pencil" go-back></button>
@@ -23,7 +23,7 @@
 						<option value="bizowner">Business Owner</option>
 					</select-->
 				</td>
-				<td>aarti@wtouch.in</td>
+				<td>{{}}</td>
 				<td>01-01-2015</td>
 				<td>
 					<div class="btn-group" role="group" aria-label="first group">
@@ -47,6 +47,6 @@
 	</table>
 </div>
 <div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="usersListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(usersListCurrentPage)"></pagination>
+	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="usersListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(usersListCurrentPage)"></pagination>Total Records : {{totalRecords}}
 			<pre>Page: {{usersListCurrentPage}} / {{numPages}}</pre>
 </div>	
