@@ -25,7 +25,7 @@
 				getMultipleUsers($limit); // from getUsers.php
 			}
 		}
-	
+	}
 	if($reqMethod=="POST"){
 		if(isset($postParams) && $postParams == 'login'){
 			doLogin($body);
