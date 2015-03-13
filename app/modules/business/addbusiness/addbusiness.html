@@ -3,7 +3,7 @@
 		<div class="col-sm-12">	<ng-include src="'modules/business/toolbar.html'"></ng-include></div>								
 		<div class="col-sm-3" ng-include="'modules/business/addbusiness/sidebar.html'"></div>
 			<div class="col-sm-9">
-				<form name="addbusinessForm" role="form" class="form-horizontal" novalidate="novalidate">
+				<form name="addbusinessForm" role="form" class="form-horizontal" ng-submit="addbusinessForm.$valid" novalidate="novalidate">
 					<!-- This is conditional include 
 								if not mailId set in url this html includes in view-->
 					<ng-include ng-show="formPart=='home'" src="'modules/business/addbusiness/buzdesc.html'"></ng-include> 

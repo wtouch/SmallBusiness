@@ -2,7 +2,7 @@
 	<label  for="date" class="col-sm-3 control-label">Date</label>
 	<div class="col-sm-9">
 		<p class="input-group">
-		  <input class="form-control" type="text" id="date" name="date" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)"/>
+		  <input class="form-control" type="text" id="date" name="date" datepicker-popup="{{format}}" ng-model="addbusiness.testimonials.dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)"/>
 		  <span class="input-group-btn">
 			<button type="button" class="btn btn-default" ng-click="open($event)">
 			<i class="glyphicon glyphicon-calendar"></i></button>
@@ -33,7 +33,7 @@
 <div class="form-group">
 	<label for="Country" class="col-sm-3 control-label" name="Country" >Sender Country</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="Country" id="Country"  ng-model="Country" required>		
+		<select class="form-control" name="Country" id="Country"  ng-model="addbusiness.testimonials.Country" required>		
 			<option value="">Select Type</option>
 			<option value="India">India</option>
 			<option value="Australia">Australia</option>
@@ -49,7 +49,7 @@
 <div class="form-group">
 	<label for="city/state" class="col-sm-3 control-label">Sender City / State</label>
 	<div class="col-sm-4">
-		<select class="form-control" name="State" id="State"  ng-model="State" required>		
+		<select class="form-control" name="State" id="State"  ng-model="addbusiness.testimonials.State" required>		
 			<option value="">Select State</option>
 			<option value="India">India</option>
 			<option value="Australia">Australia</option>
@@ -63,7 +63,7 @@
 	</div>
 
 	<div class="col-sm-offset-1 col-sm-4">
-		<select class="form-control" name="City" id="City"  ng-model="City" required>		
+		<select class="form-control" name="City" id="City"  ng-model="addbusiness.testimonials.City" required>		
 			<option value="">Select City</option>
 			<option value="India">India</option>
 			<option value="Australia">Australia</option>
@@ -80,7 +80,7 @@
 <div class="form-group">
 	<label for="phone" class="col-sm-3 control-label">Senders Phone</label>
 	<div class="col-sm-9">
-		<input type="text" id="phone" name="phone" class="form-control" ng-model="phone" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+		<input type="text" id="phone" name="phone" class="form-control" ng-model="addbusiness.testimonials.phone" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 		<span class="help-block" ng-show="addbusinessForm.phone.$dirty && addbusinessForm.phone.$invalid">
 			<span ng-show="addbusinessForm.phone.$error.pattern && (addbusinessForm.phone.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
 		</span>
@@ -100,7 +100,7 @@
 <div class="form-group">
 	<label for="testDescp" class="col-sm-3 control-label">Testimonial Description</label>
 	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="testDescp" name="testDescp" ng-model="testimonial.testDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
+		<textarea type="text" class="form-control" id="testDescp" name="testDescp" ng-model="addbusiness.testimonials.testDescp" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
 			<p ng-hide="addbusinessForm.testDescp.$error.maxlength">
 				{{ 20 - testimonial.testDescp.length + " Chars left" }}
 			</p>
@@ -115,15 +115,23 @@
 	</div>
 </div>
 
+	
+
 <div class="form-group" > 
-	<label  for="clogo" class="col-sm-3 control-label">Add Image</label>
+	<label  for="testimage" class="col-sm-3 control-label">Add Image</label>
 	<div class="col-sm-9">
-		<input type="file" id="clogo" name="clogo"><img src="">
+		<input type="file" id="testimage" name="testimage" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="testimage">
+		<!-- This will show thumbnails & progress of images -->
+			<file-preview url="testimage"></file-preview>
+			<!-- This button will show if file/s selected -->
+			<button ng-show="testimage" ng-click="upload(testimage,path,userinfo, addbusiness.testimonials.testimage)" type="button">Upload</button>
+			<!-- This hidden input will store image path in array after successful uploading -->
+			<input type="hidden" ng-model="addbusiness.testimonials.testimage">
 	</div>
 </div>
 <div class="form-group">
 		<div class="col-sm-offset-3 col-sm-9">
-		  <button type="submit" class="btn btn-primary btn-default" title="Add Testimonials/ Recommendation" ng-click="showFormPart('job')">Next</button>
+		  <button type="submit" class="btn btn-primary btn-default" title="Add Testimonials/ Recommendation" ng-click="postData(addbusiness)">Next</button>
 		</div>
 </div>
 

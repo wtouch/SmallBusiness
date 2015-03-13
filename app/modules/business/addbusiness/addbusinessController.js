@@ -1,27 +1,93 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','modalService'];
+    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService'];
 
     // This is controller for this view
-	var addbusinessController = function ($scope, $injector,$routeParams,$location,dataService,modalService)
+	var addbusinessController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService)
 	{
+		//for display form parts
+		$scope.formPart = $routeParams.formPart;
+		// all $scope object goes here
+		$scope.alerts = [];
+		$scope.maxSize = 5;
+		$scope.totalRecords = "";
+		$scope.pageItems = 10;
+		$scope.numPages = "";
+		$scope.userDetails = {user_id : 2};
+		
 		// Add Business multi part form show/hide operation from here! {Vilas}
 		$scope.formPart = 'home';
 		console.log($scope.formPart);
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
-		};  
+		};
+		$scope.infrastructure = {};
+		$scope.addToObject = function(data, object){
+			object[data.infraHeading] = data.infraDesc;
+		}
+		$scope.removeObject = function(key, object){
+			delete object[key];
+		}
 		
-		//method for insert data of add business form{trupti}
-		$scope.insert = function(addbusiness){
+		
+		//Upload Function for uploading files {Vilas}
+		$scope.addbusiness={}; // this is form object
+		$scope.addbusiness.infrastructure = {};
+		$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
+		$scope.path = "business/"; // path to store images on server
+		$scope.addbusiness.business_logo  = []; // uploaded images will store in this array
+		$scope.addbusiness.contact_profile = {};
+		$scope.addbusiness.contact_profile.contact_photo  = [];
+		$scope.addbusiness.testimonials = {};
+		$scope.addbusiness.testimonials.testimage  = [];
+		$scope.addbusiness.news_coverage = {};
+		$scope.addbusiness.news_coverage.news_image  = [];
+		
+		$scope.upload = function(files,path,userinfo, picArr){ // this function for uploading files
+			upload.upload(files,path,userinfo,function(data){
+				if(data.status === 'success'){
+					picArr.push(JSON.stringify(data.details));
+					console.log(data.message);
+				}else{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				
+			});
+		};
+		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
+			upload.generateThumbs(files);
+		};// End upload function
+		
+		//method for insert data of add businessProfile form{sonali}
+		
+		
+		/************************************************************************************/
+		// add business form code here
+		angular.extend($scope.addbusiness, $scope.userDetails);
+		
+		console.log($scope.addbusiness);
+		//reset function{sonali}
+		$scope.reset = function() {
+			$scope.addbusiness = {};
+		};
+		//post method for insert data in request businessprofile form{sonali}
+		$scope.postData = function(addbusiness) { 
+			$scope.addbusiness.user_id = $scope.userDetails.user_id;
+			console.log(addbusiness);
+		}//end of post method{sonali}
+		
+		
+		
+		
+		/*$scope.insert = function(addbusiness){
 			console.log($scope.addbusiness);
 			dataService.post("../server-api/index.php/post/business",$scope.addbusiness)
 			.then(function(response) {
 				alert(response);
 				console.log(response);
 			})
-		}	//end of insert
+		}	//end of insert*/
 		
 		
 		
@@ -47,18 +113,7 @@ define(['app'], function (app) {
 		/* Date Picker Ended here --------------------------------------------------------------------------------------*/
 		
 		
-		console.log($routeParams.id + " : AddBusinessController");
 		
-		/* switch($scope.formPart) {
-			case 'businesslist':
-				businesslist();
-				break;
-			case 'deletedbusiness':
-				deletedbusiness();
-				break;
-			default:
-				businesslist();
-		}; */
 		
     };
 	
