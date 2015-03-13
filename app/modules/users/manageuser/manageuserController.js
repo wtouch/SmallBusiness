@@ -4,7 +4,27 @@ define(['app'], function (app) {
     var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService']; /* Added $routeParams to access route parameters */
     // This is controller for this view
 	var manageuserController = function ($scope, $injector, $routeParams,$location,dataService) {
-		//console.log("this is manageuserController");
+		
+		$scope.open = function (url, buzId) {
+			dataService.get("getsingle/business/"+buzId)
+			.then(function(response) {
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+					size : 'lg'
+				};
+				var modalOptions = {
+					bizList: response.data[0]  // assign data to modal
+				};
+				console.log(response.data[0]);
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log("modalOpened");
+				});
+			});
+			
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
 		
 		//For display by default userslist.html page{trupti}
 		$scope.userViews = $routeParams.userViews; 
