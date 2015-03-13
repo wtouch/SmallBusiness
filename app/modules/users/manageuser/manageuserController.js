@@ -55,10 +55,10 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
 				$scope.reset();
-			});*/
+			});
 			
 		$scope.postData = function(usergroup) {
-			console.log(usergroup);
+			console.log(usergroup);*/
 			/*dataService.post("/post/user/"+pageItems,adduser)
 			.then(function(response) {  
 				if(response.status=="success"){
