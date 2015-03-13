@@ -18,12 +18,13 @@
 			logout();
 		}else{
 			if(isset($id)){
-				getSingleUser();
+				getSingleUser($id);
 			}else{
-				getMultipleUsers(); // from getUsers.php
+				$limit['pageNo'] = $pageNo; // from which record to select
+				$limit['records'] = $records; // how many records to select
+				getMultipleUsers($limit); // from getUsers.php
 			}
 		}
-	}//end get
 	
 	if($reqMethod=="POST"){
 		if(isset($postParams) && $postParams == 'login'){

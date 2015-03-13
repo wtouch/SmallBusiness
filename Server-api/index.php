@@ -44,7 +44,7 @@ function login($getRequest){
     }
 };
 
-function getRecord($getRequest, $id){
+function getRecord($getRequest, $id=null){
 	$app = new \Slim\Slim();
 	$body = $app->request->getBody();
 	// this will get current url
@@ -52,6 +52,7 @@ function getRecord($getRequest, $id){
 	$baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex).'/index.php'; */ 
 	
 	$id = (int)$id;
+	
 	try{
 		if($id === 0){
 			if($id === 0){
