@@ -1,10 +1,10 @@
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<a href="#" class="btn btn-default pull-right btn-primary" title="Add more Jobs">Add Jobs</a>
+		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(job_careers, addbusiness.job_careers)" title="Add Jobs">Add Jobs</button>
 	</div>
 </div>
 <div class="form-group">
-	<label for="jobTitle" class="col-sm-3 control-label">Job Title :</label>
+	<label for="jobTitle" class="col-sm-3 control-label">Job Title </label>
 	<div class="col-sm-9">
 		<input type="text" class="form-control" id="jobTitle" name="jobTitle" ng-model="addbusiness.job_careers.jobTitle" required>
 		<span class="help-block" ng-show="addbusinessForm.jobTitle.$dirty && addbusinessForm.jobTitle.$invalid">
@@ -13,21 +13,38 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="jobDes" class="col-sm-3 control-label">Job Description :</label>
+	<label for="jobDescription" class="col-sm-3 control-label">Job Description </label>
 	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="jobDes" name="jobDes" ng-model="addbusiness.job_careers.jobDes" cols="30" rows="4" ng-maxlength="20" placeholder="Enter Job Description" ui-tinymce required></textarea>
-			<p ng-hide="addbusinessForm.jobDes.$error.maxlength">
-				{{ 20 - jobs.jobDes.length + " Chars left" }}
+		<textarea type="text" class="form-control" id="jobDescription" name="jobDescription" ng-model="addbusiness.job_careers.jobDescription" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Job Description" ui-tinymce required></textarea>
+			<p ng-hide="addbusinessForm.jobDescription.$error.maxlength">
+				{{ 256 - job_careers.jobDescription.length + " Chars left" }}
 			</p>
 			
-			<span class="help-block" ng-show="addbusinessForm.jobDes.$dirty && addbusinessForm.jobDes.$invalid">
-				<span  ng-show="addbusinessForm.jobDes.$error.maxlength" class="text-danger">Sorry You are Exceeding the Limit</span>
-				<span ng-show="addbusinessForm.jobDes.$error.required" class="text-danger">Job Description is required.</span>
+			<span class="help-block" ng-show="addbusinessForm.jobDescription.$dirty && addbusinessForm.jobDescription.$invalid">
+				<span  ng-show="addbusinessForm.jobDescription.$error.maxlength" class="text-danger">Sorry You are Exceeding the Limit</span>
+				<span ng-show="addbusinessForm.jobDescription.$error.required" class="text-danger">Job Description is required.</span>
 			</span>	
 	</div>
 </div>
+
+<div>
+	<table ng-if="addbusiness.job_careers">
+		<tr>
+			<th>Job Title </th>
+			<th>Job Description</th>
+			<th>Remove</th>
+		</tr>
+		<tr ng-repeat="(key, value) in addbusiness.job_careers">
+			<td>{{key}}</td>
+			<td>{{value}}</td>
+			<td><button ng-click="removeObject(key,addbusiness.job_careers)">Remove</button></td>
+			
+		</tr>
+	</table>
+</div>
+
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button type="submit" class="btn btn-default btn-primary" title="next" ng-click="postData(addbusiness)">Next</button>
+		<button type="submit" class="btn btn-default btn-primary" title="next" ng-click="showFormPart('news')">Next</button>
 	</div>
 </div>
