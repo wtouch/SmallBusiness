@@ -3,7 +3,7 @@
 		<div class="form-group">
 			<label  for="name" class="col-sm-2 control-label">Website Name</label>		
 			<div class="col-sm-9">
-				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="name" required >
+				<input type="text" id="website_name" class="form-control" name="website_name" placeholder="Website Name" ng-model="reqnewsite.website_name" required >
 				<span class="help-block" ng-show="requestsiteForm.name.$dirty && requestsiteForm.name.$invalid">
 					<span class="text-danger" ng-show="requestsiteForm.name.$error.required">Website Name is required.</span>
 				</span>
@@ -23,7 +23,7 @@
 		<div class="form-group">
 			<label for="contactno" class="col-md-2 control-label">Contact Number </label>
 			<div class="col-md-9">
-				<input type="text" id="contactno" name="contactno" class="form-control" ng-model="contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+				<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reqnewsite.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 					<span class="help-block" ng-show="requestsiteForm.contactno.$dirty && requestsiteForm.contactno.$invalid">
 						<span ng-show="requestsiteForm.contactno.$error.pattern && (requestsiteForm.contactno.$dirty || submitted)" class="text-danger">Enter a valid Contact Number .</span>
 					</span>
@@ -32,7 +32,7 @@
 		<div class="form-group">
 			<label for="product_service_name" class="col-sm-2 control-label">Product/Services</label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="product_service_name" name="product_service_name" ng-model="product_service_name" cols="30" rows="4" ng-maxlength="20" placeholder="Product/Services" ui-tinymce required></textarea>
+				<textarea type="text" class="form-control" id="product_service_name" name="product_service_name" ng-model="reqnewsite.product_service_name" cols="30" rows="4" ng-maxlength="20" placeholder="Product/Services" ui-tinymce required></textarea>
 					<p ng-hide="requestsiteForm.product_service_name.$error.maxlength">
 					{{ 20 - product_service_name.length + " Chars left" }}
 					</p>

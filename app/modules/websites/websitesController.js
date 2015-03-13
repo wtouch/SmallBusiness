@@ -39,11 +39,11 @@ define(['app'], function (app) {
         $scope.user_id = {user_id : 1}; // these are URL parameters
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
-		angular.extend(where, $scope.user_id);
-			dataService.get("/getmultiple/website/"+page+"/"+$scope.pageItems, where)
+			angular.extend($scope.template_type, $scope.user_id);
+			dataService.get("/getmultiple/website/"+page+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for websitelist response
 				$scope.website = response.data;
-				
+				//console.log($scope.properties);
 			});
 		};
         
