@@ -5,24 +5,6 @@ define(['app'], function (app) {
     // This is controller for this view
 	var manageuserController = function ($scope, $injector, $routeParams,$location,dataService,$route,modalService) {
 		
-		$scope.openModal = function (url, userId) {
-				var modalDefaults = {
-					templateUrl: url,	// apply template to modal
-					size : 'lg'
-				};
-				var modalOptions = {
-					userId : userId
-				};
-				
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					console.log("modalOpened");
-					console.log(modalOptions);
-				});
-		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
-		};
-		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
 		if(!$routeParams.userViews) {
@@ -37,6 +19,10 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
 		$scope.userList = [];
+		
+		$scope.dynamicTooltip = function(status, active, notActive){
+			return (status==1) ? active : notActive;
+		};
 		
 		//datepicker {sonali}	
 			$scope.today = function() 
@@ -69,25 +55,86 @@ define(['app'], function (app) {
 		};	
 		//End of pagination
 		
+		//code for modal
+		$scope.openModal = function (url, userId) {
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+					size : 'lg'
+				};
+				var modalOptions = {
+					userId : userId
+				};
+				
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log("modalOpened");
+					console.log(modalOptions);
+					dataService.put("put/user/"+id, modalOptions.data)
+					.then(function(response){
+						console.log(response);
+					})
+				});
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+		
+		//code for check password
+		$scope.passMatch = function(pass1, pass2){
+			$scope.pass = (pass1===pass2) ? true : false;
+			//alert($scope.pass);
+		}
+		$scope.submitted = false;
+		
+		
 		//code for search filter
 		$scope.searchFilter = function(statusCol, colValue) {
-			$scope.searchObj = {search: true, username : colValue};
-			//angular.extend($scope.searchObj, $scope.statusParam);
-			if(colValue.length >= 4){
-				dataService.get("/getmultiple/user/1/"+$scope.pageItems, $scope.searchObj)
-				.then(function(response) {  
-					if(response.status=="warning" || response.status=='error' ){
-						$scope.userList = response.data;
-						console.log(response);
-						$scope.totalRecords = response.totalRecords;
+			$scope.search = {search: true};
+			$scope.filterStatus= {}; // search filter for send request ex. {columnName : value}
+			(colValue =="") ? delete $scope.userParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
+			angular.extend($scope.userParams, $scope.filterStatus);
+			angular.extend($scope.userParams, $scope.search);
+			if(colValue.length >= 4 || colValue ==""){
+				dataService.get("/getmultiple/user/1/"+$scope.pageItems, $scope.userParams).then(function(response) { 
+					if(response.status == 'success'){
+						$scope.userList = response.data; // this will change for template
+						$scope.totalRecords = response.totalRecords; // this is for pagination
 					}else{
-						$scope.userList = response.data;
-						$scope.totalRecords = response.totalRecords;
-						console.log($scope.userList);
+						$scope.userList = {};
+						$scope.totalRecords = {};
+						$scope.alerts.push({type: response.status, msg: response.message});
 					}
+			//console.log($scope.properties);
 				});
 			}
 		};
+		
+		$scope.hideDeleted = ""; // & use this filter in ng-repeat - filter: { status : hideDeleted}
+		$scope.changeStatus = function(colName, colValue, id){
+		$scope.changeStatus[colName] = colValue;
+		console.log(colValue);
+		/*dataService.put("put/user/"+id, $scope.changeStatus)
+		.then(function(response) { //function for businesslist response
+				if(colName=='status'){
+					$scope.hideDeleted = 1;
+				}
+				$scope.alerts.push({type: response.status, msg: response.message});
+			});*/
+		};
+		
+			
+		/*code for delete user	
+		$scope.deleteuser = function(id, status, index){
+			if(status==1){
+				$scope.status = {status : 0};
+				console.log($scope.status);
+				/*dataService.put("put/user/"+id, $scope.status)
+				.then(function(response) { 
+					console.log(response.message);
+					$scope.userList[index].status = 0
+					$scope.hideDeleted = 1;
+ 				});
+			}
+		};*/
 		
 		//add user information
 		var addUsers =	function(){
