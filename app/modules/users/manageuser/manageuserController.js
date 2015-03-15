@@ -1,34 +1,30 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService']; /* Added $routeParams to access route parameters */
+    var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService','$route','modalService']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var manageuserController = function ($scope, $injector, $routeParams,$location,dataService) {
+	var manageuserController = function ($scope, $injector, $routeParams,$location,dataService,$route,modalService) {
 		
-		$scope.open = function (url, buzId) {
-			dataService.get("getsingle/business/"+buzId)
-			.then(function(response) {
+		$scope.openModal = function (url, userId) {
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
 					size : 'lg'
 				};
 				var modalOptions = {
-					bizList: response.data[0]  // assign data to modal
+					userId : userId
 				};
-				console.log(response.data[0]);
+				
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
+					console.log(modalOptions);
 				});
-			});
-			
 		};
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
 		
-		//For display by default userslist.html page{trupti}
+		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
-		//console.log($scope.userViews);
 		if(!$routeParams.userViews) {
 		$location.path('/dashboard/users/userslist');
 		}
@@ -52,7 +48,6 @@ define(['app'], function (app) {
 			{
 				$event.preventDefault();
 				$event.stopPropagation();
-				//$scope.opened = true;
 				$scope.opened = ($scope.opened==true)?false:true;
 			};
 			$scope.dateOptions = {
@@ -66,28 +61,33 @@ define(['app'], function (app) {
 		
 		//code for pagination
 		$scope.pageChanged = function(page) { 
-			//$log.log('Page changed to: ' + $scope.currentPage);
-			//get request for usersGroup
 			dataService.get("getmultiple/user/"+page+"/"+$scope.pageItems).then(function(response){
 				$scope.userList = response.data;
 				console.log(response.data);
+				$scope.totalRecords = response.totalRecords;
 			});
-			/*$http.get("../server-api/index.php/properties/"+$scope.usersGroupCurrentPage+"/"+$scope.pageItems).success(function(response) {
-				$scope.manageusers.usersGroupCurrentPage = response.manageusers.usersGroupCurrentPage;
-				//$scope.totalRecords = response.totalRecords;
-				//console.log($scope.properties);
-			});
-			//get request for usersList
-			$http.get("../server-api/index.php/properties/"+$scope.usersListCurrentPage+"/"+$scope.pageItems)
-			.success(function(response) {  //function for mytemplate response
-				$scope.manageusers.usersListCurrentPage = response.manageusers.usersListCurrentPage;
-				//$scope.totalRecords = response.totalRecords;
-				//console.log($scope.properties);
-			});*/
-			
-			
 		};	
 		//End of pagination
+		
+		//code for search filter
+		$scope.searchFilter = function(statusCol, colValue) {
+			$scope.searchObj = {search: true, username : colValue};
+			//angular.extend($scope.searchObj, $scope.statusParam);
+			if(colValue.length >= 4){
+				dataService.get("/getmultiple/user/1/"+$scope.pageItems, $scope.searchObj)
+				.then(function(response) {  
+					if(response.status=="warning" || response.status=='error' ){
+						$scope.userList = response.data;
+						console.log(response);
+						$scope.totalRecords = response.totalRecords;
+					}else{
+						$scope.userList = response.data;
+						$scope.totalRecords = response.totalRecords;
+						console.log($scope.userList);
+					}
+				});
+			}
+		};
 		
 		//add user information
 		var addUsers =	function(){
@@ -173,3 +173,15 @@ define(['app'], function (app) {
     app.register.controller('manageuserController', manageuserController);
 	
 });
+/*$http.get("../server-api/index.php/properties/"+$scope.usersGroupCurrentPage+"/"+$scope.pageItems).success(function(response) {
+				$scope.manageusers.usersGroupCurrentPage = response.manageusers.usersGroupCurrentPage;
+				//$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});
+			//get request for usersList
+			$http.get("../server-api/index.php/properties/"+$scope.usersListCurrentPage+"/"+$scope.pageItems)
+			.success(function(response) {  //function for mytemplate response
+				$scope.manageusers.usersListCurrentPage = response.manageusers.usersListCurrentPage;
+				//$scope.totalRecords = response.totalRecords;
+				//console.log($scope.properties);
+			});*/

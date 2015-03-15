@@ -37,7 +37,7 @@
 					<div class="btn-group">
 						<!--#/changepass
 						#/dashboard/users/changepass-->
-						<a href="#/dashboard/users/editprofile/changepass" tooltip-animation="true" tooltip="Reset Password" class="btn btn-default btn-primary glyphicon glyphicon-refresh"></a>
+						<a class="btn btn-default btn-primary glyphicon glyphicon-refresh" ng-click="openModal('modules/users/manageuser/changepassword.html', users.id)" tooltip-animation="true" tooltip="Reset Password"></a>
 					</div>
 					
 					<div class="btn-group" role="group" aria-label="second group">
@@ -56,6 +56,6 @@
 	</table>
 </div>
 <div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="usersListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(usersListCurrentPage)"></pagination>Total Records : {{totalRecords}}
+	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="usersListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(usersListCurrentPage, statusParam)"></pagination>Total Records : {{totalRecords}}
 			<pre>Page: {{usersListCurrentPage}} / {{numPages}}</pre>
 </div>	

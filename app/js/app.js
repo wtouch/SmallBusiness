@@ -108,9 +108,10 @@ define(['angular',
 						}
 						
 						sessionStorage.userDetails = JSON.stringify(response);
+						$rootScope.userDetails = JSON.parse(sessionStorage.userDetails);
 					};
 				})
-				$rootScope.userDetails = JSON.parse(sessionStorage.userDetails);
+				
 			//}
 			
 		});
