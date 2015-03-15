@@ -144,7 +144,8 @@ define(['app'], function (app) {
 			$scope.editBusiness = function(id){
 				$location.path('/dashboard/business/addbusiness/'+id);
 			};
-				
+			
+			//This code for verify button {sonali}
 			$scope.verify = function(id, verified){
 				$scope.veryfiedData = {verified : verified};
 				
@@ -162,11 +163,7 @@ define(['app'], function (app) {
 					console.log(response);
 				});
 			};
-			//Update business edit button {sonali}
-			$scope.editBusiness = function(id){
-				$location.path('/dashboard/business/addbusinesss/'+id);
-			};
-				
+
 			//delete button {sonali}
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
@@ -178,21 +175,7 @@ define(['app'], function (app) {
 						console.log(response);
 					}
 				});
-			};
-			/*$scope.deleted = function(id, status){
-				if(response.status == '1'){
-					$scope.deletedData = {status : status};
-					dataService.put("put/business/"+id, $scope.deletedData)
-					.then(function(response) {
-						$scope.bizList = response.data;
-					});
-				}	
-				else{
-					
-				}
-			};*/
-			
-			
+			};			
 		};
 		
 		var deletedbusiness = function(){
