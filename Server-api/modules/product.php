@@ -15,6 +15,12 @@
 			$limit['pageNo'] = $pageNo; // from which record to select
 			$limit['records'] = $records; // how many records to select
 			
+			((isset($_GET['business_id'])) && ($_GET['business_id']!=="")) ? $where['business_id'] = $_GET['business_id'] : "";
+			
+			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
+			((isset($_GET['type'])) && ($_GET['type']!=="")) ? $where['type'] = $_GET['type'] : "";
+			
+			
 			// this is used to select data with LIMIT & where clause
 			$data = $db->select("product", $where, $limit);
 			

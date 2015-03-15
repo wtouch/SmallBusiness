@@ -13,34 +13,29 @@
 							</select>
 						</div>
 						<div class="col-sm-3" ng-show="selectBusiness">
-							<select id="view" class="form-control" ng-model="productType" ng-init="productType = 'product'"> 
+							<select id="view" class="form-control" ng-model="productType" ng-change="changeScopeObject(productType)">{{productType}}
 								<option value="product">Product</option>
 								<option value="service">Services</option>
 							</select>
 						</div>
 						<div class="col-sm-6" ng-show="selectBusiness">
 							<div class="text-right">
-								<button ng-if="selectBusiness && productType=='product'" class="btn btn-default" ng-model="addProduct" ng-click="showForm('addProduct')">Add Product</button>
-								<button ng-if="selectBusiness && productType=='service'" class="btn btn-default" ng-model="addService" ng-click="showForm('addService')"><span ng-if="addService===true">Close Form </span><span ng-if="addService===false">Add Service</span></button>
+								<button ng-if="selectBusiness && productType=='product'" class="btn btn-default" ng-model="showProductForm" ng-click="showForm('showProductForm')">Add Product</button>
+								<button ng-if="selectBusiness && productType=='service'" class="btn btn-default" ng-model="showServiceForm" ng-click="showForm('showServiceForm')"><span ng-if="showServiceForm===true">Close Form </span><span ng-if="showServiceForm===false">Add Service</span></button>
 								
 							</div>
 						</div>
 					</div>
 				</div>
 				
-				<ng-include ng-if="productType=='service' && addService==true" src="'modules/business/products/addservices.html' "></ng-include>	
+				<ng-include ng-if="productType=='service' && showServiceForm==true" src="'modules/business/products/addservices.html' "></ng-include>	
 				
-				<ng-include ng-if="productType=='product' && addProduct==true" src="'modules/business/products/addproducts.html'"></ng-include>
+				<ng-include ng-if="productType=='product' && showProductForm==true" src="'modules/business/products/addproducts.html'"></ng-include>
 				
-				<ng-include ng-show="selectBusiness && productType=='service'"  src="'modules/business/products/servicelist.html'"></ng-include>
+				<ng-include ng-show="selectBusiness && productType=='service'" src="'modules/business/products/servicelist.html'"></ng-include>
 				
 				<ng-include ng-if="selectBusiness && productType=='product'"  src="'modules/business/products/productlist.html'"></ng-include>
-				
-				
-				
-				
-				
-					
+			
 					<!--<ng-include src="'modules/business/products/addproducts.html'"></ng-include>
 					<ng-include src="'modules/business/products/productlist.html'"></ng-include>
 					<ng-include src="'modules/business/products/servicelist.html'"></ng-include>-->

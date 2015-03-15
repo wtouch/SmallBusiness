@@ -28,7 +28,6 @@
 			(isset($_GET['category'])) ? $where['category'] = $_GET['category'] : "";
 			(isset($_GET['custom'])) ? $where['custom'] = $_GET['custom'] : "";
 			
-			
 			// this is used to select data with LIMIT & where clause with like filter
 			$data = $db->select("template", $where, $limit,$like);
 			

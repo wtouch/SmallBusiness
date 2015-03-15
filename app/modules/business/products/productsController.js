@@ -5,7 +5,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 
     // This is controller for this view
 	var productsController = function ($scope, $rootScope,$injector,$location,$routeParams,dataService,upload) {
-		console.log("Product Controller"); // Just Added for testing {Vilas}
+		//console.log("Product Controller"); // Just Added for testing {Vilas}
 		
 		//for display form parts of product & service
 		$scope.productView = $routeParams.productView;
@@ -46,23 +46,34 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.changeScope = function(value, object){
 			$scope.addservice.business_id = value.id;
 			$scope.addproduct.business_id = value.id;
-			console.log($scope.addproduct);
+			$scope.changeScopeObject($scope.productType);
 		}
-		$scope.addProduct = false;
-		$scope.addService = false;
+		$scope.showProductForm = false;
+		$scope.showServiceForm = false;
 		$scope.showForm = function(object){
 			console.log(object);
 			$scope[object] = ($scope[object]==true) ? false : true;
 			$scope.$apply;
+			if(object == 'showProductForm'){
+				addproducts();
+			}
+			if(object == 'showServiceForm'){
+				addservice();
+			}
 		}
 		// get data for business options 
+		
+		//for close alert
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
 		
 		dataService.get("getmultiple/business/1/100",$scope.userDetails)
 			.then(function(response) {  //function for template list response
 			//$scope.businessList.user_id=$scope.userDetails.user_id;
 				if(response.status == 'success'){
 					$scope.businessList = response.data;
-					console.log($scope.businessList);
+					//console.log($scope.businessList);
 				}else{
 					
 					$scope.alerts.push({type: response.status, msg: "You didn't added any business! Please add business first."});
@@ -71,41 +82,35 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				//console.log(businessList);
 			});
 		//end of options
-		
-		
 		var addproducts = function(){
 			//reset function{trupti}
 			//angular.extend($scope.addproducts,$scope.userDetails)
-			//console.log($scope.addproduct.business_id);
-			$scope.reset = function() {
+			console.log($scope.addproduct.business_id);
+			 $scope.reset = function() {
 				$scope.addproduct = {};
 			};
 			$scope.postData = function(addproduct) { 
 			addproduct.user_id=$scope.userDetails.user_id;
 			////console.log(user_id);
-				dataService.post("post/product",addproduct)
+				 dataService.post("post/product",addproduct)
 				.then(function(response) {  //function for response of request temp
 					$scope.addproduct = response.data;
 					console.log(response);
 					$scope.reset();
-				});
-				
+				}); 
 				console.log(addproduct);
-			}//end of post method {trupti}
-			
-			//method for close{trupti}
-			$scope.ok = function () {
-			$addservice.close('ok');
-		};
+			}//end of post method {trupti} 
+			console.log("add product");
 		}
 		
 		var addservices = function(){
 			//reset function{trupti}
-			//console.log($scope.addproduct.business_id);
+			console.log($scope.addproduct.business_id);
 			$scope.reset = function() {
 				$scope.addservice = {};
 			};
-			$scope.postData = function(addservice) { 
+			console.log("add service");
+			/* $scope.postData = function(addservice) { 
 			addservice.user_id=$scope.userDetails.user_id;
 			
 			//console.log(user_id);
@@ -114,20 +119,64 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					$scope.addservice = response.data;
 					console.log(response);
 					$scope.reset();
-				});
-			}//end of post method {trupti}
+				});*/
+				console.log(addproduct);
+			//}//end of post method {trupti} 
 		}
 		
-		switch($scope.productView) {
-			case 'addproducts':
+		//view for product list
+		var productlist= function(){
+				$scope.productFilter = {business_id : $scope.selectBusiness.id, type : 'product'};
+				angular.extend($scope.userDetails, $scope.productFilter);
+				dataService.get("getmultiple/product/1/10",$scope.userDetails)
+				.then(function(response) {  
+					if(response.status == 'success'){
+						$scope.products = response.data;
+						//$scope.totalRecords = response.totalRecords;	
+					}
+					else
+					{
+						$scope.alerts.push({type: response.status, msg: response.message});
+						$scope.products = {};
+					};
+				});
+			}	
+
+		var servicelist= function(){
+			$scope.productFilter = {business_id : $scope.selectBusiness.id, type : 'service'};
+				angular.extend($scope.userDetails, $scope.productFilter);
+				dataService.get("getmultiple/product/1/10",$scope.userDetails)
+				.then(function(response) {  
+					if(response.status == 'success'){
+						$scope.products = response.data;
+						//$scope.totalRecords = response.totalRecords;	
+					}
+					else
+					{
+						$scope.alerts.push({type: response.status, msg: response.message});
+						$scope.products = {};
+					};
+				});
+			}
+		
+		$scope.productType = "product";
+		$scope.changeScopeObject = function(value){
+			$scope.productType = value;
+			console.log($scope.showProductForm);
+			if(value=="product" && $scope.showProductForm == true){
 				addproducts();
-				break;
-			case 'addservices':
-				addservices();
-				break;
-			default:
-				addproducts();
-		};
+			}
+			if(value=="product"){
+				productlist();
+				console.log("product if");
+			}
+
+			if(value=="service"){
+				console.log("service if");
+				servicelist();
+			}
+		}
+		
 		
     };
 
