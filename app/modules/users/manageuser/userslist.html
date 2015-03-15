@@ -30,7 +30,7 @@
 				<td>{{users.register_date}}</td>
 				<td>
 					<div class="btn-group">
-						<button type="button" tooltip="{{dynamicTooltip(users.status, 'No Approve','Approve')}}" ng-class="(users.status==1) ? 'btn btn-primary' : 'btn btn-warning'" ng-model="users.status" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" tooltip-animation="true">
+						<button type="button" tooltip="{{dynamicTooltip(users.status, 'No Approve','Approve')}}" ng-class="(users.status==1) ? 'btn btn-primary' : 'btn btn-warning'" ng-model="users.status" ng-click="changeStatus('status',users.status, users.id)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" tooltip-animation="true">
 							<span class="glyphicon glyphicon-ok"></span>
 						</button>
 					</div>
@@ -48,7 +48,7 @@
 					<div class="btn-group" role="group" aria-label="third group">
 						<a class="btn btn-default btn-info glyphicon glyphicon-pencil" href="#/dashboard/users/adduser/{{users.id}}" tooltip-animation="true" tooltip="Edit User Information">
 						</a>
-						<button type="button" tooltip-animation="true"  tooltip="Delete User" class="btn btn-default btn-danger glyphicon glyphicon-remove" ng-click="changeStatus('status', users.status, users.id)"></button>
+						<button type="button" tooltip-animation="true"  tooltip="Delete User" class="btn btn-default btn-danger glyphicon glyphicon-remove" ng-click="changeStatus('status',users.status, users.id)"></button>
 					</div>	
 				</td>
 			</tr>					

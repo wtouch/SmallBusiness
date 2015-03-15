@@ -112,13 +112,13 @@ define(['app'], function (app) {
 		$scope.changeStatus = function(colName, colValue, id){
 		$scope.changeStatus[colName] = colValue;
 		console.log(colValue);
-		/*dataService.put("put/user/"+id, $scope.changeStatus)
-		.then(function(response) { //function for businesslist response
-				if(colName=='status'){
-					$scope.hideDeleted = 1;
-				}
-				$scope.alerts.push({type: response.status, msg: response.message});
-			});*/
+			//dataService.put("put/user/"+id, $scope.changeStatus)
+			//.then(function(response) { //function for businesslist response
+					if(colName=='status'){
+						$scope.hideDeleted = 1;
+					}
+				//$scope.alerts.push({type: response.status, msg: response.message});
+			//});
 		};
 		
 			
