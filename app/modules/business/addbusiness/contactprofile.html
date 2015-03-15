@@ -71,7 +71,7 @@
 					<div class="form-group">
 						<label for="Country" class="col-sm-3 control-label">Country</label>
 						<div class="col-sm-9">
-							<select class="form-control" name="Country" id="Country"  ng-model="addbusiness.testimonials.Country" required>		
+							<select class="form-control" name="Country" id="Country"  ng-model="addbusiness.contact_profile.Country" required>		
 								<option value="">Select Country</option>
 								<option value="India">India</option>
 								<option value="Australia">Australia</option>
@@ -87,7 +87,7 @@
 					<div class="form-group">
 						<label for="state" class="col-sm-3 control-label">State</label>
 						<div class="col-sm-4">
-							<select class="form-control" name="State" id="State"  ng-model="addbusiness.testimonials.State" required>		
+							<select class="form-control" name="State" id="State"  ng-model="addbusiness.contact_profile.State" required>		
 								<option value="">Select State</option>
 								<option value="Maharashtra">Maharashtra</option>
 								<option value="Gujarat">Gujarat</option>
@@ -100,7 +100,7 @@
 						</div>
 
 						<div class="col-sm-offset-1 col-sm-4">
-							<select class="form-control" name="City" id="City"  ng-model="addbusiness.testimonials.City" required>		
+							<select class="form-control" name="City" id="City"  ng-model="addbusiness.contact_profile.City" required>		
 								<option value="">Select City</option>
 								<option value="Ahmednagar">Ahmednagar</option>
 								<option value="Pune">Pune</option>
@@ -112,13 +112,14 @@
 							</span>				
 						</div>
 					</div>
-					
-					<div class="form-group">	
-						<label  for="ZIP_Code" class="col-sm-3 control-label">ZIP Code</label>	
+				
+					<div class="form-group">
+						<label for="ZIP_Code" class="col-sm-3 control-label">ZIP Code</label>
 						<div class="col-sm-9">
-							<input type="text" id="ZIP_Code" class="form-control" name="ZIP_Code" placeholder="ZIP Code" ng-pattern="/^[\d\.\-]+$/" maxlength="6" ng-model="addbusiness.contact_profile.ZIP_Code">
+							<input type="text" id="ZIP_Code" name="ZIP_Code" class="form-control" ng-model="addbusiness.contact_profile.ZIP_Code" placeholder="Enetr Zip Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
 							<span class="help-block" ng-show="addbusinessForm.ZIP_Code.$dirty && addbusinessForm.ZIP_Code.$invalid">
 								<span ng-show="addbusinessForm.ZIP_Code.$error.pattern && (addbusinessForm.ZIP_Code.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
+								<span class="text-danger" ng-show="addbusinessForm.ZIP_Code.$error.minlength && (addbusinessForm.ZIP_Code.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
 							</span>
 						</div>						
 					</div>
@@ -127,9 +128,10 @@
 					<div class="form-group">
 						<label for="telephone" class="col-sm-3 control-label">Telephone</label>
 						<div class="col-sm-9">
-							<input type="text" id="telephone" name="telephone" class="form-control" ng-model="addbusiness.contact_profile.telephone" placeholder="Your Contact No" ng-pattern="/^[\d\.\-]+$/" maxlength="12">
+							<input type="text" id="telephone" name="telephone" class="form-control" ng-model="addbusiness.contact_profile.telephone" placeholder="Enetr Telephone" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="12"  ng-minlength="12">
 							<span class="help-block" ng-show="addbusinessForm.telephone.$dirty && addbusinessForm.telephone.$invalid">
-								<span ng-show="addbusinessForm.telephone.$error.pattern && (addbusinessForm.telephone.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
+								<span ng-show="addbusinessForm.telephone.$error.pattern && (addbusinessForm.telephone.$dirty || submitted)" class="text-danger">Enter a valid Telephone</span>
+								<span class="text-danger" ng-show="addbusinessForm.telephone.$error.minlength && (addbusinessForm.telephone.$dirty || submitted)">Enter Valid Length Of Telephone.</span>
 							</span>
 						</div>						
 					</div>
@@ -137,7 +139,7 @@
 					<div class="form-group">
 						<label for="mobile" class="col-sm-3 control-label">Mobile/Cell Phone</label>
 						<div class="col-sm-9">
-							<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addbusiness.contact_profile.mobile" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+							<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addbusiness.contact_profile.mobile" placeholder="Enetr Mobile No." ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 							<span class="help-block" ng-show="addbusinessForm.mobile.$dirty && addbusinessForm.mobile.$invalid">
 								<span ng-show="addbusinessForm.mobile.$error.pattern && (addbusinessForm.mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
 							</span>
@@ -147,9 +149,10 @@
 					<div class="form-group">
 						<label  for="fax" class="col-sm-3 control-label">Fax</label>
 						<div class="col-sm-9">
-							<input type="text" id="fax" class="form-control" name="fax" ng-model="addbusiness.contact_profile.fax" ng-pattern="/^[\d\.\-]+$/" maxlength="10" placeholder="Fax">
+							<input type="text" id="fax" class="form-control" name="fax" ng-model="addbusiness.contact_profile.fax" ng-pattern="/^[0-9 \-\s \( \)]*$/" ng-minlength="6" maxlength="10" placeholder="Fax">
 							<span class="help-block" ng-show="addbusinessForm.fax.$dirty && addbusinessForm.fax.$invalid">
-								<span ng-show="addbusinessForm.fax.$error.pattern && (addbusinessForm.fax.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
+								<span ng-show="addbusinessForm.fax.$error.pattern && (addbusinessForm.fax.$dirty || submitted)" class="text-danger">Enter a valid Fax</span>
+								<span class="text-danger" ng-show="addbusinessForm.fax.$error.minlength && (addbusinessForm.fax.$dirty || submitted)">Enter Valid Length Of Fax.</span>
 							</span>
 						</div>						
 					</div>

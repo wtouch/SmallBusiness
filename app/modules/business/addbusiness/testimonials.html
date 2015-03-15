@@ -8,9 +8,9 @@
 	<label  for="date" class="col-sm-3 control-label">Date</label>
 	<div class="col-sm-9">
 		<p class="input-group">
-		  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="testimonials.desc.date" is-open="selectDate" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'selectDate')"/>
+		  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="testimonials.desc.date" is-open="testimonialdate" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'testimonialdate')"/>
 		  <span class="input-group-btn">
-			<button type="button" class="btn btn-default" ng-click="open($event, 'selectDate')">
+			<button type="button" class="btn btn-default" ng-click="open($event, 'testimonialdate')">
 			<i class="glyphicon glyphicon-calendar"></i></button>
 		  </span>
 		</p>
@@ -40,7 +40,7 @@
 	<label for="Sender_Country" class="col-sm-3 control-label">Sender Country</label>
 	<div class="col-sm-9">
 		<select class="form-control" name="Sender_Country" id="Sender_Country"  ng-model="testimonials.desc.Sender_Country" required>		
-			<option value="">Select Type</option>
+			<option value="">Select Country</option>
 			<option value="India">India</option>
 			<option value="Australia">Australia</option>
 			<option value="China">China</option>
@@ -76,7 +76,7 @@
 			<option value="Nasik">Nasik</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.Sender_City.$dirty && addbusinessForm.Sender_City.$invalid">
-		<span ng-show="addbusinessForm.Sender_City.$error.required" class="text-danger">Sender City is required.</span>
+			<span ng-show="addbusinessForm.Sender_City.$error.required" class="text-danger">Sender City is required.</span>
 		</span>				
 	</div>
 </div>
@@ -138,7 +138,7 @@
 	</span>
 </div>
 
-<div class="col-sm-offset-3 col-sm-9">
+<div class="col-sm-12">
 	<table class="table table-bordered" ng-if="addbusiness.testimonials">
 		<tr>
 			<th>Testimonial Title</th>
