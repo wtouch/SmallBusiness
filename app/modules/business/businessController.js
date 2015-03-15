@@ -164,7 +164,7 @@ define(['app'], function (app) {
 			};
 			//Update business edit button {sonali}
 			$scope.editBusiness = function(id){
-				$location.path('/dashboard/business/addbusiness/'+id);
+				$location.path('/dashboard/business/addbusinesss/'+id);
 			};
 				
 			//delete button {sonali}

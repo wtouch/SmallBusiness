@@ -3,7 +3,6 @@
 		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(infrastructure, addbusiness.infrastructure)" title="Add Infrastucture">Add Infrastucture</button>
 	</div>
 </div>
-{{addbusiness.infrastructure | json}}
 
 <div class="form-group" >
 	<label  for="infra_image" class="col-sm-3 control-label">Add Image</label>
@@ -12,50 +11,50 @@
 		<!-- This will show thumbnails & progress of images -->
 			<file-preview url="infra_image"></file-preview>
 			<!-- This button will show if file/s selected -->
-			<button ng-show="infra_image" ng-click="upload(infra_image,path,userinfo, addbusiness.infrastructure.infra_image)" type="button">Upload</button>
+			<button ng-show="infra_image" ng-click="upload(infra_image,path,userinfo, infrastructure.desc.infra_image)" type="button">Upload</button>
 			<!-- This hidden input will store image path in array after successful uploading -->
-			<input type="hidden" ng-model="addbusiness.infrastructure.infra_image">		
+			<input type="hidden" ng-model="infrastructure.desc.infra_image">
 	</div>
 </div>
 
 <div class="form-group">
 	<label for="infraHeading" class="col-sm-3 control-label" name="infraHeading" >Infrastucture Heading</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="infraHeading" id="infraHeading"  ng-model="infrastructure.infraHeading" required>
+		<select class="form-control" name="infraHeading" id="infraHeading"  ng-model="infrastructure.heading" required>
 			<option value="">Select Heading</option>
-			<option value="Customization">Customization Facilities</option>
-			<option value="Customized">Customized Packaging</option>
-			<option value="Distribution">Distribution Network</option>
-			<option value="Infrastructural">Infrastructural Set-Up</option>
-			<option value="Infrastructural_Manufacturing">Infrastructural & Manufacturing Facilities</option>
-			<option value="Team">Infrastructure & Team</option>
-			<option value="Infrastructure_Facilities">Infrastructure Facilities</option>
+			<option value="Customization Facilities">Customization Facilities</option>
+			<option value="Customized Packaging">Customized Packaging</option>
+			<option value="Distribution Network">Distribution Network</option>
+			<option value="Infrastructural Set-Up">Infrastructural Set-Up</option>
+			<option value="Infrastructural & Manufacturing Facilities">Infrastructural & Manufacturing Facilities</option>
+			<option value="Infrastructure & Team">Infrastructure & Team</option>
+			<option value="Infrastructure Facilities">Infrastructure Facilities</option>
 			<option value="Logistics">Logistics</option>
-			<option value="Logistics_Transportation">Logistics & Transportation</option>
-			<option value="Logistics_Facility">Logistics Facility & Timely Delivery</option>
-			<option value="Manufacturing_Facilities">Manufacturing Facilities</option>
-			<option value="Manufacturing_Unit">Manufacturing Unit</option>
+			<option value="Logistics Transportation">Logistics & Transportation</option>
+			<option value="Logistics Facility">Logistics Facility & Timely Delivery</option>
+			<option value="Manufacturing Facilities">Manufacturing Facilities</option>
+			<option value="Manufacturing Unit">Manufacturing Unit</option>
 			<option value="Infrastructure">Our Infrastructure</option>
 			<option value="Machinery">Our Machinery</option>
 			<option value="Vendor">Our Vendor Base</option>
 			<option value="Warehouse">Our Warehouse</option>
 			<option value="Packaging">Packaging & Delivery</option>
-			<option value="Packaging_Transportation">Packaging & Transportation</option>
-			<option value="Product_Packaging">Product Packaging</option>
+			<option value="Packaging Transportation">Packaging & Transportation</option>
+			<option value="Product Packaging">Product Packaging</option>
 			<option value="Production">Production Facility</option>
 			<option value="Reasearch">Reasearch & Development</option>
-			<option value="Reasearch_Activities">Reasearch & Development Activities</option>
-			<option value="Reasearch_Facilities">Reasearch & Development Facilities</option>
+			<option value="Reasearch Activities">Reasearch & Development Activities</option>
+			<option value="Reasearch Facilities">Reasearch & Development Facilities</option>
 			<option value="Sales">Sales Network</option>
-			<option value="Warehouse_Packaging">Warehouse & Packaging</option>
-			<option value="Warehouse_Facilities">Warehouse Facilities</option>
-			<option value="Warehouse_Unit">Warehouse Unit</option>
-			<option value="Warehousing_Logistics">Warehousing & Logistics</option>
-			<option value="Warehousing_Packaging">Warehousing & Packaging</option>
-			<option value="Warehousing_Logistics">Warehousing,Packaging & Logistics</option>
-			<option value="Warehousing_Delivery">Warehousing,Packaging & Timely Delivery</option>
-			<option value="Warehousing-Transportation">Warehousing,Packaging & Transportation</option>
-			<option value="WideDesc">Wide Distribution Network</option>
+			<option value="Warehouse Packaging">Warehouse & Packaging</option>
+			<option value="Warehouse Facilities">Warehouse Facilities</option>
+			<option value="Warehouse Unit">Warehouse Unit</option>
+			<option value="Warehousing Logistics">Warehousing & Logistics</option>
+			<option value="Warehousing Packaging">Warehousing & Packaging</option>
+			<option value="Warehousing Logistics">Warehousing,Packaging & Logistics</option>
+			<option value="Warehousing Delivery">Warehousing,Packaging & Timely Delivery</option>
+			<option value="Warehousing Transportation">Warehousing,Packaging & Transportation</option>
+			<option value="WideDistribution">Wide Distribution Network</option>
 			
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.infraHeading.$dirty && addbusinessForm.infraHeading.$invalid">
@@ -67,9 +66,9 @@
 <div class="form-group">
 	<label for="infraDesc" class="col-sm-3 control-label">Infrastucture Description</label>
 	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastructure.infraDesc" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
+		<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastructure.desc.description" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
 			<p ng-hide="addbusinessForm.infraDesc.$error.maxlength">
-				{{ 256 - infrastructure.infraDesc.length + " Chars left" }}
+				{{ 256 - infrastructure.desc.length + " Chars left" }}
 			</p>
 			
 			<span class="help-block" ng-show="addbusinessForm.infraDesc.$dirty && addbusinessForm.infraDesc.$invalid">
@@ -85,8 +84,8 @@
 	</span>
 </div>
 
-<div>
-	<table ng-if="addbusiness.infrastructure">
+<div class="col-sm-offset-3 col-sm-9">
+	<table class="table table-bordered" ng-if="addbusiness.infrastructure">
 		<tr>
 			<th>Infrastucture Heading</th>
 			<th>Infrastucture Description</th>

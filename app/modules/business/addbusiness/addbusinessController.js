@@ -23,9 +23,18 @@ define(['app'], function (app) {
 			$scope.formPart = formPart;
 		};
 		$scope.infrastructure = {};
+		$scope.infrastructure.desc = {};
+		$scope.job_careers = {};
+		$scope.job_careers.desc = {};
+		$scope.testimonials = {};
+		$scope.testimonials.desc = {};
+		$scope.news_coverage = {};
+		$scope.news_coverage.desc = {};
+		
 		$scope.addToObject = function(data, object){
-			object[data.infraHeading] = data.infraDesc;
-		}	
+			object[data.heading] = data.desc;
+		}
+		
 		$scope.removeObject = function(key, object){
 			delete object[key];
 		}
@@ -33,16 +42,17 @@ define(['app'], function (app) {
 		//Upload Function for uploading files {Vilas}
 		$scope.addbusiness={}; // this is form object
 		$scope.addbusiness.infrastructure = {};
+		$scope.addbusiness.job_careers = {};
+		$scope.addbusiness.testimonials = {};
+		$scope.addbusiness.contact_profile = {};
+		$scope.addbusiness.news_coverage = {};
 		$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
 		$scope.path = "business/"; // path to store images on server
 		$scope.addbusiness.business_logo  = []; // uploaded images will store in this array
-		$scope.addbusiness.contact_profile = {};
-		$scope.addbusiness.contact_profile.contact_photo  = [];
-		$scope.addbusiness.testimonials = {};
-		$scope.addbusiness.testimonials.testimage  = [];
-		$scope.addbusiness.news_coverage = {};
-		$scope.addbusiness.news_coverage.news_image  = [];
-		$scope.addbusiness.infrastructure.infra_image  = [];	
+		$scope.addbusiness.contact_profile.contact_photo  = [];	
+		$scope.testimonials.desc.testimage  = [];	
+		$scope.news_coverage.desc.news_image  = [];
+		$scope.infrastructure.desc.infra_image  = [];
 		
 		$scope.upload = function(files,path,userinfo, picArr){ // this function for uploading files
 			upload.upload(files,path,userinfo,function(data){
@@ -58,12 +68,9 @@ define(['app'], function (app) {
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
 			upload.generateThumbs(files);
 		};// End upload function
-		
-		//method for insert data of add businessProfile form{sonali}
-		
-		
+			
 		/************************************************************************************/
-		// add business form code here
+		// add business form code here{sonali}
 		angular.extend($scope.addbusiness, $scope.userDetails);
 		
 		console.log($scope.addbusiness);
@@ -94,12 +101,8 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope[opened] = ($scope[opened]===true) ? false : true;
 		};
-		$scope.dateOptions ={
-			formatYear: 'yy',
-			startingDay: 1
-		};
 
-		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		/* Date Picker Ended here --------------------------------------------------------------------------------------*/
 		
