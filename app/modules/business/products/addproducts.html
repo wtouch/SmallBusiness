@@ -38,7 +38,7 @@
 				<div>
 					<input type="hidden" ng-model="addproduct.date">
 				</div>						
-				<div class="form-group">
+				<!--<div class="form-group">
 					<label for="prodGroup" class="col-sm-2 control-label">Product Group </label>
 					<div class="col-sm-9">
 						<select class="form-control" name="prodGroup" id="prodGroup"  ng-model="prodGroup" required>		
@@ -53,7 +53,7 @@
 						<span ng-show="addproductForm.prodGroup.$error.required" class="text-danger">Sender Product Group </span>
 						</span>				
 					</div>
-				</div>	
+				</div>-->
 				<div class="form-group">
 					<label class="col-sm-2 control-label" for="description">Product Description 
 					</label>
@@ -63,7 +63,6 @@
 							<p ng-hide="addproductForm.description.$error.maxlength">
 								{{ 256 - addproduct.description.length + " Chars left" }}
 							</p>
-							
 							<span class="help-block" ng-show="addproductForm.description.$dirty && addproductForm.description.$invalid">
 								<span class="text-danger" ng-show="addproductForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
 								<span ng-show="addproductForm.description.$error.required" class="text-danger">Product Description is required.</span>

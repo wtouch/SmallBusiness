@@ -21,7 +21,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		//$scope.tinymceConfig = {};
 		//$scope.selectBusiness = {};
-		
 		//Upload Function for uploading files {Vilas}
 		$scope.addproduct={}; // this is form object
 		$scope.addservice = {};
@@ -159,7 +158,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 						$scope.products = {};
 					};
 				});
-				
 				
 			}	
 
