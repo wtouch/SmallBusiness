@@ -31,7 +31,7 @@
 			
 			//$data = $db->selectSingle("users", $where);
 			if($data['status'] == 'error' || $data['status'] == 'warning' || $data['data'] == "" ){
-				throw new Exception('You are not registered user!');
+				throw new Exception('You are not registered user!: '.$data['status'] . " : ". $data['data']);
 			}
 			// password check with hash encode
 			if(passwordHash::check_password($data['data']['password'],$password)){
@@ -54,27 +54,117 @@
         }
 		
 	}
-	function forgotPass($body){
-		$db = new dbHelper();
-		$sessionObj = new session();
-		
-		$input = json_decode($body);
-		
-		(property_exists($input,'username')) ? $where['username'] = $input->username : "";
-		(property_exists($input,'email')) ? $where['email'] = $input->email : "";
-		
-		$limit['pageNo'] = 1; // from which record to select
-		$limit['records'] = 1; // how many records to select
-			
-		$password = $input->password; // get password from json
-		
-		$data = $db->select("users", $where, $limit);
-		if($data['status']=='success'){
-			echo "reset link will sent to your mail id";
-		}else{
-			echo "your username or email id doesn't match to database";
-		}
+	function getUniqueId(){
+		$uniqueId = $better_token = md5(uniqid(rand(), true));
+		return $uniqueId;
 	}
+	function forgotPass($body){
+		try{
+			$table = 'users';
+			$db = new dbHelper();
+			$input = json_decode($body);
+			$uniqueId = getUniqueId();
+			if(property_exists($input,'email')){
+				$where['email'] = $input->email;
+				$data = $db->selectSingle($table, $where);
+				if($data['status'] == 'success' && $data['data']['email'] == $input->email){
+					$from['email'] = "admin@wtouch.in";
+					$from['name'] = "Reset Password";
+					$recipients = [$input->email];
+					$subject = "Reset your Password";
+					$message = "Dear User, <a href='#/changepass/".$uniqueId."'>Click here to reset your password</a>";
+					$sendMail = $db->sendMail($from, $recipients, $subject, $message);
+					if($sendMail['status'] == 'success'){
+						$dataCol['password'] = $uniqueId;
+						$resetPass = $db->update($table, $dataCol, $where);
+						if($resetPass['status'] !== 'success'){
+							throw new Exception($resetPass['message']);
+							
+						}
+					}else{
+						throw new Exception("Mail sending error: ".$sendMail['message']);
+					}
+				}else{
+					throw new Exception("Mail doesn't matched!");
+				}
+			}else{
+				throw new Exception("Please Provide email id!");
+			}
+			
+			$response["message"] = "Password link sent to your email id. Please check your mailbox.";
+			$response["status"] = "success";
+			$response["data"] = null;//json_encode($sessionObj->getSession());
+		}catch(Exception $e){
+            $response["status"] = "error";
+            $response["message"] = 'Error: ' .$e->getMessage();
+            $response["data"] = null;
+        }
+		return $response;
+	}
+	function changePass($body){
+		try{
+			$db = new dbHelper();
+			$sessionObj = new session();
+			$input = json_decode($body);
+			$table = 'users';
+			$where = [];
+			if(isset($_GET['reset'])){
+				if($_GET['reset'] ===""){
+					throw new Exception("URL not valid");
+				}else{
+					$where['password'] = $_GET['reset'];
+					$data = $db->selectSingle($table, $where);
+					//print_r($data);
+					if($data['status'] == 'error' || $data['data'] == null){
+						throw new Exception("You are already changed password or this link has expired. Please try again!");
+					}else{
+						if(property_exists($input,'password')){
+							$newPass['password'] = passwordHash::hash($input->password);
+							$updatePass = $db->update($table, $newPass, $where);
+							if($updatePass['status'] == 'error'){
+								throw new Exception('Password didn\'t updated! Database Error: '.$updatePass['message']);
+							}
+						}else{
+							throw new Exception('Please provide password!');
+						};
+					}
+				}
+			}else{
+				if(property_exists($input,'user_id')){
+					$where['id'] = $input->user_id;
+					$data = $db->selectSingle($table, $where);
+					if($data['status'] == 'error'){
+						throw new Exception("Database Error: ".$data['message']);
+					}else{
+					
+						$password = $input->password->old;
+						// password check with hash encode
+						if(passwordHash::check_password($data['data']['password'],$password)){
+							$newPass['password'] = passwordHash::hash($input->password->new);
+							$updatePass = $db->update($table, $newPass, $where);
+							if($updatePass['status'] == 'error'){
+								throw new Exception('Password didn\'t updated! Database Error: '.$updatePass['message']);
+							}
+						}else{
+							throw new Exception('Password does\'n match!');
+						}
+					}
+				}else{
+					throw new Exception('You are not allowed to change password!');
+				};
+			}
+			$response["message"] = "Your password Changed successfully.";
+			$response["status"] = "success";
+			$response["data"] = null;
+			echo json_encode($response);
+		}catch(Exception $e){
+            $response["status"] = "warning";
+            $response["message"] = 'Warning Message: ' .$e->getMessage();
+            $response["data"] = null;
+			echo json_encode($response);
+        }
+	}
+	
 	function logout(){
 		$sessionObj = new session();
 		print_r($sessionObj->destroySession());

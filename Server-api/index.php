@@ -2,6 +2,7 @@
 
 // load required files
 require_once 'lib/Slim/Slim.php';
+require_once 'lib/PHPMailer/PHPMailerAutoload.php';
 
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
@@ -15,6 +16,8 @@ $body = $app->request->getBody();
 }); */
 //use these uri for all get requests {Vilas}
 $app->post('/upload', 'uploadFiles' );
+$app->post('/sendmail', 'sendMail' );
+
 //Use this uri for multiple records with limit {Vilas}
 $app->get('/getmultiple/:getRequest/:pageNo(/:records)','getRecords');
 
@@ -132,7 +135,18 @@ function uploadFiles(){
         //return $app->response()->redirect($baseUrl.'/notfound');
     }
 }
+function sendMail(){
+	$app = new \Slim\Slim();
+	$body = $app->request->getBody();
 
+	try{
+			include 'modules/mail/index.php';
+	}
+	catch(Exception $e) {
+		echo "Error: '".$e->getMessage()."'";
+        //return $app->response()->redirect($baseUrl.'/notfound');
+    }
+}
 function putRecord($getRequest, $id){
 	$app = new \Slim\Slim();
 	$body = $app->request->getBody();

@@ -32,9 +32,11 @@
 		}elseif(isset($postParams) && $postParams == 'register'){
 			registerUser($body);
 		}elseif(isset($postParams) && $postParams == 'forgotpass'){
-			forgotPass($body);
+			echo json_encode(forgotPass($body));
 		}elseif(isset($postParams) && $postParams == 'changepass'){
 			changePass($body);
+		}elseif(isset($postParams) && $postParams == 'checkavailability'){
+			checkAvailability($body);
 		}
 	}
 	

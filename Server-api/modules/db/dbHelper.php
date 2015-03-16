@@ -3,6 +3,11 @@ require_once 'modules/db/config.php'; // Database setting constants [DB_HOST, DB
 class dbHelper {
     private $db;
     private $err;
+	// for mail configuration
+	private $mailHost;
+	private $mailUsername;
+	private $mailPassword;
+	private $mailPort;
     function __construct() {
 	
         $dsn = 'mysql:host='.DB_HOST.';dbname='.DB_NAME;
@@ -15,6 +20,69 @@ class dbHelper {
             exit;
         }
     }
+	
+	function sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail=null, $bccMail = null, $messageText = null){
+		try{
+			$mail = new PHPMailer;
+
+			//$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+			$mail->isSMTP();                                      // Set mailer to use SMTP
+			$mail->Host = 'mail.wtouch.in';  // Specify main and backup SMTP servers
+			$mail->SMTPAuth = true;                               // Enable SMTP authentication
+			$mail->Username = 'vilas@wtouch.in';                 // SMTP username
+			$mail->Password = 'vilas@1988';                           // SMTP password
+			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+			$mail->Port = 587;                                    // TCP port to connect to
+
+			$mail->From = $from['email'];	// From email - $from['email']
+			(isset($from['name'])) ? $mail->FromName = $from['name'] : "";	// From Name - $from['name']
+			foreach($recipients as $email){
+				$mail->addAddress($email);     // Add a recipient
+			}
+			
+			($replyTo === null) ? $replyTo = $from : $replyTo ;
+			if(isset($replyTo['name'])){
+				$mail->addReplyTo($replyTo['email'], $replyTo['name']);	// replyTo email & name
+			}else{
+				$mail->addReplyTo($replyTo['email']);	// replyTo email & name
+			}
+			
+			if($ccMail !== null){
+				foreach($ccMail as $email){
+					$mail->addCC($email);
+				}
+			}
+			if($bccMail !== null){
+				foreach($bccMail as $email){
+					$mail->addBCC($email);
+				}
+			}
+			if($attachments !== null){
+				foreach($attachments as $file => $path){
+					$mail->addAttachment($path, $file);    // Add attachments with Optional name
+				}
+			}
+			
+			$mail->isHTML(true);                                  // Set email format to HTML
+
+			$mail->Subject = $subject;
+			$mail->Body    = $message;
+			//$mail->AltBody = $messageText;
+
+			if(!$mail->send()) {
+				throw new Exception('Message could not be sent. Mailer Error: ' . $mail->ErrorInfo);
+			}
+			$response["message"] = 'Message has been sent';
+			$response["status"] = "success";
+			$response["data"] = null;
+		}catch(Exception $e){
+            $response["status"] = "error";
+            $response["message"] = 'Error: ' .$e->getMessage();
+            $response["data"] = null;
+        }
+		return $response;
+	}
 	
 	function selectJoin($table,$where, $limit=null, $likeFilter=null, $innerJoin = null, $selectInnerJoinCols = null, $leftJoin = null, $selectLeftJoinCols = null){
 		try{
@@ -260,7 +328,7 @@ class dbHelper {
     function insert($table, $inputData) {
 	
         try{
-			$inputData = json_decode($inputData);
+			(isObject($inputData)) ? $inputData : $inputData = json_decode($inputData);
 			
 			$dataKey = [];
 			$dataValue = [];
@@ -301,7 +369,7 @@ class dbHelper {
                 $w .= " and " .$key. " = :".$key;
                 $a[":".$key] = $value;
             }
-            $inputData = json_decode($inputData);
+            (is_Array($inputData)) ? $inputData : $inputData = json_decode($inputData);
 			$updateTable = [];
 			foreach($inputData as $key => $val) // $inputData holds input json data
 			{
