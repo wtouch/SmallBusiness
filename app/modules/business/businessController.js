@@ -24,8 +24,7 @@ define(['app'], function (app) {
 					return newArr;
 				}
 				angular.forEach(oldObj, function(value, key) {
-				  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? 
-							((angular.isArray(JSON.parse(value))) ? arrConvrt(JSON.parse(value)) : JSON.parse(value)) : value;
+				  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
 				  //(key === 'infrastructure') ? JSON.parse(value) : value;
 				}, newObj);
 				console.log(newObj);

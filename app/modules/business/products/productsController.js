@@ -18,21 +18,27 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.userDetails = {user_id : 2};
+		//$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		//$scope.tinymceConfig = {};
 		//$scope.selectBusiness = {};
+		
 		//Upload Function for uploading files {Vilas}
 		$scope.addproduct={}; // this is form object
 		$scope.addservice = {};
-		$scope.userinfo = {userId:1}; // this is for uploading credentials
+		$scope.userinfo = {user_id:1}; // this is for uploading credentials
 		$scope.path = "product/"; // path to store images on server
-		$scope.addproduct.product_image  = []; // uploaded images will store in this array
-		$scope.addservice.product_image  = []; // uploaded images will store in this array
-		$scope.upload = function(files,path,userinfo,imgArr){//this function for uploading files
-		console.log(imgArr);
+		$scope.addproduct.product_image  = {}; // uploaded images will store in this array
+		$scope.addservice.product_image  = {}; // uploaded images will store in this array
+		
+		$scope.upload = function(files,path,userinfo,picArr){//this function for uploading files
+		console.log(picArr);
+		
 			upload.upload(files,path,userinfo,function(data){
+				var picArrKey = 0, x;
+				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
-					imgArr.push(JSON.stringify(data.details));
+					picArr[picArrKey] = (JSON.stringify(data.details));
 					console.log(data.message);
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -139,8 +145,29 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				dataService.get("getmultiple/product/1/10",$scope.userDetails)
 				.then(function(response) {  
 					if(response.status == 'success'){
-						$scope.products = response.data;
-						console.log(response);
+						$scope.products = [];
+						var x;
+						for (x in response.data){
+							var oldObj = response.data[x];
+							var newObj = {};
+							var arrConvrt = function(arr){
+								//console.log(arr);
+								var newArr = [];
+								var x;
+								for(x in arr){
+									newArr.push(JSON.parse(arr[x]));
+								}
+								return newArr;
+							}
+							angular.forEach(oldObj, function(value, key) {
+							  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? 
+										((angular.isArray(JSON.parse(value))) ? arrConvrt(JSON.parse(value)) : JSON.parse(value)) : value;
+							  //(key === 'infrastructure') ? JSON.parse(value) : value;
+							}, newObj);
+							$scope.products.push(newObj);
+						}
+						console.log($scope.products);
+						console.log(response.data);
 						//$scope.totalRecords = response.totalRecords;	
 							//for read only
 					 /*  if($scope.products == response){
