@@ -39,6 +39,7 @@ define(['app'], function (app) {
 		$scope.customTempCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
+		$scope.currentDate = dataService.currentDate;
 		$scope.user_id = {user_id : 2};// these are URL parameters
 		// All $scope methods
 		
@@ -263,12 +264,14 @@ define(['app'], function (app) {
 			//post method for insert data in request template form{trupti}
 			$scope.postData = function(reqtemp) { 
 			reqtemp.user_id=$scope.user_id.user_id;
+			$scope.reqtemp.date = $scope.currentDate;
 			//console.log(user_id);
 				dataService.post("/post/template",reqtemp,$scope.user_id)
 				.then(function(response) {  //function for response of request temp
 					$scope.reqtemp = response.data;
 					console.log(response);
 					$scope.reset();
+					console.log(reqtemp);
 				});
 			}//end of post method{trupti}
 		}

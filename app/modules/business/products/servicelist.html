@@ -2,17 +2,18 @@
 	<div class="col-sm-12">
 	<div class=" bottomspace">
 		<div class="product">
-			<div class="row">
+			<div class="row" ng-repeat="x in services">
 				<div class="col-sm-9">
-					<h3>Service with photo receives 5 times more enquiries from buyers</h3>
+					<h3>{{x.business_name}}</h3>
 					<div class="media">
 						<div class="media-left">
-							<img class="media-object" src="img/m4.jpg"/>
+							<img class="media-object" src="img/m4.jpg"/>{{x.product_image}}
 						</div>
 						<div class="media-body">
-							<h3>Website Design</h3>
-								<label for="prodDesc">Website Description :</label>
-									<textarea id="prodDesc" name="prodDesc" class="form-control" rows="3" ng-model="prodDesc" required ng-minlength="10" ng-maxlength="15"placeholder="Your Website Description"></textarea>
+							<h3>{{x.product_service_name}}</h3>
+								<label for="prodDesc"></label>
+									<textarea id="prodDesc" name="prodDesc" class="form-control" rows="3"  required ng-minlength="10" ng-maxlength="15"placeholder="Your Website Description">{{x.description}}</textarea>
+									
 						</div>
 					</div>
 				</div>	

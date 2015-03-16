@@ -29,13 +29,15 @@
 				<div>
 					<input type="hidden" ng-model="addproduct.user_id">
 				</div>	
-				
 				<div>
 					<input type="hidden" ng-model="addproduct.business_id">
 				</div>		
 				<div>
 					<input type="hidden" ng-model="addproduct.business_name">
-				</div>		
+				</div>
+				<div>
+					<input type="hidden" ng-model="addproduct.date">
+				</div>						
 				<div class="form-group">
 					<label for="prodGroup" class="col-sm-2 control-label">Product Group </label>
 					<div class="col-sm-9">
@@ -56,7 +58,7 @@
 					<label class="col-sm-2 control-label" for="description">Product Description 
 					</label>
 					<div  class="col-sm-9">
-						<textarea type="text" class="form-control" id="description" name="description" ng-model="addproduct.description" cols="30" rows="4" placeholder="Enter Product Description" ui-tinymce required>
+						<textarea type="text" class="form-control" id="description" name="description" ng-model="addproduct.description" cols="30" rows="4" placeholder="Enter Product Description" ui-tinymce="tinyConfig" required>
 						</textarea>
 							<p ng-hide="addproductForm.description.$error.maxlength">
 								{{ 256 - addproduct.description.length + " Chars left" }}
@@ -67,14 +69,13 @@
 								<span ng-show="addproductForm.description.$error.required" class="text-danger">Product Description is required.</span>
 							</span>
 					</div>
+					<input type="hidden" ng-model="addproduct.type" ng-init="addproduct.type='product'">
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-9">
 						<button type="submit" class="btn btn-default btn-success" ng-disabled="addproductForm.$invalid" ng-click="postData(addproduct)" title="submit">
 						Add Product</button>
-						<button class="btn btn-primary" ng-click="addservice.ok()" title="OK">Close</button>
 					</div>
-					
 				</div>
 			</form>
 		</div>

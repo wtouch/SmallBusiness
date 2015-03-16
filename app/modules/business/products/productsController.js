@@ -18,6 +18,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.userDetails = {user_id : 2};
+		$scope.currentDate = dataService.currentDate;
+		//$scope.tinymceConfig = {};
 		//$scope.selectBusiness = {};
 		
 		//Upload Function for uploading files {Vilas}
@@ -58,8 +60,13 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				addproducts();
 			}
 			if(object == 'showServiceForm'){
-				addservice();
+				addservices();
 			}
+			
+			if(value=="service"){
+				console.log("service if");
+				servicelist();
+			} 
 		}
 		// get data for business options 
 		
@@ -89,8 +96,9 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			 $scope.reset = function() {
 				$scope.addproduct = {};
 			};
-			$scope.postData = function(addproduct) { 
+			 $scope.postData = function(addproduct) { 
 			addproduct.user_id=$scope.userDetails.user_id;
+			$scope.addproduct.date = $scope.currentDate;
 			////console.log(user_id);
 				 dataService.post("post/product",addproduct)
 				.then(function(response) {  //function for response of request temp
@@ -99,31 +107,32 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					$scope.reset();
 				}); 
 				console.log(addproduct);
-			}//end of post method {trupti} 
+			}//end of post method {trupti}  
 			console.log("add product");
 		}
 		
 		var addservices = function(){
 			//reset function{trupti}
-			console.log($scope.addproduct.business_id);
+			console.log($scope.addservice.business_id);
 			$scope.reset = function() {
 				$scope.addservice = {};
 			};
-			console.log("add service");
-			/* $scope.postData = function(addservice) { 
+		    
+			  $scope.postData = function(addservice) { 
+			  	console.log(addservice);
 			addservice.user_id=$scope.userDetails.user_id;
-			
+			$scope.addservice.date = $scope.currentDate;
 			//console.log(user_id);
 				dataService.post("post/product",addservice)
 				.then(function(response) {  //function for response of request temp
 					$scope.addservice = response.data;
 					console.log(response);
 					$scope.reset();
-				});*/
-				console.log(addproduct);
-			//}//end of post method {trupti} 
+				});
+				console.log(addservice);
+			} //end of post method {trupti} 
 		}
-		
+	
 		//view for product list
 		var productlist= function(){
 				$scope.productFilter = {business_id : $scope.selectBusiness.id, type : 'product'};
@@ -132,7 +141,17 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				.then(function(response) {  
 					if(response.status == 'success'){
 						$scope.products = response.data;
+						console.log(response);
 						//$scope.totalRecords = response.totalRecords;	
+							//for read only
+					 /*  if($scope.products == response){
+							$scope.tinymceConfig = {
+								readonly: true,
+								//toolbar: false,
+								//menubar: false,
+								//statusbar: false
+							  }
+						}   */
 					}
 					else
 					{
@@ -140,6 +159,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 						$scope.products = {};
 					};
 				});
+				
+				
 			}	
 
 		var servicelist= function(){
@@ -148,16 +169,16 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				dataService.get("getmultiple/product/1/10",$scope.userDetails)
 				.then(function(response) {  
 					if(response.status == 'success'){
-						$scope.products = response.data;
-						//$scope.totalRecords = response.totalRecords;	
+						$scope.services = response.data;
+						console.log(response);
 					}
 					else
 					{
 						$scope.alerts.push({type: response.status, msg: response.message});
-						$scope.products = {};
+						$scope.services = {};
 					};
 				});
-			}
+		}
 		
 		$scope.productType = "product";
 		$scope.changeScopeObject = function(value){
@@ -166,20 +187,24 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			if(value=="product" && $scope.showProductForm == true){
 				addproducts();
 			}
+			
 			if(value=="product"){
 				productlist();
 				console.log("product if");
 			}
-
+			
+			if(value=="service" && $scope.showServiceForm == true){
+				addservices();
+			}
+			
 			if(value=="service"){
-				console.log("service if");
 				servicelist();
+				console.log("service if");
 			}
 		}
-		
-		
+	
     };
-
+	
 	// Inject controller's dependencies
 	productsController.$inject = injectParams;
 	// Register/apply controller dynamically
