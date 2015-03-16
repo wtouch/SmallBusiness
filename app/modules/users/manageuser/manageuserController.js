@@ -166,19 +166,26 @@ define(['app'], function (app) {
 				.then(function(response) {
 					$scope.adduser = response.data;
 					console.log(response);
-					$scope.usersId = $routeParams.id;
-					$scope.update = function(usersId,adduser){
-						dataService.put("put/user/register"+usersId,adduser)
-						.then(function(response) {
-							console.log(response);
-						});
-					};
-				},function(error) {
-					console.log(error);
+					//$scope.usersId = $routeParams.id;
 				});
+				$scope.update = function(adduser){
+					
+					dataService.put("put/user/"+$routeParams.id,adduser)
+					.then(function(response) {
+						console.log(response);
+						if(response.status == 'success'){
+							$scope.submitted = true;
+							$scope.alerts.push({type: response.status, msg: response.message});
+						
+						}else{
+							$scope.alerts.push({type: response.status, msg: response.message});
+						}
+					});
+				};
+				
 			}
-			
-		}
+		};			
+		
 		
 		//create user group
 		var usersGroup = function(){
@@ -213,14 +220,14 @@ define(['app'], function (app) {
 				}
 			});
 			
-			/* $scope.verify = function(id, status){
+			$scope.verify = function(id, status){
 				$scope.veryfiedData = {status : status};
 				
 				dataService.put("put/user_group/"+id, $scope.veryfiedData)
 				.then(function(response) { //function for businesslist response
 					console.log(response);
 				});
-			} ; */
+			} ;
 		}
 		
 		switch($scope.userViews) {
