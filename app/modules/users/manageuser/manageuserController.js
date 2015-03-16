@@ -5,13 +5,7 @@ define(['app'], function (app) {
     // This is controller for this view
 	var manageuserController = function ($scope, $injector, $routeParams,$location,dataService,$route,modalService) {
 		
-		//For display by default userslist.html page
-		$scope.userViews = $routeParams.userViews; 
-		if(!$routeParams.userViews) {
-		$location.path('/dashboard/users/userslist');
-		}
-		
-		//Code For Pagination
+		//variable decalaration
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.usersGroupCurrentPage = 1;
@@ -19,30 +13,38 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
 		$scope.userList = [];
+		$scope.alerts = [];
 		
+		//For display by default userslist.html page
+		$scope.userViews = $routeParams.userViews; 
+		if(!$routeParams.userViews) {
+		$location.path('/dashboard/users/userslist');
+		}
+		
+		//change tooltip dynamically
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
 		};
 		
 		//datepicker {sonali}	
-			$scope.today = function() 
-			{
-				$scope.date = new Date();
-			};
-			$scope.today();
-			$scope.open = function($event,opened)
-			{
-				$event.preventDefault();
-				$event.stopPropagation();
-				$scope.opened = ($scope.opened==true)?false:true;
-			};
-			$scope.dateOptions = {
-				formatYear: 'yy',
-				startingDay: 1
-			};
+		$scope.today = function() 
+		{
+			$scope.date = new Date();
+		};
+		$scope.today();
+		$scope.open = function($event,opened)
+		{
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.opened = ($scope.opened==true)?false:true;
+		};
+		$scope.dateOptions = {
+			formatYear: 'yy',
+			startingDay: 1
+		};
 
-			$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-			$scope.format = $scope.formats[0];
+		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.format = $scope.formats[0];
 		// Date Picker Ended here 
 		
 		//code for pagination
@@ -89,6 +91,7 @@ define(['app'], function (app) {
 		//code for search filter
 		$scope.searchFilter = function(statusCol, colValue) {
 			$scope.search = {search: true};
+			$scope.userParams = {};
 			$scope.filterStatus= {}; // search filter for send request ex. {columnName : value}
 			(colValue =="") ? delete $scope.userParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
 			angular.extend($scope.userParams, $scope.filterStatus);
@@ -103,25 +106,32 @@ define(['app'], function (app) {
 						$scope.totalRecords = {};
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}
-			//console.log($scope.properties);
 				});
 			}
 		};
 		
-		$scope.hideDeleted = ""; // & use this filter in ng-repeat - filter: { status : hideDeleted}
+		//global method for change status of particular column 
+		$scope.hideDeleted = "";// & use this filter in ng-repeat - filter: { status : hideDeleted}
 		$scope.changeStatus = function(colName, colValue, id){
 		$scope.changeStatus[colName] = colValue;
 		console.log(colValue);
-			//dataService.put("put/user/"+id, $scope.changeStatus)
-			//.then(function(response) { //function for businesslist response
+			dataService.put("put/user/register"+id, $scope.changeStatus)
+			.then(function(response) { //function for businesslist response
 					if(colName=='status'){
 						$scope.hideDeleted = 1;
 					}
-				//$scope.alerts.push({type: response.status, msg: response.message});
-			//});
+					if(response.status == 'success'){
+						$scope.userList = response.data; // this will change for template
+						$scope.totalRecords = response.totalRecords; // this is for pagination
+					}else{
+						$scope.userList = {};
+						$scope.totalRecords = {};
+						$scope.submitted = true;
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}
+			});
 		};
 		
-			
 		/*code for delete user	
 		$scope.deleteuser = function(id, status, index){
 			if(status==1){
@@ -140,31 +150,51 @@ define(['app'], function (app) {
 		var addUsers =	function(){
 			$scope.postData = function(adduser) {
 				console.log(adduser);
-				/*dataService.post("/post/user/"+pageItems,adduser)
+				dataService.post("post/user/register",adduser)
 				.then(function(response) {  
-					if(response.status=="success"){
+					if(response.status == 'success'){
+						$scope.submitted = true;
 						$scope.alerts.push({type: response.status, msg: response.message});
+						
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
-					}
-					$scope.reset();
-				});*/
+					}					
+				});
 			}
+			if($routeParams.id){
+				dataService.get("getsingle/user/"+$routeParams.id)
+				.then(function(response) {
+					$scope.adduser = response.data;
+					console.log(response);
+					$scope.usersId = $routeParams.id;
+					$scope.update = function(usersId,adduser){
+						dataService.put("put/user/register"+usersId,adduser)
+						.then(function(response) {
+							console.log(response);
+						});
+					};
+				},function(error) {
+					console.log(error);
+				});
+			}
+			
 		}
 		
 		//create user group
 		var usersGroup = function(){
 				$scope.postData = function(usergroup) {
 				console.log(usergroup);
-				/*dataService.post("/post/user/"+pageItems,adduser)
+				dataService.post("post/user/register",usergroup)
 				.then(function(response) {  
-					if(response.status=="success"){
+					if(response.status == 'success'){
+						$scope.submitted = true;
 						$scope.alerts.push({type: response.status, msg: response.message});
+						
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
-					}
-					$scope.reset();
-				});*/
+					}	
+					//$scope.reset();
+				});
 				
 			}
 		}	
@@ -183,14 +213,14 @@ define(['app'], function (app) {
 				}
 			});
 			
-			$scope.verify = function(id, status){
+			/* $scope.verify = function(id, status){
 				$scope.veryfiedData = {status : status};
 				
-				dataService.put("put/user/"+id, $scope.veryfiedData)
+				dataService.put("put/user_group/"+id, $scope.veryfiedData)
 				.then(function(response) { //function for businesslist response
 					console.log(response);
 				});
-			} ;
+			} ; */
 		}
 		
 		switch($scope.userViews) {

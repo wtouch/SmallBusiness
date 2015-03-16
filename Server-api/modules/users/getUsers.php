@@ -2,10 +2,14 @@
 	function getMultipleUsers($limit){
 		$db = new dbHelper();
 		$where=[]; // this will used for user specific data selection.
-			
-			
+			$like = [];
+			 if(isset($_GET['search']) && $_GET['search'] == true){
+				 
+				 (isset($_GET['username'])) ? $like['username'] = $_GET['username'] : "";
+			 }
+			 
 			// this is used to select data with LIMIT & where clause
-			$data = $db->select("users", $where, $limit);
+			$data = $db->select("users", $where, $limit,$like);
 			
 			// this is used to count totalRecords with only where clause
 			$totalRecords['totalRecords'] = count($db->select("users", $where)['data']);		
