@@ -15,7 +15,7 @@
 							<tr><th>Business Category</th><td>{{modalOptions.bizList.category}}</td></tr>
 							<tr><th>Ownership</th><td>{{modalOptions.bizList.ownership}}</td></tr>
 							<tr><th>Key Description</th><td ng-bind-html="modalOptions.bizList.business_info.keywords"></td></tr>
-							<tr><th>Detailed Description</th><td>{{modalOptions.bizList.business_info.keyDes}}</td></tr>
+							<tr><th>Detailed Description</th><td ng-bind-html="modalOptions.bizList.business_info.description"></td></tr>
 						</table>
 					</tab>
 					<tab heading="Business Profile" title="Business Profile">
@@ -25,64 +25,66 @@
 							<tr><th>Alternate Website</th><td>{{modalOptions.bizList.business_profile.website}}</td></tr>
 							<tr><th>Year Of Establishment</th><td>{{modalOptions.bizList.business_profile.establishment}}</td></tr>
 							<tr><th>No. Of Employees</th><td>{{modalOptions.bizList.business_profile.no_of_employees}}</td></tr>
-							<tr><th>Additional Business</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Additional Business</th><td ng-repeat="x in additional_business">{{modalOptions.bizList.business_profile.x.trader}}</td></tr>
 						</table>
 					</tab>
 					<tab heading="Contact Profile" title="Contact Profile">
 						<table class="table table-responsive">
-							<tr><th>Contact Person</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Contact Person Photo</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Designation/Job Title</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>CEO Name</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Company Name</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Address</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>State</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>City</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>ZIP Code</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Telephone</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Mobile/Cell Phone</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Fax</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Email</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Alternate Email</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Small Business Catalog</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Website</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Contact Person</th><td>{{modalOptions.bizList.contact_profile.contact_person}}</td></tr>
+							<tr><th>Contact Person Photo</th><td>{{modalOptions.bizList.contact_profile.contact_photo}}</td></tr>
+							<tr><th>Designation/Job Title</th><td>{{modalOptions.bizList.contact_profile.Designation}}</td></tr>
+							<tr><th>CEO Name</th><td>{{modalOptions.bizList.contact_profile.ceo}}</td></tr>
+							<tr><th>Company Name</th><td>{{modalOptions.bizList.contact_profile.companyname}}</td></tr>
+							<tr><th>Address</th><td>{{modalOptions.bizList.contact_profile.address}}</td></tr>
+							<tr><th>Country</th><td>{{modalOptions.bizList.contact_profile.Country}}</td></tr>
+							<tr><th>State</th><td>{{modalOptions.bizList.contact_profile.State}}</td></tr>
+							<tr><th>City</th><td>{{modalOptions.bizList.contact_profile.City}}</td></tr>
+							<tr><th>ZIP Code</th><td>{{modalOptions.bizList.contact_profile.ZIP_Code}}</td></tr>
+							<tr><th>Telephone</th><td>{{modalOptions.bizList.contact_profile.telephone}}</td></tr>
+							<tr><th>Mobile/Cell Phone</th><td>{{modalOptions.bizList.contact_profile.mobile}}</td></tr>
+							<tr><th>Fax</th><td>{{modalOptions.bizList.contact_profile.fax}}</td></tr>
+							<tr><th>Email</th><td>{{modalOptions.bizList.contact_profile.email}}</td></tr>
+							<tr><th>Alternate Email</th><td>{{modalOptions.bizList.contact_profile.alternate_email}}</td></tr>
+							<tr><th>Small Business Catalog</th><td>{{modalOptions.bizList.contact_profile.SmallBusinessCatalog}}</td></tr>
+							<tr><th>Website</th><td>{{modalOptions.bizList.contact_profile.contact_website}}</td></tr>
 						</table>
 					</tab>
 					<tab heading="Infrastructure" title="Infrastructure Facility">
-						<table class="table table-responsive">
-							<tr><th>Infrastructure Image</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Infrastucture Heading</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Infrastucture Description</th><td>{{modalOptions.bizList.}}</td></tr>
+						<table class="table table-responsive" ng-repeat="(key, val) in modalOptions.bizList.infrastructure">
+							<tr><th>Infrastructure Image</th><td>{{val.infra_image}}</td></tr>
+							<tr><th>Infrastucture Heading</th><td>{{key}}</td></tr>
+							<tr><th>Infrastucture Description</th><td ng-bind-html="val.description"></td></tr>
 						</table>
 					</tab>
 					<tab heading="Testimonials" title="Testimonials">
-						<table class="table table-responsive">
-							<tr><th>Date</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Testimonial Given By</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Sender Email</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Sender Country</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Sender State / City</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Senders Phone</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Testimonial Title</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Testimonial Description</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Testimonial Imgae</th><td>{{modalOptions.bizList.}}</td></tr>
+						<table class="table table-responsive" ng-repeat="(key, val) in modalOptions.bizList.testimonials">
+							<tr><th>Date</th><td>{{val.date}}</td></tr>
+							<tr><th>Testimonial Given By</th><td>{{key}}</td></tr>
+							<tr><th>Sender Email</th><td>{{val.email}}</td></tr>
+							<tr><th>Sender Country</th><td>{{val.Sender_Country}}</td></tr>
+							<tr><th>Sender State</th><td>{{val.Sender_State}}</td></tr>
+							<tr><th>Sender City</th><td>{{val.Sender_City}}</td></tr>
+							<tr><th>Senders Phone</th><td>{{val.phone}}</td></tr>
+							<tr><th>Testimonial Title</th><td>{{val.testimonial_title}}</td></tr>
+							<tr><th>Testimonial Description</th><td ng-bind-html="val.test_Description"></td></tr>
+							<tr><th>Testimonial Imgae</th><td>{{val.testimage}}</td></tr>
 						</table>
 					</tab>
 					<tab heading="Job & Careers" title="Job & Careers">
-						<table class="table table-responsive">
-							<tr><th>Job Title</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Job Description</th><td>{{modalOptions.bizList.}}</td></tr>
+						<table class="table table-responsive" ng-repeat="(key, val) in modalOptions.bizList.job_careers">
+							<tr><th>Job Title</th><td>{{key}}</td></tr>
+							<tr><th>Job Description</th><td ng-bind-html="val.jobDescription"></td></tr>
 						</table>
 					</tab>
 					<tab heading="News Coverage" title="News Coverage">
-						<table class="table table-responsive">
-							<tr><th>Date</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Media Name</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Media Type</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>Headline</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>News Coverage URL</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>News Coverage Details</th><td>{{modalOptions.bizList.}}</td></tr>
-							<tr><th>News Coverage Image</th><td>{{modalOptions.bizList.}}</td></tr>
+						<table class="table table-responsive" ng-repeat="(key, val) in modalOptions.bizList.news_coverage">
+							<tr><th>Date</th><td>{{val.newsdate}}</td></tr>
+							<tr><th>Media Name</th><td>{{key}}</td></tr>
+							<tr><th>Media Type</th><td>{{val.mediaType}}</td></tr>
+							<tr><th>Headline</th><td>{{val.headline}}</td></tr>
+							<tr><th>News Coverage URL</th><td>{{val.News}}</td></tr>
+							<tr><th>News Coverage Details</th><td ng-bind-html="val.newsdetails"></td></tr>
+							<tr><th>News Coverage Image</th><td>{{val.news_image}}</td></tr>
 						</table>
 					</tab>
 				</tabset>											
