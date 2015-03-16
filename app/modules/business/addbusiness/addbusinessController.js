@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService'];
+    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope'];
 
     // This is controller for this view
-	var addbusinessController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService)
+	var addbusinessController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope)
 	{
 		//for display form parts
 		$scope.formPart = $routeParams.formPart;
@@ -14,7 +14,8 @@ define(['app'], function (app) {
 		$scope.totalRecords = "";
 		$scope.pageItems = 10;
 		$scope.numPages = "";
-		$scope.userDetails = {user_id : 2};
+		$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		$scope.currentDate = dataService.currentDate;
 		
 		// Add Business multi part form show/hide operation from here! {Vilas}
 		$scope.formPart = 'home';
@@ -41,29 +42,33 @@ define(['app'], function (app) {
 
 		//Upload Function for uploading files {Vilas}
 		$scope.addbusiness={}; // this is form object
+		$scope.addbusiness.created_date = $scope.currentDate
 		$scope.addbusiness.infrastructure = {};
 		$scope.addbusiness.job_careers = {};
 		$scope.addbusiness.testimonials = {};
 		$scope.addbusiness.contact_profile = {};
 		$scope.addbusiness.news_coverage = {};
-		$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
+		$scope.userinfo = $scope.userDetails; // this is for uploading credentials
 		$scope.path = "business/"; // path to store images on server
-		$scope.addbusiness.business_logo  = []; // uploaded images will store in this array
-		$scope.addbusiness.contact_profile.contact_photo  = [];	
-		$scope.testimonials.desc.testimage  = [];	
-		$scope.news_coverage.desc.news_image  = [];
-		$scope.infrastructure.desc.infra_image  = [];
+		$scope.addbusiness.business_logo  = {}; // uploaded images will store in this object
+		$scope.addbusiness.contact_profile.contact_photo  = {};	
+		$scope.testimonials.desc.testimage  = {};	
+		$scope.news_coverage.desc.news_image  = {};
+		$scope.infrastructure.desc.infra_image  = {};
 		
 		$scope.upload = function(files,path,userinfo, picArr){ // this function for uploading files
+			
 			upload.upload(files,path,userinfo,function(data){
+				var picArrKey = 0, x;
+				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
-					picArr.push(JSON.stringify(data.details));
+					picArr[picArrKey] = (JSON.stringify(data.details));
 					console.log(data.message);
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
 				
-			});
+			}); 
 		};
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
 			upload.generateThumbs(files);

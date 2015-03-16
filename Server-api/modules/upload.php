@@ -36,8 +36,8 @@
 		// user parameters 
 		$path = ($_POST['path']) ? "uploads/images/".$_POST['path'] : "uploads/images/";
 		$userInfo = json_decode($_POST['userinfo']);
-		$userId = ($userInfo->userId) ? $userInfo->userId : null;
-		if(isset($_FILES['file']) && $userId !== null){
+		$user_id = ($userInfo->user_id) ? $userInfo->user_id : null;
+		if(isset($_FILES['file']) && $user_id !== null){
 		
 			$errors= array();        
 			$file_name = $_FILES['file']['name'];

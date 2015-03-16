@@ -66,9 +66,9 @@
 <div class="form-group">
 	<label for="newsdetails" class="col-sm-3 control-label">News Coverage Details</label>
 	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="news_coverage.desc.newsdetails" cols="30" rows="4" ng-maxlength="20" placeholder="News Coverage Details" ui-tinymce required></textarea>
+		<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="news_coverage.desc.newsdetails" cols="30" rows="4" ng-maxlength="256" placeholder="News Coverage Details" ui-tinymce required></textarea>
 			<p ng-hide="addbusinessForm.newsdetails.$error.maxlength">
-				{{ 20 - newscover.newsdetails.length + " Chars left" }}
+				{{ 256 - newscover.newsdetails.length + " Chars left" }}
 			</p>		
 			<span class="help-block" ng-show="addbusinessForm.newsdetails.$dirty && addbusinessForm.newsdetails.$invalid">
 				<span class="text-danger" ng-show="addbusinessForm.newsdetails.$error.maxlength">Sorry You are Exceeding the Limit</span>
@@ -98,7 +98,7 @@
 </div>
 
 <div class="col-sm-12">
-	<table class="table table-bordered" ng-if="addbusiness.news_coverage">
+	<table class="table table-bordered table-responsive" ng-if="addbusiness.news_coverage">
 		<tr>
 			<th>News Coverage Title</th>
 			<th> News Coverage Description</th>

@@ -6,8 +6,102 @@
 	<div class="modal-body">
 		<div class="row">
 			<div class="col-sm-12">
-						
-						<h3>Business Details</h3>
+				<tabset>
+					<tab heading="Business Info" title="Business Information">
+						<table class="table table-responsive">
+							<tr><th>ID</th><td>{{modalOptions.bizList.id}}</td></tr>
+							<tr><th>Business Name</th><td>{{modalOptions.bizList.business_name}}</td></tr>
+							<tr><th>Business Logo </th><td>{{modalOptions.bizList.business_logo}}</td></tr>
+							<tr><th>Business Category</th><td>{{modalOptions.bizList.category}}</td></tr>
+							<tr><th>Ownership</th><td>{{modalOptions.bizList.ownership}}</td></tr>
+							<tr><th>Key Description</th><td ng-bind-html="modalOptions.bizList.business_info.keywords"></td></tr>
+							<tr><th>Detailed Description</th><td>{{modalOptions.bizList.business_info.keyDes}}</td></tr>
+						</table>
+					</tab>
+					<tab heading="Business Profile" title="Business Profile">
+						<table class="table table-responsive">
+							<tr><th>Prmary Business Type</th><td>{{modalOptions.bizList.business_profile.business_type}}</td></tr>
+							<tr><th>Small Business Catelog</th><td>{{modalOptions.bizList.business_profile.biz_catalog}}</td></tr>
+							<tr><th>Alternate Website</th><td>{{modalOptions.bizList.business_profile.website}}</td></tr>
+							<tr><th>Year Of Establishment</th><td>{{modalOptions.bizList.business_profile.establishment}}</td></tr>
+							<tr><th>No. Of Employees</th><td>{{modalOptions.bizList.business_profile.no_of_employees}}</td></tr>
+							<tr><th>Additional Business</th><td>{{modalOptions.bizList.}}</td></tr>
+						</table>
+					</tab>
+					<tab heading="Contact Profile" title="Contact Profile">
+						<table class="table table-responsive">
+							<tr><th>Contact Person</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Contact Person Photo</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Designation/Job Title</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>CEO Name</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Company Name</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Address</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>State</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>City</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>ZIP Code</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Telephone</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Mobile/Cell Phone</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Fax</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Email</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Alternate Email</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Small Business Catalog</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Website</th><td>{{modalOptions.bizList.}}</td></tr>
+						</table>
+					</tab>
+					<tab heading="Infrastructure" title="Infrastructure Facility">
+						<table class="table table-responsive">
+							<tr><th>Infrastructure Image</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Infrastucture Heading</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Infrastucture Description</th><td>{{modalOptions.bizList.}}</td></tr>
+						</table>
+					</tab>
+					<tab heading="Testimonials" title="Testimonials">
+						<table class="table table-responsive">
+							<tr><th>Date</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Testimonial Given By</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Sender Email</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Sender Country</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Sender State / City</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Senders Phone</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Testimonial Title</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Testimonial Description</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Testimonial Imgae</th><td>{{modalOptions.bizList.}}</td></tr>
+						</table>
+					</tab>
+					<tab heading="Job & Careers" title="Job & Careers">
+						<table class="table table-responsive">
+							<tr><th>Job Title</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Job Description</th><td>{{modalOptions.bizList.}}</td></tr>
+						</table>
+					</tab>
+					<tab heading="News Coverage" title="News Coverage">
+						<table class="table table-responsive">
+							<tr><th>Date</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Media Name</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Media Type</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>Headline</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>News Coverage URL</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>News Coverage Details</th><td>{{modalOptions.bizList.}}</td></tr>
+							<tr><th>News Coverage Image</th><td>{{modalOptions.bizList.}}</td></tr>
+						</table>
+					</tab>
+				</tabset>											
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+				<button class="btn btn-primary" ng-click="modalOptions.ok()" title="OK">OK</button>
+	</div>
+</div>			
+
+
+
+
+
+
+
+	
+						<!--<h3>Business Details</h3>
 						<label>ID  :</label>{{modalOptions.bizList.id}}<br>
 						<label>Business Information  :</label>{{modalOptions.bizList.business_info}}<br>
 						<label>Business Logo		 :</label>{{modalOptions.bizList.business_logo}}<br>
@@ -27,12 +121,4 @@
 						<label>Status :</label>{{modalOptions.bizList.status}}<br>
 						<label>Testimonials  :</label>{{modalOptions.bizList.testimonials}}<br>
 						<label>User Id :</label>{{modalOptions.bizList.user_id}}<br>
-						<label>Verified  :</label>{{modalOptions.bizList.verified}}<br>
-															
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-				<button class="btn btn-primary" ng-click="modalOptions.ok()" title="OK">OK</button>
-	</div>
-</div>			
+						<label>Verified  :</label>{{modalOptions.bizList.verified}}<br>-->

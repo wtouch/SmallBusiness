@@ -6,18 +6,38 @@ define(['app'], function (app) {
     // This is controller for this view
 	var businessController = function ($scope, $injector, $routeParams,$location,dataService,modalService)
 	{
-		
+		//This code for modal {sonali}
 		$scope.open = function (url, buzId) {
 			dataService.get("getsingle/business/"+buzId)
 			.then(function(response) {
+				
+				var oldObj = response.data[0];
+				var newObj = {};
+				
+				var arrConvrt = function(arr){
+					//console.log(arr);
+					var newArr = [];
+					var x;
+					for(x in arr){
+						newArr.push(JSON.parse(arr[x]));
+					}
+					return newArr;
+				}
+				angular.forEach(oldObj, function(value, key) {
+				  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? 
+							((angular.isArray(JSON.parse(value))) ? arrConvrt(JSON.parse(value)) : JSON.parse(value)) : value;
+				  //(key === 'infrastructure') ? JSON.parse(value) : value;
+				}, newObj);
+				console.log(newObj);
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
 					size : 'lg'
 				};
 				var modalOptions = {
-					bizList: response.data[0]  // assign data to modal
+					bizList: newObj  // assign data to modal
 				};
-				console.log(response.data[0]);
+				//console.log(JSON.parse(response.data[0].infrastructure));
+				
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
 				});
