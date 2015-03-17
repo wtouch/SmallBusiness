@@ -15,6 +15,7 @@ define(['app'], function (app) {
 		$scope.userList = [];
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
+		console.log($scope.currentDate);
 		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
@@ -44,10 +45,10 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope.opened = ($scope.opened==true)?false:true;
 		};
-		/* $scope.dateOptions = {
-			formatYear: 'yy',
+		 /* $scope.dateOptions = {
+			formatYear: 'yyyy',
 			startingDay: 1
-		}; */
+		};  */
 		
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
@@ -145,10 +146,12 @@ define(['app'], function (app) {
 			}
 		};*/
 		
+		$scope.adduser ={};
 		//add user information
 		var addUsers =	function(){
-			$scope.adduser.register_date = $scope.currentDate;
+			
 			$scope.postData = function(adduser) {
+				$scope.adduser.register_date = $scope.currentDate;
 				console.log(adduser);
 				dataService.post("post/user/register",adduser)
 				.then(function(response) {  
@@ -158,7 +161,10 @@ define(['app'], function (app) {
 						
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
-					}					
+					}
+					/* $scope.reset = function() {
+						$scope.adduser = {};
+					}; */
 				});
 			}
 			if($routeParams.id){
@@ -180,16 +186,21 @@ define(['app'], function (app) {
 						}else{
 							$scope.alerts.push({type: response.status, msg: response.message});
 						}
+						/* $scope.reset = function() {
+							$scope.adduser = {};
+						}; */
 					});
 				};
 				
 			}
 		};			
 		
-		
+		$scope.usergroup ={};
 		//create user group
 		var usersGroup = function(){
+			$scope.usergroup.date = $scope.currentDate;
 				$scope.postData = function(usergroup) {
+					
 				console.log(usergroup);
 				dataService.post("post/user/register",usergroup)
 				.then(function(response) {  
