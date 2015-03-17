@@ -9,7 +9,7 @@
 		$db = new dbHelper();	
 		$insert = $db->insert("user_group", $body);
 		echo json_encode($insert);
-	} */
+	}  */
 	function checkAvailability($body){
 		$db = new dbHelper();
 		$input = json_decode($body);

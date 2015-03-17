@@ -1,6 +1,7 @@
 <div class="row bottomspace">
 	<div class="col-sm-3">
-		<input id="search" type="text" class="form-control" ng-change="searchFilter('username', searchUser)" ng-model="searchUser" placeholder="Search">
+		<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="searchFilter('username', searchUser)" ng-model="searchUser" placeholder="Search">
+		<input id="search" type="text" class="form-control" ng-if="'userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUser)" ng-model="searchUser" placeholder="Search">
 	</div>
 	
 	<div class="col-sm-9 text-right">

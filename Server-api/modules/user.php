@@ -5,7 +5,6 @@
 	require_once 'users/login.php';
 	require_once 'users/getUsers.php';
 	require_once 'users/register.php';
-	require_once 'users/usergroup.php';
 	
 	$db = new dbHelper();
 	
@@ -38,8 +37,6 @@
 			changePass($body);
 		}elseif(isset($postParams) && $postParams == 'checkavailability'){
 			checkAvailability($body);
-		}elseif(isset($postParams) && $postParams == 'createusergroup'){
-			userGroup($body);
 		}
 	}
 	
