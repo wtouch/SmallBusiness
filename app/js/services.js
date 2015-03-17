@@ -238,6 +238,9 @@ define(['app'], function (app) {
 			obj.setBase = function(path){
 				serviceBase = path;
 			};
+			obj.rememberPass = function(remb){
+				$cookieStore.put('auth',remb);
+			}
 			obj.logout = function(){
 				obj.get('/login/logout').then(function(response){
 					$rootScope.LogoutMsg = response;
@@ -253,16 +256,20 @@ define(['app'], function (app) {
 				});
 			}
 				
-			obj.auth = (sessionStorage.auth) ? JSON.parse(sessionStorage.auth) : false;
-			obj.userDetails = (sessionStorage.userDetails) ? JSON.parse(sessionStorage.userDetails) : null;
+			obj.auth = ($cookieStore.get('auth')) ? true : (sessionStorage.auth) ? JSON.parse(sessionStorage.auth) : false;
+			//obj.userDetails = (sessionStorage.userDetails) ? JSON.parse(sessionStorage.userDetails) : null;
+			obj.userDetails = ($cookieStore.get('userDetails')) ? JSON.parse($cookieStore.get('userDetails')) : null;
 			
 			obj.setAuth = function (data) {
 				sessionStorage.auth = data;
+				//$cookieStore.put('userDetails',data);
 				return obj.auth =  JSON.parse(sessionStorage.auth);
 			};
 			obj.setUserDetails = function(data){
-				sessionStorage.userDetails = (data);
-				obj.userDetails = JSON.parse(sessionStorage.userDetails);
+				//sessionStorage.userDetails = (data);
+				$cookieStore.put('userDetails',data);
+				//obj.userDetails = JSON.parse(sessionStorage.userDetails);
+				obj.userDetails = JSON.parse($cookieStore.get('userDetails'));
 			}
 			obj.get = function (q, params) {
 				return $http({
