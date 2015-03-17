@@ -3,22 +3,22 @@
 		<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	{{alert.msg}}
 		</alert>
 		<h3 class="col-sm-offset-2 col-sm-9"> Create New User Group</h3>
-		<form name="usergroupForm" class="form-horizontal" role="form" ng-submit="usergroupForm.$valid" novalidate>	
+		<form name="usersgroupForm" class="form-horizontal" role="form" ng-submit="usersgroupForm.$valid" novalidate>	
 			<div class="form-group">
-				<label for="groupname" class="col-sm-2 control-label">Group Name</label>
+				<label for="group_name" class="col-sm-2 control-label">Group Name</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="groupname" name="groupname" ng-model="usergroup.group_name.groupname" placeholder="Enter Group Name" required>
-					<span class="help-block" ng-show="usergroupForm.groupname.$dirty && usergroupForm.groupname.$invalid">
-						<span class="text-danger" ng-show="usergroupForm.groupname.$error.required">Group Name is required.</span>
+					<input type="text" class="form-control" id="group_name" name="group_name" ng-model="usersgroup.group_name" placeholder="Enter Group Name" required>
+					<span class="help-block" ng-show="usersgroupForm.group_name.$dirty && usersgroupForm.group_name.$invalid">
+						<span class="text-danger" ng-show="usersgroupForm.group_name.$error.required">Group Name is required.</span>
 					</span>
 				</div>
 			</div>
 			<div class="form-group">	
-				<label for="groupdescription" class="col-sm-2 control-label">Group Description</label>
+				<label for="group_description" class="col-sm-2 control-label">Group Description</label>
 				<div class="col-sm-9">
-					<input type="text" id="groupdescription" class="form-control" name="groupdescription" ng-model="usergroup.group_name.groupdescription" placeholder="Enter Group Description" required >
-					<span class="help-block" ng-show="usergroupForm.groupdescription.$dirty && usergroupForm.groupdescription.$invalid">
-						<span class="text-danger" ng-show="usergroupForm.groupdescription.$error.required">Group Description is required.</span>
+					<input type="text" id="group_description" class="form-control" name="group_description" ng-model="usersgroup.group_description" placeholder="Enter Group Description" required >
+					<span class="help-block" ng-show="usersgroupForm.group_description.$dirty && usersgroupForm.group_description.$invalid">
+						<span class="text-danger" ng-show="usersgroupForm.group_description.$error.required">Group Description is required.</span>
 					</span>
 				</div>
 			</div>	
@@ -26,10 +26,7 @@
 				<label for="date" class="col-sm-2 control-label">Date</label>
 				<div class="col-sm-9">
 					<p class="input-group">
-						<input type="text" id="date" name="date" class="form-control" datepicker-popup="{{format}}" ng-model="usergroup.date" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)"/>
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-						</span>
+						<input readonly type="text" id="date" name="date" class="form-control" value="{{usersgroup.date}}" ng-model="usersgroup.date">
 					</p>
 				</div>
 			</div>		
@@ -41,27 +38,27 @@
 							<label class="control-label">User Module</label>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="usergroup.group_permission.userlist">User List
+									<input type="checkbox" ng-model="usersgroup.group_permission.userlist">User List
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="usergroup.group_permission.adduser"> Add User
+									<input type="checkbox" ng-model="usersgroup.group_permission.adduser"> Add User
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-								  <input type="checkbox" ng-model="usergroup.group_permission.edituser"> Edit User
+								  <input type="checkbox" ng-model="usersgroup.group_permission.edituser"> Edit User
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-								  <input type="checkbox" ng-model="usergroup.group_permission.banuser"> Ban User
+								  <input type="checkbox" ng-model="usersgroup.group_permission.banuser"> Ban User
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-								  <input type="checkbox" ng-model="usergroup.group_permission.deleteuser"> Delete User
+								  <input type="checkbox" ng-model="usersgroup.group_permission.deleteuser"> Delete User
 								</label>
 							</div>
 						</div>
@@ -69,32 +66,32 @@
 							<label class="control-label">Template Module</label>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="usergroup.group_permission.templist">Template List
+									<input type="checkbox" ng-model="usersgroup.group_permission.templist">Template List
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="usergroup.group_permission.mytemplist">My Template List
+									<input type="checkbox" ng-model="usersgroup.group_permission.mytemplist">My Template List
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-								  <input type="checkbox" ng-model="usergroup.group_permission.customtemp"> Request Custom Template
+								  <input type="checkbox" ng-model="usersgroup.group_permission.customtemp"> Request Custom Template
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="usergroup.group_permission.addtemp">Add Template
+									<input type="checkbox" ng-model="usersgroup.group_permission.addtemp">Add Template
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-								  <input type="checkbox" ng-model="usergroup.group_permission.edittemp">Edit Template
+								  <input type="checkbox" ng-model="usersgroup.group_permission.edittemp">Edit Template
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-								  <input type="checkbox" ng-model="usergroup.group_permission.deletetemp">Delete Template
+								  <input type="checkbox" ng-model="usersgroup.group_permission.deletetemp">Delete Template
 								</label>
 							</div>
 						</div>		
@@ -102,32 +99,32 @@
 							<label class="control-label">Business Module</label>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="usergroup.group_permission.bizlist">Business list
+									<input type="checkbox" ng-model="usersgroup.group_permission.bizlist">Business list
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="usergroup.group_permission.addbiz"> Add Business
+									<input type="checkbox" ng-model="usersgroup.group_permission.addbiz"> Add Business
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-								  <input type="checkbox" ng-model="usergroup.group_permission.aprovebiz"> Approve Business
+								  <input type="checkbox" ng-model="usersgroup.group_permission.aprovebiz"> Approve Business
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="usergroup.group_permission.verifybiz">Varify Business
+									<input type="checkbox" ng-model="usersgroup.group_permission.verifybiz">Varify Business
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" ng-model="usergroup.group_permission.editbiz"> Edit Business
+									<input type="checkbox" ng-model="usersgroup.group_permission.editbiz"> Edit Business
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-								  <input type="checkbox" ng-model="usergroup.group_permission.deletebiz"> Delete Business
+								  <input type="checkbox" ng-model="usersgroup.group_permission.deletebiz"> Delete Business
 								</label>
 							</div>
 						</div>			
@@ -151,7 +148,8 @@
 			</div>	
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-				  <button type="submit" class="btn btn-success" title="Add User" ng-disabled="usergroupForm.$invalid" ng-click="postData(usergroup)">Add User</button>
+				  <button type="submit" class="btn btn-success" title="Add User" ng-disabled="usersgroupForm.$invalid" ng-click="postData(usersgroup)">Add User Group</button>
+				  <button type="submit" class="btn btn-success" title="Add User" ng-disabled="usersgroupForm.$invalid" ng-click="update(usersgroup)">Update User Group</button>
 				  <button type="reset" class="btn btn-danger" title="Reset">Reset</button>
 				</div>
 			</div>						

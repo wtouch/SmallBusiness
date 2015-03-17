@@ -8,19 +8,26 @@
 			<th>Manage</th>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td>admin</td>
-				<td>1</td>
-				<td>{"menus":["Home","Users","Templates","Websites","Business","Products"],"SpecialPermission":{"Whole access":true}}
+			<tr ng-repeat="groups in usergroupList">
+				<td>{{((usersGroupCurrentPage - 1) * pageItems ) + $index + 1}}</td>
+				<td>{{groups.group_name}}</td>
+				<td>2</td>
+				<td><pre>{{groups.group_permission| json}}</pre></td>
+				<td>
+					<div class="btn-group" role="group" aria-label="first group">
+						<a href="#/dashboard/users/createusergroup/{{groups.id}}" class="btn btn-info" tooltip="Edit">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</a>
+						<button type="button" class="btn btn-danger" tooltip="Remove Group" ng-model="groups.status" ng-change="changeStatusFn('status', groups.status, groups.id)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</div>
 				</td>
-				<td><a href="#" class="btn btn-default glyphicon glyphicon-pencil" tooltip="Edit"></a>
-				<a href="#" class="btn btn-default glyphicon glyphicon-remove" tooltip="Remove"></a></td>
 			</tr>					
 		</tbody>					
 	</table>
 </div>
 <div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="manageusers.usersGroupCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></pagination>
+	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="usersGroupCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(usersGroupCurrentPage)"></pagination>Total user groups:{{totalRecords}}
 			<pre>Page: {{usersGroupCurrentPage}} / {{numPages}}</pre>
 </div>

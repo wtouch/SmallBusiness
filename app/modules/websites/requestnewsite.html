@@ -1,6 +1,6 @@
-<h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>	
-	<form name="requestsiteForm" class="form-horizontal" role="form" novalidate="novalidate">
-		<div class="form-group">
+<h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>	{{reqnewsite | json}}
+	<form name="requestsiteForm" class="form-horizontal" role="form" ng-submit="requestsiteForm.$valid" novalidate="novalidate">
+		<!--<div class="form-group">
 			<label  for="name" class="col-sm-2 control-label">Website Name</label>		
 			<div class="col-sm-9">
 				<input type="text" id="website_name" class="form-control" name="website_name" placeholder="Website Name" ng-model="reqnewsite.website_name" required >
@@ -8,7 +8,7 @@
 					<span class="text-danger" ng-show="requestsiteForm.name.$error.required">Website Name is required.</span>
 				</span>
 			</div>						
-		</div>
+		</div>-->
 		<div class="form-group">	
 			<label  for="domain_name" class="col-sm-2 control-label">Domain Name</label>
 			<div class="col-sm-9">
@@ -19,30 +19,44 @@
 				</span>
 				<span>e.g http://www.google.com</span>
 			</div>						
+		</div>	
+
+		<div class="form-group">	
+			<label  for="other_domain" class="col-sm-2 control-label">Other Domain</label>
+			<div class="col-sm-9">
+				<input type="url" class="form-control" id="other_domain" ng-model="reqnewsite.description.other_domain" name="other_domain" placeholder="Enter Domain " required>
+				<span class="help-block" ng-show="requestsiteForm.other_domain.$dirty && requestsiteForm.other_domain.$invalid">
+					<span class="text-danger" ng-show="requestsiteForm.other_domain.$error.required">Domain  is required.</span>
+					<span class="text-danger"ng-show="requestsiteForm.other_domain.$error.url">Invalid Web Site.</span>
+				</span>
+				<span>e.g http://www.google.com</span>
+			</div>						
 		</div>			
+		
 		<div class="form-group">
 			<label for="contactno" class="col-md-2 control-label">Contact Number </label>
 			<div class="col-md-9">
-				<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reqnewsite.contactno" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+				<input type="text" id="contactno" name="contactno" class="form-control" ng-model="reqnewsite.description.contact" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 					<span class="help-block" ng-show="requestsiteForm.contactno.$dirty && requestsiteForm.contactno.$invalid">
 						<span ng-show="requestsiteForm.contactno.$error.pattern && (requestsiteForm.contactno.$dirty || submitted)" class="text-danger">Enter a valid Contact Number .</span>
 					</span>
 			</div>						
 		</div>
 		<div class="form-group">
-			<label for="product_service_name" class="col-sm-2 control-label">Product/Services</label>
+			<label for="description" class="col-sm-2 control-label">Description</label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="product_service_name" name="product_service_name" ng-model="reqnewsite.product_service_name" cols="30" rows="4" ng-maxlength="20" placeholder="Product/Services" ui-tinymce required></textarea>
-					<p ng-hide="requestsiteForm.product_service_name.$error.maxlength">
-					{{ 20 - product_service_name.length + " Chars left" }}
+				<textarea type="text" class="form-control" id="description" name="description" ng-model="reqnewsite.description.desc" cols="30" rows="4" ng-maxlength="256" placeholder="description" ui-tinymce required></textarea>
+					<p ng-hide="requestsiteForm.description.$error.maxlength">
+					{{ 256 - description.length + " Chars left" }}
 					</p>
-					<span class="help-block" ng-show="requestsiteForm.product_service_name.$dirty && requestsiteForm.product_service_name.$invalid">
-						<span class="text-danger" ng-show="requestsiteForm.product_service_name.$error.maxlength">Sorry You are Exceeding the Limit</span>
-						<span class="text-danger" ng-show="requestsiteForm.product_service_name.$error.required">Please enter Product/Services.</span>
+					
+					<span class="help-block" ng-show="requestsiteForm.description.$dirty && requestsiteForm.description.$invalid">
+						<span class="text-danger" ng-show="requestsiteForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+						<span class="text-danger" ng-show="requestsiteForm.description.$error.required">Please enter Product/Services.</span>
 					</span>
 			</div>						
 		</div>	
-		<div class="form-group">
+		<!--<div class="form-group">
 			<label for="custom" class="col-sm-2 control-label pull-left">Required Custom</label>
 			<div class="col-sm-9">
 				<label class="radio-inline">
@@ -52,11 +66,11 @@
 					<input type="radio" name="radio" id=" No" value=" No">No
 				</label>
 			</div>
-		</div>
+		</div>-->
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
-				<button type="submit" class="btn btn-success" ng-click="insert()" tooltip="Send Request">Send Request</button>
-				<button type="reset" class="btn btn-danger" tooltip="Cancle">Reset</button>
+				<button type="submit" class="btn btn-success" ng-disabled="requestsiteForm.$invalid" ng-click="postData(reqnewsite)">Send Request</button>
+				<button type="reset" class="btn btn-danger">Reset</button>
 			</div>
 		</div>					
 	</form>

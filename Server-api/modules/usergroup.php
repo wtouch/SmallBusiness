@@ -7,29 +7,30 @@
 	if($reqMethod=="GET"){
 		if(isset($id)){
 			$where['id'] = $id;
-			$data = $db->select("website", $where);
+			$data = $db->selectSingle("user_group", $where);
 			echo json_encode($data);
 			
 		}else{
-			//this is for search
+			$where=[]; // this will used for user specific data selection.
 			 $like = [];
 			 if(isset($_GET['search']) && $_GET['search'] == true){
 				 
-				 (isset($_GET['domain_name'])) ? $like['domain_name'] = $_GET['domain_name'] : "";
+				 (isset($_GET['group_name'])) ? $like['group_name'] = $_GET['group_name'] : "";
 			 }
-			$where=[]; // this will used for user specific data selection.
+			
+			(isset($_GET['user_id'])) ? $where['user_id'] = $_GET['user_id'] : "";
+			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
+			(isset($_GET['read_status'])) ? $where['read_status'] = $_GET['read_status'] : "";
+			
+			
 			$limit['pageNo'] = $pageNo; // from which record to select
 			$limit['records'] = $records; // how many records to select
 			
-			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
-			((isset($_GET['domain_name'])) && ($_GET['domain_name']!=="")) ? $where['domain_name'] = $_GET['domain_name'] : "";
-			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
-			
 			// this is used to select data with LIMIT & where clause
-			$data = $db->select("website", $where, $limit);
+			$data = $db->select("user_group", $where, $limit,$like);
 			
 			// this is used to count totalRecords with only where clause
-			$totalRecords['totalRecords'] = count($db->select("website", $where)['data']);		
+			$totalRecords['totalRecords'] = count($db->select("user_group", $where,null, $like)['data']);	
 			
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
 			$data = array_merge($totalRecords,$data);
@@ -38,14 +39,12 @@
 	}//end get
 	
 	if($reqMethod=="POST"){
-		$insert = $db->insert("website", $body);
+		$insert = $db->insert("user_group", $body);
 		echo json_encode($insert);
 	}
-	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record
-		$update = $db->update("website", $body, $where);
+		$update = $db->update("user_group", $body, $where);
 		echo json_encode($update);
 	}
-
  ?>

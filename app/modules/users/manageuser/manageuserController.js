@@ -15,6 +15,7 @@ define(['app'], function (app) {
 		$scope.userList = [];
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
+		console.log($scope.currentDate);
 		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
@@ -44,10 +45,10 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope.opened = ($scope.opened==true)?false:true;
 		};
-		/* $scope.dateOptions = {
-			formatYear: 'yy',
+		 /* $scope.dateOptions = {
+			formatYear: 'yyyy',
 			startingDay: 1
-		}; */
+		};  */
 		
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
@@ -103,16 +104,31 @@ define(['app'], function (app) {
 			angular.extend($scope.userParams, $scope.filterStatus);
 			angular.extend($scope.userParams, $scope.search);
 			if(colValue.length >= 4 || colValue ==""){
-				dataService.get("/getmultiple/user/1/"+$scope.pageItems, $scope.userParams).then(function(response) { 
-					if(response.status == 'success'){
-						$scope.userList = response.data; // this will change for template
-						$scope.totalRecords = response.totalRecords; // this is for pagination
-					}else{
-						$scope.userList = {};
-						$scope.totalRecords = {};
-						$scope.alerts.push({type: response.status, msg: response.message});
-					}
-				});
+				if($scope.userViews=='userslist'){
+					dataService.get("/getmultiple/user/1/"+$scope.pageItems, $scope.userParams).then(function(response) { 
+						if(response.status == 'success'){
+							$scope.userList = response.data; // this will change for template
+							$scope.totalRecords = response.totalRecords; // this is for pagination
+						}else{
+							$scope.userList = {};
+							$scope.totalRecords = {};
+							$scope.alerts.push({type: response.status, msg: response.message});
+						}
+					});
+				}
+				if($scope.userViews=='usergroup'){
+					dataService.get("/getmultiple/usergroup/1/"+$scope.pageItems, $scope.userParams).then(function(response) { 
+						if(response.status == 'success'){
+							$scope.usergroupList = response.data; // this will change for template
+							$scope.totalRecords = response.totalRecords; // this is for pagination
+						}else{
+							$scope.usergroupList = {};
+							$scope.totalRecords = {};
+							$scope.alerts.push({type: response.status, msg: response.message});
+						}
+					});
+				}
+				
 			}
 		};
 		
@@ -122,13 +138,22 @@ define(['app'], function (app) {
 		$scope.changeStatusFn = function(colName, colValue, id){
 			$scope.changeStatus[colName] = colValue;
 			console.log($scope.changeStatus);
-			 dataService.put("put/user/"+id, $scope.changeStatus)
-			.then(function(response) { 
-				if(colName=='status'){
-					//$scope.hideDeleted = 1;
-				}
-				$scope.alerts.push({type: response.status, msg: response.message});
-			}); 
+			if($scope.userViews=='userslist'){
+				dataService.put("put/user/"+id, $scope.changeStatus)
+				.then(function(response) { 
+					/* if(colName=='status'){
+						//$scope.hideDeleted = 1;
+					} */
+					$scope.alerts.push({type: response.status, msg: response.message});
+				});
+			}
+			if($scope.userViews=='usergroup'){
+				dataService.put("put/usergroup/"+id, $scope.changeStatus)
+				.then(function(response) { 
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}); 
+			}
+			
 		};
 		
 		/*code for delete user	
@@ -145,10 +170,14 @@ define(['app'], function (app) {
 			}
 		};*/
 		
+		$scope.adduser ={};
 		//add user information
 		var addUsers =	function(){
-			$scope.adduser.register_date = $scope.currentDate;
+			$scope.reset = function() {
+				$scope.adduser = {};
+			};
 			$scope.postData = function(adduser) {
+				$scope.adduser.register_date = $scope.currentDate;
 				console.log(adduser);
 				dataService.post("post/user/register",adduser)
 				.then(function(response) {  
@@ -158,7 +187,8 @@ define(['app'], function (app) {
 						
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
-					}					
+					}
+					$scope.reset();
 				});
 			}
 			if($routeParams.id){
@@ -169,7 +199,6 @@ define(['app'], function (app) {
 					//$scope.usersId = $routeParams.id;
 				});
 				$scope.update = function(adduser){
-					
 					dataService.put("put/user/"+$routeParams.id,adduser)
 					.then(function(response) {
 						console.log(response);
@@ -180,54 +209,79 @@ define(['app'], function (app) {
 						}else{
 							$scope.alerts.push({type: response.status, msg: response.message});
 						}
+						$scope.reset();
 					});
 				};
-				
 			}
 		};			
 		
-		
+		$scope.usersgroup ={};
 		//create user group
 		var usersGroup = function(){
-				$scope.postData = function(usergroup) {
-				console.log(usergroup);
-				dataService.post("post/user/register",usergroup)
-				.then(function(response) {  
-					if(response.status == 'success'){
-						$scope.submitted = true;
-						$scope.alerts.push({type: response.status, msg: response.message});
-						
-					}else{
-						$scope.alerts.push({type: response.status, msg: response.message});
-					}	
-					//$scope.reset();
-				});
+			$scope.reset = function() {
+				$scope.usersgroup = {};
+			};
+			$scope.usersgroup.date = $scope.currentDate;
+				$scope.postData = function(usersgroup) {
+					dataService.post("post/usergroup",usersgroup)
+					.then(function(response) {  
+						if(response.status == 'success'){
+							$scope.submitted = true;
+							$scope.alerts.push({type: response.status, msg: response.message});
+							
+						}else{
+							$scope.alerts.push({type: response.status, msg: response.message});
+						}	
+						$scope.reset();
+					});
 				
+			}
+			if($routeParams.id){
+				dataService.get("getsingle/usergroup/"+$routeParams.id)
+				.then(function(response) {
+					$scope.usersgroup = response.data;
+					console.log(response);
+					//$scope.usersId = $routeParams.id;
+				});
+				$scope.update = function(usersgroup){
+					dataService.put("put/usergroup/"+$routeParams.id,usersgroup)
+					.then(function(response) {
+						console.log(response);
+						if(response.status == 'success'){
+							$scope.submitted = true;
+							$scope.alerts.push({type: response.status, msg: response.message});
+						
+						}else{
+							$scope.alerts.push({type: response.status, msg: response.message});
+						}
+						$scope.reset();
+					});
+				};
 			}
 		}	
 		
 		var usersList = function(){
-			//$scope.statusParam = {status : 1};
-			
 			dataService.get("getmultiple/user/"+$scope.usersListCurrentPage+"/"+$scope.pageItems).then(function(response) { 
-				
 				if(response.status == 'success'){
 					$scope.userList = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+			});
+		}
+		
+		var usersgroupList = function(){
+			dataService.get("getmultiple/usergroup/"+$scope.usersGroupCurrentPage+"/"+$scope.pageItems).then(function(response) { 
+				//console.log(response);
+				if(response.status == 'success'){
+					$scope.usergroupList = response.data;
 					console.log(response.data);
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
 			});
-			
-			$scope.verify = function(id, status){
-				$scope.veryfiedData = {status : status};
-				
-				dataService.put("put/user_group/"+id, $scope.veryfiedData)
-				.then(function(response) { //function for businesslist response
-					console.log(response);
-				});
-			} ;
 		}
 		
 		switch($scope.userViews) {
@@ -241,6 +295,10 @@ define(['app'], function (app) {
 				
 			case 'userslist':
 				usersList();
+				break;
+				
+			case 'usersgroup':
+				usersgroupList();
 				break;
 				
 			default:

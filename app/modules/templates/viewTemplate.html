@@ -7,6 +7,33 @@
 		<div class="row">
 			<div class="col-sm-12">
 						<h1>Template</h1>
+						
+						<!--<div class="table-responsive">		
+		<table class="table table-bordered table-hover">
+			<thead>
+				<th>Sr.No.</th>
+				<th>Site Names</th>
+				<th>Start Date</th>
+				<th>Exp Date</th>
+				<th>registered_date</th>
+				<th>validity</th>
+				<th>description</th>
+			</thead>
+				<tbody>
+					<tr ng-repeat="x in website | orderBy:sort ">
+					<td>{{((webListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
+					<td>{{x.domain_name}} 
+					<button type="button" class="btn btn-warning glyphicon glyphicon-pencil pull-right" tooltip="Edit">
+					</button>
+					</td>
+					<td>{{x.registered_date}}</td>
+					<td>{{x.expiry_date}}</td>
+					
+					</tr>
+				</tbody>					
+		</table>
+	</div>-->
+	
 						<!-- <div ng-repeat="abc in modalOptions.tempList">
 							{{abc + " img"}}
 						</div> -->
@@ -15,6 +42,6 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-				<button class="btn btn-primary" ng-click="modalOptions.ok()" title="OK">OK</button>
+				<button class="btn btn-primary" ng-click="modalOptions.ok()">OK</button>
 	</div>
 </div>			

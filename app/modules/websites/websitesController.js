@@ -1,22 +1,22 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService'];
 
     // This is controller for this view
-	var websitesController = function ($scope, $injector,$routeParams,$location,dataService,upload) {
+	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
         //open function for previewing the website[Dnyaneshwar].
-        $scope.open = function (url, buzId) {
-			dataService.get("getsingle/business/"+buzId)
+        $scope.open = function (url, webId) {
+			dataService.get("getsingle/website/"+webId)
 			.then(function(response) {
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
 					size : 'lg'
 				};
 				var modalOptions = {
-					bizList: response.data[0]  // assign data to modal
+					website: response.data[0]  // assign data to modal
 				};
 				console.log(response.data[0]);
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
@@ -25,9 +25,7 @@ define(['app'], function (app) {
 			});
 			
 		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
-		};
+		
         // all $scope object goes here
         $scope.alerts = [];
 		$scope.maxSize = 5;
@@ -36,6 +34,7 @@ define(['app'], function (app) {
 		$scope.reqestSiteCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
+		$scope.currentDate = dataService.currentDate;
         $scope.user_id = {user_id : 1}; // these are URL parameters
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
@@ -46,7 +45,50 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
-        
+		
+		
+		//for search filter{trupti}
+		$scope.searchFilter = function(statusCol, showStatus) {
+			$scope.search = {search: true};
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.domain_name[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.domain_name, $scope.filterStatus);
+			angular.extend($scope.domain_name, $scope.search);
+			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.domain_name)
+			.then(function(response) {  //function for websitelist response
+				if(response.status == 'success'){
+					$scope.website = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.website = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				//console.log($scope.properties);
+			});
+		};
+		
+		//this is global method for filter 
+		$scope.changeStatus = function(statusCol, showStatus) {
+			console.log($scope.domain_name);
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.domain_name[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.domain_name, $scope.filterStatus);
+			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.domain_name)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.website = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.website = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				//console.log($scope.properties);
+			});
+		};
+		
+		
         //function for close alert
 			$scope.closeAlert = function(index) {
 				$scope.alerts.splice(index, 1);
@@ -58,19 +100,26 @@ define(['app'], function (app) {
         
         // switch functions
         var requestnewsite = function(){
+			 $scope.reqnewsite = {};
 			//reset function{Dnyaneshwar}
-			$scope.reset = function() {
-				$scope.reqnewsite = {};
-			};
+			//$scope.reset = function(reqnewsite) {
+				//$scope.reqnewsite = {};
+			//};
 			//post method for insert data in request template form{trupti}
-			$scope.postData = function(reqnewsite) { 
-				dataService.post("/post/website",reqnewsite)
+			 $scope.postData = function(reqnewsite) { 
+				console.log(reqnewsite);
+			
+			reqnewsite.user_id=$scope.user_id.user_id;
+			reqnewsite.date = $scope.currentDate;
+			//console.log(user_id);
+				 dataService.post("post/website",reqnewsite,$scope.user_id)
 				.then(function(response) {  //function for response of request temp
 					$scope.reqnewsite = response.data;
 					console.log(response);
-					$scope.reset();
-				});
-			}//end of post method{Dnyaneshwar}
+					//$scope.reset();
+					console.log(reqnewsite);
+				});   
+			}//end of post method{trupti} 
 		};
         
         var websiteslist = function(){
@@ -80,7 +129,6 @@ define(['app'], function (app) {
 			if(response.status == 'success'){
 					$scope.website=response.data;
 					console.log($scope.website);
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;	
 				}
 				else
