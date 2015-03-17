@@ -25,9 +25,7 @@ define(['app'], function (app) {
 			});
 			
 		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
-		};
+		
         // all $scope object goes here
         $scope.alerts = [];
 		$scope.maxSize = 5;
@@ -36,7 +34,7 @@ define(['app'], function (app) {
 		$scope.reqestSiteCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
-		//$scope.currentDate = dataService.currentDate;
+		$scope.currentDate = dataService.currentDate;
         $scope.user_id = {user_id : 1}; // these are URL parameters
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
@@ -70,6 +68,26 @@ define(['app'], function (app) {
 			});
 		};
 		
+		//this is global method for filter 
+		$scope.changeStatus = function(statusCol, showStatus) {
+			console.log($scope.domain_name);
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.domain_name[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.domain_name, $scope.filterStatus);
+			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.domain_name)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.website = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.website = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				//console.log($scope.properties);
+			});
+		};
+		
 		
         //function for close alert
 			$scope.closeAlert = function(index) {
@@ -82,16 +100,17 @@ define(['app'], function (app) {
         
         // switch functions
         var requestnewsite = function(){
+			 $scope.reqnewsite = {};
 			//reset function{Dnyaneshwar}
 			//$scope.reset = function(reqnewsite) {
 				//$scope.reqnewsite = {};
 			//};
 			//post method for insert data in request template form{trupti}
 			 $scope.postData = function(reqnewsite) { 
-			 console.log(reqnewsite);
-			/*
+				console.log(reqnewsite);
+			
 			reqnewsite.user_id=$scope.user_id.user_id;
-			$scope.reqnewsite.date = $scope.currentDate;
+			reqnewsite.date = $scope.currentDate;
 			//console.log(user_id);
 				 dataService.post("post/website",reqnewsite,$scope.user_id)
 				.then(function(response) {  //function for response of request temp
@@ -99,7 +118,7 @@ define(['app'], function (app) {
 					console.log(response);
 					//$scope.reset();
 					console.log(reqnewsite);
-				});   */
+				});   
 			}//end of post method{trupti} 
 		};
         
@@ -110,7 +129,6 @@ define(['app'], function (app) {
 			if(response.status == 'success'){
 					$scope.website=response.data;
 					console.log($scope.website);
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;	
 				}
 				else
