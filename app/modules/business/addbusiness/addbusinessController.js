@@ -62,7 +62,7 @@ define(['app'], function (app) {
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
-					picArr[picArrKey] = (JSON.stringify(data.details));
+					picArr[picArrKey] = data.details;
 					console.log(data.message);
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
