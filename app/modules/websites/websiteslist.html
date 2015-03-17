@@ -19,9 +19,10 @@
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="status" class="control-label">Select Status</label>
-					<select id="status" class="form-control" ng-change="changeStatus('status',showStatus)" ng-model="showStatus" ng-init="showStatus=1" >
-						<option value="1">Active</option>
-						<option value="0">Deleted</option>   
+					<select id="status" class="form-control" ng-change="changeStatus('status',showStatus)" ng-model="showStatus" ng-init="showStatus='active'">
+						<option value="'active'" selected>Active</option>
+						<option value="'deleted'">Deleted</option>
+						<option value="'expired'">Expired</option>   
 					</select>
 			</div>
 		</div>
@@ -46,6 +47,7 @@
 				<th>Site Names</th>
 				<th>Start Date</th>
 				<th>Exp Date</th>
+				<th>status</th>
 				<th>Manage</th>
 			</thead>
 				<tbody>
@@ -57,6 +59,11 @@
 					</td>
 					<td>{{x.registered_date}}</td>
 					<td>{{x.expiry_date}}</td>
+					<!--<td>{{x.status}}</td>-->
+					<td>
+					<a class="btn btn-success" ng-show="x.status=='active'">Active</a>
+					<a class="btn btn-warning" ng-show="x.status=='delete'">Delete</a>
+					</td>
 					<td>
 					<div class="btn-toolbar" role="toolbar" aria-label="...">
 						<!--<div class="btn-group" role="group" aria-label="...">-->
