@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService'];
 
     // This is controller for this view
-	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload) {
+	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
         //open function for previewing the website[Dnyaneshwar].
@@ -71,7 +71,6 @@ define(['app'], function (app) {
 		};
 		
 		
-        
         //function for close alert
 			$scope.closeAlert = function(index) {
 				$scope.alerts.splice(index, 1);
@@ -84,18 +83,24 @@ define(['app'], function (app) {
         // switch functions
         var requestnewsite = function(){
 			//reset function{Dnyaneshwar}
-			$scope.reset = function() {
-				$scope.reqnewsite = {};
-			};
+			//$scope.reset = function(reqnewsite) {
+				//$scope.reqnewsite = {};
+			//};
 			//post method for insert data in request template form{trupti}
-			$scope.postData = function(reqnewsite) { 
-				dataService.post("/post/website",reqnewsite)
+			 $scope.postData = function(reqnewsite) { 
+			 console.log(reqnewsite);
+			/*
+			reqnewsite.user_id=$scope.user_id.user_id;
+			$scope.reqnewsite.date = $scope.currentDate;
+			//console.log(user_id);
+				 dataService.post("post/website",reqnewsite,$scope.user_id)
 				.then(function(response) {  //function for response of request temp
 					$scope.reqnewsite = response.data;
 					console.log(response);
-					$scope.reset();
-				});
-			}//end of post method{Dnyaneshwar}
+					//$scope.reset();
+					console.log(reqnewsite);
+				});   */
+			}//end of post method{trupti} 
 		};
         
         var websiteslist = function(){

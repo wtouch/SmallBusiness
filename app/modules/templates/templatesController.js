@@ -95,7 +95,6 @@ define(['app'], function (app) {
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
-		
 		/*For display by default templatelist page {trupti}*/
 		if(!$routeParams.tempPart) {
 			$location.path('/dashboard/templates/listoftemplates');
