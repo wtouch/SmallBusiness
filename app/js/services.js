@@ -222,8 +222,8 @@ define(['app'], function (app) {
 	  /* $HTTP Service for server request
 	  *************************************************************************/
 	  
-	  app.factory("dataService", ['$http',
-		function ($http) { // This service connects to our REST API
+	  app.factory("dataService", ['$http', '$window','$rootScope', '$cookieStore', '$cookies',
+		function ($http, $window,$rootScope,$cookieStore,$cookies) { // This service connects to our REST API
 
 			var serviceBase = '../server-api/index.php/';
 			var today = new Date();
@@ -238,6 +238,32 @@ define(['app'], function (app) {
 			obj.setBase = function(path){
 				serviceBase = path;
 			};
+			obj.logout = function(){
+				obj.get('/login/logout').then(function(response){
+					$rootScope.LogoutMsg = response;
+					obj.userDetails = null;
+					obj.setAuth(false);
+					obj.removeCookies($cookies);
+					sessionStorage.clear();
+				});
+			};
+			obj.removeCookies = function(cookies){
+				angular.forEach(cookies, function (v, k) {
+					$cookieStore.remove(k);
+				});
+			}
+				
+			obj.auth = (sessionStorage.auth) ? JSON.parse(sessionStorage.auth) : false;
+			obj.userDetails = (sessionStorage.userDetails) ? JSON.parse(sessionStorage.userDetails) : null;
+			
+			obj.setAuth = function (data) {
+				sessionStorage.auth = data;
+				return obj.auth =  JSON.parse(sessionStorage.auth);
+			};
+			obj.setUserDetails = function(data){
+				sessionStorage.userDetails = (data);
+				obj.userDetails = JSON.parse(sessionStorage.userDetails);
+			}
 			obj.get = function (q, params) {
 				return $http({
 					url: serviceBase + q,

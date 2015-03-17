@@ -69,51 +69,36 @@ define(['angular',
 				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
 				
                 .otherwise({ redirectTo: '/' });
+				
 	}]);
 	
 		
 	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies) {
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
+			$rootScope.userDetails = dataService.userDetails;
 			$rootScope.breadcrumbs = breadcrumbs;
 			$rootScope.appConfig = {
 				metaTitle : "Small Business",
 				headerTitle : next.$$route.label,
 				subTitle : next.$$route.label
 			};
-			
 			var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout'){
-				dataService.get('/login/logout').then(function(response){
-					$rootScope.LogoutMsg = response;
-					$rootScope.userDetails = {};
-					console.log("logout");
-					sessionStorage.clear();
-					angular.forEach($cookies, function (v, k) {
-						$cookieStore.remove(k);
-					});
-				});
+				dataService.logout();
+				$rootScope.userDetails = {};
 			}
-			//if(!$cookies.userDetails==""){
-				dataService.get('/login/session').then(function(response){
-					if(response.id===""){
-						if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout') {
+			if(dataService.auth == false){
+				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout') {
 
-						} else {
-							$location.path("/login");
-							$rootScope.alerts = [{type: "warning", msg: "You are not logged in!"}];
-						}
-					}else{
-						if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/') {
-							$location.path("/dashboard");
-						}
-						
-						sessionStorage.userDetails = JSON.stringify(response);
-						$rootScope.userDetails = JSON.parse(sessionStorage.userDetails);
-					};
-				})
-				
-			//}
-			
+				} else {
+					$location.path("/login");
+					$rootScope.alerts = [{type: "warning", msg: "You are not logged in!"}];
+				}
+			}else{
+				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/') {
+					$location.path("/dashboard");
+				}
+			};
 		});
 	}]);
 	return app;
