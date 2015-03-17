@@ -9,22 +9,24 @@
 					<div class="table-responsive">		
 						<table class="table table-bordered table-hover">
 							<thead>
-								<th>Sr.No.</th>
+								<th>User Id</th>
 								<th>Site Names</th>
 								<th>Registered date</th>
 								<th>Exp Date</th>
 								<th>validity</th>
+								<th>Domain Price</th>
 								<th>Status</th>
 								<th>Description</th>
 							</thead>
 							<tbody>
 							<tr "modalOptions.website | orderBy:sort">
-								<td>{{((webListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
+								<td>{{modalOptions.website.user_id}}</td>
 								<td>{{modalOptions.website.domain_name}} 
 								</td>
-								<!-- <td>{{modalOptions.website.registered_date}}</td> -->
+								<td></td> 
 								<td>{{modalOptions.website.expiry_date}}</td>
 								<td>{{modalOptions.website.validity}}</td>
+								<td>{{modalOptions.website.domain_price}}</td>
 								<td>{{modalOptions.website.status}}</td>
 								<td>{{modalOptions.website.description}}</td>
 							</tr>
