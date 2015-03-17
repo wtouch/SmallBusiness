@@ -1,6 +1,6 @@
-<h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>	
-	<form name="requestsiteForm" class="form-horizontal" role="form" novalidate="novalidate">
-		<div class="form-group">
+<h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>	{{reqnewsite | json}}
+	<form name="requestsiteForm" class="form-horizontal" role="form" ng-submit="requestsiteForm.$valid" novalidate="novalidate">
+		<!--<div class="form-group">
 			<label  for="name" class="col-sm-2 control-label">Website Name</label>		
 			<div class="col-sm-9">
 				<input type="text" id="website_name" class="form-control" name="website_name" placeholder="Website Name" ng-model="reqnewsite.website_name" required >
@@ -8,7 +8,7 @@
 					<span class="text-danger" ng-show="requestsiteForm.name.$error.required">Website Name is required.</span>
 				</span>
 			</div>						
-		</div>
+		</div>-->
 		<div class="form-group">	
 			<label  for="domain_name" class="col-sm-2 control-label">Domain Name</label>
 			<div class="col-sm-9">
@@ -55,7 +55,7 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
-				<button type="submit" class="btn btn-success" ng-click="insert()" tooltip="Send Request">Send Request</button>
+				<button type="submit" class="btn btn-success" ng-click="insert()" tooltip="Send Request" ng-disabled="requestsiteForm.$invalid">Send Request</button>
 				<button type="reset" class="btn btn-danger" tooltip="Cancle">Reset</button>
 			</div>
 		</div>					

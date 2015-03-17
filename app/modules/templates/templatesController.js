@@ -106,15 +106,19 @@ define(['app'], function (app) {
 		$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
 		$scope.path = "template/"; // path to store images on server
 		$scope.reqtemp.scrible  = []; // uploaded images will store in this array
-		$scope.upload = function(files,path,userinfo){ // this function for uploading files
+		
+		$scope.upload = function(files,path,userinfo,picArr){ // this function for uploading files
+		console.log(picArr);
+		
 			upload.upload(files,path,userinfo,function(data){
+				var picArrKey = 0, x;
+				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
-					$scope.reqtemp.scrible.push(JSON.stringify(data.details));
+					picArr[picArrKey] = (JSON.stringify(data.details));
 					console.log(data.message);
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-	
 			});
 		};
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images

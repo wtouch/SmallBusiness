@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload'];
 
     // This is controller for this view
-	var websitesController = function ($scope, $injector,$routeParams,$location,dataService,upload) {
+	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload) {
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
         //open function for previewing the website[Dnyaneshwar].
@@ -36,6 +36,7 @@ define(['app'], function (app) {
 		$scope.reqestSiteCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
+		//$scope.currentDate = dataService.currentDate;
         $scope.user_id = {user_id : 1}; // these are URL parameters
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
@@ -46,6 +47,30 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
+		
+		
+		//for search filter{trupti}
+		$scope.searchFilter = function(statusCol, showStatus) {
+			$scope.search = {search: true};
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.domain_name[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.domain_name, $scope.filterStatus);
+			angular.extend($scope.domain_name, $scope.search);
+			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.domain_name)
+			.then(function(response) {  //function for websitelist response
+				if(response.status == 'success'){
+					$scope.website = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.website = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				//console.log($scope.properties);
+			});
+		};
+		
+		
         
         //function for close alert
 			$scope.closeAlert = function(index) {

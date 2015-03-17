@@ -11,9 +11,19 @@
 			echo json_encode($data);
 			
 		}else{
+			//this is for search
+			 $like = [];
+			 if(isset($_GET['search']) && $_GET['search'] == true){
+				 
+				 (isset($_GET['domain_name'])) ? $like['domain_name'] = $_GET['domain_name'] : "";
+			 }
 			$where=[]; // this will used for user specific data selection.
 			$limit['pageNo'] = $pageNo; // from which record to select
 			$limit['records'] = $records; // how many records to select
+			
+			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
+			((isset($_GET['domain_name'])) && ($_GET['domain_name']!=="")) ? $where['domain_name'] = $_GET['domain_name'] : "";
+			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			
 			// this is used to select data with LIMIT & where clause
 			$data = $db->select("website", $where, $limit);
@@ -33,7 +43,9 @@
 	}
 	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
-		echo $reqMethod;
-		echo $body;
+		$where['id'] = $id; // need where clause to update/delete record
+		$update = $db->update("website", $body, $where);
+		echo json_encode($update);
 	}
+
  ?>
