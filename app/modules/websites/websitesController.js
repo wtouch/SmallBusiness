@@ -8,15 +8,15 @@ define(['app'], function (app) {
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
         //open function for previewing the website[Dnyaneshwar].
-        $scope.open = function (url, buzId) {
-			dataService.get("getsingle/business/"+buzId)
+        $scope.open = function (url, webId) {
+			dataService.get("getsingle/website/"+webId)
 			.then(function(response) {
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
 					size : 'lg'
 				};
 				var modalOptions = {
-					bizList: response.data[0]  // assign data to modal
+					website: response.data[0]  // assign data to modal
 				};
 				console.log(response.data[0]);
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
