@@ -15,12 +15,11 @@ define(['app'], function (app) {
 		$scope.userList = [];
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
-		console.log($scope.currentDate);
 		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
 		if(!$routeParams.userViews) {
-		$location.path('/dashboard/users/userslist');
+			$location.path('/dashboard/users/userslist');
 		}
 		
 		//change tooltip dynamically
@@ -77,15 +76,16 @@ define(['app'], function (app) {
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
 					console.log(modalOptions);
-					dataService.put("put/user/"+id, modalOptions.data)
+					dataService.put("put/user/register"+id, modalOptions.data)
 					.then(function(response){
 						console.log(response);
 					})
+					$scope.ok = function () {
+						$modalOptions.close('ok');
+					};
 				});
 		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
-		};
+		
 		
 		//code for check password
 		$scope.passMatch = function(pass1, pass2){
@@ -104,7 +104,7 @@ define(['app'], function (app) {
 			angular.extend($scope.userParams, $scope.filterStatus);
 			angular.extend($scope.userParams, $scope.search);
 			if(colValue.length >= 4 || colValue ==""){
-				if($scope.userViews=='userslist'){
+				if($scope.userViews == 'userslist'){
 					dataService.get("/getmultiple/user/1/"+$scope.pageItems, $scope.userParams).then(function(response) { 
 						if(response.status == 'success'){
 							$scope.userList = response.data; // this will change for template
@@ -116,7 +116,7 @@ define(['app'], function (app) {
 						}
 					});
 				}
-				if($scope.userViews=='usergroup'){
+				if($scope.userViews == 'usersgroup'){
 					dataService.get("/getmultiple/usergroup/1/"+$scope.pageItems, $scope.userParams).then(function(response) { 
 						if(response.status == 'success'){
 							$scope.usergroupList = response.data; // this will change for template
@@ -141,15 +141,16 @@ define(['app'], function (app) {
 			if($scope.userViews=='userslist'){
 				dataService.put("put/user/"+id, $scope.changeStatus)
 				.then(function(response) { 
-					/* if(colName=='status'){
-						//$scope.hideDeleted = 1;
-					} */
+					
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			}
-			if($scope.userViews=='usergroup'){
+			if($scope.userViews=='usersgroup'){
 				dataService.put("put/usergroup/"+id, $scope.changeStatus)
 				.then(function(response) { 
+					/* if(colName=='status'){
+						//$scope.hideDeleted = 1;
+					} */
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}); 
 			}
@@ -170,6 +171,37 @@ define(['app'], function (app) {
 			}
 		};*/
 		
+		/* function(scope, element, attrs, accordionCtrl) {
+			var getIsOpen, setIsOpen;
+			accordionCtrl.addGroup(scope);
+			scope.isOpen = false;
+			if ( attrs.isOpen ) {
+				getIsOpen = $parse(attrs.isOpen);
+				setIsOpen = getIsOpen.assign;
+				scope.$parent.$watch(getIsOpen, function(value) {
+					scope.isOpen = !!value;
+				});
+			}
+			scope.$watch('isOpen', function(value) {
+				if ( value ) {
+					accordionCtrl.closeOthers(scope);
+				}
+				if ( setIsOpen ) {
+					setIsOpen(scope.$parent, value);
+				}
+			});
+		} */
+		$scope.open = function() {
+			$scope.opened = true;
+		}
+		$scope.close = function() {
+			dataService.put("put/usergroup/"+id, $scope.changeStatus)
+				.then(function(response) { 
+					$scope.alerts.push({type: response.status, msg: response.message});
+				});
+			$scope.opened = false;
+		}
+	
 		$scope.adduser ={};
 		//add user information
 		var addUsers =	function(){
