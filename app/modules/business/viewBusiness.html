@@ -53,25 +53,18 @@
 							<tr><th>Website</th><td>{{modalOptions.bizList.contact_profile.contact_website}}</td></tr>
 						</table>
 					</tab>
+					
 					<tab heading="Infrastructure" title="Infrastructure Facility">
-						<table class="table table-responsive" ng-repeat="(key, val) in modalOptions.bizList.infrastructure">
-							<tr><th>Infrastructure Image</th><td>{{val.infra_image}}</td></tr>
-							<tr><th>Infrastucture Heading</th><td>{{key}}</td></tr>
-							<tr><th>Infrastucture Description</th><td ng-bind-html="val.description"></td></tr>
+						<table class="table table-responsive" >
+							<tr><th>Infrastucture Heading</th><th>Infrastructure Image</th><th>Infrastucture Description</th></tr>
+							<tr ng-repeat="(key, val) in modalOptions.bizList.infrastructure"><td>{{key}}</td><td>{{val.infra_image}}</td><td ng-bind-html="val.description"></td></tr>
 						</table>
 					</tab>
+		
 					<tab heading="Testimonials" title="Testimonials">
-						<table class="table table-responsive" ng-repeat="(key, val) in modalOptions.bizList.testimonials">
-							<tr><th>Date</th><td>{{val.date}}</td></tr>
-							<tr><th>Testimonial Given By</th><td>{{key}}</td></tr>
-							<tr><th>Sender Email</th><td>{{val.email}}</td></tr>
-							<tr><th>Sender Country</th><td>{{val.Sender_Country}}</td></tr>
-							<tr><th>Sender State</th><td>{{val.Sender_State}}</td></tr>
-							<tr><th>Sender City</th><td>{{val.Sender_City}}</td></tr>
-							<tr><th>Senders Phone</th><td>{{val.phone}}</td></tr>
-							<tr><th>Testimonial Title</th><td>{{val.testimonial_title}}</td></tr>
-							<tr><th>Testimonial Description</th><td ng-bind-html="val.test_Description"></td></tr>
-							<tr><th>Testimonial Imgae</th><td>{{val.testimage}}</td></tr>
+						<table class="table table-responsive" >
+							<tr><th>Testimonial Given By</th><th>Date</th><th>Sender Email</th><th>Sender Country</th><th>Sender State</th><th>Sender City</th><th>Senders Phone</th><th>Testimonial Title</th><th>Testimonial Description</th><th>Testimonial Imgae</th></tr>
+							<tr ng-repeat="(key, val) in modalOptions.bizList.testimonials"><td>{{key}}</td><td>{{val.date}}</td><td>{{val.email}}</td><td>{{val.Sender_Country}}</td><td>{{val.Sender_State}}</td><td>{{val.Sender_City}}</td><td>{{val.phone}}</td><td>{{val.testimonial_title}}</td><td ng-bind-html="val.test_Description"></td><td>{{val.testimage}}</td></tr>
 						</table>
 					</tab>
 					<tab heading="Job & Careers" title="Job & Careers">
