@@ -14,6 +14,7 @@ define(['app'], function (app) {
 		$scope.numPages = "";	
 		$scope.userList = [];
 		$scope.alerts = [];
+		$scope.currentDate = dataService.currentDate;
 		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
@@ -24,6 +25,11 @@ define(['app'], function (app) {
 		//change tooltip dynamically
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
+		};
+		
+		//function for close alert
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
 		};
 		
 		//datepicker {sonali}	
@@ -38,12 +44,12 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope.opened = ($scope.opened==true)?false:true;
 		};
-		$scope.dateOptions = {
+		/* $scope.dateOptions = {
 			formatYear: 'yy',
 			startingDay: 1
-		};
-
-		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		}; */
+		
+		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		// Date Picker Ended here 
 		
@@ -112,24 +118,17 @@ define(['app'], function (app) {
 		
 		//global method for change status of particular column 
 		$scope.hideDeleted = "";// & use this filter in ng-repeat - filter: { status : hideDeleted}
-		$scope.changeStatus = function(colName, colValue, id){
-		$scope.changeStatus[colName] = colValue;
-		console.log(colValue);
-			dataService.put("put/user/register"+id, $scope.changeStatus)
-			.then(function(response) { //function for businesslist response
-					if(colName=='status'){
-						$scope.hideDeleted = 1;
-					}
-					if(response.status == 'success'){
-						$scope.userList = response.data; // this will change for template
-						$scope.totalRecords = response.totalRecords; // this is for pagination
-					}else{
-						$scope.userList = {};
-						$scope.totalRecords = {};
-						$scope.submitted = true;
-						$scope.alerts.push({type: response.status, msg: response.message});
-					}
-			});
+		$scope.changeStatus = {};
+		$scope.changeStatusFn = function(colName, colValue, id){
+			$scope.changeStatus[colName] = colValue;
+			console.log($scope.changeStatus);
+			 dataService.put("put/user/"+id, $scope.changeStatus)
+			.then(function(response) { 
+				if(colName=='status'){
+					//$scope.hideDeleted = 1;
+				}
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}); 
 		};
 		
 		/*code for delete user	
@@ -148,6 +147,7 @@ define(['app'], function (app) {
 		
 		//add user information
 		var addUsers =	function(){
+			$scope.adduser.register_date = $scope.currentDate;
 			$scope.postData = function(adduser) {
 				console.log(adduser);
 				dataService.post("post/user/register",adduser)

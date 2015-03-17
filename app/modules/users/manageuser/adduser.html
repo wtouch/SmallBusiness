@@ -8,6 +8,8 @@
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">Name</label>
 				<div class="col-sm-9">
+					<input type="hidden" ng-model="adduser.register_date">
+					<input type="hidden" ng-model="adduser.status" ng-init="adduser.status = 1" value="{{adduser.status}}">
 					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="adduser.name" required>
 					<span class="help-block" ng-show="adduserForm.name.$dirty && adduserForm.name.$invalid">
 						<span class="text-danger" ng-show="adduserForm.name.$error.required">Name is required.</span>
@@ -102,17 +104,17 @@
 			</div>	
 			
 			<div class="form-group">
-				<label for="group_name" class="col-sm-2 control-label">Group Name</label>
+				<label for="group_id" class="col-sm-2 control-label">Group Name</label>
 				<div class="col-sm-9">
-					<select class="form-control" name="group_name" id="group_name" required>		
+					<select class="form-control" name="group_id" id="group_id" ng-model="adduser.group_id" required>		
 						<option value="">Select User Group</option>
-						<option value="India">Salesman</option>
-						<option value="Australia">Admin</option>
-						<option value="China">Manager</option>
-						<option value="America">Customer</option>
+						<option value="0">Salesman</option>
+						<option value="1">Admin</option>
+						<option value="2">Manager</option>
+						<option value="3">Customer</option>
 					</select>
-					<span class="help-block" ng-show="adduserForm.group_name.$dirty && adduserForm.group_name.$invalid">
-						<span class="text-danger" ng-show="adduserForm.group_name.$error.required">User Name Group is required.</span>
+					<span class="help-block" ng-show="adduserForm.group_id.$dirty && adduserForm.group_id.$invalid">
+						<span class="text-danger" ng-show="adduserForm.group_id.$error.required">User Name Group is required.</span>
 					</span>				
 				</div>
 			</div>		
