@@ -25,7 +25,11 @@
 							<tr><th>Alternate Website</th><td>{{modalOptions.bizList.business_profile.website}}</td></tr>
 							<tr><th>Year Of Establishment</th><td>{{modalOptions.bizList.business_profile.establishment}}</td></tr>
 							<tr><th>No. Of Employees</th><td>{{modalOptions.bizList.business_profile.no_of_employees}}</td></tr>
-							<tr><th>Additional Business</th><td ng-repeat="x in additional_business">{{modalOptions.bizList.business_profile.x.trader}}</td></tr>
+							<tr><th>Additional Business</th><td>
+								<span ng-repeat="(key, value) in modalOptions.bizList.business_profile.additional_business">
+									<span ng-if="value == true"><span>*</span>{{key}}</span>
+								</span>
+							</td></tr>
 						</table>
 					</tab>
 					<tab heading="Contact Profile" title="Contact Profile">
