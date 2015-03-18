@@ -72,6 +72,7 @@ define(['app'], function (app) {
 			}
 		}; 
 		
+		$scope.changeStatus={};
 		$scope.editDomainName = function(colName, colValue, id, editStatus){
 			$scope.changeStatus[colName] = colValue;
 			console.log(colValue);
@@ -82,6 +83,15 @@ define(['app'], function (app) {
 				}); 
 			}
 		};	
+		
+		$scope.showInput = function($event,opened)		
+		{
+			//$scope.selected = undefined;
+			$scope.domain_name = []; 				  				
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope[opened] = ($scope[opened] ===true) ? false : true;
+		};
 		/* $scope.changeStatus = {};
 		$scope.changeStatusFn = function(colName, colValue, id){
 		$scope.changeStatus[colName] = colValue;

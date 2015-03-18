@@ -58,10 +58,10 @@
 					</button>
 					</td> -->
 					<td>{{x.domain_name}} 
-					<a type="button" class="btn btn-warning pull-right" ng-model="website.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editDomainName('domain_name', website.domain_name, website.id, website.boxId)" tooltip="Edit">
+					<a type="button" class="btn btn-warning pull-right" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')"  ng-change="editDomainName('domain_name', x.domain_name, x.id,x.boxId)" tooltip="Edit">
 					<span class="glyphicon glyphicon-pencil"></span>
 					</a>
-					<input type="text" class="form-control" ng-show="website.boxId == 1" ng-model="website.domain_name"/>
+					<input type="text" id="domain_name" class="form-control" name="domain_name" ng-show="x.boxId == 1" ng-model="x.domain_name" ng-required="true"/>
 					</td>
 					<!-- <td>{{users.group_id}}
 					<a type="button" class="btn btn-success" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId)">
