@@ -9,13 +9,12 @@ define(['app'], function (app) {
 		
 		($rootScope.alerts) ? $scope.alerts = $rootScope.alerts : $scope.alerts = [];
 		//function for close alert
-		console.log(dataService.auth);
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
 		$scope.insert = function(login){
 			
-			dataService.post("/post/user/login",$scope.login)
+			dataService.post("post/user/login",$scope.login)
 			.then(function(response) {
 				if(response.status == 'success'){
 					$location.path("/dashboard");

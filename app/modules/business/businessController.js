@@ -13,19 +13,10 @@ define(['app'], function (app) {
 				
 				var oldObj = response.data[0];
 				var newObj = {};
+				console.log(oldObj);
 				
-				var arrConvrt = function(arr){
-					//console.log(arr);
-					var newArr = [];
-					var x;
-					for(x in arr){
-						newArr.push(JSON.parse(arr[x]));
-					}
-					return newArr;
-				}
 				angular.forEach(oldObj, function(value, key) {
 				  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
-				  //(key === 'infrastructure') ? JSON.parse(value) : value;
 				}, newObj);
 				console.log(newObj);
 				var modalDefaults = {
@@ -35,7 +26,7 @@ define(['app'], function (app) {
 				var modalOptions = {
 					bizList: newObj  // assign data to modal
 				};
-				//console.log(JSON.parse(response.data[0].infrastructure));
+				
 				
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
