@@ -53,10 +53,29 @@
 				<tbody>
 					<tr ng-repeat="x in website | orderBy:sort ">
 					<td>{{((webListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
-					<td>{{x.domain_name}} 
+					<!-- <td>{{x.domain_name}} 
 					<button type="button" class="btn btn-warning glyphicon glyphicon-pencil pull-right" tooltip="Edit">
 					</button>
+					</td> -->
+					<td>{{x.domain_name}} 
+					<a type="button" class="btn btn-warning pull-right" ng-model="website.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editDomainName('domain_name', website.domain_name, website.id, website.boxId)" tooltip="Edit">
+					<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+					<input type="text" class="form-control" ng-show="website.boxId == 1" ng-model="website.domain_name"/>
 					</td>
+					<!-- <td>{{users.group_id}}
+					<a type="button" class="btn btn-success" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId)">
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+					<select class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-click="showDropDown($event,'opened')" ng-required="true">
+						<option value="">Select Group</option>
+						<option value="1">Manager</option>
+						<option value="2">Salseman</option>
+						<option value="3">Business Owner</option>
+					</select>
+					</td> -->
+				
+				
 					<td>{{x.registered_date}}</td>
 					<td>{{x.expiry_date}}</td>
 					<!--<td>{{x.status}}</td>-->
@@ -84,10 +103,6 @@
 				</tbody>					
 		</table>
 	</div>
-	
-	
-	
-	
 	<div class="text-center">				
 		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="webListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(webListCurrentPage,domain_name)"></pagination>
 		<pre>Page: {{webListCurrentPage}} / {{numPages}}</pre>		

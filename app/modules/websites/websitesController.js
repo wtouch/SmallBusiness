@@ -72,6 +72,16 @@ define(['app'], function (app) {
 			}
 		}; 
 		
+		$scope.editDomainName = function(colName, colValue, id, editStatus){
+			$scope.changeStatus[colName] = colValue;
+			console.log(colValue);
+			if(editStatus==0){
+				 dataService.put("put/website/"+id,$scope.changeStatus)
+				.then(function(response) { 
+					$scope.alerts.push({type: response.status,msg:"One row updated"});
+				}); 
+			}
+		};	
 		/* $scope.changeStatus = {};
 		$scope.changeStatusFn = function(colName, colValue, id){
 		$scope.changeStatus[colName] = colValue;
