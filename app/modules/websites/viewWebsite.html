@@ -5,9 +5,30 @@
 	<div class="modal-body">
 		<div class="row">
 			<div class="col-sm-12">
-					<div class="table-responsive">		
+					<div class="table-responsive">	
 						<table class="table table-bordered table-hover">
-							<thead>
+						<tr><th>WEBSITES DETAILS</th></tr>
+						<tr "modalOptions.website | orderBy:sort">
+							<td>
+								<table class="table table-responsive">
+									<tr><th>UserId</th>
+									<td>{{modalOptions.website.user_id}}</td></tr>
+									<tr><th>Domain Name</th><td>{{modalOptions.website.domain_name}}</td></tr>
+									<tr><th>Expiry Date</th><td>{{modalOptions.website.expiry_date}}</td></tr>
+									<tr><th>Validity</th><td>{{modalOptions.website.validity}}</td></tr>
+									<tr><th>Domain Price</th><td>{{modalOptions.website.domain_price}}</td></tr>
+									<tr><th>Status</th><td>{{modalOptions.website.status}}</td></tr>
+								</table>
+							</td>
+							<td>
+								<table class="table table-responsive">
+									<tr><th>Date</th><td>{{modalOptions.website.date}}</td></tr>
+									<tr><th>Description</th><td>{{modalOptions.website.description}}</td></tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+							<!--<thead>
 								<th>User Id</th>
 								<th>Site Names</th>
 								<th>Registered date</th>
@@ -32,7 +53,7 @@
 								<td>{{modalOptions.website.description}}</td>
 							</tr>
 							</tbody>					
-						</table>
+						</table>-->
 					</div>
 					<p>{{modalOptions.tempList | json}}</p>
 			</div>
