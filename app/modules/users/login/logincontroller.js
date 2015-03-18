@@ -30,6 +30,21 @@ define(['app'], function (app) {
 				}
 			})
 		}
+		
+		$scope.forgotpass = function(forgot) {
+			console.log(forgot);
+			dataService.post("post/user/forgotpass",forgot)
+			.then(function(response) {
+				console.log(response);
+				if(response.status == 'success'){
+					$scope.forgot = response.data;
+					$location.path("/login");
+				}else{
+					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
+				}
+			})
+		}	
+		
 		$scope.passMatch = function(pass1, pass2){
 			$scope.pass = (pass1===pass2) ? true : false;
 			//alert($scope.pass); 
@@ -39,7 +54,7 @@ define(['app'], function (app) {
 			$scope.userID = {user_id : $rootScope.userDetails.id}
 			angular.extend(changepass, $scope.userID);
 			console.log(JSON.stringify(changepass));
-			dataService.post("/post/user/changepass",changepass)
+			dataService.post("post/user/changepass",changepass)
 			.then(function(response) {
 				if(response.status == 'success'){
 					$scope.changepass = {};
