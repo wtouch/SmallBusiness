@@ -100,6 +100,7 @@ define(['app'], function (app) {
 		
 		//check availability
 		$scope.checkuserAvailable = function(adduser){
+			// $scope.
 			dataService.post("post/user/checkavailability",adduser)
 			.then(function(response) {  
 				if(response.status == 'success'){

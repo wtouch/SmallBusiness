@@ -16,8 +16,9 @@
 				<td>{{((usersListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
 				<td>{{users.username}}</td>
 				<td>{{users.group_id}}
-					<a type="button" class="btn btn-success" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId)">
-						<span class="glyphicon glyphicon-pencil"></span>
+					<a type="button" class="btn btn-success" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_name', users.group_id, users.id, users.boxId)">
+						<span ng-if="users.boxId == " class="glyphicon glyphicon-pencil"></span>
+						<span ng-if="users.boxId == 1" class="glyphicon glyphicon-ok"></span>
 					</a>
 					<select class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-click="showDropDown($event,'opened')" ng-required="true">
 						<option value="">Select Group</option>
