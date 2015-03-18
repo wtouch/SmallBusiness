@@ -22,14 +22,13 @@
 			$limit['records'] = $records; // how many records to select
 			
 			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
-			((isset($_GET['domain_name'])) && ($_GET['domain_name']!=="")) ? $where['domain_name'] = $_GET['domain_name'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			
 			// this is used to select data with LIMIT & where clause
-			$data = $db->select("website", $where, $limit);
+			$data = $db->select("website", $where, $limit,$like);
 			
 			// this is used to count totalRecords with only where clause
-			$totalRecords['totalRecords'] = count($db->select("website", $where)['data']);		
+			$totalRecords['totalRecords'] = count($db->select("website", $where, $limit=null, $like)['data']);		
 			
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
 			$data = array_merge($totalRecords,$data);

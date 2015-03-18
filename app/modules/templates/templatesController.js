@@ -45,7 +45,7 @@ define(['app'], function (app) {
 		
 		$scope.pageChanged = function(page, template_type) { // Pagination page changed
 			angular.extend(template_type, $scope.user_id);
-			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
+			dataService.get("getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response){  //function for templatelist response
 				$scope.templates = response.data;
 				//console.log($scope.properties);
@@ -77,7 +77,7 @@ define(['app'], function (app) {
 			(showStatus =="") ? delete $scope.template_type[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.template_type, $scope.filterStatus);
 			angular.extend($scope.template_type, $scope.search);
-			dataService.get("/getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
+			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for templatelist response
 				if(response.status == 'success'){
 					$scope.templates = response.data;
@@ -126,7 +126,7 @@ define(['app'], function (app) {
 		
 		// switch functions
 		var mytemplates = function(){
-			dataService.get("/getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.user_id)
+			dataService.get("getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) {  //function for my templates response
 			if(response.status == 'success'){
 					$scope.templates=response.data;
@@ -143,7 +143,7 @@ define(['app'], function (app) {
 		var listoftemplates = function(){
 			$scope.template_type = {template_type : 'public', status:1};
 			angular.extend($scope.template_type, $scope.user_id);
-			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+			dataService.get("getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
 					$scope.templates=response.data;
@@ -158,7 +158,7 @@ define(['app'], function (app) {
 			//function for active button
 			var showActive= function(status){
 				$scope.template_type = {template_type : 'public',status:1};
-				dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+				dataService.get("getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 						if(response.status == 'success'){
 						$scope.templates=response.data;
@@ -192,7 +192,7 @@ define(['app'], function (app) {
 		var custometemplates = function(){
 			$scope.template_type = {template_type : 'private',status:1,custom:1};
 			angular.extend($scope.template_type, $scope.user_id);
-			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+			dataService.get("getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for template list response
 				if(response.status == 'success'){
 					$scope.templates=response.data;

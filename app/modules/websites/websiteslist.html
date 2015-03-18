@@ -3,14 +3,14 @@
 		<div class="col-sm-4"> 
 			<div class="bottomspace">
 				<label for="search" class="control-label">Search </label>		
-					<input id="search" type="text" class="form-control" ng-model="searchProp" ng-change="searchFilter('domain_name', searchProp)" placeholder="search"/>
+					<input id="search" type="text" class="form-control" ng-model="searchProper" ng-change="searchFilter('domain_name', searchProper)" placeholder="search"/>
 			</div>
 		</div>			 				  
 		<div class="col-sm-4">
 			<div class="bottomspace">
 				<label for="sort" class="control-label">Sort by Order</label>
 					<select id="sort" class="form-control" ng-model="sort"> 
-						<option value="">Select Order</option>		<!-- added value & selected attr -->	
+						<option value="">Select Order</option><!-- added value & selected attr -->	
 						<option value="-domain_name">Desending</option>
 						<option value="domain_name">Asending</option>  
 					</select>
@@ -19,17 +19,17 @@
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="status" class="control-label">Select Status</label>
-					<select id="status" class="form-control" ng-change="changeStatus('status',showStatus)" ng-model="showStatus" ng-init="showStatus='active'">
-						<option value="'active'" selected>Active</option>
-						<option value="'deleted'">Deleted</option>
-						<option value="'expired'">Expired</option>   
+					<select id="status" class="form-control" ng-change="changeStatus('status',showStatus)" ng-model="showStatus" ng-init="showStatus='1'">
+						<option value="1" selected>Active</option>
+						<option value="0">Deleted</option>
+						<option value="2">Expired</option>   
 					</select>
 			</div>
 		</div>
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="domain" class="control-label">Select Domain :</label>
-					<select id="domain" class="form-control">            
+					<select id="domain" class="form-control" ng-change="changeStatus('domain_name',showdomain)" ng-model="showdomain">            
 						<option value="">All</option>
 						<option value="www.jaidevlandmarks.com">www.jaidevlandmarks.com</option>  
 						<option value="www.hinjewadiproperties.com">www.hinjewadiproperties.com</option>  
@@ -75,8 +75,6 @@
 						<div class="btn-group" role="group" aria-label="...">
 							<button type="button" class="btn btn-primary ng-click="open('modules/business/viewBusiness.html', x.id=1)">Prieview
 							</button>
-							
-							
 							<!--<button type="button" class="glyphicon glyphicon-remove" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
 							</button>-->
 						</div>

@@ -44,7 +44,7 @@ define(['app'], function (app) {
 			dataService.get("getmultiple/website/"+page+"/"+$scope.pageItems, $scope.domain_name)
 			.then(function(response) {  //function for websitelist response
 				$scope.website = response.data;
-				//console.log($scope.properties);
+				console.log($scope.website);
 			});
 		};
 		
@@ -52,11 +52,14 @@ define(['app'], function (app) {
 		$scope.searchFilter = function(statusCol, showStatus) {
 			$scope.search = {search: true};
 			$scope.filterStatus= {};
-			(showStatus =="") ? delete $scope.domain_name[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.domain_name, $scope.filterStatus);
-			angular.extend($scope.domain_name, $scope.search);
-			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.domain_name)
+			$scope.webParam={};
+			(showStatus =="") ? delete $scope.webParam[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.webParam, $scope.filterStatus);
+			angular.extend($scope.webParam, $scope.search);
+			if(showStatus.length >= 4 || showStatus == ""){
+			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.webParam)
 			.then(function(response) {  //function for websitelist response
+			console.log(response);
 				if(response.status == 'success'){
 					$scope.website = response.data;
 					$scope.totalRecords = response.totalRecords;
@@ -65,12 +68,28 @@ define(['app'], function (app) {
 					$scope.totalRecords = {};
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				//console.log($scope.properties);
 			});
-		};
+			}
+		}; 
 		
+		/* $scope.changeStatus = {};
+		$scope.changeStatusFn = function(colName, colValue, id){
+		$scope.changeStatus[colName] = colValue;
+		$scope.filterStatus= {};
+		dataService.get("getmultiple/website/1"+id, $scope.changeStatus)
+		.then(function(response) { 
+		if(response.status == 'success'){
+			$scope.website = response.data;
+			$scope.totalRecords = response.totalRecords;
+		}else{
+			$scope.website = {};
+			$scope.totalRecords = {};
+		$scope.alerts.push({type: response.status, msg: "No data Found"});
+		});
+		}; */
 		
-		//this is global method for filter 
+		 
+		 //this is global method for filter 
 		$scope.changeStatus = function(statusCol, showStatus) {
 			console.log($scope.status);
 			$scope.filterStatus= {};
@@ -84,12 +103,13 @@ define(['app'], function (app) {
 				}else{
 					$scope.website = {};
 					$scope.totalRecords = {};
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.alerts.push({type: response.status, msg: "No data Found"});
 				}
 				//console.log($scope.properties);
 			});
-		};
-	
+		};  
+		
+		
         //function for close alert
 			$scope.closeAlert = function(index) {
 				$scope.alerts.splice(index, 1);
@@ -119,7 +139,10 @@ define(['app'], function (app) {
         
         var websiteslist = function(){
 			//function for websiteslist{Dnyaneshwar}
-			dataService.get("/getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.user_id)
+			$scope.domain_name = {status: 1}
+			//$scope.template_type = {template_type : 'public', status:1};
+			angular.extend($scope.domain_name, $scope.user_id);
+			dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.domain_name)
 			.then(function(response) {  //function for websiteslist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
@@ -153,7 +176,7 @@ define(['app'], function (app) {
         
         var requestedsitelist = function(){
 			//function for requestedsitelist{Dnyaneshwar}
-			dataService.get("/getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems, $scope.user_id)
+			dataService.get("getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) {  //function for requestedsitelist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
