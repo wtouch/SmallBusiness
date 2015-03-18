@@ -57,7 +57,7 @@ define(['app'], function (app) {
 			$scope.filterStatus= {};
 			(showStatus =="") ? delete $scope.template_type[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.template_type, $scope.filterStatus);
-			dataService.get("/getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
+			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for templatelist response
 				if(response.status == 'success'){
 					$scope.templates = response.data;
@@ -208,7 +208,7 @@ define(['app'], function (app) {
 			//function for active button
 			var showActive= function(status){
 				$scope.template_type = {template_type : 'private',status:1,custom:1};
-				dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+				dataService.get("getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 						if(response.status == 'success'){
 						$scope.templates=response.data;
@@ -269,7 +269,7 @@ define(['app'], function (app) {
 			reqtemp.user_id=$scope.user_id.user_id;
 			$scope.reqtemp.date = $scope.currentDate;
 			//console.log(user_id);
-				dataService.post("/post/template",reqtemp,$scope.user_id)
+				dataService.post("post/template",reqtemp,$scope.user_id)
 				.then(function(response) {  //function for response of request temp
 					$scope.reqtemp = response.data;
 					console.log(response);

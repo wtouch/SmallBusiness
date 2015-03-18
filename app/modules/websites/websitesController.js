@@ -40,14 +40,13 @@ define(['app'], function (app) {
 		//$scope.user_details = {user_id : 1};
 		
         $scope.pageChanged = function(page,where) { // Pagination page changed
-			angular.extend($scope.template_type, $scope.user_id);
-			dataService.get("/getmultiple/website/"+page+"/"+$scope.pageItems, $scope.template_type)
+			angular.extend($scope.domain_name, $scope.user_id);
+			dataService.get("getmultiple/website/"+page+"/"+$scope.pageItems, $scope.domain_name)
 			.then(function(response) {  //function for websitelist response
 				$scope.website = response.data;
 				//console.log($scope.properties);
 			});
 		};
-		
 		
 		//for search filter{trupti}
 		$scope.searchFilter = function(statusCol, showStatus) {
@@ -134,6 +133,23 @@ define(['app'], function (app) {
 				//$scope.website = response.data;
 			});
 		};
+		
+		//function for active button
+			var showActive= function(status){
+				$scope.status = {status : 'active',status:1};
+				dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.status)
+				.then(function(response) {  //function for templatelist response
+						if(response.status == 'success'){
+						$scope.website=response.data;
+						$scope.totalRecords = response.totalRecords;
+					}
+					else
+					{
+						$scope.alerts.push({type: response.status, msg: response.message});
+					};
+				});
+			//end of active button function
+			}
         
         var requestedsitelist = function(){
 			//function for requestedsitelist{Dnyaneshwar}
