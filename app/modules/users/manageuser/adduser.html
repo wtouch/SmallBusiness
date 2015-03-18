@@ -19,7 +19,12 @@
 			<div class="form-group">
 				<label  for="username" class="col-sm-2 control-label">User Name</label>
 				<div class="col-sm-9">
-					<input class="form-control" type="text" id="username" name="username" ng-model="adduser.username" placeholder="User Name"  required>
+					<div class="input-group">
+						<input class="form-control" type="text" id="username" name="username" ng-model="adduser.username" placeholder="User Name"  required>
+						<div class="input-group-btn">
+							<button type="submit" ng-click="checkuserAvailable(adduser)" class="btn btn-success">Check Availability</button>
+						</div>
+					</div>	
 					<span class="help-block" ng-show="adduserForm.username.$dirty && adduserForm.username.$invalid">
 						<span class="text-danger" ng-show="adduserForm.username.$error.required">User Name is required.</span>
 					</span>

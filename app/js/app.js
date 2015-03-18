@@ -43,6 +43,9 @@ define(['angular',
 				
 				.when('/logout', route.resolve({controller:'login', template: 'logout', label: 'Logout'}, 'users/login/'))
 				
+				.when('/changepass',route.resolve({controller: 'login',template: 'changepass',label: "Change Password"
+                }, 'users/login/')) 
+				
 				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
 				
 				.when('/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/login/'))

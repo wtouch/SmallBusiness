@@ -54,12 +54,22 @@ define(['app'], function (app) {
 		// Date Picker Ended here 
 		
 		//code for pagination
-		$scope.pageChanged = function(page) { 
-			dataService.get("getmultiple/user/"+page+"/"+$scope.pageItems).then(function(response){
-				$scope.userList = response.data;
-				console.log(response.data);
-				$scope.totalRecords = response.totalRecords;
-			});
+		$scope.pageChanged = function(page) {
+			if($scope.userViews == 'userslist'){
+				dataService.get("getmultiple/user/"+page+"/"+$scope.pageItems).then(function(response){
+					$scope.userList = response.data;
+					console.log(response.data);
+					$scope.totalRecords = response.totalRecords;
+				});
+			}
+			if($scope.userViews == 'usersgroup'){
+				dataService.get("getmultiple/usergroup/"+page+"/"+$scope.pageItems).then(function(response){
+					$scope.usergroupList = response.data;
+					console.log(response.data);
+					$scope.totalRecords = response.totalRecords;
+				});
+			}
+			
 		};	
 		//End of pagination
 		
@@ -86,14 +96,19 @@ define(['app'], function (app) {
 				});
 		};
 		
+		//$scope.submitted = false;
 		
-		//code for check password
-		$scope.passMatch = function(pass1, pass2){
-			$scope.pass = (pass1===pass2) ? true : false;
-			//alert($scope.pass);
-		}
-		$scope.submitted = false;
-		
+		//check availability
+		$scope.checkuserAvailable = function(adduser){
+			dataService.post("post/user/checkavailability",adduser)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}else{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+			});
+		} 
 		
 		//code for search filter
 		$scope.searchFilter = function(statusCol, colValue) {
@@ -141,7 +156,9 @@ define(['app'], function (app) {
 			if($scope.userViews=='userslist'){
 				dataService.put("put/user/"+id, $scope.changeStatus)
 				.then(function(response) { 
-					
+					if(colName=='status'){
+						$scope.hideDeleted = 1;
+					}
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			}
