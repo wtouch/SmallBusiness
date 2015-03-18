@@ -72,17 +72,51 @@ define(['app'], function (app) {
 			}
 		}; 
 		
+		
+		/* $scope.changeStatusFn = function(colName, colValue, id){
+			$scope.changeStatus[colName] = colValue;
+			console.log($scope.changeStatus);
+			if($scope.userViews=='userslist'){
+				dataService.put("put/user/"+id, $scope.changeStatus)
+				.then(function(response) { 
+					if(colName=='status'){
+						$scope.hideDeleted = 1;
+					}
+					$scope.alerts.push({type: response.status, msg: response.message});
+				});
+			} */
+		
+			/* $scope.changeStatus={};
+			$scope.editDomainName = function(colName, colValue, id, editStatus){
+			$scope.changeStatus[colName] = colValue;
+			//console.log(colValue);
+			console.log($scope.changeStatus);
+				if(editStatus==0){
+				 dataService.put("put/website/"+id,$scope.changeStatus)
+				.then(function(response) { 
+				//if(colName=='domain_name'){
+						//$scope.hideDeleted = 1;
+				//}
+					$scope.alerts.push({type: response.status,msg:"One row updated"});
+				}); 
+			}
+			};*/
+			
 		$scope.changeStatus={};
 		$scope.editDomainName = function(colName, colValue, id, editStatus){
 			$scope.changeStatus[colName] = colValue;
 			console.log(colValue);
-			if(editStatus==0){
+			console.log($scope.changeStatus);
+				if(editStatus==0){
 				 dataService.put("put/website/"+id,$scope.changeStatus)
 				.then(function(response) { 
+					//if(status=='success'){
+						//$scope.hideDeleted = 1;
+					//}
 					$scope.alerts.push({type: response.status,msg:"One row updated"});
 				}); 
 			}
-		};	
+		};	 
 		
 		$scope.showInput = function($event,opened)		
 		{

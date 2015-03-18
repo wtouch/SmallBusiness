@@ -53,50 +53,39 @@
 				<tbody>
 					<tr ng-repeat="x in website | orderBy:sort ">
 					<td>{{((webListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
-					<!-- <td>{{x.domain_name}} 
-					<button type="button" class="btn btn-warning glyphicon glyphicon-pencil pull-right" tooltip="Edit">
-					</button>
-					</td> -->
 					<td>{{x.domain_name}} 
-					<a type="button" class="btn btn-warning pull-right" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')"  ng-change="editDomainName('domain_name', x.domain_name, x.id,x.boxId)" tooltip="Edit">
+					<a type="button" class="btn btn-warning pull-right" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')" ng-change="editDomainName('domain_name', x.domain_name, x.id,x.boxId)" tooltip="Edit">
 					<span class="glyphicon glyphicon-pencil"></span>
 					</a>
 					<input type="text" id="domain_name" class="form-control" name="domain_name" ng-show="x.boxId == 1" ng-model="x.domain_name" ng-required="true"/>
 					</td>
-					<!-- <td>{{users.group_id}}
-					<a type="button" class="btn btn-success" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId)">
-						<span class="glyphicon glyphicon-pencil"></span>
-					</a>
-					<select class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-click="showDropDown($event,'opened')" ng-required="true">
-						<option value="">Select Group</option>
-						<option value="1">Manager</option>
-						<option value="2">Salseman</option>
-						<option value="3">Business Owner</option>
-					</select>
-					</td> -->
-				
-				
 					<td>{{x.registered_date}}</td>
 					<td>{{x.expiry_date}}</td>
-					<!--<td>{{x.status}}</td>-->
-					<td>
-					<a class="btn btn-success" ng-show="x.status=='active'">Active</a>
-					<a class="btn btn-warning" ng-show="x.status=='delete'">Delete</a>
-					</td>
+					<td>{{x.status}}</td>
+					
 					<td>
 					<div class="btn-toolbar" role="toolbar" aria-label="...">
-						<!--<div class="btn-group" role="group" aria-label="...">-->
-						
 							<a ng-click="open('modules/websites/viewWebsite.html', x.id)" class="btn btn-primary responsive"> View Details</a>
 							
-							<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status=='active') ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'active'" btn-checkbox-false="'delete'"><span class="glyphicon glyphicon-remove"></span></button>								
-						<!--</div>-->
-						<div class="btn-group" role="group" aria-label="...">
-							<button type="button" class="btn btn-primary ng-click="open('modules/business/viewBusiness.html', x.id=1)">Prieview
-							</button>
-							<!--<button type="button" class="glyphicon glyphicon-remove" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
-							</button>-->
-						</div>
+							<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status=='active') ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'active'" btn-checkbox-false="'delete'"><span class="glyphicon glyphicon-remove"></span></button>
+
+							<button type="button" tooltip="{{dynamicTooltip(x.status, 'expired', 'reactivate')}}" ng-class="(x.status=='expired') ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.status" ng-change="expired(x.id, x.status)" btn-checkbox btn-checkbox-true="'expired'" btn-checkbox-false="'reactivate'"><span class="glyphicon glyphicon-ok"></span></button>
+							
+							
+								<!-- <div class="btn-group">
+								<button type="button" tooltip="{{dynamicTooltip(users.expired, 'Baned','Re-active')}}" ng-class="(users.baned==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="users.baned" ng-change="changeStatusFn('baned', users.baned, users.id)" btn-checkbox btn-checkbox-true="'0'" btn-checkbox-false="'1'">
+								<span ng-if="users.baned==1" class="glyphicon glyphicon-repeat"></span>
+								<span ng-if="users.baned==0 || baned==1" class="glyphicon glyphicon-ban-circle"></span>
+								</button>
+								</div> -->
+								
+					
+							<div class="btn-group" role="group" aria-label="...">
+							<button type="button" class="btn btn-primary ng-click=" "open('modules/business/viewBusiness.html', x.id=1)">Prieview
+							</button>				
+							</div>
+							
+							
 					</div>
 					</td>
 					</tr>
@@ -107,3 +96,11 @@
 		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="webListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(webListCurrentPage,domain_name)"></pagination>
 		<pre>Page: {{webListCurrentPage}} / {{numPages}}</pre>		
 	</div>	
+	
+	<!--  <div class="input-group bottomspace">		
+					<input id="search" type="text" class="form-control" ng-change="searchFilter('business_name', searchProp)" ng-model="searchProp" placeholder="search"/>
+					<span class="input-group-btn">
+					<button class="btn btn-success" type="button">
+						<span class="glyphicon glyphicon-search iconsearch"></span>
+					</span>	
+					</div>	 -->

@@ -4,7 +4,6 @@ define(['app'], function (app) {
     var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService','$route','modalService']; /* Added $routeParams to access route parameters */
     // This is controller for this view
 	var manageuserController = function ($scope, $injector, $routeParams,$location,dataService,$route,modalService) {
-		
 		//variable decalaration
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
