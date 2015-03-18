@@ -34,7 +34,10 @@
 							<tr><td>
 								<table class="table table-responsive">
 									<tr><th>Name</th><td>{{modalOptions.bizList.contact_profile.contact_person}}</td></tr>
-									<tr><th>Photo</th><td>{{modalOptions.bizList.contact_profile.contact_photo}}</td></tr>
+									<tr><th>Photo</th><td>
+									<span ng-repeat="(key, value) in modalOptions.bizList.contact_profile.contact_photo">
+										<img width='50px' ng-src="{{'../server-api/'+value.file_name}}" />
+									</span></td></tr>
 									<tr><th>Designation</th><td>{{modalOptions.bizList.contact_profile.Designation}}</td></tr>
 									<tr><th>Mobile No.</th><td>{{modalOptions.bizList.contact_profile.mobile}}</td></tr>
 									<tr><th>Email</th><td>{{modalOptions.bizList.contact_profile.email}}</td></tr>
@@ -68,7 +71,11 @@
 					<tab heading="Infrastructure" title="Infrastructure Facility">
 						<table class="table table-responsive table-bordered">
 							<tr><th>Infrastucture Heading</th><th>Infrastructure Image</th><th>Infrastucture Description</th></tr>
-							<tr ng-repeat="(key, val) in modalOptions.bizList.infrastructure"><td>{{key}}</td><td>{{val.infra_image}}</td><td ng-bind-html="val.description"></td></tr>
+							<tr ng-repeat="(key, val) in modalOptions.bizList.infrastructure"><td>{{key}}</td><td>
+							<span ng-repeat="(key, value) in val.infra_image">
+								<img width='50px' ng-src="{{'../server-api/'+value.file_name}}" />
+							</span></td>
+							<td ng-bind-html="val.description"></td></tr>
 						</table>
 					</tab>
 		
@@ -88,7 +95,11 @@
 								<td><table class="table table-responsive">
 										<tr><th>Title</th><td>{{val.testimonial_title}}</td></tr>
 										<tr><th>Description</th><td ng-bind-html="val.test_Description"></td></tr>
-										<tr><th>Imgae</th><td>{{val.testimage}}</td></tr>				
+										<tr><th>Imgae</th><td>
+										<span ng-repeat="(key, value) in val.testimage">
+											<img width='50px' ng-src="{{'../server-api/'+value.file_name}}" />
+										</span>
+										</td></tr>				
 								</table></td>	
 							</tr>
 						</table>
@@ -112,7 +123,10 @@
 										<tr><th>Headline</th><td>{{val.headline}}</td></tr>
 										<tr><th>Date</th><td>{{val.newsdate}}</td></tr>
 										<tr><th>URL</th><td>{{val.News}}</td></tr>
-										<tr><th>Image</th><td>{{val.news_image}}</td></tr>
+										<tr><th>Image</th><td>
+										<span ng-repeat="(key, value) in val.news_image">
+											<img width='50px' ng-src="{{'../server-api/'+value.file_name}}" />
+										</span></td></tr>
 										<tr><th>Details</th><td ng-bind-html="val.newsdetails"></td></tr>												
 								</table></td>	
 							</tr>
@@ -125,33 +139,4 @@
 	<div class="modal-footer">
 				<button class="btn btn-primary" ng-click="modalOptions.ok()" title="OK">OK</button>
 	</div>
-</div>			
-
-
-
-
-
-
-
-	
-						<!--<h3>Business Details</h3>
-						<label>ID  :</label>{{modalOptions.bizList.id}}<br>
-						<label>Business Information  :</label>{{modalOptions.bizList.business_info}}<br>
-						<label>Business Logo		 :</label>{{modalOptions.bizList.business_logo}}<br>
-						<label>Business Name  :</label>{{modalOptions.bizList.business_name}}<br>
-						<label>Business Profile  :</label>{{modalOptions.bizList.business_profile}}<br>
-						<label>Business Category  :</label>{{modalOptions.bizList.category}}<br>
-						<label>Contact Profile  :</label>{{modalOptions.bizList.contact_profile}}<br>
-						<label>Created Date  :</label>{{modalOptions.bizList.created_date}}<br>
-						<label>Featured :</label>{{modalOptions.bizList.featured}}<br>
-						<label>Infrastructure  :</label>{{modalOptions.bizList.infrastructure}}<br>
-						<label>Job & Careers  :</label>{{modalOptions.bizList.job_careers}}<br>
-						<label>Manager Id  :</label>{{modalOptions.bizList.manager_id}}<br>
-						<label>Modified Date  :</label>{{modalOptions.bizList.modified_date}}<br>
-						<label>News Coverage :</label>{{modalOptions.bizList.news_coverage}}<br>
-						<label>Ownership :</label>{{modalOptions.bizList.Ownership}}<br>
-						<label>Salseman Id  :</label>{{modalOptions.bizList.salseman_id}}<br>
-						<label>Status :</label>{{modalOptions.bizList.status}}<br>
-						<label>Testimonials  :</label>{{modalOptions.bizList.testimonials}}<br>
-						<label>User Id :</label>{{modalOptions.bizList.user_id}}<br>
-						<label>Verified  :</label>{{modalOptions.bizList.verified}}<br>-->
+</div>		
