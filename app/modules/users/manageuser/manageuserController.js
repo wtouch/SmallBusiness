@@ -157,6 +157,24 @@ define(['app'], function (app) {
 			
 		};
 		
+		$scope.editGroupName = function(colName, colValue, id, editStatus){
+			$scope.changeStatus[colName] = colValue;
+			console.log(colValue);
+			if(editStatus==0){
+				 dataService.put("put/user/"+id,$scope.changeStatus)
+				.then(function(response) { 
+					$scope.alerts.push({type: response.status,msg: response.message});
+				}); 
+			}
+		};	
+		$scope.showDropDown = function($event,opened)		
+		{
+			//$scope.selected = undefined;
+			$scope.user_groups = []; 				  				
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope[opened] = ($scope[opened] ===true) ? false : true;
+		};
 		/*code for delete user	
 		$scope.deleteuser = function(id, status, index){
 			if(status==1){
@@ -170,37 +188,6 @@ define(['app'], function (app) {
  				});
 			}
 		};*/
-		
-		/* function(scope, element, attrs, accordionCtrl) {
-			var getIsOpen, setIsOpen;
-			accordionCtrl.addGroup(scope);
-			scope.isOpen = false;
-			if ( attrs.isOpen ) {
-				getIsOpen = $parse(attrs.isOpen);
-				setIsOpen = getIsOpen.assign;
-				scope.$parent.$watch(getIsOpen, function(value) {
-					scope.isOpen = !!value;
-				});
-			}
-			scope.$watch('isOpen', function(value) {
-				if ( value ) {
-					accordionCtrl.closeOthers(scope);
-				}
-				if ( setIsOpen ) {
-					setIsOpen(scope.$parent, value);
-				}
-			});
-		} */
-		$scope.open = function() {
-			$scope.opened = true;
-		}
-		$scope.close = function() {
-			dataService.put("put/usergroup/"+id, $scope.changeStatus)
-				.then(function(response) { 
-					$scope.alerts.push({type: response.status, msg: response.message});
-				});
-			$scope.opened = false;
-		}
 	
 		$scope.adduser ={};
 		//add user information

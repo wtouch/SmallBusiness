@@ -1,4 +1,5 @@
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	      {{alert.msg}}
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	
+	{{alert.msg}}
 </alert>
 <div class="table-responsive">
 	<table class="table table-bordered">
@@ -11,37 +12,31 @@
 			<th>Manage</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="users in userList | filter: { status : hideDeleted}">
+			<tr ng-repeat="users in userList">
 				<td>{{((usersListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
 				<td>{{users.username}}</td>
-				<td>
-					<p>Salseman
-						<!--select id="selectGroup" class="form-control" ng-model="selectGroup" ng-options="item.id as item.business_name for item in userList"> 
-							<option value="">Select Group</option>
-						</select-->
-						<button type="button" ng-show="!opened" ng-click="open()" tooltip-animation="true" tooltip="Change Group" class="btn btn-default">
-							<span class="glyphicon glyphicon-pencil" go-back></span>
-						</button>
-						<button type="button" ng-show="opened" ng-click="close()" tooltip-animation="true" tooltip="Change Group" class="btn btn-default">
-							<span class="glyphicon glyphicon-ok" go-back></span>
-						</button>
-					</p>
-					<select class="form-control" focus-me="opened" ng-show="opened">
+				<td>{{users.group_id}}
+					<a type="button" class="btn btn-success" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId)">
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+					<select class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-click="showDropDown($event,'opened')" ng-required="true">
 						<option value="">Select Group</option>
-						<option value="0">Admin</option>
-						<option value="1">Salseman</option>
-						<option value="2">Manager</option>
-						<option value="3">Customer</option>
+						<option value="1">Manager</option>
+						<option value="2">Salseman</option>
+						<option value="3">Business Owner</option>
 					</select>
 				</td>
 				<td>{{users.email}}</td>
 				<td>{{users.register_date}}</td>
 				<td>
 					<div class="btn-group">
-						<a class="btn btn-default btn-primary glyphicon glyphicon-refresh" ng-click="openModal('modules/users/manageuser/changepassword.html', users.id)" tooltip-animation="true" tooltip="Reset Password"></a>
+						<a class="btn btn-primary" ng-click="openModal('modules/users/manageuser/changepassword.html', users.id)" tooltip-animation="true" tooltip="Reset Password">
+							<span class="glyphicon glyphicon-refresh"></span>
+						</a>
 					</div>
 					<div class="btn-group">
-						<a class="btn btn-default btn-info glyphicon glyphicon-pencil" href="#/dashboard/users/adduser/{{users.id}}" tooltip-animation="true" tooltip="Edit User Information">
+						<a class="btn btn-info" href="#/dashboard/users/adduser/{{users.id}}" tooltip-animation="true" tooltip="Edit User Information">
+							<span class="glyphicon glyphicon-pencil"></span>
 						</a>
 					</div>
 					
