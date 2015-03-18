@@ -40,7 +40,12 @@
 					<span class="help-block" ng-show="requestsiteForm.contactno.$dirty && requestsiteForm.contactno.$invalid">
 						<span ng-show="requestsiteForm.contactno.$error.pattern && (requestsiteForm.contactno.$dirty || submitted)" class="text-danger">Enter a valid Contact Number .</span>
 					</span>
-			</div>						
+			</div>	
+
+				<div>
+					<input type="hidden" ng-model="reqnewsite.date">
+				</div>	
+			
 		</div>
 		<div class="form-group">
 			<label for="description" class="col-sm-2 control-label">Description</label>
@@ -49,7 +54,6 @@
 					<p ng-hide="requestsiteForm.description.$error.maxlength">
 					{{ 256 - description.length + " Chars left" }}
 					</p>
-					
 					<span class="help-block" ng-show="requestsiteForm.description.$dirty && requestsiteForm.description.$invalid">
 						<span class="text-danger" ng-show="requestsiteForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
 						<span class="text-danger" ng-show="requestsiteForm.description.$error.required">Please enter Product/Services.</span>

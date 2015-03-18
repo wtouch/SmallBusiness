@@ -37,6 +37,8 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
         $scope.user_id = {user_id : 1}; // these are URL parameters
 		// All $scope methods
+		//$scope.user_details = {user_id : 1};
+		
         $scope.pageChanged = function(page,where) { // Pagination page changed
 			angular.extend($scope.template_type, $scope.user_id);
 			dataService.get("/getmultiple/website/"+page+"/"+$scope.pageItems, $scope.template_type)
@@ -68,13 +70,14 @@ define(['app'], function (app) {
 			});
 		};
 		
+		
 		//this is global method for filter 
 		$scope.changeStatus = function(statusCol, showStatus) {
-			console.log($scope.domain_name);
+			console.log($scope.status);
 			$scope.filterStatus= {};
-			(showStatus =="") ? delete $scope.domain_name[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.domain_name, $scope.filterStatus);
-			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.domain_name)
+			(showStatus =="") ? delete $scope.status[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.status, $scope.filterStatus);
+			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.status)
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.website = response.data;
@@ -87,8 +90,7 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
-		
-		
+	
         //function for close alert
 			$scope.closeAlert = function(index) {
 				$scope.alerts.splice(index, 1);
@@ -101,22 +103,16 @@ define(['app'], function (app) {
         // switch functions
         var requestnewsite = function(){
 			 $scope.reqnewsite = {};
-			//reset function{Dnyaneshwar}
-			//$scope.reset = function(reqnewsite) {
-				//$scope.reqnewsite = {};
-			//};
-			//post method for insert data in request template form{trupti}
+			//post method for insert data in request site form{trupti}
 			 $scope.postData = function(reqnewsite) { 
 				console.log(reqnewsite);
-			
 			reqnewsite.user_id=$scope.user_id.user_id;
 			reqnewsite.date = $scope.currentDate;
 			//console.log(user_id);
 				 dataService.post("post/website",reqnewsite,$scope.user_id)
-				.then(function(response) {  //function for response of request temp
+				.then(function(response) {  //function for response of request site
 					$scope.reqnewsite = response.data;
 					console.log(response);
-					//$scope.reset();
 					console.log(reqnewsite);
 				});   
 			}//end of post method{trupti} 
@@ -169,7 +165,7 @@ define(['app'], function (app) {
 			default:
 				websiteslist();
 		};
-		
+	
     };
 	
 	// Inject controller's dependencies

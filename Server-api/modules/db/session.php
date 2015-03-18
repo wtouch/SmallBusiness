@@ -38,14 +38,6 @@ class session {
 			foreach($_SESSION as $sessionName => $sessionValue){
 				unset($_SESSION[$sessionName]);
 			}
-			unset($_SESSION['uid']);
-			unset($_SESSION['name']);
-			unset($_SESSION['email']);
-			
-			$info='info';
-			if(isSet($_COOKIE[$info])){
-				setcookie ($info, '', time() - $cookie_time);
-			}
 			$msg="Logged Out Successfully...";
 		}
 		else{

@@ -15,7 +15,7 @@
 			$password = $input->password; // get password from json
 			
 			$table = "users";
-			// inner join [table name][column name]
+			// inner join [table name][first table column name] = [second table column name]
 			$innerJoin['user_group']['group_id'] = "id";
 			
 			
@@ -31,7 +31,7 @@
 			
 			//$data = $db->selectSingle("users", $where);
 			if($data['status'] == 'error' || $data['status'] == 'warning' || $data['data'] == "" ){
-				throw new Exception('You are not registered user!: '.$data['status'] . " : ". $data['data']);
+				throw new Exception('You are not registered user!');
 			}
 			// password check with hash encode
 			if(passwordHash::check_password($data['data']['password'],$password)){

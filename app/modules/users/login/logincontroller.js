@@ -6,7 +6,7 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var loginController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies) {
-		console.log($cookies);
+		
 		($rootScope.alerts) ? $scope.alerts = $rootScope.alerts : $scope.alerts = [];
 		//function for close alert
 		$scope.closeAlert = function(index) {
@@ -14,14 +14,19 @@ define(['app'], function (app) {
 		};
 		$scope.insert = function(login){
 			
-			dataService.post("/post/user/login",$scope.login)
+			dataService.post("post/user/login",$scope.login)
 			.then(function(response) {
 				if(response.status == 'success'){
 					$location.path("/dashboard");
-					$cookieStore.put("vilas", "vilas");
+					dataService.setUserDetails(response.data);
+					if($scope.login.remember){
+						dataService.rememberPass(true);
+					}
+					dataService.setAuth(true);
+					$rootScope.userDetails = dataService.userDetails;
 				}else{
 					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
-					$cookieStore.remove("vilas");
+					
 				}
 			})
 		}	

@@ -19,15 +19,20 @@
 						<!--select id="selectGroup" class="form-control" ng-model="selectGroup" ng-options="item.id as item.business_name for item in userList"> 
 							<option value="">Select Group</option>
 						</select-->
-						<button type="button"  tooltip-animation="true" tooltip="Change Group" class="btn btn-default glyphicon glyphicon-pencil" go-back></button>
+						<button type="button" ng-show="!opened" ng-click="open()" tooltip-animation="true" tooltip="Change Group" class="btn btn-default">
+							<span class="glyphicon glyphicon-pencil" go-back></span>
+						</button>
+						<button type="button" ng-show="opened" ng-click="close()" tooltip-animation="true" tooltip="Change Group" class="btn btn-default">
+							<span class="glyphicon glyphicon-ok" go-back></span>
+						</button>
 					</p>
-					<!-- <select class="form-control">
+					<select class="form-control" focus-me="opened" ng-show="opened">
 						<option value="">Select Group</option>
 						<option value="0">Admin</option>
 						<option value="1">Salseman</option>
 						<option value="2">Manager</option>
 						<option value="3">Customer</option>
-					</select> -->
+					</select>
 				</td>
 				<td>{{users.email}}</td>
 				<td>{{users.register_date}}</td>
@@ -59,6 +64,6 @@
 	</table>
 </div>
 <div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="usersListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(usersListCurrentPage)"></pagination>Total Records : {{totalRecords}}
+	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="usersListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(usersListCurrentPage)"></pagination>
 	<pre>Page: {{usersListCurrentPage}} / {{numPages}}</pre>
 </div>	
