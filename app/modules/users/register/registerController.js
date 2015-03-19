@@ -12,7 +12,26 @@ define(['app'], function (app) {
 			$scope.pass = (pass1===pass2) ? true : false;
 			//alert($scope.pass);
 		}
-		$scope.register = {country : {} };
+		
+		$scope.alerts = [];
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
+		
+		//check availability
+		$scope.checkuserAvailable = function(register){
+			dataService.post("post/user/checkavailability",register)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}else{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+			});
+		} 
+		
+		
+		/* $scope.register = {country : {} };
 		$scope.contries = dataService.config.country;
 
 		$scope.getState = function(country){
@@ -36,7 +55,7 @@ define(['app'], function (app) {
 				}
 			}
 			$scope.cities = cities;
-		};
+		}; */
 		$scope.submitted = false;
 		$scope.insert = function(register){
 			$scope.params = {url:'login'};

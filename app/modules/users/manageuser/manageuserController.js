@@ -15,6 +15,34 @@ define(['app'], function (app) {
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
 		
+		//$scope.adduser = {country : {} };
+		/*$scope.contries = dataService.config.country;
+		console.log(countries);
+		 $scope.getState = function(country){
+			var states = [];
+			for (var x in $scope.contries){
+				console.log($scope.contries[x].country_name);
+				if($scope.contries[x].country_name == country){
+					for(var y in $scope.contries[x].states){
+						states.push($scope.contries[x].states[y])
+					}
+				}
+			}
+			$scope.states = states;
+		};
+		$scope.getCities = function(state){
+			var cities = [];
+			for (var x in $scope.states){
+				console.log($scope.states[x].state_name);
+				if($scope.states[x].state_name == state){
+					for(var y in $scope.states[x].cities){
+						cities.push($scope.states[x].cities[y])
+					}
+				}
+			}
+			$scope.cities = cities;
+		}; */
+		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
 		if(!$routeParams.userViews) {
@@ -97,7 +125,6 @@ define(['app'], function (app) {
 		
 		//check availability
 		$scope.checkuserAvailable = function(adduser){
-			// $scope.
 			dataService.post("post/user/checkavailability",adduser)
 			.then(function(response) {  
 				if(response.status == 'success'){

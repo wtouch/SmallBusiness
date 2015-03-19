@@ -105,9 +105,11 @@
 							<div class="input-group">
 								<input type="text" id="username" class="form-control" name="username" ng-model="register.username" placeholder="Your Username" minlength="6" maxlength="12" ng-required="true">
 								<div class="input-group-btn">
-									<button type="submit" class="btn btn-success">Check Availability</button>
+									<button type="submit" ng-click="checkuserAvailable(register)" class="btn btn-success">Check Availability</button>
 								</div>
 							</div>
+							<div><alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	{{alert.msg}}
+							</alert></div>
 							<span  class="help-block" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">
 								<span class="text-danger" ng-show="registerForm.username.$error.required && (registerForm.username.$dirty || submitted)">You username is required.</span>
 								<span class="text-danger" ng-show="registerForm.username.$error.minlength && (registerForm.username.$dirty || submitted)">Username is too short.</span>
