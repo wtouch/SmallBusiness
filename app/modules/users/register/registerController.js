@@ -12,6 +12,31 @@ define(['app'], function (app) {
 			$scope.pass = (pass1===pass2) ? true : false;
 			//alert($scope.pass);
 		}
+		$scope.register = {country : {} };
+		$scope.contries = dataService.config.country;
+
+		$scope.getState = function(country){
+			var states = [];
+			for (var x in $scope.contries){
+				if($scope.contries[x].country_name == country){
+					for(var y in $scope.contries[x].states){
+						states.push($scope.contries[x].states[y])
+					}
+				}
+			}
+			$scope.states = states;
+		};
+		$scope.getCities = function(state){
+			var cities = [];
+			for (var x in $scope.states){
+				if($scope.states[x].state_name == state){
+					for(var y in $scope.states[x].cities){
+						cities.push($scope.states[x].cities[y])
+					}
+				}
+			}
+			$scope.cities = cities;
+		};
 		$scope.submitted = false;
 		$scope.insert = function(register){
 			$scope.params = {url:'login'};

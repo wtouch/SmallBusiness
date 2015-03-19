@@ -16,9 +16,9 @@
 				<td>{{((usersListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
 				<td>{{users.username}}</td>
 				<td>{{users.group_id}}
-					<a type="button" class="btn btn-success" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_name', users.group_id, users.id, users.boxId)">
-						<span ng-if="users.boxId == " class="glyphicon glyphicon-pencil"></span>
-						<span ng-if="users.boxId == 1" class="glyphicon glyphicon-ok"></span>
+					<a type="button" class="btn btn-success" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId)">
+						<span ng-hide="users.boxId ==1" class="glyphicon glyphicon-pencil"></span>
+						<span ng-hide="users.boxId ==0" class="glyphicon glyphicon-ok"></span>
 					</a>
 					<select class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-click="showDropDown($event,'opened')" ng-required="true">
 						<option value="">Select Group</option>
@@ -31,7 +31,7 @@
 				<td>{{users.register_date}}</td>
 				<td>
 					<div class="btn-group">
-						<a class="btn btn-primary" href="#/changepass" tooltip-animation="true" tooltip="Reset Password">
+						<a type="button" tooltip="Reset Password" class="btn btn-info " ng-model="users.email" ng-click="forgotPass('email', users.email, users.id)">
 							<span class="glyphicon glyphicon-refresh"></span>
 						</a>
 					</div>

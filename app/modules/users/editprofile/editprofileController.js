@@ -2,11 +2,15 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector'];
+    var injectParams = ['$scope','$rootScope', '$injector','dataService','$location', '$cookieStore', '$cookies'];
 
     // This is controller for this view
-	var editprofileController = function ($scope,$injector) {
-	//datepicker {sonali}	
+	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies) {
+		
+		console.log(dataService.config.property.amenities);
+		console.log(dataService.config.property);
+		$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		//datepicker {sonali}	
 		$scope.today = function() 
 		{
 			$scope.dt = new Date();
@@ -26,16 +30,16 @@ define(['app'], function (app) {
 		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 	/* Date Picker Ended here --------------------------------------------------------------------------------------*/
-	
+	$scope.alerts = [];
 	$scope.passMatch = function(pass1, pass2){
 			$scope.pass = (pass1===pass2) ? true : false;
 			//alert($scope.pass); 
 		}
 		$scope.changepassword = function(changepasswd) {
+			console.log($rootScope.userDetails.id);
 			console.log(changepasswd);
-			$scope.userID = {user_id : $rootScope.userDetails.id}
+			$scope.userID = {user_id : $rootScope.userDetails.id };
 			angular.extend(changepasswd, $scope.userID);
-			console.log(JSON.stringify(changepasswd));
 			dataService.post("post/user/changepass",changepasswd)
 			.then(function(response) {
 				if(response.status == 'success'){

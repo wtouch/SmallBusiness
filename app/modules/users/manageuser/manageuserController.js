@@ -95,8 +95,6 @@ define(['app'], function (app) {
 				});
 		};
 		
-		//$scope.submitted = false;
-		
 		//check availability
 		$scope.checkuserAvailable = function(adduser){
 			// $scope.
@@ -192,6 +190,15 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope[opened] = ($scope[opened] ===true) ? false : true;
 		};
+		
+		$scope.forgotPass = function(colName, colValue, id){
+			$scope.changeStatus[colName] = colValue;				
+				 dataService.post("post/user/forgotpass", $scope.changeStatus)
+				.then(function(response) {					
+					$scope.alerts.push({type: response.status,msg: response.message});
+				}); 
+		};
+		
 		/*code for delete user	
 		$scope.deleteuser = function(id, status, index){
 			if(status==1){
