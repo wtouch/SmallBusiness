@@ -35,12 +35,11 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.currentDate = dataService.currentDate;
-        $scope.user_id = {user_id : 1}; // these are URL parameters
+		//$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		$scope.userDetails = {user_id : 1};
 		// All $scope methods
-		//$scope.user_details = {user_id : 1};
-		
         $scope.pageChanged = function(page,where) { // Pagination page changed
-			angular.extend($scope.domain_name, $scope.user_id);
+			angular.extend($scope.domain_name, $scope.userDetails);
 			dataService.get("getmultiple/website/"+page+"/"+$scope.pageItems, $scope.domain_name)
 			.then(function(response) {  //function for websitelist response
 				$scope.website = response.data;
@@ -71,36 +70,6 @@ define(['app'], function (app) {
 			});
 			}
 		}; 
-		
-		
-		/* $scope.changeStatusFn = function(colName, colValue, id){
-			$scope.changeStatus[colName] = colValue;
-			console.log($scope.changeStatus);
-			if($scope.userViews=='userslist'){
-				dataService.put("put/user/"+id, $scope.changeStatus)
-				.then(function(response) { 
-					if(colName=='status'){
-						$scope.hideDeleted = 1;
-					}
-					$scope.alerts.push({type: response.status, msg: response.message});
-				});
-			} */
-		
-			/* $scope.changeStatus={};
-			$scope.editDomainName = function(colName, colValue, id, editStatus){
-			$scope.changeStatus[colName] = colValue;
-			//console.log(colValue);
-			console.log($scope.changeStatus);
-				if(editStatus==0){
-				 dataService.put("put/website/"+id,$scope.changeStatus)
-				.then(function(response) { 
-				//if(colName=='domain_name'){
-						//$scope.hideDeleted = 1;
-				//}
-					$scope.alerts.push({type: response.status,msg:"One row updated"});
-				}); 
-			}
-			};*/
 			
 		$scope.changeStatus={};
 		$scope.editDomainName = function(colName, colValue, id, editStatus){
@@ -118,7 +87,7 @@ define(['app'], function (app) {
 			}
 		};	 
 		
-		$scope.showInput = function($event,opened)		
+		$scope.showInput = function($event,opened) 		
 		{
 			//$scope.selected = undefined;
 			$scope.domain_name = []; 				  				
@@ -126,25 +95,9 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope[opened] = ($scope[opened] ===true) ? false : true;
 		};
-		/* $scope.changeStatus = {};
-		$scope.changeStatusFn = function(colName, colValue, id){
-		$scope.changeStatus[colName] = colValue;
-		$scope.filterStatus= {};
-		dataService.get("getmultiple/website/1"+id, $scope.changeStatus)
-		.then(function(response) { 
-		if(response.status == 'success'){
-			$scope.website = response.data;
-			$scope.totalRecords = response.totalRecords;
-		}else{
-			$scope.website = {};
-			$scope.totalRecords = {};
-		$scope.alerts.push({type: response.status, msg: "No data Found"});
-		});
-		}; */
 		
-		 
-		 //this is global method for filter 
-		$scope.changeStatus = function(statusCol, showStatus) {
+		//this is global method for filter 
+		$scope.changeStatusFn = function(statusCol, showStatus) {
 			console.log($scope.status);
 			$scope.filterStatus= {};
 			(showStatus =="") ? delete $scope.status[statusCol] : $scope.filterStatus[statusCol] = showStatus;
@@ -162,8 +115,7 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};  
-		
-		
+	
         //function for close alert
 			$scope.closeAlert = function(index) {
 				$scope.alerts.splice(index, 1);
@@ -172,6 +124,10 @@ define(['app'], function (app) {
 		if(!$scope.websitePart) {
 			$location.path('/dashboard/websites/websiteslist');
 		}
+		//for tooltip
+		$scope.dynamicTooltip = function(status, active, notActive){
+			return (status==1) ? active : notActive;
+		};
         
         // switch functions
         var requestnewsite = function(){
@@ -179,10 +135,11 @@ define(['app'], function (app) {
 			//post method for insert data in request site form{trupti}
 			 $scope.postData = function(reqnewsite) { 
 				console.log(reqnewsite);
-			reqnewsite.user_id=$scope.user_id.user_id;
+			//reqnewsite.userDetails=$scope.userDetails.user_id;
+			$scope.userDetails=$scope.userDetails;
 			reqnewsite.date = $scope.currentDate;
 			//console.log(user_id);
-				 dataService.post("post/website",reqnewsite,$scope.user_id)
+				 dataService.post("post/website",reqnewsite,$scope.userDetails)
 				.then(function(response) {  //function for response of request site
 					$scope.reqnewsite = response.data;
 					console.log(response);
@@ -194,21 +151,31 @@ define(['app'], function (app) {
         var websiteslist = function(){
 			//function for websiteslist{Dnyaneshwar}
 			$scope.domain_name = {status: 1}
-			//$scope.template_type = {template_type : 'public', status:1};
-			angular.extend($scope.domain_name, $scope.user_id);
+			angular.extend($scope.domain_name, $scope.userDetails);
 			dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.domain_name)
 			.then(function(response) {  //function for websiteslist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
-					console.log($scope.website);
 					$scope.totalRecords = response.totalRecords;	
 				}
 				else
 				{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				};
-				//$scope.website = response.data;
 			});
+			
+			//delete button {trupti}
+			$scope.deleted = function(id, status){
+				$scope.deletedData = {status : status};
+				dataService.put("put/website/"+id, $scope.deletedData)
+				.then(function(response) { //function for businesslist response
+					if(response.status == 'success'){
+						//$scope.hideDeleted = 1;
+						//console.log(response);
+						$scope.website=response.data;
+					}
+				});
+			};			
 		};
 		
 		//function for active button
@@ -230,7 +197,7 @@ define(['app'], function (app) {
         
         var requestedsitelist = function(){
 			//function for requestedsitelist{Dnyaneshwar}
-			dataService.get("getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems, $scope.user_id)
+			dataService.get("getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems, $scope.userDetails)
 			.then(function(response) {  //function for requestedsitelist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
@@ -260,11 +227,8 @@ define(['app'], function (app) {
 		};
 	
     };
-	
 	// Inject controller's dependencies
 	websitesController.$inject = injectParams;
 	// Register/apply controller dynamically
     app.register.controller('websitesController', websitesController);
-	
-	
 });
