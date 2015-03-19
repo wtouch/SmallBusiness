@@ -88,18 +88,14 @@ define(['angular',
 				headerTitle : next.$$route.label,
 				subTitle : next.$$route.label
 			};
-			console.log(next);
 			var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout'){
 				dataService.logout();
 				$rootScope.userDetails = {};
 			}
-			console.log(next.pathParams.resetPassKey);
-			console.log('/changepass/'+next.pathParams.resetPassKey);
 			if(dataService.auth == false){
 				var changePassUrl = '"/changepass/'+next.pathParams.resetPassKey+'"';
 				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout' || nextUrl == '/changepass/:resetPassKey') {
-					console.log(nextUrl);
 				} else {
 					$location.path("/login");
 					$rootScope.alerts = [{type: "warning", msg: "You are not logged in!"}];
