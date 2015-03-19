@@ -86,7 +86,8 @@ define(['angular',
 			$rootScope.appConfig = {
 				metaTitle : "Small Business",
 				headerTitle : next.$$route.label,
-				subTitle : next.$$route.label
+				subTitle : next.$$route.label,
+				assetPath : '../server-api'
 			};
 			var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout'){

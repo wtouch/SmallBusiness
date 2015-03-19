@@ -180,7 +180,7 @@ define(['app'], function (app) {
 		
 		//function for active button
 			var showActive= function(status){
-				$scope.status = {status : 'active',status:1};
+				$scope.status = {status:1};
 				dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.status)
 				.then(function(response) {  //function for templatelist response
 						if(response.status == 'success'){

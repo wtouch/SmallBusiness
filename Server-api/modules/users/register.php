@@ -5,23 +5,20 @@
 		$insert = $db->insert("users", $body);
 		echo json_encode($insert);
 	}
-	/* function userGroup($body){
-		$db = new dbHelper();	
-		$insert = $db->insert("user_group", $body);
-		echo json_encode($insert);
-	}  */
 	function checkAvailability($body){
 		$db = new dbHelper();
 		$input = json_decode($body);
-		$where['username'] = $input->username;
+		foreach ($input as $key => $value){
+			$where[$key] = $value;
+		}
 		
 		$select = $db->select("users", $where);
 		if($select['status'] === 'success' && $select['data'] >=1){
-			$response["message"] = "Username not available!";
+			$response["message"] = (isset($where['email'])) ? "Email-ID not available!" : "Username not available!";
 			$response["status"] = "warning";
 			$response["data"] = null;
 		}else{
-			$response["message"] = "Username available!";
+			$response["message"] = (isset($where['email'])) ? "Email-ID available!" : "Username available!";
 			$response["status"] = "success";
 			$response["data"] = null;
 		}

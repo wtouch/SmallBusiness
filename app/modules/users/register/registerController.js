@@ -6,32 +6,34 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var registerController = function ($scope,$injector,dataService) {
-		console.log("this is register ctrl");
-		//templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/users/register/register.html';
+		
 		$scope.passMatch = function(pass1, pass2){
 			$scope.pass = (pass1===pass2) ? true : false;
-			//alert($scope.pass);
 		}
 		
 		$scope.alerts = [];
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
+		$scope.register = {address:{}};
 		
 		//check availability
-		$scope.checkuserAvailable = function(register){
-			dataService.post("post/user/checkavailability",register)
+		$scope.checkuserAvailable = function(fieldName, fieldValue){
+			$scope.checkParams = {};
+			$scope.checkParams[fieldName] = fieldValue;
+			dataService.post("post/user/checkavailability",$scope.checkParams)
 			.then(function(response) {  
 				if(response.status == 'success'){
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.registerForm[fieldName].$setValidity('available', true);
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.registerForm[fieldName].$setValidity('available', false);
 				}
+				$scope.availabilityMsg = response.message;
 			});
 		} 
 		
 		
-		/* $scope.register = {country : {} };
+		
 		$scope.contries = dataService.config.country;
 
 		$scope.getState = function(country){
@@ -55,7 +57,7 @@ define(['app'], function (app) {
 				}
 			}
 			$scope.cities = cities;
-		}; */
+		};
 		$scope.submitted = false;
 		$scope.insert = function(register){
 			$scope.params = {url:'login'};
@@ -67,6 +69,7 @@ define(['app'], function (app) {
 					$scope.submitted = true;
 				}
 				console.log(response);
+				
 			},function(err){
 				console.log(err);
 			})

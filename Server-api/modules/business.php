@@ -3,15 +3,16 @@
 	$db = new dbHelper();
 	$reqMethod = $app->request->getMethod();
 	
+	$table = "business";
 	//getMethod
 	if($reqMethod=="GET"){
 		if(isset($id)){
 			$where['id'] = $id;
-			$data = $db->select("business", $where);
+			$data = $db->select($table, $where);
 			echo json_encode($data);
 			
 		}else{
-			$table = "business";
+			
 			
 			$like = [];
 			if(isset($_GET['search']) && $_GET['search'] == true){
@@ -48,7 +49,7 @@
 			$data = $db->selectJoin($table, $where, $limit,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols);
 			
 			// this is used to count totalRecords with only where clause
-			$totalRecords['totalRecords'] = count($db->select("business", $where)['data']);		
+			$totalRecords['totalRecords'] = count($db->selectJoin($table, $where, $limit=null,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols)['data']);		
 			
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
 			$data = array_merge($totalRecords,$data);
@@ -58,14 +59,14 @@
 	
 	
 	if($reqMethod=="POST"){
-		$insert = $db->insert("business", $body);
+		$insert = $db->insert($table, $body);
 		echo json_encode($insert);
 	}
 	
 	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record
-		$update = $db->update("business", $body, $where);
+		$update = $db->update($table, $body, $where);
 		echo json_encode($update);
 	}
 

@@ -140,7 +140,7 @@ function sendMail(){
 	$body = $app->request->getBody();
 
 	try{
-			include 'modules/mail/index.php';
+			include 'modules/mail.php';
 	}
 	catch(Exception $e) {
 		echo "Error: '".$e->getMessage()."'";

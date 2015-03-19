@@ -7,8 +7,6 @@ define(['app'], function (app) {
     // This is controller for this view
 	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies) {
 		
-		console.log(dataService.config.property.amenities);
-		console.log(dataService.config.property);
 		$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		//datepicker {sonali}	
 		$scope.today = function() 
@@ -44,6 +42,7 @@ define(['app'], function (app) {
 			.then(function(response) {
 				if(response.status == 'success'){
 					$scope.changepasswd = {};
+					$scope.changepassForm.$setPristine();
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}else{
 					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
