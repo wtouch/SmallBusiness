@@ -65,7 +65,7 @@ define(['app'], function (app) {
 					picArr[picArrKey] = data.details;
 					console.log(data.message);
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.alerts.push({type: data.status, msg: data.message});
 				}
 				
 			}); 

@@ -241,7 +241,7 @@ define(['app'], function (app) {
 			obj.parse = function(oldObj){
 				var newObj = {};
 				angular.forEach(oldObj, function(value, key) {
-				  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
+				  this[key] = (value.slice(0, 1) == "{" ) ? JSON.parse(value) : value;
 				}, newObj);
 				return newObj;
 			}

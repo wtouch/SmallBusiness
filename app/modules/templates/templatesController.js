@@ -6,26 +6,20 @@ define(['app'], function (app) {
     // This is controller for this view
 	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
 		
-		console.log($rootScope.userDetails);
+		//console.log($rootScope.userDetails);
 		//this code block for modal{trupti}
 		$scope.open = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
-				var oldObj = response.data;
-				var newObj = {};
-				
-				angular.forEach(oldObj, function(value, key) {
-				  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
-				}, newObj);
-				
-				console.log(newObj);
+				//console.log(newObj);
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
 					size : 'lg'
 				};
 				var modalOptions = {
-					tempList: newObj  // assign data to modal
+					tempList: dataService.parse(response.data)  // assign data to modal
 				};
+
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
 				});
@@ -37,7 +31,9 @@ define(['app'], function (app) {
 		
 		//this model for show website details when click on apply button{trupti}
 		$scope.showWebsitedetails = function (url, tempId) {
-			dataService.get("getmultiple/website/1/50")
+			$scope.status = {status:1};
+			angular.extend($scope.status, $scope.userDetails);
+			dataService.get("getmultiple/website/1/50",$scope.status)
 			.then(function(response) {
 				var oldObj = response.data;
 				var modalDefaults = {
@@ -45,11 +41,33 @@ define(['app'], function (app) {
 					size : 'lg'
 				};
 				var modalOptions = {
-					tempList: oldObj  // assign data to modal
+					websiteList: oldObj,  // assign data to modal
+					tempId : {templates : {template_id : [tempId]}},
+					updateConfig : function(formData){
+						modalOptions.formData = formData;
+					},
+					
 				};
-				console.log(oldObj);
+				//console.log(dataService.parse($rootScope.userDetails));
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					console.log("modalOpened");
+					var formData = modalOptions.formData;
+					var userConfig = dataService.parse($rootScope.userDetails).config;
+					var webConfig = dataService.parse(modalOptions.websiteList[formData.website_id].config);
+					var userTemplateConfig = (userConfig.templates.template_id) ? userConfig.templates.template_id.push(tempId) : angular.extend(userConfig,formData.config);
+					
+					console.log(userTemplateConfig);
+					console.log(userConfig);
+					//angular.extend(userConfig, formData.config);
+					angular.extend(webConfig, formData.config);
+					dataService.put('put/website/'+formData.website_id, {config : webConfig})
+					.then(function(response){
+						console.log(response.message);
+					});
+					dataService.put('put/user/'+$rootScope.userDetails.id, {config : userConfig})
+					.then(function(response){
+						console.log(response.message);
+					});  
+					
 				});
 			});
 		};
@@ -68,20 +86,26 @@ define(['app'], function (app) {
 		$scope.customTempCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
-		//$rootScope.appConfig="" ;
 		$scope.currentDate = dataService.currentDate;
-		//$scope.user_id = {user_id : 2};// these are URL parameters
 		$scope.userDetails = {user_id : $rootScope.userDetails.id};
-		// All $scope methods
 		
-		$scope.pageChanged = function(page, template_type) { // Pagination page changed
+		// All $scope methods
+		$scope.pageChanged = function(page, where) { // Pagination page changed
 			angular.extend(template_type, $scope.userDetails);
 			dataService.get("getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response){  //function for templatelist response
 				$scope.templates = response.data;
-				//console.log($scope.properties);
+				console.log($scope.templates);
 			});
 		};
+	
+		//for get the single col value from db{trupti} 
+		$scope.changeScope = function(value, object){
+			$scope.website.userDetails = value.id;
+			//$scope.addproduct.business_id = value.id;
+			$scope.changeScopeObject($scope.domain_name);
+		}
+		
 		//this is global method for filter 
 		$scope.changeStatus = function(statusCol, showStatus) {
 			console.log($scope.template_type);
@@ -101,15 +125,19 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
-		
+	
+		//for search filter{trupti}
 		$scope.searchFilter = function(statusCol, showStatus) {
 			$scope.search = {search: true};
 			$scope.filterStatus= {};
-			(showStatus =="") ? delete $scope.template_type[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.template_type, $scope.filterStatus);
-			angular.extend($scope.template_type, $scope.search);
-			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
-			.then(function(response) {  //function for templatelist response
+			$scope.webParam={};
+			(showStatus =="") ? delete $scope.webParam[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.webParam, $scope.filterStatus);
+			angular.extend($scope.webParam, $scope.search);
+			if(showStatus.length >= 4 || showStatus == ""){
+			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.webParam)
+			.then(function(response) {  //function for websitelist response
+			console.log(response);
 				if(response.status == 'success'){
 					$scope.templates = response.data;
 					$scope.totalRecords = response.totalRecords;
@@ -118,9 +146,10 @@ define(['app'], function (app) {
 					$scope.totalRecords = {};
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				//console.log($scope.properties);
 			});
-		};
+			}
+		}; 
+	
 		
 		//function for close alert
 		$scope.closeAlert = function(index) {
@@ -170,6 +199,7 @@ define(['app'], function (app) {
 				$scope.templates = response.data;
 			});
 		};
+		//userDetails.config.templates
 		
 		var listoftemplates = function(){
 			$scope.template_type = {template_type : 'public', status:1};

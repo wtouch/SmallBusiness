@@ -38,7 +38,7 @@
 				<th>Manage</th>
 			</thead>
 				<tbody>
-					<tr ng-repeat="x in website | orderBy:sort ">
+					<tr ng-repeat="x in website | orderBy : sort">
 					<td>{{((webListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 					<td>{{x.domain_name}} 
 					<a type="button" class="btn btn-warning pull-right" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')" ng-change="editDomainName('domain_name', x.domain_name, x.id,x.boxId)" tooltip="Edit">
