@@ -15,13 +15,11 @@ define(['app'], function (app) {
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
 		
-		//$scope.adduser = {country : {} };
-		/*$scope.contries = dataService.config.country;
-		console.log(countries);
-		 $scope.getState = function(country){
+		$scope.contries = dataService.config.country;
+
+		$scope.getState = function(country){
 			var states = [];
 			for (var x in $scope.contries){
-				console.log($scope.contries[x].country_name);
 				if($scope.contries[x].country_name == country){
 					for(var y in $scope.contries[x].states){
 						states.push($scope.contries[x].states[y])
@@ -33,7 +31,6 @@ define(['app'], function (app) {
 		$scope.getCities = function(state){
 			var cities = [];
 			for (var x in $scope.states){
-				console.log($scope.states[x].state_name);
 				if($scope.states[x].state_name == state){
 					for(var y in $scope.states[x].cities){
 						cities.push($scope.states[x].cities[y])
@@ -41,7 +38,11 @@ define(['app'], function (app) {
 				}
 			}
 			$scope.cities = cities;
-		}; */
+		};
+		
+		$scope.manage_user = dataService.config.manage_user;
+		console.log($scope.manage_user);
+	
 		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 

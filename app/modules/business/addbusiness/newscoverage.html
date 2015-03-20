@@ -1,7 +1,7 @@
 
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(news_coverage, addbusiness.news_coverage)" title="Add News Coverage">Add News Coverage</button>
+		<button class="btn btn-default btn-primary pull-right" ng-click="addNewsCoverage(news_coverage, addbusiness.news_coverage)" title="Add News Coverage">Add News Coverage</button>
 	</div>
 </div>
 
@@ -31,10 +31,8 @@
 <div class="form-group">
 	<label for="mediatype" class="col-sm-3 control-label" name="mediatype">Media Type</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="mediatype" id="mediatype"  ng-model="news_coverage.desc.mediaType" required>		
+		<select class="form-control" name="mediatype" id="mediatype"  ng-model="news_coverage.desc.mediaType" required ng-options="item as item for item in biz.media_type">		
 			<option value="">Select Media Type</option>
-			<option value="Newspaper">Newspaper</option>
-			<option value="Television">Television</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.mediatype.$dirty && addbusinessForm.mediatype.$invalid">
 		<span ng-show="addbusinessForm.mediatype.$error.required" class="text-danger">Media Type is required.</span>
@@ -115,7 +113,8 @@
 
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-	  <button type="submit" class="btn btn-success"  title="Save" ng-click="postData(addbusiness)">Submit</button>
+	  <button type="submit" class="btn btn-success"  title="Save"  ng-click="postData(addbusiness)">Submit</button>
+	   <button type="submit"  class="btn btn-success" title="Edit" ng-click="update(addbusiness)">Update</button>
 	</div>
 </div>							
 <!--ng-disabled="addbusinessForm.$invalid"-->
