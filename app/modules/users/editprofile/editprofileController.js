@@ -8,6 +8,7 @@ define(['app'], function (app) {
 	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies) {
 		
 		$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		console.log($rootScope.userDetails);
 		//datepicker {sonali}	
 		$scope.today = function() 
 		{

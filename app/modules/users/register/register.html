@@ -47,7 +47,7 @@
 					<div class="form-group">
 						<label for="country" class="col-sm-2 control-label" name="country" >Country</label>
 						<div class="col-sm-3">
-							<select class="form-control" id="country" name="country" ng-model="register.address.country" required ng-change="getState(register.address.country)" ng-options="item.country_name as item.country_name for item in contries">		
+							<select class="form-control" id="country" name="country" ng-model="register.country" required ng-change="getState(register.country)" ng-options="item.country_name as item.country_name for item in contries">		
 								<option value="">Select Country</option>
 							</select>{{register.country}}
 							<span class="help-block" ng-show="registerForm.country.$dirty && registerForm.country.$invalid">
@@ -55,7 +55,7 @@
 							</span>				
 						</div>
 						<div class="col-sm-3">
-							<select class="form-control" id="state" name="state" ng-model="register.address.state" ng-change="getCities(register.address.state)" required ng-options="item.state_name as item.state_name for item in states">		
+							<select class="form-control" id="state" name="state" ng-model="register.state" ng-change="getCities(register.state)" required ng-options="item.state_name as item.state_name for item in states">		
 								<option value="">Select State</option>
 							</select>
 							<span class="help-block" ng-show="registerForm.state.$dirty && registerForm.state.$invalid">
