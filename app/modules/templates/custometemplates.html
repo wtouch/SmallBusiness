@@ -3,7 +3,7 @@
 		<div class="col-sm-3"> 
 			<div class="bottomspace">
 				<label for="search" class="control-label">Search </label>		
-				<input id="search" type="text" class="form-control" ng-model="searchProp" placeholder="search"/>
+				<input id="search" type="text" class="form-control" ng-change="searchFilter('template_name', searchProp)" ng-model="searchProp" placeholder="search"/>
 			</div>
 		</div>			 				  
 		<div class="col-sm-3">
@@ -45,7 +45,7 @@
 				<thead>
 					<th>Sr.No.</th>
 					<th>Template Name</th>
-					<th>custom</th>
+					<!-- <th>custom</th> -->
 					<th>Development Status</th>
 					<th>Create Date</th>
 					<th>Modified Date</th>
@@ -55,7 +55,7 @@
 						<tr ng-repeat="x in templates">
 							<td>{{((customTempCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 							<td>{{x.template_name}}</td>
-							<td>{{x.custom}}</td>
+							<!-- <td>{{x.custom}}</td> -->
 							<td>
 							<button type="button" ng-show="x.development_status=='rejected'"tooltip="{{dynamicTooltip(x.development_status, 'rejected', 'order_placed')}}" ng-class="(x.development_status==rejected) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.development_status" ng-change="reject(x.id, x.development_status)" btn-checkbox btn-checkbox-true="'rejected'" btn-checkbox-false="'order_placed'"><span class="glyphicon glyphicon-refresh">Resend Request</span></button>
 							<span ng-show="x.development_status!='rejected'">{{x.development_status}}</span>

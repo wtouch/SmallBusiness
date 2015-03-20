@@ -238,6 +238,13 @@ define(['app'], function (app) {
 			obj.setBase = function(path){
 				serviceBase = path;
 			};
+			obj.parse = function(oldObj){
+				var newObj = {};
+				angular.forEach(oldObj, function(value, key) {
+				  this[key] = (value.slice(0, 1) == "{" ) ? JSON.parse(value) : value;
+				}, newObj);
+				return newObj;
+			}
 			obj.config = (sessionStorage.config) ? JSON.parse(sessionStorage.config) : null ;
 				$http.get('js/config.json').success(function(response){
 					sessionStorage.config =  JSON.stringify(response);

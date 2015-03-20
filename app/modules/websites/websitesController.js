@@ -36,6 +36,7 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.currentDate = dataService.currentDate;
 		$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
 			angular.extend($scope.domain_name, $scope.userDetails);
@@ -175,12 +176,12 @@ define(['app'], function (app) {
 			};			
 		};
 		
-			//function for active button
-			var showActive= function(status){
-				$scope.status = {status:1};
-				dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.status)
+		//function for active button
+		var showActive= function(status){
+		$scope.status = {status:1};
+			dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.status)
 				.then(function(response) {  //function for templatelist response
-						if(response.status == 'success'){
+					if(response.status == 'success'){
 						$scope.website=response.data;
 						$scope.totalRecords = response.totalRecords;
 					}
@@ -190,7 +191,7 @@ define(['app'], function (app) {
 					};
 				});
 			
-			}//end of active button function
+		}//end of active button function
         
         var requestedsitelist = function(){
 			//function for requestedsitelist{Dnyaneshwar}
