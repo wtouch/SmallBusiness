@@ -35,6 +35,28 @@ define(['app'], function (app) {
 			$modalOptions.close('ok');
 		};
 		
+		//this model for show website details when click on apply button{trupti}
+		$scope.showWebsitedetails = function (url, tempId) {
+			dataService.get("getmultiple/website/1/50")
+			.then(function(response) {
+				var oldObj = response.data;
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+					size : 'lg'
+				};
+				var modalOptions = {
+					tempList: oldObj  // assign data to modal
+				};
+				console.log(oldObj);
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log("modalOpened");
+				});
+			});
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+	
 		//for display form parts
 		$scope.tempPart = $routeParams.tempPart;
 		// all $scope object goes here
