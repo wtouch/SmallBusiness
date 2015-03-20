@@ -2,12 +2,8 @@
 <div class="form-group">
 	<label for="business_type" class="col-sm-3 control-label" name="business_type" >Primary Business Type</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="business_type" id="business_type"  ng-model="addbusiness.business_profile.business_type" required>		
+		<select class="form-control" name="business_type" id="business_type"  ng-model="addbusiness.business_profile.business_type" required ng-options="item as item for item in biz.business_type">		
 			<option value="">Select Type</option>
-			<option value="Trader">Trader</option>
-			<option value="Retailer">Retailer</option>
-			<option value="Exporter">Exporter</option>
-			<option value="Buying House">Buying House</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.business_type.$dirty && addbusinessForm.business_type.$invalid">
 			<span ng-show="addbusinessForm.business_type.$error.required" class="text-danger">Primary Business Type is required.</span>
@@ -69,7 +65,7 @@
 		<div class="checkbox">		
 			<label ng-repeat="x in biz.additional_business">
 				<span>
-					<input type="checkbox" checklist-model="addbusiness.business_profile" checklist-value="x"> {{x}}
+					<input type="checkbox" checklist-model="addbusiness.business_profile.additional_business" checklist-value="x"> {{x}}
 				</span>
 			</label>
 		</div>
