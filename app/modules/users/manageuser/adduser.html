@@ -19,9 +19,15 @@
 			<div class="form-group">
 				<label  for="username" class="col-sm-2 control-label">User Name</label>
 				<div class="col-sm-9">
-					<input class="form-control" type="text" id="username" name="username" ng-model="adduser.username" placeholder="User Name"  required>
+					<div class="input-group">
+						<input class="form-control" type="text" id="username" name="username" ng-model="adduser.username" placeholder="User Name"  required>
+						<div class="input-group-btn">
+							<button type="submit" ng-click="checkuserAvailable(adduser)" class="btn btn-success">Check Availability</button>
+						</div>
+					</div>	
 					<span class="help-block" ng-show="adduserForm.username.$dirty && adduserForm.username.$invalid">
 						<span class="text-danger" ng-show="adduserForm.username.$error.required">User Name is required.</span>
+				
 					</span>
 				</div>
 			</div>
@@ -52,39 +58,24 @@
 			<div class="form-group">
 				<label for="Address" class="col-sm-2 control-label">Address</label>
 				<div class="col-sm-2">
-					<select class="form-control" name="Country" id="Country"  ng-model="adduser.country" required>		
+					<select class="form-control" name="Country" id="Country"  ng-model="adduser.country" ng-change="getState(adduser.country)" ng-options="item.country_name as item.country_name for item in contries" required>		
 						<option value="">Select Country</option>
-						<option value="India">India</option>
-						<option value="Australia">Australia</option>
-						<option value="China">China</option>
-						<option value="America">America</option>
-						<option value="Belgium">Belgium</option>
 					</select>
 					<span class="help-block" ng-show="adduserForm.Country.$dirty && adduserForm.Country.$invalid">
 						<span class="text-danger" ng-show="adduserForm.Country.$error.required">Country is required.</span>
 					</span>				
 				</div>
 				<div class="col-sm-2">
-					<select class="form-control" name="state" id="state" ng-model="adduser.state" required>		
+					<select class="form-control" name="state" id="state" ng-model="adduser.state" ng-change="getCities(adduser.state)" ng-options="item.state_name as item.state_name for item in states" required>		
 						<option value="">Select State</option>
-						<option value="Maharashtra">Maharashtra</option>
-						<option value="Rajasthan">Rajasthan</option>
-						<option value="Goa">Goa</option>
-						<option value="Delhi">Delhi</option>
-						<option value="Kerla">Kerla</option>
 					</select>
 					<span class="help-block" ng-show="adduserForm.state.$dirty && adduserForm.state.$invalid">
 						<span class="text-danger" ng-show="adduserForm.state.$error.required">State is required.</span>
 					</span>				
 				</div>
 				<div class="col-sm-2">
-					<select class="form-control" name="address" id="address" ng-model="adduser.address">		
+					<select class="form-control" name="address" id="address" ng-model="adduser.address" ng-options="item.city_name as item.city_name for item in cities" required>		
 						<option value="">Select City</option>
-						<option value="Pune">Pune</option>
-						<option value="Mumbai">Mumbai</option>
-						<option value="Aurangabad">Aurangabad</option>
-						<option value="Nashik">Nashik</option>
-						<option value="Nanded">Nanded</option>
 					</select>
 					<span class="help-block" ng-show="adduserForm.address.$dirty && adduserForm.address.$invalid">
 						<span class="text-danger" ng-show="adduserForm.address.$error.required">State is required.</span>

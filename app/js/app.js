@@ -43,6 +43,12 @@ define(['angular',
 				
 				.when('/logout', route.resolve({controller:'login', template: 'logout', label: 'Logout'}, 'users/login/'))
 				
+				.when('/changepass',route.resolve({controller: 'editprofile',template: 'changepass',label: "Change Password"
+                }, 'users/editprofile/')) 
+				
+				.when('/changepass/:resetPassKey',route.resolve({controller: 'login',template: 'changepass',label: "Change Password"
+                }, 'users/login/'))
+				
 				.when('/register', route.resolve({controller:'register', template: 'register', label: 'Register'}, 'users/register/'))
 				
 				.when('/forgotpass', route.resolve({controller:'login', template: 'forgotpass', label: 'Forgot Password'}, 'users/login/'))
@@ -73,14 +79,15 @@ define(['angular',
 	}]);
 	
 		
-	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies) {
+	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies,$routeParams) {
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
 			$rootScope.userDetails = dataService.userDetails;
 			$rootScope.breadcrumbs = breadcrumbs;
 			$rootScope.appConfig = {
 				metaTitle : "Small Business",
 				headerTitle : next.$$route.label,
-				subTitle : next.$$route.label
+				subTitle : next.$$route.label,
+				assetPath : '../server-api'
 			};
 			var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout'){
@@ -88,14 +95,14 @@ define(['angular',
 				$rootScope.userDetails = {};
 			}
 			if(dataService.auth == false){
-				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout') {
-
+				var changePassUrl = '"/changepass/'+next.pathParams.resetPassKey+'"';
+				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout' || nextUrl == '/changepass/:resetPassKey') {
 				} else {
 					$location.path("/login");
 					$rootScope.alerts = [{type: "warning", msg: "You are not logged in!"}];
 				}
 			}else{
-				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/') {
+				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/changepass/:resetPassKey') {
 					$location.path("/dashboard");
 				}
 			};

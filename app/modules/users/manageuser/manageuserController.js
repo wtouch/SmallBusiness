@@ -4,7 +4,6 @@ define(['app'], function (app) {
     var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService','$route','modalService']; /* Added $routeParams to access route parameters */
     // This is controller for this view
 	var manageuserController = function ($scope, $injector, $routeParams,$location,dataService,$route,modalService) {
-		
 		//variable decalaration
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -15,6 +14,34 @@ define(['app'], function (app) {
 		$scope.userList = [];
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
+		
+		//$scope.adduser = {country : {} };
+		/*$scope.contries = dataService.config.country;
+		console.log(countries);
+		 $scope.getState = function(country){
+			var states = [];
+			for (var x in $scope.contries){
+				console.log($scope.contries[x].country_name);
+				if($scope.contries[x].country_name == country){
+					for(var y in $scope.contries[x].states){
+						states.push($scope.contries[x].states[y])
+					}
+				}
+			}
+			$scope.states = states;
+		};
+		$scope.getCities = function(state){
+			var cities = [];
+			for (var x in $scope.states){
+				console.log($scope.states[x].state_name);
+				if($scope.states[x].state_name == state){
+					for(var y in $scope.states[x].cities){
+						cities.push($scope.states[x].cities[y])
+					}
+				}
+			}
+			$scope.cities = cities;
+		}; */
 		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
@@ -54,12 +81,22 @@ define(['app'], function (app) {
 		// Date Picker Ended here 
 		
 		//code for pagination
-		$scope.pageChanged = function(page) { 
-			dataService.get("getmultiple/user/"+page+"/"+$scope.pageItems).then(function(response){
-				$scope.userList = response.data;
-				console.log(response.data);
-				$scope.totalRecords = response.totalRecords;
-			});
+		$scope.pageChanged = function(page) {
+			if($scope.userViews == 'userslist'){
+				dataService.get("getmultiple/user/"+page+"/"+$scope.pageItems).then(function(response){
+					$scope.userList = response.data;
+					console.log(response.data);
+					$scope.totalRecords = response.totalRecords;
+				});
+			}
+			if($scope.userViews == 'usersgroup'){
+				dataService.get("getmultiple/usergroup/"+page+"/"+$scope.pageItems).then(function(response){
+					$scope.usergroupList = response.data;
+					console.log(response.data);
+					$scope.totalRecords = response.totalRecords;
+				});
+			}
+			
 		};	
 		//End of pagination
 		
@@ -86,14 +123,17 @@ define(['app'], function (app) {
 				});
 		};
 		
-		
-		//code for check password
-		$scope.passMatch = function(pass1, pass2){
-			$scope.pass = (pass1===pass2) ? true : false;
-			//alert($scope.pass);
-		}
-		$scope.submitted = false;
-		
+		//check availability
+		$scope.checkuserAvailable = function(adduser){
+			dataService.post("post/user/checkavailability",adduser)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}else{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+			});
+		} 
 		
 		//code for search filter
 		$scope.searchFilter = function(statusCol, colValue) {
@@ -141,7 +181,9 @@ define(['app'], function (app) {
 			if($scope.userViews=='userslist'){
 				dataService.put("put/user/"+id, $scope.changeStatus)
 				.then(function(response) { 
-					
+					if(colName=='status'){
+						$scope.hideDeleted = 1;
+					}
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			}
@@ -157,6 +199,33 @@ define(['app'], function (app) {
 			
 		};
 		
+		$scope.editGroupName = function(colName, colValue, id, editStatus){
+			$scope.changeStatus[colName] = colValue;
+			console.log(colValue);
+			if(editStatus==0){
+				 dataService.put("put/user/"+id,$scope.changeStatus)
+				.then(function(response) { 
+					$scope.alerts.push({type: response.status,msg: response.message});
+				}); 
+			}
+		};	
+		$scope.showDropDown = function($event,opened)		
+		{
+			//$scope.selected = undefined;
+			$scope.user_groups = []; 				  				
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope[opened] = ($scope[opened] ===true) ? false : true;
+		};
+		
+		$scope.forgotPass = function(colName, colValue, id){
+			$scope.changeStatus[colName] = colValue;				
+				 dataService.post("post/user/forgotpass", $scope.changeStatus)
+				.then(function(response) {					
+					$scope.alerts.push({type: response.status,msg: response.message});
+				}); 
+		};
+		
 		/*code for delete user	
 		$scope.deleteuser = function(id, status, index){
 			if(status==1){
@@ -170,37 +239,6 @@ define(['app'], function (app) {
  				});
 			}
 		};*/
-		
-		/* function(scope, element, attrs, accordionCtrl) {
-			var getIsOpen, setIsOpen;
-			accordionCtrl.addGroup(scope);
-			scope.isOpen = false;
-			if ( attrs.isOpen ) {
-				getIsOpen = $parse(attrs.isOpen);
-				setIsOpen = getIsOpen.assign;
-				scope.$parent.$watch(getIsOpen, function(value) {
-					scope.isOpen = !!value;
-				});
-			}
-			scope.$watch('isOpen', function(value) {
-				if ( value ) {
-					accordionCtrl.closeOthers(scope);
-				}
-				if ( setIsOpen ) {
-					setIsOpen(scope.$parent, value);
-				}
-			});
-		} */
-		$scope.open = function() {
-			$scope.opened = true;
-		}
-		$scope.close = function() {
-			dataService.put("put/usergroup/"+id, $scope.changeStatus)
-				.then(function(response) { 
-					$scope.alerts.push({type: response.status, msg: response.message});
-				});
-			$scope.opened = false;
-		}
 	
 		$scope.adduser ={};
 		//add user information

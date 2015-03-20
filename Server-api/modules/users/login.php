@@ -72,7 +72,7 @@
 					$from['name'] = "Reset Password";
 					$recipients = [$input->email];
 					$subject = "Reset your Password";
-					$message = "Dear User, <a href='#/changepass/".$uniqueId."'>Click here to reset your password</a>";
+					$message = "Dear User, <a href='http://localhost/vilas/SmallBusiness/app/#/changepass/".$uniqueId."'>Click here to reset your password</a>";
 					$sendMail = $db->sendMail($from, $recipients, $subject, $message);
 					if($sendMail['status'] == 'success'){
 						$dataCol['password'] = $uniqueId;

@@ -1,36 +1,41 @@
-
-		<form class="form-horizontal" name="changepassForm" novalidate>
-		<h3 class="col-sm-offset-2 col-sm-9">Change Password</h3>	
-			<div class="form-group">
-				<label for="passw" class="col-sm-2 control-label">Old Password</label>
-				<div class="col-sm-9">
-					<input type="password" class="form-control" id="passw" name="passw" ng-model="changepass.passw" placeholder="Old Password" required>
-						<span class="help-block" ng-show="changepassForm.passw.$dirty && changepassForm.passw.$invalid">
-						<span ng-show="changepassForm.passw.$error.required" class="text-danger">Old Password is required.</span>
-						</span>
-				</div>
+<div class="main-content">
+	<ng-include src="'modules/component/toolbar.html'"></ng-include>
+	<form class="form-horizontal" name="changepassForm" novalidate>
+	<h3 class="col-sm-offset-2 col-sm-9">Change Password</h3>	
+		<div class="form-group">
+			<label for="passw" class="col-sm-2 control-label">Old Password</label>
+			<div class="col-sm-9">
+				<input type="password" class="form-control" id="passw" name="passw" ng-model="changepasswd.password.old" placeholder="Old Password" required>
+					<span class="help-block" ng-show="changepassForm.passw.$dirty && changepassForm.passw.$invalid">
+					<span ng-show="changepassForm.passw.$error.required" class="text-danger">Old Password is required.</span>
+					</span>
 			</div>
-			<div class="form-group">
-				<label for="newpassw" class="col-sm-2 control-label">New Password</label>
-					<div class="col-sm-9">
-						<input type="password" class="form-control" id="newpassw" name="newpassw" ng-model="changepass.newpassw" placeholder="New Password" required>
-							<span class="help-block" ng-show="changepassForm.newpassw.$dirty && changepassForm.newpassw.$invalid">
-							<span ng-show="changepassForm.newpassw.$error.required" class="text-danger">New Password is required.</span>
-							</span>
-					</div>
+		</div>
+		<div class="form-group">
+			<label for="newpassw" class="col-sm-2 control-label">New Password</label>
+			<div class="col-sm-9">
+				<input type="password" class="form-control" id="newpassw" name="newpassw" ng-model="changepasswd.password.new" placeholder="New Password" required>
+					<span class="help-block" ng-show="changepassForm.newpassw.$dirty && changepassForm.newpassw.$invalid">
+						<span ng-show="changepassForm.newpassw.$error.required && (changepassForm.password.$dirty || submitted)" class="text-danger">New Password is required.</span>
+					</span>
 			</div>
-			<div class="form-group">
-				<label for="confirmpass" class="col-sm-2 control-label">Confirm Password</label>
-					<div class="col-sm-9">
-						<input type="password" class="form-control" id="confirmpass" name="confirmpass" ng-model="changepass.confirmpass"  placeholder="Confirm Password" required>
-							<span class="help-block" ng-show="changepassForm.confirmpass.$dirty && changepassForm.confirmpass.$invalid">
-							<span ng-show="changepassForm.confirmpass.$error.required" class="text-danger">Confirm Password is required.</span>
-							</span>
-					</div>
+		</div>
+		<div class="form-group">
+			<label for="confirmpasswd" class="col-sm-2 control-label">Confirm Password</label>
+			<div class="col-sm-9">
+				<input type="password" class="form-control" id="confirmpasswd" name="confirmpasswd" ng-model="confirmpasswd"  placeholder="Confirm Password" required ng-change="passMatch(changepasswd.password, confirmpasswd)">
+					<span class="help-block" ng-show="changepassForm.confirmpasswd.$dirty && !pass || changepassForm.confirmpasswd.$dirty && changepassForm.confirmpasswd.$invalid">
+						<span ng-show="changepassForm.confirmpasswd.$error.required" class="text-danger">Confirm Password is required.</span>
+					</span>
 			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-9">
-					<button type="submit" class="btn btn-success">Save</button>
-				</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-9">
+				<button type="submit" class="btn btn-success" ng-click="changepassword(changepasswd)">Save</button>
 			</div>
-		</form>
+		</div>
+	</form>
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	
+		{{alert.msg}}
+	</alert>
+</div>

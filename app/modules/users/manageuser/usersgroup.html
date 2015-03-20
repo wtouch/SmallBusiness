@@ -1,3 +1,6 @@
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	
+	{{alert.msg}}
+</alert>
 <div class="table-responsive">		
 	<table class="table table-bordered">
 		<thead>
@@ -8,7 +11,7 @@
 			<th>Manage</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="groups in usergroupList">
+			<tr ng-repeat="groups in usergroupList | filter : {status : hideDeleted}">
 				<td>{{((usersGroupCurrentPage - 1) * pageItems ) + $index + 1}}</td>
 				<td>{{groups.group_name}}</td>
 				<td>2</td>

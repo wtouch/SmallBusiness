@@ -26,6 +26,7 @@
 			}
 		}
 	}
+	
 	if($reqMethod=="POST"){
 		if(isset($postParams) && $postParams == 'login'){
 			doLogin($body);

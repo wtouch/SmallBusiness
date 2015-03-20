@@ -11,14 +11,21 @@ define(['app'], function (app) {
 		$scope.open = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
+				var oldObj = response.data;
+				var newObj = {};
+				
+				angular.forEach(oldObj, function(value, key) {
+				  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
+				}, newObj);
+				
+				console.log(newObj);
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
 					size : 'lg'
 				};
 				var modalOptions = {
-					tempList: response.data[0]  // assign data to modal
+					tempList: newObj  // assign data to modal
 				};
-				console.log(response.data[0]);
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
 				});
@@ -28,6 +35,28 @@ define(['app'], function (app) {
 			$modalOptions.close('ok');
 		};
 		
+		//this model for show website details when click on apply button{trupti}
+		$scope.showWebsitedetails = function (url, tempId) {
+			dataService.get("getmultiple/website/1/50")
+			.then(function(response) {
+				var oldObj = response.data;
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+					size : 'lg'
+				};
+				var modalOptions = {
+					tempList: oldObj  // assign data to modal
+				};
+				console.log(oldObj);
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log("modalOpened");
+				});
+			});
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+	
 		//for display form parts
 		$scope.tempPart = $routeParams.tempPart;
 		// all $scope object goes here
@@ -39,13 +68,15 @@ define(['app'], function (app) {
 		$scope.customTempCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
+		//$rootScope.appConfig="" ;
 		$scope.currentDate = dataService.currentDate;
-		$scope.user_id = {user_id : 2};// these are URL parameters
+		//$scope.user_id = {user_id : 2};// these are URL parameters
+		$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		// All $scope methods
 		
 		$scope.pageChanged = function(page, template_type) { // Pagination page changed
-			angular.extend(template_type, $scope.user_id);
-			dataService.get("/getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
+			angular.extend(template_type, $scope.userDetails);
+			dataService.get("getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response){  //function for templatelist response
 				$scope.templates = response.data;
 				//console.log($scope.properties);
@@ -57,7 +88,7 @@ define(['app'], function (app) {
 			$scope.filterStatus= {};
 			(showStatus =="") ? delete $scope.template_type[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.template_type, $scope.filterStatus);
-			dataService.get("/getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
+			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for templatelist response
 				if(response.status == 'success'){
 					$scope.templates = response.data;
@@ -77,7 +108,7 @@ define(['app'], function (app) {
 			(showStatus =="") ? delete $scope.template_type[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.template_type, $scope.filterStatus);
 			angular.extend($scope.template_type, $scope.search);
-			dataService.get("/getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
+			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for templatelist response
 				if(response.status == 'success'){
 					$scope.templates = response.data;
@@ -107,16 +138,16 @@ define(['app'], function (app) {
 		$scope.reqtemp.scrible  = []; // uploaded images will store in this array
 		
 		$scope.upload = function(files,path,userinfo,picArr){ // this function for uploading files
-		console.log(picArr);
+		//console.log(picArr);
 		
 			upload.upload(files,path,userinfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
-					picArr[picArrKey] = (JSON.stringify(data.details));
+					picArr[picArrKey] = data.details;
 					console.log(data.message);
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.alerts.push({type: data.status, msg: data.message});
 				}
 			});
 		};
@@ -126,7 +157,7 @@ define(['app'], function (app) {
 		
 		// switch functions
 		var mytemplates = function(){
-			dataService.get("/getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.user_id)
+			dataService.get("getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.userDetails)
 			.then(function(response) {  //function for my templates response
 			if(response.status == 'success'){
 					$scope.templates=response.data;
@@ -142,8 +173,8 @@ define(['app'], function (app) {
 		
 		var listoftemplates = function(){
 			$scope.template_type = {template_type : 'public', status:1};
-			angular.extend($scope.template_type, $scope.user_id);
-			dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+			angular.extend($scope.template_type, $scope.userDetails);
+			dataService.get("getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
 					$scope.templates=response.data;
@@ -158,7 +189,7 @@ define(['app'], function (app) {
 			//function for active button
 			var showActive= function(status){
 				$scope.template_type = {template_type : 'public',status:1};
-				dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+				dataService.get("getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 						if(response.status == 'success'){
 						$scope.templates=response.data;
@@ -191,8 +222,8 @@ define(['app'], function (app) {
 		
 		var custometemplates = function(){
 			$scope.template_type = {template_type : 'private',status:1,custom:1};
-			angular.extend($scope.template_type, $scope.user_id);
-			dataService.get("/getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+			angular.extend($scope.template_type, $scope.userDetails);
+			dataService.get("getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for template list response
 				if(response.status == 'success'){
 					$scope.templates=response.data;
@@ -208,7 +239,7 @@ define(['app'], function (app) {
 			//function for active button
 			var showActive= function(status){
 				$scope.template_type = {template_type : 'private',status:1,custom:1};
-				dataService.get("/getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
+				dataService.get("getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 						if(response.status == 'success'){
 						$scope.templates=response.data;
@@ -266,10 +297,9 @@ define(['app'], function (app) {
 			//$scope.userid={user_id : 1};
 			//post method for insert data in request template form{trupti}
 			$scope.postData = function(reqtemp) { 
-			reqtemp.user_id=$scope.user_id.user_id;
+			$scope.userDetails=$scope.userDetails;
 			$scope.reqtemp.date = $scope.currentDate;
-			//console.log(user_id);
-				dataService.post("/post/template",reqtemp,$scope.user_id)
+				dataService.post("post/template",reqtemp,$scope.userDetails)
 				.then(function(response) {  //function for response of request temp
 					$scope.reqtemp = response.data;
 					console.log(response);

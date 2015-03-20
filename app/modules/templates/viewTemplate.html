@@ -6,38 +6,39 @@
 	<div class="modal-body">
 		<div class="row">
 			<div class="col-sm-12">
-						<h1>Template</h1>
-						
-						<!--<div class="table-responsive">		
-		<table class="table table-bordered table-hover">
-			<thead>
-				<th>Sr.No.</th>
-				<th>Site Names</th>
-				<th>Start Date</th>
-				<th>Exp Date</th>
-				<th>registered_date</th>
-				<th>validity</th>
-				<th>description</th>
-			</thead>
-				<tbody>
-					<tr ng-repeat="x in website | orderBy:sort ">
-					<td>{{((webListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
-					<td>{{x.domain_name}} 
-					<button type="button" class="btn btn-warning glyphicon glyphicon-pencil pull-right" tooltip="Edit">
-					</button>
-					</td>
-					<td>{{x.registered_date}}</td>
-					<td>{{x.expiry_date}}</td>
+					<table class="table table-responsive">
+							<tr "modalOptions.templates">
+							<td>
+							<span ng-repeat="(key, value) in modalOptions.tempList.template_image.images">
+							<img width='150px' ng-src="{{appConfig.assetPath+value.file_name}}"/>
+								<!-- <img ng-src="{{assetPath + [actualUrl]}}"/> -->
+							</span>
+							</td>
+							</tr>		
+					</table> 
+					<!-- <table class="table table-bordered table-hover">
+						<tr><th>WEBSITES DETAILS</th></tr>
+						<tr "modalOptions.templates">
+							<td>
+								<table class="table table-responsive">
+									<tr><th>UserId</th>
+									<td>{{modalOptions.templates.user_id}}</td></tr>
+									<tr><th>Domain Name</th><td>{{modalOptions.templates.template_name}}</td></tr>
+									<tr "modalOptions.templates">
+									<td>
+									<span ng-repeat="(key, value) in modalOptions.templates.scrible">
+										<img width='50px' ng-src="{{'../server-api/'+value.file_name}}" />
+									</span>
+									</td>
+									<td>{{modalOptions.tempList.template_name}}</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table> -->
+					<!-- <p>{{modalOptions.templates.scrible}}</p>	 -->
+					<p></p>
 					
-					</tr>
-				</tbody>					
-		</table>
-	</div>-->
-	
-						<!-- <div ng-repeat="abc in modalOptions.tempList">
-							{{abc + " img"}}
-						</div> -->
-						<p>{{modalOptions.tempList | json}}</p>
 			</div>
 		</div>
 	</div>
