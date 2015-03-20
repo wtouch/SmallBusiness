@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','modalService'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','modalService'];
 
     // This is controller for this view
-	var businessController = function ($scope, $injector, $routeParams,$location,dataService,modalService)
+	var businessController = function ($scope,$rootScope,$injector, $routeParams,$location,dataService,modalService)
 	{
 		//This code for modal {sonali}
 		$scope.open = function (url, buzId) {
@@ -32,7 +32,6 @@ define(['app'], function (app) {
 					console.log("modalOpened");
 				});
 			});
-			
 		};
 		$scope.ok = function () {
 			$modalOptions.close('ok');
@@ -48,10 +47,8 @@ define(['app'], function (app) {
 		$scope.delBizCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
-		$scope.userInfo = {user_id : 2}; // these are URL parameters
+		$scope.userDetails = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		$scope.hideDeleted = "";
-		
-		
 		
 		//function for close alert
 		$scope.closeAlert = function(index) {
@@ -64,24 +61,20 @@ define(['app'], function (app) {
 		
 		$scope.businessView = $routeParams.businessView;
 		
-				
-		
-		
 		//for display default businesslist.html{sonali}
 		if(!$routeParams.businessView) {
 			$location.path('/dashboard/business/businesslist');
-		}
-			
+		}	
 		
 		$scope.pageChanged = function(page) {
 			
-			angular.extend($scope.featured, $scope.user_id);
-			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
+			angular.extend($scope.featured, $scope.userDetails);
+			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.userDetails)
 			.then(function(response) { //function for businesslist response			
 				$scope.bizList = response.data;			
 			});
 			//get request for delete bizlist 
-			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.user_id)
+			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.userDetails)
 			.then(function(response) { //function for deltebiz response
 				$scope.delBiz = response.data;
 				$scope.totalRecords = response.totalRecords;
@@ -131,8 +124,6 @@ define(['app'], function (app) {
 				});
 			}
 		};
-		
-		
 		
 		var businesslist = function(){
 			$scope.businessParams = {status: 1};

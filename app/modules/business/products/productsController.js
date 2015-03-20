@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app','css!modules/business/products/products.css'], function (app) {
-    var injectParams = ['$scope','$rootScope', '$injector','$location','$routeParams','dataService','upload'];
+    var injectParams = ['$scope','$rootScope', '$injector','$location','$routeParams','dataService','upload','modalService'];
 
     // This is controller for this view
-	var productsController = function ($scope, $rootScope,$injector,$location,$routeParams,dataService,upload) {
+	var productsController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
 		//console.log("Product Controller"); // Just Added for testing {Vilas}
 		
 		//for display form parts of product & service
@@ -17,8 +17,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.addproductCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
-		$scope.userDetails = {user_id : 2};
-		//$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		//$scope.tinymceConfig = {};
 		//$scope.selectBusiness = {};
@@ -38,10 +37,10 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
-					picArr[picArrKey] = (JSON.stringify(data.details));
+					picArr[picArrKey] = data.details;
 					console.log(data.message);
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.alerts.push({type: data.status, msg: d.message});
 				}
 	
 			});
@@ -96,15 +95,14 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		//end of options
 		var addproducts = function(){
 			//reset function{trupti}
-			//angular.extend($scope.addproducts,$scope.userDetails)
-			console.log($scope.addproduct.business_id);
-			 $scope.reset = function() {
+				console.log($scope.addproduct.business_id);
+				$scope.reset = function(){
 				$scope.addproduct = {};
 			};
-			 $scope.postData = function(addproduct) { 
-			addproduct.user_id=$scope.userDetails.user_id;
+			$scope.postData = function(addproduct) { 
+			$scope.userDetails=$scope.userDetails;
 			$scope.addproduct.date = $scope.currentDate;
-			////console.log(user_id);
+			////console.log(userDetails);
 				 dataService.post("post/product",addproduct)
 				.then(function(response) {  //function for response of request temp
 					$scope.addproduct = response.data;
@@ -123,11 +121,11 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				$scope.addservice = {};
 			};
 		    
-			  $scope.postData = function(addservice) { 
-			  	console.log(addservice);
-			addservice.user_id=$scope.userDetails.user_id;
+			$scope.postData = function(addservice) { 
+			console.log(addservice);
+			$scope.userDetails=$scope.userDetails;
 			$scope.addservice.date = $scope.currentDate;
-			//console.log(user_id);
+			//console.log(userDetails);
 				dataService.post("post/product",addservice)
 				.then(function(response) {  //function for response of request temp
 					$scope.addservice = response.data;

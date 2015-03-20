@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','modalService'];
 
     // This is controller for this view
-	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
+	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,modalService) {
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
         //open function for previewing the website[Dnyaneshwar].
@@ -35,8 +35,7 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.currentDate = dataService.currentDate;
-		//$scope.userDetails = {user_id : $rootScope.userDetails.id};
-		$scope.userDetails = {user_id : 1};
+		$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
 			angular.extend($scope.domain_name, $scope.userDetails);
@@ -82,14 +81,13 @@ define(['app'], function (app) {
 					//if(status=='success'){
 						//$scope.hideDeleted = 1;
 					//}
-					$scope.alerts.push({type: response.status,msg:"One row updated"});
+					$scope.alerts.push({type: response.status,msg: response.message});
 				}); 
 			}
 		};	 
 		
 		$scope.showInput = function($event,opened) 		
 		{
-			//$scope.selected = undefined;
 			$scope.domain_name = []; 				  				
 			$event.preventDefault();
 			$event.stopPropagation();
@@ -112,18 +110,19 @@ define(['app'], function (app) {
 					$scope.totalRecords = {};
 					$scope.alerts.push({type: response.status, msg: "No data Found"});
 				}
-				//console.log($scope.properties);
 			});
 		};  
 	
         //function for close alert
-			$scope.closeAlert = function(index) {
-				$scope.alerts.splice(index, 1);
-			};
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
+		
         /*For display by default websitelist.html page*/
 		if(!$scope.websitePart) {
 			$location.path('/dashboard/websites/websiteslist');
 		}
+		
 		//for tooltip
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
@@ -131,15 +130,14 @@ define(['app'], function (app) {
         
         // switch functions
         var requestnewsite = function(){
-			 $scope.reqnewsite = {};
+			$scope.reqnewsite = {};
 			//post method for insert data in request site form{trupti}
-			 $scope.postData = function(reqnewsite) { 
-				console.log(reqnewsite);
-			//reqnewsite.userDetails=$scope.userDetails.user_id;
+			$scope.postData = function(reqnewsite) { 
+			console.log(reqnewsite);
 			$scope.userDetails=$scope.userDetails;
 			reqnewsite.date = $scope.currentDate;
 			//console.log(user_id);
-				 dataService.post("post/website",reqnewsite,$scope.userDetails)
+				dataService.post("post/website",reqnewsite,$scope.userDetails)
 				.then(function(response) {  //function for response of request site
 					$scope.reqnewsite = response.data;
 					console.log(response);
@@ -163,7 +161,6 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 				};
 			});
-			
 			//delete button {trupti}
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
@@ -178,7 +175,7 @@ define(['app'], function (app) {
 			};			
 		};
 		
-		//function for active button
+			//function for active button
 			var showActive= function(status){
 				$scope.status = {status : 'active',status:1};
 				dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.status)
@@ -192,8 +189,8 @@ define(['app'], function (app) {
 						$scope.alerts.push({type: response.status, msg: response.message});
 					};
 				});
-			//end of active button function
-			}
+			
+			}//end of active button function
         
         var requestedsitelist = function(){
 			//function for requestedsitelist{Dnyaneshwar}
@@ -201,7 +198,7 @@ define(['app'], function (app) {
 			.then(function(response) {  //function for requestedsitelist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
-					$scope.alerts.push({type: response.status, msg:'data access successfully..'});
+					//$scope.alerts.push({type: response.status, msg:'data access successfully..'});
 					$scope.totalRecords = response.totalRecords;	
 				}
 				else
