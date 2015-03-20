@@ -238,6 +238,13 @@ define(['app'], function (app) {
 			obj.setBase = function(path){
 				serviceBase = path;
 			};
+			obj.config = (sessionStorage.config) ? JSON.parse(sessionStorage.config) : null ;
+				$http.get('js/config.json').success(function(response){
+					sessionStorage.config =  JSON.stringify(response);
+					obj.config = response;
+				});
+
+			
 			obj.rememberPass = function(remb){
 				$cookieStore.put('auth',remb);
 			}
