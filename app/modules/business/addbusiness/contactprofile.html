@@ -71,44 +71,32 @@
 					<div class="form-group">
 						<label for="Country" class="col-sm-3 control-label">Country</label>
 						<div class="col-sm-9">
-							<select class="form-control" name="Country" id="Country"  ng-model="addbusiness.contact_profile.Country" required>		
+							<select class="form-control" name="Country" id="Country"  ng-model="addbusiness.contact_profile.Country" required ng-change="getState(addbusiness.contact_profile.country)" ng-options="item.country_name as item.country_name for item in contries">		
 								<option value="">Select Country</option>
-								<option value="India">India</option>
-								<option value="Australia">Australia</option>
-								<option value="China">China</option>
-								<option value="America">America</option>
-								<option value="Belgium">Belgium</option>
-							</select>
+							</select>{{addbusiness.contact_profile.Country}}											
 							<span class="help-block" ng-show="addbusinessForm.Country.$dirty && addbusinessForm.Country.$invalid">
-							<span ng-show="addbusinessForm.Country.$error.required" class="text-danger">Country is required.</span>
+								<span ng-show="addbusinessForm.Country.$error.required" class="text-danger">Country is required.</span>
 							</span>				
 						</div>
-					</div>		
+					</div>	
+											
 					<div class="form-group">
 						<label for="state" class="col-sm-3 control-label">State</label>
 						<div class="col-sm-4">
-							<select class="form-control" name="State" id="State"  ng-model="addbusiness.contact_profile.State" required>		
+							<select class="form-control" name="State" id="State"  ng-model="addbusiness.contact_profile.State" ng-change="getCities(addbusiness.contact_profile.State)" required ng-options="item.state_name as item.state_name for item in states">		
 								<option value="">Select State</option>
-								<option value="Maharashtra">Maharashtra</option>
-								<option value="Gujarat">Gujarat</option>
-								<option value="Kerala">Kerala</option>
-								<option value="Karnatka">Karnatka</option>
 							</select>
 							<span class="help-block" ng-show="addbusinessForm.State.$dirty && addbusinessForm.State.$invalid">
-							<span ng-show="addbusinessForm.State.$error.required" class="text-danger">State is required.</span>
+								<span ng-show="addbusinessForm.State.$error.required" class="text-danger">State is required.</span>
 							</span>				
 						</div>
-
+												
 						<div class="col-sm-offset-1 col-sm-4">
-							<select class="form-control" name="City" id="City"  ng-model="addbusiness.contact_profile.City" required>		
+							<select class="form-control" name="City" id="City"  ng-model="addbusiness.contact_profile.City" required ng-options="item.city_name as item.city_name for item in cities">		
 								<option value="">Select City</option>
-								<option value="Ahmednagar">Ahmednagar</option>
-								<option value="Pune">Pune</option>
-								<option value="Mumbai">Mumbai</option>
-								<option value="Nasik">Nasik</option>
 							</select>
 							<span class="help-block" ng-show="addbusinessForm.City.$dirty && addbusinessForm.City.$invalid">
-							<span ng-show="addbusinessForm.City.$error.required" class="text-danger">City is required.</span>
+								<span ng-show="addbusinessForm.City.$error.required" class="text-danger">City is required.</span>
 							</span>				
 						</div>
 					</div>

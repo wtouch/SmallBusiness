@@ -25,65 +25,8 @@
 <div class="form-group">
 	<label for="category" class="col-sm-3 control-label" name="category" >Category</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="category" id="category"  ng-model="addbusiness.category" required>		
+		<select class="form-control" name="category" id="category"  ng-model="addbusiness.category" required ng-options="item as item for item in biz.category">		
 			<option value="">Select Category</option>
-			<option value="Gems & Jewelry">Gems & Jewelry</option>
-			<option value="Arts & Crafts">Arts & Crafts</option>
-			<option value="Leather">Leather Products</option>
-			<option value="Hand & Machine Tools">Hand & Machine Tools</option>
-			<option value="Natural Stones">Natural Stones</option>
-			<option value="Medical Products">Medical Products</option>
-			<option value="Furniture Products">Furniture Products</option>
-			<option value="Office & School Supplies">Office & School Supplies</option>
-			<option value="Computers & Software">Computers & Software</option>
-			<option value="Cosmetics">Cosmetics</option>
-			<option value="Electronics & Electrical">Electronics & Electrical</option>
-			<option value="Industrial Supplies">Industrial Supplies</option>
-			<option value="Food & Beverages">Food & Beverages</option>
-			<option value="Metals & Minerals">Metals & Minerals</option>
-			<option value="Packaging Materials & Machines">Packaging Materials & Machines</option>
-			<option value="Printing & Publishing">Printing & Publishing</option>
-			<option value="Plant & Machinery">Plant & Machinery</option>
-			<option value="Sporting Goods, Toys & Games">Sporting Goods, Toys & Games</option>
-			<option value="Telecom Products">Telecom Products</option>
-			<option value="Embassies, Consulates & Councils">Embassies, Consulates & Councils</option>
-			<option value="HR Consultants<">HR Consultants</option>
-			<option value="Hotels & Resorts">Hotels & Resorts</option>
-			<option value="Travel Agents & Tour Operators">Travel Agents & Tour Operators</option>
-			<option value="HomeSupplies">Home Supplies</option>
-			<option value="Paper & Paper Products">Paper & Paper Products</option>
-			<option value="Transportation">Transportation & Shipping</option>
-			<option value="Engineering">Engineering Services</option>
-			<option value="Miscellaneous">Miscellaneous</option>
-			<option value="Advertising">Advertising</option>
-			<option value="TravelTourism">Travel & Tourism</option>
-			<option value="Research & Development">Research & Development</option>
-			<option value="Business Services">Business Services</option>
-			<option value="Architectural Services">Architectural Services</option>
-			<option value="Real Estate">Real Estate</option>
-			<option value="Educational & Training Institutes">Educational & Training Institutes</option>
-			<option value="Medical">Medical Services</option>
-			<option value="IT">IT & Telecom Services</option>
-			<option value="Call Centers & BPO Services">Call Centers & BPO Services</option>
-			<option value="Product">Product Rental Services</option>
-			<option value="Small">Small Businesses</option>
-			<option value="Financial">Financial & Legal Services</option>
-			<option value="Fashion">Fashion Accessories</option>
-			<option value="HomeGarden">Home & Garden</option>
-			<option value="Mechanical">Mechanical Components</option>
-			<option value="Apparel">Apparel & Garments</option>
-			<option value="Automobile">Automobile</option>
-			<option value="Bicycles">Bicycles & Rickshaws</option>
-			<option value="Building">Building & Construction</option>
-			<option value="Dyes">Dyes & Chemicals</option>
-			<option value="Ayurvedic">Ayurvedic & Herbal Products</option>
-			<option value="Event">Event Management Services</option>
-			<option value="Textile">Textile, Yarn & Fabrics</option>
-			<option value="Scientific">Scientific Instruments & Supplies</option>
-			<option value="Rubber">Rubber & Rubber Products</option>
-			<option value="Plastic">Plastic & Plastic Products</option>
-			<option value="Railway">Railway, Shipping & Aviation</option>
-			<option value="HomeTextiles">Home Textiles & Furnishings</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.category.$dirty && addbusinessForm.category.$invalid">
 		<span ng-show="addbusinessForm.category.$error.required" class="text-danger">Category Type is required.</span>
@@ -94,13 +37,8 @@
 <div class="form-group">
 	<label for="ownership" class="col-sm-3 control-label" name="ownership" >Ownership Type</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.ownership" required>		
+		<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.ownership" required ng-model="addbusiness.ownership" required ng-options="item as item for item in biz.ownership">		
 			<option value="">Select Ownership Type</option>
-			<option value="Proprietory">Sole Proprietory(Individual)</option>
-			<option value="Partnership">Partnership</option>
-			<option value="Professional">Professional Association</option>
-			<option value="Private">Private Limited Company</option>
-			<option value="Public">Public Limited Company</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.ownership.$dirty && addbusinessForm.ownership.$invalid">
 		<span ng-show="addbusinessForm.ownership.$error.required" class="text-danger">Ownership Type is required.</span>
