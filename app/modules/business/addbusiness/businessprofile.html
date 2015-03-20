@@ -2,12 +2,8 @@
 <div class="form-group">
 	<label for="business_type" class="col-sm-3 control-label" name="business_type" >Primary Business Type</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="business_type" id="business_type"  ng-model="addbusiness.business_profile.business_type" required>		
+		<select class="form-control" name="business_type" id="business_type"  ng-model="addbusiness.business_profile.business_type" required ng-options="item as item for item in biz.business_type">		
 			<option value="">Select Type</option>
-			<option value="Trader">Trader</option>
-			<option value="Retailer">Retailer</option>
-			<option value="Exporter">Exporter</option>
-			<option value="Buying House">Buying House</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.business_type.$dirty && addbusinessForm.business_type.$invalid">
 			<span ng-show="addbusinessForm.business_type.$error.required" class="text-danger">Primary Business Type is required.</span>
@@ -42,15 +38,11 @@
 <div class="form-group">
 	<label for="establishment" class="col-sm-3 control-label">Year Of Establishment</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="establishment" id="establishment"  ng-model="addbusiness.business_profile.establishment" required>		
-			<option value="">Select Establish Year</option>
-			<option value="2010">2010</option>
-			<option value="2011">2011</option>
-			<option value="2012">2012</option>
-			<option value="2013">2013</option>			
+		<select class="form-control" name="establishment" id="establishment"  ng-model="addbusiness.business_profile.establishment" required ng-options="item as item for item in biz.year">		
+			<option value="">Select Establish Year</option>		
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.establishment.$dirty && addbusinessForm.establishment.$invalid">
-		<span ng-show="addbusinessForm.establishment.$error.required" class="text-danger">Year Of Establishment is required.</span>
+			<span ng-show="addbusinessForm.establishment.$error.required" class="text-danger">Year Of Establishment is required.</span>
 		</span>				
 	</div>
 </div>	
@@ -58,65 +50,24 @@
 <div class="form-group">
 	<label for="no_of_employees" class="col-sm-3 control-label">No. Of Employees</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="no_of_employees" id="no_of_employees"  ng-model="addbusiness.business_profile.no_of_employees" required>		
+		<select class="form-control" name="no_of_employees" id="no_of_employees"  ng-model="addbusiness.business_profile.no_of_employees" required ng-options="item as item for item in biz.employees">		
 			<option value="">--Choose One--</option>
-			<option value="10">Upto 10 People</option>
-			<option value="25">11 To 25 People</option>
-			<option value="50">26 To 50 People</option>
-			<option value="100">51 To 100 People</option>
-			<option value="500">101 To 500 People</option>
-			<option value="501">501 To 1000 People</option>
-			<option value="1000">More Than 1000 People</option>			
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.no_of_employees.$dirty && addbusinessForm.no_of_employees.$invalid">
-		<span ng-show="addbusinessForm.no_of_employees.$error.required" class="text-danger">No. Of Employees is required.</span>
+			<span ng-show="addbusinessForm.no_of_employees.$error.required" class="text-danger">No. Of Employees is required.</span>
 		</span>				
 	</div>
 </div>	
 	
 <div class="form-group">
 	<label class="col-sm-3 control-label">Additional Business</label>
-	<div class="col-sm-9">
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="checkbox">
-					<label>
-					<input type="checkbox" name="trader" value="trader" ng-model="addbusiness.business_profile.additional_business.trader">Trader
-					</label>
-				</div>
-				<div class="checkbox">
-					<label>
-					  <input type="checkbox" name="manufacturer" value="manufacturer" ng-model="addbusiness.business_profile.additional_business.manufacturer"> Manufacturer
-					</label>
-				</div>
-				<div class="checkbox">
-					<label>
-					  <input type="checkbox" name="retailer" value="retailer" ng-model="addbusiness.business_profile.additional_business.retailer"> Retailer
-					</label>
-				</div>
-				<div class="checkbox">
-					<label>
-					  <input type="checkbox" name="buyinghouse" value="buyinghouse" ng-model="addbusiness.business_profile.additional_business.buyinghouse"> Buying House
-					</label>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="wholesaler" value="wholesaler" ng-model="addbusiness.business_profile.additional_business.wholesaler">Wholesaler
-					</label>
-				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="exporter" value="exporter" ng-model="addbusiness.business_profile.additional_business.exporter"> Exporter
-					</label>
-				</div>
-				<div class="checkbox">
-					<label>
-					  <input type="checkbox" name="serviceprovider" value="serviceprovider" ng-model="addbusiness.business_profile.additional_business.serviceprovider"> Service Provider
-					</label>
-				</div>
-			</div>						 				
+	<div class="col-sm-9">	
+		<div class="checkbox">		
+			<label ng-repeat="x in biz.additional_business">
+				<span>
+					<input type="checkbox" checklist-model="addbusiness.business_profile.additional_business" checklist-value="x"> {{x}}
+				</span>
+			</label>
 		</div>
 	</div>
 </div>																

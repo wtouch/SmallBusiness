@@ -1,7 +1,8 @@
-
+{{testimonials | json}}
+{{addbusiness.testimonials | json}}
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(testimonials, addbusiness.testimonials)" title="Add Testimonials">Add Testimonials</button>
+		<button class="btn btn-default btn-primary pull-right" ng-click="addTestimonials(testimonials, addbusiness.testimonials)" title="Add Testimonials">Add Testimonials</button>
 	</div>
 </div>
 <div class="form-group">
@@ -39,41 +40,29 @@
 <div class="form-group">
 	<label for="Sender_Country" class="col-sm-3 control-label">Sender Country</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="Sender_Country" id="Sender_Country"  ng-model="testimonials.desc.Sender_Country" required>		
+		<select class="form-control" name="Sender_Country" id="Sender_Country"  ng-model="testimonials.desc.Sender_Country" required ng-change="getTestimonialState(testimonials.desc.Sender_Country)" ng-options="item.country_name as item.country_name for item in contries">		
 			<option value="">Select Country</option>
-			<option value="India">India</option>
-			<option value="Australia">Australia</option>
-			<option value="China">China</option>
-			<option value="America">America</option>
-			<option value="Belgium">Belgium</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.Sender_Country.$dirty && addbusinessForm.Sender_Country.$invalid">
-		<span ng-show="addbusinessForm.Sender_Country.$error.required" class="text-danger">Sender Country is required.</span>
+			<span ng-show="addbusinessForm.Sender_Country.$error.required" class="text-danger">Sender Country is required.</span>
 		</span>				
 	</div>
-</div>		
+</div>	
+
 <div class="form-group">
 	<label for="Sender_State" class="col-sm-3 control-label">Sender State / City</label>
 	<div class="col-sm-4">
-		<select class="form-control" name="Sender_State" id="Sender_State"  ng-model="testimonials.desc.Sender_State" required>		
+		<select class="form-control" name="Sender_State" id="Sender_State"  ng-model="testimonials.desc.Sender_State" ng-change="getTestimonialCities(testimonials.desc.Sender_State)" required ng-options="item.state_name as item.state_name for item in states">		
 			<option value="">Select State</option>
-			<option value="Maharashtra">Maharashtra</option>
-			<option value="Gujarat">Gujarat</option>
-			<option value="Kerala">Kerala</option>
-			<option value="Karnatka">Karnatka</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.Sender_State.$dirty && addbusinessForm.Sender_State.$invalid">
-		<span ng-show="addbusinessForm.Sender_State.$error.required" class="text-danger">Sender State is required.</span>
+			<span ng-show="addbusinessForm.Sender_State.$error.required" class="text-danger">Sender State is required.</span>
 		</span>				
 	</div>
 
 	<div class="col-sm-offset-1 col-sm-4">
-		<select class="form-control" name="Sender_City" id="Sender_City"  ng-model="testimonials.desc.Sender_City" required>		
+		<select class="form-control" name="Sender_City" id="Sender_City"  ng-model="testimonials.desc.Sender_City" required ng-options="item.city_name as item.city_name for item in cities">		
 			<option value="">Select City</option>
-			<option value="Ahmednagar">Ahmednagar</option>
-			<option value="Pune">Pune</option>
-			<option value="Mumbai">Mumbai</option>
-			<option value="Nasik">Nasik</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.Sender_City.$dirty && addbusinessForm.Sender_City.$invalid">
 			<span ng-show="addbusinessForm.Sender_City.$error.required" class="text-danger">Sender City is required.</span>

@@ -33,13 +33,89 @@ define(['app'], function (app) {
 		$scope.news_coverage.desc = {};
 		
 		$scope.addToObject = function(data, object){
-			object[data.heading] = data.desc;
+			var dtlObj = JSON.stringify(data.desc);
+			object[data.heading] = JSON.parse(dtlObj);
+		}
+		
+		$scope.addInfrastructure = function(data, object){
+			$scope.addToObject(data, object);
+			$scope.infrastructure = { desc : { infra_image  : {} }};
+		}
+		$scope.addJobsCareers = function(data, object){
+			$scope.addToObject(data, object);
+			$scope.job_careers = { desc : {} };
+		}
+		$scope.addTestimonials = function(data, object){
+			$scope.addToObject(data, object);
+			$scope.testimonials = { desc : { testimage : {} }};
+		}
+		$scope.addNewsCoverage = function(data, object){
+			$scope.addToObject(data, object);
+			$scope.news_coverage = { desc : { news_image : {} }};
 		}
 		
 		$scope.removeObject = function(key, object){
 			delete object[key];
 		}
-
+		
+		$scope.biz = {};
+		$scope.biz = dataService.config.business;
+		
+		//console.log(contries);		
+		//$scope.adduser = {country : {} };
+		$scope.contries = {};
+		$scope.contries = dataService.config.country;
+		//console.log(contries);
+		 $scope.getState = function(country){
+			var states = [];
+			for (var x in $scope.contries){
+				console.log($scope.contries[x].country_name);
+				if($scope.contries[x].country_name == country){
+					for(var y in $scope.contries[x].states){
+						states.push($scope.contries[x].states[y])
+					}
+				}
+			}
+			$scope.states = states;
+		};
+		$scope.getCities = function(state){
+			var cities = [];
+			for (var x in $scope.states){
+				console.log($scope.states[x].state_name);
+				if($scope.states[x].state_name == state){
+					for(var y in $scope.states[x].cities){
+						cities.push($scope.states[x].cities[y])
+					}
+				}
+			}
+			$scope.cities = cities;
+		}; 
+		
+		$scope.getTestimonialState = function(country){
+			var states = [];
+			for (var x in $scope.contries){
+				console.log($scope.contries[x].country_name);
+				if($scope.contries[x].country_name == country){
+					for(var y in $scope.contries[x].states){
+						states.push($scope.contries[x].states[y])
+					}
+				}
+			}
+			$scope.testimonialstates = states;
+		};
+		$scope.getTestimonialCities = function(state){
+			var cities = [];
+			for (var x in $scope.states){
+				console.log($scope.states[x].state_name);
+				if($scope.states[x].state_name == state){
+					for(var y in $scope.states[x].cities){
+						cities.push($scope.states[x].cities[y])
+					}
+				}
+			}
+			$scope.testimonialcities = cities;
+		}; 
+		
 		//Upload Function for uploading files {Vilas}
 		$scope.addbusiness={}; // this is form object
 		$scope.addbusiness.created_date = $scope.currentDate
@@ -94,6 +170,26 @@ define(['app'], function (app) {
 				});
 			//console.log(addbusiness);
 		}//end of post method{sonali}
+		
+		//update data into addbusiness table
+		if($scope.user_id){//Update business			
+			dataService.get("getsingle/business/"+$scope.user_id)
+			.then(function(response) {
+					$scope.addbusiness = response.data;					
+				});				
+			$scope.update = function(addbusiness){				
+				console.log(addbusiness);						
+				dataService.put("put/business/"+$scope.user_id ,addbusiness)
+				.then(function(response) {  //function for response of request temp
+					if(response.status == 'success'){
+						$scope.submitted = true;
+						$scope.alerts.push({type: response.status,msg: response.message});						
+					}else{
+						$scope.alerts.push({type: response.status,msg: response.message});
+					}	
+				});	 
+			};	
+		}		
 		
 		//datepicker {sonali}
 		$scope.today = function(){
