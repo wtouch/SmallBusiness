@@ -17,6 +17,7 @@ define(['app'], function (app) {
 		$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		
+		console.log(dataService.config);
 		// Add Business multi part form show/hide operation from here! {Vilas}
 		$scope.formPart = 'home';
 		console.log($scope.formPart);
@@ -91,7 +92,7 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		}; 
 		
-		$scope.getTestimonialState = function(country){
+		/* $scope.getTestimonialState = function(country){
 			var states = [];
 			for (var x in $scope.contries){
 				console.log($scope.contries[x].country_name);
@@ -114,7 +115,7 @@ define(['app'], function (app) {
 				}
 			}
 			$scope.testimonialcities = cities;
-		}; 
+		};  */
 		
 		//Upload Function for uploading files {Vilas}
 		$scope.addbusiness={}; // this is form object
