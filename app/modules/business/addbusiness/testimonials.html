@@ -1,8 +1,7 @@
-{{testimonials | json}}
-{{addbusiness.testimonials | json}}
+
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button class="btn btn-default btn-primary pull-right" ng-click="addTestimonials(testimonials, addbusiness.testimonials)" title="Add Testimonials">Add Testimonials</button>
+		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(testimonials, addbusiness.testimonials)" title="Add Testimonials">Add Testimonials</button>
 	</div>
 </div>
 <div class="form-group">
@@ -105,8 +104,6 @@
 	</div>
 </div>
 
-	
-
 <div class="form-group" > 
 	<label  for="testimage" class="col-sm-3 control-label">Add Image</label>
 	<div class="col-sm-9">
@@ -121,7 +118,7 @@
 </div>
 
 <div>
-	<input type="hidden" required name="testimonials" ng-model="addbusiness.testimonials" />
+	<input type="hidden" name="testimonials" ng-model="addbusiness.testimonials" />
 	<span class="help-block" ng-show="addbusinessForm.testimonials.$dirty && addbusinessForm.testimonials.$invalid">
 		<span ng-show="addbusinessForm.testimonials.$error.required" class="text-danger">Testimonials Description is required.</span>
 	</span>
@@ -136,8 +133,8 @@
 		</tr>
 		<tr ng-repeat="(key, value) in addbusiness.testimonials">
 			<td>{{key}}</td>
-			<td>{{value}}</td>
-			<td><button ng-click="removeObject(key,addbusiness.testimonials)">Remove</button></td>
+			<td class="tdwidth">{{value}}</td>
+			<td><button class="btn btn-danger" ng-click="removeObject(key,addbusiness.testimonials)">Remove</button></td>
 			
 		</tr>
 	</table>

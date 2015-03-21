@@ -1,7 +1,8 @@
-
+<!-- {{infrastructure | json}}
+{{addbusiness.infrastructure | json}} -->
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button class="btn btn-default btn-primary pull-right" ng-click="addInfrastructure(infrastructure, addbusiness.infrastructure)" title="Add Infrastucture">Add Infrastucture</button>
+		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(infrastructure, addbusiness.infrastructure)" title="Add Infrastucture">Add Infrastucture</button>
 	</div>
 </div>
 
@@ -45,14 +46,14 @@
 	</div>
 </div>
 <div>
-	<input type="hidden" required name="infrastructure" ng-model="addbusiness.infrastructure" />
+	<input type="hidden" name="infrastructure" ng-model="addbusiness.infrastructure" />
 	<span class="help-block" ng-show="addbusinessForm.infrastructure.$dirty && addbusinessForm.infrastructure.$invalid">
 		<span ng-show="addbusinessForm.infrastructure.$error.required" class="text-danger">Infrastucture Description is required.</span>
 	</span>
 </div>
 
 <div class="col-sm-12">
-	<table class="table table-bordered table-responsive tablewidth " ng-if="addbusiness.infrastructure">
+	<table class="table table-bordered table-responsive " ng-if="addbusiness.infrastructure">
 		<tr>
 			<th>Infrastucture Heading</th>
 			<th>Infrastucture Description</th>
@@ -60,9 +61,9 @@
 		</tr>
 		<tr ng-repeat="(key, value) in addbusiness.infrastructure">
 			<td>{{key}}</td>
-			<td>{{value}}
+			<td class="tdwidth">{{value}}
 			</td>
-			<td><button ng-click="removeObject(key,addbusiness.infrastructure)">Remove</button></td>
+			<td><button class="btn btn-danger" ng-click="removeObject(key,addbusiness.infrastructure)">Remove</button></td>
 			
 		</tr>
 	</table>
