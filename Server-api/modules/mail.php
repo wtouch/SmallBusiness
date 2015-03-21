@@ -7,7 +7,7 @@
 		$input = json_decode($body);
 
 		$from['email'] = $input->from_email;
-		$from['name'] = $input->first_name." ".$input->last_name;
+		$from['name'] = $input->name;
 		$recipients = [$input->to_email];
 		$subject = $input->subject;
 		$message = $input->message;

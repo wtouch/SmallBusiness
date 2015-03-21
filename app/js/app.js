@@ -90,7 +90,7 @@ define(['angular',
 				assetPath : '../server-api'
 			};
 			var nextUrl = next.$$route.originalPath;
-			if(nextUrl == '/logout'){
+			if(nextUrl == '/logout' || dataService.auth == false){
 				dataService.logout();
 				$rootScope.userDetails = {};
 			}
