@@ -72,6 +72,8 @@ define(['angular',
 				
 				.when('/dashboard/business/:businessView?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
 				
+				.when('/dashboard/websites/websettings/:id', route.resolve({controller:'websettings', template: 'websettings',label:"Website Settings"}, 'websites/websettings/'))
+				
 				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
 				
                 .otherwise({ redirectTo: '/' });
@@ -90,11 +92,11 @@ define(['angular',
 				assetPath : '../server-api'
 			};
 			var nextUrl = next.$$route.originalPath;
-			if(nextUrl == '/logout'){
+			if(nextUrl == '/logout' || dataService.auth == false){
 				dataService.logout();
-				$rootScope.userDetails = {};
+				$rootScope.userDetails = null;
 			}
-			if(dataService.auth == false){
+			if(dataService.auth == false || $rootScope.userDetails == null){
 				var changePassUrl = '"/changepass/'+next.pathParams.resetPassKey+'"';
 				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout' || nextUrl == '/changepass/:resetPassKey') {
 				} else {

@@ -26,13 +26,13 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.addproduct={}; // this is form object
 		$scope.addservice = {};
 		$scope.userinfo = {user_id:1}; // this is for uploading credentials
+		
 		$scope.path = "product/"; // path to store images on server
 		$scope.addproduct.product_image  = {}; // uploaded images will store in this array
 		$scope.addservice.product_image  = {}; // uploaded images will store in this array
-		
 		$scope.upload = function(files,path,userinfo,picArr){//this function for uploading files
 		console.log(picArr);
-		
+	
 			upload.upload(files,path,userinfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
@@ -45,6 +45,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 	
 			});
 		};
+		
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
 			upload.generateThumbs(files);
 		};// End upload function
@@ -93,20 +94,22 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				//console.log(businessList);
 			});
 		//end of options
-		var addproducts = function(){
+		var addproducts = function(){ 
 			//reset function{trupti}
 				console.log($scope.addproduct.business_id);
 				$scope.reset = function(){
 				$scope.addproduct = {};
 			};
+			//angular.extend(addproduct,$scope.userDetails);
 			$scope.postData = function(addproduct) { 
-			$scope.userDetails=$scope.userDetails;
+			//$scope.addproducts = {};
+			//$scope.addproductForm.$setPristine();
+			$scope.addproduct.user_id= $rootScope.userDetails.id;
 			$scope.addproduct.date = $scope.currentDate;
-			////console.log(userDetails);
 				 dataService.post("post/product",addproduct)
 				.then(function(response) {  //function for response of request temp
 					$scope.addproduct = response.data;
-					console.log(response);
+					console.log(response.message);
 					$scope.reset();
 				}); 
 				console.log(addproduct);
@@ -120,8 +123,10 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			$scope.reset = function() {
 				$scope.addservice = {};
 			};
-		    
+		    $scope.addservice.user_id= $rootScope.userDetails.id;
 			$scope.postData = function(addservice) { 
+			//$scope.addservice = {};
+			//$scope.addserviceForm.$setPristine();
 			console.log(addservice);
 			$scope.userDetails=$scope.userDetails;
 			$scope.addservice.date = $scope.currentDate;

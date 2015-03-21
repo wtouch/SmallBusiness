@@ -1,9 +1,9 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService','$route','modalService']; /* Added $routeParams to access route parameters */
+    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','$route','modalService']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var manageuserController = function ($scope, $injector, $routeParams,$location,dataService,$route,modalService) {
+	var manageuserController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,$route,modalService) {
 		//variable decalaration
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -14,7 +14,7 @@ define(['app'], function (app) {
 		$scope.userList = [];
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
-		
+		$scope.userDetails = {user_id : $rootScope.userDetails};
 		$scope.contries = dataService.config.country;
 
 		$scope.getState = function(country){
@@ -40,9 +40,25 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		};
 		
+		// for dynamic value of group name
+		dataService.get('getmultiple/usergroup/1/200').then(function(response){
+			
+			if(response.status=='success'){
+				$scope.groups = response.data;
+				console.log($scope.groups);
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+			/* var groups = [];
+			for(var id in response.data){
+				var obj = {id: response.data[id].id, group_name : response.data[id].group_name};
+				groups.push(obj);
+			}
+			$scope.groups = groups;  */
+		}) ;
+		
+		//dynamic checkboxes in create user group form
 		$scope.manage_user = dataService.config.manage_user;
-		console.log($scope.manage_user);
-	
 		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
@@ -125,17 +141,20 @@ define(['app'], function (app) {
 		};
 		
 		//check availability
-		$scope.checkuserAvailable = function(adduser){
-			dataService.post("post/user/checkavailability",adduser)
+		$scope.checkuserAvailable = function(fieldName, fieldValue){
+			$scope.checkParams = {};
+			$scope.checkParams[fieldName] = fieldValue;
+			dataService.post("post/user/checkavailability",$scope.checkParams)
 			.then(function(response) {  
 				if(response.status == 'success'){
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.adduserForm[fieldName].$setValidity('available', true);
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.adduserForm[fieldName].$setValidity('available', false);
 				}
+				$scope.availabilityMsg = response.message;
 			});
-		} 
-		
+		}
+		console.log($scope.adduserForm);
 		//code for search filter
 		$scope.searchFilter = function(statusCol, colValue) {
 			$scope.search = {search: true};
@@ -169,7 +188,6 @@ define(['app'], function (app) {
 						}
 					});
 				}
-				
 			}
 		};
 		
@@ -227,20 +245,6 @@ define(['app'], function (app) {
 				}); 
 		};
 		
-		/*code for delete user	
-		$scope.deleteuser = function(id, status, index){
-			if(status==1){
-				$scope.status = {status : 0};
-				console.log($scope.status);
-				/*dataService.put("put/user/"+id, $scope.status)
-				.then(function(response) { 
-					console.log(response.message);
-					$scope.userList[index].status = 0
-					$scope.hideDeleted = 1;
- 				});
-			}
-		};*/
-	
 		$scope.adduser ={};
 		//add user information
 		var addUsers =	function(){
@@ -253,6 +257,8 @@ define(['app'], function (app) {
 				dataService.post("post/user/register",adduser)
 				.then(function(response) {  
 					if(response.status == 'success'){
+						$scope.adduser = {};
+						$scope.adduserForm.$setPristine();
 						$scope.submitted = true;
 						$scope.alerts.push({type: response.status, msg: response.message});
 						
@@ -297,7 +303,9 @@ define(['app'], function (app) {
 					dataService.post("post/usergroup",usersgroup)
 					.then(function(response) {  
 						if(response.status == 'success'){
-							$scope.submitted = true;
+							$scope.usersgroup = {};
+							$scope.usersgroupForm.$setPristine();
+							//$scope.submitted = true;
 							$scope.alerts.push({type: response.status, msg: response.message});
 							
 						}else{
@@ -375,26 +383,9 @@ define(['app'], function (app) {
 			default:
 				usersList();
 		};
-			
-		
-	
 	};
-
 	// Inject controller's dependencies
 	manageuserController.$inject = injectParams;
 	// Register/apply controller dynamically
     app.register.controller('manageuserController', manageuserController);
-	
 });
-/*$http.get("../server-api/index.php/properties/"+$scope.usersGroupCurrentPage+"/"+$scope.pageItems).success(function(response) {
-				$scope.manageusers.usersGroupCurrentPage = response.manageusers.usersGroupCurrentPage;
-				//$scope.totalRecords = response.totalRecords;
-				//console.log($scope.properties);
-			});
-			//get request for usersList
-			$http.get("../server-api/index.php/properties/"+$scope.usersListCurrentPage+"/"+$scope.pageItems)
-			.success(function(response) {  //function for mytemplate response
-				$scope.manageusers.usersListCurrentPage = response.manageusers.usersListCurrentPage;
-				//$scope.totalRecords = response.totalRecords;
-				//console.log($scope.properties);
-			});*/

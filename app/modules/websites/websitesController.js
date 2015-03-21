@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','modalService'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService'];
 
     // This is controller for this view
-	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,modalService) {
+	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
         //open function for previewing the website[Dnyaneshwar].
@@ -134,6 +134,8 @@ define(['app'], function (app) {
 			$scope.reqnewsite = {};
 			//post method for insert data in request site form{trupti}
 			$scope.postData = function(reqnewsite) { 
+			$scope.reqnewsite = {};
+			$scope.requestsiteForm.$setPristine();
 			console.log(reqnewsite);
 			$scope.userDetails=$scope.userDetails;
 			reqnewsite.date = $scope.currentDate;

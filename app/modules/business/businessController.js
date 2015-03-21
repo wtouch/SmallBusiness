@@ -129,7 +129,7 @@ define(['app'], function (app) {
 		
 		var businesslist = function(){
 			$scope.businessParams = {status: 1};
-			angular.extend($scope.businessParams, $scope.userInfo);
+			angular.extend($scope.businessParams, $scope.userDetails);
 			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response){
 				if(response.status == 'success'){	
@@ -184,7 +184,7 @@ define(['app'], function (app) {
 		var deletedbusiness = function(){
 			console.log("del : "+$scope.businessParams);
 			$scope.businessParams = {status: 0};
-			angular.extend($scope.businessParams, $scope.userInfo);
+			angular.extend($scope.businessParams, $scope.userDetails);
 			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response){
 				if(response.status == 'success'){	

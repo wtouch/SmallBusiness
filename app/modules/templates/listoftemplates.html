@@ -11,8 +11,8 @@
 				<label for="sort" class="control-label">Sort by Order</label>
 					<select id="sort" class="form-control" ng-model="sort"> 
 						<option value="">Select Order</option>	<!-- added value & selected attr -->	
-						<option value="-id">Desending</option>
-						<option value="id">Asending</option>  
+						<option value="-template_name">Desending</option>
+						<option value="template_name">Asending</option>  
 					</select>
 			</div>
 		</div>
@@ -65,11 +65,6 @@
 						<td>{{x.template_name}}</td>
 						<td>{{x.date | date:'MM/dd/yyyy'}}</td>
 						<td>{{x.category}}</td>
-						<!-- <td>
-						<a class="btn btn-success" ng-show="x.status==1" title="Active">Active</a>
-						<a class="btn btn-warning" ng-show="x.status==0" title="Delete">Delete</a>
-						</button>
-						</td> -->
 						<td>{{x.template_price}}</td>
 						<td>
 						<a ng-click="showWebsitedetails('modules/templates/viewWebsitelist.html', x.id)" class="btn btn-success" ng-show="x.template_price=='free'">Apply</a>
