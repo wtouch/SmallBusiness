@@ -257,8 +257,8 @@ define(['app'], function (app) {
 				dataService.post("post/user/register",adduser)
 				.then(function(response) {  
 					if(response.status == 'success'){
-						$scope.adduser = {};
-						$scope.adduserForm.$setPristine();
+						/* $scope.adduser = {};
+						$scope.adduserForm.$setPristine(); */
 						$scope.submitted = true;
 						$scope.alerts.push({type: response.status, msg: response.message});
 						
@@ -303,8 +303,8 @@ define(['app'], function (app) {
 					dataService.post("post/usergroup",usersgroup)
 					.then(function(response) {  
 						if(response.status == 'success'){
-							$scope.usersgroup = {};
-							$scope.usersgroupForm.$setPristine();
+							/* $scope.usersgroup = {};
+							$scope.usersgroupForm.$setPristine(); */
 							//$scope.submitted = true;
 							$scope.alerts.push({type: response.status, msg: response.message});
 							
