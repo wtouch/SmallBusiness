@@ -1,7 +1,7 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope', '$injector','$location','$routeParams','dataService','upload','modalService'];
+    var injectParams = ['$scope','$rootScope','$injector','$location','$routeParams','dataService','upload','modalService'];
     
     // This is controller for this view
 	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
@@ -167,9 +167,9 @@ define(['app'], function (app) {
 		$scope.path = "template/"; // path to store images on server
 		$scope.reqtemp.scrible  = {};// uploaded images will store in this array
 		$scope.addtemplate.scrible  = {};
-		$scope.upload = function(files,path,userDetails,picArr){ //this function for uploading files
-		//console.log(picArr);
 		
+		$scope.upload = function(files,path,userDetails,picArr){ //this function for uploading files
+
 			upload.upload(files,path,userDetails,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
@@ -190,6 +190,10 @@ define(['app'], function (app) {
 		$scope.temp = {};
 		$scope.temp = dataService.config.template;
 		
+		//for post add template data{trupti}
+		$scope.postData=function(addtemplate){
+			console.log(addtemplate);
+		}
 		// switch functions
 		var mytemplates = function(){
 			dataService.get("getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.userDetails)
@@ -205,30 +209,7 @@ define(['app'], function (app) {
 				$scope.templates = response.data;
 			});
 		};
-		
-		//add templates
-		var addtemplate = function(){
-			//reset function{trupti}
-			console.log($scope.addtemplate.business_id);
-			$scope.reset = function() {
-				$scope.addtemplate = {};
-			};
-		    
-			$scope.postData = function(addtemplate) { 
-			console.log(addtemplate);
-			$scope.userDetails=$scope.userDetails;
-			$scope.addtemplate.date = $scope.currentDate;
-			//console.log(userDetails);
-				dataService.post("post/template",addtemplate)
-				.then(function(response) {  //function for response of request temp
-					$scope.addtemplate = response.data;
-					console.log(response);
-					$scope.reset();
-				});
-				console.log(addtemplate);
-			} //end of post method {trupti} 
-		}
-		
+	
 		//list of templates
 		var listoftemplates = function(){
 			$scope.template_type = {template_type : 'public', status:1};
@@ -261,10 +242,8 @@ define(['app'], function (app) {
 				});
 			//end of active button function
 			}
-			
-			
+		
 			//This code for apply/buy button{trupti}
-			
 			$scope.dynamicTooltip = function(status, active, notActive){
 				return (status==1) ? active : notActive;
 			};
@@ -313,7 +292,6 @@ define(['app'], function (app) {
 			}
 			
 			//This code for apply/buy button{trupti}
-			
 			$scope.dynamicTooltip = function(status, active, notActive){
 				return (status==1) ? active : notActive;
 			};
@@ -353,9 +331,10 @@ define(['app'], function (app) {
 			$scope.reset = function() {
 				$scope.reqtemp = {};
 			};
-			//$scope.userid={user_id : 1};
 			//post method for insert data in request template form{trupti}
 			$scope.postData = function(reqtemp) { 
+			$scope.reqtemp = {};
+			$scope.requestcustomtempForm.$setPristine();
 			$scope.userDetails=$scope.userDetails;
 			$scope.reqtemp.date = $scope.currentDate;
 				dataService.post("post/template",reqtemp,$scope.userDetails)
@@ -364,6 +343,28 @@ define(['app'], function (app) {
 					console.log(response);
 					$scope.reset();
 					console.log(reqtemp);
+				});
+			}//end of post method{trupti}
+		}
+	
+		//post method for add template form(trupti)
+		var addtemplate = function(){
+			//reset function{trupti}
+			$scope.reset = function() {
+				$scope.addtemplate = {};
+			};
+			//post method for insert data in request template form{trupti}
+			$scope.postData = function(addtemplate) { 
+			$scope.addtemplate = {};
+			$scope.submittempForm.$setPristine();
+			$scope.userDetails=$scope.userDetails;
+			$scope.addtemplate.date = $scope.currentDate;
+				dataService.post("post/template",addtemplate,$scope.userDetails)
+				.then(function(response) {  //function for response of request temp
+					$scope.addtemplate = response.data;
+					console.log(response);
+					$scope.reset();
+					console.log(addtemplate);
 				});
 			}//end of post method{trupti}
 		}
