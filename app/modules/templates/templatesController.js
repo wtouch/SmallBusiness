@@ -162,14 +162,15 @@ define(['app'], function (app) {
 		
 		//Upload Function for uploading files {Vilas}
 		$scope.reqtemp={}; // this is form object
-		$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
+		$scope.addtemplate={};
+		//$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
 		$scope.path = "template/"; // path to store images on server
-		$scope.reqtemp.scrible  = []; // uploaded images will store in this array
-		
-		$scope.upload = function(files,path,userinfo,picArr){ // this function for uploading files
+		$scope.reqtemp.scrible  = {};// uploaded images will store in this array
+		$scope.addtemplate.scrible  = {};
+		$scope.upload = function(files,path,userDetails,picArr){ //this function for uploading files
 		//console.log(picArr);
 		
-			upload.upload(files,path,userinfo,function(data){
+			upload.upload(files,path,userDetails,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
@@ -180,9 +181,14 @@ define(['app'], function (app) {
 				}
 			});
 		};
+		
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
 			upload.generateThumbs(files);
 		};// End upload function
+		
+		
+		$scope.temp = {};
+		$scope.temp = dataService.config.template;
 		
 		// switch functions
 		var mytemplates = function(){
@@ -199,8 +205,31 @@ define(['app'], function (app) {
 				$scope.templates = response.data;
 			});
 		};
-		//userDetails.config.templates
 		
+		//add templates
+		var addtemplate = function(){
+			//reset function{trupti}
+			console.log($scope.addtemplate.business_id);
+			$scope.reset = function() {
+				$scope.addtemplate = {};
+			};
+		    
+			$scope.postData = function(addtemplate) { 
+			console.log(addtemplate);
+			$scope.userDetails=$scope.userDetails;
+			$scope.addtemplate.date = $scope.currentDate;
+			//console.log(userDetails);
+				dataService.post("post/template",addtemplate)
+				.then(function(response) {  //function for response of request temp
+					$scope.addtemplate = response.data;
+					console.log(response);
+					$scope.reset();
+				});
+				console.log(addtemplate);
+			} //end of post method {trupti} 
+		}
+		
+		//list of templates
 		var listoftemplates = function(){
 			$scope.template_type = {template_type : 'public', status:1};
 			angular.extend($scope.template_type, $scope.userDetails);
