@@ -26,14 +26,33 @@ define(['app'], function (app) {
 			startingDay: 1
 		};
 
-		$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.formats = ['yyyy/MM/dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 	/* Date Picker Ended here --------------------------------------------------------------------------------------*/
 	$scope.alerts = [];
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
 	$scope.passMatch = function(pass1, pass2){
-			$scope.pass = (pass1===pass2) ? true : false;
-			//alert($scope.pass); 
-		}
+		$scope.pass = (pass1===pass2) ? true : false;
+	}
+		
+		$scope.editprofile ={};	
+		$scope.userInfo = dataService.parse($rootScope.userDetails);
+		$scope.editprofile = angular.copy($scope.userInfo);
+		console.log($scope.editprofile);
+		$scope.changeProfile = function(editprofile){
+			dataService.put("put/user/changepass",editprofile)
+			.then(function(response) {
+				if(response.status == 'success'){
+					$scope.changepasswd = {};
+					$scope.changepassForm.$setPristine();
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}else{
+					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
+				}
+			}) 
+		}	
 		$scope.changepassword = function(changepasswd) {
 			console.log($rootScope.userDetails.id);
 			console.log(changepasswd);

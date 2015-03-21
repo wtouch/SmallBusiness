@@ -30,10 +30,7 @@ define(['app'], function (app) {
 				}
 				$scope.availabilityMsg = response.message;
 			});
-		} 
-		
-		
-		
+		}
 		$scope.contries = dataService.config.country;
 
 		$scope.getState = function(country){

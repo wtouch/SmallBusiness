@@ -1,7 +1,7 @@
 
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(infrastructure, addbusiness.infrastructure)" title="Add Infrastucture">Add Infrastucture</button>
+		<button class="btn btn-default btn-primary pull-right" ng-click="addInfrastructure(infrastructure, addbusiness.infrastructure)" title="Add Infrastucture">Add Infrastucture</button>
 	</div>
 </div>
 
@@ -21,42 +21,8 @@
 <div class="form-group">
 	<label for="infraHeading" class="col-sm-3 control-label" name="infraHeading" >Infrastucture Heading</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="infraHeading" id="infraHeading"  ng-model="infrastructure.heading" required>
-			<option value="">Select Heading</option>
-			<option value="Customization Facilities">Customization Facilities</option>
-			<option value="Customized Packaging">Customized Packaging</option>
-			<option value="Distribution Network">Distribution Network</option>
-			<option value="Infrastructural Set-Up">Infrastructural Set-Up</option>
-			<option value="Infrastructural & Manufacturing Facilities">Infrastructural & Manufacturing Facilities</option>
-			<option value="Infrastructure & Team">Infrastructure & Team</option>
-			<option value="Infrastructure Facilities">Infrastructure Facilities</option>
-			<option value="Logistics">Logistics</option>
-			<option value="Logistics Transportation">Logistics & Transportation</option>
-			<option value="Logistics Facility">Logistics Facility & Timely Delivery</option>
-			<option value="Manufacturing Facilities">Manufacturing Facilities</option>
-			<option value="Manufacturing Unit">Manufacturing Unit</option>
-			<option value="Infrastructure">Our Infrastructure</option>
-			<option value="Machinery">Our Machinery</option>
-			<option value="Vendor">Our Vendor Base</option>
-			<option value="Warehouse">Our Warehouse</option>
-			<option value="Packaging">Packaging & Delivery</option>
-			<option value="Packaging Transportation">Packaging & Transportation</option>
-			<option value="Product Packaging">Product Packaging</option>
-			<option value="Production">Production Facility</option>
-			<option value="Reasearch">Reasearch & Development</option>
-			<option value="Reasearch Activities">Reasearch & Development Activities</option>
-			<option value="Reasearch Facilities">Reasearch & Development Facilities</option>
-			<option value="Sales">Sales Network</option>
-			<option value="Warehouse Packaging">Warehouse & Packaging</option>
-			<option value="Warehouse Facilities">Warehouse Facilities</option>
-			<option value="Warehouse Unit">Warehouse Unit</option>
-			<option value="Warehousing Logistics">Warehousing & Logistics</option>
-			<option value="Warehousing Packaging">Warehousing & Packaging</option>
-			<option value="Warehousing Logistics">Warehousing,Packaging & Logistics</option>
-			<option value="Warehousing Delivery">Warehousing,Packaging & Timely Delivery</option>
-			<option value="Warehousing Transportation">Warehousing,Packaging & Transportation</option>
-			<option value="WideDistribution">Wide Distribution Network</option>
-			
+		<select class="form-control" name="infraHeading" id="infraHeading"  ng-model="infrastructure.heading" required ng-options="item as item for item in biz.infrastructure">
+			<option value="">Select Heading</option>					
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.infraHeading.$dirty && addbusinessForm.infraHeading.$invalid">
 		<span ng-show="addbusinessForm.infraHeading.$error.required" class="text-danger">Sender Country is required.</span>

@@ -13,6 +13,8 @@
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">Name </label>
 						<div class="col-sm-9">
+							<input type="hidden" ng-model="register.register_date">
+							<input type="hidden" ng-model="register.config" ng-init="">
 							<input type="text" class="form-control" id="name" ng-model="register.name" name="name" placeholder="Enter Name" required>
 							<span class="help-block" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">
 								<span class="text-danger" ng-show="registerForm.name.$error.required">name is required.</span>
@@ -113,10 +115,10 @@
 								</div>
 							</div>
 							<span class="help-block">	
-								<span class="text-success" ng-show="registerForm.username.$dirty && registerForm.username.$valid">{{availabilityMsg}}</span>
+								<span class="text-success" ng-show="registerForm.username.$dirty && registerForm.username.$valid">Please Select Another username.Username already exist.</span>
 							</span>
 							<span  class="help-block" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">
-								<span class="text-danger" ng-show="registerForm.username.$error.available">{{availabilityMsg}}</span>
+								<span class="text-danger" ng-show="registerForm.username.$error.available">Username available</span>
 								<span class="text-danger" ng-show="registerForm.username.$error.required && (registerForm.username.$dirty || submitted)">username is required.</span>
 								<span class="text-danger" ng-show="registerForm.username.$error.minlength && (registerForm.username.$dirty || submitted)">username is too short.</span>
 							</span>

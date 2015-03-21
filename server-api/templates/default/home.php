@@ -1,0 +1,1 @@
+<p><?php echo "this is home page!" ?></p>
