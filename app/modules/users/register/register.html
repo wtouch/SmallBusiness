@@ -74,7 +74,7 @@
 						</div>
 					</div>				
 					<div class="form-group">
-						<label for="phone" class="col-sm-2 control-label">Phone </label>
+						<label for="phone" class="col-sm-2 control-label">Phone No.</label>
 						<div class="col-sm-9">
 							<input type="text" id="phone" class="form-control" name="phone" ng-model="register.phone" placeholder="Your Contact No" ng-pattern="/(7|8|9)\d{9}$/" maxlength="10" required>
 							<span class="help-block" ng-show="registerForm.phone.$dirty && registerForm.phone.$invalid">
@@ -115,10 +115,10 @@
 								</div>
 							</div>
 							<span class="help-block">	
-								<span class="text-success" ng-show="registerForm.username.$dirty && registerForm.username.$valid">Please Select Another username.Username already exist.</span>
+								<span class="text-success" ng-show="registerForm.username.$dirty && registerForm.username.$valid">Username available</span>
 							</span>
 							<span  class="help-block" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">
-								<span class="text-danger" ng-show="registerForm.username.$error.available">Username available</span>
+								<span class="text-danger" ng-show="registerForm.username.$error.available">Please Select Another username.Username already exist.</span>
 								<span class="text-danger" ng-show="registerForm.username.$error.required && (registerForm.username.$dirty || submitted)">username is required.</span>
 								<span class="text-danger" ng-show="registerForm.username.$error.minlength && (registerForm.username.$dirty || submitted)">username is too short.</span>
 							</span>

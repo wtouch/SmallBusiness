@@ -1,11 +1,10 @@
-<ng-include src="'modules/component/toolbar.html'"></ng-include>
-	<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	
-		{{alert.msg}}
-	</alert>
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	
+	{{alert.msg}}
+</alert>
 <div class="row">
 	<div class="col-sm-12">	
 		<div class="main-content">
-				<ng-include src="'modules/component/toolbar.html'"></ng-include>
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>
 			<div class="row">
 				<div class="col-sm-2">
 					<img src="img/user.jpg">
@@ -21,6 +20,13 @@
 								<span class="help-block" ng-show="editProfileForm.name.$dirty && editProfileForm.name.$invalid">
 									<span class="text-danger" ng-show="editProfileForm.name.$error.required">Name is required.</span>
 								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label  for="username" class="col-sm-2 control-label">Username</label>
+							<div class="col-sm-9">
+								<input readonly type="text" id="username" class="form-control"
+								name="username" ng-model="editprofile.username"/>
 							</div>
 						</div>
 						<div class="form-group">	
@@ -53,18 +59,63 @@
 									<span class="text-danger" ng-show="editProfileForm.Address.$error.required">Address is required.</span>
 								</span>	
 							</div>
-						</div>	
+						</div>
+						<div class="form-group">
+						<label for="country" class="col-sm-2 control-label" name="country" >Country</label>
+						<div class="col-sm-3">
+							<select class="form-control" id="country" name="country" ng-model="editprofile.country" required ng-change="getState(editprofile.country)" ng-options="item.country_name as item.country_name for item in contries">		
+								<option value="">Select Country</option>
+							</select>
+							<span class="help-block" ng-show="editProfileForm.country.$dirty && editProfileForm.country.$invalid">
+								<span class="text-danger" ng-show="editProfileForm.country.$error.required">Country is required.</span>
+							</span>				
+						</div>
+						<div class="col-sm-3">
+							<select class="form-control" id="state" name="state" ng-model="editprofile.state" ng-change="getCities(editprofile.state)" required ng-options="item.state_name as item.state_name for item in states">		
+								<option value="">Select State</option>
+							</select>
+							<span class="help-block" ng-show="editProfileForm.state.$dirty && editProfileForm.state.$invalid">
+								<span class="text-danger" ng-show="editProfileForm.state.$error.required">state is required.</span>
+							</span>				
+						</div>
+						<div class="col-sm-3">
+							<select class="form-control" id="city" name="city" ng-model="editprofile.address.city" required ng-options="item.city_name as item.city_name for item in cities">		
+								<option value="">Select city</option>
+							</select>
+							<span class="help-block" ng-show="editProfileForm.city.$dirty && editProfileForm.city.$invalid">
+								<span class="text-danger" ng-show="editProfileForm.city.$error.required">city is required.</span>
+							</span>				
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="fax" class="col-sm-2 control-label">Fax </label>
+						<div class="col-sm-9">
+							<input type="text" id="fax" class="form-control" name="fax" ng-model="editprofile.fax" placeholder="Your Fax " ng-pattern="/[0-9]\d$/" maxlength="12" required>
+							<span class="help-block" ng-show="editProfileForm.fax.$dirty && editProfileForm.fax.$invalid">
+								<span class="text-danger" ng-show="editProfileForm.fax.$error.pattern && (editProfileForm.fax.$dirty || submitted)">Enter a valid Fax.</span>
+							</span>
+						</div>						
+					</div>				
+					<div class="form-group">
+						<label for="website" class="col-sm-2 control-label">Website </label>
+						<div class="col-sm-9">
+							<input type="url" class="form-control" id="website" name="website" ng-model="editprofile.website" placeholder="Enter Website">
+							<span class="help-block" ng-show="editProfileForm.website.$dirty && editProfileForm.website.$invalid">
+								<span class="text-danger" ng-show="editProfileForm.website.$error.required">Website  is required.</span>
+								<span class="text-danger" ng-show="editProfileForm.website.$error.url">Invalid Web Site.</span>
+							</span>
+							<span>e.g http://www.google.com</span>
+						</div>						
+					</div>	
 						<div class="form-group">
 							<label  for="dob" class="col-sm-2 control-label">Birth dob</label>
 							<div class="col-sm-9">
-								<p class="input-group">
-									<input readonly type="text" id="dob" class="form-control" ng-model="editprofile.dob"/>
-								</p>
+								<input readonly type="text" id="dob" class="form-control" ng-model="editprofile.dob"/>
 							</div>
 						</div>											
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-9">
-							  <button type="submit" class="btn btn-success" title="save">Save</button>
+							  <button type="submit" class="btn btn-success" title="save" ng-click="changeProfile(editprofile.id,editprofile)">Save</button>
 							  <button type="reset" class="btn btn-danger" title="Reset">Reset</button>
 							</div>
 						</div>						

@@ -7,15 +7,16 @@ define(['app'], function (app) {
     // This is controller for this view
 	var registerController = function ($scope,$injector,dataService) {
 		
-		$scope.passMatch = function(pass1, pass2){
-			$scope.pass = (pass1===pass2) ? true : false;
-		}
-		
 		$scope.alerts = [];
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
 		$scope.register = {address:{}};
+		
+		//match password
+		$scope.passMatch = function(pass1, pass2){
+			$scope.pass = (pass1===pass2) ? true : false;
+		}
 		
 		//check availability
 		$scope.checkuserAvailable = function(fieldName, fieldValue){
@@ -31,8 +32,9 @@ define(['app'], function (app) {
 				$scope.availabilityMsg = response.message;
 			});
 		}
+		
+		//dynamic dropdwnlist of country,state & city
 		$scope.contries = dataService.config.country;
-
 		$scope.getState = function(country){
 			var states = [];
 			for (var x in $scope.contries){
@@ -55,6 +57,8 @@ define(['app'], function (app) {
 			}
 			$scope.cities = cities;
 		};
+		
+		//insert data of register user into table
 		$scope.submitted = false;
 		$scope.insert = function(register){
 			$scope.params = {url:'login'};
@@ -66,7 +70,6 @@ define(['app'], function (app) {
 					$scope.submitted = true;
 				}
 				console.log(response);
-				
 			},function(err){
 				console.log(err);
 			})

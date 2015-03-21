@@ -125,17 +125,20 @@ define(['app'], function (app) {
 		};
 		
 		//check availability
-		$scope.checkuserAvailable = function(adduser){
-			dataService.post("post/user/checkavailability",adduser)
+		$scope.checkuserAvailable = function(fieldName, fieldValue){
+			$scope.checkParams = {};
+			$scope.checkParams[fieldName] = fieldValue;
+			dataService.post("post/user/checkavailability",$scope.checkParams)
 			.then(function(response) {  
 				if(response.status == 'success'){
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.adduserForm[fieldName].$setValidity('available', true);
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.adduserForm[fieldName].$setValidity('available', false);
 				}
+				$scope.availabilityMsg = response.message;
 			});
-		} 
-		
+		}
+		console.log($scope.adduserForm);
 		//code for search filter
 		$scope.searchFilter = function(statusCol, colValue) {
 			$scope.search = {search: true};
