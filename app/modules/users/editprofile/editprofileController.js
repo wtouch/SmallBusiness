@@ -2,11 +2,12 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope', '$injector','dataService','$location', '$cookieStore', '$cookies'];
+    var injectParams = ['$scope','$rootScope', '$injector','dataService','$location', '$cookieStore', '$cookies','upload'];
 
     // This is controller for this view
-	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies) {
+	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,upload) {
 		
+		$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		$scope.alerts = [];
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
@@ -63,8 +64,30 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		};
 		
+		//Upload Function for uploading files {Vilas}
+		$scope.editprofile ={};	// this is form object
+		$scope.path = "users/"; // path to store images on server
+		$scope.editprofile.user_img; // uploaded images will store in this array
+		
+		$scope.upload = function(files,path,userDetails,picArr){ // this function for uploading files
+		//console.log(picArr);
+		
+			upload.upload(files,path,userDetails,function(data){
+				var picArrKey = 0, x;
+				for(x in picArr) picArrKey++;
+				if(data.status === 'success'){
+					picArr[picArrKey] = data.details;
+					console.log(data.message);
+				}else{
+					$scope.alerts.push({type: data.status, msg: data.message});
+				}
+			});
+		};
+		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
+			upload.generateThumbs(files);
+		};// End upload function
+		
 		//code for change profile 
-		$scope.editprofile ={};	
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
 		$scope.editprofile = {
 			id : $scope.userInfo.id,
@@ -73,8 +96,6 @@ define(['app'], function (app) {
 			email : $scope.userInfo.email,
 			phone : $scope.userInfo.phone,
 			address :$scope.userInfo.address,
-			country :$scope.userInfo.country,
-			state :$scope.userInfo.state,
 			fax :$scope.userInfo.fax,
 			website :$scope.userInfo.website,
 			dob : $scope.userInfo.dob
@@ -87,6 +108,10 @@ define(['app'], function (app) {
 					$scope.editprofile = {};
 					$scope.editProfileForm.$setPristine();
 					$scope.alerts.push({type: response.status, msg: response.message});
+					//angular.extend($rootScope.userDetails, editprofile);
+					//console.log($rootScope.userDetails);
+					//console.log(editprofile);
+					//dataService.setUserDetails($rootScope.userDetails);
 				}else{
 					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
 				}
