@@ -94,20 +94,22 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				//console.log(businessList);
 			});
 		//end of options
-		var addproducts = function(){
+		var addproducts = function(){ 
 			//reset function{trupti}
 				console.log($scope.addproduct.business_id);
 				$scope.reset = function(){
 				$scope.addproduct = {};
 			};
+			//angular.extend(addproduct,$scope.userDetails);
 			$scope.postData = function(addproduct) { 
-			$scope.userDetails=$scope.userDetails;
+			//$scope.addproducts = {};
+			//$scope.addproductForm.$setPristine();
+			$scope.addproduct.user_id= $rootScope.userDetails.id;
 			$scope.addproduct.date = $scope.currentDate;
-			////console.log(userDetails);
 				 dataService.post("post/product",addproduct)
 				.then(function(response) {  //function for response of request temp
 					$scope.addproduct = response.data;
-					console.log(response);
+					console.log(response.message);
 					$scope.reset();
 				}); 
 				console.log(addproduct);
@@ -121,8 +123,10 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			$scope.reset = function() {
 				$scope.addservice = {};
 			};
-		    
+		    $scope.addservice.user_id= $rootScope.userDetails.id;
 			$scope.postData = function(addservice) { 
+			//$scope.addservice = {};
+			//$scope.addserviceForm.$setPristine();
 			console.log(addservice);
 			$scope.userDetails=$scope.userDetails;
 			$scope.addservice.date = $scope.currentDate;

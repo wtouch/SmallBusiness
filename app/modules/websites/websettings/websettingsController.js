@@ -50,10 +50,9 @@ define(['app'], function (app) {
 					console.log(response.message);
 				});
 			}
-	
     };
-	// Inject controller's dependencies
+	//Inject controller's dependencies
 	websettingsController.$inject = injectParams;
-	// Register/apply controller dynamically
+	//Register/apply controller dynamically
     app.register.controller('websettingsController', websettingsController);
 });

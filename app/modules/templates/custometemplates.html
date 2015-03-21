@@ -41,16 +41,16 @@
 		</div>
 	</div>
 	<div class="table-responsive">	
-			<table class="table table-bordered">
-				<thead>
-					<th>Sr.No.</th>
-					<th>Template Name</th>
-					<th>Template Type</th> 
-					<th>Development Status</th>
-					<th>Create Date</th>
-					<th>Modified Date</th>
-					<th>Manage</th>
-				</thead>
+		<table class="table table-bordered">
+			<thead>
+				<th>Sr.No.</th>
+				<th>Template Name</th>
+				<th>Template Type</th> 
+				<th>Development Status</th>
+				<th>Create Date</th>
+				<th>Modified Date</th>
+				<th>Manage</th>
+			</thead>
 					<tbody>
 						<tr ng-repeat="x in templates">
 							<td>{{((customTempCurrentPage - 1) * pageItems) + $index + 1 }}</td>
@@ -71,7 +71,7 @@
 							</td>
 						</tr>		
 					</tbody>					
-			</table>
+		</table>
 	</div>
 	<div class="text-center">				
 		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="customTempCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(customTempCurrentPage,template_type)"></pagination>

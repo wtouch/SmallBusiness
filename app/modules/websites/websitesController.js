@@ -134,6 +134,8 @@ define(['app'], function (app) {
 			$scope.reqnewsite = {};
 			//post method for insert data in request site form{trupti}
 			$scope.postData = function(reqnewsite) { 
+			$scope.reqnewsite = {};
+			$scope.requestsiteForm.$setPristine();
 			console.log(reqnewsite);
 			$scope.userDetails=$scope.userDetails;
 			reqnewsite.date = $scope.currentDate;
