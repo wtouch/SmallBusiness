@@ -1,10 +1,1 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title><?php echo $userShortInfo ?></title>
-</head>
-<body>
-	<p><?php echo $userShortInfo ?></p>
-	
-</body>
-</html>
+<p><?php echo "this is home page!" ?></p>

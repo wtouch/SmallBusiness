@@ -4,7 +4,11 @@
 	<title><?php echo $userShortInfo ?></title>
 </head>
 <body>
-	<p><?php echo $userShortInfo ?></p>
-	
+<nav>navigation</nav>
+<?php if(isset($_GET['view'])){
+	include $_GET['view'].".php";
+} ?>
+	<p></p>
+<footer>footer</footer>
 </body>
 </html>
