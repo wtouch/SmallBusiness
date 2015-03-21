@@ -40,11 +40,12 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		};
 		
-		// for dynamic value of domain name
-		dataService.get('getmultiple/usergroup/1/200', $scope.userDetails).then(function(response){
+		// for dynamic value of group name
+		dataService.get('getmultiple/usergroup/1/200').then(function(response){
 			
 			if(response.status=='success'){
 				$scope.groups = response.data;
+				console.log($scope.groups);
 			}else{
 				$scope.alerts.push({type: response.status, msg: response.message});
 			}
@@ -58,7 +59,6 @@ define(['app'], function (app) {
 		
 		//dynamic checkboxes in create user group form
 		$scope.manage_user = dataService.config.manage_user;
-		console.log($scope.manage_user);
 		
 		//For display by default userslist.html page
 		$scope.userViews = $routeParams.userViews; 
@@ -305,7 +305,7 @@ define(['app'], function (app) {
 						if(response.status == 'success'){
 							$scope.usersgroup = {};
 							$scope.usersgroupForm.$setPristine();
-							$scope.submitted = true;
+							//$scope.submitted = true;
 							$scope.alerts.push({type: response.status, msg: response.message});
 							
 						}else{

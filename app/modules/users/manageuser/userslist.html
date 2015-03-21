@@ -20,7 +20,7 @@
 						<span ng-hide="users.boxId ==1" class="glyphicon glyphicon-pencil"></span>
 						<span ng-hide="users.boxId ==0||!users.boxId" class="glyphicon glyphicon-ok"></span>
 					</a>
-					<select class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-click="showDropDown($event,'opened')" ng-options="item as item.group_name for item in groups" ng-required="true">
+					<select class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-click="showDropDown($event,'opened')" ng-options="item.id as item.group_name for item in groups" ng-required="true">
 						<option value="">Select Group</option>
 						<!-- <option value="1">Manager</option>
 						<option value="2">Salseman</option>
