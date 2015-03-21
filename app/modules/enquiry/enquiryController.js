@@ -1,9 +1,9 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope', '$injector', '$routeParams','$location','dataService','upload','$route']; /* Added $routeParams to access route parameters */
+    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','upload','$route']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var enquiryController = function ($scope, $injector, $routeParams,$location,dataService,upload,$route) {
+	var enquiryController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,upload,$route) {
 		
 		//Code For Pagination
 		$scope.maxSize = 5;
@@ -15,14 +15,13 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.mailList = [];
 		$scope.mailId = $routeParams.mailId;
-		$scope.user_id = {user_id : 2};
 		$scope.alerts = [];
 		$scope.tinymceConfig = {};
 		$scope.currentDate = dataService.currentDate;
-		console.log($scope.currentDate);
 		$scope.hideDeleted = "";//hide deleted mails from inbox
 		
-		//For display by default mails.html page{trupti}
+		
+		//For display by default mails.html page
 		if(!$routeParams.mailId) {
 			$location.path('/dashboard/enquiry/mails');
 		}
@@ -44,10 +43,8 @@ define(['app'], function (app) {
 			
 		//pagination
 		$scope.pageChanged = function(page, where) {
-			//angular.extend(where, $scope.user_id);
 			dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems, where).then(function(response){
 				$scope.mailList = response.data;
-				//console.log(response.data);
 			});
 		};//End of pagination
 		
@@ -81,9 +78,8 @@ define(['app'], function (app) {
 			angular.extend($scope.searchObj, $scope.statusParam);
 			if(colValue.length >= 4){
 				dataService.get("/getmultiple/enquiry/1/"+$scope.pageItems, $scope.searchObj)
-				.then(function(response) {  //function for templatelist response
+				.then(function(response) { 
 					if(response.status=="warning" || response.status=='error' ){
-						//$scope.alerts.push({type: response.status, msg: response.message});
 						$scope.mailList = response.data;
 						$scope.totalRecords = response.totalRecords;
 					}else{
@@ -101,6 +97,7 @@ define(['app'], function (app) {
 			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response) { 
 				if(response.status == 'success'){
 					$scope.mailList = response.data;
+					//dataService.parse($scope.mailList);
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -139,57 +136,51 @@ define(['app'], function (app) {
 			$scope.mailSingleId = ($routeParams.id) ? $routeParams.id : "";
 			$scope.prevmail=function(){
 				$scope.mailSingleId = $scope.mailSingleId - 1;
-				console.log('/mailview/'+$scope.mailSingleId);
 				$location.path('/dashboard/enquiry/mailview/'+$scope.mailSingleId);
-			  }
+			}
 			$scope.nextmail=function(){
-				$scope.mailSingleId = parseInt($scope.mailSingleId)  + 1;
-				console.log('/mailview/'+$scope.mailSingleId );
-				$location.path('/dashboard/enquiry/mailview/'+$scope.mailSingleId  );
+				$scope.mailSingleId = parseInt($scope.mailSingleId) + 1;
+				$location.path('/dashboard/enquiry/mailview/'+$scope.mailSingleId);
 			}
 			if($scope.mailSingleId != ""){
 				dataService.get("getsingle/enquiry/"+$scope.mailSingleId)
 				.then(function(response) {
 					$scope.singlemail = response.data;
-					$scope.singlemail.to_email = JSON.parse($scope.singlemail.to_email);
-					$scope.singlemail.from_email = JSON.parse($scope.singlemail.from_email);	
+					$scope.singlemail.date = $scope.singlemail.date;
 					$scope.totalRecords = response.totalRecords;
 					$scope.replyMail = {};
 					$scope.replyMail.reply_message ={};
-					$scope.replyMail.to_email = $scope.singlemail.from_email;
-					$scope.replyMail.from_email = $scope.singlemail.to_email;
+					$scope.replyMail.to_email = $scope.singlemail.from_email.from;
+					$scope.replyMail.from_email = $scope.singlemail.to_email.to;
 					$scope.replyMail.reply_message.subject = "RE: "+$scope.singlemail.subject;
 					$scope.replyMsg = ($scope.singlemail.reply_message!="") ? JSON.parse($scope.singlemail.reply_message) : {message:""};
 					$scope.replyMail.reply_message.message = $scope.replyMsg.message;
-					console.log(response);
 					if($scope.singlemail.reply_status == 1){
 						$scope.tinymceConfig = {
 							readonly: true,
-							//toolbar: false,
-							//menubar: false,
-							//statusbar: false
-						  }
+						}
 					}
-					
 					$scope.update = function(id,replyMail){
 						dataService.put("put/enquiry/"+id,replyMail)
 						.then(function(response) {
-							console.log(response);
+							$scope.replyMail={};
+							$scope.replyMail.$setPristine();
 						});
 					};
 				},function(error) {
 					console.log(error);
 				});
-				
 			}	
 		}
 		
+		
+		
+		
 		var composeMail = function(){
+			//Upload Function for uploading files 
+			$scope.composemail = {user_id: $rootScope.userDetails.id, from_email : {from:$rootScope.userDetails.email ,cc : ""}, name : $rootScope.userDetails.username} ;
 			
-			//Upload Function for uploading files {Vilas}
-			$scope.composemail = {user_id: 1, from_email : {from : "vilas@wtouch.in",cc : ""}, first_name : "Vilas", last_name : "Shetkar"} ;
 			$scope.composemail.date = $scope.currentDate;
-			$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
 			$scope.path = "mail/"; // path to store images on server
 			$scope.composemail.Attachment = []; // uploaded images will store in this array
 			$scope.upload = function(files,path,userinfo){ // this function for uploading files
@@ -207,7 +198,7 @@ define(['app'], function (app) {
 				upload.generateThumbs(files);
 			};
 			
-	
+		
 			//post method for insert data of compose mail
 			$scope.postData = function(composemail) {
 				console.log(composemail);
@@ -215,10 +206,11 @@ define(['app'], function (app) {
 				.then(function(response) {  
 					if(response.status=="success"){
 						$scope.alerts.push({type: response.status, msg: response.message});
+						
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}
-					$scope.reset();
+				
 				});
 				
 			}

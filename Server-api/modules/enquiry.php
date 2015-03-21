@@ -39,8 +39,22 @@
 	}//end get
 	
 	if($reqMethod=="POST"){
-		$insert = $db->insert("enquiry", $body);
-		echo json_encode($insert);
+		$input = json_decode($body);
+		
+		$from['email'] = $input->from_email->from;
+		$from['name'] = $input->name;
+		$recipients = [$input->to_email->to];
+		$subject = $input->subject;
+		$message = $input->message;
+
+		$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail=null, $bccMail = null, $messageText = null);
+		 if($mail['status'] == 'success'){
+			$insert = $db->insert("enquiry", $body);
+			echo json_encode($insert);
+		}else{
+			$response = $mail;
+		}
+
 	}
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record
