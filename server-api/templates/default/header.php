@@ -2,7 +2,7 @@
     <div class="container">
 	     <div class="row">
 		    <div class="col-sm-12">
-			    <img src="img/logo.jpg"/>					
+			    <img src="<?php echo $filesPath ?>/img/logo.jpg"/>					
 			    <address class="pull-right">
 						8901 manora road,Glasglow.D0489GR<br>
 						telephone:+000444<br>
