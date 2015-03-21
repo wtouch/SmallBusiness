@@ -1,13 +1,13 @@
 
-<form name="websettingsForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">
+
 <div class="row">		
 	<div class="col-sm-12">	
 		<div class="main-content">
 				<div class="bottomspace">
 					<ng-include src="'modules/business/toolbar.html'"></ng-include>
-				<div class="bottomspace">
+				<!-- <div class="bottomspace">
 					<div class="row">
-						<div class="col-sm-3">
+	<form name="websettingsForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">					<div class="col-sm-3">
 							<select id="selectBusiness" class="form-control" ng-change="changeScope(selectBusiness)" ng-model="selectBusiness" ng-options="item as item.business_name for item in businessList"> 
 								<option value="">Select Business</option>
 							<select id="biz" class="form-control" ng-model="biz"> 		
@@ -50,7 +50,7 @@
 					<span ng-show="websettingsForm.contact_details.$error.required">Contact Details are required.</span>
 					</span>
 					</div>						
-					</div>	 -->
+					</div>	 - ->
 					
 		<div class="form-group">
 			<label for="contact" class="col-md-2 control-label">Contact Number </label>
@@ -127,11 +127,20 @@
 				
 				<ng-include ng-show="selectBusiness && productType=='service'" src="'modules/business/products/servicelist.html'"></ng-include>
 				
-				<ng-include ng-if="selectBusiness && productType=='product'"  src="'modules/business/products/productlist.html'"></ng-include> -->
+				<ng-include ng-if="selectBusiness && productType=='product'"  src="'modules/business/products/productlist.html'"></ng-include> - ->
 		</div>
 		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-9">
+				<button type="submit" class="btn btn-success" ng-disabled="websettingsForm.$dirty && websettingsForm.$invalid" ng-click="postData(websetting)">Send Request</button>
+				<button type="reset" class="btn btn-danger">Reset</button> -->
+			</div>
+</div>		
 	</div>
+	
 </div>
+
+<!-- </form> -->
 
 
 
