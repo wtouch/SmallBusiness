@@ -1,7 +1,7 @@
 
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button class="btn btn-default btn-primary pull-right" ng-click="addNewsCoverage(news_coverage, addbusiness.news_coverage)" title="Add News Coverage">Add News Coverage</button>
+		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(news_coverage, addbusiness.news_coverage)" title="Add News Coverage">Add News Coverage</button>
 	</div>
 </div>
 
@@ -89,7 +89,7 @@
 </div>
 
 <div>
-	<input type="hidden" required name="news_coverage" ng-model="addbusiness.news_coverage" />
+	<input type="hidden" name="news_coverage" ng-model="addbusiness.news_coverage" />
 	<span class="help-block" ng-show="addbusinessForm.news_coverage.$dirty && addbusinessForm.news_coverage.$invalid">
 		<span ng-show="addbusinessForm.news_coverage.$error.required" class="text-danger">News Coverage Description is required.</span>
 	</span>
@@ -104,8 +104,8 @@
 		</tr>
 		<tr ng-repeat="(key, value) in addbusiness.news_coverage">
 			<td>{{key}}</td>
-			<td>{{value}}</td>
-			<td><button ng-click="removeObject(key,addbusiness.news_coverage)">Remove</button></td>
+			<td class="tdwidth">{{value}}</td>
+			<td><button class="btn btn-danger" ng-click="removeObject(key,addbusiness.news_coverage)">Remove</button></td>
 			
 		</tr>
 	</table>
@@ -113,7 +113,7 @@
 
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-	  <button type="submit" class="btn btn-success"  title="Save"  ng-click="postData(addbusiness)">Submit</button>
+	  <button type="submit" class="btn btn-success"  title="Save" ng-disabled="addbusinessForm.$dirty && addbusinessForm.$invalid"  ng-click="postData(addbusiness)">Submit</button>
 	   <button type="submit"  class="btn btn-success" title="Edit" ng-click="update(addbusiness)">Update</button>
 	</div>
 </div>							

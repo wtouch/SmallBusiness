@@ -1,7 +1,9 @@
 
+<!-- {{job_careers | json}}
+{{addbusiness.job_careers | json}} -->
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button class="btn btn-default btn-primary pull-right" ng-click="addJobsCareers(job_careers, addbusiness.job_careers)" title="Add Jobs">Add Jobs</button>
+		<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(job_careers, addbusiness.job_careers)" title="Add Jobs">Add Jobs</button>
 	</div>
 </div>
 
@@ -30,7 +32,7 @@
 </div>
 
 <div>
-	<input type="hidden" required name="job_careers" ng-model="addbusiness.job_careers" />
+	<input type="hidden" name="job_careers" ng-model="addbusiness.job_careers" />
 	<span class="help-block" ng-show="addbusinessForm.job_careers.$dirty && addbusinessForm.job_careers.$invalid">
 		<span ng-show="addbusinessForm.job_careers.$error.required" class="text-danger">Infrastucture Description is required.</span>
 	</span>
@@ -45,8 +47,8 @@
 		</tr>
 		<tr ng-repeat="(key, value) in addbusiness.job_careers">
 			<td>{{key}}</td>
-			<td>{{value}}</td>
-			<td><button ng-click="removeObject(key,addbusiness.job_careers)">Remove</button></td>
+			<td class="tdwidth">{{value}}</td>
+			<td><button class="btn btn-danger" ng-click="removeObject(key,addbusiness.job_careers)">Remove</button></td>
 			
 		</tr>
 	</table>

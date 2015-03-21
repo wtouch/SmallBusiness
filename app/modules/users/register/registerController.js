@@ -7,10 +7,29 @@ define(['app'], function (app) {
     // This is controller for this view
 	var registerController = function ($scope,$injector,dataService) {
 		
+		$scope.currentDate = dataService.currentDate;
 		$scope.alerts = [];
+		
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
+		
+		//datepicker	
+		$scope.today = function() 
+		{
+			$scope.date = new Date();
+		};
+		$scope.today();
+		$scope.open = function($event,opened)
+		{
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.opened = ($scope.opened==true)?false:true;
+		};
+		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.format = $scope.formats[0];
+		// Date Picker Ended here 
+		
 		$scope.register = {address:{}};
 		
 		//match password
@@ -58,18 +77,17 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		};
 		
+		$scope.register.register_date = $scope.currentDate;
 		//insert data of register user into table
 		$scope.submitted = false;
 		$scope.insert = function(register){
 			$scope.params = {url:'login'};
-			console.log(register);
 			//angular.extend($scope.register, register)
 			dataService.post("post/user/register", register)
 			.then(function(response) {
 				if(response.status == 'success'){
 					$scope.submitted = true;
 				}
-				console.log(response);
 			},function(err){
 				console.log(err);
 			})
