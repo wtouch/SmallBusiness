@@ -13,8 +13,8 @@
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">Name </label>
 						<div class="col-sm-9">
-							<input type="hidden" ng-model="register.register_date">
-							<input type="hidden" ng-model="register.config" ng-init="">
+							<input type="hidden" id="date" name="date" class="form-control" ng-model="register.register_date" value="{{register.register_date}}">
+							<input type="hidden" class="form-control" ng-model="register.config" ng-init="">
 							<input type="text" class="form-control" id="name" ng-model="register.name" name="name" placeholder="Enter Name" required>
 							<span class="help-block" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">
 								<span class="text-danger" ng-show="registerForm.name.$error.required">name is required.</span>
@@ -51,7 +51,7 @@
 						<div class="col-sm-3">
 							<select class="form-control" id="country" name="country" ng-model="register.country" required ng-change="getState(register.country)" ng-options="item.country_name as item.country_name for item in contries">		
 								<option value="">Select Country</option>
-							</select>{{register.country}}
+							</select>
 							<span class="help-block" ng-show="registerForm.country.$dirty && registerForm.country.$invalid">
 								<span class="text-danger" ng-show="registerForm.country.$error.required">Country is required.</span>
 							</span>				
@@ -72,7 +72,18 @@
 								<span class="text-danger" ng-show="registerForm.city.$error.required">city is required.</span>
 							</span>				
 						</div>
-					</div>				
+					</div>	
+					<div class="form-group">
+						<label  for="dob" class="col-sm-2 control-label">Birth Date</label>
+						<div class="col-sm-9">
+							<p class="input-group">
+								<input type="text" id="dob" name="dob" class="form-control" ng-model="register.dob" datepicker-popup="{{format}}" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)" />
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+								</span>
+							</p>
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="phone" class="col-sm-2 control-label">Phone No.</label>
 						<div class="col-sm-9">
@@ -117,7 +128,7 @@
 							<span class="help-block">	
 								<span class="text-success" ng-show="registerForm.username.$dirty && registerForm.username.$valid">Username available</span>
 							</span>
-							<span  class="help-block" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">
+							<span  class="help-block" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">	
 								<span class="text-danger" ng-show="registerForm.username.$error.available">Please Select Another username.Username already exist.</span>
 								<span class="text-danger" ng-show="registerForm.username.$error.required && (registerForm.username.$dirty || submitted)">username is required.</span>
 								<span class="text-danger" ng-show="registerForm.username.$error.minlength && (registerForm.username.$dirty || submitted)">username is too short.</span>

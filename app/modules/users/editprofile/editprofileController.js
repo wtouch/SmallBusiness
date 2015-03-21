@@ -65,19 +65,15 @@ define(['app'], function (app) {
 		};
 		
 		//Upload Function for uploading files {Vilas}
-		$scope.editprofile ={};	// this is form object
+		$scope.editprofile = {user_img : {}};	// this is form object
 		$scope.path = "users/"; // path to store images on server
-		$scope.editprofile.user_img; // uploaded images will store in this array
-		
 		$scope.upload = function(files,path,userDetails,picArr){ // this function for uploading files
-		//console.log(picArr);
-		
+			console.log(picArr);
 			upload.upload(files,path,userDetails,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
 					picArr[picArrKey] = data.details;
-					console.log(data.message);
 				}else{
 					$scope.alerts.push({type: data.status, msg: data.message});
 				}
@@ -100,7 +96,6 @@ define(['app'], function (app) {
 			website :$scope.userInfo.website,
 			dob : $scope.userInfo.dob
 		};
-		console.log($scope.editprofile);
 		$scope.changeProfile = function(id,editprofile){
 			dataService.put("put/user/"+id,editprofile)
 			.then(function(response) {
@@ -135,7 +130,6 @@ define(['app'], function (app) {
 				}
 			})  
 		}
-	
 		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/mybusiness/addbusiness/editprofile.html';
     };
 	// Inject controller's dependencies
