@@ -46,6 +46,7 @@ class websiteManager{
 		// get data for view from product table, business table, users table, template table
 		$where['id'] = $config['website_config']->business_id;
 		$whereProd['business_id'] = $config['website_config']->business_id;
+		$whereProd['user_id'] = $config['user_id'];
 		
 		$businessTable = "business";
 		$productTable = "product";
