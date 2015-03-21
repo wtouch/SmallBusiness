@@ -1,6 +1,6 @@
 <?php
 
-require '../server-api/lib/Slim/Slim.php';
+require $config['root_path'].'/server-api/lib/Slim/Slim.php';
 require 'websitemanager/index.php';
 Slim\Slim::registerAutoloader();
 
