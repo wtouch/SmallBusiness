@@ -12,8 +12,8 @@ define(['app'], function (app) {
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
+		
 		$scope.insert = function(login){
-			
 			dataService.post("post/user/login",$scope.login)
 			.then(function(response) {
 				if(response.status == 'success'){
@@ -32,10 +32,8 @@ define(['app'], function (app) {
 		}
 		
 		$scope.forgotpass = function(forgot) {
-			console.log(forgot);
 			dataService.post("post/user/forgotpass",forgot)
 			.then(function(response) {
-				console.log(response);
 				if(response.status == 'success'){
 					$scope.forgot = response.data;
 					$location.path("/login");
@@ -47,12 +45,9 @@ define(['app'], function (app) {
 		
 		$scope.passMatch = function(pass1, pass2){
 			$scope.pass = (pass1===pass2) ? true : false;
-			//alert($scope.pass); 
 		}
 		$scope.changepasswd = function(changepass) {
-			console.log(changepass);
 			var urlParams = {reset : $routeParams.resetPassKey}
-			console.log(urlParams);
 			dataService.post("post/user/changepass",changepass,urlParams)
 			.then(function(response) {
 				if(response.status == 'success'){

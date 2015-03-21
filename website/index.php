@@ -1,17 +1,20 @@
 <?php
 
-require '../server-api/lib/Slim/Slim.php';
-require 'websitemanager/index.php';
+require $config['root_path'].'/server-api/lib/Slim/Slim.php';
+require $config['root_path'].'/server-api/modules/db/dbHelper.php';
+require 'websitemanager/websiteManager.php';
 Slim\Slim::registerAutoloader();
 
 $app = new Slim\Slim();
-$websiteConfig['routes'] = ['index','home','about'];
+$app->response->headers->set('Content-Type', 'application/json');
+$websiteConfig = websiteManager::getConfig();
+$routes = websiteManager::getRoutes();
+//print_r($websiteConfig);
 
-foreach ($websiteConfig['routes'] as $route){
+foreach ($routes as $route){
 	$app->get('/'.$route, function() use($app, $route) {
-		$templateData = array('userShortInfo' => "my name is vilas");
-		$templateData1 = array('userShortInfo' => "my name is vilas");
-		$app->render('templateloader.php',$templateData);
+		print_r((websiteManager::getTemplate()));
+		
 	});
 }
 

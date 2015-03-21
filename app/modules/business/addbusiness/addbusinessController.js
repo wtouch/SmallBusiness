@@ -17,12 +17,16 @@ define(['app'], function (app) {
 		$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		
+		console.log(dataService.config);
 		// Add Business multi part form show/hide operation from here! {Vilas}
 		$scope.formPart = 'home';
 		console.log($scope.formPart);
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
 		};
+		
+		/***********************************************************************
+		code for add infrastructure,job_careers,testimonials and news_coverage */
 		$scope.infrastructure = {};
 		$scope.infrastructure.desc = {};
 		$scope.job_careers = {};
@@ -37,7 +41,7 @@ define(['app'], function (app) {
 			object[data.heading] = JSON.parse(dtlObj);
 		}
 		
-		$scope.addInfrastructure = function(data, object){
+		 $scope.addInfrastructure = function(data, object){
 			$scope.addToObject(data, object);
 			$scope.infrastructure = { desc : { infra_image  : {} }};
 		}
@@ -52,24 +56,26 @@ define(['app'], function (app) {
 		$scope.addNewsCoverage = function(data, object){
 			$scope.addToObject(data, object);
 			$scope.news_coverage = { desc : { news_image : {} }};
-		}
+		} 
 		
 		$scope.removeObject = function(key, object){
 			delete object[key];
 		}
+		//end of code
 		
+		/**********************************************************************
+		code for accessing json data of business	{Sonali} */
 		$scope.biz = {};
 		$scope.biz = dataService.config.business;
 		
-		//console.log(contries);		
-		//$scope.adduser = {country : {} };
-		$scope.contries = {};
+		//end of code		
+		
+		/**********************************************************************
+		code for accessing json data of country, State & City {Sonali}*/
 		$scope.contries = dataService.config.country;
-		//console.log(contries);
-		 $scope.getState = function(country){
+		$scope.getState = function(country){
 			var states = [];
 			for (var x in $scope.contries){
-				console.log($scope.contries[x].country_name);
 				if($scope.contries[x].country_name == country){
 					for(var y in $scope.contries[x].states){
 						states.push($scope.contries[x].states[y])
@@ -81,7 +87,6 @@ define(['app'], function (app) {
 		$scope.getCities = function(state){
 			var cities = [];
 			for (var x in $scope.states){
-				console.log($scope.states[x].state_name);
 				if($scope.states[x].state_name == state){
 					for(var y in $scope.states[x].cities){
 						cities.push($scope.states[x].cities[y])
@@ -89,34 +94,36 @@ define(['app'], function (app) {
 				}
 			}
 			$scope.cities = cities;
-		}; 
+		};
 		
-		$scope.getTestimonialState = function(country){
+		//for testimonial Country,State, City
+		$scope.countries = dataService.config.country;
+		 $scope.getTestimonialState = function(country){
 			var states = [];
-			for (var x in $scope.contries){
-				console.log($scope.contries[x].country_name);
-				if($scope.contries[x].country_name == country){
-					for(var y in $scope.contries[x].states){
-						states.push($scope.contries[x].states[y])
+			for (var x in $scope.countries){
+				if($scope.countries[x].country_name == country){
+					for(var y in $scope.countries[x].states){
+						states.push($scope.countries[x].states[y])
 					}
 				}
 			}
-			$scope.testimonialstates = states;
+			$scope.states = states;
 		};
 		$scope.getTestimonialCities = function(state){
 			var cities = [];
 			for (var x in $scope.states){
-				console.log($scope.states[x].state_name);
 				if($scope.states[x].state_name == state){
 					for(var y in $scope.states[x].cities){
 						cities.push($scope.states[x].cities[y])
 					}
 				}
 			}
-			$scope.testimonialcities = cities;
-		}; 
-		
-		//Upload Function for uploading files {Vilas}
+			$scope.cities = cities;
+		};  
+		//end of code 
+				
+		/*************************************************************************
+		Upload Function for uploading files {sonali}*/
 		$scope.addbusiness={}; // this is form object
 		$scope.addbusiness.created_date = $scope.currentDate
 		$scope.addbusiness.infrastructure = {};
@@ -150,8 +157,9 @@ define(['app'], function (app) {
 			upload.generateThumbs(files);
 		};// End upload function
 			
-		/************************************************************************************/
-		// add business form code here{sonali}
+		/***********************************************************************************
+		add business form code here{sonali}*/
+		
 		angular.extend($scope.addbusiness, $scope.userDetails);
 		
 		console.log($scope.addbusiness);
@@ -169,7 +177,7 @@ define(['app'], function (app) {
 					$scope.reset();
 				});
 			//console.log(addbusiness);
-		}//end of post method{sonali}
+		}//end of post method
 		
 		//update data into addbusiness table
 		if($scope.user_id){//Update business			
@@ -191,7 +199,8 @@ define(['app'], function (app) {
 			};	
 		}		
 		
-		//datepicker {sonali}
+		/*****************************************************************************
+		datepicker {sonali}*/
 		$scope.today = function(){
 			$scope.newsDate = new Date();
 		};
@@ -205,7 +214,8 @@ define(['app'], function (app) {
 
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
-		/* Date Picker Ended here --------------------------------------------------------------------------------------*/
+		
+		// Date Picker Ended here 
 		
 		
 		

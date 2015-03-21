@@ -53,9 +53,18 @@
 					<div class="btn-toolbar" role="toolbar" aria-label="...">
 							<a ng-click="open('modules/websites/viewWebsite.html', x.id)" class="btn btn-primary responsive"> View Details</a>
 							
+							
 							<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted( x.status, x.id)"" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-remove"></span></button>
 							
 							<button type="button" tooltip="{{dynamicTooltip(x.expired, 'expired', 'Reactive')}}"ng-class="(x.expired==0) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="changeStatusFn('expired',x.id, x.expired)" btn-checkbox btn-checkbox-true="0" btn-checkbox-false="1"><span class="glyphicon glyphicon-ok"></span></button>
+							
+							<div class="btn-group">
+								<a type="button" tooltip="Edit" class="btn btn-warning glyphicon glyphicon-pencil" href="#/dashboard/websites/websettings/{{x.id}}"></a>
+										
+							</div>
+							
+							
+							
 								<!-- <div class="btn-group">
 								<button type="button" tooltip="{{dynamicTooltip(users.expired, 'Baned','Re-active')}}" ng-class="(users.baned==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="users.baned" ng-change="changeStatusFn('baned', users.baned, users.id)" btn-checkbox btn-checkbox-true="'0'" btn-checkbox-false="'1'">
 								<span ng-if="users.baned==1" class="glyphicon glyphicon-repeat"></span>
@@ -66,6 +75,7 @@
 							<a href="{{x.domain_name}}" target="_blank" class="btn btn-primary">Prieview
 							</a>				
 							</div>
+							
 					</div>
 					</td>
 					</tr>

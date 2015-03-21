@@ -26,13 +26,13 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.addproduct={}; // this is form object
 		$scope.addservice = {};
 		$scope.userinfo = {user_id:1}; // this is for uploading credentials
+		
 		$scope.path = "product/"; // path to store images on server
 		$scope.addproduct.product_image  = {}; // uploaded images will store in this array
 		$scope.addservice.product_image  = {}; // uploaded images will store in this array
-		
 		$scope.upload = function(files,path,userinfo,picArr){//this function for uploading files
 		console.log(picArr);
-		
+	
 			upload.upload(files,path,userinfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
@@ -45,6 +45,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 	
 			});
 		};
+		
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
 			upload.generateThumbs(files);
 		};// End upload function
