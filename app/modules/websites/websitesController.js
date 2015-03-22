@@ -21,7 +21,8 @@ define(['app'], function (app) {
 				console.log(response.data[0]);
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
-				});
+				}); 
+				
 			});
 			
 		};
@@ -134,13 +135,14 @@ define(['app'], function (app) {
 			$scope.reqnewsite = {};
 			//post method for insert data in request site form{trupti}
 			$scope.postData = function(reqnewsite) { 
-			$scope.reqnewsite = {};
-			$scope.requestsiteForm.$setPristine();
+			//$scope.reqnewsite = {};
+			//$scope.requestsiteForm.$setPristine();
 			console.log(reqnewsite);
 			$scope.userDetails=$scope.userDetails;
-			reqnewsite.date = $scope.currentDate;
-			//console.log(user_id);
-				dataService.post("post/website",reqnewsite,$scope.userDetails)
+			$scope.reqnewsite.user_id= $rootScope.userDetails.id;
+			$scope.reqnewsite.date = $scope.currentDate;
+				 dataService.post("post/website",reqnewsite)
+				//dataService.post("post/website",reqnewsite,$scope.userDetails)
 				.then(function(response) {  //function for response of request site
 					$scope.reqnewsite = response.data;
 					console.log(response);

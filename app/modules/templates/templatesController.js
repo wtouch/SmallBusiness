@@ -28,7 +28,6 @@ define(['app'], function (app) {
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
-		
 		//this model for show website details when click on apply button{trupti}
 		$scope.showWebsitedetails = function (url, tempId) {
 			$scope.status = {status:1};
@@ -77,6 +76,7 @@ define(['app'], function (app) {
 	
 		//for display form parts
 		$scope.tempPart = $routeParams.tempPart;
+		
 		// all $scope object goes here
 		$scope.alerts = [];
 		$scope.maxSize = 5;
@@ -149,8 +149,7 @@ define(['app'], function (app) {
 			});
 			}
 		}; 
-	
-		
+
 		//function for close alert
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
@@ -163,7 +162,6 @@ define(['app'], function (app) {
 		//Upload Function for uploading files {Vilas}
 		$scope.reqtemp={}; // this is form object
 		$scope.addtemplate={};
-		//$scope.userinfo = {userId:1, name:"vilas"}; // this is for uploading credentials
 		$scope.path = "template/"; // path to store images on server
 		$scope.reqtemp.scrible  = {};// uploaded images will store in this array
 		$scope.addtemplate.scrible  = {};
@@ -318,7 +316,6 @@ define(['app'], function (app) {
 		
 			$scope.apply = function(id, applied){
 				$scope.appliedData = {applied : applied};
-				
 				dataService.put("put/template/"+id, $scope.appliedData)
 				.then(function(response) { //function for businesslist response
 					console.log(response);
@@ -333,11 +330,11 @@ define(['app'], function (app) {
 			};
 			//post method for insert data in request template form{trupti}
 			$scope.postData = function(reqtemp) { 
-			$scope.reqtemp = {};
-			$scope.requestcustomtempForm.$setPristine();
-			$scope.userDetails=$scope.userDetails;
+			//$scope.reqtemp = {};
+			//$scope.requestcustomtempForm.$setPristine();
+			$scope.reqtemp.user_id= $rootScope.userDetails.id;
 			$scope.reqtemp.date = $scope.currentDate;
-				dataService.post("post/template",reqtemp,$scope.userDetails)
+				 dataService.post("post/template",reqtemp)
 				.then(function(response) {  //function for response of request temp
 					$scope.reqtemp = response.data;
 					console.log(response);
@@ -355,8 +352,8 @@ define(['app'], function (app) {
 			};
 			//post method for insert data in request template form{trupti}
 			$scope.postData = function(addtemplate) { 
-			$scope.addtemplate = {};
-			$scope.submittempForm.$setPristine();
+			//$scope.addtemplate = {};
+			//$scope.submittempForm.$setPristine();
 			$scope.userDetails=$scope.userDetails;
 			$scope.addtemplate.date = $scope.currentDate;
 				dataService.post("post/template",addtemplate,$scope.userDetails)

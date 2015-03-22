@@ -5,8 +5,6 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var websettingsController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
-    console.log("hello");
-	
 	// all $scope object goes here
 	$scope.userDetails = {user_id : $rootScope.userDetails.id};
 	$scope.website_id=$routeParams.id;
@@ -32,11 +30,39 @@ define(['app'], function (app) {
 				if(response.status == 'success'){
 					$scope.templateList = response.data;
 					
-				}else{
+				}
+				else{
 					
 					$scope.alerts.push({type: response.status, msg: "You didn't added any business! Please add business first."});
 				}
 			});
+			
+			//code for edit website details{trupti}
+			$scope.userInfo = dataService.parse($rootScope.userDetails);
+				dataService.get("getsingle/website/"+$routeParams.id,$scope.userDetails)
+				.then(function(response) {  //function for my templates response
+				if(response.status == 'success'){
+					$scope.config =response.data.config;
+				}
+				else
+				{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				};
+				$scope.config = response.data;
+			});
+			//update method for website settings form{trupti}
+			$scope.editWebsitedetails = function(id,config){
+				dataService.put("put/website/"+id,config)
+				.then(function(response) {
+					if(response.status == 'success'){
+						//$scope.config = {};
+						//$scope.websettingsForm.$setPristine();
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}else{
+						$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
+					}
+				}) 
+			}	
 			
 			//post data
 			$scope.postData=function(config){
@@ -49,7 +75,7 @@ define(['app'], function (app) {
 					}
 					console.log(response.message);
 				});
-			}
+			};
     };
 	//Inject controller's dependencies
 	websettingsController.$inject = injectParams;

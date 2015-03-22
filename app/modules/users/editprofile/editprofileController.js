@@ -85,7 +85,8 @@ define(['app'], function (app) {
 		
 		//code for change profile 
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
-		$scope.editprofile = {
+		$scope.userInfo = dataService.parse($rootScope.userDetails);
+			$scope.editprofile = {
 			id : $scope.userInfo.id,
 			name : $scope.userInfo.name,
 			username : $scope.userInfo.username,
