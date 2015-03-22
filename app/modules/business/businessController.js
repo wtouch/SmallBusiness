@@ -48,8 +48,17 @@ define(['app'], function (app) {
 		$scope.bizListCurrentPage = 1;
 		$scope.delBizCurrentPage = 1;
 		$scope.pageItems = 10;
-		$scope.numPages = "";	
-		$scope.userDetails = {user_id : $rootScope.userDetails.id}; // these are URL parameters
+		$scope.numPages = "";
+		if($rootScope.userDetails.group_name == "customer"){
+			$scope.userDetails = {user_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "admin" || $rootScope.userDetails.group_name == "manager"){
+			$scope.userDetails = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "salesman"){
+			$scope.userDetails = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		
 		$scope.hideDeleted = "";
 		
 		//function for close alert

@@ -22,6 +22,8 @@
 			// this will used for user specific data selection.
 			$where=array();
 			(isset($_GET['user_id'])) ? $where['user_id'] = $_GET['user_id'] : "";
+			(isset($_GET['manager_id'])) ? $where['manager_id'] = $_GET['manager_id'] : "";
+			(isset($_GET['salesman_id'])) ? $where['salesman_id'] = $_GET['salesman_id'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";
 			(isset($_GET['verified'])) ? $where['verified'] = $_GET['verified'] : "";

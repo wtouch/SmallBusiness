@@ -170,8 +170,7 @@ define(['app'], function (app) {
 		};
 		//post method for insert data in request businessprofile form{sonali}
 		$scope.postData = function(addbusiness) { 
-			$scope.addbusiness.user_id = $scope.userInfo.user_id;
-			dataService.post("post/business",addbusiness,$scope.user_id)
+			dataService.post("post/business",addbusiness)
 				.then(function(response) {  //function for response of request temp
 					$scope.addbusiness = response.data;
 					console.log(response);
@@ -181,14 +180,14 @@ define(['app'], function (app) {
 		}//end of post method
 		
 		//update data into addbusiness table
-		 if($scope.user_id){//Update business			
-			dataService.get("getsingle/business/"+$scope.user_id)
+		 if(/* $scope.user_id */){//Update business		// use business id here	
+			dataService.get("getsingle/business/"+$scope.user_id) // use business id here
 			.then(function(response) {
 					$scope.addbusiness = response.data;					
 			});
 			$scope.update = function(addbusiness){				
 				console.log(addbusiness);						
-				dataService.put("put/business/"+$scope.user_id ,addbusiness)
+				dataService.put("put/business/"+/* $scope.user_id */ ,addbusiness)  // use business id here
 				.then(function(response) {  //function for response of request temp
 					if(response.status == 'success'){
 						$scope.submitted = true;
