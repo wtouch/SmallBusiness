@@ -70,7 +70,7 @@
 				if($data['status'] == 'success' && $data['data']['email'] == $input->email){
 					$from['email'] = "admin@wtouch.in";
 					$from['name'] = "Reset Password";
-					$recipients = [$input->email];
+					$recipients = array($input->email);
 					$subject = "Reset your Password";
 					$message = "Dear User, <a href='http://localhost/vilas/SmallBusiness/app/#/changepass/".$uniqueId."'>Click here to reset your password</a>";
 					$sendMail = $db->sendMail($from, $recipients, $subject, $message);
@@ -107,7 +107,7 @@
 			$sessionObj = new session();
 			$input = json_decode($body);
 			$table = 'users';
-			$where = [];
+			$where = array();
 			if(isset($_GET['reset'])){
 				if($_GET['reset'] ===""){
 					throw new Exception("URL not valid");

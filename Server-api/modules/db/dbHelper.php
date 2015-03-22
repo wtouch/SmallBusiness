@@ -330,14 +330,14 @@ class dbHelper {
         try{
 			(is_Array($inputData)) ? $inputData : $inputData = json_decode($inputData);
 			
-			$dataKey = [];
-			$dataValue = [];
+			$dataKey = array();
+			$dataValue = array();
 			foreach($inputData as $key => $val) // $inputData holds input json data
 			{
 				$value = ($key!=='password')
 						? (is_object($val) || is_array($val))
-							? mysql_real_escape_string(json_encode($val))
-							: mysql_real_escape_string($val)
+							? json_encode($val)
+							: $val
 						: passwordHash::hash($val);
 				//echo ($key=='password')	? passwordHash::hash($val) : "not pass";
 				array_push($dataKey,$key);
@@ -370,11 +370,11 @@ class dbHelper {
                 $a[":".$key] = $value;
             }
             (is_Array($inputData)) ? $inputData : $inputData = json_decode($inputData);
-			$updateTable = [];
+			$updateTable = array();
 			foreach($inputData as $key => $val) // $inputData holds input json data
 			{
 			
-				$value = (is_object($val) || is_array($val)) ? mysql_real_escape_string(json_encode($val)) : mysql_real_escape_string($val);
+				$value = (is_object($val) || is_array($val)) ? json_encode($val) : $val;
 				array_push($updateTable,$key." = '".$value."'");
 				
 			}

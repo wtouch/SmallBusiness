@@ -10,7 +10,7 @@
 			echo json_encode($data);
 			
 		}else{
-			$where=[]; // this will used for user specific data selection.
+			$where=array(); // this will used for user specific data selection.
 			$limit['pageNo'] = $pageNo; // from which record to select
 			$limit['records'] = $records; // how many records to select
 			
@@ -18,7 +18,9 @@
 			$data = $db->select("websites", $where, $limit);
 			
 			// this is used to count totalRecords with only where clause
-			$totalRecords['totalRecords'] = count($db->select("websites", $where)['data']);		
+			$tootalDbRecords = $db->select("website", $where, $limit=null, $like);
+			$totalRecords['totalRecords'] = count($tootalDbRecords['data']);
+			
 			
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
 			$data = array_merge($totalRecords,$data);
@@ -51,7 +53,7 @@
 				echoResponse(200,$response);
 			}               
 			else{
-				$fileDetails = [];
+				$fileDetails = array();
 				$fileDetails['file_name'] = $path . $file_name;
 				$fileDetails['url'] = $file_name;
 				move_uploaded_file($file_tmp,"uploads/images/".$file_name);

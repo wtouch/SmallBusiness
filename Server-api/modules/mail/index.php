@@ -7,7 +7,7 @@
 		
 		$from['email'] = "admin@wtouch.in";
 		$from['name'] = "Testing mail";
-		$recipients = ["vilas@wtouch.in"];
+		$recipients = array("vilas@wtouch.in");
 		$subject = "Reset your Password";
 		$message = "Dear User, This is testing mail!";
 

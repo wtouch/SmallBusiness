@@ -14,13 +14,13 @@
 		}else{
 			
 			
-			$like = [];
+			$like = array();
 			if(isset($_GET['search']) && $_GET['search'] == true){
 				(isset($_GET['business_name'])) ? $like['business_name'] = $_GET['business_name'] : "";
 			}
 			 
 			// this will used for user specific data selection.
-			$where=[];
+			$where=array();
 			(isset($_GET['user_id'])) ? $where['user_id'] = $_GET['user_id'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";
@@ -49,7 +49,9 @@
 			$data = $db->selectJoin($table, $where, $limit,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols);
 			
 			// this is used to count totalRecords with only where clause
-			$totalRecords['totalRecords'] = count($db->selectJoin($table, $where, $limit=null,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols)['data']);		
+			$totalDBRecords = count($db->selectJoin($table, $where, $limit=null,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols));
+			
+			$totalRecords['totalRecords'] = count($totalDBRecords['data']);		
 			
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
 			$data = array_merge($totalRecords,$data);

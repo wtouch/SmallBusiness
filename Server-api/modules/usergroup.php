@@ -11,8 +11,8 @@
 			echo json_encode($data);
 			
 		}else{
-			$where=[]; // this will used for user specific data selection.
-			 $like = [];
+			$where=array(); // this will used for user specific data selection.
+			 $like = array();
 			 if(isset($_GET['search']) && $_GET['search'] == true){
 				 
 				 (isset($_GET['group_name'])) ? $like['group_name'] = $_GET['group_name'] : "";
@@ -30,7 +30,9 @@
 			$data = $db->select("user_group", $where, $limit,$like);
 			
 			// this is used to count totalRecords with only where clause
-			$totalRecords['totalRecords'] = count($db->select("user_group", $where,null, $like)['data']);	
+			$tootalDbRecords = $db->select("user_group", $where, $limit=null, $like);
+			$totalRecords['totalRecords'] = count($tootalDbRecords['data']);
+			
 			
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
 			$data = array_merge($totalRecords,$data);

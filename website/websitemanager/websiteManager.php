@@ -11,7 +11,8 @@ class websiteManager{
 		$table = 'website';
 		$domain = websiteManager::getDomain();
 		$where['domain_name'] = $domain;
-		$dbresult = $db->selectSingle($table, $where)['data'];
+		$dbresult = $db->selectSingle($table, $where);
+		$dbresult = $dbresult['data'];
 		$config['domain_name'] = $dbresult['domain_name'];
 		$config['website_id'] = $dbresult['id'];
 		$config['website_config'] = json_decode($dbresult['config']);
@@ -69,8 +70,8 @@ class websiteManager{
 		$productDbData = $db->selectJoin($productTable, $whereProd, $limit=null, $likeFilter=null, $innerJoinProd, $selectInnerJoinColsProd, $leftJoin = null, $selectLeftJoinCols = null);
 		
 		$businessData = $db->selectSingleJoin($businessTable, $where, $innerJoin, $selectInnerJoinCols, $leftJoin = null, $selectLeftJoinCols = null);
-		$serviceData = [];
-		$productData = [];
+		$serviceData = array();
+		$productData = array();
 		
 		if($productDbData['status'] == "success"){
 			foreach ($productDbData['data'] as $index => $dataArr){
@@ -101,6 +102,6 @@ class websiteManager{
 	}
 	
 	public function getRoutes(){
-		return ['home', 'about', 'products', 'services', 'contact', 'careers', 'testimonials', 'activities'];
+		return array('home', 'about', 'products', 'services', 'contact', 'careers', 'testimonials', 'activities');
 	}
 }

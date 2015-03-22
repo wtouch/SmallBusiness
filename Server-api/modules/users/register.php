@@ -26,7 +26,7 @@
 	}
 	function editUser($body){
 		$db = new dbHelper();
-		$where = [];
+		$where = array();
 		(isset($_GET['id'])) ? $where['id'] = $_GET['id'] : "";		
 		$insert = $db->update("users", $body);
 		echo json_encode($insert);

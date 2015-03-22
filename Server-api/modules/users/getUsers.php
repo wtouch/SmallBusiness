@@ -1,8 +1,8 @@
 <?php
 	function getMultipleUsers($limit){
 		$db = new dbHelper();
-		$where=[]; // this will used for user specific data selection.
-			$like = [];
+		$where=array(); // this will used for user specific data selection.
+			$like = array();
 			 if(isset($_GET['search']) && $_GET['search'] == true){
 				 
 				 (isset($_GET['username'])) ? $like['username'] = $_GET['username'] : "";
@@ -12,8 +12,8 @@
 			$data = $db->select("users", $where, $limit,$like);
 			
 			// this is used to count totalRecords with only where clause
-			$totalRecords['totalRecords'] = count($db->select("users", $where)['data']);		
-			
+			$totalRecords['totalRecords'] = count($db->select("users", $where));		
+			$totalRecords['totalRecords'] = $totalRecords['totalRecords']['data'];
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
 			$data = array_merge($totalRecords,$data);
 			echo json_encode($data);

@@ -8,7 +8,7 @@
 
 		$from['email'] = $input->from_email;
 		$from['name'] = $input->name;
-		$recipients = [$input->to_email];
+		$recipients = array($input->to_email);
 		$subject = $input->subject;
 		$message = $input->message;
 
