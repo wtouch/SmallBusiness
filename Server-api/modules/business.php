@@ -8,7 +8,7 @@
 	if($reqMethod=="GET"){
 		if(isset($id)){
 			$where['id'] = $id;
-			$data = $db->select($table, $where);
+			$data = $db->selectSingle($table, $where);
 			echo json_encode($data);
 			
 		}else{
@@ -31,14 +31,14 @@
 			$innerJoin['users']['user_id'] = "id";
 			
 			// left join [table name][column name]
-			$leftJoin['users']['salseman_id'] = "id";
+			$leftJoin['users']['salesman_id'] = "id";
 			$leftJoin['users']['manager_id'] = "id";
 			
 			// inner join select column [table name][join col name][column to select] = column alias
 			$selectInnerJoinCols['users']['user_id']['name'] = "user_name";
 			
 			// left join select column [table name][join col name][column to select] = column alias
-			$selectLeftJoinCols['users']['salseman_id']['name'] = "salseman";
+			$selectLeftJoinCols['users']['salesman_id']['name'] = "salesman";
 			$selectLeftJoinCols['users']['manager_id']['name'] = "manager";  
 			
 			// page limit
