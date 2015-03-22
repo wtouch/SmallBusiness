@@ -1,3 +1,17 @@
+{{userDetails.group_name}}
+
+<span ng-if="userDetails.group_name != 'admin' || 'salseman' || 'manager'"><input type="text" ng-model="addbusiness.user_id" ng-init="addbusiness.user_id = userDetails.id" /> user id</span>
+
+<span ng-if="userDetails.group_name == 'admin' || 'salesman' || 'manager'" >
+	<select>
+	<option value="">Select Customer</option>
+	</select>
+</span>
+<span ng-if="userDetails.group_name == 'salesman'" > salseman id
+<input type="text" ng-model="addbusiness.salesman_id" ng-init="addbusiness.salesman_id = userDetails.id" />
+</span>
+<input ng-if="userDetails.group_name == 'admin' || userDetails.group_name == 'manager'" type="text" ng-model="addbusiness.manager_id" ng-init="addbusiness.manager_id = userDetails.id" />
+
 <div class="form-group">
 	<label  for="business_name" class="col-sm-3 control-label">Business Name</label>
 	<div class="col-sm-9">

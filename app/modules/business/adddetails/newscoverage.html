@@ -1,0 +1,121 @@
+
+<form name="newscoverageForm" role="form" class="form-horizontal" ng-submit="newscoverageForm.$valid" novalidate="novalidate">
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-9">
+			<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(news_coverage, addbusiness.news_coverage)" title="Add News Coverage">Add News Coverage</button>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label  for="date" class="col-sm-3 control-label">Date</label>
+		<div class="col-sm-9">
+			<p class="input-group">
+			  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="news_coverage.desc.newsdate" is-open="selectDate" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event, 'selectDate')"/>
+			  <span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="open($event, 'selectDate')">
+				<i class="glyphicon glyphicon-calendar"></i></button>
+			  </span>
+			</p>
+		</div>
+	</div>	
+		
+	<div class="form-group">
+		<label  for="medianame" class="col-sm-3 control-label">Media Name</label>	
+		<div class="col-sm-9">
+			<input type="text" id="medianame" class="form-control" ng-model="news_coverage.heading" name="medianame" placeholder="Media Name" required>
+			<span class="help-block" ng-show="newscoverageForm.medianame.$dirty && newscoverageForm.medianame.$invalid">
+				<span ng-show="newscoverageForm.medianame.$error.required" class="text-danger">Media Name is required.</span>
+			</span>
+		</div>						
+	</div>
+
+	<div class="form-group">
+		<label for="mediatype" class="col-sm-3 control-label" name="mediatype">Media Type</label>
+		<div class="col-sm-9">
+			<select class="form-control" name="mediatype" id="mediatype"  ng-model="news_coverage.desc.mediaType" required ng-options="item as item for item in biz.media_type">		
+				<option value="">Select Media Type</option>
+			</select>
+			<span class="help-block" ng-show="newscoverageForm.mediatype.$dirty && newscoverageForm.mediatype.$invalid">
+			<span ng-show="newscoverageForm.mediatype.$error.required" class="text-danger">Media Type is required.</span>
+			</span>				
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label  for="headline" class="col-sm-3 control-label">Headline</label>		
+		<div class="col-sm-9">
+			<input type="text" id="headline" class="form-control" ng-model="news_coverage.desc.headline" name="headline" placeholder="Headline" required>
+			<span class="help-block" ng-show="newscoverageForm.headline.$dirty && 	newscoverageForm.headline.$invalid">
+			<span ng-show="newscoverageForm.headline.$error.required" class="text-danger">Headline is required.</span>
+			</span>
+		</div>						
+	</div>
+	<div class="form-group">
+		<label for="News" class="col-sm-3 control-label">News Coverage URL</label>
+		<div class="col-sm-9">
+			<input type="url" class="form-control" id="News" ng-model="news_coverage.desc.News" name="News" placeholder="News Coverage URL" required>
+			<span class="help-block" ng-show="newscoverageForm.News.$dirty && 	newscoverageForm.News.$invalid">
+				<span ng-show="newscoverageForm.News.$error.required" class="text-danger">News Coverage URL is required.</span>
+				<span ng-show="newscoverageForm.News.$error.url" class="text-danger">Invalid News Coverage URL.</span>
+			</span>
+			<span>e.g http://www.google.com</span>
+		</div>						
+	</div>
+
+	<div class="form-group">
+		<label for="newsdetails" class="col-sm-3 control-label">News Coverage Details</label>
+		<div class="col-sm-9">
+			<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="news_coverage.desc.newsdetails" cols="30" rows="4" ng-maxlength="256" placeholder="News Coverage Details" ui-tinymce required></textarea>
+				<p ng-hide="newscoverageForm.newsdetails.$error.maxlength">
+					{{ 256 - newscover.newsdetails.length + " Chars left" }}
+				</p>		
+				<span class="help-block" ng-show="newscoverageForm.newsdetails.$dirty && newscoverageForm.newsdetails.$invalid">
+					<span class="text-danger" ng-show="newscoverageForm.newsdetails.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="newscoverageForm.newsdetails.$error.required">News Coverage Details is required.</span>
+				</span>	
+		</div>
+	</div> 
+
+	<div class="form-group" > 
+		<label  for="news_image" class="col-sm-3 control-label">Add Image</label>
+		<div class="col-sm-9">
+			<input type="file" id="news_image" name="news_image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="news_image">
+			<!-- This will show thumbnails & progress of images -->
+				<file-preview url="news_image"></file-preview>
+				<!-- This button will show if file/s selected -->
+				<button ng-show="news_image" ng-click="upload(news_image,path,userinfo, news_coverage.desc.news_image)" type="button">Upload</button>
+				<!-- This hidden input will store image path in array after successful uploading -->
+				<input type="hidden" ng-model="news_coverage.desc.news_image">
+		</div>
+	</div>
+
+	<div>
+		<input type="hidden" name="news_coverage" ng-model="addbusiness.news_coverage" />
+		<span class="help-block" ng-show="newscoverageForm.news_coverage.$dirty && newscoverageForm.news_coverage.$invalid">
+			<span ng-show="newscoverageForm.news_coverage.$error.required" class="text-danger">News Coverage Description is required.</span>
+		</span>
+	</div>
+
+	<div class="col-sm-12">
+		<table class="table table-bordered table-responsive" ng-if="addbusiness.news_coverage">
+			<tr>
+				<th>News Coverage Title</th>
+				<th> News Coverage Description</th>
+				<th>Remove </th>
+			</tr>
+			<tr ng-repeat="(key, value) in addbusiness.news_coverage">
+				<td>{{key}}</td>
+				<td class="tdwidth">{{value}}</td>
+				<td><button class="btn btn-danger" ng-click="removeObject(key,addbusiness.news_coverage)">Remove</button></td>
+				
+			</tr>
+		</table>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-9">
+		  <button type="submit" class="btn btn-success"  title="Save" ng-disabled="newscoverageForm.$dirty && newscoverageForm.$invalid"  ng-click="postData(addbusiness)">Submit</button>
+		   <button type="submit"  class="btn btn-success" title="Edit" ng-click="update(addbusiness)">Update</button>
+		</div>
+	</div>							
+</form>

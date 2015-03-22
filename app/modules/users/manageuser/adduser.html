@@ -28,7 +28,7 @@
 					<span class="help-block">	
 						<span class="text-success" ng-show="adduserForm.username.$dirty && adduserForm.username.$valid">Username available</span>
 					</span>
-					<span class="help-block" ng-show="adduserForm.username.$dirty && adduserForm.username.$invalid">
+					<span  class="help-block" ng-show="adduserForm.username.$dirty && adduserForm.username.$invalid">	
 						<span class="text-danger" ng-show="adduserForm.username.$error.available">Please Select Another username.Username already exist.</span>
 						<span class="text-danger" ng-show="adduserForm.username.$error.required && (adduserForm.username.$dirty || submitted)">username is required.</span>
 						<span class="text-danger" ng-show="adduserForm.username.$error.minlength && (adduserForm.username.$dirty || submitted)">username is too short.</span>
@@ -119,8 +119,8 @@
 						
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="postData(adduser)" ng-if="!$routeParams">Add User</button>
-				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="update(adduser)" ng-if="$routeParams">Update User</button>
+				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid || adduserForm.$pristine" ng-click="postData(adduser)" ng-if="!$routeParams">Add User</button>
+				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="update(adduser)" ng-if="#/{{$routeParams}}">Update User</button>
 				  <button type="reset" class="btn btn-danger">Reset</button>
 				</div>
 			</div>						
