@@ -44,9 +44,28 @@
 		
 		$from['email'] = $input->from_email->from;
 		$from['name'] = $input->name;
-		$recipients = [$input->to_email->to];
+		$recipients = array($input->to_email->to);
 		$subject = $input->subject;
-		$message = $input->message;
+		$message = "<table>
+				<tr>
+					<td>Name: </td><td>".$from['name']."</td>
+				</tr>
+				<tr>
+					<td>Email: </td><td>".$from['email']."</td>
+				</tr>";
+		if(is_object($input->message)){
+			foreach($input->message as $key => $value){
+				$message .= "<tr>
+					<td>".$key.":</td><td>".$value."</td>
+				</tr>";
+			}
+		}else{
+			$message .= "<tr>
+					<td>Message: </td><td>".$input->message."</td>
+				</tr>";
+		}
+		$message .= "</table>";
+		//$message = $input->message->message;
 
 		$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail=null, $bccMail = null, $messageText = null);
 		 if($mail['status'] == 'success'){
@@ -55,7 +74,8 @@
 		}else{
 			$response = $mail;
 		}
-
+		print_r($input->to_email->to);
+		print_r($response);
 	}
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record

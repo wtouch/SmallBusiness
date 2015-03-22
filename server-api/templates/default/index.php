@@ -9,6 +9,8 @@ $filesPath = $config['http_template_path'].$template_dir;
 		<link rel="stylesheet" href="<?php echo $filesPath ?>/css/style.css">
 		<script src="<?php echo $filesPath ?>/js/jquery.min.js"></script>
 		<script src="<?php echo $filesPath ?>/js/bootstrap.min.js"></script>
+		<script src="<?php echo $filesPath ?>/js/angular.min.js"></script>
+		<script src="<?php echo $filesPath ?>/js/script.js"></script>
 		<title>Welcome </title>
 		<meta name="description" content="">
 		<meta name="keywords" content="">
