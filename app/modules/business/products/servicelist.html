@@ -7,7 +7,9 @@
 					<h3>{{x.business_name}}</h3>
 					<div class="media">
 						<div class="media-left">
-							<img class="media-object" src="img/m4.jpg"/>{{x.product_image}}
+								<span ng-repeat="(key, value) in x.service_image">
+									<img class="media-object" ng-src="{{value.file_name}}"/>
+								</span>
 						</div>
 						<div class="media-body">
 							<h3>{{x.product_service_name}}</h3>

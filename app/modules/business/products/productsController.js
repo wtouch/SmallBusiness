@@ -130,7 +130,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			console.log(addservice);
 			$scope.userDetails=$scope.userDetails;
 			$scope.addservice.date = $scope.currentDate;
-			//console.log(userDetails);
 				dataService.post("post/product",addservice)
 				.then(function(response) {  //function for response of request temp
 					$scope.addservice = response.data;
@@ -232,7 +231,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		}
 	
     };
-	
 	// Inject controller's dependencies
 	productsController.$inject = injectParams;
 	// Register/apply controller dynamically
