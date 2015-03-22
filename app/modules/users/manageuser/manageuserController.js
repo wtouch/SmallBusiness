@@ -45,16 +45,9 @@ define(['app'], function (app) {
 			
 			if(response.status=='success'){
 				$scope.groups = response.data;
-				console.log($scope.groups);
 			}else{
 				$scope.alerts.push({type: response.status, msg: response.message});
 			}
-			/* var groups = [];
-			for(var id in response.data){
-				var obj = {id: response.data[id].id, group_name : response.data[id].group_name};
-				groups.push(obj);
-			}
-			$scope.groups = groups;  */
 		}) ;
 		
 		//dynamic checkboxes in create user group form
@@ -88,11 +81,6 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope.opened = ($scope.opened==true)?false:true;
 		};
-		 /* $scope.dateOptions = {
-			formatYear: 'yyyy',
-			startingDay: 1
-		};  */
-		
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		// Date Picker Ended here 
@@ -102,43 +90,18 @@ define(['app'], function (app) {
 			if($scope.userViews == 'userslist'){
 				dataService.get("getmultiple/user/"+page+"/"+$scope.pageItems).then(function(response){
 					$scope.userList = response.data;
-					console.log(response.data);
 					$scope.totalRecords = response.totalRecords;
 				});
 			}
 			if($scope.userViews == 'usersgroup'){
 				dataService.get("getmultiple/usergroup/"+page+"/"+$scope.pageItems).then(function(response){
 					$scope.usergroupList = response.data;
-					console.log(response.data);
 					$scope.totalRecords = response.totalRecords;
 				});
 			}
 			
 		};	
 		//End of pagination
-		
-		//code for modal
-		$scope.openModal = function (url, userId) {
-				var modalDefaults = {
-					templateUrl: url,	// apply template to modal
-					size : 'lg'
-				};
-				var modalOptions = {
-					userId : userId
-				};
-				
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					console.log("modalOpened");
-					console.log(modalOptions);
-					dataService.put("put/user/register"+id, modalOptions.data)
-					.then(function(response){
-						console.log(response);
-					})
-					$scope.ok = function () {
-						$modalOptions.close('ok');
-					};
-				});
-		};
 		
 		//check availability
 		$scope.checkuserAvailable = function(fieldName, fieldValue){
@@ -154,7 +117,7 @@ define(['app'], function (app) {
 				$scope.availabilityMsg = response.message;
 			});
 		}
-		console.log($scope.adduserForm);
+		
 		//code for search filter
 		$scope.searchFilter = function(statusCol, colValue) {
 			$scope.search = {search: true};
@@ -196,22 +159,15 @@ define(['app'], function (app) {
 		$scope.changeStatus = {};
 		$scope.changeStatusFn = function(colName, colValue, id){
 			$scope.changeStatus[colName] = colValue;
-			console.log($scope.changeStatus);
 			if($scope.userViews=='userslist'){
 				dataService.put("put/user/"+id, $scope.changeStatus)
-				.then(function(response) { 
-					if(colName=='status'){
-						$scope.hideDeleted = 1;
-					}
+				.then(function(response) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			}
 			if($scope.userViews=='usersgroup'){
 				dataService.put("put/usergroup/"+id, $scope.changeStatus)
 				.then(function(response) { 
-					/* if(colName=='status'){
-						//$scope.hideDeleted = 1;
-					} */
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}); 
 			}
@@ -220,7 +176,6 @@ define(['app'], function (app) {
 		
 		$scope.editGroupName = function(colName, colValue, id, editStatus){
 			$scope.changeStatus[colName] = colValue;
-			console.log(colValue);
 			if(editStatus==0){
 				 dataService.put("put/user/"+id,$scope.changeStatus)
 				.then(function(response) { 
@@ -230,7 +185,6 @@ define(['app'], function (app) {
 		};	
 		$scope.showDropDown = function($event,opened)		
 		{
-			//$scope.selected = undefined;
 			$scope.user_groups = []; 				  				
 			$event.preventDefault();
 			$event.stopPropagation();
@@ -252,9 +206,8 @@ define(['app'], function (app) {
 				$scope.adduser = {};
 			};
 			$scope.postData = function(adduser) {
-				$scope.adduser.register_date = $scope.currentDate;
-				console.log(adduser);
-				dataService.post("post/user/register",adduser)
+				$scope.adduser.adduser_date = $scope.currentDate;
+				dataService.post("post/user/adduser",adduser)
 				.then(function(response) {  
 					if(response.status == 'success'){
 						/* $scope.adduser = {};
@@ -272,17 +225,13 @@ define(['app'], function (app) {
 				dataService.get("getsingle/user/"+$routeParams.id)
 				.then(function(response) {
 					$scope.adduser = response.data;
-					console.log(response);
-					//$scope.usersId = $routeParams.id;
 				});
 				$scope.update = function(adduser){
 					dataService.put("put/user/"+$routeParams.id,adduser)
 					.then(function(response) {
-						console.log(response);
 						if(response.status == 'success'){
 							$scope.submitted = true;
 							$scope.alerts.push({type: response.status, msg: response.message});
-						
 						}else{
 							$scope.alerts.push({type: response.status, msg: response.message});
 						}
@@ -307,7 +256,6 @@ define(['app'], function (app) {
 							$scope.usersgroupForm.$setPristine(); */
 							//$scope.submitted = true;
 							$scope.alerts.push({type: response.status, msg: response.message});
-							
 						}else{
 							$scope.alerts.push({type: response.status, msg: response.message});
 						}	
@@ -319,13 +267,10 @@ define(['app'], function (app) {
 				dataService.get("getsingle/usergroup/"+$routeParams.id)
 				.then(function(response) {
 					$scope.usersgroup = response.data;
-					console.log(response);
-					//$scope.usersId = $routeParams.id;
 				});
 				$scope.update = function(usersgroup){
 					dataService.put("put/usergroup/"+$routeParams.id,usersgroup)
 					.then(function(response) {
-						console.log(response);
 						if(response.status == 'success'){
 							$scope.submitted = true;
 							$scope.alerts.push({type: response.status, msg: response.message});
@@ -355,7 +300,6 @@ define(['app'], function (app) {
 				//console.log(response);
 				if(response.status == 'success'){
 					$scope.usergroupList = response.data;
-					console.log(response.data);
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -386,6 +330,6 @@ define(['app'], function (app) {
 	};
 	// Inject controller's dependencies
 	manageuserController.$inject = injectParams;
-	// Register/apply controller dynamically
+	// adduser/apply controller dynamically
     app.register.controller('manageuserController', manageuserController);
 });

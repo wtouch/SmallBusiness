@@ -116,7 +116,6 @@ define(['app'], function (app) {
 		//code for change password 
 		$scope.changepassword = function(changepasswd) {
 			console.log($rootScope.userDetails.id);
-			console.log(changepasswd);
 			$scope.userID = {user_id : $rootScope.userDetails.id };
 			angular.extend(changepasswd, $scope.userID);
 			dataService.post("post/user/changepass",changepasswd)
@@ -130,7 +129,6 @@ define(['app'], function (app) {
 				}
 			})  
 		}
-		templateUrl:'http://localhost/trupti/SmallBusiness/app/modules/mybusiness/addbusiness/editprofile.html';
     };
 	// Inject controller's dependencies
 	editprofileController.$inject = injectParams;
