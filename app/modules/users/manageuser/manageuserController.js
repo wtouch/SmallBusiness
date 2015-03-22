@@ -1,9 +1,9 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','$route','modalService']; /* Added $routeParams to access route parameters */
+    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','$route']; /* Added $routeParams to access route parameters */
     // This is controller for this view
-	var manageuserController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,$route,modalService) {
+	var manageuserController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,$route) {
 		//variable decalaration
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
