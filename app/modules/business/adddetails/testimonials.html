@@ -2,7 +2,7 @@
 <form name="jobsandcareersForm" role="form" class="form-horizontal" ng-submit="jobsandcareersForm.$valid" novalidate="novalidate">
 	<div class="form-group">
 		<div class="col-sm-offset-3 col-sm-9">
-			<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(testimonials, addbusiness.testimonials)" title="Add Testimonials">Add Testimonials</button>
+			<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(testimonials, businessData.testimonials)" title="Add Testimonials">Add Testimonials</button>
 		</div>
 	</div>
 	<div class="form-group">
@@ -20,7 +20,7 @@
 	<div class="form-group">
 		<label for="testimonial" class="col-sm-3 control-label">Testimonial Given By</label>
 		<div class="col-sm-9">
-			<input type="text" id="testimonial" class="form-control" name="testimonial" placeholder="Testimonial Given By" ng-model="testimonials.heading" required >
+			<input type="text" id="testimonial" class="form-control" name="testimonial" placeholder="Testimonial Given By" ng-model="testimonials.heading" required readonly>
 			<span class="help-block" ng-show="addbusinessForm.testimonial.$dirty && addbusinessForm.testimonial.$invalid">
 				<span ng-show="addbusinessForm.testimonial.$error.required" class="text-danger">Testimonial Given By is required.</span>
 			</span>
@@ -126,16 +126,20 @@
 	</div>
 
 	<div class="col-sm-12">
-		<table class="table table-bordered table-responsive" ng-if="addbusiness.testimonials">
+		<table class="table table-bordered table-responsive" ng-if="businessData.testimonials">
 			<tr>
 				<th>Testimonial Title</th>
 				<th>Testimonial Description</th>
 				<th>Remove </th>
 			</tr>
-			<tr ng-repeat="(key, value) in addbusiness.testimonials">
+			<tr ng-repeat="(key, value) in businessData.testimonials">
 				<td>{{key}}</td>
 				<td class="tdwidth">{{value}}</td>
-				<td><button class="btn btn-danger" ng-click="removeObject(key,addbusiness.testimonials)">Remove</button></td>
+				
+				<td>
+				<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.testimonials)" tooltip="Edit Details"> </button>
+				<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.testimonials)" tooltip="Remove"></button>
+				</td>
 				
 			</tr>
 		</table>
@@ -143,7 +147,8 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-3 col-sm-9">
-		  <button type="submit" class="btn btn-primary btn-default" title="Add Testimonials/ Recommendation" ng-click="showFormPart('job')">Submit</button>
+		  <button type="submit" class="btn btn-primary btn-default" title="Add Testimonials/ Recommendation" ng-click="postData(businessData)">Submit</button>
+		
 		</div>
 	</div>
 </form>

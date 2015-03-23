@@ -1,16 +1,30 @@
-<span ng-if="userDetails.group_name == 'customer'"><input type="text" ng-model="addbusiness.user_id" ng-init="addbusiness.user_id = userDetails.id" />user id</span>
+	<span ng-if="userDetails.group_name == 'customer'"><input type="text" ng-model="addbusiness.user_id" ng-init="addbusiness.user_id = userDetails.id" />user id</span>
+	
+<div class="form-group">
+	<label for="customer" class="col-sm-3 control-label">Customer</label>
+	<div class="col-sm-9">
+		<span ng-if="userDetails.group_name == 'admin' || 'salesman' || 'manager'" ng-model="addbusiness.user_id">
+			<select class="form-control" name="customer" id="customer"  ng-model="addbusiness.customer" required>
+				<option value="">Select Customer</option>
+			</select>
+		</span>
+		<span class="help-block" ng-show="addbusinessForm.customer.$dirty && addbusinessForm.customer.$invalid">
+			<span ng-show="addbusinessForm.customer.$error.required" class="text-danger">Customer is required.</span>
+		</span>	
+	</div>
+</div>
 
-<span ng-if="userDetails.group_name == 'admin' || 'salesman' || 'manager'" ng-model="addbusiness.user_id">
-	<select>
-	<option value="">Select Customer</option>
-	</select>
-</span>
-<span ng-if="userDetails.group_name == 'salesman'" > salseman id
-<input type="text" ng-model="addbusiness.salesman_id" ng-init="addbusiness.salesman_id = userDetails.id" />
-</span>
-<span ng-if="userDetails.group_name == 'admin' || userDetails.group_name == 'manager'"> Admin or Manager
-	<input  type="text" ng-model="addbusiness.manager_id" ng-init="addbusiness.manager_id = userDetails.id" />
-</span>
+<div class="form-group">
+	<label for="Salseman" class="col-sm-3 control-label">Salseman Id</label>
+	<div class="col-sm-9">
+		<span ng-if="userDetails.group_name == 'salesman'" >
+			<input type="text" class="form-control" ng-model="addbusiness.salesman_id" ng-init="addbusiness.salesman_id = userDetails.id" />
+		</span>
+		<span ng-if="userDetails.group_name == 'admin' || userDetails.group_name == 'manager'"> Admin or Manager
+			<input  type="text" class="form-control" ng-model="addbusiness.manager_id" ng-init="addbusiness.manager_id = userDetails.id" />
+		</span>
+	</div>
+</div>
 
 <div class="form-group">
 	<label  for="business_name" class="col-sm-3 control-label">Business Name</label>

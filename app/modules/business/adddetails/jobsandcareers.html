@@ -5,14 +5,14 @@
 <form name="jobsandcareersForm" role="form" class="form-horizontal" ng-submit="jobsandcareersForm.$valid" novalidate="novalidate">
 	<div class="form-group">
 		<div class="col-sm-offset-3 col-sm-9">
-			<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(job_careers, addbusiness.job_careers)" title="Add Jobs">Add Jobs</button>
+			<button class="btn btn-default btn-primary pull-right" ng-click="addToObject(job_careers, businessData.job_careers)" title="Add Jobs">Add Jobs</button>
 		</div>
 	</div>
 
 	<div class="form-group">
 		<label for="jobTitle" class="col-sm-3 control-label">Job Title</label>
 		<div class="col-sm-9">
-			<input type="text" class="form-control" id="jobTitle" name="jobTitle" ng-model="job_careers.heading" required>
+			<input type="text" class="form-control" id="jobTitle" readonly name="jobTitle" ng-model="job_careers.heading" required >
 			<span class="help-block" ng-show="jobsandcareersForm.jobTitle.$dirty && jobTitle.$invalid">
 				<span ng-show="jobsandcareersForm.jobTitle.$error.required" class="text-danger">Plz Enter Title for Jobs</span>
 			</span>
@@ -41,16 +41,18 @@
 	</div>
 
 	<div class="col-sm-12">
-		<table class="table table-bordered table-responsive" ng-if="addbusiness.job_careers">
+		<table class="table table-bordered table-responsive" ng-if="businessData.job_careers">
 			<tr>
 				<th>Job Title</th>
 				<th>Job Description</th>
 				<th>Remove </th>
 			</tr>
-			<tr ng-repeat="(key, value) in addbusiness.job_careers">
+			<tr ng-repeat="(key, value) in businessData.job_careers">
 				<td>{{key}}</td>
 				<td class="tdwidth">{{value}}</td>
-				<td><button class="btn btn-danger" ng-click="removeObject(key,addbusiness.job_careers)">Remove</button></td>
+				<td><button class="btn btn-success glyphicon glyphicon-pencil" ng-click="removeObject(key,businessData.job_careers)" tooltip="Edit Details"></button>
+				<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="editObject(key,businessData.job_careers)" tooltip="Remove"></button>
+				</td>
 				
 			</tr>
 		</table>
@@ -58,7 +60,7 @@
 
 	<div class="form-group">
 		<div class="col-sm-offset-3 col-sm-9">
-			<button type="submit" class="btn btn-default btn-primary" title="next" ng-click="showFormPart('news')">Submit</button>
+			<button type="submit" class="btn btn-default btn-primary" title="next" ng-click="postData(businessData)">Submit</button>
 		</div>
 	</div>
 </form>

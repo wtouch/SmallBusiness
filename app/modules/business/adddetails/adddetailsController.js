@@ -10,7 +10,8 @@ define(['app'], function (app) {
 		.then(function(response) {
 			$scope.businessData = dataService.parse(response.data);
 		});	
-			
+		
+		
 		//for display form parts
 		$scope.formPart = $routeParams.formPart;
 		// all $scope object goes here
@@ -33,20 +34,21 @@ define(['app'], function (app) {
 		/***********************************************************************
 		code for add infrastructure,job_careers,testimonials and news_coverage */
 		$scope.infrastructure = { desc : { infra_image  : {} }};
-		$scope.job_careers = {};
+		$scope.job_careers = { desc : {} };
 		$scope.job_careers.desc = {};
-		$scope.testimonials = {};
+		$scope.testimonials = { desc : { testimage : {} }};
 		$scope.testimonials.desc = {};
-		$scope.news_coverage = {};
+		$scope.news_coverage = { desc : { news_image : {} }};
 		$scope.news_coverage.desc = {};
 		
 		$scope.addToObject = function(data, object){
 			var dtlObj = JSON.stringify(data.desc);
 			object[data.heading] = JSON.parse(dtlObj);
+			$scope.headingDisabled = false;
 		}
 		
 		
-		 $scope.addInfrastructure = function(data, object){
+		$scope.addInfrastructure = function(data, object){
 			$scope.addToObject(data, object);
 			$scope.infrastructure = { desc : { infra_image  : {} }};
 		}
@@ -67,10 +69,17 @@ define(['app'], function (app) {
 			delete object[key];
 		}
 		$scope.editObject = function(key, object){
+			$scope.headingDisabled = true;
 			$scope.infrastructure.desc = object[key];
 			$scope.infrastructure.heading = key;
+			$scope.job_careers.desc = object[key];
+			$scope.job_careers.heading = key;
+			$scope.testimonials.desc = object[key];
+			$scope.testimonials.heading = key;
+			$scope.news_coverage.desc = object[key];
+			$scope.news_coverage.heading = key;
 			
-			console.log($scope.infrastructure);
+			//console.log($scope.infrastructure);
 		}
 		//end of code
 		
@@ -170,36 +179,24 @@ define(['app'], function (app) {
 			
 		/***********************************************************************************
 		add business form code here{sonali}*/
-		
-		angular.extend($scope.addbusiness, $scope.userInfo);
-		
-		console.log($scope.addbusiness);
-		//reset function{sonali}
-		$scope.reset = function() {
-			$scope.addbusiness = {};
-		};
-		//post method for insert data in request businessprofile form{sonali}
-		$scope.postData = function(addbusiness) { 
-			$scope.addbusiness.user_id = $scope.userInfo.user_id;
-			dataService.post("post/business",addbusiness,$scope.user_id)
+		$scope.postData = function(businessData) { 
+			dataService.post("post/business",businessData)
 				.then(function(response) {  //function for response of request temp
-					$scope.addbusiness = response.data;
+					$scope.businessData = response.data;
 					console.log(response);
-					$scope.reset();
+				//	$scope.reset();
 				});
-			//console.log(addbusiness);
-		}//end of post method
-		
-		//update data into addbusiness table
-		if($scope.user_id){//Update business			
-			dataService.get("getsingle/business/"+$scope.user_id)
+			//console.log(businessData);
+		}
+		 if($scope.business_id ){       //Update business		// use business id here	
+			dataService.get("getsingle/business/"+$scope.business_id) // use business id here
 			.then(function(response) {
-					$scope.addbusiness = response.data;					
-				});				
-			$scope.update = function(addbusiness){				
-				console.log(addbusiness);						
-				dataService.put("put/business/"+$scope.user_id ,addbusiness)
-				.then(function(response) {  //function for response of request temp
+					$scope.businessData = response.data;					
+			});
+			$scope.update = function(businessData){				
+				console.log(businessData);						
+				dataService.put("put/business/"+ $scope.business_id, businessData)  // use business id here
+				 .then(function(response) {  //function for response of request temp
 					if(response.status == 'success'){
 						$scope.submitted = true;
 						$scope.alerts.push({type: response.status,msg: response.message});						
@@ -210,6 +207,25 @@ define(['app'], function (app) {
 			};	
 		}		
 		
+		
+		//angular.extend($scope.businessData, $scope.userInfo);
+		
+		/* console.log($scope.businessData);
+		//reset function{sonali}
+		$scope.reset = function() {
+			$scope.businessData = {};
+		}; */
+		//post method for insert data in request businessprofile form{sonali}
+		/* $scope.postData = function(businessData) { 
+			dataService.post("post/business",businessData)
+				.then(function(response) {  //function for response of request temp
+					$scope.businessData = response.data;
+					console.log(response);
+					$scope.reset();
+				});
+			//console.log(addbusiness);
+		} *///end of post method
+	
 		/*****************************************************************************
 		datepicker {sonali}*/
 		$scope.today = function(){
@@ -226,11 +242,7 @@ define(['app'], function (app) {
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		
-		// Date Picker Ended here 
-		
-		
-		
-		
+		// Date Picker Ended here 				
     };
 	
 	// Inject controller's dependencies

@@ -180,15 +180,15 @@ define(['app'], function (app) {
 		}//end of post method
 		
 		//update data into addbusiness table
-		 if(/* $scope.user_id */){//Update business		// use business id here	
-			dataService.get("getsingle/business/"+$scope.user_id) // use business id here
+		 /* if(/* $scope.user_id ){*///Update business		// use business id here	
+			/* dataService.get("getsingle/business/"+$scope.user_id) // use business id here
 			.then(function(response) {
 					$scope.addbusiness = response.data;					
 			});
 			$scope.update = function(addbusiness){				
 				console.log(addbusiness);						
-				dataService.put("put/business/"+/* $scope.user_id */ ,addbusiness)  // use business id here
-				.then(function(response) {  //function for response of request temp
+				dataService.put("put/business/"+/* $scope.user_id  ,addbusiness)*/  // use business id here
+				/* .then(function(response) {  //function for response of request temp
 					if(response.status == 'success'){
 						$scope.submitted = true;
 						$scope.alerts.push({type: response.status,msg: response.message});						
@@ -197,8 +197,8 @@ define(['app'], function (app) {
 					}	
 				});	 
 			};	
-		}		
-		 
+		}		  */
+	
 		/*****************************************************************************
 		datepicker {sonali}*/
 		$scope.today = function(){
