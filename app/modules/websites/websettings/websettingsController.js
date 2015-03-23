@@ -9,7 +9,7 @@ define(['app'], function (app) {
 	$scope.userDetails = {user_id : $rootScope.userDetails.id};
 	$scope.website_id=$routeParams.id;
 	$scope.currentDate = dataService.currentDate;
-
+	$scope.alerts = [];
 	//this is for get business name from business
 	dataService.get("getmultiple/business/1/100",$scope.userDetails)
 			.then(function(response) {  //function for template list response
@@ -42,21 +42,24 @@ define(['app'], function (app) {
 				dataService.get("getsingle/website/"+$routeParams.id,$scope.userDetails)
 				.then(function(response) {  //function for my templates response
 				if(response.status == 'success'){
-					$scope.config =response.data.config;
+					if(response.data.config!=''){
+					var config = JSON.parse(response.data.config);
+					$scope.config = config;
+					console.log(config);
+					}
+					
 				}
 				else
 				{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				};
-				$scope.config = response.data;
+				//$scope.config = response.data;
 			});
 			//update method for website settings form{trupti}
-			$scope.editWebsitedetails = function(id,config){
-				dataService.put("put/website/"+id,config)
+			$scope.editWebsitedetails = function(config){
+				dataService.put("put/website/"+$routeParams.id,{config : config})
 				.then(function(response) {
 					if(response.status == 'success'){
-						//$scope.config = {};
-						//$scope.websettingsForm.$setPristine();
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}else{
 						$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
@@ -69,13 +72,12 @@ define(['app'], function (app) {
 				dataService.put("put/website/"+$scope.website_id,{config : config})
 				.then(function(response) { 
 					if(response.status == 'success'){
-						$scope.config = {};
-						$scope.websettingsForm.$setPristine();
 						response.message
 					}
 					console.log(response.message);
 				});
-			};
+			}; 
+		
     };
 	//Inject controller's dependencies
 	websettingsController.$inject = injectParams;

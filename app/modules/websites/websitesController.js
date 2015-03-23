@@ -24,7 +24,6 @@ define(['app'], function (app) {
 				}); 
 				
 			});
-			
 		};
 		
         // all $scope object goes here
