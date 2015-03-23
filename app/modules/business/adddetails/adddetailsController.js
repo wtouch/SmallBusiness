@@ -188,44 +188,19 @@ define(['app'], function (app) {
 				});
 			//console.log(businessData);
 		}
-		 if($scope.business_id ){       //Update business		// use business id here	
-			dataService.get("getsingle/business/"+$scope.business_id) // use business id here
-			.then(function(response) {
-					$scope.businessData = response.data;					
-			});
-			$scope.update = function(businessData){				
-				console.log(businessData);						
-				dataService.put("put/business/"+ $scope.business_id, businessData)  // use business id here
-				 .then(function(response) {  //function for response of request temp
-					if(response.status == 'success'){
-						$scope.submitted = true;
-						$scope.alerts.push({type: response.status,msg: response.message});						
-					}else{
-						$scope.alerts.push({type: response.status,msg: response.message});
-					}	
-				});	 
-			};	
-		}		
-		
-		
-		//angular.extend($scope.businessData, $scope.userInfo);
-		
-		/* console.log($scope.businessData);
-		//reset function{sonali}
-		$scope.reset = function() {
-			$scope.businessData = {};
-		}; */
-		//post method for insert data in request businessprofile form{sonali}
-		/* $scope.postData = function(businessData) { 
-			dataService.post("post/business",businessData)
-				.then(function(response) {  //function for response of request temp
-					$scope.businessData = response.data;
-					console.log(response);
-					$scope.reset();
-				});
-			//console.log(addbusiness);
-		} *///end of post method
-	
+		$scope.update = function(businessData){				
+			console.log(businessData);						
+			dataService.put("put/business/"+ $scope.business_id, businessData)  // use business id here
+			 .then(function(response) {  //function for response of request temp
+				if(response.status == 'success'){
+					$scope.submitted = true;
+					$scope.alerts.push({type: response.status,msg: response.message});						
+				}else{
+					$scope.alerts.push({type: response.status,msg: response.message});
+				}	
+			});	 
+		};	
+			
 		/*****************************************************************************
 		datepicker {sonali}*/
 		$scope.today = function(){
