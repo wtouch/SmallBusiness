@@ -67,7 +67,7 @@ define(['app'], function (app) {
 				}) 
 			}	
 			
-			//post data
+			/* //post data
 			$scope.postData=function(config){
 				dataService.put("put/website/"+$scope.website_id,{config : config})
 				.then(function(response) { 
@@ -76,7 +76,7 @@ define(['app'], function (app) {
 					}
 					console.log(response.message);
 				});
-			}; 
+			};  */
 		
     };
 	//Inject controller's dependencies
