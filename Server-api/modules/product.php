@@ -25,7 +25,7 @@
 			$data = $db->select("product", $where, $limit);
 			
 			// this is used to count totalRecords with only where clause
-			$tootalDbRecords = $db->select("product", $where, $limit=null, $like);
+			$tootalDbRecords = $db->select("product", $where, $limit=null);
 			$totalRecords['totalRecords'] = count($tootalDbRecords['data']);
 			
 			

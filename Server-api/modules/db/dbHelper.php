@@ -156,7 +156,7 @@ class dbHelper {
 			/* $res = $this->db->query('SELECT COUNT(*) FROM '.$table);
 			$totalRecords = $res->fetchColumn(); */
 			
-            if(count($rows)<=0){
+            if(count($rows)<=0  || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
 				$response["data"] = null;
@@ -237,7 +237,7 @@ class dbHelper {
 			/* $res = $this->db->query('SELECT COUNT(*) FROM '.$table);
 			$totalRecords = $res->fetchColumn(); */
 			
-            if(count($rows)<=0){
+            if(count($rows)<=0  || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
 				$response["data"] = null;
@@ -277,7 +277,7 @@ class dbHelper {
             $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
-            if(count($rows)<=0){
+            if(count($rows)<=0 || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
 				$response["data"] = null;
@@ -306,8 +306,8 @@ class dbHelper {
             $stmt = $this->db->query("select * from ".$table." where 1=1 ". $w ." ".$dbLimit);
             //$stmt->execute($a);
             $rows = $stmt->fetch(PDO::FETCH_ASSOC);
-			
-            if(count($rows)<=0){
+			//echo "select * from ".$table." where 1=1 ". $w ." ".$dbLimit;
+            if(count($rows)<=0 || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
 				$response["data"] = null;

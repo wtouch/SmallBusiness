@@ -1,6 +1,4 @@
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	
-{{alert.msg}}
-</alert>
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 <form class="form-horizontal" name="changepassForm" novalidate>
 <h3 class="col-sm-offset-2 col-sm-9">Change Password</h3>	
 	<div class="form-group">
@@ -24,7 +22,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-9">
-			<button type="submit" class="btn btn-success" ng-click="changepass(changepass)">Save</button>
+			<button type="submit" ng-disabled="changepassForm.$invalid" class="btn btn-success" ng-click="changepasswd(changepass)">Save</button>
 		</div>
 	</div>
 </form>
