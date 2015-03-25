@@ -16,9 +16,9 @@ define(['app'], function (app) {
 					size : 'lg'
 				};
 				var modalOptions = {
-					website: response.data[0]  // assign data to modal
+					website: response.data  // assign data to modal
 				};
-				console.log(response.data[0]);
+				console.log(response.data);
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
 				}); 

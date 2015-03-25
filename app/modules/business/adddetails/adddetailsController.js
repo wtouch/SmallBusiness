@@ -11,9 +11,7 @@ define(['app'], function (app) {
 			$scope.businessData = dataService.parse(response.data);
 		});	
 		
-		
-		//for display form parts
-		$scope.formPart = $routeParams.formPart;
+		console.log(dataService.parse($rootScope.userDetails));
 		// all $scope object goes here
 		$scope.alerts = [];
 		$scope.maxSize = 5;
@@ -22,73 +20,65 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		
+		$scope.business_id = $routeParams.id;
+		$scope.userinfo = $scope.userInfo; // this is for uploading credentials
+		$scope.path = "business/"; // path to store images on server
+		$scope.infrastructure = { desc : { image  : {} }};
+		$scope.testimonials = { desc : { image  : {} }};
+		$scope.news_coverage = { desc : { image  : {} }};
+		$scope.job_careers = { desc : {}};
+		// config data for business form
+		$scope.biz = dataService.config.business;
 		
 		// Add Business multi part form show/hide operation from here! {Vilas}
 		$scope.formPart = 'infrastructure';
 		
+		//function for close alert
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
+		$scope.infra = false;
+		$scope.imgRemoved = false;
+		// Scope methods
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
+			$scope.headingDisabled = false;
+			$scope.infra = false;
+			$scope.imgRemoved = false;
 		};
 		
-		/***********************************************************************
-		code for add infrastructure,job_careers,testimonials and news_coverage */
-		$scope.infrastructure = { desc : { infra_image  : {} }};
-		$scope.job_careers = { desc : {} };
-		$scope.job_careers.desc = {};
-		$scope.testimonials = { desc : { testimage : {} }};
-		$scope.testimonials.desc = {};
-		$scope.news_coverage = { desc : { news_image : {} }};
-		$scope.news_coverage.desc = {};
 		
-		$scope.addToObject = function(data, object){
+		$scope.addToObject = function(data, object, resetObj){
 			var dtlObj = JSON.stringify(data.desc);
 			object[data.heading] = JSON.parse(dtlObj);
 			$scope.headingDisabled = false;
+			$scope.infra = false;
+			$scope.imgRemoved = false;
+			//console.log(data);
+			$scope[resetObj] = { desc : { image  : {} }};
+			console.log(data);
 		}
-		
-		
-		$scope.addInfrastructure = function(data, object){
-			$scope.addToObject(data, object);
-			$scope.infrastructure = { desc : { infra_image  : {} }};
-		}
-		$scope.addJobsCareers = function(data, object){
-			$scope.addToObject(data, object);
-			$scope.job_careers = { desc : {} };
-		}
-		$scope.addTestimonials = function(data, object){
-			$scope.addToObject(data, object);
-			$scope.testimonials = { desc : { testimage : {} }};
-		}
-		$scope.addNewsCoverage = function(data, object){
-			$scope.addToObject(data, object);
-			$scope.news_coverage = { desc : { news_image : {} }};
-		} 
 		
 		$scope.removeObject = function(key, object){
+			$scope.imgRemoved = true;
 			delete object[key];
 		}
-		$scope.editObject = function(key, object){
+		$scope.editObject = function(key, object, FormObj){
 			$scope.headingDisabled = true;
-			$scope.infrastructure.desc = object[key];
-			$scope.infrastructure.heading = key;
-			$scope.job_careers.desc = object[key];
-			$scope.job_careers.heading = key;
-			$scope.testimonials.desc = object[key];
-			$scope.testimonials.heading = key;
-			$scope.news_coverage.desc = object[key];
-			$scope.news_coverage.heading = key;
-			
-			//console.log($scope.infrastructure);
+			$scope.imgRemoved = true;
+			var dtlObj = JSON.stringify(object[key]);
+			FormObj['desc'] = JSON.parse(dtlObj);
+			FormObj['heading'] = key;
 		}
-		//end of code
 		
-		/**********************************************************************
-		code for accessing json data of business	{Sonali} */
-		$scope.biz = {};
-		$scope.biz = dataService.config.business;
-		
-		//end of code		
+		$scope.showForm = function(obj, resetObj){
+			$scope[obj] = !$scope[obj];
+			if(resetObj){
+				$scope.headingDisabled = false;
+				$scope.imgRemoved = true;
+				$scope[resetObj] = { desc : { image  : {} }};
+			}
+		}
 		
 		/**********************************************************************
 		code for accessing json data of country, State & City {Sonali}*/
@@ -116,49 +106,8 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		};
 		
-		//for testimonial Country,State, City
-		$scope.countries = dataService.config.country;
-		 $scope.getTestimonialState = function(country){
-			var states = [];
-			for (var x in $scope.countries){
-				if($scope.countries[x].country_name == country){
-					for(var y in $scope.countries[x].states){
-						states.push($scope.countries[x].states[y])
-					}
-				}
-			}
-			$scope.states = states;
-		};
-		$scope.getTestimonialCities = function(state){
-			var cities = [];
-			for (var x in $scope.states){
-				if($scope.states[x].state_name == state){
-					for(var y in $scope.states[x].cities){
-						cities.push($scope.states[x].cities[y])
-					}
-				}
-			}
-			$scope.cities = cities;
-		};  
-		//end of code 
-				
 		/*************************************************************************
 		Upload Function for uploading files {sonali}*/
-		$scope.addbusiness={}; // this is form object
-		$scope.addbusiness.created_date = $scope.currentDate
-		$scope.addbusiness.infrastructure = {};
-		$scope.addbusiness.job_careers = {};
-		$scope.addbusiness.testimonials = {};
-		$scope.addbusiness.contact_profile = {};
-		$scope.addbusiness.news_coverage = {};
-		$scope.userinfo = $scope.userInfo; // this is for uploading credentials
-		$scope.path = "business/"; // path to store images on server
-		$scope.addbusiness.business_logo  = {}; // uploaded images will store in this object
-		$scope.addbusiness.contact_profile.contact_photo  = {};	
-		$scope.testimonials.desc.testimage  = {};	
-		$scope.news_coverage.desc.news_image  = {};
-		//$scope.infrastructure.desc.infra_image  = {};
-		
 		$scope.upload = function(files,path,userinfo, picArr){ // this function for uploading files
 			
 			upload.upload(files,path,userinfo,function(data){
@@ -178,16 +127,7 @@ define(['app'], function (app) {
 		};// End upload function
 			
 		/***********************************************************************************
-		add business form code here{sonali}*/
-		$scope.postData = function(businessData) { 
-			dataService.post("post/business",businessData)
-				.then(function(response) {  //function for response of request temp
-					$scope.businessData = response.data;
-					console.log(response);
-				//	$scope.reset();
-				});
-			//console.log(businessData);
-		}
+		Update business form code here{sonali}*/
 		$scope.update = function(businessData){				
 			console.log(businessData);						
 			dataService.put("put/business/"+ $scope.business_id, businessData)  // use business id here
@@ -197,27 +137,9 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status,msg: response.message});						
 				}else{
 					$scope.alerts.push({type: response.status,msg: response.message});
-				}	
-			});	 
-		};	
-			
-		/*****************************************************************************
-		datepicker {sonali}*/
-		$scope.today = function(){
-			$scope.newsDate = new Date();
+				}
+			});
 		};
-		$scope.today();
-		$scope.open = function($event,opened)
-		{
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope[opened] = ($scope[opened]===true) ? false : true;
-		};
-
-		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-		$scope.format = $scope.formats[0];
-		
-		// Date Picker Ended here 				
     };
 	
 	// Inject controller's dependencies

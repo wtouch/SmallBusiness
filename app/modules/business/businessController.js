@@ -13,22 +13,14 @@ define(['app'], function (app) {
 			dataService.get("getsingle/business/"+buzId)
 			.then(function(response) {
 				
-				var oldObj = response.data[0];
-				var newObj = {};
-				console.log(oldObj);
-				
-				angular.forEach(oldObj, function(value, key) {
-				  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
-				}, newObj);
-				console.log(newObj);
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
 					size : 'lg'
 				};
 				var modalOptions = {
-					bizList: newObj  // assign data to modal
+					bizList: dataService.parse(response.data)  // assign data to modal
 				};
-				
+				console.log(dataService.parse(response.data));
 				
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
@@ -50,13 +42,16 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		if($rootScope.userDetails.group_name == "customer"){
-			$scope.userDetails = {user_id : $rootScope.userDetails.id}; // these are URL parameters
+			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		}
-		if($rootScope.userDetails.group_name == "admin" || $rootScope.userDetails.group_name == "manager"){
-			$scope.userDetails = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
+		if($rootScope.userDetails.group_name == "manager"){
+			$scope.userInfo = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "admin"){
+			$scope.userInfo = {}; // these are URL parameters
 		}
 		if($rootScope.userDetails.group_name == "salesman"){
-			$scope.userDetails = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
+			$scope.userInfo = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
 		}
 		
 		$scope.hideDeleted = "";
@@ -79,13 +74,13 @@ define(['app'], function (app) {
 		
 		$scope.pageChanged = function(page) {
 			
-			angular.extend($scope.featured, $scope.userDetails);
-			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.userDetails)
+			angular.extend($scope.featured, $scope.userInfo);
+			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.userInfo)
 			.then(function(response) { //function for businesslist response			
 				$scope.bizList = response.data;			
 			});
 			//get request for delete bizlist 
-			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.userDetails)
+			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.userInfo)
 			.then(function(response) { //function for deltebiz response
 				$scope.delBiz = response.data;
 				$scope.totalRecords = response.totalRecords;
@@ -138,7 +133,7 @@ define(['app'], function (app) {
 		
 		var businesslist = function(){
 			$scope.businessParams = {status: 1};
-			angular.extend($scope.businessParams, $scope.userDetails);
+			angular.extend($scope.businessParams, $scope.userInfo);
 			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response){
 				if(response.status == 'success'){	
@@ -193,7 +188,7 @@ define(['app'], function (app) {
 		var deletedbusiness = function(){
 			console.log("del : "+$scope.businessParams);
 			$scope.businessParams = {status: 0};
-			angular.extend($scope.businessParams, $scope.userDetails);
+			angular.extend($scope.businessParams, $scope.userInfo);
 			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response){
 				if(response.status == 'success'){	
