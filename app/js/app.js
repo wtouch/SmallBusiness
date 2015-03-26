@@ -86,7 +86,7 @@ define(['angular',
 		
 	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies,$routeParams) {
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
-			$rootScope.userDetails = dataService.userDetails;
+			$rootScope.userDetails = dataService.parse(dataService.userDetails);
 			$rootScope.breadcrumbs = breadcrumbs;
 			$rootScope.appConfig = {
 				metaTitle : "Small Business",

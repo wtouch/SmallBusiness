@@ -12,17 +12,23 @@
 			<th>Manage</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="users in userList">
+			<tr ng-repeat="users in userList | orderBy:'id'">
 				<td>{{((usersListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
 				<td>{{users.username}}</td>
-				<td>{{users.group_id}}
-					<a type="button" class="btn btn-success" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId)">
-						<span ng-hide="users.boxId ==1" class="glyphicon glyphicon-pencil"></span>
-						<span ng-hide="users.boxId ==0||!users.boxId" class="glyphicon glyphicon-ok"></span>
-					</a>
-					<select class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-click="showDropDown($event,'opened')" ng-options="item.id as item.group_name for item in groups" ng-required="true">
+				<td style="max-width:150px">
+				
+				<div class="input-group">
+					<p class="form-control-static" ng-hide="users.boxId ==1">{{users.group_name}}</p>
+					<select ng-hide="users.boxId ==0 || !users.boxId" class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-options="item.id as item.group_name for item in groups" ng-required="true">
 						<option value="">Select Group</option>
 					</select>
+					<div class="input-group-btn" >
+						<a type="button" ng-class="(users.boxId == 0 || !users.boxId) ? 'btn btn-info' : 'btn btn-success'" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId); users.group_name = changeGroupName(users.group_id, groups)">
+							<span ng-class="(users.boxId ==1) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'"></span>
+						</a>
+					</div>
+					
+				</div>
 				</td>
 				<td>{{users.email}}</td>
 				<td>{{users.register_date}}</td>

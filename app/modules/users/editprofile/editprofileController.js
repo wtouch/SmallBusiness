@@ -52,6 +52,7 @@ define(['app'], function (app) {
 			}
 			$scope.states = states;
 		};
+		
 		$scope.getCities = function(state){
 			var cities = [];
 			for (var x in $scope.states){
@@ -64,18 +65,28 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		};
 		
+		//code for change profile 
+		dataService.get("getsingle/user/"+$rootScope.userDetails.id)
+		.then(function(response) {
+			$scope.editprofile = dataService.parse(response.data);
+			$scope.getState($scope.editprofile.country);
+			$scope.getCities($scope.editprofile.state);
+			if($scope.editprofile.user_img == (undefined)) $scope.editprofile.user_img = "";
+		});
+		
+		
 		//Upload Function for uploading files {Vilas}
-		$scope.editprofile = {user_img : {}};	// this is form object
-		$scope.path = "users/"; // path to store images on server
+			// this is form object
+		$scope.path = ""; // path to store images on server
 		$scope.upload = function(files,path,userDetails,picArr){ // this function for uploading files
-			console.log(picArr);
-			upload.upload(files,path,userDetails,function(data){
+			
+			upload.upload(files,'',userDetails,function(response){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
-				if(data.status === 'success'){
-					picArr[picArrKey] = data.details;
+				if(response.status === 'success'){
+					$scope.editprofile.user_img = response.details;
 				}else{
-					$scope.alerts.push({type: data.status, msg: data.message});
+					$scope.alerts.push({type: response.status, msg: response.message});
 				}
 			});
 		};
@@ -83,31 +94,18 @@ define(['app'], function (app) {
 			upload.generateThumbs(files);
 		};// End upload function
 		
-		//code for change profile 
-		$scope.userInfo = dataService.parse($rootScope.userDetails);
-		$scope.userInfo = dataService.parse($rootScope.userDetails);
-			$scope.editprofile = {
-			id : $scope.userInfo.id,
-			name : $scope.userInfo.name,
-			username : $scope.userInfo.username,
-			email : $scope.userInfo.email,
-			phone : $scope.userInfo.phone,
-			address :$scope.userInfo.address,
-			fax :$scope.userInfo.fax,
-			website :$scope.userInfo.website,
-			dob : $scope.userInfo.dob
-		};
+		console.log($rootScope.userDetails);
 		$scope.changeProfile = function(id,editprofile){
 			dataService.put("put/user/"+id,editprofile)
 			.then(function(response) {
 				if(response.status == 'success'){
-					$scope.editprofile = {};
 					$scope.editProfileForm.$setPristine();
 					$scope.alerts.push({type: response.status, msg: response.message});
-					//angular.extend($rootScope.userDetails, editprofile);
-					//console.log($rootScope.userDetails);
-					//console.log(editprofile);
+					
+					angular.extend($rootScope.userDetails,editprofile);
+					
 					//dataService.setUserDetails($rootScope.userDetails);
+					//console.log(dataService.stringify($rootScope.userDetails));
 				}else{
 					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
 				}
@@ -116,7 +114,7 @@ define(['app'], function (app) {
 		
 		//code for change password 
 		$scope.changepassword = function(changepasswd) {
-			console.log($rootScope.userDetails.id);
+			
 			$scope.userID = {user_id : $rootScope.userDetails.id };
 			angular.extend(changepasswd, $scope.userID);
 			dataService.post("post/user/changepass",changepasswd)

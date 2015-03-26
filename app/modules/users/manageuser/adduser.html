@@ -20,16 +20,16 @@
 				<label for="username" class="col-sm-2 control-label">UserName*</label>
 				<div class="col-sm-9">
 					<div class="input-group">
-						<input type="text" id="username" class="form-control" name="username" ng-model="adduser.username" placeholder="Your Username" minlength="6" maxlength="12" ng-required="true" >
+						<input type="text" id="username" class="form-control" name="username" ng-model="adduser.username" placeholder="Your Username" minlength="6" maxlength="12" ng-required="true" ng-disabled="editUserId" >
 						<div class="input-group-btn">
-							<button type="submit" ng-click="checkuserAvailable('username', adduser.username)" class="btn btn-success">Check Availability</button>
+							<button type="submit" ng-disabled="editUserId" ng-click="checkuserAvailable('username', adduser.username)" class="btn btn-success">Check Availability</button>
 						</div>
 					</div>
 					<span class="help-block">	
-						<span class="text-success" ng-show="adduserForm.username.$dirty && adduserForm.username.$valid">Username available</span>
+						<span class="text-success" ng-show="adduserForm.username.$dirty && adduserForm.username.$valid && UserAvailable">Username available</span>
 					</span>
-					<span  class="help-block" ng-show="adduserForm.username.$dirty && adduserForm.username.$invalid">	
-						<span class="text-danger" ng-show="adduserForm.username.$error.available">Please Select Another username.Username already exist.</span>
+					<span  class="help-block" ng-show="adduserForm.username.$dirty && adduserForm.username.$invalid || UserAvailable==false">
+						<span class="text-danger" ng-show="adduserForm.username.$dirty && UserAvailable==false">Please Select Another username. Username already exist.</span>
 						<span class="text-danger" ng-show="adduserForm.username.$error.required && (adduserForm.username.$dirty || submitted)">username is required.</span>
 						<span class="text-danger" ng-show="adduserForm.username.$error.minlength && (adduserForm.username.$dirty || submitted)">username is too short.</span>
 					</span>
@@ -41,10 +41,10 @@
 				<div class="col-sm-9">
 					<input type="Email" class="form-control" id="email" ng-model="adduser.email" name="email" placeholder="Enter Email" ng-blur="checkuserAvailable('email', adduser.email)" required >
 					<span class="help-block">
-						<span class="text-success" ng-show="adduserForm.email.$dirty && adduserForm.email.$valid">{{availabilityMsg}}</span>
+						<span class="text-success" ng-show="adduserForm.email.$dirty && adduserForm.email.$valid && EmailAvailable">{{availabilityMsg}}</span>
 					</span>
-					<span class="help-block" ng-show="adduserForm.email.$dirty && adduserForm.email.$invalid">
-						<span class="text-danger" ng-show="adduserForm.email.$error.available">{{availabilityMsg}}</span>
+					<span class="help-block" ng-show="adduserForm.email.$dirty && adduserForm.email.$invalid || EmailAvailable == false">
+						<span class="text-danger" ng-show="adduserForm.email.$dirty && EmailAvailable == false">{{availabilityMsg}}</span>
 						<span class="text-danger" ng-show="adduserForm.email.$error.required">Email is required.</span>
 						<span class="text-danger" ng-show="adduserForm.email.$error.email">Invalid Email address.</span>
 					</span>
@@ -60,6 +60,19 @@
 							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
 					</p>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="Address" class="col-sm-2 control-label">Address</label>
+				<div class="col-sm-9">
+					<textarea  class="form-control" id="Address" ng-model="editprofile.address.address" name="Address" placeholder="Enter Address" ng-maxlength="75" required>
+					</textarea>
+					 <p ng-hide="editProfileForm.Address.$error.maxlength">{{ 75 - Address.length + " Characters left"}}</p>
+					<span class="help-block" ng-show="editProfileForm.Address.$dirty &&  editProfileForm.Address.$invalid">
+						<span class="text-danger" ng-show="editProfileForm.Address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+						<span class="text-danger" ng-show="editProfileForm.Address.$error.required">Address is required.</span>
+					</span>	
 				</div>
 			</div>
 			
@@ -82,7 +95,7 @@
 					</span>				
 				</div>
 				<div class="col-sm-2">
-					<select class="form-control" name="address" id="address" ng-model="adduser.address" ng-options="item.city_name as item.city_name for item in cities" required>		
+					<select class="form-control" name="address" id="address" ng-model="adduser.address.city" ng-options="item.city_name as item.city_name for item in cities" required>		
 						<option value="">Select City</option>
 					</select>
 					<span class="help-block" ng-show="adduserForm.address.$dirty && adduserForm.address.$invalid">
@@ -119,8 +132,8 @@
 						
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid || adduserForm.$pristine" ng-click="postData(adduser)" ng-if="!$routeParams">Add User</button>
-				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="update(adduser)" ng-if="#/{{$routeParams}}">Update User</button>
+				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid || EmailAvailable==false || UserAvailable==false" ng-click="postData(adduser)" ng-if="!editUserId">Add User</button>
+				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="update(adduser)" ng-if="editUserId">Update User</button>
 				  <button type="reset" class="btn btn-danger">Reset</button>
 				</div>
 			</div>						

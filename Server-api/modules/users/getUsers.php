@@ -7,13 +7,23 @@
 				 
 				 (isset($_GET['username'])) ? $like['username'] = $_GET['username'] : "";
 			 }
-			 
+			
+			$table = "users";
+			// inner join [table name][first table column name] = [second table column name]
+			$innerJoin['user_group']['group_id'] = "id";
+			
+			
+			// inner join select column [table name][join col name][column to select] = column alias
+			$selectInnerJoinCols['user_group']['group_id']['group_name'] = "group_name";
+			$selectInnerJoinCols['user_group']['group_id']['config'] = "group_config";
+			$selectInnerJoinCols['user_group']['group_id']['group_permission'] = "permission";
+			
 			// this is used to select data with LIMIT & where clause
-			$data = $db->select("users", $where, $limit,$like);
+			$data = $db->selectJoin($table, $where, $limit, $like, $innerJoin, $selectInnerJoinCols);
 			
 			// this is used to count totalRecords with only where clause
-			$totalRecords['totalRecords'] = count($db->select("users", $where));		
-			$totalRecords['totalRecords'] = $totalRecords['totalRecords']['data'];
+			$totalRecords = $db->selectJoin("users", $where, null, $like, $innerJoin, $selectInnerJoinCols);
+			$totalRecords['totalRecords'] = count($totalRecords['data']);
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
 			$data = array_merge($totalRecords,$data);
 			echo json_encode($data);

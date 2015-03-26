@@ -49,7 +49,15 @@ define(['app'], function (app) {
 				$scope.alerts.push({type: response.status, msg: response.message});
 			}
 		}) ;
-		
+		$scope.changeGroupName = function(group_id, groups){
+			var group_name;
+			for(var x in groups){
+				if(groups[x].id == group_id) group_name = groups[x].group_name;
+			}
+			
+			return group_name;
+			console.log(group_name);
+		}
 		//dynamic checkboxes in create user group form
 		$scope.manage_user = dataService.config.manage_user;
 		
@@ -103,20 +111,7 @@ define(['app'], function (app) {
 		};	
 		//End of pagination
 		
-		//check availability
-		$scope.checkuserAvailable = function(fieldName, fieldValue){
-			$scope.checkParams = {};
-			$scope.checkParams[fieldName] = fieldValue;
-			dataService.post("post/user/checkavailability",$scope.checkParams)
-			.then(function(response) {  
-				if(response.status == 'success'){
-					$scope.adduserForm[fieldName].$setValidity('available', true);
-				}else{
-					$scope.adduserForm[fieldName].$setValidity('available', false);
-				}
-				$scope.availabilityMsg = response.message;
-			});
-		}
+		
 		
 		//code for search filter
 		$scope.searchFilter = function(statusCol, colValue) {
@@ -202,26 +197,50 @@ define(['app'], function (app) {
 		$scope.adduser ={};
 		//add user information
 		var addUsers =	function(){
+			
+			//check availability
+		$scope.checkuserAvailable = function(fieldName, fieldValue){
+			
+			$scope.checkParams = {};
+			$scope.checkParams[fieldName] = fieldValue;
+			dataService.post("post/user/checkavailability",$scope.checkParams)
+			.then(function(response) { 
+				if(response.status == 'success'){
+					if(fieldName == 'username') $scope.UserAvailable = true;
+					if(fieldName == 'email') $scope.EmailAvailable = true;
+					//$scope.adduserForm[fieldName].$setValidity('available', true);
+				}else{
+					if(fieldName == 'username') $scope.UserAvailable = false;
+					if(fieldName == 'email') $scope.EmailAvailable = false;
+					//$scope.adduserForm[fieldName].$setValidity('available', false);
+				}
+				$scope.availabilityMsg = response.message;
+			});
+		}
+		
 			$scope.reset = function() {
 				$scope.adduser = {};
 			};
 			$scope.postData = function(adduser) {
-				$scope.adduser.adduser_date = $scope.currentDate;
-				dataService.post("post/user/adduser",adduser)
+				var register_date = {register_date : $scope.currentDate};
+				angular.extend(adduser, register_date);
+				
+				dataService.post("post/user/register",adduser)
 				.then(function(response) {  
 					if(response.status == 'success'){
-						/* $scope.adduser = {};
-						$scope.adduserForm.$setPristine(); */
+						$scope.adduser = {};
+						//$scope.adduserForm.$setPristine();
 						$scope.submitted = true;
 						$scope.alerts.push({type: response.status, msg: response.message});
 						
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}
-					$scope.reset();
 				});
 			}
+			$scope.editUserId = $routeParams.id;
 			if($routeParams.id){
+				
 				dataService.get("getsingle/user/"+$routeParams.id)
 				.then(function(response) {
 					$scope.adduser = response.data;
@@ -235,7 +254,6 @@ define(['app'], function (app) {
 						}else{
 							$scope.alerts.push({type: response.status, msg: response.message});
 						}
-						$scope.reset();
 					});
 				};
 			}
@@ -266,7 +284,7 @@ define(['app'], function (app) {
 			if($routeParams.id){
 				dataService.get("getsingle/usergroup/"+$routeParams.id)
 				.then(function(response) {
-					$scope.usersgroup = response.data;
+					$scope.usersgroup = dataService.parse(response.data);
 				});
 				$scope.update = function(usersgroup){
 					dataService.put("put/usergroup/"+$routeParams.id,usersgroup)
@@ -285,7 +303,7 @@ define(['app'], function (app) {
 		}	
 		
 		var usersList = function(){
-			dataService.get("getmultiple/user/"+$scope.usersListCurrentPage+"/"+$scope.pageItems).then(function(response) { 
+			dataService.get("getmultiple/user/"+$scope.usersListCurrentPage+"/"+$scope.pageItems).then(function(response) {
 				if(response.status == 'success'){
 					$scope.userList = response.data;
 					$scope.totalRecords = response.totalRecords;

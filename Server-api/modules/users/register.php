@@ -30,6 +30,5 @@
 		(isset($_GET['id'])) ? $where['id'] = $_GET['id'] : "";		
 		$insert = $db->update("users", $body);
 		echo json_encode($insert);
-		echo json_encode($insert1);
 	}
  ?>

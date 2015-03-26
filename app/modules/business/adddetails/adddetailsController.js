@@ -16,7 +16,7 @@ define(['app'], function (app) {
 			if($scope.businessData.job_careers == "") $scope.businessData.job_careers = {};
 		});	
 		
-		console.log(dataService.parse($rootScope.userDetails));
+		
 		// all $scope object goes here
 		$scope.alerts = [];
 		$scope.maxSize = 5;
