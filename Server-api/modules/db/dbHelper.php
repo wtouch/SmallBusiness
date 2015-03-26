@@ -348,10 +348,11 @@ class dbHelper {
 
 		    $stmt =  $this->db->prepare("INSERT INTO $table($colNames) VALUES($colValues)");
             $stmt->execute();
+			$id = $this->db->lastInsertId();
             $affected_rows = $stmt->rowCount();
             $response["status"] = "success";
             $response["message"] = $affected_rows." row inserted into database";
-			$response["data"] = null;
+			$response["data"] = $id;
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = 'Insert Failed: ' .$e->getMessage();

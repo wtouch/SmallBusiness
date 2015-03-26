@@ -51,7 +51,7 @@
 			$data = $db->selectJoin($table, $where, $limit,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols);
 			
 			// this is used to count totalRecords with only where clause
-			$totalDBRecords = count($db->selectJoin($table, $where, $limit=null,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols));
+			$totalDBRecords = $db->selectJoin($table, $where, $limit=null,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols);
 			
 			$totalRecords['totalRecords'] = count($totalDBRecords['data']);		
 			

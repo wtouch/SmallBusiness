@@ -9,6 +9,11 @@ define(['app'], function (app) {
 		dataService.get("getsingle/business/"+$routeParams.id)
 		.then(function(response) {
 			$scope.businessData = dataService.parse(response.data);
+			if($scope.businessData.infrastructure == "") $scope.businessData.infrastructure = {};
+			if($scope.businessData.testimonials == "") $scope.businessData.testimonials = {};
+			if($scope.businessData.news_coverage == "") $scope.businessData.news_coverage = {};
+			if($scope.businessData.gallery == "") $scope.businessData.gallery = {};
+			if($scope.businessData.job_careers == "") $scope.businessData.job_careers = {};
 		});	
 		
 		console.log(dataService.parse($rootScope.userDetails));
@@ -26,7 +31,8 @@ define(['app'], function (app) {
 		$scope.infrastructure = { desc : { image  : {} }};
 		$scope.testimonials = { desc : { image  : {} }};
 		$scope.news_coverage = { desc : { image  : {} }};
-		$scope.job_careers = { desc : {}};
+		$scope.job_careers = { desc : { image  : {} }};
+		$scope.gallery = { desc : { image  : {} }};
 		// config data for business form
 		$scope.biz = dataService.config.business;
 		

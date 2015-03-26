@@ -72,10 +72,9 @@ define(['app'], function (app) {
 			$location.path('/dashboard/business/businesslist');
 		}	
 		
-		$scope.pageChanged = function(page) {
-			
-			angular.extend($scope.featured, $scope.userInfo);
-			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.userInfo)
+		$scope.pageChanged = function(page, featured) {
+			(featured) ? angular.extend($scope.businessParams, featured) : "";
+			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response) { //function for businesslist response			
 				$scope.bizList = response.data;			
 			});
@@ -89,7 +88,6 @@ define(['app'], function (app) {
 		
 		//this is global method for filter 
 		$scope.changeStatus = function(statusCol, colValue) {
-			console.log($scope.businessParams);
 			$scope.filterStatus= {};
 			(colValue =="") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
 			angular.extend($scope.businessParams, $scope.filterStatus);
@@ -112,8 +110,7 @@ define(['app'], function (app) {
 			$scope.search = {search: true};
 			$scope.filterStatus= {};
 			(colValue =="") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
-			angular.extend($scope.businessParams, $scope.filterStatus);
-			angular.extend($scope.businessParams, $scope.search);
+			angular.extend($scope.businessParams, $scope.filterStatus, $scope.search);
 			
 			if(colValue.length >= 4 || colValue ==""){
 				dataService.get("/getmultiple/business/1/"+$scope.pageItems, $scope.businessParams)
@@ -158,7 +155,7 @@ define(['app'], function (app) {
 				
 				dataService.put("put/business/"+id, $scope.veryfiedData)
 				.then(function(response) { //function for businesslist response
-					console.log(response);
+					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			} ;
 			//This code for featured unfeatured button {sonali}
@@ -167,7 +164,7 @@ define(['app'], function (app) {
 				console.log($scope.featuredData);
 				dataService.put("put/business/"+id, $scope.featuredData)
 				.then(function(response) { //function for businesslist response
-					console.log(response);
+					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			};
 
@@ -179,14 +176,13 @@ define(['app'], function (app) {
 				.then(function(response) { //function for businesslist response
 					if(response.status == 'success'){
 						$scope.hideDeleted = 1;
-						console.log(response);
 					}
+					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			};			
 		};
 		
 		var deletedbusiness = function(){
-			console.log("del : "+$scope.businessParams);
 			$scope.businessParams = {status: 0};
 			angular.extend($scope.businessParams, $scope.userInfo);
 			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
@@ -208,8 +204,8 @@ define(['app'], function (app) {
 				.then(function(response) { //function for businesslist response
 					if(response.status == 'success'){
 						$scope.hideDeleted = 0;
-						console.log(response);
 					}
+					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			};
 
