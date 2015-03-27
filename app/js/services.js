@@ -245,20 +245,21 @@ define(['app'], function (app) {
 				}, newObj);
 				return newObj;
 			}
+			// this parse will parse within array or object of JSON string to object/array
 			obj.parse = function(oldObj){
 				if(angular.isArray(oldObj)){
 					var newObj = [];
 					for(var x in oldObj){
 						var newArrObj = {};
 						angular.forEach(oldObj[x], function(value, key) {
-						  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
+						  this[key] = (angular.isObject(value)) ? value :(value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
 						}, newArrObj);
 						newObj.push(newArrObj);
 					}
 				}else{
 					var newObj = {};
 					angular.forEach(oldObj, function(value, key) {
-					  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
+					  this[key] = (angular.isObject(value)) ? value :(value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
 					}, newObj);
 				}
 				return newObj;
@@ -290,7 +291,7 @@ define(['app'], function (app) {
 				
 			obj.auth = ($cookieStore.get('auth')) ? true : (sessionStorage.auth) ? JSON.parse(sessionStorage.auth) : false;
 			//obj.userDetails = (sessionStorage.userDetails) ? JSON.parse(sessionStorage.userDetails) : null;
-			obj.userDetails = ($cookieStore.get('userDetails')) ? JSON.parse($cookieStore.get('userDetails')) : null;
+			obj.userDetails = ($cookieStore.get('userDetails')) ? (angular.isObject($cookieStore.get('userDetails'))) ? $cookieStore.get('userDetails') : JSON.parse($cookieStore.get('userDetails')) : null;
 			
 			obj.setAuth = function (data) {
 				sessionStorage.auth = data;
@@ -298,10 +299,15 @@ define(['app'], function (app) {
 				return obj.auth =  JSON.parse(sessionStorage.auth);
 			};
 			obj.setUserDetails = function(data){
-				//sessionStorage.userDetails = (data);
-				$cookieStore.put('userDetails',data);
-				//obj.userDetails = JSON.parse(sessionStorage.userDetails);
-				obj.userDetails = JSON.parse($cookieStore.get('userDetails'));
+				if(data == (undefined || "")){
+					console.log("data undefined: "+data);
+				}else{
+					//sessionStorage.userDetails = (data);
+					$cookieStore.remove('userDetails');
+					$cookieStore.put('userDetails',data);
+					//obj.userDetails = JSON.parse(sessionStorage.userDetails);
+					obj.userDetails = (angular.isObject($cookieStore.get('userDetails'))) ? $cookieStore.get('userDetails') : JSON.parse($cookieStore.get('userDetails'));
+				}
 			}
 			obj.get = function (q, params) {
 				return $http({
@@ -346,8 +352,6 @@ define(['app'], function (app) {
 
 			return obj;
 	}]);
-	  
-	  
-	
+
 	return app;
 });

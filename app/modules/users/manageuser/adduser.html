@@ -117,12 +117,9 @@
 			<div class="form-group">
 				<label for="group_id" class="col-sm-2 control-label">Group Name</label>
 				<div class="col-sm-9">
-					<select class="form-control" name="group_id" id="group_id" ng-model="adduser.group_id" required>		
+					<select class="form-control" name="group_id" id="group_id" ng-model="adduser.group_id" required>
 						<option value="">Select User Group</option>
-						<option value="0">Salesman</option>
-						<option value="1">Admin</option>
-						<option value="2">Manager</option>
-						<option value="3">Customer</option>
+						<option value="{{group.id}}" ng-disabled="disableGroup(group.group_name)" ng-repeat="group in groups">{{group.group_name}}</option>
 					</select>
 					<span class="help-block" ng-show="adduserForm.group_id.$dirty && adduserForm.group_id.$invalid">
 						<span class="text-danger" ng-show="adduserForm.group_id.$error.required">User Name Group is required.</span>

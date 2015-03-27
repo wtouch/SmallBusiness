@@ -14,7 +14,7 @@ define(['app'], function (app) {
 		$scope.userList = [];
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
-		$scope.userDetails = {user_id : $rootScope.userDetails};
+		$scope.userInfo = {user_id : $rootScope.userDetails};
 		$scope.contries = dataService.config.country;
 
 		$scope.getState = function(country){
@@ -57,6 +57,15 @@ define(['app'], function (app) {
 			
 			return group_name;
 			console.log(group_name);
+		}
+		
+		$scope.disableGroup = function(group_name){
+			if(group_name == ("admin" || "manager") && $rootScope.userDetails.group_name != "admin"){
+				return true;
+			}
+		}
+		$scope.disColors = function(color){
+		  return color.group_name == 'admin' || color.group_name == 'manager';
 		}
 		//dynamic checkboxes in create user group form
 		$scope.manage_user = dataService.config.manage_user;
@@ -259,20 +268,29 @@ define(['app'], function (app) {
 			}
 		};			
 		
-		$scope.usersgroup ={};
+		
 		//create user group
 		var usersGroup = function(){
-			$scope.reset = function() {
-				$scope.usersgroup = {};
+			$scope.usersgroupData = {
+				group_permission : {
+					user_module : {},
+					group_access : {},
+					template_module : {},
+					business_module : {},
+					website_module : {}
+				},
+				config:{}
 			};
+			$scope.editForm = false;
+			$scope.reset = function() {
+				$scope.usersgroup = angular.copy($scope.usersgroupData);
+			};
+			$scope.reset();
 			$scope.usersgroup.date = $scope.currentDate;
 				$scope.postData = function(usersgroup) {
 					dataService.post("post/usergroup",usersgroup)
 					.then(function(response) {  
 						if(response.status == 'success'){
-							/* $scope.usersgroup = {};
-							$scope.usersgroupForm.$setPristine(); */
-							//$scope.submitted = true;
 							$scope.alerts.push({type: response.status, msg: response.message});
 						}else{
 							$scope.alerts.push({type: response.status, msg: response.message});
@@ -281,22 +299,23 @@ define(['app'], function (app) {
 					});
 				
 			}
+
 			if($routeParams.id){
+				$scope.editForm = true;
 				dataService.get("getsingle/usergroup/"+$routeParams.id)
 				.then(function(response) {
 					$scope.usersgroup = dataService.parse(response.data);
+					if($scope.usersgroup.config == (undefined || "")) $scope.usersgroup.config = {};
 				});
 				$scope.update = function(usersgroup){
 					dataService.put("put/usergroup/"+$routeParams.id,usersgroup)
 					.then(function(response) {
 						if(response.status == 'success'){
-							$scope.submitted = true;
 							$scope.alerts.push({type: response.status, msg: response.message});
 						
 						}else{
 							$scope.alerts.push({type: response.status, msg: response.message});
 						}
-						$scope.reset();
 					});
 				};
 			}

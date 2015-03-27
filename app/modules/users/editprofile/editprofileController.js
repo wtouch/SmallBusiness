@@ -94,18 +94,15 @@ define(['app'], function (app) {
 			upload.generateThumbs(files);
 		};// End upload function
 		
-		console.log($rootScope.userDetails);
 		$scope.changeProfile = function(id,editprofile){
 			dataService.put("put/user/"+id,editprofile)
 			.then(function(response) {
 				if(response.status == 'success'){
 					$scope.editProfileForm.$setPristine();
 					$scope.alerts.push({type: response.status, msg: response.message});
-					
 					angular.extend($rootScope.userDetails,editprofile);
-					
-					//dataService.setUserDetails($rootScope.userDetails);
-					//console.log(dataService.stringify($rootScope.userDetails));
+					dataService.setUserDetails($rootScope.userDetails);
+					$rootScope.userDetails = dataService.parse(dataService.userDetails);
 				}else{
 					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
 				}

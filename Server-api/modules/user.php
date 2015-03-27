@@ -7,8 +7,10 @@
 	require_once 'users/register.php';
 	
 	$db = new dbHelper();
-	
 	$reqMethod = $app->request->getMethod();
+	
+	$pathExpl = explode("server-api", $_SERVER['REQUEST_URI']);
+	$appPath =  $_SERVER['HTTP_HOST'].$pathExpl[0]."app/";
 	
 	//getMethod
 	if($reqMethod=="GET"){
@@ -16,9 +18,11 @@
 			getSession($getRequest);
 		}elseif(isset($getRequest) && $getRequest =='logout'){
 			logout();
+		}elseif(isset($getRequest) && $getRequest =='activate'){
+			echo json_encode(autoActivate());
 		}else{
 			if(isset($id)){
-				getSingleUser($id);
+				echo json_encode(getSingleUser($id));
 			}else{
 				$limit['pageNo'] = $pageNo; // from which record to select
 				$limit['records'] = $records; // how many records to select
@@ -31,16 +35,20 @@
 		if(isset($postParams) && $postParams == 'login'){
 			doLogin($body);
 		}elseif(isset($postParams) && $postParams == 'register'){
-			registerUser($body);
+			registerUser($body, $appPath);
 		}elseif(isset($postParams) && $postParams == 'forgotpass'){
-			echo json_encode(forgotPass($body));
+			echo json_encode(forgotPass($body, $appPath));
 		}elseif(isset($postParams) && $postParams == 'changepass'){
 			changePass($body);
 		}elseif(isset($postParams) && $postParams == 'checkavailability'){
 			checkAvailability($body);
+		}elseif(isset($postParams) && $postParams == 'activate'){
+			$body = json_decode($body);
+			$email = $body->email;
+			echo json_encode(activateUser($email, $appPath));
 		}
 	}
-	
+
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record
 		$update = $db->update("users", $body, $where);

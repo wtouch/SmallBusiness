@@ -36,7 +36,9 @@
 			// password check with hash encode
 			if(passwordHash::check_password($data['data']['password'],$password)){
 				$sessionObj->setSession($data['data']);
-				
+				if($data['data']['status'] == 0){
+					throw new Exception('Please activate your account to access.');
+				}
 				$response["message"] = "You are logged in successfully.";
                 $response["status"] = "success";
 				$response["data"] = json_encode($sessionObj->getSession());
@@ -55,10 +57,10 @@
 		
 	}
 	function getUniqueId(){
-		$uniqueId = $better_token = md5(uniqid(rand(), true));
+		$uniqueId = md5(uniqid(rand(), true));
 		return $uniqueId;
 	}
-	function forgotPass($body){
+	function forgotPass($body, $appPath){
 		try{
 			$table = 'users';
 			$db = new dbHelper();
@@ -72,7 +74,7 @@
 					$from['name'] = "Reset Password";
 					$recipients = array($input->email);
 					$subject = "Reset your Password";
-					$message = "Dear User, <a href='http://localhost/vilas/SmallBusiness/app/#/changepass/".$uniqueId."'>Click here to reset your password</a>";
+					$message = "Dear User, <a href='http://".$appPath."#/changepass/".$uniqueId."'>Click here to reset your password</a>";
 					$sendMail = $db->sendMail($from, $recipients, $subject, $message);
 					if($sendMail['status'] == 'success'){
 						$dataCol['password'] = $uniqueId;
@@ -85,10 +87,10 @@
 						throw new Exception("Mail sending error: ".$sendMail['message']);
 					}
 				}else{
-					throw new Exception("Mail doesn't matched!");
+					throw new Exception("Email doesn't matched!");
 				}
 			}else{
-				throw new Exception("Please Provide email id!");
+				throw new Exception("Please Provide an email id!");
 			}
 			
 			$response["message"] = "Password link sent to your email id. Please check your mailbox.";

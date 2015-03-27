@@ -78,12 +78,6 @@ define(['app'], function (app) {
 			.then(function(response) { //function for businesslist response			
 				$scope.bizList = response.data;			
 			});
-			//get request for delete bizlist 
-			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.userInfo)
-			.then(function(response) { //function for deltebiz response
-				$scope.delBiz = response.data;
-				$scope.totalRecords = response.totalRecords;
-			});
 		};
 		
 		//this is global method for filter 

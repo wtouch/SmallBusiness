@@ -58,6 +58,30 @@ define(['app'], function (app) {
 				}
 			})  
 		}
+		
+		// Auto activate account
+		if($routeParams.activateKey && $routeParams.email){
+			$scope.activatePass = ($routeParams.pass) ? JSON.parse($routeParams.pass) : false;
+			$scope.changePassword = function(changepass) {
+				var urlParams = {activate : $routeParams.activateKey, email : $routeParams.email};
+				if(changepass != (undefined || "")) angular.extend(urlParams, changepass);
+				dataService.get("login/activate",urlParams)
+				.then(function(response) {
+					if(response.status == 'success'){
+						$scope.changepass = {};
+						$scope.alerts.push({type: response.status, msg: response.message});
+						$scope.activate = true;
+					}else{
+						$scope.activate = false;
+						$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
+					}
+				})  
+			}
+			if($scope.activatePass == false) $scope.changePassword();
+			$scope.resendLink = function(){
+				console.log($routeParams.email);
+			}
+		}
 
     };
 	// Inject controller's dependencies

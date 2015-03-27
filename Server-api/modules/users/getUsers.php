@@ -32,6 +32,6 @@
 		$db = new dbHelper();
 		$where['id'] = $id;
 		$data = $db->selectSingle("users", $where);
-		echo json_encode($data);
+		return $data;
 	}
  ?>

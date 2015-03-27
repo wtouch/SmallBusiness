@@ -3,8 +3,8 @@
 		<div class="col-sm-12">	
 			<div class="main-content">
 				<div class="breadcrumb-back" ng-include="'modules/component/toolbar.html'"></div>
-				<div ng-show="submitted"><h2>You have registered successfully!</h2>
-					<p><a href="#/login">Click here</a> to login!</p>
+				<div ng-show="submitted" class="text-center"><h2>You have registered successfully! Check your mail for activation link.</h2>
+					<small>If activated <a href="#/login">Click here</a> to login!</small>
 				</div>
 				<form ng-hide="submitted" class="form-horizontal center-block" role="form" name="registerForm" ng-submit="registerForm.$valid" novalidate="novalidate" >
 					<h3>Free Registration / Sign up</h3>
@@ -120,16 +120,16 @@
 						<label for="username" class="col-sm-2 control-label">UserName*</label>
 						<div class="col-sm-9">
 							<div class="input-group">
-								<input type="text" id="username" class="form-control" name="username" ng-model="register.username" placeholder="Your Username" minlength="6" maxlength="12" ng-required="true" >
+								<input type="text" id="username" class="form-control" name="username" ng-model="register.username" ng-blur="checkuserAvailable('username', register.username)" placeholder="Your Username" ng-minlength="5" ng-maxlength="12" ng-required="true" >
 								<div class="input-group-btn">
 									<button type="submit" ng-click="checkuserAvailable('username', register.username)" class="btn btn-success">Check Availability</button>
 								</div>
 							</div>
 							<span class="help-block">	
-								<span class="text-success" ng-show="registerForm.username.$dirty && registerForm.username.$valid">Username available</span>
+								<span class="text-success" ng-show="registerForm.username.$dirty && registerForm.username.$valid && registerForm.username.$error.available == false">Username available</span>
 							</span>
 							<span  class="help-block" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">	
-								<span class="text-danger" ng-show="registerForm.username.$error.available">Please Select Another username.Username already exist.</span>
+								<span class="text-danger" ng-show="registerForm.username.$error.available == true && (registerForm.username.$dirty || submitted)">Please Select Another username.Username already exist.</span>
 								<span class="text-danger" ng-show="registerForm.username.$error.required && (registerForm.username.$dirty || submitted)">username is required.</span>
 								<span class="text-danger" ng-show="registerForm.username.$error.minlength && (registerForm.username.$dirty || submitted)">username is too short.</span>
 							</span>

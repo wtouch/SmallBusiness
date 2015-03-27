@@ -41,15 +41,17 @@ define(['app'], function (app) {
 		$scope.checkuserAvailable = function(fieldName, fieldValue){
 			$scope.checkParams = {};
 			$scope.checkParams[fieldName] = fieldValue;
-			dataService.post("post/user/checkavailability",$scope.checkParams)
-			.then(function(response) {  
-				if(response.status == 'success'){
-					$scope.registerForm[fieldName].$setValidity('available', true);
-				}else{
-					$scope.registerForm[fieldName].$setValidity('available', false);
-				}
-				$scope.availabilityMsg = response.message;
-			});
+			if(fieldValue != undefined && fieldValue.length >= 5){
+				dataService.post("post/user/checkavailability",$scope.checkParams)
+				.then(function(response) {  
+					if(response.status == 'success'){
+						$scope.registerForm[fieldName].$setValidity('available', true);
+					}else{
+						$scope.registerForm[fieldName].$setValidity('available', false);
+					}
+					$scope.availabilityMsg = response.message;
+				});
+			}
 		}
 		
 		//dynamic dropdwnlist of country,state & city
