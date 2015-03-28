@@ -5,21 +5,20 @@
 			<div class="table-responsive">
 				<table>
 					<thead>
-						<th colspan="3">{{
-						singlemail.subject}}</th>
+						<th colspan="3">{{singlemail.subject}}</th>
 					</thead>
 					<tbody>
 						<tr>
 							<td rowspan="5"><img src="img/user.jpg"/></td>
 							<td>From</td>
-							<td>{{singlemail.from_email}}</td>
+							<td>{{singlemail.from_email.from}}</td>
 						</tr>
 						<tr>
 							<td>To </td>
-							<td><a>{{singlemail.to_email}}</a></td>
+							<td><a>{{singlemail.to_email.to}}</a></td>
 						</tr>
 						
-						<tr ng-if="singlemail.from_email.cc!=''">
+						<tr ng-if="singlemail.from_email.cc">
 							<td>Cc </td>
 							<td><a>{{singlemail.from_email.cc}}</a></td>
 						</tr>
@@ -35,11 +34,12 @@
 					</tbody>
 				</table>
 			</div>
+			<div>
+				<label>Message:</label><span ng-bind-html="singlemail.message">{{singlemail.message}}</span>
+			</div>
 		</div>
 	</div>
-	<div>
-		<label>Message:</label><span ng-bind-html="singlemail.message">{{singlemail.message}}</span>
-	</div>			
+	
 </div>	
 <div class="row">
 	<div class="col-sm-12 ">

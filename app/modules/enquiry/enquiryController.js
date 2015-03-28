@@ -44,7 +44,7 @@ define(['app'], function (app) {
 		//pagination
 		$scope.pageChanged = function(page, where) {
 			dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems, where).then(function(response){
-				$scope.mailList = response.data;
+				$scope.mailList = dataService.parse(response.data);
 			});
 		};//End of pagination
 		
@@ -80,10 +80,10 @@ define(['app'], function (app) {
 				dataService.get("/getmultiple/enquiry/1/"+$scope.pageItems, $scope.searchObj)
 				.then(function(response) { 
 					if(response.status=="warning" || response.status=='error' ){
-						$scope.mailList = response.data;
+						$scope.mailList = dataService.parse(response.data);
 						$scope.totalRecords = response.totalRecords;
 					}else{
-						$scope.mailList = response.data;
+						$scope.mailList = dataService.parse(response.data);
 						$scope.totalRecords = response.totalRecords;
 						console.log($scope.mailList);
 					}
@@ -96,8 +96,8 @@ define(['app'], function (app) {
 			$scope.statusParam = {status : 1};
 			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response) { 
 				if(response.status == 'success'){
-					$scope.mailList = response.data;
-					//dataService.parse($scope.mailList);
+					$scope.mailList = dataService.parse(response.data);
+					console.log($scope.mailList);
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -109,7 +109,7 @@ define(['app'], function (app) {
 			$scope.statusParam = {status : 2};
 			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response){
 				if(response.status=="success"){
-						$scope.mailList = response.data;
+						$scope.mailList = dataService.parse(response.data);
 						$scope.totalRecords = response.totalRecords;
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
@@ -123,7 +123,7 @@ define(['app'], function (app) {
 				if(response.status=="warning" || response.status=='error' ){
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}else{
-					$scope.mailList = response.data;
+					$scope.mailList = dataService.parse(response.data);
 					$scope.totalRecords = response.totalRecords;
 				}
 			});
@@ -145,8 +145,9 @@ define(['app'], function (app) {
 			if($scope.mailSingleId != ""){
 				dataService.get("getsingle/enquiry/"+$scope.mailSingleId)
 				.then(function(response) {
-					$scope.singlemail = response.data;
+					$scope.singlemail = dataService.parse(response.data);
 					$scope.singlemail.date = $scope.singlemail.date;
+					console.log($scope.singlemail);
 					$scope.totalRecords = response.totalRecords;
 					$scope.replyMail = {};
 					$scope.replyMail.reply_message ={};
