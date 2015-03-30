@@ -18,7 +18,8 @@ define(['app'], function (app) {
 		$scope.alerts = [];
 		$scope.tinymceConfig = {};
 		$scope.currentDate = dataService.currentDate;
-		$scope.hideDeleted = "";//hide deleted mails from inbox
+		$scope.user_id = { user_id : dataService.userDetails.id };
+		$scope.hideDeleted = "";
 		
 		
 		//For display by default mails.html page
@@ -94,6 +95,7 @@ define(['app'], function (app) {
 		//view inbox list
 		var inboxmailList = function(){
 			$scope.statusParam = {status : 1};
+			angular.extend($scope.statusParam, $scope.user_id);
 			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response) { 
 				if(response.status == 'success'){
 					$scope.mailList = dataService.parse(response.data);
@@ -107,6 +109,7 @@ define(['app'], function (app) {
 		
 		var sentmailList = function(){
 			$scope.statusParam = {status : 2};
+			angular.extend($scope.statusParam, $scope.user_id);
 			dataService.get("getmultiple/enquiry/"+$scope.sentmailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response){
 				if(response.status=="success"){
 						$scope.mailList = dataService.parse(response.data);
@@ -119,10 +122,12 @@ define(['app'], function (app) {
 		
 		var deletemailList = function(){
 			$scope.statusParam = {status : 0};
+			angular.extend($scope.statusParam, $scope.user_id);
 			dataService.get("getmultiple/enquiry/"+$scope.delmailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response){
 				if(response.status=="warning" || response.status=='error' ){
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}else{
+					console.log(response.data);
 					$scope.mailList = dataService.parse(response.data);
 					$scope.totalRecords = response.totalRecords;
 				}
@@ -132,7 +137,7 @@ define(['app'], function (app) {
 		// this object will check list of mails show or single mail show 
 		
 		//view single mail 
-		var mailview= function(){
+		var mailview = function(){
 			$scope.mailSingleId = ($routeParams.id) ? $routeParams.id : "";
 			$scope.prevmail=function(){
 				$scope.mailSingleId = $scope.mailSingleId - 1;
@@ -149,13 +154,15 @@ define(['app'], function (app) {
 					$scope.singlemail.date = $scope.singlemail.date;
 					console.log($scope.singlemail);
 					$scope.totalRecords = response.totalRecords;
-					$scope.replyMail = {};
-					$scope.replyMail.reply_message ={};
-					$scope.replyMail.to_email = $scope.singlemail.from_email.from;
-					$scope.replyMail.from_email = $scope.singlemail.to_email.to;
-					$scope.replyMail.reply_message.subject = "RE: "+$scope.singlemail.subject;
-					$scope.replyMsg = ($scope.singlemail.reply_message!="") ? JSON.parse($scope.singlemail.reply_message) : {message:""};
-					$scope.replyMail.reply_message.message = $scope.replyMsg.message;
+					$scope.replyMsg = ($scope.singlemail.reply_message!="") ? $scope.singlemail.reply_message : {message:""};
+					$scope.replyMail = {
+						reply_message : {
+							subject : "RE: "+$scope.singlemail.subject,
+							message : $scope.replyMsg.message
+						},
+						reply_date : $scope.currentDate
+					};
+					
 					if($scope.singlemail.reply_status == 1){
 						$scope.tinymceConfig = {
 							readonly: true,
@@ -164,8 +171,7 @@ define(['app'], function (app) {
 					$scope.update = function(id,replyMail){
 						dataService.put("put/enquiry/"+id,replyMail)
 						.then(function(response) {
-							$scope.replyMail={};
-							$scope.replyMail.$setPristine();
+							$scope.alerts.push({type: response.status, msg: response.message});
 						});
 					};
 				},function(error) {
@@ -179,7 +185,11 @@ define(['app'], function (app) {
 		
 		var composeMail = function(){
 			//Upload Function for uploading files 
-			$scope.composemail = {user_id: $rootScope.userDetails.id, from_email : {from:$rootScope.userDetails.email ,cc : ""}, name : $rootScope.userDetails.username} ;
+			$scope.composemail = {
+				user_id: $rootScope.userDetails.id,
+				from_email : {from:$rootScope.userDetails.email ,cc : ""},
+				name : $rootScope.userDetails.username
+			};
 			
 			$scope.composemail.date = $scope.currentDate;
 			$scope.path = "mail/"; // path to store images on server
@@ -199,7 +209,6 @@ define(['app'], function (app) {
 				upload.generateThumbs(files);
 			};
 			
-		
 			//post method for insert data of compose mail
 			$scope.postData = function(composemail) {
 				console.log(composemail);
@@ -211,9 +220,7 @@ define(['app'], function (app) {
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}
-				
 				});
-				
 			}
 		}
 		

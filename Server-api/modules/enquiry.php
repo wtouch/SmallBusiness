@@ -70,16 +70,63 @@
 		$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail=null, $bccMail = null, $messageText = null);
 		 if($mail['status'] == 'success'){
 			$insert = $db->insert("enquiry", $body);
-			echo json_encode($insert);
+			$insert['message'] = $insert['message']." " .$mail['message'];
+			$response= $insert;
 		}else{
 			$response = $mail;
 		}
-		print_r($input->to_email->to);
-		print_r($response);
+		echo json_encode($response);
 	}
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record
-		$update = $db->update("enquiry", $body, $where);
-		echo json_encode($update);
+		$input = json_decode($body);
+		$response = array();
+		try{
+			if(property_exists ($input, 'reply_message')){
+				$from['email'] = $input->reply_message->from_email;
+				$from['name'] = $input->reply_message->name;
+				$recipients = array($input->reply_message->to_email);
+				$subject = $input->reply_message->subject;
+				$message = "<table>
+						<tr>
+							<td>Name: </td><td>".$from['name']."</td>
+						</tr>
+						<tr>
+							<td>Email: </td><td>".$from['email']."</td>
+						</tr>";
+				if(is_object($input->reply_message->message)){
+					foreach($input->message as $key => $value){
+						$message .= "<tr>
+							<td>".$key.":</td><td>".$value."</td>
+						</tr>";
+					}
+				}else{
+					$message .= "<tr>
+							<td>Message: </td><td>".$input->reply_message->message."</td>
+						</tr>";
+				}
+				$message .= "</table>";
+				
+				//print_r($input);
+				$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail=null, $bccMail = null, $messageText = null);
+				
+				if(isset($mail['status']) && $mail['status'] != 'success'){
+					throw new Exception('Mail didn\'t sent!');
+				}
+					$response["message"] = $mail["message"];
+				
+			}
+			$update = $db->update("enquiry", $body, $where);
+			//$response = $update;
+			$response["status"] = "success";
+			$response["message"] = (isset($response["message"])) ? $response["message"]." ".$update["message"] : $update["message"];
+			$response["data"] = $update["data"];
+			echo json_encode($response);
+		}catch(Exception $e){
+			$response["status"] = "warning";
+			$response["message"] = 'Error: ' .$e->getMessage();
+			$response["data"] = null;
+			echo json_encode($response);
+		}
 	}
  ?>

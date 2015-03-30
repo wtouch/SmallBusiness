@@ -21,6 +21,12 @@ app.controller('enquiryController', function($scope,$http, $route, $location) {
 			$scope.products = response.webData.products;
 			$scope.services = response.webData.services;
 			$scope.routes = response.webRoutes;
+			$scope.enquiry = {
+				user_id : $scope.business.user_id,
+				to_email : {to : $scope.business.owner_email},
+				subject : 'Website Enquiry'
+			};
+			console.log($scope.business.owner_email);
 		}
 	});
 	

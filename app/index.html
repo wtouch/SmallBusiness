@@ -13,10 +13,12 @@
 
 	<div  ng-include="'modules/component/header.html'">
 	</div>
-		<div ng-view class="container">
-			
+	<div class="ng-cloak container" ng-cloak ng-view></div>
+	<div ng-show="loading" style="display: block; position: fixed; top: 0; right: 0; left: 0; bottom: 0; background: rgba(0, 0, 0, 0.05);z-index: 10000;">
+		<div style="margin: 0 auto;font-size: 26px;color: transparent;width: 128px;text-align: center;margin-top: 10%;font-family: arial, helvetica, sans-serif;background: url(img/loader-leaf-purple.gif) no-repeat center center;height: 128px;">
+			Loading...
 		</div>
-	<div id="app"></div>
+	</div>
 
     <!-- Require JS -->
     <script data-main="js/main" src="lib/requirejs/require.js"></script>

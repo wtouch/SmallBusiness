@@ -313,42 +313,51 @@ define(['app'], function (app) {
 				}
 			}
 			obj.get = function (q, params) {
+				$rootScope.loading = true;
+				console.log($rootScope.loading);
 				return $http({
 					url: serviceBase + q,
 					method: "GET",
 					params: params
 				}).then(function (results) {
+					$rootScope.loading = false;
 					return results.data;
 					
 				});
 			};
 			obj.post = function (q, object, params) {
+				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
 					method: "POST",
 					data: object,
 					params: params
 				}).then(function (results) {
+					$rootScope.loading = false;
 					return results.data;
 				});
 			};
 			obj.put = function (q, object, params) {
+				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
 					method: "PUT",
 					data: object,
 					params: params
 				}).then(function (results) {
+					$rootScope.loading = false;
 					return results.data;
 				});
 			};
 			obj.delete = function (q, object, params) {
+				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
 					method: "DELETE",
 					data: object,
 					params: params
 				}).then(function (results) {
+					$rootScope.loading = false;
 					return results.data;
 				});
 			};

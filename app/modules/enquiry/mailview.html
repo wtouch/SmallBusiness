@@ -3,13 +3,12 @@
 	<div class="row"> 
 		<div class="col-md-12">
 			<div class="table-responsive">
-				<table>
+				<table class="table">
 					<thead>
 						<th colspan="3">{{singlemail.subject}}</th>
 					</thead>
 					<tbody>
 						<tr>
-							<td rowspan="5"><img src="img/user.jpg"/></td>
 							<td>From</td>
 							<td>{{singlemail.from_email.from}}</td>
 						</tr>
@@ -34,8 +33,20 @@
 					</tbody>
 				</table>
 			</div>
-			<div>
-				<label>Message:</label><span ng-bind-html="singlemail.message">{{singlemail.message}}</span>
+			<label>Message: </label>
+			<div class="panel panel-default">
+				<div class="panel-body">
+					
+						<table ng-if="singlemail.message.message">
+							<tr ng-repeat="(key, val) in singlemail.message">
+							<td>{{key | uppercase}} :</td> 
+							<td ng-bind-html="val"></td>
+							</tr>
+						</table>
+						<span ng-if="!singlemail.message.message">
+							<span ng-bind-html="singlemail.message"></span>
+						</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -45,11 +56,11 @@
 	<div class="col-sm-12 ">
 	<div ng-if="singlemail" ng-hide="singlemail.status == 2" class="main-content">
 		<h4> Reply </h4>
-			<form class="form-horizontal " name="mailView" ng-submit="mailView.$valid"  novalidate>
+			<form class="form-horizontal" name="mailView" ng-submit="mailView.$valid"  novalidate>
 				<div class="form-group">
 					<label for="subject" class="col-sm-2 control-label">Subject</label>
 					<div class="col-sm-10">
-						<input readonly type="text" class="form-control" id="subject" name="subject" placeholder="Subject" ng-model="replyMail.reply_message.subject"  ng-required="true">
+						<input type="text" class="form-control" id="subject" name="subject" ng-model="replyMail.reply_message.subject" ng-required="true" ng-disabled="singlemail.reply_status == 1">
 						<span class="text-danger" ng-show="mailView.subject.$dirty && mailView.subject.$invalid">
 						  <span ng-show="mailView.subject.$error.required">Message is required .</span>
 					</div>
@@ -57,7 +68,11 @@
 				<div class="form-group">
 					<label for="to_email" class="col-sm-2 control-label">To</label>
 					<div class="col-sm-10">
-						<input readonly type="email" class="form-control" id="to_email" name="to_email" placeholder="example@gmail.com" ng-model="replyMail.to_email.to" required>
+						<input type="hidden" class="form-control" ng-model="replyMail.reply_message.from_email" ng-init="replyMail.reply_message.from_email = singlemail.to_email.to">
+						
+						<input type="hidden" class="form-control" ng-model="replyMail.reply_message.name" ng-init="replyMail.reply_message.name = userDetails.name">
+						
+						<input readonly type="email" class="form-control" id="to_email" name="to_email" ng-model="replyMail.reply_message.to_email" ng-init="replyMail.reply_message.to_email = singlemail.from_email.from">
 						<span  ng-show="mailView.to_email.$dirty && mailView.to_email.$invalid">
 						
 							<span class="text-danger" ng-show="mailView.to_email.$error.required">Email is required.</span>
@@ -87,8 +102,8 @@
 				
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary" title="Send replay" ng-click="update(singlemail.id, replyMail)" ng-disabled="mailView.$invalid" ng-disabled="true">Send Reply</button>
-						<button type="reset" ng-click="reset()" class="btn btn-danger" title="Cancel Sending">Cancel</button>
+						<button type="submit" class="btn btn-primary" title="Send replay" ng-click="update(singlemail.id, replyMail)" ng-disabled="mailView.$invalid || singlemail.reply_status == 1">Send Reply</button>
+						<button type="reset" go-back class="btn btn-danger">Cancel</button>
 					</div>
 				</div>
 			</form>
