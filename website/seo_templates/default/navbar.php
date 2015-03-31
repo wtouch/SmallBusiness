@@ -7,7 +7,7 @@ global $config;
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav" >
 				<?php foreach($routes as $route):?>
-				<li <?php if($currentUrl==$route) echo 'class="active"' ?>><a href="http://<?php echo $rootUrl."/".$route ?>" style="background-color: #C0D51E;"><?php echo $route ?></a></li>
+				<li <?php if($currentUrl==$route) echo 'class="active"' ?>><a href="http://<?php echo $rootUrl."/#/".$route ?>" style="background-color: #C0D51E;"><?php echo $route ?></a></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>	

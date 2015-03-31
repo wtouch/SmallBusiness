@@ -23,7 +23,9 @@
 			if($seo){
 				// this is for seo template
 				$rootUrl = ($config['uri'][1]=='index.php') ? "/".$config['uri'][1] : $config['host'];
-				$currentUrl = ($config['uri'][1]=='index.php') ? $config['uri'][2] : $config['uri'][1];
+				$uri = $config['seouri'];
+				$uri = explode("/",$uri[1]);
+				$currentUrl = $uri[1];
 				$routes = websiteManager::getRoutes();
 				$routes = $routes["data"];
 				$template_dir = "default/";

@@ -13,17 +13,17 @@ $filesPath = $config['http_template_path'].$template_dir;
 		<script src="<?php echo $filesPath ?>/js/script.js"></script>
 		<title>Welcome </title>
 		<meta name="description" content="">
+		<meta name="fragment" content="!"/>
 		<meta name="keywords" content="">
 	</head>
 	<body>
 		<?php
-		include ('header.php');
-			  include ('navbar.php');
-			  //if(file_exists($currentUrl.".php")){
-				  include($currentUrl.".php");
-			 // }
-			  //include ('home.html');
-			  include ('footer.html');
+		include ('navbar.php');
+		if(file_exists($currentUrl.".php")){
+			include($currentUrl.".php");
+		}
+		echo $currentUrl;
+		include ('footer.html');
 		?>
 		
 

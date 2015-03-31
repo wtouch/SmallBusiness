@@ -172,6 +172,10 @@ define(['app'], function (app) {
 						dataService.put("put/enquiry/"+id,replyMail)
 						.then(function(response) {
 							$scope.alerts.push({type: response.status, msg: response.message});
+							$scope.singlemail.reply_status = 1;
+							setTimeout(function(){
+								$location.path("/dashboard/enquiry/mails");
+							},500);
 						});
 					};
 				},function(error) {
@@ -187,7 +191,7 @@ define(['app'], function (app) {
 			//Upload Function for uploading files 
 			$scope.composemail = {
 				user_id: $rootScope.userDetails.id,
-				from_email : {from:$rootScope.userDetails.email ,cc : ""},
+				from_email : {from : $rootScope.userDetails.email, cc : ""},
 				name : $rootScope.userDetails.username
 			};
 			
@@ -216,7 +220,9 @@ define(['app'], function (app) {
 				.then(function(response) {  
 					if(response.status=="success"){
 						$scope.alerts.push({type: response.status, msg: response.message});
-						
+						setTimeout(function(){
+							$location.path("/dashboard/enquiry/mails");
+						},1000);
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}

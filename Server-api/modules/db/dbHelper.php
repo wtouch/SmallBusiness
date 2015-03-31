@@ -330,8 +330,8 @@ class dbHelper {
         try{
 			(is_Array($inputData)) ? $inputData : $inputData = json_decode($inputData);
 			
-			$dataKey = [];
-			$dataValue = [];
+			$dataKey = array();
+			$dataValue = array();
 			foreach($inputData as $key => $val) // $inputData holds input json data
 			{
 				$value = ($key!=='password')
@@ -371,7 +371,7 @@ class dbHelper {
                 $a[":".$key] = $value;
             }
             (is_Array($inputData)) ? $inputData : $inputData = json_decode($inputData);
-			$updateTable = [];
+			$updateTable = array();
 			foreach($inputData as $key => $val) // $inputData holds input json data
 			{
 			

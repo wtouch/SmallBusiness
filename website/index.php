@@ -15,7 +15,7 @@ if(isset($_GET['_escaped_fragment_'])){
 	$seo = false;
 }
 $app->get('/', function() use($app, $seo) {
-	echo $seo;
+	//echo $seo;
 	loadTemplate($seo);
 });
 

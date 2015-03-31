@@ -44,7 +44,8 @@
 		
 		$from['email'] = $input->from_email->from;
 		$from['name'] = $input->name;
-		$recipients = array($input->to_email->to);
+		(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", $input->to_email->cc) : $ccMail = null;
+		$recipients = explode(",", $input->to_email->to);
 		$subject = $input->subject;
 		$message = "<table>
 				<tr>
@@ -67,7 +68,7 @@
 		$message .= "</table>";
 		//$message = $input->message->message;
 
-		$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail=null, $bccMail = null, $messageText = null);
+		$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
 		 if($mail['status'] == 'success'){
 			$insert = $db->insert("enquiry", $body);
 			$insert['message'] = $insert['message']." " .$mail['message'];
@@ -85,7 +86,7 @@
 			if(property_exists ($input, 'reply_message')){
 				$from['email'] = $input->reply_message->from_email;
 				$from['name'] = $input->reply_message->name;
-				$recipients = array($input->reply_message->to_email);
+				$recipients = explode("," ,$input->reply_message->to_email);
 				$subject = $input->reply_message->subject;
 				$message = "<table>
 						<tr>

@@ -12,7 +12,14 @@ app.config(function($routeProvider, $locationProvider) {
 });
 app.controller('enquiryController', function($scope,$http, $route, $location) {
 	$scope.hostUrl = hostUrl;
-	
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth() + 1;
+	var date = today.getDate();
+	var hour = today.getHours();
+	var min = today.getMinutes();
+	var sec = today.getSeconds();
+	$scope.mailSent = false;
 	$http.get("/sitedata").success(function(response){
 		if(response.status == "success"){
 			$scope.config = response.config;
@@ -24,15 +31,16 @@ app.controller('enquiryController', function($scope,$http, $route, $location) {
 			$scope.enquiry = {
 				user_id : $scope.business.user_id,
 				to_email : {to : $scope.business.owner_email},
-				subject : 'Website Enquiry'
+				subject : 'Website Enquiry',
+				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 			};
-			console.log($scope.business.owner_email);
+			console.log($scope.enquiry);
 		}
 	});
 	
 	$scope.postData = function(enquiry){
 		$http.post("../server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				console.log(response);
+				$scope.mailSent = true;
 		});
 	};
 
