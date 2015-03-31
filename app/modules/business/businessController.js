@@ -6,7 +6,7 @@ define(['app'], function (app) {
     // This is controller for this view
 	var businessController = function ($scope,$rootScope,$injector, $routeParams,$location,dataService,modalService)
 	{
-		
+		$scope.permission = $rootScope.userDetails.permission.business_module;
 		console.log(dataService.config);
 		//This code for modal {sonali}
 		$scope.open = function (url, buzId) {
