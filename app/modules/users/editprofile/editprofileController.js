@@ -77,14 +77,14 @@ define(['app'], function (app) {
 		
 		//Upload Function for uploading files {Vilas}
 			// this is form object
-		$scope.path = ""; // path to store images on server
+		$scope.path = "user/profile"; // path to store images on server
 		$scope.upload = function(files,path,userDetails,picArr){ // this function for uploading files
 			
-			upload.upload(files,'',userDetails,function(response){
+			upload.upload(files,path,userDetails,function(response){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(response.status === 'success'){
-					$scope.editprofile.user_img = response.details;
+					$scope.editprofile.user_img = response.data.file_relative_path;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}

@@ -176,7 +176,7 @@ define(['app'], function (app) {
 						var file = files[i];
 						$upload.upload({
 							url: '../server-api/index.php/upload',
-							fields: {'path': path, 'userinfo': userinfo},
+							fields: {'path': 'uploads/'+path, 'userinfo': userinfo},
 							file: file
 						}).progress(function (evt) {
 							var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);

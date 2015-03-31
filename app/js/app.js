@@ -95,7 +95,7 @@ define(['angular',
 				metaTitle : "Small Business",
 				headerTitle : next.$$route.label,
 				subTitle : next.$$route.label,
-				assetPath : '../server-api'
+				assetPath : '..'
 			};
 			var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout' || dataService.auth == false){
