@@ -58,6 +58,7 @@ class uploadClass {
 		$zip = new ZipArchive;
 		$res = $zip->open($file);
 		if ($res === TRUE){
+			$this->make_dir($this->get_path() . $path_to_extract);
 		  $zip->extractTo($this->get_path() . $path_to_extract);
 		  $zip->close();
 		  return true;

@@ -15,8 +15,8 @@ $body = $app->request->getBody();
 	echo "Not Found";
 }); */
 //use these uri for all get requests {Vilas}
-$app->post('/upload', 'uploadFiles' );
-$app->post('/sendmail', 'sendMail' );
+$app->post('/upload(/:postParams)', 'uploadFiles' );
+$app->post('/sendmail(/:postParams)', 'sendMail' );
 
 //Use this uri for multiple records with limit {Vilas}
 $app->get('/getmultiple/:getRequest/:pageNo(/:records)','getRecords');
@@ -119,7 +119,7 @@ function postRecord($getRequest, $postParams=null){
     }
 };
 
-function uploadFiles(){
+function uploadFiles($postParams = null){
 	$app = new \Slim\Slim();
 	$body = $app->request->getBody();
 
@@ -135,7 +135,7 @@ function uploadFiles(){
         //return $app->response()->redirect($baseUrl.'/notfound');
     }
 }
-function sendMail(){
+function sendMail($postParams = null){
 	$app = new \Slim\Slim();
 	$body = $app->request->getBody();
 

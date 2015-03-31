@@ -35,7 +35,6 @@
 		$path = (isset($_POST['path'])) ? $_POST['path'] : "uploads/general";
 		$userInfo = json_decode($_POST['userinfo']);
 		$user_id = ($userInfo->user_id) ? $userInfo->user_id : null;
-		
 		if(isset($_FILES['file']) && $user_id !== null){
 			$upload->set_path($path);
 			echo json_encode($upload->upload($_FILES['file']));

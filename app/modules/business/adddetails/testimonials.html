@@ -119,7 +119,7 @@
 		<div class="col-sm-9">
 			<div ng-class="(!headingDisabled || !imgRemoved) ? 'btn btn-default' : '' " id="infra_image" name="testimage" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="testimage">
 				<ul ng-if="headingDisabled" class="list-unstyled">
-					<li ng-repeat="(key, value) in testimonials.desc.image"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + value.file_name}}" width="100%" /></li>
+					<li ng-repeat="(key, value) in testimonials.desc.image"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}" width="100%" /></li>
 				</ul>
 				<span ng-if="!headingDisabled">Select Image</span>
 			</div>
@@ -150,7 +150,7 @@
 					<td>{{key}}</td>
 					<td>
 					<ul class="list-unstyled">
-						<li ng-repeat="(key, value) in value.image"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + value.file_name}}" width="100%" /></li>
+						<li ng-repeat="(key, value) in value.image"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}" width="100%" /></li>
 					</ul>
 						
 					</td>
