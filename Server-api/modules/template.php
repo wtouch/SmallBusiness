@@ -1,5 +1,6 @@
 <?php
 	require_once 'db/dbHelper.php';
+	require_once 'uploadClass.php';
 	$db = new dbHelper();
 	$reqMethod = $app->request->getMethod();
 	
@@ -41,8 +42,12 @@
 	}//end get
 	
 	if($reqMethod=="POST"){
-		$insert = $db->insert("template", $body);
-		echo json_encode($insert);
+		if(isset($postParams) && $postParams == 'addtemplate'){
+			addTemplate($body);
+		}else{
+			$insert = $db->insert("template", $body);
+			echo json_encode($insert);
+		}
 	}
 	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
@@ -50,6 +55,34 @@
 		$update = $db->update("template", $body, $where);
 		echo json_encode($update);
 	}
-
+	
+	function addTemplate($body){
+		try{
+			$upload = new uploadClass;
+			$db = new dbHelper();
+			$input = json_decode($body);
+			$file = $input->template_zip->file_path;
+			$path_to_extract = $input->category."/".$input->template_name;
+			$upload->set_path("website/templates");
+			
+			$insert = $db->insert("template", $body);
+			if($insert['status'] == "success" && $insert['data'] != ""){
+				$extractZip = $upload->extract_zip($file, $path_to_extract);
+				if(!$extractZip){
+					throw new Exception("zip not extracted!");
+				}
+			}else{
+				throw new Exception($insert['message']);
+			}
+			$response = $insert;
+			$response["message"] = $insert["message"]." Zip extracted in ".$path_to_extract;
+			echo json_encode($response);
+		}catch(Exception $e) {
+			$response["status"] = "error";
+            $response["message"] = 'Error: ' .$e->getMessage();
+            $response["data"] = null;
+			echo json_encode($response);
+		}
+	}
 
  ?>

@@ -40,10 +40,8 @@
 			<div class="bottomspace">
 				<label for="featured" class="control-label">Filter By Category</label>
 					<select id="featured" class="form-control" ng-model="filterCategory" 
-					ng-change="changeStatus('category',filterCategory)">
-						<option value="" selected>Select Category</option> <!-- added value & selected attr -->
-						<option value="mobile" >Mobile</option>
-						<option value="tab">Tab</option> 
+					ng-change="changeStatus('category',filterCategory)" ng-options="item.system_name as item.name for item in temp.category">
+						<option value="" selected>Select Category</option>
 					</select>
 			</div>
 		</div>
