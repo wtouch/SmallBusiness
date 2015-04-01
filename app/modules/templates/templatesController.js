@@ -5,7 +5,7 @@ define(['app'], function (app) {
     
     // This is controller for this view
 	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
-		
+		$scope.permission = $rootScope.userDetails.permission.template_module;
 		//console.log($rootScope.userDetails);
 		//this code block for modal{trupti}
 		$scope.open = function (url, tempId) {

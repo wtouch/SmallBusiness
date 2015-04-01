@@ -5,6 +5,7 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
+		$scope.permission = $rootScope.userDetails.permission.website_module;
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
         //open function for previewing the website[Dnyaneshwar].

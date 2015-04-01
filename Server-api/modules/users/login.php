@@ -39,6 +39,9 @@
 				if($data['data']['status'] == 0){
 					throw new Exception('Please activate your account to access.');
 				}
+				if($data['data']['baned'] == 1){
+					throw new Exception('Your account is banned, please contact administrator.');
+				}
 				$response["message"] = "You are logged in successfully.";
                 $response["status"] = "success";
 				$response["data"] = json_encode($sessionObj->getSession());
