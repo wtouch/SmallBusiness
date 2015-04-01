@@ -314,7 +314,7 @@ define(['app'], function (app) {
 			}
 			obj.get = function (q, params) {
 				$rootScope.loading = true;
-				console.log($rootScope.loading);
+				
 				return $http({
 					url: serviceBase + q,
 					method: "GET",

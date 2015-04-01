@@ -31,7 +31,7 @@ define(['app'], function (app) {
 		//this model for show website details when click on apply button{trupti}
 		$scope.showWebsitedetails = function (url, tempId) {
 			$scope.status = {status:1};
-			angular.extend($scope.status, $scope.userDetails);
+			angular.extend($scope.status, $scope.userInfo);
 			dataService.get("getmultiple/website/1/50",$scope.status)
 			.then(function(response) {
 				var oldObj = response.data;
@@ -87,11 +87,11 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.currentDate = dataService.currentDate;
-		$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		
 		// All $scope methods
 		$scope.pageChanged = function(page, where) { // Pagination page changed
-			angular.extend(template_type, $scope.userDetails);
+			angular.extend(template_type, $scope.userInfo);
 			dataService.get("getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response){  //function for templatelist response
 				$scope.templates = response.data;
@@ -194,7 +194,7 @@ define(['app'], function (app) {
 		}
 		// switch functions
 		var mytemplates = function(){
-			dataService.get("getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.userDetails)
+			dataService.get("getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.userInfo)
 			.then(function(response) {  //function for my templates response
 			if(response.status == 'success'){
 					$scope.templates=response.data;
@@ -211,7 +211,7 @@ define(['app'], function (app) {
 		//list of templates
 		var listoftemplates = function(){
 			$scope.template_type = {template_type : 'public', status:1};
-			angular.extend($scope.template_type, $scope.userDetails);
+			angular.extend($scope.template_type, $scope.userInfo);
 			dataService.get("getmultiple/template/"+$scope.tempListCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
@@ -258,7 +258,7 @@ define(['app'], function (app) {
 		
 		var custometemplates = function(){
 			$scope.template_type = {template_type : 'private',status:1,custom:1};
-			angular.extend($scope.template_type, $scope.userDetails);
+			angular.extend($scope.template_type, $scope.userInfo);
 			dataService.get("getmultiple/template/"+$scope.customTempCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  //function for template list response
 				if(response.status == 'success'){
@@ -348,22 +348,19 @@ define(['app'], function (app) {
 		var addtemplate = function(){
 			//reset function{trupti}
 			$scope.reset = function() {
-				$scope.addtemplate = {};
+				$scope.addtemplate = {
+					date : $scope.currentDate,
+					template_params : {}
+				};
 			};
-			//post method for insert data in request template form{trupti}
-			$scope.postData = function(addtemplate) { 
-			//$scope.addtemplate = {};
-			//$scope.submittempForm.$setPristine();
-			$scope.userDetails=$scope.userDetails;
-			$scope.addtemplate.date = $scope.currentDate;
-				dataService.post("post/template",addtemplate,$scope.userDetails)
-				.then(function(response) {  //function for response of request temp
-					$scope.addtemplate = response.data;
+			$scope.reset();
+			/* $scope.postData = function(addtemplate) {
+				angular.extend(addtemplate, $scope.userInfo);
+				dataService.post("post/template",addtemplate)
+				.then(function(response) {
 					console.log(response);
-					$scope.reset();
-					console.log(addtemplate);
 				});
-			}//end of post method{trupti}
+			} */
 		}
 		
 		switch($scope.tempPart) {
@@ -379,6 +376,9 @@ define(['app'], function (app) {
 			case 'requestcustomtemplates':
 				requestcustomtemplates();
 				break;	
+			case 'addtemplate':
+				addtemplate();
+				break;
 			default:
 				listoftemplates();
 		};
