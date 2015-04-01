@@ -66,7 +66,8 @@
 							<a class="btn btn-success" ng-show="x.status==1" title="Active">Active</a>
 							<a class="btn btn-warning" ng-show="x.status==0" title="Delete">Delete</a>
 							<div class="btn-group">
-									<a ng-click="open('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary responsive"> Prieview</a>
+									<a ng-click="open('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary responsive">Prieview</a>
+									<a ng-if="permission.Make_Private"ng-click="open('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary responsive">Public</a>
 							</div>
 							</td>
 						</tr>		

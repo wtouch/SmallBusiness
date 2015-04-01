@@ -8,6 +8,11 @@ define(['app'], function (app) {
 		$scope.permission = $rootScope.userDetails.permission.website_module;
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
+		// For displaying manage domain module parts! {Dnyaneshwar}
+		$scope.formPart = 'checkdomainavailable';
+		$scope.showFormPart = function(formPart){
+			$scope.formPart = formPart;
+		};
         //open function for previewing the website[Dnyaneshwar].
         $scope.open = function (url, webId) {
 			dataService.get("getsingle/website/"+webId)

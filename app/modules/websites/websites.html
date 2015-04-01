@@ -6,6 +6,7 @@
 				<a href="#/dashboard/websites/websiteslist" class="btn btn-default">Website List</a>
 				<a href="#/dashboard/websites/requestnewsite" class="btn btn-default">Request New Site</a>
 				<a href="#/dashboard/websites/requestedsitelist" class="btn btn-default">Requested Site List</a>
+				<a href="#/dashboard/websites/managedomains" class="btn btn-default">	Manage Domains</a>
 				</div>
 				<div>
 				<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
@@ -15,6 +16,7 @@
 				<ng-include ng-if="websitePart=='websiteslist'" src="'modules/websites/websiteslist.html'"></ng-include>
 				<ng-include ng-if="websitePart=='requestnewsite'" src="'modules/websites/requestnewsite.html'"></ng-include>
 				<ng-include ng-if="websitePart=='requestedsitelist'" src="'modules/websites/requestedsitelist.html'"></ng-include>
+				<ng-include ng-if="websitePart=='managedomains'" src="'modules/websites/managedomains/managedomains.html'"></ng-include>
 			</div>
 		</div>
 </div>
