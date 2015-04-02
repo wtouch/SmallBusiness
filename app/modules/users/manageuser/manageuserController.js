@@ -278,7 +278,10 @@ define(['app'], function (app) {
 					group_access : {},
 					template_module : {},
 					business_module : {},
-					website_module : {}
+					product_module : {},
+					website_module : {},
+					enquiry_module : {},
+					dashboard : {}
 				},
 				config:{}
 			};
