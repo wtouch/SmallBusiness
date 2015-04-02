@@ -54,7 +54,7 @@ define(['app'], function (app) {
 			if(read_status==0){
 				$scope.statusParam = {read_status : 1};
 				dataService.put("put/enquiry/"+id, $scope.statusParam).then(function(response) { 
-					console.log(response.message);
+					
 					$scope.mailList[index].read_status = 1
 				});
 			}
@@ -66,7 +66,7 @@ define(['app'], function (app) {
 				$scope.status = {status : 0};
 				dataService.put("put/enquiry/"+id, $scope.status)
 				.then(function(response) { 
-					console.log(response.message);
+					
 					$scope.mailList[index].status = 0
 					$scope.hideDeleted = 1;
  				});
@@ -86,7 +86,7 @@ define(['app'], function (app) {
 					}else{
 						$scope.mailList = dataService.parse(response.data);
 						$scope.totalRecords = response.totalRecords;
-						console.log($scope.mailList);
+						
 					}
 				});
 			}
@@ -99,7 +99,7 @@ define(['app'], function (app) {
 			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response) { 
 				if(response.status == 'success'){
 					$scope.mailList = dataService.parse(response.data);
-					console.log($scope.mailList);
+					
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -127,7 +127,7 @@ define(['app'], function (app) {
 				if(response.status=="warning" || response.status=='error' ){
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}else{
-					console.log(response.data);
+					
 					$scope.mailList = dataService.parse(response.data);
 					$scope.totalRecords = response.totalRecords;
 				}
@@ -152,7 +152,7 @@ define(['app'], function (app) {
 				.then(function(response) {
 					$scope.singlemail = dataService.parse(response.data);
 					$scope.singlemail.date = $scope.singlemail.date;
-					console.log($scope.singlemail);
+					
 					$scope.totalRecords = response.totalRecords;
 					$scope.replyMsg = ($scope.singlemail.reply_message!="") ? $scope.singlemail.reply_message : {message:""};
 					$scope.replyMail = {
@@ -215,10 +215,11 @@ define(['app'], function (app) {
 			
 			//post method for insert data of compose mail
 			$scope.postData = function(composemail) {
-				console.log(composemail);
+				
 				dataService.post("/post/enquiry",composemail)
 				.then(function(response) {  
 					if(response.status=="success"){
+						//$scope.composemailviewForm.$setPristine();
 						$scope.alerts.push({type: response.status, msg: response.message});
 						setTimeout(function(){
 							$location.path("/dashboard/enquiry/mails");

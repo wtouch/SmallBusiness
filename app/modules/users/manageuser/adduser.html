@@ -3,7 +3,7 @@
 		<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	{{alert.msg}}
 		</alert>
 		<h3 class="col-sm-offset-2 col-sm-9"> Add New User</h3>
-		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate>	
+		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate="novalidate">	
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">Name</label>
 				<div class="col-sm-9">
@@ -64,15 +64,14 @@
 			</div>
 			
 			<div class="form-group">
-				<label for="Address" class="col-sm-2 control-label">Address</label>
+				<label for="address" class="col-sm-2 control-label">Address</label>
 				<div class="col-sm-9">
-					<textarea  class="form-control" id="Address" ng-model="editprofile.address.address" name="Address" placeholder="Enter Address" ng-maxlength="75" required>
-					</textarea>
-					 <p ng-hide="editProfileForm.Address.$error.maxlength">{{ 75 - Address.length + " Characters left"}}</p>
-					<span class="help-block" ng-show="editProfileForm.Address.$dirty &&  editProfileForm.Address.$invalid">
-						<span class="text-danger" ng-show="editProfileForm.Address.$error.maxlength">Sorry You are Exceeding the Limit</span>
-						<span class="text-danger" ng-show="editProfileForm.Address.$error.required">Address is required.</span>
-					</span>	
+					<textarea  class="form-control" id="address" ng-model="adduser.address.address" name="address" placeholder="Enter address" ng-maxlength="75" required></textarea>
+					<p ng-hide="adduserForm.address.$error.maxlength">{{ 75 - adduser.address.address.length + " Characters left"}}</p>
+					<span class="help-block" ng-show="adduserForm.address.$dirty &&  adduserForm.address.$invalid">
+						<span class="text-danger" ng-show="adduserForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+						<span class="text-danger" ng-show="adduserForm.address.$error.required">Address is required.</span>
+					</span>
 				</div>
 			</div>
 			

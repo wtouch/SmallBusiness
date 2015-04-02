@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="main-content">	
-			<form class="form-horizontal" role="form" name="composemailviewForm" novalidate="novalidate">
+			<form class="form-horizontal" role="form" name="composemailviewForm" novalidate="novalidate" ng-submit="composemailviewForm.$valid">
 			<h3> Compose Mail</h3>
 				<div class="form-group">
 					<label for="from" class="col-sm-2 control-label">From</label>
@@ -68,7 +68,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-9">
-						<button type="button" class="btn btn-primary" ng-click="postData(composemail)" ng-disabled="composemailviewForm.$dirty && composemailviewForm.$invalid">Send</button>
+						<button type="button" class="btn btn-primary" ng-click="postData(composemail)" ng-disabled="composemailviewForm.$invalid">Send</button>
 						<button type="reset" class="btn btn-danger" title="Cancel Sending">Cancel</button>
 					</div>
 				</div>

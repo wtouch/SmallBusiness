@@ -39,7 +39,7 @@
 						<label for="address" class="col-sm-2 control-label">Address</label>
 						<div class="col-sm-9">
 							<textarea  class="form-control" id="address" ng-model="register.address.address" name="address" placeholder="Enter address" ng-maxlength="75" required></textarea>
-							<p ng-hide="registerForm.address.$error.maxlength">{{ 75 - reg.address.length + " Characters left"}}</p>
+							<p ng-hide="registerForm.address.$error.maxlength">{{ 75 - register.address.address.length + " Characters left"}}</p>
 							<span class="help-block" ng-show="registerForm.address.$dirty &&  registerForm.address.$invalid">
 								<span class="text-danger" ng-show="registerForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
 								<span class="text-danger" ng-show="registerForm.address.$error.required">Address is required.</span>

@@ -146,7 +146,7 @@ define(['app'], function (app) {
 				if($scope.userViews == 'usersgroup'){
 					dataService.get("/getmultiple/usergroup/1/"+$scope.pageItems, $scope.userParams).then(function(response) { 
 						if(response.status == 'success'){
-							$scope.usergroupList = response.data; // this will change for template
+							$scope.usergroupList = dataService.parse(response.data); // this will change for template
 							$scope.totalRecords = response.totalRecords; // this is for pagination
 						}else{
 							$scope.usergroupList = {};
@@ -336,7 +336,7 @@ define(['app'], function (app) {
 			dataService.get("getmultiple/usergroup/"+$scope.usersGroupCurrentPage+"/"+$scope.pageItems).then(function(response) { 
 				//console.log(response);
 				if(response.status == 'success'){
-					$scope.usergroupList = response.data;
+					$scope.usergroupList = dataService.parse(response.data);
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
