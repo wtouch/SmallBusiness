@@ -1,8 +1,13 @@
 <h3>Check Free Domain</h3>
-<form role="form" class="form-horizontal center-block">
+<form role="form" class="form-horizontal center-block" name="checkfreedomainForm">
   <div class="form-group">
     <label class="col-sm-3" for="checkdomainavailable">Enter Domain Name</label>
-    <div class="col-sm-5"><input type="email" class="form-control" id="checkdomainavailable" placeholder="Enter Domain Name You Want"></div>
+    <div class="col-sm-5"><input type="text" class="form-control" id="domain_name" ng-model="domian-name" name="domain_name" placeholder="Enter Domain Name You Want" required>
+	<span class="help-block ng-hide" ng-show="checkfreedomainForm.domain_name.$dirty &amp;&amp; checkfreedomainForm.domain_name.$invalid">
+					<span class="text-danger" ng-show="checkfreedomainForm.domain_name.$error.required">Domain  is required.</span>
+					<span class="text-danger ng-hide" ng-show="checkfreedomainForm.domain_name.$error.url">Invalid Web Site.</span>
+				</span>
+	<span>e.g www.google.com</span></div>
 	<button class="col-sm-2 btn btn-success">Check Availability</button>
   </div>
  </form>
