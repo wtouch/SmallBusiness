@@ -5,79 +5,8 @@ define(['app'], function (app) {
     
     // This is controller for this view
 	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
-		$scope.permission = $rootScope.userDetails.permission.template_module;
-		//console.log($rootScope.userDetails);
-		//this code block for modal{trupti}
-		$scope.open = function (url, tempId) {
-			dataService.get("getsingle/template/"+tempId)
-			.then(function(response) {
-				//console.log(newObj);
-				var modalDefaults = {
-					templateUrl: url,	// apply template to modal
-					size : 'lg'
-				};
-				var modalOptions = {
-					tempList: dataService.parse(response.data)  // assign data to modal
-				};
-
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					console.log("modalOpened");
-				});
-			});
-		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
-		};
-		//this model for show website details when click on apply button{trupti}
-		$scope.showWebsitedetails = function (url, tempId) {
-			$scope.status = {status:1};
-			angular.extend($scope.status, $scope.userInfo);
-			dataService.get("getmultiple/website/1/50",$scope.status)
-			.then(function(response) {
-				var oldObj = response.data;
-				var modalDefaults = {
-					templateUrl: url,	// apply template to modal
-					size : 'lg'
-				};
-				var modalOptions = {
-					websiteList: oldObj,  // assign data to modal
-					tempId : {templates : {template_id : [tempId]}},
-					updateConfig : function(formData){
-						modalOptions.formData = formData;
-					},
-					
-				};
-				//console.log(dataService.parse($rootScope.userDetails));
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					var formData = modalOptions.formData;
-					var userConfig = dataService.parse($rootScope.userDetails).config;
-					var webConfig = dataService.parse(modalOptions.websiteList[formData.website_id].config);
-					var userTemplateConfig = (userConfig.templates.template_id) ? userConfig.templates.template_id.push(tempId) : angular.extend(userConfig,formData.config);
-					
-					console.log(userTemplateConfig);
-					console.log(userConfig);
-					//angular.extend(userConfig, formData.config);
-					angular.extend(webConfig, formData.config);
-					dataService.put('put/website/'+formData.website_id, {config : webConfig})
-					.then(function(response){
-						console.log(response.message);
-					});
-					dataService.put('put/user/'+$rootScope.userDetails.id, {config : userConfig})
-					.then(function(response){
-						console.log(response.message);
-					});  
-					
-				});
-			});
-		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
-		};
-	
-		//for display form parts
-		$scope.tempPart = $routeParams.tempPart;
 		
-		// all $scope object goes here
+	// all $scope object goes here
 		$scope.alerts = [];
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -88,28 +17,101 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.currentDate = dataService.currentDate;
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
+		$scope.tempPart = $routeParams.tempPart;
+		$scope.permission = $rootScope.userDetails.permission.template_module;
+		$scope.filterStatus= {};
+		$scope.webParam = {};
+		$scope.path = "template/"; // path to store images on server
 		
-		// All $scope methods
-		$scope.pageChanged = function(page, where) { // Pagination page changed
-			//angular.extend(template_type, $scope.userInfo);
+		//function for close alert
+		$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+		};
+		
+		//For display by default templatelist page 
+		if(!$routeParams.tempPart) {
+			$location.path('/dashboard/templates/listoftemplates');
+		}
+		//This code for apply/buy button
+		$scope.dynamicTooltip = function(status, active, notActive){
+			return (status==1) ? active : notActive;
+		};
+		
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+		
+		//for display form parts
+		$scope.pageChanged = function(page, where) {
 			dataService.get("getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
-			.then(function(response){  //function for templatelist response
+			.then(function(response){ 
 				$scope.templates = response.data;
-				console.log($scope.templates);
 			});
 		};
 	
-		//for get the single col value from db{trupti} 
+		//for get the single col value from db
 		$scope.changeScope = function(value, object){
 			$scope.website.userDetails = value.id;
-			//$scope.addproduct.business_id = value.id;
 			$scope.changeScopeObject($scope.domain_name);
 		}
 		
+		// this function will generate thumbnails of images
+		$scope.generateThumb = function(files){  
+			upload.generateThumbs(files);
+		};
+		
+		//this is form object
+		$scope.reqtemp = {
+			scrible : {}
+		}; 
+		
+		// functions 
+		$scope.open = function (url, tempId) {
+			dataService.get("getsingle/template/"+tempId)
+			.then(function(response) {
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					var modalOptions = {
+						tempList: dataService.parse(response.data),
+					};
+					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					
+					});
+			});
+		};
+		
+		$scope.addMytemplate=function(tempList){
+			 dataService.post("post/mytemplate",tempList)
+			.then(function(response) { 
+				console.log(response);
+				$scope.alerts.push({type: response.status, msg: response.message});
+			});
+		};
+		/*
+			dataService.get("getmultiple/website/1/50",$scope.status)
+			.then(function(response) {
+				var formData = modalOptions.formData;
+					var userConfig = dataService.parse($rootScope.userDetails).config;
+					var webConfig = dataService.parse(modalOptions.websiteList[formData.website_id].config);
+					var userTemplateConfig = (userConfig.templates.template_id) ? userConfig.templates.template_id.push(tempId) : angular.extend(userConfig,formData.config);
+					angular.extend(webConfig, formData.config);
+					dataService.put('put/website/'+formData.website_id, {config : webConfig})
+					.then(function(response){
+							$scope.alerts.push({type: response.status, msg: response.message});
+					});
+					dataService.put('put/user/'+$rootScope.userDetails.id, {config : userConfig})
+					.then(function(response){
+							$scope.alerts.push({type: response.status, msg: response.message});
+					});  
+					
+				});
+			
+		*/
+		
 		//this is global method for filter 
 		$scope.changeStatus = function(statusCol, showStatus) {
-			console.log($scope.template_type);
-			$scope.filterStatus= {};
 			(showStatus =="") ? delete $scope.template_type[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.template_type, $scope.filterStatus);
 			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
@@ -122,22 +124,18 @@ define(['app'], function (app) {
 					$scope.totalRecords = {};
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				//console.log($scope.properties);
 			});
 		};
 	
-		//for search filter{trupti}
+		//for search filter
 		$scope.searchFilter = function(statusCol, showStatus) {
 			$scope.search = {search: true};
-			$scope.filterStatus= {};
-			$scope.webParam={};
 			(showStatus =="") ? delete $scope.webParam[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.webParam, $scope.filterStatus);
 			angular.extend($scope.webParam, $scope.search);
 			if(showStatus.length >= 4 || showStatus == ""){
 			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.webParam)
 			.then(function(response) {  //function for websitelist response
-			console.log(response);
 				if(response.status == 'success'){
 					$scope.templates = response.data;
 					$scope.totalRecords = response.totalRecords;
@@ -150,18 +148,6 @@ define(['app'], function (app) {
 			}
 		}; 
 
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
-		/*For display by default templatelist page {trupti}*/
-		if(!$routeParams.tempPart) {
-			$location.path('/dashboard/templates/listoftemplates');
-		}
-		//This code for apply/buy button{trupti}
-		$scope.dynamicTooltip = function(status, active, notActive){
-			return (status==1) ? active : notActive;
-		};
 		
 		//This code for active/delete button 
 		$scope.feature = function(id, featured){
@@ -191,30 +177,22 @@ define(['app'], function (app) {
 			});
 		} ;
 		
-		//Upload Function for uploading files {Vilas}
-		$scope.reqtemp = {
-			scrible : {}
-		}; // this is form object
-		$scope.path = "template/"; // path to store images on server
-		
-		$scope.upload = function(files,path,userDetails,picArr){ //this function for uploading files
-			upload.upload(files,path,userDetails,function(data){
+	
+		$scope.path = "template/mytemplate"; // path to store images on server
+		$scope.upload = function(files,path,userinfo, picArr){ // this function for uploading files
+			upload.upload(files,path,userinfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
-					picArr[picArrKey] = data.details;
-					console.log(data.message);
+					picArr[picArrKey] = data.data;
+					console.log(data);
 				}else{
 					$scope.alerts.push({type: data.status, msg: data.message});
 				}
-			});
+				
+			}); 
 		};
 		
-		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
-			upload.generateThumbs(files);
-		};// End upload function
-		
-		$scope.temp = dataService.config.template;
 		
 		// switch functions
 		var mytemplates = function(){
@@ -242,8 +220,7 @@ define(['app'], function (app) {
 				else{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				};
-			});//end of by default templist
-			
+			});
 		};
 		
 		var custometemplates = function(){
@@ -261,21 +238,14 @@ define(['app'], function (app) {
 		}
 		
 		var requestcustomtemplates = function(){
-			//reset function{trupti}
-			$scope.reset = function() {
-				$scope.reqtemp = {};
-			};
-			//post method for insert data in request template form{trupti}
 			$scope.postData = function(reqtemp) { 
 			$scope.reqtemp.user_id= $rootScope.userDetails.id;
 			$scope.reqtemp.date = $scope.currentDate;
 				 dataService.post("post/template",reqtemp)
-				.then(function(response) {  //function for response of request temp
-					console.log(response);
-					$scope.reset();
-					console.log(reqtemp);
+				.then(function(response) { 
+					$scope.alerts.push({type: response.status, msg: response.message});
 				});
-			}//end of post method{trupti}
+			}
 		}
 	
 		//post method for add template form(trupti)
@@ -290,10 +260,7 @@ define(['app'], function (app) {
 					development_status : 'completed'
 				};
 			};
-			$scope.reset();
 			$scope.uploadZip = function(files,path,userDetails,picArr){ 
-			//addtemplate.template_zip
-			console.log(files);
 				upload.upload(files,path,userDetails,function(data){
 					var picArrKey = 0, x;
 					for(x in $scope.addtemplate.template_image) picArrKey++;
