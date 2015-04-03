@@ -1,6 +1,6 @@
 <?php
 	class templateLoader{
-		global $config;
+		private $config;
 		function __construct(){
 			$this->path = $_SERVER['DOCUMENT_ROOT'] . "/" ."uploads". "/";
 			$this->relative_path = "/" ."uploads". "/";
