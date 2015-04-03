@@ -341,6 +341,7 @@ define(['app'], function (app) {
 				//console.log(response);
 				if(response.status == 'success'){
 					$scope.usergroupList = dataService.parse(response.data);
+					if($scope.usergroupList.config == (undefined || "")) $scope.usergroupList.config = {};
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
