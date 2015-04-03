@@ -1,8 +1,8 @@
 <h3>Requested Site List</h3>
-	<div class="row">
+		<div class="row">
 		<div class="col-sm-2"> 
 			<div class="bottomspace">
-				<label for="search" class="control-label">Search </label>		
+				<label for="search" class="control-label">Search </label>
 					<input id="search" type="text" class="form-control" ng-model="searchProper" ng-change="searchFilter('domain_name', searchProper)" placeholder="search"/>
 			</div>
 		</div>			 				  
@@ -41,34 +41,34 @@
 				<label for="sortnewold" class="control-label">Sort by Newest/Oldest</label>
 					<select id="sortnewold" class="form-control" ng-model="sortnewold"> 
 						<option value="">Select Order</option><!-- added value & selected attr -->	
-						<option value="-domain_name">Newest</option>
-						<option value="domain_name">Oldest</option>  
+						<option value="-registered_date">Newest</option>
+						<option value="registered_date">Oldest</option>  
 					</select>
 			</div>
 		</div>
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="filterbyvalidity" class="control-label">Filter By validity</label>
-					<select id="filterbyvalidity" class="form-control" ng-model="filterbyvalidity"> 
-						<option value="">Select Order</option><!-- added value & selected attr -->	
-						<option value="0">0</option>
+					<select id="filterbyvalidity" class="form-control" ng-model="filterbyvalidity" ng-change="changeStatusFn('validity', filterbyvalidity)" >
+						<option value="">Filter by Validity</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
 					</select>
 			</div>
 		</div>
-		<div class="col-sm-2">
+		<div ng-if="permission.customer_filter" class="col-sm-2">
 			<div class="bottomspace">
 				<label for="filterbycustomerid" class="control-label">Filter By Customer Id</label>
-					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"> 
-						<option value="">Select Order</option><!-- added value & selected attr -->	
-						<option value="0">0</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
+					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatusFn('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+						<option value="">Select Order</option>
 					</select>
 			</div>
 		</div>
@@ -84,14 +84,24 @@
 				<th>Manage</th>
 			</thead>
 				<tbody>
-					<tr ng-repeat="x in website | orderBy : sort">
+					<tr ng-repeat="x in website | orderBy : sort | orderBy : sortnewold">
 					<td>{{((webListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
-					<td>{{x.domain_name}} 
-					<a type="button" class="btn btn-warning pull-right" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')" ng-change="editDomainName('domain_name', x.domain_name, x.id,x.boxId)" tooltip="Edit">
-					<span class="glyphicon glyphicon-pencil"></span>
-					</a>
-					<input type="text" id="domain_name" class="form-control" name="domain_name" ng-show="x.boxId == 1" ng-model="x.domain_name" ng-required="true"/>
-					</td>
+					
+					<td class="col-sm-2">
+						<div class="input-group">
+							<p class="form-control-static" ng-hide="x.boxId ==1">{{x.domain_name}}</p>					
+
+						<input type="text" id="domain_name" class="form-control" ng-hide="x.boxId ==0 || !x.boxId"  name="domain_name" ng-show="x.boxId == 1" ng-model="x.domain_name" ng-required="true"/> 
+							
+							<div class="input-group-btn" >							
+								<a type="button" ng-class="(x.boxId == 0 || !x.boxId) ? 'btn btn-warning' : 'btn btn-success'" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')" ng-change="editDomainName('domain_name', x.domain_name, x.id,x.boxId)" tooltip="Edit site name">
+								 
+									<span ng-class="(x.boxId ==1) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'"></span>
+								</a>
+							</div>
+						</div>
+					
+ 					</td>
 					<td>{{x.registered_date}}</td>
 					<td>{{x.expiry_date}}</td>
 					<td>{{x.status}}</td>
@@ -104,7 +114,7 @@
 							<button type="button" tooltip="{{dynamicTooltip(x.expired, 'expired', 'Reactive')}}"ng-class="(x.expired==0) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="changeStatus('expired',x.id, x.expired)" btn-checkbox btn-checkbox-true="0" btn-checkbox-false="1"><span class="glyphicon glyphicon-ok"></span></button>
 						
 							<div class="btn-group">
-								<a type="button" tooltip="Edit" class="btn btn-warning glyphicon glyphicon-pencil" ng-click="getWebsitedetails(config)" href="#/dashboard/websites/websettings/{{x.id}}"></a>	
+								<a type="button" tooltip="Website setting" class="btn btn-info glyphicon glyphicon-cog" ng-click="getWebsitedetails(config)" href="#/dashboard/websites/websettings/{{x.id}}"></a>	
 							</div>
 							
 							<div class="btn-group">

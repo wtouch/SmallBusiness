@@ -263,7 +263,6 @@ define(['app', 'tinymce'], function (app) {
 		};
 	}]);
 	/* TinyMCE ends here*/
-
 	return app;
 
 });

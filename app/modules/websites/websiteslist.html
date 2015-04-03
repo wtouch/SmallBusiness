@@ -114,16 +114,23 @@
 							<button type="button" tooltip="{{dynamicTooltip(x.expired, 'expired', 'Reactive')}}"ng-class="(x.expired==0) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="changeStatus('expired',x.id, x.expired)" btn-checkbox btn-checkbox-true="0" btn-checkbox-false="1"><span class="glyphicon glyphicon-ok"></span></button>
 						
 							<div class="btn-group">
-								<a type="button" tooltip="Edit" class="btn btn-warning glyphicon glyphicon-pencil" ng-click="getWebsitedetails(config)" href="#/dashboard/websites/websettings/{{x.id}}"></a>	
+								<a type="button" tooltip="Website setting" class="btn btn-info glyphicon glyphicon-cog" ng-click="getWebsitedetails(config)" href="#/dashboard/websites/websettings/{{x.id}}"></a>	
 							</div>
 							
 							<div class="btn-group">
 								<a href="{{'http://'+x.domain_name}}" target="_blank" class="btn btn-primary">Prieview
 								</a>		
 							</div>
-							<div class="btn-group">
-								<a href="{{'http://'+x.domain_name}}" target="_blank" class="btn btn-primary">Renew
-								</a>		
+							<div ng-class="(drop) ? 'btn-group open' : 'btn-group'">
+								  <button type="button" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop" class="btn btn-danger">Renew</button>
+								  <ul ng-show="drop" class="dropdown-menu" role="menu">
+									<form style="padding:3px" name="renewForm">
+									<select class="form-control" id="country" name="country" ng-model="renew.country" required ng-change="getState(register.country)" ng-options="item.country_name as item.country_name for item in contries">		
+								<option value="">Select Validity</option>
+									</select>
+									<button type="submit" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop; method()" class="btn btn-danger">Renew</button>
+									</form>
+								  </ul>
 							</div>
 					</div>
 					</td>
