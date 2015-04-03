@@ -2,15 +2,15 @@
 
 class websiteManager{
 	private $domain;
-	private function getDomain(){
+	function getDomain(){
 		return $domain = $_SERVER['SERVER_NAME'];
 	}
 
-	public function getConfig(){
+	function getConfig(){
 		try{
 			$db = new dbHelper;
 			$table = 'website';
-			$domain = websiteManager::getDomain();
+			$domain = $this->getDomain();
 			$where['domain_name'] = $domain;
 			$dbresult = $db->selectSingle($table, $where);
 			
@@ -36,10 +36,10 @@ class websiteManager{
 		}
 		return $response;
 	}
-	public function getTemplate(){
+	function getTemplate(){
 		try{
 			$db = new dbHelper;
-			$config = websiteManager::getConfig();
+			$config = $this->getConfig();
 			if($config['status'] == 'success'){
 				$config = $config['data'];
 			}else{
@@ -72,11 +72,11 @@ class websiteManager{
 		}
 		return $response;
 	}
-	public function getData(){
+	function getData(){
 		try{
 
 			$db = new dbHelper;
-			$config = websiteManager::getConfig();
+			$config = $this->getConfig();
 			if($config['status'] == 'success'){
 				$config = $config['data'];
 			}else{
@@ -155,7 +155,7 @@ class websiteManager{
 		return $response;
 	}
 	
-	public function getRoutes(){
+	function getRoutes(){
 		try{
 			
 			$response["status"] = "success";
@@ -169,3 +169,4 @@ class websiteManager{
 		return $response;
 	}
 }
+?>

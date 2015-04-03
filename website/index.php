@@ -1,12 +1,18 @@
 <?php
 
 require $config['root_path'].'/server-api/lib/Slim/Slim.php';
+require $config['root_path'].'/server-api/lib/Twig/Autoloader.php';
 require $config['root_path'].'/server-api/modules/db/dbHelper.php';
 require 'websitemanager/websiteManager.php';
 require 'websitemanager/templateLoader.php';
 Slim\Slim::registerAutoloader();
-
+Twig_Autoloader::register();
 $app = new Slim\Slim();
+$loader = new Twig_Loader_Filesystem($config['root_path'].'/website/templates');
+// initialize Twig environment
+$twig = new Twig_Environment($loader);
+
+
 //$app->response->headers->set('Content-Type', 'application/json');
 
 if(isset($_GET['_escaped_fragment_'])){
@@ -14,11 +20,21 @@ if(isset($_GET['_escaped_fragment_'])){
 }else{
 	$seo = false;
 }
-$app->get('/', function() use($app, $seo) {
+$app->get('/', function() use($app, $seo, $twig,$config) {
 	//echo $seo;
-	loadTemplate($seo);
+	// load template
+	$web = new websiteManager;
+	print_r($web->getRoutes());
+	$template = $twig->loadTemplate('child.tmpl');
+	$template->display(array(
+	'path' => $config['http_template_path'],
+	'title' => 'Small Business',
+    'name' => 'Clark Kent',
+    'username' => 'ckent',
+    'password' => 'krypt0n1te',
+  ));
+	//loadTemplate($seo);
 });
-
 
 $app->get('/sitedata', function() use($app, $config) {
 	try{
