@@ -11,41 +11,38 @@ define(['app'], function (app) {
 		$scope.open = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
-				//console.log(newObj);
-				var modalDefaults = {
-					templateUrl: url,	// apply template to modal
-					size : 'lg'
-				};
-				var modalOptions = {
-					tempList: dataService.parse(response.data)  // assign data to modal
-				};
+				
+				dataService.get("getmultiple/website/1/50",$scope.status)
+				.then(function(webresponse) {
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					var modalOptions = {
+						websiteList: webresponse.data,  // assign data to modal
+						tempList: dataService.parse(response.data)  // assign data to modal
+					};
 
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					console.log("modalOpened");
+					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+						console.log("modalOpened");
+					});
 				});
+				
+				
 			});
 		};
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
 		//this model for show website details when click on apply button{trupti}
-		$scope.showWebsitedetails = function (url, tempId) {
+		/* $scope.showWebsitedetails = function (url, tempId) {
 			$scope.status = {status:1};
 			angular.extend($scope.status, $scope.userInfo);
 			dataService.get("getmultiple/website/1/50",$scope.status)
 			.then(function(response) {
-				var oldObj = response.data;
-				var modalDefaults = {
-					templateUrl: url,	// apply template to modal
-					size : 'lg'
-				};
+				
 				var modalOptions = {
-					websiteList: oldObj,  // assign data to modal
-					tempId : {templates : {template_id : [tempId]}},
-					updateConfig : function(formData){
-						modalOptions.formData = formData;
-					},
-					
+					websiteList: dataService.parse(oldObj),  // assign data to modal
 				};
 				//console.log(dataService.parse($rootScope.userDetails));
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
@@ -69,7 +66,7 @@ define(['app'], function (app) {
 					
 				});
 			});
-		};
+		}; */
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
@@ -319,7 +316,7 @@ define(['app'], function (app) {
 							$location.path("/dashboard/templates/mytemplates");
 						},500);
 					}
-					$scope.alerts.push({type: data.status, msg: data.message});
+					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			}
 		}

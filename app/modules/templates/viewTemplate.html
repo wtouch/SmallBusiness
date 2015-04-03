@@ -5,12 +5,11 @@
 	<div class="modal-body">
 		<div class="row">
 			<div class="col-sm-12">
+				<h3>Template Images</h3>
 				<table class="table table-responsive">
 					<tr "modalOptions.templates">
 						<td>
-							<span ng-repeat="(key, value) in modalOptions.tempList.template_image.images">
-								<img width='150px' ng-src="{{appConfig.assetPath+value.file_name}}"/>
-							</span>
+							<span ng-repeat="(key, value) in modalOptions.tempList.template_image"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}" width="20%" /></span>
 						</td>
 					</tr>		
 				</table> 
