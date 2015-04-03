@@ -2,7 +2,7 @@
 
 define(['app'], function (app) {
     var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService'];
-
+	
     // This is controller for this view
 	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
 		$scope.permission = $rootScope.userDetails.permission.website_module;
@@ -42,7 +42,7 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.currentDate = dataService.currentDate;
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
-		
+		$scope.numbers = dataService.config.numbers;
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
 			(where) ? angular.extend($scope.websiteParams, where) : "";
@@ -184,12 +184,19 @@ define(['app'], function (app) {
 				dataService.put("put/website/"+id, $scope.deletedData)
 				.then(function(response) { //function for businesslist response
 					if(response.status == 'success'){
-						//$scope.hideDeleted = 1;
-						//console.log(response);
-						$scope.website=response.data;
+						$scope.alerts.push({type: response.status, msg: response.message});
 					}
 				});
-			};			
+			};
+			//Expire button {Dnyaneshwar}
+			$scope.expire = function(id, expired){
+				$scope.expiredData = {expired : expired};
+				console.log($scope.expiredData);
+				dataService.put("put/website/"+id, $scope.expiredData)
+				.then(function(response) { //function for businesslist response
+					$scope.alerts.push({type: response.status, msg: response.message});
+				});
+			};
 		};
 		
 		//function for active button

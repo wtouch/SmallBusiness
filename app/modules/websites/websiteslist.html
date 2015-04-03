@@ -84,7 +84,7 @@
 				<th>Manage</th>
 			</thead>
 				<tbody>
-					<tr ng-repeat="x in website | orderBy : sort | orderBy : sortnewold">
+					<tr ng-repeat="x in website | orderBy : sort | orderBy : sortnewold | filter : {status : hideDeleted}">
 					<td>{{((webListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 					
 					<td class="col-sm-2">
@@ -109,9 +109,10 @@
 					<div class="btn-toolbar" role="toolbar" aria-label="...">	
 							<a ng-click="open('modules/websites/viewWebsite.html', x.id)" class="btn btn-primary responsive"> View Details</a>
 
-							<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted( x.status, x.id)"" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class = "glyphicon glyphicon-remove"></span></button>
+							<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted( x.id, x.status)"" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class = "glyphicon glyphicon-remove"></span></button>
+							{{x.expired}}
+							<button type="button" tooltip="{{dynamicTooltip(x.expired, 'expired', 'Reactive')}}"ng-class="(x.expired==1) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="expire(x.id, x.expired)" btn-checkbox btn-checkbox-true="'0'" btn-checkbox-false="'1'"><span class="glyphicon glyphicon-ok"></span></button>
 							
-							<button type="button" tooltip="{{dynamicTooltip(x.expired, 'expired', 'Reactive')}}"ng-class="(x.expired==0) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="changeStatus('expired',x.id, x.expired)" btn-checkbox btn-checkbox-true="0" btn-checkbox-false="1"><span class="glyphicon glyphicon-ok"></span></button>
 						
 							<div class="btn-group">
 								<a type="button" tooltip="Website setting" class="btn btn-info glyphicon glyphicon-cog" ng-click="getWebsitedetails(config)" href="#/dashboard/websites/websettings/{{x.id}}"></a>	
@@ -125,10 +126,22 @@
 								  <button type="button" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop" class="btn btn-danger">Renew</button>
 								  <ul ng-show="drop" class="dropdown-menu" role="menu">
 									<form style="padding:3px" name="renewForm">
-									<select class="form-control" id="country" name="country" ng-model="renew.country" required ng-change="getState(register.country)" ng-options="item.country_name as item.country_name for item in contries">		
-								<option value="">Select Validity</option>
+									<div class="form-group">
+									<label for="validity">Select Validity</label>
+									<select class="form-control" id="validity" name="validity" ng-model="renew.numbers" required ng-change="getState(numbers)" ng-options="item for item in numbers">		
+									<option value="">Select Validity</option>
 									</select>
+									</div>
 									<button type="submit" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop; method()" class="btn btn-danger">Renew</button>
+									</form>
+									<form style="padding:3px" name="renewalrequestForm">
+									<div class="form-group">
+									<label for="renewalrequest">Request for Validity</label>
+									<select class="form-control" id="renewalrequest" name="validity" ng-model="renewalrequest.numbers" required ng-change="getState(numbers)" ng-options="item for item in numbers">		
+									<option value="">Select Validity Required</option>
+									</select>
+									</div>
+									<button type="submit" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop; method()" class="btn btn-danger">Renewal Request</button>
 									</form>
 								  </ul>
 							</div>

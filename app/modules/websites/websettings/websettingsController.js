@@ -24,7 +24,7 @@ define(['app'], function (app) {
 			});
 			
 			//this is for get business name from business{trupti}
-			dataService.get("getmultiple/template/1/100",$scope.userDetails)
+			dataService.get("getmultiple/mytemplate/1/100",$scope.userDetails)
 			.then(function(response) {  //function for template list response
 			//$scope.templateList.user_id=$scope.userDetails.user_id;
 				if(response.status == 'success'){
