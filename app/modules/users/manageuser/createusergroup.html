@@ -59,18 +59,64 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
+							<label>Website Module</label>
+							<div class="checkbox" ng-repeat="(key, value) in manage_user.website_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.website_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>	
+						</div>
+						<div class="col-sm-4">
+							<label>Enquiry Module</label>
+							<div class="checkbox" ng-repeat="(key, value) in manage_user.enquiry_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.enquiry_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</div>
+						<div class="col-sm-4">{{usersgroup.group_permission.dashboard + "dash"}}
+						<label>Dashboard</label>
+							<div class="checkbox" ng-repeat="(key, value) in manage_user.dashboard">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.dashboard[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Product Module</label>
+							<div class="checkbox" ng-repeat="(key, value) in manage_user.product_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.product_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>	
+						</div>
+						<div class="col-sm-4">
+							<label>Enquiry Module</label>
+							<div class="checkbox" ng-repeat="(key, value) in manage_user.enquiry_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.enquiry_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</div>
+						<div class="col-sm-4">
+						<label>Dashboard</label>
+							<div class="checkbox" ng-repeat="(key, value) in manage_user.dashboard">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.dashboard[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
 							<label>group_access</label>
 							<div class="checkbox" ng-repeat="(key, value) in manage_user.group_access">
 								<label>
 									<input type="checkbox" ng-model="usersgroup.group_permission.group_access[key]" ng-value="value">{{value}}
 								</label>
 							</div>	
-						</div>
-						<div class="col-sm-4">
-							
-						</div>
-						<div class="col-sm-4">
-						
 						</div>
 					</div>
 				</div>

@@ -4,6 +4,7 @@ define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','upload','$route']; /* Added $routeParams to access route parameters */
     // This is controller for this view
 	var enquiryController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,upload,$route) {
+		$scope.permission = $rootScope.userDetails.permission.enquiry_module;
 		
 		//Code For Pagination
 		$scope.maxSize = 5;

@@ -41,28 +41,36 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.currentDate = dataService.currentDate;
-		$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
-			angular.extend($scope.domain_name, $scope.userDetails);
-			dataService.get("getmultiple/website/"+page+"/"+$scope.pageItems, $scope.domain_name)
+			(where) ? angular.extend($scope.websiteParams, where) : "";
+			dataService.get("getmultiple/website/"+page+"/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  //function for websitelist response
 				$scope.website = response.data;
 				console.log($scope.website);
 			});
 		};
-		
+		// for users list/customerList
+		dataService.get("getmultiple/user/1/500")
+		.then(function(response) {  //function for websitelist response
+			if(response.status == 'success'){
+				$scope.customerList = response.data;
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+		});
 		//for search filter{trupti}
 		$scope.searchFilter = function(statusCol, showStatus) {
 			$scope.search = {search: true};
-			$scope.filterStatus= {};
-			$scope.webParam={};
-			(showStatus =="") ? delete $scope.webParam[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.webParam, $scope.filterStatus);
-			angular.extend($scope.webParam, $scope.search);
+			$scope.filterStatus = {};
+
+			(showStatus =="") ? delete $scope.websiteParams[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.websiteParams, $scope.filterStatus, $scope.search);
+
 			if(showStatus.length >= 4 || showStatus == ""){
-			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.webParam)
+			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  //function for websitelist response
 			console.log(response);
 				if(response.status == 'success'){
@@ -95,7 +103,7 @@ define(['app'], function (app) {
 		
 		$scope.showInput = function($event,opened) 		
 		{
-			$scope.domain_name = []; 				  				
+			$scope.websiteParams = []; 				  				
 			$event.preventDefault();
 			$event.stopPropagation();
 			$scope[opened] = ($scope[opened] ===true) ? false : true;
@@ -103,11 +111,10 @@ define(['app'], function (app) {
 		
 		//this is global method for filter 
 		$scope.changeStatusFn = function(statusCol, showStatus) {
-			console.log($scope.status);
 			$scope.filterStatus= {};
-			(showStatus =="") ? delete $scope.status[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.status, $scope.filterStatus);
-			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.status)
+			(showStatus =="") ? delete $scope.websiteParams[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.websiteParams, $scope.filterStatus);
+			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.website = response.data;
@@ -143,11 +150,11 @@ define(['app'], function (app) {
 			//$scope.reqnewsite = {};
 			//$scope.requestsiteForm.$setPristine();
 			console.log(reqnewsite);
-			$scope.userDetails=$scope.userDetails;
+			$scope.userInfo=$scope.userInfo;
 			$scope.reqnewsite.user_id= $rootScope.userDetails.id;
 			$scope.reqnewsite.date = $scope.currentDate;
 				 dataService.post("post/website",reqnewsite)
-				//dataService.post("post/website",reqnewsite,$scope.userDetails)
+				//dataService.post("post/website",reqnewsite,$scope.userInfo)
 				.then(function(response) {  //function for response of request site
 					$scope.reqnewsite = response.data;
 					console.log(response);
@@ -158,9 +165,9 @@ define(['app'], function (app) {
         
         var websiteslist = function(){
 			//function for websiteslist{Dnyaneshwar}
-			$scope.domain_name = {status: 1}
-			angular.extend($scope.domain_name, $scope.userDetails);
-			dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.domain_name)
+			$scope.websiteParams = {status: 1}
+			angular.extend($scope.websiteParams, $scope.userInfo);
+			dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  //function for websiteslist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
@@ -204,7 +211,8 @@ define(['app'], function (app) {
         
         var requestedsitelist = function(){
 			//function for requestedsitelist{Dnyaneshwar}
-			dataService.get("getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems, $scope.userDetails)
+			$scope.websiteParams = $scope.userInfo;
+			dataService.get("getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems, $scope.userInfo)
 			.then(function(response) {  //function for requestedsitelist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
