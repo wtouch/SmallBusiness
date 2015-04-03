@@ -41,7 +41,20 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.currentDate = dataService.currentDate;
-		$scope.userInfo = {user_id : $rootScope.userDetails.id};
+		
+		if($rootScope.userDetails.group_name == "customer"){
+			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "manager"){
+			$scope.userInfo = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "admin"){
+			$scope.userInfo = {}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "salesman"){
+			$scope.userInfo = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		
 		$scope.numbers = dataService.config.numbers;
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
@@ -232,6 +245,27 @@ define(['app'], function (app) {
 				};
 				$scope.website = response.data;
 			});
+			
+			//delete button {trupti}
+			$scope.deleted = function(id, status){
+				$scope.deletedData = {status : status};
+				dataService.put("put/website/"+id, $scope.deletedData)
+				.then(function(response) { //function for businesslist response
+					if(response.status == 'success'){
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}
+				});
+			};
+			//Expire button {Dnyaneshwar}
+			$scope.expire = function(id, expired){
+				$scope.expiredData = {expired : expired};
+				console.log($scope.expiredData);
+				dataService.put("put/website/"+id, $scope.expiredData)
+				.then(function(response) { //function for businesslist response
+					$scope.alerts.push({type: response.status, msg: response.message});
+				});
+			};
+			
 		};
         
         switch($scope.websitePart) {

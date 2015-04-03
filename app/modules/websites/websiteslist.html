@@ -1,5 +1,5 @@
 <h3>Website List</h3>
-	<div class="row">
+<div class="row">
 		<div class="col-sm-2"> 
 			<div class="bottomspace">
 				<label for="search" class="control-label">Search </label>
@@ -22,17 +22,18 @@
 					<select id="status" class="form-control" ng-change="changeStatusFn('status',showStatus)" ng-model="showStatus" ng-init="showStatus=''">
 						<option value="">Select Status</option>
 						<option value="1" selected>Active</option>
-						<option value="0">Deleted</option> 
+						<option value="0">Deleted</option>
+						<option value="2">Requested</option>
 					</select>
 			</div>
 		</div>
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="expirystatus" class="control-label">Select Expiry Status</label>
-					<select id="expirystatus" class="form-control" ng-change="changeStatusFn('expiry',showExpiryStatus)" ng-model="showExpiryStatus" ng-init="showExpiryStatus=''">
+					<select id="expirystatus" class="form-control" ng-change="changeStatusFn('expired',showExpiryStatus)" ng-model="showExpiryStatus" ng-init="showExpiryStatus=''">
 						<option value="">Select Expiry Status</option>
-						<option value="1" selected>Active</option>
-						<option value="0">Expired</option> 
+						<option value="0" selected>Active</option>
+						<option value="1">Expired</option> 
 					</select>
 			</div>
 		</div>
@@ -46,7 +47,7 @@
 					</select>
 			</div>
 		</div>
-		<div class="col-sm-2">
+		<div class="col-sm-2" ng-if="permission.validity_filter">
 			<div class="bottomspace">
 				<label for="filterbyvalidity" class="control-label">Filter By validity</label>
 					<select id="filterbyvalidity" class="form-control" ng-model="filterbyvalidity" ng-change="changeStatusFn('validity', filterbyvalidity)" >
@@ -64,7 +65,7 @@
 					</select>
 			</div>
 		</div>
-		<div ng-if="permission.customer_filter" class="col-sm-2">
+		<div ng-if="permission.validity_filter" class="col-sm-2">
 			<div class="bottomspace">
 				<label for="filterbycustomerid" class="control-label">Filter By Customer Id</label>
 					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatusFn('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
@@ -91,9 +92,9 @@
 						<div class="input-group">
 							<p class="form-control-static" ng-hide="x.boxId ==1">{{x.domain_name}}</p>					
 
-						<input type="text" id="domain_name" class="form-control" ng-hide="x.boxId ==0 || !x.boxId"  name="domain_name" ng-show="x.boxId == 1" ng-model="x.domain_name" ng-required="true"/> 
+						<input ng-if="permission.edit_domain" type="text" id="domain_name" class="form-control" ng-hide="x.boxId ==0 || !x.boxId"  name="domain_name" ng-show="x.boxId == 1" ng-model="x.domain_name" ng-required="true"/> 
 							
-							<div class="input-group-btn" >							
+							<div  ng-if="permission.edit_domain" class="input-group-btn" >							
 								<a type="button" ng-class="(x.boxId == 0 || !x.boxId) ? 'btn btn-warning' : 'btn btn-success'" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')" ng-change="editDomainName('domain_name', x.domain_name, x.id,x.boxId)" tooltip="Edit site name">
 								 
 									<span ng-class="(x.boxId ==1) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'"></span>
@@ -109,12 +110,11 @@
 					<div class="btn-toolbar" role="toolbar" aria-label="...">	
 							<a ng-click="open('modules/websites/viewWebsite.html', x.id)" class="btn btn-primary responsive"> View Details</a>
 
-							<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted( x.id, x.status)"" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class = "glyphicon glyphicon-remove"></span></button>
-							{{x.expired}}
-							<button type="button" tooltip="{{dynamicTooltip(x.expired, 'expired', 'Reactive')}}"ng-class="(x.expired==1) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="expire(x.id, x.expired)" btn-checkbox btn-checkbox-true="'0'" btn-checkbox-false="'1'"><span class="glyphicon glyphicon-ok"></span></button>
+							<button ng-if="permission.publish_domain" type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted( x.id, x.status)"" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class = "glyphicon glyphicon-remove"></span></button>
+							<button  ng-if="permission.expiry" type="button" tooltip="{{dynamicTooltip(x.expired, 'expired', 'Reactive')}}"ng-class="(x.expired==1) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="expire(x.id, x.expired)" btn-checkbox btn-checkbox-true="'0'" btn-checkbox-false="'1'"><span class="glyphicon glyphicon-ok"></span></button>
 							
 						
-							<div class="btn-group">
+							<div ng-if="permission.change_settings" class="btn-group">
 								<a type="button" tooltip="Website setting" class="btn btn-info glyphicon glyphicon-cog" ng-click="getWebsitedetails(config)" href="#/dashboard/websites/websettings/{{x.id}}"></a>	
 							</div>
 							
@@ -134,7 +134,7 @@
 									</div>
 									<button type="submit" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop; method()" class="btn btn-danger">Renew</button>
 									</form>
-									<form style="padding:3px" name="renewalrequestForm">
+									<form ng-if="permission.renew" style="padding:3px" name="renewalrequestForm">
 									<div class="form-group">
 									<label for="renewalrequest">Request for Validity</label>
 									<select class="form-control" id="renewalrequest" name="validity" ng-model="renewalrequest.numbers" required ng-change="getState(numbers)" ng-options="item for item in numbers">		

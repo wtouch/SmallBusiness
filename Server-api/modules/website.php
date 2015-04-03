@@ -14,7 +14,6 @@
 			//this is for search
 			 $like = array();
 			 if(isset($_GET['search']) && $_GET['search'] == true){
-				 
 				 (isset($_GET['domain_name'])) ? $like['domain_name'] = $_GET['domain_name'] : "";
 			 }
 			$where=array(); // this will used for user specific data selection.
@@ -22,13 +21,15 @@
 			$limit['records'] = $records; // how many records to select
 			
 			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
+			((isset($_GET['validity'])) && ($_GET['validity']!=="")) ? $where['validity'] = $_GET['validity'] : "";
+			((isset($_GET['expired'])) && ($_GET['expired']!=="")) ? $where['expired'] = $_GET['expired'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			
 			// this is used to select data with LIMIT & where clause
 			$data = $db->select("website", $where, $limit,$like);
 			
 			// this is used to count totalRecords with only where clause
-			$tootalDbRecords = $db->select("website", $where, $limit=null, $like);
+			$tootalDbRecords = $db->select("website", $where, null, $like);
 			$totalRecords['totalRecords'] = count($tootalDbRecords['data']);		
 			
 			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
