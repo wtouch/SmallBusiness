@@ -19,15 +19,20 @@
 		<div class="form-group">	
 		<label  for="date" class="col-sm-2 control-label">Date</label>
 		<div class="col-sm-9">
-				  <input type="date" id="date" class="form-control" name="dateInput" ng-model="reqtemp.custome_requirement.date" required  placeholder="date" ng-model="date">(yyyy/mm/dd)
+				  <p class="input-group">
+				  <input type="text" id="date" name="date" class="form-control" datepicker-popup="{{format}}" ng-model="reqtemp.custome_requirement.date" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)"/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span> 
+						</p>
 		</div>						
 		</div>
 		<div class="form-group">	
 			<label  for="domain" class="col-sm-2 control-label">Domain Name</label>
 				<div class="col-sm-9">
-					<input type="text" id="domain" class="form-control" name="domain" placeholder="Domain Name" ng-model="reqtemp.custome_requirement.domain" required >
-					<span class="text-danger" ng-show="reqCustTemplate.domain.$dirty && reqCustTemplate.domain.$invalid">
-					<span ng-show="reqCustTemplate.domain.$error.required">Domain Name is required.</span>
+					<input type="text" id="domain" class="form-control" name="domain" placeholder="Domain Name" ng-model="reqtemp.custome_requirement.domain" required>
+					<span class="text-danger" ng-show="requestcustomtempForm.domain.$dirty && requestcustomtempForm.domain.$invalid">
+					<span ng-show="requestcustomtempForm.domain.$error.required">Domain Name is required.</span>
 					</span>
 				</div>						
 		</div>	
@@ -44,11 +49,11 @@
 			<label for="requirement" class="col-sm-2 control-label">Custom Requirement</label>	
 			<div class="col-sm-9">
 				<textarea type="text" class="form-control" id="custome_requirement" name="custome_requirement" ng-model="reqtemp.custome_requirement.requirement" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Product Description" ui-tinymce required></textarea>
-				<p ng-hide="requestcustomtempForm.custome_requirement.$error.maxlength">{{ 256 - custome_requirement.length + " Chars left" }}
-				</p>
+				<p ng-hide="requestcustomtempForm.custome_requirement.$error.maxlength">{{ 256 - reqtemp.custome_requirement.length + " Chars left" }}
+				</p>		
 				<span class="help-block" ng-show="requestcustomtempForm.custome_requirement.$error.maxlength">Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="requestcustomtempForm.custome_requirement.$dirty && requestcustomtempForm.custome_requirement.$invalid">
-					<span class="text-danger" ng-show="requestcustomtempForm.custome_requirement.$error.required">Product Description is required.</span>
+					<span class="text-danger" ng-show="requestcustomtempForm.custome_requirement.$error.required">Custom Requirement required.</span>
 					</span>
 			</div>  
 		</div>	

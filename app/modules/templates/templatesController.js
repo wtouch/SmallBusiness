@@ -5,13 +5,24 @@ define(['app'], function (app) {
     
     // This is controller for this view
 	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
+		// all $scope object goes here
+		$scope.alerts = [];
+		$scope.maxSize = 5;
+		$scope.totalRecords = "";
+		$scope.tempListCurrentPage = 1;
+		$scope.myTempCurrentPage = 1;
+		$scope.customTempCurrentPage = 1;
+		$scope.pageItems = 10;
+		$scope.numPages = "";
+		$scope.currentDate = dataService.currentDate;
+		$scope.userInfo = {user_id : $rootScope.userDetails.id};
+		//$rootScope.userDetails.permission="";
 		$scope.permission = $rootScope.userDetails.permission.template_module;
-		//console.log($rootScope.userDetails);
 		//this code block for modal{trupti}
-		$scope.open = function (url, tempId) {
+		$scope.openModel = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
-				
+		
 				dataService.get("getmultiple/website/1/50",$scope.status)
 				.then(function(webresponse) {
 					var modalDefaults = {
@@ -23,7 +34,7 @@ define(['app'], function (app) {
 						tempList: dataService.parse(response.data)  // assign data to modal
 					};
 
-					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 						console.log("modalOpened");
 					});
 				});
@@ -70,22 +81,88 @@ define(['app'], function (app) {
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
+		
+		//for edit the price of template{trupti}
+		$scope.changeStatusf={};
+		$scope.editTemplatePrice = function(colName, colValue, id, editStatus){
+			$scope.changeStatusf[colName] = colValue;
+			console.log(colValue);
+			console.log($scope.changeStatusf);
+				if(editStatus==0){
+				 dataService.put("put/template/"+id,$scope.changeStatusf)
+				.then(function(response) { 
+					//if(status=='success'){
+						//$scope.hideDeleted = 1;
+					//}
+					$scope.alerts.push({type: response.status,msg: response.message});
+				}); 
+			}
+		};	 
+		//for show template_price{trupti}
+		$scope.showInput = function($event,opened) 		
+		{
+			$scope.template_price = []; 				  				
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope[opened] = ($scope[opened] ===true) ? false : true;
+		};
+		
+		$scope.changePrice = function(id, prices){
+			var template_price;
+			for(var x in prices){
+				if(prices[x].id == id) template_price = prices[x].template_price;
+			}
+			
+			return template_price;
+			console.log(template_price);
+		}
 	
+		 // for dynamic value of development status
+		dataService.get('getmultiple/template/1/100').then(function(response){
+			
+			if(response.status=='success'){
+				$scope.development = response.data;
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+		}) ; 
+		//method for select development status
+		$scope.changeStatusf={};
+		$scope.editDevelopmentStatus = function(colName, colValue, id, editStatus){
+			$scope.changeStatusf[colName] = colValue;
+			console.log(colValue);
+			console.log($scope.changeStatusf);
+				if(editStatus==0){
+				 dataService.put("put/template/"+id,$scope.changeStatusf)
+				.then(function(response) { 
+					//if(status=='success'){
+						//$scope.hideDeleted = 1;
+					//}
+					$scope.alerts.push({type: response.status,msg: response.message});
+				}); 
+			}
+		};	 
+		//for show development status{trupti}
+		$scope.showInput = function($event,opened) 		
+		{
+			$scope.development_status = []; 				  				
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope[opened] = ($scope[opened] ===true) ? false : true;
+		};
+		
+		$scope.changeDevelopmentStatus = function(id, development){
+			var development_status;
+			for(var x in development){
+				if(development[x].id == id) development_status = development[x].development_status;
+			}
+			
+			return development_status;
+			console.log(development_status);
+		}//end development status
+
 		//for display form parts
 		$scope.tempPart = $routeParams.tempPart;
-		
-		// all $scope object goes here
-		$scope.alerts = [];
-		$scope.maxSize = 5;
-		$scope.totalRecords = "";
-		$scope.tempListCurrentPage = 1;
-		$scope.myTempCurrentPage = 1;
-		$scope.customTempCurrentPage = 1;
-		$scope.pageItems = 10;
-		$scope.numPages = "";
-		$scope.currentDate = dataService.currentDate;
-		$scope.userInfo = {user_id : $rootScope.userDetails.id};
-		
 		// All $scope methods
 		$scope.pageChanged = function(page, where) { // Pagination page changed
 			//angular.extend(template_type, $scope.userInfo);
@@ -122,7 +199,19 @@ define(['app'], function (app) {
 				//console.log($scope.properties);
 			});
 		};
-	
+		//to change status {trupti}			
+		$scope.changeStatusf = {};
+		$scope.changeStatusFn = function(colName, colValue, id){
+		$scope.changeStatus[colName] = colValue;    
+		//console.log($scope.changeStatus);
+			dataService.put("put/template/"+id,$scope.changeStatus)   
+			.then(function(response) {     
+					if(colName=='template_type'){     
+					}
+					$scope.alerts.push({type: response.status,msg: response.message});
+					}); 
+		}//end method
+		
 		//for search filter{trupti}
 		$scope.searchFilter = function(statusCol, showStatus) {
 			$scope.search = {search: true};
@@ -179,6 +268,19 @@ define(['app'], function (app) {
 				console.log(response);
 			});
 		};
+		
+		//delete button {trupti}
+			$scope.deleted = function(id, status){
+				$scope.deletedData = {status : status};
+				//console.log($scope.deletedData);
+				dataService.put("put/template/"+id, $scope.deletedData)
+				.then(function(response) { //function for businesslist response
+					if(response.status == 'success'){
+						$scope.hideDeleted = 1;
+					}
+					$scope.alerts.push({type: response.status, msg: response.message});
+				});
+			};			
 	
 		$scope.apply = function(id, applied){
 			$scope.appliedData = {applied : applied};
@@ -193,9 +295,9 @@ define(['app'], function (app) {
 			scrible : {}
 		}; // this is form object
 		$scope.path = "template/"; // path to store images on server
-		
-		$scope.upload = function(files,path,userDetails,picArr){ //this function for uploading files
-			upload.upload(files,path,userDetails,function(data){
+		$scope.userinfo = $scope.userInfo;
+		$scope.upload = function(files,path,userInfo,picArr){ //this function for uploading files
+			upload.upload(files,path,userInfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
@@ -210,6 +312,24 @@ define(['app'], function (app) {
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
 			upload.generateThumbs(files);
 		};// End upload function
+		
+		
+		 //datepicker 	
+		$scope.today = function() 
+		{
+			$scope.date = new Date();
+		};
+		$scope.today();
+		$scope.open = function($event,opened)
+		{
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.opened = ($scope.opened==true)?false:true;
+		};
+		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.format = $scope.formats[0];
+		// Date Picker Ended here  
+		
 		
 		$scope.temp = dataService.config.template;
 		
