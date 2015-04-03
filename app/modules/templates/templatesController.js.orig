@@ -60,10 +60,10 @@ define(['app'], function (app) {
 			$scope.opened = ($scope.opened==true)?false:true;
 		};
 	
+		//this code block for modal
 		$scope.openModel = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
-		
 				dataService.get("getmultiple/website/1/50",$scope.status)
 				.then(function(webresponse) {
 					var modalDefaults = {
@@ -72,10 +72,25 @@ define(['app'], function (app) {
 					};
 					var modalOptions = {
 						websiteList: webresponse.data,  // assign data to modal
-						tempList: dataService.parse(response.data)  // assign data to modal
+						tempList: dataService.parse(response.data),
+						myTemplateData : {},
+						formData : function(data){
+							modalOptions.myTemplateData = data;
+						},
 					};
 
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+<<<<<<< Updated upstream
+					dataService.post("post/mytemplate",modalOptions.myTemplateData,$scope.userInfo).then(function(response) {
+						$scope.alerts.push({type: response.status,msg: response.message});
+					}); 
+					
+				});
+				});
+			});
+		};
+		$scope.ok = function () {
+=======
 						console.log("modalOpened");
 					});
 				});
@@ -87,11 +102,22 @@ define(['app'], function (app) {
 			$modalOptions.close('ok');
 		};
 		
+		/* $scope.ok = function () {
+>>>>>>> Stashed changes
+			$modalOptions.close('ok');
+		}; */
+		
 		//for edit the price of template
 		$scope.changeStatusf={};
 		$scope.editTemplatePrice = function(colName, colValue, id, editStatus){
 			$scope.changeStatusf[colName] = colValue;
+<<<<<<< Updated upstream
 			if(editStatus==0){
+=======
+			//console.log(colValue);
+			//console.log($scope.changeStatusf);
+				if(editStatus==0){
+>>>>>>> Stashed changes
 				 dataService.put("put/template/"+id,$scope.changeStatusf)
 				.then(function(response) { 
 					$scope.alerts.push({type: response.status,msg: response.message});
@@ -114,9 +140,21 @@ define(['app'], function (app) {
 				if(prices[x].id == id) template_price = prices[x].template_price;
 			}
 			return template_price;
+<<<<<<< Updated upstream
+		}
+	
+		 // for dynamic value of development status
+		dataService.get('getmultiple/template/1/100').then(function(response){
+			if(response.status=='success'){
+				$scope.development = response.data;
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+		}) ; 
+=======
 			//console.log(template_price);
 		}
-		
+>>>>>>> Stashed changes
 		
 		//method for select development status
 		$scope.changeStatusf={};
@@ -180,8 +218,14 @@ define(['app'], function (app) {
 		//to change status 	
 		$scope.changeStatusf = {};
 		$scope.changeStatusFn = function(colName, colValue, id){
+<<<<<<< Updated upstream
+		$scope.changeStatus[colName] = colValue;    
+			dataService.put("put/template/"+id,$scope.changeStatus)   
+=======
 		$scope.changeStatusf[colName] = colValue;    
+		//console.log($scope.changeStatus);
 			dataService.put("put/template/"+id,$scope.changeStatusf)   
+>>>>>>> Stashed changes
 			.then(function(response) {     
 				if(colName=='template_type'){     
 				}
@@ -200,6 +244,10 @@ define(['app'], function (app) {
 			if(showStatus.length >= 4 || showStatus == ""){
 			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.webParam)
 			.then(function(response) {  //function for websitelist response
+<<<<<<< Updated upstream
+=======
+			//console.log(response);
+>>>>>>> Stashed changes
 				if(response.status == 'success'){
 					$scope.templates = response.data;
 					$scope.totalRecords = response.totalRecords;
@@ -247,11 +295,23 @@ define(['app'], function (app) {
 			$scope.appliedData = {applied : applied};
 			dataService.put("put/template/"+id, $scope.appliedData)
 			.then(function(response) { //function for businesslist response
+<<<<<<< Updated upstream
 				$scope.alerts.push({type: response.status, msg: response.message});
 			});
 		} ;
 		
 		
+=======
+				//console.log(response);
+			});
+		} ;
+		
+		//Upload Function for uploading files {Vilas}
+		$scope.reqtemp = {}; // this is form object
+		$scope.reqtemp.scrible = {};
+		$scope.path = "template/"; // path to store images on server
+		$scope.userinfo = $scope.userInfo;
+>>>>>>> Stashed changes
 		$scope.upload = function(files,path,userInfo,picArr){ //this function for uploading files
 			upload.upload(files,path,userInfo,function(data){
 				var picArrKey = 0, x;
@@ -267,7 +327,7 @@ define(['app'], function (app) {
 		
 		// switch functions
 		var mytemplates = function(){
-			dataService.get("getmultiple/mytemplate/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.userInfo)
+			dataService.get("getmultiple/template/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.userInfo)
 			.then(function(response) { 
 			if(response.status == 'success'){
 					$scope.templates=response.data;
@@ -319,8 +379,9 @@ define(['app'], function (app) {
 			$scope.postData = function(reqtemp) { 
 			$scope.reqtemp.user_id= $rootScope.userDetails.id;
 			
-				//$scope.reqtemp.custom = {custom:1};
-				 dataService.post("post/template",reqtemp)
+				$scope.custom = {custom:1};
+				//angular.extend($scope.reqtemp,$scope.userInfo);
+				 dataService.post("post/template",reqtemp,$scope.custom)
 				.then(function(response) {  //function for response of request temp
 					$scope.reset();
 				});
@@ -329,42 +390,17 @@ define(['app'], function (app) {
 	
 		//post method for add template form(trupti)
 		var addtemplate = function(){
-			$scope.tempId = $routeParams.id;
 			$scope.zipPath = 'zip_templates';
-			if($scope.tempId){
-				dataService.get("getsingle/template/"+$scope.tempId)
-				.then(function(response) {
-					$scope.reset = function() {
-						$scope.addtemplate = {
-							template_params : {},
-							template_image : {},
-							created_by : $rootScope.userDetails.id,
-							development_status : 'completed'
-						};
-					angular.extend(response.data, $scope.addtemplate);
-					$scope.addtemplate = response.data;
+			$scope.reset = function() {
+				$scope.addtemplate = {
+					date : $scope.currentDate,
+					template_params : {},
+					template_image : {},
+					created_by : $rootScope.userDetails.id,
+					development_status : 'completed'
 				};
-				$scope.reset();
-				console.log($scope.addtemplate);
-				
-			})
-			}else{
-				$scope.reset = function() {
-					$scope.addtemplate = {
-						date : $scope.currentDate,
-						template_params : {},
-						template_image : {},
-						created_by : $rootScope.userDetails.id,
-						development_status : 'completed'
-					};
-				};
-				$scope.reset();
-			}
-			
-			//$scope.addtemplate = {custom:1};
-			//angular.extend($scope.template_type, $scope.userInfo);
-			
-			//$scope.reset();
+			};
+			$scope.reset();
 			$scope.uploadZip = function(files,path,userDetails,picArr){ 
 				upload.upload(files,path,userDetails,function(data){
 					var picArrKey = 0, x;
@@ -381,25 +417,14 @@ define(['app'], function (app) {
 					}
 				});
 			};
-			$scope.updateData = function(addtemplate) {
-				dataService.put("put/template/"+$scope.tempId,addtemplate)
-				.then(function(response) {
-					if(response.status == "success"){
-						$scope.reset();
-						setTimeout(function(){
-							$location.path("#/dashboard/templates/mytemplates");
-						},500);
-					}
-					$scope.alerts.push({type: response.status, msg: response.message});
-				});
-			}
+			
 			$scope.postData = function(addtemplate) {
 				dataService.post("post/template/addtemplate",addtemplate)
 				.then(function(response) {
 					if(response.status == "success"){
 						$scope.reset();
 						setTimeout(function(){
-							$location.path("#/dashboard/templates/mytemplates");
+							$location.path("/dashboard/templates/mytemplates");
 						},500);
 					}
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -426,8 +451,7 @@ define(['app'], function (app) {
 			default:
 				listoftemplates();
 		};
-    
-	};
+    };
 	
 	// Inject controller's dependencies
 	templatesController.$inject = injectParams;
