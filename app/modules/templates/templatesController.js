@@ -35,11 +35,11 @@ define(['app'], function (app) {
 					};
 
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-						console.log("modalOpened");
-					});
+						dataService.post("post/mytemplate",modalOptions.tempList,$scope.userInfo).then(function(response) {
+							console.log(modalOptions.tempList,$scope.userInfo);
+						});
 				});
-				
-				
+				});
 			});
 		};
 		$scope.ok = function () {
