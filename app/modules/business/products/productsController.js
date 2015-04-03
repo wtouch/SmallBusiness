@@ -19,17 +19,18 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.numPages = "";
 		$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		//$scope.tinymceConfig = {};
-		//$scope.selectBusiness = {};
+		// for testing
 		
 		//Upload Function for uploading files {Vilas}
-		$scope.addproduct={}; // this is form object
-		$scope.addservice = {};
+		$scope.addproduct = {
+			product_image : {}
+		}; // this is form object
+		$scope.addservice = {
+			product_image : {}
+		};
 		$scope.userinfo = {user_id:1}; // this is for uploading credentials
 		
 		$scope.path = "product/"; // path to store images on server
-		$scope.addproduct.product_image  = {}; // uploaded images will store in this array
-		$scope.addservice.product_image  = {}; // uploaded images will store in this array
 		$scope.upload = function(files,path,userinfo,picArr){//this function for uploading files
 		console.log(picArr);
 	
@@ -37,7 +38,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
-					picArr[picArrKey] = data.details;
+					picArr[picArrKey] = data.data;
 					console.log(data.message);
 				}else{
 					$scope.alerts.push({type: data.status, msg: d.message});
@@ -50,15 +51,22 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			upload.generateThumbs(files);
 		};// End upload function
 		
+		//for change image src dynamically
+		$scope.imgkey = '0';
+		$scope.changeSrc = function(key){
+			$scope.imgkey = key;
+		}
+		
 		$scope.changeScope = function(value, object){
 			$scope.addservice.business_id = value.id;
 			$scope.addproduct.business_id = value.id;
 			$scope.changeScopeObject($scope.productType);
-		}
+		};
+		
+		//$scope.selectBusiness = {id : 2};
 		$scope.showProductForm = false;
 		$scope.showServiceForm = false;
 		$scope.showForm = function(object){
-			console.log(object);
 			$scope[object] = ($scope[object]==true) ? false : true;
 			$scope.$apply;
 			if(object == 'showProductForm'){
@@ -68,10 +76,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				addservices();
 			}
 			
-			if(value=="service"){
-				console.log("service if");
-				servicelist();
-			} 
 		}
 		// get data for business options 
 		
@@ -118,25 +122,16 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		}
 		
 		var addservices = function(){
-			//reset function{trupti}
-			console.log($scope.addservice.business_id);
-			$scope.reset = function() {
-				$scope.addservice = {};
-			};
+			
 		    $scope.addservice.user_id= $rootScope.userDetails.id;
 			$scope.postData = function(addservice) { 
-			//$scope.addservice = {};
-			//$scope.addserviceForm.$setPristine();
-			console.log(addservice);
-			$scope.userDetails=$scope.userDetails;
-			$scope.addservice.date = $scope.currentDate;
+				console.log(addservice);
+				$scope.userDetails=$scope.userDetails;
+				$scope.addservice.date = $scope.currentDate;
 				dataService.post("post/product",addservice)
 				.then(function(response) {  //function for response of request temp
-					$scope.addservice = response.data;
 					console.log(response);
-					$scope.reset();
 				});
-				console.log(addservice);
 			} //end of post method {trupti} 
 		}
 	
@@ -147,44 +142,13 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				dataService.get("getmultiple/product/1/10",$scope.userDetails)
 				.then(function(response) {  
 					if(response.status == 'success'){
-						$scope.products = [];
-						var x;
-						for (x in response.data){
-							var oldObj = response.data[x];
-							var newObj = {};
-							var arrConvrt = function(arr){
-								//console.log(arr);
-								var newArr = [];
-								var x;
-								for(x in arr){
-									newArr.push(JSON.parse(arr[x]));
-								}
-								return newArr;
-							}
-							angular.forEach(oldObj, function(value, key) {
-							  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? 
-										((angular.isArray(JSON.parse(value))) ? arrConvrt(JSON.parse(value)) : JSON.parse(value)) : value;
-							  //(key === 'infrastructure') ? JSON.parse(value) : value;
-							}, newObj);
-							$scope.products.push(newObj);
-						}
+						$scope.products = dataService.parse(response.data);
+					
 						console.log($scope.products);
 						console.log(response.data);
-						//$scope.totalRecords = response.totalRecords;	
-							//for read only
-					 /*  if($scope.products == response){
-							$scope.tinymceConfig = {
-								readonly: true,
-								//toolbar: false,
-								//menubar: false,
-								//statusbar: false
-							  }
-						}   */
-					}
-					else
-					{
+					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
-						$scope.products = {};
+						$scope.products = [];
 					};
 				});
 				
@@ -196,8 +160,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				dataService.get("getmultiple/product/1/10",$scope.userDetails)
 				.then(function(response) {  
 					if(response.status == 'success'){
-						$scope.services = response.data;
-						console.log(response);
+						$scope.services = dataService.parse(response.data);
+						console.log($scope.services);
 					}
 					else
 					{
@@ -207,7 +171,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				});
 		}
 		
-		$scope.productType = "product";
+		$scope.productType = "service";
 		$scope.changeScopeObject = function(value){
 			$scope.productType = value;
 			console.log($scope.showProductForm);
