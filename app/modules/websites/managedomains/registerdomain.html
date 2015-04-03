@@ -3,7 +3,7 @@
 	<div class="form-group">
 		<label for="domain_name" class="col-sm-2 control-label">Domain Name</label>
 		<div class="col-sm-10">
-			<input type="text" id="domain_name" name="domain_name" class="form-control" ng-model="registerdomain.domain_name"  placeholder="Domain Name" required>
+			<input type="text" id="domain_name" name="domain_name" class="form-control" ng-model="registerdomain.domain_name"  placeholder="Domain Name" ng-pattern="/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{3,})+$/" required>
 			<span class="help-block" ng-show="registerdomainForm.domain_name.$dirty && registerdomainForm.domain_name.$invalid">
 				<span ng-show="registerdomainForm.domain_name.$error.required" class="text-danger">Domain Name is required.</span>
 			</span>
