@@ -1,0 +1,96 @@
+<div class="modal-content">		
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	</div>
+	
+	<form name="applyTemplateForm" class="form-horizontal" role="form" novalidate="novalidate" 	ng-submit="applyTemplateForm.$valid">
+		<div class="modal-body">
+		<h1>Website Details</h1>
+			<div class="form-group">	
+				<label  for="template_name" class="col-sm-2 control-label">Template Name</label>
+					<div class="col-sm-9">
+						<input type="text" id="template_name" class="form-control" name="template_name" ng-init="templateList.template_name = modalOptions.tempList.template_name" ng-model="templateList.template_name" readonly>
+					</div>						
+			</div>	
+			<div class="form-group">	
+				<label  for="date" class="col-sm-2 control-label"> Date</label>
+					<div class="col-sm-9">
+						<input type="text" id="date" class="form-control" ng-init="templateList.date= modalOptions.tempList.date" name="date" ng-model="templateList.date" readonly>
+					</div>						
+			</div>	
+			<div class="form-group">	
+				<input type="hidden" ng-model="templateList.user_id"  ng-init="templateList.user_id= modalOptions.tempList.user_id"/>
+				<input type="hidden" ng-model="templateList.created_by"   ng-init="templateList.user_id= modalOptions.tempList.created_by"/>
+				<input type="hidden" ng-model="templateList.template_folder"  ng-init="templateList.template_folder= modalOptions.tempList.template_folder"/>
+				<input type="hidden" ng-model="templateList.status"  ng-init="templateList.status = modalOptions.tempList.status"/>
+				<input type="hidden" ng-model="templateList.template_image"  ng-init="templateList.template_image=modalOptions.tempList.template_image"/>
+				<input type="hidden" ng-model="templateList.template_price"  ng-init="templateList.template_price = modalOptions.tempList.template_price"/>
+				
+				<input type="hidden" ng-model="templateList.template_price"  ng-init="templateList.template_price=modalOptions.tempList.template_price"/>
+				
+			</div>	
+			<div class="form-group" ng-if="modalOptions.tempList.template_params">	
+				<div  class="form-group" ng-if="modalOptions.tempList.template_params.enquiry_form">
+					<label  for="enquiry_form" class="col-sm-2 control-label"> Enquiry Form</label>
+					<div class="col-sm-9">
+						<input type="text" id="enquiry_form" class="form-control" name="enquiry_form" ng-init="templateList.template_params.enquiry_form=modalOptions.tempList.template_params.enquiry_form" ng-model="templateList.template_params.enquiry_form">
+					</div>
+				</div>
+				<div class="form-group" ng-if="modalOptions.tempList.template_params.slider">
+					<label  for="slider" class="col-sm-2 control-label"> Slider</label>
+					<div class="col-sm-9">
+						<input type="text" id="slider" class="form-control" name="slider" ng-model="templateList.template_params.slider" ng-init="templateList.template_params.slider=modalOptions.tempList.template_params.slider">
+					</div>
+				</div>
+				<div class="form-group" ng-if="modalOptions.tempList.template_params.featured">
+					<label  for="featured" class="col-sm-2 control-label"> Featured</label>
+					<div class="col-sm-9">
+						<input type="text" id="featured" class="form-control" name="featured" ng-model="templateList.template_params.featured" ng-init="templateList.template_params.featured=modalOptions.tempList.template_params.featured">
+					</div>
+				</div>
+				<div class="form-group" ng-if="modalOptions.tempList.template_params.template_color">
+					<label  for="template_color" class="col-sm-2 control-label"> Template color</label>
+					<div class="col-sm-9">
+						<select id="template_color" name="template_color" class="form-control" ng-options="item as item for item in modalOptions.tempList.template_params.template_color" ng-model="templateList.template_params.template_color" ng-init="templateList.template_params.featured=modalOptions.tempList.template_params.template_color">
+							<option value="">Select Color</option>
+						</select>
+							
+					</div>
+				</div>
+				<div class="form-group" ng-if="modalOptions.tempList.template_params.product">
+					<label  for="product" class="col-sm-2 control-label"> Product</label>
+					<div class="col-sm-9">
+						<select id="template_color" name="template_color" class="form-control" ng-model="templateList.template_params.product" ng-init="templateList.template_params.product=modalOptions.tempList.template_params.product" multiple>
+							<option value="1">1</option>
+						</select>
+						
+					</div>
+				</div>
+			</div>	
+			<div class="form-group">	
+				<label  for="category" class="col-sm-2 control-label">Template Category </label>
+					<div class="col-sm-9">
+						<input type="text" id="category" class="form-control" name="category" ng-model="templateList.category" ng-init="templateList.category= modalOptions.tempList.category"  readonly>
+					</div>		
+			</div>	
+			<div class="form-group">	
+				<label  for="website_id" class="col-sm-2 control-label">Website name </label>
+				<div class="col-sm-9">
+					<select id="website_id" name="website_id" class="form-control" ng-change="changeScope(selectDomain)" ng-model="templateList.template_params.website_id" ng-options="item.id as item.domain_name for item in modalOptions.websiteList" > 
+							<option value="">Select Website</option>
+					</select>
+					<span class="help-block" ng-show="applyTemplateForm.website_id.$dirty && applyTemplateForm.website_id.$invalid">
+						<span ng-show="applyTemplateForm.website_id.$error.required" class="text-danger">Please select website.</span>
+					</span>	
+					
+				
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" ng-disabled="applyTemplateForm.$invalid" class="btn btn-primary" ng-click="modalOptions.formData(templateList); modalOptions.ok()">OK</button>
+		</div>
+	</form>
+</div>			
+
+
