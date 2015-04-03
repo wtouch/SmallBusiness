@@ -60,13 +60,13 @@
 							
 							<td style="max-width:150px">
 							<div class="input-group">
-							<p class="form-control-static" ng-hide="x.boxId ==1">{{x.development_status}}</p>
-								<select ng-hide="x.boxId ==0 || !x.boxId" class="form-control" ng-show="x.boxId == 1" ng-model="x.development_status" ng-options="item.id as item.development_status for item in development" ng-required="true">
+							<p class="form-control-static" ng-hide="x.development_id ==1">{{x.development_status}}</p>
+								<select ng-hide="x.development_id ==0 || !x.development_id" class="form-control" ng-show="x.development_id == 1" ng-model="x.development_status" ng-options="item.id as item.development_status for item in development" ng-required="true">
 									<option value="">Select Group</option>
 								</select>
 								<div class="input-group-btn" >
-								<a type="button" ng-class="(x.boxId == 0 || !x.boxId) ? 'btn btn-info' : 'btn btn-success'" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editDevelopmentStatus('development_status', x.development_status, x.id, x.boxId); x.development_status = changeDevelopmentStatus(x.development_status, development)">
-								 <span ng-class="(x.boxId ==1) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'"></span> 
+								<a type="button" ng-class="(x.development_id == 0 || !x.development_id) ? 'btn btn-info' : 'btn btn-success'" ng-model="x.development_id" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editDevelopmentStatus('development_status', x.development_status, x.id, x.development_id); x.development_status = changeDevelopmentStatus(x.development_status, development)">
+								 <span ng-class="(x.development_id ==1) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'"></span> 
 								</a>
 								</div>
 							</div>
