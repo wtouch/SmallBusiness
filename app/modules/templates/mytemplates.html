@@ -34,12 +34,11 @@
 						<td>{{x.modified_date}}</td>
 						<td>
 							<div class="btn-group">
-								<a ng-click="openMyTemp('modules/templates/viewMyTemplate.html', x.id)" class="btn btn-primary responsive"> Prieview</a>
+								<a ng-click="openMyTemp('modules/templates/viewMyTemplate.html', x.id)" class="btn btn-primary responsive">Prieview</a>
 							</div>
 							<div class="btn-group">
-								<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This ', 'Make Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
-								<span class="glyphicon glyphicon-remove"></span>
-								</button>							
+								<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deletedmytemp( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
+							</button>
 							</div>
 						</td>
 					</tr>			

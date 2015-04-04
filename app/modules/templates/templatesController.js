@@ -272,7 +272,7 @@ define(['app'], function (app) {
 			});
 		};
 		
-		//delete button 
+		//delete button for cahnge status for template
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
 				dataService.put("put/template/"+id, $scope.deletedData)
@@ -283,7 +283,18 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			};			
-	
+		
+		//delete for my template
+		$scope.deletedmytemp = function(id, status){
+				$scope.deletedData = {status : status};
+				dataService.put("put/mytemplate/"+id, $scope.deletedData)
+				.then(function(response) { //function for businesslist response
+					if(response.status == 'success'){
+						//$scope.hideDeleted = 1;
+					}
+					$scope.alerts.push({type: response.status, msg: response.message});
+				});
+			};			
 		$scope.apply = function(id, applied){
 			$scope.appliedData = {applied : applied};
 			dataService.put("put/template/"+id, $scope.appliedData)

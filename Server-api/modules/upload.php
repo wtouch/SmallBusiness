@@ -37,8 +37,7 @@
 		$user_id = ($userInfo->user_id) ? $userInfo->user_id : null;
 		if(isset($_FILES['file']) && $user_id !== null){
 			$upload->set_path($path);
-			echo ($upload->get_path());
-			//echo json_encode($upload->upload($_FILES['file']));
+			echo json_encode($upload->upload($_FILES['file']));
 		}else{
 			$response["status"] = "error";
 			$response['message'] = 'No image found';
