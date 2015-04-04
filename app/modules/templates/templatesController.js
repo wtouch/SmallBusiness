@@ -60,10 +60,10 @@ define(['app'], function (app) {
 			$scope.opened = ($scope.opened==true)?false:true;
 		};
 	
+		//this code block for modal
 		$scope.openModel = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
-		
 				dataService.get("getmultiple/website/1/50",$scope.status)
 				.then(function(webresponse) {
 					var modalDefaults = {
@@ -72,20 +72,27 @@ define(['app'], function (app) {
 					};
 					var modalOptions = {
 						websiteList: webresponse.data,  // assign data to modal
-						tempList: dataService.parse(response.data)  // assign data to modal
+						tempList: dataService.parse(response.data),
+						myTemplateData : {},
+						formData : function(data){
+							modalOptions.myTemplateData = data;
+						},
 					};
 
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-						console.log("modalOpened");
-					});
+					dataService.post("post/mytemplate",modalOptions.myTemplateData,$scope.userInfo).then(function(response) {
+						$scope.alerts.push({type: response.status,msg: response.message});
+					}); 
+					
 				});
-				
-				
+				});
 			});
 		};
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
+		
+		
 		
 		//for edit the price of template
 		$scope.changeStatusf={};
