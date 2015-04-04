@@ -91,8 +91,43 @@ define(['app'], function (app) {
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
+	
+		//open model for template img
+		$scope.openTemp = function (url, tempId) {
+			dataService.get("getsingle/template/"+tempId)
+			.then(function(response) {
+
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					 var modalOptions = {
+						
+						tempList: dataService.parse(response.data)  // assign data to modal
+					}; 
+				modalService.show(modalDefaults, modalOptions).then(function (result) {
+						console.log("modalOpened");
+				});
+				
+			});
+		};
+		//open model for My template img
+		$scope.openMyTemp = function (url, tempId) {
+			dataService.get("getsingle/mytemplate/"+tempId)
+			.then(function(response) {
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					 var modalOptions = {
+						tempList: dataService.parse(response.data)  // assign data to modal
+					}; 
+				modalService.show(modalDefaults, modalOptions).then(function (result) {
+						console.log("modalOpened");
+				});
 		
-		
+			});
+		};
 		
 		//for edit the price of template
 		$scope.changeStatusf={};
@@ -121,7 +156,6 @@ define(['app'], function (app) {
 				if(prices[x].id == id) template_price = prices[x].template_price;
 			}
 			return template_price;
-			//console.log(template_price);
 		}
 		
 		

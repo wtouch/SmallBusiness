@@ -87,10 +87,13 @@
 							<td>{{x.modified_date}}</td>
 							<td>
 							<div>
-							<a class="btn btn-success" ng-show="x.status==1" title="Active">Active</a>
-							<a class="btn btn-warning" ng-show="x.status==0" title="Delete">Delete</a>
+							<!-- <a class="btn btn-success" ng-show="x.status==1" title="Active">Active</a>
+							<a class="btn btn-warning" ng-show="x.status==0" title="Delete">Delete</a> -->
+							<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
+							</button>
+							
 						
-							<a ng-click="openModel('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary responsive">Prieview</a>
+							<a ng-click="openTemp('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary responsive">Prieview</a>
 							<!-- <a ng-if="permission.Make_Private"ng-click="open('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary responsive">Public</a> -->
 							<a type="button" tooltip="Submit Template" class="btn btn-info glyphicon glyphicon-open" href="#/dashboard/templates/addtemplate/{{x.id}}"></a>	
 							</div>
