@@ -5,34 +5,30 @@
 				<div class="row">
 					<div class="col-sm-9">
 						<h3>{{x.business_name}}</h3>
-						<div class="media">
-							<div class="media-left">
-								<span ng-repeat="(key, value) in x.product_image">
-									<img class="media-object" ng-src="{{value.file_name}}"/>
+					<div class="media">
+						<div class="media-left">
+								<div class="media-object text-center">
+								<img width="150px" ng-model="x.imgkey" ng-src="{{appConfig.assetPath + x.product_image[x.imgkey].file_relative_path}}" ng-init="x.imgkey = 0"/>
+								<span class="thumbs" ng-repeat="(key, value) in x.product_image">
+									<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="x.imgkey = key"/>
 								</span>
-							</div>
-							<div class="media-body">
-								<h4>{{x.product_service_name}}</h4>
-									<label for="prodDesc"></label>
-									<textarea id="prodDesc{{$index}}" name="prodDesc" class="form-control" rows="3" required ng-minlength="10" ng-maxlength="15" ng-bind-html="x.description">
-									</textarea>
-							</div>
+								</div>
 						</div>
+						<div class="panel panel-default media-body">
+							  <div class="panel-heading">
+								<h3>{{x.product_service_name}}</h3>
+							  </div>
+							  <div class="panel-body" ng-bind-html="x.description">
+							  </div>
+						</div>
+					</div>
 					</div>	
 					<div class="col-sm-3">
-						<a href="" class="btn btn-default add-prod">Add Product Photo</a>
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"></span> Push to Top</button>
-								<div class="hot-product">
-									<input type="checkbox" id="hotProduct"><label for="hotProduct">Featured Product</label>
-								</div>
-								<div class="edit-btns">	
-									<a href="#">
-										<span class="btn btn-default glyphicon glyphicon-pencil"></span> Edit
-									</a>
-									<a href="#">
-										<span class="btn btn-default glyphicon glyphicon-remove-sign"></span> Delete
-									</a>
-								</div>
+								<div class="btn-group">
+										<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Non Featured', 'Featured')}}" ng-class="(x.featured==1) ? 'btn btn-info' : 'btn btn-danger'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-star"></span></button>
+										<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-remove"></span></button>
+										<button type="button" tooltip="Edit" href="#/editprofile" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+							</div>
 					</div>
 				</div>	
 			</div>
