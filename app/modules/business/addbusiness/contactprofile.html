@@ -1,4 +1,3 @@
-
 					<div class="form-group">
 						<label  for="contact_person" class="col-sm-3 control-label">Contact Person</label>
 						<div class="col-sm-9">
@@ -8,7 +7,6 @@
 							</span>
 						</div>						
 					</div>
-					
 					<div class="form-group" > 
 						<label  for="contact_photo" class="col-sm-3 control-label">Contact Person Photo</label>
 						<div class="col-sm-9">
@@ -21,7 +19,6 @@
 								<input type="hidden" ng-model="addbusiness.contact_profile.contact_photo">
 						</div>
 					</div>
-						
 					<div class="form-group">
 						<label  for="Designation" class="col-sm-3 control-label">Designation/Job Title</label>
 						<div class="col-sm-9">
@@ -31,7 +28,6 @@
 							</span>
 						</div>						
 					</div>
-						
 					<div class="form-group">
 						<label  for="ceo" class="col-sm-3 control-label">CEO Name</label>
 						<div class="col-sm-9">
@@ -40,8 +36,7 @@
 							<span ng-show="addbusinessForm.ceo.$error.required" class="text-danger">CEO Name  Required.</span>
 							</span>
 						</div>						
-					</div>
-					
+					</div>	
 					<div class="form-group">
 						<label  for="companyname" class="col-sm-3 control-label">Company Name</label>	
 						<div class="col-sm-9">
@@ -50,8 +45,7 @@
 							<span ng-show="addbusinessForm.companyname.$error.required" class="text-danger">Company Name  Required.</span>
 							</span>
 						</div>						
-					</div>
-						
+					</div>	
 					<div class="form-group">
 						<label for="address" class="col-sm-3 control-label">Address</label>
 						<div class="col-sm-9">
@@ -59,7 +53,6 @@
 							<p ng-hide="addbusinessForm.address.$error.maxlength">
 								{{ 256 - addbusiness.contact_profile.address.length + " Chars left" }}
 							</p>
-							
 							<span class="help-block" ng-show="addbusinessForm.address.$dirty && addbusinessForm.address.$invalid">
 								<span ng-show="addbusinessForm.address.$error.maxlength"class="text-danger">Sorry You are Exceeding the Limit</span>
 								<span class="text-danger" ng-show="addbusinessForm.address.$error.required">Address is required.</span>
@@ -78,8 +71,7 @@
 								<span ng-show="addbusinessForm.Country.$error.required" class="text-danger">Country is required.</span>
 							</span>				
 						</div>
-					</div>	
-											
+					</div>								
 					<div class="form-group">
 						<label for="state" class="col-sm-3 control-label">State</label>
 						<div class="col-sm-4">
@@ -89,8 +81,7 @@
 							<span class="help-block" ng-show="addbusinessForm.State.$dirty && addbusinessForm.State.$invalid">
 								<span ng-show="addbusinessForm.State.$error.required" class="text-danger">State is required.</span>
 							</span>				
-						</div>
-												
+						</div>						
 						<div class="col-sm-offset-1 col-sm-4">
 							<select class="form-control" name="City" id="City"  ng-model="addbusiness.contact_profile.City" required ng-options="item.city_name as item.city_name for item in cities">		
 								<option value="">Select City</option>
@@ -100,7 +91,6 @@
 							</span>				
 						</div>
 					</div>
-				
 					<div class="form-group">
 						<label for="ZIP_Code" class="col-sm-3 control-label">ZIP Code</label>
 						<div class="col-sm-9">
@@ -111,7 +101,6 @@
 							</span>
 						</div>						
 					</div>
-					
 					
 					<div class="form-group">
 						<label for="telephone" class="col-sm-3 control-label">Telephone</label>
@@ -187,7 +176,7 @@
 					</div>	
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-							 <button type="submit" class="btn btn-success" title="Save" ng-disabled="addbusinessForm.$invalid" ng-click="postData(addbusiness)">Submit</button>
+							 <button type="submit" class="btn btn-success" ng-disabled="addbusinessForm.$invalid" ng-click="postData(addbusiness)">Submit</button>
 							 <!-- <button ng-if="bizId" type="submit" class="btn btn-success" ng-disabled="addbusinessForm.$invalid" ng-click="updateData(addbusiness)">Update</button> -->
 						</div>
 					</div>
