@@ -8,10 +8,25 @@
     </style>
 {% endblock %}
 {% block content %}
+{% autoescape false %}
 	{% for x in data %}
-		<h1>{{ x.product_service_name|e }} vilas</h1>
+		<!-- <h1>{{ x.product_service_name|e }} vilas</h1>
 		<p class="important">
 			Welcome to my awesome homepage.
-		</p>
+		</p> -->
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h1 class="panel-title">{{ x.product_service_name }} </h1>
+			</div>
+			<div class="panel-body">
+				<div class="important">
+					{% for key, value in x.product_image %}
+						<img class="img-circle img-responsive col-sm-2" src="{{value.file_relative_path}}">
+					{% endfor %}
+					{{x.description}} 
+				</div>
+			</div>
+		</div>
 	{% endfor %}
+	{% endautoescape %}
 {% endblock %}

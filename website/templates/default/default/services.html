@@ -8,8 +8,33 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h1>{{heading}}</h1>
+{% autoescape false %}
+    <!--<h1>{{heading}}</h1>
     <p class="important">
         Welcome to my awesome homepage.
-    </p>
+    </p> -->	
+	{% for x in data %}
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h1 class="panel-title">{{ x.product_service_name }}</h1>
+		</div>
+		<div class="panel-body">
+			<div class="important">
+				<div class="media">
+					<div class="media-left">
+						<a href="#">
+							{% for key, value in x.product_image %}
+								<img class="img-circle img-responsive col-sm-2" src="{{value.file_relative_path}}">
+							{% endfor %}
+						</a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">{{x.description}}</h4>
+					</div>
+				</div> 
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+{% endautoescape %}
 {% endblock %}

@@ -1,6 +1,5 @@
 
 {% extends "index.html" %}
-
 {% block title %}{{data.business_name}}{% endblock %}
 
 {% block content %}
@@ -14,7 +13,7 @@
 	</div>
 	<div class="col-sm-9 sidebar">
 		<h2 id="about">{{ data.business_name }}</h2>
-		<table class="table">
+		<table class="table table-bordered">
 			<tr>
 				<th class="col-sm-4">Business Logo</th>
 				<td class="col-sm-8">
@@ -52,15 +51,25 @@
 		</div>
 		{% if data.infrastructure %}
 			<div class="infrastructure" id="infrastructure">
-				<h2>Infrastructure/Facilities</h2>
+			<!-- <div class="media">
+  <div class="media-left">
+  {% for key, value in data.infrastructure %}
+    <img class="img-circle img-responsive col-sm-2" src="{{value.image.0.file_relative_path}}" />
+	{% endfor %}
+  </div>
+  <div class="media-body">
+    <h2>Infrastructure/Facilities</h2>
+    {{value.description}}
+  </div>
+</div>  -->
+				 <h2>Infrastructure/Facilities</h2>
 				{% for key, value in data.infrastructure %}
 					<h3>{{key}}</h3>
 					<div class="infrastructure description">
 						<img class="img-circle img-responsive col-sm-2" src="{{value.image.0.file_relative_path}}" />
 						{{value.description}}
 					</div>
-				{% endfor %}
-			</div>
+				{% endfor %}  
 		{% endif %}
 		
 	</div>
