@@ -134,6 +134,19 @@ define(['app'], function (app) {
 			});
 			//console.log(addbusiness);
 		}
+		
+		$scope.updateData = function(addbusiness) {
+				dataService.put("put/business/"+$scope.bizId,addbusiness)
+				.then(function(response) {
+					if(response.status == "success"){
+						$scope.reset();
+						setTimeout(function(){
+							$location.path("#/dashboard/templates/mytemplates");
+						},500);
+					}
+					$scope.alerts.push({type: response.status, msg: response.message});
+				});
+			}
 			/*$scope.update = function(addbusiness){				
 				console.log(addbusiness);
 				dataService.put("put/business/"+ $scope.user_id  ,addbusiness)  // use business id here

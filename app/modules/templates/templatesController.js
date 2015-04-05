@@ -413,10 +413,6 @@ define(['app'], function (app) {
 				$scope.reset();
 			}
 			
-			//$scope.addtemplate = {custom:1};
-			//angular.extend($scope.template_type, $scope.userInfo);
-			
-			//$scope.reset();
 			$scope.uploadZip = function(files,path,userDetails,picArr){ 
 				upload.upload(files,path,userDetails,function(data){
 					var picArrKey = 0, x;
