@@ -12,7 +12,6 @@
 		<a href="#/dashboard/users/adduser" class="btn btn-default">Add New User</a>
 	</div>
 </div>
-
 <div class="form-group">
 	<label for="Salseman" class="col-sm-3 control-label">User Id</label>
 	<div class="col-sm-9">
@@ -27,18 +26,16 @@
 		</span>
 	</div>
 </div>
-
 <div class="form-group">
 	<label  for="business_name" class="col-sm-3 control-label">Business Name</label>
 	<div class="col-sm-9">
 		<input type="hidden" ng-model="addbusiness.created_date">
-		<input type="text" id="business_name" class="form-control" name="business_name" placeholder="Business Name" ng-model="addbusiness.business_name" required >
+		<input type="text" ng-disabled="bizId" id="business_name" class="form-control" name="business_name" placeholder="Business Name" ng-model="addbusiness.business_name" required>
 		<span class="help-block" ng-show="addbusinessForm.business_name.$dirty && addbusinessForm.business_name.$invalid">
 			<span ng-show="addbusinessForm.business_name.$error.required" class="text-danger">Business Name is required.</span>
 		</span>
 	</div>						
 </div>
-
 <div class="form-group" >
 	<label  for="business_logo" class="col-sm-3 control-label">Business Logo</label>
 	<div class="col-sm-9">
@@ -51,7 +48,6 @@
 			<input type="hidden" ng-model="addbusiness.business_logo">		
 	</div>
 </div>	
-
 <div class="form-group">
 	<label for="category" class="col-sm-3 control-label" name="category" >Category</label>
 	<div class="col-sm-9">
@@ -63,7 +59,6 @@
 		</span>				
 	</div>
 </div>	
-
 <div class="form-group">
 	<label for="ownership" class="col-sm-3 control-label" name="ownership" >Ownership Type</label>
 	<div class="col-sm-9">
@@ -75,7 +70,6 @@
 		</span>				
 	</div>
 </div>
-
 <div class="form-group">
 	<label for="keyDes" class="col-sm-3 control-label">Short Description of your Company <br><small>(Visible in Small Business search)</small></label>
 	<div class="col-sm-9">

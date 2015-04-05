@@ -102,7 +102,6 @@ define(['app'], function (app) {
 						size : 'lg'
 					};
 					 var modalOptions = {
-						
 						tempList: dataService.parse(response.data)  // assign data to modal
 					}; 
 				modalService.show(modalDefaults, modalOptions).then(function (result) {
@@ -128,6 +127,30 @@ define(['app'], function (app) {
 		
 			});
 		};
+		
+		//modalfor open scrible details.
+		$scope.openTab = function (url, tempId) {
+			dataService.get("getsingle/template/"+tempId)
+			.then(function(response) {
+				
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+					size : 'lg'
+				};
+				var modalOptions = {
+					tempList: dataService.parse(response.data)  // assign data to modal
+				};
+				console.log(dataService.parse(response.data));
+				
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log("modalOpened");
+				});
+			});
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+
 		
 		//for edit the price of template
 		$scope.changeStatusf={};
@@ -302,8 +325,7 @@ define(['app'], function (app) {
 				$scope.alerts.push({type: response.status, msg: response.message});
 			});
 		} ;
-		
-		
+
 		$scope.upload = function(files,path,userInfo,picArr){ //this function for uploading files
 			upload.upload(files,path,userInfo,function(data){
 				var picArrKey = 0, x;

@@ -118,8 +118,6 @@ define(['app'], function (app) {
 			dataService.post("post/business",addbusiness)
 			.then(function(response) {  //function for response of request temp
 				if(response.status == "success"){
-					$scope.reset();
-					$scope.addbusinessForm.$setPristine();
 					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
 					
 					setTimeout(function(){
@@ -132,9 +130,40 @@ define(['app'], function (app) {
 				}
 				
 			});
-			//console.log(addbusiness);
 		}
 		
+		//get method for get data from business
+		var addbusiness = function(){
+			console.log(addbusiness);
+			$scope.bizId = $routeParams.id;
+			if($scope.bizId){
+				dataService.get("getsingle/business/"+$scope.bizId)
+				.then(function(response) {
+					$scope.reset = function() {
+						$scope.addbusiness = {
+							business_logo : {},
+							category : {},
+							ownership : {},
+							contact_profile : {}
+						};
+					angular.extend(response.data, $scope.addbusiness);
+					$scope.addbusiness = response.data;
+				};
+				$scope.reset();
+				console.log($scope.addbusiness);
+			})
+			}else{
+				$scope.reset = function() {
+					$scope.addbusiness = {
+						business_logo : {},
+							category : {},
+							ownership : {},
+							contact_profile : {}
+					};
+				};
+				$scope.reset();
+			}
+		}
 		$scope.updateData = function(addbusiness) {
 				dataService.put("put/business/"+$scope.bizId,addbusiness)
 				.then(function(response) {
@@ -147,20 +176,6 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			}
-			/*$scope.update = function(addbusiness){				
-				console.log(addbusiness);
-				dataService.put("put/business/"+ $scope.user_id  ,addbusiness)  // use business id here
-				 .then(function(response) {  //function for response of request temp
-					if(response.status == 'success'){
-						$scope.submitted = true;
-						$scope.alerts.push({type: response.status,msg: response.message});						
-					}else{
-						$scope.alerts.push({type: response.status,msg: response.message});
-					}	
-				});	 
-			};	
-		}		  */
-			
     };
 	
 	// Inject controller's dependencies
