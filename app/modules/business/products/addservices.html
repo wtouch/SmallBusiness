@@ -2,8 +2,8 @@
 	<div class="col-sm-12">
 	<div class="bottomspace">
 		<div class="product">
-			<h3 ng-if="!editProductForm" class="col-sm-offset-2 col-sm-9">Add New Services</h3>
-			<h3 ng-if="editProductForm" class="col-sm-offset-2 col-sm-9">Edit Service</h3>
+			<h3 ng-if="!editServiceForm" class="col-sm-offset-2 col-sm-9">Add New Services</h3>
+			<h3 ng-if="editServiceForm" class="col-sm-offset-2 col-sm-9">Edit Service</h3>
 			<form class="form-horizontal" role="form" name="addserviceForm" ng-submit="addserviceForm.$valid" novalidate="novalidate">
 				<div class="form-group">
 					<label for="product_service_name" class="col-sm-2 control-label">Service Name </label>
@@ -26,12 +26,14 @@
 					<input type="hidden" ng-model="addservice.product_image">
 					</div>
 				</div>
-				<!--<div class="form-group">
-				<img width="150px" ng-model="x.imgkey" ng-src="{{appConfig.assetPath + x.product_image[x.imgkey].file_relative_path}}" ng-init="x.imgkey = 0"/>
-				<span class="thumbs" ng-repeat="(key, value) in x.product_image">
-					<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="x.imgkey = key"/>
+				<div class="form-group" ng-if="editServiceForm">
+				 <label class="col-md-2"><img width=150px" ng-model="addservice.imgkey" ng-src="{{appConfig.assetPath + addservice.product_image[addservice.imgkey].file_relative_path}}" ng-init="addservice.imgkey = 0"/></label>
+				 <div class="col-md-9">
+				<span class="thumbs" ng-repeat="(key, value) in addservice.product_image">
+					<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="addservice.imgkey = key"/>
 				</span>
-				</div>-->
+				</div>
+				</div>
 				<div>
 					<input type="hidden" ng-model="addservice.user_id" value="{{addservice.user_id}}">
 				</div>
@@ -56,10 +58,10 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-9">
-						<button ng-if="!editProductForm" type="submit" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-click="postData(addservice)" title="submit">Submit
+						<button ng-if="!editServiceForm" type="submit" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-click="postData(addservice)" title="submit">Submit
 						</button>
 						
-						<button ng-if="editProductForm" type="submit" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-click="updateData(addservice)" title="submit">
+						<button ng-if="editServiceForm" type="button" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-change="updateData(addservice,addservice.id)" title="submit">
 						Edit Service</button>
 					</div>
 				</div>

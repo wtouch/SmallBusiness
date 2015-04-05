@@ -63,11 +63,17 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				addservices();
 			}
 			$scope.editProductForm = false;//this is for closing the edit form
+			$scope.editServiceForm = false
 		}
-		$scope.editForm = function(x1){
+		$scope.editServiceForm = function(x1){
 			$scope.showServiceForm = true;
-			$scope.editProductForm = true;
+			$scope.editServiceForm = true;
 			angular.extend($scope.addservice, x1);
+		}
+		$scope.editProductForm = function(x1){
+			$scope.showProductForm = true;
+			$scope.editProductForm = true;
+			angular.extend($scope.addproduct, x1);
 		}
 		
 		// get data for business options 
@@ -120,7 +126,10 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				.then(function(response) {  //function for response of request temp
 				});
 			} //end of post method {trupti} 
+			 //end of post method {trupti}
 		}
+		
+		
 		//view for product list
 		var productlist= function(){
 					$scope.productFilter = {business_id : $scope.selectBusiness.id, type : 'product'};
