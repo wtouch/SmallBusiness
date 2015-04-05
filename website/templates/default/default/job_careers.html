@@ -1,0 +1,23 @@
+
+{% extends "index.html" %}
+
+{% block title %}{{data.business_name}}{% endblock %}
+
+{% block content %}
+{% autoescape false %}
+{% if data.job_careers %}
+
+<div class="row">
+	<div class="col-sm-12">
+		<h2>Careers</h2>
+		{% for key, value in data.job_careers if break == 0 %}
+			<h3>{{key}}</h3>
+			<img class="pull-left col-sm-2 img-circle" src="{{value.image.0.file_relative_path}}">
+			<p>{{ value.description }}</p>
+		</blockquote>
+		{% endfor %}
+	</div>
+</div>
+{% endif %}
+{% endautoescape %}
+{% endblock %}

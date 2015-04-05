@@ -48,7 +48,7 @@
 			if(isset($data['featured_products'])) $response['featured_products'] = $data['featured_products'];
 			$response['path'] = $this->tmplConfig['template_host_path_folder']."/";
 			//print_r($data);
-			//print_r($response['data']['testimonials']);
+			print_r($response['data']);
 			return $response;
 		}
 		function displayTemplate($route){
