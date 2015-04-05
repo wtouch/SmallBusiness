@@ -427,7 +427,7 @@ define(['app'], function (app) {
 					$scope.addtemplate = {
 						date : $scope.currentDate,
 						template_params : {},
-						template_image : {},
+						template_image : [],
 						created_by : $rootScope.userDetails.id,
 						development_status : 'completed'
 					};
@@ -443,7 +443,7 @@ define(['app'], function (app) {
 						if(picArr == "zip"){
 							$scope.addtemplate.template_zip = data.data;
 						}else{
-							$scope.addtemplate.template_image[picArrKey] = data.data;
+							$scope.addtemplate.template_image.push(data.data);
 						}
 						console.log($scope.addtemplate.template_image);
 					}else{

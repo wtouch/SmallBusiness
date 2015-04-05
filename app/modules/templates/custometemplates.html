@@ -57,7 +57,6 @@
 							<td>{{((customTempCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 							<td>{{x.template_name}}</td>
 							<td>{{x.template_type}}</td> 
-							
 							<td style="max-width:150px">
 							<div class="input-group">
 							<p class="form-control-static" ng-hide="x.development_id ==1">{{x.development_status}}</p>
@@ -70,6 +69,22 @@
 								</a>
 								</div>
 							</div>
+							
+							
+							<!-- <div class="input-group">
+					<p class="form-control-static" ng-hide="users.boxId ==1">{{users.group_name}}</p>
+					<select ng-if="permission.assign_user_group" ng-hide="users.boxId ==0 || !users.boxId" class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-options="item.id as item.group_name for item in groups" ng-required="true">
+						<option value="">Select Group</option>
+					</select>
+					<div  ng-if="permission.assign_user_group" class="input-group-btn" >
+						<a type="button" ng-class="(users.boxId == 0 || !users.boxId) ? 'btn btn-info' : 'btn btn-success'" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId); users.group_name = changeGroupName(users.group_id, groups)">
+							<span ng-class="(users.boxId ==1) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'"></span>
+						</a>
+					</div>
+					
+				</div> -->
+				
+				
 							</td>
 							
 							<td style="max-width:150px">
