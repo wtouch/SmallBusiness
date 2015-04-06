@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<h3>Template Images</h3>
-				<table class="table table-responsive">
+				<!-- <table class="table table-responsive">
 					<tr "modalOptions.templates">
 					<td>
 						<td>
@@ -19,7 +19,23 @@
 						</td>
 					</td>
 					</tr>		
-				</table> 
+				</table>  -->
+				<div class="table-responsive">
+						<table class="table table-bordered">
+						<tr "modalOptions.templates">
+						<td>
+						<td>
+						<span class="thumbs" ng-repeat="(key, value) in modalOptions.tempList.template_image">
+						<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.tempList.imgkey = key"/>
+						</span>
+						<!-- </td>
+						<td> -->
+						<img class="img-responsive" ng-model="modalOptions.tempList.imgkey" ng-src="{{appConfig.assetPath + modalOptions.tempList.template_image[modalOptions.tempList.imgkey].file_relative_path}}" ng-init="modalOptions.tempList.imgkey = 0"/>
+						</td>
+						</td>
+						</tr>		
+						</table>
+				</div>
 			</div>
 		</div>
 	</div>

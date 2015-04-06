@@ -86,24 +86,26 @@ define(['app'], function (app) {
 		$scope.reset = function() {
 			$scope.addbusiness = {
 				created_date : $scope.currentDate,
-				contact_profile : {contact_photo : {}},
-				business_logo  : {},
+				contact_profile : {contact_photo : []},
+				business_logo  : [],
 			};
 		};
 		$scope.path = "business/"; // path to store images on server
-		$scope.userinfo = $scope.userInfo; // this is for uploading credentials		
+		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
+		
+		//this upload function for uploading single image.{trupti}
 		$scope.upload = function(files,path,userInfo, picArr){ // this function for uploading files
-			
 			upload.upload(files,path,userInfo,function(data){
-				var picArrKey = 0, x;
-				for(x in picArr) picArrKey++;
-				if(data.status === 'success'){
-					picArr[picArrKey] = data.details;
-					console.log(data.message);
-				}else{
-					$scope.alerts.push({type: data.status, msg: data.message});
+		
+				if(picArr){
+					if(data.status === 'success'){
+						$scope.addbusiness.business_logo = data.data;
+						
+						console.log($scope.addbusiness.business_logo);
+					}else{
+						$scope.alerts.push({type: data.status, msg: data.message});
+					}
 				}
-				
 			}); 
 		};
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images

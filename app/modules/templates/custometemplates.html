@@ -9,23 +9,23 @@
 		<div class="col-sm-3">
 			<div class="bottomspace">
 				<label for="sort" class="control-label">Sort by Order</label>
-					<select id="sort" class="form-control" ng-model="id"> 
+					<select id="sort" class="form-control" ng-model="sort"> 
 						<option value="">Select Order</option>		<!-- added value & selected attr -->	
-						<option value="-id">Desending</option>
-						<option value="id">Asending</option>  
+						<option value="-template_name">Desending</option>
+						<option value="template_name">Asending</option>  
 					</select>
 			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="bottomspace">
-				<label for="status" class="control-label">Development Status</label>
-					<select id="status" class="form-control" ng-model="status"
-					ng-change="changeStatus('development_status',status)" ng-init="showStatus='rejected'">
+				<label for="developmentstatus" class="control-label">Development Status</label>
+					<select id="developmentstatus" class="form-control" ng-model="developmentstatus"
+					ng-change="changeStatus('development_status',developmentstatus)" ng-init="showStatus='rejected'">
 						<option value="" selected>Select Status</option> <!-- add value attribute empty & selected for initial selected option -->
-						<option value="inprogress">Order Placed</option>
-						<option value="order_placed">Pending</option>  
-						<option value="completed">Inprogress</option> 
-						<option value="rejected">Completed</option> 
+						<option value="inprogress">Inprogress</option>
+						<option value="order_placed">Order Placed</option>  
+						<option value="completed">Completed</option> 
+						<option value="rejected">Rejecteted</option> 
 					</select>
 			</div>
 		</div>
@@ -53,7 +53,7 @@
 				<th class="col-sm-3">Manage</th>
 			</thead>
 					<tbody>
-						<tr ng-repeat="x in templates">
+						<tr ng-repeat="x in templates | orderBy:sort">
 							<td>{{((customTempCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 							<td>{{x.template_name}}</td>
 							<td>{{x.template_type}}</td> 
@@ -69,8 +69,6 @@
 								</a>
 								</div>
 							</div>
-							
-							
 							<!-- <div class="input-group">
 					<p class="form-control-static" ng-hide="users.boxId ==1">{{users.group_name}}</p>
 					<select ng-if="permission.assign_user_group" ng-hide="users.boxId ==0 || !users.boxId" class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-options="item.id as item.group_name for item in groups" ng-required="true">
