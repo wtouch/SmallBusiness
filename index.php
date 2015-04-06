@@ -6,8 +6,4 @@ $config['http_template_path'] = "http://".$config['host']."/website/templates/";
 $config['uri'] = explode("/",$_SERVER['REQUEST_URI']);
 $config['seouri'] = explode("?_escaped_fragment_=",$_SERVER['REQUEST_URI']);
 
-if($_SERVER['HTTP_HOST']=='vilas.local'){
-	require_once 'website/portal/index.php';
-}else{
 	require_once 'website/index.php';
-}

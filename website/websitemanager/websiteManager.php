@@ -46,7 +46,7 @@ class websiteManager{
 				throw new Exception("Website Configuration error: ".$config['message']);
 			}
 			
-			$table = "template";
+			$table = "my_template";
 			(property_exists ( $config['website_config'] , 'website_config')) ? $template_id = $config['website_config']->template_id : "";
 			(property_exists ( $config['website_config'] , 'website_config')) ? $where["id"] = $template_id : $template_id = 0;
 			if($template_id == 0 || property_exists ( $config['website_config'] , 'website_config')){
