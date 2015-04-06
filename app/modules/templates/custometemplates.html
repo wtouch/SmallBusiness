@@ -9,23 +9,23 @@
 		<div class="col-sm-3">
 			<div class="bottomspace">
 				<label for="sort" class="control-label">Sort by Order</label>
-					<select id="sort" class="form-control" ng-model="id"> 
+					<select id="sort" class="form-control" ng-model="sort"> 
 						<option value="">Select Order</option>		<!-- added value & selected attr -->	
-						<option value="-id">Desending</option>
-						<option value="id">Asending</option>  
+						<option value="-template_name">Desending</option>
+						<option value="template_name">Asending</option>  
 					</select>
 			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="bottomspace">
-				<label for="status" class="control-label">Development Status</label>
-					<select id="status" class="form-control" ng-model="status"
-					ng-change="changeStatus('development_status',status)" ng-init="showStatus='rejected'">
+				<label for="developmentstatus" class="control-label">Development Status</label>
+					<select id="developmentstatus" class="form-control" ng-model="developmentstatus"
+					ng-change="changeStatus('development_status',developmentstatus)" ng-init="showStatus='rejected'">
 						<option value="" selected>Select Status</option> <!-- add value attribute empty & selected for initial selected option -->
-						<option value="inprogress">Order Placed</option>
-						<option value="order_placed">Pending</option>  
-						<option value="completed">Inprogress</option> 
-						<option value="rejected">Completed</option> 
+						<option value="inprogress">Inprogress</option>
+						<option value="order_placed">Order Placed</option>  
+						<option value="completed">Completed</option> 
+						<option value="rejected">Rejecteted</option> 
 					</select>
 			</div>
 		</div>
@@ -50,14 +50,13 @@
 				<th>Price</th>
 				<th>Create Date</th>
 				<th>Modified Date</th>
-				<th>Manage</th>
+				<th class="col-sm-3">Manage</th>
 			</thead>
 					<tbody>
-						<tr ng-repeat="x in templates">
+						<tr ng-repeat="x in templates | orderBy:sort">
 							<td>{{((customTempCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 							<td>{{x.template_name}}</td>
 							<td>{{x.template_type}}</td> 
-							
 							<td style="max-width:150px">
 							<div class="input-group">
 							<p class="form-control-static" ng-hide="x.development_id ==1">{{x.development_status}}</p>
@@ -70,6 +69,20 @@
 								</a>
 								</div>
 							</div>
+							<!-- <div class="input-group">
+					<p class="form-control-static" ng-hide="users.boxId ==1">{{users.group_name}}</p>
+					<select ng-if="permission.assign_user_group" ng-hide="users.boxId ==0 || !users.boxId" class="form-control" ng-show="users.boxId == 1" ng-model="users.group_id" ng-options="item.id as item.group_name for item in groups" ng-required="true">
+						<option value="">Select Group</option>
+					</select>
+					<div  ng-if="permission.assign_user_group" class="input-group-btn" >
+						<a type="button" ng-class="(users.boxId == 0 || !users.boxId) ? 'btn btn-info' : 'btn btn-success'" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId); users.group_name = changeGroupName(users.group_id, groups)">
+							<span ng-class="(users.boxId ==1) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'"></span>
+						</a>
+					</div>
+					
+				</div> -->
+				
+				
 							</td>
 							
 							<td style="max-width:150px">
@@ -91,7 +104,7 @@
 							<a ng-click="openTemp('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary responsive">Prieview</a>
 							<!-- <a ng-if="permission.Make_Private"ng-click="open('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary responsive">Public</a> -->
 							<a type="button" tooltip="Submit Template" class="btn btn-info glyphicon glyphicon-open" href="#/dashboard/templates/addtemplate/{{x.id}}"></a>
-							<a ng-click="openTab('modules/templates/viewTemplate.html',x.id)" class="btn btn-primary responsive glyphicon glyphicon-ok"></a> 
+							<a ng-click="openTab('modules/templates/viewscrible.html',x.id)" class="btn btn-primary responsive glyphicon glyphicon-ok" tooltip="View Scrible"></a> 
 							</div>
 							</td>
 						</tr>		

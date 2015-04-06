@@ -27,7 +27,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label  for="business_name" class="col-sm-3 control-label">Business Name</label>
+	<label  for="business_name" class="col-sm-3 control-label">Organization/Firm Name</label>
 	<div class="col-sm-9">
 		<input type="hidden" ng-model="addbusiness.created_date">
 		<input type="text" ng-disabled="bizId" id="business_name" class="form-control" name="business_name" placeholder="Business Name" ng-model="addbusiness.business_name" required>
@@ -37,7 +37,7 @@
 	</div>						
 </div>
 <div class="form-group" >
-	<label  for="business_logo" class="col-sm-3 control-label">Business Logo</label>
+	<label  for="business_logo" class="col-sm-3 control-label">Logo</label>
 	<div class="col-sm-9">
 		<input type="file" id="business_logo" name="business_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="business_logo">	
 		<!-- This will show thumbnails & progress of images -->
@@ -60,6 +60,17 @@
 	</div>
 </div>	
 <div class="form-group">
+	<label for="type" class="col-sm-3 control-label" name="type" >Type</label>
+	<div class="col-sm-9">
+		<select class="form-control" name="type" id="type"  ng-model="addbusiness.type" required ng-options="item as item for item in biz.type">		
+			<option value="">Select Type</option>
+		</select>
+		<span class="help-block" ng-show="addbusinessForm.type.$dirty && addbusinessForm.type.$invalid">
+		<span ng-show="addbusinessForm.type.$error.required" class="text-danger">Type is required.</span>
+		</span>				
+	</div>
+</div>	
+<div class="form-group">
 	<label for="ownership" class="col-sm-3 control-label" name="ownership" >Ownership Type</label>
 	<div class="col-sm-9">
 		<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.ownership" required ng-model="addbusiness.ownership" required ng-options="item as item for item in biz.ownership">		
@@ -70,30 +81,15 @@
 		</span>				
 	</div>
 </div>
+
 <div class="form-group">
-	<label for="keyDes" class="col-sm-3 control-label">Short Description of your Company <br><small>(Visible in Small Business search)</small></label>
-	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="addbusiness.business_info.keywords" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Short Description of company" required>
-		</textarea>
-			<p ng-hide="addbusinessForm.keywords.$error.maxlength">
-				{{ 256 - addbusiness.business_info.keywords.length + " Chars left" }}
-			</p>
-			
-			<span class="help-block" ng-show="addbusinessForm.keywords.$dirty && addbusinessForm.keywords.$invalid">
-				<span class="text-danger" ng-show="addbusinessForm.keywords.$error.maxlength">Sorry You are Exceeding the Limit</span>
-				<span ng-show="addbusinessForm.keywords.$error.required" class="text-danger">Short Description of company is required.</span>
-			</span>	
-	</div>
-</div>  
-<div class="form-group">
-	<label for="description" class="col-sm-3 control-label">Detailed Description of Company </br>
+	<label for="description" class="col-sm-3 control-label">Detailed Description</br>
 	<small>This will show on Website Home Page</small></label>
 	<div class="col-sm-9">
 		<textarea type="text" class="form-control" id="description" name="description" ng-model="addbusiness.business_info.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
 			<p ng-hide="addbusinessForm.description.$error.maxlength">
-				{{ 5000 - addbusiness.business_info.description.length + " Chars left"}} 
+				{{ 1500 - addbusiness.business_info.description.length + " Chars left"}} 
 			</p>
-			
 			<span class="help-block" ng-show="addbusinessForm.description.$dirty && addbusinessForm.description.$invalid">
 				<span class="text-danger" ng-show="addbusinessForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
 				<span ng-show="addbusinessForm.description.$error.required" class="text-danger">Detailed Description of company is required.</span>

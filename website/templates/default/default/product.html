@@ -4,18 +4,28 @@
 {% block head %}
     {{ parent() }}
     <style type="text/css">
-        .important { color: #336699; }
+        .important { color: #336699;
+			}
     </style>
 {% endblock %}
 {% block content %}
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h1 class="panel-title">{{ data.product_service_name }}</h1>
-		</div>
+{% autoescape false %}
+	<div class="important panel panel-default">
 		<div class="panel-body">
-			<p class="important">
-				Welcome to my awesome homepage.
-			</p>
-		 </div>
+			<h4>{{ data.product_service_name }}</h4>
+			<div class="media">
+				<div class="media-left col-sm-2">
+					<a href="#">
+						{% for key, value in data.product_image %}
+							<img class="img-responsive" src="{{value.file_relative_path}}">
+						{% endfor %}
+					</a>
+				</div>
+				<div class="media-body">
+					<p class="media-heading">{{data.description}}</p>
+				</div>
+			</div>
+		</div>
 	</div>
+{% endautoescape %}
 {% endblock %}

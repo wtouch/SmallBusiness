@@ -23,12 +23,11 @@ define(['app'], function (app) {
 		$scope.temp = dataService.config.template;
 		$scope.path = "template/"; // path to store images on server
 		$scope.userinfo = $scope.userInfo;
+		$scope.reqtemp = {
+			scrible : []
+		};
 		
 		//global methods
-		//Upload Function for uploading files {Vilas}
-		$scope.reqtemp = {
-			scrible : {}
-		};
 		//function for close alert
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
@@ -325,19 +324,36 @@ define(['app'], function (app) {
 				$scope.alerts.push({type: response.status, msg: response.message});
 			});
 		} ;
-
-		$scope.upload = function(files,path,userInfo,picArr){ //this function for uploading files
-			upload.upload(files,path,userInfo,function(data){
+		
+	
+	   $scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
+		
+			 upload.upload(files,path,userInfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
+				
 				if(data.status === 'success'){
-					picArr[picArrKey] = data.data;
-					//console.log(data.message);
+					picArr.push(data.data);
+					console.log(picArr);
+				}else{
+					$scope.alerts.push({type: data.status, msg: data.message});
+				}
+			}); 
+		};    
+		
+		
+		   /* $scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
+			upload.upload(files,path,userInfo,function(data){
+				var picArrKey = 0, x;
+				for(x in $scope.reqtemp.scrible) picArrKey++;
+				if(data.status === 'success'){
+					picArr.push[data.data];
 				}else{
 					$scope.alerts.push({type: data.status, msg: data.message});
 				}
 			});
-		};
+		};     */
+	
 		
 		// switch functions
 		var mytemplates = function(){
@@ -411,7 +427,7 @@ define(['app'], function (app) {
 					$scope.reset = function() {
 						$scope.addtemplate = {
 							template_params : {},
-							template_image : {},
+							template_image : [],
 							created_by : $rootScope.userDetails.id,
 							development_status : 'completed'
 						};
@@ -427,7 +443,7 @@ define(['app'], function (app) {
 					$scope.addtemplate = {
 						date : $scope.currentDate,
 						template_params : {},
-						template_image : {},
+						template_image : [],
 						created_by : $rootScope.userDetails.id,
 						development_status : 'completed'
 					};
@@ -443,7 +459,7 @@ define(['app'], function (app) {
 						if(picArr == "zip"){
 							$scope.addtemplate.template_zip = data.data;
 						}else{
-							$scope.addtemplate.template_image[picArrKey] = data.data;
+							$scope.addtemplate.template_image.push(data.data);
 						}
 						console.log($scope.addtemplate.template_image);
 					}else{

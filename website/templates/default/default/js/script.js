@@ -39,7 +39,7 @@ app.controller('enquiryController', function($scope,$http, $route, $location) {
 	});
 	
 	$scope.postData = function(enquiry){
-		$http.post("../server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
 				$scope.mailSent = true;
 		});
 	};
