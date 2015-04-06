@@ -213,7 +213,7 @@ define(['app'], function (app) {
 		$scope.pageChanged = function(page, where) {
 			dataService.get("getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response){ 
-				$scope.templates = response.datconsole.log($scope.templates);
+				$scope.templates = response.data;
 			});
 		};
 	

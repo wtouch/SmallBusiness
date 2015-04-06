@@ -47,19 +47,24 @@ class websiteManager{
 			}
 			
 			$table = "my_template";
-			(property_exists ( $config['website_config'] , 'website_config')) ? $template_id = $config['website_config']->template_id : "";
-			(property_exists ( $config['website_config'] , 'website_config')) ? $where["id"] = $template_id : $template_id = 0;
-			if($template_id == 0 || property_exists ( $config['website_config'] , 'website_config')){
+			(property_exists ( $config['website_config'] , 'template_id')) ? $template_id = $config['website_config']->template_id : "";
+			//print_r($template_id);
+			(isset($template_id)) ? $where["id"] = $template_id : $template_id = 0;
+			//print_r($where["id"]);
+			if($template_id == 0 || !property_exists ( $config['website_config'] , 'template_id')){
 				$templateDetails["template_name"] = "default";
 				$templateDetails["template_folder"] = "default";
 				$templateDetails["template_image"] = "default/preview.png";
+				$templateDetails["template_params"] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/website/templates/default/default/templateParams.json'),true);
+				
 			}else{
 				$dbresult = $db->selectSingle($table, $where);
 				
 				if($dbresult['status'] == "success"){
 					$templateDetails["template_name"] = $dbresult['data']['template_name'];
 					$templateDetails["template_folder"] = $dbresult['data']['category'];
-					$templateDetails["template_image"] = $dbresult['data']['template_image'];
+					$templateDetails["template_image"] = json_decode($dbresult['data']['template_image'],true);
+					$templateDetails["template_params"] = json_decode($dbresult['data']['template_params'],true);
 				}else{
 					throw new Exception("Template DB Error: ".$dbresult['message']);
 				}
@@ -71,6 +76,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = 'Error: ' .$e->getMessage();
             $response["data"] = null;
+			print_r($response);
 		}
 		return $response;
 	}

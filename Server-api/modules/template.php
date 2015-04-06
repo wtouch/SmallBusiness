@@ -71,6 +71,9 @@
 				if(!$extractZip){
 					throw new Exception("zip not extracted!");
 				}
+				$where['id'] = $insert['data'];
+				$updateData['template_params'] =  file_get_contents($upload->get_path().$path_to_extract."/templateParams.json");
+				$update = $db->update("template", $updateData, $where);
 			}else{
 				throw new Exception($insert['message']);
 			}

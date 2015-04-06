@@ -39,16 +39,20 @@
 		}
 		function getData($route){
 			$data = $this->web->getTemplateData($route);
+			$template = $this->web->getTemplate();
+			
 			$routes = $this->web->getRoutes();
 			$response['title'] = $route;
 			$response['uri'] = $this->tmplConfig['uri'];
 			$response['routes'] = $routes['data'];
 			$response['data'] = $data['business'];
+			$response['template'] = $template['data'];
 			if(isset($data['featured_services'])) $response['featured_services'] = $data['featured_services'];
 			if(isset($data['featured_products'])) $response['featured_products'] = $data['featured_products'];
 			$response['path'] = $this->tmplConfig['template_host_path_folder']."/";
+			print_r($response['template']);
 			//print_r($data);
-			print_r($response['data']);
+			//print_r($response['data']);
 			return $response;
 		}
 		function displayTemplate($route){
