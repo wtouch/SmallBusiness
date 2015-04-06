@@ -62,7 +62,7 @@ class websiteManager{
 				
 				if($dbresult['status'] == "success"){
 					$templateDetails["template_name"] = $dbresult['data']['template_name'];
-					$templateDetails["template_folder"] = $dbresult['data']['category'];
+					$templateDetails["template_category"] = $dbresult['data']['category'];
 					$templateDetails["template_image"] = json_decode($dbresult['data']['template_image'],true);
 					$templateDetails["template_params"] = json_decode($dbresult['data']['template_params'],true);
 				}else{

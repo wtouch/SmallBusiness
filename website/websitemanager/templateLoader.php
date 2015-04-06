@@ -19,9 +19,16 @@
 			// initialize Twig environment
 			$this->twig = new Twig_Environment($loader);
 		}
-		function setConfig($property, $value){
-			$this->tmplConfig[$property] = $value;
-			return true;
+		function setConfig($property){
+			foreach($property as $key => $value){
+				$this->tmplConfig[$key] = $value;
+			}
+			$this->tmplConfig['template_root_path_folder'] = $this->tmplConfig['template_root_path'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_category'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_folder'];
+			$this->tmplConfig['template_host_path_folder'] = $this->tmplConfig['template_host_path'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_category'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_folder'];
+			$loader = new Twig_Loader_Filesystem($this->tmplConfig['template_root_path_folder']);
+			// initialize Twig environment
+			$this->twig = new Twig_Environment($loader);
+			return $this->tmplConfig;
 		}
 		function getConfig(){
 			return $this->tmplConfig;
@@ -29,11 +36,19 @@
 		
 		function getTemplate($route){
 			$route = explode("/", $route);
+			$template = $this->web->getTemplate();
+			if($template['status']=='success'){
+				//print_r($template['data']);
+				$this->setConfig(array('template_category'=>$template['data']['template_category'], 'template_folder' => $template['data']['template_name']));
+				
+			}
+			
 			if(count($route) > 1){
 				$route = $route[0];
 			}else{
 				$route = $route[0];
 			}
+			//print_r($this->getConfig());
 			if($route == "") $route = "home";
 			return $this->twig->loadTemplate($route.".html");
 		}
@@ -50,7 +65,7 @@
 			if(isset($data['featured_services'])) $response['featured_services'] = $data['featured_services'];
 			if(isset($data['featured_products'])) $response['featured_products'] = $data['featured_products'];
 			$response['path'] = $this->tmplConfig['template_host_path_folder']."/";
-			print_r($response['template']);
+			//print_r($response['template']);
 			//print_r($data);
 			//print_r($response['data']);
 			return $response;
