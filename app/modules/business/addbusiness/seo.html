@@ -9,14 +9,16 @@
 		</div>						
 </div>
 <div class="form-group">
-	<label for="keywords" class="col-sm-3 control-label">Keywords<br><small>(Visible in Small Business search)</small></label>
+	<label for="keywords" class="col-sm-3 control-label">Keywords</label>
 	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="addbusiness.keywords" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Keywords" required>
+		<!-- <textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="addbusiness.keywords" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Keywords" required>
 		</textarea>
 			<p ng-hide="addbusinessForm.keywords.$error.maxlength">
 				{{ 256 - addbusiness.keywords.length + " Chars left" }}
-			</p>
-			
+			</p> -->
+					<select multiple class="form-control" name="keywords" id="keywords"  ng-model="addbusiness.keywords" ng-change="getCities(addbusiness.keywords)" required>		
+								<option value="">Select State</option>
+					</select>
 			<span class="help-block" ng-show="addbusinessForm.keywords.$dirty && addbusinessForm.keywords.$invalid">
 				<span class="text-danger" ng-show="addbusinessForm.keywords.$error.maxlength">Sorry You are Exceeding the Limit</span>
 				<span ng-show="addbusinessForm.keywords.$error.required" class="text-danger">Short keywords of company is required.</span>
@@ -24,7 +26,7 @@
 	</div>
 </div>  
 <div class="form-group">
-	<label for="description" class="col-sm-3 control-label">Description<br><small>(Visible in Small Business search)</small></label>
+	<label for="description" class="col-sm-3 control-label">Description</label>
 	<div class="col-sm-9">
 		<textarea type="text" class="form-control" id="description" name="description" ng-model="addbusiness.seo.description" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Description of company" required>
 		</textarea>
