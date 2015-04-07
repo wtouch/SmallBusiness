@@ -7,6 +7,7 @@ require $config['root_path'].'/server-api/modules/db/dbHelper.php';
 Slim\Slim::registerAutoloader();
 Twig_Autoloader::register();
 $app = new Slim\Slim();
+$db = new dbHelper;
 
 $app->get('/', function() use($app, $config) {
 	

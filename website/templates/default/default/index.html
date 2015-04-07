@@ -12,9 +12,24 @@
 			<script src="{{ path }}js/script.js"></script>
             <title>{% block title %}{% endblock %}</title>
 			<style>
-				h1,h2,h3,h4{
-					color: {{template.template_params.color}};
+				h1,h2,h4{
+					color: {{template.template_params.dark_color}};
 				}
+				p{
+					color:{{template.template_params.background_color_dark}};
+				}
+				.panel-default h3{
+					color: {{template.template_params.color}};
+					font-family :{{template.template_params.heading_font}};
+				}
+				.panel-default
+				{
+					background-color: {{template.template_params.background_color_light}};
+				}
+				.panel-default p{
+					color:{{template.template_params.background_color}};
+				}
+				
 			</style>
         {% endblock %}
     </head>
