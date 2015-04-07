@@ -12,12 +12,17 @@
 			<script src="{{ path }}js/script.js"></script>
             <title>{% block title %}{% endblock %}</title>
 			<style>
-				h1,h2,h3,h4{
+				h1,h2,h4{
+					color: {{template.template_params.dark_color}};
+				}
+				.panel-default
+				{
 					color: {{template.template_params.color}};
 				}
-				.panel-default{
-					background-color: {{template.template_params.background-color}};
+				p{
+					color:{{template.template_params.color}};
 				}
+				
 			</style>
         {% endblock %}
     </head>
@@ -30,6 +35,7 @@
 <div class="container">
 	{% block content %}{% endblock %}
 </div>
+<div class="container">{% include 'error.html' ignore missing %}</div>
 <footer class="navbar navbar-default navbar-fixed-bottom">
 	<div class="container text-center">
 		{% block footer %}

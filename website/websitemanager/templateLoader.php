@@ -9,12 +9,12 @@
 			$this->tmplConfig['host'] = "http://".$_SERVER['HTTP_HOST'];
 			$this->tmplConfig['uri'] = $_SERVER['REQUEST_URI'];
 			$this->tmplConfig['root_path'] = $_SERVER['DOCUMENT_ROOT'];
-			$this->tmplConfig['template_root_path'] = $this->tmplConfig['root_path'].DIRECTORY_SEPARATOR ."website".DIRECTORY_SEPARATOR ."templates";
-			$this->tmplConfig['template_host_path'] = $this->tmplConfig['host'].DIRECTORY_SEPARATOR ."website".DIRECTORY_SEPARATOR ."templates";
+			$this->tmplConfig['template_root_path'] = $this->tmplConfig['root_path']."/" ."website"."/" ."templates";
+			$this->tmplConfig['template_host_path'] = $this->tmplConfig['host']."/" ."website"."/" ."templates";
 			$this->tmplConfig['template_category'] = "default";
 			$this->tmplConfig['template_folder'] = "default";
-			$this->tmplConfig['template_root_path_folder'] = $this->tmplConfig['template_root_path'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_category'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_folder'];
-			$this->tmplConfig['template_host_path_folder'] = $this->tmplConfig['template_host_path'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_category'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_folder'];
+			$this->tmplConfig['template_root_path_folder'] = $this->tmplConfig['template_root_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
+			$this->tmplConfig['template_host_path_folder'] = $this->tmplConfig['template_host_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
 			$loader = new Twig_Loader_Filesystem($this->tmplConfig['template_root_path_folder']);
 			// initialize Twig environment
 			$this->twig = new Twig_Environment($loader);
@@ -23,8 +23,8 @@
 			foreach($property as $key => $value){
 				$this->tmplConfig[$key] = $value;
 			}
-			$this->tmplConfig['template_root_path_folder'] = $this->tmplConfig['template_root_path'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_category'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_folder'];
-			$this->tmplConfig['template_host_path_folder'] = $this->tmplConfig['template_host_path'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_category'].DIRECTORY_SEPARATOR .$this->tmplConfig['template_folder'];
+			$this->tmplConfig['template_root_path_folder'] = $this->tmplConfig['template_root_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
+			$this->tmplConfig['template_host_path_folder'] = $this->tmplConfig['template_host_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
 			$loader = new Twig_Loader_Filesystem($this->tmplConfig['template_root_path_folder']);
 			// initialize Twig environment
 			$this->twig = new Twig_Environment($loader);
@@ -66,7 +66,7 @@
 			if(isset($data['featured_products'])) $response['featured_products'] = $data['featured_products'];
 			$response['path'] = $this->tmplConfig['template_host_path_folder']."/";
 			//print_r($response['template']);
-			print_r($data);
+			print_r($response['template']['template_params']['dark_color']);
 			//print_r($response['data']);
 			return $response;
 		}
