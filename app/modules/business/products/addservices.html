@@ -2,8 +2,8 @@
 	<div class="col-sm-12">
 	<div class="bottomspace">
 		<div class="product">
-			<h3 ng-if="!editServiceForm" class="col-sm-offset-2 col-sm-9">Add New Services</h3>
-			<h3 ng-if="editServiceForm" class="col-sm-offset-2 col-sm-9">Edit Service</h3>
+			<h3 ng-if="!editServForm" class="col-sm-offset-2 col-sm-9">Add New Services</h3>
+			<h3 ng-if="editServForm" class="col-sm-offset-2 col-sm-9">Edit Service</h3>
 			<form class="form-horizontal" role="form" name="addserviceForm" ng-submit="addserviceForm.$valid" novalidate="novalidate">
 				<div class="form-group">
 					<label for="product_service_name" class="col-sm-2 control-label">Service Name </label>
@@ -15,22 +15,19 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="servicelogo" class="col-sm-2 control-label">Select Image </label>
+					<label for="productImages" class="col-sm-2 control-label">Select Image </label>
 					<div class="col-sm-9">
-					<input type="file" id="serviceImages" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="serviceImages">
-					<!-- This will show thumbnails & progress of images -->
-					<file-preview url="serviceImages"></file-preview>
-					<!-- This button will show if file/s selected -->
-					<button ng-show="serviceImages" ng-click="upload(serviceImages,path,userinfo,addservice.product_image)" type="button">Upload</button>
+					<input type="file" id="productImages" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="upload($files,path,userinfo,addservice.product_image)" ng-model="productImages">
+					
 					<!-- This hidden input will store image path in array after successful uploading -->
 					<input type="hidden" ng-model="addservice.product_image">
 					</div>
 				</div>
-				<div class="form-group" ng-if="editServiceForm">
-				 <label class="col-md-2"><img width=150px" ng-model="addservice.imgkey" ng-src="{{appConfig.assetPath + addservice.product_image[addservice.imgkey].file_relative_path}}" ng-init="addservice.imgkey = 0"/></label>
-				 <div class="col-md-9">
+				<div class="form-group">
+				 <div class="col-sm-9 col-sm-offset-2">
 				<span class="thumbs" ng-repeat="(key, value) in addservice.product_image">
-					<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="addservice.imgkey = key"/>
+					<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="addservice.imgkey = key; "/>
+					<span class="close" ng-click="removeImg(key, addservice.product_image)">X</span>
 				</span>
 				</div>
 				</div>
@@ -58,10 +55,10 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-9">
-						<button ng-if="!editServiceForm" type="submit" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-click="postData(addservice)" title="submit">Submit
+						<button ng-if="!editServForm" type="submit" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-click="postData(addservice)" title="submit">Submit
 						</button>
 						
-						<button ng-if="editServiceForm" type="button" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-change="updateData(addservice,addservice.id)" title="submit">
+						<button ng-if="editServForm" type="button" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-change="updateData(addservice,addservice.id)" title="submit">
 						Edit Service</button>
 					</div>
 				</div>
