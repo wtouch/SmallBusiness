@@ -65,19 +65,146 @@ define(['app'], function (app) {
 						$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
 					}
 				}) 
-			}	
+			}
 			
-			/* //post data
-			$scope.postData=function(config){
-				dataService.put("put/website/"+$scope.website_id,{config : config})
-				.then(function(response) { 
-					if(response.status == 'success'){
-						response.message
-					}
-					console.log(response.message);
-				});
-			};  */
+			
+		// Google Map
 		
+		$scope.map = {
+			"center": {
+				"latitude": 18.520430299999997,
+				"longitude": 73.8567437
+			},
+			"zoom": 5
+		}; //TODO:  set location based on users current gps location 
+		 $scope.marker = {
+			id: 0,
+			coords: {
+				latitude: 18.520430299999997,
+				longitude: 73.8567437
+			},
+			options: { draggable: true },
+			events: {
+				dragend: function (marker, eventName, args) {
+					$scope.config.google_map.latitude = $scope.marker.coords.latitude;
+					$scope.config.google_map.longitude = $scope.marker.coords.longitude;
+					console.log($scope.config.google_map.latitude);
+					console.log($scope.marker.coords);
+					$scope.marker.options = {
+						draggable: true,
+						labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+						labelAnchor: "100 0",
+						labelClass: "marker-labels"
+					};
+				}
+			}
+		};
+		var events = {
+			places_changed: function (searchBox) {
+				var place = searchBox.getPlaces();
+				if (!place || place == 'undefined' || place.length == 0) {
+					console.log('no place data :(');
+					return;
+				}
+
+				$scope.map = {
+					"center": {
+						"latitude": place[0].geometry.location.lat(),
+						"longitude": place[0].geometry.location.lng()
+					},
+					"zoom": 18
+				};
+
+				$scope.marker = {
+					id: 0,
+					coords: {
+						latitude: place[0].geometry.location.lat(),
+						longitude: place[0].geometry.location.lng()
+					},
+					options: { draggable: true },
+					events: {
+						dragend: function (marker, eventName, args) {
+							$scope.config.google_map.latitude = $scope.marker.coords.latitude;
+							$scope.config.google_map.longitude = $scope.marker.coords.longitude;
+							console.log($scope.config.google_map.latitude);
+							console.log($scope.marker.coords);
+							$scope.marker.options = {
+								draggable: true,
+								labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+								labelAnchor: "100 0",
+								labelClass: "marker-labels"
+							};
+						}
+					}
+				};
+			}
+		};
+
+		$scope.searchbox = { template: 'modules/websites/websettings/searchbox.html', events: events };
+
+		$scope.showPosition = function (position) {
+				$scope.config.google_map.latitude = position.coords.latitude;
+				$scope.config.google_map.longitude = position.coords.longitude;
+				$scope.map = {
+					"center": {
+						"latitude": position.coords.latitude,
+						"longitude": position.coords.longitude
+					},
+					"zoom": 10
+				};
+				$scope.marker = {
+					"id": 0,
+					"coords": {
+						"latitude": position.coords.latitude,
+						'longitude': position.coords.longitude
+					},
+					'options': { draggable: true },
+					events: {
+						dragend: function (marker, eventName, args) {
+							$scope.config.google_map.latitude = $scope.marker.coords.latitude;
+							$scope.config.google_map.longitude = $scope.marker.coords.longitude;
+							console.log($scope.marker.coords);
+							$scope.marker.options = {
+								draggable: true,
+								labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+								labelAnchor: "100 0",
+								labelClass: "marker-labels"
+							};
+						}
+					}
+				};   
+		}
+ 
+		$scope.showError = function (error) {
+			switch (error.code) {
+				case error.PERMISSION_DENIED:
+					$scope.error = "User denied the request for Geolocation."
+					break;
+				case error.POSITION_UNAVAILABLE:
+					$scope.error = "Location information is unavailable."
+					break;
+				case error.TIMEOUT:
+					$scope.error = "The request to get user location timed out."
+					break;
+				case error.UNKNOWN_ERROR:
+					$scope.error = "An unknown error occurred."
+					break;
+			}
+			$scope.$apply();
+		}
+
+		$scope.getLocation = function () {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
+			}
+			else {
+				$scope.error = "Geolocation is not supported by this browser.";
+			}
+		}
+
+		$scope.getLocation();
+			
+			
     };
 	//Inject controller's dependencies
 	websettingsController.$inject = injectParams;
