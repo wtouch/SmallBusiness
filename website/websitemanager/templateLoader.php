@@ -60,66 +60,25 @@
 			$response['title'] = $route;
 			$response['uri'] = $this->tmplConfig['uri'];
 			$response['routes'] = $routes['data'];
-			$response['data'] = $data['business'];
+			$response['data'] = (isset($data['business'])) ? $data['business'] : $data;
 			$response['template'] = $template['data'];
 			if(isset($data['featured_services'])) $response['featured_services'] = $data['featured_services'];
 			if(isset($data['featured_products'])) $response['featured_products'] = $data['featured_products'];
 			$response['path'] = $this->tmplConfig['template_host_path_folder']."/";
 			//print_r($response['template']);
-			//print_r($data);
+			print_r($data);
 			//print_r($response['data']);
 			return $response;
 		}
 		function displayTemplate($route){
 			$response = $this->getData($route);
 			$template = $this->getTemplate($route);
-			return $template->display($response);
+			if($response['data']['status'] == 'error'){
+				
+			}else{
+				return $template->display($response);
+			}
 		}
 	}
-	
-	
-/*	try{	
-			}catch(Exception $e){
-				$response["status"] = "error";
-				$response["message"] = 'Error: ' .$e->getMessage();
-				$response["data"] = null;
-				echo json_encode($response);
-			}
 
-			$web = new websiteManager;
-				$webConfig = $web->getConfig();
-				$webData = $web->getData();
-				$webRoutes = $web->getRoutes();
-				$webTemplate = $web->getTemplate();
-				
-				
-				if($webConfig['status'] == 'success'){
-					$response['webConfig'] = $webConfig['data'];
-				}else{
-					throw new Exception($webConfig['message']);
-				}
-				if($webData['status'] == 'success'){
-					$response['webData'] = $webData['data'];
-				}else{
-					throw new Exception($webData['message']);
-				}
-				if($webRoutes['status'] == 'success'){
-					$response['webRoutes'] = $webRoutes['data'];
-				}else{
-					throw new Exception($webRoutes['message']);
-				}
-				if($webTemplate['status'] == 'success'){
-					$response['webTemplate'] = $webTemplate['data'];
-				}else{
-					throw new Exception($webTemplate['message']);
-				} */
-				
-				// this is for angular template
-				/* if (file_exists($template['template_folder']) && is_dir($template['template_folder'])){
-					$template_dir = $template['template_folder'];
-					include $config['template_path']."/".$template['template_folder']."/index.php";
-				}else{
-					$template_dir = "default";
-					include $config['template_path']."default/index.html";
-				} */
 ?>

@@ -21,6 +21,9 @@ class websiteManager{
 				$config['website_config'] = json_decode($dbresult['config']);
 				$config['user_id'] = $dbresult['user_id'];
 				$config['expired'] = $dbresult['expired'];
+				if($dbresult['expired'] == 1){
+					throw new Exception('Website is expired please renew soon!');
+				}
 			}else{
 				throw new Exception('Website not registered!');
 			}
@@ -48,9 +51,9 @@ class websiteManager{
 			
 			$table = "my_template";
 			(property_exists ( $config['website_config'] , 'template_id')) ? $template_id = $config['website_config']->template_id : "";
-			//print_r($template_id);
+			
 			(isset($template_id)) ? $where["id"] = $template_id : $template_id = 0;
-			//print_r($where["id"]);
+			
 			if($template_id == 0 || !property_exists ( $config['website_config'] , 'template_id')){
 				$templateDetails["template_name"] = "default";
 				$templateDetails["template_folder"] = "default";
@@ -76,7 +79,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = 'Error: ' .$e->getMessage();
             $response["data"] = null;
-			print_r($response);
+			//print_r($response);
 		}
 		return $response;
 	}
@@ -213,9 +216,8 @@ class websiteManager{
 		if($business['status'] == 'success'){
 			return $data;
 		}else{
-			return $data['message'];
+			return $business;
 		}
-		
 	}
 	
 	function getRoutes(){
