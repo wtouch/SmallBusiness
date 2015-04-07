@@ -1,6 +1,7 @@
 {% spaceless %}
 <!DOCTYPE html>
 <html ng-app="myApp">
+
     <head>
         {% block head %}
 			<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
@@ -10,26 +11,29 @@
 			<script src="{{ path }}js/angular.min.js"></script>
 			<script src="{{ path }}js/angular-route.min.js"></script>
 			<script src="{{ path }}js/script.js"></script>
-            <title>{% block title %}{% endblock %}</title>
+            <title>{% block title %}{{title}}{% endblock %}</title>
 			<style>
-				h1,h2,h4{
+				h1,h2,h3,h4{
 					color: {{template.template_params.dark_color}};
 				}
-				p{
-					color:{{template.template_params.background_color_dark}};
-				}
-				.panel-default h3{
-					color: {{template.template_params.color}};
-					font-family :{{template.template_params.heading_font}};
-				}
-				.panel-default
-				{
+				.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+					color: {{template.template_params.dark_color}};
 					background-color: {{template.template_params.background_color_light}};
 				}
-				.panel-default p{
-					color:{{template.template_params.background_color}};
+				navbar{
+					background-color: {{template.template_params.background_color_dark}};
 				}
-				
+				.panel-default {
+					border-color: {{template.template_params.background_color_dark}};
+				}
+				.panel-default>.panel-heading {
+					color: {{template.template_params.dark_color}};
+					background-color: {{template.template_params.background_color_light}};
+					border-color: {{template.template_params.background_color_dark}};
+				}
+				.thumbnail {
+					border-color: {{template.template_params.background_color_dark}};
+				}
 			</style>
         {% endblock %}
     </head>
