@@ -1,7 +1,6 @@
 {% spaceless %}
 <!DOCTYPE html>
 <html ng-app="myApp">
-
     <head>
         {% block head %}
 			<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
@@ -16,14 +15,15 @@
 				h1,h2,h3,h4{
 					color: {{template.template_params.dark_color}};
 				}
-				.navbar-default {
+				.navbar-default{
 					background-color: {{template.template_params.background_color_dark}};
+					border:none;
 				}
-				.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
+				.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
 					color: {{template.template_params.dark_color}};
 					background-color: {{template.template_params.background_color_light}};
 				}
-				.navbar-default .navbar-nav>.active>a:hover{
+				.navbar-default .navbar-nav>li>a, .navbar-fixed-bottom, .navbar-default .navbar-brand {
 					color: {{template.template_params.light_color}};
 				}
 				navbar{

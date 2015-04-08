@@ -3,11 +3,23 @@
 {% block title %}{{title}}{% endblock %}
 {% block head %}
     {{ parent() }}
+	<script src="http://maps.googleapis.com/maps/api/js">
+	</script>
+	<script>
+		function initialize() {
+			var mapProp = {
+				center:new google.maps.LatLng(51.508742,-0.120850),
+				zoom:5,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
 {% endblock %}
 {% block content %}
     <h1>{{ data.owner_name }}</h1>
-    <p class="important">
-        <div class="row">
+	<div class="row">
 		<div class="col-sm-6">
 			<table class="table table-bordered">
 				<tr>
@@ -120,5 +132,8 @@
 			</div>
 		</div>
 	</div>
-    </p>
+    <div class="row">
+		<div class="col-sm-12" id="googleMap" style="height:380px;"></div>
+	</div>
+	
 {% endblock %}
