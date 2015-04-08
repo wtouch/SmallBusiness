@@ -197,6 +197,8 @@ class websiteManager{
 	
 	function getTemplateData($routes){
 		try{
+			$config = $this->getConfig();
+			$config = $config['data'];
 			$route = explode("/", $routes);
 			if($route[0] == 'product' || $route[0] == 'products' || $route[0] == 'service' || $route[0] == 'services'){
 				$business = $this->getProductData($routes);
@@ -223,6 +225,8 @@ class websiteManager{
 				}
 				$data['business'] = $business['data'];
 			}
+			
+			$data['website'] = json_decode(json_encode($config['website_config']),true);
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
             $response["data"] = $data;

@@ -6,6 +6,7 @@ define(['app'], function (app) {
     // This is controller for this view
 	var websettingsController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
 	// all $scope object goes here
+		$scope.permission = $rootScope.userDetails.permission.website_module;
 		$scope.userDetails = {user_id : $rootScope.userDetails.id};
 		$scope.website_id=$routeParams.id;
 		$scope.currentDate = dataService.currentDate;

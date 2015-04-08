@@ -31,74 +31,64 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Group Permission/Access</label>
 				<div class="col-sm-9">
-					<div class="row">
-						<accordion close-others="true">
-							<accordion-group is-open="true">
-								<accordion-heading>User Module</accordion-heading>
-								<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.user_module">
-									<label>
-										<input type="checkbox" ng-model="usersgroup.group_permission.user_module[key]" ng-value="value">{{value}}
-									</label>
-								</div>
-							</accordion-group>
-							<accordion-group>
-								<accordion-heading>Template Module</accordion-heading>
-								<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.template_module">
-									<label>
-										<input type="checkbox" ng-model="usersgroup.group_permission.template_module[key]" ng-value="value">{{value}}
-									</label>
-								</div>
-							</accordion-group>
-							<accordion-group>
-								<accordion-heading>Business Module</accordion-heading>
-								<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.business_module">
-									<label>
-										<input type="checkbox" ng-model="usersgroup.group_permission.business_module[key]" ng-value="value">{{value}}
-									</label>
-								</div>
-							</accordion-group>
-							<accordion-group>
-								<accordion-heading>Website Module</accordion-heading>
-								<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.website_module">
-									<label>
-										<input type="checkbox" ng-model="usersgroup.group_permission.website_module[key]" ng-value="value">{{value}}
-									</label>
-								</div>
-							</accordion-group>
-							<accordion-group>
-								<accordion-heading>Enquiry Module</accordion-heading>
-								<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.enquiry_module">
-									<label>
-										<input type="checkbox" ng-model="usersgroup.group_permission.enquiry_module[key]" ng-value="value">{{value}}
-									</label>
-								</div>
-							</accordion-group>
-							<accordion-group>
-								<accordion-heading>Dashboard</accordion-heading>
-								<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.dashboard">
-									<label>
-										<input type="checkbox" ng-model="usersgroup.group_permission.dashboard[key]" ng-value="value">{{value}}
-									</label>
-								</div>
-							</accordion-group>
-							<accordion-group>
-								<accordion-heading>Product Module</accordion-heading>
-								<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.product_module">
-									<label>
-										<input type="checkbox" ng-model="usersgroup.group_permission.product_module[key]" ng-value="value">{{value}}
-									</label>
-								</div>
-							</accordion-group>
-							<accordion-group>
-								<accordion-heading>group_access</accordion-heading>
-								<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.group_access">
-									<label>
-										<input type="checkbox" ng-model="usersgroup.group_permission.group_access[key]" ng-value="value">{{value}}
-									</label>
-								</div>
-							</accordion-group>
-						</accordion>
-					</div>
+					<accordion close-others="true">
+						<accordion-group heading="User Module">
+							<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.user_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.user_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</accordion-group>
+						<accordion-group heading="Template Module">
+							<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.template_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.template_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</accordion-group>
+						<accordion-group heading="Business Module">
+							<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.business_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.business_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</accordion-group>
+						<accordion-group heading="Website Module">
+							<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.website_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.website_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</accordion-group>
+						<accordion-group heading="Enquiry Module">
+							<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.enquiry_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.enquiry_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</accordion-group>
+						<accordion-group heading="Dashboard">
+							<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.dashboard">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.dashboard[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</accordion-group>
+						<accordion-group heading="Product Module">
+							<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.product_module">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.product_module[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</accordion-group>
+						<accordion-group heading="group_access">
+							<div class="checkbox col-sm-3" ng-repeat="(key, value) in manage_user.group_access">
+								<label>
+									<input type="checkbox" ng-model="usersgroup.group_permission.group_access[key]" ng-value="value">{{value}}
+								</label>
+							</div>
+						</accordion-group>
+					</accordion>
 				</div>
 			</div>
 			<div class="form-group">
