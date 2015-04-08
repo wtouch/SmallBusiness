@@ -80,7 +80,7 @@ define(['app'], function (app) {
 		
 		$scope.addbusiness={
 			created_date : $scope.currentDate,
-			contact_profile : {contact_photo : {}},
+			contact_profile : {contact_photo : {},google_map :{}},
 			business_logo  : {},
 		};
 		$scope.reset = function() {
@@ -134,6 +134,96 @@ define(['app'], function (app) {
 			});
 		}
 		
+		 //code for get data from business
+		
+		dataService.get("getsingle/business/"+$routeParams.id)
+		.then(function(response) {
+			console.log(response);
+				if(response.status == 'success'){
+					$scope.addbusiness = dataService.parse(response.data);
+				}
+		});
+		 
+		
+		/* // Google Map
+		$scope.initGoogleMap = function(latitude,longitude, zoom){
+			$scope.addbusiness.contact_profile.google_map.latitude = latitude;
+			$scope.addbusiness.contact_profile.google_map.longitude = longitude;
+			$scope.map = {
+				"center": {
+					"latitude": latitude,
+					"longitude": longitude
+				},
+				"zoom": zoom
+			}; //TODO:  set location based on users current gps location 
+			$scope.marker = {
+				id: 0,
+				coords: {
+					latitude: latitude,
+					longitude: longitude
+				},
+				options: { draggable: true },
+				events: {
+					dragend: function (marker, eventName, args) {
+						$scope.addbusiness.contact_profile.google_map.latitude = $scope.marker.coords.latitude;
+						$scope.addbusiness.contact_profile.google_map.longitude = $scope.marker.coords.longitude;
+						console.log($scope.addbusiness.contact_profile.google_map);
+						$scope.marker.options = {
+							draggable: true,
+							labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+							labelAnchor: "100 0",
+							labelClass: "marker-labels"
+						};
+					}
+				}
+			};
+		}
+		var events = {
+			places_changed: function (searchBox) {
+				var place = searchBox.getPlaces();
+				if (!place || place == 'undefined' || place.length == 0) {
+					console.log('no place data :(');
+					return;
+				}
+				$scope.initGoogleMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), 15);
+			}
+		};
+		$scope.searchbox = { template: 'modules/websites/websettings/searchbox.html', events: events };
+		$scope.showPosition = function (position) {
+			$scope.initGoogleMap(position.coords.latitude, position.coords.longitude, 5);
+			console.log(position.coords.latitude,  position.coords.longitude)
+			$scope.$apply();
+		}
+		$scope.showError = function (error) {
+			switch (error.code) {
+				case error.PERMISSION_DENIED:
+					$scope.error = "User denied the request for Geolocation."
+					break;
+				case error.POSITION_UNAVAILABLE:
+					$scope.error = "Location information is unavailable."
+					break;
+				case error.TIMEOUT:
+					$scope.error = "The request to get user location timed out."
+					break;
+				case error.UNKNOWN_ERROR:
+					$scope.error = "An unknown error occurred."
+					break;
+			}
+			console.log($scope.error);
+			$scope.$apply();
+		}
+		$scope.getLocation = function () {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
+			}
+			else {
+				$scope.error = "Geolocation is not supported by this browser.";
+			}
+		}
+		
+			$scope.getLocation(); */
+		
+		
 		//get method for get data from business
 		var addbusiness = function(){
 			console.log(addbusiness);
@@ -166,18 +256,19 @@ define(['app'], function (app) {
 				$scope.reset();
 			}
 		}
+		
 		$scope.updateData = function(addbusiness) {
-				dataService.put("put/business/"+$scope.bizId,addbusiness)
-				.then(function(response) {
-					if(response.status == "success"){
-						$scope.reset();
-						setTimeout(function(){
-							$location.path("#/dashboard/templates/mytemplates");
-						},500);
-					}
-					$scope.alerts.push({type: response.status, msg: response.message});
-				});
-			}
+			dataService.put("put/business/"+$scope.bizId,addbusiness)
+			.then(function(response) {
+				if(response.status == "success"){
+					$scope.reset();
+					setTimeout(function(){
+						$location.path("#/dashboard/templates/mytemplates");
+					},500);
+				}
+				$scope.alerts.push({type: response.status, msg: response.message});
+			});
+		}
     };
 	
 	// Inject controller's dependencies

@@ -29,7 +29,6 @@ define(['app'], function (app) {
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
-
 		
 		
 		//all $scope object goes here

@@ -69,11 +69,12 @@
 				$responseDt['routes'] = $routes['data'];
 				$responseDt['data'] = $data['business'];
 				$responseDt['template'] = $template['data'];
+				$responseDt['google_map'] = $data['website']['google_map'];
 				if(isset($data['featured_services'])) $responseDt['featured_services'] = $data['featured_services'];
 				if(isset($data['featured_products'])) $responseDt['featured_products'] = $data['featured_products'];
 				$responseDt['path'] = $this->tmplConfig['template_host_path_folder']."/";
 				
-				print_r($responseDt['template']['template_params']['dark_color']);
+				//print_r($responseDt['template']);
 				$response["status"] = "success";
 				$response["message"] = "Data Selected!";
 				$response["data"] = $responseDt;
