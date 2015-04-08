@@ -14,6 +14,15 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
+		$scope.reset = function() {
+			$scope.addbusiness = {
+				created_date : $scope.currentDate,
+				contact_profile : {contact_photo : []},
+				business_logo  : [],
+			};
+		};
+		$scope.reset();
+		$scope.readOnly = false;
 		/*****************************************************************************
 		datepicker {sonali}*/
 		$scope.today = function(){
@@ -43,10 +52,52 @@ define(['app'], function (app) {
 		/**********************************************************************
 		code for accessing json data of business	{Sonali} */
 		$scope.biz = {};
-		$scope.biz = dataService.config.business;
-		
-		//end of code		
-		
+		dataService.config('config', {config_name : "business"}).then(function(response){
+			$scope.biz = response.config_data;
+			console.log($scope.biz); 
+		});
+		$scope.getData = function(location){
+			$scope.readOnly = true;
+			$scope.addbusiness.location = location.location;
+			$scope.addbusiness.city = location.city;
+			$scope.addbusiness.state = location.state;
+			$scope.addbusiness.country = location.country;
+			$scope.addbusiness.area = location.area;
+			$scope.addbusiness.pincode = location.pincode;
+		}
+		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+			var locationParams = {search : {}, groupBy : {}}
+			locationParams.search[searchColumn] = searchValue;
+			locationParams.groupBy[searchColumn] = searchValue;
+			return dataService.config('locations', locationParams).then(function(response){
+				return response;
+			});
+		}
+		$scope.getCategory = function(searchColumn, searchValue){
+			var locationParams = {search : {}, groupBy : {}}
+			locationParams.groupBy[searchColumn] = searchColumn;
+			dataService.config('keywords',locationParams).then(function(response){
+				$scope.businessCategories = response;
+			});
+		} 
+		$scope.getTypes = function(filterColumn, searchValue){
+			var locationParams = {filter : {}, groupBy : {}}
+			locationParams.filter[filterColumn] = searchValue;
+			locationParams.groupBy['type'] = "type";
+			dataService.config('keywords',locationParams).then(function(response){
+				$scope.businessTypes = response;
+			});
+		}
+		$scope.getKeywords = function(filterColumn, searchValue){
+			var locationParams = {filter : {}, groupBy : {}}
+			locationParams.filter[filterColumn] = searchValue;
+			locationParams.groupBy['keyword'] = "keyword";
+			dataService.config('keywords',locationParams).then(function(response){
+				$scope.businessKyewords = response;
+				console.log($scope.businessKyewords);
+			});
+		}
+		$scope.getKeywords('type', "Philosophy Poetry");
 		/**********************************************************************
 		code for accessing json data of country, State & City {Sonali}*/
 		$scope.contries = dataService.config.country;
@@ -78,18 +129,7 @@ define(['app'], function (app) {
 			$scope.selectUsers = response.data;
 		});	
 		
-		$scope.addbusiness={
-			created_date : $scope.currentDate,
-			contact_profile : {contact_photo : {},google_map :{}},
-			business_logo  : {},
-		};
-		$scope.reset = function() {
-			$scope.addbusiness = {
-				created_date : $scope.currentDate,
-				contact_profile : {contact_photo : []},
-				business_logo  : [],
-			};
-		};
+		
 		$scope.path = "business/"; // path to store images on server
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
 		

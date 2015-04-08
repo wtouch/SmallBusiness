@@ -51,9 +51,11 @@
 <div class="form-group">
 	<label for="category" class="col-sm-3 control-label" name="category" >Category</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="category" id="category"  ng-model="addbusiness.category" required ng-options="item as item for item in biz.category">		
+		 <select class="form-control" name="category" id="category"  ng-model="addbusiness.category" ng-change="getTypes('category',addbusiness.category)" required ng-options="item.category as item.category for item in businessCategories">		
 			<option value="">Select Category</option>
 		</select>
+		<!-- <input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="addbusiness.location" typeahead-on-select="getData($item)" placeholder="Locations loaded via $http" typeahead="address.category for address in getTypeaheadData('keywords','category', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
+		<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i> -->
 		<span class="help-block" ng-show="addbusinessForm.category.$dirty && addbusinessForm.category.$invalid">
 		<span ng-show="addbusinessForm.category.$error.required" class="text-danger">Category Type is required.</span>
 		</span>				
@@ -62,7 +64,7 @@
 <div class="form-group">
 	<label for="type" class="col-sm-3 control-label" name="type" >Type</label>
 	<div class="col-sm-9">
-		<select class="form-control" name="type" id="type"  ng-model="addbusiness.type" required ng-options="item as item for item in biz.type">		
+		<select class="form-control" name="type" id="type"  ng-model="addbusiness.type" required ng-options="item.type as item.type for item in businessTypes">
 			<option value="">Select Type</option>
 		</select>
 		<span class="help-block" ng-show="addbusinessForm.type.$dirty && addbusinessForm.type.$invalid">

@@ -267,11 +267,8 @@ define(['app'], function (app) {
 				}
 				return newObj;
 			}
-			obj.config = (sessionStorage.config) ? JSON.parse(sessionStorage.config) : null ;
-				$http.get('js/config.json').success(function(response){
-					sessionStorage.config =  JSON.stringify(response);
-					obj.config = response;
-				});
+			
+				
 
 			
 			obj.rememberPass = function(remb){
@@ -318,6 +315,22 @@ define(['app'], function (app) {
 					obj.userDetails = (angular.isObject(localStorage.userDetails)) ? localStorage.userDetails : JSON.parse(localStorage.userDetails);
 				}
 			}
+			obj.config = function(table, params){
+				params.table = table;
+				return $http({
+					url: serviceBase +'getmultiple/config/1/1',
+					method: "GET",
+					params: params
+				}).then(function (results) {
+					if(results.data.status == 'success'){
+						return obj.parse(results.data.data);
+					}else{
+						return obj.parse(results.data.data);
+					}
+					
+					
+				});
+			} ;
 			obj.get = function (q, params) {
 				$rootScope.loading = true;
 				

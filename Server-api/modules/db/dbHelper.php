@@ -3,6 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/server-api/modules/db/config.php'; // D
 class dbHelper {
     private $db;
     private $err;
+	private $groupBy;
 	// for mail configuration
 	private $mailHost;
 	private $mailUsername;
@@ -13,6 +14,7 @@ class dbHelper {
         $dsn = 'mysql:host='.DB_HOST.';dbname='.DB_NAME;
         try {
             $this->db = new PDO($dsn, DB_USERNAME, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+			$this->groupBy = null;
         } catch (PDOException $e) {
             $response["status"] = "error";
             $response["message"] = 'Connection failed: ' . $e->getMessage();
@@ -83,7 +85,25 @@ class dbHelper {
         }
 		return $response;
 	}
-	
+	function setGroupBy($groupByArray){
+		if(count($groupByArray) >= 1){
+			$groupByString = " GROUP BY ";
+			foreach($groupByArray as $key => $value){
+				$groupByString .= $key.",";
+			}
+			$this->groupBy = trim($groupByString, ",");
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function getGroupBy(){
+		if($this->groupBy != null || $this->groupBy != ""){
+			return $this->groupBy;
+		}else{
+			return;
+		}
+	}
 	function selectJoin($table,$where, $limit=null, $likeFilter=null, $innerJoin = null, $selectInnerJoinCols = null, $leftJoin = null, $selectLeftJoinCols = null){
 		try{
             $a = array();
@@ -149,7 +169,7 @@ class dbHelper {
 			$finalQueryString = $finalSelectQuery." FROM ".$table." ".$innerJoinQuery.$leftJoinQuery;
 			//echo $finalQueryString;
 			
-            $stmt = $this->db->prepare($finalQueryString." where 1=1 ". $w ." ".$l." ".$dbLimit);
+            $stmt = $this->db->prepare($finalQueryString." where 1=1 ". $w ." ".$l." ".$dbLimit.$this->getGroupBy());
             $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
@@ -273,7 +293,8 @@ class dbHelper {
 				}
 			}
 			
-            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w . " ". $l. " ".$dbLimit);
+            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w . " ". $l." ".$this->getGroupBy(). " ".$dbLimit);
+			//echo "select * from ".$table." where 1=1 ". $w . " ". $l. " ".$dbLimit;
             $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			

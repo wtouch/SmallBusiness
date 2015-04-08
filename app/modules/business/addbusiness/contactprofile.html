@@ -42,20 +42,26 @@
 						</div>
 					</div>	
 					<!-- add combo boxes for city, state, country & add text input for zip code & validation with number max-char 6 -->		
+					<script type="text/ng-template" id="customTemplate.html">
+					  <a>
+						  <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+						  <span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
+					  </a>
+					</script>
 					<div class="form-group">
 						<label for="location" class="col-sm-3 control-label">Location</label>
 						<div class="col-sm-9">
-							<input type="text" id="location" name="location" class="form-control" ng-model="addbusiness.location" placeholder="Enetr location">
-							<span class="help-block" ng-show="addbusinessForm.location.$dirty && addbusinessForm.location.$invalid">
-								<span ng-show="addbusinessForm.location.$error.pattern && (addbusinessForm.location.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
-								<span class="text-danger" ng-show="addbusinessForm.location.$error.minlength && (addbusinessForm.location.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
+<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="addbusiness.location" typeahead-on-select="getData($item)" placeholder="Locations loaded via $http" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
+<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i>
+							<span class="help-block" ng-show="addbusinessForm.location.$dirty && addbusinessForm.location.$invalid || addbusinessForm.location.$dirty && !addbusiness.location">
+								<span class="text-danger" ng-show="addbusinessForm.location.$dirty && (addbusinessForm.location.$error.required || !addbusiness.location)">Location required.</span>
 							</span>
 						</div>						
 					</div>
 					<div class="form-group">
 						<label for="area" class="col-sm-3 control-label">Area</label>
 						<div class="col-sm-9">
-							<input type="text" id="area" name="area" class="form-control" ng-model="addbusiness.area" placeholder="Enetr area">
+							<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="addbusiness.area" placeholder="Enetr area">
 							<span class="help-block" ng-show="addbusinessForm.area.$dirty && addbusinessForm.area.$invalid">
 								<span ng-show="addbusinessForm.area.$error.pattern && (addbusinessForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
 								<span class="text-danger" ng-show="addbusinessForm.area.$error.minlength && (addbusinessForm.area.$dirty || submitted)">Enter correct Code.</span>
@@ -65,37 +71,32 @@
 					<div class="form-group">
 						<label for="state" class="col-sm-3 control-label">State</label>
 						<div class="col-sm-4">
-							<select class="form-control" name="state" id="state"  ng-model="addbusiness.state" ng-change="getCities(addbusiness.state)" required ng-options="item.state_name as item.state_name for item in states">		
-								<option value="">Select State</option>
-							</select>
+						<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="addbusiness.state" placeholder="Enetr state">
 							<span class="help-block" ng-show="addbusinessForm.state.$dirty && addbusinessForm.state.$invalid">
 								<span ng-show="addbusinessForm.state.$error.required" class="text-danger">State is required.</span>
 							</span>				
 						</div>						
 						<div class="col-sm-offset-1 col-sm-4">
-							<select class="form-control" name="City" id="City"  ng-model="addbusiness.City" required ng-options="item.city_name as item.city_name for item in cities">		
-								<option value="">Select City</option>
-							</select>
-							<span class="help-block" ng-show="addbusinessForm.City.$dirty && addbusinessForm.City.$invalid">
-								<span ng-show="addbusinessForm.City.$error.required" class="text-danger">City is required.</span>
+<input type="text" required name="City" id="City" ng-model="addbusiness.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
+<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
+							<span class="help-block" ng-show="addbusinessForm.City.$dirty && addbusinessForm.City.$invalid || addbusinessForm.City.$dirty && !addbusiness.City">
+								<span ng-show="addbusinessForm.City.$error.required || addbusinessForm.City.$dirty && !addbusiness.city" class="text-danger">City is required.</span>
 							</span>				
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="Country" class="col-sm-3 control-label">Country</label>
 						<div class="col-sm-9">
-							<select class="form-control" name="Country" id="Country"  ng-model="addbusiness.Country" required ng-change="getState(addbusiness.Country)" ng-options="item.country_name as item.country_name for item in contries">		
-								<option value="">Select Country</option>
-							</select>							
-							<span class="help-block" ng-show="addbusinessForm.Country.$dirty && addbusinessForm.Country.$invalid">
-								<span ng-show="addbusinessForm.Country.$error.required" class="text-danger">Country is required.</span>
+<input type="text" required name="Country" id="Country" ng-model="addbusiness.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
+							<span class="help-block" ng-show="addbusinessForm.Country.$dirty && addbusinessForm.Country.$invalid || addbusinessForm.Country.$dirty && !addbusiness.Country">
+								<span ng-show="addbusinessForm.Country.$error.required || addbusinessForm.Country.$dirty && !addbusiness.Country" class="text-danger">Country is required.</span>
 							</span>				
 						</div>
 					</div>					
 					<div class="form-group">
 						<label for="pincode" class="col-sm-3 control-label">Pin Code</label>
 						<div class="col-sm-9">
-							<input type="text" id="pincode" name="pincode" class="form-control" ng-model="addbusiness.pincode" placeholder="Enetr Zip Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+							<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="addbusiness.pincode" placeholder="Enetr Zip Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
 							<span class="help-block" ng-show="addbusinessForm.pincode.$dirty && addbusinessForm.pincode.$invalid">
 								<span ng-show="addbusinessForm.pincode.$error.pattern && (addbusinessForm.pincode.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
 								<span class="text-danger" ng-show="addbusinessForm.pincode.$error.minlength && (addbusinessForm.pincode.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
