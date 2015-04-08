@@ -134,7 +134,7 @@ define(['app'], function (app) {
 			});
 		}
 		
-		// Google Map
+		/* // Google Map
 		$scope.initGoogleMap = function(latitude,longitude, zoom){
 			$scope.addbusiness.contact_profile.google_map.latitude = latitude;
 			$scope.addbusiness.contact_profile.google_map.longitude = longitude;
@@ -210,7 +210,7 @@ define(['app'], function (app) {
 			}
 		}
 		
-			$scope.getLocation();
+			$scope.getLocation(); */
 		
 		
 		//get method for get data from business
