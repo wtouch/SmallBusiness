@@ -46,7 +46,7 @@ class websiteManager{
 			if($config['status'] == 'success'){
 				$config = $config['data'];
 			}else{
-				throw new Exception("Website Configuration error: ".$config['message']);
+				throw new Exception($config['message']);
 			}
 			
 			$table = "my_template";
@@ -77,7 +77,7 @@ class websiteManager{
             $response["data"] = $templateDetails;
 		}catch(Exception $e){
 			$response["status"] = "error";
-            $response["message"] = 'Error: ' .$e->getMessage();
+            $response["message"] = $e->getMessage();
             $response["data"] = null;
 			//print_r($response);
 		}
@@ -91,7 +91,7 @@ class websiteManager{
 			if($config['status'] == 'success'){
 				$config = $config['data'];
 			}else{
-				throw new Exception("Website Configuration error: ".$config['message']);
+				throw new Exception($config['message']);
 			}
 			// get data for view from product table, business table, users table, template table
 			$where['id'] = $config['website_config']->business_id;
@@ -125,7 +125,7 @@ class websiteManager{
             $response["data"] = $bizData;
 		}catch(Exception $e){
 			$response["status"] = "error";
-            $response["message"] = 'Error: ' .$e->getMessage();
+            $response["message"] = $e->getMessage();
             $response["data"] = null;
 		}
 		return $response;
@@ -149,7 +149,7 @@ class websiteManager{
 			if($config['status'] == 'success'){
 				$config = $config['data'];
 			}else{
-				throw new Exception("Website Configuration error: ".$config['message']);
+				throw new Exception($config['message']);
 			}
 			// get data for view from product table, business table, users table, template table
 			if($id != null) $whereProd['id'] = $id;
@@ -189,35 +189,50 @@ class websiteManager{
             $response["data"] = $productData;
 		}catch(Exception $e){
 			$response["status"] = "error";
-            $response["message"] = 'Error: ' .$e->getMessage();
+            $response["message"] = $e->getMessage();
             $response["data"] = null;
 		}
 		return $response;
 	}
 	
 	function getTemplateData($routes){
-		$route = explode("/", $routes);
-		if($route[0] == 'product' || $route[0] == 'products' || $route[0] == 'service' || $route[0] == 'services'){
-			$business = $this->getProductData($routes);
-			$data['business'] = $business['data'];
-		}elseif($route[0] == 'home' || $route[0] == '') {
-			$featured_products = $this->getProductData('products', 1);
-			$featured_services = $this->getProductData('services', 1);
-			$business = $this->getBusinessData($routes);
-			$data['featured_products'] = $featured_products['data'];
-			$data['featured_services'] = $featured_services['data'];
-			$data['business'] = $business['data'];
-			//print_r($data);
-		}else{
-			$business = $this->getBusinessData($routes);
-			$data['business'] = $business['data'];
+		try{
+			$route = explode("/", $routes);
+			if($route[0] == 'product' || $route[0] == 'products' || $route[0] == 'service' || $route[0] == 'services'){
+				$business = $this->getProductData($routes);
+				if($business['status'] != "success") {
+					throw new Exception($business['message']);
+				}
+				$data['business'] = $business['data'];
+			}elseif($route[0] == 'home' || $route[0] == '') {
+				$featured_products = $this->getProductData('products', 1);
+				$featured_services = $this->getProductData('services', 1);
+				$business = $this->getBusinessData($routes);
+				
+				if($business['status'] != "success") {
+					throw new Exception($business['message']);
+				}
+				$data['featured_products'] = $featured_products['data'];
+				$data['featured_services'] = $featured_services['data'];
+				$data['business'] = $business['data'];
+				//print_r($data);
+			}else{
+				$business = $this->getBusinessData($routes);
+				if($business['status'] != "success") {
+					throw new Exception($business['message']);
+				}
+				$data['business'] = $business['data'];
+			}
+			$response["status"] = "success";
+            $response["message"] = "Data Selected!";
+            $response["data"] = $data;
+		}catch(Exception $e){
+			$response["status"] = "error";
+            $response["message"] = $e->getMessage();
+            $response["data"] = null;
 		}
-		
-		if($business['status'] == 'success'){
-			return $data;
-		}else{
-			return $business;
-		}
+		//print_r($response);
+		return $response;
 	}
 	
 	function getRoutes(){

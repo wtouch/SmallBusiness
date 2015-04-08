@@ -20,15 +20,16 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.path = "product/"; // path to store images on server
 		$scope.showProductForm = false;
 		$scope.showServiceForm = false;
-		$scope.editProductForm = false;
+		$scope.editProdForm = false;
+		$scope.editServForm = false;
 		$scope.productType = "service";
 		//Upload Function for uploading files {Vilas}
 		$scope.addproduct = {
-			product_image : {}
+			product_image : []
 		}; 
 		// this is form object
 		$scope.addservice = {
-			product_image : {}
+			product_image : []
 		};
 		$scope.userinfo = {user_id:1}; // this is for uploading credentials
 		$scope.upload = function(files,path,userinfo,picArr){//this function for uploading files
@@ -37,11 +38,17 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(data.status === 'success'){
-					picArr[picArrKey] = data.data;
+					picArr.push(data.data);
 				}else{
 					$scope.alerts.push({type: data.status, msg: d.message});
 				}
 	
+			});
+		};
+		$scope.pageChanged = function(page) {
+			dataService.get("/getmultiple/product/"+page+"/"+$scope.pageItems)
+			.then(function(response) { 		
+				$scope.services = response.data;			
 			});
 		};
 		
@@ -62,18 +69,22 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			if(object == 'showServiceForm'){
 				addservices();
 			}
-			$scope.editProductForm = false;//this is for closing the edit form
-			$scope.editServiceForm = false
+			$scope.showProductForm = true;
+			$scope.showServiceForm = true;
 		}
 		$scope.editServiceForm = function(x1){
 			$scope.showServiceForm = true;
-			$scope.editServiceForm = true;
+			$scope.editServeForm = true;
 			angular.extend($scope.addservice, x1);
 		}
 		$scope.editProductForm = function(x1){
 			$scope.showProductForm = true;
-			$scope.editProductForm = true;
+			$scope.editProdForm = true;
 			angular.extend($scope.addproduct, x1);
+		}
+		$scope.removeImg = function(item, imgObject) { 
+		  var index = imgObject.indexOf(item);
+		  imgObject.splice(index, 1);     
 		}
 		
 		// get data for business options 

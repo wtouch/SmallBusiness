@@ -53,31 +53,50 @@
 			return $this->twig->loadTemplate($route.".html");
 		}
 		function getData($route){
-			$data = $this->web->getTemplateData($route);
-			$template = $this->web->getTemplate();
-			
-			$routes = $this->web->getRoutes();
-			$response['title'] = $route;
-			$response['uri'] = $this->tmplConfig['uri'];
-			$response['routes'] = $routes['data'];
-			$response['data'] = (isset($data['business'])) ? $data['business'] : $data;
-			$response['template'] = $template['data'];
-			if(isset($data['featured_services'])) $response['featured_services'] = $data['featured_services'];
-			if(isset($data['featured_products'])) $response['featured_products'] = $data['featured_products'];
-			$response['path'] = $this->tmplConfig['template_host_path_folder']."/";
-			//print_r($response['template']);
-			print_r($response['template']['template_params']['dark_color']);
-			//print_r($response['data']);
+			try{
+				$data = $this->web->getTemplateData($route);
+				$template = $this->web->getTemplate();
+				
+				if($data['status'] == "success"){
+					$data = $data['data'];
+				}else{
+					throw new Exception($data['message']);
+				}
+				
+				$routes = $this->web->getRoutes();
+				$responseDt['title'] = $route;
+				$responseDt['uri'] = $this->tmplConfig['uri'];
+				$responseDt['routes'] = $routes['data'];
+				$responseDt['data'] = $data['business'];
+				$responseDt['template'] = $template['data'];
+				if(isset($data['featured_services'])) $responseDt['featured_services'] = $data['featured_services'];
+				if(isset($data['featured_products'])) $responseDt['featured_products'] = $data['featured_products'];
+				$responseDt['path'] = $this->tmplConfig['template_host_path_folder']."/";
+				
+				print_r($responseDt['template']['template_params']['dark_color']);
+				$response["status"] = "success";
+				$response["message"] = "Data Selected!";
+				$response["data"] = $responseDt;
+				$response["path"] = $responseDt['path'];
+			}catch(Exception $e){
+				$response["status"] = "error";
+				$response["message"] = $e->getMessage();
+				$response["data"] = null;
+				$response["path"] = $this->tmplConfig['template_host_path_folder']."/";
+				$response["title"] = "Error!";
+			}
 			return $response;
 		}
 		function displayTemplate($route){
 			$response = $this->getData($route);
-			$template = $this->getTemplate($route);
-			if($response['data']['status'] == 'error'){
-				
+			if($response['status'] == "success") {
+				$template = $this->getTemplate($route);
+				return $template->display($response['data']);
 			}else{
+				$template = $this->getTemplate("error");
 				return $template->display($response);
 			}
+			
 		}
 	}
 

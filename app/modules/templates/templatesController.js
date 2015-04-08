@@ -5,6 +5,13 @@ define(['app'], function (app) {
     
     // This is controller for this view
 	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
+		
+		dataService.get("getsingle/template/"+$routeParams.id)
+		.then(function(response) {
+			$scope.templateData = dataService.parse(response.data);
+			if($scope.templateData.template_params == "") $scope.templateData.template_params = {};
+		
+		});	
 		// all $scope object goes here
 		$scope.alerts = [];
 		$scope.maxSize = 5;
@@ -58,24 +65,119 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope.opened = ($scope.opened==true)?false:true;
 		};
+		
+		$scope.addToObject = function(data, object, resetObj){
+			var dtlObj = JSON.stringify(data.desc);
+			object[data.heading] = JSON.parse(dtlObj);
+			$scope.headingDisabled = false;
+			$scope.temp = false;
+			$scope.imgRemoved = false;
+			//console.log(data);
+			$scope[resetObj] = { desc : { image  : {} }};
+			console.log(data);
+		}
+		
+		$scope.removeObject = function(key, object){
+			$scope.imgRemoved = true;
+			delete object[key];
+		}
+		$scope.editObject = function(key, object, FormObj){
+			$scope.headingDisabled = true;
+			$scope.imgRemoved = true;
+			var dtlObj = JSON.stringify(object[key]);
+			FormObj['desc'] = JSON.parse(dtlObj);
+			FormObj['heading'] = key;
+		}
+		$scope.showForm = function(obj, resetObj){
+			$scope[obj] = !$scope[obj];
+			if(resetObj){
+				$scope.headingDisabled = false;
+				$scope.imgRemoved = true;
+				$scope[resetObj] = { desc : { image  : {} }};
+			}
+		}
+		
+		//Update template form code here
+		$scope.update = function(businessData){				
+			console.log(templateData);						
+			dataService.put("put/template/"+ $scope.template_id, templateData)  // use business id here
+			 .then(function(response) {  //function for response of request temp
+				if(response.status == 'success'){
+					$scope.submitted = true;
+					$scope.alerts.push({type: response.status,msg: response.message});						
+				}else{
+					$scope.alerts.push({type: response.status,msg: response.message});
+				}
+			});
+		};
 	
 		//this code block for modal
 		$scope.openModel = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
-				dataService.get("getmultiple/website/1/50",$scope.status)
-				.then(function(webresponse) {
 					var modalDefaults = {
 						templateUrl: url,	// apply template to modal
 						size : 'lg'
 					};
 					var modalOptions = {
-						websiteList: webresponse.data,  // assign data to modal
 						tempList: dataService.parse(response.data),
 						myTemplateData : {},
-						formData : function(data){
-							modalOptions.myTemplateData = data;
+						slider : {},
+						editIndex : {},
+						files : {},
+						path : {},
+						userInfo : {},
+						formData : function(templateData){
+							console.log(templateData);
+							modalOptions.myTemplateData = templateData;
 						},
+						deleteSlide : function(index,object){
+							var index = object.indexOf(index);
+							object.splice(index, 1); 
+						},
+						addSlide : function(data, array){
+							var pushdata = JSON.stringify(data);
+							array.push(JSON.parse(pushdata));
+							modalOptions.slider = {};
+							for(var x in data){
+								delete data[x];
+							}
+						},
+						upload : function(files,path,userInfo,picArr){
+							/* upload.upload(files,path,userInfo,function(data){
+							var picArrKey = 0, x;
+								for(x in picArr) picArrKey++;
+									if(data.status === 'success'){
+										picArr.push(data.data);
+										console.log(picArr);
+									}else{
+									$scope.alerts.push({type: data.status, msg: data.message});
+								}
+							}); */
+							upload.upload(files,path,userInfo,function(data){
+								if(picArr){
+								if(data.status === 'success'){
+								$scope.addbusiness.business_logo = data.data;
+									console.log($scope.addbusiness.business_logo);
+								}else{
+								$scope.alerts.push({type: data.status, msg: data.message});
+							}
+						}
+						}); 
+						},
+						generateThumb : function(files){  
+							upload.generateThumbs(files);
+						},
+						
+						updateSlide : function(index, array, data){
+							var pushdata = JSON.stringify(data);
+							array[index.index] = JSON.parse(pushdata);
+							for(var x in data){
+								delete data[x];
+							}
+							delete index['index'];
+							//array.push(data);
+						}
 					};
 
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
@@ -84,12 +186,13 @@ define(['app'], function (app) {
 					}); 
 					
 				});
-				});
 			});
 		};
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
+	
+	
 	
 		//open model for template img
 		$scope.openTemp = function (url, tempId) {
@@ -367,6 +470,73 @@ define(['app'], function (app) {
 				};
 				$scope.templates = response.data;
 			});
+			
+			//this code block for modal
+			$scope.openModel = function (url, tempId) {
+			dataService.get("getsingle/mytemplate/"+tempId)
+			.then(function(response) {
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					var modalOptions = {
+						tempList: dataService.parse(response.data),
+						myTemplateData : {},
+						slider : {},
+						editIndex : {},
+						formData : function(templateData){
+							console.log(templateData);
+							modalOptions.myTemplateData = templateData;
+						},
+						deleteSlide : function(index,object){
+							var index = object.indexOf(index);
+							object.splice(index, 1); 
+						},
+						addSlide : function(data, array){
+							var pushdata = JSON.stringify(data);
+							array.push(JSON.parse(pushdata));
+							modalOptions.slider = {};
+							for(var x in data){
+								delete data[x];
+							}
+						},
+						upload : function(files,path,userInfo,picArr){
+							upload.upload(files,path,userInfo,function(data){
+							if(picArr){
+							if(data.status === 'success'){
+							$scope.modalOptions.slider_image = data.data;
+							console.log($scope.modalOptions.slider_image);
+							}else{
+							$scope.alerts.push({type: data.status, msg: data.message});
+						}
+						}
+						}); 
+						},
+						
+						updateSlide : function(index, array, data){
+							var pushdata = JSON.stringify(data);
+							array[index.index] = JSON.parse(pushdata);
+							for(var x in data){
+								delete data[x];
+							}
+							delete index['index'];
+							//array.push(data);
+						}
+					};
+
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					dataService.post("post/mytemplate",modalOptions.myTemplateData,$scope.userInfo).then(function(response) {
+						$scope.alerts.push({type: response.status,msg: response.message});
+					}); 
+					
+				});
+			});
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+	
+	
 		};
 	
 		//list of templates

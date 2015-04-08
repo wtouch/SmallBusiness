@@ -9,16 +9,23 @@ define(['angular',
 	'directives',
 	'services', 
 	'filters',
+	'googleMap',
 	'upload','uploadShim',
 	'css!../css/bootstrap.min','css!../css/style'
 ], function(angular, angularRoute, ngCookies) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
-	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize'
+	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps'
 	]);
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
-                '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 
-				function($routeProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider) {
+                '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 'uiGmapGoogleMapApiProvider',
+				function($routeProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider, uiGmapGoogleMapApiProvider) {
+					
+				uiGmapGoogleMapApiProvider.configure({
+					// key: 'your api key',
+					v: '3.17',
+					libraries: 'places' // Required for SearchBox.
+				});
 				
 				//Change default views and controllers directory using the following:
 				routeResolverProvider.routeConfig.setBaseDirectories('modules/', 'modules/');

@@ -3,15 +3,27 @@
 {% block title %}{{title}}{% endblock %}
 {% block head %}
     {{ parent() }}
+	<script src="http://maps.googleapis.com/maps/api/js">
+	</script>
+	<script>
+		function initialize() {
+			var mapProp = {
+				center:new google.maps.LatLng(51.508742,-0.120850),
+				zoom:5,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
 {% endblock %}
 {% block content %}
     <h1>{{ data.owner_name }}</h1>
-    <p class="important">
-        <div class="row">
+	<div class="row">
 		<div class="col-sm-6">
 			<table class="table table-bordered">
 				<tr>
-					<td colspan="2"><h2 class="text-center">Contact us</h2></td>
+					<td colspan="2"><h4 class="text-center">Contact us</h4></td>
 				</tr>
 				<tr>
 					<td>CONTACT PERSON</td>
@@ -62,7 +74,7 @@
 				<div class="panel-body">
 					<div class="alert alert-success" ng-show="mailSent" role="alert">Message has been sent!</div>
 					<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-controller="enquiryController" novalidate>
-						<h2 class="text-center"> Enquiry Form</h2>
+						<h4 class="text-center"> Enquiry Form</h4>
 						<div class="form-group">
 							<label for="phone" class="col-sm-2 control-label">Name </label>
 							<div class="col-sm-9">
@@ -120,5 +132,8 @@
 			</div>
 		</div>
 	</div>
-    </p>
+    <div class="row">
+		<div class="col-sm-12" id="googleMap" style="height:380px;"></div>
+	</div>
+	
 {% endblock %}
