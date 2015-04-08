@@ -62,7 +62,6 @@ class websiteManager{
 				
 			}else{
 				$dbresult = $db->selectSingle($table, $where);
-				
 				if($dbresult['status'] == "success"){
 					$templateDetails["template_name"] = $dbresult['data']['template_name'];
 					$templateDetails["template_category"] = $dbresult['data']['category'];
