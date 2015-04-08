@@ -134,6 +134,17 @@ define(['app'], function (app) {
 			});
 		}
 		
+		 //code for get data from business
+		
+		dataService.get("getsingle/business/"+$routeParams.id)
+		.then(function(response) {
+			console.log(response);
+				if(response.status == 'success'){
+					$scope.addbusiness = dataService.parse(response.data);
+				}
+		});
+		 
+		
 		/* // Google Map
 		$scope.initGoogleMap = function(latitude,longitude, zoom){
 			$scope.addbusiness.contact_profile.google_map.latitude = latitude;
