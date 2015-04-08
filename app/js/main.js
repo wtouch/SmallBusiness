@@ -3,6 +3,9 @@
 require.config({
 	paths: {
 		angular: '../lib/angular/angular.min',
+		lodash: '../lib/lodash',
+		googleMap: '../lib/google-map/angular-google-maps.min',
+		googleMapApi: '../lib/google-map/angular-google-maps.min',
 		ngSanitize: '../lib/angular/angular-sanitize',
 		ngCookies: '../lib/angular/angular-cookies.min',
 		upload: '../lib/upload/angular-file-upload.min',
@@ -26,6 +29,7 @@ require.config({
 		'routeResolver': { "deps": ['angular', 'angularRoute'] },
 		'breadcrumbs':  { "deps": ['angular', 'angularRoute'] },
 		'bootstrap': { "deps": ['angular'] },
+		'googleMap': { "deps": ['angular', 'lodash'] },
 		'filters':  { "deps": ['angular'] },
 		'services':  { "deps": ['angular'] },
 		'directives':  { "deps": ['angular'] },

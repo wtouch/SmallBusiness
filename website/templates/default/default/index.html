@@ -16,23 +16,32 @@
 				h1,h2,h3,h4{
 					color: {{template.template_params.dark_color}};
 				}
-				.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+				.navbar-default {
+					background-color: {{template.template_params.background_color_dark}};
+				}
+				.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
 					color: {{template.template_params.dark_color}};
 					background-color: {{template.template_params.background_color_light}};
+				}
+				.navbar-default .navbar-nav>.active>a:hover{
+					color: {{template.template_params.light_color}};
 				}
 				navbar{
 					background-color: {{template.template_params.background_color_dark}};
 				}
-				.panel-default {
+				.panel-default,table table-bordered{
 					border-color: {{template.template_params.background_color_dark}};
 				}
 				.panel-default>.panel-heading {
-					color: {{template.template_params.dark_color}};
 					background-color: {{template.template_params.background_color_light}};
 					border-color: {{template.template_params.background_color_dark}};
 				}
 				.thumbnail {
 					border-color: {{template.template_params.background_color_dark}};
+				}
+				.btn-default{
+					color: {{template.template_params.light_color}};
+					background-color: {{template.template_params.background_color_dark}};
 				}
 			</style>
         {% endblock %}

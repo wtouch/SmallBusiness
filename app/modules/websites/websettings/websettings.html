@@ -1,9 +1,18 @@
-<div class="row">		
-	<div class="col-sm-12">	
-		<div class="main-content"> 
-		<div>
-			<ng-include src="'modules/component/toolbar.html'"></ng-include>  
-		</div>
+<div class="main-content">
+	<ng-include src="'modules/component/toolbar.html'"></ng-include>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="text-right">
+			<a ng-if="permission.website_list" href="#/dashboard/websites/websiteslist" class="btn btn-default">Website List</a>
+			<a ng-if="permission.request_site" href="#/dashboard/websites/requestnewsite" class="btn btn-default">Request New Site</a>
+			<a ng-if="permission.requested_sites" href="#/dashboard/websites/requestedsitelist" class="btn btn-default">Requested Site List</a>
+			<a ng-if="permission.manage_domain" href="#/dashboard/websites/managedomains" class="btn btn-default">Manage Domains</a>
+			</div>
+			<div>
+			<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+			</div>
+		</div>	
+	<div class="col-sm-12">
 		<div class="bottomspace">
 			<h3 class="text-center">Website Setting</h3>
 				<form name="websettingsForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">
@@ -60,7 +69,7 @@
 						<div class="form-group">	
 							<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
 								<div class="col-sm-9">
-									<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="config.google_map.latitude" required>
+									<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="config.google_map.latitude" readonly>
 										<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
 										<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
 										</span>
@@ -70,7 +79,7 @@
 					<input type="hidden" ng-model="config.website_id"/>
 						<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
 							<div class="col-sm-9">
-								<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="config.google_map.longitude" required >
+								<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="config.google_map.longitude" readonly >
 									<span class="text-danger" ng-show="websettingsForm.Longitude.$dirty && websettingsForm.Longitude.$invalid">
 									<span ng-show="websettingsForm.Longitude.$error.required">Domain Name is required.</span>
 									</span>
@@ -83,7 +92,15 @@
 						</div>
 					</div>		
 					</div>
-				</form> 	
+					<div class="form-group" ng-click="getMapObject()">
+						<div class="col-sm-offset-2 col-sm-9" id="map_canvas">
+							<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" control="googleMap">
+								<ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="TOP_LEFT"></ui-gmap-search-box>
+								<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+							</ui-gmap-google-map>
+						</div>
+					</div>
+				</form>
 		</div>
 	</div> 
 </div>	
