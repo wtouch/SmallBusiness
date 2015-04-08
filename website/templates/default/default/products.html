@@ -9,10 +9,11 @@
 {% endblock %}
 {% block content %}
 {% autoescape false %}
+	<h2 class="text-center">Products</h2>
 	{% for x in data %}
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<a href="#"><h1 class="panel-title">{{ x.product_service_name }} </h1></a>
+				<a href="product/{{x.id}}"><h1 class="panel-title">{{ x.product_service_name }} </h1></a>
 			</div>
 			<div class="panel-body">
 				<div class="important">
