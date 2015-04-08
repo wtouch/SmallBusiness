@@ -1,10 +1,18 @@
-<div class="row">		
+<div class="main-content">
+	<ng-include src="'modules/component/toolbar.html'"></ng-include>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="text-right">
+			<a ng-if="permission.website_list" href="#/dashboard/websites/websiteslist" class="btn btn-default">Website List</a>
+			<a ng-if="permission.request_site" href="#/dashboard/websites/requestnewsite" class="btn btn-default">Request New Site</a>
+			<a ng-if="permission.requested_sites" href="#/dashboard/websites/requestedsitelist" class="btn btn-default">Requested Site List</a>
+			<a ng-if="permission.manage_domain" href="#/dashboard/websites/managedomains" class="btn btn-default">Manage Domains</a>
+			</div>
+			<div>
+			<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+			</div>
+		</div>	
 	<div class="col-sm-12">
-	
-		<div class="main-content"> 
-		<div>
-			<ng-include src="'modules/component/toolbar.html'"></ng-include>  
-		</div>
 		<div class="bottomspace">
 			<h3 class="text-center">Website Setting</h3>
 				<form name="websettingsForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">
