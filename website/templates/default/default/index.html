@@ -13,35 +13,37 @@
             <title>{% block title %}{{title}}{% endblock %}</title>
 			<style>
 				h1,h2,h3,h4{
-					color: {{template.template_params.dark_color}};
+					color: {{template.template_params.color}};
+				}
+				navbar,.navbar-default{
+					background-color: {{template.template_params.background_color_dark}};
 				}
 				.navbar-default{
-					background-color: {{template.template_params.background_color_dark}};
 					border:none;
 				}
-				.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover,.navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand{
+				.navbar-default .navbar-nav>.active>a,  .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus,.dropdown-menu>li>a:hover{
 					color: #FFF;
 					background-color: {{template.template_params.background_color_light}};
 				}
-				navbar{
-					background-color: {{template.template_params.background_color_dark}};
+				.navbar-default .navbar-nav>.active>a:hover,.navbar-default .navbar-nav>li>a:hover{
+					color: #FFF;
+					background-color: {{template.template_params.background_color}};
 				}
-				.panel-default,table table-bordered{
-					border-color: {{template.template_params.background_color_dark}};
+				.navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand,.navbar-fixed-bottom,a,.btn-default{
+					color: #FFF;
+				}
+				.panel-default{
+					border-color: {{template.template_params.background_color}};
 				}
 				.panel-default>.panel-heading {
 					background-color: {{template.template_params.background_color_light}};
-					border-color: {{template.template_params.background_color_dark}};
+					border-color: {{template.template_params.background_color}};
 				}
 				.thumbnail {
 					border-color: {{template.template_params.background_color_dark}};
 				}
 				.btn-default{
-					color: {{template.template_params.light_color}};
 					background-color: {{template.template_params.background_color_dark}};
-				}
-				.navbar-fixed-bottom{
-					color:#FFF;
 				}
 			</style>
         {% endblock %}
