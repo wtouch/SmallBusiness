@@ -245,6 +245,7 @@ define(['app'], function (app) {
 				$scope.reset();
 			}
 		}
+		
 		$scope.updateData = function(addbusiness) {
 			dataService.put("put/business/"+$scope.bizId,addbusiness)
 			.then(function(response) {

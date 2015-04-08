@@ -125,8 +125,8 @@ define(['app'], function (app) {
 						slider : {},
 						editIndex : {},
 						files : {},
-						path : {},
-						userInfo : {},
+						path : $scope.path,
+						userInfo : $scope.userInfo,
 						formData : function(templateData){
 							console.log(templateData);
 							modalOptions.myTemplateData = templateData;
@@ -144,25 +144,16 @@ define(['app'], function (app) {
 							}
 						},
 						upload : function(files,path,userInfo,picArr){
-							/* upload.upload(files,path,userInfo,function(data){
-							var picArrKey = 0, x;
-								for(x in picArr) picArrKey++;
-									if(data.status === 'success'){
-										picArr.push(data.data);
-										console.log(picArr);
-									}else{
-									$scope.alerts.push({type: data.status, msg: data.message});
-								}
-							}); */
+							console.log(picArr);
 							upload.upload(files,path,userInfo,function(data){
-								if(picArr){
+								
 								if(data.status === 'success'){
-								$scope.addbusiness.business_logo = data.data;
-									console.log($scope.addbusiness.business_logo);
+									modalOptions.slider.image = data.data.file_relative_path;
+									console.log(data.data);
 								}else{
 								$scope.alerts.push({type: data.status, msg: data.message});
 							}
-						}
+						
 						}); 
 						},
 						generateThumb : function(files){  
@@ -179,9 +170,8 @@ define(['app'], function (app) {
 							//array.push(data);
 						}
 					};
-
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					dataService.post("post/mytemplate",modalOptions.myTemplateData,$scope.userInfo).then(function(response) {
+					dataService.post("post/mytemplate",modalOptions.myTemplateData).then(function(response) {
 						$scope.alerts.push({type: response.status,msg: response.message});
 					}); 
 					
@@ -445,19 +435,6 @@ define(['app'], function (app) {
 		};    
 		
 		
-		   /* $scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
-			upload.upload(files,path,userInfo,function(data){
-				var picArrKey = 0, x;
-				for(x in $scope.reqtemp.scrible) picArrKey++;
-				if(data.status === 'success'){
-					picArr.push[data.data];
-				}else{
-					$scope.alerts.push({type: data.status, msg: data.message});
-				}
-			});
-		};     */
-	
-		
 		// switch functions
 		var mytemplates = function(){
 			dataService.get("getmultiple/mytemplate/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.userInfo)
@@ -472,7 +449,7 @@ define(['app'], function (app) {
 			});
 			
 			//this code block for modal
-			$scope.openModel = function (url, tempId) {
+		$scope.editTempParamsModel = function (url, tempId) {
 			dataService.get("getsingle/mytemplate/"+tempId)
 			.then(function(response) {
 					var modalDefaults = {
@@ -480,12 +457,16 @@ define(['app'], function (app) {
 						size : 'lg'
 					};
 					var modalOptions = {
-						tempList: dataService.parse(response.data),
+						editTemplate: dataService.parse(response.data),
 						myTemplateData : {},
 						slider : {},
 						editIndex : {},
+						files : {},
+						path : $scope.path,
+						userInfo : $scope.userInfo,
+						tempId : $scope.tempId,
 						formData : function(templateData){
-							console.log(templateData);
+							
 							modalOptions.myTemplateData = templateData;
 						},
 						deleteSlide : function(index,object){
@@ -501,16 +482,20 @@ define(['app'], function (app) {
 							}
 						},
 						upload : function(files,path,userInfo,picArr){
+							console.log(picArr);
 							upload.upload(files,path,userInfo,function(data){
-							if(picArr){
-							if(data.status === 'success'){
-							$scope.modalOptions.slider_image = data.data;
-							console.log($scope.modalOptions.slider_image);
-							}else{
-							$scope.alerts.push({type: data.status, msg: data.message});
-						}
-						}
+								
+								if(data.status === 'success'){
+									modalOptions.slider.image = data.data.file_relative_path;
+									console.log(data.data);
+								}else{
+								$scope.alerts.push({type: data.status, msg: data.message});
+							}
+						
 						}); 
+						},
+						generateThumb : function(files){  
+							upload.generateThumbs(files);
 						},
 						
 						updateSlide : function(index, array, data){
@@ -523,11 +508,11 @@ define(['app'], function (app) {
 							//array.push(data);
 						}
 					};
-
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					dataService.post("post/mytemplate",modalOptions.myTemplateData,$scope.userInfo).then(function(response) {
+					console.log(modalOptions.myTemplateData);
+					dataService.put("put/mytemplate/"+tempId,modalOptions.myTemplateData).then(function(response) {
 						$scope.alerts.push({type: response.status,msg: response.message});
-					}); 
+					});
 					
 				});
 			});
@@ -535,8 +520,7 @@ define(['app'], function (app) {
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
-	
-	
+
 		};
 	
 		//list of templates

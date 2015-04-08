@@ -41,15 +41,15 @@
 							</button>
 							</div>
 							<div class="btn-group">
-								<a type="button" tooltip="Customize Template" class="btn btn-info glyphicon glyphicon-cog" ng-click="openModel('modules/templates/applytemplate.html', x.id)"></a>	
+								<a type="button" tooltip="Customize Template" class="btn btn-info glyphicon glyphicon-cog" ng-click="editTempParamsModel('modules/templates/applymytemplate.html', x.id)"></a>	
 							</div>
-							
 						</td>
 					</tr>			
 				</tbody>					
 		</table>
 	</div>
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="myTempCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(myTempCurrentPage)"></pagination>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="myTempCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(myTempCurrentPage,template_type)"></pagination>
 		<pre>Page: {{myTempCurrentPage}} / {{numPages}}</pre>
 	</div>	
+	
