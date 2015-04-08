@@ -124,6 +124,9 @@ define(['app'], function (app) {
 						myTemplateData : {},
 						slider : {},
 						editIndex : {},
+						files : {},
+						path : {},
+						userInfo : {},
 						formData : function(templateData){
 							console.log(templateData);
 							modalOptions.myTemplateData = templateData;
@@ -141,16 +144,29 @@ define(['app'], function (app) {
 							}
 						},
 						upload : function(files,path,userInfo,picArr){
+							/* upload.upload(files,path,userInfo,function(data){
+							var picArrKey = 0, x;
+								for(x in picArr) picArrKey++;
+									if(data.status === 'success'){
+										picArr.push(data.data);
+										console.log(picArr);
+									}else{
+									$scope.alerts.push({type: data.status, msg: data.message});
+								}
+							}); */
 							upload.upload(files,path,userInfo,function(data){
-							if(picArr){
-							if(data.status === 'success'){
-							$scope.modalOptions.slider_image = data.data;
-							console.log($scope.modalOptions.slider_image);
-							}else{
-							$scope.alerts.push({type: data.status, msg: data.message});
-						}
+								if(picArr){
+								if(data.status === 'success'){
+								$scope.addbusiness.business_logo = data.data;
+									console.log($scope.addbusiness.business_logo);
+								}else{
+								$scope.alerts.push({type: data.status, msg: data.message});
+							}
 						}
 						}); 
+						},
+						generateThumb : function(files){  
+							upload.generateThumbs(files);
 						},
 						
 						updateSlide : function(index, array, data){
