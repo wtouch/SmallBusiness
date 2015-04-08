@@ -14,8 +14,10 @@
 		<div class="bottomspace">
 			<h3 class="text-center">Website Setting</h3>
 				<form name="websettingsForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">
+				
 					<div class="bottomspace">
-							<div class="form-group">	
+							<div class="form-group">
+							<input type="hidden" ng-model="config.website_id"/>
 								<label  for="selectbusiness" class="col-sm-2 control-label">Select Business</label>
 								<div class="col-sm-3">
 									<select id="selectBusiness" class="form-control" ng-model="config.business_id" ng-options="item.id as item.business_name for item in businessList">
@@ -74,7 +76,7 @@
 								</div>						
 						</div>	
 					<div class="form-group">	
-					<input type="hidden" ng-model="config.website_id"/>
+					
 						<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
 							<div class="col-sm-9">
 								<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="config.google_map.longitude" readonly >

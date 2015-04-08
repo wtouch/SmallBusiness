@@ -8,7 +8,7 @@ define(['app'], function (app) {
 	// all $scope object goes here
 		$scope.permission = $rootScope.userDetails.permission.website_module;
 		$scope.userDetails = {user_id : $rootScope.userDetails.id};
-		$scope.website_id=$routeParams.id;
+		$scope.website_id = $routeParams.id;
 		$scope.currentDate = dataService.currentDate;
 		$scope.alerts = [];
 		//this is for get business name from business
