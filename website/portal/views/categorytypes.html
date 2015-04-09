@@ -1,143 +1,39 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Welcome to Wtouch Portal</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<meta name="fragment" content="!"/>
-		<meta name="description" content="">
-		<meta name="keywords" content="">
-	</head>
-	<body >
+{% extends "index.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+{% autoescape false %}
 		<header>
-			<div class="container" ng-controller="TypeaheadCtrl">
-				<div class="row">
-					<div class="col-md-12">
-						<nav class="navbar navbar-default">
-							<div class="navbar-header">
-							  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							  </button>
-							 </div>
-							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-								<ul class="nav navbar-nav">
-									<li  class="dropdown"><a href="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-th  "> </span></a>
-										<ul class="dropdown-menu media" role="menu">
-											<li><a href="#">
-												<div class="products ">
-												<span class="glyphicon glyphicon-film"></span>
-												<p>Media</p>
-												</div></a>
-											</li>
-											<li><a href="#">
-												<div class="products ">
-												<span class="glyphicon glyphicon-briefcase"></span>
-												<p>Travel</p>
-												</div></a>
-											</li>
-											<li><a href="#">
-												<div class="products ">
-												<span class="glyphicon glyphicon-plane"></span>
-											<p>Flight</p>
-												</div></a>
-											</li>
-										</ul>
-									</li>
-									<li><a href="#"><img src="img/logo.png" title="Web Touch India Solution Pune " class="center-block " /></a></li>
-								</ul>
-								<ul class="nav navbar-nav navbar-right">
-									<li>
-										<form class="navbar-form navbar-right" role="search">
-										  <div class="form-group">
-											<input type="text" class="form-control" placeholder="Search">
-										  </div>
-										  <button type="submit" class="btn btn-default glyphicon glyphicon-search"></button>
-										</form>
-									</li>
-									<li><a href="#">Login</a></li>
-									<li><a href="#">Register</a></li>
-								</ul>
-							</div>
-						</nav> 
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<nav class="navbar navbar-inverse">
-							<ul class="nav navbar-nav ">
-								<li><a href="#">HOME</a></li>
-								<li><a href="#">ABOUT US</a></li>
-								<li class="dropdown">
-								  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">BUSINESS CATEGORY<span class="caret"></span></a>
-									<ul class="dropdown-menu" role="menu">
-										<li><a href="#">Media</a></li>
-										<li><a href="#">Art & Gallery</a></li>
-										<li><a href="#">Computer Networking</a></li>
-										<li class="divider"></li>
-										<li><a href="#">Jwellery</a></li>
-									</ul>
-								</li>
-								<li><a href="#">PRODUCT</a></li>
-								<li><a href="#">SERVICES</a></li>
-								<li><a href="#">GALLERY</a></li>
-								<li><a href="#">CONTACT US</a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-md-12 ng-controller="ModalDemoCtrl">
-						<div class="btn-group btn-group-justified" role="group" aria-label="...">
-							<button type="button" class="btn btn-primary">Sort Result By</button>
-							<button type="button" class="btn btn-success">Top Result</button>
-							<button type="button" class="btn btn-default" ng-click="open()" >Location</button>
-							<button type="button" class="btn btn-default">Distance</button>
-							<button type="button" class="btn btn-default">Rating</button>
-						</div>
-					</div>
-				</div>
-			</div>
+			{% include 'includes/navbar.html' ignore missing %}
 		</header>
 		
 		<main >
+			<h3> Popular Business Types</h3>
 			<div class="container">
 				<div class="row">
-					<div class="col-md-3">
-						<div class="btn-group-vertical leftlnk" role="group" aria-label="...">
-							<button type="button" class="btn btn-primary active"> Hospitals</button>
-							<button type="button" class="btn btn-default">Public hospital</button>
-							<button type="button" class="btn btn-default">Vaternity Hospital</button>
-							<button type="button" class="btn btn-default">Cancer Hospital
-							<button type="button" class="btn btn-default">Critical Care Center</button>
+				{% for x in data %}
+					<div class="col-md-4">
+						<div class="media buztypes">
+							<div class="media-left">
+								<a href="#">
+									<img class="media-object" src="{{path}}img/book.jpg" alt="Art gallery">
+								</a>
+							</div>
+							<div class="media-body">
+								<h4 class="media-heading"><a href="/{{x.category}}/{{x.type}}">{{x.type}}</a></h4>
 								
-							<button type="button" class="btn btn-default">Public hospital</button>
-							<button type="button" class="btn btn-default">Vaternity Hospital</button>
-							<button type="button" class="btn btn-default">Cancer Hospital
-							<button type="button" class="btn btn-default">Critical Care Center</button>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-9 col-xs-12">
-						<ng-include src="'includes/search-result.html'"></ng-include>
-					</div>
+				{% endfor %}
 				</div>
 			</div>
-		</main>
-		<div class="container">
-			<footer>
-				<div class="row">
-					<div class="col-md-12">
-						<p class="text-center">&copy copyright by  Wtouch India Solution Pune </p>
-					</div>
-				</div>
-			</footer>
-		</div>
-		<script data-main="js/main" src="lib/requirejs/require.js"></script>
-	</body>
-</html>
+		</main >
+	{% endautoescape %}
+{% endblock %}	
 
 
 		

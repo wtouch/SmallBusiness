@@ -20,26 +20,21 @@ $app->get('/', function() use($app, $config, $twig, $portal) {
 
 $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
 	$response = $portal->getCategoryTypes($category);
-	$template = $twig->loadTemplate("types.html");
+	$template = $twig->loadTemplate("categorytypes.html");
 	$template->display($response);
-	echo $response;
+	
 });
 
 $app->get('/:category/:type', function($category, $type) use($app, $config, $twig, $portal) {
-	echo $category;
-	echo $type;
-	$response = $portal->getCategories();
-	$template = $twig->loadTemplate("index.html");
+	$response = $portal->getBusiness($category, $type);
+	$template = $twig->loadTemplate("business.html");
 	$template->display($response);
 });
 
 $app->get('/:category/:type/:business', function($category, $type, $business) use($app, $config, $twig, $portal) {
-	echo $category;
-	echo $type;
-	echo "<br>";
 	echo $business;
-	$response = $portal->getCategories();
-	$template = $twig->loadTemplate("index.html");
+	$response = $portal->getBusinessView($category, $type, $business);
+	$template = $twig->loadTemplate("viewbusiness.html");
 	$template->display($response);
 });
 

@@ -6,6 +6,12 @@
 {% block content %}
 
 {% autoescape false %}
+<script type="text/ng-template" id="search.html">
+    <a>
+     <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+     <span>(<small bind-html-unsafe="match.model.area"></small>-<small bind-html-unsafe="match.model.pincode"></small>)</span>
+    </a>
+  </script>
 	<header>
 		<div class="row">
 			<div class="col-md-12">
@@ -33,23 +39,22 @@
 		</div>
 	</header>
 	<section >
-	<div class="container">
+	<div class="container" ng-controller="TypeaheadCtrl">
 		<div class="row">
 			<div class="col-md-12">
 				<img src="{{path}}img/logo.png" title="Web Touch India Solution Pune " class="center-block logo img-responsive" />
 					
 			</div>
 		</div>
+		
 		<div class="row">
 			<div class="col-md-2 ">
 				<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item)" placeholder="Select City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off" ng-init="city = 'Pune'">
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-2"></div>
 			<div class="col-md-8 ">
 				<div class="input-group  ">
-					<input type="text" class="form-control " placeholder="Search for...">
+					<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="location" typeahead-on-select="getData($item)" placeholder="Type to Search" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
+
 					<span class="input-group-btn">
 						<button class="btn btn-primary  form-control " type="button"><span class="glyphicon glyphicon-search"></span></button>
 					</span>
@@ -69,30 +74,13 @@
 			<div class="row">
 				<div class="col-md-12 ">
 					<div class="text-center">
-						<div class="products " >
-							<span class="glyphicon glyphicon-film"></span>
-							<p>{{data.0.category}}</p>
-						</div>
-						<div class="products">
-							<span class="glyphicon glyphicon-briefcase"></span>
-							<p>Travel</p>
-						</div>
-						<div class="products">
-							<span class="glyphicon glyphicon-plane"></span>
-							<p>Flight</p>
-						</div>
-						<div class="products">
-							<span class="glyphicon glyphicon-wrench"></span>
-							<p>Repairs</p>
-						</div>
-						<div class="products">
-							<span class="glyphicon glyphicon-film"></span>
-							<p>Media</p>
-						</div>
-						<div class="products">
-							<span class="glyphicon glyphicon-film"></span>
-							<p>Media</p>
-						</div>
+						{% for x in data %}
+							<div class="products " >
+								<p class="catp"><a href="/{{x.category}}" >{{x.category}}</a></p>
+								<span class="glyphicon glyphicon-film"></span>
+							</div>
+						{% endfor %}
+						
 					</div>
 					<span class="showmore"><a href="#" >More</a></span>
 				</div>

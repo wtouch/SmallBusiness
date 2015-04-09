@@ -1,0 +1,133 @@
+{% extends "index.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+
+	{% autoescape false %}
+	<header>
+		{% include 'includes/navbar.html' ignore missing %}
+	</header>
+	<main >
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+				{% for x in data %}
+
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h3 class="media-heading"><span class="glyphicon glyphicon-thumbs-up"></span><a href="/{{x.category}}/{{x.type}}/{{x.business_name}}">{{x.business_name}}</a></h3>
+					  </div>
+						<div class="panel-body">
+							<div class="media" >
+								<div class="media-left col-md-3">
+									<a href="#"><img class="img-responsive" src="{{x.business_logo}}">
+									</a>
+								</div>
+								<div class="media-body col-md-6 ">
+									<p class="media-heading"><span class="glyphicon glyphicon-earphone"></span>&nbsp&nbsp{{x.contact_profile.mobile}}</p>
+									<p class="media-heading"><span class="glyphicon glyphicon-home"></span>&nbsp&nbsp Country :{{x.country}},&nbsp&nbsp State - {{x.state}} ,<br>&nbsp&nbsp Location :{{x.location}},&nbsp&nbsp Area - {{x.area}}<br>
+									&nbsp&nbsp City : {{x.city}}, &nbsp&nbsp pincode : {{x.pincode}} | <a href="#"  tooltip="{{x.location}}">More</a></p>
+									<address class="media-heading"&nbsp&nbsp>Email :{{x.contact_profile.email}}</address>
+									<div class="table-responsive">
+									<table class="table table-bordered">
+										<tr>
+											<td>Estd,in<p>2000</p></td>
+											<td>
+												<div ng-controller="RatingDemoCtrl">
+													<h4>Rating</h4>
+													<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+													<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+												</div>
+											</td>
+											<td>
+												<a href="#" ><span class="glyphicon glyphicon-thumbs-up verified "></span><p>Wtouch Verified</p></a>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3">
+												<div class="btn-group center-block" role="group" aria-label="...">
+													<a  href="#" class="btn btn-warning">SMS</a>
+													<a   href="#" class="btn btn-warning">Email</a>
+													<a  href="#" class="btn btn-warning">Own This</a>
+													<a   href="#" class="btn btn-warning">Rate It</a>
+												</div>
+											</td>
+										</tr>
+									</table>
+									</div>
+								</div>
+								<div class="media-right col-md-3">
+									<a href="#" class="btn btn-success">
+									  Best Deal
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="searchrate"><a href="#"><span class="glyphicon glyphicon-star"></span></a>Click here to view your friends rating</div>
+					{% endfor %}
+					<div class="row">
+						<div class="col-md-6">
+							<div class="media" >
+								<div class="media-left">
+									<a href="#">
+									  <img class="media-object" src="{{path}}img/user.png" alt="profile picture">
+									</a>
+								</div>
+								<div class="media-body ">
+									<h3 class="media-heading">{{x.contact_profile.email}}
+									<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+										<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+									</h3><p > sai**@gmail.com|48******56</p><hr/>Multispecialist hospital, Emergency Facilities , Blood Banks , Well Qualified Doctors</p> 
+									<p > <a href="#">View All Ratings</a>|<a href="#">Rate & Review</a></p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+						<p class="text-warning">Overall Rating 
+							<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+							<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span></p>
+							<img src="{{path}}img/overallrating.jpg"/>
+						</div>
+						<div class="col-md-3">
+							<p class="text-warning">Rating overtime
+							<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+							<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span></p>
+							<img src="{{path}}img/linechart.jpg"/>
+						</div>
+					</div>
+					<div class="searchrate">
+						<p>More Information about Sai Hospital</p>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<p class="media-heading"><span class="glyphicon glyphicon-home"></span>&nbsp&nbsp Mumbai-Pune Road, Pune  
+							<p class="media-heading"><span class="glyphicon glyphicon-earphone"></span>&nbsp&nbsp (+91)-9418414122</p>
+							<p class="media-heading"><span class="glyphicon glyphicon-globe"></span>&nbsp&nbsp <a href="#">www.saihospitals.in</a></p>
+							<h4>Also Listed In </h4>
+							<table class="table table-striped">
+								<tr>
+									<td> Hospitals</td>
+									<td> Multispecialist Hospital</td>
+								</tr>
+								<tr>
+									<td>  Blood Banks</td>
+									<td> Pune,Mumbai</td>
+								</tr>
+							</table>
+							<h4>Hours Of Operations </h4>
+							<p>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday: 12:00 am to 11:59 pm</p>
+							<h4>Other Locations</h4>
+							<p>Mumbai, Pune, Delhi</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+  {% endautoescape %}
+{% endblock %}	
+
