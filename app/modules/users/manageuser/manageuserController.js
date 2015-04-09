@@ -17,7 +17,15 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.userInfo = {user_id : $rootScope.userDetails};
 		$scope.contries = dataService.config.country;
+		
+		//code for accessing json data of users
+		$scope.user = {};
+		dataService.config('config', {config_name : "manage_user"}).then(function(response){
+			$scope.user = response.config_data;
+			console.log($scope.user); 
+		});
 
+		
 		$scope.getState = function(country){
 			var states = [];
 			for (var x in $scope.contries){

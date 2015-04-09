@@ -114,18 +114,18 @@ define(['app'], function (app) {
 		
 		/*************************************************************************
 		Upload Function for uploading files {sonali}*/
-		$scope.upload = function(files,path,userinfo, picArr){ // this function for uploading files
-			
-			upload.upload(files,path,userinfo,function(data){
-				var picArrKey = 0, x;
-				for(x in picArr) picArrKey++;
-				if(data.status === 'success'){
-					picArr[picArrKey] = data.data;
-					console.log(data);
-				}else{
-					$scope.alerts.push({type: data.status, msg: data.message});
+		$scope.upload = function(files,path,userInfo, picArr){ // this function for uploading files
+			upload.upload(files,path,userInfo,function(data){
+		
+				if(picArr){
+					if(data.status === 'success'){
+						$scope.infrastructure.desc.image = data.data;
+						
+						console.log($scope.infrastructure.desc.image);
+					}else{
+						$scope.alerts.push({type: data.status, msg: data.message});
+					}
 				}
-				
 			}); 
 		};
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images

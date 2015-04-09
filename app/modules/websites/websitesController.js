@@ -32,6 +32,12 @@ define(['app'], function (app) {
 			});
 		};
 		
+		//code for accessing json data of website
+		$scope.web = {};
+		dataService.config('config', {config_name : "website"}).then(function(response){
+			$scope.web = response.config_data;
+			console.log($scope.web); 
+		});
         // all $scope object goes here
         $scope.alerts = [];
 		$scope.maxSize = 5;

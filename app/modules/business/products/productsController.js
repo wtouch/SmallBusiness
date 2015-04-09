@@ -109,7 +109,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			});
 		//end of options
 		var addproducts = function(){ 
-			//reset function{trupti}
 				$scope.reset = function(){
 				$scope.addproduct = {};
 			};
@@ -137,7 +136,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				.then(function(response) {  //function for response of request temp
 				});
 			} //end of post method {trupti} 
-			 //end of post method {trupti}
+			 
 		}
 		
 		

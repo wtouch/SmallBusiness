@@ -34,6 +34,12 @@ define(['app'], function (app) {
 			scrible : []
 		};
 		
+		//code for accessing json data of template
+		$scope.temp = {};
+		dataService.config('config', {config_name : "template"}).then(function(response){
+			$scope.temp = response.config_data;
+			console.log($scope.temp); 
+		});
 		//global methods
 		//function for close alert
 		$scope.closeAlert = function(index) {
@@ -437,7 +443,9 @@ define(['app'], function (app) {
 		
 		// switch functions
 		var mytemplates = function(){
-			dataService.get("getmultiple/mytemplate/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.userInfo)
+			$scope.template_type = {status:1};
+			angular.extend($scope.template_type, $scope.userInfo);
+			dataService.get("getmultiple/mytemplate/"+$scope.myTempCurrentPage+"/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) { 
 			if(response.status == 'success'){
 					$scope.templates=response.data;
@@ -519,6 +527,13 @@ define(['app'], function (app) {
 		};
 		$scope.ok = function () {
 			$modalOptions.close('ok');
+		};
+		
+		$scope.mypageChanged = function(page, where) {
+			dataService.get("getmultiple/mytemplate/"+page+"/"+$scope.pageItems, $scope.template_type)
+			.then(function(response){ 
+				$scope.templates = response.data;
+			});
 		};
 
 		};
