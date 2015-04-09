@@ -100,29 +100,6 @@ define(['app'], function (app) {
 		$scope.getKeywords('type', "Philosophy Poetry");
 		/**********************************************************************
 		code for accessing json data of country, State & City {Sonali}*/
-		$scope.contries = dataService.config.country;
-		$scope.getState = function(country){
-			var states = [];
-			for (var x in $scope.contries){
-				if($scope.contries[x].country_name == country){
-					for(var y in $scope.contries[x].states){
-						states.push($scope.contries[x].states[y])
-					}
-				}
-			}
-			$scope.states = states;
-		};
-		$scope.getCities = function(state){
-			var cities = [];
-			for (var x in $scope.states){
-				if($scope.states[x].state_name == state){
-					for(var y in $scope.states[x].cities){
-						cities.push($scope.states[x].cities[y])
-					}
-				}
-			}
-			$scope.cities = cities;
-		};
 		
 		dataService.get("getmultiple/user/1/100")
 		.then(function(response) {
@@ -178,30 +155,31 @@ define(['app'], function (app) {
 		}
 		
 		 //code for get data from business
-		if($routeParams.id)
-		{
-		$scope.id=$routeParams.id
-		dataService.get("getsingle/business/"+$routeParams.id)
-		.then(function(response) {
-			console.log(response);
-				if(response.status == 'success'){
-					$scope.addbusiness = dataService.parse(response.data);
-				}
-		});
-		} 
-		
-		$scope.updateData = function(addbusiness) {
-			dataService.put("put/business/"+$routeParams.id,addbusiness)
+		if($routeParams.id){
+			$scope.id=$routeParams.id
+			dataService.get("getsingle/business/"+$routeParams.id)
 			.then(function(response) {
-				if(response.status == "success"){
-					$scope.reset();
-					setTimeout(function(){
-						$location.path("#/dashboard/business/addbusiness");
-					},500);
-				}
-				$scope.alerts.push({type: response.status, msg: response.message});
+				console.log(response);
+					if(response.status == 'success'){
+						$scope.addbusiness = dataService.parse(response.data);
+						$scope.getTypes('category', $scope.addbusiness.category);
+						$scope.getKeywords('type', $scope.addbusiness.type);
+					}
 			});
+			$scope.updateData = function(addbusiness) {
+				dataService.put("put/business/"+$routeParams.id,addbusiness)
+				.then(function(response) {
+					if(response.status == "success"){
+						setTimeout(function(){
+							$location.path("/dashboard/business/businesslist");
+						},500);
+					}
+					$scope.alerts.push({type: response.status, msg: response.message});
+				});
+			}
 		}
+		
+		
 		
 		//update data
 		/* // Google Map
