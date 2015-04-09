@@ -2,12 +2,23 @@
 
 define(['angular',
 	'bootstrap',
-], function (angular) {
+	'services',
+	'ngCookies'
+], function (angular, ngCookies) {
     // Declare app level module which depends on views, and components
     var app = angular.module('apnasitePortal', [
-   'ui.bootstrap'
+   'ui.bootstrap', 'customServices', 'ngCookies'
  ]);
-	app.controller('TypeaheadCtrl', ['$scope','$http', function($scope, $http) {
+	app.controller('TypeaheadCtrl', ['$scope','$http','dataService', function($scope, $http,dataService) {
+		$scope.data = "vilas";
+		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+			var locationParams = {search : {}, groupBy : {}}
+			locationParams.search[searchColumn] = searchValue;
+			locationParams.groupBy[searchColumn] = searchValue;
+			return dataService.config('locations', locationParams).then(function(response){
+				return response;
+			});
+		}
 		console.log("TypeaheadCtrl");
 	}]).controller('RatingDemoCtrl', ['$scope','$http', function($scope, $http) {
 	  $scope.rate = 7;
@@ -50,3 +61,4 @@ define(['angular',
 	}]);	
     return app;
 });
+console.log("app");

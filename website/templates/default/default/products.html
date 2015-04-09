@@ -20,9 +20,12 @@
 					<div class="media">
 						<div class="media-left col-sm-2">
 						{% for key, value in x.product_image %}
-							<img class="img-responsive" src="{{value.file_relative_path}}">
+							<span>
+								<img class="img-responsive" src="{{value.file_relative_path}}">  <!--ng-click="x.images=key" -->
+							</span>
 						{% endfor %}
-						</div>
+						<!-- <img class="img-responsive col-sm-3" src="value.file_relative_path" ng-init="x.images = 0"/>-->
+						</div> 
 						<div class="media-body">
 							<p class="media-heading">{{x.description}}</p>
 							<a href="product/{{x.id}}" class="btn btn-default">Interested in this Product</a>

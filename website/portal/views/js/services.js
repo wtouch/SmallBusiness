@@ -176,7 +176,7 @@ define(['app'], function (app) {
 						var file = files[i];
 						$upload.upload({
 							url: '../server-api/index.php/upload',
-							fields: {'path': path, 'userinfo': userinfo},
+							fields: {'path': 'uploads/'+path, 'userinfo': userinfo},
 							file: file
 						}).progress(function (evt) {
 							var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -238,18 +238,37 @@ define(['app'], function (app) {
 			obj.setBase = function(path){
 				serviceBase = path;
 			};
-			obj.parse = function(oldObj){
+			obj.capitalize = function(string) {
+				return string.charAt(0).toUpperCase() + string.slice(1);
+			}
+			obj.stringify = function(oldObj){
 				var newObj = {};
 				angular.forEach(oldObj, function(value, key) {
-				  this[key] = (value.slice(0, 1) == "{" ) ? JSON.parse(value) : value;
+				  this[key] = JSON.stringify(value);
 				}, newObj);
 				return newObj;
 			}
-			obj.config = (sessionStorage.config) ? JSON.parse(sessionStorage.config) : null ;
-				$http.get('js/config.json').success(function(response){
-					sessionStorage.config =  JSON.stringify(response);
-					obj.config = response;
-				});
+			// this parse will parse within array or object of JSON string to object/array
+			obj.parse = function(oldObj){
+				if(angular.isArray(oldObj)){
+					var newObj = [];
+					for(var x in oldObj){
+						var newArrObj = {};
+						angular.forEach(oldObj[x], function(value, key) {
+						  this[key] = (angular.isObject(value)) ? value :(value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
+						}, newArrObj);
+						newObj.push(newArrObj);
+					}
+				}else{
+					var newObj = {};
+					angular.forEach(oldObj, function(value, key) {
+					  this[key] = (angular.isObject(value)) ? value :(value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
+					}, newObj);
+				}
+				return newObj;
+			}
+			
+				
 
 			
 			obj.rememberPass = function(remb){
@@ -262,6 +281,7 @@ define(['app'], function (app) {
 					obj.setAuth(false);
 					obj.removeCookies($cookies);
 					sessionStorage.clear();
+					localStorage.clear();
 				});
 			};
 			obj.removeCookies = function(cookies){
@@ -271,65 +291,98 @@ define(['app'], function (app) {
 			}
 				
 			obj.auth = ($cookieStore.get('auth')) ? true : (sessionStorage.auth) ? JSON.parse(sessionStorage.auth) : false;
-			//obj.userDetails = (sessionStorage.userDetails) ? JSON.parse(sessionStorage.userDetails) : null;
-			obj.userDetails = ($cookieStore.get('userDetails')) ? JSON.parse($cookieStore.get('userDetails')) : null;
+			
+			//obj.userDetails = ($cookieStore.get('userDetails')) ? (angular.isObject($cookieStore.get('userDetails'))) ? $cookieStore.get('userDetails') : JSON.parse($cookieStore.get('userDetails')) : null;
+			obj.userDetails = (localStorage.userDetails) ? (angular.isObject(localStorage.userDetails)) ? localStorage.userDetails : JSON.parse(localStorage.userDetails) : null;
 			
 			obj.setAuth = function (data) {
 				sessionStorage.auth = data;
-				//$cookieStore.put('userDetails',data);
 				return obj.auth =  JSON.parse(sessionStorage.auth);
 			};
 			obj.setUserDetails = function(data){
-				//sessionStorage.userDetails = (data);
-				$cookieStore.put('userDetails',data);
-				//obj.userDetails = JSON.parse(sessionStorage.userDetails);
-				obj.userDetails = JSON.parse($cookieStore.get('userDetails'));
+				if(data == (undefined || "")){
+					console.log("data undefined: "+data);
+				}else{
+					//sessionStorage.userDetails = (data);
+					//$cookieStore.remove('userDetails');
+					//$cookieStore.put('userDetails',data);
+					//sessionStorage.clear();
+					localStorage.clear();
+					//sessionStorage.userDetails = data;
+					localStorage.userDetails = data;
+					
+					//obj.userDetails = (angular.isObject($cookieStore.get('userDetails'))) ? $cookieStore.get('userDetails') : JSON.parse($cookieStore.get('userDetails'));
+					obj.userDetails = (angular.isObject(localStorage.userDetails)) ? localStorage.userDetails : JSON.parse(localStorage.userDetails);
+				}
 			}
+			obj.config = function(table, params){
+				params.table = table;
+				return $http({
+					url: serviceBase +'getmultiple/config/1/1',
+					method: "GET",
+					params: params
+				}).then(function (results) {
+					if(results.data.status == 'success'){
+						return obj.parse(results.data.data);
+					}else{
+						return obj.parse(results.data.data);
+					}
+					
+					
+				});
+			} ;
 			obj.get = function (q, params) {
+				$rootScope.loading = true;
+				
 				return $http({
 					url: serviceBase + q,
 					method: "GET",
 					params: params
 				}).then(function (results) {
+					$rootScope.loading = false;
 					return results.data;
 					
 				});
 			};
 			obj.post = function (q, object, params) {
+				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
 					method: "POST",
 					data: object,
 					params: params
 				}).then(function (results) {
+					$rootScope.loading = false;
 					return results.data;
 				});
 			};
 			obj.put = function (q, object, params) {
+				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
 					method: "PUT",
 					data: object,
 					params: params
 				}).then(function (results) {
+					$rootScope.loading = false;
 					return results.data;
 				});
 			};
 			obj.delete = function (q, object, params) {
+				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
 					method: "DELETE",
 					data: object,
 					params: params
 				}).then(function (results) {
+					$rootScope.loading = false;
 					return results.data;
 				});
 			};
 
 			return obj;
 	}]);
-	  
-	  
-	
+
 	return app;
 });
