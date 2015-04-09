@@ -19,6 +19,9 @@ $app->get('/', function() use($app, $config, $twig, $portal) {
 });
 
 $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
+	// this will replace [-] with [space]
+	//to add [-] from template use - replace({' ' : '-'}) as a filter
+	$category = $portal->decodeUrl($category); 
 	$response = $portal->getCategoryTypes($category);
 	$template = $twig->loadTemplate("categorytypes.html");
 	$template->display($response);
@@ -26,6 +29,9 @@ $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
 });
 
 $app->get('/:category/:type', function($category, $type) use($app, $config, $twig, $portal) {
+	$category = $portal->decodeUrl($category);
+	$type = $portal->decodeUrl($type);
+	
 	$response = $portal->getBusiness($category, $type);
 	$template = $twig->loadTemplate("business.html");
 	$template->display($response);

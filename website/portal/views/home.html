@@ -52,7 +52,8 @@
 				<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item)" placeholder="Select City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off" ng-init="city = 'Pune'">
 			</div>
 			<div class="col-md-8 ">
-				<div class="input-group  ">
+				<div class="input-group">
+
 					<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="location" typeahead-on-select="getData($item)" placeholder="Type to Search" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
 
 					<span class="input-group-btn">
@@ -76,7 +77,7 @@
 					<div class="text-center">
 						{% for x in data %}
 							<div class="products " >
-								<p class="catp"><a href="/{{x.category}}" >{{x.category}}</a></p>
+								<p class="catp"><a href="/{{x.category | replace({' ' : '-'}) }}" >{{x.category}}</a></p>
 								<span class="glyphicon glyphicon-film"></span>
 							</div>
 						{% endfor %}

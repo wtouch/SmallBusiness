@@ -8,7 +8,12 @@ class portalManager{
 		$this->db = new portalDbHelper;
 		$this->config =$config;
 	}
-	
+	function encodeUrl($url){
+		return $url = str_replace(" ","-",$url);
+	}
+	function decodeUrl($url){
+		return $url = str_replace("-"," ",$url);
+	}
 	function getBusinessData(){
 		try{
 			// page limit
