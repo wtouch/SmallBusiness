@@ -17,8 +17,7 @@ define(['app'], function (app) {
 		$scope.reset = function() {
 			$scope.addbusiness = {
 				created_date : $scope.currentDate,
-				contact_profile : {contact_photo : []},
-				business_logo  : [],
+				contact_profile : {contact_photo : []}
 			};
 		};
 		$scope.reset();
@@ -135,24 +134,27 @@ define(['app'], function (app) {
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
 		
 		//this upload function for uploading single image.{trupti}
+		
 		$scope.upload = function(files,path,userInfo, picArr){ // this function for uploading files
 			upload.upload(files,path,userInfo,function(data){
-		
-				if(picArr){
 					if(data.status === 'success'){
-						$scope.addbusiness.business_logo = data.data;
-						
-						console.log($scope.addbusiness.business_logo);
+						if(picArr == "business_logo"){
+							$scope.addbusiness.business_logo = data.data;
+						}
+						if(picArr == "contact_photo"){
+							$scope.addbusiness.contact_profile.contact_photo = data.data;
+						}
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}
-				}
-			}); 
+				
+			});
 		};
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
 			upload.generateThumbs(files);
 		};// End upload function
-			
+		
+		
 		/***********************************************************************************
 		add business form code here{sonali}*/
 		
@@ -176,9 +178,32 @@ define(['app'], function (app) {
 		}
 		
 		 //code for get data from business
+		if($routeParams.id)
+		{
+		$scope.id=$routeParams.id
+		dataService.get("getsingle/business/"+$routeParams.id)
+		.then(function(response) {
+			console.log(response);
+				if(response.status == 'success'){
+					$scope.addbusiness = dataService.parse(response.data);
+				}
+		});
+		} 
 		
+		$scope.updateData = function(addbusiness) {
+			dataService.put("put/business/"+$routeParams.id,addbusiness)
+			.then(function(response) {
+				if(response.status == "success"){
+					$scope.reset();
+					setTimeout(function(){
+						$location.path("#/dashboard/business/addbusiness");
+					},500);
+				}
+				$scope.alerts.push({type: response.status, msg: response.message});
+			});
+		}
 		
-		
+		//update data
 		/* // Google Map
 		$scope.initGoogleMap = function(latitude,longitude, zoom){
 			$scope.addbusiness.contact_profile.google_map.latitude = latitude;
@@ -291,18 +316,7 @@ define(['app'], function (app) {
 			}
 		}
 		
-		$scope.updateData = function(addbusiness) {
-			dataService.put("put/business/"+$scope.bizId,addbusiness)
-			.then(function(response) {
-				if(response.status == "success"){
-					$scope.reset();
-					setTimeout(function(){
-						$location.path("#/dashboard/templates/mytemplates");
-					},500);
-				}
-				$scope.alerts.push({type: response.status, msg: response.message});
-			});
-		}
+		
     };
 	
 	// Inject controller's dependencies

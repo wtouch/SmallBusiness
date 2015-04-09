@@ -33,6 +33,14 @@ define(['app'], function (app) {
 		$scope.news_coverage = { desc : { image  : {} }};
 		$scope.job_careers = { desc : { image  : {} }};
 		$scope.gallery = { desc : { image  : {} }};
+		
+		//code for accessing json data of business	
+		$scope.biz = {};
+		dataService.config('config', {config_name : "business"}).then(function(response){
+			$scope.biz = response.config_data;
+			console.log($scope.biz); 
+		});
+		
 		// config data for business form
 		$scope.biz = dataService.config.business;
 		
@@ -114,18 +122,18 @@ define(['app'], function (app) {
 		
 		/*************************************************************************
 		Upload Function for uploading files {sonali}*/
-		$scope.upload = function(files,path,userinfo, picArr){ // this function for uploading files
-			
-			upload.upload(files,path,userinfo,function(data){
-				var picArrKey = 0, x;
-				for(x in picArr) picArrKey++;
-				if(data.status === 'success'){
-					picArr[picArrKey] = data.data;
-					console.log(data);
-				}else{
-					$scope.alerts.push({type: data.status, msg: data.message});
+		$scope.upload = function(files,path,userInfo, picArr){ // this function for uploading files
+			upload.upload(files,path,userInfo,function(data){
+		
+				if(picArr){
+					if(data.status === 'success'){
+						$scope.infrastructure.desc.image = data.data;
+						
+						console.log($scope.infrastructure.desc.image);
+					}else{
+						$scope.alerts.push({type: data.status, msg: data.message});
+					}
 				}
-				
 			}); 
 		};
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images

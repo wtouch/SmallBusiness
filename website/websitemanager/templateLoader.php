@@ -74,7 +74,7 @@
 				if(isset($data['featured_products'])) $responseDt['featured_products'] = $data['featured_products'];
 				$responseDt['path'] = $this->tmplConfig['template_host_path_folder']."/";
 				
-				//print_r($responseDt['template']);
+				//print_r($responseDt['data']);
 				$response["status"] = "success";
 				$response["message"] = "Data Selected!";
 				$response["data"] = $responseDt;
