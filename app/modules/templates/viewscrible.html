@@ -7,19 +7,7 @@
 			<div class="col-sm-12">
 				<tabset>
 					<tab heading="Scrible Info" title="Scrible Info">
-						<!-- <table class="table table-responsive table-bordered ">
-							<tr><th>ID</th><th>TEMPLATE NAME</th><th>TEMPLATE TYPE</th><th>DEVELOPMENT STATUS</th><th>CATEGORY</th>
-							<th>CUSTOM REQUIREMENT</th><th>CREATE DATE</th></tr>
-							<tr>
-								<td>{{modalOptions.tempList.id}}</td>
-								<td>{{modalOptions.tempList.template_name}}</td>
-								<td>{{modalOptions.tempList.template_type}}</td>
-								<td>{{modalOptions.tempList.development_status}}</td>
-								<td>{{modalOptions.tempList.category}}</td>
-								<td>{{modalOptions.tempList.custome_requirement}}</td>
-								<td>{{modalOptions.tempList.date}}</td>
-							</tr>
-						</table> -->
+						
 						<table class="table table-bordered table-hover">
 						<tr><th>SCRIBLE DETAILS</th></tr>
 						<tr>
@@ -52,14 +40,14 @@
 						<table class="table table-bordered">
 						<tr "modalOptions.templates">
 						<td>
-						<td>
-						<span class="thumbs" ng-repeat="(key, value) in modalOptions.tempList.template_image">
-						<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.tempList.imgkey = key"/>
-						</span>
-						<!-- </td>
-						<td> -->
-						<img class="img-responsive" ng-model="modalOptions.tempList.imgkey" ng-src="{{appConfig.assetPath + modalOptions.tempList.template_image[modalOptions.tempList.imgkey].file_relative_path}}" ng-init="modalOptions.tempList.imgkey = 0"/>
-						</td>
+							<td>
+							<span class="thumbs" ng-repeat="(key, value) in modalOptions.tempList.template_image">
+								<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.tempList.imgkey = key"/>
+							</span>
+							</td>
+							<td> 
+							<img class="img-responsive" ng-model="modalOptions.tempList.imgkey" ng-src="{{appConfig.assetPath + modalOptions.tempList.template_image[modalOptions.tempList.imgkey].file_relative_path}}" ng-init="modalOptions.tempList.imgkey = 0"/>
+							</td>
 						</td>
 						</tr>		
 						</table>
@@ -69,16 +57,12 @@
 					<div class="table-responsive">
 						<table class="table table-bordered">
 							<tr "modalOptions.templates">
-						<td>
-						<td>
-						<span class="thumbs" ng-repeat="(key, value) in modalOptions.tempList.scrible">
-						<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.tempList.imgkey = key"/>
-						</span>
-						<!-- </td>
-						<td> -->
-						<img class="img-responsive" ng-model="modalOptions.tempList.imgkey" ng-src="{{appConfig.assetPath + modalOptions.tempList.scrible[modalOptions.tempList.imgkey].file_relative_path}}" ng-init="modalOptions.tempList.imgkey = 0"/>
-						</td>
-						</td>
+								<td>
+									<span class="thumbs" ng-repeat="(key, value) in modalOptions.tempList.scrible">
+									<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.tempList.imgkey = key"/>
+									</span>
+									<img class="img-responsive" ng-model="modalOptions.tempList.imgkey" ng-src="{{appConfig.assetPath + modalOptions.tempList.scrible[modalOptions.tempList.imgkey].file_relative_path}}" ng-init="modalOptions.tempList.imgkey = 0"/>
+								</td>
 						</tr>		
 						</table>
 						</div>

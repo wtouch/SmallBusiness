@@ -33,6 +33,14 @@ define(['app'], function (app) {
 		$scope.news_coverage = { desc : { image  : {} }};
 		$scope.job_careers = { desc : { image  : {} }};
 		$scope.gallery = { desc : { image  : {} }};
+		
+		//code for accessing json data of business	
+		$scope.biz = {};
+		dataService.config('config', {config_name : "business"}).then(function(response){
+			$scope.biz = response.config_data;
+			console.log($scope.biz); 
+		});
+		
 		// config data for business form
 		$scope.biz = dataService.config.business;
 		
