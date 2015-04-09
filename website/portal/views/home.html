@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12 ">
+			<div class="col-md-2 ">
 				<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item)" placeholder="Select City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off" ng-init="city = 'Pune'">
 			</div>
 		</div>
@@ -69,9 +69,9 @@
 			<div class="row">
 				<div class="col-md-12 ">
 					<div class="text-center">
-						<div class="products " ng-repeat="x in data.category" >{{x.category}}
+						<div class="products " >
 							<span class="glyphicon glyphicon-film"></span>
-							<p>{{x.category}}</p>
+							<p>{{data.0.category}}</p>
 						</div>
 						<div class="products">
 							<span class="glyphicon glyphicon-briefcase"></span>

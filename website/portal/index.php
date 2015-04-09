@@ -14,13 +14,13 @@ $twig = new Twig_Environment($loader);
 
 $app->get('/', function() use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories();
-	$template = $twig->loadTemplate("index.html");
+	$template = $twig->loadTemplate("home.html");
 	$template->display($response);
 });
 
 $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
 	$response = $portal->getCategoryTypes($category);
-	$template = $twig->loadTemplate("index.html");
+	$template = $twig->loadTemplate("types.html");
 	$template->display($response);
 	echo $response;
 });

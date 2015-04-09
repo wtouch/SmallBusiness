@@ -33,11 +33,13 @@ class portalManager{
 		$this->db->setGroupBy($groupByArray);
 		$where = array();
 		$data = $this->db->select('keywords', $where);
-		print_r($data);
+		
 		$response['title'] = "this is twig template";
+		$response['data'] = $data['data'];
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
+	
 	
 	function getCategoryTypes($category){
 		
