@@ -28,14 +28,20 @@ class portalManager{
 		echo json_encode($data);
 	}
 	function getCategories(){
-		$response = array(); 
+		/* $response = array(); 
 		$selectSql= mysql_query("SELECT category  FROM `keywords` GROUP BY `category` ");
 		$row=mysql_fetch_assoc($selectSql)or die(mysql_error());
 		while($row)
 		{
 			array_push($response,$row);
 		}
-		echo json_encode($response);	
+		echo json_encode($response);	 */
+		$groupByArray['category'] = 'category';
+		$this->db->setGroupBy($groupByArray);
+		$where = array();
+		$data = $this->db->select('keywords', $where);
+		print_r($data);
+		
 		//write query to get types & group by category
 		$response['title'] = "this is twig template";
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
@@ -43,7 +49,7 @@ class portalManager{
 	}
 	
 	function getCategoryTypes($category){
-		$data = array(); //write query to get types & group by types
+		/* $data = array(); //write query to get types & group by types
 		if($category===Null){
 			$selectSql= mysql_query("SELECT category,type  FROM `keywords` GROUP BY `category` ") or die(mysql_error());
 			while($row=mysql_fetch_assoc($selectSql))
@@ -60,7 +66,15 @@ class portalManager{
 		}else{
 			throw new Exception($data['message']);
 		}
+		print_r($data); */
+		$groupByArray['type'] = 'type';
+		$this->db->setGroupBy($groupByArray);
+		$where['category'] = $category;
+		$data = $this->db->select('keywords', $where);
 		print_r($data);
+		$response['title'] = "this is twig template";
+		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+		return $response;
 	}
 }
 ?>

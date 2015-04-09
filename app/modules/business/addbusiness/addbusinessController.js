@@ -75,11 +75,12 @@ define(['app'], function (app) {
 		}
 		$scope.getCategory = function(searchColumn, searchValue){
 			var locationParams = {search : {}, groupBy : {}}
-			locationParams.groupBy[searchColumn] = searchColumn;
+			locationParams.groupBy['category'] = 'category';
 			dataService.config('keywords',locationParams).then(function(response){
 				$scope.businessCategories = response;
 			});
-		} 
+		}
+		$scope.getCategory('category');
 		$scope.getTypes = function(filterColumn, searchValue){
 			var locationParams = {filter : {}, groupBy : {}}
 			locationParams.filter[filterColumn] = searchValue;
@@ -176,14 +177,7 @@ define(['app'], function (app) {
 		
 		 //code for get data from business
 		
-		dataService.get("getsingle/business/"+$routeParams.id)
-		.then(function(response) {
-			console.log(response);
-				if(response.status == 'success'){
-					$scope.addbusiness = dataService.parse(response.data);
-				}
-		});
-		 
+		
 		
 		/* // Google Map
 		$scope.initGoogleMap = function(latitude,longitude, zoom){
