@@ -19,7 +19,7 @@ define(['angular',
 				return response;
 			});
 		}
-		console.log("TypeaheadCtrl");
+		
 	}]).controller('RatingDemoCtrl', ['$scope','$http', function($scope, $http) {
 	  $scope.rate = 7;
 	  $scope.max = 10;
@@ -61,4 +61,3 @@ define(['angular',
 	}]);	
     return app;
 });
-console.log("app");

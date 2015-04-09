@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+{% autoescape false %}
+	<header>
+		{% include 'includes/navbar.html' ignore missing %}
+	</header>
+		<main >
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="btn-group-vertical leftlnk" role="group" aria-label="...">
+							{% for x in data %}
+							<button type="button" class="btn btn-primary active"> {{x.category}}</button>
+								<button type="button" class="btn btn-default">{{x.type}}</button>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="col-md-9 col-xs-12">
+						{% include 'includes/search-result.html' ignore missing %}
+					</div>
+				</div>
+			</div>
+		</main >
+	{% endautoescape %}
+{% endblock %}	
+
+
+		

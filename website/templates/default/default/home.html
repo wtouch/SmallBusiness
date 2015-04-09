@@ -10,13 +10,21 @@
 	
 {% block content %}
 {% autoescape false %}
-	{% include 'includes/featured_services.html' ignore missing %}
-	{% include 'includes/featured_products.html' ignore missing %}
-	
 <div class="row">
-	<div class="col-sm-12 text-center">
-    <h1>Welcome to {{ data.business_name }}</h1>
-    {{ data.business_info.keywords }}
+	<div class="col-sm-3">
+		<ul>
+			{% if data.news_coverage %}
+				<a href="activities">{{ value.newsdetails }}</a>
+			{% endif %}
+		</ul>
+	</div>
+	<div class="col-sm-9 text-center">
+		<div class="news">
+			<h1>Welcome to {{ data.business_name }}</h1>
+			{{ data.business_info.keywords }}
+			{% include 'includes/featured_services.html' ignore missing %}
+			{% include 'includes/featured_products.html' ignore missing %}
+		</div>
 	</div>
 </div>
 {% include 'includes/featured_testimonials.html' ignore missing %}

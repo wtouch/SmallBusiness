@@ -28,51 +28,55 @@ class portalManager{
 		echo json_encode($data);
 	}
 	function getCategories(){
-		/* $response = array(); 
-		$selectSql= mysql_query("SELECT category  FROM `keywords` GROUP BY `category` ");
-		$row=mysql_fetch_assoc($selectSql)or die(mysql_error());
-		while($row)
-		{
-			array_push($response,$row);
-		}
-		echo json_encode($response);	 */
+		// query to get types & group by category
 		$groupByArray['category'] = 'category';
 		$this->db->setGroupBy($groupByArray);
 		$where = array();
-		$data = $this->db->select('keywords', $where);
-		print_r($data);
 		
-		//write query to get types & group by category
+		$data = $this->db->select('keywords', $where);
+	
 		$response['title'] = "this is twig template";
+		$response['data'] = $data['data'];
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
 	
+	
 	function getCategoryTypes($category){
-		/* $data = array(); //write query to get types & group by types
-		if($category===Null){
-			$selectSql= mysql_query("SELECT category,type  FROM `keywords` GROUP BY `category` ") or die(mysql_error());
-			while($row=mysql_fetch_assoc($selectSql))
-			{
-				array_push($data,$row);
-			}
-		}else{
-			$where="WHERE category= ".$category;
-			$selectSql=mysql_query("SELECT category,type  FROM `keywords` GROUP BY `category` $where")or die(mysql_error());
-			$data=mysql_fetch_assoc($selectSql)or die(mysql_error());
-		}
-		if($data['status'] == "success"){
-			$response = $data['data'];
-		}else{
-			throw new Exception($data['message']);
-		}
-		print_r($data); */
+		$bizData=array();
 		$groupByArray['type'] = 'type';
 		$this->db->setGroupBy($groupByArray);
 		$where['category'] = $category;
 		$data = $this->db->select('keywords', $where);
-		print_r($data);
 		$response['title'] = "this is twig template";
+		$response['data'] = $data['data'];
+		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+		return $response;
+	}
+	function getBusiness ($category, $type){
+		$bizData=array();
+		$groupByArray['category'] = 'category';
+		$groupByArray['type'] = 'type';
+		$this->db->setGroupBy($groupByArray);
+		$where['category'] = $category  and $where['status'] = 1;
+		$data = $this->db->select('business', $where);
+		print_r ($data);
+		$response['title'] = "this is twig template";
+		$response['data'] = $data['data'];
+		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+		return $response;
+	}
+	function getBusinessView ($category, $type, $business){
+		$bizData=array();
+		$groupByArray['type'] = 'type';
+		$groupByArray['keywords'] = 'keywords';
+		$this->db->setGroupBy($groupByArray);
+		$where['type'] = $type  and $where['status'] = 1;
+		$data = $this->db->select('business', $where);
+		
+		print_r ($data);
+		$response['title'] = "this is twig template";
+		$response['data'] = $data['data'];
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}

@@ -1,120 +1,37 @@
+{% spaceless %}
 <!DOCTYPE html>
-<html ng-app="myApp" ng-controller="TypeaheadCtrl">
+<html >
 	<head>
-		<title>Welcome to Wtouch Portal</title>
+		 {% block head %}
+		<title>{% block title %}{{title}}{% endblock %}</title>
 		<link rel="stylesheet" type="text/css" href="{{path}}css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="{{path}}css/style.css">
 		<meta name="fragment" content="!"/>
 		<meta name="description" content="">
 		<meta name="keywords" content="">
+		 {% endblock %}
 	</head>
 	<body >
-		<header>
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="navbar navbar-default">
-						<div class="navbar-header">
-						  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						  </button>
-						 </div>
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav">
-								<li><a href="#"> <span class="glyphicon glyphicon-th "> </span></a></li>
-								<li><a href="#"> Free Listing</a></li>
-							</ul>
-							<ul class="nav navbar-nav navbar-right">
-								<li><a href="#">Login</a></li>
-								<li><a href="#">Register</a></li>
-							</ul>
-						</div>
-					 </nav>
-				</div>
-			</div>
-		</header>
-		<section >
+	
+		<div class="container">
+		{% block content %}
+			
+		{% endblock %}
+		
+		<footer>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<img src="{{path}}img/logo.png" title="Web Touch India Solution Pune " class="center-block logo img-responsive" />
-							
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12 ">
-						<a id="citylink" class="customSel search " href="#;" >Pune</a>
-						<input style="display: none;"  ng-model="customSelected"  typeahead="state as state.name for state in statesWithFlags | filter:{name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control" autocomplete="OFF" tabindex="1" name="city" id="city" type="text" value="Pune" >
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-8 ">
-						<div class="input-group  ">
-							<input type="text" class="form-control " placeholder="Search for...">
-							<span class="input-group-btn">
-								<button class="btn btn-primary  " type="button"><span class="glyphicon glyphicon-search"></span></button>
-							</span>
-						</div>
-					</div >
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<span class="location">Location not detected</span> <span >|</span> <span class="area"> <a href="javascript:;">Enter Area</a>
-						<input  type="text" autocomplete="OFF" id="where" name="where" value=""></span>
+					{% block footer %}
+						<p class="text-center">&copy copyright by  Wtouch India Solution Pune</p>
+					{% endblock %}
 					</div>
 				</div>
 			</div>
-		</section>
-			<section >
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12 ">
-							<div class="text-center">
-								<div class="products ">
-									<span class="glyphicon glyphicon-film"></span>
-									<p>Media</p>
-								</div>
-								<div class="products">
-									<span class="glyphicon glyphicon-briefcase"></span>
-									<p>Travel</p>
-								</div>
-								<div class="products">
-									<span class="glyphicon glyphicon-plane"></span>
-									<p>Flight</p>
-								</div>
-								<div class="products">
-									<span class="glyphicon glyphicon-wrench"></span>
-									<p>Repairs</p>
-								</div>
-								<div class="products">
-									<span class="glyphicon glyphicon-film"></span>
-									<p>Media</p>
-								</div>
-								<div class="products">
-									<span class="glyphicon glyphicon-film"></span>
-									<p>Media</p>
-								</div>
-							</div>
-							<span class="showmore"><a href="#" >More</a></span>
-						</div>
-					</div>
-				</div>
-			</section>
-			<footer>
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<p class="text-center">&Copy copyright by  Wtouch India Solution Pune</p>
-						</div>
-					</div>
-				</div>
-			</footer>
-		<script data-main="js/main" src="lib/requirejs/require.js"></script>
+		</footer></div>
+		<script data-main="{{path}}js/main" src="{{path}}lib/requirejs/require.js"></script>
 	</body>
 </html>
-
+{% endspaceless %}
 
 		

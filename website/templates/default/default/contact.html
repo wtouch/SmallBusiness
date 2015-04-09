@@ -72,18 +72,18 @@
 		<div class="col-sm-4">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<div class="alert alert-success" ng-show="mailSent" role="alert">Message has been sent!</div>
+					<div class="alert alert-success" ng-show="mailSent==true" role="alert">Message has been sent!</div>
 					<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-controller="enquiryController" novalidate>
 						<h4 class="text-center">General Enquiry</h4>
 						<div class="form-group">
 							<div class="col-sm-12">
-								<input type="hidden" class="form-control" id="user_id" ng-init="enquiry.user_id={{data.user_id}}" ng-model="enquiry.user_id" name="user_id">
+								<input type="hidden" class="form-control" id="user_id" ng-bind="data.user_id" ng-model="enquiry.user_id" name="user_id">
 								
-								<input type="hidden" class="form-control" id="user_id" ng-model="enquiry.date" name="current_date">
+								<input type="hidden" class="form-control" id="date" ng-bind="enquiry.date" ng-model="enquiry.date" name="date">
 								
-								<input type="hidden" class="form-control" id="to_email" name="to_email" ng-model="enquiry.to_email.to" ng-init="enquiry.to_email.to={{data.owner_email}}" >
+								<input type="hidden" class="form-control" id="to_email" name="to_email" ng-model="enquiry.to_email.to" ng-bind="data.owner_email">
 						
-								<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" ng-init="enquiry.subject='website enquiry'">
+								<input type="hidden" class="form-control" id="subject" name="subject" ng-bind="enquiry.subject" ng-model="enquiry.subject">
 								
 								<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true">	
 									<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
@@ -101,21 +101,21 @@
 						
 						<div class="form-group">
 							<div class="col-sm-12">
-								<input type="text" class="form-control help-block" id="phone" ng-model="enquiry.message.phone" name="phone" placeholder="Contact Number"  ng-pattern="/(7|8|9)\d{9}$/" maxlengtd="10" required>
+								<input type="text" class="form-control help-block" id="phone" ng-model="enquiry.message.phone" name="phone" placeholder="Contact Number"  ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 								<p ng-show="enquiryForm.phone.$error.pattern && (enquiryForm.phone.$dirty || submitted)" class="text-danger" >Enter a valid contact no.</p>
 							</div>						
 						</div>	
 						
 						<div class="form-group">
 							<div class="col-sm-12">
-								<textarea id="address" name="address" class="form-control" placeholder="Address" rows="3" ng-model="enquiry.message.address" ng-minlengtd="2" ng-maxlengtd="356" required>
+								<textarea id="address" name="address" class="form-control" placeholder="Address" rows="3" ng-model="enquiry.message.address" ng-minlength="2" ng-maxlength="356" required>
 								</textarea>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="col-sm-12">
-								<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlengtd="2" ng-maxlengtd="356" required>
+								<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlength="2" ng-maxlength="356" required>
 								</textarea>
 							</div>
 						</div>

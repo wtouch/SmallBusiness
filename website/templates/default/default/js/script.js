@@ -12,38 +12,23 @@ app.config(function($routeProvider, $locationProvider) {
 });
 app.controller('enquiryController', function($scope,$http, $route, $location) {
 	$scope.hostUrl = hostUrl;
-	/*var today = new Date();
-	 var year = today.getFullYear();
+	var today = new Date();
+	var year = today.getFullYear();
 	var month = today.getMonth() + 1;
 	var date = today.getDate();
 	var hour = today.getHours();
 	var min = today.getMinutes();
-	var sec = today.getSeconds(); */
+	var sec = today.getSeconds();
 	$scope.mailSent = false;
-	$http.get("/sitedata").success(function(response){
-		if(response.status == "success"){
-			$scope.config = response.config;
-			$scope.hostUrl = response.config.http_template_path + response.webTemplate.template_folder+"/";
-			$scope.business = response.webData.business;
-			$scope.products = response.webData.products;
-			$scope.services = response.webData.services;
-			$scope.routes = response.webRoutes;
-			$scope.enquiry = {
-				user_id : $scope.business.user_id,
-				to_email : {to : $scope.business.owner_email},
+	$scope.enquiry = {
 				subject : 'Website Enquiry',
 				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 			};
-			console.log($scope.enquiry);
-		}
-	});
-	$scope.today = function() {
-		$scope.enquiry.date = new Date();
-	};
-	$scope.today();
+	console.log($scope.enquiry);
 	$scope.postData = function(enquiry){
 		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
 				$scope.mailSent = true;
+				console.log(response);
 		});
 	};
 });	

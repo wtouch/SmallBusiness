@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+{% autoescape false %}
+		<header>
+			{% include 'includes/navbar.html' ignore missing %}
+		</header>
+		
+		<main >
+			<h3> Popular Business Types</h3>
+			<div class="container">
+				<div class="row">
+				{% for x in data %}
+					<div class="col-md-4">
+						<div class="media buztypes">
+							<div class="media-left">
+								<a href="#">
+									<img class="media-object" src="{{path}}img/book.jpg" alt="Art gallery">
+								</a>
+							</div>
+							<div class="media-body">
+								<h4 class="media-heading"><a href="/{{x.category}}/{{x.type}}">{{x.type}}</a></h4>
+								
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				</div>
+			</div>
+		</main >
+	{% endautoescape %}
+{% endblock %}	
+
+
+		
