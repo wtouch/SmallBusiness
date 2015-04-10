@@ -11,7 +11,7 @@
      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
      <span>(<small bind-html-unsafe="match.model.area"></small>-<small bind-html-unsafe="match.model.pincode"></small>)</span>
     </a>
-  </script>
+</script>
 	<header>
 		<div class="row">
 			<div class="col-md-12">
@@ -53,7 +53,6 @@
 			</div>
 			<div class="col-md-8 ">
 				<div class="input-group">
-
 					<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="location" typeahead-on-select="getData($item)" placeholder="Type to Search" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
 
 					<span class="input-group-btn">
