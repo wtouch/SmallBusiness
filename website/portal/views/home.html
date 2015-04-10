@@ -12,47 +12,39 @@
      <span>(<small bind-html-unsafe="match.model.area"></small>-<small bind-html-unsafe="match.model.pincode"></small>)</span>
     </a>
 </script>
-	{% include 'includes/header.html' ignore missing %}
-	<section >
+	
+<section >
 	<div class="container" ng-controller="TypeaheadCtrl">
-		<div class="row">
-			<div class="col-md-12">
-				<img src="{{path}}img/logo.png" title="Web Touch India Solution Pune " class="center-block logo img-responsive" />
-					
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-md-2 ">
-				<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item)" placeholder="Select City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off" ng-init="city = 'Pune'">
-			</div>
-			<div class="col-md-8 ">
-				<div class="input-group">
-					<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="location" typeahead-on-select="getData($item)" placeholder="Type to Search" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
-
-					<span class="input-group-btn">
-						<button class="btn btn-primary  form-control " type="button"><span class="glyphicon glyphicon-search"></span></button>
-					</span>
+		<div class="home center-block">
+			<div class="row">
+				<div class="col-md-12">
+					<img src="{{path}}img/logo.png" title="Web Touch India Solution Pune " class="center-block logo img-responsive" />
+						
 				</div>
-			</div >
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<span class="location">Location not detected</span> <span >|</span> <span class="area"> <a href="javascript:;">Enter Area</a>
-				<input  type="text" autocomplete="OFF" id="where" name="where" value=""></span>
 			</div>
-		</div>
-	</div>
-	</section>
-	<section >
-		<div class="container">
+			<div class="row">
+				<div class="col-md-6 pull-right">
+					<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item)" placeholder="Search City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control cityBlock" autocomplete="off" ng-init="city = ''">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 ">
+					<div class="input-group searchBlock">
+						<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="location" typeahead-on-select="getData($item)" placeholder="Type to Search" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
+
+						<span class="input-group-btn">
+							<button class="btn btn-primary  form-control " type="button"><span class="glyphicon glyphicon-search"></span></button>
+						</span>
+					</div>
+				</div >
+			</div>
 			<div class="row">
 				<div class="col-md-12 ">
 					<div class="text-center">
 						{% for x in data %}
 							<div class="products " >
-								<p class="catp"><a href="/{{x.category | replace({' ' : '-'}) }}" >{{x.category}}</a></p>
-								<span class="glyphicon glyphicon-film"></span>
+								<span class="glyphicon glyphicon-film"></span><br>
+								<a  class="catp"href="/{{x.category | replace({' ' : '-'}) }}" >{{x.category}}</a>
 							</div>
 						{% endfor %}
 						
@@ -61,7 +53,8 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 {% endautoescape %}
 {% endblock %}
 

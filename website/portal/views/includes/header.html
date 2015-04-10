@@ -4,8 +4,15 @@
 				<nav class="navbar navbar-default">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="#"><img src="{{path}}img/logo.png" title="Web Touch India Solution Pune " class="center-block " /></a>
+						<div class="input-group search" ng-if="!index.html">
+							<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="location" typeahead-on-select="getData($item)" placeholder="Type to Search" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
+
+							<span class="input-group-btn">
+								<button class="btn btn-primary  form-control " type="button"><span class="glyphicon glyphicon-search"></span></button>
+							</span>
+						</div>
 					 </div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="#"> Free Listing</a></li>
 							<li><a href="#">Login</a></li>
