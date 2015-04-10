@@ -14,6 +14,28 @@ class portalManager{
 	function decodeUrl($url){
 		return $url = str_replace("-"," ",$url);
 	}
+	
+	function jsonDecode($data){
+		if($data==null || $data==""){
+			return false;
+		}else{
+			$arr = array();
+			if(is_array($data) || is_object($data)){
+				foreach($data as $key => $value){
+					foreach($value as $subkey => $subvalue){
+						$subarr[$subkey] = ((substr($subvalue,0,1) == "{") || (substr($subvalue,0,1) == "[")) ? json_decode($subvalue, true) : $subvalue;
+					}
+					$arr[$key] = $subarr;
+				}
+			}else{
+				foreach($data as $key => $value){
+					$arr[$key] = ((substr($value,0,1) == "{") || (substr($value,0,1) == "[")) ? json_decode($value, true) : $value;
+				}
+			}
+			return $arr;
+		}
+	}
+	
 	function getBusinessData(){
 		try{
 			// page limit
@@ -24,7 +46,7 @@ class portalManager{
 			
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
-            $response["data"] = $productData;
+            $response["data"] = $this->jsonDecode($data["data"]);
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = 'Error: ' .$e->getMessage();
@@ -41,11 +63,10 @@ class portalManager{
 		$data = $this->db->select('keywords', $where);
 	
 		$response['title'] = "this is twig template";
-		$response['data'] = $data['data'];
+		$response['data'] = $this->jsonDecode($data["data"]);
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
-	
 	
 	function getCategoryTypes($category){
 		$bizData=array();
@@ -54,34 +75,32 @@ class portalManager{
 		$where['category'] = $category;
 		$data = $this->db->select('keywords', $where);
 		$response['title'] = "this is twig template";
-		$response['data'] = $data['data'];
+		$response['data'] = $this->jsonDecode($data["data"]);
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
 	function getBusiness ($category, $type){
-		$bizData=array();
-		$groupByArray['category'] = 'category';
-		$groupByArray['type'] = 'type';
-		$this->db->setGroupBy($groupByArray);
-		$where['category'] = $category  and $where['status'] = 1;
+		$where['category'] = $category;
+		$where['type'] = $type;
+		$where['status'] = 1;
 		$data = $this->db->select('business', $where);
-		print_r ($data);
+		//print_r ($data);
 		$response['title'] = "this is twig template";
-		$response['data'] = $data['data'];
+		$response['data'] = $this->jsonDecode($data["data"]);
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
-	function getBusinessView ($category, $type, $business){
-		$bizData=array();
-		$groupByArray['type'] = 'type';
-		$groupByArray['keywords'] = 'keywords';
-		$this->db->setGroupBy($groupByArray);
-		$where['type'] = $type  and $where['status'] = 1;
+	function getBusinessView ($category, $type, $business,$id){
+
+		$where['type'] = $type;
+		$where['status'] = 1;
+		$where['category'] = $category ;
+		$where['id'] = $id ;
+		//print_r($where);
 		$data = $this->db->select('business', $where);
-		
 		print_r ($data);
 		$response['title'] = "this is twig template";
-		$response['data'] = $data['data'];
+		$response['data'] = $this->jsonDecode($data["data"]);
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}

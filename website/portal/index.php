@@ -31,15 +31,16 @@ $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
 $app->get('/:category/:type', function($category, $type) use($app, $config, $twig, $portal) {
 	$category = $portal->decodeUrl($category);
 	$type = $portal->decodeUrl($type);
-	
 	$response = $portal->getBusiness($category, $type);
 	$template = $twig->loadTemplate("business.html");
 	$template->display($response);
 });
 
-$app->get('/:category/:type/:business', function($category, $type, $business) use($app, $config, $twig, $portal) {
-	echo $business;
-	$response = $portal->getBusinessView($category, $type, $business);
+$app->get('/:category/:type/:business/:id', function($category, $type, $business,$id) use($app, $config, $twig, $portal) {
+	$category = $portal->decodeUrl($category);
+	$type = $portal->decodeUrl($type);
+	$business = $portal->decodeUrl($business);
+	$response = $portal->getBusinessView($category, $type, $business,$id);
 	$template = $twig->loadTemplate("viewbusiness.html");
 	$template->display($response);
 });

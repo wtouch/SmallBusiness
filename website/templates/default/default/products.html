@@ -7,6 +7,9 @@
         .important { color: #336699; }
     </style>
 {% endblock %}
+{% block carousal %}
+	{% include 'includes/carousal.html' ignore missing %}
+{% endblock %}
 {% block content %}
 {% autoescape false %}
 	<h2 class="text-center">Products</h2>
@@ -17,9 +20,11 @@
 					<img class="img-responsive" src="{{value.file_relative_path}}" alt="{{key}}"/>
 				{% endfor %}
 				<div class="caption">
-					<h1>{{ x.product_service_name }} </h1>
-					<p>{{x.description}}</p>
-					<a href="product/{{x.id}}" class="btn btn-default">Interested in this Product</a>
+					<h3>{{ x.product_service_name }} </h3>
+					<p>
+					{{x.description|slice(start, 50)}}
+					</p>
+					<a href="product/{{x.id}}" class="btn btn-info">Read More..</a>
 				</div>
 			</div>
 		</div>
