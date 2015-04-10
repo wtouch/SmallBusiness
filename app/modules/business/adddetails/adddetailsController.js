@@ -16,7 +16,6 @@ define(['app'], function (app) {
 			if($scope.businessData.job_careers == "") $scope.businessData.job_careers = {};
 		});	
 		
-		
 		// all $scope object goes here
 		$scope.alerts = [];
 		$scope.maxSize = 5;
@@ -27,7 +26,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.business_id = $routeParams.id;
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials
-		$scope.path = "business/"; // path to store images on server
+		$scope.path = "business/"+$scope.userInfo.user_id; // path to store images on server
 		$scope.infrastructure = { desc : { image  : {} }};
 		$scope.testimonials = { desc : { image  : {} }};
 		$scope.news_coverage = { desc : { image  : {} }};
@@ -61,14 +60,12 @@ define(['app'], function (app) {
 			$scope.imgRemoved = false;
 		};
 		
-		
 		$scope.addToObject = function(data, object, resetObj){
 			var dtlObj = JSON.stringify(data.desc);
 			object[data.heading] = JSON.parse(dtlObj);
 			$scope.headingDisabled = false;
 			$scope.infra = false;
 			$scope.imgRemoved = false;
-			//console.log(data);
 			$scope[resetObj] = { desc : { image  : {} }};
 			console.log(data);
 		}

@@ -107,7 +107,7 @@ define(['app'], function (app) {
 		});	
 		
 		
-		$scope.path = "business/"; // path to store images on server
+		$scope.path = "business/"+$scope.userInfo.user_id; // path to store images on server
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
 		
 		//this upload function for uploading single image.{trupti}

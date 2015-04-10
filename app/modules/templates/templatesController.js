@@ -28,7 +28,7 @@ define(['app'], function (app) {
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		$scope.temp = dataService.config.template;
-		$scope.path = "template/"; // path to store images on server
+		$scope.path = "template/"+$scope.userInfo.user_id; // path to store images on server
 		$scope.userinfo = $scope.userInfo;
 		$scope.reqtemp = {
 			scrible : []
@@ -187,9 +187,7 @@ define(['app'], function (app) {
 		$scope.ok = function () {
 			$modalOptions.close('ok');
 		};
-	
-	
-	
+
 		//open model for template img
 		$scope.openTemp = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
@@ -226,7 +224,7 @@ define(['app'], function (app) {
 			});
 		};
 		
-		//modalfor open scrible details.
+		//modal for open scrible details.
 		$scope.openTab = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
@@ -249,7 +247,6 @@ define(['app'], function (app) {
 			$modalOptions.close('ok');
 		};
 
-		
 		//for edit the price of template
 		$scope.changeStatusf={};
 		$scope.editTemplatePrice = function(colName, colValue, id, editStatus){
@@ -278,7 +275,6 @@ define(['app'], function (app) {
 			}
 			return template_price;
 		}
-		
 		
 		//method for select development status
 		$scope.changeStatusf={};
@@ -424,7 +420,6 @@ define(['app'], function (app) {
 			});
 		} ;
 		
-	
 	   $scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
 		
 			 upload.upload(files,path,userInfo,function(data){
@@ -439,7 +434,6 @@ define(['app'], function (app) {
 				}
 			}); 
 		};    
-		
 		
 		// switch functions
 		var mytemplates = function(){
@@ -456,7 +450,7 @@ define(['app'], function (app) {
 				$scope.templates = response.data;
 			});
 			
-			//this code block for modal
+		//this code block for modal
 		$scope.editTempParamsModel = function (url, tempId) {
 			dataService.get("getsingle/mytemplate/"+tempId)
 			.then(function(response) {
@@ -572,12 +566,10 @@ define(['app'], function (app) {
 			$scope.reset = function() {
 				$scope.reqtemp = {};
 			};
-			
 			//post method for insert data in request template form{trupti}
 			$scope.reqtemp.date = $scope.currentDate;
 			$scope.postData = function(reqtemp) { 
 			$scope.reqtemp.user_id= $rootScope.userDetails.id;
-			
 				//$scope.reqtemp.custom = {custom:1};
 				 dataService.post("post/template",reqtemp)
 				.then(function(response) {  //function for response of request temp
