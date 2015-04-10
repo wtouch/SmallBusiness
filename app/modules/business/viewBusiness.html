@@ -13,11 +13,12 @@
 							<tr>
 								<td>{{modalOptions.bizList.id}}</td>
 								<td>{{modalOptions.bizList.business_name}}</td><td>
+								
 								<!-- <span ng-repeat="(key, value) in modalOptions.bizList.business_logo">
-									<img width='50px' ng-src="{{'../server-api/'+value.file_name}}" />
-								</span> -->
-								<span ng-repeat="(key, value) in modalOptions.bizList.business_logo">
 									<img class="imgwidth" ng-src="{{appConfig.assetPath+'/'+value.file_name}}"/>
+								</span> -->
+								<span "value.file_relative_path" in modalOptions.bizList.business_logo>
+									<img class="imgwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}"/>
 								</span>
 								</td><td>{{modalOptions.bizList.category}}</td>
 								<td>{{modalOptions.bizList.ownership}}</td><td ng-bind-html="modalOptions.bizList.business_info.keywords"></td>

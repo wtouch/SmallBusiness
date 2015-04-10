@@ -25,6 +25,23 @@ define(['app'], function (app) {
 			console.log($scope.user); 
 		});
 
+		$scope.getData = function(location){
+			$scope.readOnly = true;
+			$scope.adduser.address.location = location.location;
+			$scope.adduser.address.city = location.city;
+			$scope.adduser.state = location.state;
+			$scope.adduser.country = location.country;
+			$scope.adduser.address.area = location.area;
+			$scope.adduser.address.pincode = location.pincode;
+		}
+		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+			var locationParams = {search : {}, groupBy : {}}
+			locationParams.search[searchColumn] = searchValue;
+			locationParams.groupBy[searchColumn] = searchValue;
+			return dataService.config('locations', locationParams).then(function(response){
+				return response;
+			});
+		}
 		
 		$scope.getState = function(country){
 			var states = [];

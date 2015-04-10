@@ -5,7 +5,18 @@ define(['app'], function (app) {
 	
     // This is controller for this view
 	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
+		
+		//all $scope object goes here
+        $scope.alerts = [];
+		$scope.maxSize = 5;
+		$scope.totalRecords = "";
+		$scope.webListCurrentPage = 1;
+		$scope.reqestSiteCurrentPage = 1;
+		$scope.pageItems = 10;
+		$scope.numPages = "";
+		$scope.currentDate = dataService.currentDate;
 		$scope.permission = $rootScope.userDetails.permission.website_module;
+		
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
 		// For displaying manage domain module parts! {Dnyaneshwar}
@@ -33,21 +44,12 @@ define(['app'], function (app) {
 		};
 		
 		//code for accessing json data of website
-		$scope.web = {};
+		 $scope.web = {};
 		dataService.config('config', {config_name : "website"}).then(function(response){
 			$scope.web = response.config_data;
 			console.log($scope.web); 
 		});
-        // all $scope object goes here
-        $scope.alerts = [];
-		$scope.maxSize = 5;
-		$scope.totalRecords = "";
-		$scope.webListCurrentPage = 1;
-		$scope.reqestSiteCurrentPage = 1;
-		$scope.pageItems = 10;
-		$scope.numPages = "";
-		$scope.currentDate = dataService.currentDate;
-		
+        
 		if($rootScope.userDetails.group_name == "customer"){
 			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		}
@@ -238,7 +240,7 @@ define(['app'], function (app) {
         var requestedsitelist = function(){
 			//function for requestedsitelist{Dnyaneshwar}
 			$scope.websiteParams = $scope.userInfo;
-			dataService.get("getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems, $scope.userInfo)
+			dataService.get("getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems,$scope.userInfo)
 			.then(function(response) {  //function for requestedsitelist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
