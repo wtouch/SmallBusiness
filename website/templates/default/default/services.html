@@ -7,12 +7,11 @@
         .important { color: #336699; }
     </style>
 {% endblock %}
+{% block carousal %}
+	{% include 'includes/carousal.html' ignore missing %}
+{% endblock %}
 {% block content %}
 {% autoescape false %}
-    <!--<h1>{{heading}}</h1>
-    <p class="important">
-        Welcome to my awesome homepage.
-    </p> -->
 	<h2 class="text-center">Services</h2>
 	{% for x in data %}
 		<div class="col-sm-6 col-md-4">
@@ -21,9 +20,9 @@
 					<img class="img-responsive" src="{{value.file_relative_path}}" alt="{{key}}"/>
 				{% endfor %}
 				<div class="caption">
-					<h1>{{ x.product_service_name }} </h1>
-					<p>{{x.description}}</p>
-					<a href="service/{{x.id}}" class="btn btn-default">Interested in this Product</a>
+					<h3>{{ x.product_service_name }} </h3>
+					<p>{{x.description|slice(start, 50)}}</p>
+					<a href="service/{{x.id}}" class="btn btn-info">Read More...</a>
 				</div>
 			</div>
 		</div>

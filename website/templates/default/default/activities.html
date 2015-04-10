@@ -2,10 +2,13 @@
 
 {% block title %}{{data.business_name}}{% endblock %}
 
+{% block carousal %}
+	{% include 'includes/carousal.html' ignore missing %}
+{% endblock %}
+
 {% block content %}
 {% autoescape false %}
 {% if data.news_coverage %}
-
 <div class="row">
 	<div class="col-sm-12">
 		<h2>Activities</h2>
