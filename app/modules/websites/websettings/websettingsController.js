@@ -36,20 +36,24 @@ define(['app'], function (app) {
 		
 		//code for edit website details{trupti}
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
-		dataService.get("getsingle/website/"+$routeParams.id,$scope.userDetails)
+		dataService.get("getsingle/website/"+$routeParams.id)
 		.then(function(response) {  //function for my templates response
+		console.log(response);
 			if(response.status == 'success'){
-				if(response.data.config!=''){
-					var config = JSON.parse(response.data.config);
+				
+					var config = (response.data.config!='') ? JSON.parse(response.data.config) : { google_map : {}};
+					if(config.google_map == undefined) config.google_map = {};
 					$scope.config = config;
-					console.log(config);
-					if(config.google_map.latitude && config.google_map.longitude){
+					console.log(response.data);
+					//console.log(config.google_map.latitude);
+					if(config.google_map.latitude != undefined && config.google_map.longitude != undefined){
 						$scope.initGoogleMap(config.google_map.latitude, config.google_map.longitude, 18);
 					}else{
 						$scope.getLocation();
 					}
-				}
+				
 			}else{
+				
 				$scope.alerts.push({type: response.status, msg: response.message});
 			};
 			//$scope.config = response.data;
