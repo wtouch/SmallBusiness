@@ -91,17 +91,16 @@ class portalManager{
 		return $response;
 	}
 	function getBusinessView ($category, $type, $business,$id){
-
 		$where['type'] = $type;
 		$where['status'] = 1;
 		$where['category'] = $category ;
 		$where['id'] = $id ;
 		//print_r($where);
 		$data = $this->db->select('business', $where);
-		print_r ($data);
 		$response['title'] = "this is twig template";
 		$response['data'] = $this->jsonDecode($data["data"]);
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+		print_r ($response['data']);
 		return $response;
 	}
 }

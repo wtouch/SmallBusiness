@@ -42,7 +42,7 @@
 													<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
 												</div>
 											</td>
-											<td ng-if="x.verified">
+											<td ng-if="{{x.verified}}">
 												<a href="#" ><img src="{{path}}/img/verified.png"/><p> Verified Business</p></a>
 											</td>
 										</tr>
@@ -73,53 +73,59 @@
 							<div class="media" >
 								<div class="media-left">
 									<a href="#">
-									  <img class="media-object" class="img-responsive" src="{{x.contact_profile.contact_photo.file_relative_path}}" alt="profile picture">
-									  
+										<img class="media-object img-responsive" src="{{x.contact_profile.contact_photo.file_relative_path}}" alt="profile picture"/>
 									</a>
 								</div>
 								<div class="media-body ">
-									<h3 class="media-heading">
+									<h4 class="media-heading">
 									<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
 										<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
-									</h3>
-										<p  >&nbsp&nbsp {{x.contact_profile.email}}|{{x.contact_profile.mobile}}</p><hr/>
-										{{data.keywords}}
-									<p > <a href="#">View All Ratings</a>|<a href="#">Rate & Review</a></p>
+									</h4>
+									<p>&nbsp&nbsp Contact Email:&nbsp&nbsp {{x.contact_profile.email}}</p><p>&nbsp Person Mobile :&nbsp&nbsp{{x.contact_profile.mobile}}</p>
+										<span>
+											<b> Other Information :</b>
+											{% for key,value  in x.keywords %}
+												{{value}}
+											{% endfor %}
+										</span>
+									<p ng-if="x.rating"> 
+										<a href="#">View All Ratings</a>|<a href="#">Rate & Review</a>
+									</p>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-3">
-						<p class="text-warning">Overall Rating 
-							<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-							<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span></p>
+							<p class="text-warning">Overall Rating 
+								<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+								<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+							</p>
 							<img src="{{path}}img/overallrating.jpg"/>
 						</div>
 						<div class="col-md-3">
 							<p class="text-warning">Rating overtime
 							<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-							<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span></p>
+								<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+							</p>
 							<img src="{{path}}img/linechart.jpg"/>
 						</div>
 					</div>
 					<div class="searchrate">
-						<p>More Information about Sai Hospital</p>
+						<a href="{{x.contact_profile.contact_website}}"><p>More Information about Sai Hospital</p></a>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<p class="media-heading"><span class="glyphicon glyphicon-home"></span>&nbsp&nbsp Mumbai-Pune Road, Pune  
-							<p class="media-heading"><span class="glyphicon glyphicon-earphone"></span>&nbsp&nbsp (+91)-9418414122</p>
-							<p class="media-heading"><span class="glyphicon glyphicon-globe"></span>&nbsp&nbsp <a href="#">www.saihospitals.in</a></p>
+							<p class="media-heading"><span class="glyphicon glyphicon-earphone"></span>&nbsp&nbsp{{x.contact_profile.mobile}}</p>
+							<p class="media-heading"><span class="glyphicon glyphicon-globe"></span>&nbsp&nbsp <a href="#">&nbsp&nbsp{{x.contact_profile.contact_website}}</a></p>
 							<h4>Also Listed In </h4>
-							<table class="table table-striped">
-								<tr>
-									<td> Hospitals</td>
-									<td> Multispecialist Hospital</td>
-								</tr>
-								<tr>
-									<td>  Blood Banks</td>
-									<td> Pune,Mumbai</td>
-								</tr>
-							</table>
+							{% for key,value  in x.keywords %}
+								<table class="table table-bordered">
+									<tr>
+										<td>{{key}}</td>
+										<td> {{value}}</td>
+									</tr>
+								</table>
+							{% endfor %}
 							<h4>Hours Of Operations </h4>
 							<p>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday: 12:00 am to 11:59 pm</p>
 							<h4>Other Locations</h4>
