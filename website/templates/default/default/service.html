@@ -5,6 +5,9 @@
     {{ parent() }}
    
 {% endblock %}
+{% block carousal %}
+	{% include 'includes/carousal.html' ignore missing %}
+{% endblock %}
 {% block content %}
 {% autoescape false %}
 	<h2>{{ data.product_service_name }}</h2>
@@ -13,7 +16,7 @@
 		<div class="media-left col-sm-3">
 			<a href="#">
 				{% for key, value in data.product_image %}
-					<img class="img-responsive" src="{{value.file_relative_path}}">
+				<img class="img-responsive" src="{{value.file_relative_path}}"> 
 				{% endfor %}
 			</a>
 		</div>

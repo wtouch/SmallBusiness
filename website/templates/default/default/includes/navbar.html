@@ -1,17 +1,6 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-   <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNav">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Web Touch</a>
-    </div>
-	
-	<div class="collapse navbar-collapse" id="mainNav">
-      <ul class="nav navbar-nav">
+<nav class="navbar navbar-default">				
+	<div class="collapse navbar-collapse">
+		<ul class="nav nav-pills nav-stacked">
 			{% for key, value in routes %}
 				{% if value is iterable %}
 					{% for childKey, childValue in value %}
@@ -26,7 +15,6 @@
 							</ul>
 						</li>
 					{% endfor %}
-
 				{% else %}
 					{% if value %}
 						<li class="{{ value == (uri | replace({'/': ""})) ? 'active' : '' }}" ><a href="/{{value}}">{{value | upper | replace({'_': " "})}}</a></li>
@@ -34,6 +22,5 @@
 				{% endif %}
 			{% endfor %}
 		</ul>
-	</div>
 	</div>
 </nav>

@@ -29,7 +29,10 @@
 					<tab heading="Business Profile" title="Business Profile">
 						<table class="table table-responsive table-bordered">
 							<tr><th>BUSINESS TYPE</th><th>SMALL BUSINESS CATELOG</th><th>ALTERNATE WEBSITE</th><th>ESTABLISHMENT YEAR</th><th>EMPLOYEES</th><th>ADDITIONAL BUSINESS</th></tr>
-							<tr><td>{{modalOptions.bizList.business_profile.business_type}}</td><td>{{modalOptions.bizList.business_profile.biz_catalog}}</td><td>{{modalOptions.bizList.business_profile.website}}</td><td>{{modalOptions.bizList.business_profile.establishment}}</td><td>{{modalOptions.bizList.business_profile.no_of_employees}}</td>
+							<tr><td>{{modalOptions.bizList.business_profile.business_type}}</td>
+							<td>{{modalOptions.bizList.business_profile.catelog}}</td>
+							<td>{{modalOptions.bizList.business_profile.website}}</td>
+							<td>{{modalOptions.bizList.business_profile.establishment}}</td><td>{{modalOptions.bizList.business_profile.no_of_employees}}</td>
 							<td>
 								<p ng-repeat="x in modalOptions.bizList.business_profile.additional_business">
 								<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>{{x}}</span>
@@ -45,8 +48,8 @@
 								<table class="table table-responsive">
 									<tr><th>Name</th><td>{{modalOptions.bizList.contact_profile.contact_person}}</td></tr>
 									<tr><th>Photo</th><td>
-										<span ng-repeat="(key, value) in modalOptions.bizList.contact_profile.contact_photo">
-											<img class="imgwidth" ng-src="{{appConfig.assetPath+'/'+value.file_name}}"/>
+										<span "value.file_relative_path" in modalOptions.bizList.contact_profile.contact_photo">
+											<img class="imgwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}"/>
 										</span>
 									</td></tr>								
 									<tr><th>Designation</th><td>{{modalOptions.bizList.contact_profile.Designation}}</td></tr>
@@ -56,13 +59,11 @@
 								</table>
 							</td><td>
 								<table class="table table-responsive">
-									<tr><th>CEO</th><td>{{modalOptions.bizList.contact_profile.ceo}}</td></tr>
-									<tr><th>Name</th><td>{{modalOptions.bizList.contact_profile.companyname}}</td></tr>
 									<tr><th>Address</th><td>{{modalOptions.bizList.contact_profile.address}}</td></tr>
-									<tr><th>Country</th><td>{{modalOptions.bizList.contact_profile.Country}}</td></tr>
-									<tr><th>State</th><td>{{modalOptions.bizList.contact_profile.State}}</td></tr>
+									<tr><th>Country</th><td>{{modalOptions.bizList.country}}</td></tr>
+									<tr><th>State</th><td>{{modalOptions.bizList.state}}</td></tr>
 									<tr><th>City</th><td>{{modalOptions.bizList.contact_profile.Designation}}</td></tr>
-									<tr><th>ZIP Code</th><td>{{modalOptions.bizList.contact_profile.ZIP_Code}}</td></tr>
+									<tr><th>ZIP Code</th><td>{{modalOptions.bizList.pincode}}</td></tr>
 								</table>
 							</td>
 							<td>

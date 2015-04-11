@@ -17,7 +17,7 @@ define(['app'], function (app) {
 		$scope.reset = function() {
 			$scope.addbusiness = {
 				created_date : $scope.currentDate,
-				contact_profile : {contact_photo : []}
+				contact_profile : {}
 			};
 		};
 		$scope.reset();
