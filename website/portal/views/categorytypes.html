@@ -9,25 +9,19 @@
 	{% include 'includes/header.html' ignore missing %}
 		<main >
 			<h3> Popular Business Types</h3>
-			<div class="container">
-				<div class="row">
+			<div class="row">
 				{% for x in data %}
 					<div class="col-md-3">
-						<div class="media buztypes">
-							<div class="media-left">
-								<a href="#">
-									<img class="media-object" src="{{path}}img/book.jpg" alt="Art gallery">
-								</a>
-							</div>
-							<div class="media-body">
-								<h4 class="media-heading"><a href="/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}">{{x.type}}</a></h4>
-								
-							</div>
+						<div class=" buztypes">
+							<a href="#">
+								<img class="media-object" src="{{path}}img/book.jpg" alt="Art gallery">
+							</a>
+							<h4 class="media-heading"><a href="/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}">{{x.type}}</a></h4>
 						</div>
 					</div>
 				{% endfor %}
 				</div>
-			</div>
+			
 		</main >
 	{% endautoescape %}
 {% endblock %}	

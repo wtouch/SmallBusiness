@@ -17,6 +17,28 @@ $app->get('/', function() use($app, $config, $twig, $portal) {
 	$template = $twig->loadTemplate("home.html");
 	$template->display($response);
 });
+$app->get('/enquiry/:business/:business_id', function($business, $business_id) use($app, $config, $twig, $portal) {
+	
+	$business = $portal->decodeUrl($business); 
+	$business = $portal->decodeUrl($business); 
+	$response['subject'] = "Enquiry from Apna Site: ".$business;
+	$response['business_id'] = $business_id;
+	$template = $twig->loadTemplate("enquiry.html");
+	$template->display($response);
+});
+$app->get('/search/:keyword', function($keyword) use($app, $config, $twig, $portal) {
+	// this will replace [-] with [space]
+	//to add [-] from template use - replace({' ' : '-'}) as a filter
+	$keyword = $portal->decodeUrl($keyword); 
+	$response = $portal->getDataByKeyword($keyword);
+	if($response['status'] == "success"){
+		$template = $twig->loadTemplate("business.html");
+	}else{
+		$template = $twig->loadTemplate("error.html");
+	}
+	
+	$template->display($response);
+});
 
 $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
 	// this will replace [-] with [space]

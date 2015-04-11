@@ -5,137 +5,48 @@
 {% endblock %}
 {% block content %}
 {% autoescape false %}
-	<header>
-		{% include 'includes/navbar.html' ignore missing %}
-	</header>
+	{% include 'includes/header.html' ignore missing %}
 	<main >
-		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
-					{% include 'includes/sidebar.html' ignore missing %}
-				</div>
-				<div class="col-md-9">
-				{% for x in data %}
-					<div class="panel panel-default">
-					  <div class="panel-heading">
-						<h3 class="media-heading"><span class="glyphicon glyphicon-thumbs-up"></span><a href="/{{x.category | replace({' ' : '-'})}}/{{x.type | replace({' ' : '-'})}}/{{x.business_name | replace({' ' : '-'})}}">{{x.business_name}}</a></h3>
-					  </div>
-						<div class="panel-body">
-							<div class="media" >
-								<div class="media-left col-md-3">
-									<a href="#"><img class="img-responsive" src="{{x.business_logo.file_relative_path}}">
-									</a>
-								</div>
-								<div class="media-body col-md-6 ">
-									<p class="media-heading"><span class="glyphicon glyphicon-earphone"></span>&nbsp&nbsp{{x.contact_profile.mobile}}</p>
-									<p class="media-heading"><span class="glyphicon glyphicon-home"></span>&nbsp&nbsp Country :{{x.country}},&nbsp&nbsp State - {{x.state}} ,<br>&nbsp&nbsp Location :{{x.location}},&nbsp&nbsp Area - {{x.area}}<br>
-									&nbsp&nbsp City : {{x.city}}, &nbsp&nbsp pincode : {{x.pincode}} | <a href="#"  tooltip="{{x.location}}">More</a></p>
-									<address class="media-heading"&nbsp&nbsp>Email :{{x.contact_profile.email}}</address>
-									<div class="table-responsive">
-									<table class="table table-bordered">
-										<tr>
-											<td>Estd,in<p>2000</p></td>
-											<td>
-												<div ng-controller="RatingDemoCtrl">
-													<h4>Rating</h4>
-													<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-													<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
-												</div>
-											</td>
-											<td ng-if="{{x.verified}}">
-												<a href="#" ><img src="{{path}}/img/verified.png"/><p> Verified Business</p></a>
-											</td>
-										</tr>
-										<tr>
-											<td colspan="3">
-												<div class="btn-group center-block" role="group" aria-label="...">
-													<a  href="#" class="btn btn-warning">SMS</a>
-													<a   href="#" class="btn btn-warning">Email</a>
-													<a   href="#" class="btn btn-warning">Rate It</a>
-												</div>
-											</td>
-										</tr>
-									</table>
-									</div>
-								</div>
-								<div class="media-right col-md-3">
-									<a href="#" class="btn btn-success">
-									 Send Enquiry
-									</a>
-								</div>
-							</div>
-						</div>
+		{% for x in data %}
+		<div class="row">
+			<div class="col-md-12 ">
+				<nav class="navbar navbar-default">
+						<a class="navbar-brand" href="#"><img class="img-responsive" src="{{x.business_logo.file_relative_path}}"></a>
+						
+						<h2 class="text-center" >{{x.business_name}}</h2>
+							<h6 class="text-center"><span class="glyphicon glyphicon-envelope Email">
+							</span> <a href="{{x.contact_profile.email}}" >{{x.contact_profile.email}}</a>
+							<span class="glyphicon glyphicon-earphone"></span>{{x.contact_profile.mobile}}
+							<span class="glyphicon glyphicon-globe"></span>
+							<a href="{{x.contact_profile.contact_website}}">{{x.contact_profile.contact_website}}</a></h6>
+						
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				{% include 'includes/sidebar.html' ignore missing %}
+			</div>
+			<div class="col-md-10">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<img class="media-object img-responsive" src="{{x.contact_profile.contact_photo.file_relative_path}}" alt="profile picture"/>
+						<span>
+							<h3> Business Information :</h3>
+							<ul>
+								{% for key,value  in x.keywords %}
+									<li><a href="/search/{{value}}">{{value}}</a></li>
+								{% endfor %}
+							</ul>
+							<h3> Business Description :</h3>
+							<p>{{x.business_info.description}}
+							
+						</span>
 					</div>
-					<div class="searchrate"><a href="#"><span class="glyphicon glyphicon-star"></span></a>Click here to view your friends rating</div>
-					
-					<div class="row">
-						<div class="col-md-6">
-							<div class="media" >
-								<div class="media-left">
-									<a href="#">
-										<img class="media-object img-responsive" src="{{x.contact_profile.contact_photo.file_relative_path}}" alt="profile picture"/>
-									</a>
-								</div>
-								<div class="media-body ">
-									<h4 class="media-heading">
-									<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-										<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
-									</h4>
-									<p>&nbsp&nbsp Contact Email:&nbsp&nbsp {{x.contact_profile.email}}</p><p>&nbsp Person Mobile :&nbsp&nbsp{{x.contact_profile.mobile}}</p>
-										<span>
-											<b> Other Information :</b>
-											{% for key,value  in x.keywords %}
-												{{value}}
-											{% endfor %}
-										</span>
-									<p ng-if="x.rating"> 
-										<a href="#">View All Ratings</a>|<a href="#">Rate & Review</a>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<p class="text-warning">Overall Rating 
-								<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-								<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
-							</p>
-							<img src="{{path}}img/overallrating.jpg"/>
-						</div>
-						<div class="col-md-3">
-							<p class="text-warning">Rating overtime
-							<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-								<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
-							</p>
-							<img src="{{path}}img/linechart.jpg"/>
-						</div>
-					</div>
-					<div class="searchrate">
-						<a href="{{x.contact_profile.contact_website}}"><p>More Information about Sai Hospital</p></a>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<p class="media-heading"><span class="glyphicon glyphicon-home"></span>&nbsp&nbsp Mumbai-Pune Road, Pune  
-							<p class="media-heading"><span class="glyphicon glyphicon-earphone"></span>&nbsp&nbsp{{x.contact_profile.mobile}}</p>
-							<p class="media-heading"><span class="glyphicon glyphicon-globe"></span>&nbsp&nbsp <a href="#">&nbsp&nbsp{{x.contact_profile.contact_website}}</a></p>
-							<h4>Also Listed In </h4>
-							{% for key,value  in x.keywords %}
-								<table class="table table-bordered">
-									<tr>
-										<td>{{key}}</td>
-										<td> {{value}}</td>
-									</tr>
-								</table>
-							{% endfor %}
-							<h4>Hours Of Operations </h4>
-							<p>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday: 12:00 am to 11:59 pm</p>
-							<h4>Other Locations</h4>
-							<p>Mumbai, Pune, Delhi</p>
-						</div>
-					</div>
-					{% endfor %}
 				</div>
 			</div>
 		</div>
+		{% endfor %}
 	</main>
   {% endautoescape %}
 {% endblock %}	

@@ -35,25 +35,27 @@ class portalManager{
 			return $arr;
 		}
 	}
-	
-	function getBusinessData(){
+	function getDataByKeyword($keyword){
 		try{
-			// page limit
-			$limit['pageNo'] = 1; // from which record to select
-			$limit['records'] = 100; // how many records to select
 			$where['status'] = 1;
-			$data = $this->db->select('business',$where);
-			
+			$like['keywords'] = $keyword;
+			$data = $this->db->select('business', $where, $limit=null, $like);
+			if($data['status'] != "success"){
+				throw new Exception($data['message']);
+			}
+			$response['title'] = "this is twig template";
+			$response['data'] = $this->jsonDecode($data["data"]);
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 			$response["status"] = "success";
-            $response["message"] = "Data Selected!";
-            $response["data"] = $this->jsonDecode($data["data"]);
 		}catch(Exception $e){
-			$response["status"] = "error";
-            $response["message"] = 'Error: ' .$e->getMessage();
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
             $response["data"] = null;
-		}
-		echo json_encode($data);
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+        }
+        return $response;
 	}
+	
 	function getCategories(){
 		// query to get types & group by category
 		$groupByArray['category'] = 'category';
@@ -84,7 +86,7 @@ class portalManager{
 		$where['type'] = $type;
 		$where['status'] = 1;
 		$data = $this->db->select('business', $where);
-		//print_r ($data);
+		
 		$response['title'] = "this is twig template";
 		$response['data'] = $this->jsonDecode($data["data"]);
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
@@ -95,12 +97,10 @@ class portalManager{
 		$where['status'] = 1;
 		$where['category'] = $category ;
 		$where['id'] = $id ;
-		//print_r($where);
 		$data = $this->db->select('business', $where);
 		$response['title'] = "this is twig template";
 		$response['data'] = $this->jsonDecode($data["data"]);
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
-		print_r ($response['data']);
 		return $response;
 	}
 }
