@@ -1,12 +1,12 @@
 <h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>
-	<form name="requestsiteForm" class="form-horizontal" role="form" ng-submit="requestsiteForm.$valid" novalidate="novalidate">
+	<form name="requestsiteForm" class="form-horizontal" role="form" ng-submit="requestsiteForm.$valid" novalidate="novalidate" ng-init="setFormScope(this)">
 		<div class="form-group">	
 			<label  for="domain_name" class="col-sm-2 control-label">Domain Name</label>
 			<div class="col-sm-9">
-				<input type="text" class="form-control" id="domain_name" ng-model="reqnewsite.domain_name" name="domain_name" placeholder="Enter Domain " required>
+				<input type="text" ng-pattern="/^[a-zA-Z0-9(.)]*$/" class="form-control" id="domain_name" ng-model="reqnewsite.domain_name" ng-blur="checkAvailable(reqnewsite.domain_name)" name="domain_name" placeholder="Enter Domain " required>
 				<span class="help-block" ng-show="requestsiteForm.domain_name.$dirty && requestsiteForm.domain_name.$invalid">
 					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.required">Domain  is required.</span>
-					<span class="text-danger"ng-show="requestsiteForm.domain_name.$error.url">Invalid Web Site.</span>
+					<span class="text-danger"ng-show="requestsiteForm.domain_name.$error.pattern">Invalid Web Site.</span>
 				</span>
 				<span>e.g www.google.com</span>
 			</div>						
