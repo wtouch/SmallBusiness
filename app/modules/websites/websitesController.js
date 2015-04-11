@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService', '$http'];
 	
     // This is controller for this view
-	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
+	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService,$http) {
 		
 		//all $scope object goes here
         $scope.alerts = [];
@@ -23,6 +23,24 @@ define(['app'], function (app) {
 		$scope.formPart = 'checkdomainavailable';
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
+		};
+		$scope.setFormScope= function(scope){
+			$scope.formScope = scope;
+		}
+		$scope.checkAvailable = function(domain_name){
+			console.log(domain_name);
+			if(domain_name !== undefined){
+				dataService.post("post/domain", {domain : domain_name }).then(function(response){
+					if(response[domain_name].status == 'available'){
+						$scope.formScope.requestsiteForm.$setValidity('available', true);
+						$scope.domainAvailableMsg = "Domain Available";
+					}else{
+						$scope.formScope.requestsiteForm.$setValidity('available', true);
+						$scope.domainAvailableMsg = "Domain not available please select another!";
+					}
+					console.log(response[domain_name].status);
+				})
+			}
 		};
         //open function for previewing the website[Dnyaneshwar].
         $scope.open = function (url, webId) {
@@ -45,10 +63,10 @@ define(['app'], function (app) {
 		
 		//code for accessing json data of website
 		 $scope.web = {};
-		dataService.config('config', {config_name : "website"}).then(function(response){
+		/* dataService.config('config', {config_name : "website"}).then(function(response){
 			$scope.web = response.config_data;
 			console.log($scope.web); 
-		});
+		}); */
         
 		if($rootScope.userDetails.group_name == "customer"){
 			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
