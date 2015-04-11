@@ -1,11 +1,11 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope'];
+    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope', '$cookies', '$cookieStore'];
 
     // This is controller for this view
-	var adddetailsController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope)
-	{
+	var adddetailsController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope, $cookies, $cookieStore)
+	{ 
 		dataService.get("getsingle/business/"+$routeParams.id)
 		.then(function(response) {
 			$scope.businessData = dataService.parse(response.data);
@@ -27,11 +27,11 @@ define(['app'], function (app) {
 		$scope.business_id = $routeParams.id;
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials
 		$scope.path = "business/"+$scope.userInfo.user_id; // path to store images on server
-		$scope.infrastructure = { desc : { image  : {} }};
-		$scope.testimonials = { desc : { image  : {} }};
-		$scope.news_coverage = { desc : { image  : {} }};
-		$scope.job_careers = { desc : { image  : {} }};
-		$scope.gallery = { desc : { image  : {} }};
+		$scope.infrastructure = { desc : { }};
+		$scope.testimonials = { desc : { }};
+		$scope.news_coverage = { desc : {  }};
+		$scope.job_careers = { desc : {  }};
+		$scope.gallery = { desc : {  }};
 		
 		//code for accessing json data of business	
 		$scope.biz = {};
@@ -44,7 +44,7 @@ define(['app'], function (app) {
 		$scope.biz = dataService.config.business;
 		
 		// Add Business multi part form show/hide operation from here! {Vilas}
-		$scope.formPart = 'infrastructure';
+		$scope.formPart = ($cookies.bizFormPart) ? $cookieStore.get("bizFormPart") : 'infrastructure';
 		
 		//function for close alert
 		$scope.closeAlert = function(index) {
@@ -54,10 +54,10 @@ define(['app'], function (app) {
 		$scope.imgRemoved = false;
 		// Scope methods
 		$scope.showFormPart = function(formPart){
-			$scope.formPart = formPart;
+			$cookieStore.put("bizFormPart", formPart);
+			$scope.formPart = $cookieStore.get("bizFormPart");
 			$scope.headingDisabled = false;
 			$scope.infra = false;
-			$scope.imgRemoved = false;
 		};
 		
 		$scope.addToObject = function(data, object, resetObj){
@@ -65,7 +65,6 @@ define(['app'], function (app) {
 			object[data.heading] = JSON.parse(dtlObj);
 			$scope.headingDisabled = false;
 			$scope.infra = false;
-			$scope.imgRemoved = false;
 			$scope[resetObj] = { desc : { image  : {} }};
 			console.log(data);
 		}
@@ -87,7 +86,7 @@ define(['app'], function (app) {
 			if(resetObj){
 				$scope.headingDisabled = false;
 				$scope.imgRemoved = true;
-				$scope[resetObj] = { desc : { image  : {} }};
+				$scope[resetObj] = { desc : {}};
 			}
 		}
 		
@@ -121,8 +120,6 @@ define(['app'], function (app) {
 		Upload Function for uploading files {sonali}*/
 		$scope.upload = function(files,path,userInfo, picArr){ // this function for uploading files
 			upload.upload(files,path,userInfo,function(data){
-		
-				if(picArr){
 					if(data.status === 'success'){
 						$scope.infrastructure.desc.image = data.data;
 						
@@ -130,9 +127,23 @@ define(['app'], function (app) {
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}
-				}
 			}); 
-		};
+		}; 
+		
+		
+		//Upload Function for uploading files {sonali}
+		$scope.uploadtesti = function(files,path,userInfo, picArr){ // this function for uploading files
+			upload.upload(files,path,userInfo,function(data){
+					if(data.status === 'success'){
+						$scope.testimonials.desc.testimage = data.data;
+						
+						console.log($scope.testimonials.desc.testimage);
+					}else{
+						$scope.alerts.push({type: data.status, msg: data.message});
+					}
+			}); 
+		}; 
+		
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
 			upload.generateThumbs(files);
 		};// End upload function

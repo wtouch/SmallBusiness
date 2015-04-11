@@ -1,4 +1,3 @@
-
 <div class="modal-content">		
 	<div class="modal-header">
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
@@ -13,13 +12,10 @@
 							<tr>
 								<td>{{modalOptions.bizList.id}}</td>
 								<td>{{modalOptions.bizList.business_name}}</td><td>
-								
-								<!-- <span ng-repeat="(key, value) in modalOptions.bizList.business_logo">
-									<img class="imgwidth" ng-src="{{appConfig.assetPath+'/'+value.file_name}}"/>
-								</span> -->
-								<span "value.file_relative_path" in modalOptions.bizList.business_logo>
-									<img class="imgwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}"/>
-								</span>
+								<span "value.file_relative_path" in modalOptions.bizList.business_logo>  
+									<img class="imgwidth" ng-src="{{appConfig.assetPath + '/' +  
+									modalOptions.bizList.business_logo.file_relative_path}}"/>
+								</span> 
 								</td><td>{{modalOptions.bizList.category}}</td>
 								<td>{{modalOptions.bizList.ownership}}</td><td ng-bind-html="modalOptions.bizList.business_info.keywords"></td>
 								<td ng-bind-html="modalOptions.bizList.business_info.description"></td>
@@ -28,9 +24,9 @@
 					</tab>
 					<tab heading="Business Profile" title="Business Profile">
 						<table class="table table-responsive table-bordered">
-							<tr><th>BUSINESS TYPE</th><th>SMALL BUSINESS CATELOG</th><th>ALTERNATE WEBSITE</th><th>ESTABLISHMENT YEAR</th><th>EMPLOYEES</th><th>ADDITIONAL BUSINESS</th></tr>
+							<tr><th>BUSINESS TYPE</th><!-- <th>SMALL BUSINESS CATELOG</th> --><th>ALTERNATE WEBSITE</th><th>ESTABLISHMENT YEAR</th><th>EMPLOYEES</th><th>ADDITIONAL BUSINESS</th></tr>
 							<tr><td>{{modalOptions.bizList.business_profile.business_type}}</td>
-							<td>{{modalOptions.bizList.business_profile.catelog}}</td>
+							<!-- <td>{{modalOptions.bizList.business_profile.catelog}}</td> -->
 							<td>{{modalOptions.bizList.business_profile.website}}</td>
 							<td>{{modalOptions.bizList.business_profile.establishment}}</td><td>{{modalOptions.bizList.business_profile.no_of_employees}}</td>
 							<td>
@@ -40,7 +36,6 @@
 							</td></tr>
 						</table>
 					</tab>
-					
 					<tab heading="Contact Profile" title="Contact Profile">
 						<table class="table table-responsive table-bordered">
 							<tr><th>CONTACT PERSON DETAILS</th><th>COMPANY DETAILS</th><th>CONTACT DETAILS</th></tr>
@@ -48,14 +43,15 @@
 								<table class="table table-responsive">
 									<tr><th>Name</th><td>{{modalOptions.bizList.contact_profile.contact_person}}</td></tr>
 									<tr><th>Photo</th><td>
-										<span "value.file_relative_path" in modalOptions.bizList.contact_profile.contact_photo">
-											<img class="imgwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}"/>
-										</span>
+									<span "value.file_relative_path" in modalOptions.bizList.contact_profile.contact_photo>
+									<img class="imgwidth" ng-src="{{appConfig.assetPath + '/' +  
+							modalOptions.bizList.contact_profile.contact_photo.file_relative_path}}"/>
+								    </span>
 									</td></tr>								
 									<tr><th>Designation</th><td>{{modalOptions.bizList.contact_profile.Designation}}</td></tr>
 									<tr><th>Mobile No.</th><td>{{modalOptions.bizList.contact_profile.mobile}}</td></tr>
 									<tr><th>Email</th><td>{{modalOptions.bizList.contact_profile.email}}</td></tr>
-									<tr><th>Alternate Email</th><td>{{modalOptions.bizList.contact_profile.alternate_email}}</td></tr>
+									<!-- <tr><th>Alternate Email</th><td>{{modalOptions.bizList.contact_profile.alternate_email}}</td></tr> -->
 								</table>
 							</td><td>
 								<table class="table table-responsive">
@@ -77,20 +73,15 @@
 							</tr>	
 						</table>
 					</tab>
-	
-					
-					
 					<tab heading="Infrastructure" title="Infrastructure Facility">
 						<table class="table table-responsive table-bordered">
 							<tr><th>Infrastucture Heading</th><th>Infrastructure Image</th><th>Infrastucture Description</th></tr>
 							<tr ng-repeat="(key, val) in modalOptions.bizList.infrastructure"><td>{{key}}</td><td>
-							<span ng-repeat="(key, value) in val.infra_image">
-								<img class="imgwidth" ng-src="{{appConfig.assetPath+'/'+value.file_name}}"/>
-							</span></td>
+							<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + val.image.file_relative_path}}" width="150px" />
+							</td>
 							<td ng-bind-html="val.description"></td></tr>
 						</table>
 					</tab>
-		
 					<tab heading="Testimonials" title="Testimonials">
 						<table class="table table-responsive table-bordered">
 							<tr><th>TESTIMONIAL GIVEN BY</th><th>TESTIMONIAL DETAILS</th></tr>
@@ -107,12 +98,21 @@
 								<td><table class="table table-responsive">
 										<tr><th>Title</th><td>{{val.testimonial_title}}</td></tr>
 										<tr><th>Description</th><td ng-bind-html="val.test_Description"></td></tr>
-										<tr><th>Imgae</th><td>
-										<span ng-repeat="(key, value) in val.testimage">
-											<img class="imgwidth" ng-src="{{appConfig.assetPath+'/'+value.file_name}}"/>
-										</span>
-										</td></tr>				
-								</table></td>	
+										<tr><th>Imgae</th>
+									<!-- <tr "value.file_relative_path" modalOptions.bizList.testimonials.testimage">
+									<td>{{key}}</td>
+									<td>
+									<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + val.image.file_relative_path}}" width="150px" />
+									</td>
+									</td>
+									</tr>   -->
+									
+									<tr ng-repeat="(key, val) in modalOptions.bizList.testimonials"><td>{{key}}</td><td>
+							<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + val.testimage.file_relative_path}}" width="150px" />
+							</td>
+							<td ng-bind-html="val.description"></td></tr>
+								</table>
+								</td>	
 							</tr>
 						</table>
 					</tab>
@@ -122,14 +122,13 @@
 							<tr ng-repeat="(key, val) in modalOptions.bizList.job_careers"><td>{{key}}</td><td ng-bind-html="val.jobDescription"></td></tr>
 						</table>
 					</tab>
-					
 					<tab heading="NewsCoverage" title="News Coverage">
 						<table class="table table-responsive table-bordered">
 							<tr><th>MEDIA DETAILS</th><th>NEWS COVERAGE DETAILS</th></tr>
 							<tr ng-repeat="(key, val) in modalOptions.bizList.news_coverage">
 								<td><table class="table table-responsive">
 										<tr><th>Media Name</th><td>{{key}}</td></tr>
-										<tr><th>Media Type</th><td>{{val.mediaType}}</td></tr>
+										<tr><th>Media Type</th><td>{{val.mediatype}}</td></tr>
 								</table></td>
 								<td><table class="table table-responsive">
 										<tr><th>Headline</th><td>{{val.headline}}</td></tr>
@@ -139,7 +138,7 @@
 										<span ng-repeat="(key, value) in val.news_image">
 											<img class="imgwidth" ng-src="{{appConfig.assetPath+'/'+value.file_name}}"/>
 										</span></td></tr>
-										<tr><th>Details</th><td ng-bind-html="val.newsdetails"></td></tr>												
+										<tr><th>Details</th><td ng-bind-html="val.newsdetails"></td></tr>
 								</table></td>	
 							</tr>
 						</table>

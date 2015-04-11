@@ -111,7 +111,6 @@ define(['app'], function (app) {
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
 		
 		//this upload function for uploading single image.{trupti}
-		
 		$scope.upload = function(files,path,userInfo, picArr){ // this function for uploading files
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
@@ -124,6 +123,11 @@ define(['app'], function (app) {
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}
+					
+					/* if(picArr == "image"){
+						$scope.addbusiness.infrastructure.image = data.data;
+					} */
+					
 				
 			});
 		};
@@ -258,7 +262,7 @@ define(['app'], function (app) {
 			}
 		}
 		
-			$scope.getLocation(); */
+		$scope.getLocation(); */
 		
 		
 		//get method for get data from business
