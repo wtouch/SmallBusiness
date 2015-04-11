@@ -3,7 +3,7 @@
 {% for x in data %}
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="media-heading"><span class="glyphicon glyphicon-thumbs-up"></span><a href="/{{x.category | replace({' ' : '-'})}}/{{x.type | replace({' ' : '-'})}}/{{x.business_name | replace({' ' : '-'})}}/{{x.id}}">{{x.business_name}}</a></h3>
+    <h3 class="media-heading"></span><a href="/{{x.category | replace({' ' : '-'})}}/{{x.type | replace({' ' : '-'})}}/{{x.business_name | replace({' ' : '-'})}}/{{x.id}}">{{x.business_name}}</a></h3>
   </div>
 	<div class="panel-body">
 		<div class="media" >
@@ -16,33 +16,7 @@
 				<p class="media-heading"><span class="glyphicon glyphicon-home"></span>&nbsp&nbsp Country :{{x.country}},&nbsp&nbsp State - {{x.state}} ,<br>&nbsp&nbsp Location :{{x.location}},&nbsp&nbsp Area - {{x.area}}<br>
 				&nbsp&nbsp City : {{x.city}}, &nbsp&nbsp pincode : {{x.pincode}} | <a href="#"  tooltip="{{x.location}}">More</a></p>
 				<address class="media-heading"&nbsp&nbsp>Email :{{x.contact_profile.email}}</address>
-				<div class="table-responsive">
-				<table class="table table-bordered">
-					<tr>
-						<td>Estd,in<p>2000</p></td>
-						<td>
-							<div ng-controller="RatingDemoCtrl">
-								<h4>Rating</h4>
-								<rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-								<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
-							</div>
-						</td>
-						<td>
-							<a href="#" ><span class="glyphicon glyphicon-thumbs-up verified "></span><p>Wtouch Verified</p></a>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							<div class="btn-group center-block" role="group" aria-label="...">
-								<a  href="#" class="btn btn-warning">SMS</a>
-								<a   href="#" class="btn btn-warning">Email</a>
-								<a  href="#" class="btn btn-warning">Own This</a>
-								<a   href="#" class="btn btn-warning">Rate It</a>
-							</div>
-						</td>
-					</tr>
-				</table>
-				</div>
+			
 			</div>
 			<div class="media-right col-md-3">
 				<a href="/enquiry" class="btn btn-success">

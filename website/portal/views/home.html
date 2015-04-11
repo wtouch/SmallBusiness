@@ -13,7 +13,7 @@
     </a>
 </script>
 	
-<section >
+<section  >
 	<div class="container" ng-controller="TypeaheadCtrl">
 		<div class="home center-block">
 			<div class="row">
@@ -24,7 +24,8 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 pull-right">
-					<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item)" placeholder="Search City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control cityBlock" autocomplete="off" ng-init="city = ''">
+					<span name="currentItem" id="currentItem" class="form-control-static" ng-click="onItemClicked(currentItem)">Pune </span>
+					<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item)" placeholder="Search City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control cityBlock" autocomplete="off" ng-init="city = ''"   ng-show="currentItem.isVisible">
 				</div>
 			</div>
 			<div class="row">
@@ -40,7 +41,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12 ">
-					<div class="text-center">
+					<div class="text-center ">
 						{% for x in data %}
 							<div class="products " >
 								<span class="glyphicon glyphicon-film"></span><br>

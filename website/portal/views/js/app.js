@@ -19,6 +19,9 @@ define(['angular',
 				return response;
 			});
 		}
+		$scope.onItemClicked = function (item) {
+			item.isVisible = true;
+		};
 		
 	}]).controller('RatingDemoCtrl', ['$scope','$http', function($scope, $http) {
 	  $scope.rate = 7;
