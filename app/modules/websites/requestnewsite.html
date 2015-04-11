@@ -1,27 +1,68 @@
 <h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>
 	<form name="requestsiteForm" class="form-horizontal" role="form" ng-submit="requestsiteForm.$valid" novalidate="novalidate" ng-init="setFormScope(this)">
+	
 		<div class="form-group">	
+			<label for="domain_type" class="col-sm-2 control-label">Domain Type</label>
+			<div class="col-sm-9">
+				<div class="row">
+					<div class="radio col-sm-3" ng-init="domain_type = 'free'">
+					  <label>
+						<input type="radio" name="domain_type" ng-model="domain_type" id="domain_type" value="free">
+						Free Domain
+					  </label>
+					</div>
+					<div class="radio col-sm-3">
+					  <label>
+						<input type="radio" name="domain_type" ng-model="domain_type" id="domain_type" value="paid">
+						Private/Paid Domain
+					  </label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="domain_type == 'free'" class="form-group">
 			<label  for="domain_name" class="col-sm-2 control-label">Domain Name</label>
 			<div class="col-sm-9">
-				<input type="text" ng-pattern="/^[a-zA-Z0-9(.)]*$/" class="form-control" id="domain_name" ng-model="reqnewsite.domain_name" ng-blur="checkAvailable(reqnewsite.domain_name)" name="domain_name" placeholder="Enter Domain " required>
+			<div class="input-group">
+				<input type="text" ng-pattern="/^[a-z0-9]*$/" class="form-control" id="domain_name" ng-model="subdomain" name="domain_name" placeholder="Enter Domain" ng-keyup="($event.keyCode==13) ? checkSubsomainAvailable(reqnewsite.domain_name) : ''" ng-change="reqnewsite.domain_name = subdomain+'.wtouch.in'" required>
+				<input type="hidden" ng-model="reqnewsite.domain_name" />
+				<span class="input-group-addon" type="button" ng-click="checkSubsomainAvailable(reqnewsite.domain_name)">.apnasite.in</span>
+				<span class="input-group-btn">
+					
+					<button class="btn btn-info" type="button" ng-click="checkAvailable(reqnewsite.domain_name)">Check Availability</button>
+				</span>
+			</div>
+				<span class="help-block" ng-show="requestsiteForm.domain_name.$dirty &&  !requestsiteForm.domain_name.$error.available">
+					<span class="text-success">{{domainAvailableMsg}}</span>
+				</span>
 				<span class="help-block" ng-show="requestsiteForm.domain_name.$dirty && requestsiteForm.domain_name.$invalid">
 					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.required">Domain  is required.</span>
-					<span class="text-danger"ng-show="requestsiteForm.domain_name.$error.pattern">Invalid Web Site.</span>
+					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.pattern">Invalid Web Site.</span>
+					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.available">{{domainAvailableMsg}}</span>
 				</span>
-				<span>e.g www.google.com</span>
-			</div>						
+				<span>e.g yourdomain.apnasite.in</span>
+			</div>
 		</div>
-		<div class="form-group">	
-			<label  for="other_domain" class="col-sm-2 control-label">Other Domain</label>
+		<div ng-if="domain_type == 'paid'" class="form-group">	
+			<label  for="domain_name" class="col-sm-2 control-label">Domain Name</label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="other_domain" name="other_domain" ng-model="reqnewsite.description.other_domain" cols="30" rows="4" ng-maxlength="256" placeholder="description" ui-tinymce required></textarea>
-				<span class="help-block" ng-show="requestsiteForm.other_domain.$dirty && requestsiteForm.other_domain.$invalid">
-					<span class="text-danger" ng-show="requestsiteForm.other_domain.$error.required">Domain  is required.</span>
-					<span class="text-danger"ng-show="requestsiteForm.other_domain.$error.url">Invalid Web Site.</span>
+			<div class="input-group">
+				<input type="text" ng-pattern="/^[a-z0-9]+\.[a-z]*$/" class="form-control" id="domain_name" ng-model="reqnewsite.domain_name" name="domain_name" placeholder="Enter Domain" ng-keyup="($event.keyCode==13) ? checkAvailable(reqnewsite.domain_name) : ''" required>
+				<span class="input-group-btn">
+					<button class="btn btn-info" type="button" ng-click="checkAvailable(reqnewsite.domain_name)">Check Availability</button>
 				</span>
-				<span>e.g www.google.com</span>
-			</div>						
-		</div>			
+			</div>
+				<span class="help-block" ng-show="requestsiteForm.domain_name.$dirty &&  !requestsiteForm.domain_name.$error.available">
+					<span class="text-success">{{domainAvailableMsg}}</span>
+				</span>
+				<span class="help-block" ng-show="requestsiteForm.domain_name.$dirty && requestsiteForm.domain_name.$invalid">
+					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.required">Domain  is required.</span>
+					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.pattern">Invalid Web Site.</span>
+					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.available">{{domainAvailableMsg}}</span>
+				</span>
+				<span>e.g apnasite.in</span>
+			</div>
+		</div>
 		<div class="form-group">
 			<label for="contactno" class="col-md-2 control-label">Contact Number </label>
 			<div class="col-md-9">
@@ -50,7 +91,7 @@
 		<div class="form-group">
 			<label for="description" class="col-sm-2 control-label">Description</label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="description" name="description" ng-model="reqnewsite.description.desc" cols="30" rows="4" ng-maxlength="256" placeholder="description" ui-tinymce required></textarea>
+				<textarea type="text" class="form-control" id="description" name="description" ng-model="reqnewsite.description.desc" cols="30" rows="4" ng-maxlength="256" placeholder="description" required></textarea>
 					<p ng-hide="requestsiteForm.description.$error.maxlength">
 					{{ 256 - description.length + " Chars left" }}
 					</p>
@@ -62,7 +103,7 @@
 		</div>	
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
-				<button type="submit" class="btn btn-success" ng-disabled="requestsiteForm.$invalid" ng-click="postData(reqnewsite)">Send Request</button>
+				<button type="submit" class="btn btn-success" ng-disabled="requestsiteForm.$invalid || requestsiteForm.domain_name.$error.available" ng-click="postData(reqnewsite)">Send Request</button>
 				<button type="reset" class="btn btn-danger">Reset</button>
 			</div>
 		</div>					

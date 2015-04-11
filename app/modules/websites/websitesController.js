@@ -27,19 +27,22 @@ define(['app'], function (app) {
 		$scope.setFormScope= function(scope){
 			$scope.formScope = scope;
 		}
+		
+		
 		$scope.checkAvailable = function(domain_name){
-			console.log(domain_name);
 			if(domain_name !== undefined){
 				dataService.post("post/domain", {domain : domain_name }).then(function(response){
 					if(response[domain_name].status == 'available'){
-						$scope.formScope.requestsiteForm.$setValidity('available', true);
+						$scope.formScope.requestsiteForm.domain_name.$setValidity('available', true);
 						$scope.domainAvailableMsg = "Domain Available";
 					}else{
-						$scope.formScope.requestsiteForm.$setValidity('available', true);
+						$scope.formScope.requestsiteForm.domain_name.$setValidity('available', false);
 						$scope.domainAvailableMsg = "Domain not available please select another!";
 					}
 					console.log(response[domain_name].status);
 				})
+			}else{
+				$scope.formScope.requestsiteForm.domain_name.$setValidity('available', false);
 			}
 		};
         //open function for previewing the website[Dnyaneshwar].
@@ -193,11 +196,16 @@ define(['app'], function (app) {
 			$scope.reqnewsite.user_id= $rootScope.userDetails.id;
 			$scope.reqnewsite.date = $scope.currentDate;
 				 dataService.post("post/website",reqnewsite)
-				//dataService.post("post/website",reqnewsite,$scope.userInfo)
-				.then(function(response) {  //function for response of request site
-					$scope.reqnewsite = response.data;
-					console.log(response);
-					console.log(reqnewsite);
+				.then(function(response) {
+					if(response.status == "success"){
+						$scope.reqnewsite = {};
+						$scope.formScope.requestsiteForm.$setPristine;
+						$scope.alerts.push({type: response.status, msg: "Your Request has successfully registered. Kindly check your mailbox for activation status!"});
+					}else{
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}
+					
+					
 				});   
 			}//end of post method{trupti} 
 		};
@@ -257,8 +265,9 @@ define(['app'], function (app) {
         
         var requestedsitelist = function(){
 			//function for requestedsitelist{Dnyaneshwar}
-			$scope.websiteParams = $scope.userInfo;
-			dataService.get("getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems,$scope.userInfo)
+			$scope.websiteParams = {status : 2};
+			angular.extend($scope.websiteParams, $scope.userInfo);
+			dataService.get("getmultiple/website/"+$scope.reqestSiteCurrentPage+"/"+$scope.pageItems,$scope.websiteParams)
 			.then(function(response) {  //function for requestedsitelist response
 			if(response.status == 'success'){
 					$scope.website=response.data;
