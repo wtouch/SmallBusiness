@@ -21,24 +21,23 @@
 			</div>
 		</div>
 		<div ng-if="domain_type == 'free'" class="form-group">
-			<label  for="domain_name" class="col-sm-2 control-label">Domain Name</label>
+			<label  for="subdomain" class="col-sm-2 control-label">Domain Name</label>
 			<div class="col-sm-9">
 			<div class="input-group">
-				<input type="text" ng-pattern="/^[a-z0-9]*$/" class="form-control" id="domain_name" ng-model="subdomain" name="domain_name" placeholder="Enter Domain" ng-keyup="($event.keyCode==13) ? checkSubsomainAvailable(reqnewsite.domain_name) : ''" ng-change="reqnewsite.domain_name = subdomain+'.wtouch.in'" required>
+				<input type="text" ng-pattern="/^[a-z0-9]*$/" class="form-control" id="subdomain" ng-model="subdomain" name="subdomain" placeholder="Enter Domain" ng-keyup="($event.keyCode==13) ? checkSubsomainAvailable(reqnewsite.domain_name) : ''" ng-change="reqnewsite.domain_name = subdomain+'.wtouch.in'" required>
 				<input type="hidden" ng-model="reqnewsite.domain_name" />
 				<span class="input-group-addon" type="button" ng-click="checkSubsomainAvailable(reqnewsite.domain_name)">.apnasite.in</span>
 				<span class="input-group-btn">
-					
-					<button class="btn btn-info" type="button" ng-click="checkAvailable(reqnewsite.domain_name)">Check Availability</button>
+					<button class="btn btn-info" type="button" ng-click="checkSubsomainAvailable(reqnewsite.domain_name)">Check Availability</button>
 				</span>
 			</div>
-				<span class="help-block" ng-show="requestsiteForm.domain_name.$dirty &&  !requestsiteForm.domain_name.$error.available">
+				<span class="help-block" ng-show="requestsiteForm.subdomain.$dirty &&  !requestsiteForm.subdomain.$error.available">
 					<span class="text-success">{{domainAvailableMsg}}</span>
 				</span>
-				<span class="help-block" ng-show="requestsiteForm.domain_name.$dirty && requestsiteForm.domain_name.$invalid">
-					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.required">Domain  is required.</span>
-					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.pattern">Invalid Web Site.</span>
-					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.available">{{domainAvailableMsg}}</span>
+				<span class="help-block" ng-show="requestsiteForm.subdomain.$dirty && requestsiteForm.subdomain.$invalid">
+					<span class="text-danger" ng-show="requestsiteForm.subdomain.$error.required">Domain  is required.</span>
+					<span class="text-danger" ng-show="requestsiteForm.subdomain.$error.pattern">Invalid Web Site.</span>
+					<span class="text-danger" ng-show="requestsiteForm.subdomain.$error.available">{{domainAvailableMsg}}</span>
 				</span>
 				<span>e.g yourdomain.apnasite.in</span>
 			</div>
@@ -61,6 +60,24 @@
 					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.available">{{domainAvailableMsg}}</span>
 				</span>
 				<span>e.g apnasite.in</span>
+			</div>
+		</div>
+		<div ng-if="domain_type == 'paid'" class="form-group">
+			<label for="contactno" class="col-md-2 control-label">Contact Number </label>
+			<div class="col-md-9">
+				<select id="filterbyvalidity" class="form-control" ng-model="reqnewsite.validity">
+						<option value="">Filter by Validity</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
 			</div>
 		</div>
 		<div class="form-group">

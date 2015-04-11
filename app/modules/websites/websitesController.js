@@ -45,6 +45,25 @@ define(['app'], function (app) {
 				$scope.formScope.requestsiteForm.domain_name.$setValidity('available', false);
 			}
 		};
+		
+		$scope.checkSubsomainAvailable = function(domain_name){
+			if(domain_name !== undefined){
+				dataService.post("post/domain", {domain : domain_name }, {subdomain : true}).then(function(response){
+					if(response.status == 'success'){
+						$scope.formScope.requestsiteForm.subdomain.$setValidity('available', true);
+						$scope.domainAvailableMsg = "Domain Available";
+					}else{
+						$scope.formScope.requestsiteForm.subdomain.$setValidity('available', false);
+						$scope.domainAvailableMsg = "Domain not available please select another!";
+					}
+					console.log(response.status);
+				})
+			}else{
+				$scope.formScope.requestsiteForm.domain_name.$setValidity('available', false);
+			}
+		}
+		
+		
         //open function for previewing the website[Dnyaneshwar].
         $scope.open = function (url, webId) {
 			dataService.get("getsingle/website/"+webId)
@@ -95,7 +114,7 @@ define(['app'], function (app) {
 			});
 		};
 		// for users list/customerList
-		dataService.get("getmultiple/user/1/500")
+		dataService.get("getmultiple/user/1/500", {status: 1})
 		.then(function(response) {  //function for websitelist response
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
@@ -226,8 +245,13 @@ define(['app'], function (app) {
 				};
 			});
 			//delete button {trupti}
-			$scope.deleted = function(id, status){
-				$scope.deletedData = {status : status};
+			$scope.deleted = function(id, status, activate){
+				if(activate == 2){
+					$scope.deletedData = {status : status, registered_date : $scope.currentDate};
+				}else{
+					
+				}
+				
 				dataService.put("put/website/"+id, $scope.deletedData)
 				.then(function(response) { //function for businesslist response
 					if(response.status == 'success'){

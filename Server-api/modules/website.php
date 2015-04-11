@@ -45,7 +45,16 @@
 	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record
-		$update = $db->update("website", $body, $where);
+		$input = json_decode($body, true);
+		
+		$checkNewDomain = $db->selectSingle("website", $where);
+		if($checkNewDomain['data']['status'] == 2) {
+			$input['registered_date'] = date("Y-m-d");
+			$inputValidity = (isset($input['validity'])) ? $input['validity'] : ($checkNewDomain['data']['validity'] == 0) ? 10 : $checkNewDomain['data']['validity'];
+			$input['expiry_date'] = date('Y-m-d', strtotime('+'.$inputValidity.' years'));
+		}
+		
+		$update = $db->update("website", $input, $where);
 		echo json_encode($update);
 	}
 

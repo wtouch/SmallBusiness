@@ -106,7 +106,9 @@
 					<td>
 					<div class="btn-toolbar" role="toolbar" aria-label="...">	
 							<a ng-click="open('modules/websites/viewWebsite.html', x.id)" class="btn btn-primary responsive"> View Details</a>
+							
 							<button ng-if="permission.publish_domain" type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted( x.id, x.status)"" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class = "glyphicon glyphicon-remove"></span></button>
+							
 							<button  ng-if="permission.expiry" type="button" tooltip="{{dynamicTooltip(x.expired, 'expired', 'Reactive')}}"ng-class="(x.expired==1) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="expire(x.id, x.expired)" btn-checkbox btn-checkbox-true="'0'" btn-checkbox-false="'1'"><span class="glyphicon glyphicon-ok"></span></button>
 							<div ng-if="permission.change_settings" class="btn-group">
 								<a type="button" tooltip="Website setting" class="btn btn-info glyphicon glyphicon-cog" ng-click="getWebsitedetails(config)" href="#/dashboard/websites/websettings/{{x.id}}"></a>	
@@ -121,7 +123,7 @@
 									<form style="padding:3px" name="renewForm">
 									<div class="form-group">
 										<label for="validity" class="control-label">Filter By validity</label>
-										<select id="validity" class="form-control" ng-model="validity" ng-change="changeStatusFn('validity', validity)" >
+										<select id="validity" class="form-control" ng-model="validity"  >
 											<option value="">Filter by Validity</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
@@ -140,7 +142,7 @@
 									<form ng-if="permission.renew" style="padding:3px" name="renewalrequestForm">
 									<div class="form-group">
 										<label for="validity" class="control-label">Filter By validity</label>
-										<select id="validity" class="form-control" ng-model="validity" ng-change="changeStatusFn('validity', validity)" >
+										<select id="validity" class="form-control" ng-model="validity"  >
 											<option value="">Filter by Validity</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
