@@ -3,14 +3,11 @@
 
 {% block title %}{{data.business_name}}{% endblock %}
 
-{% block carousal %}
-	{% include 'includes/carousal.html' ignore missing %}
-{% endblock %}
-
 {% block content %}
 	{% autoescape false %}
 		{% if data.job_careers %}
-			<h2 class="text-center">Careers</h2>
+			<h2>Careers</h2>
+			<hr>
 			{% for key, value in data.job_careers if break == 0 %}
 			<div class="panel panel-default">
 				<div class="panel-heading">

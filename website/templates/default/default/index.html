@@ -16,26 +16,51 @@
 			<!-- <meta name="fragment" content="!"/>
 			<meta name="description" content="">
 			<meta name="keywords" content=""> -->
+			<style>		
+				.nav-pills>li.active>a,.nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus,.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus,.dropdown-menu>li>a:hover,.nav .open>a, .nav .open>a:hover, .nav .open>a:focus,.Hearing {
+					background-color: {{template.template_params.background_color}};
+				}
+				.nav-pills>li>a, .nav-pills>li>a:hover, .panel-default>.panel-heading{
+					background-color: {{template.template_params.background_color_light}};
+				}
+				.news,footer{
+					background-color: {{template.template_params.background_color_dark}};
+				}
+				.news,.Hearing{
+					color: 
+					{{template.template_params.color}};
+				}
+				.panel-default,.panel-default>.panel-heading {
+					border-color: {{template.template_params.background_color_dark}};;
+				}
+				.panel,.nav{
+					background:none;
+				}
+				
+			</style>
 		{% endblock %}
 	</head>
-	<body> 
+	<body>
 		<div class="container">
-			<header>
-				<div class="row headerRow">
-					<div class="col-sm-4">
-						<img src="img/logo.png" />
-						{% include 'includes/navbar.html' ignore missing %}	
-					</div>	
-					<div class="col-sm-8">
-						{% block carousal %}{% endblock %}
-					</div>
+			<div class="row">
+				<div class="col-sm-4">
+					<!-- <div class="links"> -->
+						<div class="row headerRow">
+							<div class="col-sm-12">
+								<img src="{{ path }}img/logo.png" class="img-responsive"/>
+								{% include 'includes/navbar.html' ignore missing %}
+							</div>
+						</div>
+					<!-- </div> -->
 				</div>
-			</header>
+				<div class="col-sm-8">
+					{% block carousal %}{% endblock %}
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+			
 		</div>
-		<div class="container">
-			{% block content %}{% endblock %}
-		</div>
-		<!-- <div class="section2">
+		<!--<div class="section2">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
@@ -67,8 +92,8 @@
 					</div>				
 				</div>		
 			</div>
-		</div> <!--end sec2- ->	
-		
+		</div> end sec2- ->	
+		<!-- 
 		<div class="section3">
 			<div class="container">
 				<div class="row">		    
@@ -127,85 +152,11 @@
 			</div>
 		</div>  --><!--end sec3-->	
 			
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-9">
-						<div class="row">
-							<div class="col-sm-3">
-								<h3 class="text-center">About </h3>
-								<ul>
-									<li><a>Elementum velit</a></li>
-									<li><a>Consequat ante</a></li>
-									<li><a>Lorem ipsum dolor</a></li>
-									<li><a>Sit amet</a></li>
-									<li><a>Consectetuer</a></li>						
-								</ul>
-							</div>
-							<div class="col-sm-3">
-								<h3 class="text-center">About </h3>
-								<ul>
-									<li><a>Elementum velit</a></li>
-									<li><a>Consequat ante</a></li>
-									<li><a>Lorem ipsum dolor</a></li>
-									<li><a>Sit amet</a></li>
-									<li><a>Consectetuer</a></li>						
-								</ul>
-							</div>
-							<div class="col-sm-3">
-								<h3 class="text-center">For patients </h3>
-								<ul>
-									<li><a>Elementum velit</a></li>
-									<li><a>Consequat ante</a></li>
-									<li><a>Lorem ipsum dolor</a></li>
-															
-								</ul>
-							</div>
-							<div class="col-sm-3">
-								<h3 class="text-center">Navigation </h3>
-								<ul>
-									<li><a href="#">HOME</a></li>
-									<li><a href="#">ABOUT-US</a></li>
-									<li><a href="#">SERVICES</a></li>
-									<li><a href="#">BLOG</a></li>
-									<li><a href="#" >CONTACT</a></li>					
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-3 icons">
-						<div class="row">						
-							<div class="col-sm-3"> 
-								<span class="glyphicon glyphicon-home"></span>
-							</div>
-							<div class="col-sm-9"> 
-								<address>9870 St Vincent Place,<br>
-								Glasgow, DC 45 Fr 45.</address>
-							</div>	
-							<div class="col-sm-3"> 
-								<span class="glyphicon glyphicon-earphone"></span>
-							</div>
-							<div class="col-sm-9"> 
-								<address>9870 St Vincent Place,<br>
-								Glasgow, DC 45 Fr 45.</address>
-							</div>
-							
-							<a>wtouch India Solution &copy 2015</a>
-							
-							<div class="footerLogo">	
-								<img src="img/facebook.png">
-								<img src="img/twitter.png">
-								<img src="img/rss.png">
-								<img src="img/google.png">								
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-12 text-center">
-						{% block footer %}
-							&copy; Copyright 2015 by <a href="http://wtouch.in">Web Touch India Solutions</a>.
-						{% endblock %}
-					</div>
-				</div>		
+		<footer class="navbar navbar-default navbar-fixed-bottom">
+			<div class="container text-center">
+				{% block footer %}
+					&copy; Copyright 2015 by <a href="http://wtouch.in">Web Touch India Solutions</a>.
+				{% endblock %}
 			</div>
 		</footer>	
 	</body>
