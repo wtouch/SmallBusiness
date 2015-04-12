@@ -10,9 +10,9 @@
 
 {% block content %}
 {% autoescape false %}
-	<h2>Services</h2>
-	<hr>
-	{% for x in data %}
+<div class="row">
+	<h2 class="text-center">Services</h2>
+	{% for x in services %}
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
 				{% for key, value in x.product_image %}
@@ -26,5 +26,6 @@
 			</div>
 		</div>
 	{% endfor %}
+</div>
 {% endautoescape %}
 {% endblock %}

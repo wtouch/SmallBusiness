@@ -11,14 +11,18 @@
 	
 {% block content %}
 {% autoescape false %}
-		<div class="Hearing">
-			<h2>Featured services</h2>
-			{% include 'includes/featured_services.html' ignore missing %}
+		<div class="row">
+			<div class="col-sm-12 Hearing">
+				<h1 class="text-center">Welcome to {{ data.business_name }}</h1>
+				{{ data.business_info.description|slice(start,1500)}}
+				<button type=""
+			</div>
+			<div class="col-sm-12 news">
+				{% include 'includes/featured_services.html' ignore missing %}
+				{% include 'includes/featured_products.html' ignore missing %}
+				{% include 'includes/featured_testimonials.html' ignore missing %}
+			</div>
 		</div>
-		<div class="news">
-			<h1 class="text-center">Welcome to {{ data.business_name }}</h1>
-			{{ data.business_info.description }}
-		</div>
-{% include 'includes/featured_testimonials.html' ignore missing %}
+
 {% endautoescape %}
 {% endblock %}

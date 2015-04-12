@@ -72,6 +72,8 @@
 				$responseDt['google_map'] = $data['website']['google_map'];
 				if(isset($data['featured_services'])) $responseDt['featured_services'] = $data['featured_services'];
 				if(isset($data['featured_products'])) $responseDt['featured_products'] = $data['featured_products'];
+				if(isset($data['services'])) $responseDt['services'] = $data['services'];
+				if(isset($data['products'])) $responseDt['products'] = $data['products'];
 				$responseDt['path'] = $this->tmplConfig['template_host_path_folder']."/";
 				
 				//print_r($responseDt['data']);

@@ -12,18 +12,17 @@
 
 {% block content %}
 	{% autoescape false %}
-		<div class="important">
-			<h2>{{ data.product_service_name }}</h2>
-			<hr>
+		<div class="important row">
 			<div class="media">
 				<div class="media-left col-sm-3">
 					<a href="#">
 						{% for key, value in data.product_image %}
-							<img class="img-responsive" src="{{value.0.file_relative_path}}">
+							<img class="img-responsive" src="{{value.file_relative_path}}">
 						{% endfor %}
 					</a>
 				</div>
-				<div class="media-body">
+				<div class="media-body col-sm-9">
+					<h2>{{ data.product_service_name }}</h2>
 					<p class="media-heading">{{data.description}}</p>
 				</div>
 			</div> 

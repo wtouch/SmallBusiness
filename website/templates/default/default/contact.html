@@ -21,12 +21,15 @@
 {% block content %}
 	<h2>Contact us</h2>
 	<div class="row">
-		<div class="col-sm-8">
-			<div class="row">
-				<div class="col-sm-12">
-					<h4>{{data.contact_profile.contact_person}}</h4>
+		<div class="col-sm-6">
+			<div class="media row">
+				<div class="media-left col-sm-4">
+					<a href="#">
+						<img class="img-responsive" src="{{data.contact_profile.contact_photo.file_relative_path}}" alt="{{data.business_name}}"/>
+					</a>
 				</div>
-				<div class="col-sm-6">
+				<div class="media-body col-sm-8">
+					<h4 class="media-heading">{{data.contact_profile.contact_person}}</h4>
 					<b>Address</b>
 					<address>
 						{{data.contact_profile.address}}<br>
@@ -36,7 +39,9 @@
 						{{data.contact_profile.ZIP_Code}}
 					</address>
 				</div>
-				<div class="col-sm-6">
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
 					<table class="table">
 						<tr>
 							<td><b>Telephone</b></td>
@@ -59,12 +64,8 @@
 					</table>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-12" id="googleMap" style="height:225px;"></div>
-			</div>
-			</table>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-6">
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="alert alert-success" ng-show="mailSent==true" role="alert">Message has been sent!</div>
@@ -129,5 +130,8 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12" id="googleMap" style="height:300px;"></div>
 	</div>
 {% endblock %}

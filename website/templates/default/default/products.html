@@ -10,13 +10,13 @@
 
 {% block content %}
 {% autoescape false %}
-	<h2>Products</h2>
-	<hr>
-	{% for x in data %}
+<div class="row">
+	<h2 class="text-center">Products</h2>
+	{% for x in products %}
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
 				{% for key, value in x.product_image%}
-					<img class="img-responsive" src="{{appConfig.assetPath + value.file_relative_path}}" alt="{{key}}"/>
+					<img class="img-responsive" src="{{value.file_relative_path}}" alt="{{key}}"/>
 				{% endfor %}
 				<div class="caption">
 					<h3>{{ x.product_service_name }} </h3>
@@ -28,5 +28,6 @@
 			</div>
 		</div>
 	{% endfor %}
-	{% endautoescape %}
+</div>
+{% endautoescape %}
 {% endblock %}

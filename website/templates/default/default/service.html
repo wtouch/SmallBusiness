@@ -8,8 +8,7 @@
 
 {% block content %}
 {% autoescape false %}
-	<h2>{{ data.product_service_name }}</h2>
-	<hr>
+<div class="row">
 	<div class="media">
 		<div class="media-left col-sm-3">
 			<a href="#">
@@ -18,9 +17,11 @@
 				{% endfor %}
 			</a>
 		</div>
-		<div class="media-body">
+		<div class="media-body col-sm-9">
+			<h2>{{ data.product_service_name }}</h2>
 			<p class="media-heading">{{data.description}}</p>
 		</div>
 	</div>
+</div>
 {% endautoescape %}
 {% endblock %}

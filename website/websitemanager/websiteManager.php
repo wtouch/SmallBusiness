@@ -177,7 +177,7 @@ class websiteManager{
 				foreach ($productDbData['data'] as $index => $dataArr){
 					//$serviceData[$index] = $dataArr;
 						foreach($dataArr as $key => $value){
-							$DataArray[$key] = (substr($value,0,1) !== "{") ? $value : json_decode($value, true);
+							$DataArray[$key] = (substr($value,0,1) == "{" || substr($value,0,1) == "[") ? json_decode($value, true) : $value;
 						}
 						array_push($productData,$DataArray);
 				}
@@ -200,11 +200,30 @@ class websiteManager{
 			$config = $config['data'];
 			$route = explode("/", $routes);
 			if($route[0] == 'product' || $route[0] == 'products' || $route[0] == 'service' || $route[0] == 'services'){
-				$business = $this->getProductData($routes);
+				$products = $this->getProductData($routes);
+				if($products['status'] != "success") {
+					throw new Exception($business['message']);
+				}
+				if($route[0] == 'products'){
+					$data['products'] = $products['data'];
+				}
+				if($route[0] == 'services'){
+					$data['services'] = $products['data'];
+				}
+				
+				$business = $this->getBusinessData($routes);
+				
 				if($business['status'] != "success") {
 					throw new Exception($business['message']);
 				}
+				
 				$data['business'] = $business['data'];
+				
+				if($route[0] == 'product' || $route[0] == 'service'){
+					
+					$data['business'] = array_merge($data['business'],$products['data']);
+				}
+				//print_r($data['business']);
 			}elseif($route[0] == 'home' || $route[0] == '') {
 				$featured_products = $this->getProductData('products', 1);
 				$featured_services = $this->getProductData('services', 1);
