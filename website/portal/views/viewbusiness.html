@@ -22,7 +22,7 @@
 		</div>
 		<span ng-bind="id" ></span>
 		<div class="row" ng-controller="aboutController">
-			<div class="col-sm-2 sidebar" id="navbar-example">
+			<div class="col-sm-2 sidebar boxborder" id="navbar-example">
 				<ul class="nav nav-pills nav-stacked">
 					<li ng-class="{active:id=='home'}" ng-click="makeActive('home')"><a href="#home">Home</a></li>
 					<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
@@ -71,7 +71,7 @@
 				<div ng-show="id=='products'" class="products boxborder" id="products">
 					<div class="row">
 						<h2 class="text-center">Products</h2>
-						{% for x in data %}
+						{% for x in product %}
 							<div class="col-sm-6 col-md-4 ">
 								<div class="thumbnail productBox">
 									{% for key, value in x.product_image %}
@@ -92,8 +92,8 @@
 				<div ng-show="id=='services'" class="products boxborder" id="services">
 					<div class="row">
 						<h2 class="text-center">Services</h2>
-						{% for x in data %}
-							<div class="col-sm-6 col-md-4">
+						{% for x in service %}
+							<div class="col-sm-6 col-md-4 ">
 								<div class="thumbnail productBox">
 									{% for key, value in x.product_image %}
 										<img class="img-responsive" src="{{value.file_relative_path}}" alt="{{key}}"/>

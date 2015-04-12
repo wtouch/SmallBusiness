@@ -59,20 +59,29 @@ class portalManager{
 	
 	function getCategories(){
 		// query to get types & group by category
-		$groupByArray['category'] = 'category';
-		$this->db->setGroupBy($groupByArray);
-		$where = array();
-		
-		$data = $this->db->select('keywords', $where);
-	
-		$response['title'] = "this is twig template";
-		$response['data'] = $this->jsonDecode($data["data"]);
-		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+		try{
+			$groupByArray['category'] = 'category';
+			$this->db->setGroupBy($groupByArray);
+			$where = array();
+			$data = $this->db->select('keywords', $where);
+			if($data['status'] != "success"){
+				throw new Exception($data['message']);
+			}
+			$response['title'] = "this is twig template";
+			$response['data'] = $this->jsonDecode($data["data"]);
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+			$response["status"] = "success";
+		}catch(Exception $e){
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+            $response["data"] = null;
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+        }
 		return $response;
 	}
 	
 	function getCategoryTypes($category){
-		$bizData=array();
+		
 		$groupByArray['type'] = 'type';
 		$this->db->setGroupBy($groupByArray);
 		$where['category'] = $category;
@@ -102,19 +111,20 @@ class portalManager{
 		
 		$prodwhere['status'] = 1;
 		$prodwhere['type'] = "product";
-		$prodwhere['id'] = $id ;
+		$prodwhere['business_id'] = $id ;
 		$proddata = $this->db->select('product', $prodwhere);
 		
 		$servicewhere['status'] = 1;
 		$servicewhere['type'] = "service";
-		$servicewhere['id'] = $id ;
+		$servicewhere['business_id'] = $id ;
 		$servicedata = $this->db->select('product', $servicewhere);
-		
 		$response['title'] = "this is twig template";
 		$response['data'] = $this->jsonDecode($data["data"]);
 		$response['service'] = $this->jsonDecode($servicedata["data"]);	
 		$response['product'] = $this->jsonDecode($proddata["data"]);
+		print_r($response['product']);
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+		$response['status'] = "success";
 		return $response;
 	}
 	

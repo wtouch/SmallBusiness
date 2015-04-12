@@ -11,7 +11,7 @@ $app = new Slim\Slim();
 $portal = new portalManager($config);
 $loader = new Twig_Loader_Filesystem("website/portal/views");
 $twig = new Twig_Environment($loader);
-$app->post('/post/:getRequest(/:postParams)', 'postRecord' );
+
 $app->get('/', function() use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories();
 	$template = $twig->loadTemplate("home.html");
@@ -45,7 +45,12 @@ $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
 	//to add [-] from template use - replace({' ' : '-'}) as a filter
 	$category = $portal->decodeUrl($category); 
 	$response = $portal->getCategoryTypes($category);
-	$template = $twig->loadTemplate("categorytypes.html");
+	if($response['status'] == "success"){
+		$template = $twig->loadTemplate("categorytypes.html");
+	}else{
+		$template = $twig->loadTemplate("error.html");
+	}
+	
 	$template->display($response);
 	
 });
@@ -54,7 +59,12 @@ $app->get('/:category/:type', function($category, $type) use($app, $config, $twi
 	$category = $portal->decodeUrl($category);
 	$type = $portal->decodeUrl($type);
 	$response = $portal->getBusinessList($category, $type);
-	$template = $twig->loadTemplate("business.html");
+	if($response['status'] == "success"){
+		$template = $twig->loadTemplate("business.html");
+	}else{
+		$template = $twig->loadTemplate("error.html");
+	}
+	
 	$template->display($response);
 });
 
@@ -63,31 +73,15 @@ $app->get('/:category/:type/:business/:id', function($category, $type, $business
 	$type = $portal->decodeUrl($type);
 	$business = $portal->decodeUrl($business);
 	$response = $portal->getBusiness($category, $type, $business,$id);
-	$template = $twig->loadTemplate("viewbusiness.html");
-	$template->display($response);
-});
-
-function postRecord($getRequest, $postParams=null){
-	$app = new \Slim\Slim();
-	$body = $app->request->getBody();
-	// this will get current url
-	$posIndex = strpos( $_SERVER['PHP_SELF'], '/index.php');
-	$baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex).'/index.php'; 
-	
-	try{
-		if($body===""){
-				throw new Exception('There is no input!');
-		}else{
-			include 'portalManager.php';
-		}
+	if($response['status'] == "success"){
+		$template = $twig->loadTemplate("viewbusiness.html");
+	}else{
+		$template = $twig->loadTemplate("error.html");
 	}
-	catch(Exception $e) {
-		echo "Error: '".$e->getMessage()."'";
-        //return $app->response()->redirect($baseUrl.'/notfound');
-    }
-};
+	
+	$template->display($response);
 
-
+});
 
 $app->run();
 ?>
