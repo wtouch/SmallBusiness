@@ -19,10 +19,10 @@ define(['app'], function (app) {
 		$scope.contries = dataService.config.country;
 		
 		//code for accessing json data of users
-		$scope.user = {};
+		$scope.manage_user = {};
 		dataService.config('config', {config_name : "manage_user"}).then(function(response){
-			$scope.user = response.config_data;
-			console.log($scope.user); 
+			$scope.manage_user = response.config_data;
+			console.log($scope.manage_user); 
 		});
 
 		$scope.getData = function(location){
@@ -146,6 +146,11 @@ define(['app'], function (app) {
 		};	
 		//End of pagination
 		
+		//
+		dataService.get("getmultiple/user/1/100")
+		.then(function(response) {
+			$scope.selectUsers = response.data;
+		});	
 		
 		
 		//code for search filter
@@ -293,7 +298,6 @@ define(['app'], function (app) {
 				};
 			}
 		};			
-		
 		
 		//create user group
 		var usersGroup = function(){

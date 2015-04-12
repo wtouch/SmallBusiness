@@ -24,6 +24,34 @@
 				</div>
 			</div>
 			
+			
+		<div class="col-sm-3" ng-if="permission.filter_by_type">
+			<div class="bottomspace">
+				<label for="status" class="control-label">Filter By Temp Type</label>
+					<select id="status" class="form-control" ng-model="type" ng-change="changeStatus('template_type',type)" >
+						<option value="" selected>Select type</option> <!-- add value attribute empty & selected for initial selected option -->
+						<option value="service">Service</option>
+						<option value="product">Product</option>
+						<option value="business">Business</option>
+						<option value="website">Website</option>
+					</select>
+			</div>
+		</div>
+		
+		<div class="col-sm-3" ng-if="permission.filter_by_category">
+			<div class="bottomspace">
+				<label for="status" class="control-label">Filter By Category</label>
+					<select id="status" class="form-control" ng-model="type" ng-change="changeStatus('template_type',type)" >
+						<option value="" selected>Select Category</option> <!-- add value attribute empty & selected for initial selected option -->
+						<option value="website">Website</option>
+						<option value="portal">Portal</option>
+					</select>
+			</div>
+		</div>
+		
+		
+		
+			
 			<div class="toolbar pull-right">
 				<div class="btn-group" role="group" aria-label="Sixth group" ng-if="mailId=='mailview'">
 					<a class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Previous Message" ng-click="prevmail()" >
@@ -33,6 +61,10 @@
 						<span class="glyphicon glyphicon-arrow-right" name="nextmsg" value="nextmsg"></span>
 					</a>
 				</div>
+				
+				
+		
+		
 				<form class="form-inline">
 					<div class="input-group">
 						<input id="search" type="text" class="form-control" ng-change="searchFilter('subject', searchProp)" ng-model="searchProp" placeholder="search" ng-if="mailId!='composemailview' && mailId!='mailview'"/>

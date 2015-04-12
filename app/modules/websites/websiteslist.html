@@ -65,7 +65,7 @@
 					</select>
 			</div>
 		</div>
-		<div ng-if="permission.validity_filter" class="col-sm-2">
+		<div ng-if="permission.customer_filter" class="col-sm-2">
 			<div class="bottomspace">
 				<label for="filterbycustomerid" class="control-label">Filter By Customer Id</label>
 					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatusFn('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
@@ -118,7 +118,7 @@
 								</a>		
 							</div>
 							<div ng-class="(drop) ? 'btn-group open' : 'btn-group'">
-								  <button type="button" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop" class="btn btn-danger">Renew</button>
+								  <button ng-if="permission.renew" type="button" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop" class="btn btn-danger">Renew</button>
 								  <ul ng-show="drop" class="dropdown-menu" role="menu">
 									<form style="padding:3px" name="renewForm">
 									<div class="form-group">

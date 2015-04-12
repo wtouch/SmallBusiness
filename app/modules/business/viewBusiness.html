@@ -99,15 +99,8 @@
 										<tr><th>Title</th><td>{{val.testimonial_title}}</td></tr>
 										<tr><th>Description</th><td ng-bind-html="val.test_Description"></td></tr>
 										<tr><th>Imgae</th>
-									<!-- <tr "value.file_relative_path" modalOptions.bizList.testimonials.testimage">
-									<td>{{key}}</td>
-									<td>
-									<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + val.image.file_relative_path}}" width="150px" />
-									</td>
-									</td>
-									</tr>   -->
-									
-									<tr ng-repeat="(key, val) in modalOptions.bizList.testimonials"><td>{{key}}</td><td>
+
+									<tr "value.file_relative_path" in modalOptions.bizList.testimonials"><td>{{key}}</td><td>
 							<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + val.testimage.file_relative_path}}" width="150px" />
 							</td>
 							<td ng-bind-html="val.description"></td></tr>
@@ -135,8 +128,8 @@
 										<tr><th>Date</th><td>{{val.newsdate}}</td></tr>
 										<tr><th>URL</th><td>{{val.News}}</td></tr>
 										<tr><th>Image</th><td>
-										<span ng-repeat="(key, value) in val.news_image">
-											<img class="imgwidth" ng-src="{{appConfig.assetPath+'/'+value.file_name}}"/>
+										<span "value.file_relative_path" in  modalOptions.bizList.news_coverage">
+											<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + val.image.file_relative_path}}" width="150px" />
 										</span></td></tr>
 										<tr><th>Details</th><td ng-bind-html="val.newsdetails"></td></tr>
 								</table></td>	

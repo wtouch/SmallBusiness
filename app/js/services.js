@@ -292,7 +292,6 @@ define(['app'], function (app) {
 				
 			obj.auth = ($cookieStore.get('auth')) ? true : (sessionStorage.auth) ? JSON.parse(sessionStorage.auth) : false;
 			
-			//obj.userDetails = ($cookieStore.get('userDetails')) ? (angular.isObject($cookieStore.get('userDetails'))) ? $cookieStore.get('userDetails') : JSON.parse($cookieStore.get('userDetails')) : null;
 			obj.userDetails = (localStorage.userDetails) ? (angular.isObject(localStorage.userDetails)) ? localStorage.userDetails : JSON.parse(localStorage.userDetails) : null;
 			
 			obj.setAuth = function (data) {
@@ -303,15 +302,8 @@ define(['app'], function (app) {
 				if(data == (undefined || "")){
 					console.log("data undefined: "+data);
 				}else{
-					//sessionStorage.userDetails = (data);
-					//$cookieStore.remove('userDetails');
-					//$cookieStore.put('userDetails',data);
-					//sessionStorage.clear();
 					localStorage.clear();
-					//sessionStorage.userDetails = data;
 					localStorage.userDetails = data;
-					
-					//obj.userDetails = (angular.isObject($cookieStore.get('userDetails'))) ? $cookieStore.get('userDetails') : JSON.parse($cookieStore.get('userDetails'));
 					obj.userDetails = (angular.isObject(localStorage.userDetails)) ? localStorage.userDetails : JSON.parse(localStorage.userDetails);
 				}
 			}

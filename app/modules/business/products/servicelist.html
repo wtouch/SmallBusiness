@@ -27,7 +27,7 @@
 					<div class="btn-group">
 						<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Non Featured', 'Featured')}}" ng-class="(x.featured==1) ? 'btn btn-info' : 'btn btn-danger'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-star"></span></button>
 						<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-remove"></span></button>
-						<button type="button" tooltip="Edit" class="btn btn-warning" ng-click="editServiceForm(x)"><span class="glyphicon glyphicon-pencil"></span></button>
+						<button ng-if="permission.edit_product" type="button" tooltip="Edit" class="btn btn-warning" ng-click="editServiceForm(x)"><span class="glyphicon glyphicon-pencil"></span></button>
 					</div>
 				</div>
 			</div>	
