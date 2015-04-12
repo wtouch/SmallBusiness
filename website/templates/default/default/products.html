@@ -7,16 +7,15 @@
         .important { color: #336699; }
     </style>
 {% endblock %}
-{% block carousal %}
-	{% include 'includes/carousal.html' ignore missing %}
-{% endblock %}
+
 {% block content %}
 {% autoescape false %}
+<div class="row">
 	<h2 class="text-center">Products</h2>
-	{% for x in data %}
+	{% for x in products %}
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
-				{% for key, value in x.product_image %}
+				{% for key, value in x.product_image%}
 					<img class="img-responsive" src="{{value.file_relative_path}}" alt="{{key}}"/>
 				{% endfor %}
 				<div class="caption">
@@ -29,5 +28,6 @@
 			</div>
 		</div>
 	{% endfor %}
-	{% endautoescape %}
+</div>
+{% endautoescape %}
 {% endblock %}

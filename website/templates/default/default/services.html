@@ -7,13 +7,12 @@
         .important { color: #336699; }
     </style>
 {% endblock %}
-{% block carousal %}
-	{% include 'includes/carousal.html' ignore missing %}
-{% endblock %}
+
 {% block content %}
 {% autoescape false %}
+<div class="row">
 	<h2 class="text-center">Services</h2>
-	{% for x in data %}
+	{% for x in services %}
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
 				{% for key, value in x.product_image %}
@@ -27,5 +26,6 @@
 			</div>
 		</div>
 	{% endfor %}
+</div>
 {% endautoescape %}
 {% endblock %}
