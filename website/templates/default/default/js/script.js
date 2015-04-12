@@ -32,11 +32,11 @@ app.controller('enquiryController', function($scope,$http, $route, $location) {
 		});
 	};
 });	
-	app.controller('aboutController', function($scope,$http, $route, $location) {
-		var s = $location.path();
-		$scope.url = s.substr(1);
-		$scope.makeActive = function(url){
-			$scope.id = url;
-		}
-		$scope.makeActive($scope.url);
-	});
+app.controller('aboutController', function($scope,$http, $route, $location) {
+	var s = $location.path();
+	$scope.url = s.substr(1);
+	$scope.makeActive = function(url){
+		$scope.id = url;
+	}
+	$scope.makeActive($scope.url);
+});

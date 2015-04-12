@@ -11,7 +11,7 @@ $app = new Slim\Slim();
 $portal = new portalManager($config);
 $loader = new Twig_Loader_Filesystem("website/portal/views");
 $twig = new Twig_Environment($loader);
-
+$app->post('/post/:getRequest(/:postParams)', 'postRecord' );
 $app->get('/', function() use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories();
 	$template = $twig->loadTemplate("home.html");
@@ -53,7 +53,7 @@ $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
 $app->get('/:category/:type', function($category, $type) use($app, $config, $twig, $portal) {
 	$category = $portal->decodeUrl($category);
 	$type = $portal->decodeUrl($type);
-	$response = $portal->getBusiness($category, $type);
+	$response = $portal->getBusinessList($category, $type);
 	$template = $twig->loadTemplate("business.html");
 	$template->display($response);
 });
@@ -62,10 +62,32 @@ $app->get('/:category/:type/:business/:id', function($category, $type, $business
 	$category = $portal->decodeUrl($category);
 	$type = $portal->decodeUrl($type);
 	$business = $portal->decodeUrl($business);
-	$response = $portal->getBusinessView($category, $type, $business,$id);
+	$response = $portal->getBusiness($category, $type, $business,$id);
 	$template = $twig->loadTemplate("viewbusiness.html");
 	$template->display($response);
 });
+
+function postRecord($getRequest, $postParams=null){
+	$app = new \Slim\Slim();
+	$body = $app->request->getBody();
+	// this will get current url
+	$posIndex = strpos( $_SERVER['PHP_SELF'], '/index.php');
+	$baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex).'/index.php'; 
+	
+	try{
+		if($body===""){
+				throw new Exception('There is no input!');
+		}else{
+			include 'portalManager.php';
+		}
+	}
+	catch(Exception $e) {
+		echo "Error: '".$e->getMessage()."'";
+        //return $app->response()->redirect($baseUrl.'/notfound');
+    }
+};
+
+
 
 $app->run();
 ?>

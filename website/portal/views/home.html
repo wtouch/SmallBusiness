@@ -15,40 +15,37 @@
 	
 <section  >
 	<div class="home center-block" ng-controller="TypeaheadCtrl">
-					<a href="#/"><img src="{{path}}img/logo.png" title="Web Touch India Solution Pune " class="center-block logo img-responsive" /></a>
-			<div class="row">
-				<div class="col-md-6 pull-right">
-					<span name="currentItem" id="currentItem" class="form-control-static" ng-click="onItemClicked(currentItem)">Pune </span>
-					<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item)" placeholder="Search City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control cityBlock" autocomplete="off" ng-init="city = ''"   ng-show="currentItem.isVisible">
+		<a href="#/"><img src="{{path}}img/logo.png" title="Web Touch India Solution Pune " class="center-block logo img-responsive" /></a>
+		<div >
+			<span name="currentItem" id="currentItem" class="form-control-static" ng-click="onItemClicked(currentItem)">Pune </span>
+			<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item)" placeholder="Search City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control cityBlock" autocomplete="off" ng-init="city = ''"   ng-show="currentItem.isVisible">
+		</div>
+		<div class="row">
+			<div class="col-md-12 ">
+				<div class="input-group searchBlock">
+					<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="location" typeahead-on-select="getData($item)" placeholder="Type to Search" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
+					<span class="input-group-btn">
+						<button class="btn btn-primary  form-control " type="button"><span class="glyphicon glyphicon-search"></span></button>
+					</span>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 ">
-					<div class="input-group searchBlock">
-						<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="location" typeahead-on-select="getData($item)" placeholder="Type to Search" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
-
-						<span class="input-group-btn">
-							<button class="btn btn-primary  form-control " type="button"><span class="glyphicon glyphicon-search"></span></button>
-						</span>
-					</div>
-				</div >
-			</div>
-			<div class="row">
-				<div class="col-md-12 ">
-					<div class="text-center ">
-						{% for x in data %}
-							<div class="products " >
-								<span class="glyphicon glyphicon-film"></span><br>
-								<a  class="catp"href="/{{x.category | replace({' ' : '-'}) }}" >{{x.category}}</a>
-							</div>
-						{% endfor %}
-						
-					</div>
-					<span class="showmore"><a href="#" >More</a></span>
+			</div >
+		</div>
+		<div class="row">
+			<div class="col-md-12 ">
+				<div class="text-center ">
+					{% for x in data %}
+						<div class="products " >
+							<span class="glyphicon glyphicon-film"></span><br>
+							<a  class="catp"href="/{{x.category | replace({' ' : '-'}) }}" >{{x.category}}</a>
+						</div>
+					{% endfor %}
+					
 				</div>
+				<span class="showmore"><a href="#" >More</a></span>
 			</div>
 		</div>
 	</div>
+	
 </section>
 {% endautoescape %}
 {% endblock %}

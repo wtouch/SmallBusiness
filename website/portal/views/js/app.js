@@ -3,10 +3,11 @@
 define(['angular',
 	'bootstrap',
 	'services',
-	'ngCookies'
+	'ngCookies',
+	
 ], function (angular, ngCookies) {
     // Declare app level module which depends on views, and components
-    var app = angular.module('apnasitePortal', [
+    var app = angular.module('apnasitePortal', ['ngRoute',
    'ui.bootstrap', 'customServices', 'ngCookies'
  ]);
 	app.controller('TypeaheadCtrl', ['$scope','$http','dataService', function($scope, $http,dataService) {
@@ -23,44 +24,34 @@ define(['angular',
 			item.isVisible = true;
 		};
 		
-	}]).controller('RatingDemoCtrl', ['$scope','$http', function($scope, $http) {
-	  $scope.rate = 7;
-	  $scope.max = 10;
-	  $scope.isReadonly = false;
-
-	  $scope.hoveringOver = function(value) {
-		$scope.overStar = value;
-		$scope.percent = 100 * (value / $scope.max);
-	  };
-
-	  $scope.ratingStates = [
-		{stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
-		{stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
-		{stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
-		{stateOn: 'glyphicon-heart'},
-		{stateOff: 'glyphicon-off'}
-	  ];
-	}]).controller('ModalDemoCtrl',[ '$scope', '$modal', '$logfunction' ,function($scope, $modal, $log) {
-		$scope.open = function (size) {
-			var modalInstance = $modal.open({
-			  templateUrl: 'includes/search-location.html',
-			  controller: 'ModalInstanceCtrl',
-			  size: size,
-			  resolve: {
-				items: function () {
-				  return $scope.items;
-				}
-			  }
-			});
-		};
-	}]).controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-		 $scope.ok = function () {
-			$modalInstance.close($scope.selected.item);
-		  };
-
-		  $scope.cancel = function () {
-			$modalInstance.dismiss('cancel');
-		  };
-	}]);	
+	}]).controller('aboutController',['$scope','$http', '$route', '$location', function($scope,$http, $route, $location) {
+		var s = $location.path();
+		$scope.url = s.substr(1);
+		$scope.makeActive = function(url){
+			$scope.id = url;
+		}
+		$scope.makeActive($scope.url);
+	}]).controller('enquiryController', ['$scope','$http','$route','$location', function($scope,http, $route, $location) {
+			$scope.hostUrl = hostUrl;
+			var today = new Date();
+			var year = today.getFullYear();
+			var month = today.getMonth() + 1;
+			var date = today.getDate();
+			var hour = today.getHours();
+			var min = today.getMinutes();
+			var sec = today.getSeconds();
+			$scope.mailSent = false;
+			$scope.enquiry = {
+				subject : 'Website Enquiry',
+				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
+			};
+				console.log($scope.enquiry);
+			$scope.postData = function(enquiry){
+				dataService.post("../server-api/index.php/post/enquiry",$scope.enquiry).success(function(response) {
+					$scope.mailSent = true;
+					console.log(response);
+				});
+			};
+		}]);	
     return app;
 });

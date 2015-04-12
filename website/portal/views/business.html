@@ -6,87 +6,82 @@
 {% block content %}
 
 {% autoescape false %}
-		
-			{% include 'includes/header.html' ignore missing %}
-		
-	<main>
-		
-			<div class="row">
-				<!--div class="col-md-3">
-					<div class="btn-group-vertical leftlnk" role="group" aria-label="...">
-						{% for x in data %}
-						<button type="button" class="btn btn-primary active"> {{x.category}}</button>
-							<button type="button" class="btn btn-default">{{x.type}}</button>
-						{% endfor %}
-					</div>
-				</div-->
-				<div class="col-md-12 col-xs-12">
-					{% for x in data %}
-					<div class="panel panel-default">
-					  <div class="panel-heading">
-						<h3 class="media-heading "><a href="/{{x.category | replace({' ' : '-'})}}/{{x.type | replace({' ' : '-'})}}/{{x.business_name | replace({' ' : '-'})}}/{{x.id}}">{{x.business_name}}</a>
-						<div class="verifyBiz pull-right ">
-							<span ng-if="{{x.verified}}" tooltip="Business Verified"><img src="{{path}}/img/verified.png"/> </span>
-							<span href="#" ng-if="{{x.featured}}" tooltip="Featured Business "><img src="{{path}}/img/feature.png"/> </span>
-							<a href="/enquiry/{{x.business_name | replace({' ' : '-'})}}/{{x.business_id}}" class="btn btn-primary">
-							Enqiry 
+{% include 'includes/header.html' ignore missing %}
+<main>
+	<div class="row">
+		<!--div class="col-md-3">
+			<div class="btn-group-vertical leftlnk" role="group" aria-label="...">
+				{% for x in data %}
+				<button type="button" class="btn btn-primary active"> {{x.category}}</button>
+					<button type="button" class="btn btn-default">{{x.type}}</button>
+				{% endfor %}
+			</div>
+		</div-->
+		<div class="col-md-12 col-xs-12">
+			{% for x in data %}
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+				<h3 class="media-heading "><a href="/{{x.category | replace({' ' : '-'})}}/{{x.type | replace({' ' : '-'})}}/{{x.business_name | replace({' ' : '-'})}}/{{x.id}}">{{x.business_name}}</a>
+				<div class="verifyBiz pull-right ">
+					<span ng-if="{{x.verified}}" tooltip="Business Verified"><img src="{{path}}/img/verified.png"/> </span>
+					<span href="#" ng-if="{{x.featured}}" tooltip="Featured Business "><img src="{{path}}/img/feature.png"/> </span>
+					<a href="/enquiry/{{x.business_name | replace({' ' : '-'})}}/{{x.business_id}}" class="btn btn-primary">
+					Enqiry 
+					</a>
+				</div>	</h3>
+			 </div>
+				<div class="panel-body">
+					<div class="media" >
+						<div class="media-left col-md-3">
+							<a href="#"><img class="img-responsive" src="{{x.business_logo.file_relative_path}}">
 							</a>
-						</div>	</h3>
-					 </div>
-						<div class="panel-body">
-							<div class="media" >
-								<div class="media-left col-md-3">
-									<a href="#"><img class="img-responsive" src="{{x.business_logo.file_relative_path}}">
-									</a>
-								</div>
-								<div class="media-body col-md-9 table-responsive">
-									<table class="table table-bordered">
-										<tr><td>
-											<abbr title="Website"><span class="glyphicon glyphicon-globe"></span> </abbr></td>
-											<td><strong><a href="{{x.contact_profile.contact_website}}">{{x.contact_profile.contact_website}}</a></strong></td>
-										</tr>
-										<tr><td>
-											<abbr title="Phone"><span class="glyphicon glyphicon-earphone"></span></abbr></td>
-											<td>{{x.contact_profile.mobile}}</td>
-										</tr>
-										<tr><td>
-											<abbr title="Email ID"><span class="glyphicon glyphicon-envelope Email"></abbr></span> </td>
-											<td><a href="{{x.contact_profile.email}}" >{{x.contact_profile.email}}</a></td>
-										</tr>
-									 		<td><abbr title="Address"> <span class="glyphicon glyphicon-home"></span></abbr></td>
-											<td>
-												<address>
-												  Country :{{x.country}},<br>
-												  State - {{x.state}},<br>
-												   City : {{x.city}},<br>
-													Location :{{x.location}},&nbsp&nbsp Area - {{x.area}},<br>
-												  pincode : {{x.pincode}} 
-												</address>
-											</td>
-										</tr>
-										<tr>
-											<td> Details</td>
-											<td><a href="#/search/{{x.business_info.keywords | replace({' ' : '-'})}}">{{x.business_info.keywords}}</a></td>
-										</tr>
-										<tr>
-											<td>Description</td>
-											<td>{{x.business_info.description}}</td>
-										</tr>
-									</table>
-								</div>
-								<div class="media-right col-md-3">
-									
-								</div>
-							</div>
+						</div>
+						<div class="media-body col-md-9 table-responsive">
+							<table class="table table-bordered">
+								<tr><td>
+									<abbr title="Website"><span class="glyphicon glyphicon-globe"></span> </abbr></td>
+									<td><strong><a href="{{x.contact_profile.contact_website}}">{{x.contact_profile.contact_website}}</a></strong></td>
+								</tr>
+								<tr><td>
+									<abbr title="Phone"><span class="glyphicon glyphicon-earphone"></span></abbr></td>
+									<td>{{x.contact_profile.mobile}}</td>
+								</tr>
+								<tr><td>
+									<abbr title="Email ID"><span class="glyphicon glyphicon-envelope Email"></abbr></span> </td>
+									<td><a href="{{x.contact_profile.email}}" >{{x.contact_profile.email}}</a></td>
+								</tr>
+									<td><abbr title="Address"> <span class="glyphicon glyphicon-home"></span></abbr></td>
+									<td>
+										<address>
+										  Country :{{x.country}},<br>
+										  State - {{x.state}},<br>
+										   City : {{x.city}},<br>
+											Location :{{x.location}},&nbsp&nbsp Area - {{x.area}},<br>
+										  pincode : {{x.pincode}} 
+										</address>
+									</td>
+								</tr>
+								<tr>
+									<td> Details</td>
+									<td><a href="#/search/{{x.business_info.keywords | replace({' ' : '-'})}}">{{x.business_info.keywords}}</a></td>
+								</tr>
+								<tr>
+									<td>Description</td>
+									<td>{{x.business_info.description}}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="media-right col-md-3">
+							
 						</div>
 					</div>
-					
-				 {% endfor %} 
 				</div>
 			</div>
-		
-	</main>
-	{% endautoescape %}
+		 {% endfor %} 
+		</div>
+	</div>
+</main>
+{% endautoescape %}
 {% endblock %}	
 
 

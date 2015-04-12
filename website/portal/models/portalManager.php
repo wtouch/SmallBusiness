@@ -20,20 +20,21 @@ class portalManager{
 			return false;
 		}else{
 			$arr = array();
-			if(is_array($data) || is_object($data)){
-				foreach($data as $key => $value){
+	
+			foreach($data as $key => $value){
+				if(is_array($value) || is_object($value)){
 					foreach($value as $subkey => $subvalue){
 						$subarr[$subkey] = ((substr($subvalue,0,1) == "{") || (substr($subvalue,0,1) == "[")) ? json_decode($subvalue, true) : $subvalue;
 					}
 					$arr[$key] = $subarr;
-				}
-			}else{
-				foreach($data as $key => $value){
-					$arr[$key] = ((substr($value,0,1) == "{") || (substr($value,0,1) == "[")) ? json_decode($value, true) : $value;
+				}else{
+					foreach($data as $key => $value){
+						$arr[$key] = ((substr($value,0,1) == "{") || (substr($value,0,1) == "[")) ? json_decode($value, true) : $value;
+					}
 				}
 			}
 			return $arr;
-		}
+		}	
 	}
 	function getDataByKeyword($keyword){
 		try{
@@ -81,7 +82,7 @@ class portalManager{
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
-	function getBusiness ($category, $type){
+	function getBusinessList ($category, $type){
 		$where['category'] = $category;
 		$where['type'] = $type;
 		$where['status'] = 1;
@@ -92,16 +93,30 @@ class portalManager{
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
-	function getBusinessView ($category, $type, $business,$id){
+	function getBusiness ($category, $type, $business,$id){
 		$where['type'] = $type;
 		$where['status'] = 1;
 		$where['category'] = $category ;
 		$where['id'] = $id ;
-		$data = $this->db->select('business', $where);
+		$data = $this->db->selectSingle('business', $where);
+		
+		$prodwhere['status'] = 1;
+		$prodwhere['type'] = "product";
+		$prodwhere['id'] = $id ;
+		$proddata = $this->db->select('product', $prodwhere);
+		
+		$servicewhere['status'] = 1;
+		$servicewhere['type'] = "service";
+		$servicewhere['id'] = $id ;
+		$servicedata = $this->db->select('product', $servicewhere);
+		
 		$response['title'] = "this is twig template";
 		$response['data'] = $this->jsonDecode($data["data"]);
+		$response['service'] = $this->jsonDecode($servicedata["data"]);	
+		$response['product'] = $this->jsonDecode($proddata["data"]);
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
+	
 }
 ?>
