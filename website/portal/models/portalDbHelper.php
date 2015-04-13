@@ -221,12 +221,14 @@ class portalDbHelper {
 			$dbLimit = ($limit===null) ? "" : " LIMIT ".$startLimit.", ".$limit['records'];
 			$l = "";
 			if($likeFilter!=null){
+				$l = " and ";
 				foreach ($likeFilter as $key => $value) {
-					$l .= " and " .$key. " like '%". $value . "%'";
+					$l .= $key. " like '%". $value . "%' or ";
 				}
 			}
-			
+			$l = trim($l, "or ");
             $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w . " ". $l. $this->getGroupBy(). " ".$dbLimit);
+			
             $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			

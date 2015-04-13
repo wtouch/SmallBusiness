@@ -62,12 +62,16 @@
 									</td>
 								</tr>
 								<tr>
-									<td> Details</td>
-									<td><a href="#/search/{{x.business_info.keywords | replace({' ' : '-'})}}">{{x.business_info.keywords}}</a></td>
+									<td>Keywords</td>
+									<td>
+										{% for keyword in x.keywords %}
+										<a href="/search/{{keyword | replace({' ' : '-'}) | url_encode}}">{{keyword}}</a>
+										{% endfor %}
+									</td>
 								</tr>
 								<tr>
 									<td>Description</td>
-									<td>{{x.business_info.description}}</td>
+									<td>{{x.business_info.description |slice(0, 250) }}</td>
 								</tr>
 							</table>
 						</div>

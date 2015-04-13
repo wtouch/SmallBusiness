@@ -39,7 +39,17 @@ class portalManager{
 	function getDataByKeyword($keyword){
 		try{
 			$where['status'] = 1;
-			$like['keywords'] = $keyword;
+			
+			if(is_array($keyword)){
+				foreach($keyword as $key => $value){
+					$like[$key] = $value;
+					$like['business_name'] = $value;
+				}
+			}else{
+				$like['keywords'] = $keyword;
+				$like['business_name'] = $keyword;
+			}
+			
 			$data = $this->db->select('business', $where, $limit=null, $like);
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
@@ -63,7 +73,7 @@ class portalManager{
 			$groupByArray['category'] = 'category';
 			$this->db->setGroupBy($groupByArray);
 			$where = array();
-			$data = $this->db->select('keywords', $where);
+			$data = $this->db->select('business', $where);
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
@@ -85,7 +95,7 @@ class portalManager{
 			$groupByArray['type'] = 'type';
 			$this->db->setGroupBy($groupByArray);
 			$where['category'] = $category;
-			$data = $this->db->select('keywords', $where);
+			$data = $this->db->select('business', $where);
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
