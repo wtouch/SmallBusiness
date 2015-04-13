@@ -15,7 +15,7 @@ define(['app'], function (app) {
 		$scope.userList = [];
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
-		$scope.userInfo = {user_id : $rootScope.userDetails};
+		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.contries = dataService.config.country;
 		
 		//code for accessing json data of users
@@ -263,8 +263,8 @@ define(['app'], function (app) {
 			};
 			$scope.postData = function(adduser) {
 				var register_date = {register_date : $scope.currentDate};
-				angular.extend(adduser, register_date);
-				
+				angular.extend(adduser, register_date,$scope.userInfo);
+				//$scope.adduser.user_id= $rootScope.userDetails.id;
 				dataService.post("post/user/register",adduser)
 				.then(function(response) {  
 					if(response.status == 'success'){

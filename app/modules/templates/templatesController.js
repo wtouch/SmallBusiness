@@ -38,6 +38,7 @@ define(['app'], function (app) {
 		$scope.format = $scope.formats[0];
 		$scope.temp = dataService.config.template;
 		$scope.path = "template/"+$scope.userInfo.user_id; // path to store images on server
+		//$scope.path = "template/"+$rootScope.userDetails.id
 		$scope.userinfo = $scope.userInfo;
 		$scope.reqtemp = {
 			scrible : []
