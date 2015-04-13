@@ -49,13 +49,8 @@
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-4">
-					<div class="fixed-nav headerRow">
-						<img class="imglogo img-responsive" src="{{data.business_logo.file_relative_path}}"/>
-						{% include 'includes/navbar.html' ignore missing %}
-					</div>
-				</div>
-				<div class="col-sm-8">
+					{% include 'includes/navbar.html' ignore missing %}
+				<div class="{{ (data) ? 'col-sm-8' : 'col-sm-12' }}">
 					{% block carousal %}{% endblock %}
 					{% block content %}{% endblock %}
 					<footer class="row">

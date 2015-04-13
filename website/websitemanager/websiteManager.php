@@ -121,7 +121,7 @@ class websiteManager{
 			
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
-            $response["data"] = $bizData;
+            $response["data"] = $bizDataa;
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
