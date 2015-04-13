@@ -36,8 +36,7 @@
 			<div class="col-md-10">
 				<div class="panel panel-default">
 					<div class="panel-body">
-					
-						<img class="media-object img-responsive" src="{{data.contact_profile.contact_photo.0.file_relative_path}}" alt="profile picture"/>
+						<img class="img-circle img-responsive" src="{{data.contact_profile.contact_photo.0.file_relative_path}}">
 						<h4> Business Profile</h4>
 						<ul>
 							{% for key,value  in data.keywords %}
@@ -116,7 +115,6 @@
 				</div>
 				{% endif %}
 				<div class="clearfix"></div>
-				{% if data.testimonials %}
 				<div ng-show="id=='testimonials'" class="products boxborder" id="testimonials">
 					<div class="row">
 						<div class="col-md-12">
@@ -124,107 +122,111 @@
 						{% for key, value in data.testimonials if break == 0 %}
 						<div class="panel panel-default">
 							<div class="panel-body">
-								
-									<div class="media">
-										<div class="media-left ">
-											<a href="#">
-												<img class="img-circle img-responsive" src="{{value.image.0.file_relative_path}}">
-											</a>
-										</div>
-										<div class="media-body">
-											<table class="table table-bordered">
-												<tr>
-													<td colspan="2">
-														<h3 class="media-heading"> {{key}}</h3>
-													</td>
-												</tr>
-												<tr>
-													<td >
-														<strong>Title : </strong>
-													</td>
-													<td >
-														{{value.title}}
-													</td>
-												</tr>
-												<tr>
-													<td >
-														<strong>Date : </strong>
-													</td>
-													<td >
-														{{value.date}}
-													</td>
-												</tr>
-												<tr>
-													<td >
-														<strong>Testomonial Description :</strong>
-													</td>
-													<td >
-														{{ value.description }}
-													</td>
-												</tr>
-											</table>
-											<footer class="text-center">by <cite title="{{key}}" >{{key}}</cite></footer>	
-										</div>
+								<div class="media">
+									<div class="media-left ">
+										<a href="#">
+											<img class="img-circle img-responsive" src="{{value.image.0.file_relative_path}}">
+										</a>
 									</div>
-								
+									<div class="media-body">
+										<table class="table table-bordered">
+											<tr>
+												<td colspan="2">
+													<h3 class="media-heading"> {{key}}</h3>
+												</td>
+											</tr>
+											<tr>
+												<td >
+													<strong>Title : </strong>
+												</td>
+												<td >
+													{{value.title}}
+												</td>
+											</tr>
+											<tr>
+												<td >
+													<strong>Date : </strong>
+												</td>
+												<td >
+													{{value.date}}
+												</td>
+											</tr>
+											<tr>
+												<td >
+													<strong>Testomonial Description :</strong>
+												</td>
+												<td >
+													{{ value.description }}
+												</td>
+											</tr>
+										</table>
+										<footer class="text-center">by <cite title="{{key}}" >{{key}}</cite></footer>	
+									</div>
+								</div>
 							</div>
 						</div>
 						{% endfor %}
 					</div>
 					</div>
 				</div>
-				{% endif %}
+			
 				<div class="clearfix"></div>
-				<div ng-show="id=='testimonials'" class="products boxborder" id="testimonials">
+				<div ng-show="id=='activities'" class="products boxborder" id="activities">
 					<div class="row">
 						<div class="col-md-12">
-						<h2 class="text-center">Testimonials</h2>
-						{% for key, value in data.testimonials if break == 0 %}
+						<h2 class="text-center">Activities</h2>
+						{% for key, value in data.news_coverage  %}
 						<div class="panel panel-default">
 							<div class="panel-body">
-								
-									<div class="media">
-										<div class="media-left ">
-											<a href="#">
-												<img class="img-circle img-responsive" src="{{value.image.0.file_relative_path}}">
-											</a>
-										</div>
-										<div class="media-body ">
-											<table class="table table-bordered">
-												<tr>
-													<td colspan="2">
-														<h3 class="media-heading"> {{key}}</h3>
-													</td>
-												</tr>
-												<tr>
-													<td >
-														<strong>Title : </strong>
-													</td>
-													<td >
-														{{value.title}}
-													</td>
-												</tr>
-												<tr>
-													<td >
-														<strong>Date : </strong>
-													</td>
-													<td >
-														{{value.date}}
-													</td>
-												</tr>
-												<tr>
-													<td >
-														<strong>Testomonial Description :</strong>
-													</td>
-													<td >
-														{{ value.description }}
-													</td>
-												</tr>
-											</table>
-											<footer class="text-center">by <cite title="{{key}}" >{{key}}</cite></footer>	
-										</div>
+								<div class="media">
+									<div class="media-left ">
+										<a href="#">
+											<img class="img-circle img-responsive" src="{{value.image.0.file_relative_path}}">
+										</a>
 									</div>
-								
+									<div class="media-body ">
+										<table class="table table-bordered">
+											<tr>
+												<td colspan="2">
+													<h3 class="media-heading"> {{key}}</h3>
+												</td>
+											</tr>
+											<tr>
+												<td >
+													<strong>Media Name : </strong>
+												</td>
+												<td >
+													{{value.medianame}}
+												</td>
+											</tr>
+											<tr>
+												<td >
+													<strong>Date : </strong>
+												</td>
+												<td >
+													{{value.date}}
+												</td>
+											</tr>
+											<tr>
+												<td >
+													<strong>Media Type :</strong>
+												</td>
+												<td >
+													{{ value.mediatype }}
+												</td>
+											</tr>
+											<tr>
+												<td >
+													<strong>News Details :</strong>
+												</td>
+												<td >
+													{{ value.newsdetails }}
+												</td>
+											</tr>
+										</table>
+										
+									</div>
+								</div>
 							</div>
 						</div>
 						{% endfor %}
