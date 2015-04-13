@@ -15,8 +15,8 @@
 				<label for="id" class="control-label">Sort by Order</label>
 					<select id="id" class="form-control" ng-model="id"> 
 						<option value="">Select Order</option>		<!-- added value & selected attr -->	
-						<option value="-business_name">Desending</option>
-						<option value="business_name">Asending</option>  
+						<option value="-business_name">Descending</option>
+						<option value="business_name">Ascending</option>  
 					</select>
 			</div>
 		</div>
@@ -40,20 +40,11 @@
 					</select>
 			</div>
 		</div>
-		<div class="col-sm-3">
+		<div  class="col-sm-2">
 			<div class="bottomspace">
-				<label for="filterbycustomer" class="control-label">Filter By Customer Id</label>
-					<select id="filterbycustomer" class="form-control" ng-model="filterbycustomer" ng-change="changeStatus('filterbycustomer',featuredFilter)">
-						<option value="" selected>Select Customer Id</option><!-- added value & selected attr -->
-						<option value="1">1</option> 
-						<option value="2">2</option> 
-						<option value="3">3</option> 
-						<option value="4">4</option> 
-						<option value="5">5</option> 
-						<option value="6">6</option> 
-						<option value="7">7</option> 
-						<option value="8">8</option> 
-						<option value="9">9</option> 
+				<label for="filterbycustomerid" class="control-label">Filter By Customer Name</label>
+					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+						<option value="">Select Customer</option>
 					</select>
 			</div>
 		</div>

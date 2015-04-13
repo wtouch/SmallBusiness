@@ -30,6 +30,14 @@ define(['app'], function (app) {
 			$modalOptions.close('ok');
 		};
 		
+		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+		.then(function(response) {  //function for websitelist response
+			if(response.status == 'success'){
+				$scope.customerList = response.data;
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+		});
 		
 		//all $scope object goes here
 		$scope.alerts = [];
