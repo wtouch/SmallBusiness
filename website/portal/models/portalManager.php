@@ -143,7 +143,7 @@ class portalManager{
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['service'] = $this->jsonDecode($servicedata["data"]);	
 			$response['product'] = $this->jsonDecode($proddata["data"]);
-			print_r($response['product']);
+		
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 			$response['status'] = "success";
 		}catch(Exception $e){

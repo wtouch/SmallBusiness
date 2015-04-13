@@ -67,7 +67,7 @@
 					</div>
 				</div>
 				{% if product %}
-				<div ng-show="id=='products'" class="products boxborder" id="products">
+				<div ng-show="id=='products'" class="product boxborder" id="products">
 					<div class="row">
 						<h2 class="text-center">Products</h2>
 						{% for x in product %}
@@ -92,11 +92,11 @@
 				{% endif %}
 				<div class="clearfix"></div>
 				{% if service %}
-				<div ng-show="id=='services'" class="products boxborder" id="services">
+				<div ng-show="id=='services'" class="product boxborder" id="services">
 					<div class="row">
 						<h2 class="text-center">Services</h2>
 						{% for x in service %}
-							<div class="col-sm-6 col-md-4 ">
+							<div class="col-sm-12 col-md-4 ">
 								<div class="thumbnail productBox">
 									{% for key, value in x.product_image %}
 										<img class="img-responsive prodimg" src="{{value.file_relative_path}}" alt="{{key}}"/>
@@ -115,7 +115,7 @@
 				</div>
 				{% endif %}
 				<div class="clearfix"></div>
-				<div ng-show="id=='testimonials'" class="products boxborder" id="testimonials">
+				<div ng-show="id=='testimonials'" class="product boxborder" id="testimonials">
 					<div class="row">
 						<div class="col-md-12">
 						<h2 class="text-center">Testimonials</h2>
@@ -169,9 +169,8 @@
 					</div>
 					</div>
 				</div>
-			
 				<div class="clearfix"></div>
-				<div ng-show="id=='activities'" class="products boxborder" id="activities">
+				<div ng-show="id=='activities'" class="product boxborder" id="activities">
 					<div class="row">
 						<div class="col-md-12">
 						<h2 class="text-center">Activities</h2>
@@ -239,14 +238,15 @@
 						<div class="col-md-4">
 							<h4>Name : {{data.contact_profile.contact_person}}</h4>
 							<table class="table table-bordered">
-								<tr><td><address><abbr title="Address"> <span class="glyphicon glyphicon-home"></span></abbr></td><td>
-								
-									Address: {{data.contact_profile.address}}<br>
-									City :{{data.contact_profile.City}}<br>
-									State :{{data.contact_profile.State}}<br>
-									Country :{{data.contact_profile.Country}}<br>
-									Pin Code : {{data.contact_profile.ZIP_Code}}
-								</address>
+								<tr><td>
+									<address><abbr title="Address"> <span class="glyphicon glyphicon-home"></span></abbr></td><td>
+									
+										Address: {{data.contact_profile.address}}<br>
+										City :{{data.contact_profile.City}}<br>
+										State :{{data.contact_profile.State}}<br>
+										Country :{{data.contact_profile.Country}}<br>
+										Pin Code : {{data.contact_profile.ZIP_Code}}
+									</address>
 								</td></tr>
 									<tr>
 										<td><b>Telephone</b></td>
@@ -282,7 +282,7 @@
 										
 										<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc='vilas@wtouch.in'">
 								
-										<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject">
+										<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" ng-init="enquiry.subject = {{data.business_name}}">
 										
 										<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true">	
 											<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
@@ -314,7 +314,9 @@
 									<div class="col-sm-12">
 										<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlength="2" ng-maxlength="356" required>
 										</textarea>
+										
 									</div>
+									
 								</div>
 								<div class="form-group">
 									<div class="col-sm-6">

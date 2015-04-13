@@ -225,7 +225,7 @@ define(['app'], function (app) {
 	  app.factory("dataService", ['$http', '$window','$rootScope', '$cookieStore', '$cookies',
 		function ($http, $window,$rootScope,$cookieStore,$cookies) { // This service connects to our REST API
 
-			var serviceBase = '../server-api/index.php/';
+			var serviceBase = '/server-api/index.php/';
 			var today = new Date();
 			var year = today.getFullYear();
 			var month = today.getMonth() + 1;

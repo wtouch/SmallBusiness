@@ -7,7 +7,7 @@ define(['angular',
 	
 ], function (angular, ngCookies) {
     // Declare app level module which depends on views, and components
-    var app = angular.module('apnasitePortal', ['ngRoute',
+    var app = angular.module('apnasitePortal', [
    'ui.bootstrap', 'customServices', 'ngCookies'
  ]);
 	app.controller('TypeaheadCtrl', ['$scope','$http','dataService', function($scope, $http,dataService) {
@@ -24,15 +24,15 @@ define(['angular',
 			item.isVisible = true;
 		};
 		
-	}]).controller('aboutController',['$scope','$http', '$route', '$location', function($scope,$http, $route, $location) {
+	}]).controller('aboutController',['$scope','$http', '$location', function($scope,$http, $location) {
 		var s = $location.path();
 		$scope.url = s.substr(1);
 		$scope.makeActive = function(url){
 			$scope.id = url;
 		}
 		$scope.makeActive($scope.url);
-	}]).controller('enquiryController', ['$scope','$http','$route','$location', function($scope,http, $route, $location) {
-			$scope.hostUrl = hostUrl;
+	}]).controller('enquiryController', ['$scope','$http','$location','dataService', function($scope,http, $location,dataService) {
+			
 			var today = new Date();
 			var year = today.getFullYear();
 			var month = today.getMonth() + 1;
@@ -47,7 +47,7 @@ define(['angular',
 			};
 				console.log($scope.enquiry);
 			$scope.postData = function(enquiry){
-				dataService.post("../server-api/index.php/post/enquiry",$scope.enquiry).success(function(response) {
+				dataService.post("post/enquiry",enquiry).then(function(response) {
 					$scope.mailSent = true;
 					console.log(response);
 				});
