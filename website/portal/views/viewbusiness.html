@@ -36,10 +36,9 @@
 			<div class="col-md-10">
 				<div class="panel panel-default">
 					<div class="panel-body">
-					{%if data.business_logo%}
-						<img class="media-object img-responsive" src="{{data.contact_profile.contact_photo.file_relative_path}}" alt="profile picture"/>
-					{%endif%}
-						<h4> Business Information</h4>
+					
+						<img class="media-object img-responsive" src="{{data.contact_profile.contact_photo.0.file_relative_path}}" alt="profile picture"/>
+						<h4> Business Profile</h4>
 						<ul>
 							{% for key,value  in data.keywords %}
 								<li><a href="/search/{{value}}">{{value}}</a></li>
@@ -68,6 +67,7 @@
 						{{data.business_info.aboutDescription}}
 					</div>
 				</div>
+				{% if product %}
 				<div ng-show="id=='products'" class="products boxborder" id="products">
 					<div class="row">
 						<h2 class="text-center">Products</h2>
@@ -75,20 +75,24 @@
 							<div class="col-sm-6 col-md-4 ">
 								<div class="thumbnail productBox">
 									{% for key, value in x.product_image %}
-										<img class="img-responsive" src="{{value.file_relative_path}}" alt="{{key}}"/>
+										<img class="img-responsive prodimg" src="{{value.file_relative_path}}" alt="{{key}}"/>
 									{% endfor %}
-									<div class="caption">
-										<h3>{{ x.product_service_name }} </h3>
-										<p>
-										{{x.description|slice(start, 50)}}
-										</p>
-										<a href="product/{{x.id}}" class="btn btn-info">Read More..</a>
-									</div>
+								</div>
+								<div class="caption text-center">
+									<h3 >{{ x.product_service_name }} </h3>
+									<p>
+									{{x.description|slice(start, 50)}}
+									</p>
+									<a href="product/{{x.id}}" class="btn btn-info">Read More..</a>
 								</div>
 							</div>
 						{% endfor %}
 					</div>
 				</div>
+				
+				{% endif %}
+				<div class="clearfix"></div>
+				{% if service %}
 				<div ng-show="id=='services'" class="products boxborder" id="services">
 					<div class="row">
 						<h2 class="text-center">Services</h2>
@@ -96,20 +100,23 @@
 							<div class="col-sm-6 col-md-4 ">
 								<div class="thumbnail productBox">
 									{% for key, value in x.product_image %}
-										<img class="img-responsive" src="{{value.file_relative_path}}" alt="{{key}}"/>
+										<img class="img-responsive prodimg" src="{{value.file_relative_path}}" alt="{{key}}"/>
 									{% endfor %}
-									<div class="caption">
-										<h3>{{ x.product_service_name }} </h3>
-										<p>
-										{{x.description|slice(start, 50)}}
-										</p>
-										<a href="product/{{x.id}}" class="btn btn-info">Read More..</a>
-									</div>
+								</div>
+								<div class="caption text-center">
+									<h3>{{ x.product_service_name }} </h3>
+									<p>
+									{{x.description|slice(start, 50)}}
+									</p>
+									<a href="product/{{x.id}}" class="btn btn-info">Read More..</a>
 								</div>
 							</div>
 						{% endfor %}
 					</div>
 				</div>
+				{% endif %}
+				<div class="clearfix"></div>
+				{% if data.testimonials %}
 				<div ng-show="id=='testimonials'" class="products boxborder" id="testimonials">
 					<div class="row">
 						<div class="col-md-12">
@@ -117,20 +124,107 @@
 						{% for key, value in data.testimonials if break == 0 %}
 						<div class="panel panel-default">
 							<div class="panel-body">
-								<blockquote>
+								
 									<div class="media">
 										<div class="media-left ">
 											<a href="#">
-												<img class="img-circle img-responsive" src="{{value.testimage.0.file_relative_path}}">
+												<img class="img-circle img-responsive" src="{{value.image.0.file_relative_path}}">
 											</a>
 										</div>
 										<div class="media-body">
-											<h3 class="media-heading">{{key}}</h3>
-											<p>{{ value.description }}</p>
-											<footer>by <cite title="{{key}}">{{key}}</cite></footer>
+											<table class="table table-bordered">
+												<tr>
+													<td colspan="2">
+														<h3 class="media-heading"> {{key}}</h3>
+													</td>
+												</tr>
+												<tr>
+													<td >
+														<strong>Title : </strong>
+													</td>
+													<td >
+														{{value.title}}
+													</td>
+												</tr>
+												<tr>
+													<td >
+														<strong>Date : </strong>
+													</td>
+													<td >
+														{{value.date}}
+													</td>
+												</tr>
+												<tr>
+													<td >
+														<strong>Testomonial Description :</strong>
+													</td>
+													<td >
+														{{ value.description }}
+													</td>
+												</tr>
+											</table>
+											<footer class="text-center">by <cite title="{{key}}" >{{key}}</cite></footer>	
 										</div>
 									</div>
-								</blockquote>
+								
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+					</div>
+				</div>
+				{% endif %}
+				<div class="clearfix"></div>
+				<div ng-show="id=='testimonials'" class="products boxborder" id="testimonials">
+					<div class="row">
+						<div class="col-md-12">
+						<h2 class="text-center">Testimonials</h2>
+						{% for key, value in data.testimonials if break == 0 %}
+						<div class="panel panel-default">
+							<div class="panel-body">
+								
+									<div class="media">
+										<div class="media-left ">
+											<a href="#">
+												<img class="img-circle img-responsive" src="{{value.image.0.file_relative_path}}">
+											</a>
+										</div>
+										<div class="media-body ">
+											<table class="table table-bordered">
+												<tr>
+													<td colspan="2">
+														<h3 class="media-heading"> {{key}}</h3>
+													</td>
+												</tr>
+												<tr>
+													<td >
+														<strong>Title : </strong>
+													</td>
+													<td >
+														{{value.title}}
+													</td>
+												</tr>
+												<tr>
+													<td >
+														<strong>Date : </strong>
+													</td>
+													<td >
+														{{value.date}}
+													</td>
+												</tr>
+												<tr>
+													<td >
+														<strong>Testomonial Description :</strong>
+													</td>
+													<td >
+														{{ value.description }}
+													</td>
+												</tr>
+											</table>
+											<footer class="text-center">by <cite title="{{key}}" >{{key}}</cite></footer>	
+										</div>
+									</div>
+								
 							</div>
 						</div>
 						{% endfor %}
@@ -173,64 +267,62 @@
 								</table>
 						</div>
 						<div class="col-sm-8 boxborder">
-							
-									<div class="alert alert-success" ng-show="mailSent==true" role="alert">Message has been sent!</div>
-									<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-controller="enquiryController" novalidate>
-										<h4 class="text-center">General Enquiry</h4>
-										<div class="form-group">
-											<div class="col-sm-12">
-												<input type="hidden" class="form-control" id="user_id" ng-init="enquiry.user_id={{data.user_id}}" ng-model="enquiry.user_id" name="user_id">
-												
-												<input type="hidden" class="form-control" id="date" ng-model="enquiry.date" name="date">
-												
-												<input type="hidden" class="form-control" id="to_email.to" name="to_email.to" ng-model="enquiry.to_email.to" ng-init="enquiry.to_email.to='{{data.owner_email}}'">
-												
-												<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc='vilas@wtouch.in'">
+							<div class="alert alert-success" ng-show="mailSent==true" role="alert">Message has been sent!</div>
+							<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-controller="enquiryController" novalidate>
+								<h4 class="text-center">General Enquiry</h4>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<input type="hidden" class="form-control" id="user_id" ng-init="enquiry.user_id={{data.user_id}}" ng-model="enquiry.user_id" name="user_id">
 										
-												<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject">
-												
-												<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true">	
-													<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
-											</div>	
-										</div>
-										<div class="form-group">
-											<div class="col-sm-12">
-												<input type="email" class="form-control" id="from" name="from" placeholder="E-mail" ng-model="enquiry.from_email.from" required>
-												<span  ng-show="enquiryForm.from.$dirty && enquiryForm.from.$invalid">
-													<span class="text-danger" ng-show="enquiryForm.from.$error.required">From is required.</span>
-													<span class="text-danger" ng-show="enquiryForm.from.$error.email">Invalid Email address.</span>
-												</span>
-											</div>
-										</div>
+										<input type="hidden" class="form-control" id="date" ng-model="enquiry.date" name="date">
 										
-										<div class="form-group">
-											<div class="col-sm-12">
-												<input type="text" class="form-control help-block" id="phone" ng-model="enquiry.message.phone" name="phone" placeholder="Contact Number"  ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
-												<p ng-show="enquiryForm.phone.$error.pattern && (enquiryForm.phone.$dirty || submitted)" class="text-danger" >Enter a valid contact no.</p>
-											</div>						
-										</div>	
-										<div class="form-group">
-											<div class="col-sm-12">
-												<textarea id="address" name="address" class="form-control" placeholder="Address" rows="3" ng-model="enquiry.message.address" ng-minlength="2" ng-maxlength="356" required>
-												</textarea>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-12">
-												<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlength="2" ng-maxlength="356" required>
-												</textarea>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-6">
-												<button type="submit" class="btn btn-primary pull-right" ng-click="postData(enquiry)" ng-disabled="enquiryForm.$pristine || enquiryForm.$invalid || mailSent">Send</button>
-											</div>	
-											<div class="col-sm-6">
-												<button type="reset" class="btn btn-danger" title="Cancel Sending">Cancel</button>
-											</div>
-										</div>
-									</form>
-							
+										<input type="hidden" class="form-control" id="to_email.to" name="to_email.to" ng-model="enquiry.to_email.to" ng-init="enquiry.to_email.to='{{data.owner_email}}'">
+										
+										<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc='vilas@wtouch.in'">
+								
+										<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject">
+										
+										<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true">	
+											<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
+									</div>	
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<input type="email" class="form-control" id="from" name="from" placeholder="E-mail" ng-model="enquiry.from_email.from" required>
+										<span  ng-show="enquiryForm.from.$dirty && enquiryForm.from.$invalid">
+											<span class="text-danger" ng-show="enquiryForm.from.$error.required">From is required.</span>
+											<span class="text-danger" ng-show="enquiryForm.from.$error.email">Invalid Email address.</span>
+										</span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-sm-12">
+										<input type="text" class="form-control help-block" id="phone" ng-model="enquiry.message.phone" name="phone" placeholder="Contact Number"  ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+										<p ng-show="enquiryForm.phone.$error.pattern && (enquiryForm.phone.$dirty || submitted)" class="text-danger" >Enter a valid contact no.</p>
+									</div>						
+								</div>	
+								<div class="form-group">
+									<div class="col-sm-12">
+										<textarea id="address" name="address" class="form-control" placeholder="Address" rows="3" ng-model="enquiry.message.address" ng-minlength="2" ng-maxlength="356" required>
+										</textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlength="2" ng-maxlength="356" required>
+										</textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-6">
+										<button type="submit" class="btn btn-primary pull-right" ng-click="postData(enquiry)" ng-disabled="enquiryForm.$pristine || enquiryForm.$invalid || mailSent">Send</button>
+									</div>	
+									<div class="col-sm-6">
+										<button type="reset" class="btn btn-danger" title="Cancel Sending">Cancel</button>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>

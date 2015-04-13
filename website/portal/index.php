@@ -45,26 +45,20 @@ $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
 	//to add [-] from template use - replace({' ' : '-'}) as a filter
 	$category = $portal->decodeUrl($category); 
 	$response = $portal->getCategoryTypes($category);
-	if($response['status'] == "success"){
-		$template = $twig->loadTemplate("categorytypes.html");
-	}else{
-		$template = $twig->loadTemplate("error.html");
-	}
-	
+	$template = $twig->loadTemplate("categorytypes.html");
 	$template->display($response);
-	
 });
 
 $app->get('/:category/:type', function($category, $type) use($app, $config, $twig, $portal) {
 	$category = $portal->decodeUrl($category);
 	$type = $portal->decodeUrl($type);
 	$response = $portal->getBusinessList($category, $type);
-	if($response['status'] == "success"){
+	/* if($response['status'] == "success"){
 		$template = $twig->loadTemplate("business.html");
 	}else{
 		$template = $twig->loadTemplate("error.html");
-	}
-	
+	} */
+	$template = $twig->loadTemplate("business.html");
 	$template->display($response);
 });
 
@@ -73,11 +67,12 @@ $app->get('/:category/:type/:business/:id', function($category, $type, $business
 	$type = $portal->decodeUrl($type);
 	$business = $portal->decodeUrl($business);
 	$response = $portal->getBusiness($category, $type, $business,$id);
-	if($response['status'] == "success"){
+	/* if($response['status'] == "success"){
 		$template = $twig->loadTemplate("viewbusiness.html");
 	}else{
 		$template = $twig->loadTemplate("error.html");
-	}
+	} */
+	$template = $twig->loadTemplate("viewbusiness.html");
 	
 	$template->display($response);
 
