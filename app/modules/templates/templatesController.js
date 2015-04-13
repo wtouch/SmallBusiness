@@ -446,7 +446,6 @@ define(['app'], function (app) {
 		} ;
 		
 	   $scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
-		
 			 upload.upload(files,path,userInfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
