@@ -17,6 +17,8 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.permission = $rootScope.userDetails.permission.website_module;
 		
+		console.log($scope.permission);
+		
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
 		// For displaying manage domain module parts! {Dnyaneshwar}
@@ -27,7 +29,6 @@ define(['app'], function (app) {
 		$scope.setFormScope= function(scope){
 			$scope.formScope = scope;
 		}
-		
 		
 		$scope.checkAvailable = function(domain_name){
 			if(domain_name !== undefined){
@@ -83,30 +84,23 @@ define(['app'], function (app) {
 			});
 		};
 		
-		//code for accessing json data of website
-		 $scope.web = {};
-		/* dataService.config('config', {config_name : "website"}).then(function(response){
-			$scope.web = response.config_data;
-			console.log($scope.web); 
-		}); */
-        
 		if($rootScope.userDetails.group_name == "customer"){
 			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		}
 		if($rootScope.userDetails.group_name == "manager"){
 			$scope.userInfo = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
 		}
-		if($rootScope.userDetails.group_name == "admin"){
+		if($rootScope.userDetails.group_name == "superadmin" || $rootScope.userDetails.group_name == "admin"){
 			$scope.userInfo = {}; // these are URL parameters
 		}
 		if($rootScope.userDetails.group_name == "salesman"){
 			$scope.userInfo = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
 		}
+	
 		
-		$scope.numbers = dataService.config.numbers;
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
-			(where) ? angular.extend($scope.websiteParams, where) : "";
+			(where) ? angular.extend($scope.websiteParams, where, $scope.userInfo) : "";
 			dataService.get("getmultiple/website/"+page+"/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  //function for websitelist response
 				$scope.website = response.data;
@@ -114,7 +108,8 @@ define(['app'], function (app) {
 			});
 		};
 		// for users list/customerList
-		dataService.get("getmultiple/user/1/500", {status: 1})
+		
+		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  //function for websitelist response
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
@@ -128,7 +123,7 @@ define(['app'], function (app) {
 			$scope.filterStatus = {};
 
 			(showStatus =="") ? delete $scope.websiteParams[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.websiteParams, $scope.filterStatus, $scope.search);
+			angular.extend($scope.websiteParams, $scope.filterStatus, $scope.search, $scope.userInfo);
 
 			if(showStatus.length >= 4 || showStatus == ""){
 			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.websiteParams)
@@ -164,7 +159,7 @@ define(['app'], function (app) {
 		
 		$scope.showInput = function($event,opened) 		
 		{
-			$scope.websiteParams = []; 				  				
+			$scope.websiteParams = {};
 			$event.preventDefault();
 			$event.stopPropagation();
 			$scope[opened] = ($scope[opened] ===true) ? false : true;
@@ -174,7 +169,7 @@ define(['app'], function (app) {
 		$scope.changeStatusFn = function(statusCol, showStatus) {
 			$scope.filterStatus= {};
 			(showStatus =="") ? delete $scope.websiteParams[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.websiteParams, $scope.filterStatus);
+			angular.extend($scope.websiteParams, $scope.filterStatus, $scope.userInfo);
 			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  
 				if(response.status == 'success'){

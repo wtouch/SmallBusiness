@@ -1,6 +1,6 @@
 <h3>Template List</h3>
 	<div class="row">
-		<div class="col-sm-3"> 
+		<div class="col-sm-2"> 
 			<div class="bottomspace">
 				<label for="search" class="control-label">Search </label>		
 					<input id="search" type="text" class="form-control" ng-change="searchFilter('template_name', searchProp)" ng-model="searchProp" placeholder="search"/>
@@ -36,12 +36,20 @@
 					</select>
 			</div>
 		</div>
-		<div class="col-sm-3">
+		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="featured" class="control-label">Filter By Category</label>
 					<select id="featured" class="form-control" ng-model="filterCategory" 
 					ng-change="changeStatus('category',filterCategory)" ng-options="item.system_name as item.name for item in temp.category">
 						<option value="" selected>Select Category</option>
+					</select>
+			</div>
+		</div>
+		<div ng-if="permission.customer_filter" class="col-sm-2">
+			<div class="bottomspace">
+				<label for="filterbycustomerid" class="control-label">Select By Customer Id</label>
+					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatusFn('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+						<option value="">Select Customer</option>
 					</select>
 			</div>
 		</div>
@@ -64,9 +72,11 @@
 						<td>{{x.category}}</td>
 						<td style="max-width:150px">
 						<div class="input-group">
+						
 						<p class="form-control-static" ng-hide="x.boxId ==1">{{x.template_price}}</p>
 						<input type="text" id="template_price" class="form-control" name="template_price" ng-show="x.boxId == 1" ng-model="x.template_price" ng-required="true"/>
-						<div class="input-group-btn" >
+						
+						<div class="input-group-btn" ng-if="permission.set_template_price">
 						<a type="button" class="btn btn-warning pull-right" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')" ng-change="editTemplatePrice('template_price', x.template_price, x.id,x.boxId)" tooltip="Edit Price">
 						<span class="glyphicon glyphicon-pencil"></span>
 						</a>
@@ -78,9 +88,9 @@
 							<div class="btn-group">
 									<a ng-click="openTemp('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary responsive"> Prieview</a>
 							</div>
-							<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
+							<button ng-if="permission.delete_template" type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
 							</button>
-							<button type="button" tooltip="{{dynamicTooltip(x.template_type, 'make public', 'make private')}}" ng-class="(x.template_type=='public') ? 'btn btn-warning glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.template_type" ng-change="changeStatusFn('template_type', x.template_type,x.id)" btn-checkbox btn-checkbox-true="'private'" btn-checkbox-false="'public'">
+							<button ng-if="permission.Make_Private" type="button" tooltip="{{dynamicTooltip(x.template_type, 'make public', 'make private')}}" ng-class="(x.template_type=='public') ? 'btn btn-warning glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.template_type" ng-change="changeStatusFn('template_type', x.template_type,x.id)" btn-checkbox btn-checkbox-true="'private'" btn-checkbox-false="'public'">
 							</button>		
 						</td>
 					</tr>	

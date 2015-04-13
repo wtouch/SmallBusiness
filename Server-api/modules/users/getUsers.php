@@ -8,6 +8,7 @@
 				 (isset($_GET['username'])) ? $like['username'] = $_GET['username'] : "";
 			 }
 			if(isset($_GET['status'])) $where['status'] = $_GET['status'];
+			if(isset($_GET['user_id'])) $where['user_id'] = $_GET['user_id'];
 			$table = "users";
 			// inner join [table name][first table column name] = [second table column name]
 			$innerJoin['user_group']['group_id'] = "id";

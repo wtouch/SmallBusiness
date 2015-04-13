@@ -101,11 +101,20 @@ define(['app'], function (app) {
 		/**********************************************************************
 		code for accessing json data of country, State & City {Sonali}*/
 		
-		dataService.get("getmultiple/user/1/100")
+		/* dataService.get("getmultiple/user/1/100")
 		.then(function(response) {
 			$scope.selectUsers = response.data;
 		});	
+		 */
 		
+		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+		.then(function(response) {  //function for websitelist response
+			if(response.status == 'success'){
+				$scope.customerList = response.data;
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+		});
 		
 		$scope.path = "business/"+$scope.userInfo.user_id; // path to store images on server
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
@@ -123,11 +132,6 @@ define(['app'], function (app) {
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}
-					
-					/* if(picArr == "image"){
-						$scope.addbusiness.infrastructure.image = data.data;
-					} */
-					
 				
 			});
 		};
@@ -183,88 +187,6 @@ define(['app'], function (app) {
 			}
 		}
 		
-		
-		
-		//update data
-		/* // Google Map
-		$scope.initGoogleMap = function(latitude,longitude, zoom){
-			$scope.addbusiness.contact_profile.google_map.latitude = latitude;
-			$scope.addbusiness.contact_profile.google_map.longitude = longitude;
-			$scope.map = {
-				"center": {
-					"latitude": latitude,
-					"longitude": longitude
-				},
-				"zoom": zoom
-			}; //TODO:  set location based on users current gps location 
-			$scope.marker = {
-				id: 0,
-				coords: {
-					latitude: latitude,
-					longitude: longitude
-				},
-				options: { draggable: true },
-				events: {
-					dragend: function (marker, eventName, args) {
-						$scope.addbusiness.contact_profile.google_map.latitude = $scope.marker.coords.latitude;
-						$scope.addbusiness.contact_profile.google_map.longitude = $scope.marker.coords.longitude;
-						console.log($scope.addbusiness.contact_profile.google_map);
-						$scope.marker.options = {
-							draggable: true,
-							labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
-							labelAnchor: "100 0",
-							labelClass: "marker-labels"
-						};
-					}
-				}
-			};
-		}
-		var events = {
-			places_changed: function (searchBox) {
-				var place = searchBox.getPlaces();
-				if (!place || place == 'undefined' || place.length == 0) {
-					console.log('no place data :(');
-					return;
-				}
-				$scope.initGoogleMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), 15);
-			}
-		};
-		$scope.searchbox = { template: 'modules/websites/websettings/searchbox.html', events: events };
-		$scope.showPosition = function (position) {
-			$scope.initGoogleMap(position.coords.latitude, position.coords.longitude, 5);
-			console.log(position.coords.latitude,  position.coords.longitude)
-			$scope.$apply();
-		}
-		$scope.showError = function (error) {
-			switch (error.code) {
-				case error.PERMISSION_DENIED:
-					$scope.error = "User denied the request for Geolocation."
-					break;
-				case error.POSITION_UNAVAILABLE:
-					$scope.error = "Location information is unavailable."
-					break;
-				case error.TIMEOUT:
-					$scope.error = "The request to get user location timed out."
-					break;
-				case error.UNKNOWN_ERROR:
-					$scope.error = "An unknown error occurred."
-					break;
-			}
-			console.log($scope.error);
-			$scope.$apply();
-		}
-		$scope.getLocation = function () {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
-			}
-			else {
-				$scope.error = "Geolocation is not supported by this browser.";
-			}
-		}
-		
-		$scope.getLocation(); */
-		
-		
 		//get method for get data from business
 		var addbusiness = function(){
 			console.log(addbusiness);
@@ -272,32 +194,14 @@ define(['app'], function (app) {
 			if($scope.bizId){
 				dataService.get("getsingle/business/"+$scope.bizId)
 				.then(function(response) {
-					$scope.reset = function() {
-						$scope.addbusiness = {
-							business_logo : {},
-							category : {},
-							ownership : {},
-							contact_profile : {}
-						};
 					angular.extend(response.data, $scope.addbusiness);
 					$scope.addbusiness = response.data;
-				};
-				$scope.reset();
-				console.log($scope.addbusiness);
+					$scope.reset();
 			})
 			}else{
-				$scope.reset = function() {
-					$scope.addbusiness = {
-						business_logo : {},
-							category : {},
-							ownership : {},
-							contact_profile : {}
-					};
-				};
 				$scope.reset();
 			}
 		}
-		
 		
     };
 	

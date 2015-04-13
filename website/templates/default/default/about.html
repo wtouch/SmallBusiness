@@ -6,13 +6,13 @@
 {% autoescape false %}
 <div class="row">
 	<span ng-bind="id"></span>
-		 <div class="col-sm-12 sidebar" id="navbar-example">
-			<ul class="nav nav-pills" >
-				<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
-				<li ng-class="{active:id=='infrastructure'}" ng-click="makeActive('infrastructure')"><a href="#infrastructure">Infrastructure/Facilities</a></li>
-			</ul>
-		</div>
-		<div class="col-sm-12 Hearing">
+		<div class="col-sm-12 news">
+			<div class="sidebar" id="navbar-example">
+				<ul class="nav nav-pills" >
+					<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
+					<li ng-class="{active:id=='infrastructure'}" ng-click="makeActive('infrastructure')"><a href="#infrastructure">Infrastructure/Facilities</a></li>
+				</ul>
+			</div>
 			<div class="about" id="about">
 				<h2>{{ data.business_name }}</h2>
 				<table class="table table-bordered">
@@ -55,7 +55,6 @@
 					{{data.business_info.aboutDescription}}
 				</div> 
 			</div>
-		
 			{% if data.infrastructure %}
 				<div class=" infrastructure" id="infrastructure">
 					<h2>Infrastructure/Facilities</h2>

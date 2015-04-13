@@ -18,6 +18,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		$scope.path = "product/"+$rootScope.userDetails.id; // path to store images on server
+		$scope.permission = $rootScope.userDetails.permission.product_module;
 		$scope.showProductForm = false;
 		$scope.showServiceForm = false;
 		$scope.editProdForm = false;
@@ -32,6 +33,19 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.addservice = {
 			product_image : []
 		};
+		
+		if($rootScope.userDetails.group_name == "customer"){
+			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "manager" || $rootScope.userDetails.group_name == "admin"){
+			$scope.userInfo = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "superadmin"){
+			$scope.userInfo = {}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "salesman"){
+			$scope.userInfo = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
 		
 		$scope.upload = function(files,path,userInfo,picArr){//this function for uploading files
 	

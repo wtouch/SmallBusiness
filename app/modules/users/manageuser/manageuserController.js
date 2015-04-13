@@ -15,14 +15,14 @@ define(['app'], function (app) {
 		$scope.userList = [];
 		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
-		$scope.userInfo = {user_id : $rootScope.userDetails};
+		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.contries = dataService.config.country;
 		
 		//code for accessing json data of users
-		$scope.user = {};
+		$scope.manage_user = {};
 		dataService.config('config', {config_name : "manage_user"}).then(function(response){
-			$scope.user = response.config_data;
-			console.log($scope.user); 
+			$scope.manage_user = response.config_data;
+			console.log($scope.manage_user); 
 		});
 
 		$scope.getData = function(location){
@@ -146,6 +146,11 @@ define(['app'], function (app) {
 		};	
 		//End of pagination
 		
+		//
+		dataService.get("getmultiple/user/1/100")
+		.then(function(response) {
+			$scope.selectUsers = response.data;
+		});	
 		
 		
 		//code for search filter
@@ -258,8 +263,8 @@ define(['app'], function (app) {
 			};
 			$scope.postData = function(adduser) {
 				var register_date = {register_date : $scope.currentDate};
-				angular.extend(adduser, register_date);
-				
+				angular.extend(adduser, register_date,$scope.userInfo);
+				//$scope.adduser.user_id= $rootScope.userDetails.id;
 				dataService.post("post/user/register",adduser)
 				.then(function(response) {  
 					if(response.status == 'success'){
@@ -293,7 +298,6 @@ define(['app'], function (app) {
 				};
 			}
 		};			
-		
 		
 		//create user group
 		var usersGroup = function(){

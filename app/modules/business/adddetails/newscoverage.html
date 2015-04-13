@@ -8,7 +8,7 @@
 <form name="newscoverageForm" role="form" class="form-horizontal" ng-if="infra" ng-submit="newscoverageForm.$valid" novalidate="novalidate">
 	<div class="form-group" >
 		<div class="col-sm-9 col-sm-offset-3">
-			<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(news_coverage, businessData.news_coverage, 'news_coverage')" ng-disabled="newscoverageForm.$invalid">Add News Activity</button>
+			<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(news_coverage, businessData.news_coverage, 'news_coverage')">Add News Activity</button>
 			<button ng-if="infra && headingDisabled" class="btn btn-default btn-info" ng-click="addToObject(news_coverage, businessData.news_coverage, 'news_coverage')" title="Add Job/Career">Edit Details</button>
 			<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')"><span ng-show="infra">Cancel</span></button>
 		</div>
@@ -83,26 +83,23 @@
 				</span>	
 		</div>
 	</div> 
-
-	<div class="form-group" > 
-		<label  for="news_image" class="col-sm-3 control-label">Add Image</label>
-		<div class="col-sm-9">
-		
-		<div ng-class="(!headingDisabled || !imgRemoved) ? 'btn btn-default' : '' " id="infra_image" name="news_image" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="news_image">
-				<ul ng-if="headingDisabled" class="list-unstyled">
-					<li ng-repeat="(key, value) in news_coverage.desc.image"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}" width="100%" /></li>
-				</ul>
-				<span ng-if="!headingDisabled">Select Image</span>
-			</div>
-			<span ng-if="headingDisabled || imgRemoved" ng-model="imgRemoved" class="close" ng-click="removeObject('0',news_coverage.desc.image)" tooltip="Remove Image">X</span>
+	
+	<div class="form-group">
+		<label  for="image" class="col-sm-3 control-label">Add Image</label>
+		<div class="col-sm-4">
+			<input type="file" class="form-control" id="image" name="image" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="image"/>
 			<!-- This will show thumbnails & progress of images -->
-				<file-preview url="news_image"></file-preview>
-				<!-- This button will show if file/s selected -->
-				<button ng-show="news_image" ng-click="upload(news_image,path,userinfo, news_coverage.desc.image)" type="button">Upload</button>
-				<!-- This hidden input will store image path in array after successful uploading -->
-				<input type="hidden" ng-model="news_coverage.desc.image">
+			<file-preview url="image"></file-preview>
+			<!-- This button will show if file/s selected -->
+			<button ng-show="image" ng-click="uploadnews(image,path,userInfo,news_coverage.image)" type="button">Upload</button>
+			<!-- This hidden input will store image path in array after successful uploading -->
+			<input type="hidden" ng-model="news_coverage.desc.image">
 		</div>
-	</div>				
+		<div class="col-sm-4">
+			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + news_coverage.desc.image.file_relative_path}}" width="150px" />
+		</div>
+	</div>
+	
 </form><!-- ng-disabled="newscoverageForm.$dirty && newscoverageForm.$invalid" -->
 <div class="col-sm-12">
 		<table class="table table-bordered table-responsive" ng-if="businessData.news_coverage">

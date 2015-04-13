@@ -4,6 +4,8 @@ class dbHelper {
     private $db;
     private $err;
 	private $groupBy;
+	private $joinString;
+	private $whereString;
 	// for mail configuration
 	private $mailHost;
 	private $mailUsername;

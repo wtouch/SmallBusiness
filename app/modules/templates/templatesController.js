@@ -12,6 +12,15 @@ define(['app'], function (app) {
 			if($scope.templateData.template_params == "") $scope.templateData.template_params = {};
 		
 		});	
+		
+		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+		.then(function(response) {  //function for websitelist response
+			if(response.status == 'success'){
+				$scope.customerList = response.data;
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+		});
 		// all $scope object goes here
 		$scope.alerts = [];
 		$scope.maxSize = 5;
@@ -29,6 +38,7 @@ define(['app'], function (app) {
 		$scope.format = $scope.formats[0];
 		$scope.temp = dataService.config.template;
 		$scope.path = "template/"+$scope.userInfo.user_id; // path to store images on server
+		//$scope.path = "template/"+$rootScope.userDetails.id
 		$scope.userinfo = $scope.userInfo;
 		$scope.reqtemp = {
 			scrible : []
@@ -49,6 +59,8 @@ define(['app'], function (app) {
 		if(!$routeParams.tempPart) {
 			$location.path('/dashboard/templates/listoftemplates');
 		}
+		
+		
 		//This code for apply/buy button{trupti}
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
@@ -116,6 +128,19 @@ define(['app'], function (app) {
 				}
 			});
 		};
+		
+		if($rootScope.userDetails.group_name == "customer"){
+			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "manager" || $rootScope.userDetails.group_name == "admin"){
+			$scope.userInfo = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "superadmin"){
+			$scope.userInfo = {}; // these are URL parameters
+		}
+		if($rootScope.userDetails.group_name == "salesman"){
+			$scope.userInfo = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
+		}
 	
 		//this code block for modal
 		$scope.openModel = function (url, tempId) {

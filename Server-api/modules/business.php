@@ -28,7 +28,7 @@
 			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";
 			(isset($_GET['verified'])) ? $where['verified'] = $_GET['verified'] : "";
 			
-			
+			$userGropus = $db->select("user_group", array());
 			// inner join [table name][column name]
 			$innerJoin['users']['user_id'] = "id";
 			
@@ -41,7 +41,7 @@
 			
 			// left join select column [table name][join col name][column to select] = column alias
 			$selectLeftJoinCols['users']['salesman_id']['name'] = "salesman";
-			$selectLeftJoinCols['users']['manager_id']['name'] = "manager";  
+			$selectLeftJoinCols['users']['manager_id']['name'] = "manager";
 			
 			// page limit
 			$limit['pageNo'] = $pageNo; // from which record to select

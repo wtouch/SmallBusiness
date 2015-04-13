@@ -144,6 +144,32 @@ define(['app'], function (app) {
 			}); 
 		}; 
 		
+		//Upload Function for uploading files {sonali}
+		$scope.uploadnews = function(files,path,userInfo, picArr){ // this function for uploading files
+			upload.upload(files,path,userInfo,function(data){
+					if(data.status === 'success'){
+						$scope.news_coverage.desc.image = data.data;
+						
+						console.log($scope.news_coverage.desc.image);
+					}else{
+						$scope.alerts.push({type: data.status, msg: data.message});
+					}
+			}); 
+		}; 
+		
+		//Upload Function for uploading files {sonali}
+		$scope.uploadgallery = function(files,path,userInfo, picArr){ // this function for uploading files
+			upload.upload(files,path,userInfo,function(data){
+					if(data.status === 'success'){
+						$scope.gallery.desc.image = data.data;
+						
+						console.log($scope.gallery.desc.image);
+					}else{
+						$scope.alerts.push({type: data.status, msg: data.message});
+					}
+			}); 
+		}; 
+		
 		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
 			upload.generateThumbs(files);
 		};// End upload function

@@ -24,13 +24,13 @@
 				.nav-pills>li>a,h1{
 					color:{{template.template_params.dark_color}};
 				}
-				.nav-pills>li>a, .panel-default>.panel-heading{
+				.nav-pills>li>a, .panel-default>.panel-heading,.sidebar .nav-pills>li>a:hover,.sidebar .nav-pills>.active>a{
 					background-color: {{template.template_params.background_color_light}};
 				}
-				.news{
+				.news,footer{
 					background-color: {{template.template_params.background_color_dark}};
 				}
-				.news,.Hearing{
+				.news,.Hearing,.sidebar .nav-pills>li>a{
 					color: 
 					{{template.template_params.color}};
 				}
@@ -40,7 +40,9 @@
 				.panel,.nav{
 					background:none;
 				}
-				
+				.sidebar .nav-pills>li>a:hover,.sidebar .nav-pills>.active>a{
+					color:{{template.template_params.dark_color}};
+				}
 			</style>
 		{% endblock %}
 	</head>
@@ -56,7 +58,7 @@
 				<div class="col-sm-8">
 					{% block carousal %}{% endblock %}
 					{% block content %}{% endblock %}
-					<footer class="row news">
+					<footer class="row">
 						<div class="col-sm-12 text-center">
 							{% block footer %}
 								&copy; Copyright 2015 by <a href="http://wtouch.in">Web Touch India Solutions</a>.
