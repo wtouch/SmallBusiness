@@ -7,7 +7,9 @@
 	if($reqMethod=="GET"){
 		if(isset($id)){
 			$where['id'] = $id;
-			$data = $db->selectSingle("user_group", $where);
+			$t0 = $db->setTable("user_group");
+			$db->setWhere($where, $t0);
+			$data = $db->selectSingle();
 			echo json_encode($data);
 			
 		}else{
@@ -23,19 +25,22 @@
 			(isset($_GET['read_status'])) ? $where['read_status'] = $_GET['read_status'] : "";
 			
 			
-			$limit['pageNo'] = $pageNo; // from which record to select
-			$limit['records'] = $records; // how many records to select
+			$limit[0] = $pageNo; // from which record to select
+			$limit[1] = $records; // how many records to select
 			
-			// this is used to select data with LIMIT & where clause
-			$data = $db->select("user_group", $where, $limit,$like);
+			$t0 = $db->setTable("user_group");
+			$db->setWhere($where, $t0);
+			$db->setWhere($like, $t0, true);
+			$db->setLimit($limit);
 			
-			// this is used to count totalRecords with only where clause
-			$tootalDbRecords = $db->select("user_group", $where, $limit=null, $like);
-			$totalRecords['totalRecords'] = count($tootalDbRecords['data']);
+			$data = $db->select(true); // true for totalRecords
 			
-			
-			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
-			$data = array_merge($totalRecords,$data);
+			if($data['status'] == "success"){
+				if(isset($data['data'][0]['totalRecords'])){
+					$tootalDbRecords['totalRecords'] = $data['data'][0]['totalRecords'];
+					$data = array_merge($tootalDbRecords,$data);
+				}
+			}
 			echo json_encode($data);
 		}
 	}//end get

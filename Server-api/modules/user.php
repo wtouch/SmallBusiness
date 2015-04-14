@@ -24,8 +24,8 @@
 			if(isset($id)){
 				echo json_encode(getSingleUser($id));
 			}else{
-				$limit['pageNo'] = $pageNo; // from which record to select
-				$limit['records'] = $records; // how many records to select
+				$limit[0] = $pageNo; 
+				$limit[1] = $records; 
 				getMultipleUsers($limit); // from getUsers.php
 			}
 		}

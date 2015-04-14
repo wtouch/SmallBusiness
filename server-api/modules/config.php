@@ -7,8 +7,8 @@
 	if($reqMethod=="GET"){
 		try{
 			$table = $_GET['table'];
-			$limit['pageNo'] = 1;
-			$limit['records'] = 25;
+			$limit[0] = 1;
+			$limit[1] = 25;
 			$where = array();
 			$like = array();
 			$groupBy = array();
@@ -26,7 +26,7 @@
 				if(count($search) >=1){
 					foreach($search as $key => $value){
 						$like[$key] = $value;
-						$groupBy[$key] = $value;
+						$groupBy[$key] = $key;
 					}
 				}
 			}
@@ -34,17 +34,30 @@
 				$groupBy = json_decode($_GET['groupBy'],true);
 				if(count($groupBy) >=1){
 					foreach($groupBy as $key => $value){
-						$groupBy[$key] = $value;
+						$groupBy[$key] = $key;
 					}
 				}
 			}
 			//print_r($groupBy);
 			$db->setGroupBy($groupBy);
+			$t0 = $db->setTable($table);
+			$db->setWhere($where, $t0);
+			$db->setWhere($like, $t0, true);
+			$db->setLimit($limit);
 			if($table == 'config'){
 				((isset($_GET['config_name'])) && ($_GET['config_name']!=="")) ? $where['config_name'] = $_GET['config_name'] : "";
-				$data = $db->selectSingle($table, $where);
+				$db->setWhere($where, $t0);
+				$data = $db->selectSingle();
 			}else{
-				$data = $db->select($table, $where,$limit, $like);
+				
+				$data = $db->select(false);
+				
+				if($data['status'] == "success"){
+					if(isset($data['data'][0]['totalRecords'])){
+						$tootalDbRecords['totalRecords'] = $data['data'][0]['totalRecords'];
+						$data = array_merge($tootalDbRecords,$data);
+					}
+				}
 			}
 			
 			if($data['status'] != "success"){

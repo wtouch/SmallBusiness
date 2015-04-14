@@ -8,7 +8,9 @@
 	if($reqMethod=="GET"){
 		if(isset($id)){
 			$where['id'] = $id;
-			$data = $db->selectSingle("template", $where);
+			$t0 = $db->setTable("template");
+			$db->setWhere($where, $t0);
+			$data = $db->selectSingle();
 			echo json_encode($data);
 			
 		}else{
@@ -19,8 +21,8 @@
 				 (isset($_GET['template_name'])) ? $like['template_name'] = $_GET['template_name'] : "";
 			 }
 			$where = array(); // this will used for user specific data selection.
-			$limit['pageNo'] = $pageNo; // from which record to select
-			$limit['records'] = $records; // how many records to select
+			$limit[0] = $pageNo; // from which record to select
+			$limit[1] = $records; // how many records to select
 			
 			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
 			(isset($_GET['template_type'])) ? $where['template_type'] = $_GET['template_type'] : "";
@@ -29,14 +31,19 @@
 			(isset($_GET['category'])) ? $where['category'] = $_GET['category'] : "";
 			(isset($_GET['custom'])) ? $where['custom'] = $_GET['custom'] : "";
 			
-			// this is used to select data with LIMIT & where clause with like filter
-			$data = $db->select("template", $where, $limit,$like);
+			$t0 = $db->setTable("template");
+			$db->setWhere($where, $t0);
+			$db->setWhere($like, $t0, true);
+			$db->setLimit($limit);
 			
-			// this is used to count totalRecords with only where clause
-			$tootalDbRecords = $db->select("template", $where,$limit=null,$like);
-			$totalRecords['totalRecords'] = count($tootalDbRecords['data']);			
-			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
-			$data = array_merge($totalRecords,$data);
+			$data = $db->select(true); // true for totalRecords
+			
+			if($data['status'] == "success"){
+				if(isset($data['data'][0]['totalRecords'])){
+					$tootalDbRecords['totalRecords'] = $data['data'][0]['totalRecords'];
+					$data = array_merge($tootalDbRecords,$data);
+				}
+			}
 			echo json_encode($data);
 		}
 	}//end get

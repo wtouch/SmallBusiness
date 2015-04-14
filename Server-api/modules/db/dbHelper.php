@@ -1,11 +1,18 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/server-api/modules/db/config.php'; // Database setting constants [DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD]
 class dbHelper {
-    private $db;
+	private $db;
     private $err;
-	private $groupBy;
-	private $joinString;
-	private $whereString;
+	private $groupBy = null;
+	private $where = null;
+	private $orderBy = null;
+	private $selectColumns = null;
+	private $joinQueryString = null;
+	private $table;
+	private $queryString;
+	private $queryParams;
+	private $tablesJoined = null;
+	private $limit = null;
 	// for mail configuration
 	private $mailHost;
 	private $mailUsername;
@@ -16,7 +23,6 @@ class dbHelper {
         $dsn = 'mysql:host='.DB_HOST.';dbname='.DB_NAME;
         try {
             $this->db = new PDO($dsn, DB_USERNAME, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-			$this->groupBy = null;
         } catch (PDOException $e) {
             $response["status"] = "error";
             $response["message"] = 'Connection failed: ' . $e->getMessage();
@@ -87,13 +93,55 @@ class dbHelper {
         }
 		return $response;
 	}
+	function isAssoc($arr){
+		return array_keys($arr) !== range(0, count($arr) - 1);
+	}
+	
+	function resetQueryData(){
+		$this->groupBy = null;
+		$this->where = null;
+		$this->orderBy = null;
+		$this->selectColumns = null;
+		$this->joinQueryString = null;
+		$this->table = null;
+		$this->queryString = null;
+		$this->queryParams = null;
+		$this->tablesJoined = null;
+	}
+	
+	function setTable($table){
+		$this->tablesJoined = 0;
+		$tableAlias = "t".$this->tablesJoined;
+		$this->table[$table] = $tableAlias;
+		return $tableAlias;
+	}
+	function getTable(){
+		foreach($this->table as $key => $value){
+			$table = $key." as ".$value;
+		}
+		return $table;
+	}
+	function setLimit($limit = array(1,10)){
+		$lmt = ($limit[0] == 0 ) ? $limit[0] : $limit[0] - 1;
+		$startLimit = $lmt * $limit[1];
+		
+		$this->limit = "LIMIT ".$startLimit.",".$limit[1];
+		return true;
+	}
+	function getLimit(){
+		return $this->limit;
+	}
 	function setGroupBy($groupByArray){
 		if(count($groupByArray) >= 1){
-			$groupByString = " GROUP BY ";
-			foreach($groupByArray as $key => $value){
-				$groupByString .= $key.",";
+			if($this->groupBy == null || $this->groupBy == ""){
+				$this->groupBy = " GROUP BY ";
+			}else{
+				$this->groupBy .= " ";
 			}
-			$this->groupBy = trim($groupByString, ",");
+			foreach($groupByArray as $key){
+				$this->groupBy .= $key.",";
+			}
+			$this->groupBy = $this->groupBy;
 			return true;
 		}else{
 			return false;
@@ -101,232 +149,158 @@ class dbHelper {
 	}
 	function getGroupBy(){
 		if($this->groupBy != null || $this->groupBy != ""){
-			return $this->groupBy;
+			return trim($this->groupBy, ",");
 		}else{
 			return;
 		}
 	}
-	function selectJoin($table,$where, $limit=null, $likeFilter=null, $innerJoin = null, $selectInnerJoinCols = null, $leftJoin = null, $selectLeftJoinCols = null){
-		try{
-            $a = array();
-            $w = "";
-            foreach ($where as $key => $value) {
-                $w .= " and " .$table.".".$key. " like :".$key;
-                $a[":".$key] = $value;
-            }
-			$lmt = ($limit['pageNo'] == 0 ) ? $limit['pageNo'] : $limit['pageNo'] - 1;
-			$startLimit = $lmt * $limit['records']; // start on record $startLimit
-			$dbLimit = ($limit===null) ? "" : " LIMIT ".$startLimit.", ".$limit['records'];
-			
-			$l = "";
-			if($likeFilter!=null){
-				foreach ($likeFilter as $key => $value) {
-					$l .= " and " .$key. " like '%". $value . "%'";
+	function setColumns($table, $selectColumns, $joinCols=false){
+		if(count($selectColumns) >= 1){
+			$selectColumn = ($this->selectColumns == null) ? " " : $this->selectColumns;
+			if($this->isAssoc($selectColumns)){
+				foreach($selectColumns as $key => $value){
+					$selectColumn .= $table.".".$key." as ".$value.",";
+				}
+			}else{
+				foreach($selectColumns as $key => $value){
+					$selectColumn .= $table.".".$value.",";
 				}
 			}
-			
-			$selectQuery = "";
-			$innerJoinQuery = "";
-			$no=null;
-			if(isset($innerJoin)){
-				foreach($innerJoin as $tableName=> $columnArray ){
-					
-					 foreach($columnArray as  $leftColumn => $rightColumn){
-						$no += 1;
-						$tableAlias = "inr".$no; 
-						 
-						$innerJoinQuery .= "INNER JOIN ".$tableName." as ".$tableAlias." ";
-						$innerJoinQuery .= "ON ".$table.".".$leftColumn." = ".$tableAlias.".".$rightColumn." ";
-						
-						foreach($selectInnerJoinCols[$tableName][$leftColumn] as $colName => $colAs){
-							$colAs = ($colAs==="") ? ", " : " as ".$colAs.", ";
-							$selectQuery .= " ".$tableAlias.".".$colName.$colAs;
-						}
-					}
-
-				}
-			}
-
-			$leftJoinQuery = "";
-			$no=null;
-			if(isset($leftJoin)){
-				foreach($leftJoin as $tableName=> $columnArray ){
-					
-					 foreach($columnArray as  $leftColumn => $rightColumn){
-						 $no += 1;
-						 $tableAlias = "lft".$no;
-						$leftJoinQuery .= "LEFT JOIN ".$tableName." as ".$tableAlias." ";
-						$leftJoinQuery .= "ON ".$table.".".$leftColumn." = ".$tableAlias.".".$rightColumn." ";
-						
-						foreach($selectLeftJoinCols[$tableName][$leftColumn] as $colName => $colAs){
-							$colAs = ($colAs==="") ? ", " : " as ".$colAs.", ";
-							$selectQuery .= " ".$tableAlias.".".$colName.$colAs;
-						}
-						
-					}
-					
-				}
-			}
-			$finalSelectQuery = substr("SELECT ".$table.".*, ".$selectQuery, 0, -2);
-			$finalQueryString = $finalSelectQuery." FROM ".$table." ".$innerJoinQuery.$leftJoinQuery;
-			//echo $finalQueryString;
-			
-            $stmt = $this->db->prepare($finalQueryString." where 1=1 ". $w ." ".$l." ".$dbLimit.$this->getGroupBy());
-            $stmt->execute($a);
-            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			
-			/* $res = $this->db->query('SELECT COUNT(*) FROM '.$table);
-			$totalRecords = $res->fetchColumn(); */
-			
-            if(count($rows)<=0  || !is_array($rows)){
-                $response["status"] = "warning";
-                $response["message"] = "No data found.";
-				$response["data"] = null;
-            }else{
-				//$response['totalRecords']= $totalRecords;
-				$response["message"] = count($rows)." rows selected.";
-                $response["status"] = "success";
-				$response["data"] = $rows;
-            }
-                
-        }catch(PDOException $e){
-            $response["status"] = "error";
-            $response["message"] = 'Select Failed: ' .$e->getMessage();
-            $response["data"] = null; //$finalQueryString." where 1=1 ". $w ." ".$dbLimit;
-        }
-        return $response;
+			$this->selectColumns = $selectColumn;
+			return true;
+		}else{
+			return false;
+		}
 	}
-	function selectSingleJoin($table,$where, $innerJoin = null, $selectInnerJoinCols = null, $leftJoin = null, $selectLeftJoinCols = null){
-		try{
-
-            $w = "";
-            foreach ($where as $key => $value) {
-                $w .= " and " .$table.".".$key. " = '".$value."'";
-            }
-			$dbLimit = " LIMIT 1";
-			
-			
-			$selectQuery = "";
-			$innerJoinQuery = "";
-			$no=null;
-			if(isset($innerJoin)){
-				foreach($innerJoin as $tableName=> $columnArray ){
-					
-					 foreach($columnArray as  $leftColumn => $rightColumn){
-						$no += 1;
-						$tableAlias = "inr".$no; 
-						 
-						$innerJoinQuery .= "INNER JOIN ".$tableName." as ".$tableAlias." ";
-						$innerJoinQuery .= "ON ".$table.".".$leftColumn." = ".$tableAlias.".".$rightColumn." ";
-						
-						foreach($selectInnerJoinCols[$tableName][$leftColumn] as $colName => $colAs){
-							$colAs = ($colAs==="") ? ", " : " as ".$colAs.", ";
-							$selectQuery .= " ".$tableAlias.".".$colName.$colAs;
-						}
-					}
-
-				}
+	function getColumns(){
+		if($this->selectColumns != null || $this->selectColumns != ""){
+			return trim($this->selectColumns, ",");
+		}else{
+			foreach($this->table as $tableName){
+				$columns = $tableName.'.* ';
 			}
-
-			$leftJoinQuery = "";
-			$no=null;
-			if(isset($leftJoin)){
-				foreach($leftJoin as $tableName=> $columnArray ){
-					
-					 foreach($columnArray as  $leftColumn => $rightColumn){
-						 $no += 1;
-						 $tableAlias = "lft".$no;
-						$leftJoinQuery .= "LEFT JOIN ".$tableName." as ".$tableAlias." ";
-						$leftJoinQuery .= "ON ".$table.".".$leftColumn." = ".$tableAlias.".".$rightColumn." ";
-						
-						foreach($selectLeftJoinCols[$tableName][$leftColumn] as $colName => $colAs){
-							$colAs = ($colAs==="") ? ", " : " as ".$colAs.", ";
-							$selectQuery .= " ".$tableAlias.".".$colName.$colAs;
-						}
-						
-					}
-					
-				}
-			}
-			$finalSelectQuery = substr("SELECT ".$table.".*, ".$selectQuery, 0, -2);
-			$finalQueryString = $finalSelectQuery." FROM ".$table." ".$innerJoinQuery.$leftJoinQuery;
-			//echo $finalQueryString;
-			
-            $stmt = $this->db->query($finalQueryString." where 1=1 ". $w ." ".$dbLimit);
-            //$stmt->execute($a);
-            $rows = $stmt->fetch(PDO::FETCH_ASSOC);
-			
-			/* $res = $this->db->query('SELECT COUNT(*) FROM '.$table);
-			$totalRecords = $res->fetchColumn(); */
-			
-            if(count($rows)<=0  || !is_array($rows)){
-                $response["status"] = "warning";
-                $response["message"] = "No data found.";
-				$response["data"] = null;
-            }else{
-				//$response['totalRecords']= $totalRecords;
-				$response["message"] = count($rows)." rows selected.";
-                $response["status"] = "success";
-				$response["data"] = $rows;
-            }
-                
-        }catch(PDOException $e){
-            $response["status"] = "error";
-            $response["message"] = 'Select Failed: ' .$e->getMessage();
-            $response["data"] = null; //$finalQueryString." where 1=1 ". $w ." ".$dbLimit;
-        }
-        return $response;
+			return $columns;
+		}
 	}
-    function select($table, $where, $limit=null, $likeFilter=null){
+	
+	/*******************************************************************************/
+	function setJoinString($joinType, $joinTable, $joinOn){
+		$this->joinQueryString = ($this->joinQueryString == null) ? " ".$joinType : $this->joinQueryString." ".$joinType;
+		$this->tablesJoined = ($this->tablesJoined== null) ? 1 : $this->tablesJoined + 1 ;
+		foreach($joinOn as $key => $value){
+			$this->joinQueryString .= " ".$joinTable. " as t".$this->tablesJoined." ON t".$this->tablesJoined.".".$key ." = ".$value;
+		}
+		return "t".$this->tablesJoined;
+	}
+	
+	function getJoinString(){
+		if($this->joinQueryString != null || $this->joinQueryString != ""){
+			return trim($this->joinQueryString, ",");
+		}else{
+			return;
+		}
+	}
+	
+	/*******************************************************************************/
+	
+	function setOrderBy($orderBy){
+		if(count($orderBy) >= 1){
+			if($this->orderBy == null || $this->orderBy == ""){
+				$this->orderBy = " ORDER BY ";
+			}else{
+				$this->orderBy .= " ";
+			}
+			foreach($orderBy as $key => $value){
+				$this->orderBy .= $key." ".$value.",";
+			}
+			$this->orderBy = $this->orderBy;
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function getOrderBy(){
+		if($this->orderBy != null || $this->orderBy != ""){
+			return trim($this->orderBy, ",");
+		}else{
+			return;
+		}
+	}
+	function setWhere($where, $table, $like = false){
+		if(count($where) >= 1){
+			if($this->where == null || $this->where == ""){
+				$this->where = " WHERE 1=1";
+			}else{
+				$this->where .= " ";
+			}
+			if($like == true){
+				foreach($where as $key => $value){
+					$this->where .= " AND ".$table.".".$key." like '%".$value."%' ";
+				}
+			}else{
+				foreach($where as $key => $value){
+					$this->where .= " AND ".$table.".".$key."='".$value."' ";
+				}
+			}
+			
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	function getWhere(){
+		if($this->where != null || $this->where != ""){
+			return trim($this->where, ",");
+		}else{
+			return;
+		}
+	}
+	
+	function getQueryString($total = false){
+		$table = $this->getTable();
+		$columns = $this->getColumns();
+		$joinCols = $this->getJoinString();
+		$orderBy = $this->getOrderBy();
+		$groupBy = $this->getGroupBy();
+		$where = $this->getWhere();
+		$limit = $this->getLimit();
+		$queryString = ($total == true) ? "(SELECT COUNT(t0.id) FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy.") as totalRecords, " : "";
+		
+		$this->queryString = "SELECT ".$queryString." ".$columns." FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy." ".$limit;
+
+		return $this->queryString;
+	}
+	
+    function select($totalRecords=false){
         try{
-            $a = array();
-            $w = "";
-            foreach ($where as $key => $value) {
-                $w .= " and " .$key. " like :".$key;
-                $a[":".$key] = $value;
-            }
-			$lmt = ($limit['pageNo'] == 0 ) ? $limit['pageNo'] : $limit['pageNo'] - 1;
-			$startLimit = $lmt * $limit['records']; // start on record $startLimit
-			$dbLimit = ($limit===null) ? "" : " LIMIT ".$startLimit.", ".$limit['records'];
-			$l = "";
-			if($likeFilter!=null){
-				foreach ($likeFilter as $key => $value) {
-					$l .= " and " .$key. " like '%". $value . "%'";
-				}
-			}
+            $stmt = $this->db->query($this->getQueryString($totalRecords));
 			
-            $stmt = $this->db->prepare("select * from ".$table." where 1=1 ". $w . " ". $l." ".$this->getGroupBy(). " ".$dbLimit);
-			//echo "select * from ".$table." where 1=1 ". $w . " ". $l. " ".$dbLimit;
-            $stmt->execute($a);
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			
             if(count($rows)<=0 || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
-				$response["data"] = null;
+				$response["data"] = $this->getQueryString($totalRecords);
             }else{
 				//$response['totalRecords']= $totalRecords;
 				$response["message"] = count($rows)." rows selected.";
                 $response["status"] = "success";
+                $response["query"] = $this->getQueryString($totalRecords);
 				$response["data"] = $rows;
             }
-                
+            $this->resetQueryData();
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = 'Select Failed: ' .$e->getMessage();
-            $response["data"] = null;
+            $response["data"] = $this->getQueryString($totalRecords);
         }
         return $response;
     }
-	function selectSingle($table, $where, $limit=1){
+	function selectSingle(){
         try{
-            $w = "";
-            foreach ($where as $key => $value) {
-                $w .= " and " .$key. " = '".$value."'";
-            }
-			$dbLimit = " LIMIT ".$limit;
-			
-            $stmt = $this->db->query("select * from ".$table." where 1=1 ". $w ." ".$dbLimit);
+            
+            $stmt = $this->db->query($this->getQueryString());
             //$stmt->execute($a);
             $rows = $stmt->fetch(PDO::FETCH_ASSOC);
 			//echo "select * from ".$table." where 1=1 ". $w ." ".$dbLimit;
@@ -340,7 +314,7 @@ class dbHelper {
                 $response["status"] = "success";
 				$response["data"] = $rows; //(count($rows)==1) ? $rows[0] : $rows;
             }
-                
+            $this->resetQueryData();
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = 'Select Failed: ' .$e->getMessage();

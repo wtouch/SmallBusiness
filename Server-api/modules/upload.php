@@ -5,28 +5,7 @@
 	$reqMethod = $app->request->getMethod();
 	
 	if($reqMethod=="GET"){
-		if(isset($id)){
-			$where['id'] = $id;
-			$data = $db->select("websites", $where);
-			echo json_encode($data);
-			
-		}else{
-			$where=array(); // this will used for user specific data selection.
-			$limit['pageNo'] = $pageNo; // from which record to select
-			$limit['records'] = $records; // how many records to select
-			
-			// this is used to select data with LIMIT & where clause
-			$data = $db->select("websites", $where, $limit);
-			
-			// this is used to count totalRecords with only where clause
-			$tootalDbRecords = $db->select("website", $where, $limit=null, $like);
-			$totalRecords['totalRecords'] = count($tootalDbRecords['data']);
-			
-			
-			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
-			$data = array_merge($totalRecords,$data);
-			echo json_encode($data);
-		}
+		
 	}
 	
 	if($reqMethod=="POST"){

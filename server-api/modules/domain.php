@@ -35,7 +35,11 @@
 			$input = json_decode($body,true);
 			$domainArr = explode('.', $input['domain']);
 			$where['domain_name'] = $input['domain'];
-			$dbCheck = $db->selectSingle("website", $where);
+			
+			$t0 = $db->setTable("website");
+			$db->setWhere($where, $t0);
+			
+			$dbCheck = $db->selectSingle();
 			if($dbCheck['status'] != "success"){
 				$response['status'] = "success";
 				$response['message'] = "Domain Available";

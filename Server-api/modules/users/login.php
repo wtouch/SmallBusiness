@@ -15,17 +15,30 @@
 			$password = $input->password; // get password from json
 			
 			$table = "users";
-			// inner join [table name][first table column name] = [second table column name]
+			$t[0] = $db->setTable($table);
+			$db->setWhere($where, $t[0]);
+			
+			$db->setColumns($t[0], array("*"));
+			
+			$t1 = $db->setJoinString("INNER JOIN", "user_group", array("id"=>$t[0].".group_id"));
+			
+			// inner join select column [table name][join col name][column to select] = column alias
+			$selectInnerJoinCols['group_name'] = "group_name";
+			$selectInnerJoinCols['config'] = "group_config";
+			$selectInnerJoinCols['group_permission'] = "permission";
+			$db->setColumns($t1, $selectInnerJoinCols);
+			
+			/* // inner join [table name][first table column name] = [second table column name]
 			$innerJoin['user_group']['group_id'] = "id";
 			
 			
 			// inner join select column [table name][join col name][column to select] = column alias
 			$selectInnerJoinCols['user_group']['group_id']['group_name'] = "group_name";
 			$selectInnerJoinCols['user_group']['group_id']['config'] = "group_config";
-			$selectInnerJoinCols['user_group']['group_id']['group_permission'] = "permission";
+			$selectInnerJoinCols['user_group']['group_id']['group_permission'] = "permission"; */
 			
 			// this is used to select data with LIMIT & where clause & inner/left join with join columns
-			$data = $db->selectSingleJoin($table, $where, $innerJoin, $selectInnerJoinCols);
+			$data = $db->selectSingle();
 
 			
 			

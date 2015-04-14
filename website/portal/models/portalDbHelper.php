@@ -195,8 +195,10 @@ class portalDbHelper {
 		$groupBy = $this->getGroupBy();
 		$where = $this->getWhere();
 		$limit = $this->getLimit();
-		$this->queryString = "SELECT ".$columns." FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy." ".$limit;
-		//echo $this->queryString;
+		$queryString = "SELECT COUNT(t0.id) FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy;
+		
+		$this->queryString = "SELECT (".$queryString.") as totalRecords, ".$columns." FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy." ".$limit;
+		
 		return $this->queryString;
 	}
 	

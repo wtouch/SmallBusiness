@@ -109,7 +109,7 @@ define(['app'], function (app) {
 		};
 		// for users list/customerList
 		
-		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+		dataService.get("getmultiple/user/1/500", {status: 1})
 		.then(function(response) {  //function for websitelist response
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
