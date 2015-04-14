@@ -13,6 +13,7 @@ define(['angular',
  ]);
 	app.controller('TypeaheadCtrl', ['$scope','$http','dataService', function($scope, $http,dataService) {
 		$scope.data = "vilas";
+		$scope.city = "Pune";
 		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
 			var locationParams = {search : {}, groupBy : {}}
 			locationParams.search[searchColumn] = searchValue;

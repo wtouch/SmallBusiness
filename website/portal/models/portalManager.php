@@ -6,7 +6,7 @@ class portalManager{
 	private $config;
 	function __construct($config){
 		$this->db = new portalDbHelper;
-		$this->config =$config;
+		$this->config = $config;
 	}
 	function encodeUrl($url){
 		return $url = str_replace(" ","-",$url);
@@ -36,7 +36,7 @@ class portalManager{
 			return $arr;
 		}	
 	}
-	function getDataByKeyword($keyword){
+	function getDataByKeyword($keyword, $search = false){
 		try{
 			$where['status'] = 1;
 			
@@ -51,6 +51,7 @@ class portalManager{
 			}
 			
 			$data = $this->db->select('business', $where, $limit=null, $like);
+			$keyData = $this->db->select('business', $where, $limit=null, $like);
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
@@ -70,10 +71,22 @@ class portalManager{
 	function getCategories(){
 		// query to get types & group by category
 		try{
+			$groupBy = array('category');
 			$groupByArray['category'] = 'category';
-			$this->db->setGroupBy($groupByArray);
-			$where = array();
-			$data = $this->db->select('business', $where);
+			$groupByArray['type'] = 'type';
+			$groupByArray1['type'] = 'desc';
+			$where['status'] = 1;
+			
+			$this->db->setTable("business");
+			$this->db->setGroupBy($groupBy);
+			$this->db->setOrderBy($groupByArray1);
+			$this->db->setWhere($where);
+			$this->db->setLimit(array(1,10));
+			//$this->db->setColumns($groupByArray);
+			
+			//echo $this->db->getQueryString();
+			
+			$data = $this->db->select('business');
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
