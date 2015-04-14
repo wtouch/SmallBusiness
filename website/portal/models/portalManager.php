@@ -77,16 +77,33 @@ class portalManager{
 			$groupByArray1['type'] = 'desc';
 			$where['status'] = 1;
 			
-			$this->db->setTable("business");
-			$this->db->setGroupBy($groupBy);
-			$this->db->setOrderBy($groupByArray1);
-			$this->db->setWhere($where);
-			$this->db->setLimit(array(1,10));
-			//$this->db->setColumns($groupByArray);
+			$t0 = $this->db->setTable("users");
+			//$this->db->setGroupBy($groupBy);
+			//$this->db->setOrderBy($groupByArray1);
+			$this->db->setWhere($where, $t0);
+			//$this->db->setLimit(array(1,10));
+			$userCol['id'] = "id";
+			$userCol['name'] = "user_name";
+			$userCol['user_id'] = "user_id";
+			$this->db->setColumns($t0, $userCol);
 			
-			//echo $this->db->getQueryString();
+			$t1 = $this->db->setJoinString("LEFT JOIN", "users", array("user_id"=>$t0.".id"));
+			$userCol1['name'] = "salesman";
+			$userCol['user_id'] = "salesman_id";
+			$this->db->setColumns($t1, $userCol1);
+			$where1['id'] = 2;
+			$this->db->setWhere($where1, $t1);
+			
+			$t2 = $this->db->setJoinString("LEFT JOIN", "users", array("user_id"=>$t1.".id"));
+			$this->db->setColumns($t2, array("id"=>"customer_id"));
+			
+			$t3 = $this->db->setJoinString("INNER JOIN", "business", array("user_id"=>$t2.".id"));
+			$this->db->setColumns($t3, array("id", "business_name", "user_id"));
+			
+			$this->db->setLimit(array(1,10));
 			
 			$data = $this->db->select('business');
+			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
@@ -100,6 +117,7 @@ class portalManager{
             $response["data"] = null;
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
+		print_r($response);
 		return $response;
 	}
 	

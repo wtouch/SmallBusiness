@@ -1,0 +1,52 @@
+1) setTable($tableName)
+	-	parameter as table name
+	-	to set table for select query
+	-	return table alias like t0, t1 etc.
+2)	setColumns($t0, $userCol)
+	-	parameter 1) table alias from setTable() return value
+	-	parameter 2) table columns as array - associative array for setting column alias like user_name as salesman etc.
+	-	to select columns from table (table alias)
+	-	return true
+3)	setWhere($where, $t0, $like)
+	-	parameter 1) associative array having column name as key & column value as value
+	-	parameter 2) table alias return value of setTable();
+	-	parameter 3) set true for LIKE '%%' statement
+	-	to set `WHERE` clause
+	-	return true
+4)	setGroupBy($groupBy)
+	-	parameter - array/associative array having column names
+	-	to set `GROUP BY` clause
+	-	return true
+5)	setOrderBy($orderBy)
+	-	parameter - associative array having column names as key & value as asc or desc
+	-	to set `ORDER BY` clause
+	-	return true
+6)	setLimit(array(1,10))
+	-	parameter - array having two values 1) select record form 2) no of records
+	-	to select limited data default selecting 1st record & select 10 records at a time
+	-	return true
+7)	setJoinString("LEFT JOIN", "users", array("user_id"=>$t0.".id"))
+	-	parameter 1) join type (string) - supported type - LEFT JOIN, INNER JOIN, JOIN, RIGHT JOIN
+	-	parameter 2) join table name (string)
+	-	parameter 3) associative array - key as column name of current table & value as column name of parent table with [tableAlias.columnName]
+	-	this method prepare join statement with parent table & current table
+	-	return current table alias like t1, t2, t3 etc.
+8)	select()
+	-	this is used to get data from table or joined table
+	-	return query result(rows) as array having table data as associative array
+9)	selectSingle()
+	-	this is used to get single record from table or joined table
+	-	return query result as associative array
+10) insert($table, $inputData)
+	-	parameter 1) tableName
+	-	parameter 2) inputData as JSON object or associative array
+	-	this method is used to insert data into database
+	-	return last inserted id
+11)	update($table, $inputData, $where)
+	-	parameter 1) tableName
+	-	parameter 2) inputData as JSON object or associative array
+	-	parameter 3) associative array having column name & value as key & value
+	-	this method is used to update record/s from database
+	-	return true
+	
+	

@@ -30,12 +30,29 @@ class portalDbHelper {
 		return array_keys($arr) !== range(0, count($arr) - 1);
 	}
 	
+	function resetQueryData(){
+		$this->groupBy = null;
+		$this->where = null;
+		$this->orderBy = null;
+		$this->selectColumns = null;
+		$this->joinQueryString = null;
+		$this->table = null;
+		$this->queryString = null;
+		$this->queryParams = null;
+		$this->tablesJoined = null;
+	}
+	
 	function setTable($table){
-		$this->table = $table;
-		return true;
+		$this->tablesJoined = 0;
+		$tableAlias = "t".$this->tablesJoined;
+		$this->table[$table] = $tableAlias;
+		return $tableAlias;
 	}
 	function getTable(){
-		return $this->table;
+		foreach($this->table as $key => $value){
+			$table = $key." as ".$value;
+		}
+		return $table;
 	}
 	function setLimit($limit = array(1,10)){
 		$this->limit = "LIMIT ".$limit[0].",".$limit[1];
@@ -67,24 +84,20 @@ class portalDbHelper {
 			return;
 		}
 	}
-	function setColumns($selectColumns, $joinCols=false){
+	function setColumns($table, $selectColumns, $joinCols=false){
 		if(count($selectColumns) >= 1){
-			$selectColumn = " ";
+			$selectColumn = ($this->selectColumns == null) ? " " : $this->selectColumns;
 			if($this->isAssoc($selectColumns)){
 				foreach($selectColumns as $key => $value){
-					$selectColumn .= $key." as ".$value.",";
+					$selectColumn .= $table.".".$key." as ".$value.",";
 				}
 			}else{
 				foreach($selectColumns as $key => $value){
-					$selectColumn .= $value.",";
+					$selectColumn .= $table.".".$value.",";
 				}
 			}
-			if($joinCols==true){
-				return $selectColumn;
-			}else{
-				$this->selectColumns = $selectColumn;
-				return true;
-			}
+			$this->selectColumns = $selectColumn;
+			return true;
 		}else{
 			return false;
 		}
@@ -93,15 +106,21 @@ class portalDbHelper {
 		if($this->selectColumns != null || $this->selectColumns != ""){
 			return trim($this->selectColumns, ",");
 		}else{
-			return;
+			foreach($this->table as $tableName){
+				$columns = $tableName.'.* ';
+			}
+			return $columns;
 		}
 	}
 	
 	/*******************************************************************************/
-	function setJoinString($joinType, $joinTable, $joinCols, $where = null){
-		$this->joinQueryString = $joinType;
+	function setJoinString($joinType, $joinTable, $joinOn){
+		$this->joinQueryString = ($this->joinQueryString == null) ? " ".$joinType : $this->joinQueryString." ".$joinType;
 		$this->tablesJoined = ($this->tablesJoined== null) ? 1 : $this->tablesJoined + 1 ;
-		return false;
+		foreach($joinOn as $key => $value){
+			$this->joinQueryString .= " ".$joinTable. " as t".$this->tablesJoined." ON t".$this->tablesJoined.".".$key ." = ".$value;
+		}
+		return "t".$this->tablesJoined;
 	}
 	
 	function getJoinString(){
@@ -137,20 +156,20 @@ class portalDbHelper {
 			return;
 		}
 	}
-	function setWhere($where, $like = false){
+	function setWhere($where, $table, $like = false){
 		if(count($where) >= 1){
 			if($this->where == null || $this->where == ""){
 				$this->where = " WHERE ";
 			}else{
-				$this->where .= " ";
+				$this->where .= " AND ";
 			}
 			if($like == true){
 				foreach($where as $key => $value){
-					$this->where .= $this->getTable().".".$key." like '%".$value."%',";
+					$this->where .= $table.".".$key." like '%".$value."%' ";
 				}
 			}else{
 				foreach($where as $key => $value){
-					$this->where .= $this->getTable().".".$key."=".$value.",";
+					$this->where .= $table.".".$key."='".$value."' ";
 				}
 			}
 			
@@ -169,25 +188,20 @@ class portalDbHelper {
 	}
 	
 	function getQueryString(){
-		$table = $this->table;
-		if($this->getColumns()){
-			$columns = $this->getColumns();
-		}else{
-			$columns = ' * ';
-		}
+		$table = $this->getTable();
+		$columns = $this->getColumns();
 		$joinCols = $this->getJoinString();
 		$orderBy = $this->getOrderBy();
 		$groupBy = $this->getGroupBy();
 		$where = $this->getWhere();
 		$limit = $this->getLimit();
 		$this->queryString = "SELECT ".$columns." FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy." ".$limit;
-
+		//echo $this->queryString;
 		return $this->queryString;
 	}
 	
     function select($table=null){
         try{
-			
             $stmt = $this->db->query($this->getQueryString());
 			
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -202,7 +216,7 @@ class portalDbHelper {
                 $response["status"] = "success";
 				$response["data"] = $rows;
             }
-                
+            $this->resetQueryData();
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = 'Select Failed: ' .$e->getMessage();
@@ -227,7 +241,7 @@ class portalDbHelper {
                 $response["status"] = "success";
 				$response["data"] = $rows; //(count($rows)==1) ? $rows[0] : $rows;
             }
-                
+            $this->resetQueryData();
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = 'Select Failed: ' .$e->getMessage();
