@@ -154,7 +154,7 @@ class dbHelper {
 			return;
 		}
 	}
-	function setColumns($table, $selectColumns, $joinCols=false){
+	function setColumns($table, $selectColumns, $raw=false){
 		if(count($selectColumns) >= 1){
 			$selectColumn = ($this->selectColumns == null) ? " " : $this->selectColumns;
 			if($this->isAssoc($selectColumns)){
@@ -163,7 +163,7 @@ class dbHelper {
 				}
 			}else{
 				foreach($selectColumns as $key => $value){
-					$selectColumn .= $table.".".$value.",";
+					$selectColumn .= ($raw) ? $value."," : $table.".".$value.",";
 				}
 			}
 			$this->selectColumns = $selectColumn;
@@ -226,7 +226,7 @@ class dbHelper {
 			return;
 		}
 	}
-	function setWhere($where, $table, $like = false){
+	function setWhere($where, $table, $like = false, $raw=false){
 		if(count($where) >= 1){
 			if($this->where == null || $this->where == ""){
 				$this->where = " WHERE 1=1";
@@ -235,11 +235,11 @@ class dbHelper {
 			}
 			if($like == true){
 				foreach($where as $key => $value){
-					$this->where .= " AND ".$table.".".$key." like '%".$value."%' ";
+					$this->where .= ($raw) ? " AND ".$value : " AND ".$table.".".$key." like '%".$value."%' ";
 				}
 			}else{
 				foreach($where as $key => $value){
-					$this->where .= " AND ".$table.".".$key."='".$value."' ";
+					$this->where .= ($raw) ? " AND ".$value : " AND ".$table.".".$key."='".$value."' ";
 				}
 			}
 			
@@ -265,7 +265,7 @@ class dbHelper {
 		$groupBy = $this->getGroupBy();
 		$where = $this->getWhere();
 		$limit = $this->getLimit();
-		$queryString = ($total == true) ? "(SELECT COUNT(t0.id) FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy.") as totalRecords, " : "";
+		$queryString = ($total == true) ? "(SELECT COUNT(t0.id) FROM ".$table." ".$joinCols." ".$where.$orderBy.") as totalRecords, " : "";
 		
 		$this->queryString = "SELECT ".$queryString." ".$columns." FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy." ".$limit;
 

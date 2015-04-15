@@ -29,9 +29,12 @@
 			$limit[1] = $records; // how many records to select
 			
 			$t0 = $db->setTable("user_group");
+			$db->setColumns($t0,array("*"));
 			$db->setWhere($where, $t0);
 			$db->setWhere($like, $t0, true);
 			$db->setLimit($limit);
+			
+			$db->setColumns($t0,array("(select count(*) as count from users where status = 1 and group_id = ".$t0.".id) as usersCount"),true);
 			
 			$data = $db->select(true); // true for totalRecords
 			

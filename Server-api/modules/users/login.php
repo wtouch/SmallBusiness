@@ -20,13 +20,13 @@
 			
 			$db->setColumns($t[0], array("*"));
 			
-			$t1 = $db->setJoinString("INNER JOIN", "user_group", array("id"=>$t[0].".group_id"));
+			$t[1] = $db->setJoinString("INNER JOIN", "user_group", array("id"=>$t[0].".group_id"));
 			
 			// inner join select column [table name][join col name][column to select] = column alias
 			$selectInnerJoinCols['group_name'] = "group_name";
 			$selectInnerJoinCols['config'] = "group_config";
 			$selectInnerJoinCols['group_permission'] = "permission";
-			$db->setColumns($t1, $selectInnerJoinCols);
+			$db->setColumns($t[1], $selectInnerJoinCols);
 			
 			/* // inner join [table name][first table column name] = [second table column name]
 			$innerJoin['user_group']['group_id'] = "id";
@@ -38,6 +38,7 @@
 			$selectInnerJoinCols['user_group']['group_id']['group_permission'] = "permission"; */
 			
 			// this is used to select data with LIMIT & where clause & inner/left join with join columns
+			
 			$data = $db->selectSingle();
 
 			

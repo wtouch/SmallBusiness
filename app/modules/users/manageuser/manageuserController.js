@@ -131,7 +131,7 @@ define(['app'], function (app) {
 		//code for pagination
 		$scope.pageChanged = function(page) {
 			if($scope.userViews == 'userslist'){
-				dataService.get("getmultiple/user/"+page+"/"+$scope.pageItems).then(function(response){
+				dataService.get("getmultiple/user/"+page+"/"+$scope.pageItems, $scope.userInfo).then(function(response){
 					$scope.userList = response.data;
 					$scope.totalRecords = response.totalRecords;
 				});
@@ -147,7 +147,7 @@ define(['app'], function (app) {
 		//End of pagination
 		
 		//
-		dataService.get("getmultiple/user/1/100")
+		dataService.get("getmultiple/user/1/100", $scope.userInfo)
 		.then(function(response) {
 			$scope.selectUsers = response.data;
 		});	
@@ -159,8 +159,8 @@ define(['app'], function (app) {
 			$scope.userParams = {};
 			$scope.filterStatus= {}; // search filter for send request ex. {columnName : value}
 			(colValue =="") ? delete $scope.userParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
-			angular.extend($scope.userParams, $scope.filterStatus);
-			angular.extend($scope.userParams, $scope.search);
+			angular.extend($scope.userParams, $scope.filterStatus, $scope.userInfo, $scope.search);
+			
 			if(colValue.length >= 4 || colValue ==""){
 				if($scope.userViews == 'userslist'){
 					dataService.get("/getmultiple/user/1/"+$scope.pageItems, $scope.userParams).then(function(response) { 
@@ -355,7 +355,8 @@ define(['app'], function (app) {
 		}	
 		
 		var usersList = function(){
-			dataService.get("getmultiple/user/"+$scope.usersListCurrentPage+"/"+$scope.pageItems).then(function(response) {
+			
+			dataService.get("getmultiple/user/"+$scope.usersListCurrentPage+"/"+$scope.pageItems, $scope.userInfo).then(function(response) {
 				if(response.status == 'success'){
 					$scope.userList = response.data;
 					$scope.totalRecords = response.totalRecords;

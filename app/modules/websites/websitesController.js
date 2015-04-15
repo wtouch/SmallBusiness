@@ -84,18 +84,9 @@ define(['app'], function (app) {
 			});
 		};
 		
-		if($rootScope.userDetails.group_name == "customer"){
+		
 			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
-		}
-		if($rootScope.userDetails.group_name == "manager"){
-			$scope.userInfo = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
-		}
-		if($rootScope.userDetails.group_name == "superadmin" || $rootScope.userDetails.group_name == "admin"){
-			$scope.userInfo = {}; // these are URL parameters
-		}
-		if($rootScope.userDetails.group_name == "salesman"){
-			$scope.userInfo = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
-		}
+		
 	
 		
 		// All $scope methods
@@ -108,8 +99,8 @@ define(['app'], function (app) {
 			});
 		};
 		// for users list/customerList
-		
-		dataService.get("getmultiple/user/1/500", {status: 1})
+		angular.extend($scope.userInfo, {status: 1})
+		dataService.get("getmultiple/user/1/500", $scope.userInfo)
 		.then(function(response) {  //function for websitelist response
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
