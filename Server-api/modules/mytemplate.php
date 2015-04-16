@@ -14,34 +14,31 @@
 			echo json_encode($data);
 			
 		}else{
-			 // This is for search
-			 $like = array();
-			 if(isset($_GET['search']) && $_GET['search'] == true){
+			$like = array();
+			$userId = 0;
+			$limit[0] = $pageNo;
+			$limit[1] = $records;
+			$where = array();
+			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
+			
+			if(isset($_GET['search']) && $_GET['search'] == true){
 				 
 				 (isset($_GET['template_name'])) ? $like['template_name'] = $_GET['template_name'] : "";
-			 }
-			$where = array(); // this will used for user specific data selection.
-			$limit[0] = $pageNo; // from which record to select
-			$limit[1] = $records; // how many records to select
-			
-			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
+			}
 			(isset($_GET['template_type'])) ? $where['template_type'] = $_GET['template_type'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 		
-			
-			$t0 = $db->setTable("my_template");
-			$db->setWhere($where, $t0);
-			$db->setWhere($like, $t0, true);
+			$userCols['name'] = "name";
+			$userCols['username'] = "username";
+			$user = $db->getUsers($userId,$userCols);
 			$db->setLimit($limit);
+			$table = $db->setJoinString("INNER JOIN", "business", array("user_id"=>$user.".id"));
+			$db->setWhere($where, $table);
+			$db->setWhere($like, $table, true);
+			$selectInnerJoinCols[0] = "*";
+			$db->setColumns($table, $selectInnerJoinCols);
+			$data = $db->select();
 			
-			$data = $db->select(true); // true for totalRecords
-			
-			if($data['status'] == "success"){
-				if(isset($data['data'][0]['totalRecords'])){
-					$tootalDbRecords['totalRecords'] = $data['data'][0]['totalRecords'];
-					$data = array_merge($tootalDbRecords,$data);
-				}
-			}
 			echo json_encode($data);
 		}
 	}//end get

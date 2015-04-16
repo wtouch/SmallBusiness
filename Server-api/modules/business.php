@@ -8,55 +8,38 @@
 	if($reqMethod=="GET"){
 		if(isset($id)){
 			$where['id'] = $id;
-			$data = $db->selectSingle($table, $where);
+			$t0 = $db->setTable($table);
+			$db->setWhere($where, $t0);
+			$data = $db->selectSingle();
 			echo json_encode($data);
 			
 		}else{
 			
-			
 			$like = array();
+			$userId = 0;
+			$limit[0] = $pageNo;
+			$limit[1] = $records;
+			$where = array();
+			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
+			
 			if(isset($_GET['search']) && $_GET['search'] == true){
 				(isset($_GET['business_name'])) ? $like['business_name'] = $_GET['business_name'] : "";
 			}
-			 
-			// this will used for user specific data selection.
-			$where=array();
-			(isset($_GET['user_id'])) ? $where['user_id'] = $_GET['user_id'] : "";
-			(isset($_GET['manager_id'])) ? $where['manager_id'] = $_GET['manager_id'] : "";
-			(isset($_GET['salesman_id'])) ? $where['salesman_id'] = $_GET['salesman_id'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";
 			(isset($_GET['verified'])) ? $where['verified'] = $_GET['verified'] : "";
 			
-			$userGropus = $db->select("user_group", array());
-			// inner join [table name][column name]
-			$innerJoin['users']['user_id'] = "id";
+			$userCols['name'] = "name";
+			$userCols['username'] = "username";
+			$user = $db->getUsers($userId,$userCols);
+			$db->setLimit($limit);
+			$table = $db->setJoinString("INNER JOIN", "business", array("user_id"=>$user.".id"));
+			$db->setWhere($where, $table);
+			$db->setWhere($like, $table, true);
+			$selectInnerJoinCols[0] = "*";
+			$db->setColumns($table, $selectInnerJoinCols);
+			$data = $db->select();
 			
-			// left join [table name][column name]
-			$leftJoin['users']['salesman_id'] = "id";
-			$leftJoin['users']['manager_id'] = "id";
-			
-			// inner join select column [table name][join col name][column to select] = column alias
-			$selectInnerJoinCols['users']['user_id']['name'] = "user_name";
-			
-			// left join select column [table name][join col name][column to select] = column alias
-			$selectLeftJoinCols['users']['salesman_id']['name'] = "salesman";
-			$selectLeftJoinCols['users']['manager_id']['name'] = "manager";
-			
-			// page limit
-			$limit['pageNo'] = $pageNo; // from which record to select
-			$limit['records'] = $records; // how many records to select
-			
-			// this is used to select data with LIMIT & where clause & inner/left join with join columns
-			$data = $db->selectJoin($table, $where, $limit,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols);
-			
-			// this is used to count totalRecords with only where clause
-			$totalDBRecords = $db->selectJoin($table, $where, $limit=null,$like, $innerJoin, $selectInnerJoinCols, $leftJoin, $selectLeftJoinCols);
-			
-			$totalRecords['totalRecords'] = count($totalDBRecords['data']);		
-			
-			// $data is array & $totalRecords is also array. So for final output we just merge these two arrays into $data array
-			$data = array_merge($totalRecords,$data);
 			echo json_encode($data);
 		}
 	}//end get

@@ -6,25 +6,18 @@
 		$where=array(); // this will used for user specific data selection.
 			$like = array();
 			 if(isset($_GET['search']) && $_GET['search'] == true){
-				 
 				 (isset($_GET['username'])) ? $like['username'] = $_GET['username'] : "";
 			 }
-			$whereId = 0;
+			$userId = 0;
 			if(isset($_GET['status'])) $where['status'] = $_GET['status'];
-			if(isset($_GET['user_id'])) $whereId = $_GET['user_id'];
-			$table = "users";
-			$groupTable = "user_group";
+			
+			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
+			
+			
 			$groupWhere['status'] = 1;
 			
-			$t[0] = $db->setTable($table);
-			$db->setWhere($where, $t[0]);
-			$db->setWhere($like, $t[0], true);
-			$db->setWhere(array("FIND_IN_SET(".$t[0].".id, (select GetFamilyTree(id) FROM users where id = ".$whereId."))"), $t[0], false,true);
+			$t[0] = $db->getUsers($userId, $userCols = null, $where, $like);
 			$db->setLimit($limit);
-			$db->setColumns($t[0], array("*"));
-			$db->setColumns($t[0], array("name" => "superadmin"));
-			
-			//$session['group_id']
 			
 			$t1 = $db->setJoinString("INNER JOIN", "user_group", array("id"=>$t[0].".group_id"));
 			$db->setWhere($groupWhere, $t1);

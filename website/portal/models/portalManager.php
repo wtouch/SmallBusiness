@@ -1,11 +1,11 @@
 <?php
-require_once "portalDbHelper.php";
+
 class portalManager{
 	private $domain;
 	private $db;
 	private $config;
 	function __construct($config){
-		$this->db = new portalDbHelper;
+		$this->db = new dbHelper;
 		$this->config = $config;
 	}
 	function encodeUrl($url){
@@ -52,6 +52,17 @@ class portalManager{
 			
 			$data = $this->db->select('business', $where, $limit=null, $like);
 			$keyData = $this->db->select('business', $where, $limit=null, $like);
+			
+			$t0 = $this->db->setTable("business");
+			$this->db->setGroupBy($groupBy);
+			$this->db->setWhere($where, $t0);
+			
+			$cols = array("category");
+			$this->db->setColumns($t0, $cols);
+			
+			$data = $this->db->select();
+			
+			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
@@ -72,37 +83,16 @@ class portalManager{
 		// query to get types & group by category
 		try{
 			$groupBy = array('category');
-			$groupByArray['category'] = 'category';
-			$groupByArray['type'] = 'type';
-			$groupByArray1['type'] = 'desc';
 			$where['status'] = 1;
 			
-			$t0 = $this->db->setTable("users");
-			//$this->db->setGroupBy($groupBy);
-			//$this->db->setOrderBy($groupByArray1);
+			$t0 = $this->db->setTable("business");
+			$this->db->setGroupBy($groupBy);
 			$this->db->setWhere($where, $t0);
-			//$this->db->setLimit(array(1,10));
-			$userCol['id'] = "id";
-			$userCol['name'] = "user_name";
-			$userCol['user_id'] = "user_id";
-			$this->db->setColumns($t0, $userCol);
 			
-			$t1 = $this->db->setJoinString("LEFT JOIN", "users", array("user_id"=>$t0.".id"));
-			$userCol1['name'] = "salesman";
-			$userCol['user_id'] = "salesman_id";
-			$this->db->setColumns($t1, $userCol1);
-			$where1['id'] = 2;
-			$this->db->setWhere($where1, $t1);
+			$cols = array("category");
+			$this->db->setColumns($t0, $cols);
 			
-			$t2 = $this->db->setJoinString("LEFT JOIN", "users", array("user_id"=>$t1.".id"));
-			$this->db->setColumns($t2, array("id"=>"customer_id"));
-			
-			$t3 = $this->db->setJoinString("INNER JOIN", "business", array("user_id"=>$t2.".id"));
-			$this->db->setColumns($t3, array("id", "business_name", "user_id"));
-			
-			$this->db->setLimit(array(1,10));
-			
-			$data = $this->db->select('business');
+			$data = $this->db->select();
 			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
@@ -123,10 +113,18 @@ class portalManager{
 	
 	function getCategoryTypes($category){
 		try{
-			$groupByArray['type'] = 'type';
-			$this->db->setGroupBy($groupByArray);
+			$groupBy['type'] = 'type';
 			$where['category'] = $category;
-			$data = $this->db->select('business', $where);
+			
+			$t0 = $this->db->setTable("business");
+			$this->db->setGroupBy($groupBy);
+			$this->db->setWhere($where, $t0);
+			
+			$cols = array("category, type");
+			$this->db->setColumns($t0, $cols);
+			
+			$data = $this->db->select();
+			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
@@ -139,6 +137,7 @@ class portalManager{
             $response["data"] = null;
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
+		
 		return $response;
 	}
 	function getBusinessList ($category, $type){
@@ -146,7 +145,16 @@ class portalManager{
 			$where['category'] = $category;
 			$where['type'] = $type;
 			$where['status'] = 1;
-			$data = $this->db->select('business', $where);
+			
+			$t0 = $this->db->setTable("business");
+			$this->db->setWhere($where, $t0);
+			
+			$cols = array("*");
+			$this->db->setColumns($t0, $cols);
+			
+			$data = $this->db->select();
+			
+			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
@@ -159,6 +167,7 @@ class portalManager{
             $response["data"] = null;
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
+		
 		return $response;
 	}
 	function getBusiness ($category, $type, $business,$id){
@@ -167,19 +176,41 @@ class portalManager{
 			$where['status'] = 1;
 			$where['category'] = $category ;
 			$where['id'] = $id ;
-			$data = $this->db->selectSingle('business', $where);
+			$t0 = $this->db->setTable("business");
+			$this->db->setWhere($where, $t0);
+			
+			$cols = array("*");
+			$this->db->setColumns($t0, $cols);
+			
+			$data = $this->db->selectSingle();
+			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
 			$prodwhere['status'] = 1;
 			$prodwhere['type'] = "product";
 			$prodwhere['business_id'] = $id ;
-			$proddata = $this->db->select('product', $prodwhere);
+						
+			$t1 = $this->db->setTable("product");
+			$this->db->setWhere($prodwhere, $t1);
+			$this->db->setLimit(array(1,10));
+			$cols = array("*");
+			$this->db->setColumns($t1, $cols);
+			
+			$proddata = $this->db->select();
 			
 			$servicewhere['status'] = 1;
 			$servicewhere['type'] = "service";
 			$servicewhere['business_id'] = $id ;
-			$servicedata = $this->db->select('product', $servicewhere);
+			
+			$t2 = $this->db->setTable("product");
+			$this->db->setWhere($servicewhere, $t2);
+			$this->db->setLimit(array(1,10));
+			$cols = array("*");
+			$this->db->setColumns($t2, $cols);
+			
+			$servicedata = $this->db->select();
+			
 			$response['title'] = "this is twig template";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['service'] = $this->jsonDecode($servicedata["data"]);	

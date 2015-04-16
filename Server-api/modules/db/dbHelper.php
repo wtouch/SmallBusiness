@@ -265,29 +265,37 @@ class dbHelper {
 		$groupBy = $this->getGroupBy();
 		$where = $this->getWhere();
 		$limit = $this->getLimit();
-		$queryString = ($total == true) ? "(SELECT COUNT(t0.id) FROM ".$table." ".$joinCols." ".$where.$orderBy.") as totalRecords, " : "";
-		
-		$this->queryString = "SELECT ".$queryString." ".$columns." FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy." ".$limit;
+		if($total == true){
+			$this->queryString ="(SELECT COUNT(t0.id) as totalRecords FROM ".$table." ".$joinCols." ".$where." ".$orderBy.") ";
+		}else{
+			$this->queryString = "SELECT ".$columns." FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy." ".$limit;
+		}
 
 		return $this->queryString;
 	}
 	
     function select($totalRecords=false){
         try{
-            $stmt = $this->db->query($this->getQueryString($totalRecords));
+            $stmt = $this->db->query($this->getQueryString());
+            
+			$totalRecord = $this->db->query($this->getQueryString(true));
 			
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+			$totalRecords = $totalRecord->fetch(PDO::FETCH_ASSOC);
 			
             if(count($rows)<=0 || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
-				$response["data"] = $this->getQueryString($totalRecords);
+				$response["data"] = null;
+				$response["totalRecords"] = $totalRecords['totalRecords'];
             }else{
 				//$response['totalRecords']= $totalRecords;
 				$response["message"] = count($rows)." rows selected.";
                 $response["status"] = "success";
-                $response["query"] = $this->getQueryString($totalRecords);
+                $response["query"] = $this->getQueryString(true);
 				$response["data"] = $rows;
+				$response["totalRecords"] = $totalRecords['totalRecords'];
             }
             $this->resetQueryData();
         }catch(PDOException $e){
@@ -431,6 +439,24 @@ class dbHelper {
         }
         return $response;
     }
+	
+	function getUsers($userId, $userCols = null, $where=null, $like=null){
+		$table = "users";
+		if($where === null) $where['status'] = 1;
+		if($where === null) $where['baned'] = 0;
+		$userCols = ($userCols === null) ? array("*") : $userCols;
+		$t[0] = $this->setTable($table);
+		$this->setWhere($where, $t[0]);
+		if($like!= null) $this->setWhere($like, $t[0], true);
+		$this->setWhere(array("(FIND_IN_SET(".$t[0].".id, (select GetFamilyTree(id) FROM users where id = ".$userId.")) or ".$t[0].".id =".$userId.")"), $t[0], false,true);
+		
+		$this->setColumns($t[0], $userCols);
+		$this->setColumns($t[0], array("@usrId := ".$t[0].".id as id, (SELECT count(*) from users where user_id = @usrId) as userCount"), true);
+		$this->setColumns($t[0], array("getParentName(".$t[0].".id) as manager, getParentName(".$t[0].".user_id) as admin, getParentId(".$t[0].".user_id) as admin_id"), true);
+		
+		return $t[0];
+	}
+	//$t[0] = $db->getUsers($table, $userId,$limit, $where, $like);
   
 }
 

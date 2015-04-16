@@ -29,12 +29,6 @@
 			
 			$data = $db->select(true); // true for totalRecords
 			
-			if($data['status'] == "success"){
-				if(isset($data['data'][0]['totalRecords'])){
-					$tootalDbRecords['totalRecords'] = $data['data'][0]['totalRecords'];
-					$data = array_merge($tootalDbRecords,$data);
-				}
-			}
 			echo json_encode($data);
 		}
 	}//end get

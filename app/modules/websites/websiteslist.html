@@ -57,7 +57,7 @@
 		<div ng-if="permission.customer_filter" class="col-sm-2">
 			<div class="bottomspace">
 				<label for="filterbycustomerid" class="control-label">Filter By CustomerName</label>
-					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatusFn('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatusFn('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList | filter: { userCount : 0 }">
 						<option value="">Select Customer</option>
 					</select>
 			</div>

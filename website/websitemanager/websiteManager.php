@@ -2,17 +2,20 @@
 
 class websiteManager{
 	private $domain;
-	function getDomain(){
-		return $domain = $_SERVER['SERVER_NAME'];
+	private $db;
+	function __construct(){
+		$this->domain = $_SERVER['SERVER_NAME'];
+		$this->db = new dbHelper;
 	}
+
 
 	function getConfig(){
 		try{
-			$db = new dbHelper;
 			$table = 'website';
-			$domain = $this->getDomain();
-			$where['domain_name'] = $domain;
-			$dbresult = $db->selectSingle($table, $where);
+			$where['domain_name'] = $this->domain;
+			$t0 = $this->db->setTable($table);
+			$this->db->setWhere($where, $t0);
+			$dbresult = $this->db->selectSingle();
 			
 			if($dbresult['status'] == 'success' && $dbresult['data'] != null) {
 				$dbresult = $dbresult['data'];

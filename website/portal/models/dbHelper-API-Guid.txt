@@ -48,5 +48,99 @@
 	-	parameter 3) associative array having column name & value as key & value
 	-	this method is used to update record/s from database
 	-	return true
+
 	
-	
+Using Stored Function
+SELECT @usrId := t1.id as id, (select count(id) from users where user_id = @usrId) as userCount, * from users where FIND_IN_SET(users.id, (select GetFamilyTree(id) FROM users where id = 1))
+
+// for child users
+DELIMITER $$
+DROP FUNCTION IF EXISTS `GetFamilyTree` $$
+CREATE FUNCTION `GetFamilyTree`(`GivenId` VARCHAR(50)) RETURNS varchar(1024) CHARSET latin1
+    DETERMINISTIC
+BEGIN
+
+    DECLARE rv,q,queue,queue_children,queue_names VARCHAR(1024);
+    DECLARE queue_length,pos INT;
+    DECLARE GivenSSN,front_ssn VARCHAR(64);
+
+    SET rv = '';
+
+    SELECT id INTO GivenSSN
+    FROM users
+    WHERE id = GivenId;
+    IF ISNULL(GivenSSN) THEN
+        RETURN ev;
+    END IF;
+
+    SET queue = GivenSSN;
+    SET queue_length = 1;
+
+    WHILE queue_length > 0 DO
+        IF queue_length = 1 THEN
+            SET front_ssn = queue;
+            SET queue = '';
+        ELSE
+            SET pos = LOCATE(',',queue);
+            SET front_ssn = LEFT(queue,pos - 1);
+            SET q = SUBSTR(queue,pos + 1);
+            SET queue = q;
+        END IF;
+        SET queue_length = queue_length - 1;
+        SELECT IFNULL(qc,'') INTO queue_children
+        FROM
+        (
+            SELECT GROUP_CONCAT(id) qc FROM users
+            WHERE user_id = front_ssn AND group_id <> '1'
+        ) A;
+        SELECT IFNULL(qc,'') INTO queue_names
+        FROM
+        (
+            SELECT GROUP_CONCAT(id) qc FROM users
+            WHERE user_id = front_ssn AND group_id <> '1'
+        ) A;
+        IF LENGTH(queue_children) = 0 THEN
+            IF LENGTH(queue) = 0 THEN
+                SET queue_length = 0;
+            END IF;
+        ELSE
+            IF LENGTH(rv) = 0 THEN
+                SET rv = queue_names;
+            ELSE
+                SET rv = CONCAT(rv,',',queue_names);
+            END IF;
+            IF LENGTH(queue) = 0 THEN
+                SET queue = queue_children;
+            ELSE
+                SET queue = CONCAT(queue,',',queue_children);
+            END IF;
+            SET queue_length = LENGTH(queue) - LENGTH(REPLACE(queue,',','')) + 1;
+        END IF;
+    END WHILE;
+
+    RETURN rv;
+
+END $$
+
+// for Parent users
+CREATE DEFINER=`root`@`localhost` FUNCTION `GetAncestry`(GivenID INT) RETURNS varchar(1024) CHARSET latin1
+    DETERMINISTIC
+BEGIN
+    DECLARE rv VARCHAR(1024);
+    DECLARE cm CHAR(1);
+    DECLARE ch INT;
+
+    SET rv = '';
+    SET cm = '';
+    SET ch = GivenID;
+    WHILE ch > 0 DO
+        SELECT IFNULL(user_id,-1) INTO ch FROM
+        (SELECT user_id FROM users WHERE id = ch) A;
+        IF ch > 0 THEN
+            SET rv = CONCAT(rv,cm,ch);
+            SET cm = ',';
+        END IF;
+    END WHILE;
+    RETURN rv;
+END
+

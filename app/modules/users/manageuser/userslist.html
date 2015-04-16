@@ -7,14 +7,17 @@
 			<th>Sr.No.</th>
 			<th>User Name</th>
 			<th>User Group</th>
-			<th>Email Id</th>
+			<th>Users</th>
+			<th>Manager</th>
+			<th>Admin</th>
+			<th>Email</th>
 			<th>Registered Date</th>
 			<th>Manage</th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="users in userList | orderBy:'id'">
 				<td>{{((usersListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
-				<td>{{users.username}}</td>
+				<td>{{users.name}}</td>
 				<td style="max-width:150px">
 				
 				<div class="input-group">
@@ -30,6 +33,9 @@
 					
 				</div>
 				</td>
+				<td>{{users.userCount}}</td>
+				<td><span ng-if="users.manager">{{users.manager}}</span><span ng-if="!users.manager">-</span></td>
+				<td><span ng-if="users.admin">{{users.admin}}</span><span ng-if="!users.admin">-</span></td>
 				<td>{{users.email}}</td>
 				<td>{{users.register_date}}</td>
 				<td>

@@ -47,18 +47,7 @@ define(['app'], function (app) {
 		$scope.delBizCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
-		if($rootScope.userDetails.group_name == "customer"){
-			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
-		}
-		if($rootScope.userDetails.group_name == "manager"){
-			$scope.userInfo = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
-		}
-		if($rootScope.userDetails.group_name == "admin"){
-			$scope.userInfo = {}; // these are URL parameters
-		}
-		if($rootScope.userDetails.group_name == "salesman"){
-			$scope.userInfo = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
-		}
+		$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		
 		$scope.hideDeleted = "";
 		
@@ -80,7 +69,7 @@ define(['app'], function (app) {
 		
 		$scope.pageChanged = function(page, featured) {
 			(featured) ? angular.extend($scope.businessParams, featured) : "";
-			dataService.get("/getmultiple/business/"+page+"/"+$scope.pageItems, $scope.businessParams)
+			dataService.get("getmultiple/business/"+page+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response) { //function for businesslist response			
 				$scope.bizList = response.data;			
 			});
@@ -91,7 +80,7 @@ define(['app'], function (app) {
 			$scope.filterStatus= {};
 			(colValue =="") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
 			angular.extend($scope.businessParams, $scope.filterStatus);
-			dataService.get("/getmultiple/business/1/"+$scope.pageItems, $scope.businessParams)
+			dataService.get("getmultiple/business/1/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response) {  //function for templatelist response
 				if(response.status == 'success'){
 					$scope.bizList = response.data;
@@ -113,7 +102,7 @@ define(['app'], function (app) {
 			angular.extend($scope.businessParams, $scope.filterStatus, $scope.search);
 			
 			if(colValue.length >= 4 || colValue ==""){
-				dataService.get("/getmultiple/business/1/"+$scope.pageItems, $scope.businessParams)
+				dataService.get("getmultiple/business/1/"+$scope.pageItems, $scope.businessParams)
 				.then(function(response) {  //function for templatelist response
 					if(response.status == 'success'){
 						$scope.bizList = response.data;
@@ -131,7 +120,7 @@ define(['app'], function (app) {
 		var businesslist = function(){
 			$scope.businessParams = {status: 1};
 			angular.extend($scope.businessParams, $scope.userInfo);
-			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
+			dataService.get("getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response){
 				if(response.status == 'success'){	
 					$scope.bizList=response.data;
@@ -185,7 +174,7 @@ define(['app'], function (app) {
 		var deletedbusiness = function(){
 			$scope.businessParams = {status: 0};
 			angular.extend($scope.businessParams, $scope.userInfo);
-			dataService.get("/getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
+			dataService.get("getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response){
 				if(response.status == 'success'){	
 					$scope.bizList = response.data;
