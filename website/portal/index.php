@@ -18,9 +18,8 @@ $app->get('/', function() use($app, $config, $twig, $portal) {
 	$template->display($response);
 });
 $app->get('/enquiry/:business/:business_id', function($business, $business_id) use($app, $config, $twig, $portal) {
-	
 	$business = $portal->decodeUrl($business); 
-	$business = $portal->decodeUrl($business); 
+	print_r($business_id);
 	$response['subject'] = "Enquiry from Apna Site: ".$business;
 	$response['business_id'] = $business_id;
 	$template = $twig->loadTemplate("enquiry.html");
@@ -35,12 +34,12 @@ $app->get('/search/data', function() use($app, $config, $twig, $portal) {
 	
 	$keyword = $portal->decodeUrl($keyword); 
 	$response = $portal->getDataByKeyword($keyword, true);
-	/* if($response['status'] == "success"){
+	if($response['status'] == "success"){
 		$template = $twig->loadTemplate("business.html");
 	}else{
 		$template = $twig->loadTemplate("error.html");
 	}
-	$template->display($response); */
+	$template->display($response); 
 	$app->response->headers->set('Content-Type', 'application/json');
 	echo json_encode($response);
 });
@@ -65,6 +64,7 @@ $app->get('/:category', function($category) use($app, $config, $twig, $portal) {
 	
 	$category = $portal->decodeUrl($category); 
 	$response = $portal->getCategoryTypes($category);
+
 	$template = $twig->loadTemplate("categorytypes.html");
 	$template->display($response);
 });
@@ -73,30 +73,27 @@ $app->get('/:category/:type', function($category, $type) use($app, $config, $twi
 	$category = $portal->decodeUrl($category);
 	$type = $portal->decodeUrl($type);
 	$response = $portal->getBusinessList($category, $type);
-	
-	/* if($response['status'] == "success"){
+	 if($response['status'] == "success"){
 		$template = $twig->loadTemplate("business.html");
 	}else{
 		$template = $twig->loadTemplate("error.html");
-	} */
-	$template = $twig->loadTemplate("business.html");
+	} 
+	//$template = $twig->loadTemplate("business.html");
 	$template->display($response);
 });
 
 $app->get('/:category/:type/:business/:id', function($category, $type, $business,$id) use($app, $config, $twig, $portal) {
 	$category = $portal->decodeUrl($category);
 	$type = $portal->decodeUrl($type);
+	
 	$business = $portal->decodeUrl($business);
 	$response = $portal->getBusiness($category, $type, $business,$id);
-	/* if($response['status'] == "success"){
+	 if($response['status'] == "success"){
 		$template = $twig->loadTemplate("viewbusiness.html");
 	}else{
 		$template = $twig->loadTemplate("error.html");
-	} */
-	$template = $twig->loadTemplate("viewbusiness.html");
-	
+	} 
 	$template->display($response);
-
 });
 
 $app->run();

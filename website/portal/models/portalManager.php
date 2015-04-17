@@ -104,7 +104,7 @@ class portalManager{
             $response["data"] = null;
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
-		print_r($response);
+		
 		return $response;
 	}
 	
@@ -129,7 +129,7 @@ class portalManager{
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		}catch(Exception $e){
-            $response["status"] = "error";
+           $response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
@@ -146,15 +146,14 @@ class portalManager{
 			$t0 = $this->db->setTable("business");
 			$this->db->setWhere($where, $t0);
 			
-			$cols = array("*");
+			$cols = array("category, type,id,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info");
 			$this->db->setColumns($t0, $cols);
 			
 			$data = $this->db->select();
-			
-			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
+			 $response["status"] = "success";
 			$response['title'] = "this is twig template";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
@@ -175,7 +174,6 @@ class portalManager{
 			$where['id'] = $id ;
 			$t0 = $this->db->setTable("business");
 			$this->db->setWhere($where, $t0);
-			
 			$cols = array("*");
 			$this->db->setColumns($t0, $cols);
 			

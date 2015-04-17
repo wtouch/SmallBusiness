@@ -16,6 +16,7 @@
 			<!-- <meta name="fragment" content="!"/>
 			<meta name="description" content="">
 			<meta name="keywords" content=""> -->
+			{% if template.template_params%}
 			<style>	
 				.nav-pills>li.active>a,.nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus,.nav>li>a:hover, .nav>li>a:focus, .dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,.nav .open>a, .nav .open>a:hover, .nav .open>a:focus,.Hearing {
 					color:{{template.template_params.color}};
@@ -44,6 +45,7 @@
 					color:{{template.template_params.dark_color}};
 				}
 			</style>
+			{%endif%}
 		{% endblock %}
 	</head>
 	<body>

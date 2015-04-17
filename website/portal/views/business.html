@@ -26,8 +26,7 @@
 					<span ng-if="{{x.verified}}" tooltip="Business Verified"><img src="{{path}}/img/verified.png"/> </span>
 					<span href="#" ng-if="{{x.featured}}" tooltip="Featured Business "><img src="{{path}}/img/feature.png"/> </span>
 					<a href="/enquiry/{{x.business_name | replace({' ' : '-'})}}/{{x.business_id}}" class="btn btn-primary">
-					Enqiry 
-					</a>
+					Enqiry 		{{data.business_id}}			</a>
 				</div>	</h3>
 			 </div>
 				<div class="panel-body">
@@ -69,10 +68,10 @@
 										{% endfor %}
 									</td>
 								</tr>
-								<tr>
+								<!--tr>
 									<td>Description</td>
 									<td>{{x.business_info.description |slice(0, 250) }}</td>
-								</tr>
+								</tr-->
 							</table>
 						</div>
 						<div class="media-right col-md-3">
