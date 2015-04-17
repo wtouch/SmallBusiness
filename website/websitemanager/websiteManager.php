@@ -64,7 +64,10 @@ class websiteManager{
 				$templateDetails["template_params"] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/website/templates/default/default/templateParams.json'),true);
 				
 			}else{
-				$dbresult = $db->selectSingle($table, $where);
+				$t0 = $this->db->setTable($table);
+				$this->db->setWhere($where, $t0);
+				$dbresult = $this->db->selectSingle();
+				//$dbresult = $db->selectSingle($table, $where);
 				if($dbresult['status'] == "success"){
 					$templateDetails["template_name"] = $dbresult['data']['template_name'];
 					$templateDetails["template_category"] = $dbresult['data']['category'];
@@ -98,21 +101,23 @@ class websiteManager{
 			// get data for view from product table, business table, users table, template table
 			$where['id'] = $config['website_config']->business_id;
 			
-			$businessTable = "business";
+			$table = "business";
+			$t0 = $this->db->setTable($table);
+			$this->db->setWhere($where, $t0);
+			$this->db->setColumns($t0, array("*"));
 			
-			// inner join [table name][first table column name] = [second table column name]
-			$innerJoin['users']['user_id'] = "id";
+			$selectInnerJoinCols['name'] = "owner_name";
+			$selectInnerJoinCols['email'] = "owner_email";
+			$selectInnerJoinCols['address'] = "owner_address";
+			$selectInnerJoinCols['country'] = "owner_country";
+			$selectInnerJoinCols['state'] = "owner_state";
+			$selectInnerJoinCols['phone'] = "owner_phone";
+			$selectInnerJoinCols['website'] = "owner_website";
+			$selectInnerJoinCols['fax'] = "owner_fax";
 			
-			$selectInnerJoinCols['users']['user_id']['name'] = "owner_name";
-			$selectInnerJoinCols['users']['user_id']['email'] = "owner_email";
-			$selectInnerJoinCols['users']['user_id']['address'] = "owner_address";
-			$selectInnerJoinCols['users']['user_id']['country'] = "owner_country";
-			$selectInnerJoinCols['users']['user_id']['state'] = "owner_state";
-			$selectInnerJoinCols['users']['user_id']['phone'] = "owner_phone";
-			$selectInnerJoinCols['users']['user_id']['website'] = "owner_website";
-			$selectInnerJoinCols['users']['user_id']['fax'] = "owner_fax";
-			
-			$businessData = $db->selectSingleJoin($businessTable, $where, $innerJoin, $selectInnerJoinCols, $leftJoin = null, $selectLeftJoinCols = null);
+			$t1 = $this->db->setJoinString("INNER JOIN","users", array("id"=>$t0.".user_id"));
+			$this->db->setColumns($t1, $selectInnerJoinCols);
+			$businessData = $this->db->selectSingle();
 			$bizData = array();
 			if($businessData['status'] != "success"){
 				throw new Exception("Business DB Table Error: ".$dbresult['message']);
@@ -124,7 +129,8 @@ class websiteManager{
 			
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
-            $response["data"] = $bizDataa;
+            $response["data"] = $bizData;
+			
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
@@ -135,7 +141,7 @@ class websiteManager{
 	
 	function getProductData($routes=null, $featured=null){
 		try{
-			$id = null;
+			/* $id = null;
 			if($routes != null){
 				$route = explode("/", $routes);
 				if(count($route) > 1){
@@ -146,7 +152,7 @@ class websiteManager{
 					$id = null;
 				}
 			}
-			$db = new dbHelper;
+			
 			$config = $this->getConfig();
 			if($config['status'] == 'success'){
 				$config = $config['data'];
@@ -167,7 +173,7 @@ class websiteManager{
 			// inner join select column [table name][join col name][column to select] = column alias
 			$selectInnerJoinColsProd['business']['business_id']['business_name'] = "business_name";
 			
-			$productDbData = $db->selectJoin($productTable, $whereProd, $limit=null, $likeFilter=null, $innerJoinProd, $selectInnerJoinColsProd, $leftJoin = null, $selectLeftJoinCols = null);
+			$productDbData = $db->select($productTable, $whereProd, $limit=null, $likeFilter=null, $innerJoinProd, $selectInnerJoinColsProd, $leftJoin = null, $selectLeftJoinCols = null);
 			
 			if($productDbData['status'] != "success"){
 				throw new Exception("Product DB Table Error: ".$productDbData['message']);
@@ -185,10 +191,10 @@ class websiteManager{
 						array_push($productData,$DataArray);
 				}
 			}
-			if(count($productData) <= 1 && $id != null) $productData = $productData[0];
+			if(count($productData) <= 1 && $id != null) $productData = $productData[0]; */
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
-            $response["data"] = $productData;
+            $response["data"] = array("vilas");
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();

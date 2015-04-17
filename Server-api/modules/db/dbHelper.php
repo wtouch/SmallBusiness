@@ -293,7 +293,7 @@ class dbHelper {
 				//$response['totalRecords']= $totalRecords;
 				$response["message"] = count($rows)." rows selected.";
                 $response["status"] = "success";
-                $response["query"] = $this->getQueryString(true);
+                $response["query"] = $this->getQueryString();
 				$response["data"] = $rows;
 				$response["totalRecords"] = $totalRecords['totalRecords'];
             }

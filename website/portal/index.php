@@ -34,7 +34,7 @@ $app->get('/search/data', function() use($app, $config, $twig, $portal) {
 	}
 	
 	$keyword = $portal->decodeUrl($keyword); 
-	$response = $portal->getDataByKeyword($keyword);
+	$response = $portal->getDataByKeyword($keyword, true);
 	/* if($response['status'] == "success"){
 		$template = $twig->loadTemplate("business.html");
 	}else{
