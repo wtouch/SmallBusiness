@@ -255,14 +255,14 @@ define(['app'], function (app) {
 					for(var x in oldObj){
 						var newArrObj = {};
 						angular.forEach(oldObj[x], function(value, key) {
-						  this[key] = (angular.isObject(value)) ? value :(value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
+						  this[key] = (angular.isObject(value) || angular.isNumber(value)) ? value :(value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
 						}, newArrObj);
 						newObj.push(newArrObj);
 					}
 				}else{
 					var newObj = {};
 					angular.forEach(oldObj, function(value, key) {
-					  this[key] = (angular.isObject(value)) ? value :(value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
+					  this[key] = (angular.isObject(value) || angular.isNumber(value)) ? value :(value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
 					}, newObj);
 				}
 				return newObj;
@@ -273,6 +273,7 @@ define(['app'], function (app) {
 			
 			obj.rememberPass = function(remb){
 				$cookieStore.put('auth',remb);
+				sessionStorage.clear();
 			}
 			obj.logout = function(){
 				obj.get('/login/logout').then(function(response){

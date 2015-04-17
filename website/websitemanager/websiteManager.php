@@ -3,19 +3,29 @@
 class websiteManager{
 	private $domain;
 	private $db;
+	private $config;
+	private $tempDetails;
+	private $routes;
+	private $business;
 	function __construct(){
 		$this->domain = $_SERVER['SERVER_NAME'];
 		$this->db = new dbHelper;
 	}
 
-
 	function getConfig(){
 		try{
-			$table = 'website';
-			$where['domain_name'] = $this->domain;
-			$t0 = $this->db->setTable($table);
-			$this->db->setWhere($where, $t0);
-			$dbresult = $this->db->selectSingle();
+			
+			if(!isset($_SESSION['config'])){
+				$table = 'website';
+				$where['domain_name'] = $this->domain;
+				$t0 = $this->db->setTable($table);
+				$this->db->setWhere($where, $t0);
+				$dbresult = $this->db->selectSingle();
+				$_SESSION['config'] = $dbresult;
+				$dbresult = $_SESSION['config'];
+			}else{
+				$dbresult = $_SESSION['config'];
+			}
 			
 			if($dbresult['status'] == 'success' && $dbresult['data'] != null) {
 				$dbresult = $dbresult['data'];
@@ -44,7 +54,6 @@ class websiteManager{
 	}
 	function getTemplate(){
 		try{
-			$db = new dbHelper;
 			$config = $this->getConfig();
 			if($config['status'] == 'success'){
 				$config = $config['data'];
@@ -64,10 +73,15 @@ class websiteManager{
 				$templateDetails["template_params"] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/website/templates/default/default/templateParams.json'),true);
 				
 			}else{
-				$t0 = $this->db->setTable($table);
-				$this->db->setWhere($where, $t0);
-				$dbresult = $this->db->selectSingle();
-				//$dbresult = $db->selectSingle($table, $where);
+				if(!isset($_SESSION['tempDetails'])){
+					$t0 = $this->db->setTable($table);
+					$this->db->setWhere($where, $t0);
+					$dbresult = $this->db->selectSingle();
+					$_SESSION['tempDetails'] = $dbresult;
+				}else{
+					$dbresult = $_SESSION['tempDetails'];
+				}
+				
 				if($dbresult['status'] == "success"){
 					$templateDetails["template_name"] = $dbresult['data']['template_name'];
 					$templateDetails["template_category"] = $dbresult['data']['category'];
