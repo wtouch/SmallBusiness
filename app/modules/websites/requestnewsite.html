@@ -1,19 +1,19 @@
 <h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>
 	<form name="requestsiteForm" class="form-horizontal" role="form" ng-submit="requestsiteForm.$valid" novalidate="novalidate" ng-init="setFormScope(this)">
-		<div class="form-group" ng-if="userDetails.group_name == 'admin' || userDetails.group_name == 'salesman' || userDetails.group_name == 'manager' || userDetails.group_name == 'superadmin'" ng-model="reqnewsite.user_id">
+		<div class="form-group" ng-if="userDetails.group_name != 'customer'"ng-model="addbusiness.user_id">
 		<label for="customer" class="col-sm-2 control-label">Customer</label>
 		<div class="col-sm-7">
-				<select class="form-control" name="customer" id="customer"  ng-model="reqnewsite.user_id" ng-options="item.id as item.name for item in customerList" required>
+				<select class="form-control" name="customer" id="customer"  ng-model="addbusiness.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " required>
 					<option value="">Select Customer</option>
 				</select>
-			<span class="help-block" ng-show="requestsiteForm.customer.$dirty && requestsiteForm.customer.$invalid">
-				<span ng-show="requestsiteForm.customer.$error.required" class="text-danger">Customer is required.</span>
+			<span class="help-block" ng-show="addbusinessForm.customer.$dirty && addbusinessForm.customer.$invalid">
+				<span ng-show="addbusinessForm.customer.$error.required" class="text-danger">Customer is required.</span>
 			</span>	
 		</div>
 		<div class="col-sm-2">
 			<a href="#/dashboard/users/adduser" class="btn btn-default">Add New User</a>
 		</div>
-		</div>
+	</div>
 		<span ng-if="userDetails.group_name == 'salesman'">
 			<input type="hidden" class="form-control" ng-model="addbusiness.salesman_id" ng-init="addbusiness.salesman_id = userDetails.id" readonly/>
 			<input type="hidden" class="form-control" ng-model="addbusiness.manager_id" ng-init="addbusiness.manager_id = userDetails.user_id" readonly/>

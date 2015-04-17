@@ -94,7 +94,6 @@ define(['app'], function (app) {
 			});
 		};
 			
-		
 		$scope.searchFilter = function(statusCol, colValue) {
 			$scope.search = {search: true};
 			$scope.filterStatus= {};

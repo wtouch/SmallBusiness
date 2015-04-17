@@ -152,7 +152,6 @@ define(['app'], function (app) {
 			$scope.selectUsers = response.data;
 		});	
 		
-		
 		//code for search filter
 		$scope.searchFilter = function(statusCol, colValue) {
 			$scope.search = {search: true};

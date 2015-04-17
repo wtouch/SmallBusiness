@@ -15,19 +15,19 @@
 		}else{
 			$where=array(); // this will used for user specific data selection.
 			$limit[0] = $pageNo; // from which record to select
-			$limit[0] = $records; // how many records to select
+			$limit[1] = $records; // how many records to select
 			
 			((isset($_GET['business_id'])) && ($_GET['business_id']!=="")) ? $where['business_id'] = $_GET['business_id'] : "";
 			
-			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
+			
 			((isset($_GET['type'])) && ($_GET['type']!=="")) ? $where['type'] = $_GET['type'] : "";
 			
 			$t0 = $db->setTable("product");
 			$db->setWhere($where, $t0);
-			$db->setWhere($like, $t0, true);
+			
 			$db->setLimit($limit);
 			
-			$data = $db->select(true); // true for totalRecords
+			$data = $db->select(); // true for totalRecords
 			
 			echo json_encode($data);
 		}

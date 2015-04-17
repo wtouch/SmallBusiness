@@ -16,7 +16,7 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.currentDate = dataService.currentDate;
 		$scope.permission = $rootScope.userDetails.permission.website_module;
-		
+		$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		console.log($scope.permission);
 		
         //for display form parts
@@ -84,11 +84,6 @@ define(['app'], function (app) {
 			});
 		};
 		
-		
-			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
-		
-	
-		
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
 			(where) ? angular.extend($scope.websiteParams, where, $scope.userInfo) : "";
@@ -99,8 +94,9 @@ define(['app'], function (app) {
 			});
 		};
 		// for users list/customerList
-		angular.extend($scope.userInfo, {status: 1})
-		dataService.get("getmultiple/user/1/500", $scope.userInfo)
+		var userStatus = {status: 1};
+		angular.extend(userStatus, $scope.userInfo)
+		dataService.get("getmultiple/user/1/500", userStatus)
 		.then(function(response) {  //function for websitelist response
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
@@ -321,9 +317,11 @@ define(['app'], function (app) {
 				requestnewsite();
 				break;
 			case 'requestedsitelist':
+			console.log($scope.websitePart);
 				requestedsitelist();
 				break;
 			default:
+			
 				websiteslist();
 		};
 	

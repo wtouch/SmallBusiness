@@ -60,7 +60,6 @@ define(['app'], function (app) {
 			$location.path('/dashboard/templates/listoftemplates');
 		}
 		
-		
 		//This code for apply/buy button{trupti}
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
@@ -128,30 +127,23 @@ define(['app'], function (app) {
 				}
 			});
 		};
-		
-		if($rootScope.userDetails.group_name == "customer"){
-			$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
-		}
-		if($rootScope.userDetails.group_name == "manager" || $rootScope.userDetails.group_name == "admin"){
-			$scope.userInfo = {manager_id : $rootScope.userDetails.id}; // these are URL parameters
-		}
-		if($rootScope.userDetails.group_name == "superadmin"){
-			$scope.userInfo = {}; // these are URL parameters
-		}
-		if($rootScope.userDetails.group_name == "salesman"){
-			$scope.userInfo = {salesman_id : $rootScope.userDetails.id}; // these are URL parameters
-		}
 	
 		//this code block for modal
 		$scope.openModel = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
+				console.log(response);
+				dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+				.then(function(user) {  //function for websitelist response
+					console.log(user);
 					var modalDefaults = {
 						templateUrl: url,	// apply template to modal
 						size : 'lg'
 					};
 					var modalOptions = {
-						tempList: dataService.parse(response.data),
+						userDetails : $rootScope.userDetails,
+						tempList : dataService.parse(response.data),
+						customerList : (user.data),
 						myTemplateData : {},
 						slider : {},
 						editIndex : {},
@@ -201,11 +193,12 @@ define(['app'], function (app) {
 							//array.push(data);
 						}
 					};
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					dataService.post("post/mytemplate",modalOptions.myTemplateData).then(function(response) {
-						$scope.alerts.push({type: response.status,msg: response.message});
-					}); 
+					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+						dataService.post("post/mytemplate",modalOptions.myTemplateData).then(function(response) {
+							$scope.alerts.push({type: response.status,msg: response.message});
+						}); 
 					
+					});
 				});
 			});
 		};

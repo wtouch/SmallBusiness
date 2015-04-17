@@ -2,7 +2,7 @@
 	<div class="form-group" ng-if="userDetails.group_name != 'customer'"ng-model="addbusiness.user_id">
 		<label for="customer" class="col-sm-3 control-label">Customer</label>
 		<div class="col-sm-7">
-				<select class="form-control" name="customer" id="customer"  ng-model="addbusiness.user_id" ng-options="item.id as item.name for item in customerList" required>
+				<select class="form-control" name="customer" id="customer"  ng-model="addbusiness.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " required>
 					<option value="">Select Customer</option>
 				</select>
 			<span class="help-block" ng-show="addbusinessForm.customer.$dirty && addbusinessForm.customer.$invalid">
@@ -13,7 +13,6 @@
 			<a href="#/dashboard/users/adduser" class="btn btn-default">Add New User</a>
 		</div>
 	</div>
-	
 	<span ng-if="userDetails.group_name == 'customer'">
 		<input type="hidden" class="form-control" ng-model="addbusiness.user_id" ng-init="addbusiness.user_id = userDetails.id" readonly/>
 	</span> 

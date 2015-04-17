@@ -32,7 +32,7 @@
 			$userCols['username'] = "username";
 			$user = $db->getUsers($userId,$userCols);
 			$db->setLimit($limit);
-			$table = $db->setJoinString("INNER JOIN", "business", array("user_id"=>$user.".id"));
+			$table = $db->setJoinString("INNER JOIN", "my_template", array("user_id"=>$user.".id"));
 			$db->setWhere($where, $table);
 			$db->setWhere($like, $table, true);
 			$selectInnerJoinCols[0] = "*";
