@@ -43,18 +43,16 @@ class portalManager{
 			if(is_array($keyword)){
 				foreach($keyword as $key => $value){
 					$like[$key] = $value;
-					//$like['business_name'] = $value;
 				}
 			}else{
 				$like['keywords'] = $keyword;
-				$like['business_name'] = $keyword;
+				//$like['business_name'] = $keyword;
 			}
-			
-			
 			
 			$t0 = $this->db->setTable("business");
 			
 			$this->db->setWhere($where, $t0);
+			$this->db->setWhere($like, $t0,true);
 			
 			$cols = array("*");
 			$this->db->setColumns($t0, $cols);

@@ -45,12 +45,13 @@ $app->get('/search/data', function() use($app, $config, $twig, $portal) {
 	echo json_encode($response);
 });
 
-$app->get('/search/:keyword/:business_name', function($keyword,$business_name) use($app, $config, $twig, $portal) {
+$app->get('/search/:keyword(/:business_name)', function($keyword,$business_name=null) use($app, $config, $twig, $portal) {
 	// this will replace [-] with [space]
 	//to add [-] from template use - replace({' ' : '-'}) as a filter
-	//$keyword = $portal->decodeUrl($keyword);
+	$keyword = $portal->decodeUrl($keyword);
 	//$business_name = $portal->decodeUrl($business_name);
 	$response = $portal->getDataByKeyword($keyword);
+	
 	if($response['status'] == "success"){
 		$template = $twig->loadTemplate("business.html");
 	}else{
@@ -72,6 +73,7 @@ $app->get('/:category/:type', function($category, $type) use($app, $config, $twi
 	$category = $portal->decodeUrl($category);
 	$type = $portal->decodeUrl($type);
 	$response = $portal->getBusinessList($category, $type);
+	
 	/* if($response['status'] == "success"){
 		$template = $twig->loadTemplate("business.html");
 	}else{

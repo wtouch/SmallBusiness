@@ -24,8 +24,7 @@ define(['angular',
 		}
 		
 		$scope.getSearchData = function(inputValue, city){
-			$scope.searchParams = {
-				keywords : inputValue,
+			$scope.searchParams = {				
 				city : city,
 				business_name : inputValue
 			}

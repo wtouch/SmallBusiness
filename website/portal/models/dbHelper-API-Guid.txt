@@ -51,7 +51,7 @@
 
 	
 Using Stored Function
-SELECT @usrId := t1.id as id, (select count(id) from users where user_id = @usrId) as userCount, * from users where FIND_IN_SET(users.id, (select GetFamilyTree(id) FROM users where id = 1))
+SELECT @usrId := t1.id as id, (SELECT count(*) from users where user_id = @usrId) as userCount, t1.* from users as t1 where FIND_IN_SET(t1.id, (select GetFamilyTree(id) FROM users where id = 1))
 
 // for child users
 DELIMITER $$
@@ -121,9 +121,11 @@ BEGIN
     RETURN rv;
 
 END $$
+DELIMITER ;
 
 // for Parent users
-CREATE DEFINER=`root`@`localhost` FUNCTION `GetAncestry`(GivenID INT) RETURNS varchar(1024) CHARSET latin1
+DELIMITER $$
+CREATE FUNCTION `GetAncestry`(GivenID INT) RETURNS varchar(1024) CHARSET latin1
     DETERMINISTIC
 BEGIN
     DECLARE rv VARCHAR(1024);
@@ -142,5 +144,67 @@ BEGIN
         END IF;
     END WHILE;
     RETURN rv;
-END
+END $$
+DELIMITER ;
 
+// Get Parent user's Group Name
+DELIMITER $$
+CREATE FUNCTION `getGroupName`(`groupId` INT(20)) RETURNS varchar(64) CHARSET latin1
+    NO SQL
+BEGIN
+    DECLARE rv VARCHAR(50);
+	DECLARE uid INT;
+	DECLARE gid INT;
+	
+	SELECT IFNULL(user_id,-1) INTO uid FROM
+    (SELECT user_id FROM users WHERE id = groupId) A;
+
+	
+
+    SELECT IFNULL(group_name,-1) INTO rv FROM
+    (SELECT g.group_name FROM `users` as u
+left join user_group as g on g.id = u.group_id where u.id = uid) C;
+    RETURN rv;
+
+
+
+END $$
+DELIMITER ;
+
+// Get Parent & grand parent User Name
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `getParentName`(`userId` INT) RETURNS varchar(64) CHARSET latin1
+    NO SQL
+BEGIN
+    DECLARE rv VARCHAR(50);
+	DECLARE uid INT;
+	DECLARE gid INT;
+	
+	SELECT IFNULL(user_id,-1) INTO uid FROM
+    (SELECT user_id FROM users WHERE id = userId) A;
+
+	
+
+    SELECT IFNULL(name,-1) INTO rv FROM
+    (SELECT g.name FROM `users` as u
+left join users as g on g.id = u.user_id where u.id = userId) C;
+    RETURN rv;
+END $$
+DELIMITER ;
+
+// get Parent's parent id (admin_id)
+DELIMITER $$
+CREATE FUNCTION `getParentId`(`userId` INT) RETURNS varchar(64) CHARSET latin1
+    NO SQL
+BEGIN
+    DECLARE rv VARCHAR(50);
+	DECLARE uid INT;
+	DECLARE gid INT;
+	SELECT IFNULL(user_id,-1) INTO uid FROM
+    (SELECT user_id FROM users WHERE id = userId) A;
+    SELECT IFNULL(id,-1) INTO rv FROM
+    (SELECT g.id FROM `users` as u
+left join users as g on g.id = u.user_id where u.id = userId) C;
+    RETURN rv;
+END  $$
+DELIMITER ;
