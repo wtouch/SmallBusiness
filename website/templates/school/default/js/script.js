@@ -4,11 +4,11 @@ var hostUrl = '/website/templates/default/';
 var app = angular.module('myApp', ['ngRoute']);
 
 app.config(function($routeProvider, $locationProvider) {
-  $routeProvider
+  /* $routeProvider
    .when('/:view', {
     templateUrl: function(rd) { return hostUrl+"/"+rd.view+'.html';}
   })
-  .otherwise({ redirectTo: '/home' });
+  .otherwise({ redirectTo: '/home' }); */
 });
 app.controller('enquiryController', function($scope,$http, $route, $location) {
 	$scope.hostUrl = hostUrl;
@@ -20,28 +20,21 @@ app.controller('enquiryController', function($scope,$http, $route, $location) {
 	var min = today.getMinutes();
 	var sec = today.getSeconds();
 	$scope.mailSent = false;
-	$http.get("/sitedata").success(function(response){
-		if(response.status == "success"){
-			$scope.config = response.config;
-			$scope.hostUrl = response.config.http_template_path + response.webTemplate.template_folder+"/";
-			$scope.business = response.webData.business;
-			$scope.products = response.webData.products;
-			$scope.services = response.webData.services;
-			$scope.routes = response.webRoutes;
-			$scope.enquiry = {
-				user_id : $scope.business.user_id,
-				to_email : {to : $scope.business.owner_email},
+	$scope.enquiry = {
 				subject : 'Website Enquiry',
 				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 			};
-			console.log($scope.enquiry);
-		}
-	});
-	
 	$scope.postData = function(enquiry){
-		$http.post("../server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
 				$scope.mailSent = true;
 		});
 	};
-
-});
+});	
+	app.controller('aboutController', function($scope,$http, $route, $location) {
+		var s = $location.path();
+		$scope.url = s.substr(1);
+		$scope.makeActive = function(url){
+			$scope.id = url;
+		}
+		$scope.makeActive($scope.url);
+	});
