@@ -141,7 +141,7 @@ class websiteManager{
 	
 	function getProductData($routes=null, $featured=null){
 		try{
-			/* $id = null;
+			$id = null;
 			if($routes != null){
 				$route = explode("/", $routes);
 				if(count($route) > 1){
@@ -166,14 +166,17 @@ class websiteManager{
 			$whereProd['business_id'] = $config['website_config']->business_id;
 			$whereProd['user_id'] = $config['user_id'];
 			
-			$productTable = "product";
-			// inner join [table name][first table column name] = [second table column name]
-			$innerJoinProd['business']['business_id'] = "id";
+			$table = "product";
+			$t0 = $this->db->setTable($table);
+			$this->db->setWhere($whereProd, $t0);
+			$this->db->setColumns($t0, array("*"));
 			
-			// inner join select column [table name][join col name][column to select] = column alias
-			$selectInnerJoinColsProd['business']['business_id']['business_name'] = "business_name";
+			$t1 = $this->db->setJoinString("INNER JOIN","business", array("id"=>$t0.".business_id"));
+			$selectInnerJoinCols['business_name'] = "business_name";
+			$this->db->setColumns($t1, $selectInnerJoinCols);
 			
-			$productDbData = $db->select($productTable, $whereProd, $limit=null, $likeFilter=null, $innerJoinProd, $selectInnerJoinColsProd, $leftJoin = null, $selectLeftJoinCols = null);
+			
+			$productDbData = $this->db->select();
 			
 			if($productDbData['status'] != "success"){
 				throw new Exception("Product DB Table Error: ".$productDbData['message']);
@@ -191,10 +194,10 @@ class websiteManager{
 						array_push($productData,$DataArray);
 				}
 			}
-			if(count($productData) <= 1 && $id != null) $productData = $productData[0]; */
+			if(count($productData) <= 1 && $id != null) $productData = $productData[0];
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
-            $response["data"] = array("vilas");
+            $response["data"] = $productData;
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
