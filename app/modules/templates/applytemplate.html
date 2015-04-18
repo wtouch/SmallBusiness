@@ -53,43 +53,48 @@
 				
 				
 				<div ng-if="modalOptions.tempList.template_params" ng-init="templateList.template_params = modalOptions.tempList.template_params" >	
-					<div  class="form-group" ng-if="modalOptions.tempList.template_params.color">
+					<!-- <div  class="form-group" > -->
 						<label  for="color" class="col-sm-2 control-label">Color</label>
-						<div class="col-sm-9">
+						<div class="col-sm-2" ng-if="modalOptions.tempList.template_params.color">
+						<label  for="color" class="col-sm-3 control-label">Color</label>
 							<input type="color" id="color" class="form-control" name="color"  ng-model="templateList.template_params.color">
 						</div>
-					</div>
-					<div  class="form-group" ng-if="modalOptions.tempList.template_params.background_color">
-						<label  for="light_color" class="col-sm-2 control-label">Light Color</label>
-						<div class="col-sm-9">
+						
+						
+					<!-- </div> -->
+					<!-- <div  class="form-group" > -->
+						
+						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.background_color">
+						<label  for="color" class="col-sm-3 control-label">Light</label>
 							<input type="color" id="light_color" class="form-control" name="light_color"  ng-model="templateList.template_params.light_color">
 						</div>
-					</div>
-					<div  class="form-group" ng-if="modalOptions.tempList.template_params.dark_color">
-						<label  for="dark_color" class="col-sm-2 control-label">Dark Color</label>
-						<div class="col-sm-9">
+					<!-- </div> -->
+					<!-- <div  class="form-group" > -->
+						
+						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.dark_color">
+						<label  for="dark_color" class="col-sm-2 control-label">Dark</label>
 							<input type="color" id="dark_color" class="form-control" name="dark-color" ng-model="templateList.template_params.dark_color">
 						</div>
+					<!-- </div> -->
 					</div>
 					<div  class="form-group" ng-if="modalOptions.tempList.template_params.background_color">
 						<label  for="background_color" class="col-sm-2 control-label">Background Color</label>
-						<div class="col-sm-9">
+						<div class="col-sm-2">
+						<label  for="background_color" class="col-sm-3 control-label">Color</label>
 							<input type="color" id="background_color" class="form-control" name="background_color"  ng-model="templateList.template_params.background_color">
 						</div>
-					</div>
-					<div  class="form-group" ng-if="modalOptions.tempList.template_params.background-color-light">
-						<label  for="background-color-light" class="col-sm-2 control-label">Background Color Light</label>
-						<div class="col-sm-9">
+					
+						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.background-color-light">
+						<label  for="color" class="col-sm-3 control-label">Light</label>
 							<input type="background-color-light" id="background-color-light" class="form-control" name="background-color-light"  ng-model="templateList.template_params.background-color-light">
 						</div>
-					</div>
-					<div  class="form-group" ng-if="modalOptions.tempList.template_params.background-color-dark">
-						<label  for="background-color-dark" class="col-sm-2 control-label">Background Color Dark</label>
-						<div class="col-sm-9">
+					
+						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.background-color-dark">
+						<label  for="color" class="col-sm-3 control-label">Dark</label>
 							<input type="background-color-dark" id="background-color-dark" class="form-control" name="background-color-dark" ng-model="templateList.template_params.background-color-dark">
 						</div>
 					</div>
-				</div>
+		</div>
 				
 				<!-- <div class="form-group">
 				 <label  for="color" class="col-sm-2 control-label">Color</label> 

@@ -21,15 +21,21 @@
 			$where = array(); // this will used for user specific data selection.
 			$limit = array($pageNo, $records);
 			
-			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
 			((isset($_GET['validity'])) && ($_GET['validity']!=="")) ? $where['validity'] = $_GET['validity'] : "";
 			((isset($_GET['expired'])) && ($_GET['expired']!=="")) ? $where['expired'] = $_GET['expired'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			
-			$t0 = $db->setTable("website");
-			$db->setWhere($where, $t0);
-			$db->setWhere($like, $t0, true);
+			$userId = $_GET['user_id'];
+			$userCols['name'] = "name";
+			$userCols['username'] = "username";
+			$user = $db->getUsers($userId,$userCols);
+			
+			$table = $db->setJoinString("INNER JOIN", "website", array("user_id"=>$user.".id"));
+			$db->setWhere($where, $table);
+			$db->setWhere($like, $table, true);
 			$db->setLimit($limit);
+			$selectInnerJoinCols[0] = "*";
+			$db->setColumns($table, $selectInnerJoinCols);
 			
 			$data = $db->select(true); // true for totalRecords
 			
