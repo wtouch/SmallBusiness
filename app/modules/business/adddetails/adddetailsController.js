@@ -65,7 +65,7 @@ define(['app'], function (app) {
 			object[data.heading] = JSON.parse(dtlObj);
 			$scope.headingDisabled = false;
 			$scope.infra = false;
-			$scope[resetObj] = { desc : { image  : {} }};
+			$scope[resetObj] = { desc : { }};
 			console.log(data);
 		}
 		
@@ -135,9 +135,9 @@ define(['app'], function (app) {
 		$scope.uploadtesti = function(files,path,userInfo, picArr){ // this function for uploading files
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
-						$scope.testimonials.desc.testimage = data.data;
+						$scope.testimonials.desc.image = data.data;
 						
-						console.log($scope.testimonials.desc.testimage);
+						console.log($scope.testimonials.desc.image);
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}

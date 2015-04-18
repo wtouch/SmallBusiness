@@ -42,12 +42,12 @@
 			<!-- This will show thumbnails & progress of images -->
 			<file-preview url="testimage"></file-preview>
 			<!-- This button will show if file/s selected -->
-			<button ng-show="testimage" ng-click="uploadtesti(testimage,path,userInfo, testimonials.testimage)" type="button">Upload</button>
+			<button ng-show="testimage" ng-click="uploadtesti(testimage,path,userInfo, testimonials.image)" type="button">Upload</button>
 			<!-- This hidden input will store image path in array after successful uploading -->
-			<input type="hidden" ng-model="testimonials.desc.testimage">
+			<input type="hidden" ng-model="testimonials.desc.image">
 		</div>
 		<div class="col-sm-4">
-			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + testimonials.desc.testimage.file_relative_path}}" width="150px" />
+			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + testimonials.desc.image.file_relative_path}}" width="150px" />
 		</div>
 	</div>
 	<div class="form-group">	
@@ -115,7 +115,7 @@
 					<td>{{key}}</td>
 					<td>
 					<ul class="list-unstyled">
-						<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + value.testimage.file_relative_path}}" width="150px" />
+						<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" />
 					</ul>
 					</td>
 					<td class="tdwidth">

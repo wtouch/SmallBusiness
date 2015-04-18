@@ -163,6 +163,7 @@ class websiteManager{
             $response["message"] = $e->getMessage();
             $response["data"] = null;
 		}
+		print_r($response);
 		return $response;
 	}
 	
