@@ -37,7 +37,7 @@ define(['app'], function (app) {
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		$scope.temp = dataService.config.template;
-		$scope.path = "template/"+$scope.userInfo.user_id; // path to store images on server
+		$scope.path = "template/"; // path to store images on server
 		//$scope.path = "template/"+$rootScope.userDetails.id
 		$scope.userinfo = $scope.userInfo;
 		$scope.reqtemp = {
@@ -126,143 +126,6 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status,msg: response.message});
 				}
 			});
-		};
-	
-		//this code block for modal
-		$scope.openModel = function (url, tempId) {
-			dataService.get("getsingle/template/"+tempId)
-			.then(function(response) {
-				console.log(response);
-				dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
-				.then(function(user) {  //function for websitelist response
-					console.log(user);
-					var modalDefaults = {
-						templateUrl: url,	// apply template to modal
-						size : 'lg'
-					};
-					var modalOptions = {
-						userDetails : $rootScope.userDetails,
-						tempList : dataService.parse(response.data),
-						customerList : (user.data),
-						myTemplateData : {},
-						slider : {},
-						editIndex : {},
-						files : {},
-						path : $scope.path,
-						userInfo : $scope.userInfo,
-						formData : function(templateData){
-							console.log(templateData);
-							modalOptions.myTemplateData = templateData;
-						},
-						deleteSlide : function(index,object){
-							var index = object.indexOf(index);
-							object.splice(index, 1); 
-						},
-						addSlide : function(data, array){
-							var pushdata = JSON.stringify(data);
-							array.push(JSON.parse(pushdata));
-							modalOptions.slider = {};
-							for(var x in data){
-								delete data[x];
-							}
-						},
-						upload : function(files,path,userInfo,picArr){
-							console.log(picArr);
-							upload.upload(files,path,userInfo,function(data){
-								
-								if(data.status === 'success'){
-									modalOptions.slider.image = data.data.file_relative_path;
-									console.log(data.data);
-								}else{
-								$scope.alerts.push({type: data.status, msg: data.message});
-							}
-						
-						}); 
-						},
-						generateThumb : function(files){  
-							upload.generateThumbs(files);
-						},
-						
-						updateSlide : function(index, array, data){
-							var pushdata = JSON.stringify(data);
-							array[index.index] = JSON.parse(pushdata);
-							for(var x in data){
-								delete data[x];
-							}
-							delete index['index'];
-							//array.push(data);
-						}
-					};
-					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-						dataService.post("post/mytemplate",modalOptions.myTemplateData).then(function(response) {
-							$scope.alerts.push({type: response.status,msg: response.message});
-						}); 
-					
-					});
-				});
-			});
-		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
-		};
-
-		//open model for template img
-		$scope.openTemp = function (url, tempId) {
-			dataService.get("getsingle/template/"+tempId)
-			.then(function(response) {
-
-					var modalDefaults = {
-						templateUrl: url,	// apply template to modal
-						size : 'lg'
-					};
-					 var modalOptions = {
-						tempList: dataService.parse(response.data)  // assign data to modal
-					}; 
-				modalService.show(modalDefaults, modalOptions).then(function (result) {
-						console.log("modalOpened");
-				});
-				
-			});
-		};
-		//open model for My template img
-		$scope.openMyTemp = function (url, tempId) {
-			dataService.get("getsingle/mytemplate/"+tempId)
-			.then(function(response) {
-					var modalDefaults = {
-						templateUrl: url,	// apply template to modal
-						size : 'lg'
-					};
-					 var modalOptions = {
-						tempList: dataService.parse(response.data)  // assign data to modal
-					}; 
-				modalService.show(modalDefaults, modalOptions).then(function (result) {
-						console.log("modalOpened");
-				});
-		
-			});
-		};
-		
-		//modal for open scrible details.
-		$scope.openTab = function (url, tempId) {
-			dataService.get("getsingle/template/"+tempId)
-			.then(function(response) {
-				
-				var modalDefaults = {
-					templateUrl: url,	// apply template to modal
-					size : 'lg'
-				};
-				var modalOptions = {
-					tempList: dataService.parse(response.data)  // assign data to modal
-				};
-				console.log(dataService.parse(response.data));
-				
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					console.log("modalOpened");
-				});
-			});
-		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
 		};
 
 		//for edit the price of template
@@ -466,17 +329,32 @@ define(['app'], function (app) {
 				};
 				$scope.templates = response.data;
 			});
+			
+			//open model for My template img
+			$scope.openMyTemp = function (url, tempId) {
+			dataService.get("getsingle/mytemplate/"+tempId)
+			.then(function(response) {
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					 var modalOptions = {
+						tempList: dataService.parse(response.data)  // assign data to modal
+					}; 
+				modalService.show(modalDefaults, modalOptions).then(function (result) {
+						console.log("modalOpened");
+				});
 		
+			});
+			};
+			//end modal
 		
-			dataService.get("getsingle/template/"+$routeParams.id)
+			/* dataService.get("getsingle/template/"+$routeParams.id)
 			.then(function(response) {
 				$scope.templateData = dataService.parse(response.data);
 				if($scope.templateData.template_params == "") $scope.templateData.template_params = {};
 		
-			});	 
-			
-			
-		
+			});	  */
 		//this code block for modal
 		$scope.editTempParamsModel = function (url, tempId) {
 			dataService.get("getsingle/mytemplate/"+tempId)
@@ -573,6 +451,105 @@ define(['app'], function (app) {
 				};
 			});
 			
+			//open model for template img
+			$scope.openTemp = function (url, tempId) {
+			dataService.get("getsingle/template/"+tempId)
+			.then(function(response) {
+
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					 var modalOptions = {
+						tempList: dataService.parse(response.data)  // assign data to modal
+					}; 
+				modalService.show(modalDefaults, modalOptions).then(function (result) {
+						console.log("modalOpened");
+				});
+				
+			});
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+		
+		//this code block for modal
+		$scope.openModel = function (url, tempId) {
+			dataService.get("getsingle/template/"+tempId)
+			.then(function(response) {
+				console.log(response);
+				dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+				.then(function(user) {  //function for websitelist response
+					console.log(user);
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					var modalOptions = {
+						userDetails : $rootScope.userDetails,
+						tempList : dataService.parse(response.data),
+						customerList : (user.data),
+						myTemplateData : {},
+						slider : {},
+						editIndex : {},
+						files : {},
+						path : $scope.path,
+						userInfo : $scope.userInfo,
+						formData : function(templateData){
+							console.log(templateData);
+							modalOptions.myTemplateData = templateData;
+						},
+						deleteSlide : function(index,object){
+							var index = object.indexOf(index);
+							object.splice(index, 1); 
+						},
+						addSlide : function(data, array){
+							var pushdata = JSON.stringify(data);
+							array.push(JSON.parse(pushdata));
+							modalOptions.slider = {};
+							for(var x in data){
+								delete data[x];
+							}
+						},
+						upload : function(files,path,userInfo,picArr){
+							console.log(picArr);
+							upload.upload(files,path,userInfo,function(data){
+								
+								if(data.status === 'success'){
+									modalOptions.slider.image = data.data.file_relative_path;
+									console.log(data.data);
+								}else{
+								$scope.alerts.push({type: data.status, msg: data.message});
+							}
+						
+						}); 
+						},
+						generateThumb : function(files){  
+							upload.generateThumbs(files);
+						},
+						
+						updateSlide : function(index, array, data){
+							var pushdata = JSON.stringify(data);
+							array[index.index] = JSON.parse(pushdata);
+							for(var x in data){
+								delete data[x];
+							}
+							delete index['index'];
+							//array.push(data);
+						}
+					};
+					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+						dataService.post("post/mytemplate",modalOptions.myTemplateData).then(function(response) {
+							$scope.alerts.push({type: response.status,msg: response.message});
+						}); 
+					
+					});
+				});
+			});
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
 		};
 		
 		var custometemplates = function(){
@@ -587,6 +564,52 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 				};
 			});
+	
+			//open model for template img
+			$scope.openTemp = function (url, tempId) {
+				dataService.get("getsingle/template/"+tempId)
+				.then(function(response) {
+
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					 var modalOptions = {
+						tempList: dataService.parse(response.data)  // assign data to modal
+					}; 
+						modalService.show(modalDefaults, modalOptions).then(function (result) {
+						console.log("modalOpened");
+					});
+				
+				});
+			};
+			$scope.ok = function () {
+				$modalOptions.close('ok');
+			}; 
+			
+			//modal for open scrible details.
+			$scope.openTab = function (url, tempId) {
+			dataService.get("getsingle/template/"+tempId)
+			.then(function(response) {
+				
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+					size : 'lg'
+				};
+				var modalOptions = {
+					tempList: dataService.parse(response.data)  // assign data to modal
+				};
+				console.log(dataService.parse(response.data));
+				
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log("modalOpened");
+				});
+			});
+		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
+		//end modal
 		}
 		
 		var requestcustomtemplates = function(){
@@ -600,7 +623,13 @@ define(['app'], function (app) {
 				//$scope.reqtemp.custom = {custom:1};
 				 dataService.post("post/template",reqtemp)
 				.then(function(response) {  //function for response of request temp
-					$scope.reset();
+					if(response.status == "success"){
+						$scope.reset();
+						setTimeout(function(){
+							$location.path("/dashboard/templates/mytemplates");
+						},500);
+					}
+					$scope.alerts.push({type: data.status, msg: data.message});
 				});
 			}
 		}
@@ -661,7 +690,7 @@ define(['app'], function (app) {
 					if(response.status == "success"){
 						$scope.reset();
 						setTimeout(function(){
-							$location.path("#/dashboard/templates/mytemplates");
+							$location.path("/dashboard/templates/mytemplates");
 						},500);
 					}
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -673,7 +702,7 @@ define(['app'], function (app) {
 					if(response.status == "success"){
 						$scope.reset();
 						setTimeout(function(){
-							$location.path("#/dashboard/templates/mytemplates");
+							$location.path("/dashboard/templates/mytemplates");
 						},500);
 					}
 					$scope.alerts.push({type: response.status, msg: response.message});
