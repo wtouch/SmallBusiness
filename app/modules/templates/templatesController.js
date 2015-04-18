@@ -407,7 +407,7 @@ define(['app'], function (app) {
 			});
 		};
 		
-		//delete button for cahnge status for template
+		//delete button for change status for template
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
 				dataService.put("put/template/"+id, $scope.deletedData)

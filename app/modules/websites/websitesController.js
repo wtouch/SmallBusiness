@@ -84,6 +84,7 @@ define(['app'], function (app) {
 			});
 		};
 		
+		
 		// All $scope methods
         $scope.pageChanged = function(page,where) { // Pagination page changed
 			(where) ? angular.extend($scope.websiteParams, where, $scope.userInfo) : "";
@@ -179,10 +180,7 @@ define(['app'], function (app) {
 			$location.path('/dashboard/websites/websiteslist');
 		}
 		
-		//for tooltip
-		$scope.dynamicTooltip = function(status, active, notActive){
-			return (status==1) ? active : notActive;
-		};
+		
         
         // switch functions
         var requestnewsite = function(){
@@ -282,6 +280,12 @@ define(['app'], function (app) {
 				$scope.website = response.data;
 			});
 			
+			
+			//This code for apply/buy button{trupti}
+			$scope.dynamicTooltip = function(status, active, notActive){
+				return (status==1) ? active : notActive;
+			};
+		
 			//delete button {trupti}
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
