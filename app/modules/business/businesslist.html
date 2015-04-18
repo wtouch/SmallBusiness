@@ -73,8 +73,9 @@
 							<div class="btn-toolbar" role="toolbar" aria-label="...">
 								<div class="btn-group">
 									<a href="#/dashboard/business/adddetails/{{x.id}}" class="btn btn-primary responsive" tooltip="Business Details"> View Details</a>
-								</div>	
-								<div class="btn-group" ng-if="userDetails.permission.verify_business">
+								</div>
+								<!--ng-if="userDetails.permission.verify_business"-->
+								<div class="btn-group" ng-if="userDetails.group_name == 'superadmin'" >
 										<button type="button" tooltip="{{dynamicTooltip(x.verified, 'No Verify', 'Verify')}}" ng-class="(x.verified==1) ? 'btn btn-primary' : 'btn btn-warning'" ng-model="x.verified" ng-change="verify(x.id, x.verified)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-ok"></span></button>
 								</div>
 								<div class="btn-group" ng-if="permission.featured_business">

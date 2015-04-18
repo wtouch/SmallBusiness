@@ -6,13 +6,13 @@ define(['app'], function (app) {
     // This is controller for this view
 	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
 		
-		dataService.get("getsingle/template/"+$routeParams.id)
+		/* dataService.get("getsingle/template/"+$routeParams.id)
 		.then(function(response) {
 			$scope.templateData = dataService.parse(response.data);
 			if($scope.templateData.template_params == "") $scope.templateData.template_params = {};
 		
-		});	
-		
+		});	 
+		 */
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  //function for websitelist response
 			if(response.status == 'success'){
@@ -466,7 +466,17 @@ define(['app'], function (app) {
 				};
 				$scope.templates = response.data;
 			});
+		
+		
+			dataService.get("getsingle/template/"+$routeParams.id)
+			.then(function(response) {
+				$scope.templateData = dataService.parse(response.data);
+				if($scope.templateData.template_params == "") $scope.templateData.template_params = {};
+		
+			});	 
 			
+			
+		
 		//this code block for modal
 		$scope.editTempParamsModel = function (url, tempId) {
 			dataService.get("getsingle/mytemplate/"+tempId)
