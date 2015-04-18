@@ -188,13 +188,9 @@ define(['app'], function (app) {
         // switch functions
         var requestnewsite = function(){
 			$scope.reqnewsite = {};
-			//post method for insert data in request site form{trupti}
+
 			$scope.postData = function(reqnewsite) { 
-			//$scope.reqnewsite = {};
-			//$scope.requestsiteForm.$setPristine();
-			console.log(reqnewsite);
-			$scope.userInfo=$scope.userInfo;
-			$scope.reqnewsite.user_id= $rootScope.userDetails.id;
+			
 			$scope.reqnewsite.date = $scope.currentDate;
 				 dataService.post("post/website",reqnewsite)
 				.then(function(response) {
