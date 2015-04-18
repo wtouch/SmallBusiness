@@ -74,7 +74,7 @@ define(['app'], function (app) {
 					size : 'lg'
 				};
 				var modalOptions = {
-					website: response.data  // assign data to modal
+					website: dataService.parse(response.data)
 				};
 				
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
