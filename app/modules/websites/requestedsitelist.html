@@ -110,63 +110,76 @@
 					<td>{{x.expiry_date}}</td>
 					<td>{{x.status}}</td>
 					<td>
-					<div class="btn-toolbar" role="toolbar" aria-label="...">	
-							<a ng-click="open('modules/websites/viewWebsite.html', x.id)" class="btn btn-primary responsive"> View Details</a>
-							
-							<button ng-if="permission.publish_domain" type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted( x.id, x.status)"" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class = "glyphicon glyphicon-remove"></span></button>
-							
-							<button  ng-if="permission.expiry" type="button" tooltip="{{dynamicTooltip(x.expired, 'expired', 'Reactive')}}"ng-class="(x.expired==1) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="expire(x.id, x.expired)" btn-checkbox btn-checkbox-true="'0'" btn-checkbox-false="'1'"><span class="glyphicon glyphicon-ok"></span></button>
-							<div ng-if="permission.change_settings" class="btn-group">
-								<a type="button" tooltip="Website setting" class="btn btn-info glyphicon glyphicon-cog" ng-click="getWebsitedetails(config)" href="#/dashboard/websites/websettings/{{x.id}}"></a>	
+					<div class="btn-toolbar" role="toolbar">
+							<div class="btn-group">					
+								<!-- View Website Details -->
+								<a ng-click="open('modules/websites/viewWebsite.html', x.id)" tooltip="View Details" class="btn btn-primary responsive"><span class="glyphicon glyphicon-info-sign"></span></a>
 							</div>
+							
+							<!-- Website Settings -->
 							<div class="btn-group">
-								<a href="{{'http://'+x.domain_name}}" target="_blank" class="btn btn-primary">Prieview
+								<a ng-if="permission.change_settings" type="button" tooltip="Website setting" class="btn btn-info glyphicon glyphicon-cog" ng-click="getWebsitedetails(config)" href="#/dashboard/websites/websettings/{{x.id}}"></a>	
+							</div>
+							
+							<!-- Preview Website -->
+							<div class="btn-group">
+								<a href="{{'http://'+x.domain_name}}" tooltip="Preview" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>
 								</a>		
 							</div>
+							
+							<!-- Renew Website -->
 							<div ng-class="(drop) ? 'btn-group open' : 'btn-group'">
-								  <button type="button" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop" class="btn btn-danger">Renew</button>
+								  <button ng-if="permission.renew" type="button" tooltip="Renew Website" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop" class="btn btn-danger"><span class="glyphicon glyphicon-repeat"></span></button>
 								  <ul ng-show="drop" class="dropdown-menu" role="menu">
 									<form style="padding:3px" name="renewForm">
-									<div class="form-group">
-										<label for="validity" class="control-label">Filter By validity</label>
-										<select id="validity" class="form-control" ng-model="validity"  >
-											<option value="">Filter by Validity</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">10</option>
-										</select>
-									</div>
-									<button type="submit" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop; method()" class="btn btn-danger">Renew</button>
+										<div class="form-group">
+											<label for="validity" class="control-label">Filter By validity</label>
+											<select id="validity" class="form-control" ng-model="validity">
+												<option value="">Filter by Validity</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+											</select>
+										</div>
+										<button type="submit" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop; method()" class="btn btn-danger">Renew</button>
 									</form>
 									<form ng-if="permission.renew" style="padding:3px" name="renewalrequestForm">
-									<div class="form-group">
-										<label for="validity" class="control-label">Filter By validity</label>
-										<select id="validity" class="form-control" ng-model="validity"  >
-											<option value="">Filter by Validity</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">10</option>
-										</select>
-									</div>
-									<button type="submit" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop; method()" class="btn btn-danger">Renewal Request</button>
+										<div class="form-group">
+											<label for="validity" class="control-label">Filter By validity</label>
+											<select id="validity" class="form-control" ng-model="validity" >
+												<option value="">Filter by Validity</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10</option>
+											</select>
+										</div>
+										<button type="submit" ng-model="drop" ng-init="drop = false" ng-click="drop = !drop; method()" class="btn btn-danger">Renewal Request</button>
 									</form>
-								  </ul>
+								</ul>
 							</div>
-					</div>
+							<div class="btn-group">		
+								<!-- Website Status -->
+								<button ng-if="permission.publish_domain" type="button" tooltip="{{dynamicTooltip(x.status, 'Delete', 'Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)"" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class = "glyphicon glyphicon-remove"></span></button>
+							</div>
+							<div class="btn-group">	
+								<!-- Website Expired Status -->
+								<button ng-if="permission.expiry" type="button" tooltip="{{dynamicTooltip(x.expired, 'Reactive', 'Mark Expired')}}"ng-class="(x.expired==1) ? 'btn btn-danger' : 'btn btn-success'" ng-model="x.expired" ng-change="expire(x.id, x.expired)" btn-checkbox btn-checkbox-true="'0'" btn-checkbox-false="'1'"><span class="glyphicon glyphicon-ok"></span></button>
+							</div>
+						</div>
 					</td>
 					</tr>
 				</tbody>					

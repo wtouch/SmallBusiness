@@ -7,7 +7,7 @@ define(['app'], function (app) {
 	var websettingsController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
 	// all $scope object goes here
 		$scope.permission = $rootScope.userDetails.permission.website_module;
-		$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.website_id = $routeParams.id;
 		$scope.currentDate = dataService.currentDate;
 		$scope.alerts = [];
@@ -21,7 +21,7 @@ define(['app'], function (app) {
 		
 			dataService.get("getmultiple/business/1/100",{user_id : response.data.user_id})
 			.then(function(business) {  //function for template list response
-			//$scope.businessList.user_id=$scope.userDetails.user_id;
+			//$scope.businessList.user_id=$scope.userInfo.user_id;
 				if(business.status == 'success'){
 					$scope.businessList = business.data;
 					

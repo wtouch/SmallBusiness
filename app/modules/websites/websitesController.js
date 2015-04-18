@@ -144,8 +144,7 @@ define(['app'], function (app) {
 			}
 		};	 
 		
-		$scope.showInput = function($event,opened) 		
-		{
+		$scope.showInput = function($event,opened){
 			$scope.websiteParams = {};
 			$event.preventDefault();
 			$event.stopPropagation();
@@ -227,7 +226,7 @@ define(['app'], function (app) {
 				if(activate == 2){
 					$scope.deletedData = {status : status, registered_date : $scope.currentDate};
 				}else{
-					
+					$scope.deletedData = {status : status};
 				}
 				
 				dataService.put("put/website/"+id, $scope.deletedData)
