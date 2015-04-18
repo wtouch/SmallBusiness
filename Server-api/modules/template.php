@@ -48,8 +48,6 @@
 				$db->setLimit($limit);
 			}
 			
-			
-			
 			$data = $db->select(true); // true for totalRecords
 			
 			echo json_encode($data);
