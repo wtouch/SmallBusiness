@@ -28,7 +28,7 @@
 				.nav-pills>li>a, .panel-default>.panel-heading,.sidebar .nav-pills>li>a:hover,.sidebar .nav-pills>.active>a{
 					background-color: {{template.template_params.background_color_light}};
 				}
-				.news,footer{
+				.news,.footer{
 					background-color: {{template.template_params.background_color_dark}};
 				}
 				.news,.Hearing,.sidebar .nav-pills>li>a{
@@ -49,19 +49,18 @@
 		{% endblock %}
 	</head>
 	<body>
+		
 		<div class="container">
 			<div class="row">
 					{% include 'includes/navbar.html' ignore missing %}
 				<div class="{{ (data) ? 'col-sm-8' : 'col-sm-12' }}">
 					{% block carousal %}{% endblock %}
 					{% block content %}{% endblock %}
-					<footer class="row">
-						<div class="col-sm-12 text-center">
-							{% block footer %}
-								&copy; Copyright 2015 by <a href="http://wtouch.in">Web Touch India Solutions</a>.
-							{% endblock %}
-						</div>
-					</footer>
+					<div class="row footer text-center">
+						{% block footer %}
+							&copy; Copyright 2015 by <a href="http://wtouch.in">Web Touch India Solutions</a>.
+						{% endblock %}
+					</div>
 				</div>
 			</div>
 		</div>
