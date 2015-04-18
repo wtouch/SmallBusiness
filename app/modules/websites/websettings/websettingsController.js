@@ -46,8 +46,7 @@ define(['app'], function (app) {
 					var config = (response.data.config!='') ? JSON.parse(response.data.config) : { google_map : {}};
 					if(config.google_map == undefined) config.google_map = {};
 					$scope.config = config;
-					console.log(response.data);
-					//console.log(config.google_map.latitude);
+					
 					if(config.google_map.latitude != undefined && config.google_map.longitude != undefined){
 						$scope.initGoogleMap(config.google_map.latitude, config.google_map.longitude, 18);
 					}else{
@@ -93,7 +92,7 @@ define(['app'], function (app) {
 					dragend: function (marker, eventName, args) {
 						$scope.config.google_map.latitude = $scope.marker.coords.latitude;
 						$scope.config.google_map.longitude = $scope.marker.coords.longitude;
-						console.log($scope.config.google_map);
+						
 						$scope.marker.options = {
 							draggable: true,
 							labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
@@ -108,7 +107,7 @@ define(['app'], function (app) {
 			places_changed: function (searchBox) {
 				var place = searchBox.getPlaces();
 				if (!place || place == 'undefined' || place.length == 0) {
-					console.log('no place data :(');
+					
 					return;
 				}
 				$scope.initGoogleMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), 15);
@@ -134,7 +133,6 @@ define(['app'], function (app) {
 					$scope.error = "An unknown error occurred."
 					break;
 			}
-			console.log($scope.error);
 			$scope.$apply();
 		}
 		$scope.getLocation = function () {

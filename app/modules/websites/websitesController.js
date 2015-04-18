@@ -17,7 +17,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.permission = $rootScope.userDetails.permission.website_module;
 		$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
-		console.log($scope.permission);
+		
 		
         //for display form parts
         $scope.websitePart = $routeParams.websitePart;
@@ -40,7 +40,7 @@ define(['app'], function (app) {
 						$scope.formScope.requestsiteForm.domain_name.$setValidity('available', false);
 						$scope.domainAvailableMsg = "Domain not available please select another!";
 					}
-					console.log(response[domain_name].status);
+					
 				})
 			}else{
 				$scope.formScope.requestsiteForm.domain_name.$setValidity('available', false);
@@ -57,7 +57,7 @@ define(['app'], function (app) {
 						$scope.formScope.requestsiteForm.subdomain.$setValidity('available', false);
 						$scope.domainAvailableMsg = "Domain not available please select another!";
 					}
-					console.log(response.status);
+					
 				})
 			}else{
 				$scope.formScope.requestsiteForm.domain_name.$setValidity('available', false);
@@ -76,7 +76,7 @@ define(['app'], function (app) {
 				var modalOptions = {
 					website: response.data  // assign data to modal
 				};
-				console.log(response.data);
+				
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					console.log("modalOpened");
 				}); 
@@ -90,7 +90,7 @@ define(['app'], function (app) {
 			dataService.get("getmultiple/website/"+page+"/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  //function for websitelist response
 				$scope.website = response.data;
-				console.log($scope.website);
+				
 			});
 		};
 		// for users list/customerList
@@ -115,7 +115,7 @@ define(['app'], function (app) {
 			if(showStatus.length >= 4 || showStatus == ""){
 			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  //function for websitelist response
-			console.log(response);
+			
 				if(response.status == 'success'){
 					$scope.website = response.data;
 					$scope.totalRecords = response.totalRecords;
@@ -131,8 +131,8 @@ define(['app'], function (app) {
 		$scope.changeStatus={};
 		$scope.editDomainName = function(colName, colValue, id, editStatus){
 			$scope.changeStatus[colName] = colValue;
-			console.log(colValue);
-			console.log($scope.changeStatus);
+			
+			
 				if(editStatus==0){
 				 dataService.put("put/website/"+id,$scope.changeStatus)
 				.then(function(response) { 
@@ -239,7 +239,7 @@ define(['app'], function (app) {
 			//Expire button {Dnyaneshwar}
 			$scope.expire = function(id, expired){
 				$scope.expiredData = {expired : expired};
-				console.log($scope.expiredData);
+				
 				dataService.put("put/website/"+id, $scope.expiredData)
 				.then(function(response) { //function for businesslist response
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -295,7 +295,7 @@ define(['app'], function (app) {
 			//Expire button {Dnyaneshwar}
 			$scope.expire = function(id, expired){
 				$scope.expiredData = {expired : expired};
-				console.log($scope.expiredData);
+				
 				dataService.put("put/website/"+id, $scope.expiredData)
 				.then(function(response) { //function for businesslist response
 					$scope.alerts.push({type: response.status, msg: response.message});
@@ -312,7 +312,7 @@ define(['app'], function (app) {
 				requestnewsite();
 				break;
 			case 'requestedsitelist':
-			console.log($scope.websitePart);
+			
 				requestedsitelist();
 				break;
 			default:
