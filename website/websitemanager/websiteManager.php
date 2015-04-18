@@ -34,8 +34,15 @@ class websiteManager{
 				$config['website_config'] = json_decode($dbresult['config']);
 				$config['user_id'] = $dbresult['user_id'];
 				$config['expired'] = $dbresult['expired'];
+				
 				if($dbresult['expired'] == 1){
 					throw new Exception('Website is expired please renew soon!');
+				}
+				if($dbresult['status'] != 1){
+					throw new Exception('Website is not activated please contact your administrator!');
+				}
+				if($dbresult['config'] == ""){
+					throw new Exception('Please add website details!');
 				}
 			}else{
 				throw new Exception('Website not registered!');
@@ -113,7 +120,13 @@ class websiteManager{
 				throw new Exception($config['message']);
 			}
 			// get data for view from product table, business table, users table, template table
-			$where['id'] = $config['website_config']->business_id;
+			//$where['id'] = $config['website_config']->business_id;
+			
+			if(property_exists ( $config['website_config'] , 'business_id')) {
+				$where['id'] = $config['website_config']->business_id;
+			}else{
+				throw new Exception("Please add website details!");
+			}
 			
 			$table = "business";
 			$t0 = $this->db->setTable($table);
@@ -170,6 +183,13 @@ class websiteManager{
 			$config = $this->getConfig();
 			if($config['status'] == 'success'){
 				$config = $config['data'];
+				//print_r($config['website_config']);
+				if(property_exists($config['website_config'] , 'business_id')) {
+					$whereProd['business_id'] = $config['website_config']->business_id;
+				}else{
+					throw new Exception("Please add website details!");
+				}
+				
 			}else{
 				throw new Exception($config['message']);
 			}
@@ -177,7 +197,9 @@ class websiteManager{
 			if($id != null) $whereProd['id'] = $id;
 			if($featured != null) $whereProd['featured'] = $featured;
 			if(isset($productType)) $whereProd['type'] = $productType;
-			$whereProd['business_id'] = $config['website_config']->business_id;
+			
+			
+			//$whereProd['business_id'] = $config['website_config']->business_id;
 			$whereProd['user_id'] = $config['user_id'];
 			
 			$table = "product";

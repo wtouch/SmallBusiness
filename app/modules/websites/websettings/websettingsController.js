@@ -12,33 +12,35 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.alerts = [];
 		//this is for get business name from business
-		dataService.get("getmultiple/business/1/100",$scope.userDetails)
-		.then(function(response) {  //function for template list response
-		//$scope.businessList.user_id=$scope.userDetails.user_id;
-			if(response.status == 'success'){
-				$scope.businessList = response.data;
-				
-			}else{
-				
-				$scope.alerts.push({type: response.status, msg: "You didn't added any business! Please add business first."});
-			}
-		});
 		
-		//this is for get business name from business{trupti}
-		dataService.get("getmultiple/mytemplate/1/100",$scope.userDetails)
-		.then(function(response) {  //function for template list response
-			if(response.status == 'success'){
-				$scope.templateList = response.data;
-			}else{
-				$scope.alerts.push({type: response.status, msg: "You don't have any template! Please get free template or buy template first."});
-			}
-		});
 		
 		//code for edit website details{trupti}
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
 		dataService.get("getsingle/website/"+$routeParams.id)
 		.then(function(response) {  //function for my templates response
-		console.log(response);
+		
+			dataService.get("getmultiple/business/1/100",{user_id : response.data.user_id})
+			.then(function(business) {  //function for template list response
+			//$scope.businessList.user_id=$scope.userDetails.user_id;
+				if(business.status == 'success'){
+					$scope.businessList = business.data;
+					
+				}else{
+					
+					$scope.alerts.push({type: business.status, msg: "You didn't added any business! Please add business first."});
+				}
+			});
+			
+			//this is for get business name from business{trupti}
+			dataService.get("getmultiple/mytemplate/1/100",{user_id : response.data.user_id})
+			.then(function(template) {  //function for template list response
+				if(template.status == 'success'){
+					$scope.templateList = template.data;
+				}else{
+					$scope.alerts.push({type: template.status, msg: "You don't have any template! Please get free template or buy template first."});
+				}
+			});
+		
 			if(response.status == 'success'){
 				
 					var config = (response.data.config!='') ? JSON.parse(response.data.config) : { google_map : {}};
