@@ -4,6 +4,7 @@
 		private $web;
 		private $tmplConfig;
 		private $twig;
+		private $path;
 		function __construct(){
 			$this->web = new websiteManager;
 			$this->tmplConfig['host'] = "http://".$_SERVER['HTTP_HOST'];
@@ -15,33 +16,38 @@
 			$this->tmplConfig['template_folder'] = "default";
 			$this->tmplConfig['template_root_path_folder'] = $this->tmplConfig['template_root_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
 			$this->tmplConfig['template_host_path_folder'] = $this->tmplConfig['template_host_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
-			$loader = new Twig_Loader_Filesystem($this->tmplConfig['template_root_path_folder']);
-			// initialize Twig environment
-			$this->twig = new Twig_Environment($loader);
+			$this->path = $this->tmplConfig['template_host_path_folder']."/";
+			
 		}
 		function setConfig($property){
 			foreach($property as $key => $value){
 				$this->tmplConfig[$key] = $value;
 			}
+			$this->tmplConfig['template_category'] = $property['template_category'];
+			$this->tmplConfig['template_folder'] = $property['template_folder'];
 			$this->tmplConfig['template_root_path_folder'] = $this->tmplConfig['template_root_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
 			$this->tmplConfig['template_host_path_folder'] = $this->tmplConfig['template_host_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
-			$loader = new Twig_Loader_Filesystem($this->tmplConfig['template_root_path_folder']);
-			// initialize Twig environment
-			$this->twig = new Twig_Environment($loader);
+			
+			
 			return $this->tmplConfig;
 		}
 		function getConfig(){
+			//echo $this->tmplConfig['template_root_path_folder'];
 			return $this->tmplConfig;
 		}
 		
 		function getTemplate($route){
 			$route = explode("/", $route);
 			$template = $this->web->getTemplate();
+			
 			if($template['status']=='success'){
 				//print_r($template['data']);
 				$this->setConfig(array('template_category'=>$template['data']['template_category'], 'template_folder' => $template['data']['template_name']));
-				
 			}
+			$this->path = $this->tmplConfig['template_host_path_folder']."/";
+			$loader = new Twig_Loader_Filesystem($this->tmplConfig['template_root_path_folder']);
+			// initialize Twig environment
+			$this->twig = new Twig_Environment($loader);
 			
 			if(count($route) > 1){
 				$route = $route[0];
@@ -74,7 +80,7 @@
 				if(isset($data['featured_products'])) $responseDt['featured_products'] = $data['featured_products'];
 				if(isset($data['services'])) $responseDt['services'] = $data['services'];
 				if(isset($data['products'])) $responseDt['products'] = $data['products'];
-				$responseDt['path'] = $this->tmplConfig['template_host_path_folder']."/";
+				$responseDt['path'] = $this->path;
 				
 				//print_r($responseDt['data']);
 				$response["status"] = "success";
@@ -85,9 +91,10 @@
 				$response["status"] = "error";
 				$response["message"] = $e->getMessage();
 				$response["data"] = null;
-				$response["path"] = $this->tmplConfig['template_host_path_folder']."/";
+				$response["path"] = $this->path;
 				$response["title"] = "Error!";
 			}
+			//echo $response["path"];
 			return $response;
 		}
 		function displayTemplate($route){

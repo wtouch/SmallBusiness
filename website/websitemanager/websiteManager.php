@@ -15,17 +15,17 @@ class websiteManager{
 	function getConfig(){
 		try{
 			
-			if(!isset($_SESSION['config'])){
+			//if(!isset($_SESSION['config'])){
 				$table = 'website';
 				$where['domain_name'] = $this->domain;
 				$t0 = $this->db->setTable($table);
 				$this->db->setWhere($where, $t0);
 				$dbresult = $this->db->selectSingle();
-				$_SESSION['config'] = $dbresult;
+				/* $_SESSION['config'] = $dbresult;
 				$dbresult = $_SESSION['config'];
 			}else{
 				$dbresult = $_SESSION['config'];
-			}
+			} */
 			
 			if($dbresult['status'] == 'success' && $dbresult['data'] != null) {
 				$dbresult = $dbresult['data'];
@@ -80,14 +80,14 @@ class websiteManager{
 				$templateDetails["template_params"] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/website/templates/default/default/templateParams.json'),true);
 				
 			}else{
-				if(!isset($_SESSION['tempDetails'])){
+				//if(!isset($_SESSION['tempDetails'])){
 					$t0 = $this->db->setTable($table);
 					$this->db->setWhere($where, $t0);
 					$dbresult = $this->db->selectSingle();
-					$_SESSION['tempDetails'] = $dbresult;
-				}else{
+					//$_SESSION['tempDetails'] = $dbresult;
+				/* }else{
 					$dbresult = $_SESSION['tempDetails'];
-				}
+				} */
 				
 				if($dbresult['status'] == "success"){
 					$templateDetails["template_name"] = $dbresult['data']['template_name'];
