@@ -9,33 +9,31 @@
 {% include 'includes/header.html' ignore missing %}
 <main>
 	<div class="row">
-		<!--div class="col-md-3">
-			<div class="btn-group-vertical leftlnk" role="group" aria-label="...">
-				{% for x in data %}
-				<button type="button" class="btn btn-primary active"> {{x.category}}</button>
-					<button type="button" class="btn btn-default">{{x.type}}</button>
-				{% endfor %}
-			</div>
-		</div-->
-		<div class="col-md-12 col-xs-12">
+	
+		<div class="col-md-12 col-xs-12" ng-controller="enquiryController">
 			{% for x in data %}
 			<div class="panel panel-default">
 			  <div class="panel-heading">
 				<h3 class="media-heading "><a href="/{{x.category | replace({' ' : '-'})}}/{{x.type | replace({' ' : '-'})}}/{{x.business_name | replace({' ' : '-'})}}/{{x.id}}">{{x.business_name}}</a>
-				<div class="verifyBiz pull-right ">
-					<span ng-if="{{x.verified}}" tooltip="Business Verified"><img src="{{path}}/img/verified.png"/> </span>
-					<span href="#" ng-if="{{x.featured}}" tooltip="Featured Business "><img src="{{path}}/img/feature.png"/> </span>
-					<a href="/enquiry/{{x.business_name | replace({' ' : '-'})}}/{{x.business_id}}" class="btn btn-primary">
-					Enqiry 		{{data.business_id}}			</a>
+				<div class="verifyBiz pull-right" >
+					<span ng-if="{{x.verified}}" tooltip="Business Verified"><img src="{{path}}img/verified.png"/></span>
+					<span  ng-if="{{x.featured}}" tooltip="Featured Business"><img src="{{path}}img/feature.png"/></span>
+					<button ng-click="openModel('includes/enquiryform.html', {{x.id}})" class="btn btn-primary" >Enquiry</button>
 				</div>	</h3>
 			 </div>
 				<div class="panel-body">
 					<div class="media" >
-						<div class="media-left col-md-3">
+						<div class="media-left col-md-2">
 							<a href="#"><img class="img-responsive" src="{{x.business_logo.file_relative_path}}">
 							</a>
+							<h4>Keywords</h4>
+							<ul>
+							{% for keyword in x.keywords %}
+								<li><a href="/search/{{keyword | replace({' ' : '-'})}}">{{keyword}}</a></li>
+							{% endfor %}
+							</ul>
 						</div>
-						<div class="media-body col-md-9 table-responsive">
+						<div class="media-body col-md-5 table-responsive">
 							<table class="table table-bordered">
 								<tr><td>
 									<abbr title="Website"><span class="glyphicon glyphicon-globe"></span> </abbr></td>
@@ -60,22 +58,12 @@
 										</address>
 									</td>
 								</tr>
-								<tr>
-									<td>Keywords</td>
-									<td>
-										{% for keyword in x.keywords %}
-										<a href="/search/{{keyword | replace({' ' : '-'})}}">{{keyword}}</a>
-										{% endfor %}
-									</td>
-								</tr>
-								<!--tr>
-									<td>Description</td>
-									<td>{{x.business_info.description |slice(0, 250) }}</td>
-								</tr-->
 							</table>
 						</div>
-						<div class="media-right col-md-3">
-							
+						<div class="media-right col-md-5 ">
+							<h4>Description</h4>
+							<p>{{x.business_info.description |length >250 ?x.business_info.description|slice(start, 450)~ '...' : x.business_info.description}}</p>
+							<a href="/{{x.category | replace({' ' : '-'})}}/{{x.type | replace({' ' : '-'})}}/{{x.business_name | replace({' ' : '-'})}}/{{x.id}}" class="btn btn-info">Read More..</a>
 						</div>
 					</div>
 				</div>

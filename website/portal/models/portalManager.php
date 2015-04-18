@@ -56,10 +56,7 @@ class portalManager{
 			
 			$cols = array("*");
 			$this->db->setColumns($t0, $cols);
-			
 			$data = $this->db->select();
-			
-			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
@@ -67,6 +64,32 @@ class portalManager{
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 			$response["status"] = "success";
+		}catch(Exception $e){
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+            $response["data"] = null;
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+        }
+        return $response;
+	}
+	
+	function getEnquiry($business, $business_id){
+		try{
+			$where['status'] = 1;
+			$t0 = $this->db->setTable("business");
+			$this->db->setWhere($where, $t0);
+			$cols = array("business_name, id");
+			$this->db->setColumns($t0, $cols);
+			$data = $this->db->select();
+		
+			if($data['status'] != "success"){
+				throw new Exception($data['message']);
+			}
+			$response['title'] = "This is Enquiry for Product";
+			$response['data'] = $this->jsonDecode($data["data"]);
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+			$response["status"] = "success";
+			$response["message"] = "Record Displayed successfully";
 		}catch(Exception $e){
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
@@ -98,6 +121,7 @@ class portalManager{
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 			$response["status"] = "success";
+			$response["message"] = "Data List displays successfully";
 		}catch(Exception $e){
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
@@ -125,6 +149,8 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
+			$response["status"] = "success";
+			$response["message"] = "Data Shows";
 			$response['title'] = "this is twig template";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
@@ -146,14 +172,16 @@ class portalManager{
 			$t0 = $this->db->setTable("business");
 			$this->db->setWhere($where, $t0);
 			
-			$cols = array("category, type,id,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info");
+			$cols = array("category, type,id,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info, featured, verified");
 			$this->db->setColumns($t0, $cols);
-			
+		
 			$data = $this->db->select();
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			 $response["status"] = "success";
+			
+			$response["status"] = "success";
+			$response["message"] = "Data Shows";
 			$response['title'] = "this is twig template";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
@@ -202,23 +230,26 @@ class portalManager{
 			$this->db->setWhere($servicewhere, $t2);
 			$this->db->setLimit(array(1,10));
 			$cols = array("*");
+			
 			$this->db->setColumns($t2, $cols);
 			
 			$servicedata = $this->db->select();
+			$response["status"] = "success";
+			$response["message"] = "Data Shows";
 			
 			$response['title'] = "this is twig template";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['service'] = $this->jsonDecode($servicedata["data"]);	
 			$response['product'] = $this->jsonDecode($proddata["data"]);
-		
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
-			$response['status'] = "success";
+		
 		}catch(Exception $e){
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
+		
 		return $response;
 	}
 	

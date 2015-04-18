@@ -2,31 +2,45 @@
 {% block title %}{{title}}{% endblock %}
 {% block head %}
     {{ parent() }}
+	{% if data.google_map %}
+	<script src="http://maps.googleapis.com/maps/api/js">
+	</script>
+	<script>
+		function initialize() {
+			var mapProp = {
+				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+				zoom:18,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+	{% endif %}
 {% endblock %}
 {% block content %}
 {% autoescape false %}
 	{% include 'includes/header.html' ignore missing %}
+	
 	<main>
 		
 		<div class="row">
 			<div class="col-md-12 ">
-				
-					<nav class="navbar navbar-default">
-						<a class="navbar-brand" href="#"><img class="img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
-						<h2 class="text-center" >{{data.business_name}}</h2>
-						<address class="text-center"><span class="glyphicon glyphicon-envelope Email">
-						</span> <a href="{{data.contact_profile.email}}" >{{data.contact_profile.email}}</a>
-						<span class="glyphicon glyphicon-earphone"></span>{{data.contact_profile.mobile}}
-						<span class="glyphicon glyphicon-globe"></span>
-						<a href="{{data.contact_profile.contact_website}}">{{data.contact_profile.contact_website}}</a></address>
-					</nav>
-				</div>
-			
+				<nav class="navbar navbar-default">
+					<a class="navbar-brand" href="#"><img class="img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
+					<h2 class="text-center" >{{data.business_name}}<button class="btn btn-primary pull-right"  ng-click="openModel('includes/enquiryform.html',data.id)">Get In Touch With Us</a></h2>
+					<p class="text-center"><span class="glyphicon glyphicon-envelope Email">
+					</span> <a href="{{data.contact_profile.email}}" >{{data.contact_profile.email}}</a>
+					<span class="glyphicon glyphicon-earphone"></span>{{data.contact_profile.mobile}}
+					<span class="glyphicon glyphicon-globe"></span>
+					<a href="{{data.contact_profile.contact_website}}">{{data.contact_profile.contact_website}}</a>
+					</p>
+				</nav>
+			</div>
 		</div>
-		
 		<div class="row" ng-controller="aboutController">
 			<div class="col-sm-2 sidebar " id="navbar-example">
-				<ul class="nav nav-pills nav-stacked text-center border">
+				<ul class="nav nav-pills nav-stacked  border">
 					<li ng-class="{active:id=='home'}" ng-click="makeActive('home')"><a href="#home">Home</a></li>
 					<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
 						{% if product %}<li ng-class="{active:id=='products'}" ng-click="makeActive('products')"><a href="#products">Products</a></li>{% endif %}
@@ -36,11 +50,11 @@
 						<li ng-class="{active:id=='testimonials'}" ng-click="makeActive('testimonials')"><a href="#testimonials">Testimonials</a></li>
 					
 						<li ng-class="{active:id=='activities'}" ng-click="makeActive('activities')"><a href="#activities">Activities</a></li>
-						<li ng-class="{active:id=='contact'}" ng-click="makeActive('contact')"><a href="#contact">Contact Profile</a></li>
+						<li ng-class="{active:id=='contact'}" ng-click="makeActive('contact')"><a href="#contact">Contact Us</a></li>
 				</ul>
 			</div>
 			<div class="col-md-10">
-				<div ng-show="id=='home'" class="home" id="home">
+				<div ng-show="id==''||id=='home'" class="home" id="home">
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<table class="table table-striped">
@@ -50,7 +64,7 @@
 								</tr>
 								<tr>
 									<td>
-										 Business Profile</td>
+										<strong>Keywords</strong></td>
 									<td>
 										<ul>
 											{% for key,value  in data.keywords %}
@@ -117,7 +131,7 @@
 							<div class="col-sm-6 col-md-4 ">
 								<div class="thumbnail productBox">
 									{% for key, value in x.product_image %}
-										<img class="img-responsive prodimg" src="{{value.file_relative_path}}" alt="{{key}}"/>
+										<img class="img-responsive " src="{{value.file_relative_path}}" alt="{{key}}"/>
 									{% endfor %}
 								</div>
 								<div class="caption text-center">
@@ -125,7 +139,7 @@
 									<p>
 									{{x.description|slice(start, 50)}}
 									</p>
-									<a href="product/{{x.id}}" class="btn btn-info">Read More..</a>
+									<a href="{{x.type}}/{{x.business_id}}" class="btn btn-info">Read More..</a>
 								</div>
 							</div>
 						{% endfor %}
@@ -168,7 +182,7 @@
 								<div class="media">
 									<div class="media-left ">
 										<a href="#">
-											<img class="img-circle img-responsive" src="{{value.image.0.file_relative_path}}">
+											<img class="img-circle img-responsive testm" src="{{value.image.0.file_relative_path}}">
 										</a>
 									</div>
 									<div class="media-body">
@@ -313,6 +327,9 @@
 								</table>
 						</div>
 						<div class="col-sm-8 boxborder">
+						{% if data.google_map %}
+							<div id="googleMap"></div>
+						{% else %}
 							<div class="alert alert-success" ng-show="mailSent==true" role="alert">Message has been sent!</div>
 							<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-controller="enquiryController" novalidate>
 								<h4 class="text-center">General Enquiry</h4>
@@ -368,11 +385,13 @@
 									</div>
 								</div>
 							</form>
+						{% endif %}	
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		
 	</main>
   {% endautoescape %}
 {% endblock %}	

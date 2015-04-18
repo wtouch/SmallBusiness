@@ -1,0 +1,14 @@
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+		<h3>Contact Us</h3>
+	</div>
+	<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-controller="enquiryController" class="border" novalidate>
+		<div class="modal-body">
+			{% include 'includes/enquiry.html' ignore missing %}
+		</div>
+	<!--div class="modal-footer">
+		<button type="submit" class="btn btn-primary pull-right"  ng-disabled="enquiryForm.$pristine || enquiryForm.$invalid || mailSent"ng-click="modalOptions.formData(enquiry); modalOptions.ok()">Send</button>
+		<button type="reset" class="btn btn-danger" title="Cancel Sending">Cancel</button>
+			
+	</div-->
+	</form>

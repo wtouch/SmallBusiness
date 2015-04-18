@@ -1,12 +1,24 @@
-<header>
+<script type="text/ng-template" id="city.html">
+    <a>
+     <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+     <span>(<small bind-html-unsafe="match.model.area"></small>-<small bind-html-unsafe="match.model.pincode"></small>)</span>
+    </a>
+</script>
+<script type="text/ng-template" id="search.html">
+    <a>
+     <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+     <span>(<small bind-html-unsafe="match.model.location"></small>-<small bind-html-unsafe="match.model.area"></small>)</span>
+    </a>
+</script>
+
+<header ng-controller="TypeaheadCtrl">
 	<div class="row">
 		<div class="col-md-12">
 			<nav class="navbar navbar-default  navbar-fixed-top">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="/"><img src="{{path}}img/logo.png" title="Web Touch India Solution Pune " class="center-block " /></a>
 					<div class="input-group search" ng-if="!index.html">
-						<input typeahead-template-url="search.html" type="text" required name="location" id="location" ng-model="location" typeahead-on-select="getData($item)" placeholder="Type to Search" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
-
+						<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult($item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, city)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
 						<span class="input-group-btn">
 							<button class="btn btn-primary  form-control " type="button"><span class="glyphicon glyphicon-search"></span></button>
 						</span>

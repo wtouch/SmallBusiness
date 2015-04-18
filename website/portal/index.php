@@ -19,27 +19,25 @@ $app->get('/', function() use($app, $config, $twig, $portal) {
 });
 $app->get('/enquiry/:business/:business_id', function($business, $business_id) use($app, $config, $twig, $portal) {
 	$business = $portal->decodeUrl($business); 
-	print_r($business_id);
 	$response['subject'] = "Enquiry from Apna Site: ".$business;
 	$response['business_id'] = $business_id;
-	$template = $twig->loadTemplate("enquiry.html");
+	$response = $portal->getEnquiry($business, $business_id);
+	 if($response['status'] == "success"){
+		$template = $twig->loadTemplate("includes/enquiry.html");
+	}else{
+		$template = $twig->loadTemplate("error.html");
+	} 
 	$template->display($response);
 });
+
 $app->get('/search/data', function() use($app, $config, $twig, $portal) {
 	// this will replace [-] with [space]
 	//to add [-] from template use - replace({' ' : '-'}) as a filter
 	foreach($_GET as $key => $value){
 		$keyword[$key] = $value;
 	}
-	
 	$keyword = $portal->decodeUrl($keyword); 
 	$response = $portal->getDataByKeyword($keyword, true);
-	if($response['status'] == "success"){
-		$template = $twig->loadTemplate("business.html");
-	}else{
-		$template = $twig->loadTemplate("error.html");
-	}
-	$template->display($response); 
 	$app->response->headers->set('Content-Type', 'application/json');
 	echo json_encode($response);
 });
@@ -50,13 +48,11 @@ $app->get('/search/:keyword(/:business_name)', function($keyword,$business_name=
 	$keyword = $portal->decodeUrl($keyword);
 	//$business_name = $portal->decodeUrl($business_name);
 	$response = $portal->getDataByKeyword($keyword);
-	
 	if($response['status'] == "success"){
 		$template = $twig->loadTemplate("business.html");
 	}else{
 		$template = $twig->loadTemplate("error.html");
 	}
-	
 	$template->display($response);
 });
 
@@ -78,7 +74,6 @@ $app->get('/:category/:type', function($category, $type) use($app, $config, $twi
 	}else{
 		$template = $twig->loadTemplate("error.html");
 	} 
-	//$template = $twig->loadTemplate("business.html");
 	$template->display($response);
 });
 

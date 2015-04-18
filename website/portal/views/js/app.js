@@ -109,7 +109,7 @@ define(['angular',
 			$scope.id = url;
 		}
 		$scope.makeActive($scope.url);
-	}]).controller('enquiryController', ['$scope','$http','$location','dataService', function($scope,http, $location,dataService) {
+	}]).controller('enquiryController', ['$scope','$http','$location','dataService','modalService', function($scope,http, $location,dataService,modalService) {
 			
 			var today = new Date();
 			var year = today.getFullYear();
@@ -120,16 +120,39 @@ define(['angular',
 			var sec = today.getSeconds();
 			$scope.mailSent = false;
 			$scope.enquiry = {
-				subject : 'Website Enquiry',
+				subject : 'Portal Enquiry',
 				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 			};
-				console.log($scope.enquiry);
-			$scope.postData = function(enquiry){
+			console.log($scope.enquiry);
+			/*$scope.postData = function(enquiry){
 				dataService.post("post/enquiry",enquiry).then(function(response) {
 					$scope.mailSent = true;
 					console.log(response);
 				});
+			};*/
+			$scope.openModel = function (url, tempId) {
+				var modalDefaults = {
+					templateUrl: url,	// apply template to modal
+					size : 'lg'
+				};
+				var modalOptions = {
+					formData : function(enquiry){
+						console.log(enquiry);
+						modalOptions.myenquiryData = enquiry;
+					}
+				};
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					dataService.post("post/enquiry",modalOptions.myenquiryData).then(function(response) {
+						$scope.mailSent = true;
+						console.log(response);
+						$scope.alerts.push({type: response.status,msg: response.message});
+					}); 
+				});
 			};
+			$scope.ok = function () {
+				$modalOptions.close('ok');
+			};
+
 		}]);	
     return app;
 });
