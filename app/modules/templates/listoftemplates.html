@@ -68,6 +68,7 @@
 						<div class="input-group">
 						<p class="form-control-static" ng-hide="x.boxId ==1">{{x.template_price}}</p>
 						<input type="text" id="template_price" class="form-control" name="template_price" ng-show="x.boxId == 1" ng-model="x.template_price" ng-required="true"/>
+						<!--Edit Template Price-->
 						<div class="input-group-btn" ng-if="permission.set_template_price">
 						<a type="button" class="btn btn-warning pull-right" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')" ng-change="editTemplatePrice('template_price', x.template_price, x.id,x.boxId)" tooltip="Edit Price">
 						<span class="glyphicon glyphicon-pencil"></span>
@@ -75,11 +76,14 @@
 						</div>
 						</td>
 						<td>
+						<!--Apply Template-->
 						<a ng-click="openModel('modules/templates/applytemplate.html', x.id)" class="btn btn-success" ng-show="x.template_price=='free'">Apply</a>
 						<button href="#" class="btn btn-warning" title="Buy Template" ng-show="x.template_price!='free'"> Buy </button>
+							<!--View Template-->
 							<div class="btn-group">
 								<a ng-click="openTemp('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="Preview Template"></a>
 							</div>
+							<!--Delete template-->
 							<button ng-if="permission.delete_template" type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
 							</button>
 						</td>

@@ -50,11 +50,10 @@
 			</div>
 		</div>
 	</div>
-	
 </div>	
 <div class="row">
-	<div class="col-sm-12 ">
-	<div ng-if="singlemail" ng-hide="singlemail.status == 2" class="main-content">
+	<div class="col-sm-12">
+	<div ng-if="singlemail"  ng-hide="singlemail.status == 2 || userDetails.id != singlemail.user_id" class="main-content">
 		<h4> Reply </h4>
 			<form class="form-horizontal" name="mailView" ng-submit="mailView.$valid"  novalidate>
 				<div class="form-group">
