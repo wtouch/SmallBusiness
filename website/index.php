@@ -8,7 +8,7 @@ require 'websitemanager/templateLoader.php';
 Slim\Slim::registerAutoloader();
 Twig_Autoloader::register();
 $app = new Slim\Slim();
-echo $config['root_path'];
+
 $web = new websiteManager;
 $template = new templateLoader();
 $routes = $web->getRoutes();

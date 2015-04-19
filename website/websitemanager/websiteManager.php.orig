@@ -73,9 +73,9 @@ class websiteManager{
 			
 			(isset($template_id)) ? $where["id"] = $template_id : $template_id = 0;
 			
-			if($template_id == 0 || $template_id == null || !property_exists ( $config['website_config'] , 'template_id')){
+			if($template_id == 0 || !property_exists ( $config['website_config'] , 'template_id')){
 				$templateDetails["template_name"] = "default";
-				$templateDetails["template_category"] = "default";
+				$templateDetails["template_folder"] = "default";
 				$templateDetails["template_image"] = "default/preview.png";
 				$templateDetails["template_params"] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/website/templates/default/default/templateParams.json'),true);
 				
@@ -101,7 +101,6 @@ class websiteManager{
 			$response["status"] = "success";
             $response["message"] = "Template - ".$templateDetails["template_name"]." Selected!";
             $response["data"] = $templateDetails;
-			//print_r($response["data"]);
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
@@ -164,7 +163,10 @@ class websiteManager{
             $response["message"] = $e->getMessage();
             $response["data"] = null;
 		}
+<<<<<<< HEAD
+=======
 		//print_r($response);
+>>>>>>> front end templateLoader & websiteManager updated.
 		return $response;
 	}
 	

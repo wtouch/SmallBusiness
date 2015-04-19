@@ -16,8 +16,6 @@
 			$this->tmplConfig['template_folder'] = "default";
 			$this->tmplConfig['template_root_path_folder'] = $this->tmplConfig['template_root_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
 			$this->tmplConfig['template_host_path_folder'] = $this->tmplConfig['template_host_path']."/" .$this->tmplConfig['template_category']."/" .$this->tmplConfig['template_folder'];
-			$this->path = $this->tmplConfig['template_host_path_folder']."/";
-			
 		}
 		function setConfig($property){
 			foreach($property as $key => $value){
@@ -80,18 +78,15 @@
 				if(isset($data['featured_products'])) $responseDt['featured_products'] = $data['featured_products'];
 				if(isset($data['services'])) $responseDt['services'] = $data['services'];
 				if(isset($data['products'])) $responseDt['products'] = $data['products'];
-				$responseDt['path'] = $this->path;
-				
+								
 				//print_r($responseDt['data']);
 				$response["status"] = "success";
 				$response["message"] = "Data Selected!";
 				$response["data"] = $responseDt;
-				$response["path"] = $responseDt['path'];
 			}catch(Exception $e){
 				$response["status"] = "error";
 				$response["message"] = $e->getMessage();
 				$response["data"] = null;
-				$response["path"] = $this->path;
 				$response["title"] = "Error!";
 			}
 			//echo $response["path"];
@@ -101,9 +96,11 @@
 			$response = $this->getData($route);
 			if($response['status'] == "success") {
 				$template = $this->getTemplate($route);
+				$response['data']["path"] = $this->path;
 				return $template->display($response['data']);
 			}else{
 				$template = $this->getTemplate("error");
+				$response["path"] = $this->path;
 				return $template->display($response);
 			}
 			
