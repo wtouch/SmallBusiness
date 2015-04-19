@@ -18,7 +18,7 @@
 				<div class="verifyBiz pull-right" >
 					<span ng-if="{{x.verified}}" tooltip="Business Verified"><img src="{{path}}img/verified.png"/></span>
 					<span  ng-if="{{x.featured}}" tooltip="Featured Business"><img src="{{path}}img/feature.png"/></span>
-					<button ng-click="openModel('includes/enquiryform.html', {{x.id}})" class="btn btn-primary" >Enquiry</button>
+					<a class="btn btn-primary pull-right"  ng-click="openModel('{{path}}includes/enquiryform.html',{{x.id}},'{{x.business_name}}','{{x.contact_profile.email}}',x.user_id)">Enquiry</a>
 				</div>	</h3>
 			 </div>
 				<div class="panel-body">
@@ -27,7 +27,7 @@
 							<a href="#"><img class="img-responsive" src="{{x.business_logo.file_relative_path}}">
 							</a>
 							<h4>Keywords</h4>
-							<ul>
+							<ul class="list-inline">
 							{% for keyword in x.keywords %}
 								<li><a href="/search/{{keyword | replace({' ' : '-'})}}">{{keyword}}</a></li>
 							{% endfor %}
@@ -46,7 +46,7 @@
 								<tr><td>
 									<abbr title="Email ID"><span class="glyphicon glyphicon-envelope Email"></abbr></span> </td>
 									<td><a href="{{x.contact_profile.email}}" >{{x.contact_profile.email}}</a></td>
-								</tr>
+								</tr><tr>
 									<td><abbr title="Address"> <span class="glyphicon glyphicon-home"></span></abbr></td>
 									<td>
 										<address>

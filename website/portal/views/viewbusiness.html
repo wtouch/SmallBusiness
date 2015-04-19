@@ -23,12 +23,11 @@
 	{% include 'includes/header.html' ignore missing %}
 	
 	<main>
-		
 		<div class="row">
-			<div class="col-md-12 ">
+			<div class="col-md-12" ng-controller="enquiryController">
 				<nav class="navbar navbar-default">
 					<a class="navbar-brand" href="#"><img class="img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
-					<h2 class="text-center" >{{data.business_name}}<button class="btn btn-primary pull-right"  ng-click="openModel('includes/enquiryform.html',data.id)">Get In Touch With Us</a></h2>
+					<h2 class="text-center" >{{data.business_name}}<a class="btn btn-primary pull-right"  ng-click="openModel('{{path}}includes/enquiryform.html',{{data.id}},'{{data.business_name}}','{{data.contact_profile.email}}',{{data.user_id}})">Get In Touch With Us</a></h2>
 					<p class="text-center"><span class="glyphicon glyphicon-envelope Email">
 					</span> <a href="{{data.contact_profile.email}}" >{{data.contact_profile.email}}</a>
 					<span class="glyphicon glyphicon-earphone"></span>{{data.contact_profile.mobile}}
@@ -124,7 +123,7 @@
 					</div>
 				</div>
 				{% if product %}
-				<div ng-show="id=='products'" class="product boxborder" id="products">
+				<div ng-show="id=='products'" class="product boxborder" id="products" ng-controller="productController">
 					<div class="row">
 						<h2 class="text-center">Products</h2>
 						{% for x in product %}
@@ -139,7 +138,7 @@
 									<p>
 									{{x.description|slice(start, 50)}}
 									</p>
-									<a href="{{x.type}}/{{x.business_id}}" class="btn btn-info">Read More..</a>
+									<a class="btn btn-primary "  ng-click="openProduct('{{path}}product.html','{{data.category}}','{{data.type}}','{{data.business_name}}',{{data.id}},'{{x.type}}',{{x.id}},'{{x.description}}','{{x.product_service_name}}')">Read More..</a>
 								</div>
 							</div>
 						{% endfor %}

@@ -119,33 +119,25 @@ define(['angular',
 			var min = today.getMinutes();
 			var sec = today.getSeconds();
 			$scope.mailSent = false;
-			$scope.enquiry = {
-				subject : 'Portal Enquiry',
-				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
-			};
-			console.log($scope.enquiry);
-			/*$scope.postData = function(enquiry){
-				dataService.post("post/enquiry",enquiry).then(function(response) {
-					$scope.mailSent = true;
-					console.log(response);
-				});
-			};*/
-			$scope.openModel = function (url, tempId) {
+			
+			$scope.openModel = function (url, buzId,businessname,toemail,userId) {
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
-					size : 'lg'
+					size : 'sm'
 				};
 				var modalOptions = {
 					formData : function(enquiry){
-						console.log(enquiry);
+						enquiry.subject = 'Portal Enquiry: '+ businessname;
+						enquiry.to_email.to = toemail;
+						enquiry.user_id = userId;
+						enquiry.date = year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec;
+						
 						modalOptions.myenquiryData = enquiry;
 					}
 				};
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					dataService.post("post/enquiry",modalOptions.myenquiryData).then(function(response) {
+					dataService.post("/enquiry",modalOptions.myenquiryData).then(function(response) {
 						$scope.mailSent = true;
-						console.log(response);
-						$scope.alerts.push({type: response.status,msg: response.message});
 					}); 
 				});
 			};
@@ -153,6 +145,29 @@ define(['angular',
 				$modalOptions.close('ok');
 			};
 
+		}]).controller('productController', ['$scope','$http','$location','dataService','modalService', function($scope,http, $location,dataService,modalService) {
+			$scope.openProduct = function (url, bizId,category,type,businessname,product,id,des,servicename) {
+				dataService.get("getsingle/product/"+id)
+				.then(function(response) {
+					var modalDefaults = {
+						templateUrl: url,	// apply template to modal
+						size : 'lg'
+					};
+					var modalOptions = {
+						productList : dataService.parse(response.data),
+						formData : function(productData){
+							console.log(productData);
+							modalOptions.myProductData = productData;
+						}
+					};
+					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+						console.log(modalOptions.myProductData)
+					});
+				});
+			};
+			$scope.ok = function () {
+				$modalOptions.close('ok');
+			};
 		}]);	
     return app;
 });

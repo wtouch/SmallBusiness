@@ -72,31 +72,64 @@ class portalManager{
         }
         return $response;
 	}
-	
-	function getEnquiry($business, $business_id){
-		try{
-			$where['status'] = 1;
-			$t0 = $this->db->setTable("business");
-			$this->db->setWhere($where, $t0);
-			$cols = array("business_name, id");
-			$this->db->setColumns($t0, $cols);
-			$data = $this->db->select();
-		
-			if($data['status'] != "success"){
-				throw new Exception($data['message']);
+	function sendEnquiry($body){
+		$input = json_decode($body);
+		$from['email'] = $input->from_email->from;
+		$replyfrom['to_email'] = $input->to_email->to;
+		$from['name'] = $input->name;
+		(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", $input->to_email->cc) : $ccMail = null;
+		$recipients = explode(",", $input->to_email->to);
+		$replyrecipients = explode(",", $input->from_email->from);
+		$subject = $input->subject;
+		$message = "<table>
+				<tr>
+					<td>Name: </td><td>".$from['name']."</td>
+				</tr>
+				<tr>
+					<td>Email: </td><td>".$from['email']."</td>
+				</tr>";
+		if(is_object($input->message)){
+			foreach($input->message as $key => $value){
+				$message .= "<tr>
+					<td>".$key.":</td><td>".$value."</td>
+				</tr>";
 			}
-			$response['title'] = "This is Enquiry for Product";
-			$response['data'] = $this->jsonDecode($data["data"]);
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
-			$response["status"] = "success";
-			$response["message"] = "Record Displayed successfully";
-		}catch(Exception $e){
-            $response["status"] = "error";
-            $response["message"] = $e->getMessage();
-            $response["data"] = null;
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
-        }
-        return $response;
+		}else{
+			$message .= "<tr>
+					<td>Message: </td><td>".$input->message."</td>
+				</tr>";
+		}
+		
+		$message .= "</table>";
+		
+		// Reply message mail
+		$replymessage = "<table>
+				
+			<tr>
+				<td>Message: </td><td>".'Thank You'."</td>
+			</tr>";
+		
+		$replymessage .= "</table>";
+		$mail = $this->db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
+		 if($mail['status'] == 'success'){
+			$insert = $this->db->insert("enquiry", $body);
+			$insert['message'] = $insert['message']." " .$mail['message'];
+			$response= $insert;
+		}else{
+			$response = $mail;
+		}
+		echo json_encode($response);
+		
+		// reply mail to sender
+		
+		$replymail = $this->db->sendMail($replyfrom, $replyrecipients, $subject, $replymessage, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
+		 if($replymail['status'] == 'success'){
+			echo "Thank You ";
+		}else{
+			$responsemail = $replymail;
+		}
+		echo json_encode($responsemail);
+	
 	}
 	
 	function getCategories(){
@@ -252,6 +285,55 @@ class portalManager{
 		
 		return $response;
 	}
+	
+	function getProduct ($category, $type, $business,$id,$product){
+		try{
+			$where['type'] = $type;
+			$where['status'] = 1;
+			$where['category'] = $category ;
+			$where['id'] = $id ;
+			
+			$t0 = $this->db->setTable("business");
+			$this->db->setWhere($where, $t0);
+			$cols = array("*");
+			$this->db->setColumns($t0, $cols);
+			
+			$data = $this->db->selectSingle();
+			
+			if($data['status'] != "success"){
+				throw new Exception($data['message']);
+			}
+			$prodwhere['status'] = 1;
+			$prodwhere['type'] = "product";
+			$prodwhere['business_id'] = $id ;
+			$prodwhere['type']=$product;	
+			
+			$t1 = $this->db->setTable("product");
+			$this->db->setWhere($prodwhere, $t1);
+			$this->db->setLimit(array(1,10));
+			$cols = array("*");
+			$this->db->setColumns($t1, $cols);
+			
+			$proddata = $this->db->select();
+			
+			$response["status"] = "success";
+			$response["message"] = "Data Shows";
+			
+			$response['title'] = "this is twig template";
+			$response['data'] = $this->jsonDecode($data["data"]);
+			$response['product'] = $this->jsonDecode($proddata["data"]);
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+		
+		}catch(Exception $e){
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+            $response["data"] = null;
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+        }
+		
+		return $response;
+	}
+	
 	
 }
 ?>

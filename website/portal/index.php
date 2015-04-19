@@ -3,6 +3,7 @@
 require $config['root_path'].'/server-api/lib/Slim/Slim.php';
 require $config['root_path'].'/server-api/lib/Twig/Autoloader.php';
 require $config['root_path'].'/server-api/modules/db/dbHelper.php';
+require_once $config['root_path'].'/server-api/lib/PHPMailer/PHPMailerAutoload.php';
 require 'models/portalManager.php';
 
 Slim\Slim::registerAutoloader();
@@ -11,23 +12,15 @@ $app = new Slim\Slim();
 $portal = new portalManager($config);
 $loader = new Twig_Loader_Filesystem("website/portal/views");
 $twig = new Twig_Environment($loader);
+$body = $app->request->getBody();
 
 $app->get('/', function() use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories();
 	$template = $twig->loadTemplate("home.html");
 	$template->display($response);
 });
-$app->get('/enquiry/:business/:business_id', function($business, $business_id) use($app, $config, $twig, $portal) {
-	$business = $portal->decodeUrl($business); 
-	$response['subject'] = "Enquiry from Apna Site: ".$business;
-	$response['business_id'] = $business_id;
-	$response = $portal->getEnquiry($business, $business_id);
-	 if($response['status'] == "success"){
-		$template = $twig->loadTemplate("includes/enquiry.html");
-	}else{
-		$template = $twig->loadTemplate("error.html");
-	} 
-	$template->display($response);
+$app->post('/enquiry', function() use($app, $config, $twig, $portal, $body) {
+	$response = $portal->sendEnquiry($body);
 });
 
 $app->get('/search/data', function() use($app, $config, $twig, $portal) {
@@ -85,6 +78,19 @@ $app->get('/:category/:type/:business/:id', function($category, $type, $business
 	$response = $portal->getBusiness($category, $type, $business,$id);
 	 if($response['status'] == "success"){
 		$template = $twig->loadTemplate("viewbusiness.html");
+	}else{
+		$template = $twig->loadTemplate("error.html");
+	} 
+	$template->display($response);
+});
+$app->get('/:category/:type/:business/:id/:product', function($category, $type, $business,$id,$product) use($app, $config, $twig, $portal, $body) {
+	$category = $portal->decodeUrl($category);
+	$type = $portal->decodeUrl($type);
+	$product = $portal->decodeUrl($product);
+	$business = $portal->decodeUrl($business);
+	$response = $portal->getProduct($category, $type, $business,$id,$product);
+	 if($response['status'] == "success"){
+		$template = $twig->loadTemplate("product.html");
 	}else{
 		$template = $twig->loadTemplate("error.html");
 	} 
