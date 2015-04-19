@@ -144,30 +144,6 @@ define(['angular',
 			$scope.ok = function () {
 				$modalOptions.close('ok');
 			};
-
-		}]).controller('productController', ['$scope','$http','$location','dataService','modalService', function($scope,http, $location,dataService,modalService) {
-			$scope.openProduct = function (url, bizId,category,type,businessname,product,id,des,servicename) {
-				dataService.get("getsingle/product/"+id)
-				.then(function(response) {
-					var modalDefaults = {
-						templateUrl: url,	// apply template to modal
-						size : 'lg'
-					};
-					var modalOptions = {
-						productList : dataService.parse(response.data),
-						formData : function(productData){
-							console.log(productData);
-							modalOptions.myProductData = productData;
-						}
-					};
-					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-						console.log(modalOptions.myProductData)
-					});
-				});
-			};
-			$scope.ok = function () {
-				$modalOptions.close('ok');
-			};
-		}]);	
+		}]);
     return app;
 });

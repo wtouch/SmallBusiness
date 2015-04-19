@@ -83,19 +83,6 @@ $app->get('/:category/:type/:business/:id', function($category, $type, $business
 	} 
 	$template->display($response);
 });
-$app->get('/:category/:type/:business/:id/:product', function($category, $type, $business,$id,$product) use($app, $config, $twig, $portal, $body) {
-	$category = $portal->decodeUrl($category);
-	$type = $portal->decodeUrl($type);
-	$product = $portal->decodeUrl($product);
-	$business = $portal->decodeUrl($business);
-	$response = $portal->getProduct($category, $type, $business,$id,$product);
-	 if($response['status'] == "success"){
-		$template = $twig->loadTemplate("product.html");
-	}else{
-		$template = $twig->loadTemplate("error.html");
-	} 
-	$template->display($response);
-});
 
 $app->run();
 ?>

@@ -4,7 +4,6 @@
     {{ parent() }}
 {% endblock %}
 {% block content %}
-
 {% autoescape false %}
 <script type="text/ng-template" id="city.html">
     <a>
@@ -21,7 +20,7 @@
 	
 <section  >
 	<div class="home center-block" ng-controller="TypeaheadCtrl">
-		<a href="#/"><img src="{{path}}img/logo.png" title="Web Touch India Solution Pune " class="center-block logo img-responsive" /></a>
+		<a href="#/"><img src="{{path}}img/logo.png" title="Apnasite Portal" class="center-block logo img-responsive" /></a>
 		<div >
 			<span ng-hide="isVisible" name="currentItem" id="currentItem" class="form-control-static" ng-click="isVisible = !isVisible" ng-init="isVisible = false" ng-bind="city"></span>
 			<input typeahead-template-url="city.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item); isVisible = false" placeholder="Search City" typeahead="address.city for address in getTypeaheadData('locations','city', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control cityBlock" autocomplete="off" ng-hide="!isVisible">
@@ -45,13 +44,11 @@
 							<a  class="catp"href="/{{x.category | replace({' ' : '-'}) }}" >{{x.category}}</a>
 						</div>
 					{% endfor %}
-					
 				</div>
 				<span class="showmore"><a href="#" >More</a></span>
 			</div>
 		</div>
 	</div>
-	
 </section>
 {% endautoescape %}
 {% endblock %}

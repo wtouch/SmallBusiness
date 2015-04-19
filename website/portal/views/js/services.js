@@ -318,7 +318,7 @@ define(['app'], function (app) {
 			obj.config = function(table, params){
 				params.table = table;
 				return $http({
-					url: serviceBase +'getmultiple/config/1/1',
+					url: '/server-api/index.php/getmultiple/config/1/1',
 					method: "GET",
 					params: params
 				}).then(function (results) {

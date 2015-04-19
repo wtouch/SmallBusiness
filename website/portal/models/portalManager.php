@@ -37,7 +37,7 @@ class portalManager{
 		}	
 	}
 	function getDataByKeyword($keyword, $search = false){
-		try{
+		
 			$where['status'] = 1;
 			
 			if(is_array($keyword)){
@@ -60,23 +60,16 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			$response['title'] = "this is twig template";
-			$response['data'] = $this->jsonDecode($data["data"]);
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
-			$response["status"] = "success";
-		}catch(Exception $e){
-            $response["status"] = "error";
-            $response["message"] = $e->getMessage();
-            $response["data"] = null;
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
-        }
+			
+		
         return $response;
 	}
 	function sendEnquiry($body){
 		$input = json_decode($body);
 		$from['email'] = $input->from_email->from;
-		$replyfrom['to_email'] = $input->to_email->to;
+		$replyfrom['email'] = $input->to_email->to;
 		$from['name'] = $input->name;
+		$replyfrom['name'] = "ApnaSite AutoReply";
 		(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", $input->to_email->cc) : $ccMail = null;
 		$recipients = explode(",", $input->to_email->to);
 		$replyrecipients = explode(",", $input->from_email->from);
@@ -103,11 +96,10 @@ class portalManager{
 		$message .= "</table>";
 		
 		// Reply message mail
-		$replymessage = "<table>
+		$replymessage =
 				
-			<tr>
-				<td>Message: </td><td>".'Thank You'."</td>
-			</tr>";
+			"<h1>Thank You for your Interest! Our representative will call you shortly!</h1>";
+			
 		
 		$replymessage .= "</table>";
 		$mail = $this->db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
@@ -117,19 +109,18 @@ class portalManager{
 			$response= $insert;
 		}else{
 			$response = $mail;
-		}
-		echo json_encode($response);
+		};
 		
 		// reply mail to sender
 		
-		$replymail = $this->db->sendMail($replyfrom, $replyrecipients, $subject, $replymessage, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
-		 if($replymail['status'] == 'success'){
-			echo "Thank You ";
+		$replymail = $this->db->sendMail($replyfrom, $replyrecipients, $subject, $replymessage,$replyTo=null, $attachments = null, $ccMail = null, $bccMail = null, $messageText = null);
+		if($replymail['status'] == 'success'){
+			$response = $replymail;
 		}else{
-			$responsemail = $replymail;
+			$response = $replymail;
 		}
-		echo json_encode($responsemail);
-	
+		
+		echo json_encode($response);
 	}
 	
 	function getCategories(){
@@ -215,7 +206,7 @@ class portalManager{
 			
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
-			$response['title'] = "this is twig template";
+			$response['title'] = "Business List";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		}catch(Exception $e){
@@ -285,55 +276,6 @@ class portalManager{
 		
 		return $response;
 	}
-	
-	function getProduct ($category, $type, $business,$id,$product){
-		try{
-			$where['type'] = $type;
-			$where['status'] = 1;
-			$where['category'] = $category ;
-			$where['id'] = $id ;
-			
-			$t0 = $this->db->setTable("business");
-			$this->db->setWhere($where, $t0);
-			$cols = array("*");
-			$this->db->setColumns($t0, $cols);
-			
-			$data = $this->db->selectSingle();
-			
-			if($data['status'] != "success"){
-				throw new Exception($data['message']);
-			}
-			$prodwhere['status'] = 1;
-			$prodwhere['type'] = "product";
-			$prodwhere['business_id'] = $id ;
-			$prodwhere['type']=$product;	
-			
-			$t1 = $this->db->setTable("product");
-			$this->db->setWhere($prodwhere, $t1);
-			$this->db->setLimit(array(1,10));
-			$cols = array("*");
-			$this->db->setColumns($t1, $cols);
-			
-			$proddata = $this->db->select();
-			
-			$response["status"] = "success";
-			$response["message"] = "Data Shows";
-			
-			$response['title'] = "this is twig template";
-			$response['data'] = $this->jsonDecode($data["data"]);
-			$response['product'] = $this->jsonDecode($proddata["data"]);
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		
-		}catch(Exception $e){
-            $response["status"] = "error";
-            $response["message"] = $e->getMessage();
-            $response["data"] = null;
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
-        }
-		
-		return $response;
-	}
-	
-	
 }
 ?>

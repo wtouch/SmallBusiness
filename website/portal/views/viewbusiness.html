@@ -16,6 +16,23 @@
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
+	<script type="text/ng-template" id="product.html">
+		<div class="important row">
+			<div class="media">
+				<div class="media-left col-sm-3">
+					<a href="#">
+						{% for key, value in product.product_image %}
+							<img class="img-responsive" src="{{value.file_relative_path}}">
+						{% endfor %}
+					</a>
+				</div>
+				<div class="media-body col-sm-9">
+					<h2>{{ product.product_service_name }}</h2>
+					<p class="media-heading">{{product.description}}</p>
+				</div>
+			</div> 
+		</div>
+	</script>
 	{% endif %}
 {% endblock %}
 {% block content %}
@@ -55,7 +72,7 @@
 			<div class="col-md-10">
 				<div ng-show="id==''||id=='home'" class="home" id="home">
 					<div class="panel panel-default">
-						<div class="panel-body">
+						<div class="panel-body table-responsive">
 							<table class="table table-striped">
 								<tbody>
 								<tr>
@@ -123,7 +140,7 @@
 					</div>
 				</div>
 				{% if product %}
-				<div ng-show="id=='products'" class="product boxborder" id="products" ng-controller="productController">
+				<div ng-show="id=='products'" class="product boxborder" id="products" >
 					<div class="row">
 						<h2 class="text-center">Products</h2>
 						{% for x in product %}
@@ -138,7 +155,8 @@
 									<p>
 									{{x.description|slice(start, 50)}}
 									</p>
-									<a class="btn btn-primary "  ng-click="openProduct('{{path}}product.html','{{data.category}}','{{data.type}}','{{data.business_name}}',{{data.id}},'{{x.type}}',{{x.id}},'{{x.description}}','{{x.product_service_name}}')">Read More..</a>
+									<span ng-hide="isVisible" name="currentItem" id="currentItem" class="form-control-static" ng-click="isVisible = !isVisible" ng-init="isVisible = false" ng-bind="product"></span>
+									<a class="btn btn-primary " href="#" typeahead-template-url="product.html">Read More..</a>
 								</div>
 							</div>
 						{% endfor %}

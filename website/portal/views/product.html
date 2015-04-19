@@ -1,25 +1,26 @@
 
-<div class="modal-content">		
+<div class="modal-content" ng-controller="productController">		
 	<div class="modal-header">
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 	</div>
 	<div class="modal-body">
 		<div class="row">
 			<div class="col-sm-12">
-				<h3>Template Images</h3>
-				<div class="table-responsive">
-						<table class="table table-bordered">
-						<tr "modalOptions.templates">
-						<span class="thumbs" ng-repeat="(key, value) in modalOptions.tempList.template_image">
-						<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.tempList.imgkey = key"/>
-						</span>
-						<img class="img-responsive" ng-model="modalOptions.tempList.imgkey" ng-src="{{appConfig.assetPath + modalOptions.tempList.template_image[modalOptions.tempList.imgkey].file_relative_path}}" ng-init="modalOptions.tempList.imgkey = 0"/>
-						</td>
-						</td>
-						</tr>		
-						</table>
-				</div>
+				<div class="media">
+					<div class="media-left col-sm-3">
+						<a href="#">
+							{% for key, value in modalOptions.product.product_image %}
+								<img class="img-responsive" src="{{value.file_relative_path}}">
+							{% endfor %}
+						</a>
+					</div>
+					<div class="media-body col-sm-9">
+						<h2>{{ modalOptions.product.product_service_name }}</h2>
+						<p class="media-heading">{{modalOptions.data.description}}</p>
+					</div>
+				</div> 
 			</div>
 		</div>
 	</div>
-</div>			
+</div>
+	
