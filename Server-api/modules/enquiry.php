@@ -13,22 +13,28 @@
 			echo json_encode($data);
 			
 		}else{
-			$where=array(); // this will used for user specific data selection.
-			 $like = array();
-			 if(isset($_GET['search']) && $_GET['search'] == true){
-				 
-				 (isset($_GET['subject'])) ? $like['subject'] = $_GET['subject'] : "";
-			 }
+			$like = array();
+			$userId = 0;
+			$limit[0] = $pageNo;
+			$limit[1] = $records;
+			$where = array();
+			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
 			
-			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";
+			if(isset($_GET['search']) && $_GET['search'] == true){
+				 
+				(isset($_GET['subject'])) ? $like['subject'] = $_GET['subject'] : "";
+			}
+			
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			(isset($_GET['read_status'])) ? $where['read_status'] = $_GET['read_status'] : "";
 			
+			$userCols['name'] = "name";
+			$userCols['username'] = "username";
+			$user = $db->getUsers($userId,$userCols);
 			
-			$limit[0] = $pageNo; // from which record to select
-			$limit[1] = $records; // how many records to select
-			
-			$t0 = $db->setTable("enquiry");
+			$t0 = $db->setJoinString("INNER JOIN", "enquiry", array("user_id"=>$user.".id"));
+			$selectInnerJoinCols[0] = "*";
+			$db->setColumns($t0, $selectInnerJoinCols);
 			$db->setWhere($where, $t0);
 			$db->setWhere($like, $t0, true);
 			$db->setLimit($limit);
