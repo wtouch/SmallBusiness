@@ -1,5 +1,17 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
+<div class="row">
+	<div class="col-sm-6">
+		<a href="#"><img class="logo img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
+	</div>
+	<div class="col-sm-6">
+		<address class="pull-right">
+			{{ data.business_name }}<br>
+			{{data.business_profile.business_type}}<br>
+			{{data.business_profile.establishment}}<br> 
+			{{data.ownership}}
+		</address>
+	</div>
+</div>
+<nav class="navbar navbar-default">
    <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNav">
         <span class="sr-only">Toggle navigation</span>
@@ -7,7 +19,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Web Touch</a>
     </div>
 	
 	<div class="collapse navbar-collapse" id="mainNav">
@@ -34,6 +45,5 @@
 				{% endif %}
 			{% endfor %}
 		</ul>
-	</div>
 	</div>
 </nav>

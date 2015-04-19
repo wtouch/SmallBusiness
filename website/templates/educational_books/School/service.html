@@ -5,19 +5,21 @@
     {{ parent() }}
    
 {% endblock %}
+
 {% block content %}
 {% autoescape false %}
-	<h2>{{ data.product_service_name }}</h2>
-	<hr>
-	<div class="media">
-		<div class="media-left col-sm-3">
-			<a href="#">
-				{% for key, value in data.product_image %}
-					<img class="img-responsive" src="{{value.file_relative_path}}">
-				{% endfor %}
-			</a>
-		</div>
-		<div class="media-body">
+	<div class="row">
+		<h2 class="text-center">{{ data.product_service_name }}</h2>
+		{% for key, value in data.product_image %}
+			<div class="col-xs-6 col-sm-3 col-md-3">
+				<a href="#" class="thumbnail">
+				<img class="img-responsive" src="{{value.file_relative_path}}"> 
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
 			<p class="media-heading">{{data.description}}</p>
 		</div>
 	</div>

@@ -9,24 +9,17 @@
 {% block content %}
 	{% autoescape false %}
 	<div class="row">
-	{% for key, value in data.product_image %}
-		<div class="col-xs-6 col-md-3">
-			<a href="#" class="thumbnail">
-				<img class="img-responsive" src="{{value.file_relative_path}}" ng-click="data.imgkey = key"> 
-			</a>
-		</div> 
-	{% endfor %}
+		<h2 class="text-center">{{ data.product_service_name }}</h2>
+		{% for key, value in data.product_image %}
+			<div class="col-xs-6 col-sm-3 col-md-3">
+				<a href="#" class="thumbnail">
+					<img class="img-responsive" src="{{value.file_relative_path}}" ng-click="data.imgkey = key"> 
+				</a>
+			</div> 
+		{% endfor %}
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<img class="img-responsive" ng-src="{{data.product_image[data.imgkey].file_relative_path}}" ng-init="value.imgkey = 0"/>
-		</div>
-	</div>
-	
-						<img class="img-responsive" ng-model="modalOptions.tempList.imgkey" ng-src="{{appConfig.assetPath + modalOptions.tempList.template_image[modalOptions.tempList.imgkey].file_relative_path}}" ng-init="modalOptions.tempList.imgkey = 0"/>
-	<div class="row">
-		<div class="col-sm-12">
-			<h2 class="text-center">{{ data.product_service_name }}</h2>
 			<p class="media-heading">{{data.description}}</p>
 		</div>
 	</div> 

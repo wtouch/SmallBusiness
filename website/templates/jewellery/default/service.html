@@ -9,17 +9,17 @@
 {% block content %}
 {% autoescape false %}
 	<div class="row">
-	{% for key, value in data.product_image %}
-		<div class="col-xs-6 col-md-3">
-			<a href="#" class="thumbnail">
+		<h2 class="text-center">{{ data.product_service_name }}</h2>
+		{% for key, value in data.product_image %}
+			<div class="col-xs-6 col-sm-3 col-md-3">
+				<a href="#" class="thumbnail">
 				<img class="img-responsive" src="{{value.file_relative_path}}"> 
-			</a>
-		</div>
-	{% endfor %}
+				</a>
+			</div>
+		{% endfor %}
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<h2 class="text-center">{{ data.product_service_name }}</h2>
 			<p class="media-heading">{{data.description}}</p>
 		</div>
 	</div>
