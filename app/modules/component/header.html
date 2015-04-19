@@ -10,36 +10,41 @@
 			</div>		
 			<div class="col-sm-3">
 				<div ng-show="!userDetails.username">
-				<a  class="btn btn-primary" href="#login">Login</a> | 
-				<a  class="btn btn-primary" href="#register">Register</a>
+					<a  class="btn btn-primary" href="#login">Login</a> | 
+					<a  class="btn btn-primary" href="#register">Register</a>
 				</div>
-				<div class="user-dropdown" ng-show="userDetails.username" dropdown>
-					<a class="btn btn-link">
-						Welcome {{userDetails.name}}
-						<p>{{userDetails.group_name}}</p>
-					</a>
-					<span dropdown-toggle class="user-img">
-						<img ng-hide="userDetails.user_img" src="img/user1.png" class="img-responsive img-circle pull-right">
-						<img ng-if="userDetails.user_img" ng-src="{{appConfig.assetPath+''+userDetails.user_img}}" class="img-responsive img-circle pull-right">
-					</span>
-					<ul class="dropdown-menu " role="menu">
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#/editprofile">
-								<span class="glyphicon glyphicon-pencil"></span> Edit Profile
-							</a>
-						</li>
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#/changepass">
-								<span class="glyphicon glyphicon-pencil"></span> Change Password
-							</a>
-						</li>
-						<li role="presentation">
-								<a role="menuitem" tabindex="-1" href="#/logout">
-								<span class="glyphicon glyphicon-off"></span> Sign Out
-								</a>
-						</li>
-						
-					</ul>
+				<div class="row">
+					<div class="col-sm-6">
+						<a class="text-right">
+							<p>Welcome {{userDetails.name}}</p>
+							<p>{{userDetails.group_name}}</p>
+						</a>
+					</div>
+					<div class="col-sm-6">
+						<div class="user-dropdown" ng-show="userDetails.username" dropdown>
+							<span dropdown-toggle class="user-img">
+								<img ng-hide="userDetails.user_img" src="img/user1.png" class="img-responsive img-circle pull-right">
+								<img ng-if="userDetails.user_img" ng-src="{{appConfig.assetPath+''+userDetails.user_img}}" class="img-responsive img-circle pull-right">
+							</span>
+							<ul class="dropdown-menu " role="menu">
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" href="#/editprofile">
+										<span class="glyphicon glyphicon-pencil"></span> Edit Profile
+									</a>
+								</li>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" href="#/changepass">
+										<span class="glyphicon glyphicon-pencil"></span> Change Password
+									</a>
+								</li>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" href="#/logout">
+										<span class="glyphicon glyphicon-off"></span> Sign Out
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

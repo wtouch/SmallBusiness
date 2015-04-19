@@ -12,7 +12,7 @@
 			<tr ng-repeat="mail in mailList | filter: { status : hideDeleted}">
 				<td>
 					<button class="btn btn-default" tooltip="delete" ng-click="deletemail(mail.id,mail.status, $index)">
-						<span class="glyphicon glyphicon-trash"></span>
+						<span ng-disabled="userDetails.user_id != mail.id" class="glyphicon glyphicon-trash"></span>
 					</button>
 				</td>
 				<td>{{((mailListCurrentPage - 1) * pageItems ) + $index + 1}}</td>	

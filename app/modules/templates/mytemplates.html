@@ -1,12 +1,12 @@
 <h3>My Templates</h3>
 	<div class="row">
-		<div class="col-sm-4"> 
+		<div class="col-sm-3"> 
 			<div class="bottomspace">
 				<label for="search" class="control-label">Search </label>		
 					<input id="search" type="text" class="form-control" ng-change="searchFilter('template_name', searchProp)" ng-model="searchProp" placeholder="search"/>
 			</div>
 		</div>			 				  
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 			<div class="bottomspace">
 				<label for="sort" class="control-label">Sort by Order</label>
 					<select id="sort" class="form-control" ng-model="sort"> 
@@ -16,7 +16,19 @@
 					</select>
 			</div>
 		</div>
-		<div class="col-sm-4">
+		
+		<div class="col-sm-3">
+			<div class="bottomspace">
+				<label for="status" class="control-label">Select Status</label>
+					<select id="status" class="form-control" 
+					ng-change="changeStatus('status',showStatus)" ng-model="showStatus" ng-init="showStatus=1">
+						<option value="1">Active</option>
+						<option value="0">Deleted</option>
+					</select>
+			</div>
+		</div>
+		
+		<div class="col-sm-3">
 			<div class="bottomspace">
 				<label for="filterbycustomerid" class="control-label">Select By Customer</label>
 					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatusFn('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
@@ -31,7 +43,6 @@
 				<th>Sr.No.</th>
 				<th>Template Name</th>
 				<th>Create Date</th>
-				<th>Modified Date</th>
 				<th>Owner Name</th>
 				<th>Salesman</th>
 				<th>Manager</th>
@@ -42,11 +53,9 @@
 						<td>{{((myTempCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 						<td>{{x.template_name}}</td>
 						<td>{{x.date | date:'MM/dd/yyyy'}}</td>
-						<td>{{x.modified_date}}</td>
 						<td>{{x.name}}</td>
 						<td><span ng-if="x.manager==null">-</span><span ng-if="x.manager!=null">{{x.manager}}</span></td>
 						<td><span ng-if="x.admin==null">-</span><span ng-if="x.admin!=null">{{x.admin}}</span></td>
-						
 						<td>
 							<div class="btn-group">
 								<a type="button" ng-click="openMyTemp('modules/templates/viewMyTemplate.html', x.id)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="Preview Details"></a>

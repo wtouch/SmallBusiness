@@ -21,8 +21,6 @@
 			<span ng-if="userDetails.group_name == 'customer'">
 				<input type="hidden" class="form-control" ng-model="templateList.user_id" ng-init="templateList.user_id= modalOptions.userDetails.id" readonly/>
 			</span>
-	
-	
 				<div class="form-group">	
 					<label  for="template_name" class="col-sm-2 control-label">Template Name</label>
 						<div class="col-sm-9">
@@ -40,7 +38,11 @@
 						<div class="col-sm-9">
 							<input type="text" id="category" class="form-control" name="category" ng-model="templateList.category" ng-init="templateList.category= modalOptions.tempList.category"  readonly>
 						</div>		
-				</div>	
+				</div>	 <!-- {{modalOptions.tempList.template_image}}  -->
+				{{templateList.template_image}}
+					<!-- <input type="hidden" ng-model="modalOptions.tempList.template_image"> -->
+					<input type="hidden" ng-init="templateList.template_image = modalOptions.tempList.template_image" ng-model="templateList.template_image">
+
 				<!-- <div class="form-group">	
 					<input type="hidden" ng-model="templateList.user_id"  ng-init="templateList.user_id= modalOptions.tempList.user_id"/>
 					<input type="hidden" ng-model="templateList.created_by"   ng-init="templateList.user_id= modalOptions.tempList.created_by"/>
@@ -50,32 +52,20 @@
 					<input type="hidden" ng-model="templateList.template_price"  ng-init="templateList.template_price = modalOptions.tempList.template_price"/>
 					<input type="hidden" ng-model="templateList.template_price"  ng-init="templateList.template_price=modalOptions.tempList.template_price"/>
 				</div>	-->
-				
-				
 				<div ng-if="modalOptions.tempList.template_params" ng-init="templateList.template_params = modalOptions.tempList.template_params" >	
-					<!-- <div  class="form-group" > -->
 						<label  for="color" class="col-sm-2 control-label">Color</label>
 						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.color">
 						<label  for="color" class="col-sm-3 control-label">Color</label>
 							<input type="color" id="color" class="form-control" name="color"  ng-model="templateList.template_params.color">
 						</div>
-						
-						
-					<!-- </div> -->
-					<!-- <div  class="form-group" > -->
-						
 						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.background_color">
 						<label  for="color" class="col-sm-3 control-label">Light</label>
 							<input type="color" id="light_color" class="form-control" name="light_color"  ng-model="templateList.template_params.light_color">
 						</div>
-					<!-- </div> -->
-					<!-- <div  class="form-group" > -->
-						
 						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.dark_color">
 						<label  for="dark_color" class="col-sm-2 control-label">Dark</label>
 							<input type="color" id="dark_color" class="form-control" name="dark-color" ng-model="templateList.template_params.dark_color">
 						</div>
-					<!-- </div> -->
 					</div>
 					<div  class="form-group" ng-if="modalOptions.tempList.template_params.background_color">
 						<label  for="background_color" class="col-sm-2 control-label">Background Color</label>
@@ -83,35 +73,16 @@
 						<label  for="background_color" class="col-sm-3 control-label">Color</label>
 							<input type="color" id="background_color" class="form-control" name="background_color"  ng-model="templateList.template_params.background_color">
 						</div>
-					
 						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.background_color_light">
 						<label  for="color" class="col-sm-3 control-label">Light</label>
 							<input type="color" id="background_color_light" class="form-control" name="background_color_light"  ng-model="templateList.template_params.background_color_light">
 						</div>
-					
 						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.background_color_dark">
 						<label  for="color" class="col-sm-3 control-label">Dark</label>
 							<input type="color" id="background_color_dark" class="form-control" name="background_color_dark" ng-model="templateList.template_params.background_color_dark">
 						</div>
 					</div>
 		</div>
-				
-				<!-- <div class="form-group">
-				 <label  for="color" class="col-sm-2 control-label">Color</label> 
-					<div  class="col-sm-2" ng-if="modalOptions.editTemplate.template_params.color">
-						<label  for="color" class="col-sm-3 control-label">Color</label>
-							<input type="color" id="color" class="form-control" name="color"  ng-model="editTempParamsModel.template_params.color">
-					</div>
-					<div  class="col-sm-2" ng-if="modalOptions.editTemplate.template_params.background_color">
-						<label  for="light_color" class="col-sm-2 control-label">Light</label>
-							<input type="color" id="light_color" class="form-control" name="light_color"  ng-model="editTempParamsModel.template_params.light_color">
-					</div>
-					<div  class="col-sm-2" ng-if="modalOptions.editTemplate.template_params.dark_color">
-						<label  for="dark_color" class="col-sm-2 control-label">Dark</label>
-							<input type="color" id="dark_color" class="form-control" name="dark-color" ng-model="editTempParamsModel.template_params.dark_color">
-					</div>
-				</div>	
-				 -->
 				<div class="form-group">
 					<label  for="slider-title" class="col-sm-2 control-label">Title</label>
 					<div class="col-sm-9">

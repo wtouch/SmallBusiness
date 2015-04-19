@@ -334,12 +334,13 @@ define(['app'], function (app) {
 			$scope.openMyTemp = function (url, tempId) {
 			dataService.get("getsingle/mytemplate/"+tempId)
 			.then(function(response) {
+				console.log(response);
 					var modalDefaults = {
 						templateUrl: url,	// apply template to modal
 						size : 'lg'
 					};
 					 var modalOptions = {
-						tempList: dataService.parse(response.data)  // assign data to modal
+						tempLists: dataService.parse(response.data)  // assign data to modal
 					}; 
 				modalService.show(modalDefaults, modalOptions).then(function (result) {
 						console.log("modalOpened");
@@ -653,7 +654,6 @@ define(['app'], function (app) {
 				};
 				$scope.reset();
 				console.log($scope.addtemplate);
-				
 			})
 			}else{
 				$scope.reset = function() {

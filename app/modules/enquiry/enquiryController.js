@@ -60,6 +60,27 @@ define(['app'], function (app) {
 				});
 			}
 		};
+		
+		/* //to change status 	
+		$scope.changeStatusf = {};
+		$scope.changeStatusFn = function(colName, colValue, id){
+		$scope.changeStatusf[colName] = colValue;    
+			dataService.put("put/enquiry/"+id,$scope.changeStatusf)   
+			.then(function(response) {     
+				if(colName=='enquiry'){     
+				}
+				$scope.alerts.push({type: response.status,msg: response.message});
+				}); 
+		}//end method */
+		
+		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+		.then(function(response) {  //function for websitelist response
+			if(response.status == 'success'){
+				$scope.customerList = response.data;
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+		});
 
 		//code for delete single mail
 		$scope.deletemail = function(id, status, index){

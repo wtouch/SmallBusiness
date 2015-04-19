@@ -125,7 +125,7 @@
 			<label for="description" class="col-sm-2 control-label">Description</label>
 			<div class="col-sm-9">
 				<textarea type="text" class="form-control" id="description" name="description" ng-model="reqnewsite.description.desc" cols="30" rows="4" ng-maxlength="256" placeholder="description" required></textarea>
-					<p ng-hide="requestsiteForm.description.$error.maxlength">
+					<p ng-bind-html="" ng-hide="requestsiteForm.description.$error.maxlength">
 					{{ 256 - description.length + " Chars left" }}
 					</p>
 					<span class="help-block" ng-show="requestsiteForm.description.$dirty && requestsiteForm.description.$invalid">
