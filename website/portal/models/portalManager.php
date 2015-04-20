@@ -128,7 +128,7 @@ class portalManager{
 		try{
 			$groupBy = array('category');
 			$where['status'] = 1;
-			
+				
 			$t0 = $this->db->setTable("business");
 			$this->db->setGroupBy($groupBy);
 			$this->db->setWhere($where, $t0);
@@ -156,16 +156,17 @@ class portalManager{
 		return $response;
 	}
 	
-	function getCategoryTypes($category){
+	function getCategoryTypes($city,$category){
 		try{
 			$groupBy['type'] = 'type';
 			$where['category'] = $category;
+			$where['city'] = $city;
 			
 			$t0 = $this->db->setTable("business");
 			$this->db->setGroupBy($groupBy);
 			$this->db->setWhere($where, $t0);
 			
-			$cols = array("category, type");
+			$cols = array("city,category, type");
 			$this->db->setColumns($t0, $cols);
 			
 			$data = $this->db->select();
@@ -187,16 +188,17 @@ class portalManager{
 		
 		return $response;
 	}
-	function getBusinessList ($category, $type){
+	function getBusinessList ($city, $category, $type){
 		try{
 			$where['category'] = $category;
 			$where['type'] = $type;
 			$where['status'] = 1;
-			
+			$where['city'] = $city;
+		
 			$t0 = $this->db->setTable("business");
 			$this->db->setWhere($where, $t0);
 			
-			$cols = array("category, type,id,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info, featured, verified");
+			$cols = array("city,category, type,id,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info, featured, verified");
 			$this->db->setColumns($t0, $cols);
 		
 			$data = $this->db->select();

@@ -49,20 +49,18 @@ $app->get('/search/:keyword(/:business_name)', function($keyword,$business_name=
 	$template->display($response);
 });
 
-$app->get('/:category', function($category) use($app, $config, $twig, $portal) {
-	
+$app->get('/:city/:category', function($city,$category) use($app, $config, $twig, $portal) {
 	$category = $portal->decodeUrl($category); 
-	$response = $portal->getCategoryTypes($category);
-
+	$response = $portal->getCategoryTypes($city,$category);
 	$template = $twig->loadTemplate("categorytypes.html");
 	$template->display($response);
 });
 
-$app->get('/:category/:type', function($category, $type) use($app, $config, $twig, $portal) {
+$app->get('/:city/:category/:type', function($city,$category, $type) use($app, $config, $twig, $portal) {
 	$category = $portal->decodeUrl($category);
 	$type = $portal->decodeUrl($type);
-	$response = $portal->getBusinessList($category, $type);
-	 if($response['status'] == "success"){
+	$response = $portal->getBusinessList($city,$category, $type);
+	if($response['status'] == "success"){
 		$template = $twig->loadTemplate("business.html");
 	}else{
 		$template = $twig->loadTemplate("error.html");
