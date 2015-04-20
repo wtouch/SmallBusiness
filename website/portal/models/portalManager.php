@@ -37,7 +37,7 @@ class portalManager{
 		}	
 	}
 	function getDataByKeyword($keyword, $search = false){
-		
+		try{
 			$where['status'] = 1;
 			
 			if(is_array($keyword)){
@@ -60,7 +60,17 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			
+			$response['title'] = "this is twig template";
+			$response['data'] = $this->jsonDecode($data["data"]);
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+			$response["status"] = "success";
+			$response["message"] = "Data List displays successfully";
+		}catch(Exception $e){
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+            $response["data"] = null;
+			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+        }
 		
         return $response;
 	}

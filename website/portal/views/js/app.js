@@ -144,6 +144,11 @@ define(['angular',
 			$scope.ok = function () {
 				$modalOptions.close('ok');
 			};
+		}]).controller('productController',['$scope','$http', '$location', function($scope,$http, $location) {
+			$scope.isShow = function(id){
+				$scope.isVisible = "true";
+				
+			}
 		}]);
     return app;
 });
