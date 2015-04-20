@@ -5,21 +5,26 @@
 				<a class="brand" href="#" title="Welcome To Small Business"><img id="brand" src="img/logo.png" class="img-responsive"></a>	
 			</div>			
 			<div class="col-sm-7">
-				<h1 class="text-center">Apnasite<small>.in</small></h1>
+				<!-- <h1 class="text-center">Apnasite<small>.in</small></h1> -->
 				<h2 class="text-center">{{appConfig.subTitle}}</h2>
 			</div>		
-			<div class="col-sm-3">
+			<div class="col-sm-3" class="collapse navbar-collapse">
+				
 				<div ng-show="!userDetails.username">
 					<a  class="btn btn-primary" href="#login">Login</a> | 
 					<a  class="btn btn-primary" href="#register">Register</a>
 				</div>
-				<div class="row">
+				<ul class="nav navbar-nav pull-right">
+				<div class="row"> 
+				<li>
 					<div class="col-sm-6">
-						<a class="text-right">
-							<p>Welcome {{userDetails.name}}</p>
+						<a class="text-right btn btn-link">
+							<p>Hi {{userDetails.name}}</p>
 							<p>{{userDetails.group_name}}</p>
 						</a>
 					</div>
+				</li>
+				<li>				
 					<div class="col-sm-6">
 						<div class="user-dropdown" ng-show="userDetails.username" dropdown>
 							<span dropdown-toggle class="user-img">
@@ -45,7 +50,9 @@
 							</ul>
 						</div>
 					</div>
-				</div>
+				</li>	
+				</div> 
+				</ul>
 			</div>
 		</div>
 	</div>
