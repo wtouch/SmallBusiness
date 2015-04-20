@@ -17,7 +17,7 @@
 							<input type="hidden" class="form-control" ng-model="register.config" ng-init="">
 							<input type="text" class="form-control" id="name" ng-model="register.name" name="name" placeholder="Enter Name" required>
 							<span class="help-block" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">
-								<span class="text-danger" ng-show="registerForm.name.$error.required">name is required.</span>
+								<span class="text-danger" ng-show="registerForm.name.$error.required">Name required.</span>
 							</span>	
 						</div>
 					</div>	
@@ -28,9 +28,10 @@
 								<span class="help-block">
 									<span class="text-success" ng-show="registerForm.email.$dirty && registerForm.email.$valid">{{availabilityMsg}}</span>
 								</span>
+                                <span>e.g:example@wtouch.in</span>
 								<span class="help-block" ng-show="registerForm.email.$dirty && registerForm.email.$invalid">
 									<span class="text-danger" ng-show="registerForm.email.$error.available">{{availabilityMsg}}</span>
-									<span class="text-danger" ng-show="registerForm.email.$error.required">Email is required.</span>
+									<span class="text-danger" ng-show="registerForm.email.$error.required">Email address required.</span>
 									<span class="text-danger" ng-show="registerForm.email.$error.email">Invalid Email address.</span>
 								</span>
 							</div>
@@ -67,7 +68,7 @@
 					<div class="form-group">
 								<label for="area" class="col-sm-2 control-label">Area *</label>
 								<div class="col-sm-9">
-									<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="register.address.area" placeholder="Enetr area">
+									<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="register.address.area" placeholder="Enter Area">
 									<span class="help-block" ng-show="registerForm.area.$dirty && registerForm.area.$invalid">
 										<span ng-show="registerForm.area.$error.pattern && (registerForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
 										<span class="text-danger" ng-show="registerForm.area.$error.minlength && (registerForm.area.$dirty || submitted)">Enter correct Code.</span>
@@ -78,7 +79,7 @@
 					<div class="form-group">
 								<label for="state" class="col-sm-2 control-label">State</label>
 								<div class="col-sm-4">
-								<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="register.state" placeholder="Enetr state">
+								<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="register.state" placeholder="Enter Your State Name">
 									<span class="help-block" ng-show="registerForm.state.$dirty && registerForm.state.$invalid">
 										<span ng-show="registerForm.state.$error.required" class="text-danger">State is required.</span>
 									</span>				
@@ -97,7 +98,7 @@
 								<div class="col-sm-9">
 		<input type="text" required name="Country" id="Country" ng-model="register.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
 									<span class="help-block" ng-show="registerForm.Country.$dirty && registerForm.Country.$invalid || registerForm.Country.$dirty && !register.Country">
-										<span ng-show="registerForm.Country.$error.required || registerForm.Country.$dirty && !register.Country" class="text-danger">Country is required.</span>
+										<span ng-show="registerForm.Country.$error.required || registerForm.Country.$dirty && !register.Country" class="text-danger">Country Name required.</span>
 									</span>				
 								</div>
 						</div>	
@@ -130,6 +131,7 @@
 							<span class="help-block" ng-show="registerForm.phone.$dirty && registerForm.phone.$invalid">
 								<span class="text-danger" ng-show="registerForm.phone.$error.pattern && (registerForm.phone.$dirty || submitted)">Enter a Valid Contact Number.</span>
 							</span>
+                            <span>e.g: 9199999999</span>
 						</div>						
 					</div>
 					
