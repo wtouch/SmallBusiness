@@ -1,5 +1,5 @@
 <?php header('Content-type: text/xml'); ?>
-<?php echo '<?xml version="1.0" encoding="utf-8"?>' ?>
+<?php echo '<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="/website/sitemapcss/xml-sitemap.xsl"?>' ?>
 <?php
 	/* for corn job in cpanel
 		/usr/bin/php -q /home/wtoucct8/public_html/mybusiness/sitemap.php
@@ -7,7 +7,7 @@
  ?>
 <?php
 	$host = $_SERVER['SERVER_NAME'];
-	$inputJSON = file_get_contents('http://'.$host.'/sitemap');
+	$inputJSON = file_get_contents('http://'.$host.'/sitemapdata');
 	$input= json_decode($inputJSON, TRUE); //convert JSON into array
 ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
@@ -24,8 +24,8 @@
 					echo '<image:image><image:loc>'.$url["image"].'</image:loc></image:image>';
 				}
 			?>
-			<changefreq>monthly</changefreq>
-			<priority>0.5</priority>
+			<changefreq>daily</changefreq>
+			<priority>1</priority>
 		</url>
 <?php
 		}

@@ -35,7 +35,7 @@ foreach($routes['data'] as $routeKey => $routeName){
 	}
 }
 
-$app->get('/sitemap', function() use($app, $config, $routes, $template) {
+$app->get('/sitemapdata', function() use($app, $config, $routes, $template) {
 	echo json_encode($template->getSitemap());
 });
 

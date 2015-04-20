@@ -8,11 +8,12 @@
 		try{
 			$table = $_GET['table'];
 			$limit[0] = 1;
-			$limit[1] = 25;
+			$limit[1] = 1000;
 			$where = array();
 			$like = array();
 			$groupBy = array();
 			if(isset($_GET['filter'])){
+				//echo $_GET['filter'];
 				$filter = json_decode($_GET['filter'],true);
 				if(count($filter) >=1){
 					foreach($filter as $key => $value){
@@ -77,16 +78,16 @@
 	
 	if($reqMethod=="POST"){
 		$input = json_decode($body,true);
-		
+		//print_r($input);
 		$postData = array();
 		foreach($input as $key => $value){
-			$dbData['config_name'] = $key;
-			$dbData['config_data'] = $value;
-			array_push($postData,$dbData);
-			print_r($dbData);
-			$insert = $db->insert("config", $dbData);
+			//$dbData['config_name'] = $key;
+			//$dbData[$key] = $value;
+			//array_push($postData,$dbData);
+			//print_r($dbData); 
+			$insert = $db->insert("business_category", $value);
 			echo json_encode($insert);
-		}
+		 }
 	}
 	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){

@@ -16,7 +16,13 @@ $body = $app->request->getBody();
 
 $app->get('/', function() use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories();
-	$template = $twig->loadTemplate("home.html");
+	if($response['status'] == "success"){
+		$template = $twig->loadTemplate("home.html");
+	}else{
+		$template = $twig->loadTemplate("error.html");
+	}
+	//$template->display($response);
+	//$template = $twig->loadTemplate("home.html");
 	$template->display($response);
 });
 $app->post('/enquiry', function() use($app, $config, $twig, $portal, $body) {
@@ -29,7 +35,6 @@ $app->get('/search/data', function() use($app, $config, $twig, $portal) {
 	foreach($_GET as $key => $value){
 		$keyword[$key] = $value;
 	}
-	$keyword = $portal->decodeUrl($keyword); 
 	$response = $portal->getDataByKeyword($keyword, true);
 	$app->response->headers->set('Content-Type', 'application/json');
 	echo json_encode($response);

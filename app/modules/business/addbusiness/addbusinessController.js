@@ -72,32 +72,31 @@ define(['app'], function (app) {
 				return response;
 			});
 		}
-		$scope.getCategory = function(searchColumn, searchValue){
-			var locationParams = {search : {}, groupBy : {}}
-			locationParams.groupBy['category'] = 'category';
-			dataService.config('keywords',locationParams).then(function(response){
+		$scope.getCategory = function(filterColumn){
+			if(filterColumn){
+				var locationParams = {filter : {parent_id : filterColumn}};
+			}else{
+				var locationParams = {filter : {parent_id : 0}};
+			}
+			dataService.config('business_category',locationParams).then(function(response){
 				$scope.businessCategories = response;
 			});
 		}
-		$scope.getCategory('category');
-		$scope.getTypes = function(filterColumn, searchValue){
-			var locationParams = {filter : {}, groupBy : {}}
-			locationParams.filter[filterColumn] = searchValue;
-			locationParams.groupBy['type'] = "type";
-			dataService.config('keywords',locationParams).then(function(response){
+		$scope.getCategory(0);
+		$scope.getTypes = function(filterColumn){
+			var locationParams = {filter : {parent_id : filterColumn}};
+			dataService.config('business_category',locationParams).then(function(response){
 				$scope.businessTypes = response;
 			});
 		}
-		$scope.getKeywords = function(filterColumn, searchValue){
-			var locationParams = {filter : {}, groupBy : {}}
-			locationParams.filter[filterColumn] = searchValue;
-			locationParams.groupBy['keyword'] = "keyword";
-			dataService.config('keywords',locationParams).then(function(response){
+		$scope.getKeywords = function(filterColumn){
+			var locationParams = {filter : {parent_id : filterColumn}};
+			dataService.config('business_category',locationParams).then(function(response){
 				$scope.businessKyewords = response;
 				console.log($scope.businessKyewords);
 			});
 		}
-		$scope.getKeywords('type', "Philosophy Poetry");
+		
 		/**********************************************************************
 		code for accessing json data of country, State & City {Sonali}*/
 		
