@@ -21,113 +21,29 @@
 		{% endblock %}
 	</head>
 	<body >
+		{% block carousal %}
+		{% endblock %}
 		<div class="container header">
 			{% include 'includes/navbar.html' ignore missing %}
 		</div>
 		<div class="container">
 			{% block content %}{% endblock %}
+		
+			<div class="row">
+				<a href="#" class="ftrlink"><div class="col-sm-1 ftrlink1"><img src="{{ path }}img/arr2.png"/></div></a>
+				<a href="activities" class="ftrlink"><div class="col-sm-7 ftrlink2">ACTIVITES</div></a>
+				<a href="contact" class="ftrlink"><div class="col-sm-4 ftrlink3"><p>GET IN TOUCH WITH US</p></div>
+				</a>
+			</div>
 		</div>
-		<div class="container">
-			<a href="#" class="ftrlink">
-				<div class="row">
-					<div class="col-sm-1 ftrlink1"><img src="{{ path }}img/arr2.png"/></div>
-					<div class="col-sm-7 ftrlink2">VOLUNTEER YOUR TIME</div>
-					<div class="col-sm-4 ftrlink3"><p>WORKING AT OUR SCHOOL</p></div>
-				</div>
-			</a>
-		</div>
-			<!-- <div class="row content">
-				<div class="col-sm-8">
-					<div class="row">
-						<img class="mainimg" src="{{ path }}img/slide1.jpg">
-					</div>
-					<div class="row">
-						<div class="col-sm-4 div1">
-							<div class="sub-div1">
-								<h2>SPORT & REST</h2>
-								<p>Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis. parturient montes ascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. 
-							</div>
-						</div>
-						<div class="col-sm-4 div2">
-							<div class="sub-div2">
-								<h2>Nutrition & meals</h2>
-								<p>Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis. parturient montes ascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. 
-							</div>
-						</div>
-						<div class="col-sm-4 div2">
-							<div class="sub-div2">
-								<h2>Nutrition & meals</h2>
-								<p>Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis. parturient montes ascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio. 
-							</div>
-						</div>
-					</div>
-					<div class="row ">
-						<div class="col-sm-12 schoolinfo">
-							<h2>What is Our School ?</h2>
-						</div>
-						<div class="col-sm-7 schoolinfo">
-							<div class="media">
-								<div class="media-left">
-									<a href="#">
-										<img class="media-object" src="{{ path }}img/page1_pic1.jpg">
-									</a>
-								</div>
-								<div class="media-body">
-									<p class="media-heading">Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis parturient montes ascetur ridiculus mus. Nulla dui. Fusce feugiat malesuada odio.</p>
-									<a class="read" href="#">Read More...</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-5">
-							<ul>
-								<li>Praesent vestibulum aenean nonummy</li>
-								<li>Cum sociis natoque penatibus et</li>
-								<li>magnis parturient montes ascetur</li>
-								<li>Fusce feugiat malesuada odio</li>
-								<li>Morbi nunc odio gravida at cursus</li>
-								<li>Maecenas tristique orci ac sem</li>
-								<li>Duis ultricies pharetra magna</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="row sidesec1">	
-						<div class="slogan">
-							<p>Good Start For Your CHILD</p><br>
-							<a href="#" class="arrowimg">view our timetable</a>
-						</div>
-					</div>
-					<div class="row">
-						<div class="features">
-							<h3>Research <br>benefits</h3>
-							<p>Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis. parturient montes ascetur ridiculus.</p>
-							<br>
-							<a href="#">Read More...</a>
-						</div>
-						<div class="features">
-							<h3>Programs<br>for educators</h3>
-							<p>Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis. parturient montes ascetur ridiculus.</p>
-							<p>Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis. parturient montes ascetur ridiculus.</p><br>
-							<a href="#">Read More...</a>
-						</div>
-						<div class="features">
-							<h3>Dynamic<br>classrooms</h3>
-							<p>Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis. parturient montes ascetur ridiculus.</p>
-							<p>Praesent vestibulum aenean nonummy hendrerit mauris. Cum sociis natoque penatibus et magnis. parturient montes ascetur ridiculus.</p><br>
-							<a href="#">Read More...</a>
-						</div>
-					</div>
-				</div>
-			</div> -->
-			
 		<footer>
 			<div class="container">
 				{% block footer %}
 				<div class="row">
 					<div class="col-sm-4">
 						<a href="#"><img class="logo img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
-						<p>&copy; Copyright 2015 by <a href="http://apnasite.in">apnasite.in</a></p>
+						<p>&copy; Copyright 2015 by <a href="http://apnasite.in">apnasite.in</a><br>
+						<a href="/sitemap.xml">SITEMAP</a></p>
 					</div>
 					<div class="col-sm-4">
 						<h4>CONTACT US</h4>
@@ -138,9 +54,12 @@
 					</div>
 					<div class="col-sm-4">
 						<h4>LOCATION</h4>
-						<p>8901 Marmora Road
-						<p>	Glasgow, DO4 89GR.
-						<p>Get Directions
+						{{data.contact_profile.address}}<br>
+						{{data.contact_profile.City}}<br>
+						{{data.contact_profile.State}}<br>
+						{{data.contact_profile.Country}}<br>
+						{{data.contact_profile.ZIP_Code}}<br>
+						
 					</div>
 				</div>
 				{% endblock %}

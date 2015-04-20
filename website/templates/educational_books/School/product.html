@@ -9,15 +9,16 @@
 {% block content %}
 	{% autoescape false %}
 		<div class="row text">
-			<h2 class="text-center">{{ data.product_service_name }}</h2>
-			{% for key, value in data.product_image %}
-				<div class="col-xs-6 col-sm-3 col-md-3">
+		<hr>
+			<div class="col-sm-3">
+				{% for key, value in data.product_image %}
 					<a href="#" class="thumbnail">
 						<img class="img-responsive" src="{{value.file_relative_path}}" ng-click="data.imgkey = key"> 
 					</a>
-				</div> 
-			{% endfor %}
-			<div class="col-sm-12">
+				{% endfor %}
+			</div> 
+			<div class="col-sm-9">
+				<h2 class="text-center">{{ data.product_service_name }}</h2>
 				<p class="media-heading">{{data.description}}</p>
 			</div>
 		</div>
