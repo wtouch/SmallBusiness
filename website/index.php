@@ -17,20 +17,27 @@ foreach($routes['data'] as $routeKey => $routeName){
 	if(is_array($routeName)) foreach($routeName as $childRouteKey => $childRouteName){
 		if(is_array($childRouteName)){
 			foreach($childRouteName as $childChildRouteKey => $childChildRouteName){
+				$template->setSitemap($childChildRouteKey);
 				$app->get('/'.$childChildRouteKey, function() use($app, $web, $template, $childChildRouteKey) {
 					$template->displayTemplate($childChildRouteKey);
 				});
 			}
 		}
+		$template->setSitemap($childRouteKey);
 		$app->get('/'.$childRouteKey, function() use($app, $web, $template, $childRouteKey) {
 			$template->displayTemplate($childRouteKey);
 		});
 	}else{
+		$template->setSitemap($routeName);
 		$app->get('/'.$routeName, function() use($app, $web, $template, $routeName) {
 			$template->displayTemplate($routeName);
 		});
 	}
 }
+
+$app->get('/sitemap', function() use($app, $config, $routes, $template) {
+	echo json_encode($template->getSitemap());
+});
 
 $app->get('/sitedata', function() use($app, $config) {
 	try{

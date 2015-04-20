@@ -5,6 +5,7 @@
 		private $tmplConfig;
 		private $twig;
 		private $path;
+		private $sitemap;
 		function __construct(){
 			$this->web = new websiteManager;
 			$this->tmplConfig['host'] = "http://".$_SERVER['HTTP_HOST'];
@@ -70,6 +71,7 @@
 				$routes = $this->web->getRoutes();
 				$responseDt['title'] = $route;
 				$responseDt['uri'] = $this->tmplConfig['uri'];
+				
 				$responseDt['routes'] = $routes['data'];
 				$responseDt['data'] = $data['business'];
 				$responseDt['template'] = $template['data'];
@@ -80,10 +82,12 @@
 				if(isset($data['products'])) $responseDt['products'] = $data['products'];
 								
 				//print_r($responseDt['data']);
+				$response['host'] = $this->tmplConfig['host'];
 				$response["status"] = "success";
 				$response["message"] = "Data Selected!";
 				$response["data"] = $responseDt;
 			}catch(Exception $e){
+				$response['host'] = $this->tmplConfig['host'];
 				$response["status"] = "error";
 				$response["message"] = $e->getMessage();
 				$response["data"] = null;
@@ -104,6 +108,15 @@
 				return $template->display($response);
 			}
 			
+		}
+		
+		function setSitemap($route){
+			$this->sitemap[] = array("url" => $this->tmplConfig['host'] . "/" . $route);
+			return true;
+		}
+		
+		function getSitemap(){
+			return $this->sitemap;
 		}
 	}
 

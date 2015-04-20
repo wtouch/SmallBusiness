@@ -36,7 +36,10 @@
 
 			if($email != ""){
 				$where['email'] = $email;
-				$data = $db->selectSingle($table, $where);
+				$t0 = $db->setTable($table);
+				$db->setWhere($where, $t0);
+				$data = $db->selectSingle();
+				//$data = $db->selectSingle($table, $where);
 				$passEmpty = ($data['data']['password'] == ("" || null)) ? 'true' : 'false';
 				if($data['status'] == 'success' && $data['data']['email'] == $email){
 					$from['email'] = "admin@wtouch.in";
@@ -94,8 +97,11 @@
 		foreach ($input as $key => $value){
 			$where[$key] = $value;
 		}
-		
-		$select = $db->select("users", $where);
+		//$where['id'] = $id;
+		$t0 = $db->setTable("users");
+		$db->setWhere($where, $t0);
+		$select = $db->select();
+		//$select = $db->select("users", $where);
 		if($select['status'] === 'success' && $select['data'] >=1){
 			$response["message"] = (isset($where['email'])) ? "Email-ID not available!" : "Username not available!";
 			$response["status"] = "warning";
