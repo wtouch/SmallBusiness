@@ -1,7 +1,7 @@
 <h3 class="col-sm-offset-2 col-sm-9">Submit Template</h3>
 	<form name="submittempForm" class="form-horizontal" role="form" novalidate="novalidate" 	ng-submit="submittempForm.$valid">
 		<div class="form-group">
-			<label  class="col-sm-2"></label>
+			 <label for="template" class="col-sm-2 control-label" name="template" >Template Category</label>
 				<div class="col-sm-7">
 					<p>Please Note that Fields Marked * are Required.</p>		
 				</div>
@@ -13,7 +13,7 @@
 						<option value="">Select Category</option>
 					</select>
 						<span class="help-block" ng-show="submittempForm.category.$dirty && submittempForm.category.$invalid">
-						<span class="text-danger" ng-show="submittempForm.category.$error.required">Category is required.</span>
+						<span class="text-danger" ng-show="submittempForm.category.$error.required">Template Category is required.</span>
 						</span>				
 				</div>
 		</div>
@@ -23,7 +23,7 @@
 					<input ng-disabled="tempId" type="text" id="name" class="form-control" name="name" placeholder="Enter Template Name" ng-model="addtemplate.template_name" ng-pattern="/^[a-zA-Z0-9(_)]*$/" required>
 					<span class="text-warning">Use a-z A-Z 0-9 _ only</span>
 					<span class="help-block" ng-show="submittempForm.name.$dirty && submittempForm.name.$invalid">
-						<span class="text-danger" ng-show="submittempForm.name.$error.required">Name is required.</span>
+						<span class="text-danger" ng-show="submittempForm.name.$error.required">Template Name is required.</span>
 						<span class="text-danger" ng-show="submittempForm.name.$error.pattern">Alphabets, Numbers & _ Only!</span>
 					</span>
 				</div>						

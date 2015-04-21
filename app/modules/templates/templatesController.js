@@ -5,22 +5,6 @@ define(['app'], function (app) {
     
     // This is controller for this view
 	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
-		
-		/* dataService.get("getsingle/template/"+$routeParams.id)
-		.then(function(response) {
-			$scope.templateData = dataService.parse(response.data);
-			if($scope.templateData.template_params == "") $scope.templateData.template_params = {};
-		
-		});	 
-		 */
-		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
-		.then(function(response) {  //function for websitelist response
-			if(response.status == 'success'){
-				$scope.customerList = response.data;
-			}else{
-				$scope.alerts.push({type: response.status, msg: response.message});
-			}
-		});
 		// all $scope object goes here
 		$scope.alerts = [];
 		$scope.maxSize = 5;
@@ -38,7 +22,6 @@ define(['app'], function (app) {
 		$scope.format = $scope.formats[0];
 		$scope.temp = dataService.config.template;
 		$scope.path = "template/"; // path to store images on server
-		//$scope.path = "template/"+$rootScope.userDetails.id
 		$scope.userinfo = $scope.userInfo;
 		$scope.reqtemp = {
 			scrible : []
@@ -48,7 +31,6 @@ define(['app'], function (app) {
 		$scope.temp = {};
 		dataService.config('config', {config_name : "template"}).then(function(response){
 			$scope.temp = response.config_data;
-			console.log($scope.temp); 
 		});
 		//global methods
 		//function for close alert
@@ -89,9 +71,7 @@ define(['app'], function (app) {
 			$scope.headingDisabled = false;
 			$scope.temp = false;
 			$scope.imgRemoved = false;
-			//console.log(data);
 			$scope[resetObj] = { desc : { image  : {} }};
-			console.log(data);
 		}
 		
 		$scope.removeObject = function(key, object){
@@ -116,7 +96,6 @@ define(['app'], function (app) {
 		
 		//Update template form code here
 		$scope.update = function(businessData){				
-			console.log(templateData);						
 			dataService.put("put/template/"+ $scope.template_id, templateData)  // use business id here
 			 .then(function(response) {  //function for response of request temp
 				if(response.status == 'success'){
@@ -198,6 +177,16 @@ define(['app'], function (app) {
 			$scope.changeScopeObject($scope.domain_name);
 		}
 		
+		//function for websitelist response
+		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+		.then(function(response) {  
+			if(response.status == 'success'){
+				$scope.customerList = response.data;
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+		});
+		
 		//this is global method for filter 
 		$scope.changeStatus = function(statusCol, showStatus) {
 			$scope.filterStatus= {};
@@ -254,7 +243,6 @@ define(['app'], function (app) {
 		//This code for active/delete button 
 		$scope.feature = function(id, featured){
 			$scope.featuredData = {featured : featured};
-			console.log($scope.featuredData);
 			dataService.put("put/template/"+id, $scope.featuredData)
 			.then(function(response) { //function for businesslist response
 				$scope.alerts.push({type: response.status, msg: response.message});
@@ -263,7 +251,6 @@ define(['app'], function (app) {
 		//This code for reject/order_placed button 
 		$scope.reject = function(id, development_status){
 			$scope.featuredData = {development_status : development_status};
-			console.log($scope.featuredData);
 			dataService.put("put/template/"+id, $scope.featuredData)
 			.then(function(response) { 
 				$scope.alerts.push({type: response.status, msg: response.message});
@@ -308,7 +295,6 @@ define(['app'], function (app) {
 				
 				if(data.status === 'success'){
 					picArr.push(data.data);
-					console.log(picArr);
 				}else{
 					$scope.alerts.push({type: data.status, msg: data.message});
 				}
@@ -334,8 +320,7 @@ define(['app'], function (app) {
 			$scope.openMyTemp = function (url, tempId) {
 			dataService.get("getsingle/mytemplate/"+tempId)
 			.then(function(response) {
-				console.log(response);
-					var modalDefaults = {
+				var modalDefaults = {
 						templateUrl: url,	// apply template to modal
 						size : 'lg'
 					};
@@ -343,19 +328,12 @@ define(['app'], function (app) {
 						tempLists: dataService.parse(response.data)  // assign data to modal
 					}; 
 				modalService.show(modalDefaults, modalOptions).then(function (result) {
-						console.log("modalOpened");
 				});
 		
 			});
 			};
 			//end modal
 		
-			/* dataService.get("getsingle/template/"+$routeParams.id)
-			.then(function(response) {
-				$scope.templateData = dataService.parse(response.data);
-				if($scope.templateData.template_params == "") $scope.templateData.template_params = {};
-		
-			});	  */
 		//this code block for modal
 		$scope.editTempParamsModel = function (url, tempId) {
 			dataService.get("getsingle/mytemplate/"+tempId)
@@ -390,12 +368,9 @@ define(['app'], function (app) {
 							}
 						},
 						upload : function(files,path,userInfo,picArr){
-							console.log(picArr);
 							upload.upload(files,path,userInfo,function(data){
-								
 								if(data.status === 'success'){
 									modalOptions.slider.image = data.data.file_relative_path;
-									console.log(data.data);
 								}else{
 								$scope.alerts.push({type: data.status, msg: data.message});
 							}
@@ -413,15 +388,12 @@ define(['app'], function (app) {
 								delete data[x];
 							}
 							delete index['index'];
-							//array.push(data);
 						}
 					};
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					console.log(modalOptions.myTemplateData);
 					dataService.put("put/mytemplate/"+tempId,modalOptions.myTemplateData).then(function(response) {
 						$scope.alerts.push({type: response.status,msg: response.message});
 					});
-					
 				});
 			});
 		};
@@ -465,7 +437,6 @@ define(['app'], function (app) {
 						tempList: dataService.parse(response.data)  // assign data to modal
 					}; 
 				modalService.show(modalDefaults, modalOptions).then(function (result) {
-						console.log("modalOpened");
 				});
 				
 			});
@@ -478,10 +449,8 @@ define(['app'], function (app) {
 		$scope.openModel = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
-				console.log(response);
 				dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 				.then(function(user) {  //function for websitelist response
-					console.log(user);
 					var modalDefaults = {
 						templateUrl: url,	// apply template to modal
 						size : 'lg'
@@ -497,7 +466,6 @@ define(['app'], function (app) {
 						path : $scope.path,
 						userInfo : $scope.userInfo,
 						formData : function(templateData){
-							console.log(templateData);
 							modalOptions.myTemplateData = templateData;
 						},
 						deleteSlide : function(index,object){
@@ -513,16 +481,12 @@ define(['app'], function (app) {
 							}
 						},
 						upload : function(files,path,userInfo,picArr){
-							console.log(picArr);
 							upload.upload(files,path,userInfo,function(data){
-								
 								if(data.status === 'success'){
 									modalOptions.slider.image = data.data.file_relative_path;
-									console.log(data.data);
 								}else{
 								$scope.alerts.push({type: data.status, msg: data.message});
 							}
-						
 						}); 
 						},
 						generateThumb : function(files){  
@@ -536,7 +500,6 @@ define(['app'], function (app) {
 								delete data[x];
 							}
 							delete index['index'];
-							//array.push(data);
 						}
 					};
 					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
@@ -570,7 +533,6 @@ define(['app'], function (app) {
 			$scope.openTemp = function (url, tempId) {
 				dataService.get("getsingle/template/"+tempId)
 				.then(function(response) {
-
 					var modalDefaults = {
 						templateUrl: url,	// apply template to modal
 						size : 'lg'
@@ -579,7 +541,6 @@ define(['app'], function (app) {
 						tempList: dataService.parse(response.data)  // assign data to modal
 					}; 
 						modalService.show(modalDefaults, modalOptions).then(function (result) {
-						console.log("modalOpened");
 					});
 				
 				});
@@ -592,7 +553,6 @@ define(['app'], function (app) {
 			$scope.openTab = function (url, tempId) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
-				
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
 					size : 'lg'
@@ -600,10 +560,7 @@ define(['app'], function (app) {
 				var modalOptions = {
 					tempList: dataService.parse(response.data)  // assign data to modal
 				};
-				console.log(dataService.parse(response.data));
-				
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					console.log("modalOpened");
 				});
 			});
 		};
@@ -630,7 +587,7 @@ define(['app'], function (app) {
 							$location.path("/dashboard/templates/mytemplates");
 						},500);
 					}
-					$scope.alerts.push({type: data.status, msg: data.message});
+					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			}
 		}
@@ -653,7 +610,6 @@ define(['app'], function (app) {
 					$scope.addtemplate = response.data;
 				};
 				$scope.reset();
-				console.log($scope.addtemplate);
 			})
 			}else{
 				$scope.reset = function() {
@@ -678,7 +634,6 @@ define(['app'], function (app) {
 						}else{
 							$scope.addtemplate.template_image.push(data.data);
 						}
-						console.log($scope.addtemplate.template_image);
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}

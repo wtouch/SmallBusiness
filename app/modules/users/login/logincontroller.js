@@ -8,7 +8,6 @@ define(['app'], function (app) {
 	var loginController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,$routeParams) {
 		
 		($rootScope.alerts) ? $scope.alerts = $rootScope.alerts : $scope.alerts = [];
-
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
@@ -79,7 +78,7 @@ define(['app'], function (app) {
 			}
 			if($scope.activatePass == false) $scope.changePassword();
 			$scope.resendLink = function(){
-				console.log($routeParams.email);
+				
 			}
 		}
 

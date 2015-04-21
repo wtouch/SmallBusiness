@@ -24,7 +24,7 @@
 				</div> 
 				
 				<div class="form-group">
-					<label  for="name" class="col-sm-2 control-label">Name</label>
+					<label  for="name" class="col-sm-2 control-label">Name *</label>
 					<div class="col-sm-9">
 						<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="editprofile.name" required >
 						<span class="help-block" ng-show="editProfileForm.name.$dirty && editProfileForm.name.$invalid">
@@ -33,14 +33,14 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label  for="username" class="col-sm-2 control-label">Username</label>
+					<label  for="username" class="col-sm-2 control-label">Username *</label>
 					<div class="col-sm-9">
 						<input readonly type="text" id="username" class="form-control"
 						name="username" ng-model="editprofile.username"/>
 					</div>
 				</div>
 				<div class="form-group">	
-					<label  for="email" class="col-sm-2 control-label">Email</label>
+					<label  for="email" class="col-sm-2 control-label">Email *</label>
 					<div class="col-sm-9">
 						<input type="Email" class="form-control" id="email" ng-model="editprofile.email" name="email" placeholder="Enter Email" required >
 						<span class="help-block" ng-show="editProfileForm.email.$dirty && editProfileForm.email.$invalid">
@@ -50,7 +50,7 @@
 					</div>
 				</div>						
 				<div class="form-group">
-					<label for="phone" class="col-sm-2 control-label">Contact Number </label>
+					<label for="phone" class="col-sm-2 control-label">Contact Number *</label>
 					<div class="col-sm-9">
 						<input type="text" id="phone" name="phone" class="form-control" ng-model="editprofile.phone" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 						<span class="help-block" ng-show="editProfileForm.phone.$dirty && editProfileForm.phone.$invalid">
@@ -59,7 +59,7 @@
 					</div>						
 				</div>	
 				<div class="form-group">
-					<label for="Address" class="col-sm-2 control-label">Address</label>
+					<label for="Address" class="col-sm-2 control-label">Address *</label>
 					<div class="col-sm-9">
 						<textarea  class="form-control" id="Address" ng-model="editprofile.address.address" name="Address" placeholder="Enter Address" ng-maxlength="75" required>
 						</textarea>
@@ -70,51 +70,78 @@
 						</span>	
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="country" class="col-sm-2 control-label" name="country" >Country</label>
-					<div class="col-sm-3">
-						<select class="form-control" id="country" name="country" ng-model="editprofile.country" required ng-change="getState(editprofile.country)" ng-options="item.country_name as item.country_name for item in contries">		
-							<option value="">Select Country</option>
-						</select>
-						<span class="help-block" ng-show="editProfileForm.country.$dirty && editProfileForm.country.$invalid">
-							<span class="text-danger" ng-show="editProfileForm.country.$error.required">Country is required.</span>
-						</span>				
-					</div>
-					<div class="col-sm-3">
-						<select class="form-control" id="state" name="state" ng-model="editprofile.state" ng-change="getCities(editprofile.state)" required ng-options="item.state_name as item.state_name for item in states">		
-							<option value="">Select State</option>
-						</select>
-						<span class="help-block" ng-show="editProfileForm.state.$dirty && editProfileForm.state.$invalid">
-							<span class="text-danger" ng-show="editProfileForm.state.$error.required">state is required.</span>
-						</span>				
-					</div>
-					<div class="col-sm-3">
-						<select class="form-control" id="city" name="city" ng-model="editprofile.address.city" required ng-options="item.city_name as item.city_name for item in cities">		
-							<option value="">Select city</option>
-						</select>
-						<span class="help-block" ng-show="editProfileForm.city.$dirty && editProfileForm.city.$invalid">
-							<span class="text-danger" ng-show="editProfileForm.city.$error.required">city is required.</span>
-						</span>				
-					</div>
-				</div>
+				
+					<script type="text/ng-template" id="customTemplate.html">
+						<a>
+							<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+							<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
+						</a>
+					</script>
+					<div class="form-group">
+						<label for="location" class="col-sm-2 control-label">Location *</label>
+							<div class="col-sm-9">
+								<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="register.address.location" typeahead-on-select="getData($item)" placeholder="Start typing to select your location" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
+								<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i>
+									<span class="help-block" ng-show="registerForm.location.$dirty && registerForm.location.$invalid || registerForm.location.$dirty && !register.location">
+										
+									</span>
+							</div>						
+						</div>
+						<div class="form-group">
+							<label for="area" class="col-sm-2 control-label">Area *</label>
+							<div class="col-sm-9">
+								<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="register.address.area" placeholder="Enter Area">
+								<span class="help-block" ng-show="registerForm.area.$dirty && registerForm.area.$invalid">
+									<span ng-show="registerForm.area.$error.pattern && (registerForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
+									<span class="text-danger" ng-show="registerForm.area.$error.minlength && (registerForm.area.$dirty || submitted)">Enter correct Code.</span>
+								</span>
+							</div>						
+						</div>			
+						<div class="form-group">
+							<label for="state" class="col-sm-2 control-label">State</label>
+							<div class="col-sm-4">
+							<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="register.state" placeholder="Enter Your State Name">
+								<span class="help-block" ng-show="registerForm.state.$dirty && registerForm.state.$invalid">
+									<span ng-show="registerForm.state.$error.required" class="text-danger">State is required.</span>
+								</span>				
+							</div>						
+							<div class="col-sm-offset-1 col-sm-4">
+								<input type="text" required name="City" id="City" ng-model="register.address.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
+									<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
+								<span class="help-block" ng-show="registerForm.City.$dirty && registerForm.City.$invalid || registerForm.City.$dirty && !register.City">
+									<span ng-show="registerForm.City.$error.required || registerForm.City.$dirty && !register.city" class="text-danger">City is required.</span>
+								</span>				
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="Country" class="col-sm-2 control-label">Country</label>
+							<div class="col-sm-9">
+								<input type="text" required name="Country" id="Country" ng-model="register.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
+								<span class="help-block" ng-show="registerForm.Country.$dirty && registerForm.Country.$invalid || registerForm.Country.$dirty && !register.Country">
+									<span ng-show="registerForm.Country.$error.required || registerForm.Country.$dirty && !register.Country" class="text-danger">Country Name required.</span>
+								</span>				
+							</div>
+						</div>	
+						<div class="form-group">
+							<label for="pincode" class="col-sm-2 control-label">Pin Code</label>
+							<div class="col-sm-9">
+								<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="register.address.pincode" placeholder="Enetr Zip Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+								<span class="help-block" ng-show="registerForm.pincode.$dirty && registerForm.pincode.$invalid">
+									<span ng-show="registerForm.pincode.$error.pattern && (registerForm.pincode.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
+									<span class="text-danger" ng-show="registerForm.pincode.$error.minlength && (registerForm.pincode.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
+								</span>
+							</div>						
+						</div>
 				<div class="form-group">
 					<label for="fax" class="col-sm-2 control-label">Fax </label>
 					<div class="col-sm-9">
-						<input type="text" id="fax" class="form-control" name="fax" ng-model="editprofile.fax" placeholder="Your Fax " ng-pattern="/[0-9]\d$/" maxlength="12" required>
-						<span class="help-block" ng-show="editProfileForm.fax.$dirty && editProfileForm.fax.$invalid">
-							<span class="text-danger" ng-show="editProfileForm.fax.$error.pattern && (editProfileForm.fax.$dirty || submitted)">Enter a valid Fax.</span>
-						</span>
+						<input type="text" id="fax" class="form-control" name="fax" ng-model="editprofile.fax" placeholder="Your Fax " ng-pattern="/[0-9]\d$/" maxlength="12" >
 					</div>						
 				</div>				
 				<div class="form-group">
 					<label for="website" class="col-sm-2 control-label">Website </label>
 					<div class="col-sm-9">
 						<input type="url" class="form-control" id="website" name="website" ng-model="editprofile.website" placeholder="Enter Website">
-						<span class="help-block" ng-show="editProfileForm.website.$dirty && editProfileForm.website.$invalid">
-							<span class="text-danger" ng-show="editProfileForm.website.$error.required">Website  is required.</span>
-							<span class="text-danger" ng-show="editProfileForm.website.$error.url">Invalid Web Site.</span>
-						</span>
-						<span>e.g http://www.google.com</span>
 					</div>						
 				</div>	
 				<div class="form-group">
