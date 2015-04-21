@@ -77,12 +77,12 @@
 				</td>
 				<td>
 					<div ng-if="permission.edit_group" class="btn-group" role="group" aria-label="first group">
-						<a href="#/dashboard/users/createusergroup/{{groups.id}}" class="btn btn-info" tooltip="Edit">
+						<a href="#/dashboard/users/createusergroup/{{groups.id}}" class="btn btn-info" tooltip="Edit Group">
 							<span class="glyphicon glyphicon-pencil"></span>
 						</a>
 					</div>
 					<div class="btn-group" role="group" aria-label="third group">
-						<button type="button" tooltip="{{dynamicTooltip(groups.status, 'Remove','Active')}}" ng-class="(groups.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="groups.status" ng-change="changeStatusFn('status', groups.status, groups.id)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
+						<button type="button" tooltip="{{dynamicTooltip(groups.status, 'Remove group','Active user group')}}" ng-class="(groups.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="groups.status" ng-change="changeStatusFn('status', groups.status, groups.id)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
 							<span ng-if="groups.status==1" class="glyphicon glyphicon-ok"></span>
 							<span ng-if="groups.status==0" class="glyphicon glyphicon-remove"></span>
 						</button>

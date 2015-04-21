@@ -22,7 +22,7 @@ define(['app'], function (app) {
 		$scope.manage_user = {};
 		dataService.config('config', {config_name : "manage_user"}).then(function(response){
 			$scope.manage_user = response.config_data;
-			console.log($scope.manage_user); 
+			
 		});
 
 		$scope.getData = function(location){
@@ -82,7 +82,7 @@ define(['app'], function (app) {
 			}
 			
 			return group_name;
-			console.log(group_name);
+			
 		}
 		
 		$scope.disableGroup = function(group_name){
@@ -156,9 +156,11 @@ define(['app'], function (app) {
 		$scope.searchFilter = function(statusCol, colValue) {
 			$scope.search = {search: true};
 			$scope.userParams = {};
+			$scope.usergroupParams = {};
 			$scope.filterStatus= {}; // search filter for send request ex. {columnName : value}
 			(colValue =="") ? delete $scope.userParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
 			angular.extend($scope.userParams, $scope.filterStatus, $scope.userInfo, $scope.search);
+			angular.extend($scope.usergroupParams, $scope.filterStatus, $scope.search);
 			
 			if(colValue.length >= 4 || colValue ==""){
 				if($scope.userViews == 'userslist'){
@@ -174,7 +176,7 @@ define(['app'], function (app) {
 					});
 				}
 				if($scope.userViews == 'usersgroup'){
-					dataService.get("/getmultiple/usergroup/1/"+$scope.pageItems, $scope.userParams).then(function(response) { 
+					dataService.get("/getmultiple/usergroup/1/"+$scope.pageItems, $scope.usergroupParams).then(function(response) { 
 						if(response.status == 'success'){
 							$scope.usergroupList = dataService.parse(response.data); // this will change for template
 							$scope.totalRecords = response.totalRecords; // this is for pagination
@@ -279,7 +281,6 @@ define(['app'], function (app) {
 			}
 			$scope.editUserId = $routeParams.id;
 			if($routeParams.id){
-				
 				dataService.get("getsingle/user/"+$routeParams.id)
 				.then(function(response) {
 					$scope.adduser = response.data;
@@ -342,7 +343,7 @@ define(['app'], function (app) {
 					if($scope.usersgroup.group_permission.enquiry_module == (undefined)){
 						$scope.usersgroup.group_permission.enquiry_module = {}
 					};
-					console.log($scope.usersgroup.group_permission);
+					
 					/* group_permission : {
 					user_module : {},
 					group_access : {},
@@ -381,7 +382,6 @@ define(['app'], function (app) {
 		
 		var usersgroupList = function(){
 			dataService.get("getmultiple/usergroup/"+$scope.usersGroupCurrentPage+"/"+$scope.pageItems).then(function(response) { 
-				//console.log(response);
 				if(response.status == 'success'){
 					$scope.usergroupList = dataService.parse(response.data);
 					if($scope.usergroupList.config == (undefined || "")) $scope.usergroupList.config = {};
