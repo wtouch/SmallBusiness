@@ -195,6 +195,7 @@ define(['app'], function (app) {
 						$scope.reqnewsite = {};
 						$scope.formScope.requestsiteForm.$setPristine;
 						$scope.alerts.push({type: response.status, msg: "Your Request has successfully registered. Kindly check your mailbox for activation status!"});
+						dataService.progressSteps('requestSite', true);
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}

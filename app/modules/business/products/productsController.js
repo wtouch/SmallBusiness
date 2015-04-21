@@ -127,8 +127,9 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			$scope.addproduct.date = $scope.currentDate;
 				 dataService.post("post/product",addproduct)
 				.then(function(response) {  //function for response of request temp
-					$scope.addproduct = response.data;
+					$scope.alerts.push({type: response.status, msg: response.message});
 					$scope.reset();
+					dataService.progressSteps('addProducts', true);
 				});
 			}//end of post method {trupti} 
 		}
@@ -145,6 +146,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 						$scope.showServiceForm = false;
 						$scope.showProductForm = false;
 					}
+					$scope.alerts.push({type: response.status, msg: response.message});
 				
 				});
 			} //end of post method {trupti} 

@@ -505,6 +505,7 @@ define(['app'], function (app) {
 					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 						dataService.post("post/mytemplate",modalOptions.myTemplateData).then(function(response) {
 							$scope.alerts.push({type: response.status,msg: response.message});
+							dataService.progressSteps('chooseTemplate', true);
 						}); 
 					
 					});

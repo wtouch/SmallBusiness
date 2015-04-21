@@ -148,7 +148,7 @@ define(['angular',
 						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
 						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
 						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
-					}else if($rootScope.userDetails.config.addbusinessDetails == false){
+					}else if($rootScope.userDetails.config.addbusinessDetails != true){
 						$location.path("/dashboard/business/adddetails/"+$rootScope.userDetails.config.addbusinessDetails);
 						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step active';
 						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
@@ -157,9 +157,9 @@ define(['angular',
 					}else if($rootScope.userDetails.config.addProducts ==false){
 						$location.path("/dashboard/business/products");
 						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
-						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';
+						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step active';
 						
-						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step active';
+						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
 						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
 						
 					}else if($rootScope.userDetails.config.chooseTemplate ==false){
