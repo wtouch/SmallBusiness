@@ -121,7 +121,67 @@ define(['angular',
 					$location.path("/dashboard");
 				}
 			};
+			if($rootScope.userDetails != null){
+				if($rootScope.userDetails.config.addbusiness === undefined){
+					
+					$rootScope.userDetails.config = {
+						addbusiness : false,
+						addbusinessDetails : false,
+						addProducts : false,
+						chooseTemplate : false,
+						requestSite : false
+					}
+					
+					dataService.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
+						console.log(response);
+						if(response.status == "success"){
+							dataService.setUserDetails(JSON.stringify($rootScope.userDetails));
+							$rootScope.userDetails = dataService.parse(dataService.userDetails);
+						}
+					})
+				}
+				//console.log($rootScope.userDetails.config);
+				if($rootScope.userDetails.config.addbusiness == false){
+					$location.path("/dashboard/business/addbusiness");
+					$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step active';
+					$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
+					$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
+					$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
+				}else if($rootScope.userDetails.config.addbusinessDetails !=true){
+					$location.path("/dashboard/business/adddetails/"+$rootScope.userDetails.config.addbusinessDetails);
+					$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
+					$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step active';
+					$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
+					$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
+				}else if($rootScope.userDetails.config.addProducts ==false){
+					$location.path("/dashboard/business/products");
+					$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
+					$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';
+					
+					$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step active';
+					$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
+					
+				}else if($rootScope.userDetails.config.chooseTemplate ==false){
+					$location.path("/dashboard/templates/listoftemplates");
+					$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
+					$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';
+					$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step active';
+					$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
+					
+				}else if($rootScope.userDetails.config.requestSite ==false){
+					$location.path("/dashboard/websites/requestnewsite");
+					$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
+					$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';
+					$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step complete';
+					$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step active';
+				}
+			}
 		});
+		
+		
+		
+		
+		//(userDetails.config.chooseTemplate=='true')
 	}]);
 	return app;
 });
