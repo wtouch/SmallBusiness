@@ -61,7 +61,7 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			$response['title'] = "this is twig template";
+			$response['title'] = "my business keywords";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 			$response["status"] = "success";
@@ -157,7 +157,7 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			$response['title'] = "this is twig template";
+			$response['title'] = "Apnasite business category";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 			$response["status"] = "success";
@@ -200,7 +200,7 @@ class portalManager{
 			}
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
-			$response['title'] = "this is twig template";
+			$response['title'] = "ApnaSite business category types";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		}catch(Exception $e){
@@ -232,7 +232,7 @@ class portalManager{
 			
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
-			$response['title'] = "Business List";
+			$response['title'] = "ApnaSite Business List";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		}catch(Exception $e){
@@ -244,11 +244,12 @@ class portalManager{
 		
 		return $response;
 	}
-	function getBusiness ($category, $type, $business,$id){
+	function getBusiness ($city,$category, $type, $business,$id){
 		try{
 			$where['type'] = $type;
 			$where['status'] = 1;
 			$where['category'] = $category ;
+			$where['city'] = $city ;
 			$where['id'] = $id ;
 			$t0 = $this->db->setTable("business");
 			$this->db->setWhere($where, $t0);
@@ -287,7 +288,7 @@ class portalManager{
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			
-			$response['title'] = "this is twig template";
+			$response['title'] = "My Site";
 			$response['data'] = $this->jsonDecode($data["data"]);
 			$response['service'] = $this->jsonDecode($servicedata["data"]);	
 			$response['product'] = $this->jsonDecode($proddata["data"]);

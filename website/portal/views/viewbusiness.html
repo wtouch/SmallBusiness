@@ -21,13 +21,12 @@
 {% block content %}
 {% autoescape false %}
 	{% include 'includes/header.html' ignore missing %}
-	
 	<main>
 		<div class="row">
 			<div class="col-md-12" ng-controller="enquiryController">
 				<nav class="navbar navbar-default">
-					<a class="navbar-brand" href="#"><img class="img-responsive biz-logo" src="{{data.business_logo.file_relative_path}}"></a>
-					<h2 class="text-center" >{{data.business_name}}<a class="btn btn-primary pull-right"  ng-click="openModel('{{path}}includes/enquiryform.html',{{data.id}},'{{data.business_name}}','{{data.contact_profile.email}}',{{data.user_id}})">Get In Touch With Us</a></h2>
+					<a class="navbar-brand" href="#" title="'{{data.business_name}}'"><img class="img-responsive biz-logo" src="{{data.business_logo.file_relative_path}}"></a>
+					<h2 class="text-center" title="'{{data.business_name}}'" >{{data.business_name}}<a class="btn btn-primary pull-right"  ng-click="openModel('{{path}}includes/enquiryform.html',{{data.id}},'{{data.business_name}}','{{data.contact_profile.email}}',{{data.user_id}})">Get In Touch With Us</a></h2>
 					<p class="text-center"><span class="glyphicon glyphicon-envelope Email">
 					</span> <a href="{{data.contact_profile.email}}" >{{data.contact_profile.email}}</a>
 					<span class="glyphicon glyphicon-earphone"></span>{{data.contact_profile.mobile}}
@@ -55,10 +54,10 @@
 			<div class="col-md-10">
 				<div ng-show="id==''||id=='home'"  id="home">
 						<div class="row media boxborder">
-							<div class="media-left col-md-3">
+							<div class="media-left col-md-3  col-sm-12 col-xs-12 ">
 								<img class="img-circle img-responsive" src="{{data.contact_profile.contact_photo.file_relative_path}}">
 							</div>
-							<div class="media-body col-md-9 table-responsive">
+							<div class="media-body col-md-9  col-sm-12 col-xs-12  table-responsive">
 								<table class="table table-bordered" >
 									<tbody>
 										<tr>
@@ -66,7 +65,7 @@
 											<td>
 												<ul>
 													{% for key,value  in data.keywords %}
-														<li><a href="/search/{{value}}">{{value}}</a></li>
+														<li><a href="/search/{{data.city}}/{{value| replace({' ' : '-'})}}">{{value}}</a></li>
 													{% endfor %}
 												</ul>
 											</td>
@@ -131,7 +130,7 @@
 								<div class="thumbnail productBox">
 									<img class="img-responsive prodimg" src="{{x.product_image.0.file_relative_path}}" alt="{{key}}"/>
 								</div>
-								<div class="caption text-center" ng-init="isVisible = false" ng-controller="productController">
+								<div class="caption text-center" ng-init="isVisible = false" ng-controller="productController" class="table-responsive">
 									<h3 >{{ x.product_service_name }} </h3>
 									<p >{{x.description |length >120 ?x.description|slice(start, 100)~ '...' : x.description}}</p>
 										<button class="btn btn-primary"  ng-click="isShow({{key}})" >Read More..</button>
@@ -139,8 +138,19 @@
 										<div  ng-show="isVisible"  ng-class ="(isVisible)? 'product-desc show'  :'product-desc ' " >
 											<button type="button" class="close pull-right" ng-click="isVisible = !isVisible"><span aria-hidden="true">&times;</span></button>
 											<h4>{{ x.product_service_name }} </h4>
-											{{x.description}}
-											
+											<table class="table table-bordered">
+												<tr>
+													<td>
+														{% for key, value in x.product_image %}
+														<img class="img-responsive prod-image" src="{{value.file_relative_path}}" alt="{{key}}"/>
+														{%endfor%}
+													
+													</td>
+													<td style=" width: 50%;">
+													<strong>Product Details</strong>
+													<p >{{x.description}}</p></td>
+												</tr>
+											</table>
 										</div>
 										{% endif %}
 								</div>
@@ -169,7 +179,19 @@
 										<div  ng-show="isVisible"  ng-class ="(isVisible)? 'product-desc show'  :'product-desc ' " >
 											<button type="button" class="close pull-right" ng-click="isVisible = !isVisible"><span aria-hidden="true">&times;</span></button>
 											<h4>{{ x.product_service_name }} </h4>
-											{{x.description}}
+											<table class="table table-bordered">
+												<tr>
+													<td>
+														{% for key, value in x.product_image %}
+														<img class="img-responsive prod-image" src="{{value.file_relative_path}}" alt="{{key}}"/>
+														{%endfor%}
+													
+													</td>
+													<td style=" width: 50%;">
+													<strong>Product Details</strong>
+													<p >{{x.description}}</p></td>
+												</tr>
+											</table>
 										</div>
 										{% endif %}
 								</div>
