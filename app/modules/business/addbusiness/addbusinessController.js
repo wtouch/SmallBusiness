@@ -153,12 +153,11 @@ define(['app'], function (app) {
 					dataService.progressSteps('addbusinessDetails', response.data);
 				}else{
 					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
-				} 
-				
+				}
 			});
 		}
 		
-		 //code for get data from business
+		//code for get data from business
 		if($routeParams.id){
 			$scope.id=$routeParams.id
 			dataService.get("getsingle/business/"+$routeParams.id)
@@ -180,7 +179,6 @@ define(['app'], function (app) {
 				});
 			}
 		}
-		
 		//get method for get data from business
 		var addbusiness = function(){
 			console.log(addbusiness);
@@ -196,7 +194,6 @@ define(['app'], function (app) {
 				$scope.reset();
 			}
 		}
-		
     };
 	
 	// Inject controller's dependencies
