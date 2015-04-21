@@ -78,6 +78,7 @@
 	
 	function registerUser($body, $appPath){
 		$db = new dbHelper();	
+		
 		$insert = $db->insert("users", $body);
 		$input = json_decode($body);
 		if($insert['status'] == 'success'){
