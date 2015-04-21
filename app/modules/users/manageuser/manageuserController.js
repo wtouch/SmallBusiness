@@ -338,6 +338,20 @@ define(['app'], function (app) {
 				.then(function(response) {
 					$scope.usersgroup = dataService.parse(response.data);
 					if($scope.usersgroup.config == (undefined || "")) $scope.usersgroup.config = {};
+					if($scope.usersgroup.group_permission == (undefined)) $scope.usersgroup.group_permission = {};
+					if($scope.usersgroup.group_permission.enquiry_module == (undefined)){
+						$scope.usersgroup.group_permission.enquiry_module = {}
+					};
+					console.log($scope.usersgroup.group_permission);
+					/* group_permission : {
+					user_module : {},
+					group_access : {},
+					template_module : {},
+					business_module : {},
+					product_module : {},
+					website_module : {},
+					enquiry_module : {},
+					dashboard : {} }*/
 				});
 				$scope.update = function(usersgroup){
 					dataService.put("put/usergroup/"+$routeParams.id,usersgroup)
