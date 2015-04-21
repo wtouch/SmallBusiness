@@ -154,9 +154,10 @@ define(['app'], function (app) {
 		
 		//this is global method for filter 
 		$scope.changeStatusFn = function(statusCol, showStatus) {
-			$scope.filterStatus= {};
+			console.log(statusCol);
+			$scope.filterStatus = {};
 			(showStatus =="") ? delete $scope.websiteParams[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.websiteParams, $scope.filterStatus, $scope.userInfo);
+			angular.extend($scope.websiteParams, $scope.filterStatus);
 			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  
 				if(response.status == 'success'){
