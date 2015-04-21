@@ -1,6 +1,6 @@
 <!-- This block for current user id -->
-	<div class="form-group" ng-if="userDetails.group_name != 'customer'"ng-model="addbusiness.user_id">
-		<label for="customer" class="col-sm-3 control-label">Customer</label>
+	<div class="form-group" ng-if="userDetails.group_name != 'customer'" ng-model="addbusiness.user_id" ng-submit="addbusinessForm.$valid">
+		<label for="customer" class="col-sm-3 control-label">Customer*</label>
 		<div class="col-sm-7">
 				<select class="form-control" name="customer" id="customer"  ng-model="addbusiness.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " required>
 					<option value="">Select Customer</option>
@@ -18,17 +18,17 @@
 	</span> 
 <!-- This block for current user id -->
 <div class="form-group">
-	<label  for="business_name" class="col-sm-3 control-label">Organization/Firm Name</label>
+	<label  for="business_name" class="col-sm-3 control-label">Organization/Firm Name*</label>
 	<div class="col-sm-9">
 		<input type="hidden" ng-model="addbusiness.created_date">
-		<input type="text" ng-disabled="bizId" id="business_name" class="form-control" name="business_name" placeholder="Business Name" ng-model="addbusiness.business_name" required>
+		<input type="text" ng-disabled="bizId" id="business_name" class="form-control" name="business_name" placeholder="Organization/Firm Name" ng-model="addbusiness.business_name" required>
 		<span class="help-block" ng-show="addbusinessForm.business_name.$dirty && addbusinessForm.business_name.$invalid">
-			<span ng-show="addbusinessForm.business_name.$error.required" class="text-danger">Business Name is required.</span>
+			<span ng-show="addbusinessForm.business_name.$error.required" class="text-danger">Organization Name is required.</span>
 		</span>
 	</div>						
 </div>
 <div class="form-group" >
-	<label  for="business_logo" class="col-sm-3 control-label">Logo</label>
+	<label  for="business_logo" class="col-sm-3 control-label">Logo*</label>
 	<div class="col-sm-9">
 		<input type="file" id="business_logo" name="business_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="business_logo">	
 		<!-- This will show thumbnails & progress of images -->
@@ -41,7 +41,7 @@
 </div>	
 
 <div class="form-group">
-	<label for="category" class="col-sm-3 control-label" name="category" >Category</label>
+	<label for="category" class="col-sm-3 control-label" name="category" >Category*</label>
 	<div class="col-sm-9">
 		<select class="form-control" name="category" id="category"  ng-model="addbusiness.category" ng-change="getTypes(addbusiness.category)" required ng-options="item.id as item.category_name for item in businessCategories">		
 			<option value="">Select Category</option>
@@ -52,7 +52,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="type" class="col-sm-3 control-label" name="type">Type</label>
+	<label for="type" class="col-sm-3 control-label" name="type">Type*</label>
 	<div class="col-sm-9">
 		<select class="form-control" name="type" id="type"  ng-model="addbusiness.type" ng-change="getKeywords(addbusiness.type)" required ng-options="item.id as item.category_name for item in businessTypes">
 			<option value="">Select Type</option>
@@ -63,7 +63,7 @@
 	</div>
 </div>	
 <div class="form-group">
-	<label for="ownership" class="col-sm-3 control-label" name="ownership" >Ownership Type</label>
+	<label for="ownership" class="col-sm-3 control-label" name="ownership" >Ownership Type*</label>
 	<div class="col-sm-9">
 		<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.ownership" required ng-model="addbusiness.ownership" required ng-options="item as item for item in biz.ownership">		
 			<option value="">Select Ownership Type</option>
@@ -75,7 +75,7 @@
 </div>
 
 <div class="form-group">
-	<label for="description" class="col-sm-3 control-label">Detailed Description</br>
+	<label for="description" class="col-sm-3 control-label">Detailed Description*</br>
 	<small>This will show on Website Home Page</small></label>
 	<div class="col-sm-9">
 		<textarea type="text" class="form-control" id="description" name="description" ng-model="addbusiness.business_info.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
@@ -90,7 +90,7 @@
 </div>  
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button type="submit" class="btn btn-default btn-primary" title="Save" ng-click="showFormPart('business')">Next</button>
+		<button type="submit" class="btn btn-primary" title="Save" ng-click="showFormPart('business')">Next</button>
 		<button ng-if="id" type="submit" class="btn btn-success"  ng-click="updateData(addbusiness)">Update</button> 
 	</div>
 </div>
