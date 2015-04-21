@@ -54,6 +54,24 @@ define(['app'], function (app) {
 			}
 		}
 		
+		$scope.getData = function(location){
+			$scope.readOnly = true;
+			$scope.register.address.location = location.location;
+			$scope.register.address.city = location.city;
+			$scope.register.state = location.state;
+			$scope.register.country = location.country;
+			$scope.register.address.area = location.area;
+			$scope.register.address.pincode = location.pincode;
+		}
+		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+			var locationParams = {search : {}, groupBy : {}}
+			locationParams.search[searchColumn] = searchValue;
+			locationParams.groupBy[searchColumn] = searchValue;
+			return dataService.config('locations', locationParams).then(function(response){
+				return response;
+			});
+		}
+		
 		//dynamic dropdwnlist of country,state & city
 		$scope.contries = dataService.config.country;
 		$scope.getState = function(country){

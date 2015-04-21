@@ -312,6 +312,7 @@ class websiteManager{
 			$routes = array("", "home", "about", "contact");
 			$products = $this->getProductData("products");
 			$services = $this->getProductData("services");
+			
 			$business = $this->getBusinessData();
 			if(count($business['data']['testimonials']) >= 1) array_push($routes,'testimonials');
 			if(count($business['data']['job_careers']) >= 1) array_push($routes,'job_careers');

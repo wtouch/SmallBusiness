@@ -72,32 +72,31 @@ define(['app'], function (app) {
 				return response;
 			});
 		}
-		$scope.getCategory = function(searchColumn, searchValue){
-			var locationParams = {search : {}, groupBy : {}}
-			locationParams.groupBy['category'] = 'category';
-			dataService.config('keywords',locationParams).then(function(response){
+		$scope.getCategory = function(filterColumn){
+			if(filterColumn){
+				var locationParams = {filter : {parent_id : filterColumn}};
+			}else{
+				var locationParams = {filter : {parent_id : 0}};
+			}
+			dataService.config('business_category',locationParams).then(function(response){
 				$scope.businessCategories = response;
 			});
 		}
-		$scope.getCategory('category');
-		$scope.getTypes = function(filterColumn, searchValue){
-			var locationParams = {filter : {}, groupBy : {}}
-			locationParams.filter[filterColumn] = searchValue;
-			locationParams.groupBy['type'] = "type";
-			dataService.config('keywords',locationParams).then(function(response){
+		$scope.getCategory(0);
+		$scope.getTypes = function(filterColumn){
+			var locationParams = {filter : {parent_id : filterColumn}};
+			dataService.config('business_category',locationParams).then(function(response){
 				$scope.businessTypes = response;
 			});
 		}
-		$scope.getKeywords = function(filterColumn, searchValue){
-			var locationParams = {filter : {}, groupBy : {}}
-			locationParams.filter[filterColumn] = searchValue;
-			locationParams.groupBy['keyword'] = "keyword";
-			dataService.config('keywords',locationParams).then(function(response){
+		$scope.getKeywords = function(filterColumn){
+			var locationParams = {filter : {parent_id : filterColumn}};
+			dataService.config('business_category',locationParams).then(function(response){
 				$scope.businessKyewords = response;
 				console.log($scope.businessKyewords);
 			});
 		}
-		$scope.getKeywords('type', "Philosophy Poetry");
+		
 		/**********************************************************************
 		code for accessing json data of country, State & City {Sonali}*/
 		
@@ -149,12 +148,8 @@ define(['app'], function (app) {
 			.then(function(response) {  //function for response of request temp
 				if(response.status == "success"){
 					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
-					
-					setTimeout(function(){
-						alert(response.data);
-						$location.path("/dashboard/business/adddetails/"+response.data);
-						$scope.$apply();
-					}, 3000);
+					$location.path("/dashboard/business/adddetails/"+response.data);
+					$scope.$apply();
 				}else{
 					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
 				}
@@ -170,17 +165,15 @@ define(['app'], function (app) {
 				console.log(response);
 					if(response.status == 'success'){
 						$scope.addbusiness = dataService.parse(response.data);
-						$scope.getTypes('category', $scope.addbusiness.category);
-						$scope.getKeywords('type', $scope.addbusiness.type);
+						$scope.getTypes($scope.addbusiness.category);
+						$scope.getKeywords($scope.addbusiness.type);
 					}
 			});
 			$scope.updateData = function(addbusiness) {
 				dataService.put("put/business/"+$routeParams.id,addbusiness)
 				.then(function(response) {
 					if(response.status == "success"){
-						setTimeout(function(){
-							$location.path("/dashboard/business/businesslist");
-						},500);
+						$location.path("/dashboard/business/businesslist");
 					}
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});

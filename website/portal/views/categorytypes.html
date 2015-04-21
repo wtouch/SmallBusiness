@@ -8,20 +8,30 @@
 {% autoescape false %}
 	{% include 'includes/header.html' ignore missing %}
 		<main  >
-			<div class="cat center-block">
+			<div class="cat center-block text-center">
 				<h3> Popular Business Types</h3>
-				<div class="row ">
-					{% for x in data %}
+				<div class="row">
+					<div class="col-md-12 ">
+							{% for x in data %}
+								<div class="products " >
+									<img src="{{path}}img/category/{{x.type_name}}.jpg" class="category center-block"/><br>
+									<a class="catp" href="/{{x.city}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}">{{x.type_name}}</a>
+								</div>
+							{% endfor %}
+					</div>
+				</div>
+				<!-- <div class="row ">
+					{#% for x in data %}
 						<div class="col-md-3">
 							<div class=" buztypes ">
 								<a href="#">
-									<img src="{{path}}img/types/{{x.type}}.jpg" class="category center-block"/><br>
+									<img src="{{path}}img/category/{{x.type_name}}.jpg" class="category center-block"/><br>
 								</a>
-								<h4 class="media-heading"><a href="/{{x.city}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}">{{x.type}}</a></h4>
+								<h4 class="media-heading"><a href="/{{x.city}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}">{{x.type_name}}</a></h4>
 							</div>
 						</div>
-					{% endfor %}
-				</div>
+					{% endfor %#}
+				</div> -->
 			</div>
 		</main >
 	{% endautoescape %}

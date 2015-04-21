@@ -12,27 +12,27 @@
 </script>
 
 <header ng-controller="TypeaheadCtrl">
-	<div class="row">
-		<div class="col-md-12">
-			<nav class="navbar navbar-default  navbar-fixed-top">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/"><img src="{{path}}img/logo.png" title="Apnasite Portal" class="img center-block " /></a>
-					<div class="input-group search" ng-if="!index.html">
-						<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult($item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, city)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
-						<span class="input-group-btn">
-							<button class="btn btn-primary  form-control " type="button"><span class="glyphicon glyphicon-search"></span></button>
-						</span>
-					</div>
-				 </div>
-				<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav pull-right">
-						
-						<li><a href="/app/#/login">Login</a></li>
-						<li><a href="/app/#/register">Register</a></li>
-						
-					</ul>
+	<nav class="navbar navbar-default  navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/"><img src="{{path}}img/logo.png" title="Apnasite Portal" class="img center-block " /></a>
+			</div>
+			<form class="navbar-form navbar-left" role="search">
+				<div class="input-group search" ng-if="!index.html">
+					<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult($item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, city)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
+					<span class="input-group-btn">
+						<button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-search"></span></button>
+					</span>
 				</div>
-			 </nav>
+			</form>
+			<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav pull-right">
+					
+					<li><a href="/app/#/login">Login</a></li>
+					<li><a href="/app/#/register">Register</a></li>
+					
+				</ul>
+			</div>
 		</div>
-	</div>
+	</nav>
 </header>

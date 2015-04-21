@@ -36,9 +36,10 @@ class portalManager{
 			return $arr;
 		}	
 	}
-	function getDataByKeyword($keyword, $search = false){
+	function getDataByKeyword($city, $keyword, $search = false){
 		try{
 			$where['status'] = 1;
+			$where['city'] = $city;
 			
 			if(is_array($keyword)){
 				foreach($keyword as $key => $value){
@@ -133,11 +134,13 @@ class portalManager{
 		echo json_encode($response);
 	}
 	
-	function getCategories(){
+	function getCategories($city){
 		// query to get types & group by category
 		try{
+			if($city==null) $city = "Pune";
 			$groupBy = array('category');
 			$where['status'] = 1;
+			$where['city'] = $city;
 				
 			$t0 = $this->db->setTable("business");
 			$this->db->setGroupBy($groupBy);
@@ -146,6 +149,9 @@ class portalManager{
 			$cols = array("category");
 			$this->db->setColumns($t0, $cols);
 			
+			$t1 = $this->db->setJoinString("LEFT JOIN", "business_category", array("id"=>$t0.".category"));
+			$col["category_name"] = "category_name";
+			$this->db->setColumns($t1, $col);
 			$data = $this->db->select();
 			
 			if($data['status'] != "success"){
@@ -178,6 +184,14 @@ class portalManager{
 			
 			$cols = array("city,category, type");
 			$this->db->setColumns($t0, $cols);
+			
+			$t1 = $this->db->setJoinString("LEFT JOIN", "business_category", array("id"=>$t0.".category"));
+			$t2 = $this->db->setJoinString("LEFT JOIN", "business_category", array("parent_id"=>$t0.".type"));
+			$col["category_name"] = "category_name";
+			$this->db->setColumns($t1, $col);
+			
+			$colType["category_name"] = "type_name";
+			$this->db->setColumns($t2, $colType);
 			
 			$data = $this->db->select();
 			

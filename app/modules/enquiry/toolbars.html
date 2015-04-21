@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12 bottomspace">
-		<div class="clearfix">
-			<div class="toolbar pull-left">
+		<div class="row">
+			<div class="col-sm-2 toolbar pull-left">
 				<div class="btn-group" role="group" aria-label="first group">
 					<button class="btn btn-default" tooltip-animation="true" tooltip="Back" go-back ng-if="mailId!='mails'">
 						<span  class="glyphicon glyphicon-arrow-left"></span>
@@ -59,7 +59,7 @@
 		
 		
 			
-			<div class="toolbar pull-right">
+			<div class=" col-sm-2 toolbar pull-right">
 				<div class="btn-group" role="group" aria-label="Sixth group" ng-if="mailId=='mailview'">
 					<a class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Previous Message" ng-click="prevmail()" >
 						<span class=" glyphicon glyphicon-arrow-left" name="prevmsg" value="prevmsg"></span>
@@ -68,10 +68,6 @@
 						<span class="glyphicon glyphicon-arrow-right" name="nextmsg" value="nextmsg"></span>
 					</a>
 				</div>
-				
-				
-		
-		
 				<form class="form-inline">
 					<div class="input-group">
 						<input id="search" type="text" class="form-control" ng-change="searchFilter('subject', searchProp)" ng-model="searchProp" placeholder="search" ng-if="mailId!='composemailview' && mailId!='mailview'"/>
