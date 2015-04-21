@@ -55,7 +55,7 @@
 <div class="form-group">
 	<label for="location" class="col-sm-3 control-label">Location*</label>
 	<div class="col-sm-9">
-		<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="addbusiness.location" typeahead-on-select="getData($item)" placeholder="Locations loaded via $http" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
+		<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="addbusiness.location" typeahead-on-select="getData($item)" placeholder="Locations" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
 		<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i>
 			<span class="help-block" ng-show="addbusinessForm.location.$dirty && addbusinessForm.location.$invalid || addbusinessForm.location.$dirty && !addbusiness.location">
 				<span class="text-danger" ng-show="addbusinessForm.location.$dirty && (addbusinessForm.location.$error.required || !addbusiness.location)">Location required.</span>
@@ -65,7 +65,7 @@
 <div class="form-group">
 	<label for="area" class="col-sm-3 control-label">Area</label>
 	<div class="col-sm-9">
-		<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="addbusiness.area" placeholder="Enetr area">
+		<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="addbusiness.area" placeholder="Enter area">
 		<span class="help-block" ng-show="addbusinessForm.area.$dirty && addbusinessForm.area.$invalid">
 			<span ng-show="addbusinessForm.area.$error.pattern && (addbusinessForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
 			<span class="text-danger" ng-show="addbusinessForm.area.$error.minlength && (addbusinessForm.area.$dirty || submitted)">Enter correct Code.</span>
@@ -75,7 +75,7 @@
 <div class="form-group">
 	<label for="state" class="col-sm-3 control-label">State</label>
 	<div class="col-sm-4">
-	<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="addbusiness.state" placeholder="Enetr state">
+	<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="addbusiness.state" placeholder="Enter state">
 		<span class="help-block" ng-show="addbusinessForm.state.$dirty && addbusinessForm.state.$invalid">
 			<span ng-show="addbusinessForm.state.$error.required" class="text-danger">State is required.</span>
 		</span>				
@@ -101,7 +101,7 @@
 <div class="form-group">
 	<label for="pincode" class="col-sm-3 control-label">Pin Code</label>
 	<div class="col-sm-9">
-		<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="addbusiness.pincode" placeholder="Enetr Pin Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+		<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="addbusiness.pincode" placeholder="Enter Pin Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
 		<span class="help-block" ng-show="addbusinessForm.pincode.$dirty && addbusinessForm.pincode.$invalid">
 			<span ng-show="addbusinessForm.pincode.$error.pattern && (addbusinessForm.pincode.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
 			<span class="text-danger" ng-show="addbusinessForm.pincode.$error.minlength && (addbusinessForm.pincode.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
@@ -111,7 +111,7 @@
 <div class="form-group">
 	<label for="mobile" class="col-sm-3 control-label">Mobile/Cell Phone*</label>
 	<div class="col-sm-9">
-		<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addbusiness.contact_profile.mobile" placeholder="Enetr Mobile No." ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+		<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addbusiness.contact_profile.mobile" placeholder="Enter Mobile No." ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 		<span class="help-block" ng-show="addbusinessForm.mobile.$dirty && addbusinessForm.mobile.$invalid">
 			<span ng-show="addbusinessForm.mobile.$error.required" class="text-danger">Mobile/Cell Phone is required.</span>
 			<span ng-show="addbusinessForm.mobile.$error.pattern && (addbusinessForm.mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>

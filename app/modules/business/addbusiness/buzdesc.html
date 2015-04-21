@@ -75,16 +75,16 @@
 </div>
 
 <div class="form-group">
-	<label for="description" class="col-sm-3 control-label">Detailed Description*</br>
+	<label for="shortdescription" class="col-sm-3 control-label">Detailed Description*</br>
 	<small>This will show on Website Home Page</small></label>
 	<div class="col-sm-9">
-		<textarea type="text" class="form-control" id="description" name="description" ng-model="addbusiness.business_info.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
-			<p ng-hide="addbusinessForm.description.$error.maxlength">
+		<textarea type="text" class="form-control" id="shortdescription" name="shortdescription" ng-model="addbusiness.business_info.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
+			<p ng-hide="addbusinessForm.shortdescription.$error.maxlength">
 				{{ 5000 - addbusiness.business_info.description.length + " Chars left"}} 
 			</p>
-			<span class="help-block" ng-show="addbusinessForm.description.$dirty && addbusinessForm.description.$invalid">
-				<span class="text-danger" ng-show="addbusinessForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-				<span ng-show="addbusinessForm.description.$error.required" class="text-danger">Detailed Description of company is required.</span>
+			<span class="help-block" ng-show="addbusinessForm.shortdescription.$dirty && addbusinessForm.shortdescription.$invalid">
+				<span class="text-danger" ng-show="addbusinessForm.shortdescription.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				<span ng-show="addbusinessForm.shortdescription.$error.required" class="text-danger">Please write Description of your company in short.</span>
 			</span>		
 	</div>
 </div>  

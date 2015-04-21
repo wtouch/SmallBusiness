@@ -34,8 +34,10 @@
 <div class="form-group">
 	<label class="col-sm-3 control-label">Additional Business</label>
 	<div class="col-sm-9">
-		<div class="col-sm-3" ng-repeat="x in biz.additional_business">		
-			<input id="check" type="checkbox" checklist-model="addbusiness.business_profile.additional_business" checklist-value="x"> {{x}}
+		<div class="checkbox col-sm-3" ng-repeat="x in biz.additional_business">
+			<label class="ng-binding">
+				<input id="check" type="checkbox" checklist-model="addbusiness.business_profile.additional_business" checklist-value="x"> {{x}}
+			</label>
 		</div>
 	</div> 
 </div>
@@ -49,7 +51,7 @@
 			</p>
 			<span class="help-block" ng-show="addbusinessForm.aboutDescription.$dirty && addbusinessForm.aboutDescription.$invalid">
 				<span class="text-danger" ng-show="addbusinessForm.aboutDescription.$error.maxlength">Sorry You are Exceeding the Limit</span>
-				<span ng-show="addbusinessForm.aboutDescription.$error.required" class="text-danger">About Company Description of company is required.</span>
+				<span ng-show="addbusinessForm.aboutDescription.$error.required" class="text-danger">Please write Description of your company.</span>
 			</span>		
 	</div>
 </div>  												

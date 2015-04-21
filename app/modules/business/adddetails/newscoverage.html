@@ -32,7 +32,7 @@
 		<div class="col-sm-9">
 			<input type="text" id="medianame" class="form-control" ng-model="news_coverage.desc.medianame" name="medianame" placeholder="Media Name" required >
 			<span class="help-block" ng-show="newscoverageForm.medianame.$dirty && newscoverageForm.medianame.$invalid">
-				<span ng-show="newscoverageForm.medianame.$error.required" class="text-danger">Media Name is required.</span>
+				<span ng-show="newscoverageForm.medianame.$error.required" class="text-danger">Please Enter Media Name.</span>
 			</span>
 		</div>						
 	</div>
@@ -54,7 +54,7 @@
 		<div class="col-sm-9">
 			<input type="text" id="headline" class="form-control" ng-model="news_coverage.heading" name="headline" placeholder="Headline" required ng-disabled="headingDisabled">
 			<span class="help-block" ng-show="newscoverageForm.headline.$dirty && 	newscoverageForm.headline.$invalid">
-			<span ng-show="newscoverageForm.headline.$error.required" class="text-danger">Headline is required.</span>
+			<span ng-show="newscoverageForm.headline.$error.required" class="text-danger">Please Enter News Headline.</span>
 			</span>
 		</div>						
 	</div>
@@ -73,14 +73,15 @@
 	<div class="form-group">
 		<label for="newsdetails" class="col-sm-3 control-label">News Coverage Details</label>
 		<div class="col-sm-9">
-			<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="news_coverage.desc.newsdetails" cols="30" rows="4" ng-maxlength="256" placeholder="News Coverage Details" ui-tinymce required></textarea>
+			<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="news_coverage.desc.newsdetails" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter News Details" ui-tinymce required></textarea>
 				<p ng-hide="newscoverageForm.newsdetails.$error.maxlength">
-					{{ 256 - newscover.newsdetails.length + " Chars left" }}
-				</p>		
+					{{ 1500 - news_coverage.desc.newsdetails.length + " Chars left" }}
+				</p>
+				
 				<span class="help-block" ng-show="newscoverageForm.newsdetails.$dirty && newscoverageForm.newsdetails.$invalid">
 					<span class="text-danger" ng-show="newscoverageForm.newsdetails.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="newscoverageForm.newsdetails.$error.required">News Coverage Details is required.</span>
-				</span>	
+					<span ng-show="newscoverageForm.newsdetails.$error.required" class="text-danger">Infrastucture Description is required.</span>
+				</span>
 		</div>
 	</div> 
 	

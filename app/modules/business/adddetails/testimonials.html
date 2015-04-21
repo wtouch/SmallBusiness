@@ -65,13 +65,13 @@
 		<label for="address" class="col-sm-3 control-label">Address</label>
 			<div class="col-sm-9">
 				<textarea type="text" class="form-control" id="address" name="address" ng-model="testimonials.desc.address" cols="30" rows="3" ng-maxlength="256" placeholder="Enter address"  required></textarea>
-					<p ng-hide="testimonialsForm.address.$error.maxlength">
-								{{ 256 - addbusiness.address.length + " Chars left" }}
-					</p>
-					<span class="help-block" ng-show="testimonialsForm.address.$dirty && testimonialsForm.address.$invalid">
+				<p ng-hide="testimonialsForm.address.$error.maxlength">
+					{{ 256 - testimonials.desc.address.length + " Chars left" }}
+				</p>
+				<span class="help-block" ng-show="testimonialsForm.address.$dirty && testimonialsForm.address.$invalid">
 					<span ng-show="testimonialsForm.address.$error.maxlength"class="text-danger">Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="testimonialsForm.address.$error.required">Address is required.</span>
-					</span>					
+				</span>					
 			</div>
 	</div>	
 
@@ -88,15 +88,15 @@
 	<div class="form-group">
 		<label for="test_Description" class="col-sm-3 control-label">Testimonial Description</label>
 		<div class="col-sm-9">
-			<textarea type="text" class="form-control" id="test_Description" name="test_Description" ng-model="testimonials.desc.description" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
+			<textarea type="text" class="form-control" id="test_Description" name="test_Description" ng-model="testimonials.desc.description" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
 				<p ng-hide="testimonialsForm.test_Description.$error.maxlength">
-					{{ 256 - testimonials.description.length + " Chars left" }}
+					{{ 1500 - testimonials.desc.description.length + " Chars left" }}
 				</p>
 				
 				<span class="help-block" ng-show="testimonialsForm.test_Description.$dirty && testimonialsForm.test_Description.$invalid">
 					<span class="text-danger" ng-show="testimonialsForm.test_Description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="testimonialsForm.test_Description.$error.required">Testimonial Title is required.</span>
-				</span>
+					<span ng-show="testimonialsForm.test_Description.$error.required" class="text-danger">Testimonial Description is required.</span>
+				</span>	
 		</div>
 	</div>
 
