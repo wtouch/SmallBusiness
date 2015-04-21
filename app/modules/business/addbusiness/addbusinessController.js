@@ -148,12 +148,8 @@ define(['app'], function (app) {
 			.then(function(response) {  //function for response of request temp
 				if(response.status == "success"){
 					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
-					
-					setTimeout(function(){
-						alert(response.data);
-						$location.path("/dashboard/business/adddetails/"+response.data);
-						$scope.$apply();
-					}, 3000);
+					$location.path("/dashboard/business/adddetails/"+response.data);
+					$scope.$apply();
 				}else{
 					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
 				}
@@ -169,17 +165,15 @@ define(['app'], function (app) {
 				console.log(response);
 					if(response.status == 'success'){
 						$scope.addbusiness = dataService.parse(response.data);
-						$scope.getTypes('category', $scope.addbusiness.category);
-						$scope.getKeywords('type', $scope.addbusiness.type);
+						$scope.getTypes($scope.addbusiness.category);
+						$scope.getKeywords($scope.addbusiness.type);
 					}
 			});
 			$scope.updateData = function(addbusiness) {
 				dataService.put("put/business/"+$routeParams.id,addbusiness)
 				.then(function(response) {
 					if(response.status == "success"){
-						setTimeout(function(){
-							$location.path("/dashboard/business/businesslist");
-						},500);
+						$location.path("/dashboard/business/businesslist");
 					}
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});

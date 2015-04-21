@@ -14,7 +14,7 @@ define(['angular',
 	app.controller('TypeaheadCtrl', ['$scope','$http','dataService', function($scope, $http,dataService) {
 		$scope.data = "vilas";
 		$scope.city = "Pune";
-		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+		$scope.getTypeaheadData = function(table, searchColumn,city, searchValue){
 			var locationParams = {search : {}, groupBy : {}}
 			locationParams.search[searchColumn] = searchValue;
 			locationParams.groupBy[searchColumn] = searchValue;
@@ -28,14 +28,14 @@ define(['angular',
 				city : city,
 				business_name : inputValue
 			}
-			return $http.get('/search/data', {params : $scope.searchParams}).then(function(response){
+			return $http.get('/search/'+city, {params : $scope.searchParams}).then(function(response){
 				return response.data.data;
 			}); 
 		}
 		
-		$scope.getSearchResult = function(item){
+		$scope.getSearchResult = function(city,item){
 			console.log(item);
-			var url = '/'+item.category+'/'+item.type+'/'+item.business_name+'/'+item.id;
+			var url = '/'+city+'/'+item.category+'/'+item.type+'/'+item.business_name+'/'+item.id;
 			window.location.href = url.replace(/ /g, "-");
 		}
 		
