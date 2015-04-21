@@ -7,7 +7,7 @@ define(['app'], function (app) {
     // This is controller for this view
 	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,upload) {
 		
-		$scope.userDetails = {user_id : $rootScope.userDetails.id};
+		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.alerts = [];
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
@@ -78,9 +78,9 @@ define(['app'], function (app) {
 		//Upload Function for uploading files {Vilas}
 			// this is form object
 		$scope.path = "user/profile"; // path to store images on server
-		$scope.upload = function(files,path,userDetails,picArr){ // this function for uploading files
+		$scope.upload = function(files,path,userInfo,picArr){ // this function for uploading files
 			
-			upload.upload(files,path,userDetails,function(response){
+			upload.upload(files,path,userInfo,function(response){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
 				if(response.status === 'success'){

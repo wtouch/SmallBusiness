@@ -1,7 +1,13 @@
 <h3 class="col-sm-offset-2 col-sm-9">Submit Template</h3>
 	<form name="submittempForm" class="form-horizontal" role="form" novalidate="novalidate" 	ng-submit="submittempForm.$valid">
 		<div class="form-group">
-			 <label for="template" class="col-sm-2 control-label" name="template" >Template Category</label>
+			<label  class="col-sm-2"></label>
+				<div class="col-sm-7">
+					<p>Please Note that Fields Marked * are Required.</p>		
+				</div>
+		</div>
+		<div class="form-group">
+			 <label for="template" class="col-sm-2 control-label" name="template" >Template Category *</label>
 				<div class="col-sm-3">
 					<select class="form-control" id="category" name="category" ng-model="addtemplate.category" required ng-options="item.system_name as item.name for item in temp.category">		
 						<option value="">Select Category</option>
@@ -12,7 +18,7 @@
 				</div>
 		</div>
 		<div class="form-group">	
-			<label  for="name" class="col-sm-2 control-label">Template Name</label>
+			<label  for="name" class="col-sm-2 control-label">Template Name *</label>
 				<div class="col-sm-9">
 					<input ng-disabled="tempId" type="text" id="name" class="form-control" name="name" placeholder="Enter Template Name" ng-model="addtemplate.template_name" ng-pattern="/^[a-zA-Z0-9(_)]*$/" required>
 					<span class="text-warning">Use a-z A-Z 0-9 _ only</span>
@@ -29,7 +35,7 @@
 			</div>						
 		</div>
 		<div class="form-group">
-			<label for="tempimage" class="col-sm-2 control-label">Template Image</label>
+			<label for="tempimage" class="col-sm-2 control-label">Template Image *</label>
 				<div class="col-sm-9">
 					<input ng-disabled="!addtemplate.template_name || !addtemplate.category" type="file" id="tempImages" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="tempImages">
 						<!-- This will show thumbnails & progress of images -->
@@ -41,7 +47,7 @@
 				</div>
 		</div>
 		<div class="form-group">
-			<label for="templatezip" class="col-sm-2 control-label">Template Zip</label>
+			<label for="templatezip" class="col-sm-2 control-label">Template Zip *</label>
 				<div class="col-sm-9">
 					<input ng-disabled="!addtemplate.template_name || !addtemplate.category" type="file" id="tempZip" ng-file-select ng-multiple="false" ng-accept="'.zip'" ng-file-change="uploadZip($files,zipPath+'/'+addtemplate.category+'/'+addtemplate.template_name,userInfo,'zip')" ng-model="tempZip">
 						<button ng-show="tempZip" ng-click="" type="button">Upload</button>
