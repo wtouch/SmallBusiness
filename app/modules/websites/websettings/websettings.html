@@ -17,24 +17,29 @@
 					<div class="bottomspace">
 							<div class="form-group">
 							<input type="hidden" ng-model="config.website_id"/>
+							
 								<label  for="selectbusiness" class="col-sm-2 control-label">Select Business</label>
+								
 								<div class="col-sm-3">
 									<select id="selectBusiness" class="form-control" ng-model="config.business_id" ng-options="item.id as item.business_name for item in businessList">
 										<option value="">Select Business</option>
 									</select>
 								</div>
+								
 								<label  for="selectbusiness" class="col-sm-2 control-label">Select Template</label>
+								
 								<div class="col-sm-3">
 									<select id="selectTemplate" class="form-control" ng-model="config.template_id" ng-options="item.id as item.template_name for item in templateList"> 
 										<option value="">Select Template</option>
 									</select>
 								</div>
+								
 							</div>
 						<div class="form-group">
 							<div class="col-md-9 col-md-offset-2"><strong>Contact Details</strong></div>
 						</div>
 						<div class="form-group">
-							<label for="contact_name" class="col-sm-2 control-label">Contact Name</label>		
+							<label for="contact_name" class="col-sm-2 control-label">Contact Name*</label>		
 								<div class="col-sm-9">
 									<input type="text" id="contact_name" class="form-control" name="contact_name" placeholder="Name" ng-model="config.contact_details.contact_name" required >
 										<span class="help-block" ng-show="websettingsForm.contact_name.$dirty && websettingsForm.contact_name.$invalid">
@@ -43,7 +48,7 @@
 								</div>
 						</div>
 						<div class="form-group">
-							<label for="contact" class="col-sm-2 control-label">Contact Number </label>
+							<label for="contact" class="col-sm-2 control-label">Contact Number*</label>
 							<div class="col-md-9">
 								<input type="text" id="contact" name="contact" class="form-control" ng-model="config.contact_details.contact" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 									<span class="help-block" ng-show="websettingsForm.contact.$dirty && websettingsForm.contact.$invalid">
@@ -52,7 +57,7 @@
 							</div>						
 						</div>
 						<div class="form-group">	
-							<label  for="contact_email" class="col-sm-2 control-label">Contact Email</label>	
+							<label  for="contact_email" class="col-sm-2 control-label">Contact Email*</label>	
 							<div class="col-sm-9">
 								<input type="Email" class="form-control" id="contact_email" ng-model="config.contact_details.contact_email" name="contact_email" placeholder="Enter Email" required >
 									<span class="help-block" ng-show="websettingsForm.contact_email.$dirty && websettingsForm.contact_email.$invalid">
