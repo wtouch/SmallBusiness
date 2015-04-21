@@ -6,7 +6,7 @@
 			<h3 ng-if="editServForm" class="col-sm-offset-2 col-sm-9">Edit Service</h3>
 			<form class="form-horizontal" role="form" name="addserviceForm" ng-submit="addserviceForm.$valid" novalidate="novalidate">
 				<div class="form-group">
-					<label for="product_service_name" class="col-sm-2 control-label">Service Name </label>
+					<label for="product_service_name" class="col-sm-2 control-label">Service Name* </label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control" id="product_service_name" name="product_service_name" ng-model="addservice.product_service_name" placeholder="Enter Service Name here" required>
 							<span class="help-block" ng-show="addserviceForm.product_service_name.$dirty && addserviceForm.product_service_name.$invalid">
@@ -38,7 +38,7 @@
 					<input type="hidden" ng-model="addservice.date">
 				</div>	
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="description">Service Description 
+					<label class="col-sm-2 control-label" for="description">Service Description* 
 					</label>
 					<div  class="col-sm-9">
 						<textarea type="text" class="form-control" id="description" name="description" ng-model="addservice.description" cols="30" rows="4"  placeholder="Enter Service Description" ui-tinymce required>

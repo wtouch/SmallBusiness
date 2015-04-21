@@ -1,5 +1,5 @@
 <div class="form-group">
-	<label for="business_type" class="col-sm-3 control-label" name="business_type" >Primary Business Type</label>
+	<label for="business_type" class="col-sm-3 control-label" name="business_type" >Primary Business Type*</label>
 	<div class="col-sm-9">
 		<select class="form-control" name="business_type" id="business_type"  ng-model="addbusiness.business_profile.business_type" required ng-options="item as item for item in biz.business_type">		
 			<option value="">Select Type</option>
@@ -10,7 +10,7 @@
 	</div>
 </div>		
 <div class="form-group">
-	<label for="establishment" class="col-sm-3 control-label">Establishment Year</label>
+	<label for="establishment" class="col-sm-3 control-label">Establishment Year*</label>
 	<div class="col-sm-9">
 		<select class="form-control" name="establishment" id="establishment"  ng-model="addbusiness.business_profile.establishment" required ng-options="item as item for item in biz.year">	
 			<option value="">Select Establish Year</option>		
@@ -21,7 +21,7 @@
 	</div>
 </div>	
 <div class="form-group">
-	<label for="no_of_employees" class="col-sm-3 control-label">Team Size</label>
+	<label for="no_of_employees" class="col-sm-3 control-label">Team Size*</label>
 	<div class="col-sm-9">
 		<select class="form-control" name="no_of_employees" id="no_of_employees"  ng-model="addbusiness.business_profile.no_of_employees" required ng-options="item as item for item in biz.employees">		
 			<option value="">--Choose One--</option>
@@ -40,14 +40,13 @@
 		</div>
 </div>
 <div class="form-group">
-	<label for="aboutDescription" class="col-sm-3 control-label">About Us</br>
+	<label for="aboutDescription" class="col-sm-3 control-label">About Us*</br>
 	<small>This will show on Website About Us Page</small></label>
 	<div class="col-sm-9">
 		<textarea type="text" class="form-control" id="aboutDescription" name="aboutDescription" ng-model="addbusiness.business_info.aboutDescription" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
 			<p ng-hide="addbusinessForm.aboutDescription.$error.maxlength">
-				{{ 1500 - addbusiness.business_info.aboutDescription.length + " Chars left"}} 
+				{{ 5000 - addbusiness.business_info.aboutDescription.length + " Chars left"}} 
 			</p>
-			
 			<span class="help-block" ng-show="addbusinessForm.aboutDescription.$dirty && addbusinessForm.aboutDescription.$invalid">
 				<span class="text-danger" ng-show="addbusinessForm.aboutDescription.$error.maxlength">Sorry You are Exceeding the Limit</span>
 				<span ng-show="addbusinessForm.aboutDescription.$error.required" class="text-danger">About Company Description of company is required.</span>
