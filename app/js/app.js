@@ -140,17 +140,17 @@ define(['angular',
 						}
 					})
 				}
-				//console.log($rootScope.userDetails.config);
+				console.log($rootScope.userDetails.config);
 				if($rootScope.userDetails.config.addbusiness == false){
 					$location.path("/dashboard/business/addbusiness");
 					$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step active';
 					$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
 					$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
 					$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
-				}else if($rootScope.userDetails.config.addbusinessDetails !=true){
+				}else if($rootScope.userDetails.config.addbusinessDetails == false){
 					$location.path("/dashboard/business/adddetails/"+$rootScope.userDetails.config.addbusinessDetails);
-					$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
-					$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step active';
+					$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step active';
+					$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
 					$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
 					$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
 				}else if($rootScope.userDetails.config.addProducts ==false){
