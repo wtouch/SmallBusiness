@@ -323,7 +323,16 @@ define(['app'], function (app) {
 					
 					
 				});
-			} ;
+			};
+			obj.progressSteps = function(key, value){
+				$rootScope.userDetails.config[key] = value;
+				obj.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
+					if(response.status == "success"){
+						obj.setUserDetails(JSON.stringify($rootScope.userDetails));
+						$rootScope.userDetails = obj.parse(obj.userDetails);
+					}
+				})
+			}
 			obj.get = function (q, params) {
 				$rootScope.loading = true;
 				

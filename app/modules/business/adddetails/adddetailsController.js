@@ -182,7 +182,8 @@ define(['app'], function (app) {
 			 .then(function(response) {  //function for response of request temp
 				if(response.status == 'success'){
 					$scope.submitted = true;
-					$scope.alerts.push({type: response.status,msg: response.message});						
+					$scope.alerts.push({type: response.status,msg: response.message});
+					dataService.progressSteps('addbusinessDetails', true);
 				}else{
 					$scope.alerts.push({type: response.status,msg: response.message});
 				}
