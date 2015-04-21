@@ -14,6 +14,7 @@
 			<script src="{{ path }}js/angular-route.min.js"></script>
 			<script src="{{ path }}js/script.js"></script>
             <title>{% block title %}{{title}}{% endblock %}</title>
+			{%if template.template_params%}
 			<style>
 				h1,h2{
 					color: {{template.template_params.dark_color}};
@@ -60,6 +61,7 @@
 					background-color:{{template.template_params.background_color}};
 				}
 			</style>
+			{%endif%}
         {% endblock %}
     </head>
     <body>
@@ -74,7 +76,8 @@
 <footer class="navbar navbar-default navbar-fixed-bottom">
 	<div class="container text-center">
 		{% block footer %}
-			&copy; Copyright 2015 by <a href="http://wtouch.in">Web Touch India Solutions</a>.
+			<a href="/sitemap.xml">SITEMAP</a><br>
+			&copy; Copyright 2015 by <a href="http://apnasite.in">apnasite.in</a>.
 		{% endblock %}
 	</div>
 </footer>
