@@ -65,8 +65,12 @@
 	
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record
-		$update = $db->update("template", $body, $where);
-		echo json_encode($update);
+		if(isset($_GET['postParams']) && $_GET['postParams'] == 'addtemplate'){
+			updateTemplate($body);
+		}else{
+			$update = $db->update("template", $body, $where);
+			echo json_encode($update);
+		}
 	}
 	
 	function addTemplate($body){
@@ -85,6 +89,37 @@
 					throw new Exception("zip not extracted!");
 				}
 				$where['id'] = $insert['data'];
+				$updateData['template_params'] =  file_get_contents($upload->get_path().$path_to_extract."/templateParams.json");
+				$update = $db->update("template", $updateData, $where);
+			}else{
+				throw new Exception($insert['message']);
+			}
+			$response = $insert;
+			$response["message"] = $insert["message"]." Zip extracted in ".$path_to_extract;
+			echo json_encode($response);
+		}catch(Exception $e) {
+			$response["status"] = "error";
+            $response["message"] = 'Error: ' .$e->getMessage();
+            $response["data"] = null;
+			echo json_encode($response);
+		}
+	}
+	function updateTemplate($body){
+		try{
+			$upload = new uploadClass;
+			$db = new dbHelper();
+			$input = json_decode($body);
+			$file = $input->template_zip->file_path;
+			$path_to_extract = $input->category."/".$input->template_name;
+			$upload->set_path("website/templates");
+			
+			$insert = $db->update("template", $body);
+			if($insert['status'] == "success" && $insert['data'] != ""){
+				$extractZip = $upload->extract_zip($file, $path_to_extract);
+				if(!$extractZip){
+					throw new Exception("zip not extracted!");
+				}
+				$where['id'] = $insert['id'];
 				$updateData['template_params'] =  file_get_contents($upload->get_path().$path_to_extract."/templateParams.json");
 				$update = $db->update("template", $updateData, $where);
 			}else{

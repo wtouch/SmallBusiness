@@ -10,21 +10,22 @@
 {% endblock %}
 {% block content %}
 {% autoescape false %}
-	<div class="important">
-		<h2>{{ data.product_service_name }}</h2>
-		<hr>
-		<div class="media">
-			<div class="media-left col-sm-3">
-				<a href="#">
-					{% for key, value in data.product_image %}
-						<img class="img-responsive" src="{{value.file_relative_path}}">
-					{% endfor %}
-				</a>
+	<div class="important panel panel-default">
+		<div class="panel-body">
+			<h4>{{ data.product_service_name }}</h4>
+			<div class="media">
+				<div class="media-left col-sm-2">
+					<a href="#">
+						{% for key, value in data.product_image %}
+							<img class="img-responsive" src="{{value.file_relative_path}}">
+						{% endfor %}
+					</a>
+				</div>
+				<div class="media-body">
+					<p class="media-heading">{{data.description}}</p>
+				</div>
 			</div>
-			<div class="media-body">
-				<p class="media-heading">{{data.description}}</p>
-			</div>
-		</div> 
+		</div>
 	</div>
 {% endautoescape %}
 {% endblock %}

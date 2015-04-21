@@ -7,18 +7,26 @@
 {% autoescape false %}
 {% if data.job_careers %}
 <div class="row">
-	
+	<div class="col-sm-12">
 	<h2 class="text-center">Careers</h2>
-	{% for key, value in data.job_careers if break == 0 %}
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">{{key}}</h3>
-		</div>
-		<div class="panel-body">
-			<p>{{ value.description }}</p>
-		</div>
+		{% for key, value in data.job_careers if break == 0 %}
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="media">
+						<div class="media-left">
+							<a href="#">
+								<img class="pull-left img-circle" src="{{value.image.0.file_relative_path}}">
+							</a>
+						</div>
+						<div class="media-body">
+							<h3 class="media-heading">{{key}}</h3>
+							<p>{{ value.description }}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
 	</div>
-	{% endfor %}
 </div>
 {% endif %}
 {% endautoescape %}

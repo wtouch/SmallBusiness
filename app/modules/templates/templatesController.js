@@ -641,7 +641,8 @@ define(['app'], function (app) {
 				});
 			};
 			$scope.updateData = function(addtemplate) {
-				dataService.put("put/template/"+$scope.tempId,addtemplate)
+				delete addtemplate.id;
+				dataService.put("put/template/"+$scope.tempId,addtemplate, {postParams:'addtemplate'})
 				.then(function(response) {
 					if(response.status == "success"){
 						$scope.reset();
