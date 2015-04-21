@@ -44,11 +44,15 @@
 				<div class="form-group">
 					<label for="subject" class="col-sm-2 control-label">Message *</label>
 					<div class="col-sm-9">
-						<textarea id="message" name="message" class="form-control" rows="3" ng-model="composemail.message" ng-minlength="2" ng-maxlength="356" ui-tinymce required>
+						<textarea id="message" name="message" class="form-control" rows="3" ng-model="composemail.message" ng-minlength="2" ng-maxlength="1000" ui-tinymce required>
 						</textarea>
+						<p ng-hide="composemailviewForm.message.$error.maxlength">
+							{{ 1000 - composemail.message.length + " Chars left"}} 
+						</p>
 						<span class="help-block" ng-show="composemailviewForm.message.$dirty && composemailviewForm.message.$invalid">
-							<span class="text-danger" ng-show="composemailviewForm.message.$error.required">Message is required.</span>
-						</span>
+							<span class="text-danger" ng-show="composemailviewForm.message.$error.maxlength">Sorry You are Exceeding the Limit</span>
+							<span ng-show="composemailviewForm.message.$error.required" class="text-danger">Message is required.</span>
+						</span>		
 					</div>
 				</div>
 				<div class="form-group" ng-hide="composemailviewForm">
