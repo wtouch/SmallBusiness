@@ -1,15 +1,15 @@
 <div class="form-group">
-	<label for="seo" class="col-sm-3 control-label">Title</label>
-		<div class="col-sm-9">
-			<input type="text" id="seo" name="seo" class="form-control" ng-model="addbusiness.seo.title" placeholder="Enetr title">
-				<span class="help-block" ng-show="addbusinessForm.seo.$dirty && addbusinessForm.seo.$invalid">
-				<span ng-show="addbusinessForm.seo.$error.pattern && (addbusinessForm.seo.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
-				<span class="text-danger" ng-show="addbusinessForm.seo.$error.minlength && (addbusinessForm.seo.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
-				</span>
-		</div>						
+	<label for="seo" class="col-sm-3 control-label">Title*</label>
+	<div class="col-sm-9">
+		<input type="text" id="seo" name="seo" class="form-control" ng-model="addbusiness.seo.title" placeholder="Enter title">
+			<span class="help-block" ng-show="addbusinessForm.seo.$dirty && addbusinessForm.seo.$invalid">
+			<span ng-show="addbusinessForm.seo.$error.pattern && (addbusinessForm.seo.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
+			<span class="text-danger" ng-show="addbusinessForm.seo.$error.minlength && (addbusinessForm.seo.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
+			</span>
+	</div>						
 </div>
 <div class="form-group">
-	<label for="keyword" class="col-sm-3 control-label">Keywords</label>
+	<label for="keyword" class="col-sm-3 control-label">Keywords*</label>
 	<div class="col-sm-9">
 		<select class="form-control" multiple name="keyword" id="keyword"  ng-model="addbusiness.keywords" required ng-options="item.category_name as item.category_name for item in businessKyewords">		
 				<option value="">Select Keywords</option>
@@ -17,12 +17,12 @@
 	</div>
 </div> 
 <div class="form-group">
-	<label for="description" class="col-sm-3 control-label">Description</label>
+	<label for="description" class="col-sm-3 control-label">Description*</label>
 	<div class="col-sm-9">
 		<textarea type="text" class="form-control" id="description" name="description" ng-model="addbusiness.seo.description" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Description of company" required>
 		</textarea>
 			<p ng-hide="addbusinessForm.description.$error.maxlength">
-				{{ 256 - addbusiness.description.length + " Chars left" }}
+				{{ 256 - addbusiness.seo.description.length + " Chars left" }}
 			</p>
 			<span class="help-block" ng-show="addbusinessForm.description.$dirty && addbusinessForm.description.$invalid">
 				<span class="text-danger" ng-show="addbusinessForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>

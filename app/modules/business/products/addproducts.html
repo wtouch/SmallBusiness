@@ -48,14 +48,14 @@
 					<label class="col-sm-2 control-label" for="description">Product Description* 
 					</label>
 					<div  class="col-sm-9">
-						<textarea type="text" class="form-control" id="productdescription" name="productdescription" ng-model="addproduct.description" cols="30" rows="4" placeholder="Enter Product Description" ui-tinymce required>
+						<textarea type="text" class="form-control" id="description" name="description" ng-model="addproduct.description" cols="30" rows="4" placeholder="Enter Product Description" ui-tinymce required>
 						</textarea>
-							<p ng-hide="addproductForm.productdescription.$error.maxlength">
-								{{ 256 - addproduct.productdescription.length + " Chars left" }}
+							<p ng-hide="addproductForm.description.$error.maxlength">
+								{{ 256 - addproduct.description.length + " Chars left" }}
 							</p>
-							<span class="help-block" ng-show="addproductForm.productdescription.$dirty && addproductForm.productdescription.$invalid">
-								<span class="text-danger" ng-show="addproductForm.productdescription.$error.maxlength">Sorry You are Exceeding the Limit</span>
-								<span ng-show="addproductForm.productdescription.$error.required" class="text-danger">Product Description is required.</span>
+							<span class="help-block" ng-show="addproductForm.description.$dirty && addproductForm.description.$invalid">
+								<span class="text-danger" ng-show="addproductForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+								<span ng-show="addproductForm.description.$error.required" class="text-danger">Product Description is required.</span>
 							</span>
 					</div>
 					<input type="hidden" ng-model="addproduct.type" ng-init="addproduct.type='product'">
