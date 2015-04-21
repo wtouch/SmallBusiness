@@ -23,11 +23,8 @@
 					</button>
 				</div>
 			</div>
-			
-			
-		<div class="col-sm-3" ng-if="permission.filter_by_type">
-			<div class="bottomspace">
-				<label for="status" class="control-label">Filter By Temp Type</label>
+			<div class="col-sm-3" ng-if="permission.filter_by_type">
+				<div class="bottomspace">
 					<select id="status" class="form-control" ng-model="type" ng-change="changeStatus('template_type',type)" >
 						<option value="" selected>Select type</option> <!-- add value attribute empty & selected for initial selected option -->
 						<option value="service">Service</option>
@@ -35,30 +32,25 @@
 						<option value="business">Business</option>
 						<option value="website">Website</option>
 					</select>
+				</div>
 			</div>
-		</div>
-		
-		<div class="col-sm-3" ng-if="permission.filter_by_category">
-			<div class="bottomspace">
-				<label for="status" class="control-label">Filter By Category</label>
+			
+			<div class="col-sm-3" ng-if="permission.filter_by_category">
+				<div class="bottomspace">
 					<select id="status" class="form-control" ng-model="type" ng-change="changeStatus('template_type',type)" >
 						<option value="" selected>Select Category</option> <!-- add value attribute empty & selected for initial selected option -->
 						<option value="website">Website</option>
 						<option value="portal">Portal</option>
 					</select>
+				</div>
 			</div>
-		</div>
-		<div class="col-sm-2">
-			<div class="bottomspace">
-				<label for="filterbycustomerid" class="control-label">Select Customer</label>
+			<div class="col-sm-2">
+				<div class="bottomspace">
 					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatusFn('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
 						<option value="">Select Customer</option>
 					</select>
+				</div>
 			</div>
-		</div>
-		
-		
-			
 			<div class=" col-sm-2 toolbar pull-right">
 				<div class="btn-group" role="group" aria-label="Sixth group" ng-if="mailId=='mailview'">
 					<a class="btn btn-default" tooltip-animation="true" aria-hidden="true" tooltip="Previous Message" ng-click="prevmail()" >
