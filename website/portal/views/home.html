@@ -24,7 +24,7 @@
 		<div class="form-group">
 			<div class="input-group col-md-4">
 				<span ng-hide="isVisible" name="currentItem" id="currentItem" class="form-control-static" ng-click="isVisible = !isVisible" ng-init="isVisible = false" ng-bind="city"></span>
-				<input typeahead-template-url="city.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="getData($item); isVisible = false" placeholder="Search City" typeahead="address.city for address in getTypeaheadData('locations','city', city, $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control cityBlock" autocomplete="off" ng-hide="!isVisible">
+				<input typeahead-template-url="city.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="setCity(city,$item); isVisible = false" placeholder="Search City" typeahead="address.city for address in getTypeaheadData('locations','city', city, $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control cityBlock" autocomplete="off" ng-hide="!isVisible">
 				<span class="input-group-btn" ng-hide="!isVisible">
 					<button class="btn btn-warning" type="button" ng-click="isVisible = false"><span class="glyphicon glyphicon-remove"></span></button>
 				</span>

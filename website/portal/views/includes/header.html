@@ -25,13 +25,24 @@
 				<a class="navbar-brand" href="/"><img src="{{path}}img/logo.png" title="Apnasite Portal" class="img center-block " /></a>
 			</div>
 			<form class="navbar-form navbar-left" role="search">
-					<div class="input-group search" ng-if="!index.html">
-						<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult(city, $item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, city)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
-						<span class="input-group-btn">
-							<button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-search"></span></button>
-						</span>
-					</div>
-				</form>
+				<div class="form-group">
+				<div class="input-group">
+					<span ng-hide="isVisible" name="currentItem" id="currentItem" class="form-control-static" ng-click="isVisible = !isVisible" ng-init="isVisible = false" ng-bind="city"></span>
+					<input typeahead-template-url="city.html" type="text" required name="location" id="location" ng-model="city" typeahead-on-select="setCity(city,$item); isVisible = false" placeholder="Search City" typeahead="address.city for address in getTypeaheadData('locations','city', city, $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control cityBlock" autocomplete="off" ng-hide="!isVisible">
+					<span class="input-group-btn" ng-hide="!isVisible">
+						<button class="btn btn-warning" type="button" ng-click="isVisible = false"><span class="glyphicon glyphicon-remove"></span></button>
+					</span>
+				</div>
+				</div>
+				<div class="form-group">
+				<div class="input-group search" ng-if="!index.html">
+					<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult(city, $item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, city)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
+					<span class="input-group-btn">
+						<button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-search"></span></button>
+					</span>
+				</div>
+				</div>
+			</form>
 			
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/app/#/login">Login</a></li>

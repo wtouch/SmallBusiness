@@ -35,6 +35,13 @@ class portalManager{
 			return $arr;
 		}	
 	}
+	
+	function setResponse($data){
+		$response['title'] = "my business keywords";
+		$response['data'] = $data;
+		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+		return $response;
+	}
 	function getDataByKeyword($city, $keyword, $search = false){
 		try{
 			$where['status'] = 1;
@@ -57,16 +64,13 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			$response['title'] = "my business keywords";
-			$response['data'] = ($data["data"]);
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+			$response = $this->setResponse($data["data"]);
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
 		}catch(Exception $e){
+            $response = $this->setResponse($data = null);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
-            $response["data"] = null;
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
 		
         return $response;
@@ -153,18 +157,14 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			$response['title'] = "Apnasite business category";
-			$response['data'] = ($data["data"]);
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+			$response = $this->setResponse($data["data"]);
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
 		}catch(Exception $e){
+            $response = $this->setResponse($data = null);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
-            $response["data"] = null;
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
-		
 		return $response;
 	}
 	
@@ -194,16 +194,15 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
+			
+			$response = $this->setResponse($data["data"]);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
-			$response['title'] = "ApnaSite business category types";
-			$response['data'] = ($data["data"]);
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+			
 		}catch(Exception $e){
-           $response["status"] = "error";
+			$response = $this->setResponse($data = null);
+            $response["status"] = "error";
             $response["message"] = $e->getMessage();
-            $response["data"] = null;
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
 		
 		return $response;
@@ -226,16 +225,14 @@ class portalManager{
 				throw new Exception($data['message']);
 			}
 			
+			$response = $this->setResponse($data["data"]);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
-			$response['title'] = "ApnaSite Business List";
-			$response['data'] = ($data["data"]);
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
+			
 		}catch(Exception $e){
+            $response = $this->setResponse($data = null);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
-            $response["data"] = null;
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
 		
 		return $response;
@@ -281,20 +278,16 @@ class portalManager{
 			$this->db->setColumns($t2, $cols);
 			
 			$servicedata = $this->db->select();
+			
+			$response = $this->setResponse($data["data"]);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
-			
-			$response['title'] = "My Site";
-			$response['data'] = ($data["data"]);
 			$response['service'] = ($servicedata["data"]);	
 			$response['product'] = ($proddata["data"]);
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
-		
 		}catch(Exception $e){
+			$response = $this->setResponse($data = null);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
-            $response["data"] = null;
-			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
         }
 		
 		return $response;

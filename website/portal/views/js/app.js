@@ -38,6 +38,11 @@ define(['angular',
 			var url = '/'+city+'/'+item.category+'/'+item.type+'/'+item.business_name+'/'+item.id;
 			window.location.href = url.replace(/ /g, "-");
 		}
+		$scope.setCity = function(city,item){
+			console.log(item);
+			var url = '/'+city;
+			window.location.href = url.replace(/ /g, "-");
+		}
 		
 		$scope.onItemClicked = function (isVisible) {
 			isVisible = !isVisible;
