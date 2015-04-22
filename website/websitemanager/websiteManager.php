@@ -31,7 +31,7 @@ class websiteManager{
 				$dbresult = $dbresult['data'];
 				$config['domain_name'] = $dbresult['domain_name'];
 				$config['website_id'] = $dbresult['id'];
-				$config['website_config'] = json_decode($dbresult['config']);
+				$config['website_config'] = ($dbresult['config']);
 				$config['user_id'] = $dbresult['user_id'];
 				$config['expired'] = $dbresult['expired'];
 				
@@ -69,11 +69,11 @@ class websiteManager{
 			}
 			
 			$table = "my_template";
-			(property_exists ( $config['website_config'] , 'template_id')) ? $template_id = $config['website_config']->template_id : "";
+			(isset($config['website_config']['template_id'])) ? $template_id = $config['website_config']['template_id'] : "";
 			
 			(isset($template_id)) ? $where["id"] = $template_id : $template_id = 0;
 			
-			if($template_id == 0 || $template_id == null || !property_exists ( $config['website_config'] , 'template_id')){
+			if($template_id == 0 || $template_id == null || !isset($config['website_config']['template_id'])){
 				$templateDetails["template_name"] = "default";
 				$templateDetails["template_category"] = "default";
 				$templateDetails["template_image"] = "default/preview.png";
@@ -92,8 +92,8 @@ class websiteManager{
 				if($dbresult['status'] == "success"){
 					$templateDetails["template_name"] = $dbresult['data']['template_name'];
 					$templateDetails["template_category"] = $dbresult['data']['category'];
-					$templateDetails["template_image"] = json_decode($dbresult['data']['template_image'],true);
-					$templateDetails["template_params"] = json_decode($dbresult['data']['template_params'],true);
+					$templateDetails["template_image"] = ($dbresult['data']['template_image']);
+					$templateDetails["template_params"] = ($dbresult['data']['template_params']);
 				}else{
 					throw new Exception("Template DB Error: ".$dbresult['message']);
 				}
@@ -123,8 +123,8 @@ class websiteManager{
 			// get data for view from product table, business table, users table, template table
 			//$where['id'] = $config['website_config']->business_id;
 			
-			if(property_exists ( $config['website_config'] , 'business_id')) {
-				$where['id'] = $config['website_config']->business_id;
+			if(isset($config['website_config']['business_id'])) {
+				$where['id'] = $config['website_config']['business_id'];
 			}else{
 				throw new Exception("Please add website details!");
 			}
@@ -146,18 +146,14 @@ class websiteManager{
 			$t1 = $this->db->setJoinString("INNER JOIN","users", array("id"=>$t0.".user_id"));
 			$this->db->setColumns($t1, $selectInnerJoinCols);
 			$businessData = $this->db->selectSingle();
-			$bizData = array();
+			
 			if($businessData['status'] != "success"){
-				throw new Exception("Business DB Table Error: ".$dbresult['message']);
-			}else{
-				foreach ($businessData['data'] as $key => $value){
-					$bizData[$key] = (substr($value,0,1) !== "{") ? $value : json_decode($value, true);
-				}
+				throw new Exception("Business DB Table Error: ".$businessData['message']);
 			}
 			
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
-            $response["data"] = $bizData;
+            $response["data"] = $businessData["data"];
 			
 		}catch(Exception $e){
 			$response["status"] = "error";
@@ -186,8 +182,8 @@ class websiteManager{
 			if($config['status'] == 'success'){
 				$config = $config['data'];
 				//print_r($config['website_config']);
-				if(property_exists($config['website_config'] , 'business_id')) {
-					$whereProd['business_id'] = $config['website_config']->business_id;
+				if(isset($config['website_config']['business_id'])) {
+					$whereProd['business_id'] = $config['website_config']['business_id'];
 				}else{
 					throw new Exception("Please add website details!");
 				}
@@ -221,21 +217,10 @@ class websiteManager{
 			}
 			
 			
-			$productData = array();
-			
-			if($productDbData['status'] == "success" && $productDbData['data'] != ""){
-				foreach ($productDbData['data'] as $index => $dataArr){
-					//$serviceData[$index] = $dataArr;
-						foreach($dataArr as $key => $value){
-							$DataArray[$key] = (substr($value,0,1) == "{" || substr($value,0,1) == "[") ? json_decode($value, true) : $value;
-						}
-						array_push($productData,$DataArray);
-				}
-			}
-			if(count($productData) <= 1 && $id != null) $productData = $productData[0];
+			if(count($productDbData) <= 1 && $id != null) $productDbData = $productDbData[0];
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
-            $response["data"] = $productData;
+            $response["data"] = $productDbData["data"];
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
@@ -314,6 +299,7 @@ class websiteManager{
 			$services = $this->getProductData("services");
 			
 			$business = $this->getBusinessData();
+			//print_r($business);
 			if(count($business['data']['testimonials']) >= 1) array_push($routes,'testimonials');
 			if(count($business['data']['job_careers']) >= 1) array_push($routes,'job_careers');
 			if(count($business['data']['news_coverage']) >= 1) array_push($routes,'activities');
