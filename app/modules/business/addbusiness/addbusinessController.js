@@ -47,8 +47,7 @@ define(['app'], function (app) {
 			$scope.formPart = formPart;
 		};
 		
-		/**********************************************************************/
-		code for accessing json data of business	
+		//code for accessing json data of business	
 		$scope.biz = {};
 		dataService.config('config', {config_name : "business"}).then(function(response){
 			$scope.biz = response.config_data;

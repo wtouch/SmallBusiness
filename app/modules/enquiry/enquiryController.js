@@ -125,6 +125,7 @@ define(['app'], function (app) {
 			});
 		}
 		
+		//function to delete maillist
 		var deletemailList = function(){
 			$scope.statusParam = {status : 0};
 			angular.extend($scope.statusParam, $scope.user_id);
@@ -132,14 +133,13 @@ define(['app'], function (app) {
 				if(response.status=="warning" || response.status=='error' ){
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}else{
-					
 					$scope.mailList = dataService.parse(response.data);
 					$scope.totalRecords = response.totalRecords;
 				}
 			});
 		}
 		
-		//view single mail 
+		//function to view single mail 
 		var mailview = function(){
 			$scope.mailSingleId = ($routeParams.id) ? $routeParams.id : "";
 			$scope.prevmail=function(){
@@ -155,7 +155,6 @@ define(['app'], function (app) {
 				.then(function(response) {
 					$scope.singlemail = dataService.parse(response.data);
 					$scope.singlemail.date = $scope.singlemail.date;
-					
 					$scope.totalRecords = response.totalRecords;
 					$scope.replyMsg = ($scope.singlemail.reply_message!="") ? $scope.singlemail.reply_message : {message:""};
 					$scope.replyMail = {
@@ -165,7 +164,6 @@ define(['app'], function (app) {
 						},
 						reply_date : $scope.currentDate
 					};
-					
 					if($scope.singlemail.reply_status == 1){
 						$scope.tinymceConfig = {
 							readonly: true,
@@ -181,48 +179,38 @@ define(['app'], function (app) {
 							},500);
 						});
 					};
-				},function(error) {
-					console.log(error);
 				});
 			}	
 		}
 		
-		
-		
-		
+		//function to compose mail
 		var composeMail = function(){
-			//Upload Function for uploading files 
 			$scope.composemail = {
 				user_id: $rootScope.userDetails.id,
 				from_email : {from : $rootScope.userDetails.email, cc : ""},
 				name : $rootScope.userDetails.username
 			};
-			
 			$scope.composemail.date = $scope.currentDate;
 			$scope.path = "mail/"; // path to store images on server
 			$scope.composemail.Attachment = []; // uploaded images will store in this array
-			$scope.upload = function(files,path,userinfo){ // this function for uploading files
+			$scope.upload = function(files,path,userinfo){
 				upload.upload(files,path,userinfo,function(data){
 					if(data.status !== 'error'){
 						$scope.composemail.Attachment.push(JSON.stringify(data.details));
-						console.log(data.message);
 					}else{
 						alert(data.message);
 					}
-					
 				});
 			};
-			$scope.generateThumb = function(files){  // this function will generate thumbnails of images
+			$scope.generateThumb = function(files){  
 				upload.generateThumbs(files);
 			};
 			
-			//post method for insert data of compose mail
+			//code for send mail
 			$scope.postData = function(composemail) {
-				
 				dataService.post("/post/enquiry",composemail)
 				.then(function(response) {  
 					if(response.status=="success"){
-						//$scope.composemailviewForm.$setPristine();
 						$scope.alerts.push({type: response.status, msg: response.message});
 						setTimeout(function(){
 							$location.path("/dashboard/enquiry/mails");
@@ -238,35 +226,24 @@ define(['app'], function (app) {
 			case 'mails':
 				inboxmailList();
 				break;
-				
 			case 'sentmail':
 				sentmailList();
 				break;
-				
 			case 'delete':
 				deletemailList();
 				break;
-			
 			case 'composemailview':
 				composeMail();
 				break;
-				
 			case 'mailview':
-				//console.log(id);
 				mailview();
 				break;
-				
 			default:
 				inboxmailList();
 		};
-		
-		// End upload function
-		
 	};
-
 	// Inject controller's dependencies
 	enquiryController.$inject = injectParams;
 	// Register/apply controller dynamically
     app.register.controller('enquiryController', enquiryController);
-	
 });
