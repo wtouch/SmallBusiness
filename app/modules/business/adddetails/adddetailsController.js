@@ -32,13 +32,28 @@ define(['app'], function (app) {
 		$scope.news_coverage = { desc : {  }};
 		$scope.job_careers = { desc : {  }};
 		$scope.gallery = { desc : {  }};
-		
+		//$scope.today();
+		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.format = $scope.formats[0];
 		//code for accessing json data of business	
 		$scope.biz = {};
 		dataService.config('config', {config_name : "business"}).then(function(response){
 			$scope.biz = response.config_data;
 		});
 		
+		$scope.today = function() {
+			$scope.date = new Date();
+		};
+		$scope.open = function($event,testimonialdate){
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.testimonialdate = ($scope.testimonialdate==true)?false:true;
+		};
+		$scope.opendate = function($event,selectDate){
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.selectDate = ($scope.selectDate==true)?false:true;
+		};
 		// config data for business form
 		$scope.biz = dataService.config.business;
 		

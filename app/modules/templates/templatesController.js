@@ -89,8 +89,8 @@ define(['app'], function (app) {
 		
 		//Function to Update template 
 		$scope.update = function(businessData){				
-			dataService.put("put/template/"+ $scope.template_id, templateData)  /
-			 .then(function(response) {  
+			dataService.put("put/template/"+ $scope.template_id, templateData)
+			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.submitted = true;
 					$scope.alerts.push({type: response.status,msg: response.message});						

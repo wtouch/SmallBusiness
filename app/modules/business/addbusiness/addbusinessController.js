@@ -8,45 +8,47 @@ define(['app'], function (app) {
 	{
 		// all $scope object goes here
 		$scope.alerts = [];
+		$scope.estyear = [];
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
+		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.format = $scope.formats[0];
+		$scope.readOnly = false;
+		$scope.formPart = 'home';	
 		$scope.reset = function() {
 			$scope.addbusiness = {
 				created_date : $scope.currentDate,
 				contact_profile : {}
 			};
 		};
-		$scope.reset();
-		$scope.readOnly = false;
-		/****************************************datepicker ***********************************/
+		// to add establish year in combobox
+		var date = new Date();
+		var todayYear = date.getFullYear();
+		for (var value =1900; value <=todayYear;value++){
+			$scope.estyear.push(value);
+		}
+		
+		//code for datepicker
 		$scope.today = function(){
 			$scope.newsDate = new Date();
 		};
-		$scope.today();
-		$scope.open = function($event,opened)
-		{
+		$scope.open = function($event,opened){
 			$event.preventDefault();
 			$event.stopPropagation();
 			$scope[opened] = ($scope[opened]===true) ? false : true;
 		};
-
-		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-		$scope.format = $scope.formats[0];
-		
 		//function for close alert
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
 		// Add Business multi part form show/hide operation from here! {Vilas}
-		$scope.formPart = 'home';
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
 		};
-		
 		//code for accessing json data of business	
 		$scope.biz = {};
 		dataService.config('config', {config_name : "business"}).then(function(response){
@@ -103,34 +105,26 @@ define(['app'], function (app) {
 			}
 		});
 		
-		$scope.path = "business/"+$scope.userInfo.user_id; // path to store images on server
+		$scope.path = "business/"+$scope.userInfo.user_id; 
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
-		
-		//this upload function for uploading single image.
 		$scope.upload = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
-					if(data.status === 'success'){
-						if(picArr == "business_logo"){
-							$scope.addbusiness.business_logo = data.data;
-						}
-						if(picArr == "contact_photo"){
-							$scope.addbusiness.contact_profile.contact_photo = data.data;
-						}
-					}else{
-						$scope.alerts.push({type: data.status, msg: data.message});
+				if(data.status === 'success'){
+					if(picArr == "business_logo"){
+						$scope.addbusiness.business_logo = data.data;
 					}
-				
+					if(picArr == "contact_photo"){
+						$scope.addbusiness.contact_profile.contact_photo = data.data;
+					}
+				}else{
+					$scope.alerts.push({type: data.status, msg: data.message});
+				}
 			});
 		};
 		//to generate thumbnail
 		$scope.generateThumb = function(files){  
 			upload.generateThumbs(files);
 		};
-		
-		
-		/***********************************************************************************
-		add business form code here{sonali}*/
-		
 		//to add business code
 		$scope.postData = function(addbusiness) {
 			dataService.post("post/business",addbusiness)

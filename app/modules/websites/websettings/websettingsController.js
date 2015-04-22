@@ -3,37 +3,29 @@
 define(['app'], function (app) {
     var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService'];
 
-    // This is controller for this view
 	var websettingsController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
-	// all $scope object goes here
 		$scope.permission = $rootScope.userDetails.permission.website_module;
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.website_id = $routeParams.id;
 		$scope.currentDate = dataService.currentDate;
 		$scope.alerts = [];
-		//this is for get business name from business
-		
-		
-		//code for edit website details{trupti}
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
-		dataService.get("getsingle/website/"+$routeParams.id)
-		.then(function(response) {  //function for my templates response
 		
+		//code for view single website details
+		dataService.get("getsingle/website/"+$routeParams.id)
+		.then(function(response) {  
 			dataService.get("getmultiple/business/1/100",{user_id : response.data.user_id})
-			.then(function(business) {  //function for template list response
-			//$scope.businessList.user_id=$scope.userInfo.user_id;
+			.then(function(business) {  
 				if(business.status == 'success'){
 					$scope.businessList = business.data;
-					
 				}else{
-					
 					$scope.alerts.push({type: business.status, msg: "You didn't added any business! Please add business first."});
 				}
 			});
 			
-			//this is for get business name from business{trupti}
+			//code for get business name from business
 			dataService.get("getmultiple/mytemplate/1/100",{user_id : response.data.user_id})
-			.then(function(template) {  //function for template list response
+			.then(function(template) {  
 				if(template.status == 'success'){
 					$scope.templateList = template.data;
 				}else{
@@ -42,24 +34,20 @@ define(['app'], function (app) {
 			});
 		
 			if(response.status == 'success'){
-				
-					var config = (response.data.config!='') ? JSON.parse(response.data.config) : { google_map : {}};
-					if(config.google_map == undefined) config.google_map = {};
-					$scope.config = config;
-					
-					if(config.google_map.latitude != undefined && config.google_map.longitude != undefined){
-						$scope.initGoogleMap(config.google_map.latitude, config.google_map.longitude, 18);
-					}else{
-						$scope.getLocation();
-					}
-				
+				var config = (response.data.config!='') ? JSON.parse(response.data.config) : { google_map : {}};
+				if(config.google_map == undefined) config.google_map = {};
+				$scope.config = config;
+				if(config.google_map.latitude != undefined && config.google_map.longitude != undefined){
+					$scope.initGoogleMap(config.google_map.latitude, config.google_map.longitude, 18);
+				}else{
+					$scope.getLocation();
+				}
 			}else{
-				
 				$scope.alerts.push({type: response.status, msg: response.message});
 			};
-			//$scope.config = response.data;
 		});
-		//update method for website settings form{trupti}
+		
+		//update method for website settings form
 		$scope.editWebsitedetails = function(config){
 			dataService.put("put/website/"+$routeParams.id,{config : config})
 			.then(function(response) {
@@ -70,6 +58,7 @@ define(['app'], function (app) {
 				}
 			}) 
 		}
+		
 		// Google Map
 		$scope.initGoogleMap = function(latitude,longitude, zoom){
 			$scope.config.google_map.latitude = latitude;
@@ -107,7 +96,6 @@ define(['app'], function (app) {
 			places_changed: function (searchBox) {
 				var place = searchBox.getPlaces();
 				if (!place || place == 'undefined' || place.length == 0) {
-					
 					return;
 				}
 				$scope.initGoogleMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), 15);

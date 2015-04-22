@@ -4,39 +4,31 @@
 define(['app'], function (app) {
     var injectParams = ['$scope','$injector','dataService'];
 
-    // This is controller for this view
 	var registerController = function ($scope,$injector,dataService) {
-		
 		$scope.currentDate = dataService.currentDate;
 		$scope.alerts = [];
+		$scope.today();
+		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.format = $scope.formats[0];
+		$scope.register = {address:{}};
+		$scope.register.register_date = $scope.currentDate;
+		$scope.submitted = false;
 		
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
-		
-		//datepicker	
-		$scope.today = function() 
-		{
+		$scope.today = function() {
 			$scope.date = new Date();
 		};
-		$scope.today();
-		$scope.open = function($event,opened)
-		{
+		$scope.open = function($event,opened){
 			$event.preventDefault();
 			$event.stopPropagation();
 			$scope.opened = ($scope.opened==true)?false:true;
 		};
-		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-		$scope.format = $scope.formats[0];
-		// Date Picker Ended here 
-		
-		$scope.register = {address:{}};
-		
 		//match password
 		$scope.passMatch = function(pass1, pass2){
 			$scope.pass = (pass1===pass2) ? true : false;
 		}
-		
 		//check availability
 		$scope.checkuserAvailable = function(fieldName, fieldValue){
 			$scope.checkParams = {};
@@ -53,7 +45,6 @@ define(['app'], function (app) {
 				});
 			}
 		}
-		
 		$scope.getData = function(location){
 			$scope.readOnly = true;
 			$scope.register.address.location = location.location;
@@ -72,7 +63,7 @@ define(['app'], function (app) {
 			});
 		}
 		
-		//dynamic dropdwnlist of country,state & city
+		//dynamic drop down list of country,state & city
 		$scope.contries = dataService.config.country;
 		$scope.getState = function(country){
 			var states = [];
@@ -97,23 +88,17 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		};
 		
-		$scope.register.register_date = $scope.currentDate;
-		//insert data of register user into table
-		$scope.submitted = false;
+		//code to register user
 		$scope.insert = function(register){
 			$scope.params = {url:'login'};
-			//angular.extend($scope.register, register)
 			dataService.post("post/user/register", register)
 			.then(function(response) {
 				if(response.status == 'success'){
 					$scope.submitted = true;
 				}
-			},function(err){
-				console.log(err);
-			})
+			});
 		}	
-		
-    };
+	 };
 	// Inject controller's dependencies
 	registerController.$inject = injectParams;
 	// Register/apply controller dynamically

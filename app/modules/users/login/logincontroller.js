@@ -6,12 +6,12 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var loginController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,$routeParams) {
-		
 		($rootScope.alerts) ? $scope.alerts = $rootScope.alerts : $scope.alerts = [];
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
 		
+		//function to login user
 		$scope.insert = function(login){
 			dataService.post("post/user/login",$scope.login)
 			.then(function(response) {
@@ -30,6 +30,7 @@ define(['app'], function (app) {
 			})
 		}
 		
+		//function to forgot password
 		$scope.forgotpass = function(forgot) {
 			dataService.post("post/user/forgotpass",forgot)
 			.then(function(response) {
@@ -42,9 +43,11 @@ define(['app'], function (app) {
 			})
 		} 	
 		
+		//function to match password
 		$scope.passMatch = function(pass1, pass2){
 			$scope.pass = (pass1===pass2) ? true : false;
 		}
+		// function to change password
 		$scope.changepasswd = function(changepass) {
 			var urlParams = {reset : $routeParams.resetPassKey}
 			dataService.post("post/user/changepass",changepass,urlParams)
@@ -78,11 +81,9 @@ define(['app'], function (app) {
 			}
 			if($scope.activatePass == false) $scope.changePassword();
 			$scope.resendLink = function(){
-				
 			}
 		}
-
-    };
+	};
 	// Inject controller's dependencies
 	loginController.$inject = injectParams;
 	// Register/apply controller dynamically

@@ -16,7 +16,6 @@ $body = $app->request->getBody();
 
 $app->get('/(/:city)', function($city=null) use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories($city);
-	print_r($response);
 	if($response['status'] == "success"){
 		$template = $twig->loadTemplate("home.html");
 	}else{
@@ -30,7 +29,7 @@ $app->post('/enquiry', function() use($app, $config, $twig, $portal, $body) {
 	$response = $portal->sendEnquiry($body);
 });
 
-$app->get('/search/:city', function($city,$keyword,$search) use($app, $config, $twig, $portal) {
+$app->get('/search/:city/(:keyword)', function($city,$keyword,$search=true) use($app, $config, $twig, $portal) {
 	// this will replace [-] with [space]
 	//to add [-] from template use - replace({' ' : '-'}) as a filter
 	foreach($_GET as $key => $value){
@@ -80,7 +79,7 @@ $app->get('/:city/:category/:type/:business/:id', function($city, $category, $ty
 	$city = $portal->decodeUrl($city);
 	$business = $portal->decodeUrl($business);
 	$response = $portal->getBusiness($city,$category, $type, $business,$id);
-	print_r($response);
+
 	 if($response['status'] == "success"){
 		$template = $twig->loadTemplate("viewbusiness.html");
 	}else{

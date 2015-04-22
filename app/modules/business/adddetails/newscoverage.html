@@ -20,9 +20,9 @@
 			<label  for="date" class="col-sm-3 control-label">Date*</label>
 			<div class="col-sm-9">
 				<p class="input-group">
-					<input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="news_coverage.desc.date" is-open="selectDate" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event, 'selectDate')"/>
+			  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="news_coverage.desc.date" is-open="selectDate" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="opendate($event, 'selectDate')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"/>
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="open($event, 'selectDate')">
+				<button type="button" class="btn btn-default" ng-click="opendate($event, 'selectDate')">
 						<i class="glyphicon glyphicon-calendar"></i></button>
 					</span>
 				</p>
@@ -115,6 +115,8 @@
 				<th> News Coverage Description</th>
 				<th>Remove </th>
 			</tr>			
+			</tr>
+			
 			<tr ng-repeat="(key, value) in businessData.news_coverage">
 				<td>{{key}}</td>
 				<td>

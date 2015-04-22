@@ -4,6 +4,7 @@
 			<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra', 'news_coverage')">Add News Activity</button>
 		</div>
 	</div>
+<<<<<<< HEAD
 	 
 	<form name="newscoverageForm" role="form" class="form-horizontal" ng-if="infra" ng-submit="newscoverageForm.$valid" novalidate="novalidate">
 		<div class="form-group" >
@@ -14,21 +15,20 @@
 				
 				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')"><span ng-show="infra">Cancel</span></button>
 			</div>
-		</div>
-<<<<<<< HEAD
-	</div>	
-		
-	<div class="form-group">
-		<label  for="medianame" class="col-sm-3 control-label">Media Name</label>	
-		<div class="col-sm-9">
-			<input type="text" id="medianame" class="form-control" ng-model="news_coverage.desc.medianame" name="medianame" placeholder="Media Name" required >
-			<span class="help-block" ng-show="newscoverageForm.medianame.$dirty && newscoverageForm.medianame.$invalid">
-				<span ng-show="newscoverageForm.medianame.$error.required" class="text-danger">Please Enter Media Name.</span>
-			</span>
-		</div>						
-	</div>
 =======
->>>>>>> check markup for html file
+
+	<div class="form-group">
+		<label  for="date" class="col-sm-3 control-label">Date</label>
+		<div class="col-sm-9">
+			<p class="input-group">
+			  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="news_coverage.desc.date" is-open="selectDate" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="opendate($event, 'selectDate')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"/>
+			  <span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="opendate($event, 'selectDate')">
+				<i class="glyphicon glyphicon-calendar"></i></button>
+			  </span>
+			</p>
+>>>>>>> "addbusinessController.js,
+		</div>
 
 		<div class="form-group">
 			<label  for="date" class="col-sm-3 control-label">Date*</label>
@@ -53,41 +53,6 @@
 			</div>						
 		</div>
 
-<<<<<<< HEAD
-	<div class="form-group">
-		<label  for="headline" class="col-sm-3 control-label">Headline</label>		
-		<div class="col-sm-9">
-			<input type="text" id="headline" class="form-control" ng-model="news_coverage.heading" name="headline" placeholder="Headline" required ng-disabled="headingDisabled">
-			<span class="help-block" ng-show="newscoverageForm.headline.$dirty && 	newscoverageForm.headline.$invalid">
-			<span ng-show="newscoverageForm.headline.$error.required" class="text-danger">Please Enter News Headline.</span>
-			</span>
-		</div>						
-	</div>
-	<div class="form-group">
-		<label for="News" class="col-sm-3 control-label">News Coverage URL</label>
-		<div class="col-sm-9">
-			<input type="url" class="form-control" id="News" ng-model="news_coverage.desc.news" name="News" placeholder="News Coverage URL">
-			<span class="help-block" ng-show="newscoverageForm.News.$dirty && 	newscoverageForm.News.$invalid">
-				<span ng-show="newscoverageForm.News.$error.required" class="text-danger">News Coverage URL is required.</span>
-				<span ng-show="newscoverageForm.News.$error.url" class="text-danger">Invalid News Coverage URL.</span>
-			</span>
-			<span>e.g http://www.google.com</span>
-		</div>						
-	</div>
-
-	<div class="form-group">
-		<label for="newsdetails" class="col-sm-3 control-label">News Coverage Details</label>
-		<div class="col-sm-9">
-			<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="news_coverage.desc.newsdetails" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter News Details" ui-tinymce required></textarea>
-				<p ng-hide="newscoverageForm.newsdetails.$error.maxlength">
-					{{ 1500 - news_coverage.desc.newsdetails.length + " Chars left" }}
-				</p>
-				
-				<span class="help-block" ng-show="newscoverageForm.newsdetails.$dirty && newscoverageForm.newsdetails.$invalid">
-					<span class="text-danger" ng-show="newscoverageForm.newsdetails.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span ng-show="newscoverageForm.newsdetails.$error.required" class="text-danger">Infrastucture Description is required.</span>
-				</span>
-=======
 		<div class="form-group">
 			<label for="mediatype" class="col-sm-3 control-label" name="mediatype">Media Type*</label>
 			<div class="col-sm-9">
@@ -128,10 +93,11 @@
 				
 				<p ng-hide="newscoverageForm.newsdetails.$error.maxlength">{{ 256 - newscover.newsdetails.length + " Chars left" }}	</p>	
 				
+				
 				<span class="help-block" ng-show="newscoverageForm.newsdetails.$dirty && newscoverageForm.newsdetails.$invalid">
 					<span class="text-danger" ng-show="newscoverageForm.newsdetails.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="newscoverageForm.newsdetails.$error.required">News Coverage Details is required.</span>
-				</span>	
+					<span ng-show="newscoverageForm.newsdetails.$error.required" class="text-danger">Infrastucture Description is required.</span>
+				</span>
 			</div>
 		</div> 
 		
@@ -152,7 +118,6 @@
 			<div class="col-sm-4">
 				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + news_coverage.desc.image.file_relative_path}}" width="150px" />
 			</div>
->>>>>>> check markup for html file
 		</div>
 		
 	</form>

@@ -3,22 +3,22 @@
 
 define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope', '$injector','dataService','$location', '$cookieStore', '$cookies','upload'];
-
-    // This is controller for this view
+	
 	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,upload) {
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.alerts = [];
+		$scope.path = "user/profile"; // path to store images on server
+		$scope.formats = ['yyyy/MM/dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+		$scope.format = $scope.formats[0];
+		$scope.today();
+		
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
-		
-		//datepicker 
 		$scope.today = function() {
 			$scope.dt = new Date();
 		};
-		$scope.today();
-		$scope.open = function($event)
-		{
+		$scope.open = function($event){
 			$event.preventDefault();
 			$event.stopPropagation();
 			$scope.opened =true;
@@ -27,17 +27,16 @@ define(['app'], function (app) {
 			formatYear: 'yy',
 			startingDay: 1
 		};
-
-		$scope.formats = ['yyyy/MM/dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-		$scope.format = $scope.formats[0];
-		/* Date Picker Ended here */
-		
 		//function for match password
 		$scope.passMatch = function(pass1, pass2){
 			$scope.pass = (pass1===pass2) ? true : false;
 		}
+		//to generate thumb for image
+		$scope.generateThumb = function(files){  
+			upload.generateThumbs(files);
+		};
 		
-		//dynamic dropdwnlist of country,state & city
+		//dynamic dropdown list of country,state & city
 		$scope.contries = dataService.config.country;
 		$scope.getState = function(country){
 			var states = [];
@@ -72,10 +71,7 @@ define(['app'], function (app) {
 			if($scope.editprofile.user_img == (undefined)) $scope.editprofile.user_img = "";
 		});
 		
-		
-		//Upload Function for uploading files {Vilas}
-			// this is form object
-		$scope.path = "user/profile"; // path to store images on server
+		//Upload Function for uploading files 
 		$scope.upload = function(files,path,userInfo,picArr){ // this function for uploading files
 			upload.upload(files,path,userInfo,function(response){
 				var picArrKey = 0, x;
@@ -87,10 +83,8 @@ define(['app'], function (app) {
 				}
 			});
 		};
-		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
-			upload.generateThumbs(files);
-		};// End upload function
 		
+		// function for edit your profile
 		$scope.changeProfile = function(id,editprofile){
 			dataService.put("put/user/"+id,editprofile)
 			.then(function(response) {

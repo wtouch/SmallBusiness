@@ -319,14 +319,18 @@
 						</div>
 					</div>{% endfor %}
 					</div>
-				</div>
+				</div>{{data.gallery.image}}
 				{% endif %}
 				
 				{% if gallery %}
 				<div ng-show="id=='gallery'" class="boxborder" id="gallery">
 					<div class="row" >
 						<h2 class="text-center">Gallery</h2>
-						
+						{% for key,value in data.gallery.image %}
+							<div class="col-md-4">
+								<img class="img-responsive prod-image" src="{{value.file_relative_path}}" alt="{{key}}"/>
+							</div>
+						{% endfor %}
 					</div>
 				</div>
 				{% endif %}
@@ -432,7 +436,6 @@
 				</div>
 			</div>
 		</div>
-		
 	</main>
   {% endautoescape %}
 {% endblock %}	

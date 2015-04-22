@@ -20,8 +20,7 @@ class portalManager{
 			return false;
 		}else{
 			$arr = array();
-	
-			foreach($data as $key => $value){
+				foreach($data as $key => $value){
 				if(is_array($value) || is_object($value)){
 					foreach($value as $subkey => $subvalue){
 						$subarr[$subkey] = ((substr($subvalue,0,1) == "{") || (substr($subvalue,0,1) == "[")) ? json_decode($subvalue, true) : $subvalue;
@@ -40,18 +39,15 @@ class portalManager{
 		try{
 			$where['status'] = 1;
 			$where['city'] = $city;
-			
 			if(is_array($keyword)){
 				foreach($keyword as $key => $value){
 					$like[$key] = $value;
 				}
 			}else{
 				$like['keywords'] = $keyword;
-				//$like['business_name'] = $keyword;
 			}
 			
 			$t0 = $this->db->setTable("business");
-			
 			$this->db->setWhere($where, $t0);
 			$this->db->setWhere($like, $t0,true);
 			
