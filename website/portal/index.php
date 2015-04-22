@@ -14,7 +14,18 @@ $loader = new Twig_Loader_Filesystem("website/portal/views");
 $twig = new Twig_Environment($loader);
 $body = $app->request->getBody();
 
-$app->get('/(/:city)', function($city=null) use($app, $config, $twig, $portal) {
+$app->get('/', function($city=null) use($app, $config, $twig, $portal) {
+	$response = $portal->getCategories($city);
+	if($response['status'] == "success"){
+		$template = $twig->loadTemplate("home.html");
+	}else{
+		$template = $twig->loadTemplate("error.html");
+	}
+	//$template->display($response);
+	//$template = $twig->loadTemplate("home.html");
+	$template->display($response);
+});
+$app->get('/:city', function($city=null) use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories($city);
 	if($response['status'] == "success"){
 		$template = $twig->loadTemplate("home.html");
@@ -29,13 +40,13 @@ $app->post('/enquiry', function() use($app, $config, $twig, $portal, $body) {
 	$response = $portal->sendEnquiry($body);
 });
 
-$app->get('/search/:city/(:keyword)', function($city,$keyword,$search=true) use($app, $config, $twig, $portal) {
+$app->get('/search/data', function() use($app, $config, $twig, $portal) {
 	// this will replace [-] with [space]
 	//to add [-] from template use - replace({' ' : '-'}) as a filter
 	foreach($_GET as $key => $value){
 		$keyword[$key] = $value;
 	}
-	$response = $portal->getDataByKeyword($city, $keyword, true);
+	$response = $portal->getDataByKeyword($keyword['city'], $keyword, true);
 	$app->response->headers->set('Content-Type', 'application/json');
 	echo json_encode($response);
 });

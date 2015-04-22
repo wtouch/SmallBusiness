@@ -58,7 +58,7 @@ class portalManager{
 				throw new Exception($data['message']);
 			}
 			$response['title'] = "my business keywords";
-			$response['data'] = $this->jsonDecode($data["data"]);
+			$response['data'] = ($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
@@ -154,7 +154,7 @@ class portalManager{
 				throw new Exception($data['message']);
 			}
 			$response['title'] = "Apnasite business category";
-			$response['data'] = $this->jsonDecode($data["data"]);
+			$response['data'] = ($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
@@ -197,7 +197,7 @@ class portalManager{
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			$response['title'] = "ApnaSite business category types";
-			$response['data'] = $this->jsonDecode($data["data"]);
+			$response['data'] = ($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		}catch(Exception $e){
            $response["status"] = "error";
@@ -229,7 +229,7 @@ class portalManager{
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			$response['title'] = "ApnaSite Business List";
-			$response['data'] = $this->jsonDecode($data["data"]);
+			$response['data'] = ($data["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		}catch(Exception $e){
             $response["status"] = "error";
@@ -285,9 +285,9 @@ class portalManager{
 			$response["message"] = "Data Shows";
 			
 			$response['title'] = "My Site";
-			$response['data'] = $this->jsonDecode($data["data"]);
-			$response['service'] = $this->jsonDecode($servicedata["data"]);	
-			$response['product'] = $this->jsonDecode($proddata["data"]);
+			$response['data'] = ($data["data"]);
+			$response['service'] = ($servicedata["data"]);	
+			$response['product'] = ($proddata["data"]);
 			$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		
 		}catch(Exception $e){

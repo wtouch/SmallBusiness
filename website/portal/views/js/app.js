@@ -28,7 +28,7 @@ define(['angular',
 				city : city,
 				business_name : inputValue
 			}
-			return $http.get('/search/'+city, {params : $scope.searchParams}).then(function(response){
+			return $http.get('/search/data', {params : $scope.searchParams}).then(function(response){
 				return response.data.data;
 			}); 
 		}
