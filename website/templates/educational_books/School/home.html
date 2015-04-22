@@ -1,10 +1,8 @@
 {% extends "index.html" %}
 
-{% block title %}{{title}}{% endblock %}
 {% block head %}
     {{ parent() }}
 {% endblock %}
-	
 
 {% block content %}
 {% autoescape false %}
@@ -19,28 +17,16 @@
 			<div class="row ">
 				<div class="col-sm-12 schoolinfo">
 					<h1>Welcome to {{ data.business_name }}</h1>
-				</div>
-				<div class="col-sm-9 schoolinfo">
-					{{ data.business_info.description|length >1000 ? data.business_info.description|slice(start,1000)~ '...' : data.business_info.description}}
+					<p>{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}</p>
 					<br>
 					<a href="about" class="read">Read More..</a>
-				</div>
-				<div class="col-sm-3">
-					<ul type="none">
-					<h4>Our Products</h4>
-					{% for x in featured_products %}
-						<li><a href="product/{{x.id}}">{{ x.product_service_name }}</a></li>
-					{% endfor %}
-					</ul>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-4">
 			<div class="row sidesec1">	
 				<div class="slogan">
-					<p>Pretty attracts us.<br>Beauty changes us. 
-					<br>Be a force of beauty.</p><br>
-					<a href="#" class="arrowimg">view our timetable</a>
+					<p class="text-center">Our<br>Services</p>
 				</div>
 			</div>
 			<div class="row">
