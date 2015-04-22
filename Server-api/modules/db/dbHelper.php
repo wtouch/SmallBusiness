@@ -283,7 +283,7 @@ class dbHelper {
             $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
 			$totalRecords = $totalRecord->fetch(PDO::FETCH_ASSOC);
-			
+			$affected_rows = $stmt->rowCount();
             if(count($rows)<=0 || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
@@ -291,7 +291,7 @@ class dbHelper {
 				$response["totalRecords"] = $totalRecords['totalRecords'];
             }else{
 				//$response['totalRecords']= $totalRecords;
-				$response["message"] = count($rows)." rows selected.";
+				$response["message"] = $affected_rows." rows selected.";
                 $response["status"] = "success";
                 $response["query"] = $this->getQueryString();
 				$response["data"] = $rows;
@@ -311,6 +311,7 @@ class dbHelper {
             $stmt = $this->db->query($this->getQueryString());
             //$stmt->execute($a);
             $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+			$affected_rows = $stmt->rowCount();
 			//echo "select * from ".$table." where 1=1 ". $w ." ".$dbLimit;
             if(count($rows)<=0 || !is_array($rows)){
                 $response["status"] = "warning";
@@ -318,7 +319,7 @@ class dbHelper {
 				$response["data"] = null;
             }else{
 				//$response['totalRecords']= $totalRecords;
-				$response["message"] = count($rows)." rows selected.";
+				$response["message"] = $affected_rows." rows selected.";
                 $response["status"] = "success";
 				$response["data"] = $rows; //(count($rows)==1) ? $rows[0] : $rows;
             }
@@ -346,18 +347,19 @@ class dbHelper {
 						: passwordHash::hash($val);
 				//echo ($key=='password')	? passwordHash::hash($val) : "not pass";
 				array_push($dataKey,$key);
-				array_push($dataValue,"'".$value."'");
+				//array_push($dataValue,"'".$value."'");
+				$dataValue[":".$key] = $value;
 			}
 			$colNames = implode(",",$dataKey);
-			$colValues = implode(",",$dataValue);
-
+			$colValues = ":".implode(",:",$dataKey);
 		    $stmt =  $this->db->prepare("INSERT INTO $table($colNames) VALUES($colValues)");
-            $stmt->execute();
+            $stmt->execute($dataValue);
 			$id = $this->db->lastInsertId();
             $affected_rows = $stmt->rowCount();
             $response["status"] = "success";
             $response["message"] = $affected_rows." row inserted into database";
 			$response["data"] = $id;
+			//$response["data"] = $colNames;
         }catch(PDOException $e){
             $response["status"] = "error";
             $response["message"] = 'Insert Failed: ' .$e->getMessage();
@@ -381,11 +383,12 @@ class dbHelper {
 			{
 			
 				$value = (is_object($val) || is_array($val)) ? (json_encode($val)) : ($val);
-				array_push($updateTable,$key." = '".$value."'");
+				array_push($updateTable,$key." = :".$key);
+				$a[":".$key] = $value;
 				
 			}
 			$updateFields = implode(",",$updateTable);
-
+			//echo $updateFields;
             $stmt =  $this->db->prepare("UPDATE $table SET $updateFields WHERE 1=1 ".$w);
             $stmt->execute($a);
             $affected_rows = $stmt->rowCount();
@@ -395,7 +398,7 @@ class dbHelper {
 				$response["data"] = null;
             }else{
                 $response["status"] = "success";
-                $response["message"] = $affected_rows." row(s) updated in database";
+                $response["message"] = $affected_rows. " row(s) updated in database";
 				$response["data"] = null;
             }
         }catch(PDOException $e){

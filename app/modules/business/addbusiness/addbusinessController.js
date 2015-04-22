@@ -138,7 +138,7 @@ define(['app'], function (app) {
 			.then(function(response) { 
 				if(response.status == "success"){
 					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
-					$location.path("/dashboard/business/adddetails/"+response.data);
+					if($rootScope.userDetails.config.addbusinessDetails != true)  $location.path("/dashboard/business/adddetails/"+response.data);
 					dataService.progressSteps('addbusiness', true);
 					dataService.progressSteps('addbusinessDetails', response.data);
 				}else{

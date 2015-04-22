@@ -85,7 +85,14 @@
 			$uniqueId = getUniqueId();
 			if(property_exists($input,'email')){
 				$where['email'] = $input->email;
-				$data = $db->selectSingle($table, $where);
+				
+				$table = "users";
+				$t[0] = $db->setTable($table);
+				$db->setWhere($where, $t[0]);
+				
+				$db->setColumns($t[0], array("*"));
+				$data = $db->selectSingle();
+				
 				if($data['status'] == 'success' && $data['data']['email'] == $input->email){
 					$from['email'] = "admin@wtouch.in";
 					$from['name'] = "Reset Password";
@@ -132,7 +139,13 @@
 					throw new Exception("URL not valid");
 				}else{
 					$where['password'] = $_GET['reset'];
-					$data = $db->selectSingle($table, $where);
+					
+					$t[0] = $db->setTable($table);
+					$db->setWhere($where, $t[0]);
+					
+					$db->setColumns($t[0], array("*"));
+					$data = $db->selectSingle();
+					
 					//print_r($data);
 					if($data['status'] == 'error' || $data['data'] == null){
 						throw new Exception("You are already changed password or this link has expired. Please try again!");
@@ -151,7 +164,11 @@
 			}else{
 				if(property_exists($input,'user_id')){
 					$where['id'] = $input->user_id;
-					$data = $db->selectSingle($table, $where);
+					$t[0] = $db->setTable($table);
+					$db->setWhere($where, $t[0]);
+					
+					$db->setColumns($t[0], array("*"));
+					$data = $db->selectSingle();
 					if($data['status'] == 'error'){
 						throw new Exception("Database Error: ".$data['message']);
 					}else{

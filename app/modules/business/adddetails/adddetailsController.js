@@ -163,7 +163,7 @@ define(['app'], function (app) {
 				if(response.status == 'success'){
 					$scope.submitted = true;
 					$scope.alerts.push({type: response.status,msg: response.message});
-					$location.path("/dashboard/business/products");
+					if($rootScope.userDetails.config.addProducts == false) $location.path("/dashboard/business/products");
 					dataService.progressSteps('addbusinessDetails', true);
 				}else{
 					$scope.alerts.push({type: response.status,msg: response.message});
