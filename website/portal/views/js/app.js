@@ -12,8 +12,8 @@ define(['angular',
    'ui.bootstrap', 'customServices', 'ngCookies', 'ngRoute'
  ]);
 	app.controller('TypeaheadCtrl', ['$scope','$http','dataService', function($scope, $http,dataService) {
-		$scope.data = "vilas";
-		$scope.city = "Pune";
+		
+		
 		$scope.getTypeaheadData = function(table, searchColumn,city, searchValue){
 			var locationParams = {search : {}, groupBy : {}}
 			locationParams.search[searchColumn] = searchValue;
@@ -105,7 +105,16 @@ define(['angular',
 				$scope.error = "Geolocation is not supported by this browser.";
 			}
 		}
-		$scope.getLocation();
+		
+		$scope.setCityName = function(city){
+			if(city == undefined || city == "Pune"){
+				$scope.city = "Pune";
+				$scope.getLocation();
+			}else{
+				$scope.city = city;
+			}
+		}
+		
 		
 	}]).controller('aboutController',['$scope','$http', '$location', function($scope,$http, $location) {
 		var s = $location.path();

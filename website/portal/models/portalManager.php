@@ -36,9 +36,10 @@ class portalManager{
 		}	
 	}
 	
-	function setResponse($data){
+	function setResponse($data,$city){
 		$response['title'] = "my business keywords";
 		$response['data'] = $data;
+		$response['city'] = $city;
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
@@ -64,11 +65,11 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			$response = $this->setResponse($data["data"]);
+			$response = $this->setResponse($data["data"], $city);
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
 		}catch(Exception $e){
-            $response = $this->setResponse($data = null);
+            $response = $this->setResponse($data = array(),$city);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
         }
@@ -157,11 +158,11 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			$response = $this->setResponse($data["data"]);
+			$response = $this->setResponse($data["data"],$city);
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
 		}catch(Exception $e){
-            $response = $this->setResponse($data = null);
+            $response = $this->setResponse($data = array(),$city);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
         }
@@ -195,12 +196,12 @@ class portalManager{
 				throw new Exception($data['message']);
 			}
 			
-			$response = $this->setResponse($data["data"]);
+			$response = $this->setResponse($data["data"],$city);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			
 		}catch(Exception $e){
-			$response = $this->setResponse($data = null);
+			$response = $this->setResponse($data = array(),$city);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
         }
@@ -225,12 +226,12 @@ class portalManager{
 				throw new Exception($data['message']);
 			}
 			
-			$response = $this->setResponse($data["data"]);
+			$response = $this->setResponse($data["data"],$city);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			
 		}catch(Exception $e){
-            $response = $this->setResponse($data = null);
+            $response = $this->setResponse($data = array(),$city);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
         }
@@ -279,13 +280,13 @@ class portalManager{
 			
 			$servicedata = $this->db->select();
 			
-			$response = $this->setResponse($data["data"]);
+			$response = $this->setResponse($data["data"],$city);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			$response['service'] = ($servicedata["data"]);	
 			$response['product'] = ($proddata["data"]);
 		}catch(Exception $e){
-			$response = $this->setResponse($data = null);
+			$response = $this->setResponse($data = array(),$city);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
         }

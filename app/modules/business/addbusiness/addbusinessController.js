@@ -22,13 +22,14 @@ define(['app'], function (app) {
 		$scope.reset = function() {
 			$scope.addbusiness = {
 				created_date : $scope.currentDate,
-				contact_profile : {}
+				contact_profile : {},
+				business_profile : { establishment : 2014}
 			};
 		};
 		// to add establish year in combobox
 		var date = new Date();
 		var todayYear = date.getFullYear();
-		for (var value =1900; value <=todayYear;value++){
+		for (var value =1900; value <= todayYear;value++){
 			$scope.estyear.push(value);
 		}
 		
@@ -146,7 +147,7 @@ define(['app'], function (app) {
 			dataService.get("getsingle/business/"+$routeParams.id)
 			.then(function(response) {
 				if(response.status == 'success'){
-					$scope.addbusiness = dataService.parse(response.data);
+					$scope.addbusiness = (response.data);
 					$scope.getTypes($scope.addbusiness.category);
 					$scope.getKeywords($scope.addbusiness.type);
 				}

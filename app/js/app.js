@@ -97,7 +97,7 @@ define(['angular',
 	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies,$routeParams) {
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
 			$rootScope.userDetails = dataService.userDetails;
-			console.log(($rootScope.userDetails));
+			
 			$rootScope.breadcrumbs = breadcrumbs;
 			$rootScope.appConfig = {
 				metaTitle : "Small Business",
@@ -135,14 +135,14 @@ define(['angular',
 						}
 						
 						dataService.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
-							console.log(response);
+							
 							if(response.status == "success"){
 								dataService.setUserDetails(JSON.stringify($rootScope.userDetails));
 								$rootScope.userDetails = dataService.parse(dataService.userDetails);
 							}
 						})
 					}
-					console.log($rootScope.userDetails.config);
+					
 					if($rootScope.userDetails.config.addbusiness == false){
 						$location.path("/dashboard/business/addbusiness");
 						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step active';
