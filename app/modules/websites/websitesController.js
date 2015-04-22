@@ -105,6 +105,7 @@ define(['app'], function (app) {
 				$scope.alerts.push({type: response.status, msg: response.message});
 			}
 		});
+		
 		//for search filter{trupti}
 		$scope.searchFilter = function(statusCol, showStatus) {
 			$scope.search = {search: true};

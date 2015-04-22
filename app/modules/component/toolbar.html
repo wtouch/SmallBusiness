@@ -1,31 +1,40 @@
-<div ng-if="userDetails.config.requestSite != true && userDetails.group_id == 4" class="row bs-wizard" style="border-bottom:0;">
-	<div ng-class="addbusinessClass">
-	  <div class="text-center bs-wizard-stepnum">Step 1</div>
-	  <div class="progress"><div class="progress-bar"></div></div>
-	  <a class="bs-wizard-dot"></a>
-	  <div class="bs-wizard-info text-center">Add your business/organisation Details!</div>
+	<div ng-if="userDetails.config.requestSite != true && userDetails.group_id == 4" class="row bs-wizard" style="border-bottom:0;">
+		<div ng-class="addbusinessClass">
+			<div class="text-center bs-wizard-stepnum">Step 1</div>
+			<div class="progress"><div class="progress-bar"></div></div>
+			  <a class="bs-wizard-dot"></a>
+			<div class="bs-wizard-info text-center">Add your business/organisation Details!</div>
+		</div>
+		<div ng-class="addProductsClass"><!-- complete -->
+			<div class="text-center bs-wizard-stepnum">Step 2</div>
+			<div class="progress">
+				<div class="progress-bar"></div>
+			</div>
+			<a class="bs-wizard-dot"></a>
+			<div class="bs-wizard-info text-center">Add Products Services</div>
+		</div>
+		
+		<div ng-class="chooseTemplateClass"><!-- complete -->
+			<div class="text-center bs-wizard-stepnum">Step 3</div>
+			<div class="progress">
+				<div class="progress-bar"></div>
+			</div>
+			<a class="bs-wizard-dot"></a>
+		  
+			<div class="bs-wizard-info text-center">Choose Template for your website!</div>
+		</div>
+		
+		<div ng-class="requestSiteClass"><!-- active -->
+			<div class="text-center bs-wizard-stepnum">Step 4</div>
+			<div class="progress">
+				<div class="progress-bar"></div>
+			</div>
+			<a class="bs-wizard-dot"></a>
+			<div class="bs-wizard-info text-center">Request for new website!</div>
+		</div>
 	</div>
-	<div ng-class="addProductsClass"><!-- complete -->
-	  <div class="text-center bs-wizard-stepnum">Step 2</div>
-	  <div class="progress"><div class="progress-bar"></div></div>
-	  <a class="bs-wizard-dot"></a>
-	  <div class="bs-wizard-info text-center">Add Products Services</div>
-	</div>
-	<div ng-class="chooseTemplateClass"><!-- complete -->
-	  <div class="text-center bs-wizard-stepnum">Step 3</div>
-	  <div class="progress"><div class="progress-bar"></div></div>
-	  <a class="bs-wizard-dot"></a>
-	  <div class="bs-wizard-info text-center">Choose Template for your website!</div>
-	</div>
-	<div ng-class="requestSiteClass"><!-- active -->
-	  <div class="text-center bs-wizard-stepnum">Step 4</div>
-	  <div class="progress"><div class="progress-bar"></div></div>
-	  <a class="bs-wizard-dot"></a>
-	  <div class="bs-wizard-info text-center">Request for new website!</div>
-	</div>
-</div>
 
-<div class="row border-bottom">
-	<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'"></div>
-	<div class="col-md-6" ng-include="'modules/component/menu-back.html'"></div>
-</div>
+	<div class="row border-bottom">
+		<div class="col-md-6" ng-include="'modules/component/breadcrumb.html'"></div>
+		<div class="col-md-6" ng-include="'modules/component/menu-back.html'"></div>
+	</div>

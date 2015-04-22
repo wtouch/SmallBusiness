@@ -15,9 +15,11 @@
 					</span>
 				</div>
 			</div>
+			
 			<div>
 				<input type="hidden" ng-model="adduser.user_id">
 			</div>	
+			
 			<div class="form-group">
 				<label for="username" class="col-sm-2 control-label">UserName *</label>
 				<div class="col-sm-9">
@@ -45,6 +47,7 @@
 					<span class="help-block">
 						<span class="text-success" ng-show="adduserForm.email.$dirty && adduserForm.email.$valid && EmailAvailable">{{availabilityMsg}}</span>
 					</span>
+					
 					<span class="help-block" ng-show="adduserForm.email.$dirty && adduserForm.email.$invalid || EmailAvailable == false">
 						<span class="text-danger" ng-show="adduserForm.email.$dirty && EmailAvailable == false">{{availabilityMsg}}</span>
 						<span class="text-danger" ng-show="adduserForm.email.$error.required">Email is required.</span>
@@ -58,6 +61,7 @@
 				<div class="col-sm-9">
 					<p class="input-group">
 						<input type="text" id="dob" name="dob" class="form-control" datepicker-popup="{{format}}" ng-model="adduser.dob" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required close-text="Close" ng-click="open($event)" />
+						
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
@@ -91,32 +95,32 @@
 					<div class="col-sm-9">
 						<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="adduser.address.location" typeahead-on-select="getData($item)" placeholder="Enter your location" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
 						<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i>
-							<span class="help-block" ng-show="adduserForm.location.$dirty && adduserForm.location.$invalid || adduserForm.location.$dirty && !adduser.location">
-							
+							<span class="help-block" ng-show="adduserForm.location.$dirty && adduserForm.location.$invalid || adduserForm.location.$dirty && !adduser.location">							
 							</span>
 					</div>						
 			</div>
 			
 			<div class="form-group">
-						<label for="area" class="col-sm-2 control-label">Area *</label>
-						<div class="col-sm-9">
-							<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="adduser.address.area" placeholder="Enter area" required>
-							<span class="help-block" ng-show="adduserForm.area.$dirty && adduserForm.area.$invalid">
-								<span class="text-danger" ng-show="adduserForm.area.$error.required">Area is required.</span>
-								<span ng-show="adduserForm.area.$error.pattern && (adduserForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
-								<span class="text-danger" ng-show="adduserForm.area.$error.minlength && (adduserForm.area.$dirty || submitted)">Enter correct Area.</span>
-							</span>
-						</div>						
+				<label for="area" class="col-sm-2 control-label">Area *</label>
+				<div class="col-sm-9">
+					<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="adduser.address.area" placeholder="Enter area" required>
+					<span class="help-block" ng-show="adduserForm.area.$dirty && adduserForm.area.$invalid">
+						<span class="text-danger" ng-show="adduserForm.area.$error.required">Area is required.</span>
+						<span ng-show="adduserForm.area.$error.pattern && (adduserForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
+						<span class="text-danger" ng-show="adduserForm.area.$error.minlength && (adduserForm.area.$dirty || submitted)">Enter correct Area.</span>
+					</span>
+				</div>						
 			</div>			
 					
 			<div class="form-group">
 				<label for="state" class="col-sm-2 control-label">State *</label>
 				<div class="col-sm-4">
-				<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="adduser.state" placeholder="Enter state">
+					<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="adduser.state" placeholder="Enter state">
 					<span class="help-block" ng-show="adduserForm.state.$dirty && adduserForm.state.$invalid">
 						<span ng-show="adduserForm.state.$error.required" class="text-danger">State is required.</span>
 					</span>				
-				</div>						
+				</div>	
+				
 				<div class="col-sm-offset-1 col-sm-4">
 					<input type="text" required name="City" id="City" ng-model="adduser.address.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
 						<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
@@ -125,6 +129,7 @@
 					</span>				
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label for="Country" class="col-sm-2 control-label">Country *</label>
 				<div class="col-sm-9">
@@ -134,6 +139,7 @@
 					</span>				
 				</div>
 			</div>	
+			
 			<div class="form-group">
 				<label for="pincode" class="col-sm-2 control-label">Pin Code *</label>
 				<div class="col-sm-9">
@@ -171,9 +177,11 @@
 						
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid || EmailAvailable==false || UserAvailable==false" ng-click="postData(adduser)" ng-if="!editUserId">Add User</button>
-				  <button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="update(adduser)" ng-if="editUserId">Update User</button>
-				  <button type="reset" class="btn btn-danger">Reset</button>
+					<button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid || EmailAvailable==false || UserAvailable==false" ng-click="postData(adduser)" ng-if="!editUserId">Add User</button>
+					
+					<button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="update(adduser)" ng-if="editUserId">Update User</button>
+					
+					<button type="reset" class="btn btn-danger">Reset</button>
 				</div>
 			</div>						
 		</form>			

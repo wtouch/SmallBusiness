@@ -35,8 +35,7 @@
 			</div>
 			<label>Message: </label>
 			<div class="panel panel-default">
-				<div class="panel-body">
-					
+				<div class="panel-body">					
 						<table ng-if="singlemail.message.message">
 							<tr ng-repeat="(key, val) in singlemail.message">
 							<td>{{key | uppercase}} :</td> 
@@ -53,8 +52,8 @@
 </div>	
 <div class="row">
 	<div class="col-sm-12">
-	<div ng-if="singlemail"  ng-hide="singlemail.status == 2 || userDetails.id != singlemail.user_id" class="main-content">
-		<h4> Reply </h4>
+		<div ng-if="singlemail"  ng-hide="singlemail.status == 2 || userDetails.id != singlemail.user_id" class="main-content">
+			<h4> Reply </h4>
 			<form class="form-horizontal" name="mailView" ng-submit="mailView.$valid"  novalidate>
 				<div class="form-group">
 					<label for="subject" class="col-sm-2 control-label">Subject</label>
