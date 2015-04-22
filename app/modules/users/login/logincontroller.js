@@ -17,7 +17,7 @@ define(['app'], function (app) {
 			.then(function(response) {
 				if(response.status == 'success'){
 					$location.path("/dashboard");
-					dataService.setUserDetails(response.data);
+					dataService.setUserDetails(dataService.parse(response.data));
 					if($scope.login.remember){
 						dataService.rememberPass(true);
 					}

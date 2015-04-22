@@ -284,6 +284,19 @@ class dbHelper {
             
 			$totalRecords = $totalRecord->fetch(PDO::FETCH_ASSOC);
 			$affected_rows = $stmt->rowCount();
+			
+			$data = array();
+			
+			if(count($rows)>=1){
+				foreach ($rows as $index => $dataArr){
+					//$serviceData[$index] = $dataArr;
+					foreach($dataArr as $key => $value){
+						$DataArray[$key] = (substr($value,0,1) == "{" || substr($value,0,1) == "[") ? json_decode($value, true) : $value;
+					}
+					array_push($data,$DataArray);
+				}
+			}
+			
             if(count($rows)<=0 || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
@@ -294,7 +307,7 @@ class dbHelper {
 				$response["message"] = $affected_rows." rows selected.";
                 $response["status"] = "success";
                 $response["query"] = $this->getQueryString();
-				$response["data"] = $rows;
+				$response["data"] = $data;
 				$response["totalRecords"] = $totalRecords['totalRecords'];
             }
             $this->resetQueryData();
@@ -313,7 +326,14 @@ class dbHelper {
             $rows = $stmt->fetch(PDO::FETCH_ASSOC);
 			$affected_rows = $stmt->rowCount();
 			//echo "select * from ".$table." where 1=1 ". $w ." ".$dbLimit;
-            if(count($rows)<=0 || !is_array($rows)){
+			
+			$data = array();
+			
+			foreach($rows as $key => $value){
+				$data[$key] = (substr($value,0,1) == "{" || substr($value,0,1) == "[") ? json_decode($value, true) : $value;
+			}
+			
+            if(count($rows)<= 0 || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
 				$response["data"] = null;
@@ -321,7 +341,7 @@ class dbHelper {
 				//$response['totalRecords']= $totalRecords;
 				$response["message"] = $affected_rows." rows selected.";
                 $response["status"] = "success";
-				$response["data"] = $rows; //(count($rows)==1) ? $rows[0] : $rows;
+				$response["data"] = $data; //(count($rows)==1) ? $rows[0] : $rows;
             }
             $this->resetQueryData();
         }catch(PDOException $e){

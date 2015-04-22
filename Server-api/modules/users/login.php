@@ -58,7 +58,7 @@
 				}
 				$response["message"] = "You are logged in successfully.";
                 $response["status"] = "success";
-				$response["data"] = json_encode($sessionObj->getSession());
+				$response["data"] = $sessionObj->getSession();
 				echo json_encode($response);
 			}else{
 				throw new Exception('Password does\'n match!');

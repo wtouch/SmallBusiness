@@ -92,7 +92,8 @@ define(['app'], function (app) {
 					$scope.editProfileForm.$setPristine();
 					$scope.alerts.push({type: response.status, msg: response.message});
 					angular.extend($rootScope.userDetails,editprofile);
-					dataService.setUserDetails($rootScope.userDetails);
+					console.log($rootScope.userDetails);
+					dataService.setUserDetails(($rootScope.userDetails));
 					$rootScope.userDetails = dataService.parse(dataService.userDetails);
 				}else{
 					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
