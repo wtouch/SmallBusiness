@@ -22,8 +22,7 @@ define(['app'], function (app) {
 		};
 		$scope.reset();
 		$scope.readOnly = false;
-		/*****************************************************************************
-		datepicker {sonali}*/
+		/****************************************datepicker ***********************************/
 		$scope.today = function(){
 			$scope.newsDate = new Date();
 		};
@@ -48,12 +47,11 @@ define(['app'], function (app) {
 			$scope.formPart = formPart;
 		};
 		
-		/**********************************************************************
-		code for accessing json data of business	{Sonali} */
+		/**********************************************************************/
+		code for accessing json data of business	
 		$scope.biz = {};
 		dataService.config('config', {config_name : "business"}).then(function(response){
 			$scope.biz = response.config_data;
-			console.log($scope.biz); 
 		});
 		$scope.getData = function(location){
 			$scope.readOnly = true;
@@ -93,21 +91,12 @@ define(['app'], function (app) {
 			var locationParams = {filter : {parent_id : filterColumn}};
 			dataService.config('business_category',locationParams).then(function(response){
 				$scope.businessKyewords = response;
-				console.log($scope.businessKyewords);
 			});
 		}
 		
-		/**********************************************************************
-		code for accessing json data of country, State & City {Sonali}*/
-		
-		/* dataService.get("getmultiple/user/1/100")
-		.then(function(response) {
-			$scope.selectUsers = response.data;
-		});	
-		 */
-		
+		 //function for websitelist response
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
-		.then(function(response) {  //function for websitelist response
+		.then(function(response) { 
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
 			}else{
@@ -118,8 +107,8 @@ define(['app'], function (app) {
 		$scope.path = "business/"+$scope.userInfo.user_id; // path to store images on server
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
 		
-		//this upload function for uploading single image.{trupti}
-		$scope.upload = function(files,path,userInfo, picArr){ // this function for uploading files
+		//this upload function for uploading single image.
+		$scope.upload = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
 						if(picArr == "business_logo"){
@@ -134,18 +123,19 @@ define(['app'], function (app) {
 				
 			});
 		};
-		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
+		//to generate thumbnail
+		$scope.generateThumb = function(files){  
 			upload.generateThumbs(files);
-		};// End upload function
+		};
 		
 		
 		/***********************************************************************************
 		add business form code here{sonali}*/
 		
-		//post method for insert data in request businessprofile form{sonali}
+		//to add business code
 		$scope.postData = function(addbusiness) {
 			dataService.post("post/business",addbusiness)
-			.then(function(response) {  //function for response of request temp
+			.then(function(response) { 
 				if(response.status == "success"){
 					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
 					$location.path("/dashboard/business/adddetails/"+response.data);
@@ -162,12 +152,11 @@ define(['app'], function (app) {
 			$scope.id=$routeParams.id
 			dataService.get("getsingle/business/"+$routeParams.id)
 			.then(function(response) {
-				console.log(response);
-					if(response.status == 'success'){
-						$scope.addbusiness = dataService.parse(response.data);
-						$scope.getTypes($scope.addbusiness.category);
-						$scope.getKeywords($scope.addbusiness.type);
-					}
+				if(response.status == 'success'){
+					$scope.addbusiness = dataService.parse(response.data);
+					$scope.getTypes($scope.addbusiness.category);
+					$scope.getKeywords($scope.addbusiness.type);
+				}
 			});
 			$scope.updateData = function(addbusiness) {
 				dataService.put("put/business/"+$routeParams.id,addbusiness)
@@ -181,7 +170,6 @@ define(['app'], function (app) {
 		}
 		//get method for get data from business
 		var addbusiness = function(){
-			console.log(addbusiness);
 			$scope.bizId = $routeParams.id;
 			if($scope.bizId){
 				dataService.get("getsingle/business/"+$scope.bizId)
@@ -195,7 +183,6 @@ define(['app'], function (app) {
 			}
 		}
     };
-	
 	// Inject controller's dependencies
 	addbusinessController.$inject = injectParams;
 	// Register/apply controller dynamically

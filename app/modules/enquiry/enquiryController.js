@@ -1,8 +1,8 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','upload','$route']; /* Added $routeParams to access route parameters */
-    // This is controller for this view
+    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','upload','$route']; 
+   
 	var enquiryController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,upload,$route) {
 		$scope.permission = $rootScope.userDetails.permission.enquiry_module;
 		
@@ -22,33 +22,28 @@ define(['app'], function (app) {
 		$scope.user_id = { user_id : dataService.userDetails.id };
 		$scope.hideDeleted = "";
 		
-		
 		//For display by default mails.html page
 		if(!$routeParams.mailId) {
 			$location.path('/dashboard/enquiry/mails');
 		}
-		
 		//function for close alert
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
-		
 		// code for refresh page
 		$scope.refreshpage=function(){
 			$route.reload();
 		}
-		
 		//reset function
 		$scope.reset = function() {
 			$scope.composemail = {};
 		};
-			
-		//pagination
+		// code for pagination
 		$scope.pageChanged = function(page, where) {
 			dataService.get("getmultiple/enquiry/"+page+"/"+$scope.pageItems, where).then(function(response){
 				$scope.mailList = dataService.parse(response.data);
 			});
-		};//End of pagination
+		};
 		
 		//to change status of read and unread mails
 		$scope.changestatus = function(id, read_status, index){
@@ -61,9 +56,9 @@ define(['app'], function (app) {
 			}
 		};
 		
-		
+		//code for get user list
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
-		.then(function(response) {  //function for websitelist response
+		.then(function(response) {  
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
 			}else{
@@ -77,7 +72,6 @@ define(['app'], function (app) {
 				$scope.status = {status : 0};
 				dataService.put("put/enquiry/"+id, $scope.status)
 				.then(function(response) { 
-					
 					$scope.mailList[index].status = 0
 					$scope.hideDeleted = 1;
  				});
@@ -97,13 +91,12 @@ define(['app'], function (app) {
 					}else{
 						$scope.mailList = dataService.parse(response.data);
 						$scope.totalRecords = response.totalRecords;
-						
 					}
 				});
 			}
 		};
 		
-		//view inbox list
+		//function for view maillist
 		var inboxmailList = function(){
 			$scope.statusParam = {status : 1};
 			angular.extend($scope.statusParam, $scope.user_id);
@@ -118,6 +111,7 @@ define(['app'], function (app) {
 			});
 		}
 		
+		//function for sent mail list
 		var sentmailList = function(){
 			$scope.statusParam = {status : 2};
 			angular.extend($scope.statusParam, $scope.user_id);
@@ -144,8 +138,6 @@ define(['app'], function (app) {
 				}
 			});
 		}
-		
-		// this object will check list of mails show or single mail show 
 		
 		//view single mail 
 		var mailview = function(){

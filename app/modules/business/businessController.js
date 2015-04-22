@@ -3,43 +3,10 @@
 define(['app'], function (app) {
     var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','modalService'];
 
-    // This is controller for this view
 	var businessController = function ($scope,$rootScope,$injector, $routeParams,$location,dataService,modalService)
 	{
-		$scope.permission = $rootScope.userDetails.permission.business_module;
-		//This code for modal {sonali}
-		$scope.open = function (url, buzId) {
-			dataService.get("getsingle/business/"+buzId)
-			.then(function(response) {
-				
-				var modalDefaults = {
-					templateUrl: url,	// apply template to modal
-					size : 'lg'
-				};
-				var modalOptions = {
-					bizList: dataService.parse(response.data)  // assign data to modal
-				};
-				console.log(dataService.parse(response.data));
-				
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					console.log("modalOpened");
-				});
-			});
-		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
-		};
-		
-		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
-		.then(function(response) {  //function for websitelist response
-			if(response.status == 'success'){
-				$scope.customerList = response.data;
-			}else{
-				$scope.alerts.push({type: response.status, msg: response.message});
-			}
-		});
-		
 		//all $scope object goes here
+		$scope.permission = $rootScope.userDetails.permission.business_module;
 		$scope.alerts = [];
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -48,7 +15,6 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
-		
 		$scope.hideDeleted = "";
 		
 		//function for close alert
@@ -74,8 +40,37 @@ define(['app'], function (app) {
 				$scope.bizList = response.data;			
 			});
 		};
+		$scope.ok = function () {
+			$modalOptions.close('ok');
+		};
 		
-		//this is global method for filter 
+		//to open modal
+		$scope.open = function (url, buzId) {
+			dataService.get("getsingle/business/"+buzId)
+			.then(function(response) {
+				var modalDefaults = {
+					templateUrl: url,	
+					size : 'lg'
+				};
+				var modalOptions = {
+					bizList: dataService.parse(response.data)  
+				};
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+				});
+			});
+		};
+		
+		// code for show website list
+		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+		.then(function(response) {  
+			if(response.status == 'success'){
+				$scope.customerList = response.data;
+			}else{
+				$scope.alerts.push({type: response.status, msg: response.message});
+			}
+		});
+		
+		//global method for filter 
 		$scope.changeStatus = function(statusCol, colValue) {
 			$scope.filterStatus= {};
 			(colValue =="") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
@@ -90,19 +85,18 @@ define(['app'], function (app) {
 					$scope.totalRecords = {};
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				//console.log($scope.properties);
 			});
 		};
-			
+		
+		//function to search filter
 		$scope.searchFilter = function(statusCol, colValue) {
 			$scope.search = {search: true};
 			$scope.filterStatus= {};
 			(colValue =="") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
 			angular.extend($scope.businessParams, $scope.filterStatus, $scope.search);
-			
 			if(colValue.length >= 4 || colValue ==""){
 				dataService.get("getmultiple/business/1/"+$scope.pageItems, $scope.businessParams)
-				.then(function(response) {  //function for templatelist response
+				.then(function(response) {  
 					if(response.status == 'success'){
 						$scope.bizList = response.data;
 						$scope.totalRecords = response.totalRecords;
@@ -111,11 +105,11 @@ define(['app'], function (app) {
 						$scope.totalRecords = {};
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}
-					//console.log($scope.properties);
 				});
 			}
 		};
 		
+		//function to view business list
 		var businesslist = function(){
 			$scope.businessParams = {status: 1};
 			angular.extend($scope.businessParams, $scope.userInfo);
@@ -132,36 +126,33 @@ define(['app'], function (app) {
 				}
 			});	
 			
-			//Update business edit button {sonali}
+			//Update business edit button 
 			$scope.editBusiness = function(id){
 				$location.path('/dashboard/business/addbusiness/'+id);
 			};
 			
-			//This code for verify button {sonali}
+			// code for verify button 
 			$scope.verify = function(id, verified){
 				$scope.veryfiedData = {verified : verified};
-				
 				dataService.put("put/business/"+id, $scope.veryfiedData)
-				.then(function(response) { //function for businesslist response
+				.then(function(response) { 
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			} ;
-			//This code for featured unfeatured button {sonali}
+			//This code for featured & un-featured button 
 			$scope.feature = function(id, featured){
 				$scope.featuredData = {featured : featured};
-				console.log($scope.featuredData);
 				dataService.put("put/business/"+id, $scope.featuredData)
-				.then(function(response) { //function for businesslist response
+				.then(function(response) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 				});
 			};
 
-			//delete button {sonali}
+			// code for delete button 
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
-				//console.log($scope.deletedData);
 				dataService.put("put/business/"+id, $scope.deletedData)
-				.then(function(response) { //function for businesslist response
+				.then(function(response) { 
 					if(response.status == 'success'){
 						$scope.hideDeleted = 1;
 					}
@@ -170,6 +161,7 @@ define(['app'], function (app) {
 			};			
 		};
 		
+		//function for delete business
 		var deletedbusiness = function(){
 			$scope.businessParams = {status: 0};
 			angular.extend($scope.businessParams, $scope.userInfo);
@@ -187,9 +179,8 @@ define(['app'], function (app) {
 			});
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
-				//console.log($scope.deletedData);
 				dataService.put("put/business/"+id, $scope.deletedData)
-				.then(function(response) { //function for businesslist response
+				.then(function(response) { 
 					if(response.status == 'success'){
 						$scope.hideDeleted = 0;
 					}
@@ -198,23 +189,17 @@ define(['app'], function (app) {
 			};
 
 		};
-		
-		
 		switch($scope.businessView) {
 			case 'businesslist':
-			console.log("businesslist");
 				businesslist();
 				break;
 			case 'deletedbusiness':
-			console.log("deletedbusiness");
 				deletedbusiness();
 				break;
 			default:
 				businesslist();
 		};
-		
-    };
-	
+	};
 	// Inject controller's dependencies
 	businessController.$inject = injectParams;
 	// Register/apply controller dynamically

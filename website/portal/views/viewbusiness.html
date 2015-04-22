@@ -44,10 +44,12 @@
 						{% if product %}<li ng-class="{active:id=='products'}" ng-click="makeActive('products')"><a href="#products">Products</a></li>{% endif %}
 						{% if service %}	
 						<li ng-class="{active:id=='services'}" ng-click="makeActive('services')"><a href="#services">Services</a></li>{% endif %}
-						
-						<li ng-class="{active:id=='testimonials'}" ng-click="makeActive('testimonials')"><a href="#testimonials">Testimonials</a></li>
-					
-						<li ng-class="{active:id=='activities'}" ng-click="makeActive('activities')"><a href="#activities">Activities</a></li>
+						{% if testimonials %}	
+						<li ng-class="{active:id=='testimonials'}" ng-click="makeActive('testimonials')"><a href="#testimonials">Testimonials</a></li>{% endif %}
+						{% if activities %}	
+						<li ng-class="{active:id=='activities'}" ng-click="makeActive('activities')"><a href="#activities">Activities</a></li>{% endif %}
+						{% if gallery %}	
+						<li ng-class="{active:id=='gallery'}" ng-click="makeActive('gallery')"><a href="#activities">Gallery</a></li>{% endif %}
 						<li ng-class="{active:id=='contact'}" ng-click="makeActive('contact')"><a href="#contact">Contact Us</a></li>
 				</ul>
 			</div>
@@ -167,9 +169,7 @@
 						{% for key, x in service %}
 							<div class="col-sm-12 col-md-4 ">
 								<div class="thumbnail productBox">
-									
-										<img class="img-responsive prodimg" src="{{x.product_image.0.file_relative_path}}" alt="{{key}}"/>
-									
+									<img class="img-responsive prodimg" src="{{x.product_image.0.file_relative_path}}" alt="{{key}}"/>
 								</div>
 								<div class="caption text-center" ng-init="isVisible = false" ng-controller="productController">
 									<h3 >{{ x.product_service_name }} </h3>
@@ -201,6 +201,7 @@
 				</div>
 				{% endif %}
 				<div class="clearfix"></div>
+				{% if testimonials %}	
 				<div ng-show="id=='testimonials'" class="product boxborder" id="testimonials">
 					<div class="row">
 						<div class="col-md-12">
@@ -255,7 +256,9 @@
 					</div>
 					</div>
 				</div>
+				{% endif %}
 				<div class="clearfix"></div>
+				{% if activities %}	
 				<div ng-show="id=='activities'" class="product boxborder" id="activities">
 					<h2 class="text-center">Activities</h2>
 					<div class="row">
@@ -317,6 +320,16 @@
 					</div>{% endfor %}
 					</div>
 				</div>
+				{% endif %}
+				
+				{% if gallery %}
+				<div ng-show="id=='gallery'" class="boxborder" id="gallery">
+					<div class="row" >
+						<h2 class="text-center">Gallery</h2>
+						
+					</div>
+				</div>
+				{% endif %}
 				<div class="clearfix"></div>
 				<div ng-show="id=='contact'" class=" boxborder" id="contact">
 				<h2 class="text-center">Contact us</h2>

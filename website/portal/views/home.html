@@ -17,7 +17,7 @@
      <span>(<small bind-html-unsafe="match.model.location"></small>-<small bind-html-unsafe="match.model.area"></small>)</span>
     </a>
 </script>
-	
+{% include 'includes/header.html' ignore missing %}	
 <section  >
 	<div class="home center-block" ng-controller="TypeaheadCtrl">
 		<a href="#/"><img src="{{path}}img/logo.png" title="Apnasite Portal" class="center-block logo img-responsive" /></a>
@@ -45,7 +45,7 @@
 				<div class="text-center">
 					{% for x in data %}
 						<div class="products " >
-							<img src="{{path}}img/category/{{x.category_name}}.jpg" class="category"/><br>
+							<a href="{{'{{city}}'}}/{{x.category | replace({' ' : '-'}) }}" ><img src="{{path}}img/category/{{x.category_name}}.jpg" class="category"/></a><br>
 							<a  class="catp" href="{{'{{city}}'}}/{{x.category | replace({' ' : '-'}) }}" >{{x.category_name}}</a>
 						</div>
 					{% endfor %}

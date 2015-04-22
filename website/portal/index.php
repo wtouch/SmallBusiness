@@ -16,6 +16,7 @@ $body = $app->request->getBody();
 
 $app->get('/(/:city)', function($city=null) use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories($city);
+	print_r($response);
 	if($response['status'] == "success"){
 		$template = $twig->loadTemplate("home.html");
 	}else{
@@ -79,6 +80,7 @@ $app->get('/:city/:category/:type/:business/:id', function($city, $category, $ty
 	$city = $portal->decodeUrl($city);
 	$business = $portal->decodeUrl($business);
 	$response = $portal->getBusiness($city,$category, $type, $business,$id);
+	print_r($response);
 	 if($response['status'] == "success"){
 		$template = $twig->loadTemplate("viewbusiness.html");
 	}else{

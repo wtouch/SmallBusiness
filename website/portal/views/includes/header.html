@@ -14,6 +14,7 @@
 <header ng-controller="TypeaheadCtrl">
 	<nav class="navbar navbar-default  navbar-fixed-top">
 		<div class="container">
+		{% if (data.city) or (data.keyword) %}
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle navigation</span>
@@ -23,8 +24,7 @@
 				</button>
 				<a class="navbar-brand" href="/"><img src="{{path}}img/logo.png" title="Apnasite Portal" class="img center-block " /></a>
 			</div>
-			<div class="collapse navbar-collapse">
-				<form class="navbar-form navbar-left" role="search">
+			<form class="navbar-form navbar-left" role="search">
 					<div class="input-group search" ng-if="!index.html">
 						<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult($item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, city)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
 						<span class="input-group-btn">
@@ -32,11 +32,11 @@
 						</span>
 					</div>
 				</form>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/app/#/login">Login</a></li>
-					<li><a href="/app/#/register">Register</a></li>
-				</ul>
-			</div>
+			{% endif %}
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/app/#/login">Login</a></li>
+				<li><a href="/app/#/register">Register</a></li>
+			</ul>
 		</div>
 	</nav>
 </header>

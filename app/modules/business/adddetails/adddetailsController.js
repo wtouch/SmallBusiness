@@ -37,13 +37,12 @@ define(['app'], function (app) {
 		$scope.biz = {};
 		dataService.config('config', {config_name : "business"}).then(function(response){
 			$scope.biz = response.config_data;
-			console.log($scope.biz); 
 		});
 		
 		// config data for business form
 		$scope.biz = dataService.config.business;
 		
-		// Add Business multi part form show/hide operation from here! {Vilas}
+		// Add Business multi part form show/hide operation from here!
 		$scope.formPart = ($cookies.bizFormPart) ? $cookieStore.get("bizFormPart") : 'infrastructure';
 		
 		//function for close alert
@@ -52,7 +51,8 @@ define(['app'], function (app) {
 		};
 		$scope.infra = false;
 		$scope.imgRemoved = false;
-		// Scope methods
+		
+		// Scope  Global methods
 		$scope.showFormPart = function(formPart){
 			$cookieStore.put("bizFormPart", formPart);
 			$scope.formPart = $cookieStore.get("bizFormPart");
@@ -66,7 +66,6 @@ define(['app'], function (app) {
 			$scope.headingDisabled = false;
 			$scope.infra = false;
 			$scope[resetObj] = { desc : { }};
-			console.log(data);
 		}
 		
 		$scope.removeObject = function(key, object){
@@ -90,8 +89,6 @@ define(['app'], function (app) {
 			}
 		}
 		
-		/**********************************************************************
-		code for accessing json data of country, State & City {Sonali}*/
 		$scope.contries = dataService.config.country;
 		$scope.getState = function(country){
 			var states = [];
@@ -116,70 +113,53 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		};
 		
-		/*************************************************************************
-		Upload Function for uploading files {sonali}*/
-		$scope.upload = function(files,path,userInfo, picArr){ // this function for uploading files
+		//Upload Functions for uploading files 
+		$scope.upload = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
 						$scope.infrastructure.desc.image = data.data;
-						
-						console.log($scope.infrastructure.desc.image);
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}
 			}); 
 		}; 
-		
-		
-		//Upload Function for uploading files {sonali}
-		$scope.uploadtesti = function(files,path,userInfo, picArr){ // this function for uploading files
+		$scope.uploadtesti = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
 						$scope.testimonials.desc.image = data.data;
-						
-						console.log($scope.testimonials.desc.image);
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}
 			}); 
 		}; 
 		
-		//Upload Function for uploading files {sonali}
-		$scope.uploadnews = function(files,path,userInfo, picArr){ // this function for uploading files
+		$scope.uploadnews = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
 						$scope.news_coverage.desc.image = data.data;
-						
-						console.log($scope.news_coverage.desc.image);
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}
 			}); 
 		}; 
-		
-		//Upload Function for uploading files {sonali}
-		$scope.uploadgallery = function(files,path,userInfo, picArr){ // this function for uploading files
+		$scope.uploadgallery = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
 						$scope.gallery.desc.image = data.data;
-						
-						console.log($scope.gallery.desc.image);
 					}else{
 						$scope.alerts.push({type: data.status, msg: data.message});
 					}
 			}); 
 		}; 
-		
-		$scope.generateThumb = function(files){  // this function will generate thumbnails of images
+		// to generate thumbnail of image
+		$scope.generateThumb = function(files){ 
 			upload.generateThumbs(files);
-		};// End upload function
+		};
 			
-		/***********************************************************************************
-		Update business form code here{sonali}*/
+		//Update business form code here
 		$scope.update = function(businessData){				
-			console.log(businessData);						
-			dataService.put("put/business/"+ $scope.business_id, businessData)  // use business id here
-			 .then(function(response) {  //function for response of request temp
+			dataService.put("put/business/"+ $scope.business_id, businessData)  
+			 .then(function(response) { 
 				if(response.status == 'success'){
 					$scope.submitted = true;
 					$scope.alerts.push({type: response.status,msg: response.message});
