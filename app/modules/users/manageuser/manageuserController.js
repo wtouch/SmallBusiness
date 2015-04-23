@@ -16,7 +16,6 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.contries = dataService.config.country;
-		$scope.today();
 		$scope.adduser ={};
 		$scope.manage_user = dataService.config.manage_user;
 		//code for accessing json data of users

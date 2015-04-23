@@ -10,7 +10,6 @@ define(['app'], function (app) {
 		$scope.path = "user/profile"; // path to store images on server
 		$scope.formats = ['yyyy/MM/dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
-		$scope.today();
 		
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
