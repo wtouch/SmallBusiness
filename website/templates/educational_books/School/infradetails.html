@@ -5,7 +5,7 @@
 				<button type="button" class="close" ng-click="modalOptions.close()">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h3>Infrasture Details</h3>
+				<h3>Infrastrcture Details</h3>
 				<div class="media">
 					{% for key, value in data.infrastructure %}
 					<div class="media-left">
@@ -13,11 +13,11 @@
 							<img class="img-responsive " src="{{value.image.file_relative_path}}"/>
 						</a>
 					</div>
+					{% endfor %}
 					<div class="media-body">
 						<h4 class="media-heading">{{key}}</h4>
-						<p>{{value.description}}</p>
+						<p>{{data.description}}</p>
 					</div>
-					{% endfor %}
 				</div>
 			</div>
 		</div>

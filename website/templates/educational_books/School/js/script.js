@@ -37,7 +37,5 @@ app.controller('enquiryController', function($scope,$http, $route, $location) {
 			$scope.id = url;
 		}
 		$scope.makeActive($scope.url);
-		$scope.isShow = function(id){
-			$scope.isVisible = "true";
-		}
+		
 	});
