@@ -38,7 +38,15 @@ class portalManager{
 	
 	function setResponse($data,$city){
 		$response['title'] = "my business keywords";
-		$response['data'] = $data;
+		if(isset($data['data'])){
+			$response['data'] = $data['data'];
+		}else{
+			$response['data'] = array();
+		}
+		if(isset($data['totalRecords'])){
+			$response['totalRecords'] = $data['totalRecords'];
+		}
+		$response['currentPage'] = isset($_GET['page']) ? $_GET['page'] : 1;
 		$response['city'] = $city;
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
@@ -55,17 +63,22 @@ class portalManager{
 				$like['keywords'] = $keyword;
 			}
 			
+			$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+			
+			$limit[0] = $currentPage;
+			$limit[1] = 10;
+			
 			$t0 = $this->db->setTable("business");
 			$this->db->setWhere($where, $t0);
 			$this->db->setWhere($like, $t0,true);
-			
+			$this->db->setLimit($limit);
 			$cols = array("*");
 			$this->db->setColumns($t0, $cols);
 			$data = $this->db->select();
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			$response = $this->setResponse($data["data"], $city);
+			$response = $this->setResponse($data, $city);
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
 		}catch(Exception $e){
@@ -158,7 +171,7 @@ class portalManager{
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
-			$response = $this->setResponse($data["data"],$city);
+			$response = $this->setResponse($data,$city);
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
 		}catch(Exception $e){
@@ -196,7 +209,7 @@ class portalManager{
 				throw new Exception($data['message']);
 			}
 			
-			$response = $this->setResponse($data["data"],$city);
+			$response = $this->setResponse($data,$city);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			
@@ -214,20 +227,27 @@ class portalManager{
 			$where['type'] = $type;
 			$where['status'] = 1;
 			$where['city'] = $city;
-		
+			
+			$currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+			
+			$limit[0] = $currentPage;
+			$limit[1] = 10;
 			$t0 = $this->db->setTable("business");
 			$this->db->setWhere($where, $t0);
 			
+			$this->db->setLimit($limit);
 			$cols = array("city,category, type,id,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info, featured, verified");
 			$this->db->setColumns($t0, $cols);
 		
 			$data = $this->db->select();
+			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
 			
-			$response = $this->setResponse($data["data"],$city);
+			$response = $this->setResponse($data,$city);
 			$response["status"] = "success";
+			$response["currentPage"] = $currentPage;
 			$response["message"] = "Data Shows";
 			
 		}catch(Exception $e){
@@ -261,7 +281,7 @@ class portalManager{
 						
 			$t1 = $this->db->setTable("product");
 			$this->db->setWhere($prodwhere, $t1);
-			$this->db->setLimit(array(1,10));
+			
 			$cols = array("*");
 			$this->db->setColumns($t1, $cols);
 			
@@ -273,14 +293,14 @@ class portalManager{
 			
 			$t2 = $this->db->setTable("product");
 			$this->db->setWhere($servicewhere, $t2);
-			$this->db->setLimit(array(1,10));
+			
 			$cols = array("*");
 			
 			$this->db->setColumns($t2, $cols);
 			
 			$servicedata = $this->db->select();
 			
-			$response = $this->setResponse($data["data"],$city);
+			$response = $this->setResponse($data,$city);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			$response['service'] = ($servicedata["data"]);	

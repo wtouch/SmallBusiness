@@ -79,7 +79,8 @@ $app->get('/:city/:category/:type', function($city,$category, $type) use($app, $
 		$template = $twig->loadTemplate("business.html");
 	}else{
 		$template = $twig->loadTemplate("error.html");
-	} 
+	}
+	
 	$template->display($response);
 });
 

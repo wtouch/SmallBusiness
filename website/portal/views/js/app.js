@@ -12,8 +12,6 @@ define(['angular',
    'ui.bootstrap', 'customServices', 'ngCookies', 'ngRoute'
  ]);
 	app.controller('TypeaheadCtrl', ['$scope','$http','dataService', function($scope, $http,dataService) {
-		
-		
 		$scope.getTypeaheadData = function(table, searchColumn,city, searchValue){
 			var locationParams = {search : {}, groupBy : {}}
 			locationParams.search[searchColumn] = searchValue;
@@ -75,7 +73,6 @@ define(['angular',
 		$scope.showPosition = function (position) {
 			$scope.latitude = position.coords.latitude;
 			$scope.longitude = position.coords.longitude;
-			//console.log(position.coords.latitude, position.coords.longitude);
 			$scope.$apply();
 			$scope.getCurLocation(position.coords.latitude, position.coords.longitude);
 		}
@@ -145,7 +142,6 @@ define(['angular',
 						enquiry.to_email.to = toemail;
 						enquiry.user_id = userId;
 						enquiry.date = year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec;
-						
 						modalOptions.myenquiryData = enquiry;
 					}
 				};
@@ -158,6 +154,15 @@ define(['angular',
 			$scope.ok = function () {
 				$modalOptions.close('ok');
 			};
+			$scope.postData= function (enquiry,businessname){
+				enquiry.subject = 'Portal Enquiry: '+ businessname;
+				enquiry.date = year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec;
+				dataService.post("/enquiry",enquiry).then(function(response) {
+					$scope.mailSent = true; 
+					console.log(response);
+				}); 
+			};
+			
 		}]).controller('productController',['$scope','$http', '$location', function($scope,$http, $location) {
 			$scope.isShow = function(id){
 				$scope.isVisible = "true";

@@ -15,8 +15,8 @@
 			  <div class="panel-heading">
 				<h3 class="media-heading "><a href="/{{x.city| replace({' ' : '-'})}}/{{x.category | replace({' ' : '-'})}}/{{x.type | replace({' ' : '-'})}}/{{x.business_name | replace({' ' : '-'})}}/{{x.id}}">{{x.business_name}}</a>
 				<div class="verifyBiz pull-right" >
-					<span ng-if="{{x.verified}}" tooltip="Business Verified"><img src="{{path}}img/verified.png"/></span>
-					<span  ng-if="{{x.featured}}" tooltip="Featured Business"><img src="{{path}}img/feature.png"/></span>
+					{% if x.verified %}<span  tooltip="Business Verified"><img src="{{path}}img/verified.png"/></span>{% endif %}
+					{% if x.featured %}<span  tooltip="Featured Business"><img src="{{path}}img/feature.png"/></span>{% endif %}
 					<a class="btn btn-primary pull-right"  ng-click="openModel('{{path}}includes/enquiryform.html',{{x.id}},'{{x.business_name}}','{{x.contact_profile.email}}',x.user_id)"><span class="glyphicon glyphicon-envelope"></span> Send Enquiry</a>
 				</div>	</h3>
 			 </div>
@@ -71,8 +71,12 @@
 				</div>
 				</div>
 			</div>
-		 {% endfor %} 
+		{% endfor %}
+		<div class="text-center">
+			{% include 'includes/pagger.html' ignore missing %}
 		</div>
+		
+	</div>
 	</div>
 </main>
 {% endautoescape %}
