@@ -112,7 +112,7 @@
 				</div>						
 			</div>			
 					
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label for="state" class="col-sm-2 control-label">State *</label>
 				<div class="col-sm-4">
 					<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="adduser.state" placeholder="Enter state">
@@ -120,7 +120,7 @@
 						<span ng-show="adduserForm.state.$error.required" class="text-danger">State is required.</span>
 					</span>				
 				</div>	
-				
+				<label for="city" class="col-sm-2 control-label">City *</label>	<div class="col-sm-3" >
 				<div class="col-sm-offset-1 col-sm-4">
 					<input type="text" required name="City" id="City" ng-model="adduser.address.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
 						<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
@@ -128,7 +128,25 @@
 						<span ng-show="adduserForm.City.$error.required || adduserForm.City.$dirty && !adduser.city" class="text-danger">City is required.</span>
 					</span>				
 				</div>
-			</div>
+			</div> 
+			 -->
+			 <div class="form-group">
+					<label for="state" class="col-sm-2 control-label">State *</label>
+					<div class="col-sm-4">
+					<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="adduser.state" placeholder="Enter state">
+						<span class="help-block" ng-show="adduserForm.state.$dirty && adduserForm.state.$invalid">
+							<span ng-show="adduserForm.state.$error.required" class="text-danger">State is required.</span>
+						</span>				
+					</div>	
+					<label for="city" class="col-sm-2 control-label">City *</label>	<div class="col-sm-3" >
+						<input type="text" required name="City" id="City" ng-model="adduser.address.city"placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
+							<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
+						<span class="help-block" ng-show="adduserForm.City.$dirty && adduserForm.City.$invalid || adduserForm.City.$dirty && !adduser.City">
+							<span ng-show="adduserForm.City.$error.required || adduserForm.City.$dirty && !adduser.city" class="text-danger">City is required.</span>
+						</span>				
+					</div>
+			</div> 
+				
 			
 			<div class="form-group">
 				<label for="Country" class="col-sm-2 control-label">Country *</label>
