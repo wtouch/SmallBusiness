@@ -20,7 +20,8 @@
 			<div class="bottomspace">
 				<label for="status" class="control-label">Select Status</label>
 					<select id="status" class="form-control" 
-					ng-change="changeStatus('status',showStatus)" ng-model="showStatus" ng-init="showStatus=1">
+					ng-change="changeStatus('status',showStatus)" ng-model="showStatus">
+						<option value="">Select Status</option>
 						<option value="1">Active</option>
 						<option value="0">Deleted</option>
 					</select>
@@ -67,17 +68,17 @@
 						<!-- <td>{{x.name}}</td> -->
 						
 						<td style="max-width:150px">
-							<div class="input-group">
-								<p class="form-control-static" ng-hide="x.boxId ==1">{{x.template_price}}</p>
-								<input type="text" id="template_price" class="form-control" name="template_price" ng-show="x.boxId == 1" ng-model="x.template_price" ng-required="true"/>
-							</div>
-							<!--Edit Template Price-->
-							<div class="input-group-btn" ng-if="permission.set_template_price">
-								<a type="button" class="btn btn-warning pull-right" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')" ng-change="editTemplatePrice('template_price', x.template_price, x.id,x.boxId)" tooltip="Edit Price">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</a>
-							</div>
+						<div class="input-group">
+						<p class="form-control-static" ng-hide="x.boxId ==1">{{x.template_price}}</p>
+						<input type="text" id="template_price" class="form-control" name="template_price" ng-show="x.boxId == 1" ng-model="x.template_price" ng-required="true"/>
+						<!--Edit Template Price-->
+						<div class="input-group-btn" ng-if="permission.set_template_price">
+						<a type="button" class="btn btn-warning pull-right" ng-model="x.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-click="showInput($event,'opened')" ng-change="editTemplatePrice('template_price', x.template_price, x.id,x.boxId)" tooltip="Edit Price">
+						<span class="glyphicon glyphicon-pencil"></span>
+						</a>
+						</div>
 						</td>
+
 						<td>
 							<!--Apply Template-->
 							<a ng-click="openModel('modules/templates/applytemplate.html', x.id)" class="btn btn-success" ng-show="x.template_price=='free'">Apply</a>

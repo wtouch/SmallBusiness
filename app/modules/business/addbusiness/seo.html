@@ -1,13 +1,13 @@
 	<div class="form-group">
-		<label for="seo" class="col-sm-3 control-label">Title*</label>
-		<div class="col-sm-9">
-			<input type="text" id="seo" name="seo" class="form-control" ng-model="addbusiness.seo.title" placeholder="Enter title">
-			<span class="help-block" ng-show="addbusinessForm.seo.$dirty && addbusinessForm.seo.$invalid">
-				<span ng-show="addbusinessForm.seo.$error.pattern && (addbusinessForm.seo.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
-				<span class="text-danger" ng-show="addbusinessForm.seo.$error.minlength && (addbusinessForm.seo.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
-			</span>
-		</div>						
-	</div>
+	<label  for="seo" class="col-sm-3 control-label">Title*</label>
+	<div class="col-sm-9">
+		<input type="hidden" ng-model="addbusiness.created_date">
+		<input type="text" ng-disabled="bizId" id="seo" class="form-control" name="seo" placeholder="SEO Title" ng-model="addbusiness.seo.title" required>
+		<span class="help-block" ng-show="addbusinessForm.seo.$dirty && addbusinessForm.seo.$invalid">
+			<span ng-show="addbusinessForm.seo.$error.required" class="text-danger">Title is required.</span>
+		</span>
+	</div>						
+</div>
 	<div class="form-group">
 		<label for="keyword" class="col-sm-3 control-label">Keywords*</label>
 		<div class="col-sm-9">

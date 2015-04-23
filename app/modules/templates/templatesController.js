@@ -208,7 +208,7 @@ define(['app'], function (app) {
 				$scope.alerts.push({type: response.status,msg: response.message});
 				}); 
 		}
-		
+	
 		//code for search filter
 		$scope.searchFilter = function(statusCol, showStatus) {
 			$scope.search = {search: true};

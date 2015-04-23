@@ -19,6 +19,7 @@ define(['app'], function (app) {
 		$scope.format = $scope.formats[0];
 		$scope.readOnly = false;
 		$scope.formPart = 'home';	
+		$scope.addbusiness= {};
 		$scope.reset = function() {
 			$scope.addbusiness = {
 				created_date : $scope.currentDate,

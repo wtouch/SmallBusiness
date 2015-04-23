@@ -1,15 +1,13 @@
 <div class="row">		
 	<div class="col-sm-12">	
 		<div class="main-content">
-			<div class="bottomspace">
-				<ng-include src="'modules/business/toolbar.html'"></ng-include>
+				<div class="bottomspace">
+					<ng-include src="'modules/business/toolbar.html'"></ng-include>
 				<div class="bottomspace">
 					<div class="row">
 						<div class="col-sm-3">
 							<select id="selectBusiness" class="form-control" ng-change="changeScope(selectBusiness)" ng-model="selectBusiness" ng-options="item.id as item.business_name for item in businessList"> 
 								<option value="">Select Business</option>
-							</select>	
-								
 							<select id="biz" class="form-control" ng-model="biz"> 		
 								<option value="">{{product.business_name}}</option>
 							</select>
@@ -23,13 +21,10 @@
 						<div class="col-sm-6" ng-show="selectBusiness">
 							<div class="text-right">
 								<button ng-if="selectBusiness && productType=='product'" class="btn btn-default" ng-model="showProductForm" ng-click="showForm('showProductForm')"><span ng-if=
-								"showProductForm===true">Close Form </span><span ng-if="showProductForm===false">
+								"showProductForm===true">Close Form</span><span ng-if="showProductForm===false">
 								Add Product</span></button>
 								
-								<button ng-if="selectBusiness && productType=='service'" class="btn btn-default" ng-model="showServiceForm" ng-click="showForm('showServiceForm')">
-									<span ng-if="showServiceForm===true">Close Form </span>
-									<span ng-if="showServiceForm===false">Add Service</span>
-								</button>
+								<button ng-if="selectBusiness && productType=='service'" class="btn btn-default" ng-model="showServiceForm" ng-click="showForm('showServiceForm')"><span ng-if="showServiceForm===true">Close Form </span><span ng-if="showServiceForm===false">Add Service</span></button>
 							</div>
 						</div>
 					</div>
@@ -41,7 +36,7 @@
 				<ng-include ng-show="selectBusiness && productType=='service'" src="'modules/business/products/servicelist.html'"></ng-include>
 				
 				<ng-include ng-if="selectBusiness && productType=='product'"  src="'modules/business/products/productlist.html'"></ng-include>
-			</div>
+		</div>
 		</div>
 	</div>
 </div>
