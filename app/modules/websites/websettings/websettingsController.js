@@ -34,7 +34,7 @@ define(['app'], function (app) {
 			});
 		
 			if(response.status == 'success'){
-				var config = (response.data.config!='') ? JSON.parse(response.data.config) : { google_map : {}};
+				var config = (response.data.config!='') ? (response.data.config) : { google_map : {}};
 				if(config.google_map == undefined) config.google_map = {};
 				$scope.config = config;
 				if(config.google_map.latitude != undefined && config.google_map.longitude != undefined){

@@ -5,7 +5,7 @@
 {% autoescape false %}
 <div class="row text">
 	<span ng-bind="id"></span>
-		<div class="col-sm-12 news">
+		<div class="col-sm-12 news" ng-controller="aboutController">
 			<div class="sidebar" id="navbar-example">
 				<ul class="nav nav-pills" >
 					<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
@@ -64,34 +64,16 @@
 					<h2>Infrastructure/Facilities</h2>
 					<div class="row">
 						{% for key, value in data.infrastructure %}
-							<div class="col-sm-4" ng-controller="infraController">
+							<div class="col-sm-4">
 								<div class="thumbnail">
 									<a href="#">
-									<img class="img-responsive " src="{{value.image.0.file_relative_path}}" />
-								</a>
-								</div>
-								<div class="caption text-center" ng-init="isVisible = false" ng-controller="aboutController" class="table-responsive">
-									<h4>{{key}}</h4>
-									<p>{{value.description|length >50 ? value.description|slice(start,50)~ '...' : value.description}}</p>
-										<button class="btn btn-primary"  ng-click="isShow({{key}})" >Read More..</button>
-										{% if '{{key}}' %}
-										<div  ng-show="isVisible"  ng-class ="(isVisible)? 'product-desc show'  :'product-desc ' " >
-											<button type="button" class="close pull-right" ng-click="isVisible = !isVisible"><span aria-hidden="true">&times;</span></button>
-											<h4> {{key}} </h4>
-											<table class="table table-bordered">
-												<tr>
-													<td>
-														{% for key, value in data.infrastructure %}
-														<img class="img-responsive " src="{{value.image.0.file_relative_path}}" alt="{{key}}"/>
-														{%endfor%}
-													</td>
-													<td style=" width: 50%;">
-													<strong>Infrastructure Descriptions</strong>
-													<p >{{x.description}}</p></td>
-												</tr>
-											</table>
-										</div>
-										{% endif %}
+										<img class="img-responsive " src="{{value.image.file_relative_path}}"/>
+									</a>
+									<div class="caption text-center" ng-controller="aboutController" class="table-responsive">
+										<h4>{{key}}</h4>
+										<p>{{value.description|length >150 ? value.description|slice(start,150)~ '...' : value.description}}</p>
+										<button class="btn btn-primary">Read More..</button>
+									</div>
 								</div>
 							</div>
 						{% endfor %}
