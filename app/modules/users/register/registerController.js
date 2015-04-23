@@ -7,7 +7,6 @@ define(['app'], function (app) {
 	var registerController = function ($scope,$injector,dataService) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.alerts = [];
-		$scope.today();
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		$scope.register = {address:{}};

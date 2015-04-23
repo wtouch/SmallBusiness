@@ -18,6 +18,7 @@ define(['app'], function (app) {
 		$scope.contries = dataService.config.country;
 		$scope.adduser ={};
 		$scope.manage_user = dataService.config.manage_user;
+		$scope.userViews = $routeParams.userViews;
 		//code for accessing json data of users
 		$scope.manage_user = {};
 		dataService.config('config', {config_name : "manage_user"}).then(function(response){
