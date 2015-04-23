@@ -42,7 +42,7 @@
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="filterbycustomerid" class="control-label">Select By Customer</label>
-					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatusFn('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
 						<option value="">Select Customer</option>
 					</select>
 			</div>
@@ -68,7 +68,8 @@
 					<td>{{((customTempCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 					<td>{{x.template_name}}</td>
 					<td>
-						<button ng-if="permission.Make_Private" type="button" tooltip="{{dynamicTooltip(x.template_type, 'make public', 'make private')}}" ng-class="(x.template_type=='public') ? 'btn btn-warning glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.template_type" ng-change="changeStatusFn('template_type', x.template_type,x.id)" btn-checkbox btn-checkbox-true="'private'" btn-checkbox-false="'public'">
+					<p class="form-control-static">{{x.template_type}}</p>
+					<button ng-if="permission.Make_Private" type="button" tooltip="{{dynamicTooltip(x.template_type, 'make public', 'make private')}}" ng-class="(x.template_type=='public') ? 'btn btn-warning glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.template_type" ng-change="changeStatusFn('template_type', x.template_type,x.id)" btn-checkbox btn-checkbox-true="'private'" btn-checkbox-false="'public'">
 					</button>		
 					</td> 
 					<td style="max-width:150px">
