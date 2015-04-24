@@ -61,6 +61,24 @@ define(['app'], function (app) {
 			$scope.cities = cities;
 		};
 		
+		$scope.getData = function(location){
+			$scope.readOnly = true;
+			$scope.editprofile.address.location = location.location;
+			$scope.editprofile.address.city = location.city;
+			$scope.editprofile.state = location.state;
+			$scope.editprofile.country = location.country;
+			$scope.editprofile.address.area = location.area;
+			$scope.editprofile.address.pincode = location.pincode;
+		}
+		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+			var locationParams = {search : {}, groupBy : {}}
+			locationParams.search[searchColumn] = searchValue;
+			locationParams.groupBy[searchColumn] = searchValue;
+			return dataService.config('locations', locationParams).then(function(response){
+				return response;
+			});
+		}
+		
 		//code for change profile 
 		dataService.get("getsingle/user/"+$rootScope.userDetails.id)
 		.then(function(response) {

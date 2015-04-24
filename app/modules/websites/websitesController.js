@@ -29,6 +29,32 @@ define(['app'], function (app) {
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		};
+		
+		
+			// code for get business list
+			dataService.get("getmultiple/business/1/100",$scope.userInfo)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.businessList = response.data;
+				}else{
+					$scope.alerts.push({type: response.status, msg: "You didn't added any business! Please add business first."});
+				}
+				$scope.businessList = response.data;
+			});
+			
+			// code for get business list
+			dataService.get("getmultiple/mytemplate/1/100",$scope.userInfo)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.templateList = response.data;
+				}else{
+					$scope.alerts.push({type: response.status, msg: "You didn't added any business! Please add business first."});
+				}
+				$scope.businessList = response.data;
+			});
+			
+		
+			
 		//For display by default website list
 		if(!$scope.websitePart) {
 			$location.path('/dashboard/websites/websiteslist');
@@ -159,7 +185,7 @@ define(['app'], function (app) {
 		
 		 // code for request new website 
         var requestnewsite = function(){
-			$scope.reqnewsite = {};
+			$scope.reqnewsite = { config : {google_map:{}}};
 			$scope.postData = function(reqnewsite) { 
 			$scope.reqnewsite.date = $scope.currentDate;
 				 dataService.post("post/website",reqnewsite)
@@ -174,6 +200,84 @@ define(['app'], function (app) {
 					}
 				});   
 			}
+			
+			// Google Map
+		$scope.initGoogleMap = function(latitude,longitude, zoom){
+			$scope.reqnewsite.config.google_map.latitude = latitude;
+			$scope.reqnewsite.config.google_map.longitude = longitude;
+			$scope.map = {
+				"center": {
+					"latitude": latitude,
+					"longitude": longitude
+				},
+				"zoom": zoom
+			}; //TODO:  set location based on users current gps location 
+			$scope.marker = {
+				id: 0,
+				coords: {
+					latitude: latitude,
+					longitude: longitude
+				},
+				options: { draggable: true },
+				events: {
+					dragend: function (marker, eventName, args) {
+						$scope.reqnewsite.config.google_map.latitude = $scope.marker.coords.latitude;
+						$scope.reqnewsite.config.google_map.longitude = $scope.marker.coords.longitude;
+						
+						$scope.marker.options = {
+							draggable: true,
+							labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+							labelAnchor: "100 0",
+							labelClass: "marker-labels"
+						};
+					}
+				}
+			};
+		}
+		var events = {
+			places_changed: function (searchBox) {
+				var place = searchBox.getPlaces();
+				if (!place || place == 'undefined' || place.length == 0) {
+					return;
+				}
+				$scope.initGoogleMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), 15);
+			}
+		};
+		$scope.searchbox = { template: 'modules/websites/websettings/searchbox.html', events: events };
+		$scope.showPosition = function (position) {
+			$scope.initGoogleMap(position.coords.latitude, position.coords.longitude, 5);
+			$scope.$apply();
+		}
+		$scope.showError = function (error) {
+			switch (error.code) {
+				case error.PERMISSION_DENIED:
+					$scope.error = "User denied the request for Geolocation."
+					break;
+				case error.POSITION_UNAVAILABLE:
+					$scope.error = "Location information is unavailable."
+					break;
+				case error.TIMEOUT:
+					$scope.error = "The request to get user location timed out."
+					break;
+				case error.UNKNOWN_ERROR:
+					$scope.error = "An unknown error occurred."
+					break;
+			}
+			$scope.initGoogleMap("19.7514798", "75.71388839999997", 5);
+			console.log($scope.error);
+			$scope.$apply();
+		}
+		$scope.getLocation = function () {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
+			}
+			else {
+				$scope.error = "Geolocation is not supported by this browser.";
+			}
+		}
+		$scope.getLocation();
+		//end google map
+			
 		};
         
 		//code for view website list

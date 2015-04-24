@@ -23,6 +23,11 @@ define(['app'], function (app) {
 				}
 			});
 			
+			//function for close alert
+			$scope.closeAlert = function(index) {
+			$scope.alerts.splice(index, 1);
+			};
+			
 			//code for get business name from business
 			dataService.get("getmultiple/mytemplate/1/100",{user_id : response.data.user_id})
 			.then(function(template) {  
@@ -34,9 +39,9 @@ define(['app'], function (app) {
 			});
 		
 			if(response.status == 'success'){
-				var config = (response.data.config!='') ? (response.data.config) : { google_map : {}};
+				var websetting = (response.data.config!='') ? (response.data.config) : { google_map : {}};
 				if(config.google_map == undefined) config.google_map = {};
-				$scope.config = config;
+				$scope.websetting = websetting;
 				if(config.google_map.latitude != undefined && config.google_map.longitude != undefined){
 					$scope.initGoogleMap(config.google_map.latitude, config.google_map.longitude, 18);
 				}else{

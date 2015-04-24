@@ -238,6 +238,7 @@ class dbHelper {
 					$this->where .= ($raw) ? " AND ".$value : " AND ".$table.".".$key." like '%".$value."%' ";
 				}
 			}else{
+				//print_r($where);
 				foreach($where as $key => $value){
 					$this->where .= ($raw) ? " AND ".$value : " AND ".$table.".".$key."='".$value."' ";
 				}

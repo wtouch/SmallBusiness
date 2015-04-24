@@ -48,7 +48,7 @@
 			<input type="hidden" ng-init="templateList.template_image = modalOptions.tempList.template_image" ng-model="templateList.template_image">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<div ng-if="modalOptions.tempList.template_params" ng-init="templateList.template_params = modalOptions.tempList.template_params" >	
+					<div ng-if="modalOptions.tempList.template_params" ng-init="templateList.template_params = modalOptions.tempList.template_params">	
 					
 						<label  for="color" class="col-sm-2 control-label">Color</label>
 						<div class="col-sm-3" ng-if="modalOptions.tempList.template_params.color">
@@ -67,9 +67,8 @@
 						</div>				
 					</div>
 					
-					<div  class="form-group" ng-if="modalOptions.tempList.template_params.background_color">
+					<div ng-if="modalOptions.tempList.template_params.background_color">
 						<label  for="background_color" class="col-sm-2 control-label">Background</label>
-						
 						<div class="col-sm-3">
 							<label  for="background_color" class="col-sm-3 control-label">Color</label>
 							<input type="color" id="background_color" class="form-control" name="background_color"  ng-model="templateList.template_params.background_color">
@@ -86,6 +85,7 @@
 						</div>
 					
 					</div>
+					
 				<div class="form-group">
 					<label  for="slider-title" class="col-sm-2 control-label">Title</label>
 					<div class="col-sm-9">
