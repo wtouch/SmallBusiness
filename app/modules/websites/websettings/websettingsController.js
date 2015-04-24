@@ -66,8 +66,8 @@ define(['app'], function (app) {
 		
 		// Google Map
 		$scope.initGoogleMap = function(latitude,longitude, zoom){
-			$scope.config.google_map.latitude = latitude;
-			$scope.config.google_map.longitude = longitude;
+			$scope.websetting.config.google_map.latitude = latitude;
+			$scope.websetting.config.google_map.longitude = longitude;
 			$scope.map = {
 				"center": {
 					"latitude": latitude,
@@ -84,8 +84,8 @@ define(['app'], function (app) {
 				options: { draggable: true },
 				events: {
 					dragend: function (marker, eventName, args) {
-						$scope.config.google_map.latitude = $scope.marker.coords.latitude;
-						$scope.config.google_map.longitude = $scope.marker.coords.longitude;
+						$scope.websetting.config.google_map.latitude = $scope.marker.coords.latitude;
+						$scope.websetting.config.google_map.longitude = $scope.marker.coords.longitude;
 						
 						$scope.marker.options = {
 							draggable: true,
