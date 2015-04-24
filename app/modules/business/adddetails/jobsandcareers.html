@@ -19,9 +19,9 @@
 		<div class="form-group">
 			<label for="jobTitle" class="col-sm-3 control-label">Job Title*</label>
 			<div class="col-sm-9">
-				<input type="text" class="form-control" id="jobTitle"  ng-disabled="headingDisabled" name="jobTitle" ng-model="job_careers.heading" required >
-				<span class="help-block" ng-show="jobsandcareersForm.jobTitle.$dirty && jobTitle.$invalid">
-					<span ng-show="jobsandcareersForm.jobTitle.$error.required" class="text-danger">Plz Enter Title for Jobs</span>
+				<input type="text" id="jobTitle" class="form-control" ng-model="job_careers.heading" name="jobTitle" placeholder="Job Title" required>
+				<span class="help-block" ng-show="jobsandcareersForm.jobTitle.$dirty && jobsandcareersForm.jobTitle.$invalid">
+					<span ng-show="jobsandcareersForm.jobTitle.$error.required" class="text-danger">Plz enter job title.</span>
 				</span>
 			</div>
 		</div>
@@ -31,11 +31,11 @@
 				<textarea type="text" class="form-control" id="jobDescription" name="jobDescription" ng-model="job_careers.desc.description" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Job Description" ui-tinymce required></textarea>
 				
 				<p ng-hide="jobsandcareersForm.jobDescription.$error.maxlength">
-					{{ 256 - job_careers.jobDescription.length + " Chars left" }}</p>
+					{{ 256 - job_careers.desc.description.length + " Chars left" }}</p>
 					
 				<span class="help-block" ng-show="jobsandcareersForm.jobDescription.$dirty && jobsandcareersForm.jobDescription.$invalid">
 					<span class="text-danger" ng-show="jobsandcareersForm.jobDescription.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span ng-show="jobsandcareersForm.jobDescription.$error.required" class="text-danger">Infrastucture Description is required.</span>
+					<span ng-show="jobsandcareersForm.jobDescription.$error.required" class="text-danger">Job Description is required.</span>
 				</span>	
 			</div>
 		</div>

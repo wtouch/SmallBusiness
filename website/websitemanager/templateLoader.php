@@ -93,7 +93,7 @@
 				$response["data"] = null;
 				$response["title"] = "Error!";
 			}
-			//echo $response["path"];
+			//print_r($response["data"]);
 			return $response;
 		}
 		function displayTemplate($route){

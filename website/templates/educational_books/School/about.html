@@ -1,11 +1,10 @@
-
 {% extends "index.html" %}
 
 {% block content %}
 {% autoescape false %}
 <div class="row text">
 	<span ng-bind="id"></span>
-		<div class="col-sm-12">
+		<div class="col-sm-12" ng-controller="aboutController">
 			<div class="sidebar" id="navbar-example">
 				<ul class="nav nav-pills" >
 					<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
@@ -86,8 +85,8 @@
 										<h4 class="modal-title" id="myModalLabel">Infrastructure Details</h4>
 									</div>
 									<div class="modal-body">
-									<!-- media -->
-									{% for key, value in data.infrastructure %}
+									<!-- media 
+									{% for key, value in data.infrastructure %}-->
 										<div class="row">
 											<div class="col-sm-3">
 												<a href="#">
@@ -99,8 +98,8 @@
 												<p>{{value.description}}</p>
 											</div>
 										</div>
-									{%endfor%}
-									<!-- media end -->
+									<!--{%endfor%}
+									 media end -->
 									</div>
 									<!-- <div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

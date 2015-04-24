@@ -209,15 +209,18 @@ class websiteManager{
 			$selectInnerJoinCols['business_name'] = "business_name";
 			$this->db->setColumns($t1, $selectInnerJoinCols);
 			
-			
-			$productDbData = $this->db->select();
+			if($id == null){
+				$productDbData = $this->db->select();
+			}else{
+				$productDbData = $this->db->selectSingle();
+			}
 			
 			if($productDbData['status'] != "success"){
 				throw new Exception("Product DB Table Error: ".$productDbData['message']);
 			}
 			
 			
-			if(count($productDbData) <= 1 && $id != null) $productDbData = $productDbData[0];
+			//if(count($productDbData) <= 1 && $id != null) $productDbData = $productDbData[0];
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
             $response["data"] = $productDbData["data"];

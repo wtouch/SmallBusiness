@@ -15,10 +15,9 @@
 			<script src="{{ path }}js/angular-route.min.js"></script>
 			<script src="{{ path }}js/script.js"></script>
 			<script src="{{ path }}js/curosal.js"></script>
-			<title>{% block title %}{{title}}{% endblock %}</title>
-			<!-- <meta name="fragment" content="!"/>
-			<meta name="description" content="">
-			<meta name="keywords" content=""> -->
+			<title>{{data.seo.title}} | {{title}}</title>
+			<meta name="description" content="{{data.seo.description}}">
+			<meta name="keywords" content="{{data.keywords | join(',')}}">
 			{%if template.template_params%}
 			<style>	
 				.nav-pills>li.active>a,.nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus,.nav>li>a:hover, .nav>li>a:focus, .dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,.nav .open>a, .nav .open>a:hover, .nav .open>a:focus,.Hearing {
