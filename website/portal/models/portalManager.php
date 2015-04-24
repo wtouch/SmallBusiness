@@ -270,6 +270,12 @@ class portalManager{
 			$cols = array("*");
 			$this->db->setColumns($t0, $cols);
 			
+			$t1 = $this->db->setJoinString("left JOIN", "website", array("business_id"=>$t0.".id"));
+			
+			$col["domain_name"] = "domain_name";
+			$col["config"] = "config";
+			$this->db->setColumns($t1, $col);			
+			
 			$data = $this->db->selectSingle();
 			
 			if($data['status'] != "success"){

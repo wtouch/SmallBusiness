@@ -168,6 +168,13 @@ define(['angular',
 				$scope.isVisible = "true";
 				
 			}
-		}]);
+		}]).controller('businessController',['$scope','$http', '$location', function($scope,$http, $location) {
+		var s = $location.path();
+		$scope.url = s.substr(1);
+		$scope.makeActive = function(url){
+			$scope.id = url;
+		}
+		$scope.makeActive($scope.url);
+	}]);
     return app;
 });

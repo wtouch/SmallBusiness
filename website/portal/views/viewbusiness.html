@@ -2,13 +2,13 @@
 {% block title %}{{title}}{% endblock %}
 {% block head %}
     {{ parent() }}
-	{% if data.google_map %}
+	{% if data.config.google_map %}
 	<script src="http://maps.googleapis.com/maps/api/js">
 	</script>
 	<script>
 		function initialize() {
 			var mapProp = {
-				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+				center:new google.maps.LatLng({{data.config.google_map.latitude}},{{data.config.google_map.longitude}}),
 				zoom:18,
 				mapTypeId:google.maps.MapTypeId.ROADMAP
 			};
@@ -39,7 +39,6 @@
 		<div class="row" ng-controller="aboutController">
 			<div class="col-sm-2 sidebar " id="navbar-example">
 				<ul class="nav nav-pills nav-stacked  border">
-					<li ng-class="{active:id=='home'}" ng-click="makeActive('home')"><a href="#home">Home</a></li>
 					<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
 						{% if product %}<li ng-class="{active:id=='products'}" ng-click="makeActive('products')"><a href="#products">Products</a></li>{% endif %}
 						{% if service %}	
@@ -54,73 +53,68 @@
 				</ul>
 			</div>
 			<div class="col-md-10">
-				<div ng-show="id==''||id=='home'"  id="home">
-						<div class="row media boxborder">
-							<div class="media-left col-md-3  col-sm-12 col-xs-12 ">
-								<img class="img-circle img-responsive" src="{{data.contact_profile.contact_photo.file_relative_path}}">
-							</div>
-							<div class="media-body col-md-9  col-sm-12 col-xs-12  table-responsive">
-								<table class="table table-bordered" >
-									<tbody>
-										<tr>
-											<td><strong>Keywords</strong></td>
-											<td>
-												<ul>
-													{% for key,value  in data.keywords %}
-														<li><a href="/search/{{data.city| replace({' ' : '-'})}}/{{value| replace({' ' : '-'})}}">{{value}}</a></li>
-													{% endfor %}
-												</ul>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												 <strong>Primary Business Type:</strong></td>
-											<td>
-												{{data.business_profile.business_type}}
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong>Year Of Establishment:</strong></td>
-											<td>
-												{{data.business_profile.establishment}}
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong>Number Of Employees:</strong></td>
-											<td>
-												{{data.business_profile.no_of_employees}}
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong>Ownership:</strong></td>
-											<td>
-												{{data.ownership}}
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<strong>Additional Business</strong></td>
-											<td>
-												<ul>
-													{% for s in data.business_profile.additional_business %}
-														<li>{{s}}</li>
-													{% endfor %}
-												</ul>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				<div ng-show="id=='about'" class="about" id="about">
-					<div>
+			<div ng-show="id=='about'|| id==''"  id="about">
+				<div class="row">
+					<div class="col-md-7" >
 						<h2>About Us</h2>
 						{{data.business_info.aboutDescription}}
 					</div>
+					<div class="col-md-5  table-responsive ">
+						<table class="table table-bordered" >
+							<tbody>
+								<tr>
+									<td>
+										 <strong> Business Type:</strong></td>
+									<td>
+										{{data.business_profile.business_type}}
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong> Establishment:</strong></td>
+									<td>
+										{{data.business_profile.establishment}}
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Employees:</strong></td>
+									<td>
+										{{data.business_profile.no_of_employees}}
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Ownership:</strong></td>
+									<td>
+										{{data.ownership}}
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<strong>Additional Business</strong></td>
+									<td>
+										<ul>
+											{% for s in data.business_profile.additional_business %}
+												<li>{{s}}</li>
+											{% endfor %}
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									
+									<td colspan="2">
+										<ul class="list-inline">
+											{% for key,value  in data.keywords %}
+												<li><a href="/search/{{data.city| replace({' ' : '-'})}}/{{value| replace({' ' : '-'})}}">{{value}},</a></li>
+											{% endfor %}
+										</ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 				</div>
 				{% if product %}
 				<div ng-show="id=='products'" class="product boxborder" id="products" >
@@ -135,9 +129,9 @@
 								<div class="caption text-center" ng-init="isVisible = false" ng-controller="productController" class="table-responsive">
 									<h3 >{{ x.product_service_name }} </h3>
 									<p >{{x.description |length >120 ?x.description|slice(start, 100)~ '...' : x.description}}</p>
-										<button class="btn btn-primary"  ng-click="isShow({{key}})" >Read More..</button>
-										{% if '{{key}}' %}
-										<div  ng-show="isVisible"  ng-class ="(isVisible)? 'product-desc show'  :'product-desc ' " >
+										<a class="btn btn-primary" href="{{data.contact_profile.contact_website}}/product/{{key}}"  ng-click="isShow({{key}})" >Read More..</a>
+										
+										<!--div  ng-show="isVisible"  ng-class ="(isVisible)? 'product-desc show'  :'product-desc ' " >
 											<button type="button" class="close pull-right" ng-click="isVisible = !isVisible"><span aria-hidden="true">&times;</span></button>
 											<h4>{{ x.product_service_name }} </h4>
 											<table class="table table-bordered">
@@ -148,13 +142,15 @@
 														{%endfor%}
 													
 													</td>
-													<td style=" width: 50%;">
-													<strong>Product Details</strong>
-													<p >{{x.description}}</p></td>
+													<td class="col-md-6">
+														<div class="pdesc">
+														<strong>Product Details</strong>
+														<p >{{x.description}}</p></td>
+													</div>
 												</tr>
 											</table>
-										</div>
-										{% endif %}
+										</div-->
+										
 								</div>
 							</div>
 						{% endfor %}
@@ -174,154 +170,13 @@
 								<div class="caption text-center" ng-init="isVisible = false" ng-controller="productController">
 									<h3 >{{ x.product_service_name }} </h3>
 									<p >{{x.description |length >120 ?x.description|slice(start, 100)~ '...' : x.description}}</p>
-										<button class="btn btn-primary"  ng-click="isShow({{key}})" >Read More..</button>
-										{% if '{{key}}' %}
-										<div  ng-show="isVisible"  ng-class ="(isVisible)? 'product-desc show'  :'product-desc ' " >
-											<button type="button" class="close pull-right" ng-click="isVisible = !isVisible"><span aria-hidden="true">&times;</span></button>
-											<h4>{{ x.product_service_name }} </h4>
-											<table class="table table-bordered">
-												<tr>
-													<td>
-														{% for key, value in x.product_image %}
-														<img class="img-responsive prod-image" src="{{value.file_relative_path}}" alt="{{key}}"/>
-														{%endfor%}
-													
-													</td>
-													<td style=" width: 50%;">
-													<strong>Service Details</strong>
-													<p >{{x.description}}</p></td>
-												</tr>
-											</table>
-										</div>
-									{% endif %}
-								</div>
+										<a class="btn btn-primary" href="{{data.contact_profile.contact_website}}/service/{{key}}"  ng-click="isShow({{key}})" >Read More..</a>
+									</div>
 							</div>
 						{% endfor %}
 					</div>
 				</div>
 				{% endif %}
-				<div class="clearfix"></div>
-				{% if testimonials %}	
-				<div ng-show="id=='testimonials'" class="product boxborder" id="testimonials">
-					<div class="row">
-						<div class="col-md-12">
-						<h2 class="text-center">Testimonials</h2>
-						{% for key, value in data.testimonials if break == 0 %}
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<div class="media">
-									<div class="media-left ">
-										<a href="#">
-											<img class="img-circle img-responsive testm" src="{{value.image.0.file_relative_path}}">
-										</a>
-									</div>
-									<div class="media-body">
-										<table class="table table-bordered">
-											<tr>
-												<td colspan="2">
-													<h3 class="media-heading"> {{key}}</h3>
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<strong>Title : </strong>
-												</td>
-												<td >
-													{{value.title}}
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<strong>Date : </strong>
-												</td>
-												<td >
-													{{value.date}}
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<strong>Testomonial Description :</strong>
-												</td>
-												<td >
-													{{ value.description }}
-												</td>
-											</tr>
-										</table>
-										<footer class="text-center">by <cite title="{{key}}" >{{key}}</cite></footer>	
-									</div>
-								</div>
-							</div>
-						</div>
-						{% endfor %}
-					</div>
-					</div>
-				</div>
-				{% endif %}
-				<div class="clearfix"></div>
-				{% if activities %}	
-				<div ng-show="id=='activities'" class="product boxborder" id="activities">
-					<h2 class="text-center">Activities</h2>
-					<div class="row">
-					{% for key, value in data.news_coverage  %}
-						<div class="col-md-4">
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<div class="media">
-									<div class="media-left ">
-										<a href="#">
-											<img class="img-circle img-responsive" src="{{value.image.0.file_relative_path}}">
-										</a>
-									</div>
-									<div class="media-body table-responsive">
-										<table class="table table-bordered">
-											<tr>
-												<td colspan="2">
-													<h3 class="media-heading"> {{key}}</h3>
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<strong>Media Name : </strong>
-												</td>
-												<td >
-													{{value.medianame}}
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<strong>Date : </strong>
-												</td>
-												<td >
-													{{value.date}}
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<strong>Media Type :</strong>
-												</td>
-												<td >
-													{{ value.mediatype }}
-												</td>
-											</tr>
-											<tr>
-												<td >
-													<strong>News Details :</strong>
-												</td>
-												<td >
-													{{ value.newsdetails }}
-												</td>
-											</tr>
-										</table>
-										
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>{% endfor %}
-					</div>
-				</div>{{data.gallery.image}}
-				{% endif %}
-				
 				{% if gallery %}
 				<div ng-show="id=='gallery'" class="boxborder" id="gallery">
 					<div class="row" >
@@ -336,7 +191,7 @@
 				{% endif %}
 				<div class="clearfix"></div>
 				<div ng-show="id=='contact'" class=" boxborder" id="contact">
-				<h2 class="text-center">Contact us</h2>
+					<h2 class="text-center">Contact us</h2>
 					<div class="row">
 						<div class="col-md-4">
 							<h4>Name : {{data.contact_profile.contact_person}}</h4>
@@ -372,9 +227,7 @@
 								</table>
 						</div>
 						<div class="col-sm-8 boxborder">
-						{% if data.google_map %}
-							<div id="googleMap"></div>
-						{% else %}
+						
 							<div class="alert alert-success" ng-show="mailSent==true" role="alert">Message has been sent!</div>
 							<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-controller="enquiryController" novalidate>
 								<h4 class="text-center">General Enquiry</h4>
@@ -428,9 +281,14 @@
 									<div class="col-sm-6">
 										<button type="reset" class="btn btn-danger" title="Cancel Sending">Cancel</button>
 									</div>
+								
 								</div>
 							</form>
-						{% endif %}	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12" >
+							<div  id="googleMap" style="height:225px;"></div>
 						</div>
 					</div>
 				</div>
