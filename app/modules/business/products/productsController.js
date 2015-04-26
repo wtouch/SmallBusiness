@@ -1,14 +1,14 @@
 'use strict';
 
 define(['app','css!modules/business/products/products.css'], function (app) {
-    var injectParams = ['$scope','$rootScope', '$injector','$location','$routeParams','dataService','upload','modalService','$cookieStore', '$cookies'];
+    var injectParams = ['$scope','$rootScope', '$injector','$location','$routeParams','dataService','upload','modalService','$cookieStore', '$cookies','$notification'];
 	
-	var productsController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService,$cookieStore, $cookies) {
+	var productsController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService,$cookieStore, $cookies,$notification) {
 		//for display form parts of product & service
 		$scope.productView = $routeParams.productView;
 	
 		// all $scope object goes here
-		$scope.alerts = [];
+		
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.addproductCurrentPage = 1;
@@ -41,7 +41,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				if(data.status === 'success'){
 					picArr.push(data.data);
 				}else{
-					$scope.alerts.push({type: data.status, msg: data.message});
+					$notification[response.status]("Upload Image", response.message);
 				}
 	
 			});
@@ -93,10 +93,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		   imgObject.splice(item, 1);     
 		}
 		
-		//for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
+		
 		
 		// code for get business list
 			dataService.get("getmultiple/business/1/100",$scope.userInfo)
@@ -104,7 +101,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				if(response.status == 'success'){
 					$scope.businessList = response.data;
 				}else{
-					$scope.alerts.push({type: response.status, msg: "You didn't added any business! Please add business first."});
+					
+					$notification[response.status]("Get Business List", "You didn't added any business! Please add business first.");
 				}
 				$scope.businessList = response.data;
 			});
@@ -119,7 +117,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				$scope.addproduct.date = $scope.currentDate;
 					 dataService.post("post/product",addproduct)
 					.then(function(response) { 
-						$scope.alerts.push({type: response.status, msg: response.message});
+						
+						$notification[response.status]("Add Product", response.message);
 						$scope.reset();
 						dataService.progressSteps('addProducts', true);
 					});
@@ -138,7 +137,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 						$scope.showServiceForm = false;
 						$scope.showProductForm = false;
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Add Service", response.message);
 				});
 			} 
 		}
@@ -152,7 +152,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				if(response.status == 'success'){
 					$scope.products = dataService.parse(response.data);
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Get Product List", response.message);
 					$scope.products = [];
 				};
 			});
@@ -165,8 +166,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			$scope.feature = function(id, featured){
 				$scope.featuredData = {featured : featured};
 				dataService.put("put/product/"+id, $scope.featuredData)
-				.then(function(response) { 
-					$scope.alerts.push({type: response.status, msg: response.message});
+				.then(function(response) {
+					$notification[response.status]("Feature Product", response.message);
 				});
 			};
 		//This code for featured unfeatured button 
@@ -177,7 +178,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					if(response.status == 'success'){
 						$scope.hideDeleted = 0;
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$notification[response.status]("Delete Product", response.message);
 				});
 			};
 
@@ -193,7 +194,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				}
 				else
 				{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Get Services List", response.message);
 					$scope.services = {};
 				};
 			});	
@@ -210,7 +212,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					$scope.editProdForm = false;
 					$scope.editServForm = false;
 				}
-			$scope.alerts.push({type: response.status, msg: response.message});
+				$notification[response.status]("Edit Product", response.message);
 			});
 		} 
 		

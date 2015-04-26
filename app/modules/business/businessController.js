@@ -1,13 +1,12 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','modalService'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','modalService','$notification'];
 
-	var businessController = function ($scope,$rootScope,$injector, $routeParams,$location,dataService,modalService)
+	var businessController = function ($scope,$rootScope,$injector, $routeParams,$location,dataService,modalService,$notification)
 	{
 		//all $scope object goes here
 		$scope.permission = $rootScope.userDetails.permission.business_module;
-		$scope.alerts = [];
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.bizListCurrentPage = 1;
@@ -17,10 +16,6 @@ define(['app'], function (app) {
 		$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		$scope.hideDeleted = "";
 		
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
 		};
@@ -66,15 +61,19 @@ define(['app'], function (app) {
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
 			}else{
-				$scope.alerts.push({type: response.status, msg: response.message});
+				
+				$notification[response.status]("Get Users", response.message);
 			}
 		});
 		
 		//global method for filter 
 		$scope.changeStatus = function(statusCol, colValue) {
 			$scope.filterStatus= {};
-			(colValue =="") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
+			(colValue == "") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
 			angular.extend($scope.businessParams, $scope.filterStatus);
+			if(statusCol == 'user_id' && colValue == null) {
+				angular.extend($scope.businessParams, $scope.userInfo);
+			}
 			dataService.get("getmultiple/business/1/"+$scope.pageItems, $scope.businessParams)
 			.then(function(response) {  //function for templatelist response
 				if(response.status == 'success'){
@@ -83,7 +82,8 @@ define(['app'], function (app) {
 				}else{
 					$scope.bizList = {};
 					$scope.totalRecords = {};
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Get Business", response.message);
 				}
 			});
 		};
@@ -103,7 +103,8 @@ define(['app'], function (app) {
 					}else{
 						$scope.bizList = {};
 						$scope.totalRecords = {};
-						$scope.alerts.push({type: response.status, msg: response.message});
+						
+						$notification[response.status]("Business Filter", response.message);
 					}
 				});
 			}
@@ -122,7 +123,8 @@ define(['app'], function (app) {
 				else{
 					$scope.bizList = {};
 					$scope.totalRecords = {};	
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Get Business List", response.message);
 				}
 			});	
 			
@@ -136,7 +138,8 @@ define(['app'], function (app) {
 				$scope.veryfiedData = {verified : verified};
 				dataService.put("put/business/"+id, $scope.veryfiedData)
 				.then(function(response) { 
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Verify Business", response.message);
 				});
 			} ;
 			//This code for featured & un-featured button 
@@ -144,7 +147,8 @@ define(['app'], function (app) {
 				$scope.featuredData = {featured : featured};
 				dataService.put("put/business/"+id, $scope.featuredData)
 				.then(function(response) {
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Feature Business", response.message);
 				});
 			};
 
@@ -156,7 +160,8 @@ define(['app'], function (app) {
 					if(response.status == 'success'){
 						$scope.hideDeleted = 1;
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Delete Business", response.message);
 				});
 			};			
 		};
@@ -174,7 +179,8 @@ define(['app'], function (app) {
 				else{
 					$scope.bizList = {};
 					$scope.totalRecords = {};	
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Get Deleted Business", response.message);
 				}
 			});
 			$scope.deleted = function(id, status){
@@ -184,7 +190,8 @@ define(['app'], function (app) {
 					if(response.status == 'success'){
 						$scope.hideDeleted = 0;
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					
+					$notification[response.status]("Delete Business", response.message);
 				});
 			};
 

@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope', '$cookies', '$cookieStore'];
+    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope', '$cookies', '$cookieStore','$notification'];
 
     // This is controller for this view
-	var adddetailsController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope, $cookies, $cookieStore)
+	var adddetailsController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope, $cookies, $cookieStore,$notification)
 	{ 
 		dataService.get("getsingle/business/"+$routeParams.id)
 		.then(function(response) {
@@ -17,7 +17,8 @@ define(['app'], function (app) {
 		});	
 		
 		// all $scope object goes here
-		$scope.alerts = [];
+		
+		
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.pageItems = 10;
@@ -60,10 +61,6 @@ define(['app'], function (app) {
 		// Add Business multi part form show/hide operation from here!
 		$scope.formPart = ($cookies.bizFormPart) ? $cookieStore.get("bizFormPart") : 'infrastructure';
 		
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
 		$scope.infra = false;
 		$scope.imgRemoved = false;
 		
@@ -104,37 +101,13 @@ define(['app'], function (app) {
 			}
 		}
 		
-		$scope.contries = dataService.config.country;
-		$scope.getState = function(country){
-			var states = [];
-			for (var x in $scope.contries){
-				if($scope.contries[x].country_name == country){
-					for(var y in $scope.contries[x].states){
-						states.push($scope.contries[x].states[y])
-					}
-				}
-			}
-			$scope.states = states;
-		};
-		$scope.getCities = function(state){
-			var cities = [];
-			for (var x in $scope.states){
-				if($scope.states[x].state_name == state){
-					for(var y in $scope.states[x].cities){
-						cities.push($scope.states[x].cities[y])
-					}
-				}
-			}
-			$scope.cities = cities;
-		};
-		
 		//Upload Functions for uploading files 
 		$scope.upload = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
 						$scope.infrastructure.desc.image = data.data;
 					}else{
-						$scope.alerts.push({type: data.status, msg: data.message});
+						$notification.error("Upload Image", data.message);
 					}
 			}); 
 		}; 
@@ -143,7 +116,7 @@ define(['app'], function (app) {
 					if(data.status === 'success'){
 						$scope.testimonials.desc.image = data.data;
 					}else{
-						$scope.alerts.push({type: data.status, msg: data.message});
+						$notification.error("Upload Image", data.message);
 					}
 			}); 
 		}; 
@@ -153,7 +126,8 @@ define(['app'], function (app) {
 					if(data.status === 'success'){
 						$scope.news_coverage.desc.image = data.data;
 					}else{
-						$scope.alerts.push({type: data.status, msg: data.message});
+						
+						$notification.error("Upload Image", data.message);
 					}
 			}); 
 		}; 
@@ -162,7 +136,7 @@ define(['app'], function (app) {
 					if(data.status === 'success'){
 						$scope.gallery.desc.image = data.data;
 					}else{
-						$scope.alerts.push({type: data.status, msg: data.message});
+						$notification.error("Upload Image", data.message);
 					}
 			}); 
 		}; 
@@ -177,11 +151,13 @@ define(['app'], function (app) {
 			 .then(function(response) { 
 				if(response.status == 'success'){
 					$scope.submitted = true;
-					$scope.alerts.push({type: response.status,msg: response.message});
 					if($rootScope.userDetails.config.addProducts == false) $location.path("/dashboard/business/products");
 					dataService.progressSteps('addbusinessDetails', true);
+				}
+				if(response.status == undefined){
+					$notification.error("Add Business Details", response.message);
 				}else{
-					$scope.alerts.push({type: response.status,msg: response.message});
+					$notification[response.status]("Add Business Details", response.message);
 				}
 			});
 		};

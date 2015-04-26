@@ -1,13 +1,13 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope'];
+    var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope','$notification'];
 
     // This is controller for this view
-	var addbusinessController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope)
+	var addbusinessController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope,$notification)
 	{
 		// all $scope object goes here
-		$scope.alerts = [];
+		
 		$scope.estyear = [];
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -44,10 +44,7 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope[opened] = ($scope[opened]===true) ? false : true;
 		};
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
+		
 		// Add Business multi part form show/hide operation from here! {Vilas}
 		$scope.showFormPart = function(formPart, formSteps){
 			$scope.formPart = formPart;
@@ -117,7 +114,7 @@ define(['app'], function (app) {
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
 			}else{
-				$scope.alerts.push({type: response.status, msg: response.message});
+				$notification.error("Get Customers", response.message);
 			}
 		});
 		
@@ -133,7 +130,7 @@ define(['app'], function (app) {
 						$scope.addbusiness.contact_profile.contact_photo = data.data;
 					}
 				}else{
-					$scope.alerts.push({type: data.status, msg: data.message});
+					$notification.error("Upload Image", data.message);
 				}
 			});
 		};
@@ -146,13 +143,16 @@ define(['app'], function (app) {
 			dataService.post("post/business",addbusiness)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
 					if($rootScope.userDetails.config.addbusinessDetails != true)  $location.path("/dashboard/business/adddetails/"+response.data);
 					dataService.progressSteps('addbusiness', true);
 					dataService.progressSteps('addbusinessDetails', response.data);
-				}else{
-					$scope.alerts.push({type: (response.status=='error') ? 'danger' : response.status, msg: response.message});
 				}
+				if(response.status == undefined){
+					$notification.error("Add Business", response.message);
+				}else{
+					$notification[response.status]("Add Business", response.message);
+				}
+				
 			});
 		}
 		
@@ -165,6 +165,12 @@ define(['app'], function (app) {
 					$scope.addbusiness = (response.data);
 					$scope.getTypes($scope.addbusiness.category);
 					$scope.getKeywords($scope.addbusiness.type);
+				}else{
+					if(response.status == undefined){
+						$notification.error("Edit Business", response.message);
+					}else{
+						$notification[response.status]("Edit Business", response.message);
+					}
 				}
 			});
 			$scope.updateData = function(addbusiness) {
@@ -173,22 +179,13 @@ define(['app'], function (app) {
 					if(response.status == "success"){
 						$location.path("/dashboard/business/businesslist");
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined){
+						$notification.error("Edit Business", response.message);
+					}else{
+						$notification[response.status]("Edit Business", response.message);
+					}
+					
 				});
-			}
-		}
-		//get method for get data from business
-		var addbusiness = function(){
-			$scope.bizId = $routeParams.id;
-			if($scope.bizId){
-				dataService.get("getsingle/business/"+$scope.bizId)
-				.then(function(response) {
-					angular.extend(response.data, $scope.addbusiness);
-					$scope.addbusiness = response.data;
-					$scope.reset();
-			})
-			}else{
-				$scope.reset();
 			}
 		}
     };

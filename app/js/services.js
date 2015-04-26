@@ -400,5 +400,205 @@ define(['app'], function (app) {
 			return obj;
 	}]);
 
+	
+	'use strict';
+
+	app.factory('$notification', ['$timeout',function($timeout){
+
+		
+		var notifications = JSON.parse(localStorage.getItem('$notifications')) || [],
+			queue = [];
+
+		var settings = {
+		  info: { duration: 2000, enabled: true },
+		  warning: { duration: 2000, enabled: true },
+		  error: { duration: 2000, enabled: true },
+		  success: { duration: 2000, enabled: true },
+		  progress: { duration: 2000, enabled: true },
+		  custom: { duration: 2000, enabled: true },
+		  details: true,
+		  localStorage: false,
+		  html5Mode: false,
+		  html5DefaultIcon: 'icon.png'
+		};
+
+		function html5Notify(icon, title, content, ondisplay, onclose){
+		  if(window.webkitNotifications.checkPermission() === 0){
+			if(!icon){
+			  icon = 'favicon.ico';
+			}
+			var noti = window.webkitNotifications.createNotification(icon, title, content);
+			if(typeof ondisplay === 'function'){
+			  noti.ondisplay = ondisplay;
+			}
+			if(typeof onclose === 'function'){
+			  noti.onclose = onclose;
+			}
+			noti.show();
+		  }
+		  else {
+			settings.html5Mode = false;
+		  }
+		}
+
+
+		return {
+
+		  /* ========== SETTINGS RELATED METHODS =============*/
+
+		  disableHtml5Mode: function(){
+			settings.html5Mode = false;
+		  },
+
+		  disableType: function(notificationType){
+			settings[notificationType].enabled = false;
+		  },
+
+		  enableHtml5Mode: function(){
+			// settings.html5Mode = true;
+			settings.html5Mode = this.requestHtml5ModePermissions();
+		  },
+
+		  enableType: function(notificationType){
+			settings[notificationType].enabled = true;
+		  },
+
+		  getSettings: function(){
+			return settings;
+		  },
+
+		  toggleType: function(notificationType){
+			settings[notificationType].enabled = !settings[notificationType].enabled;
+		  },
+
+		  toggleHtml5Mode: function(){
+			settings.html5Mode = !settings.html5Mode;
+		  },
+
+		  requestHtml5ModePermissions: function(){
+			if (window.webkitNotifications){
+			  if (window.webkitNotifications.checkPermission() === 0) {
+				return true;
+			  }
+			  else{
+				window.webkitNotifications.requestPermission(function(){
+				  if(window.webkitNotifications.checkPermission() === 0){
+					settings.html5Mode = true;
+				  }
+				  else{
+					settings.html5Mode = false;
+				  }
+				});
+				return false;
+			  }
+			}
+			else{
+			  return false;
+			}
+		  },
+
+
+		  /* ============ QUERYING RELATED METHODS ============*/
+
+		  getAll: function(){
+			// Returns all notifications that are currently stored
+			return notifications;
+		  },
+
+		  getQueue: function(){
+			return queue;
+		  },
+
+		  /* ============== NOTIFICATION METHODS ==============*/
+
+		  info: function(title, content, userData){
+			return this.awesomeNotify('info','info-sign', title, content, userData);
+		  },
+
+		  error: function(title, content, userData){
+			return this.awesomeNotify('error', 'remove', title, content, userData);
+		  },
+
+		  success: function(title, content, userData){
+			return this.awesomeNotify('success', 'ok', title, content, userData);
+		  },
+
+		  warning: function(title, content, userData){
+			return this.awesomeNotify('warning', 'exclamation-sign', title, content, userData);
+		  },
+
+		  awesomeNotify: function(type, icon, title, content, userData){
+			/**
+			 * Supposed to wrap the makeNotification method for drawing icons using font-awesome
+			 * rather than an image.
+			 *
+			 * Need to find out how I'm going to make the API take either an image
+			 * resource, or a font-awesome icon and then display either of them.
+			 * Also should probably provide some bits of color, could do the coloring
+			 * through classes.
+			 */
+			// image = '<i class="icon-' + image + '"></i>';
+			return this.makeNotification(type, false, icon, title, content, userData);
+		  },
+
+		  notify: function(image, title, content, userData){
+			// Wraps the makeNotification method for displaying notifications with images
+			// rather than icons
+			return this.makeNotification('custom', image, true, title, content, userData);
+		  },
+
+		  makeNotification: function(type, image, icon, title, content, userData){
+			var notification = {
+			  'type': type,
+			  'image': image,
+			  'icon': icon,
+			  'title': title,
+			  'content': content,
+			  'timestamp': +new Date(),
+			  'userData': userData
+			};
+			notifications.push(notification);
+
+			if(settings.html5Mode){
+			  html5Notify(image, title, content, function(){
+			  }, function(){
+			  });
+			}
+			else{
+			  queue.push(notification);
+			  $timeout(function removeFromQueueTimeout(){
+				queue.splice(queue.indexOf(notification), 1);
+			  }, settings[type].duration);
+
+			}
+
+			this.save();
+			return notification;
+		  },
+
+
+		  /* ============ PERSISTENCE METHODS ============ */
+
+		  save: function(){
+			// Save all the notifications into localStorage
+			// console.log(JSON);
+			if(settings.localStorage){
+			  localStorage.setItem('$notifications', JSON.stringify(notifications));
+			}
+			// console.log(localStorage.getItem('$notifications'));
+		  },
+
+		  restore: function(){
+			// Load all notifications from localStorage
+		  },
+
+		  clear: function(){
+			notifications = [];
+			this.save();
+		  }
+
+		};
+	}])
+  
 	return app;
 });

@@ -263,6 +263,64 @@ define(['app', 'tinymce'], function (app) {
 		};
 	}]);
 	/* TinyMCE ends here*/
+	
+	/* Notification directive */
+	app.directive('notifications', ['$notification', '$compile', function($notification, $compile){
+    /**
+     *
+     * It should also parse the arguments passed to it that specify
+     * its position on the screen like "bottom right" and apply those
+     * positions as a class to the container element
+     *
+     * Finally, the directive should have its own controller for
+     * handling all of the notifications from the notification service
+     */
+    var html =
+      '<div class="dr-notification-wrapper" ng-repeat="noti in queue">' +
+        '<div class="dr-notification alert alert-dismissible alert-{{(noti.type == \'error\') ? \'danger\' : noti.type}}">' +
+			'<button type="button" class="close" ng-click="removeNotification(noti)">'+
+				'<span aria-hidden="true">×</span>'+
+				'<span class="sr-only">Close</span>'+
+			'</button>'+
+          '<div class="dr-notification-image dr-notification-type-{{noti.type}}" ng-switch on="noti.image">' +
+            '<i class="glyphicon glyphicon-{{noti.icon}}" ng-switch-when="false"></i>' +
+            '<img ng-src="{{noti.image}}" ng-switch-default />' +
+          '</div>' +
+          '<div class="dr-notification-content">' +
+            '<h3 class="dr-notification-title">{{noti.title}}</h3>' +
+            '<p class="dr-notification-text">{{noti.content}}</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+
+    function link(scope, element, attrs){
+      var position = attrs.notifications;
+      position = position.split(' ');
+      element.addClass('dr-notification-container');
+      for(var i = 0; i < position.length ; i++){
+        element.addClass(position[i]);
+      }
+    }
+
+
+    return {
+      restrict: 'A',
+      scope: {},
+      template: html,
+      link: link,
+      controller: ['$scope', function NotificationsCtrl( $scope ){
+        $scope.queue = $notification.getQueue();
+
+        $scope.removeNotification = function(noti){
+          $scope.queue.splice($scope.queue.indexOf(noti), 1);
+        };
+      }
+    ]
+
+    };
+  }]);
+	
 	return app;
 
 });
