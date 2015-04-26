@@ -1,11 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService', '$http'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService', '$notification'];
 	
-	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService,$http) {
+	var websitesController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService,$notification) {
 		//all $scope object goes here
-        $scope.alerts = [];
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.webListCurrentPage = 1;
@@ -25,12 +24,6 @@ define(['app'], function (app) {
 			$scope.formScope = scope;
 		}
 		
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
-		
-		
 		$scope.getBusiness = function(user_id){
 		// code for get business list
 			dataService.get("getmultiple/business/1/100",{user_id:user_id, status : 1})
@@ -38,7 +31,8 @@ define(['app'], function (app) {
 				if(response.status == 'success'){
 					$scope.businessList = response.data;
 				}else{
-					$scope.alerts.push({type: response.status, msg: "You didn't added any business! Please add business first."});
+					$notification.error("Get Business", "You didn't added any business! Please add business first.");
+					
 				}
 			});
 			
@@ -48,7 +42,9 @@ define(['app'], function (app) {
 				if(response.status == 'success'){
 					$scope.templateList = response.data;
 				}else{
-					$scope.alerts.push({type: response.status, msg: "You didn't have any Template! Please apply free template or buy new template first."});
+					
+					$notification.error("Get Template", "You didn't have any Template! Please apply free template or buy new template first.");
+					
 				}
 			});
 		}
@@ -122,7 +118,7 @@ define(['app'], function (app) {
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
 			}else{
-				$scope.alerts.push({type: response.status, msg: response.message});
+				$notification.error("Get Customers", response.message);
 			}
 		});
 		
@@ -141,7 +137,7 @@ define(['app'], function (app) {
 				}else{
 					$scope.website = {};
 					$scope.totalRecords = {};
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$notification.error("Get Website List", response.message);
 				}
 			});
 			}
@@ -152,7 +148,7 @@ define(['app'], function (app) {
 				if(editStatus==0){
 				 dataService.put("put/website/"+id,$scope.changeStatus)
 				.then(function(response) { 
-					$scope.alerts.push({type: response.status,msg: response.message});
+					$notification[response.status]("Edit Domain Name", response.message);
 				}); 
 			}
 		};	 
@@ -168,6 +164,9 @@ define(['app'], function (app) {
 			$scope.filterStatus = {};
 			(showStatus =="") ? delete $scope.websiteParams[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.websiteParams, $scope.filterStatus);
+			if(statusCol == 'user_id' && (showStatus == null || showStatus == "")) {
+				angular.extend($scope.websiteParams, $scope.userInfo);
+			}
 			dataService.get("getmultiple/website/1/"+$scope.pageItems, $scope.websiteParams)
 			.then(function(response) {  
 				if(response.status == 'success'){
@@ -176,7 +175,7 @@ define(['app'], function (app) {
 				}else{
 					$scope.website = {};
 					$scope.totalRecords = {};
-					$scope.alerts.push({type: response.status, msg: "No data Found"});
+					$notification.warning("Filter Website List", response.message);
 				}
 			});
 		};  
@@ -191,15 +190,16 @@ define(['app'], function (app) {
 					if(response.status == "success"){
 						$scope.reqnewsite = {};
 						$scope.formScope.requestsiteForm.$setPristine;
-						$scope.alerts.push({type: response.status, msg: "Your Request has successfully registered. Kindly check your mailbox for activation status!"});
+
+						$notification.success("Filter Website List", "Your Request has successfully registered. Kindly check your mailbox for activation status!");
 						dataService.progressSteps('requestSite', true);
 					}else{
-						$scope.alerts.push({type: response.status, msg: response.message});
+						$notification.error("Request New Site", response.message);
 					}
 				});   
 			}
 			
-			// Google Map
+		// Google Map
 		$scope.initGoogleMap = function(latitude,longitude, zoom){
 			$scope.reqnewsite.config.google_map.latitude = latitude;
 			$scope.reqnewsite.config.google_map.longitude = longitude;
@@ -262,7 +262,7 @@ define(['app'], function (app) {
 					break;
 			}
 			$scope.initGoogleMap("19.7514798", "75.71388839999997", 5);
-			console.log($scope.error);
+			$notification.error("Location Error", $scope.error);
 			$scope.$apply();
 		}
 		$scope.getLocation = function () {
@@ -287,10 +287,8 @@ define(['app'], function (app) {
 			if(response.status == 'success'){
 					$scope.website=response.data;
 					$scope.totalRecords = response.totalRecords;	
-				}
-				else
-				{
-					$scope.alerts.push({type: response.status, msg: response.message});
+				}else{
+					$notification.error("Get Website List", response.message);
 				};
 			});
 			//delete button 
@@ -303,7 +301,7 @@ define(['app'], function (app) {
 				dataService.put("put/website/"+id, $scope.deletedData)
 				.then(function(response) { 
 					if(response.status == 'success'){
-						$scope.alerts.push({type: response.status, msg: response.message});
+						$notification[response.status]("Delete Website", response.message);
 					}
 				});
 			};
@@ -312,26 +310,12 @@ define(['app'], function (app) {
 				$scope.expiredData = {expired : expired};
 				dataService.put("put/website/"+id, $scope.expiredData)
 				.then(function(response) { 
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$notification[response.status]("Website Expiry Status", response.message);
 				});
 			};
 		};
 		
-		//function for active button
-		var showActive= function(status){
-		$scope.status = {status:1};
-			dataService.get("getmultiple/website/"+$scope.webListCurrentPage+"/"+$scope.pageItems, $scope.status)
-			.then(function(response) {  
-				if(response.status == 'success'){
-					$scope.website=response.data;
-					$scope.totalRecords = response.totalRecords;
-				}
-				else{
-					$scope.alerts.push({type: response.status, msg: response.message});
-				};
-			});
-		}
-        
+		
 		//code for requested site list
         var requestedsitelist = function(){
 			$scope.websiteParams = {status : 2};
@@ -343,9 +327,8 @@ define(['app'], function (app) {
 					$scope.totalRecords = response.totalRecords;	
 				}
 				else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$notification.error("Requested Website List", response.message);
 				};
-					$scope.website = response.data;
 			});
 			
 			//This code for apply/buy button
@@ -359,7 +342,7 @@ define(['app'], function (app) {
 				dataService.put("put/website/"+id, $scope.deletedData)
 				.then(function(response) { 
 					if(response.status == 'success'){
-						$scope.alerts.push({type: response.status, msg: response.message});
+						$notification[response.status]("Website Status", response.message);
 					}
 				});
 			};
@@ -368,7 +351,7 @@ define(['app'], function (app) {
 				$scope.expiredData = {expired : expired};
 				dataService.put("put/website/"+id, $scope.expiredData)
 				.then(function(response) { 
-					$scope.alerts.push({type: response.status, msg: response.message});
+					$notification[response.status]("Website Expiry Status", response.message);
 				});
 			};
 		};

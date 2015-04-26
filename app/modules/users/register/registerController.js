@@ -2,9 +2,9 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$injector','dataService'];
+    var injectParams = ['$scope','$injector','dataService','$notification'];
 
-	var registerController = function ($scope,$injector,dataService) {
+	var registerController = function ($scope,$injector,dataService,$notification) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.alerts = [];
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
@@ -13,9 +13,6 @@ define(['app'], function (app) {
 		$scope.register.register_date = $scope.currentDate;
 		$scope.submitted = false;
 		
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
 		$scope.today = function() {
 			$scope.date = new Date();
 		};
@@ -61,30 +58,6 @@ define(['app'], function (app) {
 			});
 		}
 		
-		//dynamic drop down list of country,state & city
-		$scope.contries = dataService.config.country;
-		$scope.getState = function(country){
-			var states = [];
-			for (var x in $scope.contries){
-				if($scope.contries[x].country_name == country){
-					for(var y in $scope.contries[x].states){
-						states.push($scope.contries[x].states[y])
-					}
-				}
-			}
-			$scope.states = states;
-		};
-		$scope.getCities = function(state){
-			var cities = [];
-			for (var x in $scope.states){
-				if($scope.states[x].state_name == state){
-					for(var y in $scope.states[x].cities){
-						cities.push($scope.states[x].cities[y])
-					}
-				}
-			}
-			$scope.cities = cities;
-		};
 		
 		//code to register user
 		$scope.insert = function(register){
@@ -94,6 +67,7 @@ define(['app'], function (app) {
 				if(response.status == 'success'){
 					$scope.submitted = true;
 				}
+				$notification[response.status]("Registration", response.message);
 			});
 		}	
 	 };

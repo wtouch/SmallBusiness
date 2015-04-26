@@ -1,14 +1,13 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService'];
+    var injectParams = ['$scope', '$rootScope','$injector','$routeParams','$location','dataService','upload','modalService','$notification'];
 
-	var websettingsController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService) {
+	var websettingsController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService,$notification) {
 		$scope.permission = $rootScope.userDetails.permission.website_module;
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.website_id = $routeParams.id;
 		$scope.currentDate = dataService.currentDate;
-		$scope.alerts = [];
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
 		$scope.websetting = {config : { google_map: {}}};
 		
@@ -20,14 +19,10 @@ define(['app'], function (app) {
 				if(business.status == 'success'){
 					$scope.businessList = business.data;
 				}else{
-					$scope.alerts.push({type: business.status, msg: "You didn't added any business! Please add business first."});
+					$notification.error("Get Business", "You didn't added any business! Please add business first.");
 				}
 			});
 			
-			//function for close alert
-			$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-			};
 			
 			//code for get business name from business
 			dataService.get("getmultiple/mytemplate/1/100",{user_id : response.data.user_id})
@@ -35,7 +30,7 @@ define(['app'], function (app) {
 				if(template.status == 'success'){
 					$scope.templateList = template.data;
 				}else{
-					$scope.alerts.push({type: template.status, msg: "You don't have any template! Please get free template or buy template first."});
+					$notification.error("Get Template", "You didn't have any Template! Please apply free template or buy new template first.");
 				}
 			});
 		
@@ -49,7 +44,7 @@ define(['app'], function (app) {
 					$scope.getLocation();
 				}
 			}else{
-				$scope.alerts.push({type: response.status, msg: response.message});
+				$notification[response.status]("Website Settings", response.message);
 			};
 		});
 		
@@ -57,11 +52,7 @@ define(['app'], function (app) {
 		$scope.editWebsitedetails = function(config){
 			dataService.put("put/website/"+$routeParams.id, config)
 			.then(function(response) {
-				if(response.status == 'success'){
-					$scope.alerts.push({type: response.status, msg: response.message});
-				}else{
-					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
-				}
+				$notification[response.status]("Website Settings", response.message);
 			}) 
 		}
 		
@@ -127,6 +118,8 @@ define(['app'], function (app) {
 					$scope.error = "An unknown error occurred."
 					break;
 			}
+			$scope.initGoogleMap("19.7514798", "75.71388839999997", 5);
+			$notification.error("Location Error", $scope.error);
 			$scope.$apply();
 		}
 		$scope.getLocation = function () {

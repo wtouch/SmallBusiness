@@ -2,14 +2,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope', '$injector','dataService','$location', '$cookieStore', '$cookies', '$routeParams'];
+    var injectParams = ['$scope','$rootScope', '$injector','dataService','$location', '$cookieStore', '$cookies', '$routeParams','$notification'];
 
     // This is controller for this view
-	var loginController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,$routeParams) {
-		($rootScope.alerts) ? $scope.alerts = $rootScope.alerts : $scope.alerts = [];
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
+	var loginController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,$routeParams,$notification) {
 		
 		//function to login user
 		$scope.insert = function(login){
@@ -23,10 +19,9 @@ define(['app'], function (app) {
 					}
 					dataService.setAuth(true);
 					$rootScope.userDetails = dataService.userDetails;
-				}else{
-					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
-					
 				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Login", response.message);
 			})
 		}
 		
@@ -37,9 +32,9 @@ define(['app'], function (app) {
 				if(response.status == 'success'){
 					$scope.forgot = response.data;
 					$location.path("/login");
-				}else{
-					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
 				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Login", response.message);
 			})
 		} 	
 		
@@ -54,10 +49,9 @@ define(['app'], function (app) {
 			.then(function(response) {
 				if(response.status == 'success'){
 					$scope.changepass = {};
-					$scope.alerts.push({type: response.status, msg: response.message});
-				}else{
-					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
 				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Login", response.message);
 			})  
 		}
 		
@@ -71,12 +65,12 @@ define(['app'], function (app) {
 				.then(function(response) {
 					if(response.status == 'success'){
 						$scope.changepass = {};
-						$scope.alerts.push({type: response.status, msg: response.message});
 						$scope.activate = true;
 					}else{
 						$scope.activate = false;
-						$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
 					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Login", response.message);
 				})  
 			}
 			if($scope.activatePass == false) $scope.changePassword();

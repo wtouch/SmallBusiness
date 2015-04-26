@@ -2,18 +2,14 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope', '$injector','dataService','$location', '$cookieStore', '$cookies','upload'];
+    var injectParams = ['$scope','$rootScope', '$injector','dataService','$location', '$cookieStore', '$cookies','upload','$notification'];
 	
-	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,upload) {
+	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,upload,$notification) {
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
-		$scope.alerts = [];
-		$scope.path = "user/profile/"+userInfo.user_id; // path to store images on server
+		$scope.path = "user/profile/"+$scope.userInfo.user_id; // path to store images on server
 		$scope.formats = ['yyyy/MM/dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
 		$scope.today = function() {
 			$scope.dt = new Date();
 		};
@@ -33,32 +29,6 @@ define(['app'], function (app) {
 		//to generate thumb for image
 		$scope.generateThumb = function(files){  
 			upload.generateThumbs(files);
-		};
-		
-		//dynamic dropdown list of country,state & city
-		$scope.contries = dataService.config.country;
-		$scope.getState = function(country){
-			var states = [];
-			for (var x in $scope.contries){
-				if($scope.contries[x].country_name == country){
-					for(var y in $scope.contries[x].states){
-						states.push($scope.contries[x].states[y])
-					}
-				}
-			}
-			$scope.states = states;
-		};
-		
-		$scope.getCities = function(state){
-			var cities = [];
-			for (var x in $scope.states){
-				if($scope.states[x].state_name == state){
-					for(var y in $scope.states[x].cities){
-						cities.push($scope.states[x].cities[y])
-					}
-				}
-			}
-			$scope.cities = cities;
 		};
 		
 		$scope.getData = function(location){
@@ -82,8 +52,6 @@ define(['app'], function (app) {
 		dataService.get("getsingle/user/"+$rootScope.userDetails.id)
 		.then(function(response) {
 			$scope.editprofile = dataService.parse(response.data);
-			$scope.getState($scope.editprofile.country);
-			$scope.getCities($scope.editprofile.state);
 			if($scope.editprofile.user_img == (undefined)) $scope.editprofile.user_img = "";
 		});
 		
@@ -95,7 +63,8 @@ define(['app'], function (app) {
 				if(response.status === 'success'){
 					$scope.editprofile.user_img = response.data.file_relative_path;
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Upload Image", response.message);
 				}
 			});
 		};
@@ -106,14 +75,13 @@ define(['app'], function (app) {
 			.then(function(response) {
 				if(response.status == 'success'){
 					$scope.editProfileForm.$setPristine();
-					$scope.alerts.push({type: response.status, msg: response.message});
 					angular.extend($rootScope.userDetails,editprofile);
 					console.log($rootScope.userDetails);
 					dataService.setUserDetails(($rootScope.userDetails));
 					$rootScope.userDetails = dataService.parse(dataService.userDetails);
-				}else{
-					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
 				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Edit Profile", response.message);
 			}) 
 		}	
 		
@@ -126,10 +94,9 @@ define(['app'], function (app) {
 				if(response.status == 'success'){
 					$scope.changepasswd = {};
 					$scope.changepassForm.$setPristine();
-					$scope.alerts.push({type: response.status, msg: response.message});
-				}else{
-					$scope.alerts.push({type: (response.status == 'error') ? "danger" :response.status, msg: response.message});
 				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Change Password", response.message);
 			})  
 		}
     };

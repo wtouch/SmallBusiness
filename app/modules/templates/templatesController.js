@@ -1,12 +1,11 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope','$injector','$location','$routeParams','dataService','upload','modalService'];
+    var injectParams = ['$scope','$rootScope','$injector','$location','$routeParams','dataService','upload','modalService','$notification'];
     
     // This is controller for this view
-	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService) {
+	var templatesController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService,$notification) {
 		// all $scope object goes here
-		$scope.alerts = [];
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.tempListCurrentPage = 1;
@@ -32,10 +31,7 @@ define(['app'], function (app) {
 		dataService.config('config', {config_name : "template"}).then(function(response){
 			$scope.temp = response.config_data;
 		});
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
+		
 		// to show default template list
 		if(!$routeParams.tempPart) {
 			$location.path('/dashboard/templates/listoftemplates');
@@ -93,10 +89,9 @@ define(['app'], function (app) {
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.submitted = true;
-					$scope.alerts.push({type: response.status,msg: response.message});						
-				}else{
-					$scope.alerts.push({type: response.status,msg: response.message});
 				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Update Template", response.message);
 			});
 		};
 
@@ -107,7 +102,8 @@ define(['app'], function (app) {
 			if(editStatus==0){
 				 dataService.put("put/template/"+id,$scope.changeStatusf)
 				.then(function(response) { 
-					$scope.alerts.push({type: response.status,msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Edit Template Price", response.message);
 				}); 
 			}
 		};	
@@ -135,7 +131,8 @@ define(['app'], function (app) {
 			if(editStatus==0){
 				 dataService.put("put/template/"+id,$scope.changeStatusf)
 				.then(function(response) { 
-					$scope.alerts.push({type: response.status,msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Change Development Status", response.message);
 				}); 
 			}
 		};	 
@@ -169,13 +166,14 @@ define(['app'], function (app) {
 			$scope.changeScopeObject($scope.domain_name);
 		}
 		
-		//function for website list response
+		//function for Users list response
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
 			}else{
-				$scope.alerts.push({type: response.status, msg: response.message});
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Get Customers", response.message);
 			}
 		});
 		
@@ -184,6 +182,9 @@ define(['app'], function (app) {
 			$scope.filterStatus= {};
 			(showStatus =="") ? delete $scope.template_type[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.template_type, $scope.filterStatus);
+			if(statusCol == 'user_id' && showStatus == null) {
+				angular.extend($scope.template_type, $scope.userInfo);
+			}
 			dataService.get("getmultiple/template/1/"+$scope.pageItems, $scope.template_type)
 			.then(function(response) {  
 				if(response.status == 'success'){
@@ -192,7 +193,8 @@ define(['app'], function (app) {
 				}else{
 					$scope.templates = {};
 					$scope.totalRecords = {};
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Template List", response.message);
 				}
 			});
 		};
@@ -203,10 +205,9 @@ define(['app'], function (app) {
 		$scope.changeStatusf[colName] = colValue;    
 			dataService.put("put/template/"+id,$scope.changeStatusf)   
 			.then(function(response) {     
-				if(colName=='template_type'){     
-				}
-				$scope.alerts.push({type: response.status,msg: response.message});
-				}); 
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Modify Template Status", response.message);
+			}); 
 		}
 	
 		//code for search filter
@@ -226,7 +227,8 @@ define(['app'], function (app) {
 				}else{
 					$scope.templates = {};
 					$scope.totalRecords = {};
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Search Template", response.message);
 				}
 			});
 			}
@@ -237,7 +239,8 @@ define(['app'], function (app) {
 			$scope.featuredData = {featured : featured};
 			dataService.put("put/template/"+id, $scope.featuredData)
 			.then(function(response) { //function for businesslist response
-				$scope.alerts.push({type: response.status, msg: response.message});
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Feature Template", response.message);
 			});
 		};
 		//This code for reject/order_placed button 
@@ -245,7 +248,8 @@ define(['app'], function (app) {
 			$scope.featuredData = {development_status : development_status};
 			dataService.put("put/template/"+id, $scope.featuredData)
 			.then(function(response) { 
-				$scope.alerts.push({type: response.status, msg: response.message});
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Reject Template", response.message);
 			});
 		};
 		
@@ -257,7 +261,8 @@ define(['app'], function (app) {
 					if(response.status == 'success'){
 						$scope.hideDeleted = 1;
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Delete Template", response.message);
 				});
 			};			
 		
@@ -268,14 +273,16 @@ define(['app'], function (app) {
 				.then(function(response) { 
 					if(response.status == 'success'){
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Delete Template", response.message);
 				});
 			};			
 		$scope.apply = function(id, applied){
 			$scope.appliedData = {applied : applied};
 			dataService.put("put/template/"+id, $scope.appliedData)
 			.then(function(response) { 
-				$scope.alerts.push({type: response.status, msg: response.message});
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Apply Template", response.message);
 			});
 		} ;
 		
@@ -286,7 +293,8 @@ define(['app'], function (app) {
 				if(data.status === 'success'){
 					picArr.push(data.data);
 				}else{
-					$scope.alerts.push({type: data.status, msg: data.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Upload Images", response.message);
 				}
 			}); 
 		};    
@@ -301,9 +309,9 @@ define(['app'], function (app) {
 					$scope.templates=response.data;
 					$scope.totalRecords = response.totalRecords;	
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Templates List", response.message);
 				};
-				$scope.templates = response.data;
 			});
 			
 			//open model for My template image
@@ -360,8 +368,9 @@ define(['app'], function (app) {
 							if(data.status === 'success'){
 								modalOptions.slider.image = data.data.file_relative_path;
 							}else{
-							$scope.alerts.push({type: data.status, msg: data.message});
-						}
+								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+								$notification[response.status]("Upload Image", response.message);
+							}
 					
 					}); 
 					},
@@ -380,7 +389,8 @@ define(['app'], function (app) {
 				};
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					dataService.put("put/mytemplate/"+tempId,modalOptions.myTemplateData).then(function(response) {
-						$scope.alerts.push({type: response.status,msg: response.message});
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Update Template Details", response.message);
 					});
 				});
 			});
@@ -408,7 +418,8 @@ define(['app'], function (app) {
 					$scope.totalRecords = response.totalRecords;
 				}
 				else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Templates List", response.message);
 				};
 			});
 			
@@ -472,7 +483,8 @@ define(['app'], function (app) {
 									if(data.status === 'success'){
 										modalOptions.slider.image = data.data.file_relative_path;
 									}else{
-									$scope.alerts.push({type: data.status, msg: data.message});
+									if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+									$notification[response.status]("Upload Images", response.message);
 								}
 							}); 
 							},
@@ -491,7 +503,8 @@ define(['app'], function (app) {
 						};
 						modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 							dataService.post("post/mytemplate",modalOptions.myTemplateData).then(function(response) {
-								$scope.alerts.push({type: response.status,msg: response.message});
+								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+								$notification[response.status]("Apply Template", response.message);
 								dataService.progressSteps('chooseTemplate', true);
 							}); 
 						
@@ -514,7 +527,8 @@ define(['app'], function (app) {
 					$scope.templates=response.data;
 					$scope.totalRecords = response.totalRecords;
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Custom Templates List", response.message);
 				};
 			});
 	
@@ -574,7 +588,8 @@ define(['app'], function (app) {
 							$location.path("/dashboard/templates/mytemplates");
 						},500); */
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Submit Template", response.message);
 				});
 			}
 		}
@@ -622,7 +637,8 @@ define(['app'], function (app) {
 							$scope.addtemplate.template_image.push(data.data);
 						}
 					}else{
-						$scope.alerts.push({type: data.status, msg: data.message});
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Upload Zip", response.message);
 					}
 				});
 			};
@@ -636,7 +652,8 @@ define(['app'], function (app) {
 							$location.path("/dashboard/templates/mytemplates");
 						},500);*/
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Upload", response.message);
 				});
 			}
 			$scope.postData = function(addtemplate) {
@@ -648,7 +665,8 @@ define(['app'], function (app) {
 							$location.path("/dashboard/templates/mytemplates");
 						},500); */
 					}
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Add Template", response.message);
 				});
 			}
 		}

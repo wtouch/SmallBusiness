@@ -1,9 +1,9 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','$route']; 
+    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','$route','$notification']; 
    
-	var manageuserController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,$route) {
+	var manageuserController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,$route,$notification) {
 		$scope.permission = $rootScope.userDetails.permission.user_module;
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -12,7 +12,6 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";	
 		$scope.userList = [];
-		$scope.alerts = [];
 		$scope.currentDate = dataService.currentDate;
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.contries = dataService.config.country;
@@ -43,35 +42,12 @@ define(['app'], function (app) {
 			});
 		}
 		
-		$scope.getState = function(country){
-			var states = [];
-			for (var x in $scope.contries){
-				if($scope.contries[x].country_name == country){
-					for(var y in $scope.contries[x].states){
-						states.push($scope.contries[x].states[y])
-					}
-				}
-			}
-			$scope.states = states;
-		};
-		$scope.getCities = function(state){
-			var cities = [];
-			for (var x in $scope.states){
-				if($scope.states[x].state_name == state){
-					for(var y in $scope.states[x].cities){
-						cities.push($scope.states[x].cities[y])
-					}
-				}
-			}
-			$scope.cities = cities;
-		};
-		
 		// for dynamic value of group name
 		dataService.get('getmultiple/usergroup/1/200').then(function(response){
 			if(response.status=='success'){
 				$scope.groups = response.data;
 			}else{
-				$scope.alerts.push({type: response.status, msg: response.message});
+				$notification.error("Get User Groups", response.message);
 			}
 		}) ;
 		$scope.changeGroupName = function(group_id, groups){
@@ -101,11 +77,6 @@ define(['app'], function (app) {
 			return (status==1) ? active : notActive;
 		};
 		
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
-		
 		//datepicker {sonali}	
 		$scope.today = function() {
 			$scope.date = new Date();
@@ -124,14 +95,25 @@ define(['app'], function (app) {
 		$scope.pageChanged = function(page) {
 			if($scope.userViews == 'userslist'){
 				dataService.get("getmultiple/user/"+page+"/"+$scope.pageItems, $scope.userInfo).then(function(response){
-					$scope.userList = response.data;
-					$scope.totalRecords = response.totalRecords;
+					if(response.status == "success"){
+						$scope.userList = response.data;
+						$scope.totalRecords = response.totalRecords;
+					}else{
+						$notification.error("User Groups", response.message);
+					}
 				});
+				
 			}
 			if($scope.userViews == 'usersgroup'){
 				dataService.get("getmultiple/usergroup/"+page+"/"+$scope.pageItems).then(function(response){
-					$scope.usergroupList = response.data;
-					$scope.totalRecords = response.totalRecords;
+					if(response.status == "success"){
+						$scope.usergroupList = response.data;
+						$scope.totalRecords = response.totalRecords;
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("User Groups", response.message);
+					}
+					
 				});
 			}
 			
@@ -139,7 +121,12 @@ define(['app'], function (app) {
 		
 		dataService.get("getmultiple/user/1/100", $scope.userInfo)
 		.then(function(response) {
-			$scope.selectUsers = response.data;
+			if(response.status == "success"){
+				$scope.selectUsers = response.data;
+			}else{
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("User Groups", response.message);
+			}
 		});	
 		
 		//code for search filter
@@ -160,7 +147,8 @@ define(['app'], function (app) {
 						}else{
 							$scope.userList = {};
 							$scope.totalRecords = {};
-							$scope.alerts.push({type: response.status, msg: response.message});
+							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification[response.status]("Get Users List", response.message);
 						}
 					});
 				}
@@ -172,7 +160,8 @@ define(['app'], function (app) {
 						}else{
 							$scope.usergroupList = {};
 							$scope.totalRecords = {};
-							$scope.alerts.push({type: response.status, msg: response.message});
+							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification[response.status]("Get User Group List", response.message);
 						}
 					});
 				}
@@ -187,13 +176,15 @@ define(['app'], function (app) {
 			if($scope.userViews=='userslist'){
 				dataService.put("put/user/"+id, $scope.changeStatus)
 				.then(function(response) {
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("User Modification", response.message);
 				});
 			}
 			if($scope.userViews=='usersgroup'){
 				dataService.put("put/usergroup/"+id, $scope.changeStatus)
-				.then(function(response) { 
-					$scope.alerts.push({type: response.status, msg: response.message});
+				.then(function(response) {
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("User Group Modification", response.message);
 				}); 
 			}
 		};
@@ -203,7 +194,8 @@ define(['app'], function (app) {
 			if(editStatus==0){
 				 dataService.put("put/user/"+id,$scope.changeStatus)
 				.then(function(response) { 
-					$scope.alerts.push({type: response.status,msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Edit Group Name", response.message);
 				}); 
 			}
 		};	
@@ -219,7 +211,8 @@ define(['app'], function (app) {
 			$scope.changeStatus[colName] = colValue;				
 				 dataService.post("post/user/forgotpass", $scope.changeStatus)
 				.then(function(response) {					
-					$scope.alerts.push({type: response.status,msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Reset User's Password", response.message);
 			}); 
 		};
 		
@@ -251,27 +244,30 @@ define(['app'], function (app) {
 					if(response.status == 'success'){
 						$scope.adduser = {};
 						$scope.submitted = true;
-						$scope.alerts.push({type: response.status, msg: response.message});
-					}else{
-						$scope.alerts.push({type: response.status, msg: response.message});
 					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Add User", response.message);
 				});
 			}
 			$scope.editUserId = $routeParams.id;
 			if($routeParams.id){
 				dataService.get("getsingle/user/"+$routeParams.id)
 				.then(function(response) {
-					$scope.adduser = response.data;
+					if(response.status=="success"){
+						$scope.adduser = response.data;
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Get User Details", response.message);
+					}
 				});
 				$scope.update = function(adduser){
 					dataService.put("put/user/"+$routeParams.id,adduser)
 					.then(function(response) {
 						if(response.status == 'success'){
 							$scope.submitted = true;
-							$scope.alerts.push({type: response.status, msg: response.message});
-						}else{
-							$scope.alerts.push({type: response.status, msg: response.message});
 						}
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Edit User Details", response.message);
 					});
 				};
 			}
@@ -302,11 +298,11 @@ define(['app'], function (app) {
 				dataService.post("post/usergroup",usersgroup)
 				.then(function(response) {  
 					if(response.status == 'success'){
-						$scope.alerts.push({type: response.status, msg: response.message});
-					}else{
-						$scope.alerts.push({type: response.status, msg: response.message});
-					}	
-					$scope.reset();
+						$scope.reset();
+					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Add User Group", response.message);
+					
 				});
 			}
 
@@ -314,21 +310,23 @@ define(['app'], function (app) {
 				$scope.editForm = true;
 				dataService.get("getsingle/usergroup/"+$routeParams.id)
 				.then(function(response) {
-					$scope.usersgroup = dataService.parse(response.data);
-					if($scope.usersgroup.config == (undefined || "")) $scope.usersgroup.config = {};
-					if($scope.usersgroup.group_permission == (undefined)) $scope.usersgroup.group_permission = {};
-					if($scope.usersgroup.group_permission.enquiry_module == (undefined)){
-						$scope.usersgroup.group_permission.enquiry_module = {}
-					};
+					if(response.status == "success"){
+						$scope.usersgroup = dataService.parse(response.data);
+						if($scope.usersgroup.config == (undefined || "")) $scope.usersgroup.config = {};
+						if($scope.usersgroup.group_permission == (undefined)) $scope.usersgroup.group_permission = {};
+						if($scope.usersgroup.group_permission.enquiry_module == (undefined)){
+							$scope.usersgroup.group_permission.enquiry_module = {}
+						};
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Edit User Group", response.message);
+					}
 				});
 				$scope.update = function(usersgroup){
 					dataService.put("put/usergroup/"+$routeParams.id,usersgroup)
 					.then(function(response) {
-						if(response.status == 'success'){
-							$scope.alerts.push({type: response.status, msg: response.message});
-						}else{
-							$scope.alerts.push({type: response.status, msg: response.message});
-						}
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Edit User Group", response.message);
 					});
 				};
 			}
@@ -341,7 +339,8 @@ define(['app'], function (app) {
 					$scope.userList = response.data;
 					$scope.totalRecords = response.totalRecords;
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Users List", response.message);
 				}
 			});
 		}
@@ -353,7 +352,8 @@ define(['app'], function (app) {
 					if($scope.usergroupList.config == (undefined || "")) $scope.usergroupList.config = {};
 					$scope.totalRecords = response.totalRecords;
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get User Group List", response.message);
 				}
 			});
 		}
