@@ -10,6 +10,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.alerts = [];
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
+		$scope.websetting = {config : { google_map: {}}};
 		
 		//code for view single website details
 		dataService.get("getsingle/website/"+$routeParams.id)
@@ -39,9 +40,9 @@ define(['app'], function (app) {
 			});
 		
 			if(response.status == 'success'){
+				$scope.websetting.business_id = response.data.business_id;
 				var config = (response.data.config!='') ? (response.data.config) : { google_map : {}};
-				if(config.google_map == undefined) config.google_map = {};
-				$scope.config = config;
+				angular.extend($scope.websetting.config,config);
 				if(config.google_map.latitude != undefined && config.google_map.longitude != undefined){
 					$scope.initGoogleMap(config.google_map.latitude, config.google_map.longitude, 18);
 				}else{
@@ -54,7 +55,7 @@ define(['app'], function (app) {
 		
 		//update method for website settings form
 		$scope.editWebsitedetails = function(config){
-			dataService.put("put/website/"+$routeParams.id,{config : config})
+			dataService.put("put/website/"+$routeParams.id, config)
 			.then(function(response) {
 				if(response.status == 'success'){
 					$scope.alerts.push({type: response.status, msg: response.message});

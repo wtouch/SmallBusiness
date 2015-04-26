@@ -20,6 +20,7 @@ define(['app'], function (app) {
 		$scope.readOnly = false;
 		$scope.formPart = 'home';	
 		$scope.addbusiness= {};
+		$scope.formSteps = 0;
 		$scope.reset = function() {
 			$scope.addbusiness = {
 				created_date : $scope.currentDate,
@@ -48,8 +49,9 @@ define(['app'], function (app) {
 			$scope.alerts.splice(index, 1);
 		};
 		// Add Business multi part form show/hide operation from here! {Vilas}
-		$scope.showFormPart = function(formPart){
+		$scope.showFormPart = function(formPart, formSteps){
 			$scope.formPart = formPart;
+			if(formSteps != undefined ) $scope.formSteps = formSteps;
 		};
 		//code for accessing json data of business	
 		$scope.biz = {};
@@ -66,18 +68,30 @@ define(['app'], function (app) {
 			$scope.addbusiness.pincode = location.pincode;
 		}
 		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
-			var locationParams = {search : {}, groupBy : {}}
+			var locationParams = {search : {}}
 			locationParams.search[searchColumn] = searchValue;
-			locationParams.groupBy[searchColumn] = searchValue;
 			return dataService.config('locations', locationParams).then(function(response){
 				return response;
 			});
 		}
+		$scope.searchCategory = function(searchValue){
+			var categoryParms = {search : {}}
+			categoryParms.search.category_name = searchValue;
+			return dataService.config('business_category',categoryParms).then(function(response){
+				return response;
+			});
+		}
+		$scope.setCategoryType = function(item){
+			$scope.addbusiness.category = item.id;
+			$scope.getTypes(item.id);
+			$scope.addbusiness.type = item.type_id;
+			$scope.getKeywords(item.type_id);
+		}
 		$scope.getCategory = function(filterColumn){
 			if(filterColumn){
-				var locationParams = {filter : {parent_id : filterColumn}};
+				var locationParams = {filter : {parent_id : filterColumn}, groupBy: 'category_name'};
 			}else{
-				var locationParams = {filter : {parent_id : 0}};
+				var locationParams = {filter : {parent_id : 0}, groupBy: 'category_name'};
 			}
 			dataService.config('business_category',locationParams).then(function(response){
 				$scope.businessCategories = response;
@@ -85,7 +99,7 @@ define(['app'], function (app) {
 		}
 		$scope.getCategory(0);
 		$scope.getTypes = function(filterColumn){
-			var locationParams = {filter : {parent_id : filterColumn}};
+			var locationParams = {filter : {parent_id : filterColumn}, groupBy: 'type'};
 			dataService.config('business_category',locationParams).then(function(response){
 				$scope.businessTypes = response;
 			});
@@ -107,7 +121,7 @@ define(['app'], function (app) {
 			}
 		});
 		
-		$scope.path = "business/"+$scope.userInfo.user_id; 
+		$scope.path = "business/"; 
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
 		$scope.upload = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){

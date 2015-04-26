@@ -54,9 +54,8 @@ define(['app'], function (app) {
 			$scope.register.address.pincode = location.pincode;
 		}
 		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
-			var locationParams = {search : {}, groupBy : {}}
+			var locationParams = {search : {}}
 			locationParams.search[searchColumn] = searchValue;
-			locationParams.groupBy[searchColumn] = searchValue;
 			return dataService.config('locations', locationParams).then(function(response){
 				return response;
 			});

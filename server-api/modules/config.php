@@ -8,7 +8,7 @@
 		try{
 			$table = $_GET['table'];
 			$limit[0] = 1;
-			$limit[1] = 1000;
+			$limit[1] = 500;
 			$where = array();
 			$like = array();
 			$groupBy = array();
@@ -27,7 +27,6 @@
 				if(count($search) >=1){
 					foreach($search as $key => $value){
 						$like[$key] = $value;
-						$groupBy[$key] = $key;
 					}
 				}
 			}
@@ -40,25 +39,28 @@
 				}
 			}
 			//print_r($groupBy);
-			$db->setGroupBy($groupBy);
 			$t0 = $db->setTable($table);
-			$db->setWhere($where, $t0);
-			$db->setWhere($like, $t0, true);
+			$db->setGroupBy($groupBy,$t0);
 			$db->setLimit($limit);
 			if($table == 'config'){
-				((isset($_GET['config_name'])) && ($_GET['config_name']!=="")) ? $where['config_name'] = $_GET['config_name'] : "";
+				((isset($_GET['config_name'])) && ($_GET['config_name']!=="")) ? $where['config_name'] =$_GET['config_name'] : "";
 				$db->setWhere($where, $t0);
 				$data = $db->selectSingle();
-			}else{
-				
+			}elseif($table == 'business_category' && isset($_GET['search'])){
+				$subCat = $db->setJoinString("LEFT JOIN", "business_category", array("parent_id"=>$t0.".id"));
+				$keywords = $db->setJoinString("LEFT JOIN", "business_category", array("parent_id"=>$subCat.".id"));
+				$db->setWhere($where, $t0);
+				$db->setWhere($like, $keywords, true);
+
+				$db->setColumns($subCat, array("category_name"=>"type","id"=>"type_id"));
+				$db->setColumns($t0, array("*"));
+				$db->setColumns($keywords, array("category_name"=>"keyword"));
 				$data = $db->select(false);
 				
-				if($data['status'] == "success"){
-					if(isset($data['data'][0]['totalRecords'])){
-						$tootalDbRecords['totalRecords'] = $data['data'][0]['totalRecords'];
-						$data = array_merge($tootalDbRecords,$data);
-					}
-				}
+			}else{
+				$db->setWhere($where, $t0);
+				$db->setWhere($like, $t0, true);
+				$data = $db->select(false);
 			}
 			
 			if($data['status'] != "success"){
@@ -66,6 +68,7 @@
 			}
 			$response["message"] = "You are logged in successfully.";
 			$response["status"] = "success";
+			$response["totalRecords"] = isset($data['totalRecords']) ? $data['totalRecords'] : 1;
 			$response["data"] = $data['data'];
 			echo json_encode($response);
 		}catch(Exception $e){

@@ -33,7 +33,7 @@
 			echo $response;
 		}else{
 			$input = json_decode($body,true);
-			$domainArr = explode('.', $input['domain']);
+			//$domainArr = explode('.', $input['domain']);
 			$where['domain_name'] = $input['domain'];
 			
 			$t0 = $db->setTable("website");

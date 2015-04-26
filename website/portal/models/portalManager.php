@@ -196,7 +196,7 @@ class portalManager{
 			$this->db->setColumns($t0, $cols);
 			
 			$t1 = $this->db->setJoinString("LEFT JOIN", "business_category", array("id"=>$t0.".category"));
-			$t2 = $this->db->setJoinString("LEFT JOIN", "business_category", array("parent_id"=>$t0.".type"));
+			$t2 = $this->db->setJoinString("LEFT JOIN", "business_category", array("id"=>$t0.".type"));
 			$col["category_name"] = "category_name";
 			$this->db->setColumns($t1, $col);
 			

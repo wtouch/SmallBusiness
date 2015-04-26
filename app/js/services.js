@@ -309,6 +309,7 @@ define(['app'], function (app) {
 				}
 			}
 			obj.config = function(table, params){
+				if(params == undefined) params = {};
 				params.table = table;
 				return $http({
 					url: serviceBase +'getmultiple/config/1/1',

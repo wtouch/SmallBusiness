@@ -131,7 +131,8 @@ class dbHelper {
 	function getLimit(){
 		return $this->limit;
 	}
-	function setGroupBy($groupByArray){
+	function setGroupBy($groupByArray,$table=null){
+		if($table===null) $table = $this->table;
 		if(count($groupByArray) >= 1){
 			if($this->groupBy == null || $this->groupBy == ""){
 				$this->groupBy = " GROUP BY ";
@@ -139,7 +140,7 @@ class dbHelper {
 				$this->groupBy .= " ";
 			}
 			foreach($groupByArray as $key){
-				$this->groupBy .= $key.",";
+				$this->groupBy .= $table.".".$key.",";
 			}
 			$this->groupBy = $this->groupBy;
 			return true;
@@ -288,7 +289,7 @@ class dbHelper {
 			
 			$data = array();
 			
-			if(count($rows)>=1){
+			if($affected_rows >= 1){
 				foreach ($rows as $index => $dataArr){
 					//$serviceData[$index] = $dataArr;
 					foreach($dataArr as $key => $value){
@@ -298,7 +299,7 @@ class dbHelper {
 				}
 			}
 			
-            if(count($rows)<=0 || !is_array($rows)){
+            if($affected_rows <= 0 || !is_array($rows)){
                 $response["status"] = "warning";
                 $response["message"] = "No data found.";
 				$response["data"] = null;
@@ -330,8 +331,10 @@ class dbHelper {
 			
 			$data = array();
 			
-			foreach($rows as $key => $value){
-				$data[$key] = (substr($value,0,1) == "{" || substr($value,0,1) == "[") ? json_decode($value, true) : $value;
+			if($affected_rows >=1 ){
+				foreach($rows as $key => $value){
+					$data[$key] = (substr($value,0,1) == "{" || substr($value,0,1) == "[") ? json_decode($value, true) : $value;
+				}
 			}
 			
             if(count($rows)<= 0 || !is_array($rows)){

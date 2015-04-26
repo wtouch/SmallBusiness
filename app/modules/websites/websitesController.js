@@ -31,30 +31,28 @@ define(['app'], function (app) {
 		};
 		
 		
-			// code for get business list
-			dataService.get("getmultiple/business/1/100",$scope.userInfo)
+		$scope.getBusiness = function(user_id){
+		// code for get business list
+			dataService.get("getmultiple/business/1/100",{user_id:user_id, status : 1})
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.businessList = response.data;
 				}else{
 					$scope.alerts.push({type: response.status, msg: "You didn't added any business! Please add business first."});
 				}
-				$scope.businessList = response.data;
 			});
 			
 			// code for get business list
-			dataService.get("getmultiple/mytemplate/1/100",$scope.userInfo)
+			dataService.get("getmultiple/mytemplate/1/100",{user_id:user_id, status : 1})
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.templateList = response.data;
 				}else{
-					$scope.alerts.push({type: response.status, msg: "You didn't added any business! Please add business first."});
+					$scope.alerts.push({type: response.status, msg: "You didn't have any Template! Please apply free template or buy new template first."});
 				}
-				$scope.businessList = response.data;
 			});
-			
+		}
 		
-			
 		//For display by default website list
 		if(!$scope.websitePart) {
 			$location.path('/dashboard/websites/websiteslist');

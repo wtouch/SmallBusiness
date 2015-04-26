@@ -147,13 +147,14 @@
 					$data = $db->selectSingle();
 					
 					//print_r($data);
-					if($data['status'] == 'error' || $data['data'] == null){
+					if($data['status'] != 'success' || $data['data'] == null){
 						throw new Exception("You are already changed password or this link has expired. Please try again!");
 					}else{
 						if(property_exists($input,'password')){
 							$newPass['password'] = passwordHash::hash($input->password);
-							$updatePass = $db->update($table, $newPass, $where);
-							if($updatePass['status'] == 'error'){
+							$updatePass = $db->update("users", $newPass, array("id"=>$data['data']['id']));
+							//print_r($updatePass);
+							if($updatePass['status'] != 'success'){
 								throw new Exception('Password didn\'t updated! Database Error: '.$updatePass['message']);
 							}
 						}else{
@@ -169,7 +170,7 @@
 					
 					$db->setColumns($t[0], array("*"));
 					$data = $db->selectSingle();
-					if($data['status'] == 'error'){
+					if($data['status'] != 'success'){
 						throw new Exception("Database Error: ".$data['message']);
 					}else{
 					
@@ -203,6 +204,6 @@
 	
 	function logout(){
 		$sessionObj = new session();
-		print_r($sessionObj->destroySession());
+		echo json_encode($sessionObj->destroySession());
 	}
  ?>

@@ -7,7 +7,7 @@ define(['app'], function (app) {
 	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,upload) {
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.alerts = [];
-		$scope.path = "user/profile"; // path to store images on server
+		$scope.path = "user/profile/"+userInfo.user_id; // path to store images on server
 		$scope.formats = ['yyyy/MM/dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		
@@ -71,9 +71,8 @@ define(['app'], function (app) {
 			$scope.editprofile.address.pincode = location.pincode;
 		}
 		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
-			var locationParams = {search : {}, groupBy : {}}
+			var locationParams = {search : {}}
 			locationParams.search[searchColumn] = searchValue;
-			locationParams.groupBy[searchColumn] = searchValue;
 			return dataService.config('locations', locationParams).then(function(response){
 				return response;
 			});

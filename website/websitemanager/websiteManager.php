@@ -32,6 +32,7 @@ class websiteManager{
 				$config['domain_name'] = $dbresult['domain_name'];
 				$config['website_id'] = $dbresult['id'];
 				$config['website_config'] = ($dbresult['config']);
+				$config['business_id'] = ($dbresult['business_id']);
 				$config['user_id'] = $dbresult['user_id'];
 				$config['expired'] = $dbresult['expired'];
 				
@@ -41,7 +42,8 @@ class websiteManager{
 				if($dbresult['status'] != 1){
 					throw new Exception('Website is not activated please contact your administrator!');
 				}
-				if($dbresult['config'] == ""){
+				//print_r();
+				if(empty($dbresult['config'])){
 					throw new Exception('Please add website details!');
 				}
 			}else{
@@ -123,8 +125,8 @@ class websiteManager{
 			// get data for view from product table, business table, users table, template table
 			//$where['id'] = $config['website_config']->business_id;
 			
-			if(isset($config['website_config']['business_id'])) {
-				$where['id'] = $config['website_config']['business_id'];
+			if(isset($config['business_id'])) {
+				$where['id'] = $config['business_id'];
 			}else{
 				throw new Exception("Please add website details!");
 			}

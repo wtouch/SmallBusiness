@@ -103,7 +103,6 @@
 						<span class="help-block" ng-show="editProfileForm.area.$dirty && editProfileForm.area.$invalid">
 							<span ng-show="editProfileForm.state.$error.required" class="text-danger">State is required.</span>
 							<span ng-show="editProfileForm.area.$error.pattern && (editProfileForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
-							<span class="text-danger" ng-show="editProfileForm.area.$error.minlength && (editProfileForm.area.$dirty || submitted)">Enter correct Code.</span>
 						</span>
 					</div>						
 				</div>			
@@ -118,8 +117,8 @@
 					<label for="city" class="col-sm-2 control-label">City *</label>	<div class="col-sm-3" >
 						<input type="text" required name="City" id="City" ng-model="editprofile.address.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
 							<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
-						<span class="help-block" ng-show="editProfileForm.City.$dirty && editProfileForm.City.$invalid || editProfileForm.City.$dirty && !editprofile.City">
-							<span ng-show="editProfileForm.City.$error.required || editProfileForm.City.$dirty && !editprofile.city" class="text-danger">City is required.</span>
+						<span class="help-block" ng-show="editProfileForm.City.$dirty && editProfileForm.City.$invalid || editProfileForm.City.$dirty && !editprofile.address.city">
+							<span ng-show="editProfileForm.City.$error.required || editProfileForm.City.$dirty && !editprofile.address.city" class="text-danger">City is required.</span>
 						</span>				
 					</div>
 				</div>
@@ -127,8 +126,8 @@
 					<label for="Country" class="col-sm-2 control-label">Country *</label>
 					<div class="col-sm-9">
 						<input type="text" required name="Country" id="Country" ng-model="editprofile.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
-						<span class="help-block" ng-show="editProfileForm.Country.$dirty && editProfileForm.Country.$invalid || editProfileForm.Country.$dirty && !editprofile.Country">
-							<span ng-show="editProfileForm.Country.$error.required || editProfileForm.Country.$dirty && !editprofile.Country" class="text-danger">Country Name required.</span>
+						<span class="help-block" ng-show="editProfileForm.Country.$dirty && editProfileForm.Country.$invalid || editProfileForm.Country.$dirty && !editprofile.country">
+							<span ng-show="editProfileForm.Country.$error.required || editProfileForm.Country.$dirty && !editprofile.country" class="text-danger">Country Name required.</span>
 						</span>				
 					</div>
 				</div>	
