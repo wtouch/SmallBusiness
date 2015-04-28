@@ -283,13 +283,12 @@ define(['app'], function (app) {
 					obj.removeCookies($cookies);
 					sessionStorage.clear();
 					localStorage.clear();
-					$location.path("/");
 				});
 			};
 			obj.removeCookies = function(cookies){
-				/* angular.forEach(cookies, function (v, k) {
+				angular.forEach(cookies, function (v, k) {
 					$cookieStore.remove(k);
-				}); */
+				});
 			}
 			
 			obj.auth = ($cookies.auth) ? $cookieStore.get('auth') : false;

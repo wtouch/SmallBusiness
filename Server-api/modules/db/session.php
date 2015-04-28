@@ -37,6 +37,22 @@ class session {
 			//print_r($_SESSION);
 		}
 	}
+	
+	public function checkActivity(){
+		if (!isset($_SESSION)) {
+			session_start();
+		}
+		if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60*30)) {
+			// last request was more than 30 minutes ago
+			session_regenerate_id(true);
+			$this->destroySession();
+		}else{
+			 // update last activity time stamp
+			$this->setCookies("auth", "true", 60*30);
+		}
+		$_SESSION['LAST_ACTIVITY'] = time();
+	}
+	
     public function destroySession(){
 		if (!isset($_SESSION)) {
 			session_start();

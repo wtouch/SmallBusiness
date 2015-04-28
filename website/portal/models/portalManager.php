@@ -49,7 +49,7 @@ class portalManager{
 			$response['totalRecords'] = $data['totalRecords'];
 		}
 		if(isset($_SESSION['username'])){
-			$response['username'] = $_SESSION['username'];
+			$response['username'] = $_SESSION['name'];
 			$response['login_user_id'] = $_SESSION['id'];
 		}
 		$response['currentPage'] = isset($_GET['page']) ? $_GET['page'] : 1;

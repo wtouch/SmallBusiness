@@ -5,14 +5,14 @@
 	<form name="applyTemplateForm" class="form-horizontal" role="form" novalidate="novalidate" 	ng-submit="applyTemplateForm.$valid">
 		<div class="modal-body">
 			<div class="form-group" ng-if="userDetails.group_name != 'customer'">
-				<label for="customer" class="col-sm-2 control-label">Customer</label>
+				<label for="customer" class="col-sm-2 control-label">Customer *</label>
 				<div class="col-sm-7">
 					<select class="form-control" name="customer" id="customer"  ng-model="templateList.user_id" ng-options="item.id as item.name for item in modalOptions.customerList | filter: { group_name : 'customer'} " required>
-						<option value="">Select Customer *</option>
+						<option value="">Select Customer</option>
 					</select>
 					
-					<span class="help-block" ng-show="addbusinessForm.customer.$dirty && addbusinessForm.customer.$invalid">
-						<span ng-show="addbusinessForm.customer.$error.required" class="text-danger">Customer is required.</span>
+					<span class="help-block" ng-show="applyTemplateForm.customer.$dirty && applyTemplateForm.customer.$invalid">
+						<span ng-show="applyTemplateForm.customer.$error.required" class="text-danger">Customer is required.</span>
 					</span>	
 				</div>
 				
@@ -140,6 +140,6 @@
 			</tr>
 		</table>		
 		<div class="modal-footer">
-			<button type="submit" class="btn btn-primary" ng-click="modalOptions.formData(templateList); modalOptions.ok()">OK</button>
+			<button type="submit" ng-disabled="applyTemplateForm.$invalid" class="btn btn-primary" ng-click="modalOptions.formData(templateList); modalOptions.ok()">OK</button>
 		</div>
 	</form>

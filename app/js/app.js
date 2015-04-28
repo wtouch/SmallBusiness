@@ -74,6 +74,8 @@ define(['angular',
 				
 				.when('/dashboard/enquiry/:mailId?/:id?', route.resolve({controller:'enquiry', template: 'enquiry',label:"Mail Box"}, 'enquiry/'))
 				
+				.when('/dashboard/templates/mytemplates/:id?', route.resolve({controller:'mytemplates', template: 'mytemplates',label:"My Template"}, 'templates/mytemplates/'))
+				
 				.when('/dashboard/templates/:tempPart?/:id?', route.resolve({controller:'templates', template: 'templates',label:"Template"}, 'templates/'))
 				
 				// Always Add Static Route before dynamic route/dynamic parameter

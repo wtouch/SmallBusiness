@@ -204,7 +204,8 @@ class dbHelper {
 	
 	/*******************************************************************************/
 	
-	function setOrderBy($orderBy){
+	function setOrderBy($orderBy,$table=null){
+		($table==null) ? $table = "" : $table = $table.".";
 		if(count($orderBy) >= 1){
 			if($this->orderBy == null || $this->orderBy == ""){
 				$this->orderBy = " ORDER BY ";
@@ -212,7 +213,7 @@ class dbHelper {
 				$this->orderBy .= " ";
 			}
 			foreach($orderBy as $key => $value){
-				$this->orderBy .= $key." ".$value.",";
+				$this->orderBy .= $table.$key." ".$value.",";
 			}
 			$this->orderBy = $this->orderBy;
 			return true;

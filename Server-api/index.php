@@ -3,27 +3,13 @@
 // load required files
 require_once 'lib/Slim/Slim.php';
 require_once 'lib/PHPMailer/PHPMailerAutoload.php';
-require_once 'modules/db/dbHelper.php';
 require_once 'modules/db/session.php';
 
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
 
-$db = new dbHelper();
 $sessionObj = new session();
-
-if (!isset($_SESSION)) {
-	session_start();
-}
-if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60*30)) {
-    // last request was more than 30 minutes ago
-	session_regenerate_id(true);
-    ($sessionObj->destroySession());
-}else{
-	 // update last activity time stamp
-	($sessionObj->setCookies("auth", "true", 60*30));
-}
-$_SESSION['LAST_ACTIVITY'] = time();
+$sessionObj->checkActivity();
 
 $app->response->headers->set('Content-Type', 'application/json');
 // this will get input
@@ -134,7 +120,7 @@ function postRecord($getRequest, $postParams=null){
 	$baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex).'/index.php'; 
 	
 	try{
-		if(!isset($_SESSION['username']) && $postParams != "login"){
+		if(!isset($_SESSION['username']) && $postParams != ("login" || "forgotpass" || "changepass")){
 			throw new Exception('You are not logged in!');
 		}
 		if($body===""){

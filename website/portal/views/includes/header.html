@@ -35,11 +35,19 @@
 				</div>
 			</form>
 			
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/app/#/login">Login</a></li>
-				<li><a href="/app/#/register">Register</a></li>
-				<li><a href="/addbusiness">Add Your Business</a></li>
-			</ul>
+			{% if not username %}
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/app/#/login">Login</a></li>
+					<li><a href="/app/#/register">Register</a></li>
+					<li><a href="/addbusiness">Add Your Business</a></li>
+				</ul>
+			{% else %}
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/app/#/dashboard">Hi {{username}}</a></li>
+					<li><a href="/app/#/logout">logout</a></li>
+				</ul>
+			{% endif %}
+			
 		</div>
 	</nav>
 </header>

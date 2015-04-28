@@ -18,7 +18,7 @@
 			
 			$t[0] = $db->getUsers($userId, $userCols = null, $where, $like);
 			$db->setLimit($limit);
-			
+			$db->setOrderBy(array("id"=>"asc"),$t[0]);
 			$t1 = $db->setJoinString("INNER JOIN", "user_group", array("id"=>$t[0].".group_id"));
 			$db->setWhere($groupWhere, $t1);
 			// inner join select column [table name][join col name][column to select] = column alias
