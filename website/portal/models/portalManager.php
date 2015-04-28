@@ -1,5 +1,7 @@
 <?php
-
+if(!isset($_SESSION)){
+	session_start();
+}
 class portalManager{
 	private $domain;
 	private $db;
@@ -45,6 +47,10 @@ class portalManager{
 		}
 		if(isset($data['totalRecords'])){
 			$response['totalRecords'] = $data['totalRecords'];
+		}
+		if(isset($_SESSION['username'])){
+			$response['username'] = $_SESSION['username'];
+			$response['login_user_id'] = $_SESSION['id'];
 		}
 		$response['currentPage'] = isset($_GET['page']) ? $_GET['page'] : 1;
 		$response['city'] = $city;

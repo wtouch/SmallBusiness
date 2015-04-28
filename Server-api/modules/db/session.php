@@ -26,13 +26,16 @@ class session {
 		foreach($sessionData as $sessionName => $sessionValue){
 			$_SESSION[$sessionName] = $sessionValue;
 		}
+		$this->setCookies("auth","true", $period);
+		return $_SESSION;
+	}
+	public function setCookies($name, $value, $period){
 		if($period !== null){
-			$cookie_name = "auth";
-			$cookie_value = "true";
+			$cookie_name = $name;
+			$cookie_value = $value;
 			setcookie($cookie_name, $cookie_value, time() + ($period), "/");
 			//print_r($_SESSION);
 		}
-		return $_SESSION;
 	}
     public function destroySession(){
 		if (!isset($_SESSION)) {
@@ -43,7 +46,9 @@ class session {
 			foreach($_SESSION as $sessionName => $sessionValue){
 				unset($_SESSION[$sessionName]);
 			}
-			$msg="Logged Out Successfully...";
+			session_unset();     // unset $_SESSION variable for the run-time 
+			session_destroy();   // destroy session data in storage
+			$msg = "Logged Out Successfully...";
 		}
 		else{
 			$msg = "Not logged in...";

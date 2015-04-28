@@ -272,7 +272,7 @@ define(['app'], function (app) {
 
 			
 			obj.rememberPass = function(remb){
-				$cookieStore.put('auth',remb);
+				//$cookieStore.put('auth',remb);
 				sessionStorage.clear();
 			}
 			obj.logout = function(){
@@ -283,21 +283,24 @@ define(['app'], function (app) {
 					obj.removeCookies($cookies);
 					sessionStorage.clear();
 					localStorage.clear();
+					$location.path("/");
 				});
 			};
 			obj.removeCookies = function(cookies){
-				angular.forEach(cookies, function (v, k) {
+				/* angular.forEach(cookies, function (v, k) {
 					$cookieStore.remove(k);
-				});
+				}); */
 			}
 			
-			obj.auth = ($cookieStore.get('auth')) ? true : (sessionStorage.auth) ? obj.parse(sessionStorage.auth) : false;
+			obj.auth = ($cookies.auth) ? $cookieStore.get('auth') : false;
 			
 			obj.userDetails = (localStorage.userDetails) ? JSON.parse(localStorage.userDetails) : null;
 			
 			obj.setAuth = function (data) {
-				sessionStorage.auth = data;
-				return obj.auth =  JSON.parse(sessionStorage.auth);
+				//sessionStorage.auth = data;
+				//return obj.auth =  JSON.parse(sessionStorage.auth);
+				//$cookieStore.put('auth',data);
+				return obj.auth =  ($cookieStore.get('auth'));
 			};
 			obj.setUserDetails = function(data){
 				if(data == (undefined || "")){
@@ -349,7 +352,6 @@ define(['app'], function (app) {
 			}
 			obj.get = function (q, params) {
 				$rootScope.loading = true;
-				
 				return $http({
 					url: serviceBase + q,
 					method: "GET",
@@ -361,6 +363,7 @@ define(['app'], function (app) {
 				});
 			};
 			obj.post = function (q, object, params) {
+				if($cookies.auth==undefined) obj.logout();
 				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
@@ -373,6 +376,7 @@ define(['app'], function (app) {
 				});
 			};
 			obj.put = function (q, object, params) {
+				if($cookies.auth==undefined) obj.logout();
 				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
@@ -385,6 +389,7 @@ define(['app'], function (app) {
 				});
 			};
 			obj.delete = function (q, object, params) {
+				if($cookies.auth==undefined) obj.logout();
 				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,

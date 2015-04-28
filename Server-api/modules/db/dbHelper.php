@@ -132,7 +132,7 @@ class dbHelper {
 		return $this->limit;
 	}
 	function setGroupBy($groupByArray,$table=null){
-		if($table===null) $table = $this->table;
+		($table==null) ? $table = "" : $table = $table.".";
 		if(count($groupByArray) >= 1){
 			if($this->groupBy == null || $this->groupBy == ""){
 				$this->groupBy = " GROUP BY ";
@@ -140,7 +140,7 @@ class dbHelper {
 				$this->groupBy .= " ";
 			}
 			foreach($groupByArray as $key){
-				$this->groupBy .= $table.".".$key.",";
+				$this->groupBy .= $table.$key.",";
 			}
 			$this->groupBy = $this->groupBy;
 			return true;

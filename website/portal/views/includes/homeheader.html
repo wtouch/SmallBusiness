@@ -10,10 +10,17 @@
 				</button>
 				
 			</div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/app/#/login">Login</a></li>
-				<li><a href="/app/#/register">Register</a></li>
-			</ul>
+			{% if not username %}
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/app/#/login">Login</a></li>
+					<li><a href="/app/#/register">Register</a></li>
+				</ul>
+			{% else %}
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/app/#/dashboard">Hi {{username}}</a></li>
+					<li><a href="/app/#/logout">logout</a></li>
+				</ul>
+			{% endif %}
 		</div>
 	</nav>
 </header>

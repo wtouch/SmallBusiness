@@ -3,9 +3,27 @@
 // load required files
 require_once 'lib/Slim/Slim.php';
 require_once 'lib/PHPMailer/PHPMailerAutoload.php';
+require_once 'modules/db/dbHelper.php';
+require_once 'modules/db/session.php';
 
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
+
+$db = new dbHelper();
+$sessionObj = new session();
+
+if (!isset($_SESSION)) {
+	session_start();
+}
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60*30)) {
+    // last request was more than 30 minutes ago
+	session_regenerate_id(true);
+    ($sessionObj->destroySession());
+}else{
+	 // update last activity time stamp
+	($sessionObj->setCookies("auth", "true", 60*30));
+}
+$_SESSION['LAST_ACTIVITY'] = time();
 
 $app->response->headers->set('Content-Type', 'application/json');
 // this will get input
@@ -43,7 +61,10 @@ function login($getRequest){
 			include 'modules/user.php';
 	}
 	catch(Exception $e) {
-        echo "Error: '".$e->getMessage()."'";
+       $response["status"] = "error";
+        $response["message"] = "Error: '".$e->getMessage()."'";
+        $response["data"] = null;
+		echoResponse(200, $response);
     }
 };
 
@@ -66,7 +87,10 @@ function getRecord($getRequest, $id=null){
 		}
 	}
 	catch(Exception $e) {
-        echo "Error: '".$e->getMessage()."'";
+        $response["status"] = "error";
+        $response["message"] = "Error: '".$e->getMessage()."'";
+        $response["data"] = null;
+		echoResponse(200, $response);
     }
 };
 
@@ -94,7 +118,10 @@ function getRecords($getRequest, $pageNo=1, $records = 10){
 	}
 	catch(Exception $e) {
         //return $app->response()->redirect($baseUrl.'/notfound');
-		echo "Error: '".$e->getMessage()."'";
+		$response["status"] = "error";
+        $response["message"] = "Error: '".$e->getMessage()."'";
+        $response["data"] = null;
+		echoResponse(200, $response);
     }
 		
 };
@@ -107,15 +134,20 @@ function postRecord($getRequest, $postParams=null){
 	$baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex).'/index.php'; 
 	
 	try{
+		if(!isset($_SESSION['username']) && $postParams != "login"){
+			throw new Exception('You are not logged in!');
+		}
 		if($body===""){
-				throw new Exception('There is no input!');
+			throw new Exception('There is no input!');
 		}else{
 			include 'modules/'.$getRequest.'.php';
 		}
 	}
 	catch(Exception $e) {
-		echo "Error: '".$e->getMessage()."'";
-        //return $app->response()->redirect($baseUrl.'/notfound');
+		$response["status"] = "error";
+        $response["message"] = "Error: '".$e->getMessage()."'";
+        $response["data"] = null;
+		echoResponse(200, $response);
     }
 };
 
@@ -131,8 +163,10 @@ function uploadFiles($postParams = null){
 		}
 	}
 	catch(Exception $e) {
-		echo "Error: '".$e->getMessage()."'";
-        //return $app->response()->redirect($baseUrl.'/notfound');
+		$response["status"] = "error";
+        $response["message"] = "Error: '".$e->getMessage()."'";
+        $response["data"] = null;
+		echoResponse(200, $response);
     }
 }
 function sendMail($postParams = null){
@@ -143,8 +177,10 @@ function sendMail($postParams = null){
 			include 'modules/mail.php';
 	}
 	catch(Exception $e) {
-		echo "Error: '".$e->getMessage()."'";
-        //return $app->response()->redirect($baseUrl.'/notfound');
+		$response["status"] = "error";
+        $response["message"] = "Error: '".$e->getMessage()."'";
+        $response["data"] = null;
+		echoResponse(200, $response);
     }
 }
 function putRecord($getRequest, $id){
@@ -156,6 +192,9 @@ function putRecord($getRequest, $id){
 	
 	$id = (int)$id;
 	try{
+		if(!isset($_SESSION['username'])){
+			throw new Exception('You are not logged in!');
+		}
 		if($id === 0 || $getRequest===null){
 			if($id === 0){
 				throw new Exception('Please Use proper id for record.');
@@ -168,7 +207,10 @@ function putRecord($getRequest, $id){
 		}
 	}
 	catch(Exception $e) {
-        echo "Error: '".$e->getMessage()."'";
+        $response["status"] = "error";
+        $response["message"] = "Error: '".$e->getMessage()."'";
+        $response["data"] = null;
+		echoResponse(200, $response);
     }
 };
 
@@ -193,7 +235,10 @@ function deleteRecord($getRequest, $id){
 		}
 	}
 	catch(Exception $e) {
-        echo "Error: '".$e->getMessage()."'";
+       $response["status"] = "error";
+        $response["message"] = "Error: '".$e->getMessage()."'";
+        $response["data"] = null;
+		echoResponse(200, $response);
     }
 };
 function echoResponse($status_code, $response) {

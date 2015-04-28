@@ -8,11 +8,12 @@
 			$db = new dbHelper();
 			$sessionObj = new session();
 			
-			$input = json_decode($body);
+			$input = json_decode($body, true);
 			
-			$where['username'] = $input->username;
+			$where['username'] = $input['username'];
 				
-			$password = $input->password; // get password from json
+			$password = $input['password']; // get password from json
+			$sessionPeriod = (isset($input['remember'])) ? 60*60*24*30 : 60*30;
 			
 			$table = "users";
 			$t[0] = $db->setTable($table);
@@ -28,28 +29,14 @@
 			$selectInnerJoinCols['group_permission'] = "permission";
 			$db->setColumns($t[1], $selectInnerJoinCols);
 			
-			/* // inner join [table name][first table column name] = [second table column name]
-			$innerJoin['user_group']['group_id'] = "id";
-			
-			
-			// inner join select column [table name][join col name][column to select] = column alias
-			$selectInnerJoinCols['user_group']['group_id']['group_name'] = "group_name";
-			$selectInnerJoinCols['user_group']['group_id']['config'] = "group_config";
-			$selectInnerJoinCols['user_group']['group_id']['group_permission'] = "permission"; */
-			
-			// this is used to select data with LIMIT & where clause & inner/left join with join columns
-			
 			$data = $db->selectSingle();
 
-			
-			
-			//$data = $db->selectSingle("users", $where);
 			if($data['status'] == 'error' || $data['status'] == 'warning' || $data['data'] == "" ){
 				throw new Exception('You are not registered user!');
 			}
 			// password check with hash encode
 			if(passwordHash::check_password($data['data']['password'],$password)){
-				$sessionObj->setSession($data['data']);
+				$sessionObj->setSession($data['data'],$sessionPeriod);
 				if($data['data']['status'] == 0){
 					throw new Exception('Please activate your account to access.');
 				}
@@ -173,7 +160,6 @@
 					if($data['status'] != 'success'){
 						throw new Exception("Database Error: ".$data['message']);
 					}else{
-					
 						$password = $input->password->old;
 						// password check with hash encode
 						if(passwordHash::check_password($data['data']['password'],$password)){
