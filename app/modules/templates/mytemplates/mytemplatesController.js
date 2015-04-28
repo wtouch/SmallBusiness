@@ -575,7 +575,6 @@ define(['app'], function (app) {
 			};
 			$scope.reqtemp.date = $scope.currentDate;
 			$scope.postData = function(reqtemp) { 
-			$scope.reqtemp.user_id= $rootScope.userDetails.id;
 				 dataService.post("post/template",reqtemp)
 				.then(function(response) {  
 					if(response.status == "success"){

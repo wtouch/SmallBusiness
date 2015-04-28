@@ -108,6 +108,11 @@
 					<td>{{x.modified_date}}</td>					
 					<td>
 						<div>
+						<!--Apply Template-->
+							<a ng-click="openModel('modules/templates/applytemplate.html', x.id)" class="btn btn-success" ng-show="x.template_price=='free'">Apply</a>
+							
+							<button href="#" class="btn btn-warning" title="Buy Template" ng-show="x.template_price!='free'"> Buy </button>
+							
 							<button ng-if="permission.publish_template" type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
 							</button>
 							

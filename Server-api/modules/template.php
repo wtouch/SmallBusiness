@@ -66,7 +66,7 @@
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record
 		if(isset($_GET['postParams']) && $_GET['postParams'] == 'addtemplate'){
-			updateTemplate($body);
+			updateTemplate($body,$id);
 		}else{
 			$update = $db->update("template", $body, $where);
 			echo json_encode($update);
@@ -104,7 +104,7 @@
 			echo json_encode($response);
 		}
 	}
-	function updateTemplate($body){
+	function updateTemplate($body,$id){
 		try{
 			$upload = new uploadClass;
 			$db = new dbHelper();
@@ -112,14 +112,14 @@
 			$file = $input->template_zip->file_path;
 			$path_to_extract = $input->category."/".$input->template_name;
 			$upload->set_path("website/templates");
+			$where['id'] = $id;
 			
-			$insert = $db->update("template", $body);
-			if($insert['status'] == "success" && $insert['data'] != ""){
+			$insert = $db->update("template", $body, $where);
+			if($insert['status'] == "success"){
 				$extractZip = $upload->extract_zip($file, $path_to_extract);
 				if(!$extractZip){
 					throw new Exception("zip not extracted!");
 				}
-				$where['id'] = $insert['id'];
 				$updateData['template_params'] =  file_get_contents($upload->get_path().$path_to_extract."/templateParams.json");
 				$update = $db->update("template", $updateData, $where);
 			}else{

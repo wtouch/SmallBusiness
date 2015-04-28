@@ -46,7 +46,7 @@ class session {
 			// last request was more than 30 minutes ago
 			session_regenerate_id(true);
 			$this->destroySession();
-		}else{
+		}else if(isset($_SESSION['username'])){
 			 // update last activity time stamp
 			$this->setCookies("auth", "true", 60*30);
 		}

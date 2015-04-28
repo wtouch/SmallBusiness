@@ -298,7 +298,7 @@ define(['app'], function (app) {
 			obj.setAuth = function (data) {
 				//sessionStorage.auth = data;
 				//return obj.auth =  JSON.parse(sessionStorage.auth);
-				//$cookieStore.put('auth',data);
+				$cookieStore.put('auth',data);
 				return obj.auth =  ($cookieStore.get('auth'));
 			};
 			obj.setUserDetails = function(data){
