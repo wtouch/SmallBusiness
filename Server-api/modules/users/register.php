@@ -42,7 +42,7 @@
 				//$data = $db->selectSingle($table, $where);
 				$passEmpty = ($data['data']['password'] == ("" || null)) ? 'true' : 'false';
 				if($data['status'] == 'success' && $data['data']['email'] == $email){
-					$from['email'] = "admin@wtouch.in";
+					$from['email'] = "admin@apnasite.in";
 					$from['name'] = "Activate Account";
 					$recipients = array($email);
 					$subject = "Activate your account";
@@ -87,7 +87,7 @@
 				$insert['message'] = $insert['message']." and ".$activate['message'];
 			}else{
 				$insert['status'] = "warning";
-				$insert['message'] = $insert['message']." and ".$activate['message'];
+				$insert['message'] = "Contact system administrator with your user details. admin@apnasite.in";
 			}
 		}
 		echo json_encode($insert);

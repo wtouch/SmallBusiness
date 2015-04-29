@@ -96,7 +96,7 @@ define(['angular',
 	}]);
 	
 		
-	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams','$notification', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies,$routeParams,$notification) {
+	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams','$notification','$timeout', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies,$routeParams,$notification,$timeout) {
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
 			$rootScope.userDetails = dataService.userDetails;
 			
@@ -112,6 +112,7 @@ define(['angular',
 				dataService.logout();
 				$rootScope.userDetails = null;
 			}
+			
 			if(dataService.auth == false || $rootScope.userDetails == null){
 				var changePassUrl = '"/changepass/'+next.pathParams.resetPassKey+'"';
 				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout' || nextUrl == '/changepass/:resetPassKey' || nextUrl == '/activate/:activateKey/:email/:pass?') {
@@ -123,6 +124,7 @@ define(['angular',
 				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/changepass/:resetPassKey' || nextUrl == '/activate/:activateKey/:email/:pass?') {
 					$location.path("/dashboard");
 				}
+				
 			};
 			if($rootScope.userDetails != null){
 				if($rootScope.userDetails.group_id == 4){
@@ -182,9 +184,6 @@ define(['angular',
 				}
 			}
 		});
-		
-		
-		
 		
 		//(userDetails.config.chooseTemplate=='true')
 	}]);

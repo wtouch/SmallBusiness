@@ -40,7 +40,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label" for="description">Service Description* </label>
 							<div class="col-sm-9">
-								<textarea type="text" class="form-control" id="description" name="description" ng-model="addservice.description" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter Service Description" ui-tinymce required>
+								<textarea type="text" class="form-control" id="description" name="description" ng-model="addservice.description" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter Service Description" ui-tinymce ng-required="true">
 								</textarea>
 									<p ng-hide="addserviceForm.description.$error.maxlength">
 										{{ 1500 - addservice.description.length + " Chars left" }}

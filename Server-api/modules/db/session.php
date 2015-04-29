@@ -23,10 +23,11 @@ class session {
 		if (!isset($_SESSION)) {
 			session_start();
 		}
+		$this->setCookies("auth","true", $period);
 		foreach($sessionData as $sessionName => $sessionValue){
 			$_SESSION[$sessionName] = $sessionValue;
 		}
-		$this->setCookies("auth","true", $period);
+		
 		return $_SESSION;
 	}
 	public function setCookies($name, $value, $period){
@@ -42,6 +43,7 @@ class session {
 		if (!isset($_SESSION)) {
 			session_start();
 		}
+		
 		if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 60*30)) {
 			// last request was more than 30 minutes ago
 			session_regenerate_id(true);

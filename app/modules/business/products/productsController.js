@@ -76,8 +76,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			if(object == 'showServiceForm'){
 				addservices();
 			}
-			$scope.showProductForm = true;
-			$scope.showServiceForm = true;
 		}
 		$scope.editServiceForm = function(x){
 			$scope.showServiceForm = true;

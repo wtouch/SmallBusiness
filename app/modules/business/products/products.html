@@ -21,10 +21,10 @@
 						<div class="col-sm-6" ng-show="selectBusiness">
 							<div class="text-right">
 								<button ng-if="selectBusiness && productType=='product'" class="btn btn-default" ng-model="showProductForm" ng-click="showForm('showProductForm')"><span ng-if=
-								"showProductForm===true">Close Form</span><span ng-if="showProductForm===false">
+								"showProductForm">Close Form</span><span ng-if="!showProductForm">
 								Add Product</span></button>
 								
-								<button ng-if="selectBusiness && productType=='service'" class="btn btn-default" ng-model="showServiceForm" ng-click="showForm('showServiceForm')"><span ng-if="showServiceForm===true">Close Form </span><span ng-if="showServiceForm===false">Add Service</span></button>
+								<button ng-if="selectBusiness && productType=='service'" class="btn btn-default" ng-model="showServiceForm" ng-click="showForm('showServiceForm')"><span ng-if="showServiceForm">Close Form </span><span ng-if="!showServiceForm">Add Service</span></button>
 							</div>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 				
 				<ng-include ng-if="productType=='product' && showProductForm==true" src="'modules/business/products/addproducts.html'"></ng-include>
 				
-				<ng-include ng-show="selectBusiness && productType=='service'" src="'modules/business/products/servicelist.html'"></ng-include>
+				<ng-include ng-if="selectBusiness && productType=='service'" src="'modules/business/products/servicelist.html'"></ng-include>
 				
 				<ng-include ng-if="selectBusiness && productType=='product'"  src="'modules/business/products/productlist.html'"></ng-include>
 		</div>

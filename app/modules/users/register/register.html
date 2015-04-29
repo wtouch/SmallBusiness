@@ -96,13 +96,13 @@
 								<span ng-show="registerForm.state.$error.required" class="text-danger">State is required.</span>
 							</span>				
 						</div>						
-						
-						<div class="col-sm-offset-1 col-sm-4">
-							<input type="text" required name="City" id="City" ng-model="register.address.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">
+						<label for="state" class="col-sm-1 control-label">City *</label>
+						<div class="col-sm-4">
+							<input type="text" required name="city" id="city" ng-model="register.address.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">
 							
 							<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
-							<span class="help-block" ng-show="registerForm.City.$dirty && registerForm.City.$invalid || registerForm.City.$dirty && !register.City">
-								<span ng-show="registerForm.City.$error.required || registerForm.City.$dirty && !register.city" class="text-danger">City is required.</span>
+							<span class="help-block" ng-show="registerForm.city.$dirty && registerForm.city.$invalid">
+								<span ng-show="registerForm.city.$error.required" class="text-danger">City is required.</span>
 							</span>				
 						</div>
 					</div>
@@ -111,8 +111,8 @@
 						<label for="Country" class="col-sm-2 control-label">Country*</label>
 						<div class="col-sm-9">
 							<input type="text" required name="Country" id="Country" ng-model="register.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
-								<span class="help-block" ng-show="registerForm.Country.$dirty && registerForm.Country.$invalid || registerForm.Country.$dirty && !register.Country">
-									<span ng-show="registerForm.Country.$error.required || registerForm.Country.$dirty && !register.Country" class="text-danger">Country Name required.</span>
+								<span class="help-block" ng-show="registerForm.Country.$dirty && registerForm.Country.$invalid">
+									<span ng-show="registerForm.Country.$error.required" class="text-danger">Country Name required.</span>
 								</span>				
 						</div>
 					</div>	
@@ -132,11 +132,14 @@
 						<label  for="dob" class="col-sm-2 control-label">Birth Date*</label>
 						<div class="col-sm-9">
 							<div class="input-group">
-								<input type="text" placeholder="Date of Birth" id="dob" name="dob" class="form-control" ng-model="register.dob" datepicker-popup="{{format}}" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)" />
+								<input type="text" placeholder="YYYY-DD-MM" id="dob" name="dob" class="form-control" ng-model="register.dob" datepicker-popup="{{format}}" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)" />
 								<span class="input-group-btn">
 									<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 								</span>
 							</div>
+							<span class="help-block" ng-show="registerForm.dob.$dirty && registerForm.dob.$invalid">
+								<span class="text-danger" ng-show="registerForm.dob.$error.required || submitted">Date of birth required in YYYY-DD-MM format.</span>
+							</span>
 						</div>
 					</div>
 					

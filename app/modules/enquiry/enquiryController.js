@@ -1,9 +1,9 @@
 'use strict';
 
 define(['app'], function (app) { 
-    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','upload','$route']; 
+    var injectParams = ['$scope','$rootScope', '$injector', '$routeParams','$location','dataService','upload','$route','$notification']; 
    
-	var enquiryController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,upload,$route) {
+	var enquiryController = function ($scope,$rootScope, $injector, $routeParams,$location,dataService,upload,$route,$notification) {
 		$scope.permission = $rootScope.userDetails.permission.enquiry_module;
 		
 		//Code For Pagination
@@ -16,7 +16,7 @@ define(['app'], function (app) {
 		$scope.numPages = "";
 		$scope.mailList = [];
 		$scope.mailId = $routeParams.mailId;
-		$scope.alerts = [];
+		
 		$scope.tinymceConfig = {};
 		$scope.currentDate = dataService.currentDate;
 		$scope.user_id = { user_id : dataService.userDetails.id };
@@ -26,10 +26,7 @@ define(['app'], function (app) {
 		if(!$routeParams.mailId) {
 			$location.path('/dashboard/enquiry/mails');
 		}
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
+		
 		// code for refresh page
 		$scope.refreshpage=function(){
 			$route.reload();
@@ -62,7 +59,9 @@ define(['app'], function (app) {
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
 			}else{
-				$scope.alerts.push({type: response.status, msg: response.message});
+				
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Get Customer List", response.message);
 			}
 		});
 
@@ -71,9 +70,13 @@ define(['app'], function (app) {
 			if(status==1){
 				$scope.status = {status : 0};
 				dataService.put("put/enquiry/"+id, $scope.status)
-				.then(function(response) { 
-					$scope.mailList[index].status = 0
-					$scope.hideDeleted = 1;
+				.then(function(response) {
+					if(response.status == "success"){
+						$scope.mailList[index].status = 0
+						$scope.hideDeleted = 1;
+					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Delete Mail", response.message);
  				});
 			}
 		};
@@ -86,8 +89,8 @@ define(['app'], function (app) {
 				dataService.get("/getmultiple/enquiry/1/"+$scope.pageItems, $scope.searchObj)
 				.then(function(response) { 
 					if(response.status=="warning" || response.status=='error' ){
-						$scope.mailList = dataService.parse(response.data);
-						$scope.totalRecords = response.totalRecords;
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Search Enquiries", response.message);
 					}else{
 						$scope.mailList = dataService.parse(response.data);
 						$scope.totalRecords = response.totalRecords;
@@ -103,10 +106,10 @@ define(['app'], function (app) {
 			dataService.get("getmultiple/enquiry/"+$scope.mailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response) { 
 				if(response.status == 'success'){
 					$scope.mailList = dataService.parse(response.data);
-					
 					$scope.totalRecords = response.totalRecords;
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("New Enquiries", response.message);
 				}
 			});
 		}
@@ -120,7 +123,8 @@ define(['app'], function (app) {
 						$scope.mailList = dataService.parse(response.data);
 						$scope.totalRecords = response.totalRecords;
 					}else{
-						$scope.alerts.push({type: response.status, msg: response.message});
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Send Mail", response.message);
 					}
 			});
 		}
@@ -131,7 +135,8 @@ define(['app'], function (app) {
 			angular.extend($scope.statusParam, $scope.user_id);
 			dataService.get("getmultiple/enquiry/"+$scope.delmailListCurrentPage+"/"+$scope.pageItems, $scope.statusParam).then(function(response){
 				if(response.status=="warning" || response.status=='error' ){
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Deleted Enquiries", response.message);
 				}else{
 					$scope.mailList = dataService.parse(response.data);
 					$scope.totalRecords = response.totalRecords;
@@ -153,32 +158,40 @@ define(['app'], function (app) {
 			if($scope.mailSingleId != ""){
 				dataService.get("getsingle/enquiry/"+$scope.mailSingleId)
 				.then(function(response) {
-					$scope.singlemail = dataService.parse(response.data);
-					$scope.singlemail.date = $scope.singlemail.date;
-					$scope.totalRecords = response.totalRecords;
-					$scope.replyMsg = ($scope.singlemail.reply_message!="") ? $scope.singlemail.reply_message : {message:""};
-					$scope.replyMail = {
-						reply_message : {
-							subject : "RE: "+$scope.singlemail.subject,
-							message : $scope.replyMsg.message
-						},
-						reply_date : $scope.currentDate
-					};
-					if($scope.singlemail.reply_status == 1){
-						$scope.tinymceConfig = {
-							readonly: true,
+					if(response.status=="success"){
+						$scope.singlemail = dataService.parse(response.data);
+						$scope.singlemail.date = $scope.singlemail.date;
+						$scope.totalRecords = response.totalRecords;
+						$scope.replyMsg = ($scope.singlemail.reply_message!="") ? $scope.singlemail.reply_message : {message:""};
+						$scope.replyMail = {
+							reply_message : {
+								subject : "RE: "+$scope.singlemail.subject,
+								message : $scope.replyMsg.message
+							},
+							reply_date : $scope.currentDate
+						};
+						if($scope.singlemail.reply_status == 1){
+							$scope.tinymceConfig = {
+								readonly: true,
+							}
 						}
+						$scope.update = function(id,replyMail){
+							dataService.put("put/enquiry/"+id,replyMail)
+							.then(function(response) {
+								if(response.status == "success"){
+									$scope.singlemail.reply_status = 1;
+									setTimeout(function(){
+										$location.path("/dashboard/enquiry/mails");
+									},500);
+								}
+								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+								$notification[response.status]("Reply Mail", response.message);
+							});
+						};
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Enquiry View", response.message);
 					}
-					$scope.update = function(id,replyMail){
-						dataService.put("put/enquiry/"+id,replyMail)
-						.then(function(response) {
-							$scope.alerts.push({type: response.status, msg: response.message});
-							$scope.singlemail.reply_status = 1;
-							setTimeout(function(){
-								$location.path("/dashboard/enquiry/mails");
-							},500);
-						});
-					};
 				});
 			}	
 		}
@@ -198,7 +211,9 @@ define(['app'], function (app) {
 					if(data.status !== 'error'){
 						$scope.composemail.Attachment.push(JSON.stringify(data.details));
 					}else{
-						alert(data.message);
+						
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Attachment", response.message);
 					}
 				});
 			};
@@ -211,13 +226,13 @@ define(['app'], function (app) {
 				dataService.post("/post/enquiry",composemail)
 				.then(function(response) {  
 					if(response.status=="success"){
-						$scope.alerts.push({type: response.status, msg: response.message});
+						
 						setTimeout(function(){
 							$location.path("/dashboard/enquiry/mails");
 						},1000);
-					}else{
-						$scope.alerts.push({type: response.status, msg: response.message});
 					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Send Mail", response.message);
 				});
 			}
 		}

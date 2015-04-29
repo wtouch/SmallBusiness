@@ -1,7 +1,5 @@
 <div class="row">
 	<div class="col-sm-12">	
-		<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	{{alert.msg}}
-		</alert>
 		<h3 class="col-sm-offset-2 col-sm-9"> Add New User</h3>
 		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate="novalidate">
 			<div class="form-group">
@@ -60,14 +58,14 @@
 				<label  for="dob" class="col-sm-2 control-label">Birth Date *</label>
 				<div class="col-sm-9">
 					<p class="input-group">
-						<input type="text" id="dob" name="dob" class="form-control" datepicker-popup="{{format}}" ng-model="adduser.dob" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required close-text="Close" ng-click="open($event)" />
+						<input type="text" id="dob" name="dob" placeholder="YYYY-DD-MM" class="form-control" datepicker-popup="{{format}}" ng-model="adduser.dob" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required close-text="Close" ng-click="open($event)" />
 						
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
 					</p>
 					<span class="help-block" ng-show="adduserForm.dob.$dirty && adduserForm.dob.$invalid">
-							<span class="text-danger" ng-show="adduserForm.dob.$error.required">Date of birth is required.</span>
+							<span class="text-danger" ng-show="adduserForm.dob.$error.required">Date of birth required in YYYY-DD-MM format.</span>
 						</span>
 				</div>
 			</div>
@@ -111,25 +109,7 @@
 					</span>
 				</div>						
 			</div>			
-					
-			<!-- <div class="form-group">
-				<label for="state" class="col-sm-2 control-label">State *</label>
-				<div class="col-sm-4">
-					<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="adduser.state" placeholder="Enter state">
-					<span class="help-block" ng-show="adduserForm.state.$dirty && adduserForm.state.$invalid">
-						<span ng-show="adduserForm.state.$error.required" class="text-danger">State is required.</span>
-					</span>				
-				</div>	
-				<label for="city" class="col-sm-2 control-label">City *</label>	<div class="col-sm-3" >
-				<div class="col-sm-offset-1 col-sm-4">
-					<input type="text" required name="City" id="City" ng-model="adduser.address.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
-						<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
-					<span class="help-block" ng-show="adduserForm.City.$dirty && adduserForm.City.$invalid || adduserForm.City.$dirty && !adduser.City">
-						<span ng-show="adduserForm.City.$error.required || adduserForm.City.$dirty && !adduser.city" class="text-danger">City is required.</span>
-					</span>				
-				</div>
-			</div> 
-			 -->
+			
 			 <div class="form-group">
 					<label for="state" class="col-sm-2 control-label">State *</label>
 					<div class="col-sm-4">
@@ -138,11 +118,12 @@
 							<span ng-show="adduserForm.state.$error.required" class="text-danger">State is required.</span>
 						</span>				
 					</div>	
-					<label for="city" class="col-sm-2 control-label">City *</label>	<div class="col-sm-3" >
+					<label for="city" class="col-sm-1 control-label">City *</label>
+					<div class="col-sm-4" >
 						<input type="text" required name="City" id="City" ng-model="adduser.address.city"placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
 							<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
-						<span class="help-block" ng-show="adduserForm.City.$dirty && adduserForm.City.$invalid || adduserForm.City.$dirty && !adduser.City">
-							<span ng-show="adduserForm.City.$error.required || adduserForm.City.$dirty && !adduser.city" class="text-danger">City is required.</span>
+						<span class="help-block" ng-show="adduserForm.City.$dirty && adduserForm.City.$invalid || adduserForm.City.$dirty && !adduser.address.city">
+							<span ng-show="adduserForm.City.$error.required || adduserForm.City.$dirty && !adduser.address.city" class="text-danger">City is required.</span>
 						</span>				
 					</div>
 			</div> 
@@ -152,8 +133,8 @@
 				<label for="Country" class="col-sm-2 control-label">Country *</label>
 				<div class="col-sm-9">
 					<input type="text" required name="Country" id="Country" ng-model="adduser.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
-					<span class="help-block" ng-show="adduserForm.Country.$dirty && adduserForm.Country.$invalid || adduserForm.Country.$dirty && !adduser.Country">
-						<span ng-show="adduserForm.Country.$error.required || adduserForm.Country.$dirty && !adduser.Country" class="text-danger">Country is required.</span>
+					<span class="help-block" ng-show="adduserForm.Country.$dirty && adduserForm.Country.$invalid || adduserForm.Country.$dirty && !adduser.country">
+						<span ng-show="adduserForm.Country.$error.required || adduserForm.Country.$dirty && !adduser.country" class="text-danger">Country is required.</span>
 					</span>				
 				</div>
 			</div>	
@@ -199,7 +180,7 @@
 					
 					<button type="submit" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="update(adduser)" ng-if="editUserId">Update User</button>
 					
-					<button type="reset" class="btn btn-danger">Reset</button>
+					<a href="#/dashboard/users/userslist" class="btn btn-danger">Cancel</a>
 				</div>
 			</div>						
 		</form>			

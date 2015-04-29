@@ -222,8 +222,8 @@ define(['app'], function (app) {
 	  /* $HTTP Service for server request
 	  *************************************************************************/
 	  
-	  app.factory("dataService", ['$http', '$window','$rootScope', '$cookieStore', '$cookies', '$location',
-		function ($http, $window,$rootScope,$cookieStore,$cookies,$location) { // This service connects to our REST API
+	  app.factory("dataService", ['$http', '$window','$rootScope', '$cookieStore', '$cookies', '$location','$timeout','$notification',
+		function ($http, $window,$rootScope,$cookieStore,$cookies,$location,$timeout,$notification) { // This service connects to our REST API
 
 			var serviceBase = '../server-api/index.php/';
 			var today = new Date();
@@ -294,11 +294,23 @@ define(['app'], function (app) {
 			obj.auth = ($cookies.auth) ? $cookieStore.get('auth') : false;
 			
 			obj.userDetails = (localStorage.userDetails) ? JSON.parse(localStorage.userDetails) : null;
-			
+			$timeout(function () {
+				$rootScope.$watch(function() { return $cookies.auth; }, function(newValue) {
+					//console.log('Cookie string: ' + $cookies.auth);
+					if($cookies.auth == undefined && obj.userDetails != null){
+						obj.logout();
+						$rootScope.userDetails = null;
+						$notification.warning("Login", "Session Expired, Please login again!");
+						$timeout(function () {
+							$location.path("/login");
+						}, 700);
+					}
+				});
+			}, 1500);
 			obj.setAuth = function (data) {
 				//sessionStorage.auth = data;
 				//return obj.auth =  JSON.parse(sessionStorage.auth);
-				$cookieStore.put('auth',data);
+				//$cookieStore.put('auth',data);
 				return obj.auth =  ($cookieStore.get('auth'));
 			};
 			obj.setUserDetails = function(data){
@@ -362,7 +374,7 @@ define(['app'], function (app) {
 				});
 			};
 			obj.post = function (q, object, params) {
-				if($cookies.auth==undefined) obj.logout();
+				
 				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
@@ -375,7 +387,7 @@ define(['app'], function (app) {
 				});
 			};
 			obj.put = function (q, object, params) {
-				if($cookies.auth==undefined) obj.logout();
+				
 				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
@@ -388,7 +400,7 @@ define(['app'], function (app) {
 				});
 			};
 			obj.delete = function (q, object, params) {
-				if($cookies.auth==undefined) obj.logout();
+				
 				$rootScope.loading = true;
 				return $http({
 					url: serviceBase + q,
@@ -414,10 +426,10 @@ define(['app'], function (app) {
 			queue = [];
 
 		var settings = {
-		  info: { duration: 2000, enabled: true },
-		  warning: { duration: 2000, enabled: true },
-		  error: { duration: 2000, enabled: true },
-		  success: { duration: 2000, enabled: true },
+		  info: { duration: 2500, enabled: true },
+		  warning: { duration: 2500, enabled: true },
+		  error: { duration: 3000, enabled: true },
+		  success: { duration: 2500, enabled: true },
 		  progress: { duration: 2000, enabled: true },
 		  custom: { duration: 2000, enabled: true },
 		  details: true,
