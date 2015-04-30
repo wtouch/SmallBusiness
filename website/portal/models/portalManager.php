@@ -39,7 +39,7 @@ class portalManager{
 	}
 	
 	function setResponse($data,$city){
-		$response['title'] = "my business keywords";
+		
 		if(isset($data['data'])){
 			$response['data'] = $data['data'];
 		}else{
@@ -57,6 +57,9 @@ class portalManager{
 		$response['path'] = "http://".$this->config['host']."/website/portal/views/";
 		return $response;
 	}
+	
+	
+	
 	function getDataByKeyword($city, $keyword, $search = false){
 		try{
 			$where['status'] = 1;
@@ -180,6 +183,9 @@ class portalManager{
 			$response = $this->setResponse($data,$city);
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
+			$response['title'] = "Apna Site - Create Your Website in 4 Easy Steps! or Submit your Business on ApnaSite.in";
+			$response['keywords'] = "Website Creator, Website Designing, Website Developing, Business Search Portal, Google Business, Search Engine Optimization, Google Map, Business Promotion, Business Marketing, Online Marketing, Social Media Marketing";
+			$response['description'] = "Apna Site provides Dynamic Website Creating Tool for Free Business Posting, Business Search, Collect Enquiry from end user and also provides updated information about all B2B and B2C Services & Products.";
 		}catch(Exception $e){
             $response = $this->setResponse($data = array(),$city);
             $response["status"] = "error";
@@ -215,16 +221,25 @@ class portalManager{
 				throw new Exception($data['message']);
 			}
 			
+			if(is_array($data['data'])){
+				foreach($data['data'] as $key => $value){
+					$keyword[] = $value['type_name'];
+				}
+				$keywords = implode(",",$keyword);
+			}
+			
 			$response = $this->setResponse($data,$city);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
-			
+			$response['title'] = $data['data'][0]['category_name']." - Apna Site!";
+			$response['keywords'] = $keywords;
+			$response['description'] = "Apna Site provides updated information about all B2B and B2C Services & Products under category - ".$data['data'][0]['category_name'];
 		}catch(Exception $e){
 			$response = $this->setResponse($data = array(),$city);
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
         }
-		
+		//print_r($response);
 		return $response;
 	}
 	function getBusinessList ($city, $category, $type){
@@ -242,19 +257,38 @@ class portalManager{
 			$this->db->setWhere($where, $t0);
 			
 			$this->db->setLimit($limit);
-			$cols = array("city,category, type,id,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info, featured, verified");
+			$cols = array("id, city,category, type,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info, featured, verified");
 			$this->db->setColumns($t0, $cols);
-		
+			
+			$t1 = $this->db->setJoinString("LEFT JOIN", "business_category", array("id"=>$t0.".category"));
+			$t2 = $this->db->setJoinString("LEFT JOIN", "business_category", array("id"=>$t0.".type"));
+			$col["category_name"] = "category_name";
+			$this->db->setColumns($t1, $col);
+			
+			$colType["category_name"] = "type_name";
+			$this->db->setColumns($t2, $colType);
+			
 			$data = $this->db->select();
 			
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
 			
+			if(is_array($data['data'])){
+				foreach($data['data'] as $key => $value){
+					$keyword[] = implode(",",$value['keywords']);
+				}
+				$keywords = implode(",",array_unique($keyword));
+			}
+			
 			$response = $this->setResponse($data,$city);
 			$response["status"] = "success";
 			$response["currentPage"] = $currentPage;
 			$response["message"] = "Data Shows";
+			
+			$response['title'] = $data['data'][0]['type_name']." - ".$data['data'][0]['category_name']." - Apna Site!";
+			$response['keywords'] = $keywords;
+			$response['description'] = "Apna Site provides updated information of listed businesses under - ".$data['data'][0]['type_name']." - ".$data['data'][0]['category_name'];
 			
 		}catch(Exception $e){
             $response = $this->setResponse($data = array(),$city);
@@ -276,11 +310,19 @@ class portalManager{
 			$cols = array("*");
 			$this->db->setColumns($t0, $cols);
 			
-			$t1 = $this->db->setJoinString("left JOIN", "website", array("business_id"=>$t0.".id"));
+			$t1 = $this->db->setJoinString("LEFT JOIN", "website", array("business_id"=>$t0.".id"));
 			
-			$col["domain_name"] = "domain_name";
-			$col["config"] = "config";
-			$this->db->setColumns($t1, $col);			
+			$webcol["domain_name"] = "domain_name";
+			$webcol["config"] = "config";
+			$this->db->setColumns($t1, $webcol);
+			
+			$t2 = $this->db->setJoinString("LEFT JOIN", "business_category", array("id"=>$t0.".category"));
+			$t3 = $this->db->setJoinString("LEFT JOIN", "business_category", array("id"=>$t0.".type"));
+			$col["category_name"] = "category_name";
+			$this->db->setColumns($t2, $col);
+			
+			$colType["category_name"] = "type_name";
+			$this->db->setColumns($t3, $colType);
 			
 			$data = $this->db->selectSingle();
 			
@@ -312,11 +354,21 @@ class portalManager{
 			
 			$servicedata = $this->db->select();
 			
+			if(is_array($data['data'])){
+				/* foreach($data['data'] as $key => $value){
+					$keyword[] = implode(",",$value['keywords']);
+				} */
+				$keywords = implode(",",array_unique($data['data']['keywords']));
+			}
+			
 			$response = $this->setResponse($data,$city);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			$response['service'] = ($servicedata["data"]);	
 			$response['product'] = ($proddata["data"]);
+			$response['title'] = $data['data']['business_name']." | ".$data['data']['seo']['title']." | Apna Site!";
+			$response['keywords'] = $keywords;
+			$response['description'] = "Apna Site - ".$data['data']['seo']['title'];
 		}catch(Exception $e){
 			$response = $this->setResponse($data = array(),$city);
             $response["status"] = "error";

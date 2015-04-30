@@ -81,11 +81,13 @@
 				$data = $db->selectSingle();
 				
 				if($data['status'] == 'success' && $data['data']['email'] == $input->email){
-					$from['email'] = "admin@wtouch.in";
-					$from['name'] = "Reset Password";
+					$frmEmail = json_decode('{"email":"admin@apnasite.in", "name":"Reset Password"}',true);
+					$from['email'] = $frmEmail['email'];
+					$from['name'] = $frmEmail['name'];
+					
 					$recipients = array($input->email);
 					$subject = "Reset your Password";
-					$message = "Dear User, <a href='http://".$appPath."#/changepass/".$uniqueId."'>Click here to reset your password</a>";
+					$message = "Dear User, <a href='http://".$appPath."#/changepass/".$uniqueId."'>Reset your password</a>";
 					$sendMail = $db->sendMail($from, $recipients, $subject, $message);
 					if($sendMail['status'] == 'success'){
 						$dataCol['password'] = $uniqueId;

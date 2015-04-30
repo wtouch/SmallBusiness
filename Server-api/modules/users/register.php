@@ -42,11 +42,12 @@
 				//$data = $db->selectSingle($table, $where);
 				$passEmpty = ($data['data']['password'] == ("" || null)) ? 'true' : 'false';
 				if($data['status'] == 'success' && $data['data']['email'] == $email){
-					$from['email'] = "admin@apnasite.in";
-					$from['name'] = "Activate Account";
+					$frmEmail = json_decode('{"email":"admin@apnasite.in", "name":"Activate Account"}',true);
+					$from['email'] = $frmEmail['email'];
+					$from['name'] = $frmEmail['name'];
 					$recipients = array($email);
 					$subject = "Activate your account";
-					$message = "Dear User, <a href='http://".$appPath."#/activate/".$uniqueId."/".$email."/".$passEmpty."'>Click here to activate your account</a>";
+					$message = "Dear User, <a href='http://".$appPath."#/activate/".$uniqueId."/".$email."/".$passEmpty."'>Activate your account</a>";
 					$sendMail = $db->sendMail($from, $recipients, $subject, $message);
 					if($sendMail['status'] == 'success'){
 						$dataCol['status'] = 0;
