@@ -1,0 +1,141 @@
+
+ <!-- ng-controller removed from here. No need ng-controller on each page. Bcoz we add it through main angular module(mean from app.js-route provider) -->
+<div class="row">
+	<div class="col-sm-12">	
+		<div class="main-content">	
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>
+			<div class="row bottom-space">
+				<div class="col-sm-2"> 
+					<label class="control-label"> </label><br>
+					<a href="#/dashboard/property/addproperty" class="btn btn-primary" title="Add new property">Add New Property</a>				
+				</div>	
+		 		
+				 <div class="col-sm-2"> 
+					<label for="searchProp" class="control-label">Search </label>		
+					<div class="input-group">					
+						<input id="searchProp" type="text" class="form-control" placeholder="Search for..." ng-model="searchProp" ng-change="searchFilter('title', searchProp)">
+						<span class="input-group-btn">
+							<button class="btn btn-success" type="button">Go!</button>
+						</span>
+						
+					</div><!-- /input-group -->
+				</div>	
+				
+				<div class="col-sm-2">
+					<label for="sort" class="control-label">Sort by Order</label>		
+				<select id="sort" class="form-control" ng-model="sort" title="Select order">  
+						<option value="">Select Order</option>		<!-- added value & selected attr -->	
+						<option value="-id">Desending</option>
+						<option value="id">Asending</option>  
+					</select>
+				</div>
+				
+				<div class="col-sm-2">
+					<label for="status" class="control-label">Select Status</label>
+					<select id="status" class="form-control" ng-model="status" title="status"  ng-change="changeValue('status',status)" ng-init="status=1">
+						<option value="" selected>Select Status</option> <!-- add value attribute empty & selected for initial selected option -->
+						<option value="1">Active</option>
+						<option value="0">Deleted</option>   
+					</select>
+				</div>
+				
+				<div class="col-sm-2">
+					<label for="featured" class="control-label">Filter By Featured</label>
+					<select id="featured" class="form-control" ng-model="featured" ng-init="featured=1" ng-change="changeValue('featured',featured)">
+						<option value="" selected>Select Featured</option> <!-- added value & selected attr -->
+						<option value="1" >Featured</option>
+						<option value="0">Not Featured</option> 
+					</select>
+				</div>
+				
+				<div class="col-sm-2">
+					<label for="domain" class="control-label">Select Domain :</label>
+					<select id="domain" class="form-control" ng-model="domain">    
+						<option value="">Select Domain</option>						
+					</select>
+				</div>				
+			</div>		
+			
+			<h3> Property List</h3>
+			<div class="row" >
+				<div class="col-sm-12 ">
+					<div class="table-responsive">
+						<table class="table table-bordered ">
+							<thead>
+								<tr>
+									<th>Sr. No.</th>
+									<th>Image</th>
+									<th> Property Details</th>
+									<th>Featured</th>
+									<th>Status</th>
+									<th>Other Domains</th>
+									<th>Manage</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in properties | orderBy:sort">
+									<td>{{((currentPage - 1) * pageItems) + $index + 1}}</td>
+									
+									<td>
+										{{x.property_images}}									
+										 <img ng-src="{{x.property_images}}" ng-click="open(x.property_images)" class="img-thumbnail   img-responsive prop-img" title="Property image"> 
+									</td> <!-- ng-click added for modal, class added for responsive image -->
+									<td>
+										<table class="table table-bordered table-responsive">
+											<tr>
+												<td><b>Property Title</b></td>
+												<td>{{x.title}}</td>
+											</tr>
+											<tr>
+												<td><b>Property For</b></td>
+												<td>{{x.property_for}}</td>
+											</tr>
+											<tr>
+												<td><b>Property Type</b></td>
+												<td>{{x.type}}</td>		
+											</tr>
+											<tr>
+												<td><b>Address</b></td>
+												<td>{{x.property_location}}</td>
+											</tr>
+										</table>
+									</td>	
+									
+									<td>										
+										<a class="btn btn-success" ng-show="x.featured==0" title="Featured">Featured </a>
+										
+										<a class="btn btn-warning" ng-show="x.featured==1" title="Not featured"> Not Featured </a>
+									</td>			
+									<td>
+										<a class="btn btn-success"  ng-show="x.status==1" title="Active">Active</a>
+										
+										<a class="btn btn-warning"  ng-show="x.status==0" title="Delete">Delete</a>
+									</td>
+									<td>{{x.domain}}									
+									</td>				
+									<td>										
+										<a href="#/dashboard/property/addproperty/{{x.id}}" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="Edit User Information"> 
+											<span class="glyphicon glyphicon-pencil"></span>
+										</a>
+										
+										<a ng-click="open('modules/property/viewProperty.html', x.id)" class="btn btn-success responsive" title="View"> View</a> 
+									</td>	
+								</tr>				
+							</tbody>
+						</table>
+					</div>					
+					<div class="text-center">
+					
+						<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(currentPage,propertyParam)"></pagination>			
+						<pre>Page: {{currentPage}} / {{numPages}}</pre>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>			
+								
+										 
+
+							
+												

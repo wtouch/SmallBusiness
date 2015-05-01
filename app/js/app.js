@@ -87,6 +87,17 @@ define(['angular',
 				
 				.when('/dashboard/business/:businessView?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
 				
+				.when('/dashboard/property', route.resolve({controller: 'property', template: 'property',
+				 label: "Property"}, 'property/'))
+				 
+				.when('/dashboard/property/addproperty/:id?', route.resolve({controller: 'addproperty', template: 'addproperty',label: "Add Property"}, 'property/addproperty/'))
+				 
+				.when('/dashboard/project', route.resolve({controller: 'project',template: 'project',
+					label: "Project"}, 'project/'))
+					
+				 .when('/dashboard/project/addproject/:id?', route.resolve({controller: 'addproject',template: 'addproject',label: "Add Project"}, 'project/addproject/'))
+				
+				
 				.when('/dashboard/websites/websettings/:id', route.resolve({controller:'websettings', template: 'websettings',label:"Website Settings"}, 'websites/websettings/'))
 				
 				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
