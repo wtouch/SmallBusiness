@@ -159,22 +159,22 @@ define(['angular',
 						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
 						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
 						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
-					}else if($rootScope.userDetails.config.addProducts ==false){
-						$location.path("/dashboard/business/products");
+					}else if($rootScope.userDetails.config.addProducts != true){
+						$location.path("/dashboard/business/products/"+$rootScope.userDetails.config.addProducts);
 						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
 						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step active';
 						
 						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
 						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
 						
-					}else if($rootScope.userDetails.config.chooseTemplate ==false){
+					}else if($rootScope.userDetails.config.chooseTemplate == false){
 						$location.path("/dashboard/templates/listoftemplates");
 						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
 						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';
 						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step active';
 						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
 						
-					}else if($rootScope.userDetails.config.requestSite ==false){
+					}else if($rootScope.userDetails.config.requestSite == false){
 						$location.path("/dashboard/websites/requestnewsite");
 						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
 						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';

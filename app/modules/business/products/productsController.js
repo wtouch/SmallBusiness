@@ -57,13 +57,14 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			upload.generateThumbs(files);
 		};
 		
-		$scope.changeScope = function(value, object){
+		$scope.changeScope = function(value){
 			$cookieStore.put("businessId", value);
 			$scope.selectBusiness = $cookieStore.get("businessId");
 			$scope.addservice.business_id = value;
 			$scope.addproduct.business_id = value;
 			$scope.changeScopeObject($scope.productType);
 		};
+		
 		$scope.selectBusiness = $cookieStore.get("businessId");
 		$scope.addservice.business_id = $cookieStore.get("businessId");
 		$scope.addproduct.business_id = $cookieStore.get("businessId");
@@ -115,14 +116,16 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				$scope.addproduct.date = $scope.currentDate;
 					 dataService.post("post/product",addproduct)
 					.then(function(response) { 
-						
+						if(response.status == "success"){
+							$scope.showServiceForm = false;
+							$scope.showProductForm = false;
+							dataService.progressSteps('addProducts', true);
+						}
 						$notification[response.status]("Add Product", response.message);
 						$scope.reset();
-						dataService.progressSteps('addProducts', true);
 					});
 				}
 			}
-		
 		//function for add services
 		var addservices = function(){
 			$scope.addservice.user_id= $rootScope.userDetails.id;
@@ -134,6 +137,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					if(response.status == "success"){
 						$scope.showServiceForm = false;
 						$scope.showProductForm = false;
+						dataService.progressSteps('addProducts', true);
 					}
 					
 					$notification[response.status]("Add Service", response.message);
@@ -149,8 +153,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.products = dataService.parse(response.data);
-				}else{
-					
+				}else if($rootScope.userDetails.config.addProducts == true){
 					$notification[response.status]("Get Product List", response.message);
 					$scope.products = [];
 				};
@@ -189,10 +192,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.services = dataService.parse(response.data);
-				}
-				else
-				{
-					
+				}else if($rootScope.userDetails.config.addProducts == true){
 					$notification[response.status]("Get Services List", response.message);
 					$scope.services = {};
 				};
@@ -235,6 +235,11 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		}
 		if($cookies.businessId){
 			$scope.changeScopeObject($scope.productType);
+		}
+		if($scope.productView){
+			$scope.changeScope($scope.productView);
+			$scope.showForm('showProductForm');
+			$scope.showForm('showServiceForm');
 		}
 	 };
 	// Inject controller's dependencies
