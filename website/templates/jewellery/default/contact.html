@@ -40,24 +40,30 @@
 						</address>
 					</td>
 				</tr>
+				{%if data.contact_profile.telephone%}
 				<tr>
 					<td><b>Telephone</b></td>
-					<td>{{data.contact_profile.telephone}}</td>
+					<td>
+						{{data.contact_profile.telephone}}
+					</td>
 				</tr>
-					<tr>
-						<td><b>Mobile</b></td>
-						<td>{{data.contact_profile.mobile}}</td>
-					</tr>
-					<tr>
-						<td><b>E-mail Id</b></td>
-						<td>{{data.contact_profile.email}}<br>
-						{{data.contact_profile.alternate_email}}</td>
-					</tr>
-					<tr>
-						<td><b>Website</b></td>
-						<td><a href="#">{{data.contact_profile.contact_website}}</a>
-						</td>
-					</tr>
+				{% endif %}
+				<tr>
+					<td><b>Mobile</b></td>
+					<td>{{data.contact_profile.mobile}}</td>
+				</tr>
+				<tr>
+					<td><b>E-mail Id</b></td>
+					<td>{{data.contact_profile.email}}<br>
+					{{data.contact_profile.alternate_email}}</td>
+				</tr>
+				{%if data.contact_profile.contact_website%}
+				<tr>
+					<td><b>Website</b></td>
+					<td><a href="#">{{data.contact_profile.contact_website}}</a>
+					</td>
+				</tr>
+				{% endif %}
 			</table>
 		</div>
 		<div class="col-sm-6">

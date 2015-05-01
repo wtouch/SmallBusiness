@@ -7,7 +7,9 @@
 	</div>
 	<div class="col-sm-3">
 		<address class="pull-right">
-			Telephone:{{data.contact_profile.telephone}}<br>
+			{%if data.contact_profile.telephone%}
+				Telephone:{{data.contact_profile.telephone}}<br>
+			{% endif %}
 			Mobile: {{data.contact_profile.mobile}}<br> 
 			E-mail: {{data.contact_profile.email}}<br>
 					{{data.contact_profile.alternate_email}}
