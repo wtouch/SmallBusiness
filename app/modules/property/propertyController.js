@@ -1,8 +1,8 @@
 'use strict';
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$http','$log', 'modalService', '$rootScope','dataService'];
+    var injectParams = ['$scope', '$injector','$routeParams','$http','$log', 'modalService', '$rootScope','dataService','upload'];
     // This is controller for this view
-	var propertyController = function ($scope, $injector,$routeParams,$http, $log, modalService, $rootScope,dataService) {
+	var propertyController = function ($scope, $injector,$routeParams,$http, $log, modalService, $rootScope,dataService,upload) {
 		$rootScope.metaTitle = "Real Estate Properties";
 		
 		//Code For Pagination
@@ -16,7 +16,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		console.log($scope.currentDate);
 		
-		 //for alert {Pooja}		 
+		 //for alert 		 
 		if($scope.status=="warning"){     
 			 $scope.alerts.push({type: 'error', msg: "Error to load data"});
 			 $scope.closeAlert = function(index) {
@@ -24,7 +24,6 @@ define(['app'], function (app) {
 			 };
 		}	 
 		//function for close alert
-		
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
 		}; 		
@@ -60,7 +59,22 @@ define(['app'], function (app) {
 				}
 				//console.log($scope.properties);
 			});
-		};		
+		};
+
+		//upload method for multiple images
+		$scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
+			 upload.upload(files,path,userInfo,function(data){
+				var picArrKey = 0, x;
+				for(x in picArr) picArrKey++;
+				if(data.status === 'success'){
+					picArr.push(data.data);
+				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Upload Images", response.message);
+				}
+			}); 
+		};    
+		
 
 /***************************************************************************************/
 		/* $scope.changeStatus = {};
@@ -139,7 +153,7 @@ define(['app'], function (app) {
 			});	
 			
 	};		
-	/***************************************************************************************/
+/***************************************************************************************/
 	
 	// Inject controller's dependencies
 	propertyController.$inject = injectParams;

@@ -75,11 +75,11 @@
 							<tbody>
 								<tr ng-repeat="x in properties | orderBy:sort">
 									<td>{{((currentPage - 1) * pageItems) + $index + 1}}</td>
-									
-									<td>
+									 <td>
 										{{x.property_images}}									
-										 <img ng-src="{{x.property_images}}" ng-click="open(x.property_images)" class="img-thumbnail   img-responsive prop-img" title="Property image"> 
-									</td> <!-- ng-click added for modal, class added for responsive image -->
+										 <!-- <img ng-src="{{x.property_images}}" ng-click="open(x.property_images)" class="img-thumbnail   img-responsive prop-img" title="Property image">  -->
+										 <img class="img-responsive" ng-model="x.property_images" ng-src="{{appConfig.assetPath + x.property_images.file_relative_path}}"/>
+									</td> <!-- ng-click added for modal, class added for responsive image --> 
 									<td>
 										<table class="table table-bordered table-responsive">
 											<tr>
@@ -111,23 +111,19 @@
 										
 										<a class="btn btn-warning"  ng-show="x.status==0" title="Delete">Delete</a>
 									</td>
-									<td>{{x.domain}}									
-									</td>				
+									<td>{{x.domain}}</td>				
 									<td>										
 										<a href="#/dashboard/property/addproperty/{{x.id}}" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="Edit User Information"> 
 											<span class="glyphicon glyphicon-pencil"></span>
 										</a>
-										
-										<a ng-click="open('modules/property/viewProperty.html', x.id)" class="btn btn-success responsive" title="View"> View</a> 
+										<a ng-click="open('modules/property/viewProperty.html', x.id)" class="btn btn-success responsive" title="View">View</a> 
 									</td>	
 								</tr>				
 							</tbody>
 						</table>
 					</div>					
 					<div class="text-center">
-					
-						<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(currentPage,propertyParam)"></pagination>			
-						<pre>Page: {{currentPage}} / {{numPages}}</pre>
+						<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(currentPage,propertyParam)"></pagination>	<pre>Page: {{currentPage}} / {{numPages}}</pre>
 					</div>
 				</div>
 			</div>

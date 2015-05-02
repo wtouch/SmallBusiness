@@ -9,11 +9,12 @@ define(['app'], function (app) {
 		$scope.alerts = [];
 		$scope.userinfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
+		$scope.property = dataService.config.property;
 		$scope.property={};
 		
-		$scope.prop = {};
+		//$scope.property = {};
 		dataService.config('config', {config_name : "property"}).then(function(response){
-			$scope.prop = response.config_data;
+			$scope.property = response.config_data;
 		});
 		
 		
@@ -150,31 +151,23 @@ define(['app'], function (app) {
 						});	  
 					};	 
 			}			
-
-
-			
-						
-		
 	/*********************************************************************/	
-	//display websites-domain into checkbox
+	//display websites-domain into checkbox $scope.userinfo $routeParams.id
 	
-		dataService.get('getmultiple/website/1/200', $scope.userinfo)
-		.then(function(response){
+		dataService.get('getmultiple/website/1/200',$scope.userinfo)
+		.then(function(response) {
 			var websites = [];
 			for(var id in response.data){
 				var obj = {id: response.data[id].id, domain_name : response.data[id].domain_name};
 				websites.push(obj);
 			}
 			$scope.websites = websites;
-		}) 
-		 $scope.websites = [
+		})  
+		 /* $scope.websites = [
 			{id:1, domain_name:"google.com"},
 			{id:2, domain_name:"wtouch.in"},
-		];
-		
-		 $scope.$watchCollection('websites', function(newNames, oldNames) {
-			
-				
+		]; */
+		 $scope.$watchCollection('websites', function(newNames, oldNames) {	
 		}); 
 		$scope.checkAll = function(websites, checkValue) {			
 			if(checkValue){
