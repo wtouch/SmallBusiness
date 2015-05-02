@@ -40,14 +40,14 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label" for="description">Service Description* </label>
 							<div class="col-sm-9">
-								<textarea type="text" class="form-control" id="description" name="description" ng-model="addservice.description" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter Service Description" ui-tinymce ng-required="true">
+								<textarea type="text" class="form-control" id="description" name="description" ng-model="addservice.description" cols="30" rows="4" ng-maxlength="2500" placeholder="Enter Service Description" ui-tinymce ng-required="true">
 								</textarea>
 									<p ng-hide="addserviceForm.description.$error.maxlength">
-										{{ 1500 - addservice.description.length + " Chars left" }}
+										{{ 2500 - addservice.description.length + " Chars left" }}
 									</p>							
 									<span class="help-block" ng-show="addserviceForm.description.$dirty && addserviceForm.description.$invalid">
 										<span class="text-danger" ng-show="addserviceForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-										<span ng-show="addserviceForm.description.$error.required" class="text-danger"> Service Description is required.</span>
+										<span class="text-danger" ng-show="addserviceForm.description.$error.required">Service Description required.</span>
 									</span>
 							</div>
 							<input type="hidden" ng-model="addservice.type" ng-init="addservice.type='service'"/>
@@ -58,6 +58,7 @@
 								<button ng-if="!editServeForm" type="submit" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-click="postData(addservice)" title="submit">Submit</button>
 								
 								<button ng-if="editServeForm" type="button" class="btn btn-default btn-success" ng-disabled="addserviceForm.$invalid" ng-click="updateData(addservice)" title="submit">	Update</button>
+								<button type="reset" class="btn btn-danger">Cancel</button>
 							</div>
 						</div>
 					</form>

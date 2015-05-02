@@ -31,11 +31,14 @@
 				h1, h2, h3, h4, .read, .read:hover, .read:focus, .btn-link, .btn-link:hover, .btn-link:focus ,li>a ,blockquote a:hover,footer h4{
 					color:{{template.template_params.color}};
 				}
-				.jobs:nth-child(odd){
+				.jobs:nth-child(odd),.ftrlink2{
 					background-color: {{template.template_params.background_color_dark}};
 				}
 				.jobs:nth-child(even){
 					background-color: {{template.template_params.color}};
+				}
+				.ftrlink1{
+					background-color: {{template.template_params.background_color}};
 				}
 			</style>
 			{%endif%}
@@ -72,7 +75,9 @@
 					</div>
 					<div class="col-sm-4">
 						<h4>CONTACT US</h4>
-						Telephone:{{data.contact_profile.telephone}}<br>
+						{%if data.contact_profile.telephone%}
+							Telephone:{{data.contact_profile.telephone}}
+						{% endif %}<br>
 						Mobile: {{data.contact_profile.mobile}}<br>
 						E-mail: {{data.contact_profile.email}}<br>
 						{{data.contact_profile.alternate_email}}

@@ -1,0 +1,134 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="modal-body">
+	<div class="row">
+	    <div class="col-sm-12">
+			<h3>{{modalOptions.viewProperty.title}}</h3>
+			<div class="content">
+				<blockquote>
+					<p>{{modalOptions.viewProperty.property_description}}</p>
+				</blockquote>
+			</div>			
+			<div class="row">
+			    <div class="col-sm-9">
+					<table class="table table-hover table-responsive">
+					    
+						<tr>
+							 <td><b>Property For </b></td>
+							 <td><ul>							
+									<p>{{modalOptions.viewProperty.property_for.rent}} {{modalOptions.viewProperty.property_for.sale}} {{modalOptions.viewProperty.property_for.PG}}</p>
+								</ul>	
+							 </td>	
+						</tr>
+						<tr>
+							<td><b>Property Type</b> </td>
+							<td>		{{modalOptions.viewProperty.property_info.type}}					</td>					
+						</tr>
+						<tr>
+							<td><b>Location </b></td>
+							<td>								
+								<p><b>Country :</b> {{modalOptions.viewProperty.property_location.country}}
+								
+								<br><b>State :</b> {{modalOptions.viewProperty.property_location.state}}
+								
+								<br><b>City :</b>								
+								{{modalOptions.viewProperty.property_location.city}}
+								
+								<br><b>Address :</b> {{modalOptions.viewProperty.property_location.address}}</p>
+							</td>					
+						</tr>
+						<tr>
+							<td><b>Area</b> 
+							<td>
+								 <p><b>Built_up area :</b>
+								 {{modalOptions.viewProperty.property_info.buildup_area}}		 {{modalOptions.viewProperty.property_info.build_unit}}</p>
+								 
+								 <p><b>Plot/ Land Area</b>
+								 {{modalOptions.viewProperty.property_info.land_area}}
+								 {{modalOptions.viewProperty.property_info.land_unit}}
+								 </p>
+								 
+								 <p><b>Carpet Area</b>							 
+								 {{modalOptions.viewProperty.property_info.carpet_area}}
+								 {{modalOptions.viewProperty.property_info.carpet_unit}}
+								 </p>
+							</td>					
+						</tr>
+						<tr>
+							<td><b>Price </b>
+							<td>{{modalOptions.viewProperty.price}}</td>			
+						</tr>
+						<tr>
+							<td><b>Contact US! </b> </td> 
+							<td>{{modalOptions.viewProperty.contact_details.contact_person}}</td>
+						</tr>
+					</table>	
+				</div>
+				<div class="col-sm-3">
+					<img src="img1.jpg" width="100%">
+				</div>
+			</div>
+			<hr>	
+					<h3>Property Built Up Details</h3>
+					<table class="table table-bordered table-responsive">
+						<thead>
+							<th>Furnishing</th>
+							<th>Transaction</th>
+							<th>Bedrooms</th>
+							<th>Bathrooms</th>
+							<th>Reserved Parking</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{modalOptions.viewProperty.optional_property_details.furnished}}</td>
+								
+								<td>					{{modalOptions.viewProperty.optional_property_details.transType}}</td>
+								
+								<td>{{modalOptions.viewProperty.property_info.bedrooms}}</td>
+								
+								<td>{{modalOptions.viewProperty.property_info.bathrooms}}</td>
+								
+								<td>{{modalOptions.viewProperty.optional_property_details.parking}}</td>
+							</tr>
+						</tbody>
+					</table>
+				
+			<hr>
+				<table class="table table-hover table-responsive">
+					<tbody>
+						<h3>Amenities</h3>	
+						<tr>
+						</tr>
+					<hr>			
+						<h3>Property Address</h3>
+						<td></td>
+						<td>{{modalOptions.viewProperty.property_location.address}}</td>
+					</tbody>
+				</table>		
+			<hr>			
+					<h3>Property Seller Detail</h3>
+					<table class="table table-bordered table-responsive">
+						<tbody>
+							<tr>
+								<td>Contact Person</td>
+								<td>{{modalOptions.viewProperty.contact_details.contact_person}}</td>
+							</tr>
+							<tr>
+								<td>Mobile</td>
+								<td>{{modalOptions.viewProperty.contact_details.mobile}}</td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td>{{modalOptions.viewProperty.contact_details.email}}</td>
+							</tr>
+							<tr>
+								<td>Contact Address</td>
+								<td>{{modalOptions.viewProperty.contact_details.cont_address}}</td>
+							</tr>
+						</tbody>
+					</table>				
+		</div>
+	</div>
+</div>
+

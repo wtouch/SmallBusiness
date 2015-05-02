@@ -1,6 +1,41 @@
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">	
 		{{alert.msg}}
 	</alert>
+	<div class="row">			  
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="sort" class="control-label">Sort by Order</label>
+					<select id="sort" class="form-control" ng-model="sort"> 
+						<option value="">Select Order</option>	<!-- added value & selected attr -->	
+						<option value="-username">Desending</option>
+						<option value="username">Asending</option>  
+					</select>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="status" class="control-label">Select Status</label>
+					<select id="status" class="form-control" 
+					ng-change="changeStatus('status',showStatus)" ng-model="showStatus">
+						<option value="">Select Status</option>
+						<option value="1">Active</option>
+						<option value="0">Baned</option>
+					</select>
+			</div>
+		</div>
+	
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="filterbycustomerid" class="control-label">Select By Customer</label>
+					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+						<option value="">Select Customer</option>
+					</select>
+			</div>
+		</div>
+	</div>
+	
+	
+	
 	<div class="table-responsive">
 		<table class="table table-bordered">
 			<thead>
@@ -15,7 +50,7 @@
 				<th>Manage</th>
 			</thead>
 			<tbody>
-				<tr ng-repeat="users in userList">
+				<tr ng-repeat="users in userList |orderBy:sort">
 					<td>{{((usersListCurrentPage - 1) * pageItems ) + $index + 1}}</td>
 					<td>{{users.name}}</td>
 					<td style="max-width:150px">

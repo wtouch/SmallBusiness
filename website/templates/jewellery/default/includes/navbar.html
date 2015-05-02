@@ -1,8 +1,16 @@
 {% if data %}
-<div class="col-sm-4">
+<div class="col-sm-4 col-xs-12">
 <div class="fixed-nav headerRow">
 	<img class="imglogo img-responsive" src="{{data.business_logo.file_relative_path}}"/>
-<nav class="navbar navbar-default">	
+<nav class="navbar navbar-default">
+	<div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>	
 	<div class="collapse navbar-collapse">
 		<ul class="nav nav-pills nav-stacked">
 			{% for key, value in routes %}
