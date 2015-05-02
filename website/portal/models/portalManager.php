@@ -199,6 +199,7 @@ class portalManager{
 			$groupBy['type'] = 'type';
 			$where['category'] = $category;
 			$where['city'] = $city;
+			$where['status'] = 1;
 			
 			$t0 = $this->db->setTable("business");
 			$this->db->setGroupBy($groupBy);
