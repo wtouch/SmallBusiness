@@ -25,12 +25,22 @@ $app->get('/', function() use($app, $config, $twig, $portal) {
 });
 $app->get('/addbusiness', function() use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories($city=null);
-	$template = $twig->loadTemplate("addbusiness.html");
+	$template = $twig->loadTemplate("loginuser.html");
 	$template->display($response);
 });
 $app->post('/addbusiness', function() use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories($city=null);
-	$template = $twig->loadTemplate("addbusiness.html");
+	$template = $twig->loadTemplate("loginuser.html");
+	$template->display($response);
+});
+$app->get('/addbusiness/verified', function() use($app, $config, $twig, $portal) {
+	$response = $portal->getCategories($city=null);
+	$template = $twig->loadTemplate("verified.html");
+	$template->display($response);
+});
+$app->post('/addbusiness/verified', function() use($app, $config, $twig, $portal) {
+	$response = $portal->getCategories($city=null);
+	$template = $twig->loadTemplate("verified.html");
 	$template->display($response);
 });
 $app->get('/:city', function($city=null) use($app, $config, $twig, $portal) {

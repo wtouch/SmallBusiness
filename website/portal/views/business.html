@@ -36,18 +36,25 @@
 						<div class="media-body col-md-5 col-sm-12 col-xs-12 table-responsive">
 						
 							<table class="table table-bordered">
+							{% if x.contact_profile.contact_website %}
 								<tr><td>
 									<abbr title="Website"><span class="glyphicon glyphicon-globe"></span> </abbr></td>
 									<td><strong><a href="{{x.contact_profile.contact_website}}">{{x.contact_profile.contact_website}}</a></strong></td>
 								</tr>
+							{% endif %}
+							{% if x.contact_profile.mobile %}
 								<tr><td>
 									<abbr title="Phone"><span class="glyphicon glyphicon-earphone"></span></abbr></td>
 									<td>{{x.contact_profile.mobile}}</td>
 								</tr>
+							{% endif %}
+							{% if x.contact_profile.email %}
 								<tr><td>
 									<abbr title="Email ID"><span class="glyphicon glyphicon-envelope Email"></abbr></span> </td>
 									<td><a href="{{x.contact_profile.email}}" >{{x.contact_profile.email}}</a></td>
-								</tr><tr>
+								</tr>
+							{% endif %}
+								<tr>
 									<td><abbr title="Address"> <span class="glyphicon glyphicon-home"></span></abbr></td>
 									<td>
 										<address>

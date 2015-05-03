@@ -29,25 +29,12 @@
 				<div class="input-group search" ng-if="!index.html">
 					<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult('{{city}}', $item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, '{{city}}')" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
 					<span class="input-group-btn">
-						<button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-search"></span></button>
+						<a class="btn btn-primary" href="/{{data.city| replace({' ' : '-'})}}/{{data.category | replace({' ' : '-'})}}/{{data.type | replace({' ' : '-'})}}"><span class="glyphicon glyphicon-search"></span></a>
 					</span>
 				</div>
 				</div>
 			</form>
-			
-			{% if not username %}
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/app/#/login">Login</a></li>
-					<li><a href="/app/#/register">Register</a></li>
-					<li><a href="/addbusiness">Add Your Business</a></li>
-				</ul>
-			{% else %}
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/app/#/dashboard">Hi {{username}}</a></li>
-					<li><a href="/app/#/logout">logout</a></li>
-				</ul>
-			{% endif %}
-			
+			{% include 'includes/homeheader.html' ignore missing %}	
 		</div>
 	</nav>
 </header>

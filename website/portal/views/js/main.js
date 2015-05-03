@@ -6,6 +6,7 @@ require.config({
 		ngCookies: '../lib/angular/angular-cookies.min',
 		upload: '../lib/upload/angular-file-upload.min',
 		uploadShim: '../lib/upload/angular-file-upload-shim.min',
+		ngSanitize: '../lib/angular/angular-sanitize',
 		breadcrumbs: '../lib/angular/ng-breadcrumbs',
 		routeResolver: '../js/routeResolver',
 		directives: '../js/directives', 
@@ -32,6 +33,7 @@ require.config({
 		'uploadShim':  { "deps": ['angular'] },
 		'angularRoute': ['angular'],
 		'ngCookies': ['angular'],
+		'ngSanitize': ['angular'],
 		'angularMocks': {
 			deps:['angular'],
 			'exports':'angular.mock'

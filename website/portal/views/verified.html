@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+{% autoescape false %}
+{% include 'includes/header.html' ignore missing %}
+
+<main>
+	<form autocomplete="off" novalidate class="form-horizontal   boxborder" name="loginUser" ng-submit="VerificationForm.$valid" ng-controller="loginuserController">
+	<h4>Your Verification Code Send to your Mobile & Email ID please check Verified to add your business  </p> 
+		<div class="form-group">	
+			<label  for="code" class="col-sm-3 control-label">Enter Code Here</label>
+			<div class="col-sm-6">
+				<input type="code" class="form-control" id="code" ng-model="verify.contact_profile.code" name="code" placeholder="Enter Verification Code" required >
+				<span class="help-block" ng-show="VerificationForm.code.$dirty && VerificationForm.code.$invalid">
+				<span ng-show="VerificationForm.code.$error.required" class="text-danger">Code is required.</span>
+			
+				</span>
+			</div>
+		</div>	
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+			  <button type="submit" ng-disabled="VerificationForm.$invalid" class="btn btn-primary" name="btn1" ng-model="userlogin.btn1" ng-click="verifyCode(verify)">Sign in</button>
+			</div>
+		 </div>
+	</form>
+
+</main>
+{% endautoescape %}
+{% endblock %}	

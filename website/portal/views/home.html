@@ -19,7 +19,22 @@
      <span>(<small bind-html-unsafe="match.model.location"></small>-<small bind-html-unsafe="match.model.area"></small>)</span>
     </a>
 </script>
-{% include 'includes/homeheader.html' ignore missing %}	
+<header ng-controller="TypeaheadCtrl" >
+	<nav class="navbar navbar-default   navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header navbar-right">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				{% include 'includes/homeheader.html' ignore missing %}	
+			</div>
+		</div>
+	</nav>
+</header>
+
 <section>
 	<div class="home center-block" ng-controller="TypeaheadCtrl">
 		<a href="/"><img src="{{path}}img/logo.png" title="Apnasite Portal" class="center-block logo img-responsive" /></a>
