@@ -29,16 +29,20 @@
 			<div class="col-sm-6">
 				<input type="text" id="propertyPrice" class="form-control" name="propertyPrice" ng-model="property.price" ng-pattern="/^\d{0,9}[0-9]$/" required>
 				<p ng-show="addProperty.price.$error.pattern && (addProperty.price.$dirty || submitted)" class="help-block">Enter only no.</p>
-			</div>
-			<div class="col-sm-3">
-			
-				<select class="form-control" ng-model="property.price.currency" ng-options="item as item for item in propertyConfig.currency" required>
-					<option value="" selected>Select Currency</option>				
-				</select>
 				
 				<span class="text-danger" ng-show="addProperty.propertyPrice.$dirty && addProperty.propertyPrice.$invalid">
 					<span ng-show="addProperty.propertyPrice.$error.required">Property Price is required .</span>
-				</span>				 
+				</span>			
+			</div>
+			<div class="col-sm-3">
+				<select id="currency"  name="currency" class="form-control" ng-model="property.price.currency" ng-options="item as item for item in propertyConfig.currency" required>
+					<option value="" selected>Select Currency</option>				
+				</select>
+				
+				<span class="text-danger" ng-show="addProperty.currency.$dirty && addProperty.currency.$invalid">
+					<span ng-show="addProperty.currency.$error.required">Property selection is required .</span>
+				</span>	
+						 
 			</div>				
 		</div>
 	
@@ -47,11 +51,13 @@
 			<div class="col-sm-9">
 				<!-- Changed by Vilas -->
 				<!-- This is file input for select images -->
-				<input type="file" id="property_images" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="property_images" required>		
+				<input type="file" id="property_images" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="property_images" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}"required>
+
 				<!-- This will show thumbnails & progress of images -->
 				<file-preview url="property_images" ng-model="property.property_images"></file-preview>
 				<!-- This button will show if file/s selected -->
-				<button ng-show="property_images" ng-click="uploadMultiple(property_images,path,userInfo,property.property_images)" type="button">Upload</button>
+				<button ng-show="property_images" ng-click="uploadMultiple(property_images,path + property.user_id,userinfo,property.property_images)" type="button">Upload</button>
+				
 				<!-- This hidden input will store image path in array after successful uploading -->
 				<input type="hidden" ng-model="property.property_images">
 			<!-- Changed by pooja - ->

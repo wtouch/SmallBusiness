@@ -1,61 +1,88 @@
 
   <h3>Optional Property Details:</h3>
 		<div class="form-group">
-			<label for="prop_age" class="col-sm-2 control-label">Property Age</label>
+			<label for="property_age" class="col-sm-2 control-label">Property Age</label>
 			<div class="col-sm-9">
-				<select class="form-control"  id="prop_age" ng-model="property.optional_property_details.property_age"  ng-options="item for item in propertyConfig.propertyAge" required>
+				<select class="form-control"  id="property_age"  name="property_age" ng-model="property.optional_property_details.property_age"  ng-options="item for item in propertyConfig.propertyAge" required>
 					<option value="" selected>Select One</option>	
 				</select>
+				
+				<span class="text-danger" ng-show="addProperty.property_age.$dirty && addProperty.property_age.$invalid">
+					<span ng-show="addProperty.property_age.$error.required">Property Age selection is required .</span>
+				</span>		
 			</div>					
 		</div>				
 		<div class="form-group">
 			<label for="furnished" class="col-sm-2 control-label">Furnished</label>
 			<div class="col-sm-9">
-				<select class="form-control" id="furnished" ng-model="property.optional_property_details.furnished" ng-options="item for item in propertyConfig.furnished" required>
+				<select class="form-control" id="furnished" name="furnished" ng-model="property.optional_property_details.furnished" ng-options="item for item in propertyConfig.furnished" required>
 					<option value="" selected>Select One</option>				
 				</select>
+				
+				<span class="text-danger" ng-show="addProperty.furnished.$dirty && addProperty.furnished.$invalid">
+					<span ng-show="addProperty.furnished.$error.required">selection is required .</span>
+				</span>		
 			</div>
 		</div>
 		<div class="form-group">
-				<label for="prop_owner" class="col-sm-2 control-label">Ownership</label>
+				<label for="ownership" class="col-sm-2 control-label">Ownership</label>
 				<div class="col-sm-9">
-					<select class="form-control" id="prop_owner" ng-model="property.optional_property_details.ownership" ng-options="item for item in propertyConfig.ownership" required>
+					<select class="form-control" id="ownership" name="ownership" ng-model="property.optional_property_details.ownership" ng-options="item for item in propertyConfig.ownership" required>
 						<option value="" selected>Select One</option>					
 					</select>
+					
+					<span class="text-danger" ng-show="addProperty.ownership.$dirty && addProperty.ownership.$invalid">
+					<span ng-show="addProperty.ownership.$error.required">Ownership selection is required .</span>
+				</span>		
 				</div>
 		</div>
 		<div class="form-group">
-				<label for="floors" class="col-sm-2 control-label">Total Number of Floors</label>
+				<label for="property_floor" class="col-sm-2 control-label">Total Number of Floors</label>
 				<div class="col-sm-9">
-					<select class="form-control" id="floors" ng-model="property.optional_property_details.property_floor" ng-options="item for item in propertyConfig.floors" required>
+					<select class="form-control" id="property_floor" name="property_floor" ng-model="property.optional_property_details.property_floor" ng-options="item for item in propertyConfig.floors" required>
 						<option value="" selected>Select One</option>
-						
 					</select>
+					
+					<span class="text-danger" ng-show="addProperty.property_floor.$dirty && addProperty.property_floor.$invalid">
+					<span ng-show="addProperty.property_floor.$error.required">Property floor selection is required .</span>
+				</span>		
 				</div>
 		</div>
 		<div class="form-group">
 				<label for="facing" class="col-sm-2 control-label">Facing</label>
 				<div class="col-sm-9">
-					<select class="form-control" id="facing" ng-model="property.optional_property_details.facing" ng-options="item for item in propertyConfig.facing" required>
+					<select class="form-control" id="facing" name="facing" ng-model="property.optional_property_details.facing" ng-options="item for item in propertyConfig.facing" required>
 						<option value="">Select One</option>										
 					</select>
+					
+				<span class="text-danger" ng-show="addProperty.facing.$dirty && addProperty.facing.$invalid">
+					<span ng-show="addProperty.facing.$error.required">Property Age selection is required .</span>
+				</span>		
 				</div>
 		</div>
 		
 		<div class="form-group">
 				<label for="parking" class="col-sm-2 control-label">Parking</label>
 				<div class="col-sm-9">
-					<select class="form-control" id="parking" ng-model="property.optional_property_details.parking" ng-options="item for item in propertyConfig.parking" required>
+					<select class="form-control" id="parking" name="parking" ng-model="property.optional_property_details.parking" ng-options="item for item in propertyConfig.parking" required>
 						<option value="" selected>Select One</option>				
 					</select>
+					
+					<span class="text-danger" ng-show="addProperty.parking.$dirty && addProperty.parking.$invalid">
+					<span ng-show="addProperty.parking.$error.required">Property Age selection is required .</span>
+				</span>		
 				</div>
 		</div>
 		
 		<div class="form-group">
 			<label for=" transType" class="col-sm-2 control-label">Transaction Type</label>
 			<div class="col-sm-9">
-				<select class="form-control" id="transType" ng-model="property.optional_property_details.transType" ng-options="item for item in propertyConfig.transaction_type" required>							
+				<select class="form-control" id="transType" name="transType" ng-model="property.optional_property_details.transType" ng-options="item for item in propertyConfig.transaction_type" required>							
 					<option value="">Select Transaction Type</option>				
 				</select>
+				
+				<span class="text-danger" ng-show="addProperty.transType.$dirty && addProperty.transType.$invalid">
+					<span ng-show="addProperty.transType.$error.required">Transaction Type selection is required .</span>
+				</span>		
 			</div>
 		</div>						

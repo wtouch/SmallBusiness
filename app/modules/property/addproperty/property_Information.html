@@ -13,15 +13,15 @@
 	</div>
 
 	<div class="form-group">
-		<label for="projectType" class="col-sm-2  control-label">* Property Type </label>
+		<label for="type" class="col-sm-2  control-label">* Property Type </label>
 		<div class="col-sm-9">
-			<select  id="projectType"  name="projectType" ng-model="property.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types" >
+			<select  id="type"  name="type" ng-model="property.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types" >
 				<option value=""> Select Property Type</option>		
 			</select>
 			
-			<span class="text-danger" ng-show="addProperty.category.$dirty && addProperty.category.$invalid">
-				<span ng-show="addProperty.category.$error.required">Property selection is required .</span>
-			</span>	
+			<span class="text-danger" ng-show="addProperty.type.$dirty && addProperty.type.$invalid">
+					<span ng-show="addProperty.type.$error.required">Project Type is required .</span>
+				</span>	
 		</div>
 	</div>
 	

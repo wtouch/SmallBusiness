@@ -12,12 +12,40 @@ define(['app'], function (app) {
 		$scope.property = dataService.config.property;
 		$scope.property={};
 		
-		//$scope.property = {};
 		dataService.config('config', {config_name : "property"}).then(function(response){
-			$scope.prop = response.config_data;
+			$scope.propertyConfig = response.config_data;
 		});
 		
+		$scope.getData = function(location){
+			$scope.readOnly = true;
+			$scope.property.address.location = location.location;
+			$scope.property.address.city = location.city;
+			$scope.property.address.state = location.state;
+			$scope.property.address.country = location.country;
+			$scope.property.address.area = location.area;
+			$scope.property.address.pincode = location.pincode;
+		}
+		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+			var locationParams = {search : {}}
+			locationParams.search[searchColumn] = searchValue;
+			return dataService.config('locations', locationParams).then(function(response){
+				return response;
+			});
+		}
 		
+		//function for upload images
+		 $scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
+			 upload.upload(files,path,userInfo,function(data){
+				var picArrKey = 0, x;
+				for(x in picArr) picArrKey++;
+				if(data.status === 'success'){
+					picArr.push(data.data);
+				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Upload Images", response.message);
+				}
+			}); 
+		};    
 		//function for Users list response
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  

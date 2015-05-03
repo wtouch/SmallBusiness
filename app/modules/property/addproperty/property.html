@@ -50,7 +50,7 @@
 		<div class="form-group">
 			<label for="category" class="col-sm-2 control-label">Property Category </label>
 			<div class="col-sm-9">
-				<select  id="category"  name="category" ng-model="property.category" class="form-control" required ng-options="item.category_name as item.type for item in prop.category">
+				<select id="category" name="category" ng-model="property.category" class="form-control" required ng-options="item.category_name as item.category_name for item in propertyConfig.category">
 					<!--ng-options="item.system_name as item.name for item in temp.category"-->
 					<option value="">Select Category</option>			
 				</select>
@@ -62,18 +62,22 @@
 		</div>
 	
 		<div class="form-group">
-			<label for="projectName" class="col-sm-2 control-label">* Project Name </label>
+			<label for="project_name" class="col-sm-2 control-label">* Project Name </label>
 			<div class="col-sm-9">
-				<select class="form-control" id="projectName" name="projectName" ng-model="property.project_name" ng-options="item.title as item.title for item in addProjName" required>
+				<select class="form-control" id="project_name" name="project_name" ng-model="property.project_name" ng-options="item.title as item.title for item in addProjName" required>
 					<option value="">Select Project Name</option>
 				</select>
+				
+				<span class="text-danger" ng-show="addProperty.project_name.$dirty && addProperty.project_name.$invalid">
+					<span ng-show="addProperty.project_name.$error.required">Project Name is required .</span>
+				</span>	
 			</div>
 		</div>
 	
 		<div class="form-group">
-			<label for="prop_desc" class="col-sm-2 control-label">* Property Discription  </label>
+			<label for="property_description" class="col-sm-2 control-label">* Property Discription  </label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" name="prop_desc" ng-model="property.property_description" cols="30" rows="4" ng-maxlength="356" required></textarea>
+				<textarea type="text" class="form-control" name="property_description" id="property_description" ng-model="property.property_description" cols="30" rows="4" ng-maxlength="356" required></textarea>
 				
 				<p ng-hide="addProperty.property_description.$error.maxlength">{{ 356 - property.property_description.length + " Chars left" }}</p>
 				
@@ -82,7 +86,7 @@
 				</span>	
 				
 				<span class="text-danger" ng-show="addProperty.property_description.$dirty && addProperty.property_description.$invalid">
-					<span ng-show="addProperty.property_description.$error.required">Property Discription is required .</span>
+					<span ng-show="addProperty.property_description.$error.required">Property Description is required .</span>
 				</span>							
 			</div>				
 		</div><!-- property discription -->						

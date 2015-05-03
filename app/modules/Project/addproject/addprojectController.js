@@ -8,6 +8,7 @@ define(['app'], function (app) {
 		$scope.alerts = [];
 		$scope.userinfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
+		$scope.project={};
 		
 		$scope.project = {
 			featured : 0,
@@ -27,8 +28,25 @@ define(['app'], function (app) {
 		$scope.proj = {};
 		dataService.config('config', {config_name : "project"}).then(function(response){
 			$scope.proj = response.config_data;
+			console.log(response.config_data);
 		});
 		
+		$scope.getData = function(location){
+			$scope.readOnly = true;
+			$scope.project.address.location = location.location;
+			$scope.project.address.city = location.city;
+			$scope.project.address.state = location.state;
+			$scope.project.address.country = location.country;
+			$scope.project.address.area = location.area;
+			$scope.project.address.pincode = location.pincode;
+		}
+		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+			var locationParams = {search : {}}
+			locationParams.search[searchColumn] = searchValue;
+			return dataService.config('locations', locationParams).then(function(response){
+				return response;
+			});
+		}
 
 		//Upload Function for uploading files 
 		

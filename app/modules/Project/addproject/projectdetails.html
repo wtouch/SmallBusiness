@@ -29,7 +29,7 @@
 	<div class="form-group">
 		<label for="Category" class="col-sm-2 control-label">* &nbsp Category</label>
 		<div class="col-sm-9">
-			<select class="form-control" id="Category" name="Category" ng-model="project.category" required ng-change="getTypes(project.category)" ng-options="item.category_name as item.category_name for item in categories">		
+			<select class="form-control" id="Category" name="Category" ng-model="project.category" required ng-change="getTypes(project.category)" ng-options="item.category_name as item.category_name for item in proj.category">		
 				<option value="">Select Category</option>
 			</select>
 			<span class="help-block" ng-show="addProject.Category.$dirty && addProject.Category.$invalid">
@@ -38,15 +38,14 @@
 		</div>
 	</div>
 	
-	
 	<div class="form-group">
 		<label for="projectType" class="col-sm-2 control-label"> * &nbsp Project Type</label>
 		<div class="col-sm-9">
-			<select class="form-control" id="projectType" name="projectType" ng-model="project.type" required ng-options="item.types as item.types for item in projtypes">	{{item.types}}	
+			<select class="form-control" id="projectType" name="projectType" ng-model="project.type" required ng-options="item.types as item.types for item in proj.type">	{{item.types}}	
 				<option value="">Select Project Type</option>
 			</select>
 			<span class="help-block" ng-show="addProject.projectType.$dirty && addProject.projectType.$invalid">
-				<span class="text-danger" ng-show="addProject.projectType.$error.required">Project type is required.</span>
+				<span class="text-danger" ng-show="addProject.projectType.$error.required">Project Type is required.</span>
 			</span>				
 		</div>				
 	</div>	
