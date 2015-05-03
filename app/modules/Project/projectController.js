@@ -115,7 +115,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				$scope.domains = domains;
 		});
 		
-		// code for open model in preview button
+		/* // code for open model in preview button
 		$scope.open = function (url, projectId) {
 			dataService.get("getsingle/project/"+projectId)
 			.then(function(response) {
@@ -140,15 +140,33 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		};
 		$scope.ok = function () {
 			$modalOptions.close('ok');
-		};
+		}; */
 		
-		 // code for view project details
+		//modal for open project details.
+			$scope.open = function (url, projectId) {
+				dataService.get("getsingle/project/"+projectId)
+				.then(function(response) {
+					var modalDefaults = {
+						templateUrl: url,	
+						size : 'lg'
+					};
+					var modalOptions = {
+						project: dataService.parse(response.data)  
+					};
+					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					});
+				});
+			};
+			$scope.ok = function () {
+				$modalOptions.close('ok');
+			};
+		
+		//code for view project details
 		$scope.projectParam = {status : 1};			
 		angular.extend($scope.projectParam,$scope.user_id);
 		dataService.get("/getmultiple/project/"+$scope.projectListCurrentPage+"/"+$scope.pageItems, $scope.projectParam)
 		.then(function(response) {  
 			$scope.totalRecords = response.totalRecords;
-			console.log(response);
 			$scope.projects = response.data;
 		}); 
 	/******************************************************************************************/
