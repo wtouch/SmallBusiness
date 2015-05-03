@@ -13,7 +13,9 @@
 			<script src="{{ path }}js/angular.min.js"></script>
 			<script src="{{ path }}js/angular-route.min.js"></script>
 			<script src="{{ path }}js/script.js"></script>
-            <title>{% block title %}{{title}}{% endblock %}</title>
+            <title>{{data.seo.title}} | {{title}}</title>
+			<meta name="description" content="{{data.seo.description}}">
+			<meta name="keywords" content="{{data.keywords | join(',')}}">
 			{%if template.template_params%}
 			<style>
 				h1,h2{
