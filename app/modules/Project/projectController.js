@@ -11,6 +11,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
 		$scope.user_id = {user_id : $rootScope.userDetails.id}; 
+		//$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.alerts = [];
 		
 		// function to close alert
@@ -104,7 +105,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			});
 		};
 		// code to access domain names dynamically
-		$scope.userinfo={user_id:$rootScope.userDetails.id,status :1}
+		$scope.userinfo={user_id:$rootScope.userDetails.id,status :1};
 		dataService.get('getmultiple/website/1/200', $scope.userinfo).then(function(response){
 				var domains = [];
 				for(var id in response.data){
@@ -141,40 +142,60 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			$modalOptions.close('ok');
 		};
 		
-		// code for view project details
+		 // code for view project details
 		$scope.projectParam = {status : 1};			
 		angular.extend($scope.projectParam,$scope.user_id);
 		dataService.get("/getmultiple/project/"+$scope.projectListCurrentPage+"/"+$scope.pageItems, $scope.projectParam)
 		.then(function(response) {  
 			$scope.totalRecords = response.totalRecords;
+			console.log(response);
 			$scope.projects = response.data;
-		});
+		}); 
+	/******************************************************************************************/
 		
-	/***********************************************************************************/	
+		/* //view multiple records
+			$scope.projectParam = {status : 1};			
+			angular.extend($scope.projectParam,$scope.userInfo);
+			dataService.get("getmultiple/project/1/"+$scope.pageItems, $scope.projectParam)
+			.then(function(response) { //function for property list response  
+				//console.log(response.data);				
+					if(response.status == 'success'){
+						$scope.totalRecords = response.totalRecords;
+						$scope.projects = response.data; 					
+						
+					}else{
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}
+			});	
+			
+	}; */
+	/*****************************************************************************************/
+	/*****************************************************************************************/	
 			//update single record
 			
 			if($routeParams.id){//Update user			
 			dataService.get("getsingle/project/"+$routeParams.id)
-			.then(function(response) {
-					$scope.projects = response.data;	
-					console.log(projects);					
-				});				
-			$scope.update = function(projects){				
-				console.log(projects);	
-				
-				/*  dataService.put("put/project/"+$routeParams.id ,projects)
-				.then(function(response) { 	//function for response of request project
-					if(response.status == 'success'){
-						$scope.submitted = true;
-						$scope.alerts.push({type: response.status,msg: response.message});						
-					}else{
-						
-						$scope.alerts.push({type: response.status,msg: response.message});
-					}	
-				});	 */ 
-			};	
+				.then(function(response) {
+						$scope.projects = response.data;	
+						console.log(projects);					
+					});				
+				$scope.update = function(projects){				
+					console.log(projects);	
+					
+					/*  dataService.put("put/project/"+$routeParams.id ,projects)
+					.then(function(response) { 	//function for response of request project
+						if(response.status == 'success'){
+							$scope.submitted = true;
+							$scope.alerts.push({type: response.status,msg: response.message});						
+						}else{
+							
+							$scope.alerts.push({type: response.status,msg: response.message});
+						}	
+					});	 */ 
+				};	
 	/***********************************************************************************/	
-	 };		 
+	 };	
+ };		 
 	// Inject controller's dependencies
 	projectController.$inject = injectParams;
 	// Register/apply controller dynamically

@@ -1,19 +1,19 @@
-<div class="row">
+<div class="row">	
 	<div class="col-sm-12">
-		<div class="main-content">
-			<ng-include src="'modules/component/toolbar.html'"></ng-include>		
+		<div class="main-content">		
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
 			<div class="row bottom-space">
 				<div class="col-sm-2"> 
 					<label class="control-label"> </label><br>
 					<a href="#/dashboard/project/addproject" class="btn btn-primary" title="Add new project">Add New Project</a>				
 				</div>	
-				 <div class="col-sm-2"> 
+				<div class="col-sm-2"> 
 					<label class="control-label" for="search">Search </label>		
 					<div class="input-group">
 						 <input type="text" class="form-control" id="search" ng-model="searchProper" ng-change="searchFilter('title', searchProper)" placeholder="search"/>
 					</div>
 				</div>			 				  
-				 <div class="col-sm-2">
+				<div class="col-sm-2">
 					<label for="sort" class="control-label">Sort by Order</label>
 					<select id="sort" class="form-control" ng-model="title"> 
 						<option value="">Select Order</option>	
@@ -24,7 +24,8 @@
 				<div class="col-sm-2">
 					<label for="status" class="control-label">Filter By Status</label>
 					<select id="status" class="form-control" 
-					ng-change="changeStatus('status',showStatus)" ng-model="showStatus" ng-init="showStatus=1">
+					ng-change="changeStatus('status',showStatus)" ng-model="showStatus">
+					<option value="">Select Status</option>	
 						<option value="1">Active</option>
 						<option value="0">Deleted</option>
 					</select>
@@ -43,7 +44,7 @@
 					  <option value="">Select Websites</option> 
 					</select>
 				</div>
-			</div>
+			</div> 
 			<h3> Project Details</h3>
 			<div class="row">
 				<div class="col-sm-12">

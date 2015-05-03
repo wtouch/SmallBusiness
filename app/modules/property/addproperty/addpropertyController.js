@@ -14,7 +14,7 @@ define(['app'], function (app) {
 		
 		//$scope.property = {};
 		dataService.config('config', {config_name : "property"}).then(function(response){
-			$scope.property = response.config_data;
+			$scope.prop = response.config_data;
 		});
 		
 		
