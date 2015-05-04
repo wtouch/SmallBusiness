@@ -11,22 +11,10 @@
 <main>
 <h4> Add Your Business Here.</h4>
 	<div class="row">
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 	<form name="addbusinessForm" role="form" class="form-horizontal" ng-submit="addbusinessForm.$valid" novalidate="novalidate" ng-controller="businessController">
 	<accordion close-others="oneAtATime">
 		<accordion-group heading="Basic Information " is-open="status.isFirstOpen" >
-			<div class="form-group" ng-if="userDetails.group_name != 'customer'" ng-model="addbusiness.user_id" ng-submit="addbusinessForm.$valid">
-							<label for="customer" class="col-sm-3 control-label">Customer *</label>
-							<div class="col-sm-8">
-									<select class="form-control" name="customer" id="customer"  ng-model="addbusiness.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " >
-										<option value="">Select Customer</option>
-									</select>
-								<span class="help-block" ng-show="addbusinessForm.customer.$dirty && addbusinessForm.customer.$invalid">
-									<span ng-show="addbusinessForm.customer.$error.required" class="text-danger">Customer is required.</span>
-								</span>	
-							</div>
-							
-			</div>
-						
 			<!-- This block for current user id -->
 			<div class="form-group">
 				<label  for="business_name" class="col-sm-3 control-label">Organization/Firm Name *</label>

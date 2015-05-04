@@ -3,11 +3,17 @@
 require $config['root_path'].'/server-api/lib/Slim/Slim.php';
 require $config['root_path'].'/server-api/lib/Twig/Autoloader.php';
 require $config['root_path'].'/server-api/modules/db/dbHelper.php';
+require $config['root_path'].'/server-api/modules/db/passwordHash.php';
+require $config['root_path'].'/server-api/modules/db/session.php';
 require_once $config['root_path'].'/server-api/lib/PHPMailer/PHPMailerAutoload.php';
 require 'models/portalManager.php';
 
 Slim\Slim::registerAutoloader();
 Twig_Autoloader::register();
+
+$sessionObj = new session();
+$sessionObj->checkActivity();
+
 $app = new Slim\Slim();
 $portal = new portalManager($config);
 $loader = new Twig_Loader_Filesystem("website/portal/views");
@@ -24,25 +30,35 @@ $app->get('/', function() use($app, $config, $twig, $portal) {
 	$template->display($response);
 });
 $app->get('/addbusiness', function() use($app, $config, $twig, $portal) {
+	
 	$response = $portal->getCategories($city=null);
 	$template = $twig->loadTemplate("loginuser.html");
 	$template->display($response);
 });
-$app->post('/addbusiness', function() use($app, $config, $twig, $portal) {
-	$response = $portal->getCategories($city=null);
-	$template = $twig->loadTemplate("loginuser.html");
-	$template->display($response);
+
+// login to add business
+$app->post('/businesslogin', function() use($app, $config, $twig, $portal, $body) {
+	$response = $portal->sendVerification($body);
+	
 });
-$app->get('/addbusiness/verified', function() use($app, $config, $twig, $portal) {
+
+$app->post('/addbusiness', function() use($app, $config, $twig, $portal, $body) {
+	
+	$response = $portal->addBusiness($body);
+});
+
+$app->get('/verified', function() use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories($city=null);
 	$template = $twig->loadTemplate("verified.html");
 	$template->display($response);
 });
-$app->post('/addbusiness/verified', function() use($app, $config, $twig, $portal) {
+
+$app->post('/verified', function() use($app, $config, $twig, $portal) {
 	$response = $portal->getCategories($city=null);
 	$template = $twig->loadTemplate("verified.html");
 	$template->display($response);
 });
+
 $app->get('/:city', function($city=null) use($app, $config, $twig, $portal) {
 	$city = $portal->decodeUrl($city);
 	$response = $portal->getCategories($city);
@@ -53,6 +69,7 @@ $app->get('/:city', function($city=null) use($app, $config, $twig, $portal) {
 	}
 	$template->display($response);
 });
+
 $app->post('/enquiry', function() use($app, $config, $twig, $portal, $body) {
 	$response = $portal->sendEnquiry($body);
 });

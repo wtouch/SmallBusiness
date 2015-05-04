@@ -31,7 +31,7 @@
 					</span> <a href="{{data.contact_profile.email}}" >{{data.contact_profile.email}}</a>
 					{% endif %}{% if data.contact_profile.mobile %} 
 					<span class="glyphicon glyphicon-earphone"></span>{{data.contact_profile.mobile}}{% endif %}
-					{% if data.data.domain_name %} <span class="glyphicon glyphicon-globe"></span>
+					{% if data.domain_name %} <span class="glyphicon glyphicon-globe"></span>
 					<a href="{{data.domain_name}}">www.{{data.domain_name}}</a>{% endif %}
 					</p>
 					
@@ -239,6 +239,9 @@
 											<input type="hidden" class="form-control" id="date" ng-model="enquiry.date" name="date">
 											
 											<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc='vilas@wtouch.in'">
+											
+											<input type="hidden" class="form-control" id="to_email.to" name="to_email.to" ng-model="enquiry.to_email.to" ng-init="enquiry.to_email.to='vilas@wtouch.in'">
+									
 									
 											<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" ng-init="enquiry.subject = '{{data.business_name}}'">
 											

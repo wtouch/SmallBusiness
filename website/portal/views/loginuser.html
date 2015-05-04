@@ -11,9 +11,9 @@
 <main>
 	<form autocomplete="off" novalidate class="form-horizontal   boxborder" name="loginUser" ng-submit="loginUser.$valid" ng-controller="loginuserController"><p> To add your business please enter your detail here </p> 
 		<div class="form-group">	
-			<label  for="email" class="col-sm-3 control-label">Email ID : *</label>
+			<label  for="email" class="col-sm-3 control-label"> * Email ID :</label>
 			<div class="col-sm-6">
-				<input type="Email" class="form-control" id="email" ng-model="userlogin.contact_profile.email" name="email" placeholder="Enter Email" required >
+				<input type="Email" class="form-control" id="email" ng-model="userlogin.email" name="email" placeholder="Enter Email" required >
 				<span class="help-block" ng-show="loginUser.email.$dirty && loginUser.email.$invalid">
 				<span ng-show="loginUser.email.$error.required" class="text-danger">Email is required.</span>
 				<span ng-show="loginUser.email.$error.email" class="text-danger">Invalid Email address.</span>
@@ -21,12 +21,13 @@
 			</div>
 		</div>	
 		<div class="form-group">
-			<label for="phone" class="col-sm-3 control-label">Mobile Number : *</label>
+			<label for="phone" class="col-sm-3 control-label">* Mobile Number : </label>
 			<div class="col-sm-6">
 				<input type="text" id="phone" class="form-control" name="phone" ng-model="userlogin.phone" placeholder="Your Contact No" ng-pattern="/(7|8|9)\d{9}$/" maxlength="10" required>
 				<span class="help-block" ng-show="loginUser.phone.$dirty && loginUser.phone.$invalid">
 					<span class="text-danger" ng-show="loginUser.phone.$error.pattern && (loginUser.phone.$dirty || submitted)">Enter a Valid Contact Number.</span>
 				</span>
+				<input type="hidden" ng-model="userlogin.to_email" ng-init="userlogin.to_email = 'sunita@wtouch.in'">
 				
 			</div>						
 		</div>

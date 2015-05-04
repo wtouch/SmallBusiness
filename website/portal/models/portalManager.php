@@ -6,9 +6,11 @@ class portalManager{
 	private $domain;
 	private $db;
 	private $config;
+	private $passHash;
 	function __construct($config){
 		$this->db = new dbHelper;
 		$this->config = $config;
+		$this->passHash = new passwordHash;
 	}
 	function encodeUrl($url){
 		return $url = str_replace(" ","-",$url);
@@ -154,6 +156,36 @@ class portalManager{
 			$response = $replymail;
 		}
 		
+		echo json_encode($response);
+	}
+
+	function sendVerification($body){
+			$input = json_decode($body);
+			$smsUniqueId = rand(99,9999);
+			$emailUniqueId = $this->passHash->getUniqueId();
+			$mail['email'] = $input->email;
+			$subject = "Verify your Account"; 
+			
+			?ev=$this->passHash->hash($emailUniqueId)
+			$this->passHash->check_password($_GET['ev'], session['ev']);
+			
+			$message = "<h3>Dear User your verification code is".$uniqueId." Plz Use this to login to add your business</h3>";
+			$recipients = array($input->to_email) ;
+			$sendmail = $this->db->sendMail($mail, $recipients, $subject, $message,$replyTo=null, $attachments = null, $ccMail = null, $bccMail = null, $messageText = null);
+			print_r($sendmail);
+			if($sendmail){
+			$response = $sendmail;
+			$response["status"] = "success";
+			$response["message"] = "Data List displays successfully";
+			}
+			 return $response;
+		}
+	
+	// to add business function
+	function addBusiness($body){
+		$insert = $this->db->insert("business", $body);
+		$insert['message'] = $insert['message'];
+		$response= $insert;
 		echo json_encode($response);
 	}
 	

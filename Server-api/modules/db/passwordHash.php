@@ -26,6 +26,10 @@ class passwordHash {
         $new_hash = crypt($password, $full_salt);
         return ($hash == $new_hash);
     }
+	public function getUniqueId(){
+		$uniqueId = md5(uniqid(rand(), true));
+		return $uniqueId;
+	}
 
 }
 

@@ -12,11 +12,10 @@
 </script>
 
 <header ng-controller="TypeaheadCtrl" >
-	<nav class="navbar navbar-default  navbar-fixed-top">
+	<nav class="navbar navbar-default">
 		<div class="container">
-		
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#portalMenu">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -24,17 +23,19 @@
 				</button>
 				<a class="navbar-brand" href="/"><img src="{{path}}img/logo.png" title="Apnasite Portal" class="img center-block " /></a>
 			</div>
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-				<div class="input-group search" ng-if="!index.html">
-					<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult('{{city}}', $item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, '{{city}}')" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
-					<span class="input-group-btn">
-						<a class="btn btn-primary" href="/{{data.city| replace({' ' : '-'})}}/{{data.category | replace({' ' : '-'})}}/{{data.type | replace({' ' : '-'})}}"><span class="glyphicon glyphicon-search"></span></a>
-					</span>
-				</div>
-				</div>
-			</form>
-			{% include 'includes/homeheader.html' ignore missing %}	
+			<div class="collapse navbar-collapse" id="portalMenu">
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+					<div class="input-group search" ng-if="!index.html">
+						<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult('{{city}}', $item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, '{{city}}')" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
+						<span class="input-group-btn">
+							<a class="btn btn-primary" href="/{{data.city| replace({' ' : '-'})}}/{{data.category | replace({' ' : '-'})}}/{{data.type | replace({' ' : '-'})}}"><span class="glyphicon glyphicon-search"></span></a>
+						</span>
+					</div>
+					</div>
+				</form>
+				{% include 'includes/homeheader.html' ignore missing %}	
+			</div>
 		</div>
 	</nav>
 </header>
