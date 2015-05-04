@@ -166,10 +166,10 @@ class portalManager{
 			$mail['email'] = $input->email;
 			$subject = "Verify your Account"; 
 			
-			?ev=$this->passHash->hash($emailUniqueId)
-			$this->passHash->check_password($_GET['ev'], session['ev']);
+			/* ?ev=$this->passHash->hash($emailUniqueId)
+			$this->passHash->check_password($_GET['ev'], session['ev']); */
 			
-			$message = "<h3>Dear User your verification code is".$uniqueId." Plz Use this to login to add your business</h3>";
+			$message = "<h3>Dear User your verification code is".$smsUniqueId ." Plz Use this to login to add your business</h3>";
 			$recipients = array($input->to_email) ;
 			$sendmail = $this->db->sendMail($mail, $recipients, $subject, $message,$replyTo=null, $attachments = null, $ccMail = null, $bccMail = null, $messageText = null);
 			print_r($sendmail);
