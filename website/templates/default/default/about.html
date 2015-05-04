@@ -1,12 +1,10 @@
-
 {% extends "index.html" %}
-{% block title %}{{data.business_name}}{% endblock %}
 
 {% block content %}
 {% autoescape false %}
+<div class="row aboutus">
 <span ng-bind="id"></span>
-<div ng-controller="aboutController" class="row">
-
+<div ng-controller="aboutController">
 	<div class="col-sm-2 sidebar" id="navbar-example">
 		<ul class="nav nav-pills nav-stacked">
 			<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
@@ -70,7 +68,9 @@
 				{% endfor %}
 			</div>
 		{% endif %}
-	</div>	
+	</div>
+</div>	
+</div>
 {% endautoescape %}
 {% endblock %}
 <!-- {%if data.business_logo%}

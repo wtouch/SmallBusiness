@@ -3,15 +3,15 @@
 {% block content %}
 {% autoescape false %}
 {% if data.testimonials %}
-<div class="row text">
+	<div class="row mytesti">
 	<h2 class="text-center">{{title}}</h2>
 	<hr>
 	{% for key, value in data.testimonials if break == 0 %}
-	<div class="col-sm-6">
+	<div class="col-sm-12">
 		<blockquote>
 			<div class="row">
 				<div class="col-sm-1">
-					<img src="{{path}}img/quote_sign.png"/>
+					<img width="30px" src="{{path}}img/quote_sign.png"/>
 				</div>
 				<div class="col-sm-11">
 					<p>{{ value.description }}</p>

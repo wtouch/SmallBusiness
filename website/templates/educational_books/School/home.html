@@ -3,23 +3,21 @@
 {% block content %}
 {% autoescape false %}
 	<div class="row">
-		<div class="col-sm-12">
-			{% include 'includes/carousal.html' ignore missing %}
+		{% include 'includes/carousal.html' ignore missing %}
+		<div class="eventimg">
+			{% include 'includes/featured_products.html' ignore missing %}		
 		</div>
-	</div>
-	<div class="row eventimg">
-		{% include 'includes/featured_products.html' ignore missing %}		
 	</div>
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="homeabout text-center">
+			<div class="text-center homeabout">
 				<h2>Welcome to {{ data.business_name }}</h2>
 				<p class="text-center">{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}</p>
 				<br>
 				<a href="about">Read More..</a>
 			</div>
 		</div>
-	</div> 
-	{% include 'includes/featured_services.html' ignore missing %}
+		{% include 'includes/featured_services.html' ignore missing %}
+	</div>
 {% endautoescape %}
 {% endblock %}

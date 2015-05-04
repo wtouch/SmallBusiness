@@ -10,7 +10,7 @@
 
 {% block content %}
 {% autoescape false %}
-<div class="row">
+<div class="row prod">
 	<h2 class="text-center">{{title}}</h2>
 	{% for key, x in products %}
 		<div class="col-sm-6 col-md-4">
@@ -45,6 +45,8 @@
 					<p>
 					{{x.description|length > 50 ?x.description|slice(start, 150)~ '...' : x.description}}
 					</p>
+				</div>
+				<div class="read">
 					<a href="product/{{x.id}}" class="btn btn-info">Read More..</a>
 				</div>
 			</div>

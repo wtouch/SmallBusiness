@@ -4,7 +4,7 @@
 	{% autoescape false %}
 		{% if data.job_careers %}
 		<div class="row text">
-			<h2 class="text-center">{{title}}</h2>
+			<h2 class="text-center">{{title | replace({'_': " "})}}</h2>
 			<hr>
 			{% for key, value in data.job_careers if break == 0 %}
 			<div class="col-sm-4 jobs">

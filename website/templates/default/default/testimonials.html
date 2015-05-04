@@ -6,26 +6,25 @@
 {% block content %}
 {% autoescape false %}
 {% if data.testimonials %}
-<div class="row">
+<div class="row mytesti">
+	<h2 class="text-center">{{title}}</h2>
+	<hr>
+	{% for key, value in data.testimonials if break == 0 %}
 	<div class="col-sm-12">
-		<h2>{{title}}</h2>
-		{% for key, value in data.testimonials if break == 0 %}
 		<blockquote>
-			<div class="media row">
-				<div class="media-left col-sm-3">
-					<a href="#">
-						<img class="img-rounded img-responsive" src="{{value.image.file_relative_path}}">
-					</a>
+			<div class="row">
+				<div class="col-sm-1">
+					<img width="30px" src="{{path}}img/quote_sign.png"/>
 				</div>
-				<div class="media-body col-sm-9">
-					<h3 class="media-heading">{{key}}</h3>
+				<div class="col-sm-11">
 					<p>{{ value.description }}</p>
-					<footer><cite title="key">{{key}}</cite></footer>
+					<h4><a href="#">{{key}}</a>
+					<img class="img-circle img-responsive col-sm-3" src="{{value.image.file_relative_path}}"></h4>
 				</div>
 			</div>
 		</blockquote>
-		{% endfor %}
 	</div>
+	{% endfor %}
 </div>
 {% endif %}
 {% endautoescape %}
