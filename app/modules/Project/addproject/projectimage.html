@@ -6,10 +6,10 @@
 </div>
 
 <div class="form-group">
-	<label  for="ImageTitle" class="col-sm-2 control-label">Title *</label>
+	<label  for="ImageTitle" class="col-sm-2 control-label">* Title</label>
 	<div class="col-sm-9">		
-		<textarea type="text"  id="ImageTitle" class="form-control" name="ImageTitle" ng-model="addimage.title"    cols="20" rows="4" ng-maxlength="356"  ></textarea>
-		<p ng-hide="addProject.ImageTitle.$error.maxlength">{{ 356 - addimage.title.length + " Chars left" }}</p>
+		<input type="text"  id="ImageTitle" class="form-control" name="ImageTitle" ng-model="addimage.title"    cols="20" rows="4" ng-maxlength="60" />
+		<p ng-hide="addProject.ImageTitle.$error.maxlength">{{ 60 - addimage.title.length + " Chars left" }}</p>
 			<!-- <span class="text-danger" ng-show="addProject.ImageTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
 			<span class="text-danger" ng-show="addProject.ImageTitle.$dirty && addProject.ImageTitle.$invalid">
@@ -23,9 +23,9 @@
 </div>
 
 <div class="form-group">
-	<label for="project_images" class="col-sm-2 control-label">* &nbsp Project Image</label>
+	<label for="project_images" class="col-sm-2 control-label">* Project Image</label>
 	<div class="col-sm-9">
-		<input type="file" id="project_images" name="project_images" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="project_images">	
+		<input type="file" id="project_images" name="project_images" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="project_images">	
 		<!-- This will show thumbnails & progress of images -->
 			<file-preview url="project_images"></file-preview>
 			<!-- This button will show if file/s selected -->
@@ -36,7 +36,7 @@
 </div>	
 
 <div class="form-group"> 
-	<label for="projImageDescription" class="col-sm-2 control-label">  * Description</label> 
+	<label for="projImageDescription" class="col-sm-2 control-label">* Description</label> 
 	<div class="col-sm-9">
 		<textarea class="form-control" id="projImageDescription"  name="projImageDescription" ng-model="addimage.description.description" cols="20" rows="4" ng-maxlength="356" required ui-tinymce></textarea>
 		<p ng-hide="addProject.projImageDescription.$error.maxlength">{{ 356 - addimage.description.description.length + " Chars left" }}</p>

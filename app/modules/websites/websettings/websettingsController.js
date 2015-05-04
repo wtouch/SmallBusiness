@@ -20,6 +20,7 @@ define(['app'], function (app) {
 					$scope.businessList = business.data;
 					console.log($scope.businessList);
 				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification.error("Get Business", "You didn't added any business! Please add business first.");
 				}
 			});
@@ -31,6 +32,7 @@ define(['app'], function (app) {
 				if(template.status == 'success'){
 					$scope.templateList = template.data;
 				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification.error("Get Template", "You didn't have any Template! Please apply free template or buy new template first.");
 				}
 			});
@@ -45,6 +47,7 @@ define(['app'], function (app) {
 					$scope.getLocation();
 				}
 			}else{
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Website Settings", response.message);
 			};
 		});
@@ -53,6 +56,7 @@ define(['app'], function (app) {
 		$scope.editWebsitedetails = function(config){
 			dataService.put("put/website/"+$routeParams.id, config)
 			.then(function(response) {
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Website Settings", response.message);
 			}) 
 		}

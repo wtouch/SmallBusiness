@@ -1,8 +1,8 @@
 'use strict';
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$http','$log', 'modalService', '$rootScope','dataService','upload'];
+    var injectParams = ['$scope', '$injector','$routeParams','$http','$log', 'modalService', '$rootScope','dataService','upload','$notification'];
     // This is controller for this view
-	var propertyController = function ($scope, $injector,$routeParams,$http, $log, modalService, $rootScope,dataService,upload) {
+	var propertyController = function ($scope, $injector,$routeParams,$http, $log, modalService, $rootScope,dataService,upload,$notification) {
 		$rootScope.metaTitle = "Real Estate Properties";
 		
 		//Code For Pagination
@@ -41,7 +41,7 @@ define(['app'], function (app) {
 					if(response.status == 'success'){
 						$scope.hideDeleted = 1;
 					}
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Delete Property", response.message);
 				});
 			};			
@@ -61,7 +61,7 @@ define(['app'], function (app) {
 				$scope.featuredData = {featured : featured};
 				dataService.put("put/property/"+id, $scope.featuredData)
 				.then(function(response) {
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Feature Property", response.message);
 				});
 			};
@@ -71,7 +71,7 @@ define(['app'], function (app) {
 				$scope.veryfiedData = {verified : verified};
 				dataService.put("put/property/"+id, $scope.veryfiedData)
 				.then(function(response) { 
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Verify Property", response.message);
 				});
 			} ;	
@@ -153,7 +153,8 @@ define(['app'], function (app) {
 				}else{
 					$scope.projects = {};
 					$scope.totalRecords = {};
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Users", response.message);
 				}
 			});
 		};
@@ -173,7 +174,8 @@ define(['app'], function (app) {
 				}else{
 					$scope.properties = {};
 					$scope.totalRecords = {};
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Users", response.message);
 				}				
 			});
 		};
@@ -213,9 +215,11 @@ define(['app'], function (app) {
 					if(response.status == 'success'){
 						$scope.totalRecords = response.totalRecords;
 						$scope.properties = response.data; 					
-						
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Get Property", response.message);
 					}else{
-						$scope.alerts.push({type: response.status, msg: response.message});
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Get Property", response.message);
 					}
 			});	
 			

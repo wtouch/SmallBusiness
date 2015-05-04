@@ -288,6 +288,7 @@ define(['app'], function (app) {
 					$scope.website=response.data;
 					$scope.totalRecords = response.totalRecords;	
 				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification.error("Get Website List", response.message);
 				};
 			});
@@ -301,6 +302,7 @@ define(['app'], function (app) {
 				dataService.put("put/website/"+id, $scope.deletedData)
 				.then(function(response) { 
 					if(response.status == 'success'){
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Delete Website", response.message);
 					}
 				});
@@ -310,6 +312,7 @@ define(['app'], function (app) {
 				$scope.expiredData = {expired : expired};
 				dataService.put("put/website/"+id, $scope.expiredData)
 				.then(function(response) { 
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Website Expiry Status", response.message);
 				});
 			};
@@ -327,6 +330,7 @@ define(['app'], function (app) {
 					$scope.totalRecords = response.totalRecords;	
 				}
 				else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification.error("Requested Website List", response.message);
 				};
 			});
@@ -342,6 +346,7 @@ define(['app'], function (app) {
 				dataService.put("put/website/"+id, $scope.deletedData)
 				.then(function(response) { 
 					if(response.status == 'success'){
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Website Status", response.message);
 					}
 				});
@@ -351,6 +356,7 @@ define(['app'], function (app) {
 				$scope.expiredData = {expired : expired};
 				dataService.put("put/website/"+id, $scope.expiredData)
 				.then(function(response) { 
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Website Expiry Status", response.message);
 				});
 			};

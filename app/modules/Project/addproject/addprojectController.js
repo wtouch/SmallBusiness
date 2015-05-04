@@ -1,9 +1,9 @@
 'use strict';
 define(['app'], function (app) {
 	
-	var injectParams = ['$scope','$rootScope','$injector', '$routeParams','upload','dataService'];
+	var injectParams = ['$scope','$rootScope','$injector', '$routeParams','upload','dataService','$notification'];
   // This is controller for this view
-	var addprojectController = function ($scope,$rootScope, $injector,$routeParams,upload,dataService) {
+	var addprojectController = function ($scope,$rootScope, $injector,$routeParams,upload,dataService,$notification) {
 		 $rootScope.metaTitle = "Real Estate Add Project";
 		$scope.alerts = [];
 		$scope.userinfo = {user_id : $rootScope.userDetails.id};
@@ -38,12 +38,12 @@ define(['app'], function (app) {
 		};
 		$scope.getData = function(location){
 			$scope.readOnly = true;
-			$scope.project.address.location = location.location;
-			$scope.project.address.city = location.city;
-			$scope.project.address.state = location.state;
-			$scope.project.address.country = location.country;
-			$scope.project.address.area = location.area;
-			$scope.project.address.pincode = location.pincode;
+			$scope.project.location = location.location;
+			$scope.project.city = location.city;
+			$scope.project.state = location.state;
+			$scope.project.country = location.country;
+			$scope.project.area = location.area;
+			$scope.project.pincode = location.pincode;
 		}
 		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
 			var locationParams = {search : {}}
@@ -155,7 +155,8 @@ define(['app'], function (app) {
 					$scope.alerts.push({type: response.status, msg: response.message});
 					$scope.formScope.addprojectForm.$setPristine();
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Get Users", response.message);
 				}
 				
 			});

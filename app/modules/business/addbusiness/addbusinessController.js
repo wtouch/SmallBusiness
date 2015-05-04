@@ -114,6 +114,7 @@ define(['app'], function (app) {
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
 			}else{
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification.error("Get Customers", response.message);
 			}
 		});
@@ -130,6 +131,7 @@ define(['app'], function (app) {
 						$scope.addbusiness.contact_profile.contact_photo = data.data;
 					}
 				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification.error("Upload Image", data.message);
 				}
 			});
@@ -148,8 +150,10 @@ define(['app'], function (app) {
 					dataService.progressSteps('addbusinessDetails', response.data);
 				}
 				if(response.status == undefined){
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification.error("Add Business", response.message);
 				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Add Business", response.message);
 				}
 				
@@ -167,8 +171,10 @@ define(['app'], function (app) {
 					$scope.getKeywords($scope.addbusiness.type);
 				}else{
 					if(response.status == undefined){
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification.error("Edit Business", response.message);
 					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Edit Business", response.message);
 					}
 				}
@@ -180,8 +186,10 @@ define(['app'], function (app) {
 						$location.path("/dashboard/business/businesslist");
 					}
 					if(response.status == undefined){
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification.error("Edit Business", response.message);
 					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Edit Business", response.message);
 					}
 					

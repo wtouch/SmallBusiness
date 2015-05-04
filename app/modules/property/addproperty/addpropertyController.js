@@ -1,8 +1,8 @@
 'use strict';
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$http','$rootScope','upload', '$timeout', 'dataService'];
+    var injectParams = ['$scope', '$injector','$routeParams','$http','$rootScope','upload', '$timeout', 'dataService','$notification'];
     // This is controller for this view
-	var addpropertyController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService) {
+	var addpropertyController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification) {
 		$rootScope.metaTitle = "Add Real Estate Property";
 		
 		// all $scope object goes here
@@ -71,7 +71,8 @@ define(['app'], function (app) {
 						picArr[picArrKey] = data.details;
 						
 					}else{
-						$scope.alerts.push({type: data.status, msg: data.message});
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Upload Images", response.message);
 					}
 					
 				}); 
@@ -150,9 +151,11 @@ define(['app'], function (app) {
 			.then(function(response) {
 				
 				if(response.status=="success"){
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Post Property", response.message);
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Post Property", response.message);
 				}				
 			}); 
 			/********************************************************************************/
@@ -172,9 +175,11 @@ define(['app'], function (app) {
 						.then(function(response) { //function for response of request temp
 							if(response.status == 'success'){
 								$scope.submitted = true;
-								$scope.alerts.push({type: response.status,msg: response.message});						
+								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+								$notification[response.status]("Put Property", response.message);						
 							}else{
-								$scope.alerts.push({type: response.status, msg: response.message});
+								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+								$notification[response.status]("Put Property", response.message);
 							}	
 						});	  
 					};	 

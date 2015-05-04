@@ -61,7 +61,7 @@ define(['app'], function (app) {
 			if(response.status == 'success'){
 				$scope.customerList = response.data;
 			}else{
-				
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Get Users", response.message);
 			}
 		});
@@ -82,7 +82,7 @@ define(['app'], function (app) {
 				}else{
 					$scope.bizList = {};
 					$scope.totalRecords = {};
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Get Business", response.message);
 				}
 			});
@@ -103,7 +103,7 @@ define(['app'], function (app) {
 					}else{
 						$scope.bizList = {};
 						$scope.totalRecords = {};
-						
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Business Filter", response.message);
 					}
 				});
@@ -123,7 +123,7 @@ define(['app'], function (app) {
 				else{
 					$scope.bizList = {};
 					$scope.totalRecords = {};	
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Get Business List", response.message);
 				}
 			});	
@@ -138,7 +138,7 @@ define(['app'], function (app) {
 				$scope.veryfiedData = {verified : verified};
 				dataService.put("put/business/"+id, $scope.veryfiedData)
 				.then(function(response) { 
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Verify Business", response.message);
 				});
 			} ;
@@ -147,7 +147,7 @@ define(['app'], function (app) {
 				$scope.featuredData = {featured : featured};
 				dataService.put("put/business/"+id, $scope.featuredData)
 				.then(function(response) {
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Feature Business", response.message);
 				});
 			};
@@ -160,7 +160,7 @@ define(['app'], function (app) {
 					if(response.status == 'success'){
 						$scope.hideDeleted = 1;
 					}
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Delete Business", response.message);
 				});
 			};			
@@ -179,7 +179,7 @@ define(['app'], function (app) {
 				else{
 					$scope.bizList = {};
 					$scope.totalRecords = {};	
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Get Deleted Business", response.message);
 				}
 			});
@@ -190,7 +190,7 @@ define(['app'], function (app) {
 					if(response.status == 'success'){
 						$scope.hideDeleted = 0;
 					}
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Delete Business", response.message);
 				});
 			};

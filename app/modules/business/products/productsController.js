@@ -41,6 +41,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				if(data.status === 'success'){
 					picArr.push(data.data);
 				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Upload Image", response.message);
 				}
 	
@@ -100,7 +101,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				if(response.status == 'success'){
 					$scope.businessList = response.data;
 				}else{
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Get Business List", "You didn't added any business! Please add business first.");
 				}
 				$scope.businessList = response.data;
@@ -121,6 +122,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 							$scope.showProductForm = false;
 							dataService.progressSteps('addProducts', true);
 						}
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Add Product", response.message);
 						$scope.reset();
 					});
@@ -139,7 +141,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 						$scope.showProductForm = false;
 						dataService.progressSteps('addProducts', true);
 					}
-					
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Add Service", response.message);
 				});
 			} 
@@ -154,6 +156,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				if(response.status == 'success'){
 					$scope.products = dataService.parse(response.data);
 				}else if($rootScope.userDetails.config.addProducts == true){
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Get Product List", response.message);
 					$scope.products = [];
 				};
@@ -168,6 +171,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				$scope.featuredData = {featured : featured};
 				dataService.put("put/product/"+id, $scope.featuredData)
 				.then(function(response) {
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Feature Product", response.message);
 				});
 			};
@@ -179,6 +183,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					if(response.status == 'success'){
 						$scope.hideDeleted = 0;
 					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Delete Product", response.message);
 				});
 			};
@@ -193,6 +198,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				if(response.status == 'success'){
 					$scope.services = dataService.parse(response.data);
 				}else if($rootScope.userDetails.config.addProducts == true){
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Get Services List", response.message);
 					$scope.services = {};
 				};
@@ -210,6 +216,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					$scope.editProdForm = false;
 					$scope.editServForm = false;
 				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Edit Product", response.message);
 			});
 		} 
