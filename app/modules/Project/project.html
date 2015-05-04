@@ -66,8 +66,6 @@
 									<td>{{ $index + 1 }}</td>
 									<td>{{x.title}}</td>
 									<td><img class="img-thumbnail img-responsive prop-img" ng-src="/img/{{x.proj_image}}"></td>
-									
-									
 									<td>
 										<table class="table table-bordered table-responsive">
 											<tr>
@@ -94,15 +92,22 @@
 									</td>	
 									<td>{{x.domain}}</td>					
 									<td>
-									<div class="btn-group">
+									<!-- <div class="btn-group">
 										<button type="button" tooltip="{{dynamicTooltip(x.status, 'Active', ' Delete')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class=""></span></button>								
-									</div>
+									</div> -->
+									
+									<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
+									</button>
 									
 									<div class="btn-group">
 										<button type="button" tooltip="{{dynamicTooltip(x.featured, ' Featured', 'Non Featured')}}" ng-class="(x.featured==1) ? 'btn btn-warning glyphicon glyphicon-star' : 'btn btn-danger glyphicon glyphicon-star-empty'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"></button>
-									</div>
+									</div> 
+									
+								<!-- <div class="btn-group">
+										<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Non Featured', 'Featured')}}" ng-class="(x.featured==1) ? 'btn btn-info' : 'btn btn-danger'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-star"></span></button>
+								</div>	 -->
 									<div class="btn-group">	
-										<a class="btn btn-success" href="#/dashboard/project/addproject/{{x.id}}" title="Edit">
+										<a class="btn btn-success" href="#/dashboard/project/addproject/{{x.id}}" title="Edit" tooltip="Edit Project Details">
 											<span class="glyphicon glyphicon-pencil"></span>
 										</a>
 									</div>										

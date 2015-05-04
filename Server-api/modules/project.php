@@ -39,6 +39,7 @@
 	 
 	//getMethod
 	if($reqMethod=="GET"){
+		$table="project";
 		if(isset($id)){
 			$where['id'] = $id;
 			$t0 = $db->setTable($table);

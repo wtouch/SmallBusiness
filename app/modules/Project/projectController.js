@@ -23,6 +23,17 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
 		};
+		
+		//This code for featured & un-featured button 
+			$scope.feature = function(id, featured){
+				$scope.featuredData = {featured : featured};
+				dataService.put("put/project/"+id, $scope.featuredData)
+				.then(function(response) {
+					
+					$notification[response.status]("Feature Project", response.message);
+				});
+			};
+			
 		//Code For Pagination
 		$scope.pageChanged = function(page) { 
 			angular.extend($scope.projectParam, $scope.user_id);
@@ -32,18 +43,18 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			});
 		};
 		
-		// for delete button
-			$scope.deleted = function(id, delstatus){
-				$scope.deletedData = {status : delstatus};
-				//$scope.featuredData = {featured : 0};
+		//delete button for change status for template
+			$scope.deleted = function(id, status){
+				$scope.deletedData = {status : status};
 				dataService.put("put/project/"+id, $scope.deletedData)
 				.then(function(response) { 
 					if(response.status == 'success'){
-						$scope.projects=response.data;
-						$scope.alerts.push({type: response.status, msg: response.message});
+						//$scope.hideDeleted = 1;
 					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Delete Project", response.message);
 				});
-			};		
+			};			
 		
 		$scope.searchFilter = function(statusCol, showStatus) {
 			$scope.search = {search: true};
@@ -190,30 +201,18 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 	/*****************************************************************************************/
 	/*****************************************************************************************/	
 			//update single record
-			
-			if($routeParams.id){//Update user			
-			dataService.get("getsingle/project/"+$routeParams.id)
+			if($routeParams.id){//Update user 	 	
+			dataService.get("getsingle/project/"+$rootScope.userDetails.id)
 				.then(function(response) {
-						$scope.projects = response.data;	
-						console.log(projects);					
+						$scope.project = response.data;	
+						console.log($scope.project);					
 					});				
-				$scope.update = function(projects){				
-					console.log(projects);	
-					
-					/*  dataService.put("put/project/"+$routeParams.id ,projects)
-					.then(function(response) { 	//function for response of request project
-						if(response.status == 'success'){
-							$scope.submitted = true;
-							$scope.alerts.push({type: response.status,msg: response.message});						
-						}else{
-							
-							$scope.alerts.push({type: response.status,msg: response.message});
-						}	
-					});	 */ 
+				$scope.update = function(project){				
+					console.log(project);
 				};	
-	/***********************************************************************************/	
-	 };	
- };		 
+			 };  	
+	 /***********************************************************************************/	
+ }; 
 	// Inject controller's dependencies
 	projectController.$inject = injectParams;
 	// Register/apply controller dynamically

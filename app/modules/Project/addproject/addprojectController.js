@@ -49,7 +49,6 @@ define(['app'], function (app) {
 		}
 
 		//Upload Function for uploading files 
-		
 			$scope.path = "project/"; 
 			
 			// for project image form part
@@ -103,7 +102,7 @@ define(['app'], function (app) {
 			$scope.closeAlert = function(index) {
 				$scope.alerts.splice(index, 1);
 			};
-			
+			 
 			// this function for uploading files
 			$scope.upload = function(files,path,userinfo, picArr){ 
 				upload.upload(files,path,userinfo,function(data){
@@ -116,7 +115,8 @@ define(['app'], function (app) {
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}					
 				}); 
-			};
+			}; 
+			
 			$scope.generateThumb = function(files){  
 				upload.generateThumbs(files);
 			};// end file upload code
@@ -139,24 +139,6 @@ define(['app'], function (app) {
 				}
 			};
 			
-		// code to access dynamic project categories & types
-				/* $scope.categories = dataService.config.property.category;
-				console.log(dataService.config);
-				$scope.getTypes = function(category){
-					var projtypes = [];
-					console.log($scope.categories);
-					for (var x in $scope.categories){
-						console.log($scope.categories[x].category_name);
-						if($scope.categories[x].category_name == category){
-							for(var y in $scope.categories[x].types){
-								projtypes.push($scope.categories[x].types[y])
-							}
-						}
-					}
-					$scope.projtypes = projtypes;
-					
-				}; */
-				
 		
 
 		//add project
@@ -169,18 +151,16 @@ define(['app'], function (app) {
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				$scope.addproject.$setPristine();
+				//$scope.addproject.$setPristine();
 			});
 		};
 		
 		//code to edit project details
-		
-		//code to edit project details
 		if($routeParams.id){
-			dataService.get("getsingle/project/"+$routeParams.id)
+			dataService.get("getsingle/project/"+$rootScope.userDetails.id)
 			.then(function(response) {
 				$scope.project = response.data;
-				console.log($scope.project);
+				console.log(response);
 			});
 			
 			$scope.update = function(id,project){

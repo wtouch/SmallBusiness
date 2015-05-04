@@ -18,6 +18,7 @@ define(['app'], function (app) {
 			.then(function(business) {  
 				if(business.status == 'success'){
 					$scope.businessList = business.data;
+					console.log($scope.businessList);
 				}else{
 					$notification.error("Get Business", "You didn't added any business! Please add business first.");
 				}

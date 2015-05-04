@@ -15,7 +15,7 @@
 	<div class="col-sm-9">		
 		<textarea type="text"  id="specificationTitle" class="form-control" name="specificationTitle" ng-model="addspecification.title"    cols="20" rows="4" ng-maxlength="356"  required></textarea>
 		<p ng-hide="addProject.specificationTitle.$error.maxlength">{{ 356 - addspecification.title + " Chars left" }}</p>
-			 <span class="text-danger" ng-show="addProject.specificationTitle.$error.maxlength">
+			<span class="text-danger" ng-show="addProject.specificationTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
 				<span class="text-danger" ng-show="addProject.specificationTitle.$dirty && addProject.title.$invalid">
 			  <span ng-show="addProject.specificationTitle.$error.required"> title is required .</span>
@@ -41,11 +41,15 @@
 
 		<p ng-hide="addProject.specBrowserTitle.$error.maxlength">{{ 356 - project.specifications.seo.browser_title + " Chars left" }}</p>
 		
-		<span class="text-danger" ng-show="addProject.specBrowserTitle.$error.maxlength">
+		<!-- <span class="text-danger" ng-show="addProject.specBrowserTitle.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 		<span class="text-danger" ng-show="addProject.specBrowserTitle.$dirty && addProject.specBrowserTitle.$invalid">
 				<span ng-show="addProject.specBrowserTitle.$error.required">Browser is required .</span>
-		</span>
+		</span> -->
+		<span class="text-danger" ng-show="addProject.specBrowserTitle.$error.maxlength">
+			Sorry You are Exceeding the Limit</span>
+				<span class="text-danger" ng-show="addProject.specBrowserTitle.$dirty && addProject.title.$invalid">
+		<span ng-show="addProject.specBrowserTitle.$error.required"> title is required .</span>
 	</div>							
 </div>				
 <div class="form-group">
