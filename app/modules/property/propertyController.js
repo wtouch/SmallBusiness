@@ -26,7 +26,25 @@ define(['app'], function (app) {
 		//function for close alert
 		$scope.closeAlert = function(index) {
 			$scope.alerts.splice(index, 1);
-		}; 		
+		}; 	
+		
+		//dynamic tooltip
+		$scope.dynamicTooltip = function(status, active, notActive){
+			return (status==1) ? active : notActive;
+		};
+		
+		// code for delete button 
+			$scope.deleted = function(id, status){
+				$scope.deletedData = {status : status};
+				dataService.put("put/property/"+id, $scope.deletedData)
+				.then(function(response) { 
+					if(response.status == 'success'){
+						$scope.hideDeleted = 1;
+					}
+					
+					$notification[response.status]("Delete Property", response.message);
+				});
+			};			
 		
 		//code for pagination		
 		$scope.pageChanged = function(page) {	
@@ -38,7 +56,26 @@ define(['app'], function (app) {
 			});			
 		};	//end pagination
 		
-		
+		//This code for featured & un-featured button 
+			$scope.feature = function(id, featured){
+				$scope.featuredData = {featured : featured};
+				dataService.put("put/property/"+id, $scope.featuredData)
+				.then(function(response) {
+					
+					$notification[response.status]("Feature Property", response.message);
+				});
+			};
+			
+		// code for verify button 
+			$scope.verify = function(id, verified){
+				$scope.veryfiedData = {verified : verified};
+				dataService.put("put/property/"+id, $scope.veryfiedData)
+				.then(function(response) { 
+					
+					$notification[response.status]("Verify Property", response.message);
+				});
+			} ;	
+			
 		//search filter function
 		$scope.searchFilter = function(statusCol, searchProp) {
 			$scope.search = {search: true};
@@ -75,7 +112,19 @@ define(['app'], function (app) {
 			}); 
 		};    
 		
-
+		
+		// code to access domain names dynamically
+		$scope.userinfo={user_id:$rootScope.userDetails.id,status :1};
+		dataService.get('getmultiple/website/1/200', $scope.userinfo).then(function(response){
+				var domains = [];
+				for(var id in response.data){
+					var obj = {id: response.data[id].id, domain_name : response.data[id].domain_name};
+					domains.push(obj);
+				}
+				$scope.domains = domains;
+		});
+		
+		
 /***************************************************************************************/
 		/* $scope.changeStatus = {};
 		$scope.changeStatusFn = function(colName, colValue, id){
@@ -90,6 +139,24 @@ define(['app'], function (app) {
 				}); 
 		}		 */
 		
+		
+		// code for filter data as per satus (delete/active)		
+		$scope.changeStatus = function(statusCol, showStatus) {
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.projectParam[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.projectParam, $scope.filterStatus);
+			dataService.get("getmultiple/project/1/"+$scope.pageItems, $scope.projectParam)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.projects = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.projects = {};
+					$scope.totalRecords = {};
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+			});
+		};
 /***************************************************************************************/	
 		$scope.changeValue = function(statusCol,status) {
 			//console.log($scope.propertyParam);

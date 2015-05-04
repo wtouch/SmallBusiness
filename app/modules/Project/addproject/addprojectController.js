@@ -31,6 +31,11 @@ define(['app'], function (app) {
 			console.log(response.config_data);
 		});
 		
+		// Add Project multi part form show/hide operation from here!
+		$scope.formPart = 'project';
+		$scope.showFormPart = function(formPart){
+			$scope.formPart = formPart;
+		};
 		$scope.getData = function(location){
 			$scope.readOnly = true;
 			$scope.project.address.location = location.location;
@@ -138,25 +143,26 @@ define(['app'], function (app) {
 					$scope.project.domain = angular.copy(websites);
 				}
 			};
-			
-		
-
-		//add project
+		$scope.setFormScope= function(scope){
+			$scope.formScope = scope;
+		}
+		//add project //project,$scope.userinfo
 		$scope.addproject = function(project){
 			console.log(project);
-			dataService.post("post/project", $scope.project,$scope.userinfo)
+			dataService.post("post/project",project)
 			.then(function(response) {
 				if(response.status=="success"){
 					$scope.alerts.push({type: response.status, msg: response.message});
+					$scope.formScope.addprojectForm.$setPristine();
 				}else{
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				//$scope.addproject.$setPristine();
+				
 			});
 		};
 		
 		//code to edit project details
-		if($routeParams.id){
+		 if($routeParams.id){ 
 			dataService.get("getsingle/project/"+$rootScope.userDetails.id)
 			.then(function(response) {
 				$scope.project = response.data;
@@ -169,7 +175,7 @@ define(['app'], function (app) {
 					console.log(response);
 				});
 			};
-		};
+		 }; 
 		
 		
 	};	

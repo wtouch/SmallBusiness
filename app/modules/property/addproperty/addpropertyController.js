@@ -18,12 +18,12 @@ define(['app'], function (app) {
 		
 		$scope.getData = function(location){
 			$scope.readOnly = true;
-			$scope.property.address.location = location.location;
-			$scope.property.address.city = location.city;
-			$scope.property.address.state = location.state;
-			$scope.property.address.country = location.country;
-			$scope.property.address.area = location.area;
-			$scope.property.address.pincode = location.pincode;
+			$scope.property.location = location.location;
+			$scope.property.city = location.city;
+			$scope.property.state = location.state;
+			$scope.property.country = location.country;
+			$scope.property.area = location.area;
+			$scope.property.pincode = location.pincode;
 		}
 		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
 			var locationParams = {search : {}}

@@ -32,7 +32,7 @@
 				
 				<div class="col-sm-2">
 					<label for="status" class="control-label">Select Status</label>
-					<select id="status" class="form-control" ng-model="status" title="status"  ng-change="changeValue('status',status)" ng-init="status=1">
+					<select id="status" class="form-control" ng-model="status" title="status"  ng-change="changeValue('status',status)">
 						<option value="" selected>Select Status</option> <!-- add value attribute empty & selected for initial selected option -->
 						<option value="1">Active</option>
 						<option value="0">Deleted</option>   
@@ -41,7 +41,7 @@
 				
 				<div class="col-sm-2">
 					<label for="featured" class="control-label">Filter By Featured</label>
-					<select id="featured" class="form-control" ng-model="featured" ng-init="featured=1" ng-change="changeValue('featured',featured)">
+					<select id="featured" class="form-control" ng-model="featured" ng-change="changeValue('featured',featured)">
 						<option value="" selected>Select Featured</option> <!-- added value & selected attr -->
 						<option value="1" >Featured</option>
 						<option value="0">Not Featured</option> 
@@ -49,11 +49,11 @@
 				</div>
 				
 				<div class="col-sm-2">
-					<label for="domain" class="control-label">Select Domain :</label>
-					<select id="domain" class="form-control" ng-model="domain">    
-						<option value="">Select Domain</option>						
+					<label for="domain_name" class="control-label">Select Domain :</label>
+					 <select class="form-control" id="domain_name" name="domain_name" ng-change="changeStatus('domain',showDomain)" ng-model="showDomain" ng-required="true" ng-options="item.domain_name as item.domain_name for item in domains">
+					  <option value="">Select Websites</option> 
 					</select>
-				</div>				
+				</div>	
 			</div>		
 			
 			<h3> Property List</h3>
@@ -66,8 +66,8 @@
 									<th>Sr. No.</th>
 									<th>Image</th>
 									<th> Property Details</th>
-									<th>Featured</th>
-									<th>Status</th>
+									<!-- <th>Featured</th> -->
+									<!-- <th>Status</th> -->
 									<th>Other Domains</th>
 									<th>Manage</th>
 								</tr>
@@ -75,12 +75,12 @@
 							<tbody>
 								<tr ng-repeat="x in properties | orderBy:sort">
 									<td>{{((currentPage - 1) * pageItems) + $index + 1}}</td>
-									 <td>
+									<td>
 										{{x.property_images}}									
 										 <!-- <img ng-src="{{x.property_images}}" ng-click="open(x.property_images)" class="img-thumbnail   img-responsive prop-img" title="Property image">  -->
 										 <img class="img-responsive" ng-model="x.property_images" ng-src="{{appConfig.assetPath + x.property_images.file_relative_path}}"/>
 									</td> <!-- ng-click added for modal, class added for responsive image --> 
-									<td>
+									<td style="max-width:435px">
 										<table class="table table-bordered table-responsive">
 											<tr>
 												<td><b>Property Title</b></td>
@@ -96,27 +96,51 @@
 											</tr>
 											<tr>
 												<td><b>Address</b></td>
-												<td>{{x.property_location}}</td>
+												<td>{{x.address}}</td>
+											</tr>
+											<tr>
+												<td><b>City</b></td>
+												<td>{{x.city}}</td>
+											</tr>
+											<tr>
+												<td><b>State</b></td>
+												<td>{{x.state}}</td>
+											</tr>
+											<tr>
+												<td><b>Country</b></td>
+												<td>{{x.country}}</td>
 											</tr>
 										</table>
 									</td>	
 									
-									<td>										
+									<!-- <td>										
 										<a class="btn btn-success" ng-show="x.featured==0" title="Featured">Featured </a>
 										
 										<a class="btn btn-warning" ng-show="x.featured==1" title="Not featured"> Not Featured </a>
-									</td>			
-									<td>
+									</td>	 -->		
+									<!-- <td>
 										<a class="btn btn-success"  ng-show="x.status==1" title="Active">Active</a>
 										
 										<a class="btn btn-warning"  ng-show="x.status==0" title="Delete">Delete</a>
-									</td>
-									<td>{{x.domain}}</td>				
-									<td>										
-										<a href="#/dashboard/property/addproperty/{{x.id}}" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="Edit User Information"> 
+									</td> -->
+									<td><!-- {{x.domain}} --></td>				
+									<td style="max-width:150px">
+										<div class="btn-group">
+										<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Non Featured', 'Featured')}}" ng-class="(x.featured==1) ? 'btn btn-info' : 'btn btn-danger'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-star"></span></button>
+										</div>	
+										
+										<div class="btn-group">
+										<button type="button" tooltip="{{dynamicTooltip(x.verified, 'No Verify', 'Make Verify')}}" ng-class="(x.verified==1) ? 'btn btn-primary' : 'btn btn-warning'" ng-model="x.verified" ng-change="verify(x.id, x.verified)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-ok"></span></button>
+										</div>
+										
+										<div class="btn-group">
+										<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete Business', 'Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-remove"></span></button>
+										</div>
+								
+										<a href="#/dashboard/property/addproperty/{{x.id}}" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="Edit Property Information"> 
 											<span class="glyphicon glyphicon-pencil"></span>
 										</a>
-										<a ng-click="open('modules/property/viewProperty.html', x.id)" class="btn btn-success responsive" title="View">View</a> 
+										<a ng-click="open('modules/property/viewProperty.html', x.id)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="View Property Details"></a> 
 									</td>	
 								</tr>				
 							</tbody>

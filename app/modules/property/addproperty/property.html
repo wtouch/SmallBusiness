@@ -20,7 +20,7 @@
 <!-- This block for current user id -->
 		
 		<div class="form-group">
-			<label for="title" class="col-sm-2 control-label">* Property Title </label>
+			<label for="title" class="col-sm-2 control-label">Property Title * </label>
 			<div class="col-sm-9">
 				<input type="text"  id="title" class="form-control" name="title" ng-model="property.title" required>				
 				
@@ -29,9 +29,45 @@
 				</span>											 
 			</div>				
 		</div>
+		
+		<div class="form-group">
+			<label for="project_name" class="col-sm-2 control-label">Project Name *</label>
+			<div class="col-sm-9">
+				<select class="form-control" id="project_name" name="project_name" ng-model="property.project_name" ng-options="item.title as item.title for item in addProjName" required>
+					<option value="">Select Project Name</option>
+				</select>
+				
+				<span class="text-danger" ng-show="addProperty.project_name.$dirty && addProperty.project_name.$invalid">
+					<span ng-show="addProperty.project_name.$error.required">Project Name is required .</span>
+				</span>	
+			</div>
+		</div>
 	
+		<div class="form-group">
+			<label for="category" class="col-sm-2 control-label">Property Category *</label>
+			<div class="col-sm-3">
+				<select id="category" name="category" ng-model="property.category" class="form-control" required ng-options="item.category_name as item.category_name for item in propertyConfig.category">
+					<!--ng-options="item.system_name as item.name for item in temp.category"-->
+					<option value="">Select Category</option>			
+				</select>
+				
+				<span class="text-danger" ng-show="addProperty.category.$dirty && addProperty.category.$invalid">
+					<span ng-show="addProperty.category.$error.required">Property selection is required .</span>
+				</span>				 
+			</div>
+			<label for="type" class="col-sm-2  control-label">Property Type *</label>
+				<div class="col-sm-4">
+					<select  id="type"  name="type" ng-model="property.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types" >
+						<option value=""> Select Property Type</option>		
+					</select>
+						<span class="text-danger" ng-show="addProperty.type.$dirty && addProperty.type.$invalid">
+							<span ng-show="addProperty.type.$error.required">Project Type is required .</span>
+						</span>	
+				</div>
+		</div>
+		
 		<div class="form-group">							
-			<label for="property_for" class="col-sm-2  control-label">* Property for</label>	
+			<label for="property_for" class="col-sm-2  control-label">Property for *</label>	
 			<div class="col-sm-9"> 
 				<label class="radio-inline">
 					<input type="radio" name="property_for"   id="Sale" value="Sale"  ng-model="property.property_for" checked="true" required>Sale
@@ -47,35 +83,21 @@
 			</div>	
 		</div> 	
 
-		<div class="form-group">
-			<label for="category" class="col-sm-2 control-label">Property Category </label>
-			<div class="col-sm-9">
-				<select id="category" name="category" ng-model="property.category" class="form-control" required ng-options="item.category_name as item.category_name for item in propertyConfig.category">
-					<!--ng-options="item.system_name as item.name for item in temp.category"-->
-					<option value="">Select Category</option>			
-				</select>
-				
-				<span class="text-danger" ng-show="addProperty.category.$dirty && addProperty.category.$invalid">
-					<span ng-show="addProperty.category.$error.required">Property selection is required .</span>
-				</span>				 
-			</div>
+		
+		<div class="form-group"> 
+			<label for="featured" class="col-sm-2 control-label">Featured *</label> 
+				<div class="col-sm-9 "  ng-model="property.featured">
+					<label class="radio-inline">
+						<input type="radio" name="featured" id="Yes" value="yes" checked="true" required> Yes
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="featured" id="No" value="No" ng-model="property.featured " required>No
+					</label>								
+				</div>	
 		</div>
 	
 		<div class="form-group">
-			<label for="project_name" class="col-sm-2 control-label">* Project Name </label>
-			<div class="col-sm-9">
-				<select class="form-control" id="project_name" name="project_name" ng-model="property.project_name" ng-options="item.title as item.title for item in addProjName" required>
-					<option value="">Select Project Name</option>
-				</select>
-				
-				<span class="text-danger" ng-show="addProperty.project_name.$dirty && addProperty.project_name.$invalid">
-					<span ng-show="addProperty.project_name.$error.required">Project Name is required .</span>
-				</span>	
-			</div>
-		</div>
-	
-		<div class="form-group">
-			<label for="property_description" class="col-sm-2 control-label">* Property Discription  </label>
+			<label for="property_description" class="col-sm-2 control-label">Property Discription  *</label>
 			<div class="col-sm-9">
 				<textarea type="text" class="form-control" name="property_description" id="property_description" ng-model="property.property_description" cols="30" rows="4" ng-maxlength="356" required></textarea>
 				

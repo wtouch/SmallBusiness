@@ -4,7 +4,7 @@
 		<div class="main-content">		
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
 			<h3 class="text-center" title="Add new Property">Add New Property</h3>
-			<form class="form-horizontal" name="addProperty" novalidate>	
+			<form class="form-horizontal" name="addProperty" ng-submit="addProperty.$valid"novalidate>	
 				
 				<p class="paraMand">* Fields are mandatory</p>
 				
@@ -14,20 +14,19 @@
 				
 				<input type="hidden" id="user_id" name="user_id" ng-model="property.user_id" >				
 				
-				<input type="hidden" id="status" name="status" ng-model="property.status" >
+				<input type="hidden" id="status" name="status" ng-model="property.status">
 				
-				<input type="hidden" id="date" name="date" ng-model="property.date" >
-					
+				<input type="hidden" id="date" name="date" ng-model="property.date">	
 					
 				<ul class="nav nav-tabs">
 				
 					<li role="presentation" ng-class="{active: formPart=='property'}">
-						<a ng-click="showFormPart('property')">Property</a>
+						<a ng-click="showFormPart('property')">Property Information</a>
 					</li>
 					  
-					<li role="presentation" ng-class="{active:formPart=='property_Information'}">
+					<!-- <li role="presentation" ng-class="{active:formPart=='property_Information'}">
 						<a ng-click="showFormPart('property_Information')">Property Information</a>
-					</li>
+					</li> -->
 					  
 					<li role="presentation" ng-class="{active: formPart=='propertyStructure'}">
 						<a ng-click="showFormPart('propertyStructure')"> Structure</a>
@@ -37,12 +36,9 @@
 						<a ng-click="showFormPart('propertyLocation')">Location</a>
 					</li>
 					  
-					<li role="presentation" ng-class="{active: formPart=='contactDetails'}">
-						<a ng-click="showFormPart('contactDetails')">Contact Details</a>
-					</li>
-					  
+					
 					<li role="presentation" ng-class="{active: formPart=='optionalPropertyDt'}">
-						<a ng-click="showFormPart('optionalPropertyDt')">Optional Details</a>
+						<a ng-click="showFormPart('optionalPropertyDt')">Other Details</a>
 					</li>
 					  
 					<li role="presentation" ng-class="{active: formPart=='landmarkDetails'}">
@@ -52,14 +48,19 @@
 					<li role="presentation" ng-class="{active: formPart=='amenities'}">
 						<a ng-click="showFormPart('amenities')">Aminities</a>
 					</li>
+					
+					<li role="presentation" ng-class="{active: formPart=='contactDetails'}">
+						<a ng-click="showFormPart('contactDetails')">Contact Details</a>
+					</li>
+					  
 					  
 				</ul>
 				
 					<ng-include  ng-show="formPart=='property'" src="'modules/property/addproperty/property.html'">
 					</ng-include> 					
 					
-					<ng-include  ng-show="formPart=='property_Information'" src="'modules/property/addproperty/property_Information.html'">
-					</ng-include> 					
+					<!-- <ng-include  ng-show="formPart=='property_Information'" src="'modules/property/addproperty/property_Information.html'">
+					</ng-include> 	 -->				
 					
 					<ng-include  ng-show="formPart=='propertyStructure'" src="'modules/property/addproperty/propertyStructure.html'">
 					</ng-include> 
@@ -102,8 +103,8 @@
 					</div>
 						
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-9">
-							<button type="submit" ng-click="addPropertyFun(property)" class="btn btn-primary" title="Add new property">Add New Property</button>
+						<div class="col-sm-offset-2 col-sm-9"><!--ng-disabled="addProperty.$invalid"-->
+							<button type="submit" ng-click="addPropertyFun(property)"  class="btn btn-primary" title="Add new property">Add New Property</button>
 							
 							<button type="submit" ng-click="update(property)" title="Update your property" class="btn btn-success text-center ">Edit Property</button>
 							<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>
