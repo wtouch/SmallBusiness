@@ -2,8 +2,8 @@
 		<div class="form-group">
 			<label for="address" class="col-sm-2 control-label">* Address</label>
 			<div class="col-sm-9">
-				<textarea type="text"  id="address" class="form-control" name="address" ng-model="project.address" cols="30" rows="4" ng-maxlength="356"  required></textarea>
-				<p ng-hide="addProject.address.$error.maxlength">{{ 356 - project.address.length + " Chars left" }}</p>
+				<textarea type="text"  id="address" class="form-control" name="address" ng-model="projects.address" cols="30" rows="4" ng-maxlength="356"  required></textarea>
+				<p ng-hide="addProject.address.$error.maxlength">{{ 356 - projects.address.length + " Chars left" }}</p>
 				 <span class="text-danger" ng-show="addProject.address.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="addProject.address.$dirty && addProject.address.$invalid">
@@ -20,7 +20,7 @@
 <div class="form-group">
 	<label for="location" class="col-sm-2 control-label">* Location</label>
 	<div class="col-sm-9">
-		<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="project.location" typeahead-on-select="getData($item)" placeholder="Location" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
+		<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="projects.location" typeahead-on-select="getData($item)" placeholder="Location" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
 		<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i>
 			<!-- <span class="help-block" ng-show="businessContactForm.location.$dirty && businessContactForm.location.$invalid || businessContactForm.location.$dirty && !property.location">
 				<span class="text-danger" ng-show="businessContactForm.location.$dirty && (businessContactForm.location.$error.required || !property.location)">Location required.</span>
@@ -30,7 +30,7 @@
 <div class="form-group">
 	<label for="area" class="col-sm-2 control-label">Area</label>
 	<div class="col-sm-9">
-		<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="project.area" placeholder="Enter area">
+		<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="projects.area" placeholder="Enter area">
 		<!-- <span class="help-block" ng-show="addProperty.area.$dirty && addProperty.area.$invalid">
 			<span ng-show="businessContactForm.area.$error.pattern && (businessContactForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
 			<span class="text-danger" ng-show="businessContactForm.area.$error.minlength && (businessContactForm.area.$dirty || submitted)">Enter correct Code.</span>
@@ -40,14 +40,14 @@
 <div class="form-group">
 	<label for="state" class="col-sm-2 control-label">State</label>
 	<div class="col-sm-4">
-	<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="project.state" placeholder="Enter state">
+	<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="projects.state" placeholder="Enter state">
 		<!-- <span class="help-block" ng-show="businessContactForm.state.$dirty && businessContactForm.state.$invalid">
 			<span ng-show="businessContactForm.state.$error.required" class="text-danger">State is required.</span>
 		</span>		 -->		
 	</div>
 	<label for="state" class="col-sm-1 control-label">City</label>
 	<div class="col-sm-4">
-		<input type="text" required name="City" id="City" ng-model="project.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
+		<input type="text" required name="City" id="City" ng-model="projects.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
 		<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
 		<!-- <span class="help-block" ng-show="businessContactForm.City.$dirty && businessContactForm.City.$invalid || businessContactForm.City.$dirty && !addbusiness.City">
 			<span ng-show="businessContactForm.City.$error.required || businessContactForm.City.$dirty && !addbusiness.city" class="text-danger">City is required.</span>
@@ -57,7 +57,7 @@
 <div class="form-group">
 	<label for="Country" class="col-sm-2 control-label">Country</label>
 	<div class="col-sm-9">
-		<input type="text" required name="Country" id="Country" ng-model="project.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
+		<input type="text" required name="Country" id="Country" ng-model="projects.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
 		<!-- <span class="help-block" ng-show="businessContactForm.Country.$dirty && businessContactForm.Country.$invalid || businessContactForm.Country.$dirty && !addbusiness.Country">
 			<span ng-show="businessContactForm.Country.$error.required || businessContactForm.Country.$dirty && !addbusiness.Country" class="text-danger">Country is required.</span>
 		</span>	 -->			
@@ -66,7 +66,7 @@
 <div class="form-group">
 	<label for="pincode" class="col-sm-2 control-label">Pin Code</label>
 	<div class="col-sm-9">
-		<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="project.pincode" placeholder="Enter Pin Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+		<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="projects.pincode" placeholder="Enter Pin Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
 		<!-- <span class="help-block" ng-show="businessContactForm.pincode.$dirty && businessContactForm.pincode.$invalid">
 			<span ng-show="businessContactForm.pincode.$error.pattern && (businessContactForm.pincode.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
 			<span class="text-danger" ng-show="businessContactForm.pincode.$error.minlength && (businessContactForm.pincode.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>

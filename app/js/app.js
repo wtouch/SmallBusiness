@@ -102,6 +102,9 @@ define(['angular',
 				
 				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
 				
+				.when('/dashboard/seo/seo', route.resolve({controller: 'seo',template: 'seo',
+					label: "SEO"}, 'seo/'))
+				
                 .otherwise({ redirectTo: '/' });
 				
 	}]);

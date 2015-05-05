@@ -15,8 +15,8 @@
 <div class="form-group">
 		<label  for="floorTitle" class="col-sm-2 control-label">* Title</label>
 		<div class="col-sm-9">		
-			<input type="text"  id="floorTitle" class="form-control" name="floorTitle" ng-model="floor_plan.title"    cols="20" rows="4" ng-maxlength="60" required />
-			<p ng-hide="addProject.floorTitle.$error.maxlength">{{ 60 - floor_plan.title + " Chars left" }}</p>
+			<input type="text"  id="floorTitle" class="form-control" name="floorTitle" ng-model="project.floor_plan.title"    cols="20" rows="4" ng-maxlength="60" required />
+			<p ng-hide="addProject.floorTitle.$error.maxlength">{{ 60 - project.floor_plan.title + " Chars left" }}</p>
 				 <span class="text-danger" ng-show="addProject.floorTitle.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="addProject.floorTitle.$dirty && addProject.floorTitle.$invalid">
@@ -40,8 +40,8 @@
 <div class="form-group"> 
 	<label for="floorDescription" class="col-sm-2 control-label">* Description</label> 
 		<div class="col-sm-9">
-				<textarea class="form-control" id="floorDescription"  name="floorDescription" ng-model="floor_plan.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-			<p ng-hide="addProject.floorDescription.$error.maxlength">{{ 356 - floor_plan.description.description.length + " Chars left" }}</p>
+				<textarea class="form-control" id="floorDescription"  name="floorDescription" ng-model="project.floor_plan.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
+			<p ng-hide="addProject.floorDescription.$error.maxlength">{{ 356 - project.floor_plan.description.length + " Chars left" }}</p>
 			 <span class="text-danger" ng-show="addProject.floorDescription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 			<span class="text-danger" ng-show="addProject.floorDescription.$dirty && addProject.floorDescription.$invalid">

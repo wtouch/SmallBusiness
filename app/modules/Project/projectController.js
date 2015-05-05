@@ -52,9 +52,19 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 						//$scope.hideDeleted = 1;
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Delete Project", response.message);
+					$notification[response.status]("Edit Project", response.message);
 				});
-			};			
+			};
+
+		// code for verify button 
+			$scope.verify = function(id, verified){
+				$scope.veryfiedData = {verified : verified};
+				dataService.put("put/project/"+id, $scope.veryfiedData)
+				.then(function(response) { 
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Verify Property", response.message);
+				});
+			} ;		
 		
 		$scope.searchFilter = function(statusCol, showStatus) {
 			$scope.search = {search: true};
@@ -73,7 +83,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 					$scope.projects = {};
 					$scope.totalRecords = {};
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Delete Project", response.message);
+					$notification[response.status](response.message);
 				}
 			});
 			}
@@ -93,7 +103,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 					$scope.projects = {};
 					$scope.totalRecords = {};
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Delete Project", response.message);
+					$notification[response.status](response.message);
 				}
 			});
 		};
@@ -114,7 +124,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 					$scope.projects = {};
 					$scope.totalRecords = {};
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Delete Project", response.message);
+					$notification[response.status](response.message);
 				}				
 			});
 		};
@@ -128,33 +138,6 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				}
 				$scope.domains = domains;
 		});
-		
-		/* // code for open model in preview button
-		$scope.open = function (url, projectId) {
-			dataService.get("getsingle/project/"+projectId)
-			.then(function(response) {
-				var oldObj = response.data[0];
-				var newObj = {};
-				angular.forEach(oldObj, function(value, key) {
-				  this[key] = (value.slice(0, 1) == "{" || value.slice(0, 1) == "[" ) ? JSON.parse(value) : value;
-				}, newObj);
-				
-				var modalDefaults = {
-					templateUrl: url,	// apply template to modal
-					size : 'lg'
-				};
-				var modalOptions = {
-					project: newObj // assign data to modal
-				};
-			
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-					
-				});
-			});
-		};
-		$scope.ok = function () {
-			$modalOptions.close('ok');
-		}; */
 		
 		//modal for open project details.
 			$scope.open = function (url, projectId) {
@@ -183,7 +166,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			$scope.totalRecords = response.totalRecords;
 			$scope.projects = response.data;
 			if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Delete Project", response.message);
+					$notification[response.status];
 		}); 
 	/******************************************************************************************/
 		

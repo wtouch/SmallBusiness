@@ -1,8 +1,8 @@
 <h3>Location Map</h3>
-{{alocation_map|json}}
+{{project.location_map|json}}
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button type="button" class="btn btn-default btn-primary pull-right" ng-click="addToObject(location_map, project.location_map.details)" title="Add Location map">Add Location map</button>
+		<button type="button" class="btn btn-default btn-primary pull-right" ng-click="addToObject(location_map, project.location_map)" title="Add Location map">Add Location map</button>
 	</div>
 	<input type="hidden" required name="location_map" ng-model="project.location_map" />
 </div>
@@ -11,7 +11,7 @@
 	<label  for="locationTitle" class="col-sm-2 control-label">* Title</label>
 	<div class="col-sm-9">		
 		<input type="text"  id="locationTitle" class="form-control" name="locationTitle" ng-model="location_map.title"    cols="20" rows="4" ng-maxlength="60"/>
-		<p ng-hide="addProject.locationTitle.$error.maxlength">{{ 60 - location_map.title + " Chars left" }}</p>
+		<p ng-hide="addProject.locationTitle.$error.maxlength">{{ 60 - project.location_map.title + " Chars left" }}</p>
 			<span class="text-danger" ng-show="addProject.locationTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
 				<span class="text-danger" ng-show="addProject.locationTitle.$dirty && addProject.locationTitle.$invalid">
@@ -26,9 +26,9 @@
 		<!-- This will show thumbnails & progress of images -->
 			<file-preview url="location_image"></file-preview>
 			<!-- This button will show if file/s selected -->
-			<button ng-show="location_image" ng-click="upload(location_image,path,userinfo, location_map.location_image)" type="button">Upload</button>
+			<button ng-show="location_image" ng-click="upload(location_image,path,userinfo, 'location_map.image')" type="button">Upload</button>
 			<!-- This hidden input will store image path in array after successful uploading -->
-			<input type="hidden" ng-model="location_map.location_image">
+			<input type="text" ng-model="location_map.image">
 	</div>
 </div>	
 
@@ -45,22 +45,20 @@
 	</div>
 </div>
 
-<div class="col-sm-12">
-	<div class="table-responsive">
-		<table class="table table-bordered " ng-if="project.location_map.details">
+<div >
+	<div class="table-responsive">{{project.location_map}}
+		<table class="table table-bordered " >
 			<tr>
 				<th>Location Map Heading</th>
 				<th>Location Map Description</th>
 				<th>Location Map Image</th>
 				<th>Remove </th>
 			</tr>
-			<tr ng-repeat="(key, value) in project.location_map.details">{{project.location_map.details.description}}
-				<td>{{key}}</td>
-				<!-- <td ng-bind-html="{{value.description}}"> -->
-				<td ng-bind-html="location_map.description">
-				</td>
-				<td>
-				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.location_image.file_relative_path}}" width="150px" />
+			<tr ng-repeat="(key, value) in project.location_map">
+				<td>{{value.title}}</td>
+				<td ng-bind-html="value.description">
+				<td><span ng-if="value.image">
+				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" /></span>
 				</td>
 				<td><button ng-click="removeObject(key,project.location_map.details)">Remove</button></td>
 			</tr>

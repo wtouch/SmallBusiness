@@ -216,10 +216,10 @@ define(['app'], function (app) {
 						$scope.totalRecords = response.totalRecords;
 						$scope.properties = response.data; 					
 						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-						$notification[response.status]("Get Property", response.message);
+						$notification[response.status];
 					}else{
 						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-						$notification[response.status]("Get Property", response.message);
+						$notification[response.status];
 					}
 			});	
 			

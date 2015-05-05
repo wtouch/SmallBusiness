@@ -89,42 +89,12 @@ define(['app'], function (app) {
 		
 	/*********************************************************************/
 		
-		// Add Business multi part form show/hide operation from here! {pooja}
+		// Add Business multi part form show/hide operation from here! 
 		$scope.formPart = 'property';
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
 		};
-	/*********************************************************************/
-		
-	//dynamic dropdwnlist of country,state & city
 	
-		$scope.contries = dataService.config.country;
-		
-		 $scope.getState = function(country){
-			var states = [];
-			for (var x in $scope.contries){
-				if($scope.contries[x].country_name == country){
-					for(var y in $scope.contries[x].states){
-						states.push($scope.contries[x].states[y])
-					}
-				}
-			}
-			$scope.states = states;
-		};
-		
-		
-		$scope.getCities = function(state){
-			var cities = [];
-			for (var x in $scope.states){
-				if($scope.states[x].state_name == state){
-					for(var y in $scope.states[x].cities){
-						cities.push($scope.states[x].cities[y])
-					}
-				}
-			}
-			$scope.cities = cities;
-		}; 
-		
 	/*********************************************************************/
 	
 	//display dynamic list from project table 
@@ -133,7 +103,6 @@ define(['app'], function (app) {
 												
 				$scope.addProjName = response.data;				
 			});
-
          
 		dataService.get('getmultiple/property/1/50', $scope.userinfo)
 			.then(function(response){
@@ -145,7 +114,6 @@ define(['app'], function (app) {
 		
 		 //Add property
 		$scope.addPropertyFun = function(property){	
-			
 			$scope.property.date = $scope.currentDate;
 			dataService.post("post/property",property,$scope.userinfo)
 			.then(function(response) {
@@ -196,11 +164,8 @@ define(['app'], function (app) {
 			}
 			$scope.websites = websites;
 		})  
-		 /* $scope.websites = [
-			{id:1, domain_name:"google.com"},
-			{id:2, domain_name:"wtouch.in"},
-		]; */
-		 $scope.$watchCollection('websites', function(newNames, oldNames) {	
+		
+		$scope.$watchCollection('websites', function(newNames, oldNames) {	
 		}); 
 		$scope.checkAll = function(websites, checkValue) {			
 			if(checkValue){

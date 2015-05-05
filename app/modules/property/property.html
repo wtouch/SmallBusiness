@@ -17,7 +17,6 @@
 						<span class="input-group-btn">
 							<button class="btn btn-success" type="button">Go!</button>
 						</span>
-						
 					</div><!-- /input-group -->
 				</div>	
 				
@@ -75,10 +74,8 @@
 							<tbody>
 								<tr ng-repeat="x in properties | orderBy:sort">
 									<td>{{((currentPage - 1) * pageItems) + $index + 1}}</td>
-									<td>
-										{{x.property_images}}									
-										 <!-- <img ng-src="{{x.property_images}}" ng-click="open(x.property_images)" class="img-thumbnail   img-responsive prop-img" title="Property image">  -->
-										 <img class="img-responsive" ng-model="x.property_images" ng-src="{{appConfig.assetPath + x.property_images.file_relative_path}}"/>
+									<td><!--ng-model="x.property_images"-->								
+										<img class="img-responsive"  ng-src="{{appConfig.assetPath + x.property_images.file_relative_path}}"/>
 									</td> <!-- ng-click added for modal, class added for responsive image --> 
 									<td style="max-width:435px">
 										<table class="table table-bordered table-responsive">
@@ -94,35 +91,25 @@
 												<td><b>Property Type</b></td>
 												<td>{{x.type}}</td>		
 											</tr>
-											<tr>
+											<tr ng-if="x.address">
 												<td><b>Address</b></td>
 												<td>{{x.address}}</td>
 											</tr>
-											<tr>
+											<tr ng-if="x.city">
 												<td><b>City</b></td>
 												<td>{{x.city}}</td>
 											</tr>
-											<tr>
-												<td><b>State</b></td>
+											<tr ng-if="x.state">
+												<td ><b>State</b></td>
 												<td>{{x.state}}</td>
 											</tr>
-											<tr>
+											<tr ng-if="x.country">
 												<td><b>Country</b></td>
 												<td>{{x.country}}</td>
 											</tr>
 										</table>
 									</td>	
-									
-									<!-- <td>										
-										<a class="btn btn-success" ng-show="x.featured==0" title="Featured">Featured </a>
-										
-										<a class="btn btn-warning" ng-show="x.featured==1" title="Not featured"> Not Featured </a>
-									</td>	 -->		
-									<!-- <td>
-										<a class="btn btn-success"  ng-show="x.status==1" title="Active">Active</a>
-										
-										<a class="btn btn-warning"  ng-show="x.status==0" title="Delete">Delete</a>
-									</td> -->
+								
 									<td>{{x.domain}}</td>				
 									<td style="max-width:150px">
 										<div class="btn-group">

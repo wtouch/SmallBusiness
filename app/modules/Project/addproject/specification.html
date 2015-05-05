@@ -9,7 +9,7 @@
 	<label  for="specificationTitle" class="col-sm-2 control-label">* Title</label>
 	<div class="col-sm-9">		
 		<input type="text"  id="specificationTitle" class="form-control" name="specificationTitle" ng-model="project.specifications.title"    cols="20" rows="4" ng-maxlength="356" required />
-		<p ng-hide="addProject.specificationTitle.$error.maxlength">{{ 356 - specifications.title + " Chars left" }}</p>
+		<p ng-hide="addProject.specificationTitle.$error.maxlength">{{ 356 - project.specifications.title + " Chars left" }}</p>
 			<span class="text-danger" ng-show="addProject.specificationTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
 				<span class="text-danger" ng-show="addProject.specificationTitle.$dirty && addProject.title.$invalid">
@@ -20,7 +20,7 @@
 	<label for="specificationDiscription" class="col-sm-2 control-label">* Description</label> 
 	<div class="col-sm-9">
 			<textarea class="form-control" id="specificationDiscription"  name="specificationDiscription" ng-model="project.specifications.description" cols="20" rows="4" ng-maxlength="356" required ui-tinymce ></textarea>
-		<p ng-hide="addProject.specificationDiscription.$error.maxlength">{{ 356 - specifications.description.description.length + " Chars left" }}</p>
+		<p ng-hide="addProject.specificationDiscription.$error.maxlength">{{ 356 - project.specifications.description.description.length + " Chars left" }}</p>
 		 <span class="text-danger" ng-show="addProject.specificationDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 		<span class="text-danger" ng-show="addProject.specificationDiscription.$dirty && addProject.specificationDiscription.$invalid">

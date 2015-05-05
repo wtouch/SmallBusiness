@@ -13,8 +13,8 @@
 <div class="form-group">
 	<label  for="layoutTitle" class="col-sm-2 control-label">* Title</label>
 	<div class="col-sm-9">		
-		<input type="text"  id="layoutTitle" class="form-control" name="layoutTitle" ng-model="layout_map.title"    cols="20" rows="4" ng-maxlength="60" required />
-		<p ng-hide="addProject.title.$error.maxlength">{{ 60 - layout_map.title + " Chars left" }}</p>
+		<input type="text"  id="layoutTitle" class="form-control" name="layoutTitle" ng-model="project.layout_map.title"    cols="20" rows="4" ng-maxlength="60" required />
+		<p ng-hide="addProject.title.$error.maxlength">{{ 60 - project.layout_map.title + " Chars left" }}</p>
 			 <span class="text-danger" ng-show="addProject.layoutTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
 				<span class="text-danger" ng-show="addProject.layoutTitle.$dirty && addProject.layoutTitle.$invalid">
@@ -38,8 +38,8 @@
 <div class="form-group"> 
 	<label for="layoutDiscription" class="col-sm-2 control-label"> *  Description</label> 
 	<div class="col-sm-9">
-			<textarea class="form-control" id="layoutDiscription"  name="layoutDiscription" ng-model="layout_map.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.layoutDiscription.$error.maxlength">{{ 356 - alayout_map.description.description.length + " Chars left" }}</p>
+			<textarea class="form-control" id="layoutDiscription"  name="layoutDiscription" ng-model="project.layout_map.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
+		<p ng-hide="addProject.layoutDiscription.$error.maxlength">{{ 356 - project.layout_map.description.length + " Chars left" }}</p>
 		 <span class="text-danger" ng-show="addProject.layoutDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 		<span class="text-danger" ng-show="addProject.layoutDiscription.$dirty && addProject.layoutDiscription.$invalid">

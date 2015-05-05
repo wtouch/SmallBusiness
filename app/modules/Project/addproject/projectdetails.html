@@ -4,7 +4,7 @@
 	<div class="form-group" ng-if="userDetails.group_name != 'customer'">
 		<label for="customer" class="col-sm-2 control-label">Customer*</label>
 		<div class="col-sm-7">
-				<select class="form-control" name="customer" id="customer"  ng-model="project.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " required>
+				<select class="form-control" name="customer" id="customer" ng-change="getWebsite(project.user_id)"  ng-model="project.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " required>
 					<option value="">Select Customer</option>
 				</select>
 			<span class="help-block" ng-show="addProject.customer.$dirty && addProject.customer.$invalid">
@@ -16,7 +16,7 @@
 		</div> 
 	</div>
 	<span ng-if="userDetails.group_name == 'customer'">
-		<input type="hidden" class="form-control" ng-model="project.user_id" ng-init="project.user_id = userDetails.id" readonly/>
+		<input type="hidden" class="form-control" ng-model="project.user_id"  ng-init="project.user_id = userDetails.id; getWebsite(userDetails.id)" readonly/>
 	</span> 
 <!-- This block for current user id -->
 			
@@ -30,7 +30,7 @@
 			<span class="text-danger" ng-show="addProject.projectTitle.$dirty && addProject.projectTitle.$invalid">
 			<span ng-show="addProject.projectTitle.$error.required">Project title is required .</span>
 	</div>
-	<input type="hidden" ng-model="project.user_id">
+	<!-- <input type="hidden" ng-model="project.user_id"> -->
 	<input type="hidden" ng-model="project.status">
 	<input type="hidden" ng-model="project.date">
 	</div>
