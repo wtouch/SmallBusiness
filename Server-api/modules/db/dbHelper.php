@@ -260,18 +260,26 @@ class dbHelper {
 		}
 	}
 	
-	function getQueryString($total = false){
-		$table = $this->getTable();
-		$columns = $this->getColumns();
-		$joinCols = $this->getJoinString();
-		$orderBy = $this->getOrderBy();
-		$groupBy = $this->getGroupBy();
-		$where = $this->getWhere();
-		$limit = $this->getLimit();
-		if($total == true){
-			$this->queryString ="(SELECT COUNT(t0.id) as totalRecords FROM ".$table." ".$joinCols." ".$where." ".$orderBy.") ";
+	function setQueryString($total){
+		
+	}
+	
+	function getQueryString($total = false, $queryString = null){
+		if($queryString == null){
+			$table = $this->getTable();
+			$columns = $this->getColumns();
+			$joinCols = $this->getJoinString();
+			$orderBy = $this->getOrderBy();
+			$groupBy = $this->getGroupBy();
+			$where = $this->getWhere();
+			$limit = $this->getLimit();
+			if($total == true){
+				$this->queryString ="(SELECT COUNT(t0.id) as totalRecords FROM ".$table." ".$joinCols." ".$where." ".$orderBy.") ";
+			}else{
+				$this->queryString = "SELECT ".$columns." FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy." ".$limit;
+			}
 		}else{
-			$this->queryString = "SELECT ".$columns." FROM ".$table." ".$joinCols." ".$where." ".$groupBy." ".$orderBy." ".$limit;
+			$this->queryString = $queryString;
 		}
 
 		return $this->queryString;

@@ -62,6 +62,47 @@ class portalManager{
 	
 	
 	
+	function getSitemapData(){
+		try{
+			$where['status'] = 1;
+			$t0 = $this->db->setTable("business");
+			$this->db->setWhere($where, $t0);
+			$this->db->setColumns($t0, array("business_name, category, type, city"));
+			$this->db->setGroupBy(array('type'));
+			
+			$data = $this->db->select();
+			if($data['status'] != "success"){
+				throw new Exception($data['message']);
+			}
+			foreach($data['data'] as $key => $value){
+				$response['url'][] = array("url" => "http://".$this->config['host'] . "/" . $value['city']);
+			}
+			$where['status'] = 1;
+			$t0 = $this->db->setTable("business");
+			$this->db->setWhere($where, $t0);
+			$this->db->setColumns($t0, array("business_name, category, type, city"));
+			$this->db->setGroupBy(array('city'));
+			
+			$data = $this->db->select();
+			if($data['status'] != "success"){
+				throw new Exception($data['message']);
+			}
+			foreach($data['data'] as $key => $value){
+				$response['url'][] = array("url" => "http://".$this->config['host'] . "/" . $value['city']);
+			}
+			
+			
+			
+			$response["status"] = "success";
+			$response["message"] = "Data List displays successfully";
+		}catch(Exception $e){
+            $response = $this->setResponse($data = array(),$city=null);
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+        }
+		
+        return $response;
+	}
 	function getDataByKeyword($city, $keyword, $search = false){
 		try{
 			$where['status'] = 1;
@@ -194,6 +235,7 @@ class portalManager{
 		try{
 			if($city==null) $city = "Pune";
 			$groupBy = array('category');
+			
 			$where['status'] = 1;
 			$where['city'] = $city;
 				

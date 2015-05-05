@@ -29,6 +29,15 @@ $app->get('/', function() use($app, $config, $twig, $portal) {
 	}
 	$template->display($response);
 });
+$app->get('/sitemapdata', function() use($app, $config, $twig, $portal) {
+	$response = $portal->getSitemapData();
+	$app->response->headers->set('Content-Type', 'application/json');
+	if($response['status'] == "success"){
+		echo json_encode($response['url']);
+	}else{
+		echo json_encode($response);
+	}
+});
 $app->get('/addbusiness', function() use($app, $config, $twig, $portal) {
 	
 	$response = $portal->getCategories($city=null);
