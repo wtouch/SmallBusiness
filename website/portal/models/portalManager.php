@@ -68,30 +68,19 @@ class portalManager{
 			$t0 = $this->db->setTable("business");
 			$this->db->setWhere($where, $t0);
 			$this->db->setColumns($t0, array("business_name, category, type, city"));
-			$this->db->setGroupBy(array('type'));
+			//$this->db->setGroupBy(array('type'));
 			
 			$data = $this->db->select();
 			if($data['status'] != "success"){
 				throw new Exception($data['message']);
 			}
 			foreach($data['data'] as $key => $value){
-				$response['url'][] = array("url" => "http://".$this->config['host'] . "/" . $value['city']);
+				$response['url'][$value['city']] = array("url" => "http://".$this->config['host'] . "/" . $value['city']);
+				
+				$response['url'][$value['category']] = array("url" => "http://".$this->config['host'] . "/" . str_replace(' ','-',$value['city']). "/" . $value['category']);
+				
+				$response['url'][$value['type']] = array("url" => "http://".$this->config['host']  . "/" . $value['city']. "/" . $value['category']. "/" . $value['type']);
 			}
-			$where['status'] = 1;
-			$t0 = $this->db->setTable("business");
-			$this->db->setWhere($where, $t0);
-			$this->db->setColumns($t0, array("business_name, category, type, city"));
-			$this->db->setGroupBy(array('city'));
-			
-			$data = $this->db->select();
-			if($data['status'] != "success"){
-				throw new Exception($data['message']);
-			}
-			foreach($data['data'] as $key => $value){
-				$response['url'][] = array("url" => "http://".$this->config['host'] . "/" . $value['city']);
-			}
-			
-			
 			
 			$response["status"] = "success";
 			$response["message"] = "Data List displays successfully";
