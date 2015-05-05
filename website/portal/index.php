@@ -39,9 +39,8 @@ $app->get('/sitemapdata', function() use($app, $config, $twig, $portal) {
 	}
 });
 $app->get('/addbusiness', function() use($app, $config, $twig, $portal) {
-	
-	$response = $portal->getCategories($city=null);
-	$template = $twig->loadTemplate("loginuser.html");
+	$response = $portal->verifiCode($city=null);
+	$template = $twig->loadTemplate("addbusiness.html");
 	$template->display($response);
 });
 
@@ -56,17 +55,15 @@ $app->post('/addbusiness', function() use($app, $config, $twig, $portal, $body) 
 	$response = $portal->addBusiness($body);
 });
 
-$app->get('/verified', function() use($app, $config, $twig, $portal) {
-	$response = $portal->getCategories($city=null);
+ $app->get('/verified', function() use($app, $config, $twig, $portal,$body) {
+	$response = $portal->verifiCode($body=null);
 	$template = $twig->loadTemplate("verified.html");
 	$template->display($response);
 });
 
-$app->post('/verified', function() use($app, $config, $twig, $portal) {
-	$response = $portal->getCategories($city=null);
-	$template = $twig->loadTemplate("verified.html");
-	$template->display($response);
-});
+/*$app->post('/verified', function() use($app, $config, $twig, $portal,$body) {
+	$response = $portal->verifiCode($body);
+}); */
 
 $app->get('/:city', function($city=null) use($app, $config, $twig, $portal) {
 	$city = $portal->decodeUrl($city);

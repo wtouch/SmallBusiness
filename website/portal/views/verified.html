@@ -6,24 +6,40 @@
 {% block content %}
 
 {% autoescape false %}
-{% include 'includes/header.html' ignore missing %}
+
 
 <main>
-	<form autocomplete="off" novalidate class="form-horizontal   boxborder" name="loginUser" ng-submit="VerificationForm.$valid" ng-controller="loginuserController">
-	<h4>Your Verification Code Send to your Mobile & Email ID please check Verified to add your business  </p> 
+	<form autocomplete="off" action="/addbusiness" method="GET" novalidate class="form-horizontal   boxborder" name="loginUser">
+	<h4>Enter verification code for verify your account to add your business  </h4> 
+	{% if emailstatus != 'success' %}
 		<div class="form-group">	
-			<label  for="code" class="col-sm-3 control-label">Enter Code Here</label>
+			<label  for="email-code" class="col-sm-3 control-label">* Email Verification Code :</label>
 			<div class="col-sm-6">
-				<input type="code" class="form-control" id="code" ng-model="verify.contact_profile.code" name="code" placeholder="Enter Verification Code" required >
-				<span class="help-block" ng-show="VerificationForm.code.$dirty && VerificationForm.code.$invalid">
-				<span ng-show="VerificationForm.code.$error.required" class="text-danger">Code is required.</span>
+				<input type="text" class="form-control" id="email-code" ng-model="verify.ev" name="ev" placeholder="Email Verification" required >
+				<span class="help-block" ng-show="VerificationForm.email-code.$dirty && VerificationForm.email-code.$invalid">
+				<span ng-show="VerificationForm.email-code.$error.required" class="text-danger">Email Code is required.</span>
 			
 				</span>
 			</div>
-		</div>	
+		</div>
+		{%else%}
+		<input type="hidden" value="{{ev}}" name="ev"/>
+		{% endif %}
+		{% if mobilestatus != 'success' %}
+		<div class="form-group">	
+			<label  for="mobcode" class="col-sm-3 control-label">* Mobile Verification Code</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" id="mobcode" ng-model="verify.mv" name="mv" placeholder=" Mobile Verification " required >
+				<span class="help-block" ng-show="VerificationForm.mobcode.$dirty && VerificationForm.mobcode.$invalid">
+				<span ng-show="VerificationForm.mobcode.$error.required" class="text-danger">Mobile Verification is required.</span>
+			
+				</span>
+			</div>
+		</div>
+		{% endif %}
 		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-			  <button type="submit" ng-disabled="VerificationForm.$invalid" class="btn btn-primary" name="btn1" ng-model="userlogin.btn1" ng-click="verifyCode(verify)">Sign in</button>
+			<div class="col-sm-offset-3 col-sm-10">
+			  <button type="submit" class="btn btn-primary">Verify</button>
 			</div>
 		 </div>
 	</form>

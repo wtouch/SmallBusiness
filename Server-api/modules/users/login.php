@@ -50,8 +50,6 @@
 			}else{
 				throw new Exception('Password does\'n match!');
 			}
-			
-				
 		}catch(Exception $e){
             $response["status"] = "error";
             $response["message"] = 'Error: ' .$e->getMessage();

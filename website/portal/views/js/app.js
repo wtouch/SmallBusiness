@@ -173,10 +173,22 @@ define(['angular',
 		}]).controller('loginuserController',['$scope','$injector','dataService','$location', function($scope,$injector,dataService,$location) {
 			$scope.insert = function(userlogin){
 				console.log(userlogin);
-				$scope.params = {url:'verified'};
 				dataService.post("/businesslogin",userlogin).then(function(response) {
-					window.location.href = "/verified";
+					
+						window.location.href = "/verified";
+					
 				}); 
+			}
+			
+		}]).controller('verificationController',['$scope','$injector','dataService','$location', function($scope,$injector,dataService,$location) {
+			$scope.verifyCode = function(verify){
+				console.log(verify);
+				 /* dataService.get("/verified",verify).then(function(response) {
+					if(response.status == "success"){
+						window.location.href = "/addbusiness";
+					}
+					
+				});   */
 			}
 			
 		}]).controller('businessController',['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope', function($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope) {
@@ -256,9 +268,9 @@ define(['angular',
 			}
 		
 			$scope.path = "business/"; 
-			$scope.userinfo = {user_id : 1}; // this is for uploading credentials	
-			$scope.upload = function(files,path,userinfo, picArr){ 
-				upload.upload(files,path,userinfo,function(data){
+			$scope.userinfo = {user_id:1}; // this is for uploading credentials	
+			$scope.upload = function(files,path,userInfo, picArr){ 
+				upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
 						if(picArr == "business_logo"){
 							$scope.addbusiness.business_logo = data.data;
@@ -266,6 +278,9 @@ define(['angular',
 						if(picArr == "contact_photo"){
 							$scope.addbusiness.contact_profile.contact_photo = data.data;
 						}
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification.error("Upload Image", data.message);
 					}
 				});
 			};

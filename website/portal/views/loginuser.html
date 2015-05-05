@@ -6,17 +6,17 @@
 {% block content %}
 
 {% autoescape false %}
-{% include 'includes/header.html' ignore missing %}
+
 
 <main>
 	<form autocomplete="off" novalidate class="form-horizontal   boxborder" name="loginUser" ng-submit="loginUser.$valid" ng-controller="loginuserController"><p> To add your business please enter your detail here </p> 
 		<div class="form-group">	
-			<label  for="email" class="col-sm-3 control-label"> * Email ID :</label>
+			<label  for="to_email" class="col-sm-3 control-label"> * Email ID :</label>
 			<div class="col-sm-6">
-				<input type="Email" class="form-control" id="email" ng-model="userlogin.email" name="email" placeholder="Enter Email" required >
-				<span class="help-block" ng-show="loginUser.email.$dirty && loginUser.email.$invalid">
-				<span ng-show="loginUser.email.$error.required" class="text-danger">Email is required.</span>
-				<span ng-show="loginUser.email.$error.email" class="text-danger">Invalid Email address.</span>
+				<input type="Email" class="form-control" id="to_email" ng-model="userlogin.to_email" name="to_email" placeholder="Enter Email" required >
+				<span class="help-block" ng-show="loginUser.to_email.$dirty && loginUser.to_email.$invalid">
+				<span ng-show="loginUser.to_email.$error.required" class="text-danger">Email is required.</span>
+				<span ng-show="loginUser.to_email.$error.email" class="text-danger">Invalid Email address.</span>
 				</span>
 			</div>
 		</div>	
@@ -27,13 +27,13 @@
 				<span class="help-block" ng-show="loginUser.phone.$dirty && loginUser.phone.$invalid">
 					<span class="text-danger" ng-show="loginUser.phone.$error.pattern && (loginUser.phone.$dirty || submitted)">Enter a Valid Contact Number.</span>
 				</span>
-				<input type="hidden" ng-model="userlogin.to_email" ng-init="userlogin.to_email = 'sunita@wtouch.in'">
+				<input type="hidden" ng-model="userlogin.email" ng-init="userlogin.email = 'admin@apnasite.in'">
 				
 			</div>						
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-			  <button type="submit" ng-disabled="loginUser.$invalid" class="btn btn-primary" name="btn1" ng-model="userlogin.btn1" ng-click="insert(userlogin)">Sign in</button>
+			  <button type="submit" ng-disabled="loginUser.$invalid" class="btn btn-primary" name="btn1" ng-model="userlogin.btn1" ng-click="insert(userlogin)">Submit</button>
 			</div>
 		 </div>
 	</form>

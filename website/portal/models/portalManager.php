@@ -18,6 +18,10 @@ class portalManager{
 	function decodeUrl($url){
 		return $url = str_replace("-"," ",$url);
 	}
+	function getSession($getRequest){
+		$sessionObj = new session();
+		echo json_encode($sessionObj->getSession());
+	}
 	
 	function jsonDecode($data){
 		if($data==null || $data==""){
@@ -60,14 +64,13 @@ class portalManager{
 		return $response;
 	}
 	
-	
-	
+	//code to display sitemap details
 	function getSitemapData(){
 		try{
 			$where['status'] = 1;
 			$t0 = $this->db->setTable("business");
 			$this->db->setWhere($where, $t0);
-			$this->db->setColumns($t0, array("business_name, category, type, city"));
+			$this->db->setColumns($t0, array("business_name"=>"business_name", "category"=>"category", "type"=>"type","city"=>"city","id"=>"business_id"));
 			//$this->db->setGroupBy(array('type'));
 			
 			$data = $this->db->select();
@@ -75,11 +78,13 @@ class portalManager{
 				throw new Exception($data['message']);
 			}
 			foreach($data['data'] as $key => $value){
-				$response['url'][$value['city']] = array("url" => "http://".$this->config['host'] . "/" . $value['city']);
+				$response['url'][$value['city']] = array("url" => "http://".$this->config['host'] . "/" . str_replace(' ','-',$value['city']));
 				
-				$response['url'][$value['category']] = array("url" => "http://".$this->config['host'] . "/" . str_replace(' ','-',$value['city']). "/" . $value['category']);
+				$response['url'][$value['category']] = array("url" => "http://".$this->config['host'] . "/" . str_replace(' ','-',$value['city']). "/" .str_replace(' ','-', $value['category']));
 				
-				$response['url'][$value['type']] = array("url" => "http://".$this->config['host']  . "/" . $value['city']. "/" . $value['category']. "/" . $value['type']);
+				$response['url'][$value['type']] = array("url" => "http://".$this->config['host']  . "/" .str_replace(' ','-', $value['city']). "/" .str_replace(' ','-', $value['category']). "/" .str_replace(' ','-', $value['type']));
+				
+				$response['url'][$value['business_name'].$value['business_id']] = array("url" => "http://".$this->config['host']  . "/" . str_replace(' ','-',$value['city']). "/" . str_replace(' ','-',$value['category']). "/" . str_replace(' ','-',$value['type']). "/" . str_replace(' ','-',$value['business_name']). "/" . $value['business_id']);
 			}
 			
 			$response["status"] = "success";
@@ -92,6 +97,8 @@ class portalManager{
 		
         return $response;
 	}
+	
+	//code for access keywords
 	function getDataByKeyword($city, $keyword, $search = false){
 		try{
 			$where['status'] = 1;
@@ -130,6 +137,8 @@ class portalManager{
 		
         return $response;
 	}
+	
+	//code for send user enquiry
 	function sendEnquiry($body){
 		$input = json_decode($body);
 		$from['email'] = $input->from_email->from;
@@ -188,34 +197,131 @@ class portalManager{
 		
 		echo json_encode($response);
 	}
+	
+	function curlCall($url){
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+		//curl_setopt($curl, CURLOPT_PROXY, $proxy);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		$result = curl_exec($curl);
+		curl_close($curl);
+		return $result;
+	}
+	
+	function sendSms($message, $phone){
+			
 
+			$message = trim($message);
+			$number = trim($phone);
+
+			$message = urlencode($message);
+
+			$url = 'http://sms.wtouch.in/httpapi/smsapi?uname=apnasite&password=apna@2015&sender=APNAST&receiver='.$number.'&route=T&msgtype=1&sms='.$message;
+
+			$message_id = $this->curlCall($url);
+
+			$url = 'http://sms.wtouch.in/httpapi/dlrapi?uname=apnasite&password=apna@2015&smsgroupid='.$message_id;
+			$dlr = $this->curlCall($url);
+
+			$xml = simplexml_load_string($dlr);
+			$json = json_encode($xml);
+			$array = json_decode($json,TRUE);
+			$json;
+
+			return $array['Report']['Status'];
+
+	}
+	//code for verified the mail or mobile verification code
+	function verifiCode(){
+		try{
+			$response = $this->setResponse($data = array(),$city=null);
+			if(isset($_SESSION['ev']) && isset($_SESSION['mv'])){
+				echo $_SESSION['mv'];
+				if(isset($_GET['mv'])){
+					if($_SESSION['mv'] != $_GET['mv']){
+						throw new Exception("Mobile Verification Failed. Pleas try again.");
+					}
+					$response['mobilestatus'] = "success";
+					$response['data']['user_mobile'] = $_SESSION['user_mobile'];
+					
+				}else{
+					$response['mobilestatus'] = "pending";
+				}
+				if(isset($_GET['ev'])){
+					if($_SESSION['ev'] != $_GET['ev']){
+						throw new Exception("Email Verification Failed. Please try again.");
+					}
+					$response['emailstatus'] = "success";
+					$response['data']['user_email'] = $_SESSION['user_email'];
+					$response['ev'] = $_GET['ev'];
+				}else{
+					$response['emailstatus'] = "pending";
+				}
+				
+			}
+			$response["status"] = "success";
+			$response["message"] = "Code Verification done successfully";
+		}catch(Exception $e){
+            $response = $this->setResponse($data = array(),$city=null);
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+        }
+		return $response;
+	}
+	
+	//code for send email verification 
 	function sendVerification($body){
+		try{
+			$sessionObj = new session();
 			$input = json_decode($body);
 			$smsUniqueId = rand(99,9999);
 			$emailUniqueId = $this->passHash->getUniqueId();
-			$mail['email'] = $input->email;
+			$mail['email'] = trim($input->email);
+			$mail['name'] = trim("Apna Site");
+			$phone = $input->phone;
 			$subject = "Verify your Account"; 
 			
-			/* ?ev=$this->passHash->hash($emailUniqueId)
-			$this->passHash->check_password($_GET['ev'], session['ev']); */
+			$sessionObj->setSession(array("mv"=>$smsUniqueId, "ev"=>$emailUniqueId, "user_email"=>$input->to_email, "user_mobile"=>$phone), 60*15);
 			
-			$message = "<h3>Dear User your verification code is".$smsUniqueId ." Plz Use this to login to add your business</h3>";
-			$recipients = array($input->to_email) ;
+			$message = trim("<h3>Dear User your verification code is ".$emailUniqueId.", <a href='http://sunita.local/verified?ev=".$emailUniqueId."'>Verify  your account</a></h3>");
+			
+			$smsMsg = trim("Apnasite verification code is - ".$smsUniqueId);
+			$recipients = array($input->to_email);
 			$sendmail = $this->db->sendMail($mail, $recipients, $subject, $message,$replyTo=null, $attachments = null, $ccMail = null, $bccMail = null, $messageText = null);
-			print_r($sendmail);
-			if($sendmail){
-			$response = $sendmail;
-			$response["status"] = "success";
-			$response["message"] = "Data List displays successfully";
+			
+			if($sendmail['status'] == 'success'){
+				//$sms = $this->sendSms($smsMsg, $phone);
+				/* if($sms != "Sent"){
+					throw new Exception("Verification code not sent to your Mobile! Please try again later!");
+				} */
+				$response = $sendmail;
+			}else{
+				throw new Exception("Mail Not Send Please try again");
 			}
-			 return $response;
-		}
+			$response["status"] = "success";
+			$response["message"] = "Mail Sent successfully";
+		}catch(Exception $e){
+            $response = $this->setResponse($data = array(),$city=null);
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+        }
+		return $response;
+	}
 	
 	// to add business function
 	function addBusiness($body){
-		$insert = $this->db->insert("business", $body);
-		$insert['message'] = $insert['message'];
-		$response= $insert;
+		try{
+			$insert = $this->db->insert("business", $body);
+			$insert['message'] = $insert['message'];
+			$response= $insert;
+			$response["status"] = "success";
+			$response["message"] = "Your Business Added successfully";
+		}catch(Exception $e){
+            $response = $this->setResponse($data = array(),$city=null);
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+        }
 		echo json_encode($response);
 	}
 	
@@ -303,7 +409,7 @@ class portalManager{
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
         }
-		//print_r($response);
+		
 		return $response;
 	}
 	function getBusinessList ($city, $category, $type){
@@ -419,9 +525,6 @@ class portalManager{
 			$servicedata = $this->db->select();
 			
 			if(is_array($data['data'])){
-				/* foreach($data['data'] as $key => $value){
-					$keyword[] = implode(",",$value['keywords']);
-				} */
 				$keywords = implode(",",array_unique($data['data']['keywords']));
 			}
 			

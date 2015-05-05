@@ -7,6 +7,12 @@
 
 {% autoescape false %}
 {% include 'includes/header.html' ignore missing %}
+{%if status == "error" %}
+	{{message}}
+{%elseif mobilestatus != "success" and emailstatus != "success" %}
+	{% include 'loginuser.html' ignore missing %}
+
+{% elseif mobilestatus == "success" and emailstatus == "success" and status == "success" %}
 
 <main>
 <h4> Add Your Business Here.</h4>
@@ -27,16 +33,15 @@
 				</div>						
 			</div>
 			<div class="form-group" >
-				<label  for="business_logo" class="col-sm-3 control-label">Logo *</label>
-				<div class="col-sm-8">
-					<input type="file" id="business_logo" name="business_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="business_logo">	
+				<label  for="business_logo" class="col-sm-3 control-label">Logo*</label>
+				<div class="col-sm-9">
+					<input type="file" id="business_logo" name="business_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="business_logo" >	
 					<!-- This will show thumbnails & progress of images -->
 						<file-preview url="business_logo"></file-preview>
 						<!-- This button will show if file/s selected -->
-						<button ng-show="business_logo" ng-click="upload(business_logo,path,userinfo,'business_logo
-						')" type="button">Upload</button>
+						<button ng-show="business_logo" ng-click="upload(business_logo,path,userInfo,'business_logo')" type="button">Upload</button>
 						<!-- This hidden input will store image path in array after successful uploading -->
-						<input type="hidden" ng-model="addbusiness.business_logo">
+						<input type="hidden" ng-model="addbusiness.business_logo" required>
 				</div>
 			</div>	
 
@@ -108,15 +113,15 @@
 
 					<div class="form-group" > 
 						<label  for="contact_photo" class="col-sm-3 control-label">Person Photo</label>
-						<div class="col-sm-8">
+						<div class="col-sm-9">
 							<input type="file" id="contact_photo" name="contact_photo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="contact_photo">
-						
+							
 								<file-preview url="contact_photo"></file-preview>
 							
-								<button ng-show="contact_photo" ng-click="upload(contact_photo,path,userInfo, 'addbusiness.contact_profile.contact_photo')" type="button">Upload</button>
-						
+								<button ng-show="contact_photo" ng-click="upload(contact_photo,path,userInfo,'contact_photo')" type="button">Upload</button>
+							
 								<input type="hidden" ng-model="addbusiness.contact_profile.contact_photo">
-						
+							
 						</div>
 					</div>
 										
@@ -210,11 +215,8 @@
 					<div class="form-group">
 						<label for="mobile" class="col-sm-3 control-label">Mobile Number *</label>
 						<div class="col-sm-8">
-							<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addbusiness.contact_profile.mobile" placeholder="Enter Mobile No." ng-pattern="/(7|8|9)\d{9}$/" maxlength="10" required>
-							<span class="help-block" ng-show="addbusinessForm.mobile.$dirty && addbusinessForm.mobile.$invalid">
-								<span ng-show="addbusinessForm.mobile.$error.required" class="text-danger">Mobile/Cell Phone is required.</span>
-								<span ng-show="addbusinessForm.mobile.$error.pattern && (addbusinessForm.mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
-							</span>
+							<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addbusiness.contact_profile.mobile" ng-init="addbusiness.contact_profile.mobile={{data.user_mobile}}" readOnly>
+							
 						</div>						
 					</div>
 					<div class="form-group">
@@ -240,11 +242,8 @@
 					<div class="form-group">	
 						<label  for="email" class="col-sm-3 control-label">Email *</label>
 						<div class="col-sm-8">
-							<input type="Email" class="form-control" id="email" ng-model="addbusiness.contact_profile.email" name="email" placeholder="Enter Email" required >
-							<span class="help-block" ng-show="addbusinessForm.email.$dirty && addbusinessForm.email.$invalid">
-							<span ng-show="addbusinessForm.email.$error.required" class="text-danger">Email is required.</span>
-							<span ng-show="addbusinessForm.email.$error.email" class="text-danger">Invalid Email address.</span>
-							</span>
+							<input type="Email" class="form-control" id="email" ng-model="addbusiness.contact_profile.email" ng-init="addbusiness.contact_profile.email='{{data.user_email}}'" readOnly>
+							
 						</div>
 					</div>	
 					<div class="form-group">	
@@ -278,5 +277,8 @@
 		</form>	
 	</div>
 </main>
+{% else %}
+	{% include 'verified.html' ignore missing %}
+{% endif %}
  {% endautoescape %}
 {% endblock %}	
