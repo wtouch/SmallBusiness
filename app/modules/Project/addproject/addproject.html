@@ -9,23 +9,23 @@
 				
 				<tabset>
 						
-					<tab heading="Project" title="Project information">
+					<tab heading="Project Information" title="Project information">
 						<ng-include  src="'modules/project/addproject/projectdetails.html'">
 						</ng-include> 
 					</tab>
-					<tab heading="Project Image " title="Project Image">	
+					<!-- <tab heading="Project Image " title="Project Image">	
 						<ng-include  src="'modules/project/addproject/projectimage.html'">
 						</ng-include> 
-					</tab>
+					</tab> -->
 					<tab heading="Overview" title="Overview">
 						<ng-include  src="'modules/project/addproject/overview.html'">
 						</ng-include> 
 					</tab>
 					
-					<tab heading="Builder" title="Builder Details">
+					<!-- <tab heading="Builder" title="Builder Details">
 					<ng-include  src="'modules/project/addproject/builder.html'">
 						</ng-include> 
-					</tab>
+					</tab> -->
 					
 					<tab heading="Location" title="Location">
 					<ng-include  src="'modules/project/addproject/Location.html'">
@@ -63,9 +63,11 @@
 					</tab>
 				</tabset> 
 				
-				<ng-include  src="'modules/project/addproject/domains.html'">
-				</ng-include> 
+				<ng-include  ng-if="project.user_id" src="'modules/project/addproject/domains.html'">
+				</ng-include>  
 				
+				<!-- <ng-include ng-show ="project.user_id" src="'modules/project/addproject/domains.html'"> 
+				</ng-include> -->
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-9"><!--ng-disabled="addProject.$invalid" -->
 						<button type="submit" ng-click="addproject(project)" title="Add your new project" class="btn btn-primary text-center">Add new Project</button>

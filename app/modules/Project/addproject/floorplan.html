@@ -4,37 +4,28 @@
 		<button type="button" class="btn btn-default btn-primary pull-right" ng-click="addToObject(floor_plan, project.floor_plan.details)" title="Add Floor Plans">Add Floor Plan</button>
 	</div>
 </div>
+
 <div>
 	<input type="hidden" required name="floor_plan" ng-model="project.floor_plan" />
 	<span class="help-block" ng-show="addProject.floor_plan.$dirty && addProject.floor_plan.$invalid">
 		<span ng-show="addProject.floor_plan.$error.required" class="text-danger">Floor Plan Description is required.</span>
 	</span>
 </div>
+
 <div class="form-group">
 		<label  for="floorTitle" class="col-sm-2 control-label">* Title</label>
 		<div class="col-sm-9">		
-			<input type="text"  id="floorTitle" class="form-control" name="floorTitle" ng-model="project.floor_plan.title"    cols="20" rows="4" ng-maxlength="60" required />
+			<input type="text"  id="floorTitle" class="form-control" name="floorTitle" ng-model="floor_plan.title"    cols="20" rows="4" ng-maxlength="60" required />
 			<p ng-hide="addProject.floorTitle.$error.maxlength">{{ 60 - floor_plan.title + " Chars left" }}</p>
 				 <span class="text-danger" ng-show="addProject.floorTitle.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="addProject.floorTitle.$dirty && addProject.floorTitle.$invalid">
 				  <span ng-show="addProject.floorTitle.$error.required"> title is required .</span>
 		</div>
-	</div>
-	<div class="form-group"> 
-		<label for="floorDescription" class="col-sm-2 control-label">* Description</label> 
-		<div class="col-sm-9">
-				<textarea class="form-control" id="floorDescription"  name="floorDescription" ng-model="project.floor_plan.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-			<p ng-hide="addProject.floorDescription.$error.maxlength">{{ 356 - floor_plan.description.description.length + " Chars left" }}</p>
-			 <span class="text-danger" ng-show="addProject.floorDescription.$error.maxlength">
-					Sorry You are Exceeding the Limit</span>
-			<span class="text-danger" ng-show="addProject.floorDescription.$dirty && addProject.floorDescription.$invalid">
-					<span ng-show="addProject.floorDescription.$error.required"> Description is required .</span>
-			</span>
-		</div>
-	</div>	
-	<div class="form-group">
-		<label for="floor_image" class="col-sm-2 control-label">* Floor Image</label>
+</div>
+
+<div class="form-group">
+	<label for="floor_image" class="col-sm-2 control-label">* Floor Image</label>
 		<div class="col-sm-9">
 			<input type="file" id="floor_image" name="floor_image" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="floor_image">	
 		<!-- This will show thumbnails & progress of images -->
@@ -43,34 +34,41 @@
 			<button ng-show="floor_image" ng-click="upload(floor_image,path,userinfo, floor_plan.description.floor_image)" type="button">Upload</button>
 			<!-- This hidden input will store image path in array after successful uploading -->
 			<input type="hidden" ng-model="floor_plan.description.floor_image">
-	</div>
-	</div>	
-	<!-- <div class="form-group"> 
-		<label for="floorImageDesc" class="col-sm-2 control-label"> Image Description</label> 
+		</div>
+</div>	
+
+<div class="form-group"> 
+	<label for="floorDescription" class="col-sm-2 control-label">* Description</label> 
 		<div class="col-sm-9">
-				<textarea class="form-control" id="floorImageDesc"  name="floorImageDesc" ng-model="addfloor_plan.image_description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-			<p ng-hide="addProject.floorImageDesc.$error.maxlength">{{ 356 - addfloor_plan.image_description.length + " Chars left" }}</p>
-			 <span class="text-danger" ng-show="addProject.floorImageDesc.$error.maxlength">
+				<textarea class="form-control" id="floorDescription"  name="floorDescription" ng-model="floor_plan.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
+			<p ng-hide="addProject.floorDescription.$error.maxlength">{{ 356 - floor_plan.description.description.length + " Chars left" }}</p>
+			 <span class="text-danger" ng-show="addProject.floorDescription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
-			<span class="text-danger" ng-show="addProject.floorImageDesc.$dirty && addProject.floorImageDesc.$invalid">
-					<span ng-show="addProject.floorImageDesc.$error.required"> Description is required .</span>
+			<span class="text-danger" ng-show="addProject.floorDescription.$dirty && addProject.floorDescription.$invalid">
+					<span ng-show="addProject.floorDescription.$error.required"> Description is required .</span>
 			</span>
 		</div>
-	</div>	 -->
-	<div class="col-sm-12">
-		<div class="table-responsive">
-			<table class="table table-bordered " ng-if="project.floor_plan.details">
-				<tr>
-					<th>Floor Plan Title</th>
-					<th>Floor Plan Description</th>
-					<th>Remove </th>
-				</tr>
-				<tr ng-repeat="(key, value) in project.floor_plan.details">
-					<td>{{key}}</td>
-					<td>{{value}}</td>
-					<td><button ng-click="removeObject(key,project.floor_plan.details)">Remove</button></td>
-					
-				</tr>
-			</table>
-		</div>
+</div>	
+
+<div class="col-sm-12">
+	<div class="table-responsive">
+		<table class="table table-bordered " ng-if="project.floor_plan.details">
+			<tr>
+				<th>Floor Plan Title</th>
+				<th>Floor Plan Description</th>
+				<th>Floor Plan Image</th>
+				<th>Remove </th>
+			</tr>
+			<tr ng-repeat="(key, value) in project.floor_plan.details">
+				<td>{{key}}</td>
+				<!-- <td ng-bind-html="{{value.description}}"> -->
+				<td ng-bind-html="floor_plan.description">
+				</td>
+				<td>
+					<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.location_image.file_relative_path}}" width="150px" />
+				</td>
+				<td><button ng-click="removeObject(key,project.floor_plan.details)">Remove</button></td>
+			</tr>
+		</table>
 	</div>
+</div>

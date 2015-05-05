@@ -31,16 +31,16 @@
 
 <div class="col-sm-12">
 	<div class="table-responsive">
-		<table class="table table-bordered " ng-if="project.amenities.details">
+		<table class="table table-bordered " ng-if="project.amenities">
 			<tr>
 				<th>Amenities Title</th>
 				<th>Amenities Description</th>
 				<th>Remove </th>
 			</tr>
-			<tr ng-repeat="(key, value) in project.amenities.details">
+			<tr ng-repeat="(key, value) in project.amenities">
 				<td>{{key}}</td>
 				<td>{{value}}</td>
-				<td><button ng-click="removeObject(key,project.amenities.details)">Remove</button></td>
+				<td><button ng-click="removeObject(key,project.amenities)">Remove</button></td>
 				
 			</tr>
 		</table>

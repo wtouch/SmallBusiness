@@ -2,7 +2,7 @@
 {{alocation_map|json}}
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button type="button" class="btn btn-default btn-primary pull-right" ng-click="addToObject(addlocation_map, project.location_map.details)" title="Add Location map">Add Location map</button>
+		<button type="button" class="btn btn-default btn-primary pull-right" ng-click="addToObject(location_map, project.location_map.details)" title="Add Location map">Add Location map</button>
 	</div>
 	<input type="hidden" required name="location_map" ng-model="project.location_map" />
 </div>
@@ -10,20 +10,32 @@
 <div class="form-group">
 	<label  for="locationTitle" class="col-sm-2 control-label">* Title</label>
 	<div class="col-sm-9">		
-		<input type="text"  id="locationTitle" class="form-control" name="locationTitle" ng-model="project.location_map.title"    cols="20" rows="4" ng-maxlength="60" />
+		<input type="text"  id="locationTitle" class="form-control" name="locationTitle" ng-model="location_map.title"    cols="20" rows="4" ng-maxlength="60"/>
 		<p ng-hide="addProject.locationTitle.$error.maxlength">{{ 60 - location_map.title + " Chars left" }}</p>
 			<span class="text-danger" ng-show="addProject.locationTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
 				<span class="text-danger" ng-show="addProject.locationTitle.$dirty && addProject.locationTitle.$invalid">
 			<span ng-show="addProject.locationTitle.$error.required"> title is required .</span> 
-			
-			
 	</div>
 </div>
-<div class="form-group"> 
-	<label for="locationDiscription" class="col-sm-2 control-label">* Description</label> 
+
+<div class="form-group">
+	<label for="location_image" class="col-sm-2 control-label">*  Location Image</label>
 	<div class="col-sm-9">
-			<textarea class="form-control" id="locationDiscription"  name="locationDiscription" ng-model="project.location_map.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
+		<input type="file" id="location_image" name="location_image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="location_image">	
+		<!-- This will show thumbnails & progress of images -->
+			<file-preview url="location_image"></file-preview>
+			<!-- This button will show if file/s selected -->
+			<button ng-show="location_image" ng-click="upload(location_image,path,userinfo, location_map.location_image)" type="button">Upload</button>
+			<!-- This hidden input will store image path in array after successful uploading -->
+			<input type="hidden" ng-model="location_map.location_image">
+	</div>
+</div>	
+
+<div class="form-group"> 
+	<label for="locationDiscription" class="col-sm-2 control-label">  * Description</label> 
+	<div class="col-sm-9">
+			<textarea class="form-control" id="locationDiscription"  name="locationDiscription" ng-model="location_map.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
 		<p ng-hide="addProject.locationDiscription.$error.maxlength">{{ 356 - location_map.description.length + " Chars left" }}</p>
 		 <span class="text-danger" ng-show="addProject.locationDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
@@ -31,32 +43,7 @@
 				<span ng-show="addProject.locationDiscription.$error.required"> Discription is required .</span>
 		</span>
 	</div>
-</div>	
-<div class="form-group">
-	<label for="location_image" class="col-sm-2 control-label">* Location Image</label>
-	<div class="col-sm-9">
-			<input type="file" id="location_image" name="location_image" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="location_image">	
-		<!-- This will show thumbnails & progress of images -->
-			<file-preview url="location_image"></file-preview>
-			<!-- This button will show if file/s selected -->
-			<button ng-show="location_image" ng-click="upload(location_image,path,userinfo, addlocation_map.description.location_image)" type="button">Upload</button>
-			<!-- This hidden input will store image path in array after successful uploading -->
-			<input type="hidden" ng-model="addlocation_map.description.location_image">
-	</div>
-
-</div>	
-<!-- <div class="form-group"> 
-	<label for="locationImageDis" class="col-sm-2 control-label"> Image Description</label> 
-	<div class="col-sm-9">
-			<textarea class="form-control" id="locationImageDis"  name="locationImageDis" ng-model="addlocation_map.description.image_description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.locationImageDis.$error.maxlength">{{ 356 - addlocation_map.image_description.length + " Chars left" }}</p>
-		 <span class="text-danger" ng-show="addProject.locationImageDis.$error.maxlength">
-				Sorry You are Exceeding the Limit</span>
-		<span class="text-danger" ng-show="addProject.locationImageDis.$dirty && addProject.locationImageDis.$invalid">
-				<span ng-show="addProject.locationImageDis.$error.required"> Description is required .</span>
-		</span>
-	</div>
-</div>	 -->
+</div>
 
 <div class="col-sm-12">
 	<div class="table-responsive">
@@ -64,13 +51,18 @@
 			<tr>
 				<th>Location Map Heading</th>
 				<th>Location Map Description</th>
+				<th>Location Map Image</th>
 				<th>Remove </th>
 			</tr>
-			<tr ng-repeat="(key, value) in project.location_map.details">
+			<tr ng-repeat="(key, value) in project.location_map.details">{{project.location_map.details.description}}
 				<td>{{key}}</td>
-				<td>{{value}}</td>
+				<!-- <td ng-bind-html="{{value.description}}"> -->
+				<td ng-bind-html="location_map.description">
+				</td>
+				<td>
+				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.location_image.file_relative_path}}" width="150px" />
+				</td>
 				<td><button ng-click="removeObject(key,project.location_map.details)">Remove</button></td>
-				
 			</tr>
 		</table>
 	</div>

@@ -13,7 +13,7 @@
 <div class="form-group">
 	<label  for="galleryTitle" class="col-sm-2 control-label">* Title </label>
 	<div class="col-sm-9">		
-		<input type="text"  id="galleryTitle" class="form-control" name="galleryTitle" ng-model="project.addproject_gallery.title"    cols="20" rows="4" ng-maxlength="60" required />
+		<input type="text"  id="galleryTitle" class="form-control" name="galleryTitle" ng-model="addproject_gallery.title"    cols="20" rows="4" ng-maxlength="60" required />
 		<p ng-hide="addProject.galleryTitle.$error.maxlength">{{ 60 - addproject_gallery.title + " Chars left" }}</p>
 			 <span class="text-danger" ng-show="addProject.galleryTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
@@ -21,18 +21,6 @@
 			  <span ng-show="addProject.galleryTitle.$error.required"> title is required .</span>
 	</div>
 </div>
-<div class="form-group"> 
-	<label for="galleryDescription" class="col-sm-2 control-label">* Description</label> 
-	<div class="col-sm-9">
-			<textarea class="form-control" id="galleryDescription"  name="galleryDescription" ng-model="project.addproject_gallery.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.galleryDescription.$error.maxlength">{{ 356 - addproject_gallery.description.description.length + " Chars left" }}</p>
-		 <span class="text-danger" ng-show="addProject.galleryDescription.$error.maxlength">
-				Sorry You are Exceeding the Limit</span>
-		<span class="text-danger" ng-show="addProject.galleryDescription.$dirty && addProject.galleryDescription.$invalid">
-				<span ng-show="addProject.galleryDescription.$error.required"> Description is required .</span>
-		</span>
-	</div>
-</div>	
 
 <div class="form-group">
 	<label for="layout_image" class="col-sm-2 control-label">*  Layout Image</label>
@@ -44,9 +32,23 @@
 			<button ng-show="layout_image" ng-click="upload(layout_image,path,userinfo, addlayout_map.description.layout_image)" type="button">Upload</button>
 			<!-- This hidden input will store image path in array after successful uploading -->
 			<input type="hidden" ng-model="addlayout_map.description.layout_image">
-	</div>
+</div>
 
 </div>	
+
+<div class="form-group"> 
+	<label for="galleryDescription" class="col-sm-2 control-label">* Description</label> 
+	<div class="col-sm-9">
+			<textarea class="form-control" id="galleryDescription"  name="galleryDescription" ng-model="addproject_gallery.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
+		<p ng-hide="addProject.galleryDescription.$error.maxlength">{{ 356 - addproject_gallery.description.description.length + " Chars left" }}</p>
+		 <span class="text-danger" ng-show="addProject.galleryDescription.$error.maxlength">
+				Sorry You are Exceeding the Limit</span>
+		<span class="text-danger" ng-show="addProject.galleryDescription.$dirty && addProject.galleryDescription.$invalid">
+				<span ng-show="addProject.galleryDescription.$error.required"> Description is required .</span>
+		</span>
+	</div>
+</div>	
+
 
 	<!-- <div class="form-group"> 
 		<label for="mediaDiscription" class="col-sm-2 control-label">* Description</label> 
@@ -67,11 +69,15 @@
 				<tr>
 					<th>Project Gallery Title</th>
 					<th>Project Gallery Description</th>
+					<th>Project Gallery Images</th>
 					<th>Remove </th>
 				</tr>
 				<tr ng-repeat="(key, value) in project.project_gallery.details">
 					<td>{{key}}</td>
 					<td>{{value}}</td>
+					<td>
+						<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.location_image.file_relative_path}}" width="150px" />
+					</td>
 					<td><button ng-click="removeObject(key,project.project_gallery.details)">Remove</button></td>
 					
 				</tr>

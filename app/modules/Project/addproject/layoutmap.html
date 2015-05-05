@@ -13,7 +13,7 @@
 <div class="form-group">
 	<label  for="layoutTitle" class="col-sm-2 control-label">* Title</label>
 	<div class="col-sm-9">		
-		<input type="text"  id="layoutTitle" class="form-control" name="layoutTitle" ng-model="project.layout_map.title"    cols="20" rows="4" ng-maxlength="60" required />
+		<input type="text"  id="layoutTitle" class="form-control" name="layoutTitle" ng-model="layout_map.title"    cols="20" rows="4" ng-maxlength="60" required />
 		<p ng-hide="addProject.title.$error.maxlength">{{ 60 - layout_map.title + " Chars left" }}</p>
 			 <span class="text-danger" ng-show="addProject.layoutTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
@@ -21,18 +21,7 @@
 			  <span ng-show="addProject.layoutTitle.$error.required"> title is required .</span>
 	</div>
 </div>
-<div class="form-group"> 
-	<label for="layoutDiscription" class="col-sm-2 control-label"> *  Description</label> 
-	<div class="col-sm-9">
-			<textarea class="form-control" id="layoutDiscription"  name="layoutDiscription" ng-model="project.layout_map.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.layoutDiscription.$error.maxlength">{{ 356 - alayout_map.description.description.length + " Chars left" }}</p>
-		 <span class="text-danger" ng-show="addProject.layoutDiscription.$error.maxlength">
-				Sorry You are Exceeding the Limit</span>
-		<span class="text-danger" ng-show="addProject.layoutDiscription.$dirty && addProject.layoutDiscription.$invalid">
-				<span ng-show="addProject.layoutDiscription.$error.required"> Description is required .</span>
-		</span>
-	</div>
-</div>	
+
 <div class="form-group">
 	<label for="layout_image" class="col-sm-2 control-label">*  Layout Image</label>
 	<div class="col-sm-9">
@@ -44,20 +33,20 @@
 			<!-- This hidden input will store image path in array after successful uploading -->
 			<input type="hidden" ng-model="layout_map.description.layout_image">
 	</div>
-
 </div>	
-<!-- <div class="form-group"> 
-	<label for="layoutImageDis" class="col-sm-2 control-label"> Image Description</label> 
+
+<div class="form-group"> 
+	<label for="layoutDiscription" class="col-sm-2 control-label"> *  Description</label> 
 	<div class="col-sm-9">
-			<textarea class="form-control" id="layoutImageDis"  name="layoutImageDis" ng-model="addlayout_map.image_description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.layoutImageDis.$error.maxlength">{{ 356 - addlayout_map.image_description.length + " Chars left" }}</p>
-		 <span class="text-danger" ng-show="addProject.layoutImageDis.$error.maxlength">
+			<textarea class="form-control" id="layoutDiscription"  name="layoutDiscription" ng-model="layout_map.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
+		<p ng-hide="addProject.layoutDiscription.$error.maxlength">{{ 356 - alayout_map.description.description.length + " Chars left" }}</p>
+		 <span class="text-danger" ng-show="addProject.layoutDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
-		<span class="text-danger" ng-show="addProject.layoutImageDis.$dirty && addProject.layoutImageDis.$invalid">
-				<span ng-show="addProject.layoutImageDis.$error.required"> Description is required .</span>
+		<span class="text-danger" ng-show="addProject.layoutDiscription.$dirty && addProject.layoutDiscription.$invalid">
+				<span ng-show="addProject.layoutDiscription.$error.required"> Description is required .</span>
 		</span>
 	</div>
-</div>	 -->
+</div>	
 
 <div class="col-sm-12">
 	<div class="table-responsive">
@@ -65,11 +54,16 @@
 			<tr>
 				<th>Layout Map Heading</th>
 				<th>Layout Map Description</th>
+				<th>Layout Map Image</th>
 				<th>Remove </th>
 			</tr>
 			<tr ng-repeat="(key, value) in project.layout_map.details">
 				<td>{{key}}</td>
-				<td>{{value}}</td>
+				<!-- <td ng-bind-html="{{value.description}}"> -->
+				<td ng-bind-html="layout_map.description">
+				<td>
+				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.location_image.file_relative_path}}" width="150px" />
+				</td>
 				<td><button ng-click="removeObject(key,project.layout_map.details)">Remove</button></td>
 				
 			</tr>
