@@ -3,13 +3,16 @@
 {% block content %}
 	{% autoescape false %}
 		{% if data.job_careers %}
-		<div class="row text">
+		<div class="row myjobs">
 			<h2 class="text-center">{{title | replace({'_': " "})}}</h2>
-			<hr>
 			{% for key, value in data.job_careers if break == 0 %}
-			<div class="col-sm-4 jobs">
-				<h3>{{key}}</h3>
-				<p>{{ value.description }}</p>
+			<div class="col-sm-4">
+				<div class="panel panel-default">
+					<div class="panel-body jobs">
+						<h3>{{key}}</h3>
+						<p>{{ value.description }}</p>
+					</div>
+				</div>
 			</div>
 			{% endfor %}
 		</div>

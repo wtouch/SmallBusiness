@@ -48,10 +48,10 @@
 		<hr>
 		{% if data.infrastructure %}
 			<div class="infrastructure" id="infrastructure">
-				<h2>Infrastructure/Facilities</h2>
+				<h2 class="text-center">Infrastructure/Facilities</h2>
 				<div class="row">
 					{% for key, value in data.infrastructure %}
-						<div class="col-sm-3">
+						<div class="col-sm-4">
 							<div class="thumbnail">
 								<a href="#">
 									<img class="infraimg img-responsive " src="{{value.image.file_relative_path}}"/>
@@ -59,12 +59,14 @@
 								<div class="caption text-center" ng-controller="aboutController">
 									<h4>{{key}}</h4>
 									<p>{{value.description|length >150 ? value.description|slice(start,150)~ '...' : value.description}}</p>
-									<button type="button" class="btn btn-link"  data-toggle="modal" data-target="#myModal{{key}}">Read More..</button>
+								</div>
+								<div class="read">
+									<a type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal">Read More..</a>
 								</div>
 							</div>
 						</div>
 						<!-- modal -->	
-						<div id="myModal{{key}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 							<div class="modal-dialog modal-lg">
 								<div class="modal-content">
 									<div class="modal-header">
