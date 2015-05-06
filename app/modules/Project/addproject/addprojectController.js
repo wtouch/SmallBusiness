@@ -58,6 +58,11 @@ define(['app'], function (app) {
 			}
 		});
 		
+		// remove object from main form object
+			$scope.removeObject = function(key, object){
+				$scope.alerts.splice(key, 1);
+			}
+		
 		/* // to close alert message
 			$scope.closeAlert = function(index) {
 				$scope.alerts.splice(index, 1);
@@ -139,7 +144,7 @@ define(['app'], function (app) {
 					});	
 					
 					$scope.update = function(Project){				
-												
+						Project.modified_date = dataService.currentDate;
 						dataService.put("put/Project/"+$routeParams.id,Project)
 						.then(function(response) { //function for response of request temp
 							if(response.status == 'success'){

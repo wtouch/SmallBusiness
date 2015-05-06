@@ -1,1 +1,48 @@
-amenities
+<h3>Amenities</h3>	
+<div>
+	<input type="hidden" required name="amenities" ng-model="project.amenities" />
+	<span class="help-block" ng-show="addProject.amenities.$dirty && addProject.amenities.$invalid">
+		<span ng-show="addProject.amenities.$error.required" class="text-danger">Amenities Description is required.</span>
+	</span>
+</div>
+
+<div class="form-group">
+	<label  for="amenitiesTitle" class="col-sm-2 control-label">* Title</label>
+	<div class="col-sm-9">
+		<input type="text"  id="amenitiesTitle" class="form-control" name="amenitiesTitle" ng-model="project.amenities.title"  cols="20" rows="4" ng-maxlength="60" required />
+		<p ng-hide="addProject.amenitiesTitle.$error.maxlength">{{ 60 - project.amenities.title + " Chars left" }}</p>
+			 <span class="text-danger" ng-show="addProject.amenitiesTitle.$error.maxlength">
+			Sorry You are Exceeding the Limit</span>
+				<span class="text-danger" ng-show="addProject.amenitiesTitle.$dirty && addProject.amenitiesTitle.$invalid">
+			  <span ng-show="addProject.amenitiesTitle.$error.required">Title is required .</span>
+	</div>
+</div>
+
+<div class="form-group"> 
+	<label for="amenitiesDiscription" class="col-sm-2 control-label">* Description</label> 
+	<div class="col-sm-9">
+			<textarea class="form-control" id="amenitiesDiscription"  name="amenitiesDiscription" ng-model="project.amenities.description" cols="20" rows="4" ng-maxlength="356" required ui-tinymce></textarea>
+		<p ng-hide="addProject.amenitiesDiscription.$error.maxlength">{{ 356 - project.amenities.description.length + " Chars left" }}</p>
+		 <span class="text-danger" ng-show="addProject.amenitiesDiscription.$error.maxlength">
+				Sorry You are Exceeding the Limit</span>
+		<span class="text-danger" ng-show="addProject.amenitiesDiscription.$dirty && addProject.amenitiesDiscription.$invalid">
+				<span ng-show="addProject.amenitiesDiscription.$error.required"> Description is required .</span>
+		</span>
+	</div>
+</div>	
+<div class="col-sm-12">
+	<div class="table-responsive">
+		<table class="table table-bordered " ng-if="project.amenities">
+			<tr>
+				<th>Amenities Title</th>
+				<th>Amenities Description</th>
+				<th>Remove</th>
+			</tr>
+			<tr ng-repeat="(key, value) in project.amenities">
+				<td>{{key}}</td>
+				<td>{{value}}</td>
+				<td><button ng-click="removeObject(key,project.amenities)">Remove</button></td>
+			</tr>
+		</table>
+	</div>
+</div>

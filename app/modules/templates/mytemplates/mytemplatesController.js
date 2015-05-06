@@ -260,7 +260,7 @@ define(['app'], function (app) {
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Delete Template", response.message);
 				});
-			};			
+			};	
 		
 		//delete for my template
 		$scope.deletedmytemp = function(id, status){
@@ -336,6 +336,8 @@ define(['app'], function (app) {
 				};
 				var modalOptions = {
 					editTemplate: dataService.parse(response.data),
+					modifiedDate : dataService.currentDate,
+					date : $scope.currentDate,
 					myTemplateData : {},
 					slider : {},
 					editIndex : {},
@@ -347,6 +349,30 @@ define(['app'], function (app) {
 						
 						modalOptions.myTemplateData = templateData;
 					},
+					resetParams : function(resetData){
+						dataService.get("getsingle/template/"+tempId)
+						.then(function(response) {	
+						
+						console.log(resetData.template_params);
+						console.log(response.data.template_params);
+							resetData.template_params.color = response.data.template_params.color;
+							resetData.template_params.light_color = response.data.template_params.light_color; 
+							resetData.template_params.dark_color = response.data.template_params.dark_color;
+							resetData.template_params.background_color = response.data.template_params.background_color;
+							resetData.template_params.background_color_light = response.data.template_params.background_color_light;
+							resetData.template_params.background_color_dark = response.data.template_params.background_color_dark;
+						});
+					},
+					/* $scope.resetParams = function (url, tempId) {
+					dataService.get("getsingle/template/"+tempId)
+					.then(function(response) {
+					
+					$scope.templates = response.data;
+					
+					});
+					 */
+					
+					
 					deleteSlide : function(index,object){
 						var index = object.indexOf(index);
 						object.splice(index, 1); 
@@ -579,9 +605,6 @@ define(['app'], function (app) {
 				.then(function(response) {  
 					if(response.status == "success"){
 						$scope.reset();
-						/* setTimeout(function(){
-							$location.path("/dashboard/templates/mytemplates");
-						},500); */
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Submit Template", response.message);
