@@ -1,73 +1,125 @@
-<div class="row">	
+<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+<div class="row">
 	<div class="col-sm-12">
-		<div class="main-content">		
+		<div class="main-content">
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
-			<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-			<h3 class="text-center" title="Add project">Add Project Details</h3>
-			<form class="form-horizontal" role="form" name="addProjectForm" ng-submit="addProject.$valid" ng-init="setFormScope(this)" novalidate>
-				<p class="paraMand">* Fields are mandatory</p>	
+			<h3 class="text-center" title="Add new Project">Add New Project</h3>
+			<form class="form-horizontal" name="addProject" ng-submit="addProject.$valid"novalidate>	
 				
-				<tabset>
-						
-					<tab heading="Project Information" title="Project information">
-						<ng-include  src="'modules/project/addproject/projectdetails.html'">
-						</ng-include> 
-					</tab>
-					
-					<tab heading="Overview" title="Overview">
-						<ng-include  src="'modules/project/addproject/overview.html'">
-						</ng-include> 
-					</tab>
-					
-					<tab heading="Location" title="Location">
-					<ng-include  src="'modules/project/addproject/Location.html'">
-						</ng-include> 
-					</tab>
-					
-					<tab heading="Amenities" title="Amenities">
-						<ng-include  src="'modules/project/addproject/amenities.html'">
-						</ng-include> 
-					</tab>
-					<tab heading="Specifications" title="Specification">
-						<ng-include  src="'modules/project/addproject/specification.html'">
-						</ng-include> 
-					</tab>
-						<tab heading="Location Map" title="This is location map">
-							<ng-include  src="'modules/project/addproject/locationmap.html'">
-						</ng-include> 
-						</tab>
-						<tab heading="Layout Map" title="This is Layout Map">	
-							<ng-include  src="'modules/project/addproject/layoutmap.html'">
-						</ng-include> 
-					</tab>
-					<tab heading="Floor Plans" title="Floor plans">
-						<ng-include  src="'modules/project/addproject/floorplan.html'">
-						</ng-include> 
-					</tab>
-					<tab heading=" Gallery" title="Project Gallery">
-						<ng-include  src="'modules/project/addproject/projectgallery.html'">
-						</ng-include> 
-					</tab>
-							
-					<tab heading="Contact" title="Contact">
-						<ng-include  src="'modules/project/addproject/contactdetails.html'">
-						</ng-include> 
-					</tab>
-				</tabset> 
+				<p class="paraMand">* Fields are mandatory</p>
 				
-				<ng-include  ng-if="project.user_id" src="'modules/project/addproject/domains.html'">
-				</ng-include>  
+				<input type="hidden" id="status" name="status" ng-model="project.status" >	
 				
-				<!-- <ng-include ng-show ="project.user_id" src="'modules/project/addproject/domains.html'"> 
-				</ng-include> -->
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-9"><!--ng-disabled="addProject.$invalid" -->
-						<button type="submit" ng-click="addproject(project)" title="Add your new project" class="btn btn-primary text-center">Add new Project</button>
-							<button type="submit" ng-click="update()" title="Edit your project Details" class="btn btn-success text-center">Edit Project</button>
-							<button type="reset" ng-click="reset()" title="cancel Details" class="btn btn-danger text-center">Cancel</button>
+				<input type="hidden" id="verified" name="verified" ng-model="project.verified" >
+				
+				<input type="hidden" id="user_id" name="user_id" ng-model="project.user_id" >				
+				
+				<input type="hidden" id="status" name="status" ng-model="project.status">
+				
+				<input type="hidden" id="date" name="date" ng-model="project.date">	
+					
+				<ul class="nav nav-tabs">
+				
+					<li role="presentation" ng-class="{active: formPart=='project'}">
+						<a ng-click="showFormPart('project')">Project Information</a>
+					</li>
+					  
+					<li role="presentation" ng-class="{active: formPart=='overview'}">
+						<a ng-click="showFormPart('overview')">Overview</a>
+					</li>
+					  
+					<li role="presentation" ng-class="{active: formPart=='location'}">
+						<a ng-click="showFormPart('location')">Location</a>
+					</li>
+					  
+					
+					<li role="presentation" ng-class="{active: formPart=='amenities'}">
+						<a ng-click="showFormPart('amenities')">Amenities</a>
+					</li>
+					  
+					<li role="presentation" ng-class="{active: formPart=='locationmap'}">
+						<a ng-click="showFormPart('locationmap')">Location Map</a>
+					</li>
+					  
+					<li role="presentation" ng-class="{active: formPart=='layoutmap'}">
+						<a ng-click="showFormPart('layoutmap')">Layout Map</a>
+					</li>
+					
+					<li role="presentation" ng-class="{active: formPart=='floorplan'}">
+						<a ng-click="showFormPart('floorplan')">Floor Plan</a>
+					</li>
+					
+					<li role="presentation" ng-class="{active: formPart=='gallery'}">
+						<a ng-click="showFormPart('gallery')">Gallery</a>
+					</li>
+					  
+					<li role="presentation" ng-class="{active: formPart=='contact'}">
+						<a ng-click="showFormPart('contact')">Contact</a>
+					</li>  
+				</ul>
+				
+					<ng-include  ng-show="formPart=='project'" src="'modules/project/addproject/project.html'">
+					</ng-include> 					
+					
+					<ng-include  ng-show="formPart=='overview'" src="'modules/project/addproject/overview.html'">
+					</ng-include> 
+					
+					<ng-include ng-show="formPart=='location'"  src="'modules/project/addproject/location.html'">
+					</ng-include> 
+					
+					<ng-include  ng-show="formPart=='amenities'" src="'modules/project/addproject/amenities.html'">
+					</ng-include> 
+					
+					<ng-include ng-show="formPart=='locationmap'" src="'modules/project/addproject/locationmap.html'">
+					</ng-include> 
+					
+					<ng-include  ng-show="formPart=='layoutmap'"    src="'modules/project/addproject/layoutmap.html'">
+					</ng-include> 
+					
+					<ng-include ng-show="formPart=='floorplan'" src="'modules/project/addproject/floorplan.html'">
+					</ng-include> 
+					
+					<ng-include ng-show="formPart=='gallery'" src="'modules/project/addproject/gallery.html'">
+					</ng-include> 
+					
+					<ng-include ng-show="formPart=='contact'" src="'modules/project/addproject/contact.html'">
+					</ng-include> 
+					{{project.user_id}}
+					<div class="form-group" ng-if="project.user_id">
+						<div class="col-sm-12">					
+							<h3>Select Sites</h3>
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<tr>
+										<td class="checkbox">
+											<label>
+												<input type="checkbox" ng-model="selectAll" ng-change="checkAll(websites, selectAll)" > Select all
+											</label> 
+										</td>
+										<td class="checkbox">
+											<label ng-repeat="website in websites" class="col-sm-3">
+												<input type="checkbox" checklist-model="project.domain" checklist-value="website"> {{website.domain_name}}
+											</label>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
 					</div>
-				</div>						
-			</form>	
+						
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-9"><!--ng-disabled="addProperty.$invalid"-->
+							<button type="submit" ng-click="addProjectFun(project)"  class="btn btn-primary" title="Add new project">Add New Project</button>
+							
+							<button type="submit" ng-click="update(project)" title="Update your project" class="btn btn-success text-center ">Edit Project</button>
+							<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>
+						</div>
+					</div>							
+			</form>
 		</div>	
 	</div>
 </div>
+
+
+
+
