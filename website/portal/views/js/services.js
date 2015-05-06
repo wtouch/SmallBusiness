@@ -175,7 +175,7 @@ define(['app'], function (app) {
 					for (var i = 0; i < files.length; i++) {
 						var file = files[i];
 						$upload.upload({
-							url: '../index.php/upload',
+							url: '/server-api/index.php/upload',
 							fields: {'path': 'uploads/'+path, 'userinfo': userinfo},
 							file: file
 						}).progress(function (evt) {
@@ -194,6 +194,7 @@ define(['app'], function (app) {
 				}
 			},
 			generateThumb : function(file) {
+				//console.log(file);
 				if (file != null) {
 					if (this.fileReaderSupported && file.type.indexOf('image') > -1) {
 						$timeout(function() {

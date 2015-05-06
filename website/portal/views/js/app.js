@@ -267,7 +267,7 @@ define(['angular',
 				});
 			}
 		
-			$scope.path = "business/"; 
+			$scope.path = "business/";
 			$scope.userinfo = {user_id:1}; // this is for uploading credentials	
 			$scope.upload = function(files,path,userInfo, picArr){ 
 				upload.upload(files,path,userInfo,function(data){
@@ -279,13 +279,16 @@ define(['angular',
 							$scope.addbusiness.contact_profile.contact_photo = data.data;
 						}
 					}else{
-						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						if(data.status == undefined) data = {status :"error", message:"Unknown Error"};
 						$notification.error("Upload Image", data.message);
 					}
 				});
 			};
 			//to generate thumbnail
-			$scope.generateThumb = function(files){  
+			$scope.generateThumb = function(files){
+				//console.log(files);
+				$scope.business_logo = files;
+				console.log($scope.business_logo);
 				upload.generateThumbs(files);
 			};
 			

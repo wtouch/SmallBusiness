@@ -16,11 +16,11 @@
 
 <main>
 <h4> Add Your Business Here.</h4>
-	<div class="row">
+	<div class="row" ng-controller="businessController">
 	<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-	<form name="addbusinessForm" role="form" class="form-horizontal" ng-submit="addbusinessForm.$valid" novalidate="novalidate" ng-controller="businessController">
+	<form name="addbusinessForm" role="form" class="form-horizontal" ng-submit="addbusinessForm.$valid" novalidate="novalidate">
 	<accordion close-others="oneAtATime">
-		<accordion-group heading="Basic Information " is-open="status.isFirstOpen" >
+		<accordion-group heading="Basic Information" is-open="status.isFirstOpen" >
 			<!-- This block for current user id -->
 			<div class="form-group">
 				<label  for="business_name" class="col-sm-3 control-label">Organization/Firm Name *</label>
@@ -35,13 +35,9 @@
 			<div class="form-group" >
 				<label  for="business_logo" class="col-sm-3 control-label">Logo*</label>
 				<div class="col-sm-9">
-					<input type="file" id="business_logo" name="business_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="business_logo" >	
-					<!-- This will show thumbnails & progress of images -->
-						<file-preview url="business_logo"></file-preview>
-						<!-- This button will show if file/s selected -->
-						<button ng-show="business_logo" ng-click="upload(business_logo,path,userInfo,'business_logo')" type="button">Upload</button>
-						<!-- This hidden input will store image path in array after successful uploading -->
-						<input type="hidden" ng-model="addbusiness.business_logo" required>
+					<input type="file" id="business_logo" name="business_logo" ng-file-select ng-multiple="false"  ng-file-change="upload(business_logo,path,userInfo,'business_logo')" ng-model="business_logo" /> {{ '{{addbusiness.business_logo}}'}}
+					
+					<input type="hidden" ng-model="addbusiness.business_logo" required> <img ng-src="{{'{{addbusiness.business_logo.file_relative_path}}'}}"/>
 				</div>
 			</div>	
 
