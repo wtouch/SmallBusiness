@@ -20,31 +20,17 @@
 			<meta name="keywords" content="{{data.keywords | join(',')}}">
 			{%if template.template_params%}
 			<style>	
-				.nav-pills>li.active>a,.nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus,.nav>li>a:hover, .nav>li>a:focus, .dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover,.nav .open>a, .nav .open>a:hover, .nav .open>a:focus,.Hearing {
-					color:{{template.template_params.color}};
-					background-color: {{template.template_params.background_color}};
-				}
-				.nav-pills>li>a,h1{
-					color:{{template.template_params.dark_color}};
-				}
-				.nav-pills>li>a, .panel-default>.panel-heading,.sidebar .nav-pills>li>a:hover,.sidebar .nav-pills>.active>a{
+				.headerRow,.nav-pills>li>a{
 					background-color: {{template.template_params.background_color_light}};
 				}
-				.news,.footer{
-					background-color: {{template.template_params.background_color_dark}};
-				}
-				.news,.Hearing,.sidebar .nav-pills>li>a{
-					color: 
-					{{template.template_params.color}};
-				}
-				.panel-default,.panel-default>.panel-heading {
-					border-color: {{template.template_params.background_color_dark}};;
-				}
-				.panel,.nav{
-					background:none;
-				}
-				.sidebar .nav-pills>li>a:hover,.sidebar .nav-pills>.active>a{
+				.nav-pills>li>a, h1, h2{
 					color:{{template.template_params.dark_color}};
+				}
+				.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus, .nav>li>a:hover, .nav>li>a:focus, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover, .nav .open>a, .nav .open>a:hover, .nav .open>a:focus, .Hearing{
+					background-color: {{template.template_params.background_color}};
+				}
+				.news, .footer, .aboutus{
+					background-color: {{template.template_params.background_color_dark}};
 				}
 			</style>
 			{%endif%}
