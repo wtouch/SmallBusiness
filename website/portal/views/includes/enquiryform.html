@@ -1,5 +1,7 @@
+
 	<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-controller="enquiryController" class="border" novalidate>
 		<div class="modal-body">
+		
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 			<div class="alert alert-success" ng-show="mailSent==true" role="alert">Message has been sent!</div>
 			<h4 class="text-center">Send Enquiry</h4>
@@ -7,22 +9,31 @@
 					<label for="name" class="col-sm-3 control-label">Name :</label>
 					<div class="col-sm-9">
 						<input type="hidden" class="form-control" id="date" ng-model="enquiry.date" name="date">
+						<input type="hidden" class="form-control" id="type" name="type" ng-model="enquiry.user_id" >
 						
 						<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc='vilas@wtouch.in'">
 				
 						<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" ng-init="enquiry.subject = '{{data.business_name}}'">
+						<div ng-if="modalOptions.enquiryData.category && modalOptions.enquiryData.type && modalOptions.enquiryData.keywords">
+							<input type="hidden" class="form-control" id="category" name="category" ng-model="enquiry.category" ng-init="enquiry.category = modalOptions.enquiryData.category">
+							
+							<input type="hidden" class="form-control" id="type" name="type" ng-model="enquiry.type" ng-init="enquiry.type = '{{data.type}}'">
+							
+							<input type="hidden" class="form-control" id="keywords" name="keywords" ng-model="enquiry.keywords" ng-init="enquiry.keywords = '{{data.keywords}}'">
+						</div>
 						
 						<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true">	
 							<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
 					</div>	
 				</div>
+				
 				<div class="form-group">
-				 <label for="email" class="col-sm-3 control-label">From Email :</label>
+				 <label for="email" class="col-sm-3 control-label">Email :</label>
 						<div class="col-sm-9">
 						<input type="email" class="form-control" id="from" name="from" placeholder="E-mail" ng-model="enquiry.from_email.from" required>
 						<span  ng-show="enquiryForm.from.$dirty && enquiryForm.from.$invalid">
 							<span class="text-danger" ng-show="enquiryForm.from.$error.required">From is required.</span>
-							<span class="text-danger" ng-show="enquiryForm.from.$error.email">Invalid Email address.</span>
+							<span class="text-danger" ng-show="enquiryForm.from.$error.email">Invalid Email address.</span>	
 						</span>
 					</div>
 				</div>
@@ -49,6 +60,38 @@
 						
 					</div>
 					
+				</div>
+				<div ng-if="!modalOptions.enquiryData.category && !modalOptions.enquiryData.type && !modalOptions.enquiryData.keywords">
+					<div class="form-group">
+						<label for="category" class="col-sm-3 control-label" name="category" >Category *</label>
+						<div class="col-sm-9">
+							<select class="form-control" name="category" id="category"  ng-model="enquiry.category" ng-change="getTypes(enquiry.category)" required ng-options="item.id as item.category_name for item in businessCategories">		
+								<option value="">Select Category</option>
+							</select>
+							<span class="help-block" ng-show="enquiryForm.category.$dirty && enquiryForm.category.$invalid">
+							<span ng-show="enquiryForm.category.$error.required" class="text-danger">Category is required.</span>
+							</span>				
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="type" class="col-sm-3 control-label" name="type">Type *</label>
+						<div class="col-sm-9">
+							<select class="form-control" name="type" id="type"  ng-model="enquiry.type" ng-change="getKeywords(enquiry.type)" required ng-options="item.id as item.category_name for item in businessTypes">
+								<option value="">Select Type</option>
+							</select>
+							<span class="help-block" ng-show="enquiryForm.type.$dirty && enquiryForm.type.$invalid">
+							<span ng-show="enquiryForm.type.$error.required" class="text-danger">Type is required.</span>
+							</span>				
+						</div>
+					</div>	
+					<div class="form-group">
+						<label for="keyword" class="col-sm-3 control-label">Keywords*</label>
+						<div class="col-sm-9">
+							<select class="form-control" multiple name="keyword" id="keyword"  ng-model="enquiry.keywords"  ng-options="item.category_name as item.category_name for item in businessKyewords">		
+								<option value="">Select Keywords</option>
+							</select>
+						</div>
+					</div> 
 				</div>
 			
 				<div class="form-group">

@@ -18,15 +18,18 @@
 	</script>
 	{% endif %}
 {% endblock %}
+{% block header %}
+    {% include 'includes/header.html' ignore missing %}
+{% endblock %}
 {% block content %}
 {% autoescape false %}
-	{% include 'includes/header.html' ignore missing %}
+	
 	<main>
 		<div class="row">
 			<div class="col-md-12" ng-controller="enquiryController">
 				<nav class="navbar navbar-default ">
 					<a class="navbar-brand" href="#" title="'{{data.business_name}}'"><img class="img-responsive biz-logo" src="{{data.business_logo.file_relative_path}}"></a>
-					<h2 class="text-center" title="'{{data.business_name}}'" >{{data.business_name}} <a class="btn btn-primary pull-right" ng-click="openModel('{{path}}includes/enquiryform.html',{{data.id}},'{{data.business_name}}','{{data.contact_profile.email}}',{{data.user_id}})">Get In Touch With Us</a></h2>
+					<h2 class="text-center" title="'{{data.business_name}}'" >{{data.business_name}} <a class="btn btn-primary pull-right" ng-click="openModel('{{path}}includes/enquiryform.html',{{data.id}},'{{data.business_name}}','{{data.contact_profile.email}}',{{data.user_id}},'{{data.category}}','{{data.type}}','{{data.keywords | join(',')}}')">Get In Touch With Us</a></h2>
 					<p class="text-center">{% if data.contact_profile.email %}<span class="glyphicon glyphicon-envelope Email">
 					</span> <a href="{{data.contact_profile.email}}" >{{data.contact_profile.email}}</a>
 					{% endif %}{% if data.contact_profile.mobile %} 
@@ -131,7 +134,7 @@
 									<h3 >{{ x.product_service_name }} </h3>
 									<p >{{x.description |length >120 ?x.description|slice(start, 100)~ '...' : x.description}}</p>
 									{% if data.domain_name %}
-										<a class="btn btn-primary" href="{{data.domain_name}}/product/{{key}}"   >Read More..</a>
+										<a class="btn btn-primary" href="http://{{data.domain_name}}/product/{{x.id}}"   >Read More..</a>
 									{% else %}
 										<a class="btn btn-primary"   ng-click="isShow({{key}})" >Read More..</a>
 										<div  ng-show="isVisible"  ng-class ="(isVisible)? 'product-desc show'  :'product-desc ' " >
@@ -174,8 +177,31 @@
 									<div class="caption text-center" ng-init="isVisible = false" ng-controller="productController">
 										<h3 >{{ x.product_service_name }} </h3>
 										<p >{{x.description |length >120 ?x.description|slice(start, 100)~ '...' : x.description}}</p>
-											<a class="btn btn-primary" href="{{data.domain_name}}/service/{{key}}"  ng-click="isShow({{key}})" >Read More..</a>
+									{% if data.domain_name %}
+										<a class="btn btn-primary" href="http://{{data.domain_name}}/service/{{x.id}}"   >Read More..</a>
+									{% else %}
+										<a class="btn btn-primary"   ng-click="isShow({{key}})" >Read More..</a>
+										<div  ng-show="isVisible"  ng-class ="(isVisible)? 'product-desc show'  :'product-desc ' " >
+											<button type="button" class="close pull-right" ng-click="isVisible = !isVisible"><span aria-hidden="true">&times;</span></button>
+											<h4>{{ x.product_service_name }} </h4>
+											<table class="table table-bordered">
+												<tr>
+													<td>
+														{% for key, value in x.product_image %}
+														<img class="img-responsive prod-image" src="{{value.file_relative_path}}" alt="{{key}}"/>
+														{%endfor%}
+													
+													</td>
+													<td class="col-md-6">
+														<div class="pdesc">
+														<strong>Service Details</strong>
+														<p >{{x.description}}</p></td>
+													</div>
+												</tr>
+											</table>
 										</div>
+									{% endif %}
+									</div>
 								</div>
 							{% endfor %}
 						</div>
@@ -239,15 +265,18 @@
 											<input type="hidden" class="form-control" id="date" ng-model="enquiry.date" name="date">
 											
 											<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc='vilas@wtouch.in'">
-											
-											<input type="hidden" class="form-control" id="to_email.to" name="to_email.to" ng-model="enquiry.to_email.to" ng-init="enquiry.to_email.to='vilas@wtouch.in'">
-									
 									
 											<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" ng-init="enquiry.subject = '{{data.business_name}}'">
 											
+											<input type="hidden" class="form-control" id="category" name="category" ng-model="enquiry.category_name" ng-init="enquiry.category_name = '{{data.category_name}}'">
+											
+											<input type="hidden" class="form-control" id="type" name="type" ng-model="enquiry.type" ng-init="enquiry.type = '{{data.type}}'">
+											
+											<input type="hidden" class="form-control" id="keywords" name="keywords" ng-model="enquiry.keywords" ng-init="enquiry.keywords = '{{x}}'">
+										
 											<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true">	
 												<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
-										</div>	
+										</div>		
 									</div>
 									<div class="form-group">
 									 <label for="email" class="col-sm-3 control-label">From Email :</label>

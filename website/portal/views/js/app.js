@@ -123,7 +123,7 @@ define(['angular',
 			}
 			$scope.makeActive($scope.url);
 	}]).controller('enquiryController', ['$scope','$http','$location','dataService','modalService', function($scope,http, $location,dataService,modalService) {
-			
+			$scope.currentDate = dataService.currentDate;
 			var today = new Date();
 			var year = today.getFullYear();
 			var month = today.getMonth() + 1;
@@ -133,24 +133,36 @@ define(['angular',
 			var sec = today.getSeconds();
 			$scope.mailSent = false;
 			
-			$scope.openModel = function (url, buzId,businessname,toemail,userId) {
+			$scope.openModel = function (url, buzId,businessname,toemail,userId,category,type,keywords) {
 				var modalDefaults = {
 					templateUrl: url,	// apply template to modal
 					size : 'md'
 				};
 				var modalOptions = {
+					enquiryData : {
+						subject : 'Portal Enquiry: '+ businessname,
+						to_email:{to : toemail},
+						user_id : userId,
+						category :category,
+						type :type,
+						keywords : keywords
+					},
 					formData : function(enquiry){
 						enquiry.subject = 'Portal Enquiry: '+ businessname;
 						enquiry.to_email.to = toemail;
 						enquiry.user_id = userId;
-						enquiry.date = year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec;
+						enquiry.category = category;
+						enquiry.type = type;
+						enquiry.keywords = keywords;
+						enquiry.date = $scope.currentDate;
 						modalOptions.myenquiryData = enquiry;
 					}
 				};
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+				
 					dataService.post("/enquiry",modalOptions.myenquiryData).then(function(response) {
 						$scope.mailSent = true;
-					}); 
+					});   
 				});
 			};
 			$scope.ok = function () {
@@ -164,6 +176,40 @@ define(['angular',
 					console.log(response);
 				}); 
 			};
+			
+			$scope.setCategoryType = function(item){
+				$scope.addbusiness.category = item.id;
+				$scope.getTypes(item.id);
+				$scope.addbusiness.type = item.type_id;
+				$scope.getKeywords(item.type_id);
+			}
+			
+			$scope.getCategory = function(filterColumn){
+				if(filterColumn){
+					var locationParams = {filter : {parent_id : filterColumn}, groupBy: 'category_name'};
+				}else{
+					var locationParams = {filter : {parent_id : 0}, groupBy: 'category_name'};
+				}
+				dataService.config('business_category',locationParams).then(function(response){
+					$scope.businessCategories = response;
+				});
+			}
+			
+			$scope.getCategory(0);
+			$scope.getTypes = function(filterColumn){
+				var locationParams = {filter : {parent_id : filterColumn}, groupBy: 'type'};
+				dataService.config('business_category',locationParams).then(function(response){
+					$scope.businessTypes = response;
+				});
+			}
+			
+			$scope.getKeywords = function(filterColumn){
+				var locationParams = {filter : {parent_id : filterColumn}};
+				dataService.config('business_category',locationParams).then(function(response){
+					$scope.businessKyewords = response;
+				});
+			}
+			
 			
 		}]).controller('productController',['$scope','$http', '$location', function($scope,$http, $location) {
 			$scope.isShow = function(id){
@@ -195,6 +241,7 @@ define(['angular',
 			$scope.oneAtATime = true;
 			$scope.addbusiness= {};
 			$scope.readOnly = false;
+			$scope.currentDate = dataService.currentDate;
 			$scope.alerts = [
 				{ type: 'danger', msg: 'Error to add business.' },
 				{ type: 'success', msg: 'Business Added Successfully.' }
@@ -294,13 +341,13 @@ define(['angular',
 			
 			//to add business code
 			$scope.postData = function(addbusiness) {
-				console.log(addbusiness)
+				$scope.addbusiness.created_date = $scope.currentDate;
 				dataService.post("/addbusiness",addbusiness)
 					.then(function(response) { 
 						if(response.status == "success"){
 							$scope.alerts.push({type, msg :"Business Added"});
 						}
-				});
+				}); 
 			}
 				
 		}]);

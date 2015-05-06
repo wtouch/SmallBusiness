@@ -140,6 +140,7 @@ class portalManager{
 	
 	//code for send user enquiry
 	function sendEnquiry($body){
+		print_r($body);
 		$input = json_decode($body);
 		$from['email'] = $input->from_email->from;
 		$replyfrom['email'] = $input->to_email->to;
@@ -427,7 +428,7 @@ class portalManager{
 			$this->db->setWhere($where, $t0);
 			
 			$this->db->setLimit($limit);
-			$cols = array("id, city,category, type,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info, featured, verified");
+			$cols = array("id, city,category, type,business_name,business_logo,contact_profile,country,state,city,location,area,pincode,keywords,business_info, featured, verified ,user_id");
 			$this->db->setColumns($t0, $cols);
 			
 			$t1 = $this->db->setJoinString("LEFT JOIN", "business_category", array("id"=>$t0.".category"));
