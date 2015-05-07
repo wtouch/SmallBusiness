@@ -291,8 +291,9 @@ class portalManager{
 			$subject = "Verify your Account"; 
 			
 			$sessionObj->setSession(array("mv"=>$smsUniqueId, "ev"=>$emailUniqueId, "user_email"=>$input->to_email, "user_mobile"=>$phone), 60*15);
+			$apppath = $_SERVER['HTTP_HOST'];
 			
-			$message = trim("<h3>Dear User your verification code is ".$emailUniqueId.", <a href='http://sunita.local/verified?ev=".$emailUniqueId."'>Verify  your account</a></h3>");
+			$message = trim("<h3>Dear User your verification code is ".$emailUniqueId.", <a href='http://".$apppath."/verified?ev=".$emailUniqueId."'>Verify  your account</a></h3>");
 			
 			$smsMsg = trim("Apnasite verification code is - ".$smsUniqueId);
 			$recipients = array($input->to_email);
@@ -309,7 +310,6 @@ class portalManager{
 			}
 			$response["status"] = "success";
 			$response["message"] = "Mail Sent successfully";
-			print_r($response["status"]);
 		}catch(Exception $e){
             $response = $this->setResponse($data = array(),$city=null);
             $response["status"] = "error";

@@ -31,10 +31,10 @@
 		<div class="form-group">	
 			<label  for="mobcode" class="col-sm-3 control-label">* Mobile Verification Code</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="mobcode" ng-model="verify.mv" name="mv" placeholder=" Mobile Verification " required >
+				<input type="text" class="form-control" id="mobcode" ng-model="verify.mv" name="mv" placeholder=" Mobile Verification "  maxlength="4" required >
 				<span class="help-block" ng-show="VerificationForm.mobcode.$dirty && VerificationForm.mobcode.$invalid">
-				<span ng-show="VerificationForm.mobcode.$error.required" class="text-danger">Mobile Verification is required.</span>
-			
+					<span ng-show="VerificationForm.mobcode.$error.required" class="text-danger">Mobile Verification is required.</span>
+					<span class="text-danger" ng-show="VerificationForm.phone.$error.maxlength && (VerificationForm.phone.$dirty || submitted)">Enter a Valid Verification code.</span>
 				</span>
 			</div>
 		</div>

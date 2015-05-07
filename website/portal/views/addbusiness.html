@@ -21,13 +21,12 @@
 		<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 		<h4> Add Your Business Here.</h4>
 			<div class="row" ng-controller="businessController">
-			
 			<form name="addbusinessForm" role="form" class="form-horizontal" ng-submit="addbusinessForm.$valid" novalidate="novalidate">
 			<accordion close-others="oneAtATime">
 				<accordion-group heading="Basic Information" is-open="status.isFirstOpen" >
 					<!-- This block for current user id -->
 					<div class="form-group">
-						<label  for="business_name" class="col-sm-3 control-label">Organization/Firm Name *</label>
+						<label  for="business_name" class="col-sm-3 control-label">* Organization/Firm Name </label>
 						<div class="col-sm-8">
 							<input type="hidden" ng-model="addbusiness.created_date">
 							<input type="text" ng-disabled="bizId" id="business_name" class="form-control" name="business_name" placeholder="Organization/Firm Name" ng-model="addbusiness.business_name" required>
@@ -37,7 +36,7 @@
 						</div>						
 					</div>
 					<div class="form-group" >
-						<label  for="business_logo" class="col-sm-3 control-label">Logo*</label>
+						<label  for="business_logo" class="col-sm-3 control-label">* Logo</label>
 						<div class="col-sm-9">
 							<input type="file" id="business_logo" name="business_logo" ng-file-select ng-multiple="false"  ng-file-change="upload(business_logo,path,userInfo,'business_logo')" ng-model="business_logo" /> 
 							
@@ -47,7 +46,7 @@
 					</div>	
 
 					<div class="form-group">
-						<label for="category" class="col-sm-3 control-label" name="category" >Category *</label>
+						<label for="category" class="col-sm-3 control-label" name="category" > * Category</label>
 						<div class="col-sm-8">
 							<select class="form-control" name="category" id="category"  ng-model="addbusiness.category" ng-change="getTypes(addbusiness.category)" required ng-options="item.id as item.category_name for item in businessCategories">		
 								<option value="">Select Category</option>
@@ -58,7 +57,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="type" class="col-sm-3 control-label" name="type">Type *</label>
+						<label for="type" class="col-sm-3 control-label" name="type"> * Type</label>
 						<div class="col-sm-8">
 							<select class="form-control" name="type" id="type"  ng-model="addbusiness.type" ng-change="getKeywords(addbusiness.type)" required ng-options="item.id as item.category_name for item in businessTypes">
 								<option value="">Select Type</option>
@@ -69,7 +68,7 @@
 						</div>
 					</div>	
 					<div class="form-group">
-						<label for="ownership" class="col-sm-3 control-label" name="ownership" >Ownership Type *</label>
+						<label for="ownership" class="col-sm-3 control-label" name="ownership" >* Ownership Type </label>
 						<div class="col-sm-8">
 							<select class="form-control" name="ownership" id="ownership"  ng-model="addbusiness.ownership" required ng-model="addbusiness.ownership" required ng-options="item as item for item in biz.ownership">		
 								<option value="">Select Ownership Type</option>
@@ -81,7 +80,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="shortdescription" class="col-sm-3 control-label">Detailed Description *</br>
+						<label for="shortdescription" class="col-sm-3 control-label">* Detailed  Description </br>
 						<small>This will show on Website Home Page</small></label>
 						<div class="col-sm-8">
 							<textarea type="text" class="form-control" id="shortdescription" name="shortdescription" ng-model="addbusiness.business_info.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
@@ -95,15 +94,15 @@
 						</div>
 					</div>  
 					<div class="form-group">
-								<div class="col-sm-offset-3 col-sm-8">
-								<button class="btn btn-primary btn-sm" ng-click="status.open = !status.open">Next</button>
-									
-								</div>
-							</div>	
+						<div class="col-sm-offset-3 col-sm-8">
+						<button class="btn btn-primary btn-sm" ng-click="status.open = !status.open">Next</button>
+							
+						</div>
+					</div>	
 				</accordion-group>
 				<accordion-group heading="Contact US" is-open="status.open" >
 					<div class="form-group">
-							<label  for="contact_person" class="col-sm-3 control-label">Contact Person *</label>
+							<label  for="contact_person" class="col-sm-3 control-label">* Contact Person </label>
 							<div class="col-sm-8">
 								<input type="text" id="contact_person" class="form-control" name="contact_person" placeholder="Contact Person" ng-model="addbusiness.contact_profile.contact_person" required >
 								<span class="help-block" ng-show="addbusinessForm.contact_person.$dirty && addbusinessForm.contact_person.$invalid">
@@ -122,7 +121,7 @@
 							</div>
 												
 							<div class="form-group">
-								<label  for="Designation" class="col-sm-3 control-label">Designation/Job Title *</label>
+								<label  for="Designation" class="col-sm-3 control-label">* Designation/Job Title </label>
 								<div class="col-sm-8">
 									<input type="text" id="Designation" class="form-control" name="Designation" placeholder="Designation/Job Title" ng-model="addbusiness.contact_profile.Designation" required >
 									<span class="help-block" ng-show="addbusinessForm.Designation.$dirty && addbusinessForm.Designation.$invalid">
@@ -132,7 +131,7 @@
 							</div>
 
 							<div class="form-group">
-								<label for="address" class="col-sm-3 control-label">Address *</label>
+								<label for="address" class="col-sm-3 control-label">* Address </label>
 								<div class="col-sm-8">
 									<textarea type="text" class="form-control" id="address" name="address" ng-model="addbusiness.contact_profile.address" cols="30" rows="3" ng-maxlength="256" placeholder="Enter address"  required></textarea>
 									<p ng-hide="addbusinessForm.address.$error.maxlength">
@@ -152,7 +151,7 @@
 									</a>
 								</script>
 							<div class="form-group">
-								<label for="location" class="col-sm-3 control-label">Location *</label>
+								<label for="location" class="col-sm-3 control-label">* Location </label>
 								<div class="col-sm-8">
 									<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="addbusiness.location" typeahead-on-select="getData($item)" placeholder="Location" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
 									<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i>
@@ -209,7 +208,7 @@
 							</div>
 							
 							<div class="form-group">
-								<label for="mobile" class="col-sm-3 control-label">Mobile Number *</label>
+								<label for="mobile" class="col-sm-3 control-label">* Mobile Number </label>
 								<div class="col-sm-8">
 									<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addbusiness.contact_profile.mobile" ng-init="addbusiness.contact_profile.mobile={{data.user_mobile}}" readOnly>
 									
@@ -236,7 +235,7 @@
 								</div>						
 							</div>
 							<div class="form-group">	
-								<label  for="email" class="col-sm-3 control-label">Email *</label>
+								<label  for="email" class="col-sm-3 control-label">* Email </label>
 								<div class="col-sm-8">
 									<input type="Email" class="form-control" id="email" ng-model="addbusiness.contact_profile.email" ng-init="addbusiness.contact_profile.email='{{data.user_email}}'" readOnly>
 									

@@ -161,7 +161,11 @@ define(['angular',
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 				
 					dataService.post("/enquiry",modalOptions.myenquiryData).then(function(response) {
-						$scope.mailSent = true;
+						if(response.status=="success"){
+							$scope.mailSent = true;
+						}else{
+							console.log(response.message);
+						}
 					});   
 				});
 			};
@@ -172,8 +176,11 @@ define(['angular',
 				enquiry.subject = 'Portal Enquiry: '+ businessname;
 				enquiry.date = year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec;
 				dataService.post("/enquiry",enquiry).then(function(response) {
-					$scope.mailSent = true; 
-					console.log(response);
+					if(response.status=="success"){
+						$scope.mailSent = true; 
+					}else{
+						console.log(response.message);
+					}
 				}); 
 			};
 			
@@ -220,8 +227,11 @@ define(['angular',
 			$scope.insert = function(userlogin){
 				console.log(userlogin);
 				dataService.post("/businesslogin",userlogin).then(function(response) {
-					
+					if(response.status=="success"){
 						window.location.href = "/verified";
+					}else{
+						console.log(response.message);
+					}
 					
 				}); 
 			}
@@ -335,6 +345,7 @@ define(['angular',
 			$scope.generateThumb = function(files){
 				//console.log(files);
 				$scope.business_logo = files;
+				$scope.contact_profile.contact_photo = files;
 				console.log($scope.business_logo);
 				upload.generateThumbs(files);
 			};

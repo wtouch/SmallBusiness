@@ -2,10 +2,11 @@
 
 require $config['root_path'].'/server-api/lib/Slim/Slim.php';
 require $config['root_path'].'/server-api/lib/Twig/Autoloader.php';
-require $config['root_path'].'/server-api/modules/db/dbHelper.php';
-require $config['root_path'].'/server-api/modules/db/passwordHash.php';
-require $config['root_path'].'/server-api/modules/db/session.php';
+require_once $config['root_path'].'/server-api/modules/db/passwordHash.php';
+require_once $config['root_path'].'/server-api/modules/db/session.php';
 require_once $config['root_path'].'/server-api/lib/PHPMailer/PHPMailerAutoload.php';
+require_once $config['root_path'].'/server-api/modules/db/dbHelper.php';
+
 require 'models/portalManager.php';
 
 Slim\Slim::registerAutoloader();
@@ -47,12 +48,14 @@ $app->get('/addbusiness', function() use($app, $config, $twig, $portal) {
 // login to add business
 $app->post('/businesslogin', function() use($app, $config, $twig, $portal, $body) {
 	$response = $portal->sendVerification($body);
-	
+	echo json_encode($response);
+
 });
 
 $app->post('/addbusiness', function() use($app, $config, $twig, $portal, $body) {
-	
 	$response = $portal->addBusiness($body);
+	//echo json_encode($response);
+
 });
 
  $app->get('/verified', function() use($app, $config, $twig, $portal,$body) {
