@@ -84,7 +84,7 @@ define(['app'], function (app) {
 		}
 		
 		//Function to Update template 
-		$scope.update = function(businessData){				
+		$scope.update = function(businessData){	
 			dataService.put("put/template/"+ $scope.template_id, templateData)
 			.then(function(response) {  
 				if(response.status == 'success'){
@@ -147,8 +147,10 @@ define(['app'], function (app) {
 						size : 'lg'
 					};
 					var modalOptions = {
+						date : $scope.currentDate,
 						userDetails : $rootScope.userDetails,
 						tempList : dataService.parse(response.data),
+						modifiedDate : dataService.currentDate,
 						customerList : (user.data),
 						myTemplateData : {},
 						slider : {},
@@ -195,6 +197,8 @@ define(['app'], function (app) {
 						}
 					};
 					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+							modalOptions.tempList.date = dataService.currentDate;
+							modalOptions.tempList.modified_date = dataService.currentDate;
 						dataService.post("post/mytemplate",modalOptions.myTemplateData).then(function(response) {
 							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 							$notification[response.status]("Apply Template", response.message);
@@ -417,7 +421,8 @@ define(['app'], function (app) {
 					userInfo : $scope.userInfo,
 					tempId : $scope.tempId,
 					formData : function(templateData){
-						
+						modalOptions.tempList.date = dataService.currentDate;
+						modalOptions.tempList.modified_date = dataService.currentDate;
 						modalOptions.myTemplateData = templateData;
 					},
 					deleteSlide : function(index,object){
@@ -457,6 +462,7 @@ define(['app'], function (app) {
 					}
 				};
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					
 					dataService.put("put/mytemplate/"+tempId,modalOptions.myTemplateData).then(function(response) {
 						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Update Template Details", response.message);
@@ -580,6 +586,7 @@ define(['app'], function (app) {
 				$scope.reqtemp = {};
 			};
 			$scope.reqtemp.date = $scope.currentDate;
+			$scope.reqtemp.modified_date = $scope.currentDate;
 			$scope.postData = function(reqtemp) {
 				 dataService.post("post/template",reqtemp)
 				.then(function(response) {  
@@ -599,11 +606,13 @@ define(['app'], function (app) {
 		var addtemplate = function(){
 			$scope.tempId = $routeParams.id;
 			$scope.zipPath = 'zip_templates';
+			
 			if($scope.tempId){
 				dataService.get("getsingle/template/"+$scope.tempId)
 				.then(function(response) {
 					$scope.reset = function() {
 						$scope.addtemplate = {
+							modified_date : dataService.currentDate,
 							template_params : {},
 							template_image : [],
 							created_by : $rootScope.userDetails.id,
@@ -618,6 +627,7 @@ define(['app'], function (app) {
 				$scope.reset = function() {
 					$scope.addtemplate = {
 						date : $scope.currentDate,
+						modified_date : $scope.currentDate,
 						template_params : {},
 						template_image : [],
 						created_by : $rootScope.userDetails.id,
@@ -643,7 +653,10 @@ define(['app'], function (app) {
 					}
 				});
 			};
+			
 			$scope.updateData = function(addtemplate) {
+				addtemplate.modified_date = dataService.currentDate;
+				//console.log($scope.addtemplate.modified_date);
 				delete addtemplate.id;
 				dataService.put("put/template/"+$scope.tempId,addtemplate, {postParams:'addtemplate'})
 				.then(function(response) {

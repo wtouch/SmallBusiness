@@ -24,6 +24,7 @@ define(['app'], function (app) {
 		$scope.reset = function() {
 			$scope.addbusiness = {
 				created_date : $scope.currentDate,
+				modified_date : $scope.currentDate,
 				contact_profile : {},
 				business_profile : { establishment : 2014}
 			};
@@ -144,6 +145,8 @@ define(['app'], function (app) {
 		$scope.postData = function(addbusiness) {
 			dataService.post("post/business",addbusiness)
 			.then(function(response) { 
+			$scope.addbusiness.created_date = dataService.currentDate;
+			/* created_date : $scope.currentDate */
 				if(response.status == "success"){
 					if($rootScope.userDetails.config.addbusinessDetails != true)  $location.path("/dashboard/business/adddetails/"+response.data);
 					dataService.progressSteps('addbusiness', true);

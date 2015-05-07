@@ -27,7 +27,6 @@
 					</select>
 			</div>
 		</div>
-	
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="featured" class="control-label">Filter By Category</label>
@@ -45,6 +44,7 @@
 				<th>Sr.No.</th>
 				<th>Template Name</th>
 				<th>Create Date</th>
+				<th>Modified Date</th> 
 				<th>Category</th>
 				<!-- <th>Created By</th> -->
 				<th>Price</th>
@@ -55,6 +55,7 @@
 						<td>{{((tempListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
 						<td>{{x.template_name}}</td>
 						<td>{{x.date | date:'MM/dd/yyyy'}}</td>
+						<td>{{x.modified_date}}</td>
 						<td>{{x.category}}</td>
 						<!-- <td>{{x.name}}</td> -->
 						
@@ -88,6 +89,7 @@
 					</tr>								
 			</tbody>
 		</table>
+	</div>
 	</div>
 	<div class="text-center">				
 		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="tempListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(tempListCurrentPage,template_type)"></pagination>

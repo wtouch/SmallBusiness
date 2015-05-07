@@ -21,13 +21,31 @@
 <div class="form-group">
 	<label  for="business_name" class="col-sm-3 control-label">Organization/Firm Name*</label>
 	<div class="col-sm-9">
-		<input type="hidden" ng-model="addbusiness.created_date">
+	
+		<!-- <input type="hidden" ng-model="addbusiness.created_date">
+		<input type="hidden" ng-model="addbusiness.modified_date">  -->
 		<input type="text" ng-disabled="bizId" id="business_name" class="form-control" name="business_name" placeholder="Organization/Firm Name" ng-model="addbusiness.business_name" required>
 		<span class="help-block" ng-show="businessDescForm.business_name.$dirty && businessDescForm.business_name.$invalid">
 			<span ng-show="businessDescForm.business_name.$error.required" class="text-danger">Organization Name is required.</span>
 		</span>
 	</div>						
 </div>
+
+<div class="form-group">	
+	<!-- <label  for="date" class="col-sm-2 control-label"> Modified Date</label> -->
+	<div class="col-sm-9">
+		 <input type="hidden" id="date1"  ng-init="addbusiness.created_date" name="dateInput" value="{{addbusiness.created_date}}" ng-model="addbusiness.created_date" >
+	</div>						
+</div> 
+
+<div class="form-group">	
+	<!-- <label  for="date" class="col-sm-2 control-label"> Modified Date</label> -->
+	<div class="col-sm-9">
+		 <input type="hidden" id="date" class="form-control" ng-init="addbusiness.modified_date" name="dateInput1" value="{{addbusiness.modified_date}}" ng-model="addbusiness.modified_date" >
+	</div>						
+</div> 
+
+
 <div class="form-group" >
 	<label  for="business_logo" class="col-sm-3 control-label">Logo*</label>
 	<div class="col-sm-9">

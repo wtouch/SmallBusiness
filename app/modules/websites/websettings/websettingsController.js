@@ -13,8 +13,10 @@ define(['app'], function (app) {
 		
 		//code for view single website details
 		dataService.get("getsingle/website/"+$routeParams.id)
-		.then(function(response) {  
-			dataService.get("getmultiple/business/1/100",{user_id : response.data.user_id})
+		.then(function(response) { 
+			$scope.status = {status:1};
+			angular.extend($scope.status, {user_id : response.data.user_id});
+			dataService.get("getmultiple/business/1/100",$scope.status)
 			.then(function(business) {  
 				if(business.status == 'success'){
 					$scope.businessList = business.data;
@@ -26,8 +28,11 @@ define(['app'], function (app) {
 			});
 			
 			
+			//
 			//code for get business name from business
-			dataService.get("getmultiple/mytemplate/1/100",{user_id : response.data.user_id})
+			$scope.status = {status:1};
+			angular.extend($scope.status, {user_id : response.data.user_id});
+			dataService.get("getmultiple/mytemplate/1/100",$scope.status)
 			.then(function(template) {  
 				if(template.status == 'success'){
 					$scope.templateList = template.data;

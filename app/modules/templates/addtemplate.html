@@ -31,12 +31,23 @@
 					</div>						
 			</div>	
 			
-			<div class="form-group">	
+			<div class="form-group" ng-if="!tempId">	
 				<label  for="date" class="col-sm-2 control-label">Date</label>
 				<div class="col-sm-9">
 					 <input type="text" id="date" class="form-control" name="dateInput" ng-model="addtemplate.date" readonly  placeholder="date">
 				</div>						
 			</div>
+			
+			<div class="form-group">	
+			<label  for="date1" class="col-sm-2 control-label"> Modified Date</label>
+			<div class="col-sm-9">
+				 <input type="text" id="date1" class="form-control" name="dateInput" value="{{addtemplate.modified_date}}" ng-model="addtemplate.modified_date" readonly  placeholder="date" >
+			</div>						
+		</div>
+		
+			
+			
+			
 			
 			<div class="form-group">
 				<label for="tempimage" class="col-sm-2 control-label">Template Image *</label>

@@ -53,6 +53,27 @@ define(['app'], function (app) {
 			}
 		};
 		
+		//this is global method for filter 
+		$scope.changeStatusFn = function(statusCol, showStatus) {
+			$scope.filterStatus = {};
+			(showStatus =="") ? delete $scope.enquiryParams[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.enquiryParams, $scope.filterStatus);
+			if(statusCol == 'user_id' && (showStatus == null || showStatus == "")) {
+				angular.extend($scope.enquiryParams, $scope.userInfo);
+			}
+			dataService.get("getmultiple/enquiry/1/"+$scope.pageItems, $scope.enquiryParams)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.enquiry = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.enquiry = {};
+					$scope.totalRecords = {};
+					$notification.warning("Filter enquiry List", response.message);
+				}
+			});
+		};  
+		
 		//code for get user list
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
