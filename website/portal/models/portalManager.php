@@ -454,10 +454,16 @@ class portalManager{
 			}
 			
 			if(is_array($data['data'])){
+				$keyword =array();
 				foreach($data['data'] as $key => $value){
-					$keyword[] = implode(",",$value['keywords']);
+					if($value['keywords']!=""){
+						$keyword[] = implode(",",$value['keywords']);
+					}
 				}
-				$keywords = implode(",",array_unique($keyword));
+				$keywords ="";
+				if(!empty($keyword)){
+					$keywords = implode(",",array_unique($keyword));
+				}
 			}
 			
 			$response = $this->setResponse($data,$city);
