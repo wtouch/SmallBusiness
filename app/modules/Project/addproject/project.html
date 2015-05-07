@@ -38,7 +38,7 @@
 	<div class="form-group">
 		<label for="Category" class="col-sm-2 control-label">* Category</label>
 		<div class="col-sm-4">
-			<select class="form-control" id="Category" name="Category" ng-model="project.category" required ng-change="getTypes(project.category)" ng-options="item.category_name as item.category_name for item in proj.category">		
+			<select class="form-control" id="Category" name="Category" ng-model="project.category" required ng-change="getTypes(project.category)" ng-options="item.category_name as item.category_name for item in projectConfig.category">		
 				<option value="">Select Category</option>
 			</select>
 			<span class="help-block" ng-show="addProject.Category.$dirty && addProject.Category.$invalid">
@@ -47,7 +47,7 @@
 		</div>
 		<label for="projectType" class="col-sm-1 control-label">* Type</label>
 			<div class="col-sm-4">
-				<select class="form-control" id="projectType" name="projectType" ng-model="project.type" required ng-options="item.category_name as item.type for item in proj.types">	{{item.types}}	
+				<select class="form-control" id="projectType" name="projectType" ng-model="project.type" required ng-options="item.category_name as item.type for item in projectConfig.types">	{{item.types}}	
 					<option value="">Select Project Type</option>
 				</select>
 				<span class="help-block" ng-show="addProject.projectType.$dirty && addProject.projectType.$invalid">
@@ -79,17 +79,22 @@
 		</div>
 		
 		<div class="form-group">
-			<label for="project_images" class="col-sm-2 control-label">* Project Image</label>
+		  <label for="project_images" class="col-sm-2" >* Project Image</label>
 			<div class="col-sm-9">
-				<input type="file" id="project_images" name="project_images" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="project_images">	
+				<!-- Changed by Vilas -->
+				<!-- This is file input for select images -->
+				<input type="file" id="project_images" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="project_images" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}"required>
+
 				<!-- This will show thumbnails & progress of images -->
-					<file-preview url="project_images"></file-preview>
-					<!-- This button will show if file/s selected -->
-						<button ng-show="project_images" ng-click="upload(project_images,path,userinfo, addimage.project_images)" type="button">Upload</button>
-					<!-- This hidden input will store image path in array after successful uploading -->
-						<input type="hidden" ng-model="addimage.project_images">
-			</div>
+				<file-preview url="project_images" ng-model="project.project_images"></file-preview>
+				<!-- This button will show if file/s selected -->
+				<button ng-show="project_images" ng-click="upload(project_images,path + project.user_id,userinfo,project.project_images)" type="button">Upload</button>
+				
+				<!-- This hidden input will store image path in array after successful uploading -->
+				<input type="hidden" ng-model="project.project_images">
+		</div>	
 		</div>
+		
 
 		<div class="form-group"> 
 			<label for="projImageDescription" class="col-sm-2 control-label">* Description</label> 

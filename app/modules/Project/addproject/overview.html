@@ -35,9 +35,9 @@
 <div class="form-group">
 		<label for="overviewBrowserTitle" class="col-sm-2 control-label">* Browser Title</label>
 	<div class="col-sm-9">
-		 <textarea class="form-control" id="overviewBrowserTitle"  name="overviewBrowserTitle" ng-model="project.overview.browser_title"   cols="20" rows="4" ng-maxlength="356" required></textarea>	
+		 <input class="form-control" id="overviewBrowserTitle"  name="overviewBrowserTitle" ng-model="project.overview.browser_title"   cols="20" rows="4" ng-maxlength="60" required />
 
-		<p ng-hide="addProject.overviewBrowserTitle.$error.maxlength">{{ 356 - overview.browser_title + " Chars left" }}</p>
+		<p ng-hide="addProject.overviewBrowserTitle.$error.maxlength">{{ 60- project.overview.browser_title + " Chars left" }}</p>
 		
 		<span class="text-danger" ng-show="addProject.overviewBrowserTitle.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
@@ -50,7 +50,7 @@
 	<label for="overviewMetaKey" class="col-sm-2 control-label">* Meta Keywords</label> 
 	<div class="col-sm-9"> 
 		<textarea class="form-control" name="overviewMetaKey" ng-model="project.overview.meta_key"  id="overviewMetaKey" cols="20" rows="4" ng-maxlength="356" required> </textarea>
-		<p ng-hide="addProject.overviewMetaKey.$error.maxlength">{{ 356 - overview.seo.meta_key.length + " Chars left" }}</p>
+		<p ng-hide="addProject.overviewMetaKey.$error.maxlength">{{ 356 - project.overview.meta_key.length + " Chars left" }}</p>
 				 <span class="text-danger" ng-show="addProject.overviewMetaKey.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 				<span class="text-danger" ng-show="addProject.overviewMetaKey.$dirty && addProject.overviewMetaKey.$invalid">
@@ -62,7 +62,7 @@
 		<label for="overviewMetaDisc" class="col-sm-2 control-label">* Meta Discription</label> 
 	<div class="col-sm-9">
 			<textarea class="form-control" id="overviewMetaDisc"  name="overviewMetaDisc" ng-model="project.overview.meta_desc" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.overviewMetaDisc.$error.maxlength">{{ 356 - overview.meta_desc.length + " Chars left" }}</p>
+		<p ng-hide="addProject.overviewMetaDisc.$error.maxlength">{{ 356 - project.overview.meta_desc.length + " Chars left" }}</p>
 				 <span class="text-danger" ng-show="addProject.overviewMetaDisc.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 			<span class="text-danger" ng-show="addProject.overviewMetaDisc.$dirty && addProject.overviewMetaDisc.$invalid">

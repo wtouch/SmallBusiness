@@ -27,7 +27,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.business_id = $routeParams.id;
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials
-		$scope.path = "business/"+$scope.userInfo.user_id; // path to store images on server
+		$scope.path = "business/"; // path to store images on server
 		$scope.infrastructure = { desc : { }};
 		$scope.testimonials = { desc : { }};
 		$scope.news_coverage = { desc : {  }};

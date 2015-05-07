@@ -54,25 +54,26 @@ define(['app'], function (app) {
 		};
 		
 		//this is global method for filter 
-		$scope.changeStatusFn = function(statusCol, showStatus) {
-			$scope.filterStatus = {};
-			(showStatus =="") ? delete $scope.enquiryParams[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.enquiryParams, $scope.filterStatus);
-			if(statusCol == 'user_id' && (showStatus == null || showStatus == "")) {
-				angular.extend($scope.enquiryParams, $scope.userInfo);
+		$scope.changeStatus = function(statusCol, showStatus) {
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.user_id[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.user_id, $scope.filterStatus);
+			if(statusCol == 'user_id' && showStatus == null) {
+				angular.extend($scope.user_id, $scope.userInfo);
 			}
-			dataService.get("getmultiple/enquiry/1/"+$scope.pageItems, $scope.enquiryParams)
+			dataService.get("getmultiple/enquiry/1/"+$scope.pageItems, $scope.user_id)
 			.then(function(response) {  
 				if(response.status == 'success'){
-					$scope.enquiry = response.data;
+					$scope.mail = response.data;
 					$scope.totalRecords = response.totalRecords;
 				}else{
-					$scope.enquiry = {};
+					$scope.mail = {};
 					$scope.totalRecords = {};
-					$notification.warning("Filter enquiry List", response.message);
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Enquiry List", response.message);
 				}
 			});
-		};  
+		};
 		
 		//code for get user list
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})

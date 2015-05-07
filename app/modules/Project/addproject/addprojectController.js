@@ -34,6 +34,22 @@ define(['app'], function (app) {
 			});
 		}
 		
+		$scope.project = {
+			featured : 0,
+			builder :{},
+			overview : {},
+			amenities : {},
+			specifications : {},
+			location_map : [],
+			layout_map : [],
+			floor_plan : [],
+			project_gallery : [],
+			project_images : [] ,
+			created_date : $scope.currentDate,
+			modified_date :$scope.currentDate,
+			
+		};
+		
 		//function for upload images
 		 $scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
 			 upload.upload(files,path,userInfo,function(data){
@@ -63,36 +79,41 @@ define(['app'], function (app) {
 				$scope.alerts.splice(key, 1);
 			}
 		
-		/* // to close alert message
+			// to close alert message
 			$scope.closeAlert = function(index) {
 				$scope.alerts.splice(index, 1);
 			};
-			 */
+			
+			// add form part to main form object
+			$scope.addToObject = function(data, object){
+				 var dtlObj = JSON.stringify(data);
+				 object.push(JSON.parse(dtlObj));
+			}
+			
+			//Upload Function for uploading files 
+			$scope.path = "project/"; 
+			 
 			// this function for uploading files
 			$scope.upload = function(files,path,userinfo, picArr){ 
 				upload.upload(files,path,userinfo,function(data){
 					var picArrKey = 0, x;
 					for(x in picArr) picArrKey++;
 					if(data.status === 'success'){
-						picArr[picArrKey] = data.details;
-						
+						$scope[picArr] = data.data;
+						console.log($scope[picArr]);
 					}else{
-						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-				$notification[response.status]("Upload Images", response.message);
-					}
-					
+						$scope.alerts.push({type: response.status, msg: response.message});
+					}					
 				}); 
-			};
+			}; 
+			
 			$scope.generateThumb = function(files){  
 				upload.generateThumbs(files);
 			};// end file upload code
 		
 	/**********************************************************************/
 		//display records from config.js to combo
-		
 		$scope.projectConfig = dataService.config.project;					
-		
-		
 	/*********************************************************************/
 		
 		// Add Business multi part form show/hide operation from here! 
@@ -103,6 +124,62 @@ define(['app'], function (app) {
 	
 	/*********************************************************************/
 	
+	$scope.getWebsite = function(userId){
+				// for dynamic value of domain name
+				dataService.get('getmultiple/website/1/200', {user_id:userId})
+				.then(function(response){
+					var websites = [];
+					for(var id in response.data){
+						var obj = {id: response.data[id].id, domain_name : response.data[id].domain_name};
+						websites.push(obj);
+					}
+					$scope.websites = websites;
+				}) ;
+			}
+			
+			// for check all checkboxes
+			$scope.checkAll = function(websites, checkValue) {
+				if(checkValue){
+					$scope.project.domain = angular.copy(websites);
+				}
+			};
+			
+			$scope.setFormScope= function(scope){
+			$scope.formScope = scope;
+			}
+	
+		//add project //project,$scope.userinfo
+		$scope.addproject = function(project){
+			console.log(project);
+			dataService.post("post/project",project)
+			.then(function(response) {
+				if(response.status=="success"){
+					$scope.alerts.push({type: response.status, msg: response.message});
+					//$scope.formScope.addprojectForm.$setPristine();
+				}else{
+					$scope.alerts.push({type: response.status, msg: response.message});
+				}
+				
+			});
+		};
+		
+		//code to edit project details
+		 if($routeParams.id){ 
+			dataService.get("getsingle/project/"+$rootScope.userDetails.id)
+			.then(function(response) {
+				
+				console.log(response);
+			});
+			
+			$scope.update = function(id,project){
+				dataService.put("put/project/"+id,project)
+				.then(function(response) {
+					console.log(response);
+				});
+			};
+		 }; 
+		
+		
 	//display dynamic list from project table 
 		dataService.get('getmultiple/project/1/50', $scope.userinfo)
 			.then(function(response){

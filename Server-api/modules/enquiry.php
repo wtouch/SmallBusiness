@@ -20,12 +20,17 @@
 			$where = array();
 			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
 			
+			if(isset($_GET['user_name'])) $userId = $_GET['user_name'];
+			
 			if(isset($_GET['search']) && $_GET['search'] == true){
 				 
 				(isset($_GET['subject'])) ? $like['subject'] = $_GET['subject'] : "";
 			}
 			
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
+			
+			(isset($_GET['from_email'])) ? $where['from_email'] = $_GET['from_email'] : "";
+			
 			(isset($_GET['read_status'])) ? $where['read_status'] = $_GET['read_status'] : "";
 			
 			$userCols['name'] = "name";
