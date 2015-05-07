@@ -140,62 +140,69 @@ class portalManager{
 	
 	//code for send user enquiry
 	function sendEnquiry($body){
-		print_r($body);
-		$input = json_decode($body);
-		$from['email'] = $input->from_email->from;
-		$replyfrom['email'] = $input->to_email->to;
-		$from['name'] = $input->name;
-		$replyfrom['name'] = "ApnaSite AutoReply";
-		(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", $input->to_email->cc) : $ccMail = null;
-		$recipients = explode(",", $input->to_email->to);
-		$replyrecipients = explode(",", $input->from_email->from);
-		$subject = $input->subject;
-		$message = "<table>
-				<tr>
-					<td>Name: </td><td>".$from['name']."</td>
-				</tr>
-				<tr>
-					<td>Email: </td><td>".$from['email']."</td>
-				</tr>";
-		if(is_object($input->message)){
-			foreach($input->message as $key => $value){
+		try{
+			print_r($body);
+			$input = json_decode($body);
+			$from['email'] = $input->from_email->from;
+			$replyfrom['email'] = $input->to_email->to;
+			$from['name'] = $input->name;
+			$replyfrom['name'] = "ApnaSite AutoReply";
+			(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", $input->to_email->cc) : $ccMail = null;
+			$recipients = explode(",", $input->to_email->to);
+			$replyrecipients = explode(",", $input->from_email->from);
+			$subject = $input->subject;
+			$message = "<table>
+					<tr>
+						<td>Name: </td><td>".$from['name']."</td>
+					</tr>
+					<tr>
+						<td>Email: </td><td>".$from['email']."</td>
+					</tr>";
+			if(is_object($input->message)){
+				foreach($input->message as $key => $value){
+					$message .= "<tr>
+						<td>".$key.":</td><td>".$value."</td>
+					</tr>";
+				}
+			}else{
 				$message .= "<tr>
-					<td>".$key.":</td><td>".$value."</td>
-				</tr>";
+						<td>Message: </td><td>".$input->message."</td>
+					</tr>";
 			}
-		}else{
-			$message .= "<tr>
-					<td>Message: </td><td>".$input->message."</td>
-				</tr>";
-		}
-		
-		$message .= "</table>";
-		
-		// Reply message mail
-		$replymessage =
-				
-			"<h1>Thank You for your Interest! Our representative will call you shortly!</h1>";
 			
-		
-		$replymessage .= "</table>";
-		$mail = $this->db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
-		 if($mail['status'] == 'success'){
-			$insert = $this->db->insert("enquiry", $body);
-			$insert['message'] = $insert['message']." " .$mail['message'];
-			$response= $insert;
-		}else{
-			$response = $mail;
-		};
-		
-		// reply mail to sender
-		
-		$replymail = $this->db->sendMail($replyfrom, $replyrecipients, $subject, $replymessage,$replyTo=null, $attachments = null, $ccMail = null, $bccMail = null, $messageText = null);
-		if($replymail['status'] == 'success'){
-			$response = $replymail;
-		}else{
-			$response = $replymail;
-		}
-		
+			$message .= "</table>";
+			
+			// Reply message mail
+			$replymessage =
+					
+				"<h1>Thank You for your Interest! Our representative will call you shortly!</h1>";
+				
+			
+			$replymessage .= "</table>";
+			$mail = $this->db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
+			 if($mail['status'] == 'success'){
+				$insert = $this->db->insert("enquiry", $body);
+				$insert['message'] = $insert['message']." " .$mail['message'];
+				$response= $insert;
+			}else{
+				$response = $mail;
+			};
+			
+			// reply mail to sender
+			
+			$replymail = $this->db->sendMail($replyfrom, $replyrecipients, $subject, $replymessage,$replyTo=null, $attachments = null, $ccMail = null, $bccMail = null, $messageText = null);
+			if($replymail['status'] == 'success'){
+				$response = $replymail;
+			}else{
+				$response = $replymail;
+			}
+			$response["status"] = "success";
+			$response["message"] = "Mail Sent successfully";
+		}catch(Exception $e){
+            $response = $this->setResponse($data = array(),$city=null);
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+        }
 		echo json_encode($response);
 	}
 	
@@ -241,7 +248,7 @@ class portalManager{
 				echo $_SESSION['mv'];
 				if(isset($_GET['mv'])){
 					if($_SESSION['mv'] != $_GET['mv']){
-						throw new Exception("Mobile Verification Failed. Pleas try again.");
+						throw new Exception("Mobile Verification Failed. Please try again.");
 					}
 					$response['mobilestatus'] = "success";
 					$response['data']['user_mobile'] = $_SESSION['user_mobile'];
@@ -302,6 +309,7 @@ class portalManager{
 			}
 			$response["status"] = "success";
 			$response["message"] = "Mail Sent successfully";
+			print_r($response["status"]);
 		}catch(Exception $e){
             $response = $this->setResponse($data = array(),$city=null);
             $response["status"] = "error";
