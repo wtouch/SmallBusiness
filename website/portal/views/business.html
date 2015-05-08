@@ -29,11 +29,13 @@
 						<div class="media-left col-md-2 col-sm-12 col-xs-12 ">
 							<a href="#"><img class="img-responsive" src="{{x.business_logo.file_relative_path}}">
 							</a>
+							{% if keywords %}
 							<h4>Keywords</h4>
 							<ul class="list-inline">
 							{% for keyword in x.keywords %}
 								<li><a href="/search/{{x.city| replace({' ' : '-'})}}/{{keyword | replace({' ' : '-'})}}">{{keyword}}</a></li>
 							{% endfor %}
+							{% endif %}
 							</ul>
 						</div>
 						<div class="media-body col-md-5 col-sm-12 col-xs-12 table-responsive">
@@ -61,11 +63,14 @@
 									<td><abbr title="Address"> <span class="glyphicon glyphicon-home"></span></abbr></td>
 									<td>
 										<address>
-										  Country :{{x.country}},<br>
-										  State - {{x.state}},<br>
-										   City : {{x.city}},<br>
+											Country :{{x.country}},<br>
+											State - {{x.state}},<br>
+											City : {{x.city}},<br>
 											Location :{{x.location}},&nbsp&nbsp Area - {{x.area}},<br>
-										  pincode : {{x.pincode}} 
+											pincode : {{x.pincode}} <br>
+											{% if x.contact_profile.address %}  
+											  Address : {{x.contact_profile.address}} 
+											{% endif %}
 										</address>
 									</td>
 								</tr>

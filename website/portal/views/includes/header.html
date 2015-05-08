@@ -34,7 +34,22 @@
 					</div>
 					</div>
 				</form>
-				{% include 'includes/homeheader.html' ignore missing %}	
+				{% if not username %}
+				
+					<ul class="nav navbar-nav navbar-right " >
+						<li><a href="/app/#/login">Login</a></li>
+						<li><a href="/app/#/register">Register</a></li>
+						<li><a href="/addbusiness">Add Business</a></li>
+						<li><a href="/postrequirement">Post Requirement</a></li>
+					</ul>
+				{% else %}
+					<ul class="nav navbar-nav navbar-right" id="#portalMenu">
+						<li><a href="/app/#/dashboard">Hi {{username}}</a></li>
+						<li><a href="/app/#/logout">logout</a></li>
+						<li><a href="/postrequirement">Post Requirement</a></li>
+					</ul>
+				{% endif %}
+				
 			</div>
 		</div>
 	</nav>

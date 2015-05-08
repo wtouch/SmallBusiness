@@ -12,7 +12,7 @@ define(['angular',
     // Declare app level module which depends on views, and components
     var app = angular.module('apnasitePortal', [
    'ui.bootstrap', 'customServices', 'ngCookies', 'ngRoute','angularFileUpload','ngSanitize'
- ]);
+	]);
 	app.controller('TypeaheadCtrl', ['$scope','$http','dataService', function($scope, $http,dataService) {
 		$scope.getTypeaheadData = function(table, searchColumn,city, searchValue){
 			var locationParams = {search : {}, groupBy : {}}
@@ -224,12 +224,11 @@ define(['angular',
 					if(response.status=="success"){
 						window.location.href = "/verified";
 					}else{
-						console.log(response.message);
+						if(response.status == "error") response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Login Business", response.message);
 					}
-					
-				}); 
-			}
-			
+				});
+			} 
 		}]).controller('verificationController',['$scope','$injector','dataService','$location', function($scope,$injector,dataService,$location) {
 			$scope.verifyCode = function(verify){
 				console.log(verify);
@@ -246,6 +245,15 @@ define(['angular',
 			$scope.addbusiness= {};
 			$scope.readOnly = false;
 			$scope.currentDate = dataService.currentDate;
+			
+			// to add establish year in combobox
+			$scope.estyear = [];
+			var date = new Date();
+			var todayYear = date.getFullYear();
+			for (var value =1900; value <= todayYear;value++){
+				$scope.estyear.push(value);
+			}
+				
 			$scope.alerts = [
 				{ type: 'danger', msg: 'Error to add business.' },
 				{ type: 'success', msg: 'Business Added Successfully.' }
@@ -329,9 +337,6 @@ define(['angular',
 						if(picArr == "contact_photo"){
 							$scope.addbusiness.contact_profile.contact_photo = data.data;
 						}
-					}else{
-						if(data.status == undefined) data = {status :"error", message:"Unknown Error"};
-						$notification.error("Upload Image", data.message);
 					}
 				});
 			};
@@ -339,7 +344,7 @@ define(['angular',
 			$scope.generateThumb = function(files){
 				//console.log(files);
 				$scope.business_logo = files;
-				$scope.contact_profile.contact_photo = files;
+				$scope.contact_photo = files;
 				console.log($scope.business_logo);
 				upload.generateThumbs(files);
 			};
@@ -347,14 +352,15 @@ define(['angular',
 			//to add business code
 			$scope.postData = function(addbusiness) {
 				$scope.addbusiness.created_date = $scope.currentDate;
-				dataService.post("/addbusiness",addbusiness)
-					.then(function(response) { 
-						if(response.status == "success"){
-							$scope.alerts.push({type, msg :"Business Added"});
-						}
+				console.log(addbusiness);
+				 dataService.post("/addbusiness",addbusiness)
+				.then(function(response) { 
+					if(response.status == "success"){
+						window.location.href = "/"+addbusiness.city+"/"+addbusiness.category+"/"+addbusiness.type+"/"+addbusiness.business_name+"/"+response.data;
+						console.log(response.data);
+					}
 				}); 
-			}
-				
+			}; 
 		}]);
     return app;
 });

@@ -79,13 +79,49 @@
 						</div>
 					</div>
 
+				
 					<div class="form-group">
+						<label for="business_type" class="col-sm-3 control-label" name="business_type" >* Primary Business Type</label>
+						<div class="col-sm-8">
+							<select class="form-control" name="business_type" id="business_type"  ng-model="addbusiness.business_profile.business_type" required ng-options="item as item for item in biz.business_type">	
+								<option value="">Select Type</option>
+							</select>
+							<span class="help-block" ng-show="businessProfileForm.business_type.$dirty && businessProfileForm.business_type.$invalid">
+								<span ng-show="businessProfileForm.business_type.$error.required" class="text-danger">Primary Business Type is required.</span>
+							</span>				
+						</div>
+					</div>	
+					
+					<div class="form-group">
+						<label for="establishment" class="col-sm-3 control-label">* Establishment Year</label>
+						<div class="col-sm-8">
+						<select class="form-control" name="establishment" id="establishment"  ng-model="addbusiness.business_profile.establishment" required ng-options="item as item for item in estyear" ng-init="addbusiness.business_profile.establishment = 2014">	
+								<option value="">Select Establish Year</option>		
+							</select>
+							
+							<span class="help-block" ng-show="businessProfileForm.establishment.$dirty && businessProfileForm.establishment.$invalid">
+								<span ng-show="businessProfileForm.establishment.$error.required" class="text-danger">Year Of Establishment is required.</span>
+							</span>				
+						</div>
+					</div>	
+					
+					<div class="form-group">
+						<label for="no_of_employees" class="col-sm-3 control-label"> * Team Size</label>
+						<div class="col-sm-8">
+							<select class="form-control" name="no_of_employees" id="no_of_employees"  ng-model="addbusiness.business_profile.no_of_employees" required ng-options="item as item for item in biz.employees">		
+								<option value="">--Choose One--</option>
+							</select>
+							<span class="help-block" ng-show="businessProfileForm.no_of_employees.$dirty && businessProfileForm.no_of_employees.$invalid">
+								<span ng-show="businessProfileForm.no_of_employees.$error.required" class="text-danger">No. Of Employees is required.</span>
+							</span>				
+						</div>
+					</div>	
+						<div class="form-group">
 						<label for="shortdescription" class="col-sm-3 control-label">* Detailed  Description </br>
 						<small>This will show on Website Home Page</small></label>
 						<div class="col-sm-8">
-							<textarea type="text" class="form-control" id="shortdescription" name="shortdescription" ng-model="addbusiness.business_info.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
-								<p ng-hide="addbusinessForm.shortdescription.$error.maxlength">
-									{{ 5000 - addbusiness.business_info.description.length + " Chars left"}} 
+							<textarea type="text" class="form-control" id="shortdescription" name="shortdescription" ng-model="addbusiness.business_info.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company"  required ui-tinymce></textarea>
+								<p ng-hide="addbusinessForm.shortdescription.$error.maxlength" ng-bind="5000 - addbusiness.business_info.description.length + ' Chars left'">
 								</p>
 								<span class="help-block" ng-show="addbusinessForm.shortdescription.$dirty && addbusinessForm.shortdescription.$invalid">
 									<span class="text-danger" ng-show="addbusinessForm.shortdescription.$error.maxlength">Sorry You are Exceeding the Limit</span>
@@ -134,8 +170,7 @@
 								<label for="address" class="col-sm-3 control-label">* Address </label>
 								<div class="col-sm-8">
 									<textarea type="text" class="form-control" id="address" name="address" ng-model="addbusiness.contact_profile.address" cols="30" rows="3" ng-maxlength="256" placeholder="Enter address"  required></textarea>
-									<p ng-hide="addbusinessForm.address.$error.maxlength">
-										{{ 256 - addbusiness.contact_profile.address.length + " Chars left" }}
+									<p ng-hide="addbusinessForm.address.$error.maxlength" ng-bind="256 - addbusiness.contact_profile.address.length + ' Chars left'">
 									</p>
 									<span class="help-block" ng-show="addbusinessForm.address.$dirty && addbusinessForm.address.$invalid">
 										<span ng-show="addbusinessForm.address.$error.maxlength"class="text-danger">Sorry You are Exceeding the Limit</span>
