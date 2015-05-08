@@ -59,7 +59,7 @@ $app->post('/businesslogin', function() use($app, $config, $twig, $portal, $body
 
 $app->post('/addbusiness', function() use($app, $config, $twig, $portal, $body) {
 	$response = $portal->addBusiness($body);
-	//echo json_encode($response);
+	echo json_encode($response);
 
 });
 

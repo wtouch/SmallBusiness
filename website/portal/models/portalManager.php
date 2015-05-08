@@ -243,8 +243,8 @@ class portalManager{
 	function verifiCode(){
 		try{
 			$response = $this->setResponse($data = array(),$city=null);
+			echo $_SESSION['mv'];
 			if(isset($_SESSION['ev']) && isset($_SESSION['mv'])){
-				echo $_SESSION['mv'];
 				if(isset($_GET['mv'])){
 					if($_SESSION['mv'] != $_GET['mv']){
 						throw new Exception("Mobile Verification Failed. Please try again.");
@@ -299,6 +299,7 @@ class portalManager{
 			$sendmail = $this->db->sendMail($mail, $recipients, $subject, $message,$replyTo=null, $attachments = null, $ccMail = null, $bccMail = null, $messageText = null);
 			
 			if($sendmail['status'] == 'success'){
+				
 				//$sms = $this->sendSms($smsMsg, $phone);
 				/* if($sms != "Sent"){
 					throw new Exception("Verification code not sent to your Mobile! Please try again later!");
@@ -321,8 +322,11 @@ class portalManager{
 	function addBusiness($body){
 		try{
 			$insert = $this->db->insert("business", $body);
-			$insert['message'] = $insert['message'];
-			$response= $insert;
+			if($insert["status"] != "success"){
+				throw new Exception("Your Business not added. Please try again!");
+			}
+			
+			$response['data'] = $insert['data'];
 			$response["status"] = "success";
 			$response["message"] = "Your Business Added successfully";
 		}catch(Exception $e){
@@ -330,7 +334,7 @@ class portalManager{
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
         }
-		echo json_encode($response);
+		return $response;
 	}
 	
 	function getCategories($city){

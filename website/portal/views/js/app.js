@@ -223,9 +223,6 @@ define(['angular',
 				dataService.post("/businesslogin",userlogin).then(function(response) {
 					if(response.status=="success"){
 						window.location.href = "/verified";
-					}else{
-						if(response.status == "error") response = {status :"error", message:"Unknown Error"};
-						$notification[response.status]("Login Business", response.message);
 					}
 				});
 			} 
@@ -352,9 +349,9 @@ define(['angular',
 			//to add business code
 			$scope.postData = function(addbusiness) {
 				$scope.addbusiness.created_date = $scope.currentDate;
-				console.log(addbusiness);
-				 dataService.post("/addbusiness",addbusiness)
+				dataService.post("/addbusiness",addbusiness)
 				.then(function(response) { 
+					console.log(response);
 					if(response.status == "success"){
 						window.location.href = "/"+addbusiness.city+"/"+addbusiness.category+"/"+addbusiness.type+"/"+addbusiness.business_name+"/"+response.data;
 						console.log(response.data);
