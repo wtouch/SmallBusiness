@@ -44,6 +44,11 @@ $app->get('/addbusiness', function() use($app, $config, $twig, $portal) {
 	$template = $twig->loadTemplate("addbusiness.html");
 	$template->display($response);
 });
+$app->get('/postrequirement', function() use($app, $config, $twig, $portal) {
+	$response = $portal->verifiCode($city=null);
+	$template = $twig->loadTemplate("enquiry.html");
+	$template->display($response);
+});
 
 // login to add business
 $app->post('/businesslogin', function() use($app, $config, $twig, $portal, $body) {

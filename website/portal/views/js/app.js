@@ -139,42 +139,36 @@ define(['angular',
 					size : 'md'
 				};
 				var modalOptions = {
-					enquiryData : {
-						subject : 'Portal Enquiry: '+ businessname,
-						to_email:{to : toemail},
-						user_id : userId,
-						category :category,
-						type :type,
-						keywords : keywords
-					},
+					modal : true,
 					formData : function(enquiry){
-						enquiry.subject = 'Portal Enquiry: '+ businessname;
-						enquiry.to_email.to = toemail;
-						enquiry.user_id = userId;
-						enquiry.category = category;
-						enquiry.type = type;
-						enquiry.keywords = keywords;
-						enquiry.date = $scope.currentDate;
 						modalOptions.myenquiryData = enquiry;
 					}
 				};
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+				$scope.initEnquiryData(buzId,businessname,toemail,userId,category,type,keywords);
+				angular.extend(modalOptions, $scope.modalOptions);
 				
-					dataService.post("/enquiry",modalOptions.myenquiryData).then(function(response) {
-						if(response.status=="success"){
-							$scope.mailSent = true;
-						}else{
-							console.log(response.message);
-						}
-					});   
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log(modalOptions.myenquiryData);
+					$scope.postData(modalOptions.myenquiryData);
 				});
 			};
-			$scope.ok = function () {
-				$modalOptions.close('ok');
-			};
-			$scope.postData= function (enquiry,businessname){
-				enquiry.subject = 'Portal Enquiry: '+ businessname;
-				enquiry.date = year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec;
+			$scope.initEnquiryData = function(buzId,businessname,toemail,userId,category,type,keywords){
+				$scope.modalOptions = {
+					enquiryData : {
+						subject : (businessname) ? 'Portal Enquiry: '+ businessname : "",
+						to_email: (toemail) ? {to : toemail, cc : 'admin@apnasite.in'} : {to : "admin@apnasite.in"},
+						user_id : (userId) ? userId : 1,
+						category : category,
+						type : type,
+						keywords : keywords
+					}
+				}
+				console.log($scope.modalOptions);
+			}
+			$scope.postData= function (enquiry){
+				enquiry.date = $scope.currentDate;
+				
+				console.log(enquiry);
 				dataService.post("/enquiry",enquiry).then(function(response) {
 					if(response.status=="success"){
 						$scope.mailSent = true; 

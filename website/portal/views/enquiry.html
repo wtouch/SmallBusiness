@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+{% block header %}
+		{% include 'includes/header.html' ignore missing %}
+{% endblock %}
+
+
+{% block content %}
+{% autoescape false %}
+<main>
+	<div class="row" ng-controller="enquiryController">
+		<div class="col-md-12 col-xs-12" ng-init="initEnquiryData()">
+		{{modalOptions}}
+			{% include 'includes/enquiryform.html' ignore missing %}
+		</div>
+	</div>
+</main>
+{% endautoescape %}
+{% endblock %}	

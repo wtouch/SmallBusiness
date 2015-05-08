@@ -141,7 +141,6 @@ class portalManager{
 	//code for send user enquiry
 	function sendEnquiry($body){
 		try{
-			print_r($body);
 			$input = json_decode($body);
 			$from['email'] = $input->from_email->from;
 			$replyfrom['email'] = $input->to_email->to;
@@ -539,18 +538,28 @@ class portalManager{
 			
 			$servicedata = $this->db->select();
 			
+			$keywords = $data['data']['business_name'].",".$data['data']['category_name'].",".$data['data']['type_name'];
 			if(is_array($data['data'])){
-				$keywords = implode(",",array_unique($data['data']['keywords']));
+				if(!empty($data['data']['keywords'])){
+					$keywords = implode(",",array_unique($data['data']['keywords']));
+				}
 			}
+			
 			
 			$response = $this->setResponse($data,$city);
 			$response["status"] = "success";
 			$response["message"] = "Data Shows";
 			$response['service'] = ($servicedata["data"]);	
 			$response['product'] = ($proddata["data"]);
-			$response['title'] = $data['data']['business_name']." | ".$data['data']['seo']['title']." | Apna Site!";
+			if($data['data']['seo'] != ""){
+				$response['title'] = $data['data']['business_name']." | ".$data['data']['seo']['title']." | Apna Site!";
+				$response['description'] = "Apna Site - ".$data['data']['seo']['title'];
+			}else{
+				$response['title'] = $data['data']['business_name']." | Apna Site!";
+				$response['description'] = "Apna Site - ".$data['data']['business_name'];
+			}
 			$response['keywords'] = $keywords;
-			$response['description'] = "Apna Site - ".$data['data']['seo']['title'];
+			
 		}catch(Exception $e){
 			$response = $this->setResponse($data = array(),$city);
             $response["status"] = "error";
