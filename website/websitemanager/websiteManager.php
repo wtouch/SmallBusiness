@@ -184,8 +184,8 @@ class websiteManager{
 			if($config['status'] == 'success'){
 				$config = $config['data'];
 				//print_r($config['website_config']);
-				if(isset($config['website_config']['business_id'])) {
-					$whereProd['business_id'] = $config['website_config']['business_id'];
+				if(isset($config['business_id'])) {
+					$whereProd['business_id'] = $config['business_id'];
 				}else{
 					throw new Exception("Please add website details!");
 				}
@@ -197,10 +197,6 @@ class websiteManager{
 			if($id != null) $whereProd['id'] = $id;
 			if($featured != null) $whereProd['featured'] = $featured;
 			if(isset($productType)) $whereProd['type'] = $productType;
-			
-			
-			//$whereProd['business_id'] = $config['website_config']->business_id;
-			$whereProd['user_id'] = $config['user_id'];
 			
 			$table = "product";
 			$t0 = $this->db->setTable($table);

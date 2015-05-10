@@ -18,7 +18,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.path = "product/"+$rootScope.userDetails.id; // path to store images on server
 		$scope.permission = $rootScope.userDetails.permission.product_module;
-		$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		$scope.showProductForm = false;
 		$scope.showServiceForm = false;
 		$scope.editProdForm = false;
@@ -113,7 +112,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					$scope.addproduct = {};
 				};
 				$scope.postData = function(addproduct) { 
-				$scope.addproduct.user_id= $rootScope.userDetails.id;
+				$scope.addproduct.user_id = $rootScope.userDetails.id;
 				$scope.addproduct.date = $scope.currentDate;
 					 dataService.post("post/product",addproduct)
 					.then(function(response) { 
