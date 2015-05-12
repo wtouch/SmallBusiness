@@ -202,7 +202,9 @@ define(['app'], function (app) {
 						dataService.post("post/mytemplate",modalOptions.myTemplateData).then(function(response) {
 							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 							$notification[response.status]("Apply Template", response.message);
-							dataService.progressSteps('chooseTemplate', true);
+							if($rootScope.userDetails.config.chooseTemplate == false){
+								dataService.progressSteps('chooseTemplate', true);
+							}
 						}); 
 					
 					});
@@ -562,18 +564,16 @@ define(['app'], function (app) {
 			
 			//modal for open scrible details.
 			$scope.openTab = function (url, tempId) {
-				dataService.get("getsingle/template/"+tempId)
-				.then(function(response) {
+				
 					var modalDefaults = {
 						templateUrl: url,	
 						size : 'lg'
 					};
 					var modalOptions = {
-						tempList: dataService.parse(response.data)  
+						tempList: tempId  
 					};
 					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					});
-				});
 			};
 			$scope.ok = function () {
 				$modalOptions.close('ok');

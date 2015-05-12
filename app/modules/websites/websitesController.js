@@ -87,18 +87,15 @@ define(['app'], function (app) {
 		
 		//open function for previewing the website
         $scope.open = function (url, webId) {
-			dataService.get("getsingle/website/"+webId)
-			.then(function(response) {
 				var modalDefaults = {
 					templateUrl: url,	
 					size : 'lg'
 				};
 				var modalOptions = {
-					website: dataService.parse(response.data)
+					website: webId
 				};
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 				}); 
-			});
 		};
 		
 		// All $scope methods
@@ -192,7 +189,9 @@ define(['app'], function (app) {
 						$scope.formScope.requestsiteForm.$setPristine;
 
 						$notification.success("Filter Website List", "Your Request has successfully registered. Kindly check your mailbox for activation status!");
-						dataService.progressSteps('requestSite', true);
+						if($rootScope.userDetails.config.requestSite == false){
+							dataService.progressSteps('requestSite', true);
+						}
 					}else{
 						$notification.error("Request New Site", response.message);
 					}

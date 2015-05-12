@@ -119,7 +119,9 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 						if(response.status == "success"){
 							$scope.showServiceForm = false;
 							$scope.showProductForm = false;
-							dataService.progressSteps('addProducts', true);
+							if($rootScope.userDetails.config.addProducts == false){
+								dataService.progressSteps('addProducts', true);
+							}
 						}
 						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Add Product", response.message);
@@ -138,7 +140,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					if(response.status == "success"){
 						$scope.showServiceForm = false;
 						$scope.showProductForm = false;
-						dataService.progressSteps('addProducts', true);
+							dataService.progressSteps('addProducts', true);
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Add Service", response.message);

@@ -149,7 +149,9 @@ define(['app'], function (app) {
 			/* created_date : $scope.currentDate */
 				if(response.status == "success"){
 					if($rootScope.userDetails.config.addbusinessDetails != true)  $location.path("/dashboard/business/adddetails/"+response.data);
-					dataService.progressSteps('addbusiness', true);
+					if($rootScope.userDetails.config.addbusiness == false){
+						dataService.progressSteps('addbusiness', true);
+					}
 					dataService.progressSteps('addbusinessDetails', response.data);
 				}
 				if(response.status == undefined){

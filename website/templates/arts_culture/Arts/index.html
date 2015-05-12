@@ -16,129 +16,29 @@
 			<title>{{data.seo.title}} | {{title}}</title>
 			<meta name="description" content="{{data.seo.description}}">
 			<meta name="keywords" content="{{data.keywords | join(',')}}">
+			{%if template.template_params%}
+			<style>	
+			background-color: {{template.template_params.color}};
+			</style>
+			{%endif%}
 		{% endblock %}
 	</head>
 	<body>
 		{% block carousal %}
 		{% endblock %}
-		<header>
-			<div class="container">
-				<nav class="navbar navbar-default">
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
-							<li><a href="about.html">About us</a></li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Programs <span class="caret"></span></a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Annual Day Function</a></li>
-									<li><a href="#">Teacher-Parent Meeting</a></li>
-									<li><a href="#">Sports Tournaments</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Our Events</a></li>
-							<li><a href="#">Gallery</a></li>
-							<li><a href="#">Contacts</a></li>
-						</ul>
-					</div>	
-				</nav>
-				<div class="heading text-center">JOVEES COSMETICS</div>
-			</div>
-		</header>
 		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<div id="myCarousel" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-							<li data-target="#myCarousel" data-slide-to="1"></li>
-							<li data-target="#myCarousel" data-slide-to="2"></li>
-						</ol>
-						<div class="carousel-inner" role="listbox">
-							<div class="item active">
-								<img class="img-responsive" width="100%" src="img/slide2.jpg" alt="First slide">
-								<div class="carousel-caption">
-									<h1>NEW OFFERS FOR CORPORATE EVENTS</h1>
-									<p>erec onetase adiscvertas unumquam eius.</p>
-								</div>
-							</div>	
-						</div>
-						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
+			{% include 'includes/navbar.html' ignore missing %}
+			{% block content %}{% endblock %}
+			<footer>
+			{% block footer %}
+				<div class="row">
+					<div class="col-sm-12">
+						<p class=" text-center">&copy;Copyright 2015 by <a href="apnasite.in">apnasite.in</a></p>
 					</div>
 				</div>
-			</div>
+			{% endblock %}
+			</footer>
 		</div>
-		<div class="container">
-			<div class="row eventimg">
-				<div class="col-sm-3">
-					<img class="events" src="img/img1.jpg">
-				</div>
-				<div class="col-sm-3">
-					<img class="events" src="img/img2.jpg">
-				</div>
-				<div class="col-sm-3">
-					<img class="events" src="img/img3.jpg">
-				</div>
-				<div class="col-sm-3">
-					<img class="events" src="img/img1.jpg">
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="wcmsg text-center">
-				<h2>WELCOME MESSAGE</h2>
-				<p class="text-center">Beciegast nveriti vitaesaert asety kertya aset aplica boserde nerafae kertyurauestyasnemo faseran.Ptaiadeser daesraed sdrasrolern atur aut oditaut. onsequserantur magni dolqui ratione voluptatemsequi nesciunt orearo  numquam eius modi teincidunt, ut labore et dolore magnam...</p>
-				<a href="#">Read More...</a>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4">
-					<div class="feature">
-						<img class="img-responsive" src="img/dec2.jpg">
-						<p>Consectetur adipisci velit, sed quimquam eius modi tempora incidunt, ut laboret dolore agnamera aliquam quaerat voluptatem. Setnim ad minimase veniam suscipit labert bytrasas. 
-					</div>
-					<a href="#">
-					<div class="read">
-						<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Read More...
-					</div>
-					</a>
-				</div>
-				<div class="col-sm-4">
-					<div class=" feature">
-						<img class="img-responsive" src="img/dec4.jpg">
-						<p>Consectetur adipisci velit, sed quimquam eius modi tempora incidunt, ut laboret dolore agnamera aliquam quaerat voluptatem. Setnim ad minimase veniam suscipit labert bytrasas. 
-					</div>
-					<a href="#">
-					<div class="read">
-						<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Read More...
-					</div>
-					</a>
-				</div>
-				<div class="col-sm-4">
-					<div class="feature">
-						<img class="img-responsive" src="img/dec3.jpg">
-						<p>Consectetur adipisci velit, sed quimquam eius modi tempora incidunt, ut laboret dolore agnamera aliquam quaerat voluptatem. Setnim ad minimase veniam suscipit labert bytrasas. 
-					</div>
-					<a href="#">
-					<div class="read">
-						<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Read More...
-					</div>
-					</a>
-				</div>
-			</div>
-		</div>
-		<footer>
-			<div class="container">
-				<p class="text-center">&copy;Copyright 2015 by <a href="apnasite.in">apnasite.in</a></p>
-			</div>
-		</footer>
 	</body>
 </html>
+{% endspaceless %}

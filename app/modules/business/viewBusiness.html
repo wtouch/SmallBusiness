@@ -8,7 +8,7 @@
 				<tabset>
 					<tab heading="Business Info" title="Business Information">
 						<table class="table table-responsive table-bordered ">
-							<tr><th>ID</th><th>BUSINESS NAME</th><th>LOGO</th><th>CATEGORY</th><th>OWNERSHIP</th><th>KEY DESCRIPTION</th><th>DETAILED DESCRIPTION</th></tr>
+							<tr><th>ID</th><th>BUSINESS NAME</th><th>LOGO</th><th>CATEGORY</th><th>OWNERSHIP</th><th>DETAILED DESCRIPTION</th></tr>
 							<tr>
 								<td>{{modalOptions.bizList.id}}</td>
 								<td>{{modalOptions.bizList.business_name}}</td><td>
@@ -17,12 +17,11 @@
 									modalOptions.bizList.business_logo.file_relative_path}}"/>
 								</span> 
 								</td><td>{{modalOptions.bizList.category}}</td>
-								<td>{{modalOptions.bizList.ownership}}</td><td ng-bind-html="modalOptions.bizList.business_info.keywords"></td>
-								 <td>
-								 <div  class="scroll" ng-bind-html="modalOptions.bizList.business_info.description">
-								 </div>
-							 
-						</td> 
+								<td>{{modalOptions.bizList.ownership}}</td>
+								<td>
+									<div class="scroll" ng-bind-html="modalOptions.bizList.business_info.description">
+									</div>
+								</td> 
 							</tr>
 						</table>
 					</tab>
@@ -33,7 +32,10 @@
 								<td>{{modalOptions.bizList.business_profile.business_type}}</td>
 								<td>{{modalOptions.bizList.business_profile.establishment}}</td>
 								<td>{{modalOptions.bizList.business_profile.no_of_employees}}</td>
-								<td>{{modalOptions.bizList.business_profile.aboutDescription}}</td>
+								<td>
+									<div class="scroll" ng-bind-html="modalOptions.bizList.business_info.aboutDescription">
+									</div>
+								</td>
 								<td>
 									<p ng-repeat="x in modalOptions.bizList.business_profile.additional_business">
 										<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>{{x}}</span>
@@ -162,25 +164,19 @@
 										<tr><th>Name</th><td>{{key}}</td></tr>
 										<tr><th>Date</th><td>{{val.date}}</td></tr>		
 										<tr><th>Email</th><td>{{val.email}}</td></tr>
-										<tr><th>Country</th><td>{{val.country}}</td></tr>
-										<tr><th>State</th><td>{{val.state}}</td></tr>
-										<tr><th>City</th><td>{{val.city}}</td></tr>
+										<tr><th>Address</th><td>{{val.address}}</td></tr>
 										<tr><th>Phone</th><td>{{val.phone}}</td></tr>
 									</table>
 								</td>
 								<td>
 									<table class="table table-responsive">
-										<tr><th>Title</th><td>{{val.testimonial_title}}</td></tr>
-										<tr><th>Description</th><td ng-bind-html="val.test_Description"></td></tr>
+										<tr><th>Title</th><td>{{key}}</td></tr>
+										<tr><th>Description</th><td ng-bind-html="val.description"></td></tr>
 										<tr>
-											<th>Imgae</th>
-											<tr "value.file_relative_path" in modalOptions.bizList.testimonials>
-												<td>{{key}}</td>
-												<td>
-													<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + val.image.file_relative_path}}" width="150px" />
-												</td>
-												<td ng-bind-html="val.description"></td>
-											</tr>
+											<th>Image</th>
+											<td "value.file_relative_path" in modalOptions.bizList.testimonials>
+												<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + val.image.file_relative_path}}" width="150px" />
+											</td>
 										</tr>						
 									</table>
 								</td>								
@@ -193,7 +189,7 @@
 								<th>JOB DESCRIPTION</th>
 							</tr>
 							<tr ng-repeat="(key, val) in modalOptions.bizList.job_careers">
-								<td>{{key}}</td><td ng-bind-html="val.jobDescription"></td>
+								<td>{{key}}</td><td ng-bind-html="val.description"></td>
 							</tr>
 						</table>
 					</tab>
@@ -206,14 +202,14 @@
 							<tr ng-repeat="(key, val) in modalOptions.bizList.news_coverage">
 								<td>
 									<table class="table table-responsive">
-										<tr><th>Media Name</th><td>{{key}}</td></tr>
+										<tr><th>Media Name</th><td>{{val.medianame}}</td></tr>
 										<tr><th>Media Type</th><td>{{val.mediatype}}</td></tr>
 									</table>
 								</td>
 								<td><table class="table table-responsive">
-										<tr><th>Headline</th><td>{{val.headline}}</td></tr>
-										<tr><th>Date</th><td>{{val.newsdate}}</td></tr>
-										<tr><th>URL</th><td>{{val.News}}</td></tr>
+										<tr><th>Headline</th><td>{{key}}</td></tr>
+										<tr><th>Date</th><td>{{val.date}}</td></tr>
+										<tr><th>URL</th><td>{{val.news}}</td></tr>
 										<tr>
 											<th>Image</th>
 											<td>

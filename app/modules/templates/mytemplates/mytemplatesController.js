@@ -335,7 +335,7 @@ define(['app'], function (app) {
 					size : 'lg'
 				};
 				var modalOptions = {
-					editTemplate: dataService.parse(response.data),
+					editTemplate: response.data,
 					modifiedDate : dataService.currentDate,
 					date : $scope.currentDate,
 					myTemplateData : {},
@@ -344,23 +344,23 @@ define(['app'], function (app) {
 					files : {},
 					path : $scope.path,
 					userInfo : $scope.userInfo,
-					tempId : $scope.tempId,
 					formData : function(templateData){
 						
 						modalOptions.myTemplateData = templateData;
 					},
 					resetParams : function(resetData){
-						dataService.get("getsingle/template/"+tempId)
-						.then(function(response) {	
+						console.log(resetData);
+						dataService.get("getsingle/template/"+response.data.template_id)
+						.then(function(resetRes) {	
 						
 						console.log(resetData.template_params);
-						console.log(response.data.template_params);
-							resetData.template_params.color = response.data.template_params.color;
-							resetData.template_params.light_color = response.data.template_params.light_color; 
-							resetData.template_params.dark_color = response.data.template_params.dark_color;
-							resetData.template_params.background_color = response.data.template_params.background_color;
-							resetData.template_params.background_color_light = response.data.template_params.background_color_light;
-							resetData.template_params.background_color_dark = response.data.template_params.background_color_dark;
+						console.log(resetRes.data.template_params);
+							resetData.template_params.color = resetRes.data.template_params.color;
+							resetData.template_params.light_color = resetRes.data.template_params.light_color; 
+							resetData.template_params.dark_color = resetRes.data.template_params.dark_color;
+							resetData.template_params.background_color = resetRes.data.template_params.background_color;
+							resetData.template_params.background_color_light = resetRes.data.template_params.background_color_light;
+							resetData.template_params.background_color_dark = resetRes.data.template_params.background_color_dark;
 						});
 					},
 					/* $scope.resetParams = function (url, tempId) {
