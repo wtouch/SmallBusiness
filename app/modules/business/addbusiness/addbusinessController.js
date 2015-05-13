@@ -141,11 +141,12 @@ define(['app'], function (app) {
 		$scope.generateThumb = function(files){  
 			upload.generateThumbs(files);
 		};
+		
 		//to add business code
 		$scope.postData = function(addbusiness) {
+			$scope.addbusiness.created_date = dataService.currentDate;
 			dataService.post("post/business",addbusiness)
 			.then(function(response) { 
-			$scope.addbusiness.created_date = dataService.currentDate;
 			/* created_date : $scope.currentDate */
 				if(response.status == "success"){
 					if($rootScope.userDetails.config.addbusinessDetails != true)  $location.path("/dashboard/business/adddetails/"+response.data);
@@ -184,7 +185,9 @@ define(['app'], function (app) {
 					}
 				}
 			});
+			
 			$scope.updateData = function(addbusiness) {
+				$scope.addbusiness.modified_date = dataService.currentDate;
 				dataService.put("put/business/"+$routeParams.id,addbusiness)
 				.then(function(response) {
 					if(response.status == "success"){

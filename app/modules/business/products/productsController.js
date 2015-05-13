@@ -16,7 +16,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		$scope.path = "product/"+$rootScope.userDetails.id; // path to store images on server
+		$scope.path = "product/"+ $rootScope.userDetails.id; // path to store images on server
 		$scope.permission = $rootScope.userDetails.permission.product_module;
 		$scope.showProductForm = false;
 		$scope.showServiceForm = false;

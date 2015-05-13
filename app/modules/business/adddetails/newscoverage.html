@@ -96,13 +96,13 @@
 				<file-preview url="image"></file-preview>
 				
 				<!-- This button will show if file/s selected -->
-				<button ng-show="image" ng-click="uploadnews(image,path,userInfo,news_coverage.image)" type="button">Upload</button>
+				<button ng-show="image" ng-click="uploadnews(image,path + businessData.user_id,userInfo,news_coverage.image)" type="button">Upload</button>
 				
 				<!-- This hidden input will store image path in array after successful uploading -->
 				<input type="hidden" ng-model="news_coverage.desc.image">
 			</div>
 			<div class="col-sm-4">
-				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + news_coverage.desc.image.file_relative_path}}" width="150px" />
+				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + news_coverage.desc.image.file_relative_path}}" width="150px" />
 			</div>
 		</div>
 		

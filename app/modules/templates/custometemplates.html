@@ -109,14 +109,14 @@
 					<td>
 						<div>
 						<!--Apply Template-->
-							<a ng-click="openModel('modules/templates/applytemplate.html', x.id)" class="btn btn-success" ng-show="x.template_price=='free'">Apply</a>
+							<a ng-click="openModel('modules/templates/applytemplate.html', x.id)" class="btn btn-success" ng-show="x.template_price=='free'" ng-disabled="x.development_status!='completed'">Apply</a>
 							
 							<button href="#" class="btn btn-warning" title="Buy Template" ng-show="x.template_price!='free'"> Buy </button>
 							
 							<button ng-if="permission.publish_template" type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
 							</button>
 							
-							<a type="button" ng-click="openTemp('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="Preview Template Details"></a>
+							<a type="button" ng-disabled="x.development_status!='completed'" ng-click="openTemp('modules/templates/viewTemplate.html', x.id)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="Preview Template Details"></a>
 							
 							<a ng-if="permission.edit_template" type="button" tooltip="Submit Template" class="btn btn-info glyphicon glyphicon-open" href="#/dashboard/templates/addtemplate/{{x.id}}"></a>
 							

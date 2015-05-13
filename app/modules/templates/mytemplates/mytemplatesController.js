@@ -476,7 +476,7 @@ define(['app'], function (app) {
 							size : 'lg'
 						};
 						var modalOptions = {
-							userDetails : $rootScope.userDetails,
+							userInfo : {user_id:$rootScope.userDetails.id},
 							tempList : dataService.parse(response.data),
 							customerList : (user.data),
 							myTemplateData : {},

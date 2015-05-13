@@ -12,7 +12,7 @@
 			<th>Manager</th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="mail in mailList | filter: { status : hideDeleted}">
+			<tr ng-repeat="mail in mailList | filter: { status : hideDeleted}| orderBy: '-date'">
 				<td>
 					<button ng-if="userDetails.id == mail.user_id" class="btn btn-default" tooltip="delete" ng-click="deletemail(mail.id,mail.status, $index)">
 						<span  class="glyphicon glyphicon-trash"></span> 
