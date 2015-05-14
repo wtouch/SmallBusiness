@@ -39,6 +39,7 @@
 			
 			$t0 = $db->setJoinString("INNER JOIN", "enquiry", array("user_id"=>$user.".id"));
 			$selectInnerJoinCols[0] = "*";
+			$db->setOrderBy(array("date"=>"desc"),$t0);
 			$db->setColumns($t0, $selectInnerJoinCols);
 			$db->setWhere($where, $t0);
 			$db->setWhere($like, $t0, true);

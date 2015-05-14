@@ -119,7 +119,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 						if(response.status == "success"){
 							$scope.showServiceForm = false;
 							$scope.showProductForm = false;
-							if($rootScope.userDetails.config.addProducts == false){
+							if($rootScope.userDetails.config.addProducts != true){
 								dataService.progressSteps('addProducts', true);
 							}
 						}

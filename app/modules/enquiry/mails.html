@@ -1,7 +1,7 @@
 <div class="table-responsive">
 	<table class="table table-bordered">
 		<thead> 
-			<th></th>
+			<th><button class="btn btn-default"><span class="glyphicon glyphicon-trash" tooltip="delete"></span></button></th>
 			<th>Sr.No.</th>
 			<th><span class="glyphicon glyphicon-share-alt" tooltip="Replied"></th>
 			<th>Subject</th>
@@ -14,7 +14,7 @@
 		<tbody>
 			<tr ng-repeat="mail in mailList | filter: { status : hideDeleted}| orderBy: '-date'">
 				<td>
-					<button ng-if="userDetails.id == mail.user_id" class="btn btn-default" tooltip="delete" ng-click="deletemail(mail.id,mail.status, $index)">
+					<button ng-if="userDetails.id == mail.user_id" class="btn btn-default" ng-click="deletemail(mail.id,mail.status, $index)">
 						<span  class="glyphicon glyphicon-trash"></span> 
 					</button>
 				</td>
@@ -40,12 +40,8 @@
 				<td>{{mail.from_email.from}}</td>
 				<td>{{mail.date}}</td>
 				<td>{{mail.to_email.to}}</td>
-				<td>
-					<span ng-if="x.manager==null">-</span><span ng-if="x.manager!=null">{{x.manager}}</span>
-				</td>
-				<td>
-					<span ng-if="x.admin==null">-</span><span ng-if="x.admin!=null">{{x.admin}}</span>
-				</td>
+				<td><span ng-if="mail.manager==null">-</span><span ng-if="mail.manager!=null">{{mail.manager}}</span></td>
+				<td><span ng-if="mail.admin==null">-</span><span ng-if="mail.admin!=null">{{mail.admin}}</span></td>
 			</tr>
 		</tbody>					
 	</table>

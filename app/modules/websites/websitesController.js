@@ -181,8 +181,8 @@ define(['app'], function (app) {
         var requestnewsite = function(){
 			$scope.reqnewsite = { config : {google_map:{}}};
 			$scope.postData = function(reqnewsite) { 
-			$scope.reqnewsite.date = $scope.currentDate;
-				 dataService.post("post/website",reqnewsite)
+				reqnewsite.date = dataService.currentDate;
+				dataService.post("post/website",reqnewsite)
 				.then(function(response) {
 					if(response.status == "success"){
 						$scope.reqnewsite = {};

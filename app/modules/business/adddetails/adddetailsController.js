@@ -151,7 +151,7 @@ define(['app'], function (app) {
 			 .then(function(response) { 
 				if(response.status == 'success'){
 					$scope.submitted = true;
-					if($rootScope.userDetails.config.addbusinessDetails == false){
+					if($rootScope.userDetails.config.addbusinessDetails != true){
 						dataService.progressSteps('addbusinessDetails', true);
 						dataService.progressSteps('addProducts', $scope.business_id);
 					}

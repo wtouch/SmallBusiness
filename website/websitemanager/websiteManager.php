@@ -195,6 +195,7 @@ class websiteManager{
 			}
 			// get data for view from product table, business table, users table, template table
 			if($id != null) $whereProd['id'] = $id;
+			$whereProd['status'] = 1;
 			if($featured != null) $whereProd['featured'] = $featured;
 			if(isset($productType)) $whereProd['type'] = $productType;
 			

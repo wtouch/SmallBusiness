@@ -144,7 +144,8 @@ define(['app'], function (app) {
 		
 		//to add business code
 		$scope.postData = function(addbusiness) {
-			$scope.addbusiness.created_date = dataService.currentDate;
+			addbusiness.created_date = dataService.currentDate;
+			addbusiness.modified_date = dataService.currentDate;
 			dataService.post("post/business",addbusiness)
 			.then(function(response) { 
 			/* created_date : $scope.currentDate */
@@ -187,8 +188,9 @@ define(['app'], function (app) {
 			});
 			
 			$scope.updateData = function(addbusiness) {
-				$scope.addbusiness.modified_date = dataService.currentDate;
-				dataService.put("put/business/"+$routeParams.id,addbusiness)
+				addbusiness.modified_date = dataService.currentDate;
+				console.log(addbusiness);
+				 dataService.put("put/business/"+$routeParams.id,addbusiness)
 				.then(function(response) {
 					if(response.status == "success"){
 						$location.path("/dashboard/business/businesslist");
