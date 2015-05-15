@@ -1,0 +1,65 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		{% block head %}
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+			<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
+			<link rel="stylesheet" href="{{ path }}css/style.css">
+			<script src="{{ path }}js/jquery.min.js"></script>
+			<script src="{{ path }}js/bootstrap.min.js"></script>
+			<script src="{{ path }}js/angular.min.js"></script>
+			<script src="{{ path }}js/angular-route.min.js"></script>
+			<script src="{{ path }}js/script.js"></script>
+			<title>{{data.seo.title}} | {{title}}</title>
+			<meta name="description" content="{{data.seo.description}}">
+			<meta name="keywords" content="{{data.keywords | join(',')}}">
+			{%if template.template_params%}
+			<style>	
+				.navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:hover ,.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover, body .navbar-default .navbar-nav li .dropdown-menu > li > a{
+					color :{{template.template_params.color}};
+				}
+				body{
+					background_color :{{template.template_params.background_color_dark}};
+				}
+				header{
+					background-color:{{template.template_params.background_color_light}};
+				}
+				.heading{
+					background-color:{{template.template_params.dark_color}};
+				}
+				.aboutus ,.mycontact, .mytesti, .myjobs, .myact, .prod,.singleprod,.featureserv, .mygallery, .homeabout{
+					border-top:10px solid {{template.template_params.background_color}};
+				}
+				.read{
+					background-color:{{template.template_params.background_color}};
+				}
+			</style>
+			{% endif %}
+		{% endblock %}
+	</head>
+	<body>
+		{% block carousal %}
+		{% endblock %}
+		<header>
+			<div class="container">	
+				{% include 'includes/navbar.html' ignore missing %}
+				<div class="row">
+					<div class="heading">JOVEES COSMETICS</div>
+				</div>
+			</div>
+		</header>
+		<div class="container">
+			{% block content %}{% endblock %}
+		</div>
+		<footer>
+			<div class="container text-center">
+				<a href="/sitemap.xml">SITEMAP</a>
+				<p class="text-center">&copy;Copyright 2015 by <a href="apnasite.in">apnasite.in</a></p>
+			</div>
+		</footer>
+	</body>
+</html>
+{% endspaceless %}

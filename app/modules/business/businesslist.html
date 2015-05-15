@@ -40,7 +40,7 @@
 					</select>
 			</div>
 		</div>
-		<div  class="col-sm-2">
+		<div class="col-sm-2" ng-if="userDetails.group_name != 'customer'">
 			<div class="bottomspace">
 				<label for="filterbycustomerid" class="control-label">Filter By Customer</label>
 					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
@@ -60,6 +60,8 @@
 					<th>Salesman</th>
 					<th>Manager</th>
 					<th>Manage</th>
+					<!-- <th ng-if="userDetails.group_name == 'customer'">Verified</th>
+					<th ng-if="userDetails.group_name == 'customer'">Featured</th> -->
 				</thead>
 				<tbody>
 					<tr ng-repeat="x in bizList | orderBy:id | filter: { status : hideDeleted}">
@@ -76,9 +78,8 @@
 								<div class="btn-group">
 									<a href="#/dashboard/business/adddetails/{{x.id}}" class="btn btn-primary  glyphicon glyphicon-info-sign" tooltip="Add/Edit Details"></a>
 								</div>
-								
 								<!--ng-if="userDetails.permission.verify_business"-->
-								<div class="btn-group" ng-if="userDetails.group_name == 'superadmin'" >
+								<div class="btn-group" ng-if="userDetails.group_name == 'superadmin'">
 										<button type="button" tooltip="{{dynamicTooltip(x.verified, 'No Verify', 'Make Verify')}}" ng-class="(x.verified==1) ? 'btn btn-primary' : 'btn btn-warning'" ng-model="x.verified" ng-change="verify(x.id, x.verified)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-ok"></span></button>
 								</div>
 								<div class="btn-group" ng-if="permission.featured_business">
@@ -91,10 +92,22 @@
 									<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete Business', 'Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="deleted(x.id, x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-remove"></span></button>
 								</div>
 								<div class="btn-group">
-									<a ng-click="open('modules/business/viewBusiness.html', x.id)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="View Business"></a>
+									<a ng-click="open('modules/business/viewBusiness.html', x)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="View Business"></a>
+								</div>
+								<div class="btn-group" ng-if="userDetails.group_name == 'customer'">
+									<span class="glyphicon glyphicon-ok btn btn-default" ng-show="x.verified==1" tooltip="Verified" ng-disabled="true"></span>
+								</div>
+								<div class="btn-group" ng-if="userDetails.group_name == 'customer'">
+									<span class="glyphicon glyphicon-star btn btn-default" ng-show="x.featured==1" tooltip="Featured" ng-disabled="true"></span>
 								</div>
 							</div>	
 						</td>
+						<!-- <td ng-if="userDetails.group_name == 'customer'">
+							<span class="glyphicon glyphicon-ok" ng-show="x.verified==1" tooltip="Verified" ng-disabled="true"></span>
+						</td>
+						<td ng-if="userDetails.group_name == 'customer'">
+							<span class="glyphicon glyphicon-star" ng-show="x.featured==1" tooltip="Featured" ng-disabled="true"></span>
+						</td> -->
 					</tr>
 				</tbody>									
 			</table>

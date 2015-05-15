@@ -141,15 +141,19 @@ define(['app'], function (app) {
 		$scope.generateThumb = function(files){  
 			upload.generateThumbs(files);
 		};
+		
 		//to add business code
 		$scope.postData = function(addbusiness) {
+			addbusiness.created_date = dataService.currentDate;
+			addbusiness.modified_date = dataService.currentDate;
 			dataService.post("post/business",addbusiness)
 			.then(function(response) { 
-			$scope.addbusiness.created_date = dataService.currentDate;
 			/* created_date : $scope.currentDate */
 				if(response.status == "success"){
 					if($rootScope.userDetails.config.addbusinessDetails != true)  $location.path("/dashboard/business/adddetails/"+response.data);
-					dataService.progressSteps('addbusiness', true);
+					if($rootScope.userDetails.config.addbusiness == false){
+						dataService.progressSteps('addbusiness', true);
+					}
 					dataService.progressSteps('addbusinessDetails', response.data);
 				}
 				if(response.status == undefined){
@@ -182,8 +186,11 @@ define(['app'], function (app) {
 					}
 				}
 			});
+			
 			$scope.updateData = function(addbusiness) {
-				dataService.put("put/business/"+$routeParams.id,addbusiness)
+				addbusiness.modified_date = dataService.currentDate;
+				console.log(addbusiness);
+				 dataService.put("put/business/"+$routeParams.id,addbusiness)
 				.then(function(response) {
 					if(response.status == "success"){
 						$location.path("/dashboard/business/businesslist");

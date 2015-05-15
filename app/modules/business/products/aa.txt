@@ -1,0 +1,15 @@
+
+code for get multiple business on product page
+// code for get business list
+			$scope.statusParam={status:1};
+			angular.extend($scope.userInfo,$scope.statusParam);
+			dataService.get("getmultiple/business/1/100",$scope.statusParam)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.businessList = response.data;
+				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Business List", "You didn't added any business! Please add business first.");
+				}
+				$scope.businessList = response.data;
+			});

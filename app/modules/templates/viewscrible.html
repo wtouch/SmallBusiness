@@ -27,39 +27,31 @@
 											<td>{{modalOptions.tempList.development_status}}</td>
 										</tr>
 										<tr>
-											<th>Category</th>
-											<td>{{modalOptions.tempList.category}}</td>
-										</tr>
-										<tr>
 											<th>Create Date</th>
 											<td>{{modalOptions.tempList.date}}</td>
+										</tr>
+										<tr>
+											<th>Contact</th>
+											<td>{{modalOptions.tempList.custome_requirement.contact}}</td>
 										</tr>
 									</table>
 								</td>								
 								<td>
 									<table class="table table-responsive">
 										<tr>
-											<th>Custome Requirements</th>
+											<th>Custom Requirements</th>
+											<!-- {{modalOptions.tempList.custome_requirement.requirement}} -->
+											<td><div class="scroll" ng-bind-html="modalOptions.tempList.custome_requirement.requirement">
+											</div></td>
 										</tr>
-										<tr>
-											<th>Domain</th>
-											<td>{{modalOptions.tempList.custome_requirement.domain}}</td>
-										</tr>
-										<tr>
-											<th>Contact</th>
-											<td>{{modalOptions.tempList.custome_requirement.contact}}</td>
-										</tr>
-										<tr>
-											<th>Requiremwnt</th>
-											<td>{{modalOptions.tempList.custome_requirement.requirement}}</td>
-										</tr>
+										
 									</table>
 								</td>								
 							</tr>
 						</table>
 					</tab>
 					
-					<tab heading="Template Image" title="Template Image">
+					<tab ng-if="modalOptions.tempList.template_image" heading="Template Image" title="Template Image">
 						<div class="table-responsive">
 							<table class="table table-bordered">
 								<tr "modalOptions.templates">

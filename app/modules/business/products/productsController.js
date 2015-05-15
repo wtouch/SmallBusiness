@@ -8,7 +8,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.productView = $routeParams.productView;
 	
 		// all $scope object goes here
-		
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.addproductCurrentPage = 1;
@@ -16,9 +15,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		$scope.path = "product/"+$rootScope.userDetails.id; // path to store images on server
+		$scope.path = "product/"+ $rootScope.userDetails.id; // path to store images on server
 		$scope.permission = $rootScope.userDetails.permission.product_module;
-		$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		$scope.showProductForm = false;
 		$scope.showServiceForm = false;
 		$scope.editProdForm = false;
@@ -93,10 +91,10 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		   imgObject.splice(item, 1);     
 		}
 		
-		
-		
 		// code for get business list
-			dataService.get("getmultiple/business/1/100",$scope.userInfo)
+			$scope.statusParam={status:1};
+			angular.extend($scope.userInfo,$scope.statusParam);
+			dataService.get("getmultiple/business/1/100",$scope.statusParam)
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.businessList = response.data;
@@ -113,14 +111,16 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					$scope.addproduct = {};
 				};
 				$scope.postData = function(addproduct) { 
-				$scope.addproduct.user_id= $rootScope.userDetails.id;
+				$scope.addproduct.user_id = $rootScope.userDetails.id;
 				$scope.addproduct.date = $scope.currentDate;
 					 dataService.post("post/product",addproduct)
 					.then(function(response) { 
 						if(response.status == "success"){
 							$scope.showServiceForm = false;
 							$scope.showProductForm = false;
-							dataService.progressSteps('addProducts', true);
+							if($rootScope.userDetails.config.addProducts != true){
+								dataService.progressSteps('addProducts', true);
+							}
 						}
 						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Add Product", response.message);
@@ -139,7 +139,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					if(response.status == "success"){
 						$scope.showServiceForm = false;
 						$scope.showProductForm = false;
-						dataService.progressSteps('addProducts', true);
+							dataService.progressSteps('addProducts', true);
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Add Service", response.message);

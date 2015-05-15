@@ -23,7 +23,7 @@
 					</button>
 				</div>
 			</div>
-			<div class="col-sm-3" ng-if="permission.filter_by_type">
+			<div class="col-sm-2" ng-if="permission.filter_by_type">
 				<div class="bottomspace">
 					<select id="status" class="form-control" ng-model="type" ng-change="changeStatus('template_type',type)" >
 						<option value="" selected>Select type</option> <!-- add value attribute empty & selected for initial selected option -->
@@ -44,7 +44,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-3" ng-if="userDetails.group_name != 'customer'">
 				<div class="bottomspace">
 					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
 						<option value="">Select Customer</option>

@@ -41,18 +41,15 @@ define(['app'], function (app) {
 		
 		//to open modal
 		$scope.open = function (url, buzId) {
-			dataService.get("getsingle/business/"+buzId)
-			.then(function(response) {
 				var modalDefaults = {
 					templateUrl: url,	
 					size : 'lg'
 				};
 				var modalOptions = {
-					bizList: dataService.parse(response.data)  
+					bizList: buzId  
 				};
 				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 				});
-			});
 		};
 		
 		// code for show website list
