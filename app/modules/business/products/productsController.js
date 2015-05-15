@@ -8,7 +8,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.productView = $routeParams.productView;
 	
 		// all $scope object goes here
-		
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.addproductCurrentPage = 1;
@@ -92,10 +91,10 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		   imgObject.splice(item, 1);     
 		}
 		
-		
-		
 		// code for get business list
-			dataService.get("getmultiple/business/1/100",$scope.userInfo)
+			$scope.statusParam={status:1};
+			angular.extend($scope.userInfo,$scope.statusParam);
+			dataService.get("getmultiple/business/1/100",$scope.statusParam)
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.businessList = response.data;

@@ -59,7 +59,7 @@
 		<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="addbusiness.location" typeahead-on-select="getData($item)" placeholder="Location" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
 		<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i>
 			<span class="help-block" ng-show="businessContactForm.location.$dirty && businessContactForm.location.$invalid || businessContactForm.location.$dirty && !addbusiness.location">
-				<span class="text-danger" ng-show="businessContactForm.location.$dirty && (businessContactForm.location.$error.required || !addbusiness.location)">Location required.(If Location not found enter pincode)</span>
+				<span class="text-danger" ng-show="businessContactForm.location.$dirty && (businessContactForm.location.$error.required || !addbusiness.location)">Location required.If Location not found enter pincode.</span>
 			</span>
 	</div>						
 </div>
