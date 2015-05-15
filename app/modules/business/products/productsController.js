@@ -92,9 +92,9 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		}
 		
 		// code for get business list
-			$scope.statusParam={status:1};
-			angular.extend($scope.userInfo,$scope.statusParam);
-			dataService.get("getmultiple/business/1/100",$scope.statusParam)
+			//$scope.statusParam={status:1};
+			//angular.extend($scope.userInfo,$scope.statusParam);
+			dataService.get("getmultiple/business/1/100",$scope.userInfo)
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.businessList = response.data;
