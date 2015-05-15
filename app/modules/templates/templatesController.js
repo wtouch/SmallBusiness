@@ -558,6 +558,7 @@ define(['app'], function (app) {
 				
 				});
 			};
+			
 			$scope.ok = function () {
 				$modalOptions.close('ok');
 			}; 
@@ -592,9 +593,6 @@ define(['app'], function (app) {
 				.then(function(response) {  
 					if(response.status == "success"){
 						$scope.reset();
-						/* setTimeout(function(){
-							$location.path("/dashboard/templates/mytemplates");
-						},500); */
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Submit Template", response.message);
