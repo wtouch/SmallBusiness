@@ -13,10 +13,13 @@ class portalManager{
 		$this->passHash = new passwordHash;
 	}
 	function encodeUrl($url){
-		return $url = str_replace(" ","-",$url);
+		$url = str_replace(" ","-",$url);
+		return $url;
 	}
 	function decodeUrl($url){
-		return $url = str_replace("-"," ",$url);
+		$url = str_replace("-"," ",$url);
+		$url = str_replace("'","\'",$url);
+		return $url;
 	}
 	function getSession($getRequest){
 		$sessionObj = new session();

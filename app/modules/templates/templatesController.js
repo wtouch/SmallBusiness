@@ -186,7 +186,6 @@ define(['app'], function (app) {
 						generateThumb : function(files){  
 							upload.generateThumbs(files);
 						},
-						
 						updateSlide : function(index, array, data){
 							var pushdata = JSON.stringify(data);
 							array[index.index] = JSON.parse(pushdata);
