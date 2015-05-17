@@ -81,13 +81,13 @@ class portalManager{
 				throw new Exception($data['message']);
 			}
 			foreach($data['data'] as $key => $value){
-				$response['url'][$value['city']] = array("url" => "http://".$this->config['host'] . "/" . str_replace(' ','-',$value['city']));
+				$response['url'][$value['city']] = array("url" => "http://".$this->config['host'] . "/" . str_replace(' ','-',urlencode($value['city'])));
 				
-				$response['url'][$value['category']] = array("url" => "http://".$this->config['host'] . "/" . str_replace(' ','-',$value['city']). "/" .str_replace(' ','-', $value['category']));
+				$response['url'][$value['category']] = array("url" => "http://".$this->config['host'] . "/" . str_replace(' ','-',urlencode($value['city'])). "/" .str_replace(' ','-', urlencode($value['category'])));
 				
-				$response['url'][$value['type']] = array("url" => "http://".$this->config['host']  . "/" .str_replace(' ','-', $value['city']). "/" .str_replace(' ','-', $value['category']). "/" .str_replace(' ','-', $value['type']));
+				$response['url'][$value['type']] = array("url" => "http://".$this->config['host']  . "/" .str_replace(' ','-', urlencode($value['city'])). "/" .str_replace(' ','-', urlencode($value['category'])). "/" .str_replace(' ','-', urlencode($value['type'])));
 				
-				$response['url'][$value['business_name'].$value['business_id']] = array("url" => "http://".$this->config['host']  . "/" . str_replace(' ','-',$value['city']). "/" . str_replace(' ','-',$value['category']). "/" . str_replace(' ','-',$value['type']). "/" . str_replace(' ','-',$value['business_name']). "/" . $value['business_id']);
+				$response['url'][$value['business_name'].$value['business_id']] = array("url" => "http://".$this->config['host']  . "/" . str_replace(' ','-',urlencode($value['city'])). "/" . str_replace(' ','-',urlencode($value['category'])). "/" . str_replace(' ','-',urlencode($value['type'])). "/" . str_replace(' ','-',urlencode($value['business_name'])). "/" . $value['business_id']);
 			}
 			
 			$response["status"] = "success";
@@ -97,7 +97,7 @@ class portalManager{
             $response["status"] = "error";
             $response["message"] = $e->getMessage();
         }
-		
+		//print_r($response);
         return $response;
 	}
 	
