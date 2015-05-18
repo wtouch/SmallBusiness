@@ -15,9 +15,9 @@
 			<script src="{{ path }}js/angular-route.min.js"></script>
 			<script src="{{ path }}js/script.js"></script>
 			<script src="{{ path }}js/curosal.js"></script>
-			<title>{{data.seo.title}} | {{title}}</title>
-			<meta name="description" content="{{data.seo.description}}">
-			<meta name="keywords" content="{{data.keywords | join(',')}}">
+			<title>{{ (title) ? title : 'Home'}} | {{data.seo.title}} | {{data.business_name}}, {{data.location}}, {{data.area}}, {{data.city}}</title>
+			<meta name="description" content="{{data.business_name}}, {{data.location}}, {{data.area}}, {{data.city}} | {{data.seo.description}}">
+			<meta name="keywords" content="{{data.business_name}}, {{data.keywords | join(',')}}">
 			{%if template.template_params%}
 			<style>	
 				.headerRow,.nav-pills>li>a{
