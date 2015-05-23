@@ -1,24 +1,36 @@
 {% extends "index.html" %}
-
-{% block title %}{{title}}{% endblock %}
-{% block head %}
-    {{ parent() }}
-{% endblock %}
 {% block carousal %}
-	{% include 'includes/carousal.html' ignore missing %}
+{% include 'includes/carousal.html' ignore missing %} 
 {% endblock %}
-	
 {% block content %}
 {% autoescape false %}
-	{% include 'includes/featured_services.html' ignore missing %}
-	{% include 'includes/featured_products.html' ignore missing %}
-	
-<div class="row">
-	<div class="col-sm-12 text-center">
-    <h1>Welcome to {{ data.business_name }}</h1>
-    {{ data.business_info.keywords }}
+	<div class="row">
+		<div class="eventimg">
+		
+		<div class="div2 textcolordiv">
+			<h2>Windows</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sollicitudin eu ex at suscipit. Sed eget placerat metus. Praesent in eros lacinia, tempus tortor id, luctus urna.</p>
+			<a href="#" class="btn btn-primary text-center">READ MORE</a>
+		</div>
+		<div class="div3 textcolordiv">
+			<h2>Doors</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sollicitudin eu ex at suscipit. Sed eget placerat metus. Praesent in eros lacinia, tempus tortor id, luctus urna.</p>
+			<a href="#" class="btn btn-primary text-center">READ MORE</a>
+		</div>
+		
+		</div>
 	</div>
-</div>
-{% include 'includes/featured_testimonials.html' ignore missing %}
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="text-center homeabout">
+				<h2>Welcome to {{ data.business_name }}</h2>
+				<p class="text-center">{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}</p>
+				<br>
+				<a href="about">Read More..</a>
+			</div>
+		</div>
+		{% include 'includes/featured_products.html' ignore missing %}		
+		{% include 'includes/featured_services.html' ignore missing %}
+	</div>
 {% endautoescape %}
 {% endblock %}
