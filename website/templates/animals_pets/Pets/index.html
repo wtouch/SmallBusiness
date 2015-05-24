@@ -2,21 +2,21 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 	<head>
-	{% block head %}
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
-		<link rel="stylesheet" href="{{ path }}css/style.css">
-		<script src="{{ path }}js/jquery.min.js"></script>
-		<script src="{{ path }}js/bootstrap.min.js"></script>
-		<script src="{{ path }}js/angular.min.js"></script>
-		<script src="{{ path }}js/angular-route.min.js"></script>
-		<script src="{{ path }}js/script.js"></script>
-		<title>{{data.seo.title}} | {{title}}</title>
-		<meta name="description" content="{{data.seo.description}}">
-		<meta name="keywords" content="{{data.keywords | join(',')}}">
-	{% endblock %}
+		{% block head %}
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+			<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
+			<link rel="stylesheet" href="{{ path }}css/style.css">
+			<script src="{{ path }}js/jquery.min.js"></script>
+			<script src="{{ path }}js/bootstrap.min.js"></script>
+			<script src="{{ path }}js/angular.min.js"></script>
+			<script src="{{ path }}js/angular-route.min.js"></script>
+			<script src="{{ path }}js/script.js"></script>
+			<title>{{data.seo.title}} | {{title}}</title>
+			<meta name="description" content="{{data.seo.description}}">
+			<meta name="keywords" content="{{data.keywords | join(',')}}">
+		{% endblock %}
 	</head>
 	<body>
 		<header>
@@ -33,103 +33,27 @@
 			{% block content %}{% endblock %}
 		</div>
 		
-		
-		<!-- <div class="div2 textcolordiv">
-			<h2>Windows</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sollicitudin eu ex at suscipit. Sed eget placerat metus. Praesent in eros lacinia, tempus tortor id, luctus urna.</p>
-			<a href="#" class="btn btn-primary text-center">READ MORE</a>
-		</div>
-		<div class="div3 textcolordiv">
-			<h2>Doors</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sollicitudin eu ex at suscipit. Sed eget placerat metus. Praesent in eros lacinia, tempus tortor id, luctus urna.</p>
-			<a href="#" class="btn btn-primary text-center">READ MORE</a>
-		</div> -->
-		
 		<div class="container">
 			<div class="bottom-space">
 				<div class="row">
 				<div class="bottom-space">
 					<div class="col-sm-6">
-						<h1>{{data.business_name}}</h1>
+						<p class="h1font"><b>{{data.business_name}}</b></p>
 						<p class="parafont"><b>{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}</b></p>
 					</div>
 				</div>
 				<div class="topspace">
 					<div class="col-sm-6">
-						<p class="parafont"><b>{{ data.business_info.description}}</b></p>
+						<p><b>{{ data.business_info.description}}</b></p>
 						<a href="#" class="btn btn-primary text-center">READ MORE</a>
 					</div>
 				</div>
 				</div>
 			</div>
 		</div>
-		
-			<!-- <div class="row">
-				<div class="col-sm-4 text-center">
-					<div class="productdiv">
-					<h2 class="h1padding">Lorem Ipsum</h2>
-					<p class="textcolor">Vivamus accumsan vehicula diam vel faucibus.</p>
-					<a href="#" class="btn btn-info center">READ MORE</a>
-					</div>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="productdiv thumbnail">
-					<img class="h1padding">{{data.product_image}}</img>
-					<p class="textcolor">Vivamus accumsan vehicula diam vel faucibus.</p>
-					<a href="#" class="btn btn-info center">READ MORE</a>
-					</div>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="productdiv">
-					<h2 class="h1padding">Lorem Ipsum</h2>
-					<p class="textcolor">Vivamus accumsan vehicula diam vel faucibus.</p>
-					<a href="#" class="btn btn-info center">READ MORE</a>
-					</div>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="productdiv">
-					<h2 class="h1padding">Lorem Ipsum</h2>
-					<p class="textcolor">Vivamus accumsan vehicula diam vel faucibus.</p>
-					<a href="#" class="btn btn-info center">READ MORE</a>
-					</div>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="productdiv">
-					<h2 class="h1padding">Lorem Ipsum</h2>
-					<p class="textcolor">Vivamus accumsan vehicula diam vel faucibus.</p>
-					<a href="#" class="btn btn-info text-center">READ MORE</a>
-					</div>
-				</div>
-				<div class="col-sm-4 text-center">
-					<div class="productdiv">
-					<h2 class="h1padding">Lorem Ipsum</h2>
-					<p class="textcolor">Vivamus accumsan vehicula diam vel faucibus.</p>
-					<a href="#" class="btn btn-info text-center">READ MORE</a>
-					</div>
-				</div>
-			</div>
-			
-		</div>
-		</div>
-		 -->
-		 
-		<footer>
 		<div class="bottom-space">
-		<div class="row">
-			<div class="bottom-space textcolor">
-				<div class="col-sm-4">
-					<h1>Eco</h1>
-				</div>
-				<div class="col-sm-8">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sollicitudin eu ex at suscipit. Sed eget placerat metus. Praesent in eros lacinia, tempus tortor id, luctus urna. Vivamus eget velit vulputate, pharetra mauris non, ultrices lectus. Nulla at lorem a augue iaculis semper. Vestibulum volutpat ornare odio, nec ullamcorper elit imperdiet non. Vestibulum interdum posuere dapibus. Donec vitae volutpat tortor. Suspendisse metus lacus, pulvinar eget risus ac, finibus bibendum nisl. Ut eros tortor, finibus id porta id, ultricies vel nibh.</p>
-				</div>
-			</div>
+			<a><p class="text-center footercol">&copy;2015 wtouch India Solution</p></a>
 		</div>
-		</div>
-		<div>
-			<a><p class="textcolor text-center footercol">&copy;2015 wtouch India Solution</p></a>
-		</div>
-		</footer>
 	</body>
 </html>
 {% endspaceless %}
