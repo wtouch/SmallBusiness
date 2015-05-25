@@ -22,20 +22,23 @@
 					background-color: {{template.template_params.background_color_light}};	
 				}
 				.navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:hover, body .navbar-default .navbar-nav li .dropdown-menu, body .navbar-default .navbar-nav li .dropdown-menu > li > a ,.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,.nav>li>a.dropdown-caret + .dropdown-toggle:hover,.ftrlink3, .sidesec1{
-					background-color: {{template.template_params.color}};
+					background-color: {{template.template_params.dark_color}};
 				}
-				address, .nav>li>a.dropdown-caret + .dropdown-toggle, .navbar-default .navbar-nav > li > a, .navbar a, p, footer, blockquote a, footer a{
-					color:{{template.template_params.light_color}};
-				}
-				
-				h1, h2, h3, h4, .read, .read:hover, .read:focus, .btn-link, .btn-link:hover, .btn-link:focus ,li>a ,blockquote a:hover,footer h4{
+				.nav>li>a.dropdown-caret + .dropdown-toggle, .navbar-default .navbar-nav > li > a, .navbar a,  blockquote a{
 					color:{{template.template_params.color}};
 				}
-				.jobs:nth-child(odd),.ftrlink2{
+				
+				h1, h2, h3, h4, .read, .read:hover, .read:focus, .btn-link, .btn-link:hover, .btn-link:focus ,li>a ,blockquote a:hover,footer h4,.btn-info, .btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info{
+					color:{{template.template_params.dark_color}};
+				}
+				.ftrlink3 p::after{
+					border-color :{{template.template_params.background_color_light}};
+				}
+				.jobs:nth-child(odd),.ftrlink2,.sub-div1 .btn-info,.sub-div1 .btn-info:hover, .sub-div1 .btn-info:focus, .sub-div1 .btn-info.focus, .sub-div1 .btn-info:active, .sub-div1 .btn-info.active, .open>.dropdown-toggle.btn-info,.ftrlink3 p:hover::after{
 					background-color: {{template.template_params.background_color_dark}};
 				}
 				.jobs:nth-child(even){
-					background-color: {{template.template_params.color}};
+					background-color: {{template.template_params.background_color_light}};
 				}
 				.ftrlink1{
 					background-color: {{template.template_params.background_color}};
@@ -70,7 +73,8 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<a href="#"><img class="logo img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
-						<p>&copy; Copyright 2015 by <a href="http://apnasite.in">apnasite.in</a><br>
+						<p>&copy; Copyright 2015 by <a href="/">{{data.business_name}}</a><br>
+						Designed By - <a href="http://apnasite.in" target="_blank">apnasite.in</a>
 						</p>
 					</div>
 					<div class="col-sm-4">
@@ -84,12 +88,14 @@
 					</div>
 					<div class="col-sm-4">
 						<h4>ADDRESS</h4>
-						{{data.contact_profile.address}}<br>
-						{{data.contact_profile.City}}<br>
-						{{data.contact_profile.State}}<br>
-						{{data.contact_profile.Country}}<br>
-						{{data.contact_profile.ZIP_Code}}<br>
-						<a href="/sitemap.xml">SITEMAP</a>
+						<address>
+							{{data.contact_profile.address}}<br>
+							{{data.city}}<br>
+							{{data.state}}<br>
+							{{data.country}}<br>
+							{{data.pincode}}
+						</address>
+						<a target="_blank" href="/sitemap.xml">SITEMAP</a>
 					</div>
 				</div>
 				{% endblock %}
