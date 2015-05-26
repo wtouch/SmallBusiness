@@ -11,13 +11,13 @@
 {% block content %}
 {% autoescape false %}
 		<div class="row">
-			<div class="col-sm-12 Hearing">
+			<div class="col-sm-12 homeabout">
 				<h1 class="text-center">Welcome to {{ data.business_name }}</h1>
 				{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start, 1500)~ '...' : data.business_info.description}}
-				<br>
+				<br><br>
 				<a href="about" class="btn btn-info">Read More..</a>
 			</div>
-			<div class="col-sm-12 news">
+			<div class="col-sm-12 features">
 				{% include 'includes/featured_services.html' ignore missing %}
 				{% include 'includes/featured_products.html' ignore missing %}
 				{% include 'includes/featured_testimonials.html' ignore missing %}
