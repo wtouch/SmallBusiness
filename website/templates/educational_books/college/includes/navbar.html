@@ -1,19 +1,17 @@
-<div class="row">
-	<div class="col-sm-6 col-md-4">
-		<a href="/"><img class="logo img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
-	</div>
-	<div class="col-sm-6 col-md-4">
-		<h1 class="text-center">{{ data.business_name }}</h1>
-	</div>
-	<div class="col-md-4">
-		<address class="pull-right">
-			{%if data.contact_profile.telephone%}
-				Telephone : {{data.contact_profile.telephone}}<br>
-			{% endif %}
-			Mobile : {{data.contact_profile.mobile}}<br> 
-			E-mail : {{data.contact_profile.email}}
-		</address>
-	</div>
+<div class="head">
+	<a href="/"><img class="logo img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
+</div>
+<div class="head">
+	<h1 class="text-center">{{ data.business_name }}</h1>
+</div>
+<div class="head">
+	<address class="pull-right">
+		{%if data.contact_profile.telephone%}
+			Telephone : {{data.contact_profile.telephone}}<br>
+		{% endif %}
+		Mobile : {{data.contact_profile.mobile}}<br> 
+		E-mail : {{data.contact_profile.email}}
+	</address>
 </div>
 <nav class="navbar navbar-default">
    <div class="navbar-header">
