@@ -1,10 +1,18 @@
-<div class="head">
-	<a href="/"><img class="logo img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
+<div class="logo">
+	<a href="/"><img class="img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
 </div>
-<div class="head">
+<div class="bizname">
 	<h1 class="text-center">{{ data.business_name }}</h1>
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNav">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	  </button>
+	</div>
 </div>
-<div class="head">
+<div class="addrs">
 	<address class="pull-right">
 		{%if data.contact_profile.telephone%}
 			Telephone : {{data.contact_profile.telephone}}<br>
@@ -14,15 +22,6 @@
 	</address>
 </div>
 <nav class="navbar navbar-default">
-   <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNav">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-	
 	<div class="collapse navbar-collapse" id="mainNav">
       <ul class="nav navbar-nav">
 			{% for key, value in routes %}
