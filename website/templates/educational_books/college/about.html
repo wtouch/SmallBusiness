@@ -53,9 +53,7 @@
 					{% for key, value in data.infrastructure %}
 						<div class="col-sm-4">
 							<div class="thumbnail">
-								<a href="#">
-									<img class="img-responsive " src="{{value.image.file_relative_path}}"/>
-								</a>
+								<img class="img-responsive " src="{{value.image.file_relative_path}}"/>
 								<div class="caption text-center" ng-controller="aboutController">
 									<h4>{{key}}</h4>
 									<p>{{value.description|length >150 ? value.description|slice(start,150)~ '...' : value.description}}</p>
