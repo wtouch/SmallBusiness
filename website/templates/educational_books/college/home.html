@@ -3,7 +3,7 @@
 {% block content %}
 {% autoescape false %}
 	<div class="row content">
-		<div class="{{(featured_services) ? 'col-md-8 col-sm-8' : 'col-md-12 col-sm-12'}}">
+		<div class="{{(featured_services) >= 1 ? 'col-md-8 col-sm-8' : 'col-md-12 col-sm-12'}}">
 			<div class="row">
 				{% include 'includes/carousal.html' ignore missing %}
 			</div>
@@ -16,7 +16,6 @@
 					<p>{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}</p>
 					<br>
 					<a href="about" class="read">Read More..</a>
-					<br>
 				</div>
 			</div>
 		</div>

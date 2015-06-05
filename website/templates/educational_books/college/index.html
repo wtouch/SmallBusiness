@@ -67,39 +67,41 @@
 				</a>
 			</div>
 		</div>
-		<footer>
-			<div class="container">
-				{% block footer %}
-				<div class="row">
-					<div class="col-sm-4">
-						<a href="#"><img class="ftrimg img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
-						<p>&copy; Copyright 2015 by <a href="/">{{data.business_name}}</a><br>
-						Designed By - <a href="http://apnasite.in" target="_blank">apnasite.in</a>
-						</p>
-					</div>
-					<div class="col-sm-4">
-						<h4>CONTACT US</h4>
-						{%if data.contact_profile.telephone%}
-							Telephone:{{data.contact_profile.telephone}}
-						{% endif %}<br>
-						Mobile: {{data.contact_profile.mobile}}<br>
-						E-mail: {{data.contact_profile.email}}<br>
-						{{data.contact_profile.alternate_email}}
-					</div>
-					<div class="col-sm-4">
-						<h4>ADDRESS</h4>
-						<address>
-							{{data.contact_profile.address}}<br>
-							{{data.city}}<br>
-							{{data.state}}<br>
-							{{data.country}}<br>
-							{{data.pincode}}
-						</address>
-						<a target="_blank" href="/sitemap.xml">SITEMAP</a>
-					</div>
+		<div class="container">
+			<div class="row subftr">
+				<div class="col-sm-4">
+					<a href="#"><img class="ftrimg img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
 				</div>
-				{% endblock %}
+				<div class="col-sm-4">
+					<h4>CONTACT US</h4>
+					<p>{%if data.contact_profile.telephone%}
+						Telephone:{{data.contact_profile.telephone}}
+					{% endif %}<br>
+					<p>Mobile: {{data.contact_profile.mobile}}<br>
+					<p>E-mail: {{data.contact_profile.email}},&nbsp;
+					{{data.contact_profile.alternate_email}}
+				</div>
+				<div class="col-sm-4">
+					<h4>ADDRESS</h4>
+					<address>
+						{{data.contact_profile.address}},<br>
+						{{data.city}}-&nbsp;{{data.pincode}},<br>
+						{{data.state|capitalize}},&nbsp;{{data.country|capitalize}}
+					</address>
+				</div>
 			</div>
+		</div>
+		<footer>
+			{% block footer %}
+			<div class="row">
+				<div class="col-sm-12 ">
+					<p class="text-center">&copy; 2015 <a href="/">{{data.business_name}}</a>&nbsp;|&nbsp;
+					Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>&nbsp;|&nbsp;
+					<a target="_blank" href="/sitemap.xml">SITEMAP</a>
+					</p>
+				</div>
+			</div>
+			{% endblock %}
 		</footer>
 	</body>
 </html>

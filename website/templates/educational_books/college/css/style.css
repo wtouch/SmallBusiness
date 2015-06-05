@@ -10,6 +10,9 @@
 	h1,h2{
 		text-transform : uppercase;
 	}
+	.profile{
+		max-height : 200px;
+	}
 	.navbar-default {
 		border: none;
 		background:none;
@@ -37,25 +40,25 @@
 	}
 	.navbar-toggle .icon-bar {
 		background-color: #888;
-	}
-	.thumbnail{
+	} 
+	.infrastructure .thumbnail, .prod .thumbnail{
 		height: 435px;
 	}
 	.mygallery .thumbnail{
 		height :415px;
-	}
-	.thumbnail .caption{
+	}/* 
+	.singleprod .thumbnail{
+		height :270px;
+	} */
+	.infrastructure .thumbnail.caption, .prod .thumbnail.caption{
 		height : 120px;
 	}
-	.thumbnail img,.prod .carousel-inner>.item>img{
+	.infrastructure.thumbnail img,.prod.thumbnail img,.prod .carousel-inner>.item>img{
 		height : 260px;
 	}
-	.item .active{
+	.carousel .carousel-inner .item .active {
 		overflow:hidden;
-		max-height:300px;
-	}
-	.carousel-inner>.item>img{
-		width : 100%;
+		max-height:350px;
 	}
 	.carousel-caption h2, .carousel-caption p{
 		color : #fff;
@@ -68,7 +71,9 @@
 	}
 	.header{
 		margin-top:30px;
-	}
+	
+		padding: 20px 15px 0;
+}
 	.header,.content,.aboutus,.mycontact, .mytesti, .myjobs, .myact, .prod,.singleprod,.featureserv, .mygallery{
 		background-color:#fff;
 	}
@@ -115,12 +120,14 @@
 		padding-bottom: 30px;
 	}
 	.slogan{
-		padding:10px 20px 20px 50px;
+		padding: 15px;
 	}
 	.slogan p{
 		font-size: 35px;
 		letter-spacing: 2px;
-	}
+	
+		margin-bottom: 0;
+}
 	.features{
 		padding: 15px 30px;
 	}
@@ -187,15 +194,15 @@
 	blockquote p{
 		font-size: medium;
 	}
-	footer{
-		font-size: initial;
-	}
-	footer .container{
-		padding-top:20px;
-		padding-bottom:20px;
+	.subftr{
+		margin-top : 15px;
+		font-size : initial;
 	}
 	.ftrimg{
-		height : 80px;
+		height :120px;
+	}
+	footer{
+		margin-top :15px;
 	}
 	.jobs:nth-child(odd){
 		background-color:#85933d;
@@ -211,9 +218,9 @@
 	}
 	/* media queries */
 	@media (min-width: 320px){
-		.carousel-inner>.item>img{
+		/* .carousel-inner>.item>img{
 			height : 260px;
-		} 
+		}  */
 		.logo{
 			width :100%;
 		}
@@ -233,9 +240,9 @@
 		}
 	}
 	@media (min-width: 992px){
-		.carousel-inner>.item>img{
+		/* .carousel-inner>.item>img{
 			height : 450px;
-		} 
+		} */ 
 		.logo, .bizname, .addrs{
 			width : 313px;
 			display : inline-block;
@@ -249,18 +256,19 @@
 		}
 	}
 	@media (min-width: 1200px){
-		.carousel-inner>.item>img{
+		/* .carousel-inner>.item>img{
 			height : 490px;
-		} 
+		} */ 
 		.logo, .bizname, .addrs{
 			width : 380px;
 			display : inline-block;
-			height: 115px;
+			height: 135px;
 			vertical-align: top;
 		}
 		.logo img{
 			max-width : 75%;
 			height : auto;
+			max-height: 135px;
 		}
 		.ftrlink3 p{
 			font-size:20px;
