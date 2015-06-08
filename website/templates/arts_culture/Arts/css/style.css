@@ -46,14 +46,37 @@
 	p{
 		text-align : justify;
 	}
+
+	/* Small devices (tablets, 768px and up) */
+	@media (min-width: 768px) { 
+		.singleprod .thumbnail {
+			height: 166px;
+		}
+	}
+
+	/* Medium devices (desktops, 992px and up) */
+	@media (min-width: 992px) { 
+		.singleprod .thumbnail {
+			height: 200px;
+		}
+	}
+
+	/* Large devices (large desktops, 1200px and up) */
+	@media (min-width: @screen-lg-min) { ... }
 	.thumbnail{
 		height: 465px;
 	}
 	.thumbnail .caption{
 		height : 145px;
 	}
+	.singleprod .thumbnail {
+		height: 200px;
+	}
 	.prod .carousel-inner>.item>img, img.infraimg.img-responsive{
 		height :265px;
+	}
+	.item  img{
+		width :100%;
 	}
 	blockquote,.btn-info{
 		border : none;
@@ -64,9 +87,6 @@
 	}
 	.header{
 		background-color:#fff;
-	}
-	.item  img{
-		width :100%;
 	}
 	.navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,footer a:hover{
 		color : #A9B25D;
@@ -111,11 +131,14 @@
 	.featuredserv a{
 		font-weight : bold ;
 	}
+	.col-sm-6.text-center.featuredprod{
+		padding : 20px;
+	}
 	.addr a, .featuredserv a{
 		text-decoration: none;
 	}
 	.addr{
-		margin-left : 50px;
+		margin-left : 35px;
 	}
 	.addr img{
 		padding-left : 5px;
