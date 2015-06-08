@@ -1,4 +1,3 @@
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="main-content">
@@ -83,7 +82,7 @@
 					<div class="form-group" ng-if="property.user_id">
 						<div class="col-sm-12">					
 							<h3>Select Sites</h3>
-							<div class="table-responsive">
+							<div class="table-responsive" ng-init="getWebsite(userId)">
 								<table class="table table-bordered">
 									<tr>
 										<td class="checkbox">
@@ -103,10 +102,10 @@
 					</div>
 						
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-9"><!--ng-disabled="addProperty.$invalid"-->
-							<button type="submit" ng-click="addPropertyFun(property)"  class="btn btn-primary" title="Add new property">Add New Property</button>
+						<div class="col-sm-offset-2 col-sm-9">
+							<button type="submit" ng-if="!property.id" ng-click="addPropertyFun(property)"  class="btn btn-primary" title="Add new property">Add New Property</button>
 							
-							<button type="submit" ng-click="update(property)" title="Update your property" class="btn btn-success text-center ">Edit Property</button>
+							<button type="submit" ng-if="property.id" ng-click="update(property)" title="Update your property" class="btn btn-success text-center ">Edit Property</button>
 							<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>
 						</div>
 					</div>							

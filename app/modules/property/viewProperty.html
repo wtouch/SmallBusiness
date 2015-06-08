@@ -4,38 +4,38 @@
 <div class="modal-body">
 	<div class="row">
 	    <div class="col-sm-12">
-			<h3>{{modalOptions.viewProperty.title}}</h3>
+			<h3 class="text-center">{{modalOptions.viewProperty.title}}</h3>
 			<div class="content">
 				<blockquote>
 					<p>{{modalOptions.viewProperty.property_description}}</p>
 				</blockquote>
 			</div>			
 			<div class="row">
-			    <div class="col-sm-9">
+			    <div class="col-sm-4">
 					<table class="table table-hover table-responsive">
 					    
 						<tr>
-							 <td><b>Property For </b></td>
+							 <td><b>Property For</b></td>
 							 <td><ul>							
-									<p>{{modalOptions.viewProperty.property_for.rent}} {{modalOptions.viewProperty.property_for.sale}} {{modalOptions.viewProperty.property_for.PG}}</p>
+									<p>{{modalOptions.viewProperty.property_for}}</p>
 								</ul>	
 							 </td>	
 						</tr>
 						<tr>
 							<td><b>Property Type</b> </td>
-							<td>		{{modalOptions.viewProperty.property_info.type}}					</td>					
+							<td>		{{modalOptions.viewProperty.type}}					</td>					
 						</tr>
 						<tr>
 							<td><b>Location </b></td>
 							<td>								
-								<p><b>Country :</b> {{modalOptions.viewProperty.property_location.country}}
+								<p><b>Country :</b>{{modalOptions.viewProperty.country}}
 								
-								<br><b>State :</b> {{modalOptions.viewProperty.property_location.state}}
+								<br><b>State :</b> {{modalOptions.viewProperty.state}}
 								
 								<br><b>City :</b>								
-								{{modalOptions.viewProperty.property_location.city}}
+								{{modalOptions.viewProperty.city}}
 								
-								<br><b>Address :</b> {{modalOptions.viewProperty.property_location.address}}</p>
+								<br><b>Address :</b> {{modalOptions.viewProperty.address}}</p>
 							</td>					
 						</tr>
 						<tr>
@@ -65,70 +65,85 @@
 						</tr>
 					</table>	
 				</div>
-				<div class="col-sm-3">
-					<img src="img1.jpg" width="100%">
+				<div class="col-sm-4">
+				
+				<div class="col-sm-4">
+			<h3>Property Details</h3>
+			<table class="table table-bordered table-responsive">
+				<tbody>
+					<tr>
+						<th ng-if="modalOptions.viewProperty.optional_property_details.furnished">Furnishing</th>
+						<td ng-if="modalOptions.viewProperty.optional_property_details.furnished">{{modalOptions.viewProperty.optional_property_details.furnished}}</td>
+					</tr>
+					<tr>
+						<th ng-if="modalOptions.viewProperty.optional_property_details.transType">Transaction</th>
+						<td ng-if="modalOptions.viewProperty.optional_property_details.transType">{{modalOptions.viewProperty.optional_property_details.transType}}</td>
+					</tr>
+					<tr>	
+						<th ng-if="modalOptions.viewProperty.property_info.bedrooms">Bedrooms</th>
+						<td ng-if="modalOptions.viewProperty.property_info.bedrooms">{{modalOptions.viewProperty.property_info.bedrooms}}</td>
+					</tr>
+					<tr>	
+						<th ng-if="modalOptions.viewProperty.property_info.bathrooms">Bathrooms</th>
+						<td ng-if="modalOptions.viewProperty.property_info.bathrooms">{{modalOptions.viewProperty.property_info.bathrooms}}</td>
+					</tr>
+					<tr>	
+						<th ng-if="modalOptions.propertyData.optional_property_details.parking">Reserved Parking</th>
+						<td ng-if="modalOptions.propertyData.optional_property_details.parking">{{modalOptions.propertyData.optional_property_details.parking}}</td>
+					</tr>
+					<tr>	
+						<th ng-if="modalOptions.viewProperty.optional_property_details.floor_no">Floor Number</th>
+						<td ng-if="modalOptions.viewProperty.optional_property_details.floor_no">
+						{{modalOptions.viewProperty.optional_property_details.floor_no}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+				</div>
+				<div class="col-sm-4">
+				<h3>Property Seller Detail</h3>
+				<table class="table table-bordered table-responsive">
+					<tbody>
+						<tr>
+							<td>Contact Person</td>
+							<td>{{modalOptions.viewProperty.contact_details.contact_person}}</td>
+						</tr>
+						<tr>
+							<td>Mobile</td>
+							<td>{{modalOptions.viewProperty.contact_details.mobile}}</td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>{{modalOptions.viewProperty.contact_details.email}}</td>
+						</tr>
+						<tr>
+							<td>Contact Address</td>
+							<td>{{modalOptions.viewProperty.contact_details.cont_address}}</td>
+						</tr>
+					</tbody>
+				</table>				
 				</div>
 			</div>
-			<hr>	
-					<h3>Property Built Up Details</h3>
-					<table class="table table-bordered table-responsive">
-						<thead>
-							<th>Furnishing</th>
-							<th>Transaction</th>
-							<th>Bedrooms</th>
-							<th>Bathrooms</th>
-							<th>Reserved Parking</th>
-						</thead>
-						<tbody>
-							<tr>
-								<td>{{modalOptions.viewProperty.optional_property_details.furnished}}</td>
-								
-								<td>					{{modalOptions.viewProperty.optional_property_details.transType}}</td>
-								
-								<td>{{modalOptions.viewProperty.property_info.bedrooms}}</td>
-								
-								<td>{{modalOptions.viewProperty.property_info.bathrooms}}</td>
-								
-								<td>{{modalOptions.viewProperty.optional_property_details.parking}}</td>
-							</tr>
-						</tbody>
-					</table>
-				
-			<hr>
-				<table class="table table-hover table-responsive">
-					<tbody>
-						<h3>Amenities</h3>	
-						<tr>
-						</tr>
-					<hr>			
-						<h3>Property Address</h3>
-						<td></td>
-						<td>{{modalOptions.viewProperty.property_location.address}}</td>
-					</tbody>
-				</table>		
-			<hr>			
-					<h3>Property Seller Detail</h3>
-					<table class="table table-bordered table-responsive">
-						<tbody>
-							<tr>
-								<td>Contact Person</td>
-								<td>{{modalOptions.viewProperty.contact_details.contact_person}}</td>
-							</tr>
-							<tr>
-								<td>Mobile</td>
-								<td>{{modalOptions.viewProperty.contact_details.mobile}}</td>
-							</tr>
-							<tr>
-								<td>Email</td>
-								<td>{{modalOptions.viewProperty.contact_details.email}}</td>
-							</tr>
-							<tr>
-								<td>Contact Address</td>
-								<td>{{modalOptions.viewProperty.contact_details.cont_address}}</td>
-							</tr>
-						</tbody>
-					</table>				
-		</div>
+		<hr>
+			<table class="table table-hover table-responsive">
+				<tbody>
+					<h3>Amenities</h3>	
+					<tr>
+					<ul>
+						<li ng-repeat="x in modalOptions.viewProperty.amenities">
+							{{x}}
+						</li>
+					</ul>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+	</div>
+	<div class="property-images">
+		<img class="img-responsive" ng-model="modalOptions.viewProperty.imgkey" ng-src="{{appConfig.assetPath + modalOptions.viewProperty.property_images[modalOptions.viewProperty.imgkey].file_relative_path}}" ng-init="modalOptions.viewProperty.imgkey = 0"/>
+			<span class="thumbs" ng-repeat="(key, value) in modalOptions.viewProperty.property_images">
+				<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.viewProperty.imgkey = key"/>
+			</span>
 	</div>
 </div>
 

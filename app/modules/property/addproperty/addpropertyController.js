@@ -6,11 +6,10 @@ define(['app'], function (app) {
 		$rootScope.metaTitle = "Add Real Estate Property";
 		
 		// all $scope object goes here
-		$scope.alerts = [];
 		$scope.userinfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		$scope.property = dataService.config.property;
-		$scope.property={};
+		$scope.property = { property_images : [] };
+		$scope.path = "property";
 		
 		dataService.config('config', {config_name : "property"}).then(function(response){
 			$scope.propertyConfig = response.config_data;
@@ -25,7 +24,7 @@ define(['app'], function (app) {
 			$scope.property.area = location.area;
 			$scope.property.pincode = location.pincode;
 		}
-		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+		$scope.getTypeaheadData = function(table,searchColumn, searchValue){
 			var locationParams = {search : {}}
 			locationParams.search[searchColumn] = searchValue;
 			return dataService.config('locations', locationParams).then(function(response){
@@ -33,20 +32,21 @@ define(['app'], function (app) {
 			});
 		}
 		
-		//function for upload images
-		 $scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
-			 upload.upload(files,path,userInfo,function(data){
-				var picArrKey = 0, x;
-				for(x in picArr) picArrKey++;
+		$scope.removeImg = function(item, imgObject) {
+			imgObject.splice(item, 1);     
+		};
+		
+		$scope.uploadMultiple = function(files,path,userinfo, picArr){
+			upload.upload(files,path,userinfo,function(data){
 				if(data.status === 'success'){
-					picArr.push(data.data);
+					picArr.property_images.push(data.data);
 				}else{
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Upload Images", response.message);
+					$notification[response.status]("", response.message);
 				}
-			}); 
-		};    
-		//function for Users list response
+			});
+		};
+		
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
 			if(response.status == 'success'){
@@ -57,62 +57,36 @@ define(['app'], function (app) {
 			}
 		});
 		
-		// to close alert message
-			$scope.closeAlert = function(index) {
-				$scope.alerts.splice(index, 1);
-			};
-			
-			// this function for uploading files
-			$scope.upload = function(files,path,userinfo, picArr){ 
-				upload.upload(files,path,userinfo,function(data){
-					var picArrKey = 0, x;
-					for(x in picArr) picArrKey++;
-					if(data.status === 'success'){
-						picArr[picArrKey] = data.details;
-						
-					}else{
-						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-				$notification[response.status]("Upload Images", response.message);
-					}
+		$scope.upload = function(files,path,userinfo, picArr){ 
+			upload.upload(files,path,userinfo,function(data){
+				
+				if(data.status === 'success'){
+					picArr = data.data.file_relative_path;
 					
-				}); 
-			};
-			$scope.generateThumb = function(files){  
-				upload.generateThumbs(files);
-			};// end file upload code
-		
-	/**********************************************************************/
-		//display records from config.js to combo
-		
-		$scope.propertyConfig = dataService.config.property;					
-		
-		
+				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Upload Images", response.message);
+				}
+				
+			}); 
+		};
+		$scope.generateThumb = function(files){  
+			upload.generateThumbs(files);
+		};
 	/*********************************************************************/
-		
 		// Add Business multi part form show/hide operation from here! 
 		$scope.formPart = 'property';
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
 		};
-	
 	/*********************************************************************/
-	
 	//display dynamic list from project table 
-		dataService.get('getmultiple/project/1/50', $scope.userinfo)
-			.then(function(response){
-												
+		dataService.get('getmultiple/project/1/500', $scope.userinfo)
+			.then(function(response){		
 				$scope.addProjName = response.data;				
 			});
-         
-		dataService.get('getmultiple/property/1/50', $scope.userinfo)
-			.then(function(response){
-												
-				$scope.addPropStruct = response.data;				
-		}); 
-			
 	/************************************************************************************/		
-		
-		 //Add property
+		//Add property
 		$scope.addPropertyFun = function(property){	
 			$scope.property.date = $scope.currentDate;
 			dataService.post("post/property",property,$scope.userinfo)
@@ -126,9 +100,8 @@ define(['app'], function (app) {
 				$notification[response.status]("Post Property", response.message);
 				}				
 			}); 
-			
 			};
-			/********************************************************************************/
+	/**********************************************************************************/
 			//update into property
 			 if($routeParams.id){//Update user
 				console.log($routeParams.id);	
@@ -138,8 +111,7 @@ define(['app'], function (app) {
 						console.log($scope.property);					
 					});	
 					
-					$scope.update = function(property){				
-												
+					$scope.update = function(property){	
 						dataService.put("put/property/"+$routeParams.id,property)
 						.then(function(response) { //function for response of request temp
 							if(response.status == 'success'){
@@ -154,8 +126,7 @@ define(['app'], function (app) {
 					};	 
 			}			
 	/*********************************************************************/	
-	//display websites-domain into checkbox $scope.userinfo $routeParams.id
-	
+	 //display websites-domain into checkbox $scope.userinfo $routeParams.id
 		dataService.get('getmultiple/website/1/200',$scope.userinfo)
 		.then(function(response) {
 			var websites = [];
@@ -172,12 +143,9 @@ define(['app'], function (app) {
 			if(checkValue){
 				$scope.property.domain = angular.copy(websites);
 			}
-		}; 
+		};  
 	/*********************************************************************/	
-		
 	};		
-	
-	
 	
 	// Inject controller's dependencies
 	addpropertyController.$inject = injectParams;

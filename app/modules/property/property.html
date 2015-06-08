@@ -64,9 +64,7 @@
 								<tr>
 									<th>Sr. No.</th>
 									<th>Image</th>
-									<th> Property Details</th>
-									<!-- <th>Featured</th> -->
-									<!-- <th>Status</th> -->
+									<th>Property Details</th>
 									<th>Other Domains</th>
 									<th>Manage</th>
 								</tr>
@@ -74,10 +72,17 @@
 							<tbody>
 								<tr ng-repeat="x in properties | orderBy:sort">
 									<td>{{((currentPage - 1) * pageItems) + $index + 1}}</td>
-									<td><!--ng-model="x.property_images"-->								
-										<img class="img-responsive"  ng-src="{{appConfig.assetPath + x.property_images.file_relative_path}}"/>
-									</td> <!-- ng-click added for modal, class added for responsive image --> 
-									<td style="max-width:435px">
+									<td class="col-sm-2">
+									<div class="media-left">
+									<div class="media-object text-center">
+										<img class="imgwidths"  ng-model="x.imgkey" ng-src="{{appConfig.assetPath + x.property_images[x.imgkey].file_relative_path}}" ng-init="x.imgkey = 0"/>
+										<span class="thumbs" ng-repeat="(key, value) in x.property_images">
+											<img class="img-thumbnail" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="x.imgkey = key"/>
+										</span>
+									</div>
+									</div>
+									</td>
+									<td class="col-sm-2">
 										<table class="table table-bordered table-responsive">
 											<tr>
 												<td><b>Property Title</b></td>
@@ -110,7 +115,7 @@
 										</table>
 									</td>	
 								
-									<td>{{x.domain}}</td>				
+									<td class="col-sm-2">{{x.domain}}</td>				
 									<td style="max-width:150px">
 										<div class="btn-group">
 										<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Non Featured', 'Featured')}}" ng-class="(x.featured==1) ? 'btn btn-info' : 'btn btn-danger'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-star"></span></button>

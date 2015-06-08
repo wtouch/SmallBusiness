@@ -5,13 +5,10 @@ define(['app'], function (app) {
 	var addprojectController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification) {
 		$rootScope.metaTitle = "Add Real Estate Property";
 		
-		
-		// all $scope object goes here
-		$scope.alerts = [];
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		$scope.project = dataService.config.project;
-		$scope.project={};
+		$scope.project = { project_images : [] };
+		$scope.path = "project/"; 
 		
 		dataService.config('config', {config_name : "project"}).then(function(response){
 			$scope.projectConfig = response.config_data;
@@ -47,11 +44,9 @@ define(['app'], function (app) {
 			project_images : [] ,
 			created_date : $scope.currentDate,
 			modified_date :$scope.currentDate,
-			
 		};
 		
-		//function for upload images
-		 $scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
+		$scope.uploadMultiple = function(files,path,userInfo,picArr){ 
 			 upload.upload(files,path,userInfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
@@ -62,8 +57,8 @@ define(['app'], function (app) {
 					$notification[response.status]("Upload Images", response.message);
 				}
 			}); 
-		};    
-		//function for Users list response
+		};  
+		
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
 			if(response.status == 'success'){
@@ -74,25 +69,18 @@ define(['app'], function (app) {
 			}
 		});
 		
-		// remove object from main form object
-			$scope.removeObject = function(key, object){
-				$scope.alerts.splice(key, 1);
-			}
 		
-			// to close alert message
-			$scope.closeAlert = function(index) {
-				$scope.alerts.splice(index, 1);
-			};
+		$scope.removeObject = function(key, object){
+			$scope.alerts.splice(key, 1);
+		}
+		
 			
-			// add form part to main form object
+		// add form part to main form object
 			$scope.addToObject = function(data, object){
 				 var dtlObj = JSON.stringify(data);
 				 object.push(JSON.parse(dtlObj));
 			}
 			
-			//Upload Function for uploading files 
-			$scope.path = "project/"; 
-			 
 			// this function for uploading files
 			$scope.upload = function(files,path,userinfo, picArr){ 
 				upload.upload(files,path,userinfo,function(data){
@@ -109,35 +97,26 @@ define(['app'], function (app) {
 			
 			$scope.generateThumb = function(files){  
 				upload.generateThumbs(files);
-			};// end file upload code
-		
-	/**********************************************************************/
-		//display records from config.js to combo
-		$scope.projectConfig = dataService.config.project;					
+			};
 	/*********************************************************************/
-		
 		// Add Business multi part form show/hide operation from here! 
 		$scope.formPart = 'project';
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
 		};
-	
 	/*********************************************************************/
-	
 	$scope.getWebsite = function(userId){
-				// for dynamic value of domain name
-				dataService.get('getmultiple/website/1/200', {user_id:userId})
-				.then(function(response){
-					var websites = [];
-					for(var id in response.data){
-						var obj = {id: response.data[id].id, domain_name : response.data[id].domain_name};
-						websites.push(obj);
-					}
-					$scope.websites = websites;
-				}) ;
+			// for dynamic value of domain name
+			dataService.get('getmultiple/website/1/200', {user_id:userId})
+			.then(function(response){
+				var websites = [];
+				for(var id in response.data){
+					var obj = {id: response.data[id].id, domain_name : response.data[id].domain_name};
+					websites.push(obj);
+				}
+				$scope.websites = websites;
+			}) ;
 			}
-			
-			// for check all checkboxes
 			$scope.checkAll = function(websites, checkValue) {
 				if(checkValue){
 					$scope.project.domain = angular.copy(websites);
@@ -162,7 +141,6 @@ define(['app'], function (app) {
 				
 			});
 		};
-		
 		//code to edit project details
 		 if($routeParams.id){ 
 			dataService.get("getsingle/project/"+$rootScope.userDetails.id)
@@ -179,20 +157,6 @@ define(['app'], function (app) {
 			};
 		 }; 
 		
-		
-	//display dynamic list from project table 
-		dataService.get('getmultiple/project/1/50', $scope.userinfo)
-			.then(function(response){
-												
-				$scope.addProjName = response.data;				
-			});
-         
-		dataService.get('getmultiple/property/1/50', $scope.userinfo)
-			.then(function(response){
-												
-				$scope.addPropStruct = response.data;				
-		}); 
-			
 	/************************************************************************************/		
 		
 		 //Add Project

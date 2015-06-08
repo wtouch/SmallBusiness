@@ -1,45 +1,45 @@
+<h3>Land Mark:</h3>
+	<div class="form-group">
+			<label for="hospitals" class="col-sm-2 control-label">Hospitals </label>
+			<div class="col-sm-9">
+				<input type="text"  id="hospitals" class="form-control" name="hospitals" ng-model="property.landmarks.hospitals" ng-pattern="/^\d{0,9}[0-9]$/" required /> kms	
 
-	
-	<!--Land  Mark -->				
-		<h3>Land Mark:</h3>
-		<div class="form-group">
-				<label for="hospitals" class="col-sm-2 control-label">Hospitals </label>
-				<div class="col-sm-9">
-					<input type="text"  id="hospitals" class="form-control" name="hospitals" ng-model="property.landmarks.hospitals" required /> kms	
-
-				<span class="text-danger" ng-show="addProperty.hospitals.$dirty && addProperty.hospitals.$invalid">
-					<span ng-show="addProperty.hospitals.$error.required">KM are required .</span>
+			<span class="text-danger" ng-show="addProperty.hospitals.$dirty && addProperty.hospitals.$invalid">
+			<span ng-show="addProperty.hospitals.$error.pattern && (addProperty.hospitals.$dirty)" class="text-danger">Enter only no.</span>
+				<span ng-show="addProperty.hospitals.$error.required">KM are required .</span>
+			</span>		
+			</div>							
+	  </div>
+	  <div class="form-group">
+			<label for="airport" class="col-sm-2 control-label">  Airport </label>
+			<div class="col-sm-9">
+				<input type="text" id="airport" class="form-control"  name="airport" ng-model="property.landmarks.airport" ng-pattern="/^\d{0,9}[0-9]$/" required />	kms	
+				
+				<span class="text-danger" ng-show="addProperty.airport.$dirty && addProperty.airport.$invalid">
+				<span ng-show="addProperty.airport.$error.pattern && (addProperty.airport.$dirty)" class="text-danger">Enter only no.</span>
+				<span ng-show="addProperty.airport.$error.required">KM are required .</span>
 				</span>		
-				</div>							
-		  </div>
-		  <div class="form-group">
-				<label for="airport" class="col-sm-2 control-label">  Airport </label>
-				<div class="col-sm-9">
-					<input type="text" id="airport" class="form-control"  name="airport" ng-model="property.landmarks.airport" required >	kms	
-					
-					<span class="text-danger" ng-show="addProperty.airport.$dirty && addProperty.airport.$invalid">
-					<span ng-show="addProperty.airport.$error.required">KM are required .</span>
-					</span>		
-				</div>											
-		  </div>
-		  <div class="form-group">
-				<label for="railway" class="col-sm-2 control-label">Railway Station</label>
-				<div class="col-sm-9">
-					<input type="text" id="railway" class="form-control" name="railway" ng-model="property.landmarks.railway" required>kms	
-					
-					<span class="text-danger" ng-show="addProperty.railway.$dirty && addProperty.railway.$invalid">
-					<span ng-show="addProperty.railway.$error.required">KM are required .</span>
-					</span>	
-				</div>											
-		  </div>
-		  <div class="form-group">
-				<label for="school" class="col-sm-2 control-label">School </label>
-				<div class="col-sm-9">
-					<input type="text" id="school" class="form-control" name="school" ng-model="property.landmarks.school" required>kms	
-					
-					<span class="text-danger" ng-show="addProperty.school.$dirty && addProperty.school.$invalid">
-					<span ng-show="addProperty.school.$error.required">KM are required .</span>
-					</span>
-				</div>											
-		  </div>
-	
+			</div>											
+	  </div>
+	  <div class="form-group">
+			<label for="railway" class="col-sm-2 control-label">Railway Station</label>
+			<div class="col-sm-9">
+				<input type="text" id="railway" class="form-control" name="railway" ng-model="property.landmarks.railway" ng-pattern="/^\d{0,9}[0-9]$/" required />kms	
+				
+				<span class="text-danger" ng-show="addProperty.railway.$dirty && addProperty.railway.$invalid">
+				<span ng-show="addProperty.railway.$error.pattern && (addProperty.railway.$dirty)" class="text-danger">Enter only no.</span>
+				<span ng-show="addProperty.railway.$error.required">KM are required .</span>
+				</span>	
+			</div>											
+	  </div>
+	  <div class="form-group">
+			<label for="school" class="col-sm-2 control-label">School </label>
+			<div class="col-sm-9">
+				<input type="text" id="school" class="form-control" name="school" ng-model="property.landmarks.school" ng-pattern="/^\d{0,9}[0-9]$/" required />kms	
+				
+				<span class="text-danger" ng-show="addProperty.school.$dirty && addProperty.school.$invalid">
+				<span ng-show="addProperty.school.$error.pattern && (addProperty.school.$dirty)" class="text-danger">Enter only no.</span>
+				<span ng-show="addProperty.school.$error.required">KM are required .</span>
+				</span>
+			</div>											
+	  </div>

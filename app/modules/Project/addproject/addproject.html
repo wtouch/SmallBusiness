@@ -1,4 +1,3 @@
-<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="main-content">
@@ -84,7 +83,6 @@
 					
 					<ng-include ng-show="formPart=='contact'" src="'modules/project/addproject/contact.html'">
 					</ng-include> 
-					{{project.user_id}}
 					<div class="form-group" ng-if="project.user_id">
 						<div class="col-sm-12">					
 							<h3>Select Sites</h3>
@@ -93,7 +91,7 @@
 									<tr>
 										<td class="checkbox">
 											<label>
-												<input type="checkbox" ng-model="selectAll" ng-change="checkAll(websites, selectAll)" > Select all
+												<input type="checkbox" ng-model="selectAll" ng-change="checkAll(websites, selectAll)" /> Select all
 											</label> 
 										</td>
 										<td class="checkbox">
@@ -108,7 +106,7 @@
 					</div>
 						
 					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-9"><!--ng-disabled="addProperty.$invalid"-->
+						<div class="col-sm-offset-2 col-sm-9">
 							<button type="submit" ng-click="addproject(project)"  class="btn btn-primary" title="Add new project">Add New Project</button>
 							
 							<button type="submit" ng-click="update(project)" title="Update your project" class="btn btn-success text-center ">Edit Project</button>

@@ -7,7 +7,7 @@
 	if($reqMethod=="GET"){
 		if(isset($id)){
 			$where['id'] = $id;
-			$t0 = $db->setTable($table);
+			$t0 = $db->setTable("property");
 			$db->setWhere($where, $t0);
 			$data = $db->selectSingle();
 			echo json_encode($data);
@@ -21,9 +21,9 @@
 			$where = array();
 			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
 			
-			/* if(isset($_GET['search']) && $_GET['search'] == true){
-				(isset($_GET['business_name'])) ? $like['business_name'] = $_GET['business_name'] : "";
-			} */
+			 if(isset($_GET['search']) && $_GET['search'] == true){
+				(isset($_GET['title'])) ? $like['title'] = $_GET['title'] : "";
+			} 
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";
 			(isset($_GET['domain'])) ? $where['domain'] = $_GET['domain'] : "";
