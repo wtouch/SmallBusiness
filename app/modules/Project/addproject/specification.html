@@ -1,1 +1,48 @@
-specification
+<h3>Specification</h3>	
+<div>
+	<input type="hidden" required name="specifications" ng-model="project.specifications" />
+	<span class="help-block" ng-show="addProject.specifications.$dirty && addProject.specifications.$invalid">
+		<span ng-show="addProject.specifications.$error.required" class="text-danger">Specifications Description is required.</span>
+	</span>
+</div>
+
+<div class="form-group">
+	<label  for="specificationTitle" class="col-sm-2 control-label">* Title</label>
+	<div class="col-sm-9">
+		<input type="text"  id="specificationTitle" class="form-control" name="specificationTitle" ng-model="project.specifications.title"  cols="20" rows="4" ng-maxlength="60" required />
+		<p ng-hide="addProject.specificationTitle.$error.maxlength">{{ 60 - project.specifications.title + " Chars left" }}</p>
+			 <span class="text-danger" ng-show="addProject.specificationTitle.$error.maxlength">
+			Sorry You are Exceeding the Limit</span>
+				<span class="text-danger" ng-show="addProject.specificationTitle.$dirty && addProject.specificationTitle.$invalid">
+			  <span ng-show="addProject.specificationTitle.$error.required">Title is required .</span>
+	</div>
+</div>
+
+<div class="form-group"> 
+	<label for="specDiscription" class="col-sm-2 control-label">* Description</label> 
+	<div class="col-sm-9">
+			<textarea class="form-control" id="specDiscription"  name="specDiscription" ng-model="project.specifications.description" cols="20" rows="4" ng-maxlength="356" required ui-tinymce></textarea>
+		<p ng-hide="addProject.specDiscription.$error.maxlength">{{ 356 - project.specifications.description.length + " Chars left" }}</p>
+		 <span class="text-danger" ng-show="addProject.specDiscription.$error.maxlength">
+				Sorry You are Exceeding the Limit</span>
+		<span class="text-danger" ng-show="addProject.specDiscription.$dirty && addProject.specDiscription.$invalid">
+				<span ng-show="addProject.specDiscription.$error.required"> Description is required .</span>
+		</span>
+	</div>
+</div>	
+<div class="col-sm-12">
+	<div class="table-responsive">{{project.specifications}}
+		<table class="table table-bordered " ng-if="project.specifications">
+			<tr>
+				<th>Specification Title</th>
+				<th>Specification Description</th>
+				<th>Remove</th>
+			</tr>
+			<tr ng-repeat="(key, value) in project.specifications">
+				<td>{{key}}</td>
+				<td>{{value}}</td>
+				<td><button ng-click="removeObject(key,project.specifications)">Remove</button></td>
+			</tr>
+		</table>
+	</div>
+</div>

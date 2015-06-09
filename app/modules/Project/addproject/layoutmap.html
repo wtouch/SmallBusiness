@@ -4,12 +4,14 @@
 		<button type="button" class="btn btn-default btn-primary pull-right" ng-click="addToObject(layout_map, project.layout_map)" title="Add Layout map">Add Layout map</button>
 	</div>
 </div>
+
 <div>
 	<input type="hidden" required name="layout_map" ng-model="project.layout_map" />
 	<span class="help-block" ng-show="addProject.layout_map.$dirty && addProject.layout_map.$invalid">
 		<span ng-show="addProject.layout_map.$error.required" class="text-danger">location_map Description is required.</span>
 	</span>
 </div>
+
 <div class="form-group">
 	<label  for="layoutTitle" class="col-sm-2 control-label">* Title</label>
 	<div class="col-sm-9">		
@@ -57,12 +59,12 @@
 				<th>Layout Map Image</th>
 				<th>Remove </th>
 			</tr>
-			<tr ng-repeat="(key, value) in project.layout_map">
-				<td>{{value.title}}</td>
-				<td ng-bind-html="value.description">
-				<td><span ng-if="value.image">
-				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" /></span>
-				</td>
+			<tr ng-model="project.layout_map">
+				<td>{{project.layout_map.title}}</td>
+				<td>{{project.layout_map.description}}</td>
+				<td>
+					<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + project.layout_map.image.file_relative_path}}" width="150px" />
+				</td> 
 				<td><button ng-click="removeObject(key,project.layout_map)">Remove</button></td>
 			</tr>
 		</table>

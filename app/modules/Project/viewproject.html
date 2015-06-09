@@ -1,4 +1,4 @@
-<div class="modal-content">		
+<!-- <div class="modal-content">		
 	<div class="modal-header">
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 	</div>
@@ -20,7 +20,7 @@
 						<tr>
 							<td>{{modalOptions.project.id}}</td>
 							<td>{{modalOptions.project.title}}</td>
-							<!-- <td>{{modalOptions.project.project_images}}</td> -->
+							<!-- <td>{{modalOptions.project.project_images}}</td> - ->
 							<td>{{modalOptions.project.created_date}}</td>
 							<td>{{modalOptions.project.modified_date}}</td>
 							<td>{{modalOptions.project.other_domains}}</td>
@@ -35,4 +35,96 @@
 	<div class="modal-footer">
 		<button class="btn btn-primary" ng-click="modalOptions.ok()" title="OK">OK</button>
 	</div>
-</div>		
+</div> -->
+
+
+
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="modal-body">
+	<div class="row">
+	    <div class="col-sm-12">
+			<h3 class="text-center">{{modalOptions.project.title}}</h3>		
+			<div class="row">
+			    <div class="col-sm-6">
+					<table class="table table-hover table-responsive">
+						<tr>
+							<td ng-if="modalOptions.project.category"><b>Category </b></td>
+							<td ng-if="modalOptions.project.category">						
+								<p>{{modalOptions.project.category}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td ng-if="modalOptions.project.type"><b>Type </b></td>
+							<td ng-if="modalOptions.project.type">						
+								<p>{{modalOptions.project.type}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td ng-if="modalOptions.project.address"><b>Address</b></td>
+							<td ng-if="modalOptions.project.address">						
+								<p>{{modalOptions.project.address}}</p>
+							</td>								 
+						</tr>
+						<tr>
+							<td><b>Location </b></td>
+							<td>
+								<p><b>Location :</b> {{modalOptions.project.location}}</p>
+								<p><b>Area :</b> {{modalOptions.project.area}}</p>
+								<p><b>City :</b>								
+								{{modalOptions.project.city}}</p>
+								<p><b>State :</b> {{modalOptions.project.state}}</p>
+								<p><b>Country :</b> {{modalOptions.project.country}}</p>
+								<p><b>Pincode :</b> {{modalOptions.project.pincode}}</p>
+							</td>
+						</tr>
+					</table>	
+				</div>
+				<div class="col-sm-6">
+					<div class="property-images">
+						<img class="img-responsive" ng-model="modalOptions.project.imgkey" ng-src="{{appConfig.assetPath + modalOptions.project.project_images[modalOptions.project.imgkey].file_relative_path}}" ng-init="modalOptions.project.imgkey = 0"/>
+							<span class="thumbs" ng-repeat="(key, value) in modalOptions.project.project_images">
+								<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.project.imgkey = key"/>
+							</span>
+					</div>
+				</div>
+			</div>
+				<table class="table table-hover table-responsive">
+					<tbody>
+						<h3>Amenities</h3>	
+						<tr>
+							<ul>
+								<li ng-repeat="x in modalOptions.project.amenities">
+									{{x}}
+								</li>
+							</ul>
+						</tr>		
+					</tbody>
+				</table>		
+			<hr>			
+					<h3>Property Seller Detail</h3>
+					<table class="table table-bordered table-responsive">
+						<tbody>
+							<tr>
+								<td>Contact Person</td>
+								<td>{{modalOptions.project.contact_details.name}}</td>
+							</tr>
+							<tr>
+								<td>Mobile</td>
+								<td>{{modalOptions.project.contact_details.phone}}</td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td>{{modalOptions.project.contact_details.email}}</td>
+							</tr>
+							<tr>
+								<td>Contact Address</td>
+								<td>{{modalOptions.project.contact_details.address}}</td>
+							</tr>
+						</tbody>
+					</table>				
+		</div>
+	</div>
+</div>
+

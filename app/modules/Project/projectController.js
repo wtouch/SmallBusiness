@@ -11,13 +11,6 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
 		$scope.user_id = {user_id : $rootScope.userDetails.id}; 
-		//$scope.userInfo = {user_id : $rootScope.userDetails.id};
-		$scope.alerts = [];
-		
-		// function to close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		};
 		
 		//for dynamic tooltip
 		$scope.dynamicTooltip = function(status, active, notActive){
@@ -66,29 +59,30 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				});
 			} ;		
 		
-		$scope.searchFilter = function(statusCol, showStatus) {
+		 //search filter function
+		$scope.searchFilter = function(statusCol, searchProp) {
 			$scope.search = {search: true};
 			$scope.filterStatus= {};
-			$scope.projectParam={};
-			(showStatus =="") ? delete $scope.projectParam[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			(searchProp =="") ? delete $scope.projectParam[statusCol] : $scope.filterStatus[statusCol] = searchProp;
 			angular.extend($scope.projectParam, $scope.filterStatus);
-			angular.extend($scope.projectParam, $scope.search);
-			if(showStatus.length >= 4 || showStatus == ""){
-			dataService.get("getmultiple/project/1/"+$scope.pageItems, $scope.projectParam)
-			.then(function(response) {  
+			angular.extend($scope.projectParam, $scope.search);			
+			
+			dataService.get("/getmultiple/property/1/"+$scope.pageItems, $scope.projectParam)
+			.then(function(response) {  //function for propertylist response
 				if(response.status == 'success'){
 					$scope.projects = response.data;
 					$scope.totalRecords = response.totalRecords;
 				}else{
 					$scope.projects = {};
 					$scope.totalRecords = {};
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status](response.message);
+					$scope.alerts.push({type: response.status, msg: response.message});
 				}
 			});
-			}
-		}; 
-		
+		};
+
+		$scope.removeImg = function(item, imgObject) {
+			imgObject.splice(item, 1);     
+		};
 		// code for filter data as per satus (delete/active)		
 		$scope.changeStatus = function(statusCol, showStatus) {
 			$scope.filterStatus= {};
@@ -108,27 +102,8 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			});
 		};
 		
-		// code for change status when user delete/ active the project
-		$scope.changeValue = function(statusCol,status) {
-			$scope.filterStatus= {};
-			(status =="") ? delete $scope.projectParam[statusCol] : $scope.filterStatus[statusCol] = status;
-			angular.extend($scope.projectParam, $scope.filterStatus);
-			angular.extend($scope.projectParam, $scope.search);			
-			
-			dataService.get("/getmultiple/project/1/"+$scope.pageItems, $scope.projectParam)
-			.then(function(response) {  
-				if(response.status == 'success'){
-					$scope.projects = response.data;
-					$scope.totalRecords = response.totalRecords;
-				}else{
-					$scope.projects = {};
-					$scope.totalRecords = {};
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status](response.message);
-				}				
-			});
-		};
 		// code to access domain names dynamically
+		$scope.getWebsitelist = function(){
 		$scope.userinfo={user_id:$rootScope.userDetails.id,status :1};
 		dataService.get('getmultiple/website/1/200', $scope.userinfo).then(function(response){
 				var domains = [];
@@ -138,7 +113,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				}
 				$scope.domains = domains;
 		});
-		
+		};
 		//modal for open project details.
 			$scope.open = function (url, projectId) {
 				dataService.get("getsingle/project/"+projectId)
@@ -166,40 +141,9 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			$scope.totalRecords = response.totalRecords;
 			$scope.projects = response.data;
 			if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status];
+				$notification[response.status];
 		}); 
-	/******************************************************************************************/
-		
-		/* //view multiple records
-			$scope.projectParam = {status : 1};			
-			angular.extend($scope.projectParam,$scope.userInfo);
-			dataService.get("getmultiple/project/1/"+$scope.pageItems, $scope.projectParam)
-			.then(function(response) { //function for property list response  
-				//console.log(response.data);				
-					if(response.status == 'success'){
-						$scope.totalRecords = response.totalRecords;
-						$scope.projects = response.data; 					
-						
-					}else{
-						$scope.alerts.push({type: response.status, msg: response.message});
-					}
-			});	
-			
-	}; */
-	/*****************************************************************************************/
 	/*****************************************************************************************/	
-			//update single record
-			if($routeParams.id){//Update user 	 	
-			dataService.get("getsingle/project/"+$rootScope.userDetails.id)
-				.then(function(response) {
-						$scope.project = response.data;	
-						console.log($scope.project);					
-					});				
-				$scope.update = function(project){				
-					console.log(project);
-				};	
-			 };  	
-	 /***********************************************************************************/	
  }; 
 	// Inject controller's dependencies
 	projectController.$inject = injectParams;

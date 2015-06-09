@@ -59,12 +59,12 @@
 				<th>Floor Image</th>
 				<th>Remove </th>
 			</tr>
-			<tr ng-repeat="(key, value) in project.floor_plan">
-				<td>{{value.title}}</td>
-				<td ng-bind-html="value.description">
-				<td><span ng-if="value.image">
-				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" /></span>
-				</td>
+			<tr ng-model="project.floor_plan">
+				<td>{{project.floor_plan.title}}</td>
+				<td>{{project.floor_plan.description}}</td>
+				<td>
+					<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + project.floor_plan.image.file_relative_path}}" width="150px" />
+				</td> 
 				<td><button ng-click="removeObject(key,project.floor_plan)">Remove</button></td>
 			</tr>
 		</table>

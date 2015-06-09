@@ -21,7 +21,7 @@
 			$where = array();
 			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
 			
-			 if(isset($_GET['search']) && $_GET['search'] == true){
+			if(isset($_GET['search']) && $_GET['search'] == true){
 				(isset($_GET['title'])) ? $like['title'] = $_GET['title'] : "";
 				(isset($_GET['domain'])) ? $like['domain'] = $_GET['domain'] : "";
 			} 

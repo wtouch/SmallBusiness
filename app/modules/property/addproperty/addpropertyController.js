@@ -100,7 +100,7 @@ define(['app'], function (app) {
 				$notification[response.status]("Post Property", response.message);
 				}				
 			}); 
-			};
+		};
 	/**********************************************************************************/
 			//update into property
 			 if($routeParams.id){//Update user

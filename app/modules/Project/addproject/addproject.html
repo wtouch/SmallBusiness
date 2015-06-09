@@ -2,7 +2,8 @@
 	<div class="col-sm-12">
 		<div class="main-content">
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
-			<h3 class="text-center" title="Add new Project">Add New Project</h3>
+			<h3 class="text-center" ng-if="!project.id" title="Add new Project">Add New Project</h3>
+			<h3 class="text-center" ng-if="project.id" title="Add new Project">Edit Project</h3>
 			<form class="form-horizontal" name="addProject" ng-submit="addProject.$valid"novalidate>	
 				
 				<p class="paraMand">* Fields are mandatory</p>
@@ -12,7 +13,6 @@
 				<input type="hidden" id="verified" name="verified" ng-model="project.verified" >
 				
 				<input type="hidden" id="user_id" name="user_id" ng-model="project.user_id" >				
-				
 				<input type="hidden" id="status" name="status" ng-model="project.status">
 				
 				<input type="hidden" id="date" name="date" ng-model="project.date">	
@@ -31,6 +31,9 @@
 						<a ng-click="showFormPart('location')">Location</a>
 					</li>
 					  
+					<li role="presentation" ng-class="{active: formPart=='specification'}">
+						<a ng-click="showFormPart('specification')">Specification</a>
+					</li>
 					
 					<li role="presentation" ng-class="{active: formPart=='amenities'}">
 						<a ng-click="showFormPart('amenities')">Amenities</a>
@@ -64,7 +67,10 @@
 					</ng-include> 
 					
 					<ng-include ng-show="formPart=='location'"  src="'modules/project/addproject/location.html'">
-					</ng-include> 
+					</ng-include>
+					
+					<ng-include ng-show="formPart=='specification'"  src="'modules/project/addproject/specification.html'">
+					</ng-include>
 					
 					<ng-include  ng-show="formPart=='amenities'" src="'modules/project/addproject/amenities.html'">
 					</ng-include> 
@@ -107,9 +113,9 @@
 						
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-9">
-							<button type="submit" ng-click="addproject(project)"  class="btn btn-primary" title="Add new project">Add New Project</button>
+							<button type="submit" ng-if="!project.id" ng-click="addproject(project)"  class="btn btn-primary" title="Add new project">Add New Project</button>
 							
-							<button type="submit" ng-click="update(project)" title="Update your project" class="btn btn-success text-center ">Edit Project</button>
+							<button type="submit" ng-if="project.id" ng-click="update(project)" title="Update your project" class="btn btn-success text-center ">Edit Project</button>
 							<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>
 						</div>
 					</div>							

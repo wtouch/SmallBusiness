@@ -46,26 +46,26 @@
 				<span ng-show="addProject.galleryDescription.$error.required"> Description is required .</span>
 		</span>
 	</div>
-</div>	
+</div>
 
-	<div class="col-sm-12">
-		<div class="table-responsive">
-			<table class="table table-bordered " ng-if="project.project_gallery">
-				<tr>
-					<th>Project Gallery Title</th>
-					<th>Project Gallery Description</th>
-					<th>Project Gallery Images</th>
-					<th>Remove </th>
-				</tr>
-				<tr ng-repeat="(key, value) in project.project_gallery">
-					<td>{{key}}</td>
-					<td>{{value}}</td>
-					<td>
-						<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.location_image.file_relative_path}}" width="150px" />
-					</td>
-					<td><button ng-click="removeObject(key,project.project_gallery)">Remove</button></td>
-					
-				</tr>
-			</table>
-		</div>
+<div class="col-sm-12">
+	<div class="table-responsive">
+		<table class="table table-bordered " ng-if="project.project_gallery">
+			<tr>
+				<th>Project Gallery Title</th>
+				<th>Project Gallery Description</th>
+				<th>Project Gallery Images</th>
+				<th>Remove</th>
+			</tr>
+			<tr ng-model="project.project_gallery">
+				<td>{{project.project_gallery.title}}</td>
+				<td>{{project.project_gallery.description}}</td>
+				<td>
+					<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.project_gallery.file_relative_path}}" width="150px" />
+				</td>
+				<td><button ng-click="removeObject(key,project.project_gallery)">Remove</button></td>
+				
+			</tr>
+		</table>
 	</div>
+</div>

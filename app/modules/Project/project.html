@@ -8,7 +8,7 @@
 					<a href="#/dashboard/project/addproject" class="btn btn-primary" title="Add new project">Add New Project</a>				
 				</div>	
 				<div class="col-sm-2"> 
-					<label class="control-label" for="search">Search </label>		
+					<label class="control-label" for="search">Search</label>		
 					<div class="input-group">
 						 <input type="text" class="form-control" id="search" ng-model="searchProper" ng-change="searchFilter('title', searchProper)" placeholder="search"/>
 					</div>
@@ -38,7 +38,7 @@
 							<option value="0">Not Featured</option> 
 						</select>
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-2"  ng-init="getWebsitelist()">
 					<label for="domain_name" class="control-label">Select Domain :</label>
 					 <select class="form-control" id="domain_name" name="domain_name" ng-change="changeStatus('domain',showDomain)" ng-model="showDomain" ng-required="true" ng-options="item.domain_name as item.domain_name for item in domains">
 					  <option value="">Select Websites</option> 
@@ -52,10 +52,10 @@
 							<table class="table table-bordered ">
 							<thead>
 								<tr>
-									<th>Sr. No.</th>
-									<th> Project Title</th>
+									<th>Sr.No.</th>
 									<th>Image</th>
-									<th> Project Details</th>
+									<th>Project Title</th>
+									<th>Project Details</th>
 									<th>Other Domains</th>
 									<th>Manage</th>
 								</tr>
@@ -64,11 +64,17 @@
 							<tbody>
 								<tr ng-repeat="x in projects | orderBy:title ">
 									<td>{{ $index + 1 }}</td>
+									<td class="col-sm-2">
+									<div class="media-left">
+									<div class="media-object text-center">
+										<img class="imgwidths"  ng-model="x.imgkey" ng-src="{{appConfig.assetPath + x.project_images[x.imgkey].file_relative_path}}" ng-init="x.imgkey = 0"/>
+										<span class="thumbs" ng-repeat="(key, value) in x.project_images">
+											<img class="img-thumbnail" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="x.imgkey = key"/>
+										</span>
+									</div>
+									</div>
+									</td>
 									<td>{{x.title}}</td>
-									<td>
-									<!-- <img class="img-responsive" ng-model="x.proj_image" ng-src="{{appConfig.assetPath + x.proj_image.file_relative_path}}"/> -->
-									<img ng-src="{{appConfig.assetPath + '/' +  
-									x.proj_image.file_relative_path}}"/>
 									<td>
 										<table class="table table-bordered table-responsive">
 											<tr>

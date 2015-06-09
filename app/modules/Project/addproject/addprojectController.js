@@ -37,27 +37,29 @@ define(['app'], function (app) {
 			overview : {},
 			amenities : {},
 			specifications : {},
-			location_map : [],
-			layout_map : [],
-			floor_plan : [],
-			project_gallery : [],
+			location_map : {},
+			layout_map : {},
+			floor_plan : {},
+			project_gallery : {},
 			project_images : [] ,
 			created_date : $scope.currentDate,
 			modified_date :$scope.currentDate,
 		};
 		
-		$scope.uploadMultiple = function(files,path,userInfo,picArr){ 
-			 upload.upload(files,path,userInfo,function(data){
-				var picArrKey = 0, x;
-				for(x in picArr) picArrKey++;
+		$scope.uploadMultiple = function(files,path,userinfo, picArr){
+			upload.upload(files,path,userinfo,function(data){
 				if(data.status === 'success'){
-					picArr.push(data.data);
+					picArr.project_images.push(data.data);
 				}else{
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Upload Images", response.message);
+					$notification[response.status]("", response.message);
 				}
-			}); 
-		};  
+			});
+		};
+		
+		$scope.removeImg = function(item, imgObject) {
+			imgObject.splice(item, 1);     
+		};
 		
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
@@ -69,13 +71,11 @@ define(['app'], function (app) {
 			}
 		});
 		
-		
 		$scope.removeObject = function(key, object){
 			$scope.alerts.splice(key, 1);
 		}
 		
-			
-		// add form part to main form object
+		//add form part to main form object
 			$scope.addToObject = function(data, object){
 				 var dtlObj = JSON.stringify(data);
 				 object.push(JSON.parse(dtlObj));
@@ -93,7 +93,7 @@ define(['app'], function (app) {
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}					
 				}); 
-			}; 
+			};  
 			
 			$scope.generateThumb = function(files){  
 				upload.generateThumbs(files);
@@ -133,29 +133,39 @@ define(['app'], function (app) {
 			dataService.post("post/project",project)
 			.then(function(response) {
 				if(response.status=="success"){
-					$scope.alerts.push({type: response.status, msg: response.message});
-					//$scope.formScope.addprojectForm.$setPristine();
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Post Project", response.message);
 				}else{
-					$scope.alerts.push({type: response.status, msg: response.message});
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Post Project", response.message);
 				}
 				
 			});
 		};
-		//code to edit project details
-		 if($routeParams.id){ 
-			dataService.get("getsingle/project/"+$rootScope.userDetails.id)
-			.then(function(response) {
-				
-				console.log(response);
-			});
-			
-			$scope.update = function(id,project){
-				dataService.put("put/project/"+id,project)
+		
+		//update into project
+			 if($routeParams.id){//Update user
+				console.log($routeParams.id);	
+				dataService.get("getsingle/project/"+$routeParams.id)
 				.then(function(response) {
-					console.log(response);
-				});
-			};
-		 }; 
+						$scope.project = response.data;	
+						console.log($scope.project);					
+					});	
+					
+					$scope.update = function(project){	
+						dataService.put("put/project/"+$routeParams.id,project)
+						.then(function(response) { //function for response of request temp
+							if(response.status == 'success'){
+								$scope.submitted = true;
+								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+								$notification[response.status]("Put project", response.message);						
+							}else{
+								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+								$notification[response.status]("Put project", response.message);
+							}	
+						});	  
+					};	 
+			}			
 		
 	/************************************************************************************/		
 		
