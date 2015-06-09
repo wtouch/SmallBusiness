@@ -42,9 +42,7 @@ define(['app'], function (app) {
 				if(response.status == 'success'){
 					$scope.templateList = response.data;
 				}else{
-					
 					$notification.error("Get Template", "You didn't have any Template! Please apply free template or buy new template first.");
-					
 				}
 			});
 		}

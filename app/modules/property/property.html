@@ -22,10 +22,10 @@
 				
 				<div class="col-sm-2">
 					<label for="sort" class="control-label">Sort by Order</label>		
-				<select id="sort" class="form-control" ng-model="sort" title="Select order">  
-						<option value="">Select Order</option>		<!-- added value & selected attr -->	
-						<option value="-id">Desending</option>
-						<option value="id">Asending</option>  
+				<select id="sort" class="form-control" ng-model="sort">  
+						<option value="">Select Order</option>		
+						<option value="-title">Desending</option>
+						<option value="title">Asending</option>  
 					</select>
 				</div>
 				
@@ -47,9 +47,10 @@
 					</select>
 				</div>
 				
-				<div class="col-sm-2">
+				<div class="col-sm-2" ng-init="getWebsitelist()">
 					<label for="domain_name" class="control-label">Select Domain :</label>
-					 <select class="form-control" id="domain_name" name="domain_name" ng-change="searchFilter('domain',showDomain)" ng-model="showDomain" ng-required="true" ng-options="item.domain_name as item.domain_name for item in domains">
+					<select class="form-control" id="domain_name" name="domain_name"
+					 ng-change="searchFilter('domain',showDomain)" ng-model="showDomain" ng-required="true" ng-options="item.domain_name as item.domain_name for item in domains">
 					  <option value="">Select Websites</option> 
 					</select>
 				</div>	

@@ -27,8 +27,6 @@ define(['app'], function (app) {
 				}
 			});
 			
-			
-			//
 			//code for get business name from business
 			$scope.status = {status:1};
 			angular.extend($scope.status, {user_id : response.data.user_id});

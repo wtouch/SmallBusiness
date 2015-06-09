@@ -10,23 +10,10 @@ define(['app'], function (app) {
 		$scope.totalRecords = "";
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
-		$scope.numPages = "";		
-		$scope.alerts = [];
+		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		console.log($scope.currentDate);
-		
-		 //for alert 		 
-		if($scope.status=="warning"){     
-			 $scope.alerts.push({type: 'error', msg: "Error to load data"});
-			 $scope.closeAlert = function(index) {
-				$scope.alerts.splice(index, 1);
-			 };
-		}	 
-		//function for close alert
-		$scope.closeAlert = function(index) {
-			$scope.alerts.splice(index, 1);
-		}; 	
 		
 		//dynamic tooltip
 		$scope.dynamicTooltip = function(status, active, notActive){
@@ -34,17 +21,17 @@ define(['app'], function (app) {
 		};
 		
 		// code for delete button 
-			$scope.deleted = function(id, status){
-				$scope.deletedData = {status : status};
-				dataService.put("put/property/"+id, $scope.deletedData)
-				.then(function(response) { 
-					if(response.status == 'success'){
-						$scope.hideDeleted = 1;
-					}
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Delete Property", response.message);
-				});
-			};			
+		$scope.deleted = function(id, status){
+			$scope.deletedData = {status : status};
+			dataService.put("put/property/"+id, $scope.deletedData)
+			.then(function(response) { 
+				if(response.status == 'success'){
+					$scope.hideDeleted = 1;
+				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Delete Property", response.message);
+			});
+		};			
 		
 		//code for pagination		
 		$scope.pageChanged = function(page) {	
@@ -57,24 +44,24 @@ define(['app'], function (app) {
 		};	//end pagination
 		
 		//This code for featured & un-featured button 
-			$scope.feature = function(id, featured){
-				$scope.featuredData = {featured : featured};
-				dataService.put("put/property/"+id, $scope.featuredData)
-				.then(function(response) {
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Feature Property", response.message);
-				});
-			};
+		$scope.feature = function(id, featured){
+			$scope.featuredData = {featured : featured};
+			dataService.put("put/property/"+id, $scope.featuredData)
+			.then(function(response) {
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Feature Property", response.message);
+			});
+		};
 			
 		// code for verify button 
-			$scope.verify = function(id, verified){
-				$scope.veryfiedData = {verified : verified};
-				dataService.put("put/property/"+id, $scope.veryfiedData)
-				.then(function(response) { 
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Verify Property", response.message);
-				});
-			} ;	
+		$scope.verify = function(id, verified){
+			$scope.veryfiedData = {verified : verified};
+			dataService.put("put/property/"+id, $scope.veryfiedData)
+			.then(function(response) { 
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Verify Property", response.message);
+			});
+		};	
 			
 		//search filter function
 		$scope.searchFilter = function(statusCol, searchProp) {
@@ -94,12 +81,11 @@ define(['app'], function (app) {
 					$scope.totalRecords = {};
 					$scope.alerts.push({type: response.status, msg: response.message});
 				}
-				//console.log($scope.properties);
 			});
 		};
 
 		//upload method for multiple images
-		$scope.uploadMultiple = function(files,path,userInfo,picArr){ //this function for uploading files
+		$scope.uploadMultiple = function(files,path,userInfo,picArr){ 
 			 upload.upload(files,path,userInfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
@@ -111,7 +97,9 @@ define(['app'], function (app) {
 				}
 			}); 
 		};    
+		
 		// code to access domain names dynamically
+		$scope.getWebsitelist = function(){
 		$scope.userinfo={user_id:$rootScope.userDetails.id,status :1};
 		dataService.get('getmultiple/website/1/200', $scope.userinfo).then(function(response){
 				var domains = [];
@@ -120,7 +108,9 @@ define(['app'], function (app) {
 					domains.push(obj);
 				}
 				$scope.domains = domains;
-		});
+				
+		}); 
+		};
 /***************************************************************************************/
 		// code for filter data as per satus (delete/active)		
 		$scope.changeStatus = function(statusCol, showStatus) {
