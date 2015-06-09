@@ -23,6 +23,7 @@
 			
 			 if(isset($_GET['search']) && $_GET['search'] == true){
 				(isset($_GET['title'])) ? $like['title'] = $_GET['title'] : "";
+				(isset($_GET['domain'])) ? $like['domain'] = $_GET['domain'] : "";
 			} 
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";

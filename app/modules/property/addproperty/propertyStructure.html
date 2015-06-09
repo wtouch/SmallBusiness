@@ -3,9 +3,9 @@
 	<div class="form-group">
 		<label for="buildup_area" class="col-sm-2 control-label">Built Up Area * </label>
 		<div class="col-sm-6">
-			<input type="text"  id="buildup_area" class="form-control help-block" name="buildup_area" ng-model="property.property_info.buildup_area" ng-pattern="/^\d{0,9}[0-9]$/" required>
+			<input type="text" id="buildup_area" class="form-control help-block" name="buildup_area" ng-model="property.property_info.buildup_area" ng-pattern="/^\d{0,9}[0-9]$/" required>
 			
-			<span ng-show="addProperty.buildup_area.$error.pattern && (addProperty.buildup_area.$dirty || submitted)" class="text-danger">Enter only no.</span>
+			<span ng-show="addProperty.buildup_area.$error.pattern && (addProperty.buildup_area.$dirty)" class="text-danger">Enter only no!</span>
 		</div>							
 		<div class="col-sm-3">
 			<select class="form-control" ng-model="property.property_info.build_unit"  title="" required >
@@ -24,7 +24,7 @@
 		<label for="land_area" class="col-sm-2 control-label ">Plot/ Land Area * </label>
 		<div class="col-sm-6">
 			<input type="text" id="land_area" class="form-control" name="land_area" ng-model="property.property_info.land_area"  ng-pattern="/^\d{0,9}[0-9]$/" required>
-			<span class="text-danger" ng-show="addProperty.land_area.$error.pattern && (addProperty.land_area.$dirty || submitted)" class="help-block">Enter only no.</span>
+			<span class="text-danger" ng-show="addProperty.land_area.$error.pattern && (addProperty.land_area.$dirty)" class="help-block">Enter only no.</span>
 		</div>
 		<div class="col-sm-3">
 			<select class="form-control" ng-model="property.property_info.land_unit" required>

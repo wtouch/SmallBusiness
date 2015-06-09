@@ -1,4 +1,4 @@
-	<h3>Property</h3>
+<h3>Property</h3>
 	<!-- This block for current user id -->
 	<div class="form-group" ng-if="userDetails.group_name != 'customer'">
 		<label for="customer" class="col-sm-2 control-label">Customer*</label>
@@ -19,93 +19,91 @@
 	</span> 
 <!-- This block for current user id -->
 		
-		<div class="form-group">
-			<label for="title" class="col-sm-2 control-label">Property Title * </label>
-			<div class="col-sm-9">
-				<input type="text"  id="title" class="form-control" name="title" ng-model="property.title" required>				
-				
-				<span class="text-danger" ng-show="addProperty.title.$dirty && addProperty.title.$invalid">
-					<span ng-show="addProperty.title.$error.required">Title is required .</span>
-				</span>											 
-			</div>				
-		</div>
+	<div class="form-group">
+		<label for="title" class="col-sm-2 control-label">Property Title * </label>
+		<div class="col-sm-9">
+			<input type="text"  id="title" class="form-control" name="title" ng-model="property.title" required>				
+			
+			<span class="text-danger" ng-show="addProperty.title.$dirty && addProperty.title.$invalid">
+				<span ng-show="addProperty.title.$error.required">Title is required .</span>
+			</span>											 
+		</div>				
+	</div>
 		
-		<div class="form-group">
-			<label for="project_name" class="col-sm-2 control-label">Project Name *</label>
-			<div class="col-sm-9">
-				<select class="form-control" id="project_name" name="project_name" ng-model="property.project_name" ng-options="item.title as item.title for item in addProjName" required>
-					<option value="">Select Project Name</option> 
-					<option value="other">other</option>
-				</select>
-				<span class="text-danger" ng-show="addProperty.project_name.$dirty && addProperty.project_name.$invalid">
-					<span ng-show="addProperty.project_name.$error.required">Project Name is required .</span>
-				</span>	
-			</div>
+	<div class="form-group">
+		<label for="project_name" class="col-sm-2 control-label">Project Name *</label>
+		<div class="col-sm-9">
+			<select class="form-control" id="project_name" name="project_name" ng-model="property.project_name" ng-options="item.title as item.title for item in addProjName" required>
+				<option value="">Select Project Name</option> 
+				<option value="other">other</option>
+			</select>
+			<span class="text-danger" ng-show="addProperty.project_name.$dirty && addProperty.project_name.$invalid">
+				<span ng-show="addProperty.project_name.$error.required">Project Name required.</span>
+			</span>	
 		</div>
+	</div>
 	
-		<div class="form-group">
-			<label for="category" class="col-sm-2 control-label">Property Category *</label>
-			<div class="col-sm-3">
-				<select id="category" name="category" ng-model="property.category" class="form-control" required ng-options="item.category_name as item.category_name for item in propertyConfig.category">
-					<option value="">Select Category</option>			
+	<div class="form-group">
+		<label for="category" class="col-sm-2 control-label">Property Category *</label>
+		<div class="col-sm-3">
+			<select id="category" name="category" ng-model="property.category" class="form-control" required ng-options="item.category_name as item.category_name for item in propertyConfig.category">
+				<option value="">Select Category</option>			
+			</select>
+			<span class="text-danger" ng-show="addProperty.category.$dirty && addProperty.category.$invalid">
+				<span ng-show="addProperty.category.$error.required">Property selection is required .</span>
+			</span>				 
+		</div>
+		<label for="type" class="col-sm-2  control-label">Property Type *</label>
+			<div class="col-sm-4">
+				<select  id="type"  name="type" ng-model="property.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types">
+					<option value="">Select Property Type</option>		
 				</select>
-				<span class="text-danger" ng-show="addProperty.category.$dirty && addProperty.category.$invalid">
-					<span ng-show="addProperty.category.$error.required">Property selection is required .</span>
-				</span>				 
+					<span class="text-danger" ng-show="addProperty.type.$dirty && addProperty.type.$invalid">
+						<span ng-show="addProperty.type.$error.required">Project Type is required .</span>
+					</span>	
 			</div>
-			<label for="type" class="col-sm-2  control-label">Property Type *</label>
-				<div class="col-sm-4">
-					<select  id="type"  name="type" ng-model="property.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types">
-						<option value="">Select Property Type</option>		
-					</select>
-						<span class="text-danger" ng-show="addProperty.type.$dirty && addProperty.type.$invalid">
-							<span ng-show="addProperty.type.$error.required">Project Type is required .</span>
-						</span>	
-				</div>
-		</div>
-		
-		<div class="form-group">							
-			<label for="property_for" class="col-sm-2  control-label">Property for *</label>	
-			<div class="col-sm-9"> 
+	</div>
+	
+	<div class="form-group">							
+		<label for="property_for" class="col-sm-2  control-label">Property for *</label>	
+		<div class="col-sm-9"> 
+			<label class="radio-inline">
+				<input type="radio" name="property_for" id="Sale" value="Sale" checked="true" required>Sale
+			</label>
+			<label class="radio-inline">
+			  <input type="radio" name="property_for" id="Rent" value="Rent" ng-model="property.property_for" required> Rent
+			</label>
+			
+			<label class="radio-inline">
+			  <input type="radio" name="property_for" id="PG" value="PG" ng-model="property.property_for" required> PG	
+			</label>										
+		</div>	
+	</div> 	
+	<div class="form-group"> 
+		<label for="featured" class="col-sm-2 control-label">Featured *</label> 
+			<div class="col-sm-9 "  ng-model="property.featured">
 				<label class="radio-inline">
-					<input type="radio" name="property_for" id="Sale" value="Sale" checked="true" required>Sale
+					<input type="radio" name="featured" id="Yes" value="yes" checked="true" required> Yes
 				</label>
 				<label class="radio-inline">
-				  <input type="radio" name="property_for" id="Rent" value="Rent" ng-model="property.property_for" required> Rent
-				</label>
-				
-				<label class="radio-inline">
-				  <input type="radio" name="property_for" id="PG" value="PG" ng-model="property.property_for" required> PG	
-				</label>										
+					<input type="radio" name="featured" id="No" value="No" ng-model="property.featured " required>No
+				</label>								
 			</div>	
-		</div> 	
-
+	</div>
 		
-		<div class="form-group"> 
-			<label for="featured" class="col-sm-2 control-label">Featured *</label> 
-				<div class="col-sm-9 "  ng-model="property.featured">
-					<label class="radio-inline">
-						<input type="radio" name="featured" id="Yes" value="yes" checked="true" required> Yes
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="featured" id="No" value="No" ng-model="property.featured " required>No
-					</label>								
-				</div>	
-		</div>
-		
-		<div class="form-group">
-			<label for="property_description" class="col-sm-2 control-label">Property Discription *</label>
-			<div class="col-sm-9">
-				<textarea type="text" class="form-control" name="property_description" id="property_description" ng-model="property.property_description" cols="30" rows="4" ng-maxlength="1500" required></textarea>
-				
-				<p ng-hide="addProperty.property_description.$error.maxlength">{{ 1500 - property.property_description.length + " Chars left" }}</p>
-				
-				 <span class="text-danger" ng-show="addProperty.property_description.$error.maxlength">
-					Sorry You are Exceeding the Limit
-				</span>	
-				
-				<span class="text-danger" ng-show="addProperty.property_description.$dirty && addProperty.property_description.$invalid">
-					<span ng-show="addProperty.property_description.$error.required">Property Description is required .</span>
-				</span>							
-			</div>				
-		</div><!-- property discription -->						
+	<div class="form-group">
+		<label for="property_description" class="col-sm-2 control-label">Property Discription *</label>
+		<div class="col-sm-9">
+			<textarea type="text" class="form-control" name="property_description" id="property_description" ng-model="property.property_description" cols="30" rows="4" ng-maxlength="1500" required></textarea>
+			
+			<p ng-hide="addProperty.property_description.$error.maxlength">{{ 1500 - property.property_description.length + " Chars left" }}</p>
+			
+			 <span class="text-danger" ng-show="addProperty.property_description.$error.maxlength">
+				Sorry You are Exceeding the Limit
+			</span>	
+			
+			<span class="text-danger" ng-show="addProperty.property_description.$dirty && addProperty.property_description.$invalid">
+				<span ng-show="addProperty.property_description.$error.required">Property Description is required .</span>
+			</span>							
+		</div>				
+	</div>					

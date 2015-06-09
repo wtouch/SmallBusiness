@@ -111,8 +111,6 @@ define(['app'], function (app) {
 				}
 			}); 
 		};    
-		
-		
 		// code to access domain names dynamically
 		$scope.userinfo={user_id:$rootScope.userDetails.id,status :1};
 		dataService.get('getmultiple/website/1/200', $scope.userinfo).then(function(response){
@@ -123,23 +121,7 @@ define(['app'], function (app) {
 				}
 				$scope.domains = domains;
 		});
-		
-		
 /***************************************************************************************/
-		/* $scope.changeStatus = {};
-		$scope.changeStatusFn = function(colName, colValue, id){
-			$scope.changeStatus[colName] = colValue;				
-			//console.log($scope.changeStatus);
-			
-				 dataService.put("put/property/"+id,$scope.changeStatus)			
-				.then(function(response) {					
-					if(colName=='title'){					
-					}
-					$scope.alerts.push({type: response.status,msg: response.message});
-				}); 
-		}		 */
-		
-		
 		// code for filter data as per satus (delete/active)		
 		$scope.changeStatus = function(statusCol, showStatus) {
 			$scope.filterStatus= {};
