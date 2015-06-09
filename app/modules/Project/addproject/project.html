@@ -23,21 +23,19 @@
 	<label  for="projectTitle" class="col-sm-2 control-label">* Project Title</label>
 	<div class="col-sm-9">		
 		<input type="text" id="projectTitle" class="form-control" name="projectTitle" ng-model="project.title" cols="20" rows="4" required />
-		<!-- <p ng-hide="addProject.projectTitle.$error.maxlength">{{ 60 - project.title.length + " Chars left" ng-maxlength="60"}}</p> -->
 			 <span class="text-danger" ng-show="addProject.projectTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
 			<span class="text-danger" ng-show="addProject.projectTitle.$dirty && addProject.projectTitle.$invalid">
 			<span ng-show="addProject.projectTitle.$error.required">Project title is required .</span>
 	</div>
-	<!-- <input type="hidden" ng-model="project.user_id"> -->
 	<input type="hidden" ng-model="project.status">
 	<input type="hidden" ng-model="project.date">
-	</div>
+</div>
 	
 	<div class="form-group">
 		<label for="Category" class="col-sm-2 control-label">* Category</label>
 		<div class="col-sm-4">
-			<select class="form-control" id="Category" name="Category" ng-model="project.category" required ng-change="getTypes(project.category)" ng-options="item.category_name as item.category_name for item in projectConfig.category">		
+			<select class="form-control" id="Category" name="Category" ng-model="project.category" required ng-change="getTypes(project.category)" ng-options="item.category_name as item.category_name for item in projectConfig.category">	
 				<option value="">Select Category</option>
 			</select>
 			<span class="help-block" ng-show="addProject.Category.$dirty && addProject.Category.$invalid">
@@ -106,7 +104,7 @@
 	<div class="form-group">
 		<label for="builderName" class="col-sm-2 control-label">* Builder Name</label>
 			<div class="col-sm-9">
-				<input type="text"  class="form-control" id="builderName" name="builderName" ng-model="project.builder.builder_name" required>
+				<input type="text" class="form-control" id="builderName" name="builderName" ng-model="project.builder.builder_name" required>
 				<span class="text-danger" ng-show="addProject.builderName.$dirty && addProject.builderName.$invalid">
 				<span ng-show="addProject.builderName.$error.required">Builder name is required .</span>
 				</span>

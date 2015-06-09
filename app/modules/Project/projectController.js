@@ -7,7 +7,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 	
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
-		$scope.projectListCurrentPage = 1;
+		$scope.CurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
 		$scope.user_id = {user_id : $rootScope.userDetails.id}; 
@@ -136,7 +136,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		//code for view project details
 		$scope.projectParam = {status : 1};			
 		angular.extend($scope.projectParam,$scope.user_id);
-		dataService.get("/getmultiple/project/"+$scope.projectListCurrentPage+"/"+$scope.pageItems, $scope.projectParam)
+		dataService.get("/getmultiple/project/"+$scope.CurrentPage+"/"+$scope.pageItems, $scope.projectParam)
 		.then(function(response) {  
 			$scope.totalRecords = response.totalRecords;
 			$scope.projects = response.data;
