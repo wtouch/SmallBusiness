@@ -8,7 +8,7 @@ define(['app'], function (app) {
 		// all $scope object goes here
 		$scope.userinfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		$scope.property = { property_images : [],config : { google_map: {}}};
+		$scope.property = { property_images : []};
 		$scope.path = "property";
 		
 		dataService.config('config', {config_name : "property"}).then(function(response){
@@ -127,15 +127,18 @@ define(['app'], function (app) {
 			}			
 	/*********************************************************************/	
 	 //display websites-domain into checkbox $scope.userinfo $routeParams.id
-		dataService.get('getmultiple/website/1/200',$scope.userinfo)
-		.then(function(response) {
-			var websites = [];
-			for(var id in response.data){
-				var obj = {id: response.data[id].id, domain_name : response.data[id].domain_name};
-				websites.push(obj);
-			}
-			$scope.websites = websites;
-		})  
+	 
+		$scope.getWebsitelist = function(user_id){
+			var websiteParams = {user_id : user_id, status : 1};
+			dataService.get('getmultiple/website/1/200', websiteParams).then(function(response){
+				var websites = [];
+				for(var id in response.data){
+					var obj = {id: response.data[id].id, domain_name : response.data[id].domain_name};
+					websites.push(obj);
+				}
+				$scope.websites = websites;
+			}); 
+		};
 		
 		$scope.$watchCollection('websites', function(newNames, oldNames) {	
 		}); 

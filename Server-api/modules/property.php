@@ -27,7 +27,6 @@
 			} 
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";
-			(isset($_GET['domain'])) ? $where['domain'] = $_GET['domain'] : "";
 			
 			$userCols['name'] = "name";
 			$userCols['username'] = "username";

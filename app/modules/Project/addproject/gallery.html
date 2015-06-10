@@ -22,16 +22,16 @@
 	</div>
 </div>
 
-<div class="form-group">{{project.project_gallery.image}}
+<div class="form-group">{{project.project_gallery.gallery_image}}
 	<label for="image" class="col-sm-2 control-label">Gallery Image *</label>
 	<div class="col-sm-9">
-			<input type="file" id="image" name="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="image" />	
+			<input type="file" id="image" name="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="gallery_image" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}"required />	
 		<!-- This will show thumbnails & progress of images -->
-			<file-preview url="image"></file-preview>
+			<file-preview url="gallery_image"></file-preview>
 			<!-- This button will show if file/s selected -->
-			<button ng-show="image" ng-click="upload(image,path,userinfo, project.project_gallery.image)" type="button">Upload</button>
+			<button ng-show="gallery_image" ng-click="upload(gallery_image,path,userInfo, project)" type="button">Upload</button>
 			<!-- This hidden input will store image path in array after successful uploading -->
-			<input type="hidden" ng-model="project.project_gallery.image">
+			<input type="hidden" ng-model="project.project_gallery.gallery_image">
 	</div>
 </div>	
 

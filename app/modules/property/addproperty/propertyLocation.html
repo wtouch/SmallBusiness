@@ -2,12 +2,14 @@
 		<div class="form-group">
 			<label for="address" class="col-sm-2 control-label">Address *</label>
 			<div class="col-sm-9">
-				<textarea type="text"  id="address" class="form-control" name="address" ng-model="property.address" cols="30" rows="4" ng-maxlength="160"  required></textarea>
+				<textarea type="text" id="address" class="form-control" name="address" ng-model="property.address" cols="30" rows="4" ng-maxlength="160"  required></textarea>
 				<p ng-hide="addProperty.address.$error.maxlength">{{ 160 - property.address.length + " Chars left" }}</p>
 				 <span class="text-danger" ng-show="addProperty.address.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="addProperty.address.$dirty && addProperty.address.$invalid">
-				  <span ng-show="addProperty.address.$error.required">Address is required .</span>	 
+					</span>
+					<span ng-show="addProperty.address.$error.required">Address is required .
+					</span>
 			</div>				
 		</div>
 	  

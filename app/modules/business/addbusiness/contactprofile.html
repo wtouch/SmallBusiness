@@ -120,15 +120,34 @@
 	</div>						
 </div>
 <div class="form-group">
+	<label for="alternate_mobile" class="col-sm-3 control-label">Alternate Mobile *</label>
+	<div class="col-sm-9">
+		<input type="text" id="alternate_mobile" name="alternate_mobile" class="form-control" ng-model="addbusiness.contact_profile.alternate_mobile" placeholder="Alternate Mobile No" ng-pattern="/^[789]\d{9}$/" maxlength="10">
+		<span class="help-block" ng-show="businessContactForm.alternate_mobile.$dirty && businessContactForm.alternate_mobile.$invalid">
+			<span ng-show="businessContactForm.alternate_mobile.$error.pattern && (businessContactForm.alternate_mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
+		</span>
+	</div>						
+</div>
+<div class="form-group">
 	<label for="telephone" class="col-sm-3 control-label">Telephone</label>
 	<div class="col-sm-9">
-		<input type="text" id="telephone" name="telephone" class="form-control" ng-model="addbusiness.contact_profile.telephone" placeholder="Enter Telephone" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="12"  ng-minlength="12">
+		<input type="text" id="telephone" name="telephone" class="form-control" ng-model="addbusiness.contact_profile.telephone" placeholder="Enter Telephone" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="15">
 		<span class="help-block" ng-show="businessContactForm.telephone.$dirty && businessContactForm.telephone.$invalid">
 			<span ng-show="businessContactForm.telephone.$error.pattern && (businessContactForm.telephone.$dirty || submitted)" class="text-danger">Enter a valid Telephone</span>
 			<span class="text-danger" ng-show="businessContactForm.telephone.$error.minlength && (businessContactForm.telephone.$dirty || submitted)">Enter Valid Length Of Telephone.</span>
 		</span>
 	</div>						
-</div>	
+</div>
+<div class="form-group">
+	<label for="alternate_telephone" class="col-sm-3 control-label">Alternate Telephone</label>
+	<div class="col-sm-9">
+		<input type="text" id="alternate_telephone" name="alternate_telephone" class="form-control" ng-model="addbusiness.contact_profile.alternate_telephone" placeholder="Enter Telephone" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="15">
+		<span class="help-block" ng-show="businessContactForm.alternate_telephone.$dirty && businessContactForm.alternate_telephone.$invalid">
+			<span ng-show="businessContactForm.alternate_telephone.$error.pattern && (businessContactForm.alternate_telephone.$dirty || submitted)" class="text-danger">Enter a valid Telephone</span>
+			<span class="text-danger" ng-show="businessContactForm.alternate_telephone.$error.minlength && (businessContactForm.alternate_telephone.$dirty || submitted)">Enter Valid Length Of Telephone.</span>
+		</span>
+	</div>						
+</div>		
 <div class="form-group">
 	<label  for="fax" class="col-sm-3 control-label">Fax</label>
 	<div class="col-sm-9">

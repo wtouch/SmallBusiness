@@ -29,7 +29,7 @@
 				
 				<div class="col-sm-2">
 					<label for="status" class="control-label">Select Status</label>
-					<select id="status" class="form-control" ng-model="status" title="status"  ng-change="changeValue('status',status)">
+					<select id="status" class="form-control" ng-model="status" ng-change="changeValue('status',status)">
 						<option value="" selected>Select Status</option> <!-- add value attribute empty & selected for initial selected option -->
 						<option value="1">Active</option>
 						<option value="0">Deleted</option>   
@@ -39,8 +39,8 @@
 				<div class="col-sm-2">
 					<label for="featured" class="control-label">Filter By Featured</label>
 					<select id="featured" class="form-control" ng-model="featured" ng-change="changeValue('featured',featured)">
-						<option value="" selected>Select Featured</option> <!-- added value & selected attr -->
-						<option value="1" >Featured</option>
+						<option value="" selected>Select Featured</option>
+						<option value="1">Featured</option>
 						<option value="0">Not Featured</option> 
 					</select>
 				</div>
@@ -61,16 +61,16 @@
 						<table class="table table-bordered ">
 							<thead>
 								<tr>
-									<th>Sr. No.</th>
+									<th>Sr.No.</th>
 									<th>Image</th>
 									<th>Property Details</th>
 									<th>Other Domains</th>
 									<th>Manage</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody ng-init="getProperty(currentPage)">
 								<tr ng-repeat="x in properties | orderBy:sort">
-									<td>{{((currentPage - 1) * pageItems) + $index + 1}}</td>
+									<td class="col-sm-1">{{((currentPage - 1) * pageItems) + $index + 1}}</td>
 									<td class="col-sm-2">
 									<div class="media-left">
 									<div class="media-object text-center">
@@ -114,7 +114,16 @@
 										</table>
 									</td>	
 								
-									<td class="col-sm-2">{{x.domain}}</td>				
+									<td class="col-sm-2">
+									<ul class="list-unstyled">
+										<li ng-repeat="domain in domains">
+											<label>
+												<input type="checkbox" ng-change="domainUpdate(x.id, x.domain)" checklist-model="x.domain" checklist-value="domain"/ required>
+													{{domain.domain_name}}
+											</label>
+										</li>
+									</ul>
+									</td>
 									<td class="col-sm-3">
 										<div class="btn-group">
 										<button type="button" tooltip="{{dynamicTooltip(x.featured, 'Non Featured', 'Featured')}}" ng-class="(x.featured==1) ? 'btn btn-info' : 'btn btn-danger'" ng-model="x.featured" ng-change="feature(x.id, x.featured)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-star"></span></button>
@@ -138,7 +147,8 @@
 						</table>
 					</div>					
 					<div class="text-center">
-						<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(currentPage,propertyParam)"></pagination>	<pre>Page: {{currentPage}} / {{numPages}}</pre>
+						<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getProperty(currentPage,propertyParam)"></pagination>	
+						<pre>Page: {{currentPage}} / {{numPages}}</pre>
 					</div>
 				</div>
 			</div>

@@ -22,11 +22,7 @@
 					<li role="presentation" ng-class="{active: formPart=='property'}">
 						<a ng-click="showFormPart('property')">Property Information</a>
 					</li>
-					  
-					<!-- <li role="presentation" ng-class="{active:formPart=='property_Information'}">
-						<a ng-click="showFormPart('property_Information')">Property Information</a>
-					</li> -->
-					  
+					
 					<li role="presentation" ng-class="{active: formPart=='propertyStructure'}">
 						<a ng-click="showFormPart('propertyStructure')"> Structure</a>
 					</li>
@@ -45,7 +41,7 @@
 					</li>
 					  
 					<li role="presentation" ng-class="{active: formPart=='amenities'}">
-						<a ng-click="showFormPart('amenities')">Aminities</a>
+						<a ng-click="showFormPart('amenities')">Amenities</a>
 					</li>
 					
 					<li role="presentation" ng-class="{active: formPart=='contactDetails'}">
@@ -57,9 +53,6 @@
 				
 					<ng-include  ng-show="formPart=='property'" src="'modules/property/addproperty/property.html'">
 					</ng-include> 					
-					
-					<!-- <ng-include  ng-show="formPart=='property_Information'" src="'modules/property/addproperty/property_Information.html'">
-					</ng-include> 	 -->				
 					
 					<ng-include  ng-show="formPart=='propertyStructure'" src="'modules/property/addproperty/propertyStructure.html'">
 					</ng-include> 
@@ -78,19 +71,18 @@
 					
 					<ng-include ng-show="formPart=='amenities'" src="'modules/property/addproperty/amenities.html'">
 					</ng-include> 
-					{{property.user_id}}
 					<div class="form-group" ng-if="property.user_id">
 						<div class="col-sm-12">					
 							<h3>Select Sites</h3>
 							<div class="table-responsive" ng-init="getWebsite(userId)">
 								<table class="table table-bordered">
-									<tr>
+									<tr class="clearfix">
 										<td class="checkbox">
 											<label>
 												<input type="checkbox" ng-model="selectAll" ng-change="checkAll(websites, selectAll)" > Select all
 											</label> 
 										</td>
-										<td class="checkbox">
+										<td class="checkbox clearfix">
 											<label ng-repeat="website in websites" class="col-sm-3">
 												<input type="checkbox" checklist-model="property.domain" checklist-value="website"> {{website.domain_name}}
 											</label>
@@ -103,7 +95,7 @@
 						
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-9">
-							<button type="submit" ng-if="!property.id" ng-click="addPropertyFun(property)"  class="btn btn-primary" title="Add new property">Add New Property</button>
+							<button type="submit" ng-if="!property.id" ng-click="addPropertyFun(property)" ng-disabled="addProperty.$Invalid" class="btn btn-primary" title="Add new property">Add New Property</button>
 							
 							<button type="submit" ng-if="property.id" ng-click="update(property)" title="Update your property" class="btn btn-success text-center ">Edit Property</button>
 							<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>

@@ -32,7 +32,7 @@
 				</div>
 				<div class="col-sm-2">
 					<label for="featured" class="control-label">Filter By Featured</label>
-						<select id="featured" class="form-control"  title="Featured" ng-change="changeStatus('featured',showFeatured)" ng-model="showFeatured">
+						<select id="featured" class="form-control" ng-change="changeStatus('featured',showFeatured)" ng-model="showFeatured">
 							<option value="" selected>Select Featured</option>
 							<option value="1" >Featured</option>
 							<option value="0">Not Featured</option> 
@@ -40,7 +40,7 @@
 				</div>
 				<div class="col-sm-2"  ng-init="getWebsitelist()">
 					<label for="domain_name" class="control-label">Select Domain :</label>
-					 <select class="form-control" id="domain_name" name="domain_name" ng-change="changeStatus('domain',showDomain)" ng-model="showDomain" ng-required="true" ng-options="item.domain_name as item.domain_name for item in domains">
+					 <select class="form-control" id="domain_name" name="domain_name" ng-change="searchFilter('domain',showDomain)" ng-model="showDomain" ng-required="true" ng-options="item.domain_name as item.domain_name for item in domains">
 					  <option value="">Select Websites</option> 
 					</select>
 				</div>
@@ -61,9 +61,9 @@
 								</tr>
 							</thead>
 							
-							<tbody>
+							<tbody ng-init="getProject(CurrentPage)">
 								<tr ng-repeat="x in projects | orderBy:title ">
-									<td>{{ $index + 1 }}</td>
+									<td>{{((CurrentPage - 1) * pageItems) + $index + 1}}</td>
 									<td class="col-sm-2">
 									<div class="media-left">
 									<div class="media-object text-center">
@@ -99,7 +99,16 @@
 											</tr>
 										</table>
 									</td>	
-									<td class="col-sm-2">{{x.domain}}</td>					
+									<!-- <td class="col-sm-2">{{x.domain}}</td>	 --><td class="col-sm-2">
+									<ul class="list-unstyled">
+										<li ng-repeat="domain in domains">
+											<label>
+												<input type="checkbox" ng-change="domainUpdate(x.id, x.domain)" checklist-model="x.domain" checklist-value="domain"/ required>
+													{{domain.domain_name}}
+											</label>
+										</li>
+									</ul>
+									</td>				
 									<td class="col-sm-3">
 									<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
 									</button>
@@ -126,8 +135,8 @@
 						</table>
 					</div>
 				<div class="text-center">				
-					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="projectListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(projectListCurrentPage,projectParam)"></pagination>				
-					<pre>Page: {{projectListCurrentPage}} / {{numPages}}</pre>
+					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="CurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getProject(CurrentPage,projectParam)"></pagination>			
+					<pre>Page: {{CurrentPage}} / {{numPages}}</pre>
 				</div>	
 				</div>
 			</div>

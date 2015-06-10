@@ -3,7 +3,7 @@
 	<div class="form-group" ng-if="userDetails.group_name != 'customer'">
 		<label for="customer" class="col-sm-2 control-label">Customer*</label>
 		<div class="col-sm-7">
-				<select class="form-control" name="customer" id="customer"  ng-model="property.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " required>
+				<select class="form-control" name="customer" id="customer"  ng-model="property.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " ng-change="getWebsitelist(property.user_id)" required>
 					<option value="">Select Customer</option>
 				</select>
 			<span class="help-block" ng-show="addProperty.customer.$dirty && addProperty.customer.$invalid">
@@ -15,7 +15,7 @@
 		</div> 
 	</div>
 	<span ng-if="userDetails.group_name == 'customer'">
-		<input type="hidden" class="form-control" ng-model="property.user_id" ng-init="property.user_id = userDetails.id" readonly/>
+		<input type="hidden" class="form-control" ng-model="property.user_id" ng-init="property.user_id = userDetails.id; getWebsitelist(property.user_id)" readonly/>
 	</span> 
 <!-- This block for current user id -->
 		
@@ -25,7 +25,7 @@
 			<input type="text"  id="title" class="form-control" name="title" ng-model="property.title" required>				
 			
 			<span class="text-danger" ng-show="addProperty.title.$dirty && addProperty.title.$invalid">
-				<span ng-show="addProperty.title.$error.required">Title is required .</span>
+				<span ng-show="addProperty.title.$error.required">Property Title is required .</span>
 			</span>											 
 		</div>				
 	</div>
@@ -50,16 +50,16 @@
 				<option value="">Select Category</option>			
 			</select>
 			<span class="text-danger" ng-show="addProperty.category.$dirty && addProperty.category.$invalid">
-				<span ng-show="addProperty.category.$error.required">Property selection is required .</span>
+				<span ng-show="addProperty.category.$error.required">Property category selection required .</span>
 			</span>				 
 		</div>
-		<label for="type" class="col-sm-2  control-label">Property Type *</label>
+		<label for="type" class="col-sm-2 control-label" ng-if="property.category" >Property Type *</label>
 			<div class="col-sm-4">
-				<select  id="type"  name="type" ng-model="property.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types">
+				<select  id="type" ng-if="property.category" name="type" ng-model="property.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types  | filter : {'category_name' : property.category}">
 					<option value="">Select Property Type</option>		
 				</select>
 					<span class="text-danger" ng-show="addProperty.type.$dirty && addProperty.type.$invalid">
-						<span ng-show="addProperty.type.$error.required">Project Type is required .</span>
+						<span ng-show="addProperty.type.$error.required">Project Type selection required .</span>
 					</span>	
 			</div>
 	</div>
@@ -103,7 +103,7 @@
 			</span>	
 			
 			<span class="text-danger" ng-show="addProperty.property_description.$dirty && addProperty.property_description.$invalid">
-				<span ng-show="addProperty.property_description.$error.required">Property Description is required .</span>
+				<span ng-show="addProperty.property_description.$error.required">Property Description required.</span>
 			</span>							
 		</div>				
 	</div>					

@@ -13,7 +13,63 @@ define(['app'], function (app) {
 		dataService.config('config', {config_name : "project"}).then(function(response){
 			$scope.projectConfig = response.config_data;
 		});
+	/********************************************************************/
+		$scope.infra = false;
+		$scope.imgRemoved = false;
 		
+		// Scope  Global methods
+		$scope.showFormPart = function(formPart){
+			$cookieStore.put("projFormPart", formPart);
+			$scope.formPart = $cookieStore.get("projFormPart");
+			$scope.headingDisabled = false;
+			$scope.infra = false;
+		};
+		
+		$scope.addToObject = function(data, object, resetObj){
+			var dtlObj = JSON.stringify(data.desc);
+			object[data.heading] = JSON.parse(dtlObj);
+			$scope.headingDisabled = false;
+			$scope.infra = false;
+			$scope[resetObj] = { desc : { }};
+		}
+		$scope.removeObject = function(key, object){
+			$scope.imgRemoved = true;
+			delete object[key];
+		}
+		$scope.editObject = function(key, object, FormObj){
+			$scope.headingDisabled = true;
+			$scope.imgRemoved = true;
+			var dtlObj = JSON.stringify(object[key]);
+			FormObj['desc'] = JSON.parse(dtlObj);
+			FormObj['heading'] = key;
+		}
+		
+		$scope.showForm = function(obj, resetObj){
+			$scope[obj] = !$scope[obj];
+			if(resetObj){
+				$scope.headingDisabled = false;
+				$scope.imgRemoved = true;
+				$scope[resetObj] = { desc : {}};
+			}
+		}
+		
+		$scope.add = function(project){				
+			dataService.post("post/project/"+$routeParams.id,project)  
+			 .then(function(response) { 
+				if(response.status == 'success'){
+					$scope.submitted = true;
+					if($rootScope.userDetails.config.addprojectDetails != true){
+						dataService.progressSteps('addprojectDetails', true);
+					}
+				}
+				if(response.status == undefined){
+					$notification.error("", response.message);
+				}else{
+					$notification[response.status]("", response.message);
+				}
+			});
+		};
+	/***********************************************************************/
 		$scope.getData = function(location){
 			$scope.readOnly = true;
 			$scope.project.location = location.location;
@@ -40,7 +96,7 @@ define(['app'], function (app) {
 			location_map : {},
 			layout_map : {},
 			floor_plan : {},
-			project_gallery : {imge : [] },
+			project_gallery : {gallery_image : [] },
 			project_images : [] ,
 			created_date : $scope.currentDate,
 			modified_date :$scope.currentDate,
@@ -71,25 +127,19 @@ define(['app'], function (app) {
 			}
 		});
 		
-		$scope.removeObject = function(key, object){
-			$scope.alerts.splice(key, 1);
-		}
-		
-		//add form part to main form object
-			$scope.addToObject = function(data, object){
-				 var dtlObj = JSON.stringify(data);
-				 object.push(JSON.parse(dtlObj));
-			}
-			
-			// this function for uploading files
-			$scope.upload = function(files,path,userinfo, picArr){ 
-				upload.upload(files,path,userinfo,function(data){
-					var picArrKey = 0, x;
-					for(x in picArr) picArrKey++;
+		// this function for uploading files
+			$scope.upload = function(files,path,userInfo, picArr){ 
+				upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
-						//$scope[picArr] = data.data;
+						/* //$scope[picArr] = data.data;
 						picArr.project_gallery.image.push(data.data);
-						console.log($scope[picArr]);
+						console.log($scope[picArr]); */
+						if(picArr == "gallery_image"){
+						$scope.project.project_gallery.gallery_image = data.data;
+						}
+						/* if(picArr == "contact_photo"){
+							$scope.addbusiness.contact_profile.contact_photo = data.data;
+						} */
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});
 					}					
