@@ -22,21 +22,21 @@
 	</div>
 </div>
 
-<div class="form-group">
-	<label for="image" class="col-sm-2 control-label">*  Gallery Image</label>
+<div class="form-group">{{project.project_gallery.image}}
+	<label for="image" class="col-sm-2 control-label">Gallery Image *</label>
 	<div class="col-sm-9">
-			<input type="file" id="image" name="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="image">	
+			<input type="file" id="image" name="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="image" />	
 		<!-- This will show thumbnails & progress of images -->
 			<file-preview url="image"></file-preview>
 			<!-- This button will show if file/s selected -->
-			<button ng-show="image" ng-click="upload(image,path,userinfo, layout_map.description.image)" type="button">Upload</button>
+			<button ng-show="image" ng-click="upload(image,path,userinfo, project.project_gallery.image)" type="button">Upload</button>
 			<!-- This hidden input will store image path in array after successful uploading -->
 			<input type="hidden" ng-model="project.project_gallery.image">
 	</div>
 </div>	
 
 <div class="form-group"> 
-	<label for="galleryDescription" class="col-sm-2 control-label">* Description</label> 
+	<label for="galleryDescription" class="col-sm-2 control-label">Description *</label> 
 	<div class="col-sm-9">
 			<textarea class="form-control" id="galleryDescription"  name="galleryDescription" ng-model="project.project_gallery.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
 		<p ng-hide="addProject.galleryDescription.$error.maxlength">{{ 356 - project.project_gallery.description.length + " Chars left" }}</p>

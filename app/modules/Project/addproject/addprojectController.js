@@ -40,7 +40,7 @@ define(['app'], function (app) {
 			location_map : {},
 			layout_map : {},
 			floor_plan : {},
-			project_gallery : {},
+			project_gallery : {imge : [] },
 			project_images : [] ,
 			created_date : $scope.currentDate,
 			modified_date :$scope.currentDate,
@@ -87,7 +87,8 @@ define(['app'], function (app) {
 					var picArrKey = 0, x;
 					for(x in picArr) picArrKey++;
 					if(data.status === 'success'){
-						$scope[picArr] = data.data;
+						//$scope[picArr] = data.data;
+						picArr.project_gallery.image.push(data.data);
 						console.log($scope[picArr]);
 					}else{
 						$scope.alerts.push({type: response.status, msg: response.message});

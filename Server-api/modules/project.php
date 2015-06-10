@@ -24,12 +24,12 @@
 			
 			if(isset($_GET['search']) && $_GET['search'] == true){
 				(isset($_GET['title'])) ? $like['title'] = $_GET['title'] : "";
-				(isset($_GET['domain'])) ? $like['domain'] = $_GET['domain'] : "";
+				//(isset($_GET['domain'])) ? $like['domain'] = $_GET['domain'] : "";
 			} 
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
 			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";
 			(isset($_GET['domain'])) ? $where['domain'] = $_GET['domain'] : "";
-			((isset($_GET['user_id'])) && ($_GET['user_id']!=="")) ? $where['user_id'] = $_GET['user_id'] : "";		
+			
 			$userCols['name'] = "name";
 			$userCols['username'] = "username";
 			$user = $db->getUsers($userId,$userCols);
@@ -40,7 +40,6 @@
 			$selectInnerJoinCols[0] = "*";
 			$db->setColumns($table, $selectInnerJoinCols);
 			$data = $db->select();
-			
 			echo json_encode($data);
 		}
 	}//end get

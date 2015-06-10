@@ -39,9 +39,8 @@ define(['app'], function (app) {
 			dataService.get("getmultiple/property/"+page+"/"+$scope.pageItems,$scope.propertyParam)
 			.then(function(response) {
 				$scope.properties = response.data;
-				//console.log(response.data);				
 			});			
-		};	//end pagination
+		};	
 		
 		//This code for featured & un-featured button 
 		$scope.feature = function(id, featured){
@@ -53,7 +52,6 @@ define(['app'], function (app) {
 			});
 		};
 			
-		// code for verify button 
 		$scope.verify = function(id, verified){
 			$scope.veryfiedData = {verified : verified};
 			dataService.put("put/property/"+id, $scope.veryfiedData)
@@ -62,8 +60,7 @@ define(['app'], function (app) {
 				$notification[response.status]("Verify Property", response.message);
 			});
 		};	
-			
-		//search filter function
+		
 		$scope.searchFilter = function(statusCol, searchProp) {
 			$scope.search = {search: true};
 			$scope.filterStatus= {};
@@ -182,8 +179,7 @@ define(['app'], function (app) {
 			$scope.propertyParam = {status : 1};			
 			angular.extend($scope.propertyParam,$scope.userInfo);
 			dataService.get("getmultiple/property/1/"+$scope.pageItems, $scope.propertyParam)
-			.then(function(response) { //function for property list response  
-				//console.log(response.data);				
+			.then(function(response) { 				
 					if(response.status == 'success'){
 						$scope.totalRecords = response.totalRecords;
 						$scope.properties = response.data; 					
