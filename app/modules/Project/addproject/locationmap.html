@@ -101,7 +101,7 @@
 	</div>
 		
 	<div class="form-group">
-		<label  for="LocationTitle" class="col-sm-2 control-label">* Title</label>
+		<label  for="LocationTitle" class="col-sm-2 control-label">Title *</label>
 		<div class="col-sm-9">
 			<input type="text"  id="LocationTitle" class="form-control" name="LocationTitle" ng-model="project.location_map.title"  cols="20" rows="4" ng-maxlength="60" required />
 			<p ng-hide="addProject.LocationTitle.$error.maxlength">{{ 60 - project.location_map.title + " Chars left" }}</p>
@@ -113,9 +113,9 @@
 	</div>
 
 	<div class="form-group"> 
-		<label for="LocDiscription" class="col-sm-2 control-label">* Description</label> 
+		<label for="LocDiscription" class="col-sm-2 control-label">Description *</label> 
 		<div class="col-sm-9">
-				<textarea class="form-control" id="LocDiscription"  name="LocDiscription" ng-model="project.location_map.description" cols="20" rows="4" ng-maxlength="356" required ui-tinymce></textarea>
+				<textarea class="form-control" id="LocDiscription"  name="LocDiscription" ng-model="project.location_map.description" cols="20" rows="4" ng-maxlength="356" required></textarea>
 			<p ng-hide="addProject.LocDiscription.$error.maxlength">{{ 356 - project.location_map.description.length + " Chars left" }}</p>
 			 <span class="text-danger" ng-show="addProject.LocDiscription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
@@ -125,7 +125,7 @@
 		</div>
 	</div>	
 	<div class="form-group">{{project.location_map.image}}
-		<label for="image" class="col-sm-2 control-label">*  Location Image</label>
+		<label for="image" class="col-sm-2 control-label">Location Image *</label>
 		<div class="col-sm-9">
 			<input type="file" id="image" name="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="image">	
 			<!-- This will show thumbnails & progress of images -->

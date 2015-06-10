@@ -33,6 +33,7 @@
 <div class="form-group" >
 	<label for="business_logo" class="col-sm-3 control-label">Logo*</label>
 	<div class="col-sm-9">
+	
 		<input class="form-control" type="file" id="business_logo" name="business_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="business_logo" >	
 		<!-- This will show thumbnails & progress of images -->
 			<file-preview url="business_logo"></file-preview>
@@ -43,7 +44,23 @@
 	</div>
 </div>	
 
+<div class="form-group">
+	<label for="tagline" class="col-sm-3 control-label" name="tagline">Tag Line </label>
+		<div class="col-sm-9">
+			<input type="text" class="form-control" id="tagline" name="tagline" ng-model="addbusiness.business_info.tagline" placeholder="Enter TagLine" required />
+			<span class="help-block" ng-show="businessDescForm.tagline.$dirty && businessDescForm.tagline.$invalid">
+			</span>
+		</div>
+</div>
 
+<div class="form-group">
+	<label for="alternate_tagline" class="col-sm-3 control-label" name="alternate_tagline"> Tag Line 2</label>
+		<div class="col-sm-9">
+			<input type="text" class="form-control" id="alternate_tagline" name="alternate_tagline" ng-model="addbusiness.business_info.alternate_tagline" placeholder="Enter TagLine" required />
+			<span class="help-block" ng-show="businessDescForm.alternate_tagline.$dirty && businessDescForm.alternate_tagline.$invalid">
+			</span>
+		</div>
+</div>
 <div class="form-group">
 	<label for="ownership" class="col-sm-3 control-label" name="ownership">Ownership Type*</label>
 	<div class="col-sm-9">

@@ -7,7 +7,7 @@
 </div>
 
 <div class="form-group">
-	<label  for="overviewTitle" class="col-sm-2 control-label">* Title</label>
+	<label  for="overviewTitle" class="col-sm-2 control-label">Title *</label>
 		<div class="col-sm-9">		
 			<input type="text"  id="overviewTitle" class="form-control" name="overviewTitle" ng-model="project.overview.title"  cols="20" rows="4" ng-maxlength="60" required/>
 			<p ng-hide="addProject.overviewTitle.$error.maxlength">{{ 60 - project.overview.title.length + " Chars left" }}</p>
@@ -19,9 +19,9 @@
 </div>
 
 <div class="form-group"> 
-	<label for="overviewDiscription" class="col-sm-2 control-label">* Description</label> 
+	<label for="overviewDiscription" class="col-sm-2 control-label">Description *</label> 
 	<div class="col-sm-9">
-			<textarea class="form-control" id="overviewDiscription"  name="overviewDiscription" ng-model="project.overview.description" cols="20" rows="4" ng-maxlength="356" required ui-tinymce></textarea>
+			<textarea class="form-control" id="overviewDiscription"  name="overviewDiscription" ng-model="project.overview.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
 		<p ng-hide="addProject.overviewDiscription.$error.maxlength">{{ 356 - project.overview.description.length + " Chars left" }}</p>
 				 <span class="text-danger" ng-show="addProject.overviewDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>

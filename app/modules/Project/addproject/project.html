@@ -1,7 +1,7 @@
 <h3>Project Information</h3>
 <!-- This block for current user id -->
 	<div class="form-group" ng-if="userDetails.group_name != 'customer'">
-		<label for="customer" class="col-sm-2 control-label">Customer*</label>
+		<label for="customer" class="col-sm-2 control-label">Customer *</label>
 		<div class="col-sm-7">
 				<select class="form-control" name="customer" id="customer" ng-change="getWebsite(project.user_id)"  ng-model="project.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " required>
 					<option value="">Select Customer</option>
@@ -20,7 +20,7 @@
 <!-- This block for current user id -->
 			
 <div class="form-group">
-	<label  for="projectTitle" class="col-sm-2 control-label">* Project Title</label>
+	<label  for="projectTitle" class="col-sm-2 control-label">Project Title *</label>
 	<div class="col-sm-9">		
 		<input type="text" id="projectTitle" class="form-control" name="projectTitle" ng-model="project.title" cols="20" rows="4" required />
 			<span class="text-danger" ng-show="addProject.projectTitle.$error.maxlength">
@@ -33,7 +33,7 @@
 </div>
 	
 	<div class="form-group">
-		<label for="Category" class="col-sm-2 control-label">* Category</label>
+		<label for="Category" class="col-sm-2 control-label">Category *</label>
 		<div class="col-sm-4">
 			<select class="form-control" id="Category" name="Category" ng-model="project.category" required ng-change="getTypes(project.category)" ng-options="item.category_name as item.category_name for item in projectConfig.category">	
 				<option value="">Select Category</option>
@@ -54,7 +54,7 @@
 		</div>
 		
 		<div class="form-group"> 
-			<label for="featured" class="col-sm-2 control-label">* Featured</label> 
+			<label for="featured" class="col-sm-2 control-label">Featured *</label> 
 			<div class="col-sm-9">
 				<label class="radio-inline" >
 					<input type="radio" name="featured" id="yes" value="1"   ng-model="project.featured" checked> Yes
@@ -85,7 +85,7 @@
 		
 
 	<div class="form-group"> 
-		<label for="projImageDescription" class="col-sm-2 control-label">* Description</label> 
+		<label for="projImageDescription" class="col-sm-2 control-label">Description *</label> 
 			<div class="col-sm-9">
 			<textarea class="form-control" id="projImageDescription"  name="projImageDescription" ng-model="addimage.description.description" cols="20" rows="4" ng-maxlength="356" required></textarea>
 				<p ng-hide="addProject.projImageDescription.$error.maxlength">{{ 356 - addimage.description.description.length + " Chars left" }}</p>
@@ -102,7 +102,7 @@
 	</div>
 		
 	<div class="form-group">
-		<label for="builderName" class="col-sm-2 control-label">* Builder Name</label>
+		<label for="builderName" class="col-sm-2 control-label">Builder Name *</label>
 			<div class="col-sm-9">
 				<input type="text" class="form-control" id="builderName" name="builderName" ng-model="project.builder.builder_name" required>
 				<span class="text-danger" ng-show="addProject.builderName.$dirty && addProject.builderName.$invalid">
@@ -130,7 +130,7 @@
 	</div> -->
 
 	<div class="form-group">
-		<label for="OwnerName" class="col-sm-2 control-label">* Owner Name</label>
+		<label for="OwnerName" class="col-sm-2 control-label">Owner Name *</label>
 			<div class="col-sm-9">
 				<input type="text"  class="form-control" id="OwnerName" name="OwnerName" ng-model="project.builder.owner_name" required>
 					<span class="text-danger" ng-show="addProject.OwnerName.$dirty && addProject.OwnerName.$invalid">
