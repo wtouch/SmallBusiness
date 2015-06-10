@@ -10,10 +10,11 @@ Twig_Autoloader::register();
 $app = new Slim\Slim();
 
 $web = new websiteManager;
-$template = new templateLoader();
-$routes = $web->getRoutes();
 
-foreach($routes['data'] as $routeKey => $routeName){
+/* $template = new templateLoader();
+$routes = $web->getRoutes(); */
+
+/* foreach($routes['data'] as $routeKey => $routeName){
 	if(is_array($routeName)) foreach($routeName as $childRouteKey => $childRouteName){
 		if(is_array($childRouteName)){
 			foreach($childRouteName as $childChildRouteKey => $childChildRouteName){
@@ -34,6 +35,16 @@ foreach($routes['data'] as $routeKey => $routeName){
 		});
 	}
 }
+ */
+
+$app->get('/:page', function() use($app, $config) {
+	
+});
+
+$app->get('/:page/:product/:id', function() use($app, $config) {
+	
+});
+
 
 $app->get('/sitemapdata', function() use($app, $config, $routes, $template) {
 	echo json_encode($template->getSitemap());

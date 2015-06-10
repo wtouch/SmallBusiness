@@ -7,11 +7,21 @@ class websiteManager{
 	private $tempDetails;
 	private $routes;
 	private $business;
+	private $twig;
+	
+	
 	function __construct(){
 		$this->domain = $_SERVER['SERVER_NAME'];
 		$this->db = new dbHelper;
+		
 	}
-
+	
+	function getTemplate($templateFolder){
+		$loader = new Twig_Loader_Filesystem($templateFolder);
+		$this->twig = new Twig_Environment($loader);
+		return $this->twig->loadTemplate($route.".html");
+	}
+	
 	function getConfig(){
 		try{
 			
@@ -61,7 +71,9 @@ class websiteManager{
 		}
 		return $response;
 	}
-	function getTemplate(){
+	
+	
+	/* function getTemplate(){
 		try{
 			$config = $this->getConfig();
 			if($config['status'] == 'success'){
@@ -89,7 +101,7 @@ class websiteManager{
 					//$_SESSION['tempDetails'] = $dbresult;
 				/* }else{
 					$dbresult = $_SESSION['tempDetails'];
-				} */
+				} * /
 				
 				if($dbresult['status'] == "success"){
 					$templateDetails["template_name"] = $dbresult['data']['template_name'];
@@ -111,7 +123,10 @@ class websiteManager{
 			//print_r($response);
 		}
 		return $response;
-	}
+	} */
+	
+	
+	
 	function getBusinessData(){
 		try{
 
@@ -156,6 +171,15 @@ class websiteManager{
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
             $response["data"] = $businessData["data"];
+			
+			$response = $portal->getCategories($city=null);
+			if($response['status'] == "success"){
+				$template = $twig->loadTemplate("home.html");
+			}else{
+				$template = $twig->loadTemplate("error.html");
+			}
+			$template->display($response);
+			
 			
 		}catch(Exception $e){
 			$response["status"] = "error";

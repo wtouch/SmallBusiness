@@ -42,6 +42,7 @@ define(['app'], function (app) {
 		
 			if(response.status == 'success'){
 				$scope.websetting.business_id = response.data.business_id;
+				$scope.websetting.template_id = response.data.template_id;
 				var config = (response.data.config!='') ? (response.data.config) : { google_map : {}};
 				angular.extend($scope.websetting.config,config);
 				if(config.google_map.latitude != undefined && config.google_map.longitude != undefined){
