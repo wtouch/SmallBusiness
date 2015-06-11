@@ -37,8 +37,12 @@ $routes = $web->getRoutes(); */
 }
  */
 
-$app->get('/:page', function() use($app, $config) {
-	
+$app->get('/', function() use($app, $config, $web) {
+	$web->getBusinessData('home');
+});
+
+$app->get('/:page', function($page) use($app, $config, $web) {
+	$web->getBusinessData($page);
 });
 
 $app->get('/:page/:product/:id', function() use($app, $config) {
@@ -46,7 +50,7 @@ $app->get('/:page/:product/:id', function() use($app, $config) {
 });
 
 
-$app->get('/sitemapdata', function() use($app, $config, $routes, $template) {
+$app->get('/sitemapdata', function() use($app, $config, $web) {
 	echo json_encode($template->getSitemap());
 });
 

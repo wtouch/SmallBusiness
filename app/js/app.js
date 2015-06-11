@@ -9,13 +9,14 @@ define(['angular',
 	'directives',
 	'services', 
 	'filters',
+	'ngSortable',
 	'googleMap',
 	'upload','uploadShim',
 	'css!../css/bootstrap.min','css!../css/style'
 ], function(angular, angularRoute, ngCookies) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
-	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps'
+	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps', 'ui.sortable'
 	]);
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
                 '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 'uiGmapGoogleMapApiProvider',

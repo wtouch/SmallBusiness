@@ -1,0 +1,11 @@
+<!--includes/menu-links.html-->
+{% for link in links %}
+	<li class="{{ (link.childMenu) ? 'child-menu' : '' }} {{ link.url == uri ? 'active' : 'not' }} {{uri}}" >
+		<a href="{{ link.url }}">{{ link.name }}</a>
+		{% if link.childMenu %}
+			<ul>
+				{% include "includes/links.html" with {'links': link.childMenu} %}
+			</ul>
+		{% endif %}
+	</li>
+{% endfor %}
