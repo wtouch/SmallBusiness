@@ -11,9 +11,6 @@ define(['app'], function (app) {
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
 		$scope.websetting = {config : { google_map: {}}};
 		
-		$scope.alert = function(item){
-			console.log(item);
-		}
 		$scope.dragControlListeners = {
 			accept: function (sourceItemHandleScope, destSortableScope) {
 				return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
