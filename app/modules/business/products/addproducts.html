@@ -26,8 +26,6 @@
 							<label for="productImages" class="col-sm-2 control-label">Select Image </label>
 							<div class="col-sm-9">
 								<input type="file" id="productImages" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="upload($files,path,userInfo,addproduct.product_image)" ng-model="productImages">
-							
-								<!-- This hidden input will store image path in array after successful uploading -->
 								<input type="hidden" ng-model="addproduct.product_image">
 							</div>
 						</div>
@@ -59,7 +57,6 @@
 								<span class="help-block" ng-show="addproductForm.description.$dirty && addproductForm.description.$invalid">
 									<span class="text-danger" ng-show="addproductForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
 									
-									<!-- <span ng-show="addproductForm.description.$error.required" class="text-danger">Product Description is required.</span> -->
 									<span class="text-danger" ng-show="addproductForm.description.$error.required">Product Description required.</span>
 									
 								</span> 
