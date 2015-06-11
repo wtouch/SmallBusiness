@@ -93,7 +93,7 @@
 						<div class="col-sm-6" ng-init="ind = []">
 						
 						<script type="text/ng-template"  id="tree_item_renderer.html">
-								<span ng-if="data.childMenu" class="caret"></span>
+								
 								<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
 								
 								<span ng-show="!ind[$index + data.url]" as-sortable-item-handle ng-click="ind[$index + data.url] = !ind[$index + data.url]">{{data.name}}</span>
@@ -103,6 +103,8 @@
 								<ul ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
 									<li ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item></li>
 								</ul>
+								
+								<span ng-if="data.childMenu" class="caret"></span>
 						</script>
 
 							<ul as-sortable="dragControlListeners" ng-model="websetting.config.menus">
