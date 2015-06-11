@@ -15,19 +15,24 @@
 					<form name="websettingsForm" class="form-horizontal clearfix" role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">
 						<div class="bottomspace col-sm-6">
 							<div class="form-group">
-								<input type="hidden" ng-model="config.website_id"/>							
-								<label  for="selectbusiness" class="col-sm-2 control-label">Select Business</label>			
-								<div class="col-sm-3">
+								<input type="hidden" ng-model="config.website_id"/>
+								<label for="" class="col-sm-2 control-label"></label>
+								<div class="col-sm-4"> 
+									<div class="bottomspace">
+									<label  for="selectbusiness" class="col-sm-2 control-label">Business</label>
 									<select id="selectBusiness" class="form-control" ng-model="websetting.business_id" ng-options="item.id as item.business_name for item in businessList">
 										<option value="">Select Business</option>
 									</select>
-								</div>							
-								<label  for="selectbusiness" class="col-sm-2 control-label">Select Template</label>				
-								<div class="col-sm-3">
+									</div>
+								</div>
+								<div class="col-sm-4"> 
+									<div class="bottomspace">
+									<label  for="selectbusiness" class="col-sm-2 control-label">Template</label>
 									<select id="selectTemplate" class="form-control" ng-model="websetting.template_id" ng-options="item.id as item.template_name for item in templateList"> 
 										<option value="">Select Template</option>
 									</select>
-								</div>							
+									</div>
+								</div>	
 							</div>
 							
 							<div class="form-group">
@@ -62,27 +67,32 @@
 									</span>
 								</div>					
 							</div>
-							<div class="form-group">	
+							<div class="form-group"> 
 								<div class="col-md-9 col-md-offset-2"><strong>Google Map</strong></div>
-							</div>
-							<div class="form-group">	
-								<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
-									<div class="col-sm-9">
-										<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="websetting.config.google_map.latitude" readonly>
-										<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
-											<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
-										</span>
-									</div>						
-							</div>	
-							<div class="form-group">						
-								<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
-									<div class="col-sm-9">
-										<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="websetting.config.google_map.longitude" readonly >
+							</div> 
+							<div class="form-group">
+							<label for="" class="col-sm-2 control-label"></label>
+								<div class="col-sm-4"> 
+									<div class="bottomspace">
+									<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
+									<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="websetting.config.google_map.latitude" readonly />
+									<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
+										<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
+									</span>
+									</div>
+								</div>
+
+								<div class="col-sm-4"> 
+									<div class="bottomspace">
+									<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
+									<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="websetting.config.google_map.longitude" readonly >
 										<span class="text-danger" ng-show="websettingsForm.Longitude.$dirty && websettingsForm.Longitude.$invalid">
 											<span ng-show="websettingsForm.Longitude.$error.required">Domain Name is required.</span>
 										</span>
-									</div>						
+									</div>
+								</div>									
 							</div>	
+						
 							<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-9">
 									<button type="submit" class="btn btn-primary" ng-disabled="websettingsForm.$dirty && websettingsForm.$invalid" ng-click="editWebsitedetails(websetting)">Update</button>
@@ -100,11 +110,11 @@
 								
 								<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
 								
-								<ul ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
-									<li ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item></li>
+								<ul class="s1" ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
+									<li class="s2" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+									<span ng-if="data.childMenu" class="caret s3"></span>
+									</li>
 								</ul>
-								
-								<span ng-if="data.childMenu" class="caret"></span>
 						</script>
 
 							<ul as-sortable="dragControlListeners" ng-model="websetting.config.menus">
