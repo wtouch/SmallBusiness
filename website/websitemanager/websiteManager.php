@@ -16,10 +16,10 @@ class websiteManager{
 		
 	}
 	
-	function getTemplate($templateFolder){
+	function getTemplate($templateFolder, $page){
 		$loader = new Twig_Loader_Filesystem($templateFolder);
 		$this->twig = new Twig_Environment($loader);
-		return $this->twig->loadTemplate($route.".html");
+		return $this->twig->loadTemplate($page.".html");
 	}
 	
 	function getConfig(){
@@ -71,7 +71,65 @@ class websiteManager{
 		}
 		return $response;
 	}
-	
+	function getBusinessData($page){
+		try{
+			$table = 'website';
+			$where['domain_name'] = $this->domain;
+			$website = $this->db->setTable($table);
+			$this->db->setWhere($where, $website);
+			$this->db->setColumns($website, array("config"=>"web_config"));
+			
+			$selectInnerJoinCols['name'] = "owner_name";
+			$selectInnerJoinCols['email'] = "owner_email";
+			$selectInnerJoinCols['address'] = "owner_address";
+			$selectInnerJoinCols['country'] = "owner_country";
+			$selectInnerJoinCols['state'] = "owner_state";
+			$selectInnerJoinCols['phone'] = "owner_phone";
+			$selectInnerJoinCols['website'] = "owner_website";
+			$selectInnerJoinCols['fax'] = "owner_fax";
+			
+			$users = $this->db->setJoinString("LEFT JOIN","users", array("id"=>$website.".user_id"));
+			$this->db->setColumns($users, $selectInnerJoinCols);
+
+			$business = $this->db->setJoinString("LEFT JOIN","business", array("id"=>$website.".business_id"));
+			//$this->db->setWhere($where, $business);
+			$this->db->setColumns($business, array("*"));
+			
+			
+			$businessData = $this->db->selectSingle();
+			
+			if($businessData['status'] != "success"){
+				throw new Exception("Business DB Table Error: ".$businessData['message']);
+			}
+			
+			$response["status"] = "success";
+            $response["message"] = "Data Selected!";
+            $response["data"] = $businessData["data"];
+            $response["path"] = "http://".$_SERVER['SERVER_NAME']."/website/templates/educational_books/college/";
+			
+			print_r($businessData["data"]['web_config']['menus']);
+			
+            $response["routes"] = $businessData["data"]['web_config']['menus'];
+			
+            $response["uri"] = ($page) ? "/".$page : '/home';
+			
+            $response["pathLink"] = "includes/links.html";
+            
+			//$response["routes"] = array('home', 'about', 'contact',array("product" => array("product/26" => "Product one", "product/25" => "Product Two")));
+			
+			$template = $this->getTemplate($_SERVER['DOCUMENT_ROOT']."/website/templates/educational_books/college/", $page);
+			
+			$template->display($response);
+			
+		}catch(Exception $e){
+			$response["status"] = "error";
+            $response["message"] = $e->getMessage();
+            $response["data"] = null;
+			print_r($response);
+		}
+		
+		return $response;
+	}
 	
 	/* function getTemplate(){
 		try{
@@ -127,68 +185,7 @@ class websiteManager{
 	
 	
 	
-	function getBusinessData(){
-		try{
-
-			$db = new dbHelper;
-			$config = $this->getConfig();
-			if($config['status'] == 'success'){
-				$config = $config['data'];
-			}else{
-				throw new Exception($config['message']);
-			}
-			// get data for view from product table, business table, users table, template table
-			//$where['id'] = $config['website_config']->business_id;
-			
-			if(isset($config['business_id'])) {
-				$where['id'] = $config['business_id'];
-			}else{
-				throw new Exception("Please add website details!");
-			}
-			
-			$table = "business";
-			$t0 = $this->db->setTable($table);
-			$this->db->setWhere($where, $t0);
-			$this->db->setColumns($t0, array("*"));
-			
-			$selectInnerJoinCols['name'] = "owner_name";
-			$selectInnerJoinCols['email'] = "owner_email";
-			$selectInnerJoinCols['address'] = "owner_address";
-			$selectInnerJoinCols['country'] = "owner_country";
-			$selectInnerJoinCols['state'] = "owner_state";
-			$selectInnerJoinCols['phone'] = "owner_phone";
-			$selectInnerJoinCols['website'] = "owner_website";
-			$selectInnerJoinCols['fax'] = "owner_fax";
-			
-			$t1 = $this->db->setJoinString("INNER JOIN","users", array("id"=>$t0.".user_id"));
-			$this->db->setColumns($t1, $selectInnerJoinCols);
-			$businessData = $this->db->selectSingle();
-			
-			if($businessData['status'] != "success"){
-				throw new Exception("Business DB Table Error: ".$businessData['message']);
-			}
-			
-			$response["status"] = "success";
-            $response["message"] = "Data Selected!";
-            $response["data"] = $businessData["data"];
-			
-			$response = $portal->getCategories($city=null);
-			if($response['status'] == "success"){
-				$template = $twig->loadTemplate("home.html");
-			}else{
-				$template = $twig->loadTemplate("error.html");
-			}
-			$template->display($response);
-			
-			
-		}catch(Exception $e){
-			$response["status"] = "error";
-            $response["message"] = $e->getMessage();
-            $response["data"] = null;
-		}
-		//print_r($response);
-		return $response;
-	}
+	
 	
 	function getProductData($routes=null, $featured=null){
 		try{

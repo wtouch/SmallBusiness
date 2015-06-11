@@ -12,8 +12,8 @@
 		<div class="col-sm-12">
 			<div class="bottomspace">
 				<h3 class="text-center">Website Setting</h3>
-					<form name="websettingsForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">				
-						<div class="bottomspace">
+					<form name="websettingsForm" class="form-horizontal clearfix" role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">
+						<div class="bottomspace col-sm-6">
 							<div class="form-group">
 								<input type="hidden" ng-model="config.website_id"/>							
 								<label  for="selectbusiness" class="col-sm-2 control-label">Select Business</label>			
@@ -89,6 +89,22 @@
 									<button type="reset" class="btn btn-danger">Reset</button>
 								</div>
 							</div>		
+						</div>
+						<div class="col-sm-6" ng-init="ind = []">
+						
+						<script type="text/ng-template"  id="tree_item_renderer.html">
+								<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
+								
+								<span ng-show="!ind[$index + data.url]" as-sortable-item-handle ng-click="ind[$index + data.url] = !ind[$index + data.url]">{{data.name}}</span>
+								<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
+								<ul as-sortable="dragControlListeners" ng-model="data.childMenu">
+									<li ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item></li>
+								</ul>
+							</script>
+
+							<ul as-sortable="dragControlListeners" ng-model="websetting.config.menus">
+								<li ng-repeat="data in websetting.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item></li>
+							</ul>
 						</div>
 						<div class="form-group" ng-click="getMapObject()">
 							<div class="col-sm-offset-2 col-sm-9" id="map_canvas">

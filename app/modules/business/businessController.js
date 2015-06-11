@@ -16,6 +16,15 @@ define(['app'], function (app) {
 		$scope.userInfo = {user_id : $rootScope.userDetails.id}; // these are URL parameters
 		$scope.hideDeleted = "";
 		
+		$scope.items = [{business_name : "Vilas Shetkar"},{business_name : "fdfas Shetkar"},{business_name : "Vilas Shetdgdsgkar"},{business_name : "Vilas gsdgd"},{business_name : "fsdfasd Shetkar"}];
+		$scope.sortableOptions = {
+			//containment: '#sortable-container',
+			//restrict move across columns. move only within column.
+			accept: function (sourceItemHandleScope, destSortableScope) {
+			  return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
+			}
+		  };
+		
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
 		};

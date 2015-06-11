@@ -50,8 +50,8 @@
 		</div>
 	</div>
 	<div class="table-responsive">
-		<div class="bottomspace">		
-			<table class="table table-bordered">
+		<div class="bottomspace">
+			<table id="sortable-container" class="table table-bordered" ng-if="bizList">
 				<thead>
 					<th>Sr.No</th>
 					<th>Business Name</th>
@@ -63,9 +63,9 @@
 					<!-- <th ng-if="userDetails.group_name == 'customer'">Verified</th>
 					<th ng-if="userDetails.group_name == 'customer'">Featured</th> -->
 				</thead>
-				<tbody>
-					<tr ng-repeat="x in bizList | orderBy:id | filter: { status : hideDeleted}">
-						<td>{{ ((bizListCurrentPage - 1) * pageItems) + $index + 1 }}</td>
+				<tbody as-sortable="board.dragControlListeners" ng-model="bizList">
+					<tr ng-repeat="x in bizList | orderBy:id | filter: { status : hideDeleted}" as-sortable-item>
+						<td><span as-sortable-item-handle >{{ ((bizListCurrentPage - 1) * pageItems) + $index + 1 }}</span></td>
 						<td>{{x.business_name}}</td>
 						<td>{{x.created_date}}</td>
 						<td>{{x.name}}</td>
