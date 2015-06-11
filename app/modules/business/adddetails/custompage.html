@@ -1,0 +1,148 @@
+	<div class="row">
+		<div class="col-sm-12 text-right"><!--ng-if="!infra"  ng-if="!infra"-->
+			<button  type="button" class="btn btn-default btn-primary" title="next" ng-click="update(businessData)">Save Details</button>
+			<button  class="btn btn-default btn-info" ng-click="showForm('infra', 'custompage')">Add Custom Details</button>
+		</div>
+	</div>
+
+	<form name="customdetailsForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="customdetailsForm.$valid" novalidate="novalidate">
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-9">
+				<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(custom_details, businessData.custom_details, 'custom_details')" ng-disabled="customdetailsForm.$invalid">Add Custom</button>
+				<button ng-if="infra && headingDisabled" class="btn btn-default btn-info" ng-click="addToObject(custom_details, businessData.custom_details, 'custom_details')" title="Edit Custom Page">Edit Details</button>
+				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')"><span ng-show="infra">Cancel</span></button>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  for="date" class="col-sm-3 control-label">Date*</label>
+			<div class="col-sm-9">
+				<p class="input-group">
+			  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="custom_details.desc.date" is-open="custom_detailsdate" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'custom_detailsdate')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="open($event, 'custom_detailsdate')">
+						<i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</p>
+			</div>
+		</div>	
+		<div class="form-group">
+			<label for="details" class="col-sm-3 control-label">custom Details Given By*</label>
+			<div class="col-sm-9">
+				<input type="text" id="details" class="form-control" name="details" placeholder="custom Details Given By" ng-model="custom_details.heading" required ng-disabled="headingDisabled">
+				<span class="help-block" ng-show="customdetailsForm.details.$dirty && customdetailsForm.details.$invalid">
+					<span ng-show="customdetailsForm.details.$error.required" class="text-danger">custom Details required.</span>
+				</span>
+			</div>						
+		</div>
+		
+		<div class="form-group">
+			<label  for="image" class="col-sm-3 control-label">Add Image</label>
+			<div class="col-sm-4">
+				<input type="file" class="form-control" id="image" name="image" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="image"/>
+				
+				<!-- This will show thumbnails & progress of images -->
+				<file-preview url="image"></file-preview>
+				
+				<!-- This button will show if file/s selected -->
+				<button ng-show="image" ng-click="uploadtesti(image,path + businessData.user_id,userInfo, custom_details.image)" type="button">Upload</button>
+				
+				<!-- This hidden input will store image path in array after successful uploading -->
+				<input type="hidden" ng-model="custom_details.desc.image">
+			</div>
+			<div class="col-sm-4">
+				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + custom_details.desc.image.file_relative_path}}" width="150px" />
+			</div>
+		</div>
+		
+		<div class="form-group">	
+			<label  for="email" class="col-sm-3 control-label">Email*</label>	
+			<div class="col-sm-9">
+				<input type="Email" class="form-control" id="email" ng-model="custom_details.desc.email" name="email" placeholder="Enter Email" required >
+				<span class="help-block" ng-show="customdetailsForm.email.$dirty && customdetailsForm.email.$invalid">
+				<span ng-show="customdetailsForm.email.$error.required" class="text-danger">Email is required.</span>
+				<span ng-show="customdetailsForm.email.$error.email" class="text-danger">Invalid Email address.</span>
+				</span>
+			</div>					
+		</div>
+		
+		<div class="form-group">
+			<label for="address" class="col-sm-3 control-label">Address*</label>
+				<div class="col-sm-9">
+					<textarea type="text" class="form-control" id="address" name="address" ng-model="custom_details.desc.address" cols="30" rows="3" ng-maxlength="256" placeholder="Enter address"  required></textarea>
+					<p ng-hide="customdetailsForm.address.$error.maxlength">
+							{{ 256 - custom_details.desc.address.length + " Chars left" }}	</p>
+						<span class="help-block" ng-show="customdetailsForm.address.$dirty && customdetailsForm.address.$invalid">
+							<span ng-show="customdetailsForm.address.$error.maxlength"class="text-danger">Sorry You are Exceeding the Limit</span>
+							<span class="text-danger" ng-show="customdetailsForm.address.$error.required">Address is required.</span>
+						</span>					
+				</div>
+		</div>	
+
+		<div class="form-group">
+			<label for="phone" class="col-sm-3 control-label">Phone*</label>
+			<div class="col-sm-9">
+				<input type="text" id="phone" name="phone" class="form-control" ng-model="custom_details.desc.phone" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+				<span class="help-block" ng-show="customdetailsForm.phone.$dirty && customdetailsForm.phone.$invalid">
+					<span ng-show="customdetailsForm.phone.$error.pattern && (customdetailsForm.phone.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
+				</span>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="test_Description" class="col-sm-3 control-label">Testimonial Description*</label>
+			<div class="col-sm-9">
+				<textarea type="text" class="form-control" id="test_Description" name="test_Description" ng-model="custom_details.desc.description" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
+				<p ng-hide="customdetailsForm.test_Description.$error.maxlength">{{ 1500 - custom_details.desc.description.length + " Chars left" }}</p>
+				<span class="help-block" ng-show="customdetailsForm.test_Description.$dirty && customdetailsForm.test_Description.$invalid">
+					<span class="text-danger" ng-show="customdetailsForm.test_Description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span ng-show="customdetailsForm.test_Description.$error.required" class="text-danger">Testimonial Description is required.</span>
+				</span>	
+			</div>
+		</div>
+	</form>
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="table-responsive">
+				<table class="table table-bordered" ng-if="businessData.custom_details">
+					<tr>
+						<th>Testimonial Title</th>
+						<th>Image</th>
+						<th>Testimonial Description</th>
+						<th>Remove </th>
+					</tr>
+					<tr ng-repeat="(key, value) in businessData.custom_details">
+						<td>{{key}}</td>
+						<td>
+							<ul class="list-unstyled">
+								<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" />
+							</ul>
+						</td>
+						<td class="tdwidth">
+							<table class="table pull-left">
+								<tr>
+									<td>Date</td>
+									<td>{{value.date}}</td>
+								</tr>
+								<tr>
+									<td>Description</td>
+									<td>
+										<div class="pull-left" ng-bind-html="value.description"></div>
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</td>
+						<td>
+							<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.custom_details, custom_details); showForm('infra')" tooltip="Edit Details"></button>
+							
+							<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.custom_details)" tooltip="Remove"></button>
+						</td>
+					</tr> 				
+				</table>
+			</div>
+		</div>
+	</div>

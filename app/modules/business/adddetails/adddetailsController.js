@@ -33,11 +33,10 @@ define(['app'], function (app) {
 		$scope.news_coverage = { desc : {  }};
 		$scope.job_careers = { desc : {  }};
 		$scope.gallery = { desc : {  }};
-		//$scope.today();
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
-		//code for accessing json data of business	
 		$scope.biz = {};
+		
 		dataService.config('config', {config_name : "business"}).then(function(response){
 			$scope.biz = response.config_data;
 		});
@@ -55,16 +54,14 @@ define(['app'], function (app) {
 			$event.stopPropagation();
 			$scope.selectDate = ($scope.selectDate==true)?false:true;
 		};
-		// config data for business form
+		
 		$scope.biz = dataService.config.business;
 		
-		// Add Business multi part form show/hide operation from here!
 		$scope.formPart = ($cookies.bizFormPart) ? $cookieStore.get("bizFormPart") : 'infrastructure';
 		
 		$scope.infra = false;
 		$scope.imgRemoved = false;
 		
-		// Scope  Global methods
 		$scope.showFormPart = function(formPart){
 			$cookieStore.put("bizFormPart", formPart);
 			$scope.formPart = $cookieStore.get("bizFormPart");
@@ -101,7 +98,6 @@ define(['app'], function (app) {
 			}
 		}
 		
-		//Upload Functions for uploading files 
 		$scope.upload = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
@@ -111,6 +107,7 @@ define(['app'], function (app) {
 					}
 			}); 
 		}; 
+		
 		$scope.uploadtesti = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
@@ -140,12 +137,11 @@ define(['app'], function (app) {
 					}
 			}); 
 		}; 
-		// to generate thumbnail of image
+		
 		$scope.generateThumb = function(files){ 
 			upload.generateThumbs(files);
 		};
 			
-		//Update business form code here
 		$scope.update = function(businessData){				
 			dataService.put("put/business/"+ $scope.business_id, businessData)  
 			 .then(function(response) { 

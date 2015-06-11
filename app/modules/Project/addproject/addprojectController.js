@@ -4,7 +4,24 @@ define(['app'], function (app) {
     // This is controller for this view
 	var addprojectController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification) {
 		$rootScope.metaTitle = "Add Real Estate Property";
-		
+		$scope.project = {
+			featured : 0,
+			builder :{},
+			overview : {},
+			amenities : {},
+			specifications : {},
+			location_map : [],
+			layout_map : [],
+			floor_plan : [],
+			project_gallery : [],
+			project_images : [],
+			created_date : $scope.currentDate,
+			modified_date :$scope.currentDate,
+		};
+		$scope.location_map = {};
+		$scope.layout_map = {};
+		$scope.floor_plan = {};
+		$scope.project_gallery = {};
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		//$scope.project = { project_images : [] };
@@ -14,18 +31,28 @@ define(['app'], function (app) {
 			$scope.projectConfig = response.config_data;
 		});
 	/********************************************************************/
-		
+		$scope.edit = false;
 		$scope.addToObject = function(data, object, resetObj){
+			$scope.infra = false;
+			if($scope.edit == true){
+				$scope[resetObj] = {};
+				$scope.edit = false;
+				return true;
+			}
 			var dtlObj = JSON.stringify(data);
-			object.push = JSON.parse(dtlObj);
-			$scope[resetObj] = { desc : { }};
+			object.push(JSON.parse(dtlObj));
+			$scope[resetObj] = {};
+			
 		}
+		
 		$scope.removeObject = function(key, object){
 			delete object[key];
 		}
 		$scope.editObject = function(object, FormObj){
+			$scope.edit = true;
+			console.log(FormObj);
 			var dtlObj = JSON.stringify(object);
-			FormObj = JSON.parse(dtlObj);
+			$scope[FormObj] = object;
 		}
 		
 		$scope.showForm = function(obj, resetObj){
@@ -70,21 +97,6 @@ define(['app'], function (app) {
 				return response;
 			});
 		}
-	/**************************************************************************************/
-		$scope.project = {
-			featured : 0,
-			builder :{},
-			overview : {},
-			amenities : {},
-			specifications : {},
-			location_map : {},
-			layout_map : {},
-			floor_plan : {},
-			project_gallery : {gallery_image : [] },
-			project_images : [] ,
-			created_date : $scope.currentDate,
-			modified_date :$scope.currentDate,
-		};
 	/**********************************************************************************/	
 		$scope.uploadMultiple = function(files,path,userinfo, picArr){
 			upload.upload(files,path,userinfo,function(data){
@@ -115,17 +127,10 @@ define(['app'], function (app) {
 			$scope.upload = function(files,path,userInfo, picArr){ 
 				upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
-						/* //$scope[picArr] = data.data;
-						picArr.project_gallery.image.push(data.data);
-						console.log($scope[picArr]); */
-						if(picArr == "gallery_image"){
-						$scope.project.project_gallery.gallery_image = data.data;
-						}
-						/* if(picArr == "contact_photo"){
-							$scope.addbusiness.contact_profile.contact_photo = data.data;
-						} */
+						$scope[picArr].image = data.data.file_relative_path;
 					}else{
-						$scope.alerts.push({type: response.status, msg: response.message});
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Upload Image", response.message);
 					}					
 				}); 
 			};  

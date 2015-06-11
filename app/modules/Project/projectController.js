@@ -122,7 +122,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			dataService.put("put/project/"+id, $scope.domainData)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.getProject($scope.currentPage);
+					$scope.getProject($scope.CurrentPage);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Update Property", response.message);
