@@ -100,7 +100,7 @@
 								</div>
 							</div>		
 						</div>
-						<div class="col-sm-6" ng-init="ind = []">
+						<div class="col-sm-3" ng-init="ind = []">
 						
 						<script type="text/ng-template"  id="tree_item_renderer.html">
 								
@@ -114,13 +114,25 @@
 									<li class="s2" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
 									<span ng-if="data.childMenu" class="caret s3"></span>
 									</li>
-								</ul>
+								</ul>  
+								<!-- <ul class="list-group" ng-if="data.childMenu" ng-model="data.childMenu">
+									<li class="list-group-item">
+										<span class="badge">14</span>
+										Cras justo odio{{data.childMenu}}
+									</li>
+								</ul>  -->
 						</script>
 
 							<ul as-sortable="dragControlListeners" ng-model="websetting.config.menus">
 								<li ng-repeat="data in websetting.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item ></li>
-							</ul>
+							</ul> 
 						</div>
+						
+						<div class="col-sm-3">
+							Social Links
+						</div>
+						
+						
 						<div class="form-group" ng-click="getMapObject()">
 							<div class="col-sm-offset-2 col-sm-9" id="map_canvas">
 								<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" control="googleMap">
@@ -131,6 +143,7 @@
 						</div>
 					</form>
 			</div>
+			
 		</div> 
 	</div>	
 </div>
