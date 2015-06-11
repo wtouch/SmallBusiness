@@ -1,9 +1,10 @@
+<form class="form-horizontal" name="locationForm" ng-submit="locationForm.$valid" novalidate="novalidate">
  <h3>Project Location:</h3>		
 		<div class="form-group">
 			<label for="address" class="col-sm-2 control-label">Address *</label>
 			<div class="col-sm-9">
-				<textarea type="text"  id="address" class="form-control" name="address" ng-model="project.address" cols="30" rows="4" ng-maxlength="356"  required></textarea>
-				<p ng-hide="addProject.address.$error.maxlength">{{ 356 - project.address.length + " Chars left" }}</p>
+				<textarea type="text" id="address" class="form-control" name="address" ng-model="project.address" cols="30" rows="4" ng-maxlength="160" required></textarea>
+				<p ng-hide="locationForm.address.$error.maxlength">{{ 160 - project.address.length + " Chars left" }}</p>
 				 <span class="text-danger" ng-show="addProperty.address.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="addProperty.address.$dirty && addProperty.address.$invalid">
@@ -53,3 +54,5 @@
 		<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="project.pincode" placeholder="Enter Pin Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
 	</div>		
 </div>					
+	<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="locationForm.$invalid" ng-click="showFormPart('specification',1)">Next</button>
+</form>

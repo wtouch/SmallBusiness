@@ -1,3 +1,4 @@
+<form class="form-horizontal" name="floorplanForm" ng-submit="floorplanForm.$valid" novalidate="novalidate">
 <h3>Floor Plans</h3>
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
@@ -7,20 +8,19 @@
 
 <div>
 	<input type="hidden" required name="floor_plan" ng-model="project.floor_plan" />
-	<span class="help-block" ng-show="addProject.floor_plan.$dirty && addProject.floor_plan.$invalid">
-		<span ng-show="addProject.floor_plan.$error.required" class="text-danger">Floor Plan Description is required.</span>
+	<span class="help-block" ng-show="floorplanForm.floor_plan.$dirty && floorplanForm.floor_plan.$invalid">
+		<span ng-show="floorplanForm.floor_plan.$error.required" class="text-danger">Floor Plan Description is required.</span>
 	</span>
 </div>
 
 <div class="form-group">
 		<label  for="floorTitle" class="col-sm-2 control-label">Title *</label>
 		<div class="col-sm-9">		
-			<input type="text"  id="floorTitle" class="form-control" name="floorTitle" ng-model="project.floor_plan.title"    cols="20" rows="4" ng-maxlength="60" required />
-			<p ng-hide="addProject.floorTitle.$error.maxlength">{{ 60 - project.floor_plan.title + " Chars left" }}</p>
-				 <span class="text-danger" ng-show="addProject.floorTitle.$error.maxlength">
+			<input type="text"  id="floorTitle" class="form-control" name="floorTitle" ng-model="project.floor_plan.title"    cols="20" rows="4" required />
+				 <span class="text-danger" ng-show="floorplanForm.floorTitle.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="addProject.floorTitle.$dirty && addProject.floorTitle.$invalid">
-				  <span ng-show="addProject.floorTitle.$error.required"> title is required .</span>
+					<span class="text-danger" ng-show="floorplanForm.floorTitle.$dirty && floorplanForm.floorTitle.$invalid">
+				  <span ng-show="floorplanForm.floorTitle.$error.required"> title is required .</span>
 		</div>
 </div>
 
@@ -40,16 +40,18 @@
 <div class="form-group"> 
 	<label for="floorDescription" class="col-sm-2 control-label">Description *</label> 
 		<div class="col-sm-9">
-				<textarea class="form-control" id="floorDescription"  name="floorDescription" ng-model="project.floor_plan.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-			<p ng-hide="addProject.floorDescription.$error.maxlength">{{ 356 - project.floor_plan.description.length + " Chars left" }}</p>
-			 <span class="text-danger" ng-show="addProject.floorDescription.$error.maxlength">
+				<textarea class="form-control" id="floorDescription"  name="floorDescription" ng-model="project.floor_plan.description" cols="20" rows="4" ng-maxlength="500" required ></textarea>
+			<p ng-hide="floorplanForm.floorDescription.$error.maxlength">{{ 500 - project.floor_plan.description.length + " Chars left" }}</p>
+			 <span class="text-danger" ng-show="floorplanForm.floorDescription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
-			<span class="text-danger" ng-show="addProject.floorDescription.$dirty && addProject.floorDescription.$invalid">
-					<span ng-show="addProject.floorDescription.$error.required"> Description is required .</span>
+			<span class="text-danger" ng-show="floorplanForm.floorDescription.$dirty && floorplanForm.floorDescription.$invalid">
+					<span ng-show="floorplanForm.floorDescription.$error.required"> Description is required .</span>
 			</span>
 		</div>
 </div>	
 
+	<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="floorplanForm.$invalid" ng-click="showFormPart('gallery',1)">Next</button>
+	
 <div>
 	<div class="table-responsive">{{project.floor_plan}}
 		<table class="table table-bordered " >
@@ -70,3 +72,4 @@
 		</table>
 	</div>
 </div>
+</form>

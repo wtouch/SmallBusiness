@@ -1,3 +1,4 @@
+<form class="form-horizontal" name="projectForm" ng-submit="projectForm.$valid" novalidate="novalidate">
 <h3>Project Information</h3>
 <!-- This block for current user id -->
 	<div class="form-group" ng-if="userDetails.group_name != 'customer'">
@@ -6,8 +7,8 @@
 				<select class="form-control" name="customer" id="customer" ng-change="getWebsite(project.user_id)"  ng-model="project.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " required>
 					<option value="">Select Customer</option>
 				</select>
-			<span class="help-block" ng-show="addProject.customer.$dirty && addProject.customer.$invalid">
-				<span ng-show="addProject.customer.$error.required" class="text-danger">Customer is required.</span>
+			<span class="help-block" ng-show="projectForm.customer.$dirty && projectForm.customer.$invalid">
+				<span ng-show="projectForm.customer.$error.required" class="text-danger">Customer is required.</span>
 			</span>	
 		</div>
 		<div class="col-sm-3">
@@ -23,10 +24,10 @@
 	<label  for="projectTitle" class="col-sm-2 control-label">Project Title *</label>
 	<div class="col-sm-9">		
 		<input type="text" id="projectTitle" class="form-control" name="projectTitle" ng-model="project.title" cols="20" rows="4" required />
-			<span class="text-danger" ng-show="addProject.projectTitle.$error.maxlength">
+			<span class="text-danger" ng-show="projectForm.projectTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
-				<span class="text-danger" ng-show="addProject.projectTitle.$dirty && addProject.projectTitle.$invalid">
-			<span ng-show="addProject.projectTitle.$error.required">Project title is required .</span>
+				<span class="text-danger" ng-show="projectForm.projectTitle.$dirty && projectForm.projectTitle.$invalid">
+			<span ng-show="projectForm.projectTitle.$error.required">Project title is required .</span>
 	</div>
 	<input type="hidden" ng-model="project.status">
 	<input type="hidden" ng-model="project.date">
@@ -38,8 +39,8 @@
 			<select class="form-control" id="Category" name="Category" ng-model="project.category" required ng-change="getTypes(project.category)" ng-options="item.category_name as item.category_name for item in projectConfig.category">	
 				<option value="">Select Category</option>
 			</select>
-			<span class="help-block" ng-show="addProject.Category.$dirty && addProject.Category.$invalid">
-				<span class="text-danger" ng-show="addProject.Category.$error.required">Category is required.</span>
+			<span class="help-block" ng-show="projectForm.Category.$dirty && projectForm.Category.$invalid">
+				<span class="text-danger" ng-show="projectForm.Category.$error.required">Category is required.</span>
 			</span>				
 		</div>
 		<label for="projectType" ng-if="project.category" class="col-sm-1 control-label">* Type</label>
@@ -47,8 +48,8 @@
 				<select class="form-control" ng-if="project.category"id="projectType" name="projectType" ng-model="project.type" required ng-options="item.category_name as item.type for item in projectConfig.types | filter : {'category_name' : project.category}">	{{item.types}}	
 					<option value="">Select Project Type</option>
 				</select>
-				<span class="help-block" ng-show="addProject.projectType.$dirty && addProject.projectType.$invalid">
-					<span class="text-danger" ng-show="addProject.projectType.$error.required">Project Type is required.</span>
+				<span class="help-block" ng-show="projectForm.projectType.$dirty && projectForm.projectType.$invalid">
+					<span class="text-danger" ng-show="projectForm.projectType.$error.required">Project Type is required.</span>
 				</span>				
 			</div>				
 		</div>
@@ -88,16 +89,16 @@
 		<label for="projImageDescription" class="col-sm-2 control-label">Description *</label> 
 			<div class="col-sm-9">
 			<textarea class="form-control" id="projImageDescription"  name="projImageDescription" ng-model="addimage.description.description" cols="20" rows="4" ng-maxlength="356" required></textarea>
-				<p ng-hide="addProject.projImageDescription.$error.maxlength">{{ 356 - addimage.description.description.length + " Chars left" }}</p>
-					<span class="text-danger" ng-show="addProject.projImageDescription.$error.maxlength">
+				<p ng-hide="projectForm.projImageDescription.$error.maxlength">{{ 356 - addimage.description.description.length + " Chars left" }}</p>
+					<span class="text-danger" ng-show="projectForm.projImageDescription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="addProject.projImageDescription.$dirty && 	addProject.projImageDescription.$invalid">
-					<span ng-show="addProject.projImageDescription.$error.required"> Description is required .</span>
+					<span class="text-danger" ng-show="projectForm.projImageDescription.$dirty && 	projectForm.projImageDescription.$invalid">
+					<span ng-show="projectForm.projImageDescription.$error.required"> Description is required .</span>
 					</span>
 			</div>
 			<input type="hidden" required name="project_images" ng-model="project.project_images" />
-				<span class="help-block" ng-show="addProject.project_images.$dirty && addProject.project_images.$invalid">
-				<span ng-show="addProject.project_images.$error.required" class="text-danger">Project Images Description is required.</span>
+				<span class="help-block" ng-show="projectForm.project_images.$dirty && projectForm.project_images.$invalid">
+				<span ng-show="projectForm.project_images.$error.required" class="text-danger">Project Images Description is required.</span>
 				</span>
 	</div>
 		
@@ -105,8 +106,8 @@
 		<label for="builderName" class="col-sm-2 control-label">Builder Name *</label>
 			<div class="col-sm-9">
 				<input type="text" class="form-control" id="builderName" name="builderName" ng-model="project.builder.builder_name" required>
-				<span class="text-danger" ng-show="addProject.builderName.$dirty && addProject.builderName.$invalid">
-				<span ng-show="addProject.builderName.$error.required">Builder name is required .</span>
+				<span class="text-danger" ng-show="projectForm.builderName.$dirty && projectForm.builderName.$invalid">
+				<span ng-show="projectForm.builderName.$error.required">Builder name is required .</span>
 				</span>
 			</div>	
 	</div>
@@ -133,8 +134,32 @@
 		<label for="OwnerName" class="col-sm-2 control-label">Owner Name *</label>
 			<div class="col-sm-9">
 				<input type="text"  class="form-control" id="OwnerName" name="OwnerName" ng-model="project.builder.owner_name" required>
-					<span class="text-danger" ng-show="addProject.OwnerName.$dirty && addProject.OwnerName.$invalid">
-					<span ng-show="addProject.OwnerName.$error.required">Owner name is required .</span>
+					<span class="text-danger" ng-show="projectForm.OwnerName.$dirty && projectForm.OwnerName.$invalid">
+					<span ng-show="projectForm.OwnerName.$error.required">Owner name is required .</span>
 					</span>
 			</div>	
 	</div>
+	<div class="form-group" ng-if="project.user_id">
+						<div class="col-sm-12">					
+							<h3>Select Sites</h3>
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<tr>
+										<td class="checkbox">
+											<label>
+												<input type="checkbox" ng-model="selectAll" ng-change="checkAll(websites, selectAll)" /> Select all
+											</label> 
+										</td>
+										<td class="checkbox clearfix">
+											<label ng-repeat="website in websites" class="col-sm-3">
+												<input type="checkbox" checklist-model="project.domain" checklist-value="website"> {{website.domain_name}}
+											</label>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+	
+	<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="projectForm.$invalid" ng-click="showFormPart('overview',1)">Next</button>
+</form>

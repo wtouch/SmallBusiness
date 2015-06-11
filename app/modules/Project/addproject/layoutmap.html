@@ -1,3 +1,4 @@
+<form class="form-horizontal" name="layoutmapForm" ng-submit="layoutmapForm.$valid" novalidate="novalidate">
 <h3>Layout Map</h3>
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
@@ -7,20 +8,19 @@
 
 <div>
 	<input type="hidden" required name="layout_map" ng-model="project.layout_map" />
-	<span class="help-block" ng-show="addProject.layout_map.$dirty && addProject.layout_map.$invalid">
-		<span ng-show="addProject.layout_map.$error.required" class="text-danger">location_map Description is required.</span>
+	<span class="help-block" ng-show="layoutmapForm.layout_map.$dirty && layoutmapForm.layout_map.$invalid">
+		<span ng-show="layoutmapForm.layout_map.$error.required" class="text-danger">location_map Description is required.</span>
 	</span>
 </div>
 
 <div class="form-group">
 	<label  for="layoutTitle" class="col-sm-2 control-label">Title *</label>
 	<div class="col-sm-9">		
-		<input type="text"  id="layoutTitle" class="form-control" name="layoutTitle" ng-model="project.layout_map.title"    cols="20" rows="4" ng-maxlength="60" required />
-		<p ng-hide="addProject.title.$error.maxlength">{{ 60 - project.layout_map.title + " Chars left" }}</p>
-			 <span class="text-danger" ng-show="addProject.layoutTitle.$error.maxlength">
+		<input type="text"  id="layoutTitle" class="form-control" name="layoutTitle" ng-model="project.layout_map.title"    cols="20" rows="4" required />
+			 <span class="text-danger" ng-show="layoutmapForm.layoutTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
-				<span class="text-danger" ng-show="addProject.layoutTitle.$dirty && addProject.layoutTitle.$invalid">
-			  <span ng-show="addProject.layoutTitle.$error.required"> title is required .</span>
+				<span class="text-danger" ng-show="layoutmapForm.layoutTitle.$dirty && layoutmapForm.layoutTitle.$invalid">
+			  <span ng-show="layoutmapForm.layoutTitle.$error.required"> title is required .</span>
 	</div>
 </div>
 
@@ -40,17 +40,18 @@
 <div class="form-group"> 
 	<label for="layoutDiscription" class="col-sm-2 control-label">Description *</label> 
 	<div class="col-sm-9">
-			<textarea class="form-control" id="layoutDiscription"  name="layoutDiscription" ng-model="project.layout_map.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.layoutDiscription.$error.maxlength">{{ 356 - project.layout_map.description.length + " Chars left" }}</p>
-		 <span class="text-danger" ng-show="addProject.layoutDiscription.$error.maxlength">
+			<textarea class="form-control" id="layoutDiscription"  name="layoutDiscription" ng-model="project.layout_map.description" cols="20" rows="4" ng-maxlength="500" required ></textarea>
+		<p ng-hide="layoutmapForm.layoutDiscription.$error.maxlength">{{ 500 - project.layout_map.description.length + " Chars left" }}</p>
+		 <span class="text-danger" ng-show="layoutmapForm.layoutDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
-		<span class="text-danger" ng-show="addProject.layoutDiscription.$dirty && addProject.layoutDiscription.$invalid">
-				<span ng-show="addProject.layoutDiscription.$error.required"> Description is required .</span>
+		<span class="text-danger" ng-show="layoutmapForm.layoutDiscription.$dirty && layoutmapForm.layoutDiscription.$invalid">
+				<span ng-show="layoutmapForm.layoutDiscription.$error.required"> Description is required .</span>
 		</span>
 	</div>
 </div>	
 
-<div>
+<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="layoutmapForm.$invalid" ng-click="showFormPart('floorplan',1)">Next</button>
+
 	<div class="table-responsive">{{project.layout_map}}
 		<table class="table table-bordered " >
 			<tr>
@@ -69,4 +70,5 @@
 			</tr>
 		</table>
 	</div>
-</div>
+
+</form>

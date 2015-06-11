@@ -1,25 +1,26 @@
+<form class="form-horizontal" name="contactForm" ng-submit="contactForm.$valid" novalidate="novalidate">
 <h3>Contact Details</h3>
 <div class="form-group">
 	<label for="personName" class="col-sm-2 control-label">Person Name *</label>
 	<div class="col-sm-9">
 		<input type="text" class="form-control" id="personName" ng-model="project.contact_details.name" name="personName" placeholder="Enter Your Name" ng-required="true">	
-			<span class="text-danger" ng-show="addProject.personName.$error.required && (addProject.personName.$dirty)" class="help-block">Name is required.</span>						
+			<span class="text-danger" ng-show="contactForm.personName.$error.required && (contactForm.personName.$dirty)" class="help-block">Name is required.</span>						
 	</div>						
 </div>	
 <div class="form-group">
 	<label for="Phone" class="col-sm-2 control-label">Mobile</label>
 	<div class="col-sm-9">
 		<input type="text" class="form-control help-block" id="Phone" ng-model="project.contact_details.phone" name="Phone" placeholder="Your Phone number"  ng-pattern="/(7|8|9)\d{9}$/" maxlength="10"  required >							
-		<p ng-show="addProject.Phone.$error.pattern && (addProject.Phone.$dirty || submitted)" class="text-danger" >Enter a valid contact no.</p>
+		<p ng-show="contactForm.Phone.$error.pattern && (contactForm.Phone.$dirty || submitted)" class="text-danger" >Enter a valid contact no.</p>
 	</div>						
 </div>	
 <div class="form-group">
 	<label for="Email" class="col-sm-2 control-label">Email ID *</label>
 	<div class="col-sm-9">
 		<input type="email" class="form-control" id="Email" name="Email" placeholder="example@gmail.com" ng-model="project.contact_details.email" required>
-		<span  ng-show="addProject.Email.$dirty && addProject.Email.$invalid">
-			<span class="text-danger" ng-show="addProject.Email.$error.required">Email is required.</span>
-			<span class="text-danger" ng-show="addProject.Email.$error.email">Invalid Email address.</span>
+		<span  ng-show="contactForm.Email.$dirty && contactForm.Email.$invalid">
+			<span class="text-danger" ng-show="contactForm.Email.$error.required">Email is required.</span>
+			<span class="text-danger" ng-show="contactForm.Email.$error.email">Invalid Email address.</span>
 		</span>
 	</div>
 </div>
@@ -27,17 +28,21 @@
 <div class="form-group">
 	<label for="Address" class="col-sm-2 control-label">Address *</label>
 	<div class="col-sm-9">
-		<textarea  class="form-control" id="Address" ng-model="project.contact_details.address" name="Address" placeholder="Enter Address" required maxlength="50">
+		<textarea  class="form-control" id="Address" ng-model="project.contact_details.address" name="Address" placeholder="Enter Address" required maxlength="160">
 		</textarea>
-		<p ng-hide="addProject.Address.$error.maxlength">{{ 50 - project.contact_details.address.length + " Chars left"}}</p>
-		<span class="text-danger" ng-show="addProject.Address.$dirty && addProject.Address.$invalid">
-		<span class="text-danger" ng-show="addProject.Address.$error.maxlength">
+		<p ng-hide="contactForm.Address.$error.maxlength">{{ 160 - project.contact_details.address.length + " Chars left"}}</p>
+		<span class="text-danger" ng-show="contactForm.Address.$dirty && contactForm.Address.$invalid">
+		<span class="text-danger" ng-show="contactForm.Address.$error.maxlength">
 		Sorry You are Exceeding the Limit</span>
-		<span ng-show="addProject.Address.$error.required">Address is required.</span>
+		<span ng-show="contactForm.Address.$error.required">Address is required.</span>
 		</span>
 	</div>						
 </div>
-
+	<button type="submit" ng-if="!project.id" ng-click="addproject(project)"  class="col-sm-offset-2 btn btn-primary" ng-disabled="contactForm.$invalid">Add New Project</button>
+							
+	<button type="submit" ng-if="project.id" ng-click="update(project)" title="Update your project" class="btn btn-success text-center ">Edit Project</button>
 	
+	<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>
+</form>
 	
 	

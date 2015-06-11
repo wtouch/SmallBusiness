@@ -1,24 +1,24 @@
+<form class="form-horizontal" name="galleryForm" ng-submit="galleryForm.$valid" novalidate="novalidate">
 <h3>Project Gallery</h3>
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
-		<button type="button" class="btn btn-default btn-primary pull-right" ng-click="addToObject(addproject_gallery, project.project_gallery.details)" title="Add Project Gallery">Add Project Gallery</button>
+		<button type="button" class="btn btn-default btn-primary pull-right" ng-click="addToObject(galleryForm_gallery, project.project_gallery.details)" title="Add Project Gallery">Add Project Gallery</button>
 	</div>
 </div>
 <div>
 	<input type="hidden" required name="project_gallery" ng-model="project.project_gallery" />
-	<span class="help-block" ng-show="addProject.project_gallery.$dirty && addProject.project_gallery.$invalid">
-		<span ng-show="addProject.project_gallery.$error.required" class="text-danger">Project Gallery Description is required.</span>
+	<span class="help-block" ng-show="galleryForm.project_gallery.$dirty && galleryForm.project_gallery.$invalid">
+		<span ng-show="galleryForm.project_gallery.$error.required" class="text-danger">Project Gallery Description is required.</span>
 	</span>
 </div>
 <div class="form-group">
 	<label  for="galleryTitle" class="col-sm-2 control-label">Title *</label>
 	<div class="col-sm-9">		
-		<input type="text"  id="galleryTitle" class="form-control" name="galleryTitle" ng-model="project.project_gallery.title"    cols="20" rows="4" ng-maxlength="60" required />
-		<p ng-hide="addProject.galleryTitle.$error.maxlength">{{ 60 - project.project_gallery.title + " Chars left" }}</p>
-			 <span class="text-danger" ng-show="addProject.galleryTitle.$error.maxlength">
+		<input type="text"  id="galleryTitle" class="form-control" name="galleryTitle" ng-model="project.project_gallery.title"    cols="20" rows="4" required />
+			 <span class="text-danger" ng-show="galleryForm.galleryTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
-				<span class="text-danger" ng-show="addProject.galleryTitle.$dirty && addProject.galleryTitle.$invalid">
-			  <span ng-show="addProject.galleryTitle.$error.required"> title is required .</span>
+				<span class="text-danger" ng-show="galleryForm.galleryTitle.$dirty && galleryForm.galleryTitle.$invalid">
+			  <span ng-show="galleryForm.galleryTitle.$error.required"> title is required .</span>
 	</div>
 </div>
 
@@ -38,16 +38,18 @@
 <div class="form-group"> 
 	<label for="galleryDescription" class="col-sm-2 control-label">Description *</label> 
 	<div class="col-sm-9">
-			<textarea class="form-control" id="galleryDescription"  name="galleryDescription" ng-model="project.project_gallery.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.galleryDescription.$error.maxlength">{{ 356 - project.project_gallery.description.length + " Chars left" }}</p>
-		 <span class="text-danger" ng-show="addProject.galleryDescription.$error.maxlength">
+			<textarea class="form-control" id="galleryDescription"  name="galleryDescription" ng-model="project.project_gallery.description" cols="20" rows="4" ng-maxlength="500" required ></textarea>
+		<p ng-hide="galleryForm.galleryDescription.$error.maxlength">{{ 500 - project.project_gallery.description.length + " Chars left" }}</p>
+		 <span class="text-danger" ng-show="galleryForm.galleryDescription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
-		<span class="text-danger" ng-show="addProject.galleryDescription.$dirty && addProject.galleryDescription.$invalid">
-				<span ng-show="addProject.galleryDescription.$error.required"> Description is required .</span>
+		<span class="text-danger" ng-show="galleryForm.galleryDescription.$dirty && galleryForm.galleryDescription.$invalid">
+				<span ng-show="galleryForm.galleryDescription.$error.required"> Description is required .</span>
 		</span>
 	</div>
 </div>
 
+	<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="galleryForm.$invalid" ng-click="showFormPart('contact',1)">Next</button>
+	
 <div class="col-sm-12">
 	<div class="table-responsive">
 		<table class="table table-bordered " ng-if="project.project_gallery">
@@ -69,3 +71,4 @@
 		</table>
 	</div>
 </div>
+</form>

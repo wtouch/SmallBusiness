@@ -1,8 +1,9 @@
+<form class="form-horizontal" name="amenitiesForm" ng-submit="amenitiesForm.$valid" novalidate="novalidate">
 <h3>Amenities</h3>	
 <div>
 	<input type="hidden" required name="amenities" ng-model="project.amenities" />
-	<span class="help-block" ng-show="addProject.amenities.$dirty && addProject.amenities.$invalid">
-		<span ng-show="addProject.amenities.$error.required" class="text-danger">Amenities Description is required.</span>
+	<span class="help-block" ng-show="amenitiesForm.amenities.$dirty && amenitiesForm.amenities.$invalid">
+		<span ng-show="amenitiesForm.amenities.$error.required" class="text-danger">Amenities Description is required.</span>
 	</span>
 </div>
 
@@ -10,23 +11,25 @@
 	<label  for="amenitiesTitle" class="col-sm-2 control-label">Title *</label>
 	<div class="col-sm-9">
 		<input type="text"  id="amenitiesTitle" class="form-control" name="amenitiesTitle" ng-model="project.amenities.title"  cols="20" rows="4" ng-maxlength="60" required />
-		<p ng-hide="addProject.amenitiesTitle.$error.maxlength">{{ 60 - project.amenities.title + " Chars left" }}</p>
-			 <span class="text-danger" ng-show="addProject.amenitiesTitle.$error.maxlength">
+		<p ng-hide="amenitiesForm.amenitiesTitle.$error.maxlength">{{ 60 - project.amenities.title + " Chars left" }}</p>
+			 <span class="text-danger" ng-show="amenitiesForm.amenitiesTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
-				<span class="text-danger" ng-show="addProject.amenitiesTitle.$dirty && addProject.amenitiesTitle.$invalid">
-			  <span ng-show="addProject.amenitiesTitle.$error.required">Title is required .</span>
+				<span class="text-danger" ng-show="amenitiesForm.amenitiesTitle.$dirty && amenitiesForm.amenitiesTitle.$invalid">
+			  <span ng-show="amenitiesForm.amenitiesTitle.$error.required">Title is required .</span>
 	</div>
 </div>
 
 <div class="form-group"> 
 	<label for="amenitiesDiscription" class="col-sm-2 control-label">Description *</label> 
 	<div class="col-sm-9">
-			<textarea class="form-control" id="amenitiesDiscription"  name="amenitiesDiscription" ng-model="project.amenities.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.amenitiesDiscription.$error.maxlength">{{ 356 - project.amenities.description.length + " Chars left" }}</p>
-		 <span class="text-danger" ng-show="addProject.amenitiesDiscription.$error.maxlength">
+			<textarea class="form-control" id="amenitiesDiscription"  name="amenitiesDiscription" ng-model="project.amenities.description" cols="20" rows="4" ng-maxlength="2000" required ui-tinymce></textarea>
+		<p ng-hide="amenitiesForm.amenitiesDiscription.$error.maxlength">{{ 2000 - project.amenities.description.length + " Chars left" }}</p>
+		 <span class="text-danger" ng-show="amenitiesForm.amenitiesDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
-		<span class="text-danger" ng-show="addProject.amenitiesDiscription.$dirty && addProject.amenitiesDiscription.$invalid">
-				<span ng-show="addProject.amenitiesDiscription.$error.required"> Description is required .</span>
+		<span class="text-danger" ng-show="amenitiesForm.amenitiesDiscription.$dirty && amenitiesForm.amenitiesDiscription.$invalid">
+				<span ng-show="amenitiesForm.amenitiesDiscription.$error.required"> Description is required .</span>
 		</span>
 	</div>
 </div>
+	<button type="submit" class="col-sm-offset-2 btn btn-primary" ng-disabled="amenitiesForm.$invalid" ng-click="showFormPart('locationmap',1)">Next</button>
+</form>

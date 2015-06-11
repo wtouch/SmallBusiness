@@ -7,41 +7,25 @@ define(['app'], function (app) {
 		
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		$scope.project = { project_images : [] };
+		//$scope.project = { project_images : [] };
 		$scope.path = "project/"; 
 		
 		dataService.config('config', {config_name : "project"}).then(function(response){
 			$scope.projectConfig = response.config_data;
 		});
 	/********************************************************************/
-		$scope.infra = false;
-		$scope.imgRemoved = false;
-		
-		// Scope  Global methods
-		$scope.showFormPart = function(formPart){
-			$cookieStore.put("projFormPart", formPart);
-			$scope.formPart = $cookieStore.get("projFormPart");
-			$scope.headingDisabled = false;
-			$scope.infra = false;
-		};
 		
 		$scope.addToObject = function(data, object, resetObj){
-			var dtlObj = JSON.stringify(data.desc);
-			object[data.heading] = JSON.parse(dtlObj);
-			$scope.headingDisabled = false;
-			$scope.infra = false;
+			var dtlObj = JSON.stringify(data);
+			object.push = JSON.parse(dtlObj);
 			$scope[resetObj] = { desc : { }};
 		}
 		$scope.removeObject = function(key, object){
-			$scope.imgRemoved = true;
 			delete object[key];
 		}
-		$scope.editObject = function(key, object, FormObj){
-			$scope.headingDisabled = true;
-			$scope.imgRemoved = true;
-			var dtlObj = JSON.stringify(object[key]);
-			FormObj['desc'] = JSON.parse(dtlObj);
-			FormObj['heading'] = key;
+		$scope.editObject = function(object, FormObj){
+			var dtlObj = JSON.stringify(object);
+			FormObj = JSON.parse(dtlObj);
 		}
 		
 		$scope.showForm = function(obj, resetObj){
@@ -86,7 +70,7 @@ define(['app'], function (app) {
 				return response;
 			});
 		}
-		
+	/**************************************************************************************/
 		$scope.project = {
 			featured : 0,
 			builder :{},
@@ -101,7 +85,7 @@ define(['app'], function (app) {
 			created_date : $scope.currentDate,
 			modified_date :$scope.currentDate,
 		};
-		
+	/**********************************************************************************/	
 		$scope.uploadMultiple = function(files,path,userinfo, picArr){
 			upload.upload(files,path,userinfo,function(data){
 				if(data.status === 'success'){
@@ -116,7 +100,7 @@ define(['app'], function (app) {
 		$scope.removeImg = function(item, imgObject) {
 			imgObject.splice(item, 1);     
 		};
-		
+	/**********************************************************************************/
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
 			if(response.status == 'success'){
@@ -126,7 +110,7 @@ define(['app'], function (app) {
 				$notification[response.status]("Get Customers", response.message);
 			}
 		});
-		
+	/************************************************************************************/	
 		// this function for uploading files
 			$scope.upload = function(files,path,userInfo, picArr){ 
 				upload.upload(files,path,userInfo,function(data){

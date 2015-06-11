@@ -1,32 +1,34 @@
+<form class="form-horizontal" name="specificationForm" ng-submit="overviewForm.$valid" novalidate="novalidate">
 <h3>Specification</h3>	
 <div>
 	<input type="hidden" required name="specifications" ng-model="project.specifications" />
-	<span class="help-block" ng-show="addProject.specifications.$dirty && addProject.specifications.$invalid">
-		<span ng-show="addProject.specifications.$error.required" class="text-danger">Specifications Description is required.</span>
+	<span class="help-block" ng-show="specificationForm.specifications.$dirty && specificationForm.specifications.$invalid">
+		<span ng-show="specificationForm.specifications.$error.required" class="text-danger">Specifications Description is required.</span>
 	</span>
 </div>
 
 <div class="form-group">
 	<label  for="specificationTitle" class="col-sm-2 control-label">Title *</label>
 	<div class="col-sm-9">
-		<input type="text"  id="specificationTitle" class="form-control" name="specificationTitle" ng-model="project.specifications.title"  cols="20" rows="4" ng-maxlength="60" required />
-		<p ng-hide="addProject.specificationTitle.$error.maxlength">{{ 60 - project.specifications.title + " Chars left" }}</p>
-			 <span class="text-danger" ng-show="addProject.specificationTitle.$error.maxlength">
+		<input type="text" id="specificationTitle" class="form-control" name="specificationTitle" ng-model="project.specifications.title" cols="20" rows="4" required />
+			 <span class="text-danger" ng-show="specificationForm.specificationTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
-				<span class="text-danger" ng-show="addProject.specificationTitle.$dirty && addProject.specificationTitle.$invalid">
-			  <span ng-show="addProject.specificationTitle.$error.required">Title is required .</span>
+				<span class="text-danger" ng-show="specificationForm.specificationTitle.$dirty && specificationForm.specificationTitle.$invalid">
+			  <span ng-show="specificationForm.specificationTitle.$error.required">Title is required .</span>
 	</div>
 </div>
 
 <div class="form-group"> 
 	<label for="specDiscription" class="col-sm-2 control-label">Description *</label> 
 	<div class="col-sm-9">
-			<textarea class="form-control" id="specDiscription"  name="specDiscription" ng-model="project.specifications.description" cols="20" rows="4" ng-maxlength="356" required ></textarea>
-		<p ng-hide="addProject.specDiscription.$error.maxlength">{{ 356 - project.specifications.description.length + " Chars left" }}</p>
-		 <span class="text-danger" ng-show="addProject.specDiscription.$error.maxlength">
+			<textarea class="form-control" id="specDiscription"  name="specDiscription" ng-model="project.specifications.description" cols="20" rows="4" ng-maxlength="2000" required ui-tinymce></textarea>
+		<p ng-hide="specificationForm.specDiscription.$error.maxlength">{{ 2000 - project.specifications.description.length + " Chars left" }}</p>
+		 <span class="text-danger" ng-show="specificationForm.specDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
-		<span class="text-danger" ng-show="addProject.specDiscription.$dirty && addProject.specDiscription.$invalid">
-				<span ng-show="addProject.specDiscription.$error.required"> Description is required .</span>
+		<span class="text-danger" ng-show="specificationForm.specDiscription.$dirty && specificationForm.specDiscription.$invalid">
+				<span ng-show="specificationForm.specDiscription.$error.required"> Description is required .</span>
 		</span>
 	</div>
 </div>	
+	<button type="submit" class="col-sm-offset-2 btn btn-primary" ng-disabled="specificationForm.$invalid" ng-click="showFormPart('amenities',1)">Next</button>
+</form>
