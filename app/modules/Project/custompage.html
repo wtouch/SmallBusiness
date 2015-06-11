@@ -8,9 +8,9 @@
 	<form name="custompageForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="custompageForm.$valid" novalidate="novalidate"> 
 		<div class="form-group">
 			<div class="col-sm-9 col-sm-offset-3">
-				<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(custompage, businessData.custom_details, 'custompage')" ng-disabled="custompageForm.$invalid">Add Custom Details</button>
+				<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(custompage, businessData.custompage, 'custompage')" ng-disabled="custompageForm.$invalid">Add Custom Details</button>
 				
-				<button ng-if="infra && headingDisabled" class="btn btn-default btn-info" ng-click="addToObject(custompage, businessData.custom_details, 'custompage')">Edit Details</button>
+				<button ng-if="infra && headingDisabled" class="btn btn-default btn-info" ng-click="addToObject(custompage, businessData.custompage, 'custompage')">Edit Details</button>
 				
 				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')">
 					<span ng-show="infra">Cancel</span>
@@ -18,17 +18,20 @@
 			</div>
 		</div>
 		
+
 		<div class="form-group">
-			<label  for="title" class="col-sm-3 control-label">Title *</label>
+			<label for="customHeading" class="col-sm-3 control-label" name="customHeading" >Infrastucture Heading*</label>
 			<div class="col-sm-9">
-				<input type="text" id="title" class="form-control" name="title" ng-model="custompage.heading" cols="20" rows="4" required />
-					<span class="text-danger" ng-show="custompageForm.title.$error.maxlength">
-					Sorry You are Exceeding the Limit</span>
-						<span class="text-danger" ng-show="custompageForm.title.$dirty && custompageForm.title.$invalid">
-					<span ng-show="custompageForm.title.$error.required">Title is required .</span>
+				<select class="form-control" name="customHeading" id="customHeading"  ng-model="custompage.heading" required ng-options="item as item for item in biz.custompage" ng-disabled="headingDisabled">
+					<option value="">Select Heading</option>					
+				</select>
+				
+				<span class="help-block" ng-show="custompageForm.customHeading.$dirty && custompageForm.customHeading.$invalid">
+			<span ng-show="custompageForm.customHeading.$error.required" class="text-danger">Custom Details required.</span>
+				</span>				
 			</div>
-		</div>
-	
+		</div>	
+
 		<div class="form-group">
 			<label for="Desc" class="col-sm-3 control-label">Description*</label>
 			<div class="col-sm-9">
@@ -51,22 +54,23 @@
 		</div>
 	</form>
 	<div class="row">
-		<div class="col-sm-12">{{businessData.custom_details}}
-			<table class="table table-bordered table-responsive " ng-if="businessData.custom_details">
+		<div class="col-sm-12">
+			<table class="table table-bordered table-responsive " ng-if="businessData.custompage">
 				<tr>
 					<th>Custom Detail Heading</th>
 					<th>Custom DetailDescription</th>
 					<th>Remove</th>
 				</tr>
-				<tr ng-repeat="(key, value) in businessData.custom_details">
+				<tr ng-repeat="(key, value) in businessData.custompage">
 					<td>{{key}}</td>
-					<td>
-					<div ng-bind-html="value.description"></div>
+					<td class="tdwidth">
+						<div class="pull-left" ng-bind-html="value.description"></div>
+						<img class="pull-right" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
 					</td>
 					<td>
-						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.custom_details, custompage); showForm('infra')" tooltip="Edit Details"></button>
+						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.custompage, custompage); showForm('infra')" tooltip="Edit Details"></button>
 						
-						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.custom_details)" tooltip="Remove"></button>			
+						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.custompage)" tooltip="Remove"></button>			
 					</td>
 				</tr>
 			</table>

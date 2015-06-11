@@ -11,6 +11,7 @@ define(['app'], function (app) {
 			$scope.businessData = dataService.parse(response.data);
 			if($scope.businessData.infrastructure == "") $scope.businessData.infrastructure = {};
 			if($scope.businessData.testimonials == "") $scope.businessData.testimonials = {};
+			if($scope.businessData.custom_details == "") $scope.businessData.custom_details = {};
 			if($scope.businessData.news_coverage == "") $scope.businessData.news_coverage = {};
 			if($scope.businessData.gallery == "") $scope.businessData.gallery = {};
 			if($scope.businessData.job_careers == "") $scope.businessData.job_careers = {};
@@ -29,6 +30,7 @@ define(['app'], function (app) {
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials
 		$scope.path = "business/"; // path to store images on server
 		$scope.infrastructure = { desc : { }};
+		$scope.custompage = { desc : { }};
 		$scope.testimonials = { desc : { }};
 		$scope.news_coverage = { desc : {  }};
 		$scope.job_careers = { desc : {  }};
@@ -58,7 +60,7 @@ define(['app'], function (app) {
 		$scope.biz = dataService.config.business;
 		
 		$scope.formPart = ($cookies.bizFormPart) ? $cookieStore.get("bizFormPart") : 'infrastructure';
-		
+	
 		$scope.infra = false;
 		$scope.imgRemoved = false;
 		
