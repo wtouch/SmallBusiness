@@ -18,7 +18,7 @@
 		</div>
 		<div class="col-sm-2">
 			<div class="bottomspace">
-				<label for="expirystatus" class="control-label">Select Expiry Status</label>
+				<label for="expirystatus" class="control-label">Expiry Status</label>
 					<select id="expirystatus" class="form-control" ng-change="changeStatusFn('expired',showExpiryStatus)" ng-model="showExpiryStatus" ng-init="showExpiryStatus=''">
 						<option value="">Select Expiry Status</option>
 						<option value="0" selected>Active</option>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="col-sm-2">
 			<div class="bottomspace">
-				<label for="sortnewold" class="control-label">Sort by Newest/Oldest</label>
+				<label for="sortnewold" class="control-label">Newest/Oldest</label>
 					<select id="sortnewold" class="form-control" ng-model="sortnewold"> 
 						<option value="">Select Order</option><!-- added value & selected attr -->	
 						<option value="-registered_date">Newest</option>
@@ -90,6 +90,7 @@
 								</a>
 							</div>
 						</div>
+						</td>
 						<td>{{x.name}}</td>
 						<td>
 							<span ng-if="x.manager==null">-</span>
@@ -99,11 +100,11 @@
 							<span ng-if="x.admin==null">-</span>
 							<span ng-if="x.admin!=null">{{x.admin}}</span>
 						</td>
- 					</td>
+ 					<!-- </td> -->
 					<td>{{x.registered_date}}</td>
 					<td>{{x.expiry_date}}</td>
 					<td>{{x.status}}</td>
-					<td>
+					<td class="col-sm-3">
 						<div class="btn-toolbar" role="toolbar">
 							<div class="btn-group">					
 								<!-- View Website Details -->

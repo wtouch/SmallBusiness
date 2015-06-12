@@ -29,7 +29,6 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				});
 			};
 	/***********************************************************************************/	
-		//delete button for change status for template
 			$scope.deleted = function(id, status){
 				$scope.deletedData = {status : status};
 				dataService.put("put/project/"+id, $scope.deletedData)
@@ -42,7 +41,6 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				});
 			};
 	/**************************************************************************************/
-		// code for verify button 
 			$scope.verify = function(id, verified){
 				$scope.veryfiedData = {verified : verified};
 				dataService.put("put/project/"+id, $scope.veryfiedData)
@@ -98,7 +96,6 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		});
 		};
 	/********************************************************************************/
-		//Model
 			$scope.open = function (url, projectId) {
 				dataService.get("getsingle/project/"+projectId)
 				.then(function(response) {

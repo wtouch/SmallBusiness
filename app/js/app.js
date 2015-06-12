@@ -106,6 +106,10 @@ define(['angular',
 				.when('/dashboard/seo/seo', route.resolve({controller: 'seo',template: 'seo',
 					label: "SEO"}, 'seo/'))
 				
+				.when('/dashboard/sms', route.resolve({controller: 'sms',template: 'sms',label:"sms"}, 'sms/'))
+				 
+				.when('/dashboard/contact', route.resolve({controller: 'contact',template: 'contact',label:"Contact"}, 'contact/'))
+					
                 .otherwise({ redirectTo: '/' });
 				
 	}]);
@@ -118,10 +122,11 @@ define(['angular',
 			$rootScope.breadcrumbs = breadcrumbs;
 			$rootScope.appConfig = {
 				metaTitle : "Small Business",
-				headerTitle : next.$$route.label,
-				subTitle : next.$$route.label,
+				headerTitle : (next.$$route.label) ? next.$$route.label:"",
+				subTitle : (next.$$route.label) ? next.$$route.label : "",
 				assetPath : '..'
 			};
+			
 			var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout' || dataService.auth == false){
 				dataService.logout();

@@ -1,7 +1,7 @@
 <form class="form-horizontal" name="projectForm" ng-submit="projectForm.$valid" novalidate="novalidate">
 <h3>Project Information</h3>
 <!-- This block for current user id -->
-	<div class="form-group" ng-if="userDetails.group_name != 'customer'">
+	<div class="form-group" ng-if="userDetails.group_name != 'customer'" ng-init="getUsers()">
 		<label for="customer" class="col-sm-2 control-label">Customer *</label>
 		<div class="col-sm-7">
 				<select class="form-control" name="customer" id="customer" ng-change="getWebsite(project.user_id)"  ng-model="project.user_id" ng-options="item.id as item.name for item in customerList | filter: { group_name : 'customer'} " required>

@@ -4,8 +4,6 @@
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
 			<h3 class="text-center" ng-if="!project.id">Add New Project</h3>
 			<h3 class="text-center" ng-if="project.id" title="Add new Project">Edit Project</h3>
-			<!-- <form class="form-horizontal" name="addProject" ng-submit="addProject.$valid"novalidate> -->	
-				
 				<p class="paraMand">* Fields are mandatory</p>
 				
 				<input type="hidden" id="status" name="status" ng-model="project.status" >	
@@ -18,7 +16,6 @@
 				<input type="hidden" id="date" name="date" ng-model="project.date">	
 					
 				<ul class="nav nav-tabs">
-				
 					<li role="presentation" ng-class="{active: formPart=='project'}">
 						<a ng-click="showFormPart('project')">Project Information</a>
 					</li>
@@ -59,7 +56,6 @@
 						<a ng-click="showFormPart('contact')">Contact</a>
 					</li>  
 				</ul>
-				
 					<ng-include  ng-show="formPart=='project'" src="'modules/project/addproject/project.html'">
 					</ng-include> 					
 					
@@ -88,38 +84,7 @@
 					</ng-include> 
 					
 					<ng-include ng-show="formPart=='contact'" src="'modules/project/addproject/contact.html'">
-					</ng-include> 
-					<!-- <div class="form-group" ng-if="project.user_id">
-						<div class="col-sm-12">					
-							<h3>Select Sites</h3>
-							<div class="table-responsive">
-								<table class="table table-bordered">
-									<tr>
-										<td class="checkbox">
-											<label>
-												<input type="checkbox" ng-model="selectAll" ng-change="checkAll(websites, selectAll)" /> Select all
-											</label> 
-										</td>
-										<td class="checkbox clearfix">
-											<label ng-repeat="website in websites" class="col-sm-3">
-												<input type="checkbox" checklist-model="project.domain" checklist-value="website"> {{website.domain_name}}
-											</label>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div> -->
-						
-					<!-- <div class="form-group">
-						<div class="col-sm-offset-2 col-sm-9">
-							<button type="submit" ng-if="!project.id" ng-click="addproject(project)"  class="btn btn-primary" title="Add new project">Add New Project</button>
-							
-							<button type="submit" ng-if="project.id" ng-click="update(project)" title="Update your project" class="btn btn-success text-center ">Edit Project</button>
-							<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>
-						</div>
-					</div>		 -->					
-			<!-- </form> -->
+					</ng-include>
 		</div>	
 	</div>
 </div>

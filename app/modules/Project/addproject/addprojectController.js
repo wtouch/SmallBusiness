@@ -18,13 +18,13 @@ define(['app'], function (app) {
 			created_date : $scope.currentDate,
 			modified_date :$scope.currentDate,
 		};
+		
 		$scope.location_map = {};
 		$scope.layout_map = {};
 		$scope.floor_plan = {};
 		$scope.project_gallery = {};
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		//$scope.project = { project_images : [] };
 		$scope.path = "project/"; 
 		
 		dataService.config('config', {config_name : "project"}).then(function(response){
@@ -63,23 +63,6 @@ define(['app'], function (app) {
 				$scope[resetObj] = { desc : {}};
 			}
 		}
-		
-		$scope.add = function(project){				
-			dataService.post("post/project/"+$routeParams.id,project)  
-			 .then(function(response) { 
-				if(response.status == 'success'){
-					$scope.submitted = true;
-					if($rootScope.userDetails.config.addprojectDetails != true){
-						dataService.progressSteps('addprojectDetails', true);
-					}
-				}
-				if(response.status == undefined){
-					$notification.error("", response.message);
-				}else{
-					$notification[response.status]("", response.message);
-				}
-			});
-		};
 	/***********************************************************************/
 		$scope.getData = function(location){
 			$scope.readOnly = true;
@@ -113,6 +96,7 @@ define(['app'], function (app) {
 			imgObject.splice(item, 1);     
 		};
 	/**********************************************************************************/
+		$scope.getUsers = function(){
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
 			if(response.status == 'success'){
@@ -122,6 +106,7 @@ define(['app'], function (app) {
 				$notification[response.status]("Get Customers", response.message);
 			}
 		});
+		};
 	/************************************************************************************/	
 		// this function for uploading files
 			$scope.upload = function(files,path,userInfo, picArr){ 

@@ -1,0 +1,89 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="row">
+	<div class="col-sm-12">	
+		<h3 class="col-sm-offset-2 col-sm-9 text-center"> Add New Contact</h3>
+		<form class="form-horizontal" name="addcontactForm" role="form" ng-submit="addcontactForm.$valid" novalidate="novalidate">
+		
+	<div class="form-group" ng-if="userDetails.group_name != 'customer'" ng-init="modalOptions.getParty(modalOptions)">
+		<label for="customer" class="col-sm-2 control-label">Customer *</label>
+		<div class="col-sm-9">
+				<select class="form-control" name="customer" id="customer"  ng-model="modalOptions.contact.user_id" ng-options="item.id as item.name for item in    modalOptions.customerList| filter: { group_name : 'customer'}" required>
+					<option value="">Select Customer</option>
+				</select>
+			<span class="help-block" ng-show="addcontactForm.customer.$dirty && addcontactForm.customer.$invalid">
+				<span ng-show="addcontactForm.customer.$error.required" class="text-danger">Customer is required.</span>
+			</span>	
+		</div>
+	</div>{{modalOptions.contact.user_id}}
+	
+	<input type="hidden" ng-model="modalOptions.contact.user_id" ng-init="modalOptions.contact.user_id = modalOptions.contact.user_id" /> 
+	
+	<input type="hidden" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.contact.date" ng-init="modalOptions.contact.date = modalOptions.date" required readonly /> 
+	
+	
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">Name *</label>
+			<div class="col-sm-9">
+				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="modalOptions.contact.name" required />
+				<span class="help-block" ng-show="addcontactForm.name.$dirty && addcontactForm.name.$invalid">
+					<span class="text-danger" ng-show="addcontactForm.name.$error.required">Name is required.</span>
+				</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="category" class="col-sm-2 control-label">Category *</label>
+			<div class="col-sm-9">
+				<input type="text" id="category" class="form-control" name="category" placeholder="category" ng-model="modalOptions.contact.category" required />
+				<span class="help-block" ng-show="addcontactForm.category.$dirty && addcontactForm.category.$invalid">
+					<span class="text-danger" ng-show="addcontactForm.category.$error.required">category is required.</span>
+				</span>
+			</div>
+		</div>
+			
+		<div class="form-group">	
+			<label  for="email" class="col-sm-2 control-label">Email *</label>
+			<div class="col-sm-9">
+				<input type="Email" class="form-control" id="email" ng-model="modalOptions.contact.email" name="email" placeholder="Enter Email" required />
+				
+				<span class="help-block" ng-show="addcontactForm.email.$dirty && addcontactForm.email.$invalid">
+					<span class="text-danger" ng-show="addcontactForm.email.$error.required">Email is required.</span>
+					<span class="text-danger" ng-show="addcontactForm.email.$error.email">Invalid Email address.</span>
+				</span>
+			</div>
+		</div> 
+		
+		<div class="form-group">
+			<label for="address" class="col-sm-2 control-label">Address *</label>
+			<div class="col-sm-9">
+				<textarea class="form-control" id="address" ng-model="modalOptions.contact.address" name="address" placeholder="Enter address" ng-maxlength="160" required></textarea>
+				<p ng-hide="addcontactForm.address.$error.maxlength">{{ 160 - modalOptions.contact.address.length + " Characters left"}}</p>
+				<span class="help-block" ng-show="addcontactForm.address.$dirty &&  addcontactForm.address.$invalid">
+					<span class="text-danger" ng-show="addcontactForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="addcontactForm.address.$error.required">Address is required.</span>
+				</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="phone" class="col-sm-2 control-label">Mobile *</label>
+			<div class="col-sm-9">
+				<input type="text" id="phone" name="phone" class="form-control" ng-model="modalOptions.contact.phone" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+				<span class="help-block" ng-show="addcontactForm.phone.$dirty && addcontactForm.phone.$invalid">
+					<span ng-show="addcontactForm.phone.$error.required" class="text-danger">Mobile Number is required.</span>
+					<span class="text-danger" ng-show="addcontactForm.phone.$error.pattern && (addcontactForm.phone.$dirty)">Enter a valid Contact Number</span>
+				</span>
+			</div>						
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-9">
+				<button type="submit" class="btn btn-success" ng-click="modalOptions.postData(modalOptions.contact)" >Add Contact</button>
+				<a href="#/dashboard/contact/addcontact" class="btn btn-danger">Cancel</a>
+			</div>
+		</div>						
+		</form>			
+	</div>
+</div>

@@ -1,0 +1,51 @@
+<h3 class="text-center">Send SMS</h3>
+<form name="composeForm" class="horizontal" role="form" novalidate>
+	<div class="row">
+		<div class="form-group">
+			<label  for="sendto" class="col-sm-2 control-label">Send To *</label>	
+				<select id="sendto" name="sendto" class="form-control" ng-model="sendto" required> 
+					<option value="" selected>Select Sender</option>
+					<option value="individual">Individual</option>
+					<option value="group">Group</option>
+					<option value="multiple">Multiple</option>
+				</select>
+		</div>
+	
+		<div class="form-group">
+			<label for="senderid" class="col-sm-2 control-label">Select Sender Id *</label>	
+				<div class="col-sm-9">
+					<select id="senderid" name="senderid" class="form-control" ng-model="compose.sender_id" required> 
+						<option value="" selected>Select Id</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+					</select> 
+				</div>
+		</div>
+		
+		<div class="form-group" ng-if="sendto==individual">
+			<label for="contact" class="col-sm-2 control-label">Contact *</label>
+			<div class="col-sm-9">
+				<input type="text" name="contact" class="form-control" id="contact" ng-model="compose.contact" placeholder="Enter contact"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="groupid" class="col-sm-2 control-label">Select Group Id</label>
+			<select name="groupid" id="groupid" class="form-control" ng-model="compose.groupid"required>
+				<option value="" selected>Select Group Id</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<label for="contacts" class="col-sm-2 control-label">Contacts *</label>
+			<div class="col-sm-9">
+				<textarea type="text" name="contacts" id="contacts" class="form-control" ng-model="compose.contacts" placeholder="Enter Contacts">
+				</textarea>
+			</div>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,61 @@
+<h3 class="text-center">Contact List</h3>
+<div class="row">			  
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="sort" class="control-label">Sort by Order</label>
+					<select id="sort" class="form-control" ng-model="sort"> 
+						<option value="">Select Order</option>	<!-- added value & selected attr -->	
+						<option value="-username">Desending</option>
+						<option value="username">Asending</option>  
+					</select>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="status" class="control-label">Select Status</label>
+					<select id="status" class="form-control" 
+					ng-change="changeStatus('status',showStatus)" ng-model="showStatus">
+						<option value="">Select Status</option>
+						<option value="1">Active</option>
+						<option value="0">Baned</option>
+					</select>
+			</div>
+		</div>
+	
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="filterbycustomerid" class="control-label">Select By Customer</label>
+					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+						<option value="">Select Customer</option>
+					</select>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<th>Sr.No.</th>
+				<th>User Name</th>
+				<th>Email</th>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in contacts |orderBy:sort">
+					<td>{{ $index + 1}}</td>
+					<td>{{x.first_name}}</td>
+					<td>
+						{{x.email}}
+					</td>
+					   
+					</td>
+				</tr>					
+			</tbody>					
+		</table>
+	</div>
+	
+	<div class="text-center">				
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="usersListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(usersListCurrentPage)"></pagination>
+		<pre>Page: {{usersListCurrentPage}} / {{numPages}}</pre>
+	</div>	

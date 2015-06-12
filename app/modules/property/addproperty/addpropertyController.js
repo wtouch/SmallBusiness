@@ -47,6 +47,7 @@ define(['app'], function (app) {
 			});
 		};
 		
+		$scope.getUsers = function(){
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
 			if(response.status == 'success'){
@@ -56,6 +57,7 @@ define(['app'], function (app) {
 				$notification[response.status]("Get Customers", response.message);
 			}
 		});
+		};
 		
 		$scope.upload = function(files,path,userinfo, picArr){ 
 			upload.upload(files,path,userinfo,function(data){

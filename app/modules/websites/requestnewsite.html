@@ -1,9 +1,10 @@
 <h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>
 	<form name="requestsiteForm" class="form-horizontal" role="form" ng-submit="requestsiteForm.$valid" novalidate="novalidate" ng-init="setFormScope(this)">
-											
-		<div class="form-group" ng-if="userDetails.group_name != 'customer'">		
-			<label for="customer" class="col-sm-2 control-label">Customer*</label>{{reqnewsite.user_id}}
-			<div class="col-sm-7">				
+	<div class="row">
+	<div class="col-sm-7 panel panel-default">
+		<div class="form-group panel-body" ng-if="userDetails.group_name != 'customer'">		
+			<label for="customer" class="col-sm-2 control-label">Customer*</label>
+			<div class="col-sm-6">				
 				<select class="form-control" name="customer" id="customer" ng-change="getBusiness(reqnewsite.user_id)" ng-model="reqnewsite.user_id" ng-options="item.id as item.name for item in customerList | filter:{ group_name : 'customer' }" required>
 					<option value="">Select Customer</option>
 				</select>				
@@ -158,41 +159,98 @@
 					<span class="text-danger" ng-show="requestsiteForm.description.$error.required">Please enter Product/Services.</span>
 				</span>
 			</div>						
-		</div>	
-		<div class="form-group">	
-			<div class="col-md-9 col-md-offset-2"><strong>Google Map</strong></div>
 		</div>
-		<div class="form-group">	
-			<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
-				<div class="col-sm-9">
-					<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="reqnewsite.config.google_map.latitude" readonly>
-						<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
-						<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
-						</span>
-				</div>						
-		</div>	
-		<div class="form-group">						
-			<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
-				<div class="col-sm-9">
-					<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="reqnewsite.config.google_map.longitude" readonly >
-						<span class="text-danger" ng-show="websettingsForm.Longitude.$dirty && websettingsForm.Longitude.$invalid">
+		<div class="form-group">
+			<label for="" class="col-sm-2 control-label"></label>
+			<div class="col-sm-4"> 
+				<div class="bottomspace">
+				<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
+				<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="reqnewsite.config.google_map.latitude" readonly />
+				<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
+					<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
+				</span>
+				</div>
+			</div>
+
+			<div class="col-sm-4"> 
+				<div class="bottomspace">
+				<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
+				<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="reqnewsite.config.google_map.longitude" readonly >
+					<span class="text-danger" ng-show="websettingsForm.Longitude.$dirty && websettingsForm.Longitude.$invalid">
 						<span ng-show="websettingsForm.Longitude.$error.required">Domain Name is required.</span>
-						</span>
-				</div>						
-		</div>	
+					</span>
+				</div>
+			</div>									
+		</div>
+			
+		
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
 				<button ng-disabled="requestsiteForm.$invalid || requestsiteForm.domain_name.$error.available" type="submit" class="btn btn-success" ng-click="postData(reqnewsite)">Send Request</button>
-				<!--ng-disabled="requestsiteForm.$invalid || requestsiteForm.domain_name.$error.available"-->
+				
 				<button type="reset" class="btn btn-danger">Reset</button>
 			</div>
 		</div>	
-		<div class="form-group" ng-click="getMapObject()">
-			<div class="col-sm-offset-2 col-sm-9" id="map_canvas">
-					<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" control="googleMap">
-						<ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="TOP_LEFT"></ui-gmap-search-box>
-						<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-					</ui-gmap-google-map>
-			</div>
+		
+	</div>
+	
+	<div class="col-sm-5 panel panel-default">
+		<div class ="form-group">	
+			<label  for="facebook" class="col-sm-3 control-label">Facebook</label>	
+			<div class="col-sm-9">
+				<input type="text" class="form-control" id="facebook" ng-model="reqnewsite.config.sociallinks.facebook" name="facebook" />
+			</div>					
 		</div>
+		
+		<div class="form-group ">	
+			<label  for="google" class="col-sm-3 control-label">Google</label>	
+			<div class="col-sm-9">
+				<input type="text" class="form-control" name="google" id="google" ng-model="reqnewsite.config.sociallinks.google"  />
+			</div>					
+		</div>
+		
+		<div class="form-group">	
+			<label  for="twitter" class="col-sm-3 control-label">Twitter</label>	
+			<div class="col-sm-9">
+				<input type="text" class="form-control" id="twitter" name="twitter" ng-model="reqnewsite.config.sociallinks.twitter"  />
+			</div>					
+		</div>
+		
+		<div class="form-group ">	
+			<label  for="linkedin" class="col-sm-3 control-label">LinkedIn</label>	
+			<div class="col-sm-9">
+				<input type="text" class="form-control" id="linkedin" name="linkedin" ng-model="reqnewsite.config.sociallinks.linkedin"  />
+			</div>					
+		</div>
+		
+		<script type="text/ng-template"  id="tree_item_renderer.html">
+			<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
+			<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
+			<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
+			<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'pull-right glyphicon glyphicon-ok'" aria-hidden="true"></span>
+			
+			<ul  ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
+				<li ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+					<span class="caret pull-right" ng-if="data.childMenu"></span>
+				</li>
+			</ul> 
+		</script>
+		<ul class="list-group" as-sortable="dragControlListeners"ng-model="reqnewsite.config.menus">
+			<li class="list-group-item" ng-repeat="data in reqnewsite.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
+			</li>
+		</ul>
+
+	</div>
+	
+	<div class="panel-panel-default">	
+	<div class="form-group panel-body" ng-click="getMapObject()">
+		<div class="col-sm-12" id="map_canvas">
+				<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" control="googleMap">
+					<ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="TOP_LEFT"></ui-gmap-search-box>
+					<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+				</ui-gmap-google-map>
+		</div>
+	</div>
+	</div>
+	</div>
 	</form>

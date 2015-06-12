@@ -24,6 +24,12 @@ define(['app'], function (app) {
 			$scope.formScope = scope;
 		}
 		
+		$scope.dragControlListeners = {
+			accept: function (sourceItemHandleScope, destSortableScope) {
+				return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
+			}
+		};
+		
 		$scope.getBusiness = function(user_id){
 		// code for get business list
 			dataService.get("getmultiple/business/1/100",{user_id:user_id, status : 1})
@@ -43,6 +49,16 @@ define(['app'], function (app) {
 					$scope.templateList = response.data;
 				}else{
 					$notification.error("Get Template", "You didn't have any Template! Please apply free template or buy new template first.");
+				}
+			});
+			
+			// code for get  
+			dataService.get("getmultiple/seo/1/100",{user_id:user_id, status : 1})
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.reqnewsite = response.data;
+				}else{
+					$notification.error("Get", "You didn't have any Template! Please apply free template or buy new template first.");
 				}
 			});
 		}
