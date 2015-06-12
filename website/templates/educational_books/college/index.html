@@ -51,10 +51,11 @@
 		{% block carousal %}
 		{% endblock %}
 		<div class="container header">
-			{% include 'includes/navbar.html' ignore missing %}
+			{% include templatePath ~ '/includes/navbar.html' ignore missing %}
 		</div>
 		<div class="container">
-			{% block content %}{% endblock %}
+		{{templatePath}}
+			{% include templatePath ~ '/' ~ uri ~ '.html'  %}
 		
 			<div class="row">
 				<a href="#" class="ftrlink"><div class="col-sm-1 ftrlink1"><img src="{{ path }}img/arr2.png"/></div></a>
