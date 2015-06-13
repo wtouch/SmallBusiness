@@ -150,18 +150,16 @@
 									
 									<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'pull-right glyphicon glyphicon-ok'" aria-hidden="true"></span>
 									
-									<span>{{data.status}}</span>
-									
-									<ul  ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
-										<li collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+									<div  ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
+										<div class="menudiv" collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
 											<span class="caret pull-right" ng-if="data.childMenu"></span>
-										</li>
-									</ul> 
+										</div>
+									</div> 
 							</script>
-							<ul class="list-group" as-sortable="dragControlListeners"ng-model="websetting.config.menus">
-								<li class="list-group-item" ng-repeat="data in websetting.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
-								</li>
-							</ul>
+							<div class="list-group" as-sortable="dragControlListeners"ng-model="websetting.config.menus">
+								<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
+								</div>
+							</div>
 						</div>
 						
 						<div class="panel-panel-default">
