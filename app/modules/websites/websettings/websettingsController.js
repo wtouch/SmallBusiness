@@ -16,7 +16,9 @@ define(['app'], function (app) {
 				return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
 			}
 		};
-
+		
+		$scope.isCollapsed = true;
+		
 		//code for view single website details
 		dataService.get("getsingle/website/"+$routeParams.id)
 		.then(function(response) { 
