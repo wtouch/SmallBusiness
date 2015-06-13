@@ -5,7 +5,12 @@ define(['app'], function (app) {
 	
 	var contactController = function ($scope,$rootScope,$injector,$routeParams,$location,dataService,upload,modalService,$notification) {
 		$rootScope.metaTitle = "Contact Form";
-	$rootScope.headerTitle = "Contact Form";
+		
+		$scope.maxSize = 5;
+		$scope.totalRecords = "";
+		$scope.CurrentPage = 1;
+		$scope.pageItems = 10;
+		$scope.numPages = "";		
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		$scope.contactView = $routeParams.contactView;
@@ -45,8 +50,9 @@ define(['app'], function (app) {
 	};
 	
 	/**************************************************************************/
-		$scope.getContact = function(){
-			dataService.get("/getmultiple/contacts/"+$scope.pageItems)
+		$scope.getContact = function(page,contactParam){
+			$scope.contactParam = (contactParam) ? contactParam : {status : 1, user_id : $scope.user_id.user_id};
+			dataService.get("/getmultiple/contacts/"+page+"/"+$scope.pageItems,contactParam)
 			.then(function(response) {
 				if(response.status == 'success'){				
 					$scope.totalRecords = response.totalRecords;
