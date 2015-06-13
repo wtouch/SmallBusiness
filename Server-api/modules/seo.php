@@ -32,42 +32,42 @@
 		
 		$data = $db->select();
 		
-		$home = array("name" => "Home", "url" => "/home");
-		$about = array("name" => "About Us", "url" => "/about-us");
-		$contact = array("name" => "Contact Us", "url" => "/contact-us");
+		$home = array("name" => "Home", "url" => "/home", "status" => "1");
+		$about = array("name" => "About Us", "url" => "/about-us", "status" => "1");
+		$contact = array("name" => "Contact Us", "url" => "/contact-us", "status" => "1");
 		
 		$menus = array($home, $about, $contact);
 		
 		if($data['status'] == "success"){
-			if($data['data'][0]['testimonials']) $menus[] = array("name" => "Testimonials", "url" => "/testimonials");
+			if($data['data'][0]['testimonials']) $menus[] = array("name" => "Testimonials", "url" => "/testimonials", "status" => "1");
 				
-			if($data['data'][0]['job_careers']) $menus[] = array("name" => "Jobs/Careers", "url" => "/job-careers");
+			if($data['data'][0]['job_careers']) $menus[] = array("name" => "Jobs/Careers", "url" => "/job-careers", "status" => "1");
 			
-			if($data['data'][0]['news_coverage']) $menus[] = array("name" => "Activities", "url" => "/activities"); 
+			if($data['data'][0]['news_coverage']) $menus[] = array("name" => "Activities", "url" => "/activities", "status" => "1"); 
 			
 			foreach($data['data'] as $key => $value){
 				if($value['product_type'] == "product"){
-					$productCategory[$value['product_category']][] = array("name" => $value['product_name'], "url" => "/products/".$value['product_name']."/".$value['product_id']);
+					$productCategory[$value['product_category']][] = array("name" => $value['product_name'], "url" => "/products/".$value['product_name']."/".$value['product_id'], "status" => "1");
 				}
 				if($value['product_type'] == "service"){
-					$serviceCategory[$value['product_category']][] = array("name" => $value['product_name'], "url" => "/services/".$value['product_name']."/".$value['product_id']);
+					$serviceCategory[$value['product_category']][] = array("name" => $value['product_name'], "url" => "/services/".$value['product_name']."/".$value['product_id'], "status" => "1");
 				}
 				
 			}
 			
 			foreach($productCategory as $key => $value){
-				$productMenus[] = array("name" => $key, "url" => "/products/".str_replace(" ", "-",$key), "childMenu" => $value);
+				$productMenus[] = array("name" => $key, "url" => "/products/".str_replace(" ", "-",$key), "status" => "1", "childMenu" => $value);
 			}
 			
 			foreach($serviceCategory as $key => $value){
-				$serviceMenus[] = array("name" => $key, "url" => "/services/".str_replace(" ", "-",$key), "childMenu" => $value);
+				$serviceMenus[] = array("name" => $key, "url" => "/services/".str_replace(" ", "-",$key), "status" => "1", "childMenu" => $value);
 			}
 			
 			if(count($productMenus) >=1 || count($productMenus) >=1){
 				
-				$menus[] = array("name" => "Products", "url" => "/products", "childMenu" => $productMenus );
+				$menus[] = array("name" => "Products", "url" => "/products", "status" => "1", "childMenu" => $productMenus );
 				
-				$menus[] = array("name" => "Services", "url" => "/services", "childMenu" => $serviceMenus );
+				$menus[] = array("name" => "Services", "url" => "/services", "status" => "1", "childMenu" => $serviceMenus );
 			}
 			
 		}

@@ -109,10 +109,15 @@
 						
 						<div class="col-sm-3" ng-init="ind = []">
 							<script type="text/ng-template"  id="tree_item_renderer.html">
-									<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
 									<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
+									
+									<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
+									
 									<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
+									
 									<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'pull-right glyphicon glyphicon-ok'" aria-hidden="true"></span>
+									
+									<span>{{data.status}}</span>
 									
 									<ul  ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
 										<li ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
