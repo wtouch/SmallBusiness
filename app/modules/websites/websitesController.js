@@ -29,7 +29,6 @@ define(['app'], function (app) {
 				return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
 			}
 		};
-		
 		$scope.getBusiness = function(user_id){
 		// code for get business list
 			dataService.get("getmultiple/business/1/100",{user_id:user_id, status : 1})
@@ -54,7 +53,8 @@ define(['app'], function (app) {
 		}
 		
 		$scope.getMenulist = function(){
-			dataService.get("getmultiple/seo/1/100",{user_id:user_id, status : 1})
+			$scope.seoParam ={user_id : $rootScope.userDetails.id,status:1}
+			dataService.get("getmultiple/seo/1/100",$scope.seoParam)
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.reqnewsite.config = response.data;

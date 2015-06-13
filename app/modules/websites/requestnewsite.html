@@ -16,6 +16,7 @@
 				<a href="#/dashboard/users/adduser" class="btn btn-default">Add New User</a>
 			</div>
 		</div>
+		
 		<input type="hidden" class="form-control" ng-if="userDetails.group_name == 'customer'" ng-model="reqnewsite.user_id" ng-init="reqnewsite.user_id = userDetails.id; getBusiness(reqnewsite.user_id)" readonly/>
 		
 		<div class="form-group" ng-if="reqnewsite.user_id" >
@@ -80,6 +81,7 @@
 				<span>e.g yourdomain.apnasite.in</span>
 			</div>
 		</div>
+		
 		<div ng-if="domain_type == 'paid'" class="form-group">	
 			<label  for="domain_name" class="col-sm-2 control-label">Domain Name*</label>
 			<div class="col-sm-9">
@@ -225,7 +227,7 @@
 			<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
 			<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'pull-right glyphicon glyphicon-ok'" aria-hidden="true"></span>
 			
-			<ul  ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
+			<ul ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
 				<li ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
 					<span class="caret pull-right" ng-if="data.childMenu"></span>
 				</li>

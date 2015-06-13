@@ -108,21 +108,21 @@ define(['app'], function (app) {
 		});
 		};
 	/************************************************************************************/	
-		// this function for uploading files
-			$scope.upload = function(files,path,userInfo, picArr){ 
-				upload.upload(files,path,userInfo,function(data){
-					if(data.status === 'success'){
-						$scope[picArr].image = data.data.file_relative_path;
-					}else{
-						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-						$notification[response.status]("Upload Image", response.message);
-					}					
-				}); 
-			};  
-			
-			$scope.generateThumb = function(files){  
-				upload.generateThumbs(files);
-			};
+	// this function for uploading files
+		$scope.upload = function(files,path,userInfo, picArr){ 
+			upload.upload(files,path,userInfo,function(data){
+				if(data.status === 'success'){
+					$scope[picArr].image = data.data.file_relative_path;
+				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Upload Image", response.message);
+				}					
+			}); 
+		};  
+		
+		$scope.generateThumb = function(files){  
+			upload.generateThumbs(files);
+		};
 	/*********************************************************************/
 		// Add Business multi part form show/hide operation from here! 
 		$scope.formPart = 'project';
@@ -152,7 +152,7 @@ define(['app'], function (app) {
 			$scope.formScope = scope;
 			}
 	
-		//add project //project,$scope.userinfo
+		//add project 
 		$scope.addproject = function(project){
 			console.log(project);
 			dataService.post("post/project",project)
@@ -190,10 +190,8 @@ define(['app'], function (app) {
 							}	
 						});	  
 					};	 
-			}			
-		
-	/************************************************************************************/		
-		
+			}	
+	/************************************************************************************/	
 		 //Add Project
 		$scope.addProjectFun = function(project){	
 			$scope.Project.date = $scope.currentDate;
@@ -208,10 +206,9 @@ define(['app'], function (app) {
 				$notification[response.status]("Post Project", response.message);
 				}				
 			}); 
-			/********************************************************************************/
-			//update into Project
 			};
-			 if($routeParams.id){//Update user
+			//update into Project
+			if($routeParams.id){
 				console.log($routeParams.id);	
 				dataService.get("getsingle/Project/"+$routeParams.id)
 				.then(function(response) {

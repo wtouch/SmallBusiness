@@ -19,6 +19,18 @@ define(['app'], function (app) {
 		if(!$routeParams.contactView) {
 			$location.path('/dashboard/contact');
 		}
+	/************************************************************************/
+		$scope.deleted = function(id, status){
+			$scope.deletedData = {status : status};
+			dataService.put("put/contacts/"+id, $scope.deletedData)
+			.then(function(response) { 
+				if(response.status == 'success'){
+					$scope.getContact($scope.CurrentPage);
+				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Edit Project", response.message);
+			});
+		};
 	/*************************************************************************/
 	$scope.openContact= function (url) {
 			var modalDefaults = {
@@ -33,7 +45,7 @@ define(['app'], function (app) {
 					});
 				},
 				postData : function(contact) {
-				 dataService.post("post/contact",contact)
+				 dataService.post("post/contacts",contact)
 				.then(function(response) {  
 					if(response.status == "success"){
 						
@@ -45,25 +57,35 @@ define(['app'], function (app) {
 			};
 			modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 			});
-		
-			
 	};
-	
 	/**************************************************************************/
+	$scope.openGroup= function (url) {
+			var modalDefaults = {
+				templateUrl: url,	
+				size : 'lg'
+			};
+			var modalOptions = {
+				date : $scope.currentDate
+			};
+			modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+			});
+	};
+/************************************************************************************/
 		$scope.getContact = function(page,contactParam){
-			$scope.contactParam = (contactParam) ? contactParam : {status : 1, user_id : $scope.user_id.user_id};
-			dataService.get("/getmultiple/contacts/"+page+"/"+$scope.pageItems,contactParam)
+			$scope.contactParam = {status : 1,user_id : $rootScope.userDetails.id};
+			dataService.get("/getmultiple/contacts/"+page+"/"+$scope.pageItems,$scope.contactParam)
 			.then(function(response) {
 				if(response.status == 'success'){				
 					$scope.totalRecords = response.totalRecords;
 					$scope.contacts = response.data;
+					console.log(contacts);
 				}else{
 						$scope.totalRecords = [];
 						$scope.contacts = 0;
 						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status](response.message);
 					}
-		}); 
+			}); 
 		}
 	/*******************************************************************************/
 	};	

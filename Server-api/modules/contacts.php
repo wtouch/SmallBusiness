@@ -22,11 +22,8 @@
 			$where = array();
 			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
 			
-			//if(isset($_GET['search']) && $_GET['search'] == true){
-				//(isset($_GET['title'])) ? $like['title'] = $_GET['title'] : "";
-			//} 
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
-			(isset($_GET['featured'])) ? $where['featured'] = $_GET['featured'] : "";
+			(isset($_GET['name'])) ? $where['name'] = $_GET['name'] : "";
 			
 			$userCols['name'] = "name";
 			$userCols['username'] = "username";

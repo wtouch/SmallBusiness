@@ -41,17 +41,17 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				});
 			};
 	/**************************************************************************************/
-			$scope.verify = function(id, verified){
-				$scope.veryfiedData = {verified : verified};
-				dataService.put("put/project/"+id, $scope.veryfiedData)
-				.then(function(response) {
-					if(response.status == 'success'){
-						$scope.getProject($scope.CurrentPage);
-					}
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Verify Property", response.message);
-				});
-			} ;		
+		$scope.verify = function(id, verified){
+			$scope.veryfiedData = {verified : verified};
+			dataService.put("put/project/"+id, $scope.veryfiedData)
+			.then(function(response) {
+				if(response.status == 'success'){
+					$scope.getProject($scope.CurrentPage);
+				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Verify Property", response.message);
+			});
+		} ;		
 	/**************************************************************************************/	
 		$scope.searchFilter = function(statusCol, searchProp) {
 			$scope.filterStatus= {search: true};

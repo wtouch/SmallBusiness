@@ -1,0 +1,83 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="row">
+	<div class="col-sm-12">	
+		<h3 class="col-sm-offset-2 col-sm-9 text-center">Add New Group</h3>
+		<form class="form-horizontal" name="addgroupForm" role="form" ng-submit="addgroupForm.$valid" novalidate="novalidate">
+		
+	
+		<div class="form-group">
+			<label for="groupname" class="col-sm-2 control-label">Group Name *</label>
+			<div class="col-sm-9">
+				<input type="text" id="groupname" class="form-control" name="groupname" placeholder="Group Name" ng-model="modalOptions.addgroup.groupname" required />
+				<span class="help-block" ng-show="addgroupForm.groupname.$dirty && addgroupForm.groupname.$invalid">
+					<span class="text-danger" ng-show="addgroupForm.groupname.$error.required">Group Name is required.</span>
+				</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="contact_type" class="col-sm-2 control-label">Contact Type*</label>
+			<div class="col-sm-9">
+				<select class="form-control" name="contact_type" id="contact_type"  ng-model="modalOptions.addgroup.user_id" ng-options="item.id as item.name for item in    modalOptions.customerList| filter: { group_name : 'customer'}" required>
+					<option value="">Select Contact Type</option>
+				</select>
+			</div>
+		</div>
+			
+		<div class="form-group">
+			<label for="contacts" class="col-sm-2 control-label">Contacts *</label>
+			<div class="col-sm-9">
+				<textarea type="text" id="contacts" class="form-control" name="contacts" placeholder="Group Name" ng-model="modalOptions.addgroup.contacts" required >
+				</textarea>
+				<span class="help-block" ng-show="addgroupForm.contacts.$dirty && addgroupForm.contacts.$invalid">
+					<span class="text-danger" ng-show="addgroupForm.contacts.$error.required">Group Name is required.</span>
+				</span>
+			</div>
+		</div>
+		
+		<div class="form-group">	
+			<label  for="email" class="col-sm-2 control-label">Email *</label>
+			<div class="col-sm-9">
+				<input type="Email" class="form-control" id="email" ng-model="modalOptions.addgroup.email" name="email" placeholder="Enter Email" required />
+				
+				<span class="help-block" ng-show="addgroupForm.email.$dirty && addgroupForm.email.$invalid">
+					<span class="text-danger" ng-show="addgroupForm.email.$error.required">Email is required.</span>
+					<span class="text-danger" ng-show="addgroupForm.email.$error.email">Invalid Email address.</span>
+				</span>
+			</div>
+		</div> 
+		
+		<div class="form-group">
+			<label for="address" class="col-sm-2 control-label">Address *</label>
+			<div class="col-sm-9">
+				<textarea class="form-control" id="address" ng-model="modalOptions.addgroup.address" name="address" placeholder="Enter address" ng-maxlength="160" required></textarea>
+				<p ng-hide="addgroupForm.address.$error.maxlength">{{ 160 - modalOptions.addgroup.address.length + " Characters left"}}</p>
+				<span class="help-block" ng-show="addgroupForm.address.$dirty &&  addgroupForm.address.$invalid">
+					<span class="text-danger" ng-show="addgroupForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="addgroupForm.address.$error.required">Address is required.</span>
+				</span>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="phone" class="col-sm-2 control-label">Mobile *</label>
+			<div class="col-sm-9">
+				<input type="text" id="phone" name="phone" class="form-control" ng-model="modalOptions.addgroup.phone" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required />
+				<span class="help-block" ng-show="addgroupForm.phone.$dirty && addgroupForm.phone.$invalid">
+					<span ng-show="addgroupForm.phone.$error.required" class="text-danger">Mobile Number is required.</span>
+					<span class="text-danger" ng-show="addgroupForm.phone.$error.pattern && (addgroupForm.phone.$dirty)">Enter a valid Contact Number</span>
+				</span>
+			</div>						
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-9">
+				<button type="submit" class="btn btn-success" ng-click="modalOptions.postData(modalOptions.addgroup)" >Add Contact</button>
+				<a href="#/dashboard/contact/addcontact" class="btn btn-danger">Cancel</a>
+			</div>
+		</div>						
+		</form>			
+	</div>
+</div>
