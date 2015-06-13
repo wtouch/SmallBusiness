@@ -4,20 +4,23 @@
 	<div class="col-sm-6 panel panel-default">
 		<div class="form-group panel-body" ng-if="userDetails.group_name != 'customer'">		
 			<label for="customer" class="col-sm-2 control-label">Customer*</label>
-			<div class="col-sm-6">				
-				<select class="form-control" name="customer" id="customer" ng-change="getBusiness(reqnewsite.user_id)" ng-model="reqnewsite.user_id" ng-options="item.id as item.name for item in customerList | filter:{ group_name : 'customer' }" required>
+			<div class="col-sm-5">				
+				<select class="form-control" name="customer" id="customer" ng-change="getBusiness(reqnewsite.user_id); getMenulist(reqnewsite.user_id)" ng-model="reqnewsite.user_id" ng-options="item.id as item.name for item in customerList | filter:{ group_name : 'customer' }" required>
 					<option value="">Select Customer</option>
 				</select>				
 				<span class="help-block" ng-show="requestsiteForm.customer.$dirty && requestsiteForm.customer.$invalid">
 					<span ng-show="requestsiteForm.customer.$error.required" class="text-danger">Customer is required.</span>
 				</span>	
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-3">
 				<a href="#/dashboard/users/adduser" class="btn btn-default">Add New User</a>
 			</div>
 		</div>
 		
-		<input type="hidden" class="form-control" ng-if="userDetails.group_name == 'customer'" ng-model="reqnewsite.user_id" ng-init="reqnewsite.user_id = userDetails.id; getBusiness(reqnewsite.user_id)" readonly/>
+		<input type="hidden" class="form-control" ng-if="userDetails.group_name == 'customer'" ng-model="reqnewsite.user_id" ng-init="reqnewsite.user_id = userDetails.id; getBusiness(reqnewsite.user_id); getMenulist(reqnewsite.user_id)" readonly/>
+		
+		<input type="hidden" ng-init="reqtemp.date" ng-model="reqnewsite.registered_date" readonly/>
+		
 		
 		<div class="form-group" ng-if="reqnewsite.user_id" >
 			<label  for="selectbusiness" class="col-sm-2 control-label">Select Business *</label>			
@@ -129,6 +132,7 @@
 						</span>	
 				</div>
 		</div>
+		
 		<div class="form-group">
 			<label for="contactno" class="col-md-2 control-label">Contact Number* </label>
 			<div class="col-md-9">
@@ -138,6 +142,7 @@
 					</span>
 			</div>	
 		</div>
+		
 		<div class="form-group">	
 			<label  for="contact_email" class="col-sm-2 control-label">Contact Email*</label>	
 				<div class="col-sm-9">
@@ -220,24 +225,33 @@
 		</div>	
 	</div>
 	
-	<div class="col-sm-6 panel panel-default">
-		<script type="text/ng-template"  id="tree_item_renderer.html" ng-init="getMenulist()">
-			<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
-			<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
-			<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
-			<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'pull-right glyphicon glyphicon-ok'" aria-hidden="true"></span>
-			
-			<ul ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
-				<li ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
-					<span class="caret pull-right" ng-if="data.childMenu"></span>
-				</li>
-			</ul> 
-		</script> 
-		<ul class="list-group" as-sortable="dragControlListeners"ng-model="reqnewsite.config.menus">
-			<li class="list-group-item" ng-repeat="data in reqnewsite.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
-			</li>
-		</ul>
-	</div>
+	<div class="col-sm-6" ng-init="ind = []">
+						<script type="text/ng-template" id="tree_item_renderer.html">
+							<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
+							 
+							<a class="glyphicon glyphicon-ok" ng-model="data.status" ng-class="(data.status==1) ? ' pull-right glyphicon glyphicon-ok text-success' : 'pull-right glyphicon glyphicon-remove text-danger'" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+							</a>
+							
+							<span ng-show="data.childMenu" class="caret" ng-click="isCollapsed = !isCollapsed"></span>
+								
+							<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
+							
+							<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
+							
+							<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
+							
+							<div ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
+								<div class="menudiv childMenu" collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+									<span class="caret pull-right" ng-if="data.childMenu"></span>
+								</div>
+							</div> 
+						</script>
+						<div class="list-group" as-sortable="dragControlListeners"ng-model="reqnewsite.config.menus">
+							<div class="list-group-item menudiv" ng-repeat="data in reqnewsite.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
+							</div>
+						</div>
+					</div>
+					
 	
 	<div class="panel-panel-default">	
 	<div class="form-group panel-body" ng-click="getMapObject()">

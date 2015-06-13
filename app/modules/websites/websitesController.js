@@ -17,6 +17,7 @@ define(['app'], function (app) {
 		$scope.websitePart = $routeParams.websitePart;
 		$scope.formPart = 'checkdomainavailable';
 		$scope.changeStatus={};
+		$scope.isCollapsed = true;
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
 		};
@@ -40,7 +41,6 @@ define(['app'], function (app) {
 					
 				}
 			});
-			
 			// code for get business list
 			dataService.get("getmultiple/mytemplate/1/100",{user_id:user_id, status : 1})
 			.then(function(response) {  
@@ -52,17 +52,7 @@ define(['app'], function (app) {
 			});
 		}
 		
-		$scope.getMenulist = function(){
-			$scope.seoParam ={user_id : $rootScope.userDetails.id,status:1}
-			dataService.get("getmultiple/seo/1/100",$scope.seoParam)
-			.then(function(response) {  
-				if(response.status == 'success'){
-					$scope.reqnewsite.config = response.data;
-				}else{
-					$notification.error("Get", "You didn't have any Template! Please apply free template or buy new template first.");
-				}
-			});
-		}
+		
 		//For display by default website list
 		if(!$scope.websitePart) {
 			$location.path('/dashboard/websites/websiteslist');
@@ -196,6 +186,7 @@ define(['app'], function (app) {
 			$scope.reqnewsite = { config : {google_map:{}}};
 			$scope.postData = function(reqnewsite) { 
 				reqnewsite.date = dataService.currentDate;
+				reqnewsite.registered_date = dataService.currentDate;
 				dataService.post("post/website",reqnewsite)
 				.then(function(response) {
 					if(response.status == "success"){
@@ -288,6 +279,20 @@ define(['app'], function (app) {
 		}
 		$scope.getLocation();
 		//end google map
+		$scope.getMenulist = function(user_id){
+			$scope.seoParam ={user_id : user_id, status:1};
+			dataService.get("getmultiple/seo/1/100",$scope.seoParam)
+			.then(function(response) {  
+				$scope.reqnewsite.config.menus = response;
+				console.log(response);
+				if(response.status == 'success'){
+					
+					
+				}else{
+					//$notification[response.status]("", response.message);
+				}
+			});
+		}
 			
 		};
         

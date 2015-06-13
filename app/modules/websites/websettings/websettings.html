@@ -147,7 +147,7 @@
 							
 							<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
 							
-							<div  ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
+							<div ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
 								<div class="menudiv childMenu" collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
 									<span class="caret pull-right" ng-if="data.childMenu"></span>
 								</div>
