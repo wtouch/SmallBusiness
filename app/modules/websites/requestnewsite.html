@@ -1,7 +1,7 @@
 <h3 class="col-sm-offset-2 col-sm-9">Request For New Site</h3>
 	<form name="requestsiteForm" class="form-horizontal" role="form" ng-submit="requestsiteForm.$valid" novalidate="novalidate" ng-init="setFormScope(this)">
 	<div class="row">
-	<div class="col-sm-7 panel panel-default">
+	<div class="col-sm-6 panel panel-default">
 		<div class="form-group panel-body" ng-if="userDetails.group_name != 'customer'">		
 			<label for="customer" class="col-sm-2 control-label">Customer*</label>
 			<div class="col-sm-6">				
@@ -160,6 +160,7 @@
 				</span>
 			</div>						
 		</div>
+		
 		<div class="form-group">
 			<label for="" class="col-sm-2 control-label"></label>
 			<div class="col-sm-4"> 
@@ -183,47 +184,42 @@
 			</div>									
 		</div>
 			
-		
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-9">
-				<button ng-disabled="requestsiteForm.$invalid || requestsiteForm.domain_name.$error.available" type="submit" class="btn btn-success" ng-click="postData(reqnewsite)">Send Request</button>
-				
-				<button type="reset" class="btn btn-danger">Reset</button>
-			</div>
-		</div>	
-		
-	</div>
-	
-	<div class="col-sm-5 panel panel-default">
+		<h4>Social Links</h4>
 		<div class ="form-group">	
-			<label  for="facebook" class="col-sm-3 control-label">Facebook</label>	
+			<label  for="facebook" class="col-sm-2 control-label">Facebook</label>	
 			<div class="col-sm-9">
 				<input type="text" class="form-control" id="facebook" ng-model="reqnewsite.config.sociallinks.facebook" name="facebook" />
 			</div>					
 		</div>
-		
 		<div class="form-group ">	
-			<label  for="google" class="col-sm-3 control-label">Google</label>	
+			<label  for="google" class="col-sm-2 control-label">Google</label>	
 			<div class="col-sm-9">
 				<input type="text" class="form-control" name="google" id="google" ng-model="reqnewsite.config.sociallinks.google"  />
 			</div>					
 		</div>
-		
 		<div class="form-group">	
-			<label  for="twitter" class="col-sm-3 control-label">Twitter</label>	
+			<label  for="twitter" class="col-sm-2 control-label">Twitter</label>	
 			<div class="col-sm-9">
 				<input type="text" class="form-control" id="twitter" name="twitter" ng-model="reqnewsite.config.sociallinks.twitter"  />
 			</div>					
 		</div>
 		
 		<div class="form-group ">	
-			<label  for="linkedin" class="col-sm-3 control-label">LinkedIn</label>	
+			<label  for="linkedin" class="col-sm-2 control-label">LinkedIn</label>	
 			<div class="col-sm-9">
 				<input type="text" class="form-control" id="linkedin" name="linkedin" ng-model="reqnewsite.config.sociallinks.linkedin"  />
 			</div>					
 		</div>
 		
-		<script type="text/ng-template"  id="tree_item_renderer.html">
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-9">
+				<button ng-disabled="requestsiteForm.$invalid || requestsiteForm.domain_name.$error.available" type="submit" class="btn btn-success" ng-click="postData(reqnewsite)">Send Request</button>
+			</div>
+		</div>	
+	</div>
+	
+	<div class="col-sm-6 panel panel-default">
+		<script type="text/ng-template"  id="tree_item_renderer.html" ng-init="getMenulist()">
 			<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
 			<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
 			<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
@@ -234,12 +230,11 @@
 					<span class="caret pull-right" ng-if="data.childMenu"></span>
 				</li>
 			</ul> 
-		</script>
+		</script> 
 		<ul class="list-group" as-sortable="dragControlListeners"ng-model="reqnewsite.config.menus">
 			<li class="list-group-item" ng-repeat="data in reqnewsite.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
 			</li>
 		</ul>
-
 	</div>
 	
 	<div class="panel-panel-default">	

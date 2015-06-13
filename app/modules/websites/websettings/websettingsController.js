@@ -10,14 +10,13 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
 		$scope.websetting = {config : { google_map: {}}};
+		$scope.isCollapsed = true;
 		
 		$scope.dragControlListeners = {
 			accept: function (sourceItemHandleScope, destSortableScope) {
 				return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
 			}
 		};
-		
-		$scope.isCollapsed = true;
 		
 		//code for view single website details
 		dataService.get("getsingle/website/"+$routeParams.id)

@@ -51,18 +51,18 @@ define(['app'], function (app) {
 					$notification.error("Get Template", "You didn't have any Template! Please apply free template or buy new template first.");
 				}
 			});
-			
-			// code for get  
+		}
+		
+		$scope.getMenulist = function(){
 			dataService.get("getmultiple/seo/1/100",{user_id:user_id, status : 1})
 			.then(function(response) {  
 				if(response.status == 'success'){
-					$scope.reqnewsite = response.data;
+					$scope.reqnewsite.config = response.data;
 				}else{
 					$notification.error("Get", "You didn't have any Template! Please apply free template or buy new template first.");
 				}
 			});
 		}
-		
 		//For display by default website list
 		if(!$scope.websitePart) {
 			$location.path('/dashboard/websites/websiteslist');
