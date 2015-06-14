@@ -31,14 +31,12 @@ define(['app'], function (app) {
 			}
 		};
 		$scope.getBusiness = function(user_id){
-		// code for get business list
 			dataService.get("getmultiple/business/1/100",{user_id:user_id, status : 1})
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.businessList = response.data;
 				}else{
 					$notification.error("Get Business", "You didn't added any business! Please add business first.");
-					
 				}
 			});
 			// code for get business list
@@ -51,7 +49,6 @@ define(['app'], function (app) {
 				}
 			});
 		}
-		
 		
 		//For display by default website list
 		if(!$scope.websitePart) {
