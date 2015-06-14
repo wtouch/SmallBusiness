@@ -50,6 +50,14 @@ define(['app'], function (app) {
 			});
 		}
 		
+		/* $scope.reqnewsite.business_id = response.data.business_id;
+		$scope.reqnewsite.template_id = response.data.template_id;
+		$scope.reqnewsite.user_id = response.data.user_id;
+		
+		if(response.data.config.menus == undefined){
+			$scope.getMenulist(response.data.user_id, response.data.business_id);
+		} */
+		
 		//For display by default website list
 		if(!$scope.websitePart) {
 			$location.path('/dashboard/websites/websiteslist');
@@ -276,7 +284,7 @@ define(['app'], function (app) {
 		}
 		$scope.getLocation();
 		//end google map
-		$scope.getMenulist = function(user_id){
+		/* $scope.getMenulist = function(user_id){
 			$scope.seoParam ={user_id : user_id, status:1};
 			dataService.get("getmultiple/seo/1/100",$scope.seoParam)
 			.then(function(response) {  
@@ -289,7 +297,23 @@ define(['app'], function (app) {
 					//$notification[response.status]("", response.message);
 				}
 			});
+		} */
+		$scope.getMenulist = function(user_id, business_id){
+			console.log(user_id, business_id);
+			$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
+				
+				dataService.get("getmultiple/seo/1/100",$scope.seoParam)
+				.then(function(response) {
+					if(response.status == 'success'){
+						$scope.reqnewsite.config.menus = response.data;
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Menu Selection", response.message);
+					}
+				});
+			
 		}
+		
 			
 		};
         

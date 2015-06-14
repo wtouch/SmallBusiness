@@ -4,7 +4,7 @@
 	<div class="col-sm-6 panel panel-default">
 		<div class="form-group panel-body" ng-if="userDetails.group_name != 'customer'">		
 			<label for="customer" class="col-sm-2 control-label">Customer*</label>
-			<div class="col-sm-5">				
+			<div class="col-sm-9">				
 				<select class="form-control" name="customer" id="customer" ng-change="getBusiness(reqnewsite.user_id); getMenulist(reqnewsite.user_id)" ng-model="reqnewsite.user_id" ng-options="item.id as item.name for item in customerList | filter:{ group_name : 'customer' }" required>
 					<option value="">Select Customer</option>
 				</select>				
@@ -12,9 +12,9 @@
 					<span ng-show="requestsiteForm.customer.$error.required" class="text-danger">Customer is required.</span>
 				</span>	
 			</div>
-			<div class="col-sm-3">
+			<!-- <div class="col-sm-3">
 				<a href="#/dashboard/users/adduser" class="btn btn-default">Add New User</a>
-			</div>
+			</div> -->
 		</div>
 		
 		<input type="hidden" class="form-control" ng-if="userDetails.group_name == 'customer'" ng-model="reqnewsite.user_id" ng-init="reqnewsite.user_id = userDetails.id; getBusiness(reqnewsite.user_id); getMenulist(reqnewsite.user_id)" readonly/>
@@ -23,17 +23,17 @@
 		
 		
 		<div class="form-group" ng-if="reqnewsite.user_id" >
-			<label  for="selectbusiness" class="col-sm-2 control-label">Select Business *</label>			
-			<div class="col-sm-3">
-				<select id="selectBusiness" name="selectBusiness" class="form-control" ng-change="changeScope(selectBusiness)" ng-model="reqnewsite.business_id" ng-options="item.id as item.business_name for item in businessList" required> 
+			<label  for="selectbusiness" class="col-sm-2 control-label">Business *</label>			
+			<div class="col-sm-4">
+				<select id="selectBusiness" name="selectBusiness" class="form-control" ng-change="changeScope(selectBusiness);getMenulist(reqnewsite.user_id, reqnewsite.business_id)" ng-model="reqnewsite.business_id" ng-options="item.id as item.business_name for item in businessList" required> 
 					<option value="">Select Business</option>
 				</select> 
 				<span class="help-block" ng-show="requestsiteForm.selectBusiness.$dirty && requestsiteForm.selectBusiness.$invalid">
 				<span ng-show="requestsiteForm.selectBusiness.$error.required" class="text-danger">Business is required.</span>
 				</span>	
 			</div>
-			<label  for="selectTemplate" class="col-sm-2 control-label">Select Template *</label>		
-			<div class="col-sm-3">
+			<label  for="selectTemplate" class="col-sm-1 control-label">Template *</label>		
+			<div class="col-sm-4">
 				<select id="selectTemplate" name="selectTemplate" class="form-control" ng-model="reqnewsite.template_id" ng-options="item.id as item.template_name for item in templateList" required>
 					<option value="">Select Template</option>
 				</select>
@@ -226,6 +226,7 @@
 	</div>
 	
 	<div class="col-sm-6" ng-init="ind = []">
+	<button ng-click="getMenulist(reqnewsite.user_id, reqnewsite.business_id)">Refresh</button>
 		<script type="text/ng-template" id="tree_item_renderer.html">
 			<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
 			 
