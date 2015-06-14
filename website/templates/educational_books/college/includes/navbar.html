@@ -22,11 +22,11 @@
 			E-mail : {{data.contact_profile.email}}
 		</address>
 	</div>
-</div>{{uri}}fd
+</div>
 <nav class="navbar navbar-default">
 	<div class="collapse navbar-collapse" id="mainNav">
 		<ul class="nav navbar-nav">
-			{% include pathLink with {'links' : routes, 'uri' : uri } only %}
+			{% include templatePath ~ '/' ~ "includes/links.html" with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 		</ul>
 	</div>
 </nav>

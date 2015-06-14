@@ -4,7 +4,7 @@
 		<a href="{{ link.url }}">{{ link.name }}</a>
 		{% if link.childMenu %}
 			<ul>
-				{% include "includes/links.html" with {'links': link.childMenu} %}
+				{% include templatePath ~ '/' ~ "includes/links.html" with {'links': link.childMenu} %}
 			</ul>
 		{% endif %}
 	</li>

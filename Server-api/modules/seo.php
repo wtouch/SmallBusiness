@@ -19,6 +19,7 @@
 		$userCols['name'] = "name";
 		$userCols['username'] = "username";
 		$user = $db->getUsers($userId,$userCols);
+		
 		$db->setLimit($limit);
 		$business = $db->setJoinString("INNER JOIN", "business", array("user_id"=>$user.".id"));
 		$db->setWhere($where, $business);
@@ -56,18 +57,18 @@
 			}
 			
 			foreach($productCategory as $key => $value){
-				$productMenus[] = array("name" => $key, "url" => "/products/".str_replace(" ", "-",$key), "status" => "1", "childMenu" => $value);
+				$productMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/products/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
 			}
 			
 			foreach($serviceCategory as $key => $value){
-				$serviceMenus[] = array("name" => $key, "url" => "/services/".str_replace(" ", "-",$key), "status" => "1", "childMenu" => $value);
+				$serviceMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/services/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
 			}
 			
-			if(count($productMenus) >=1 || count($productMenus) >=1){
+			if(count($productMenus) >=1 || count($serviceMenus) >=1){
 				
-				$menus[] = array("name" => "Products", "url" => "/products", "status" => "1", "childMenu" => $productMenus );
+				if(count($productMenus) >=1) $menus[] = array("name" => "Products", "url" => "/products", "status" => "1", "childMenu" => $productMenus );
 				
-				$menus[] = array("name" => "Services", "url" => "/services", "status" => "1", "childMenu" => $serviceMenus );
+				if(count($serviceMenus) >=1) $menus[] = array("name" => "Services", "url" => "/services", "status" => "1", "childMenu" => $serviceMenus );
 			}
 			
 		}

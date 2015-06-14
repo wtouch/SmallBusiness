@@ -19,7 +19,7 @@ class websiteManager{
 	function getTemplate($templateFolder, $page){
 		$loader = new Twig_Loader_Filesystem($templateFolder);
 		$this->twig = new Twig_Environment($loader);
-		return $this->twig->loadTemplate("educational_books/college/index.html");
+		return $this->twig->loadTemplate($page);
 	}
 	
 	function getConfig(){
@@ -107,7 +107,7 @@ class websiteManager{
             $response["data"] = $businessData["data"];
             $response["path"] = "http://".$_SERVER['SERVER_NAME']."/website/templates/educational_books/college/";
 			
-            $response["templatePath"] = "educational_books/college";
+            $response["templatePath"] = "educational_books/college/";
             //$response["templatePath"] = "educational_books/college/about-us.html";
 			
 			print_r($response["templatePath"]);
@@ -118,11 +118,11 @@ class websiteManager{
 			
             $response["uri"] = ($page) ? "/".$page : '/home';
 			
-            $response["pathLink"] = "educational_books/college/includes/links.html";
+            $response["pathLink"] = "includes/links.html";
             
 			//$response["routes"] = array('home', 'about', 'contact',array("product" => array("product/26" => "Product one", "product/25" => "Product Two")));
 			
-			$template = $this->getTemplate($_SERVER['DOCUMENT_ROOT']."/website/templates/", $page);
+			$template = $this->getTemplate($_SERVER['DOCUMENT_ROOT']."/website/templates/", "educational_books/college/index.html");
 			
 			$template->display($response);
 			
