@@ -30,7 +30,15 @@ define(['app'], function (app) {
 				$notification[response.status]("Edit Project", response.message);
 			});
 		};
-	/*************************************************************************/
+	/**************************************************************************************/	
+		$scope.searchFilter = function(statusCol, searchProp) {
+			$scope.contactParam = {status : 1,user_id : $rootScope.userDetails.id};
+			$scope.filterStatus= {search: true};
+			(searchProp =="") ? delete $scope.contactParam[statusCol] : $scope.filterStatus[statusCol] = searchProp;
+			angular.extend($scope.contactParam, $scope.filterStatus);
+			$scope.getContact(1,$scope.contactParam);
+		};
+    /**************************************************************************************/
 	$scope.openContact= function (url,contactData) {
 		var modalDefaults = {
 			templateUrl: url,	

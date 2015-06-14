@@ -1,51 +1,70 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+</div>
 <h3 class="text-center">Send SMS</h3>
-<form name="composeForm" class="horizontal" role="form" novalidate>
-	<div class="row">
-		<div class="form-group">
-			<label  for="sendto" class="col-sm-2 control-label">Send To *</label>	
-				<select id="sendto" name="sendto" class="form-control" ng-model="sendto" required> 
-					<option value="" selected>Select Sender</option>
+	<form name="composeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="composeForm.$valid">
+		<div class="form-group" ng-if="userDetails.group_name != 'customer'">
+			<label for="sender_id" class="col-sm-2 control-label">Sender Id *</label>
+			<div class="col-sm-7">
+				<select class="form-control" name="sender_id" id="sender_id"  ng-model="sender" required>
+					<option value="">Select Sender Id</option>
 					<option value="individual">Individual</option>
-					<option value="group">Group</option>
-					<option value="multiple">Multiple</option>
+					<option value="Group">Group</option>
+					<option value="Multiple">Multiple</option>
 				</select>
-		</div>
-	
-		<div class="form-group">
-			<label for="senderid" class="col-sm-2 control-label">Select Sender Id *</label>	
-				<div class="col-sm-9">
-					<select id="senderid" name="senderid" class="form-control" ng-model="compose.sender_id" required> 
-						<option value="" selected>Select Id</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-					</select> 
-				</div>
-		</div>
-		
-		<div class="form-group" ng-if="sendto==individual">
-			<label for="contact" class="col-sm-2 control-label">Contact *</label>
-			<div class="col-sm-9">
-				<input type="text" name="contact" class="form-control" id="contact" ng-model="compose.contact" placeholder="Enter contact"/>
+				<span class="help-block" ng-show="composeForm.sender_id.$dirty && composeForm.sender_id.$invalid">
+				<span ng-show="composeForm.sender_id.$error.required" class="text-danger">Sender Id is required.</span>
+				</span>	
 			</div>
 		</div>
 		
 		<div class="form-group">
-			<label for="groupid" class="col-sm-2 control-label">Select Group Id</label>
-			<select name="groupid" id="groupid" class="form-control" ng-model="compose.groupid"required>
-				<option value="" selected>Select Group Id</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-			</select>
+			<label for="contact" class="col-sm-2 control-label">Contact *</label>
+			<div class="col-sm-7">
+				<input type="text" id="contact" class="form-control" name="contact" placeholder="Conatct No" ng-model="modalOptions.compose.contact" required >
+				</input>
+				<span class="help-block" ng-show="composeForm.contact.$dirty && composeForm.contact.$invalid">
+					<span class="text-danger" ng-show="composeForm.contact.$error.required">Contact is required.</span>
+				</span>
+			</div>
 		</div>
 		
 		<div class="form-group">
 			<label for="contacts" class="col-sm-2 control-label">Contacts *</label>
-			<div class="col-sm-9">
-				<textarea type="text" name="contacts" id="contacts" class="form-control" ng-model="compose.contacts" placeholder="Enter Contacts">
+			<div class="col-sm-7">
+				<textarea type="text" id="contacts" class="form-control" name="contacts" placeholder="Group Name" ng-model="modalOptions.compose.contacts" required >
 				</textarea>
+				<span class="help-block" ng-show="composeForm.contacts.$dirty && composeForm.contacts.$invalid">
+					<span class="text-danger" ng-show="composeForm.contacts.$error.required">Contact is required.</span>
+				</span>
 			</div>
 		</div>
-	</div>
-</form>
+		
+		<div class="form-group">
+			<label for="message" class="col-sm-2 control-label">Message *</label>
+			<div class="col-sm-7">
+				<textarea type="text" id="message" class="form-control" name="message" placeholder="Message" ng-model="modalOptions.compose.message" required >
+				</textarea>
+				<span class="help-block" ng-show="composeForm.message.$dirty && composeForm.message.$invalid">
+					<span class="text-danger" ng-show="composeForm.message.$error.required">Message is required.</span>
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="custom" class="col-sm-2 control-label">Signature</label>
+			<div class="col-sm-9">
+				<label class="radio-inline">
+					<input type="radio" name="Public" id="Public" value="Public" ng-model="reqtemp.template_type">Add Signature
+				</label>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-9">
+				<button type="submit" class="btn btn-primary" ng-disabled="composeForm.$dirty && composeForm.$invalid" ng-click="postData(compose)">Send SMS</button>
+				
+			</div>
+		</div>					
+	</form>
+			

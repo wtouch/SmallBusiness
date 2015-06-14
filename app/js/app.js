@@ -96,7 +96,7 @@ define(['angular',
 				.when('/dashboard/project', route.resolve({controller: 'project',template: 'project',
 					label: "Project"}, 'project/'))
 					
-				 .when('/dashboard/project/addproject/:id?', route.resolve({controller: 'addproject',template: 'addproject',label: "Add Project"}, 'project/addproject/'))
+				.when('/dashboard/project/addproject/:id?', route.resolve({controller: 'addproject',template: 'addproject',label: "Add Project"}, 'project/addproject/'))
 				
 				
 				.when('/dashboard/websites/websettings/:id', route.resolve({controller:'websettings', template: 'websettings',label:"Website Settings"}, 'websites/websettings/'))
@@ -106,7 +106,7 @@ define(['angular',
 				.when('/dashboard/seo/seo', route.resolve({controller: 'seo',template: 'seo',
 					label: "SEO"}, 'seo/'))
 				
-				.when('/dashboard/sms', route.resolve({controller: 'sms',template: 'sms',label:"sms"}, 'sms/'))
+				.when('/dashboard/sms', route.resolve({controller: 'sms',template: 'sms',label:"SMS"}, 'sms/'))
 				 
 				.when('/dashboard/contact', route.resolve({controller: 'contact',template: 'contact',label:"Contact"}, 'contact/'))
 					
