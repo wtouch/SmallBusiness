@@ -15,7 +15,6 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.contactView = $routeParams.contactView;
 		
-		//For display by default userslist.html page
 		if(!$routeParams.contactView) {
 			$location.path('/dashboard/contact');
 		}
@@ -32,31 +31,51 @@ define(['app'], function (app) {
 			});
 		};
 	/*************************************************************************/
-	$scope.openContact= function (url) {
-			var modalDefaults = {
-				templateUrl: url,	
-				size : 'lg'
-			};
-			var modalOptions = {
-				date : $scope.currentDate,
-				getParty: function(modalOptions){
-					dataService.get("getmultiple/user/1/100", {status: 1, user_id : $rootScope.userDetails.id}).then(function(response){
-						modalOptions.customerList = (response.data);
-					});
-				},
-				postData : function(contact) {
-				 dataService.post("post/contacts",contact)
-				.then(function(response) {  
-					if(response.status == "success"){
-						
-					}
-					 if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Contact Added", response.message); 
+	$scope.openContact= function (url,contactData) {
+		var modalDefaults = {
+			templateUrl: url,	
+			size : 'lg'
+		};
+		var modalOptions = {
+			date : $scope.currentDate,
+			contactData : contactData,
+			
+			getParty: function(modalOptions){
+				dataService.get("getmultiple/user/1/100", {status: 1, user_id : $rootScope.userDetails.id}).then(function(response){
+					modalOptions.customerList = (response.data);
 				});
-				}, 
-			};
-			modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+			},
+			postData : function(contact) {
+			 dataService.post("post/contacts",contact)
+			.then(function(response) {  
+				if(response.status == "success"){
+					$scope.getContact($scope.CurrentPage);
+				}
+				 if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Contact Added", response.message); 
 			});
+			}, 
+			updateData : function(id,contact) {
+				dataService.put("put/contacts/"+ contactData.id,contact)
+				.then(function(response) {
+					if(response.status == "success"){
+						$scope.getContact($scope.CurrentPage);
+					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Record Updated", response.message);
+				});
+			},
+			contact : (contactData) ? {
+				name : contactData.name,
+				category : contactData.category,
+				email : contactData.email,
+				address : contactData.address,
+				user_id : contactData.user_id,
+				mobile : contactData.mobile
+			}:{ } 
+		};
+		modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+		});
 	};
 	/**************************************************************************/
 	$scope.openGroup= function (url) {
@@ -78,7 +97,7 @@ define(['app'], function (app) {
 				if(response.status == 'success'){				
 					$scope.totalRecords = response.totalRecords;
 					$scope.contacts = response.data;
-					console.log(contacts);
+					console.log($scope.contacts);
 				}else{
 						$scope.totalRecords = [];
 						$scope.contacts = 0;
@@ -87,7 +106,39 @@ define(['app'], function (app) {
 					}
 			}); 
 		}
-	/*******************************************************************************/
+	/***********************************************************************************/
+		// code for filter data as per satus (delete/active)		
+		$scope.changeStatus = function(statusCol, showStatus) {
+			$scope.filterStatus= {};
+			(showStatus =="") ? delete $scope.contactParam[statusCol] : $scope.filterStatus[statusCol] = showStatus;
+			angular.extend($scope.contactParam, $scope.filterStatus);
+			dataService.get("getmultiple/contacts/1/"+$scope.pageItems, $scope.contactParam)
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.contacts = response.data;
+					$scope.totalRecords = response.totalRecords;
+				}else{
+					$scope.contacts = {};
+					$scope.totalRecords = {};
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status](response.message);
+				}
+			});
+			
+		};
+	/**********************************************************************************/
+	$scope.getUsers = function(){
+		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+		.then(function(response) {  
+			if(response.status == 'success'){
+				$scope.customerList = response.data;
+			}else{
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Get Customers", response.message);
+			}
+		});
+		};
+	/**********************************************************************************/	
 	};	
 	 
 	// Inject controller's dependencies

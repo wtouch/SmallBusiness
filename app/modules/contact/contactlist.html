@@ -24,8 +24,8 @@
 	
 		<div class="col-sm-2">
 			<div class="bottomspace">
-				<label for="filterbycustomerid" class="control-label">Select By Customer</label>
-					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+				<label for="filterbycustomerid" ng-init="getUsers()" class="control-label">Select By Customer</label>
+					<select id="filterbycustomerid"  class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
 						<option value="">Select Customer</option>
 					</select>
 			</div>
@@ -46,7 +46,7 @@
 			</thead>
 			<tbody ng-init="getContact(CurrentPage)">
 				<tr ng-repeat="x in contacts | orderBy:sort">
-					<td>{{ $index + 1}}</td>
+					<td>{{((CurrentPage - 1) * pageItems) + $index + 1}}</td>
 					<td>{{x.name}}</td>
 					<td>{{x.email}}</td>
 					<td>{{x.mobile}}</td>
@@ -56,16 +56,15 @@
 					<td>
 					<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
 					</button>
-					<a class="btn btn-success" href="#/dashboard/contact/addcontact/{{x.id}}" tooltip="Edit Project Details">
-						<span class="glyphicon glyphicon-pencil"></span>
-					</a>
-					</td>
+					
+					<a ng-click="openContact('modules/contact/addcontact.html',x)" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="Edit Contact Information"><span class="glyphicon glyphicon-pencil"></span></a>
+					</td>{{x}}
 				</tr>					
 			</tbody>					
 		</table>
 	</div>
 	
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="usersListCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getContact(CurrentPage)"></pagination>
-		<pre>Page: {{usersListCurrentPage}} / {{numPages}}</pre>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="CurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getContact(CurrentPage)"></pagination>
+		<pre>Page: {{CurrentPage}} / {{numPages}}</pre>
 	</div>	

@@ -2,14 +2,15 @@
 	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 </div>
 <div class="row">
-	<div class="col-sm-12">	
-		<h3 class="col-sm-offset-2 col-sm-9 text-center"> Add New Contact</h3>
+	<div class="col-sm-12">
+		<h3 class="col-sm-offset-2 col-sm-9 text-center" ng-if="!modalOptions.contactData.id"> Add New Contact</h3>
+		<h3 class="col-sm-offset-2 col-sm-9 text-center" ng-if="modalOptions.contactData.id"> Update Contact</h3>
 		<form class="form-horizontal" name="addcontactForm" role="form" ng-submit="addcontactForm.$valid" novalidate="novalidate">
 		
-	<div class="form-group" ng-if="userDetails.group_name != 'customer'" ng-init="modalOptions.getParty(modalOptions)">
+	<div class="form-group" ng-if="userDetails.group_name != 'customer'" ng-init="modalOptions.contact = modalOptions.contact;contact.user_id = userDetails.id;modalOptions.getParty(modalOptions)">
 		<label for="customer" class="col-sm-2 control-label">Customer *</label>
 		<div class="col-sm-9">
-				<select class="form-control" name="customer" id="customer"  ng-model="modalOptions.contact.user_id" ng-options="item.id as item.name for item in    modalOptions.customerList| filter: { group_name : 'customer'}" required>
+				<select class="form-control" name="customer" id="customer" ng-model="modalOptions.contact.user_id" ng-options="item.id as item.name for item in    modalOptions.customerList| filter: { group_name : 'customer'}" required>
 					<option value="">Select Customer</option>
 				</select>
 			<span class="help-block" ng-show="addcontactForm.customer.$dirty && addcontactForm.customer.$invalid">
@@ -26,7 +27,7 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Name *</label>
 			<div class="col-sm-9">
-				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="modalOptions.contact.name" required />
+				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-init="modalOptions.contact.name = modalOptions.contact.name" ng-model="modalOptions.contact.name" required />
 				<span class="help-block" ng-show="addcontactForm.name.$dirty && addcontactForm.name.$invalid">
 					<span class="text-danger" ng-show="addcontactForm.name.$error.required">Name is required.</span>
 				</span>
@@ -80,8 +81,11 @@
 		
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
-				<button type="submit" class="btn btn-success" ng-click="modalOptions.postData(modalOptions.contact)" >Add Contact</button>
-				<a href="#/dashboard/contact/addcontact" class="btn btn-danger">Cancel</a>
+				<button type="submit" class="btn btn-success" ng-if="!modalOptions.contactData.id" ng-click="modalOptions.postData(modalOptions.contact)">Add Contact</button>
+				
+				<button type="submit" class="btn btn-success" ng-if="modalOptions.contactData.id" ng-click="modalOptions.updateData(modalOptions.contact.id,modalOptions.contact)">Update Contact</button>
+				
+				<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 			</div>
 		</div>						
 		</form>			
