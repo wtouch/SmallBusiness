@@ -46,6 +46,8 @@
 			if($data['data'][0]['job_careers']) $menus[] = array("name" => "Jobs/Careers", "url" => "/job-careers", "status" => "1");
 			
 			if($data['data'][0]['news_coverage']) $menus[] = array("name" => "Activities", "url" => "/activities", "status" => "1"); 
+			
+			if($data['data'][0]['gallery']) $menus[] = array("name" => "Gallery", "url" => "/gallery", "status" => "1");
 			$productCategory = array();
 			$serviceCategory = array();
 			foreach($data['data'] as $key => $value){

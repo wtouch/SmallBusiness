@@ -1,5 +1,5 @@
-<!--includes/menu-links.html-->
 {% for link in links %}
+{% if link.status == 1 %}
 	<li class="{{ (link.childMenu) ? 'child-menu' : '' }} {{ link.url == uri ? 'active' : 'not' }} {{uri}}" >
 		<a href="{{ link.url }}">{{ link.name }}</a>
 		{% if link.childMenu %}
@@ -8,4 +8,5 @@
 			</ul>
 		{% endif %}
 	</li>
+{% endif %}
 {% endfor %}
