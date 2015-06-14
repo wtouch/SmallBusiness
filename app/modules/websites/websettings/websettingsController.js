@@ -71,6 +71,20 @@ define(['app'], function (app) {
 				$notification[response.status]("Website Settings", response.message);
 			}) 
 		}
+		$scope.getMenulist = function(user_id){
+			$scope.seoParam ={user_id : user_id, status:1};
+			dataService.get("getmultiple/seo/1/100",$scope.seoParam)
+			.then(function(response) {  
+				$scope.websetting.config.menus = response;
+				console.log(response);
+				if(response.status == 'success'){
+					
+					
+				}else{
+					//$notification[response.status]("", response.message);
+				}
+			});
+		}
 		
 		// Google Map
 		$scope.initGoogleMap = function(latitude,longitude, zoom){
