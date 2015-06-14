@@ -20,36 +20,42 @@ define(['app'], function (app) {
 		
 		//code for view single website details
 		dataService.get("getsingle/website/"+$routeParams.id)
-		.then(function(response) { 
-			$scope.status = {status:1};
-			angular.extend($scope.status, {user_id : response.data.user_id});
-			dataService.get("getmultiple/business/1/100",$scope.status)
-			.then(function(business) {  
-				if(business.status == 'success'){
-					$scope.businessList = business.data;
-					console.log($scope.businessList);
-				}else{
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification.error("Get Business", "You didn't added any business! Please add business first.");
-				}
-			});
-			
-			//code for get business name from business
-			$scope.status = {status:1};
-			angular.extend($scope.status, {user_id : response.data.user_id});
-			dataService.get("getmultiple/mytemplate/1/100",$scope.status)
-			.then(function(template) {  
-				if(template.status == 'success'){
-					$scope.templateList = template.data;
-				}else{
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification.error("Get Template", "You didn't have any Template! Please apply free template or buy new template first.");
-				}
-			});
-		
+		.then(function(response) {
 			if(response.status == 'success'){
+				$scope.status = {status:1};
+				angular.extend($scope.status, {user_id : response.data.user_id});
+				dataService.get("getmultiple/business/1/100",$scope.status)
+				.then(function(business) {
+					if(business.status == 'success'){
+						$scope.businessList = business.data;
+						console.log($scope.businessList);
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification.error("Get Business", "You didn't added any business! Please add business first.");
+					}
+				});
+				
+				//code for get business name from business
+				$scope.status = {status:1};
+				angular.extend($scope.status, {user_id : response.data.user_id});
+				dataService.get("getmultiple/mytemplate/1/100",$scope.status)
+				.then(function(template) {
+					if(template.status == 'success'){
+						$scope.templateList = template.data;
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification.error("Get Template", "You didn't have any Template! Please apply free template or buy new template first.");
+					}
+				});
+				
 				$scope.websetting.business_id = response.data.business_id;
 				$scope.websetting.template_id = response.data.template_id;
+				$scope.websetting.user_id = response.data.user_id;
+				
+				if(response.data.config.menus == undefined){
+					$scope.getMenulist(response.data.user_id, response.data.business_id);
+				}
+				
 				var config = (response.data.config!='') ? (response.data.config) : { google_map : {}};
 				angular.extend($scope.websetting.config,config);
 				if(config.google_map.latitude != undefined && config.google_map.longitude != undefined){
@@ -63,6 +69,23 @@ define(['app'], function (app) {
 			};
 		});
 		
+		
+		$scope.getMenulist = function(user_id, business_id){
+			console.log(user_id, business_id);
+			$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
+				
+				dataService.get("getmultiple/seo/1/100",$scope.seoParam)
+				.then(function(response) {
+					if(response.status == 'success'){
+						$scope.websetting.config.menus = response.data;
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Menu Selection", response.message);
+					}
+				});
+			
+		}
+		
 		//update method for website settings form
 		$scope.editWebsitedetails = function(config){
 			dataService.put("put/website/"+$routeParams.id, config)
@@ -70,20 +93,6 @@ define(['app'], function (app) {
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Website Settings", response.message);
 			}) 
-		}
-		$scope.getMenulist = function(user_id){
-			$scope.seoParam ={user_id : user_id, status:1};
-			dataService.get("getmultiple/seo/1/100",$scope.seoParam)
-			.then(function(response) {  
-				$scope.websetting.config.menus = response;
-				console.log(response);
-				if(response.status == 'success'){
-					
-					
-				}else{
-					//$notification[response.status]("", response.message);
-				}
-			});
 		}
 		
 		// Google Map

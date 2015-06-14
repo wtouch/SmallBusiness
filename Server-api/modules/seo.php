@@ -15,6 +15,7 @@
 		if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
 		
 		(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : 1;
+		if(isset($_GET['business_id'])) $where['id'] = $_GET['business_id'];
 		
 		$userCols['name'] = "name";
 		$userCols['username'] = "username";
@@ -45,7 +46,8 @@
 			if($data['data'][0]['job_careers']) $menus[] = array("name" => "Jobs/Careers", "url" => "/job-careers", "status" => "1");
 			
 			if($data['data'][0]['news_coverage']) $menus[] = array("name" => "Activities", "url" => "/activities", "status" => "1"); 
-			
+			$productCategory = array();
+			$serviceCategory = array();
 			foreach($data['data'] as $key => $value){
 				if($value['product_type'] == "product"){
 					$productCategory[$value['product_category']][] = array("name" => $value['product_name'], "url" => "/products/".$value['product_name']."/".$value['product_id'], "status" => "1");
@@ -55,13 +57,17 @@
 				}
 				
 			}
-			
-			foreach($productCategory as $key => $value){
-				$productMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/products/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
+			$productMenus = array();
+			$serviceMenus = array();
+			if(count($productCategory) >=1 ){
+				foreach($productCategory as $key => $value){
+					$productMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/products/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
+				}
 			}
-			
-			foreach($serviceCategory as $key => $value){
-				$serviceMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/services/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
+			if(count($serviceCategory) >=1 ){
+				foreach($serviceCategory as $key => $value){
+					$serviceMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/services/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
+				}
 			}
 			
 			if(count($productMenus) >=1 || count($serviceMenus) >=1){
@@ -72,8 +78,11 @@
 			}
 			
 		}
-		//print_r($menus);
-		echo json_encode($menus);
+		
+		$response["status"] = "success";
+		$response["message"] = "Menus selected!";
+		$response["data"] = $menus;
+		echo json_encode($response);
 	}
 	
 	if($reqMethod == "PUT" || $reqMethod == "DELETE"){
