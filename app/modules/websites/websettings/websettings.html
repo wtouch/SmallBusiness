@@ -135,9 +135,9 @@
 					<div class="col-sm-6" ng-init="ind = []"> 
 					<button ng-click="getMenulist(websetting.user_id, websetting.business_id)"><span class="glyphicon glyphicon-refresh"></span></button>
 						<script type="text/ng-template" id="tree_item_renderer.html">
-							<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
+							<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
 							 
-							<a class="glyphicon glyphicon-ok" ng-model="data.status" ng-class="(data.status==1) ? ' pull-right glyphicon glyphicon-ok text-success' : 'pull-right glyphicon glyphicon-remove text-danger'" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+							<a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status==1) ? ' pull-right glyphicon glyphicon-ok text-success' : 'pull-right glyphicon glyphicon-remove text-danger'" >
 							</a>
 							
 							<span ng-show="data.childMenu" class="caret" ng-click="isCollapsed = !isCollapsed"></span>
