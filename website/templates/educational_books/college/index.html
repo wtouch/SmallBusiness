@@ -1,105 +1,495 @@
 {% spaceless %}
 <!DOCTYPE html>
-<html ng-app="myApp">
+<!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
+<html lang="en" ng-app="myApp">
 	<head>
 		{% block head %}
-			<meta charset="utf-8">
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-			<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
-			<link rel="stylesheet" href="{{ path }}css/style.css">
-			<script src="{{ path }}js/jquery.min.js"></script>
-			<script src="{{ path }}js/bootstrap.min.js"></script>
-			<script src="{{ path }}js/angular.min.js"></script>
-			<script src="{{ path }}js/angular-route.min.js"></script>
-			<script src="{{ path }}js/script.js"></script>
-			<title>{{data.seo.title}} | {{title}}</title>
-			<meta name="description" content="{{data.seo.description}}">
-			<meta name="keywords" content="{{data.keywords | join(',')}}">
-			{%if template.template_params%}
-			<style>	
-				body{
-					background-color: {{template.template_params.background_color_light}};	
-				}
-				.navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:hover, body .navbar-default .navbar-nav li .dropdown-menu, body .navbar-default .navbar-nav li .dropdown-menu > li > a ,.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,.nav>li>a.dropdown-caret + .dropdown-toggle:hover,.ftrlink3, .sidesec1{
-					background-color: {{template.template_params.dark_color}};
-				}
-				.nav>li>a.dropdown-caret + .dropdown-toggle, .navbar-default .navbar-nav > li > a, .navbar a,  blockquote a{
-					color:{{template.template_params.color}};
-				}
-				
-				h1, h2, h3, h4, .read, .read:hover, .read:focus, .btn-link, .btn-link:hover, .btn-link:focus ,li>a ,blockquote a:hover,footer h4,.btn-info, .btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info{
-					color:{{template.template_params.dark_color}};
-				}
-				.ftrlink3 p::after{
-					border-color :{{template.template_params.background_color_light}};
-				}
-				.jobs:nth-child(odd),.ftrlink2,.sub-div1 .btn-info,.sub-div1 .btn-info:hover, .sub-div1 .btn-info:focus, .sub-div1 .btn-info.focus, .sub-div1 .btn-info:active, .sub-div1 .btn-info.active, .open>.dropdown-toggle.btn-info,.ftrlink3 p:hover::after{
-					background-color: {{template.template_params.background_color_dark}};
-				}
-				.jobs:nth-child(even){
-					background-color: {{template.template_params.background_color_light}};
-				}
-				.ftrlink1{
-					background-color: {{template.template_params.background_color}};
-				}
-			</style>
-			{%endif%}
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" href="{{ path }}css/fluid_dg.css">
+		<link type="text/css" rel="stylesheet" href="{{ path }}css/jquery.bxslider.css">
+		<link rel="stylesheet" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<script type="text/javascript" src="{{ path }}js/fluid_dg.min.js"></script>
+		<script type="text/javascript" src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<script type="text/javascript" src="{{ path }}js/jquery.DG_Slider.min.js"></script>
+		<title>{{data.seo.title}} | {{title}}</title>
+		<meta name="description" content="{{data.seo.description}}">
+		<meta name="keywords" content="{{data.keywords | join(',')}}">
+		<script type="text/javascript">
+			$('#menu > ul.navbar-nav li').click(function(e) {
+				$('.navbar li.active').removeClass('active');
+				var $this = $(this);
+					if (!$this.hasClass('active')) {
+						$this.addClass('active');
+					}
+				e.preventDefault();
+			});
+			$(document).ready(function(){
+				$('#bxslider').bxSlider({
+					mode:'horizontal',
+					slideMargin: 5,
+					minSlides :1,
+					maxSlides: 4,
+					moveSlides: 2,
+					slideWidth: 200,
+					auto: true, 
+					autoDirection:'next',
+					pause:4000,
+					pager:false,
+					pagerType:'full',
+					autoControls: false, 
+					controls:true, 
+					autoHover:true
+				});
+			
+			$('#bxslider1').bxSlider({
+				mode:'vertical',
+				minSlides: 1,auto: true, 
+				autoDirection:'next',
+				moveSlides: 1,
+				pause:4000,
+				pager:false,
+				pagerType:'full',
+				autoControls: false, 
+				controls:false, 
+				autoHover:true,
+				speed : 1000
+			});
+			$('carousel-inner').fluid_dg({
+				height: '41%',
+				pagination: false,
+				thumbnails: true
+			});
+		  });
+		</script> 
 		{% endblock %}
 	</head>
-	<body >
+	<body>
 		{% block carousal %}
 		{% endblock %}
-		<div class="container header">
-			{% include templatePath ~ '/includes/navbar.html' ignore missing %}
-		</div>
 		<div class="container">
-		{{uri}}
-			{% include contentPath  %}
-		
+			<header class="row">
+				<div class="col-sm-12 col-md-4">
+					<!-- <img src="img/logo.jpg" class="img-responsive logo"> -->
+					<a href="/"><img src="{{data.business_logo.file_relative_path}}" class="img-responsive logo"></a>
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-4"><h1>{{ data.business_name }}</h1></div>
+				<div class="col-sm-12 col-md-4">
+					<div class="cnctinfo">
+						<p class="text-right">Email : {{data.contact_profile.email}},&nbsp;
+											  {{data.contact_profile.alternate_email}}
+						</p>
+						<p class="text-right">Mobile :{{data.contact_profile.mobile}}</p>
+					</div>
+				</div>
+			</header>
+		</div>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="collapse navbar-collapse text-center" id="menu">
+					<ul class="nav navbar-nav">
+						{% include templatePath ~ '/' ~ "includes/links.html" with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+						<!-- <li class="active"><a href="index.html">Home</a></li>
+						<li><a href="about.html">About US</a></li>
+						<li>
+							<a href="propertylist.html">Properties</a>
+							<ul>
+								<li><a href="property.html">Wakad 2.5 BHK Flat </a></li>
+								<li><a href="property.html">Wakad Luxurious 3 BHK Flat </a></li>
+								<li><a href="property.html">Hinjewadi Life Republic 3 4 BHK Bungalow / Villa</a></li>
+								<li><a href="property.html">Pimple Saudagar Commercial for Bank Hotel Hospital</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="projectlist.html">Projects</a>
+							<ul>
+								<li><a href="project.html">Diamond Park</a></li>
+								<li><a href="project.html">Sapphire Park</a></li>
+								<li><a href="project.html">Emerald Park</a></li>
+								<li><a href="project.html">Park Titanium</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="services.html">Services</a>
+							<ul>
+								<li><a href="service.html">Service1</a></li>
+								<li><a href="service.html">Service2</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="products.html">Products</a>
+							<ul>
+								<li><a href="product.html">Product1</a></li>
+								<li><a href="product.html">Product2</a></li>
+							</ul>
+						</li>
+						<li><a href="charges.html">Charges</a></li>
+						<li><a href="gallery.html">Gallery</a></li>
+						<li><a href="testimonials.html">Testimonial</a></li>
+						<li><a href="contacts.html">Contact us</a></li> -->
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
 			<div class="row">
-				<a href="#" class="ftrlink"><div class="col-sm-1 ftrlink1"><img src="{{ path }}img/arr2.png"/></div></a>
-				{% if data.news_coverage %}
-					<a href="activities" class="ftrlink"><div class="col-sm-7 ftrlink2">ACTIVITES</div></a>
-				{% else %}
-					<a href="about" class="ftrlink"><div class="col-sm-7 ftrlink2">ABOUT US</div></a>
-				{%endif%}
-				<a href="contact" class="ftrlink"><div class="col-sm-4 ftrlink3"><p>GET IN TOUCH WITH US</p></div>
-				</a>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row subftr">
-				<div class="col-sm-4">
-					<a href="#"><img class="ftrimg img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
+				{% include templatePath ~ '/includes/carousal.html' %}
+			</div> 
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					{% include contentPath ignore missing %}
 				</div>
-				<div class="col-sm-4">
-					<h4>CONTACT US</h4>
-					<p>{%if data.contact_profile.telephone%}
-						Telephone:{{data.contact_profile.telephone}}
-					{% endif %}<br>
-					<p>Mobile: {{data.contact_profile.mobile}}<br>
-					<p>E-mail: {{data.contact_profile.email}},&nbsp;
-					{{data.contact_profile.alternate_email}}
+			</div> 
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					<div class="content">
+						<div class="row">
+							<div class="col-sm-12 col-md-9">
+								<div class="row">
+									<div class="col-sm-12 col-md-12">
+										<h2>Welcome to {{ data.business_name }}.</h2>
+										<img src="img/3553.jpg" class="img-responsive homeimg">
+										{% autoescape false %}<p class="info">{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}</p>{% endautoescape %}
+										<br>
+										<a href="about" class="btn btn-info">Read More..</a>
+									</div>
+									<!-- <div class="col-sm-12 col-md-12">
+										<h2 class="subhead">Featured Property</h2>
+										<div class="sections text-center">
+											<ul class="bxslider" id="bxslider">
+												<li><img class="img-responsive center-block" src="img/153263_1-small.jpg" />
+												<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
+												<li><img class="img-responsive center-block" src="img/153267_1-small.jpg" />
+												<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
+												<li><img class="img-responsive center-block" src="img/153418_1-small.jpg" />
+												<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
+												<li><img class="img-responsive center-block" src="img/153422_1-small.jpg" />
+												<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
+												<li><img class="img-responsive center-block" src="img/153607_1-small.jpg" />
+												<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
+												<li><img class="img-responsive center-block" src="img/153607_1-small.jpg" />
+												<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-12">
+										<h2 class="subhead">Featured Project</h2>
+										<div class="sections">
+											<ul class="bxslider1" id="bxslider1">
+												<li>
+													<div class="row">
+														<div class="col-sm-12 col-md-3">
+															<a href="#" class="thumbnail">
+																<img class="img-responsive" src="img/proj_img-849_1-small.jpg"/>
+															</a>
+														</div>
+														<div class="col-sm-12 col-md-9">
+															<a href="#" class="head">Max Heights Majestic</a>
+															<p class="info">Max Heights present "Max Heights Majestic" a dream for home for you in Suncity Sikar Road NH-11, Jaipur. Suncity is a gated township spread over 450 acres is a fine amalgam of high living ensconced not only by the greenery but all the modern amenitie...</p>
+															<a href="#" class="btn btn-info">Read More</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="row">
+														<div class="col-sm-12 col-md-3">
+															<a href="#" class="thumbnail">
+																<img class="img-responsive slideimg" src="img/proj_img-5575_1-small.jpg"/>
+															</a>
+														</div>
+														<div class="col-sm-12 col-md-9">
+															<a href="#" class="head">Max Heights Majestic</a>
+															<p class="info">Max Heights present "Max Heights Majestic" a dream for home for you in Suncity Sikar Road NH-11, Jaipur. Suncity is a gated township spread over 450 acres is a fine amalgam of high living ensconced not only by the greenery but all the modern amenitie...</p>
+															<a href="#" class="btn btn-info">Read More</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="row">
+														<div class="col-sm-12 col-md-3">
+															<a href="#" class="thumbnail">
+																<img class="img-responsive slideimg" src="img/proj_img-5575_1-small.jpg"/>
+															</a>
+														</div>
+														<div class="col-sm-12 col-md-9">
+															<a href="#" class="head">Max Heights Majestic</a>
+															<p class="info">Max Heights present "Max Heights Majestic" a dream for home for you in Suncity Sikar Road NH-11, Jaipur. Suncity is a gated township spread over 450 acres is a fine amalgam of high living ensconced not only by the greenery but all the modern amenitie...</p>
+															<a href="#" class="btn btn-info">Read More</a>
+														</div>
+													</div>
+												</li>
+												<li>
+													<div class="row">
+														<div class="col-sm-12 col-md-3">
+															<a href="#" class="thumbnail"> 
+																<img class="img-responsive" src="img/proj_img-5575_1-small.jpg"/>
+															</a>
+														</div>
+														<div class="col-sm-12 col-md-9">
+															<a href="#" class="head">Max Heights Majestic</a>
+															<p class="info">Max Heights present "Max Heights Majestic" a dream for home for you in Suncity Sikar Road NH-11, Jaipur. Suncity is a gated township spread over 450 acres is a fine amalgam of high living ensconced not only by the greenery but all the modern amenitie...</p>
+															<a href="#" class="btn btn-info">Read More</a>
+														</div>
+													</div>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-12">
+										<h2 class="subhead">Featured Services</h2>
+										<div class="sections">
+											<div class="row">
+												<div class="col-sm-6 col-md-3 service">
+													<a href="#">
+														<img class="img-responsive center-block" src="img/buying-property-1615.jpg" alt="...">
+													</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<h3>Buying Property</h3>
+													<p>Whether you are a first time commercial or residential property b...</p>
+													<a href="#" class="btn btn-info">Read More</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<a href="#">
+														<img class="img-responsive center-block" src="img/buying-property-1615.jpg" alt="...">
+													</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<h3>Buying Property</h3>
+													<p>Whether you are a first time commercial or residential property b...</p>
+													<a href="#" class="btn btn-info">Read More</a>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-6 col-md-3 service">
+													<a href="#">
+														<img class="img-responsive center-block" src="img/buying-property-1615.jpg" alt="...">
+													</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<h3>Buying Property</h3>
+													<p>Whether you are a first time commercial or residential property b...</p>
+													<a href="#" class="btn btn-info">Read More</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<a href="#">
+														<img class="img-responsive center-block" src="img/buying-property-1615.jpg" alt="...">
+													</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<h3>Buying Property</h3>
+													<p>Whether you are a first time commercial or residential property b...</p>
+													<a href="#" class="btn btn-info">Read More</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-12">
+										<h2 class="subhead">Featured Products</h2>
+										<div class="sections">
+											<div class="row">
+												<div class="col-sm-6 col-md-3 service">
+													<a href="#">
+														<img class="img-responsive center-block" src="img/buying-property-1615.jpg" alt="...">
+													</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<h3>Buying Property</h3>
+													<p>Whether you are a first time commercial or residential property b...</p>
+													<a href="#" class="btn btn-info">Read More</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<a href="#">
+														<img class="img-responsive center-block" src="img/buying-property-1615.jpg" alt="...">
+													</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<h3>Buying Property</h3>
+													<p>Whether you are a first time commercial or residential property b...</p>
+													<a href="#" class="btn btn-info">Read More</a>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-6 col-md-3 service">
+													<a href="#">
+														<img class="img-responsive center-block" src="img/buying-property-1615.jpg" alt="...">
+													</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<h3>Buying Property</h3>
+													<p>Whether you are a first time commercial or residential property b...</p>
+													<a href="#" class="btn btn-info">Read More</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<a href="#">
+														<img class="img-responsive center-block" src="img/buying-property-1615.jpg" alt="...">
+													</a>
+												</div>
+												<div class="col-sm-6 col-md-3 service">
+													<h3>Buying Property</h3>
+													<p>Whether you are a first time commercial or residential property b...</p>
+													<a href="#" class="btn btn-info">Read More</a>
+												</div>
+											</div>
+										</div>
+									</div>  -->
+								</div>
+							</div>
+							<div class="col-sm-12 col-md-3">
+								<div class="row">
+									<div class="col-sm-12 col-md-12">
+										<h2 class="subhead">Search Property</h2>
+										<div class="searchProperty sections">
+											<form name="searchForm" action="index.php" method="get" target="_blank">
+												<div class="form-group">
+													<label for="exampleInputEmail1">I want to:</label><br>
+													<label class="radio-inline">
+														<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0">Sale
+													</label>
+													<label class="radio-inline">
+													  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">Rent
+													</label>
+													<label class="radio-inline">
+													  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="2">PG
+													</label>
+												</div>
+												<div class="form-group">
+													<label for="propertytype">Property Type:</label>
+													<select class="form-control" id="propertytype" name="propertytype">
+														<option value="">Select Category</option>
+														<option value="Residential Property">Residential Property</option>
+														<option value="Commercial Property">Commercial Property</option>
+														<option value="Agricultural land">Agricultural land</option>
+														<option value="Industrial Property">Industrial Property</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="city">City</label>
+													<input type="text" class="form-control" id="city" value="pune" name="city">
+												</div>
+												<div class="form-group">
+													<label for="budget">Budget</label>
+													<input type="text" class="form-control" id="budget" value="0" name="budget">
+												</div>
+												<input type="submit" class="btn btn-info" value="Search">
+											</form>
+										</div>
+									</div>
+									<div class="col-sm-12 col-md-12">
+										<img alt="" class="img-responsive center-block sideimg" title="" src="img/area_converter.png">
+										<img alt="" class="img-responsive center-block sideimg" title="" src="img/emi_calculator.png">
+									</div>
+									<div class="col-sm-12 col-md-12">
+										<h2 class="subhead">Contact Us</h2>
+										<div class="sections">
+											<h4>{{ data.business_name }}</h4>
+											<hr>
+											<p><b>Mobile : </b><br>{{data.contact_profile.mobile}}<hr>
+											<b>Email Address : </b><br><a class="email" href="mailto:jaidevlandmarks@gmail.com">{{data.contact_profile.email}}</a></p>
+										</div>
+									</div>
+								</div><!--row search-->
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<h4>ADDRESS</h4>
-					<address>
-						{{data.contact_profile.address}},<br>
-						{{data.city}}-&nbsp;{{data.pincode}},<br>
-						{{data.state|capitalize}},&nbsp;{{data.country|capitalize}}
-					</address>
-				</div>
-			</div>
-		</div>
-		<footer class="container">
-			{% block footer %}
+			</div> 
 			
-			<p class="text-center">&copy; 2015 <a href="/">{{data.business_name}}</a>&nbsp;|&nbsp;
-			Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>&nbsp;|&nbsp;
-			<a target="_blank" href="/sitemap.xml">SITEMAP</a>
-			</p>
-			{% endblock %}
+				<!--<div class="col-sm-12 col-md-3">
+					<div class="projnav">
+						<ul class="nav nav-stacked">
+							<li role="presentation"><a href="project.html">Overview</a></li>
+							<li role="presentation"><a href="specification.html">Specifications</a></li>
+							<li role="presentation"><a href="amenities.html">Amenities</a></li>
+							<li role="presentation"><a href="floor.html">Floor Plan</a></li>
+							<li role="presentation"><a href="locmap.html">Location Map</a></li>
+							<li role="presentation"><a href="layplan.html">Layout Plan</a></li>
+							<li role="presentation"><a href="">E-Brochure</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-6">
+				{% include templatePath ~ '/includes/carousal.html' ignore missing %}
+					 <div id="carousel-example-generic" class="carousel slide row" data-ride="carousel">
+						<!-- Indicators - ->
+						<ol class="carousel-indicators">
+							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="2"></li> 
+							<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="4"></li> 
+						</ol>
+						<!-- Wrapper for slides - ->
+						<div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<img src="img/82633.jpg" alt="...">
+								<div class="carousel-caption">
+								</div>
+							</div> 
+							<div class="item">
+								<img src="img/82632.jpg" alt="...">
+								<div class="carousel-caption">
+								</div>
+							</div>  
+							<div class="item">
+								<img src="img/82631.jpg" alt="...">
+								<div class="carousel-caption">
+								</div>
+							</div>   
+							<div class="item">
+								<img src="img/82630.jpg" alt="...">
+								<div class="carousel-caption">
+								</div>
+							</div>  
+							<div class="item">
+								<img src="img/38282.jpg" alt="...">
+								<div class="carousel-caption">
+								</div>
+							</div> 
+						</div>
+						<!-- Controls - ->
+						<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div> 
+				</div>
+				<div class="col-sm-12 col-md-3 text-center">
+					<div class="projnav">
+						<img src="img/3228_200x200.jpg" class="img-responsive center-block" style="display : block;"/>
+						<a href="project.html" class="projlink">View Properties of this Project</a>
+					</div>
+				</div>-->
+			
+		</div>
+		<footer>
+			<div class="container">
+				{% block footer %}
+					<p class="text-center">&copy; 2015 <a href="/">{{data.business_name}}</a>
+					&nbsp;|&nbsp;Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>
+					&nbsp;|&nbsp;<a target="_blank" href="/sitemap.xml">SITEMAP</a>
+				</p>
+				{% endblock %}
+			</div>
 		</footer>
 	</body>
 </html>

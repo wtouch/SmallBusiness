@@ -1,0 +1,23 @@
+{% autoescape false %}
+	<div class="row content">
+		<div class="{{(featured_services) >= 1 ? 'col-md-8 col-sm-8' : 'col-md-12 col-sm-12'}}">
+			<div class="row">
+				{% include 'includes/carousal.html' ignore missing %}
+			</div>
+			<div class="row">
+				{% include 'includes/featured_products.html' ignore missing %}
+			</div>
+			<div class="row ">
+				<div class="col-sm-12 schoolinfo">
+					<h1>Welcome to {{ data.business_name }}</h1>
+					<p>{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}</p>
+					<br>
+					<a href="about" class="read">Read More..</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			{% include 'includes/featured_services.html' ignore missing %}
+		</div>
+	</div> 
+{% endautoescape %}
