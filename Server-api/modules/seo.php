@@ -24,7 +24,7 @@
 		$db->setLimit($limit);
 		$business = $db->setJoinString("INNER JOIN", "business", array("user_id"=>$user.".id"));
 		$db->setWhere($where, $business);
-		$businessCols[0] = "*";
+		$businessCols = array("id","testimonials", "job_careers", "news_coverage", "gallery" );
 		$db->setColumns($business, $businessCols);
 		
 		$product = $db->setJoinString("LEFT JOIN", "product", array("business_id"=>$business.".id"));
@@ -63,12 +63,20 @@
 			$serviceMenus = array();
 			if(count($productCategory) >=1 ){
 				foreach($productCategory as $key => $value){
-					$productMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/products/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
+					if(count($productCategory) == 1 && $key == "" ){
+						if(count($value) >=1) $menus[] = array("name" => "Products", "url" => "/products", "status" => "1", "childMenu" => $value );
+					}else{
+						$productMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/products/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
+					}
 				}
 			}
 			if(count($serviceCategory) >=1 ){
 				foreach($serviceCategory as $key => $value){
-					$serviceMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/services/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
+					if(count($serviceCategory) == 1 && $key == "" ){
+						if(count($value) >=1) $menus[] = array("name" => "Services", "url" => "/services", "status" => "1", "childMenu" => $value );
+					}else{
+						$serviceMenus[] = array("name" => ($key) ? $key : 'Other', "url" => "/services/".str_replace(" ", "-",($key) ? $key : 'Other'), "status" => "1", "childMenu" => $value);
+					}
 				}
 			}
 			
@@ -79,6 +87,8 @@
 				if(count($serviceMenus) >=1) $menus[] = array("name" => "Services", "url" => "/services", "status" => "1", "childMenu" => $serviceMenus );
 			}
 			
+		}else{
+			print_r($data['message']);
 		}
 		
 		$response["status"] = "success";

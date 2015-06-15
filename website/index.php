@@ -11,39 +11,53 @@ $app = new Slim\Slim();
 
 $web = new websiteManager;
 
-/* $template = new templateLoader();
-$routes = $web->getRoutes(); */
-
-/* foreach($routes['data'] as $routeKey => $routeName){
-	if(is_array($routeName)) foreach($routeName as $childRouteKey => $childRouteName){
-		if(is_array($childRouteName)){
-			foreach($childRouteName as $childChildRouteKey => $childChildRouteName){
-				$template->setSitemap($childChildRouteKey);
-				$app->get('/'.$childChildRouteKey, function() use($app, $web, $template, $childChildRouteKey) {
-					$template->displayTemplate($childChildRouteKey);
-				});
-			}
-		}
-		$template->setSitemap($childRouteKey);
-		$app->get('/'.$childRouteKey, function() use($app, $web, $template, $childRouteKey) {
-			$template->displayTemplate($childRouteKey);
-		});
-	}else{
-		$template->setSitemap($routeName);
-		$app->get('/'.$routeName, function() use($app, $web, $template, $routeName) {
-			$template->displayTemplate($routeName);
-		});
-	}
-}
- */
-
 $app->get('/', function() use($app, $config, $web) {
 	$web->getBusinessData('home');
 });
 
+$app->get('/products', function() use($app, $config, $web) {
+	$web->getProductData("products", "product");
+});
+
+$app->get('/products/:category', function($category) use($app, $config, $web) {
+	$web->getProductData("products", "product", $category);
+});
+
+$app->get('/products/:product_name/:productId', function($product_name, $productId) use($app, $config, $web) {
+	$web->getSingleProduct("product", $productId);
+}); 
+
+$app->get('/services', function() use($app, $config, $web) {
+	$web->getProductData("products", "service");
+});
+
+$app->get('/services/:category', function($category) use($app, $config, $web) {
+	$web->getProductData("products", "service", $category);
+});
+
+$app->get('/services/:product_name/:productId', function($product_name, $productId) use($app, $config, $web) {
+	$web->getSingleProduct("product", $productId);
+}); 
+
+/* $app->get('/property', function() use($app, $config, $web) {
+	$web->getPropertyData("property");
+}); */
+
+/* $app->get('/project', function() use($app, $config, $web) {
+	$web->getProjectData("project");
+});
+ */
+/* $app->get('/property/:property_name/:propertyId', function($property_name, $propertyId) use($app, $config, $web) {
+	$web->getProductData("property");
+}); */
+
+/* $app->get('/project/:project_name/:projectId', function() use($app, $config, $web) {
+	$web->getProductData("project");
+}); */
 $app->get('/:page', function($page) use($app, $config, $web) {
 	$web->getBusinessData($page);
 });
+
 
 $app->get('/:page/:product/:id', function() use($app, $config) {
 	
