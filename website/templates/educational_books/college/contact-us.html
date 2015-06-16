@@ -4,16 +4,20 @@
 		function initialize() {
 			var mapProp = {
 				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
-				zoom:18,
+				zoom:12,
 				mapTypeId:google.maps.MapTypeId.ROADMAP
 			};
 			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			var marker=new google.maps.Marker({
+				position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+			});
+			marker.setMap(map);
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
 	
-	<div class="row contact">
-		<h1 class="text-center">{{title}}</h1>
+	<div class="row contact" ng-app="myApp">
+		<h2 class="text-center">Contact Us</h2>
 		<div class="col-sm-9">
 			<div class="row">
 				<div class="col-md-5">
@@ -29,10 +33,9 @@
 								<b>Address</b>
 								<address>
 									{{data.contact_profile.address}}<br>
-									{{data.city}}<br>
-									{{data.state}}<br>
-									{{data.country}}<br>
-									{{data.pincode}}
+									{{data.city}}-{{data.pincode}},<br>
+									{{data.state|capitalize}},<br>
+									{{data.country|capitalize}}.
 								</address>
 							</td>
 						</tr>
@@ -40,13 +43,13 @@
 						<tr>
 							<td><b>Telephone</b></td>
 							<td>
-								{{data.contact_profile.telephone}}
+								{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}
 							</td>
 						</tr>
 						{% endif %}
 						<tr>
 							<td><b>Mobile</b></td>
-							<td>{{data.contact_profile.mobile}}</td>
+							<td>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? ", " ~ data.contact_profile.alternate_mobile}}</td>
 						</tr>
 						<tr>
 							<td><b>E-mail Id</b></td>
@@ -65,7 +68,9 @@
 				<div class="col-md-7"><div id="googleMap"></div></div>
 			</div>
 		</div>
+		{% if modules.enquiry %}
 		<div class="col-md-3">
 			{% include templatePath ~ '/includes/enquiry.html' ignore missing %}
 		</div>
+		{%endif%}
 	</div>

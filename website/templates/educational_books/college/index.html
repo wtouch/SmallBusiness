@@ -1,6 +1,6 @@
 {% spaceless %}
 <!DOCTYPE html>
-<html ng-app="myApp">
+<html>
 	<head>
 		{% block head %}
 			<meta charset="utf-8">
@@ -59,16 +59,22 @@
 						{% include templatePath ~ '/includes/carousal.html' ignore missing %}
 					{% endblock %}
 					</div>
+					{%if modules.featured_products %}
+						<div class="row">
+							{% include templatePath ~ '/includes/featured_products.html' %}
+						</div>
+					{%endif%}
 					<div class="row">
 						<div class="content">
 							{% include contentPath %}
 						</div>
 					</div>
 				</div>
-				{%if modules.searchPropa %}
+				
+				{%if modules.featured_services %}
 					<div class="col-sm-4">
 						<div class="row">
-							{% include templatePath ~ '/includes/carousal.html' %}
+							{% include templatePath ~ '/includes/featured_services.html' %}
 						</div>
 					</div>
 				{%endif%}
@@ -86,10 +92,7 @@
 		</div>
 		<div class="container">
 			<div class="row subftr">
-				<div class="col-sm-4">
-					<a href="#"><img class="ftrimg img-responsive" src="{{data.business_logo.file_relative_path}}"></a>
-				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-6 col-md-6">
 					<h4>CONTACT US</h4>
 					<p>{%if data.contact_profile.telephone%}
 						Telephone:{{data.contact_profile.telephone}}
@@ -98,19 +101,17 @@
 					<p>E-mail: {{data.contact_profile.email}},&nbsp;
 					{{data.contact_profile.alternate_email}}
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-6 col-md-6">
 					<h4>ADDRESS</h4>
 					<address>
 						{{data.contact_profile.address}},<br>
-						{{data.city}}-&nbsp;{{data.pincode}},<br>
-						{{data.state|capitalize}},&nbsp;{{data.country|capitalize}}
+						{{data.city}},&nbsp;{{data.state|capitalize}},&nbsp;{{data.country|capitalize}},&nbsp;{{data.pincode}}
 					</address>
 				</div>
 			</div>
 		</div>
 		<footer class="container">
 			{% block footer %}
-			
 			<p class="text-center">&copy; 2015 <a href="/">{{data.business_name}}</a>&nbsp;|&nbsp;
 			Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>&nbsp;|&nbsp;
 			<a target="_blank" href="/sitemap.xml">SITEMAP</a>

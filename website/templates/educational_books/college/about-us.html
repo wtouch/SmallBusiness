@@ -1,6 +1,6 @@
 {% autoescape false %}
 	<span ng-bind="id"></span>
-	<h2 class="text-center">{{title}}</h2>
+	<h2 class="text-center">About us</h2>
 	<div class="sidebar" id="navbar-example">
 		<ul class="nav nav-pills" >
 			<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
@@ -44,6 +44,7 @@
 		<div class="infrastructure" id="infrastructure">
 			<h2 class="text-center">Infrastructure/Facilities</h2>
 			<div class="row">
+				
 				{% for key, value in data.infrastructure %}
 					<div class="col-sm-4">
 						<div class="thumbnail">
@@ -53,12 +54,12 @@
 								<p>{{value.description|length >150 ? value.description|slice(start,150)~ '...' : value.description}}</p>
 							</div>
 							<div class="read">
-								<a type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal">Read More..</a>
+								<a type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal{{loop.index}}">Read More..</a>
 							</div>
 						</div>
 					</div>
 					<!-- modal -->	
-					<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					<div id="myModal{{loop.index}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -66,8 +67,7 @@
 									<h4 class="modal-title" id="myModalLabel">Infrastructure Details</h4>
 								</div>
 								<div class="modal-body">
-								<!-- media 
-								{% for key, value in data.infrastructure %}-->
+								
 									<div class="row">
 										<div class="col-sm-3">
 											<a href="#">
@@ -79,13 +79,7 @@
 											<p>{{value.description}}</p>
 										</div>
 									</div>
-								<!--{%endfor%}
-								 media end -->
 								</div>
-								<!-- <div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save changes</button>
-								</div> -->
 							</div>
 						</div>
 					</div>

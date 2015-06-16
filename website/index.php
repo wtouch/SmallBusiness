@@ -13,6 +13,8 @@ $web = new websiteManager;
 
 $app->get('/', function() use($app, $config, $web) {
 	$modules['searchProp'] = true;
+	$modules["featured_products"] = true;
+	$modules["featured_services"] = true;
 	$title = "Home";
 	$web->getBusinessData('home',$modules, $title);
 });
@@ -58,6 +60,7 @@ $app->get('/services/:product_name/:productId', function($product_name, $product
 }); */
 $app->get('/:page', function($page) use($app, $config, $web) {
 	$modules = array();
+	$modules['enquiry'] = true;
 	$title = "Home";
 	$web->getBusinessData($page, $modules, $title);
 });

@@ -79,6 +79,14 @@ class websiteManager{
 			
 			// assign data to response
 			$response["modules"] = $modules;
+			if(isset($modules["featured_products"])){
+				$response["featured_products"] = $this->getProducts($businessData['data']["id"],"product", $category = null, 1);
+				
+			}
+			if(isset($modules["featured_services"])){
+				$response["featured_services"] = $this->getProducts($businessData['data']["id"],"service", $category = null, 1);
+				
+			}
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
             $response["data"] = $businessData["data"];
@@ -87,6 +95,7 @@ class websiteManager{
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];
+			$response["google_map"] = $businessData["data"]['website_config']['google_map'];
 			$response["uri"] = ($page) ? "/".$page : '/home';
 			
 			// this will dynamic with checking template folder and default folder for template page
@@ -104,7 +113,26 @@ class websiteManager{
 		
 		return $response;
 	}
-	
+	function getProducts($business_id, $type, $category = null, $featured = null){
+		if($category) $category = str_replace("-", " ", $category);
+		$whereProd['status'] = 1;
+		$whereProd['business_id'] = $business_id;
+		$whereProd['type'] = $type;
+		if($category && $category != "Other") $whereProd['category'] = $category;
+		
+		$product = $this->db->setTable('product');
+		$this->db->setWhere($whereProd, $product);
+		if($category == "Other"){
+			$this->db->setWhere(array($product.".category IS NULL OR ".$product.".category = ''"), $product, false, true);
+		}
+		$this->db->setWhere($whereProd, $product);
+		$this->db->setColumns($product, array("*"));
+		$productData = $this->db->select();
+		if($productData['status'] != 'success'){
+			throw new Exception('Product Error: '.$productData['message']);
+		}
+		return $productData["data"];
+	}
 	function getProductData($page, $type, $category = null){
 		try{
 			// main website table
@@ -150,20 +178,8 @@ class websiteManager{
 				if(($businessData['data']['template_name']) == ""){
 					throw new Exception('Please add template details!');
 				}
-				$whereProd['status'] = 1;
-				$whereProd['business_id'] = $businessData['data']['id'];
-				$whereProd['type'] = $type;
-				if($category) $whereProd['category'] = $category;
-				
-				$product = $this->db->setTable('product');
-				$this->db->setWhere($whereProd, $product);
-				$this->db->setColumns($product, array("*"));
-				$productData = $this->db->select();
-				if($productData['status'] != 'success'){
-					throw new Exception('Product Error: '.$productData['message']);
-				}
-				
-				$response["products"] = $productData["data"];
+				$this->getProducts($businessData['data']["id"], $type, $category);
+				$response["products"] = $this->getProducts($businessData['data']["id"], $type, $category);
 			}else{
 				throw new Exception('Website not registered!');
 			}
@@ -176,6 +192,7 @@ class websiteManager{
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
             $response["data"] = $businessData["data"];
+            $response["title"] = ($type == 'product') ? "Products" : "Services";
 			
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];

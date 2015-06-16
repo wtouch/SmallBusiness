@@ -1,16 +1,16 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
 
-var app = angular.module('myApp', ['ngRoute']);
+var app = angular.module('myApp',[]);
 
-app.config(function($routeProvider, $locationProvider) {
+app.config(function($locationProvider) {
   /* $routeProvider
    .when('/:view', {
     templateUrl: function(rd) { return hostUrl+"/"+rd.view+'.html';}
   })
   .otherwise({ redirectTo: '/home' }); */
 });
-app.controller('enquiryController', function($scope,$http, $route, $location) {
+app.controller('enquiryController', function($scope,$http, $location) {
 	$scope.hostUrl = hostUrl;
 	var today = new Date();
 	var year = today.getFullYear();
@@ -30,7 +30,7 @@ app.controller('enquiryController', function($scope,$http, $route, $location) {
 		});
 	};
 });	
-	app.controller('aboutController', function($scope,$http, $route, $location) {
+	app.controller('aboutController', function($scope,$http, $location) {
 		var s = $location.path();
 		$scope.url = s.substr(1);
 		$scope.makeActive = function(url){
