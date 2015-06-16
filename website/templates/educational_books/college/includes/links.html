@@ -1,6 +1,6 @@
 {% for link in links %}
 {% if link.status == 1 %}
-	<li class="{{ (link.childMenu) ? 'child-menu' : '' }} {{ link.url == uri ? 'active' : 'not' }} {{uri}}" >
+	<li class="{{ (link.childMenu) ? 'child-menu' : '' }}{{ link.url == uri ? ' active' : '' }}" >
 		<a href="{{ link.url }}">{{ link.name }}</a>
 		{% if link.childMenu %}
 			<ul>

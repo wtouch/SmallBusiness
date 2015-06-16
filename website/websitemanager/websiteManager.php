@@ -271,7 +271,7 @@ class websiteManager{
 			$response["uri"] = ($page) ? "/".$page : '/home';
 			
 			// this will dynamic with checking template folder and default folder for template page
-            $response["contentPath"] = $templateCategory."/".$templateFolder."/".$response["uri"].".html";
+            $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
 			
 			// to render template 
 			$this->getTemplate($this->config['rootTempPath'], $response["templatePath"]."/index.html", $response);

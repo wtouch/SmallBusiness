@@ -4,29 +4,8 @@
 	{% for key, x in products %}
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail">
-				<div id="myCarousel{{key}}" class="carousel slide product" data-ride="carousel">
-					<!-- Indicators -->
-					<ol class="carousel-indicators">
-						{% for key, value in x.product_image%}
-							<li data-target="#myCarousel{{key}}" data-slide-to="{{key}}" class="{{ (key == 0) ? 'active' }}"></li>
-						{% endfor %}
-					</ol>
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-						{% for key, value in x.product_image%}
-						<div class="item {{ (key == 0) ? 'active' }}">
-							<img src="{{value.file_relative_path}}" class="img-responsive" alt="{{key}}"/>
-						</div>
-						{% endfor %}
-					</div>
-					<!-- Controls -->
-					<a class="left carousel-control" href="#myCarousel{{key}}" role="button" data-slide="prev">
-						<span class="sr-only">Previous</span>
-					</a>
-					<a class="right carousel-control" href="#myCarousel{{key}}" role="button" data-slide="next">
-						<span class="sr-only">Next</span>
-					</a>
-				</div>
+					<img src="{{x.product_image.0.file_relative_path}}" class="img-responsive" alt="{{key}}"/>
+				
 				<div class="caption">
 					<h4 class="text-center">{{ x.product_service_name }}</h4>
 					<p>

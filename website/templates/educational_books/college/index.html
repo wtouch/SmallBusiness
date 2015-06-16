@@ -16,7 +16,7 @@
 			<title>{{data.seo.title}} | {{title}}</title>
 			<meta name="description" content="{{data.seo.description}}">
 			<meta name="keywords" content="{{data.keywords | join(',')}}">
-			{%if data.template_params%}
+			 {%if data.template_params%}
 			<style>	
 				body{
 					background-color: {{data.template_params.background_color_light}};	
@@ -44,27 +44,35 @@
 					background-color: {{data.template_params.background_color}};
 				}
 			</style>
-			{%endif%}
+			{%endif%} 
 		{% endblock %}
 	</head>
-	<body >
-		
+	<body>
 		<div class="container header">
-			{% include templatePath ~ '/includes/navbar.html' ignore missing %}
+			{% include templatePath ~ '/includes/header.html' ignore missing %}
 		</div>
 		<div class="container">
-			{% block carousal %}
-				{% include templatePath ~ '/includes/carousal.html' ignore missing %}
-			{% endblock %}
-			
-			<div class="{{(modules.searchProp) ? 'col-sm-8' : 'col-sm-12' }}">
-				{% include contentPath %}
+			<div class="row">
+				<div class="{{(modules.searchProp) ? 'col-sm-8' : 'col-sm-12' }}">
+					<div class="row">
+					{% block carousal %}
+						{% include templatePath ~ '/includes/carousal.html' ignore missing %}
+					{% endblock %}
+					</div>
+					<div class="row">
+						<div class="content">
+							{% include contentPath %}
+						</div>
+					</div>
+				</div>
+				{%if modules.searchPropa %}
+					<div class="col-sm-4">
+						<div class="row">
+							{% include templatePath ~ '/includes/carousal.html' %}
+						</div>
+					</div>
+				{%endif%}
 			</div>
-			{%if modules.searchProp %}
-			<div class="col-sm-4">
-					{% include templatePath ~ '/includes/carousal.html' %}
-			</div>
-			{%endif%}
 			<div class="row">
 				<a href="#" class="ftrlink"><div class="col-sm-1 ftrlink1"><img src="{{ path }}img/arr2.png"/></div></a>
 				{% if data.news_coverage %}
