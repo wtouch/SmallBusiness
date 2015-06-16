@@ -4,18 +4,15 @@
 	<div class="col-sm-12">
 		<a ng-click="openContact('modules/contact/addcontact.html')" class="btn btn-primary">Add New Contact</a> 
 		<a ng-click="openGroup('modules/contact/ctreategroup.html')" class="btn btn-primary">Create Group</a> 
-		<a href="#/dashboard/contact/contactlist.html" class="btn btn-primary">Contact List</a>
-		<a href="#/dashboard/contact/viewgroup.html" class="btn btn-primary">View Groups</a>
+		<a href="#/dashboard/contact" class="btn btn-primary">Contact List</a>
+		<a href="#/dashboard/contact/viewgroup" class="btn btn-primary">View Groups</a>
 		
 	</div>
 	<div class="col-md-12">	
 		<ng-include src="'modules/contact/contactlist.html'"></ng-include>
-		
-		<ng-include ng-if="contactView=='creategroup'" src="'modules/contact/creategroup.html'"></ng-include>
-		
 		<ng-include ng-if="contactView=='contactlist'" src="'modules/contact/contactlist.html'"></ng-include>
 		
-		<ng-include ng-if="contactView=='creategroup'" src="'modules/contact/creategroup.html'"></ng-include>
+		<ng-include ng-if="contactView=='viewgroup'" src="'modules/contact/viewgroup.html'"></ng-include>
 		
 		
 	</div>

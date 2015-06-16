@@ -1,0 +1,76 @@
+<h3 class="text-center">Group List</h3>
+<div class="row">
+		<div class="col-sm-2"> 
+			<div class="bottomspace">
+				<label for="search" class="control-label">Search </label>		
+					<input id="search" type="text" class="form-control" ng-change="searchFilter('name', searchProp)" ng-model="searchProp" placeholder="search"/>
+			</div>
+		</div>			  
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="sort" class="control-label">Sort by Order</label>
+					<select id="sort" class="form-control" ng-model="sort"> 
+						<option value="">Select Order</option>
+						<option value="-name">Desending</option>
+						<option value="name">Asending</option>  
+					</select>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="status" class="control-label">Select Status</label>
+					<select id="status" class="form-control" 
+					ng-change="changeStatus('status',showStatus)" ng-model="showStatus">
+						<option value="">Select Status</option>
+						<option value="1">Active</option>
+						<option value="0">Deleted</option>
+					</select>
+			</div>
+		</div>
+	
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="filterbycustomerid" ng-init="getUsers()" class="control-label">Select By Customer</label>
+					<select id="filterbycustomerid"  class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+						<option value="">Select Customer</option>
+					</select>
+			</div>
+		</div>
+	</div>
+	
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<th>Sr.No.</th>
+				<th>User Name</th>
+				<th>Email</th>
+				<th>Contact</th>
+				<th>Address</th>
+				<th>Status</th>
+				<th>Category</th>
+				<th>Manage</th>
+			</thead>
+			<tbody ng-init="getContact(CurrentPage)">
+				<tr ng-repeat="x in contacts | orderBy:sort">
+					<td>{{((CurrentPage - 1) * pageItems) + $index + 1}}</td>
+					<td>{{x.name}}</td>
+					<td>{{x.email}}</td>
+					<td>{{x.mobile}}</td>
+					<td>{{x.address}}</td>
+					<td>{{x.status}}</td>
+					<td>{{x.category}}</td>
+					<td>
+					<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
+					</button>
+					
+					<a ng-click="openContact('modules/contact/addcontact.html',x)" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="Edit Contact Information"><span class="glyphicon glyphicon-pencil"></span></a>
+					</td>{{x}}
+				</tr>					
+			</tbody>					
+		</table>
+	</div>
+	
+	<div class="text-center">				
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="CurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getContact(CurrentPage)"></pagination>
+		<pre>Page: {{CurrentPage}} / {{numPages}}</pre>
+	</div>	
