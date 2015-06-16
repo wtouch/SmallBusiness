@@ -32,14 +32,15 @@ define(['app'], function (app) {
 			$scope.temp = response.config_data;
 		});
 		
-		//code for apply/buy button
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
 		};
+		
 		// function to generate thumbnails of images
 		$scope.generateThumb = function(files){  
 			upload.generateThumbs(files);
 		};
+		
 		// code for datepicker 	
 		$scope.today = function() {
 			$scope.date = new Date();

@@ -1,5 +1,4 @@
 <form name="businessDescForm" role="form" class="form-horizontal">
-<!-- This block for current user id -->
 	<div class="form-group" ng-if="userDetails.group_name != 'customer'">
 		<label for="customer" class="col-sm-3 control-label">Customer*</label>
 		<div class="col-sm-7">
@@ -16,14 +15,10 @@
 	</div>
 	<span ng-if="userDetails.group_name == 'customer'">
 		<input type="hidden" class="form-control" ng-model="addbusiness.user_id" ng-init="addbusiness.user_id = userDetails.id" readonly/>
-	</span> 
-<!-- This block for current user id -->
+	</span>
 <div class="form-group">
 	<label  for="business_name" class="col-sm-3 control-label">Organization/Firm Name*</label>
 	<div class="col-sm-9">
-	
-		<!-- <input type="hidden" ng-model="addbusiness.created_date">
-		<input type="hidden" ng-model="addbusiness.modified_date">  -->
 		<input type="text" ng-disabled="bizId" id="business_name" class="form-control" name="business_name" placeholder="Organization/Firm Name" ng-model="addbusiness.business_name" required>
 		<span class="help-block" ng-show="businessDescForm.business_name.$dirty && businessDescForm.business_name.$invalid">
 			<span ng-show="businessDescForm.business_name.$error.required" class="text-danger">Organization Name is required.</span>

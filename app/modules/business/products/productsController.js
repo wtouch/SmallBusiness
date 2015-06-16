@@ -54,7 +54,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			});
 		};
 		
-		//to generate thumb
 		$scope.generateThumb = function(files){ 
 			upload.generateThumbs(files);
 		};
@@ -108,9 +107,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			
 		//code for add product
 		var addproducts = function(){ 
-			/* $scope.reset = function(){
-				$scope.addproduct = {};
-			}; */
 			$scope.postData = function(addproduct) { 
 			$scope.addproduct.user_id = $rootScope.userDetails.id;
 			$scope.addproduct.date = $scope.currentDate;
@@ -171,7 +167,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			return (status==1) ? active : notActive;
 		};
 						
-		//This code for featured unfeatured button 
 		$scope.feature = function(id, featured){
 			$scope.featuredData = {featured : featured};
 			dataService.put("put/product/"+id, $scope.featuredData)
@@ -181,7 +176,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			});
 		};
 		
-		//This code for featured unfeatured button 
 		$scope.deleted = function(id, status){
 			$scope.deletedData = {status : status};
 			dataService.put("put/product/"+id, $scope.deletedData)
@@ -193,8 +187,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				$notification[response.status]("Delete Product", response.message);
 			});
 		};
-
-		//function for display services list
+		
+		//To show service list
 		$scope.servicelist= function(){
 			$scope.id=$routeParams.id
 			$scope.productFilter = {business_id : $scope.selectBusiness, type : 'service'};

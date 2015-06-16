@@ -28,11 +28,10 @@ define(['app'], function (app) {
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
 		};
-		// This will change businessView dynamically from 'business.html' {Vilas}
-		
+		// This will change businessView dynamically from 'business.html'
 		$scope.businessView = $routeParams.businessView;
 		
-		//for display default businesslist.html{sonali}
+		//for display default businesslist.html
 		if(!$routeParams.businessView) {
 			$location.path('/dashboard/business/businesslist');
 		}	
@@ -40,7 +39,7 @@ define(['app'], function (app) {
 		$scope.pageChanged = function(page, featured) {
 			(featured) ? angular.extend($scope.businessParams, featured) : "";
 			dataService.get("getmultiple/business/"+page+"/"+$scope.pageItems, $scope.businessParams)
-			.then(function(response) { //function for businesslist response			
+			.then(function(response) { 
 				$scope.bizList = response.data;			
 			});
 		};
@@ -48,7 +47,6 @@ define(['app'], function (app) {
 			$modalOptions.close('ok');
 		};
 		
-		//to open modal
 		$scope.open = function (url, buzId) {
 				var modalDefaults = {
 					templateUrl: url,	
@@ -61,7 +59,7 @@ define(['app'], function (app) {
 				});
 		};
 		
-		// code for show website list
+		
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
 			if(response.status == 'success'){
@@ -72,7 +70,6 @@ define(['app'], function (app) {
 			}
 		});
 		
-		//global method for filter 
 		$scope.changeStatus = function(statusCol, colValue) {
 			$scope.filterStatus= {};
 			(colValue == "") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
@@ -94,7 +91,6 @@ define(['app'], function (app) {
 			});
 		};
 		
-		//function to search filter
 		$scope.searchFilter = function(statusCol, colValue) {
 			$scope.search = {search: true};
 			$scope.filterStatus= {};
@@ -148,6 +144,7 @@ define(['app'], function (app) {
 					$notification[response.status]("Verify Business", response.message);
 				});
 			} ;
+			
 			//This code for featured & un-featured button 
 			$scope.feature = function(id, featured){
 				$scope.featuredData = {featured : featured};
@@ -202,6 +199,7 @@ define(['app'], function (app) {
 			};
 
 		};
+		
 		switch($scope.businessView) {
 			case 'businesslist':
 				businesslist();

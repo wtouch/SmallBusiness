@@ -14,7 +14,7 @@
 			<div class="bottomspace">
 				<label for="id" class="control-label">Sort by Order</label>
 					<select id="id" class="form-control" ng-model="id"> 
-						<option value="">Select Order</option>		<!-- added value & selected attr -->	
+						<option value="">Select Order</option>	
 						<option value="-business_name">Descending</option>
 						<option value="business_name">Ascending</option>  
 					</select>
@@ -24,7 +24,7 @@
 			<div class="bottomspace">
 				<label for="verified" class="control-label">Filter By Verified</label>
 					<select id="verified" class="form-control" ng-model="verifiedFilter" ng-change="changeStatus('verified',verifiedFilter)">
-						<option value="" selected>Select Verified</option><!-- added value & selected attr -->
+						<option value="" selected>Select Verified</option>
 						<option value="1" >Verified</option>
 						<option value="0">Not Verified</option>
 					</select>
@@ -34,7 +34,7 @@
 			<div class="bottomspace">
 				<label for="featured" class="control-label">Filter By Featured</label>
 					<select id="featured" class="form-control" ng-model="featuredFilter" ng-change="changeStatus('featured',featuredFilter)">
-						<option value="" selected>Select Featured</option><!-- added value & selected attr -->
+						<option value="" selected>Select Featured</option>
 						<option value="1" >Featured</option>
 						<option value="0">Not Featured</option> 
 					</select>
@@ -60,8 +60,6 @@
 					<th>Salesman</th>
 					<th>Manager</th>
 					<th>Manage</th>
-					<!-- <th ng-if="userDetails.group_name == 'customer'">Verified</th>
-					<th ng-if="userDetails.group_name == 'customer'">Featured</th> -->
 				</thead>
 				<tbody as-sortable="board.dragControlListeners" ng-model="bizList">
 					<tr ng-repeat="x in bizList | orderBy:id | filter: { status : hideDeleted}" as-sortable-item>
@@ -107,7 +105,7 @@
 							<span class="glyphicon glyphicon-ok" ng-show="x.verified==1" tooltip="Verified" ng-disabled="true"></span>
 						</td>
 						<td ng-if="userDetails.group_name == 'customer'">
-							<span class="glyphicon glyphicon-star" ng-show="x.featured==1" tooltip="Featured" ng-disabled="true"></span>
+							<span class="glyphicon glyphicon-star" ng-show="x.featured==1" tooltip="" ng-disabled="true"></span>
 						</td> -->
 					</tr>
 				</tbody>									

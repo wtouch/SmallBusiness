@@ -17,13 +17,10 @@
 			<label  for="image" class="col-sm-3 control-label">Add Image</label>
 			<div class="col-sm-4">
 				<input type="file" class="form-control" id="image" name="image" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="image"/>
-				
 				<!-- This will show thumbnails & progress of images -->
 				<file-preview url="image"></file-preview>
-				
 				<!-- This button will show if file/s selected -->
 				<button ng-show="image" ng-click="uploadgallery(image,path + businessData.user_id,userInfo,gallery.image)" type="button">Upload</button>
-				
 				<!-- This hidden input will store image path in array after successful uploading -->
 				<input type="hidden" ng-model="gallery.desc.image">
 			</div>
@@ -41,6 +38,7 @@
 				</span>				
 			</div>
 		</div>
+		
 		<div class="form-group">
 			<label class="col-sm-3 control-label">Featured Gallery*</label>
 			<div class="col-sm-9 radio">
@@ -51,7 +49,6 @@
 					<input type="radio" name="featuredGallery" id="featuredGallery" value="1" ng-model="gallery.desc.featured" ng-init="gallery.featured='Yes'" required> Yes
 				</label>
 				<span class="help-block" ng-show="galleryForm.featuredGallery.$dirty && galleryForm.featuredGallery.$invalid">
-					<!-- <span ng-show="galleryForm.featuredGallery.$error.required" class="text-danger">Sender Country is required.</span> -->
 				</span>				
 			</div>
 		</div>

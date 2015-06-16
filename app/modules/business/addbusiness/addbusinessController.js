@@ -148,7 +148,6 @@ define(['app'], function (app) {
 			addbusiness.modified_date = dataService.currentDate;
 			dataService.post("post/business",addbusiness)
 			.then(function(response) { 
-			/* created_date : $scope.currentDate */
 				if(response.status == "success"){
 					if($rootScope.userDetails.config.addbusinessDetails != true)  $location.path("/dashboard/business/adddetails/"+response.data);
 					if($rootScope.userDetails.config.addbusiness == false){

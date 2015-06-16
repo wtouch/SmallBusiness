@@ -17,9 +17,6 @@ define(['app'], function (app) {
 			if($scope.businessData.job_careers == "") $scope.businessData.job_careers = {};
 		});	
 		
-		// all $scope object goes here
-		
-		
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.pageItems = 10;
