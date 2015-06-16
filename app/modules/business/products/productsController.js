@@ -107,9 +107,9 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			
 			//code for add product
 			var addproducts = function(){ 
-				$scope.reset = function(){
+				/* $scope.reset = function(){
 					$scope.addproduct = {};
-				};
+				}; */
 				$scope.postData = function(addproduct) { 
 				$scope.addproduct.user_id = $rootScope.userDetails.id;
 				$scope.addproduct.date = $scope.currentDate;
@@ -118,6 +118,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 						if(response.status == "success"){
 							$scope.showServiceForm = false;
 							$scope.showProductForm = false;
+							$scope.productlist();
 							if($rootScope.userDetails.config.addProducts != true){
 								dataService.progressSteps('addProducts', true);
 							}
@@ -140,6 +141,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 						$scope.showServiceForm = false;
 						$scope.showProductForm = false;
 							dataService.progressSteps('addProducts', true);
+						$scope.servicelist();	
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Add Service", response.message);
@@ -148,7 +150,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		}
 	
 		//view for product list
-		var productlist= function(){
+		
+		$scope.productlist = function(){
 			$scope.productFilter = {business_id : $scope.selectBusiness, type : 'product'};
 			angular.extend($scope.userInfo, $scope.productFilter);
 			dataService.get("getmultiple/product/1/10",$scope.userInfo)
@@ -158,10 +161,11 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				}else if($rootScope.userDetails.config.addProducts == true){
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Get Product List", response.message);
-					$scope.products = [];
+					$scope.products = {};
 				};
 			});
 		}
+		
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
 		};
@@ -189,7 +193,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			};
 
 		//function for display services list
-		var servicelist= function(){
+		$scope.servicelist= function(){
 			$scope.id=$routeParams.id
 			$scope.productFilter = {business_id : $scope.selectBusiness, type : 'service'};
 			angular.extend($scope.userInfo, $scope.productFilter);
@@ -229,7 +233,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				addproducts();
 			}
 			if(value=="product"){
-				productlist();
+				$scope.productlist();
 			}
 			
 			if(value=="service" && $scope.showServiceForm == true){
@@ -237,7 +241,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			}
 			
 			if(value=="service"){
-				servicelist();
+				$scope.servicelist();
 			}
 		}
 		if($cookies.businessId){

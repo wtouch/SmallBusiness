@@ -49,15 +49,7 @@ define(['app'], function (app) {
 				}
 			});
 		}
-		
-		/* $scope.reqnewsite.business_id = response.data.business_id;
-		$scope.reqnewsite.template_id = response.data.template_id;
-		$scope.reqnewsite.user_id = response.data.user_id;
-		
-		if(response.data.config.menus == undefined){
-			$scope.getMenulist(response.data.user_id, response.data.business_id);
-		} */
-		
+				
 		//For display by default website list
 		if(!$scope.websitePart) {
 			$location.path('/dashboard/websites/websiteslist');
@@ -197,8 +189,7 @@ define(['app'], function (app) {
 					if(response.status == "success"){
 						$scope.reqnewsite = {};
 						$scope.formScope.requestsiteForm.$setPristine;
-
-						$notification.success("Filter Website List", "Your Request has successfully registered. Kindly check your mailbox for activation status!");
+						$notification.success("Website Added", "Your Request has successfully registered. Kindly check your mailbox for activation status!");
 						if($rootScope.userDetails.config.requestSite == false){
 							dataService.progressSteps('requestSite', true);
 						}
@@ -207,115 +198,99 @@ define(['app'], function (app) {
 					}
 				});   
 			}
-			
-		// Google Map
-		$scope.initGoogleMap = function(latitude,longitude, zoom){
-			$scope.reqnewsite.config.google_map.latitude = latitude;
-			$scope.reqnewsite.config.google_map.longitude = longitude;
-			$scope.map = {
-				"center": {
-					"latitude": latitude,
-					"longitude": longitude
-				},
-				"zoom": zoom
-			}; //TODO:  set location based on users current gps location 
-			$scope.marker = {
-				id: 0,
-				coords: {
-					latitude: latitude,
-					longitude: longitude
-				},
-				options: { draggable: true },
-				events: {
-					dragend: function (marker, eventName, args) {
-						$scope.reqnewsite.config.google_map.latitude = $scope.marker.coords.latitude;
-						$scope.reqnewsite.config.google_map.longitude = $scope.marker.coords.longitude;
-						
-						$scope.marker.options = {
-							draggable: true,
-							labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
-							labelAnchor: "100 0",
-							labelClass: "marker-labels"
-						};
+			// Google Map
+			$scope.initGoogleMap = function(latitude,longitude, zoom){
+				$scope.reqnewsite.config.google_map.latitude = latitude;
+				$scope.reqnewsite.config.google_map.longitude = longitude;
+				$scope.map = {
+					"center": {
+						"latitude": latitude,
+						"longitude": longitude
+					},
+					"zoom": zoom
+				}; //TODO:  set location based on users current gps location 
+				$scope.marker = {
+					id: 0,
+					coords: {
+						latitude: latitude,
+						longitude: longitude
+					},
+					options: { draggable: true },
+					events: {
+						dragend: function (marker, eventName, args) {
+							$scope.reqnewsite.config.google_map.latitude = $scope.marker.coords.latitude;
+							$scope.reqnewsite.config.google_map.longitude = $scope.marker.coords.longitude;
+							
+							$scope.marker.options = {
+								draggable: true,
+								labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
+								labelAnchor: "100 0",
+								labelClass: "marker-labels"
+							};
+						}
 					}
+				};
+			}
+			var events = {
+				places_changed: function (searchBox) {
+					var place = searchBox.getPlaces();
+					if (!place || place == 'undefined' || place.length == 0) {
+						return;
+					}
+					$scope.initGoogleMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), 15);
 				}
 			};
-		}
-		var events = {
-			places_changed: function (searchBox) {
-				var place = searchBox.getPlaces();
-				if (!place || place == 'undefined' || place.length == 0) {
-					return;
+			$scope.searchbox = { template: 'modules/websites/websettings/searchbox.html', events: events };
+			$scope.showPosition = function (position) {
+				$scope.initGoogleMap(position.coords.latitude, position.coords.longitude, 5);
+				$scope.$apply();
+			}
+			$scope.showError = function (error) {
+				switch (error.code) {
+					case error.PERMISSION_DENIED:
+						$scope.error = "User denied the request for Geolocation."
+						break;
+					case error.POSITION_UNAVAILABLE:
+						$scope.error = "Location information is unavailable."
+						break;
+					case error.TIMEOUT:
+						$scope.error = "The request to get user location timed out."
+						break;
+					case error.UNKNOWN_ERROR:
+						$scope.error = "An unknown error occurred."
+						break;
 				}
-				$scope.initGoogleMap(place[0].geometry.location.lat(), place[0].geometry.location.lng(), 15);
+				$scope.initGoogleMap("19.7514798", "75.71388839999997", 5);
+				$notification.error("Location Error", $scope.error);
+				$scope.$apply();
 			}
-		};
-		$scope.searchbox = { template: 'modules/websites/websettings/searchbox.html', events: events };
-		$scope.showPosition = function (position) {
-			$scope.initGoogleMap(position.coords.latitude, position.coords.longitude, 5);
-			$scope.$apply();
-		}
-		$scope.showError = function (error) {
-			switch (error.code) {
-				case error.PERMISSION_DENIED:
-					$scope.error = "User denied the request for Geolocation."
-					break;
-				case error.POSITION_UNAVAILABLE:
-					$scope.error = "Location information is unavailable."
-					break;
-				case error.TIMEOUT:
-					$scope.error = "The request to get user location timed out."
-					break;
-				case error.UNKNOWN_ERROR:
-					$scope.error = "An unknown error occurred."
-					break;
-			}
-			$scope.initGoogleMap("19.7514798", "75.71388839999997", 5);
-			$notification.error("Location Error", $scope.error);
-			$scope.$apply();
-		}
-		$scope.getLocation = function () {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
-			}
-			else {
-				$scope.error = "Geolocation is not supported by this browser.";
-			}
-		}
-		$scope.getLocation();
-		//end google map
-		/* $scope.getMenulist = function(user_id){
-			$scope.seoParam ={user_id : user_id, status:1};
-			dataService.get("getmultiple/seo/1/100",$scope.seoParam)
-			.then(function(response) {  
-				$scope.reqnewsite.config.menus = response;
-				console.log(response);
-				if(response.status == 'success'){
-					
-					
-				}else{
-					//$notification[response.status]("", response.message);
+			$scope.getLocation = function () {
+				if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition($scope.showPosition, $scope.showError);
 				}
-			});
-		} */
-		$scope.getMenulist = function(user_id, business_id){
-			console.log(user_id, business_id);
-			$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
-				
-				dataService.get("getmultiple/seo/1/100",$scope.seoParam)
-				.then(function(response) {
-					if(response.status == 'success'){
-						$scope.reqnewsite.config.menus = response.data;
-					}else{
-						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-						$notification[response.status]("Menu Selection", response.message);
-					}
-				});
-			
-		}
+				else {
+					$scope.error = "Geolocation is not supported by this browser.";
+				}
+			}
+			$scope.getLocation();
+			//end google map
 		
-			
-		};
+			$scope.getMenulist = function(user_id, business_id){
+				console.log(user_id, business_id);
+				$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
+					
+					dataService.get("getmultiple/seo/1/100",$scope.seoParam)
+					.then(function(response) {
+						if(response.status == 'success'){
+							$scope.reqnewsite.config.menus = response.data;
+						}else{
+							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification[response.status]("Menu Selection", response.message);
+						}
+					});
+				
+			}
+			};
         
 		//code for view website list
         var websiteslist = function(){
