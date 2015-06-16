@@ -131,7 +131,8 @@
 <div class="form-group">
 	<label for="telephone" class="col-sm-3 control-label">Telephone</label>
 	<div class="col-sm-9">
-		<input type="text" id="telephone" name="telephone" class="form-control" ng-model="addbusiness.contact_profile.telephone" placeholder="Enter Telephone" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="15">
+		<input type="text" id="telephone" name="telephone" class="form-control" ng-model="addbusiness.contact_profile.telephone" placeholder="Enter Telephone" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="14">
+	
 		<span class="help-block" ng-show="businessContactForm.telephone.$dirty && businessContactForm.telephone.$invalid">
 			<span ng-show="businessContactForm.telephone.$error.pattern && (businessContactForm.telephone.$dirty || submitted)" class="text-danger">Enter a valid Telephone</span>
 			<span class="text-danger" ng-show="businessContactForm.telephone.$error.minlength && (businessContactForm.telephone.$dirty || submitted)">Enter Valid Length Of Telephone.</span>

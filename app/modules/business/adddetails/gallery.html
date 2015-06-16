@@ -54,8 +54,15 @@
 					<!-- <span ng-show="galleryForm.featuredGallery.$error.required" class="text-danger">Sender Country is required.</span> -->
 				</span>				
 			</div>
-		</div>	
-
+		</div>
+			
+		<div class="form-group">
+			<label for="category" class="col-sm-3 control-label">Category </label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="category" name="category" ng-model="gallery.desc.category" placeholder="Enter Category" />
+				</div>
+		</div>
+						
 		<div class="form-group">
 			<label for="imgDesc" class="col-sm-3 control-label">Image Description*</label>
 			<div class="col-sm-9">
@@ -84,6 +91,7 @@
 				<tr>
 					<th>Infrastucture Heading</th>
 					<th>Infrastucture Description</th>
+					<th>Category</th>
 					<th>Remove </th>
 				</tr>
 				<tr ng-repeat="(key, value) in businessData.gallery">
@@ -94,6 +102,7 @@
 							<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
 						</ul>
 					</td>
+					<td>{{value.category}}</td>
 					<td>
 						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.gallery, gallery); showForm('infra')" tooltip="Edit Details"></button>
 						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.gallery)" tooltip="Remove"></button>			
