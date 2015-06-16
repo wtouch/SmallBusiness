@@ -128,9 +128,9 @@ class websiteManager{
 		$this->db->setWhere($whereProd, $product);
 		$this->db->setColumns($product, array("*"));
 		$productData = $this->db->select();
-		if($productData['status'] != 'success'){
+		/* if($productData['status'] != 'success'){
 			throw new Exception('Product Error: '.$productData['message']);
-		}
+		} */
 		return $productData["data"];
 	}
 	function getProductData($page, $type, $category = null){
