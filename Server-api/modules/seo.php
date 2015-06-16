@@ -24,7 +24,7 @@
 		$db->setLimit($limit);
 		$business = $db->setJoinString("INNER JOIN", "business", array("user_id"=>$user.".id"));
 		$db->setWhere($where, $business);
-		$businessCols = array("id","testimonials", "job_careers", "news_coverage", "gallery" );
+		$businessCols = array("id","testimonials", "job_careers", "news_coverage", "gallery", "custom_details");
 		$db->setColumns($business, $businessCols);
 		
 		$product = $db->setJoinString("LEFT JOIN", "product", array("business_id"=>$business.".id"));
@@ -34,7 +34,7 @@
 		
 		$data = $db->select();
 		
-		$home = array("name" => "Home", "url" => "/home", "status" => "1");
+		$home = array("name" => "Home", "url" => "/", "status" => "1");
 		$about = array("name" => "About Us", "url" => "/about-us", "status" => "1");
 		$contact = array("name" => "Contact Us", "url" => "/contact-us", "status" => "1");
 		
@@ -48,6 +48,16 @@
 			if($data['data'][0]['news_coverage']) $menus[] = array("name" => "Activities", "url" => "/activities", "status" => "1"); 
 			
 			if($data['data'][0]['gallery']) $menus[] = array("name" => "Gallery", "url" => "/gallery", "status" => "1");
+			
+			if($data['data'][0]['custom_details']){
+				if(count($data['data'][0]['custom_details']) >=1 ){
+					foreach($data['data'][0]['custom_details'] as $key => $value){
+						$menus[] = array("name" => $key, "url" => "/cp/".str_replace(" ", "-",($key)), "status" => "1", "custom" => true);
+					}
+				}
+			} 
+			
+			
 			$productCategory = array();
 			$serviceCategory = array();
 			foreach($data['data'] as $key => $value){
@@ -87,8 +97,6 @@
 				if(count($serviceMenus) >=1) $menus[] = array("name" => "Services", "url" => "/services", "status" => "1", "childMenu" => $serviceMenus );
 			}
 			
-		}else{
-			print_r($data['message']);
 		}
 		
 		$response["status"] = "success";
