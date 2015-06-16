@@ -12,7 +12,9 @@ $app = new Slim\Slim();
 $web = new websiteManager;
 
 $app->get('/', function() use($app, $config, $web) {
-	$web->getBusinessData('home');
+	$modules['searchProp'] = true;
+	$title = "Home";
+	$web->getBusinessData('home',$modules, $title);
 });
 
 $app->get('/products', function() use($app, $config, $web) {
@@ -55,7 +57,9 @@ $app->get('/services/:product_name/:productId', function($product_name, $product
 	$web->getProductData("project");
 }); */
 $app->get('/:page', function($page) use($app, $config, $web) {
-	$web->getBusinessData($page);
+	$modules = array();
+	$title = "Home";
+	$web->getBusinessData($page, $modules, $title);
 });
 
 

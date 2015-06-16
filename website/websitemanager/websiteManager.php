@@ -24,7 +24,7 @@ class websiteManager{
 		$template->display($response);
 	}
 	
-	function getBusinessData($page){
+	function getBusinessData($page, $modules, $title){
 		try{
 			// main website table
 			$table = 'website';
@@ -51,7 +51,7 @@ class websiteManager{
 			
 			// template table
 			$business = $this->db->setJoinString("LEFT JOIN","my_template", array("id"=>$website.".template_id"));
-			$this->db->setColumns($business, array("template_name" => "template_name", "category" => "template_category"));
+			$this->db->setColumns($business, array("template_name" => "template_name", "category" => "template_category","template_params" => "template_params"));
 			
 			$businessData = $this->db->selectSingle();
 			
@@ -78,9 +78,11 @@ class websiteManager{
 			$templateFolder = $businessData['data']['template_name'];
 			
 			// assign data to response
+			$response["modules"] = $modules;
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
             $response["data"] = $businessData["data"];
+            $response["title"] = $title;
 			
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];

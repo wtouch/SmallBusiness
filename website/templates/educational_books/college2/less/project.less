@@ -1,0 +1,90 @@
+//project
+	.breadcrumb{
+		background : none;
+		li{
+			a{
+				color : @lightcolor;
+				text-decoration : underline;
+				&:hover{
+					color : @lightcolor;
+					text-decoration : none;
+				}
+			}
+			&+li:before {
+				content: ">\00a0";
+			}
+		}
+	}
+	.highlight{
+		color :@color; 
+	}
+	.project{
+		ul.nav.navbar-nav {
+			background-color: @back;
+			border-bottom: 4px solid @lightbackcolor;
+			height : 42px;
+			>li{
+				border-right : 1px solid @lightbackcolor;
+				height : 38px;
+				>a, > a:focus{
+					padding-top : 9px;
+					padding-bottom : 9px;
+					color : @lightcolor;
+					font-weight : bold;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					background-color: @color ;
+					color : @colorblack;
+				}
+			}
+		}
+		.projImg{
+			margin-right: 20px;
+		}
+		.projHead{
+			margin-top:40px
+		}
+		.projImgs{
+			margin-bottom: 20px;
+			max-height : 175px;
+		}
+	}
+	.projectgallery,.projlist{
+		background-color : @back;
+		border : 1px solid @lightbackcolor;
+		padding: 20px 20px 0px;
+		.thumbnail{
+			background-color : @darkbackcolor;
+		}
+	}
+	//projectlist
+	.projlist{
+		.thumbnail{
+			.caption{
+				color : @lightcolor;
+				a{
+					color : @color;
+					text-decoration : underline;
+					&:hover{
+						color : @color;
+						text-decoration : none;
+					}
+				}
+			}
+		}
+	}
+	@media (min-width: 320px){
+		.projImg{
+			float :none;
+		}
+	}
+	@media (min-width: 992px){
+		.projImg{
+			float :left;
+		}
+	}
+	@media (min-width: 1200px){
+		.projImg{
+			float :left;
+		}
+	}

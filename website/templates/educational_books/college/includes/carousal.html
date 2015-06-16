@@ -1,15 +1,15 @@
-{% if template.template_params.slider %}
+{% if data.template_params.slider %}
 <div id="carousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
 	<ol class="carousel-indicators">
-	{% for key, value in template.template_params.slider %}
+	{% for key, value in data.template_params.slider %}
 		<li data-target="#carousel" data-slide-to="{{key}}" class="{{ (key == 0) ? 'active' }}"></li>
 	{% endfor %}
 	</ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-	{% for key, value in template.template_params.slider %}
+	{% for key, value in data.template_params.slider %}
 		<div class="item {{ (key == 0) ? 'active' }}">
 		  <img class="img-responsive" src="{{value.image}}" alt="{{value.title}}">
 		  <div class="carousel-caption">
