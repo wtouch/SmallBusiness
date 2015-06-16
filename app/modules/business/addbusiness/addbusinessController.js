@@ -109,7 +109,7 @@ define(['app'], function (app) {
 			});
 		}
 		
-		 //function for websitelist response
+		//function for websitelist response
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) { 
 			if(response.status == 'success'){

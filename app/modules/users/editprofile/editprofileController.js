@@ -1,4 +1,3 @@
-
 'use strict';
 
 define(['app'], function (app) {
@@ -55,19 +54,7 @@ define(['app'], function (app) {
 			if($scope.editprofile.user_img == (undefined)) $scope.editprofile.user_img = "";
 		});
 		
-		/* //Upload Function for uploading files 
-		$scope.upload = function(files,path,userInfo,picArr){ // this function for uploading files
-			upload.upload(files,path,userInfo,function(response){
-				var picArrKey = 0, x;
-				for(x in picArr) picArrKey++;
-				if(response.status === 'success'){
-					$scope.editprofile.user_img = response.data.file_relative_path;
-				}else{
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Upload Image", response.message);
-				}
-			});
-		}; */
+		
 		//Upload Function for uploading files 
 		$scope.upload = function(files,path,userInfo,picArr){ // this function for uploading files
 			upload.upload(files,path,userInfo,function(response){
