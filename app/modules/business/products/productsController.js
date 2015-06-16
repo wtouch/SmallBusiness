@@ -6,8 +6,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 	var productsController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService,$cookieStore, $cookies,$notification) {
 		//for display form parts of product & service
 		$scope.productView = $routeParams.productView;
-	
-		// all $scope object goes here
+		
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.addproductCurrentPage = 1;
@@ -27,10 +26,12 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.addproduct = {
 			product_image : []
 		}; 
+		
 		// this is form object
 		$scope.addservice = {
 			product_image : []
 		};
+		
 		//function to upload files
 		$scope.upload = function(files,path,userInfo,picArr){//this function for uploading files
 			upload.upload(files,path,userInfo,function(data){
@@ -45,12 +46,14 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 	
 			});
 		};
+		
 		$scope.pageChanged = function(page) {
 			dataService.get("/getmultiple/product/"+page+"/"+$scope.pageItems)
 			.then(function(response) { 		
 				$scope.services = response.data;			
 			});
 		};
+		
 		//to generate thumb
 		$scope.generateThumb = function(files){ 
 			upload.generateThumbs(files);
@@ -92,43 +95,42 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		}
 		
 		// code for get business list
-			//$scope.statusParam={status:1};
-			//angular.extend($scope.userInfo,$scope.statusParam);
-			dataService.get("getmultiple/business/1/100",$scope.userInfo)
-			.then(function(response) {  
-				if(response.status == 'success'){
-					$scope.businessList = response.data;
-				}else{
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Get Business List", "You didn't added any business! Please add business first.");
-				}
+		dataService.get("getmultiple/business/1/100",$scope.userInfo)
+		.then(function(response) {  
+			if(response.status == 'success'){
 				$scope.businessList = response.data;
-			});
-			
-			//code for add product
-			var addproducts = function(){ 
-				/* $scope.reset = function(){
-					$scope.addproduct = {};
-				}; */
-				$scope.postData = function(addproduct) { 
-				$scope.addproduct.user_id = $rootScope.userDetails.id;
-				$scope.addproduct.date = $scope.currentDate;
-					 dataService.post("post/product",addproduct)
-					.then(function(response) { 
-						if(response.status == "success"){
-							$scope.showServiceForm = false;
-							$scope.showProductForm = false;
-							$scope.productlist();
-							if($rootScope.userDetails.config.addProducts != true){
-								dataService.progressSteps('addProducts', true);
-							}
-						}
-						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-						$notification[response.status]("Add Product", response.message);
-						$scope.reset();
-					});
-				}
+			}else{
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Get Business List", "You didn't added any business! Please add business first.");
 			}
+			$scope.businessList = response.data;
+		});
+			
+		//code for add product
+		var addproducts = function(){ 
+			/* $scope.reset = function(){
+				$scope.addproduct = {};
+			}; */
+			$scope.postData = function(addproduct) { 
+			$scope.addproduct.user_id = $rootScope.userDetails.id;
+			$scope.addproduct.date = $scope.currentDate;
+				 dataService.post("post/product",addproduct)
+				.then(function(response) { 
+					if(response.status == "success"){
+						$scope.showServiceForm = false;
+						$scope.showProductForm = false;
+						$scope.productlist();
+						if($rootScope.userDetails.config.addProducts != true){
+							dataService.progressSteps('addProducts', true);
+						}
+					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Add Product", response.message);
+					$scope.reset();
+				});
+			}
+		}
+		
 		//function for add services
 		var addservices = function(){
 			$scope.addservice.user_id= $rootScope.userDetails.id;
@@ -150,7 +152,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		}
 	
 		//view for product list
-		
 		$scope.productlist = function(){
 			$scope.productFilter = {business_id : $scope.selectBusiness, type : 'product'};
 			angular.extend($scope.userInfo, $scope.productFilter);
@@ -171,26 +172,27 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		};
 						
 		//This code for featured unfeatured button 
-			$scope.feature = function(id, featured){
-				$scope.featuredData = {featured : featured};
-				dataService.put("put/product/"+id, $scope.featuredData)
-				.then(function(response) {
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Feature Product", response.message);
-				});
-			};
+		$scope.feature = function(id, featured){
+			$scope.featuredData = {featured : featured};
+			dataService.put("put/product/"+id, $scope.featuredData)
+			.then(function(response) {
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Feature Product", response.message);
+			});
+		};
+		
 		//This code for featured unfeatured button 
-			$scope.deleted = function(id, status){
-				$scope.deletedData = {status : status};
-				dataService.put("put/product/"+id, $scope.deletedData)
-				.then(function(response) { 
-					if(response.status == 'success'){
-						$scope.hideDeleted = 0;
-					}
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Delete Product", response.message);
-				});
-			};
+		$scope.deleted = function(id, status){
+			$scope.deletedData = {status : status};
+			dataService.put("put/product/"+id, $scope.deletedData)
+			.then(function(response) { 
+				if(response.status == 'success'){
+					$scope.hideDeleted = 0;
+				}
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Delete Product", response.message);
+			});
+		};
 
 		//function for display services list
 		$scope.servicelist= function(){
@@ -219,6 +221,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					$scope.showProductForm = false;
 					$scope.editProdForm = false;
 					$scope.editServForm = false;
+					$scope.servicelist();
+					$scope.productlist();
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Edit Product", response.message);
