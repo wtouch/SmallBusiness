@@ -1,0 +1,19 @@
+
+	{% autoescape false %}
+	<div class="row gallery">
+		{% if data.gallery %}
+			<h2 class="text-center">Gallery</h2>
+			{% for key, value in data.gallery if break == 0 %}
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail">
+					<img class="img-responsive" src="{{value.image.file_relative_path}}" alt="{{key}}" />
+					<div class="caption">
+						<h4 class="text-center">{{key}}</h4>
+						<p>{{ value.description }}</p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+	{% endautoescape %}

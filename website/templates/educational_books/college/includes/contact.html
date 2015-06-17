@@ -1,0 +1,19 @@
+<h2 class="subhead">Contact Us</h2>
+<div class="sections">
+	<h4>{{ data.business_name }}</h4>
+	<hr>
+	{%if data.contact_profile.telephone%}
+		<p><b>Telephone : </b><br>{{data.contact_profile.telephone}}
+	{% endif %}
+	{%if data.contact_profile.alternate_telephone%}
+		<br>{{data.contact_profile.alternate_telephone}}
+	{% endif %}
+	<hr>
+	<p><b>Mobile : </b><br>{{data.contact_profile.mobile}}
+	{%if data.contact_profile.alternate_telephone%}
+		<br>{{data.contact_profile.alternate_mobile}}
+	{% endif %}
+	</p>
+	<hr>
+	<b>Email Address : </b><br><a class="email" href="#">{{data.contact_profile.email}}</a></p>
+</div>

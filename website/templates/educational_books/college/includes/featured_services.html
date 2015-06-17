@@ -1,25 +1,26 @@
 {% autoescape false %}
-{% if featured_services | length >= 1 %}
-	<div class="row sidesec1">	
-		<div class="slogan">
-			<p class="text-center">Our Services</p>
-		</div>
-	</div>
+{% if featured_services | length >= 2 %}
+<h2 class="subhead">Featured Services</h2>
+<div class="sections">
 	<div class="row">
-	<div class="content">
 		{% set break = 0 %}{% set i = 0 %}
 		{% for x in featured_services if break == 0 %}
-			<div class="features">
+			<div class="col-sm-6 col-md-3 service">
+				<a href="#">
+					<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" alt="{{x.product_image.0.file_relative_path}}">
+				</a>
+			</div>
+			<div class="col-sm-6 col-md-3 service">
 				<h3>{{x.product_service_name}}</h3>
-				<p>{{ x.description |length > 200 ?x.description|slice(start, 200)~ '...' : x.description}}</p>
-				<a class="read" href="service/{{x.id}}">View Details</a>
+				<p>{{ x.description |length > 150 ?x.description|slice(start, 150)~ '...' : x.description}}</p>
+				<a href="service/{{x.id}}" class="btn btn-info">Read More</a>
 			</div>
 			{% set i = (i + 1) %}
-			{% if i == 3 %}
+			{% if i == 4 %}
 				{% set break = 1 %}
 			{% endif %}
 		{% endfor %}
 	</div>
-	</div>
+</div>
 {% endif %}
 {% endautoescape %}
