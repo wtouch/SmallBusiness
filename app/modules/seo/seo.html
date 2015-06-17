@@ -13,7 +13,7 @@
 		<div class="form-group">
 			<label for="title" class="col-sm-2 control-label">* Title</label>		
 				<div class="col-sm-9">
-					<input type="text" id="title" class="form-control" name="title" placeholder=" SEO Title" ng-model="seo.title" ng-pattern="/^[a-zA-Z0-9(_)]*$/" required>
+					<input type="text" id="title" class="form-control" name="title" placeholder=" SEO Title" ng-model="seo.title"  required /><!--ng-pattern="/^[a-zA-Z0-9(_)]*$/"-->
 					<span class="text-danger" ng-show="seoForm.title.$dirty && seoForm.title.$invalid">
 						<span ng-show="seoForm.title.$error.required">Title is required.</span>
 					</span>
@@ -22,7 +22,7 @@
 		
 			<div class="form-group">	
 				<div class="col-sm-9">
-					 <input type="hidden" id="date" class="form-control" name="dateInput" value="{{seo.date}}" ng-model="seo.modified_date" readonly  placeholder="date" >
+					 <input type="hidden" id="date" class="form-control" name="dateInput" value="{{seo.date}}" ng-model="seo.modified_date" placeholder="date" readonly >
 				</div>						
 			</div>
 			

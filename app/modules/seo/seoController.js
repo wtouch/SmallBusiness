@@ -10,16 +10,15 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		
 		$scope.postData = function(seo) {
-			/* $scope.seo.user_id= $rootScope.userDetails.id; */
-				 dataService.post("post/seo",seo)
-				.then(function(response) {  
-					if(response.status == "success"){
-						//$scope.reset();
-					}
-					 if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Submit SEO", response.message); 
-				});
-			}
+			dataService.post("post/seo",seo)
+			.then(function(response) {  
+				if(response.status == "success"){
+				}
+				 if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Submit SEO", response.message); 
+			});
+		}
+		
 		
 	};	
 	 

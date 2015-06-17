@@ -69,11 +69,9 @@ define(['app'], function (app) {
 			};
 		});
 		
-		
 		$scope.getMenulist = function(user_id, business_id){
 			console.log(user_id, business_id);
 			$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
-				
 				dataService.get("getmultiple/seo/1/100",$scope.seoParam)
 				.then(function(response) {
 					if(response.status == 'success'){
