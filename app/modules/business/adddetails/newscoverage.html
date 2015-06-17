@@ -111,21 +111,20 @@
 		<table class="table table-bordered table-responsive" ng-if="businessData.news_coverage">
 			<tr>
 				<th>News Coverage Title</th>
-				<th>Image</th>
-				<th> News Coverage Description</th>
 				<th>Remove </th>
 			</tr>			
 			</tr>
 			
 			<tr ng-repeat="(key, value) in businessData.news_coverage">
-				<td>{{key}}</td>
-				<td>
-					<ul class="list-unstyled">
-						<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" />
-					</ul>
-				</td>
-				<td class="tdwidth">
-					<div class="pull-left" ng-bind-html="value.newsdetails"></div>
+				<td as-sortable="dragControlListeners">
+					<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
+						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
+					<hr>
+						<div collapse="isCollapsed">
+							<div class="well well-lg"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" /><br>		
+								<b>Description:</b><p ng-bind-html="value.newsdetails">
+							</div> 
+						</div> 
 				</td>
 				<td>
 					<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.news_coverage, news_coverage); showForm('infra')" tooltip="Edit Details"></button>

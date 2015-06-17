@@ -53,13 +53,17 @@
 			<table class="table table-bordered table-responsive " ng-if="businessData.job_careers">
 				<tr>
 					<th>Job Title</th>
-					<th>Job Description</th>
 					<th>Remove </th>
 				</tr>
 				<tr ng-repeat="(key, value) in businessData.job_careers">
-					<td>{{key}}</td>
-					<td class="tdwidth">
-						<div class="pull-left" ng-bind-html="value.description"></div>
+					<td as-sortable="dragControlListeners">
+						<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
+						<p>{{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></p>
+						<hr>
+						<div collapse="isCollapsed" as-sortable-item>
+							<div><p ng-bind-html="value.description" ></p>
+							</div> 
+						</div>
 					</td>
 					<td>
 						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.job_careers, job_careers); showForm('infra')" tooltip="Edit Details"></button>

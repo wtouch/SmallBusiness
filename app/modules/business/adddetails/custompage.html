@@ -55,15 +55,20 @@
 			<table class="table table-bordered table-responsive " ng-if="businessData.custom_details">
 				<tr>
 					<th>Custom Detail Heading</th>
-					<th>Custom DetailDescription</th>
+					
 					<th>Remove</th>
 				</tr>
 				<tr ng-repeat="(key, value) in businessData.custom_details">
-					<td>{{key}}</td>
-					<td>
-					<div ng-bind-html="value.description"></div>
+					<td as-sortable="dragControlListeners">
+						<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
+						<p>{{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></p>
+						<hr>
+						<div collapse="isCollapsed" as-sortable-item>
+							<div><p ng-bind-html="value.description" ></p>
+							</div> 
+						</div>
 					</td>
-					<td>
+					<td class="col-sm-2">
 						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.custom_details, custompage); showForm('infra')" tooltip="Edit Details"></button>
 						
 						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.custom_details)" tooltip="Remove"></button>			

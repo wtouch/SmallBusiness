@@ -34,11 +34,18 @@ define(['app'], function (app) {
 		$scope.gallery = { desc : {  }};
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
+		$scope.isCollapsed = true;
 		$scope.biz = {};
 		
 		dataService.config('config', {config_name : "business"}).then(function(response){
 			$scope.biz = response.config_data;
 		});
+		
+		$scope.dragControlListeners = {
+			accept: function (sourceItemHandleScope, destSortableScope) {
+				return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
+			}
+		};
 		
 		$scope.today = function() {
 			$scope.date = new Date();
@@ -157,6 +164,19 @@ define(['app'], function (app) {
 					$notification[response.status]("Add Business Details", response.message);
 				}
 			});
+		};
+		
+		$scope.openGallery = function (url) {
+				var modalDefaults = {
+					templateUrl: url,	
+					size : 'lg'
+				};
+				var modalOptions = {
+					
+					
+				};
+				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+				});
 		};
     };
 	

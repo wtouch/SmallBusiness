@@ -87,23 +87,27 @@
 			<table class="table table-bordered table-responsive " ng-if="businessData.gallery">
 				<tr>
 					<th>Infrastucture Heading</th>
-					<th>Infrastucture Description</th>
-					<th>Category</th>
 					<th>Remove </th>
 				</tr>
 				<tr ng-repeat="(key, value) in businessData.gallery">
-					<td>{{key}}</td>
-					<td class="tdwidth">
-						<div class="pull-left" ng-bind-html="value.description"></div>
-						<ul class="list-unstyled pull-right">							
-							<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
-						</ul>
-					</td>
-					<td>{{value.category}}</td>
-					<td>
-						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.gallery, gallery); showForm('infra')" tooltip="Edit Details"></button>
-						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.gallery)" tooltip="Remove"></button>			
-					</td>					
+					<td as-sortable="dragControlListeners">
+					<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
+						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
+						<div collapse="isCollapsed">
+							<div class="well well-lg"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" />
+							<br>		
+								<b>Category:</b>{{value.category}}<br>
+								<b>Description:</b><p ng-bind-html="value.description">
+							</div> 
+						</div> 
+				</td>
+				<td>
+					<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.gallery, gallery); showForm('infra')" tooltip="Edit Details"></button>
+					<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.gallery)" tooltip="Remove"></button>	
+					<a ng-click="openGallery('modules/business/adddetails/viewGallery.html')" class="btn btn-success glyphicon glyphicon-eye-open">
+					</a>
+							
+				</td>					
 				</tr>
 			</table>
 		</div>
