@@ -272,7 +272,11 @@ class websiteManager{
 			$this->db->setColumns($business, array("template_name" => "template_name", "category" => "template_category"));
 			
 			$project = $this->db->setJoinString("LEFT JOIN","project", array("id"=>$website.".user_id"));
+<<<<<<< HEAD
+			$this->db->setColumns($projects, array("status" => "1", "category" => "category"));
+=======
 			$this->db->setColumns($project, array("*"));
+>>>>>>> "websiteManager.php modified"
 			
 			$projectData = $this->db->selectSingle();
 			
@@ -305,11 +309,19 @@ class websiteManager{
             $response["message"] = "Data Selected!";
             $response["data"] = $projectData["data"];
             $response["title"] = "projects";
-	
+<<<<<<< HEAD
+			
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];
 			$response["uri"] = ($page) ? "/".$type."s" : '/';
+=======
+	
+            $response["templatePath"] = $templateCategory."/".$templateFolder."/";
+			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
+			$response["routes"] = $businessData["data"]['website_config']['menus'];
+			$response["uri"] = ($page) ? "/".$type."s" : '/home';
+>>>>>>> "websiteManager.php modified"
 			
 			// this will dynamic with checking template folder and default folder for template page
             $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
@@ -397,7 +409,7 @@ class websiteManager{
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];
-			$response["uri"] = ($page) ? "/".$page : '/home';
+			$response["uri"] = ($page != "home") ? "/".$page : '/';
 			
 			// this will dynamic with checking template folder and default folder for template page
             $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
@@ -484,6 +496,7 @@ class websiteManager{
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $projectData["data"]['website_config']['menus'];
+			$response["uri"] = ($page) ? "/".$page : '/home';
 			
 			// this will dynamic with checking template folder and default folder for template page
             $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
