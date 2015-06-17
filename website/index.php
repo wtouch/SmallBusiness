@@ -48,7 +48,7 @@ $app->get('/projects', function() use($app, $config, $web) {
 	$web->getProjectData("projects", "project");
 });
 
-$app->get('/projects/:project_name/:projectId', function($projectId) use($app, $config, $web) {
+$app->get('/projects/:project_name/:projectId', function($project_name, $projectId) use($app, $config, $web) {
 	$web->getSingleProject("project", $projectId);
 }); 
 
@@ -56,13 +56,10 @@ $app->get('/properties', function() use($app, $config, $web) {
 	$web->getPropertyData("properties");
 });
 
-/* $app->get('/project', function() use($app, $config, $web) {
-	$web->getProjectData("project");
+
+$app->get('/property/:property_name/:propertyId', function($property_name, $propertyId) use($app, $config, $web) {
+	$web->getSingleProperty("property", $propertyId);
 });
- */
-/* $app->get('/property/:property_name/:propertyId', function($property_name, $propertyId) use($app, $config, $web) {
-	$web->getProductData("property");
-}); */
 
 /* $app->get('/project/:project_name/:projectId', function() use($app, $config, $web) {
 	$web->getProductData("project");

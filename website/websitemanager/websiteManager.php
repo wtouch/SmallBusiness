@@ -291,6 +291,7 @@ class websiteManager{
 		try{
 			$businessData = $this->getConfigData(true);
 			if($businessData["status"] == "success"){
+				print_r($projectId);
 				$whereProd['id'] = $projectId;
 				$product = $this->db->setTable('project');
 				$this->db->setWhere($whereProd, $product);
@@ -310,6 +311,41 @@ class websiteManager{
             $response["data"] = $businessData["data"];
 			$response["uri"] = "/projects";
 			$response["title"] = $response["project"]["title"];
+			
+			// to render template 
+			$response = $this->getTemplate($page, $response);
+			
+		}catch(Exception $e){
+			$response["status"] = "error";
+            $response["message"] = $e->getMessage();
+            $response["data"] = null;
+			print_r($response);
+		}
+		return $response;
+	}
+	function getSingleProperty($page, $projectId){
+		try{
+			$businessData = $this->getConfigData(true);
+			if($businessData["status"] == "success"){
+				$whereProd['id'] = $projectId;
+				$property = $this->db->setTable('property');
+				$this->db->setWhere($whereProd, $property);
+				$this->db->setColumns($property, array("*"));
+				$productData = $this->db->selectSingle();
+				if($productData['status'] != 'success'){
+					throw new Exception('Project Error: '.$productData['message']);
+				}
+				$response["property"] = $productData["data"];
+			}else{
+				throw new Exception($businessData["message"]);
+			}
+			
+			// assign data to response
+			$response["status"] = "success";
+            $response["message"] = "Data Selected!";
+            $response["data"] = $businessData["data"];
+			$response["uri"] = "/properties";
+			$response["title"] = $response["property"]["title"];
 			
 			// to render template 
 			$response = $this->getTemplate($page, $response);
