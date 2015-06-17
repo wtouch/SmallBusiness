@@ -250,7 +250,7 @@ class websiteManager{
 			$this->db->setColumns($business, array("template_name" => "template_name", "category" => "template_category"));
 			
 			$project = $this->db->setJoinString("LEFT JOIN","project", array("id"=>$website.".user_id"));
-			$this->db->setColumns($project, array("status" => "1", "category" => "category"));
+			$this->db->setColumns($projects, array("status" => "1", "category" => "category"));
 			
 			print_r $project;
 			
@@ -271,7 +271,7 @@ class websiteManager{
 					throw new Exception('Please add template details!');
 				}
 				$this->getProducts($projectData['data']["id"], $type, $category);
-				$response["products"] = $this->getProducts($projectData['data']["id"], $type, $category);
+				$response["projects"] = $this->getProjects($projectData['data']["id"],  $category);
 			}else{
 				throw new Exception('Website not registered!');
 			}
@@ -290,7 +290,7 @@ class websiteManager{
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];
 			$response["uri"] = ($page) ? "/".$type."s" : '/home';
-			
+			print_r($response)
 			// this will dynamic with checking template folder and default folder for template page
             $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
 			
@@ -301,8 +301,9 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
-			print_r($response);
+			print_r($response) ;
 		}
+		
 		return $response;
 	}
 	
