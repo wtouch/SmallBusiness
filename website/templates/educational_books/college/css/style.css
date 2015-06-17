@@ -3,13 +3,10 @@
 	}
 	.header {
 		margin-top: 30px;
-		padding: 20px 15px 0;
+		padding-top : 20px;
 	}
 	#googleMap{
 		height:350px;
-	}
-	p{
-		text-align:justify;
 	}
 	h1,h2{
 		text-transform : uppercase;
@@ -54,8 +51,8 @@
 	.infrastructure .thumbnail, .prod .thumbnail{
 		height: 435px;
 	}
-	.mygallery .thumbnail{
-		height :415px;
+	.gallery .thumbnail{
+		height :330px;
 	}/* 
 	.singleprod .thumbnail{
 		height :270px;
@@ -79,12 +76,7 @@
 	.carousel-control.right, .carousel-control.left{
 		background : none;
 	}
-	.header{
-		margin-top:30px;
-	
-		padding: 20px 15px 0;
-}
-	.header,.content,.aboutus,.mycontact, .mytesti, .myjobs, .myact, .prod,.singleprod,.featureserv, .mygallery{
+	.header, .info{
 		background-color:#fff;
 	}
 	address, .navbar-default .navbar-nav > li > a, .navbar a, p, footer, blockquote a, footer a, .nav>li>a.dropdown-caret + .dropdown-toggle{
@@ -196,10 +188,10 @@
 	.sub-div1{
 		padding:20px 20px 20px 50px;
 	}
-	.homeabout{
+	/*.homeabout{
 		padding-left: 30px;
 		padding-bottom: 30px;
-	}
+	}*/
 	.slogan{
 		padding: 15px;
 	}
@@ -314,17 +306,16 @@
 			height : 260px;
 		}  */
 		.logo{
-			width :100%;
+			width :62%;
+			float :left;
+			height: 135px;
 		}
 		.logo img{
-			max-width : 60%;
+			max-width : 73%;
 			height : 90px;
 			/* float : left; */
 		}
-		.bizname{
-			display : none;
-		}
-		.addrs{
+		.bizname, .addrs{
 			display : none;
 		}
 		.ftrlink3 p{
@@ -352,8 +343,17 @@
 			height : 450px;
 		} */ 
 		.logo, .bizname, .addrs{
-			width : 313px;
 			display : inline-block;
+		}
+		.logo{
+			width : 225px;
+			height: 175px;
+		}
+		.bizname{
+			width : 390px;
+		}
+		.addrs{
+			width : 265px; 
 		}
 		.logo img{
 			max-width : 75%;
@@ -384,18 +384,24 @@
 			height : 490px;
 		} */ 
 		.logo, .bizname, .addrs{
-			width : 380px;
 			display : inline-block;
-			height: 135px;
 			vertical-align: top;
-		
-}
+		}
+		.logo{
+			width: 225px;
+			height: 175px;
+		}
+		.bizname{
+			width: 490px;
+		}
+		.addrs{
+			width : 365px;
+		}
 		.logo img{
 			max-width: 100%;
 			height : auto;
 			max-height: 120px;
-		
-}
+		}
 		.ftrlink3 p{
 			font-size:20px;
 		}
@@ -417,55 +423,68 @@
 		}
 	}
 
-.bizname h1 {
-    font-weight: bold;
-    text-shadow: 2px 2px 5px #A8A8A8;
-    color: rgba(207, 96, 33, 0.85);      
-    text-shadow: 1px 4px 5px #D8D8D8, 0 0 0 #000, 1px 4px 3px #E0E0E0;
-    font-size: 60px;
-    margin-top: 0;
-}
+	.bizname h1 {
+		font-weight: bold;
+		text-shadow: 2px 2px 5px #A8A8A8;
+		color: rgba(207, 96, 33, 0.85);      
+		text-shadow: 1px 4px 5px #D8D8D8, 0 0 0 #000, 1px 4px 3px #E0E0E0;
+		font-size: 60px;
+		margin-top: 0;
+	}
 
-.header .logo {
-    border-radius: 50%;
-    box-shadow: 7px 6px 10px saddlebrown;
-    padding: 25px;
-    width: 225px;
-    height: 175px;
-    text-align: center;
-    border: 1px solid rgba(139, 69, 19, 0.31);
-    margin-right: 50px;
-}
+	.header .logo {
+		border-radius: 50%;
+		box-shadow: 7px 6px 10px saddlebrown;
+		padding: 20px;
+		text-align: center;
+		border: 1px solid rgba(139, 69, 19, 0.31);
+		margin-right: 50px;
+	}
 
-.header .bizname {
-    margin-top: 20px;
-    width: 475px;
-}
-#carousel .item.active {
-    height: 350px;
-    overflow: hidden;
-}
+	.header .bizname {
+		margin-top: 20px;
+	}
+	#carousel .item.active {
+		height: 350px;
+		overflow: hidden;
+	}
 
-#carousel .item.active img {
-    width: 100%;
-}
-.content{
-	padding: 10px 20px 30px;
-}
-.sidebar{
-	margin-bottom : 10px;
-}
+	#carousel .item.active img {
+		width: 100%;
+	}
+	.content{
+		padding: 0px 20px 30px;
+	}
+	.sidebar{
+		margin-bottom : 10px;
+	}
 
-.navbar-default .navbar-nav >.child-menu a :: after{
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 30px;
-	height: 100%;
-	display: block;
-	padding-top: 15px;
-	border-top-color: rgb(236, 236, 236);
+	.navbar-default .navbar-nav >.child-menu a :: after{
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 30px;
+		height: 100%;
+		display: block;
+		padding-top: 15px;
+		border-top-color: rgb(236, 236, 236);
+	}
+	.mailSentMsg{
+		clear : both;
+	}
+	.tagline{
+		color: #EF9306;
+		font-size: 20px;
+		border-bottom: 1px solid #EF9306;
+		border-top: 1px solid #EF9306;
+	
+		margin: 5px 0;
+		padding: 5px 10px;
 }
-.mailSentMsg{
-	clear : both;
+	.tagline1{
+		color: #77746C;
+		font-size: 14px;
+	
+		margin: 0px;
+		padding: 0 10px;
 }

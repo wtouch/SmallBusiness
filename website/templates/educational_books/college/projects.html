@@ -1,0 +1,23 @@
+{% autoescape false %}
+	<h2>Our Projects</h2>
+	<div class="row">
+		<div class="projlist">
+			{% for key, x in projects %}
+				<div class="col-sm-6 col-md-6 col-lg-4">
+					<div class="thumbnail">
+						<h4 class="text-center">{{x.projectTitle}}</h4>
+						
+						<div class="caption">
+							<p><b>Location :</b>  {{x.project.location}}</p>
+							<hr class="cnctdtls">
+							<p><b>Type :</b> {{x.project.type}}</p>
+							<hr class="cnctdtls">
+							<p class="info">{{x.description.description}}</p>
+							<a href="#">View Details</a></p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}	
+		</div>
+	</div>
+	<!-- <img src="img/proj_img-849_1-small.jpg" alt="proj_img-849_1-small.jpg" class="img-responsive center-block"> -->

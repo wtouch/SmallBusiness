@@ -52,30 +52,28 @@
 			{% include templatePath ~ '/includes/header.html' ignore missing %}
 		</div>
 		<div class="container">
-			<div class="row">
-				<div class="{{(modules.searchProp) ? 'col-sm-8' : 'col-sm-12' }}">
+			<div class="row info">
+				<div class="{{(featured_services)>=1 ? 'col-sm-8' : 'col-sm-12' }}">
 					<div class="row">
-					{% block carousal %}
-						{% include templatePath ~ '/includes/carousal.html' ignore missing %}
-					{% endblock %}
+					{%if modules.carousal %}
+						{% block carousal %}
+							{% include templatePath ~ '/includes/carousal.html' ignore missing %}
+						{% endblock %}
+					{%endif%}
 					</div>
 					{%if modules.featured_products %}
 						<div class="row">
 							{% include templatePath ~ '/includes/featured_products.html' %}
 						</div>
 					{%endif%}
-					<div class="row">
-						<div class="content">
+					<div class="row content">
 							{% include contentPath %}
-						</div>
 					</div>
 				</div>
 				
-				{%if modules.featured_services %}
 					<div class="col-sm-4">
 						{% include templatePath ~ '/includes/featured_services.html' %}
 					</div>
-				{%endif%}
 			</div>
 			<div class="row">
 				<a href="#" class="ftrlink"><div class="col-sm-1 ftrlink1"><img src="{{ path }}img/arr2.png"/></div></a>

@@ -91,9 +91,10 @@ class websiteManager{
             $response["message"] = "Data Selected!";
             $response["data"] = $businessData["data"];
 			$response["title"] = $title;
+			$response["uri"] = ($page != "home") ? "/".$page : '/';
 			if($customPage != null){
 				$response["data"]["data"] = $businessData["data"]["custom_details"][str_replace("-", " ", $customPage)]["description"];
-				
+				$response["uri"] = '/cp/'.$customPage;
 				$response["title"] = str_replace("-", " ", $customPage);
 			}
             
@@ -101,10 +102,10 @@ class websiteManager{
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];
 			$response["google_map"] = $businessData["data"]['website_config']['google_map'];
-			$response["uri"] = ($page) ? "/".$page : '/home';
+			
 			
 			// this will dynamic with checking template folder and default folder for template page
-            $response["contentPath"] = $templateCategory."/".$templateFolder."/".$response["uri"].".html";
+            $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
 			
 			// to render template 
 			$this->getTemplate($this->config['rootTempPath'], $response["templatePath"]."/index.html", $response);
@@ -202,7 +203,7 @@ class websiteManager{
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];
-			$response["uri"] = ($page) ? "/".$type."s" : '/home';
+			$response["uri"] = ($page) ? "/".$type."s" : '/';
 			
 			// this will dynamic with checking template folder and default folder for template page
             $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
@@ -252,8 +253,6 @@ class websiteManager{
 			$project = $this->db->setJoinString("LEFT JOIN","project", array("id"=>$website.".user_id"));
 			$this->db->setColumns($projects, array("status" => "1", "category" => "category"));
 			
-			print_r $project;
-			
 			$projectData = $this->db->selectSingle();
 			
 			// check website status if deleted or expired or data null
@@ -285,12 +284,12 @@ class websiteManager{
             $response["message"] = "Data Selected!";
             $response["data"] = $projectData["data"];
             $response["title"] = "projects";
-			print_r  $response["data"];
+			
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];
-			$response["uri"] = ($page) ? "/".$type."s" : '/home';
-			print_r($response)
+			$response["uri"] = ($page) ? "/".$type."s" : '/';
+			
 			// this will dynamic with checking template folder and default folder for template page
             $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
 			
@@ -378,7 +377,7 @@ class websiteManager{
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];
-			$response["uri"] = ($page) ? "/".$page : '/home';
+			$response["uri"] = ($page != "home") ? "/".$page : '/';
 			
 			// this will dynamic with checking template folder and default folder for template page
             $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";

@@ -12,6 +12,7 @@ $app = new Slim\Slim();
 $web = new websiteManager;
 
 $app->get('/', function() use($app, $config, $web) {
+	$modules['carousal'] = true;
 	$modules['searchProp'] = true;
 	$modules["featured_products"] = true;
 	$modules["featured_services"] = true;

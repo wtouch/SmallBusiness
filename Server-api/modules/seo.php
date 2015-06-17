@@ -37,8 +37,10 @@
 		$home = array("name" => "Home", "url" => "/", "status" => "1");
 		$about = array("name" => "About Us", "url" => "/about-us", "status" => "1");
 		$contact = array("name" => "Contact Us", "url" => "/contact-us", "status" => "1");
+		$projects = array("name" => "Projects", "url" => "/projects", "status" => "1");
+		$properties = array("name" => "Properties", "url" => "/properties", "status" => "1");
 		
-		$menus = array($home, $about, $contact);
+		$menus = array($home, $about, $contact, $projects, $properties);
 		
 		if($data['status'] == "success"){
 			if($data['data'][0]['testimonials']) $menus[] = array("name" => "Testimonials", "url" => "/testimonials", "status" => "1");
