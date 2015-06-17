@@ -2,7 +2,7 @@
 define(['app'], function (app) {
 	
 	var injectParams = ['$scope','$rootScope','$injector', '$routeParams','upload','dataService','$notification'];
-  // This is controller for this view
+
 	var seoController = function ($scope,$rootScope, $injector,$routeParams,upload,dataService,$notification) {
 		$rootScope.metaTitle = "SEO Form";
 		$scope.alerts = [];
@@ -18,6 +18,35 @@ define(['app'], function (app) {
 				$notification[response.status]("Submit SEO", response.message); 
 			});
 		}
+		
+		$scope.getMenulist = function(user_id){
+			//console.log(user_id, business_id);
+			$scope.seoParam = {user_id : user_id, status : 1};
+				dataService.get("getmultiple/seo/1/100",$scope.seoParam)
+				.then(function(response) {
+					if(response.status == 'success'){
+						$scope.seosetting.config.menus = response.data;
+					}else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Menu Selection", response.message);
+					}
+				});
+			
+		}
+		
+	/****************************************************************************/
+		$scope.openseo= function (url) {
+		var modalDefaults = {
+			templateUrl: url,	
+			size : 'lg'
+		};
+		var modalOptions = {
+			
+		};
+		modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+		});
+	};
+	/**********************************************************************************/
 		
 		
 	};	

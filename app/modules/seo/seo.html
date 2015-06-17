@@ -1,76 +1,22 @@
+<a ng-click="openseo('modules/seo/addseo.html')" class="btn btn-primary">Add SEO</a> 
+<div class="main-content">
 <div class="row">
-	<div class="col-sm-12">	
-		<div class="main-content">	
-			<ng-include src="'modules/component/toolbar.html'"></ng-include>
-<h3 class="col-sm-offset-2 col-sm-9">SEO</h3>
-	<form name="seoForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="seoForm.$valid">
-		<div class="form-group">
-			<label  class="col-sm-2"></label>
-			<div class="col-sm-7">
-				<p>Note that Fields Marked * are Required.</p>		
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="title" class="col-sm-2 control-label">* Title</label>		
-				<div class="col-sm-9">
-					<input type="text" id="title" class="form-control" name="title" placeholder=" SEO Title" ng-model="seo.title"  required /><!--ng-pattern="/^[a-zA-Z0-9(_)]*$/"-->
-					<span class="text-danger" ng-show="seoForm.title.$dirty && seoForm.title.$invalid">
-						<span ng-show="seoForm.title.$error.required">Title is required.</span>
-					</span>
-				</div>
-		</div>
-		
-			<div class="form-group">	
-				<div class="col-sm-9">
-					 <input type="hidden" id="date" class="form-control" name="dateInput" value="{{seo.date}}" ng-model="seo.modified_date" placeholder="date" readonly >
-				</div>						
-			</div>
-			
-			
-			<div class="form-group">
-			<label for="seo_for" class="col-sm-2 control-label">* SEO For</label>	
-				<div class="col-sm-9">
-				<select id="seo_for" class="form-control" ng-model="seo_for">  
-						<option value="">Select Seo</option>		<!-- added value & selected attr -->	
-						<option value="">Business</option>
-						<option value="">Property</option>  
-						<option value="">Project</option>
-						<option value="">Product</option>
-				</select>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="description" class="col-sm-2 control-label">SEO Description *</label>	
-				<div class="col-sm-9">
-					<textarea type="text" class="form-control" id="description" name="description" ng-model="seo.description" cols="30" rows="4" ng-maxlength="2500" placeholder="Enter SEO Description" ui-tinymce required></textarea>
-					
-					<p ng-hide="seoForm.description.$error.maxlength">{{ 2500 - seo.description.length + " Chars left" }}	</p>	
-					 
-					<span class="help-block" ng-show="seoForm.description.$dirty && seoForm.description.$invalid">
-					<span class="text-danger" ng-show="seoForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-						<span class="text-danger" ng-show="seoForm.description.$error.required"> Description is required.</span>
-				</span>
-				</div>  
-			</div>	
-			
-			<!-- <input type="hidden" ng-model="seo.user_id"> -->
-			
-			<div class="form-group">
-				<label for="keyword" class="col-sm-2 control-label">Keywords*</label>
-					<div class="col-sm-9">
-						<textarea name="keyword" class="form-control"  id="keyword"  ng-model="seo.keyword" required ng-options="item.category_name as item.category_name for item in businessKyewords"></textarea>						
-					</div>
-			</div> 
-			
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-9">
-					<button type="submit" class="btn btn-success" ng-disabled="seoForm.$dirty && seoForm.$invalid" ng-click="postData(seo)">Add SEO</button>
-					<button type="reset" class="btn btn-danger">Reset</button>
-				</div>
-			</div>		
-		</form>	
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+				<th>Sr.No.</th>
+				<th>Menu</th>
+				<th>Status</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{((CurrentPage - 1) * pageItems) + $index + 1}}</td>
+					<td>{{}}</td>
+					<td>{{}}</td>
+					<td>{{}}</td>
+				</tr>					
+			</tbody>					
+		</table>
 	</div>
 	</div>
-	</div>
-			
+</div>

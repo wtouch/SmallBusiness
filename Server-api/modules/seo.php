@@ -105,9 +105,14 @@
 		echo json_encode($response);
 	}
 	
+	if($reqMethod=="POST"){
+		$insert = $db->insert("seo", $body);
+		echo json_encode($insert);
+	}
+	
 	if($reqMethod == "PUT" || $reqMethod == "DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record
-		$update = $db->update("website", $body, $where);
+		$update = $db->update("seo", $body, $where);
 		echo json_encode($update);
 	}
  ?>
