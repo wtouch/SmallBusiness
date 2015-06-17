@@ -44,17 +44,17 @@ $app->get('/services/:product_name/:productId', function($product_name, $product
 	$web->getSingleProduct("product", $productId);
 }); 
 
-$app->get('/project', function() use($app, $config, $web) {
+$app->get('/projects', function() use($app, $config, $web) {
 	$web->getProjectData("projects", "project");
 });
 
-$app->get('/projects/:projectId', function($projectId) use($app, $config, $web) {
+$app->get('/projects/:project_name/:projectId', function($projectId) use($app, $config, $web) {
 	$web->getSingleProject("project", $projectId);
 }); 
 
-/* $app->get('/property', function() use($app, $config, $web) {
-	$web->getPropertyData("property");
-}); */
+$app->get('/properties', function() use($app, $config, $web) {
+	$web->getPropertyData("properties");
+});
 
 /* $app->get('/project', function() use($app, $config, $web) {
 	$web->getProjectData("project");
