@@ -24,7 +24,7 @@ class websiteManager{
 		$template->display($response);
 	}
 	
-	function getBusinessData($page, $modules, $title){
+	function getBusinessData($page, $modules, $title, $customPage = null){
 		try{
 			// main website table
 			$table = 'website';
@@ -90,8 +90,13 @@ class websiteManager{
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
             $response["data"] = $businessData["data"];
-            $response["title"] = $title;
-			
+			$response["title"] = $title;
+			if($customPage != null){
+				$response["data"]["data"] = $businessData["data"]["custom_details"][str_replace("-", " ", $customPage)]["description"];
+				
+				$response["title"] = str_replace("-", " ", $customPage);
+			}
+            
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];
@@ -194,6 +199,93 @@ class websiteManager{
             $response["data"] = $businessData["data"];
             $response["title"] = ($type == 'product') ? "Products" : "Services";
 			
+            $response["templatePath"] = $templateCategory."/".$templateFolder."/";
+			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
+			$response["routes"] = $businessData["data"]['website_config']['menus'];
+			$response["uri"] = ($page) ? "/".$type."s" : '/home';
+			
+			// this will dynamic with checking template folder and default folder for template page
+            $response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
+			
+			// to render template 
+			$this->getTemplate($this->config['rootTempPath'], $response["templatePath"]."/index.html", $response);
+			
+		}catch(Exception $e){
+			$response["status"] = "error";
+            $response["message"] = $e->getMessage();
+            $response["data"] = null;
+			print_r($response);
+		}
+		return $response;
+	}
+	
+	//to get project data
+	function getProjectData($page,$category = null){
+		try{
+			// main website table
+			$table = 'website';
+			$where['domain_name'] = $this->domain;
+			$website = $this->db->setTable($table);
+			$this->db->setWhere($where, $website);
+			$this->db->setColumns($website, array("status" => "website_status", "expired" => "expired", "domain_name" => "domain_name", "config"=>"website_config"));
+			
+			// users table
+			$users = $this->db->setJoinString("INNER JOIN","users", array("id"=>$website.".user_id"));
+			$usersCols['name'] = "owner_name";
+			$usersCols['email'] = "owner_email";
+			$usersCols['address'] = "owner_address";
+			$usersCols['country'] = "owner_country";
+			$usersCols['state'] = "owner_state";
+			$usersCols['phone'] = "owner_phone";
+			$usersCols['website'] = "owner_website";
+			$usersCols['fax'] = "owner_fax";
+			$this->db->setColumns($users, $usersCols);
+			
+			/* // business table
+			$business = $this->db->setJoinString("INNER JOIN","business", array("id"=>$website.".business_id"));
+			$this->db->setColumns($business, array("*")); */
+			
+			// template table
+			$business = $this->db->setJoinString("LEFT JOIN","my_template", array("id"=>$website.".template_id"));
+			$this->db->setColumns($business, array("template_name" => "template_name", "category" => "template_category"));
+			
+			$project = $this->db->setJoinString("LEFT JOIN","project", array("id"=>$website.".user_id"));
+			$this->db->setColumns($project, array("status" => "1", "category" => "category"));
+			
+			print_r $project;
+			
+			$projectData = $this->db->selectSingle();
+			
+			// check website status if deleted or expired or data null
+			if($projectData['status'] == 'success' && $projectData['data'] != null) {
+				if($projectData['data']['expired'] == 1){
+					throw new Exception('Website is expired please renew soon!');
+				}
+				if($projectData['data']['website_status'] != 1){
+					throw new Exception('Website is not activated please contact your administrator!');
+				}
+				if(empty($projectData['data']['website_config'])){
+					throw new Exception('Please add website details!');
+				}
+				if(($projectData['data']['template_name']) == ""){
+					throw new Exception('Please add template details!');
+				}
+				$this->getProducts($projectData['data']["id"], $type, $category);
+				$response["products"] = $this->getProducts($projectData['data']["id"], $type, $category);
+			}else{
+				throw new Exception('Website not registered!');
+			}
+			
+			// this will be dynamic with my template table - category is template category and folder is template name
+			$templateCategory = $projectData['data']['template_category'];
+			$templateFolder = $projectData['data']['template_name'];
+			
+			// assign data to response
+			$response["status"] = "success";
+            $response["message"] = "Data Selected!";
+            $response["data"] = $projectData["data"];
+            $response["title"] = "projects";
+			print_r  $response["data"];
             $response["templatePath"] = $templateCategory."/".$templateFolder."/";
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 			$response["routes"] = $businessData["data"]['website_config']['menus'];

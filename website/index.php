@@ -43,6 +43,14 @@ $app->get('/services/:product_name/:productId', function($product_name, $product
 	$web->getSingleProduct("product", $productId);
 }); 
 
+$app->get('/project', function() use($app, $config, $web) {
+	$web->getProjectData("projects", "project");
+});
+
+$app->get('/projects/:projectId', function($projectId) use($app, $config, $web) {
+	$web->getSingleProject("project", $projectId);
+}); 
+
 /* $app->get('/property', function() use($app, $config, $web) {
 	$web->getPropertyData("property");
 }); */
@@ -58,12 +66,19 @@ $app->get('/services/:product_name/:productId', function($product_name, $product
 /* $app->get('/project/:project_name/:projectId', function() use($app, $config, $web) {
 	$web->getProductData("project");
 }); */
+$app->get('/cp/:page', function($page) use($app, $config, $web) {
+	$modules = array();
+	$modules['enquiry'] = true;
+	$title = "Home";
+	$web->getBusinessData("page", $modules, $title, $page);
+});
 $app->get('/:page', function($page) use($app, $config, $web) {
 	$modules = array();
 	$modules['enquiry'] = true;
 	$title = "Home";
 	$web->getBusinessData($page, $modules, $title);
 });
+
 
 
 $app->get('/:page/:product/:id', function() use($app, $config) {

@@ -1,0 +1,68 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		{% block head %}
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+			<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
+			<link rel="stylesheet" href="{{ path }}css/style.css">
+			<script src="{{ path }}js/jquery.min.js"></script>
+			<script src="{{ path }}js/bootstrap.min.js"></script>
+			<script src="{{ path }}js/angular.min.js"></script>
+			<script src="{{ path }}js/angular-route.min.js"></script>
+			<script src="{{ path }}js/script.js"></script>
+			<title>{{data.seo.title}} | {{title}}</title>
+			<meta name="description" content="{{data.seo.description}}">
+			<meta name="keywords" content="{{data.keywords | join(',')}}">
+			{%if template.template_params%}
+			<style>	
+				.container {
+					border-left: 2px solid {{template.template_params.background_color_light}};
+					border-right: 2px solid {{template.template_params.background_color_light}};
+				}
+				.navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,footer a:hover,h1,.featuredprod h3, .featuredserv h3, .featuredserv a:hover, h4{
+					color : {{template.template_params.color}};
+				}
+				body .navbar-default .navbar-nav li .dropdown-menu, .readmore, .featuredprod  .readmore:hover, .btn-info:hover{
+					background-color:{{template.template_params.background_color_dark}};
+				}
+				.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav>.open>a{
+					color:{{template.template_params.dark_color}};
+				}
+				.carousel-indicators li, hr{
+					border-color:{{template.template_params.background_color}};
+				}
+				.carousel-indicators .active,.featuredprod  .readmore, .readmore:hover,.btn-info{
+					background-color:{{template.template_params.background_color}};
+				}
+				.homeabout{
+					border-right:1px solid {{template.template_params.color}};
+				}
+				h2, h3, .addr, .addr a, footer a, .featuredserv a{
+					color : {{template.template_params.dark_color}};
+				}
+			</style>
+			{%endif%}
+		{% endblock %}
+	</head>
+	<body>
+		{% block carousal %}
+		{% endblock %}
+		<div class="container">
+			{% include 'includes/navbar.html' ignore missing %}
+			{% block content %}{% endblock %}
+			<footer>
+			{% block footer %}
+				<div class="row">
+					<div class="col-sm-12">
+						<p class=" text-center">&copy;Copyright 2015 by <a href="apnasite.in">apnasite.in</a></p>
+					</div>
+				</div>
+			{% endblock %}
+			</footer>
+		</div>
+	</body>
+</html>
+{% endspaceless %}
