@@ -80,13 +80,13 @@
 				<tbody as-sortable="dragControlListeners" ng-model="businessData.infrastructure">
 				<tr ng-repeat="(key, value) in businessData.infrastructure" as-sortable-item>
 				<td>
-				<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
-					<p>{{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></p>
-					<div collapse="isCollapsed">
-						<div><p ng-bind-html="value.description" ></p>
-						<img class="pull-right" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
-						</div> 
-					</div>
+					<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
+						<p>{{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></p>
+						<div collapse="isCollapsed">
+							<div><p ng-bind-html="value.description" ></p>
+							<img class="pull-right" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
+							</div> 
+						</div>
 				</td>
 				<td>
 					<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.infrastructure, infrastructure); showForm('infra')" tooltip="Edit Details"></button>
