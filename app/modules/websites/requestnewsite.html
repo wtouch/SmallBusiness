@@ -5,7 +5,7 @@
 		<div class="form-group panel-body" ng-if="userDetails.group_name != 'customer'">		
 			<label for="customer" class="col-sm-2 control-label">Customer*</label>
 			<div class="col-sm-9">				
-				<select class="form-control" name="customer" id="customer" ng-change="getBusiness(reqnewsite.user_id); getMenulist(reqnewsite.user_id)" ng-model="reqnewsite.user_id" ng-options="item.id as item.name for item in customerList | filter:{ group_name : 'customer' }" required>
+				<select class="form-control" name="customer" id="customer" ng-change="getBusiness(reqnewsite.user_id)" ng-model="reqnewsite.user_id" ng-options="item.id as item.name for item in customerList | filter:{ group_name : 'customer' }" required>
 					<option value="">Select Customer</option>
 				</select>				
 				<span class="help-block" ng-show="requestsiteForm.customer.$dirty && requestsiteForm.customer.$invalid">
@@ -17,7 +17,7 @@
 			</div> -->
 		</div>
 		
-		<input type="hidden" class="form-control" ng-if="userDetails.group_name == 'customer'" ng-model="reqnewsite.user_id" ng-init="reqnewsite.user_id = userDetails.id; getBusiness(reqnewsite.user_id); getMenulist(reqnewsite.user_id)" readonly/>
+		<input type="hidden" class="form-control" ng-if="userDetails.group_name == 'customer'" ng-model="reqnewsite.user_id" ng-init="reqnewsite.user_id = userDetails.id; getBusiness(reqnewsite.user_id)" readonly/>
 		
 		<input type="hidden" ng-init="reqtemp.date" ng-model="reqnewsite.registered_date" readonly/>
 		

@@ -144,6 +144,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
+			print_r($response);
 		}
 		return $response;
 	}
@@ -205,6 +206,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
+			print_r($response);
 		}
 		return $response;
 	}

@@ -99,6 +99,8 @@
 				if(count($serviceMenus) >=1) $menus[] = array("name" => "Services", "url" => "/services", "status" => "1", "childMenu" => $serviceMenus );
 			}
 			
+		}else{
+			print_r($data['message']);
 		}
 		
 		$response["status"] = "success";
