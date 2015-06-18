@@ -350,18 +350,21 @@ define(['app'], function (app) {
 						modalOptions.myTemplateData = templateData;
 					},
 					resetParams : function(resetData){
-						console.log(resetData);
+						console.log(response.data.template_id);
 						dataService.get("getsingle/template/"+response.data.template_id)
 						.then(function(resetRes) {	
-						
-						console.log(resetData.template_params);
-						console.log(resetRes.data.template_params);
+						if(resetRes.status == "success"){
+						console.log(resetRes);
+						//console.log(resetRes.data.template_params);
 							resetData.template_params.color = resetRes.data.template_params.color;
 							resetData.template_params.light_color = resetRes.data.template_params.light_color; 
 							resetData.template_params.dark_color = resetRes.data.template_params.dark_color;
 							resetData.template_params.background_color = resetRes.data.template_params.background_color;
 							resetData.template_params.background_color_light = resetRes.data.template_params.background_color_light;
 							resetData.template_params.background_color_dark = resetRes.data.template_params.background_color_dark;
+						}else{
+							console.log(resetRes.message);
+						}
 						});
 					},
 					/* $scope.resetParams = function (url, tempId) {
@@ -375,7 +378,6 @@ define(['app'], function (app) {
 					
 					
 					deleteSlide : function(index,object){
-						var index = object.indexOf(index);
 						object.splice(index, 1); 
 					},
 					addSlide : function(data, array){
@@ -386,7 +388,7 @@ define(['app'], function (app) {
 							delete data[x];
 						}
 					},
-					upload : function(files,path,userInfo,picArr){
+					upload : function(files,path,userInfo,modalOptions){
 						upload.upload(files,path,userInfo,function(data){
 							if(data.status === 'success'){
 								modalOptions.slider.image = data.data.file_relative_path;

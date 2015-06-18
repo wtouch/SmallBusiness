@@ -21,12 +21,13 @@
 			$where = array();
 			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
 			
-			if(isset($_GET['search']) && $_GET['search'] == true){
+			 if(isset($_GET['search']) && $_GET['search'] == true){
 				 
 				 (isset($_GET['template_name'])) ? $like['template_name'] = $_GET['template_name'] : "";
-			}
+			 }
 			(isset($_GET['template_type'])) ? $where['template_type'] = $_GET['template_type'] : "";
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
+			(isset($_GET['category'])) ? $where['category'] = $_GET['category'] : "";
 		
 			$userCols['name'] = "name";
 			$userCols['username'] = "username";

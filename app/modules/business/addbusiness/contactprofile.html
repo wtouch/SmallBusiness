@@ -2,7 +2,7 @@
 <div class="form-group">
 	<label  for="contact_person" class="col-sm-3 control-label">Contact Person*</label>
 	<div class="col-sm-9">
-		<input type="text" id="contact_person" class="form-control" name="contact_person" placeholder="Contact Person" ng-model="addbusiness.contact_profile.contact_person" required >
+		<input type="text" id="contact_person" class="form-control" name="contact_person" placeholder="Contact Person" ng-model="addbusiness.contact_profile.contact_person" required />
 		<span class="help-block" ng-show="businessContactForm.contact_person.$dirty && businessContactForm.contact_person.$invalid">
 			<span ng-show="businessContactForm.contact_person.$error.required" class="text-danger">Please Enter Name of Contact Person.</span>
 		</span>
@@ -17,7 +17,7 @@
 			<file-preview url="contact_photo"></file-preview>
 		<!-- This button will show if file/s selected -->
 			<button ng-show="contact_photo" ng-click="upload(contact_photo,path + addbusiness.user_id,userInfo,'contact_photo')" type="button">Upload</button>
-		<!-- This hidden input will store image path in array after successful uploading {{addbusiness.contact_profile}}-->
+		<!-- This hidden input will store image path in array after successful uploading -->
 			<input type="hidden" ng-model="addbusiness.contact_profile.contact_photo">
 		<!-- <img ng-src="{{addbusiness.contact_profile.contact_photo}}" width="50px"/> -->
 	</div>
@@ -34,7 +34,7 @@
 </div>
 
 <div class="form-group">
-	<label for="address" class="col-sm-3 control-label">Address*</label>
+	<label for="address" class="col-sm-3 control-label">Address *</label>
 	<div class="col-sm-9">
 		<textarea type="text" class="form-control" id="address" name="address" ng-model="addbusiness.contact_profile.address" cols="30" rows="3" ng-maxlength="256" placeholder="Enter address"  required></textarea>
 		<p ng-hide="businessContactForm.address.$error.maxlength">
@@ -110,6 +110,51 @@
 		</span>
 	</div>						
 </div>
+
+
+<div class="form-group">
+	<label for="address1" class="col-sm-3 control-label">Address1</label>
+	<div class="col-sm-4">
+	<textarea type="text" id="address1" name="address1" class="form-control" ng-model="addbusiness.contact_profile.address1" placeholder="Enter Address" ng-maxlength="160"></textarea>
+	<p class="text-danger" ng-hide="businessContactForm.address1.$error.maxlength">
+			{{ 160 - addbusiness.contact_profile.address1.length + " Chars left" }}
+		</p>
+	</div>
+	<label for="address2" class="col-sm-1 control-label">Address2</label>
+	<div class="col-sm-4">
+		<textarea type="text" name="address2" id="address2" ng-model="addbusiness.contact_profile.address2" placeholder="Enter Your Address" class="form-control" ng-maxlength="160"></textarea>
+		<p class="text-danger" ng-hide="businessContactForm.address2.$error.maxlength">
+			{{ 160 - addbusiness.contact_profile.address2.length + " Chars left" }}
+		</p>	
+	</div>
+</div>
+
+<div class="form-group">
+	<label for="address3" class="col-sm-3 control-label">Address3</label>
+	<div class="col-sm-4">
+	<textarea type="text" id="address3" name="address3" class="form-control" ng-model="addbusiness.contact_profile.address3" placeholder="Enter Address" ng-maxlength="160"></textarea>
+	<p class="text-danger" ng-hide="businessContactForm.address3.$error.maxlength">
+			{{ 160 - addbusiness.contact_profile.address3.length + " Chars left" }}
+		</p>
+	</div>
+	<label for="address4" class="col-sm-1 control-label">Address4</label>
+	<div class="col-sm-4">
+		<textarea type="text" name="address4" id="address4" ng-model="addbusiness.contact_profile.address4" placeholder="Enter Your Address" class="form-control" ng-maxlength="160"></textarea>
+		<p class="text-danger" ng-hide="businessContactForm.address4.$error.maxlength">
+			{{ 160 - addbusiness.contact_profile.address4.length + " Chars left" }}
+		</p>	
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <div class="form-group">
 	<label for="mobile" class="col-sm-3 control-label">Mobile/Cell Phone*</label>
 	<div class="col-sm-9">

@@ -141,15 +141,20 @@ define(['app'], function (app) {
 			dataService.get("getsingle/template/"+tempId)
 			.then(function(response) {
 				dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
-				.then(function(user) {  
+				.then(function(user) {
+					if(user.status == "success"){
 					var modalDefaults = {
 						templateUrl: url,	
 						size : 'lg'
 					};
+					if(response.data.template_params.slider == undefined){
+						response.data.template_params = {slider : []};
+					}
 					var modalOptions = {
 						date : $scope.currentDate,
 						userDetails : $rootScope.userDetails,
-						tempList : dataService.parse(response.data),
+						tempList : response.data,
+						templateList : {},
 						modifiedDate : dataService.currentDate,
 						customerList : (user.data),
 						myTemplateData : {},
@@ -161,19 +166,31 @@ define(['app'], function (app) {
 						formData : function(templateData){
 							modalOptions.myTemplateData = templateData;
 						},
-						deleteSlide : function(index,object){
-							var index = object.indexOf(index);
-							object.splice(index, 1); 
+						deleteSlide : function(index, object){
+							object.splice(index, 1);
 						},
-						addSlide : function(data, array){
-							var pushdata = JSON.stringify(data);
-							array.push(JSON.parse(pushdata));
-							modalOptions.slider = {};
-							for(var x in data){
-								delete data[x];
+						addSlide : function(data, modalOptions){
+							if(modalOptions)
+							{
+								console.log(modalOptions);
+								var pushdata = JSON.stringify(data);
+								modalOptions.templateList.template_params.slider.push(JSON.parse(pushdata));
+								modalOptions.slider = {};
+								for(var x in data){
+									delete data[x];
+								} 
+							}else{
+								$scope.modalOptions = [];
+								var pushdata = JSON.stringify(data);
+								modalOptions.templateList.template_params.slider.push(JSON.parse(pushdata));
+								modalOptions.slider = {};
+								for(var x in data){
+									delete data[x];
+								} 
 							}
+							
 						},
-						upload : function(files,path,userInfo,picArr){
+						upload : function(files,path,userInfo,modalOptions){
 							upload.upload(files,path,userInfo,function(data){
 								if(data.status === 'success'){
 									modalOptions.slider.image = data.data.file_relative_path;
@@ -207,6 +224,7 @@ define(['app'], function (app) {
 						}); 
 					
 					});
+					}
 				});
 			});
 		};
@@ -230,8 +248,14 @@ define(['app'], function (app) {
 
 		$scope.pageChanged = function(page, where) {
 			dataService.get("getmultiple/template/"+page+"/"+$scope.pageItems, $scope.template_type)
-			.then(function(response){ 
-				$scope.templates = response.data;
+			.then(function(response){
+					if(response.status == 'success'){
+						$scope.templates = response.data;
+					}
+					else{
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Update Template", response.message);
+					}
 			});
 		};
 	
@@ -272,6 +296,8 @@ define(['app'], function (app) {
 				}
 			});
 		};
+		
+		
 		
 		//code for change status 	
 		$scope.changeStatusf = {};
@@ -392,6 +418,7 @@ define(['app'], function (app) {
 			$scope.openMyTemp = function (url, tempId) {
 				dataService.get("getsingle/mytemplate/"+tempId)
 				.then(function(response) {
+					
 					var modalDefaults = {
 							templateUrl: url,	
 							size : 'lg'
@@ -431,13 +458,21 @@ define(['app'], function (app) {
 						object.splice(index, 1); 
 					},
 					addSlide : function(data, array){
-						var pushdata = JSON.stringify(data);
-						array.push(JSON.parse(pushdata));
-						modalOptions.slider = {};
-						for(var x in data){
-							delete data[x];
+						console.log(array);
+						if(array){
+							var pushdata = JSON.stringify(data);
+							array.push(JSON.parse(pushdata));
+							modalOptions.slider = {};
+								for(var x in data){
+									delete data[x];
+								}
 						}
-					},
+						else{
+							array=[];
+						}
+						
+					},	
+					
 					upload : function(files,path,userInfo,picArr){
 						upload.upload(files,path,userInfo,function(data){
 							if(data.status === 'success'){

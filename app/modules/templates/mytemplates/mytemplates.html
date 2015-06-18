@@ -21,18 +21,18 @@
 					<input id="search" type="text" class="form-control" ng-change="searchFilter('template_name', searchProp)" ng-model="searchProp" placeholder="search"/>
 			</div>
 		</div>			 				  
-		<div class="col-sm-3">
+		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="sort" class="control-label">Sort by Order</label>
 					<select id="sort" class="form-control" ng-model="sort"> 
-						<option value="">Select Order</option>		<!-- added value & selected attr -->	
+						<option value="">Select Order</option>	
 						<option value="-template_name">Desending</option>
 						<option value="template_name">Asending</option>  
 					</select>
 			</div>
 		</div>
 		
-		<div class="col-sm-3">
+		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="status" class="control-label">Select Status</label>
 					<select id="status" class="form-control" 
@@ -44,11 +44,21 @@
 			</div>
 		</div>
 		
-		<div class="col-sm-3" ng-if="userDetails.group_name != 'customer'">
+		<div class="col-sm-2" ng-if="userDetails.group_name != 'customer'">
 			<div class="bottomspace">
 				<label for="filterbycustomerid" class="control-label">Select By Customer</label>
-					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid" ng-change="changeStatus('user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
 						<option value="">Select Customer</option>
+					</select>
+			</div>
+		</div>
+		
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="featured" class="control-label">Filter By Category</label>
+					<select id="featured" class="form-control" ng-model="filterCategory" 
+					ng-change="changeStatus('category',filterCategory)" ng-options="item.system_name as item.name for item in temp.category">
+						<option value="" selected>Select Category</option>
 					</select>
 			</div>
 		</div>

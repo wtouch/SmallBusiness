@@ -16,7 +16,8 @@
 					</select>
 			</div>
 		</div>
-		<div class="col-sm-2">
+		
+		<div class="col-sm-2" ng-if="permission.add_template">
 			<div class="bottomspace">
 				<label for="status" class="control-label">Select Status</label>
 					<select id="status" class="form-control" 
@@ -27,6 +28,7 @@
 					</select>
 			</div>
 		</div>
+		
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="featured" class="control-label">Filter By Category</label>
@@ -70,7 +72,6 @@
 						</a>
 						</div>
 						</td>
-
 						<td>
 							<!--Apply Template-->
 							<a ng-click="openModel('modules/templates/applytemplate.html', x.id)" class="btn btn-success" ng-show="x.template_price=='free'">Apply</a>
