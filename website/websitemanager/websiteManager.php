@@ -8,6 +8,8 @@ class websiteManager{
 	private $routes;
 	private $business;
 	private $twig;
+	private $modules;
+	private $seo;
 	
 	
 	function __construct(){
@@ -28,6 +30,7 @@ class websiteManager{
 		// apply menus to template
 		$response["routes"] = $response["data"]['website_config']['menus'];
 		
+		
 		// set assets path for css, js, images etc
 		$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
 		
@@ -39,6 +42,16 @@ class websiteManager{
 		// load index.html
 		$templateIndex = $response["templatePath"]."/index.html";
 		
+		// set modules
+		if(count($this->modules) >= 1){
+			$response["modules"] = $this->modules;
+		}
+		
+		// set modules
+		if(count($this->seo) >= 1){
+			$response["seo"] = $this->seo;
+		}
+
 		// set twig loader
 		$loader = new Twig_Loader_Filesystem($this->config['rootTempPath']);
 		$this->twig = new Twig_Environment($loader);
@@ -52,6 +65,23 @@ class websiteManager{
 		}
 		
 		return $template->display($response);
+	}
+	function setModules($routes){
+		foreach($routes as $key => $value){
+			if($_SERVER['REQUEST_URI'] === $value["url"]){
+				if(isset($value["modules"])){
+					$this->modules = $value["modules"];
+					
+				}
+				//$this->seo = $value["seo"];
+				
+			}else if(strlen($_SERVER['REQUEST_URI']) >= 2 && strpos($_SERVER['REQUEST_URI'], $value["url"]) !== false){
+				if(isset($value["modules"])){
+					$this->modules = $value["modules"];
+					//$this->seo = $value["seo"];
+				}
+			}
+		}
 	}
 	function getConfigData($businessTable = null){
 		try{
@@ -107,6 +137,9 @@ class websiteManager{
 			$response['status'] = "success";
 			$response['message'] = "Website configuration data selected successfully!";
 			$response['data'] = $result['data'];
+			
+			// set Modules
+			$this->setModules($result['data']['website_config']['menus']);
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
@@ -134,17 +167,24 @@ class websiteManager{
 		} */
 		return $productData["data"];
 	}
-	function getBusinessData($page, $modules, $title, $customPage = null){
+	function getBusinessData($page, $title, $customPage = null){
 		try{
 			$businessData = $this->getConfigData(true);
 			if($businessData["status"] != "success"){
 				throw new Exception($configData["message"]);
 			}
 			
-			// assign data to response
-			$response["modules"] = $modules;
-			if(isset($modules["featured_products"])){
+			if(isset($this->modules['contentModule']["featured_products"])){
 				$response["featured_products"] = $this->getProducts($businessData['data']["id"],"all", $category = null, 1);
+				//print_r($response["featured_products"] );
+			}
+			if(isset($this->modules['contentModule']["featured_properties"])){
+				$response["featured_properties"] = $this->getProperties($businessData['data']["user_id"], $category = null, 1);
+				//print_r($response["featured_properties"] );
+			}
+			if(isset($this->modules['contentModule']["featured_projects"])){
+				$response["featured_projects"] = $this->getProjects($businessData['data']["user_id"], 1);
+				//print_r($response["featured_projects"] );
 			}
 			
 			$response["status"] = "success";
@@ -287,11 +327,10 @@ class websiteManager{
 		}
 		return $response;
 	}
-	function getSingleProject($page, $projectId){
+	function getSingleProject($page, $projectId, $projectPage){
 		try{
 			$businessData = $this->getConfigData(true);
 			if($businessData["status"] == "success"){
-				print_r($projectId);
 				$whereProd['id'] = $projectId;
 				$product = $this->db->setTable('project');
 				$this->db->setWhere($whereProd, $product);
@@ -301,8 +340,15 @@ class websiteManager{
 					throw new Exception('Project Error: '.$productData['message']);
 				}
 				$response["project"] = $productData["data"];
+				$response["projectPage"] = $projectPage;
 			}else{
 				throw new Exception($businessData["message"]);
+			}
+			
+			if(isset($_GET['homeProject'])){
+				$modules = $this->modules;
+				$modules['headerModule']['homeproject'] = true;
+				$this->setModules($modules);
 			}
 			
 			// assign data to response

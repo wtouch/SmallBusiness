@@ -1,15 +1,131 @@
 {% autoescape false %}
-	<div class="row singleprod">
-		<h2 class="text-center">{{ product.product_service_name }}</h2>
-		<div class="col-sm-3">
-			{% for key, value in product.product_image %}
-				<a href="#" class="thumbnail">
-					<img class="img-responsive" src="{{value.file_relative_path}}"> 
-				</a>
-			{% endfor %}
-		</div> 
-		<div class="col-sm-9">
-			<p class="media-heading">{{product.description}}</p>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<h2>{{property.title}}</h2>
+			<p>{{property.property_description}}
+		</div>
+		<div class="col-sm-12 col-md-12">
+			<div class="property">
+				<h3>Property Details</h3>
+				<div class="row">
+					<div class="col-sm-12 col-md-8">	
+						<div class="table-responsive">
+							<table class="table">
+								<tr>
+									 <td><b>Property Name :</b></td>
+									 <td>{{property.project_name}}</td>	
+								</tr>
+								<tr>
+									<td><b>Property Type :</b> </td>
+									<td>{{property.type}}</td>					
+								</tr>
+								<tr>
+									 <td><b>Property For :</b></td>
+									 <td>{{property.property_for}}</td>	
+								</tr>
+								<tr>
+									<td><b>Location :</b></td>
+									<td>{{property.location}}, {{property.area}}, {{property.city}}</td>
+								</tr>
+								<tr>
+									<td><b>Built Up Area :</b> 
+									<td>{{property.property_info.buildup_area}}{{property.property_info.build_unit}}</td>					
+								</tr>
+								<tr>
+									<td><b>Land Area :</b> 
+									<td>{{property.property_info.land_area}}{{property.property_info.land_unit}}</td>					
+								</tr>
+								<tr>
+									<td><b>Carpet Area :</b> 
+									<td>{{property.property_info.carpet_area}}{{property.property_info.carpet_unit}}</td>					
+								</tr>
+								<tr>
+									<td><b>Price :</b>
+									<td>{{property.price}}</td>			
+								</tr>
+								<tr>
+									<td><b>Posted On :</b>
+									<td>{{property.date}}</td>			
+								</tr>
+								<tr>
+									<td><b>Contact :</b> </td> 
+									<td>{{property.contact_details.contact_person}}, {{property.contact_details.mobile}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-4 text-center">
+						<div class="mainimg">
+							<img src="{{property.property_images.0.file_relative_path}}" style="max-height:200px;" class="mainimgs">
+						</div>
+						{% for key, value in property.property_images %}
+						<div class="subimg">
+							<span><img class="subimgs img-responsive img-rounded" src="{{value.file_relative_path}}"/></span>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-12 propDetails">
+			<h3>Addtional Details</h3>
+			<ul class="list-inline">
+				<li><b>Property Age :</b> {{property.optional_property_details.property_age}}</li>
+				<li><b>Furnishing :</b> {{property.optional_property_details.furnished}}</li>
+				<li><b>Ownership :</b> {{property.optional_property_details.ownership}}</li>
+				<li><b>Floor Number :</b> {{property.optional_property_details.property_floor}}</li>
+				<li><b>Facing :</b> {{property.optional_property_details.facing}}</li>
+				<li><b>Parking :</b> {{property.optional_property_details.parking}}</li>
+				<li><b>Transaction Type :</b> {{property.optional_property_details.transType}}</li>
+				<li><b>Bedrooms :</b> {{property.property_info.bedrooms}}</li>
+				<li><b>Bathrooms :</b> {{property.property_info.bathrooms}}</li>
+				<!-- <li><b>Reserved Parking :</b> 1</li> -->
+			</ul>
+		</div>
+		<div class="col-sm-12 col-md-12 propDetails">
+			<h3>Amenities</h3>
+			<ul class="list-inline">
+				<li><span class="amenity pb"></span>Power Backup</li>
+				<li><span class="amenity ws"></span>Water Storage</li>
+				<li><span class="amenity rp"></span>Reserve Parking</li>
+				<li><span class="amenity security"></span>Security</li>
+				<li><span class="amenity ms"></span>Maintenance Staff</li>
+				<li><span class="amenity gym"></span>GYM</li>
+				<li><span class="amenity park"></span>Park</li>
+				<li><span class="amenity pt"></span>Private Tarrace</li>
+				<li><span class="amenity sp"></span>Swimming Pool</li>
+				<li><span class="amenity club"></span>Club House</li>
+			</ul>
+		</div>
+		<div class="col-sm-12 col-md-12 propDetails">
+			<h3>Property Address</h3>
+			<p>{{property.address}}, {{property.location}}, {{property.area}}, {{property.city}}, {{property.state | capitalize}}, {{property.country| capitalize}}</p>
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<tbody>
+						<tr><th colspan="2"><p>Property Seller Detail</p></th></tr>
+						<tr>
+							<td class="text-right col-md-4"><b>Contact Person :</b></td>
+							<td>{{property.contact_details.contact_person}}</td>
+						</tr>
+						<tr>
+							<td class="text-right"><b>Mobile :</b></td>
+							<td>{{property.contact_details.mobile}}</td>
+						</tr>
+						<tr>
+							<td class="text-right"><b>Email :</b></td>
+							<td>{{property.contact_details.email}}</td>
+						</tr>
+						<tr>
+							<td class="text-right"><b>Contact Address :</b></td>
+							<td>{{property.contact_details.cont_address}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-12 col-md-12 text-center">
+			<button type="button" class="btn btn-info">SEND ENQUIRY</button>
 		</div>
 	</div>
 {% endautoescape %}

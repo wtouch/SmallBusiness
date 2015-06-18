@@ -1,5 +1,5 @@
-<h4 class="subhead text-center">General Enquiry</h4>
-<div class="panel panel-default">
+<h2 class="subhead text-center">Send Enquiry</h2>
+<div class="panel panel-default"  ng-app="myApp">
 	<div class="panel-body" ng-controller="enquiryController">
 		<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" novalidate>
 			<div class="form-group">
@@ -35,22 +35,20 @@
 			</div>	
 			<div class="form-group">
 				<div class="col-sm-12">
-					<textarea id="address" name="address" class="form-control" placeholder="Address" rows="3" ng-model="enquiry.message.address" ng-minlength="2" ng-maxlength="356" required>
-					</textarea>
+					<textarea id="address" name="address" class="form-control" placeholder="Address" rows="3" ng-model="enquiry.message.address" ng-minlength="2" ng-maxlength="356" required></textarea>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-12">
-					<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlength="2" ng-maxlength="356" required>
-					</textarea>
+					<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlength="2" ng-maxlength="356" required></textarea>
 				</div>
 			</div>
 			<div class="form-group col-sm-12">
-				<button type="submit" class="btn btn-link" ng-click="postData(enquiry)" ng-disabled="enquiryForm.$pristine || enquiryForm.$invalid || mailSent">Send</button>
-				<button type="reset" class="btn btn-link" title="Cancel Sending">Clear</button>
+				<button type="submit" class="btn btn-info" ng-click="postData(enquiry)" ng-disabled="enquiryForm.$pristine || enquiryForm.$invalid || mailSent">Send</button>
+				<button type="reset" class="btn btn-info pull-right" title="Cancel Sending">Clear</button>
 			</div>
 		</form>
-		<div ng-show="mailSent" class="text-center mailSentMsg">
+		<div ng-show="mailSent" class="text-center mailSentMsg" style="clear:both;">
 			Your enquiry sent successfully.
 		</div>
 	</div>

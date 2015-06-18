@@ -137,14 +137,47 @@
 						<script type="text/ng-template" id="tree_item_renderer.html">
 							<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
 							 
-							<a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status==1) ? ' pull-right glyphicon glyphicon-ok text-success' : 'pull-right glyphicon glyphicon-remove text-danger'" >
-							</a>
 							
 							<span ng-show="data.childMenu" class="caret" ng-click="isCollapsed = !isCollapsed"></span>
 								
 							<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
 							
 							<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
+							
+							<span class="pull-right">
+								<a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status==1) ? 'glyphicon glyphicon-ok text-success' : 'glyphicon glyphicon-remove text-danger'" ></a>
+								
+								<a class="glyphicon glyphicon-home" tooltip="Home Project" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.headerModule.homeproject" ng-class="(data.modules.headerModule.homeproject == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a class="glyphicon glyphicon-picture" tooltip="Slider" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.headerModule.carousal" ng-class="(data.modules.headerModule.carousal == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a class="glyphicon glyphicon-envelope" tooltip="Enquiry Form" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.sidebarModule.enquiry" ng-class="(data.modules.sidebarModule.enquiry == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a class="glyphicon glyphicon-search" tooltip="Search Property" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.sidebarModule.searchProp" ng-class="(data.modules.sidebarModule.searchProp == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a class="glyphicon glyphicon-phone-alt" tooltip="Contact Us" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.sidebarModule.contact" ng-class="(data.modules.sidebarModule.contact == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a class="glyphicon glyphicon-th-list" tooltip="Side Menus" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.sidebarModule.sidemenu" ng-class="(data.modules.sidebarModule.sidemenu == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a class="glyphicon glyphicon-shopping-cart" tooltip="Featured Products" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.contentModule.featured_products" ng-class="(data.modules.contentModule.featured_products == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a class="glyphicon glyphicon-cog" tooltip="Featured Services" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.contentModule.featured_services" ng-class="(data.modules.contentModule.featured_services == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a class="glyphicon glyphicon-star-empty" tooltip="Featured Projects" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.contentModule.featured_projects" ng-class="(data.modules.contentModule.featured_projects == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a class="glyphicon glyphicon-star" tooltip="Featured Properties" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.contentModule.featured_properties" ng-class="(data.modules.contentModule.featured_properties == true) ? 'text-success' : 'text-muted'" ></a>
+								
+								<a ng-model="data.seo" ng-class="(ind[$index + data.url + 'seo']) ? 'text-success open' : 'text-muted'" >
+									<span tooltip="Edit SEO" class="glyphicon glyphicon-flash" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
+									<span class="dropdown-menu" ng-show="ind[$index + data.url + 'seo']">
+									<span class="close" ng-click="ind[$index + data.url + 'seo'] = false">X</span>
+										<input type="text" ng-model="data.seo.title" placeholder="SEO Title"/>
+										<input type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"/>
+										<input type="text" ng-model="data.seo.description" placeholder="SEO Description"/>
+									</span>
+								</a>
+								
+							</span>
 							
 							<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
 							

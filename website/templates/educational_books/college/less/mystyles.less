@@ -61,11 +61,15 @@
 			> li{
 				position : relative;
 				margin-right: 10px;
+				padding-left: 15px;
+				&:first-child{
+					padding-left: 0;
+				}
 				> a, > a:focus {
 					color :@lightcolor;
 					font: bold 16px/1em Arial, Helvetica, sans-serif;
 					position: relative;
-					padding : 25px 11px 15px;
+					padding : 25px 15px 15px 20px;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					background-color : @color;
@@ -92,9 +96,9 @@
 					content:url('../img/bullet.png');
 					position : absolute;
 					top: 23px;
-					left: -9px;
+					left: 0px;
 				}
-				&:hover a::before, &:first-child a::before{
+				&:hover a::before, &:first-child a::before, &.active > a::before{
 					display : none;
 				}
 				
@@ -120,9 +124,6 @@
 								 text-decoration: underline;
 							}
 						}
-						/*&:hover{
-							  text-decoration: underline;
-						}*/
 					}
 				}
 				&:hover > ul {
@@ -189,7 +190,7 @@
 	h4{
 		margin-top : 0px;
 	}
-	.subhead, .search, .enquiry, .contact{
+	.subhead, .search, .enquiry{
 		font-family: "Carter One";
 		font-size: 20px;
 		font-weight: bold;
@@ -213,10 +214,12 @@
 		border-bottom: 1px solid @lightbackcolor;
 		padding-bottom: 8px;
 	}
-	.info{
-		text-align:justify;
-		margin-top: 25px;
-		margin-bottom: 25px;
+	.description{
+		p{
+			text-align : justify;
+			margin-top : 25px;
+			margin-bottom : 25px;
+		}
 	}
 	.sections{
 		background-color:@back;
@@ -290,7 +293,7 @@
 	}
 	.btn-info{
 		border-radius : 10px;
-		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info{
+		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info, &[disabled]{
 			background-color : @color;
 			border : none;
 			color :@colorblack;
@@ -369,15 +372,12 @@
 		}
 	}
 	//Common effect
-	.contact, .myjobs{
-		.panel-default {
-			border-color: @lightbackcolor;
-		}
-		.panel{
-			background-color : @back;
-		}
+	.panel{
+		background-color : @back;
 	}
-	
+	.panel-default {
+		border-color: @lightbackcolor;
+	}
 	
 	//contactus page css
 	.contact{

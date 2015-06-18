@@ -16,61 +16,52 @@
 		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
 	
-	<div class="row contact" ng-app="myApp">
-		<h2 class="text-center">Contact Us</h2>
-		<div class="col-sm-9">
-			<div class="row">
-				<div class="col-md-5">
-					<table class="table">
-						<tr>
-							<td class="col-sm-4">
-								<a href="#">
-									<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
-								</a>
-							</td>
-							<td>
-								<h4>{{data.contact_profile.contact_person}}</h4>
-								<b>Address</b>
-								<address>
-									{{data.contact_profile.address}}<br>
-									{{data.city}}-{{data.pincode}},<br>
-									{{data.state|capitalize}},<br>
-									{{data.country|capitalize}}.
-								</address>
-							</td>
-						</tr>
-						{%if data.contact_profile.telephone%}
-						<tr>
-							<td><b>Telephone</b></td>
-							<td>
-								{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}
-							</td>
-						</tr>
-						{% endif %}
-						<tr>
-							<td><b>Mobile</b></td>
-							<td>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? ", " ~ data.contact_profile.alternate_mobile}}</td>
-						</tr>
-						<tr>
-							<td><b>E-mail Id</b></td>
-							<td>{{data.contact_profile.email}}<br>
-							{{data.contact_profile.alternate_email}}</td>
-						</tr>
-						{%if data.contact_profile.contact_website%}
-						<tr>
-							<td><b>Website</b></td>
-							<td><a href="#">{{data.contact_profile.contact_website}}</a>
-							</td>
-						</tr>
-						{% endif %}
-					</table>
-				</div>
-				<div class="col-md-7"><div id="googleMap"></div></div>
-			</div>
+	<div class="row contact">
+		<div class="col-md-12"><h2 class="text-center">Contact Us</h2></div>
+		<div class="col-md-5">
+			<table class="table">
+				<tr>
+					<td class="col-sm-4">
+						<a href="#">
+							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
+						</a>
+					</td>
+					<td>
+						<h4>{{data.contact_profile.contact_person}}</h4>
+						<b>Address</b>
+						<address>
+							{{data.contact_profile.address}}<br>
+							{{data.city}}-{{data.pincode}},<br>
+							{{data.state|capitalize}},<br>
+							{{data.country|capitalize}}.
+						</address>
+					</td>
+				</tr>
+				{%if data.contact_profile.telephone%}
+				<tr>
+					<td><b>Telephone</b></td>
+					<td>
+						{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}
+					</td>
+				</tr>
+				{% endif %}
+				<tr>
+					<td><b>Mobile</b></td>
+					<td>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? ", " ~ data.contact_profile.alternate_mobile}}</td>
+				</tr>
+				<tr>
+					<td><b>E-mail Id</b></td>
+					<td>{{data.contact_profile.email}}<br>
+					{{data.contact_profile.alternate_email}}</td>
+				</tr>
+				{%if data.contact_profile.contact_website%}
+				<tr>
+					<td><b>Website</b></td>
+					<td><a href="#">{{data.contact_profile.contact_website}}</a>
+					</td>
+				</tr>
+				{% endif %}
+			</table>
 		</div>
-		{% if modules.enquiry %}
-		<div class="col-md-3">
-			{% include templatePath ~ '/includes/enquiry.html' ignore missing %}
-		</div>
-		{%endif%}
+		<div class="col-md-7"><div id="googleMap"></div></div>
 	</div>

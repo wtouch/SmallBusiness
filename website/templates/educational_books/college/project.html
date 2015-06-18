@@ -1,47 +1,81 @@
 {% autoescape false %}
-		<!-- Overview -->
-		<div class="row">
-			<div class="col-md-12">
-				<img src="img/proj_logo.jpg" class="projImg img-responsive"/>
-				<p class="projHead">
-					<b class="highlight">Residential Township - Jaipur</b><br>
-					<span class="highlight">Project Type : </span>Residential Property - Flats & Apartments<br>
-					<span class="highlight">Project Location : </span>Sikar Road, Sikar Road, Jaipur, Rajasthan, India
-				</p>
-			</div>
-			<div class="col-md-12">
-				<h3>Overview</h3>
-				<p class="info">A complete township, spread over approx. 400 acres, with a unique blend of contemporary and traditional architecture is truly a gateway to experience and live our heritage, discovering a world-class living experience. Anyone would fall in love with the inviting beauty of Suncity Jaipur, reviving the majestic heritage of erstwhile royal Jaipur. The architecture in the city is a fusion of the art and aesthetics of the city of Jaipur, which is well blended with state of the art modern facilities, offering you the most upbeat style of living.
-
-				<p class="info">The finest architects and craftsmen give reality to this fantastic vision for the township. From breathtaking landscapes to the built form, even the most delicate and smallest of the details are taken care of, bringing you a magnificent living. Suncity Jaipur is not only a treat for your senses with its captivating beauty, fine, stylish & upbeat comfort, it is a treat for those who have always wanted to live a royal life.
-			</div>
-			<div class="col-md-12">
-				<h3>Photo Gallery</h3>
-				<div class="projectgallery">
-					<div class="row">
-						<div class="col-sm-12 col-md-4">
-							<img src="img/proj_img-849_1-small.jpg" class="center-block projImgs" alt="...">
-						</div>
-						<div class="col-sm-12 col-md-4">
-							<img src="img/Tulips.jpg" class="center-block projImgs" alt="...">
-						</div>
-						<div class="col-sm-12 col-md-4">
-							<img src="img/Tulips.jpg" class="center-block projImgs" alt="...">
-						</div>
+<!-- Project Navbar -->
+<!-- /project/[project.title]/[project.id]/[projectPage('overview/gallery/amenities')] -->
+		<h2>{{project.title}}</h2>
+		<div class="row project">
+			<ol class="breadcrumb text-right">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Library</a></li>
+				<li class="active">Data</li>
+			</ol>
+			<nav class="navbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/projects/{{project.title}}/{{project.id}}/overview">Overview</a></li>
+					<li><a href="/projects/{{project.title}}/{{project.id}}/specifications">Specifications</a></li>
+					<li><a href="/projects/{{project.title}}/{{project.id}}/amenities">Amenities</a></li>
+					<li><a href="/projects/{{project.title}}/{{project.id}}/overview">E-Brochure</a></li>
+					<li><a href="/projects/{{project.title}}/{{project.id}}/floorplans">Floor Plans</a></li>
+					<li><a href="/projects/{{project.title}}/{{project.id}}/layoutplan">Layout Plan</a></li>
+					<li><a href="/projects/{{project.title}}/{{project.id}}/locationmap">Location Map</a></li>
+					<li><a href="/projects/{{project.title}}/{{project.id}}/gallery">Gallery</a></li>
+				</ul>
+			</nav>
+			{% if projectPage == 'overview' %}
+			<!-- Overview -->
+				<div class="col-md-12">
+					<img src="{{project.project_images.0.file_relative_path}}" class="projImg img-responsive"/>
+					<p class="projHead">
+						<b class="highlight"><!-- Residential Township - Jaipur -->{{project.category}}</b><br>
+						<span class="highlight">Project Type : </span>{{project.type}}<br>
+						<span class="highlight">Project Location : </span>{{project.location}}, {{project.area}}, {{project.city}}, {{project.state}}, {{project.country}}
+					</p>
+				</div>
+				<div class="col-md-12">
+					<h3>Overview</h3>
+					{{project.overview.description}}
+				</div>
+			{% endif %}
+			{% if projectPage == 'amenities' %}
+				<div class="col-md-12">
+					{{project.amenities.description}}
+				</div>
+			{% endif %}
+			{% if projectPage == 'floorplans' %}
+				<div class="col-md-12">
+					<h3>Floor Plans</h3>
+					<div class="projectgallery">
+						<div class="row">
+						{% for key, value in project.floor_plan %}
+							<div class="col-sm-12 col-md-4">
+								<h4 class="highlight text-center">{{project.title}}</h4>
+								<div class="thumbnail">
+									<img src="{{value.file_relative_path}}" class="img-responsive center-block" alt="...">
+								</div>
+							</div>
+						{% endfor %}
+						</div> 
 					</div>
-					<div class="row">
-						<div class="col-sm-12 col-md-4">
-							<img src="img/proj_img-849_1-small.jpg" class="center-block projImgs" alt="...">
-						</div>
-						<div class="col-sm-12 col-md-4">
-							<img src="img/proj_img-5575_1-small.jpg" class="center-block projImgs" alt="...">
-						</div>
-						<div class="col-sm-12 col-md-4">
-							<img src="img/proj_img-5648_1-small.jpg" class="center-block projImgs" alt="...">
+				</div>
+			{% endif %}
+			{% if projectPage == 'specifications' %}
+				<div class="col-md-12">
+					{{project.specifications.description}}
+				</div>
+			{% endif %}
+			{% if projectPage == 'gallery' %}
+				<div class="col-md-12">
+					<h3>Photo Gallery</h3>
+					<div class="projectgallery">
+						<div class="row">
+							{% for key, value in project.project_images %}
+							<div class="col-sm-12 col-md-4">
+								<img class="center-block projImgs" src="{{value.file_relative_path}}" alt="{{value.file_relative_path}}">
+							</div>
+							{% endfor %}
 						</div>
 					</div>
 				</div>
-			</div>
+			{% endif %}
 		</div>
 {% endautoescape %}
 <!-- <!-- Site Plan - ->

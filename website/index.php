@@ -12,12 +12,18 @@ $app = new Slim\Slim();
 $web = new websiteManager;
 
 $app->get('/', function() use($app, $config, $web) {
-	$modules['carousal'] = true;
-	$modules['searchProp'] = true;
-	$modules["featured_products"] = true;
-	$modules["featured_services"] = true;
+	$modules['headerModule']['carousal'] = true;
+	$modules['headerModule']['homeproject'] = true;
+	$modules['sidebarModule']['searchProp'] = true;
+	$modules['sidebarModule']['enquiry'] = true;
+	$modules['sidebarModule']['contact'] = true;
+	$modules['sidebarModule']['sidemenu'] = true;
+	$modules['contentModule']["featured_products"] = true;
+	$modules['contentModule']["featured_services"] = true;
+	$modules['contentModule']["featured_projects"] = true;
+	$modules['contentModule']["featured_properties"] = true;
 	$title = "Home";
-	$web->getBusinessData('home',$modules, $title);
+	$web->getBusinessData('home', $title);
 });
 
 $app->get('/products', function() use($app, $config, $web) {
@@ -29,6 +35,7 @@ $app->get('/products/:category', function($category) use($app, $config, $web) {
 });
 
 $app->get('/products/:product_name/:productId', function($product_name, $productId) use($app, $config, $web) {
+	
 	$web->getSingleProduct("product", $productId);
 }); 
 
@@ -48,8 +55,9 @@ $app->get('/projects', function() use($app, $config, $web) {
 	$web->getProjectData("projects", "project");
 });
 
-$app->get('/projects/:project_name/:projectId', function($project_name, $projectId) use($app, $config, $web) {
-	$web->getSingleProject("project", $projectId);
+$app->get('/projects/:project_name/:projectId(/:page)', function($project_name, $projectId, $page = null) use($app, $config, $web) {
+	$page = ($page) ? $page : 'overview';
+	$web->getSingleProject("project", $projectId, $page);
 }); 
 
 $app->get('/properties', function() use($app, $config, $web) {
@@ -57,7 +65,7 @@ $app->get('/properties', function() use($app, $config, $web) {
 });
 
 
-$app->get('/property/:property_name/:propertyId', function($property_name, $propertyId) use($app, $config, $web) {
+$app->get('/properties/:property_name/:propertyId', function($property_name, $propertyId) use($app, $config, $web) {
 	$web->getSingleProperty("property", $propertyId);
 });
 
@@ -65,19 +73,13 @@ $app->get('/property/:property_name/:propertyId', function($property_name, $prop
 	$web->getProductData("project");
 }); */
 $app->get('/cp/:page', function($page) use($app, $config, $web) {
-	$modules = array();
-	$modules['enquiry'] = true;
 	$title = "Home";
-	$web->getBusinessData("page", $modules, $title, $page);
+	$web->getBusinessData("page", $title, $page);
 });
 $app->get('/:page', function($page) use($app, $config, $web) {
-	$modules = array();
-	$modules['enquiry'] = true;
 	$title = "Home";
-	$web->getBusinessData($page, $modules, $title);
+	$web->getBusinessData($page, $title);
 });
-
-
 
 $app->get('/:page/:product/:id', function() use($app, $config) {
 	
