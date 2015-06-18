@@ -233,8 +233,14 @@ define(['app', 'tinymce'], function (app) {
 			  plugins: [
 					 "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
 					 "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-					 "save table contextmenu directionality emoticons template paste textcolor"
+					 "table contextmenu directionality emoticons template paste textcolor responsivefilemanager"
 			  ],
+			  toolbar: "fullscreen | undo redo | styleselect | bold italic | link image | alignleft aligncenter alignright",
+			  paste_retain_style_properties: " ",
+			  paste_webkit_styles: " ",
+			  external_filemanager_path:"/filemanager/",
+			  filemanager_title:"Responsive Filemanager" ,
+			  external_plugins: { "filemanager" : "/filemanager/plugin.min.js"},
 			  elements: attrs.id
 			};
 			// extend options with initial uiTinymceConfig and options from directive attribute value
