@@ -274,9 +274,24 @@ define(['app'], function (app) {
 			}
 			$scope.getLocation();
 			//end google map
+			
+			$scope.replaceMenu = function(newMenu, oldMenu){
+			for(var x in oldMenu){
+				for(var y in newMenu){
+					if(newMenu[y].url == oldMenu[x].url){
+						newMenu[y].seo = oldMenu[x].seo;
+						if(newMenu[y].childMenu != undefined && oldMenu[x].childMenu != undefined){
+							$scope.replaceMenu(newMenu[y].childMenu, oldMenu[x].childMenu);
+						}
+					}
+					
+				}
+			}
+			return newMenu;
+			}
 		
 			$scope.getMenulist = function(user_id, business_id){
-				console.log(user_id, business_id);
+				//console.log(user_id, business_id);
 				$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
 					
 					dataService.get("getmultiple/seo/1/100",$scope.seoParam)

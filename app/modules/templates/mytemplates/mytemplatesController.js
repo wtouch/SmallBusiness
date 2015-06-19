@@ -315,7 +315,7 @@ define(['app'], function (app) {
 						 var modalOptions = {
 							tempLists: dataService.parse(response.data)  
 						}; 
-					modalService.show(modalDefaults, modalOptions).then(function (result) {
+					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 					});
 				});
 			};
@@ -328,12 +328,17 @@ define(['app'], function (app) {
 					templateUrl: url,	
 					size : 'lg'
 				};
+				if(response.data.template_params.slider == undefined){
+						response.data.template_params = {slider : []};
+					}
 				var modalOptions = {
 					editTemplate: response.data,
 					modifiedDate : dataService.currentDate,
 					date : $scope.currentDate,
-					myTemplateData : {},
+					editIndex : {},
 					slider : {},
+					myTemplateData : {},
+					editTempParamsModel : {},
 					editIndex : {},
 					files : {},
 					path : $scope.path,
@@ -357,20 +362,23 @@ define(['app'], function (app) {
 							resetData.template_params.background_color_dark = resetRes.data.template_params.background_color_dark;
 						}else{
 							console.log(resetRes.message);
-						}
+						} 
 						});
 					},
 					
 					deleteSlide : function(index,object){
 						object.splice(index, 1); 
 					},
-					addSlide : function(data, array){
+					
+					addSlide : function(data, modalOptions){
+						console.log(modalOptions);
+						modalOptions.editTempParamsModel.template_params.slider = (angular.isArray(modalOptions.editTempParamsModel.template_params.slider)) ? modalOptions.editTempParamsModel.template_params.slider : [];
 						var pushdata = JSON.stringify(data);
-						array.push(JSON.parse(pushdata));
+						modalOptions.editTempParamsModel.template_params.slider.push(JSON.parse(pushdata));
 						modalOptions.slider = {};
 						for(var x in data){
 							delete data[x];
-						}
+						} 
 					},
 					upload : function(files,path,userInfo,modalOptions){
 						upload.upload(files,path,userInfo,function(data){

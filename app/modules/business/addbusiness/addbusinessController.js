@@ -119,7 +119,7 @@ define(['app'], function (app) {
 			}
 		});
 		
-		$scope.path = "business/"; 
+		$scope.path = "/business"; 
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
 		$scope.upload = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
