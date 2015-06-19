@@ -1,6 +1,14 @@
 {% autoescape false %}
 <h2>Our Properties</h2>
 <div class="proplist">
+	{% if prop_category %}
+	<div class="text-center">
+		{% for x in prop_category %}
+			<a href="/properties/{{x}}" class="btn btn-primary">{{x}}</a>
+		{% endfor %}
+	</div>
+	{% endif %}
+	
 	{% for key, x in properties %}
 	<div class="panel panel-default">
 		<div class="panel-body">

@@ -63,15 +63,15 @@ $app->get('/projects/:project_name/:projectId(/:page)', function($project_name, 
 $app->get('/properties', function() use($app, $config, $web) {
 	$web->getPropertyData("properties");
 });
+$app->get('/properties/:category', function($category) use($app, $config, $web) {
+	$web->getPropertyData("properties", $category);
+});
 
 
 $app->get('/properties/:property_name/:propertyId', function($property_name, $propertyId) use($app, $config, $web) {
 	$web->getSingleProperty("property", $propertyId);
 });
 
-/* $app->get('/project/:project_name/:projectId', function() use($app, $config, $web) {
-	$web->getProductData("project");
-}); */
 $app->get('/cp/:page', function($page) use($app, $config, $web) {
 	$title = "Home";
 	$web->getBusinessData("page", $title, $page);

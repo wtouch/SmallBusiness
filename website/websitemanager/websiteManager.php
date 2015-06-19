@@ -419,15 +419,25 @@ class websiteManager{
 		return $response;
 	}
 	
-	function getPropertyData($page){
+	function getPropertyData($page,$category = null){
 		try{
 			$businessData = $this->getConfigData(true);
 			// check website status if deleted or expired or data null
 			if($businessData['status'] == 'success' && $businessData['data'] != null) {
-				$response["properties"] = $this->getProperties($businessData['data']["user_id"]);
+				$response["properties"] = $this->getProperties($businessData['data']["user_id"], $category);
 			}else{
 				throw new Exception($businessData['message']);
 			}
+			
+			if(count($response["properties"]) >= 1){
+				foreach($response["properties"] as $key => $value){
+					//print_r($value);
+					$category[] = $value["category"];
+				}
+				$response["prop_category"] = array_unique($category);
+				//print_r(array_unique($response["prop_category"]));
+			}
+			
 			
 			// assign data to response
 			$response["status"] = "success";
