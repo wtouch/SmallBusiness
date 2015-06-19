@@ -17,30 +17,33 @@
 </script>
 {% autoescape false %}
 {% if featured_projects %}
-<h2 class="subhead">Featured Project</h2>
-<div class="sections">
-	<ul class="bxslider1" id="bxslider1">
-		{% set break = 0 %}{% set i = 0 %}
-		{% for x in featured_projects if break == 0 %}
-			<li>
-				<div class="row">
-					<div class="col-sm-12 col-md-3">
-						<a href="#" class="thumbnail">
-							<img class="img-responsive" src="{{x.project_images.0.file_relative_path}}"/>
-						</a>
+<div class="contentModule">
+	<h3 class="subhead">Featured Project</h3>
+	<div class="sections clearfix">
+		<ul class="bxslider1" id="bxslider1">
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_projects if break == 0 %}
+				<li>
+					<div class="row">
+						<div class="col-sm-6 col-md-3">
+							<a href="#" class="thumbnail">
+								<img src="{{x.project_images.0.file_relative_path}}"/>
+							</a>
+						</div>
+						<div class="col-sm-6 col-md-9">
+							<a href="#" class="head">{{x.title}}</a>
+							{{x.overview.description|length > 100 ?x.overview.description|slice(start, 100) : x.overview.description}}<br>
+							<a href="#" class="btn btn-info">Read More</a>
+						</div>
 					</div>
-					<div class="col-sm-12 col-md-9">
-						<a href="#" class="head">{{x.title}}</a>
-						<a href="#" class="btn btn-info">Read More</a>
-					</div>
-				</div>
-			</li>
-			{% set i = (i + 1) %}
-			{% if i == 4 %}
-				{% set break = 1 %}
-			{% endif %}
-		{% endfor %}
-	</ul>
+				</li>
+				{% set i = (i + 1) %}
+				{% if i == 4 %}
+					{% set break = 1 %}
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
 </div>
 {% endif %}
 {% endautoescape %}

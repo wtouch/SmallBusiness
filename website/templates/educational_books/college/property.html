@@ -85,16 +85,9 @@
 		<div class="col-sm-12 col-md-12 propDetails">
 			<h3>Amenities</h3>
 			<ul class="list-inline">
-				<li><span class="amenity pb"></span>Power Backup</li>
-				<li><span class="amenity ws"></span>Water Storage</li>
-				<li><span class="amenity rp"></span>Reserve Parking</li>
-				<li><span class="amenity security"></span>Security</li>
-				<li><span class="amenity ms"></span>Maintenance Staff</li>
-				<li><span class="amenity gym"></span>GYM</li>
-				<li><span class="amenity park"></span>Park</li>
-				<li><span class="amenity pt"></span>Private Tarrace</li>
-				<li><span class="amenity sp"></span>Swimming Pool</li>
-				<li><span class="amenity club"></span>Club House</li>
+				{% for key, value in property.amenities %}
+				<li><span class="amenity pb"></span>{{value}}</li>
+				{% endfor %}
 			</ul>
 		</div>
 		<div class="col-sm-12 col-md-12 propDetails">
@@ -129,3 +122,12 @@
 		</div>
 	</div>
 {% endautoescape %}
+<!-- <li><span class="amenity ws"></span>Water Storage</li>
+				<li><span class="amenity rp"></span>Reserve Parking</li>
+				<li><span class="amenity security"></span>Security</li>
+				<li><span class="amenity ms"></span>Maintenance Staff</li>
+				<li><span class="amenity gym"></span>GYM</li>
+				<li><span class="amenity park"></span>Park</li>
+				<li><span class="amenity pt"></span>Private Tarrace</li>
+				<li><span class="amenity sp"></span>Swimming Pool</li>
+				<li><span class="amenity club"></span>Club House</li> -->

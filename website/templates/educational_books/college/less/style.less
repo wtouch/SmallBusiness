@@ -9,7 +9,6 @@
 	@import "property.less";
 	@import "project.less";
 	@import "product.less";
-	@import "service.less";
 	body{
 		background-image: url('../img/back.jpg');
 		//background-color : 
@@ -39,7 +38,7 @@
 		margin-left: 15px;
 		max-height: 100px;
 	}
-	.cnctinfo{
+	.contactinfo{
 		color:@color;
 		font-weight : bold;
 		margin: 40px 15px 40px 0;
@@ -124,6 +123,17 @@
 								 text-decoration: underline;
 							}
 						}
+						> ul{
+							list-style : disc;
+							>li{
+								>a{
+									color:@colorblack;
+									&:hover{
+										text-decoration: underline;
+									}
+								}
+							}
+						}
 					}
 				}
 				&:hover > ul {
@@ -132,13 +142,13 @@
 			}
 		}
 	}
-	.projnav{
+	.projectnav{
 		border : 5px solid @lightbackcolor;
 		background-color: @darkbackcolor;
 		.nav-stacked{
 			background-color: @darkbackcolor;
 			margin: 5px;
-			border: 2px solid #2F3826;
+			border: 2px solid @lightbackcolor ;
 			>li{
 				>a, > a:focus{
 					font-weight: bold;
@@ -171,6 +181,9 @@
 			}
 		}
 	}
+	.item.active{
+		overflow: hidden;
+	}
 	.content{
 		background-color : @darkbackcolor;
 		border-radius : 7px;
@@ -186,9 +199,6 @@
 	h1,h2{
 		font-size: 2.3em;
 		border-bottom: 1px solid @lightbackcolor;
-	}
-	h4{
-		margin-top : 0px;
 	}
 	.subhead, .search, .enquiry{
 		font-family: "Carter One";
@@ -213,13 +223,6 @@
 	h3{
 		border-bottom: 1px solid @lightbackcolor;
 		padding-bottom: 8px;
-	}
-	.description{
-		p{
-			text-align : justify;
-			margin-top : 25px;
-			margin-bottom : 25px;
-		}
 	}
 	.sections{
 		background-color:@back;
@@ -266,7 +269,8 @@
 			.thumbnail {
 				margin-bottom : 0px;
 				img{
-					max-height: 165px;
+					max-height: 200px;
+					width : 100%;
 				}
 			}
 			.head{
@@ -281,16 +285,14 @@
 	}
 	.service{
 		margin-bottom: 10px;
-		img{
-			max-height : 180px;
-		}
-		h3{
-			padding-bottom:0px;
-			border : none;
+		h4{
 			margin-top : 0px;
-			font-size : 18px;
+		}
+		p{
+			text-align : justify;
 		}
 	}
+
 	.btn-info{
 		border-radius : 10px;
 		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info, &[disabled]{
@@ -384,6 +386,9 @@
 		img{
 			max-height: 110px;
 		}
+		h4{
+			margin-top : 0px;
+		}
 	}
 	#googleMap{
 		height:325px;
@@ -429,16 +434,19 @@
 		.logo{
 			float:left;
 		}
-		.cnctinfo{
+		.contactinfo{
 			display : none;
 		}
 		.navbar{
 			min-height: 0px;
 			margin-top: 10px;
 		}
-		.item.active, .projnav{
+		.item.active{
 			height: 120px;
-			overflow: hidden;
+		}
+		.projectnav{
+			height: 312px;
+			margin-bottom: 10px;
 		}
 		.carousel-inner>.item>img{
 			width :100%;
@@ -453,18 +461,17 @@
 		.logo{
 			float:none;
 		}
-		.cnctinfo{
+		.contactinfo{
 			display : block;
 		}
 		.navbar{
 			min-height: 70px;
 		}
-		.projnav{
+		.projectnav{
 			height: 322px;
 		}
 		.item.active{
 			height: 312px;
-			overflow: hidden;
 		}
 		.carousel-inner>.item>img{
 			width :100%;
@@ -480,18 +487,17 @@
 		.logo{
 			float:none;
 		}
-		.cnctinfo{
+		.contactinfo{
 			display : block;
 		}
 		.navbar{
 			min-height: 70px;
 		}
-		.projnav{
+		.projectnav{
 			height: 322px;
 		}
-		.item.active,{
+		.item.active{
 			height: 312px;
-			overflow: hidden;
 		} 
 		.carousel-inner>.item>img{
 			width :100%;

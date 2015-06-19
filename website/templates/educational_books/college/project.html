@@ -3,14 +3,9 @@
 <!-- /project/[project.title]/[project.id]/[projectPage('overview/gallery/amenities')] -->
 		<h2>{{project.title}}</h2>
 		<div class="row project">
-			<ol class="breadcrumb text-right">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Library</a></li>
-				<li class="active">Data</li>
-			</ol>
 			<nav class="navbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="/projects/{{project.title}}/{{project.id}}/overview">Overview</a></li>
+					<li><a href="/projects/{{project.title}}/{{project.id}}/overview">Overview</a></li>
 					<li><a href="/projects/{{project.title}}/{{project.id}}/specifications">Specifications</a></li>
 					<li><a href="/projects/{{project.title}}/{{project.id}}/amenities">Amenities</a></li>
 					<li><a href="/projects/{{project.title}}/{{project.id}}/overview">E-Brochure</a></li>
@@ -35,8 +30,15 @@
 					{{project.overview.description}}
 				</div>
 			{% endif %}
+			{% if projectPage == 'specifications' %}
+				<div class="col-md-12">
+					<h3>Specifications</h3>
+					{{project.specifications.description}}
+				</div>
+			{% endif %}
 			{% if projectPage == 'amenities' %}
 				<div class="col-md-12">
+					<h3>Amenities/Features</h3>
 					{{project.amenities.description}}
 				</div>
 			{% endif %}
@@ -47,9 +49,9 @@
 						<div class="row">
 						{% for key, value in project.floor_plan %}
 							<div class="col-sm-12 col-md-4">
-								<h4 class="highlight text-center">{{project.title}}</h4>
+								<h4 class="highlight text-center">{{value.title}}</h4>
 								<div class="thumbnail">
-									<img src="{{value.file_relative_path}}" class="img-responsive center-block" alt="...">
+									<img src="{{value.image}}" class="img-responsive center-block" alt="...">
 								</div>
 							</div>
 						{% endfor %}
@@ -57,10 +59,25 @@
 					</div>
 				</div>
 			{% endif %}
-			{% if projectPage == 'specifications' %}
+			{% if projectPage == 'layoutplan' %}
 				<div class="col-md-12">
-					{{project.specifications.description}}
+					<h3>Layout Plan</h3>
+					{% for key, value in project.layout_map %}
+						<h4 class="highlight text-center">{{value.title}}</h4>
+						<div class="thumbnail">
+							<img src="{{value.image}}" class="img-responsive" alt="...">
+						</div>
+					{% endfor %}
 				</div>
+			{% endif %}
+			{% if projectPage == 'locationmap' %}
+				<h3>Location Map</h3>
+				{% for key, value in project.location_map%}
+					<h4 class="highlight text-center">{{value.title}}</h4>
+					<div class="thumbnail">
+						<img src="{{value.image}}" class="img-responsive" alt="...">
+					</div>
+				{% endfor %}
 			{% endif %}
 			{% if projectPage == 'gallery' %}
 				<div class="col-md-12">
@@ -84,4 +101,10 @@
 			<div class="thumbnail">
 				<img src="img/Location Map.jpg" class="img-responsive" alt="...">
 			</div>
-		</div> -->
+		</div>
+
+			<ol class="breadcrumb text-right">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Library</a></li>
+				<li class="active">Data</li>
+			</ol>		-->

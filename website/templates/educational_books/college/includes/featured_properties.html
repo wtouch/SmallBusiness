@@ -18,20 +18,23 @@
 		});
   });
 </script>
-<h2 class="subhead">Featured Property</h2>
-<div class="sections text-center">
-	<ul class="bxslider" id="bxslider">
-		<li><img class="img-responsive center-block" src="img/153263_1-small.jpg" />
-		<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
-		<li><img class="img-responsive center-block" src="img/153267_1-small.jpg" />
-		<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
-		<li><img class="img-responsive center-block" src="img/153418_1-small.jpg" />
-		<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
-		<li><img class="img-responsive center-block" src="img/153422_1-small.jpg" />
-		<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
-		<li><img class="img-responsive center-block" src="img/153607_1-small.jpg" />
-		<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
-		<li><img class="img-responsive center-block" src="img/153607_1-small.jpg" />
-		<a href="#">Residential Plot for Sale at Ajmer Road</a></li>
-	</ul>
+{% autoescape false %}
+{% if featured_properties %}
+<div class="contentModule">
+	<h3 class="subhead">Featured Property</h3>
+	<div class="sections text-center">
+		<ul class="bxslider" id="bxslider">
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_properties if break == 0 %}
+				<li><img class="img-responsive center-block" src="{{x.property_images.0.file_relative_path}}" />
+				<a href="#">{{x.title}}</a></li>
+				{% set i = (i + 1) %}
+				{% if i == 4 %}
+					{% set break = 1 %}
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
 </div>
+{% endif %}
+{% endautoescape %}

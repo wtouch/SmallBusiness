@@ -18,15 +18,34 @@
 		<script src="{{ path }}js/fluid_dg.min.js"></script>
 		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<script src="{{ path }}js/jquery.DG_Slider.min.js"></script> 
-		<title>{{seo.title}}</title>
+		<title>{{data.seo.title}} | {{title}}</title>
+		<meta name="description" content="{{data.seo.description}}">
+		<meta name="keywords" content="{{data.keywords | join(',')}}">
+		{%if data.template_params%}
+			<style>	
+				body{
+					color: {{data.template_params.light_color}};	
+				}
+				.contactinfo{
+					color: {{data.template_params.color}};	
+				}
+				.navbar-default{
+					background-image: linear-gradient({{data.template_params.background_color_dark}},{{data.template_params.background_color}});
+				}
+				.navbar-default, .projectnav, .nav-stacked{
+					border-color : {{data.template_params.background_color_light}};
+				}
+				.projectnav, .nav-stacked{
+					background-color : {{data.template_params.background_color_dark}};
+				}
+			</style>
+			{%endif%} 
 	</head>
 	<body>
 		{% include templatePath ~ '/includes/header.html' ignore missing %}
 		<div class="container">
 			{%if modules.headerModule.homeproject %}
-			<div class="row">
 				{% include templatePath ~ '/includes/homeproject.html' ignore missing %}
-			</div>
 			{% endif %}
 			<div class="row">
 				<div class="col-sm-12 col-md-12">
@@ -70,7 +89,7 @@
 								{% endif %}
 								
 								{% if modules.sidebarModule.sidemenu %}
-									{% include templatePath ~ '/includes/submenus.html' %}
+									{% include templatePath ~ '/includes/sidemenu.html' %}
 								{% endif %}
 								
 								{% if modules.sidebarModule.contact %}
