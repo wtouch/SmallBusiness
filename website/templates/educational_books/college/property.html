@@ -28,7 +28,7 @@
 									<td>{{property.location}}, {{property.area}}, {{property.city}}</td>
 								</tr>
 								<tr>
-									<td><b>Built Up Area :</b> 
+									<td><b>Built Up Area :</b></td> 
 									<td>{{property.property_info.buildup_area}}{{property.property_info.build_unit}}</td>					
 								</tr>
 								<tr>
@@ -56,13 +56,13 @@
 					</div>
 					<div class="col-sm-12 col-md-4 text-center">
 						<div class="mainimg">
-							<img src="{{property.property_images.0.file_relative_path}}" style="max-height:200px;" class="mainimgs">
-						</div><div class="subimg">
-						{% for key, value in property.property_images %}
-						
-							<span><img class="subimgs img-responsive img-rounded" src="{{value.file_relative_path}}"/></span>
-						
-						{% endfor %}</div>
+							<img src="{{property.property_images.0.file_relative_path}}" class="mainimgs">
+						</div>
+						<div class="subimg">
+							{% for key, value in property.property_images %}
+								<img class="img-responsive img-rounded" src="{{value.file_relative_path}}"/>
+							{% endfor %}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 			<h3>Amenities</h3>
 			<ul class="list-inline">
 				{% for key, value in property.amenities %}
-				<li><span class="amenity pb"></span>{{value}}</li>
+				<li><span class="amenity {{value | lower | replace({" ":'_'})}}"></span>{{value}}</li>
 				{% endfor %}
 			</ul>
 		</div>

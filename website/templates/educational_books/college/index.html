@@ -73,7 +73,6 @@
 									
 									
 									{% if modules.contentModule.featured_products %}
-									
 										{% include templatePath ~ '/includes/featured_products.html' %}
 									{% endif %}
 									</div>
@@ -88,6 +87,10 @@
 									{% include templatePath ~ '/includes/search_property.html' %}
 								{% endif %}
 								
+								{% if modules.sidebarModule.enquiry %}
+									{% include templatePath ~ '/includes/enquiry.html' %}
+								{% endif %}
+								
 								{% if modules.sidebarModule.sidemenu %}
 									{% include templatePath ~ '/includes/sidemenu.html' %}
 								{% endif %}
@@ -96,9 +99,6 @@
 									{% include templatePath ~ '/includes/contact.html' %}
 								{% endif %}
 								
-								{% if modules.sidebarModule.enquiry %}
-									{% include templatePath ~ '/includes/enquiry.html' %}
-								{% endif %}
 							</div>
 							{% endif %}
 						</div>

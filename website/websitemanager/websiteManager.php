@@ -187,6 +187,14 @@ class websiteManager{
 				$response["featured_projects"] = $this->getProjects($businessData['data']["user_id"], 1);
 				//print_r($response["featured_projects"] );
 			}
+			if(isset($this->modules['headerModule']["homeproject"]) && isset($businessData['data']['website_config']["project_id"])){
+				$productData = $this->singleProject($businessData['data']['website_config']["project_id"]);
+				$response["home_project"] = $productData["data"];
+				
+				//print_r($response["home_project"] );
+				/* $response["homeproject"] = $this->getSingleProject($businessData['data']['website_config']["project_id"], 1);
+				 */
+			}
 			
 			$response["status"] = "success";
             $response["message"] = "Data Selected!";
@@ -329,15 +337,19 @@ class websiteManager{
 		}
 		return $response;
 	}
+	
+	function singleProject($project_id){
+		$where['id'] = $project_id;
+		$product = $this->db->setTable('project');
+		$this->db->setWhere($where, $product);
+		$this->db->setColumns($product, array("*"));
+		return $productData = $this->db->selectSingle();
+	}
 	function getSingleProject($page, $projectId, $projectPage){
 		try{
 			$businessData = $this->getConfigData(true);
 			if($businessData["status"] == "success"){
-				$whereProd['id'] = $projectId;
-				$product = $this->db->setTable('project');
-				$this->db->setWhere($whereProd, $product);
-				$this->db->setColumns($product, array("*"));
-				$productData = $this->db->selectSingle();
+				$productData = $this->singleProject($projectId);
 				if($productData['status'] != 'success'){
 					throw new Exception('Project Error: '.$productData['message']);
 				}
@@ -348,9 +360,9 @@ class websiteManager{
 			}
 			
 			if(isset($_GET['homeProject'])){
-				$modules = $this->modules;
-				$modules['headerModule']['homeproject'] = true;
-				$this->setModules($modules);
+				$response["home_project"] = $productData["data"];
+				$this->modules['headerModule']['homeproject'] = true;
+				$response["homeproject"] = $_GET['homeProject'];
 			}
 			
 			// assign data to response

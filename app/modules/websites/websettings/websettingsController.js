@@ -47,7 +47,18 @@ define(['app'], function (app) {
 						$notification.error("Get Template", "You didn't have any Template! Please apply free template or buy new template first.");
 					}
 				});
-				
+				$scope.getProjectList = function(user_id){
+					dataService.get("getmultiple/project/1/100", {user_id : user_id, status : 1})
+					.then(function(response) {
+						if(response.status == 'success'){
+							$scope.projects = response.data;
+						}else{
+							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification.error("Get Projects", "You didn't have any Projects! Please add projects first.");
+						}
+					});
+				}
+				$scope.getProjectList(response.data.user_id);
 				$scope.websetting.business_id = response.data.business_id;
 				$scope.websetting.template_id = response.data.template_id;
 				$scope.websetting.user_id = response.data.user_id;

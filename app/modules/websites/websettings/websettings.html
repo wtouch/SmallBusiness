@@ -28,9 +28,7 @@
 				<form name="websettingsForm" class="form-horizontal clearfix  role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">
 					<div class="bottomspace col-sm-6 panel panel-default">
 						<div class="form-group">
-							<input type="hidden" ng-model="config.website_id"/>
-							<label for="" class="col-sm-2 control-label"></label>
-							<div class="col-sm-5"> 
+							<div class="col-sm-5 col-sm-offset-2"> 
 								<div class="bottomspace">
 								<label  for="selectbusiness" class="col-sm-2 control-label">Business</label>
 								<select id="selectBusiness" class="form-control" ng-model="websetting.business_id" ng-change="getMenulist(websetting.user_id, websetting.business_id)" ng-options="item.id as item.business_name for item in businessList">
@@ -46,6 +44,15 @@
 								</select>
 								</div>
 							</div>	
+						</div>
+						
+						<div class="form-group" ng-if="projects">
+							<div class="col-sm-10 col-sm-offset-2">
+								<label  for="selectbusiness" class="col-sm-10">Home Project</label>
+								<select id="selectBusiness" class="form-control" ng-model="websetting.config.project_id"  ng-options="item.id as item.title for item in projects">
+									<option value="">Select Project</option>
+								</select>
+							</div>
 						</div>
 						
 						<div class="form-group">

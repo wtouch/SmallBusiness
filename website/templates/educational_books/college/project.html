@@ -1,110 +1,122 @@
 {% autoescape false %}
-<!-- Project Navbar -->
-<!-- /project/[project.title]/[project.id]/[projectPage('overview/gallery/amenities')] -->
-		<h2>{{project.title}}</h2>
-		<div class="row project">
+<h2>{{project.title}}</h2>
+<div class="row project">
+	{% if homeproject != 'true' %}
+		<div class="col-md-12">
 			<nav class="navbar">
 				<ul class="nav navbar-nav">
-					<li><a href="/projects/{{project.title}}/{{project.id}}/overview">Overview</a></li>
-					<li><a href="/projects/{{project.title}}/{{project.id}}/specifications">Specifications</a></li>
-					<li><a href="/projects/{{project.title}}/{{project.id}}/amenities">Amenities</a></li>
-					<li><a href="/projects/{{project.title}}/{{project.id}}/overview">E-Brochure</a></li>
-					<li><a href="/projects/{{project.title}}/{{project.id}}/floorplans">Floor Plans</a></li>
-					<li><a href="/projects/{{project.title}}/{{project.id}}/layoutplan">Layout Plan</a></li>
-					<li><a href="/projects/{{project.title}}/{{project.id}}/locationmap">Location Map</a></li>
-					<li><a href="/projects/{{project.title}}/{{project.id}}/gallery">Gallery</a></li>
+					<li {{ projectPage == 'overview' ? 'class="active"' }}>
+					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/overview">Overview</a>
+				</li>
+				<li {{ projectPage == 'amenities' ? 'class="active"' }}>
+					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/amenities">Amenities/Specifications</a>
+				</li>
+				<li {{ projectPage == 'locationmap' ? 'class="active"' }}>
+					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/locationmap">Location Map</a>
+				</li>
+				<li {{ projectPage == 'layoutplan' ? 'class="active"' }}>
+					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/layoutplan">Layout Plan</a>
+				</li>
+				<li {{ projectPage == 'floorplans' ? 'class="active"' }}>
+					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/floorplans">Floor Plans</a>
+				</li>
+				<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
+					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projgallery">Gallery</a>
+				</li>
+				<li {{ projectPage == 'projcontact' ? 'class="active"' }}>
+					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projcontact">Contact</a>
+				</li>
 				</ul>
 			</nav>
-			{% if projectPage == 'overview' %}
-			<!-- Overview -->
-				<div class="col-md-12">
-					<img src="{{project.project_images.0.file_relative_path}}" class="projImg img-responsive"/>
-					<p class="projHead">
-						<b class="highlight"><!-- Residential Township - Jaipur -->{{project.category}}</b><br>
-						<span class="highlight">Project Type : </span>{{project.type}}<br>
-						<span class="highlight">Project Location : </span>{{project.location}}, {{project.area}}, {{project.city}}, {{project.state}}, {{project.country}}
-					</p>
-				</div>
-				<div class="col-md-12">
-					<h3>Overview</h3>
-					{{project.overview.description}}
-				</div>
-			{% endif %}
-			{% if projectPage == 'specifications' %}
-				<div class="col-md-12">
-					<h3>Specifications</h3>
-					{{project.specifications.description}}
-				</div>
-			{% endif %}
-			{% if projectPage == 'amenities' %}
-				<div class="col-md-12">
-					<h3>Amenities/Features</h3>
-					{{project.amenities.description}}
-				</div>
-			{% endif %}
-			{% if projectPage == 'floorplans' %}
-				<div class="col-md-12">
-					<h3>Floor Plans</h3>
-					<div class="projectgallery">
-						<div class="row">
-						{% for key, value in project.floor_plan %}
-							<div class="col-sm-12 col-md-4">
-								<h4 class="highlight text-center">{{value.title}}</h4>
-								<div class="thumbnail">
-									<img src="{{value.image}}" class="img-responsive center-block" alt="...">
-								</div>
-							</div>
-						{% endfor %}
-						</div> 
-					</div>
-				</div>
-			{% endif %}
-			{% if projectPage == 'layoutplan' %}
-				<div class="col-md-12">
-					<h3>Layout Plan</h3>
-					{% for key, value in project.layout_map %}
-						<h4 class="highlight text-center">{{value.title}}</h4>
-						<div class="thumbnail">
-							<img src="{{value.image}}" class="img-responsive" alt="...">
-						</div>
-					{% endfor %}
-				</div>
-			{% endif %}
-			{% if projectPage == 'locationmap' %}
-				<h3>Location Map</h3>
-				{% for key, value in project.location_map%}
-					<h4 class="highlight text-center">{{value.title}}</h4>
-					<div class="thumbnail">
-						<img src="{{value.image}}" class="img-responsive" alt="...">
-					</div>
-				{% endfor %}
-			{% endif %}
-			{% if projectPage == 'gallery' %}
-				<div class="col-md-12">
-					<h3>Photo Gallery</h3>
-					<div class="projectgallery">
-						<div class="row">
-							{% for key, value in project.project_images %}
-							<div class="col-sm-12 col-md-4">
-								<img class="center-block projImgs" src="{{value.file_relative_path}}" alt="{{value.file_relative_path}}">
-							</div>
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			{% endif %}
 		</div>
-{% endautoescape %}
-<!-- <!-- Site Plan - ->
+	{% endif %}
+	{% if projectPage == 'overview' %}
+	<!-- Overview -->
 		<div class="col-md-12">
-			<h3>Site Plan</h3>
-			<div class="thumbnail">
-				<img src="img/Location Map.jpg" class="img-responsive" alt="...">
+			<img src="{{project.project_images.0.file_relative_path}}" class="projImg img-responsive"/>
+			<div class="projHead clearfix">
+				<b class="highlight"><!-- Residential Township - Jaipur -->{{project.category}}</b><br>
+				<span class="highlight">Project Type : </span>{{project.type}}<br>
+				<span class="highlight">Project Location : </span>{{project.location}}, {{project.area}}, {{project.city}}, {{project.state}}, {{project.country}}
+			</div>
+			<div>
+				<h3>Overview</h3>
+				{{project.overview.description}}
 			</div>
 		</div>
-
-			<ol class="breadcrumb text-right">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Library</a></li>
-				<li class="active">Data</li>
-			</ol>		-->
+	{% endif %}
+	{% if projectPage == 'amenities' and project.amenities >= 1 %}
+		<div class="col-md-12">
+			<h3>Amenities/Features :</h3>
+			{{project.amenities.description}}
+		</div>
+		<div class="col-md-12">
+			<h3>Specifications :</h3>
+			{{project.specifications.description}}
+		</div>
+	{% endif %}
+	{% if projectPage == 'floorplans' and project.floor_plan >= 1 %}
+		<div class="col-md-12">
+			<h3>Floor Plans</h3>
+			<div class="projectgallery">
+				<div class="row">
+				{% for key, value in project.floor_plan %}
+					<div class="col-sm-12 col-md-4">
+						<h4 class="highlight text-center">{{value.title}}</h4>
+						<div class="thumbnail">
+							<img src="{{value.image}}" class="img-responsive center-block" alt="...">
+						</div>
+					</div>
+				{% endfor %}
+				</div> 
+			</div>
+		</div>
+	{% endif %}
+	{% if projectPage == 'layoutplan' and project.layout_map >= 1 %}
+		<div class="col-md-12">
+			<h3>Layout Plan</h3>
+			{% for key, value in project.layout_map %}
+				<h4 class="highlight text-center">{{value.title}}</h4>
+				<div class="thumbnail">
+					<img src="{{value.image}}" class="img-responsive" alt="...">
+				</div>
+			{% endfor %}
+		</div>
+	{% endif %}
+	{% if projectPage == 'locationmap' and project.location_map >= 1 %}
+		<div class="col-md-12">
+			<h3>Location Map</h3>
+			{% for key, value in project.location_map %}
+				<h4 class="highlight text-center">{{value.title}}</h4>
+				<div class="thumbnail">
+					<img src="{{value.image}}" class="img-responsive" alt="...">
+				</div>
+			{% endfor %}
+		</div>
+	{% endif %}
+	{% if projectPage == 'projgallery' and project.project_gallery >=1 %}
+		<div class="col-md-12">
+			<h3>Project Gallery</h3>
+			<div class="projectgallery">
+				<div class="row">
+					{% for key, value in project.project_gallery %}
+					<div class="col-sm-12 col-md-4">
+						<h4 class="text-center">{{value.title}}</h4>
+						<img class="center-block projImgs" src="{{value.image}}" alt="{{value.title}}">
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	{% if projectPage == 'projcontact' and project.project_gallery >=1 %}
+		<div class="col-md-12">
+			<h3>Contact Details :</h3>
+			<p>Contact Person : {{project.contact_details.name}}
+			<p>Mobile : {{project.contact_details.phone}}
+			<p>Email ID : {{project.contact_details.email}}
+			<p>Address : {{project.contact_details.address}}
+		</div>
+	{% endif %}
+</div>
+{% endautoescape %}
