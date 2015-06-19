@@ -295,15 +295,15 @@ class websiteManager{
 		
 		return $projectData["data"];
 	}
-	function getProperties($user_id, $category = null, $featured = null){
-		$category = str_replace("-", " ", $category);
+	function getProperties($user_id, $search = array(), $featured = null){
+		//$category = str_replace("-", " ", $category);
 		$where['status'] = 1;
 		$where['user_id'] = $user_id;
-		if($category != null) $where['category'] = $category;
 		if($featured != null) $where['featured'] = $featured;
-		
+		$like = $search;
 		$table = $this->db->setTable('property');
 		$this->db->setWhere($where, $table);
+		$this->db->setWhere($like, $table, true);
 		$this->db->setColumns($table, array("*"));
 		$projectData = $this->db->select();
 		
@@ -419,12 +419,18 @@ class websiteManager{
 		return $response;
 	}
 	
-	function getPropertyData($page,$category = null){
+	function getPropertyData($page, $category = null){
 		try{
 			$businessData = $this->getConfigData(true);
-			// check website status if deleted or expired or data null
+			$search = array();
+			if(isset($_GET['property_for'])){
+				$search['property_for'] = $_GET['property_for'];
+				$search['category'] = $_GET['category'];
+				$search['city'] = $_GET['city'];
+			}
+			
 			if($businessData['status'] == 'success' && $businessData['data'] != null) {
-				$response["properties"] = $this->getProperties($businessData['data']["user_id"]);
+				$response["properties"] = $this->getProperties($businessData['data']["user_id"],$search);
 			}else{
 				throw new Exception($businessData['message']);
 			}
@@ -441,7 +447,9 @@ class websiteManager{
 						$response["properties"] = $newProperty;
 					}
 				}
-				$response["prop_category"] = array_unique($categories);
+				if(!isset($_GET['property_for'])){
+					$response["prop_category"] = array_unique($categories);
+				}
 			}
 			
 			

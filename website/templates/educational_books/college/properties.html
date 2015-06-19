@@ -1,5 +1,6 @@
 {% autoescape false %}
-<h2>Our Properties</h2>
+{% if properties >=1 %}
+<h2>Properties</h2>
 <div class="proplist">
 	{% if prop_category %}
 	<div class="text-center">
@@ -48,4 +49,7 @@
 	</div>
 	{% endfor %}
 </div>
+{% else %}
+<div class="alert alert-warning">Properties are not available for your search criteria!</div>
+{% endif %}
 {% endautoescape %}
