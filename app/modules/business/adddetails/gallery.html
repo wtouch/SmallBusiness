@@ -1,9 +1,11 @@
+<div class="form-group">
 	<div class="row">
 		<div class="col-sm-12 text-right">
 			<button ng-if="!infra" type="button" class="btn btn-default btn-primary" title="next" ng-click="update(businessData)">Save Details</button>
 			<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra', 'gallery')">Add Gallery</button>
 		</div>
 	</div>
+</div>
 	 
 	<form name="galleryForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="galleryForm.$valid" novalidate="novalidate">
 		<div class="form-group" >
@@ -93,6 +95,7 @@
 					<td as-sortable="dragControlListeners">
 					<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
 						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
+						<hr>
 						<div collapse="isCollapsed">
 							<div class="well well-lg"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" />
 							<br>		
@@ -101,7 +104,7 @@
 							</div> 
 						</div> 
 				</td>
-				<td>
+				<td class="col-sm-2">
 					<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.gallery, gallery); showForm('infra')" tooltip="Edit Details"></button>
 					<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.gallery)" tooltip="Remove"></button>	
 					<a ng-click="openGallery('modules/business/adddetails/viewGallery.html')" class="btn btn-success glyphicon glyphicon-eye-open">

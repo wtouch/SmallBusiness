@@ -56,24 +56,23 @@
 
 <div class="form-group">
 	<label for="location" class="col-sm-3 control-label">Location*</label>
-	<div class="col-sm-9">
+	<div class="col-sm-4">
 		<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="addbusiness.location" typeahead-on-select="getData($item)" placeholder="Location" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
 		<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i>
 			<span class="help-block" ng-show="businessContactForm.location.$dirty && businessContactForm.location.$invalid || businessContactForm.location.$dirty && !addbusiness.location">
 				<span class="text-danger" ng-show="businessContactForm.location.$dirty && (businessContactForm.location.$error.required || !addbusiness.location)">Location required.If Location not found enter pincode.</span>
 			</span>
-	</div>						
-</div>
-<div class="form-group">
-	<label for="area" class="col-sm-3 control-label">Area</label>
-	<div class="col-sm-9">
+	</div>	
+	<label for="area" class="col-sm-1 control-label">Area</label>
+	<div class="col-sm-4">
 		<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="addbusiness.area" placeholder="Enter area">
 		<span class="help-block" ng-show="businessContactForm.area.$dirty && businessContactForm.area.$invalid">
 			<span ng-show="businessContactForm.area.$error.pattern && (businessContactForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
 			<span class="text-danger" ng-show="businessContactForm.area.$error.minlength && (businessContactForm.area.$dirty || submitted)">Enter correct Code.</span>
 		</span>
-	</div>						
-</div>			
+	</div>			
+</div>
+			
 <div class="form-group">
 	<label for="state" class="col-sm-3 control-label">State</label>
 	<div class="col-sm-4">
@@ -91,41 +90,39 @@
 		</span>				
 	</div>
 </div>
+
 <div class="form-group">
 	<label for="Country" class="col-sm-3 control-label">Country</label>
-	<div class="col-sm-9">
+	<div class="col-sm-4">
 		<input type="text" required name="Country" id="Country" ng-model="addbusiness.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
 		<span class="help-block" ng-show="businessContactForm.Country.$dirty && businessContactForm.Country.$invalid || businessContactForm.Country.$dirty && !addbusiness.Country">
 			<span ng-show="businessContactForm.Country.$error.required || businessContactForm.Country.$dirty && !addbusiness.Country" class="text-danger">Country is required.</span>
 		</span>				
 	</div>
-</div>					
-<div class="form-group">
-	<label for="pincode" class="col-sm-3 control-label">Pin Code</label>
-	<div class="col-sm-9">
+	<label for="pincode" class="col-sm-1 control-label">PinCode</label>
+	<div class="col-sm-4">
 		<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="addbusiness.pincode" placeholder="Enter Pin Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
 		<span class="help-block" ng-show="businessContactForm.pincode.$dirty && businessContactForm.pincode.$invalid">
 			<span ng-show="businessContactForm.pincode.$error.pattern && (businessContactForm.pincode.$dirty || submitted)" class="text-danger">Enter a valid ZIP Code</span>
 			<span class="text-danger" ng-show="businessContactForm.pincode.$error.minlength && (businessContactForm.pincode.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
 		</span>
-	</div>						
+	</div>				
 </div>
-
 
 <div class="form-group">
 	<label for="address1" class="col-sm-3 control-label">Address1</label>
 	<div class="col-sm-4">
 	<textarea type="text" id="address1" name="address1" class="form-control" ng-model="addbusiness.contact_profile.address1" placeholder="Enter Address" ng-maxlength="160"></textarea>
-	<p class="text-danger" ng-hide="businessContactForm.address1.$error.maxlength">
+	<span  ng-hide="businessContactForm.address1.$error.maxlength">
 			{{ 160 - addbusiness.contact_profile.address1.length + " Chars left" }}
-		</p>
+	</span>
 	</div>
 	<label for="address2" class="col-sm-1 control-label">Address2</label>
 	<div class="col-sm-4">
 		<textarea type="text" name="address2" id="address2" ng-model="addbusiness.contact_profile.address2" placeholder="Enter Your Address" class="form-control" ng-maxlength="160"></textarea>
-		<p class="text-danger" ng-hide="businessContactForm.address2.$error.maxlength">
+		<span ng-hide="businessContactForm.address2.$error.maxlength">
 			{{ 160 - addbusiness.contact_profile.address2.length + " Chars left" }}
-		</p>	
+		</span>	
 	</div>
 </div>
 
@@ -133,107 +130,94 @@
 	<label for="address3" class="col-sm-3 control-label">Address3</label>
 	<div class="col-sm-4">
 	<textarea type="text" id="address3" name="address3" class="form-control" ng-model="addbusiness.contact_profile.address3" placeholder="Enter Address" ng-maxlength="160"></textarea>
-	<p class="text-danger" ng-hide="businessContactForm.address3.$error.maxlength">
+	<span ng-hide="businessContactForm.address3.$error.maxlength">
 			{{ 160 - addbusiness.contact_profile.address3.length + " Chars left" }}
-		</p>
+	</span>
 	</div>
 	<label for="address4" class="col-sm-1 control-label">Address4</label>
 	<div class="col-sm-4">
 		<textarea type="text" name="address4" id="address4" ng-model="addbusiness.contact_profile.address4" placeholder="Enter Your Address" class="form-control" ng-maxlength="160"></textarea>
-		<p class="text-danger" ng-hide="businessContactForm.address4.$error.maxlength">
+		<span ng-hide="businessContactForm.address4.$error.maxlength">
 			{{ 160 - addbusiness.contact_profile.address4.length + " Chars left" }}
-		</p>	
+		</span>	
 	</div>
 </div>
 
-
-
-
-
-
-
-
-
-
 <div class="form-group">
-	<label for="mobile" class="col-sm-3 control-label">Mobile/Cell Phone*</label>
-	<div class="col-sm-9">
+	<label for="mobile" class="col-sm-3 control-label">Mobile *</label>
+	<div class="col-sm-4">
 		<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addbusiness.contact_profile.mobile" placeholder="Enter Mobile No." ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 		<span class="help-block" ng-show="businessContactForm.mobile.$dirty && businessContactForm.mobile.$invalid">
-			<span ng-show="businessContactForm.mobile.$error.required" class="text-danger">Mobile/Cell Phone is required.</span>
+			<span ng-show="businessContactForm.mobile.$error.required" class="text-danger">Mobile Phone is required.</span>
 			<span ng-show="businessContactForm.mobile.$error.pattern && (businessContactForm.mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
 		</span>
-	</div>						
-</div>
-<div class="form-group">
-	<label for="alternate_mobile" class="col-sm-3 control-label">Alternate Mobile *</label>
-	<div class="col-sm-9">
+	</div>
+	<label for="alternate_mobile" class="col-sm-1 control-label">Mobile2</label>
+	<div class="col-sm-4">
 		<input type="text" id="alternate_mobile" name="alternate_mobile" class="form-control" ng-model="addbusiness.contact_profile.alternate_mobile" placeholder="Alternate Mobile No" ng-pattern="/^[789]\d{9}$/" maxlength="10">
 		<span class="help-block" ng-show="businessContactForm.alternate_mobile.$dirty && businessContactForm.alternate_mobile.$invalid">
 			<span ng-show="businessContactForm.alternate_mobile.$error.pattern && (businessContactForm.alternate_mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
 		</span>
-	</div>						
+	</div>				
 </div>
+
 <div class="form-group">
 	<label for="telephone" class="col-sm-3 control-label">Telephone</label>
-	<div class="col-sm-9">
+	<div class="col-sm-4">
 		<input type="text" id="telephone" name="telephone" class="form-control" ng-model="addbusiness.contact_profile.telephone" placeholder="Enter Telephone" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="14">
 	
 		<span class="help-block" ng-show="businessContactForm.telephone.$dirty && businessContactForm.telephone.$invalid">
 			<span ng-show="businessContactForm.telephone.$error.pattern && (businessContactForm.telephone.$dirty || submitted)" class="text-danger">Enter a valid Telephone</span>
 			<span class="text-danger" ng-show="businessContactForm.telephone.$error.minlength && (businessContactForm.telephone.$dirty || submitted)">Enter Valid Length Of Telephone.</span>
 		</span>
-	</div>						
-</div>
-<div class="form-group">
-	<label for="alternate_telephone" class="col-sm-3 control-label">Alternate Telephone</label>
-	<div class="col-sm-9">
+	</div>	
+<label for="alternate_telephone" class="col-sm-1 control-label">Telephone2</label>
+	<div class="col-sm-4">
 		<input type="text" id="alternate_telephone" name="alternate_telephone" class="form-control" ng-model="addbusiness.contact_profile.alternate_telephone" placeholder="Enter Telephone" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="15">
 		<span class="help-block" ng-show="businessContactForm.alternate_telephone.$dirty && businessContactForm.alternate_telephone.$invalid">
 			<span ng-show="businessContactForm.alternate_telephone.$error.pattern && (businessContactForm.alternate_telephone.$dirty || submitted)" class="text-danger">Enter a valid Telephone</span>
 			<span class="text-danger" ng-show="businessContactForm.alternate_telephone.$error.minlength && (businessContactForm.alternate_telephone.$dirty || submitted)">Enter Valid Length Of Telephone.</span>
 		</span>
-	</div>						
-</div>		
+	</div>				
+</div>
+
 <div class="form-group">
 	<label  for="fax" class="col-sm-3 control-label">Fax</label>
-	<div class="col-sm-9">
+	<div class="col-sm-4">
 		<input type="text" id="fax" class="form-control" name="fax" ng-model="addbusiness.contact_profile.fax" ng-pattern="/^[0-9 \-\s \( \)]*$/" ng-minlength="6" maxlength="6" placeholder="Fax">
 		<span class="help-block" ng-show="businessContactForm.fax.$dirty && businessContactForm.fax.$invalid">
 			<span ng-show="businessContactForm.fax.$error.pattern && (businessContactForm.fax.$dirty || submitted)" class="text-danger">Enter a valid Fax</span>
 			<span class="text-danger" ng-show="businessContactForm.fax.$error.minlength && (businessContactForm.fax.$dirty || submitted)">Enter Valid Length Of Fax.</span>
 		</span>
-	</div>						
-</div>
-<div class="form-group">	
-	<label  for="email" class="col-sm-3 control-label">Email*</label>
-	<div class="col-sm-9">
-		<input type="Email" class="form-control" id="email" ng-model="addbusiness.contact_profile.email" name="email" placeholder="Enter Email" required >
-		<span class="help-block" ng-show="businessContactForm.email.$dirty && businessContactForm.email.$invalid">
-		<span ng-show="businessContactForm.email.$error.required" class="text-danger">Email is required.</span>
-		<span ng-show="businessContactForm.email.$error.email" class="text-danger">Invalid Email address.</span>
-		</span>
-	</div>
-</div>	
-<div class="form-group">	
-	<label  for="alternate_email" class="col-sm-3 control-label">Alternate Email</label>
-	<div class="col-sm-9">
-		<input type="Email" class="form-control" id="alternate_email" ng-model="addbusiness.contact_profile.alternate_email" name="alternate_email" placeholder="Enter Alternate Email">
-		<span class="help-block" ng-show="businessContactForm.alternate_email.$dirty && businessContactForm.alternate_email.$invalid">
-		<span ng-show="businessContactForm.alternate_email.$error.email" class="text-danger">Invalid Email address.</span>
-		</span>
-	</div>
-</div>	
-<div class="form-group">
-	<label for="contact_website" class="col-sm-3 control-label">Website </label>
-	<div class="col-sm-9">
+	</div>	
+	<label for="contact_website" class="col-sm-1 control-label">Website </label>
+	<div class="col-sm-4">
 		<input type="url" class="form-control" id="contact_website" ng-model="addbusiness.contact_profile.contact_website" name="contact_website" placeholder="Enter Website">
 		<span class="help-block" ng-show="businessContactForm.contact_website.$dirty &&businessContactForm.contact_website.$invalid">
 			<span ng-show="businessContactForm.contact_website.$error.url" class="text-danger">Invalid Website.</span>
 		</span>
 		<span>e.g http://www.google.com</span>
 	</div>						
-</div>	
+</div>
+
+<div class="form-group">	
+	<label  for="email" class="col-sm-3 control-label">Email *</label>
+	<div class="col-sm-4">
+		<input type="Email" class="form-control" id="email" ng-model="addbusiness.contact_profile.email" name="email" placeholder="Enter Email" required />
+		<span class="help-block" ng-show="businessContactForm.email.$dirty && businessContactForm.email.$invalid">
+		<span ng-show="businessContactForm.email.$error.required" class="text-danger">Email is required.</span>
+		<span ng-show="businessContactForm.email.$error.email" class="text-danger">Invalid Email address.</span>
+		</span>
+	</div>
+	<label  for="alternate_email" class="col-sm-1 control-label">Email2</label>
+	<div class="col-sm-4">
+		<input type="Email" class="form-control" id="alternate_email" ng-model="addbusiness.contact_profile.alternate_email" name="alternate_email" placeholder="Enter Alternate Email">
+		<span class="help-block" ng-show="businessContactForm.alternate_email.$dirty && businessContactForm.alternate_email.$invalid">
+		<span ng-show="businessContactForm.alternate_email.$error.email" class="text-danger">Invalid Email address.</span>
+		</span>
+	</div>
+</div>
+
 <div class="form-group">
 	<div class="col-sm-offset-3 col-sm-9">
 		<button type="submit" class="btn btn-primary" title="Save" ng-disabled="businessContactForm.$invalid" ng-click="showFormPart('seo',3)">Next</button>

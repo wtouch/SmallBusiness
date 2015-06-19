@@ -1,9 +1,11 @@
+<div class="form-group">
 	<div class="row">
 		<div class="col-sm-12 text-right">
 			<button ng-if="!infra" type="button" class="btn btn-default btn-primary" title="next" ng-click="update(businessData)">Save Details</button>
 			<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra', 'testimonials')">Add Testimonials</button>
 		</div>
 	</div>
+</div>
 
 	<form name="testimonialsForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="jobsandcareersForm.$valid" novalidate="novalidate">
 		<div class="form-group">
@@ -80,7 +82,7 @@
 		<div class="form-group">
 			<label for="phone" class="col-sm-3 control-label">Phone*</label>
 			<div class="col-sm-9">
-				<input type="text" id="phone" name="phone" class="form-control" ng-model="testimonials.desc.phone" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+				<input type="text" id="phone" name="phone" class="form-control" ng-model="testimonials.desc.phone" placeholder="Your Contact No" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="14" required>
 				<span class="help-block" ng-show="testimonialsForm.phone.$dirty && testimonialsForm.phone.$invalid">
 					<span ng-show="testimonialsForm.phone.$error.pattern && (testimonialsForm.phone.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
 				</span>
@@ -111,7 +113,8 @@
 					<tr ng-repeat="(key, value) in businessData.testimonials">
 					<td as-sortable="dragControlListeners">
 					<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
-						<p> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></p>
+						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
+						<hr>
 						<div collapse="isCollapsed">
 							<div class="well well-lg"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" /><br>
 								
@@ -121,7 +124,7 @@
 							</div> 
 						</div> 
 					</td>
-					<td>
+					<td class="col-sm-2">
 						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.testimonials, testimonials); showForm('infra')" tooltip="Edit Details"></button>
 						
 						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.testimonials)" tooltip="Remove"></button>

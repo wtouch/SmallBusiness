@@ -28,12 +28,11 @@
 <div class="form-group" >
 	<label for="business_logo" class="col-sm-3 control-label">Logo*</label>
 	<div class="col-sm-9">
-	
 		<input class="form-control" type="file" id="business_logo" name="business_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="business_logo" >	
 		<!-- This will show thumbnails & progress of images -->
 			<file-preview url="business_logo"></file-preview>
 			<!-- This button will show if file/s selected -->
-			<button ng-show="business_logo" ng-click="upload(business_logo,path + addbusiness.user_id,userInfo,'business_logo')" type="button">Upload</button>
+			<button ng-show="business_logo" ng-click="upload(business_logo, addbusiness.user_id + path,userInfo,'business_logo')" type="button">Upload</button>
 			<!-- This hidden input will store image path in array after successful uploading -->
 			<input type="hidden" ng-model="addbusiness.business_logo" required>
 	</div>

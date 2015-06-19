@@ -9,7 +9,6 @@ define(['app'], function (app) {
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.tempListCurrentPage = 1;
-		$scope.myTempCurrentPage = 1;
 		$scope.customTempCurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
@@ -414,7 +413,7 @@ define(['app'], function (app) {
 				};
 			});
 			
-			//open model for My template image
+			/* //open model for My template image
 			$scope.openMyTemp = function (url, tempId) {
 				dataService.get("getsingle/mytemplate/"+tempId)
 				.then(function(response) {
@@ -429,7 +428,7 @@ define(['app'], function (app) {
 					modalService.show(modalDefaults, modalOptions).then(function (result) {
 					});
 				});
-			};
+			}; */
 			
 		//this code block for modal
 		$scope.editTempParamsModel = function (url, tempId) {

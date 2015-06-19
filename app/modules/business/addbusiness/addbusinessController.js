@@ -6,7 +6,6 @@ define(['app'], function (app) {
     // This is controller for this view
 	var addbusinessController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope,$notification)
 	{
-		// all $scope object goes here
 		
 		$scope.estyear = [];
 		$scope.maxSize = 5;

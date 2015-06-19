@@ -1,9 +1,11 @@
+<div class="form-group">
 	<div class="row">
 		<div class="col-sm-12 text-right">
 			<button ng-if="!infra" type="button" class="btn btn-default btn-primary" title="next" ng-click="update(businessData)">Save Details</button>
 			<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra', 'job_careers')">Add New Job/Career</button>
 		</div>
 	</div>
+</div>
 	 
 	<form name="jobsandcareersForm" role="form" class="form-horizontal" ng-if="infra" ng-submit="jobsandcareersForm.$valid" novalidate="novalidate">
 		<div class="form-group" >
@@ -19,7 +21,7 @@
 		<div class="form-group">
 			<label for="jobTitle" class="col-sm-3 control-label">Job Title*</label>
 			<div class="col-sm-9">
-				<input type="text" id="jobTitle" class="form-control" ng-model="job_careers.heading" name="jobTitle" placeholder="Job Title" readonly required>
+				<input type="text" id="jobTitle" class="form-control" ng-model="job_careers.heading" name="jobTitle" placeholder="Job Title" ng-disabled="headingDisabled" required />
 				<span class="help-block" ng-show="jobsandcareersForm.jobTitle.$dirty && jobsandcareersForm.jobTitle.$invalid">
 					<span ng-show="jobsandcareersForm.jobTitle.$error.required" class="text-danger">Plz enter job title.</span>
 				</span>
@@ -58,14 +60,14 @@
 				<tr ng-repeat="(key, value) in businessData.job_careers">
 					<td as-sortable="dragControlListeners">
 						<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
-						<p>{{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></p>
+						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
 						<hr>
-						<div collapse="isCollapsed" as-sortable-item>
+						<div class="well well-lg" collapse="isCollapsed" as-sortable-item>
 							<div><p ng-bind-html="value.description" ></p>
 							</div> 
 						</div>
 					</td>
-					<td>
+					<td class="col-sm-2">
 						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.job_careers, job_careers); showForm('infra')" tooltip="Edit Details"></button>
 						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.job_careers)" tooltip="Remove"></button>			
 					</td>					

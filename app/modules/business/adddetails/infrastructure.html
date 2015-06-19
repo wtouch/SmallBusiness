@@ -1,11 +1,13 @@
+<div class="form-group">
 	<div class="row">
 		<div class="col-sm-12 text-right">
 			<button ng-if="!infra" type="button" class="btn btn-default btn-primary" title="next" ng-click="update(businessData)">Save Details</button>
 			<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra', 'infrastructure')">Add Infrastucture</button>
 		</div>
 	</div>
-	 
-	<form name="infrastructureForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="infrastructureForm.$valid" novalidate="novalidate"> gfgfgfgfgfg
+</div>
+
+	<form name="infrastructureForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="infrastructureForm.$valid" novalidate="novalidate"> 
 		<div class="form-group" >
 			<div class="col-sm-9 col-sm-offset-3">
 				<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(infrastructure, businessData.infrastructure, 'infrastructure')" ng-disabled="infrastructureForm.$invalid">Add Infrastucture</button>
@@ -77,24 +79,50 @@
 					<th>Infrastucture Heading</th>
 					<th>Remove </th>
 				</tr>
-				<tbody as-sortable="dragControlListeners" ng-model="businessData.infrastructure">
-				<tr ng-repeat="(key, value) in businessData.infrastructure" as-sortable-item>
+				<tr ng-repeat="(key, value) in businessData.infrastructure">
 				<td>
-					<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
-						<p>{{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></p>
+						<!-- <p>{{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></p> -->
+						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
+						<hr>
 						<div collapse="isCollapsed">
-							<div><p ng-bind-html="value.description" ></p>
+							<div class="well well-lg">
 							<img class="pull-right" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
+							<p ng-bind-html="value.description"></p>
 							</div> 
 						</div>
 				</td>
-				<td>
+				<td class="col-sm-2">
 					<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.infrastructure, infrastructure); showForm('infra')" tooltip="Edit Details"></button>
 					
 					<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.infrastructure)" tooltip="Remove"></button>			
 				</td>
 				</tr>
-				</tbody>
+				
 			</table>
 		</div>
 	</div>
+	
+	<!-- <div class="row">
+		<div class="col-sm-12">
+			<table class="table table-bordered table-responsive " ng-if="businessData.infrastructure">
+				<tr>
+					<th>Infrastucture Heading</th>
+					<th>Infrastucture Description</th>
+					<th>Remove </th>
+				</tr>
+				<tr ng-repeat="(key, value) in businessData.infrastructure">
+					<td>{{key}}</td>
+					<td class="tdwidth">
+						<div class="pull-left" ng-bind-html="value.description"></div>
+						<img class="pull-right" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
+					</td>
+					<td>
+						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.infrastructure, infrastructure); showForm('infra')" tooltip="Edit Details"></button>
+						
+						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.infrastructure)" tooltip="Remove"></button>			
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+ -->
