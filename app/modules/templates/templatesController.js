@@ -19,7 +19,7 @@ define(['app'], function (app) {
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		$scope.temp = dataService.config.template;
-		$scope.path = "template/"; // path to store images on server
+		$scope.path = "/template"; // path to store images on server
 		$scope.userinfo = $scope.userInfo;
 		$scope.reqtemp = {
 			scrible : []

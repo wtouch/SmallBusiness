@@ -18,6 +18,7 @@ define(['app'], function (app) {
 		$scope.formPart = 'checkdomainavailable';
 		$scope.changeStatus={};
 		$scope.isCollapsed = true;
+		$scope.isCollapseds = true;
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
 		};
@@ -305,6 +306,30 @@ define(['app'], function (app) {
 					});
 				
 			}
+			
+			//get request for sidebar menubar
+			$scope.getMenulistSidebar = function(user_id, business_id){
+				//console.log(user_id, business_id);
+				$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
+					
+					dataService.get("getmultiple/seo/1/100",$scope.seoParam)
+					.then(function(response) {
+						if(response.status == 'success'){
+							$scope.reqnewsite.config.sidebar = response.data;
+						}else{
+							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification[response.status]("Menu Selection", response.message);
+						}
+					});
+				
+			}
+			
+			$scope.addsidebar = function(reqnewsite){
+				$scope.reqnewsite.config.sidebar = (reqnewsite.config.sidebar) ? reqnewsite.config.sidebar : {};
+				console.log(reqnewsite);
+				reqnewsite.config.sidebar.name[reqnewsite.config.sidebar.name] = reqnewsite.config.sidebar.name;
+			};
+					
 			};
         
 		//code for view website list

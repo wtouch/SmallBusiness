@@ -209,14 +209,13 @@
 				<input type="text" class="form-control" id="twitter" name="twitter" ng-model="reqnewsite.config.sociallinks.twitter"  />
 			</div>					
 		</div>
-		
 		<div class="form-group ">	
 			<label  for="linkedin" class="col-sm-2 control-label">LinkedIn</label>	
 			<div class="col-sm-9">
 				<input type="text" class="form-control" id="linkedin" name="linkedin" ng-model="reqnewsite.config.sociallinks.linkedin"  />
 			</div>					
 		</div>
-		
+	
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
 				<button ng-disabled="requestsiteForm.$invalid || requestsiteForm.domain_name.$error.available" type="submit" class="btn btn-success" ng-click="postData(reqnewsite)">Send Request</button>
@@ -224,7 +223,10 @@
 		</div>	
 	</div>
 	
+	
 	<div class="col-sm-6" ng-init="ind = []">
+	<accordion close-others="true">
+	<accordion-group heading="Menus">
 		<button  ng-click="getMenulist(reqnewsite.user_id, reqnewsite.business_id)"><span class="glyphicon glyphicon-refresh"></span></button>
 		<script type="text/ng-template" id="tree_item_renderer.html">
 			<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
@@ -282,8 +284,6 @@
 						</span>
 					</a>		
 				</span>
-			
-			
 			<div ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
 				<div class="menudiv childMenu" collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
 					<span class="caret pull-right" ng-if="data.childMenu"></span>
@@ -294,14 +294,81 @@
 			<div class="list-group-item menudiv" ng-repeat="data in reqnewsite.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
 			</div>
 		</div>
+		</accordion-group>
+		<accordion-group heading="Sidebar Menus">
+		<div class="form-group panel panel-default">
+				<div class="form-group">
+					<button class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addsidebar(reqnewsite)">Add SideBar</button>
+				</div>
+			<hr>
+			<div collapse="isCollapseds">
+				<div class="well well-lg">
+				<h4>Sidebar</h4>
+					<div class="form-group">
+						<!-- <label for="sidebarname" class="col-sm-2 control-label">Name</label> -->
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="sidebarname" name="sidebarname" ng-model="reqnewsite.config.sidebar.name" placeholder="Name"/>
+						</div>
+						<!-- <label for="sidebarurl" class="col-sm-1 control-label">URL</label> -->
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="sidebarurl" name="sidebarurl" ng-model="reqnewsite.config.sidebar.url" placeholder="URL" />
+						</div>
+					</div>
+					<h4>Seo</h4>
+					<div class="form-group">
+						<!-- <label for="seotitle" class="col-sm-2 control-label">Title</label> -->
+							<div class="col-sm-12">
+								<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="reqnewsite.config.seo.name" placeholder="Title"/>
+							</div>
+					</div>
+					<div class="form-group">
+						<!-- <label for="keywords" class="col-sm-2 control-label">Keywords</label> -->
+							<div class="col-sm-6">
+								<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="reqnewsite.config.seo.keywords" placeholder="Keywords">
+								</textarea>
+							</div>
+						<!-- <label for="description" class="col-sm-1 control-label">Description</label> -->
+							<div class="col-sm-6">
+								<textarea type="text" class="form-control" id="description" name="description" ng-model="reqnewsite.config.seo.description" placeholder="Description"></textarea>
+							</div>
+					</div>
+				</div> 
+			</div>
+			
+		</div>
+
+		<!--show Sidebar Menu-->
+		<button  ng-click="getMenulistSidebar(reqnewsite.user_id, reqnewsite.business_id)"><span class="glyphicon glyphicon-refresh"></span></button>
+			<script type="text/ng-template" id="tree_item_renderer.html">
+				<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
+				<span ng-show="data.childMenu" class="caret" ng-click="isCollapsed = !isCollapsed"></span>
+					
+				<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" /> 
+				
+				<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.sidebar.name}}</span>
+					<span class="pull-right">
+					 <a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status) ? 'glyphicon glyphicon-ok text-success' : 'glyphicon glyphicon-remove text-danger'" ></a> 
+					</span>
+				<div ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
+					<div class="menudiv childMenu" collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+						<span class="caret pull-right" ng-if="data.childMenu"></span>
+					</div>
+				</div> 
+			</script> 
+			<div class="list-group" as-sortable="dragControlListeners"ng-model="reqnewsite.config.sidebar.name">
+				<div class="list-group-item menudiv" ng-repeat="data in reqnewsite.config.sidebar.name" ng-include="'tree_item_renderer.html'" as-sortable-item>
+				</div>
+			</div>
+	</accordion-group>
+	</accordion>
 	</div>
 	<div class="panel-panel-default">	
 	<div class="form-group panel-body" ng-click="getMapObject()">
 		<div class="col-sm-12" id="map_canvas">
-				<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" control="googleMap">
-					<ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="TOP_LEFT"></ui-gmap-search-box>
-					<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-				</ui-gmap-google-map>
+			<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" control="googleMap">
+				<ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="TOP_LEFT"></ui-gmap-search-box>
+				<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+			</ui-gmap-google-map>
 		</div>
 	</div>
 	</div>
