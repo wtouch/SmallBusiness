@@ -54,14 +54,13 @@
 	</form>
 	<div class="row">
 		<div class="col-sm-12">
-			<table class="table table-bordered table-responsive " ng-if="businessData.custom_details">
+			<table class="table table-bordered table-responsive " ng-if="businessData.custom_details" as-sortable="dragControlListeners">
 				<tr>
 					<th>Custom Detail Heading</th>
-					
 					<th>Remove</th>
 				</tr>
-				<tr ng-repeat="(key, value) in businessData.custom_details">
-					<td as-sortable="dragControlListeners">
+				<tr ng-repeat="(key, value) in businessData.custom_details" as-sortable-item>
+					<td>
 						<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
 						<p>{{key}}
 						<button class="btn btn-primary pull-right" tooltip="View Details">
