@@ -28,6 +28,11 @@ define(['app'], function (app) {
 				business_profile : { establishment : 2014}
 			};
 		};
+		$scope.tinyMceOptions = {
+			toolbar: "bold italic",
+			menubar : false,
+			statusbar : false
+		}
 		// to add establish year in combobox
 		var date = new Date();
 		var todayYear = date.getFullYear();

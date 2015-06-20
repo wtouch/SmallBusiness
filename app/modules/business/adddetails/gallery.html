@@ -86,25 +86,27 @@
 
 	<div class="row">
 		<div class="col-sm-12">
-			<table class="table table-bordered table-responsive " ng-if="businessData.gallery">
+			<table class="table table-bordered table-responsive " ng-if="businessData.gallery" as-sortable="dragControlListeners">
 				<tr>
 					<th>Infrastucture Heading</th>
 					<th>Remove </th>
 				</tr>
-				<tr ng-repeat="(key, value) in businessData.gallery">
-					<td as-sortable="dragControlListeners">
+				<tr ng-repeat="(key, value) in businessData.gallery" as-sortable-item>
+					<td>
 					<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
-						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
-						<hr>
+						<p>{{key}}
+						<button class="btn btn-primary pull-right" tooltip="View Details">
+						<span class="caret" ng-click="isCollapsed = !isCollapsed" ></span></button>
+						</p>
 						<div collapse="isCollapsed">
-							<div class="well well-lg"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" />
+							<div class="well well-lg clearfix"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" />
 							<br>		
 								<b>Category:</b>{{value.category}}<br>
 								<b>Description:</b><p ng-bind-html="value.description">
 							</div> 
 						</div> 
 				</td>
-				<td class="col-sm-2">
+				<td class="col-sm-3">
 					<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.gallery, gallery); showForm('infra')" tooltip="Edit Details"></button>
 					<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.gallery)" tooltip="Remove"></button>	
 					<a ng-click="openGallery('modules/business/adddetails/viewGallery.html')" class="btn btn-success glyphicon glyphicon-eye-open">

@@ -108,20 +108,22 @@
 		
 	</form>
 	<div class="col-sm-12">
-		<table class="table table-bordered table-responsive" ng-if="businessData.news_coverage">
+		<table class="table table-bordered table-responsive" ng-if="businessData.news_coverage"  as-sortable="dragControlListeners">
 			<tr>
 				<th>News Coverage Title</th>
 				<th>Remove </th>
 			</tr>			
 			</tr>
 			
-			<tr ng-repeat="(key, value) in businessData.news_coverage">
-				<td as-sortable="dragControlListeners">
+			<tr ng-repeat="(key, value) in businessData.news_coverage" as-sortable-item>
+				<td>
 					<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
-						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
-					<hr>
+						<p>{{key}}
+						<button class="btn btn-primary pull-right" tooltip="View Details">
+						<span class="caret" ng-click="isCollapsed = !isCollapsed" ></span></button>
+						</p>
 						<div collapse="isCollapsed">
-							<div class="well well-lg"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" /><br>		
+							<div class="well well-lg clearfix"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" /><br>		
 								<b>Description:</b><p ng-bind-html="value.newsdetails">
 							</div> 
 						</div> 

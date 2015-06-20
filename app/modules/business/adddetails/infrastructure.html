@@ -74,18 +74,20 @@
 	</form>
 	<div class="row">
 		<div class="col-sm-12" ng-if="businessData.infrastructure">
-			<table class="table table-bordered table-responsive ">
+			<table class="table table-bordered table-responsive " as-sortable="dragControlListeners">
 				<tr>
 					<th>Infrastucture Heading</th>
 					<th>Remove </th>
 				</tr>
-				<tr ng-repeat="(key, value) in businessData.infrastructure">
+				<tr ng-repeat="(key, value) in businessData.infrastructure" as-sortable-item>
 				<td>
-						<!-- <p>{{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></p> -->
-						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
-						<hr>
+				<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
+						<p>{{key}}
+						<button class="btn btn-primary pull-right" tooltip="View Details">
+						<span class="caret" ng-click="isCollapsed = !isCollapsed" ></span></button>
+						</p>
 						<div collapse="isCollapsed">
-							<div class="well well-lg">
+							<div class="well well-lg clearfix">
 							<img class="pull-right" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
 							<p ng-bind-html="value.description"></p>
 							</div> 

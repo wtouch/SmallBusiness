@@ -112,16 +112,16 @@
 <div class="form-group">
 	<label for="address1" class="col-sm-3 control-label">Address1</label>
 	<div class="col-sm-4">
-	<textarea type="text" id="address1" name="address1" class="form-control" ng-model="addbusiness.contact_profile.address1" placeholder="Enter Address" ng-maxlength="160"></textarea>
+	<textarea type="text" id="address1" name="address1" class="form-control" ng-model="addbusiness.contact_profile.address1" ui-tinymce="tinyMceOptions" placeholder="Enter Address" ng-maxlength="250"></textarea>
 	<span  ng-hide="businessContactForm.address1.$error.maxlength">
-			{{ 160 - addbusiness.contact_profile.address1.length + " Chars left" }}
+			{{ 250 - addbusiness.contact_profile.address1.length + " Chars left" }}
 	</span>
 	</div>
 	<label for="address2" class="col-sm-1 control-label">Address2</label>
 	<div class="col-sm-4">
-		<textarea type="text" name="address2" id="address2" ng-model="addbusiness.contact_profile.address2" placeholder="Enter Your Address" class="form-control" ng-maxlength="160"></textarea>
+		<textarea type="text" name="address2" id="address2"  ui-tinymce="tinyMceOptions" ng-model="addbusiness.contact_profile.address2" placeholder="Enter Your Address" class="form-control" ng-maxlength="250"></textarea>
 		<span ng-hide="businessContactForm.address2.$error.maxlength">
-			{{ 160 - addbusiness.contact_profile.address2.length + " Chars left" }}
+			{{ 250 - addbusiness.contact_profile.address2.length + " Chars left" }}
 		</span>	
 	</div>
 </div>
@@ -129,16 +129,16 @@
 <div class="form-group">
 	<label for="address3" class="col-sm-3 control-label">Address3</label>
 	<div class="col-sm-4">
-	<textarea type="text" id="address3" name="address3" class="form-control" ng-model="addbusiness.contact_profile.address3" placeholder="Enter Address" ng-maxlength="160"></textarea>
+	<textarea type="text" id="address3" name="address3" class="form-control"  ui-tinymce="tinyMceOptions" ng-model="addbusiness.contact_profile.address3" placeholder="Enter Address" ng-maxlength="250"></textarea>
 	<span ng-hide="businessContactForm.address3.$error.maxlength">
-			{{ 160 - addbusiness.contact_profile.address3.length + " Chars left" }}
+			{{ 250 - addbusiness.contact_profile.address3.length + " Chars left" }}
 	</span>
 	</div>
 	<label for="address4" class="col-sm-1 control-label">Address4</label>
 	<div class="col-sm-4">
-		<textarea type="text" name="address4" id="address4" ng-model="addbusiness.contact_profile.address4" placeholder="Enter Your Address" class="form-control" ng-maxlength="160"></textarea>
+		<textarea type="text" name="address4" id="address4"  ui-tinymce="tinyMceOptions" ng-model="addbusiness.contact_profile.address4" placeholder="Enter Your Address" class="form-control" ng-maxlength="250"></textarea>
 		<span ng-hide="businessContactForm.address4.$error.maxlength">
-			{{ 160 - addbusiness.contact_profile.address4.length + " Chars left" }}
+			{{ 250 - addbusiness.contact_profile.address4.length + " Chars left" }}
 		</span>	
 	</div>
 </div>
@@ -184,7 +184,7 @@
 <div class="form-group">
 	<label  for="fax" class="col-sm-3 control-label">Fax</label>
 	<div class="col-sm-4">
-		<input type="text" id="fax" class="form-control" name="fax" ng-model="addbusiness.contact_profile.fax" ng-pattern="/^[0-9 \-\s \( \)]*$/" ng-minlength="6" maxlength="6" placeholder="Fax">
+		<input type="text" id="fax" class="form-control" name="fax" ng-model="addbusiness.contact_profile.fax" ng-pattern="/^[0-9 \-\s \( \)]*$/" ng-minlength="6" placeholder="Fax">
 		<span class="help-block" ng-show="businessContactForm.fax.$dirty && businessContactForm.fax.$invalid">
 			<span ng-show="businessContactForm.fax.$error.pattern && (businessContactForm.fax.$dirty || submitted)" class="text-danger">Enter a valid Fax</span>
 			<span class="text-danger" ng-show="businessContactForm.fax.$error.minlength && (businessContactForm.fax.$dirty || submitted)">Enter Valid Length Of Fax.</span>

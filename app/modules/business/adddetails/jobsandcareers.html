@@ -52,17 +52,19 @@
 
 	<div class="row">
 		<div class="col-sm-12">
-			<table class="table table-bordered table-responsive " ng-if="businessData.job_careers">
+			<table class="table table-bordered table-responsive " ng-if="businessData.job_careers" as-sortable="dragControlListeners">
 				<tr>
 					<th>Job Title</th>
 					<th>Remove </th>
 				</tr>
-				<tr ng-repeat="(key, value) in businessData.job_careers">
-					<td >
-						<span  class="glyphicon glyphicon glyphicon-move"></span>
-						<button class="btn btn-default"> {{key}}<span class="caret" ng-click="isCollapsed = !isCollapsed"></span></button>
-						<hr>
-						<div class="well well-lg" collapse="isCollapsed" >
+				<tr ng-repeat="(key, value) in businessData.job_careers" as-sortable-item>
+					<td>
+					<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
+						<p>{{key}}
+						<button class="btn btn-primary pull-right" tooltip="View Details">
+						<span class="caret" ng-click="isCollapsed = !isCollapsed" ></span></button>
+						</p>
+						<div class="well well-lg clearfix" collapse="isCollapsed" >
 							<div><p ng-bind-html="value.description" ></p>
 							</div> 
 						</div>
