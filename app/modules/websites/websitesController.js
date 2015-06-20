@@ -31,6 +31,15 @@ define(['app'], function (app) {
 				return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
 			}
 		};
+		
+		$scope.addToObject = function(data, object, resetObj){
+			var dtlObj = JSON.stringify(data.desc);
+			object[data.heading] = JSON.parse(dtlObj);
+			$scope.headingDisabled = false;
+			$scope.temp = false;
+			$scope.imgRemoved = false;
+		}
+		
 		$scope.getBusiness = function(user_id){
 			dataService.get("getmultiple/business/1/100",{user_id:user_id, status : 1})
 			.then(function(response) {  

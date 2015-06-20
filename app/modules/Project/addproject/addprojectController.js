@@ -23,6 +23,7 @@ define(['app'], function (app) {
 		$scope.layout_map = {};
 		$scope.floor_plan = {};
 		$scope.project_gallery = {};
+		$scope.builder = {},
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		$scope.path = "project/"; 
@@ -155,6 +156,8 @@ define(['app'], function (app) {
 		//add project 
 		$scope.addproject = function(project){
 			console.log(project);
+			$scope.project.created_date = $scope.currentDate;
+			$scope.project.modified_date = $scope.currentDate;
 			dataService.post("post/project",project)
 			.then(function(response) {
 				if(response.status=="success"){
@@ -165,6 +168,21 @@ define(['app'], function (app) {
 				$notification[response.status]("Post Project", response.message);
 				}
 				
+			});
+		};
+		
+		//function to upload files
+		$scope.uploadOne = function(files,path,userInfo,picArr){//this function for uploading files
+			upload.upload(files,path,userInfo,function(data){
+				var picArrKey = 0, x;
+				for(x in picArr) picArrKey++;
+				if(data.status === 'success'){
+					picArr.push(data.data);
+				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Upload Image", response.message);
+				}
+	
 			});
 		};
 		

@@ -116,12 +116,19 @@
 	<span  ng-hide="businessContactForm.address1.$error.maxlength">
 			{{ 250 - addbusiness.contact_profile.address1.length + " Chars left" }}
 	</span>
+	<span class="help-block" ng-show="businessContactForm.address1.$dirty && businessContactForm.address1.$invalid">
+		<span class="text-danger" ng-show="businessContactForm.address1.$error.maxlength">Sorry You are Exceeding the Limit</span>
+	</span>		
+			
 	</div>
 	<label for="address2" class="col-sm-1 control-label">Address2</label>
 	<div class="col-sm-4">
 		<textarea type="text" name="address2" id="address2"  ui-tinymce="tinyMceOptions" ng-model="addbusiness.contact_profile.address2" placeholder="Enter Your Address" class="form-control" ng-maxlength="250"></textarea>
 		<span ng-hide="businessContactForm.address2.$error.maxlength">
 			{{ 250 - addbusiness.contact_profile.address2.length + " Chars left" }}
+		</span>
+		<span class="help-block" ng-show="businessContactForm.address2.$dirty && businessContactForm.address2.$invalid">
+			<span class="text-danger" ng-show="businessContactForm.address2.$error.maxlength">Sorry You are Exceeding the Limit</span>
 		</span>	
 	</div>
 </div>
@@ -133,6 +140,9 @@
 	<span ng-hide="businessContactForm.address3.$error.maxlength">
 			{{ 250 - addbusiness.contact_profile.address3.length + " Chars left" }}
 	</span>
+	<span class="help-block" ng-show="businessContactForm.address3.$dirty && businessContactForm.address3.$invalid">
+		<span class="text-danger" ng-show="businessContactForm.address3.$error.maxlength">Sorry You are Exceeding the Limit</span>
+	</span>	
 	</div>
 	<label for="address4" class="col-sm-1 control-label">Address4</label>
 	<div class="col-sm-4">
@@ -140,6 +150,9 @@
 		<span ng-hide="businessContactForm.address4.$error.maxlength">
 			{{ 250 - addbusiness.contact_profile.address4.length + " Chars left" }}
 		</span>	
+		<span class="help-block" ng-show="businessContactForm.address4.$dirty && businessContactForm.address4.$invalid">
+		<span class="text-danger" ng-show="businessContactForm.address4.$error.maxlength">Sorry You are Exceeding the Limit</span>
+	</span>	
 	</div>
 </div>
 

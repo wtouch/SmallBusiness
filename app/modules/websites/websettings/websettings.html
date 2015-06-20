@@ -178,9 +178,24 @@
 									<span tooltip="Edit SEO" class="glyphicon glyphicon-flash" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
 									<span class="dropdown-menu" ng-show="ind[$index + data.url + 'seo']">
 									<span class="close" ng-click="ind[$index + data.url + 'seo'] = false">X</span>
-										<input type="text" ng-model="data.seo.title" placeholder="SEO Title"/>
+										<!-- <input type="text" ng-model="data.seo.title" placeholder="SEO Title"/>
 										<input type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"/>
-										<input type="text" ng-model="data.seo.description" placeholder="SEO Description"/>
+										<input type="text" ng-model="data.seo.description" placeholder="SEO Description"/> -->
+										<form name="seo" role="form" class="form-horizontal panel panel-default">
+							<div class="form-group">
+							<div class="col-sm-12">
+							<input type="text" class="form-control" ng-model="data.seo.title" placeholder="SEO Title"/>
+							</div>
+							</div>
+							<div class="form-group">
+							<div class="col-sm-6">
+							<textarea class="form-control" type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"></textarea>
+							</div>
+							<div class="col-sm-6">
+							<textarea class="form-control" type="text" ng-model="data.seo.description" placeholder="SEO Description"></textarea>
+							</div>
+							</div>
+						</form>
 									</span>
 								</a>
 								

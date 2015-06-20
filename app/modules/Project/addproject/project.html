@@ -52,19 +52,19 @@
 					<span class="text-danger" ng-show="projectForm.projectType.$error.required">Project Type is required.</span>
 				</span>				
 			</div>				
-		</div>
+	</div>
 		
-		<div class="form-group"> 
-			<label for="featured" class="col-sm-2 control-label">Featured *</label> 
-			<div class="col-sm-9">
-				<label class="radio-inline" >
-					<input type="radio" name="featured" id="yes" value="1"   ng-model="project.featured" checked> Yes
-				</label>
-				<label class="radio-inline" ng-model="project.featured">
-					<input type="radio" name="featured" id="no" value="0" ng-model="project.featured"> No
-				</label>										
-			</div>	
-		</div>
+	<div class="form-group"> 
+		<label for="featured" class="col-sm-2 control-label">Featured *</label> 
+		<div class="col-sm-9">
+			<label class="radio-inline" >
+				<input type="radio" name="featured" id="yes" value="1"   ng-model="project.featured" checked> Yes
+			</label>
+			<label class="radio-inline" ng-model="project.featured">
+				<input type="radio" name="featured" id="no" value="0" ng-model="project.featured"> No
+			</label>										
+		</div>	
+	</div>
 		
 	<div class="form-group">
 	  <label for="project_images" class="col-sm-2 control-label" >Project Images *</label>
@@ -83,7 +83,6 @@
 			</span>		
 		</div>
 	</div>
-		
 
 	<div class="form-group"> 
 		<label for="projImageDescription" class="col-sm-2 control-label">Description *</label> 
@@ -112,23 +111,23 @@
 			</div>	
 	</div>
 	
-	<!-- <div class="form-group">{{project.builder.owner_logo}}
-	  <label for="owner_logo" class="col-sm-2 control-label" >* Builder Logo</label>
+	<div class="form-group">{{project.builder.builder_logo}}
+	  <label for="builder_logo" class="col-sm-2 control-label" >* Builder Logo</label>
 		<div class="col-sm-9">
-			<!-- This is file input for select images - ->
-			<input type="file" id="owner_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png,image/gif" ng-file-change="generateThumb($files)"  ng-model="owner_logo" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}"required />		
-			<!-- This will show thumbnails & progress of images - ->
-			<file-preview url="owner_logo"></file-preview>
-			<!-- This button will show if file/s selected - ->
-			<button ng-show="owner_logo" ng-click="upload(owner_logo,path,userinfo,project)" type="button">Upload</button>
-			<!-- This hidden input will store image path in array after successful uploading - ->
-			<input type="hidden" ng-model="project.builder.owner_logo"/>	
-			<span class="thumbs" ng-repeat="(key, value) in project.builder.owner_logo">
+			<!-- This is file input for select images -->
+			<input type="file" id="builder_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png,image/gif" ng-file-change="generateThumb($files)"  ng-model="builder_logo" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}"required />		
+			<!-- This will show thumbnails & progress of images -->
+			<file-preview url="builder_logo"></file-preview>
+			<!-- This button will show if file/s selected -->
+			<button ng-show="builder_logo" ng-click="upload(builder_logo,path,userinfo,project)" type="button">Upload</button>
+			<!-- This hidden input will store image path in array after successful uploading -->
+			<input type="hidden" ng-model="project.builder.builder_logo"/>	
+			<span class="thumbs" ng-repeat="(key, value) in project.builder.builder_logo">
 				<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" />
-				<span class="close" ng-click="removeImg(key, project.builder.owner_logo)">X</span>
+				<span class="close" ng-click="removeImg(key, project.builder.builder_logo)">X</span>
 			</span>		
 		</div>
-	</div> -->
+	</div> 
 
 	<div class="form-group">
 		<label for="OwnerName" class="col-sm-2 control-label">Owner Name *</label>
@@ -139,27 +138,46 @@
 					</span>
 			</div>	
 	</div>
-	<div class="form-group" ng-if="project.user_id">
-						<div class="col-sm-12">					
-							<h3>Select Sites</h3>
-							<div class="table-responsive">
-								<table class="table table-bordered">
-									<tr>
-										<td class="checkbox">
-											<label>
-												<input type="checkbox" ng-model="selectAll" ng-change="checkAll(websites, selectAll)" /> Select all
-											</label> 
-										</td>
-										<td class="checkbox clearfix">
-											<label ng-repeat="website in websites" class="col-sm-3">
-												<input type="checkbox" checklist-model="project.domain" checklist-value="website"> {{website.domain_name}}
-											</label>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-					</div>
 	
+	<div class="form-group">{{project.builder.owner_logo}}
+	  <label for="owner_logo" class="col-sm-2 control-label">*Owner Logo</label>
+	 
+		<div class="col-sm-9">
+			<!-- This is file input for select images -->
+			<input type="file" id="owner_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png,image/gif" ng-file-change="generateThumb($files)"  ng-model="owner_logo" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}"required />		
+			<!-- This will show thumbnails & progress of images -->
+			<file-preview url="owner_logo"></file-preview>
+			<!-- This button will show if file/s selected -->
+			<button ng-show="owner_logo" ng-click="upload(owner_logo,path,userinfo,project.builder.owner_logo)" type="button">Upload</button>
+			<!-- This hidden input will store image path in array after successful uploading -->
+			<input type="hidden" ng-model="project.builder.owner_logo"/>	
+			<span class="thumbs" ng-repeat="(key, value) in project.builder.owner_logo">
+				<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" />
+				<span class="close" ng-click="removeImg(key, project.builder.owner_logo)">X</span>
+			</span>		
+		</div> 
+	</div> 
+
+	<div class="form-group" ng-if="project.user_id">
+		<div class="col-sm-12">					
+			<h3>Select Sites</h3>
+			<div class="table-responsive">
+				<table class="table table-bordered">
+					<tr>
+						<td class="checkbox">
+							<label>
+								<input type="checkbox" ng-model="selectAll" ng-change="checkAll(websites, selectAll)" /> Select all
+							</label> 
+						</td>
+						<td class="checkbox clearfix">
+							<label ng-repeat="website in websites" class="col-sm-3">
+								<input type="checkbox" checklist-model="project.domain" checklist-value="website"> {{website.domain_name}}
+							</label>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 	<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="projectForm.$invalid" ng-click="showFormPart('overview',1)">Next</button>
 </form>
