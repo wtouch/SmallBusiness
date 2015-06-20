@@ -20,48 +20,65 @@ class websiteManager{
 	}
 	
 	function getTemplate($page, $response){
-		// assign template category & name
-		$templateCategory = ($response['data']['template_category']) ? $response['data']['template_category'] : "default";
-		$templateFolder = ($response['data']['template_name']) ? $response['data']['template_name'] : "default";
-		
-		// set template base path
-		$response["templatePath"] = $templateCategory."/".$templateFolder."/";
-		
-		// apply menus to template
-		$response["routes"] = $response["data"]['website_config']['menus'];
-		
-		
-		// set assets path for css, js, images etc
-		$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
-		
-		// set current uri
-		if(!isset($response["uri"])){
-			$response["uri"] = ($page == "home") ? "/" : '/'.$page;
-		}
+		//print_r($response);
+		if($response['status'] == "success"){
+			// assign template category & name
+			$templateCategory = (isset($response['data']['template_category'])) ? $response['data']['template_category'] : "default";
+			$templateFolder = (isset($response['data']['template_name'])) ? $response['data']['template_name'] : "default";
 			
-		// load index.html
-		$templateIndex = $response["templatePath"]."/index.html";
-		
-		// set modules
-		if(count($this->modules) >= 1){
-			$response["modules"] = $this->modules;
-		}
-		
-		// set modules
-		if(count($this->seo) >= 1){
-			$response["seo"] = $this->seo;
-		}
+			// set template base path
+			$response["templatePath"] = $templateCategory."/".$templateFolder."/";
+			
+			// apply menus to template
+			$response["routes"] = $response["data"]['website_config']['menus'];
+			
+			
+			// set assets path for css, js, images etc
+			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];
+			
+			// set current uri
+			if(!isset($response["uri"])){
+				$response["uri"] = ($page == "home") ? "/" : '/'.$page;
+			}
 
-		// set twig loader
-		$loader = new Twig_Loader_Filesystem($this->config['rootTempPath']);
-		$this->twig = new Twig_Environment($loader);
-		$template = $this->twig->loadTemplate($templateIndex);
-		
-		// this will dynamic with checking template folder and default folder for template page
-		if(file_exists($this->config['rootTempPath']."/".$templateCategory."/".$templateFolder."/".$page.".html")){
-			$response["contentPath"] = $templateCategory."/".$templateFolder."/".$page.".html";
+			// load index.html
+			
+			if(file_exists($this->config['rootTempPath']."/".$response["templatePath"]."/index.html")){
+				$templateIndex = $response["templatePath"]."/index.html";
+			}else{
+				$templateIndex = "default/default/index.html";
+				$response["path"] = $this->config['httpTempPath']."default/default/";
+				$response["templatePath"] = "default/default/";
+			}
+			
+			//$templateIndex = $response["templatePath"]."/index.html";
+			
+			// set modules
+			if(count($this->modules) >= 1){
+				$response["modules"] = $this->modules;
+			}
+			
+			// set modules
+			if(count($this->seo) >= 1){
+				$response["seo"] = $this->seo;
+			}
+
+			// set twig loader
+			$loader = new Twig_Loader_Filesystem($this->config['rootTempPath']);
+			$this->twig = new Twig_Environment($loader);
+			$template = $this->twig->loadTemplate($templateIndex);
+			
+			// this will dynamic with checking template folder and default folder for template page
+			if(file_exists($this->config['rootTempPath']."/".$response["templatePath"]."/".$page.".html")){
+				$response["contentPath"] = $response["templatePath"]."/".$page.".html";
+			}else{
+				$response["contentPath"] = "default/default/".$page.".html";
+			}
 		}else{
-			$response["contentPath"] = "default/default/".$page.".html";
+			// set twig loader
+			$loader = new Twig_Loader_Filesystem($this->config['rootTempPath']);
+			$this->twig = new Twig_Environment($loader);
+			$template = $this->twig->loadTemplate("default/default/error.html");
 		}
 		
 		return $template->display($response);
@@ -124,10 +141,10 @@ class websiteManager{
 			// check website status if deleted or expired or data null
 			if($result['status'] == 'success' && $result['data'] != null) {
 				if($result['data']['expired'] == 1){
-					throw new Exception('Website is expired please renew soon!');
+					throw new Exception('Website is expired, please renew soon!');
 				}
 				if($result['data']['website_status'] != 1){
-					throw new Exception('Website is not activated please contact your administrator!');
+					throw new Exception('Website is not activated, please contact system administrator!');
 				}
 				if(empty($result['data']['website_config'])){
 					throw new Exception('Please add website details!');
@@ -136,7 +153,7 @@ class websiteManager{
 					throw new Exception('Please add template details!');
 				}
 			}else{
-				throw new Exception('Website not registered!');
+				throw new Exception('Website is Under Construction!');
 			}
 			
 			$response['status'] = "success";
@@ -149,7 +166,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
-			print_r($response);
+			//print_r($response);
 		}
 		return $response;
 	}
@@ -177,7 +194,7 @@ class websiteManager{
 		try{
 			$businessData = $this->getConfigData(true);
 			if($businessData["status"] != "success"){
-				throw new Exception($configData["message"]);
+				throw new Exception($businessData["message"]);
 			}
 			
 			if(isset($this->modules['contentModule']["featured_products"])){
@@ -209,8 +226,8 @@ class websiteManager{
 				$response["google_map"] = $businessData["data"]['website_config']['google_map'];
 			}
 			if($customPage != null){
-				print_r($customPage);
-				$response["data"] = array('data' => $businessData["data"]["custom_details"][str_replace("-", " ", $customPage)]["description"]);
+				
+				$response["data"]['data'] = $businessData["data"]["custom_details"][str_replace("-", " ", $customPage)]["description"];
 				$response["uri"] = '/cp/'.$customPage;
 				$response["title"] = str_replace("-", " ", $customPage);
 			}
@@ -220,7 +237,8 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
-			print_r($response);
+			$response = $this->getTemplate('error', $response);
+			//print_r($response);
 		}
 		return $response;
 	}
@@ -249,7 +267,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
-			print_r($response);
+			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
 	}
@@ -284,7 +302,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
-			print_r($response);
+			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
 	}
@@ -339,7 +357,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
-			print_r($response) ;
+			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
 	}
@@ -385,7 +403,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
-			print_r($response);
+			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
 	}
@@ -420,7 +438,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
-			print_r($response);
+			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
 	}
@@ -472,7 +490,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
-			print_r($response) ;
+			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
 	}

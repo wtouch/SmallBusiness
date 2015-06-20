@@ -38,6 +38,29 @@
 						</address>
 					</td>
 				</tr>
+				<tr>
+					<td colspan="2">
+						{%if data.contact_profile.address1%}
+							<span>{{data.contact_profile.address1}}</span>
+							<hr/>
+						{% endif %}
+						
+						{%if data.contact_profile.address2%}
+							<span>{{data.contact_profile.address2}}</span>
+							<hr/>
+						{% endif %}
+						
+						{%if data.contact_profile.address3%}
+							<span>{{data.contact_profile.address3}}</span>
+							<hr/>
+						{% endif %}
+						
+						{%if data.contact_profile.address4%}
+							<span>{{data.contact_profile.address4}}</span>
+							<hr/>
+						{% endif %}
+					</td>
+				</tr>
 				{%if data.contact_profile.telephone%}
 				<tr>
 					<td><b>Telephone</b></td>
@@ -64,34 +87,7 @@
 			</table>
 		</div>
 		<div class="col-sm-12 col-md-6">
-			<div class="row">
-				{%if data.contact_profile.address1%}
-				<div class="col-sm-6 col-md-6">
-					<span>{{data.contact_profile.address1}}</span>
-				</div>
-				{% endif %}
-				
-				{%if data.contact_profile.address2%}
-				<div class="col-sm-6 col-md-6">
-					<span>{{data.contact_profile.address2}}</span>
-				</div>
-				{% endif %}
-				
-				{%if data.contact_profile.address3%}
-				<div class="col-sm-6 col-md-6">
-					<span>{{data.contact_profile.address3}}</span>
-				</div>		
-				{% endif %}
-				
-				{%if data.contact_profile.address4%}
-				<div class="col-sm-6 col-md-6">
-					<span>{{data.contact_profile.address4}}</span>
-				</div>	
-				{% endif %}
-			</div>
+			<div id="googleMap"></div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12 col-md-12"><div id="googleMap"></div></div>
 	</div>
 {% endautoescape %}

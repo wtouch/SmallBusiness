@@ -1,0 +1,22 @@
+{% autoescape false %}
+<div class="row prod">
+	<h2 class="text-center">{{title}}</h2>
+	{% for key, x in products %}
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+					<img src="{{x.product_image.0.file_relative_path}}" class="img-responsive" alt="{{key}}"/>
+				
+				<div class="caption">
+					<h4 class="text-center">{{ x.product_service_name }}</h4>
+					<p>
+					{{x.description|length > 150 ?x.description|slice(start, 150)~ '...' : x.description}}
+					</p>
+				</div>
+				<div class="read">
+					<a href="product/{{x.id}}" class="btn btn-info">Read More..</a>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</div>
+{% endautoescape %}
