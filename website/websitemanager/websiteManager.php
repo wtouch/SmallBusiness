@@ -73,12 +73,16 @@ class websiteManager{
 					$this->modules = $value["modules"];
 					
 				}
-				//$this->seo = $value["seo"];
+				if(isset($value["seo"])){
+					$this->seo = $value["seo"];
+				}
 				
 			}else if(strlen($_SERVER['REQUEST_URI']) >= 2 && strpos($_SERVER['REQUEST_URI'], $value["url"]) !== false){
 				if(isset($value["modules"])){
 					$this->modules = $value["modules"];
-					//$this->seo = $value["seo"];
+					if(isset($value["seo"])){
+						$this->seo = $value["seo"];
+					}
 				}
 			}
 		}

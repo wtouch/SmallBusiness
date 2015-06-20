@@ -5,13 +5,13 @@
 			<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" novalidate>
 				<div class="form-group">
 					<div class="col-sm-12">
-						<input type="hidden" class="form-control" id="user_id" ng-init="enquiry.user_id={{data.user_id}}" ng-model="enquiry.user_id" name="user_id">
+						<input type="hidden" class="form-control" id="user_id" ng-init="enquiry.user_id={{enquiry.user_id}}" ng-model="enquiry.user_id" name="user_id">
 						
 						<input type="hidden" class="form-control" id="date" ng-model="enquiry.date" name="date">
 						
-						<input type="hidden" class="form-control" id="to_email.to" name="to_email.to" ng-model="enquiry.to_email.to" ng-init="enquiry.to_email.to='{{data.owner_email}}'">
+						<input type="hidden" class="form-control" id="to_email.to" name="to_email.to" ng-model="enquiry.to_email.to" ng-init="enquiry.to_email.to='{{enquiry.owner_email}}'">
 						
-						<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc='vilas@wtouch.in'">
+						<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc = 'admin@apnasite.in'">
 				
 						<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject">
 						
