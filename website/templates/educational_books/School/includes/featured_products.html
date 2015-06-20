@@ -1,21 +1,28 @@
 {% autoescape false %}
-{% if featured_products | length >=4 %}
-	{% set break = 0 %}{% set i = 0 %}
-	{% for x in featured_products if break == 0 %}
-		<div class="col-sm-3">
-			<div class="featureprod">
-				<img class="img-responsive" src="{{x.product_image.0.file_relative_path}}" />
-				<!-- <h3>{{x.product_service_name}}</h3>
-				<p>{{ x.description|length > 50 ?x.description|slice(start, 50)~ '...' : x.description }}
-				<div class="read">
-					<a class="btn btn-info" href="product/{{x.id}}">View Details</a>
-				</div> -->
-			</div>
+	{% if featured_products | length >= 2 %}
+	<div class="contentModule">
+		<h3 class="subhead">Featured Products</h3>
+		<div class="sections clearfix">
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_products if break == 0 %}
+				{% if x.type == 'product' %}
+				<div class="col-sm-6 col-md-2 service">
+					<a href="#">
+						<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" alt="...">
+					</a>
+				</div>
+				<div class="col-sm-6 col-md-4 service">
+					<h4>{{x.product_service_name}}</h4>
+					{{ x.description|length > 75 ?x.description|slice(start, 75) : x.description }}<br><br>
+					<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
+				</div>				
+				{% set i = (i + 1) %}
+				{% if i == 4 %}
+					{% set break = 1 %}
+				{% endif %}
+				{% endif %}
+			{% endfor %}
 		</div>
-		{% set i = (i + 1) %}
-		{% if i == 4 %}
-			{% set break = 1 %}
-		{% endif %}
-	{% endfor %}
-{% endif %}
+	</div>
+	{% endif %}
 {% endautoescape %}
