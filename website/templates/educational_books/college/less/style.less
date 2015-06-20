@@ -315,15 +315,17 @@
 
 	.btn-info{
 		border-radius : 5px;
-		transition: transform 1s ease-in;
-		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info, &[disabled]{
+		&, &:focus, &:active, &[disabled]{
 			background-color : @color;
 			border : none;
 			color :@colorblack;
 			font-weight: bold;
+			border : 2px solid @color;
 		}
 		&:hover{
-			transform:rotateX(360deg);
+			background-color : @darkbackcolor;
+			transition: all 0.3s ease;
+			border : 2px solid @color;
 		}
 	}
 	.form-control{
@@ -408,14 +410,14 @@
 	//contactus page css
 	.contact{
 		img{
-			max-height: 110px;
+			max-height: 125px;
 		}
 		h4{
 			margin-top : 0px;
 		}
 	}
 	#googleMap{
-		height:425px;
+		height:395px;
 	}
 	
 	//gallery
@@ -426,14 +428,19 @@
 	}
 	
 	//testimonials
-	.mytesti{
+	.testimonial{
 		blockquote{
 			font-size : inherit;
-			border-left: 3px solid @lightbackcolor;
+			border-left: none;
 			img{
 				max-height : 70px;
 				display : inline-block;
 				margin-right : 10px;
+			}
+			.quote{
+				height: 15px;
+				margin-top: 10px;
+				padding-left: 5px;
 			}
 			a{
 				color : @color;

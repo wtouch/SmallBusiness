@@ -62,9 +62,9 @@
 				<div class="row">
 				{% for key, value in project.floor_plan %}
 					<div class="col-sm-12 col-md-4">
-						<h4 class="highlight text-center">{{value.title}}</h4>
 						<div class="thumbnail">
-							<img src="{{value.image}}" class="img-responsive center-block" alt="...">
+							<h4 class="highlight text-center">{{value.title}}</h4>
+							<img src="{{value.image}}" class="img-responsive center-block" alt="{{value.title}}">
 						</div>
 					</div>
 				{% endfor %}
@@ -78,7 +78,7 @@
 			{% for key, value in project.layout_map %}
 				<h4 class="highlight text-center">{{value.title}}</h4>
 				<div class="thumbnail">
-					<img src="{{value.image}}" class="img-responsive" alt="...">
+					<img src="{{value.image}}" class="img-responsive" alt="{{project.title}}">
 				</div>
 			{% endfor %}
 		</div>
@@ -89,7 +89,7 @@
 			{% for key, value in project.location_map %}
 				<h4 class="highlight text-center">{{value.title}}</h4>
 				<div class="thumbnail">
-					<img src="{{value.image}}" class="img-responsive" alt="...">
+					<img src="{{value.image}}" class="img-responsive" alt="{{project.title}}">
 				</div>
 			{% endfor %}
 		</div>
@@ -101,8 +101,13 @@
 				<div class="row">
 					{% for key, value in project.project_gallery %}
 					<div class="col-sm-12 col-md-4">
-						<h4 class="text-center">{{value.title}}</h4>
-						<img class="center-block projImgs" src="{{value.image}}" alt="{{value.title}}">
+						<div class="thumbnail">
+							<h4 class="text-center">{{value.title}}</h4>
+							<img class="center-block projImgs" src="{{value.image}}" alt="{{value.title}}">
+							<div class="caption text-center">
+								<span>{{value.description}}</span>
+							</div>
+						</div>
 					</div>
 					{% endfor %}
 				</div>

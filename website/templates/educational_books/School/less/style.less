@@ -1,19 +1,21 @@
 	@color : #bccb3d;
-	@lightcolor : #BBBBBB;
+	@lightcolor : #c7a2a4;
 	@darkcolor : #000;
-	@back : #272600;
+	@back :#560604;
 	@darkbackcolor : #171600;
 	@lightbackcolor :#2F3826; 
 	@colorblack : #000;
 	@colorwhite	: #fff;
+	@contentback:#F9F9F9;
 	@import "property.less";
 	@import "project.less";
 	@import "product.less";
 	body{
-		background-image: url('../img/back.jpg');
-		//background-color : 
-		background-repeat  : repeat;
-		color : @lightcolor;
+		header{
+			background-color:#281B19;
+		}
+		background-color : #F1F1F1;
+		color : @colorblack;
 		position : relative;
 	}
 	.sociallinks{
@@ -35,8 +37,9 @@
 	.logo {
 		height: 80px;
 		margin-top: 25px;
-		margin-left: 15px;
+		margin-left: 500px;
 		max-height: 100px;
+		margin-bottom:20px;
 	}
 	.contactinfo{
 		color:@color;
@@ -59,54 +62,29 @@
 		.navbar-nav{
 			> li{
 				position : relative;
-				margin-right: 10px;
-				padding-left: 15px;
+				margin-top:0px;
+				margin-bottom:0px;
 				&:first-child{
 					padding-left: 0;
 				}
 				> a, > a:focus {
-					color :@lightcolor;
+					color: #c7a2a4;
 					font: bold 16px/1em Arial, Helvetica, sans-serif;
 					position: relative;
-					padding : 25px 15px 15px 20px;
+					padding : 15px;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					background-color : @color;
-					color : @colorblack;
-					border-bottom-left-radius : 8px;
-					border-bottom-right-radius : 8px;
-					top: -10px;
-					padding-top: 34px;
-					height: 65px;
+					background-color : #a90d16;
+					color :#ff8087;
+					height: 50px;
 				}
-				&.active > a::after, &.active:hover > a::after, &.active > a:focus::after, &:hover > a::after, &:hover > a:focus::after
-				{
-					content: '';
-					position: absolute;
-					right: -8px;
-					top: 0px;
-					border-bottom: 6px solid @lightcolor;
-					border-left: 4px solid @lightcolor;
-					border-right: 4px solid transparent;
-					border-top: 4px solid transparent;
-				}
-				
-				> a::before{
-					content:url('../img/bullet.png');
-					position : absolute;
-					top: 23px;
-					left: 0px;
-				}
-				&:hover a::before, &:first-child a::before, &.active > a::before{
-					display : none;
-				}
-				
 				> ul {
 					display: none;
 					position: absolute;
 					width: 245px;
 					z-index: 999;
-					background-color: @color;
+					background-color: @back;
+					color: #ff8087;
 					padding: 15px;
 					list-style: none;
 					text-align: left;
@@ -115,13 +93,20 @@
 					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					>li{
+						
+					
 						border-bottom: 1px solid @lightbackcolor;
 						padding: 7px;
 						>a{
-							color:@colorblack;
+							color: @lightcolor;
 							&:hover{
-								 text-decoration: underline;
+								text-decoration: underline;
+								
 							}
+						}
+						&:hover{
+							background-color : #a90d16;
+							color :#ff8087;
 						}
 						> ul{
 							list-style : disc;
@@ -130,6 +115,7 @@
 									color:@colorblack;
 									&:hover{
 										text-decoration: underline;
+										color :#ff8087;
 									}
 								}
 							}
@@ -143,19 +129,18 @@
 		}
 	}
 	.projectnav{
-		border : 5px solid @lightbackcolor;
-		background-color: @darkbackcolor;
+		border : 5px solid #6C070D;
+		background-color: @back;
 		.nav-stacked{
-			background-color: @darkbackcolor;
 			margin: 5px;
-			border: 2px solid @lightbackcolor ;
+		
 			>li{
 				>a, > a:focus{
 					font-weight: bold;
-					color : @lightcolor;
+					color: #c7a2a4;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @color ;
+					background-color: #a90d16 ;
 					color : @colorblack;
 				}
 			}
@@ -185,17 +170,20 @@
 		overflow: hidden;
 	}
 	.content{
-		background-color : @darkbackcolor;
+		background-color :@contentback;
 		border-radius : 7px;
 		margin-top : 15px;
 		padding: 10px 20px 30px;
+		p{
+			color:@colorblack;
+		}
 	}
 	h1,h2,h3{
-		font-family: "Georgia", "Times New Roman", "Times", serif;
+		color :@colorblack; 
+		font: 2.5em/1em 'Alex Brush',cursive;
+		padding-bottom:20px;
 	}
-	h1,h2,h3,h4{
-		color :@color; 
-	}
+	
 	h1,h2{
 		font-size: 2.3em;
 		border-bottom: 1px solid @lightbackcolor;
@@ -209,26 +197,29 @@
 		color : @colorblack;
 		padding: 8px 40px;
 		position : relative;
-		&::after{
-			background: url(../img/sprites_image.png) -37px -24px;
-			content: "";
-			display: inline-block;
-			height: 22px;
-			left: 15px;
-			position: absolute;
-			top: 10px;
-			width: 22px;
-		}
+		
 	}
-	h3{
-		border-bottom: 1px solid @lightbackcolor;
-		padding-bottom: 8px;
+	.contentModule{
+		margin-bottom:20px;
+	}
+	
+	.contentModule h3 {
+		position: absolute;
+		left: 10px;
+		top: -37px;
+		background-color: #682024;
+		color: #eed7bd;
+		font: 16px 'Alex Brush',cursive;
+		padding: 7px 12px;
+		margin-left:30px;
+		
 	}
 	.sections{
-		background-color:@back;
+		background-color :@contentback;
 		border : 1px solid @lightbackcolor;
 		padding: 15px;
 		border-radius: 10px;
+		color:black;
 	}
 	.thumbnail{
 		background : none;
@@ -307,6 +298,7 @@
 		}
 	}
 	.service{
+		background-color :@contentback;
 		margin-bottom: 10px;
 		h4{
 			margin-top : 0px;
@@ -314,21 +306,18 @@
 	}
 
 	.btn-info{
-		border-radius : 5px;
-		transition: transform 1s ease-in;
+		border-radius : 10px;
+		margin-bottom:30px;
 		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info, &[disabled]{
-			background-color : @color;
-			border : none;
-			color :@colorblack;
+			background: transparent;
+			border: none;
+			color: #AD3434;
 			font-weight: bold;
-		}
-		&:hover{
-			transform:rotateX(360deg);
 		}
 	}
 	.form-control{
-		color: @lightcolor;
-		background-color: @darkbackcolor;
+		color: @colorblack;
+		background:transparent;
 		border: 1px solid @lightbackcolor;
 	}
 	.sideimg{
@@ -399,7 +388,7 @@
 	}
 	//Common effect
 	.panel{
-		background-color : @back;
+		background: transparent;
 	}
 	.panel-default {
 		border-color: @lightbackcolor;
@@ -408,14 +397,14 @@
 	//contactus page css
 	.contact{
 		img{
-			max-height: 110px;
+			max-height:125px;
 		}
 		h4{
 			margin-top : 0px;
 		}
 	}
 	#googleMap{
-		height:425px;
+		height:395px;
 	}
 	
 	//gallery
@@ -426,14 +415,19 @@
 	}
 	
 	//testimonials
-	.mytesti{
+	.testimonial{
 		blockquote{
 			font-size : inherit;
-			border-left: 3px solid @lightbackcolor;
+			border-left: none;
 			img{
 				max-height : 70px;
 				display : inline-block;
 				margin-right : 10px;
+			}
+			.quote{
+				height: 15px;
+				margin-top: 10px;
+				padding-left: 5px;
 			}
 			a{
 				color : @color;
@@ -488,9 +482,7 @@
 		.contactinfo{
 			display : block;
 		}
-		.navbar{
-			min-height: 70px;
-		}
+		
 		.projectnav{
 			height: 322px;
 		}
@@ -514,9 +506,7 @@
 		.contactinfo{
 			display : block;
 		}
-		.navbar{
-			min-height: 70px;
-		}
+		
 		.projectnav{
 			height: 322px;
 		}
