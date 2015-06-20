@@ -16,6 +16,10 @@
 									 <td>{{property.project_name}}</td>	
 								</tr>
 								<tr>
+									<td><b>Property Category :</b> </td>
+									<td>{{property.category}}</td>					
+								</tr>
+								<tr>
 									<td><b>Property Type :</b> </td>
 									<td>{{property.type}}</td>					
 								</tr>
@@ -73,13 +77,22 @@
 				<li><b>Property Age :</b> {{property.optional_property_details.property_age}}</li>
 				<li><b>Furnishing :</b> {{property.optional_property_details.furnished}}</li>
 				<li><b>Ownership :</b> {{property.optional_property_details.ownership}}</li>
-				<li><b>Floor Number :</b> {{property.optional_property_details.property_floor}}</li>
+				<li><b>Total Number of Floors :</b> {{property.optional_property_details.property_floor}}</li>
 				<li><b>Facing :</b> {{property.optional_property_details.facing}}</li>
 				<li><b>Parking :</b> {{property.optional_property_details.parking}}</li>
 				<li><b>Transaction Type :</b> {{property.optional_property_details.transType}}</li>
 				<li><b>Bedrooms :</b> {{property.property_info.bedrooms}}</li>
 				<li><b>Bathrooms :</b> {{property.property_info.bathrooms}}</li>
 				<!-- <li><b>Reserved Parking :</b> 1</li> -->
+			</ul>
+		</div>
+		<div class="col-sm-12 col-md-12 propDetails">
+			<h3>Nearby Landmark</h3>
+			<ul class="list-inline">
+				<li><span class="amenity hospital"></span>Hospital : {{property.landmarks.hospitals}} Km</li>
+				<li><span class="amenity airport"></span>Airport : {{property.landmarks.airport}} Km</li>
+				<li><span class="amenity railway"></span>Railway : {{property.landmarks.railway}} Km</li>
+				<li><span class="amenity school"></span>School : {{property.landmarks.school}} Km</li>
 			</ul>
 		</div>
 		<div class="col-sm-12 col-md-12 propDetails">

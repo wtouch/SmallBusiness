@@ -91,7 +91,8 @@ class websiteManager{
 		try{
 			// main website table
 			$table = 'website';
-			$where['domain_name'] = $this->domain;
+			
+			$where['domain_name'] = str_replace("www.", "",$this->domain);
 			$website = $this->db->setTable($table);
 			$this->db->setWhere($where, $website);
 			$this->db->setColumns($website, array("status" => "website_status", "expired" => "expired", "domain_name" => "domain_name", "config"=>"website_config", "business_id" => "business_id", "user_id" => "user_id"));
@@ -208,7 +209,8 @@ class websiteManager{
 				$response["google_map"] = $businessData["data"]['website_config']['google_map'];
 			}
 			if($customPage != null){
-				$response["data"]["data"] = $businessData["data"]["custom_details"][str_replace("-", " ", $customPage)]["description"];
+				print_r($customPage);
+				$response["data"] = array('data' => $businessData["data"]["custom_details"][str_replace("-", " ", $customPage)]["description"]);
 				$response["uri"] = '/cp/'.$customPage;
 				$response["title"] = str_replace("-", " ", $customPage);
 			}
