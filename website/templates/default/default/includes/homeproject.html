@@ -1,5 +1,5 @@
 {% if home_project %}
-<div class="row">
+<div class="row homeproject">
 	<div class="col-sm-12 col-md-3">
 		<div class="projectnav">
 			<ul class="nav nav-stacked">
@@ -29,10 +29,10 @@
 	</div>
 	
 	<div class="col-sm-12 col-md-6">
-		{% include templatePath ~ '/includes/carousal.html' with {sliderData : home_project.project_images } only %}
+		{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : home_project.project_images } only %}
 	</div>
 	<div class="col-sm-12 col-md-3 text-center">
-		<div class="projectnav">
+		<div class="projsnap">
 		{% if home_project.builder.builder_logo %}
 			<img src="{{home_project.builder.builder_logo}}" class="img-responsive center-block"/>
 		{% endif %}

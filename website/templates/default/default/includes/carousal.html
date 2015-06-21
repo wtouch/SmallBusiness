@@ -11,7 +11,7 @@
   <div class="carousel-inner" role="listbox">
 	{% for key, value in sliderData %}
 		<div class="item {{ (key == 0) ? 'active' }}">
-		  <img class="img-responsive" src="{{value.image}}" alt="{{value.title}}">
+		  <img class="img-responsive" src="{{value.image ? value.image : value is iterable ? value.file_relative_path : value}}" alt="{{value.title}}">
 		  {% if value.title %}
 		  <div class="carousel-caption">
 			<h2>{{value.title}}</h2>

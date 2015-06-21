@@ -19,86 +19,90 @@
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
 	</head>
-<body>
-	<header>
-	<div class="container">
-		<div class="head">
-			<div class="text-center"><img src="img/logo.jpg"></div>
-				<nav class="navbar navbar-default">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header">
-					  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					  </button>
-					</div>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					  <ul class="nav navbar-nav">
-						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-					  </ul>
-					</div><!-- /.navbar-collapse -->
-				</nav>
-			</div>
+	<body>
+		<header>
+			<div class="container">
+				<div class="head">
+					<div class="text-center">
+					<img class="logo" src="{{data.business_logo.file_relative_path}}"></div>
+					<nav class="navbar navbar-default">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+								{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+							</ul>
+						</div><!-- /.navbar-collapse -->
+					</nav>
+				</div>
 				{%if modules.headerModule.carousal %}
-					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 				{%endif%}
-	</div>
-	</header>
-	<main>
-	<div class="main-content">
-		<div class="container">
-			<div class="back">
-				<div class="row">
-					<div class="col-sm-12">
-					{%if modules.contentModule.featured_services %}
-						{% include contentPath %}
-					{%endif%}
-					{%if modules.contentModule.featured_services %}
-						{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-					{%endif%}
-					
-					{%if modules.contentModule.featured_products %}
-						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-					{%endif%}
-					
+				{%if modules.headerModule.homeproject %}
+				{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
+			</div>
+		</header>
+		<main>
+			<div class="main-content">
+				<div class="container">
+					<div class="back">
+						<div class="row">
+							<div class="col-sm-12">
+								{%if modules.contentModule.featured_services %}
+								{% include contentPath %}
+								{%endif%}
+								{%if modules.contentModule.featured_services %}
+								{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+								{%endif%}
+								
+								{%if modules.contentModule.featured_products %}
+								{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+								{%endif%}
+								
+							</div>
+							<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-9' : 'col-sm-12' }}">
+								{%if not modules.contentModule.featured_services %}
+								{% include contentPath %}
+								{%endif%}
+								{%if modules.contentModule.featured_properties %}
+								{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+								{%endif%}
+								
+								{%if modules.contentModule.featured_projects %}
+								{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
+								{%endif%}
+							</div>
+							{% if modules.sidebarModule >= 1 %}
+							<div class="col-sm-3">
+								{%if modules.sidebarModule.searchProp %}
+								{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+								{%endif%}
+								{%if modules.sidebarModule.enquiry %}
+								{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
+								{%endif%}
+								{%if modules.sidebarModule.sidemenu %}
+								{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+								{%endif%}
+								{%if modules.sidebarModule.contact %}
+								{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+								{%endif%}
+							</div>
+							{% endif %}
+						</div>
 					</div>
-					<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-8' : 'col-sm-12' }}">
-						{%if not modules.contentModule.featured_services %}
-							{% include contentPath %}
-						{%endif%}
-						{%if modules.contentModule.featured_properties %}
-							{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
-						{%endif%}
-						
-						{%if modules.contentModule.featured_projects %}
-							{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-						{%endif%}
-					</div>
-					{% if modules.sidebarModule >= 1 %}
-					<div class="col-sm-4">
-						{%if modules.sidebarModule.searchProp %}
-							{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
-						{%endif%}
-						{%if modules.sidebarModule.enquiry %}
-							{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
-						{%endif%}
-						{%if modules.sidebarModule.sidemenu %}
-							{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
-						{%endif%}
-						{%if modules.sidebarModule.contact %}
-							{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-						{%endif%}
-					</div>
-					{% endif %}
 				</div>
 			</div>
-		</div>
-		</div>
-	</main>
-	{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-</body>
+		</main>
+		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+	</body>
 </html>
 {% endspaceless %}
