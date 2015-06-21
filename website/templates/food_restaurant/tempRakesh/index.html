@@ -1,0 +1,95 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}">
+	</head>
+<body>
+	<header>
+	<div class="container">
+		<div class="logo">
+			<img src="{{data.business_logo.file_relative_path}}"/>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 nava">
+				<div class="sidenav">
+					<ul class="nav nav-pills nav-stacked">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
+				</div>
+			</div>
+			<div class="col-sm-9 caro">
+				{%if modules.headerModule.carousal %}
+				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
+				{%if modules.headerModule.homeproject %}
+				{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
+			</div>
+		</div>
+	</div>
+	</header>
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-9">
+					<div class="description">
+						{% include contentPath %}
+					</div>
+					
+					{%if modules.contentModule.featured_products %}
+						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+					{%endif%}
+					{%if modules.contentModule.featured_properties %}
+						{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+					{%endif%}
+					
+					{%if modules.contentModule.featured_projects %}
+						{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
+					{%endif%}
+					{%if modules.contentModule.featured_services %}
+						{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+					{%endif%}
+					
+				</div>
+				{% if modules.sidebarModule >= 1 %}
+				<div class="col-sm-3">
+					{%if modules.sidebarModule.searchProp %}
+						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.enquiry %}
+						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.sidemenu %}
+						{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.contact %}
+						{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+					{%endif%}
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</main>
+	
+	</body>
+	{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+</html>
+{% endspaceless %}
