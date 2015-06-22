@@ -1,7 +1,5 @@
 	@bgcolor : #2d4065;
 	@color :   #9cf;
-	
-	@color : #bccb3d;
 	@lightcolor : #BBBBBB;
 	@darkcolor : #000;
 	@back : #272600;
@@ -12,6 +10,7 @@
 	@import "property.less";
 	@import "project.less";
 	@import "product.less";
+	@import "general.less";
 body{
 	header{
 		.nava{padding-right:0px;}
@@ -28,6 +27,7 @@ body{
 			.nav{
 				>li{
 					border-bottom:1px dotted #5573ab;
+					position : relative;
 					>a{
 						color:#fff;
 						&:hover,&:focus,{
@@ -35,7 +35,7 @@ body{
 							background-color: transparent;
 							color:@color;
 						}
-					}
+					} 
 					&.active a,span{
 						background-color: transparent;
 						color:@color;
@@ -43,6 +43,46 @@ body{
 					.navigation{
 						padding:10px;
 						font-size:20px;
+					}
+					> ul {
+						display: none;
+						position :absolute;
+						background-image: -webkit-linear-gradient(left,@bgcolor, #3e588c 93%, #2e4167);
+						padding:15px;
+						left: -15px;
+						width: 278px;
+						top: 40px;
+						z-index: 999;
+						>li{
+							border-bottom:1px dotted #5573ab;
+							>a{
+								color:#fff;
+								&:hover{
+									color:@color;
+									text-decoration: underline;
+								}
+							}
+							> ul{
+								display: none;
+								list-style :none;
+								>li{
+								border-bottom:1px dotted #5573ab;
+									>a{
+										color:#fff;
+										&:hover{
+											color:@color;
+											text-decoration: underline;
+										}
+									}
+								}
+							}
+							&:hover > ul {
+								display: block;
+							}
+						}
+					}
+					&:hover > ul {
+						display: block;
 					}
 				}
 			}
@@ -97,12 +137,69 @@ body{
 			
 		}
 	}
+	h2{
+		color:#039;
+		font-size:20px;
+		border-bottom:1px solid #ccc;
+	}
+	.btn-info{
+		border-radius : 5px;
+		&, &:focus, &:active, &[disabled]{
+			background:none;
+			color:#337ab7;
+			border : none;
+			border-radius : 0px;
+			font-weight: bold;
+		}
+		&:hover{
+			color : #23527c;
+			background:none;
+		}
+	}
+	//hr
+	hr{
+		border-style : dashed;
+		border-color: #333;
+		margin :5px 0px;
+	}
+	h4{
+		color :#337ab7;
+	}
+	.btn-link{
+		color : #337ab7;
+		font-size: 18px;
+		padding-left : 0px;
+		&:hover{
+			color : #23527c;
+		}
+	}
+	.send{
+		margin-right : 8px;
+	}
+	.sidebarModule{
+		.btn-info{
+			border-radius : 5px;
+			&, &:focus, &:active, &[disabled]{
+				background-color:#337ab7;
+				color:white;
+				border-radius : 0px;
+				font-weight: bold;
+			}
+			&:hover{
+				background-color:#23527c;
+			}
+		}
+		
+	}
 	footer{
 		padding : 20px;
 		background-image: linear-gradient(#3e588c, #2d4065);
 		color : @colorwhite;
 		p {
 			margin : 0;
+		}
+		a, a:hover{
+			color : @colorwhite;
 		}
 	}
 }
