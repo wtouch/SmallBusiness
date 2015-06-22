@@ -1,0 +1,111 @@
+{% spaceless %}
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}">
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<div class="col-sm-12 col-md-6">
+					<img class="logo" src="{{data.business_logo.file_relative_path}}">
+				</div>
+				<div class="col-sm-12 col-md-6">
+					<div class="cnctinfo">
+						<p class="text-right"><b>Mobile :</b> +91-7779045873,+91-9173320866</p>
+						<p class="text-right"><b>E-mail :</b>  <a href="#">icanconsultants@outlook.com</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav class="navbar navbar-default">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div>
+		</nav>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					{%if modules.headerModule.carousal %}
+					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+					{%if modules.headerModule.homeproject %}
+					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+				</div>
+			</div>
+			<div class="row">
+				{% if modules.sidebarModule >= 1 %}
+				<div class="col-sm-12 col-md-3" >
+					{%if modules.sidebarModule.enquiry %}
+						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.sidemenu %}
+					{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.contact %}
+					{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+					{%endif%}
+				</div>
+				{% endif %}
+				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-6 ' : 'col-sm-12 ' }}">
+					{% include contentPath %}
+					{%if modules.contentModule.featured_properties %}
+						{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+					{%endif%}
+				</div>
+				
+				{%if modules.sidebarModule.searchProp %}
+				<div class="col-sm-12 col-md-3">
+					{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+				</div>
+				{%endif%}
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+				{%if modules.contentModule.featured_services %}
+					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+					{%endif%}
+					
+					{%if modules.contentModule.featured_products %}
+					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+				{%endif%}
+				</div>
+			</div>
+			
+		</div>
+		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+	</body>
+</html>
+{% endspaceless %}

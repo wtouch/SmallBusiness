@@ -1,116 +1,200 @@
-{% spaceless %}
+ {% spaceless %}
 <!DOCTYPE html>
+<!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
-		<link rel="stylesheet" href="{{ path }}css/fluid_dg.css">
-		<link rel="stylesheet" href="{{ path }}css/jquery.bxslider.css">
-		<link rel="stylesheet" href="{{ path }}css/style.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
 		<script src="{{ path }}js/jquery.min.js"></script>
 		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
-		<script src="{{ path }}js/fluid_dg.min.js"></script>
-		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
-		<script src="{{ path }}js/jquery.DG_Slider.min.js"></script> 
 		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		{%if data.template_params%}
-			<style type="text/css">
-				body, .projectnav .nav-stacked >li >a{
-					color: {{data.template_params.light_color}};	
-				}
-				.contactinfo{
-					color: {{data.template_params.color}};	
-				}
-				.navbar-default{
-					background-image: linear-gradient({{data.template_params.background_color_dark}},{{data.template_params.background_color}});
-				}
-				.navbar-default, .projectnav, .nav-stacked{
-					border-color : {{data.template_params.background_color_light}};
-				}
-				.projectnav, .nav-stacked{
-					background-color : {{data.template_params.background_color_dark}};
-				}
-			</style>
-			{%endif%} 
 	</head>
 	<body>
 		<header>
-			{% include templatePath ~ '/includes/header.html' ignore missing %}
-			
-			{%if modules.headerModule.homeproject %}
-				<div class="container">
-					{% include templatePath ~ '/includes/homeproject.html' ignore missing %}
-				</div>
-			{% endif %}
-		</header>
-		<div class="container">
-			<div class="content clearfix">
-				<div class="row">
-					<div class="{{ (modules.sidebarModule >= 1) ? 'col-sm-12 col-md-12' : 'col-sm-12 col-md-12'}}"><!-- Conditional width if sidebarModule >=1  -->
-						{% include contentPath %}
-						</div>
-				</div>
-				<div class="row">
-					<div class="{{ (modules.sidebarModule >= 1) ? 'col-sm-12 col-md-12' : 'col-sm-12 col-md-12'}}">
-						{% if (modules.contentModule | length) >= 1 %}
-							{% if modules.contentModule.featured_services %}
-								{% include templatePath ~ '/includes/featured_services.html' %}
-							{% endif %}
-							
-							{% if modules.contentModule.featured_products %}
-								{% include templatePath ~ '/includes/featured_products.html' %}
-							{% endif %}
-						{% endif %}
-					</div>
-				</div>
-				<div class="row">
-					<div class="{{ (modules.sidebarModule >= 1) ? 'col-sm-12 col-md-8' : 'col-sm-12 col-md-8'}}">		
-						{% if (modules.contentModule | length) >= 1 %}
-							
-							{% if modules.contentModule.featured_projects %}
-								{% include templatePath ~ '/includes/featured_projects.html' %}
-							{% endif %}
-							
-							{% if modules.contentModule.featured_properties %}
-								{% include templatePath ~ '/includes/featured_properties.html' %}
-							{% endif %}
-							
-						{% endif %}	
-					</div>
-				
-					<!-- SidebarModule >=1 -->
-					{% if modules.sidebarModule >= 1 %}
-					<div class="col-sm-4 col-md-4"><!-- conditional if sidebarModule >= 1 -->
-						<!-- all sidebarModules here -->
-						{% if modules.sidebarModule.searchProp %}
-							{% include templatePath ~ '/includes/search_property.html' %}
-						{% endif %}
-						
-						{% if modules.sidebarModule.enquiry %}
-							{% include templatePath ~ '/includes/enquiry.html' with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
-						{% endif %}
-						
-						{% if modules.sidebarModule.sidemenu %}
-							{% include templatePath ~ '/includes/sidemenu.html' %}
-						{% endif %}
-						
-						{% if modules.sidebarModule.contact %}
-							{% include templatePath ~ '/includes/contact.html' %}
-						{% endif %}
-						
-					</div>
-					{% endif %}
+			<div class="container">
+				<div class="col-sm-12 col-md-6">
+					<img class="logo" src="{{data.business_logo.file_relative_path}}">
 				</div>
 			</div>
+		</header>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div>
+		</nav>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					{%if modules.headerModule.carousal %}
+					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+					{%if modules.headerModule.homeproject %}
+					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+				</div>
+			</div>
+			<div class="row">
+				{% if modules.sidebarModule >= 1 %}
+				<div class="col-sm-12 col-md-3" >
+					{%if modules.sidebarModule.searchProp %}
+						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.sidemenu %}
+						{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.contact %}
+						{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+					{%endif%}
+				</div>
+				{% endif %}
+				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-12 col-md-9' : 'col-sm-12 col-md-12 ' }}">
+					{% include contentPath %}
+					{%if modules.sidebarModule.enquiry %}
+						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
+					{%endif%}
+					
+				</div>
+				
+			</div>
+			<!-- <div class="row">
+			{%if modules.contentModule.featured_properties %}
+						{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+					{%endif%}
+				
+				{%if modules.sidebarModule.enquiry %}
+						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
+					{%endif%}
+				<div class="col-sm-12 col-md-3">
+					<div class="sidebarsec">
+						<h3 class="subhead"><span class="glyphicon glyphicon-arrow-right"></span>Our Services</h3>
+						<div class="subheadli ">
+							<ul class=" subheadli">
+								<li><span class="glyphicon glyphicon-forward"></span><a href="#">Real Estate Consultant</a></li>
+								<li><span class="glyphicon glyphicon-forward"></span><a href="#">Construction Services</a></li>
+								<li><span class="glyphicon glyphicon-forward"></span><a href="#">Property Valuation Services</a></li>
+								<li><span class="glyphicon glyphicon-forward"></span><a href="#">Architectural Design Services</a></li>
+								<li><span class="glyphicon glyphicon-forward"></span><a href="#">Turnkey Project Consultant</a></li>
+								<li><span class="glyphicon glyphicon-forward"></span><a href="#">Interior Designing Services</a></li>
+								<li><span class="glyphicon glyphicon-forward"></span><a href="#">Vastu Consultant</a></li>
+								<li><span class="glyphicon glyphicon-forward"></span><a href="#">Liaison Services</a></li>
+							</ul>
+						</div>
+						<h3 class="subhead"><span class="glyphicon glyphicon-arrow-right"></span>Property by city</h3>
+						<div class="subheadli ">
+							<ul class="unstyled subheadli">
+							<li><span class="glyphicon glyphicon-forward"></span><a href="#">Real Estate Consultant</a></li>
+							<li><span class="glyphicon glyphicon-forward"></span><a href="#">Construction Services</a></li>
+							<li><span class="glyphicon glyphicon-forward"></span><a href="#">Property Valuation Services</a></li>
+							<li><span class="glyphicon glyphicon-forward"></span><a href="#">Architectural Design Services</a></li>
+							<li><span class="glyphicon glyphicon-forward"></span><a href="#">Turnkey Project Consultant</a></li>
+							<li><span class="glyphicon glyphicon-forward"></span><a href="#">Interior Designing Services</a></li>
+							<li><span class="glyphicon glyphicon-forward"></span><a href="#">Vastu Consultant</a></li>
+							<li><span class="glyphicon glyphicon-forward"></span><a href="#">Liaison Services</a></li>
+							</ul>
+						</div>
+						<img src="img/buy_property.png" class=" propimg"/>
+					</div>
+				</div>
+				<div class="col-sm-12 col-md-9">
+					<h1 class="h1">Vastu Consultant</h1>
+					<div class="media content">
+						<div class="media-left">
+							<p >Friends Associates is a trusted Vastu Consultant, based in Delhi/NCR. Our objective is to render effective Vastu Consultancy to the clients for different properties including residential as well as commercial. We have employed highly Professional Vastu Consultant who understand the requirements of the clients and serve them with fruitful Vastu tips. Moreover, our unparalleled Vastu Consultancy is well-acclaimed among the clients for its authenticity and effectiveness. 
+							</p>
+						</div>
+						<div class="media-body">
+							<a href="#">
+								<img class="media-object" src="img/vastu-consultant-9030.jpg" >
+							</a>
+						</div>
+					</div>
+					<h2 >Send Enquiry</h2>
+					<div class="formsec">
+						<form name="enquiryForm" action="index.php" class="form-horizontal" method="get" target="_blank">
+							<div class="form-group">
+								<label for="name" class="col-sm-2 control-label">* Your Name</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="name" placeholder="Name" name="name">
+								</div>
+								<label for="companyname" class="col-sm-2 control-label"> Company Name</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="companyname" placeholder="Company Name" name="companyname">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="address" class="col-sm-2 control-label"> Address</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="address" placeholder="Address" name="address">
+								</div>
+								<label for="email" class="col-sm-2 control-label">* Email</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="email" placeholder="Email" name="email">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="phone" class="col-sm-2 control-label">* Phone/Mobile</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="phone" placeholder="Phone" name="phone">
+								</div>
+								<label for="country" class="col-sm-2 control-label">* Country</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="country" placeholder="Country" name="country">
+								</div>
+							</div>
+							<div class="form-group ">
+								<label for="description" class="col-sm-2 control-label">* Description</label>
+								<div class="col-sm-10">
+									<textarea class="form-control" id="description" placeholder="Description" name="description" rows="3" cols="3"></textarea>
+								</div>
+							</div>
+						</form>
+					</div> 
+					<button type="submit" class="btn btn-default col-sm-offset-6 ">Submit</button>
+				</div>
+			</div> -->
 		</div>
-		{% include templatePath ~ '/includes/footer.html' ignore missing %}
+		<footer class="footer">
+			<div class="container">
+				<p class="text-center col-md-6">&copy Copyright 2010 - 2010. SANJAY ARYA'S FRIENDS ASSOCIATES (Regd)
+				Premium Member of apnasite.in</p>
+				<div class="footlink">
+					<ul>
+						<li><a href="index.html">HOME</a></li>
+						<li><a href="about.html">ABOUT US</a></li>
+						<li><a href="about.html">PROPERTY CLASSIFIEDS</a></li>
+						<li><a href="propertylist.html">OUR PROJECTS</a></li>
+						<li><a href="services.html">SERVICES</a></li>
+						<li><a href="products.html">PRODUCTS</a></li> 
+						<li><a href="contacts.html">CONTACT US</a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
 	</body>
-</html>
+</html> 
 {% endspaceless %}
