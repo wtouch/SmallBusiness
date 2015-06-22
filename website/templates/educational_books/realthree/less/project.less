@@ -1,16 +1,12 @@
 //project
-@back:#F9F5F5;
-@color : #ffa366;
 @lightcolor : #BBBBBB;
 @lightbackcolor :#2F3826; 
-@colorblack : #000;
-@darkbackcolor : #171600;
-@colorwhite	: #fff;
+@back:#24293D;
 	.breadcrumb{
 		background : none;
 		li{
 			a{
-				color : @colorblack;
+				color : @lightcolor;
 				text-decoration : underline;
 				&:hover{
 					color : @lightcolor;
@@ -23,7 +19,7 @@
 		}
 	}
 	.highlight{
-		color :@colorblack; 
+		color :#fff; 
 	}
 	.project{
 		ul.nav.navbar-nav {
@@ -41,12 +37,13 @@
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					background-color: @back ;
-					color : @colorblack;
+					color : #fff;
 				}
 			}
 		}
 		.projImg{
 			margin-right: 20px;
+			max-width : 200px;
 		}
 		.projHead{
 			margin-top:40px
@@ -66,52 +63,20 @@
 	}
 	//projectlist
 	.projlist{
-		
 		.thumbnail{
 			.caption{
-				color : @colorblack;
+				color : @lightcolor;
 				a{
-					color : @color;
+					color : #fff;
 					text-decoration : underline;
 					&:hover{
-						color : @colorblack;
+						color : #fff;
 						text-decoration : none;
 					}
 				}
 			}
 		}
 	}
-	
-	.homeproject{
-		.projsnap, .projectnav{
-			background-color:@contentback;
-			border-radius : 4px;
-			padding:5px;
-			min-height:312px;	
-		}
-		
-		#carousel {
-			background-color: #ccc;
-			transform: scale(1.04);
-			border-top-left-radius: 15px;
-			border-bottom-right-radius: 15px;
-			.carousel-inner {
-				transform: rotate(-3deg);
-				border: 2px solid #F9F5F5;
-				border-top-left-radius: 15px;
-				border-bottom-right-radius: 15px;
-				.item>img{
-					width :100%;
-					min-height : 310px;
-				}
-			}
-			a.left.carousel-control, a.right.carousel-control {
-				background: none;
-			}
-		}
-	}
-	
-	
 	@media (min-width: 320px){
 		.projImg{
 			float :none;

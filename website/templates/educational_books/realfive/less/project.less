@@ -1,16 +1,9 @@
 //project
-@back:#F9F5F5;
-@color : #ffa366;
-@lightcolor : #BBBBBB;
-@lightbackcolor :#2F3826; 
-@colorblack : #000;
-@darkbackcolor : #171600;
-@colorwhite	: #fff;
 	.breadcrumb{
 		background : none;
 		li{
 			a{
-				color : @colorblack;
+				color : @lightcolor;
 				text-decoration : underline;
 				&:hover{
 					color : @lightcolor;
@@ -23,9 +16,13 @@
 		}
 	}
 	.highlight{
-		color :@colorblack; 
+		color :@color; 
 	}
 	.project{
+		.navbar{
+			height : 20px;
+		}
+		
 		ul.nav.navbar-nav {
 			background-color: @back;
 			border-bottom: 4px solid @lightbackcolor;
@@ -34,13 +31,12 @@
 				border-right : 1px solid @lightbackcolor;
 				height : 38px;
 				>a, > a:focus{
-					padding-top : 9px;
-					padding-bottom : 9px;
+					padding : 9px 14px;
 					color : @lightcolor;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @back ;
+					background-color: @color ;
 					color : @colorblack;
 				}
 			}
@@ -48,70 +44,36 @@
 		.projImg{
 			margin-right: 20px;
 		}
-		.projHead{
-			margin-top:40px
-		}
 		.projImgs{
 			margin-bottom: 20px;
 			max-height : 175px;
 		}
 	}
-	.projectgallery,.projlist{
+	.projectgallery, .projlist{
 		background-color : @back;
 		border : 1px solid @lightbackcolor;
 		padding: 20px 20px 0px;
 		.thumbnail{
-			background-color : @back;
+			background-color : @darkbackcolor;
 		}
 	}
 	//projectlist
 	.projlist{
-		
 		.thumbnail{
+			padding-top : 15px;
 			.caption{
-				color : @colorblack;
+				color : @lightcolor;
 				a{
 					color : @color;
 					text-decoration : underline;
 					&:hover{
-						color : @colorblack;
+						color : @color;
 						text-decoration : none;
 					}
 				}
 			}
 		}
 	}
-	
-	.homeproject{
-		.projsnap, .projectnav{
-			background-color:@contentback;
-			border-radius : 4px;
-			padding:5px;
-			min-height:312px;	
-		}
-		
-		#carousel {
-			background-color: #ccc;
-			transform: scale(1.04);
-			border-top-left-radius: 15px;
-			border-bottom-right-radius: 15px;
-			.carousel-inner {
-				transform: rotate(-3deg);
-				border: 2px solid #F9F5F5;
-				border-top-left-radius: 15px;
-				border-bottom-right-radius: 15px;
-				.item>img{
-					width :100%;
-					min-height : 310px;
-				}
-			}
-			a.left.carousel-control, a.right.carousel-control {
-				background: none;
-			}
-		}
-	}
-	
-	
 	@media (min-width: 320px){
 		.projImg{
 			float :none;
