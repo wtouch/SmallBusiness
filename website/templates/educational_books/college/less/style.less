@@ -1,4 +1,4 @@
-@color : #a90d16;
+@color : #c7a2a4;
 @lightcolor : #ff8087;
 @darkcolor : #a90d16;
 @back : #682024;
@@ -9,6 +9,7 @@
 @import "property.less";
 @import "project.less";
 @import "product.less";
+@import "general.less";
 
 header{
 	background-color:@darkbackcolor;
@@ -172,6 +173,57 @@ main{
 		}
 	}
 }
+.btn-info{
+		border-radius : 5px;
+		&, &:focus, &:active, &[disabled]{
+			background-color:#3F181A;
+			color:white;
+			padding:10px 20px;
+			transition:padding 250ms;
+			border : none;
+			border-radius : 0px;
+			font-weight: bold;
+		}
+		&:hover{
+			padding:10px 40px;
+			background-color:#682024;
+			color : #EED7BD;
+		}
+	}
+	//hr
+	hr{
+		border-style : dashed;
+		border-color: #333;
+		margin :5px 0px;
+	}
+	.btn-link{
+		color : #3F181A;
+		font-size: 18px;
+		&:hover{
+			color : #682024;
+		}
+	}
+	.send{
+		margin-right : 8px;
+	}
+	.sidebarModule{
+		.btn-info{
+			border-radius : 5px;
+			&, &:focus, &:active, &[disabled]{
+				background-color:#3F181A;
+				color:white;
+				padding:10px 20px;
+				border : none;
+				border-radius : 0px;
+				font-weight: bold;
+			}
+			&:hover{
+				background-color:#682024;
+				color : #EED7BD;
+			}
+		}
+		
+	}
 footer{
 	background-color:@darkbackcolor;
 	color: #9e8f8d;

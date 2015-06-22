@@ -1,39 +1,34 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
 $(document).ready(function(){
-	$('.bxslider').bxSlider({
-		mode:'horizontal',
-		slideWidth: 250,
-		minSlides:3,
-		maxSlides: 4,
-		slideMargin: 25,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 2,
-		pause:2500,
-		pager:true,
-		pagerType:'full',
-		autoControls: true, 
-		controls:true, 
-		autoHover:true,
-		speed:1000,
+	$('#bxslider1').bxSlider({
+			mode:'vertical',
+			minSlides: 1,auto: true, 
+			autoDirection:'next',
+			moveSlides: 1,
+			pause:4000,
+			pager:false,
+			pagerType:'full',
+			autoControls: false, 
+			controls:false, 
+			autoHover:true,
+			speed : 1000
 	});
-	$('.bxslidervertical').bxSlider({
-		mode:'vertical',
-		slideWidth: 600,
-		minSlides: 4,
-		maxSlides:4,
-		slideMargin: 15,
+	$('#bxslider').bxSlider({
+		mode:'horizontal',
+		slideMargin: 5,
+		minSlides :1,
+		maxSlides: 4,
+		moveSlides: 2,
+		slideWidth: 200,
 		auto: true, 
 		autoDirection:'next',
-		moveSlides: 2,
-		pause:5000,
+		pause:4000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed:2000,
+		controls:true, 
+		autoHover:true
 	});
 });
 var app = angular.module('myApp',[]);
