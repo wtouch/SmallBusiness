@@ -31,9 +31,12 @@
 							<div class="col-sm-5 col-sm-offset-2"> 
 								<div class="bottomspace">
 								<label  for="selectbusiness" class="col-sm-2 control-label">Business</label>
-								<select id="selectBusiness" class="form-control" ng-model="websetting.business_id" ng-change="getMenulist(websetting.user_id, websetting.business_id)" ng-options="item.id as item.business_name for item in businessList">
+								<select id="selectBusiness" name="selectBusiness" class="form-control" ng-model="websetting.business_id" ng-change="getMenulist(websetting.user_id, websetting.business_id)" ng-options="item.id as item.business_name for item in businessList">
 									<option value="">Select Business</option>
 								</select>
+								<span class="help-block" ng-show="websettingsForm.selectBusiness.$dirty && websettingsForm.selectBusiness.$invalid">
+									<span ng-show="websettingsForm.selectBusiness.$error.required" class="text-danger">Business is required.</span>
+								</span>	
 								</div>
 							</div>
 							<div class="col-sm-5"> 
@@ -139,12 +142,13 @@
 						</div>
 					</div>
 					
-					<div class="col-sm-6" ng-init="ind = []"> 
+					<div class="col-sm-6" ng-init="ind = []">
+					<accordion close-others="true">
+					<accordion-group heading="Menus" is-open="isFirstOpen">					
 					<button ng-click="getMenulist(websetting.user_id, websetting.business_id)"><span class="glyphicon glyphicon-refresh"></span></button>
+					
 						<script type="text/ng-template" id="tree_item_renderer.html">
 							<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
-							 
-							
 							<span ng-show="data.childMenu" class="caret" ng-click="isCollapsed = !isCollapsed"></span>
 								
 							<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
@@ -174,14 +178,11 @@
 								
 								<a class="glyphicon glyphicon-star" tooltip="Featured Properties" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.contentModule.featured_properties" ng-class="(data.modules.contentModule.featured_properties == true) ? 'text-success' : 'text-muted'" ></a>
 								
-								<a ng-model="data.seo" ng-class="(ind[$index + data.url + 'seo']) ? 'text-success open' : 'text-muted'" >
+						<a ng-model="data.seo" ng-class="(ind[$index + data.url + 'seo']) ? 'text-success open' : 'text-muted'" >
 									<span tooltip="Edit SEO" class="glyphicon glyphicon-flash" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
 									<span class="dropdown-menu" ng-show="ind[$index + data.url + 'seo']">
 									<span class="close" ng-click="ind[$index + data.url + 'seo'] = false">X</span>
-										<!-- <input type="text" ng-model="data.seo.title" placeholder="SEO Title"/>
-										<input type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"/>
-										<input type="text" ng-model="data.seo.description" placeholder="SEO Description"/> -->
-										<form name="seo" role="form" class="form-horizontal panel panel-default">
+						<form name="seo" role="form" class="form-horizontal panel panel-default">
 							<div class="form-group">
 							<div class="col-sm-12">
 							<input type="text" class="form-control" ng-model="data.seo.title" placeholder="SEO Title"/>
@@ -196,11 +197,9 @@
 							</div>
 							</div>
 						</form>
-									</span>
-								</a>
-								
-							</span>
-							
+						</span>
+						</a>
+						</span>
 							<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
 							
 							<div ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
@@ -213,6 +212,63 @@
 							<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
 							</div>
 						</div>
+					</accordion-group>
+	<accordion-group heading="Sidebar Menus">
+		<div class="form-group panel panel-default">
+				<div class="form-group">
+					<button ng-show="isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds">Add SideBar</button>
+					<button ng-show="!isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObject(sidebar, websetting.config.sidebar, 'sidebar')">Add SideBar</button>
+				</div>
+			<div class="form-group panel-body">
+			<div collapse="isCollapseds">
+				<div class="well well-lg">
+				<h4>Sidebar</h4>
+				<form name="seoForm" role="form" class="form-horizontal">
+					<div class="form-group">
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="name" name="name" ng-model="sidebar.name" placeholder="Name"/>
+							<span class="text-danger" ng-show="seoForm.name.$dirty && seoForm.name.$invalid">
+								<span ng-show="seoForm.name.$error.required">Name is required.</span>
+							</span>
+						</div>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="url"  name="url" ng-model="sidebar.url" placeholder="URL" />
+							
+							<span class="text-warning" ng-hide="seoForm.url.$dirty && seoForm.url.$invalid">Use a-z A-Z 0-9 _ only</span>
+							<span class="text-danger" ng-show="seoForm.url.$dirty && seoForm.url.$invalid">
+								<span ng-show="seoForm.url.$error.required">Template Name is required.</span>
+								<span class="text-danger" ng-show="seoForm.url.$error.pattern">Alphabets, Numbers & _ Only!</span> 
+							</span>
+							
+						</div>
+					</div>
+				</form>
+					<h4>Seo</h4>
+					<div class="form-group">
+							<div class="col-sm-12">
+								<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.seo.name" placeholder="Title"/>
+								<input type="hidden" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.status" ng-init="sidebar.status = 1"/>
+							</div>
+					</div>
+					<div class="form-group">
+							<div class="col-sm-6">
+								<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="sidebar.seo.keywords" placeholder="Keywords">
+								</textarea>
+							</div>
+							<div class="col-sm-6">
+								<textarea type="text" class="form-control" id="description" name="description" ng-model="sidebar.seo.description" placeholder="Description"></textarea>
+							</div>
+					</div>
+				</div> 
+			</div>
+			<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.sidebar">
+				<div class="list-group-item menudiv" ng-repeat="data in websetting.config.sidebar" ng-include="'tree_item_renderer.html'" as-sortable-item>
+				</div>
+			</div>
+			</div>
+		</div>
+	</accordion-group>
+	</accordion>
 					</div>
 					
 					<div class="panel-panel-default">

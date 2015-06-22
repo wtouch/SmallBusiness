@@ -103,7 +103,7 @@
 			</div>
 		</div>
 		
-		<div  ng-if="domain_type == 'paid'" class="form-group"><!-- -->
+		<div ng-if="domain_type == 'paid'" class="form-group"><!-- -->
 			<label for="contactno" class="col-md-2 control-label">Website Validity</label>
 			<div class="col-md-9">
 				<select id="filterbyvalidity" class="form-control" ng-model="reqnewsite.validity">
@@ -146,9 +146,9 @@
 			<label  for="contact_email" class="col-sm-2 control-label">Contact Email*</label>	
 				<div class="col-sm-9">
 					<input type="Email" class="form-control" id="contact_email" ng-model="reqnewsite.config.contact_details.contact_email" name="contact_email" placeholder="Enter Email" required >
-						<span class="help-block" ng-show="websettingsForm.contact_email.$dirty && websettingsForm.contact_email.$invalid">
-							<span ng-show="websettingsForm.contact_email.$error.required" class="text-danger"> Email is required.</span>
-							<span ng-show="websettingsForm.contact_email.$error.email" class="text-danger">Invalid Email address.</span>
+						<span class="help-block" ng-show="requestsiteForm.contact_email.$dirty && requestsiteForm.contact_email.$invalid">
+							<span ng-show="requestsiteForm.contact_email.$error.required" class="text-danger"> Email is required.</span>
+							<span ng-show="requestsiteForm.contact_email.$error.email" class="text-danger">Invalid Email address.</span>
 						</span>
 				</div>					
 		</div>
@@ -178,7 +178,6 @@
 				</span>
 				</div>
 			</div>
-
 			<div class="col-sm-4"> 
 				<div class="bottomspace">
 				<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
@@ -302,11 +301,13 @@
 				</div>
 			<div class="form-group panel-body">
 			<div collapse="isCollapseds">
+				<form name="seo" role="form" class="form-horizontal panel panel-default">
 				<div class="well well-lg">
-				<h4>Sidebar</h4>{{reqnewsite.config.sidebar}}
+				<h4>Sidebar</h4>
 					<div class="form-group">
 						<div class="col-sm-6">
 							<input type="text" class="form-control" id="sidebarname" name="sidebarname" ng-model="sidebar.name" placeholder="Name"/>
+							
 						</div>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" id="sidebarurl" name="sidebarurl" ng-model="sidebar.url" placeholder="URL" />
@@ -329,6 +330,7 @@
 							</div>
 					</div>
 				</div> 
+				</form>
 			</div>
 			<div class="list-group" as-sortable="dragControlListeners" ng-model="reqnewsite.config.sidebar">
 				<div class="list-group-item menudiv" ng-repeat="data in reqnewsite.config.sidebar" ng-include="'tree_item_renderer.html'" as-sortable-item>
