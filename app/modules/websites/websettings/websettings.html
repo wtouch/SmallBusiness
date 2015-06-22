@@ -178,24 +178,22 @@
 									<span tooltip="Edit SEO" class="glyphicon glyphicon-flash" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
 									<span class="dropdown-menu" ng-show="ind[$index + data.url + 'seo']">
 									<span class="close" ng-click="ind[$index + data.url + 'seo'] = false">X</span>
-										<!-- <input type="text" ng-model="data.seo.title" placeholder="SEO Title"/>
-										<input type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"/>
-										<input type="text" ng-model="data.seo.description" placeholder="SEO Description"/> -->
+										
 										<form name="seo" role="form" class="form-horizontal panel panel-default">
-							<div class="form-group">
-							<div class="col-sm-12">
-							<input type="text" class="form-control" ng-model="data.seo.title" placeholder="SEO Title"/>
-							</div>
-							</div>
-							<div class="form-group">
-							<div class="col-sm-6">
-							<textarea class="form-control" type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"></textarea>
-							</div>
-							<div class="col-sm-6">
-							<textarea class="form-control" type="text" ng-model="data.seo.description" placeholder="SEO Description"></textarea>
-							</div>
-							</div>
-						</form>
+											<div class="form-group">
+												<div class="col-sm-12">
+												<input type="text" class="form-control" ng-model="data.seo.title" placeholder="SEO Title"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-sm-6">
+													<textarea class="form-control" type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"></textarea>
+												</div>
+												<div class="col-sm-6">
+													<textarea class="form-control" type="text" ng-model="data.seo.description" placeholder="SEO Description"></textarea>
+												</div>
+											</div>
+										</form>
 									</span>
 								</a>
 								
@@ -203,10 +201,12 @@
 							
 							<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
 							
-							<div ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
-								<div class="menudiv childMenu" collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
-									<span class="caret pull-right" ng-if="data.childMenu"></span>
-								</div>
+							<div ng-if="data.childMenu">
+								<div as-sortable="dragControlListeners" ng-model="data.childMenu">
+									<div class="menudiv childMenu" collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+										<span class="caret pull-right" ng-if="data.childMenu"></span>
+									</div>
+								</div> 
 							</div> 
 						</script>
 						<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.menus">
