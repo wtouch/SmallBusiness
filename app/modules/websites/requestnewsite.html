@@ -103,7 +103,7 @@
 			</div>
 		</div>
 		
-		<div ng-if="domain_type == 'paid'" class="form-group"><!-- -->
+		<div  ng-if="domain_type == 'paid'" class="form-group"><!-- -->
 			<label for="contactno" class="col-md-2 control-label">Website Validity</label>
 			<div class="col-md-9">
 				<select id="filterbyvalidity" class="form-control" ng-model="reqnewsite.validity">
@@ -146,9 +146,9 @@
 			<label  for="contact_email" class="col-sm-2 control-label">Contact Email*</label>	
 				<div class="col-sm-9">
 					<input type="Email" class="form-control" id="contact_email" ng-model="reqnewsite.config.contact_details.contact_email" name="contact_email" placeholder="Enter Email" required >
-						<span class="help-block" ng-show="requestsiteForm.contact_email.$dirty && requestsiteForm.contact_email.$invalid">
-							<span ng-show="requestsiteForm.contact_email.$error.required" class="text-danger"> Email is required.</span>
-							<span ng-show="requestsiteForm.contact_email.$error.email" class="text-danger">Invalid Email address.</span>
+						<span class="help-block" ng-show="websettingsForm.contact_email.$dirty && websettingsForm.contact_email.$invalid">
+							<span ng-show="websettingsForm.contact_email.$error.required" class="text-danger"> Email is required.</span>
+							<span ng-show="websettingsForm.contact_email.$error.email" class="text-danger">Invalid Email address.</span>
 						</span>
 				</div>					
 		</div>
@@ -178,6 +178,7 @@
 				</span>
 				</div>
 			</div>
+
 			<div class="col-sm-4"> 
 				<div class="bottomspace">
 				<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
@@ -225,20 +226,21 @@
 	
 	<div class="col-sm-6" ng-init="ind = []">
 	<accordion close-others="true">
-	<accordion-group heading="Menus" is-open="isFirstOpen">
-		<div class="form-group">
-		<button class="btn btn-success pull-right" ng-if="reqnewsite.config.menus" ng-click="getMenulist(reqnewsite.user_id, reqnewsite.business_id)"><span class="glyphicon glyphicon-refresh pull-right"></span></button>
-		</div>
+	<accordion-group heading="Menus">
+		<button  ng-click="getMenulist(reqnewsite.user_id, reqnewsite.business_id)"><span class="glyphicon glyphicon-refresh"></span></button>
 		<script type="text/ng-template" id="tree_item_renderer.html">
 			<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
+	
 			
 			<span ng-show="data.childMenu" class="caret" ng-click="isCollapsed = !isCollapsed"></span>
+				
 			<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
 			
 			<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
 			
+			
 				<span class="pull-right">
-					<a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status) ? 'glyphicon glyphicon-ok text-success' : 'glyphicon glyphicon-remove text-danger'" ng-init="data.status = 1" ></a> 
+					<a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status) ? 'glyphicon glyphicon-ok text-success' : 'glyphicon glyphicon-remove text-danger'" ></a> 
 					
 					<a class="glyphicon glyphicon-home" tooltip="Home Project" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.headerModule.homeproject" ng-class="(data.modules.headerModule.homeproject == true) ? 'text-success' : 'text-muted'" ></a>
 					
@@ -288,56 +290,76 @@
 				</div>
 			</div> 
 		</script>
-		<div class="list-group" as-sortable="dragControlListeners" ng-model="reqnewsite.config.menus">
+		<div class="list-group" as-sortable="dragControlListeners"ng-model="reqnewsite.config.menus">
 			<div class="list-group-item menudiv" ng-repeat="data in reqnewsite.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
 			</div>
 		</div>
-	</accordion-group>
-	<accordion-group heading="Sidebar Menus">
+		</accordion-group>
+		<accordion-group heading="Sidebar Menus">
 		<div class="form-group panel panel-default">
 				<div class="form-group">
-					<button ng-show="isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds">Add SideBar</button>
-					<button ng-show="!isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObject(sidebar, reqnewsite.config.sidebar, 'sidebar')">Add SideBar</button>
+					<button class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObject(reqnewsite)">Add SideBar</button>
 				</div>
 			<div class="form-group panel-body">
 			<div collapse="isCollapseds">
-				<form name="seo" role="form" class="form-horizontal panel panel-default">
 				<div class="well well-lg">
 				<h4>Sidebar</h4>
 					<div class="form-group">
+						<!-- <label for="sidebarname" class="col-sm-2 control-label">Name</label> -->
 						<div class="col-sm-6">
-							<input type="text" class="form-control" id="sidebarname" name="sidebarname" ng-model="sidebar.name" placeholder="Name"/>
-							
+							<input type="text" class="form-control" id="sidebarname" name="sidebarname" ng-model="reqnewsite.config.sidebar.name" placeholder="Name"/>
 						</div>
+						<!-- <label for="sidebarurl" class="col-sm-1 control-label">URL</label> -->
 						<div class="col-sm-6">
-							<input type="text" class="form-control" id="sidebarurl" name="sidebarurl" ng-model="sidebar.url" placeholder="URL" />
+							<input type="text" class="form-control" id="sidebarurl" name="sidebarurl" ng-model="reqnewsite.config.sidebar.url" placeholder="URL" />
 						</div>
 					</div>
 					<h4>Seo</h4>
 					<div class="form-group">
+						<!-- <label for="seotitle" class="col-sm-2 control-label">Title</label> -->
 							<div class="col-sm-12">
-								<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.seo.name" placeholder="Title"/>
-								<input type="hidden" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.status" ng-init="sidebar.status = 1"/>
+								<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="reqnewsite.config.seo.name" placeholder="Title"/>
 							</div>
 					</div>
 					<div class="form-group">
+						<!-- <label for="keywords" class="col-sm-2 control-label">Keywords</label> -->
 							<div class="col-sm-6">
-								<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="sidebar.seo.keywords" placeholder="Keywords">
+								<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="reqnewsite.config.seo.keywords" placeholder="Keywords">
 								</textarea>
 							</div>
+						<!-- <label for="description" class="col-sm-1 control-label">Description</label> -->
 							<div class="col-sm-6">
-								<textarea type="text" class="form-control" id="description" name="description" ng-model="sidebar.seo.description" placeholder="Description"></textarea>
+								<textarea type="text" class="form-control" id="description" name="description" ng-model="reqnewsite.config.seo.description" placeholder="Description"></textarea>
 							</div>
 					</div>
 				</div> 
-				</form>
-			</div>
-			<div class="list-group" as-sortable="dragControlListeners" ng-model="reqnewsite.config.sidebar">
-				<div class="list-group-item menudiv" ng-repeat="data in reqnewsite.config.sidebar" ng-include="'tree_item_renderer.html'" as-sortable-item>
-				</div>
 			</div>
 			</div>
+			
 		</div>
+
+		<!--show Sidebar Menu-->
+		<!-- <button  ng-click="getMenulistSidebar(reqnewsite.user_id, reqnewsite.business_id)"><span class="glyphicon glyphicon-refresh"></span></button>
+			<script type="text/ng-template" id="tree_item_renderer.html">
+				<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move" ></span>
+				<span ng-show="data.childMenu" class="caret" ng-click="isCollapsed = !isCollapsed"></span>
+					
+				<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" /> 
+				
+				<span ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.sidebar.name}}</span>
+					<span class="pull-right">
+					 <a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status) ? 'glyphicon glyphicon-ok text-success' : 'glyphicon glyphicon-remove text-danger'" ></a> 
+					</span>
+				<div ng-if="data.childMenu" as-sortable="dragControlListeners" ng-model="data.childMenu">
+					<div class="menudiv childMenu" collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+						<span class="caret pull-right" ng-if="data.childMenu"></span>
+					</div>
+				</div> 
+			</script>  
+			<div class="list-group" as-sortable="dragControlListeners"ng-model="reqnewsite.config.sidebar.name">
+				<div class="list-group-item menudiv" ng-repeat="data in reqnewsite.config.sidebar.name" ng-include="'tree_item_renderer.html'" as-sortable-item>
+				</div>
+			</div>-->
 	</accordion-group>
 	</accordion>
 	</div>

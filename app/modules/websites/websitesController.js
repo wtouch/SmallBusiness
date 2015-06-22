@@ -19,8 +19,6 @@ define(['app'], function (app) {
 		$scope.changeStatus={};
 		$scope.isCollapsed = true;
 		$scope.isCollapseds = true;
-		$scope.isFirstDisabled = false;
-		$scope.sidebar = {};
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
 		};
@@ -35,10 +33,11 @@ define(['app'], function (app) {
 		};
 		
 		$scope.addToObject = function(data, object, resetObj){
-			
-			var dtlObj = JSON.stringify(data);
-			object.push(JSON.parse(dtlObj));
-			$scope.sidebar = {};
+			var dtlObj = JSON.stringify(data.desc);
+			object[data.heading] = JSON.parse(dtlObj);
+			$scope.headingDisabled = false;
+			$scope.temp = false;
+			$scope.imgRemoved = false;
 		}
 		
 		$scope.getBusiness = function(user_id){
@@ -189,9 +188,9 @@ define(['app'], function (app) {
 			});
 		};  
 		
-		// code for request new website 
+		 // code for request new website 
         var requestnewsite = function(){
-			$scope.reqnewsite = { config : {google_map:{}, sidebar : []}};
+			$scope.reqnewsite = { config : {google_map:{}}};
 			$scope.postData = function(reqnewsite) { 
 				reqnewsite.date = dataService.currentDate;
 				reqnewsite.registered_date = dataService.currentDate;
@@ -284,6 +283,7 @@ define(['app'], function (app) {
 				}
 			}
 			$scope.getLocation();
+			//end google map
 			
 			$scope.replaceMenu = function(newMenu, oldMenu){
 			for(var x in oldMenu){
@@ -301,13 +301,13 @@ define(['app'], function (app) {
 			}
 		
 			$scope.getMenulist = function(user_id, business_id){
+				//console.log(user_id, business_id);
 				$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
 					
 					dataService.get("getmultiple/seo/1/100",$scope.seoParam)
 					.then(function(response) {
 						if(response.status == 'success'){
 							$scope.reqnewsite.config.menus = response.data;
-							$scope.isFirstOpen = true;
 						}else{
 							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 							$notification[response.status]("Menu Selection", response.message);
@@ -315,10 +315,28 @@ define(['app'], function (app) {
 					});
 				
 			}
+			
+			//get request for sidebar menubar
+			$scope.getMenulistSidebar = function(user_id, business_id){
+				//console.log(user_id, business_id);
+				$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
+					
+					dataService.get("getmultiple/seo/1/100",$scope.seoParam)
+					.then(function(response) {
+						if(response.status == 'success'){
+							$scope.reqnewsite.config.sidebar = response.data;
+						}else{
+							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification[response.status]("Menu Selection", response.message);
+						}
+					});
+				
+			}
+			
 			$scope.addsidebar = function(reqnewsite){
 				$scope.reqnewsite.config.sidebar = (reqnewsite.config.sidebar) ? reqnewsite.config.sidebar : {};
 				console.log(reqnewsite);
-				
+				reqnewsite.config.sidebar.name[reqnewsite.config.sidebar.name] = reqnewsite.config.sidebar.name;
 			};
 					
 			};
