@@ -14,7 +14,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		$scope.path = "/product/"+ $rootScope.userDetails.id; // path to store images on server
+		$scope.path = "/product"; // path to store images on server
 		$scope.permission = $rootScope.userDetails.permission.product_module;
 		$scope.showProductForm = false;
 		$scope.showServiceForm = false;
@@ -22,15 +22,10 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.editServForm = false;
 		($cookies.productType) ? "" : $cookieStore.put("productType", "product");
 		$scope.productType = $cookieStore.get("productType");
-	
-		$scope.addproduct = {
-			product_image : []
-		}; 
+		$scope.selectBusiness = ($cookieStore.get("businessId"));
+		$scope.addproduct = {user_id : $scope.selectBusiness.user_id, product_image : []};
+		$scope.addservice = {user_id : $scope.selectBusiness.user_id, product_image : []};
 		
-		// this is form object
-		$scope.addservice = {
-			product_image : []
-		};
 		
 		//function to upload files
 		$scope.upload = function(files,path,userInfo,picArr){//this function for uploading files
@@ -60,15 +55,12 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		
 		$scope.changeScope = function(value){
 			$cookieStore.put("businessId", value);
-			$scope.selectBusiness = $cookieStore.get("businessId");
-			$scope.addservice.business_id = value;
-			$scope.addproduct.business_id = value;
+			$scope.selectBusiness = ($cookieStore.get("businessId"));
+			$scope.addservice.business_id = value.id;
+			$scope.addproduct.business_id = value.id;
 			$scope.changeScopeObject($scope.productType);
 		};
 		
-		$scope.selectBusiness = $cookieStore.get("businessId");
-		$scope.addservice.business_id = $cookieStore.get("businessId");
-		$scope.addproduct.business_id = $cookieStore.get("businessId");
 		$scope.showForm = function(object){
 			$scope[object] = ($scope[object]==true) ? false : true;
 			$scope.$apply;
@@ -97,18 +89,21 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		dataService.get("getmultiple/business/1/100",$scope.userInfo)
 		.then(function(response) {  
 			if(response.status == 'success'){
-				$scope.businessList = response.data;
+				$scope.businessList = [];
+				for(var x in response.data){
+					$scope.businessList.push({id : response.data[x].id, user_id : response.data[x].user_id, business_name : response.data[x].business_name  });
+				}
 			}else{
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Get Business List", "You didn't added any business! Please add business first.");
 			}
-			$scope.businessList = response.data;
 		});
 			
 		//code for add product
 		var addproducts = function(){ 
+			
+			$scope.addproduct.business_id = $cookieStore.get("businessId").id;
 			$scope.postData = function(addproduct) { 
-			$scope.addproduct.user_id = $rootScope.userDetails.id;
 			$scope.addproduct.date = $scope.currentDate;
 				 dataService.post("post/product",addproduct)
 				.then(function(response) { 
@@ -122,14 +117,14 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Add Product", response.message);
-					$scope.reset();
 				});
 			}
 		}
 		
 		//function for add services
 		var addservices = function(){
-			$scope.addservice.user_id= $rootScope.userDetails.id;
+			
+			$scope.addservice.business_id = $cookieStore.get("businessId").id;
 			$scope.postData = function(addservice) {
 				$scope.userInfo=$scope.userInfo;
 				$scope.addservice.date = $scope.currentDate;
@@ -138,7 +133,9 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					if(response.status == "success"){
 						$scope.showServiceForm = false;
 						$scope.showProductForm = false;
+						if($rootScope.userDetails.config.addProducts != true){
 							dataService.progressSteps('addProducts', true);
+						}
 						$scope.servicelist();	
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
@@ -149,7 +146,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 	
 		//view for product list
 		$scope.productlist = function(){
-			$scope.productFilter = {business_id : $scope.selectBusiness, type : 'product'};
+			$scope.productFilter = {business_id : $scope.selectBusiness.id, type : 'product'};
 			angular.extend($scope.userInfo, $scope.productFilter);
 			dataService.get("getmultiple/product/1/10",$scope.userInfo)
 			.then(function(response) {  
@@ -191,7 +188,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		//To show service list
 		$scope.servicelist= function(){
 			$scope.id=$routeParams.id
-			$scope.productFilter = {business_id : $scope.selectBusiness, type : 'service'};
+			$scope.productFilter = {business_id : $scope.selectBusiness.id, type : 'service'};
 			angular.extend($scope.userInfo, $scope.productFilter);
 			dataService.get("getmultiple/product/1/10",$scope.userInfo)
 			.then(function(response) {  

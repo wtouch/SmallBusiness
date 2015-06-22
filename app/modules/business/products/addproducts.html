@@ -4,7 +4,7 @@
 				<div class="product">
 					<h3 ng-if="!editProdForm" class="col-sm-offset-2 col-sm-9">Add New Product</h3>
 					<h3 ng-if="editProdForm" class="col-sm-offset-2 col-sm-9">Edit Product</h3>
-					<form class="form-horizontal" role="form" name="addproductForm" ng-submit=		"addproductForm.$valid" novalidate="novalidate">
+					<form class="form-horizontal" role="form" name="addproductForm" ng-submit="addproductForm.$valid" novalidate="novalidate">
 						<div class="form-group">
 							<label for="product_service_name" class="col-sm-2 control-label">Product Name* </label>
 							<div class="col-sm-9">
@@ -25,7 +25,7 @@
 						<div class="form-group">
 							<label for="productImages" class="col-sm-2 control-label">Select Image</label>
 							<div class="col-sm-9">
-								<input type="file" id="productImages" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="upload($files,addproduct, path,userInfo,addproduct.product_image)" ng-model="productImages">
+								<input type="file" id="productImages" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="upload($files, addproduct.user_id + path,userInfo, addproduct.product_image)" ng-model="productImages">
 								<input type="hidden" ng-model="addproduct.product_image">
 							</div>
 						</div>
@@ -65,7 +65,7 @@
 							<div class="col-sm-offset-2 col-sm-9">
 								<button ng-if="!editProdForm" type="submit" class="btn btn-default btn-success" ng-disabled="addproductForm.$invalid" ng-click="postData(addproduct)" title="submit">Submit	</button>
 								
-								<button ng-if="editProdForm" type="submit" class="btn btn-default btn-success" ng-disabled="addproductForm.$invalid" ng-click="updateData(addproduct)" title="submit">Edit Product</button>
+								<button ng-if="editProdForm" type="submit" class="btn btn-default btn-success" ng-disabled="addproductForm.$invalid" ng-click="updateData(addproduct)" title="submit">Update Product</button>
 								<button type="reset" class="btn btn-danger">Cancel</button>
 							</div>
 						</div>
