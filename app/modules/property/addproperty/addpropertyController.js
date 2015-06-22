@@ -9,7 +9,7 @@ define(['app'], function (app) {
 		$scope.userinfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		$scope.property = { property_images : []};
-		$scope.path = "property";
+		$scope.path = "/property";
 		
 		dataService.config('config', {config_name : "property"}).then(function(response){
 			$scope.propertyConfig = response.config_data;
