@@ -13,8 +13,8 @@
 					</div>
 					<div class="col-sm-6 col-md-4 service">
 						<h4>{{x.product_service_name}}</h4>
-						{{ x.description |length > 100 ? x.description | slice(start, 100) : x.description}}<br><br>
-						<a href="services/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
+						<div class="description">{{ x.description |length > 100 ? x.description | slice(start, 100) : x.description}}</div>
+						<div class="readmore"><a href="services/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a></div>
 					</div>
 					{% set i = (i + 1) %}
 					{% if i == 4 %}
