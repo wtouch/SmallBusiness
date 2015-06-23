@@ -11,6 +11,7 @@
 	<div class="col-sm-12">
 			<div class="bottomspace">
 				<h3 class="border-bottom bottomspace text-center">Website Setting</h3>
+				<h4 class="text-center">{{website.domain_name}}</h4>
 				<div class="col-sm-12 bottomspace text-right">
 				<button type="submit" class="btn btn-primary" ng-disabled="websettingsForm.$dirty && websettingsForm.$invalid" ng-click="editWebsitedetails(websetting)">Update</button>
 				<a href="#/dashboard/websites/websiteslist" type="button" class="btn btn-danger">Cancel</a>
@@ -165,7 +166,7 @@
 									<span tooltip="Edit SEO" class="glyphicon glyphicon-flash" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
 									<span class="dropdown-menu" ng-show="ind[$index + data.url + 'seo']">
 									<span class="close" ng-click="ind[$index + data.url + 'seo'] = false">X</span>
-										<!-- <input type="text" ng-model="data.seo.title" placeholder="SEO Title"/>
+										 <input type="text" ng-model="data.seo.title" placeholder="SEO Title"/>
 										<form name="seo" role="form" class="form-horizontal panel panel-default">
 							<div class="form-group">
 							<div class="col-sm-12">

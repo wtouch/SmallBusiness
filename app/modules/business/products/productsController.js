@@ -6,7 +6,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 	var productsController = function ($scope,$rootScope,$injector,$location,$routeParams,dataService,upload,modalService,$cookieStore, $cookies,$notification) {
 		//for display form parts of product & service
 		$scope.productView = $routeParams.productView;
-		
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.addproductCurrentPage = 1;
@@ -25,10 +24,9 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.selectBusiness = ($cookieStore.get("businessId"));
 		$scope.addproduct = {user_id : $scope.selectBusiness.user_id, product_image : []};
 		$scope.addservice = {user_id : $scope.selectBusiness.user_id, product_image : []};
-		
-		
+	
 		//function to upload files
-		$scope.upload = function(files,path,userInfo,picArr){//this function for uploading files
+		$scope.upload = function(files,path,userInfo,picArr){
 			upload.upload(files,path,userInfo,function(data){
 				var picArrKey = 0, x;
 				for(x in picArr) picArrKey++;
@@ -38,7 +36,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Upload Image", response.message);
 				}
-	
 			});
 		};
 		
@@ -101,7 +98,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			
 		//code for add product
 		var addproducts = function(){ 
-			
 			$scope.addproduct.business_id = $cookieStore.get("businessId").id;
 			$scope.postData = function(addproduct) { 
 			$scope.addproduct.date = $scope.currentDate;
@@ -123,7 +119,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		
 		//function for add services
 		var addservices = function(){
-			
 			$scope.addservice.business_id = $cookieStore.get("businessId").id;
 			$scope.postData = function(addservice) {
 				$scope.userInfo=$scope.userInfo;
@@ -143,7 +138,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 				});
 			} 
 		}
-	
 		//view for product list
 		$scope.productlist = function(){
 			$scope.productFilter = {business_id : $scope.selectBusiness.id, type : 'product'};

@@ -28,7 +28,6 @@ define(['app'], function (app) {
 		};
 		
 		$scope.addToObject = function(data, object, resetObj){
-			
 			var dtlObj = JSON.stringify(data);
 			object.push(JSON.parse(dtlObj));
 			$scope.sidebar = {};
@@ -37,6 +36,7 @@ define(['app'], function (app) {
 		//code for view single website details
 		dataService.get("getsingle/website/" + $routeParams.id)
 		.then(function (response) {
+			$scope.website= response.data;
 			if (response.status == 'success') {
 				$scope.status = {
 					status : 1
