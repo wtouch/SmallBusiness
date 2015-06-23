@@ -1,7 +1,7 @@
 //text color shade
 	@color : #ffa366; // orange
 	@lightcolor : #B8F9B8; // light gray
-	@darkcolor : #BBBBBB; // vacant
+	@darkcolor : #930616; // vacant
 	 
 //background color shade
 	@back : #ede9d7; // use body background color
@@ -12,7 +12,7 @@
 	@colorblack : #000000;
 	@colorwhite	: #ffffff;
 	
-	//@import "general.less";
+	@import "general.less";
 	@import "property.less";
 	@import "project.less";
 	@import "product.less";
@@ -83,6 +83,7 @@
 					top: -10px;
 				}
 				> ul{
+					
 					display: none;
 					position: absolute;
 					width: 245px;
@@ -93,25 +94,33 @@
 					text-align: left;
 					top : 48px;
 					transition : all 500ms ease-in-out;
+					
 					>li{
-						border-bottom: 1px solid @color;
+						border-bottom: 1px solid @lightbackcolor;
 						padding: 5px;
+						text-transform:uppercase;
+						
+						font-size:10px;
+						
 						>a{
+							color:@colorblack;
 							top:0px;
-							color:@color;
-							font-size:10px;
+							
+							font-size:14px;
 							&:hover{
+								
 								text-decoration: underline;
 							}
 						}
 						&:hover{
-							background-color: @color;
+							background-color: @darkcolor;
 							-webkit-transition: all 0.4s;
 						}
 						ul{
+							
 							list-style: none;
 							li{
-								font-size:10px;
+								font-size:12px;
 								a{
 									text-transform:lowercase;
 								}
@@ -126,6 +135,7 @@
 			}
 		}
 	}
+	
 	.content{
 		background-color : @darkbackcolor;
 		border-radius : 7px;
@@ -143,6 +153,15 @@
 	  font: 2em/1.2em Playball,cursive;
 	  letter-spacing: 1px;
 	}
+	.sidebarModule .panel,.sidebarModule .sections{
+		background-color: @lightbackcolor;
+		border:1px solid @darkbackcolor;
+		box-shadow:2px 2px 2px @lightcolor;
+		border-radius : 4px;
+		.btn-info{
+			background-color:@darkbackcolor;
+		}
+	}
 	.subhead{
 		font-family: "Carter One";
 		font-size: 14px;
@@ -152,7 +171,6 @@
 		color : @colorwhite;
 		padding: 8px 40px;
 		position : relative;
-		
 	}
 	.contentModule .sections,.sidebarModule .sections{
 		background-color: @lightbackcolor;
@@ -163,6 +181,8 @@
 		border-top:1px dashed @darkcolor;
 		padding: 15px 0;
 	}
+	
+	
 	//for responsive
 	@media (min-width: 320px){
 		.logo{

@@ -23,7 +23,9 @@
 .homeproject {
 	margin-top:10px;
 	.projectnav,.projsnap {
-		background-color: @colorwhite;
+		background-color: @lightbackcolor;
+		border:1px solid @darkbackcolor;
+		box-shadow:2px 2px 2px @lightcolor;
 		border-radius : 4px;
 		padding:5px;
 		min-height:312px;
@@ -62,31 +64,45 @@
 
 //css for single project & project list
 	.projlist{
+		border:1px solid @darkbackcolor;
+		box-shadow:2px 2px 2px @lightcolor;
+		background-color:@lightbackcolor;
+		padding:10px;
 		.project{
+			
 			.thumbnail{
 				height:430px;
 				padding-top : 15px;
 				.caption{
 					color : @lightcolor;
 					a{
-						color : @color;
-						text-decoration : underline;
+						color: #9D2C03;
+						text-decoration: none;
 						&:hover{
 							color : @color;
-							text-decoration : none;
+							text-decoration : underline;
 						}
 					}
 				}
+				
+				.caption p{
+					color:@colorblack;
+				}
 			}
 			.navbar{
+				height:50px;
+				
+				border: 1px solid @lightbackcolor;
+				border-radius: 0;
 				margin-top:10px;
 				margin-bottom:10px;
 				height : 20px;
 				width:auto;
+				
 			}
 			ul.nav.navbar-nav {
-				background-color: @darkbackcolor;
 				color:@lightbackcolor;
+				
 				border-bottom: 4px solid @lightbackcolor;
 				height : 42px;
 				>li{
@@ -107,10 +123,6 @@
 				margin-right: 20px;
 				max-height : 175px;
 			}
-			.projImgs{
-				margin-bottom: 20px;
-				max-height : 175px;
-			}
 			
 		}
 		.projectgallery{ 
@@ -121,20 +133,27 @@
 				background-color : @darkbackcolor;
 			}
 		}
+		
 	}
 	
 	@media (min-width: 320px){
 		.projImg{
 			float :none;
+			max-height : 175px;
+			margin-right:10px;
 		}
 	}
 	@media (min-width: 992px){
 		.projImg{
 			float :left;
+			max-height : 175px;
+			margin-right:10px;
 		}
 	}
 	@media (min-width: 1200px){
 		.projImg{
 			float :left;
+			max-height : 175px;
+			margin-right:10px;
 		}
 	}
