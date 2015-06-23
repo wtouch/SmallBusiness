@@ -10,18 +10,31 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		$scope.CurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
-		$scope.user_id = {user_id : $rootScope.userDetails.id}; 
-		
+		$scope.user_id = "";
+		$scope.changeUserId = function(user_id){
+			$scope.user_id = user_id;
+		}
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
 		};
-	/*************************************************************************************/
-			$scope.feature = function(id, featured){
+
+		$scope.getCustomers = function(){
+			dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.customerList = response.data;
+				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Users", response.message);
+				}
+			});
+		}
+			$scope.feature = function(id, featured,user_id){
 				$scope.featuredData = {featured : featured};
 				dataService.put("put/project/"+id, $scope.featuredData)
 				.then(function(response) {
 					if(response.status == "success"){
-					$scope.getProject($scope.CurrentPage);
+					$scope.getProject($scope.CurrentPage,user_id);
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Feature Project", response.message);
@@ -29,35 +42,35 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				});
 			};
 	/***********************************************************************************/	
-			$scope.deleted = function(id, status){
+			$scope.deleted = function(id, status,user_id){
 				$scope.deletedData = {status : status};
 				dataService.put("put/project/"+id, $scope.deletedData)
 				.then(function(response) { 
 					if(response.status == 'success'){
-						$scope.getProject($scope.CurrentPage);
+						$scope.getProject($scope.CurrentPage,user_id);
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Edit Project", response.message);
 				});
 			};
 	/**************************************************************************************/
-		$scope.verify = function(id, verified){
+		$scope.verify = function(id, verified,user_id){
 			$scope.veryfiedData = {verified : verified};
 			dataService.put("put/project/"+id, $scope.veryfiedData)
 			.then(function(response) {
 				if(response.status == 'success'){
-					$scope.getProject($scope.CurrentPage);
+					$scope.getProject($scope.CurrentPage,user_id);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Verify Property", response.message);
 			});
 		} ;		
 	/**************************************************************************************/	
-		$scope.searchFilter = function(statusCol, searchProp) {
+		$scope.searchFilter = function(statusCol, searchProp,user_id) {
 			$scope.filterStatus= {search: true};
 			(searchProp =="") ? delete $scope.projectParam[statusCol] : $scope.filterStatus[statusCol] = searchProp;
 			angular.extend($scope.projectParam, $scope.filterStatus);
-			$scope.getProject(1,$scope.projectParam);
+			$scope.getProject(1,$scope.projectParam,user_id);
 		};
     /**************************************************************************************/
 		$scope.removeImg = function(item, imgObject) {
@@ -84,8 +97,8 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		};
 	/**********************************************************************************/
 		// code to access domain names dynamically
-		$scope.getWebsitelist = function(){
-		$scope.userinfo={user_id:$rootScope.userDetails.id,status :1};
+		$scope.getWebsitelist = function(user_id){
+		$scope.userinfo={user_id : user_id, status : 1};
 		dataService.get('getmultiple/website/1/200', $scope.userinfo).then(function(response){
 				var domains = [];
 				for(var id in response.data){
@@ -112,22 +125,23 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			};
 	/**************************************************************************************/
 		// code for delete button 
-		$scope.domainUpdate = function(id, domain){
+		$scope.domainUpdate = function(id, domain,user_id){
 			$scope.domainData = {domain : domain};
 			console.log($scope.domainData);
 			console.log(domain);
 			dataService.put("put/project/"+id, $scope.domainData)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.getProject($scope.CurrentPage);
+					$scope.getProject($scope.CurrentPage,user_id);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Update Property", response.message);
 			});
 		};			
 	/**************************************************************************************/	
-		$scope.getProject = function(page, projectParam){
-			$scope.projectParam = (projectParam) ? projectParam : {status : 1, user_id : $scope.user_id.user_id};
+		$scope.getProject = function(page, user_id, projectParam){
+			$scope.projectParam = (projectParam) ? projectParam : {status : 1, user_id : user_id};
+			angular.extend($scope.projectParam, {user_id : user_id});
 			dataService.get("/getmultiple/project/"+page+"/"+$scope.pageItems, $scope.projectParam)
 			.then(function(response) {
 				if(response.status == 'success'){				

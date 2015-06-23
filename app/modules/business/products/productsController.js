@@ -21,9 +21,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.editServForm = false;
 		($cookies.productType) ? "" : $cookieStore.put("productType", "product");
 		$scope.productType = $cookieStore.get("productType");
-		$scope.selectBusiness = ($cookieStore.get("businessId"));
-		$scope.addproduct = {user_id : $scope.selectBusiness.user_id, product_image : []};
-		$scope.addservice = {user_id : $scope.selectBusiness.user_id, product_image : []};
+		
 	
 		//function to upload files
 		$scope.upload = function(files,path,userInfo,picArr){
@@ -49,15 +47,17 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.generateThumb = function(files){ 
 			upload.generateThumbs(files);
 		};
-		
+		$scope.addservice = {};
+		$scope.addproduct = {};
 		$scope.changeScope = function(value){
 			$cookieStore.put("businessId", value);
 			$scope.selectBusiness = ($cookieStore.get("businessId"));
-			$scope.addservice.business_id = value.id;
-			$scope.addproduct.business_id = value.id;
+			($scope.addservice.business_id) ? $scope.addservice.business_id = value.id : $scope.addservice = {business_id : value.id};
+			($scope.addproduct.business_id) ? $scope.addproduct.business_id = value.id : $scope.addproduct = {business_id : value.id};
+			
 			$scope.changeScopeObject($scope.productType);
 		};
-		
+		$scope.selectBusiness = ($cookieStore.get("businessId"));
 		$scope.showForm = function(object){
 			$scope[object] = ($scope[object]==true) ? false : true;
 			$scope.$apply;
@@ -97,7 +97,10 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		});
 			
 		//code for add product
-		var addproducts = function(){ 
+		var addproducts = function(){
+			
+			$scope.addproduct = {user_id : $scope.selectBusiness.user_id, product_image : []};
+			
 			$scope.addproduct.business_id = $cookieStore.get("businessId").id;
 			$scope.postData = function(addproduct) { 
 			$scope.addproduct.date = $scope.currentDate;
@@ -119,6 +122,8 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		
 		//function for add services
 		var addservices = function(){
+			$scope.addservice = {user_id : $scope.selectBusiness.user_id, product_image : []};
+			console.log($scope.selectBusiness);
 			$scope.addservice.business_id = $cookieStore.get("businessId").id;
 			$scope.postData = function(addservice) {
 				$scope.userInfo=$scope.userInfo;

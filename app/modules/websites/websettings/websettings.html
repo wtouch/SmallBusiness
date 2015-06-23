@@ -131,6 +131,7 @@
 				<accordion close-others="true">
 				<accordion-group heading="Menus" is-open="isFirstOpen">
 					<button ng-click="getMenulist(websetting.user_id, websetting.business_id)"><span class="glyphicon glyphicon-refresh"></span></button>
+					
 						<script type="text/ng-template" id="tree_item_renderer.html">
 							<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
 							<span ng-show="data.childMenu" class="caret" ng-click="isCollapsed = !isCollapsed"></span>
@@ -166,24 +167,24 @@
 									<span tooltip="Edit SEO" class="glyphicon glyphicon-flash" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
 									<span class="dropdown-menu" ng-show="ind[$index + data.url + 'seo']">
 									<span class="close" ng-click="ind[$index + data.url + 'seo'] = false">X</span>
-										 <input type="text" ng-model="data.seo.title" placeholder="SEO Title"/>
+										<!--  <input type="text" ng-model="data.seo.title" placeholder="SEO Title"/> -->
 										<form name="seo" role="form" class="form-horizontal panel panel-default">
-							<div class="form-group">
-							<div class="col-sm-12">
-							<input type="text" class="form-control" ng-model="data.seo.title" placeholder="SEO Title"/>
-							</div>
-							</div>
 											<div class="form-group">
-							<div class="col-sm-6">
-							<textarea class="form-control" type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"></textarea>
-							</div>
-							<div class="col-sm-6">
-							<textarea class="form-control" type="text" ng-model="data.seo.description" placeholder="SEO Description"></textarea>
-							</div>
+											<div class="col-sm-12">
+											<input type="text" class="form-control" ng-model="data.seo.title" placeholder="SEO Title"/>
 											</div>
-						</form>
-							</span>
-							</a>
+											</div>
+											<div class="form-group">
+												<div class="col-sm-6">
+												<textarea class="form-control" type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"></textarea>
+												</div>
+												<div class="col-sm-6">
+												<textarea class="form-control" type="text" ng-model="data.seo.description" placeholder="SEO Description"></textarea>
+												</div>
+											</div>
+										</form>
+									</span>
+								</a>
 							</span>
 							<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
 							
@@ -214,7 +215,6 @@
 								<div class="form-group">
 									<div class="col-sm-6">
 										<input type="text" class="form-control" id="sidebarname" name="sidebarname" ng-model="sidebar.name" placeholder="Name"/>
-										
 									</div>
 									<div class="col-sm-6">
 										<input type="text" class="form-control" id="sidebarurl" name="sidebarurl" ng-model="sidebar.url" placeholder="URL" />
@@ -223,18 +223,18 @@
 								<h4>Seo</h4>
 								<div class="form-group">
 										<div class="col-sm-12">
-											<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.seo.name" placeholder="Title"/>
-											<input type="hidden" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.status" ng-init="sidebar.status = 1"/>
+											<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.seo.title" placeholder="Title"/>
+											<input type="hidden" class="form-control" id="status" name="status" ng-model="sidebar.status" ng-init="sidebar.status = 1"/>
 										</div>
 								</div>
 								<div class="form-group">
-										<div class="col-sm-6">
-											<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="sidebar.seo.keywords" placeholder="Keywords">
-											</textarea>
-										</div>
-										<div class="col-sm-6">
-											<textarea type="text" class="form-control" id="description" name="description" ng-model="sidebar.seo.description" placeholder="Description"></textarea>
-										</div>
+									<div class="col-sm-6">
+										<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="sidebar.seo.keywords" placeholder="Keywords">
+										</textarea>
+									</div>
+									<div class="col-sm-6">
+										<textarea type="text" class="form-control" id="description" name="description" ng-model="sidebar.seo.description" placeholder="Description"></textarea>
+									</div>
 								</div>
 							</div> 
 							</form>

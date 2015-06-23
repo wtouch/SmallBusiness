@@ -169,7 +169,7 @@ define(['app'], function (app) {
 		$scope.addsidebar = function(websetting){
 			$scope.websetting.config.sidebar = (websetting.config.sidebar) ? websetting.config.sidebar : {};
 			console.log(websetting);
-				
+			$scope.websetting.config.sidebar.name = (websetting.config.sidebar) ? websetting.config.sidebar.name : {};	
 		};
 
 		//update method for website settings form

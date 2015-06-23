@@ -2,6 +2,17 @@
 	<div class="col-sm-12">	
 		<div class="main-content">	
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>
+			
+			<div ng-if="userDetails.group_name != 'customer'" class="col-sm-2" ng-init="getCustomers()">
+					<label for="featured" class="control-label">Select Customer</label>
+						<select id="featured" class="form-control" ng-change="getProperty(CurrentPage,user_id); changeUserId(user_id); getWebsitelist(user_id)" ng-model="user_id" ng-options="item.id as item.name for item in customerList | filter :{ group_name : 'customer' }">
+							<option value="" selected>Select Customer</option>
+						</select>
+			</div>
+			<span ng-if="userDetails.group_name == 'customer'" >
+				<input type="text" ng-model="user_id" ng-init="getProperty(CurrentPage)"/>
+			</span>			
+			
 			<div class="row bottom-space">
 				<div class="col-sm-2"> 
 					<label class="control-label"> </label><br>
@@ -68,9 +79,9 @@
 									<th>Manage</th>
 								</tr>
 							</thead>
-							<tbody ng-init="getProperty(currentPage)">
+							<tbody>
 								<tr ng-repeat="x in properties | orderBy:sort">
-									<td class="col-sm-1">{{((currentPage - 1) * pageItems) + $index + 1}}</td>
+									<td class="col-sm-1">{{((CurrentPage - 1) * pageItems) + $index + 1}}</td>
 									<td class="col-sm-2">
 									<div class="media-left">
 									<div class="media-object text-center">
@@ -147,8 +158,8 @@
 						</table>
 					</div>					
 					<div class="text-center">
-						<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getProperty(currentPage,propertyParam)"></pagination>	
-						<pre>Page: {{currentPage}} / {{numPages}}</pre>
+						<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="CurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getProperty(CurrentPage,propertyParam)"></pagination>	
+						<pre>Page: {{CurrentPage}} / {{numPages}}</pre>
 					</div>
 				</div>
 			</div>

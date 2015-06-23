@@ -8,13 +8,16 @@ define(['app'], function (app) {
 		//Code For Pagination
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
-		$scope.currentPage = 1;
+		$scope.CurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
 		console.log($scope.currentDate);
-		
+		$scope.user_id = "";
+		$scope.changeUserId = function(user_id){
+			$scope.user_id = user_id;
+		}
 		$scope.dynamicTooltip = function(status, active, notActive){
 			return (status==1) ? active : notActive;
 		};
@@ -25,22 +28,34 @@ define(['app'], function (app) {
 			dataService.put("put/property/"+id, $scope.deletedData)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.getProperty($scope.currentPage);
+					$scope.getProperty($scope.currentPage,user_id);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Delete Property", response.message);
 			});
-		};		
+		};
+		/*****************************************************************************/
+		$scope.getCustomers = function(){
+			dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+			.then(function(response) {  
+				if(response.status == 'success'){
+					$scope.customerList = response.data;
+				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Get Users", response.message);
+				}
+			});
+		}
 	/**************************************************************************************/	
 		// code for delete button 
-		$scope.domainUpdate = function(id, domain){
+		$scope.domainUpdate = function(id, domain,user_id){
 			$scope.domainData = {domain : domain};
 			console.log($scope.domainData);
 			console.log(domain);
 			dataService.put("put/property/"+id, $scope.domainData)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.getProperty($scope.currentPage);
+					$scope.getProperty($scope.currentPage,user_id);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Update Property", response.message);
@@ -48,35 +63,35 @@ define(['app'], function (app) {
 		};			
 	/************************************************************************************/
 	//This code for featured & un-featured button 
-		$scope.feature = function(id, featured){
+		$scope.feature = function(id, featured,user_id){
 			$scope.featuredData = {featured : featured};
 			dataService.put("put/property/"+id, $scope.featuredData)
 			.then(function(response) {
 				if(response.status == "success"){
-					$scope.getProperty($scope.currentPage);
+					$scope.getProperty($scope.currentPage,user_id);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Feature Property", response.message);
 			});
 		};
 	/**************************************************************************************/
-		$scope.verify = function(id, verified){
+		$scope.verify = function(id, verified,user_id){
 			$scope.veryfiedData = {verified : verified};
 			dataService.put("put/property/"+id, $scope.veryfiedData)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.getProperty($scope.currentPage);
+					$scope.getProperty($scope.currentPage,user_id);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Verify Property", response.message);
 			});
 		};	
 	/**************************************************************************************/	
-		$scope.searchFilter = function(statusCol, searchProp) {
+		$scope.searchFilter = function(statusCol, searchProp,user_id) {
 			$scope.filterStatus= {search: true};
 			(searchProp =="") ? delete $scope.propertyParam[statusCol] : $scope.filterStatus[statusCol] = searchProp;
 			angular.extend($scope.propertyParam, $scope.filterStatus);
-			$scope.getProperty(1,$scope.propertyParam);
+			$scope.getProperty(1,$scope.propertyParam,user_id);
 		};
 	/***************************************************************************************/
 		$scope.uploadMultiple = function(files,path,userInfo,picArr){ 
@@ -93,8 +108,8 @@ define(['app'], function (app) {
 		};    
 	/***************************************************************************************/	
 		// code to access domain names dynamically
-		$scope.getWebsitelist = function(){
-			var websiteParams = {user_id:$rootScope.userDetails.id,status : 1};
+		$scope.getWebsitelist = function(user_id){
+			var websiteParams = {user_id:user_id,status : 1};
 			dataService.get('getmultiple/website/1/200', websiteParams).then(function(response){
 				var domains = [];
 				for(var id in response.data){
@@ -125,13 +140,13 @@ define(['app'], function (app) {
 			});
 		};
 /***************************************************************************************/	
-		$scope.changeValue = function(statusCol,status) {
+		$scope.changeValue = function(statusCol,status,user_id) {
 			//console.log($scope.propertyParam);
 			$scope.filterStatus= {};
 			(status =="") ? delete $scope.propertyParam[statusCol] : $scope.filterStatus[statusCol] = status;
 			angular.extend($scope.propertyParam, $scope.filterStatus);
 			angular.extend($scope.propertyParam, $scope.search);			
-			$scope.getProperty(1, $scope.propertyParam);
+			$scope.getProperty(1, $scope.propertyParam,user_id);
 		};
 /*****************************************************************************************/		
 
@@ -156,8 +171,9 @@ define(['app'], function (app) {
 		};	
 /**************************************************************************************/				
 		//view multiple records
-		$scope.getProperty = function(page, propertyParam){
-			$scope.propertyParam = (propertyParam) ? propertyParam : {status : 1, user_id : $scope.userInfo.user_id};
+		$scope.getProperty = function(page, user_id,propertyParam){
+			$scope.propertyParam = (propertyParam) ? propertyParam : {status : 1, user_id : user_id};
+			angular.extend($scope.propertyParam, {user_id : user_id});
 			dataService.get("getmultiple/property/"+page+"/"+$scope.pageItems, $scope.propertyParam)
 			.then(function(response) { 				
 					if(response.status == 'success'){
