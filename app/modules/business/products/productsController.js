@@ -98,9 +98,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 			
 		//code for add product
 		var addproducts = function(){
-			
 			$scope.addproduct = {user_id : $scope.selectBusiness.user_id, product_image : []};
-			
 			$scope.addproduct.business_id = $cookieStore.get("businessId").id;
 			$scope.postData = function(addproduct) { 
 			$scope.addproduct.date = $scope.currentDate;
