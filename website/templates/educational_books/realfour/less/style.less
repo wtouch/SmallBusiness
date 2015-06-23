@@ -1,17 +1,17 @@
-	@bgcolor : #2d4065;
-	@color :   #9cf;
-	@lightcolor : #BBBBBB;
-	@darkcolor : #000;
-	@back : #2d4065;
-	@darkbackcolor : #171600;
-	@lightbackcolor :#2F3826; 
-	@colorblack : #000;
-	@colorwhite	: #fff;
-	@import "property.less";
-	@import "project.less";
-	@import "product.less";
-	@import "general.less";
+@color :   #337ab7 ;
+@lightcolor : #99ccff;
+@darkcolor : #23527c;
+@back : #337ab7;
+@darkbackcolor : #2d4065;
+@lightbackcolor : #F5F9FF; 
+@colorblack : #000;
+@colorwhite	: #fff;
+@import "property.less";
+@import "project.less";
+@import "product.less";
+@import "general.less";
 body{
+	
 	header{
 		.nava{padding-right:0px;}
 		.caro{padding-left:0px;}
@@ -21,44 +21,48 @@ body{
 		}
 		
 		.sidenav{
-			background: @bgcolor;
-			background-image: -webkit-linear-gradient(left,@bgcolor, #3e588c 93%, #2e4167);
+			background: @darkbackcolor;
+			background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
 			padding:15px;
 			.nav{
-				>li{
+				li{
 					border-bottom:1px dotted #5573ab;
 					position : relative;
-					>a{
-						color:#fff;
+					> a{
+						color:@colorwhite;
+						padding: 10px 15px;
 						&:hover,&:focus,{
 							text-decoration: none;
 							background-color: transparent;
-							color:@color;
+							color:@lightcolor;
 						}
 					} 
 					&.active a,span{
 						background-color: transparent;
-						color:@color;
+						color:@lightcolor;
 					}
 					.navigation{
 						padding:10px;
 						font-size:20px;
 					}
-					> ul {
+					ul {
 						display: none;
 						position :absolute;
-						background-image: -webkit-linear-gradient(left,@bgcolor, #3e588c 93%, #2e4167);
+						list-style : none;
+						background-image: -webkit-linear-gradient(left,@darkbackcolor, #3e588c 93%, #2e4167);
 						padding:15px;
-						left: -15px;
+						left: 100%;
 						width: 278px;
-						top: 40px;
+						top: 0;
 						z-index: 999;
 						>li{
 							border-bottom:1px dotted #5573ab;
 							>a{
-								color:#fff;
+								color:@colorwhite;
+								padding: 10px 15px;
+								display: block;
 								&:hover{
-									color:@color;
+									color:@lightcolor;
 									text-decoration: underline;
 								}
 							}
@@ -68,9 +72,11 @@ body{
 								>li{
 								border-bottom:1px dotted #5573ab;
 									>a{
-										color:#fff;
+										color:@colorwhite;
+										padding: 10px 15px;
+										display: block;
 										&:hover{
-											color:@color;
+											color:@lightcolor;
 											text-decoration: underline;
 										}
 									}
@@ -94,17 +100,17 @@ body{
 			margin-top:10px;
 		}
 		.container {
-		  background-color: #F5F9FF;
+		  background-color: @lightbackcolor;
 		}
 		.contentModule, .sidebarModule{
-			border:1px solid black;
+			border:1px solid @darkbackcolor;
 			margin-top:10px;
 			margin-bottom: 10px;
 			h3{
 				margin-top:0px;
 				font-size:15px;
-				color:#fff;
-				background-color:@bgcolor;
+				color:@colorwhite;
+				background-color:@darkbackcolor;
 				padding:10px 15px;
 			}
 		}
@@ -114,48 +120,35 @@ body{
 				margin : -15px -15px 10px;
 			}
 		}
-		.menu{
-			img{
-				width:250px;
-				height:100px;
-				margin-top:10px;
-			}
+	}
+	
+	//global css
+	a{
+		color : @color;
+		&:hover{
+			color : @darkcolor;
 		}
-		.description{
-			h1{
-				color:#039;
-				font-size:20px;
-				border-bottom:1px solid #ccc;
-			}
-			p{
-				img{
-					height:150px;
-					width:150px;
-					float:right;
-					border:1px solid black; 
-					display: inline;
-				}
-			}
-			
-		}
+	}
+	h1, h2, h3{
+		color:@darkcolor;
 	}
 	h2{
-		color:#039;
 		font-size:20px;
-		border-bottom:1px solid #ccc;
+		border-bottom:1px solid @lightcolor;
 	}
 	.btn-info{
-		border-radius : 5px;
 		&, &:focus, &:active, &[disabled]{
 			background:none;
-			color:#337ab7;
 			border : none;
 			border-radius : 0px;
+			color:@color;
 			font-weight: bold;
+			padding-left: 0px;
 		}
 		&:hover{
-			color : #23527c;
-			background:none;
+			color : @darkcolor;
+			background : none;
+			text-decoration : underline;
 		}
 	}
 	//hr
@@ -164,38 +157,38 @@ body{
 		border-color: #333;
 		margin :5px 0px;
 	}
-	h4{
-		color :#337ab7;
-	}
 	.btn-link{
-		color : #337ab7;
+		color : @color;
 		font-size: 18px;
 		padding-left : 0px;
 		&:hover{
-			color : #23527c;
+			color : @darkcolor;
 		}
 	}
-	.send{
-		margin-right : 8px;
-	}
+	
 	.sidebarModule{
 		.btn-info{
-			border-radius : 5px;
 			&, &:focus, &:active, &[disabled]{
-				background-color:#337ab7;
-				color:white;
+				background-color : @back;
+				color : @colorwhite;
 				border-radius : 0px;
-				font-weight: bold;
+				font-weight : bold;
+				padding-left : 12px;
 			}
 			&:hover{
-				background-color:#23527c;
+				background-color : @darkcolor;
 			}
 		}
-		
+		.send{
+			margin-right : 8px;
+		}
+		.sideimg{
+			margin-bottom : 10px;
+		}
 	}
 	footer{
 		padding : 20px;
-		background-image: linear-gradient(#3e588c, #2d4065);
+		background-image: linear-gradient(#3e588c, @darkbackcolor);
 		color : @colorwhite;
 		p {
 			margin : 0;

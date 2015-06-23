@@ -1,6 +1,10 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
-
+jQuery(document).ready(function() {
+	jQuery(".subimgs").click(function(){
+		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
+	})
+});
 var app = angular.module('myApp',[]);
 $(document).ready(function(){
 	$('#bxslider1').bxSlider({

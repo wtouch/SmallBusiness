@@ -1,132 +1,5 @@
-//Property
-.property,.proplist{
-	border : 1px solid @lightbackcolor;
-}
-.property{
-	margin-bottom : 15px;
-	padding: 10px 15px;
-	h3{
-		border :none;
-	}
-	.table{
-		background-color : @darkbackcolor;
-		tbody{
-			tr{
-				td{
-					border-top : 1px dashed @lightbackcolor;
-				}
-			}
-		}
-	}
-	.mainimg {
-		img{
-			max-height: 180px;
-		}
-	}
-	.subimg{
-		margin-top: 10px;
-		
-		img{
-			height: 20px;
-			display : inline-block;
-			cursor : pointer;
-			margin-right : 10px;
-		}
-	}
-}
-.propDetails{
-	ul{
-		li {
-			padding: 3px;
-		}
-	}
-	span{
-		height : 20px;
-		width :20px;
-		margin-right: 6px;
-	}
-	.amenity{
-		background: url("../img/sprite_icons.png") transparent;
-		display: inline-block;
-		vertical-align: middle;
-	} 
-	span.amenity.power_backup {
-		background-position: 1px -24px;
-	}
-	span.amenity.water_storage {
-		background-position: -314px -24px;
-	}
-	span.amenity.lift {
-		background-position: -644px -22px;
-	}
-	span.amenity.reserve_parking {
-		background-position: -193px -22px;
-	}
-	span.amenity.security {
-		background-position: -97px -22px;
-	}
-	span.amenity.maintenance_staff {
-		background-position:-361px -22px;
-	}
-	span.amenity.gym {
-		background-position: -432px -22px;
-	}
-	span.amenity.park {
-		background-position: -385px -22px;
-	}
-	span.amenity.private_terrace {
-		background-position: -168px -22px;
-	}
-	span.amenity.swimming_pool {
-		background-position: -288px -22px;
-	}
-	span.amenity.club_house {
-		background-position: -74px -49px;
-	}
-	span.amenity.hospital {
-		background-position: -541px -4px;
-	}
-	span.amenity.airport {
-		background-position: 1px -2px;
-	}
-	span.amenity.railway {
-		background-position: -18px -1px;
-	}
-	span.amenity.school {
-		background-position: -60px -1px;
-	}
-	.table{
-		tbody{
-			tr{
-				th{
-					background-color : #1F1D01;
-				}
-				td, th{
-					border: 1px solid @lightbackcolor;
-				}
-			}
-		}
-	}
-}
-
-//propertyList 
-.proplist{
-	padding: 20px 20px 0px;
-	
-	.panel-default{
-		border-color : @lightbackcolor;
-	}
-	.panel-body {
-		padding: 5px 15px 15px;
-	}
-	.table{
-		td{
-			border : none;
-			padding: 1px 10px;
-		}
-	}
-}
-
+//featured properties
+.featuredProperty{
 	.bxslider1{
 		padding-left:10px;
 		list-style :none;
@@ -136,24 +9,6 @@
 				img{
 					max-height: 215px;
 					width : 100%;
-				}
-			}
-			a{
-				h4{
-					color:#337ab7;
-				}
-				h4:hover{
-					color : #23527c;
-					text-decoration : underline;
-				}
-				
-			}
-			.readmore{
-				.head
-				{color:#337ab7;}
-				.head:hover{
-					color : #23527c;
-					text-decoration : underline;
 				}
 			}
 			.table{
@@ -170,11 +25,168 @@
 			}
 		}
 	}
+}
+
+
+//propertiesList 
+.propertylist{
+	padding: 20px 20px 0px;
+	border : 1px solid @lightbackcolor;
+	.btn-primary{
+		margin-right : 10px;
+		margin-bottom: 10px;
+		background-color : @back;
+		color : @colorwhite;
+		border-radius : 0px;
+		font-weight: bold;
+		&:hover{
+			background-color : @darkbackcolor;
+		}
+	}
+	.panel-default{
+		border-color : @darkbackcolor;
+	}
+	.table{
+		td{
+			border : none;
+			padding: 1px 1px;
+		}
+	}
+	.viewdtls{
+		margin-right : 10px;
+	}
+}
+
+//single property view
+.singleproperty{
+	.property{
+		margin-bottom : 15px;
+		padding: 10px 15px;
+		border : 1px solid @darkbackcolor;
+		h3{
+			border :none;
+		}
+		.table{
+			tbody{
+				tr{
+					td{
+						border-top : 1px dashed @lightbackcolor;
+						color :@darkcolor;
+					}
+				}
+			}
+		}
+		.subimg{
+			margin-top: 10px;
+			img{
+				height: 20px;
+				display : inline-block;
+				cursor : pointer;
+				margin-right : 10px;
+			}
+		}
+	}
+	.propDetails{
+		ul{
+			li {
+				padding: 3px;
+			}
+		}
+		span{
+			height : 20px;
+			width :20px;
+			margin-right: 6px;
+		}
+		.amenity{
+			background: url("../img/sprite_icons.png") transparent;
+			display: inline-block;
+			vertical-align: middle;
+		} 
+		span.amenity.power_backup {
+			background-position: 1px -24px;
+		}
+		span.amenity.water_storage {
+			background-position: -314px -24px;
+		}
+		span.amenity.lift {
+			background-position: -644px -22px;
+		}
+		span.amenity.reserve_parking {
+			background-position: -193px -22px;
+		}
+		span.amenity.security {
+			background-position: -97px -22px;
+		}
+		span.amenity.maintenance_staff {
+			background-position:-361px -22px;
+		}
+		span.amenity.gym {
+			background-position: -432px -22px;
+		}
+		span.amenity.park {
+			background-position: -385px -22px;
+		}
+		span.amenity.private_terrace {
+			background-position: -168px -22px;
+		}
+		span.amenity.swimming_pool {
+			background-position: -288px -22px;
+		}
+		span.amenity.club_house {
+			background-position: -74px -49px;
+		}
+		span.amenity.hospital {
+			background-position: -541px -4px;
+		}
+		span.amenity.airport {
+			background-position: 1px -2px;
+		}
+		span.amenity.railway {
+			background-position: -18px -1px;
+		}
+		span.amenity.school {
+			background-position: -60px -1px;
+		}
+		.table{
+			tbody{
+				tr{
+					th{
+						background-color : @darkbackcolor;
+						color : @colorwhite;
+					}
+					td, th{
+						border: 1px solid @lightbackcolor;
+					}
+				}
+			}
+		}
+	}
+	.btn-primary{
+		margin-bottom : 10px;
+		background-color : @back;
+		color : @colorwhite;
+		border-radius : 0px;
+		font-weight: bold;
+		&:hover{
+			background-color : @darkbackcolor;
+		}
+	}
+}
+
+	
 @media (min-width: 992px){
 	.propDetails{
 		ul{
 			li{
 				width: 224px;
+			}
+		}
+	}
+	.property{
+		.mainimg {
+			img{
+				max-height: 145px;
+				max-width : 100%;
 			}
 		}
 	}
@@ -184,6 +196,14 @@
 		ul{
 			li{
 				width: 274px;
+			}
+		}
+	}
+	.property{
+		.mainimg {
+			img{
+				max-height: 180px;
+				max-width : 100%;
 			}
 		}
 	}
