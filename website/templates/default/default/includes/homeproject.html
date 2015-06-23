@@ -34,12 +34,12 @@
 	<div class="col-sm-12 col-md-3 text-center">
 		<div class="projsnap">
 		{% if home_project.builder.builder_photo %}
-			<img src="{{home_project.builder.builder_photo}}" class="img-responsive center-block"/>
+			<img src="{{home_project.builder.builder_photo.file_relative_path}}" class="img-responsive center-block"/>
 		{% endif %}
 		{% if home_project.builder.owner_photo %}
-			<img src="{{home_project.builder.owner_photo}}" class="img-responsive center-block"/>
+			<img src="{{home_project.builder.owner_photo.file_relative_path}}" class="img-responsive center-block"/>
 		{% endif %}
-		<a href="home_project.html" class="projlink">View Properties of this Project</a>
+		<a href="/properties/project_id={{home_project.id}}&homeProject=true" class="projlink">View Properties of this Project</a>
 		</div>
 	</div>
 </div>
