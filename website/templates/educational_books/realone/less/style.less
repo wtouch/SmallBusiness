@@ -1,12 +1,12 @@
 //text color shade
 	@color : #ffa366; // orange
 	@lightcolor : #B8F9B8; // light gray
-	@darkcolor : #930616; // vacant
+	@darkcolor : #930616; // dark red
 	 
 //background color shade
 	@back : #ede9d7; // use body background color
 	@darkbackcolor : #6ba72b; // use green background
-	@lightbackcolor :#f9f5f5;  // light bg
+	@lightbackcolor :#f9f5f5;  // light bg (light yellow)
 	
 //common color shade
 	@colorblack : #000000;
@@ -27,18 +27,15 @@
 		margin-left: 15px;
 		max-height: 100px;
 	}
-	
+	a, .btn.btn-link{
+		color: @darkbackcolor;
+	}
+	a:hover, .btn.btn-link:hover{
+		text-decoration : none;
+		color: @color;
+	}
 	.cnctinfo{
 		margin: 40px 15px 40px 0;
-		p{
-			a{
-				color: @darkbackcolor;
-			}
-			a:hover{
-				text-decoration:none;
-				color: @colorblack;
-			}
-		}
 	}
 	.navbar-collapse{
 		padding :0px;
@@ -156,11 +153,20 @@
 	.sidebarModule .panel,.sidebarModule .sections{
 		background-color: @lightbackcolor;
 		border:1px solid @darkbackcolor;
-		box-shadow:2px 2px 2px @lightcolor;
+		box-shadow: 3px 3px 6px #ADADAD;
 		border-radius : 4px;
-		.btn-info{
-			background-color:@darkbackcolor;
-		}
+	}
+	.btn-info, .propertylist .btn-primary{
+		background-color: @darkbackcolor;
+		border-color : @darkbackcolor;
+	}
+	.btn-info:hover, .propertylist .btn-primary:hover{
+		background-color: @lightbackcolor;
+		border-color : @darkbackcolor;
+		color : @color;
+	}
+	.btn.send{
+		margin-right : 10px;
 	}
 	.subhead{
 		font-family: "Carter One";
