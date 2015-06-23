@@ -3,6 +3,7 @@
 	.projectCarousal{
 		width : 620px;
 		display : inline-block;
+		float : left;
 		.carousel-inner{
 			.item.active{
 				height : 372px;
@@ -17,19 +18,21 @@
 	}
 	.projectnav{
 		width : 242px;
+		height : 372px;
 		display : inline-block;
+		background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
 		.nav-stacked{
-			background-color: @back;
 			margin: 5px;
-			border: 2px solid @lightcolor ;
 			>li{
+				border-bottom:1px dotted @lightbackcolor ;
 				>a, > a:focus{
-					font-weight: bold;
-					color : @lightcolor;
+					color : @colorwhite;
+					padding: 10px 15px;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @color ;
-					color : @colorblack;
+					text-decoration: none;
+					background-color: transparent;
+					color:@lightcolor;
 				}
 			}
 		}

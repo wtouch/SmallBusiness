@@ -4,14 +4,9 @@
 		<h2 class="text-center">Testimonials</h2>
 		{% for key, value in data.testimonials if break == 0 %}
 		<div class="col-sm-12 col-md-6">
-			<blockquote class="row">
-				<div class="col-sm-1 col-md-1">
-					<img class="quote" src="{{path}}img/quote_sign.png"/>
-				</div>
-				<div class="col-sm-11 col-md-11">
-					<div class="description">{{ value.description }}</div>
-					<h4><img class="img-circle" src="{{value.image.file_relative_path}}">{{key}}</h4>
-				</div>
+			<blockquote>
+				<div class="description">{{ value.description }}</div>
+				<footer><img class="img-circle" src="{{value.image.file_relative_path}}"> <cite title="Source Title">{{key}}</cite></footer>
 			</blockquote>
 		</div>
 		{% endfor %}

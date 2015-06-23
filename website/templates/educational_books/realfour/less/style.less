@@ -11,7 +11,6 @@
 @import "product.less";
 @import "general.less";
 body{
-	
 	header{
 		.nava{padding-right:0px;}
 		.caro{padding-left:0px;}
@@ -26,7 +25,7 @@ body{
 			padding:15px;
 			.nav{
 				li{
-					border-bottom:1px dotted #5573ab;
+					border-bottom:1px dotted @lightbackcolor ;
 					position : relative;
 					> a{
 						color:@colorwhite;
@@ -49,14 +48,14 @@ body{
 						display: none;
 						position :absolute;
 						list-style : none;
-						background-image: -webkit-linear-gradient(left,@darkbackcolor, #3e588c 93%, #2e4167);
+						background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
 						padding:15px;
 						left: 100%;
 						width: 278px;
 						top: 0;
 						z-index: 999;
 						>li{
-							border-bottom:1px dotted #5573ab;
+							border-bottom:1px dotted @lightbackcolor ;
 							>a{
 								color:@colorwhite;
 								padding: 10px 15px;
@@ -70,7 +69,7 @@ body{
 								display: none;
 								list-style :none;
 								>li{
-								border-bottom:1px dotted #5573ab;
+								border-bottom:1px dotted @lightbackcolor ;
 									>a{
 										color:@colorwhite;
 										padding: 10px 15px;
@@ -129,11 +128,10 @@ body{
 			color : @darkcolor;
 		}
 	}
-	h1, h2, h3{
+	h1, h2, h3, h4{
 		color:@darkcolor;
 	}
-	h2{
-		font-size:20px;
+	h1, h2, h3{
 		border-bottom:1px solid @lightcolor;
 	}
 	.btn-info{
@@ -188,7 +186,7 @@ body{
 	}
 	footer{
 		padding : 20px;
-		background-image: linear-gradient(#3e588c, @darkbackcolor);
+		background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
 		color : @colorwhite;
 		p {
 			margin : 0;
