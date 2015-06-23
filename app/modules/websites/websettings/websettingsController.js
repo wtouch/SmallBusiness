@@ -5,6 +5,7 @@ define(['app'], function (app) {
 
 	var websettingsController = function ($scope, $rootScope, $injector, $routeParams, $location, dataService, upload, modalService, $notification) {
 		$scope.permission = $rootScope.userDetails.permission.website_module;
+		$scope.sidebar = {};
 		$scope.userInfo = {
 			user_id : $rootScope.userDetails.id
 		};
@@ -13,18 +14,26 @@ define(['app'], function (app) {
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
 		$scope.websetting = {
 			config : {
-				google_map : {}
-
+				google_map : {},
+				sidebar : []
 			}
 		};
 		$scope.isCollapsed = true;
+		$scope.isFirstOpen = true;
 
 		$scope.dragControlListeners = {
 			accept : function (sourceItemHandleScope, destSortableScope) {
 				return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
 			}
 		};
-
+		
+		$scope.addToObject = function(data, object, resetObj){
+			
+			var dtlObj = JSON.stringify(data);
+			object.push(JSON.parse(dtlObj));
+			$scope.sidebar = {};
+		}
+		
 		//code for view single website details
 		dataService.get("getsingle/website/" + $routeParams.id)
 		.then(function (response) {
@@ -156,6 +165,12 @@ define(['app'], function (app) {
 			});
 
 		}
+		
+		$scope.addsidebar = function(websetting){
+			$scope.websetting.config.sidebar = (websetting.config.sidebar) ? websetting.config.sidebar : {};
+			console.log(websetting);
+				
+		};
 
 		//update method for website settings form
 		$scope.editWebsitedetails = function (config) {

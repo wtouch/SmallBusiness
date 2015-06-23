@@ -4,6 +4,7 @@ define(['app'], function (app) {
     // This is controller for this view
 	var addprojectController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification) {
 		$rootScope.metaTitle = "Add Real Estate Property";
+		$scope.path = "/project"; 
 		$scope.project = {
 			featured : 0,
 			builder :{},
@@ -18,7 +19,7 @@ define(['app'], function (app) {
 			created_date : $scope.currentDate,
 			modified_date :$scope.currentDate,
 		};
-		
+		$scope.overview = {};
 		$scope.location_map = {};
 		$scope.layout_map = {};
 		$scope.floor_plan = {};
@@ -26,7 +27,6 @@ define(['app'], function (app) {
 		$scope.builder = {},
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		$scope.path = "project/"; 
 		
 		dataService.config('config', {config_name : "project"}).then(function(response){
 			$scope.projectConfig = response.config_data;
@@ -95,6 +95,22 @@ define(['app'], function (app) {
 		
 		$scope.removeImg = function(item, imgObject) {
 			imgObject.splice(item, 1);     
+		};
+		
+		$scope.uploads = function(files,path,userinfo, picArr){ 
+			upload.upload(files,path,userinfo,function(data){
+				if(data.status === 'success'){
+					if(picArr == "builder_photo"){
+						$scope.project.builder.builder_photo = data.data;
+					}
+					if(picArr == "owner_photo"){
+						$scope.project.builder.owner_photo = data.data;
+					}
+				}else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification.error("Upload Image", data.message);
+				}
+			});
 		};
 	/**********************************************************************************/
 		$scope.getUsers = function(){
