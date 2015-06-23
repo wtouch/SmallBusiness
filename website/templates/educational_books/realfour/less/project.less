@@ -1,4 +1,24 @@
-//project
+//css for featured project slider
+.bxslider{ 
+	padding:5px;
+	li{
+		width:100px;
+		img{
+			border : 1px solid @darkcolor;
+			min-height: 190px;
+		}
+		a{
+			color:@color;
+			font-weight : bold;
+			text-decoration:underline;
+			&:hover{
+				color:@color;
+				text-decoration:none;
+			}
+		}
+	}
+}
+//homeproject
 .homeproject{
 	height : 372px;
 	.projectCarousal{
@@ -44,79 +64,98 @@
 		}
 	}
 	
-}
-.highlight{
-	color :@color; 
-}
-.project{
-	.navbar{
-		height : 20px;
-	}
-	
-	ul.nav.navbar-nav {
-		background-color: @back;
-		border-bottom: 4px solid @lightbackcolor;
-		height : 42px;
-		>li{
-			border-right : 1px solid @lightbackcolor;
-			height : 38px;
-			>a, > a:focus{
-				padding : 9px 14px;
-				color : @lightcolor;
-				font-weight : bold;
-			} 
-			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-				background-color: @color ;
-				color : @colorblack;
-			}
-		}
-	}
-	.projImg{
-		margin-right: 20px;
-	}
-	.projImgs{
-		margin-bottom: 20px;
-		max-height : 175px;
-	}
-}
-.projectgallery, .projlist{
-	//background-color : @back;
-	border : 1px solid @lightbackcolor;
-	padding: 20px 20px 0px;
-	.thumbnail{
-		//background-color : @darkbackcolor;
-	}
-}
-//projectlist
-.projlist{
-	.thumbnail{
-		padding-top : 15px;
-		height: 350px;
-		.caption{
-			//color : @lightcolor;
-			a{
-				color : @color;
-				text-decoration : none;
-				&:hover{
-					color : @color;
-					text-decoration : underline;
+}//css for single project & project list
+	.projlist{
+		border:1px solid @darkbackcolor;
+		box-shadow: 3px 3px 6px #ADADAD;
+		background-color:@lightbackcolor;
+		padding:10px;
+		.project{
+			
+			.thumbnail{
+				height:430px;
+				padding-top : 15px;
+				.caption{
+					color : @lightcolor;
+					a{
+						color: @color;
+						text-decoration: none;
+						&:hover{
+							color : @color;
+							text-decoration : underline;
+						}
+					}
+				}
+				
+				.caption p{
+					color:@colorblack;
 				}
 			}
+			.navbar{
+				height:50px;
+				
+				border: 1px solid @lightbackcolor;
+				border-radius: 0;
+				margin-top:10px;
+				margin-bottom:10px;
+				height : 20px;
+				width:auto;
+				
+			}
+			ul.nav.navbar-nav {
+				color:@lightbackcolor;
+				
+				border-bottom: 4px solid @lightbackcolor;
+				height : 42px;
+				>li{
+					border-right : 1px solid @lightbackcolor;
+					height : 38px;
+					>a, > a:focus{
+						padding : 9px 14px;
+						color : @lightcolor;
+						font-weight : bold;
+					} 
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+						background-color: @back ;
+						color : @lightbackcolor;
+					}
+				}
+			}
+			.projImg{
+				margin-right: 20px;
+				max-height : 175px;
+			}
+			
+		}
+		.projectgallery{ 
+			background-color : @back;
+			border : 1px solid @lightbackcolor;
+			padding: 20px 20px 0px;
+			.thumbnail{
+				background-color : @darkbackcolor;
+			}
+		}
+		
+	}
+	
+	@media (min-width: 320px){
+		.projImg{
+			float :none;
+			max-height : 175px;
+			margin-right:10px;
 		}
 	}
-}
-@media (min-width: 320px){
-	.projImg{
-		float :none;
+	@media (min-width: 992px){
+		.projImg{
+			float : left;
+			max-height : 175px;
+			margin-right : 10px;
+		}
 	}
-}
-@media (min-width: 992px){
-	.projImg{
-		float :left;
+	@media (min-width: 1200px){
+		.projImg{
+			float :left;
+			max-height : 175px;
+			margin-right:10px;
+		}
 	}
-}
-@media (min-width: 1200px){
-	.projImg{
-		float :left;
-	}
-}
