@@ -5,7 +5,7 @@ define(['app'], function (app) {
 	
 	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,upload,$notification) {
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
-		$scope.path = "user/profile/"+$scope.userInfo.user_id; // path to store images on server
+		$scope.path = "/profile"; // path to store images on server
 		$scope.formats = ['yyyy/MM/dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		

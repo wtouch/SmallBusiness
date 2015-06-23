@@ -12,7 +12,7 @@
 						<input type="file" id="userimg" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="userimg">
 							<file-preview url="userimg"></file-preview>
 							<!-- This button will show if file/s selected -->
-							<button ng-show="userimg" ng-click="upload(userimg,path,userInfo,editprofile.user_img)" type="button">Upload</button>
+							<button ng-show="userimg" ng-click="upload(userimg,editprofile.id + path,userInfo,editprofile.user_img)" type="button">Upload</button>
 							<input type="hidden" ng-model="editprofile.user_img">
 							<span class="thumbs" ng-repeat="(key, value) in editprofile.user_img">
 								<img class="img-thumbnail" width="40px"ng-src="{{appConfig.assetPath + editprofile.user_img}}" />
