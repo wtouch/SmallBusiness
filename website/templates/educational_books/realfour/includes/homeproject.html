@@ -4,6 +4,11 @@
 		{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : home_project.project_images } only %}
 	</div>
 	<div class="projectnav">
+		{% if home_project.builder.builder_photo %}
+		<div class="builderLogo">
+			<img src="{{home_project.builder.builder_photo.file_relative_path}}" class="center-block">
+		</div>
+		{% endif %}
 		<ul class="nav nav-stacked">
 			<li {{ projectPage == 'overview' ? 'class="active"' }}>
 				<a href="/projects/{{home_project.title}}/{{home_project.id}}/overview?homeProject=true">Overview</a>
@@ -22,6 +27,9 @@
 			</li>
 			<li {{ projectPage == 'gallery' ? 'class="active"' }}>
 				<a href="/projects/{{home_project.title}}/{{home_project.id}}/gallery?homeProject=true">Gallery</a>
+			</li>
+			<li>
+				<a href="/properties/project_id={{home_project.id}}&homeProject=true" class="projlink">View Properties of this Project</a>
 			</li>
 		</ul>
 	</div>
