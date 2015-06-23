@@ -209,8 +209,12 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 					$scope.showProductForm = false;
 					$scope.editProdForm = false;
 					$scope.editServForm = false;
-					$scope.servicelist();
-					$scope.productlist();
+					if(addservice.type =='product'){
+						$scope.productlist();
+					}
+					else{
+						$scope.servicelist();
+					}
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Edit Product", response.message);
