@@ -175,6 +175,7 @@ class websiteManager{
 		$whereProd['status'] = 1;
 		$whereProd['business_id'] = $business_id;
 		if($type != "all") $whereProd['type'] = $type;
+		if($featured) $whereProd['featured'] = 1;
 		if($category && $category != "Other") $whereProd['category'] = $category;
 		
 		$product = $this->db->setTable('product');

@@ -2,16 +2,16 @@
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background-color: @darkbackcolor;
+			background : -webkit-linear-gradient(top, @back, @darkbackcolor);
 			>li{
-				border-right : 1px solid @lightbackcolor;
+				border-right : 1px solid @lightcolor;
 				>a, > a:focus{
-					color : @colorwhite;
+					color : @color;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					color : @lightcolor;
-					background-color: @darkbackcolor;
+					background-color: @darkcolor;
 				}
 			}
 		}
@@ -71,7 +71,7 @@
 				}
 				cite{
 					font-size : 17px;
-					color : @color;
+					color : @darkcolor;
 				}
 			}
 		}
@@ -94,6 +94,10 @@
 		.gallery{
 			.thumbnail{
 				height:365px;
+				img{
+					max-height : 155px;
+					width:100%;
+				}
 			}
 		}
 	}
@@ -102,6 +106,10 @@
 		.gallery{
 			.thumbnail{
 				height:380px;
+				img{
+					max-height : 200px;
+					width:100%;
+				}
 			}
 		}
 	}
