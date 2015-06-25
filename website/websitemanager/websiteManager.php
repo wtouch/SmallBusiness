@@ -10,6 +10,8 @@ class websiteManager{
 	private $twig;
 	private $modules;
 	private $seo;
+	private $currentPage;
+	private $itemsOnPage;
 	
 	
 	function __construct(){
@@ -17,6 +19,8 @@ class websiteManager{
 		$this->db = new dbHelper;
 		$this->config["rootTempPath"] = $_SERVER['DOCUMENT_ROOT']."/website/templates/";
 		$this->config['httpTempPath'] = "http://".$_SERVER['SERVER_NAME']."/website/templates/";
+		$this->currentPage = (isset($_GET['page'])) ? $_GET['page'] : 1;
+		$this->itemsOnPage = 10;
 	}
 	
 	function getTemplate($page, $response){
@@ -162,6 +166,31 @@ class websiteManager{
 			
 			// set Modules
 			$this->setModules($result['data']['website_config']['menus']);
+			$businessData = $response;
+			if(isset($this->modules['contentModule']["featured_products"])){
+				$featured_products = $this->getProducts($businessData['data']["id"],"all", $category = null, 1);
+				$response["featured_products"] = $featured_products['data'];
+				//print_r($response["featured_products"] );
+			}
+			if(isset($this->modules['contentModule']["featured_properties"])){
+				$featured_properties = $this->getProperties($businessData['data']["user_id"], $category = null, 1);
+				$response["featured_properties"] = $featured_properties['data'];
+				//print_r($response["featured_properties"] );
+			}
+			if(isset($this->modules['contentModule']["featured_projects"])){
+				$featured_projects = $this->getProjects($businessData['data']["user_id"], 1);
+				$response["featured_projects"] = $featured_projects['data'];
+				print_r($response["featured_projects"] );
+			}
+			if(isset($this->modules['headerModule']["homeproject"]) && isset($businessData['data']['website_config']["project_id"])){
+				$productData = $this->singleProject($businessData['data']['website_config']["project_id"]);
+				$response["home_project"] = $productData["data"];
+				//print_r($response["home_project"]);
+			}
+			
+			$response["currentPage"] = $this->currentPage;
+			$response["itemsOnPage"] = $this->itemsOnPage;
+			
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
@@ -180,6 +209,9 @@ class websiteManager{
 		
 		$product = $this->db->setTable('product');
 		$this->db->setWhere($whereProd, $product);
+		$limit[0] = $this->currentPage;
+		$limit[1] = $this->itemsOnPage;
+		$this->db->setLimit($limit);
 		if($category == "Other"){
 			$this->db->setWhere(array($product.".category IS NULL OR ".$product.".category = ''"), $product, false, true);
 		}
@@ -189,7 +221,14 @@ class websiteManager{
 		/* if($productData['status'] != 'success'){
 			throw new Exception('Product Error: '.$productData['message']);
 		} */
-		return $productData["data"];
+		return $productData;
+	}
+	function getModules($businessData){
+		/* $response = array();
+		
+		
+		print_r($businessData['data']['website_config']["project_id"]);
+		return $response; */
 	}
 	function getBusinessData($page, $title, $customPage = null){
 		try{
@@ -197,31 +236,8 @@ class websiteManager{
 			if($businessData["status"] != "success"){
 				throw new Exception($businessData["message"]);
 			}
-			
-			if(isset($this->modules['contentModule']["featured_products"])){
-				$response["featured_products"] = $this->getProducts($businessData['data']["id"],"all", $category = null, 1);
-				//print_r($response["featured_products"] );
-			}
-			if(isset($this->modules['contentModule']["featured_properties"])){
-				$response["featured_properties"] = $this->getProperties($businessData['data']["user_id"], $category = null, 1);
-				//print_r($response["featured_properties"] );
-			}
-			if(isset($this->modules['contentModule']["featured_projects"])){
-				$response["featured_projects"] = $this->getProjects($businessData['data']["user_id"], 1);
-				//print_r($response["featured_projects"] );
-			}
-			if(isset($this->modules['headerModule']["homeproject"]) && isset($businessData['data']['website_config']["project_id"])){
-				$productData = $this->singleProject($businessData['data']['website_config']["project_id"]);
-				$response["home_project"] = $productData["data"];
-				
-				//print_r($response["home_project"] );
-				/* $response["homeproject"] = $this->getSingleProject($businessData['data']['website_config']["project_id"], 1);
-				 */
-			}
-			
-			$response["status"] = "success";
-            $response["message"] = "Data Selected!";
-            $response["data"] = $businessData["data"];
+			//$this->getModules($businessData);
+            $response = $businessData;
 			$response["title"] = $title;
 			if($page == "contact-us"){
 				$response["google_map"] = $businessData["data"]['website_config']['google_map'];
@@ -249,15 +265,15 @@ class websiteManager{
 			$businessData = $this->getConfigData(true);
 			// check website status if deleted or expired or data null
 			if($businessData['status'] == 'success' && $businessData['data'] != null) {
-				$response["products"] = $this->getProducts($businessData['data']["business_id"], $type, $category);
+				$products = $this->getProducts($businessData['data']["business_id"], $type, $category);
+				$response["products"] = $products["data"];
+				$response["totalRecords"] = $products["totalRecords"];
 			}else{
 				throw new Exception($businessData['message']);
 			}
 			
 			// assign data to response
-			$response["status"] = "success";
-            $response["message"] = "Data Selected!";
-            $response["data"] = $businessData["data"];
+			$response = array_merge($response, $businessData);
             $response["title"] = ($type == 'product') ? "Products" : "Services";
             $response["uri"] = ($type == 'product') ? "/products" : "/services";
 			
@@ -291,9 +307,7 @@ class websiteManager{
 			}
 			
 			// assign data to response
-			$response["status"] = "success";
-            $response["message"] = "Data Selected!";
-            $response["data"] = $businessData["data"];
+			$response = array_merge($response, $businessData);
 			$response["uri"] = "/".$response["product"]["type"]."s";
 			
 			// to render template 
@@ -315,10 +329,13 @@ class websiteManager{
 		
 		$table = $this->db->setTable('project');
 		$this->db->setWhere($where, $table);
+		$limit[0] = $this->currentPage;
+		$limit[1] = $this->itemsOnPage;
+		$this->db->setLimit($limit);
 		$this->db->setColumns($table, array("*"));
 		$projectData = $this->db->select();
 		
-		return $projectData["data"];
+		return $projectData;
 	}
 	function getProperties($user_id, $search = array(), $featured = null){
 		//$category = str_replace("-", " ", $category);
@@ -329,10 +346,13 @@ class websiteManager{
 		$table = $this->db->setTable('property');
 		$this->db->setWhere($where, $table);
 		$this->db->setWhere($like, $table, true);
+		$limit[0] = $this->currentPage;
+		$limit[1] = $this->itemsOnPage;
+		$this->db->setLimit($limit);
 		$this->db->setColumns($table, array("*"));
 		$projectData = $this->db->select();
 		
-		return $projectData["data"];
+		return $projectData;
 	}
 	//to get project data
 	function getProjectData($page){
@@ -340,15 +360,16 @@ class websiteManager{
 			$businessData = $this->getConfigData(true);
 			// check website status if deleted or expired or data null
 			if($businessData['status'] == 'success' && $businessData['data'] != null) {
-				$response["projects"] = $this->getProjects($businessData['data']["user_id"]);
+				$this->getModules($businessData);
+				$projects = $this->getProjects($businessData['data']["user_id"]);
+				$response["projects"] = $projects['data'];
+				$response["totalRecords"] = $projects["totalRecords"];
 			}else{
 				throw new Exception($businessData['message']);
 			}
 			
 			// assign data to response
-			$response["status"] = "success";
-            $response["message"] = "Data Selected!";
-            $response["data"] = $businessData["data"];
+            $response = array_merge($response, $businessData);
             $response["title"] = "Projects";
             $response["uri"] = "/projects";
 			
@@ -391,9 +412,7 @@ class websiteManager{
 			}
 			
 			// assign data to response
-			$response["status"] = "success";
-            $response["message"] = "Data Selected!";
-            $response["data"] = $businessData["data"];
+			$response = array_merge($response, $businessData);
 			$response["uri"] = "/projects";
 			$response["title"] = $response["project"]["title"];
 			
@@ -426,9 +445,7 @@ class websiteManager{
 			}
 			
 			// assign data to response
-			$response["status"] = "success";
-            $response["message"] = "Data Selected!";
-            $response["data"] = $businessData["data"];
+			$response = array_merge($response, $businessData);
 			$response["uri"] = "/properties";
 			$response["title"] = $response["property"]["title"];
 			
@@ -455,7 +472,9 @@ class websiteManager{
 			}
 			
 			if($businessData['status'] == 'success' && $businessData['data'] != null) {
-				$response["properties"] = $this->getProperties($businessData['data']["user_id"],$search);
+				$properties = $this->getProperties($businessData['data']["user_id"],$search);
+				$response["properties"] = $properties['data'];
+				$response["totalRecords"] = $properties["totalRecords"];
 			}else{
 				throw new Exception($businessData['message']);
 			}
@@ -470,6 +489,7 @@ class websiteManager{
 				if(isset($newProperty)){
 					if(count($newProperty) >=1 ){
 						$response["properties"] = $newProperty;
+						$response["totalRecords"] = count($newProperty);
 					}
 				}
 				if(!isset($_GET['property_for'])){
@@ -479,9 +499,7 @@ class websiteManager{
 			
 			
 			// assign data to response
-			$response["status"] = "success";
-            $response["message"] = "Data Selected!";
-            $response["data"] = $businessData["data"];
+			$response = array_merge($response, $businessData);
             $response["title"] = "Properties";
             $response["uri"] = "/properties";
 			
