@@ -180,7 +180,7 @@ class websiteManager{
 			if(isset($this->modules['contentModule']["featured_projects"])){
 				$featured_projects = $this->getProjects($businessData['data']["user_id"], 1);
 				$response["featured_projects"] = $featured_projects['data'];
-				print_r($response["featured_projects"] );
+				//print_r($response["featured_projects"] );
 			}
 			if(isset($this->modules['headerModule']["homeproject"]) && isset($businessData['data']['website_config']["project_id"])){
 				$productData = $this->singleProject($businessData['data']['website_config']["project_id"]);
@@ -223,13 +223,7 @@ class websiteManager{
 		} */
 		return $productData;
 	}
-	function getModules($businessData){
-		/* $response = array();
-		
-		
-		print_r($businessData['data']['website_config']["project_id"]);
-		return $response; */
-	}
+	
 	function getBusinessData($page, $title, $customPage = null){
 		try{
 			$businessData = $this->getConfigData(true);
@@ -496,7 +490,6 @@ class websiteManager{
 					$response["prop_category"] = array_unique($categories);
 				}
 			}
-			
 			
 			// assign data to response
 			$response = array_merge($response, $businessData);
