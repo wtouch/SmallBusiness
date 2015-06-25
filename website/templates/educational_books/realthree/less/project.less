@@ -1,94 +1,168 @@
 //project
-@lightcolor : #BBBBBB;
-@lightbackcolor :#2F3826; 
-@back:#24293D;
-	.breadcrumb{
-		background : none;
-		li{
-			a{
-				color : @lightcolor;
-				text-decoration : underline;
+//css for featured project slider
+.bxslider{ 
+	padding:5px;
+	li{
+		width:100px;
+		img{
+			border : 1px solid @darkcolor;
+			min-height: 190px;
+		}
+		a{
+			color:@color;
+			font-weight : bold;
+			text-decoration:underline;
+			&:hover{
+				color:@color;
+				text-decoration:none;
+			}
+		}
+	}
+}
+
+.homeproject {
+	margin-top:10px;
+	.projectnav,.projsnap {
+		background-color:@contentback;
+		border:7px solid @lightbackcolor;
+		border-radius : 4px;
+		padding:5px;
+		height:312px;
+		a{
+			color: @color;
+			&:hover{
+				color: @colorwhite;
+				text-decoration:none;
+				background: -webkit-linear-gradient(right,#ccc,#0D8375);
+			}
+		}
+		img{
+			max-height:100px;
+			width:100%;
+		}
+	}
+	#carousel {
+		background-color: @lightbackcolor;
+		border:7px solid @back;
+		.carousel-inner {
+			.item{
+				border:7px solid @lightbackcolor;
+				border-radius:40px;
+				max-height: 312px;
+				overflow: hidden;
+				transition: all 3s ease-in-out ;
+				
+				>img{
+					width :100%;
+					min-height : 310px;
+				}
 				&:hover{
-					color : @lightcolor;
-					text-decoration : none;
+					transform: scale(2);
+					 border-radius: 40px;
 				}
 			}
-			&+li:before {
-				content: ">\00a0";
-			}
+			
+		}
+		a.left.carousel-control, a.right.carousel-control {
+			background: none;
 		}
 	}
-	.highlight{
-		color :#fff; 
-	}
-	.project{
-		ul.nav.navbar-nav {
-			background-color: @back;
-			border-bottom: 4px solid @lightbackcolor;
-			height : 42px;
-			>li{
-				border-right : 1px solid @lightbackcolor;
-				height : 38px;
-				>a, > a:focus{
-					padding-top : 9px;
-					padding-bottom : 9px;
-					color : @lightcolor;
-					font-weight : bold;
-				} 
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @back ;
-					color : #fff;
-				}
-			}
-		}
-		.projImg{
-			margin-right: 20px;
-			max-width : 200px;
-		}
-		.projHead{
-			margin-top:40px
-		}
-		.projImgs{
-			margin-bottom: 20px;
-			max-height : 175px;
-		}
-	}
-	.projectgallery,.projlist{
-		background-color : @back;
-		border : 1px solid @lightbackcolor;
-		padding: 20px 20px 0px;
-		.thumbnail{
-			background-color : @back;
-		}
-	}
-	//projectlist
+}
+
+//css for single project & project list
 	.projlist{
-		.thumbnail{
-			.caption{
-				color : @lightcolor;
-				a{
-					color : #fff;
-					text-decoration : underline;
-					&:hover{
-						color : #fff;
-						text-decoration : none;
+		.panel-default{
+			background-color:@back;
+		}
+		border:1px solid @darkbackcolor;
+		box-shadow: 3px 3px 6px #ADADAD;
+		background-color:@back;
+		padding:10px;
+		.project{
+			.thumbnail{
+				background-color:@lightbackcolor;
+				height:430px;
+				padding-top : 15px;
+				.caption{
+					a{
+						color: @color;
+						text-decoration: none;
+						&:hover{
+							color : @color;
+							text-decoration : underline;
+						}
+					}
+				}
+				
+				.caption p{
+					color:@colorwhite;
+				}
+			}
+			.navbar{
+				height:50px;
+				background-color: @darkbackcolor;
+				border: 1px solid @lightbackcolor;
+				border-radius: 0;
+				margin-top:10px;
+				margin-bottom:10px;
+				height : 20px;
+				width:auto;
+				
+			}
+			ul.nav.navbar-nav {
+				color:@lightbackcolor;
+				background-color: @darkbackcolor;
+				border-bottom: 4px solid @lightbackcolor;
+				height : 42px;
+				>li{
+					border-right : 1px solid @lightbackcolor;
+					height : 38px;
+					>a, > a:focus{
+						padding : 9px 14px;
+						color : @lightcolor;
+						font-weight : bold;
+					} 
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+						background-color: @back ;
+						color : @lightbackcolor;
 					}
 				}
 			}
+			.projImg{
+				margin-right: 20px;
+				max-height : 175px;
+			}
+			
 		}
+		.projectgallery{ 
+			background-color : @back;
+			border : 1px solid @lightbackcolor;
+			padding: 20px 20px 0px;
+			.thumbnail{
+				background-color : @darkbackcolor;
+			}
+		}
+		
 	}
+	
 	@media (min-width: 320px){
 		.projImg{
 			float :none;
+			max-height : 175px;
+			margin-right:10px;
 		}
 	}
 	@media (min-width: 992px){
 		.projImg{
-			float :left;
+			float : left;
+			max-height : 175px;
+			margin-right : 10px;
 		}
 	}
 	@media (min-width: 1200px){
 		.projImg{
 			float :left;
+			max-height : 175px;
+			margin-right:10px;
 		}
 	}

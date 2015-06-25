@@ -2,20 +2,16 @@
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background-color: @back;
-			border-bottom: 4px solid @lightbackcolor;
+			background-color: @darkbackcolor;
 			>li{
 				border-right : 1px solid @lightbackcolor;
-				height : 38px;
 				>a, > a:focus{
-					padding-top : 9px;
-					padding-bottom : 9px;
-					color : @lightcolor;
+					color : @colorwhite;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @color ;
-					color : @colorblack;
+					color : @lightcolor;
+					background-color: @darkbackcolor;
 				}
 			}
 		}
@@ -25,7 +21,7 @@
 			tbody{
 				tr{
 					th,td{
-						border-color : @lightbackcolor;
+						border-color : @darkbackcolor;
 					}
 				}
 			}
@@ -38,12 +34,17 @@
 	}
 	.infrastructure{
 		.thumbnail{
+			background-color:@lightbackcolor;
+			border:1px solid @darkbackcolor;
+			box-shadow: 3px 3px 6px #ADADAD;
+			background-color:@back;
 			height: 395px;
 			img{
 				height : 190px;
 			}
 			.caption{
 				height: 138px;
+				color:@colorwhite;
 			}
 		}
 	}
@@ -66,18 +67,29 @@
 		blockquote{
 			font-size : inherit;
 			border-left: none;
-			img{
-				max-height : 50px;
-				margin-right : 10px;
-			}
-			.quote{
-				height: 15px;
-				margin-top: 10px;
-				padding-left: 5px;
+			footer{
+				background:none;
+				padding : 0px;
+				img{
+					max-height : 50px;
+					margin-right : 10px;
+				}
+				cite{
+					font-size : 17px;
+					color : @color;
+				}
 			}
 		}
 	}
-	
+	.gallery{
+			.thumbnail{
+				border-color : @darkbackcolor;
+				background-color:@back;
+				.caption p{
+					color:@colorwhite;
+				}
+			}
+		}
 	//gallery
 	@media (min-width: 320px) {
 		.gallery{
@@ -91,6 +103,10 @@
 		.gallery{
 			.thumbnail{
 				height:365px;
+				img{
+					max-height: 155px;
+					width: 100%;
+				}
 			}
 		}
 	}
@@ -99,6 +115,10 @@
 		.gallery{
 			.thumbnail{
 				height:380px;
+				img{
+					max-height: 200px;
+					width: 100%;
+				}
 			}
 		}
 	}

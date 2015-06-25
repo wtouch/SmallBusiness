@@ -1,9 +1,9 @@
-	@color : #858A9B;
+	@color : #bae275;
 	@lightcolor : #BBBBBB;
 	@darkcolor : #02071A;
-	@back : #272600;
-	@darkbackcolor : #9BA61F;
-	@lightbackcolor :#2F3826; 
+	@back : #151927;
+	@darkbackcolor : #25563B;
+	@lightbackcolor :#3C5C73; 
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	@contentlink:#6ba72b;
@@ -17,16 +17,66 @@
 	@import "general.less";
 	body{
 		color : @colorwhite;
-		background-color : @darkcolor;
+		background-image:-webkit-linear-gradient(@darkcolor,@lightbackcolor 50%);
 	}
 	*, hr{
 		border-color : #373C51;
 	}
+	*{
+		transition:300ms;
+	}
+	.form-control{
+		background-color:@darkcolor;
+	}
+	
 	.logo {
 		height: 80px;
 		margin-top: 25px;
 		margin-left: 15px;
 		max-height: 100px;
+	}
+	a, .btn.btn-link,.btn .btn-info{
+		color: @color;
+	}
+	.project .thumbnail{
+		background-color:@back;
+	}
+	.project .navbar-nav {
+		background-color: @darkbackcolor;
+		li{
+			border-right:1px solid @darkbackcolor;
+			a{
+				color:@colorwhite;
+			}
+			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+				background-color : @darkcolor;
+				color : @colorwhite;
+				border:1px solid @darkbackcolor;
+			}
+		}
+	}
+	a:hover, .btn.btn-link:hover{
+		text-decoration : none;
+		color: @colorwhite;
+	}
+	.propertylist .text-center a:hover{
+		text-decoration : none;
+		color: @colorwhite;
+	}
+	.btn-info, .propertylist .btn-primary{
+		background-color: @darkbackcolor;
+		border-color : @darkbackcolor;
+	}
+	.btn-info:hover, .propertylist .btn-primary:hover{
+		background-color: @lightbackcolor;
+		border-color : @darkbackcolor;
+		color : @colorwhite;
+	}
+	.propertylist .panel-default {
+		background-color: @back;
+	}
+	.btn.send{
+		margin-right : 10px;
 	}
 	.cnctinfo{
 		color:@color;
@@ -46,6 +96,7 @@
 	.navbar-default {
 		background-color: @darkbackcolor;
 		border: 1px solid @lightbackcolor;
+		border-radius: 0;
 		height:50px;
 		top:15px;
 		.navbar-nav{
@@ -55,21 +106,26 @@
 				margin-right: 10px;
 				> a, > a:focus {
 					
-					color :@colorblack;
+					color :@colorwhite;
 					padding : 13px;
-					border:1px solid transparent;
+					border: 4px solid transparent;
 					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					-webkit-transition: all 0.4s;
+					//-webkit-transition: all 0.4s;
+					border: 4px solid #3E8C3C;
+					border-top-left-radius: 19px;
+					border-bottom-right-radius: 19px;
 					background-color : @darkcolor;
 					color : @colorwhite;
 					top: -8px;
 					padding-top: 20px;
-					border:1px solid @darkbackcolor;
+					
 				}
 				> ul {
+					border: 3px solid #3E8C3C;
+					border-radius:19px;
 					display: none;
 					position: absolute;
 					width: 245px;
@@ -78,7 +134,7 @@
 					padding: 15px;
 					list-style: none;
 					text-align: left;
-					top : 49px;
+					top : 53px;
 					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					>li{
@@ -109,20 +165,6 @@
 			}
 		}
 	}
-	
-	.carousel-inner{
-		border: 1px solid @lightcolor;
-	}
-	.homeproject{
-		margin-top:10px;
-	}
-	.content{
-		padding-top:30px;
-		font-size :14px;
-		.media-object{
-			border:1px solid #ccc;
-		}
-	}
 	h4,h2{
 		font: 1.2em/2.5em Playball,cursive;
 		color: #bae275;
@@ -136,59 +178,8 @@
 		border-bottom: 1px solid #ccc;
 	}
 	
-	.sidebarsec{
-		.subhead{
-			font-family: "Carter One";
-			
-			font-weight: bold;
-			background-color: #E5DFDF;
-			border-radius : 7px;
-			color : #333;
-			padding: 8px 40px;
-			position : relative;
-			
-		}
-		.subheadli 
-		{ 	
-			background-color: #444;
-			border-radius : 7px;
-			padding:10px;
-			ul{
-				list-style: none;
-				li{
-					padding:5px;
-					border-bottom:1px solid #ccc;
-					span {
-						color:#CAB48E;
-					}
-					a{
-						padding-left:10px;
-						text-decoration:none;
-						color:#ddffbb;
-					}
-					a:hover{
-						color:@colorwhite;
-					}
-				}
-			}
-		}
-		.propimg{
-			margin-top:10px;
-			border:1px solid #ccc;
-		}
-	}
-	.projectnav,.projsnap{
-		min-height:312px;
-		border:1px solid @lightcolor;
-		background-color:@contentback;
-		a{
-			color:@colorwhite;
-			&:hover{
-				text-decoration: underline;
-				color:@colorblack;
-			}
-		}
-	}
+	
+	
 	.footer{
 		border-top:1px dashed #ccc;
 		padding:5px;
@@ -211,43 +202,7 @@
 		border-bottom: 1px solid @lightbackcolor;
 		padding-bottom: 8px;
 	}
-	.bxslider{
-		li{
-			width:100px;
-			img{
-				border : 1px solid #444444;
-				min-height: 190px;
-			}
-			a{
-				color:@color;
-				font-weight : bold;
-				text-decoration:underline;
-				&:hover{
-					color:@color;
-					text-decoration:none;
-				}
-			}
-		}
-	}
-	.bxslider1{
-		padding:0px;
-		li{
-			.thumbnail {
-				margin-bottom : 0px;
-				img{
-					max-height: 165px;
-				}
-			}
-			.head{
-				color:@color;
-				font-weight : bold;
-				&:hover{
-					color:@color;
-					text-decoration:none;
-				}
-			}
-		}
-	}
+	
 	.service{
 		margin-bottom: 10px;
 		margin-top: 10px;
@@ -271,7 +226,7 @@
 		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info{
 			
 			border : none;
-			color :@colorblack;
+			color :@colorwhite;
 			font-weight: bold;
 		}
 	}
@@ -288,7 +243,7 @@
 		margin-top: 20px;
 	}
 	.email{
-		color :@lightcolor;
+		color :@color;
 		text-decoration : underline;
 		&:hover{
 			text-decoration : none;
@@ -300,7 +255,8 @@
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background-color: @back;
+			background-color: @darkbackcolor;
+			
 			border-bottom: 4px solid @lightbackcolor;
 			>li{
 				border-right : 1px solid @lightbackcolor;
@@ -308,12 +264,13 @@
 				>a, > a:focus{
 					padding-top : 9px;
 					padding-bottom : 9px;
-					color : @lightcolor;
+					color : @colorwhite;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @color ;
-					color : @colorblack;
+					background-color : @darkcolor;
+					color : @colorwhite;
+					border:1px solid @darkbackcolor;
 				}
 			}
 		}
