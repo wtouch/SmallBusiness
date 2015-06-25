@@ -1,28 +1,46 @@
-.products,	.singleproduct{
+//featured servieces
+.service{
+	margin-bottom : 30px;
+	img{
+		border : 4px solid transparent;
+		padding : 6px;
+		&:hover{
+			border : 4px solid @back;
+		}
+	}
+	.readmore{
+		text-align : center;
+	}
+}
+//singleproduct
+.products, .singleproduct{
 	.thumbnail{
-		background-color: @back;
+		border-color: @darkbackcolor;
 	}
 } 
-
 .products{
 	.thumbnail{
-		img{
-			max-height : 240px;
+		.read{
+			text-align : center;
 		}
 	}
 }
+
 @media (min-width: 320px) {
 	.products{
 		.thumbnail{
-			height: 400px;
+			height: 465px;
+			img{
+				height : 240px;
+			}
 			.caption{
-				height: 165px;
+				height: 138px;
 			}
 		}
 	}
 	.singleproduct{
 		.thumbnail{
-			height: 190px;
+			height: 186px;
 		}
 	}
 }
@@ -30,23 +48,29 @@
 @media (min-width: 992px) { 
 	.products{
 		.thumbnail{
-			height: 390px;
+			height: 450px;
+			img{
+				height : 242px;
+			}
 			.caption{
-				height: 190px;
+				height: 142px;
 			}
 		}
 	}
 	.singleproduct{
 		.thumbnail{
-			height: 115px;
+			height: 100px;
 		}
 	}
 }
-
+ 
 @media (min-width: 1200px){ 
 	.products{
 		.thumbnail{
-			height: 400px;
+			height: 415px;
+			img{
+				height : 189px;
+			}
 			.caption{
 				height: 165px;
 			}
@@ -54,7 +78,7 @@
 	}
 	.singleproduct{
 		.thumbnail{
-			height: 140px;
+			height: 118px;
 		}
 	}
 }

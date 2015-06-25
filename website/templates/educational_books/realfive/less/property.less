@@ -1,32 +1,113 @@
-//Property
-	.property,.proplist{
-		background-color : @back;
-		border : 1px solid @lightbackcolor;
-	}
-	.property{
-		margin-bottom : 15px;
-		padding: 10px 15px;
-		h3{
-			border :none;
-		}
-		.table{
-			background-color : @darkbackcolor;
-			tbody{
-				tr{
-					td{
-						border-top : 1px dashed @lightbackcolor;
+//featured properties
+.featuredProperty{
+	.bxslider1{
+		padding-left:10px;
+		list-style :none;
+		li{
+			.thumbnail {
+				margin-bottom :10px;
+				img{
+					max-height: 215px;
+					width : 100%;
+				}
+			}
+			.table{
+				margin-bottom : 10px;
+				tbody{
+					tr{
+						td{
+							border :none;
+							padding: 3px 10px;
+						}
+					}
+				
+				}
+			}
+			.readmore{
+				margin-bottom :10px;
+				a{
+					font: 16px 'Alex Brush', cursive;
+					background-color : @back;
+					color : @colorwhite;
+					padding : 5px 15px;
+					transition : padding 250ms;
+					&:hover{
+						background-color : @darkcolor;
+						padding : 5px 30px;
 					}
 				}
 			}
 		}
-		.mainimg {
-			img{
-				max-height: 180px;
+	}
+}
+
+
+//propertiesList 
+.propertylist{
+	padding: 20px 20px 0px;
+	border : 1px solid @lightbackcolor;
+	.btn-primary{
+		margin-right : 10px;
+		margin-bottom: 10px;
+		background-color : @back;
+		color : @colorwhite;
+		border : none;
+		border-radius : 0px;
+		font-weight: bold;
+		&:hover{
+			background-color:@darkcolor;
+		}
+	}
+	.panel-default{
+		border-color : @darkbackcolor;
+	}
+	.table{
+		td{
+			border : none;
+			padding: 1px 1px;
+		}
+	}
+	.readmore{
+		text-align : center;
+		.viewdtls{
+			margin-right : 10px;
+		}
+		a{
+			background-color : @back;
+			color : @colorwhite;
+			padding : 10px 20px;
+			transition : padding 250ms;
+			border : none;
+			border-radius : 0px;
+			font: 16px 'Alex Brush', cursive;
+			&:hover{
+				padding : 10px 40px;
+				background-color:@darkcolor;
+			}
+		}
+	}
+}
+
+//single property view
+.singleproperty{
+	.property{
+		margin-bottom : 15px;
+		padding: 10px 15px;
+		border : 1px solid @darkbackcolor;
+		h3{
+			border :none;
+		}
+		.table{
+			tbody{
+				tr{
+					td{
+						border-top : 1px dashed @darkbackcolor;
+					}
+				}
 			}
 		}
 		.subimg{
 			margin-top: 10px;
-			
 			img{
 				height: 20px;
 				display : inline-block;
@@ -50,7 +131,7 @@
 			background: url("../img/sprite_icons.png") transparent;
 			display: inline-block;
 			vertical-align: middle;
-		}
+		} 
 		span.amenity.power_backup {
 			background-position: 1px -24px;
 		}
@@ -100,89 +181,61 @@
 			tbody{
 				tr{
 					th{
-						background-color : #1F1D01;
+						background-color : @darkbackcolor;
+						color : @colorwhite;
 					}
 					td, th{
-						border: 1px solid @lightbackcolor;
+						border: 1px solid @darkbackcolor;
 					}
 				}
 			}
 		}
 	}
+	.btn-primary{
+		margin-bottom : 10px;
+		background-color : @back;
+		color : @colorwhite;
+		border-radius : 0px;
+		border : none;
+		font-weight: bold;
+		&:hover{
+			background-color:@darkcolor;
+		}
+	}
+}
+
 	
-	.bxslider1{
-		padding:0px;
-		li{
-			.thumbnail {
-				margin-bottom : 0px;
-				img{
-					max-height: 215px;
-					width : 100%;
-				}
-			}
-			a, .head{
-				color:@color;
-				font-weight : bold;
-				&:hover{
-					text-decoration : none;
-				}
-			}
-			a:hover{
-				color : @lightcolor;
-			}
-			.head{
-				text-decoration : underline;
-				&:hover{
-					color:@color;
-				}
-			}
-			.table{
-				tbody{
-					tr{
-						td{
-							border :none;
-							padding: 3px 10px;
-						}
-					}
-				
-				}
+@media (min-width: 992px){
+	.propDetails{
+		ul{
+			li{
+				width: 224px;
 			}
 		}
 	}
-	//propertyList 
-	.proplist{
-		padding: 20px 20px 0px;
-		.panel{
-			background-color : @darkbackcolor;
-		}
-		.panel-default{
-			border-color : @lightbackcolor;
-		}
-		.panel-body {
-			padding: 5px 15px 15px;
-		}
-		.table{
-			td{
-				border : none;
-				padding: 1px 10px;
+	.property{
+		.mainimg {
+			img{
+				max-height: 145px;
+				max-width : 100%;
 			}
 		}
 	}
-	@media (min-width: 992px){
-		.propDetails{
-			ul{
-				li{
-					width: 224px;
-				}
+}
+@media (min-width: 1200px){
+	.propDetails{
+		ul{
+			li{
+				width: 274px;
 			}
 		}
 	}
-	@media (min-width: 1200px){
-		.propDetails{
-			ul{
-				li{
-					width: 274px;
-				}
+	.property{
+		.mainimg {
+			img{
+				max-height: 180px;
+				max-width : 100%;
 			}
 		}
 	}
+}

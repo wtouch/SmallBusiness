@@ -12,7 +12,12 @@
 					</div>
 				</div>
 				<div class="read">
-					<a href="product/{{x.id}}" class="btn btn-info">Read More..</a>
+					{% if x.type == 'service' %}
+						<a href="services/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More..</a>
+					{% endif %}
+					{% if x.type == 'product' %}
+						<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More..</a>
+					{% endif %}
 				</div>
 			</div>
 		</div>

@@ -5,16 +5,26 @@
 	li{
 		width:100px;
 		img{
-			border : 1px solid @darkcolor;
+			border : 2px solid transparent;
 			min-height: 190px;
-		}
-		a{
-			color:@darkcolor;
-			font-weight : bold;
-			text-decoration:underline;
+			padding : 6px;
 			&:hover{
-				color:@back;
-				text-decoration:none;
+				border : 2px solid @darkbackcolor;
+			}
+		}
+		.readmore{
+			margin-top : 10px;
+			margin-bottom : 10px;
+			a{
+				font: 16px 'Alex Brush', cursive;
+				background-color : @back;
+				color : @colorwhite;
+				padding : 5px 15px;
+				transition : padding 250ms;
+				&:hover{
+					background-color : @darkcolor;
+					padding : 5px 30px;
+				}
 			}
 		}
 	}
@@ -62,18 +72,17 @@
 		.viewproperty{
 			margin-top : 25px;
 			a{
-				color : @color;
-				margin-top : 10px;
+				color : @colorwhite;
+				font: 16px 'Alex Brush', cursive;
 				&:hover{
-					color : @lightcolor;
-					text-decoration : none;
+					color : @colorwhite;
 				}
 			}
 		}
 	}
 	#carousel {
 		.carousel-inner {
-			border: 2px solid @darkcolor;
+			border: 2px solid @back;
 			border-bottom-left-radius: 70px;
 			border-top-right-radius: 70px;
 			transition :  all 300ms linear;
@@ -88,7 +97,7 @@
 				}
 			}
 			&:hover{
-				transform : scale(1.1);
+				transform : scale(1.05);
 				z-index : 99;
 				border-color : @lightbackcolor;
 			}
@@ -101,8 +110,6 @@
 
 //css for single project & project list
 	.projlist{
-		border:1px solid @darkbackcolor;
-		box-shadow: 3px 3px 6px #ADADAD;
 		background-color:@lightbackcolor;
 		padding:10px;
 		.project{
@@ -112,12 +119,33 @@
 				border-color : @darkbackcolor;
 				img{
 					height : 183px;
+					overflow: hidden;
+					border: 0 solid #333239;
+					text-align: center;
+					transition: all 0.2s ease;
+					&:hover{
+						transition: all 0.2s ease;
+					}
 				}
 				.caption{
 					color : @lightcolor;
 				}
 				.caption p{
 					color:@colorblack;
+				}
+				.readmore{
+					margin-top : 15px;
+					a{
+						font: 16px 'Alex Brush', cursive;
+						background-color : @back;
+						color : @colorwhite;
+						padding : 5px 15px;
+						transition : padding 250ms;
+						&:hover{
+							background-color : @darkcolor;
+							padding : 5px 30px;
+						}
+					}
 				}
 			}
 		}

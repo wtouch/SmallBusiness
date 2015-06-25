@@ -10,7 +10,9 @@
 @import "project.less";
 @import "product.less";
 @import "general.less";
-
+	*{
+		transition : 300ms;
+	}
 	header{	
 		background-color:@darkbackcolor;
 		.head{
@@ -27,12 +29,12 @@
 			background : -webkit-linear-gradient(top, @back, @darkbackcolor);
 			border : none;
 			.navbar-nav{
-				li{
+				>li{
+					position :relative;
 					>a{
 						color : @color;
 						text-shadow: 1px 1px @colorblack;
 						font-size: 18px;
-						background: -webkit-linear-gradient(top, @back, @darkbackcolor 157%);
 						border-right: 1px solid @back; 
 					}
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
@@ -40,7 +42,6 @@
 						cursor: pointer;
 						text-shadow: 1px 1px @colorblack;
 						background: @darkcolor;
-						background-image: linear-gradient(@back, @darkbackcolor);
 					}
 					ul{
 						display : none;
@@ -51,29 +52,30 @@
 						padding : 15px;
 						list-style : none;
 						text-align : left;
-						left : -70%;
 						border : 1px solid @darkcolor;
 						box-shadow : 0 0 15px 0px @colorblack;
 						border-radius : 7px;
 						>li{
-							padding : 5px;
+							padding : 10px;
+							position : relative;
 							>a{
 								text-decoration:none;
 								color : @color;
 								&:hover{
-									background : @darkcolor;
 									color : @lightcolor;
 								}
 							}
 							> ul{
 								display: none;
 								list-style :none;
+								left: 70%;
+								top: 10px;
+								border-top-left-radius: 0px;
 								>li{
 									>a{
 										text-decoration:none;
 										color : @color;
 										&:hover{
-											background : @darkcolor;
 											color : @lightcolor;
 										}
 									}
@@ -105,7 +107,7 @@
 				.contentModule, .sidebarModule{
 					padding:40px 10px 0px;
 					margin: 30px 0px 0px; 
-					border:1px solid @lightbackcolor;
+					border:1px solid @darkbackcolor;
 					border-radius:10px;
 					position:relative;
 					h3{
@@ -227,7 +229,7 @@
 	.send{
 		margin-right : 8px;
 	}
-	.sidebarModule{
+	.sidebarModule.enquiry{
 		.btn-info{
 			border-radius : 5px;
 			&, &:focus, &:active, &[disabled]{

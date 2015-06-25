@@ -1,20 +1,18 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
-
-var app = angular.module('myApp',[]);
 $(document).ready(function(){
 	$('#bxslider1').bxSlider({
-		mode:'vertical',
-		minSlides: 1,auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
-		pause:4000,
-		pager:false,
-		pagerType:'full',
-		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed : 1000
+			mode:'vertical',
+			minSlides: 1,auto: true, 
+			autoDirection:'next',
+			moveSlides: 1,
+			pause:4000,
+			pager:false,
+			pagerType:'full',
+			autoControls: false, 
+			controls:false, 
+			autoHover:true,
+			speed : 1000
 	});
 	$('#bxslider').bxSlider({
 		mode:'horizontal',
@@ -33,6 +31,8 @@ $(document).ready(function(){
 		autoHover:true
 	});
 });
+var app = angular.module('myApp',[]);
+
 app.config(function($locationProvider) {
   /* $routeProvider
    .when('/:view', {

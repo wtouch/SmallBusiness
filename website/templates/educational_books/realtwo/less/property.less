@@ -4,11 +4,13 @@
 		padding-left:10px;
 		list-style :none;
 		li{
-			.thumbnail {
-				margin-bottom :10px;
-				img{
-					max-height: 215px;
-					width : 100%;
+			img{
+				max-height: 215px;
+				width : 100%;
+				padding : 4px;
+				border : 3px solid transparent;
+				&:hover{ 
+					border : 3px solid @darkcolor;
 				}
 			}
 			.table{
@@ -24,8 +26,17 @@
 				}
 			}
 			.readmore{
+				margin-bottom :10px;
 				a{
 					font: 16px 'Alex Brush', cursive;
+					background-color : @back;
+					color : @colorwhite;
+					padding : 5px 15px;
+					transition : padding 250ms;
+					&:hover{
+						background-color : @darkcolor;
+						padding : 5px 30px;
+					}
 				}
 			}
 		}
@@ -62,6 +73,19 @@
 		text-align : center;
 		.viewdtls{
 			margin-right : 10px;
+		}
+		a{
+			background-color : @back;
+			color : @colorwhite;
+			padding : 10px 20px;
+			transition : padding 250ms;
+			border : none;
+			border-radius : 0px;
+			font: 16px 'Alex Brush', cursive;
+			&:hover{
+				padding : 10px 40px;
+				background-color:@darkcolor;
+			}
 		}
 	}
 }
