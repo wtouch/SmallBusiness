@@ -18,7 +18,6 @@
 	<span ng-if="userDetails.group_name == 'customer'">
 		<input type="hidden" class="form-control" ng-model="property.user_id" ng-init="property.user_id = userDetails.id; getWebsitelist(property.user_id)" readonly/>
 	</span> 
-<!-- This block for current user id -->
 		
 	<div class="form-group">
 		<label for="title" class="col-sm-2 control-label">Property Title * </label>
@@ -80,6 +79,7 @@
 			</label>										
 		</div>	
 	</div> 	
+	
 	<div class="form-group"> 
 		<label for="featured" class="col-sm-2 control-label">Featured *</label> 
 			<div class="col-sm-9">
@@ -108,6 +108,45 @@
 			</span>							
 		</div>				
 	</div>
+	
+	<h3>SEO</h3>
+	<div class="form-group">
+		<label  for="seo" class="col-sm-2 control-label">Title*</label>
+		<div class="col-sm-9">
+			<input type="text" id="seo" class="form-control" name="seo" placeholder="SEO Title" ng-model="property.seo.title" required>
+			<span class="help-block" ng-show="propertyForm.seo.$dirty && propertyForm.seo.$invalid">
+				<span ng-show="propertyForm.seo.$error.required" class="text-danger">Title is required.</span>
+			</span>
+		</div>						
+	</div>
+	
+	<div class="form-group">
+		<label for="keywords" class="col-sm-2 control-label">Keywords*</label>
+		<div class="col-sm-9">
+			<input type="text" id="keywords" class="form-control" name="keywords" placeholder="SEO Keywords" ng-model="property.seo.keywords" required>
+			<span class="help-block" ng-show="propertyForm.keywords.$dirty && propertyForm.keywords.$invalid">
+				<span ng-show="propertyForm.keywords.$error.required" class="text-danger">Keyword required.</span>
+			</span>
+		</div>
+	</div> 
+	
+	<div class="form-group"> 
+		<label for="seoDescription" class="col-sm-2 control-label">Description *</label> 
+			<div class="col-sm-9">
+			<textarea class="form-control" id="seoDescription"  name="seoDescription" ng-model="property.seo.description" cols="20" rows="4" ng-maxlength="5000" required></textarea>
+				<p ng-hide="propertyForm.seoDescription.$error.maxlength">{{ 5000 - addimage.description.description.length + " Chars left" }}</p>
+					<span class="text-danger" ng-show="propertyForm.seoDescription.$error.maxlength">
+					Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="propertyForm.seoDescription.$dirty && 	propertyForm.seoDescription.$invalid">
+					<span ng-show="propertyForm.seoDescription.$error.required"> Description is required .</span>
+					</span>
+			</div>
+			<input type="hidden" required name="project_images" ng-model="project.project_images" />
+				<span class="help-block" ng-show="propertyForm.project_images.$dirty && propertyForm.project_images.$invalid">
+				<span ng-show="propertyForm.project_images.$error.required" class="text-danger">Project Images Description is required.</span>
+				</span>
+	</div>
+	
 	<div class="form-group" ng-if="property.user_id">
 		<div class="col-sm-12">					
 			<h3>Select Sites</h3>
@@ -129,5 +168,6 @@
 			</div>
 		</div>
 	</div>	
+	
 	<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="propertyForm.$invalid" ng-click="showFormPart('propertyStructure',1)">Next</button>	
 </form>

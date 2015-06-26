@@ -34,7 +34,7 @@
 				<div class="col-sm-2">
 					<label for="status" class="control-label">Filter By Status</label>
 					<select id="status" class="form-control" 
-					ng-change="changeStatus('status',showStatus)" ng-model="showStatus">
+					ng-change="changeStatus('status',showStatus,user_id)" ng-model="showStatus">
 					<option value="">Select Status</option>	
 						<option value="1">Active</option>
 						<option value="0">Deleted</option>
@@ -42,7 +42,7 @@
 				</div>
 				<div class="col-sm-2">
 					<label for="featured" class="control-label">Filter By Featured</label>
-						<select id="featured" class="form-control" ng-change="changeStatus('featured',showFeatured)" ng-model="showFeatured">
+						<select id="featured" class="form-control" ng-change="changeStatus('featured',showFeatured,user_id)" ng-model="showFeatured">
 							<option value="" selected>Select Featured</option>
 							<option value="1" >Featured</option>
 							<option value="0">Not Featured</option> 
@@ -50,7 +50,7 @@
 				</div>
 				<div class="col-sm-2">
 					<label for="domain_name" class="control-label">Select Domain :</label>
-					 <select class="form-control" id="domain_name" name="domain_name" ng-change="searchFilter('domain',showDomain)" ng-model="showDomain" ng-required="true" ng-options="item.domain_name as item.domain_name for item in domains">
+					 <select class="form-control" id="domain_name" name="domain_name" ng-change="searchFilter('domain',showDomain,user_id)" ng-model="showDomain" ng-required="true" ng-options="item.domain_name as item.domain_name for item in domains">
 					  <option value="">Select Websites</option> 
 					</select>
 				</div>
@@ -145,7 +145,7 @@
 						</table>
 					</div>
 				<div class="text-center">				
-					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="CurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getProject(CurrentPage,projectParam)"></pagination>			
+					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="CurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getProject(CurrentPage,user_id,projectParam)"></pagination>
 					<pre>Page: {{CurrentPage}} / {{numPages}}</pre>
 				</div>	
 				</div>
