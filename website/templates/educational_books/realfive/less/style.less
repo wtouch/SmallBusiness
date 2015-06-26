@@ -10,10 +10,14 @@
 @import "project.less";
 @import "product.less";
 @import "general.less";
-
+	*{
+		transition : 300ms;
+	}
+	body{
+		color : @darkcolor;
+	}
 	header{	
 		background-color : @darkbackcolor;
-		//@darkbackcolor
 		.head{
 			background-image: url('bg_image.png');
 			background-repeat: no-repeat;
@@ -39,6 +43,7 @@
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 						color: @darkcolor;
 						background : @lightcolor;
+						border-radius: 0px;
 					}
 					ul{
 						display : none;
@@ -198,7 +203,7 @@
 		border-radius : 5px;
 		&, &:focus, &:active, &[disabled]{
 			background-color : @darkcolor;
-			color : @color;
+			color : @lightbackcolor;
 			padding : 10px 18px;
 			border : 2px solid transparent;
 			border-radius : 0px;
@@ -212,8 +217,12 @@
 	}
 	hr{
 		border-style : dashed;
-		border-color: @back;
+		border-color: @darkcolor;
 		margin :5px 0px;
+	}
+	.thumbnail{
+		background-color : @lightbackcolor;
+		border : 1px solid @darkcolor;
 	}
 	.btn-link{
 		color : @darkcolor;
@@ -223,26 +232,35 @@
 			color : @darkcolor;
 		}
 	}
-	.send{
-		margin-right : 8px;
-	}
 	.sidebarModule{
+		.send{
+			margin-right : 8px;
+		}
 		.panel{
 			background-color : @back;
 		}
 		.panel-default{
 			border : none;
 		}
-	}
-	.sidebarModule{
 		.form-control{
 			background-color : @darkbackcolor;
 			border-color : @darkcolor;
 			color : @darkcolor;
 		}
 	}
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus
+	{
+		background-color : @darkcolor;
+		color : @color;
+		border : 1px solid @darkcolor;
+	}
+	.pagination>li>a, .pagination>li>span{
+		background-color : @lightbackcolor;
+		border : 1px solid @darkcolor;
+		color : @darkcolor;
+	}
 	footer{
-		background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
+		background : -webkit-linear-gradient(top, @color -565%, @darkcolor);
 		color : @color;
 		padding : 20px;
 		p{

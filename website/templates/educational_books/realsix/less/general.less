@@ -2,29 +2,30 @@
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
+			background-color: @back;
+			border-bottom: 4px solid @lightbackcolor;
 			>li{
 				border-right : 1px solid @lightbackcolor;
+				height : 38px;
 				>a, > a:focus{
-					color : @color;
-					background : transparent;
+					padding-top : 9px;
+					padding-bottom : 9px;
+					color : @lightcolor;
 					font-weight : bold;
-					border : 1px solid transparent;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					color: @darkcolor;
-					background : @lightcolor;
-					border : 1px solid @darkcolor;
+					background-color: @color ;
+					color : @colorblack;
 				}
 			}
 		}
 	}
-	.about, .contact{
+	.about, .contact, .charges{
 		.table{
 			tbody{
 				tr{
 					th,td{
-						border-color : @darkbackcolor;
+						border-color : @lightbackcolor;
 					}
 				}
 			}
@@ -59,7 +60,6 @@
 		height:395px;
 	}
 	
-	
 	//testimonials
 	.testimonial{
 		blockquote{
@@ -74,11 +74,12 @@
 				}
 				cite{
 					font-size : 17px;
-					color : @darkcolor;
+					color : @color;
 				}
 			}
 		}
 	}
+	
 	//gallery
 	@media (min-width: 320px) {
 		.gallery{

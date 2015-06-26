@@ -5,8 +5,12 @@
 	li{
 		width:100px;
 		img{
-			border : 1px solid @darkcolor;
+			border : 2px solid transparent;
 			min-height: 190px;
+			padding : 6px;
+			&:hover{
+				border : 2px solid @darkcolor;
+			}
 		}
 		.readmore{
 			margin-top : 10px;
@@ -14,7 +18,7 @@
 			a{
 				font: 16px 'Alex Brush', cursive;
 				background-color : @darkcolor;
-				color : @color;
+				color : @lightbackcolor;
 				padding : 5px 18px;
 				border : 2px solid transparent;
 				border-radius : 0px;
@@ -22,6 +26,7 @@
 					color : @darkcolor;
 					background-color : @back;
 					border : 2px solid @darkcolor;
+					text-decoration : none;
 				}
 			}
 		}
@@ -113,7 +118,6 @@
 			.thumbnail{
 				height:370px;
 				padding-top : 15px;
-				border-color : @darkbackcolor;
 				img{
 					height : 183px;
 				}
@@ -127,13 +131,16 @@
 					margin-top : 15px;
 					a{
 						font: 16px 'Alex Brush', cursive;
-						background-color : @back;
-						color : @colorwhite;
-						padding : 5px 15px;
-						transition : padding 250ms;
+						background-color : @darkcolor;
+						color : @lightbackcolor;
+						padding : 10px 18px;
+						border : 2px solid transparent;
+						border-radius : 0px;
+						font: 16px 'Alex Brush', cursive;
 						&:hover{
-							background-color : @darkcolor;
-							padding : 5px 30px;
+							color : @darkcolor;
+							background-color : @back;
+							border : 2px solid @darkcolor;
 						}
 					}
 				}
@@ -150,8 +157,7 @@
 			width:auto;
 		}
 		ul.nav.navbar-nav {
-			background-color: @back;
-			height : 42px;
+			background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
 			>li{
 				border-right : 1px solid @lightbackcolor;
 				height : 38px;
@@ -159,10 +165,12 @@
 					padding : 9px 14px;
 					color : @color;
 					font-weight : bold;
+					border : 1px solid transparent;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @darkcolor ;
-					color : @lightcolor;
+					color: @darkcolor;
+					background : @lightcolor;
+					border : 1px solid @darkcolor;
 				}
 			}
 		}
@@ -174,9 +182,6 @@
 			background-color : @back;
 			border : 1px solid @lightbackcolor;
 			padding: 20px 20px 0px;
-			.thumbnail{
-				background-color : @darkbackcolor;
-			}
 		}
 	}
 	
