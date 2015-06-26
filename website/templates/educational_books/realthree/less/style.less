@@ -28,7 +28,8 @@
 	.form-control{
 		background-color:@darkcolor;
 	}
-	 .logo {
+	
+	.logo {
 		height: 80px;
 		margin-top: 25px;
 		margin-left: 15px;
@@ -51,7 +52,7 @@
 	}
 	.btn-info, .propertylist .btn-primary{
 		background-color: @darkbackcolor;
-		border-color : @darkbackcolor;
+		border-color : @color;
 	}
 	.btn-info:hover, .propertylist .btn-primary:hover{
 		background-color: @lightbackcolor;
@@ -163,7 +164,65 @@
 		letter-spacing: 1px;
 		border-bottom: 1px solid #ccc;
 	}
-	
+	.contentModule {
+		.sections{
+			border:1px solid @darkbackcolor;
+			box-shadow:2px 2px 2px @lightcolor;
+			border-radius : 4px;
+			background-color:@contentback;
+			img{
+				max-height: 215px;
+				width : 100%;
+				padding : 4px;
+				border : 3px solid transparent;
+				&:hover{ 
+					border : 3px solid @color;
+				}
+			}
+			.readmore{
+				margin-bottom :10px;
+				margin-top:10px;
+				a{
+					font: 16px 'Alex Brush', cursive;
+					background-color : @darkbackcolor;
+					color : @colorwhite;
+					padding : 5px 15px;
+					transition : padding 250ms;
+					&:hover{
+						background-color : @lightbackcolor;
+						padding : 5px 30px;
+					}
+				}
+			}
+		}
+		
+	}
+	.project{
+		.navbar{
+			background-color: @darkbackcolor;
+			border-bottom: 4px solid @lightbackcolor;
+			border-radius: 0;
+			margin-bottom:10px;
+			width:auto;
+		}
+		ul.nav.navbar-nav {
+			color:@colorwhite;
+			background-color: @darkbackcolor;
+			>li{
+				border-right : 1px solid @lightbackcolor;
+				height : 38px;
+				>a, > a:focus{
+					padding : 10px;
+					color : @colorwhite;
+					font-weight : bold;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					background-color: @back ;
+					color : @colorwhite;
+				}
+			}
+		}
+	}
 	
 	
 	.footer{

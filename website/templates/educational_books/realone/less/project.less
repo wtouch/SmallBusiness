@@ -36,6 +36,14 @@
 				text-decoration:none;
 			}
 		}
+		img{
+			height : 110px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border : 1px solid @lightbackcolor;
+			border-radius : 5px;
+			padding :4px;
+		}
 	}
 	
 	#carousel {
@@ -63,8 +71,43 @@
 	}
 }
 
+// single project nav css
+.project{
+	.navbar{
+		background-color: @darkbackcolor;
+		border-bottom: 4px solid @lightbackcolor;
+		border-radius: 0;
+		margin-bottom:10px;
+		width:auto;
+	}
+	ul.nav.navbar-nav {
+		color:@colorwhite;
+		background-color: @darkbackcolor;
+		>li{
+			border-right : 1px solid @lightbackcolor;
+			height : 38px;
+			>a, > a:focus{
+				padding : 10px;
+				color : @colorwhite;
+				font-weight : bold;
+			} 
+			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+				background-color: @back ;
+				color : @colorwhite;
+			}
+		}
+	}
+}
+
 //css for single project & project list
 	.projlist{
+		.panel-default{
+			.panel-body{
+				img:hover{
+					border:4px solid #lightbackcolor; 
+				}
+			}
+		}
 		border:1px solid @darkbackcolor;
 		box-shadow: 3px 3px 6px #ADADAD;
 		background-color:@lightbackcolor;
@@ -134,6 +177,28 @@
 				background-color : @darkbackcolor;
 			}
 		}
+		
+		//pagination css
+		nav {
+			.pagination{
+				li,.disabled{
+					a{
+						background-color: @back;
+						border-color : @darkbackcolor;
+						color:@colorblack;
+						&:hover{
+							background-color:@color;
+							color:@colorblack;
+						}
+					}
+				}
+				>.active>a{
+					background-color:@color;
+					color:@colorblack;
+				}
+			}
+			
+		} 
 		
 	}
 	

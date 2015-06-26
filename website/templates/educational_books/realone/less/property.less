@@ -45,6 +45,29 @@
 	}
 	.panel-default{
 		border-color : @darkbackcolor;
+		img{
+			max-height: 215px;
+			width : 100%;
+			padding : 4px;
+			border : 3px solid transparent;
+			&:hover{ 
+				border : 3px solid @darkbackcolor;
+			}
+		}
+		.readmore{
+			margin-bottom :10px;
+			a{
+				font: 16px 'Alex Brush', cursive;
+				background-color : @darkbackcolor;
+				color : @colorwhite;
+				padding : 5px 15px;
+				transition : padding 250ms;
+				&:hover{
+					background-color : @lightbackcolor;
+					padding : 5px 30px;
+				}
+			}
+		}
 	}
 	.table{
 		td{
@@ -55,6 +78,26 @@
 	.viewdtls{
 		margin-right : 10px;
 	}
+	nav {
+		.pagination{
+			li,.disabled{
+				a{
+					background-color: @back;
+					border-color : @darkbackcolor;
+					color:@colorblack;
+					&:hover{
+						background-color:@darkbackcolor;
+						color:@color;
+					}
+				}
+			}
+			>.active>a{
+				background-color:@darkbackcolor;
+				color:@color;
+			}
+		}
+		
+	} 
 }
 
 //single property view

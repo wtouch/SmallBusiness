@@ -165,9 +165,41 @@
 		padding: 8px 40px;
 		position : relative;
 	}
-	.contentModule .sections,.sidebarModule .sections{
-		background-color: @lightbackcolor;
-		padding:10px;
+	.contentModule {
+		.sections{
+			padding-top:10px;
+			padding-right:10px;
+			border:1px solid @darkbackcolor;
+			box-shadow:2px 2px 2px @lightcolor;
+			border-radius : 4px;
+			background-color:@lightbackcolor;
+			img{
+				max-height: 215px;
+				width : 100%;
+				padding : 4px;
+				border : 3px solid transparent;
+				&:hover{ 
+					border : 3px solid @color;
+				}
+			}
+			.readmore{
+				margin-bottom :10px;
+				margin-top:10px;
+				a{
+					font: 16px 'Alex Brush', cursive;
+					background-color : @darkbackcolor;
+					color : @color;
+					padding : 5px 15px;
+					transition : padding 250ms;
+					&:hover{
+						background-color : @color;
+						color:@colorblack;
+						padding : 5px 30px;
+					}
+				}
+			}
+		}
+		
 	}
 	footer{
 		margin-top : 15px;

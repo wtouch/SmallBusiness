@@ -230,7 +230,7 @@ class websiteManager{
 			if($businessData["status"] != "success"){
 				throw new Exception($businessData["message"]);
 			}
-			//$this->getModules($businessData);
+			
             $response = $businessData;
 			$response["title"] = $title;
 			if($page == "contact-us"){
@@ -354,7 +354,6 @@ class websiteManager{
 			$businessData = $this->getConfigData(true);
 			// check website status if deleted or expired or data null
 			if($businessData['status'] == 'success' && $businessData['data'] != null) {
-				$this->getModules($businessData);
 				$projects = $this->getProjects($businessData['data']["user_id"]);
 				$response["projects"] = $projects['data'];
 				$response["totalRecords"] = $projects["totalRecords"];

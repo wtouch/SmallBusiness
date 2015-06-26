@@ -1,5 +1,7 @@
 //featured properties
+
 .featuredProperty{
+	
 	.bxslider1{
 		padding-left:10px;
 		list-style :none;
@@ -9,6 +11,15 @@
 				img{
 					max-height: 215px;
 					width : 100%;
+				}
+			}
+			img{
+				max-height: 215px;
+				width : 100%;
+				padding : 4px;
+				border : 3px solid transparent;
+				&:hover{ 
+					border : 3px solid @color;
 				}
 			}
 			.table{
@@ -23,8 +34,24 @@
 				
 				}
 			}
+			.readmore{
+				margin-bottom :10px;
+				margin-top:10px;
+				a{
+					font: 16px 'Alex Brush', cursive;
+					background-color : @darkbackcolor;
+					color : @colorwhite;
+					padding : 5px 15px;
+					transition : padding 250ms;
+					&:hover{
+						background-color : @lightbackcolor;
+						padding : 5px 30px;
+					}
+				}
+			}
 		}
 	}
+	
 }
 
 
@@ -45,8 +72,31 @@
 		}
 	}
 	.panel-default{
-		border-color : @darkbackcolor;
-		background-color:@back;
+		border-color : @lightbackcolor;
+		background-color:@darkbackcolor;
+		img{
+			max-height: 215px;
+			width : 100%;
+			padding : 4px;
+			border : 3px solid transparent;
+			&:hover{ 
+				border : 3px solid @color;
+			}
+		}
+		.readmore{
+			margin-bottom :10px;
+			a{
+				font: 16px 'Alex Brush', cursive;
+				background-color : @darkbackcolor;
+				color : @colorwhite;
+				padding : 5px 15px;
+				transition : padding 250ms;
+				&:hover{
+					background-color : @lightbackcolor;
+					padding : 5px 30px;
+				}
+			}
+		}
 	}
 	.table{
 		td{
@@ -57,6 +107,27 @@
 	.viewdtls{
 		margin-right : 10px;
 	}
+	nav {
+		.pagination{
+			li,.disabled{
+				a{
+					background-color: @lightbackcolor;
+					border-color : @colorwhite;
+					color:@colorwhite;
+					&:hover{
+						background-color:@color;
+						color:@lightbackcolor;
+					}
+				}
+			}
+			>.active>a{
+				background-color:@color;
+				color:@lightbackcolor;
+			}
+		}
+		
+	} 
+	
 }
 
 //single property view

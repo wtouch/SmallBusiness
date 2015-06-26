@@ -5,8 +5,28 @@
 	li{
 		width:100px;
 		img{
-			border : 1px solid @darkcolor;
-			min-height: 190px;
+			max-height: 215px;
+			width : 100%;
+			padding : 4px;
+			border : 3px solid transparent;
+			&:hover{ 
+				border : 3px solid @color;
+			}
+		}
+		.readmore{
+			margin-bottom :10px;
+			margin-top:10px;
+			a{
+				font: 16px 'Alex Brush', cursive;
+				background-color : @darkbackcolor;
+				color : @colorwhite;
+				padding : 5px 15px;
+				transition : padding 250ms;
+				&:hover{
+					background-color : @lightbackcolor;
+					padding : 5px 30px;
+				}
+			}
 		}
 		a{
 			color:@color;
@@ -131,35 +151,9 @@
 					color:@colorwhite;
 				}
 			}
-			.navbar{
-				height:50px;
-				background-color: @darkbackcolor;
-				border: 1px solid @lightbackcolor;
-				border-radius: 0;
-				margin-top:10px;
-				margin-bottom:10px;
-				height : 20px;
-				width:auto;
+			.pagination{
+				align:center;
 				
-			}
-			ul.nav.navbar-nav {
-				color:@lightbackcolor;
-				background-color: @darkbackcolor;
-				border-bottom: 4px solid @lightbackcolor;
-				height : 42px;
-				>li{
-					border-right : 1px solid @lightbackcolor;
-					height : 38px;
-					>a, > a:focus{
-						padding : 9px 14px;
-						color : @lightcolor;
-						font-weight : bold;
-					} 
-					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-						background-color: @back ;
-						color : @lightbackcolor;
-					}
-				}
 			}
 			.projImg{
 				margin-right: 20px;
@@ -175,7 +169,26 @@
 				background-color : @darkbackcolor;
 			}
 		}
-		
+		nav {
+			.pagination{
+				li,.disabled{
+					a{
+						background-color: @lightbackcolor;
+						border-color : @colorwhite;
+						color:@colorwhite;
+						&:hover{
+							background-color:@color;
+							color:@lightbackcolor;
+						}
+					}
+				}
+				>.active>a{
+					background-color:@color;
+					color:@lightbackcolor;
+				}
+			}
+			
+		} 
 	}
 	
 	@media (min-width: 320px){
