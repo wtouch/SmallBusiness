@@ -228,8 +228,8 @@ define(['app'], function (app) {
 	/************************************************************************************/	
 		 //Add Project
 		$scope.addProjectFun = function(project){	
-			$scope.Project.date = $scope.currentDate;
-			dataService.post("post/project",Project,$scope.userInfo)
+			project.date = $scope.currentDate;
+			dataService.post("post/project",project,$scope.userInfo)
 			.then(function(response) {
 				
 				if(response.status=="success"){
@@ -244,15 +244,15 @@ define(['app'], function (app) {
 			//update into Project
 			if($routeParams.id){
 				console.log($routeParams.id);	
-				dataService.get("getsingle/Project/"+$routeParams.id)
+				dataService.get("getsingle/project/"+$routeParams.id)
 				.then(function(response) {
-						$scope.Project = response.data;	
-						console.log($scope.Project);					
+						$scope.project = response.data;	
+						console.log($scope.project);					
 					});	
 					
-					$scope.update = function(Project){				
-						Project.modified_date = dataService.currentDate;
-						dataService.put("put/Project/"+$routeParams.id,Project)
+					$scope.update = function(project){				
+						project.modified_date = dataService.currentDate;
+						dataService.put("put/project/"+$routeParams.id,project)
 						.then(function(response) { //function for response of request temp
 							if(response.status == 'success'){
 								$scope.submitted = true;
