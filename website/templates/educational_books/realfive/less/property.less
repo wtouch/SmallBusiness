@@ -4,11 +4,15 @@
 		padding-left:10px;
 		list-style :none;
 		li{
-			.thumbnail {
-				margin-bottom :10px;
+			.sliderImg{
 				img{
 					max-height: 215px;
 					width : 100%;
+					padding : 4px;
+					border : 3px solid transparent;
+					&:hover{ 
+						border : 3px solid @darkcolor;
+					}
 				}
 			}
 			.table{
@@ -23,17 +27,22 @@
 				
 				}
 			}
-			.readmore{
-				margin-bottom :10px;
-				a{
-					font: 16px 'Alex Brush', cursive;
-					background-color : @back;
-					color : @colorwhite;
-					padding : 5px 15px;
-					transition : padding 250ms;
-					&:hover{
+			.sliderDesc{
+				.readmore{
+					margin-bottom :25px;
+					a{
+						font: 16px 'Alex Brush', cursive;
+						border-radius : 5px;
 						background-color : @darkcolor;
-						padding : 5px 30px;
+						color : @color;
+						padding : 10px 18px;
+						border : 2px solid transparent;
+						border-radius : 0px;
+						&:hover{
+							color : @darkcolor;
+							background-color : @back;
+							border : 2px solid @darkcolor;
+						}
 					}
 				}
 			}
@@ -49,17 +58,23 @@
 	.btn-primary{
 		margin-right : 10px;
 		margin-bottom: 10px;
-		background-color : @back;
-		color : @colorwhite;
-		border : none;
+		border-radius : 5px;
+		background-color : @darkcolor;
+		color : @color;
+		border : 2px solid transparent;
 		border-radius : 0px;
-		font-weight: bold;
+		font: 16px 'Alex Brush', cursive;
 		&:hover{
-			background-color:@darkcolor;
+			color : @darkcolor;
+			background-color : @back;
+			border : 2px solid @darkcolor;
 		}
 	}
+	.panel{
+		background-color : @back;
+	}
 	.panel-default{
-		border-color : @darkbackcolor;
+		border-color : @darkcolor;
 	}
 	.table{
 		td{
@@ -73,16 +88,16 @@
 			margin-right : 10px;
 		}
 		a{
-			background-color : @back;
-			color : @colorwhite;
-			padding : 10px 20px;
-			transition : padding 250ms;
-			border : none;
+			background-color : @darkcolor;
+			color : @color;
+			padding : 5px 14px;
+			border : 2px solid transparent;
 			border-radius : 0px;
 			font: 16px 'Alex Brush', cursive;
 			&:hover{
-				padding : 10px 40px;
-				background-color:@darkcolor;
+				color : @darkcolor;
+				background-color:@back;
+				border : 2px solid @darkcolor;
 			}
 		}
 	}
@@ -193,13 +208,16 @@
 	}
 	.btn-primary{
 		margin-bottom : 10px;
-		background-color : @back;
-		color : @colorwhite;
+		border-radius : 5px;
+		background-color : @darkcolor;
+		color : @color;
+		border : 2px solid transparent;
 		border-radius : 0px;
-		border : none;
-		font-weight: bold;
+		font: 16px 'Alex Brush', cursive;
 		&:hover{
-			background-color:@darkcolor;
+			color : @darkcolor;
+			background-color : @back;
+			border : 2px solid @darkcolor;
 		}
 	}
 }
