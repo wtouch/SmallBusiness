@@ -41,18 +41,18 @@
 			</div>
 			<div>
 				<h3>Overview</h3>
-				{{project.overview.description}}
+				<div class="description">{{project.overview.description}}</div>
 			</div>
 		</div>
 	{% endif %}
 	{% if projectPage == 'amenities' and project.amenities >= 1 %}
 		<div class="col-md-12">
 			<h3>Amenities/Features :</h3>
-			{{project.amenities.description}}
+			<div class="description">{{project.amenities.description}}</div>
 		</div>
 		<div class="col-md-12">
 			<h3>Specifications :</h3>
-			{{project.specifications.description}}
+			<div class="description">{{project.specifications.description}}</div>
 		</div>
 	{% endif %}
 	{% if projectPage == 'floorplans' and project.floor_plan >= 1 %}
@@ -105,7 +105,7 @@
 							<h4 class="text-center">{{value.title}}</h4>
 							<img class="center-block projImgs" src="{{value.image}}" alt="{{value.title}}">
 							<div class="caption text-center">
-								<span>{{value.description}}</span>
+								{{value.description}}
 							</div>
 						</div>
 					</div>

@@ -29,10 +29,10 @@ $(document).ready(function(){
 			{% for x in featured_properties if break == 0 %}
 				<li>
 					<div class="row">
-						<div class="col-sm-6 col-md-4">
+						<div class="col-sm-6 col-md-4 sliderImg">
 							<img src="{{x.property_images.0.file_relative_path}}"/>
 						</div>
-						<div class="col-sm-6 col-md-8">
+						<div class="col-sm-6 col-md-8 sliderDesc">
 							<a href="properties/{{x.title}}/{{x.id}}"><h4>{{x.title}}</h4></a>
 							<div class="description">{{x.overview.description|length > 100 ?x.overview.description|slice(start, 100) : x.overview.description}}</div>
 							<div class="table-responsive">
@@ -59,7 +59,9 @@ $(document).ready(function(){
 									</tr>
 								</table>
 							</div>
-							<div class="readmore"><a href="properties/{{x.title}}/{{x.id}}" class="head">More Details</a></div>
+							<div class="readmore">
+								<a href="properties/{{x.title}}/{{x.id}}" class="head">More Details</a>
+							</div>
 						</div>
 					</div>
 				</li>
