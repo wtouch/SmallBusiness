@@ -84,8 +84,12 @@ define(['app'], function (app) {
 	/*********************************************************************/
 	//display dynamic list from project table 
 		dataService.get('getmultiple/project/1/500', $scope.userinfo)
-			.then(function(response){		
-				$scope.addProjName = response.data;				
+			.then(function(response){
+				
+				$scope.addProjName = [{"id" : "0", "title" : "other"}];
+				for(var x in response.data){
+					$scope.addProjName.push({id : response.data[x].id,title : response.data[x].title});
+				}
 			});
 	/************************************************************************************/		
 		//Add property

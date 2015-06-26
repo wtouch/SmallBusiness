@@ -86,8 +86,8 @@
 	<div class="form-group"> 
 		<label for="projImageDescription" class="col-sm-2 control-label">Description *</label> 
 			<div class="col-sm-9">
-			<textarea class="form-control" id="projImageDescription"  name="projImageDescription" ng-model="addimage.description.description" cols="20" rows="4" ng-maxlength="356" required></textarea>
-				<p ng-hide="projectForm.projImageDescription.$error.maxlength">{{ 356 - addimage.description.description.length + " Chars left" }}</p>
+			<textarea class="form-control" id="projImageDescription"  name="projImageDescription" ng-model="addimage.description.description" cols="20" rows="4" ng-maxlength="5000" required></textarea>
+				<p ng-hide="projectForm.projImageDescription.$error.maxlength">{{ 5000 - addimage.description.description.length + " Chars left" }}</p>
 					<span class="text-danger" ng-show="projectForm.projImageDescription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="projectForm.projImageDescription.$dirty && 	projectForm.projImageDescription.$invalid">

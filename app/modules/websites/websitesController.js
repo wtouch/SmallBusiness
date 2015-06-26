@@ -35,15 +35,11 @@ define(['app'], function (app) {
 			}
 		};
 		
-		
-		
 		$scope.addToObject = function(data, object, resetObj){
 			var dtlObj = JSON.stringify(data);
 			object.push(JSON.parse(dtlObj));
 			$scope.sidebar = {};
 		}
-		
-		
 		
 		$scope.getBusiness = function(user_id){
 			dataService.get("getmultiple/business/1/100",{user_id:user_id, status : 1})
@@ -306,7 +302,6 @@ define(['app'], function (app) {
 			}
 		
 			$scope.getMenulist = function(user_id, business_id){
-				//console.log(user_id, business_id);
 				$scope.seoParam = {user_id : user_id, status : 1, business_id : business_id};
 					
 					dataService.get("getmultiple/seo/1/100",$scope.seoParam)

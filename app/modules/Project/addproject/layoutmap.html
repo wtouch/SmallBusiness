@@ -31,8 +31,8 @@
 	<div class="form-group"> 
 		<label for="LocDiscription" class="col-sm-2 control-label">Description *</label> 
 		<div class="col-sm-9">
-				<textarea class="form-control" id="LocDiscription"  name="LocDiscription" ng-model="layout_map.description" cols="20" rows="4" ng-maxlength="500" required></textarea>
-			<p ng-hide="locationmapForm.LocDiscription.$error.maxlength">{{ 500 - layout_map.description.length + " Chars left" }}</p>
+				<textarea class="form-control" id="LocDiscription"  name="LocDiscription" ng-model="layout_map.description" cols="20" rows="4" ng-maxlength="1000" required></textarea>
+			<p ng-hide="locationmapForm.LocDiscription.$error.maxlength">{{ 1000 - layout_map.description.length + " Chars left" }}</p>
 			 <span class="text-danger" ng-show="locationmapForm.LocDiscription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 			<span class="text-danger" ng-show="locationmapForm.LocDiscription.$dirty && locationmapForm.LocDiscription.$invalid">

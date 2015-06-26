@@ -4,8 +4,7 @@
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
 			<h3 class="text-center" ng-if="!property.id">Add New Property</h3>
 			<h3 class="text-center" ng-if="property.id">Edit Property</h3>
-			<form class="form-horizontal" name="addProperty" ng-submit="addProperty.$valid"novalidate>	
-				
+			
 				<p class="paraMand">* Fields are mandatory</p>
 				
 				<input type="hidden" id="status" name="status" ng-model="property.status" >	
@@ -72,7 +71,7 @@
 					
 					<ng-include ng-show="formPart=='amenities'" src="'modules/property/addproperty/amenities.html'">
 					</ng-include> 
-					<div class="form-group" ng-if="property.user_id">
+					<!-- <div class="form-group" ng-if="property.user_id">
 						<div class="col-sm-12">					
 							<h3>Select Sites</h3>
 							<div class="table-responsive" ng-init="getWebsite(userId)">
@@ -92,17 +91,16 @@
 								</table>
 							</div>
 						</div>
-					</div>
+					</div> -->
 						
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<div class="col-sm-offset-2 col-sm-9">
-							<button type="submit" ng-if="!property.id" ng-click="addPropertyFun(property)" ng-disabled="addProperty.$Invalid" class="btn btn-primary" title="Add new property">Add New Property</button>
+							<button type="submit" ng-if="!property.id" ng-click="addPropertyFun(property)" ng-disabled="addProperty.$invalid" class="btn btn-primary" title="Add new property">Add New Property</button>
 							
 							<button type="submit" ng-if="property.id" ng-click="update(property)" title="Update your property" class="btn btn-success text-center ">Edit Property</button>
 							<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>
 						</div>
-					</div>							
-			</form>
+					</div>			 -->				
 		</div>	
 	</div>
 </div>

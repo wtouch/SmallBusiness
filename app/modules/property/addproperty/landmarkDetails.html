@@ -1,12 +1,13 @@
+<form class="form-horizontal" name="landmarkForm" ng-submit="landmarkForm.$valid" novalidate>
 <h3>Land Mark:</h3>
 	<div class="form-group">
 			<label for="hospitals" class="col-sm-2 control-label">Hospitals </label>
 			<div class="col-sm-9">
 				<input type="text"  id="hospitals" class="form-control" name="hospitals" ng-model="property.landmarks.hospitals" ng-pattern="/^\d{0,9}[0-9]$/" required /> kms	
 
-			<span class="text-danger" ng-show="addProperty.hospitals.$dirty && addProperty.hospitals.$invalid">
-			<span ng-show="addProperty.hospitals.$error.pattern && (addProperty.hospitals.$dirty)" class="text-danger">Enter only no.</span>
-				<span ng-show="addProperty.hospitals.$error.required">KM are required .</span>
+			<span class="text-danger" ng-show="landmarkForm.hospitals.$dirty && landmarkForm.hospitals.$invalid">
+			<span ng-show="landmarkForm.hospitals.$error.pattern && (landmarkForm.hospitals.$dirty)" class="text-danger">Enter only no.</span>
+				<span ng-show="landmarkForm.hospitals.$error.required">KM are required .</span>
 			</span>		
 			</div>							
 	  </div>
@@ -15,9 +16,9 @@
 			<div class="col-sm-9">
 				<input type="text" id="airport" class="form-control"  name="airport" ng-model="property.landmarks.airport" ng-pattern="/^\d{0,9}[0-9]$/" required />	kms	
 				
-				<span class="text-danger" ng-show="addProperty.airport.$dirty && addProperty.airport.$invalid">
-				<span ng-show="addProperty.airport.$error.pattern && (addProperty.airport.$dirty)" class="text-danger">Enter only no.</span>
-				<span ng-show="addProperty.airport.$error.required">KM are required .</span>
+				<span class="text-danger" ng-show="landmarkForm.airport.$dirty && landmarkForm.airport.$invalid">
+				<span ng-show="landmarkForm.airport.$error.pattern && (landmarkForm.airport.$dirty)" class="text-danger">Enter only no.</span>
+				<span ng-show="landmarkForm.airport.$error.required">KM are required .</span>
 				</span>		
 			</div>											
 	  </div>
@@ -26,9 +27,9 @@
 			<div class="col-sm-9">
 				<input type="text" id="railway" class="form-control" name="railway" ng-model="property.landmarks.railway" ng-pattern="/^\d{0,9}[0-9]$/" required />kms	
 				
-				<span class="text-danger" ng-show="addProperty.railway.$dirty && addProperty.railway.$invalid">
-				<span ng-show="addProperty.railway.$error.pattern && (addProperty.railway.$dirty)" class="text-danger">Enter only no.</span>
-				<span ng-show="addProperty.railway.$error.required">KM are required .</span>
+				<span class="text-danger" ng-show="landmarkForm.railway.$dirty && landmarkForm.railway.$invalid">
+				<span ng-show="landmarkForm.railway.$error.pattern && (landmarkForm.railway.$dirty)" class="text-danger">Enter only no.</span>
+				<span ng-show="landmarkForm.railway.$error.required">KM are required .</span>
 				</span>	
 			</div>											
 	  </div>
@@ -37,9 +38,11 @@
 			<div class="col-sm-9">
 				<input type="text" id="school" class="form-control" name="school" ng-model="property.landmarks.school" ng-pattern="/^\d{0,9}[0-9]$/" required />kms	
 				
-				<span class="text-danger" ng-show="addProperty.school.$dirty && addProperty.school.$invalid">
-				<span ng-show="addProperty.school.$error.pattern && (addProperty.school.$dirty)" class="text-danger">Enter only no.</span>
-				<span ng-show="addProperty.school.$error.required">KM are required .</span>
+				<span class="text-danger" ng-show="landmarkForm.school.$dirty && landmarkForm.school.$invalid">
+				<span ng-show="landmarkForm.school.$error.pattern && (landmarkForm.school.$dirty)" class="text-danger">Enter only no.</span>
+				<span ng-show="landmarkForm.school.$error.required">KM are required .</span>
 				</span>
 			</div>											
 	  </div>
+	<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="landmarkForm.$invalid" ng-click="showFormPart('amenities',1)">Next</button>	
+	</form>

@@ -1,11 +1,12 @@
-  <!--Amenities-->	
-		<h3>Amenities:</h3>
-			<div class="form-group row">
-				<div class="checkbox col-sm-12">
-					<label class="col-sm-3" ng-repeat="x in propertyConfig.amenities">
-						<input type="checkbox" checklist-model="property.amenities" checklist-value="x"/ required>
-									{{x}}
-					</label>
-				</div>					
-			</div>
-				
+ <form class="form-horizontal" name="amenitiesForm" ng-submit="amenitiesForm.$valid" novalidate>
+	<h3>Amenities:</h3>
+		<div class="form-group row">
+			<div class="checkbox col-sm-12">
+				<label class="col-sm-3" ng-repeat="x in propertyConfig.amenities">
+					<input type="checkbox" checklist-model="property.amenities" checklist-value="x" />
+								{{x}}
+				</label>
+			</div>					
+		</div>
+		<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="amenitiesForm.$invalid" ng-click="showFormPart('contactDetails',1)">Next</button>	
+</form>

@@ -1,14 +1,15 @@
+ <form class="form-horizontal" name="propertylocationForm" ng-submit="propertylocationForm.$valid" novalidate>
  <h3>Property Location:</h3>		
 		<div class="form-group">
 			<label for="address" class="col-sm-2 control-label">Address *</label>
 			<div class="col-sm-9">
 				<textarea type="text" id="address" class="form-control" name="address" ng-model="property.address" cols="30" rows="4" ng-maxlength="160"  required></textarea>
-				<p ng-hide="addProperty.address.$error.maxlength">{{ 160 - property.address.length + " Chars left" }}</p>
-				 <span class="text-danger" ng-show="addProperty.address.$error.maxlength">
+				<p ng-hide="propertylocationForm.address.$error.maxlength">{{ 160 - property.address.length + " Chars left" }}</p>
+				 <span class="text-danger" ng-show="propertylocationForm.address.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="addProperty.address.$dirty && addProperty.address.$invalid">
+					<span class="text-danger" ng-show="propertylocationForm.address.$dirty && propertylocationForm.address.$invalid">
 					</span>
-					<span ng-show="addProperty.address.$error.required">Address is required .
+					<span ng-show="propertylocationForm.address.$error.required">Address is required .
 					</span>
 			</div>				
 		</div>
@@ -65,3 +66,5 @@
 		</ui-gmap-google-map>
 	</div>
 </div>
+	<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="propertylocationForm.$invalid" ng-click="showFormPart('optionalPropertyDt',1)">Next</button>	
+</form>

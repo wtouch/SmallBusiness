@@ -1,12 +1,12 @@
-<!-- property contact details -->				
+ <form class="form-horizontal" name="contactForm" ng-submit="contactForm.$valid" novalidate>				
 	<h3>Property contact Detail:</h3>
 		<div class="form-group">
 			<label for="contact_person" class="col-sm-2 control-label">Contact Person * </label>
 			<div class="col-sm-9">
 				<input type="text" id="contact_person" class="form-control" name="contact_person" ng-model="property.contact_details.contact_person" required/>
 				
-				<span class="text-danger" ng-show="addProperty.contact_person.$dirty && addProperty.contact_person.$invalid">
-					<span ng-show="addProperty.contact_person.$error.required">Person Name is required .</span>
+				<span class="text-danger" ng-show="contactForm.contact_person.$dirty && contactForm.contact_person.$invalid">
+					<span ng-show="contactForm.contact_person.$error.required">Person Name is required .</span>
 				</span>	
 			</div>						
 		</div>
@@ -15,7 +15,7 @@
 			<label for="mobile" class="col-sm-2 control-label">Mobile * </label>
 			<div class="col-sm-9">
 				<input type="text"  id="mobile" class="form-control help-block"  name="mobile" ng-model="property.contact_details.mobile" placeholder="Enter Your Mobile Number" maxlength="10" ng-pattern="/^[789]\d{9}$/" required />							
-				<span class="text-danger" ng-show="addProperty.mobile.$error.pattern && (addProperty.mobile.$dirty)" class="text-danger">Enter a valid mobile no.</span>
+				<span class="text-danger" ng-show="contactForm.mobile.$error.pattern && (contactForm.mobile.$dirty)" class="text-danger">Enter a valid mobile no.</span>
 			</div>						
 		</div>
 	  
@@ -23,9 +23,9 @@
 			<label for="email" class="col-sm-2 control-label">Email ID * </label>
 			<div class="col-sm-9">
 				<input type="email"  id="email" class="form-control" name="email" ng-model="property.contact_details.email" ng-pattern=" /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required />					
-				<span class="text-danger" ng-show="addProperty.email.$error.pattern && (addProperty.email.$dirty)"> invalid email! </span>
+				<span class="text-danger" ng-show="contactForm.email.$error.pattern && (contactForm.email.$dirty)"> invalid email! </span>
 				
-				<span class="text-danger" ng-show="addProperty.email.$error.required && (addProperty.email.$dirty)">Email is required.</span>							
+				<span class="text-danger" ng-show="contactForm.email.$error.required && (contactForm.email.$dirty)">Email is required.</span>							
 			</div>							
 		</div>
 	  
@@ -33,10 +33,19 @@
 			<label for="address" class="col-sm-2 control-label">Address *</label>
 			<div class="col-sm-9">
 				<textarea type="text" id="address" class="form-control" name="address" ng-model="property.contact_details.cont_address" cols="30" rows="4" ng-maxlength="160"  required></textarea>
-				<p ng-hide="addProperty.cont_address.$error.maxlength">{{ 160 - property.contact_details.cont_address.length + " Chars left" }}</p>
-				 <span class="text-danger" ng-show="addProperty.contact_details.cont_address.$error.maxlength">
+				<p ng-hide="contactForm.cont_address.$error.maxlength">{{ 160 - property.contact_details.cont_address.length + " Chars left" }}</p>
+				 <span class="text-danger" ng-show="contactForm.contact_details.cont_address.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="addProperty.contact_details.cont_address.$dirty && addProperty.contact_details.cont_address.$invalid">
-				  <span ng-show="addProperty.contact_details.cont_address.$error.required">Address is required .</span>	 
+					<span class="text-danger" ng-show="contactForm.contact_details.cont_address.$dirty && contactForm.contact_details.cont_address.$invalid">
+				  <span ng-show="contactForm.contact_details.cont_address.$error.required">Address is required .</span>	 
 			</div>				
 		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-9">
+				<button type="submit" ng-if="!property.id" ng-click="addPropertyFun(property)" ng-disabled="contactForm.$invalid" class="btn btn-primary" title="Add new property">Add New Property</button>
+				
+				<button type="submit" ng-if="property.id" ng-click="update(property)" title="Update your property" class="btn btn-success text-center ">Edit Property</button>
+				<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>
+			</div>
+		</div>			
+	</form>
