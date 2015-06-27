@@ -59,42 +59,48 @@
 	
 	if($reqMethod=="POST"){
 		$input = json_decode($body);
-		
-		$from['email'] = $input->from_email->from;
-		$from['name'] = $input->name;
-		(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", $input->to_email->cc) : $ccMail = null;
-		$recipients = explode(",", $input->to_email->to);
-		$subject = $input->subject;
-		$message = "<table>
-				<tr>
-					<td>Name: </td><td>".$from['name']."</td>
-				</tr>
-				<tr>
-					<td>Email: </td><td>".$from['email']."</td>
-				</tr>";
-		if(is_object($input->message)){
-			foreach($input->message as $key => $value){
+		try{
+			$from['email'] = $input->from_email->from;
+			$from['name'] = $input->name;
+			(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", $input->to_email->cc) : $ccMail = null;
+			$recipients = explode(",", $input->to_email->to);
+			$subject = $input->subject;
+			$message = "<table>
+					<tr>
+						<td>Name: </td><td>".$from['name']."</td>
+					</tr>
+					<tr>
+						<td>Email: </td><td>".$from['email']."</td>
+					</tr>";
+			if(is_object($input->message)){
+				foreach($input->message as $key => $value){
+					$message .= "<tr>
+						<td>".$key.":</td><td>".$value."</td>
+					</tr>";
+				}
+			}else{
 				$message .= "<tr>
-					<td>".$key.":</td><td>".$value."</td>
-				</tr>";
+						<td>Message: </td><td>".$input->message."</td>
+					</tr>";
 			}
-		}else{
-			$message .= "<tr>
-					<td>Message: </td><td>".$input->message."</td>
-				</tr>";
-		}
-		$message .= "</table>";
-		//$message = $input->message->message;
+			$message .= "</table>";
+			//$message = $input->message->message;
 
-		$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
-		 if($mail['status'] == 'success'){
-			$insert = $db->insert("enquiry", $body);
-			$insert['message'] = $insert['message']." " .$mail['message'];
-			$response= $insert;
-		}else{
-			$response = $mail;
+			$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
+			 if($mail['status'] == 'success'){
+				$insert = $db->insert("enquiry", $body);
+				$insert['message'] = $insert['message']." " .$mail['message'];
+				$response= $insert;
+			}else{
+				$response = $mail;
+			}
+			echo json_encode($response);
+		}catch(Exception $e){
+			$response["status"] = "warning";
+			$response["message"] = 'Error: ' .$e->getMessage();
+			$response["data"] = null;
+			echo json_encode($response);
 		}
-		echo json_encode($response);
 	}
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
 		$where['id'] = $id; // need where clause to update/delete record

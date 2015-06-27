@@ -1,17 +1,13 @@
 {% autoescape false %}
-<div class="sidebarModule sidemenu">
-{% for sidemenus in sidebar %}
-	{% if link.status == 1 %}
-	<li class="{{ (link.childMenu) ? 'child-menu' : '' }}{{ link.url == uri ? ' active' : '' }}" >
-		<a href="{{ link.url }}">{{ link.name }}</a>
-		{% if link.childMenu %}
-			<ul>
-				{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html'] with {'links': link.childMenu} %}
-			</ul>
+<div class="sidebarModule sidemenu text-center">
+	<ul>
+	{% for x in sidebar %}
+		{% if x.status == 1 %}
+			<li>
+				<a class="{{ x.name | lower | replace({" ":'_'})}}" href="{{ x.url }}">{{ x.name }}</a>
+			</li>
 		{% endif %}
-	</li>
-	{% endif %}
-{% endfor %}
-
+	{% endfor %}
+	</ul>
 </div>
 {% endautoescape %}
