@@ -77,9 +77,9 @@
 		<div class="form-group">
 			<label for="newsdetails" class="col-sm-3 control-label">News Coverage Details*</label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="news_coverage.desc.newsdetails" cols="30" rows="4" ng-maxlength="1500" placeholder="News Coverage Details" ui-tinymce required></textarea>
+				<textarea type="text" class="form-control" id="newsdetails" name="newsdetails" ng-model="news_coverage.desc.newsdetails" cols="30" rows="4" ng-maxlength="5000" placeholder="News Coverage Details" ui-tinymce required></textarea>
 				
-				<span ng-hide="newscoverageForm.newsdetails.$error.maxlength">{{ 1500 - news_coverage.desc.newsdetails.length + " Chars left" }}</span>
+				<span ng-hide="newscoverageForm.newsdetails.$error.maxlength">{{ 5000 - news_coverage.desc.newsdetails.length + " Chars left" }}</span>
 				<span class="help-block" ng-show="newscoverageForm.newsdetails.$dirty && newscoverageForm.newsdetails.$invalid">
 					<span class="text-danger" ng-show="newscoverageForm.newsdetails.$error.maxlength">Sorry You are Exceeding the Limit</span>
 					<span ng-show="newscoverageForm.newsdetails.$error.required" class="text-danger">Infrastucture Description is required.</span>

@@ -65,9 +65,9 @@
 		<div class="form-group">
 			<label for="imgDesc" class="col-sm-3 control-label">Image Description*</label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="imgDesc" name="imgDesc" ng-model="gallery.desc.description" cols="30" rows="4" ng-maxlength="256" placeholder="Enter Image Description" required></textarea>
+				<textarea type="text" class="form-control" id="imgDesc" name="imgDesc" ng-model="gallery.desc.description" cols="30" rows="4" ng-maxlength="2000" placeholder="Enter Image Description" required></textarea>
 					<p ng-hide="galleryForm.imgDesc.$error.maxlength">
-						{{ 256 - gallery.desc.description.length + " Chars left" }}
+						{{ 2000 - gallery.desc.description.length + " Chars left" }}
 					</p>					
 					<span class="help-block" ng-show="galleryForm.imgDesc.$dirty && galleryForm.imgDesc.$invalid">
 						<span class="text-danger" ng-show="galleryForm.imgDesc.$error.maxlength">Sorry You are Exceeding the Limit</span>

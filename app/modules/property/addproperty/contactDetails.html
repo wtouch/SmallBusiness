@@ -1,4 +1,4 @@
- <form class="form-horizontal" name="contactForm" ng-submit="contactForm.$valid" novalidate>				
+<form class="form-horizontal" name="contactForm" ng-submit="contactForm.$valid" novalidate>		
 	<h3>Property contact Detail:</h3>
 		<div class="form-group">
 			<label for="contact_person" class="col-sm-2 control-label">Contact Person * </label>
@@ -40,10 +40,10 @@
 				  <span ng-show="contactForm.contact_details.cont_address.$error.required">Address is required .</span>	 
 			</div>				
 		</div>
+		
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
 				<button type="submit" ng-if="!property.id" ng-click="addPropertyFun(property)" ng-disabled="contactForm.$invalid" class="btn btn-primary" title="Add new property">Add New Property</button>
-				
 				<button type="submit" ng-if="property.id" ng-click="update(property)" title="Update your property" class="btn btn-success text-center ">Edit Property</button>
 				<button type="reset" ng-click="reset()" title="Cancel" class="btn btn-danger text-center ">Cancel</button>
 			</div>

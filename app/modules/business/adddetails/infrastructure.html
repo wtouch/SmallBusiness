@@ -54,9 +54,9 @@
 		<div class="form-group">
 			<label for="infraDesc" class="col-sm-3 control-label">Infrastucture Description*</label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastructure.desc.description" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
+				<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastructure.desc.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
 				<p ng-hide="infrastructureForm.infraDesc.$error.maxlength">
-					{{ 1500 - infrastructure.desc.description.length + " Chars left" }}	
+					{{ 5000- infrastructure.desc.description.length + " Chars left" }}	
 				</p>
 				
 				<span class="help-block" ng-show="infrastructureForm.infraDesc.$dirty && infrastructureForm.infraDesc.$invalid">

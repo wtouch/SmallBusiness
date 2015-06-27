@@ -30,10 +30,10 @@
 		<div class="form-group">
 			<label for="jobDescription" class="col-sm-3 control-label">Job Description* </label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="jobDescription" name="jobDescription" ng-model="job_careers.desc.description" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter Job Description" ui-tinymce required></textarea>
+				<textarea type="text" class="form-control" id="jobDescription" name="jobDescription" ng-model="job_careers.desc.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Enter Job Description" ui-tinymce required></textarea>
 				
 				<p ng-hide="jobsandcareersForm.jobDescription.$error.maxlength">
-					{{ 1500 - job_careers.desc.description.length + " Chars left" }}</p>
+					{{ 5000 - job_careers.desc.description.length + " Chars left" }}</p>
 					
 				<span class="help-block" ng-show="jobsandcareersForm.jobDescription.$dirty && jobsandcareersForm.jobDescription.$invalid">
 					<span class="text-danger" ng-show="jobsandcareersForm.jobDescription.$error.maxlength">Sorry You are Exceeding the Limit</span>

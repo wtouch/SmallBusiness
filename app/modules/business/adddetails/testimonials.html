@@ -92,8 +92,8 @@
 		<div class="form-group">
 			<label for="test_Description" class="col-sm-3 control-label">Testimonial Description*</label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="test_Description" name="test_Description" ng-model="testimonials.desc.description" cols="30" rows="4" ng-maxlength="1500" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
-				<p ng-hide="testimonialsForm.test_Description.$error.maxlength">{{ 1500 - testimonials.desc.description.length + " Chars left" }}</p>
+				<textarea type="text" class="form-control" id="test_Description" name="test_Description" ng-model="testimonials.desc.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
+				<p ng-hide="testimonialsForm.test_Description.$error.maxlength">{{ 5000 - testimonials.desc.description.length + " Chars left" }}</p>
 				<span class="help-block" ng-show="testimonialsForm.test_Description.$dirty && testimonialsForm.test_Description.$invalid">
 					<span class="text-danger" ng-show="testimonialsForm.test_Description.$error.maxlength">Sorry You are Exceeding the Limit</span>
 					<span ng-show="testimonialsForm.test_Description.$error.required" class="text-danger">Testimonial Description is required.</span>
