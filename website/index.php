@@ -83,7 +83,7 @@ $app->get('/emi-calculator', function() use($app, $config, $web) {
 $app->get('/area-converter', function() use($app, $config, $web) {
 	$title = "Area Converter";
 	$web->getBusinessData("areaconverter", $title);
-});
+}); 
 $app->get('/:page', function($page) use($app, $config, $web) {
 	$title = "Home";
 	$web->getBusinessData($page, $title);

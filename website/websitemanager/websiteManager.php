@@ -35,7 +35,7 @@ class websiteManager{
 			
 			// apply menus to template
 			$response["routes"] = $response["data"]['website_config']['menus'];
-			
+			$response["sidebar"] = $response["data"]['website_config']['sidebar'];
 			
 			// set assets path for css, js, images etc
 			$response["path"] = $this->config['httpTempPath'].$response["templatePath"];

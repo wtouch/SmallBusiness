@@ -120,7 +120,8 @@ function postRecord($getRequest, $postParams=null){
 	$baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex).'/index.php'; 
 	
 	try{
-		if(!isset($_SESSION['username']) && $postParams != ("login" || "forgotpass" || "changepass")){
+		
+		if(!isset($_SESSION['username']) && $postParams != ("login" || "forgotpass" || "changepass") && $getRequest != "enquiry"){
 			throw new Exception('You are not logged in!');
 		}
 		if($body===""){
@@ -130,6 +131,7 @@ function postRecord($getRequest, $postParams=null){
 		}
 	}
 	catch(Exception $e) {
+		echo $postParams;
 		$response["status"] = "error";
         $response["message"] = "Error: '".$e->getMessage()."'";
         $response["data"] = null;
