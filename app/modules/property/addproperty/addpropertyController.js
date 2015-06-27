@@ -37,7 +37,9 @@ define(['app'], function (app) {
 		};
 		
 		$scope.uploadMultiple = function(files,path,userinfo, picArr){
+			$rootScope.loading = true;
 			upload.upload(files,path,userinfo,function(data){
+				$rootScope.loading = false;
 				if(data.status === 'success'){
 					picArr.property_images.push(data.data);
 				}else{

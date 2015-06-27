@@ -8,5 +8,10 @@
 				</label>
 			</div>					
 		</div>
-		<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="property.amenities.length<=0 || !property.amenities" ng-click="showFormPart('contactDetails',1)">Next</button>	
+		<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-9">
+			<button type="submit" ng-if="property.id" ng-click="update(property)" title="Update your property" class="btn btn-success text-center ">Update Property</button>
+			<button type="submit" class="btn btn-primary" title="Save" ng-disabled="property.amenities.length<=0 || !property.amenities" ng-click="showFormPart('contactDetails',1)">Next</button>	
+		</div>
+		</div>
 </form>
