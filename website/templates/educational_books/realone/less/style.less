@@ -54,28 +54,30 @@
 		border-radius: 0;
 		.navbar-nav{
 			> li{
-				
+				padding:10px;
 				margin-bottom:0px;
 				position : relative;
 				margin-right: 10px;
 				a{
+					padding:5px;
 					text-transform: uppercase;
 				}
 				> a, > a:focus {
 					color: @lightcolor;
 					font: bold 15px/1em Arial, Helvetica, sans-serif;
 					position: relative;
-					
 					border:1px solid transparent;
-					
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					background-color: @color;
-					
-					
+					border:1px solid @colorwhite;
+					border-radius:4px;
 				}
 				> ul{
+					margin-top:10px;
 					display: none;
+					border:1px solid @colorwhite;
+					border-radius:5px;
 					position: absolute;
 					width: 245px;
 					z-index: 999;
@@ -201,12 +203,25 @@
 		}
 		
 	}
+	hr{
+		border-style:dashed;
+		border-color:#5f9429;
+		margin:5px 0px;
+	}
+	.sidebarModule{
+		.sections{
+			
+			padding:10px;
+		}
+	}
 	footer{
 		margin-top : 15px;
 		border-top:1px dashed @darkcolor;
 		padding: 15px 0;
 	}
-	
+	*{
+		transition:300ms;
+	}
 	
 	//for responsive
 	@media (min-width: 320px){

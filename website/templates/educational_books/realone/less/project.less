@@ -22,8 +22,16 @@
 
 .homeproject {
 	margin-top:10px;
+	.projectnav{
+		a{
+			&:hover{
+				background: -webkit-linear-gradient(right, @lightcolor -79%, #5F9429);
+				color:@lightcolor;
+			}
+		}
+	}
 	.projectnav,.projsnap {
-		background-color: @lightbackcolor;
+		background-color: @color;
 		border:1px solid @darkbackcolor;
 		box-shadow: 3px 3px 6px #ADADAD;
 		border-radius : 4px;
@@ -32,7 +40,7 @@
 		a{
 			color: @colorblack;
 			&:hover{
-				color: @color;
+				color:@lightcolor;
 				text-decoration:none;
 			}
 		}
@@ -75,9 +83,9 @@
 .project{
 	.navbar{
 		background-color: @darkbackcolor;
-		border-bottom: 4px solid @lightbackcolor;
+		border-bottom: 2px solid @lightbackcolor;
 		border-radius: 0;
-		margin-bottom:10px;
+		
 		width:auto;
 	}
 	ul.nav.navbar-nav {
@@ -85,15 +93,15 @@
 		background-color: @darkbackcolor;
 		>li{
 			border-right : 1px solid @lightbackcolor;
-			height : 38px;
+			
 			>a, > a:focus{
-				padding : 10px;
+				
 				color : @colorwhite;
 				font-weight : bold;
 			} 
 			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-				background-color: @back ;
-				color : @colorwhite;
+				background-color: @color ;
+				color : @colorblack;
 			}
 		}
 	}
@@ -146,12 +154,9 @@
 			}
 			ul.nav.navbar-nav {
 				color:@lightbackcolor;
-				
 				border-bottom: 4px solid @lightbackcolor;
-				height : 42px;
 				>li{
 					border-right : 1px solid @lightbackcolor;
-					height : 38px;
 					>a, > a:focus{
 						padding : 9px 14px;
 						color : @lightcolor;
@@ -167,15 +172,16 @@
 				margin-right: 20px;
 				max-height : 175px;
 			}
-			
-		}
-		.projectgallery{ 
-			background-color : @back;
-			border : 1px solid @lightbackcolor;
-			padding: 20px 20px 0px;
-			.thumbnail{
-				background-color : @darkbackcolor;
+			.projectgallery{ 
+				background-color : @back;
+				border : 1px solid @lightbackcolor;
+				padding: 20px 20px 0px;
+				.thumbnail{
+					background-color : @darkbackcolor;
+				}
 			}
+		
+			
 		}
 		
 		//pagination css
@@ -201,7 +207,15 @@
 		} 
 		
 	}
-	
+	.project {
+		.projectgallery{
+			.thumbnail{
+				background-color : @lightbackcolor;
+				border : 1px solid @darkbackcolor;
+				padding: 20px 20px 0px;
+			}
+		}
+	}
 	@media (min-width: 320px){
 		.projImg{
 			float :none;

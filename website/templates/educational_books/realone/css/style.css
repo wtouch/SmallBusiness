@@ -16,8 +16,8 @@
 .sidebar .nav-pills > li:hover > a:focus,
 .sidebar .nav-pills > li > a:hover,
 .sidebar .nav-pills > li > a:focus {
-  color: #b8f9b8;
-  background-color: #6ba72b;
+  color: #000000;
+  background-color: #f4b993;
 }
 .about .table tbody tr th,
 .contact .table tbody tr th,
@@ -74,10 +74,18 @@
   .gallery .thumbnail {
     height: 365px;
   }
+  .gallery .thumbnail img {
+    max-height: 155px;
+    width: 100%;
+  }
 }
 @media (min-width: 1200px) {
   .gallery .thumbnail {
     height: 380px;
+  }
+  .gallery .thumbnail img {
+    max-height: 200px;
+    width: 100%;
   }
 }
 .featuredProperty .bxslider1 {
@@ -106,7 +114,7 @@
   margin-right: 10px;
   margin-bottom: 10px;
   background-color: #ede9d7;
-  color: #ffffff;
+  color: #000000;
   border-radius: 0px;
   font-weight: bold;
 }
@@ -136,8 +144,9 @@
   transition: padding 250ms;
 }
 .propertylist .panel-default .readmore a:hover {
-  background-color: #f9f5f5;
+  background-color: #f4b993;
   padding: 5px 30px;
+  color: #000000;
 }
 .propertylist .table td {
   border: none;
@@ -250,7 +259,7 @@
 .singleproperty .btn-primary {
   margin-bottom: 10px;
   background-color: #ede9d7;
-  color: #ffffff;
+  color: #000000;
   border-radius: 0px;
   font-weight: bold;
 }
@@ -297,9 +306,13 @@
 .homeproject {
   margin-top: 10px;
 }
+.homeproject .projectnav a:hover {
+  background: -webkit-linear-gradient(right, #b8f9b8 -79%, #5f9429);
+  color: #b8f9b8;
+}
 .homeproject .projectnav,
 .homeproject .projsnap {
-  background-color: #f9f5f5;
+  background-color: #f4b993;
   border: 1px solid #6ba72b;
   box-shadow: 3px 3px 6px #ADADAD;
   border-radius: 4px;
@@ -312,7 +325,7 @@
 }
 .homeproject .projectnav a:hover,
 .homeproject .projsnap a:hover {
-  color: #f4b993;
+  color: #b8f9b8;
   text-decoration: none;
 }
 .homeproject .projectnav img,
@@ -350,9 +363,8 @@
 }
 .project .navbar {
   background-color: #6ba72b;
-  border-bottom: 4px solid #f9f5f5;
+  border-bottom: 2px solid #f9f5f5;
   border-radius: 0;
-  margin-bottom: 10px;
   width: auto;
 }
 .project ul.nav.navbar-nav {
@@ -361,11 +373,9 @@
 }
 .project ul.nav.navbar-nav > li {
   border-right: 1px solid #f9f5f5;
-  height: 38px;
 }
 .project ul.nav.navbar-nav > li > a,
 .project ul.nav.navbar-nav > li > a:focus {
-  padding: 10px;
   color: #ffffff;
   font-weight: bold;
 }
@@ -376,8 +386,8 @@
 .project ul.nav.navbar-nav > li:hover > a:focus,
 .project ul.nav.navbar-nav > li > a:hover,
 .project ul.nav.navbar-nav > li > a:focus {
-  background-color: #ede9d7;
-  color: #ffffff;
+  background-color: #f4b993;
+  color: #000000;
 }
 .projlist {
   border: 1px solid #6ba72b;
@@ -418,11 +428,9 @@
 .projlist .project ul.nav.navbar-nav {
   color: #f9f5f5;
   border-bottom: 4px solid #f9f5f5;
-  height: 42px;
 }
 .projlist .project ul.nav.navbar-nav > li {
   border-right: 1px solid #f9f5f5;
-  height: 38px;
 }
 .projlist .project ul.nav.navbar-nav > li > a,
 .projlist .project ul.nav.navbar-nav > li > a:focus {
@@ -444,12 +452,12 @@
   margin-right: 20px;
   max-height: 175px;
 }
-.projlist .projectgallery {
+.projlist .project .projectgallery {
   background-color: #ede9d7;
   border: 1px solid #f9f5f5;
   padding: 20px 20px 0px;
 }
-.projlist .projectgallery .thumbnail {
+.projlist .project .projectgallery .thumbnail {
   background-color: #6ba72b;
 }
 .projlist nav .pagination li a,
@@ -466,6 +474,11 @@
 .projlist nav .pagination > .active > a {
   background-color: #f4b993;
   color: #000000;
+}
+.project .projectgallery .thumbnail {
+  background-color: #f9f5f5;
+  border: 1px solid #6ba72b;
+  padding: 20px 20px 0px;
 }
 @media (min-width: 320px) {
   .projImg {
@@ -597,11 +610,13 @@ a:hover,
   border-radius: 0;
 }
 .navbar-default .navbar-nav > li {
+  padding: 10px;
   margin-bottom: 0px;
   position: relative;
   margin-right: 10px;
 }
 .navbar-default .navbar-nav > li a {
+  padding: 5px;
   text-transform: uppercase;
 }
 .navbar-default .navbar-nav > li > a,
@@ -617,9 +632,14 @@ a:hover,
 .navbar-default .navbar-nav > li:hover > a,
 .navbar-default .navbar-nav > li:hover > a:focus {
   background-color: #f4b993;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
 }
 .navbar-default .navbar-nav > li > ul {
+  margin-top: 10px;
   display: none;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
   position: absolute;
   width: 245px;
   z-index: 999;
@@ -743,10 +763,21 @@ h3 {
   color: #000000;
   padding: 5px 30px;
 }
+hr {
+  border-style: dashed;
+  border-color: #5f9429;
+  margin: 5px 0px;
+}
+.sidebarModule .sections {
+  padding: 10px;
+}
 footer {
   margin-top: 15px;
   border-top: 1px dashed #930616;
   padding: 15px 0;
+}
+* {
+  transition: 300ms;
 }
 @media (min-width: 320px) {
   .logo {

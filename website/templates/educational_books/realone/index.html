@@ -28,8 +28,8 @@
 				</div>
 				<div class="col-sm-12 col-md-6">
 					<div class="cnctinfo">
-						<p class="text-right"><b>Mobile :</b> +91-7779045873,+91-9173320866</p>
-						<p class="text-right"><b>E-mail :</b>  <a href="#">icanconsultants@outlook.com</a>
+						<p class="text-right"><b>Mobile :</b> {{data.contact_profile.mobile}}</p>
+						<p class="text-right"><b>E-mail :</b>  <a href="#">{{data.contact_profile.email}}</a>
 						</p>
 					</div>
 				</div>
@@ -78,22 +78,27 @@
 					{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
 					{%endif%}
 				</div>
+			
 				{% endif %}
-				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-6 ' : 'col-sm-12 ' }}">
-					{% include contentPath %}
-					{%if modules.contentModule.featured_properties %}
-						{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
-					{%endif%}
-					{%if modules.contentModule.featured_projects %}
-						{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-					{%endif%}
+				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-6 col-md-9 ' : 'col-sm-12 col-md-12' }}">
+					<div class="row">
+						<div class="{{ (modules.sidebarModule =='searchProp' ) ? 'col-sm-12 col-md-9 ' : 'col-sm-12 col-md-12' }}">
+							{% include contentPath %}
+							{%if modules.contentModule.featured_properties %}
+								{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+							{%endif%}
+							{%if modules.contentModule.featured_projects %}
+								{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
+							{%endif%}
+						</div>
+						{%if modules.sidebarModule.searchProp %}
+						<div class="{{ (modules.sidebarModule =='searchProp' ) ? 'col-sm-3 col-md-3 ' : 'col-sm-3 col-md-3' }}">
+							{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+						</div>
+						{%endif%}
+					</div>
 				</div>
 				
-				{%if modules.sidebarModule.searchProp %}
-				<div class="col-sm-12 col-md-3">
-					{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
-				</div>
-				{%endif%}
 			</div>
 			<div class="row">
 				<div class="col-sm-12 col-md-12">
