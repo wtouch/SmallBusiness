@@ -199,7 +199,7 @@
 		font : 2.5em/1em 'Alex Brush', cursive;
 		color : @darkcolor;
 	}
-	.btn-info{
+	.btn-info, .btn-primary{
 		border-radius : 5px;
 		&, &:focus, &:active, &[disabled]{
 			background-color : @darkcolor;
@@ -232,20 +232,50 @@
 			color : @darkcolor;
 		}
 	}
+	.panel{
+		background-color : @back;
+	}
+	.panel-default{
+		border : none;
+	}
+	.form-control,.form-control[disabled], .form-control[readonly]{
+		background-color : @darkbackcolor;
+		border-color : @darkcolor;
+		color : @darkcolor;
+	}
+	.send, .calculate{
+		margin-right : 8px;
+	}
 	.sidebarModule{
-		.send{
-			margin-right : 8px;
-		}
-		.panel{
-			background-color : @back;
-		}
-		.panel-default{
-			border : none;
-		}
-		.form-control{
-			background-color : @darkbackcolor;
-			border-color : @darkcolor;
-			color : @darkcolor;
+		&.sidemenu{
+			ul{
+				padding : 0;
+				list-style : none;
+				li{
+					margin-bottom : 10px;
+				}
+			}
+			a{
+				display : inline-block;
+				height : 100px;
+				width : 225px;
+				background-repeat : no-repeat;
+				background-position: center; 
+				text-indent : -9999px;
+				overflow : hidden;
+				&.area_converter{
+					background-image : url('../img/area_converter.png');
+				}
+				&.emi_calculator{
+					background-image : url('../img/emi_calculator.png');
+				}
+				&.post_your_property{
+					background-image : url('../img/post_your_property.jpg');
+				}
+				&.post_your_requirement{
+					background-image : url('../img/post_your_requirement.jpg');
+				}
+			}
 		}
 	}
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus
