@@ -1,7 +1,17 @@
 {% autoescape false %}
 <div class="sidebarModule sidemenu">
-{{sidebar.0 | join(",")}}
-	<img alt="" class="img-responsive center-block sideimg" title="" src="{{path}}img/area_converter.png">
-	<img alt="" class="img-responsive center-block sideimg" title="" src="{{path}}img/emi_calculator.png">
+{% for sidemenus in sidebar %}
+	{% if link.status == 1 %}
+	<li class="{{ (link.childMenu) ? 'child-menu' : '' }}{{ link.url == uri ? ' active' : '' }}" >
+		<a href="{{ link.url }}">{{ link.name }}</a>
+		{% if link.childMenu %}
+			<ul>
+				{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html'] with {'links': link.childMenu} %}
+			</ul>
+		{% endif %}
+	</li>
+	{% endif %}
+{% endfor %}
+
 </div>
 {% endautoescape %}
