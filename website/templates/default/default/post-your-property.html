@@ -1,0 +1,217 @@
+{% autoescape false %}
+<div class="panel panel-default">
+	<div class="panel-body">
+		<form class="form-horizontal" name="postpropertyForm" ng-submit="postpropertyForm.$valid" novalidate ng-controller="enquiryController">
+		<h3>Post Your Property</h3>
+			<div class="form-group">							
+				<label for="property_for" class="col-sm-3  control-label">* Property for </label>	
+				<div class="col-sm-9"> 
+					<label class="radio-inline">
+						<input type="radio" name="property_for" id="Sale" value="Sale" ng-model="enquiry.message.property_for" checked="true" required>Sale
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="property_for" id="Rent" value="Rent" ng-model="enquiry.message.property_for" required> Rent
+					</label>
+					
+				</div>	
+			</div> 	
+			<div class="form-group">
+				<label for="category" class="col-sm-3 control-label">* Property Category </label>
+				<div class="col-sm-3">
+					<select id="category" name="category" ng-model="enquiry.message.category" class="form-control" required ng-options="item.category_name as item.category_name for item in propertyConfig.category">
+						<option value="">Select Category</option>			
+					</select>
+					<span class="text-danger" ng-show="propertyForm.category.$dirty && postpropertyForm.category.$invalid">
+						<span ng-show="postpropertyForm.category.$error.required">Property category selection required .</span>
+					</span>	
+						<input type="hidden" class="form-control" id="user_id" ng-init="enquiry.user_id={{enquiry.user_id}}" ng-model="enquiry.user_id" name="user_id">
+						
+						<input type="hidden" class="form-control" id="date" ng-model="enquiry.date" name="date">
+						
+						<input type="hidden" class="form-control" id="to_email.to" name="to_email.to" ng-model="enquiry.to_email.to" ng-init="enquiry.to_email.to='{{enquiry.owner_email}}'">
+						
+						<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc = 'admin@apnasite.in'">
+				
+						<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" ng-init="enquiry.subject = 'post your property enquiry'">					
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="area" class="col-sm-3 control-label">* Area </label>
+				<div class="col-sm-6">
+					<input type="text" id="area" class="form-control help-block" name="area" ng-model="enquiry.message.area" ng-pattern="/^\d{0,9}[0-9]$/" required>
+					
+					<span ng-show="postpropertyForm.area.$error.pattern && (postpropertyForm.area.$dirty)" class="text-danger">Enter only no!</span>
+					<span class="text-danger" ng-show="postpropertyForm.area.$dirty && postpropertyForm.area.$invalid">
+					  <span ng-show="postpropertyForm.area.$error.required"> Area is required .</span>
+					</span>	
+				</div>							
+				<div class="col-sm-3">
+					<select class="form-control" name="unit" ng-model="enquiry.message.build_unit"  title="" required >
+						<option selected value="">Unit Area</option>
+						<option value="Feet">Sq. Feet</option>
+						<option value="Cent">Cent</option>
+						<option value="Yard">Sq. Yard</option>
+						<option value="Acer">Acer</option>
+					</select>
+					<span class="text-danger" ng-show="postpropertyForm.unit.$dirty && postpropertyForm.unit.$invalid">
+						<span ng-show="postpropertyForm.unit.$error.required">Unit selection required .</span>
+					</span>				 
+				</div>
+			</div>	
+			<div class="form-group">
+				<label for="budget" class="col-sm-3 control-label">* Budget </label>
+					<div class="col-sm-6">
+						<input type="text" id="budget" class="form-control" name="budget" ng-model="enquiry.message.budget" ng-pattern="/^\d{0,9}[0-9]$/" required />
+						<span class="text-danger" ng-show="postpropertyForm.budget.$error.pattern && (postpropertyForm.budget.$dirty)">Enter only no.</span>
+						<span class="text-danger" ng-show="postpropertyForm.budget.$dirty && postpropertyForm.budget.$invalid">
+							<span ng-show="postpropertyForm.budget.$error.required">Budget is required.</span>
+						</span>			
+					</div>
+				<div class="col-sm-3">
+					<select class="form-control" name="currency" ng-model="enquiry.message.currency"  title="" required >
+						<option selected value="">Select Category</option>
+						<option value="In Rupees">In Rupees.</option>
+						<option value="Thousands">Thousands</option>
+						<option value="Lac">Lac</option>
+						<option value="Carror">Carror</option>
+					</select>
+					<span class="text-danger" ng-show="postpropertyForm.currency.$dirty && postpropertyForm.currency.$invalid">
+						<span ng-show="postpropertyForm.currency.$error.required">Currency selection required .</span>
+					</span>				 
+				</div>
+			</div>	
+			<div class="form-group">
+				<label for="facing" class="col-sm-3 control-label">* Facing </label>
+				<div class="col-sm-9">
+					<select class="form-control" id="facing" name="facing" ng-model="enquiry.message.facing" ng-options="item for item in propertyConfig.facing" required>
+						<option value="">Select One</option></select>
+					<span class="text-danger" ng-show="postpropertyForm.facing.$dirty && postpropertyForm.facing.$invalid">
+						<span ng-show="postpropertyForm.facing.$error.required">Property Facing is required .</span>
+					</span>		
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="property_images" class="col-sm-3 control-label" >Property Images *</label>
+				<div class="col-sm-9">
+					<!-- This is file input for select images -->
+					<input type="file" id="property_images" ng-file-select ng-multiple="true" accept="image/jpeg,image/png,image/gif" ng-file-change="generateThumb($files)"  ng-model="property_images" ng-src="{{appConfig.assetPath + '/' + value.file_relative_path}}"required />		
+					<!-- This will show thumbnails & progress of images -->
+					<file-preview url="property_images"></file-preview>
+					<!-- This button will show if file/s selected -->
+					<button ng-show="property_images" ng-click="uploadMultiple(property_images,enquiry.user_id + path,userinfo,property)" type="button">Upload</button>
+					<!-- This hidden input will store image path in array after successful uploading -->
+					<input type="hidden" ng-model="enquiry.message.property_images"/>	
+					<span class="thumbs" ng-repeat="(key, value) in enquiry.message.property_images">
+						<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" />
+						<span class="close" ng-click="removeImg(key, enquiry.message.property_images)">X</span>
+					</span>		
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="property_description" class="col-sm-3 control-label">Property Discription *</label>
+				<div class="col-sm-9">
+					<textarea type="text" class="form-control" name="property_description" id="property_description" ng-model="enquiry.message.property_description" cols="30" rows="4" ng-maxlength="2000" required></textarea>
+					
+					<p ng-hide="postpropertyForm.property_description.$error.maxlength">{{ 2000 - property.property_description.length + " Chars left" }}</p>
+					
+					 <span class="text-danger" ng-show="postpropertyForm.property_description.$error.maxlength">
+						Sorry You are Exceeding the Limit
+					</span>	
+					
+					<span class="text-danger" ng-show="postpropertyForm.property_description.$dirty && postpropertyForm.property_description.$invalid">
+						<span ng-show="postpropertyForm.property_description.$error.required">Property Description required.</span>
+					</span>							
+				</div>				
+			</div>
+			<h3>Property Location:</h3>		
+			<script type="text/ng-template" id="customTemplate.html">
+					<a>
+						<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+						<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
+					</a>
+				</script>
+			<div class="form-group">
+				<label for="location" class="col-sm-3 control-label">Location*</label>
+				<div class="col-sm-9">
+					<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="enquiry.message.location" typeahead-on-select="getData($item)" placeholder="Location" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
+					<i ng-show="locationLoading" class="glyphicon glyphicon-refresh"></i>
+				</div>						
+			</div>
+			<div class="form-group">
+				<label for="area" class="col-sm-3 control-label">Area</label>
+				<div class="col-sm-9">
+					<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="enquiry.message.area" placeholder="Enter area">
+				</div>						
+			</div>			
+			<div class="form-group">
+				<label for="state" class="col-sm-3 control-label">City</label>
+				<div class="col-sm-4">
+					<input type="text" required name="City" id="City" ng-model="enquiry.message.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
+					<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
+				</div>
+				
+				<label for="state" class="col-sm-1 control-label">State</label>
+				<div class="col-sm-4">
+				<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="enquiry.message.state" placeholder="Enter state">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="Country" class="col-sm-3 control-label">Country</label>
+				<div class="col-sm-9">
+					<input type="text" required name="Country" id="Country" ng-model="enquiry.message.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
+				</div>
+			</div>					
+			<div class="form-group">
+				<label for="pincode" class="col-sm-3 control-label">Pin Code</label>
+				<div class="col-sm-9">
+					<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="enquiry.message.pincode" placeholder="Enter Pin Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+				</div>						
+			</div>
+			<h3>Property contact Detail:</h3>
+			<div class="form-group">
+				<label for="contact_person" class="col-sm-3 control-label">Contact Person * </label>
+				<div class="col-sm-9">
+					<input type="text" id="contact_person" class="form-control" name="contact_person" ng-model="enquiry.message.contact_details.contact_person" required/>
+					
+					<span class="text-danger" ng-show="postpropertyForm.contact_person.$dirty && postpropertyForm.contact_person.$invalid">
+						<span ng-show="postpropertyForm.contact_person.$error.required">Person Name is required .</span>
+					</span>	
+				</div>						
+			</div>
+			
+			<div class="form-group">
+				<label for="mobile" class="col-sm-3 control-label">Mobile * </label>
+				<div class="col-sm-9">
+					<input type="text"  id="mobile" class="form-control help-block"  name="mobile" ng-model="enquiry.message.contact_details.mobile" placeholder="Enter Your Mobile Number" maxlength="10" ng-pattern="/^[789]\d{9}$/" required />							
+					<span class="text-danger" ng-show="postpropertyForm.mobile.$error.pattern && (postpropertyForm.mobile.$dirty)" class="text-danger">Enter a valid mobile no.</span>
+				</div>						
+			</div>
+		  
+			<div class="form-group">
+				<label for="email" class="col-sm-3 control-label">Email ID * </label>
+				<div class="col-sm-9">
+					<input type="email"  id="email" class="form-control" name="email" ng-model="enquiry.message.contact_details.email" ng-pattern=" /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required />					
+					<span class="text-danger" ng-show="postpropertyForm.email.$error.pattern && (postpropertyForm.email.$dirty)"> invalid email! </span>
+					
+					<span class="text-danger" ng-show="postpropertyForm.email.$error.required && (postpropertyForm.email.$dirty)">Email is required.</span>							
+				</div>							
+			</div>
+		  
+			<div class="form-group">
+				<label for="address" class="col-sm-3 control-label">Address *</label>
+				<div class="col-sm-9">
+					<textarea type="text" id="address" class="form-control" name="address" ng-model="enquiry.message.contact_details.cont_address" cols="30" rows="4" ng-maxlength="160"  required></textarea>
+					<p ng-hide="postpropertyForm.cont_address.$error.maxlength">{{ 160 - enquiry.message.contact_details.cont_address.length + " Chars left" }}</p>
+					 <span class="text-danger" ng-show="postpropertyForm.contact_details.cont_address.$error.maxlength">
+						Sorry You are Exceeding the Limit</span>
+						<span class="text-danger" ng-show="postpropertyForm.contact_details.cont_address.$dirty && postpropertyForm.contact_details.cont_address.$invalid">
+					  <span ng-show="postpropertyForm.contact_details.cont_address.$error.required">Address is required .</span>	 
+				</div>				
+			</div>
+			<div class="form-group col-sm-12 text-center">
+				<button type="submit" class="btn btn-info send" ng-click="postData(enquiry)" ng-disabled="enquiryForm.$pristine || postpropertyForm.$invalid || mailSent">Submit</button>
+			</div>
+		</form>
+	</div>
+</div>
+{% endautoescape %}

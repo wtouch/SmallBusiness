@@ -65,7 +65,7 @@
 						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
 					{%endif%}
 					{%if modules.sidebarModule.enquiry %}
-						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
+						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry:{user_id : data.user_id,owner_email:data.owner_email}} %}
 					{%endif%}
 					{%if modules.sidebarModule.sidemenu %}
 						{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
@@ -83,6 +83,7 @@
 					{%if modules.contentModule.featured_projects %}
 						{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
 					{%endif%}
+					
 				
 				</div>
 			</div>

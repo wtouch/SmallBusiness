@@ -1,3 +1,7 @@
+	@font-face{
+		font-family:'QumpellkaNo12';
+		src:url('../fonts/QumpellkaNo12.otf');
+	}
 	@color : #bae275;
 	@lightcolor : #BBBBBB;
 	@darkcolor : #02071A;
@@ -7,7 +11,7 @@
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	@contentlink:#6ba72b;
-	@contentback: #1B1F2F;
+	@contentback: #272A35;
 	@headingcolor:#bae275;
 	
 	@import "property.less";
@@ -153,16 +157,19 @@
 		}
 	}
 	h4,h2,h3{
-		font: 1.2em/2.5em Playball,cursive;
+		font: 1.2em/2.5em QumpellkaNo12;
 		color: #bae275;
 		letter-spacing: 1px;
 		border-bottom: 1px solid #ccc;
 	}
-	h1,h4{
+	h1{
 		color: #bae275;
-		font: 2em/1.2em Playball,cursive;
+		font: 2em/1.2em QumpellkaNo12;
 		letter-spacing: 1px;
 		border-bottom: 1px solid #ccc;
+	}
+	.panel{
+		background-color:@contentback;
 	}
 	.contentModule {
 		.sections{
@@ -261,7 +268,7 @@
 			font-size : 18px;
 		}
 	}
-	.searchProperty,.sections,.enquiry .panel-default{
+	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
 		border:1px solid @lightcolor;
 		background-color:@contentback;
 		padding:10px;

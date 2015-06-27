@@ -69,13 +69,16 @@
 				{% if modules.sidebarModule >= 1 %}
 				<div class="col-sm-12 col-md-3" >
 					{%if modules.sidebarModule.enquiry %}
-						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
+						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry:{user_id : data.user_id,owner_email:data.owner_email}} %}
 					{%endif%}
 					{%if modules.sidebarModule.sidemenu %}
 					{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
 					{%endif%}
 					{%if modules.sidebarModule.contact %}
 					{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.searchProp %}
+						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
 					{%endif%}
 				</div>
 			
@@ -91,11 +94,7 @@
 								{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
 							{%endif%}
 						</div>
-						{%if modules.sidebarModule.searchProp %}
-						<div class="{{ (modules.sidebarModule =='searchProp' ) ? 'col-sm-3 col-md-3 ' : 'col-sm-3 col-md-3' }}">
-							{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
-						</div>
-						{%endif%}
+						
 					</div>
 				</div>
 				
