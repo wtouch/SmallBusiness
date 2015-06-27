@@ -54,20 +54,21 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	var min = today.getMinutes();
 	var sec = today.getSeconds();
 	$scope.mailSent = false;
-	$scope.loading = true;
+	//$scope.loading = true;
 	$scope.enquiry = {
 				subject : 'Website Enquiry',
 				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 			};
 	$scope.postData = function(enquiry){
 		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				if(response=='success'){
+			$scope.mailSent = true;
+				/* if(response=='success'){
 					$scope.loading = false;
 					$scope.mailSent = true;
 				}
 				else{
 					alert(response);
-				}
+				} */
 		});
 	};
 });	

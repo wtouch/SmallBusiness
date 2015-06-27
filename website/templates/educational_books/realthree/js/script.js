@@ -39,6 +39,7 @@ $(document).ready(function(){
 var app = angular.module('myApp',[]);
 
 app.config(function($locationProvider) {
+	
   /* $routeProvider
    .when('/:view', {
     templateUrl: function(rd) { return hostUrl+"/"+rd.view+'.html';}
@@ -46,6 +47,8 @@ app.config(function($locationProvider) {
   .otherwise({ redirectTo: '/home' }); */
 });
 app.controller('enquiryController', function($scope,$http, $location) {
+	console.log("jk");
+	$scope.jjj = "hi";
 	$scope.hostUrl = hostUrl;
 	var today = new Date();
 	var year = today.getFullYear();
