@@ -1,7 +1,7 @@
 {% autoescape false %}
 <div class="sidebarModule enquiry">
 	<h3 class="subhead">Send Enquiry</h3>
-	<div class="panel panel-default"  ng-app="myApp">
+	<div class="panel panel-default"  >
 		<div class="panel-body" ng-controller="enquiryController">
 			<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" novalidate>
 				<div class="form-group">
@@ -50,8 +50,8 @@
 					<button type="reset" class="btn btn-info" title="Cancel Sending">Clear</button>
 				</div>
 			</form>
-			<div ng-show="loading" style="display: block; position: fixed; top: 0; right: 0; left: 0; bottom: 0; background: rgba(0, 0, 0, 0.05);z-index: 10000;">
-				<div style="margin: 0 auto;font-size: 26px;color: transparent;width: 128px;text-align: center;margin-top: 10%;font-family: arial, helvetica, sans-serif;background: url(../img/loader-leaf-purple.gif) no-repeat center center;height: 128px;">Loading...
+			<div ng-if="loading" style="display: block; position: fixed; top: 0; right: 0; left: 0; bottom: 0; background: rgba(0, 0, 0, 0.05);z-index: 10000;">
+				<div style="margin: 0 auto;font-size: 26px;color: transparent;width: 128px;text-align: center;margin-top: 10%;font-family: arial, helvetica, sans-serif;background: url({{path}}/img/loader-leaf-purple.gif) no-repeat center center;height: 128px;">Loading...
 				</div>
 			</div>
 			<div ng-show="mailSent" class="text-center mailSentMsg" style="clear:both;">
