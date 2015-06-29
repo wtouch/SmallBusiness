@@ -1,8 +1,8 @@
 'use strict';
 define(['app'], function (app) {
-    var injectParams = ['$scope', '$injector','$routeParams','$http','$rootScope','upload', '$timeout', 'dataService','$notification'];
+    var injectParams = ['$scope', '$injector','$routeParams','$http','$rootScope','upload', '$timeout', 'dataService','$notification','$location'];
     // This is controller for this view
-	var addprojectController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification) {
+	var addprojectController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification,$location) {
 		$rootScope.metaTitle = "Add Real Estate Property";
 		$scope.path = "/project"; 
 		$scope.project = {
@@ -177,6 +177,7 @@ define(['app'], function (app) {
 			dataService.post("post/project",project)
 			.then(function(response) {
 				if(response.status=="success"){
+					$location.path("/dashboard/project");
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Post Project", response.message);
 				}else{
@@ -184,21 +185,6 @@ define(['app'], function (app) {
 				$notification[response.status]("Post Project", response.message);
 				}
 				
-			});
-		};
-		
-		//function to upload files
-		$scope.uploadOne = function(files,path,userInfo,picArr){//this function for uploading files
-			upload.upload(files,path,userInfo,function(data){
-				var picArrKey = 0, x;
-				for(x in picArr) picArrKey++;
-				if(data.status === 'success'){
-					picArr.push(data.data);
-				}else{
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("Upload Image", response.message);
-				}
-	
 			});
 		};
 		
@@ -216,8 +202,10 @@ define(['app'], function (app) {
 						.then(function(response) { //function for response of request temp
 							if(response.status == 'success'){
 								$scope.submitted = true;
+								$location.path("/dashboard/project");
 								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-								$notification[response.status]("Put project", response.message);						
+								$notification[response.status]("Put project", response.message);
+															
 							}else{
 								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 								$notification[response.status]("Put project", response.message);
@@ -288,8 +276,6 @@ define(['app'], function (app) {
 	/*********************************************************************/	
 		
 	};		
-	
-	
 	
 	// Inject controller's dependencies
 	addprojectController.$inject = injectParams;

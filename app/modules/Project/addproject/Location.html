@@ -53,6 +53,11 @@
 	<div class="col-sm-4">
 		<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="project.pincode" placeholder="Enter Pin Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
 	</div>		
-</div>					
-	<button type="button" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="locationForm.$invalid" ng-click="showFormPart('specification',1)">Next</button>
+</div>
+	<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-9">
+		<button type="submit" ng-if="project.id" ng-click="update(project)" class="btn btn-success text-center ">Update Project</button>				
+		<button type="button" class="btn btn-primary" title="Save" ng-disabled="locationForm.$invalid" ng-click="showFormPart('specification',1)">Next</button>
+	</div>
+	</div>
 </form>

@@ -2,8 +2,9 @@
 	<div class="col-sm-12">
 		<div class="main-content">
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
-			<h3 class="text-center" ng-if="!property.id">Add New Property</h3>
-			<h3 class="text-center" ng-if="property.id">Edit Property</h3>
+			<h3 class="text-center" ng-if="!property.id && !copy">Add New Property</h3>
+			<h3 class="text-center" ng-if="property.id && copy">Copy Property </h3>
+			<h3 class="text-center" ng-if="property.id && !copy">Edit Property</h3>
 			
 				<p class="paraMand">* Fields are mandatory</p>
 				

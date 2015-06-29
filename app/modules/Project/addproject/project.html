@@ -1,6 +1,5 @@
 <form class="form-horizontal" name="projectForm" ng-submit="projectForm.$valid" novalidate="novalidate">
 <h3>Project Information</h3>
-<!-- This block for current user id -->
 	<div class="form-group" ng-if="userDetails.group_name != 'customer'" ng-init="getUsers()">
 		<label for="customer" class="col-sm-2 control-label">Customer *</label>
 		<div class="col-sm-7">
@@ -18,20 +17,19 @@
 	<span ng-if="userDetails.group_name == 'customer'">
 		<input type="hidden" class="form-control" ng-model="project.user_id"  ng-init="project.user_id = userDetails.id; getWebsite(userDetails.id)" readonly/>
 	</span> 
-<!-- This block for current user id -->
-			
-<div class="form-group">
-	<label  for="projectTitle" class="col-sm-2 control-label">Project Title *</label>
-	<div class="col-sm-9">		
-		<input type="text" id="projectTitle" class="form-control" name="projectTitle" ng-model="project.title" cols="20" rows="4" required />
-			<span class="text-danger" ng-show="projectForm.projectTitle.$error.maxlength">
-			Sorry You are Exceeding the Limit</span>
-				<span class="text-danger" ng-show="projectForm.projectTitle.$dirty && projectForm.projectTitle.$invalid">
-			<span ng-show="projectForm.projectTitle.$error.required">Project title is required .</span>
+	
+	<div class="form-group">
+		<label  for="projectTitle" class="col-sm-2 control-label">Project Title *</label>
+		<div class="col-sm-9">		
+			<input type="text" id="projectTitle" class="form-control" name="projectTitle" ng-model="project.title" cols="20" rows="4" required />
+				<span class="text-danger" ng-show="projectForm.projectTitle.$error.maxlength">
+				Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="projectForm.projectTitle.$dirty && projectForm.projectTitle.$invalid">
+				<span ng-show="projectForm.projectTitle.$error.required">Project title is required .</span>
+		</div>
+		<input type="hidden" ng-model="project.status">
+		<input type="hidden" ng-model="project.date">
 	</div>
-	<input type="hidden" ng-model="project.status">
-	<input type="hidden" ng-model="project.date">
-</div>
 	
 	<div class="form-group">
 		<label for="Category" class="col-sm-2 control-label">Category *</label>
@@ -73,6 +71,7 @@
 			<input type="hidden" ng-model="project.project_images">
 		</div>
 	</div>
+	
 	<div class="form-group">						 
 		<div class="col-sm-9 col-sm-offset-2">
 			<span class="thumbs" ng-repeat="(key, value) in project.project_images">
@@ -99,6 +98,7 @@
 			<input type="hidden" ng-model="project.builder.builder_photo">
 		</div>
 	</div>
+	
 	<div class="form-group">						 
 		<div class="col-sm-9 col-sm-offset-2">
 			<span class="thumbs" ng-if="project.builder.builder_photo">
@@ -124,6 +124,7 @@
 			<input type="hidden" ng-model="project.builder.owner_photo">
 		</div>
 	</div>
+	
 	<div class="form-group">						 
 		<div class="col-sm-9 col-sm-offset-2">
 			<span class="thumbs" ng-if="project.builder.owner_photo">
@@ -131,19 +132,7 @@
 			</span>
 		</div>
 	</div>			
-	<!-- <div class="form-group">
-		<label  for="owner_photo" class="col-sm-2 control-label">Owner Photo</label>
-		<div class="col-sm-9">
-			<input type="file" id="owner_photo" name="owner_photo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="owner_photo">
-				<!-- This will show thumbnails & progress of images - ->
-				<file-preview url="owner_photo"></file-preview>
-				<!-- This button will show if file/s selected - ->
-				<button ng-show="owner_photo" ng-click="uploads(owner_photo, project.user_id + path,userinfo,'owner_photo')" type="button">Upload</button>
-				<!-- This hidden input will store image path in array after successful uploading - ->
-				<input type="hidden" ng-model="project.builder.owner_photo">
-		</div>
-	</div> -->
-	
+		
 	<h3>SEO</h3>
 	<div class="form-group">
 		<label  for="seo" class="col-sm-2 control-label">Title*</label>
@@ -203,6 +192,11 @@
 			</div>
 		</div>
 	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-9">
+			<button type="submit" ng-if="project.id" ng-click="update(project)" class="btn btn-success btn text-center ">Update Project</button>
+			<button type="submit" class="btn btn-primary" ng-disabled="projectForm.$invalid" ng-click="showFormPart('overview',1)">Next</button>
+		</div>
+	</div>
 	
-	<button type="submit" class="col-sm-offset-2 btn btn-primary" title="Save" ng-disabled="projectForm.$invalid" ng-click="showFormPart('overview',1)">Next</button>
 </form>

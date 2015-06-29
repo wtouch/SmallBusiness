@@ -10,6 +10,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.property = { property_images : []};
 		$scope.path = "/property";
+		$scope.copy = $routeParams.copy;
 		
 		dataService.config('config', {config_name : "property"}).then(function(response){
 			$scope.propertyConfig = response.config_data;
@@ -95,12 +96,15 @@ define(['app'], function (app) {
 			});
 	/************************************************************************************/		
 		//Add property
-		$scope.addPropertyFun = function(property){	
-			$scope.property.date = $scope.currentDate;
+		$scope.addPropertyFun = function(property){
+			if($routeParams.copy) delete property.id;
+			property.date = $scope.currentDate;
+			property.modified_date = $scope.currentDate;
 			dataService.post("post/property",property,$scope.userinfo)
 			.then(function(response) {
-				
+					
 				if(response.status=="success"){
+					$location.path("/dashboard/property");
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Post Property", response.message);
 				}else{
@@ -111,28 +115,31 @@ define(['app'], function (app) {
 		};
 	/**********************************************************************************/
 			//update into property
-			 if($routeParams.id){//Update user
+			if($routeParams.id){
 				console.log($routeParams.id);	
 				dataService.get("getsingle/property/"+$routeParams.id)
 				.then(function(response) {
 						$scope.property = response.data;	
 						console.log($scope.property);					
-					});	
+				});	
 					
-					$scope.update = function(property){	
-						dataService.put("put/property/"+$routeParams.id,property)
-						.then(function(response) { //function for response of request temp
-							if(response.status == 'success'){
-								$scope.submitted = true;
-								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-								$notification[response.status]("Put Property", response.message);						
-							}else{
-								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-								$notification[response.status]("Put Property", response.message);
-							}	
-						});	  
-					};	 
-			}			
+				$scope.update = function(property){
+					if(property.id) delete property.id;
+					dataService.put("put/property/"+$routeParams.id,property)
+					.then(function(response) { 
+						if(response.status == 'success'){
+							$location.path("/dashboard/property");
+							$scope.submitted = true;
+							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification[response.status]("Put Property", response.message);						
+						}else{
+							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification[response.status]("Put Property", response.message);
+						}	
+					});	  
+				};
+			}
+			
 	/*********************************************************************/	
 	 //display websites-domain into checkbox $scope.userinfo $routeParams.id
 	 

@@ -5,16 +5,13 @@
 			<h3 class="text-center" ng-if="!project.id">Add New Project</h3>
 			<h3 class="text-center" ng-if="project.id" title="Add new Project">Edit Project</h3>
 				<p class="paraMand">* Fields are mandatory</p>
-				
-				<input type="hidden" id="status" name="status" ng-model="project.status" >	
-				
-				<input type="hidden" id="verified" name="verified" ng-model="project.verified" >
+				<input type="hidden" id="status" name="status" ng-model="project.status">	
+				<input type="hidden" id="verified" name="verified" ng-model="project.verified">
 				
 				<input type="hidden" id="user_id" name="user_id" ng-model="project.user_id" >				
 				<input type="hidden" id="status" name="status" ng-model="project.status">
 				
-				<input type="hidden" id="date" name="date" ng-model="project.date">	
-					
+				<input type="hidden" id="date" name="date" ng-model="project.date"/>	
 				<ul class="nav nav-tabs">
 					<li role="presentation" ng-class="{active: formPart=='project'}">
 						<a ng-click="showFormPart('project')">Project Information</a>

@@ -149,13 +149,16 @@
 											<span class="glyphicon glyphicon-pencil"></span>
 										</a>
 										<a ng-click="open('modules/property/viewProperty.html', x.id)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="View Property Details"></a> 
+										
+										<a href="#/dashboard/property/addproperty/{{x.id}}/copy" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="Copy Property"> Copy
+										</a>
 									</td>	
 								</tr>				
 							</tbody>
 						</table>
 					</div>					
 					<div class="text-center">
-						<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="CurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getProperty(CurrentPage,user_id,propertyParam)"></pagination>	
+						<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="CurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getProperty(CurrentPage,user_id,propertyParam)"></pagination>
 						<pre>Page: {{CurrentPage}} / {{numPages}}</pre>
 					</div>
 				</div>

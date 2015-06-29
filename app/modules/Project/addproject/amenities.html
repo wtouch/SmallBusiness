@@ -24,12 +24,17 @@
 	<div class="col-sm-9">
 			<textarea class="form-control" id="amenitiesDiscription"  name="amenitiesDiscription" ng-model="project.amenities.description" cols="20" rows="4" ng-maxlength="2000" required ui-tinymce></textarea>
 		<p ng-hide="amenitiesForm.amenitiesDiscription.$error.maxlength">{{ 2000 - project.amenities.description.length + " Chars left" }}</p>
-		 <span class="text-danger" ng-show="amenitiesForm.amenitiesDiscription.$error.maxlength">
+		<span class="text-danger" ng-show="amenitiesForm.amenitiesDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 		<span class="text-danger" ng-show="amenitiesForm.amenitiesDiscription.$dirty && amenitiesForm.amenitiesDiscription.$invalid">
 				<span ng-show="amenitiesForm.amenitiesDiscription.$error.required"> Description is required .</span>
 		</span>
 	</div>
 </div>
-	<button type="submit" class="col-sm-offset-2 btn btn-primary" ng-disabled="amenitiesForm.$invalid" ng-click="showFormPart('locationmap',1)">Next</button>
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-9">
+		<button type="submit" ng-if="project.id" ng-click="update(project)"  class="btn btn-success text-center ">Update Project</button>
+		<button type="submit" class="btn btn-primary" ng-disabled="amenitiesForm.$invalid" ng-click="showFormPart('locationmap',1)">Next</button>
+	</div>
+</div>
 </form>
