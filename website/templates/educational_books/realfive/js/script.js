@@ -9,7 +9,8 @@ var hostUrl = '/website/templates/default/';
 $(document).ready(function(){
 	$('#bxslider1').bxSlider({
 			mode:'vertical',
-			minSlides: 1,auto: true, 
+			minSlides: 1,
+			auto: true, 
 			autoDirection:'next',
 			moveSlides: 1,
 			pause:4000,
@@ -22,11 +23,11 @@ $(document).ready(function(){
 	});
 	$('#bxslider').bxSlider({
 		mode:'horizontal',
-		slideMargin: 5,
+		slideMargin: 10,
 		minSlides :1,
-		maxSlides: 4,
+		maxSlides: 3,
 		moveSlides: 2,
-		slideWidth: 200,
+		slideWidth: 250,
 		auto: true, 
 		autoDirection:'next',
 		pause:4000,
