@@ -1,24 +1,18 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
-jQuery(document).ready(function() {
-	jQuery(".subimgs").click(function(){
-		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
-	})
-});
-var app = angular.module('myApp',[]);
 $(document).ready(function(){
 	$('#bxslider1').bxSlider({
-		mode:'vertical',
-		minSlides: 1,auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
-		pause:4000,
-		pager:false,
-		pagerType:'full',
-		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed : 1000
+			mode:'vertical',
+			minSlides: 1,auto: true, 
+			autoDirection:'next',
+			moveSlides: 1,
+			pause:4000,
+			pager:false,
+			pagerType:'full',
+			autoControls: false, 
+			controls:false, 
+			autoHover:true,
+			speed : 1000
 	});
 	$('#bxslider').bxSlider({
 		mode:'horizontal',
@@ -37,6 +31,8 @@ $(document).ready(function(){
 		autoHover:true
 	});
 });
+var app = angular.module('myApp',[]);
+
 app.config(function($locationProvider) {
   /* $routeProvider
    .when('/:view', {
@@ -61,7 +57,7 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	$scope.postData = function(enquiry){
 		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
 				$scope.loading = true;
-				if(response == 'success'){
+				if(response.status == 'success'){
 					$scope.loading = false;
 					$scope.mailSent = true;
 				}

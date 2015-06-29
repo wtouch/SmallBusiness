@@ -1,5 +1,11 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
+jQuery(document).ready(function() {
+	jQuery(".subimgs").click(function(){
+		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
+	})
+});
+var hostUrl = '/website/templates/default/';
 $(document).ready(function(){
 	$('#bxslider1').bxSlider({
 			mode:'vertical',
@@ -56,7 +62,14 @@ app.controller('enquiryController', function($scope,$http, $location) {
 			};
 	$scope.postData = function(enquiry){
 		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				$scope.mailSent = true;
+				$scope.loading = true;
+				if(response.status == 'success'){
+					$scope.loading = false;
+					$scope.mailSent = true;
+				}
+				else{
+					alert(response.message);
+				}
 		});
 	};
 });	

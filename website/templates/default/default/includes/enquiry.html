@@ -1,7 +1,7 @@
 {% autoescape false %}
 <div class="sidebarModule enquiry">
 	<h3 class="subhead">Send Enquiry</h3>
-	<div class="panel panel-default"  >
+	<div class="panel panel-default">
 		<div class="panel-body" ng-controller="enquiryController">
 			<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" novalidate>
 				<div class="form-group">
@@ -45,9 +45,9 @@
 						<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlength="2" ng-maxlength="356" required></textarea>
 					</div>
 				</div>
-				<div class="form-group col-sm-12 text-center">
+				<div class="form-group col-sm-12">
 					<button type="submit" class="btn btn-info send" ng-click="postData(enquiry)" ng-disabled="enquiryForm.$pristine || enquiryForm.$invalid || mailSent">Send</button>
-					<button type="reset" class="btn btn-info" title="Cancel Sending">Clear</button>
+					<button type="reset" class="btn btn-danger" title="Cancel Sending">Clear</button>
 				</div>
 			</form>
 			<div ng-if="loading" style="display: block; position: fixed; top: 0; right: 0; left: 0; bottom: 0; background: rgba(0, 0, 0, 0.05);z-index: 10000;">
