@@ -2,7 +2,7 @@
 <div class="panel panel-default" >
 	<div class="panel-body" ng-controller="enquiryController">
 		<form class="form-horizontal" name="postpropertyForm" ng-submit="postpropertyForm.$valid" novalidate >
-	<h3>Post Your Property</h3>
+	<h3>Post Your Property</h3>{{enquiry}}
 			<div class="form-group">							
 				<label for="property_for" class="col-sm-3  control-label">* Property for </label>	
 				<div class="col-sm-9"> 
@@ -131,6 +131,19 @@
 					</a>
 				</script>
 			<div class="form-group">
+				<label for="address" class="col-sm-3 control-label">Address *</label>
+				<div class="col-sm-9">
+					<textarea type="text" id="address" class="form-control" name="address" ng-model="enquiry.message.address" cols="30" rows="4" ng-maxlength="160"  required></textarea>
+					<p ng-hide="postpropertyForm.address.$error.maxlength">{{ 160 - enquiry.message.address.length + " Chars left" }}</p>
+					 <span class="text-danger" ng-show="postpropertyForm.address.$error.maxlength">
+						Sorry You are Exceeding the Limit</span>
+						<span class="text-danger" ng-show="postpropertyForm.address.$dirty && postpropertyForm.address.$invalid">
+						</span>
+						<span ng-show="propertylocationForm.address.$error.required">Address is required .
+						</span>
+				</div>				
+			</div>
+			<div class="form-group">
 				<label for="location" class="col-sm-3 control-label">* Location</label>
 				<div class="col-sm-9">
 					<input typeahead-template-url="customTemplate.html" type="text" required name="location" id="location" ng-model="enquiry.message.location" typeahead-on-select="getData($item)" placeholder="Location" typeahead="address.location for address in getTypeaheadData('locations','location', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control" autocomplete="off">
@@ -208,8 +221,11 @@
 					  <span ng-show="postpropertyForm.contact_details.cont_address.$error.required">Address is required .</span>	 
 				</div>				
 			</div>
-			<div class="form-group col-sm-12 text-center">
-				<button type="submit" class="btn btn-info send" ng-click="postData(enquiry)" ng-disabled="postpropertyForm.$pristine || postpropertyForm.$invalid || mailSent">Submit</button>
+			<div class="form-group ">
+				<div class="col-sm-offset-3 col-sm-9">
+					<button type="submit" class="btn btn-info send" ng-click="postData(enquiry)" ng-disabled="postpropertyForm.$pristine || postpropertyForm.$invalid || mailSent">Submit</button>
+					<button type="reset" class="btn btn-danger send" >Cancel</button>
+				</div>
 			</div>
 		</form>
 	</div>

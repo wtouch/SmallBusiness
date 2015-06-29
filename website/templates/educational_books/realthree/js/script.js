@@ -46,9 +46,25 @@ app.config(function($locationProvider) {
   })
   .otherwise({ redirectTo: '/home' }); */
 });
+/* app.factory("factories",function ($http) {
+	var obj = {};
+	obj.config = function(table, params){
+		if(params == undefined) params = {};
+		params.table = table;
+		return $http({
+			url: serviceBase +'getmultiple/config/1/1',
+			method: "GET",
+			params: params
+		}).then(function (results) {
+			if(results.data.status == 'success'){
+				return obj.parse(results.data.data);
+			}else{
+				return obj.parse(results.data.data);
+			}
+		});
+	};
+}); */
 app.controller('enquiryController', function($scope,$http, $location) {
-	console.log("jk");
-	$scope.jjj = "hi";
 	$scope.hostUrl = hostUrl;
 	var today = new Date();
 	var year = today.getFullYear();
@@ -57,17 +73,39 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	var hour = today.getHours();
 	var min = today.getMinutes();
 	var sec = today.getSeconds();
+	
+	/* factories.config('config', {config_name : "property"}).then(function(response){
+		$scope.propertyConfig = response.config_data;
+	}); */
+	
+	$scope.getData = function(location){
+		$scope.readOnly = true;
+		$scope.enquiry.message.location = location.location;
+		$scope.enquiry.message.city = location.city;
+		$scope.enquiry.message.state = location.state;
+		$scope.enquiry.message.country = location.country;
+		$scope.enquiry.message.area = location.area;
+		$scope.enquiry.message.pincode = location.pincode;
+	}
+	$scope.getTypeaheadData = function(table,searchColumn, searchValue){
+		var locationParams = {search : {}}
+		locationParams.search[searchColumn] = searchValue;
+		return dataService.config('locations', locationParams).then(function(response){
+			return response;
+		});
+	}
 	$scope.mailSent = false;
 	$scope.enquiry = {
-				subject : 'Website Enquiry',
-				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
-			};
+		subject : 'Website Enquiry',
+		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
+	};
 	$scope.postData = function(enquiry){
 		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				$scope.mailSent = true;
+			$scope.mailSent = true;
 		});
 	};
 });	
+
 	app.controller('aboutController', function($scope,$http, $location) {
 		var s = $location.path();
 		$scope.url = s.substr(1);
