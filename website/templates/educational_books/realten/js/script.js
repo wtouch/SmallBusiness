@@ -1,5 +1,11 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
+jQuery(document).ready(function() {
+	jQuery(".subimgs").click(function(){
+		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
+	})
+});
+var hostUrl = '/website/templates/default/';
 $(document).ready(function(){
 	$('#bxslider1').bxSlider({
 			mode:'vertical',
@@ -16,11 +22,11 @@ $(document).ready(function(){
 	});
 	$('#bxslider').bxSlider({
 		mode:'horizontal',
-		slideMargin: 5,
+		slideMargin: 10,
 		minSlides :1,
 		maxSlides: 4,
 		moveSlides: 2,
-		slideWidth: 200,
+		slideWidth: 250,
 		auto: true, 
 		autoDirection:'next',
 		pause:4000,

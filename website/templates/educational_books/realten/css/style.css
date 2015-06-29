@@ -88,9 +88,29 @@
 	.header{
 		background-color:#fff;
 	}
+	.navbar-default{
+		background : none;
+	}
 	.navbar-default .navbar-nav > .active > a,.navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover,footer a:hover{
 		color : #A9B25D;
 		background: none;
+	}
+	.nav.navbar-nav >li, .nav.navbar-nav >li>ul>li{
+		position :relative;
+	}
+	.nav.navbar-nav >li>ul, .nav.navbar-nav >li>ul>li>ul{
+		display :none;
+		position : absolute;
+		top : 45px;
+		left : 5px;
+		border : 1px solid  #A9B25D;
+		z-index : 99;
+		background : #5e311a;
+		width : 200px;
+		color : #fff;
+	}
+	.nav.navbar-nav >li:hover>ul, .nav.navbar-nav >li>ul>li:hover>ul{
+		display : block;
 	}
 	body .navbar-default .navbar-nav li .dropdown-menu{
 		background-color:#5e311a;
