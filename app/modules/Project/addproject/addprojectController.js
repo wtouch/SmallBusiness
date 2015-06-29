@@ -136,10 +136,6 @@ define(['app'], function (app) {
 				}					
 			}); 
 		};  
-		
-		$scope.generateThumb = function(files){  
-			upload.generateThumbs(files);
-		};
 	/*********************************************************************/
 		// Add Business multi part form show/hide operation from here! 
 		$scope.formPart = 'project';
@@ -172,8 +168,8 @@ define(['app'], function (app) {
 		//add project 
 		$scope.addproject = function(project){
 			console.log(project);
-			$scope.project.created_date = $scope.currentDate;
-			$scope.project.modified_date = $scope.currentDate;
+			project.created_date = $scope.currentDate;
+			project.modified_date = $scope.currentDate;
 			dataService.post("post/project",project)
 			.then(function(response) {
 				if(response.status=="success"){
@@ -188,34 +184,9 @@ define(['app'], function (app) {
 			});
 		};
 		
-		//update into project
-			 if($routeParams.id){//Update user
-				console.log($routeParams.id);	
-				dataService.get("getsingle/project/"+$routeParams.id)
-				.then(function(response) {
-						$scope.project = response.data;	
-						console.log($scope.project);					
-					});	
-					
-					$scope.update = function(project){	
-						dataService.put("put/project/"+$routeParams.id,project)
-						.then(function(response) { //function for response of request temp
-							if(response.status == 'success'){
-								$scope.submitted = true;
-								$location.path("/dashboard/project");
-								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-								$notification[response.status]("Put project", response.message);
-															
-							}else{
-								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-								$notification[response.status]("Put project", response.message);
-							}	
-						});	  
-					};	 
-			}	
 	/************************************************************************************/	
 		 //Add Project
-		$scope.addProjectFun = function(project){	
+		/* $scope.addProjectFun = function(project){	
 			project.date = $scope.currentDate;
 			dataService.post("post/project",project,$scope.userInfo)
 			.then(function(response) {
@@ -228,7 +199,7 @@ define(['app'], function (app) {
 				$notification[response.status]("Post Project", response.message);
 				}				
 			}); 
-			};
+			}; */
 			//update into Project
 			if($routeParams.id){
 				console.log($routeParams.id);	
@@ -244,6 +215,7 @@ define(['app'], function (app) {
 						.then(function(response) { //function for response of request temp
 							if(response.status == 'success'){
 								$scope.submitted = true;
+								$location.path("/dashboard/project");
 								if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 								$notification[response.status]("Put Project", response.message);						
 							}else{
