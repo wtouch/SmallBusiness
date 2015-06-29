@@ -98,6 +98,7 @@
 		}catch(Exception $e){
 			$response["status"] = "warning";
 			$response["message"] = 'Error: ' .$e->getMessage();
+			print_r($response["message"]);
 			$response["data"] = null;
 			echo json_encode($response);
 		}

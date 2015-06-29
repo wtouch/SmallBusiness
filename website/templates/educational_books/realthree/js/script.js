@@ -5,7 +5,7 @@ $(document).ready(function(){
 		mode:'horizontal',
 		slideWidth: 250,
 		minSlides:3,
-		maxSlides: 4,
+		maxSlides: 3,
 		slideMargin: 25,
 		auto: true, 
 		autoDirection:'next',
@@ -18,7 +18,7 @@ $(document).ready(function(){
 		autoHover:true,
 		speed:1000,
 	});
-	$('.bxslidervertical').bxSlider({
+	$('.bxslider1').bxSlider({
 		mode:'vertical',
 		slideWidth: 600,
 		minSlides: 4,
@@ -46,24 +46,7 @@ app.config(function($locationProvider) {
   })
   .otherwise({ redirectTo: '/home' }); */
 });
-/* app.factory("factories",function ($http) {
-	var obj = {};
-	obj.config = function(table, params){
-		if(params == undefined) params = {};
-		params.table = table;
-		return $http({
-			url: serviceBase +'getmultiple/config/1/1',
-			method: "GET",
-			params: params
-		}).then(function (results) {
-			if(results.data.status == 'success'){
-				return obj.parse(results.data.data);
-			}else{
-				return obj.parse(results.data.data);
-			}
-		});
-	};
-}); */
+
 app.controller('enquiryController', function($scope,$http, $location) {
 	$scope.hostUrl = hostUrl;
 	var today = new Date();
@@ -74,33 +57,30 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	var min = today.getMinutes();
 	var sec = today.getSeconds();
 	
-	/* factories.config('config', {config_name : "property"}).then(function(response){
-		$scope.propertyConfig = response.config_data;
-	}); */
+	var params = {table : "config", config_name : "property"};
+	$http({
+		url: '/server-api/index.php/getmultiple/config/1/1',
+		method: "GET",
+		params: params
+	}).then(function (results) {
+		console.log(results);
+		if(results.data.status == 'success'){
+			$scope.propertyConfig = results.data.data.config_data;
+		}else{
+			$scope.propertyConfig = results.data.data;
+		}
+	});
 	
-	$scope.getData = function(location){
-		$scope.readOnly = true;
-		$scope.enquiry.message.location = location.location;
-		$scope.enquiry.message.city = location.city;
-		$scope.enquiry.message.state = location.state;
-		$scope.enquiry.message.country = location.country;
-		$scope.enquiry.message.area = location.area;
-		$scope.enquiry.message.pincode = location.pincode;
-	}
-	$scope.getTypeaheadData = function(table,searchColumn, searchValue){
-		var locationParams = {search : {}}
-		locationParams.search[searchColumn] = searchValue;
-		return dataService.config('locations', locationParams).then(function(response){
-			return response;
-		});
-	}
+	
 	$scope.mailSent = false;
+	 
 	$scope.enquiry = {
 		subject : 'Website Enquiry',
 		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 	};
 	$scope.postData = function(enquiry){
-		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+		console.log(enquiry);
+		 $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
 			$scope.mailSent = true;
 		});
 	};
