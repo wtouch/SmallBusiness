@@ -79,8 +79,9 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 	};
 	$scope.postData = function(enquiry){
-		console.log(enquiry);
+		$scope.loading = true;
 		 $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+			$scope.loading = false;
 			$scope.mailSent = true;
 		});
 	};
