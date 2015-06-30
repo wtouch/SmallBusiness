@@ -5,6 +5,7 @@ define(['app'], function (app) {
 	var addprojectController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification,$location) {
 		$rootScope.metaTitle = "Add Real Estate Property";
 		$scope.path = "/project"; 
+	
 		$scope.project = {
 			featured : 0,
 			builder :{},
@@ -27,7 +28,6 @@ define(['app'], function (app) {
 		$scope.builder = {},
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
-		
 		dataService.config('config', {config_name : "project"}).then(function(response){
 			$scope.projectConfig = response.config_data;
 		});
@@ -46,8 +46,8 @@ define(['app'], function (app) {
 			
 		}
 		
-		$scope.removeObject = function(key, object){
-			delete object[key];
+		$scope.removeObject = function(item, object){
+			object.splice(item, 1); 
 		}
 		$scope.editObject = function(object, FormObj){
 			$scope.edit = true;
@@ -145,7 +145,10 @@ define(['app'], function (app) {
 	/*********************************************************************/
 	$scope.getWebsite = function(userId){
 			// for dynamic value of domain name
-			dataService.get('getmultiple/website/1/200', {user_id:userId})
+			$scope.websParams = {status: 1};
+			angular.extend($scope.websParams, {user_id:userId});
+			dataService.get("getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
+			dataService.get('getmultiple/website/1/200', $scope.websParams)
 			.then(function(response){
 				var websites = [];
 				for(var id in response.data){
@@ -212,7 +215,7 @@ define(['app'], function (app) {
 			}			
 	/*********************************************************************/	
 	//display websites-domain into checkbox $scope.userinfo $routeParams.id
-	
+		
 		dataService.get('getmultiple/website/1/200',$scope.userinfo)
 		.then(function(response) {
 			var websites = [];
@@ -227,7 +230,7 @@ define(['app'], function (app) {
 		}); 
 		$scope.checkAll = function(websites, checkValue) {			
 			if(checkValue){
-				$scope.property.domain = angular.copy(websites);
+				$scope.project.domain = angular.copy(websites);
 			}
 		}; 
 	/*********************************************************************/	
