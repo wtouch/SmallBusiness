@@ -5,7 +5,7 @@ $(document).ready(function(){
 		mode:'horizontal',
 		slideWidth: 250,
 		minSlides:3,
-		maxSlides: 4,
+		maxSlides: 3,
 		slideMargin: 25,
 		auto: true, 
 		autoDirection:'next',
@@ -18,7 +18,7 @@ $(document).ready(function(){
 		autoHover:true,
 		speed:1000,
 	});
-	$('.bxslidervertical').bxSlider({
+	$('.bxslider1').bxSlider({
 		mode:'vertical',
 		slideWidth: 600,
 		minSlides: 4,
@@ -55,13 +55,28 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	var min = today.getMinutes();
 	var sec = today.getSeconds();
 	$scope.mailSent = false;
+	
+	var params = {table : "config", config_name : "property"};
+	$http({
+		url: '/server-api/index.php/getmultiple/config/1/1',
+		method: "GET",
+		params: params
+	}).then(function (results) {
+		console.log(results);
+		if(results.data.status == 'success'){
+			$scope.propertyConfig = results.data.data.config_data;
+		}else{
+			$scope.propertyConfig = results.data.data;
+		}
+	});
 	$scope.enquiry = {
-				subject : 'Website Enquiry',
-				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
-			};
+		subject : 'Website Enquiry',
+		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
+	};
 	$scope.postData = function(enquiry){
-		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				$scope.mailSent = true;
+		console.log(enquiry);
+		 $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+			$scope.mailSent = true;
 		});
 	};
 });	

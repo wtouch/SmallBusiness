@@ -2,7 +2,7 @@
 <div class="panel panel-default" >
 	<div class="panel-body" ng-controller="enquiryController">
 	<div ng-show="mailSent" class="text-center mailSentMsg" style="clear:both;">
-		Post Your Property enquiry send successfully.
+	Your Property enquiry send successfully.
 	</div>
 		<form class="form-horizontal" name="postpropertyForm" ng-submit="postpropertyForm.$valid" novalidate >
 			<h3>Post Your Property</h3>
@@ -35,11 +35,11 @@
 						
 						<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc = 'admin@apnasite.in'">
 				
-						<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" ng-init="enquiry.subject = 'post your property enquiry'">		
+						<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" ng-init="enquiry.subject = 'post property enquiry'">		
 						
 											
 				</div>
-				<label for="type" class="col-sm-3 control-label" ng-if="enquiry.message.category" >* Property Type </label>
+				<label for="type" class="col-sm-2 control-label" ng-if="enquiry.message.category" >* Property Type </label>
 				<div class="col-sm-3">
 					<select  id="type" ng-if="enquiry.message.category" name="type" ng-model="enquiry.message.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types  | filter : {'category_name' : property.category}">
 						<option value="">Select Property Type</option>		
@@ -181,10 +181,10 @@
 			</div>
 			
 			<div class="form-group">
-				<label for="mobile" class="col-sm-3 control-label">* Mobile  </label>
+				<label for="phone" class="col-sm-3 control-label">* Mobile  </label>
 				<div class="col-sm-9">
-					<input type="text"  id="mobile" class="form-control help-block"  name="mobile" ng-model="enquiry.message.mobile" placeholder="Enter Your Mobile Number" maxlength="10" ng-pattern="/^[789]\d{9}$/" required />							
-					<span class="text-danger" ng-show="postpropertyForm.mobile.$error.pattern && (postpropertyForm.mobile.$dirty)" class="text-danger">Enter a valid mobile no.</span>
+					<input type="text"  id="phone" class="form-control help-block"  name="phone" ng-model="enquiry.message.phone" placeholder="Enter Your phone Number" maxlength="10" ng-pattern="/^[789]\d{9}$/" required />							
+					<span class="text-danger" ng-show="postpropertyForm.phone.$error.pattern && (postpropertyForm.phone.$dirty)" class="text-danger">Enter a valid phone no.</span>
 				</div>						
 			</div>
 		
