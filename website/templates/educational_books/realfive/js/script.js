@@ -61,8 +61,8 @@ app.controller('enquiryController', function($scope,$http, $location) {
 				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 			};
 	$scope.postData = function(enquiry){
+		$scope.loading = true;
 		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				$scope.loading = true;
 				if(response.status == 'success'){
 					$scope.loading = false;
 					$scope.mailSent = true;
