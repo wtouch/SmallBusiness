@@ -49,7 +49,7 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 ">
+				<div class="col-xs-12  ">
 					{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
@@ -60,7 +60,7 @@
 			</div>
 			<div class="row">
 				{% if modules.sidebarModule >= 1 %}
-				<div class="col-xs-12 col-lg-3" >
+				<div class="col-xs-4 col-lg-3" >
 					{%if modules.sidebarModule.searchProp %}
 						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
 					{%endif%}
@@ -75,7 +75,7 @@
 					{%endif%}
 				</div>
 				{% endif %}
-				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-12 col-lg-9' : 'col-xs-12 col-lg-12 ' }}">
+				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12 ' }}">
 					{% include contentPath %}
 					{%if modules.contentModule.featured_properties %}
 						{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
