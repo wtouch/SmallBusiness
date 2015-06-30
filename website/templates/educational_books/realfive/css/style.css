@@ -59,11 +59,12 @@
   background-color: #ba8c5f;
   border: 2px solid #281012;
 }
-.propertylist .panel {
-  background-color: #ba8c5f;
+.propertylist img {
+  border: 2px solid transparent;
+  padding: 6px;
 }
-.propertylist .panel-default {
-  border-color: #281012;
+.propertylist img:hover {
+  border: 2px solid #281012;
 }
 .propertylist .table td {
   border: none;
@@ -214,8 +215,8 @@
   width: 100px;
 }
 .bxslider li img {
-  border: 2px solid transparent;
   min-height: 190px;
+  border: 2px solid transparent;
   padding: 6px;
 }
 .bxslider li img:hover {
@@ -298,7 +299,7 @@
   padding: 4px;
 }
 .homeproject .projsnap .viewproperty {
-  margin-top: 25px;
+  margin-top: 15px;
 }
 .homeproject .projsnap .viewproperty a {
   color: #ffffff;
@@ -369,7 +370,7 @@
   height: 50px;
   border-radius: 0;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   height: 20px;
   width: auto;
 }
@@ -401,6 +402,11 @@
 .project .projImg {
   margin-right: 20px;
   max-height: 175px;
+  border: 2px solid transparent;
+  padding: 6px;
+}
+.project .projImg:hover {
+  border: 2px solid #281012;
 }
 .project .projectgallery {
   background-color: #ba8c5f;
@@ -576,6 +582,46 @@
 .testimonial blockquote footer cite {
   font-size: 17px;
   color: #281012;
+}
+hr {
+  border-style: dashed;
+  border-color: #281012;
+  margin: 5px 0px;
+}
+.send,
+.calculate {
+  margin-right: 8px;
+}
+.sidebarModule .panel-default {
+  border: none;
+}
+.sidebarModule.sidemenu ul {
+  padding: 0;
+  list-style: none;
+}
+.sidebarModule.sidemenu ul li {
+  margin-bottom: 10px;
+}
+.sidebarModule.sidemenu a {
+  display: inline-block;
+  height: 100px;
+  width: 225px;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.sidebarModule.sidemenu a.area_converter {
+  background-image: url('../img/area_converter.png');
+}
+.sidebarModule.sidemenu a.emi_calculator {
+  background-image: url('../img/emi_calculator.png');
+}
+.sidebarModule.sidemenu a.post_your_property {
+  background-image: url('../img/post_your_property.jpg');
+}
+.sidebarModule.sidemenu a.post_your_requirement {
+  background-image: url('../img/post_your_requirement.jpg');
 }
 @media (min-width: 320px) {
   .gallery .thumbnail {
@@ -784,12 +830,6 @@ main article a:focus {
   color: #633;
   text-decoration: none;
 }
-a {
-  color: #281012;
-}
-a:hover {
-  color: #ba8c5f;
-}
 h3,
 h4 {
   color: #281012;
@@ -799,9 +839,22 @@ h2 {
   font: 2.5em/1em 'Alex Brush', cursive;
   color: #281012;
 }
-.btn-info,
-.btn-primary {
-  border-radius: 5px;
+h1,
+.tagline,
+.tagline1 {
+  text-align: center;
+}
+.tagline,
+.tagline1 {
+  font-weight: bold;
+}
+.btn-link {
+  color: #281012;
+  padding-left: 0px;
+  font: 17px 'Alex Brush', cursive;
+}
+.btn-link:hover {
+  color: #281012;
 }
 .btn-info,
 .btn-primary,
@@ -813,7 +866,6 @@ h2 {
 .btn-primary[disabled] {
   background-color: #281012;
   color: #ba8c5f;
-  padding: 10px 18px;
   border: 2px solid transparent;
   border-radius: 0px;
   font: 16px 'Alex Brush', cursive;
@@ -824,22 +876,9 @@ h2 {
   background-color: #ba8c5f;
   border: 2px solid #281012;
 }
-hr {
-  border-style: dashed;
-  border-color: #281012;
-  margin: 5px 0px;
-}
 .thumbnail {
   background-color: #ba8c5f;
   border: 1px solid #281012;
-}
-.btn-link {
-  color: #281012;
-  padding-left: 0px;
-  font: 17px 'Alex Brush', cursive;
-}
-.btn-link:hover {
-  color: #281012;
 }
 .panel {
   background-color: #ba8c5f;
@@ -854,53 +893,24 @@ hr {
   border-color: #281012;
   color: #ba8c5f;
 }
-.send,
-.calculate {
-  margin-right: 8px;
-}
-.sidebarModule .panel-default {
-  border: none;
-}
-.sidebarModule.sidemenu ul {
-  padding: 0;
-  list-style: none;
-}
-.sidebarModule.sidemenu ul li {
-  margin-bottom: 10px;
-}
-.sidebarModule.sidemenu a {
-  display: inline-block;
-  height: 100px;
-  width: 225px;
-  background-repeat: no-repeat;
-  background-position: center;
-  text-indent: -9999px;
-  overflow: hidden;
-}
-.sidebarModule.sidemenu a.area_converter {
-  background-image: url('../img/area_converter.png');
-}
-.sidebarModule.sidemenu a.emi_calculator {
-  background-image: url('../img/emi_calculator.png');
-}
-.sidebarModule.sidemenu a.post_your_property {
-  background-image: url('../img/post_your_property.jpg');
-}
-.sidebarModule.sidemenu a.post_your_requirement {
-  background-image: url('../img/post_your_requirement.jpg');
-}
 .pagination > .active > a,
 .pagination > .active > span,
 .pagination > .active > a:hover,
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
-.pagination > .active > span:focus {
+.pagination > .active > span:focus,
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
   background-color: #281012;
   color: #cb9305;
   border: 1px solid #281012;
 }
 .pagination > li > a,
-.pagination > li > span {
+.pagination > li > span,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover {
   background-color: #ba8c5f;
   border: 1px solid #281012;
   color: #281012;

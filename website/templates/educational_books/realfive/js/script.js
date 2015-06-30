@@ -5,7 +5,6 @@ jQuery(document).ready(function() {
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
 });
-var hostUrl = '/website/templates/default/';
 $(document).ready(function(){
 	$('#bxslider1').bxSlider({
 			mode:'vertical',
