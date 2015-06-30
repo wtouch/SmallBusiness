@@ -15,11 +15,6 @@
 		</div>
 	</div>
 	<div class="projectnav">
-		{% if home_project.builder.builder_photo %}
-		<div class="builderLogo">
-			<img src="{{home_project.builder.builder_photo.file_relative_path}}" class="center-block">
-		</div>
-		{% endif %}
 		<ul class="nav nav-stacked">
 			<li {{ projectPage == 'overview' ? 'class="active"' }}>
 				<a href="/projects/{{home_project.title}}/{{home_project.id}}/overview?homeProject=true">Overview</a>

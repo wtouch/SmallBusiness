@@ -3,9 +3,9 @@
 	<h3 class="subhead">Send Enquiry</h3>
 	<div class="panel panel-default">
 		<div class="panel-body" ng-controller="enquiryController">
-			<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" novalidate>
+			<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-hide="mailSent" novalidate>
 				<div class="form-group">
-					<div class="col-sm-12">
+					<div class="col-xs-12">
 						<input type="hidden" class="form-control" id="user_id" ng-init="enquiry.user_id={{enquiry.user_id}}" ng-model="enquiry.user_id" name="user_id">
 						
 						<input type="hidden" class="form-control" id="date" ng-model="enquiry.date" name="date">
@@ -21,7 +21,7 @@
 					</div>	
 				</div>
 				<div class="form-group">
-					<div class="col-sm-12">
+					<div class="col-xs-12">
 						<input type="email" class="form-control" id="from" name="from" placeholder="E-mail" ng-model="enquiry.from_email.from" required>
 						<span  ng-show="enquiryForm.from.$dirty && enquiryForm.from.$invalid">
 							<span class="text-danger" ng-show="enquiryForm.from.$error.required">From is required.</span>
@@ -30,23 +30,23 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-12">
+					<div class="col-xs-12">
 						<input type="text" class="form-control help-block" id="phone" ng-model="enquiry.message.phone" name="phone" placeholder="Contact Number"  ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 						<p ng-show="enquiryForm.phone.$error.pattern && (enquiryForm.phone.$dirty || submitted)" class="text-danger" >Enter a valid contact no.</p>
 					</div>						
 				</div>	
 				<div class="form-group">
-					<div class="col-sm-12">
+					<div class="col-xs-12">
 						<textarea id="address" name="address" class="form-control" placeholder="Address" rows="3" ng-model="enquiry.message.address" ng-minlength="2" ng-maxlength="356" required></textarea>
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-12">
+					<div class="col-xs-12">
 						<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlength="2" ng-maxlength="356" required></textarea>
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-12">
+					<div class="col-xs-12">
 						<button type="submit" class="btn btn-info send" ng-click="postData(enquiry)" ng-disabled="enquiryForm.$pristine || enquiryForm.$invalid || mailSent">Send</button>
 						<button type="reset" class="btn btn-danger" title="Cancel Sending">Clear</button>
 					</div>
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div ng-show="mailSent" class="text-center mailSentMsg" style="clear:both;">
-				Your enquiry sent successfully.
+				Your enquiry has been sent successfully. Our representative call you shortly.
 			</div>
 		</div>
 	</div>

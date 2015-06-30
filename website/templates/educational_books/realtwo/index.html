@@ -1,10 +1,9 @@
 {% spaceless %}
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="myApp">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
@@ -56,7 +55,7 @@
 				<div class="container">
 					<div class="back">
 						<div class="row">
-							<div class="col-sm-12">
+							<div class="col-xs-12">
 								{%if modules.contentModule.featured_services %}
 								{% include contentPath %}
 								{%endif%}
@@ -69,7 +68,7 @@
 								{%endif%}
 								
 							</div>
-							<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-9' : 'col-sm-12' }}">
+							<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12'}}">
 								{%if not modules.contentModule.featured_services %}
 								{% include contentPath %}
 								{%endif%}
@@ -82,12 +81,12 @@
 								{%endif%}
 							</div>
 							{% if modules.sidebarModule >= 1 %}
-							<div class="col-sm-3">
+							<div class="col-xs-4 col-lg-3">
 								{%if modules.sidebarModule.searchProp %}
 								{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
 								{%endif%}
 								{%if modules.sidebarModule.enquiry %}
-								{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
+								{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html']with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
 								{%endif%}
 								{%if modules.sidebarModule.sidemenu %}
 								{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}

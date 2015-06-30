@@ -4,8 +4,12 @@
 	li{
 		width:100px;
 		img{
-			border : 1px solid @darkcolor;
 			min-height: 190px;
+			border : 2px solid transparent;
+			padding : 6px;
+			&:hover{
+				border : 2px solid @darkcolor;
+			}
 		}
 		a{
 			color:@color;
@@ -22,14 +26,13 @@
 .homeproject{
 	height : 372px;
 	.projectCarousal{
-		width : 620px;
 		display : inline-block;
 		float : left;
 		position : relative;
 		.carousel-inner{
 			
 			.item.active{
-				height : 372px;
+				height : 381px;
 				overflow: hidden;
 			}
 			.carousel-caption{
@@ -78,9 +81,9 @@
 		}
 	}
 	.projectnav{
-		width : 242px;
-		height : 372px;
 		display : inline-block;
+		height : 381px;
+		padding: 10px;
 		background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
 		.builderLogo{
 			img{
@@ -93,7 +96,7 @@
 				border-bottom:1px dotted @lightbackcolor ;
 				>a, > a:focus{
 					color : @colorwhite;
-					padding: 10px 15px;
+					padding: 13px 15px;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration: none;
@@ -183,6 +186,12 @@
 			max-height : 175px;
 			margin-right:10px;
 		}
+		.projectnav{
+			width : 242px;
+		}
+		.projectCarousal{
+			width : 620px;
+		}
 	}
 	@media (min-width: 992px){
 		.projImg{
@@ -190,11 +199,23 @@
 			max-height : 175px;
 			margin-right : 10px;
 		}
+		.projectnav{
+			width: 200px;
+		}
+		.projectCarousal{
+			width: 512px;
+		}
 	}
 	@media (min-width: 1200px){
 		.projImg{
 			float :left;
 			max-height : 175px;
 			margin-right:10px;
+		}
+		.projectnav{
+			width : 200px;
+		}
+		.projectCarousal{
+			width : 529px;
 		}
 	}
