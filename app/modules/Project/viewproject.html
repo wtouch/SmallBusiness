@@ -4,8 +4,200 @@
 <div class="modal-body">
 	<div class="row">
 	    <div class="col-sm-12">
-			<h3 class="text-center">{{modalOptions.project.title}}</h3>		
-			<div class="row">
+			<h3 class="text-center">{{modalOptions.project.title}}</h3>	
+			<tabset>
+			<tab heading="Info" title="Info">
+				<table class="table table-hover table-responsive panel panel-default">
+						<tr>
+							<td ng-if="modalOptions.project.created_date"><b>Created Date </b></td>
+							<td ng-if="modalOptions.project.created_date">						
+								<p>{{modalOptions.project.created_date}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td ng-if="modalOptions.project.modified_date"><b>Modified Date </b></td>
+							<td ng-if="modalOptions.project.modified_date">						
+								<p>{{modalOptions.project.modified_date}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td ng-if="modalOptions.project.category"><b>category</b></td>
+							<td ng-if="modalOptions.project.category">						
+								<p>{{modalOptions.project.category}}</p>
+							</td>
+						</tr>
+						<tr>
+							<td ng-if="modalOptions.project.type"><b>Type </b></td>
+							<td ng-if="modalOptions.project.type">						
+								<p>{{modalOptions.project.type}}</p>
+							</td>
+						</tr>
+				</table>
+			</tab>
+			<tab heading="Location" title="Location">
+				<table class="table table-hover table-responsive panel panel-default">
+						<tr>
+							<td ng-if="modalOptions.project.address"><b>Address</b></td>
+							<td ng-if="modalOptions.project.address">						
+								<p>{{modalOptions.project.address}}</p>
+							</td>								 
+						</tr>
+						<tr>
+							<td ng-if="modalOptions.project.other_domains"><b>Other Domains</b></td>
+							<td ng-if="modalOptions.project.other_domains">						
+								<p>{{modalOptions.project.other_domains}}</p>
+							</td>								 
+						</tr>
+						<tr>
+							<td><b>Location </b></td>
+							<td>
+								<p><b>Location :</b> {{modalOptions.project.location}}</p>
+								<p><b>Area :</b> {{modalOptions.project.area}}</p>
+								<p><b>City :</b>								
+								{{modalOptions.project.city}}</p>
+								<p><b>State :</b> {{modalOptions.project.state}}</p>
+								<p><b>Country :</b> {{modalOptions.project.country}}</p>
+								<p><b>Pincode :</b> {{modalOptions.project.pincode}}</p>
+							</td>
+						</tr>
+					</table>
+			</tab>
+			<tab heading="Image" title="Image">
+				<div class="property-images">
+					<img class="img-responsive" ng-model="modalOptions.project.imgkey" ng-src="{{appConfig.assetPath + modalOptions.project.project_images[modalOptions.project.imgkey].file_relative_path}}" ng-init="modalOptions.project.imgkey = 0"/>
+						<span class="thumbs" ng-repeat="(key, value) in modalOptions.project.project_images">
+							<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.project.imgkey = key"/>
+						</span>
+				</div>
+			</tab>
+			<tab heading="Builder" title="Builder">
+			<table class="table table-hover table-responsive panel panel-default">
+				<tr>
+					<td ng-if="modalOptions.project.builder.builder_name"><b>Builder Name</b></td>
+					<td ng-if="modalOptions.project.builder.builder_name">						
+						<p>{{modalOptions.project.builder.builder_name}}</p>
+					</td>
+				</tr>
+				<tr>
+					<td ng-if="modalOptions.project.builder.owner_name"><b>Owner Name</b></td>
+					<td ng-if="modalOptions.project.builder.owner_name">						
+						<p>{{modalOptions.project.builder.owner_name}}</p>
+					</td>
+				</tr>
+			</table>
+			</tab>
+			<tab heading="Overview" title="Overview">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					<h3 class="panel-title"><b>Overview</b></h3>
+					</div>
+					<div class="panel-body">
+							<p><b>Title:</b>{{modalOptions.project.overview.title}}</p>
+							<p><b>Description:</b></p><p ng-bind-html="modalOptions.project.overview.description"></p>
+							
+					</div>
+				</div>
+			</tab>
+			<tab heading="Specification" title="Specification">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					<h3 class="panel-title"><b>Specifications</b></h3>
+					</div>
+					<div class="panel-body">
+							<p><b>Title:</b>{{modalOptions.project.specifications.title}}</p>
+							<p><b>Description:</b></p><p ng-bind-html="modalOptions.project.specifications.description"></p>
+					</div>
+				</div>
+			</tab>
+			<tab heading="Location Map" title="Location Map">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><b>Location Map</b></h3>{{modalOptions.project.location_map}}
+					</div>
+					<div class="panel-body">
+						<tr ng-repeat="(key, val) in modalOptions.project.location_map">
+							<p><b>Title:</b>{{key}}</p>{{val}}
+							<!-- <td>{{key}}</td> -->
+							<td ng-bind-html="modalOptions.project.location_map.description"></td>
+							<td>
+								<img class="img-responsive" ng-model="modalOptions.project.location_map.imgkey" ng-src="{{appConfig.assetPath + modalOptions.project.location_map.image[modalOptions.project.location_map.imgkey].file_relative_path}}" ng-init="modalOptions.project.location_map.imgkey = 0"/>
+									<span class="thumbs" ng-repeat="(key, value) in modalOptions.project.location_map.image">
+										<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.project.location_map.imgkey = key"/>
+									</span>
+							</td>
+							<td ng-bind-html="val.description"></td>
+						</tr>
+					</div>
+				</div>
+			</tab>
+			<tab heading="Layout Map" title="Layout Map">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					<h3 class="panel-title"><b>Layout Map</b></h3>
+					</div>
+					<div class="panel-body">
+							<p><b>Title:</b>{{modalOptions.project.layout_map.0.title}}</p>
+							<p><b>Description:</b></p><p ng-bind-html="modalOptions.layout_map.0.description"></p>
+							<p>{{modalOptions.layout_map.0.description}}</p>
+					</div>
+				</div>
+			</tab>
+			<tab heading="Floor Plan" title="Floor Plan">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					<h3 class="panel-title"><b>Floor Plan</b></h3>
+					</div>
+					<div class="panel-body">
+							<p><b>Title:</b>{{modalOptions.project.floor_plan.title}}</p>
+							<p><b>Description:</b></p><p ng-bind-html="modalOptions.project.floor_plan.description"></p>
+					</div>
+				</div>
+			</tab>
+			<tab heading="Gallery" title="Gallery">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><b>Gallery</b></h3>
+					</div>
+					<div class="panel-body">
+							<p><b>Title:</b>{{modalOptions.project.project_gallery.title}}</p>
+							<p><b>Description:</b></p><p ng-bind-html="modalOptions.project.project_gallery.description"></p>
+							<p><b>Image</b></p>
+							<div class="property-images">
+								<img class="img-responsive" ng-model="modalOptions.project_gallery.imgkey" ng-src="{{appConfig.assetPath + modalOptions.project_gallery.project_images[modalOptions.project.imgkey].file_relative_path}}" ng-init="modalOptions.gallery.imgkey = 0"/>
+									<span class="thumbs" ng-repeat="(key, value) in modalOptions.project_gallery.image">
+										<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.project_gallery.imgkey = key"/>
+									</span>
+							</div>
+					</div>
+				</div>
+			</tab>
+			<tab heading="Amenities" title="Amenities">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><b>Amenities</b></h3>
+					</div>
+					<div class="panel-body">
+							<p><b>Title:</b>{{modalOptions.project.amenities.title}}</p>
+							<p><b>Description:</b></p><p ng-bind-html="modalOptions.project.amenities.description"></p>	
+					</div>
+				</div>
+			</tab>
+			<tab heading="Contact Details" title="Contact Details">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><b>Contact Details</b></h3>
+					</div>
+					<div class="panel-body">
+						<p><b>Contact Person:</b>{{modalOptions.project.contact_details.name}}</p>
+						<p><b>Mobile:</b>{{modalOptions.project.contact_details.phone}}</p>
+						<p><b>Email:</b>{{modalOptions.project.contact_details.email}}</p>
+						<p><b>Contact Address:</b>{{modalOptions.project.contact_details.address}}</p>
+					</div>
+				</div>
+			</tab>
+			
+			</tabset>	
+			<!-- <div class="row">
 			    <div class="col-sm-6">
 					<table class="table table-hover table-responsive panel panel-default">
 						<tr>
@@ -134,6 +326,7 @@
 								</div>
 						</div>
 					</div>
+					
 				</div>
 				
 				<div class="col-sm-6">
@@ -161,7 +354,11 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
+			
+			
+			
+			
 		</div>
 	</div>
 </div>

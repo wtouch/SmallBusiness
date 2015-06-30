@@ -2,13 +2,12 @@
 	<div class="col-md-12">
 		<div class="main-content">
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>
-			<!-- <ng-include src="'modules/component/row.html'"></ng-include> -->
 			<div class="row">
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
 						<h4>
 							<span tooltip="Add new business, edit/modify business, add business details like facilities, features etc. Add your customer testimonials. Add/modify your business activities. Create your image gallery! To manage your business click below!" class="glyphicon glyphicon-info-sign"></span> Busines
-							</h4>
+						</h4>
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/business/businesslist">Business</a>
 					</div>
 				</div>
@@ -50,14 +49,25 @@
 				</div>
 				
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-					<div class="gridblock">
+					<div class="gridblock" ng-if="userDetails.permission.user_module.user_list">
 						<h4>
-							<span tooltip="In this area you will find all properties which you want to buy or sale.You can post your property for sale!" class="glyphicon glyphicon-info-sign"></span> Property
+							<span tooltip="List of users you have added!" class="glyphicon glyphicon-info-sign"></span> Users
 						</h4>
-						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/property">Property</a>
+						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/users/userslist">Users</a>
 					</div>
 				</div>
 				
+				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+					<div class="gridblock">
+						<h4>
+							<span tooltip="You can add Contacts!" class="glyphicon glyphicon-info-sign"></span> Contacts
+						</h4>
+						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/contact">Contact</a>
+					</div>
+				</div>	 				
+			</div>
+			<h3>Real Estate</h3>
+			<div class="row">
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
 						<h4>
@@ -68,23 +78,16 @@
 				</div>
 				
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-					<div class="gridblock" ng-if="userDetails.permission.user_module.user_list">
-						<h4>
-							<span tooltip="List of users you have added!" class="glyphicon glyphicon-info-sign"></span> Users
-						</h4>
-						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/users/userslist">Users</a>
-					</div>
-				</div>	
-				
-				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
 						<h4>
-							<span tooltip="You can add Keywords!" class="glyphicon glyphicon-info-sign"></span> SEO
+							<span tooltip="In this area you will find all properties which you want to buy or sale.You can post your property for sale!" class="glyphicon glyphicon-info-sign"></span> Property
 						</h4>
-						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/seo/seo">SEO</a>
+						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/property">Property</a>
 					</div>
 				</div>
-				
+			</div>
+			<h3>Bulk SMS</h3>
+			<div class="row">
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
 						<h4>
@@ -92,17 +95,7 @@
 						</h4>
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/sms">SMS</a>
 					</div>
-				</div>	 	
-				
-
-				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-					<div class="gridblock">
-						<h4>
-							<span tooltip="You can add Contacts!" class="glyphicon glyphicon-info-sign"></span> Contacts
-						</h4>
-						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/contact">Contact</a>
-					</div>
-				</div>	 				
+				</div>
 			</div>
 		</div>
 	</div>

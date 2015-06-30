@@ -98,13 +98,9 @@ define(['angular',
 					
 				.when('/dashboard/project/addproject/:id?', route.resolve({controller: 'addproject',template: 'addproject',label: "Add Project"}, 'project/addproject/'))
 				
-				
 				.when('/dashboard/websites/websettings/:id', route.resolve({controller:'websettings', template: 'websettings',label:"Website Settings"}, 'websites/websettings/'))
 				
 				.when('/dashboard/websites/:websitePart?', route.resolve({controller:'websites', template: 'websites',label:"Websites"}, 'websites/'))
-				
-				.when('/dashboard/seo/seo', route.resolve({controller: 'seo',template: 'seo',
-					label: "SEO"}, 'seo/'))
 				
 				.when('/dashboard/sms', route.resolve({controller: 'sms',template: 'sms',label:"SMS"}, 'sms/'))
 				 

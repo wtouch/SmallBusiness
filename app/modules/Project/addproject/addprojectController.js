@@ -185,21 +185,6 @@ define(['app'], function (app) {
 		};
 		
 	/************************************************************************************/	
-		 //Add Project
-		/* $scope.addProjectFun = function(project){	
-			project.date = $scope.currentDate;
-			dataService.post("post/project",project,$scope.userInfo)
-			.then(function(response) {
-				
-				if(response.status=="success"){
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-				$notification[response.status]("Post Project", response.message);
-				}else{
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-				$notification[response.status]("Post Project", response.message);
-				}				
-			}); 
-			}; */
 			//update into Project
 			if($routeParams.id){
 				console.log($routeParams.id);	

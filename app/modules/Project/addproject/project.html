@@ -161,7 +161,7 @@
 				<p ng-hide="projectForm.seoDescription.$error.maxlength">{{ 5000 - addimage.description.description.length + " Chars left" }}</p>
 					<span class="text-danger" ng-show="projectForm.seoDescription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="projectForm.seoDescription.$dirty && 	projectForm.seoDescription.$invalid">
+					<span class="text-danger" ng-show="projectForm.seoDescription.$dirty && projectForm.seoDescription.$invalid">
 					<span ng-show="projectForm.seoDescription.$error.required"> Description is required .</span>
 					</span>
 			</div>
@@ -186,17 +186,17 @@
 							<label ng-repeat="website in websites" class="col-sm-3">
 								<input type="checkbox" checklist-model="project.domain" checklist-value="website"> {{website.domain_name}}
 							</label>
-						</td>
+						</td> 
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
+	
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-9">
 			<button type="submit" ng-if="project.id" ng-click="update(project)" class="btn btn-success btn text-center ">Update Project</button>
 			<button type="submit" class="btn btn-primary" ng-disabled="projectForm.$invalid" ng-click="showFormPart('overview',1)">Next</button>
 		</div>
 	</div>
-	
 </form>

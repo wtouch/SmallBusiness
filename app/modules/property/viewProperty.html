@@ -72,7 +72,7 @@
 				</div>
 			</div>
 			<hr>	
-			<h3 ng-if="modalOptions.viewProperty.optional_property_details">Property Built Up Details</h3>
+			<h4 ng-if="modalOptions.viewProperty.optional_property_details">Property Built Up Details</h4>
 				<table class="table table-bordered table-responsive">
 					<thead>
 						<th ng-if="modalOptions.viewProperty.optional_property_details.furnished">Furnishing
@@ -110,24 +110,24 @@
 			<hr>
 				<table class="table table-hover table-responsive">
 					<tbody>
-						<h3>Amenities</h3>	
-						<tr>
-							<ul>
-								<li ng-repeat="x in modalOptions.viewProperty.amenities">
-									{{x}}
-								</li>
-							</ul>
-						</tr> 
-						
-				
-					<hr>			
-						<h3>Property Address</h3>
-						<td></td>
-						<td>{{modalOptions.viewProperty.contact_details.cont_address}}</td>
+						<h4>Amenities</h4>	
+						<div class="col-sm-12">
+							<div class="col-sm-3" ng-repeat="x in modalOptions.viewProperty.amenities">
+								<div class="ng-binding">
+									<li>
+										{{x}}
+									</li> 
+								</div>
+							</div>
+						</div> 
+					<hr>
 					</tbody>
-				</table>		
+				</table>
+				<h4>Property Address</h4>
+				<td></td>
+				<td>{{modalOptions.viewProperty.contact_details.cont_address}}</td>
 			<hr>			
-					<h3>Property Seller Detail</h3>
+					<h4>Property Seller Detail</h4>
 					<table class="table table-bordered table-responsive">
 						<tbody>
 							<tr>
