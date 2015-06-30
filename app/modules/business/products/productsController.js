@@ -9,6 +9,7 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.addproductCurrentPage = 1;
+		$scope.CurrentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
