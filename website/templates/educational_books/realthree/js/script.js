@@ -1,5 +1,10 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
+jQuery(document).ready(function() {
+	jQuery(".subimgs").click(function(){
+		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
+	})
+});
 $(document).ready(function(){
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
@@ -70,17 +75,20 @@ app.controller('enquiryController', function($scope,$http, $location) {
 			$scope.propertyConfig = results.data.data;
 		}
 	});
-	
-	
 	$scope.mailSent = false;
-	 
+
 	$scope.enquiry = {
+		message : {
+			property_for :0
+		},
 		subject : 'Website Enquiry',
 		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 	};
 	$scope.postData = function(enquiry){
+		$scope.loading = true;
 		console.log(enquiry);
 		 $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+			 $scope.loading = false;
 			$scope.mailSent = true;
 		});
 	};
