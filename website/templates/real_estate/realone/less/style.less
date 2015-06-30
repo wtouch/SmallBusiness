@@ -1,0 +1,259 @@
+@color : #c7a2a4;
+@lightcolor : #ff8087;
+@darkcolor : #a90d16;
+@back : #682024;
+@darkbackcolor : #221412;
+@lightbackcolor :#F1F1F1; 
+@colorblack : #000000;
+@colorwhite	: #ffffff;
+@import "property.less";
+@import "project.less";
+@import "product.less";
+@import "general.less";
+	*{
+		transition : 300ms;
+	}
+	header{	
+		background-color:@darkbackcolor;
+		.head{
+			background-image: url('bg_image.png');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center; 
+		}
+		img.logo{
+			height: 80px;
+			margin: 50px;	
+		}
+		.navbar-default {
+			background : -webkit-linear-gradient(top, @back, @darkbackcolor);
+			border : none;
+			.navbar-nav{
+				>li{
+					position :relative;
+					>a{
+						color : @color;
+						text-shadow: 1px 1px @colorblack;
+						font-size: 18px;
+						border-right: 1px solid @back; 
+					}
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+						color: @lightcolor;
+						cursor: pointer;
+						text-shadow: 1px 1px @colorblack;
+						background: @darkcolor;
+					}
+					ul{
+						display : none;
+						position : absolute;
+						width : 270px;
+						z-index : 999;
+						background : -webkit-linear-gradient(top, @back, @darkbackcolor 157%);
+						padding : 15px;
+						list-style : none;
+						text-align : left;
+						border : 1px solid @darkcolor;
+						box-shadow : 0 0 15px 0px @colorblack;
+						border-radius : 7px;
+						>li{
+							padding : 10px;
+							position : relative;
+							>a{
+								text-decoration:none;
+								color : @color;
+								&:hover{
+									color : @lightcolor;
+								}
+							}
+							> ul{
+								display: none;
+								list-style :none;
+								left: 70%;
+								top: 10px;
+								border-top-left-radius: 0px;
+								>li{
+									>a{
+										text-decoration:none;
+										color : @color;
+										&:hover{
+											color : @lightcolor;
+										}
+									}
+								}
+							}
+							&:hover > ul {
+								display: block;
+							}
+						}
+					}
+					&:hover{
+						>ul{
+							display:block;
+						}
+					}
+				}
+			}
+			.navbar-collapse{
+				padding:0px;
+			}
+		}
+	}
+	main{ 
+		background-color:@lightbackcolor;
+		.back{
+			background-color: @colorwhite;
+			margin-top: 24px;
+			padding: 20px;
+				.contentModule, .sidebarModule{
+					padding:40px 10px 0px;
+					margin: 30px 0px 0px; 
+					border:1px solid @darkbackcolor;
+					border-radius:10px;
+					position:relative;
+					h3{
+						position : absolute;
+						left:10px;
+						top:-37px;
+						background-color : @back;
+						color : @colorwhite;
+						padding:4px;
+						font:16px 'Alex Brush', cursive;
+						padding: 7px 12px;
+					}
+					.bxslider1, .bxslider{
+						margin : 0;
+						padding : 0;
+					}
+					.slide1{
+						height : 263px;
+					}
+					.slide {
+						a{
+							color : @darkcolor;
+							text-decoration:none;
+							margin:30px;
+							.slideimg{
+								border: 1px #999 solid;
+								margin: auto;
+								max-height:200px;
+								max-width:200px;
+							}
+							.slideimg:hover{
+								border: 1px #ccc solid
+							}
+							.slideimg1{
+								border: 1px #999 solid;
+								border-radius:12px;
+								padding:7px;
+								margin: auto;
+								max-height:200px;
+								max-width:200px;
+							}
+							.slideimg1:hover{
+								border: 1px #ccc solid
+								}
+						}
+						.slidepara{
+							margin:15px 20px;
+						}
+					}
+					.bx-wrapper .bx-pager.bx-default-pager{
+						padding-top:0px;
+						a{
+							background: #aaa;
+						}
+						a:hover{
+							background: #6d1a1f;
+						}
+						a.active{
+							background: #6d1a1f;
+						}
+					}
+				}
+			}
+		article{ 
+			padding:15px;
+			a{
+				color:#933;
+			}
+			a:hover,a:focus{
+				color:#633;
+				text-decoration: none;
+			}
+		}
+	}
+	
+	//global css
+	a{
+		color : @darkcolor;
+		&:hover{
+			color : @back;
+		}
+	}
+	h3, h4{
+		color : @darkcolor;
+	}
+	h1, h2{
+		font : 2.5em/1em 'Alex Brush', cursive;
+		color : @darkbackcolor;
+	}
+	.btn-info{
+		border-radius : 5px;
+		&, &:focus, &:active, &[disabled]{
+			background-color : @back;
+			color : @colorwhite;
+			padding : 10px 20px;
+			transition : padding 250ms;
+			border : none;
+			border-radius : 0px;
+			font: 16px 'Alex Brush', cursive;
+		}
+		&:hover{
+			padding : 10px 40px;
+			background-color:@darkcolor;
+		}
+	}
+	hr{
+		border-style : dashed;
+		border-color: @back;
+		margin :5px 0px;
+	}
+	.btn-link{
+		color : @back;
+		padding-left : 0px;
+		font: 25px 'Alex Brush', cursive;
+		&:hover{
+			color : @darkcolor;
+		}
+	}
+	.send{
+		margin-right : 8px;
+	}
+	.sidebarModule.enquiry{
+		.btn-info{
+			border-radius : 5px;
+			&, &:focus, &:active, &[disabled]{
+				background-color : @back;
+				color : @colorwhite;
+				padding : 10px 20px;
+				border : none;
+				border-radius : 0px;
+				font: 16px 'Alex Brush', cursive;
+			}
+			&:hover{
+				background-color:@darkcolor;
+			}
+		}
+		
+	}
+	footer{
+		background-image : -webkit-linear-gradient(top, @back, @darkbackcolor 157%);;
+		color : @color;
+		padding : 20px;
+		p{
+			margin : 0;
+		}
+		a, a:hover{
+			color : @color;
+		}
+	}
