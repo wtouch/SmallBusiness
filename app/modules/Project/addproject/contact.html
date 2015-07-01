@@ -4,7 +4,7 @@
 	<label for="personName" class="col-sm-2 control-label">Person Name *</label>
 	<div class="col-sm-9">
 		<input type="text" class="form-control" id="personName" ng-model="project.contact_details.name" name="personName" placeholder="Enter Your Name" ng-required="true">	
-			<span class="text-danger" ng-show="contactForm.personName.$error.required && (contactForm.personName.$dirty)" class="help-block">Name is required.</span>						
+			<span class="text-danger" ng-show="contactForm.personName.$error.required && (contactForm.personName.$dirty)" class="help-block">Required Field.</span>						
 	</div>						
 </div>
 	
@@ -21,7 +21,7 @@
 	<div class="col-sm-9">
 		<input type="email" class="form-control" id="Email" name="Email" placeholder="example@gmail.com" ng-model="project.contact_details.email" required>
 		<span  ng-show="contactForm.Email.$dirty && contactForm.Email.$invalid">
-			<span class="text-danger" ng-show="contactForm.Email.$error.required">Email is required.</span>
+			<span class="text-danger" ng-show="contactForm.Email.$error.required">Required Field.</span>
 			<span class="text-danger" ng-show="contactForm.Email.$error.email">Invalid Email address.</span>
 		</span>
 	</div>
@@ -36,7 +36,7 @@
 		<span class="text-danger" ng-show="contactForm.Address.$dirty && contactForm.Address.$invalid">
 		<span class="text-danger" ng-show="contactForm.Address.$error.maxlength">
 		Sorry You are Exceeding the Limit</span>
-		<span ng-show="contactForm.Address.$error.required">Address is required.</span>
+		<span ng-show="contactForm.Address.$error.required">Required Field.</span>
 		</span>
 	</div>						
 </div>

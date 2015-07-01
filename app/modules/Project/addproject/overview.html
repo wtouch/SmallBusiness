@@ -3,7 +3,7 @@
 	<div>
 		<input type="hidden" required name="overview" ng-model="project.overview" />
 		<span class="help-block" ng-show="overviewForm.overview.$dirty && overviewForm.overview.$invalid">
-			<span ng-show="overviewForm.overview.$error.required" class="text-danger">Overview Description is required.</span>
+			<span ng-show="overviewForm.overview.$error.required" class="text-danger">Required Field.</span>
 		</span>
 	</div>
 
@@ -14,19 +14,19 @@
 					<span class="text-danger" ng-show="overviewForm.overviewTitle.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 						<span class="text-danger" ng-show="overviewForm.overviewTitle.$dirty && overviewForm.overviewTitle.$invalid">
-					  <span ng-show="overviewForm.overviewTitle.$error.required">Title is required.</span>
+					  <span ng-show="overviewForm.overviewTitle.$error.required">Required Field.</span>
 			</div>
 	</div>
 
 	<div class="form-group"> 
 		<label for="overviewDiscription" class="col-sm-2 control-label">Description *</label> 
 		<div class="col-sm-9">
-				<textarea class="form-control" id="overviewDiscription"  name="overviewDiscription" ng-model="project.overview.description" cols="20" rows="4" ng-maxlength="2500" required ui-tinymce></textarea>
-			<p ng-hide="overviewForm.overviewDiscription.$error.maxlength">{{ 2500 - project.overview.description.length + " Chars left" }}</p>
+				<textarea class="form-control" id="overviewDiscription"  name="overviewDiscription" ng-model="project.overview.description" cols="20" rows="4" ng-maxlength="3000" required ui-tinymce></textarea>
+			<p ng-hide="overviewForm.overviewDiscription.$error.maxlength">{{ 3000 - project.overview.description.length + " Chars left" }}</p>
 					 <span class="text-danger" ng-show="overviewForm.overviewDiscription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 			<span class="text-danger" ng-show="overviewForm.overviewDiscription.$dirty && overviewForm.overviewDiscription.$invalid">
-					<span ng-show="overviewForm.overviewDiscription.$error.required"> Description is required .</span>
+					<span ng-show="overviewForm.overviewDiscription.$error.required">Required Field.</span>
 			</span>
 		</div>
 	</div>

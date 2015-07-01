@@ -3,31 +3,30 @@
 <div>
 	<input type="hidden" required name="amenities" ng-model="project.amenities" />
 	<span class="help-block" ng-show="amenitiesForm.amenities.$dirty && amenitiesForm.amenities.$invalid">
-		<span ng-show="amenitiesForm.amenities.$error.required" class="text-danger">Amenities Description is required.</span>
+		<span ng-show="amenitiesForm.amenities.$error.required" class="text-danger">Required Field.</span>
 	</span>
 </div>
 
 <div class="form-group">
 	<label  for="amenitiesTitle" class="col-sm-2 control-label">Title *</label>
 	<div class="col-sm-9">
-		<input type="text"  id="amenitiesTitle" class="form-control" name="amenitiesTitle" ng-model="project.amenities.title"  cols="20" rows="4" ng-maxlength="60" required />
-		<p ng-hide="amenitiesForm.amenitiesTitle.$error.maxlength">{{ 60 - project.amenities.title + " Chars left" }}</p>
-			 <span class="text-danger" ng-show="amenitiesForm.amenitiesTitle.$error.maxlength">
+		<input type="text"  id="amenitiesTitle" class="form-control" name="amenitiesTitle" ng-model="project.amenities.title"  cols="20" rows="4" required />
+			<span class="text-danger" ng-show="amenitiesForm.amenitiesTitle.$error.maxlength">
 			Sorry You are Exceeding the Limit</span>
 				<span class="text-danger" ng-show="amenitiesForm.amenitiesTitle.$dirty && amenitiesForm.amenitiesTitle.$invalid">
-			  <span ng-show="amenitiesForm.amenitiesTitle.$error.required">Title is required .</span>
+				<span ng-show="amenitiesForm.amenitiesTitle.$error.required">Required Field</span>
 	</div>
 </div>
 
 <div class="form-group"> 
 	<label for="amenitiesDiscription" class="col-sm-2 control-label">Description *</label> 
 	<div class="col-sm-9">
-			<textarea class="form-control" id="amenitiesDiscription"  name="amenitiesDiscription" ng-model="project.amenities.description" cols="20" rows="4" ng-maxlength="2000" required ui-tinymce></textarea>
-		<p ng-hide="amenitiesForm.amenitiesDiscription.$error.maxlength">{{ 2000 - project.amenities.description.length + " Chars left" }}</p>
+		<textarea class="form-control" id="amenitiesDiscription"  name="amenitiesDiscription" ng-model="project.amenities.description" cols="20" rows="4" ng-maxlength="3000" required ui-tinymce></textarea>
+		<p ng-hide="amenitiesForm.amenitiesDiscription.$error.maxlength">{{ 3000 - project.amenities.description.length + " Chars left" }}</p>
 		<span class="text-danger" ng-show="amenitiesForm.amenitiesDiscription.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 		<span class="text-danger" ng-show="amenitiesForm.amenitiesDiscription.$dirty && amenitiesForm.amenitiesDiscription.$invalid">
-				<span ng-show="amenitiesForm.amenitiesDiscription.$error.required"> Description is required .</span>
+				<span ng-show="amenitiesForm.amenitiesDiscription.$error.required"> Required Field.</span>
 		</span>
 	</div>
 </div>

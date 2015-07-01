@@ -7,7 +7,7 @@
 					<option value="">Select Customer</option>
 				</select>
 			<span class="help-block" ng-show="projectForm.customer.$dirty && projectForm.customer.$invalid">
-				<span ng-show="projectForm.customer.$error.required" class="text-danger">Customer is required.</span>
+				<span ng-show="projectForm.customer.$error.required" class="text-danger">Required Field.</span>
 			</span>	
 		</div>
 		<div class="col-sm-3">
@@ -25,7 +25,7 @@
 				<span class="text-danger" ng-show="projectForm.projectTitle.$error.maxlength">
 				Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="projectForm.projectTitle.$dirty && projectForm.projectTitle.$invalid">
-				<span ng-show="projectForm.projectTitle.$error.required">Project title is required .</span>
+				<span ng-show="projectForm.projectTitle.$error.required">Required Field.</span>
 		</div>
 		<input type="hidden" ng-model="project.status">
 		<input type="hidden" ng-model="project.date">
@@ -38,7 +38,7 @@
 				<option value="">Select Category</option>
 			</select>
 			<span class="help-block" ng-show="projectForm.Category.$dirty && projectForm.Category.$invalid">
-				<span class="text-danger" ng-show="projectForm.Category.$error.required">Category is required.</span>
+				<span class="text-danger" ng-show="projectForm.Category.$error.required">Required Field.</span>
 			</span>				
 		</div>
 		<label for="projectType" ng-if="project.category" class="col-sm-1 control-label">* Type</label>
@@ -47,7 +47,7 @@
 					<option value="">Select Project Type</option>
 				</select>
 				<span class="help-block" ng-show="projectForm.projectType.$dirty && projectForm.projectType.$invalid">
-					<span class="text-danger" ng-show="projectForm.projectType.$error.required">Project Type is required.</span>
+					<span class="text-danger" ng-show="projectForm.projectType.$error.required">Required Field.</span>
 				</span>				
 			</div>				
 	</div>
@@ -86,7 +86,7 @@
 			<div class="col-sm-9">
 				<input type="text" class="form-control" id="builderName" name="builderName" ng-model="project.builder.builder_name" required>
 				<span class="text-danger" ng-show="projectForm.builderName.$dirty && projectForm.builderName.$invalid">
-				<span ng-show="projectForm.builderName.$error.required">Builder name is required .</span>
+				<span ng-show="projectForm.builderName.$error.required">Required Field.</span>
 				</span>
 			</div>	
 	</div>
@@ -112,7 +112,7 @@
 			<div class="col-sm-9">
 				<input type="text"  class="form-control" id="OwnerName" name="OwnerName" ng-model="project.builder.owner_name" required>
 					<span class="text-danger" ng-show="projectForm.OwnerName.$dirty && projectForm.OwnerName.$invalid">
-					<span ng-show="projectForm.OwnerName.$error.required">Owner name is required .</span>
+					<span ng-show="projectForm.OwnerName.$error.required">Required Field.</span>
 					</span>
 			</div>	
 	</div>
@@ -139,7 +139,7 @@
 		<div class="col-sm-9">
 			<input type="text" id="seo" class="form-control" name="seo" placeholder="SEO Title" ng-model="project.seo.title" required>
 			<span class="help-block" ng-show="projectForm.seo.$dirty && projectForm.seo.$invalid">
-				<span ng-show="projectForm.seo.$error.required" class="text-danger">Title is required.</span>
+				<span ng-show="projectForm.seo.$error.required" class="text-danger">Required Field.</span>
 			</span>
 		</div>						
 	</div>
@@ -149,7 +149,7 @@
 		<div class="col-sm-9">
 			<input type="text" id="keywords" class="form-control" name="keywords" placeholder="SEO Keywords" ng-model="project.seo.keywords" required>
 			<span class="help-block" ng-show="projectForm.keywords.$dirty && projectForm.keywords.$invalid">
-				<span ng-show="projectForm.keywords.$error.required" class="text-danger">Keyword required.</span>
+				<span ng-show="projectForm.keywords.$error.required" class="text-danger">Required Field.</span>
 			</span>
 		</div>
 	</div> 
@@ -162,12 +162,12 @@
 					<span class="text-danger" ng-show="projectForm.seoDescription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="projectForm.seoDescription.$dirty && projectForm.seoDescription.$invalid">
-					<span ng-show="projectForm.seoDescription.$error.required"> Description is required .</span>
+					<span ng-show="projectForm.seoDescription.$error.required">Required Field.</span>
 					</span>
 			</div>
 			<input type="hidden" required name="project_images" ng-model="project.project_images" />
 				<span class="help-block" ng-show="projectForm.project_images.$dirty && projectForm.project_images.$invalid">
-				<span ng-show="projectForm.project_images.$error.required" class="text-danger">Project Images Description is required.</span>
+				<span ng-show="projectForm.project_images.$error.required" class="text-danger">Required Field.</span>
 				</span>
 	</div>
 	
