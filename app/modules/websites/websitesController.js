@@ -362,8 +362,7 @@ define(['app'], function (app) {
 			};
 		};
 		
-		
-		//code for requested site list
+		//requested site list
         var requestedsitelist = function(){
 			$scope.websiteParams = {status : 2};
 			angular.extend($scope.websiteParams, $scope.userInfo);

@@ -32,7 +32,7 @@
 		
 		<div class="col-sm-2">
 			<div class="bottomspace">
-				<label for="expirystatus" class="control-label">Select Expiry Status</label>
+				<label for="expirystatus" class="control-label">Select Expiry</label>
 					<select id="expirystatus" class="form-control" ng-change="changeStatusFn('expired',showExpiryStatus)" ng-model="showExpiryStatus" ng-init="showExpiryStatus=''">
 						<option value="">Select Expiry Status</option>
 						<option value="0" selected>Active</option>
@@ -43,9 +43,9 @@
 		
 		<div class="col-sm-2">
 			<div class="bottomspace">
-				<label for="sortnewold" class="control-label">Sort by Newest/Oldest</label>
+				<label for="sortnewold" class="control-label">Sort by Newest</label>
 					<select id="sortnewold" class="form-control" ng-model="sortnewold"> 
-						<option value="">Select Order</option><!-- added value & selected attr -->	
+						<option value="">Select Order</option>
 						<option value="-registered_date">Newest</option>
 						<option value="registered_date">Oldest</option>  
 					</select>
@@ -53,7 +53,7 @@
 		</div>
 		<div class="col-sm-2" ng-if="permission.validity_filter">
 			<div class="bottomspace">
-				<label for="filterbyvalidity" class="control-label">Filter By validity</label>
+				<label for="filterbyvalidity" class="control-label">Filter validity</label>
 					<select id="filterbyvalidity" class="form-control" ng-model="filterbyvalidity" ng-change="changeStatusFn('validity', filterbyvalidity)" >
 						<option value="">Filter by Validity</option>
 						<option value="1">1</option>

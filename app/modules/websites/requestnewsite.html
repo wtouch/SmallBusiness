@@ -9,7 +9,7 @@
 					<option value="">Select Customer</option>
 				</select>				
 				<span class="help-block" ng-show="requestsiteForm.customer.$dirty && requestsiteForm.customer.$invalid">
-					<span ng-show="requestsiteForm.customer.$error.required" class="text-danger">Customer is required.</span>
+					<span ng-show="requestsiteForm.customer.$error.required" class="text-danger">Required Field.</span>
 				</span>	
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 					<option value="">Select Business</option>
 				</select> 
 				<span class="help-block" ng-show="requestsiteForm.selectBusiness.$dirty && requestsiteForm.selectBusiness.$invalid">
-				<span ng-show="requestsiteForm.selectBusiness.$error.required" class="text-danger">Business is required.</span>
+				<span ng-show="requestsiteForm.selectBusiness.$error.required" class="text-danger">Required Field.</span>
 				</span>	
 			</div>
 			<label  for="selectTemplate" class="col-sm-1 control-label">Template *</label>		
@@ -34,7 +34,7 @@
 					<option value="">Select Template</option>
 				</select>
 				<span class="help-block" ng-show="requestsiteForm.selectTemplate.$dirty && requestsiteForm.selectTemplate.$invalid">
-				<span ng-show="requestsiteForm.selectTemplate.$error.required" class="text-danger">Template is required.</span>
+				<span ng-show="requestsiteForm.selectTemplate.$error.required" class="text-danger">Required Field.</span>
 				</span>	
 			</div>
 		</div>
@@ -95,7 +95,7 @@
 					<span class="text-success">{{domainAvailableMsg}}</span>
 				</span>
 				<span class="help-block" ng-show="requestsiteForm.domain_name.$dirty && requestsiteForm.domain_name.$invalid">
-					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.required">Domain  is required.</span>
+					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.required">Required Field.</span>
 					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.pattern">Invalid Web Site.</span>
 					<span class="text-danger" ng-show="requestsiteForm.domain_name.$error.available">{{domainAvailableMsg}}</span>
 				</span>
@@ -127,7 +127,7 @@
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="name" ng-model="reqnewsite.config.contact_details.contact_name" name="name" placeholder="Enter Name" required>
 						<span class="help-block" ng-show="requestsiteForm.name.$dirty && requestsiteForm.name.$invalid">
-							<span class="text-danger" ng-show="requestsiteForm.name.$error.required">name is required.</span>
+							<span class="text-danger" ng-show="requestsiteForm.name.$error.required">Required Field.</span>
 						</span>	
 				</div>
 		</div>
@@ -147,7 +147,7 @@
 				<div class="col-sm-9">
 					<input type="Email" class="form-control" id="contact_email" ng-model="reqnewsite.config.contact_details.contact_email" name="contact_email" placeholder="Enter Email" required >
 						<span class="help-block" ng-show="requestsiteForm.contact_email.$dirty && requestsiteForm.contact_email.$invalid">
-							<span ng-show="requestsiteForm.contact_email.$error.required" class="text-danger"> Email is required.</span>
+							<span ng-show="requestsiteForm.contact_email.$error.required" class="text-danger">Required Field.</span>
 							<span ng-show="requestsiteForm.contact_email.$error.email" class="text-danger">Invalid Email address.</span>
 						</span>
 				</div>					
@@ -162,7 +162,7 @@
 				</p>
 				<span class="help-block" ng-show="requestsiteForm.description.$dirty && requestsiteForm.description.$invalid">
 					<span class="text-danger" ng-show="requestsiteForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="requestsiteForm.description.$error.required">Please enter Product/Services.</span>
+					<span class="text-danger" ng-show="requestsiteForm.description.$error.required">Required Field.</span>
 				</span>
 			</div>						
 		</div>
@@ -174,7 +174,7 @@
 				<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
 				<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="reqnewsite.config.google_map.latitude" readonly />
 				<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
-					<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
+					<span ng-show="websettingsForm.Latitude.$error.required">Required Field.</span>
 				</span>
 				</div>
 			</div>
@@ -183,7 +183,7 @@
 				<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
 				<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="reqnewsite.config.google_map.longitude" readonly >
 					<span class="text-danger" ng-show="websettingsForm.Longitude.$dirty && websettingsForm.Longitude.$invalid">
-						<span ng-show="websettingsForm.Longitude.$error.required">Domain Name is required.</span>
+						<span ng-show="websettingsForm.Longitude.$error.required">Required Field.</span>
 					</span>
 				</div>
 			</div>									

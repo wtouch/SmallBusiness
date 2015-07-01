@@ -23,7 +23,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		($cookies.productType) ? "" : $cookieStore.put("productType", "product");
 		$scope.productType = $cookieStore.get("productType");
 		
-	
 		//function to upload files
 		$scope.upload = function(files,path,userInfo,picArr){
 			upload.upload(files,path,userInfo,function(data){
@@ -83,8 +82,6 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		   imgObject.splice(item, 1);     
 		}
 		
-		// code for get business list
-		//$scope.status=
 		$scope.businessParams = {status: 0};
 			angular.extend($scope.businessParams, $scope.userInfo);
 		dataService.get("getmultiple/business/1/100",$scope.userInfo)

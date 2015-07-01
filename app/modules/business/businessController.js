@@ -59,7 +59,6 @@ define(['app'], function (app) {
 				});
 		};
 		
-		
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
 			if(response.status == 'success'){

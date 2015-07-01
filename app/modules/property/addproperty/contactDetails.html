@@ -6,7 +6,7 @@
 				<input type="text" id="contact_person" class="form-control" name="contact_person" ng-model="property.contact_details.contact_person" required/>
 				
 				<span class="text-danger" ng-show="contactForm.contact_person.$dirty && contactForm.contact_person.$invalid">
-					<span ng-show="contactForm.contact_person.$error.required">Person Name is required .</span>
+					<span ng-show="contactForm.contact_person.$error.required">Required Field.</span>
 				</span>	
 			</div>						
 		</div>
@@ -25,7 +25,7 @@
 				<input type="email"  id="email" class="form-control" name="email" ng-model="property.contact_details.email" ng-pattern=" /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required />					
 				<span class="text-danger" ng-show="contactForm.email.$error.pattern && (contactForm.email.$dirty)"> invalid email! </span>
 				
-				<span class="text-danger" ng-show="contactForm.email.$error.required && (contactForm.email.$dirty)">Email is required.</span>							
+				<span class="text-danger" ng-show="contactForm.email.$error.required && (contactForm.email.$dirty)">Required Field.</span>							
 			</div>							
 		</div>
 	  
@@ -37,7 +37,7 @@
 				 <span class="text-danger" ng-show="contactForm.contact_details.cont_address.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 					<span class="text-danger" ng-show="contactForm.contact_details.cont_address.$dirty && contactForm.contact_details.cont_address.$invalid">
-				  <span ng-show="contactForm.contact_details.cont_address.$error.required">Address is required .</span>	 
+				  <span ng-show="contactForm.contact_details.cont_address.$error.required">Required Field.</span>	 
 			</div>				
 		</div>
 		
