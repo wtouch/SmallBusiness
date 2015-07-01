@@ -19,7 +19,7 @@ define(['app'], function (app) {
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		$scope.temp = dataService.config.template;
-		$scope.path = "/template"; // path to store images on server
+		$scope.path = "/template"; 
 		$scope.userinfo = $scope.userInfo;
 		$scope.reqtemp = {
 			scrible : []
@@ -263,7 +263,7 @@ define(['app'], function (app) {
 			$scope.changeScopeObject($scope.domain_name);
 		}
 		
-		//function for Users list response
+		$scope.getCustomers = function(){
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) {  
 			if(response.status == 'success'){
@@ -273,6 +273,7 @@ define(['app'], function (app) {
 				$notification[response.status]("Get Customers", response.message);
 			}
 		});
+		}
 		
 		//this is global method for filter 
 		$scope.changeStatus = function(statusCol, showStatus) {
