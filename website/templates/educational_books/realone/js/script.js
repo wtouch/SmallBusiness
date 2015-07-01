@@ -75,7 +75,6 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		}
 	});
 	$scope.enquiry = {
-		subject : 'Website Enquiry',
 		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 	};
 	$scope.postData = function(enquiry){
@@ -85,6 +84,11 @@ app.controller('enquiryController', function($scope,$http, $location) {
 			$scope.mailSent = true;
 		});
 	};
+	$scope.openModel = function (url, propId) {
+		size = 'md',
+		templateUrl= 'url'
+	};
+	
 });	
 	app.controller('aboutController', function($scope,$http, $location) {
 		var s = $location.path();

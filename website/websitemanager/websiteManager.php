@@ -191,6 +191,12 @@ class websiteManager{
 			$response["currentPage"] = $this->currentPage;
 			$response["itemsOnPage"] = $this->itemsOnPage;
 			
+			if(isset($_GET['category'])&&isset($_GET['title'])){
+				foreach($_GET as $key=>$value){
+					$response[$key]=$value;
+				}
+			}
+			
 		}catch(Exception $e){
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
