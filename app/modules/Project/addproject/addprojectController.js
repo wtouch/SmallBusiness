@@ -5,7 +5,6 @@ define(['app'], function (app) {
 	var addprojectController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification,$location) {
 		$rootScope.metaTitle = "Add Real Estate Property";
 		$scope.path = "/project"; 
-	
 		$scope.project = {
 			featured : 0,
 			builder :{},
@@ -112,18 +111,7 @@ define(['app'], function (app) {
 				}
 			});
 		};
-	/**********************************************************************************/
-		$scope.getUsers = function(){
-		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
-		.then(function(response) {  
-			if(response.status == 'success'){
-				$scope.customerList = response.data;
-			}else{
-				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-				$notification[response.status]("Get Customers", response.message);
-			}
-		});
-		};
+		
 	/************************************************************************************/	
 	// this function for uploading files
 		$scope.upload = function(files,path,userInfo, picArr){ 
@@ -136,6 +124,19 @@ define(['app'], function (app) {
 				}					
 			}); 
 		};  
+	/**********************************************************************************/
+		$scope.getUsers = function(){
+		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
+		.then(function(response) {  
+			if(response.status == 'success'){
+				$scope.customerList = response.data;
+			}else{
+				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Get Customers", response.message);
+			}
+		});
+		};
+	
 	/*********************************************************************/
 		// Add Business multi part form show/hide operation from here! 
 		$scope.formPart = 'project';
@@ -215,7 +216,6 @@ define(['app'], function (app) {
 			}			
 	/*********************************************************************/	
 	//display websites-domain into checkbox $scope.userinfo $routeParams.id
-		
 		dataService.get('getmultiple/website/1/200',$scope.userinfo)
 		.then(function(response) {
 			var websites = [];
@@ -233,8 +233,7 @@ define(['app'], function (app) {
 				$scope.project.domain = angular.copy(websites);
 			}
 		}; 
-	/*********************************************************************/	
-		
+	/*****************************************************************************/	
 	};		
 	
 	// Inject controller's dependencies

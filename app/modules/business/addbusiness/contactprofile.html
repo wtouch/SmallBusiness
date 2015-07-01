@@ -4,10 +4,11 @@
 	<div class="col-sm-9">
 		<input type="text" id="contact_person" class="form-control" name="contact_person" placeholder="Contact Person" ng-model="addbusiness.contact_profile.contact_person" required />
 		<span class="help-block" ng-show="businessContactForm.contact_person.$dirty && businessContactForm.contact_person.$invalid">
-			<span ng-show="businessContactForm.contact_person.$error.required" class="text-danger">Please Enter Name of Contact Person.</span>
+			<span ng-show="businessContactForm.contact_person.$error.required" class="text-danger">Required Field.</span>
 		</span>
 	</div>						
 </div>
+
 <div class="form-group" > 
 	<label  for="contact_photo" class="col-sm-3 control-label">Person Photo</label>
 	<div class="col-sm-9">
@@ -20,16 +21,18 @@
 			<input type="hidden" ng-model="addbusiness.contact_profile.contact_photo">
 		<!-- <img ng-src="{{addbusiness.contact_profile.contact_photo}}" width="50px"/> -->
 	</div>
-</div>				
+</div>	
+			
 <div class="form-group">
 	<label  for="Designation" class="col-sm-3 control-label">Designation/Job Title*</label>
 	<div class="col-sm-9">
 		<input type="text" id="Designation" class="form-control" name="Designation" placeholder="Designation/Job Title" ng-model="addbusiness.contact_profile.Designation" required >
 		<span class="help-block" ng-show="businessContactForm.Designation.$dirty && businessContactForm.Designation.$invalid">
-			<span ng-show="businessContactForm.Designation.$error.required" class="text-danger">Designation Required.</span>
+			<span ng-show="businessContactForm.Designation.$error.required" class="text-danger">Required Field.</span>
 		</span>
 	</div>						
 </div>
+
 <div class="form-group">
 	<label for="address" class="col-sm-3 control-label">Address *</label>
 	<div class="col-sm-9">
@@ -43,12 +46,14 @@
 		</span>					
 	</div> 
 </div>	
+
 <script type="text/ng-template" id="customTemplate.html">
 	<a>
 		<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
 		<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
 	</a>
 </script>
+
 <div class="form-group">
 	<label for="location" class="col-sm-3 control-label">Location*</label>
 	<div class="col-sm-4">
@@ -73,7 +78,7 @@
 	<div class="col-sm-4">
 	<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="addbusiness.state" placeholder="Enter state">
 		<span class="help-block" ng-show="businessContactForm.state.$dirty && businessContactForm.state.$invalid">
-			<span ng-show="businessContactForm.state.$error.required" class="text-danger">State is required.</span>
+			<span ng-show="businessContactForm.state.$error.required" class="text-danger">Required Field.</span>
 		</span>				
 	</div>
 	<label for="state" class="col-sm-1 control-label">City</label>
@@ -81,7 +86,7 @@
 		<input type="text" required name="City" id="City" ng-model="addbusiness.city" placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
 		<i ng-show="cityLoading" class="glyphicon glyphicon-refresh"></i>
 		<span class="help-block" ng-show="businessContactForm.City.$dirty && businessContactForm.City.$invalid || businessContactForm.City.$dirty && !addbusiness.City">
-			<span ng-show="businessContactForm.City.$error.required || businessContactForm.City.$dirty && !addbusiness.city" class="text-danger">City is required.</span>
+			<span ng-show="businessContactForm.City.$error.required || businessContactForm.City.$dirty && !addbusiness.city" class="text-danger">Required Field.</span>
 		</span>				
 	</div>
 </div>
@@ -91,7 +96,7 @@
 	<div class="col-sm-4">
 		<input type="text" required name="Country" id="Country" ng-model="addbusiness.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
 		<span class="help-block" ng-show="businessContactForm.Country.$dirty && businessContactForm.Country.$invalid || businessContactForm.Country.$dirty && !addbusiness.Country">
-			<span ng-show="businessContactForm.Country.$error.required || businessContactForm.Country.$dirty && !addbusiness.Country" class="text-danger">Country is required.</span>
+			<span ng-show="businessContactForm.Country.$error.required || businessContactForm.Country.$dirty && !addbusiness.Country" class="text-danger">Required Field.</span>
 		</span>				
 	</div>
 	<label for="pincode" class="col-sm-1 control-label">PinCode</label>
@@ -213,7 +218,7 @@
 	<div class="col-sm-4">
 		<input type="Email" class="form-control" id="email" ng-model="addbusiness.contact_profile.email" name="email" placeholder="Enter Email" required />
 		<span class="help-block" ng-show="businessContactForm.email.$dirty && businessContactForm.email.$invalid">
-		<span ng-show="businessContactForm.email.$error.required" class="text-danger">Email is required.</span>
+		<span ng-show="businessContactForm.email.$error.required" class="text-danger">Required Field.</span>
 		<span ng-show="businessContactForm.email.$error.email" class="text-danger">Invalid Email address.</span>
 		</span>
 	</div>

@@ -33,7 +33,7 @@
 			<div class="col-sm-9">
 				<input type="text" id="testimonial" class="form-control" name="testimonial" placeholder="Testimonial Given By" ng-model="testimonials.heading" required ng-disabled="headingDisabled">
 				<span class="help-block" ng-show="testimonialsForm.testimonial.$dirty && testimonialsForm.testimonial.$invalid">
-					<span ng-show="testimonialsForm.testimonial.$error.required" class="text-danger">Testimonial Given By is required.</span>
+					<span ng-show="testimonialsForm.testimonial.$error.required" class="text-danger">Required Field.</span>
 				</span>
 			</div>						
 		</div>
@@ -60,7 +60,7 @@
 			<div class="col-sm-9">
 				<input type="Email" class="form-control" id="senderemail" ng-model="testimonials.desc.email" name="senderemail" placeholder="Enter Email" required >
 				<span class="help-block" ng-show="testimonialsForm.senderemail.$dirty && testimonialsForm.senderemail.$invalid">
-				<span ng-show="testimonialsForm.senderemail.$error.required" class="text-danger">Email is required.</span>
+				<span ng-show="testimonialsForm.senderemail.$error.required" class="text-danger">Required Field.</span>
 				<span ng-show="testimonialsForm.senderemail.$error.email" class="text-danger">Invalid Email address.</span>
 				</span>
 			</div>					
@@ -74,7 +74,7 @@
 							{{ 256 - testimonials.desc.address.length + " Chars left" }}	</p>
 						<span class="help-block" ng-show="testimonialsForm.address.$dirty && testimonialsForm.address.$invalid">
 							<span ng-show="testimonialsForm.address.$error.maxlength"class="text-danger">Sorry You are Exceeding the Limit</span>
-							<span class="text-danger" ng-show="testimonialsForm.address.$error.required">Address is required.</span>
+							<span class="text-danger" ng-show="testimonialsForm.address.$error.required">Required Field.</span>
 						</span>					
 				</div>
 		</div>	
@@ -96,7 +96,7 @@
 				<p ng-hide="testimonialsForm.test_Description.$error.maxlength">{{ 5000 - testimonials.desc.description.length + " Chars left" }}</p>
 				<span class="help-block" ng-show="testimonialsForm.test_Description.$dirty && testimonialsForm.test_Description.$invalid">
 					<span class="text-danger" ng-show="testimonialsForm.test_Description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span ng-show="testimonialsForm.test_Description.$error.required" class="text-danger">Testimonial Description is required.</span>
+					<span ng-show="testimonialsForm.test_Description.$error.required" class="text-danger">Required Field.</span>
 				</span>	
 			</div>
 		</div>

@@ -20,6 +20,7 @@ define(['app'], function (app) {
 		$scope.formPart = 'home';	
 		$scope.addbusiness= {};
 		$scope.formSteps = 0;
+		$scope.path = "/business"; 
 		$scope.reset = function() {
 			$scope.addbusiness = {
 				created_date : $scope.currentDate,
@@ -113,7 +114,7 @@ define(['app'], function (app) {
 			});
 		}
 		
-		//function for websitelist response
+		$scope.getUsers = function(){
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
 		.then(function(response) { 
 			if(response.status == 'success'){
@@ -123,8 +124,8 @@ define(['app'], function (app) {
 				$notification.error("Get Customers", response.message);
 			}
 		});
+		};
 		
-		$scope.path = "/business"; 
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials	
 		$scope.upload = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){

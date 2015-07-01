@@ -6,7 +6,7 @@
 				<option value="">Select Type</option>
 			</select>
 			<span class="help-block" ng-show="businessProfileForm.business_type.$dirty && businessProfileForm.business_type.$invalid">
-				<span ng-show="businessProfileForm.business_type.$error.required" class="text-danger">Primary Business Type is required.</span>
+				<span ng-show="businessProfileForm.business_type.$error.required" class="text-danger">Required Field.</span>
 			</span>				
 		</div>
 	</div>	
@@ -19,7 +19,7 @@
 			</select>
 			
 			<span class="help-block" ng-show="businessProfileForm.establishment.$dirty && businessProfileForm.establishment.$invalid">
-				<span ng-show="businessProfileForm.establishment.$error.required" class="text-danger">Year Of Establishment is required.</span>
+				<span ng-show="businessProfileForm.establishment.$error.required" class="text-danger">Required Field.</span>
 			</span>				
 		</div>
 	</div>	
@@ -31,7 +31,7 @@
 				<option value="">--Choose One--</option>
 			</select>
 			<span class="help-block" ng-show="businessProfileForm.no_of_employees.$dirty && businessProfileForm.no_of_employees.$invalid">
-				<span ng-show="businessProfileForm.no_of_employees.$error.required" class="text-danger">No. Of Employees is required.</span>
+				<span ng-show="businessProfileForm.no_of_employees.$error.required" class="text-danger">Required Field.</span>
 			</span>				
 		</div>
 	</div>	
@@ -52,12 +52,12 @@
 		<small>This will show on Website About Us Page</small></label>
 		<div class="col-sm-9">
 			<textarea type="text" class="form-control" id="aboutDescription" name="aboutDescription" ng-model="addbusiness.business_info.aboutDescription" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
-				<p ng-bind-html="" ng-hide="businessProfileForm.aboutDescription.$error.maxlength">
-					{{ 5000 - addbusiness.business_profile.aboutDescription.length + " Chars left"}} 
+				<p ng-hide="businessProfileForm.aboutDescription.$error.maxlength">
+					{{ 5000 - addbusiness.business_info.aboutDescription.length + " Chars left"}} 
 				</p>
 				<span class="help-block" ng-show="businessProfileForm.aboutDescription.$dirty && businessProfileForm.aboutDescription.$invalid">
 					<span class="text-danger" ng-show="businessProfileForm.aboutDescription.$error.maxlength">Sorry You are Exceeding the Limit</span>
-				<span ng-show="businessProfileForm.aboutDescription.$error.required" class="text-danger">Please write Description of your company.</span>
+				<span ng-show="businessProfileForm.aboutDescription.$error.required" class="text-danger">Required Field.</span>
 				</span>		
 		</div>
 	</div>  
