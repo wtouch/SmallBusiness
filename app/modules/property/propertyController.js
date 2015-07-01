@@ -23,7 +23,7 @@ define(['app'], function (app) {
 		};
 		
 		// code for delete button 
-		$scope.deleted = function(id, status){
+		$scope.deleted = function(id, status,user_id){
 			$scope.deletedData = {status : status};
 			dataService.put("put/property/"+id, $scope.deletedData)
 			.then(function(response) { 
@@ -91,7 +91,7 @@ define(['app'], function (app) {
 			$scope.filterStatus= {search: true};
 			(searchProp =="") ? delete $scope.propertyParam[statusCol] : $scope.filterStatus[statusCol] = searchProp;
 			angular.extend($scope.propertyParam, $scope.filterStatus);
-			$scope.getProperty(1,$scope.propertyParam,user_id);
+			$scope.getProperty(1,user_id,$scope.propertyParam);
 		};
 	/***************************************************************************************/
 		$scope.uploadMultiple = function(files,path,userInfo,picArr){ 
@@ -122,7 +122,7 @@ define(['app'], function (app) {
 		};
 /***************************************************************************************/
 		// code for filter data as per satus (delete/active)		
-		$scope.changeStatus = function(statusCol, showStatus) {
+		$scope.changeStatus = function(statusCol, showStatus,user_id) {
 			$scope.filterStatus= {};
 			(showStatus =="") ? delete $scope.projectParam[statusCol] : $scope.filterStatus[statusCol] = showStatus;
 			angular.extend($scope.projectParam, $scope.filterStatus);

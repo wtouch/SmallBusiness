@@ -4,7 +4,6 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
   // This is controller for this view
 	var projectController = function ($scope, $injector,$routeParams,$rootScope,dataService,modalService,$notification) {
 		$rootScope.metaTitle = "Real Estate Project";
-	
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.CurrentPage = 1;
