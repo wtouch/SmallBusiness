@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Acknowledgement';
+  src: url('../fonts/Acknowledgement.otf');
+}
+@font-face {
+  font-family: 'FengardoNeue_Regular';
+  src: url('../fonts/FengardoNeue_Regular.otf');
+}
 .featuredProperty .bxslider1 {
   padding-left: 10px;
   list-style: none;
@@ -22,6 +30,7 @@
 }
 .featuredProperty .bxslider1 li .sliderDesc .readmore .head {
   margin-right: 10px;
+  padding-left: 10px;
 }
 .featuredProperty .bxslider1 li .table {
   margin-bottom: 10px;
@@ -35,7 +44,7 @@
   border: 1px solid #f5f9ff;
 }
 .propertylist .btn-primary {
-  margin-right: 10px;
+  margin-right: 7px;
   margin-bottom: 10px;
   background-color: #337ab7;
   color: #ffffff;
@@ -201,18 +210,21 @@
   position: relative;
 }
 .homeproject .projectCarousal .carousel-inner .item.active {
-  height: 381px;
+  height: 415px;
   overflow: hidden;
+}
+.homeproject .projectCarousal .carousel-inner .item.active img {
+  min-height: 415px;
 }
 .homeproject .projectCarousal .carousel-inner .carousel-caption h2 {
   border: none;
 }
 .homeproject .projectCarousal .projsnap {
-  width: 620px;
+  width: 0px;
   height: 372px;
   opacity: 0;
   background-color: transparent;
-  transform: translateX(300px);
+  transform: translateX(530px);
   transition: all 0.3s ease-in-out;
   position: absolute;
   overflow: hidden;
@@ -240,11 +252,12 @@
 }
 .homeproject .projectCarousal:hover .projsnap {
   opacity: 1;
+  width: 529px;
   transform: translateX(0px);
 }
 .homeproject .projectnav {
   display: inline-block;
-  height: 381px;
+  height: 415px;
   padding: 10px;
   background-image: -webkit-linear-gradient(left, #2d4065, #23527c 93%, #2d4065);
 }
@@ -569,6 +582,9 @@
 .container {
   width: 992px !important;
 }
+body {
+  font-family: 'FengardoNeue_Regular';
+}
 body header .nava {
   padding-right: 0px;
 }
@@ -688,6 +704,10 @@ body a {
 }
 body a:hover {
   color: #23527c;
+}
+body h1,
+body h2 {
+  font: 2em/2.5em Acknowledgement;
 }
 body h1,
 body h2,

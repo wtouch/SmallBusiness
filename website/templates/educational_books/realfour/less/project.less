@@ -32,8 +32,11 @@
 		.carousel-inner{
 			
 			.item.active{
-				height : 381px;
+				height : 415px;
 				overflow: hidden;
+				img{
+					min-height : 415px;
+				}
 			}
 			.carousel-caption{
 				h2{
@@ -42,12 +45,12 @@
 			}
 		}
 		.projsnap{
-			width : 620px;
+			width : 0px;
 			height : 372px;
 			opacity : 0;
 			background-color : transparent;
 			//border : 20px solid @back;
-			transform: translateX(300px);
+			transform: translateX(530px);
 			transition: all 0.3s ease-in-out;
 			position: absolute;
 			overflow: hidden;
@@ -77,12 +80,13 @@
 	.projectCarousal:hover{
 		.projsnap{
 			opacity : 1;
+			width : 529px;
 			transform: translateX(0px);
 		}
 	}
 	.projectnav{
 		display : inline-block;
-		height : 381px;
+		height : 415px;
 		padding: 10px;
 		background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
 		.builderLogo{
