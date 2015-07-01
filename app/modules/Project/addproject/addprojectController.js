@@ -143,30 +143,30 @@ define(['app'], function (app) {
 			$scope.formPart = formPart;
 		};
 	/*********************************************************************/
-	$scope.getWebsite = function(userId){
-			// for dynamic value of domain name
-			$scope.websParams = {status: 1};
-			angular.extend($scope.websParams, {user_id:userId});
-			dataService.get("getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems, $scope.businessParams)
-			dataService.get('getmultiple/website/1/200', $scope.websParams)
-			.then(function(response){
-				var websites = [];
-				for(var id in response.data){
-					var obj = {id: response.data[id].id, domain_name : response.data[id].domain_name};
-					websites.push(obj);
-				}
-				$scope.websites = websites;
-			}) ;
+	$scope.getWebsite = function(user_id){
+		console.log(user_id);
+		// for dynamic value of domain name
+		var websParams = {user_id : user_id, status : 1};
+		dataService.get("getmultiple/business/"+$scope.bizListCurrentPage+"/"+$scope.pageItems,$scope.businessParams)
+		dataService.get('getmultiple/website/1/200',websParams)
+		.then(function(response){
+			var websites = [];
+			for(var id in response.data){
+				var obj = {id: response.data[id].id, domain_name : response.data[id].domain_name};
+				websites.push(obj);
 			}
-			$scope.checkAll = function(websites, checkValue) {
-				if(checkValue){
-					$scope.project.domain = angular.copy(websites);
-				}
-			};
-			
-			$scope.setFormScope= function(scope){
+			$scope.websites = websites;
+		}) ;
+		}
+		$scope.checkAll = function(websites, checkValue) {
+			if(checkValue){
+				$scope.project.domain = angular.copy(websites);
+			}
+		};
+		
+		$scope.setFormScope= function(scope){
 			$scope.formScope = scope;
-			}
+		}
 	
 		//add project 
 		$scope.addproject = function(project){

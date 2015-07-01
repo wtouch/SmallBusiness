@@ -118,8 +118,10 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 					};
 					var modalOptions = {
 						project: dataService.parse(response.data)  
+						
 					};
 					modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+					console.log(result);
 					});
 				});
 			};

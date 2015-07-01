@@ -104,28 +104,28 @@
 					<h3 class="panel-title"><b>Specifications</b></h3>
 					</div>
 					<div class="panel-body">
-							<p><b>Title:</b>{{modalOptions.project.specifications.title}}</p>
-							<p><b>Description:</b></p><p ng-bind-html="modalOptions.project.specifications.description"></p>
+						<p><b>Title:</b>{{modalOptions.project.specifications.title}}</p>
+						<p><b>Description:</b></p><p ng-bind-html="modalOptions.project.specifications.description"></p>
 					</div>
 				</div>
 			</tab>
 			<tab heading="Location Map" title="Location Map">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><b>Location Map</b></h3>{{modalOptions.project.location_map}}
-					</div>
-					<div class="panel-body">
-						<tr ng-repeat="(key, val) in modalOptions.project.location_map">
-							<p><b>Title:</b>{{key}}</p>{{val}}
-							<!-- <td>{{key}}</td> -->
-							<td ng-bind-html="modalOptions.project.location_map.description"></td>
+						<h3 class="panel-title"><b>Location Map</b></h3>
+					</div>{{modalOptions.project.location_map}}
+					<div class="panel-body" ng-repeat="x in modalOptions.project.location_map">
+						<tr>
+							<td><b>Title:</b>{{x.title}}</td>
+							<td><p><b>Description:</b></p><p ng-bind-html="x.description"></p></td>
 							<td>
-								<img class="img-responsive" ng-model="modalOptions.project.location_map.imgkey" ng-src="{{appConfig.assetPath + modalOptions.project.location_map.image[modalOptions.project.location_map.imgkey].file_relative_path}}" ng-init="modalOptions.project.location_map.imgkey = 0"/>
-									<span class="thumbs" ng-repeat="(key, value) in modalOptions.project.location_map.image">
-										<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.project.location_map.imgkey = key"/>
-									</span>
+								<div class="property-images">
+									<img class="img-responsive" ng-model="x.imgkey" ng-src="{{appConfig.assetPath + x.image[x.imgkey].file_relative_path}}" ng-init="x.imgkey = 0"/>
+										<span class="thumbs" ng-repeat="x in image">
+										{{x}}	<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + x.file_relative_path}}" ng-click="x.imgkey = x"/>
+										</span>
+								</div>
 							</td>
-							<td ng-bind-html="val.description"></td>
 						</tr>
 					</div>
 				</div>
@@ -135,10 +135,19 @@
 					<div class="panel-heading">
 					<h3 class="panel-title"><b>Layout Map</b></h3>
 					</div>
-					<div class="panel-body">
-							<p><b>Title:</b>{{modalOptions.project.layout_map.0.title}}</p>
-							<p><b>Description:</b></p><p ng-bind-html="modalOptions.layout_map.0.description"></p>
-							<p>{{modalOptions.layout_map.0.description}}</p>
+					<div class="panel-body" ng-repeat="x in modalOptions.project.layout_map">
+						<tr>
+							<td><b>Title:</b>{{x.title}}</td>
+							<td><p><b>Description:</b></p><p ng-bind-html="x.description"></p></td>
+							<td ng-if="x.imgkey">
+								<div class="property-images">
+									<img class="img-responsive" ng-model="x.imgkey" ng-src="{{appConfig.assetPath + x.image[x.image].file_relative_path}}" />
+										<!-- ng-init="x.imgkey = 1"<span class="thumbs" ng-repeat="(x in image">
+											<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + x.image}}" ng-click="x.imgkey = x"/>
+										</span> -->
+								</div>
+							</td>
+						</tr>
 					</div>
 				</div>
 			</tab>
@@ -147,9 +156,11 @@
 					<div class="panel-heading">
 					<h3 class="panel-title"><b>Floor Plan</b></h3>
 					</div>
-					<div class="panel-body">
-							<p><b>Title:</b>{{modalOptions.project.floor_plan.title}}</p>
-							<p><b>Description:</b></p><p ng-bind-html="modalOptions.project.floor_plan.description"></p>
+					<div class="panel-body" ng-repeat="x in modalOptions.project.layout_map">
+						<tr>
+							<td><b>Title:</b>{{x.title}}</td>
+							<td><p><b>Description:</b></p><p ng-bind-html="x.description"></p></td>
+						</tr>
 					</div>
 				</div>
 			</tab>
@@ -158,16 +169,19 @@
 					<div class="panel-heading">
 						<h3 class="panel-title"><b>Gallery</b></h3>
 					</div>
-					<div class="panel-body">
-							<p><b>Title:</b>{{modalOptions.project.project_gallery.title}}</p>
-							<p><b>Description:</b></p><p ng-bind-html="modalOptions.project.project_gallery.description"></p>
-							<p><b>Image</b></p>
-							<div class="property-images">
-								<img class="img-responsive" ng-model="modalOptions.project_gallery.imgkey" ng-src="{{appConfig.assetPath + modalOptions.project_gallery.project_images[modalOptions.project.imgkey].file_relative_path}}" ng-init="modalOptions.gallery.imgkey = 0"/>
-									<span class="thumbs" ng-repeat="(key, value) in modalOptions.project_gallery.image">
-										<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.project_gallery.imgkey = key"/>
-									</span>
-							</div>
+					<div class="panel-body" ng-repeat="x in modalOptions.project.layout_map">
+						<tr>
+							<td><b>Title:</b>{{x.title}}</td>
+							<td><p><b>Description:</b></p><p ng-bind-html="x.description"></p></td>
+							<td><b>Image</b>
+								<div class="property-images">
+									<img class="img-responsive" ng-model="modalOptions.project_gallery.imgkey" ng-src="{{appConfig.assetPath + modalOptions.project_gallery.project_images[modalOptions.project.imgkey].file_relative_path}}" ng-init="modalOptions.gallery.imgkey = 0"/>
+										<span class="thumbs" ng-repeat="(key, value) in modalOptions.project_gallery.image">
+											<img class="img-thumbnail imgpropwidth" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="modalOptions.project_gallery.imgkey = key"/>
+										</span>
+								</div>
+							</td>
+						</tr>
 					</div>
 				</div>
 			</tab>
