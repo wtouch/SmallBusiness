@@ -1,3 +1,7 @@
+@font-face{
+	font-family : 'Cinzel-Regular';
+	src:url('../fonts/Cinzel-Regular.otf');
+}
 @color : #CB9305;
 @lightcolor : #b66b20;;
 @darkcolor : #281012;
@@ -16,8 +20,12 @@
 	.container{
 		width : 992px !important;
 	}
+	html{
+		min-width : 1022px;
+	}
 	body{
 		color : @darkcolor;
+		font-family : 'Cinzel-Regular';
 	}
 	header{	
 		background-color : @darkbackcolor;
@@ -33,6 +41,8 @@
 		}
 		.navbar-default {
 			background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
+			background : -moz-linear-gradient(top, @color -565%,@darkcolor);
+			background : linear-gradient(top, @color -565%,@darkcolor);
 			//(top, @back, @darkbackcolor)
 			border : none;
 			.navbar-nav{
@@ -42,6 +52,7 @@
 						font-size: 18px;
 						background : transparent;
 						border-right: 1px solid @back; 
+						padding : 10px 12px;
 					}
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 						color: @darkcolor;
@@ -54,6 +65,8 @@
 						width : 270px;
 						z-index : 999;
 						background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
+						background : -moz-linear-gradient(top, @color -565%,@darkcolor);
+						background : linear-gradient(top, @color -565%,@darkcolor);
 						padding : 15px;
 						list-style : none;
 						text-align : left;
@@ -193,7 +206,6 @@
 		color : @darkcolor;
 	}
 	h1, h2{
-		font : 2.5em/1em 'Alex Brush', cursive;
 		color : @darkcolor;
 	}
 	h1, .tagline, .tagline1{
@@ -252,6 +264,8 @@
 	}
 	footer{
 		background : -webkit-linear-gradient(top, @color -565%, @darkcolor);
+		background : -moz-linear-gradient(top, @color -565%, @darkcolor);
+		background : linear-gradient(top, @color -565%, @darkcolor);
 		color : @color;
 		padding : 20px;
 		p{
