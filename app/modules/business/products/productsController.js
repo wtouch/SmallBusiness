@@ -185,11 +185,11 @@ define(['app','css!modules/business/products/products.css'], function (app) {
 		};
 		
 		//To show service list
-		$scope.servicelist= function(){
+		$scope.servicelist= function(page){
 			$scope.id=$routeParams.id
 			$scope.productFilter = {business_id : $scope.selectBusiness.id, type : 'service'};
 			angular.extend($scope.userInfo, $scope.productFilter);
-			dataService.get("getmultiple/product/1/10",$scope.userInfo)
+			dataService.get("getmultiple/product/"+page+"/10",$scope.userInfo)
 			.then(function(response) {  
 				if(response.status == 'success'){
 					$scope.services = response.data;
