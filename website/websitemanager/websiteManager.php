@@ -341,6 +341,9 @@ class websiteManager{
 		//$category = str_replace("-", " ", $category);
 		$where['status'] = 1;
 		$where['user_id'] = $user_id;
+		if(isset($_GET['project_id'])){
+			$where['project_id'] = $_GET['project_id'];
+		}
 		if($featured != null) $where['featured'] = $featured;
 		$like = $search;
 		$table = $this->db->setTable('property');

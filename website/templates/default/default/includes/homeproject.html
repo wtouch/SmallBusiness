@@ -32,9 +32,10 @@
 			{% if home_project.builder.builder_photo %}
 				<img src="{{home_project.builder.builder_photo.file_relative_path}}" class="img-responsive center-block"/>
 			{% endif %}
-			
+			<p>{{home_project.title}}</p>
+			<p>{{home_project.type}}</p>
 			<div class="viewproperty">
-				<a href="/properties/project_id={{home_project.id}}&homeProject=true" class="projlink">View Properties of this Project</a>
+				<a href="/properties?project_id={{home_project.id}}&homeProject=true" class="projlink">View Properties of this Project</a>
 			</div>	
 		</div>
 	</div>
