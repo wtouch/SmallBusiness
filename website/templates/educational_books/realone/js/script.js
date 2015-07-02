@@ -80,16 +80,11 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	$scope.postData = function(enquiry){
 		$scope.loading = true;
 		console.log(enquiry);
-		/*  $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+		  $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
 			$scope.loading = false;
 			$scope.mailSent = true;
-		}); */
+		}); 
 	};
-	$scope.openModel = function (url, propId) {
-		size = 'md',
-		templateUrl= 'url'
-	};
-	
 });	
 	app.controller('aboutController', function($scope,$http, $location) {
 		var s = $location.path();

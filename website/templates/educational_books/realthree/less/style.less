@@ -42,7 +42,7 @@
 		transition:300ms;
 	}
 	.form-control{
-		background-color:@darkcolor;
+		background-color:@darkcolor !important;
 		color:@colorwhite;
 	}
 	
@@ -67,11 +67,11 @@
 		text-decoration : none;
 		color: @colorwhite;
 	}
-	.btn-info, .propertylist .btn-primary{
+	.btn-info, .btn-primary{
 		background-color: @darkbackcolor;
 		border-color : @color;
 	}
-	.btn-info:hover, .propertylist .btn-primary:hover{
+	.btn-info:hover, .btn-primary:hover{
 		background-color: @lightbackcolor;
 		border-color : @darkbackcolor;
 		color : @colorwhite;
@@ -81,6 +81,18 @@
 	}
 	.btn.send{
 		margin-right : 10px;
+	}
+	.btn + .btn {
+		margin-left : 10px;
+	}
+	.btn-info{
+		border-radius : 2px;
+		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info{
+			
+			border : none;
+			color :@colorwhite;
+			font-weight: bold;
+		}
 	}
 	.cnctinfo{
 		color:@color;
@@ -118,7 +130,7 @@
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					//-webkit-transition: all 0.4s;
-					border: 4px solid #3E8C3C;
+					border: 4px solid @color;
 					border-top-left-radius: 19px;
 					border-bottom-right-radius: 19px;
 					background-color : @darkcolor;
@@ -128,7 +140,7 @@
 					
 				}
 				> ul {
-					border: 3px solid #3E8C3C;
+					border: 3px solid @color;
 					border-radius:19px;
 					display: none;
 					position: absolute;
@@ -178,7 +190,7 @@
 	h4,h2,h3{
 		font: 1.1em/2.5em Amaranth-Regular;
 		color: #bae275;
-		
+		line-height:1.5em;
 		border-bottom: 1px solid #ccc;
 	}
 	h1{
@@ -197,6 +209,7 @@
 			border-radius : 4px;
 			background-color:@contentback;
 			img{
+				min-height: 200px;
 				max-height: 215px;
 				width : 100%;
 				padding : 4px;
@@ -213,7 +226,7 @@
 					font: 16px 'Alex Brush', cursive;
 					background-color : @darkbackcolor;
 					color : @colorwhite;
-					padding : 5px 15px;
+					padding : 3px 9px;
 				
 					
 				}
@@ -293,21 +306,13 @@
 			color:@colorwhite;
 		}
 	}
-	.btn-info{
-		border-radius : 2px;
-		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info{
-			
-			border : none;
-			color :@colorwhite;
-			font-weight: bold;
-		}
-	}
+	
 	.formsec{
 		color : #E5DFDF;
 		border-bottom: 1px solid #ccc;
 		margin-bottom:10px;
 		.form-control{
-			background-color: #444;
+			background-color: #444 !important;
 		}
 		
 	}
