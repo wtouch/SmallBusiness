@@ -32,7 +32,7 @@
   margin-right: 10px;
   background-color: #772b3d;
   color: #ffffff;
-  padding: 5px 15px;
+  padding: 6px 12px;
   transition: padding 250ms;
 }
 .featuredProperty .bxslider1 li .readmore a:hover {
@@ -70,7 +70,7 @@
 .propertylist .readmore a {
   background-color: #772b3d;
   color: #ffffff;
-  padding: 10px 20px;
+  padding: 6px 12px;
   transition: padding 250ms;
   border: none;
   border-radius: 0px;
@@ -81,6 +81,7 @@
   text-decoration: none;
 }
 .singleproperty .property {
+  margin-top: 15px;
   margin-bottom: 15px;
   padding: 10px 15px;
   border: 1px solid #440a02;
@@ -107,6 +108,8 @@
   height: 20px;
   width: 20px;
   margin-right: 6px;
+  -webkit-filter: invert(1);
+  filter: invert(1);
 }
 .singleproperty .propDetails .amenity {
   background: url("../img/sprite_icons.png") transparent;
@@ -228,17 +231,41 @@
 .homeproject {
   margin-top: 10px;
   margin-bottom: 20px;
+  position: relative;
+}
+.homeproject .projectCarousal {
+  position: relative;
+  border: 5px solid #ffffff;
+  z-index: 99;
+  width: 500px;
+  margin: 0 auto;
+  float: none;
+  z-index: 1;
+  box-shadow: 0 0 15px;
 }
 .homeproject .projectnav,
 .homeproject .projsnap {
+  position: absolute;
   background-color: #772b3d;
   border: 1px solid #951544;
-  border-bottom-left-radius: 35px;
-  border-top-right-radius: 35px;
-  height: 317px;
+  height: 320px;
+  width: 300px;
+  top: 25px;
+  box-sizing: border-box;
+  border: 5px solid #ffffff;
 }
 .homeproject .projectnav {
-  padding: 5px 10px;
+  left: 0;
+  padding-right: 110px !important;
+}
+.homeproject .projsnap {
+  right: 0;
+  padding-left: 90px !important;
+  padding-top: 5px !important;
+}
+.homeproject .projectnav {
+  padding: 5px;
+  left: 10px;
 }
 .homeproject .projectnav .nav-stacked > li {
   border-bottom: 1px solid #951544;
@@ -264,6 +291,7 @@
 }
 .homeproject .projsnap {
   padding: 5px 15px;
+  right: 10px;
 }
 .homeproject .projsnap img {
   height: 110px;
@@ -285,24 +313,20 @@
 }
 .homeproject #carousel .carousel-inner {
   border: 2px solid #772b3d;
-  border-bottom-left-radius: 70px;
-  border-top-right-radius: 70px;
-  transition: all 300ms linear;
 }
 .homeproject #carousel .carousel-inner .item {
-  height: 317px;
+  height: 350px;
   overflow: hidden;
-  border-bottom-left-radius: 68px;
-  border-top-right-radius: 68px;
 }
 .homeproject #carousel .carousel-inner .item > img {
-  width: 100%;
-  max-height: 317px;
+  width: auto;
+  min-height: 350px;
 }
-.homeproject #carousel .carousel-inner:hover {
-  transform: scale(1.05);
-  z-index: 99;
-  border-color: #e3dbbe;
+.homeproject #carousel a.left.carousel-control {
+  left: 40px;
+}
+.homeproject #carousel a.right.carousel-control {
+  right: 40px;
 }
 .homeproject #carousel a.left.carousel-control,
 .homeproject #carousel a.right.carousel-control {
@@ -603,8 +627,9 @@
 html {
   min-width: 1022px;
 }
-header {
-  background-color: #440a02;
+body {
+  background-image: url('../img/bg.jpg');
+  background-repeat: repeat;
 }
 header .head {
   background-image: url('bg_image.png');
@@ -664,7 +689,10 @@ header .navbar-default .navbar-nav > li ul > li > a {
   text-decoration: none;
   color: #f7cbce;
 }
-header .navbar-default .navbar-nav > li ul > li > a:hover {
+header .navbar-default .navbar-nav > li ul > li:hover {
+  background: #951544;
+}
+header .navbar-default .navbar-nav > li ul > li:hover a {
   color: #ff8087;
   text-decoration: underline;
 }
@@ -679,7 +707,10 @@ header .navbar-default .navbar-nav > li ul > li > ul > li > a {
   text-decoration: none;
   color: #f7cbce;
 }
-header .navbar-default .navbar-nav > li ul > li > ul > li > a:hover {
+header .navbar-default .navbar-nav > li ul > li > ul > li:hover {
+  background: #951544;
+}
+header .navbar-default .navbar-nav > li ul > li > ul > li:hover a {
   color: #ff8087;
   text-decoration: underline;
 }
@@ -692,19 +723,22 @@ header .navbar-default .navbar-nav > li:hover > ul {
 header .navbar-default .navbar-collapse {
   padding: 0px;
 }
-main {
-  background-image: url('../img/bg.jpg');
-  background-repeat: repeat;
-}
 main .back {
   background-image: url('../img/bg.jpg');
   background-repeat: repeat;
-  margin-top: 24px;
   padding: 20px;
+}
+main .back .contentModule {
+  padding: 40px 10px 0px;
+}
+main .back .sidebarModule {
+  padding: 20px 10px 0px;
+}
+main .back .sidebarModule .panel {
+  margin-bottom: 0px;
 }
 main .back .contentModule,
 main .back .sidebarModule {
-  padding: 40px 10px 0px;
   margin: 30px 0px 0px;
   border: 1px solid #440a02;
   border-radius: 10px;
@@ -809,24 +843,34 @@ h2 {
   font: 2.5em/1em 'Alex Brush', cursive;
   color: #440a02;
 }
-.btn-info {
+.btn-info,
+.btn-primary {
   border-radius: 5px;
 }
 .btn-info,
+.btn-primary,
 .btn-info:focus,
+.btn-primary:focus,
 .btn-info:active,
-.btn-info[disabled] {
+.btn-primary:active,
+.btn-info[disabled],
+.btn-primary[disabled] {
   background-color: #772b3d;
   color: #ffffff;
-  padding: 10px 20px;
   transition: padding 250ms;
   border: none;
   border-radius: 0px;
   font: 16px 'Alex Brush', cursive;
 }
-.btn-info:hover {
-  padding: 10px 40px;
+.btn-info:hover,
+.btn-primary:hover {
   background-color: #951544;
+}
+.btn-info:hover {
+  padding: 6px 40px;
+}
+.btn + .btn {
+  margin-left: 10px;
 }
 hr {
   border-style: dashed;
@@ -847,6 +891,9 @@ hr {
 .panel {
   background-color: #e3dbbe;
 }
+.panel-default {
+  border-color: #440a02;
+}
 .sidebarModule.enquiry .btn-info {
   border-radius: 5px;
 }
@@ -863,6 +910,28 @@ hr {
 }
 .sidebarModule.enquiry .btn-info:hover {
   background-color: #951544;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus,
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  background-color: #951544;
+  color: #f7cbce;
+  border: 1px solid #951544;
+}
+.pagination > li > a,
+.pagination > li > span,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover {
+  background-color: #e3dbbe;
+  border: 1px solid #951544;
+  color: #951544;
 }
 footer {
   background-image: -webkit-linear-gradient(top, #772b3d, #440a02 157%);

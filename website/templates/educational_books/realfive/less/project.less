@@ -16,6 +16,19 @@
 		.readmore{
 			margin-top : 10px;
 			margin-bottom : 10px;
+			a{
+				background-color : @darkcolor;
+				color : @lightbackcolor;
+				padding : 6px 12px;
+				border : 2px solid transparent;
+				border-radius : 0px;
+				font: 16px 'Cinzel-Regular', cursive;
+				&:hover{
+					color : @darkcolor;
+					background-color : @back;
+					border : 2px solid @darkcolor;
+				}
+			}
 		}
 	}
 }
@@ -39,17 +52,18 @@
 				}
 				>a, > a:focus{
 					color : @color;
-					padding: 10px 15px;
+					padding: 10px 5px;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration : none;
 					color: @darkcolor;
-					background : @lightcolor;
+					background : @back;
 				}
 			}
 		}
 	}
 	.projsnap{
+		padding : 5px 10px;
 		img{
 			height : 110px;
 			margin-top: 10px;
@@ -58,13 +72,16 @@
 			border-radius : 5px;
 			padding :4px;
 		}
+		p{
+			color : @color;
+		}
 		.viewproperty{
 			margin-top : 15px;
 			a{
-				color : @colorwhite;
-				font: 16px 'Alex Brush', cursive;
+				color : @color;
+				font: 16px 'Cinzel-Regular', cursive;
 				&:hover{
-					color : @colorwhite;
+					color : @back;
 				}
 			}
 		}
@@ -82,7 +99,7 @@
 				border-top-right-radius: 68px;
 				>img{
 					width : 100%;
-					max-height : 317px;
+					min-height : 317px;
 				}
 			}
 			&:hover{
@@ -117,13 +134,13 @@
 				.readmore{
 					margin-top : 15px;
 					a{
-						font: 16px 'Alex Brush', cursive;
+						font: 16px 'Cinzel-Regular', cursive;
 						background-color : @darkcolor;
 						color : @lightbackcolor;
-						padding : 10px 18px;
+						padding : 6px 12px;
 						border : 2px solid transparent;
 						border-radius : 0px;
-						font: 16px 'Alex Brush', cursive;
+						font: 16px 'Cinzel-Regular', cursive;
 						&:hover{
 							color : @darkcolor;
 							background-color : @back;

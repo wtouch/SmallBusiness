@@ -34,15 +34,39 @@
 .homeproject {
 	margin-top:10px;
 	margin-bottom :20px;
-	.projectnav,.projsnap {
+	position: relative;
+	.projectCarousal{
+		position : relative;
+		border : 5px solid @colorwhite;
+		z-index : 99;
+		width : 500px;
+		margin : 0 auto;
+		float : none;
+		z-index : 1;
+		box-shadow: 0 0 15px;
+	}
+	.projectnav, .projsnap {
+		position : absolute;
 		background-color : @back;
-		border :1px solid @darkcolor;
-		border-bottom-left-radius: 35px;
-		border-top-right-radius: 35px;
-		height:317px;
+		border : 1px solid @darkcolor;
+		height: 320px;
+		width : 300px;
+		top : 25px;
+		box-sizing : border-box;
+		border : 5px solid @colorwhite;
 	}
 	.projectnav{
-		padding : 5px 10px;
+		left : 0;
+		padding-right : 110px !important;
+	}
+	.projsnap {
+		right : 0;
+		padding-left: 90px !important;
+		padding-top: 5px !important;
+	}
+	.projectnav{
+		padding : 5px;
+		left : 10px;
 		.nav-stacked{
 			>li{
 				border-bottom:1px solid @darkcolor;
@@ -63,6 +87,7 @@
 	}
 	.projsnap{
 		padding : 5px 15px;
+		right : 10px;
 		img{
 			height : 110px;
 			margin-top: 10px;
@@ -87,24 +112,20 @@
 	#carousel {
 		.carousel-inner {
 			border: 2px solid @back;
-			border-bottom-left-radius: 70px;
-			border-top-right-radius: 70px;
-			transition :  all 300ms linear;
 			.item{
-				height: 317px;
+				height: 350px;
 				overflow: hidden;
-				border-bottom-left-radius: 68px;
-				border-top-right-radius: 68px;
 				>img{
-					width : 100%;
-					max-height : 317px;
+					width : auto;
+					min-height : 350px;
 				}
 			}
-			&:hover{
-				transform : scale(1.05);
-				z-index : 99;
-				border-color : @lightbackcolor;
-			}
+		}
+		a.left.carousel-control{
+			left : 40px;
+		}
+		a.right.carousel-control {
+			right : 40px;
 		}
 		a.left.carousel-control, a.right.carousel-control {
 			background: none;

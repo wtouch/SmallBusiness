@@ -52,11 +52,12 @@
 						font-size: 18px;
 						background : transparent;
 						border-right: 1px solid @back; 
-						padding : 10px 12px;
+						padding-right: 12px;
+						padding-left: 12px;
 					}
-					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover{
 						color: @darkcolor;
-						background : @lightcolor;
+						background : @back;
 						border-radius: 0px;
 					}
 					ul{
@@ -67,20 +68,25 @@
 						background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
 						background : -moz-linear-gradient(top, @color -565%,@darkcolor);
 						background : linear-gradient(top, @color -565%,@darkcolor);
-						padding : 15px;
+						padding : 10px;
 						list-style : none;
 						text-align : left;
 						left : -70%;
 						border : 1px solid @back;
 						box-shadow : 0 0 15px 0px @colorblack;
 						border-radius : 7px;
-						>li{
-							padding : 5px;
+						li{
+							position : relative;
+							padding : 10px 5px;
 							>a{
 								text-decoration:none;
 								color : @color;
-								&:hover{
-									color: @color;
+							}
+							&:hover{
+								background : @back;
+								border-radius: 0px;
+								a{
+									color: @darkcolor;
 								}
 							}
 							> ul{
@@ -93,8 +99,12 @@
 									>a{
 										text-decoration:none;
 										color : @color;
-										&:hover{
-											color: @color;
+									}
+									&:hover{
+										background : @back;
+										border-radius: 0px;
+										a{
+											color: @darkcolor;
 										}
 									}
 								}
@@ -122,8 +132,16 @@
 			background-color: @lightbackcolor;
 			margin-top: 24px;
 			padding: 20px;
+				.contentModule{
+					padding:40px 10px 0px;
+				}
+				.sidebarModule{
+					padding:20px 10px 0px;
+					.panel{
+						margin-bottom : 0px;
+					}
+				}
 				.contentModule, .sidebarModule{
-					padding:40px 10px 5px;
 					margin: 30px 0px 0px; 
 					border:1px solid @darkcolor;
 					border-radius:10px;
@@ -135,7 +153,7 @@
 						background-color : @darkcolor;
 						color : @color;
 						padding:4px;
-						font:16px 'Alex Brush', cursive;
+						font:16px 'Cinzel-Regular', cursive;
 						padding: 7px 12px;
 					}
 					.bxslider, .bxslider1{
@@ -217,18 +235,18 @@
 	.btn-link{
 		color : @darkcolor;
 		padding-left : 0px;
-		font: 17px 'Alex Brush', cursive;
+		font: 17px 'Cinzel-Regular', cursive;
 		&:hover{
 			color : @darkcolor;
 		}
 	}
-	a, .btn-info, .btn-primary{
+	.btn-info, .btn-primary{
 		&, &:focus, &:active, &[disabled]{
 			background-color : @darkcolor;
 			color : @lightbackcolor;
 			border : 2px solid transparent;
 			border-radius : 0px;
-			font: 16px 'Alex Brush', cursive;
+			font: 16px 'Cinzel-Regular', cursive;
 		}
 		&:hover{
 			color : @darkcolor;
@@ -236,8 +254,8 @@
 			border : 2px solid @darkcolor;
 		}
 	}
-	a{
-		padding : 6px 12px;
+	.btn + .btn{
+		margin-left : 10px;
 	}
 	.thumbnail{
 		background-color : @lightbackcolor;

@@ -19,8 +19,11 @@
 	html{
 		min-width : 1022px;
 	}
+	body{
+		background-image:url('../img/bg.jpg');
+		background-repeat : repeat;
+	}
 	header{	
-		background-color:@darkbackcolor;
 		.head{
 			background-image: url('bg_image.png');
 			background-repeat: no-repeat;
@@ -71,11 +74,15 @@
 							>a{
 								text-decoration:none;
 								color : @color;
-								&:hover{
+							}
+							&:hover{
+								background: @darkcolor;
+								a{
 									color : @lightcolor;
 									text-decoration : underline;
 								}
 							}
+							
 							> ul{
 								display: none;
 								list-style :none;
@@ -86,7 +93,10 @@
 									>a{
 										text-decoration:none;
 										color : @color;
-										&:hover{
+									}
+									&:hover{
+										background: @darkcolor;
+										a{
 											color : @lightcolor;
 											text-decoration : underline;
 										}
@@ -111,15 +121,20 @@
 		}
 	}
 	main{ 
-		background-image:url('../img/bg.jpg');
-		background-repeat : repeat;
 		.back{
 			background-image:url('../img/bg.jpg');
 			background-repeat : repeat;
-			margin-top: 24px;
 			padding: 20px;
-				.contentModule, .sidebarModule{
+				.contentModule{
 					padding:40px 10px 0px;
+				}
+				.sidebarModule{
+					padding:20px 10px 0px;
+					.panel{
+						margin-bottom : 0px;
+					}
+				}
+				.contentModule, .sidebarModule{
 					margin: 30px 0px 0px; 
 					border:1px solid @darkbackcolor;
 					border-radius:10px;
@@ -212,21 +227,25 @@
 		font : 2.5em/1em 'Alex Brush', cursive;
 		color : @darkbackcolor;
 	}
-	.btn-info{
+	.btn-info, .btn-primary{
 		border-radius : 5px;
 		&, &:focus, &:active, &[disabled]{
 			background-color : @back;
 			color : @colorwhite;
-			padding : 10px 20px;
 			transition : padding 250ms;
 			border : none;
 			border-radius : 0px;
 			font: 16px 'Alex Brush', cursive;
 		}
 		&:hover{
-			padding : 10px 40px;
 			background-color:@darkcolor;
 		}
+	}
+	.btn-info:hover{
+		padding : 6px 40px;
+	}
+	.btn + .btn{
+		margin-left : 10px;
 	}
 	hr{
 		border-style : dashed;
@@ -247,6 +266,10 @@
 	.panel{
 		background-color : @lightbackcolor;
 	}
+	.panel-default{
+		border-color : @darkbackcolor;
+	}
+	
 	.sidebarModule.enquiry{
 		.btn-info{
 			border-radius : 5px;
@@ -263,6 +286,17 @@
 			}
 		}
 		
+	}
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
+	{
+		background-color : @darkcolor;
+		color : @color;
+		border : 1px solid @darkcolor;
+	}
+	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
+		background-color : @lightbackcolor;
+		border : 1px solid @darkcolor;
+		color : @darkcolor;
 	}
 	footer{
 		background-image : -webkit-linear-gradient(top, @back, @darkbackcolor 157%);;
