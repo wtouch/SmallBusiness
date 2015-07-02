@@ -8,83 +8,87 @@
 </div>
 
 	<form name="infrastructureForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="infrastructureForm.$valid" novalidate="novalidate"> 
-		<div class="form-group" >
-			<div class="col-sm-9 col-sm-offset-3">
-				<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(infrastructure, businessData.infrastructure, 'infrastructure')" ng-disabled="infrastructureForm.$invalid">Add Infrastucture</button>
-				
-				<button ng-if="infra && headingDisabled" class="btn btn-default btn-info" ng-click="addToObject(infrastructure, businessData.infrastructure, 'infrastructure')" title="Add Infrastucture">Edit Details</button>
-				
-				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')">
-					<span ng-show="infra">Cancel</span>
-				</button>
-			</div>
+	<div class="form-group">
+		<div class="col-sm-9 col-sm-offset-3">
+			<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(infrastructure, businessData.infrastructure, 'infrastructure')" ng-disabled="infrastructureForm.$invalid">Add Infrastucture</button>
+			
+			<button ng-if="infra && headingDisabled" class="btn btn-default btn-info" ng-click="addToObject(infrastructure, businessData.infrastructure, 'infrastructure')" title="Add Infrastucture">Edit Details</button>
+			
+			<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')">
+				<span ng-show="infra">Cancel</span>
+			</button>
 		</div>
-		<div class="form-group">
-			<label  for="infra_image" class="col-sm-3 control-label">Add Image</label>
-			<div class="col-sm-4">
-				<input type="file" class="form-control" id="infra_image" name="infra_image" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="infra_image" />
-				
-				<!-- This will show thumbnails & progress of images -->
-				<file-preview url="infra_image"></file-preview>
-				
-				<!-- This button will show if file/s selected -->
-				<button ng-show="infra_image" ng-click="upload(infra_image, businessData.user_id + path,userInfo, infrastructure.image)" type="button">Upload</button>
-				
-				<!-- This hidden input will store image path in array after successful uploading -->
-				<input type="hidden" ng-model="infrastructure.desc.image">
-			</div>
-			<div class="col-sm-4">
-				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + infrastructure.desc.image.file_relative_path}}" width="150px" />
-			</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="infra_image" class="col-sm-3 control-label">Add Images</label>
+		<div class="col-sm-5">
+			<input type="file" id="infra_image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="upload(infra_image, businessData.user_id + path,userInfo, infrastructure.image)" ng-model="infra_image">
+			<input type="hidden" ng-model="infrastructure.desc.image">
 		</div>
-
-		<div class="form-group">
-			<label for="infraHeading" class="col-sm-3 control-label" name="infraHeading" >Infrastucture Heading*</label>
-			<div class="col-sm-9">
-				<select class="form-control" name="infraHeading" id="infraHeading"  ng-model="infrastructure.heading" required ng-options="item as item for item in biz.infrastructure" ng-disabled="headingDisabled">
-					<option value="">Select Heading</option>					
-				</select>
-				
-				<span class="help-block" ng-show="infrastructureForm.infraHeading.$dirty && infrastructureForm.infraHeading.$invalid">
-			<span ng-show="infrastructureForm.infraHeading.$error.required" class="text-danger">Required Field.</span>
-				</span>				
-			</div>
-		</div>	
-
-		<div class="form-group">
-			<label for="infraDesc" class="col-sm-3 control-label">Infrastucture Description*</label>
-			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastructure.desc.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
-				<p ng-hide="infrastructureForm.infraDesc.$error.maxlength">
-					{{ 5000- infrastructure.desc.description.length + " Chars left" }}	
-				</p>
-				
-				<span class="help-block" ng-show="infrastructureForm.infraDesc.$dirty && infrastructureForm.infraDesc.$invalid">
-					<span class="text-danger" ng-show="infrastructureForm.infraDesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span ng-show="infrastructureForm.infraDesc.$error.required" class="text-danger">Required Field.</span>
-				</span>	
-			</div>
+		
+		<div class="col-sm-4" ng-if="infrastructure.desc.image">
+			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + infrastructure.desc.image.file_relative_path}}" width="150px" />
 		</div>
-		<div>
-			<input type="hidden" name="infrastructure" ng-model="addbusiness.infrastructure" />
-			<span class="help-block" ng-show="infrastructureForm.infrastructure.$dirty && infrastructureForm.infrastructure.$invalid">
-				<span ng-show="infrastructureForm.infrastructure.$error.required" class="text-danger">Infrastucture Description is required.</span>
+	</div>
+	
+	<div class="form-group">						 
+		<div class="col-sm-9 col-sm-offset-3">
+			<span class="thumbs" ng-if="infrastructure.desc.image">
+				<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + '/' + infrastructure.desc.image.file_relative_path}}" ng-click="infrastructure.imgkey = key; "/>
+				<span class="close" ng-click="removeImg(key, infrastructure.infra_image)">X</span>
 			</span>
 		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="infraHeading" class="col-sm-3 control-label" name="infraHeading" >Infrastucture Heading*</label>
+		<div class="col-sm-9">
+			<select class="form-control" name="infraHeading" id="infraHeading"  ng-model="infrastructure.heading" required ng-options="item as item for item in biz.infrastructure" ng-disabled="headingDisabled">
+				<option value="">Select Heading</option>					
+			</select>
+			
+			<span class="help-block" ng-show="infrastructureForm.infraHeading.$dirty && infrastructureForm.infraHeading.$invalid">
+		<span ng-show="infrastructureForm.infraHeading.$error.required" class="text-danger">Required Field.</span>
+			</span>				
+		</div>
+	</div>	
+
+	<div class="form-group">
+		<label for="infraDesc" class="col-sm-3 control-label">Infrastucture Description*</label>
+		<div class="col-sm-9">
+			<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastructure.desc.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
+			<p ng-hide="infrastructureForm.infraDesc.$error.maxlength">
+				{{ 5000- infrastructure.desc.description.length + " Chars left" }}	
+			</p>
+			
+			<span class="help-block" ng-show="infrastructureForm.infraDesc.$dirty && infrastructureForm.infraDesc.$invalid">
+				<span class="text-danger" ng-show="infrastructureForm.infraDesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				<span ng-show="infrastructureForm.infraDesc.$error.required" class="text-danger">Required Field.</span>
+			</span>	
+		</div>
+	</div>
+	
+	<div>
+		<input type="hidden" name="infrastructure" ng-model="addbusiness.infrastructure" />
+		<span class="help-block" ng-show="infrastructureForm.infrastructure.$dirty && infrastructureForm.infrastructure.$invalid">
+			<span ng-show="infrastructureForm.infrastructure.$error.required" class="text-danger">Infrastucture Description is required.</span>
+		</span>
+	</div>
 	</form>
 	<div class="row">
 		<div class="col-sm-12" ng-if="businessData.infrastructure">
-			<table class="table table-bordered table-responsive " as-sortable="dragControlListeners">
+			<table class="table table-bordered table-responsive">
 				<tr>
 					<th>Infrastucture Heading</th>
 					<th>Remove </th>
 				</tr>
-				<tr ng-repeat="(key, value) in businessData.infrastructure" as-sortable-item>
+				<tr ng-repeat="(key, value) in businessData.infrastructure">
 				<td>
-				<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
+				<span class="pull-left glyphicon glyphicon glyphicon-move"></span>
 						<p>{{key}}
-						<button class="btn btn-primary pull-right" tooltip="View Details">
-						<span class="caret" ng-click="isCollapsed = !isCollapsed" ></span></button>
+						<button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed" tooltip="View Details">
+						<span class="caret"></span></button>
 						</p>
 						<div collapse="isCollapsed">
 							<div class="well well-lg clearfix">

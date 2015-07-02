@@ -54,18 +54,20 @@
 	</form>
 	<div class="row">
 		<div class="col-sm-12">
-			<table class="table table-bordered table-responsive " ng-if="businessData.custom_details" as-sortable="dragControlListeners">
+			<table class="table table-bordered table-responsive " ng-if="businessData.custom_details">
 				<tr>
 					<th>Custom Detail Heading</th>
 					<th>Remove</th>
 				</tr>
-				<tr ng-repeat="(key, value) in businessData.custom_details" as-sortable-item>
+				<tr ng-repeat="(key, value) in businessData.custom_details">
 					<td>
-						<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
-						<p>{{key}}
-						<button class="btn btn-primary pull-right" tooltip="View Details">
-						<span class="caret" ng-click="isCollapsed = !isCollapsed" ></span></button>
-						</p>
+						<div class="clearfix">
+							<span class="pull-left glyphicon glyphicon glyphicon-move"></span>
+							<p>{{key}}
+							<button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed" tooltip="View Details">
+							<span class="caret"></span></button>
+							</p>
+						</div>
 						<div class="well well-lg clearfix" collapse="isCollapsed" as-sortable-item>
 							<div><p ng-bind-html="value.description" ></p>
 							</div> 

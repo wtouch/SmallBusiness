@@ -6,12 +6,11 @@
 	    <div class="col-sm-12">
 			<h3 class="text-center">{{modalOptions.viewProperty.title}}</h3>
 			<div class="content">
-					<p>{{modalOptions.viewProperty.property_description}}</p>
+					<blockquote>{{modalOptions.viewProperty.property_description}}</blockquote>
 			</div>			
 			<div class="row">
 			    <div class="col-sm-8">
 					<table class="table table-hover table-responsive">
-					    
 						<tr>
 							 <td><b>Property For </b></td>
 							 <td>						
@@ -24,45 +23,39 @@
 						</tr>
 						<tr>
 							<td><b>Location </b></td>
-							<td>								
-								<p><b>Country :</b> {{modalOptions.viewProperty.country}}
-								
-								<br><b>State :</b> {{modalOptions.viewProperty.state}}
-								
-								<br><b>City :</b>								
-								{{modalOptions.viewProperty.city}}
-								
-								<br><b>Address :</b> {{modalOptions.viewProperty.address}}</p>
+							<td>
+								<p>{{modalOptions.viewProperty.location}}</p>
 							</td>					
 						</tr>
-						<tr>
-							 
-							<td ng-if="modalOptions.viewProperty.property_info">
-								 <p ng-if="modalOptions.viewProperty.property_info.buildup_area"><b>Built_up area :</b>
-								 {{modalOptions.viewProperty.property_info.buildup_area}}		 {{modalOptions.viewProperty.property_info.build_unit}}</p>
-								 
-								 <p ng-if="modalOptions.viewProperty.property_info.land_area"><b>Plot/ Land Area</b>
-								 {{modalOptions.viewProperty.property_info.land_area}}
-								 {{modalOptions.viewProperty.property_info.land_unit}}
-								 </p>
-								 
-								 <p ng-if="modalOptions.viewProperty.property_info.carpet_area"><b>Carpet Area</b>							 
-								 {{modalOptions.viewProperty.property_info.carpet_area}}
-								 {{modalOptions.viewProperty.property_info.carpet_unit}}
-								 </p>
-							</td>					
+						
+						<tr ng-if="modalOptions.viewProperty.property_info.buildup_area">
+							 <td ng-if="modalOptions.viewProperty.property_info.buildup_area"><b>Built Up Area</b></td>
+							 <td ng-if="modalOptions.viewProperty.property_info.buildup_area">
+								<p>{{modalOptions.viewProperty.property_info.buildup_area}}		 {{modalOptions.viewProperty.property_info.build_unit}}</p>
+							 </td>	
 						</tr>
+						<tr ng-if="modalOptions.viewProperty.property_info.land_area">
+							 <td ng-if="modalOptions.viewProperty.property_info.land_area"><b>Land Area</b></td>
+							 <td ng-if="modalOptions.viewProperty.property_info.land_area">						
+								<p>{{modalOptions.viewProperty.property_info.land_area}}
+								 {{modalOptions.viewProperty.property_info.land_unit}}</p>
+							 </td>	
+						</tr>
+						<tr ng-if="modalOptions.viewProperty.property_info.carpet_area">
+							<td ng-if="modalOptions.viewProperty.property_info.carpet_area"><b>Carpet Area</b></td>
+							 <td ng-if="modalOptions.viewProperty.property_info.carpet_area">						
+								<p>{{modalOptions.viewProperty.property_info.carpet_area}}
+								 {{modalOptions.viewProperty.property_info.carpet_unit}}</p>
+							</td>	
+						</tr>
+						
 						<tr>
 							<td ng-if="modalOptions.viewProperty.price"><b>Price</b>
-							<td>{{modalOptions.viewProperty.price}}</td>			
-						</tr>
-						<tr>
-							<td nf-if="modalOptions.viewProperty.contact_details.contact_person"><b>Contact US! </b> </td> 
-							<td>{{modalOptions.viewProperty.contact_details.contact_person}}</td>
+							<td ng-if="modalOptions.viewProperty.price">{{modalOptions.viewProperty.price}}</td>			
 						</tr>
 					</table>	
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-4 well well-lg">
 					<div class="property-images">
 						<img class="img-responsive" ng-model="modalOptions.viewProperty.imgkey" ng-src="{{appConfig.assetPath + modalOptions.viewProperty.property_images[modalOptions.viewProperty.imgkey].file_relative_path}}" ng-init="modalOptions.viewProperty.imgkey = 0"/>
 							<span class="thumbs" ng-repeat="(key, value) in modalOptions.viewProperty.property_images">
@@ -126,6 +119,11 @@
 				<h4>Property Address</h4>
 				<td></td>
 				<td>{{modalOptions.viewProperty.contact_details.cont_address}}</td>
+				<p><b>Country :</b> {{modalOptions.viewProperty.country}}
+				<br><b>State :</b> {{modalOptions.viewProperty.state}}
+				<br><b>City :</b>								
+				{{modalOptions.viewProperty.city}}
+				<br><b>Address :</b> {{modalOptions.viewProperty.address}}</p>
 			<hr>			
 					<h4>Property Seller Detail</h4>
 					<table class="table table-bordered table-responsive">

@@ -33,7 +33,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				dataService.put("put/project/"+id, $scope.featuredData)
 				.then(function(response) {
 					if(response.status == "success"){
-					$scope.getProject($scope.CurrentPage,user_id);
+					$scope.getProject(1,user_id,$scope.projectParam);
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Feature Project", response.message);
@@ -46,7 +46,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 				dataService.put("put/project/"+id, $scope.deletedData)
 				.then(function(response) { 
 					if(response.status == 'success'){
-						$scope.getProject($scope.CurrentPage,user_id);
+						$scope.getProject(1,user_id,$scope.projectParam);
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Edit Project", response.message);
@@ -58,7 +58,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			dataService.put("put/project/"+id, $scope.veryfiedData)
 			.then(function(response) {
 				if(response.status == 'success'){
-					$scope.getProject($scope.CurrentPage,user_id);
+					$scope.getProject(1,user_id,$scope.projectParam);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Verify Property", response.message);
@@ -69,7 +69,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			$scope.filterStatus= {search: true};
 			(searchProp =="") ? delete $scope.projectParam[statusCol] : $scope.filterStatus[statusCol] = searchProp;
 			angular.extend($scope.projectParam, $scope.filterStatus);
-			$scope.getProject(1,$scope.projectParam,user_id);
+			$scope.getProject(1,user_id,$scope.projectParam);
 		};
     /**************************************************************************************/
 		$scope.removeImg = function(item, imgObject) {
@@ -133,7 +133,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			dataService.put("put/project/"+id, $scope.domainData)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.getProject($scope.CurrentPage,user_id);
+					$scope.getProject(1,user_id,$scope.projectParam);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Update Property", response.message);
