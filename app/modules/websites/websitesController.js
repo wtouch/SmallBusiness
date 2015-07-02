@@ -20,7 +20,7 @@ define(['app'], function (app) {
 		$scope.sidebar = {};
 		$scope.isCollapsed = true;
 		$scope.isCollapseds = true;
-		$scope.isFirstOpen = true;
+		//$scope.isFirstOpen = true;
 		
 		$scope.showFormPart = function(formPart){
 			$scope.formPart = formPart;
@@ -308,6 +308,7 @@ define(['app'], function (app) {
 					.then(function(response) {
 						if(response.status == 'success'){
 							$scope.reqnewsite.config.menus = response.data;
+							$scope.isFirstOpen = true;
 						}else{
 							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 							$notification[response.status]("Menu Selection", response.message);

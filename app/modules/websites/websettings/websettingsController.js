@@ -19,7 +19,7 @@ define(['app'], function (app) {
 			}
 		};
 		$scope.isCollapsed = true;
-		$scope.isFirstOpen = true;
+		//$scope.isFirstOpen = true;
 
 		$scope.dragControlListeners = {
 			accept : function (sourceItemHandleScope, destSortableScope) {

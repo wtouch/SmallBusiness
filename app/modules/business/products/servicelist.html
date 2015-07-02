@@ -1,4 +1,4 @@
-	<div class="row" ng-init="servicelist(services)">
+	<div class="row">
 		<div class="col-sm-12" ng-repeat="x in services">
 			<div class=" bottomspace">
 				<div class="product">
@@ -54,6 +54,6 @@
 		</div>
 	</div>
 	<div class="text-center">				
-			<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="addproductCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(addproductCurrentPage)"></pagination>				
+			<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="addproductCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="servicelist(CurrentPage)"></pagination>				
 			<pre>Page: {{addproductCurrentPage}} / {{numPages}}</pre>
 	</div>

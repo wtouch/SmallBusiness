@@ -60,7 +60,24 @@
 								<p><b>Pincode :</b> {{modalOptions.project.pincode}}</p>
 							</td>
 						</tr>
-					</table>
+				</table>
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><b>Location Map</b></h3>
+					</div>{{modalOptions.project.location_map}}
+					<div class="panel-body" ng-repeat="x in modalOptions.project.location_map">
+						<tr>
+							<td><b>Title:</b>{{x.title}}</td>
+							<td><p><b>Description:</b></p><p ng-bind-html="x.description"></p></td>
+							<td>
+								<div class="property-images">
+									<img class="img-responsive" ng-src="{{appConfig.assetPath + x.image}}" />
+								</div>
+							</td>
+						</tr>
+					</div>
+				</div>
 			</tab>
 			<tab heading="Image" title="Image">
 				<div class="property-images">

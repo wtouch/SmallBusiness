@@ -170,6 +170,7 @@ define(['app'], function (app) {
 		return {
 			fileReaderSupported : window.FileReader != null && (window.FileAPI == null || FileAPI.html5 != false),
 			upload : function (files,path,userinfo,success,error) {
+				$rootScope.loading = true;
 				if (files && files.length) {
 					var progressArr = {};
 					for (var i = 0; i < files.length; i++) {
@@ -186,6 +187,7 @@ define(['app'], function (app) {
 							
 						}).success(function (data, status, headers, config) {
 							//console.log('file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data));
+							$rootScope.loading = false;
 							success(data, status, headers, config);
 						}).error(function(err,err1,err2, err3){
 							error(err,err1,err2,err3);
