@@ -27,14 +27,17 @@
 	<div class="col-xs-6">
 		{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : home_project.project_images } only %}
 	</div>
-	<div class="col-xs-3 text-center">
+	<div class="col-xs-3">
 		<div class="projsnap">
 			{% if home_project.builder.builder_photo %}
 				<img src="{{home_project.builder.builder_photo.file_relative_path}}" class="img-responsive center-block"/>
 			{% endif %}
-			<p>{{home_project.title}}</p>
-			<p>{{home_project.type}}</p>
-			<div class="viewproperty">
+			<p>Project Name : {{home_project.title}}</p>
+			<p>Project Type : {{home_project.type}}</p>
+			{% if home_project.location %}
+				<p>Location : {{home_project.location}}</p>
+			{% endif %}
+			<div class="viewproperty text-center">
 				<a href="/properties?project_id={{home_project.id}}&homeProject=true" class="projlink">View Properties of this Project</a>
 			</div>	
 		</div>
