@@ -1,5 +1,5 @@
 {% autoescape false %}
-<div class="modal-body">
+
 <div class="sidebarModule enquiry">
 	<h3 class="subhead">Send Enquiry</h3>
 	<div class="panel panel-default">
@@ -16,6 +16,8 @@
 						<input type="hidden" class="form-control" id="to_email.cc" name="to_email.cc" ng-model="enquiry.to_email.cc" ng-init="enquiry.to_email.cc = 'admin@apnasite.in'">
 				
 						<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" {{ (enquiry.subject) ? 'ng-init="enquiry.subject=\''~enquiry.subject~'\'"' : 'ng-init="enquiry.subject=\'Website Enquiry\'"'}}>
+						
+						<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.message.category" {{ (enquiry.message.category) ? 'ng-init="enquiry.subject=\''~enquiry.message.category~'\'"' : 'ng-init="enquiry.subject=\'Website Enquiry\'"'}}>
 						
 						<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true">	
 							<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
@@ -63,5 +65,5 @@
 		</div>
 	</div>
 </div>
-</div>
+
 {% endautoescape %}
