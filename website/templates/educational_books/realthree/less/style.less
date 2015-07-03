@@ -72,9 +72,9 @@
 		border-color : @color;
 	}
 	.btn-info:hover, .btn-primary:hover{
-		background-color: @lightbackcolor;
-		border-color : @darkbackcolor;
-		color : @colorwhite;
+		background: -webkit-linear-gradient(right,#ccc,#0D8375);
+		background: -moz-linear-gradient(right,#ccc,#0D8375);
+		background: linear-gradient(right,#ccc,#0D8375);
 	}
 	.propertylist .panel-default {
 		background-color: @back;
@@ -187,8 +187,22 @@
 			}
 		}
 	}
-	h4,h2,h3{
-		font: 1.1em/2.5em Amaranth-Regular;
+	.subhead {
+		font-family: "Carter One";
+		font-size: 20px;
+		font-weight: bold;
+		border:1px solid @darkbackcolor;
+		box-shadow:2px 2px 2px @lightcolor;
+		text-align: center;
+		background: -webkit-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);
+		background: -moz-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);
+		background: linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);
+		border-radius: 7px;
+		padding: 4px 10px;
+		position: relative;
+	}
+	h2,h3{
+		font: 1.8em/2.5em Amaranth-Regular;
 		color: #bae275;
 		line-height:1.5em;
 		border-bottom: 1px solid #ccc;
@@ -199,6 +213,11 @@
 		letter-spacing: 1px;
 		border-bottom: 1px solid #ccc;
 	}
+	h2,h3,h4,h5{
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 8px;
+	}
+	
 	.panel{
 		background-color:@contentback;
 	}
@@ -227,8 +246,7 @@
 					background-color : @darkbackcolor;
 					color : @colorwhite;
 					padding : 3px 9px;
-				
-					
+					border : 1px solid @colorwhite;
 				}
 			}
 		}
@@ -279,10 +297,6 @@
 				}
 			}
 		}
-	}
-	h2,h3,h4,h5{
-		border-bottom: 1px solid #ccc;
-		padding-bottom: 8px;
 	}
 	
 	.service{

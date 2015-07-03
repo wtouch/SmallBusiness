@@ -26,8 +26,8 @@ $(document).ready(function(){
 	$('.bxslider1').bxSlider({
 		mode:'vertical',
 		slideWidth: 600,
-		minSlides: 4,
-		maxSlides:4,
+		minSlides: 3,
+		maxSlides:3,
 		slideMargin: 15,
 		auto: true, 
 		autoDirection:'next',
