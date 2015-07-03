@@ -28,7 +28,7 @@ define(['app'], function (app) {
 			dataService.put("put/property/"+id, $scope.deletedData)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.getProperty($scope.currentPage,user_id);
+					$scope.getProperty(1,user_id,$scope.propertyParam);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Delete Property", response.message);
@@ -55,7 +55,7 @@ define(['app'], function (app) {
 			dataService.put("put/property/"+id, $scope.domainData)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.getProperty($scope.currentPage,user_id);
+					$scope.getProperty(1,user_id,$scope.propertyParam);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Update Property", response.message);
@@ -68,7 +68,7 @@ define(['app'], function (app) {
 			dataService.put("put/property/"+id, $scope.featuredData)
 			.then(function(response) {
 				if(response.status == "success"){
-					$scope.getProperty($scope.currentPage,user_id);
+					$scope.getProperty(1,user_id,$scope.propertyParam);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Feature Property", response.message);
@@ -80,7 +80,7 @@ define(['app'], function (app) {
 			dataService.put("put/property/"+id, $scope.veryfiedData)
 			.then(function(response) { 
 				if(response.status == "success"){
-					$scope.getProperty($scope.currentPage,user_id);
+					$scope.getProperty(1,user_id,$scope.propertyParam);
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Verify Property", response.message);
@@ -146,7 +146,7 @@ define(['app'], function (app) {
 			(status =="") ? delete $scope.propertyParam[statusCol] : $scope.filterStatus[statusCol] = status;
 			angular.extend($scope.propertyParam, $scope.filterStatus);
 			angular.extend($scope.propertyParam, $scope.search);			
-			$scope.getProperty(1, $scope.propertyParam,user_id);
+			$scope.getProperty(1,user_id,$scope.propertyParam);
 		};
 /*****************************************************************************************/		
 
