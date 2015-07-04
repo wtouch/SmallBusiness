@@ -4,7 +4,6 @@ define(['app'], function (app) {
     // This is controller for this view
 	var addpropertyController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification,$location) {
 		$rootScope.metaTitle = "Add Real Estate Property";
-		
 		// all $scope object goes here
 		$scope.userinfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
