@@ -202,15 +202,16 @@
 .bxslider {
   padding: 5px;
 }
-.bxslider li {
-  width: 100px;
-}
-.bxslider li img {
-  border: 2px solid transparent;
-  min-height: 190px;
+.bxslider li .projimg {
+  height: 175px;
+  overflow: hidden;
   padding: 6px;
+  border: 2px solid transparent;
 }
-.bxslider li img:hover {
+.bxslider li .projimg img {
+  min-height: 210px;
+}
+.bxslider li .projimg:hover {
   border: 2px solid #440a02;
 }
 .bxslider li .readmore {
@@ -257,7 +258,7 @@
 }
 .homeproject .projectnav {
   left: 0;
-  padding-right: 110px !important;
+  padding-right: 85px !important;
 }
 .homeproject .projsnap {
   right: 0;
@@ -444,9 +445,16 @@
 .services .servimage:hover {
   border: 4px solid #772b3d;
 }
+.services .servdesc {
+  height: 200px;
+}
+.services .servdesc .description {
+  height: 75px;
+  overflow: hidden;
+}
 .services .servdesc .readmore {
   text-align: center;
-  margin-bottom: 30px;
+  margin-top: 20px;
 }
 .products .thumbnail,
 .singleproduct .thumbnail {
@@ -456,15 +464,20 @@
 .singleproduct .thumbnail img {
   width: 100%;
 }
+.products .thumbnail .caption {
+  height: 190px;
+}
+.products .thumbnail .caption .description {
+  height: 75px;
+  overflow: hidden;
+}
 .products .thumbnail .readmore {
+  margin-top: 10px;
   text-align: center;
 }
 @media (min-width: 320px) {
   .products .thumbnail {
     height: 465px;
-  }
-  .products .thumbnail .caption {
-    height: 138px;
   }
   .singleproduct .thumbnail {
     height: 186px;
@@ -474,19 +487,16 @@
   .products .thumbnail {
     height: 450px;
   }
-  .products .thumbnail .caption {
-    height: 150px;
-  }
   .singleproduct .thumbnail {
     height: 100px;
   }
 }
 @media (min-width: 1200px) {
   .products .thumbnail {
-    height: 415px;
+    height: 400px;
   }
-  .products .thumbnail .caption {
-    height: 195px;
+  .products .thumbnail img {
+    min-height: 148px;
   }
   .singleproduct .thumbnail {
     height: 192px;

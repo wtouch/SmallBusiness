@@ -27,7 +27,7 @@ $(document).ready(function(){
 		minSlides :1,
 		maxSlides: 3,
 		moveSlides: 2,
-		slideWidth: 250,
+		slideWidth: 200,
 		auto: true, 
 		autoDirection:'next',
 		pause:4000,

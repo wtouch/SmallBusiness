@@ -401,8 +401,16 @@
 .services .servimage:hover {
   border: 4px solid #bccb3d;
 }
+.services .servdesc {
+  height: 200px;
+}
+.services .servdesc .description {
+  height: 75px;
+  overflow: hidden;
+}
 .services .servdesc .readmore {
-  margin-bottom: 30px;
+  text-align: center;
+  margin-top: 20px;
 }
 .services .servdesc .readmore a {
   background-color: #bccb3d;
@@ -421,19 +429,20 @@
 .singleproduct .thumbnail {
   background-color: #272600;
 }
-.products .thumbnail .readmore,
-.singleproduct .thumbnail .readmore {
-  text-align: center;
+.products .thumbnail .caption {
+  height: 190px;
 }
-.products .thumbnail img {
-  max-height: 240px;
+.products .thumbnail .caption .description {
+  height: 75px;
+  overflow: hidden;
+}
+.products .thumbnail .readmore {
+  margin-top: 10px;
+  text-align: center;
 }
 @media (min-width: 320px) {
   .products .thumbnail {
     height: 465px;
-  }
-  .products .thumbnail .caption {
-    height: 138px;
   }
   .singleproduct .thumbnail {
     height: 186px;
@@ -443,19 +452,16 @@
   .products .thumbnail {
     height: 450px;
   }
-  .products .thumbnail .caption {
-    height: 142px;
-  }
   .singleproduct .thumbnail {
     height: 100px;
   }
 }
 @media (min-width: 1200px) {
   .products .thumbnail {
-    height: 415px;
+    height: 400px;
   }
-  .products .thumbnail .caption {
-    height: 195px;
+  .products .thumbnail img {
+    min-height: 148px;
   }
   .singleproduct .thumbnail {
     height: 118px;

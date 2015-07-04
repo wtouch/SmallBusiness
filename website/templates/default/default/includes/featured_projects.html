@@ -8,7 +8,9 @@
 			{% set break = 0 %}{% set i = 0 %}
 			{% for x in featured_projects if break == 0 %}
 				<li>
-					<img class="img-responsive center-block" src="{{x.project_images.0.file_relative_path}}" />
+					<div class="projimg">
+						<img class="img-responsive center-block" src="{{x.project_images.0.file_relative_path}}" />
+					</div>
 					<div class="readmore">
 						<a href="projects/{{x.title}}/{{x.id}}">{{x.title}}</a>
 					</div>
