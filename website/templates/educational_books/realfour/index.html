@@ -22,7 +22,13 @@
 	<header>
 	<div class="container">
 		<div class="logo">
-			<img src="{{data.business_logo.file_relative_path}}"/>
+			{% if data.website_config.website_logo %}
+					
+			<img src="{{data.website_config.website_logo.file_relative_path}}" alt="{{data.business_name}}">
+			{% else %}
+			
+			<img src="{{data.business_logo.file_relative_path}}" alt="{{data.business_name}}">
+			{% endif %}
 		</div>
 	</div>
 	<div class="container">

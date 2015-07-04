@@ -11,14 +11,21 @@
 .featuredProperty .bxslider1 .row {
   padding-bottom: 10px;
 }
-.featuredProperty .bxslider1 li .sliderImg img {
-  max-height: 215px;
-  width: 100%;
-  padding: 4px;
-  border: 3px solid transparent;
+.featuredProperty .bxslider1 li {
+  height: 200px;
 }
-.featuredProperty .bxslider1 li .sliderImg img:hover {
-  border: 3px solid #281012;
+.featuredProperty .bxslider1 li .sliderImg {
+  height: 150px;
+  width: 200px;
+  overflow: hidden;
+  padding: 4px;
+  border: 2px solid transparent;
+}
+.featuredProperty .bxslider1 li .sliderImg img {
+  min-height: 150px;
+}
+.featuredProperty .bxslider1 li .sliderImg:hover {
+  border: 2px solid #281012;
 }
 .featuredProperty .bxslider1 li .table {
   margin-bottom: 10px;
@@ -228,7 +235,7 @@
   border: 2px solid transparent;
 }
 .bxslider li .projimg img {
-  min-height: 210px;
+  min-height: 175px;
 }
 .bxslider li .projimg:hover {
   border: 2px solid #281012;
@@ -354,11 +361,16 @@
   padding: 10px;
 }
 .projlist .project .thumbnail {
-  height: 370px;
+  height: 385px;
   padding-top: 15px;
 }
-.projlist .project .thumbnail img {
-  width: 100%;
+.projlist .project .thumbnail .projectimg {
+  width: 190px;
+  height: 148px;
+  overflow: hidden;
+}
+.projlist .project .thumbnail .projectimg img {
+  min-height: 148px;
 }
 .projlist .project .thumbnail .caption {
   color: #b66b20;
@@ -483,6 +495,14 @@
   background-color: #ba8c5f;
   border: 2px solid #281012;
 }
+.products .thumbnail .prodimg {
+  width: 198px;
+  height: 148px;
+  overflow: hidden;
+}
+.products .thumbnail .prodimg img {
+  min-height: 148px;
+}
 .products .thumbnail .caption {
   height: 190px;
 }
@@ -526,9 +546,6 @@
 @media (min-width: 1200px) {
   .products .thumbnail {
     height: 400px;
-  }
-  .products .thumbnail img {
-    min-height: 148px;
   }
   .singleproduct .thumbnail {
     height: 192px;
@@ -821,6 +838,13 @@ main .back .sidebarModule .bxslider,
 main .back .contentModule .bxslider1,
 main .back .sidebarModule .bxslider1 {
   margin: 0px;
+}
+main .back .contentModule .bxslider1,
+main .back .sidebarModule .bxslider1 {
+  padding-left: 15px;
+}
+main .back .contentModule .bxslider,
+main .back .sidebarModule .bxslider {
   padding: 0px;
 }
 main .back .contentModule .slide1,
