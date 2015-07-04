@@ -24,7 +24,13 @@
 		<header>
 			<div class="container">
 				<div class="col-xs-12 ">
+					{% if data.website_config.website_logo %}
+					
+					<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+					{% else %}
+					
 					<img class="logo" src="{{data.business_logo.file_relative_path}}">
+					{% endif %}
 				</div>
 			</div>
 		</header>
