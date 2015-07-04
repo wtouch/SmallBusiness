@@ -3,7 +3,6 @@
 define(['app'], function (app) {
     var injectParams = ['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope', '$cookies', '$cookieStore','$notification'];
 
-    // This is controller for this view
 	var adddetailsController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope, $cookies, $cookieStore,$notification)
 	{ 
 		dataService.get("getsingle/business/"+$routeParams.id)

@@ -48,15 +48,15 @@ define(['app'], function (app) {
 		};
 		
 		$scope.open = function (url, buzId) {
-				var modalDefaults = {
-					templateUrl: url,	
-					size : 'lg'
-				};
-				var modalOptions = {
-					bizList: buzId  
-				};
-				modalService.showModal(modalDefaults, modalOptions).then(function (result) {
-				});
+			var modalDefaults = {
+				templateUrl: url,	
+				size : 'lg'
+			};
+			var modalOptions = {
+				bizList: buzId  
+			};
+			modalService.showModal(modalDefaults, modalOptions).then(function (result) {
+			});
 		};
 		
 		dataService.get("getmultiple/user/1/500", {status: 1, user_id : $rootScope.userDetails.id})
