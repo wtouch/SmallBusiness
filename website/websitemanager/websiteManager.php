@@ -84,7 +84,6 @@ class websiteManager{
 			$this->twig = new Twig_Environment($loader);
 			$template = $this->twig->loadTemplate("default/default/error.html");
 		}
-		
 		return $template->display($response);
 	}
 	function setModules($routes){
