@@ -4,13 +4,15 @@
 				<div class="bottomspace">
 					<ng-include src="'modules/business/toolbar.html'"></ng-include>
 				<div class="bottomspace">
+				<h4 class="text-center">{{selectBusiness.business_name}}</h4>
 					<div class="row">
 						<div class="col-sm-3">
 							<select id="selectBusiness" class="form-control" ng-change="changeScope(selectBusiness)" ng-model="selectBusiness" ng-options="item as item.business_name for item in businessList"> 
-								<option value="">Select Business</option>
+								<option value="">Select Business</option>	
 							<select id="biz" class="form-control" ng-model="biz"> 		
-								<option value="">{{product.business_name}}</option>
+								<option value="">{{product.business_name}}</option> 
 							</select>
+							
 						</div>
 						<div class="col-sm-3" ng-show="selectBusiness">
 							<select id="view" class="form-control" ng-model="productType" ng-change="changeScopeObject(productType)">{{productType}} 
