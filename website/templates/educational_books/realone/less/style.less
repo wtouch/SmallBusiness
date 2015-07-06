@@ -9,14 +9,14 @@
 
 
 //text color shade
-	@color : #FDD9C2; // orange
-	@lightcolor : #B8F9B8; // light gray
+	@color : #C4DE9B; // orange
+	@lightcolor : #CCFFCC; // light gray
 	@darkcolor : #930616; // dark red
 	 
 //background color shade
-	@back : #ede9d7; // use body background color
-	@darkbackcolor : #6ba72b; // use green background
-	@lightbackcolor :#f9f5f5;  // light bg (light yellow)
+	@back : #4C8017; // darkgreen color
+	@darkbackcolor : #71381B; // use green background
+	@lightbackcolor :#C4DE9B;  //#F0DA81 light bg (light green)
 	
 //common color shade
 	@colorblack : #000000;
@@ -28,8 +28,8 @@
 	@import "product.less";
 	
 	body{
-		background-color : @back;
-		
+		background-image : url('../img/bgrnd.jpg');
+		background-repeat : repeat;
 	}
 	.container{
 		width:992px !important;
@@ -72,30 +72,27 @@
 		margin-left:10px;
 	}
 	.navbar-default {
-		height:50px;
-		background-color:#5f9429;
+		background-color : @back;
 		border: 1px solid @lightbackcolor;
 		border-radius: 0;
 		.navbar-nav{
 			> li{
-				padding:10px 5px;
 				margin-bottom:0px;
 				position : relative;
-				margin-right: 5px;
-				a{
-					padding:5px;
-					text-transform: uppercase;
-				}
 				> a, > a:focus {
-					color: @lightcolor;
-					font: bold 15px/1em Arial, Helvetica, sans-serif;
-					position: relative;
-					border:1px solid transparent;
+					color : @lightcolor;
+					font : bold 15px/1em Arial, Helvetica, sans-serif;
+					position : relative;
+					text-transform : uppercase;
+					border : 1px solid transparent;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					background-color: @back;
-					border:1px solid @colorwhite;
-					border-radius:4px;
+					background:  @darkbackcolor;
+					color : @colorwhite;
+					border : 1px solid @darkcolor;
+					border-radius : 4px;
+					padding : 18px 15px;
+					margin-top : -12px;
 				}
 				> ul{
 					margin-top:10px;
