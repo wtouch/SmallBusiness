@@ -9,19 +9,18 @@
 
 
 //text color shade
-	@color : #C4DE9B; // orange
+	@color : #264903; // #C4DE9B green
 	@lightcolor : #CCFFCC; // light gray
-	@darkcolor : #930616; // dark red
+	@darkcolor : #E2271F; // dark red
 	 
 //background color shade
-	@back : #4C8017; // darkgreen color
-	@darkbackcolor : #71381B; // use green background
+	@back : #49741E; // green color
+	@darkbackcolor : #8C241F; // use dark red background
 	@lightbackcolor :#C4DE9B;  //#F0DA81 light bg (light green)
 	
 //common color shade
 	@colorblack : #000000;
 	@colorwhite	: #ffffff;
-	
 	@import "general.less";
 	@import "property.less";
 	@import "project.less";
@@ -72,7 +71,7 @@
 		margin-left:10px;
 	}
 	.navbar-default {
-		background-color : @back;
+		background : linear-gradient(@back, @color);
 		border: 1px solid @lightbackcolor;
 		border-radius: 0;
 		.navbar-nav{
@@ -87,18 +86,13 @@
 					border : 1px solid transparent;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					background:  @darkbackcolor;
+					background : linear-gradient(@darkcolor, @darkbackcolor);
 					color : @colorwhite;
-					border : 1px solid @darkcolor;
-					border-radius : 4px;
-					padding : 18px 15px;
+					padding : 22px 15px;
 					margin-top : -12px;
 				}
 				> ul{
-					margin-top:10px;
 					display: none;
-					border:1px solid @colorwhite;
-					border-radius:5px;
 					position: absolute;
 					width: 245px;
 					z-index: 999;
@@ -171,10 +165,9 @@
 	  line-height:1.5em;
 	  font-weight:bold;
 	}
-	.sidebarModule .panel,.sidebarModule .sections{
-		background-color: @lightbackcolor;
+	.sidebarModule .panel,.sidebarModule .sections, .contentModule .sections{
+		background : transparent;
 		border:1px solid @darkbackcolor;
-		box-shadow: 3px 3px 6px #ADADAD;
 		border-radius : 4px;
 	}
 	.btn-info,.btn-primary{
@@ -192,7 +185,7 @@
 	.subhead{
 		font-size: 16px;
 		font-weight: bold;
-		background-color: @darkbackcolor;
+		background : linear-gradient(@darkcolor, @darkbackcolor);
 		border-radius : 7px;
 		color : @colorwhite;
 		padding: 8px 40px;
@@ -203,9 +196,7 @@
 			padding-top:10px;
 			padding-right:10px;
 			border:1px solid @darkbackcolor;
-			box-shadow:2px 2px 2px @lightcolor;
 			border-radius : 4px;
-			background-color:@lightbackcolor;
 			padding-bottom:10px;
 			img{
 				max-height: 215px;
