@@ -47,16 +47,19 @@
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background-color: @darkbackcolor;
+			background : linear-gradient(@back, @color);
 			>li{
 				border-right : 1px solid @lightbackcolor;
 				>a, > a:focus{
-					color : @colorwhite;
-					font-weight : bold;
+					color : @lightcolor;
+					font : bold 15px/1em Arial, Helvetica, sans-serif;
+					position : relative;
+					text-transform : uppercase;
+					border : 1px solid transparent;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					color : @colorblack;
-					background-color: @color;
+					color : @colorwhite;
+					background : linear-gradient(@darkcolor, @darkbackcolor);
 				}
 			}
 		}
@@ -82,10 +85,13 @@
 		.thumbnail{
 			height: 395px;
 			img{
-				height : 190px;
+				max-height : 190px;
 			}
 			.caption{
 				height: 138px;
+			}
+			.readmore{
+				margin-top : 10px;
 			}
 		}
 	}
@@ -126,8 +132,25 @@
 	.gallery{
 			.thumbnail{
 				border-color : @darkbackcolor;
+				background : transparent;
+				h4{
+					border : none;
+					padding-bottom : 0px;
+				}
 			}
 		}
+		
+	.enquiry{
+		.panel-body{
+			padding-bottom : 0px;
+		}
+	}
+	.contactus{
+		h4{
+			margin-top : 0px;
+			margin-bottom : 0px;
+		}
+	}
 	//gallery
 	@media (min-width: 320px) {
 		.gallery{

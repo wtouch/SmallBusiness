@@ -41,11 +41,16 @@
 	}
 	a, .btn.btn-link{
 		color: @darkbackcolor;
+		&:hover, &:hover{
+			text-decoration : none;
+			color: @color;
+		}
 	}
-	a:hover, .btn.btn-link:hover{
-		text-decoration : none;
-		color: @color;
+	.btn.btn-link{
+		font-size : 17.5px;
+		padding-left : 0px;
 	}
+	
 	.cnctinfo{
 		margin: 40px 15px 40px 0;
 	}
@@ -96,37 +101,50 @@
 					position: absolute;
 					width: 245px;
 					z-index: 999;
-					background-color: @color;
+					background : linear-gradient(@back, @color);
 					padding: 2px;
 					list-style: none;
 					text-align: left;
 					>li{
-						border-bottom: 1px solid @lightbackcolor;
-						padding: 5px;
-						text-transform:uppercase;
-						font-size:10px;
+						padding : 10px;
+						text-transform : uppercase;
+						position : relative;
 						>a{
-							color:@colorblack;
-							top:0px;
-							font-size:14px;
+							color : @lightcolor;
 							&:hover{
-								text-decoration: underline;
+								color : @colorwhite;
 							}
 						}
 						&:hover{
-							background-color: @darkcolor;
+							background : linear-gradient(@darkcolor, @darkbackcolor);
 							-webkit-transition: all 0.4s;
 						}
 						ul{
-							
+							background : linear-gradient(@back, @color);
 							list-style: none;
+							display : none;
+							position : absolute;
+							left: 150px;
+							width: 180px;
+							padding : 2px;
 							li{
-								font-size:12px;
+								padding : 10px;
 								a{
-									text-transform:lowercase;
+									color : @lightcolor;
+								}
+								&:hover{
+									a{
+										color : @colorwhite;
+									}
+									background : linear-gradient(@darkcolor, @darkbackcolor);
 								}
 							}
 						
+						}
+						&:hover{
+							ul{
+								display : block;
+							}
 						}
 					}
 				}
@@ -151,96 +169,80 @@
 		font: 2.3em/1.2em negotiate_free;
 		color: @darkbackcolor;
 	}
-	 h3, h4 {
+	h2, h3, h4 {
 		color: @darkbackcolor;
 		border-bottom: 1px solid @darkbackcolor;
 		padding-bottom:10px;
+	}
+	h3{
 		font: 1.4em/1.2em QumpellkaNo12;
 	}
-	h4{
-		font: 1.4em/1.2em QumpellkaNo12;
-	}
-	 h2, h3 {
-	  font: 2.0em/1.2em QumpellkaNo12;
-	  line-height:1.5em;
-	  font-weight:bold;
+	h2{
+		font: 2.0em/1.2em QumpellkaNo12;
+		line-height:1.5em;
+		font-weight:bold;
 	}
 	.sidebarModule .panel,.sidebarModule .sections, .contentModule .sections{
 		background : transparent;
 		border:1px solid @darkbackcolor;
 		border-radius : 4px;
 	}
+	.form-control{
+		background : transparent;
+		border-color : @darkbackcolor;
+		&:focus{
+			border-color : @back;
+		}
+	}
 	.btn-info,.btn-primary{
-		background-color: @darkbackcolor;
-		border-color : @darkbackcolor;
+		border : none;
+		background : linear-gradient(@back, @color);
+		color : @lightcolor;
+		&:hover, &:hover{
+			background : linear-gradient(@darkcolor, @darkbackcolor);
+			color : @colorwhite;
+		}
 	}
-	.btn-info:hover,.btn-primary:hover{
-		background-color: @lightbackcolor;
-		border-color : @darkbackcolor;
-		color : @colorblack;
-	}
-	.btn.send{
+	.btn + .btn{
 		margin-right : 10px;
 	}
 	.subhead{
-		font-size: 16px;
+		font-size: 18px;
 		font-weight: bold;
 		background : linear-gradient(@darkcolor, @darkbackcolor);
 		border-radius : 7px;
 		color : @colorwhite;
-		padding: 8px 40px;
+		padding: 4px 15px;
 		position : relative;
 	}
-	.contentModule {
-		.sections{
-			padding-top:10px;
-			padding-right:10px;
-			border:1px solid @darkbackcolor;
-			border-radius : 4px;
-			padding-bottom:10px;
-			img{
-				max-height: 215px;
-				width : 100%;
-				padding : 4px;
-				border : 3px solid transparent;
-				&:hover{ 
-					border : 3px solid @color;
-				}
-			}
-			.readmore{
-				margin-bottom :10px;
-				margin-top:10px;
-				a{
-					font: bold 16px Carter One;
-					background-color : @darkbackcolor;
-					color : @color;
-					padding : 3px 9px;
-					margin-right:5px;
-					&:hover{
-						background-color : @color;
-						color:@colorblack;
-					
-					}
-				}
-			}
-		}
-		
-	}
-	
-	
 	hr{
 		border-style:dashed;
 		border-color:#5f9429;
-		margin:5px 0px;
+		margin: 0px 0px 10px;
 	}
-	.sidebarModule{
+	.sidebarModule, .contentModule{
 		.sections{
 			padding:10px;
 		}
 	}
+	.sidebarModule{	
+		h4{
+			border : none;
+		}
+	}
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
+	{
+		background-color : @back;
+		color : @lightcolor;
+		border : 1px solid @darkbackcolor;
+	}
+	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
+		background-color : @darkbackcolor;
+		border : 1px solid @back;
+		color : @colorwhite;
+	}
 	footer{
 		margin-top : 15px;
-		border-top:1px dashed @darkcolor;
 		padding: 15px 0;
 	}
 	*{

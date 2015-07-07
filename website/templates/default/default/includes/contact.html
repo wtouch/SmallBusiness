@@ -5,7 +5,7 @@
 		<h4>{{ data.business_name }}</h4>
 		<hr>
 		{%if data.contact_profile.telephone%}
-			<p><b>Telephone : </b><br>{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}
+			<p><b>Telephone : </b><br>{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}</p>
 			<hr>
 		{% endif %}
 		<p><b>Mobile : </b><br>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? ", " ~ data.contact_profile.alternate_mobile}}
@@ -14,7 +14,7 @@
 		<b>Email Address : </b><br><a class="email" href="#">{{data.contact_profile.email}}</a>
 		{%if data.contact_profile.alternate_email%}
 			<br><a class="email" href="#">{{data.contact_profile.alternate_email}}</a>
-		{% endif %}</p>
+		{% endif %}
 	</div>
 </div>
 {% endautoescape %}

@@ -8,10 +8,10 @@ jQuery(document).ready(function() {
 $(document).ready(function(){
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideWidth: 250,
+		slideWidth: 225,
 		minSlides:3,
 		maxSlides: 3,
-		slideMargin: 25,
+		slideMargin: 5,
 		auto: true, 
 		autoDirection:'next',
 		moveSlides: 2,
@@ -28,7 +28,7 @@ $(document).ready(function(){
 		slideWidth: 600,
 		minSlides: 3,
 		maxSlides:3,
-		slideMargin: 15,
+		slideMargin: 5,
 		auto: true, 
 		autoDirection:'next',
 		moveSlides: 2,
