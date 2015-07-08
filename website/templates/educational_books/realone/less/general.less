@@ -10,8 +10,7 @@
 	}
 	&.sidemenu{
 		border:1px solid @darkbackcolor;
-		padding:10px;
-		
+		padding: 15px 10px 0px;
 		ul{
 			padding : 0;
 			list-style : none;
@@ -21,8 +20,8 @@
 		}
 		a{
 			display : inline-block;
-			height : 100px;
-			width : 100%;
+			height : 90px;
+			width : 186px;
 			background-size:100% 100%;
 			background-repeat : no-repeat;
 			background-position: center; 
@@ -92,6 +91,9 @@
 			}
 			.readmore{
 				margin-top : 10px;
+				.btn-info:hover{
+					padding : 6px 40px;
+				}
 			}
 		}
 	}
@@ -113,7 +115,8 @@
 	.testimonial{
 		blockquote{
 			font-size : inherit;
-			border-left: none;
+			border-left: none; 
+			padding-left : 15px;
 			footer{
 				background:none;
 				padding : 0px;
@@ -125,6 +128,16 @@
 					font-size : 17px;
 					color : @color;
 				}
+			}
+			&::before{
+				content : '\201c';
+				position : absolute;
+				display : inline-block;
+				top : 5px;
+				left : 0;
+				line-height : 40px;
+				font-family : Times New Roman,Serif;
+				font-size : 55px;
 			}
 		}
 	}
@@ -149,6 +162,11 @@
 		h4{
 			margin-top : 0px;
 			margin-bottom : 0px;
+		}
+	}
+	.searchProp{
+		.btn-info:hover{
+			padding : 6px 40px;
 		}
 	}
 	//gallery

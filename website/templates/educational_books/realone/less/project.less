@@ -173,6 +173,7 @@
 //css for single project & project list
 	.projlist{
 		padding:10px;
+		border : 1px solid @darkbackcolor;
 		.project{
 			.thumbnail{
 				background : none;
@@ -180,11 +181,16 @@
 				padding-top : 15px;
 				border-color : @darkbackcolor;
 				.projectimg{
-					width : 190px;
 					height : 148px;
 					overflow : hidden;
 					img{
 						min-height : 148px;
+						max-width : 95%;
+						border : 2px solid transparent;
+						padding : 4px;
+						&:hover{
+							border : 2px solid @back;
+						}
 					}
 				}
 				
@@ -200,9 +206,11 @@
 						background : linear-gradient(@back, @color);
 						color : @lightcolor;
 						padding :6px 12px;
+						border-radius : 4px;
 						&:hover, &:hover{
 							background : linear-gradient(@darkcolor, @darkbackcolor);
 							color : @colorwhite;
+							padding :6px 40px;
 						}
 					}
 				}
