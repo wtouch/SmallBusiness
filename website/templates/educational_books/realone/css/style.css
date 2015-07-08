@@ -38,7 +38,7 @@
 .sidebarModule.sidemenu a.area_converter {
   background-image: url('../img/area-converter.png');
 }
-.sidebarModule.sidemenu a.emi-calculator {
+.sidebarModule.sidemenu a.emi_calculator {
   background-image: url('../img/emi-calculator.png');
 }
 .sidebarModule.sidemenu a.post_your_property {
@@ -371,10 +371,15 @@
   color: #ccffcc;
   padding: 4px;
   border: none;
+  border-radius: 4px;
 }
 .bxslider li a h4:hover {
   background: linear-gradient(#e2271f, #8c241f);
   color: #ffffff;
+}
+.bxslider li p {
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 .homeproject {
   margin-top: 10px;
@@ -392,81 +397,78 @@
   box-shadow: 0 0 15px;
   border-radius: 50%;
 }
+.homeproject .projectnav,
 .homeproject .projsnap {
   position: absolute;
-  background-color: #49741e;
-  border: 1px solid #e2271f;
+  background: linear-gradient(#49741e, #264903);
   height: 320px;
   width: 300px;
-  top: 25px;
+  top: 100px;
   box-sizing: border-box;
   border: 5px solid #ffffff;
-  right: 0;
-  padding-left: 90px !important;
-  padding-top: 5px !important;
 }
 .homeproject .projectnav {
   padding: 5px;
   left: 10px;
+  left: 0;
 }
-.homeproject .projectnav .nav-pills > li {
-  float: left;
-  border: 2px solid #fff;
-  background-color: #49741e;
-  border-radius: 50%;
-  height: 75px;
-  padding: 10px;
-  margin-right: 10px;
-}
-.homeproject .projectnav .nav-pills > li + li {
+.homeproject .projectnav .nav-stacked > li + li {
   margin-top: 10px;
 }
-.homeproject .projectnav .nav-pills > li > a,
-.homeproject .projectnav .nav-pills > li > a:focus {
-  color: #264903;
+.homeproject .projectnav .nav-stacked > li > a,
+.homeproject .projectnav .nav-stacked > li > a:focus {
+  color: #ccffcc;
   padding: 10px 15px;
 }
-.homeproject .projectnav .nav-pills > li.active > a,
-.homeproject .projectnav .nav-pills > li.active:hover > a,
-.homeproject .projectnav .nav-pills > li.active > a:focus,
-.homeproject .projectnav .nav-pills > li:hover > a,
-.homeproject .projectnav .nav-pills > li:hover > a:focus,
-.homeproject .projectnav .nav-pills > li > a:hover,
-.homeproject .projectnav .nav-pills > li > a:focus {
+.homeproject .projectnav .nav-stacked > li.active > a,
+.homeproject .projectnav .nav-stacked > li.active:hover > a,
+.homeproject .projectnav .nav-stacked > li.active > a:focus,
+.homeproject .projectnav .nav-stacked > li:hover > a,
+.homeproject .projectnav .nav-stacked > li:hover > a:focus,
+.homeproject .projectnav .nav-stacked > li > a:hover,
+.homeproject .projectnav .nav-stacked > li > a:focus {
   text-decoration: none;
-  background-color: #e2271f;
+  background: linear-gradient(#e2271f, #8c241f);
   color: #ffffff;
+  transform: translateX(-50px);
+  width: 315px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 .homeproject .projsnap {
+  right: 0;
+  padding-left: 90px !important;
+  padding-top: 5px !important;
   padding: 5px 15px;
   right: 10px;
+  text-align: center;
 }
 .homeproject .projsnap img {
   height: 110px;
   margin-top: 10px;
   margin-bottom: 10px;
-  border: 1px solid #264903;
+  border: 2px solid #ccffcc;
   border-radius: 5px;
   padding: 4px;
 }
 .homeproject .projsnap p {
-  color: #264903;
+  color: #ccffcc;
 }
 .homeproject .projsnap .viewproperty a {
-  color: #264903;
-  font: 16px 'Alex Brush', cursive;
+  color: #ccffcc;
 }
 .homeproject .projsnap .viewproperty a:hover {
-  color: #264903;
+  color: #ffffff;
+  text-decoration: underline;
 }
 .homeproject #carousel .carousel-inner .item {
-  height: 350px;
+  height: 500px;
   overflow: hidden;
-  border-radius: 50%;
 }
 .homeproject #carousel .carousel-inner .item > img {
   width: auto;
-  min-height: 350px;
+  min-height: 500px;
+  border-radius: 50%;
 }
 .homeproject #carousel a.left.carousel-control {
   left: 40px;
@@ -516,6 +518,7 @@
   padding: 10px;
 }
 .projlist .project .thumbnail {
+  background: none;
   height: 385px;
   padding-top: 15px;
   border-color: #8c241f;
@@ -858,6 +861,12 @@ hr {
 }
 .sidebarModule h4 {
   border: none;
+}
+.panel {
+  background: transparent;
+}
+.panel-default {
+  border: 1px solid #8c241f;
 }
 .pagination > .active > a,
 .pagination > .active > span,

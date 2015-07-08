@@ -22,11 +22,16 @@
 				color : @lightcolor;
 				padding: 4px;
 				border : none;
+				border-radius : 4px;
 				&:hover{
 					background : linear-gradient(@darkcolor, @darkbackcolor);
 					color : @colorwhite;
 				}
 			}
+		}
+		p{
+			margin-bottom : 0px;
+			margin-top : 0px;
 		}
 	}
 }
@@ -46,66 +51,64 @@
 		box-shadow: 0 0 15px;
 		border-radius : 50%;
 	}
-	.projsnap {
+	.projectnav, .projsnap {
 		position : absolute;
-		background-color : @back;
-		border : 1px solid @darkcolor;
+		background : linear-gradient(@back, @color);
 		height: 320px;
 		width : 300px;
-		top : 25px;
+		top : 100px;
 		box-sizing : border-box;
 		border : 5px solid @colorwhite;
-		right : 0;
-		padding-left: 90px !important;
-		padding-top: 5px !important;
 	}
 	.projectnav{
 		padding : 5px;
 		left : 10px;
-		.nav-pills{
+		left : 0;
+		.nav-stacked{
 			>li{
-				float: left;
-				border: 2px solid #fff;
-				background-color: @back;
-				border-radius: 50%;
-				height: 75px;
-				padding: 10px;
-				margin-right: 10px;
 				+li {
 					margin-top: 10px;
 				}
 				>a, > a:focus{
-					color : @color;
+					color : @lightcolor;
 					padding: 10px 15px;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration : none;
-					background-color: @darkcolor;
+					background : linear-gradient(@darkcolor, @darkbackcolor);
 					color : @colorwhite;
+					transform: translateX(-50px);
+					width: 315px;
+					border-top-left-radius: 20px;
+					border-bottom-left-radius: 20px;
 				}
 			}
 		}
 	}
 	.projsnap{
+		right : 0;
+		padding-left: 90px !important;
+		padding-top: 5px !important;
 		padding : 5px 15px;
 		right : 10px;
+		text-align : center;
 		img{
 			height : 110px;
 			margin-top: 10px;
 			margin-bottom: 10px;
-			border : 1px solid @color;
+			border : 2px solid @lightcolor;
 			border-radius : 5px;
 			padding :4px;
 		}
 		p{
-			color : @color;
+			color : @lightcolor;
 		}
 		.viewproperty{
 			a{
-				color : @color;
-				font: 16px 'Alex Brush', cursive;
+				color : @lightcolor;
 				&:hover{
-					color : @color;
+					color : @colorwhite;
+					text-decoration : underline;
 				}
 			}
 		}
@@ -113,12 +116,12 @@
 	#carousel {
 		.carousel-inner {
 			.item{
-				height: 350px;
+				height: 500px;
 				overflow: hidden;
-				border-radius : 50%;
 				>img{
 					width : auto;
-					min-height : 350px;
+					min-height : 500px;
+					border-radius : 50%;
 				}
 			}
 		}
@@ -172,6 +175,7 @@
 		padding:10px;
 		.project{
 			.thumbnail{
+				background : none;
 				height:385px;
 				padding-top : 15px;
 				border-color : @darkbackcolor;
