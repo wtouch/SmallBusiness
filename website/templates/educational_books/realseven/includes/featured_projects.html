@@ -1,0 +1,91 @@
+{% autoescape false %}
+{% if featured_projects %}
+
+<div class="content-box">
+
+	<h2 id="ribbon-container">
+
+		<span id="ribbon">Featured Project</span>
+
+	</h2>
+
+	<div class="row services">
+
+		<div class="carousel slide" id="featuredProject">
+
+			<a class="left carousel-control" href="#featuredProject" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+
+			<a class="right carousel-control" href="#featuredProject" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+
+			<div class="carousel-inner">
+
+		{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_projects if break == 0 %}
+				
+
+				<div class="item {{ (i == 0) ? 'active' }}">
+
+					<div class="col-sm-3 text-center">
+
+						<div class="shadow">
+
+							<a href="#">
+
+								<div class="imgborder">
+
+									
+									<img src="{{x.project_images.0.file_relative_path}}" alt="" style="max-width:93%" />
+								</div>
+
+							</a>
+
+							<div class="proj-title">
+
+								<p>
+
+                                {{x.title}}
+
+                              </p>
+
+								<small>
+									Location : {{x.location}}
+									Type : {{x.type}}
+                                 
+
+								 {{x.property_info.buildup_area}}{{x.property_info.build_unit}}
+
+								</small>
+
+							</div>
+
+                          <div class="view-link">
+
+                            <a class="btn " href="projects/{{x.title}}/{{x.id}}" >Read more</a>
+							
+                          </div>
+
+							
+
+						</div>
+
+					</div>
+
+						
+
+				</div>
+
+				{% set i = (i + 1) %}
+				{% if i == 4 %}
+					{% set break = 1 %}
+				{% endif %}
+			{% endfor %}
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+{% endif %}
+{% endautoescape %}

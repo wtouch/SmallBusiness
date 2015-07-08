@@ -1,0 +1,59 @@
+{% autoescape false %}
+{% if featured_products | length >= 2 %}
+<div class="content-box">
+	<h2>
+		Featured Services
+	</h2>
+	<div class="row services"><!-- This is project holder row -->
+
+		<div class="carousel slide" id="featuredService">
+
+			<a class="left carousel-control" href="#featuredService" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+
+			<a class="right carousel-control" href="#featuredService" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+
+			<div class="carousel-inner">
+
+       {% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_products if break == 0 %}
+				{% if x.type == 'service' %}
+				<div class="item {{ (i == 0) ? 'active' }}">
+					<div class="col-md-3 text-center">
+						<div class="shadow">
+							<a href="#">
+								<div class="imgborder">
+									<img class="img-responsive" src="{{x.product_image.0.file_relative_path}}"  style="max-width:96%" />
+								</div>
+							</a>
+							<div class="proj-title">
+
+								<h4>{{x.product_service_name}}</h4>
+
+								<small>{{ x.description }}</small>
+							</div>
+						</div>
+						<div class="view-link">
+
+							<a class="btn" href="services/{{x.product_service_name}}/{{x.id}}">Read More</a>
+
+						</div>
+					</div>	
+				</div>
+				{% set i = (i + 1) %}
+				{% if i == 4 %}
+					{% set break = 1 %}
+				{% endif %}
+				{% endif %}
+			{% endfor %}
+
+				
+
+			</div>
+
+		</div>
+
+	</div>
+	</div>
+	
+{% endif %}
+{% endautoescape %}
