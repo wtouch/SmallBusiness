@@ -10,9 +10,9 @@
 	<form name="custompageForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="custompageForm.$valid" novalidate="novalidate"> 
 		<div class="form-group">
 			<div class="col-sm-9 col-sm-offset-3">
-				<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(custompage, businessData.custom_details, 'custompage')" ng-disabled="custompageForm.$invalid">Add Custom Details</button>
+				<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click=	"addToObject(custompage, businessData.custom_details, 'custompage')" ng-disabled="custompageForm.$invalid">Add Custom Details</button>
 				
-				<button ng-if="infra && headingDisabled" class="btn btn-default btn-info" ng-click="addToObject(custompage, businessData.custom_details, 'custompage')">Edit Details</button>
+				<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject(edit, businessData.custom_details, 'custompage')">Edit Details</button>
 				
 				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')">
 					<span ng-show="infra">Cancel</span>
@@ -53,32 +53,34 @@
 		</div>
 	</form>
 	<div class="row">
-		<div class="col-sm-12">
-			<table class="table table-bordered table-responsive " ng-if="businessData.custom_details">
-				<tr>
-					<th>Custom Detail Heading</th>
-					<th>Remove</th>
-				</tr>
-				<tr ng-repeat="(key, value) in businessData.custom_details">
-					<td>
+		<div class="col-sm-12" ng-if="businessData.custom_details.length>=1">
+			<div class="panel panel-default">
+			<h5 class="text-center border-bottom"><b>Infrastucture</b></h5>
+			<div as-sortable="dragControlListeners" ng-model="businessData.custom_details">
+				<div ng-repeat="value in businessData.custom_details" as-sortable-item>
+					<div class="clearfix border-bottom">
 						<div class="clearfix">
-							<span class="pull-left glyphicon glyphicon glyphicon-move"></span>
-							<p>{{key}}
+							<span as-sortable-item-handle class="pull-left glyphicon glyphicon glyphicon-move"></span>
+						<div class="pull-right">
+							<div class="btn-group">
 							<button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed" tooltip="View Details">
 							<span class="caret"></span></button>
-							</p>
+							</div>
+							<div class="btn-group">
+							<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(value,'custompage'); showForm('infra')" tooltip="Edit Details"></button>
+							</div>
+							<div class="btn-group">
+							<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject($index,businessData.custom_details)" tooltip="Remove"></button>	
+							</div>
 						</div>
+						<p>{{value.heading}}</p>
 						<div class="well well-lg clearfix" collapse="isCollapsed" as-sortable-item>
 							<div><p ng-bind-html="value.description" ></p>
 							</div> 
 						</div>
-					</td>
-					<td class="col-sm-2">
-						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.custom_details, custompage); showForm('infra')" tooltip="Edit Details"></button>
-						
-						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.custom_details)" tooltip="Remove"></button>			
-					</td>
-				</tr>
-			</table>
+					</div>
+				</div>
+				</div>
+			</div>
 		</div>
 	</div>

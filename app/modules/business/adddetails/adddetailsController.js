@@ -5,15 +5,24 @@ define(['app'], function (app) {
 
 	var adddetailsController = function ($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope, $cookies, $cookieStore,$notification)
 	{ 
+		$scope.businessData = {
+			infrastructure : [],
+			testimonials : [],
+			custom_details : [],
+			news_coverage : [],
+			gallery : [],
+			job_careers : [],
+			
+		};
 		dataService.get("getsingle/business/"+$routeParams.id)
 		.then(function(response) {
 			$scope.businessData = dataService.parse(response.data);
-			if($scope.businessData.infrastructure == "") $scope.businessData.infrastructure = {};
-			if($scope.businessData.testimonials == "") $scope.businessData.testimonials = {};
-			if($scope.businessData.custom_details == "") $scope.businessData.custom_details = {};
-			if($scope.businessData.news_coverage == "") $scope.businessData.news_coverage = {};
-			if($scope.businessData.gallery == "") $scope.businessData.gallery = {};
-			if($scope.businessData.job_careers == "") $scope.businessData.job_careers = {};
+			if($scope.businessData.infrastructure == "") $scope.businessData.infrastructure = [];
+			if($scope.businessData.testimonials == "") $scope.businessData.testimonials = [];
+			if($scope.businessData.custom_details == "") $scope.businessData.custom_details = [];
+			if($scope.businessData.news_coverage == "") $scope.businessData.news_coverage = [];
+			if($scope.businessData.gallery == "") $scope.businessData.gallery = [];
+			if($scope.businessData.job_careers == "") $scope.businessData.job_careers = [];
 		});	
 		
 		$scope.maxSize = 5;
@@ -25,12 +34,12 @@ define(['app'], function (app) {
 		$scope.business_id = $routeParams.id;
 		$scope.userinfo = $scope.userInfo; // this is for uploading credentials
 		$scope.path = "/business"; // path to store images on server
-		$scope.infrastructure = { desc : { }};
-		$scope.custompage = { desc : { }};
-		$scope.testimonials = { desc : { }};
-		$scope.news_coverage = { desc : {  }};
-		$scope.job_careers = { desc : {  }};
-		$scope.gallery = { desc : {  }};
+		$scope.infrastructure = {};
+		$scope.custompage = {};
+		$scope.testimonials = {};
+		$scope.news_coverage = {};
+		$scope.job_careers = {};
+		$scope.gallery = {};
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		$scope.isCollapsed = true;
@@ -41,7 +50,7 @@ define(['app'], function (app) {
 		});
 		
 		$scope.dragControlListeners = {
-			accept: function (sourceItemHandleScope, destSortableScope) {
+			accept : function (sourceItemHandleScope, destSortableScope) {
 				return sourceItemHandleScope.itemScope.sortableScope.$id === destSortableScope.$id;
 			}
 		};
@@ -70,43 +79,47 @@ define(['app'], function (app) {
 		$scope.showFormPart = function(formPart){
 			$cookieStore.put("bizFormPart", formPart);
 			$scope.formPart = $cookieStore.get("bizFormPart");
-			$scope.headingDisabled = false;
+			$scope.edit = false;
 			$scope.infra = false;
 		};
 		
 		$scope.addToObject = function(data, object, resetObj){
-			var dtlObj = JSON.stringify(data.desc);
-			object[data.heading] = JSON.parse(dtlObj);
-			$scope.headingDisabled = false;
-			$scope.infra = false;
-			$scope[resetObj] = { desc : { }};
+			
+			if(data == "edit"){
+				$scope.infra = false;
+				$scope.edit = false;
+				$scope[resetObj] = {};
+			}else{
+				var dtlObj = JSON.stringify(data);
+				console.log(data);
+				console.log(object);
+				object.push(JSON.parse(dtlObj));
+				$scope.infra = false;
+				$scope[resetObj] = {};
+			}
 		}
 		
-		$scope.removeObject = function(key, object){
-			$scope.imgRemoved = true;
-			delete object[key];
+		$scope.removeObject = function(index, object){
+			object.splice(index, 1);
 		}
-		$scope.editObject = function(key, object, FormObj){
-			$scope.headingDisabled = true;
-			$scope.imgRemoved = true;
-			var dtlObj = JSON.stringify(object[key]);
-			FormObj['desc'] = JSON.parse(dtlObj);
-			FormObj['heading'] = key;
+		$scope.editObject = function(object, FormObj){
+			$scope.edit = true;
+			$scope[FormObj] = object;
 		}
 		
 		$scope.showForm = function(obj, resetObj){
 			$scope[obj] = !$scope[obj];
 			if(resetObj){
-				$scope.headingDisabled = false;
+				$scope.edit = false;
 				$scope.imgRemoved = true;
-				$scope[resetObj] = { desc : {}};
+				$scope[resetObj] = {};
 			}
 		}
 		
 		$scope.upload = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
-						$scope.infrastructure.desc.image = data.data;
+						$scope.infrastructure.image = data.data;
 					}else{
 						$notification.error("Upload Image", data.message);
 					}
@@ -116,7 +129,7 @@ define(['app'], function (app) {
 		$scope.uploadtesti = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
-						$scope.testimonials.desc.image = data.data;
+						$scope.testimonials.image = data.data;
 					}else{
 						$notification.error("Upload Image", data.message);
 					}
@@ -126,7 +139,7 @@ define(['app'], function (app) {
 		$scope.uploadnews = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
-						$scope.news_coverage.desc.image = data.data;
+						$scope.news_coverage.image = data.data;
 					}else{
 						
 						$notification.error("Upload Image", data.message);
@@ -136,7 +149,7 @@ define(['app'], function (app) {
 		$scope.uploadgallery = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
-						$scope.gallery.desc.image = data.data;
+						$scope.gallery.image = data.data;
 					}else{
 						$notification.error("Upload Image", data.message);
 					}

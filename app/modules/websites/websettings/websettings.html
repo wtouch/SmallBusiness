@@ -13,6 +13,10 @@
 				<h3 class="border-bottom bottomspace text-center">Website Setting</h3>
 				<h4 class="text-center">{{website.domain_name}}</h4>
 				<div class="col-sm-12 bottomspace text-right">
+				
+					<a href="{{'http://'+website.domain_name}}" tooltip="Preview Website" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span>
+					</a>		
+				
 				<button type="submit" class="btn btn-primary" ng-disabled="websettingsForm.$dirty && websettingsForm.$invalid" ng-click="editWebsitedetails(websetting)">Update</button>
 				<a href="#/dashboard/websites/websiteslist" type="button" class="btn btn-danger">Cancel</a>
 				</div>

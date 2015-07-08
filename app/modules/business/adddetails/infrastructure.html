@@ -10,32 +10,32 @@
 	<form name="infrastructureForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="infrastructureForm.$valid" novalidate="novalidate"> 
 	<div class="form-group">
 		<div class="col-sm-9 col-sm-offset-3">
-			<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(infrastructure, businessData.infrastructure, 'infrastructure')" ng-disabled="infrastructureForm.$invalid">Add Infrastucture</button>
+			<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click=	"addToObject(infrastructure, businessData.infrastructure, 'infrastructure')" ng-disabled="infrastructureForm.$invalid">Add Infrastucture</button>
 			
-			<button ng-if="infra && headingDisabled" class="btn btn-default btn-info" ng-click="addToObject(infrastructure, businessData.infrastructure, 'infrastructure')" title="Add Infrastucture">Edit Details</button>
+			<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject('edit', businessData.infrastructure, 'infrastructure')" title="Edit Infrastucture">Edit Details</button>
 			
 			<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')">
 				<span ng-show="infra">Cancel</span>
 			</button>
 		</div>
 	</div>
-	
+	{{infrastructure}}
 	<div class="form-group">
 		<label for="infra_image" class="col-sm-3 control-label">Add Images</label>
 		<div class="col-sm-5">
 			<input type="file" id="infra_image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="upload(infra_image, businessData.user_id + path,userInfo, infrastructure.image)" ng-model="infra_image">
-			<input type="hidden" ng-model="infrastructure.desc.image">
+			<input type="hidden" ng-model="infrastructure.image">
 		</div>
 		
-		<div class="col-sm-4" ng-if="infrastructure.desc.image">
-			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + infrastructure.desc.image.file_relative_path}}" width="150px" />
+		<div class="col-sm-4" ng-if="infrastructure.image">
+			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + infrastructure.image.file_relative_path}}" width="150px" />
 		</div>
 	</div>
 	
 	<div class="form-group">						 
 		<div class="col-sm-9 col-sm-offset-3">
-			<span class="thumbs" ng-if="infrastructure.desc.image">
-				<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + '/' + infrastructure.desc.image.file_relative_path}}" ng-click="infrastructure.imgkey = key; "/>
+			<span class="thumbs" ng-if="infrastructure.image">
+				<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + '/' + infrastructure.image.file_relative_path}}" ng-click="infrastructure.imgkey = key; "/>
 				<span class="close" ng-click="removeImg(key, infrastructure.infra_image)">X</span>
 			</span>
 		</div>
@@ -44,7 +44,7 @@
 	<div class="form-group">
 		<label for="infraHeading" class="col-sm-3 control-label" name="infraHeading" >Infrastucture Heading*</label>
 		<div class="col-sm-9">
-			<select class="form-control" name="infraHeading" id="infraHeading"  ng-model="infrastructure.heading" required ng-options="item as item for item in biz.infrastructure" ng-disabled="headingDisabled">
+			<select class="form-control" name="infraHeading" id="infraHeading"  ng-model="infrastructure.heading" required ng-options="item as item for item in biz.infrastructure">
 				<option value="">Select Heading</option>					
 			</select>
 			
@@ -57,9 +57,9 @@
 	<div class="form-group">
 		<label for="infraDesc" class="col-sm-3 control-label">Infrastucture Description*</label>
 		<div class="col-sm-9">
-			<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastructure.desc.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
+			<textarea type="text" class="form-control" id="infraDesc" name="infraDesc" ng-model="infrastructure.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Enter Infrastucture Description" ui-tinymce required></textarea>
 			<p ng-hide="infrastructureForm.infraDesc.$error.maxlength">
-				{{ 5000- infrastructure.desc.description.length + " Chars left" }}	
+				{{ 5000- infrastructure.description.length + " Chars left" }}	
 			</p>
 			
 			<span class="help-block" ng-show="infrastructureForm.infraDesc.$dirty && infrastructureForm.infraDesc.$invalid">
@@ -77,34 +77,75 @@
 	</div>
 	</form>
 	<div class="row">
-		<div class="col-sm-12" ng-if="businessData.infrastructure">
-			<table class="table table-bordered table-responsive">
+		<div class="col-sm-12" ng-if="businessData.infrastructure.length >= 1">
+			<div class="panel panel-default">
+				<h5 class="text-center border-bottom"><b>Infrastucture</b></h5>
+				<div as-sortable="dragControlListeners" ng-model="businessData.infrastructure">
+					<div ng-repeat="value in businessData.infrastructure" as-sortable-item>
+						<div class="clearfix border-bottom">
+								<span as-sortable-item-handle class="pull-left glyphicon glyphicon-move"></span>
+								<div class="pull-right">
+								<div class="btn-group">
+								<button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed" tooltip="View Details">
+									<span class="caret"></span></button>
+								</div>
+								<div class="btn-group">
+								<button class="btn btn-success glyphicon glyphicon-pencil pull-right one" ng-click="editObject(value, 'infrastructure'); showForm('infra')" tooltip="Edit Details"></button>
+								</div>
+								<div class="btn-group">
+								<button class="btn btn-warning glyphicon glyphicon-trash pull-right one" ng-click="removeObject($index,businessData.infrastructure)" tooltip="Remove"></button>	
+								</div>
+								</div>
+								<p>{{value.heading}}
+								</p>
+						</div>
+							<div collapse="isCollapsed">
+								<div class="well well-lg clearfix">
+								<img class="pull-right" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
+								<p ng-bind-html="value.description"></p>
+								</div> 
+							</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- <table class="table table-bordered table-responsive">
 				<tr>
 					<th>Infrastucture Heading</th>
 					<th>Remove </th>
 				</tr>
-				<tr ng-repeat="(key, value) in businessData.infrastructure">
-				<td>
-				<span class="pull-left glyphicon glyphicon glyphicon-move"></span>
-						<p>{{key}}
-						<button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed" tooltip="View Details">
-						<span class="caret"></span></button>
-						</p>
-						<div collapse="isCollapsed">
-							<div class="well well-lg clearfix">
-							<img class="pull-right" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
-							<p ng-bind-html="value.description"></p>
-							</div> 
-						</div>
-				</td>
-				<td class="col-sm-2">
-					<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.infrastructure, infrastructure); showForm('infra')" tooltip="Edit Details"></button>
-					
-					<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.infrastructure)" tooltip="Remove"></button>			
-				</td>
-				</tr>
-				
-			</table>
-		</div>
-	</div>
-	
+				<tbody as-sortable="dragControlListeners" ng-model="businessData.infrastructure">
+					<tr ng-repeat="value in businessData.infrastructure" as-sortable-item>
+						<td>
+							<div class="clearfix">
+								<span as-sortable-item-handle class="pull-left glyphicon glyphicon-move"></span>
+								<button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed" tooltip="View Details">
+									<span class="caret"></span></button>
+								<p>{{value.heading}}
+								</p>
+							</div>
+							<div collapse="isCollapsed">
+								<div class="well well-lg clearfix">
+								<img class="pull-right" ng-src="{{appConfig.assetPath + '/' + value.image.file_relative_path}}" width="150px" />
+								<p ng-bind-html="value.description"></p>
+								</div> 
+							</div>
+						</td>
+						<td class="col-sm-2">
+							<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(value, 'infrastructure'); showForm('infra')" tooltip="Edit Details"></button>
+							
+							<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject($index,businessData.infrastructure)" tooltip="Remove"></button>			
+						</td>
+					</tr>
+				</tbody>
+			</table> -->

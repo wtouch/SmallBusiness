@@ -8,19 +8,20 @@
 </div>
 
 	<form name="testimonialsForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="jobsandcareersForm.$valid" novalidate="novalidate">
-		<div class="form-group">
+		<div class="form-group">{{testimonials}}
 			<div class="col-sm-offset-3 col-sm-9">
-				<button ng-if="infra && !headingDisabled" class="btn btn-default btn-primary" ng-click=	"addToObject(testimonials, businessData.testimonials, 'testimonials')" ng-disabled="infrastructureForm.$invalid">Add Testimonials</button>
-				<button ng-if="infra && headingDisabled" class="btn btn-default btn-info" ng-click="addToObject(testimonials, businessData.testimonials, 'testimonials')" title="Edit Testimonials">Edit Details</button>
-				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')"><span ng-show="infra">Cancel</span></button>
-
+				<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click=	"addToObject(testimonials, businessData.testimonials, 'testimonials')" ng-disabled="testimonialsForm.$invalid">Add Testimonials</button> 
+							
+				<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject(edit, businessData.testimonials, 'testimonials')" title="Edit Testimonials">Edit Details</button>
+				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')"><span ng-show="infra">Cancel</span></button> 
+				
 			</div>
 		</div>
 		<div class="form-group">
 			<label  for="date" class="col-sm-3 control-label">Date*</label>
 			<div class="col-sm-9">
 				<p class="input-group">
-			  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="testimonials.desc.date" is-open="testimonialdate" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'testimonialdate')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" />
+			  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="testimonials.date" is-open="testimonialdate" min-date="minDate" max-date="'2016-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'testimonialdate')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" />
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="open($event, 'testimonialdate')">
 						<i class="glyphicon glyphicon-calendar"></i></button>
@@ -39,21 +40,21 @@
 		</div>
 		
 	<div class="form-group">
-		<label for="testimage" class="col-sm-3 control-label">Add Images</label>
+		<label for="image" class="col-sm-3 control-label">Add Images</label>
 		<div class="col-sm-5">
-			<input type="file" id="testimage" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="uploadtesti(testimage,businessData.user_id + path,userInfo, testimonials.image)" ng-model="testimage">
-			<input type="hidden" ng-model="testimonials.desc.image">
+			<input type="file" id="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="uploadtesti(image,businessData.user_id + path,userInfo, testimonials.image)" ng-model="image">
+			<input type="hidden" ng-model="testimonials.image">
 		</div>
 		
-		<div class="col-sm-4" ng-if="testimonials.desc.image">
-			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + testimonials.desc.image.file_relative_path}}" width="150px" />
+		<div class="col-sm-4" ng-if="testimonials.image">
+			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + testimonials.image.file_relative_path}}" width="150px" />
 		</div>
 	</div>
 	
 	<div class="form-group">						 
 		<div class="col-sm-9 col-sm-offset-3">
-			<span class="thumbs" ng-if="testimonials.desc.image">
-				<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + '/' + testimonials.desc.image.file_relative_path}}" ng-click="testimonials.imgkey = key; "/>
+			<span class="thumbs" ng-if="testimonials.image">
+				<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + '/' + testimonials.image.file_relative_path}}" ng-click="testimonials.imgkey = key; "/>
 				<span class="close" ng-click="removeImg(key, testimonials.image)">X</span>
 			</span>
 		</div>
@@ -62,7 +63,7 @@
 		<div class="form-group">	
 			<label  for="senderemail" class="col-sm-3 control-label">Email*</label>	
 			<div class="col-sm-9">
-				<input type="Email" class="form-control" id="senderemail" ng-model="testimonials.desc.email" name="senderemail" placeholder="Enter Email" required >
+				<input type="Email" class="form-control" id="senderemail" ng-model="testimonials.email" name="senderemail" placeholder="Enter Email" required >
 				<span class="help-block" ng-show="testimonialsForm.senderemail.$dirty && testimonialsForm.senderemail.$invalid">
 				<span ng-show="testimonialsForm.senderemail.$error.required" class="text-danger">Required Field.</span>
 				<span ng-show="testimonialsForm.senderemail.$error.email" class="text-danger">Invalid Email address.</span>
@@ -73,9 +74,9 @@
 		<div class="form-group">
 			<label for="address" class="col-sm-3 control-label">Address*</label>
 				<div class="col-sm-9">
-					<textarea type="text" class="form-control" id="address" name="address" ng-model="testimonials.desc.address" cols="30" rows="3" ng-maxlength="256" placeholder="Enter address"  required></textarea>
+					<textarea type="text" class="form-control" id="address" name="address" ng-model="testimonials.address" cols="30" rows="3" ng-maxlength="256" placeholder="Enter address"  required></textarea>
 					<p ng-hide="testimonialsForm.address.$error.maxlength">
-							{{ 256 - testimonials.desc.address.length + " Chars left" }}	</p>
+							{{ 256 - testimonials.address.length + " Chars left" }}	</p>
 						<span class="help-block" ng-show="testimonialsForm.address.$dirty && testimonialsForm.address.$invalid">
 							<span ng-show="testimonialsForm.address.$error.maxlength"class="text-danger">Sorry You are Exceeding the Limit</span>
 							<span class="text-danger" ng-show="testimonialsForm.address.$error.required">Required Field.</span>
@@ -86,7 +87,7 @@
 		<div class="form-group">
 			<label for="phone" class="col-sm-3 control-label">Phone*</label>
 			<div class="col-sm-9">
-				<input type="text" id="phone" name="phone" class="form-control" ng-model="testimonials.desc.phone" placeholder="Your Contact No" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="14" required>
+				<input type="text" id="phone" name="phone" class="form-control" ng-model="testimonials.phone" placeholder="Your Contact No" ng-pattern="/\d{5}([- ]*)\d{6}/" maxlength="14" required>
 				<span class="help-block" ng-show="testimonialsForm.phone.$dirty && testimonialsForm.phone.$invalid">
 					<span ng-show="testimonialsForm.phone.$error.pattern && (testimonialsForm.phone.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
 				</span>
@@ -96,8 +97,8 @@
 		<div class="form-group">
 			<label for="test_Description" class="col-sm-3 control-label">Testimonial Description*</label>
 			<div class="col-sm-9">
-				<textarea type="text" class="form-control" id="test_Description" name="test_Description" ng-model="testimonials.desc.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
-				<p ng-hide="testimonialsForm.test_Description.$error.maxlength">{{ 5000 - testimonials.desc.description.length + " Chars left" }}</p>
+				<textarea type="text" class="form-control" id="test_Description" name="test_Description" ng-model="testimonials.description" cols="30" rows="4" ng-maxlength="5000" placeholder="Enter Testimonial Description" ui-tinymce required></textarea>
+				<p ng-hide="testimonialsForm.test_Description.$error.maxlength">{{ 5000 - testimonials.description.length + " Chars left" }}</p>
 				<span class="help-block" ng-show="testimonialsForm.test_Description.$dirty && testimonialsForm.test_Description.$invalid">
 					<span class="text-danger" ng-show="testimonialsForm.test_Description.$error.maxlength">Sorry You are Exceeding the Limit</span>
 					<span ng-show="testimonialsForm.test_Description.$error.required" class="text-danger">Required Field.</span>
@@ -107,17 +108,70 @@
 	</form>
 	
 	<div class="row">
-		<div class="col-sm-12">
-			<div class="table-responsive">
-				<table class="table table-bordered" ng-if="businessData.testimonials">
+		<div class="col-sm-12" ng-if="businessData.testimonials.length>=1">
+				<div class="panel panel-default">
+					<!-- <tr>
+						<th>Testimonial Title</th>
+						<th>Remove </th>
+					</tr> -->
+					<h5 class="text-center border-bottom"><b>Testimonials</b></h5>
+					<div as-sortable="dragControlListeners" ng-model="businessData.testimonials">
+					<div ng-repeat="value in businessData.testimonials" as-sortable-item>
+					<div class="clearfix border-bottom">
+					<span as-sortable-item-handle class="pull-left glyphicon glyphicon glyphicon-move"></span>
+						<div class="pull-right">
+							<div class="btn-group">
+								<button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed" tooltip="View Details">
+								<span class="caret"></span></button>
+							</div>
+							<div class="btn-group">
+								<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(value,'testimonials'); showForm('infra')" tooltip="Edit Details"></button>
+							</div>
+							<div class="btn-group">
+								<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject($index,businessData.testimonials)" tooltip="Remove"></button>
+							</div>
+						</div>
+						<p>{{value.heading}}</p>
+						<div collapse="isCollapsed">
+							<div class="well well-lg clearfix"><img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + value.image.file_relative_path}}" width="150px" /><br>
+								
+								<b>Date:</b><p>{{value.date}}</p><br>
+								
+								<b>Description:</b><p ng-bind-html="value.description">
+							</div> 
+						</div> 
+					</div>
+					</div> 
+				</div>	
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- <table class="table table-bordered" >
 					<tr>
 						<th>Testimonial Title</th>
 						<th>Remove </th>
 					</tr>
-					<tr ng-repeat="(key, value) in businessData.testimonials">
+					<tr ng-repeat="value in businessData.testimonials">
 					<td>
 					<span class="pull-left glyphicon glyphicon glyphicon-move"></span>
-						<p>{{key}}
+						<p>{{value.heading}}
 						<button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed" tooltip="View Details">
 						<span class="caret"></span></button>
 						</p>
@@ -131,12 +185,9 @@
 						</div> 
 					</td>
 					<td class="col-sm-2">
-						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(key,businessData.testimonials, testimonials); showForm('infra')" tooltip="Edit Details"></button>
+						<button class="btn btn-success glyphicon glyphicon-pencil" ng-click="editObject(value,'testimonials'); showForm('infra')" tooltip="Edit Details"></button>
 						
-						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject(key,businessData.testimonials)" tooltip="Remove"></button>
+						<button class="btn btn-warning glyphicon glyphicon-trash" ng-click="removeObject($index,businessData.testimonials)" tooltip="Remove"></button>
 					</td>
 					</tr> 				
-				</table>
-			</div>
-		</div>
-	</div>
+				</table> -->
