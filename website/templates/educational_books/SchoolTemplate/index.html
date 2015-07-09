@@ -1,0 +1,78 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html>
+	<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+			<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
+			<link rel="stylesheet" href="{{ path }}css/style.css">
+			<script src="{{ path }}js/jquery.min.js"></script>
+			<script src="{{ path }}js/bootstrap.min.js"></script>
+			<script src="{{ path }}js/angular.min.js"></script>
+			<script src="{{ path }}js/angular-route.min.js"></script>
+			<script src="{{ path }}js/script.js"></script>
+			<title>{{seo.title}} | {{data.business_name}}</title>
+			<meta name="description" content="{{ seo.description }}">
+			<meta name="keywords" content="{{ seo.keywords }}">
+	</head>
+	<body>
+		<div class="container header">
+			{% include [templatePath ~ '/includes/header.html', 'default/default/includes/header.html']%}
+		</div>
+		<div class="container">
+			<div class="row info">
+				<div class="{{(modules.contentModule.featured_services) ? 'col-sm-8' : 'col-sm-12' }}">
+					<div class="row">
+					{%if modules.headerModule.carousal %}
+							{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] %}
+					{%endif%}
+					</div>
+					{%if modules.contentModule.featured_products %}
+						<div class="row">
+							{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+						</div>
+					{%endif%}
+					<div class="row content">
+							{% include contentPath %}
+					</div>
+				</div>
+
+				{%if modules.contentModule.featured_services %}
+					<div class="col-sm-4">
+						{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+					</div>
+				{%endif%}
+			</div>
+		</div>
+		<div class="container">
+			<div class="row subftr">
+				<div class="col-sm-6 col-md-6">
+					<h4>CONTACT US</h4>
+					<p>{%if data.contact_profile.telephone%}
+						Telephone:{{data.contact_profile.telephone}}
+					{% endif %}<br>
+					<p>Mobile: {{data.contact_profile.mobile}}<br>
+					<p>E-mail: {{data.contact_profile.email}},&nbsp;
+					{{data.contact_profile.alternate_email}}
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<h4>ADDRESS</h4>
+					<address>
+						{{data.contact_profile.address}},<br>
+						{{data.city}},&nbsp;{{data.state|capitalize}},&nbsp;{{data.country|capitalize}},&nbsp;{{data.pincode}}
+					</address>
+				</div>
+			</div>
+		</div>
+		<footer class="container">
+			{% block footer %}
+			<p class="text-center">&copy; 2015 <a href="/">{{data.business_name}}</a>&nbsp;|&nbsp;
+			Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>&nbsp;|&nbsp;
+			<a target="_blank" href="/sitemap.xml">SITEMAP</a>
+			</p>
+			{% endblock %}
+		</footer>
+	</body>
+</html>
+{% endspaceless %}
