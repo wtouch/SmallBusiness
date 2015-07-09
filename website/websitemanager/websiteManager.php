@@ -242,10 +242,13 @@ class websiteManager{
 				$response["google_map"] = $businessData["data"]['website_config']['google_map'];
 			}
 			if($customPage != null){
-				
-				$response["data"]['data'] = $businessData["data"]["custom_details"][str_replace("-", " ", $customPage)]["description"];
-				$response["uri"] = '/cp/'.$customPage;
-				$response["title"] = str_replace("-", " ", $customPage);
+				foreach($businessData["data"]["custom_details"] as $key => $value){
+					if($value['heading'] == str_replace("-", " ", $customPage)){
+						$response["data"]['data'] = $value['description'];
+						$response["uri"] = '/cp/'.$customPage;
+						$response["title"] = str_replace("-", " ", $customPage);
+					}
+				}
 			}
             
 			$response = $this->getTemplate($page, $response);

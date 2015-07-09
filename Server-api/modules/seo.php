@@ -54,7 +54,7 @@
 			if($data['data'][0]['custom_details']){
 				if(count($data['data'][0]['custom_details']) >=1 ){
 					foreach($data['data'][0]['custom_details'] as $key => $value){
-						$menus[] = array("name" => $key, "url" => "/cp/".str_replace(" ", "-",($key)), "status" => "1", "custom" => true);
+						$menus[] = array("name" => $value['heading'], "url" => "/cp/".str_replace(" ", "-",($value['heading'])), "status" => "1", "custom" => true);
 					}
 				}
 			} 
