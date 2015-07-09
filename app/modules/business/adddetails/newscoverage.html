@@ -7,9 +7,9 @@
 		</div>
 	</div>
 	<form name="newscoverageForm" role="form" class="form-horizontal" ng-if="infra" ng-submit="newscoverageForm.$valid" novalidate="novalidate">
-		<div class="form-group" >
+		<div class="form-group">
 			<div class="col-sm-9 col-sm-offset-3">
-				<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click=	"addToObject(news_coverage, businessData.news_coverage, 'news_coverage')">Add News Activity</button>
+				<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click="addToObject(news_coverage, businessData.news_coverage, 'news_coverage')" ng-disabled="newscoverageForm.$invalid">Add News Activity</button>
 				
 				<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject('edit', businessData.news_coverage, 'news_coverage')" title="Add Job/Career">Edit Details</button>
 				
@@ -21,7 +21,7 @@
 			<label  for="date" class="col-sm-3 control-label">Date*</label>
 			<div class="col-sm-9">
 				<p class="input-group">
-			  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="news_coverage.date" is-open="selectDate" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="opendate($event, 'selectDate')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"/>
+			  <input class="form-control" type="text" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="news_coverage.date" is-open="selectDate" min-date="minDate" max-date="'2016-06-22'" ng-required="true" close-text="Close" ng-click="opendate($event, 'selectDate')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"/>
 					<span class="input-group-btn">
 				<button type="button" class="btn btn-default" ng-click="opendate($event, 'selectDate')">
 						<i class="glyphicon glyphicon-calendar"></i></button>
