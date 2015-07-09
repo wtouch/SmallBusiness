@@ -60,33 +60,26 @@
 	if($reqMethod=="POST"){
 		$input = json_decode($body);
 		try{
-			$from['email'] = $input->from_email->from;
-			$from['name'] = $input->name;
-			(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", $input->to_email->cc) : $ccMail = null;
-			$recipients = explode(",", $input->to_email->to);
-			$subject = $input->subject;
-			$message = "<table>
-					<tr>
-						<td>Name: </td><td>".$from['name']."</td>
-					</tr>
-					<tr>
-						<td>Email: </td><td>".$from['email']."</td>
-					</tr>";
+			$from['email'] = trim($input->from_email->from);
+			$from['name'] = trim($input->name);
+			
+			(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", trim($input->to_email->cc)) : $ccMail = null;
+			
+			$recipients = explode(",", trim($input->to_email->to));
+			(property_exists($input->to_email, 'replyTo1')) ? $replyTo = array("email" => trim($input->to_email->replyTo), "name" => $from['name']) : $replyTo = null;
+			$subject = "need your resume" ;//trim($input->subject);
+			$message = "<table><tr><td>Name: </td><td>".$from['name']."</td></tr><tr><td>Email: </td><td>".$from['email']."</td></tr>";
 			if(is_object($input->message)){
 				foreach($input->message as $key => $value){
-					$message .= "<tr>
-						<td>".$key.":</td><td>".$value."</td>
-					</tr>";
+					$message .= "<tr><td>".$key.":</td><td>".$value."</td></tr>";
 				}
 			}else{
-				$message .= "<tr>
-						<td>Message: </td><td>".$input->message."</td>
-					</tr>";
+				$message .= "<tr><td>Message: </td><td>".$input->message."</td></tr>";
 			}
 			$message .= "</table>";
-			//$message = $input->message->message;
+			$message = trim($message);
 
-			$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo=null, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
+			$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
 			 if($mail['status'] == 'success'){
 				$insert = $db->insert("enquiry", $body);
 				$insert['message'] = $insert['message']." " .$mail['message'];
