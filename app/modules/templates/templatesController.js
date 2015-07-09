@@ -31,6 +31,10 @@ define(['app'], function (app) {
 			$scope.temp = response.config_data;
 		});
 		
+		$scope.removeImg = function(item, imgObject) {
+			imgObject.splice(item, 1);     
+		};
+		
 		// to show default template list
 		if(!$routeParams.tempPart) {
 			$location.path('/dashboard/templates/listoftemplates');
