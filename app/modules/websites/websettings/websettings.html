@@ -171,7 +171,7 @@
 							<span class="widths" ng-show="!ind[$index + data.url]" ng-click="ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
 							
 							<span class="pull-right">
-								<a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status==1) ? 'glyphicon glyphicon-ok text-success' : 'glyphicon glyphicon-remove text-danger'" ></a>
+								<a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status==1) ? 'glyphicon glyphicon-ok text-success' : 'glyphicon glyphicon-remove text-danger'" ng-init="data.status = 1"></a>
 								
 								<a class="glyphicon glyphicon-home" tooltip="Home Project" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.headerModule.homeproject" ng-class="(data.modules.headerModule.homeproject == true) ? 'text-success' : 'text-muted'" ></a>
 								
