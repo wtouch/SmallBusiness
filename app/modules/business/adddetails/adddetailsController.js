@@ -99,6 +99,14 @@ define(['app'], function (app) {
 			}
 		}
 		
+		$scope.removeImg = function(imgObject) {
+			console.log(imgObject);
+			$scope.infrastructure.image = "";
+			$scope.testimonials.image = "";
+			$scope.news_coverage.image = "";
+			$scope.gallery.image = "";
+		};
+		
 		$scope.removeObject = function(index, object){
 			object.splice(index, 1);
 		}
