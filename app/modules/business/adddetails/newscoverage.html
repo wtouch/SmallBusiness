@@ -1,18 +1,17 @@
 	<div class="form-group">
-	<div class="row">
-		<div class="col-sm-12 text-right">
-			<button ng-if="!infra" type="button" class="btn btn-default btn-primary" title="next" ng-click="update(businessData)">Save Details</button>
-			<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra', 'news_coverage')">Add News Activity</button>
+		<div class="row">
+			<div class="col-sm-12 text-right">
+				<button ng-if="!infra" type="button" class="btn btn-default btn-primary" title="next" ng-click="update(businessData)">Save Details</button>
+				<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra', 'news_coverage')">Add News Activity</button>
+			</div>
 		</div>
 	</div>
-	</div>
-	 
 	<form name="newscoverageForm" role="form" class="form-horizontal" ng-if="infra" ng-submit="newscoverageForm.$valid" novalidate="novalidate">
 		<div class="form-group" >
 			<div class="col-sm-9 col-sm-offset-3">
 				<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click=	"addToObject(news_coverage, businessData.news_coverage, 'news_coverage')">Add News Activity</button>
 				
-				<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject(edit, businessData.news_coverage, 'news_coverage')" title="Add Job/Career">Edit Details</button>
+				<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject('edit', businessData.news_coverage, 'news_coverage')" title="Add Job/Career">Edit Details</button>
 				
 				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')"><span ng-show="infra">Cancel</span></button>
 			</div>
@@ -62,6 +61,7 @@
 				</span>
 			</div>						
 		</div>
+		
 		<div class="form-group">
 			<label for="News" class="col-sm-3 control-label">News Coverage URL</label>
 			<div class="col-sm-9">
@@ -87,29 +87,29 @@
 			</div>
 		</div> 
 		
-	<div class="form-group">
-		<label for="image" class="col-sm-3 control-label">Add Images</label>
-		<div class="col-sm-5">
-			<input type="file" id="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="uploadnews(image, businessData.user_id + path,userInfo,news_coverage.image)" ng-model="image">
-			<input type="hidden" ng-model="news_coverage.image">
+		<div class="form-group">
+			<label for="image" class="col-sm-3 control-label">Add Images</label>
+			<div class="col-sm-5">
+				<input type="file" id="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="uploadnews(image, businessData.user_id + path,userInfo,news_coverage.image)" ng-model="image">
+				<input type="hidden" ng-model="news_coverage.image">
+			</div>
+			
+			<div class="col-sm-4" ng-if="news_coverage.image">
+				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + news_coverage.image.file_relative_path}}" width="150px" />
+			</div>
 		</div>
-		
-		<div class="col-sm-4" ng-if="news_coverage.image">
-			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + news_coverage.image.file_relative_path}}" width="150px" />
-		</div>
-	</div>
 	
-	<div class="form-group">						 
-		<div class="col-sm-9 col-sm-offset-3">
-			<span class="thumbs" ng-if="news_coverage.image">
-				<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + '/' + news_coverage.image.file_relative_path}}" ng-click="news_coverage.imgkey = key; "/>
-				<span class="close" ng-click="removeImg(key, news_coverage.image)">X</span>
-			</span>
+		<div class="form-group">						 
+			<div class="col-sm-9 col-sm-offset-3">
+				<span class="thumbs" ng-if="news_coverage.image">
+					<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + '/' + news_coverage.image.file_relative_path}}" ng-click="news_coverage.imgkey = key; "/>
+					<span class="close" ng-click="removeImg(key, news_coverage.image)">X</span>
+				</span>
+			</div>
 		</div>
-	</div>
 	</form>
 	
-	<div class="row">
+<div class="row">
 	<div class="col-sm-12" ng-if="businessData.news_coverage.length>=1">
 		<div class="panel panel-default">
 		<h5 class="text-center border-bottom"><b>News Coverage</b></h5>
@@ -135,9 +135,9 @@
 								<b>Description:</b><p ng-bind-html="value.newsdetails">
 							</div> 
 						</div> 
-			</tr>		
+				</div>
+			</div>
 		</div>
-		</div>
 	</div>
 	</div>
-	</div>
+</div>

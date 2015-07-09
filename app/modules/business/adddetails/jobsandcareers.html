@@ -12,7 +12,7 @@
 			<div class="col-sm-9 col-sm-offset-3">
 				<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click=	"addToObject(job_careers, businessData.job_careers, 'job_careers')" ng-disabled="jobsandcareersForm.$invalid">Add Job/Career</button>
 				
-				<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject(edit, businessData.job_careers, 'job_careers')" title="Add Job/Career">Edit Details</button>
+				<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject('edit', businessData.job_careers, 'job_careers')" title="Add Job/Career">Edit Details</button>
 				
 				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')"><span ng-show="infra">Cancel</span></button>
 			</div>
@@ -76,7 +76,6 @@
 				</div>
 				<p>{{value.heading}}</p>
 				</div>	
-				
 			</tr>
 		</table>
 	</div>
