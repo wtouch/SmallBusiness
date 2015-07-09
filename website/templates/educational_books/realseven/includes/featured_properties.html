@@ -26,45 +26,20 @@
 						<div class="shadow">
 							<a href="#">
 								<div class="imgborder">
-
-									
 									<img src="{{x.property_images.0.file_relative_path}}" alt="" style="max-width:93%" />
 								</div>
-
 							</a>
-
 							<div class="proj-title">
-
-								<p>
-
-                                {{x.title}}
-
-                              </p>
-
-								<small>
-
-                                 {{x.type}}
-
-								 {{x.property_info.buildup_area}}{{x.property_info.build_unit}}
-
+								<a href="properties/{{x.title}}/{{x.id}}" class="head">{{x.title}}</a>
+								<small>{{x.type}}<br>
+								{{x.property_info.buildup_area}}{{x.property_info.build_unit}}
 								</small>
-
 							</div>
-
-                          <div class="view-link">
-
-                            <a class="btn " href="properties/{{x.title}}/{{x.id}}" >View Detail</a>
-							
-                          </div>
-
-							
-
+							<div class="view-link">
+								<a class="btn " href="properties/{{x.title}}/{{x.id}}" >View Detail</a>
+							</div>
 						</div>
-
 					</div>
-
-						
-
 				</div>
 
 				{% set i = (i + 1) %}
