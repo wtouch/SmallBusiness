@@ -1,0 +1,536 @@
+	@font-face{
+		font-family:'Amaranth-Regular';
+		src:url('../fonts/Amaranth-Regular.otf');
+	}
+	@font-face{
+		font-family:'QumpellkaNo12';
+		src:url('../fonts/QumpellkaNo12.otf');
+	}
+	@color : #bae275;
+	@lightcolor : #BBBBBB;
+	@darkcolor : #02071A;
+	@back : #151927;
+	@darkbackcolor : #25563B;
+	@lightbackcolor :#3C5C73; 
+	@colorblack : #02071A;
+	@colorwhite	: #fff;
+	@contentlink:#6ba72b;
+	@contentback: #272A35;
+	@headingcolor:#bae275;
+	
+	@import "property.less";
+	@import "project.less";
+	@import "product.less";
+	@import "service.less";
+	@import "general.less";
+	body{
+		color : @colorwhite;
+		background-image:-webkit-linear-gradient(@darkcolor,@lightbackcolor 50%);
+		background-image:-moz-linear-gradient(@darkcolor,@lightbackcolor 50%);
+		background-image:linear-gradient(@darkcolor,@lightbackcolor 50%);
+	}
+	html{
+		min-width:1022px;
+	}
+	.container{
+		width:992px !important;
+	}
+	*, hr{
+		border-color : #373C51;
+	}
+	*{
+		transition:300ms;
+	}
+	.form-control{
+		background-color:@darkcolor !important;
+		color:@colorwhite;
+	}
+	
+	.logo {
+		height: 80px;
+		margin-top: 25px;
+		margin-left: 15px;
+		max-height: 100px;
+	}
+	a, .btn.btn-link,.btn .btn-info{
+		color: @color;
+	}
+	.project .thumbnail{
+		background-color:@back;
+	}
+	
+	a:hover, .btn.btn-link:hover{
+		text-decoration : none;
+		color: @colorwhite;
+	}
+	.propertylist .text-center a:hover{
+		text-decoration : none;
+		color: @colorwhite;
+	}
+	.btn-info, .btn-primary{
+		background-color: @darkbackcolor;
+		border-color : @color;
+	}
+	.btn-info:hover, .btn-primary:hover{
+		background: -webkit-linear-gradient(right,#ccc,#0D8375);
+		background: -moz-linear-gradient(right,#ccc,#0D8375);
+		background: linear-gradient(right,#ccc,#0D8375);
+	}
+	.propertylist .panel-default {
+		background-color: @back;
+	}
+	.btn.send{
+		margin-right : 10px;
+	}
+	.btn + .btn {
+		margin-left : 10px;
+	}
+	.btn-info{
+		border-radius : 2px;
+		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info{
+			
+			border : none;
+			color :@colorwhite;
+			font-weight: bold;
+		}
+	}
+	.cnctinfo{
+		color:@color;
+		font-weight : bold;
+		margin: 40px 15px 40px 0;
+	}
+	.navbar-collapse{
+		padding :0px;
+	}
+	.navbar-toggle {
+		border : 1px solid @lightcolor;
+		margin-top : 45px;
+	}
+	.navbar-toggle .icon-bar {
+		background-color: @lightcolor;
+	} 
+	.navbar-default {
+		background-color: @darkbackcolor;
+		border: 1px solid @lightbackcolor;
+		border-radius: 0;
+		height:50px;
+		top:15px;
+		.navbar-nav{
+			> li{
+				text-transform:uppercase;
+				position : relative;
+				margin-right: 8px;
+				> a, > a:focus {
+					color :@colorwhite;
+					padding : 9px;
+					padding-top:15px;
+					border: 4px solid transparent;
+					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
+					position: relative;
+				}
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					//-webkit-transition: all 0.4s;
+					border: 4px solid @color;
+					border-top-left-radius: 19px;
+					border-bottom-right-radius: 19px;
+					background-color : @darkcolor;
+					color : @colorwhite;
+					top: -8px;
+					padding-top: 20px;
+					
+				}
+				> ul {
+					border: 3px solid @color;
+					border-radius:19px;
+					display: none;
+					position: absolute;
+					width: 245px;
+					z-index: 999;
+					background-color: @darkcolor;
+					padding: 15px;
+					list-style: none;
+					text-align: left;
+					top : 53px;
+					border-top-left-radius: 0px;
+					transition : all 500ms ease-in-out;
+					>li{
+						border-bottom: 1px solid @lightbackcolor;
+						padding: 7px;
+						>a{
+							color:@colorwhite;
+							&:hover{
+								text-decoration: underline;
+								-webkit-transition: all 0.4s;
+								
+							}
+						}
+						&:hover{
+							background: -webkit-linear-gradient(right,#ccc,#0D8375);
+							background: -moz-linear-gradient(right,#ccc,#0D8375);
+							background: linear-gradient(right,#ccc,#0D8375);
+						}
+						ul{
+							list-style: none;
+							li{
+								font-size:10px;
+								a{
+									text-transform:lowercase;
+								}
+							}
+						
+						}
+					}
+				}
+				&:hover > ul {
+					display: block;
+				}
+			}
+		}
+	}
+	.subhead {
+		font-family: "Carter One";
+		font-size: 20px;
+		font-weight: bold;
+		border:1px solid @darkbackcolor;
+		box-shadow:2px 2px 2px @lightcolor;
+		text-align: center;
+		background: -webkit-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);
+		background: -moz-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);
+		background: linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);
+		border-radius: 7px;
+		padding: 4px 10px;
+		position: relative;
+	}
+	h2,h3{
+		font: 1.8em/2.5em Amaranth-Regular;
+		color: #bae275;
+		line-height:1.5em;
+		border-bottom: 1px solid #ccc;
+	}
+	h1{
+		color: #bae275;
+		font: 2em/1.2em Amaranth-Regular;
+		letter-spacing: 1px;
+		border-bottom: 1px solid #ccc;
+	}
+	h2,h3,h4,h5{
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 8px;
+	}
+	
+	.panel{
+		background-color:@contentback;
+	}
+	.contentModule {
+		.sections{
+			border:1px solid @darkbackcolor;
+			box-shadow:2px 2px 2px @lightcolor;
+			border-radius : 4px;
+			background-color:@contentback;
+			img{
+				
+				width : 100%;
+				padding : 4px;
+				border : 3px solid transparent;
+				&:hover{ 
+					border : 3px solid @color;
+				}
+			}
+			.readmore{
+				margin-bottom :10px;
+				margin-top:10px;
+				margin-right:10px;
+				a{
+					font: 16px 'Alex Brush', cursive;
+					background-color : @darkbackcolor;
+					color : @colorwhite;
+					padding : 3px 9px;
+					border : 1px solid @colorwhite;
+				}
+			}
+		}
+		
+	}
+	.project{
+		.navbar{
+			background-color: @darkbackcolor;
+			border-bottom: 4px solid @lightbackcolor;
+			border-radius: 0;
+			margin-bottom:10px;
+			width:auto;
+		}
+		ul.nav.navbar-nav {
+			color:@colorwhite;
+			background-color: @darkbackcolor;
+			>li{
+				border-right : 1px solid @lightbackcolor;
+				height : 38px;
+				>a, > a:focus{
+					padding : 10px;
+					color : @colorwhite;
+					font-weight : bold;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					background-color: @back ;
+					color : @colorwhite;
+				}
+			}
+		}
+	}
+	
+	
+	.footer{
+		border-top:1px dashed #ccc;
+		padding:5px;
+		.footlink{
+			ul{
+				list-style: none;
+				li{
+					display:inline;
+					border-right:1px solid #ccc;
+					padding:5px;
+					a{
+						color : #E5DFDF;
+						font-size:10px;
+					}
+				}
+			}
+		}
+	}
+	
+	.service{
+		margin-bottom: 10px;
+		margin-top: 10px;
+		img{
+			max-height : 180px;
+		}
+		h3{
+			padding-bottom:0px;
+			border : none;
+			margin-top : 0px;
+			font-size : 18px;
+		}
+	}
+	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
+		border:1px solid @lightcolor;
+		background-color:@contentback;
+		padding:10px;
+		input,textarea{
+			color:@colorwhite;
+		}
+	}
+	
+	.formsec{
+		color : #E5DFDF;
+		border-bottom: 1px solid #ccc;
+		margin-bottom:10px;
+		.form-control{
+			background-color: #444 !important;
+		}
+		
+	}
+	.sideimg{
+		margin-top: 20px;
+	}
+	.email{
+		color :@color;
+		text-decoration : underline;
+		&:hover{
+			text-decoration : none;
+			color :@lightcolor;
+		}
+	}
+	
+	
+	//aboutus page css
+	.sidebar{
+		.nav-pills{
+			background-color: @darkbackcolor;
+			
+			border-bottom: 4px solid @lightbackcolor;
+			>li{
+				border-right : 1px solid @lightbackcolor;
+				height : 38px;
+				>a, > a:focus{
+					padding-top : 9px;
+					padding-bottom : 9px;
+					color : @colorwhite;
+					font-weight : bold;
+					border:1px solid transparent;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					background-color : @darkcolor;
+					color : @colorwhite;
+					border:1px solid @darkbackcolor;
+				}
+			}
+		}
+	}
+	.about, .contact, .charges{
+		.table{
+			tbody{
+				tr{
+					th,td{
+						border-color : @lightbackcolor;
+					}
+				}
+			}
+		}
+	}
+	.about{
+		.table{
+			margin-top: 20px;
+		}
+	}
+	.modal-body	{
+		p{
+			color:@colorblack;
+		}
+	}
+	.infrastructure{
+		.thumbnail{
+			height: 395px;
+			img{
+				height : 190px;
+			}
+			.caption{
+				height: 138px;
+			}
+		}
+	}
+	//Common effect
+	.contact, .myjobs{
+		.panel-default {
+			border-color: @lightbackcolor;
+		}
+		.panel{
+			background-color : @back;
+		}
+	}
+	
+	
+	//contactus page css
+	.contact{
+		img{
+			max-height: 110px;
+		}
+	}
+	#googleMap{
+		height:325px;
+	}
+	
+	//gallery
+	.mygallery{
+		.thumbnail{
+			height:400px;
+		}
+	}
+	
+	//testimonials
+	.mytesti{
+		blockquote{
+			font-size : inherit;
+			border-left: 3px solid @lightbackcolor;
+			img{
+				max-height : 70px;
+				display : inline-block;
+				margin-right : 10px;
+			}
+			a{
+				color : @color;
+				font-size : 17.5px;
+			}
+		}
+	}
+	
+	//charges
+	.highlight{
+		color :@color;
+	}
+	footer{
+		margin-top : 10px;
+		color:@lightcolor;
+		font-weight : bold;
+	}
+	@media (min-width: 320px){
+		.logo{
+			float:left;
+		}
+		.cnctinfo{
+			display : none;
+		}
+		.navbar{
+			min-height: 0px;
+			
+		}
+		.item.active, .projnav{
+			height: 120px;
+			overflow: hidden;
+		}
+		.carousel-inner>.item>img{
+			width :100%;
+		}
+		.homeimg{
+			float:left;
+			width:100%;
+			margin-bottom: 20px;
+		}
+	}
+	@media (min-width: 992px){
+		.logo{
+			float:none;
+		}
+		.cnctinfo{
+			display : block;
+		}
+		.navbar{
+			
+		}
+		.projnav{
+			height: 322px;
+		}
+		.item.active{
+			height: 312px;
+			overflow: hidden;
+		}
+		.carousel-inner>.item>img{
+			width :100%;
+			min-height : 310px;
+		}
+		.homeimg{
+			float:right;
+			margin-left: 25px;
+			width:25%;
+		}
+	}
+	@media (min-width: 1200px){
+		.logo{
+			float:none;
+		}
+		.cnctinfo{
+			display : block;
+		}
+		.navbar{
+			
+		}
+		.projnav{
+			height: 322px;
+		}
+		.item.active,{
+			height: 312px;
+			overflow: hidden;
+		} 
+		.carousel-inner>.item>img{
+			width :100%;
+			min-height: 312px;
+		}
+		.homeimg{
+			float:right;
+			margin-left: 25px;
+			//width:25%;
+			max-height: 210px;
+		}
+		.slider{
+			max-width:802px;
+		}
+	}
