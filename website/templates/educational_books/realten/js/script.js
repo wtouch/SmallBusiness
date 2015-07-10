@@ -5,36 +5,40 @@ jQuery(document).ready(function() {
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
 });
-var hostUrl = '/website/templates/default/';
 $(document).ready(function(){
-	$('#bxslider1').bxSlider({
-			mode:'vertical',
-			minSlides: 1,auto: true, 
-			autoDirection:'next',
-			moveSlides: 1,
-			pause:4000,
-			pager:false,
-			pagerType:'full',
-			autoControls: false, 
-			controls:false, 
-			autoHover:true,
-			speed : 1000
-	});
-	$('#bxslider').bxSlider({
+	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideMargin: 10,
-		minSlides :1,
-		maxSlides: 4,
-		moveSlides: 2,
-		slideWidth: 250,
+		slideWidth: 225,
+		minSlides:3,
+		maxSlides: 3,
+		slideMargin: 5,
 		auto: true, 
 		autoDirection:'next',
-		pause:4000,
+		moveSlides: 2,
+		pause:2500,
+		pager:true,
+		pagerType:'full',
+		autoControls: true, 
+		controls:true, 
+		autoHover:true,
+		speed:1000,
+	});
+	$('.bxslider1').bxSlider({
+		mode:'vertical',
+		slideWidth: 600,
+		minSlides: 3,
+		maxSlides:3,
+		slideMargin: 5,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 2,
+		pause:5000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
-		controls:true, 
-		autoHover:true
+		controls:false, 
+		autoHover:true,
+		speed:2000,
 	});
 });
 var app = angular.module('myApp',[]);
@@ -56,21 +60,30 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	var min = today.getMinutes();
 	var sec = today.getSeconds();
 	$scope.mailSent = false;
+	
+	var params = {table : "config", config_name : "property"};
+	$http({
+		url: '/server-api/index.php/getmultiple/config/1/1',
+		method: "GET",
+		params: params
+	}).then(function (results) {
+		console.log(results);
+		if(results.data.status == 'success'){
+			$scope.propertyConfig = results.data.data.config_data;
+		}else{
+			$scope.propertyConfig = results.data.data;
+		}
+	});
 	$scope.enquiry = {
-				subject : 'Website Enquiry',
-				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
-			};
+		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
+	};
 	$scope.postData = function(enquiry){
-		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				$scope.loading = true;
-				if(response.status == 'success'){
-					$scope.loading = false;
-					$scope.mailSent = true;
-				}
-				else{
-					alert(response.message);
-				}
-		});
+		$scope.loading = true;
+		console.log(enquiry);
+		  $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+			$scope.loading = false;
+			$scope.mailSent = true;
+		}); 
 	};
 });	
 	app.controller('aboutController', function($scope,$http, $location) {

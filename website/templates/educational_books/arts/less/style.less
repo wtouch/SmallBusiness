@@ -1,0 +1,196 @@
+@font-face{
+	font-family : 'Enriqueta-Regular';
+	src:url('../fonts/Enriqueta-Regular.otf');
+}
+@color :#829104;
+@lightcolor : #829104;
+@darkcolor : #5e311a;
+@back : #829104;
+@darkbackcolor : #5e311a;
+@lightbackcolor :#DAA138; 
+@colorblack : #000000;
+@colorwhite	: #ffffff;
+@import "property.less";
+@import "project.less";
+@import "product.less";
+@import "general.less";
+	*{
+		transition : 300ms;
+	}
+	.container{
+		width : 992px !important;
+	}
+	html{
+		min-width : 1022px;
+	}
+	img.logo{
+		height: 80px;
+		margin: 50px;	
+	}
+	.container {
+		border-left: 2px solid @lightbackcolor;
+		border-right: 2px solid @lightbackcolor;
+	}
+	.carousel{
+		margin-left : -15px;
+		margin-right : -15px;
+		.carousel-indicators li {
+			border-color : @lightcolor;
+			&.active{
+				background-color : @lightcolor;
+			}
+		}
+		.carousel-inner {
+			border: 2px solid @back;
+			.item{
+				height: 350px;
+				overflow: hidden;
+				>img{
+					width : auto;
+					min-height : 350px;
+				}
+			}
+		}
+		a.left.carousel-control, a.right.carousel-control {
+			background: none;
+		}
+	}
+	.navbar-default {
+		border : none;
+		.navbar-nav{
+			>li{
+				position :relative;
+				>a{
+					color : @lightcolor;
+					text-transform : uppercase;
+				}
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					color : @color;
+					background: none;
+				}
+				ul{
+					display : none;
+					position : absolute;
+					width : 270px;
+					z-index : 999;
+					-webkit-transition:max-height 0.4s linear;
+					-moz-transition:max-height 0.4s linear;
+					transition:max-height 0.4s linear;
+					padding : 15px;
+					list-style : none;
+					text-align : left;
+					border : 1px solid @darkcolor;
+					box-shadow : 0 0 15px 0px @colorblack;
+					border-radius : 7px;
+					>li{
+						padding : 10px;
+						position : relative;
+						>a{
+							text-decoration:none;
+							color : @color;
+						}
+						&:hover{
+							background: @darkcolor;
+							a{
+								color : @colorwhite;
+								text-decoration : underline;
+							}
+						}
+						
+						> ul{
+							display: none;
+							list-style :none;
+							left: 70%;
+							top: 10px;
+							border-top-left-radius: 0px;
+							>li{
+								>a{
+									text-decoration:none;
+									color : @color;
+								}
+								&:hover{
+									background: @darkcolor;
+									a{
+										color : @colorwhite;
+										text-decoration : underline;
+									}
+								}
+							}
+						}
+						&:hover > ul {
+							display: block;
+						}
+					}
+				}
+				&:hover{
+					>ul{
+						display:block;
+					}
+				}
+			}
+		}
+		.navbar-collapse{
+			padding:0px;
+		}
+	}
+	
+	//global css
+	h1, h3{
+		color : @darkcolor;
+	}
+	h2, h4{
+		color : @color;
+	}
+	h1, h2, h3{
+		font-family : 'Enriqueta-Regular';
+	}
+	h1{
+		font-size : 32px;
+	}
+	a{
+		color : @darkcolor;
+		&:hover{
+			color :@color;
+		}
+	}
+	
+	.btn + .btn{
+		margin-left : 10px;
+	}
+	
+	hr{
+		border-style : dashed;
+		border-color: @back;
+		margin :0px 0px 10px;
+	}
+	
+	.readmore{
+		margin-top : 10px;
+	}
+	
+	.panel{
+		background-color : @lightbackcolor;
+	}
+	.panel-default{
+		border-color : @darkbackcolor;
+	}
+	
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
+	{
+		background-color : @darkcolor;
+		color : @color;
+		border : 1px solid @darkcolor;
+	}
+	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
+		background-color : @lightbackcolor;
+		border : 1px solid @darkcolor;
+		color : @darkcolor;
+	}
+	footer{
+		font-size: initial;
+		padding-top:20px;
+		padding-bottom:20px;
+		p{
+			margin : 0;
+		}
+	}
