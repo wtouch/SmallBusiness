@@ -21,57 +21,85 @@
 			margin-bottom :10px;
 			margin-top:10px;
 			a{
-				margin-right:10px;
-				font: 16px 'Alex Brush', cursive;
-				background-color : @darkbackcolor;
-				color : @colorwhite;
-				padding : 5px 15px;
-				text-decoration:none;
-				border-color : @colorwhite;
-				&:hover{
-					background: -webkit-linear-gradient(right,#ccc,#0D8375);
-					background: -moz-linear-gradient(right,#ccc,#0D8375);
-					background: linear-gradient(right,#ccc,#0D8375);
+				h4
+				{ 
+					margin-right:10px;
+					font: 16px 'Alex Brush', cursive;
+					background-color : @darkbackcolor;
+					color : @colorwhite;
+					padding : 5px 15px;
+					text-decoration:none;
+					border-color : @colorwhite;
 				}
+				
+			}
+			h4:hover{
+				background-color : @lightbackcolor;
+				color : @colorblack;
 			}
 		}
-		a{
-			color:@color;
-			font-weight : bold;
-			text-decoration:underline;
-			&:hover{
-				color:@color;
-				text-decoration:none;
-			}
-		}
+		
 	}
 }
 
+#carousel {
+		background-color: @lightbackcolor;
+		.carousel-inner {
+			.item{
+				max-height: 298px;
+				overflow: hidden;
+				height:200px;
+				>img{
+					width :100%;
+					min-height : 310px;
+				}
+				&:hover{
+				}
+			}
+			
+		}
+		a.left.carousel-control, a.right.carousel-control {
+			background: none;
+		}
+	}
+	
 .homeproject {
-	margin-top:10px;
-	margin-bottom:10px;
+	margin-top : 20px;
+	#carousel
+	{
+		box-shadow : 0px 0px 10px 0px black;
+		border : 5px solid @colorwhite;
+	}
+	
+	/*margin-bottom:10px;*/
 	.projectnav {
-		background-color:@contentback;
-		border:7px solid @lightbackcolor;
+		margin-top : 5px;
 		border-radius : 4px;
 		padding:5px;
 		height:312px;
 		a{
+			/*background-color : black;*/
+			border: 1px solid @back;
+			margin : 8px;
 			font: bold 14px/1.5em Arial, Helvetica, sans-serif;
-			color: @color;
+			color: @back;
 			&:hover{
 				color: @colorwhite;
-				text-decoration:none;
-				background: -webkit-linear-gradient(right,#ccc,#0D8375);
-				background: -moz-linear-gradient(right,#ccc,#0D8375);
-				background: linear-gradient(right,#ccc,#0D8375);
+				text-decoration:none; 
+				background-color : @back;
+				/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
+				/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
+				/*background: linear-gradient(right,#ccc,#0D8375);*/
 			}
 		}
 		
 	}
 	.projsnap{
+		box-shadow : 0px 0px 10px 0px black;
+		border : 5px solid @colorwhite;
+		
+		margin-top : 5px;
 		background-color:@contentback;
-		border:7px solid @lightbackcolor;
 		border-radius : 4px;
 		padding:5px;
 		height:312px;
@@ -102,24 +130,20 @@
 			}
 		}
 	}
-	#carousel {
+	
+	#carousel { 
+		margin-top : 5px;
 		background-color: @lightbackcolor;
-		border:7px solid @back;
 		.carousel-inner {
 			.item{
-				border:7px solid @lightbackcolor;
-				border-radius:40px;
 				max-height: 298px;
 				overflow: hidden;
-				transition: all 1s ease-in-out ;
-				
+				height:200px;
 				>img{
 					width :100%;
 					min-height : 310px;
 				}
 				&:hover{
-					transform: scale(1.1);
-					 border-radius: 40px;
 				}
 			}
 			
@@ -150,6 +174,7 @@
 				background-color:@lightbackcolor;
 				height:400px;
 				padding-top : 15px;
+				
 				border-color : @darkbackcolor;
 				img{
 					max-height : 183px;
@@ -174,7 +199,7 @@
 				}
 				
 				.caption p{
-					color:@colorwhite;
+					color:@colorblack;
 				}
 			}
 			.pagination{

@@ -9,13 +9,15 @@
 	@color : #bae275;
 	@lightcolor : #BBBBBB;
 	@darkcolor : #02071A;
-	@back : #151927;
-	@darkbackcolor : #25563B;
-	@lightbackcolor :#3C5C73; 
+	@back : #005596;
+	@darkbackcolor : #23235C;
+	@lightbackcolor :#F3EAFF; 
+	@contentback: #B7B8BA;
+	
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	@contentlink:#6ba72b;
-	@contentback: #272A35;
+	
 	@headingcolor:#bae275;
 	
 	@import "property.less";
@@ -24,16 +26,27 @@
 	@import "service.less";
 	@import "general.less";
 	body{
-		color : @colorwhite;
-		background-image:-webkit-linear-gradient(@darkcolor,@lightbackcolor 50%);
-		background-image:-moz-linear-gradient(@darkcolor,@lightbackcolor 50%);
-		background-image:linear-gradient(@darkcolor,@lightbackcolor 50%);
+		
+		background-color :@lightbackcolor;
+		/*background-image:-webkit-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
+		/*background-image:-moz-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
+		/*background-image:linear-gradient(@darkcolor,@lightbackcolor 50%);*/
+	}
+	header
+	{
+		background-color : @back;
 	}
 	html{
 		min-width:1022px;
 	}
 	.container{
 		width:992px !important;
+		padding-left : 0px;
+		
+	}
+	.content
+	{
+		background-color :@colorwhite;
 	}
 	*, hr{
 		border-color : #373C51;
@@ -42,7 +55,7 @@
 		transition:300ms;
 	}
 	.form-control{
-		background-color:@darkcolor !important;
+		background-color:@back !important;
 		color:@colorwhite;
 	}
 	
@@ -52,35 +65,36 @@
 		margin-left: 15px;
 		max-height: 100px;
 	}
-	a, .btn.btn-link,.btn .btn-info{
+	/*a, .btn.btn-link,.btn .btn-info{
 		color: @color;
-	}
+	}*/
 	.project .thumbnail{
 		background-color:@back;
 	}
 	
-	a:hover, .btn.btn-link:hover{
+	/*a:hover, .btn.btn-link:hover{
 		text-decoration : none;
 		color: @colorwhite;
-	}
+	}*/
 	.propertylist .text-center a:hover{
 		text-decoration : none;
 		color: @colorwhite;
 	}
 	.btn-info, .btn-primary{
 		background-color: @darkbackcolor;
-		border-color : @color;
+		/*border-color : @color;*/
 	}
 	.btn-info:hover, .btn-primary:hover{
-		background: -webkit-linear-gradient(right,#ccc,#0D8375);
-		background: -moz-linear-gradient(right,#ccc,#0D8375);
-		background: linear-gradient(right,#ccc,#0D8375);
+		/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
+		/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
+		/*background: linear-gradient(right,#ccc,#0D8375);*/
+		background-color: @lightbackcolor;
 	}
 	.propertylist .panel-default {
 		background-color: @back;
 	}
 	.btn.send{
-		margin-right : 10px;
+		margin-right : 8px;
 	}
 	.btn + .btn {
 		margin-left : 10px;
@@ -109,45 +123,44 @@
 	.navbar-toggle .icon-bar {
 		background-color: @lightcolor;
 	} 
+	.navbar
+	{
+		border:none;
+	}
 	.navbar-default {
 		background-color: @darkbackcolor;
-		border: 1px solid @lightbackcolor;
+		margin-bottom :0px;
 		border-radius: 0;
-		height:50px;
-		top:15px;
+		/*height:40px;*/
 		.navbar-nav{
 			> li{
 				text-transform:uppercase;
 				position : relative;
-				margin-right: 8px;
+				
 				> a, > a:focus {
 					color :@colorwhite;
-					padding : 9px;
-					padding-top:15px;
-					border: 4px solid transparent;
+					padding : 15px 10px;
+					border-right: 1px solid white;
 					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
 				}
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+				&.active > a
+				{
+					background-color :@colorwhite;
+					color: @colorblack;
+				}
+				&.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					//-webkit-transition: all 0.4s;
-					border: 4px solid @color;
-					border-top-left-radius: 19px;
-					border-bottom-right-radius: 19px;
-					background-color : @darkcolor;
 					color : @colorwhite;
-					top: -8px;
-					padding-top: 20px;
-					
 				}
 				> ul {
-					border: 3px solid @color;
-					border-radius:19px;
+				transition: all 300ms ease-in;
 					display: none;
 					position: absolute;
 					width: 245px;
 					z-index: 999;
 					background-color: @darkcolor;
-					padding: 15px;
+					padding: 12px;
 					list-style: none;
 					text-align: left;
 					top : 53px;
@@ -185,6 +198,10 @@
 					display: block;
 				}
 			}
+			/*&:hover
+			{
+				transition: all 300ms ease-in;
+			}*/
 		}
 	}
 	.subhead {
@@ -194,9 +211,10 @@
 		border:1px solid @darkbackcolor;
 		box-shadow:2px 2px 2px @lightcolor;
 		text-align: center;
-		background: -webkit-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);
-		background: -moz-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);
-		background: linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);
+		background-color :@darkbackcolor;
+		/*background: -webkit-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
+		/*background: -moz-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
+		/*background: linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
 		border-radius: 7px;
 		padding: 4px 10px;
 		position: relative;
@@ -242,10 +260,8 @@
 				margin-right:10px;
 				a{
 					font: 16px 'Alex Brush', cursive;
-					background-color : @darkbackcolor;
 					color : @colorwhite;
 					padding : 3px 9px;
-					border : 1px solid @colorwhite;
 				}
 			}
 		}
@@ -279,8 +295,8 @@
 	}
 	
 	
-	.footer{
-		border-top:1px dashed #ccc;
+	footer{
+		background-color : @darkbackcolor;
 		padding:5px;
 		.footlink{
 			ul{
@@ -312,6 +328,7 @@
 		}
 	}
 	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
+		/*margin : 10px;*/
 		border:1px solid @lightcolor;
 		background-color:@contentback;
 		padding:10px;
@@ -325,7 +342,8 @@
 		border-bottom: 1px solid #ccc;
 		margin-bottom:10px;
 		.form-control{
-			background-color: #444 !important;
+			background-color: blue ;
+			/*!important*/
 		}
 		
 	}
