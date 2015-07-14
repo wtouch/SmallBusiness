@@ -47,10 +47,10 @@
   background-color: #23235c;
   color: #ffffff;
   padding: 5px 15px;
-}
-.featuredProperty .bxslider1 li .readmore a:hover {
-  background-color: #f3eaff;
-  color: #02071a;
+  /*&:hover{
+						background-color : @lightbackcolor;
+						color : @colorblack;
+					}*/
 }
 .propertylist {
   color: #ffffff;
@@ -86,14 +86,13 @@
 }
 .propertylist .panel-default .readmore a {
   font: 16px 'Alex Brush', cursive;
-  background-color: #23235c;
+  background-color: #005596;
   color: #ffffff;
   padding: 5px 15px;
-  transition: padding 250ms;
+  /*transition : padding 250ms;*/
 }
 .propertylist .panel-default .readmore a:hover {
   background-color: #f3eaff;
-  padding: 5px 30px;
 }
 .propertylist .table td {
   border: none;
@@ -312,14 +311,17 @@
   padding: 5px;
   height: 312px;
 }
-.homeproject .projectnav a {
+.homeproject .projectnav a,
+.homeproject .projectnav a:focus {
+  background: none;
   /*background-color : black;*/
   border: 1px solid #005596;
   margin: 5px;
   font: bold 14px/1.5em Arial, Helvetica, sans-serif;
   color: #005596;
 }
-.homeproject .projectnav a:hover {
+.homeproject .projectnav a:hover,
+.homeproject .projectnav a:focus:hover {
   color: #ffffff;
   text-decoration: none;
   background-color: #005596;
@@ -340,7 +342,7 @@
   color: #bae275;
 }
 .homeproject .projsnap a:hover {
-  color: #ffffff;
+  color: #bae275;
   text-decoration: none;
 }
 .homeproject .projsnap img {
@@ -355,12 +357,12 @@
   margin-top: 25px;
 }
 .homeproject .projsnap .viewproperty a {
-  color: #bae275;
+  color: #005596;
   margin-top: 10px;
 }
 .homeproject .projsnap .viewproperty a:hover {
-  color: #f3eaff;
-  text-decoration: none;
+  color: #005596;
+  text-decoration: underline;
 }
 .homeproject #carousel {
   height: 312px;
@@ -411,11 +413,11 @@
   transition: all 0.2s ease;
 }
 .projlist .project .thumbnail .caption a {
-  color: #bae275;
+  color: #005596;
   text-decoration: none;
 }
 .projlist .project .thumbnail .caption a:hover {
-  color: #bae275;
+  color: #005596;
   text-decoration: underline;
 }
 .projlist .project .thumbnail .caption p {
@@ -515,7 +517,7 @@
   padding: 6px;
 }
 .products .thumbnail img:hover {
-  border: 4px solid #23235c;
+  border: 4px solid #005596;
 }
 .products .thumbnail .description {
   height: 75px;
@@ -622,14 +624,10 @@
   border: 1px solid #bbbbbb;
   padding: 10px;
 }
-.sidebarModule {
-  padding: 15px;
-}
 .sidebarModule .panel-default {
   border: none;
 }
 .sidebarModule.sidemenu {
-  margin: 15px;
   /*background-color:@contentback;*/
   padding: 10px;
   border: 1px solid #bbbbbb;
@@ -781,11 +779,20 @@ html {
 }
 .container {
   width: 992px !important;
-  padding-left: 0px;
 }
 .content {
   background-color: #ffffff;
 }
+/*btn-info
+	{ 
+		color: @back;
+		&:hover
+		{
+			text-decoration:none; 
+			background-color : @back;
+		}
+		
+	}*/
 *,
 hr {
   border-color: #373C51;
@@ -818,16 +825,16 @@ hr {
   color: #ffffff;
 }
 .btn-info,
-.btn-primary {
-  background-color: #23235c;
-  /*border-color : @color;*/
+.btn-primary,
+.btn-info:focus {
+  background-color: #005596;
 }
 .btn-info:hover,
 .btn-primary:hover {
   /*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
   /*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
   /*background: linear-gradient(right,#ccc,#0D8375);*/
-  background-color: #f3eaff;
+  background-color: #23235c;
 }
 /*.propertylist .panel-default {
 		color: @colorblack;
@@ -875,6 +882,7 @@ hr {
   /*height:40px;*/
 }
 .navbar-default .navbar-nav {
+  margin-left: -15px;
   /*&:hover
 			{
 				transition: all 300ms ease-in;
@@ -963,12 +971,12 @@ hr {
 h2,
 h3 {
   font: 1.8em/2.5em Amaranth-Regular;
-  color: #bae275;
+  color: #ffffff;
   line-height: 1.5em;
   border-bottom: 1px solid #ccc;
 }
 h1 {
-  color: #bae275;
+  color: #034206;
   font: 2em/1.2em Amaranth-Regular;
   letter-spacing: 1px;
   border-bottom: 1px solid #ccc;
@@ -982,6 +990,9 @@ h5 {
 }
 .panel {
   /*background-color:@contentback;*/
+}
+.sections {
+  padding: 10px;
 }
 .contentModule .sections {
   border: 1px solid #23235c;
@@ -1071,10 +1082,8 @@ footer .footlink ul li a {
 .sections,
 .enquiry .panel-default,
 .searchProp .panel-default {
-  /*margin : 10px;*/
   border: 1px solid #bbbbbb;
   /*background-color:@contentback;*/
-  padding: 10px;
 }
 .searchProperty input,
 .sections input,
@@ -1084,8 +1093,25 @@ footer .footlink ul li a {
 .sections textarea,
 .enquiry .panel-default textarea,
 .searchProp .panel-default textarea {
+  color: #02071a;
+}
+.searchProperty .btn-info,
+.sections .btn-info,
+.enquiry .panel-default .btn-info,
+.searchProp .panel-default .btn-info {
   color: #ffffff;
 }
+.propertylist > .btn-primary,
+.searchProp .btn > btn-info {
+  background-color: #005596;
+}
+.propertylist > .btn-primary:hover,
+.searchProp .btn > btn-info:hover {
+  background-color: #23235c;
+}
+/*.btn-info:hover, .btn-info:focus{
+		background-color : @darkbackcolor;
+	}*/
 .formsec {
   color: #E5DFDF;
   border-bottom: 1px solid #ccc;

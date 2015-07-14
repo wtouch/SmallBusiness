@@ -18,7 +18,6 @@
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	@contentlink:#6ba72b;
-	
 	@headingcolor:#bae275;
 	
 	@import "property.less";
@@ -42,13 +41,23 @@
 	}
 	.container{
 		width:992px !important;
-		padding-left : 0px;
-		
 	}
 	.content
 	{
 		background-color :@colorwhite;
 	}
+	
+	
+	/*btn-info
+	{ 
+		color: @back;
+		&:hover
+		{
+			text-decoration:none; 
+			background-color : @back;
+		}
+		
+	}*/
 	*, hr{
 		border-color : #373C51;
 	}
@@ -81,15 +90,14 @@
 		text-decoration : none;
 		color: @colorwhite;
 	}
-	.btn-info, .btn-primary{
-		background-color: @darkbackcolor;
-		/*border-color : @color;*/
+	.btn-info, .btn-primary,.btn-info:focus{
+		background-color: @back;
 	}
 	.btn-info:hover, .btn-primary:hover{
 		/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
 		/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
 		/*background: linear-gradient(right,#ccc,#0D8375);*/
-		background-color: @lightbackcolor;
+		background-color: @darkbackcolor;
 	}
 	/*.propertylist .panel-default {
 		color: @colorblack;
@@ -103,7 +111,6 @@
 	.btn-info{
 		border-radius : 2px;
 		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info{
-			
 			border : none;
 			color :@colorwhite;
 			font-weight: bold;
@@ -134,7 +141,9 @@
 		border-radius: 0;
 		/*height:40px;*/
 		.navbar-nav{
+			margin-left:-15px;
 			> li{
+				
 				text-transform:uppercase;
 				position : relative;
 				
@@ -222,12 +231,12 @@
 	}
 	h2,h3{
 		font: 1.8em/2.5em Amaranth-Regular;
-		color: #bae275;
+		color: @colorwhite;
 		line-height:1.5em;
 		border-bottom: 1px solid #ccc;
 	}
 	h1{
-		color: #bae275;
+		color: #034206;
 		font: 2em/1.2em Amaranth-Regular;
 		letter-spacing: 1px;
 		border-bottom: 1px solid #ccc;
@@ -240,8 +249,13 @@
 	.panel{
 		/*background-color:@contentback;*/
 	}
+	.sections
+	{
+		padding:10px;
+	}
 	.contentModule {
 		.sections{
+			
 			border:1px solid @darkbackcolor;
 			box-shadow:2px 2px 2px @lightcolor;
 			border-radius : 4px;
@@ -329,14 +343,32 @@
 		}
 	}
 	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
-		/*margin : 10px;*/
+		
 		border:1px solid @lightcolor;
 		/*background-color:@contentback;*/
-		padding:10px;
 		input,textarea{
-			color:@colorwhite;
+			color:@colorblack;
+		}
+		.btn-info{
+		color:@colorwhite;
 		}
 	}
+	
+	
+	
+	.propertylist >.btn-primary,.searchProp .btn >btn-info 
+	{
+		background-color:@back;
+		&:hover{
+		background-color : @darkbackcolor;
+		}
+	}
+	/*.btn-info:hover, .btn-info:focus{
+		background-color : @darkbackcolor;
+	}*/
+	
+	
+	
 	
 	.formsec{
 		color : #E5DFDF;

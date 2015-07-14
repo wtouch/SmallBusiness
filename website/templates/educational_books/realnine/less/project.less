@@ -79,7 +79,8 @@
 		border-radius : 4px;
 		padding:5px;
 		height:312px;
-		a{
+		a, a:focus{
+			background : none;
 			/*background-color : black;*/
 			border: 1px solid @back;
 			margin : 5px;
@@ -108,7 +109,7 @@
 		a{
 			color: @color;
 			&:hover{
-				color: @colorwhite;
+				color: @color;
 				text-decoration:none;
 			}
 		}
@@ -123,11 +124,11 @@
 		.viewproperty{
 			margin-top : 25px;
 			a{
-				color : @color;
+				color : @back;
 				margin-top : 10px;
 				&:hover{
-					color : @lightbackcolor;
-					text-decoration : none;
+					color : @back;
+					text-decoration : underline;
 				}
 			}
 		}
@@ -191,10 +192,10 @@
 				
 				.caption{
 					a{
-						color: @color;
+						color: @back;
 						text-decoration: none;
 						&:hover{
-							color : @color;
+							color : @back;
 							text-decoration : underline;
 						}
 					}
