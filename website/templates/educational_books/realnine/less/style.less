@@ -6,6 +6,7 @@
 		font-family:'QumpellkaNo12';
 		src:url('../fonts/QumpellkaNo12.otf');
 	}
+	
 	@color : #bae275;
 	@lightcolor : #BBBBBB;
 	@darkcolor : #02071A;
@@ -13,7 +14,7 @@
 	@darkbackcolor : #23235C;
 	@lightbackcolor :#F3EAFF; 
 	@contentback: #B7B8BA;
-	
+	@hover:#B0B5B8;
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	@contentlink:#6ba72b;
@@ -55,8 +56,8 @@
 		transition:300ms;
 	}
 	.form-control{
-		background-color:@back !important;
-		color:@colorwhite;
+		/*background-color:@back !important;*/
+		/*color:@colorwhite;*/
 	}
 	
 	.logo {
@@ -90,9 +91,9 @@
 		/*background: linear-gradient(right,#ccc,#0D8375);*/
 		background-color: @lightbackcolor;
 	}
-	.propertylist .panel-default {
-		background-color: @back;
-	}
+	/*.propertylist .panel-default {
+		color: @colorblack;
+	}*/
 	.btn.send{
 		margin-right : 8px;
 	}
@@ -174,13 +175,13 @@
 							&:hover{
 								text-decoration: underline;
 								-webkit-transition: all 0.4s;
-								
 							}
 						}
 						&:hover{
-							background: -webkit-linear-gradient(right,#ccc,#0D8375);
+							background-color : @hover;
+							/*background: -webkit-linear-gradient(right,#ccc,#0D8375);
 							background: -moz-linear-gradient(right,#ccc,#0D8375);
-							background: linear-gradient(right,#ccc,#0D8375);
+							background: linear-gradient(right,#ccc,#0D8375);*/
 						}
 						ul{
 							list-style: none;
@@ -237,21 +238,21 @@
 	}
 	
 	.panel{
-		background-color:@contentback;
+		/*background-color:@contentback;*/
 	}
 	.contentModule {
 		.sections{
 			border:1px solid @darkbackcolor;
 			box-shadow:2px 2px 2px @lightcolor;
 			border-radius : 4px;
-			background-color:@contentback;
+			/*background-color:@contentback;*/
 			img{
 				
 				width : 100%;
 				padding : 4px;
 				border : 3px solid transparent;
 				&:hover{ 
-					border : 3px solid @color;
+					border : 3px solid @back;
 				}
 			}
 			.readmore{
@@ -330,7 +331,7 @@
 	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
 		/*margin : 10px;*/
 		border:1px solid @lightcolor;
-		background-color:@contentback;
+		/*background-color:@contentback;*/
 		padding:10px;
 		input,textarea{
 			color:@colorwhite;
