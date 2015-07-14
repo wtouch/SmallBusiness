@@ -8,12 +8,12 @@
 }
 
 //text color shade
-	@color : #ccb129; 
-	@lightcolor : #b4915a; 
-	@darkcolor : #f9f4da;
+	@color : #edcf31; //h1 heading
+	@lightcolor : #928e7c; //body text
+	@darkcolor : #f9f4da;//h2 and other
 	 
 //background color shade
-	@back : #675200; //  green color
+	@back : #675200; 
 	@darkbackcolor : #fff9e2;; 
 	@lightbackcolor :#edcf31; 
 	
@@ -26,35 +26,23 @@
 	@import "product.less";
 	
 	body{
-		color:#928e7c;
-		background-image: linear-gradient(#000 40px, #3f3200 150px, #000 400px);
-		.topBlock{
-			position: relative;
-			.topBg{
-				border-top: 3px solid @color;
-				height: 570px;
-				top: 0;
-				position: absolute;
-				width: 100%;
-				background-repeat: no-repeat;
-				background: url(../img/bg.png) no-repeat center 50px;
-				z-index: 2;
-			}
-		}
+		color:@lightcolor;
+		background-image:url('../img/bg.png'), linear-gradient(#000 40px, #3f3200 150px, #000 400px);
+		
+		background-repeat:no-repeat
+		
 		
 	}
 	header{
 		margin: 0 auto;
 		border-top: 3px solid #ccb129;
 	}
-	nav{
-		margin-top:5px;
-	}
+	
 	.container{
 		width:992px !important;
-		background-image: url('../img/bg.png');
-		position:relative;
-		background-repeat:no-repeat
+		//background-image: url('../img/bg.png');
+		//position:relative;
+		
 	}
 	
 	.logo {
@@ -65,7 +53,7 @@
 		
 	}
 	a, .btn.btn-link{
-		color: @darkbackcolor;
+		color: @color;
 		&:hover, &:hover{
 			text-decoration : none;
 			color: @color;
@@ -104,21 +92,21 @@
 		background-color:transparent;
 	}
 	.navbar-default {
-		background:transparent;
+		background-image:linear-gradient(#000 40px, #3f3200 150px, #000 400px);
 		border:none;
 		.navbar-nav{
 			
 			li:hover,li a:active{
-				border-top: 15px solid #ccac28;
+				border-top: 10px solid #ccac28;
 			}
-			> li{
+			li{
 				
 				margin-bottom:0px;
 				position : relative;
 				padding: 0 5px;
 				float: left;
 				z-index: 4;
-				> a, > a:focus {
+				a,  a:focus {
 				
 					padding: 8px 15px;
 					text-transform: uppercase;
@@ -157,7 +145,7 @@
 							
 						}
 						ul{
-							background : linear-gradient(@back, @color);
+							//background : linear-gradient(@back, @color);
 							list-style: none;
 							display : none;
 							position : absolute;
@@ -205,7 +193,7 @@
 		letter-spacing: 1px;
 		padding-bottom:10px;
 		font: 2.3em/1.2em negotiate_free;
-		color: @lightbackcolor;
+		color: @color;
 	}
 	h2, h4 {
 		color: @darkcolor;
@@ -247,7 +235,7 @@
 	.btn-info,.btn-primary,.btn-danger{
 		border : none;
 		background : transparent;
-		color : @lightbackcolor;
+		color : @color;
 		
 	}
 	.btn-info[disabled],.btn-info.disabled,.send,.btn-danger,.btn .btn-info .center-block{
@@ -255,7 +243,7 @@
 		border-color:transparent;
 	}
 	.btn-danger:hover,.btn-danger:active{
-		color:@darkbackcolor;
+		color:@color;
 		background-color:@lightcolor;
 	}
 	.btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info,.btn-primary:active,.btn-primary:focus,.btn-primary:hover{
@@ -266,7 +254,7 @@
 	.subhead{
 		font-size: 18px;
 		font-weight: bold;
-		background: -webkit-gradient(linear, left top, right top, from(#564500), to(#685300));
+		background: -webkit-gradient(linear, left top, right top, @back, @darkbackcolor);
 		background-image: -moz-linear-gradient(left, #564500, #685300);
 		box-shadow: -7px 5px 5px -5px #000;
 		width:65%;
@@ -281,9 +269,12 @@
 		margin: 0px 0px 10px;
 	}
 	.sidemenu{
+		margin-top: 5px;
+	}
+	.sidemenu,.projectnav{
 		padding:10px;
 		color: #928e7c;
-		margin-top: 5px;
+	
 		top: -5px;
 		background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(#171717));
 		background-image: -webkit-linear-gradient(left, #171717 0%, rgba(255,255,255,0) 5%);
