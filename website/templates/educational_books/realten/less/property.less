@@ -40,12 +40,18 @@
 //propertiesList 
 .propertylist{
 	padding: 20px 20px 0px;
-	border : 1px solid @darkbackcolor;
+	
 	.btn-primary{
 		margin-bottom: 10px;
+		background : linear-gradient(@back, @color);
+		color:@darkbackcolor;
+		&:hover{
+			background : linear-gradient(@back, @color);
+			color:@colorblack;
+		}
 	}
 	.panel-default{
-		border-color : @darkbackcolor;
+		border-color : transparent;
 		img{
 			max-height: 215px;
 			width : 100%;
@@ -55,19 +61,7 @@
 				border : 3px solid @back;
 			}
 		}
-		.readmore{
-			margin-bottom :10px;
-			a{
-				padding : 5px 15px;
-				margin-right:5px;
-				background : linear-gradient(@back, @color);
-				color : @lightcolor;
-				&:hover, &:hover{
-					background : linear-gradient(@darkcolor, @darkbackcolor);
-					color : @colorwhite;
-				}
-			}
-		}
+		
 	}
 	.table{
 		td{
@@ -176,8 +170,8 @@
 			tbody{
 				tr{
 					th{
-						background-color : @darkbackcolor;
-						color : @colorwhite;
+						background: -webkit-gradient(linear, left top, right top, from(#564500), to(#685300));
+						color : @darkbackcolor;
 					}
 					td, th{
 						border: 1px solid @darkbackcolor;

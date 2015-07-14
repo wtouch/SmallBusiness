@@ -18,14 +18,12 @@
 		width:100px;
 		a{
 			h4{
-				background : linear-gradient(@back, @color);
 				color : @lightcolor;
 				padding: 4px;
 				border : none;
 				border-radius : 4px;
 				&:hover{
-					background : linear-gradient(@darkcolor, @darkbackcolor);
-					color : @colorwhite;
+					color : @darkcolor;
 				}
 			}
 		}
@@ -57,7 +55,8 @@
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration : none;
-					color : @colorwhite;
+					color : @darkcolor;
+					background-color:#928e7c;
 				}
 			}
 		}
@@ -82,7 +81,7 @@
 				color : @lightcolor;
 				text-decoration : underline;
 				&:hover{
-					color : @colorwhite;
+					color : @darkcolor;
 					text-decoration : none;
 				}
 			}
@@ -117,7 +116,7 @@
 // single project nav css
 .project{
 	.navbar{
-		border: 1px solid @lightbackcolor;
+		
 		border-radius: 0;
 		margin-top:10px;
 		margin-bottom:10px;
@@ -126,16 +125,17 @@
 	}
 	ul.nav.navbar-nav {
 		background : linear-gradient(@back, @color);
+		margin-bottom:10px;
 		>li{
 			border-right : 1px solid @lightbackcolor;
 			>a, > a:focus{
 				padding : 9px 12px;
-				color : @lightcolor;
+				color : @darkbackcolor;
 				position : relative;
 			} 
 			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-				background : linear-gradient(@darkcolor, @darkbackcolor);
-				color : @colorwhite;
+				background : linear-gradient(@lightcolor, @back);
+				color : @color;
 			}
 		}
 	}
@@ -175,19 +175,15 @@
 					color : @lightcolor;
 				}
 				.caption p{
-					color:@colorblack;
+					color:@darkbackcolor;
 				}
 				.readmore{
 					margin-top : 15px;
 					a{
-						background : linear-gradient(@back, @color);
 						color : @lightcolor;
-						padding :6px 12px;
 						border-radius : 4px;
 						&:hover, &:hover{
-							background : linear-gradient(@darkcolor, @darkbackcolor);
 							color : @colorwhite;
-							padding :6px 40px;
 						}
 					}
 				}

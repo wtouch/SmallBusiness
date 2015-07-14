@@ -52,6 +52,9 @@
 	}
 	.container{
 		width:992px !important;
+		background-image: url('../img/bg.png');
+		position:relative;
+		background-repeat:no-repeat
 	}
 	
 	.logo {
@@ -233,11 +236,7 @@
 		font-weight:bold;
 		
 	}
-	.sidebarModule .panel,.sidebarModule .sections, .contentModule .sections{
-		background : transparent;
-		border:1px solid @darkbackcolor;
-		border-radius : 4px;
-	}
+	
 	.form-control{
 		background : transparent;
 		border-color : @darkbackcolor;
@@ -245,11 +244,24 @@
 			border-color : @back;
 		}
 	}
-	.btn-info,.btn-primary{
+	.btn-info,.btn-primary,.btn-danger{
 		border : none;
-		background : linear-gradient(@back, @color);
+		background : transparent;
 		color : @lightbackcolor;
 		
+	}
+	.btn-info[disabled],.btn-info.disabled,.send,.btn-danger,.btn .btn-info .center-block{
+		background-color:@back;
+		border-color:transparent;
+	}
+	.btn-danger:hover,.btn-danger:active{
+		color:@darkbackcolor;
+		background-color:@lightcolor;
+	}
+	.btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info,.btn-primary:active,.btn-primary:focus,.btn-primary:hover{
+		background : transparent;
+		border : none;
+		color:@darkcolor;
 	}
 	.subhead{
 		font-size: 18px;
@@ -257,7 +269,7 @@
 		background: -webkit-gradient(linear, left top, right top, from(#564500), to(#685300));
 		background-image: -moz-linear-gradient(left, #564500, #685300);
 		box-shadow: -7px 5px 5px -5px #000;
-		
+		width:65%;
 		color : @darkcolor;
 		padding: 10px 60px 10px 10px;
 		position : relative;
@@ -268,10 +280,24 @@
 		border-color:#5f9429;
 		margin: 0px 0px 10px;
 	}
-	.sidebarModule, .contentModule{
-		.sections{
+	.sidemenu{
+		padding:10px;
+		color: #928e7c;
+		margin-top: 5px;
+		top: -5px;
+		background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(#171717));
+		background-image: -webkit-linear-gradient(left, #171717 0%, rgba(255,255,255,0) 5%);
+	
+	}
+	.propertylist,.sidebarModule, .contentModule{
+		.panel,.sections{
 			padding:10px;
-		}
+			color: #928e7c;
+			
+			top: -5px;
+			background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(#171717));
+			background-image: -webkit-linear-gradient(left, #171717 0%, rgba(255,255,255,0) 5%);
+					}
 	}
 	.sidebarModule{	
 		h4{
