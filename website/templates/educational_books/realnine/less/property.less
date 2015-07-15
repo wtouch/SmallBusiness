@@ -56,9 +56,11 @@
 
 //propertiesList 
 .propertylist{
+	border: 1px solid @border;
+	border-radius : 5px;
 	color:@colorwhite;
 	padding: 20px 20px 0px;
-	border : 1px solid @lightbackcolor;
+	
 	.btn-primary{
 		margin-bottom: 10px;
 		background-color : @back;
@@ -105,18 +107,19 @@
 		.pagination{
 			li,.disabled{
 				a{
-					background-color: @lightbackcolor;
-					border-color : @colorwhite;
-					color:@colorwhite;
+					background-color: @colorwhite;
+					border-color : @border;
+					
 					&:hover{
-						background-color:@color;
-						color:@lightbackcolor;
+						background-color:@back;
+						color:@colorwhite;
 					}
 				}
 			}
 			>.active>a{
-				background-color:@color;
-				color:@lightbackcolor;
+				background-color:@back;
+				color:@colorwhite;
+				border-color : @colorblack;
 			}
 		}
 		
