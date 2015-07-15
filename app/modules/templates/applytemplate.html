@@ -55,6 +55,7 @@
 			<input type="hidden" ng-init="modalOptions.templateList.template_image = modalOptions.tempList.template_image" ng-model="modalOptions.templateList.template_image">
 			<div class="panel panel-default">
 			<div class="panel-body">
+				<div class="form-group">
 					<div ng-if="modalOptions.tempList.template_params" ng-init="modalOptions.templateList.template_params = modalOptions.tempList.template_params">	
 					
 						<label  for="color" class="col-sm-2 control-label">Color</label>
@@ -72,6 +73,7 @@
 							<label  for="dark_color" class="col-sm-2 control-label">Dark</label>
 							<input type="color" id="dark_color" class="form-control" name="dark-color" ng-model="modalOptions.templateList.template_params.dark_color">
 						</div>				
+					</div>
 					</div>
 					
 				<div class="form-group">
@@ -101,19 +103,23 @@
 					</div>
 				</div>
 				
-				<div class="form-group" >
-					<label  for="image" class="col-sm-2 control-label">Image</label>
+				<div class="form-group">
+					<label for="image" class="col-sm-2 control-label">Image *</label>
 					<div class="col-sm-9">
-						<input type="file" id="image" name="image" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="modalOptions.generateThumb($files)" ng-model="image">
-					<!-- This will show thumbnails & progress of images -->
-					<file-preview url="image"></file-preview>
-					<!-- This button will show if file/s selected -->
-						<button ng-show="image" ng-click="modalOptions.upload(image,modalOptions.path,modalOptions.userInfo,modalOptions)" type="button">Upload</button>
-					<!-- This hidden input will store image path in array after successful uploading -->
+						<input type="file" id="image" name="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="modalOptions.upload(image, modalOptions.templateList.user_id + modalOptions.path,modalOptions.userInfo,modalOptions)" ng-model="image">
 						<input type="hidden" ng-model="modalOptions.slider.image">
 					</div>
 				</div>
-				
+		
+				<div class="form-group">						 
+					<div class="col-sm-9 col-sm-offset-3">
+						<span class="thumbs" ng-if="modalOptions.slider.image">
+							<img class="img-thumbnail" ng-src="{{appConfig.assetPath + '/' + modalOptions.slider.image}}" ng-click="modalOptions.slider.image.imgkey = key; "/>
+							<span class="close" ng-click="removeImg(key, modalOptions.slider.image)">X</span>
+						</span>
+					</div>
+				</div>
+	
 				<div class="form-group">
 					<label  for="slider-description" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-9">
@@ -148,8 +154,3 @@
 			<button type="submit" class="btn btn-primary" ng-click="modalOptions.formData(modalOptions.templateList); modalOptions.ok()">OK</button>
 		</div>
 	</form>
-	
-	
-	
-	
-<!--ng-disabled="applyTemplateForm.$invalid"-->
