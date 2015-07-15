@@ -10,7 +10,7 @@
 		border : 4px solid transparent;
 		padding : 6px;
 		&:hover{
-			border : 4px solid @back;
+			border : 4px solid @darkcolor;
 		}
 	}
 	.servdesc{
@@ -33,17 +33,23 @@
 
 //singleproduct
 .singleproduct{
+	padding:10px;
+		background-color:@colorblack;
+		background-image: -webkit-linear-gradient(left, @back 1%, @colorblack 20%);
 		.thumbnail{
-			background : transparent;
-			border-color : @darkbackcolor;
+			background-color:@colorblack;
+			border-color : @darkcolor;
 		}
 	}
 
 //multipleproducts
 .products{
+	background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@back));
+		background-image: -webkit-linear-gradient(left, @back 1%, @colorblack 20%);
+		padding:10px;
 	.thumbnail{
-		background : transparent;
-		border-color : @darkbackcolor;
+		background-color:@colorblack;
+		border-color : @darkcolor;
 		padding-top : 10px;
 		.prodimg{
 			height : 148px;
@@ -54,7 +60,7 @@
 				border : 2px solid transparent;
 				padding : 4px;
 				&:hover{
-					border : 2px solid @back;
+					border : 2px solid @darkcolor;
 				}
 			}
 		}

@@ -12,7 +12,7 @@
 				min-height: 175px;
 			}
 			&:hover{
-				border : 2px solid @back;
+				border : 2px solid @darkcolor;
 			}
 		}
 		width:100px;
@@ -42,7 +42,7 @@
 	position: relative;
 	z-index: 5;
 	.projectnav{
-		background-image:linear-gradient(#392E00 40px, #272314 150px, #000000 400px);
+		background-image:linear-gradient(@colorblack 40px, @darkbackcolor 395px, @colorblack 400px);
 		border: 3px solid #f9f4da;
 		padding:5px;
 		height:312px;
@@ -58,15 +58,15 @@
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration : none;
 					color : @darkcolor;
-					background-color:#928e7c;
+					background-color:@lightcolor;
 				}
 			}
 		}
 	}
 	.projsnap{
-		background-image:linear-gradient(#392E00 40px, #272314 150px, #000000 400px);
+		background-image:linear-gradient(@colorblack 40px, @darkbackcolor 395px, @colorblack 400px);
 		border: 3px solid #f9f4da;
-		padding:5px;
+		padding:10px;
 		height:312px;
 		img{
 			height : 110px;
@@ -149,17 +149,22 @@
 		}
 	}
 }
-
+.projHead,.project .description,.project .thumbnail {
+	background-color:@colorblack;
+}
 //css for single project & project list
 	.projlist{
+		background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@back));
+		background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
 		padding:10px;
-		border : 1px solid @darkbackcolor;
+		//border : 1px solid @darkbackcolor;
 		.project{
+			
 			.thumbnail{
-				background : none;
+				background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
 				height:385px;
 				padding-top : 15px;
-				border-color : @darkbackcolor;
+				border-color : @darkcolor;
 				.projectimg{
 					height : 148px;
 					overflow : hidden;
@@ -175,10 +180,10 @@
 				}
 				
 				.caption{
-					color : @lightcolor;
+					color : @darkcolor;
 				}
 				.caption p{
-					color:@darkbackcolor;
+					color:@lightcolor;
 				}
 				.readmore{
 					margin-top : 15px;

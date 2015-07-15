@@ -101,7 +101,6 @@ define(['app'], function (app) {
 			property.modified_date = $scope.currentDate;
 			dataService.post("post/property",property,$scope.userinfo)
 			.then(function(response) {
-					
 				if(response.status=="success"){
 					$location.path("/dashboard/property");
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};

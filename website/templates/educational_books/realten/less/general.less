@@ -7,6 +7,18 @@
 .sidebarModule{
 	.panel-default{
 		border : none;
+		.panel-body{
+			.btn-info{
+				background-color:@darkbackcolor;
+				border-color:transparent;
+				&:hover,&:active{
+					color:@colorwhite;
+					background-color:@lightbackcolor;
+					padding:7px;
+				}
+			}
+		}
+		
 	}
 	&.sidemenu{
 		
@@ -82,15 +94,19 @@
 	}
 	.infrastructure{
 		.thumbnail{
+			background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@back));
+			background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
 			height: 395px;
 			img{
 				max-height : 190px;
 			}
 			.caption{
 				height: 138px;
+				color:@lightcolor;
+				margin-bottom : 15px;
 			}
 			.readmore{
-				margin-top : 10px;
+			
 				.btn-info:hover{
 					padding : 6px 40px;
 				}
@@ -99,6 +115,8 @@
 	}
 	//contactus page css
 	.contact{
+		background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
+		padding:15px;
 		img{
 			max-height: 125px;
 		}
@@ -113,6 +131,8 @@
 	
 	//testimonials
 	.testimonial{
+		background-color:@colorblack;
+		padding:10px;
 		blockquote{
 			font-size : inherit;
 			border-left: none; 
@@ -143,18 +163,21 @@
 	}
 	
 	.gallery{
-			.thumbnail{
-				border-color : @darkbackcolor;
-				background : transparent;
-				h4{
-					border : none;
-					padding-bottom : 0px;
-				}
-				.description{
-					color:@lightcolor;
-				}
+		padding:10px;
+		background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@back));
+		background-image: -webkit-linear-gradient(left, @back 1%, @colorblack 20%);
+		.thumbnail{
+			background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@back));
+			background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
+			h4{
+				border : none;
+				padding-bottom : 0px;
+			}
+			.description{
+				color:@lightcolor;
 			}
 		}
+	}
 		
 	.enquiry{
 		.panel-body{

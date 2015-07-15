@@ -9,13 +9,13 @@
 
 //text color shade
 	@color : #edcf31; //h1 heading
-	@lightcolor : #928e7c; //body text
+	@lightcolor : #D2CEBE; //body text
 	@darkcolor : #f9f4da;//h2 and other
 	 
 //background color shade
-	@back : #675200; 
-	@darkbackcolor : #fff9e2;; 
-	@lightbackcolor :#edcf31; 
+	@back : #171717; //black shade for div style
+	@darkbackcolor : #5d4a00; 
+	@lightbackcolor :#ccb129; 
 	
 //common color shade
 	@colorblack : #000000;
@@ -27,7 +27,7 @@
 	
 	body{
 		color:@lightcolor;
-		background-image:url('../img/bg.png'), linear-gradient(#000 40px, #3f3200 150px, #000 400px);
+		background-image:url('../img/bg.png'), linear-gradient(@colorblack 40px, @darkbackcolor 150px, @colorblack 400px);
 		
 		background-repeat:no-repeat
 		
@@ -92,22 +92,24 @@
 		background-color:transparent;
 	}
 	.navbar-default {
-		background-image:linear-gradient(#000 40px, #3f3200 150px, #000 400px);
+		background-image:linear-gradient(@colorblack 40px, @darkbackcolor 150px, @colorblack 400px);
 		border:none;
 		.navbar-nav{
-			
-			li:hover,li a:active{
-				border-top: 10px solid #ccac28;
+			>li:hover{
+				border-top: 10px solid @lightbackcolor;
+				color:@color;
 			}
-			li{
-				
+			>li >a:active,>li >a:hover,>li >a:focus{
+				color:@color;
+			}
+			>li{
 				margin-bottom:0px;
 				position : relative;
 				padding: 0 5px;
 				float: left;
 				z-index: 4;
-				a,  a:focus {
-				
+				>a, > a:focus {
+					color:@lightcolor;
 					padding: 8px 15px;
 					text-transform: uppercase;
 					font: normal 14px/1.5em 'Arial', Helvetica, sans-serif;
@@ -115,21 +117,19 @@
 					-o-transition: all 0.2s ease;
 					-moz-transition: all 0.2s ease;
 					-webkit-transition: all 0.2s ease;
-					
-				}
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					color:@lightcolor;
 				}
 				
 				> ul{
 					display: none;
 					position: absolute;
-					width: 245px;
+					width: 170px;
 					z-index: 999;
-					
 					padding: 2px;
 					list-style: none;
 					text-align: left;
+					left:-16px;
+					border:2px solid @lightcolor;
+					background-color:@colorblack;
 					>li{
 						padding : 10px;
 						text-transform : uppercase;
@@ -138,28 +138,31 @@
 							color : @lightcolor;
 							&:hover{
 								color : @colorwhite;
+								
 							}
 						}
 						&:hover{
-							
-							
+							background-color:@darkbackcolor;
 						}
+						
 						ul{
-							//background : linear-gradient(@back, @color);
 							list-style: none;
 							display : none;
 							position : absolute;
-							left: 150px;
+							left: 60px;
 							width: 180px;
 							padding : 2px;
+							border:1px solid @darkbackcolor;
+							background-color:@lightbackcolor;
+							z-index:999;
 							li{
 								padding : 10px;
 								a{
-									color : @lightcolor;
+									color : @colorwhite;
 								}
 								&:hover{
 									a{
-										color : @colorwhite;
+										color : @color;
 									}
 									
 									
@@ -181,7 +184,6 @@
 			
 		}
 	}
-	
 	.content{
 		background-color : @darkbackcolor;
 		border-radius : 7px;
@@ -195,28 +197,37 @@
 		font: 2.3em/1.2em negotiate_free;
 		color: @color;
 	}
-	h2, h4 {
-		color: @darkcolor;
+	h2, h4 ,h3{
+		color: @color;
 		padding-bottom:10px;
 		
 	}
 	h3{
 		font: 1.4em/1.2em QumpellkaNo12;
-		  display: inline-block;
-		  position: relative;
-		  margin-bottom:0px;
+		display: inline-block;
+		position: relative;
+		margin-bottom:0px;
 	}
 	
 	.subhead::after {
-	 content: "";
-	  height: 30px;
-	  display: block;
-	  position: absolute;
-	  top: -1px;
-	 
-	  right: -51px;
-	  border-bottom: 44px solid #574500;
-	  border-right: 52px solid transparent;
+		content: "";
+		height: 30px;
+		display: block;
+		position: absolute;
+		top: -1px;
+		right: -51px;
+		border-bottom: 44px solid @darkbackcolor;
+		border-right: 52px solid transparent;
+	}
+	.subhead::before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		background: url('../img/bg_heading.png') no-repeat;
+		width: 15px;
+		height: 67px;
+		top: 0;
+		left: -15px
 	}
 	h2{
 		font: 2.0em/1.2em QumpellkaNo12;
@@ -239,12 +250,12 @@
 		
 	}
 	.btn-info[disabled],.btn-info.disabled,.send,.btn-danger,.btn .btn-info .center-block{
-		background-color:@back;
+		background-color:@darkbackcolor;
 		border-color:transparent;
 	}
 	.btn-danger:hover,.btn-danger:active{
-		color:@color;
-		background-color:@lightcolor;
+		color:@colorwhite;
+		background-color:@lightbackcolor;
 	}
 	.btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info,.btn-primary:active,.btn-primary:focus,.btn-primary:hover{
 		background : transparent;
@@ -254,18 +265,17 @@
 	.subhead{
 		font-size: 18px;
 		font-weight: bold;
-		background: -webkit-gradient(linear, left top, right top, @back, @darkbackcolor);
-		background-image: -moz-linear-gradient(left, #564500, #685300);
-		box-shadow: -7px 5px 5px -5px #000;
+		background-color:  @darkbackcolor ;
+		box-shadow: -7px 5px 5px -5px @darkbackcolor;
 		width:65%;
 		color : @darkcolor;
 		padding: 10px 60px 10px 10px;
 		position : relative;
-		border-bottom: 2px solid #5d4a00;
+		border-bottom: 2px solid @darkbackcolor;
 	}
 	hr{
 		border-style:dashed;
-		border-color:#5f9429;
+		border-color:@lightbackcolor;
 		margin: 0px 0px 10px;
 	}
 	.sidemenu{
@@ -273,22 +283,22 @@
 	}
 	.sidemenu,.projectnav{
 		padding:10px;
-		color: #928e7c;
-	
+		color: @lightcolor;
+		border-top:1px solid @darkbackcolor;
 		top: -5px;
-		background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(#171717));
-		background-image: -webkit-linear-gradient(left, #171717 0%, rgba(255,255,255,0) 5%);
+		background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@darkbackcolor));
+		background-image: -webkit-linear-gradient(left, @back 1%,  @colorblack 20%);
 	
 	}
 	.propertylist,.sidebarModule, .contentModule{
 		.panel,.sections{
 			padding:10px;
-			color: #928e7c;
-			
+			color: #lightcolor;
 			top: -5px;
-			background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(#171717));
-			background-image: -webkit-linear-gradient(left, #171717 0%, rgba(255,255,255,0) 5%);
-					}
+			background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@darkbackcolor));
+			background-image: -webkit-linear-gradient(left, @back 1%, @colorblack 20%);
+			border-top:1px solid @darkbackcolor;
+		}
 	}
 	.sidebarModule{	
 		h4{
@@ -303,13 +313,13 @@
 	}
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
 	{
-		background-color : @back;
+		background-color : @darkbackcolor;
 		color : @lightcolor;
-		border : 1px solid @darkbackcolor;
+		border : 1px solid @lightbackcolor;
 	}
 	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
-		background-color : @darkbackcolor;
-		border : 1px solid @back;
+		background-color : @lightbackcolor;
+		border : 1px solid @darkbackcolor;
 		color : @colorwhite;
 	}
 	footer{
