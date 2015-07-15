@@ -19,7 +19,7 @@
 	@colorwhite	: #fff;
 	@contentlink:#6ba72b;
 	@headingcolor:#bae275;
-	
+	@border: #B8B8C3;
 	@import "property.less";
 	@import "project.less";
 	@import "product.less";
@@ -48,16 +48,7 @@
 	}
 	
 	
-	/*btn-info
-	{ 
-		color: @back;
-		&:hover
-		{
-			text-decoration:none; 
-			background-color : @back;
-		}
-		
-	}*/
+	
 	*, hr{
 		border-color : #373C51;
 	}
@@ -75,9 +66,7 @@
 		margin-left: 15px;
 		max-height: 100px;
 	}
-	/*a, .btn.btn-link,.btn .btn-info{
-		color: @color;
-	}*/
+	
 	.project .thumbnail{
 		background-color:@back;
 	}
@@ -90,15 +79,28 @@
 		text-decoration : none;
 		color: @colorwhite;
 	}
-	.btn-info, .btn-primary,.btn-info:focus{
+	.btn-info, .btn-info[disabled],.btn-primary,.readmore a,.readmore a h4,.btn-info:focus{
 		background-color: @back;
 	}
-	.btn-info:hover, .btn-primary:hover{
+	.btn-info:hover, .btn-info[disabled]:hover,.readmore a:hover, .readmore a h4:hover,.btn-primary:hover{
 		/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
 		/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
 		/*background: linear-gradient(right,#ccc,#0D8375);*/
 		background-color: @darkbackcolor;
 	}
+	
+	a
+	{
+		color:@back;
+	}
+	
+	/*.btn-info[disabled]
+	{
+			border-color :transparent;
+			&:hover{
+			border-color:transparent;
+			}
+	}*/
 	/*.propertylist .panel-default {
 		color: @colorblack;
 	}*/
@@ -135,6 +137,14 @@
 	{
 		border:none;
 	}
+	
+	.contentModule .sections .readmore .btn-info {
+		 background-color: @back; 
+		 &:hover{
+			background-color:@darkbackcolor;
+		 }
+	}
+
 	.navbar-default {
 		background-color: @darkbackcolor;
 		margin-bottom :0px;
@@ -169,7 +179,7 @@
 					position: absolute;
 					width: 245px;
 					z-index: 999;
-					background-color: @darkcolor;
+					background-color: @darkbackcolor;
 					padding: 12px;
 					list-style: none;
 					text-align: left;
@@ -215,7 +225,7 @@
 		}
 	}
 	.subhead {
-		font-family: "Carter One";
+		
 		font-size: 20px;
 		font-weight: bold;
 		border:1px solid @darkbackcolor;
@@ -255,11 +265,9 @@
 	}
 	.contentModule {
 		.sections{
-			
 			border:1px solid @darkbackcolor;
 			box-shadow:2px 2px 2px @lightcolor;
 			border-radius : 4px;
-			/*background-color:@contentback;*/
 			img{
 				
 				width : 100%;
@@ -274,9 +282,9 @@
 				margin-top:10px;
 				margin-right:10px;
 				a{
-					font: 16px 'Alex Brush', cursive;
+					/*font: 16px 'Alex Brush', cursive;*/
 					color : @colorwhite;
-					padding : 3px 9px;
+					/*padding : 3px 9px;*/
 				}
 			}
 		}
@@ -363,9 +371,7 @@
 		background-color : @darkbackcolor;
 		}
 	}
-	/*.btn-info:hover, .btn-info:focus{
-		background-color : @darkbackcolor;
-	}*/
+	
 	
 	
 	
@@ -384,11 +390,10 @@
 		margin-top: 20px;
 	}
 	.email{
-		color :@color;
-		text-decoration : underline;
 		&:hover{
 			text-decoration : none;
-			color :@lightcolor;
+			color :@darkbackcolor;
+			text-decoration : underline;
 		}
 	}
 	
@@ -496,7 +501,7 @@
 	
 	//charges
 	.highlight{
-		color :@color;
+		color :@back;
 	}
 	footer{
 		margin-top : 10px;

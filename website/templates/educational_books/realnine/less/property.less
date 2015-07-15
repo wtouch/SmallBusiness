@@ -19,7 +19,7 @@
 				max-height: 215px;
 				width : 100%;
 				padding : 4px;
-				border : 3px solid @lightbackcolor;
+				border : 3px solid @border;
 				&:hover{ 
 					border : 3px solid @back;
 				}
@@ -43,27 +43,25 @@
 					margin-right:10px;
 					border:1px solid @colorwhite;
 					font: 16px 'Alex Brush', cursive;
-					background-color : @darkbackcolor;
 					color : @colorwhite;
 					padding : 5px 15px;
-					/*&:hover{
-						background-color : @lightbackcolor;
-						color : @colorblack;
-					}*/
 				}
+				
 			}
 		}
 	}
 	
 }
-
+	.col-lg-9 h2
+	{
+		color:@colorblack;
+	}
 
 //propertiesList 
 .propertylist{
 	color:@colorwhite;
 	padding: 20px 20px 0px;
 	border : 1px solid @lightbackcolor;
-	
 	.btn-primary{
 		margin-bottom: 10px;
 		background-color : @back;
@@ -91,14 +89,9 @@
 			margin-bottom :10px;
 			a{
 				font: 16px 'Alex Brush', cursive;
-				background-color : @back;
 				color : @colorwhite;
 				padding : 5px 15px;
 				/*transition : padding 250ms;*/
-				&:hover{
-					background-color : @lightbackcolor;
-					
-				}
 			}
 		}
 	}
@@ -139,7 +132,8 @@
 	.property{
 		margin-bottom : 15px;
 		padding: 10px 15px;
-		border : 1px solid @darkbackcolor;
+		border-radius :5px;
+		border : 1px solid @border;
 		h3{
 			border :none;
 		}
@@ -147,10 +141,13 @@
 			tbody{
 				tr{
 					td{
-						border-top : 1px dashed @darkbackcolor;
+						border-top : 1px solid @border;
 					}
 				}
 			}
+		}
+		h3{
+			color:@colorblack;
 		}
 		.subimg{
 			margin-top: 10px;

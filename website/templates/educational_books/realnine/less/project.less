@@ -9,7 +9,7 @@
 			overflow:hidden;
 		}
 		img{
-			max-height: 215px;
+			max-height: 140px;
 			width : 100%;
 			padding : 4px;
 			border : 3px solid transparent;
@@ -25,7 +25,7 @@
 				{ 
 					margin-right:10px;
 					font: 16px 'Alex Brush', cursive;
-					background-color : @darkbackcolor;
+					
 					color : @colorwhite;
 					padding : 5px 15px;
 					text-decoration:none;
@@ -33,15 +33,17 @@
 				}
 				
 			}
-			h4:hover{
-				background-color : @lightbackcolor;
-				color : @colorblack;
-			}
+			
 		}
 		
 	}
 }
-
+.projlist .readmore a{
+		background-color : transparent;
+	&:hover{
+		background-color :transparent;
+	}
+}
 #carousel {
 		background-color: @lightbackcolor;
 		.carousel-inner {
@@ -106,13 +108,7 @@
 		border-radius : 4px;
 		padding:5px;
 		height:312px;
-		a{
-			color: @color;
-			&:hover{
-				color: @color;
-				text-decoration:none;
-			}
-		}
+		
 		img{
 			max-height : 110px;
 			margin-top: 10px;
@@ -227,18 +223,19 @@
 			.pagination{
 				li,.disabled{
 					a{
-						background-color: @lightbackcolor;
+						background-color: @back;
 						border-color : @colorwhite;
-						color:@colorwhite;
+						
 						&:hover{
-							background-color:@color;
-							color:@lightbackcolor;
+							background-color:@colorwhite;
+							color:@colorblack;
 						}
 					}
 				}
 				>.active>a{
-					background-color:@color;
-					color:@lightbackcolor;
+					background-color:@colorwhite;
+					color:@colorblack;
+					border-color : @colorblack;
 				}
 			}
 			
