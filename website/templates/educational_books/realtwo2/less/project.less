@@ -40,36 +40,62 @@
 }
 
 .homeproject {
-	width : 903px;
-	height : 400px;
-	display: block;
-  	margin-left: auto;
-	margin-right: auto;
-	.projectnav,.projsnap {
-		border : 5px solid @lightbackcolor;
-		background-color: @darkbackcolor;
-		height : 350px;
+	margin-top:10px;
+	margin-bottom :20px;
+	position: relative;
+	.projectCarousal{
+		position : relative;
+		border : 5px solid @colorwhite;
+		z-index : 99;
+		width : 500px;
+		margin : 0 auto;
+		float : none;
+		z-index : 1;
+		box-shadow: 0 0 15px;
+	}
+	.projectnav, .projsnap {
+		position : absolute;
+		background-color : @back;
+		border : 1px solid @darkcolor;
+		height: 320px;
+		width : 300px;
+		top : 25px;
+		box-sizing : border-box;
+		border : 5px solid @colorwhite;
+	}
+	.projectnav{
+		left : 0;
+		padding-right : 85px !important;
+	}
+	.projsnap {
+		right : 0;
+		padding-left: 90px !important;
+		padding-top: 5px !important;
+	}
+	.projectnav{
+		padding : 5px;
+		left : 10px;
 		.nav-stacked{
-			background-color: @darkbackcolor;
-			margin: 5px;
 			>li{
-				padding :4px;
+				border-bottom:1px solid @darkcolor;
+				+li {
+					margin-top: 10px;
+				}
 				>a, > a:focus{
-					font-weight: bold;
-					color : @lightcolor;
-					padding : 10px 0px;
+					color : @color;
+					padding: 10px 15px;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @color ;
-					color : @colorblack;
+					text-decoration : none;
+					background-color: @darkcolor;
+					color : @colorwhite;
 				}
 			}
 		}
 	}
 	.projsnap{
-		p{
-			padding-left : 10px;
-		}
+		padding : 5px 15px;
+		right : 10px;
 		img{
 			height : 110px;
 			margin-top: 10px;
@@ -78,11 +104,13 @@
 			border-radius : 5px;
 			padding :4px;
 		}
+		p{
+			color : @color;
+		}
 		.viewproperty{
-			margin-top : 25px;
 			a{
 				color : @color;
-				font-size: 16px;
+				font: 16px 'Alex Brush', cursive;
 				&:hover{
 					color : @color;
 				}
@@ -91,19 +119,21 @@
 	}
 	#carousel {
 		.carousel-inner {
-			border: 5px solid @lightcolor;
-			.carousel-caption{
-				h2{
-					border : none;
-				}
-			}
+			border: 2px solid @back;
 			.item{
+				height: 350px;
 				overflow: hidden;
-				height : 340px;
-				img{
-					min-height : 340px;
+				>img{
+					width : auto;
+					min-height : 350px;
 				}
 			}
+		}
+		a.left.carousel-control{
+			left : 40px;
+		}
+		a.right.carousel-control {
+			right : 40px;
 		}
 		a.left.carousel-control, a.right.carousel-control {
 			background: none;
