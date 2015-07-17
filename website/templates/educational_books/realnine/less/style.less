@@ -6,8 +6,16 @@
 		font-family:'QumpellkaNo12';
 		src:url('../fonts/QumpellkaNo12.otf');
 	}
+	@font-face{
+		font-family:'GandhiSans-Bold';
+		src:url('../fonts/GandhiSans-Bold.otf');
+	}
 	
-	@color : #bae275;
+	@font-face{
+		font-family:'Kirsty';
+		src:url('../fonts/Kirsty.ttf');
+	}
+	@color : #B89D6C;
 	@lightcolor : #BBBBBB;
 	@darkcolor : #02071A;
 	@back : #005596;
@@ -18,7 +26,7 @@
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	@contentlink:#6ba72b;
-	
+	@navbackground:#E3E3ED;
 	@headingcolor:#034206;
 	@border: #B8B8C3;
 	@import "property.less";
@@ -161,7 +169,7 @@
 				}
 				&.active > a
 				{
-					background-color :@colorwhite;
+					background-color :@navbackground;
 					color: @colorblack;
 				}
 				&.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
@@ -229,7 +237,7 @@
 		border-radius: 7px;
 		padding: 4px 10px;
 		position: relative;
-		color: @colorwhite;
+		color: @color;
 	}
 	
 	h1{
@@ -241,7 +249,8 @@
 	
 	h2,h3,h4,h5{
 		color : @headingcolor;
-		font: 2em/1.2em Amaranth-Regular;
+		font: 2em/1.2em GandhiSans-Bold;
+		/*font: 2em/1.2em 'Kirsty';*/
 		border-bottom: 1px solid #ccc;
 		padding-bottom: 8px;
 	}
@@ -259,7 +268,6 @@
 			/*box-shadow:2px 2px 2px @lightcolor;*/
 			border-radius : 5px;
 			img{
-				
 				width : 100%;
 				padding : 4px;
 				border : 3px solid transparent;
@@ -369,6 +377,9 @@
 		}
 	}
 	
+	.bx-wrapper .bx-controls-direction a {
+		margin-top:-35px;
+	}
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
