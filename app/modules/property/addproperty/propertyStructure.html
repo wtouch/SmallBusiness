@@ -81,21 +81,15 @@
 		<div class="form-group">
 			<label for="bedrooms" class="col-sm-2 control-label">Bedrooms </label>
 			<div class="col-sm-4">
-				<select class="form-control" id="bedrooms" name="bedrooms" ng-model="property.property_info.bedrooms"  ng-options="item as item for item in propertyConfig.Bedrooms" required>
+				<select class="form-control" id="bedrooms" name="bedrooms" ng-model="property.property_info.bedrooms"  ng-options="item as item for item in propertyConfig.Bedrooms">
 					<option value="" selected>Select one</option>						
 				</select>
-			 <span class="text-danger" ng-show="propertystructureForm.bedrooms.$dirty && propertystructureForm.bedrooms.$invalid">
-				  <span ng-show="propertystructureForm.bedrooms.$error.required">Required Field.</span>
-				</span>
 			</div>										
 			<label for="bathrooms" class="col-sm-1 control-label">Bathrooms </label>
 			<div class="col-sm-4">
-				<select class="form-control" id="bathrooms"  name="bathrooms" ng-model="property.property_info.bathrooms" required ng-options="item as item for item in propertyConfig.Bathrooms">
+				<select class="form-control" id="bathrooms"  name="bathrooms" ng-model="property.property_info.bathrooms" ng-options="item as item for item in propertyConfig.Bathrooms">
 					<option value="" selected>Select one</option>	
-				</select>	
-				 <span class="text-danger" ng-show="propertystructureForm.bathrooms.$dirty && propertystructureForm.bathrooms.$invalid">
-				  <span ng-show="propertystructureForm.bathrooms.$error.required">Required Field.</span>
-				</span>				 
+				</select>
 			</div>									
 	</div>
 	
