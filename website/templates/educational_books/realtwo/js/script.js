@@ -22,6 +22,22 @@ $(document).ready(function(){
 		controls:true, 
 		autoHover:true
 	});
+	$('#bxslider2').bxSlider({
+		mode:'horizontal',
+		slideMargin: 15,
+		minSlides :1,
+		maxSlides: 3,
+		moveSlides: 1,
+		slideWidth: 175,
+		auto: true, 
+		autoDirection:'next',
+		pause:4000,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:true, 
+		autoHover:true
+	});
 });
 var app = angular.module('myApp',[]);
 

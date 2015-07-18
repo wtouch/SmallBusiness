@@ -52,7 +52,7 @@
 		<div class="container">
 			<div class="row">
 				{% if modules.sidebarModule >= 1 %}
-				<aside class="col-xs-3">
+				<aside class="col-xs-4 col-lg-3">
 					{%if modules.sidebarModule.enquiry %}
 						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html']with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
 					{%endif%}
@@ -67,10 +67,14 @@
 					{%endif%}
 				</aside>
 				{%endif%}
-				<section class="col-xs-9">
-					<!-- <article class="row">
-						<div class="col-xs-12"><p>About us</p></div>
-					</article> -->
+				<section class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12'}} info">
+					<article class="row">
+						<div class="col-xs-12">
+							<div class="content">
+								{% include contentPath %}
+							</div>
+						</div>
+					</article> 
 					<div class="row">
 						{%if modules.contentModule.featured_properties %}
 						<div class="col-xs-6">
