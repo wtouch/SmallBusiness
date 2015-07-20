@@ -122,7 +122,7 @@
   background-color: transparent;
   background-position: center;
   border: none;
-  padding: 5px 29px;
+  padding: 7px 29px;
   color: #ffffff;
 }
 .projlist .project .thumbnail .readmore a:hover {
@@ -362,9 +362,6 @@
 .services #bxslider2 .readmore a:hover {
   text-decoration: underline;
 }
-.singleproduct .thumbnail img {
-  width: 100%;
-}
 .products .thumbnail .prodimg {
   width: 180px;
   height: 148px;
@@ -393,24 +390,15 @@
   .products .thumbnail {
     height: 465px;
   }
-  .singleproduct .thumbnail {
-    height: 186px;
-  }
 }
 @media (min-width: 992px) {
   .products .thumbnail {
     height: 450px;
   }
-  .singleproduct .thumbnail {
-    height: 100px;
-  }
 }
 @media (min-width: 1200px) {
   .products .thumbnail {
     height: 400px;
-  }
-  .singleproduct .thumbnail {
-    height: 192px;
   }
 }
 .sidebar .nav-pills {
@@ -452,7 +440,7 @@
   height: 190px;
 }
 .infrastructure .thumbnail .caption {
-  height: 138px;
+  height: 133px;
   overflow: hidden;
 }
 .infrastructure .thumbnail .caption h4 {
@@ -466,6 +454,12 @@
 }
 .contact h4 {
   margin-top: 0px;
+}
+.contact a {
+  color: #22151e;
+}
+.contact a:hover {
+  color: #89065b;
 }
 #googleMap {
   height: 395px;
@@ -492,7 +486,7 @@
   position: absolute;
   display: inline-block;
   top: 5px;
-  left: 0;
+  left: -10px;
   line-height: 40px;
   font-family: Times New Roman,Serif;
   font-size: 55px;
@@ -572,7 +566,12 @@ h1,
 h2 {
   color: #b9396a;
   text-align: center;
-  font: 4.1em/1em 'Italianno-Regular-OTF' cursive;
+}
+h1 {
+  font: 5.1em/1em 'Italianno-Regular-OTF' cursive;
+}
+h2 {
+  font: 3.1em/1em 'Italianno-Regular-OTF' cursive;
 }
 h3,
 h4 {
@@ -614,8 +613,61 @@ h4 {
   border-radius: 10px;
   border: 1px solid #22151e;
 }
-.navbar-default .navbar-nav > li ul {
+.navbar-default .navbar-nav > li > ul {
   display: none;
+  position: absolute;
+  width: 245px;
+  z-index: 999;
+  background: #22151e;
+  padding: 10px;
+  list-style: none;
+  text-align: left;
+  border: 5px solid #ffbee9;
+}
+.navbar-default .navbar-nav > li > ul > li {
+  padding: 10px;
+  text-transform: uppercase;
+  position: relative;
+}
+.navbar-default .navbar-nav > li > ul > li > a {
+  color: #ffffff;
+  padding: 10px 0px;
+}
+.navbar-default .navbar-nav > li > ul > li > a:hover {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > li > ul > li:hover {
+  background-image: linear-gradient(#b9396a, #89065b, #b9396a);
+}
+.navbar-default .navbar-nav > li > ul > li ul {
+  background: #22151e;
+  list-style: none;
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 145px;
+  width: 180px;
+  padding: 10px;
+  border: 5px solid #ffbee9;
+}
+.navbar-default .navbar-nav > li > ul > li ul li {
+  padding: 10px;
+}
+.navbar-default .navbar-nav > li > ul > li ul li a {
+  color: #ffffff;
+  padding: 10px 0px;
+}
+.navbar-default .navbar-nav > li > ul > li ul li a:hover {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > li > ul > li ul li:hover {
+  background-image: linear-gradient(#b9396a, #89065b, #b9396a);
+}
+.navbar-default .navbar-nav > li > ul > li:hover ul {
+  display: block;
+}
+.navbar-default .navbar-nav > li:hover > ul {
+  display: block;
 }
 .head {
   background: url(../img/tops.jpg);
@@ -683,7 +735,7 @@ hr {
   border-color: #22151e;
 }
 .sidebarModule {
-  background-image: url('../img/ltb-m.png');
+  background-image: linear-gradient(rgba(34, 21, 30, 0.5) 1%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 85%, rgba(34, 21, 30, 0.5)), url('../img/ltb-m.png');
   background-position: center ;
   margin-top: 35px;
   margin-bottom: 75px;

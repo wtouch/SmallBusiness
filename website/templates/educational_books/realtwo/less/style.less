@@ -42,7 +42,12 @@ body{
 h1,h2{
 	color : @darkcolor;
 	text-align : center;
-	font: 4.1em/1.0em 'Italianno-Regular-OTF' cursive;
+}
+h1{
+	font: 5.1em/1.0em 'Italianno-Regular-OTF' cursive; 
+}
+h2{
+	font: 3.1em/1.0em 'Italianno-Regular-OTF' cursive;
 }
 h3, h4{
 	font-family : 'Enriqueta-Bold';
@@ -77,8 +82,65 @@ h3, h4{
 				border-radius: 10px;
 				border: 1px solid @darkbackcolor;
 			}
-			ul{
-				display : none;
+			> ul{
+				display: none;
+				position: absolute;
+				width: 245px;
+				z-index: 999;
+				background : @darkbackcolor;
+				padding: 10px;
+				list-style: none;
+				text-align: left;
+				border : 5px solid @lightcolor;
+				>li{
+					padding : 10px;
+					text-transform : uppercase;
+					position : relative;
+					>a{
+						color : @colorwhite;
+						padding : 10px 0px;
+						//font: 1.7em/1.1em  'Italianno-Regular-OTF' cursive;
+						&:hover{
+							color : @colorwhite;
+						}
+					}
+					&:hover{
+						background-image: linear-gradient(@darkcolor, @back, @darkcolor);
+					}
+					ul{
+						background : @darkbackcolor;
+						list-style: none;
+						display : none;
+						position : absolute;
+						top : 10px;
+						left: 145px;
+						width: 180px;
+						padding : 10px;
+						border : 5px solid @lightcolor;
+						li{
+							padding : 10px;
+							a{
+								color : @colorwhite;
+								padding : 10px 0px;
+								&:hover{
+									color : @colorwhite;
+								}
+							}
+							&:hover{
+								background-image: linear-gradient(@darkcolor, @back, @darkcolor);
+							}
+						}
+					
+					}
+					&:hover{
+						ul{
+							display : block;
+						}
+					}
+				}
+			}
+			&:hover > ul {
+				display: block;
 			}
 		}
 	}
@@ -145,7 +207,7 @@ hr{
 	border-color : @darkbackcolor;
 }
 .sidebarModule{
-	background-image : url('../img/ltb-m.png');
+	background-image : linear-gradient(rgba(34, 21, 30, 0.5) 1%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 85%, rgba(34, 21, 30, 0.5)),url('../img/ltb-m.png');
 	background-position :  center ;
 	margin-top : 35px;
 	margin-bottom : 75px;
