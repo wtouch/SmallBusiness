@@ -1,101 +1,37 @@
-//project
-//css for featured project slider
-.bxslider{ 
-	padding:5px;
-	li{
-		.projimg{
-			height : 175px;
-			overflow : hidden;
-			padding : 6px;
-			border : 2px solid transparent;
-			img{
-				min-height: 175px;
-			}
-			&:hover{
-				border : 2px solid @darkbackcolor;
-			}
-		}
-		.readmore{
-			margin-top : 10px;
-			margin-bottom : 10px;
-			text-align : center;
-			a{
-				h4{
-					font: 16px 'Alex Brush', cursive;
-					background-color : @back;
-					color : @colorwhite;
-					padding : 5px 15px;
-					transition : padding 250ms;
-					&:hover{
-						background-color : @darkcolor;
-						padding : 5px 30px;
-						text-decoration : none;
-						padding : 5px 20px;
-					}
-				}
-				
-			}
-		}
-	}
-}
-
+//homeproject css
 .homeproject {
-	margin-top:10px;
-	margin-bottom :20px;
-	position: relative;
-	.projectCarousal{
-		position : relative;
-		border : 5px solid @colorwhite;
-		z-index : 99;
-		width : 500px;
-		margin : 0 auto;
-		float : none;
-		z-index : 1;
-		box-shadow: 0 0 15px;
-	}
-	.projectnav, .projsnap {
-		position : absolute;
-		background-color : @back;
-		border : 1px solid @darkcolor;
-		height: 320px;
-		width : 300px;
-		top : 25px;
-		box-sizing : border-box;
-		border : 5px solid @colorwhite;
-	}
-	.projectnav{
-		left : 0;
-		padding-right : 85px !important;
-	}
-	.projsnap {
-		right : 0;
-		padding-left: 90px !important;
-		padding-top: 5px !important;
-	}
-	.projectnav{
-		padding : 5px;
-		left : 10px;
+	width : 930px;
+	height : 400px;
+	display: block;
+  	margin-left: auto;
+	margin-right: auto;
+	.projectnav,.projsnap {
+		border : 5px solid @lightcolor;
+		background-color: @darkbackcolor;
+		height : 350px;
 		.nav-stacked{
+			background-color: @darkbackcolor;
+			margin: 5px;
 			>li{
-				border-bottom:1px solid @darkcolor;
-				+li {
-					margin-top: 10px;
-				}
+				padding :4px;
 				>a, > a:focus{
-					color : @color;
-					padding: 10px 15px;
+					color : @colorwhite;
+					padding : 10px 0px;
+					font: 1.7em/1.1em  'Italianno-Regular-OTF' cursive;
+					text-align : center;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					text-decoration : none;
-					background-color: @darkcolor;
+					background-image: linear-gradient(@darkcolor, @back, @darkcolor);
 					color : @colorwhite;
 				}
 			}
 		}
 	}
 	.projsnap{
-		padding : 5px 15px;
-		right : 10px;
+		p{
+			padding-left : 10px;
+			color : @colorwhite;
+		}
 		img{
 			height : 110px;
 			margin-top: 10px;
@@ -104,36 +40,28 @@
 			border-radius : 5px;
 			padding :4px;
 		}
-		p{
-			color : @color;
-		}
 		.viewproperty{
+			margin-top : 25px;
 			a{
-				color : @color;
-				font: 16px 'Alex Brush', cursive;
-				&:hover{
-					color : @color;
-				}
+				font-size: 16px;
 			}
 		}
 	}
 	#carousel {
 		.carousel-inner {
-			border: 2px solid @back;
-			.item{
-				height: 350px;
-				overflow: hidden;
-				>img{
-					width : auto;
-					min-height : 350px;
+			border: 5px solid @lightcolor;
+			.carousel-caption{
+				h2{
+					border : none;
 				}
 			}
-		}
-		a.left.carousel-control{
-			left : 40px;
-		}
-		a.right.carousel-control {
-			right : 40px;
+			.item{
+				overflow: hidden;
+				height : 340px;
+				img{
+					min-height : 340px;
+				}
+			}
 		}
 		a.left.carousel-control, a.right.carousel-control {
 			background: none;
@@ -141,82 +69,66 @@
 	}
 }
 
-//css for single project & project list
+//css for project list
 	.projlist{
-		background-color:@lightbackcolor;
-		padding:10px;
 		.project{
 			.thumbnail{
 				height:385px;
-				padding-top : 15px;
-				border-color : @darkbackcolor;
 				.projectimg{
-					width : 190px;
+					width : 180px;
 					height : 148px;
 					overflow : hidden;
+					padding : 4px;
+					border : 4px solid transparent;
 					img{
 						min-height : 148px;
 					}
-				}
-				.caption{
-					color : @lightcolor;
-				}
-				.caption p{
-					color:@colorblack;
+					&:hover{
+						border : 4px solid @back;
+					}
 				}
 				.readmore{
 					margin-top : 15px;
 					a{
-						font: 16px 'Alex Brush', cursive;
-						background-color : @back;
+						background-image : url('../img/mr-bg.png');
+						background-repeat: no-repeat;
+						background-color: transparent;
+						background-position: center;
+						border: none;
+						padding: 7px 29px;
 						color : @colorwhite;
-						padding : 5px 15px;
-						transition : padding 250ms;
 						&:hover{
-							background-color : @darkcolor;
-							padding : 5px 30px;
+							color: @lightcolor;
+							background-color : transparent;
+							border : none;
+							text-decoration : none;
 						}
 					}
 				}
 			}
 		}
 	}
+//css for single project
 	.project{
 		.navbar{
-			height:50px;
-			border-radius: 0;
-			margin-top:10px;
 			margin-bottom:10px;
-			height : 20px;
-			width:auto;
 		}
 		ul.nav.navbar-nav {
-			background-color: @back;
+			background : -webkit-linear-gradient(top, @back, @darkcolor, @back);
+			background : -moz-linear-gradient(top, @back, @darkcolor, @back);
+			background : linear-gradient(top, @back, @darkcolor, @back);
 			height : 42px;
 			>li{
-				border-right : 1px solid @lightbackcolor;
+				border-right : 1px solid @back;
 				height : 38px;
 				>a, > a:focus{
-					padding : 9px 14px;
-					color : @color;
-					font-weight : bold;
+					padding : 11px 6px;
+					color : @colorwhite;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @darkcolor ;
-					color : @lightcolor;
+					color : @darkbackcolor;
+					background : linear-gradient(@lightbackcolor, @lightcolor, @lightbackcolor);
 				}
-			}
-		}
-		.projImg{
-			margin-right: 20px;
-			max-height : 175px;
-		}
-		.projectgallery{ 
-			background-color : @back;
-			border : 1px solid @lightbackcolor;
-			padding: 20px 20px 0px;
-			.thumbnail{
-				background-color : @darkbackcolor;
 			}
 		}
 	}
@@ -227,6 +139,11 @@
 			max-height : 175px;
 			margin-right:10px;
 		}
+		.projectgallery{
+			.thumbnail{
+				height:380px;
+			}
+		}
 	}
 	@media (min-width: 992px){
 		.projImg{
@@ -234,11 +151,29 @@
 			max-height : 175px;
 			margin-right : 10px;
 		}
+		.projectgallery{
+			.thumbnail{
+				height:365px;
+				img{
+					max-height : 155px;
+					width:100%;
+				}
+			}
+		}
 	}
 	@media (min-width: 1200px){
 		.projImg{
 			float :left;
 			max-height : 175px;
 			margin-right:10px;
+		}
+		.projectgallery{
+			.thumbnail{
+				height:380px;
+				img{
+					max-height : 200px;
+					width:100%;
+				}
+			}
 		}
 	}

@@ -8,12 +8,12 @@
 			>li{
 				border-right : 1px solid @lightcolor;
 				>a, > a:focus{
-					color : @color;
+					color : @colorwhite;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					color : @colorwhite;
-					background-color: @darkcolor;
+					color : @darkbackcolor;
+					background : linear-gradient(@lightbackcolor, @lightcolor, @lightbackcolor);
 				}
 			}
 		}
@@ -41,7 +41,14 @@
 				height : 190px;
 			}
 			.caption{
-				height: 138px;
+				height: 133px;
+				overflow : hidden;
+				h4{
+					text-align : center;
+				}
+			}
+			.readmore{
+				margin-top : 10px;
 			}
 		}
 	}
@@ -53,6 +60,12 @@
 		h4{
 			margin-top : 0px;
 		}
+		a{
+			color : @darkbackcolor;
+			&:hover{
+				color : @back;
+			}
+		}
 	}
 	#googleMap{
 		height:395px;
@@ -63,7 +76,8 @@
 	.testimonial{
 		blockquote{
 			font-size : inherit;
-			border-left: none;
+			border-left: none; 
+			padding-left : 15px;
 			footer{
 				background:none;
 				padding : 0px;
@@ -73,20 +87,24 @@
 				}
 				cite{
 					font-size : 17px;
-					color : @darkcolor;
+					color : @color;
 				}
+			}
+			&::before{
+				content : '\201c';
+				position : absolute;
+				display : inline-block;
+				top : 5px;
+				left : -10px;
+				line-height : 40px;
+				font-family : Times New Roman,Serif;
+				font-size : 55px;
 			}
 		}
 	}
 	.sidebarModule{
-		.panel-default{
-			border : none;
-		}
-		
-		.radio label{
-			padding-left : 15px;
-		}
 		&.sidemenu{
+			padding-top : 5px;
 			ul{
 				padding : 0;
 				list-style : none;
@@ -96,8 +114,8 @@
 			}
 			a{
 				  display: inline-block;
-				  height: 75px;
-				  width: 156px;
+				  height: 95px;
+				  width: 188px;
 				  background-repeat: no-repeat;
 				  background-position: center;
 				  text-indent: -9999px;

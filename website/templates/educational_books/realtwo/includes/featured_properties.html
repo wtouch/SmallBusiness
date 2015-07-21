@@ -1,0 +1,32 @@
+{% autoescape false %}
+{% if featured_properties %}
+<div class="contentModule text-center">
+	<h3 class="subhead"><small>Featured</small><br>Property</h3>
+	<div class="sections clearfix services">
+		<ul class="bxslider" id="bxslider">
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_properties if break == 0 %}
+			<li>
+				<div class="sliderimg">
+					<a href="properties/{{x.title}}/{{x.id}}">
+						<img class="img-responsive center-block" src="{{x.property_images.0.file_relative_path}}" alt="{{x.title}}"/>
+					</a>
+				</div>
+				<div class="readmore">
+					<a href="properties/{{x.title}}/{{x.id}}">
+						{{x.title}}
+					</a>
+				</div>
+				<p>Location : {{x.location}}</p>
+				<p>Type : {{x.type}}</p>
+			</li>
+			{% set i = (i + 1) %}
+			{% if i == 4 %}
+				{% set break = 1 %}
+			{% endif %}
+		{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endif %}
+{% endautoescape %}
