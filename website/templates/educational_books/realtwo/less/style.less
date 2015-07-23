@@ -39,6 +39,46 @@ body{
 	background: @darkbackcolor;
 	color : @darkbackcolor;
 }
+.sociallinks{
+	margin-top: 355px;
+	position: fixed;
+	ul{
+		list-style : none;
+		li{
+			transform: translateX(-125px);
+			padding: 4px 4px 4px 10px;
+			background-image: -webkit-linear-gradient(@darkcolor, @back, @darkcolor);
+			background-image: -moz-linear-gradient(@darkcolor, @back, @darkcolor);
+			background-image: linear-gradient(@darkcolor, @back, @darkcolor);
+			margin: 5px;
+			border-top-right-radius: 30px;
+			border-bottom-right-radius: 30px;
+			text-align : right;
+			a{
+				color:@colorwhite;
+				//font: 1.8em 'GreatVibes-Regular' cursive;
+				&:hover{
+					color:@colorwhite;
+					text-decoration : underline;
+				}
+			}
+			img{
+				width : 30px;
+				margin-left : 10px;
+				border : 2px solid @colorwhite;
+			}
+			span{
+				height : 20px;
+				width :20px;
+				margin-right: 6px;
+			}
+			
+			&:hover{
+				  transform: translateX(-45px);
+			}
+		}
+	}
+}
 h1,h2{
 	color : @darkcolor;
 	text-align : center;
@@ -55,6 +95,8 @@ h3, h4{
 	text-align : left;
 }
 .navbar-default {
+	background-image: -webkit-linear-gradient(@darkcolor, @back, @darkcolor);
+	background-image: -moz-linear-gradient(@darkcolor, @back, @darkcolor);
 	background-image: linear-gradient(@darkcolor, @back, @darkcolor);
 	border : none;
 	.navbar-nav{	
@@ -75,6 +117,8 @@ h3, h4{
 			}
 			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 				color : @darkbackcolor;
+				background : -webkit-linear-gradient(@lightbackcolor, @lightcolor, @lightbackcolor);
+				background : -moz-linear-gradient(@lightbackcolor, @lightcolor, @lightbackcolor);
 				background : linear-gradient(@lightbackcolor, @lightcolor, @lightbackcolor);
 				padding: 15px 15px;
 				margin-top: -5px;

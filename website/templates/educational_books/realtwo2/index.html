@@ -19,6 +19,30 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 	</head>
 	<body>
+		<div class="sociallinks">
+			<ul>
+				{% if data.website_config.sociallinks.facebook %}
+					<li>
+						<a href="{{data.website_config.sociallinks.facebook}}" target="_blank">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.google %}
+					<li>
+						<a href="{{data.website_config.sociallinks.google}}" target="_blank">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.twitter %}
+					<li>
+						<a href="{{data.website_config.sociallinks.twitter}}" target="_blank">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.linkedin %}
+					<li>
+						<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
 		<header>
 			<div class="container">
 				<div class="head">

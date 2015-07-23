@@ -29,6 +29,45 @@ html{
 }
 body{
 	font-family : 'FengardoNeue_Regular';
+	.sociallinks{
+		margin-top: 232px;
+		position: fixed;
+		ul{
+			list-style : none;
+			li{
+				transform: translateX(-115px);
+				padding: 4px 4px 4px 10px;
+				background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
+				background-image: -moz-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
+				background-image: linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
+				margin: 5px;
+				border-top-right-radius: 30px;
+				border-bottom-right-radius: 30px;
+				text-align : right;
+				a{
+					color:@colorwhite;
+					&:hover{
+						color:@colorwhite;
+						text-decoration : underline;
+					}
+				}
+				img{
+					width : 50px;
+					margin-left : 10px;
+					border : 2px solid @colorwhite;
+				}
+				span{
+					height : 20px;
+					width :20px;
+					margin-right: 6px;
+				}
+				
+				&:hover{
+					  transform: translateX(-45px);
+				}
+			}
+		}
+	}
 	header{
 		.nava{padding-right:0px;}
 		.caro{
@@ -48,6 +87,8 @@ body{
 		.sidenav{
 			background: @darkbackcolor;
 			background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
+			background-image: -moz-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
+			background-image: linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
 			padding:15px;
 			.nav{
 				li{
@@ -139,6 +180,12 @@ body{
 		padding : 15px;
 		>h3{
 			margin : -15px -15px 10px;
+		}
+		.panel{
+			margin-bottom :0px;
+		}
+		&.enquiry, &.sidemenu{
+			padding-bottom : 0px;
 		}
 	}
 	main{
