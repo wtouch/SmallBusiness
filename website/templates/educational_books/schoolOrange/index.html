@@ -17,6 +17,30 @@
 			<meta name="keywords" content="{{ seo.keywords }}">
 	</head>
 	<body>
+		<div class="sociallinks">
+			<ul>
+				{% if data.website_config.sociallinks.facebook %}
+					<li>
+						<a href="{{data.website_config.sociallinks.facebook}}" target="_blank" title="Facebook">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.google %}
+					<li>
+						<a href="{{data.website_config.sociallinks.google}}" target="_blank" title="Google">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.twitter %}
+					<li>
+						<a href="{{data.website_config.sociallinks.twitter}}" target="_blank" title="Twitter">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.linkedin %}
+					<li>
+						<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank" title="Linkedin">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
 		<div class="container header">
 			{% include [templatePath ~ '/includes/header.html', 'default/default/includes/header.html']%}
 		</div>
@@ -62,30 +86,6 @@
 						{{data.contact_profile.address}},<br>
 						{{data.city}},&nbsp;{{data.state|capitalize}},&nbsp;{{data.country|capitalize}},&nbsp;{{data.pincode}}
 					</address>
-					<div class="sociallinks">
-						<ul>
-							{% if data.website_config.sociallinks.facebook %}
-								<li>
-									<a href="{{data.website_config.sociallinks.facebook}}" target="_blank" title="Facebook"><img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
-								</li>
-							{% endif %}
-							{% if data.website_config.sociallinks.google %}
-								<li>
-									<a href="{{data.website_config.sociallinks.google}}" target="_blank" title="Google"><img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
-								</li>
-							{% endif %}
-							{% if data.website_config.sociallinks.twitter %}
-								<li>
-									<a href="{{data.website_config.sociallinks.twitter}}" target="_blank" title="Twitter"><img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
-								</li>
-							{% endif %}
-							{% if data.website_config.sociallinks.linkedin %}
-								<li>
-									<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank" title="Linkedin"><img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
-								</li>
-							{% endif %}
-						</ul>
-					</div>
 				</div>
 			</div>
 		</div>

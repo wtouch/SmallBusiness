@@ -4,17 +4,23 @@
 }
 	body{
 		background-color: #0A4B6C;		
-	}/* 
+	}
 	.sociallinks {
-	  margin-top: 232px;
+	  margin-top: 275px;
 	  position: fixed;
-	} */
+	  z-index: 999;
+	}
 	.sociallinks ul {
 	  list-style: none;
-	  padding-left : 0px;
 	}
 	.sociallinks ul li {
-	  display : inline-block;
+	  transform: translateX(-123px);
+	  padding: 4px 4px 4px 10px;
+	  background-color: #CF6021;
+	  margin: 5px;
+	  border-top-right-radius: 30px;
+	  border-bottom-right-radius: 30px;
+	  text-align: right;
 	}
 	.sociallinks ul li a {
 	  color: #ffffff;
@@ -25,11 +31,16 @@
 	}
 	.sociallinks ul li img {
 	  width: 35px;
+	  margin-left: 10px;
+	  border: 2px solid #ffffff;
 	}
 	.sociallinks ul li span {
 	  height: 20px;
 	  width: 20px;
 	  margin-right: 6px;
+	}
+	.sociallinks ul li:hover {
+	  transform: translateX(-45px);
 	}
 	.header {
 		margin-top: 30px;
@@ -44,6 +55,15 @@
 	h1, h2{
 		font-family : 'Italianno-Regular-OTF';
 		font-size : 50px;
+	}
+	h2, h3{
+		margin-top : 0px;
+	}
+	.btn-link{
+		padding-left : 0px;
+	}
+	.content .tagline1{
+		margin-bottom : 10px;
 	}
 	.profile{
 		max-height : 200px;
@@ -507,12 +527,13 @@
 			min-height: 50px;
 		}
 		#carousel .item {
-			height: 350px;
+			height: 300px;
 			overflow: hidden;
 		}
 
 		#carousel .item img {
 			width: 100%;
+			min-height : 300px;
 		} 
 		.logo, .bizname, .addrs{
 			display : inline-block;
@@ -600,7 +621,7 @@
 	.mailSentMsg{
 		clear : both;
 	}
-	.tagline{
+	.header .bizname .tagline{
 		color: #EF9306;
 		font-size: 20px;
 		border-bottom: 1px solid #EF9306;
@@ -609,7 +630,7 @@
 		margin: 5px 0;
 		padding: 5px 10px;
 	}
-	.tagline1{
+	.header .bizname .tagline1{
 		color: #77746C;
 		font-size: 14px;
 	
