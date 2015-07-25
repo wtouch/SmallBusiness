@@ -173,8 +173,13 @@ class websiteManager{
 			}
 			if(isset($this->modules['contentModule']["featured_properties"])){
 				$featured_properties = $this->getProperties($businessData['data']["user_id"], $category = null, 1);
+				
 				$response["featured_properties"] = $featured_properties['data'];
+				
+				$home_properties = $this->getProperties($businessData['data']["user_id"], $category = null, $featured = null, $businessData['data']['website_config']["project_id"]);
 				//print_r($response["featured_properties"] );
+				$response["home_properties"] = $home_properties['data'];
+				//print_r($home_properties);
 			}
 			if(isset($this->modules['contentModule']["featured_projects"])){
 				$featured_projects = $this->getProjects($businessData['data']["user_id"], 1);
@@ -339,12 +344,15 @@ class websiteManager{
 		
 		return $projectData;
 	}
-	function getProperties($user_id, $search = array(), $featured = null){
+	function getProperties($user_id, $search = array(), $featured = null, $project_id = null){
 		//$category = str_replace("-", " ", $category);
 		$where['status'] = 1;
 		$where['user_id'] = $user_id;
 		if(isset($_GET['project_id'])){
 			$where['project_id'] = $_GET['project_id'];
+		}
+		if($project_id != null){
+			$where['project_id'] = $project_id;
 		}
 		if($featured != null) $where['featured'] = $featured;
 		$like = $search;
