@@ -43,28 +43,36 @@
 				{% endif %}
 			</ul>
 		</div>
-		<div class="head">
+		<header>
 			<div class="container">
-				<header class="row">
-					<div class="col-xs-12">
-						<h1>{{data.business_name}}</h1>	
+				<div class="head">
+					<div class="text-center">
+					{% if data.website_config.website_logo %}
+					
+					<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}" alt="{{data.business_name}}">
+					{% else %}
+					
+					<img class="logo" src="{{data.business_logo.file_relative_path}}" alt="{{data.business_name}}">
+					{% endif %}
 					</div>
-				</header>
-				<nav class="navbar navbar-default">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
-							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-						</ul>
-					</div>	
-				</nav>
+					<nav class="navbar navbar-default">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+								{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+							</ul>
+						</div><!-- /.navbar-collapse -->
+					</nav>
+				</div>
 				{%if modules.headerModule.carousal %}
 				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 				{%endif%}
@@ -72,55 +80,82 @@
 				{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
 				{%endif%}
 			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				{% if modules.sidebarModule >= 1 %}
-				<aside class="col-xs-4 col-lg-3">
-					{%if modules.sidebarModule.enquiry %}
-						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html']with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
-					{%endif%}
-					{%if modules.sidebarModule.contact %}
-						{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-					{%endif%}
-					{%if modules.sidebarModule.searchProp %}
-						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
-					{%endif%}
-					{%if modules.sidebarModule.sidemenu %}
-						{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
-					{%endif%}
-				</aside>
-				{%endif%}
-				<section class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12'}} info">
-					<article class="row">
-						<div class="col-xs-12">
-							<div class="content">
-								{% include contentPath %}
+		</header>
+		<main>
+			<div class="main-content">
+				<div class="container">
+					<div class="back">
+						<div class="row">
+							<div class="col-xs-12">
+								{%if modules.contentModule.featured_services %}
+									{% include contentPath %}
+								{%endif%}
+								
+								<div class="featuretab">
+									<!-- Nav tabs -->
+									<ul class="nav nav-tabs" role="tablist">
+										<li role="presentation" class="active">
+											<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
+										</li>
+										<li role="presentation">
+											<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Featured Testimonials</a>
+										</li>
+									</ul>
+									<!-- Tab panes -->
+									<div class="tab-content">
+										<div role="tabpanel" class="tab-pane active" id="featrserv">
+										{%if modules.contentModule.featured_services %}
+											{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+										{%endif%}
+										</div>
+										<div role="tabpanel" class="tab-pane" id="featrtesti">
+										{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
+										</div>
+									</div>
+								</div>
+								
+								{%if modules.contentModule.featured_products %}
+								{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+								{%endif%}
+								
 							</div>
+							<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12'}}">
+								{%if not modules.contentModule.featured_services %}
+								{% include contentPath %}
+								{%endif%}
+								
+								{%if modules.contentModule.featured_properties %}
+								{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
+								
+								{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+								
+								{%endif%}
+								
+								{%if modules.contentModule.featured_projects %}
+								{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
+								{%endif%}
+							</div>
+							{% if modules.sidebarModule >= 1 %}
+							<div class="col-xs-4 col-lg-3">
+								{%if modules.sidebarModule.searchProp %}
+								{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+								{%endif%}
+								{%if modules.sidebarModule.enquiry %}
+								{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html']with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
+								{%endif%}
+								{%if modules.sidebarModule.sidemenu %}
+								{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+								{%endif%}
+								{%if modules.sidebarModule.contact %}
+								{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+								{%endif%}
+							</div>
+							{% endif %}
 						</div>
-					</article> 
-					<div class="row">
-						{%if modules.contentModule.featured_properties %}
-						<div class="col-xs-6">
-							{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
-						</div>
-						{%endif%}
-						{%if modules.contentModule.featured_projects %}
-						<div class="col-xs-6">
-							{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-						</div>
-						{%endif%}
 					</div>
-					{%if modules.contentModule.featured_services %}
-					<div class="row">
-						<div class="col-xs-12 features">
-							{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-						</div>
-					</div>
-					{%endif%}
-				</section>
-			</div>	
-		</div>
+				</div>
+			</div>
+		</main>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html>

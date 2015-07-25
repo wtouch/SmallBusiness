@@ -6,28 +6,29 @@ jQuery(document).ready(function() {
 	})
 });
 $(document).ready(function(){
-	$('.bxslider1').bxSlider({
-			mode:'vertical',
-			minSlides: 1,
-			maxSlides: 3,
-			auto: true, 
-			autoDirection:'next',
-			moveSlides: 1,
-			pause:4000,
-			pager:false,
-			pagerType:'full',
-			autoControls: false, 
-			controls:false, 
-			autoHover:true,
-			speed : 1000
-	});
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
 		slideMargin: 5,
 		minSlides :1,
-		maxSlides: 3,
-		moveSlides: 2,
+		maxSlides: 1,
+		moveSlides: 1,
 		slideWidth: 200,
+		auto: true, 
+		autoDirection:'next',
+		pause:4000,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:true, 
+		autoHover:true
+	});
+	$('#bxslider2').bxSlider({
+		mode:'horizontal',
+		slideMargin: 15,
+		minSlides :1,
+		maxSlides: 1,
+		moveSlides: 1,
+		slideWidth: 175,
 		auto: true, 
 		autoDirection:'next',
 		pause:4000,

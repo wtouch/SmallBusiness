@@ -1,4 +1,28 @@
-
+	.featuretab{
+		border : 1px solid @darkbackcolor;
+		position: relative;
+		margin-bottom: 25px;
+		padding : 15px 30px 15px;
+		overflow : scroll;
+		.nav-tabs{
+			border-bottom: 1px solid transparent;
+			li{
+				a{
+					border: 1px solid @darkbackcolor;
+					font:16px 'Alex Brush', cursive;
+					&:hover{
+						color: @colorwhite;
+						background-color: @back;
+					}
+				}
+				&.active>a, &.active>a:hover, &.active>a:focus{
+					color: @colorwhite;
+					background-color: @back;
+					border: 1px solid @darkbackcolor;
+				}
+			}
+		}
+	}
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
@@ -8,12 +32,12 @@
 			>li{
 				border-right : 1px solid @lightcolor;
 				>a, > a:focus{
-					color : @colorwhite;
+					color : @color;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					color : @darkbackcolor;
-					background : linear-gradient(@lightbackcolor, @lightcolor, @lightbackcolor);
+					color : @colorwhite;
+					background-color: @darkcolor;
 				}
 			}
 		}
@@ -41,14 +65,7 @@
 				height : 190px;
 			}
 			.caption{
-				height: 133px;
-				overflow : hidden;
-				h4{
-					text-align : center;
-				}
-			}
-			.readmore{
-				margin-top : 10px;
+				height: 138px;
 			}
 		}
 	}
@@ -60,12 +77,6 @@
 		h4{
 			margin-top : 0px;
 		}
-		a{
-			color : @darkbackcolor;
-			&:hover{
-				color : @back;
-			}
-		}
 	}
 	#googleMap{
 		height:395px;
@@ -73,21 +84,16 @@
 	
 	
 	//testimonials
-	.testimonial{
+	.testimonial, .featrtesti{
 		blockquote{
 			font-size : inherit;
-			border-left: none; 
-			padding-left : 15px;
+			border-left: none;
 			footer{
 				background:none;
 				padding : 0px;
-				img{
-					max-height : 50px;
-					margin-right : 10px;
-				}
 				cite{
 					font-size : 17px;
-					color : @color;
+					color : @darkcolor;
 				}
 			}
 			&::before{
@@ -95,16 +101,44 @@
 				position : absolute;
 				display : inline-block;
 				top : 5px;
-				left : -10px;
+				left : 0;
 				line-height : 40px;
 				font-family : Times New Roman,Serif;
 				font-size : 55px;
 			}
 		}
 	}
+	.testimonial{
+		blockquote{
+			padding-left : 15px;
+			footer{
+				img{
+					max-height: 70px;
+					width: 70px;
+					margin-right : 10px;
+				}
+			} 
+		}
+	}
+	.featrtesti{
+		blockquote{
+			padding : 5px 15px;
+		}
+		img{
+			max-height : 100px;
+			padding : 4px;
+			border : 3px solid #732C7B;
+		}
+	} 
 	.sidebarModule{
+		.panel-default{
+			border : none;
+		}
+		
+		.radio label{
+			padding-left : 15px;
+		}
 		&.sidemenu{
-			padding-top : 5px;
 			ul{
 				padding : 0;
 				list-style : none;
@@ -114,8 +148,8 @@
 			}
 			a{
 				  display: inline-block;
-				  height: 95px;
-				  width: 188px;
+				  height: 75px;
+				  width: 156px;
 				  background-repeat: no-repeat;
 				  background-position: center;
 				  text-indent: -9999px;
