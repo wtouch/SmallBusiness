@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
 	})
 });
 $(document).ready(function(){
-	$('#bxslider1').bxSlider({
+	$('.bxslider1').bxSlider({
 			mode:'vertical',
 			minSlides: 1,
 			maxSlides: 3,
@@ -21,7 +21,7 @@ $(document).ready(function(){
 			autoHover:true,
 			speed : 1000
 	});
-	$('#bxslider').bxSlider({
+	$('.bxslider').bxSlider({
 		mode:'horizontal',
 		slideMargin: 5,
 		minSlides :1,
