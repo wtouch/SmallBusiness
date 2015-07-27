@@ -11,6 +11,50 @@ $app = new Slim\Slim();
 
 $web = new websiteManager;
 
+$app->get('/sitemapdata', function() use($app, $config, $web) {
+	echo json_encode($web->getConfigData());
+});
+
+$app->get('/sitedata', function() use($app, $config) {
+	try{
+		$app->response->headers->set('Content-Type', 'application/json');
+		$web = new websiteManager;
+		$webConfig = $web->getConfig();
+		$webData = $web->getTemplateData();
+		$webRoutes = $web->getRoutes();
+		$webTemplate = $web->getTemplate();
+		if($webConfig['status'] == 'success'){
+			$response['webConfig'] = $webConfig['data'];
+		}else{
+			throw new Exception($webConfig['message']);
+		}
+		if($webData['status'] == 'success'){
+			$response['webData'] = $webData['data'];
+		}else{
+			throw new Exception($webData['message']);
+		}
+		if($webRoutes['status'] == 'success'){
+			$response['webRoutes'] = $webRoutes['data'];
+		}else{
+			throw new Exception($webRoutes['message']);
+		}
+		if($webTemplate['status'] == 'success'){
+			$response['webTemplate'] = $webTemplate['data'];
+		}else{
+			throw new Exception($webTemplate['message']);
+		}
+		$response["status"] = "success";
+		$response["config"] = $config;
+	}catch(Exception $e){
+		header("");
+		$response["status"] = "error";
+		$response["message"] = 'Error: ' .$e->getMessage();
+		$response["data"] = null;
+	}
+	echo json_encode($response);
+	
+});
+
 $app->get('/', function() use($app, $config, $web) {
 	$modules['headerModule']['carousal'] = true;
 	$modules['headerModule']['homeproject'] = true;
@@ -81,51 +125,6 @@ $app->get('/:page', function($page) use($app, $config, $web) {
 	$web->getBusinessData($page, $title);
 });
 $app->get('/:page/:product/:id', function() use($app, $config) {
-	
-});
-
-
-$app->get('/sitemapdata', function() use($app, $config, $web) {
-	echo json_encode($template->getSitemap());
-});
-
-$app->get('/sitedata', function() use($app, $config) {
-	try{
-		$app->response->headers->set('Content-Type', 'application/json');
-		$web = new websiteManager;
-		$webConfig = $web->getConfig();
-		$webData = $web->getTemplateData();
-		$webRoutes = $web->getRoutes();
-		$webTemplate = $web->getTemplate();
-		if($webConfig['status'] == 'success'){
-			$response['webConfig'] = $webConfig['data'];
-		}else{
-			throw new Exception($webConfig['message']);
-		}
-		if($webData['status'] == 'success'){
-			$response['webData'] = $webData['data'];
-		}else{
-			throw new Exception($webData['message']);
-		}
-		if($webRoutes['status'] == 'success'){
-			$response['webRoutes'] = $webRoutes['data'];
-		}else{
-			throw new Exception($webRoutes['message']);
-		}
-		if($webTemplate['status'] == 'success'){
-			$response['webTemplate'] = $webTemplate['data'];
-		}else{
-			throw new Exception($webTemplate['message']);
-		}
-		$response["status"] = "success";
-		$response["config"] = $config;
-	}catch(Exception $e){
-		header("");
-		$response["status"] = "error";
-		$response["message"] = 'Error: ' .$e->getMessage();
-		$response["data"] = null;
-	}
-	echo json_encode($response);
 	
 });
 

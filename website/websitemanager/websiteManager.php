@@ -13,7 +13,6 @@ class websiteManager{
 	private $currentPage;
 	private $itemsOnPage;
 	
-	
 	function __construct(){
 		$this->domain = $_SERVER['SERVER_NAME'];
 		$this->db = new dbHelper;
@@ -106,6 +105,9 @@ class websiteManager{
 				}
 			}
 		}
+	}
+	function getSitemap(){
+		
 	}
 	function getConfigData($businessTable = null){
 		try{
