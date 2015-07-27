@@ -91,15 +91,20 @@
 									{% include contentPath %}
 								{%endif%}
 								
-								<div class="featuretab">
+								{% if (modules.contentModule.featured_services) or (data.testimonials | length>=1) %}
+								<div class="featuretab clearfix">
 									<!-- Nav tabs -->
 									<ul class="nav nav-tabs" role="tablist">
+										{%if modules.contentModule.featured_services %}
 										<li role="presentation" class="active">
 											<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
 										</li>
+										{%endif%}
+										{% if data.testimonials | length>=1 %}
 										<li role="presentation">
-											<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Featured Testimonials</a>
+											<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
 										</li>
+										{%endif%}
 									</ul>
 									<!-- Tab panes -->
 									<div class="tab-content">
@@ -113,6 +118,7 @@
 										</div>
 									</div>
 								</div>
+								{%endif%}
 								
 								{%if modules.contentModule.featured_products %}
 								{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
