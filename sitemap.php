@@ -14,21 +14,32 @@
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" 
   xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 <?php 
-	if(is_array($input)){
-		foreach($input as $url) {
-?>
-		<url>
-			<loc><?php echo $url["url"]; ?></loc>
-			<?php
-				if(isset($url["image"])){
-					echo '<image:image><image:loc>'.$url["image"].'</image:loc></image:image>';
+	function writeSitemap($input){
+		if(is_array($input)){
+			foreach($input as $url) {
+				if(isset($url['childMenu']) && $url['status'] == 1){
+					writeSitemap($url['childMenu']);
 				}
-			?>
-			<changefreq>daily</changefreq>
-			<priority>1</priority>
-		</url>
-<?php
+				if($url['status'] == 1){
+?>
+				<url>
+					<loc><?php echo (str_replace(" ", "-", str_replace("&", "%26",$url["url"]))); ?></loc>
+					<?php
+						if(isset($url["image"])){
+							echo '<image:image><image:loc>'.$url["image"].'</image:loc></image:image>';
+						}
+					?>
+					<changefreq>daily</changefreq>
+					<priority>1</priority>
+				</url>
+	<?php
+				}
+			}
 		}
+	}
+	writeSitemap($input['menus']);
+	if(isset($input['sidebar'])){
+		writeSitemap($input['sidebar']);
 	}
 ?>
 </urlset>

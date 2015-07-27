@@ -283,14 +283,21 @@
 		border-bottom: 1px solid #ccc;
 	}
 	
-	h2,h3,h4,h5{
+	h2,h3,h5,h4{
 		color : @headingcolor;
-		font: 2em/1.2em GandhiSans-Bold;
-		/*font: 2em/1.2em 'Kirsty';*/
 		border-bottom: 1px solid #ccc;
 		padding-bottom: 8px;
 	}
-	
+	h2,h3,h5{
+		font: 2em/1.2em GandhiSans-Bold;
+	}
+	h4{
+		font-family : GandhiSans-Bold;
+	}
+	.btn-link{
+		padding-left : 0px;
+		color : @headingcolor;
+	}
 	.panel{
 		/*background-color:@contentback;*/
 	}
@@ -348,7 +355,33 @@
 			}
 		}
 	}
-	
+	.featuretab{
+		border : 1px solid #ccc;
+		position: relative;
+		margin-bottom: 25px;
+		padding : 15px 30px 15px;
+		overflow : scroll;
+		margin-top: 20px;
+		border-radius: 5px;
+		.nav-tabs{
+			border-bottom: 1px solid transparent;
+			li{
+				a{
+					border: 1px solid @back;
+					font:16px 'Alex Brush', cursive;
+					&:hover{
+						color: @back;
+						background-color: @colorwhite;
+					}
+				}
+				&.active>a, &.active>a:hover, &.active>a:focus{
+					color: @color;
+					background-color: @back;
+					border: 1px solid @darkbackcolor;
+				}
+			}
+		}
+	}
 	footer{
 		background-color : @darkbackcolor;
 		padding:5px;

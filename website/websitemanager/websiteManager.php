@@ -169,7 +169,7 @@ class websiteManager{
 			$this->setModules($result['data']['website_config']['menus']);
 			$businessData = $response;
 			if(isset($this->modules['contentModule']["featured_products"])){
-				$featured_products = $this->getProducts($businessData['data']["id"],"all", $category = null, 1);
+				$featured_products = $this->getProducts($businessData['data']["business_id"],"all", $category = null, 1);
 				$response["featured_products"] = $featured_products['data'];
 				//print_r($response["featured_products"] );
 			}

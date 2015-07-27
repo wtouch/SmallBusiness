@@ -12,7 +12,8 @@ $app = new Slim\Slim();
 $web = new websiteManager;
 
 $app->get('/sitemapdata', function() use($app, $config, $web) {
-	echo json_encode($web->getConfigData());
+	$sitemapData = $web->getConfigData();
+	echo json_encode($sitemapData['data']['website_config']);
 });
 
 $app->get('/sitedata', function() use($app, $config) {
