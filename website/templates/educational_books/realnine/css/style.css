@@ -729,21 +729,47 @@
 .radio-inline + .radio-inline {
   margin-left: 5px;
 }
-.testimonial blockquote {
+.testimonial blockquote,
+.featrtesti blockquote {
   font-size: inherit;
   border-left: none;
 }
-.testimonial blockquote footer {
+.testimonial blockquote footer,
+.featrtesti blockquote footer {
   background: none;
   padding: 0px;
 }
+.testimonial blockquote footer cite,
+.featrtesti blockquote footer cite {
+  font-size: 17px;
+  color: #02071a;
+}
+.testimonial blockquote::before,
+.featrtesti blockquote::before {
+  content: '\201c';
+  position: absolute;
+  display: inline-block;
+  top: 5px;
+  left: 0;
+  line-height: 40px;
+  font-family: Times New Roman,Serif;
+  font-size: 55px;
+}
+.testimonial blockquote {
+  padding-left: 15px;
+}
 .testimonial blockquote footer img {
-  max-height: 50px;
+  max-height: 70px;
+  width: 70px;
   margin-right: 10px;
 }
-.testimonial blockquote footer cite {
-  font-size: 17px;
-  color: #005596;
+.featrtesti blockquote {
+  padding: 5px 15px;
+}
+.featrtesti img {
+  max-height: 100px;
+  padding: 4px;
+  border: 3px solid #732C7B;
 }
 .gallery {
   border-radius: 5px;
@@ -967,7 +993,7 @@ footer a {
   padding: 12px;
   list-style: none;
   text-align: left;
-  top: 53px;
+  top: 50px;
   border-top-left-radius: 0px;
   transition: all 500ms ease-in-out;
 }
@@ -996,6 +1022,8 @@ footer a {
 }
 .navbar-default .navbar-nav > li > ul > li ul li a {
   text-transform: lowercase;
+  font-size: 17px;
+  color: #fff;
 }
 .navbar-default .navbar-nav > li:hover > ul {
   display: block;
@@ -1026,16 +1054,18 @@ h3,
 h5,
 h4 {
   color: #034206;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 8px;
 }
 h2,
-h3,
 h5 {
   font: 2em/1.2em GandhiSans-Bold;
 }
-h4 {
+h4,
+h3 {
   font-family: GandhiSans-Bold;
+}
+h4 {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
 }
 .btn-link {
   padding-left: 0px;
@@ -1099,12 +1129,18 @@ h4 {
   background-color: #005596;
   color: #ffffff;
 }
+.contactus h4 {
+  border: none;
+  padding-bottom: 0px;
+}
 .featuretab {
   border: 1px solid #ccc;
   position: relative;
   margin-bottom: 25px;
   padding: 15px 30px 15px;
   overflow: scroll;
+  margin-top: 20px;
+  border-radius: 5px;
 }
 .featuretab .nav-tabs {
   border-bottom: 1px solid transparent;
@@ -1123,6 +1159,9 @@ h4 {
   color: #b89d6c;
   background-color: #005596;
   border: 1px solid #23235c;
+}
+hr {
+  margin: 5px 0px;
 }
 footer {
   background-color: #23235c;
