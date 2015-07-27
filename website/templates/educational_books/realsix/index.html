@@ -72,12 +72,16 @@
 							<div class="featuretab">
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
+									{% if modules.contentModule.featured_services %}
 									<li role="presentation" class="active">
 										<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
 									</li>
+									{% endif %}
+									{% if data.testimonials %}
 									<li role="presentation">
 										<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Featured Testimonials</a>
 									</li>
+									{% endif %}
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
