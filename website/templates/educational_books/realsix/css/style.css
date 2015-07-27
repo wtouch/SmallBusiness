@@ -418,9 +418,7 @@
 .services .servdesc .description {
   height: 75px;
   overflow: hidden;
-}
-.services .servdesc .readmore {
-  margin-top: 20px;
+  margin-bottom: 10px;
 }
 .services .servdesc .readmore a {
   background-color: #bccb3d;
@@ -536,21 +534,50 @@
 #googleMap {
   height: 395px;
 }
-.testimonial blockquote {
+.testimonial blockquote,
+.featrtesti blockquote {
   font-size: inherit;
   border-left: none;
 }
-.testimonial blockquote footer {
+.testimonial blockquote footer,
+.featrtesti blockquote footer {
   background: none;
   padding: 0px;
 }
-.testimonial blockquote footer img {
-  max-height: 50px;
-  margin-right: 10px;
-}
-.testimonial blockquote footer cite {
+.testimonial blockquote footer cite,
+.featrtesti blockquote footer cite {
   font-size: 17px;
   color: #bccb3d;
+}
+.testimonial blockquote::before,
+.featrtesti blockquote::before {
+  content: '\201c';
+  position: absolute;
+  display: inline-block;
+  top: 5px;
+  left: 0;
+  line-height: 40px;
+  font-family: Times New Roman,Serif;
+  font-size: 55px;
+}
+.testimonial blockquote {
+  padding-left: 15px;
+}
+.testimonial blockquote footer img {
+  max-height: 70px;
+  width: 70px;
+  margin-right: 10px;
+}
+.featrtesti blockquote {
+  padding: 5px 15px;
+}
+.featrtesti img {
+  max-height: 100px;
+  padding: 4px;
+  border: 3px solid #bbbbbb;
+}
+.featrtesti img:hover {
+  border: 3px solid #bccb3d;
 }
 .sidebarModule .radio label {
   padding-left: 15px;
@@ -635,8 +662,8 @@ body {
   list-style: none;
 }
 .sociallinks ul li {
-  transform: translateX(-123px);
-  padding: 4px 4px 4px 10px;
+  transform: translateX(-119px);
+  padding: 4px 0px 4px 10px;
   background: #bccb3d;
   margin: 5px;
   border-top-right-radius: 30px;
@@ -645,8 +672,8 @@ body {
   text-align: right;
 }
 .sociallinks ul li img {
-  width: 50px;
-  margin-left: 10px;
+  width: 35px;
+  margin-left: 4px;
 }
 .sociallinks ul li span {
   height: 20px;
@@ -823,8 +850,30 @@ h3 {
   padding: 15px;
   border-radius: 10px;
 }
+.featured_services .sections {
+  border: none;
+}
 .featuretab {
   margin-top: 20px;
+}
+.featuretab .nav-tabs {
+  border-bottom: 1px solid #2f3826;
+}
+.featuretab .nav-tabs li a {
+  border: 1px solid #2f3826;
+  font: 16px 'Alex Brush', cursive;
+  color: #bccb3d;
+}
+.featuretab .nav-tabs li a:hover {
+  color: #000000;
+  background-color: #bccb3d;
+}
+.featuretab .nav-tabs li.active > a,
+.featuretab .nav-tabs li.active > a:hover,
+.featuretab .nav-tabs li.active > a:focus {
+  color: #000000;
+  background-color: #bccb3d;
+  border: 1px solid #171600;
 }
 .thumbnail {
   background: none;
