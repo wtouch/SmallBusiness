@@ -21,8 +21,8 @@
 	<div class="form-group"> 
 		<label for="overviewDiscription" class="col-sm-2 control-label">Description *</label> 
 		<div class="col-sm-9">
-				<textarea class="form-control" id="overviewDiscription"  name="overviewDiscription" ng-model="project.overview.description" cols="20" rows="4" ng-maxlength="3000" required ui-tinymce></textarea>
-			<p ng-hide="overviewForm.overviewDiscription.$error.maxlength">{{ 3000 - project.overview.description.length + " Chars left" }}</p>
+				<textarea class="form-control" id="overviewDiscription"  name="overviewDiscription" ng-model="project.overview.description" cols="20" rows="4" ng-maxlength="5000" required ui-tinymce></textarea>
+			<p ng-hide="overviewForm.overviewDiscription.$error.maxlength">{{ 5000 - project.overview.description.length + " Chars left" }}</p>
 					 <span class="text-danger" ng-show="overviewForm.overviewDiscription.$error.maxlength">
 					Sorry You are Exceeding the Limit</span>
 			<span class="text-danger" ng-show="overviewForm.overviewDiscription.$dirty && overviewForm.overviewDiscription.$invalid">
