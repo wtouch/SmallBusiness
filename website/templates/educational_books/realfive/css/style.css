@@ -641,32 +641,50 @@
 #googleMap {
   height: 395px;
 }
+.testimonial blockquote,
 .featrtesti blockquote {
-  border-left: 5px solid transparent;
-}
-.featrtesti img {
-  margin-top: 5px;
-  border: 4px solid transparent;
-  padding: 3px;
-}
-.featrtesti img:hover {
-  border: 4px solid #5e4a44;
-}
-.testimonial blockquote {
   font-size: inherit;
   border-left: none;
 }
-.testimonial blockquote footer {
+.testimonial blockquote footer,
+.featrtesti blockquote footer {
   background: none;
   padding: 0px;
 }
+.testimonial blockquote footer cite,
+.featrtesti blockquote footer cite {
+  font-size: 17px;
+  color: #cb9305;
+}
+.testimonial blockquote::before,
+.featrtesti blockquote::before {
+  content: '\201c';
+  position: absolute;
+  display: inline-block;
+  top: 5px;
+  left: 0;
+  line-height: 40px;
+  font-family: Times New Roman,Serif;
+  font-size: 55px;
+}
+.testimonial blockquote {
+  padding-left: 15px;
+}
 .testimonial blockquote footer img {
-  max-height: 50px;
+  max-height: 70px;
+  width: 70px;
   margin-right: 10px;
 }
-.testimonial blockquote footer cite {
-  font-size: 17px;
-  color: #281012;
+.featrtesti blockquote {
+  padding: 5px 15px;
+}
+.featrtesti img {
+  max-height: 100px;
+  padding: 4px;
+  border: 3px solid #b66b20;
+}
+.featrtesti img:hover {
+  border: 3px solid #cb9305;
 }
 hr {
   border-style: dashed;
