@@ -602,6 +602,44 @@
     height: 192px;
   }
 }
+.featuretab {
+  margin-top: 20px;
+}
+.featuretab .tab-content {
+  border: 1px solid #25563b;
+  border-top: none;
+  position: relative;
+  margin-bottom: 25px;
+  padding: 1px 15px 15px;
+  box-shadow: 2px 2px 2px #bbbbbb;
+  border-radius: 4px;
+  background-color: #272a35;
+}
+.featuretab .nav-tabs {
+  border-bottom: 1px solid #25563b;
+}
+.featuretab .nav-tabs li a {
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  font: 16px 'Alex Brush', cursive;
+  background-color: #25563b;
+}
+.featuretab .nav-tabs li a:hover {
+  color: #ffffff;
+  background: -webkit-linear-gradient(right, #cccccc, #0d8375);
+  background: -moz-linear-gradient(right, #cccccc, #0d8375);
+  background: linear-gradient(right, #cccccc, #0d8375);
+  border: 1px solid #ffffff;
+}
+.featuretab .nav-tabs li.active > a,
+.featuretab .nav-tabs li.active > a:hover,
+.featuretab .nav-tabs li.active > a:focus {
+  color: #ffffff;
+  background: -webkit-linear-gradient(right, #cccccc, #0d8375);
+  background: -moz-linear-gradient(right, #cccccc, #0d8375);
+  background: linear-gradient(right, #cccccc, #0d8375);
+  border: 1px solid #ffffff;
+}
 .mailSentMsg {
   font: 1.2em/2.5em QumpellkaNo12;
   border: 1px solid #bbbbbb;
@@ -700,21 +738,50 @@
 .radio-inline + .radio-inline {
   margin-left: 5px;
 }
-.testimonial blockquote {
+.testimonial blockquote,
+.featrtesti blockquote {
   font-size: inherit;
   border-left: none;
 }
-.testimonial blockquote footer {
+.testimonial blockquote footer,
+.featrtesti blockquote footer {
   background: none;
   padding: 0px;
 }
-.testimonial blockquote footer img {
-  max-height: 50px;
-  margin-right: 10px;
-}
-.testimonial blockquote footer cite {
+.testimonial blockquote footer cite,
+.featrtesti blockquote footer cite {
   font-size: 17px;
   color: #bae275;
+}
+.testimonial blockquote::before,
+.featrtesti blockquote::before {
+  content: '\201c';
+  position: absolute;
+  display: inline-block;
+  top: 5px;
+  left: 0;
+  line-height: 40px;
+  font-family: Times New Roman,Serif;
+  font-size: 55px;
+}
+.testimonial blockquote {
+  padding-left: 15px;
+}
+.testimonial blockquote footer img {
+  max-height: 70px;
+  width: 70px;
+  margin-right: 10px;
+}
+.featrtesti blockquote {
+  padding: 5px 15px;
+}
+.featrtesti img {
+  max-height: 100px;
+  padding: 4px;
+  border: 3px solid #bbbbbb;
+}
+.featrtesti img:hover {
+  border: 3px solid #bae275;
 }
 .gallery .thumbnail {
   border-color: #25563b;
@@ -755,6 +822,7 @@ body {
 .sociallinks {
   margin-top: 355px;
   position: fixed;
+  z-index: 999;
 }
 .sociallinks ul {
   list-style: none;
@@ -831,7 +899,7 @@ a:hover,
 .btn-info,
 .btn-primary {
   background-color: #25563b;
-  border-color: #bae275;
+  border-color: #25563b;
 }
 .btn-info:hover,
 .btn-primary:hover {
@@ -1014,6 +1082,14 @@ h5 {
   color: #ffffff;
   padding: 3px 9px;
   border: 1px solid #ffffff;
+}
+.featured_services h3 {
+  margin-top: 5px;
+}
+.featured_services .sections {
+  border: none;
+  background: none;
+  box-shadow: 0 0 0;
 }
 .project .navbar {
   background-color: #25563b;

@@ -21,30 +21,7 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 	</head>
 	<body>
-		<div class="sociallinks">
-			<ul>
-				{% if data.website_config.sociallinks.facebook %}
-					<li>
-						<a href="{{data.website_config.sociallinks.facebook}}" target="_blank">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.google %}
-					<li>
-						<a href="{{data.website_config.sociallinks.google}}" target="_blank">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.twitter %}
-					<li>
-						<a href="{{data.website_config.sociallinks.twitter}}" target="_blank">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.linkedin %}
-					<li>
-						<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
-					</li>
-				{% endif %}
-			</ul>
-		</div>
+		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 		<header>
 			<div class="container">
 				<div class="col-xs-12 ">
@@ -122,16 +99,38 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-lg-12">
-				{%if modules.contentModule.featured_services %}
-					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-					{%endif%}
+				{% if (modules.contentModule.featured_services) or (data.tesitimonials | length>=1)%}
+				<div class="featuretab">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						{%if modules.contentModule.featured_services %}
+						<li role="presentation" class="active">
+							<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
+						</li>
+						{%endif%}
+						<li role="presentation">
+							<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
+						</li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="featrserv">
+						{%if modules.contentModule.featured_services %}
+							{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+						{%endif%}
+						</div>
+						<div role="tabpanel" class="tab-pane" id="featrtesti">
+						{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
+						</div>
+					</div>
+				</div>
+				{% endif %}
 					
-					{%if modules.contentModule.featured_products %}
+				{%if modules.contentModule.featured_products %}
 					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
 				{%endif%}
 				</div>
 			</div>
-				
 		</div>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
