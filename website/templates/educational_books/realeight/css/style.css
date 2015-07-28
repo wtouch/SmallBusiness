@@ -467,32 +467,50 @@
 #googleMap {
   height: 395px;
 }
-.testimonial blockquote {
+.testimonial blockquote,
+.featrtesti blockquote {
   font-size: inherit;
   border-left: none;
-  padding-left: 15px;
 }
-.testimonial blockquote footer {
+.testimonial blockquote footer,
+.featrtesti blockquote footer {
   background: none;
   padding: 0px;
 }
-.testimonial blockquote footer img {
-  max-height: 50px;
-  margin-right: 10px;
-}
-.testimonial blockquote footer cite {
+.testimonial blockquote footer cite,
+.featrtesti blockquote footer cite {
   font-size: 17px;
-  color: #fffca8;
+  color: #b9396a;
 }
-.testimonial blockquote::before {
+.testimonial blockquote::before,
+.featrtesti blockquote::before {
   content: '\201c';
   position: absolute;
   display: inline-block;
   top: 5px;
-  left: -10px;
+  left: 0;
   line-height: 40px;
   font-family: Times New Roman,Serif;
   font-size: 55px;
+}
+.testimonial blockquote {
+  padding-left: 15px;
+}
+.testimonial blockquote footer img {
+  max-height: 70px;
+  width: 70px;
+  margin-right: 10px;
+}
+.featrtesti blockquote {
+  padding: 5px 15px;
+}
+.featrtesti img {
+  max-height: 100px;
+  padding: 4px;
+  border: 3px solid #ffbee9;
+}
+.featrtesti img:hover {
+  border: 3px solid #fffca8;
 }
 .sidebarModule.sidemenu {
   padding-top: 5px;
@@ -568,6 +586,7 @@ body {
 .sociallinks {
   margin-top: 355px;
   position: fixed;
+  z-index: 999;
 }
 .sociallinks ul {
   list-style: none;
@@ -616,9 +635,11 @@ h2 {
 }
 h3,
 h4 {
-  font-family: 'Enriqueta-Bold';
   color: #b9396a;
   text-align: left;
+}
+h3 {
+  font: 2.8em/0.6em 'Italianno-Regular-OTF' cursive;
 }
 .navbar-default {
   background-image: -webkit-linear-gradient(#b9396a, #89065b, #b9396a);
@@ -782,6 +803,9 @@ hr {
 hr.divider {
   margin-bottom: 20px;
 }
+.btn-link:hover {
+  text-decoration: none;
+}
 .sidebarModule {
   background-image: linear-gradient(rgba(34, 21, 30, 0.5) 1%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 85%, rgba(34, 21, 30, 0.5)), url('../img/ltb-m.png');
   background-position: center ;
@@ -876,7 +900,10 @@ hr.divider {
 .contentModule {
   background-image: url('../img/mn-tb.png');
   background-size: 100% 100%;
-  padding: 1px 30px;
+  padding: 1px 30px 20px;
+}
+.contentModule h3 {
+  padding-left: 30px;
 }
 .contentModule h3 small {
   color: #22151e;
@@ -943,6 +970,15 @@ hr.divider {
 .pagination > .disabled > a {
   border: 1px solid #89065b;
   color: #89065b;
+}
+.featured_testimonials {
+  padding-top: 15px;
+}
+.featured_testimonials ul {
+  padding-left: 10px;
+}
+.featured_testimonials .featrtesti {
+  height: 300px;
 }
 footer {
   color: #ffffff;

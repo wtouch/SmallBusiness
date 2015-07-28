@@ -42,6 +42,7 @@ body{
 .sociallinks{
 	margin-top: 355px;
 	position: fixed;
+	z-index :999;
 	ul{
 		list-style : none;
 		li{
@@ -90,9 +91,11 @@ h2{
 	font: 3.1em/1.0em 'Italianno-Regular-OTF' cursive;
 }
 h3, h4{
-	font-family : 'Enriqueta-Bold';
 	color : @darkcolor;
 	text-align : left;
+}
+h3{
+	font: 2.8em/0.6em 'Italianno-Regular-OTF' cursive;
 }
 .navbar-default {
 	background-image: -webkit-linear-gradient(@darkcolor, @back, @darkcolor);
@@ -253,6 +256,9 @@ hr{
 		margin-bottom : 20px;
 	}
 }
+.btn-link:hover{
+	text-decoration : none;
+}
 .sidebarModule{
 	background-image : linear-gradient(rgba(34, 21, 30, 0.5) 1%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 85%, rgba(34, 21, 30, 0.5)),url('../img/ltb-m.png');
 	background-position :  center ;
@@ -347,8 +353,9 @@ hr{
 .contentModule{
 	background-image : url('../img/mn-tb.png');
 	background-size : 100% 100%; 
-	padding: 1px 30px;
+	padding: 1px 30px 20px;
 	h3{
+		padding-left : 30px;
 		small{
 			color : @darkbackcolor;
 		}
@@ -406,6 +413,15 @@ hr{
 .pagination>li>a, .pagination>li>span, .pagination>.disabled>a{
 	border : 1px solid @back;
 	color : @back;
+}
+.featured_testimonials{
+	padding-top : 15px;
+	ul{
+		padding-left : 10px;
+	}
+	.featrtesti{
+		height : 300px;
+	}
 }
 footer{
 	color: @colorwhite;
