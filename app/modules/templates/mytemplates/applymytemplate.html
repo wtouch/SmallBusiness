@@ -84,17 +84,17 @@
 					</div>
 				</div>
 				
-				<div class="form-group">{{modalOptions.slider.image}}
+				<div class="form-group">
 					<label for="image" class="col-sm-2 control-label">Image *</label>
 					<div class="col-sm-9">
 						<input type="file" id="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="modalOptions.upload(image,modalOptions.path + modalOptions.userInfo.user_id, modalOptions.userInfo,modalOptions)" ng-model="image">
 						<input type="hidden" ng-model="modalOptions.slider.image">
 					</div>
 				</div>
-				<div class="form-group">						 
+				<div class="form-group" ng-if="modalOptions.slider.image">					 
 					<div class="col-sm-9 col-sm-offset-2">
-						<span class="thumbs" ng-repeat="(key,value) in image">
-							<img class="img-thumbnail" ng-src="{{appConfig.assetPath + value.modalOptions.slider.image}}" ng-click="modalOptions.slider.image.imgkey = key; "/>
+						<span class="thumbs">
+							<img class="img-thumbnail" ng-src="{{appConfig.assetPath + modalOptions.slider.image}}"/>
 							<span class="close" ng-click="removeImg(key, modalOptions.slider.image)">X</span>
 						</span>
 					</div>
