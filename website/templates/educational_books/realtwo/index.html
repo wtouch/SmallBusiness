@@ -89,7 +89,25 @@
 							<div class="col-xs-12">
 								{%if modules.contentModule.featured_services %}
 									{% include contentPath %}
+								{%endif%} 
+							
+							</div>
+							<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12'}}">
+								{%if not modules.contentModule.featured_services %}
+								{% include contentPath %}
 								{%endif%}
+								
+								{%if modules.contentModule.featured_properties %}
+								{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
+								
+								{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+								
+								{%endif%}
+								
+								{%if modules.contentModule.featured_projects %}
+								{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
+								{%endif%}
+								
 								
 								{% if (modules.contentModule.featured_services) or (data.testimonials | length>=1) %}
 								<div class="featuretab clearfix">
@@ -124,22 +142,6 @@
 								{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
 								{%endif%}
 								
-							</div>
-							<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12'}}">
-								{%if not modules.contentModule.featured_services %}
-								{% include contentPath %}
-								{%endif%}
-								
-								{%if modules.contentModule.featured_properties %}
-								{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
-								
-								{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
-								
-								{%endif%}
-								
-								{%if modules.contentModule.featured_projects %}
-								{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-								{%endif%}
 							</div>
 							{% if modules.sidebarModule >= 1 %}
 							<div class="col-xs-4 col-lg-3">
