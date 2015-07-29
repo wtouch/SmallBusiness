@@ -131,24 +131,23 @@
 				</div>
 				
 			</div>
+			{%if modules.contentModule.featured_services %}
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="featuretab">
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
-						{%if modules.contentModule.featured_services %}	<li role="presentation" class="active">
+							<li role="presentation" class="active">
 								<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
 							</li>
 							<li role="presentation">
-								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Featured Testimonials</a>
+								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
 							</li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="featrserv">
-							
-								{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-							{%endif%}
+							{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 							</div>
 							<div role="tabpanel" class="tab-pane" id="featrtesti">
 							{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
@@ -162,7 +161,7 @@
 								
 				</div>
 			</div>
-			
+			{%endif%}
 		</div>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
