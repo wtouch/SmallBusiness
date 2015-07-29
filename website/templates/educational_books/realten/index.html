@@ -69,6 +69,7 @@
 						<div class="{{ (modules.sidebarModule =='searchProp' ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12' }}">
 							{% include contentPath %}
 							{%if modules.contentModule.featured_properties %}
+								{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
 								{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
 							{%endif%}
 							{%if modules.contentModule.featured_projects %}
@@ -99,9 +100,32 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-				{%if modules.contentModule.featured_services %}
-					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-					{%endif%}
+					{% if (modules.contentModule.featured_services) or (data.tesitimonials | length>=1)%}
+					<div class="featuretab">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							{%if modules.contentModule.featured_services %}
+							<li role="presentation" class="active">
+								<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
+							</li>
+							{%endif%}
+							<li role="presentation">
+								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
+							</li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="featrserv">
+							{%if modules.contentModule.featured_services %}
+								{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+							{%endif%}
+							</div>
+							<div role="tabpanel" class="tab-pane" id="featrtesti">
+							{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
+							</div>
+						</div>
+					</div>
+					{% endif %}
 					
 					{%if modules.contentModule.featured_products %}
 					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
