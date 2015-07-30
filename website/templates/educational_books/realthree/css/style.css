@@ -132,6 +132,14 @@ h4 {
 .singleproperty .property .table tbody tr td {
   border-top: 1px dashed #25563b;
 }
+.singleproperty .property .mainimg {
+  height: 175px;
+  width: 195px;
+  overflow: hidden;
+}
+.singleproperty .property .mainimg img {
+  max-height: 175px;
+}
 .singleproperty .property .subimg {
   margin-top: 10px;
 }
@@ -420,14 +428,6 @@ h4 {
   margin-right: 20px;
   max-height: 175px;
 }
-.projlist .projectgallery {
-  background-color: #151927;
-  border: 1px solid #3c5c73;
-  padding: 20px 20px 0px;
-}
-.projlist .projectgallery .thumbnail {
-  background-color: #25563b;
-}
 .projlist nav .pagination li a,
 .projlist nav .pagination .disabled a {
   background-color: #3c5c73;
@@ -442,6 +442,58 @@ h4 {
 .projlist nav .pagination > .active > a {
   background-color: #bae275;
   color: #3c5c73;
+}
+.project .navbar {
+  background-color: #25563b;
+  border-bottom: 4px solid #3c5c73;
+  border-radius: 0;
+  margin-bottom: 10px;
+  width: auto;
+}
+.project ul.nav.navbar-nav {
+  color: #ffffff;
+  background-color: #25563b;
+}
+.project ul.nav.navbar-nav > li {
+  border-right: 1px solid #3c5c73;
+  height: 38px;
+}
+.project ul.nav.navbar-nav > li > a,
+.project ul.nav.navbar-nav > li > a:focus {
+  padding: 7px;
+  color: #ffffff;
+  font-weight: bold;
+}
+.project ul.nav.navbar-nav > li.active > a,
+.project ul.nav.navbar-nav > li.active:hover > a,
+.project ul.nav.navbar-nav > li.active > a:focus,
+.project ul.nav.navbar-nav > li:hover > a,
+.project ul.nav.navbar-nav > li:hover > a:focus,
+.project ul.nav.navbar-nav > li > a:hover,
+.project ul.nav.navbar-nav > li > a:focus {
+  background-color: #151927;
+  color: #ffffff;
+}
+.project .projectgallery {
+  background-color: #151927;
+  border: 1px solid #3c5c73;
+  padding: 20px 20px 0px;
+}
+.project .projectgallery .thumbnail {
+  background-color: #25563b;
+}
+.project .projectgallery .thumbnail .projectImags {
+  height: 150px;
+  width: 182px;
+  overflow: hidden;
+}
+.project .projectgallery .thumbnail .projectImags img {
+  min-height: 150px;
+}
+.project .projectgallery .thumbnail .caption {
+  height: 173px;
+  overflow: hidden;
+  margin-bottom: 10px;
 }
 @media (min-width: 320px) {
   .projImg {
@@ -876,6 +928,10 @@ html {
 hr {
   border-color: #373C51;
 }
+hr {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
 * {
   transition: 300ms;
 }
@@ -1100,37 +1156,6 @@ h5 {
   border: none;
   background: none;
   box-shadow: 0 0 0;
-}
-.project .navbar {
-  background-color: #25563b;
-  border-bottom: 4px solid #3c5c73;
-  border-radius: 0;
-  margin-bottom: 10px;
-  width: auto;
-}
-.project ul.nav.navbar-nav {
-  color: #ffffff;
-  background-color: #25563b;
-}
-.project ul.nav.navbar-nav > li {
-  border-right: 1px solid #3c5c73;
-  height: 38px;
-}
-.project ul.nav.navbar-nav > li > a,
-.project ul.nav.navbar-nav > li > a:focus {
-  padding: 10px;
-  color: #ffffff;
-  font-weight: bold;
-}
-.project ul.nav.navbar-nav > li.active > a,
-.project ul.nav.navbar-nav > li.active:hover > a,
-.project ul.nav.navbar-nav > li.active > a:focus,
-.project ul.nav.navbar-nav > li:hover > a,
-.project ul.nav.navbar-nav > li:hover > a:focus,
-.project ul.nav.navbar-nav > li > a:hover,
-.project ul.nav.navbar-nav > li > a:focus {
-  background-color: #151927;
-  color: #ffffff;
 }
 .footer {
   border-top: 1px dashed #ccc;

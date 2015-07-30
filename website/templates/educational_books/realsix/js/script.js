@@ -12,7 +12,7 @@ $(document).ready(function(){
 		minSlides: 1,auto: true, 
 		autoDirection:'next',
 		moveSlides: 1,
-		pause:4000,
+		pause:3000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
@@ -25,16 +25,17 @@ $(document).ready(function(){
 		slideMargin: 5,
 		minSlides :1,
 		maxSlides: 3,
-		moveSlides: 2,
+		moveSlides: 1,
 		slideWidth: 210,
 		auto: true, 
 		autoDirection:'next',
-		pause:4000,
+		pause:3000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
 		controls:true, 
-		autoHover:true
+		autoHover:true,
+		speed : 1000
 	});
 });
 app.config(function($locationProvider) {

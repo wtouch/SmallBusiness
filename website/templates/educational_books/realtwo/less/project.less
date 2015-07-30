@@ -88,6 +88,7 @@
 					color : @color;
 					padding: 10px 15px;
 					text-transform : uppercase;
+					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration : none;
@@ -155,7 +156,7 @@
 				padding-top : 15px;
 				border-color : @darkbackcolor;
 				.projectimg{
-					width : 190px;
+					width : 180px;
 					height : 148px;
 					overflow : hidden;
 					img{
@@ -201,9 +202,8 @@
 				border-right : 1px solid @lightbackcolor;
 				height : 38px;
 				>a, > a:focus{
-					padding : 9px 14px;
+					padding : 9px 7px;
 					color : @color;
-					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					background-color: @darkcolor ;
@@ -216,18 +216,24 @@
 			max-height : 175px;
 		}
 		.projectgallery{ 
-			background-color : @back;
 			border : 1px solid @lightbackcolor;
 			padding: 20px 20px 0px;
 			.thumbnail{
-				background-color : @darkbackcolor;
+				background-color : transparent;
+				border : 1px solid @darkbackcolor;
 				.projectImags{
+					border : 1px solid @darkbackcolor;
 					height : 150px;
-					width : 182px;
+					width : 175px;
 					overflow : hidden;
 					img{
 						min-height : 150px;
 					}
+				}
+				.caption{
+					height: 173px;
+					overflow: hidden;
+					margin-bottom: 10px;
 				}
 			}
 		}

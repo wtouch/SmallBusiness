@@ -14,8 +14,8 @@ $(document).ready(function(){
 		slideMargin: 25,
 		auto: true, 
 		autoDirection:'next',
-		moveSlides: 2,
-		pause:2500,
+		moveSlides: 1,
+		pause:3000,
 		pager:true,
 		pagerType:'full',
 		autoControls: true, 
@@ -31,14 +31,14 @@ $(document).ready(function(){
 		slideMargin: 15,
 		auto: true, 
 		autoDirection:'next',
-		moveSlides: 2,
-		pause:5000,
+		moveSlides: 1,
+		pause:3000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
 		controls:false, 
 		autoHover:true,
-		speed:2000,
+		speed:1000,
 	});
 });
 var app = angular.module('myApp',[]);

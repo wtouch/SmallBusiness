@@ -130,7 +130,7 @@
 	}
 }
 
-//css for single project & project list
+//css for project list
 	.projlist{
 		.panel-default{
 			background-color:@back;
@@ -187,14 +187,6 @@
 			}
 			
 		}
-		.projectgallery{ 
-			background-color : @back;
-			border : 1px solid @lightbackcolor;
-			padding: 20px 20px 0px;
-			.thumbnail{
-				background-color : @darkbackcolor;
-			}
-		}
 		nav {
 			.pagination{
 				li,.disabled{
@@ -215,6 +207,55 @@
 			}
 			
 		} 
+	}
+	
+	//for single project
+	.project{
+		.navbar{
+			background-color: @darkbackcolor;
+			border-bottom: 4px solid @lightbackcolor;
+			border-radius: 0;
+			margin-bottom:10px;
+			width:auto;
+		}
+		ul.nav.navbar-nav {
+			color:@colorwhite;
+			background-color: @darkbackcolor;
+			>li{
+				border-right : 1px solid @lightbackcolor;
+				height : 38px;
+				>a, > a:focus{
+					padding : 7px;
+					color : @colorwhite;
+					font-weight : bold;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					background-color: @back ;
+					color : @colorwhite;
+				}
+			}
+		}
+		.projectgallery{ 
+			background-color : @back;
+			border : 1px solid @lightbackcolor;
+			padding: 20px 20px 0px;
+			.thumbnail{
+				background-color : @darkbackcolor;
+				.projectImags{
+					height : 150px;
+					width : 182px;
+					overflow : hidden;
+					img{
+						min-height : 150px;
+					}
+				}
+				.caption{
+					height: 173px;
+					overflow: hidden;
+					margin-bottom: 10px;
+				}
+			}
+		}
 	}
 	
 	@media (min-width: 320px){
