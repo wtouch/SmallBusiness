@@ -51,7 +51,18 @@
 				</span>				
 			</div>				
 	</div>
-		
+	
+	<div class="form-group">
+		<label  for="projectsubtitle" class="col-sm-2 control-label">Project Sub Title *</label>
+		<div class="col-sm-9">		
+			<input type="text" id="projectsubtitle" class="form-control" name="projectsubtitle" ng-model="project.overview.projectsubtitle" cols="20" rows="4" required />
+				<span class="text-danger" ng-show="projectForm.projectsubtitle.$error.maxlength">
+				Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="projectForm.projectsubtitle.$dirty && projectForm.projectsubtitle.$invalid">
+				<span ng-show="projectForm.projectsubtitle.$error.required">Required Field.</span>
+		</div>
+	</div>
+	
 	<div class="form-group"> 
 		<label for="featured" class="col-sm-2 control-label">Featured *</label> 
 		<div class="col-sm-9">
