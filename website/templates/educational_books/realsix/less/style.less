@@ -1,4 +1,7 @@
-
+@font-face{
+	font-family:'FengardoNeue_Regular';
+	src:url('../fonts/FengardoNeue_Regular.otf');
+}
 @color : #bccb3d;
 @lightcolor : #BBBBBB;
 @darkcolor : #000;
@@ -92,9 +95,10 @@
 				}
 				> a, > a:focus {
 					color :@lightcolor;
-					font: bold 16px/1em Arial, Helvetica, sans-serif;
+					font: bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
 					padding : 25px 15px 15px 20px;
+					text-transform : uppercase;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					background-color : @color;
@@ -174,10 +178,15 @@
 		margin-top : 15px;
 		padding: 10px 20px 30px;
 	}
-	h1,h2,h3,h4{
-		font-family: "Carter One", "Times New Roman", "Times", serif;
+	a{
+		color : @color;
+		&:hover{
+			color : @color;
+			text-decoration : underline;
+		}
 	}
 	h1,h2,h3,h4{
+		font-family:'FengardoNeue_Regular';
 		color :@color; 
 	}
 	h1,h2{

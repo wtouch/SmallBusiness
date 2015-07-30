@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'FengardoNeue_Regular';
+  src: url('../fonts/FengardoNeue_Regular.otf');
+}
 .featuredProperty .sections {
   height: 270px;
 }
@@ -65,8 +69,13 @@
 .singleproperty .property .table tbody tr td {
   border-top: 1px dashed #2f3826;
 }
+.singleproperty .property .mainimg {
+  height: 175px;
+  width: 195px;
+  overflow: hidden;
+}
 .singleproperty .property .mainimg img {
-  max-height: 180px;
+  max-height: 175px;
 }
 .singleproperty .property .subimg {
   margin-top: 10px;
@@ -150,8 +159,9 @@
   padding: 20px 20px 0px;
 }
 .propertylist .btn-primary {
-  margin-right: 3px;
+  margin-right: 4px;
   margin-bottom: 10px;
+  padding: 6px 10px;
 }
 .propertylist .readmore {
   text-align: center;
@@ -234,9 +244,6 @@
   border: 1px solid #bccb3d;
   border-radius: 5px;
   padding: 4px;
-}
-.homeproject .projsnap .viewproperty {
-  margin-top: 15px;
 }
 .homeproject .projsnap .viewproperty a {
   color: #bccb3d;
@@ -330,6 +337,22 @@
 .projectgallery .thumbnail,
 .projlist .thumbnail {
   background-color: #171600;
+}
+.projectgallery .thumbnail .projectImags,
+.projlist .thumbnail .projectImags {
+  height: 150px;
+  width: 182px;
+  overflow: hidden;
+}
+.projectgallery .thumbnail .projectImags img,
+.projlist .thumbnail .projectImags img {
+  min-height: 150px;
+}
+.projectgallery .thumbnail .caption,
+.projlist .thumbnail .caption {
+  height: 173px;
+  overflow: hidden;
+  margin-bottom: 10px;
 }
 .projlist .project .thumbnail {
   height: 385px;
@@ -463,24 +486,15 @@
   .products .thumbnail {
     height: 465px;
   }
-  .singleproduct .thumbnail {
-    height: 186px;
-  }
 }
 @media (min-width: 992px) {
   .products .thumbnail {
     height: 450px;
   }
-  .singleproduct .thumbnail {
-    height: 100px;
-  }
 }
 @media (min-width: 1200px) {
   .products .thumbnail {
     height: 400px;
-  }
-  .singleproduct .thumbnail {
-    height: 118px;
   }
 }
 .featuretab {
@@ -618,7 +632,7 @@
 }
 .sidebarModule.sidemenu {
   border: 1px solid #2f3826;
-  padding: 15px;
+  padding: 15px 15px 0px;
   border-radius: 4px;
 }
 .sidebarModule.sidemenu ul {
@@ -754,9 +768,10 @@ body {
 .navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-nav > li > a:focus {
   color: #bbbbbb;
-  font: bold 16px/1em Arial, Helvetica, sans-serif;
+  font: bold 14px/1.5em Arial, Helvetica, sans-serif;
   position: relative;
   padding: 25px 15px 15px 20px;
+  text-transform: uppercase;
 }
 .navbar-default .navbar-nav > li.active > a,
 .navbar-default .navbar-nav > li.active:hover > a,
@@ -838,16 +853,18 @@ body {
   margin-top: 15px;
   padding: 10px 20px 30px;
 }
-h1,
-h2,
-h3,
-h4 {
-  font-family: "Carter One", "Times New Roman", "Times", serif;
+a {
+  color: #bccb3d;
+}
+a:hover {
+  color: #bccb3d;
+  text-decoration: underline;
 }
 h1,
 h2,
 h3,
 h4 {
+  font-family: 'FengardoNeue_Regular';
   color: #bccb3d;
 }
 h1,
@@ -985,7 +1002,11 @@ hr {
 }
 .pagination > li > a,
 .pagination > li > span,
-.pagination > .disabled > a {
+.pagination > .disabled > a,
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
   background-color: #2f3826;
   border: 1px solid #171600;
   color: #bccb3d;

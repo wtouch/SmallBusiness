@@ -22,30 +22,7 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 	</head>
 	<body>
-		<div class="sociallinks">
-			<ul>
-				{% if data.website_config.sociallinks.facebook %}
-					<li>
-						<a href="{{data.website_config.sociallinks.facebook}}" target="_blank">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.google %}
-					<li>
-						<a href="{{data.website_config.sociallinks.google}}" target="_blank">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.twitter %}
-					<li>
-						<a href="{{data.website_config.sociallinks.twitter}}" target="_blank">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.linkedin %}
-					<li>
-						<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
-					</li>
-				{% endif %}
-			</ul>
-		</div> 
+		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 		{% include [templatePath ~ '/includes/header.html','default/default/includes/header.html' ] %}
 		<div class="container">
 			{%if modules.headerModule.homeproject %}
@@ -69,14 +46,13 @@
 								{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
 							{% endif %}
 							
+							{% if modules.contentModule.featured_services %}
 							<div class="featuretab">
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
-									{% if modules.contentModule.featured_services %}
 									<li role="presentation" class="active">
 										<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
 									</li>
-									{% endif %}
 									{% if data.testimonials %}
 									<li role="presentation">
 										<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Featured Testimonials</a>
@@ -86,16 +62,14 @@
 								<!-- Tab panes -->
 								<div class="tab-content">
 									<div role="tabpanel" class="tab-pane active" id="featrserv">
-									{%if modules.contentModule.featured_services %}
 										{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-									{%endif%}
 									</div>
 									<div role="tabpanel" class="tab-pane" id="featrtesti">
 									{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
 									</div>
 								</div>
 							</div>
-							
+							{% endif %}
 							{% if modules.contentModule.featured_products %}
 								{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
 							{% endif %}
@@ -110,16 +84,16 @@
 							{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
 						{% endif %}
 						
+						{% if modules.sidebarModule.contact %}
+							{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+						{% endif %}
+						
 						{% if modules.sidebarModule.enquiry %}
 							{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
 						{% endif %}
 						
 						{% if modules.sidebarModule.sidemenu %}
 							{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
-						{% endif %}
-						
-						{% if modules.sidebarModule.contact %}
-							{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
 						{% endif %}
 						
 					</div>
