@@ -1,12 +1,12 @@
 {% autoescape false %}
 {% if featured_properties %}
 <div class="contentModule">
-	<h3 class="subhead"><small>Featured</small><br>Properties</h3>
+	<h3 class="subhead"><small>Additional</small><br>Properties</h3>
 	<div class="sections clearfix services">
 		<ul class="bxslider" id="bxslider">
 			{% set break = 0 %}{% set i = 0 %}
 			{% for x in featured_properties if break == 0 %}
-			<li>
+			<li class="text-center">
 				<div class="sliderimg">
 					<a href="properties/{{x.title}}/{{x.id}}">
 						<img class="img-responsive center-block" src="{{x.property_images.0.file_relative_path}}" alt="{{x.title}}"/>

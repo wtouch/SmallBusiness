@@ -8,19 +8,20 @@ jQuery(document).ready(function() {
 $(document).ready(function(){
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideMargin: 5,
+		slideMargin: 3,
 		minSlides :1,
 		maxSlides: 3,
 		moveSlides: 1,
 		slideWidth: 200,
 		auto: true, 
 		autoDirection:'next',
-		pause:4000,
+		pause:3000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
 		autoHover:true,
 		controls : false,
+		speed : 1000
 	});
 	$('.bxslider5').bxSlider({
 			mode:'vertical',
@@ -28,7 +29,7 @@ $(document).ready(function(){
 			auto: true, 
 			autoDirection:'next',
 			moveSlides: 1,
-			pause:4000,
+			pause:3000,
 			pager:false,
 			pagerType:'full',
 			autoControls: false, 
