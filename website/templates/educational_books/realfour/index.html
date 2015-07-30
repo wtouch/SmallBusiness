@@ -72,7 +72,7 @@
 					{%if modules.sidebarModule.enquiry %}
 						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
 					{%endif%}
-					{%if modules.sidebarModule.sidemenu %}
+					{%if modules.sidebarModule.sidemenu.length>=1 %}
 						{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
 					{%endif%}
 					
