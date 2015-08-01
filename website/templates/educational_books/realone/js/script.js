@@ -6,39 +6,36 @@ jQuery(document).ready(function() {
 	})
 });
 $(document).ready(function(){
+	$('.bxslider1').bxSlider({
+			mode:'vertical',
+			minSlides: 1,
+			auto: true, 
+			autoDirection:'next',
+			moveSlides: 1,
+			pause:3000,
+			pager:false,
+			pagerType:'full',
+			autoControls: false, 
+			controls:false, 
+			autoHover:true,
+			speed : 1000
+	});
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideWidth: 225,
-		minSlides:3,
+		slideMargin: 5,
+		minSlides :3,
 		maxSlides: 3,
-		slideMargin: 5,
+		moveSlides: 1,
+		slideWidth: 210,
 		auto: true, 
 		autoDirection:'next',
-		moveSlides: 1,
-		pause:2500,
-		pager:true,
-		pagerType:'full',
-		autoControls: true, 
-		controls:true, 
-		autoHover:true,
-		speed:1000,
-	});
-	$('.bxslider1').bxSlider({
-		mode:'vertical',
-		slideWidth: 600,
-		minSlides: 3,
-		maxSlides:3,
-		slideMargin: 5,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
-		pause:2500,
+		pause:3000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
-		controls:false, 
+		controls:true, 
 		autoHover:true,
-		speed:1000,
+		speed : 1000
 	});
 });
 var app = angular.module('myApp',[]);
@@ -74,16 +71,22 @@ app.controller('enquiryController', function($scope,$http, $location) {
 			$scope.propertyConfig = results.data.data;
 		}
 	});
+	
 	$scope.enquiry = {
-		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
-	};
+				subject : 'Website Enquiry',
+				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
+			};
 	$scope.postData = function(enquiry){
 		$scope.loading = true;
-		console.log(enquiry);
-		  $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-			$scope.loading = false;
-			$scope.mailSent = true;
-		}); 
+		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+				if(response.status == 'success'){
+					$scope.loading = false;
+					$scope.mailSent = true;
+				}
+				else{
+					alert(response.message);
+				}
+		});
 	};
 });	
 	app.controller('aboutController', function($scope,$http, $location) {
@@ -95,8 +98,3 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		$scope.makeActive($scope.url);
 		
 	});
-
-	jQuery(document).ready(function(){
-		jQuery(function(){			
-			jQuery('#fluid_dg_wrap_1').fluid_dg({thumbnails: true,height:"25%"});
-		}); })
