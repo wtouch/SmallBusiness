@@ -95,3 +95,8 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		$scope.makeActive($scope.url);
 		
 	});
+
+	jQuery(document).ready(function(){
+		jQuery(function(){			
+			jQuery('#fluid_dg_wrap_1').fluid_dg({thumbnails: true,height:"25%"});
+		}); })

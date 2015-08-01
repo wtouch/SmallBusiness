@@ -1,0 +1,226 @@
+//project
+//css for featured project slider
+.bxslider{ 
+	padding:5px;
+	li{
+		.projimg{
+			height : 175px;
+			overflow : hidden;
+			padding : 6px;
+			border : 2px solid transparent;
+			img{
+				min-height: 175px;
+			}
+			&:hover{
+				border : 2px solid @darkbackcolor;
+			}
+		}
+		width:100px;
+		a{
+			color:@darkcolor;
+			h4{
+				color : @color;
+				padding: 4px;
+				border : none;
+				border-radius : 4px;
+				&:hover{
+					color : @colorblack;
+				}
+			}
+		}
+		p{
+			margin-bottom : 0px;
+			margin-top : 0px;
+		}
+	}
+}
+
+.homeproject {
+	
+	margin-bottom :20px;
+	margin-top: 65px;
+	position: relative;
+	z-index: 5;
+	.projectnav{
+		background-image:linear-gradient(@lightbackcolor ,@colorwhite);
+		border: 3px solid @darkbackcolor;
+		padding:5px;
+		height:312px;
+		.nav-stacked{
+			>li{
+				+li {
+					margin-top: 10px;
+				}
+				>a, > a:focus{
+					color : @colorblack;
+				
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					text-decoration : none;
+					color : @color;
+					background-color:@lightbackcolor;
+				}
+			}
+		}
+	}
+	.projsnap{
+		background-image:linear-gradient(@lightbackcolor ,@colorwhite);
+		border: 3px solid @darkbackcolor;
+		padding:10px;
+		height:312px;
+		img{
+			height : 110px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border : 2px solid @lightcolor;
+			border-radius : 5px;
+			padding :4px;
+		}
+		p{
+			color : @colorblack;
+		}
+		.viewproperty{
+			a{
+				color : @colorblack;
+				text-decoration : underline;
+				&:hover{
+					color : @color;
+					text-decoration : none;
+				}
+			}
+		}
+	}
+	#carousel {
+		height: 312px;
+		border: 3px solid #f9f4da;
+		.carousel-inner {
+			.item{
+				max-height: 306px;
+				overflow: hidden;
+				>img{
+					width :100%;
+					min-height : 302px;
+				}
+				
+			}
+		}
+		a.left.carousel-control{
+			left : 40px;
+		}
+		a.right.carousel-control {
+			right : 40px;
+		}
+		a.left.carousel-control, a.right.carousel-control {
+			background: none;
+		}
+	}
+}
+
+// single project nav css
+.project{
+	
+	.navbar{
+		
+		border-radius: 0;
+		margin-top:10px;
+		margin-bottom:10px;
+		height : 20px;
+		width:auto;
+	}
+	ul.nav.navbar-nav {
+		background-color:@darkbackcolor;
+		margin-bottom:10px;
+		>li{
+			border-right : 1px solid @lightbackcolor;
+			>a, > a:focus{
+				padding : 9px 12px;
+				color : @colorwhite;
+				position : relative;
+			} 
+			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+				background-color:@color;
+				color : @colorwhite;
+			}
+		}
+	}
+	.projectgallery{
+		.thumbnail{
+			border : 1px solid @darkbackcolor;
+			background : none;
+		}
+	}
+}
+.projHead,.project .description,.project .thumbnail {
+	background-color:@lightbackcolor;
+}
+//css for single project & project list
+	.projlist{
+		
+		
+		padding:10px;
+		//border : 1px solid @darkbackcolor;
+		.project{
+			
+			.thumbnail{
+				background-color:@lightbackcolor;
+				height:385px;
+				padding-top : 15px;
+				border-color : @darkcolor;
+				.projectimg{
+					height : 148px;
+					overflow : hidden;
+					img{
+						min-height : 148px;
+						max-width : 95%;
+						border : 2px solid transparent;
+						padding : 4px;
+						&:hover{
+							border : 2px solid @darkbackcolor;
+						}
+					}
+				}
+				
+				.caption{
+					color : @colorblack;
+				}
+				.caption p{
+					color:@colorblack;
+				}
+				.readmore{
+					margin-top : 15px;
+					a{
+						color : @color;
+						border-radius : 4px;
+						&:hover, &:hover{
+							color : @colorblack;
+						}
+					}
+				}
+			}
+			.projImg{
+				margin-right: 20px;
+				max-height : 175px;
+			}
+		}
+	}
+	@media (min-width: 320px){
+		.projImg{
+			float :none;
+			max-height : 175px;
+			margin-right:10px;
+		}
+	}
+	@media (min-width: 992px){
+		.projImg{
+			float : left;
+			max-height : 175px;
+			margin-right : 10px;
+		}
+	}
+	@media (min-width: 1200px){
+		.projImg{
+			float :left;
+			max-height : 175px;
+			margin-right:10px;
+		}
+	}
