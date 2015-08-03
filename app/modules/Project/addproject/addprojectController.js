@@ -15,6 +15,7 @@ define(['app'], function (app) {
 			layout_map : [],
 			floor_plan : [],
 			project_gallery : [],
+			projecttestimonials :[],
 			project_images : [],
 			created_date : $scope.currentDate,
 			modified_date :$scope.currentDate,
@@ -24,6 +25,7 @@ define(['app'], function (app) {
 		$scope.layout_map = {};
 		$scope.floor_plan = {};
 		$scope.project_gallery = {};
+		$scope.projecttestimonials ={};
 		$scope.builder = {},
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
@@ -60,7 +62,7 @@ define(['app'], function (app) {
 			if(resetObj){
 				$scope.headingDisabled = false;
 				$scope.imgRemoved = true;
-				$scope[resetObj] = { desc : {}};
+				//$scope[resetObj] = { desc : {}};
 			}
 		}
 	/***********************************************************************/

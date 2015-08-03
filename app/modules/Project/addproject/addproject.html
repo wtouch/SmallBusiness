@@ -45,6 +45,10 @@
 						<a ng-click="showFormPart('floorplan')">Floor Plan</a>
 					</li>
 					
+					<li role="presentation" ng-class="{active: formPart=='projecttestimonials'}">
+						<a ng-click="showFormPart('projecttestimonials')">Testimonial</a>
+					</li>
+					
 					<li role="presentation" ng-class="{active: formPart=='gallery'}">
 						<a ng-click="showFormPart('gallery')">Gallery</a>
 					</li>
@@ -78,6 +82,9 @@
 					</ng-include> 
 					
 					<ng-include ng-show="formPart=='gallery'" src="'modules/project/addproject/gallery.html'">
+					</ng-include> 
+					
+					<ng-include ng-show="formPart=='projecttestimonials'" src="'modules/project/addproject/projecttestimonials.html'">
 					</ng-include> 
 					
 					<ng-include ng-show="formPart=='contact'" src="'modules/project/addproject/contact.html'">
