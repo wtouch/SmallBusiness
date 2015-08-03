@@ -97,6 +97,7 @@
 		}
 	}
 	.projectnav{
+	
 		display : inline-block;
 		height : 342px;
 		padding:0px 15px 15px;
@@ -111,18 +112,29 @@
 		.nav-stacked{
 			margin: 5px;
 			>li{
-				padding : 4px;
+				padding: 2px 4px;
 				border-bottom:1px dotted @lightbackcolor ;
 				>a, > a:focus{
 					color : @colorwhite;
 					padding: 10px 15px;
-					padding-top:2px;
+				&:hover
+				{
+					text-decoration: none;
+					background-image: -webkit-linear-gradient(right, #337ab7, #ffffff 111%, #337ab7);
+					color: @colorwhite;
+					transform: translateX(-24px);
+					width: 235px;
+					text-align: right;
+					padding-right: 20px;
+					border-radius:4px;
+					
+				}
 				} 
 				
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus,>a:focus{
 					text-decoration: none;
 					background-color: transparent;
-					color:@lightcolor;
+					/*color:@lightcolor;*/
 				}
 			}
 		}
