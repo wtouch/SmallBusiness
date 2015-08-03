@@ -6,27 +6,13 @@ jQuery(document).ready(function() {
 	})
 });
 $(document).ready(function(){
-	$('.bxslider1').bxSlider({
-			mode:'vertical',
-			minSlides: 1,
-			auto: true, 
-			autoDirection:'next',
-			moveSlides: 1,
-			pause:3000,
-			pager:false,
-			pagerType:'full',
-			autoControls: false, 
-			controls:false, 
-			autoHover:true,
-			speed : 1000
-	});
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
 		slideMargin: 5,
 		minSlides :3,
 		maxSlides: 3,
 		moveSlides: 1,
-		slideWidth: 210,
+		slideWidth: 225,
 		auto: true, 
 		autoDirection:'next',
 		pause:3000,
@@ -36,6 +22,39 @@ $(document).ready(function(){
 		controls:true, 
 		autoHover:true,
 		speed : 1000
+	});
+	
+	$('.bxslider1').bxSlider({
+		mode:'vertical',
+		slideWidth: 600,
+		minSlides: 3,
+		maxSlides:3,
+		slideMargin: 5,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 2,
+		pause:5000,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed:2000,
+	});
+	$('#carousslider').bxSlider({
+		mode:'fade',
+		slideWidth: 600,
+		slideHeight:500,
+		
+		auto: true, 
+		autoDirection:'next',
+		pause:2500,
+		pager:true,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed:1000,
 	});
 });
 var app = angular.module('myApp',[]);
@@ -71,22 +90,16 @@ app.controller('enquiryController', function($scope,$http, $location) {
 			$scope.propertyConfig = results.data.data;
 		}
 	});
-	
 	$scope.enquiry = {
-				subject : 'Website Enquiry',
-				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
-			};
+		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
+	};
 	$scope.postData = function(enquiry){
 		$scope.loading = true;
-		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				if(response.status == 'success'){
-					$scope.loading = false;
-					$scope.mailSent = true;
-				}
-				else{
-					alert(response.message);
-				}
-		});
+		console.log(enquiry);
+		  $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+			$scope.loading = false;
+			$scope.mailSent = true;
+		}); 
 	};
 });	
 	app.controller('aboutController', function($scope,$http, $location) {
