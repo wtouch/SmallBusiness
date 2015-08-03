@@ -8,20 +8,20 @@ jQuery(document).ready(function() {
 $(document).ready(function(){
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideWidth: 225,
-		minSlides:3,
-		maxSlides: 3,
 		slideMargin: 5,
+		minSlides :3,
+		maxSlides: 3,
+		moveSlides: 1,
+		slideWidth: 225,
 		auto: true, 
 		autoDirection:'next',
-		moveSlides: 2,
-		pause:2500,
-		pager:true,
+		pause:3000,
+		pager:false,
 		pagerType:'full',
-		autoControls: true, 
+		autoControls: false, 
 		controls:true, 
 		autoHover:true,
-		speed:1000,
+		speed : 1000
 	});
 	$('.bxslider1').bxSlider({
 		mode:'vertical',
@@ -39,6 +39,22 @@ $(document).ready(function(){
 		controls:false, 
 		autoHover:true,
 		speed:2000,
+	});
+	$('.carousslider').bxSlider({ 
+		mode:'fade',
+		slideWidth: 1000,
+		slideHeight : 800,
+		minSlides:1,
+		maxSlides: 1,
+		auto: true, 
+		autoDirection:'next',
+		pause:2500,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed:1000,
 	});
 });
 var app = angular.module('myApp',[]);
