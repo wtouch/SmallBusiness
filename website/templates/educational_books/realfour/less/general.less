@@ -90,25 +90,57 @@
 	}
 	
 	
+	
 	//testimonials
-	.testimonial{
+	.testimonial, .featrtesti{
 		blockquote{
 			font-size : inherit;
 			border-left: none;
 			footer{
 				background:none;
 				padding : 0px;
-				img{
-					max-height : 50px;
-					margin-right : 10px;
-				}
 				cite{
 					font-size : 17px;
-					color : @color;
+					color : @darkcolor;
 				}
+			}
+			&::before{
+				content : '\201c';
+				position : absolute;
+				display : inline-block;
+				top : 5px;
+				left : 0;
+				line-height : 40px;
+				font-family : Times New Roman,Serif;
+				font-size : 55px;
 			}
 		}
 	}
+	.testimonial{
+		blockquote{
+			padding-left : 15px;
+			footer{
+				img{
+					max-height: 70px;
+					width: 70px;
+					margin-right : 10px;
+				}
+			} 
+		}
+	}
+	.featrtesti{
+		blockquote{
+			padding : 5px 15px;
+		}
+		img{
+			max-height : 100px;
+			padding : 4px;
+			border : 3px solid @lightcolor;
+			&:hover{
+				border : 3px solid @color;
+			}
+		}
+	} 
 	.send, .calculate{
 		margin-right : 8px;
 	}
