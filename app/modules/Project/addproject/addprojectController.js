@@ -5,6 +5,7 @@ define(['app'], function (app) {
 	var addprojectController = function ($scope, $injector,$routeParams,$http,$rootScope, upload, $timeout,dataService,$notification,$location) {
 		$rootScope.metaTitle = "Add Real Estate Property";
 		$scope.path = "/project"; 
+		$scope.isCollapsed = false;
 		$scope.project = {
 			featured : 0,
 			builder :{},
