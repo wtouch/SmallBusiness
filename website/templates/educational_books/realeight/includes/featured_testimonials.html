@@ -6,11 +6,11 @@
 			<ul class="bxslider5" id="bxslider5">
 			{% set break = 0 %}{% set i = 0 %}
 			{% for key, value in data.testimonials if break == 0 %}
-				<li style="height : 300px;">
-					<div class="col-xs-3">
+				<li style="height : 500px;">
+					<div class="col-xs-3 col-lg-3 ">
 						<img class="img-responsive center-block" src="{{value.image.file_relative_path}}">
 					</div>
-					<div class="{{ (value.image.file_relative_path) ? 'col-xs-9' : 'col-xs-12'}}">
+					<div class="{{ (value.image.file_relative_path) ? 'col-xs-9 col-lg-9' : 'col-xs-12 col-lg-12'}}">
 						<blockquote>
 							<div class="description">{{ value.description }}</div>
 							<footer><cite>{{value.heading}}</cite></footer>

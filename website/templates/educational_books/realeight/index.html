@@ -53,7 +53,7 @@
 		<div class="container">
 			<div class="row">
 				{% if modules.sidebarModule >= 1 %}
-				<aside class="col-xs-3">
+				<aside class="col-xs-12 col-lg-3">
 					{%if modules.sidebarModule.searchProp %}
 						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
 					{%endif%}
@@ -68,7 +68,7 @@
 					{%endif%}
 				</aside>
 				{%endif%}
-				<section class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-9' : 'col-xs-12'}} info">
+				<section class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-12 col-lg-9' : 'col-xs-12 col-lg-12'}} info">
 					<article class="row">
 						<div class="col-xs-12">
 							<div class="content">

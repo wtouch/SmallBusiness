@@ -1,0 +1,39 @@
+{% autoescape false %}
+<div class="sidebarModule searchProp">
+	<h3 class="subhead">Search Property</h3>
+	<div class="panel panel-default">
+		<div class="panel-body">
+		<form name="searchForm" action="/properties" method="get">
+			<div class="form-group">
+				<label for="property_for">I want to:</label>
+				<div class="radio">
+					<label class="radio-inline">
+						<input type="radio" name="property_for" id="property_for" value="sale"> Sale
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="property_for" id="property_for1" value="rent"> Rent
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="category">Property Type:</label>
+				<select class="form-control" id="category" name="category">
+					<option value="">Select Category</option>
+					<option value="Residential Property">Residential Property</option>
+					<option value="Commercial Property">Commercial Property</option>
+					<option value="Agricultural land">Agricultural land</option>
+					<option value="Industrial Property">Industrial Property</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="city">City</label>
+				<input type="text" class="form-control" id="city" value="pune" name="city">
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-info center-block" value="Search">
+			</div>
+		</form>
+		</div>
+	</div>
+</div>
+{% endautoescape %}
