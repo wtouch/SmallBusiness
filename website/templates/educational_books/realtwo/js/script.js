@@ -7,19 +7,21 @@ jQuery(document).ready(function() {
 });
 $(document).ready(function(){
 	$('.bxslider1').bxSlider({
-			mode:'vertical',
-			minSlides: 1,
-			maxSlides: 3,
-			auto: true, 
-			autoDirection:'next',
-			moveSlides: 1,
-			pause:3000,
-			pager:false,
-			pagerType:'full',
-			autoControls: false, 
-			controls:false, 
-			autoHover:true,
-			speed : 1000
+		mode:'vertical',
+		slideWidth: 600,
+		minSlides: 1,
+		maxSlides:1,
+		slideMargin: 15,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 1,
+		pause:3000,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed:1000,
 	});
 	$('.bxslider').bxSlider({
 		mode:'horizontal',

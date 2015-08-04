@@ -448,15 +448,15 @@
 }
 @keyframes moveanchor {
   0% {
-    right: 0px;
+    left: 0px;
     top: 0px;
   }
   50% {
-    right: 100px;
+    left: 18px;
     top: 0px;
   }
   100% {
-    right: 0px;
+    left: 0px;
     top: 0px;
   }
 }
@@ -480,43 +480,118 @@
   overflow: hidden;
   height: 395px;
 }
-.homeproject .projsnap {
+.homeproject .projectCarousal .projsnap {
   width: 0px;
-  height: 342px;
-  opacity: 0;
-  background-color: rgba(115, 146, 184, 0.7);
-  transform: translateX(530px);
-  transition: all 800ms ease-in;
+  height: 395px;
+  z-index: 0;
+  background-color: rgba(12, 214, 184, 0.5);
   position: absolute;
   overflow: hidden;
   top: 0;
   left: 0;
+  -webkit-transform: translate(460px, -100px) rotate(180deg);
+  -moz-transform: translate(460px, -100px) rotate(180deg);
+  -o-transform: translate(460px, -100px) rotate(180deg);
+  -ms-transform: translate(460px, -100px) rotate(180deg);
+  transform: translate(460px, -100px) rotate(180deg);
+  -webkit-transition: all 0.2s 0.4s ease-in-out;
+  -moz-transition: all 0.2s 0.4s ease-in-out;
+  -o-transition: all 0.2s 0.4s ease-in-out;
+  -ms-transition: all 0.2s 0.4s ease-in-out;
+  transition: all 0.2s 0.4s ease-in-out;
 }
-.homeproject .projsnap img {
-  height: 110px;
-  margin-top: 10px;
+.homeproject .projectCarousal .projsnap img {
   margin-bottom: 10px;
   border: 1px solid #ac2617;
   border-radius: 5px;
   padding: 4px;
+  max-height: 295px;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 }
-.homeproject .projsnap p,
-.homeproject .projsnap .viewproperty a {
-  color: #ffffff;
-  font-size: 20px;
-  text-shadow: 3px 2px 1px #000;
+.homeproject .projectCarousal .projsnap p {
+  color: #ac2617;
+  font-size: 17.5px;
+  text-shadow: 1px 1px 1px #ffffff;
+  -webkit-transform: translateX(300px) rotate(90deg);
+  -moz-transform: translateX(300px) rotate(90deg);
+  -o-transform: translateX(300px) rotate(90deg);
+  -ms-transform: translateX(300px) rotate(90deg);
+  transform: translateX(300px) rotate(90deg);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
-.homeproject .projsnap .viewproperty {
-  margin-top: 15px;
+.homeproject .projectCarousal .projsnap .viewproperty {
+  background-color: #A5BC33;
+  padding: 10px;
+  box-shadow: 1px 2px 6px #000;
+  border-radius: 5px;
   text-align: center;
+  -webkit-transform: translateY(-200px);
+  -moz-transform: translateY(-200px);
+  -o-transform: translateY(-200px);
+  -ms-transform: translateY(-200px);
+  transform: translateY(-200px);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
-.homeproject .projsnap .viewproperty a:hover {
+.homeproject .projectCarousal .projsnap .viewproperty a {
   color: #ffffff;
+  font-weight: bold;
+}
+.homeproject .projectCarousal .projsnap .viewproperty a:hover {
+  color: #ac2617;
+}
+.homeproject .projectCarousal:hover {
+  z-index: 0;
 }
 .homeproject .projectCarousal:hover .projsnap {
-  opacity: 1;
-  width: 529px;
-  transform: translateX(0px);
+  z-index: 999;
+  width: 708px;
+  padding: 50px;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  transition-delay: 0s;
+  -webkit-transform: translate(0px, 0px);
+  -moz-transform: translate(0px, 0px);
+  -o-transform: translate(0px, 0px);
+  -ms-transform: translate(0px, 0px);
+  transform: translate(0px, 0px);
+}
+.homeproject .projectCarousal:hover .projsnap p {
+  -webkit-transform: translateX(0px) rotate(0deg);
+  -moz-transform: translateX(0px) rotate(0deg);
+  -o-transform: translateX(0px) rotate(0deg);
+  -ms-transform: translateX(0px) rotate(0deg);
+  transform: translateX(0px) rotate(0deg);
+  -webkit-transition-delay: 0.4s;
+  -moz-transition-delay: 0.4s;
+  -o-transition-delay: 0.4s;
+  -ms-transition-delay: 0.4s;
+  transition-delay: 0.4s;
+}
+.homeproject .projectCarousal:hover .projsnap .viewproperty {
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -o-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
+  -webkit-transition-delay: 0.3s;
+  -moz-transition-delay: 0.3s;
+  -o-transition-delay: 0.3s;
+  -ms-transition-delay: 0.3s;
+  transition-delay: 0.3s;
 }
 .homeproject .projectnav {
   position: absolute;
@@ -539,6 +614,7 @@
   color: #ffffff;
   padding: 9px 15px;
   font-size: 17px;
+  font-weight: bold;
 }
 .homeproject .projectnav .nav-stacked > li.active > a,
 .homeproject .projectnav .nav-stacked > li.active:hover > a,
@@ -557,7 +633,7 @@
   -webkit-animation-iteration-count: 1;
   /* Chrome, Safari, Opera */
   animation-name: moveanchor;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-iteration-count: 1;
 }
 .homeproject .projectnav .nav-stacked > li::after {
