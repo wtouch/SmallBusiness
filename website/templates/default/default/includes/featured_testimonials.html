@@ -7,7 +7,7 @@
 				<div class="col-xs-3">
 					<img class="img-responsive center-block" src="{{value.image.file_relative_path}}">
 				</div>
-				<div class="col-xs-9">
+				<div class="{{ (value.image.file_relative_path) ? 'col-xs-9' : 'col-xs-offset-1 col-xs-11'}}">
 					<blockquote>
 						<div class="description">{{ value.description }}</div>
 						<footer><cite>{{value.heading}}</cite></footer>
