@@ -5,14 +5,13 @@ jQuery(document).ready(function() {
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
 });
-var app = angular.module('myApp',[]);
 $(document).ready(function(){
 	$('.bxslider1').bxSlider({
 		mode:'vertical',
 		minSlides: 1,auto: true, 
 		autoDirection:'next',
 		moveSlides: 1,
-		pause:3000,
+		pause:4000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
@@ -25,19 +24,35 @@ $(document).ready(function(){
 		slideMargin: 5,
 		minSlides :1,
 		maxSlides: 3,
-		moveSlides: 1,
+		moveSlides: 2,
 		slideWidth: 210,
 		auto: true, 
 		autoDirection:'next',
-		pause:3000,
+		pause:4000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
 		controls:true, 
+		autoHover:true
+	});
+	$('#carousslider').bxSlider({
+		mode:'fade',
+		slideWidth: 600,
+		slideHeight:500,
+		
+		auto: true, 
+		autoDirection:'next',
+		pause:2500,
+		pager:true,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
 		autoHover:true,
-		speed : 1000
+		speed:1000,
 	});
 });
+var app = angular.module('myApp',[]);
+
 app.config(function($locationProvider) {
   /* $routeProvider
    .when('/:view', {
@@ -69,22 +84,16 @@ app.controller('enquiryController', function($scope,$http, $location) {
 			$scope.propertyConfig = results.data.data;
 		}
 	});
-	
 	$scope.enquiry = {
-				subject : 'Website Enquiry',
-				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
-			};
+		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
+	};
 	$scope.postData = function(enquiry){
 		$scope.loading = true;
-		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				if(response.status == 'success'){
-					$scope.loading = false;
-					$scope.mailSent = true;
-				}
-				else{
-					alert(response.message);
-				}
-		});
+		console.log(enquiry);
+		  $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+			$scope.loading = false;
+			$scope.mailSent = true;
+		}); 
 	};
 });	
 	app.controller('aboutController', function($scope,$http, $location) {

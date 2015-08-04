@@ -58,7 +58,9 @@
 					width :20px;
 					margin-right: 6px;
 				}
-				
+				a{
+					color:@colorblack;
+				}
 				&:hover{
 					  transform: translateX(-45px);
 				}
@@ -112,6 +114,7 @@
 					top: -10px;
 					padding-top: 34px;
 					height: 65px;
+					background-image:-webkit-linear-gradient(bottom, @color 70%,@darkbackcolor) ;
 				}
 				&.active > a::after, &.active:hover > a::after, &.active > a:focus::after, &:hover > a::after, &:hover > a:focus::after
 				{
@@ -123,6 +126,7 @@
 					border-left: 4px solid @lightcolor;
 					border-right: 4px solid transparent;
 					border-top: 4px solid transparent;
+					background-image:-webkit-linear-gradient(bottom, @color 70%,@darkbackcolor) ;
 				}
 				
 				> a::before{
@@ -278,7 +282,7 @@
 		}
 	}
 	.panel{
-		background-color : @back;
+		background-color : @darkbackcolor;
 	}
 	.panel-default {
 		border-color: @lightbackcolor;
