@@ -77,8 +77,7 @@
 		border-color : #373C51;
 	}
 	hr{
-		margin-top : 0px; 
-		margin-bottom : 10px; 
+		margin: 0px 0px 10px;
 	}
 	*{
 		transition:300ms;
@@ -97,6 +96,9 @@
 	a, .btn.btn-link,.btn .btn-info{
 		color: @color;
 	}
+	.btn-link{
+		padding-left : 0px;
+	}
 	.project .thumbnail{
 		background-color:@back;
 	}
@@ -109,7 +111,7 @@
 		text-decoration : none;
 		color: @colorwhite;
 	}
-	.btn-info, .btn-primary{
+	.btn-info, .btn-info[disabled],.btn-primary{
 		background-color: @darkbackcolor;
 		border-color : @darkbackcolor;
 	}
@@ -341,12 +343,18 @@
 	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
 		border:1px solid @lightcolor;
 		background-color:@contentback;
-		padding:10px;
 		input,textarea{
 			color:@colorwhite;
 		}
 	}
-	
+	.sections{
+		padding:15px;
+	}
+	.sidebarModule{
+		.panel-body{
+			padding : 15px 15px 0px;
+		}
+	}
 	.formsec{
 		color : #E5DFDF;
 		border-bottom: 1px solid #ccc;
@@ -359,16 +367,6 @@
 	.sideimg{
 		margin-top: 20px;
 	}
-	.email{
-		color :@color;
-		text-decoration : underline;
-		&:hover{
-			text-decoration : none;
-			color :@lightcolor;
-		}
-	}
-	
-	
 	//aboutus page css
 	.sidebar{
 		.nav-pills{

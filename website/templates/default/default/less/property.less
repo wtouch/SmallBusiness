@@ -1,10 +1,72 @@
-//Property
-	.property,.proplist{
-		background-color : @back;
-		border : 1px solid @lightbackcolor;
+//featured property
+.featuredProperty{
+	.sections{
+		height : 270px;
+		.bxslider1{
+			padding-left: 15px;
+			list-style :none;
+			h4{
+				padding-left:25px;
+			}
+			.row{
+				padding-bottom : 10px;
+			}
+			li{
+				height : 260px;
+				.sliderImg{
+					height :150px;
+					width : 200px;
+					overflow : hidden;
+					padding : 4px;
+					border : 2px solid transparent;
+					img{
+						min-height: 150px;
+					}
+					&:hover{
+						border : 2px solid @color;
+					}
+				}
+				a{
+					color:@color;
+					font-weight : bold;
+					&:hover{
+						text-decoration : none;
+					}
+					&:hover{
+						color : @lightcolor;
+					}
+				}
+				.head{
+					margin-right : 10px;
+					margin-left : 10px;
+					color : @colorblack;
+				}
+				.table{
+					tbody{
+						tr{
+							td{
+								border :none;
+								padding: 3px 10px;
+							}
+						}
+					
+					}
+				}
+			}
+		}
 	}
+}
+	
+//Property
+.property,.proplist{
+	background-color : @back;
+	border : 1px solid @lightbackcolor;
+}
+
+.singleproperty{
 	.property{
 		margin-bottom : 15px;
+		margin-top : 15px;
 		padding: 10px 15px;
 		h3{
 			border :none;
@@ -20,8 +82,11 @@
 			}
 		}
 		.mainimg {
+			height : 175px;
+			width : 195px;
+			overflow : hidden;
 			img{
-				max-height: 180px;
+				max-height: 175px;
 			}
 		}
 		.subimg{
@@ -38,7 +103,8 @@
 	.propDetails{
 		ul{
 			li {
-				padding: 3px;
+				padding-left: 10px;
+				padding-bottom: 10px;
 			}
 		}
 		span{
@@ -50,7 +116,7 @@
 			background: url("../img/sprite_icons.png") transparent;
 			display: inline-block;
 			vertical-align: middle;
-		}
+		} 
 		span.amenity.power_backup {
 			background-position: 1px -24px;
 		}
@@ -109,70 +175,45 @@
 			}
 		}
 	}
-	
-	.bxslider1{
-		padding:0px;
-		li{
-			.thumbnail {
-				margin-bottom : 0px;
-				img{
-					max-height: 215px;
-					width : 100%;
+	.btn-primary{
+		margin-bottom : 10px;
+	}
+}	
+	//propertyList 
+	.propertylist{
+			padding: 20px 20px 0px;
+			.btn-primary{
+				margin-right : 4px;
+				margin-bottom: 10px;
+				padding : 6px 10px;
+			}
+			.readmore{
+				text-align : center;
+				.viewdtls{
+					margin-right : 10px;
 				}
 			}
-			a, .head{
-				color:@color;
-				font-weight : bold;
-				&:hover{
-					text-decoration : none;
-				}
+			.panel{
+				background-color : @darkbackcolor;
 			}
-			a:hover{
-				color : @lightcolor;
+			.panel-default{
+				border-color : @lightbackcolor;
 			}
-			.head{
-				text-decoration : underline;
-				&:hover{
-					color:@color;
-				}
+			.panel-body {
+				padding: 5px 15px 15px;
 			}
 			.table{
-				tbody{
-					tr{
-						td{
-							border :none;
-							padding: 3px 10px;
-						}
-					}
-				
+				td{
+					border : none;
+					padding: 1px 10px;
 				}
 			}
-		}
-	}
-	//propertyList 
-	.proplist{
-		padding: 20px 20px 0px;
-		.panel{
-			background-color : @darkbackcolor;
-		}
-		.panel-default{
-			border-color : @lightbackcolor;
-		}
-		.panel-body {
-			padding: 5px 15px 15px;
-		}
-		.table{
-			td{
-				border : none;
-				padding: 1px 10px;
-			}
-		}
 	}
 	@media (min-width: 992px){
 		.propDetails{
 			ul{
 				li{
-					width: 224px;
+					width: 229px;
 				}
 			}
 		}
@@ -181,7 +222,7 @@
 		.propDetails{
 			ul{
 				li{
-					width: 274px;
+					width: 229px;
 				}
 			}
 		}

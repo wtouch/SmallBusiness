@@ -38,6 +38,22 @@ $(document).ready(function(){
 		autoHover:true,
 		speed : 1000
 	});
+	$('.carousslider').bxSlider({ 
+		mode:'fade',
+		slideWidth: 1000,
+		slideHeight : 800,
+		minSlides:1,
+		maxSlides: 1,
+		auto: true, 
+		autoDirection:'next',
+		pause:2500,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed:1000,
+	});
 });
 var app = angular.module('myApp',[]);
 

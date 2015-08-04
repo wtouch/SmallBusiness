@@ -1,20 +1,96 @@
-//project
-	.breadcrumb{
-		background : none;
-		li{
-			a{
-				color : @lightcolor;
-				text-decoration : underline;
-				&:hover{
+.homeproject {
+	margin-top:10px;
+	margin-bottom :20px;
+	.projectnav,.projsnap {
+		border : 5px solid @lightbackcolor;
+		background-color: @darkbackcolor;
+		.nav-stacked{
+			background-color: @darkbackcolor;
+			margin: 5px;
+			>li{
+				padding :4px;
+				>a, > a:focus{
+					font-weight: bold;
 					color : @lightcolor;
-					text-decoration : none;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					background-color: @color ;
+					color : @colorblack;
 				}
-			}
-			&+li:before {
-				content: ">\00a0";
 			}
 		}
 	}
+	.projsnap{
+		p{
+			padding-left : 10px;
+		}
+		img{
+			height : 110px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border : 1px solid @color;
+			border-radius : 5px;
+			padding :4px;
+		}
+		.viewproperty{
+			a{
+				color : @color;
+				font-size: 16px;
+				&:hover{
+					color : @color;
+				}
+			}
+		}
+	}
+	#carousel {
+		.carousel-inner {
+			border: 5px solid @lightcolor;
+			.carousel-caption{
+				h2{
+					border : none;
+				}
+			}
+			.item{
+				overflow: hidden;
+			}
+		}
+		a.left.carousel-control, a.right.carousel-control {
+			background: none;
+		}
+	}
+}
+
+//featured project
+.bxslider{
+	li{
+		.projimg{
+			height : 175px;
+			overflow : hidden;
+			padding : 6px;
+			border : 2px solid @lightcolor;
+			img{
+				min-height: 175px;
+			}
+			&:hover{
+				border : 2px solid @color;
+			}
+		}
+		.head{
+			color:@color;
+			font-weight : bold;
+			text-decoration:underline;
+			&:hover{
+				color:@color;
+				text-decoration:none;
+			}
+		}
+		p{
+			margin-top: 0px;
+		}
+	}
+}
+	
+//project
 	.highlight{
 		color :@color; 
 	}
@@ -31,9 +107,9 @@
 				border-right : 1px solid @lightbackcolor;
 				height : 38px;
 				>a, > a:focus{
-					padding : 9px 14px;
 					color : @lightcolor;
-					font-weight : bold;
+					padding: 9px 8px;
+					font-size: 15px;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					background-color: @color ;
@@ -55,20 +131,44 @@
 		padding: 20px 20px 0px;
 		.thumbnail{
 			background-color : @darkbackcolor;
+			.projectImags{
+				height : 150px;
+				width : 182px;
+				overflow : hidden;
+				img{
+					min-height : 150px;
+				}
+			}
+			.caption{
+				height: 173px;
+				overflow: hidden;
+				margin-bottom: 10px;
+			}
 		}
 	}
 	//projectlist
 	.projlist{
-		.thumbnail{
-			padding-top : 15px;
-			.caption{
-				color : @lightcolor;
-				a{
-					color : @color;
-					text-decoration : underline;
-					&:hover{
+		.project{
+			.thumbnail{
+				height:385px;
+				padding-top : 15px;
+				.projectimg{
+					width : 182px;
+					height : 148px;
+					overflow : hidden;
+					img{
+						min-height : 148px;
+					}
+				}
+				.caption{
+					color : @lightcolor;
+					a{
 						color : @color;
-						text-decoration : none;
+						text-decoration : underline;
+						&:hover{
+							color : @color;
+							text-decoration : none;
+						}
 					}
 				}
 			}
@@ -77,15 +177,51 @@
 	@media (min-width: 320px){
 		.projImg{
 			float :none;
+			max-height : 175px;
+			margin-right:10px;
+		}
+		.item.active{
+			height: 120px;
+		}
+		.projectnav,.projsnap{
+			height: 312px;
+			margin-bottom: 10px;
+		}
+		.carousel-inner>.item>img{
+			width :100%;
 		}
 	}
 	@media (min-width: 992px){
 		.projImg{
-			float :left;
+			float : left;
+			max-height : 175px;
+			margin-right : 10px;
+		}
+		.projectnav,.projsnap{
+			height: 322px;
+		}
+		.item.active{
+			height: 312px;
+		}
+		.carousel-inner>.item>img{
+			width :100%;
+			min-height : 310px;
 		}
 	}
 	@media (min-width: 1200px){
 		.projImg{
 			float :left;
+			max-height : 175px;
+			margin-right:10px;
+		}
+		.projectnav,.projsnap{
+			height: 318px;
+		}
+		.item.active{
+			height: 308px;
+		} 
+		.carousel-inner>.item>img{
+			width :100%;
+			min-height: 306px;
 		}
 	}

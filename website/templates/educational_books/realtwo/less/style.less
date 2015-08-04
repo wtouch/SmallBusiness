@@ -295,22 +295,26 @@
 		font : 2.5em/1em 'Alex Brush', cursive;
 	}
 	.btn-info, .btn-primary{
-		border-radius : 5px;
 		&, &:focus, &:active, &[disabled]{
 			background-color : @back;
 			color : @colorwhite;
 			transition : padding 250ms;
-			border : none;
+			border : 1px solid transparent;
 			border-radius : 0px;
 			font-weight: bold;
-			font: 15px 'Alex Brush', cursive;
+			font: 16px 'Alex Brush', cursive;
 		}
 		&:hover{
-			background-color:@darkcolor;
+			//background-color:@darkcolor;
+			background : -webkit-linear-gradient(right, @back, @lightbackcolor,@back);
+			background : -moz-linear-gradient(right, @back, @lightbackcolor,@back);
+			background : linear-gradient(right, @back, @lightbackcolor,@back);
+			border: 1px solid @back;
+			color: @back;
 		}
 	}
 	.btn-info:hover{
-		padding : 6px 40px;
+		padding : 6px 30px;
 	}
 	.btn + .btn{
 		margin-left : 3px;

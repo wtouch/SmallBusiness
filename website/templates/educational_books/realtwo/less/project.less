@@ -52,6 +52,20 @@
 		float : none;
 		z-index : 1;
 		box-shadow: 0 0 15px;
+		.carousslider{
+			padding-left: 0px;
+			li{
+				border: 3px solid #f9f4da;
+				img{
+					width : 100%;
+					min-height : 395px;
+				}
+				&.item{
+					overflow : hidden;
+					height : 395px;
+				}
+			}
+		}
 	}
 	.projectnav, .projsnap {
 		position : absolute;
@@ -76,7 +90,7 @@
 		}
 	}
 	.projectnav{
-		padding : 5px;
+		padding : 4px;
 		left : 10px;
 		.nav-stacked{
 			>li{
@@ -86,7 +100,7 @@
 				}
 				>a, > a:focus{
 					color : @color;
-					padding: 10px 15px;
+					padding: 11px 15px;
 					text-transform : uppercase;
 					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 				} 
@@ -122,28 +136,6 @@
 			}
 		}
 	}
-	#carousel {
-		.carousel-inner {
-			border: 2px solid @back;
-			.item{
-				height: 350px;
-				overflow: hidden;
-				>img{
-					width : 100%;
-					min-height : 350px;
-				}
-			}
-		}
-		a.left.carousel-control{
-			left : 40px;
-		}
-		a.right.carousel-control {
-			right : 40px;
-		}
-		a.left.carousel-control, a.right.carousel-control {
-			background: none;
-		}
-	}
 }
 
 //css for single project & project list
@@ -159,6 +151,7 @@
 					width : 180px;
 					height : 148px;
 					overflow : hidden;
+					margin : 0 auto;
 					img{
 						min-height : 148px;
 					}
@@ -171,17 +164,6 @@
 				}
 				.readmore{
 					margin-top : 15px;
-					a{
-						font: 16px 'Alex Brush', cursive;
-						background-color : @back;
-						color : @colorwhite;
-						padding : 5px 15px;
-						transition : padding 250ms;
-						&:hover{
-							background-color : @darkcolor;
-							padding : 5px 30px;
-						}
-					}
 				}
 			}
 		}
@@ -224,8 +206,9 @@
 				.projectImags{
 					border : 1px solid @darkbackcolor;
 					height : 150px;
-					width : 175px;
+					width : 172px;
 					overflow : hidden;
+					margin : 0 auto;
 					img{
 						min-height : 150px;
 					}

@@ -1,15 +1,32 @@
-	@color : #bccb3d;
-	@lightcolor : #BBBBBB;
-	@darkcolor : #000;
-	@back : #272600;
-	@darkbackcolor : #171600;
-	@lightbackcolor :#2F3826; 
-	@colorblack : #000;
-	@colorwhite	: #fff;
-	@import "property.less";
-	@import "project.less";
-	@import "product.less";
-	@import "general.less";
+@font-face{
+	font-family:'FengardoNeue_Regular';
+	src:url('../fonts/FengardoNeue_Regular.otf');
+}
+@font-face{
+	font-family:'Amaranth-Regular';
+	src:url('../fonts/Amaranth-Regular.otf');
+}
+@color : #bccb3d;
+@lightcolor : #BBBBBB;
+@darkcolor : #000;
+@back : #272600;
+@darkbackcolor : #171600;
+@lightbackcolor :#2F3826; 
+@colorblack : #000;
+@colorwhite	: #fff;
+@import "property.less";
+@import "project.less";
+@import "product.less";
+@import "general.less";
+	*{
+		transition : 300ms;
+	}
+	.container{
+		width : 992px !important;
+	}
+	html{
+		min-width : 1022px;
+	}
 	body{
 		background-image: url('../img/back.jpg');
 		//background-color : 
@@ -18,20 +35,35 @@
 		position : relative;
 	}
 	.sociallinks{
-		border : 2px solid #fff;
 		margin-top: 232px;
-		position: absolute;
-		span{
-			height : 60px;
-			width : 60px;
-			.social.fb{
-				background-position: 1px -24px;
+		position: fixed;
+		z-index : 999;
+		ul{
+			list-style : none;
+			li{
+				transform: translateX(-119px);
+				padding: 4px 0px 4px 10px;
+				background: @color;
+				margin: 5px;
+				border-top-right-radius: 30px;
+				border-bottom-right-radius: 30px;
+				color: @colorblack;
+				text-align : right;
+				img{
+					width : 35px;
+					margin-left : 4px;
+				}
+				span{
+					height : 20px;
+					width :20px;
+					margin-right: 6px;
+				}
+				
+				&:hover{
+					  transform: translateX(-45px);
+				}
 			}
 		}
-		.social{
-			background: url("../img/sprite_icons.png") transparent;
-		}
-		
 	}
 	.logo {
 		height: 80px;
@@ -60,16 +92,17 @@
 		.navbar-nav{
 			> li{
 				position : relative;
-				margin-right: 10px;
-				padding-left: 15px;
+				margin-right: 0px;
+				padding-left: 10px;
 				&:first-child{
 					padding-left: 0;
 				}
 				> a, > a:focus {
 					color :@lightcolor;
-					font: bold 16px/1em Arial, Helvetica, sans-serif;
+					font: bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
 					padding : 25px 15px 15px 20px;
+					text-transform : uppercase;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					background-color : @color;
@@ -143,93 +176,69 @@
 			}
 		}
 	}
-	.projectnav{
-		border : 5px solid @lightbackcolor;
-		background-color: @darkbackcolor;
-		.nav-stacked{
-			background-color: @darkbackcolor;
-			margin: 5px;
-			border: 2px solid @lightbackcolor ;
-			>li{
-				>a, > a:focus{
-					font-weight: bold;
-					color : @lightcolor;
-				} 
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @color ;
-					color : @colorblack;
-				}
-			}
-		}
-		img{
-			margin-top: 25px;
-			margin-bottom: 25px;
-		}
-		.projlink{
-			color : @color;
-			text-decoration : underline;
-			&:hover{
-				color: @color;
-				text-decoration :none;
-			}
-		}
-	}
-	.carousel-inner{
-		border: 5px solid @lightcolor;
-		.carousel-caption{
-			h2{
-				border : none;
-			}
-		}
-	}
-	.item.active{
-		overflow: hidden;
-	}
 	.content{
 		background-color : @darkbackcolor;
 		border-radius : 7px;
 		margin-top : 15px;
 		padding: 10px 20px 30px;
 	}
-	h1,h2,h3{
-		font-family: "Georgia", "Times New Roman", "Times", serif;
+	a{
+		color : @color;
+		&:hover{
+			color : @color;
+			text-decoration : underline;
+		}
 	}
 	h1,h2,h3,h4{
+		font-family:'Amaranth-Regular';
 		color :@color; 
 	}
 	h1,h2{
 		font-size: 2.3em;
 		border-bottom: 1px solid @lightbackcolor;
 	}
+	h3{
+		border-bottom: 1px solid @lightbackcolor;
+		padding-bottom: 8px;
+	}
 	.subhead{
-		font-family: "Carter One";
-		font-size: 20px;
+		font: bold 14px/1.5em Arial, Helvetica, sans-serif;
 		font-weight: bold;
 		background-image: linear-gradient(@darkbackcolor -82%,@lightcolor 40%,@lightcolor 60%,@back 147%);
 		border-radius : 7px;
 		color : @colorblack;
-		padding: 8px 40px;
+		padding: 8px 35px;
 		position : relative;
+		text-transform : uppercase;
 		&::after{
 			background: url(../img/sprites_image.png) -37px -24px;
 			content: "";
 			display: inline-block;
 			height: 22px;
-			left: 15px;
+			left: 10px;
 			position: absolute;
-			top: 10px;
+			top: 9px;
 			width: 22px;
 		}
-	}
-	h3{
-		border-bottom: 1px solid @lightbackcolor;
-		padding-bottom: 8px;
 	}
 	.sections{
 		background-color:@back;
 		border : 1px solid @lightbackcolor;
 		padding: 15px;
 		border-radius: 10px;
+	}
+	.featured_services{
+		.sections{
+			border : none;
+		}
+	}
+	.contactus{
+		h4{
+			margin-top : 0px;
+		}
+	}
+	.sidemenu{
+		padding-bottom : 0px;
 	}
 	.thumbnail{
 		background : none;
@@ -246,64 +255,53 @@
 			}
 		}
 	}
-	.bxslider{
-		li{
-			width:100px;
-			img{
-				border : 7px solid @lightcolor;
-				min-height: 190px;
-			}
-			a{
-				color:@color;
-				font-weight : bold;
-				text-decoration:underline;
-				&:hover{
-					color:@color;
-					text-decoration:none;
-				}
-			}
-			p{
-				margin-top: 0px;
-				margin-bottom: 0px;
-			}
+	.btn-link{
+		color : @color;
+		padding-left : 0px;
+		&:hover{
+			color : @color;
 		}
 	}
-	.service{
-		margin-bottom: 10px;
-		h4{
-			margin-top : 0px;
-		}
-	}
-
-	.btn-info{
+	.btn-info, .btn-primary{
 		border-radius : 5px;
 		&, &:focus, &:active, &[disabled]{
 			background-color : @color;
-			border : none;
 			color :@colorblack;
 			font-weight: bold;
-			border : 2px solid @color;
+			border : 1px solid @color;
 		}
 		&:hover{
 			background-color : @darkbackcolor;
 			transition: all 0.3s ease;
-			border : 2px solid @color;
+			border : 1px solid @color;
+			color :@color;
 		}
 	}
-	.form-control{
+	.panel{
+		background-color : @back;
+	}
+	.panel-default {
+		border-color: @lightbackcolor;
+	}
+	.form-control,.form-control[disabled], .form-control[readonly]{
 		color: @lightcolor;
 		background-color: @darkbackcolor;
 		border: 1px solid @lightbackcolor;
 	}
-	.sideimg{
-		margin-top: 20px;
+	.send, .calculate{
+		margin-right : 8px;
 	}
-	.email{
-		color :@lightcolor;
-		text-decoration : underline;
-		&:hover{
-			text-decoration : none;
+	.sidebarModule{
+		.sideimg{
+			margin-top: 20px;
+		}
+		.email{
 			color :@lightcolor;
+			text-decoration : underline;
+			&:hover{
+				text-decoration : none;
+				color :@lightcolor;
+			}
 		}
 	}
 	//hr
@@ -312,15 +310,17 @@
 		border-color: @lightbackcolor;
 		margin :5px 0px;
 	}
-	
-	//Common effect
-	.panel{
-		background-color : @back;
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus
+	{
+		background-color : @darkbackcolor;
+		color : @color;
+		border : 1px solid @darkbackcolor;
 	}
-	.panel-default {
-		border-color: @lightbackcolor;
+	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
+		background-color : @lightbackcolor;
+		border : 1px solid @darkbackcolor;
+		color : @color;
 	}
-	
 	footer{
 		margin-top : 10px;
 		color:@lightcolor;
@@ -340,16 +340,6 @@
 			min-height: 0px;
 			margin-top: 10px;
 		}
-		.item.active{
-			height: 120px;
-		}
-		.projectnav{
-			height: 312px;
-			margin-bottom: 10px;
-		}
-		.carousel-inner>.item>img{
-			width :100%;
-		}
 		.homeimg{
 			float:left;
 			width:100%;
@@ -366,16 +356,6 @@
 		.navbar{
 			min-height: 70px;
 		}
-		.projectnav{
-			height: 322px;
-		}
-		.item.active{
-			height: 312px;
-		}
-		.carousel-inner>.item>img{
-			width :100%;
-			min-height : 310px;
-		}
 		.homeimg{
 			float:right;
 			margin-left: 25px;
@@ -391,16 +371,6 @@
 		}
 		.navbar{
 			min-height: 70px;
-		}
-		.projectnav{
-			height: 322px;
-		}
-		.item.active{
-			height: 312px;
-		} 
-		.carousel-inner>.item>img{
-			width :100%;
-			min-height: 312px;
 		}
 		.homeimg{
 			float:right;
