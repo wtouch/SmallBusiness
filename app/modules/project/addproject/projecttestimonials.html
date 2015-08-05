@@ -4,7 +4,7 @@
 			<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra','project_gallery')">Add Testimonials</button>
 		</div>
 	</div>
-<form ng-if="infra" class="form-horizontal" name="projecttestimonialForm" ng-submit="projecttestimonialForm.$valid" novalidate="novalidate">
+<form ng-if="infra" class="form-horizontal" name="projecttestimonialForm" ng-submit="projecttestimonialForm.$valid" novalidate="novalidate">{{projecttestimonials}}
 	<div class="form-group">
 		<div class="col-sm-9 col-sm-offset-3">
 			<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click=	"addToObject(projecttestimonials, project.projecttestimonials, 'projecttestimonials')" ng-disabled="projecttestimonialForm.$invalid">Add Testimonial</button>
@@ -17,7 +17,7 @@
 		</div>
 	</div>
 		
-	<div class="form-group">{{projecttestimonials}}
+	<div class="form-group">
 		<label  for="name" class="col-sm-2 control-label">Name *</label>
 		<div class="col-sm-9">
 			<input type="text"  id="name" class="form-control" name="name" ng-model="projecttestimonials.name"  cols="20" rows="4" required />

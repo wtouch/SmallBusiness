@@ -1,0 +1,268 @@
+//project
+//css for featured project slider
+.bxslider{ 
+	padding:5px;
+	li{
+		.projimg{
+			height : 175px;
+			overflow : hidden;
+			padding : 6px;
+			border : 2px solid transparent;
+			img{
+				min-height: 175px;
+			}
+			&:hover{
+				border : 2px solid @back;
+			}
+		}
+		width:100px;
+		a{
+			h4{
+				background : linear-gradient(@back, @color);
+				color : @lightcolor;
+				padding: 4px 15px 12px;
+				border : none;
+				border-radius : 4px;
+				&:hover{
+					background : linear-gradient(@darkcolor, @darkbackcolor);
+					color : @colorwhite;
+				}
+			}
+		}
+		.btn-info{
+			margin-bottom : 10px;
+		}
+		p{
+			margin-bottom : 0px;
+			margin-top : 0px;
+		}
+	}
+}
+
+
+
+.homeproject {
+	margin-top:10px;
+	margin-bottom :20px;
+	position: relative;
+	.projectCarousal{
+		position : relative;
+		border : 5px solid @colorwhite;
+		z-index : 99;
+		width : 500px;
+		margin : 0 auto;
+		float : none;
+		z-index : 1;
+		box-shadow: 0 0 15px;
+		border-radius : 50%;
+		overflow: hidden;
+		height:500px;
+		.bx-viewport{
+			height:500px;
+			.carousslider li{
+				left:0;
+			}
+			img{
+				height:500px;
+			}
+		}
+		
+	}
+	.projectnav, .projsnap {
+		position : absolute;
+		/*background : linear-gradient(@back, @color);*/
+		background-color:#094688;
+		height: 320px;
+		width : 300px;
+		top : 100px;
+		box-sizing : border-box;
+		border : 5px solid @colorwhite;
+	}
+	.projectnav{
+		padding : 5px;
+		left : 10px;
+		left : 0;
+		.nav-stacked{
+			>li{
+				+li {
+					margin-top: 10px;
+				}
+				>a, > a:focus{
+					color : @lightcolor;
+					padding: 10px 15px;
+					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
+					text-transform : uppercase;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					text-decoration : none;
+					/*background : linear-gradient(@darkcolor, @darkbackcolor);*/
+					
+					color : @colorwhite;
+					transform: translateX(-50px);
+					width: 315px;
+					border-top-left-radius: 20px;
+					border-bottom-left-radius: 20px;
+					text-align: right;
+					padding-right: 50px;
+				}
+			}
+		}
+	}
+	.projsnap{
+		right : 0;
+		padding-left: 90px !important;
+		padding-top: 5px !important;
+		padding : 5px 15px;
+		right : 10px;
+		text-align : center;
+		img{
+			height : 110px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border : 2px solid @lightcolor;
+			border-radius : 5px;
+			padding :4px;
+		}
+		p{
+			color : @lightcolor;
+		}
+		.viewproperty{
+			a{
+				color : @lightcolor;
+				text-decoration : underline;
+				&:hover{
+					color : @colorwhite;
+					text-decoration : none;
+				}
+			}
+		}
+	}
+	#carousel {
+		.carousel-inner {
+			.item{
+				height: 500px;
+				overflow: hidden;
+				>img{
+					width : auto;
+					min-height : 500px;
+					border-radius : 50%;
+				}
+			}
+		}
+		a.left.carousel-control{
+			left : 40px;
+		}
+		a.right.carousel-control {
+			right : 40px;
+		}
+		a.left.carousel-control, a.right.carousel-control {
+			background: none;
+		}
+	}
+}
+
+// single project nav css
+.project{
+	.navbar{
+		border: 1px solid @lightbackcolor;
+		border-radius: 0;
+		margin-top:10px;
+		margin-bottom:10px;
+		height : 20px;
+		width:auto;
+	}
+	ul.nav.navbar-nav {
+		background : linear-gradient(@back, @color);
+		>li{
+			border-right : 1px solid @lightbackcolor;
+			>a, > a:focus{
+				padding : 9px 12px;
+				color : @lightcolor;
+				position : relative;
+			} 
+			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+				background : linear-gradient(@darkcolor, @darkbackcolor);
+				color : @colorwhite;
+			}
+		}
+	}
+	.projectgallery{
+		.thumbnail{
+			border : 1px solid @darkbackcolor;
+			background : none;
+		}
+	}
+}
+
+//css for single project & project list
+	.projlist{
+		padding:10px;
+		border : 1px solid @darkbackcolor;
+		.project{
+			.thumbnail{
+				background : none;
+				height:385px;
+				padding-top : 15px;
+				border-color : @darkbackcolor;
+				.projectimg{
+					height : 148px;
+					overflow : hidden;
+					img{
+						min-height : 148px;
+						max-width : 95%;
+						border : 2px solid transparent;
+						padding : 4px;
+						&:hover{
+							border : 2px solid @back;
+						}
+					}
+				}
+				
+				.caption{
+					color : @lightcolor;
+				}
+				.caption p{
+					color:@colorblack;
+				}
+				.readmore{
+					margin-top : 15px;
+					a{
+						background : linear-gradient(@back, @color);
+						color : @lightcolor;
+						padding :6px 12px;
+						border-radius : 4px;
+						&:hover, &:hover{
+							background : linear-gradient(@darkcolor, @darkbackcolor);
+							color : @colorwhite;
+							padding :6px 40px;
+						}
+					}
+				}
+			}
+			.projImg{
+				margin-right: 20px;
+				max-height : 175px;
+			}
+		}
+	}
+	@media (min-width: 320px){
+		.projImg{
+			float :none;
+			max-height : 175px;
+			margin-right:10px;
+		}
+	}
+	@media (min-width: 992px){
+		.projImg{
+			float : left;
+			max-height : 175px;
+			margin-right : 10px;
+		}
+	}
+	@media (min-width: 1200px){
+		.projImg{
+			float :left;
+			max-height : 175px;
+			margin-right:10px;
+		}
+	}

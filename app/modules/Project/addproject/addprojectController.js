@@ -197,7 +197,8 @@ define(['app'], function (app) {
 				console.log($routeParams.id);	
 				dataService.get("getsingle/project/"+$routeParams.id)
 				.then(function(response) {
-						$scope.project = response.data;	
+						$scope.project = response.data;
+						if($scope.project.projecttestimonials == "") $scope.project.projecttestimonials = [];
 						console.log($scope.project);					
 					});	
 					
