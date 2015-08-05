@@ -95,7 +95,6 @@ define(['app'], function (app) {
 			}else{
 				var dtlObj = JSON.stringify(data);
 				console.log(data);
-				console.log(object);
 				object.push(JSON.parse(dtlObj));
 				$scope.infra = false;
 				$scope[resetObj] = {};
