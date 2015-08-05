@@ -1,0 +1,29 @@
+	{% autoescape false %}
+	<h2>Gallery</h2>
+	<div class="row gallery">
+		{% if data.gallery %}
+			{% set category = "" %}
+			{% for key, value in data.gallery %}
+			
+				{% if category != value.category %}
+					{% set category = value.category %}
+					{{ category }}
+				{% endif %}
+				
+			{% endfor %}
+			
+			{% for key, value in data.gallery %}
+
+			<div class="col-xs-4">
+				<div class="thumbnail">
+					<img class="img-responsive" src="{{value.image.file_relative_path}}" alt="{{key}}" />
+					<div class="caption">
+						<h4 class="text-center">{{value.heading}}</h4>
+						<div class="description">{{ value.description }}</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+	{% endautoescape %}

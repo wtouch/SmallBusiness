@@ -1,0 +1,11 @@
+{% autoescape false %}
+	<h1>Welcome to {{ data.business_name }}</h1>
+	{% if data.business_info.tagline %}
+		<div class="tagline">{{ data.business_info.tagline}}</div>
+	{% endif %}
+	{% if data.business_info.alternate_tagline %}
+		<div class="tagline1">{{ data.business_info.alternate_tagline}}</div>
+	{% endif %}
+	<div class="description">{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}</div>
+	<a href="about" class="btn btn-link">Read More..</a>
+{% endautoescape %}

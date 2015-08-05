@@ -1,0 +1,65 @@
+<script>
+	function clearForm1()
+	
+	{
+	
+	  document.unit_convert.reset();
+	
+	}
+	function convert() {	
+	
+		var base=document.unit_convert;
+		if(isNaN(base.initial_value.value) || base.initial_value.value=="") {
+			alert("Please enter a number");
+		}
+		else {
+			var num=base.initial_value.value/base.units.value;
+			var num1 = Math.round(num * 100) / 100;
+			base.new_value.value=num1;
+		}
+	}
+	
+	function cleantext() {
+		document.unit_convert.initial_value.value="";
+		document.unit_convert.initial_value.focus();
+	}
+</script>
+<h2>Area Converter</h2>
+<div class="panel panel-default">
+	<div class="panel-body">
+		
+		<form name="unit_convert" method="post" action="" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-xs-2 control-label" for="aa">Enter Area :</label>
+				<div class="col-xs-10">
+					<input type="text" onclick="cleantext();" value="0" name="initial_value" class="input w30 form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-2 control-label" for="aa">Select Unit :</label>
+				<div class="col-xs-10">
+					<select name="units" class="input w33 form-control"> 
+						<option value="1.0" selected="selected">Square Feets</option> 
+						<option value="0.1111111111111111000">Sq. Yards</option> 
+						<option value="0.0929030400000000000">Sq. Meters</option> 
+						<option value="0.00041666666666667">Ground</option> 
+						<option value="0.0000229568411386593">Acres</option> 
+						<option value="0.0000573921030000000">Bigha</option> 
+						<option value="0.0000092903040000000">Hectares</option> 
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-offset-2 col-xs-10">
+					<input type="text" class="input w30 form-control" disabled="disabled" value="0" name="new_value">Sq. feets 
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-offset-2 col-xs-10">
+					<input type="button" value="Calculate" name="calculate" class="btn btn-primary calculate" onclick="convert();">
+					<input type="button" name="button" id="button2" value="Clear" class="btn btn-primary" onclick="javascript:clearForm1();">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
