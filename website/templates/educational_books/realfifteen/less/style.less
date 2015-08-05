@@ -13,8 +13,9 @@
 	@darkcolor : #E2271F; // dark red
 	 
 //background color shade
-	@back : #49741E; // green color
-	@darkbackcolor : #3a0c0a;; //#8C241F use dark red background
+	/*@back : #FBCC3E;  */
+	@back :#F3DC96;// lightyellow color
+	@darkbackcolor : #094688; //#8C241F use dark blue nav n menu
 	@lightbackcolor :#C4DE9B;  //#F0DA81 light bg (light green)
 	
 //common color shade
@@ -28,7 +29,7 @@
 	body{
 		/*background-image : url('../img/bgrnd.jpg');*/
 		/*background-color : #FFC11E;*/
-		background-color :#FBCC3E;
+		background-color :@back;
 		background-repeat : repeat;
 		position : relative;
 	}
@@ -42,9 +43,10 @@
 			li{
 				transform: translateX(-123px);
 				padding: 4px 4px 4px 10px;
-				background: -webkit-linear-gradient(@darkcolor, @darkbackcolor);
-				background: -moz-linear-gradient(@darkcolor, @darkbackcolor);
-				background: linear-gradient(@darkcolor, @darkbackcolor);
+				/*background: -webkit-linear-gradient(@darkcolor, @darkbackcolor);*/
+				/*background: -moz-linear-gradient(@darkcolor, @darkbackcolor);*/
+				/*background: linear-gradient(@darkcolor, @darkbackcolor);*/
+				background-color:@darkbackcolor;
 				margin: 5px;
 				border-top-right-radius: 30px;
 				border-bottom-right-radius: 30px;
@@ -66,7 +68,6 @@
 					width :20px;
 					margin-right: 6px;
 				}
-				
 				&:hover{
 					  transform: translateX(-45px);
 				}
@@ -118,9 +119,14 @@
 	.btn + .btn{
 		margin-left:10px;
 	}
+	
+	
+	.nav>li>a:hover{
+	  background: linear-gradient(#CCA635, #ff6f00);
+	}
 	.navbar-default {
 		/*background : linear-gradient(@back, @color);*/
-		background-color:#094688;
+		background-color:@darkbackcolor;
 		border: 1px solid @lightbackcolor;
 		border-radius: 0;
 		.navbar-nav{
@@ -132,10 +138,11 @@
 					font : bold 15px/1em Arial, Helvetica, sans-serif;
 					position : relative;
 					text-transform : uppercase;
-					border : 1px solid transparent;
+					border : 3px solid transparent;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					background : linear-gradient(@darkcolor, @darkbackcolor);
+					background : linear-gradient(@back, #FF6F00);
+					border: 3px solid @darkbackcolor;
 					color : @colorwhite;
 					padding : 22px 15px;
 					margin-top : -12px;
@@ -145,11 +152,13 @@
 					position: absolute;
 					width: 245px;
 					z-index: 999;
-					background : linear-gradient(@back, @color);
+					/*background : linear-gradient(@back, @color);*/
+					background-color:@darkbackcolor;
 					padding: 2px;
 					list-style: none;
 					text-align: left;
 					>li{
+						
 						padding : 10px;
 						text-transform : uppercase;
 						position : relative;
@@ -160,11 +169,15 @@
 							}
 						}
 						&:hover{
-							background : linear-gradient(@darkcolor, @darkbackcolor);
+							/*background : linear-gradient(@darkcolor, @darkbackcolor);*/
+							background : linear-gradient(@back, #FF6F00);
 							-webkit-transition: all 0.4s;
 						}
 						ul{
-							background : linear-gradient(@back, @color);
+							background : linear-gradient(@back, #FF6F00);
+							border:1px solid @darkbackcolor;
+							
+							
 							list-style: none;
 							display : none;
 							position : absolute;
@@ -177,10 +190,10 @@
 									color : @lightcolor;
 								}
 								&:hover{
+								background : linear-gradient(@back, #FF6F00);
 									a{
 										color : @colorwhite;
 									}
-									background : linear-gradient(@darkcolor, @darkbackcolor);
 								}
 							}
 						
@@ -246,17 +259,23 @@
 	}
 	.btn-info,.btn-primary{
 		border : none;
-		background : linear-gradient(@back, @color);
+		/*background : linear-gradient(@back, @color);*/
+		/*background : linear-gradient(#5C6BC0, );*/
+		
+		background: linear-gradient(#01579B,#0277BD);
+			
+			
 		color : @lightcolor;
 		font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 		&:hover, &:hover{
-			background : linear-gradient(@darkcolor, @darkbackcolor);
+			background-color:@darkbackcolor;
 			color : @colorwhite;
 		}
 	}
 	.subhead{
 		font-size: 18px;
-		background : linear-gradient(@darkcolor, @darkbackcolor);
+		/*background : linear-gradient(#536DFE, @darkbackcolor);*/
+		background-color:@darkbackcolor;
 		border-radius : 7px;
 		color : @colorwhite;
 		padding: 4px 15px 12px;
