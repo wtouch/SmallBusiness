@@ -1,5 +1,4 @@
 //featured properties
-
 	h4{
 		font : 2em/1.2em Amaranth-Regular;
 		font-size : 18px;
@@ -13,20 +12,13 @@
 		padding-left:10px;
 		list-style :none;
 		li{
-			.thumbnail {
-				margin-bottom :10px;
+			.sliderImg{
+				height : 170px;
+				width : 180px;
+				overflow : hidden;
+				margin : auto;
 				img{
-					max-height: 215px;
-					width : 100%;
-				}
-			}
-			img{
-				max-height: 215px;
-				width : 100%;
-				padding : 4px;
-				border : 3px solid @lightbackcolor;
-				&:hover{ 
-					border : 3px solid @color;
+					min-height : 170px;
 				}
 			}
 			.table{
@@ -44,19 +36,6 @@
 			.readmore{
 				margin-bottom :10px;
 				margin-top:10px;
-				a{
-					margin-right:10px;
-					border:1px solid @colorwhite;
-					font : 2em/1.2em Amaranth-Regular;
-					background-color : @darkbackcolor;
-					font-size:16px;
-					color : @colorwhite;
-					padding : 5px 15px;
-					&:hover{
-						background-color : @lightbackcolor;
-						
-					}
-				}
 			}
 		}
 	}
@@ -68,55 +47,32 @@
 .propertylist{
 	padding: 20px 20px 0px;
 	border : 1px solid @lightbackcolor;
-	
 	.btn-primary{
-		margin-right :7px;
 		margin-bottom: 10px;
-		background-color : @back;
-		color : @colorwhite;
-		border-radius : 0px;
-		font-weight: bold;
-		&:hover{
-			background-color : @darkbackcolor;
-		}
 	}
 	.panel-default{
 		border-color : @lightbackcolor;
 		background-color:@darkbackcolor;
-		img{
-			max-height: 215px;
-			width : 100%;
-			padding : 4px;
-			border : 3px solid transparent;
-			&:hover{ 
-				border : 3px solid @color;
+		.sliderImg{
+			height : 170px;
+			width : 180px;
+			overflow : hidden;
+			margin : auto;
+			img{
+				min-height : 170px;
 			}
 		}
 		.readmore{
 			margin-bottom :10px;
-			a{
-				font: 16px 'Alex Brush', cursive;
-				background-color : @darkbackcolor;
-				color : @colorwhite;
-				padding : 5px 15px;
-				transition : padding 250ms;
-				&:hover{
-					background-color : @lightbackcolor;
-					padding : 5px 30px;
-				}
+		}
+		.table{
+			td{
+				border : none;
+				padding: 1px 1px;
 			}
 		}
 	}
-	.table{
-		td{
-			border : none;
-			padding: 1px 1px;
-		}
-	}
-	.viewdtls{
-		margin-right : 10px;
-	}
-	nav {
+	nav{
 		.pagination{
 			li,.disabled{
 				a{
@@ -161,8 +117,9 @@
 			height : 175px;
 			width : 195px;
 			overflow : hidden;
+			margin : 0 auto;
 			img{
-				max-height: 175px;
+				min-height: 175px;
 			}
 		}
 		.subimg{
@@ -172,12 +129,6 @@
 				display : inline-block;
 				cursor : pointer;
 				margin-right : 10px;
-			}
-		}
-		.mainimg {
-			img {
-				height: 130px;
-				border: 1px solid @colorwhite;
 			}
 		}
 	}
@@ -258,13 +209,6 @@
 	}
 	.btn-primary{
 		margin-bottom : 10px;
-		background-color : @back;
-		color : @colorwhite;
-		border-radius : 0px;
-		font-weight: bold;
-		&:hover{
-			background-color : @darkbackcolor;
-		}
 	}
 }
 @media (min-width: 320px){
@@ -283,13 +227,25 @@
 			}
 		}
 	}
+	.featuredProperty .bxslider1 li, .propertylist .panel-default{
+		.table-responsive{
+			margin-top : 10px;
+			padding : 10px;
+		}
+		.readmore{
+			text-align : center;
+			.btn-info{
+				padding : 5px 5px;
+			}
+		}
 	}
+}
 	
 @media (min-width: 992px){
 	.propDetails{
 		ul{
 			li{
-				width: 224px;
+				width: 207px;
 			}
 		}
 	}
@@ -301,12 +257,24 @@
 			}
 		}
 	}
+	.featuredProperty .bxslider1 li, .propertylist .panel-default{
+		.table-responsive{
+			margin-top : 0px;
+			padding : 0px;
+		}
+		.readmore{
+			text-align : left;
+			.btn-info{
+				padding : 6px 12px;
+			}
+		}
+	}
 }
 @media (min-width: 1200px){
 	.propDetails{
 		ul{
 			li{
-				width: 274px;
+				width: 239px;
 			}
 		}
 	}

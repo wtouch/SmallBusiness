@@ -23,6 +23,9 @@
 	@import "product.less";
 	@import "service.less";
 	@import "general.less";
+	.container{
+		max-width : 992px !important;
+	}
 	body{
 		color : @colorwhite;
 		background-image:-webkit-linear-gradient(@darkcolor,@lightbackcolor 50%);
@@ -51,7 +54,7 @@
 					}
 				}
 				img{
-					width : 50px;
+					width : 30px;
 					margin-left : 10px;
 					border : 2px solid @colorwhite;
 				}
@@ -93,8 +96,9 @@
 	.btn-link{
 		padding-left : 0px;
 	}
-	.project .thumbnail{
+	.thumbnail{
 		background-color:@back;
+		border : 1px solid 
 	}
 	
 	a:hover, .btn.btn-link:hover{
@@ -121,7 +125,7 @@
 		margin-right : 10px;
 	}
 	.btn + .btn {
-		margin-left : 10px;
+		margin-left : 5px;
 	}
 	.btn-info{
 		border-radius : 2px;
@@ -164,17 +168,6 @@
 					border: 4px solid transparent;
 					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
-				}
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					//-webkit-transition: all 0.4s;
-					border: 4px solid @color;
-					border-top-left-radius: 19px;
-					border-bottom-right-radius: 19px;
-					background-color : @darkcolor;
-					color : @colorwhite;
-					top: -8px;
-					padding-top: 20px;
-					
 				}
 				> ul {
 					border: 3px solid @color;
@@ -480,6 +473,20 @@
 		.navbar{
 			min-height: 0px;
 		}
+		.navbar-default{
+			.navbar-nav {
+				margin: 0px;
+				>li{
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+						border : none;
+						border-radius : 0px;
+						top : 0px;
+						background-color : @darkcolor;
+						color : @colorwhite;
+					}
+				}
+			}
+		}
 		.item.active, .projnav{
 			height: 120px;
 			overflow: hidden;
@@ -496,6 +503,22 @@
 	@media (min-width: 992px){
 		.logo{
 			float:none;
+		}
+		.navbar-default{
+			.navbar-nav {
+				margin: 0px;
+				>li{
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+						border: 4px solid @color;
+						border-top-left-radius: 19px;
+						border-bottom-right-radius: 19px;
+						background-color : @darkcolor;
+						color : @colorwhite;
+						top: -8px;
+						padding-top: 20px;
+					}
+				}
+			}
 		}
 		.cnctinfo{
 			display : block;
