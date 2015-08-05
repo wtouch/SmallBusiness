@@ -11,6 +11,7 @@ define(['app'], function (app) {
 			custom_details : [],
 			news_coverage : [],
 			gallery : [],
+			associate : [],
 			job_careers : [],
 			
 		};
@@ -22,6 +23,7 @@ define(['app'], function (app) {
 			if($scope.businessData.custom_details == "") $scope.businessData.custom_details = [];
 			if($scope.businessData.news_coverage == "") $scope.businessData.news_coverage = [];
 			if($scope.businessData.gallery == "") $scope.businessData.gallery = [];
+			if($scope.businessData.associate == "") $scope.businessData.associate = [];
 			if($scope.businessData.job_careers == "") $scope.businessData.job_careers = [];
 		});	
 		
@@ -40,6 +42,7 @@ define(['app'], function (app) {
 		$scope.news_coverage = {};
 		$scope.job_careers = {};
 		$scope.gallery = {};
+		$scope.associate = {};
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		$scope.isCollapsed = true;
@@ -105,6 +108,7 @@ define(['app'], function (app) {
 			$scope.testimonials.image = "";
 			$scope.news_coverage.image = "";
 			$scope.gallery.image = "";
+			$scope.associate.image = "";
 		};
 		
 		$scope.removeObject = function(index, object){
@@ -164,6 +168,15 @@ define(['app'], function (app) {
 			}); 
 		}; 
 		
+		$scope.uploadassociate = function(files,path,userInfo, picArr){ 
+			upload.upload(files,path,userInfo,function(data){
+					if(data.status === 'success'){
+						$scope.associate.image = data.data;
+					}else{
+						$notification.error("Upload Image", data.message);
+					}
+			}); 
+		}; 
 		$scope.generateThumb = function(files){ 
 			upload.generateThumbs(files);
 		};
