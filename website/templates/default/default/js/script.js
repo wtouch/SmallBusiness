@@ -36,6 +36,22 @@ $(document).ready(function(){
 		controls:true, 
 		autoHover:true
 	});
+	$('#bxslider3').bxSlider({
+		mode:'horizontal',
+		slideMargin: 5,
+		minSlides :1,
+		maxSlides: 4,
+		moveSlides: 2,
+		slideWidth: 200,
+		auto: true, 
+		autoDirection:'next',
+		pause:4000,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:true, 
+		autoHover:true
+	});
 });
 app.config(function($locationProvider) {
   /* $routeProvider

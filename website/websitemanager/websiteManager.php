@@ -157,6 +157,7 @@ class websiteManager{
 				if(($result['data']['template_name']) == ""){
 					throw new Exception('Please add template details!');
 				}
+				
 			}else{
 				throw new Exception('Website is Under Construction!');
 			}

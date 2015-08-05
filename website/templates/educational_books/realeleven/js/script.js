@@ -26,7 +26,7 @@ $(document).ready(function(){
 		minSlides :3,
 		maxSlides: 3,
 		moveSlides: 1,
-		slideWidth: 225,
+		slideWidth: 210,
 		auto: true, 
 		autoDirection:'next',
 		pause:3000,
@@ -36,6 +36,22 @@ $(document).ready(function(){
 		controls:true, 
 		autoHover:true,
 		speed : 1000
+	});
+	$('#bxslider3').bxSlider({
+		mode:'horizontal',
+		slideMargin: 5,
+		minSlides :3,
+		maxSlides: 3,
+		moveSlides: 3,
+		//slideWidth: 600,
+		auto: true, 
+		autoDirection:'next',
+		pause:4000,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:true, 
+		autoHover:true
 	});
 	$('#carousslider').bxSlider({
 		mode:'fade',

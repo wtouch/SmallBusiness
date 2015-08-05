@@ -2,12 +2,12 @@
 	font-family : 'Cinzel-Regular';
 	src:url('../fonts/Cinzel-Regular.otf');
 }
-@color : #CB9305;
-@lightcolor : #b66b20;;
-@darkcolor : #281012;
-@back : #BA8C5F;
-@darkbackcolor : #5E4A44;
-@lightbackcolor : #E0CDB9; 
+@color : #E2188E; //border color
+@lightcolor : #580932;//heading 
+@darkcolor : #D7077F; //sec color
+@back : #BD4A8B; //contentback
+@darkbackcolor : #BD4A8B;//
+@lightbackcolor : #D0CFCA; 
 @colorblack : #000000;
 @colorwhite	: #ffffff;
 @import "property.less";
@@ -24,7 +24,7 @@
 		min-width : 1022px;
 	}
 	body{
-		color : @darkcolor;
+		color : @colorwhite;
 		font-family : 'Cinzel-Regular';
 	}
 	.sociallinks{
@@ -44,9 +44,9 @@
 				border-bottom-right-radius: 30px;
 				text-align : right;
 				a{
-					color : @color;
+					color : @colorwhite;
 					&:hover{
-						color : @color;
+						color : @lightbackcolor;
 						text-decoration : underline;
 					}
 				}
@@ -68,7 +68,7 @@
 		}
 	}
 	header{	
-		background-color : @darkbackcolor;
+		background-color : @lightbackcolor;
 		.head{
 			background-image: url('bg_image.png');
 			background-repeat: no-repeat;
@@ -88,15 +88,15 @@
 			.navbar-nav{
 				>li{
 					>a{
-						color : @color;
+						color : @colorwhite;
 						font-size: 18px;
 						background : transparent;
-						border-right: 1px solid @back; 
+						border-right: 1px solid @color; 
 						padding-right: 12px;
 						padding-left: 12px;
 					}
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover{
-						color: @darkcolor;
+						color: @colorblack;
 						background : @back;
 						border-radius: 0px;
 					}
@@ -112,7 +112,7 @@
 						list-style : none;
 						text-align : left;
 						left : -70%;
-						border : 1px solid @back;
+						border : 1px solid @color;
 						box-shadow : 0 0 15px 0px @colorblack;
 						border-radius : 7px;
 						li{
@@ -120,7 +120,7 @@
 							padding : 10px 5px;
 							a{
 								text-decoration:none;
-								color : @color;
+								color : @colorwhite;
 							}
 							&:hover{
 								background : @back;
@@ -138,7 +138,7 @@
 								>li{
 									>a{
 										text-decoration:none;
-										color : @color;
+										color : @colorwhite;
 									}
 									&:hover{
 										background : @back;
@@ -167,9 +167,9 @@
 		}
 	}
 	main{ 
-		background-color:@darkbackcolor;
+		background-color:@lightbackcolor;
 		.back{
-			background-color: @lightbackcolor;
+			background-color: @back;
 			margin-top: 24px;
 			padding: 20px;
 				.contentModule{
@@ -185,7 +185,7 @@
 				}
 				.contentModule, .sidebarModule{
 					margin: 30px 0px 0px; 
-					border:1px solid @darkcolor;
+					border:1px solid @color;
 					border-radius:10px;
 					position:relative;
 					.subhead{
@@ -193,7 +193,7 @@
 						left:10px;
 						top:-37px;
 						background-color : @darkcolor;
-						color : @color;
+						color : @colorwhite;
 						padding:4px;
 						font:16px 'Cinzel-Regular', cursive;
 						padding: 7px 12px;
@@ -276,10 +276,10 @@
 	
 	//global css
 	h3, h4{
-		color : @darkcolor;
+		color : @lightcolor;
 	}
 	h1, h2{
-		color : @darkcolor;
+		color : @lightcolor;
 	}
 	h1, .tagline, .tagline1{
 		text-align : center;
@@ -288,61 +288,61 @@
 		font-weight : bold;
 	}
 	a{
-		color : @darkcolor;
+		color : @lightcolor;
 		&:hover{
-			color : @darkcolor;
+			color : @colorwhite;
 		}
 	}
 	.btn-link{
-		color : @darkcolor;
+		color : @lightcolor;
 		padding-left : 0px;
 		font: 17px 'Cinzel-Regular', cursive;
 		&:hover{
-			color : @darkcolor;
+			color : @colorwhite;
 		}
 	}
 	.btn-info, .btn-primary{
 		&, &:focus, &:active, &[disabled]{
-			background-color : @darkcolor;
+			background-color : @darkbackcolor;
 			color : @lightbackcolor;
 			border : 2px solid transparent;
 			border-radius : 0px;
 			font: 16px 'Cinzel-Regular', cursive;
 		}
 		&:hover{
-			color : @darkcolor;
+			color : @back;
 			background-color : @back;
-			border : 2px solid @darkcolor;
+			border : 2px solid @color;
 		}
 	}
 	.btn + .btn{
 		margin-left : 10px;
 	}
 	.thumbnail{
-		background-color : @lightbackcolor;
-		border : 1px solid @darkcolor;
+		background-color : @back;
+		border : 1px solid @lightbackcolor;
 	}
 	.panel{
-		background-color : @lightbackcolor;
+		background-color : @back;
 	}
 	.panel-default{
-		border-color : @darkcolor;
+		border-color : @lightbackcolor;
 	}
 	.form-control,.form-control[disabled], .form-control[readonly]{
-		background-color : @darkbackcolor;
-		border-color : @darkcolor;
-		color : @lightbackcolor;
+		background-color : @back;
+		border-color : @lightbackcolor;
+		color : @colorwhite;
 	}
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
 	{
-		background-color : @darkcolor;
-		color : @color;
-		border : 1px solid @darkcolor;
+		background-color : @darkbackcolor;
+		color : @colorwhite;
+		border : 1px solid @color;
 	}
 	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
-		background-color : @lightbackcolor;
-		border : 1px solid @darkcolor;
-		color : @darkcolor;
+		background-color : @back;
+		border : 1px solid @color;
+		color : @colorwhite;
 	}
 	footer{
 		background : -webkit-linear-gradient(top, @color -565%, @darkcolor);
