@@ -38,6 +38,9 @@
 						<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
 							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projgallery">Gallery</a>
 						</li>
+						<li {{ projectPage == 'projecttestimonials' ? 'class="active"' }}>
+							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projecttestimonials">Testimonials</a>
+						</li>
 						<li {{ projectPage == 'projcontact' ? 'class="active"' }}>
 							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projcontact">Contact</a>
 						</li>
@@ -124,6 +127,28 @@
 							<h4 class="text-center">{{value.title}}</h4>
 							<div class="projectImags">
 								<img class="center-block" src="{{value.image}}" alt="{{value.title}}">
+							</div>
+							<div class="caption text-center">
+								{{value.description}}
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	{% if projectPage == 'projecttestimonials' and project.projecttestimonials >=1 %}
+		<div class="col-xs-12">
+			<h3>Testimonials</h3>
+			<div class="projectgallery">
+				<div class="row">
+					{% for key, value in project.projecttestimonials %}
+					<div class="col-xs-6 col-lg-4">
+						<div class="thumbnail">
+							<h4 class="text-center">{{value.title}}</h4>
+							<div class="projectImags">
+								<img class="center-block img-responsive" src="{{value.image}}" alt="{{value.title}}">
 							</div>
 							<div class="caption text-center">
 								{{value.description}}
