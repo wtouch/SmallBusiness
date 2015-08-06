@@ -10,8 +10,10 @@
 				<li>
 					<div class="row">
 						<a href="properties/{{x.title}}/{{x.id}}"><h4>{{x.title}}</h4></a>
-						<div class="col-xs-4 sliderImg">
-							<img src="{{x.property_images.0.file_relative_path}}"/>
+						<div class="col-xs-4">
+							<div class="sliderImg">
+								<img src="{{x.property_images.0.file_relative_path}}"/>
+							</div>
 						</div>
 						<div class="col-xs-8 sliderDesc">
 							<div class="description">{{x.overview.description|length > 100 ?x.overview.description|slice(start, 100) : x.overview.description}}</div>

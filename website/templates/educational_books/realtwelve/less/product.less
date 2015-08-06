@@ -1,130 +1,58 @@
-.products,	.singleproduct{
-	.thumbnail{
-		background-color: @back;
-		img{
-			max-height:180px;
-		}
+.featured_services{
+	.sections{
+		border : none;
+		background : none;
+		box-shadow : 0 0 0;
 	}
-} 
-.services{
-	.servdesc{
-		height : 200px;
-	}
-	.servimage{
-		border : 4px solid transparent;
-		padding : 6px;
-		
-	}
-	.servdesc{
-		.description{
-			height : 75px;
-			overflow : hidden;
-		}
-		.readmore{
-			text-align : center;
-			margin-top : 20px;
-			a{
-				background-color : @back;
-				color : @colorwhite;
-				padding : 6px 12px;
-				border : 1px solid transparent;
-				border-radius : 0px;
-				
-				&:hover{
-					color : @colorwhite;
-					background-color : @darkbackcolor;
-					border : 1px solid @colorwhite;
-				}
-			}
-		}
-	}
-}
-
-
-.products .caption{
-	color:@colorwhite;
-}
-.products{
-	.thumbnail{
-		img{
+	.services{
+		.servimage{
 			border : 4px solid transparent;
 			padding : 6px;
 			&:hover{
-				border : 4px solid @darkbackcolor;
+				border : 4px solid @darkcolor;
 			}
 		}
-		.description{
-			height : 75px;
-			overflow : hidden;
+		.servdesc{
+			height : 220px;
+			.description{
+				height : 75px;
+				overflow : hidden;
+			}
+			.readmore{
+				text-align : center;
+				margin-top : 10px;
+			}
 		}
-		.readmore{
-			margin-top : 10px;
-			text-align : center;
-		}
-		
-	}
-}
-.contentModule .sections{
-	
-	.readmore .btn-info{
-		background-color:@darkbackcolor;
 	}
 }
 
-@media (min-width: 320px) {
-	.products{
-		.thumbnail{
-			height: 430px;
+.products{
+	.thumbnail{
+		height:385px;
+		.prodimg{
+			height : 148px;
+			width : 195px;
+			overflow : hidden;
+			margin : 0 auto;
 			img{
 				min-height : 148px;
-			}
-			.caption{
-				height: 138px;
+				max-width : 95%;
+				border : 2px solid transparent;
+				padding : 4px;
+				&:hover{
+					border : 2px solid @darkbackcolor;
+				}
 			}
 		}
-	}
-	.singleproduct{
-		.thumbnail{
+		.caption{
 			height: 190px;
-		}
-	}
-}
-
-@media (min-width: 992px) { 
-	.products{
-		.thumbnail{
-			height: 430px;
-			img{
-				max-height : 260px;
-			}
-			.caption{
-				height: 138px;
+			.description{
+				height : 75px;
+				overflow : hidden;
 			}
 		}
-	}
-	.singleproduct{
-		.thumbnail{
-			height: 155px;
-		}
-	}
-}
- 
-@media (min-width: 1200px){ 
-	.products{
-		.thumbnail{
-			height: 430px;
-			img{
-				max-height : 150px;
-				width:100%;
-			}
-			.caption{
-				height: 190px;
-			}
-		}
-	}
-	.singleproduct{
-		.thumbnail{
-			height: 192px;
+		.readmore{
+			text-align : center;
 		}
 	}
 }

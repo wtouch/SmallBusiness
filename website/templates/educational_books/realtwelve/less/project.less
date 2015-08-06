@@ -1,4 +1,3 @@
-
 //project
 //css for featured project slider
 .bxslider{ 
@@ -6,43 +5,20 @@
 	li{
 		width:100px;
 		.projimg{
-			height:165px;
-			overflow:hidden;
-		}
-		img{
-			min-height: 165px;
-			width : 100%;
-			padding : 4px;
-			border : 3px solid transparent;
-			&:hover{ 
-				border : 3px solid @color;
+			height : 175px;
+			overflow : hidden;
+			padding : 6px;
+			border : 2px solid transparent;
+			img{
+				min-height: 175px;
+			}
+			&:hover{
+				border : 2px solid @darkcolor;
 			}
 		}
 		.readmore{
 			margin-bottom :10px;
 			margin-top:10px;
-			a{
-				margin-right:10px;
-				font: 16px 'Alex Brush', cursive;
-				color : @lightbackcolor;
-				text-decoration:none;
-				border-color : @colorwhite;
-				display : inline-block;
-				&:hover{
-					background: transparent;
-					border:none;
-					color:@darkcolor;
-				}
-			}
-		}
-		a{
-			color:@color;
-			font-weight : bold;
-			text-decoration:underline;
-			&:hover{
-				color:@color;
-				text-decoration:none;
-			}
 		}
 	}
 }
@@ -50,30 +26,29 @@
 .homeproject {
 	margin-top:10px;
 	margin-bottom:10px;
-	.projectnav {
-		background-color:@contentback;
-		border:7px solid @lightbackcolor;
+	.projectnav, .projsnap{
 		border-radius : 4px;
 		padding:3px;
-		height:312px;
+	}  
+	.projectnav, .projsnap, .bx-wrapper{
+		background-color: @back;
+		border: 6px solid @lightcolor;
+		height : 315px;
+	}
+	.projectnav {
 		a{
 			font: bold 14px/1.5em Arial, Helvetica, sans-serif;
 			color: @color;
 			padding : 13px 15px;
 			&:hover{
-				color: @colorwhite;
+				color: @back;
 				text-decoration:none;
-				background: -webkit-linear-gradient(right,#ccc,#0D8375);
-				background: -moz-linear-gradient(right,#ccc,#0D8375);
-				background: linear-gradient(right,#ccc,#0D8375);
+				background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
+				background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
+				background: linear-gradient(top, @lightcolor, @darkcolor);
 			}
 		}
 		
-	}
-	.bx-wrapper{
-		background-color: @lightbackcolor;
-		border: 6px solid @back;
-		height : 315px;
 	}
 	.carousslider{
 		padding-left: 0px;
@@ -97,23 +72,11 @@
 		}
 	}
 	.projsnap{
-		background-color:@contentback;
-		border:7px solid @lightbackcolor;
-		border-radius : 4px;
-		padding:5px;
-		height:312px;
-		a{
-			color: @color;
-			&:hover{
-				color: @colorwhite;
-				text-decoration:none;
-			}
-		}
 		img{
 			max-height : 110px;
 			margin-top: 10px;
 			margin-bottom: 10px;
-			border : 1px solid @lightbackcolor;
+			border : 2px solid @darkcolor;
 			border-radius : 5px;
 			padding :4px;
 		}
@@ -151,121 +114,66 @@
 
 //css for project list
 	.projlist{
-		.panel-default{
-			background-color:@back;
-			img{
-				border:2px solid @lightbackcolor;
-			}
-			img:hover{
-				border:4px solid @color; 
-			}
-		}
-		border:1px solid @darkbackcolor;
-		box-shadow: 3px 3px 6px #ADADAD;
-		background-color:@back;
-		padding:10px;
 		.project{
 			.thumbnail{
-				background-color:@lightbackcolor;
-				height:400px;
-				padding-top : 15px;
-				border-color : @darkbackcolor;
-				img{
-					max-height : 183px;
-					overflow: hidden;
-					border: 0 solid #333239;
-					text-align: center;
-					transition: all 0.2s ease;
-					&:hover{
-						transition: all 0.2s ease;
-					}
-				}
-				
-				.caption{
-					a{
-						color: @color;
-						text-decoration: none;
+				height:385px;
+				.projectimg{
+					height : 148px;
+					width : 180px;
+					overflow : hidden;
+					margin : 0 auto;
+					img{
+						min-height : 148px;
+						max-width : 95%;
+						border : 2px solid transparent;
+						padding : 4px;
 						&:hover{
-							color : @color;
-							text-decoration : underline;
+							border : 2px solid @darkbackcolor;
 						}
 					}
 				}
-				
-				.caption p{
-					color:@colorwhite;
+				hr {
+					margin-top: 10px;
+					margin-bottom: 10px;
 				}
 			}
-			.pagination{
-				align:center;
-				
-			}
-			.projImg{
-				margin-right: 20px;
-				max-height : 175px;
-			}
-			
 		}
-		nav {
-			.pagination{
-				li,.disabled{
-					a{
-						background-color: @lightbackcolor;
-						border-color : @colorwhite;
-						color:@colorwhite;
-						&:hover{
-							background-color:@color;
-							color:@lightbackcolor;
-						}
-					}
-				}
-				>.active>a{
-					background-color:@color;
-					color:@lightbackcolor;
-				}
-			}
-			
-		} 
 	}
 	
 	//for single project
 	.project{
 		.navbar{
-			background-color: @darkbackcolor;
-			border-bottom: 4px solid @lightbackcolor;
+			background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
+			background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
+			background: linear-gradient(top, @lightcolor, @darkcolor);
 			border-radius: 0;
 			margin-bottom:10px;
 			width:auto;
 		}
 		ul.nav.navbar-nav {
-			color:@colorwhite;
-			background-color: @darkbackcolor;
 			>li{
-				border-right : 1px solid @lightbackcolor;
+				border-right : 1px solid @lightcolor;
 				height : 38px;
 				>a, > a:focus{
-					padding : 7px;
-					color : @colorwhite;
+					padding : 7px 7px 10px;
+					color : @back;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					background-color: @back ;
-					color : @colorwhite;
+					color : @color;
 				}
 			}
 		}
 		.projectgallery{ 
-			background-color : @back;
-			border : 1px solid @lightbackcolor;
-			padding: 20px 20px 0px;
 			.thumbnail{
-				background-color : @darkbackcolor;
 				.projectImags{
-					height : 150px;
-					width : 182px;
-					overflow : hidden;
+					width: 190px;
+					height: 148px;
+					overflow: hidden;
+					margin : 0 auto;
 					img{
-						min-height : 150px;
+						min-height : 148px;
 					}
 				}
 				.caption{

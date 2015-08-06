@@ -83,7 +83,7 @@
 				</div>
 				{% endif %}
 				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-12 col-sm-8 col-lg-9' : 'col-xs-12 col-sm-12 col-lg-12 ' }}">
-					{% include contentPath %}
+					<div class="content">{% include contentPath %}</div>
 					{%if modules.contentModule.featured_properties %}
 						{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
 						
