@@ -2,12 +2,12 @@
 	font-family : 'Cinzel-Regular';
 	src:url('../fonts/Cinzel-Regular.otf');
 }
-@color : #E2188E; //border color
-@lightcolor : #580932;//heading 
-@darkcolor : #D7077F; //sec color
-@back : #BD4A8B; //contentback
-@darkbackcolor : #BD4A8B;//
-@lightbackcolor : #D0CFCA; 
+@color : #c0c0c0; //border color
+@lightcolor : #0A4634 ;//heading 
+@darkcolor : #5F230E ; //content back color
+@back : #dd4814; 	//# #5F230E//sec color
+@darkbackcolor : #97310e;//
+@lightbackcolor : #177972; 
 @colorblack : #000000;
 @colorwhite	: #ffffff;
 @import "property.less";
@@ -46,14 +46,14 @@
 				a{
 					color : @colorwhite;
 					&:hover{
-						color : @lightbackcolor;
+						color : @colorwhite;
 						text-decoration : underline;
 					}
 				}
 				img{
 					width : 40px;
 					margin-left : 10px;
-					border : 2px solid @lightbackcolor;
+					border : 2px solid @darkcolor;
 				}
 				span{
 					height : 20px;
@@ -80,8 +80,8 @@
 			margin: 50px;	
 		}
 		.navbar-default {
-			background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
-			background : -moz-linear-gradient(top, @color -565%,@darkcolor);
+			background : -webkit-linear-gradient(top, @color -565%,@darkbackcolor);
+			background : -moz-linear-gradient(top, @color -565%,@darkbackcolor);
 			background : linear-gradient(top, @color -565%,@darkcolor);
 			//(top, @back, @darkbackcolor)
 			border : none;
@@ -126,7 +126,7 @@
 								background : @back;
 								border-radius: 0px;
 								a{
-									color: @darkcolor;
+									color: @colorwhite;
 								}
 							}
 							> ul{
@@ -144,7 +144,7 @@
 										background : @back;
 										border-radius: 0px;
 										a{
-											color: @darkcolor;
+											color: @colorwhite;
 										}
 									}
 								}
@@ -167,7 +167,7 @@
 		}
 	}
 	main{ 
-		background-color:@lightbackcolor;
+		background-color:@colorwhite;
 		.back{
 			background-color: @back;
 			margin-top: 24px;
@@ -186,13 +186,14 @@
 				.contentModule, .sidebarModule{
 					margin: 30px 0px 0px; 
 					border:1px solid @color;
+					box-shadow:4px 4px 4px @darkbackcolor;
 					border-radius:10px;
 					position:relative;
 					.subhead{
 						position : absolute;
 						left:10px;
 						top:-37px;
-						background-color : @darkcolor;
+						background-color : @lightcolor;
 						color : @colorwhite;
 						padding:4px;
 						font:16px 'Cinzel-Regular', cursive;
@@ -288,13 +289,13 @@
 		font-weight : bold;
 	}
 	a{
-		color : @lightcolor;
+		color : @back;
 		&:hover{
 			color : @colorwhite;
 		}
 	}
 	.btn-link{
-		color : @lightcolor;
+		color : @back;
 		padding-left : 0px;
 		font: 17px 'Cinzel-Regular', cursive;
 		&:hover{
@@ -303,16 +304,19 @@
 	}
 	.btn-info, .btn-primary{
 		&, &:focus, &:active, &[disabled]{
-			background-color : @darkbackcolor;
-			color : @lightbackcolor;
+			/*background : -webkit-linear-gradient(top, @darkcolor 60%,@darkbackcolor);
+			background : -moz-linear-gradient(top, @darkcolor ,@darkbackcolor);
+			background : linear-gradient(top, @darkcolor ,@darkbackcolor);*/
+			background-color:@darkcolor;
+			color : @colorwhite;
 			border : 2px solid transparent;
 			border-radius : 0px;
 			font: 16px 'Cinzel-Regular', cursive;
 		}
 		&:hover{
-			color : @back;
+			color : @colorwhite;
 			background-color : @back;
-			border : 2px solid @color;
+			border : 2px solid @darkcolor;
 		}
 	}
 	.btn + .btn{
@@ -320,17 +324,19 @@
 	}
 	.thumbnail{
 		background-color : @back;
-		border : 1px solid @lightbackcolor;
+		border : 1px solid @color;
+		box-shadow:4px 4px 4px @darkbackcolor;
 	}
 	.panel{
 		background-color : @back;
+		
 	}
 	.panel-default{
-		border-color : @lightbackcolor;
+		border-color : @color;
 	}
 	.form-control,.form-control[disabled], .form-control[readonly]{
-		background-color : @back;
-		border-color : @lightbackcolor;
+		background-color : @darkbackcolor;
+		border-color : @darkcolor;
 		color : @colorwhite;
 	}
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
