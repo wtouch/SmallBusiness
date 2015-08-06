@@ -426,6 +426,9 @@ class websiteManager{
 				$response["homeproject"] = $_GET['homeProject'];
 			}
 			
+			if(isset($response["project"]["seo"])){
+				$this->seo = $response["project"]["seo"];
+			}
 			// assign data to response
 			$response = array_merge($response, $businessData);
 			$response["uri"] = "/projects";
@@ -458,7 +461,9 @@ class websiteManager{
 			}else{
 				throw new Exception($businessData["message"]);
 			}
-			
+			if(isset($response["property"]["seo"])){
+				$this->seo = $response["property"]["seo"];
+			}
 			// assign data to response
 			$response = array_merge($response, $businessData);
 			$response["uri"] = "/properties";
