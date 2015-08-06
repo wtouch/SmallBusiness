@@ -127,11 +127,7 @@
 				-ms-transition: all 0.2s ease-in-out;
 				transition: all 0.2s ease-in-out;
 				a{
-					color: @colorwhite;
 					font-weight: bold;
-					&:hover{
-						color : @color;
-					}
 				}
 			}
 		}
@@ -192,8 +188,17 @@
 				margin-bottom: 20px;
 				position : relative;
 				text-align : right;
+				-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden;
+				position: relative;
+				-webkit-transition-property: color;
+				transition-property: color;
+				-webkit-transition-duration: 0.3s;
+				transition-duration: 0.3s;
 				>a, > a:focus{
-					color : @colorwhite;
+					color : @color;
 					padding: 9px 15px;
 					font-size: 17px;
 					font-weight : bold;
@@ -201,12 +206,12 @@
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration: none;
 					background-color: transparent;
-					color:@color;
+					color:@colorwhite;
 					-webkit-animation-name: moveanchor; /* Chrome, Safari, Opera */
-					-webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+					-webkit-animation-duration: 0.4s; /* Chrome, Safari, Opera */
 					-webkit-animation-iteration-count: 1; /* Chrome, Safari, Opera */
 					animation-name: moveanchor;
-					animation-duration: 0.5s;
+					animation-duration: 0.4s;
 					animation-iteration-count: 1;
 				}
 				&::after{
@@ -219,6 +224,38 @@
 					border-top: 10px solid @darkbackcolor;
 					border-left: 8px solid transparent;
 					border-right: 8px solid transparent;
+				}
+				&:before{
+					content: "";
+					position: absolute;
+					z-index: -1;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					background: @darkcolor;
+					-webkit-transform: scaleX(0);
+					transform: scaleX(0);
+					-webkit-transform-origin: 0 50%;
+					transform-origin: 0 50%;
+					-webkit-transition-property: transform;
+					transition-property: transform;
+					-webkit-transition-duration: 0.5s;
+					transition-duration: 0.5s;
+					-webkit-transition-timing-function: ease-out;
+					transition-timing-function: ease-out;
+				}
+				&:hover{
+					background-color : @darkbackcolor;
+					&::after{
+						border-top: 10px solid @darkcolor;
+					}
+				}
+				&:hover:before, &:focus:before, &:active:before {
+					-webkit-transform: scaleX(1);
+					transform: scaleX(1);
+					-webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+					transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 				}
 			}
 		}
@@ -250,63 +287,50 @@
 			}
 		}
 	}
-	.projectgallery{
+	.projectgallery{ 
 		.thumbnail{
-			border : 1px solid @darkbackcolor;
-			background : none;
+			.projectImags{
+				width: 160px;
+				height: 148px;
+				overflow: hidden;
+				margin : 0 auto;
+				img{
+					min-height : 148px;
+				}
+			}
+			.caption{
+				height: 173px;
+				overflow: hidden;
+				margin-bottom: 10px;
+			}
 		}
 	}
 }
-.projHead,.project .description,.project .thumbnail {
-	background-color:@lightbackcolor;
-}
 //css for single project & project list
 	.projlist{
-		
-		
 		padding:10px;
 		//border : 1px solid @darkbackcolor;
 		.project{
-			
 			.thumbnail{
-				background-color:@lightbackcolor;
-				height:385px;
-				padding-top : 15px;
-				border-color : @darkcolor;
+				height:415px;
 				.projectimg{
 					height : 148px;
+					width : 160px;
 					overflow : hidden;
+					margin : 0 auto;
 					img{
 						min-height : 148px;
-						max-width : 95%;
-						border : 2px solid transparent;
 						padding : 4px;
+						border : 2px solid transparent;
 						&:hover{
 							border : 2px solid @darkbackcolor;
 						}
 					}
 				}
-				
 				.caption{
-					color : @colorblack;
+					height: 140px;
+					margin-bottom: 10px;
 				}
-				.caption p{
-					color:@colorblack;
-				}
-				.readmore{
-					margin-top : 15px;
-					a{
-						color : @color;
-						border-radius : 4px;
-						&:hover, &:hover{
-							color : @colorblack;
-						}
-					}
-				}
-			}
-			.projImg{
-				margin-right: 20px;
-				max-height : 175px;
 			}
 		}
 	}

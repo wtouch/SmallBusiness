@@ -228,10 +228,13 @@
 		background-color: @color;
 		color : @back;
 		border-color : @lightcolor;
+		position: relative;
+		-webkit-transform: translateZ(0);
 		transform: translateZ(0);
 		-webkit-backface-visibility: hidden;
 		backface-visibility: hidden;
 		position: relative;
+		-webkit-transition-property: color;
 		transition-property: color;
 		-webkit-transition-duration: 0.3s;
 		transition-duration: 0.3s;
@@ -256,7 +259,7 @@
 			transition-timing-function: ease-out;
 		}
 		&:hover{
-			background: @darkcolor;
+			background: @color;
 			color : @darkcolor;
 			border-color : @color;
 		}

@@ -148,6 +148,9 @@
 .singleproperty .propDetails span.amenity.school {
   background-position: -60px -1px;
 }
+.singleproperty .propDetails .table {
+  margin-top: 20px;
+}
 .singleproperty .propDetails .table tbody tr th {
   background-color: #421266;
   color: #ffffff;
@@ -299,15 +302,17 @@
 }
 .projlist .project .thumbnail .projectimg img {
   min-height: 148px;
-  max-width: 95%;
   border: 2px solid transparent;
-  padding: 4px;
 }
 .projlist .project .thumbnail .projectimg img:hover {
   border: 2px solid #323e02;
 }
 .projlist .project .thumbnail hr {
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+.projlist .project .caption {
+  height: 130px;
   margin-bottom: 10px;
 }
 .project .navbar {
@@ -407,7 +412,6 @@
 }
 .products .thumbnail .prodimg img {
   min-height: 148px;
-  max-width: 95%;
   border: 2px solid transparent;
   padding: 4px;
 }
@@ -859,10 +863,12 @@ hr {
   background-color: #421266;
   color: #a5c53b;
   border-color: #966bbb;
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   position: relative;
+  -webkit-transition-property: color;
   transition-property: color;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
@@ -892,7 +898,7 @@ hr {
 .btn-info:hover,
 .btn-info[disabled]:hover,
 .btn-primary:hover {
-  background: #18012b;
+  background: #421266;
   color: #18012b;
   border-color: #421266;
 }
