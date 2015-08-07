@@ -415,6 +415,7 @@
   padding: 5px;
 }
 .bxslider li {
+  height: 325px;
   width: 100px;
 }
 .bxslider li .projimg {
@@ -562,6 +563,14 @@
 .homeproject #carousel a.right.carousel-control {
   background: none;
 }
+.project {
+  /*.projectgallery{
+		.thumbnail{
+			border : 1px solid @darkbackcolor;
+			background : none;
+		}
+	}*/
+}
 .project .navbar {
   border: 1px solid #c4de9b;
   border-radius: 0;
@@ -593,8 +602,16 @@
   color: #ffffff;
 }
 .project .projectgallery .thumbnail {
-  border: 1px solid #3a0c0a;
   background: none;
+}
+.project .projectgallery .thumbnail .projectImags {
+  width: 190px;
+  height: 148px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.project .projectgallery .thumbnail .projectImags img {
+  min-height: 148px;
 }
 .projlist {
   padding: 10px;
@@ -603,10 +620,14 @@
 .projlist .project .thumbnail {
   background: none;
   height: 385px;
-  padding-top: 15px;
-  border-color: #3a0c0a;
+  /*padding-top : 15px;*/
+  /*border-color : @darkbackcolor;*/
+  /*.caption p{
+					color:@colorblack;
+				}*/
 }
 .projlist .project .thumbnail .projectimg {
+  width: 190px;
   height: 148px;
   overflow: hidden;
 }
@@ -620,9 +641,12 @@
   border: 2px solid #49741e;
 }
 .projlist .project .thumbnail .caption {
+  padding: 9px 5px;
+  height: 120px;
   color: #ccffcc;
 }
 .projlist .project .thumbnail .caption p {
+  margin-bottom: 0px;
   color: #000000;
 }
 .projlist .project .thumbnail .readmore {
