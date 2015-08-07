@@ -6,9 +6,26 @@ jQuery(document).ready(function() {
 	})
 });
 $(document).ready(function(){
-	$('.bxslider').bxSlider({
+	$('#bxslider').bxSlider({
 		mode:'horizontal',
 		slideWidth: 250,
+		minSlides:3,
+		maxSlides: 3,
+		slideMargin: 25,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 1,
+		pause:3000,
+		pager:true,
+		pagerType:'full',
+		autoControls: true, 
+		controls:true, 
+		autoHover:true,
+		speed:1000,
+	});
+	$('#associate').bxSlider({
+		mode:'horizontal',
+		slideWidth: 300,
 		minSlides:3,
 		maxSlides: 3,
 		slideMargin: 25,
