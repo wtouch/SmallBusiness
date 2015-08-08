@@ -37,14 +37,22 @@
 .featuredProperty .bxslider1 li .readmore a {
   padding: 6px 12px;
 }
-.propertylist {
-  padding: 20px 20px 0px;
-}
 .propertylist .btn-primary {
   margin-bottom: 10px;
+  padding: 6px 7px;
 }
-.propertylist .panel-default {
-  border-color: #440a02;
+.propertylist .panel-default .sliderImg {
+  height: 165px;
+  width: 195px;
+  overflow: hidden;
+  padding: 4px;
+  border: 4px solid transparent;
+}
+.propertylist .panel-default .sliderImg img {
+  min-height: 150px;
+}
+.propertylist .panel-default .sliderImg:hover {
+  border: 4px solid #440a02;
 }
 .propertylist .table td {
   border: none;
@@ -54,9 +62,9 @@
   padding: 6px 12px;
 }
 .singleproperty .property {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  padding: 10px 15px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 0px 20px;
   border: 1px solid #440a02;
 }
 .singleproperty .property h3 {
@@ -69,9 +77,11 @@
   height: 175px;
   width: 195px;
   overflow: hidden;
+  margin: 0 auto;
+  border: 2px solid #951544;
 }
 .singleproperty .property .mainimg img {
-  max-height: 175px;
+  min-height: 175px;
 }
 .singleproperty .property .subimg {
   margin-top: 10px;
@@ -142,13 +152,16 @@
 .singleproperty .propDetails span.amenity.school {
   background-position: -60px -1px;
 }
+.singleproperty .propDetails .table {
+  margin-top: 20px;
+}
 .singleproperty .propDetails .table tbody tr th {
-  background-color: #440a02;
+  background-color: #951544;
   color: #ffffff;
 }
 .singleproperty .propDetails .table tbody tr td,
 .singleproperty .propDetails .table tbody tr th {
-  border: 1px solid #440a02;
+  border: 1px solid #951544;
 }
 .singleproperty .btn-primary {
   margin-bottom: 10px;
@@ -175,7 +188,7 @@
   padding: 5px;
 }
 .bxslider li {
-  height: 325px;
+  height: 330px;
 }
 .bxslider li .projimg {
   height: 175px;
@@ -189,23 +202,13 @@
 .bxslider li .projimg:hover {
   border: 2px solid #440a02;
 }
+.bxslider li p {
+  margin-bottom: 5px;
+}
 .bxslider li .readmore {
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
-}
-.bxslider li .readmore a h4 {
-  font: 16px 'Alex Brush', cursive;
-  background-color: #772b3d;
-  color: #ffffff;
-  padding: 5px 15px;
-  transition: padding 250ms;
-}
-.bxslider li .readmore a h4:hover {
-  background-color: #951544;
-  padding: 5px 30px;
-  text-decoration: none;
-  padding: 5px 20px;
 }
 .homeproject {
   margin-top: 10px;
@@ -309,17 +312,8 @@
 .homeproject .projsnap .viewproperty a:hover {
   color: #f7cbce;
 }
-.projlist {
-  background-color: #e3dbbe;
-  padding: 10px;
-}
 .projlist .project .thumbnail {
   height: 385px;
-  padding-top: 15px;
-  border-color: #440a02;
-  /*.caption p{
-					color:@colorblack;
-				}*/
 }
 .projlist .project .thumbnail .projectimg {
   width: 190px;
@@ -333,11 +327,6 @@
 .projlist .project .thumbnail .caption {
   padding: 9px 5px;
   height: 120px;
-  color: #ff8087;
-}
-.projlist .project .thumbnail .caption p {
-  margin-bottom: 0px;
-  color: #000000;
 }
 .projlist .project .thumbnail .readmore {
   margin-top: 15px;
@@ -379,18 +368,13 @@
   max-height: 175px;
   float: left;
 }
-.project .projectgallery {
-  border: 1px solid #e3dbbe;
-  padding: 20px 20px 0px;
-}
-.project .projectgallery .thumbnail {
-  background-color: transparent;
-  border: 1px solid #440a02;
+.project .projectgallery .thumbnail.floor {
+  height: 275px;
 }
 .project .projectgallery .thumbnail .projectImags {
   border: 1px solid #440a02;
   height: 148px;
-  width: 190px;
+  width: 185px;
   overflow: hidden;
   margin: 0 auto;
 }
@@ -423,47 +407,25 @@
 .services .servdesc h4 {
   text-align: center;
 }
-.products .thumbnail,
-.singleproduct .thumbnail {
-  border-color: #440a02;
-}
-.products .thumbnail img,
-.singleproduct .thumbnail img {
-  width: 100%;
-}
 .products .thumbnail .prodimg {
   width: 188px;
   height: 148px;
   overflow: hidden;
+  margin: 0 auto;
 }
 .products .thumbnail .prodimg img {
   min-height: 148px;
 }
 .products .thumbnail .caption {
   height: 190px;
+  margin-bottom: 10px;
 }
 .products .thumbnail .caption .description {
   height: 75px;
   overflow: hidden;
 }
 .products .thumbnail .readmore {
-  margin-top: 10px;
   text-align: center;
-}
-@media (min-width: 320px) {
-  .products .thumbnail {
-    height: 465px;
-  }
-}
-@media (min-width: 992px) {
-  .products .thumbnail {
-    height: 450px;
-  }
-}
-@media (min-width: 1200px) {
-  .products .thumbnail {
-    height: 400px;
-  }
 }
 .featuretab {
   margin-top: 10px;

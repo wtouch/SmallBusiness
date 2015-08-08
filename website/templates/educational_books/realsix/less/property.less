@@ -26,20 +26,8 @@
 						border : 2px solid @color;
 					}
 				}
-				a{
-					color:@color;
-					font-weight : bold;
-					&:hover{
-						text-decoration : none;
-					}
-					&:hover{
-						color : @lightcolor;
-					}
-				}
 				.head{
 					margin-right : 10px;
-					margin-left : 10px;
-					color : @colorblack;
 				}
 				.table{
 					tbody{
@@ -181,33 +169,44 @@
 }	
 	//propertyList 
 	.propertylist{
-			padding: 20px 20px 0px;
-			.btn-primary{
-				margin-right : 4px;
-				margin-bottom: 10px;
-				padding : 6px 10px;
+		.btn-primary{
+			margin-right : 4px;
+			margin-bottom: 10px;
+			padding : 6px 10px;
+		}
+		.readmore{
+			.viewdtls{
+				margin-right : 10px;
 			}
-			.readmore{
-				text-align : center;
-				.viewdtls{
-					margin-right : 10px;
+		}
+		.panel{
+			background-color : @darkbackcolor;
+		}
+		.panel-default{
+			border-color : @lightbackcolor;
+			.sliderImg{
+				height :165px;
+				width : 195px;
+				overflow : hidden;
+				padding : 4px;
+				img{
+					min-height: 150px;
+					border : 4px solid transparent;
+					&:hover{
+						border : 4px solid @color;
+					}
 				}
 			}
-			.panel{
-				background-color : @darkbackcolor;
+		}
+		.panel-body {
+			padding: 5px 15px 15px;
+		}
+		.table{
+			td{
+				border : none;
+				padding: 1px 10px;
 			}
-			.panel-default{
-				border-color : @lightbackcolor;
-			}
-			.panel-body {
-				padding: 5px 15px 15px;
-			}
-			.table{
-				td{
-					border : none;
-					padding: 1px 10px;
-				}
-			}
+		}
 	}
 	@media (min-width: 992px){
 		.propDetails{
