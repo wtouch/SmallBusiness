@@ -112,15 +112,14 @@
   height: 395px;
 }
 .infrastructure .thumbnail img {
-  max-height: 190px;
+  height: 190px;
 }
 .infrastructure .thumbnail .caption {
   height: 138px;
+  margin-bottom: 10px;
+  overflow: hidden;
 }
-.infrastructure .thumbnail .readmore {
-  margin-top: 10px;
-}
-.infrastructure .thumbnail .readmore .btn-info:hover {
+.infrastructure .btn-info:hover {
   padding: 6px 40px;
 }
 .contact img {
@@ -172,10 +171,6 @@
 .featrtesti img {
   max-height: 100px;
   padding: 4px;
-}
-.gallery .thumbnail {
-  border-color: #3a0c0a;
-  background: transparent;
 }
 .gallery .thumbnail h4 {
   border: none;
@@ -245,50 +240,30 @@
   border: none;
   padding: 3px 10px;
 }
-.propertylist {
-  padding: 20px 20px 0px;
-  border: 1px solid #3a0c0a;
-}
 .propertylist .btn-primary {
   margin-bottom: 10px;
 }
-.propertylist .panel-default {
-  border-color: #3a0c0a;
-}
-.propertylist .panel-default img {
-  max-height: 215px;
-  width: 100%;
+.propertylist .panel-default .sliderImg {
+  height: 165px;
+  width: 195px;
+  overflow: hidden;
   padding: 4px;
-  border: 3px solid transparent;
+  border: 4px solid transparent;
 }
-.propertylist .panel-default img:hover {
-  border: 3px solid #49741e;
+.propertylist .panel-default .sliderImg img {
+  min-height: 150px;
 }
-.propertylist .panel-default .readmore {
-  margin-bottom: 10px;
-}
-.propertylist .panel-default .readmore a {
-  padding: 5px 15px;
-  margin-right: 5px;
-  background: linear-gradient(#49741e, #264903);
-  color: #ccffcc;
-}
-.propertylist .panel-default .readmore a:hover,
-.propertylist .panel-default .readmore a:hover {
-  background: linear-gradient(#e2271f, #3a0c0a);
-  color: #ffffff;
+.propertylist .panel-default .sliderImg:hover {
+  border: 4px solid #49741e;
 }
 .propertylist .table td {
   border: none;
   padding: 1px 1px;
 }
-.propertylist .viewdtls {
-  margin-right: 10px;
-}
 .singleproperty .property {
-  margin-bottom: 15px;
-  margin-top: 15px;
-  padding: 10px 15px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 0px 20px;
   border: 1px solid #3a0c0a;
 }
 .singleproperty .property h3 {
@@ -296,6 +271,16 @@
 }
 .singleproperty .property .table tbody tr td {
   border-top: 1px dashed #3a0c0a;
+}
+.singleproperty .property .mainimg {
+  height: 175px;
+  width: 195px;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 2px solid #49741e;
+}
+.singleproperty .property .mainimg img {
+  min-height: 175px;
 }
 .singleproperty .property .subimg {
   margin-top: 10px;
@@ -366,6 +351,9 @@
 .singleproperty .propDetails span.amenity.school {
   background-position: -60px -1px;
 }
+.singleproperty .propDetails .table {
+  margin-top: 20px;
+}
 .singleproperty .propDetails .table tbody tr th {
   background-color: #3a0c0a;
   color: #ffffff;
@@ -395,7 +383,7 @@
 }
 @media (min-width: 992px) {
   .propDetails ul li {
-    width: 224px;
+    width: 275px;
   }
   .property .mainimg img {
     max-height: 145px;
@@ -404,7 +392,7 @@
 }
 @media (min-width: 1200px) {
   .propDetails ul li {
-    width: 274px;
+    width: 239px;
   }
   .property .mainimg img {
     max-height: 180px;
@@ -416,7 +404,6 @@
 }
 .bxslider li {
   height: 325px;
-  width: 100px;
 }
 .bxslider li .projimg {
   height: 175px;
@@ -430,23 +417,14 @@
 .bxslider li .projimg:hover {
   border: 2px solid #49741e;
 }
-.bxslider li a h4 {
-  background: linear-gradient(#49741e, #264903);
-  color: #ccffcc;
-  padding: 4px 15px 12px;
-  border: none;
-  border-radius: 4px;
-}
-.bxslider li a h4:hover {
-  background: linear-gradient(#e2271f, #3a0c0a);
-  color: #ffffff;
-}
 .bxslider li .btn-info {
   margin-bottom: 10px;
 }
+.bxslider li .btn-info:hover {
+  padding: 6px 40px;
+}
 .bxslider li p {
-  margin-bottom: 0px;
-  margin-top: 0px;
+  margin-bottom: 5px;
 }
 .homeproject {
   margin-top: 10px;
@@ -563,14 +541,6 @@
 .homeproject #carousel a.right.carousel-control {
   background: none;
 }
-.project {
-  /*.projectgallery{
-		.thumbnail{
-			border : 1px solid @darkbackcolor;
-			background : none;
-		}
-	}*/
-}
 .project .navbar {
   border: 1px solid #c4de9b;
   border-radius: 0;
@@ -601,39 +571,38 @@
   background: linear-gradient(#e2271f, #3a0c0a);
   color: #ffffff;
 }
-.project .projectgallery .thumbnail {
-  background: none;
+.project .projHead,
+.project .projImg {
+  margin-top: 10px;
+}
+.project .projImg {
+  max-height: 175px;
+  margin-right: 10px;
+  float: left;
+}
+.project .projectgallery .thumbnail.floor {
+  height: 275px;
 }
 .project .projectgallery .thumbnail .projectImags {
-  width: 190px;
-  height: 148px;
+  width: 205px;
+  height: 170px;
   overflow: hidden;
   margin: 0 auto;
 }
 .project .projectgallery .thumbnail .projectImags img {
-  min-height: 148px;
-}
-.projlist {
-  padding: 10px;
-  border: 1px solid #3a0c0a;
+  min-height: 170px;
 }
 .projlist .project .thumbnail {
-  background: none;
   height: 385px;
-  /*padding-top : 15px;*/
-  /*border-color : @darkbackcolor;*/
-  /*.caption p{
-					color:@colorblack;
-				}*/
 }
 .projlist .project .thumbnail .projectimg {
-  width: 190px;
-  height: 148px;
+  width: 205px;
+  height: 170px;
   overflow: hidden;
+  margin: 0 auto;
 }
 .projlist .project .thumbnail .projectimg img {
-  min-height: 148px;
-  max-width: 95%;
+  min-height: 170px;
   border: 2px solid transparent;
   padding: 4px;
 }
@@ -643,51 +612,9 @@
 .projlist .project .thumbnail .caption {
   padding: 9px 5px;
   height: 120px;
-  color: #ccffcc;
 }
 .projlist .project .thumbnail .caption p {
   margin-bottom: 0px;
-  color: #000000;
-}
-.projlist .project .thumbnail .readmore {
-  margin-top: 15px;
-}
-.projlist .project .thumbnail .readmore a {
-  background: linear-gradient(#49741e, #264903);
-  color: #ccffcc;
-  padding: 6px 12px;
-  border-radius: 4px;
-}
-.projlist .project .thumbnail .readmore a:hover,
-.projlist .project .thumbnail .readmore a:hover {
-  background: linear-gradient(#e2271f, #3a0c0a);
-  color: #ffffff;
-  padding: 6px 40px;
-}
-.projlist .project .projImg {
-  margin-right: 20px;
-  max-height: 175px;
-}
-@media (min-width: 320px) {
-  .projImg {
-    float: none;
-    max-height: 175px;
-    margin-right: 10px;
-  }
-}
-@media (min-width: 992px) {
-  .projImg {
-    float: left;
-    max-height: 175px;
-    margin-right: 10px;
-  }
-}
-@media (min-width: 1200px) {
-  .projImg {
-    float: left;
-    max-height: 175px;
-    margin-right: 10px;
-  }
 }
 .services {
   text-align: center;
@@ -720,22 +647,17 @@
   color: #ffffff;
   padding: 6px 40px;
 }
-.singleproduct .thumbnail {
-  background: transparent;
-  border-color: #3a0c0a;
-}
 .products .thumbnail {
-  background: transparent;
-  border-color: #3a0c0a;
-  padding-top: 10px;
+  height: 385px;
 }
 .products .thumbnail .prodimg {
   height: 148px;
+  width: 210px;
+  margin: 0 auto;
   overflow: hidden;
 }
 .products .thumbnail .prodimg img {
   min-height: 148px;
-  max-width: 95%;
   border: 2px solid transparent;
   padding: 4px;
 }
@@ -743,7 +665,7 @@
   border: 2px solid #49741e;
 }
 .products .thumbnail .caption {
-  height: 190px;
+  height: 185px;
 }
 .products .thumbnail .caption .description {
   height: 75px;
@@ -755,30 +677,6 @@
 }
 .products .thumbnail .readmore .btn-info:hover {
   padding: 6px 40px;
-}
-@media (min-width: 320px) {
-  .products .thumbnail {
-    height: 465px;
-  }
-  .singleproduct .thumbnail {
-    height: 186px;
-  }
-}
-@media (min-width: 992px) {
-  .products .thumbnail {
-    height: 450px;
-  }
-  .singleproduct .thumbnail {
-    height: 100px;
-  }
-}
-@media (min-width: 1200px) {
-  .products .thumbnail {
-    height: 400px;
-  }
-  .singleproduct .thumbnail {
-    height: 192px;
-  }
 }
 body {
   background-image: url('../img/bgrnd.jpg');
@@ -1031,6 +929,10 @@ hr {
 }
 .sidebarModule h4 {
   border: none;
+}
+.thumbnail {
+  border-color: #3a0c0a;
+  background: none;
 }
 .panel {
   background: transparent;
