@@ -1,0 +1,49 @@
+{% autoescape false %}
+{% if data.associate | length >= 1 %}
+
+<div class="associates">
+<h4>Featured Property</h4>
+
+	<div class="row services">
+
+		<div class="carousel slide" id="featuredProp">
+
+			<a class="left carousel-control" href="#featuredProp" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+
+			<a class="right carousel-control" href="#featuredProp" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+
+			<div class="carousel-inner">
+
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in data.associate if break == 0 %}
+				<div class="item {{ (i == 0) ? 'active' }}">
+					<div class="col-sm-3 text-center">
+						<div class="shadow">
+							<a href="properties/{{x.title}}/{{x.id}}">
+								<div class="imgborder">
+									<img src="{{x.image.file_relative_path}}" alt="" style="max-width:93%" />
+								</div>
+							</a>
+							<div class="proj-title">
+								<a href="properties/{{x.title}}/{{x.id}}" class="head">-{{x.name}}</a>
+								<small>{{x.description}}</small>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{% set i = (i + 1) %}
+				{% if i == 4 %}
+					{% set break = 1 %}
+				{% endif %}
+			{% endfor %}
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+{% endif %}
+{% endautoescape %}

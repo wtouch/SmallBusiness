@@ -19,7 +19,7 @@ $(document).ready(function(){
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
-		controls:true, 
+		controls:false, 
 		autoHover:true,
 		speed : 1000
 	});
