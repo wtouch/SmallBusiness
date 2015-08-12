@@ -42,7 +42,7 @@ $(document).ready(function(){
 	});
 	$('.bxslider1').bxSlider({
 		mode:'vertical',
-		slideWidth: 600,
+		slideWidth: 680,
 		minSlides: 3,
 		maxSlides:3,
 		slideMargin: 15,
