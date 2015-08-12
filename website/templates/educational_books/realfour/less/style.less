@@ -172,35 +172,42 @@ body{
 			}
 		}
 	}
+	.contentModule{
+		.sections{
+			padding: 0px 15px;
+		}
+	}
 	.contentModule, .sidebarModule{
 		border:1px solid @darkbackcolor;
 		margin-top:10px;
 		margin-bottom: 10px;
-		.sections{
-			padding: 0px 15px;
-		}
 		h3{
 			margin-top:0px;
-			font-size:18px;
-		
-			font-weight:bold;
+			font:1.3em/1.2em Cinzel-Regular;
 			color:@colorwhite;
 			background-color:@darkbackcolor;
 			padding:10px 15px;
 		}
 	}
 	.sidebarModule{
-		padding : 15px;
-		>h3{
+		padding : 15px 15px 0px;
+		&.contactus{
+			padding : 15px;
+		}
+		h3{
 			margin : -15px -15px 10px;
-			font: 1.2em/1.5em Cinzel-Regular;
-			font-weight:bold;
 		}
 		.panel{
 			margin-bottom :0px;
 		}
+		.panel-body {
+			padding: 0px;
+		}
 		&.enquiry, &.sidemenu{
 			padding-bottom : 0px;
+		}
+		.sections{
+			padding: 0px;
 		}
 	}
 	main{
@@ -226,21 +233,14 @@ body{
 		margin-top : 10px;
 		text-align: center;
 	}
-	h1, h2,.tagline, .tagline1{
-		color:@darkcolor;
+	h3{
+		font:1.5em/1.2em Cinzel-Regular;
 	}
-	h3
-	{
-		color:@darkcolor;
-		font: 1.3em/1.5em Acknowledgement;
-	}
-	h4
-	{
-		font: bold 14px/1.5em Arial, Helvetica, sans-serif;
+	h1, h2, h3, h4, .tagline, .tagline1{
 		color:@darkcolor;
 	}
 	.thumbnail{
-		border-color : @lightcolor;
+		border-color : @darkbackcolor;
 	}
 	.tagline, .tagline1{
 		text-align : center;
@@ -298,13 +298,10 @@ body{
 		}
 	}
 	footer{
-		padding : 20px;
-		background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
+		padding-top : 15px;
+		background-image: -webkit-linear-gradient(top,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
 		color : @colorwhite;
-		font-size:18px;
-		p {
-			margin : 0;
-		}
+		margin-top : 10px;
 		a, a:hover{
 			color : @colorwhite;
 		}

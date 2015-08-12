@@ -1,8 +1,5 @@
 //css for featured project slider
-.highlight
-{
-	color:@colorwhite;
-}
+
 .bxslider{ 
 	li{
 		height : 325px;
@@ -11,7 +8,7 @@
 			height : 175px;
 			overflow : hidden;
 			padding : 6px;
-			border : 2px solid @color;
+			border : 2px solid transparent;
 			img{
 				min-height: 175px;
 			}
@@ -118,18 +115,18 @@
 				>a, > a:focus{
 					color : @colorwhite;
 					padding: 10px 15px;
-				&:hover
-				{
-					text-decoration: none;
-					background-image: -webkit-linear-gradient(right, #337ab7, #ffffff 111%, #337ab7);
-					color: @colorwhite;
-					transform: translateX(-24px);
-					width: 235px;
-					text-align: right;
-					padding-right: 20px;
-					border-radius:4px;
-					
-				}
+					&:hover
+					{
+						text-decoration: none;
+						background-image: -webkit-linear-gradient(right, #337ab7, #ffffff 111%, #337ab7);
+						color: @colorwhite;
+						transform: translateX(-24px);
+						width: 235px;
+						text-align: right;
+						padding-right: 20px;
+						border-radius:4px;
+						
+					}
 				} 
 				
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus,>a:focus{
@@ -143,37 +140,23 @@
 	
 }//css for single project & project list
 	.projlist{
-		border:1px solid @darkbackcolor;
-		background-color:@lightbackcolor;
-		padding:10px;
 		.project{
 			.thumbnail{
 				height:385px;
-				padding-top : 15px;
 				.projectimg{
-					width : 190px;
+					width : 200px;
 					height : 148px;
 					overflow : hidden;
+					margin : 0 auto;
 					img{
 						min-height : 148px;
 					}
 				}
-								
 				.caption{
 					padding : 9px 5px;
 					height : 120px;
-					color : @lightcolor;
-					a{
-						color: @color;
-						text-decoration: none;
-						&:hover{
-							color : @color;
-							text-decoration : underline;
-						}
-					}
 					p {
 						margin-bottom : 0px;
-						color:@colorblack;
 					}
 				}
 			}
@@ -197,7 +180,7 @@
 				border-right : 1px solid @lightbackcolor;
 				height : 38px;
 				>a, > a:focus{
-					padding : 9px 14px;
+					padding : 9px 6px 7px 9px;
 					color : @colorwhite;
 					font-weight : bold;
 				} 
@@ -212,24 +195,21 @@
 			max-height : 175px;
 		}
 		.projectgallery{ 
-			background-color:transparent;
-			border : 1px solid @darkbackcolor;
-			padding: 20px 20px 0px;
 			.thumbnail{
-				background-color : @darkbackcolor;
 				.projectImags{
-				height : 150px;
-				width : 182px;
-				overflow : hidden;
-				img{
-					min-height : 150px;
+					height : 150px;
+					width : 182px;
+					overflow : hidden;
+					margin : 0 auto;
+					img{
+						min-height : 150px;
+					}
 				}
-			}
-			.caption{
-				height: 173px;
-				overflow: hidden;
-				margin-bottom: 10px;
-			}
+				.caption{
+					height: 130px;
+					overflow: hidden;
+					margin-bottom: 10px;
+				}
 			}
 		}
 	}
