@@ -3,7 +3,7 @@
 	src:url('../fonts/Cinzel-Regular.otf');
 }
 @color : #c0c0c0; //border color
-@lightcolor : #0A4634 ;//heading 
+@lightcolor : #E49E1C ;//heading 
 @darkcolor : #5F230E ; //content back color
 @back : #dd4814; 	//# #5F230E//sec color
 @darkbackcolor : #97310e;//
@@ -168,7 +168,7 @@
 		}
 	}
 	main{ 
-		background-color:@darkbackcolor;
+		background-color:@lightcolor;
 		.back{
 			background-color: @back;
 			margin-top: 24px;
@@ -304,13 +304,14 @@
 		}
 	}
 	.btn-info, .btn-primary{
+		
 		&, &:focus, &:active, &[disabled]{
-			/*background : -webkit-linear-gradient(top, @darkcolor 60%,@darkbackcolor);
-			background : -moz-linear-gradient(top, @darkcolor ,@darkbackcolor);
-			background : linear-gradient(top, @darkcolor ,@darkbackcolor);*/
-			background-color:@darkcolor;
+			//background : -webkit-linear-gradient(top, @darkcolor 60%,@darkbackcolor);
+			//background : -moz-linear-gradient(top, @darkcolor ,@darkbackcolor);
+			//background : linear-gradient(top, @darkcolor ,@lightcolor);
+			background:@darkcolor;
 			color : @colorwhite;
-			border : 2px solid transparent;
+			border : 2px solid @back ;
 			border-radius : 0px;
 			font: 16px 'Cinzel-Regular', cursive;
 		}
