@@ -6,12 +6,12 @@
 		font-family:'QumpellkaNo12';
 		src:url('../fonts/QumpellkaNo12.otf');
 	}
-	@color : #421266;
-	@lightcolor : #B478E6;
-	@darkcolor : #18012B;
-	@back : #8FB902;
-	@darkbackcolor : #4A5F0A;
-	@lightbackcolor :#A1C31A; 
+	@color : #119E93;
+	@lightcolor : #0ADACA;
+	@darkcolor :#119E93;
+	@back : #4E3C28;
+	@darkbackcolor : #4E3C28;
+	@lightbackcolor :#4E3C28; 
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	
@@ -31,13 +31,6 @@
 	body{
 		//background-color:@lightcolor;
 		background-image : url('../img/bg.jpg');
-		color: @darkcolor;
-	}
-	.logo {
-		height: 80px;
-		margin-top: 25px;
-		margin-left: 15px;
-		max-height: 100px;
 	}
 	.sociallinks{
 		top: 50%;
@@ -80,35 +73,52 @@
 			}
 		}
 	}
+	header{
+		background-image : url('../img/bg2.jpg');
+		background-repeat : no-repeat;
+		background-size : 100%;
+		height : 500px;
+		position : relative; 
+	}
+	.carous{
+		position : absolute;
+		top : 30%;
+		left : 0;
+		right : 0;
+		margin : auto;
+		width : 90%;
+		border-radius: 3px;
+		box-shadow: 0px 1px 6px @colorblack;
+	}
+	.logo {
+		height: 80px;
+		margin-left: 15px;
+		max-height: 100px;
+	}
 	.navbar-default {
-		background-image: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
-		background-image: -moz-linear-gradient(top, @lightbackcolor, @darkbackcolor);
-		background-image: -linear-gradient(top, @lightbackcolor, @darkbackcolor);
+		background : none;
 		border : none;
 		border-radius: 0;
 		height:50px;
 		top:15px;
 		.navbar-nav{
+			float : none;
 			> li{
 				text-transform:uppercase;
 				position : relative;
 				margin-right: 8px;
 				> a, > a:focus {
-					color :@color;
+					color :@colorwhite;
 					padding : 9px;
 					padding-top:10px;
-					border: 4px solid transparent;
-					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
+					font : 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					color : @back;
-					background-color : @color;
-					border: 4px solid @lightcolor;
-					border-top-left-radius: 19px;
-					border-bottom-right-radius: 19px;
-					top: -8px;
-					padding: 15px 9px;
+					color : @colorwhite;
+					background-image : -webkit-linear-gradient(@color , @darkcolor);
+					background-image : -moz-linear-gradient(@color , @darkcolor);
+					background-image : -linear-gradient(@color , @darkcolor);
 				}
 				> ul {
 					list-style: none;
@@ -152,6 +162,10 @@
 			}
 		}
 	}
+	.pages{
+		background-color : @colorwhite;
+		padding: 50px 15px 15px;
+	}
 	.subhead {
 		position: relative;
 		font : 1.5em/1.5em Amaranth-Regular;
@@ -166,7 +180,7 @@
 		box-shadow : 0px 1px 2px @back;
 	}
 	.content, .sections, .sidemenu, .thumbnail, .tab-content{
-		background-color : @back;
+		background : none;
 		border:1px solid @darkbackcolor;
 		border-radius : 4px;
 	}
@@ -209,7 +223,7 @@
 		padding-left : 0px;
 	}
 	.panel{
-		background-color : @back;
+		background : none;
 	}
 	.panel-default{
 		border-color : @darkbackcolor;
@@ -292,12 +306,10 @@
 	
 	footer{
 		margin-top : 10px;
-		padding-top : 10px;
+		padding: 25px 10px 10px;
 		color:@color;
 		font-weight : bold;
-		background: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
-		background: -moz-linear-gradient(top,  @lightbackcolor, @darkbackcolor);
-		background: linear-gradient(top,  @lightbackcolor, @darkbackcolor);
+		background-image : url('../img/bg2.jpg');
 	}
 	
 	@media (min-width: 320px){
