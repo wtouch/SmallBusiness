@@ -91,15 +91,16 @@
 							{%if modules.sidebarModule.searchProp %}
 								{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
 							{%endif%}
+							{%if modules.sidebarModule.contact %}
+								{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+							{%endif%}
 							{%if modules.sidebarModule.enquiry %}
 								{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html']with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
 							{%endif%}
 							{%if modules.sidebarModule.sidemenu %}
 								{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
 							{%endif%}
-							{%if modules.sidebarModule.contact %}
-								{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-							{%endif%}
+							
 						</div>
 						{% endif %}
 						<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12'}}">

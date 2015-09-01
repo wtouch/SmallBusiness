@@ -237,6 +237,46 @@ define(['angular',
 				});   */
 			}
 			
+		}]).controller('applicationController',['$scope','$injector','dataService','$location','$routeParams','upload','$rootScope', function($scope,$injector,dataService,$location,routeParams,upload,$rootScope) {
+			$scope.path = "application/";
+			$scope.userinfo = {user_id:1}; // this is for uploading credentials	
+			$scope.upload = function(files,path,userInfo, picArr){ 
+				upload.upload(files,path,userInfo,function(data){
+					if(data.status === 'success'){
+						if(picArr == "resume"){
+							$scope.addapplicant.resume = data.data;
+						}
+						if(picArr == "resume"){
+							$scope.addapplicant.resume = data.data;
+						}
+					}
+				});
+			};
+			//to generate thumbnail
+			$scope.generateThumb = function(files){
+				//console.log(files);
+				$scope.addapplicant.resume= files;
+				upload.generateThumbs(files);
+			};
+			
+			$scope.open = function($event) {
+				$event.preventDefault();
+				$event.stopPropagation();
+				$scope.opened = true;
+			};
+
+			$scope.dateOptions = {
+				formatYear: 'yy',
+				startingDay: 1
+			};
+			
+			$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+			$scope.format = $scope.formats[0];
+			$scope.postData = function(addapplicant){
+				console.log(addapplicant);
+			};
+			
+			
 		}]).controller('businessController',['$scope', '$injector','$routeParams','$location','dataService','upload','modalService', '$rootScope', function($scope, $injector,$routeParams,$location,dataService,upload,modalService, $rootScope) {
 			$scope.oneAtATime = true;
 			$scope.addbusiness= {};

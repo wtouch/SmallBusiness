@@ -340,6 +340,25 @@ class portalManager{
 		return $response;
 	}
 	
+	// to add Applicant information
+	function addApplicant($body){
+		try{
+			$insert = $this->db->insert("applicant", $body);
+			if($insert["status"] != "success"){
+				throw new Exception("Your Application not sent. Please try again!");
+			}
+			
+			$response['data'] = $insert['data'];
+			$response["status"] = "success";
+			$response["message"] = "Your Application sent successfully";
+		}catch(Exception $e){
+            $response = $this->setResponse($data = array(),$city=null);
+            $response["status"] = "error";
+            $response["message"] = $e->getMessage();
+        }
+		return $response;
+	}
+	
 	function getCategories($city){
 		// query to get types & group by category
 		try{

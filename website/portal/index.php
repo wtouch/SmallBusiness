@@ -62,6 +62,10 @@ $app->post('/addbusiness', function() use($app, $config, $twig, $portal, $body) 
 	echo json_encode($response);
 
 });
+$app->post('/application', function() use($app, $config, $twig, $portal, $body) {
+	$response = $portal->addApplicant($body);
+	echo json_encode($response);
+});
 
  $app->get('/verified', function() use($app, $config, $twig, $portal,$body) {
 	$response = $portal->verifiCode($body=null);
