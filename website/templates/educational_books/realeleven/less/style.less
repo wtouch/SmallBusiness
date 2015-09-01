@@ -3,7 +3,7 @@
 	src:url('../fonts/Cinzel-Regular.otf');
 }
 @color : #c0c0c0; //border color
-@lightcolor : #0A4634 ;//heading 
+@lightcolor : #E49E1C ;//heading 
 @darkcolor : #5F230E ; //content back color
 @back : #dd4814; 	//# #5F230E//sec color
 @darkbackcolor : #97310e;//
@@ -28,14 +28,15 @@
 		font-family : 'Cinzel-Regular';
 	}
 	.sociallinks{
-		margin-top: 300px;
+		top: 50%;
+		width : 5px;
 		position: fixed;
 		z-index : 999;
 		ul{
 			list-style : none;
 			li{
 				transform: translateX(-138px);
-				padding: 4px 4px 4px 10px;
+				padding: 4px 0px 4px 10px;
 				background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
 				background : -moz-linear-gradient(top, @color -565%,@darkcolor);
 				background : linear-gradient(top, @color -565%,@darkcolor);
@@ -43,6 +44,7 @@
 				border-top-right-radius: 30px;
 				border-bottom-right-radius: 30px;
 				text-align : right;
+				width : 136px;
 				a{
 					color : @colorwhite;
 					&:hover{
@@ -51,7 +53,7 @@
 					}
 				}
 				img{
-					width : 40px;
+					width : 35px;
 					margin-left : 10px;
 					border : 2px solid @darkcolor;
 				}
@@ -77,7 +79,7 @@
 		}
 		img.logo{
 			height: 80px;
-			margin: 50px;	
+			margin: 50px 0px;	
 		}
 		.navbar-default {
 			background : -webkit-linear-gradient(top, @color -565%,@darkbackcolor);
@@ -168,7 +170,7 @@
 		}
 	}
 	main{ 
-		background-color:@darkbackcolor;
+		background-color:@lightcolor;
 		.back{
 			background-color: @back;
 			margin-top: 24px;
@@ -304,13 +306,14 @@
 		}
 	}
 	.btn-info, .btn-primary{
+		
 		&, &:focus, &:active, &[disabled]{
-			/*background : -webkit-linear-gradient(top, @darkcolor 60%,@darkbackcolor);
-			background : -moz-linear-gradient(top, @darkcolor ,@darkbackcolor);
-			background : linear-gradient(top, @darkcolor ,@darkbackcolor);*/
-			background-color:@darkcolor;
+			//background : -webkit-linear-gradient(top, @darkcolor 60%,@darkbackcolor);
+			//background : -moz-linear-gradient(top, @darkcolor ,@darkbackcolor);
+			//background : linear-gradient(top, @darkcolor ,@lightcolor);
+			background:@darkcolor;
 			color : @colorwhite;
-			border : 2px solid transparent;
+			border : 2px solid @back ;
 			border-radius : 0px;
 			font: 16px 'Cinzel-Regular', cursive;
 		}
