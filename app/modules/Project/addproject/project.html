@@ -63,28 +63,105 @@
 		</div>
 	</div>
 	
+	<div class="form-group">
+		<label for="buildup_area" class="col-sm-2 control-label">Built Up Area * </label>
+		<div class="col-sm-6">
+			<input type="text" id="buildup_area" class="form-control help-block" name="buildup_area" ng-model="project.project_info.buildup_area" ng-pattern="/^\d{0,9}[0-9]$/" required>
+			
+			<span ng-show="projectForm.buildup_area.$error.pattern && (projectForm.buildup_area.$dirty)" class="text-danger">Enter only no!</span>
+			<span class="text-danger" ng-show="projectForm.buildup_area.$dirty && projectForm.buildup_area.$invalid">
+			  <span ng-show="projectForm.buildup_area.$error.required">Required Field.</span>
+			</span>	
+		</div>							
+		<div class="col-sm-3">
+			<select class="form-control" name="build_unit" ng-model="project.project_info.build_unit"  title="" required >
+				<option selected value="">Unit Area</option>
+				<option value="Sq.Ft">Sq. Feet</option>
+				<option value="Cent">Cent</option>
+				<option value="Yard">Sq. Yard</option>
+				<option value="Acres">Acres</option>
+			</select>
+			<span class="text-danger" ng-show="projectForm.build_unit.$dirty && projectForm.build_unit.$invalid">
+				<span ng-show="projectForm.build_unit.$error.required">Required Field.</span>
+			</span>				 
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="land_area" class="col-sm-2 control-label ">Plot/ Land Area * </label>
+		<div class="col-sm-6">
+			<input type="text" id="land_area" class="form-control" name="land_area" ng-model="project.project_info.land_area"  ng-pattern="/^\d{0,9}[0-9]$/" required>
+			<span class="text-danger" ng-show="projectForm.land_area.$error.pattern && (projectForm.land_area.$dirty)" class="help-block">Enter only no.</span>
+			<span class="text-danger" ng-show="projectForm.land_area.$dirty && projectForm.land_area.$invalid">
+			  <span ng-show="projectForm.land_area.$error.required">Required Field.</span>
+			</span>	
+		</div>
+		<div class="col-sm-3">
+			<select class="form-control" name="built" ng-model="project.project_info.land_unit" required>
+				<option selected value="">Unit Area</option>
+				<option value="Feet">Sq.Feet</option>
+				<option value="Cent">Cent</option>
+				<option value="Yard">Sq.Yard</option>	
+				<option value="Acres">Acres</option>
+			</select>
+			<span class="text-danger" ng-show="projectForm.built.$dirty && projectForm.built.$invalid">
+				<span ng-show="projectForm.built.$error.required">Required Field.</span>
+			</span>					 
+		</div>				
+	</div>	
+	
+	<div class="form-group">
+		<label for="carpet_area" class="col-sm-2 control-label">Carpet Area </label>
+		<div class="col-sm-6">
+			<input type="text" id="carpet_area" class="form-control" name="carpet_area" ng-model="project.project_info.carpet_area" ng-pattern="/^\d{0,9}[0-9]$/" required>
+			<span class="text-danger" ng-show="projectForm.carpet_area.$error.pattern && (projectForm.carpet_area.$dirty)" class="help-block">Enter only no.</span>
+			<span class="text-danger" ng-show="projectForm.carpet_area.$dirty && projectForm.carpet_area.$invalid">
+				<span ng-show="projectForm.carpet_area.$error.required">Required Field.</span>
+			</span>		
+		</div>
+		<div class="col-sm-3">
+			<select class="form-control" name="builted" ng-model="project.project_info.carpet_unit" required>
+				<option selected value="">Unit Area</option>
+					<option value="Feet">Sq. Feet</option>
+					<option value="Cent">Cent</option>
+					<option value="Yard">Sq. Yard</option>
+					<option value="Acres">Acres</option>
+			</select>
+			<span class="text-danger" ng-show="projectForm.builted.$dirty && projectForm.builted.$invalid">
+				<span ng-show="projectForm.builted.$error.required">Required Field.</span>
+			</span>	
+					 
+		</div>				
+	</div>
+	
+	<div class="form-group">
+		<label for="price" class="col-sm-2 control-label"> Price </label>
+		<div class="col-sm-9">
+			<input type="text" id="price" class="form-control" name="price" ng-model="project.price" ng-pattern="/^\d{0,9}[0-9]$/" />
+			<span class="text-danger" ng-show="projectForm.price.$error.pattern && (projectForm.price.$dirty)" class="help-block">Enter only no.</span>
+			<span class="text-danger" ng-show="projectForm.price.$dirty && projectForm.price.$invalid">
+				<span ng-show="projectForm.price.$error.required">Required Field.</span>
+			</span>		
+		</div>
+	</div>
+	
 	<div class="form-group"> 
 		<label for="featured" class="col-sm-2 control-label">Featured *</label> 
-		<div class="col-sm-9">
+		<div class="col-sm-4">
 			<label class="radio-inline" >
 				<input type="radio" name="featured" id="yes" value="1"   ng-model="project.featured" checked> Yes
 			</label>
 			<label class="radio-inline" ng-model="project.featured">
 				<input type="radio" name="featured" id="no" value="0" ng-model="project.featured"> No
 			</label>										
-		</div>	
-	</div>
-	
-	<div class="form-group">
+		</div>
 		<label for="project_images" class="col-sm-2 control-label">Project Images</label>
-		<div class="col-sm-9">
 			<input type="file" id="project_images" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="uploadMultiple(project_images,project.user_id + path,userinfo,project)" ng-model="project_images">
 			<input type="hidden" ng-model="project.project_images">
-		</div>
 	</div>
 	
 	<div class="form-group">						 
-		<div class="col-sm-9 col-sm-offset-2">
+		<div class="col-sm-4 col-sm-offset-8">
 			<span class="thumbs" ng-repeat="(key, value) in project.project_images">
 				<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="project.imgkey = key; "/>
 				<span class="close" ng-click="removeImg(key, project.project_images)">X</span>
@@ -94,24 +171,20 @@
 
 	<div class="form-group">
 		<label for="builderName" class="col-sm-2 control-label">Builder Name *</label>
-			<div class="col-sm-9">
+			<div class="col-sm-4">
 				<input type="text" class="form-control" id="builderName" name="builderName" ng-model="project.builder.builder_name" required>
 				<span class="text-danger" ng-show="projectForm.builderName.$dirty && projectForm.builderName.$invalid">
 				<span ng-show="projectForm.builderName.$error.required">Required Field.</span>
 				</span>
 			</div>	
-	</div>
-	
-	<div class="form-group">
+		
 		<label for="builder_photo" class="col-sm-2 control-label">Builder Photo</label>
-		<div class="col-sm-9">
 			<input type="file" id="builder_photo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "uploads($files, project.user_id + path,userinfo,'builder_photo')" ng-model="builder_photo">
 			<input type="hidden" ng-model="project.builder.builder_photo">
-		</div>
 	</div>
 	
 	<div class="form-group">						 
-		<div class="col-sm-9 col-sm-offset-2">
+		<div class="col-sm-4 col-sm-offset-8">
 			<span class="thumbs" ng-if="project.builder.builder_photo">
 				<img class="img-thumbnail" width="40px" ng-src="{{project.builder.builder_photo.file_relative_path}}" ng-click="project.imgkey = key; "/>
 			</span>
@@ -120,24 +193,19 @@
 	
 	<div class="form-group">
 		<label for="OwnerName" class="col-sm-2 control-label">Owner Name *</label>
-			<div class="col-sm-9">
+			<div class="col-sm-4">
 				<input type="text"  class="form-control" id="OwnerName" name="OwnerName" ng-model="project.builder.owner_name" required>
 					<span class="text-danger" ng-show="projectForm.OwnerName.$dirty && projectForm.OwnerName.$invalid">
 					<span ng-show="projectForm.OwnerName.$error.required">Required Field.</span>
 					</span>
-			</div>	
-	</div>
-	
-	<div class="form-group">
-		<label for="owner_photo" class="col-sm-2 control-label">Owner Photo</label>
-		<div class="col-sm-9">
+			</div>
+			<label for="owner_photo" class="col-sm-2 control-label">Owner Photo</label>
 			<input type="file" id="owner_photo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "uploads($files, project.user_id + path,userinfo,'owner_photo')" ng-model="owner_photo">
 			<input type="hidden" ng-model="project.builder.owner_photo">
-		</div>
 	</div>
 	
 	<div class="form-group">						 
-		<div class="col-sm-9 col-sm-offset-2">
+		<div class="col-sm-4 col-sm-offset-8">
 			<span class="thumbs" ng-if="project.builder.owner_photo">
 				<img class="img-thumbnail" width="40px" ng-src="{{project.builder.owner_photo.file_relative_path}}" ng-click="project.imgkey = key; "/>
 			</span>
