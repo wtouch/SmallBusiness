@@ -12,7 +12,10 @@
 						<a href="properties/{{x.title}}/{{x.id}}"><h4>{{x.title}}</h4></a>
 						<div class="col-xs-4">
 							<div class="sliderImg">
-								<img src="{{x.property_images.0.file_relative_path}}"/>
+								<img src="{{x.property_images.0.file_relative_path}}" class="slimg"/>
+								{% if x.verified %}
+									<span  tooltip="Business Verified" ><img src="{{path}}img/verify.png" class="verify"/></span>
+								{% endif %}
 							</div>
 						</div>
 						<div class="col-xs-8 sliderDesc">
@@ -44,9 +47,7 @@
 							<div class="readmore">
 								<a href="properties/{{x.title}}/{{x.id}}" class="btn btn-info head">More Details</a>
 								 <a href="/enquiry?category={{x.category}}&id={{x.id}}&title={{x.title}}"class="btn btn-info head">Send Enquiry</a>
-								{% if x.verified %}
-									<span  tooltip="Business Verified" class="verify"><img src="{{path}}img/verify.png"/></span>
-								{% endif %}
+								
 							</div>
 						</div>
 					</div>
