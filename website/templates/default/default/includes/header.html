@@ -21,8 +21,8 @@
 		</div>
 		<div class="col-sm-12 col-md-6 text-right">
 			<div class="contactinfo">
-				<span>{{(data.contact_profile.telephone) ? 'Telephone : ' ~ data.contact_profile.telephone ~ '<br>' }}</span>
-				<span>Mobile : {{data.contact_profile.mobile}}</span><br> 
+				<p class="text-right"><b>Mobile :</b> {{data.contact_profile.mobile}}
+				{%if data.contact_profile.mobile %}/{{data.contact_profile.alternate_mobile}}{% endif %}</p>
 				<span>E-mail : {{data.contact_profile.email}}</span>
 			</div>
 		</div>

@@ -1,0 +1,397 @@
+@color : #F7CBCE;
+@lightcolor : #ff8087;
+@darkcolor : #074028;
+@back : #117E50;
+@darkbackcolor : #440A02;
+@lightbackcolor :#E3DBBE; 
+@colorblack : #000000;
+@colorwhite	: #ffffff;
+@import "property.less";
+@import "project.less";
+@import "product.less";
+@import "general.less";
+	*{
+		transition : 300ms;
+	}
+	.container{
+		width : 992px !important;
+	}
+	html{
+		min-width : 1022px;
+	}
+	body{
+		background-image:url('../img/im1.jpg');
+		//background-color:#F8981D;
+		background-repeat : repeat;
+	}
+	.sociallinks{
+		top: 50%;
+		width : 5px;
+		position: fixed;
+		z-index : 999;
+		ul{
+			list-style : none;
+			li{
+				transform: translateX(-125px);
+				padding: 4px 4px 4px 10px;
+				background : -webkit-linear-gradient(top, @back, @darkcolor, @back);
+				background : -moz-linear-gradient(top, @back, @darkcolor, @back);
+				background : linear-gradient(top, @back, @darkcolor, @back);
+				margin: 5px;
+				border-top-right-radius: 30px;
+				border-bottom-right-radius: 30px;
+				text-align : right;
+				width : 130px;
+				a{
+					color:@colorwhite;
+					//font: 1.8em 'GreatVibes-Regular' cursive;
+					&:hover{
+						color:@colorwhite;
+						text-decoration : underline;
+					}
+				}
+				img{
+					width : 30px;
+					margin-left : 10px;
+					border : 2px solid @colorwhite;
+				}
+				span{
+					height : 20px;
+					width :20px;
+					margin-right: 6px;
+				}
+				
+				&:hover{
+					  transform: translateX(-45px);
+				}
+			}
+		}
+	}
+	
+	.thumbnail{
+		background-color : @lightbackcolor;
+	}
+	
+	header{	
+		.head{
+			background-image: url('bg_image.png');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center; 
+		}
+		img.logo{
+			height: 80px;
+			margin: 50px 0px;	
+		}
+		.navbar-default {
+			//background : -webkit-linear-gradient(top, @back, @darkcolor, @back);
+			//background : -moz-linear-gradient(top, @back, @darkcolor, @back);
+			//background : linear-gradient(top, @back, @darkcolor, @back);
+			background-color : @back;
+			border : none;
+			.navbar-nav{
+				>li{
+					position :relative;
+					>a{
+						color : @color;
+						text-shadow: 1px 1px @colorblack;
+						border-right: 1px solid @darkcolor; 
+						text-transform : uppercase;
+						font: bold 15px/1.5em Arial, Helvetica, sans-serif;
+					}
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+						color: @colorwhite;
+						cursor: pointer;
+						text-shadow: 1px 1px @colorblack;
+						background: @darkcolor;
+					}
+					ul{
+						display : none;
+						position : absolute;
+						width : 270px;
+						z-index : 999;
+						background : -webkit-linear-gradient(top, @back, @darkbackcolor 157%);
+						background : -moz-linear-gradient(top, @back, @darkbackcolor 157%);
+						background : linear-gradient(top, @back, @darkbackcolor 157%);
+						padding : 15px;
+						list-style : none;
+						text-align : left;
+						border : 1px solid @darkcolor;
+						box-shadow : 0 0 15px 0px @colorblack;
+						border-radius : 7px;
+						>li{
+							padding : 10px;
+							position : relative;
+							>a{
+								text-decoration:none;
+								color : @color;
+							}
+							&:hover{
+								background: @darkcolor;
+								a{
+									color : @colorwhite;
+									text-decoration : underline;
+								}
+							}
+							
+							> ul{
+								display: none;
+								list-style :none;
+								left: 70%;
+								top: 10px;
+								border-top-left-radius: 0px;
+								>li{
+									>a{
+										text-decoration:none;
+										color : @color;
+									}
+									&:hover{
+										background: @darkcolor;
+										a{
+											color : @colorwhite;
+											text-decoration : underline;
+										}
+									}
+								}
+							}
+							&:hover > ul {
+								display: block;
+							}
+						}
+					}
+					&:hover{
+						>ul{
+							display:block;
+						}
+					}
+				}
+			}
+			.navbar-collapse{
+				padding:0px;
+			}
+		}
+	}
+	main{ 
+		.back{
+			background-image:url('../img/bg.jpg');
+			background-repeat : repeat;
+			padding: 20px;
+				.featuredProperty, .featuredProject{
+					padding:25px 10px 0px;
+				}
+				.sidebarModule{
+					padding:20px 5px 0px;
+					.panel{
+						margin-bottom : 0px;
+					}
+					.panel-body{
+						padding-bottom : 1px;
+					}
+				}
+				.contactus{
+					padding:20px 10px 10px;
+				}
+				.featuredProperty, .featuredProject, .sidebarModule{
+					margin: 30px 0px 0px; 
+					border:1px solid @darkbackcolor;
+					border-radius:10px;
+					background-color : @lightbackcolor;
+					position:relative;
+					h3{
+						position : absolute;
+						left:10px;
+						top:-37px;
+						background-color : @back;
+						color : @colorwhite;
+						padding:4px;
+						font:16px 'Alex Brush', cursive;
+						padding: 7px 12px;
+					}
+					.bxslider, .bxslider1{
+						margin : 0px;
+					}
+					.bxslider1{
+						padding-left: 15px;
+					}
+					.bxslider{
+						padding : 0px;
+					}
+					.slide1{
+						height : 263px;
+					}
+					.slide {
+						a{
+							color : @darkcolor;
+							text-decoration:none;
+							margin:30px;
+							.slideimg{
+								border: 1px #999 solid;
+								margin: auto;
+								max-height:200px;
+								max-width:200px;
+							}
+							.slideimg:hover{
+								border: 1px #ccc solid
+							}
+							.slideimg1{
+								border: 1px #999 solid;
+								border-radius:12px;
+								padding:7px;
+								margin: auto;
+								max-height:200px;
+								max-width:200px;
+							}
+							.slideimg1:hover{
+								border: 1px #ccc solid
+								}
+						}
+						.slidepara{
+							margin:15px 20px;
+						}
+					}
+					.bx-wrapper .bx-pager.bx-default-pager{
+						padding-top:0px;
+						a{
+							background: #aaa;
+						}
+						a:hover{
+							background: #6d1a1f;
+						}
+						a.active{
+							background: #6d1a1f;
+						}
+					}
+				}
+				.content{
+					border:1px solid @darkbackcolor;
+					border-radius:10px;
+					background-color : @lightbackcolor;
+					padding : 0px 15px 10px;
+				}
+			}
+			.featuredProperty{
+				.sections{
+					height : 250px;
+				}
+			}
+		article{ 
+			padding:15px;
+			a{
+				color:#933;
+			}
+			a:hover,a:focus{
+				color:#633;
+				text-decoration: none;
+			}
+		}
+	}
+	
+	//global css
+	a{
+		color : @darkcolor;
+		&:hover{
+			color : @back;
+		}
+	}
+	h2, h3, h4{
+		font : 16px 'Alex Brush', cursive;
+	}
+	h2{
+		text-align : center;
+	}
+	h3, h4{
+		color : @darkcolor;
+	}
+	h1, h2{
+		color : @darkbackcolor;
+		font : 2.5em/1em 'Alex Brush', cursive;
+	}
+	.btn-info, .btn-primary{
+		&, &:focus, &:active, &[disabled]{
+			background-color : @back;
+			color : @colorwhite;
+			transition : padding 250ms;
+			border : 1px solid transparent;
+			border-radius : 0px;
+			font-weight: bold;
+			font: 16px 'Alex Brush', cursive;
+		}
+		&:hover{
+			//background-color:@darkcolor;
+			background : -webkit-linear-gradient(right, @back, @lightbackcolor,@back);
+			background : -moz-linear-gradient(right, @back, @lightbackcolor,@back);
+			background : linear-gradient(right, @back, @lightbackcolor,@back);
+			border: 1px solid @back;
+			color: @back;
+		}
+	}
+	.btn-info:hover{
+		padding : 6px 30px;
+	}
+	.btn + .btn{
+		margin-left : 3px;
+	}
+	hr{
+		border-style : dashed;
+		border-color: @back;
+		margin :5px 0px;
+	}
+	.btn-link{
+		color : @back;
+		padding-left : 0px;
+		font: 17px 'Alex Brush', cursive;
+		&:hover{
+			color : @darkcolor;
+		}
+	}
+	.send{
+		margin-right : 8px;
+	}
+	.panel{
+		background-color : @lightbackcolor;
+	}
+	.panel-default, .thumbnail{
+		border-color : @darkbackcolor;
+	}
+	
+	.sidebarModule.enquiry{
+		.btn-info{
+			border-radius : 5px;
+			&, &:focus, &:active, &[disabled]{
+				background-color : @back;
+				color : @colorwhite;
+				padding : 10px 20px;
+				border : none;
+				border-radius : 0px;
+				font: 16px 'Alex Brush', cursive;
+			}
+			&:hover{
+				background-color:@darkcolor;
+			}
+		}
+		
+	}
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
+	{
+		background-color : @darkcolor;
+		color : @color;
+		border : 1px solid @darkcolor;
+	}
+	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
+		background-color : @lightbackcolor;
+		border : 1px solid @darkcolor;
+		color : @darkcolor;
+	}
+	footer{
+		background-image : -webkit-linear-gradient(top, @back, @darkbackcolor 157%);;
+		background-image : -moz-linear-gradient(top, @back, @darkbackcolor 157%);;
+		background-image : linear-gradient(top, @back, @darkbackcolor 157%);;
+		color : @color;
+		padding : 20px;
+		p{
+			margin : 0;
+		}
+		a, a:hover{
+			color : @color;
+		}
+	}
