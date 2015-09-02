@@ -26,7 +26,10 @@
 						<div class="shadow">
 							<a href="properties/{{x.title}}/{{x.id}}">
 								<div class="imgborder">
-									<img src="{{x.property_images.0.file_relative_path}}" alt="" style="max-width:93%" />
+									<img src="{{x.property_images.0.file_relative_path}}" alt="" style="max-width:93%" class="slimg"/>
+									{% if x.verified %}
+										<span  tooltip="Business Verified" ><img src="{{path}}img/verify.png" class="verify"/></span>
+									{% endif %}
 								</div>
 							</a>
 							<div class="proj-title">
