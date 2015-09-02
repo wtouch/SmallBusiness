@@ -29,17 +29,14 @@
 	</div>
 	<div class="col-xs-3">
 		<div class="projsnap">
-			{% if home_project.builder.builder_photo %}
-				<img src="{{home_project.builder.builder_photo.file_relative_path}}" class="img-responsive center-block"/>
-			{% endif %}
-			<p>Project Name : {{home_project.title}}</p>
+			<h5>Project Name : {{home_project.title}}</h5>
 			<p>Project Type : {{home_project.type}}</p>
 			{% if home_project.location %}
 				<p>Location : {{home_project.location}}</p>
 			{% endif %}
-			<div class="viewproperty text-center">
-				<a href="/properties?project_id={{home_project.id}}&homeProject=true" class="projlink">View Properties of this Project</a>
-			</div>	
+			<p>Area : {{home_project.area}} Sq.ft</p>
+			<p>{{home_project.projectsubtitle}}</p>
+			<p>Price : {{home_project.price}}</p>
 		</div>
 	</div>
 </div>
