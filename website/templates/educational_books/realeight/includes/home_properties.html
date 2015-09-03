@@ -8,9 +8,10 @@
 			{% for x in home_properties if break == 0 %}
 			<li class="text-center">
 				<div class="sliderimg">
-					<a href="properties/{{x.title}}/{{x.id}}">
-						<img class="img-responsive center-block" src="{{x.property_images.0.file_relative_path}}" alt="{{x.title}}"/>
-					</a>
+					<img class="img-responsive center-block slimg" src="{{x.property_images.0.file_relative_path}}" alt="{{x.title}}"/>
+					{% if x.verified %}
+						<span  tooltip="Business Verified" ><img src="{{path}}img/verify.png" class="verify"/></span>
+					{% endif %}
 				</div>
 				<div class="readmore">
 					<a href="properties/{{x.title}}/{{x.id}}">

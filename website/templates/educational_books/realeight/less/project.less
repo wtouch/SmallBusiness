@@ -1,23 +1,26 @@
 //homeproject css
 .homeproject {
+	position : relative;
 	width : 930px;
 	height : 400px;
 	display: block;
   	margin-left: auto;
 	margin-right: auto;
-	.bx-viewport{
-		height:350px;
+	.bx-wrapper{
+		overflow : hidden;
 		.carousslider li{
 			left:0;
 		}
 		img{
-			height:350px;
+			min-height:350px;
 		}
 	}
-	.projectnav,.projsnap {
+	.bx-wrapper,.projectnav,.projsnap {
 		border : 5px solid @lightcolor;
-		background-color: @darkbackcolor;
 		height : 350px;
+	}
+	.projectnav,.projsnap {
+		background-color: @darkbackcolor;
 		.nav-stacked{
 			background-color: @darkbackcolor;
 			margin: 5px;
@@ -37,47 +40,26 @@
 		}
 	}
 	.projsnap{
+		text-align : center;
 		p{
-			padding-left : 10px;
+			margin: 4px 10px;
+			padding: 13px;
 			color : @colorwhite;
-		}
-		img{
-			height : 110px;
-			margin-top: 10px;
-			margin-bottom: 10px;
-			border : 1px solid @color;
-			border-radius : 5px;
-			padding :4px;
-		}
-		.viewproperty{
-			margin-top : 25px;
-			a{
-				font-size: 16px;
-			}
-		}
-	}
-	#carousel {
-		.carousel-inner {
-			border: 5px solid @lightcolor;
-			.carousel-caption{
-				h2{
-					border : none;
-				}
-			}
-			.item{
-				overflow: hidden;
-				height : 340px;
-				img{
-					min-height : 340px;
-				}
-			}
-		}
-		a.left.carousel-control, a.right.carousel-control {
-			background: none;
+			font: 1.7em/1.1em  'Italianno-Regular-OTF' cursive;
 		}
 	}
 }
-
+.homeproject::after{
+	position : absolute;
+	content : "";
+	background-image : url('../img/lady.png');
+	background-size: 100% 100%;
+	left :220px;
+	top : 15px;
+	z-index: 999;
+	height : 330px;
+	width : 120px;
+}
 //css for project list
 	.projlist{
 		.project{

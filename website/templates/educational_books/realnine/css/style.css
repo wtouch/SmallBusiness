@@ -21,15 +21,6 @@
   padding-left: 10px;
   list-style: none;
 }
-.featuredProperty .bxslider1 li .verify {
-  width: 50%;
-  border: none;
-  margin-left: 10px;
-  position: absolute;
-  right: -10px;
-  bottom: 0;
-  z-index: 999;
-}
 .featuredProperty .bxslider1 li .sliderImg {
   height: 150px;
   width: 200px;
@@ -43,6 +34,15 @@
 }
 .featuredProperty .bxslider1 li .sliderImg:hover {
   border: 2px solid #02071a;
+}
+.featuredProperty .bxslider1 li .verify {
+  width: 55%;
+  border: none;
+  margin-left: 10px;
+  position: absolute;
+  right: -15px;
+  bottom: -10px;
+  z-index: 999;
 }
 .featuredProperty .bxslider1 li .table {
   margin-bottom: 10px;
@@ -317,6 +317,7 @@
 }
 .homeproject {
   margin-top: 20px;
+  position: relative;
   /*margin-bottom:10px;*/
 }
 .homeproject #carousel {
@@ -360,8 +361,8 @@
 .homeproject .projsnap {
   box-shadow: 0px 0px 10px 0px black;
   border: 5px solid #ffffff;
+  text-align: center;
   margin-top: 5px;
-  /*background-color:@contentback;*/
   border-radius: 4px;
   padding: 5px;
   height: 312px;
@@ -385,6 +386,11 @@
   color: #005596;
   text-decoration: underline;
 }
+.homeproject .projsnap p {
+  margin: 5px 5px;
+  padding: 7px;
+  border: 1px solid #005596;
+}
 .homeproject #carousel {
   height: 312px;
   margin-top: 5px;
@@ -401,6 +407,17 @@
 .homeproject #carousel a.left.carousel-control,
 .homeproject #carousel a.right.carousel-control {
   background: none;
+}
+.homeproject::after {
+  position: absolute;
+  content: "";
+  background-image: url('../img/lady.png');
+  background-size: 100% 100%;
+  right: 200px;
+  top: 15px;
+  z-index: 999;
+  height: 290px;
+  width: 120px;
 }
 .projlist {
   border: 1px solid #b8b8c3;
@@ -1275,6 +1292,9 @@ footer .footlink ul li a {
 .enquiry .panel-default .btn-info,
 .searchProp .panel-default .btn-info {
   color: #ffffff;
+}
+.services {
+  border: none;
 }
 .formsec {
   color: #E5DFDF;

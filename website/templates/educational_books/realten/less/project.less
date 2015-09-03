@@ -25,6 +25,7 @@
     100%  {left:0px; top:0px;}
 }
 .homeproject {
+	position : relative;
 	.projectCarousal{
 		position: relative;
 		height : 400px;
@@ -245,7 +246,17 @@
 		}
 	}
 }
-
+.homeproject::after{
+	position : absolute;
+	content : "";
+	background-image : url('../img/lady.png');
+	background-size: 100% 100%;
+	right :-45px;
+	top : 40px;
+	z-index: 999;
+	height : 356px;
+	width : 150px;
+}
 // single project nav css
 .project{
 	.navbar{

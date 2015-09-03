@@ -69,6 +69,7 @@
 	
 .homeproject {
 	margin-top : 20px;
+	position : relative;
 	#carousel
 	{
 		box-shadow : 0px 0px 10px 0px black;
@@ -114,9 +115,8 @@
 	.projsnap{
 		box-shadow : 0px 0px 10px 0px black;
 		border : 5px solid @colorwhite;
-		
+		text-align : center;
 		margin-top : 5px;
-		/*background-color:@contentback;*/
 		border-radius : 4px;
 		padding:5px;
 		height:312px;
@@ -139,6 +139,11 @@
 					text-decoration : underline;
 				}
 			}
+		}
+		p{
+			margin: 5px 5px;
+			padding: 7px;
+			border : 1px solid @back;
 		}
 	}
 	
@@ -164,7 +169,17 @@
 		}
 	}
 }
-
+.homeproject::after{
+	position : absolute;
+	content : "";
+	background-image : url('../img/lady.png');
+	background-size: 100% 100%;
+	right :200px;
+	top : 15px;
+	z-index: 999;
+	height : 290px;
+	width : 120px;
+}
 //css for single project & project list
 	.projlist{
 		.panel-default{
