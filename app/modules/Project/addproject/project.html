@@ -66,9 +66,9 @@
 	<div class="form-group">
 		<label for="buildup_area" class="col-sm-2 control-label">Built Up Area * </label>
 		<div class="col-sm-6">
-			<input type="text" id="buildup_area" class="form-control help-block" name="buildup_area" ng-model="project.project_info.buildup_area" ng-pattern="/^\d{0,9}[0-9]$/" required>
+			<input type="text" id="buildup_area" class="form-control help-block" name="buildup_area" ng-model="project.project_info.buildup_area" required>
 			
-			<span ng-show="projectForm.buildup_area.$error.pattern && (projectForm.buildup_area.$dirty)" class="text-danger">Enter only no!</span>
+		<!-- 	<span ng-show="projectForm.buildup_area.$error.pattern && (projectForm.buildup_area.$dirty)" class="text-danger">Enter only no!</span> -->
 			<span class="text-danger" ng-show="projectForm.buildup_area.$dirty && projectForm.buildup_area.$invalid">
 			  <span ng-show="projectForm.buildup_area.$error.required">Required Field.</span>
 			</span>	
@@ -113,8 +113,8 @@
 	<div class="form-group">
 		<label for="carpet_area" class="col-sm-2 control-label">Carpet Area </label>
 		<div class="col-sm-6">
-			<input type="text" id="carpet_area" class="form-control" name="carpet_area" ng-model="project.project_info.carpet_area" ng-pattern="/^\d{0,9}[0-9]$/" required>
-			<span class="text-danger" ng-show="projectForm.carpet_area.$error.pattern && (projectForm.carpet_area.$dirty)" class="help-block">Enter only no.</span>
+			<input type="text" id="carpet_area" class="form-control" name="carpet_area" ng-model="project.project_info.carpet_area"  required>
+			<!-- <span class="text-danger" ng-show="projectForm.carpet_area.$error.pattern && (projectForm.carpet_area.$dirty)" class="help-block">Enter only no.</span> -->
 			<span class="text-danger" ng-show="projectForm.carpet_area.$dirty && projectForm.carpet_area.$invalid">
 				<span ng-show="projectForm.carpet_area.$error.required">Required Field.</span>
 			</span>		
@@ -137,8 +137,7 @@
 	<div class="form-group">
 		<label for="price" class="col-sm-2 control-label"> Price </label>
 		<div class="col-sm-9">
-			<input type="text" id="price" class="form-control" name="price" ng-model="project.price" ng-pattern="/^\d{0,9}[0-9]$/" />
-			<span class="text-danger" ng-show="projectForm.price.$error.pattern && (projectForm.price.$dirty)" class="help-block">Enter only no.</span>
+			<input type="text" id="price" class="form-control" name="price" ng-model="project.price"  />
 			<span class="text-danger" ng-show="projectForm.price.$dirty && projectForm.price.$invalid">
 				<span ng-show="projectForm.price.$error.required">Required Field.</span>
 			</span>		
