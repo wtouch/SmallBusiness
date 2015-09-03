@@ -259,6 +259,7 @@
   margin-bottom: 20px;
 }
 .homeproject .bx-viewport {
+  position: ralative;
   border: 4px solid #ba8c5f;
   border-bottom-left-radius: 30px;
   border-top-right-radius: 35px;
@@ -281,6 +282,17 @@
   border-color: #e0cdb9;
   border-bottom-left-radius: 35px;
   border-top-right-radius: 35px;
+}
+.homeproject .bx-viewport::after {
+  position: absolute;
+  content: "";
+  background-image: url('../img/lady.png');
+  background-size: 100% 100%;
+  right: 1px;
+  top: 21px;
+  z-index: 999;
+  height: 290px;
+  width: 120px;
 }
 .homeproject .projectnav,
 .homeproject .projsnap {
@@ -332,7 +344,7 @@
   padding: 10px;
 }
 .homeproject .projsnap p {
-  border-bottom: 1px solid #e0cdb9;
+  border-bottom: 1px solid #ba8c5f;
   padding: 6px;
 }
 .homeproject .projsnap p:last-child {
