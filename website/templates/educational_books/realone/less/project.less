@@ -28,7 +28,7 @@
 	}
 }
 .homeproject {
-	
+	position : relative;
 	.projectCarousal{
 		position : relative;
 		border : 5px solid @colorwhite;
@@ -52,6 +52,18 @@
 		}
 		
 	}
+	
+	.projectCarousal::after{
+	position : absolute;
+	content : "";
+	background-image : url('../img/lady.png');
+	background-size: 100% 100%;
+	right :200px;
+	bottom : -2px;
+	z-index: 999;
+	height : 290px;
+	width : 120px;
+}
 	.projectnav, .projsnap {
 		position : absolute;
 		background : linear-gradient(@back, @color);
@@ -152,6 +164,9 @@
 		}
 	}
 }
+
+
+
 
 // single project nav css
 .project{
