@@ -33,11 +33,20 @@
   padding: 4px;
   border: 4px solid transparent;
 }
-.featuredProperty .bxslider1 li .sliderImg img {
+.featuredProperty .bxslider1 li .sliderImg .slimg {
   min-height: 150px;
 }
 .featuredProperty .bxslider1 li .sliderImg:hover {
   border: 4px solid #18012b;
+}
+.featuredProperty .bxslider1 li .verify {
+  width: 50%;
+  border: none;
+  margin-left: 10px;
+  position: absolute;
+  right: -4px;
+  bottom: -12px;
+  z-index: 999;
 }
 .featuredProperty .bxslider1 li .sliderDesc .table {
   margin-bottom: 10px;
@@ -222,6 +231,7 @@
   margin-top: 10px;
 }
 .homeproject {
+  position: relative;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -270,6 +280,9 @@
   overflow: hidden;
   height: 303px;
 }
+.homeproject .projsnap {
+  text-align: center;
+}
 .homeproject .projsnap img {
   max-height: 110px;
   margin-top: 10px;
@@ -279,7 +292,23 @@
   padding: 4px;
 }
 .homeproject .projsnap p {
-  margin: 0 10px 10px;
+  margin: 0px 10px;
+  padding: 13px;
+  border-bottom: 1px solid #18012b;
+}
+.homeproject .projsnap p:last-child {
+  border: none;
+}
+.homeproject::after {
+  position: absolute;
+  content: "";
+  background-image: url('../img/lady.png');
+  background-size: 100% 100%;
+  right: 200px;
+  top: 15px;
+  z-index: 999;
+  height: 290px;
+  width: 120px;
 }
 .projlist .project .thumbnail {
   height: 385px;
@@ -831,12 +860,12 @@ h1,
 h2 {
   text-align: center;
 }
-a {
-  color: #421266;
-}
 .btn-link {
-  color: #ffffff;
   padding-left: 0px;
+}
+a,
+.btn-link {
+  color: #421266;
 }
 a:hover,
 .btn-link:hover {
