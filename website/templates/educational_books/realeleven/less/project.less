@@ -50,7 +50,7 @@
 .homeproject {
 	margin-top:10px;
 	margin-bottom :20px;
-	
+	position:relative;
 	.bx-viewport{
 		border :4px solid @color;
 		border-bottom-left-radius: 30px;
@@ -105,6 +105,14 @@
 		}
 	}
 	.projsnap{
+		p{
+			margin: 0px 10px;
+			padding: 10px;
+			border-bottom : 1px solid @colorwhite;
+			&:last-child{
+				border : none;
+			}
+		}
 		padding : 0px 10px;
 		img{
 			height : 110px;
@@ -160,7 +168,18 @@
 		}
 	}
 }
+.homeproject::after{
+	position : absolute;
+	content : "";
+	background-image : url('../img/lady.png');
+	background-size: 100% 100%;
+	right: 210px;
+    top: 16px;
+    z-index: 999;
+    height: 297px;
+    width: 120px;
 
+}
 //css for single project & project list
 	.projlist{
 		background-color:@back;

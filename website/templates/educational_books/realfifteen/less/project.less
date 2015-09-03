@@ -42,6 +42,7 @@
 	}
 }
 .homeproject {
+	position : relative;
 	margin-top:10px;
 	margin-bottom :20px;
 	position: relative;
@@ -67,6 +68,17 @@
 			}
 		}
 		
+	}
+	.projectCarousal::after{
+		position : absolute;
+		content : "";
+		background-image : url('../img/lady.png');
+		background-size: 100% 100%;
+		right :200px;
+		bottom : -2px;
+		z-index: 999;
+		height : 290px;
+		width : 120px;
 	}
 	.projectnav, .projsnap {
 		position : absolute;
@@ -99,14 +111,6 @@
 					text-decoration : none;
 					/*background : linear-gradient(@darkcolor, @color);*/
 					background: linear-gradient(#F57F17 75%,#F9A825);
-					
-					
-					
-					
-					
-					
-					
-					
 					color : @colorwhite;
 					transform: translateX(-50px);
 					width: 315px;
@@ -119,11 +123,15 @@
 		}
 	}
 	.projsnap{
+		p{
+		
+			padding:6px;
+			
+		}
 		right : 0;
 		padding-left: 90px !important;
-		padding-top: 5px !important;
-		padding : 5px 15px;
-		right : 10px;
+		padding-top: 12px !important;
+		padding-right: 10px !important;
 		text-align : center;
 		img{
 			height : 110px;
@@ -147,6 +155,17 @@
 			}
 		}
 	}
+	/*.homeproject::after{
+		position : absolute;
+		content : "";
+		background-image : url('../img/lady.png');
+		background-size: 100% 100%;
+		right: 213px;
+		top: 10px;
+		z-index: 999;
+		height: 305px;
+		width: 120px;
+	}*/
 	#carousel {
 		.carousel-inner {
 			.item{

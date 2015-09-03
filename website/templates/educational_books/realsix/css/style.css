@@ -202,6 +202,7 @@
   }
 }
 .homeproject {
+  position: relative;
   margin-top: 10px;
   margin-bottom: 20px;
 }
@@ -293,6 +294,17 @@
 .homeproject #carousel a.left.carousel-control,
 .homeproject #carousel a.right.carousel-control {
   background: none;
+}
+.homeproject::after {
+  position: absolute;
+  content: "";
+  background-image: url('../img/lady.png');
+  background-size: 100% 100%;
+  right: 213px;
+  top: 10px;
+  z-index: 999;
+  height: 305px;
+  width: 120px;
 }
 .bxslider li {
   height: 325px;
@@ -907,7 +919,7 @@ body {
 .content {
   background-color: #171600;
   border-radius: 7px;
-  margin-top: 15px;
+  margin-top: 35%;
   padding: 10px 20px 30px;
 }
 a {
