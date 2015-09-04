@@ -44,6 +44,17 @@ $app->get('/addbusiness', function() use($app, $config, $twig, $portal) {
 	$template = $twig->loadTemplate("addbusiness.html");
 	$template->display($response);
 });
+$app->get('/application', function() use($app, $config, $twig, $portal) {
+	$response = $portal->verifiCode($city=null);
+	$template = $twig->loadTemplate("application.html");
+	$template->display($response);
+});
+$app->post('/application', function() use($app, $config, $twig, $portal, $body) {
+	
+	$response = $portal->addApplicant($body);
+	
+	echo json_encode($response);
+});
 $app->get('/postrequirement', function() use($app, $config, $twig, $portal) {
 	$response = $portal->verifiCode($city=null);
 	$template = $twig->loadTemplate("enquiry.html");
@@ -62,10 +73,7 @@ $app->post('/addbusiness', function() use($app, $config, $twig, $portal, $body) 
 	echo json_encode($response);
 
 });
-$app->post('/application', function() use($app, $config, $twig, $portal, $body) {
-	$response = $portal->addApplicant($body);
-	echo json_encode($response);
-});
+
 
  $app->get('/verified', function() use($app, $config, $twig, $portal,$body) {
 	$response = $portal->verifiCode($body=null);

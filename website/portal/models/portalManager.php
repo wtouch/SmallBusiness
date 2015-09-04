@@ -342,8 +342,10 @@ class portalManager{
 	
 	// to add Applicant information
 	function addApplicant($body){
+		
 		try{
 			$insert = $this->db->insert("applicant", $body);
+			echo $this->db->insert("applicant", $body);
 			if($insert["status"] != "success"){
 				throw new Exception("Your Application not sent. Please try again!");
 			}

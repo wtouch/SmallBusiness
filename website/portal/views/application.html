@@ -12,242 +12,239 @@
 		{%if status == "error" %}
 			{% include 'includes/error.html' ignore missing %}
 			
-		{%elseif mobilestatus != "success" and emailstatus != "success" %}
-			{% include 'loginuser.html' ignore missing %}
+		
 
-		{% elseif mobilestatus == "success" and emailstatus == "success" and status == "success" %}
-
-<main>
-	<h4> Apply Here.</h4>
-	<div class="row" ng-controller="applicationController">
-		<form name="applicationForm" role="form" class="form-horizontal" ng-submit="applicationForm.$valid" novalidate>{{addapplicant}}
-		<!-- <accordion close-others="oneAtATime">
-			<accordion-group heading="Basic Information" is-open="status.isFirstOpen" > -->
-				<div class="form-group">
-					<label for="text" class="col-sm-2 control-label"> * Name</label>
-					<div class="col-sm-8">
-						<input type="text" class="form-control" id="name" name="name" placeholder="Full Name" ng-model="addapplicant.name" required/>
-						<span class="from-control" ng-show="applicationForm.name.$dirty && a.name.$invalid">
-							<span ng-show="applicationForm.name.$error.required" class="text-danger">Required Field.</span>
-						</span>
-					</div>
-				</div>
-				<div class="form-group">	
-					<label  for="email" class="col-sm-2 control-label">* Email </label>
-					<div class="col-sm-8">
-						<input type="Email" class="form-control" id="email" name="email" ng-model="addapplicant.email" placeholder="example@gmail.com" required />
-						<span ng-show="applicationForm.email.$dirty && applicationForm.email.$invalid">
-							<span class="text-danger" ng-show="applicationForm.email.$error.required">Email address required.</span>
-							<span class="text-danger" ng-show="applicationForm.email.$error.email">Invalid Email address.</span>
-						</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="phone" class="col-sm-2 control-label"> * Phone </label>
-					<div class="col-sm-8">
-						<input type="text" id="phone" class="form-control" name="phone" ng-model="addapplicant.contact" placeholder="Your Contact No" ng-pattern="/(7|8|9)\d{8}$/" maxlength="10" required>
-						<span ng-show="applicationForm.phone.$dirty && applicationForm.phone.$invalid">
-							<span class="text-danger" ng-show="applicationForm.phone.$error.pattern && (applicationForm.phone.$dirty || submitted)">Enter a Valid Contact Number.</span>
-						</span>
-						
-					</div>				
-				</div>
-				<div class="form-group">
-					<label  for="date" class="col-sm-2 control-label">* Birth Date</label>
-					<div class="col-sm-8">
-						<div class="input-group">
-							<input type="text" placeholder="YYYY-DD-MM" id="date" name="date" class="form-control" ng-model="addapplicant.date" datepicker-popup="{{format}}" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)" />
-							<span class="input-group-btn">
-								<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-							</span>
+			<main>
+				<h4> Apply Here.</h4>
+				<div class="row" ng-controller="applicationController">
+					<form name="applicationForm" role="form" class="form-horizontal" ng-submit="applicationForm.$valid" novalidate>{{addapplicant}}
+					<!-- <accordion close-others="oneAtATime">
+						<accordion-group heading="Basic Information" is-open="status.isFirstOpen" > -->
+							<div class="form-group">
+								<label for="text" class="col-sm-2 control-label"> * Name</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="name" name="name" placeholder="Full Name" ng-model="addapplicant.name" required/>
+									<span class="from-control" ng-show="applicationForm.name.$dirty && a.name.$invalid">
+										<span ng-show="applicationForm.name.$error.required" class="text-danger">Required Field.</span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label  for="email" class="col-sm-2 control-label">* Email </label>
+								<div class="col-sm-8">
+									<input type="Email" class="form-control" id="email" name="email" ng-model="addapplicant.email" placeholder="example@gmail.com" required />
+									<span ng-show="applicationForm.email.$dirty && applicationForm.email.$invalid">
+										<span class="text-danger" ng-show="applicationForm.email.$error.required">Email address required.</span>
+										<span class="text-danger" ng-show="applicationForm.email.$error.email">Invalid Email address.</span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="phone" class="col-sm-2 control-label"> * Phone </label>
+								<div class="col-sm-8">
+									<input type="text" id="phone" class="form-control" name="phone" ng-model="addapplicant.contact" placeholder="Your Contact No" ng-pattern="/(7|8|9)\d{8}$/" maxlength="10" required>
+									<span ng-show="applicationForm.phone.$dirty && applicationForm.phone.$invalid">
+										<span class="text-danger" ng-show="applicationForm.phone.$error.pattern && (applicationForm.phone.$dirty || submitted)">Enter a Valid Contact Number.</span>
+									</span>
+									
+								</div>				
+							</div>
+							<div class="form-group">
+								<label  for="date" class="col-sm-2 control-label">* Birth Date</label>
+								<div class="col-sm-8">
+									<div class="input-group">
+										<input type="text" placeholder="YYYY-DD-MM" id="date" name="date" class="form-control" ng-model="addapplicant.date" datepicker-popup="{{format}}" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open($event)" />
+										<span class="input-group-btn">
+											<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+										</span>
+									</div>
+									<span  ng-show="applicationForm.dob.$dirty && applicationForm.dob.$invalid">
+										<span class="text-danger" ng-show="applicationForm.dob.$error.required || submitted">Date of birth required in YYYY-DD-MM format.</span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group"> 
+								<label for="gender" class="col-sm-2 control-label">* Gender</label> 
+								<div class="col-sm-8">
+									<label class="radio-inline" >
+										<input type="radio" name="gender" id="female" value="1"   ng-model="addapplicant.gender" checked> Female
+									</label>
+									<label class="radio-inline" >
+										<input type="radio" name="gender" id="male" value="0" ng-model="addapplicant.gender">Male
+									</label>										
+								</div>	
+							</div>
+							<div class="form-group"> 
+								<label for="marrital_status" class="col-sm-2 control-label">* Married</label> 
+								<div class="col-sm-8">
+									<label class="radio-inline" >
+										<input type="radio" name="marrital_status" id="yes" value="1"   ng-model="addapplicant.marrital_status" checked> Yes
+									</label>
+									<label class="radio-inline" >
+										<input type="radio" name="marital_status" id="no" value="0" ng-model="addapplicant.marrital_status"> No
+									</label>										
+								</div>	
+							</div>
+							<div class="form-group">
+								<label for="address" class="col-sm-2 control-label">* Address</label>
+								<div class="col-sm-8">
+									<textarea  class="form-control" id="address" ng-model="addapplicant.address" name="address" placeholder="Enter address" ng-maxlength="200" required></textarea>
+									<p ng-hide="applicationForm.address.$error.maxlength">{{ 200- addapplicant.address.length + " Characters left"}}</p>
+									<span class="help-block" ng-show="applicationForm.address.$dirty &&  applicationForm.address.$invalid">
+										<span class="text-danger" ng-show="applicationForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+										<span class="text-danger" ng-show="applicationForm.address.$error.required">Address is required.</span>
+									</span>
+								</div>		
+							</div>
+						<!-- </accordion-group>
+						<accordion-group heading="Educational Qualification" is-open="status.open" > -->
+							<div class="form-group">
+								<label for="post_gradu" class="col-sm-2 control-label">* Post Graduation</label>
+								<div class="col-sm-3">
+									<select id="post_gradu" class="form-control " ng-model="addapplicant.qualification.post_gradu.degree">  
+										<option value="">Select Post Graduation </option>		
+										<option value="M.B.A">M.B.A</option>
+										<option value="M.C.A">M.C.A</option> 
+										<option value="M.C.S">M.C.S</option> 
+										<option value="M.E">M.E</option> 
+										<option value="M.Tech">M.Tech</option> 
+										<option value="M.A.Bed">M.A.Bed</option>
+									</select>
+								</div>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name="percentage" id="percentage" ng-model="addapplicant.qualification.post_gradu.percentage" placeholder="00.00" required>
+									<span class="from-control" ng-show="applicationForm.percentage.$dirty && applicationForm.percentage.$invalid">
+										<span ng-show="applicationForm.percentage.$error.required" class="text-danger">Required Field.</span>
+									</span>
+								</div>
+								<label for="ugpercentage" class=" control-label">%</label>
+							</div>
+							<div class="form-group">
+								<label for="graduation" class="col-sm-2 control-label">* Graduation</label>
+								<div class="col-sm-3">
+									<select id="graduation" class="form-control " ng-model="addapplicant.qualification.graduation.degree">  
+										<option value="">Select Graduation </option>		
+										<option value="B.B.A">B.B.A</option>
+										<option value="B.C.A">B.C.A</option> 
+										<option value="B.C.S">B.C.S</option> 
+										<option value="B.E">B.E</option> 
+										<option value="B.Tech">B.Tech</option> 
+										<option value="B.A">B.A</option>
+										<option value="B.COM">B.COM</option>
+									</select>
+								</div>
+								
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name="ugpercentage" id="percentage" ng-model="addapplicant.qualification.graduation.percentage" placeholder="00.00" required>
+									<span class="from-control" ng-show="applicationForm.ugpercentage.$dirty && applicationForm.ugpercentage.$invalid">
+										<span ng-show="applicationForm.ugpercentage.$error.required" class="text-danger">Required Field.</span>
+									</span>
+								</div>
+								<label for="ugpercentage" class=" control-label">%</label>
+							</div>
+							<div class="form-group">
+								<label for="text" class="col-sm-2 control-label">* HSC </label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name="hsc" id="hsc" ng-model="addapplicant.qualification.hsc" placeholder="00.00%" required>
+									<span class="from-control" ng-show="applicationForm.hsc.$dirty && applicationForm.hsc.$invalid">
+										<span ng-show="applicationForm.hsc.$error.required" class="text-danger">Required Field.</span>
+									</span>
+								</div>
+								<label for="ssc" class="col-sm-2 control-label">* SSC </label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" name="ssc" id="ssc" ng-model="addapplicant.qualification.ssc" placeholder="00.00%" required>
+									<span class="from-control" ng-show="applicationForm.ssc.$dirty && applicationForm.ssc.$invalid">
+										<span ng-show="applicationForm.ssc.$error.required" class="text-danger">Required Field.</span>
+									</span>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label for="Experience" class="col-sm-2 control-label" >* Experience</label>
+								<div class="col-sm-8">
+									<select id="Experience" class="form-control " ng-model="addapplicant.experience">  
+										<option value="">Select Experience </option>		
+										<option value="0-1">0-1</option>
+										<option value="2">2</option> 
+										<option value="3">3</option> 
+										<option value="4">4</option> 
+										<option value="5">5</option> 
+										<option value="6">6</option>
+										<option value="7">7</option>
+									</select>
+									<span class="from-control" ng-show="applicationForm.Experience.$dirty && applicationForm.Experience.$invalid">
+										<span ng-show="applicationForm.Experience.$error.required" class="text-danger">Required Field.</span>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="skill" class="col-sm-2 control-label">* Skill Set </label>
+								<div class="col-sm-8">
+									<textarea  class="form-control" id="skill" ng-model="addapplicant.skill_set" name="skill" placeholder="Enter skill" ng-maxlength="2000" required></textarea>
+									<p ng-hide="applicationForm.skill.$error.maxlength">{{ 2000- addapplicant.skill_set.length + " Characters left"}}</p>
+									<span class="help-block" ng-show="applicationForm.skill.$dirty &&  applicationForm.skill.$invalid">
+										<span class="text-danger" ng-show="applicationForm.skill.$error.maxlength">Sorry You are Exceeding the Limit</span>
+										<span class="text-danger" ng-show="applicationForm.skill.$error.required">Skill is required.</span>
+									</span>
+								</div>		
+							</div>
+					<!-- </accordion-group>
+					<accordion-group heading="Project Information" is-open="status.open"> -->
+						<div class="form-group">
+							<label for="project_name" class="col-sm-2 control-label">* Project Name</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" id="project_name" placeholder="Project Name"ng-model="addapplicant.project_info.project_name" required>
+								<span class="from-control" ng-show="applicationForm.project_name.$dirty && applicationForm.project_name.$invalid">
+									<span ng-show="applicationForm.project_name.$error.required" class="text-danger">Required Field.</span>
+								</span>
+							</div>
 						</div>
-						<span  ng-show="applicationForm.dob.$dirty && applicationForm.dob.$invalid">
-							<span class="text-danger" ng-show="applicationForm.dob.$error.required || submitted">Date of birth required in YYYY-DD-MM format.</span>
-						</span>
-					</div>
+						<div class="form-group">
+							<label for="team_size" class="col-sm-2 control-label">* Team Size</label>
+							<div class="col-sm-8">
+								<select id="Experience" class="form-control " ng-model="addapplicant.project_info.team_size">  
+										<option value="">Select Size</option>		
+										<option value="1-5">1-5</option> 
+										<option value="5-10">5-10</option> 
+										<option value="10-15">10-15</option> 
+								</select>
+								<span class="from-control" ng-show="applicationForm.team_size.$dirty && applicationForm.team_size.$invalid">
+									<span ng-show="applicationForm.team_size.$error.required" class="text-danger">Required Field.</span>
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="description" class="col-sm-2 control-label">Project Description</label>
+							<div class="col-sm-8">
+								<textarea  class="form-control" id="description" ng-model="addapplicant.project_info.desc" name="description" ng-maxlength="2000" placeholder="project description" required></textarea>
+								<p ng-hide="applicationForm.description.$error.maxlength">{{ 2000- addapplicant.project_info.desc.length + " Characters left"}}</p>
+								<span class="help-block" ng-show="applicationForm.description.$dirty &&  applicationForm.description.$invalid">
+									<span class="text-danger" ng-show="applicationForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+									<span class="text-danger" ng-show="applicationForm.description.$error.required">Description is required.</span>
+								</span>
+							</div>		
+						</div>
+						<div class="form-group" >
+							<label  for="resume_file" class="col-sm-2 control-label">Upload Resume</label>
+							<div class="col-sm-8">
+								<input type="file" id="resume_file" name="resume_file" ng-file-select ng-multiple="false"  ng-file-change="upload(resume_file,path,userInfo,'resume_file')" ng-model="resume_file" /> 
+								
+								<input type="hidden" ng-model="addapplicant.resume_file" > <!-- <img ng-src="{{'{{addapplicant.resume_file.file_relative_path}}'}}" />
+								 -->
+								 <input type="hidden" ng-model="addapplicant.submit_date" ng-init="addapplicant.submit_date = currDate" > 
+								 <input type="hidden" ng-model="addapplicant.user_id" > 
+							</div>
+						</div>	
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-8">
+								<button class="btn btn-success" ng-disabled="applicationForm.$invalid"  ng-click="postData(addapplicant)">Submit</button>
+							</div>
+						</div> 
+					<!-- </accordion-group>
+				</accordion> -->
+				</form>
 				</div>
-				<div class="form-group"> 
-					<label for="gender" class="col-sm-2 control-label">* Gender</label> 
-					<div class="col-sm-8">
-						<label class="radio-inline" >
-							<input type="radio" name="gender" id="female" value="1"   ng-model="addapplicant.gender" checked> Female
-						</label>
-						<label class="radio-inline" >
-							<input type="radio" name="gender" id="male" value="0" ng-model="addapplicant.gender">Male
-						</label>										
-					</div>	
-				</div>
-				<div class="form-group"> 
-					<label for="marrital_status" class="col-sm-2 control-label">* Married</label> 
-					<div class="col-sm-8">
-						<label class="radio-inline" >
-							<input type="radio" name="marrital_status" id="yes" value="1"   ng-model="addapplicant.marrital_status" checked> Yes
-						</label>
-						<label class="radio-inline" >
-							<input type="radio" name="marital_status" id="no" value="0" ng-model="addapplicant.marrital_status"> No
-						</label>										
-					</div>	
-				</div>
-				<div class="form-group">
-					<label for="address" class="col-sm-2 control-label">* Address</label>
-					<div class="col-sm-8">
-						<textarea  class="form-control" id="address" ng-model="addapplicant.address" name="address" placeholder="Enter address" ng-maxlength="200" required></textarea>
-						<p ng-hide="applicationForm.address.$error.maxlength">{{ 200- addapplicant.address.length + " Characters left"}}</p>
-						<span class="help-block" ng-show="applicationForm.address.$dirty &&  applicationForm.address.$invalid">
-							<span class="text-danger" ng-show="applicationForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
-							<span class="text-danger" ng-show="applicationForm.address.$error.required">Address is required.</span>
-						</span>
-					</div>		
-				</div>
-			<!-- </accordion-group>
-			<accordion-group heading="Educational Qualification" is-open="status.open" > -->
-				<div class="form-group">
-					<label for="post_gradu" class="col-sm-2 control-label">* Post Graduation</label>
-					<div class="col-sm-3">
-						<select id="post_gradu" class="form-control " ng-model="addapplicant.qualification.post_gradu.degree">  
-							<option value="">Select Post Graduation </option>		
-							<option value="M.B.A">M.B.A</option>
-							<option value="M.C.A">M.C.A</option> 
-							<option value="M.C.S">M.C.S</option> 
-							<option value="M.E">M.E</option> 
-							<option value="M.Tech">M.Tech</option> 
-							<option value="M.A.Bed">M.A.Bed</option>
-						</select>
-					</div>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" name="percentage" id="percentage" ng-model="addapplicant.qualification.post_gradu.percentage" placeholder="00.00" required>
-						<span class="from-control" ng-show="applicationForm.percentage.$dirty && applicationForm.percentage.$invalid">
-							<span ng-show="applicationForm.percentage.$error.required" class="text-danger">Required Field.</span>
-						</span>
-					</div>
-					<label for="ugpercentage" class=" control-label">%</label>
-				</div>
-				<div class="form-group">
-					<label for="graduation" class="col-sm-2 control-label">* Graduation</label>
-					<div class="col-sm-3">
-						<select id="graduation" class="form-control " ng-model="addapplicant.qualification.graduation.degree">  
-							<option value="">Select Graduation </option>		
-							<option value="B.B.A">B.B.A</option>
-							<option value="B.C.A">B.C.A</option> 
-							<option value="B.C.S">B.C.S</option> 
-							<option value="B.E">B.E</option> 
-							<option value="B.Tech">B.Tech</option> 
-							<option value="B.A">B.A</option>
-							<option value="B.COM">B.COM</option>
-						</select>
-					</div>
-					
-					<div class="col-sm-3">
-						<input type="text" class="form-control" name="ugpercentage" id="percentage" ng-model="addapplicant.qualification.graduation.percentage" placeholder="00.00" required>
-						<span class="from-control" ng-show="applicationForm.ugpercentage.$dirty && applicationForm.ugpercentage.$invalid">
-							<span ng-show="applicationForm.ugpercentage.$error.required" class="text-danger">Required Field.</span>
-						</span>
-					</div>
-					<label for="ugpercentage" class=" control-label">%</label>
-				</div>
-				<div class="form-group">
-					<label for="text" class="col-sm-2 control-label">* HSC </label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" name="hsc" id="hsc" ng-model="addapplicant.qualification.hsc" placeholder="00.00%" required>
-						<span class="from-control" ng-show="applicationForm.hsc.$dirty && applicationForm.hsc.$invalid">
-							<span ng-show="applicationForm.hsc.$error.required" class="text-danger">Required Field.</span>
-						</span>
-					</div>
-					<label for="ssc" class="col-sm-2 control-label">* SSC </label>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" name="ssc" id="ssc" ng-model="addapplicant.qualification.ssc" placeholder="00.00%" required>
-						<span class="from-control" ng-show="applicationForm.ssc.$dirty && applicationForm.ssc.$invalid">
-							<span ng-show="applicationForm.ssc.$error.required" class="text-danger">Required Field.</span>
-						</span>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label for="Experience" class="col-sm-2 control-label" >* Experience</label>
-					<div class="col-sm-8">
-						<select id="Experience" class="form-control " ng-model="addapplicant.experience">  
-							<option value="">Select Experience </option>		
-							<option value="0-1">0-1</option>
-							<option value="2">2</option> 
-							<option value="3">3</option> 
-							<option value="4">4</option> 
-							<option value="5">5</option> 
-							<option value="6">6</option>
-							<option value="7">7</option>
-						</select>
-						<span class="from-control" ng-show="applicationForm.Experience.$dirty && applicationForm.Experience.$invalid">
-							<span ng-show="applicationForm.Experience.$error.required" class="text-danger">Required Field.</span>
-						</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="skill" class="col-sm-2 control-label">* Skill Set </label>
-					<div class="col-sm-8">
-						<textarea  class="form-control" id="skill" ng-model="addapplicant.skill_set" name="skill" placeholder="Enter skill" ng-maxlength="2000" required></textarea>
-						<p ng-hide="applicationForm.skill.$error.maxlength">{{ 2000- addapplicant.skill_set.length + " Characters left"}}</p>
-						<span class="help-block" ng-show="applicationForm.skill.$dirty &&  applicationForm.skill.$invalid">
-							<span class="text-danger" ng-show="applicationForm.skill.$error.maxlength">Sorry You are Exceeding the Limit</span>
-							<span class="text-danger" ng-show="applicationForm.skill.$error.required">Skill is required.</span>
-						</span>
-					</div>		
-				</div>
-		<!-- </accordion-group>
-		<accordion-group heading="Project Information" is-open="status.open"> -->
-			<div class="form-group">
-				<label for="project_name" class="col-sm-2 control-label">* Project Name</label>
-				<div class="col-sm-8">
-					<input type="text" class="form-control" id="project_name" placeholder="Project Name"ng-model="addapplicant.projectinfo.project_name" required>
-					<span class="from-control" ng-show="applicationForm.project_name.$dirty && applicationForm.project_name.$invalid">
-						<span ng-show="applicationForm.project_name.$error.required" class="text-danger">Required Field.</span>
-					</span>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="team_size" class="col-sm-2 control-label">* Team Size</label>
-				<div class="col-sm-8">
-					<select id="Experience" class="form-control " ng-model="addapplicant.projectinfo.team_size">  
-							<option value="">Select Size</option>		
-							<option value="1-5">1-5</option> 
-							<option value="5-10">5-10</option> 
-							<option value="10-15">10-15</option> 
-					</select>
-					<span class="from-control" ng-show="applicationForm.team_size.$dirty && applicationForm.team_size.$invalid">
-						<span ng-show="applicationForm.team_size.$error.required" class="text-danger">Required Field.</span>
-					</span>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="description" class="col-sm-2 control-label">Project Description</label>
-				<div class="col-sm-8">
-					<textarea  class="form-control" id="description" ng-model="addapplicant.projectinfo.desc" name="description" ng-maxlength="2000" placeholder="project description" required></textarea>
-					<p ng-hide="applicationForm.description.$error.maxlength">{{ 2000- addapplicant.projectinfo.desc.length + " Characters left"}}</p>
-					<span class="help-block" ng-show="applicationForm.description.$dirty &&  applicationForm.description.$invalid">
-						<span class="text-danger" ng-show="applicationForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-						<span class="text-danger" ng-show="applicationForm.description.$error.required">Description is required.</span>
-					</span>
-				</div>		
-			</div>
-			<div class="form-group" >
-				<label  for="resume_file" class="col-sm-2 control-label">Upload Resume</label>
-				<div class="col-sm-8">
-					<input type="file" id="resume_file" name="resume_file" ng-file-select ng-multiple="false"  ng-file-change="upload(resume_file,path,userInfo,'resume_file')" ng-model="resume_file" /> 
-					
-					<input type="hidden" ng-model="addapplicant.resume_file" required> 
-					
-				</div>
-			</div>	
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-8">
-					<button class="btn btn-success" ng-disabled="applicationForm.$invalid"  ng-click="postData(addapplicant)">Submit</button>
-				</div>
-			</div> 
-		<!-- </accordion-group>
-	</accordion> -->
-	</form>
-	</div>
-</main>
-{% else %}
-			{% include 'verified.html' ignore missing %}
+			</main>
 		{% endif %}
 	 {% endautoescape %}
 {% endblock %}	
