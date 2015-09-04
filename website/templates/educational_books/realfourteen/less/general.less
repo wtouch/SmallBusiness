@@ -1,0 +1,213 @@
+.mailSentMsg{
+	font: 1.2em/2.5em QumpellkaNo12;
+	border:1px solid @lightcolor;
+	padding:10px;
+}
+
+.sidebarModule{
+	&.sidemenu{
+		padding: 15px 10px 0px;
+		ul{
+			padding : 0;
+			list-style : none;
+			li{
+				margin-bottom : 10px;
+			}
+		}
+		a{
+			display : inline-block;
+			height : 90px;
+			width : 186px;
+			background-size:100% 100%;
+			background-repeat : no-repeat;
+			background-position: center; 
+			text-indent : -9999px;
+			overflow : hidden;
+			&.area_converter{
+				background-image : url('../img/area-converter.png');
+			}
+			&.emi_calculator{
+				background-image : url('../img/emi-calculator.png');
+			}
+			&.post_your_property{
+				background-image : url('../img/post-your-property.jpg');
+			}
+			&.post_your_requirement{
+				background-image : url('../img/post-your-requirement.jpg');
+			}
+		}
+	}
+}
+
+	//aboutus page css
+	.sidebar{
+		.nav-pills{
+			background : linear-gradient(@back, @color);
+			>li{
+				border-right : 1px solid @lightbackcolor;
+				>a, > a:focus{
+					color : @lightcolor;
+					font : bold 15px/1em Arial, Helvetica, sans-serif;
+					position : relative;
+					text-transform : uppercase;
+					border : 1px solid transparent;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					color : @colorwhite;
+					background : linear-gradient(@darkcolor, @darkbackcolor);
+				}
+			}
+		}
+		
+	}
+	.about, .contact{
+		.table{
+			tbody{
+				tr{
+					th,td{
+						border-color : @darkbackcolor;
+					}
+				}
+			}
+		}
+	}
+	.about{
+		.table{
+			margin-top: 20px;
+		}
+	}
+	.infrastructure{
+		.thumbnail{
+			background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@back));
+			background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
+			height: 395px;
+			img{
+				max-height : 190px;
+			}
+			.caption{
+				height: 138px;
+				color:@lightcolor;
+				margin-bottom : 15px;
+			}
+			.readmore{
+			
+				.btn-info:hover{
+					padding : 6px 40px;
+				}
+			}
+		}
+	}
+	//contactus page css
+	.contact{
+		background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
+		padding:15px;
+		img{
+			max-height: 125px;
+		}
+		h4{
+			margin-top : 0px;
+		}
+	}
+	#googleMap{
+		height:395px;
+	}
+	
+	
+	//testimonials
+	.testimonial{
+		background-color:@colorblack;
+		padding:10px;
+		blockquote{
+			font-size : inherit;
+			border-left: none; 
+			padding-left : 15px;
+			footer{
+				background:none;
+				padding : 0px;
+				img{
+					max-height : 50px;
+					margin-right : 10px;
+				}
+				cite{
+					font-size : 17px;
+					color : @color;
+				}
+			}
+			&::before{
+				content : '\201c';
+				position : absolute;
+				display : inline-block;
+				top : 5px;
+				left : 0;
+				line-height : 40px;
+				font-family : Times New Roman,Serif;
+				font-size : 55px;
+			}
+		}
+	}
+	
+	.gallery{
+		padding:10px;
+		background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@back));
+		background-image: -webkit-linear-gradient(left, @back 1%, @colorblack 20%);
+		.thumbnail{
+			background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@back));
+			background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
+			h4{
+				border : none;
+				padding-bottom : 0px;
+			}
+			.description{
+				color:@lightcolor;
+			}
+		}
+	}
+		
+	.enquiry{
+		.panel-body{
+			padding-bottom : 0px;
+		}
+	}
+	.contactus{
+		h4{
+			margin-top : 0px;
+			margin-bottom : 0px;
+		}
+	}
+	.searchProp{
+		.btn-info:hover{
+			padding : 6px 40px;
+		}
+	}
+	//gallery
+	@media (min-width: 320px) {
+		.gallery{
+			.thumbnail{
+				height:380px;
+			}
+		}
+	}
+
+	@media (min-width: 992px) { 
+		.gallery{
+			.thumbnail{
+				height:365px;
+				img{
+					max-height : 155px;
+					width:100%;
+				}
+			}
+		}
+	}
+
+	@media (min-width: 1200px){
+		.gallery{
+			.thumbnail{
+				height:380px;
+				img{
+					max-height : 200px;
+					width:100%;
+				}
+			}
+		}
+	}

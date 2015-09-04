@@ -1,0 +1,376 @@
+@font-face{
+	font-family:'negotiate_free';
+	src:url('../fonts/negotiate_free.ttf');
+}
+@font-face{
+	font-family:'Enriqueta-Regular';
+	src:url('../fonts/Enriqueta-Regular.otf');
+}
+
+//text color shade
+	@color : #C5EF27; 
+	@lightcolor : #C316C3; 
+	@darkcolor : #580458;
+	 
+//background color shade
+	/*@back : #F33A05; 
+	@darkbackcolor : #902304; 
+	@lightbackcolor :#F1C626; */
+	@back :  #C316C3; 
+	@darkbackcolor : #580458; 
+	@lightbackcolor :#F1C626; 
+//common color shade
+	@colorblack : #000000;
+	@colorwhite	: #ffffff;
+	
+	@import "general.less";
+	@import "property.less";
+	@import "project.less";
+	@import "product.less";
+	
+	body{
+		color:@colorwhite;
+		background-image:url('../img/bg.png');
+		background-color : @lightbackcolor;
+		background-repeat:no-repeat;
+	}
+	.container{
+		width:992px !important;
+	}
+	.sociallinks{
+		margin-top: 355px;
+		position: fixed;
+		ul{
+			list-style : none;
+			li{
+				transform: translateX(-123px);
+				padding: 4px 4px 4px 10px;
+				background-color: @darkbackcolor;
+				margin: 5px;
+				border-top-right-radius: 30px;
+				border-bottom-right-radius: 30px;
+				text-align : right;
+				a{
+					color:@colorwhite;
+					&:hover{
+						color:@colorwhite;
+						text-decoration : underline;
+					}
+				}
+				img{
+					width : 50px;
+					margin-left : 10px;
+					border : 2px solid @colorwhite;
+				}
+				span{
+					height : 20px;
+					width :20px;
+					margin-right: 6px;
+				}
+				
+				&:hover{
+					  transform: translateX(-45px);
+				}
+			}
+		}
+	}
+	header{
+		margin: 0 auto;
+		border-top: 3px solid #ccb129;
+	}
+	.logo {
+		height: 80px;
+		max-height: 100px;
+		margin-top: 20px;
+		z-index: 3;
+	}
+	a,.btn.btn-link{
+		color: @colorwhite;
+		&:hover, &:hover{
+			text-decoration : underline;
+		}
+	}
+	.featuredProperty{
+		a{
+			text-decoration : none;
+		}
+	}
+	.btn.btn-link{
+		font-size : 17.5px;
+		padding-left : 0px;
+	}
+	
+	.navbar-collapse{
+		padding :0px;
+	}
+	.navbar-toggle {
+		margin-top : 45px;
+	}
+	.navbar-toggle .icon-bar {
+		background-color: @darkbackcolor;
+	}
+	.modal-body	{
+		p{
+			color:@colorblack;
+		}
+	}
+	html{
+		min-width:1022px;
+	}
+	.btn + .btn{
+		margin-left:10px;
+	}
+	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
+		background-color:transparent;
+	}
+	.navbar-default {
+		background : none;
+		border:none;
+		.navbar-nav{
+			>li{
+				margin-bottom:0px;
+				position : relative;
+				padding: 0 5px;
+				float: left;
+				>a, > a:focus {
+					color:@darkcolor;
+					padding: 8px 15px;
+					text-transform: uppercase;
+					font: normal 14px/1.5em 'Arial', Helvetica, sans-serif;
+					transition: all 0.2s ease;
+					-o-transition: all 0.2s ease;
+					-moz-transition: all 0.2s ease;
+					-webkit-transition: all 0.2s ease;
+				}
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					border-top: 10px solid @darkbackcolor;
+					color:@darkcolor;
+				}
+				> ul{
+					display: none;
+					position: absolute;
+					width: 170px;
+					z-index: 999;
+					padding: 2px;
+					list-style: none;
+					text-align: left;
+					left:-16px;
+					border:2px solid @lightcolor;
+					background: -moz-linear-gradient(-45deg, @back, @darkbackcolor); 
+					background: -webkit-linear-gradient(-45deg, @back, @darkbackcolor); 
+					background: -linear-gradient(-45deg, @back, @darkbackcolor); 
+					>li{
+						padding : 10px;
+						text-transform : uppercase;
+						position : relative;
+						>a{
+							color : @colorwhite;
+							&:hover{
+								color : @colorwhite;
+								
+							}
+						}
+						&:hover{
+							background-color:@darkbackcolor;
+						}
+						
+						ul{
+							list-style: none;
+							display : none;
+							position : absolute;
+							left: 60px;
+							width: 180px;
+							padding : 2px;
+							border:1px solid @darkbackcolor;
+							background-color:@lightbackcolor;
+							z-index:999;
+							li{
+								padding : 10px;
+								a{
+									color : @colorwhite;
+								}
+								&:hover{
+									a{
+										color : @color;
+									}
+									
+									
+								}
+							}
+						
+						}
+						&:hover{
+							ul{
+								display : block;
+							}
+						}
+					}
+				}
+				&:hover > ul {
+					display: block;
+				}
+			}
+			
+		}
+	}
+	h1,h2, h4 ,h3{
+		color: @darkcolor;
+		font-family : Enriqueta-Regular;
+	}
+	h1,h2, h4{
+		text-shadow: 2px 0px 3px @colorwhite;
+	} 
+	h1{
+		font-weight:bold;
+		letter-spacing: 1px;
+		padding-bottom:10px;
+		font: 3.0em/1.2em Enriqueta-Regular
+	}
+	h2{
+		font: 2.0em/1.2em QumpellkaNo12;
+		line-height:1.5em;
+		font-weight:bold;
+	}
+	h2, h4 ,h3{
+		padding-bottom:10px;
+	}
+	h3{
+		display: inline-block;
+		position: relative;
+		margin-bottom:0px;
+	}
+	h3, h4{
+		font: 1.8em/1.2em Enriqueta-Regular;
+	}
+	.subhead{
+		font-size: 18px;
+		font-weight: bold;
+		background-color:  @darkbackcolor ;
+		box-shadow: -7px 5px 5px -5px @darkbackcolor;
+		width:65%;
+		color : @colorwhite;
+		padding: 10px 0px 10px 10px;
+		position : relative;
+		border-bottom: 2px solid @darkbackcolor;
+	}
+	.subhead::after {
+		content: "";
+		height: 8px;
+		display: block;
+		position: absolute;
+		top: 0px;
+		right: -52px;
+		border-bottom: 44px solid @darkbackcolor;
+		border-right: 52px solid transparent;
+	}
+	.subhead::before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		background: url('../img/bg_heading.png') no-repeat;
+		width: 15px;
+		height: 67px;
+		top: 0;
+		left: -15px
+	}
+	
+	.btn-info,.btn-primary,.btn-danger,.btn-info[disabled],.btn-info.disabled,.send,.btn-danger,.btn .btn-info .center-block{
+		color : @darkcolor;
+		font-weight : bold;
+		background : @lightbackcolor;
+		border : 1px solid @darkbackcolor;
+	}
+	.btn-danger:hover,.btn-danger:active{
+		color:@colorwhite;
+		background-color:@lightbackcolor;
+	}
+	.btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info,.btn-primary:active,.btn-primary:focus,.btn-primary:hover{
+		background : @lightbackcolor;
+		border : 1px solid @darkbackcolor;
+		color:@darkcolor;
+	}
+	.content {
+		margin-top: 20px;
+		padding: 0px 20px 10px;
+	}
+	.content, .sections, .sidemenu, .thumbnail, .tab-content, .panel{
+		background: -moz-linear-gradient(-45deg, @back, @darkbackcolor); 
+		background: -webkit-linear-gradient(-45deg, @back, @darkbackcolor); 
+		background: -linear-gradient(-45deg, @back, @darkbackcolor); 
+	}
+	.content, .sections, .sidemenu, .thumbnail, .tab-content{
+		//background-color : @lightbackcolor;
+		border:1px solid @darkbackcolor;
+		border-radius : 4px;
+	}
+	.contactus .sections{
+		padding : 10px;
+	}
+	.panel-default, .thumbnail{
+		border : 1px solid @darkbackcolor;
+	}
+	hr{
+		border-style:dashed;
+		border-color:@lightbackcolor;
+		margin: 0px 0px 10px;
+	}
+	.form-control{
+		background : transparent;
+		border-color : @darkbackcolor;
+		&:focus{
+			border-color : @back;
+		}
+	}
+	.sidebarModule{	
+		h4{
+			border : none;
+		}
+	}
+	
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
+	{
+		background-color : @darkbackcolor;
+		color : @lightcolor;
+		border : 1px solid @lightbackcolor;
+	}
+	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
+		background-color : @lightbackcolor;
+		border : 1px solid @darkbackcolor;
+		color : @colorwhite;
+	}
+	footer{
+		margin-top : 15px;
+		padding: 15px 0;
+	}
+	*{
+		transition:300ms;
+	}
+	
+	//for responsive
+	@media (min-width: 320px){
+		.logo{
+			float:left;
+		}
+		.cnctinfo{
+			display : none;
+		}
+	}
+	@media (min-width: 992px){
+		.logo{
+			float:none;
+		}
+		.cnctinfo{
+			display : block;
+		}
+		
+	
+	}
+	@media (min-width: 1200px){
+		.logo{
+			float:none;
+		}
+		.cnctinfo{
+			display : block;
+		}
+		
+	}
