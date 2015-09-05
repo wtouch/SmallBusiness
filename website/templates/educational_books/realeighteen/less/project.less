@@ -52,7 +52,7 @@
 		}
 		
 	}*/
-	.projectCarousal{
+	/*.projectCarousal{
 		position : relative;
 		border : 5px solid @colorwhite;
 		z-index : 99;
@@ -74,12 +74,36 @@
 				}
 			}
 		}
+	}*/
+	.projectCarousal{
+		position : relative;
+		border : 5px solid @colorwhite;
+		z-index : 99;
+		width : 500px;
+		margin : 0 auto;
+		top:14px;
+		float : none;
+		box-shadow: 0 0 15px;
+		.carousslider{
+			padding-left: 0px;
+			li{
+				border: 3px solid #f9f4da;
+				img{
+					width : 100%;
+					min-height : 395px;
+				}
+				&.item{
+					overflow : hidden;
+					height : 395px;
+				}
+			}
+		}
 	}
 	
 	.projectCarousal::after{
 		position : absolute;
 		content : "";
-		background-image : url('../img/lady.png');
+		background-image : url('../img/home.png');
 		background-size: 100% 100%;
 		right :200px;
 		bottom : -2px;
@@ -92,18 +116,30 @@
 	
 	
 	.projectnav, .projsnap {
-		position : absolute;
+		/*position : absolute;
 		background : linear-gradient(@back, @color);
 		height: 320px;
 		width : 300px;
 		top : 100px;
 		box-sizing : border-box;
-		border : 5px solid @colorwhite;
+		border : 5px solid @colorwhite;*/
+		
+		position: absolute;
+		background: linear-gradient(#49741e, #264903);
+		//background-color: rgba(0, 125, 0, 0.58);
+		height: 400px;
+		width: 300px;
+		top: 30px;
+		border-radius: 50%;
+		z-index:999;
+		box-sizing: border-box;
+		border: 5px solid #ffffff;
 	}
 	.projectnav{
 		padding : 5px;
 		left : 10px;
 		left : 0;
+		border-radius: 0 50% 50% 0;
 		.nav-stacked{
 			>li{
 				+li {
@@ -130,6 +166,7 @@
 		}
 	}
 	.projsnap{
+	    border-radius: 50% 0 0 50%;
 		p{
 			//border-bottom :1px solid @colorwhite;
 			padding:6px;
