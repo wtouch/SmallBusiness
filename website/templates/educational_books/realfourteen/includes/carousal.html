@@ -1,0 +1,16 @@
+{% if sliderData >= 1 %}
+  <!-- Wrapper for slides -->
+  <ul class="carousslider" id="carousslider">
+	{% for key, value in sliderData %}
+		<li class="item {{ (key == 0) ? 'active' }}">
+		  <img class="img-responsive" src="{{value.image ? value.image : value is iterable ? value.file_relative_path : value}}" alt="{{value.title}}">
+		  {% if value.title %}
+		  <div class="carousel-caption">
+			<h2>{{value.title}}</h2>
+			<p>{{value.description}}</p>
+		  </div>
+		  {% endif %}
+		</li>
+	{% endfor %}
+  </ul>
+{% endif %}

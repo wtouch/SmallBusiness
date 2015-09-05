@@ -1,0 +1,386 @@
+//project
+//css for featured project slider
+.bxslider{ 
+	padding:5px;
+	li{
+		.projimg{
+			height : 175px;
+			overflow : hidden;
+			padding : 6px;
+			border : 2px solid transparent;
+			img{
+				min-height: 175px;
+			}
+			&:hover{
+				border : 2px solid @darkcolor;
+			}
+		}
+		width:100px;
+		a{
+			color:@darkcolor;
+			h4{
+				color : @color;
+				padding: 4px;
+				border : none;
+				border-radius : 4px;
+				&:hover{
+					color : @lightcolor;
+				}
+			}
+		}
+		p{
+			margin-bottom : 0px;
+			margin-top : 0px;
+		}
+	}
+}
+	
+//keyframes
+@keyframes moveanchor {
+    0%   {left:0px; top:0px;}
+    50%  {left:18px; top:0px;}
+    100%  {left:0px; top:0px;}
+}
+.homeproject {
+	position : relative;
+	.projectCarousal{
+		position: relative;
+		height : 400px;
+		border: 10px solid @darkbackcolor;
+		background-color : @colorwhite;
+		.bx-viewport{
+			height : 375px !important;
+		}
+		.carousslider{
+			padding-left: 0px;
+			li{
+				border: 3px solid #f9f4da;
+				img{
+					width : 100%;
+					min-height : 395px;
+				}
+				&.item{
+					overflow : hidden;
+					height : 395px;
+				}
+			}
+		}
+		.projsnap{
+			width : 0px;
+			height : 375px;
+			z-index : 0;
+			background-color : rgba(12,214,184, 0.5);
+			//background-color : rgba(12,214,184, 0.5);
+			//border : 20px solid @back;
+			//transform: translateY(-400px);
+			//transition: all 800ms ease-in;
+			position: absolute;
+			overflow: hidden;
+			top: 0;
+			left: 0;
+		   -webkit-transform: translate(460px, -100px) rotate(180deg);
+		   -moz-transform: translate(460px, -100px) rotate(180deg);
+		   -o-transform: translate(460px, -100px) rotate(180deg);
+		   -ms-transform: translate(460px, -100px) rotate(180deg);
+		   transform: translate(460px, -100px) rotate(180deg);
+		   -webkit-transition: all 0.2s 0.4s ease-in-out;
+		   -moz-transition: all 0.2s 0.4s ease-in-out;
+		   -o-transition: all 0.2s 0.4s ease-in-out;
+		   -ms-transition: all 0.2s 0.4s ease-in-out;
+		   transition: all 0.2s 0.4s ease-in-out;
+			img{
+				margin-bottom: 10px;
+				border : 1px solid @color;
+				border-radius : 5px;
+				padding :4px;
+				max-height : 295px;
+				-webkit-transition: all 0.2s ease-in;
+				-moz-transition: all 0.2s ease-in;
+				-o-transition: all 0.2s ease-in;
+				-ms-transition: all 0.2s ease-in;
+				transition: all 0.2s ease-in;
+			}
+			p{
+				color: @color;
+				font-size: 17.5px;
+				text-shadow: 1px 1px 1px @colorwhite;
+				-webkit-transform: translateX(300px) rotate(90deg);
+				-moz-transform: translateX(300px) rotate(90deg);
+				-o-transform: translateX(300px) rotate(90deg);
+				-ms-transform: translateX(300px) rotate(90deg);
+				transform: translateX(300px) rotate(90deg);
+				-webkit-transition: all 0.2s ease-in-out;
+				-moz-transition: all 0.2s ease-in-out;
+				-o-transition: all 0.2s ease-in-out;
+				-ms-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+			}
+			.viewproperty{
+				background-color: #A5BC33;
+				padding: 10px;
+				box-shadow: 1px 2px 6px #000;
+				border-radius: 5px;
+				text-align : center;
+				-webkit-transform: translateY(-200px);
+				-moz-transform: translateY(-200px);
+				-o-transform: translateY(-200px);
+				-ms-transform: translateY(-200px);
+				transform: translateY(-200px);
+				-webkit-transition: all 0.2s ease-in-out;
+				-moz-transition: all 0.2s ease-in-out;
+				-o-transition: all 0.2s ease-in-out;
+				-ms-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+				a{
+					font-weight: bold;
+				}
+			}
+		}
+		&:hover{
+			z-index : 0;
+			.projsnap{
+				z-index : 999;
+				width : 708px;
+				padding : 50px;
+				//transform: translateY(0px);
+				-webkit-transition-delay: 0s;
+			   -moz-transition-delay: 0s;
+			   -o-transition-delay: 0s;
+			   -ms-transition-delay: 0s;
+			   transition-delay: 0s;
+			   -webkit-transform: translate(0px, 0px);
+			   -moz-transform: translate(0px, 0px);
+			   -o-transform: translate(0px, 0px);
+			   -ms-transform: translate(0px, 0px);
+			   transform: translate(0px, 0px);
+				p{
+					-webkit-transform: translateX(0px) rotate(0deg);
+					-moz-transform: translateX(0px) rotate(0deg);
+					-o-transform: translateX(0px) rotate(0deg);
+					-ms-transform: translateX(0px) rotate(0deg);
+					transform: translateX(0px) rotate(0deg);
+					-webkit-transition-delay: 0.4s;
+					-moz-transition-delay: 0.4s;
+					-o-transition-delay: 0.4s;
+					-ms-transition-delay: 0.4s;
+					transition-delay: 0.4s;
+				}
+				.viewproperty{
+					-webkit-transform: translateY(0px);
+					-moz-transform: translateY(0px);
+					-o-transform: translateY(0px);
+					-ms-transform: translateY(0px);
+					transform: translateY(0px);
+					-webkit-transition-delay: 0.3s;
+					-moz-transition-delay: 0.3s;
+					-o-transition-delay: 0.3s;
+					-ms-transition-delay: 0.3s;
+					transition-delay: 0.3s;
+				}
+			}
+		}
+	}
+	.projectnav{
+		position : absolute;
+		left: -239px;
+		top: -5px;
+		width: 245px;
+		.nav-stacked{
+			margin: 5px;
+			>li{
+				padding : 4px;
+				background-color : @darkcolor;
+				margin-bottom: 20px;
+				position : relative;
+				text-align : right;
+				-webkit-transform: translateZ(0);
+				transform: translateZ(0);
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden;
+				position: relative;
+				-webkit-transition-property: color;
+				transition-property: color;
+				-webkit-transition-duration: 0.3s;
+				transition-duration: 0.3s;
+				>a, > a:focus{
+					color : @colorwhite;
+					padding: 9px 15px;
+					font-size: 17px;
+					font-weight : bold;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					text-decoration: none;
+					background-color: transparent;
+					color:@colorwhite;
+					-webkit-animation-name: moveanchor; /* Chrome, Safari, Opera */
+					-webkit-animation-duration: 0.4s; /* Chrome, Safari, Opera */
+					-webkit-animation-iteration-count: 1; /* Chrome, Safari, Opera */
+					animation-name: moveanchor;
+					animation-duration: 0.4s;
+					animation-iteration-count: 1;
+				}
+				&::after{
+					content: "";
+					height: 30px;
+					display: block;
+					position: absolute;
+					top: 49px;
+					left: 0px;
+					border-top: 10px solid @darkcolor;
+					border-left: 8px solid transparent;
+					border-right: 8px solid transparent;
+				}
+				&:before{
+					content: "";
+					position: absolute;
+					z-index: -1;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					background: @lightcolor;
+					-webkit-transform: scaleX(0);
+					transform: scaleX(0);
+					-webkit-transform-origin: 0 50%;
+					transform-origin: 0 50%;
+					-webkit-transition-property: transform;
+					transition-property: transform;
+					-webkit-transition-duration: 0.5s;
+					transition-duration: 0.5s;
+					-webkit-transition-timing-function: ease-out;
+					transition-timing-function: ease-out;
+				}
+				&:hover{
+					background-color : @darkcolor;
+					&::after{
+						border-top: 10px solid @lightcolor;
+					}
+				}
+				&:hover:before, &:focus:before, &:active:before {
+					-webkit-transform: scaleX(1);
+					transform: scaleX(1);
+					-webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+					transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+				}
+			}
+		}
+	}
+}
+.homeproject::after{
+	position : absolute;
+	content : "";
+	background-image : url('../img/lady.png');
+	background-size: 100% 100%;
+	right :-45px;
+	top : 40px;
+	z-index: 999;
+	height : 356px;
+	width : 150px;
+}
+// single project nav css
+.project{
+	.navbar{
+		
+		border-radius: 0;
+		margin-top:10px;
+		margin-bottom:10px;
+		height : 20px;
+		width:auto;
+	}
+	ul.nav.navbar-nav {
+		background : linear-gradient(@back, @color);
+		margin-bottom:10px;
+		>li{
+			border-right : 1px solid @lightbackcolor;
+			>a, > a:focus{
+				padding : 9px 12px;
+				color : @color;
+				position : relative;
+			} 
+			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+				background : linear-gradient(@lightcolor, @back);
+				color : @darkcolor;
+			}
+		}
+	}
+	.projectgallery{
+		.thumbnail{
+			border : 1px solid @darkbackcolor;
+			background : none;
+		}
+	}
+}
+.projHead,.project .description,.project .thumbnail {
+	background-color:@colorblack;
+}
+//css for single project & project list
+	.projlist{
+		background: -webkit-gradient(linear, left top, right top, from(@colorblack), to(@back));
+		background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
+		padding:10px;
+		//border : 1px solid @darkbackcolor;
+		.project{
+			
+			.thumbnail{
+				background-image: -webkit-linear-gradient(left, @back 0%,  @colorblack 5%);
+				height:385px;
+				padding-top : 15px;
+				border-color : @darkcolor;
+				.projectimg{
+					height : 148px;
+					overflow : hidden;
+					img{
+						min-height : 148px;
+						max-width : 95%;
+						border : 2px solid transparent;
+						padding : 4px;
+						&:hover{
+							border : 2px solid @back;
+						}
+					}
+				}
+				
+				.caption{
+					color : @darkcolor;
+				}
+				.caption p{
+					color:@lightcolor;
+				}
+				.readmore{
+					margin-top : 15px;
+					a{
+						color : @color;
+						border-radius : 4px;
+						&:hover, &:hover{
+							color : @colorwhite;
+						}
+					}
+				}
+			}
+			.projImg{
+				margin-right: 20px;
+				max-height : 175px;
+			}
+		}
+	}
+	@media (min-width: 320px){
+		.projImg{
+			float :none;
+			max-height : 175px;
+			margin-right:10px;
+		}
+	}
+	@media (min-width: 992px){
+		.projImg{
+			float : left;
+			max-height : 175px;
+			margin-right : 10px;
+		}
+	}
+	@media (min-width: 1200px){
+		.projImg{
+			float :left;
+			max-height : 175px;
+			margin-right:10px;
+		}
+	}

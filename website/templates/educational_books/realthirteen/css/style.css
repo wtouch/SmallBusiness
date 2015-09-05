@@ -214,15 +214,17 @@
   margin-top: 10px;
   margin-bottom: 20px;
   position: relative;
+  z-index: 999;
+}
+.homeproject .bx-viewport {
+  height: 395px;
 }
 .homeproject .projectCarousal {
   position: relative;
   border: 5px solid #ffffff;
-  z-index: 99;
   width: 500px;
   margin: 0 auto;
   float: none;
-  z-index: 1;
   box-shadow: 0 0 15px;
 }
 .homeproject .projectCarousal .carousslider {
@@ -238,6 +240,28 @@
 .homeproject .projectCarousal .carousslider li.item {
   overflow: hidden;
   height: 395px;
+}
+.homeproject .projectCarousal::after {
+  content: "";
+  height: 41px;
+  display: block;
+  position: absolute;
+  top: -256px;
+  right: -105px;
+  border-bottom: 276px solid #34B981;
+  border-right: 350px solid transparent;
+  z-index: -999;
+}
+.homeproject .projectCarousal::before {
+  content: "";
+  height: 41px;
+  display: block;
+  position: absolute;
+  top: -256px;
+  left: -105px;
+  border-bottom: 276px solid #46CE94;
+  border-left: 350px solid transparent;
+  z-index: -999;
 }
 .homeproject .projectnav,
 .homeproject .projsnap {
@@ -258,6 +282,7 @@
   right: 0;
   padding-left: 90px !important;
   padding-top: 5px !important;
+  z-index: -99;
 }
 .homeproject .projsnap p {
   margin-bottom: 5px;
@@ -267,7 +292,7 @@
   left: 10px;
 }
 .homeproject .projectnav .nav-stacked > li {
-  border-bottom: 1px solid #074028;
+  border-bottom: 1px solid #f7cbce;
 }
 .homeproject .projectnav .nav-stacked > li + li {
   margin-top: 10px;
@@ -293,6 +318,11 @@
 .homeproject .projsnap {
   padding: 5px 15px;
   right: 10px;
+  /*p{
+			color : @color;
+			margin-top:5px;
+			border-bottom:1px solid @color;
+		}*/
 }
 .homeproject .projsnap img {
   height: 110px;
@@ -303,7 +333,12 @@
   padding: 4px;
 }
 .homeproject .projsnap p {
+  border-bottom: 1px solid #f7cbce;
   color: #f7cbce;
+  padding: 10px;
+}
+.homeproject .projsnap p:last-child {
+  border: none;
 }
 .homeproject .projsnap .viewproperty a {
   color: #f7cbce;
@@ -344,7 +379,7 @@
   height: 42px;
 }
 .project ul.nav.navbar-nav > li {
-  border-right: 1px solid #e3dbbe;
+  border-right: 1px solid #e4abbb;
   height: 38px;
 }
 .project ul.nav.navbar-nav > li > a,
@@ -432,6 +467,7 @@
 }
 .featuretab .tab-content {
   border: 1px solid #440a02;
+  background-color: #e4abbb;
   border-top: none;
   position: relative;
   margin-bottom: 25px;
@@ -669,7 +705,13 @@ body {
   transform: translateX(-45px);
 }
 .thumbnail {
-  background-color: #e3dbbe;
+  background-color: #e4abbb;
+}
+header {
+  background-image: url('../img/nature.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: 9999;
 }
 header .head {
   background-image: url('bg_image.png');
@@ -680,12 +722,21 @@ header .head {
 header img.logo {
   height: 80px;
   margin: 50px 0px;
+  z-index: -99;
 }
 header .navbar-default {
   background-color: #117e50;
+  z-index: 9999;
   border: none;
 }
 header .navbar-default .navbar-nav > li {
+  /*border: 4px transparent;
+						border-top-left-radius: 19px;
+						border-bottom-right-radius: 19px;
+						background-color : @darkcolor;
+						color : @colorwhite;
+						top: -8px;
+						padding-top: 20px;*/
   position: relative;
 }
 header .navbar-default .navbar-nav > li > a {
@@ -704,6 +755,13 @@ header .navbar-default .navbar-nav > li:hover > a:focus {
   cursor: pointer;
   text-shadow: 1px 1px #000000;
   background: #074028;
+  /*border: 4px solid @color;
+						border-top-left-radius: 19px;
+						border-bottom-right-radius: 19px;
+						background-color : @darkcolor;
+						color : @colorwhite;
+						top: -8px;
+						padding-top: 20px;*/
 }
 header .navbar-default .navbar-nav > li ul {
   display: none;
@@ -763,7 +821,7 @@ header .navbar-default .navbar-collapse {
   padding: 0px;
 }
 main .back {
-  background-image: url('../img/bg.jpg');
+  background-image: url('../img/backg.jpg');
   background-repeat: repeat;
   padding: 20px;
 }
@@ -789,7 +847,7 @@ main .back .sidebarModule {
   margin: 30px 0px 0px;
   border: 1px solid #440a02;
   border-radius: 10px;
-  background-color: #e3dbbe;
+  background-color: #e4abbb;
   position: relative;
 }
 main .back .featuredProperty h3,
@@ -890,7 +948,7 @@ main .back .sidebarModule .bx-wrapper .bx-pager.bx-default-pager a.active {
 main .back .content {
   border: 1px solid #440a02;
   border-radius: 10px;
-  background-color: #e3dbbe;
+  background: -webkit-gradient(linear, left top, right top, from(#e4abbb), to(#ffffff));
   padding: 0px 15px 10px;
 }
 main .featuredProperty .sections {
@@ -948,9 +1006,9 @@ h2 {
 }
 .btn-info:hover,
 .btn-primary:hover {
-  background: -webkit-linear-gradient(right, #117e50, #e3dbbe, #117e50);
-  background: -moz-linear-gradient(right, #117e50, #e3dbbe, #117e50);
-  background: linear-gradient(right, #117e50, #e3dbbe, #117e50);
+  background: -webkit-linear-gradient(right, #117e50, #e4abbb, #117e50);
+  background: -moz-linear-gradient(right, #117e50, #e4abbb, #117e50);
+  background: linear-gradient(right, #117e50, #e4abbb, #117e50);
   border: 1px solid #117e50;
   color: #117e50;
 }
@@ -977,7 +1035,7 @@ hr {
   margin-right: 8px;
 }
 .panel {
-  background-color: #e3dbbe;
+  background-color: #e4abbb;
 }
 .panel-default,
 .thumbnail {
@@ -1018,7 +1076,7 @@ hr {
 .pagination > li > span,
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover {
-  background-color: #e3dbbe;
+  background-color: #e4abbb;
   border: 1px solid #074028;
   color: #074028;
 }
