@@ -122,17 +122,48 @@
 				
 			</div>
 			<div class="row">
-				<div class="col-xs-12">
-				{%if modules.contentModule.featured_services %}
-					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-					{%endif%}
-					
+				<div class="col-xs-12 col-sm-12 col-lg-12">
+					{% if (modules.contentModule.featured_services)%}
+					<div class="featuretab">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							{%if modules.contentModule.featured_services %}
+							<li role="presentation" class="active">
+								<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
+							</li>
+							{%endif%}
+							<li role="presentation">
+								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
+							</li>
+							<li role="presentation">
+								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
+							</li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="featrserv">
+							{%if modules.contentModule.featured_services %}
+								{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+							{%endif%}
+							</div>
+							<div role="tabpanel" class="tab-pane" id="featrtesti">
+							{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
+							</div>
+							<div role="tabpanel" class="tab-pane" id="ourassoc">
+								{% include [templatePath ~ '/includes/our_associates.html', 'default/default/includes/our_associates.html'] %}
+							</div>
+						</div>
+					</div>
+					{% endif %}
+						
 					{%if modules.contentModule.featured_products %}
-					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-				{%endif%}
+						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+					{%endif%}
 				</div>
 			</div>
-			
+			<!--<p>{%if modules.contentModule.featured_products %}
+					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+				{%endif%}</p>-->
 		</div>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
