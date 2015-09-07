@@ -8,14 +8,14 @@
 }
 
 //text color shade
-	@color :#A92159 ; //red darkcolor
-	@lightcolor : rgb(73, 123, 236); //#A92159 //body text
-	@darkcolor : #5A6B08;//
+	@color :#A92159 ; 
+	@lightcolor : rgb(73, 123, 236); 
+	@darkcolor : #5A6B08;//remaining
 	 
 //background color shade
-	@back : #ff0000; //black shade for div style
-	@darkbackcolor : #2F46E4;//#57102C 
-	@lightbackcolor :rgb(34, 205, 222);//#7EC2AA 
+	@back : #ff0000; //remaining
+	@darkbackcolor :#000D69;// #2F46E4;//#57102C 
+	@lightbackcolor :#3275BC;//#7EC2AA 
 	
 //common color shade
 	@colorblack : #000000;
@@ -28,7 +28,9 @@
 	body{
 		color:@colorblack;
 		//-webkit-gradient(linear, left top, right top, from(#fff3ce), to(#efefef))
-		background-image:url('../img/bg.png'), linear-gradient( @lightbackcolor ,@colorwhite );
+		//background-image:url('../img/bg.png'), linear-gradient( @lightbackcolor ,@colorwhite );
+		background: url('../img/bg.jpg') fixed;
+		
 		background-repeat:no-repeat;
 	}
 	.sociallinks{
@@ -91,10 +93,10 @@
 		
 	}
 	a, .btn.btn-link{
-		color: @lightcolor;
+		color: @darkbackcolor;
 		&:hover, &:hover{
 			text-decoration : underline;
-			color: @lightcolor;
+			color: @color;
 		}
 	}
 	.btn.btn-link{
@@ -128,7 +130,7 @@
 	}
 	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
 		background-color:transparent;
-		color:@lightcolor;
+		color:@color;
 		border-top: 10px solid @darkbackcolor;
 	}
 	.navbar-default {
@@ -140,7 +142,7 @@
 				color:@back;
 			}
 			>li >a:active,>li >a:hover,>li >a:focus{
-				color:@lightcolor;
+				color:@color;
 			}
 			>li{
 				margin-bottom:0px;
@@ -203,7 +205,7 @@
 								}
 								&:hover{
 									a{
-										color : @lightcolor;
+										color : @color;
 									}
 									
 									
@@ -283,7 +285,7 @@
 		background : transparent;
 		border-color : @darkbackcolor;
 		&:focus{
-			border-color : @back;
+			border-color : @color;
 		}
 	}
 	.btn-info, .btn-info[disabled], .btn-primary{
@@ -371,7 +373,7 @@
 			color: @colorblack;
 			top: -5px;
 			background: -webkit-gradient(linear, left top, right top, from(@lightbackcolor), to(@colorwhite));
-			background-image: -webkit-linear-gradient(left, @lightbackcolor 1%, @colorwhite 20%);
+			background-image: -webkit-linear-gradient(left, @lightbackcolor 90 , @colorwhite 20%);
 			border-top:1px solid @darkbackcolor;
 			box-shadow: 1px 1px 5px @darkbackcolor;
 		}
