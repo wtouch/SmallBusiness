@@ -45,7 +45,17 @@
 			</ul>
 		</div> 
 		<header >
-			<nav class="navbar navbar-default pull-right">
+			<div class="container">
+				<div class="companyLogo">
+					{% if data.website_config.website_logo %}
+					<img class="logo"  src="{{data.website_config.website_logo.file_relative_path}}">
+					{% else %}
+					
+					<img class="logo"  src="{{data.business_logo.file_relative_path}}">
+					{% endif %}
+				</div>
+			</div>
+			<nav class="navbar navbar-default">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header">
@@ -64,16 +74,6 @@
 					</div><!-- /.navbar-collapse -->
 				</div>
 			</nav>
-			<div class="container">
-				<div class="companyLogo">
-					{% if data.website_config.website_logo %}
-					<img class="logo"  src="{{data.website_config.website_logo.file_relative_path}}">
-					{% else %}
-					
-					<img class="logo"  src="{{data.business_logo.file_relative_path}}">
-					{% endif %}
-				</div>
-			</div>
 		</header>
 		<div class="container">
 			<div class="row">

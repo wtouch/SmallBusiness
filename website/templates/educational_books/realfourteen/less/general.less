@@ -1,3 +1,30 @@
+.featuretab{
+	margin-top : 20px;
+	.tab-content{
+		border : 1px solid @darkbackcolor;
+		border-top : none;
+		position: relative;
+		margin-bottom: 25px;
+		padding : 1px 20px 15px;
+		background: -webkit-gradient(linear, left top, right top, from(@darkbackcolor), to(@lightbackcolor));
+		background: -gradient(linear, left top, right top, from(@darkbackcolor), to(@lightbackcolor));
+	}
+	.nav-tabs{
+		border-bottom: 1px solid @darkbackcolor;
+		li{
+			a{
+				border : 1px solid @darkcolor;
+				background : @lightcolor;
+				color : @darkcolor;
+			}
+			&.active>a, &.active>a:hover, &.active>a:focus, &>a:hover{
+					background-color : @darkcolor;
+					border : 1px solid @darkcolor;
+					color:@colorwhite;
+			}
+		}
+	}
+}
 .mailSentMsg{
 	font: 1.2em/2.5em QumpellkaNo12;
 	border:1px solid @lightcolor;

@@ -12,6 +12,34 @@
 	@back :  #C316C3; 
 	@darkbackcolor : #580458; 
 	@lightbackcolor :#F1C626; */
+.featuretab {
+  margin-top: 20px;
+}
+.featuretab .tab-content {
+  border: 1px solid #ca9f04;
+  border-top: none;
+  position: relative;
+  margin-bottom: 25px;
+  padding: 1px 20px 15px;
+  background: -webkit-gradient(linear, left top, right top, from(#ca9f04), to(#f1df9e));
+  background: -gradient(linear, left top, right top, from(#ca9f04), to(#f1df9e));
+}
+.featuretab .nav-tabs {
+  border-bottom: 1px solid #ca9f04;
+}
+.featuretab .nav-tabs li a {
+  border: 1px solid #580458;
+  background: #c316c3;
+  color: #580458;
+}
+.featuretab .nav-tabs li.active > a,
+.featuretab .nav-tabs li.active > a:hover,
+.featuretab .nav-tabs li.active > a:focus,
+.featuretab .nav-tabs li > a:hover {
+  background-color: #580458;
+  border: 1px solid #580458;
+  color: #ffffff;
+}
 .mailSentMsg {
   font: 1.2em/2.5em QumpellkaNo12;
   border: 1px solid #c316c3;
@@ -384,7 +412,12 @@
   padding: 5px;
 }
 .bxslider li {
+  height: 325px;
   width: 100px;
+}
+.bxslider li h4 {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .bxslider li .projimg {
   height: 175px;
@@ -398,20 +431,8 @@
 .bxslider li .projimg:hover {
   border: 2px solid #580458;
 }
-.bxslider li a {
-  color: #580458;
-}
-.bxslider li a h4 {
-  color: #c5ef27;
-  padding: 4px;
-  border: none;
-  border-radius: 4px;
-}
-.bxslider li a h4:hover {
-  color: #c316c3;
-}
 .bxslider li p {
-  margin-bottom: 0px;
+  margin-bottom: 5px;
   margin-top: 0px;
 }
 @keyframes moveanchor {
@@ -434,7 +455,7 @@
 .homeproject .projectCarousal {
   position: relative;
   height: 400px;
-  border: 10px solid #ca9f04;
+  border: 10px solid #580458;
   background-color: #ffffff;
 }
 .homeproject .projectCarousal .bx-viewport {
@@ -468,11 +489,11 @@
   -o-transform: translate(460px, -100px) rotate(180deg);
   -ms-transform: translate(460px, -100px) rotate(180deg);
   transform: translate(460px, -100px) rotate(180deg);
-  -webkit-transition: all 0.2s 0.4s ease-in-out;
-  -moz-transition: all 0.2s 0.4s ease-in-out;
-  -o-transition: all 0.2s 0.4s ease-in-out;
-  -ms-transition: all 0.2s 0.4s ease-in-out;
-  transition: all 0.2s 0.4s ease-in-out;
+  -webkit-transition: all 0.1s 0.2s ease-in-out;
+  -moz-transition: all 0.1s 0.2s ease-in-out;
+  -o-transition: all 0.1s 0.2s ease-in-out;
+  -ms-transition: all 0.1s 0.2s ease-in-out;
+  transition: all 0.1s 0.2s ease-in-out;
 }
 .homeproject .projectCarousal .projsnap img {
   margin-bottom: 10px;
@@ -487,7 +508,8 @@
   transition: all 0.2s ease-in;
 }
 .homeproject .projectCarousal .projsnap p {
-  color: #c5ef27;
+  color: #580458;
+  text-align: right;
   font-size: 17.5px;
   text-shadow: 1px 1px 1px #ffffff;
   -webkit-transform: translateX(300px) rotate(90deg);
@@ -565,9 +587,9 @@
 }
 .homeproject .projectnav {
   position: absolute;
-  left: -239px;
+  left: -253px;
   top: -5px;
-  width: 245px;
+  width: 259px;
 }
 .homeproject .projectnav .nav-stacked {
   margin: 5px;
@@ -662,12 +684,12 @@
 .homeproject::after {
   position: absolute;
   content: "";
-  background-image: url('../img/lady.png');
+  background-image: url('../img/kadambavana.png');
   background-size: 100% 100%;
-  right: -45px;
-  top: 40px;
+  left: 15px;
+  top: 150px;
   z-index: 999;
-  height: 356px;
+  height: 270px;
   width: 150px;
 }
 .project .navbar {
@@ -779,7 +801,7 @@
   text-align: center;
 }
 .services .servimage {
-  border: 4px solid transparent;
+  border: 4px solid #c316c3;
   padding: 6px;
 }
 .services .servimage:hover {
@@ -867,9 +889,11 @@
 }
 body {
   color: #580458;
-  background-image: url('../img/bg.png');
+  background-image: url('../img/bg.jpg');
   background-color: #f3d462;
   background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
 .container {
   width: 992px !important;
@@ -922,13 +946,14 @@ header {
 }
 a,
 .btn.btn-link {
-  color: #ffffff;
+  color: #580458;
 }
 a:hover,
 .btn.btn-link:hover,
 a:hover,
 .btn.btn-link:hover {
   text-decoration: underline;
+  color: #580458;
 }
 .featuredProperty a {
   text-decoration: none;
@@ -955,14 +980,11 @@ html {
 .btn + .btn {
   margin-left: 10px;
 }
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-  background-color: transparent;
-}
 .navbar-default {
-  background: none;
+  background: rgba(255, 0, 210, 0.33);
   border: none;
+  height: 50px;
+  margin-top: 20px;
 }
 .navbar-default .navbar-nav > li {
   margin-bottom: 0px;
@@ -972,22 +994,30 @@ html {
 }
 .navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #580458;
-  padding: 8px 15px;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 10px 15px;
   text-transform: uppercase;
-  font: normal 14px/1.5em 'Arial', Helvetica, sans-serif;
   transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
+  border: 5px solid transparent;
+  text-shadow: 0px 1px 2px #580458;
 }
 .navbar-default .navbar-nav > li.active > a,
 .navbar-default .navbar-nav > li.active:hover > a,
 .navbar-default .navbar-nav > li.active > a:focus,
 .navbar-default .navbar-nav > li:hover > a,
 .navbar-default .navbar-nav > li:hover > a:focus {
-  border-top: 10px solid #ca9f04;
+  border: 5px solid #580458;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   color: #580458;
+  background-color: transparent;
+  top: -5px;
+  padding: 14px;
+  text-shadow: none;
 }
 .navbar-default .navbar-nav > li > ul {
   display: none;
@@ -998,10 +1028,7 @@ html {
   list-style: none;
   text-align: left;
   left: -16px;
-  border: 2px solid #c316c3;
-  background: -moz-linear-gradient(-45deg, #f3d462, #ca9f04);
-  background: -webkit-linear-gradient(-45deg, #f3d462, #ca9f04);
-  background: -linear-gradient(-45deg, #f3d462, #ca9f04);
+  background: rgba(255, 0, 210, 0.33);
 }
 .navbar-default .navbar-nav > li > ul > li {
   padding: 10px;
@@ -1010,32 +1037,38 @@ html {
 }
 .navbar-default .navbar-nav > li > ul > li > a {
   color: #ffffff;
+  text-shadow: 0px 1px 2px #580458;
 }
 .navbar-default .navbar-nav > li > ul > li > a:hover {
   color: #ffffff;
+  text-shadow: none;
 }
 .navbar-default .navbar-nav > li > ul > li:hover {
-  background-color: #ca9f04;
+  background-color: #580458;
 }
 .navbar-default .navbar-nav > li > ul > li ul {
   list-style: none;
   display: none;
   position: absolute;
-  left: 60px;
+  left: 100px;
   width: 180px;
   padding: 2px;
-  border: 1px solid #ca9f04;
-  background-color: #f1df9e;
+  background: rgba(255, 0, 210, 0.33);
   z-index: 999;
 }
 .navbar-default .navbar-nav > li > ul > li ul li {
   padding: 10px;
 }
-.navbar-default .navbar-nav > li > ul > li ul li a {
+.navbar-default .navbar-nav > li > ul > li ul li > a {
   color: #ffffff;
+  text-shadow: 0px 1px 2px #580458;
 }
-.navbar-default .navbar-nav > li > ul > li ul li:hover a {
-  color: #c5ef27;
+.navbar-default .navbar-nav > li > ul > li ul li > a:hover {
+  color: #ffffff;
+  text-shadow: none;
+}
+.navbar-default .navbar-nav > li > ul > li ul li:hover {
+  background-color: #580458;
 }
 .navbar-default .navbar-nav > li > ul > li:hover ul {
   display: block;
@@ -1177,11 +1210,12 @@ h4 {
 .thumbnail,
 .tab-content,
 .panel {
-  /*background: -moz-linear-gradient(-45deg, @back, @darkbackcolor); 
-		background: -webkit-linear-gradient(-45deg, @back, @darkbackcolor); 
-		background: -linear-gradient(-45deg, @back, @darkbackcolor); */
   background: -webkit-gradient(linear, left top, right top, from(#ca9f04), to(#f1df9e));
   box-shadow: 1px 1px 8px #580458;
+}
+.services {
+  background: none;
+  box-shadow: none;
 }
 .content,
 .sections,
@@ -1201,15 +1235,27 @@ h4 {
 }
 hr {
   border-style: dashed;
-  border-color: #f1df9e;
+  border-color: #580458;
   margin: 0px 0px 10px;
 }
 .form-control {
   background: transparent;
-  border-color: #ca9f04;
+  border-color: #580458;
 }
 .form-control:focus {
-  border-color: #f3d462;
+  border-color: #c316c3;
+}
+.form-control input::-webkit-input-placeholder,
+.form-control textarea::-webkit-input-placeholder {
+  color: #580458;
+}
+.form-control input:-moz-placeholder,
+.form-control textarea:-moz-placeholder {
+  color: #580458;
+}
+input::-webkit-input-placeholder {
+  color: #580458;
+  text-transform: uppercase;
 }
 .sidebarModule h4 {
   border: none;
