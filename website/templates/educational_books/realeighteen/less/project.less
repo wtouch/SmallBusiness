@@ -29,52 +29,6 @@
 }
 .homeproject {
 	position : relative;
-	/*.projectCarousal{
-		position : relative;
-		border : 5px solid @colorwhite;
-		z-index : 99;
-		width : 500px;
-		margin : 0 auto;
-		float : none;
-		z-index : 1;
-		box-shadow: 0 0 15px;
-		border-radius : 50%;
-		overflow: hidden;
-		height:500px;
-		.bx-viewport{
-			height:500px;
-			.carousslider li{
-				left:0;
-			}
-			img{
-				height:500px;
-			}
-		}
-		
-	}*/
-	/*.projectCarousal{
-		position : relative;
-		border : 5px solid @colorwhite;
-		z-index : 99;
-		width : 500px;
-		margin : 0 auto;
-		float : none;
-		box-shadow: 0 0 15px;
-		.carousslider{
-			padding-left: 0px;
-			li{
-				border: 3px solid #f9f4da;
-				img{ 
-					width : 100%;
-					min-height : 395px;
-				}
-				&.item{
-					overflow : hidden;
-					height : 395px;
-				}
-			}
-		}
-	}*/
 	.projectCarousal{
 		position : relative;
 		border : 5px solid @colorwhite;
@@ -111,21 +65,8 @@
 		height : 290px;
 		width : 120px;
 	}
-	
-	
-	
-	
 	.projectnav, .projsnap {
-		/*position : absolute;
-		background : linear-gradient(@back, @color);
-		height: 320px;
-		width : 300px;
-		top : 100px;
-		box-sizing : border-box;
-		border : 5px solid @colorwhite;*/
-		
 		position: absolute;
-		background: linear-gradient(#49741e, #264903);
 		//background-color: rgba(0, 125, 0, 0.58);
 		height: 400px;
 		width: 300px;
@@ -136,7 +77,9 @@
 		border: 5px solid #ffffff;
 	}
 	.projectnav{
-		padding : 5px;
+		background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+		//background-color: rgba(132, 29, 129, 0.85);
+		padding : 35px;
 		left : 10px;
 		left : 0;
 		border-radius: 0 50% 50% 0;
@@ -146,17 +89,17 @@
 					margin-top: 10px;
 				}
 				>a, > a:focus{
-					color : @lightcolor;
+					color : @colorwhite;
 					padding: 10px 15px;
 					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 					text-transform : uppercase;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration : none;
-					background : linear-gradient(@darkcolor, @darkbackcolor);
+					background: linear-gradient(@lightcolor, @darkcolor);
 					color : @colorwhite;
-					transform: translateX(-50px);
-					width: 315px;
+					transform: translateX(-80px);
+					width: 340px;
 					border-top-left-radius: 20px;
 					border-bottom-left-radius: 20px;
 					text-align: right;
@@ -166,22 +109,22 @@
 		}
 	}
 	.projsnap{
+	background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+	//background-color: rgba(132, 29, 129, 0.85);
 	    border-radius: 50% 0 0 50%;
 		p{
-			//border-bottom :1px solid @colorwhite;
 			padding:6px;
+			margin:18px;
 			&:last-child{
 				border:none;
 			}
 		}
 		
-	
 		right : 0;
 		padding-left: 90px !important;
 		padding-top: 12px !important;
 		padding-right: 10px !important;
-		
-		
+	
 		text-align : center;
 		img{
 			height : 110px;
@@ -192,11 +135,11 @@
 			padding :4px;
 		}
 		p{
-			color : @lightcolor;
+			color : @colorwhite;
 		}
 		.viewproperty{
 			a{
-				color : @lightcolor;
+				color : @colorwhite;
 				text-decoration : underline;
 				&:hover{
 					color : @colorwhite;
@@ -229,9 +172,6 @@
 	}
 }
 
-
-
-
 // single project nav css
 .project{
 	.navbar{
@@ -248,7 +188,7 @@
 			border-right : 1px solid @lightbackcolor;
 			>a, > a:focus{
 				padding : 9px 12px;
-				color : @lightcolor;
+				color : @colorwhite;
 				position : relative;
 			} 
 			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{

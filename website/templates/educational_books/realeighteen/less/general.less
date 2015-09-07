@@ -15,12 +15,13 @@
 					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 					&:hover{
 						color: @colorwhite;
-						background-color: @back;
+						//background-color: @back;
+						background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
 					}
 				}
 				&.active>a, &.active>a:hover, &.active>a:focus{
 					color: @colorwhite;
-					background-color: @back;
+					background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
 					border: 1px solid @darkbackcolor;
 				}
 			}
@@ -76,11 +77,11 @@
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background : linear-gradient(@back, @color);
+			background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
 			>li{
 				border-right : 1px solid @lightbackcolor;
 				>a, > a:focus{
-					color : @lightcolor;
+					color : @colorwhite;
 					font : bold 15px/1em Arial, Helvetica, sans-serif;
 					position : relative;
 					text-transform : uppercase;
@@ -88,7 +89,7 @@
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					color : @colorwhite;
-					background : linear-gradient(@darkcolor, @darkbackcolor);
+					background: linear-gradient(@lightcolor, @darkcolor);
 				}
 			}
 		}
@@ -151,7 +152,7 @@
 				padding : 0px;
 				cite{
 					font-size : 17px;
-					color : @darkcolor;
+					color : @colorwhite;
 				}
 			}
 			&::before{
