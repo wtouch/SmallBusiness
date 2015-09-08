@@ -127,7 +127,9 @@
 		margin-left:10px;
 	}
 	.navbar-default {
-		background : rgba(255, 0, 210, 0.33);
+		//background : rgba(255, 0, 210, 0.33);
+		background-image: -webkit-linear-gradient(top, @darkbackcolor, @back, @darkbackcolor);
+		//background : @darkcolor;
 		border:none;
 		height : 50px;
 		margin-top : 20px;
@@ -138,7 +140,7 @@
 				padding: 0 5px;
 				float: left;
 				>a, > a:focus {
-					color:@colorwhite;
+					color:@darkcolor;
 					font-weight : bold;
 					padding: 10px 15px;
 					text-transform: uppercase;
@@ -147,14 +149,14 @@
 					-moz-transition: all 0.2s ease;
 					-webkit-transition: all 0.2s ease;
 					border : 5px solid transparent;
-					text-shadow : 0px 1px 2px @darkcolor;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					border: 5px solid @darkcolor;
+					border: 5px solid @lightcolor;
 					border-top-left-radius : 10px;
 					border-bottom-right-radius : 10px;
-					color:@darkcolor;
-					background-color : transparent;
+					color:@colorwhite;
+					background-color:@darkcolor;
+					//background: -webkit-gradient(linear, left top, right top, from(@darkbackcolor), to(@lightbackcolor));
 					top : -5px;
 					padding : 14px;
 					text-shadow : none;
