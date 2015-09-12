@@ -77,6 +77,9 @@
 			height: 80px;
 			margin: 50px 0px;	
 		}
+		.navbar{
+			min-height : 50px;
+		}
 		.navbar-default {
 			background : -webkit-linear-gradient(top, @back, @darkcolor, @back);
 			background : -moz-linear-gradient(top, @back, @darkcolor, @back);
@@ -386,5 +389,29 @@
 		}
 		a, a:hover{
 			color : @color;
+		}
+	}
+	.navbar-toggle{
+		background-color : @darkcolor;
+		border-color : @colorwhite;
+	}
+	.navbar-toggle .icon-bar {
+		background-color: @colorwhite;
+	}
+	@media (max-width: 480px){
+		header {
+			.navbar{
+				min-height : 1px;
+			}
+			.navbar-default{
+				.navbar-nav {
+					margin: 0px;
+				}
+			}
+		}
+		
+		.btn + .btn{
+			margin-top : 5px;
+			margin-left : 0px;
 		}
 	}
