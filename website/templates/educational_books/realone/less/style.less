@@ -30,7 +30,9 @@
 		background-repeat : repeat;
 		position : relative;
 	}
-	
+	/*.container{
+		width : 992px !important;
+	}*/
 	.sociallinks{
 		top: 50%;
 		width : 5px;
@@ -73,9 +75,7 @@
 			}
 		}
 	}
-	.container{
-		width:992px !important;
-	}
+	
 	.logo {
 		height: 80px;
 		margin-top: 25px;
@@ -112,9 +112,9 @@
 			color:@colorblack;
 		}
 	}
-	html{
+	/*html{
 		min-width:1022px;
-	}
+	}*/
 	.btn + .btn{
 		margin-left:10px;
 	}
@@ -311,31 +311,77 @@
 		transition:300ms;
 	}
 	
-	//for responsive
-	@media (min-width: 320px){
-		.logo{
-			float:left;
+@media (min-width: 320px){
+		.navbar{
+			min-height: 0px;
 		}
-		.cnctinfo{
+		.navbar-default{
+			.navbar-nav {
+				margin: 0px;
+				>li{
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+						
+						top : 0px;
+						background : linear-gradient(@darkcolor, @darkbackcolor);
+						color : @colorwhite;
+					}
+				}
+			}
+		}
+		.contactinfo{
 			display : none;
+		}
+		.navbar{
+			min-height: 0px;
+			margin-top: 10px;
+		}
+		.homeimg{
+			float:left;
+			width:100%;
+			margin-bottom: 20px;
 		}
 	}
 	@media (min-width: 992px){
-		.logo{
-			float:none;
+		.navbar-default{
+			.navbar-nav {
+				margin: 0px;
+				>li{
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+						background : linear-gradient(@darkcolor, @darkbackcolor);
+						color : @colorwhite;
+						top: -8px;
+						padding-top: 20px;
+					}
+				}
+			}
 		}
-		.cnctinfo{
+		.contactinfo{
 			display : block;
 		}
-		
-	
+		.navbar{
+			min-height: 70px;
+		}
+		.homeimg{
+			float:right;
+			margin-left: 25px;
+			width:25%;
+		}
 	}
 	@media (min-width: 1200px){
-		.logo{
-			float:none;
-		}
-		.cnctinfo{
+		
+		.contactinfo{
 			display : block;
 		}
-		
+		.navbar{
+			min-height: 70px;
+		}
+		.homeimg{
+			float:right;
+			margin-left: 25px;
+			//width:25%;
+			max-height: 210px;
+		}
+		.slider{
+			max-width:802px;
+		}
 	}

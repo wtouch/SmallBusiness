@@ -443,14 +443,14 @@
   position: relative;
   border: 5px solid #ffffff;
   z-index: 99;
-  width: 500px;
+  width: 540px;
   margin: 0 auto;
   float: none;
   z-index: 1;
   box-shadow: 0 0 15px;
   border-radius: 50%;
   overflow: hidden;
-  height: 500px;
+  height: 535px;
 }
 .homeproject .projectCarousal .bx-viewport {
   height: 500px;
@@ -476,15 +476,14 @@
 .homeproject .projsnap {
   position: absolute;
   background: linear-gradient(#49741e, #264903);
-  height: 320px;
-  width: 300px;
+  height: 370px;
+  width: 340px;
   top: 100px;
   box-sizing: border-box;
   border: 5px solid #ffffff;
 }
 .homeproject .projectnav {
   padding: 5px;
-  left: 10px;
   left: 0;
 }
 .homeproject .projectnav .nav-stacked > li + li {
@@ -515,9 +514,9 @@
   padding-right: 50px;
 }
 .homeproject .projsnap {
-  right: 0;
-  padding-left: 90px !important;
-  padding-top: 12px !important;
+  right: 16px;
+  padding-left: 125px !important;
+  padding-top: 30px !important;
   padding-right: 10px !important;
   text-align: center;
 }
@@ -640,6 +639,14 @@
 .projlist .project .thumbnail .caption p {
   margin-bottom: 0px;
 }
+@media (min-width: 1200px) {
+  .projsnap {
+    right: 16px;
+    padding-left: 125px !important;
+    padding-top: 30px !important;
+    padding-right: 10px !important;
+  }
+}
 .services {
   text-align: center;
 }
@@ -707,6 +714,9 @@ body {
   background-repeat: repeat;
   position: relative;
 }
+/*.container{
+		width : 992px !important;
+	}*/
 .sociallinks {
   top: 50%;
   width: 5px;
@@ -748,9 +758,6 @@ body {
 .sociallinks ul li:hover {
   transform: translateX(-45px);
 }
-.container {
-  width: 992px !important;
-}
 .logo {
   height: 80px;
   margin-top: 25px;
@@ -788,9 +795,9 @@ a:hover,
 .modal-body p {
   color: #000000;
 }
-html {
-  min-width: 1022px;
-}
+/*html{
+		min-width:1022px;
+	}*/
 .btn + .btn {
   margin-left: 10px;
 }
@@ -999,26 +1006,75 @@ footer {
   transition: 300ms;
 }
 @media (min-width: 320px) {
-  .logo {
-    float: left;
+  .navbar {
+    min-height: 0px;
   }
-  .cnctinfo {
+  .navbar-default .navbar-nav {
+    margin: 0px;
+  }
+  .navbar-default .navbar-nav > li.active > a,
+  .navbar-default .navbar-nav > li.active:hover > a,
+  .navbar-default .navbar-nav > li.active > a:focus,
+  .navbar-default .navbar-nav > li:hover > a,
+  .navbar-default .navbar-nav > li:hover > a:focus,
+  .navbar-default .navbar-nav > li:hover > a:focus {
+    top: 0px;
+    background: linear-gradient(#e2271f, #3a0c0a);
+    color: #ffffff;
+  }
+  .contactinfo {
     display: none;
+  }
+  .navbar {
+    min-height: 0px;
+    margin-top: 10px;
+  }
+  .homeimg {
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
   }
 }
 @media (min-width: 992px) {
-  .logo {
-    float: none;
+  .navbar-default .navbar-nav {
+    margin: 0px;
   }
-  .cnctinfo {
+  .navbar-default .navbar-nav > li.active > a,
+  .navbar-default .navbar-nav > li.active:hover > a,
+  .navbar-default .navbar-nav > li.active > a:focus,
+  .navbar-default .navbar-nav > li:hover > a,
+  .navbar-default .navbar-nav > li:hover > a:focus,
+  .navbar-default .navbar-nav > li:hover > a:focus {
+    background: linear-gradient(#e2271f, #3a0c0a);
+    color: #ffffff;
+    top: -8px;
+    padding-top: 20px;
+  }
+  .contactinfo {
     display: block;
+  }
+  .navbar {
+    min-height: 70px;
+  }
+  .homeimg {
+    float: right;
+    margin-left: 25px;
+    width: 25%;
   }
 }
 @media (min-width: 1200px) {
-  .logo {
-    float: none;
-  }
-  .cnctinfo {
+  .contactinfo {
     display: block;
+  }
+  .navbar {
+    min-height: 70px;
+  }
+  .homeimg {
+    float: right;
+    margin-left: 25px;
+    max-height: 210px;
+  }
+  .slider {
+    max-width: 802px;
   }
 }
