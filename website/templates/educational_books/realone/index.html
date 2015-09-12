@@ -9,22 +9,46 @@
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
 		<script src="{{ path }}js/jquery.min.js"></script>
 		<script src="{{ path }}js/bootstrap.min.js"></script>
-		
 		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
-		
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
-		
 		<script src="{{ path }}js/script.js"></script>
 		<script src="{{ path }}js/myscript.js"></script>
-		
-		
-		
 		<title>{{seo.title}} | {{data.business_name}}</title>
-		
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		{% if data.template_params %}
+			<style>	
+				a:hover,.btn.btn-link:hover{
+					color :  {{data.template_params.color}};	
+				} 
+				.navbar-toggle .icon-bar{
+					background-color: {{data.template_params.light_color}};
+				}
+				.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > ul > li > a, .navbar-default .navbar-nav > li > ul > li ul li a,.btn-info, .btn-primary,.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus,.homeproject .projectnav .nav-stacked > li > a,.homeproject .projectnav .nav-stacked > li > a:focus, .homeproject .projsnap p, .homeproject .projsnap .viewproperty a, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus, .services .servdesc .readmore a {
+					color: {{data.template_params.light_color}};
+				}
+				.testimonial blockquote footer cite, .featrtesti blockquote footer cite{
+					color: {{data.template_params.dark_color}};
+				}
+				.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .featuretab .nav-tabs li a:hover, .featuretab .nav-tabs li.active > a, .featuretab .nav-tabs li.active > a:hover, .featuretab .nav-tabs li.active > a:focus, .singleproperty .btn-primary{
+					background-color: {{data.template_params.background_color}};
+				}
+				.form-control:focus, hr {
+					border-color: {{data.template_params.background_color}};
+				}
+				.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > .disabled > a:hover, .singleproperty .propDetails .table tbody tr th, .singleproperty .btn-primary:hover, .content{
+					background-color: {{data.template_params.background_color_dark}};
+				}
+				a, .btn.btn-link, h1,h2,h3,h4{
+					color: {{data.template_params.background_color_dark}};
+				}
+				.form-control,.thumbnail,.about .table tbody tr th,.contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td{
+					border-color: {{data.template_params.background_color_dark}};
+				}
+			</style>
+		{% endif %}
 	</head>
 	<body>
 		<div class="sociallinks">

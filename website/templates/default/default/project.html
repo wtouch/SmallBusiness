@@ -1,41 +1,57 @@
 {% autoescape false %}
-<h2>{{project.title}}</h2>
+<div class="row">
+	<div class="col-xs-9">
+		<h2>{{project.title}}</h2>
+	</div>	
+	<div class="col-xs-3">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subnav" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+	</div>
+</div>
 <div class="row project">
 	{% if homeproject != 'true' %}
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<nav class="navbar">
-				<ul class="nav navbar-nav">
-					<li {{ projectPage == 'overview' ? 'class="active"' }}>
-					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/overview">Overview</a>
-				</li>
-				<li {{ projectPage == 'amenities' ? 'class="active"' }}>
-					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/amenities">Amenities/Specifications</a>
-				</li>
-				<li {{ projectPage == 'locationmap' ? 'class="active"' }}>
-					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/locationmap">Location Map</a>
-				</li>
-				<li {{ projectPage == 'layoutplan' ? 'class="active"' }}>
-					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/layoutplan">Layout Plan</a>
-				</li>
-				<li {{ projectPage == 'floorplans' ? 'class="active"' }}>
-					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/floorplans">Floor Plans</a>
-				</li>
-				<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
-					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projgallery">Gallery</a>
-				</li>
-				<li {{ projectPage == 'projecttestimonials' ? 'class="active"' }}>
-					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projecttestimonials">Testimonials</a>
-				</li>
-				<li {{ projectPage == 'projcontact' ? 'class="active"' }}>
-					<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projcontact">Contact</a>
-				</li>
-				</ul>
+				<div class="navbar-collapse collapse " id="subnav" aria-expanded="false">
+					<ul class="nav navbar-nav">
+						<li {{ projectPage == 'overview' ? 'class="active"' }}>
+							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/overview">Overview</a>
+						</li>
+						<li {{ projectPage == 'amenities' ? 'class="active"' }}>
+							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/amenities">Amenities/Specifications</a>
+						</li>
+						<li {{ projectPage == 'locationmap' ? 'class="active"' }}>
+							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/locationmap">Location Map</a>
+						</li>
+						<li {{ projectPage == 'layoutplan' ? 'class="active"' }}>
+							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/layoutplan">Layout Plan</a>
+						</li>
+						<li {{ projectPage == 'floorplans' ? 'class="active"' }}>
+							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/floorplans">Floor Plans</a>
+						</li>
+						<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
+							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projgallery">Gallery</a>
+						</li>
+						<li {{ projectPage == 'projecttestimonials' ? 'class="active"' }}>
+							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projecttestimonials">Testimonials</a>
+						</li>
+						<li {{ projectPage == 'projcontact' ? 'class="active"' }}>
+							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projcontact">Contact</a>
+						</li>
+					</ul>
+				</div>
 			</nav>
 		</div>
 	{% endif %}
 	{% if projectPage == 'overview' %}
 	<!-- Overview -->
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<img src="{{project.project_images.0.file_relative_path}}" class="projImg img-responsive"/>
 			<div class="projHead clearfix">
 				<b class="highlight"><!-- Residential Township - Jaipur -->{{project.overview.projectsubtitle}}</b><br>
@@ -50,22 +66,22 @@
 		</div>
 	{% endif %}
 	{% if projectPage == 'amenities' and project.amenities >= 1 %}
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Amenities/Features :</h3>
 			<div class="description">{{project.amenities.description}}</div>
 		</div>
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Specifications :</h3>
 			<div class="description">{{project.specifications.description}}</div>
 		</div>
 	{% endif %}
 	{% if projectPage == 'floorplans' and project.floor_plan >= 1 %}
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Floor Plans</h3>
 			<div class="projectgallery">
 				<div class="row">
 				{% for key, value in project.floor_plan %}
-					<div class="col-xs-6 col-lg-4">
+					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="thumbnail floor">
 							<div class="projectImags">
 								<img src="{{value.image}}" class="img-responsive center-block" alt="{{value.title}}">
@@ -81,7 +97,7 @@
 		</div>
 	{% endif %}
 	{% if projectPage == 'layoutplan' and project.layout_map >= 1 %}
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Layout Plan</h3>
 			{% for key, value in project.layout_map %}
 				<h4 class="highlight text-center">{{value.title}}</h4>
@@ -92,7 +108,7 @@
 		</div>
 	{% endif %}
 	{% if projectPage == 'locationmap' and project.location_map >= 1 %}
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Location Map</h3>
 			{% for key, value in project.location_map %}
 				<h4 class="highlight text-center">{{value.title}}</h4>
@@ -103,12 +119,13 @@
 		</div>
 	{% endif %} 
 	{% if projectPage == 'projgallery' and project.project_gallery >=1 %}
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Project Gallery</h3>
+			
 			<div class="projectgallery">
 				<div class="row">
 					{% for key, value in project.project_gallery %}
-					<div class="col-xs-6 col-lg-4">
+					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="thumbnail">
 							<div class="projectImags">
 								<a type="button" data-toggle="modal" data-target="#myModal{{loop.index}}" style="cursor : pointer;">
@@ -121,13 +138,15 @@
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h2 class="modal-title text-center" id="myModalLabel">Project Images</h2>
 								</div>
 								<div class="modal-body">
-									<div class="thumbnail">
-										<img class="img-responsive center-block" src="{{value.image}}"/>
+									<div class="row">
+										<div class="thumbnail">
+											<img class="img-responsive center-block" src="{{value.image}}"/>
+											
+										</div>
 									</div>
 								</div>
 							</div>
@@ -162,7 +181,7 @@
 		</div>
 	{% endif %}
 	{% if projectPage == 'projcontact' and project.project_gallery >=1 %}
-		<div class="col-xs-12">
+		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Contact Details :</h3>
 			<p>Contact Person : {{project.contact_details.name}}
 			<p>Mobile : {{project.contact_details.phone}}
