@@ -176,6 +176,9 @@
   margin-bottom: 10px;
 }
 @media (max-width: 480px) {
+  .singleproperty .property .subimg {
+    margin-bottom: 10px;
+  }
   .singleproperty .property .mainimg {
     height: 150px;
     width: 180px;
@@ -287,16 +290,33 @@
 }
 .homeproject .projsnap {
   right: 0;
-  padding-left: 90px !important;
+  padding-left: 90px;
   padding-top: 12px !important;
   padding-right: 10px !important;
+  right: 10px;
 }
 .homeproject .projsnap p {
   border-bottom: 1px solid #951544;
   padding: 6px;
+  color: #f7cbce;
 }
 .homeproject .projsnap p:last-child {
   border: none;
+}
+.homeproject .projsnap img {
+  height: 110px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #f7cbce;
+  border-radius: 5px;
+  padding: 4px;
+}
+.homeproject .projsnap .viewproperty a {
+  color: #f7cbce;
+  font: 16px 'Alex Brush', cursive;
+}
+.homeproject .projsnap .viewproperty a:hover {
+  color: #f7cbce;
 }
 .homeproject .projectnav {
   padding: 4px;
@@ -325,28 +345,6 @@
   text-decoration: none;
   background-color: #951544;
   color: #ffffff;
-}
-.homeproject .projsnap {
-  padding: 5px 15px;
-  right: 10px;
-}
-.homeproject .projsnap img {
-  height: 110px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #f7cbce;
-  border-radius: 5px;
-  padding: 4px;
-}
-.homeproject .projsnap p {
-  color: #f7cbce;
-}
-.homeproject .projsnap .viewproperty a {
-  color: #f7cbce;
-  font: 16px 'Alex Brush', cursive;
-}
-.homeproject .projsnap .viewproperty a:hover {
-  color: #f7cbce;
 }
 .projlist .project .thumbnail {
   height: 385px;
@@ -423,23 +421,32 @@
   margin-bottom: 10px;
 }
 @media (max-width: 480px) {
+  .homeproject .bx-viewport {
+    height: 270px;
+  }
+  .homeproject .projectCarousal .carousslider li.item {
+    height: 270px;
+  }
+}
+@media (max-width: 768px) {
+  .homeproject .projectnav,
+  .homeproject .projsnap,
   .homeproject .projectCarousal {
     position: static;
+    width: auto;
+  }
+  .homeproject .bx-viewport {
+    height: 400px;
+  }
+  .homeproject .projectCarousal .carousslider li.item {
+    height: 400px;
+  }
+  .homeproject .projsnap {
+    padding-left: 5px;
   }
   .homeproject .projectCarousal::after {
-    position: absolute;
-    content: "";
-    background-image: url('../img/lady.png');
-    background-size: 100% 100%;
-    right: -38px;
-    bottom: -5px;
-    z-index: 999;
-    height: 290px;
-    width: 120px;
-  }
-  .homeproject .projectnav,
-  .homeproject .projsnap {
-    position: static;
+    display: none;
+    width: 0px;
   }
 }
 .services .servimage {
