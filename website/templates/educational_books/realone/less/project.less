@@ -30,17 +30,18 @@
 .homeproject {
 	position : relative;
 	.projectCarousal{
+		
 		position : relative;
 		border : 5px solid @colorwhite;
 		z-index : 99;
-		width : 540px;
+		width : 500px;
 		margin : 0 auto;
 		float : none;
 		z-index : 1;
 		box-shadow: 0 0 15px;
 		border-radius : 50%;
 		overflow: hidden;
-		height:535px;
+		
 		.bx-viewport{
 			height:500px;
 			.carousslider li{
@@ -54,29 +55,29 @@
 	}
 	
 	.projectCarousal::after{
-	position : absolute;
-	content : "";
-	background-image : url('../img/lady.png');
-	background-size: 100% 100%;
-	right :200px;
-	bottom : -2px;
-	z-index: 999;
-	height : 290px;
-	width : 120px;
-}
+		position : absolute;
+		content : "";
+		background-image : url('../img/lady.png');
+		background-size: 100% 100%;
+		right :200px;
+		bottom : -2px;
+		z-index: 999;
+		height : 290px;
+		width : 120px;
+	}
 	.projectnav, .projsnap {
 		position : absolute;
 		background : linear-gradient(@back, @color);
-		height: 370px;
-		width : 340px;
+		height: 320px;
+		width : 300px;
 		top : 100px;
 		box-sizing : border-box;
 		border : 5px solid @colorwhite;
 	}
 	.projectnav{
 		padding : 5px;
+		left :10;
 		left : 0;
-		
 		.nav-stacked{
 			>li{
 				+li {
@@ -248,13 +249,118 @@
 			}
 		}
 	}
-	@media (min-width: 1200px){
+	/*@media (max-width: 768px){
+	.homeproject {
+		.projectCarousal{
+			width:auto;
+			height:500px;
+		}
 		.projsnap{
+			padding-left: 154px ;
+		}
 		
-			right: 16px;
-			padding-left: 125px !important;
-			padding-top: 30px !important;
-			padding-right: 10px !important;
+	}
+		
+		
+	}*/
+	@media (max-width: 768px){
+		.homeproject {
+			.projectCarousal{
+				position : static;
+				border : 5px solid @colorwhite;
+				width:auto;
+				height:300px;
+				margin : 0 ;
+				box-shadow: 0 0 15px;
+				border-radius :0px;
+				margin-bottom:5px;
+				margin-left: 10px;
+			}
+			.projectCarousal::after{
+				position : absolute;
+				content : "";
+				background-image : url('../img/lady.png');
+				background-size: 100% 100%;
+				bottom : -3px;
+				z-index: 999;
+				height : 290px;
+				width : 120px;
+				left: 17px;
+
+			}
+			.projsnap{
+				padding-left: 0px !important;
+			}
+			.projectnav{
+				.nav-stacked{
+					>li{
+						text-align: center;
+						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+							transform: translateX(0px);
+							width: 100%;
+							border-top-left-radius: 0px;
+							border-bottom-left-radius: 0px;
+							text-align: center;
+							padding-right: 50px;
+						}
+					}
+				}
+			}
+			.projectnav, .projsnap {
+				position : static;
+				margin-left: 10px;
+				width:auto;
+			}
 		}
 	}
+	@media (max-width: 480px){
+		.homeproject {
+			
+			.projectCarousal{
+				position : static;
+				border : 5px solid @colorwhite;
+				width:auto;
+				height:300px;
+				margin : 0 ;
+				box-shadow: 0 0 15px;
+				border-radius :0px;
+				margin-bottom:5px;
+				margin-left: 10px;
+			}
+			.projectCarousal::after{
+				position : absolute;
+				content : "";
+				background-image : url('../img/lady.png');
+				background-size: 100% 100%;
+				bottom : -5px;
+				z-index: 999;
+				height : 290px;
+				width : 120px;
+			}
+			.projsnap{
+				padding-left: 0px !important;
+			}
+			.projectnav{
+				.nav-stacked{
+					>li{
+						text-align: center;
+						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+							transform: translateX(0px);
+							width: 100%;
+							border-top-left-radius: 0px;
+							border-bottom-left-radius: 0px;
+							text-align: center;
+							padding-right: 50px;
+						}
+					}
+				}
+			}
+			.projectnav, .projsnap {
+				position : static;
+				margin-left: 10px;
+				width:auto;
+			}
+		}
+	}
+	
 	
