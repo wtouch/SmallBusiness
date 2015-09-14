@@ -752,10 +752,7 @@
   transition: 300ms;
 }
 .container {
-  width: 992px !important;
-}
-html {
-  min-width: 1022px;
+  max-width: 992px !important;
 }
 body {
   background-image: url('../img/back.jpg');
@@ -814,7 +811,7 @@ body {
 }
 .navbar-toggle {
   border: 1px solid #bbbbbb;
-  margin-top: 45px;
+  margin-top: 8px;
 }
 .navbar-toggle .icon-bar {
   background-color: #bbbbbb;
@@ -1084,55 +1081,46 @@ footer a,
 footer a:hover {
   color: #bbbbbb;
 }
-@media (min-width: 320px) {
-  .logo {
-    float: left;
+@media (max-width: 540px) {
+  header .navbar {
+    min-height: 1px;
   }
-  .contactinfo {
-    display: none;
+  header .navbar-default .navbar-nav {
+    margin: 0px;
   }
-  .navbar {
-    min-height: 0px;
-    margin-top: 10px;
-  }
-  .homeimg {
-    float: left;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-}
-@media (min-width: 992px) {
-  .logo {
-    float: none;
-  }
-  .contactinfo {
-    display: block;
-  }
-  .navbar {
-    min-height: 70px;
-  }
-  .homeimg {
-    float: right;
-    margin-left: 25px;
-    width: 25%;
+  header .navbar-default .navbar-nav > li.active > a,
+  header .navbar-default .navbar-nav > li.active:hover > a,
+  header .navbar-default .navbar-nav > li.active > a:focus,
+  header .navbar-default .navbar-nav > li:hover > a,
+  header .navbar-default .navbar-nav > li:hover > a:focus,
+  header .navbar-default .navbar-nav > li:hover > a:focus {
+    background-color: #bccb3d;
+    color: #000000;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    top: 0px;
+    padding-top: 0px;
+    height: auto;
+    background-image: -webkit-linear-gradient(bottom, #bccb3d 70%, #171600);
   }
 }
-@media (min-width: 1200px) {
-  .logo {
-    float: none;
+@media (max-width: 480px) {
+  .navbar-default .navbar-nav {
+    margin: 0px;
   }
-  .contactinfo {
-    display: block;
-  }
-  .navbar {
-    min-height: 70px;
-  }
-  .homeimg {
-    float: right;
-    margin-left: 25px;
-    max-height: 210px;
-  }
-  .slider {
-    max-width: 802px;
+  .navbar-default .navbar-nav > li.active > a,
+  .navbar-default .navbar-nav > li.active:hover > a,
+  .navbar-default .navbar-nav > li.active > a:focus,
+  .navbar-default .navbar-nav > li:hover > a,
+  .navbar-default .navbar-nav > li:hover > a:focus,
+  .navbar-default .navbar-nav > li:hover > a:focus {
+    background-color: #bccb3d;
+    color: #000000;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    top: 0px;
+    padding-top: 0px;
+    height: auto;
+    background-image: -webkit-linear-gradient(bottom, #bccb3d 70%, #171600);
   }
 }

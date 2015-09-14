@@ -276,24 +276,104 @@
 			}
 		}
 	}
-	@media (min-width: 320px){
-		.projImg{
-			float :none;
-			max-height : 175px;
-			margin-right:10px;
+	@media (max-width: 768px){
+		.homeproject {
+			.projectCarousal{
+				position : static;
+				border : 5px solid @colorwhite;
+				width:auto;
+				height:300px;
+				margin : 0 ;
+				box-shadow: 0 0 15px;
+				border-radius :0px;
+				margin-bottom:5px;
+				margin-left: 10px;
+			}
+			.projectCarousal::after{
+				position : absolute;
+				content : "";
+				background-image : url('../img/lady.png');
+				background-size: 100% 100%;
+				bottom : -3px;
+				z-index: 999;
+				height : 290px;
+				width : 120px;
+				left: 17px;
+				  
+
+			}
+			.projsnap{
+				padding-left: 0px !important;
+			}
+			.projectnav{
+				.nav-stacked{
+					>li{
+						text-align: center;
+						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+							transform: translateX(0px);
+							width: 100%;
+							border-top-left-radius: 0px;
+							border-bottom-left-radius: 0px;
+							text-align: center;
+							padding-right: 50px;
+						}
+					}
+				}
+			}
+			.projectnav, .projsnap {
+				position : static;
+				margin-left: 10px;
+				width:auto;
+			}
 		}
 	}
-	@media (min-width: 992px){
-		.projImg{
-			float : left;
-			max-height : 175px;
-			margin-right : 10px;
-		}
-	}
-	@media (min-width: 1200px){
-		.projImg{
-			float :left;
-			max-height : 175px;
-			margin-right:10px;
+	@media (max-width: 480px){
+		.homeproject {
+			
+			.projectCarousal{
+				position : static;
+				border : 5px solid @colorwhite;
+				width:auto;
+				height:300px;
+				margin : 0 ;
+				box-shadow: 0 0 15px;
+				border-radius :0px;
+				margin-bottom:5px;
+				margin-left: 10px;
+			}
+			.projectCarousal::after{
+				position : absolute;
+				content : "";
+				background-image : url('../img/lady.png');
+				background-size: 100% 100%;
+				 bottom: 4px;
+				z-index: 999;
+				height : 290px;
+				width : 120px;
+				left: -21px;
+			}
+			.projsnap{
+				padding-left: 0px !important;
+			}
+			.projectnav{
+				.nav-stacked{
+					>li{
+						text-align: center;
+						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+							transform: translateX(0px);
+							width: 100%;
+							border-top-left-radius: 0px;
+							border-bottom-left-radius: 0px;
+							text-align: center;
+							padding-right: 50px;
+						}
+					}
+				}
+			}
+			.projectnav, .projsnap {
+				position : static;
+				margin-left: 10px;
+				width:auto;
+			}
 		}
 	}

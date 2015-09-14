@@ -22,10 +22,7 @@
 		transition : 300ms;
 	}
 	.container{
-		width : 992px !important;
-	}
-	html{
-		min-width : 1022px;
+		max-width : 992px !important;
 	}
 	body{
 		background-image: url('../img/back.jpg');
@@ -85,7 +82,7 @@
 	}
 	.navbar-toggle {
 		border : 1px solid @lightcolor;
-		margin-top : 45px;
+		margin-top : 8px;
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @lightcolor;
@@ -335,56 +332,47 @@
 			color:@lightcolor;
 		}
 	}
-	@media (min-width: 320px){
-		.logo{
-			float:left;
-		}
-		.contactinfo{
-			display : none;
-		}
-		.navbar{
-			min-height: 0px;
-			margin-top: 10px;
-		}
-		.homeimg{
-			float:left;
-			width:100%;
-			margin-bottom: 20px;
-		}
-	}
-	@media (min-width: 992px){
-		.logo{
-			float:none;
-		}
-		.contactinfo{
-			display : block;
-		}
-		.navbar{
-			min-height: 70px;
-		}
-		.homeimg{
-			float:right;
-			margin-left: 25px;
-			width:25%;
+	@media (max-width: 540px){
+		header {
+			.navbar{
+				min-height : 1px;
+			}
+			.navbar-default{
+				.navbar-nav {
+					margin: 0px;
+						>li{
+						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+							background-color : @color;
+							color : @colorblack;
+							border-bottom-left-radius : 0px;
+							border-bottom-right-radius : 0px;
+							top: 0px;
+							padding-top: 0px;
+							height: auto;
+							background-image:-webkit-linear-gradient(bottom, @color 70%,@darkbackcolor) ;
+						}
+					}
+				}
+			}
 		}
 	}
-	@media (min-width: 1200px){
-		.logo{
-			float:none;
+	@media (max-width: 480px){
+		.navbar-default{
+			.navbar-nav {
+				margin: 0px;
+					>li{
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+						background-color : @color;
+							color : @colorblack;
+							border-bottom-left-radius : 0px;
+							border-bottom-right-radius : 0px;
+							top: 0px;
+							padding-top: 0px;
+							height: auto;
+							background-image:-webkit-linear-gradient(bottom, @color 70%,@darkbackcolor) ;
+					}
+				}
+			}
 		}
-		.contactinfo{
-			display : block;
-		}
-		.navbar{
-			min-height: 70px;
-		}
-		.homeimg{
-			float:right;
-			margin-left: 25px;
-			//width:25%;
-			max-height: 210px;
-		}
-		.slider{
-			max-width:802px;
-		}
+		
 	}
