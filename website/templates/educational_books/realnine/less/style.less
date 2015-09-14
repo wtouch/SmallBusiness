@@ -85,14 +85,10 @@
 		background-color : @back;
 	}
 	
-	html{
-		min-width:1022px;
-	}
 	
 	.container{
-		width:992px !important;
+		max-width:992px !important;
 	}
-	
 	.content
 	{
 		background-color :@colorwhite;
@@ -178,6 +174,7 @@
 	.navbar
 	{
 		border:none;
+		min-height : 50px;
 	}
 	
 	.contentModule .sections .readmore .btn-info {
@@ -192,7 +189,6 @@
 		margin-bottom :0px;
 		border-radius: 0;
 		.navbar-nav{
-			margin-left:-15px;
 			> li{
 				
 				text-transform:uppercase;
@@ -519,17 +515,7 @@
 			color:@colorblack;
 		}
 	}
-	.infrastructure{
-		.thumbnail{
-			height: 395px;
-			img{
-				height : 190px;
-			}
-			.caption{
-				height: 138px;
-			}
-		}
-	}
+	
 	//Common effect
 	.contact, .myjobs{
 		.panel-default {
@@ -663,5 +649,28 @@
 		}
 		.slider{
 			max-width:802px;
+		}
+	}
+	.navbar-toggle{
+		background-color : @darkcolor;
+		border-color : @colorwhite;
+	}
+	.navbar-toggle .icon-bar {
+		background-color: @colorwhite;
+	}
+	@media (max-width: 540px){
+		header {
+			.navbar{
+				min-height : 1px;
+			}
+		}
+		.navbar-nav {
+			margin: 0px;
+		}
+	}
+	@media (max-width: 480px){
+		.btn + .btn{
+			margin-top : 5px;
+			margin-left : 0px;
 		}
 	}

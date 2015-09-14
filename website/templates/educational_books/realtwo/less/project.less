@@ -84,16 +84,33 @@
 		p{
 			border-bottom:1px solid @darkcolor;
 			padding:6px;
+			color : @color;
 			&:last-child{
 				border:none;
 			}
 		}
-		
-	
 		right : 0;
-		padding-left: 90px !important;
+		padding-left: 90px;
 		padding-top: 12px !important;
 		padding-right: 10px !important;
+		right : 10px;
+		img{
+			height : 110px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border : 1px solid @color;
+			border-radius : 5px;
+			padding :4px;
+		}
+		.viewproperty{
+			a{
+				color : @color;
+				font: 16px 'Alex Brush', cursive;
+				&:hover{
+					color : @color;
+				}
+			}
+		}
 	}
 	.projectnav{
 		padding : 4px;
@@ -114,30 +131,6 @@
 					text-decoration : none;
 					background-color: @darkcolor;
 					color : @colorwhite;
-				}
-			}
-		}
-	}
-	.projsnap{
-		padding : 5px 15px;
-		right : 10px;
-		img{
-			height : 110px;
-			margin-top: 10px;
-			margin-bottom: 10px;
-			border : 1px solid @color;
-			border-radius : 5px;
-			padding :4px;
-		}
-		p{
-			color : @color;
-		}
-		.viewproperty{
-			a{
-				color : @color;
-				font: 16px 'Alex Brush', cursive;
-				&:hover{
-					color : @color;
 				}
 			}
 		}
@@ -221,4 +214,49 @@
 				}
 			}
 		}
+	}
+	@media (max-width : 480px){
+		.homeproject{
+			.bx-viewport{
+				height : 270px;
+			}
+			.projectCarousal{
+				.carousslider{
+					li{
+						&.item{
+							height : 270px;
+						}
+					}
+				}
+			}
+		}
+	}
+	@media (max-width : 768px){
+		.homeproject{
+			.projectnav, .projsnap, .projectCarousal{
+				position : static;
+				width : auto;
+			}
+			.bx-viewport{
+				height : 400px;
+			}
+			.projectCarousal{
+				
+				.carousslider{
+					li{
+						&.item{
+							height : 400px;
+						}
+					}
+				}
+			}
+			.projsnap{
+				padding-left : 5px;
+			}
+			.projectCarousal::after{
+				display : none;
+				width : 0px;
+			}
+		}
+		
 	}
