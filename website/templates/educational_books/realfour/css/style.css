@@ -223,67 +223,12 @@
 .homeproject {
   margin-bottom: 10px;
 }
-.homeproject .projectCarousal {
-  display: inline-block;
-  float: left;
-  position: relative;
-}
-.homeproject .projectCarousal .carousel-inner .item {
-  height: 342px;
-  overflow: hidden;
-}
-.homeproject .projectCarousal .carousel-inner .item img {
-  min-height: 415px;
+.homeproject .projectCarousal,
+.homeproject .projsnap,
+.homeproject .projectnav {
+  position: static;
   width: auto;
-}
-.homeproject .projectCarousal .carousel-inner .carousel-caption h2 {
-  border: none;
-}
-.homeproject .projectCarousal .projsnap {
-  padding: 10px;
-  width: 0px;
-  height: 342px;
-  opacity: 0;
-  background-color: rgba(115, 146, 184, 0.7);
-  transform: translateX(530px);
-  transition: all 800ms ease-in;
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-}
-.homeproject .projectCarousal .projsnap p {
-  border-bottom: 1px solid #ffffff;
-  padding: 6px;
-}
-.homeproject .projectCarousal .projsnap p:last-child {
-  border: none;
-}
-.homeproject .projectCarousal .projsnap img {
-  height: 110px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #337ab7;
-  border-radius: 5px;
-  padding: 4px;
-}
-.homeproject .projectCarousal .projsnap p,
-.homeproject .projectCarousal .projsnap .viewproperty a {
-  color: #ffffff;
-  font-size: 20px;
-  text-shadow: 3px 2px 1px #000;
-}
-.homeproject .projectCarousal .projsnap .viewproperty {
-  margin-top: 15px;
-  text-align: center;
-}
-.homeproject .projectCarousal .projsnap .viewproperty a:hover {
-  color: #ffffff;
-}
-.homeproject .projectCarousal:hover .projsnap {
-  opacity: 1;
-  width: 529px;
-  transform: translateX(0px);
+  display: block;
 }
 .homeproject .projectnav {
   display: inline-block;
@@ -405,9 +350,6 @@
     max-height: 175px;
     margin-right: 10px;
   }
-  .projectnav {
-    width: 242px;
-  }
   .projectCarousal {
     width: 620px;
   }
@@ -417,9 +359,6 @@
     float: left;
     max-height: 175px;
     margin-right: 10px;
-  }
-  .projectnav {
-    width: 200px;
   }
   .projectCarousal {
     width: 512px;
@@ -431,11 +370,77 @@
     max-height: 175px;
     margin-right: 10px;
   }
-  .projectnav {
-    width: 200px;
-  }
   .projectCarousal {
     width: 529px;
+  }
+}
+@media (min-width: 1024px) {
+  .projectCarousal {
+    display: inline-block;
+    float: left;
+    position: relative;
+  }
+  .projectCarousal .bx-viewport {
+    height: 342px!important;
+  }
+  .projectCarousal .carousslider {
+    padding-left: 0px;
+  }
+  .projectCarousal .carousslider .item {
+    height: 342px;
+    overflow: hidden;
+  }
+  .projectCarousal .carousslider .item img {
+    min-height: 342px;
+  }
+  .projectCarousal .carousslider .carousel-caption h2 {
+    border: none;
+  }
+  .projectCarousal .projsnap {
+    padding: 10px;
+    width: 0px;
+    height: 342px;
+    opacity: 0;
+    background-color: rgba(115, 146, 184, 0.7);
+    transform: translateX(530px);
+    transition: all 800ms ease-in;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+  }
+  .projectCarousal .projsnap p {
+    border-bottom: 1px solid #ffffff;
+    padding: 6px;
+  }
+  .projectCarousal .projsnap p:last-child {
+    border: none;
+  }
+  .projectCarousal .projsnap img {
+    height: 110px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #337ab7;
+    border-radius: 5px;
+    padding: 4px;
+  }
+  .projectCarousal .projsnap p,
+  .projectCarousal .projsnap .viewproperty a {
+    color: #ffffff;
+    font-size: 20px;
+    text-shadow: 3px 2px 1px #000;
+  }
+  .projectCarousal .projsnap .viewproperty {
+    margin-top: 15px;
+    text-align: center;
+  }
+  .projectCarousal .projsnap .viewproperty a:hover {
+    color: #ffffff;
+  }
+  .projectCarousal:hover .projsnap {
+    opacity: 1;
+    width: 529px;
+    transform: translateX(0px);
   }
 }
 .services .servdesc {
@@ -695,10 +700,7 @@
   transition: 300ms;
 }
 .container {
-  width: 992px !important;
-}
-html {
-  min-width: 1022px;
+  max-width: 992px !important;
 }
 body {
   font-family: 'FengardoNeue_Regular';
@@ -755,7 +757,6 @@ body header .caro .content {
 }
 body header .logo img {
   padding: 10px 0px;
-  border-bottom: 3px solid #23527c;
 }
 body header .sidenav {
   background: #2d4065;
@@ -976,4 +977,25 @@ body footer {
 body footer a,
 body footer a:hover {
   color: #ffffff;
+}
+.navbar-toggle {
+  background-color: #23527c;
+  border-color: #ffffff;
+}
+.navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+@media (max-width: 540px) {
+  header .navbar {
+    min-height: 1px;
+  }
+  header .navbar-default .navbar-nav {
+    margin: 0px;
+  }
+}
+@media (max-width: 480px) {
+  .btn + .btn {
+    margin-top: 5px;
+    margin-left: 0px;
+  }
 }
