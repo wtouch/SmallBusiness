@@ -332,8 +332,33 @@
 			color:@lightcolor;
 		}
 	}
+	@media (max-width: 768px){
+		.navbar-default{
+			.navbar-nav {
+				margin: 0px;
+					>li{
+						padding-left: 0px;
+						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+							background-color : @color;
+							color : @colorblack;
+							border-bottom-left-radius : 0px;
+							border-bottom-right-radius : 0px;
+							top: 0px;
+							padding-top: 10px;
+							//background:none;
+							//background-image:-webkit-linear-gradient( @color 99%,@darkbackcolor) ;
+						}
+				}
+			}
+		}
+	}
 	@media (max-width: 540px){
 		header {
+			.btn + .btn{
+				margin-top : 5px;
+				margin-left : 0px;
+				margin-bottom : 5px;
+			}
 			.navbar{
 				min-height : 1px;
 			}
@@ -341,16 +366,17 @@
 				.navbar-nav {
 					margin: 0px;
 						>li{
-						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
-							background-color : @color;
-							color : @colorblack;
-							border-bottom-left-radius : 0px;
-							border-bottom-right-radius : 0px;
-							top: 0px;
-							padding-top: 0px;
-							height: auto;
-							background-image:-webkit-linear-gradient(bottom, @color 70%,@darkbackcolor) ;
-						}
+							padding-left: 0px;
+							&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+								background-color : @color;
+								color : @colorblack;
+								border-bottom-left-radius : 0px;
+								border-bottom-right-radius : 0px;
+								top: 0px;
+								padding-top: 10px;
+								//background:none;
+								//background-image:-webkit-linear-gradient( @color 99%,@darkbackcolor) ;
+							}
 					}
 				}
 			}
@@ -361,18 +387,25 @@
 			.navbar-nav {
 				margin: 0px;
 					>li{
-					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
-						background-color : @color;
+						padding-left: 0px;
+						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+							background-color : @color;
 							color : @colorblack;
 							border-bottom-left-radius : 0px;
 							border-bottom-right-radius : 0px;
 							top: 0px;
-							padding-top: 0px;
+							padding-top: 10px;
 							height: auto;
-							background-image:-webkit-linear-gradient(bottom, @color 70%,@darkbackcolor) ;
-					}
+							//background:none;
+							//background-image:-webkit-linear-gradient( @color 99%,@darkbackcolor) ;	
+						}
 				}
 			}
+		}
+		.btn + .btn{
+			margin-top : 5px;
+			margin-left : 0px;
+			margin-bottom : 5px;
 		}
 		
 	}
