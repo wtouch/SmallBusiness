@@ -170,29 +170,29 @@ define(['app'], function (app) {
 		
 		//global method for change status of particular column 
 		$scope.hideDeleted = "";
-		$scope.changeStatus = {};
+		$scope.changStatus = {};
 		$scope.changeStatusFn = function(colName, colValue, id){
-			$scope.changeStatus[colName] = colValue;
-			if($scope.userViews=='userslist'){
-				dataService.put("put/user/"+id, $scope.changeStatus)
-				.then(function(response) {
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status]("User Modification", response.message);
-				});
-			}
+			$scope.changStatus[colName] = colValue;
+			 if($scope.userViews=='userslist'){
+				dataService.put("put/user/"+id, $scope.changStatus)
+					.then(function(response) {
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("User Modification", response.message);
+					});
+				} 
 			if($scope.userViews=='usersgroup'){
 				dataService.put("put/usergroup/"+id, $scope.changeStatus)
 				.then(function(response) {
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("User Group Modification", response.message);
 				}); 
-			}
+			} 
 		};
 		
 		$scope.editGroupName = function(colName, colValue, id, editStatus){
-			$scope.changeStatus[colName] = colValue;
+			$scope.changStatus[colName] = colValue;
 			if(editStatus==0){
-				 dataService.put("put/user/"+id,$scope.changeStatus)
+				 dataService.put("put/user/"+id,$scope.changStatus)
 				.then(function(response) { 
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Edit Group Name", response.message);
@@ -232,8 +232,8 @@ define(['app'], function (app) {
 		
 		//code for forgot password
 		$scope.forgotPass = function(colName, colValue, id){
-			$scope.changeStatus[colName] = colValue;				
-				 dataService.post("post/user/forgotpass", $scope.changeStatus)
+			$scope.changStatus[colName] = colValue;				
+				 dataService.post("post/user/forgotpass", $scope.changStatus)
 				.then(function(response) {					
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification[response.status]("Reset User's Password", response.message);
