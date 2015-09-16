@@ -11,43 +11,25 @@ jQuery(document).ready(function() {
         });
 });
 
-			jQuery(document).ready(function(){
-
-		jQuery('#featuredProject,#featuredProp,#featuredService, #featuredProduct').carousel({
-
-		  interval: 4000
-
-		})
-
-		jQuery('.carousel .item').each(function(){
-
-		  var next = jQuery(this).next();
-
-		  if (!next.length) {
-
+jQuery(document).ready(function(){
+	jQuery('#featuredProject,#featuredProp,#featuredService, #featuredProduct').carousel({
+		interval: 4000
+	})
+	jQuery('.carousel .item').each(function(){
+		var next = jQuery(this).next();
+		if (!next.length) {
 			next = jQuery(this).siblings(':first');
-
-		  }
-
-		  next.children(':first-child').clone().appendTo(jQuery(this));
-
-		  for (var i=0;i<2;i++) {
-
+		}
+		next.children(':first-child').clone().appendTo(jQuery(this));
+		for (var i=0;i<2;i++) {
 			next=next.next();
-
 			if (!next.length) {
-
 				next = jQuery(this).siblings(':first');
-
 			}
-
 			next.children(':first-child').clone().appendTo(jQuery(this));
-
-		  }
-
-		});	
-
-	});
+		}
+	});	
+});
 $(document).ready(function(){
 	$('.bxslider1').bxSlider({
 			mode:'vertical',
@@ -79,6 +61,21 @@ $(document).ready(function(){
 		controls:true, 
 		autoHover:true,
 		speed : 1000
+	});
+	$('#carousslider').bxSlider({
+		mode:'fade',
+		slideWidth: 600,
+		slideHeight:500,
+		
+		auto: true, 
+		autoDirection:'next',
+		pause:2500,
+		pager:true,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed:1000,
 	});
 });
 var app = angular.module('myApp',[]);
