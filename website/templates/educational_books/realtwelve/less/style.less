@@ -82,7 +82,6 @@
 		background-image: -linear-gradient(top, @lightbackcolor, @darkbackcolor);
 		border : none;
 		border-radius: 0;
-		height:50px;
 		top:15px;
 		.navbar-nav{
 			> li{
@@ -295,13 +294,36 @@
 		background: -moz-linear-gradient(top,  @lightbackcolor, @darkbackcolor);
 		background: linear-gradient(top,  @lightbackcolor, @darkbackcolor);
 	}
-	
+	.navbar-toggle{
+		background-color : @darkcolor;
+		border-color : @colorwhite;
+	}
+	.navbar-toggle .icon-bar {
+		background-color: @colorwhite;
+	}
 	@media (min-width: 320px){
 		.logo{
 			float:left;
 		}
 		.cnctinfo{
 			display : none;
+		}
+		.navbar{
+			min-height: 1px;
+		}
+		.navbar-default{
+			.navbar-nav {
+				margin: 0px;
+				>li{
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+						border : none;
+						border-radius : 0px;
+						top : 0px;
+						background-color : @color;
+						color : @back;
+					}
+				}
+			}
 		}
 		.item.active, .projnav{
 			height: 120px;
@@ -320,8 +342,27 @@
 		.logo{
 			float:none;
 		}
+		.navbar-default{
+			.navbar-nav {
+				margin: 0px;
+				>li{
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+						border: 4px solid @lightcolor;
+						border-top-left-radius: 19px;
+						border-bottom-right-radius: 19px;
+						background-color : @color;
+						color :  @back;
+						top: -8px;
+						padding-top: 20px;
+					}
+				}
+			}
+		}
 		.cnctinfo{
 			display : block;
+		}
+		.navbar{
+			height : 50px;
 		}
 		.projnav{
 			height: 322px;
@@ -347,6 +388,9 @@
 		.cnctinfo{
 			display : block;
 		}
+		.navbar{
+			height : 50px;
+		}
 		.projnav{
 			height: 322px;
 		}
@@ -367,24 +411,4 @@
 		.slider{
 			max-width:802px;
 		}
-	}
-	.navbar-toggle{
-		background-color : @darkcolor;
-		border-color : @colorwhite;
-	}
-	.navbar-toggle .icon-bar {
-		background-color: @colorwhite;
-	}
-	.navbar{
-		min-height : 50px;
-	}
-	@media (max-width: 540px){
-			.navbar{
-				min-height : 1px;
-			}
-			.navbar-default{
-				.navbar-nav {
-					margin: 0px;
-				}
-			}
 	}
