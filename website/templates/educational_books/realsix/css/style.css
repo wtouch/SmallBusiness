@@ -190,6 +190,31 @@
   border: none;
   padding: 1px 10px;
 }
+@media screen and (max-width: 768px) {
+  .bxslider1 .sliderDesc .table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    padding: 10px;
+    padding-left: 0px;
+    border: 0px solid #ddd;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 540px) {
+  .featuredProperty .sections {
+    height: 350px;
+  }
+  .featuredProperty .bxslider1 li .verify {
+    width: 25%;
+    border: none;
+    margin-left: 10px;
+    position: absolute;
+    right: 225px;
+    bottom: -20px;
+    z-index: 999;
+  }
+}
 @media (min-width: 992px) {
   .propDetails ul li {
     width: 229px;
@@ -217,6 +242,7 @@
 }
 .homeproject .projectnav,
 .homeproject .projsnap {
+  height: 318px;
   border: 5px solid #2f3826;
   background-color: #171600;
 }
@@ -418,46 +444,58 @@
 .projlist .project .thumbnail .caption p {
   margin-bottom: 0px;
 }
-/*.projlist{
-		.project{
-			.thumbnail{
-				height:385px;
-				.projectimg{
-					height : 148px;
-					width : 180px;
-					overflow : hidden;
-					margin : 0 auto;
-					img{
-						min-height : 148px;
-					}
-				}
-				.caption{
-					padding : 9px 5px;
-					height : 120px;
-					p {
-						margin-bottom : 0px;
-					}
-				}
-			}
-			.projectgallery{
-					&.floor{
-						height : 250px;
-					} 
-				.thumbnail{
-					.projectImags{
-						width: 190px;
-						height: 148px;
-						overflow: hidden;
-						margin : 0 auto;
-						img{
-							min-height : 148px;
-						}
-					}
-				}
-			}
-		}
-	}*/
-@media (min-width: 320px) {
+@media (max-width: 768px) {
+  content {
+    margin-top: 132%;
+  }
+  .homeproject .projectCarousal {
+    position: static;
+    width: auto;
+  }
+  .homeproject::after {
+    display: none;
+    width: 0px;
+  }
+  .homeproject .projsnap {
+    padding-left: 0px !important;
+  }
+  .homeproject .projectnav,
+  .homeproject .projsnap {
+    position: static;
+    margin-left: 10px;
+    width: auto;
+  }
+  .projImg {
+    float: left;
+    max-height: 175px;
+    margin-right: 10px;
+  }
+  .item.active {
+    height: 312px;
+  }
+  .carousel-inner > .item > img {
+    width: 100%;
+    min-height: 310px;
+  }
+}
+@media (max-width: 540px) {
+  .homeproject .projectCarousal {
+    position: static;
+    width: 120px;
+  }
+  .homeproject::after {
+    display: none;
+    width: 0;
+  }
+  .homeproject .projsnap {
+    padding-left: 0px !important;
+  }
+  .homeproject .projectnav,
+  .homeproject .projsnap {
+    position: static;
+    margin-left: 10px;
+    width: auto;
+  }
   .projImg {
     float: none;
     max-height: 175px;
@@ -466,31 +504,8 @@
   .item.active {
     height: 120px;
   }
-  .projectnav,
-  .projsnap {
-    height: 312px;
-    margin-bottom: 10px;
-  }
   .carousel-inner > .item > img {
     width: 100%;
-  }
-}
-@media (min-width: 992px) {
-  .projImg {
-    float: left;
-    max-height: 175px;
-    margin-right: 10px;
-  }
-  .projectnav,
-  .projsnap {
-    height: 322px;
-  }
-  .item.active {
-    height: 312px;
-  }
-  .carousel-inner > .item > img {
-    width: 100%;
-    min-height: 310px;
   }
 }
 @media (min-width: 1200px) {
@@ -752,10 +767,7 @@
   transition: 300ms;
 }
 .container {
-  width: 992px !important;
-}
-html {
-  min-width: 1022px;
+  max-width: 992px !important;
 }
 body {
   background-image: url('../img/back.jpg');
@@ -814,7 +826,7 @@ body {
 }
 .navbar-toggle {
   border: 1px solid #bbbbbb;
-  margin-top: 45px;
+  margin-top: 8px;
 }
 .navbar-toggle .icon-bar {
   background-color: #bbbbbb;
@@ -1084,55 +1096,80 @@ footer a,
 footer a:hover {
   color: #bbbbbb;
 }
-@media (min-width: 320px) {
-  .logo {
-    float: left;
+@media (max-width: 768px) {
+  .navbar-default .navbar-nav {
+    margin: 0px;
   }
-  .contactinfo {
-    display: none;
+  .navbar-default .navbar-nav > li {
+    padding-left: 0px;
   }
-  .navbar {
-    min-height: 0px;
-    margin-top: 10px;
-  }
-  .homeimg {
-    float: left;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-}
-@media (min-width: 992px) {
-  .logo {
-    float: none;
-  }
-  .contactinfo {
-    display: block;
-  }
-  .navbar {
-    min-height: 70px;
-  }
-  .homeimg {
-    float: right;
-    margin-left: 25px;
-    width: 25%;
+  .navbar-default .navbar-nav > li.active > a,
+  .navbar-default .navbar-nav > li.active:hover > a,
+  .navbar-default .navbar-nav > li.active > a:focus,
+  .navbar-default .navbar-nav > li:hover > a,
+  .navbar-default .navbar-nav > li:hover > a:focus,
+  .navbar-default .navbar-nav > li:hover > a:focus {
+    background-color: #bccb3d;
+    color: #000000;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    top: 0px;
+    padding-top: 10px;
   }
 }
-@media (min-width: 1200px) {
-  .logo {
-    float: none;
+@media (max-width: 540px) {
+  header .btn + .btn {
+    margin-top: 5px;
+    margin-left: 0px;
+    margin-bottom: 5px;
   }
-  .contactinfo {
-    display: block;
+  header .navbar {
+    min-height: 1px;
   }
-  .navbar {
-    min-height: 70px;
+  header .navbar-default .navbar-nav {
+    margin: 0px;
   }
-  .homeimg {
-    float: right;
-    margin-left: 25px;
-    max-height: 210px;
+  header .navbar-default .navbar-nav > li {
+    padding-left: 0px;
   }
-  .slider {
-    max-width: 802px;
+  header .navbar-default .navbar-nav > li.active > a,
+  header .navbar-default .navbar-nav > li.active:hover > a,
+  header .navbar-default .navbar-nav > li.active > a:focus,
+  header .navbar-default .navbar-nav > li:hover > a,
+  header .navbar-default .navbar-nav > li:hover > a:focus,
+  header .navbar-default .navbar-nav > li:hover > a:focus {
+    background-color: #bccb3d;
+    color: #000000;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    top: 0px;
+    padding-top: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .navbar-default .navbar-nav {
+    margin: 0px;
+  }
+  .navbar-default .navbar-nav > li {
+    padding-left: 0px;
+  }
+  .navbar-default .navbar-nav > li.active > a,
+  .navbar-default .navbar-nav > li.active:hover > a,
+  .navbar-default .navbar-nav > li.active > a:focus,
+  .navbar-default .navbar-nav > li:hover > a,
+  .navbar-default .navbar-nav > li:hover > a:focus,
+  .navbar-default .navbar-nav > li:hover > a:focus {
+    background-color: #bccb3d;
+    color: #000000;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    top: 0px;
+    padding-top: 10px;
+    height: auto;
+  }
+  .btn + .btn {
+    margin-top: 5px;
+    margin-left: 0px;
+    margin-bottom: 5px;
   }
 }

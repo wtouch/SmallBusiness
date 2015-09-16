@@ -397,15 +397,44 @@
   background-color: #0260a5;
 }
 @media (min-width: 320px) {
-  .propDetails ul li {
+  .featuredProperty .bxslider1 li .verify {
+    width: 55%;
+    border: none;
+    margin-left: 10px;
+    position: absolute;
+    right: -12px;
+    bottom: -20px;
+    z-index: 999;
+  }
+  .featuredProperty .propDetails ul li {
     width: 224px;
   }
-  .property .mainimg img {
+  .featuredProperty .property .mainimg img {
     max-height: 145px;
     max-width: 100%;
   }
 }
+@media (max-width: 540px) {
+  .featuredProperty .bxslider1 li .verify {
+    width: 25%;
+    border: none;
+    margin-left: 10px;
+    position: absolute;
+    right: 225px;
+    bottom: -20px;
+    z-index: 999;
+  }
+}
 @media (min-width: 992px) {
+  .featuredProperty .bxslider1 li .verify {
+    width: 25%;
+    border: none;
+    margin-left: 10px;
+    position: absolute;
+    right: 225px;
+    bottom: -20px;
+    z-index: 999;
+  }
   .propDetails ul li {
     width: 224px;
   }
@@ -557,7 +586,7 @@
 .homeproject .projsnap {
   right: 0;
   padding-left: 90px !important;
-  padding-top: 12px !important;
+  padding-top: 7px !important;
   padding-right: 10px !important;
   text-align: center;
 }
@@ -684,25 +713,104 @@
   margin-right: 20px;
   max-height: 175px;
 }
-@media (min-width: 320px) {
-  .projImg {
-    float: none;
-    max-height: 175px;
-    margin-right: 10px;
+@media (max-width: 768px) {
+  .homeproject .projectCarousal {
+    position: static;
+    border: 5px solid #ffffff;
+    width: auto;
+    height: 300px;
+    margin: 0 ;
+    box-shadow: 0 0 15px;
+    border-radius: 0px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }
+  .homeproject .projectCarousal::after {
+    position: absolute;
+    content: "";
+    background-image: url('../img/lady.png');
+    background-size: 100% 100%;
+    bottom: -3px;
+    z-index: 999;
+    height: 290px;
+    width: 120px;
+    left: 17px;
+  }
+  .homeproject .projsnap {
+    padding-left: 0px !important;
+  }
+  .homeproject .projectnav .nav-stacked > li {
+    text-align: center;
+  }
+  .homeproject .projectnav .nav-stacked > li.active > a,
+  .homeproject .projectnav .nav-stacked > li.active:hover > a,
+  .homeproject .projectnav .nav-stacked > li.active > a:focus,
+  .homeproject .projectnav .nav-stacked > li:hover > a,
+  .homeproject .projectnav .nav-stacked > li:hover > a:focus,
+  .homeproject .projectnav .nav-stacked > li > a:hover,
+  .homeproject .projectnav .nav-stacked > li > a:focus {
+    transform: translateX(0px);
+    width: 100%;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    text-align: center;
+    padding-right: 50px;
+  }
+  .homeproject .projectnav,
+  .homeproject .projsnap {
+    position: static;
+    margin-left: 10px;
+    width: auto;
   }
 }
-@media (min-width: 992px) {
-  .projImg {
-    float: left;
-    max-height: 175px;
-    margin-right: 10px;
+@media (max-width: 480px) {
+  .homeproject .projectCarousal {
+    position: static;
+    border: 5px solid #ffffff;
+    width: auto;
+    height: 300px;
+    margin: 0 ;
+    box-shadow: 0 0 15px;
+    border-radius: 0px;
+    margin-bottom: 5px;
+    margin-left: 10px;
   }
-}
-@media (min-width: 1200px) {
-  .projImg {
-    float: left;
-    max-height: 175px;
-    margin-right: 10px;
+  .homeproject .projectCarousal::after {
+    position: absolute;
+    content: "";
+    background-image: url('../img/lady.png');
+    background-size: 100% 100%;
+    bottom: 4px;
+    z-index: 999;
+    height: 290px;
+    width: 120px;
+    left: -21px;
+  }
+  .homeproject .projsnap {
+    padding-left: 0px !important;
+  }
+  .homeproject .projectnav .nav-stacked > li {
+    text-align: center;
+  }
+  .homeproject .projectnav .nav-stacked > li.active > a,
+  .homeproject .projectnav .nav-stacked > li.active:hover > a,
+  .homeproject .projectnav .nav-stacked > li.active > a:focus,
+  .homeproject .projectnav .nav-stacked > li:hover > a,
+  .homeproject .projectnav .nav-stacked > li:hover > a:focus,
+  .homeproject .projectnav .nav-stacked > li > a:hover,
+  .homeproject .projectnav .nav-stacked > li > a:focus {
+    transform: translateX(0px);
+    width: 100%;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    text-align: center;
+    padding-right: 50px;
+  }
+  .homeproject .projectnav,
+  .homeproject .projsnap {
+    position: static;
+    margin-left: 10px;
+    width: auto;
   }
 }
 .services {
@@ -846,7 +954,7 @@ body {
   transform: translateX(-45px);
 }
 .container {
-  width: 992px !important;
+  max-width: 992px !important;
 }
 .logo {
   height: 80px;
@@ -876,17 +984,14 @@ a:hover,
   padding: 0px;
 }
 .navbar-toggle {
-  border: 1px solid #6479f5;
-  margin-top: 45px;
+  border: 1px solid #f9a825;
+  margin-top: 8px;
 }
 .navbar-toggle .icon-bar {
-  background-color: #6479f5;
+  background-color: #094688;
 }
 .modal-body p {
   color: #000000;
-}
-html {
-  min-width: 1022px;
 }
 .btn + .btn {
   margin-left: 10px;
@@ -1108,27 +1213,41 @@ footer {
 * {
   transition: 300ms;
 }
-@media (min-width: 320px) {
-  .logo {
-    float: left;
+@media (max-width: 540px) {
+  header .navbar {
+    min-height: 1px;
   }
-  .cnctinfo {
-    display: none;
+  header .navbar-default .navbar-nav {
+    margin: 0px;
+  }
+  header .navbar-default .navbar-nav > li.active > a,
+  header .navbar-default .navbar-nav > li.active:hover > a,
+  header .navbar-default .navbar-nav > li.active > a:focus,
+  header .navbar-default .navbar-nav > li:hover > a,
+  header .navbar-default .navbar-nav > li:hover > a:focus,
+  header .navbar-default .navbar-nav > li:hover > a:focus {
+    background: linear-gradient(#f9a825, #094688);
+    top: 0px;
+    background-color: #f9a825;
+    border: 1px solid #094688;
+    color: #ffffff;
   }
 }
-@media (min-width: 992px) {
-  .logo {
-    float: none;
+@media (max-width: 480px) {
+  .navbar-default .navbar-nav {
+    margin: 0px;
   }
-  .cnctinfo {
-    display: block;
-  }
-}
-@media (min-width: 1200px) {
-  .logo {
-    float: none;
-  }
-  .cnctinfo {
-    display: block;
+  .navbar-default .navbar-nav > li.active > a,
+  .navbar-default .navbar-nav > li.active:hover > a,
+  .navbar-default .navbar-nav > li.active > a:focus,
+  .navbar-default .navbar-nav > li:hover > a,
+  .navbar-default .navbar-nav > li:hover > a:focus,
+  .navbar-default .navbar-nav > li:hover > a:focus {
+    background-color: #f9a825;
+    margin-top: 0px;
+    padding: 10px 17px;
+    top: 0px;
+    border: 1px solid #094688;
+    color: #ffffff;
   }
 }

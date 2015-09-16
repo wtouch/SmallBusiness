@@ -383,15 +383,44 @@
   background-color: #3a0c0a;
 }
 @media (min-width: 320px) {
-  .propDetails ul li {
+  .featuredProperty .bxslider1 li .verify {
+    width: 55%;
+    border: none;
+    margin-left: 10px;
+    position: absolute;
+    right: -12px;
+    bottom: -20px;
+    z-index: 999;
+  }
+  .featuredProperty .propDetails ul li {
     width: 224px;
   }
-  .property .mainimg img {
+  .featuredProperty .property .mainimg img {
     max-height: 145px;
     max-width: 100%;
   }
 }
+@media (max-width: 540px) {
+  .featuredProperty .bxslider1 li .verify {
+    width: 25%;
+    border: none;
+    margin-left: 10px;
+    position: absolute;
+    right: 225px;
+    bottom: -20px;
+    z-index: 999;
+  }
+}
 @media (min-width: 992px) {
+  .featuredProperty .bxslider1 li .verify {
+    width: 50%;
+    border: none;
+    margin-left: 10px;
+    position: absolute;
+    right: 10px;
+    bottom: -20px;
+    z-index: 999;
+  }
   .propDetails ul li {
     width: 275px;
   }
@@ -443,14 +472,13 @@
   position: relative;
   border: 5px solid #ffffff;
   z-index: 99;
-  width: 540px;
+  width: 500px;
   margin: 0 auto;
   float: none;
   z-index: 1;
   box-shadow: 0 0 15px;
   border-radius: 50%;
   overflow: hidden;
-  height: 535px;
 }
 .homeproject .projectCarousal .bx-viewport {
   height: 500px;
@@ -476,14 +504,15 @@
 .homeproject .projsnap {
   position: absolute;
   background: linear-gradient(#49741e, #264903);
-  height: 370px;
-  width: 340px;
+  height: 320px;
+  width: 300px;
   top: 100px;
   box-sizing: border-box;
   border: 5px solid #ffffff;
 }
 .homeproject .projectnav {
   padding: 5px;
+  left: 10;
   left: 0;
 }
 .homeproject .projectnav .nav-stacked > li + li {
@@ -515,8 +544,8 @@
 }
 .homeproject .projsnap {
   right: 16px;
-  padding-left: 125px !important;
-  padding-top: 30px !important;
+  padding-left: 110px !important;
+  padding-top: 7px !important;
   padding-right: 10px !important;
   text-align: center;
 }
@@ -639,12 +668,117 @@
 .projlist .project .thumbnail .caption p {
   margin-bottom: 0px;
 }
-@media (min-width: 1200px) {
-  .projsnap {
-    right: 16px;
-    padding-left: 125px !important;
-    padding-top: 30px !important;
-    padding-right: 10px !important;
+/*@media (max-width: 768px){
+	.homeproject {
+		.projectCarousal{
+			width:auto;
+			height:500px;
+		}
+		.projsnap{
+			padding-left: 154px ;
+		}
+		
+	}
+		
+		
+	}*/
+@media (max-width: 768px) {
+  .homeproject .projectCarousal {
+    position: static;
+    border: 5px solid #ffffff;
+    width: auto;
+    height: 300px;
+    margin: 0 ;
+    box-shadow: 0 0 15px;
+    border-radius: 0px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }
+  .homeproject .projectCarousal::after {
+    position: absolute;
+    content: "";
+    background-image: url('../img/lady.png');
+    background-size: 100% 100%;
+    bottom: -3px;
+    z-index: 999;
+    height: 290px;
+    width: 120px;
+    left: 17px;
+  }
+  .homeproject .projsnap {
+    padding-left: 0px !important;
+  }
+  .homeproject .projectnav .nav-stacked > li {
+    text-align: center;
+  }
+  .homeproject .projectnav .nav-stacked > li.active > a,
+  .homeproject .projectnav .nav-stacked > li.active:hover > a,
+  .homeproject .projectnav .nav-stacked > li.active > a:focus,
+  .homeproject .projectnav .nav-stacked > li:hover > a,
+  .homeproject .projectnav .nav-stacked > li:hover > a:focus,
+  .homeproject .projectnav .nav-stacked > li > a:hover,
+  .homeproject .projectnav .nav-stacked > li > a:focus {
+    transform: translateX(0px);
+    width: 100%;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    text-align: center;
+    padding-right: 50px;
+  }
+  .homeproject .projectnav,
+  .homeproject .projsnap {
+    position: static;
+    margin-left: 10px;
+    width: auto;
+  }
+}
+@media (max-width: 480px) {
+  .homeproject .projectCarousal {
+    position: static;
+    border: 5px solid #ffffff;
+    width: auto;
+    height: 300px;
+    margin: 0 ;
+    box-shadow: 0 0 15px;
+    border-radius: 0px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }
+  .homeproject .projectCarousal::after {
+    position: absolute;
+    content: "";
+    background-image: url('../img/lady.png');
+    background-size: 100% 100%;
+    bottom: -5px;
+    z-index: 999;
+    height: 290px;
+    width: 120px;
+  }
+  .homeproject .projsnap {
+    padding-left: 0px !important;
+  }
+  .homeproject .projectnav .nav-stacked > li {
+    text-align: center;
+  }
+  .homeproject .projectnav .nav-stacked > li.active > a,
+  .homeproject .projectnav .nav-stacked > li.active:hover > a,
+  .homeproject .projectnav .nav-stacked > li.active > a:focus,
+  .homeproject .projectnav .nav-stacked > li:hover > a,
+  .homeproject .projectnav .nav-stacked > li:hover > a:focus,
+  .homeproject .projectnav .nav-stacked > li > a:hover,
+  .homeproject .projectnav .nav-stacked > li > a:focus {
+    transform: translateX(0px);
+    width: 100%;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    text-align: center;
+    padding-right: 50px;
+  }
+  .homeproject .projectnav,
+  .homeproject .projsnap {
+    position: static;
+    margin-left: 10px;
+    width: auto;
   }
 }
 .services {
@@ -714,9 +848,9 @@ body {
   background-repeat: repeat;
   position: relative;
 }
-/*.container{
-		width : 992px !important;
-	}*/
+.container {
+  max-width: 992px !important;
+}
 .sociallinks {
   top: 50%;
   width: 5px;
@@ -786,18 +920,15 @@ a:hover,
   padding: 0px;
 }
 .navbar-toggle {
-  border: 1px solid #ccffcc;
-  margin-top: 45px;
+  border: 1px solid #e2271f;
+  margin-top: 8px;
 }
 .navbar-toggle .icon-bar {
-  background-color: #ccffcc;
+  background-color: #3a0c0a;
 }
 .modal-body p {
   color: #000000;
 }
-/*html{
-		min-width:1022px;
-	}*/
 .btn + .btn {
   margin-left: 10px;
 }
@@ -1005,37 +1136,26 @@ footer {
 * {
   transition: 300ms;
 }
-@media (min-width: 320px) {
-  .navbar {
-    min-height: 0px;
+@media (max-width: 540px) {
+  header .navbar {
+    min-height: 1px;
   }
-  .navbar-default .navbar-nav {
+  header .navbar-default .navbar-nav {
     margin: 0px;
   }
-  .navbar-default .navbar-nav > li.active > a,
-  .navbar-default .navbar-nav > li.active:hover > a,
-  .navbar-default .navbar-nav > li.active > a:focus,
-  .navbar-default .navbar-nav > li:hover > a,
-  .navbar-default .navbar-nav > li:hover > a:focus,
-  .navbar-default .navbar-nav > li:hover > a:focus {
+  header .navbar-default .navbar-nav > li.active > a,
+  header .navbar-default .navbar-nav > li.active:hover > a,
+  header .navbar-default .navbar-nav > li.active > a:focus,
+  header .navbar-default .navbar-nav > li:hover > a,
+  header .navbar-default .navbar-nav > li:hover > a:focus,
+  header .navbar-default .navbar-nav > li:hover > a:focus {
+    border: 1px solid #3a0c0a;
     top: 0px;
-    background: linear-gradient(#e2271f, #3a0c0a);
+    background-color: #e2271f;
     color: #ffffff;
   }
-  .contactinfo {
-    display: none;
-  }
-  .navbar {
-    min-height: 0px;
-    margin-top: 10px;
-  }
-  .homeimg {
-    float: left;
-    width: 100%;
-    margin-bottom: 20px;
-  }
 }
-@media (min-width: 992px) {
+@media (max-width: 480px) {
   .navbar-default .navbar-nav {
     margin: 0px;
   }
@@ -1045,36 +1165,11 @@ footer {
   .navbar-default .navbar-nav > li:hover > a,
   .navbar-default .navbar-nav > li:hover > a:focus,
   .navbar-default .navbar-nav > li:hover > a:focus {
-    background: linear-gradient(#e2271f, #3a0c0a);
+    background-color: #e2271f;
+    margin-top: 0px;
+    padding: 10px 17px;
+    top: 0px;
+    border: 1px solid #3a0c0a;
     color: #ffffff;
-    top: -8px;
-    padding-top: 20px;
-  }
-  .contactinfo {
-    display: block;
-  }
-  .navbar {
-    min-height: 70px;
-  }
-  .homeimg {
-    float: right;
-    margin-left: 25px;
-    width: 25%;
-  }
-}
-@media (min-width: 1200px) {
-  .contactinfo {
-    display: block;
-  }
-  .navbar {
-    min-height: 70px;
-  }
-  .homeimg {
-    float: right;
-    margin-left: 25px;
-    max-height: 210px;
-  }
-  .slider {
-    max-width: 802px;
   }
 }
