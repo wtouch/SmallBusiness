@@ -4,11 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
 		<script src="{{ path }}js/jquery.min.js"></script>
@@ -69,7 +65,7 @@
 				</button>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-md-4 col-lg-3 nava">
+				<div class="col-xs-12 col-md-4 col-md-push-8 col-lg-3 col-lg-push-9 nava">
 					<div class="sidenav">
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav nav-pills nav-stacked">
@@ -91,7 +87,7 @@
 					{%endif%}
 					
 				</div>
-				<div class="col-xs-12 col-md-8 col-lg-9 caro">
+				<div class="col-xs-12 col-md-8 col-md-pull-4 col-lg-9  col-lg-pull-3 caro">
 					{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
