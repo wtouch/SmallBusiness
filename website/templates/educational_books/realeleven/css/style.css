@@ -218,6 +218,27 @@
   background-color: #dd4814;
   border: 2px solid #c0c0c0;
 }
+@media (max-width: 480px) {
+  .singleproperty .property .mainimg {
+    height: 150px;
+    width: 180px;
+  }
+  .singleproperty .property .mainimg img {
+    min-height: 150px;
+  }
+  .featuredProperty .bxslider1 li .verify {
+    width: 35%;
+    right: 5px;
+    bottom: -15px;
+  }
+  .btn + .btn {
+    margin-bottom: 15px;
+    margin-top: 15px;
+  }
+  .propDetails ul li {
+    display: block;
+  }
+}
 @media (min-width: 992px) {
   .propDetails ul li {
     width: 224px;
@@ -439,6 +460,7 @@
   width: 190px;
   height: 148px;
   overflow: hidden;
+  margin: 0 auto;
 }
 .projlist .project .thumbnail .projectimg img {
   min-height: 148px;
@@ -513,23 +535,73 @@
   border: 1px solid #c0c0c0;
   padding: 20px 20px 0px;
 }
-@media (min-width: 320px) {
+@media (max-width: 540px) {
+  .homeproject::after {
+    display: none;
+    width: 0px;
+  }
+}
+@media (max-width: 480px) {
+  .homeproject::after {
+    display: none;
+    width: 0px;
+  }
+  .homeproject .projectnav,
+  .homeproject .projsnap {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border: none;
+  }
+  .homeproject .bx-viewport {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border: none;
+  }
+  .homeproject .bx-viewport img {
+    height: 317px;
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .homeproject .projectnav,
+  .homeproject .bx-viewport {
+    margin-bottom: 10px !imoprtant;
+  }
   .projImg {
     float: none;
     max-height: 175px;
     margin-right: 10px;
   }
 }
-@media (min-width: 992px) {
-  .projImg {
-    float: left;
-    max-height: 175px;
-    margin-right: 10px;
+@media (max-width: 768px) {
+  .homeproject .projectnav,
+  .homeproject .projsnap {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border: none;
   }
-}
-@media (min-width: 1200px) {
+  .homeproject .bx-viewport {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: 15px;
+    border: none;
+    width: auto;
+  }
+  .homeproject .bx-viewport img {
+    height: 317px;
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .homeproject .bx-wrapper {
+    width: auto !important;
+  }
+  .homeproject .projectnav,
+  .homeproject .bx-viewport {
+    margin-bottom: 10px !imoprtant;
+  }
   .projImg {
-    float: left;
+    float: none;
     max-height: 175px;
     margin-right: 10px;
   }
@@ -568,6 +640,7 @@
   width: 198px;
   height: 148px;
   overflow: hidden;
+  margin: auto;
 }
 .products .thumbnail .prodimg img {
   min-height: 148px;
@@ -596,30 +669,6 @@
   color: #ffffff;
   background-color: #dd4814;
   border: 2px solid #5f230e;
-}
-@media (min-width: 320px) {
-  .products .thumbnail {
-    height: 465px;
-  }
-  .singleproduct .thumbnail {
-    height: 186px;
-  }
-}
-@media (min-width: 992px) {
-  .products .thumbnail {
-    height: 450px;
-  }
-  .singleproduct .thumbnail {
-    height: 100px;
-  }
-}
-@media (min-width: 1200px) {
-  .products .thumbnail {
-    height: 400px;
-  }
-  .singleproduct .thumbnail {
-    height: 192px;
-  }
 }
 .featuretab {
   margin-top: 20px;
@@ -859,10 +908,7 @@ hr {
   transition: 300ms;
 }
 .container {
-  width: 992px !important;
-}
-html {
-  min-width: 1022px;
+  max-width: 992px !important;
 }
 body {
   color: #ffffff;
@@ -1233,4 +1279,57 @@ footer p {
 footer a,
 footer a:hover {
   color: #c0c0c0;
+}
+@media (min-width: 320px) {
+  .carousel-inner > .item > img {
+    width: 100%;
+  }
+  .homeimg {
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+@media (min-width: 992px) {
+  .logo {
+    float: none;
+  }
+  .carousel-inner > .item > img {
+    width: 100%;
+    min-height: 310px;
+  }
+  .homeimg {
+    float: right;
+    margin-left: 25px;
+    width: 25%;
+  }
+}
+.navbar-toggle {
+  background-color: #5f230e;
+  border-color: #ffffff;
+}
+.navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+@media (min-width: 1200px) {
+  .logo {
+    float: none;
+  }
+  .carousel-inner > .item > img {
+    width: 100%;
+    min-height: 312px;
+  }
+  .homeimg {
+    float: right;
+    margin-left: 25px;
+    max-height: 210px;
+  }
+}
+@media (max-width: 540px) {
+  header .navbar {
+    min-height: 1px;
+  }
+  header .navbar-default .navbar-nav {
+    margin: 0px;
+  }
 }
