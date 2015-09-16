@@ -1,8 +1,6 @@
 //featured properties
 .featuredProperty{
-	.sections{
-		height : 230px;
-	}
+	
 	.bxslider1{
 		h4{
 			padding-left:25px;
@@ -149,6 +147,18 @@
 				}
 			}
 		}
+		
+		.mainimg {
+			height : 175px;
+			width : 195px;
+			overflow : hidden;
+			margin : 0 auto;
+			border : 2px solid @darkcolor;
+			img{
+				min-height: 175px;
+			}
+		}
+		
 		.subimg{
 			margin-top: 10px;
 			img{
@@ -252,7 +262,13 @@
 	}
 }
 
-	
+@media (max-width: 480px){
+	.featuredProperty {
+		.sections{
+			height : 430px;
+		}
+	}
+}
 @media (max-width: 480px){
 	.singleproperty{
 		.property {
@@ -260,27 +276,30 @@
 				height : 150px;
 				width : 180px;
 				img{
-					min-height: 150px;
+					height: 150px;
 				}
 			}
 		}
 	}
-	.featuredProperty{
-		.bxslider1{
-		li{
-		.verify{
-			width:35%;
-			right:5px;
-			bottom:-15px;
+	
+	.featuredProperty {
+		.sections{
+			height : 430px;
 		}
-		}
+		.bxslider1 {
+			li {
+				.verify{
+					width : 45%;
+					right : 12px;
+				}
+			}
 		}
 	}
 	
 	.btn + .btn
 	{
-       // margin-left: 25px;
-		margin-bottom:15px;
+       //margin-left: 0px;
+		//margin-bottom:15px;
 		margin-top:15px;
 	}
 

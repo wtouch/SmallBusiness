@@ -30,9 +30,9 @@
 		background-repeat : repeat;
 		position : relative;
 	}
-	/*.container{
-		width : 992px !important;
-	}*/
+	.container{
+		max-width : 992px !important;
+	}
 	.sociallinks{
 		top: 50%;
 		width : 5px;
@@ -101,20 +101,18 @@
 		padding :0px;
 	}
 	.navbar-toggle {
-		border : 1px solid @lightcolor;
-		margin-top : 45px;
+		border : 1px solid @darkcolor;
+		margin-top : 8px;
 	}
 	.navbar-toggle .icon-bar {
-		background-color: @lightcolor;
+		background-color: @darkbackcolor;
 	}
 	.modal-body	{
 		p{
 			color:@colorblack;
 		}
 	}
-	/*html{
-		min-width:1022px;
-	}*/
+	
 	.btn + .btn{
 		margin-left:10px;
 	}
@@ -310,78 +308,42 @@
 	*{
 		transition:300ms;
 	}
-	
-@media (min-width: 320px){
-		.navbar{
-			min-height: 0px;
+	@media (max-width: 540px){
+		header {
+			.navbar{
+				min-height : 1px;
+			}
+			.navbar-default{
+				.navbar-nav {
+					margin: 0px;
+						>li{
+						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+							border: 1px solid @darkbackcolor;
+							top : 0px;
+							background-color:@darkcolor;
+							color : @colorwhite;
+						}
+					}
+				}
+			}
 		}
+	}
+	@media (max-width: 480px){
 		.navbar-default{
 			.navbar-nav {
 				margin: 0px;
-				>li{
+					>li{
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
-						
+						background-color:@darkcolor;
+						margin-top:0px;
+						padding:10px 17px;
 						top : 0px;
-						background : linear-gradient(@darkcolor, @darkbackcolor);
+						border: 1px solid @darkbackcolor;
 						color : @colorwhite;
 					}
 				}
 			}
 		}
-		.contactinfo{
-			display : none;
-		}
-		.navbar{
-			min-height: 0px;
-			margin-top: 10px;
-		}
-		.homeimg{
-			float:left;
-			width:100%;
-			margin-bottom: 20px;
-		}
-	}
-	@media (min-width: 992px){
-		.navbar-default{
-			.navbar-nav {
-				margin: 0px;
-				>li{
-					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
-						background : linear-gradient(@darkcolor, @darkbackcolor);
-						color : @colorwhite;
-						top: -8px;
-						padding-top: 20px;
-					}
-				}
-			}
-		}
-		.contactinfo{
-			display : block;
-		}
-		.navbar{
-			min-height: 70px;
-		}
-		.homeimg{
-			float:right;
-			margin-left: 25px;
-			width:25%;
-		}
-	}
-	@media (min-width: 1200px){
 		
-		.contactinfo{
-			display : block;
-		}
-		.navbar{
-			min-height: 70px;
-		}
-		.homeimg{
-			float:right;
-			margin-left: 25px;
-			//width:25%;
-			max-height: 210px;
-		}
-		.slider{
-			max-width:802px;
-		}
 	}
+	

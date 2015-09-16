@@ -2,9 +2,6 @@
   font-family: 'Cinzel-Regular';
   src: url('../fonts/Cinzel-Regular.otf');
 }
-.featuredProperty .sections {
-  height: 230px;
-}
 .featuredProperty .bxslider1 {
   list-style: none;
 }
@@ -127,6 +124,16 @@
 .singleproperty .property .table tbody tr td {
   border-top: 1px dashed #97310e;
 }
+.singleproperty .property .mainimg {
+  height: 175px;
+  width: 195px;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 2px solid #5f230e;
+}
+.singleproperty .property .mainimg img {
+  min-height: 175px;
+}
 .singleproperty .property .subimg {
   margin-top: 10px;
 }
@@ -219,20 +226,26 @@
   border: 2px solid #c0c0c0;
 }
 @media (max-width: 480px) {
+  .featuredProperty .sections {
+    height: 430px;
+  }
+}
+@media (max-width: 480px) {
   .singleproperty .property .mainimg {
     height: 150px;
     width: 180px;
   }
   .singleproperty .property .mainimg img {
-    min-height: 150px;
+    height: 150px;
+  }
+  .featuredProperty .sections {
+    height: 430px;
   }
   .featuredProperty .bxslider1 li .verify {
-    width: 35%;
-    right: 5px;
-    bottom: -15px;
+    width: 45%;
+    right: 12px;
   }
   .btn + .btn {
-    margin-bottom: 15px;
     margin-top: 15px;
   }
   .propDetails ul li {
@@ -579,6 +592,7 @@
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
     border: none;
+    margin-bottom: 10px;
   }
   .homeproject .bx-viewport {
     border-bottom-left-radius: 0;
