@@ -219,14 +219,14 @@
 								<!-- --> 
 								<a ng-model="data.submenu" ng-class="(ind[$index + data.url + 'submenu']) ? 'text-success open' : 'text-muted'" >
 									<span tooltip="Edit submenu" class="glyphicon glyphicon-plus" ng-click="ind[$index + data.url + 'submenu'] = !ind[$index + data.url + 'submenu']"></span>
-										<span class="dropdown-menu" ng-show="ind[$index + data.url + 'submenu']">
-										<span class="close" ng-click="ind[$index + data.url + 'submenu'] = false">X</span>
+										 <span class="dropdown-menu" ng-show="ind[$index + data.url + 'submenu']">
+										<span class="close" ng-click="ind[$index + data.url + 'submenu'] = false">X</span> 
 									
 										<form name="submenu" role="form" class="form-horizontal panel panel-default">
 										<h4>SubMenu</h4>
-											<div class="form-group">{{submenu}}
+											<div class="form-group">
 												<div class="col-sm-6">
-													<input type="text" class="form-control" id="submenu" name="submenu" ng-model="submenu.name" placeholder="SubMenu"/>
+													<input type="text" class="form-control" id="submenu" name="submenu" ng-model="submenu.submenuname" placeholder="SubMenu"/>
 												</div>
 												<div class="col-sm-6">
 													<input type="text" class="form-control" id="submenuurl" name="submenuurl" ng-model="submenu.url" placeholder="URL" />
@@ -248,10 +248,21 @@
 													<textarea type="text" class="form-control" id="description" name="description" ng-model="submenu.seo.description" placeholder="Description"></textarea>
 												</div>
 											</div>
-											<button ng-show="!isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObjects(submenu, websetting.config.menus.submenu,'submenu')">Add SubMenu</button>
+											<button ng-show="isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds">Add SubMenu</button>
+											
+											<button ng-show="!isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObjects(submenu, websetting.config.menus.submenu,'submenu')">Add SubMenu</button> 
+											
+											<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.sidebar">
+										<div class="list-group-item menudiv" ng-repeat="data in websetting.config.sidebar" ng-include="'tree_item_renderer.html'" as-sortable-item>
+										</div>
+									</div>
+									
 										</form>
 									</span>
+									
+									
 								</a>
+								
 								 
 							</span>
 							<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
@@ -306,6 +317,7 @@
 							</div> 
 							</form>
 						</div>
+						
 						<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.sidebar">
 							<div class="list-group-item menudiv" ng-repeat="data in websetting.config.sidebar" ng-include="'tree_item_renderer.html'" as-sortable-item>
 							</div>
