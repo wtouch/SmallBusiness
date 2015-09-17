@@ -6,12 +6,11 @@ define(['app'], function (app) {
 	var websettingsController = function ($scope, $rootScope, $injector, $routeParams, $location, dataService, upload, modalService, $notification) {
 		$scope.permission = $rootScope.userDetails.permission.website_module;
 		$scope.sidebar = {};
-		$scope.submenu = {};
+		//$scope.submenu = {};
 		$scope.path = "/website";
 		$scope.userInfo = {
 			user_id : $rootScope.userDetails.id
 		};
-		 //$scope.isCollapsed = false;
 		$scope.website_id = $routeParams.id;
 		$scope.currentDate = dataService.currentDate;
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
@@ -24,11 +23,10 @@ define(['app'], function (app) {
 		$scope.websetting = {
 			config : {
 				menus : {
-					submenu : []
+					submenu :[]
 				}
 			}
 		};
-		console.log($scope.websetting);
 		$scope.isCollapsed = true;
 		$scope.isFirstOpen = true;
 

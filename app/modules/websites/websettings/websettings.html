@@ -216,54 +216,68 @@
 									</span>
 								</a>
 								
-								<!-- --> 
-								<a ng-model="data.submenu" ng-class="(ind[$index + data.url + 'submenu']) ? 'text-success open' : 'text-muted'" >
-									<span tooltip="Edit submenu" class="glyphicon glyphicon-plus" ng-click="ind[$index + data.url + 'submenu'] = !ind[$index + data.url + 'submenu']"></span>
-										 <span class="dropdown-menu" ng-show="ind[$index + data.url + 'submenu']">
-										<span class="close" ng-click="ind[$index + data.url + 'submenu'] = false">X</span> 
-									
-										<form name="submenu" role="form" class="form-horizontal panel panel-default">
-										<h4>SubMenu</h4>
-											<div class="form-group">
-												<div class="col-sm-6">
-													<input type="text" class="form-control" id="submenu" name="submenu" ng-model="submenu.submenuname" placeholder="SubMenu"/>
+								
+								
+								
+								<!-- -->
+								<a ng-model="data.seo" ng-class="(ind[$index + data.url + 'seo']) ? 'text-success open' : 'text-muted'" >
+									<span tooltip="Edit SEO" class="glyphicon glyphicon-plus" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
+									<span class="dropdown-menu" ng-show="ind[$index + data.url + 'seo']">
+									<span class="close" ng-click="ind[$index + data.url + 'seo'] = false">X</span>
+										
+									<div class="form-group panel-body">{{submenu}}
+										<div collapse="isCollapseds">
+											<form name="seo" role="form" class="form-horizontal panel panel-default">
+											<div class="well well-lg">
+											<h4>SubMenu</h4>
+												<div class="form-group">
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="submenuname" name="submenuname" ng-model="submenu.name" placeholder="Name"/>
+													</div>
+													<div class="col-sm-6">
+														<input type="text" class="form-control" id="submenuurl" name="submenuurl" ng-model="submenu.url" placeholder="URL" />
+													</div>
 												</div>
-												<div class="col-sm-6">
-													<input type="text" class="form-control" id="submenuurl" name="submenuurl" ng-model="submenu.url" placeholder="URL" />
-												</div>
-											</div>
-											<h4>Seo</h4>
-											<div class="form-group">
+												<h4>Seo</h4>
+												<div class="form-group">
 													<div class="col-sm-12">
-														<input type="text" class="form-control" id="title" name="title" ng-model="submenu.seo.title" placeholder="Title"/>
+														<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="submenu.seo.title" placeholder="Title"/>
 														<input type="hidden" class="form-control" id="status" name="status" ng-model="submenu.status" ng-init="submenu.status = 1"/>
 													</div>
-											</div>
-											<div class="form-group">
-												<div class="col-sm-6">
-													<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="submenu.seo.keywords" placeholder="Keywords">
-													</textarea>
 												</div>
-												<div class="col-sm-6">
-													<textarea type="text" class="form-control" id="description" name="description" ng-model="submenu.seo.description" placeholder="Description"></textarea>
+												<div class="form-group">
+													<div class="col-sm-6">
+														<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="submenu.seo.keywords" placeholder="Keywords">
+														</textarea>
+													</div>
+													<div class="col-sm-6">
+														<textarea type="text" class="form-control" id="description" name="description" ng-model="submenu.seo.description" placeholder="Description"></textarea>
+													</div>
+												</div>
+												
+												<button ng-show="isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds">Add SubMenu</button>
+												
+												<button ng-show="!isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObjects(submenu, websetting.config.menus.submenu,'submenu')">Add SubMenu</button> 
+											
+												
+												<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.menus.submenu">
+												<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus.submenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
 												</div>
 											</div>
-											<button ng-show="isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds">Add SubMenu</button>
 											
-											<button ng-show="!isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObjects(submenu, websetting.config.menus.submenu,'submenu')">Add SubMenu</button> 
-											
-											<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.sidebar">
-										<div class="list-group-item menudiv" ng-repeat="data in websetting.config.sidebar" ng-include="'tree_item_renderer.html'" as-sortable-item>
+											</div> 
+											</form>
+										</div>
+										
+										<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.submenu">
+											<div class="list-group-item menudiv" ng-repeat="data in websetting.config.submenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+											</div>
 										</div>
 									</div>
-									
-										</form>
 									</span>
-									
-									
 								</a>
 								
-								 
+								
 							</span>
 							<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
 							<div ng-if="data.childMenu">
@@ -300,10 +314,10 @@
 								</div>
 								<h4>Seo</h4>
 								<div class="form-group">
-									<div class="col-sm-12">
-										<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.seo.title" placeholder="Title"/>
-										<input type="hidden" class="form-control" id="status" name="status" ng-model="sidebar.status" ng-init="sidebar.status = 1"/>
-									</div>
+										<div class="col-sm-12">
+											<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.seo.title" placeholder="Title"/>
+											<input type="hidden" class="form-control" id="status" name="status" ng-model="sidebar.status" ng-init="sidebar.status = 1"/>
+										</div>
 								</div>
 								<div class="form-group">
 									<div class="col-sm-6">
@@ -317,7 +331,6 @@
 							</div> 
 							</form>
 						</div>
-						
 						<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.sidebar">
 							<div class="list-group-item menudiv" ng-repeat="data in websetting.config.sidebar" ng-include="'tree_item_renderer.html'" as-sortable-item>
 							</div>
