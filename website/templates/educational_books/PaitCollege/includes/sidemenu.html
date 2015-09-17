@@ -1,0 +1,13 @@
+{% autoescape false %}
+<div class="text-center">
+	<ul>
+	{% for x in sidebar %}
+		{% if x.status == 1 %}
+			<li>
+				<a class="{{ x.name | lower | replace({" ":'_'})}}" href="{{ x.url }}">{{ x.name }}</a>
+			</li>
+		{% endif %}
+	{% endfor %}
+	</ul>
+</div>
+{% endautoescape %}
