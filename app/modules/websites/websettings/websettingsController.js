@@ -6,6 +6,7 @@ define(['app'], function (app) {
 	var websettingsController = function ($scope, $rootScope, $injector, $routeParams, $location, dataService, upload, modalService, $notification) {
 		$scope.permission = $rootScope.userDetails.permission.website_module;
 		$scope.sidebar = {};
+		$scope.submenu = {};
 		$scope.path = "/website";
 		$scope.userInfo = {
 			user_id : $rootScope.userDetails.id
@@ -20,6 +21,14 @@ define(['app'], function (app) {
 				sidebar : []
 			}
 		};
+		$scope.websetting = {
+			config : {
+				menus : {
+					submenu : []
+				}
+			}
+		};
+		console.log($scope.websetting);
 		$scope.isCollapsed = true;
 		$scope.isFirstOpen = true;
 
@@ -33,6 +42,13 @@ define(['app'], function (app) {
 			var dtlObj = JSON.stringify(data);
 			object.push(JSON.parse(dtlObj));
 			$scope.sidebar = {};
+		}
+		
+		$scope.addToObjects = function(data, object, resetObj){
+			//var dtlObj = JSON.stringify(data);
+			object.push(JSON.parse(dtlObj));
+			$scope.submenu = {};
+			
 		}
 		
 		//code for view single website details
@@ -172,6 +188,12 @@ define(['app'], function (app) {
 			$scope.websetting.config.sidebar = (websetting.config.sidebar) ? websetting.config.sidebar : {};
 			console.log(websetting);
 			$scope.websetting.config.sidebar.name = (websetting.config.sidebar) ? websetting.config.sidebar.name : {};	
+		};
+		
+		$scope.addsubmenu = function(websetting){
+			$scope.websetting.config.menus.submenu = (websetting.config.menus.submenu) ? websetting.config.menus.submenu : {};
+			console.log(websetting);
+			$scope.websetting.config.menus.submenu.name = (websetting.config.menus.submenu) ? websetting.config.menus.submenu.name : {};	
 		};
 		
 		$scope.uploads = function(files,path,userInfo, picArr){ 
