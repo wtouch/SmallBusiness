@@ -221,7 +221,7 @@
 								
 								<!-- -->
 								<a ng-model="data.seo" ng-class="(ind[$index + data.url + 'seo']) ? 'text-success open' : 'text-muted'" >
-									<span tooltip="Edit SEO" class="glyphicon glyphicon-plus" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
+									<span tooltip="Edit seo" class="glyphicon glyphicon-plus" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
 									<span class="dropdown-menu" ng-show="ind[$index + data.url + 'seo']">
 									<span class="close" ng-click="ind[$index + data.url + 'seo'] = false">X</span>
 										
@@ -255,22 +255,29 @@
 													</div>
 												</div>
 												
-												<button ng-show="isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds">Add SubMenu</button>
+												<button ng-show="isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds">Add SubMenu</button> 
 												
 												<button ng-show="!isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObjects(submenu, websetting.config.menus.submenu,'submenu')">Add SubMenu</button> 
 											
-												
+												<!-- <div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.menus.submenu">
+													<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus.submenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+													</div>
+												</div> -->
 												<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.menus.submenu">
-												<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus.submenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+													<div class="list-group-item menudiv" ng-repeat="(key,value) in websetting.config.menus.submenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+													</div>
 												</div>
-											</div>
 											
+												<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.submenu">
+													<div class="list-group-item menudiv" ng-repeat="data in websetting.config.submenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+													</div>
+												</div>  
+										
 											</div> 
 											</form>
 										</div>
-										
-										<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.submenu">
-											<div class="list-group-item menudiv" ng-repeat="data in websetting.config.submenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+										<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.menus.submenu">
+											<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus.submenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
 											</div>
 										</div>
 									</div>
@@ -288,10 +295,11 @@
 								</div> 
 							</div> 
 						</script>
+						
 						<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.menus">
 							<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus" ng-include="'tree_item_renderer.html'" as-sortable-item>
 							</div>
-						</div>
+						</div> 
 				</accordion-group>
 				<accordion-group heading="Sidebar Menus">
 					<div class="form-group panel panel-default">

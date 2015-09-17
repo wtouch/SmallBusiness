@@ -45,7 +45,7 @@ define(['app'], function (app) {
 		$scope.addToObjects = function(data, object, resetObj){
 			var dtlObj = JSON.stringify(data);
 			object.push(JSON.parse(dtlObj));
-			$scope.submenu = {};
+			//$scope.submenu = {};
 		}
 		
 		//code for view single website details
