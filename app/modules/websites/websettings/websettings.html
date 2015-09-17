@@ -215,6 +215,15 @@
 										</form>
 									</span>
 								</a>
+								
+									<a type="button" class="glyphicon glyphicon-plus" tooltip="Add SubMenu" btn-checkbox btn-checkbox-true="true" ng-click="isCollapsed = !isCollapsed" btn-checkbox-false="false" ng-click="isCollapsed = !isCollapsed">
+									</a>
+								
+									<div collapse="isCollapsed">
+										<div class="well well-lg">
+										<h1>WelCome to Submenu</h1>
+										</div>
+									</div>
 							</span>
 							<span ng-click="ind[$index + data.url] = !ind[$index + data.url]" ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
 							<div ng-if="data.childMenu">

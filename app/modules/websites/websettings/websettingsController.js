@@ -10,6 +10,7 @@ define(['app'], function (app) {
 		$scope.userInfo = {
 			user_id : $rootScope.userDetails.id
 		};
+		 //$scope.isCollapsed = false;
 		$scope.website_id = $routeParams.id;
 		$scope.currentDate = dataService.currentDate;
 		$scope.userInfo = dataService.parse($rootScope.userDetails);
