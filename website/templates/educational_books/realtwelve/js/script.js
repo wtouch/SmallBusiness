@@ -5,12 +5,26 @@ jQuery(document).ready(function() {
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
 });
+
 $(document).ready(function(){
+	var sliderMode, minSlides, maxSlides;
+	//$(window).resize(function(){
+		if($(window).width() <= "480"){
+			sliderMode = "horizontal";
+			minSlides = 1;
+			maxSlides = 1;
+			
+		}else{
+			sliderMode = "vertical";
+			minSlides = 3;
+			maxSlides = 3;
+		}
+	//})
 	$('#bxslider').bxSlider({
 		mode:'horizontal',
 		slideWidth: 250,
-		minSlides:3,
-		maxSlides: 3,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
 		slideMargin: 25,
 		auto: true, 
 		autoDirection:'next',
@@ -26,8 +40,8 @@ $(document).ready(function(){
 	$('#associate').bxSlider({
 		mode:'horizontal',
 		slideWidth: 300,
-		minSlides:3,
-		maxSlides: 3,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
 		slideMargin: 25,
 		auto: true, 
 		autoDirection:'next',
@@ -41,10 +55,10 @@ $(document).ready(function(){
 		speed:1000,
 	});
 	$('.bxslider1').bxSlider({
-		mode:'vertical',
+		mode: sliderMode,
 		slideWidth: 680,
-		minSlides: 3,
-		maxSlides:3,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
 		slideMargin: 15,
 		auto: true, 
 		autoDirection:'next',

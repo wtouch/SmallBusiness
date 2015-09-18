@@ -401,12 +401,12 @@
   }
 }
 @media (max-width: 540px) {
+  .featuredProperty .bxslider1 li h4 {
+    padding-left: 10px;
+  }
   .featuredProperty .bxslider1 li .verify {
-    width: 25%;
-    border: none;
-    margin-left: 10px;
-    position: absolute;
-    right: 225px;
+    width: 40%;
+    left: 165px;
     bottom: -20px;
     z-index: 999;
   }
@@ -668,20 +668,6 @@
 .projlist .project .thumbnail .caption p {
   margin-bottom: 0px;
 }
-/*@media (max-width: 768px){
-	.homeproject {
-		.projectCarousal{
-			width:auto;
-			height:500px;
-		}
-		.projsnap{
-			padding-left: 154px ;
-		}
-		
-	}
-		
-		
-	}*/
 @media (max-width: 768px) {
   .homeproject .projectCarousal {
     position: static;
@@ -732,6 +718,12 @@
     width: auto;
   }
 }
+@media (max-width: 540px) {
+  .projectCarousal::after {
+    display: none;
+    width: 0px;
+  }
+}
 @media (max-width: 480px) {
   .homeproject .projectCarousal {
     position: static;
@@ -743,16 +735,6 @@
     border-radius: 0px;
     margin-bottom: 5px;
     margin-left: 10px;
-  }
-  .homeproject .projectCarousal::after {
-    position: absolute;
-    content: "";
-    background-image: url('../img/lady.png');
-    background-size: 100% 100%;
-    bottom: -5px;
-    z-index: 999;
-    height: 290px;
-    width: 120px;
   }
   .homeproject .projsnap {
     padding-left: 0px !important;
@@ -893,10 +875,8 @@ body {
   transform: translateX(-45px);
 }
 .logo {
+  max-width: 100%;
   height: 80px;
-  margin-top: 25px;
-  margin-left: 15px;
-  max-height: 100px;
 }
 a,
 .btn.btn-link {

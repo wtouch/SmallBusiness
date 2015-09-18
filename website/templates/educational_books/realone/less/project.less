@@ -249,20 +249,6 @@
 			}
 		}
 	}
-	/*@media (max-width: 768px){
-	.homeproject {
-		.projectCarousal{
-			width:auto;
-			height:500px;
-		}
-		.projsnap{
-			padding-left: 154px ;
-		}
-		
-	}
-		
-		
-	}*/
 	@media (max-width: 768px){
 		.homeproject {
 			.projectCarousal{
@@ -314,9 +300,14 @@
 			}
 		}
 	}
+	@media (max-width: 540px){
+		.projectCarousal::after{
+			display : none;
+			width : 0px;
+		}
+	}
 	@media (max-width: 480px){
 		.homeproject {
-			
 			.projectCarousal{
 				position : static;
 				border : 5px solid @colorwhite;
@@ -327,16 +318,6 @@
 				border-radius :0px;
 				margin-bottom:5px;
 				margin-left: 10px;
-			}
-			.projectCarousal::after{
-				position : absolute;
-				content : "";
-				background-image : url('../img/lady.png');
-				background-size: 100% 100%;
-				bottom : -5px;
-				z-index: 999;
-				height : 290px;
-				width : 120px;
 			}
 			.projsnap{
 				padding-left: 0px !important;
