@@ -5,12 +5,43 @@ jQuery(document).ready(function() {
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
 });
+
 $(document).ready(function(){
-	$('.bxslider').bxSlider({
+	var sliderMode, minSlides, maxSlides;
+	//$(window).resize(function(){
+		if($(window).width() <= "480"){
+			sliderMode = "horizontal";
+			minSlides = 1;
+			maxSlides = 1;
+			
+		}else{
+			sliderMode = "vertical";
+			minSlides = 3;
+			maxSlides = 3;
+		}
+	//})
+	$('#bxslider').bxSlider({
 		mode:'horizontal',
 		slideWidth: 250,
-		minSlides:3,
-		maxSlides: 3,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
+		slideMargin: 25,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 1,
+		pause:3000,
+		pager:true,
+		pagerType:'full',
+		autoControls: true, 
+		controls:true, 
+		autoHover:true,
+		speed:1000,
+	});
+	$('#associate').bxSlider({
+		mode:'horizontal',
+		slideWidth: 300,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
 		slideMargin: 25,
 		auto: true, 
 		autoDirection:'next',
@@ -24,10 +55,10 @@ $(document).ready(function(){
 		speed:1000,
 	});
 	$('.bxslider1').bxSlider({
-		mode:'vertical',
-		slideWidth: 600,
-		minSlides: 3,
-		maxSlides:3,
+		mode: sliderMode,
+		slideWidth: 680,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
 		slideMargin: 15,
 		auto: true, 
 		autoDirection:'next',
