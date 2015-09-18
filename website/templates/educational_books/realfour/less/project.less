@@ -34,10 +34,78 @@
 //homeproject
 .homeproject{
 	margin-bottom: 10px;
-	.projectCarousal, .projsnap, .projectnav{
-		position : static;
-		width : auto;
-		display : block;
+	.projectCarousal{
+		display : inline-block;
+		float : left;
+		position : relative;
+		.bx-viewport{
+			height : 342px!important;
+		}
+		.carousslider{
+			padding-left : 0px;
+			.item{
+				height : 342px;
+				overflow: hidden;
+				img{
+					min-height : 342px;;
+				}
+			}
+			.carousel-caption{
+				h2{
+					border : none;
+				}
+			}
+		}
+		.projsnap{
+			p{
+				border-bottom :1px solid @colorwhite;
+				padding:6px;
+				&:last-child{
+					border:none;
+				}
+			}
+			padding:10px;
+			width : 0px;
+			height : 342px;
+			opacity : 0;
+			background-color : rgba(115,146,184, 0.7);
+			//border : 20px solid @back;
+			transform: translateX(530px);
+			transition: all 800ms ease-in;
+			position: absolute;
+			overflow: hidden;
+			top: 0;
+			left: 0;
+			img{
+				height : 110px;
+				margin-top: 10px;
+				margin-bottom: 10px;
+				border : 1px solid @color;
+				border-radius : 5px;
+				padding :4px;
+			}
+			p, .viewproperty a {
+				color: @colorwhite;
+				font-size: 20px;
+				text-shadow: 3px 2px 1px #000;
+			}
+			.viewproperty{
+				margin-top: 15px;
+				text-align: center;
+				a{
+					&:hover{
+						color : @colorwhite;
+					}
+				}
+			}
+		}
+	}
+	.projectCarousal:hover{
+		.projsnap{
+			opacity : 1;
+			width : 529px;
+			transform: translateX(0px);
+		}
 	}
 	.projectnav{
 		display : inline-block;
@@ -186,80 +254,5 @@
 		}
 		.projectCarousal{
 			width : 507px;
-		}
-	}
-	@media (min-width: 1024px){
-		.projectCarousal{
-			display : inline-block;
-			float : left;
-			position : relative;
-			.bx-viewport{
-				height : 342px!important;
-			}
-			.carousslider{
-				padding-left : 0px;
-				.item{
-					height : 342px;
-					overflow: hidden;
-					img{
-						min-height : 342px;;
-					}
-				}
-				.carousel-caption{
-					h2{
-						border : none;
-					}
-				}
-			}
-			.projsnap{
-				p{
-					border-bottom :1px solid @colorwhite;
-					padding:6px;
-					&:last-child{
-						border:none;
-					}
-				}
-				padding:10px;
-				width : 0px;
-				height : 342px;
-				opacity : 0;
-				background-color : rgba(115,146,184, 0.7);
-				//border : 20px solid @back;
-				transform: translateX(530px);
-				transition: all 800ms ease-in;
-				position: absolute;
-				overflow: hidden;
-				top: 0;
-				left: 0;
-				img{
-					height : 110px;
-					margin-top: 10px;
-					margin-bottom: 10px;
-					border : 1px solid @color;
-					border-radius : 5px;
-					padding :4px;
-				}
-				p, .viewproperty a {
-					color: @colorwhite;
-					font-size: 20px;
-					text-shadow: 3px 2px 1px #000;
-				}
-				.viewproperty{
-					margin-top: 15px;
-					text-align: center;
-					a{
-						&:hover{
-							color : @colorwhite;
-						}
-					}
-				}
-			}
-		}
-		.projectCarousal:hover{
-			.projsnap{
-				opacity : 1;
-				width : 529px;
-				transform: translateX(0px);
-			}
 		}
 	}

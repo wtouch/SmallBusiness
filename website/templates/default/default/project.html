@@ -8,34 +8,32 @@
 	{% if homeproject != 'true' %}
 		<div class="col-xs-12 col-sm-12 col-lg-12">
 			<nav class="navbar">
-				<div class="collapse navbar-collapse" id="subnav">
-					<ul class="nav navbar-nav">
-						<li {{ projectPage == 'overview' ? 'class="active"' }}>
-							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/overview">Overview</a>
-						</li>
-						<li {{ projectPage == 'amenities' ? 'class="active"' }}>
-							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/amenities">Amenities/Specifications</a>
-						</li>
-						<li {{ projectPage == 'locationmap' ? 'class="active"' }}>
-							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/locationmap">Location Map</a>
-						</li>
-						<li {{ projectPage == 'layoutplan' ? 'class="active"' }}>
-							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/layoutplan">Layout Plan</a>
-						</li>
-						<li {{ projectPage == 'floorplans' ? 'class="active"' }}>
-							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/floorplans">Floor Plans</a>
-						</li>
-						<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
-							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projgallery">Gallery</a>
-						</li>
-						<li {{ projectPage == 'projecttestimonials' ? 'class="active"' }}>
-							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projecttestimonials">Testimonials</a>
-						</li>
-						<li {{ projectPage == 'projcontact' ? 'class="active"' }}>
-							<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projcontact">Contact</a>
-						</li>
-					</ul>
-				</div>
+				<ul class="nav navbar-nav">
+					<li {{ projectPage == 'overview' ? 'class="active"' }}>
+						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/overview">Overview</a>
+					</li>
+					<li {{ projectPage == 'amenities' ? 'class="active"' }}>
+						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/amenities">Amenities/Specifications</a>
+					</li>
+					<li {{ projectPage == 'locationmap' ? 'class="active"' }}>
+						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/locationmap">Location Map</a>
+					</li>
+					<li {{ projectPage == 'layoutplan' ? 'class="active"' }}>
+						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/layoutplan">Layout Plan</a>
+					</li>
+					<li {{ projectPage == 'floorplans' ? 'class="active"' }}>
+						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/floorplans">Floor Plans</a>
+					</li>
+					<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
+						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projgallery">Gallery</a>
+					</li>
+					<li {{ projectPage == 'projecttestimonials' ? 'class="active"' }}>
+						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projecttestimonials">Testimonials</a>
+					</li>
+					<li {{ projectPage == 'projcontact' ? 'class="active"' }}>
+						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projcontact">Contact</a>
+					</li>
+				</ul>
 			</nav>
 		</div>
 	{% endif %}

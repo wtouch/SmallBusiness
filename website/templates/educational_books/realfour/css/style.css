@@ -223,12 +223,72 @@
 .homeproject {
   margin-bottom: 10px;
 }
-.homeproject .projectCarousal,
-.homeproject .projsnap,
-.homeproject .projectnav {
-  position: static;
-  width: auto;
-  display: block;
+.homeproject .projectCarousal {
+  display: inline-block;
+  float: left;
+  position: relative;
+}
+.homeproject .projectCarousal .bx-viewport {
+  height: 342px!important;
+}
+.homeproject .projectCarousal .carousslider {
+  padding-left: 0px;
+}
+.homeproject .projectCarousal .carousslider .item {
+  height: 342px;
+  overflow: hidden;
+}
+.homeproject .projectCarousal .carousslider .item img {
+  min-height: 342px;
+}
+.homeproject .projectCarousal .carousslider .carousel-caption h2 {
+  border: none;
+}
+.homeproject .projectCarousal .projsnap {
+  padding: 10px;
+  width: 0px;
+  height: 342px;
+  opacity: 0;
+  background-color: rgba(115, 146, 184, 0.7);
+  transform: translateX(530px);
+  transition: all 800ms ease-in;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+.homeproject .projectCarousal .projsnap p {
+  border-bottom: 1px solid #ffffff;
+  padding: 6px;
+}
+.homeproject .projectCarousal .projsnap p:last-child {
+  border: none;
+}
+.homeproject .projectCarousal .projsnap img {
+  height: 110px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #337ab7;
+  border-radius: 5px;
+  padding: 4px;
+}
+.homeproject .projectCarousal .projsnap p,
+.homeproject .projectCarousal .projsnap .viewproperty a {
+  color: #ffffff;
+  font-size: 20px;
+  text-shadow: 3px 2px 1px #000;
+}
+.homeproject .projectCarousal .projsnap .viewproperty {
+  margin-top: 15px;
+  text-align: center;
+}
+.homeproject .projectCarousal .projsnap .viewproperty a:hover {
+  color: #ffffff;
+}
+.homeproject .projectCarousal:hover .projsnap {
+  opacity: 1;
+  width: 529px;
+  transform: translateX(0px);
 }
 .homeproject .projectnav {
   display: inline-block;
@@ -374,75 +434,6 @@
     width: 507px;
   }
 }
-@media (min-width: 1024px) {
-  .projectCarousal {
-    display: inline-block;
-    float: left;
-    position: relative;
-  }
-  .projectCarousal .bx-viewport {
-    height: 342px!important;
-  }
-  .projectCarousal .carousslider {
-    padding-left: 0px;
-  }
-  .projectCarousal .carousslider .item {
-    height: 342px;
-    overflow: hidden;
-  }
-  .projectCarousal .carousslider .item img {
-    min-height: 342px;
-  }
-  .projectCarousal .carousslider .carousel-caption h2 {
-    border: none;
-  }
-  .projectCarousal .projsnap {
-    padding: 10px;
-    width: 0px;
-    height: 342px;
-    opacity: 0;
-    background-color: rgba(115, 146, 184, 0.7);
-    transform: translateX(530px);
-    transition: all 800ms ease-in;
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-  }
-  .projectCarousal .projsnap p {
-    border-bottom: 1px solid #ffffff;
-    padding: 6px;
-  }
-  .projectCarousal .projsnap p:last-child {
-    border: none;
-  }
-  .projectCarousal .projsnap img {
-    height: 110px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #337ab7;
-    border-radius: 5px;
-    padding: 4px;
-  }
-  .projectCarousal .projsnap p,
-  .projectCarousal .projsnap .viewproperty a {
-    color: #ffffff;
-    font-size: 20px;
-    text-shadow: 3px 2px 1px #000;
-  }
-  .projectCarousal .projsnap .viewproperty {
-    margin-top: 15px;
-    text-align: center;
-  }
-  .projectCarousal .projsnap .viewproperty a:hover {
-    color: #ffffff;
-  }
-  .projectCarousal:hover .projsnap {
-    opacity: 1;
-    width: 529px;
-    transform: translateX(0px);
-  }
-}
 .services .servdesc {
   height: 200px;
 }
@@ -514,7 +505,7 @@
   border-top: none;
   position: relative;
   margin-bottom: 25px;
-  padding: 1px 30px 15px;
+  padding: 1px 10px 0px;
 }
 .featuretab .nav-tabs {
   border-bottom: 1px solid #2d4065;
@@ -756,7 +747,8 @@ body header .caro .content {
   padding-left: 20px;
 }
 body header .logo img {
-  padding: 10px 0px;
+  max-width: 100%;
+  height: 80px;
 }
 body header .sidenav {
   background: #2d4065;
@@ -855,6 +847,13 @@ body .sidebarModule h3 {
   color: #ffffff;
   background-color: #2d4065;
   padding: 10px 15px;
+}
+body .featured_services {
+  border: none;
+}
+body .featured_services h3 {
+  background: none;
+  color: #23527c;
 }
 body .sidebarModule {
   padding: 15px 15px 0px;

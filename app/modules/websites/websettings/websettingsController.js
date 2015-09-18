@@ -20,14 +20,9 @@ define(['app'], function (app) {
 				sidebar : []
 			}
 		};
-		$scope.websetting = {
-			config : {
-				menus : {
-					submenu :[]
-				}
-			}
-		};
+		
 		$scope.isCollapsed = true;
+		//$scope.isCollapseds = true;
 		$scope.isFirstOpen = true;
 
 		$scope.dragControlListeners = {
@@ -37,15 +32,23 @@ define(['app'], function (app) {
 		};
 		
 		$scope.addToObject = function(data, object, resetObj){
+			console.log(object);
+			if(!angular.isArray(object)){
+				object = [];
+			}
 			var dtlObj = JSON.stringify(data);
 			object.push(JSON.parse(dtlObj));
-			$scope.sidebar = {};
+			$scope.resetObj = {};
+			$scope.getMenulist($scope.websetting.user_id, $scope.websetting.business_id);
+			//console.log(object);
+			//$scope.websetting.config.menus = $scope.websetting.config.menus;
+			//console.log($scope.websetting.config.menus);
 		}
 		
 		$scope.addToObjects = function(data, object, resetObj){
 			var dtlObj = JSON.stringify(data);
 			object.push(JSON.parse(dtlObj));
-			//$scope.submenu = {};
+			$scope.submenu = {};
 		}
 		
 		//code for view single website details
@@ -120,7 +123,8 @@ define(['app'], function (app) {
 				if (response.data.config.menus == undefined) {
 					$scope.getMenulist(response.data.user_id, response.data.business_id);
 				}
-
+				
+				console.log(response.data.config.menus);
 				var config = (response.data.config != '') ? (response.data.config) : {
 					google_map : {}
 
@@ -147,6 +151,7 @@ define(['app'], function (app) {
 						newMenu[y].seo = oldMenu[x].seo;
 						newMenu[y].modules = oldMenu[x].modules;
 						newMenu[y].status = oldMenu[x].status;
+						newMenu[y].childMenu = oldMenu[x].childMenu;
 						if (newMenu[y].childMenu != undefined && oldMenu[x].childMenu != undefined) {
 							$scope.replaceMenu(newMenu[y].childMenu, oldMenu[x].childMenu);
 						}
@@ -189,7 +194,7 @@ define(['app'], function (app) {
 		
 		$scope.addsubmenu = function(websetting){
 			$scope.websetting.config.menus.submenu = (websetting.config.menus.submenu) ? websetting.config.menus.submenu : {};
-			console.log(websetting);
+			console.log(websetting.config.menus);
 			$scope.websetting.config.menus.submenu.name = (websetting.config.menus.submenu) ? websetting.config.menus.submenu.name : {};	
 		};
 		
