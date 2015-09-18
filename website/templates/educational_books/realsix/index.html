@@ -58,12 +58,16 @@
 		</nav>
 		
 		<div class="container">
+			{%if modules.headerModule.carousal %}
+				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+			{%endif%}
 			{%if modules.headerModule.homeproject %}
 				{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] %}
 			{% endif %}
-			<div class="content clearfix">
+			
 				<div class="row">
 					<div class="{{ (modules.sidebarModule >= 1) ? 'col-xs-12 col-sm-12 col-md-9 col-lg-9' : 'col-xs-12 col-sm-12 col-md-12 col-lg-12'}}"><!-- Conditional width if sidebarModule >=1  -->
+					<div class="content">
 						{% include contentPath %}
 						
 						{% if (modules.contentModule | length) >= 1 %}
@@ -115,6 +119,7 @@
 							
 						{% endif %}
 					</div>
+				</div>
 					<!-- SidebarModule >=1 -->
 					{% if modules.sidebarModule >= 1 %}
 					<div class="col-xs-12 col-sm-12  col-md-3 col-lg-3"><!-- conditional if sidebarModule >= 1 -->
@@ -138,7 +143,7 @@
 						
 					</div>
 					{% endif %}
-				</div>
+				
 			</div>
 		</div>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}

@@ -272,22 +272,21 @@
 	//for single project
 	.project{
 		.navbar{
-			background-color: @darkbackcolor;
 			border-bottom: 4px solid @lightbackcolor;
 			border-radius: 0;
 			margin-bottom:10px;
 			width:auto;
+			height : 40px;
 		}
 		ul.nav.navbar-nav {
 			color:@colorwhite;
 			background-color: @darkbackcolor;
 			>li{
 				border-right : 1px solid @lightbackcolor;
-				height : 38px;
+				height : 35px;
 				>a, > a:focus{
-					padding : 7px;
+					padding : 5px 5px 5px 6px;
 					color : @colorwhite;
-					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					background-color: @back ;
@@ -318,6 +317,12 @@
 					margin-bottom: 10px;
 				}
 			}
+		}
+	}
+	
+	@media (max-width : 540px){
+		.project .navbar{
+			height : 320px;
 		}
 	}
 	
