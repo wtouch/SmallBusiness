@@ -18,6 +18,25 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		{% if data.template_params %}
+			<style>	
+				.homeproject .projsnap p, .homeproject .projsnap .viewproperty a, .homeproject .projsnap .viewproperty a:hover, .homeproject .projectnav .nav-stacked > li > a, .homeproject .projectnav .nav-stacked > li > a:focus, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus, .sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, header .navbar-default .navbar-nav > li > a ,header .navbar-default .navbar-nav > li ul > li > a, header .navbar-default .navbar-nav > li ul > li > ul > li > a ,.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, footer, footer a, footer a:hover{
+					color : {{data.template_params.color}};
+				}
+				.homeproject .projsnap img{
+					border-color : {{data.template_params.color}};
+				}
+				.project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus{
+					color : {{data.template_params.light_color}};
+				}
+				.sidebar .nav-pills > li {
+					border-color : {{data.template_params.light_color}};
+				}
+				.testimonial blockquote footer cite, .featrtesti blockquote footer cite, main .back .featuredProperty .slide a, main .back .featuredProject .slide a, main .back .sidebarModule .slide a ,a{
+					color : {{data.template_params.dark_color}}
+				}
+			</style>
+		{% endif %} 
 	</head>
 	<body>
 		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
