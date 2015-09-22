@@ -19,7 +19,7 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		<!-- {% if data.template_params %}
+		{% if data.template_params %}
 			<style>	
 				a:hover,.btn.btn-link:hover{
 					color :  {{data.template_params.color}};	
@@ -48,8 +48,17 @@
 				.form-control,.thumbnail,.about .table tbody tr th,.contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td{
 					border-color: {{data.template_params.background_color_dark}};
 				}
+				.sidebar .nav-pills > li, .navbar-default, .project ul.nav.navbar-nav > li ,.project .navbar {
+					border-color: {{data.template_params.background_color_light}};
+				}
+				.navbar-default,.sidebar .nav-pills,.homeproject .projectnav,.homeproject .projsnap,.project ul.nav.navbar-nav,.services .servdesc .readmore a ,.navbar-default .navbar-nav > li > ul,.navbar-default .navbar-nav > li > ul > li ul, .btn-info, .btn-primary{
+					 background: linear-gradient({{data.template_params.background_color}},{{data.template_params.color}});
+				}
+				.sidebar .nav-pills > li.active > a,.sidebar .nav-pills > li.active:hover > a,.sidebar .nav-pills > li.active > a:focus,.sidebar .nav-pills > li:hover > a,.sidebar .nav-pills > li:hover > a:focus,.sidebar .nav-pills > li > a:hover,.sidebar .nav-pills > li > a:focus,.homeproject .projectnav .nav-stacked > li.active > a,.homeproject .projectnav .nav-stacked > li.active:hover > a,.homeproject .projectnav .nav-stacked > li.active > a:focus,.homeproject .projectnav .nav-stacked > li:hover > a,.homeproject .projectnav .nav-stacked > li:hover > a:focus,.homeproject .projectnav .nav-stacked > li > a:hover,.homeproject .projectnav .nav-stacked > li > a:focus,.project ul.nav.navbar-nav > li.active > a,.project ul.nav.navbar-nav > li.active:hover > a,.project ul.nav.navbar-nav > li.active > a:focus,.project ul.nav.navbar-nav > li:hover > a,.project ul.nav.navbar-nav > li:hover > a:focus,.project ul.nav.navbar-nav > li > a:hover,.project ul.nav.navbar-nav > li > a:focus ,.services .servdesc .readmore a:hover,.services .servdesc .readmore a:hover ,.sociallinks ul li,.navbar-default .navbar-nav > li.active > a,.navbar-default .navbar-nav > li.active:hover > a,.navbar-default .navbar-nav > li.active > a:focus,.navbar-default .navbar-nav > li:hover > a,.navbar-default .navbar-nav > li:hover > a:focus ,.navbar-default .navbar-nav > li > ul > li:hover,.navbar-default .navbar-nav > li > ul > li ul li:hover,.btn-info:hover, .btn-primary:hover,.btn-info:hover,.btn-primary:hover ,.subhead{
+					background: linear-gradient({{data.template_params.dark_color}}, {{data.template_params.background_color_dark}});
+				}
 			</style>
-		{% endif %} -->
+		{% endif %} 
 	</head>
 	<body>
 		<!-- <div class="sociallinks">
