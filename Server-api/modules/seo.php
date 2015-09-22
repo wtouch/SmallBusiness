@@ -27,7 +27,7 @@
 		$businessCols = array("id","testimonials", "job_careers", "news_coverage", "gallery", "custom_details");
 		$db->setColumns($business, $businessCols);
 		
-		$product = $db->setJoinString("LEFT JOIN", "product", array("business_id"=>$business.".id"));
+		$product = $db->setJoinString("RIGHT JOIN", "product", array("business_id"=>$business.".id"));
 		$db->setWhere($whereProd, $product);
 		$productCols = array("id" => "product_id", "product_service_name" => "product_name", "type" => "product_type", "product_image" => "product_image", "description" => "product_description", "category" => "product_category");
 		$db->setColumns($product, $productCols);
