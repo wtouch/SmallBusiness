@@ -44,9 +44,15 @@
 		
 		.bx-viewport{
 			height:500px;
-			.carousslider li{
-				left:0;
-			}
+			min-height : 300px !important;
+			.carousslider{
+				min-height : 300px;
+				li{
+					left:0;
+					min-height : 300px;
+					min-width : 100% !important;
+				}
+			} 
 			img{
 				height:500px;
 			}
@@ -313,6 +319,9 @@
 	@media (max-width: 480px){
 		.homeproject {
 			.projectCarousal{
+				.carousslider{
+					height : 300px;
+				}
 				position : static;
 				border : 5px solid @colorwhite;
 				width:auto;
@@ -322,6 +331,9 @@
 				border-radius :0px;
 				margin-bottom:5px;
 				margin-left: 10px;
+				.bx-viewport img {
+					height: 300px;
+				}
 			}
 			.projsnap{
 				padding-left: 0px !important;

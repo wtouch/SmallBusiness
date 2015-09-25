@@ -73,8 +73,7 @@ $(document).ready(function(){
 	});
 	$('.carousslider').bxSlider({ 
 		mode:'fade',
-		slideWidth: 1000,
-		slideHeight : 800,
+		
 		minSlides:1,
 		maxSlides: 1,
 		auto: true, 
