@@ -73,7 +73,6 @@ $(document).ready(function(){
 	});
 	$('.carousslider').bxSlider({ 
 		mode:'fade',
-		
 		minSlides:1,
 		maxSlides: 1,
 		auto: true, 

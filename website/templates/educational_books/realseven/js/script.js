@@ -64,9 +64,6 @@ $(document).ready(function(){
 	});
 	$('#carousslider').bxSlider({
 		mode:'fade',
-		slideWidth: 600,
-		slideHeight:500,
-		
 		auto: true, 
 		autoDirection:'next',
 		pause:2500,
