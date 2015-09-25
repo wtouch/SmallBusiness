@@ -1,0 +1,118 @@
+<span as-sortable-item-handle class="glyphicon glyphicon glyphicon-move"></span>
+<span ng-show="data.childMenu" class="caret" ng-click="isCollapsed = !isCollapsed"></span>
+
+<input ng-show="ind[$index + data.url]" type="text" ng-model="data.name" />
+
+<span class="widths" ng-show="!ind[$index + data.url]" ng-click="(data.customMenu == 1) ? editMenu(data) : ind[$index + data.url] = !ind[$index + data.url]" tooltip="{{data.url}}">{{data.name}}</span>
+
+<span class="pull-right">
+	<a class="glyphicon glyphicon-ok" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-model="data.status" ng-class="(data.status==1) ? 'glyphicon glyphicon-ok text-success' : 'glyphicon glyphicon-remove text-danger'" ng-init="data.status = (data.status == null || undefined) ? data.status = 1 : data.status"></a>
+	
+	<a class="glyphicon glyphicon-home" tooltip="Home Project" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.headerModule.homeproject" ng-class="(data.modules.headerModule.homeproject == true) ? 'text-success' : 'text-muted'" ></a>
+	
+	<a class="glyphicon glyphicon-picture" tooltip="Slider" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.headerModule.carousal" ng-class="(data.modules.headerModule.carousal == true) ? 'text-success' : 'text-muted'" ></a>
+	
+	<a class="glyphicon glyphicon-envelope" tooltip="Enquiry Form" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.sidebarModule.enquiry" ng-class="(data.modules.sidebarModule.enquiry == true) ? 'text-success' : 'text-muted'" ></a>
+	
+	<a class="glyphicon glyphicon-search" tooltip="Search Property" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.sidebarModule.searchProp" ng-class="(data.modules.sidebarModule.searchProp == true) ? 'text-success' : 'text-muted'" ></a>
+	
+	<a class="glyphicon glyphicon-phone-alt" tooltip="Contact Us" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.sidebarModule.contact" ng-class="(data.modules.sidebarModule.contact == true) ? 'text-success' : 'text-muted'"></a>
+	
+	<a class="glyphicon glyphicon-th-list" tooltip="Side Menus" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.sidebarModule.sidemenu" ng-class="(data.modules.sidebarModule.sidemenu == true) ? 'text-success' : 'text-muted'" ></a>
+	
+	<a class="glyphicon glyphicon-shopping-cart" tooltip="Featured Products" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.contentModule.featured_products" ng-class="(data.modules.contentModule.featured_products == true) ? 'text-success' : 'text-muted'" ></a>
+	
+	<a class="glyphicon glyphicon-cog" tooltip="Featured Services" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.contentModule.featured_services" ng-class="(data.modules.contentModule.featured_services == true) ? 'text-success' : 'text-muted'" ></a>
+	
+	<a class="glyphicon glyphicon-star-empty" tooltip="Featured Projects" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.contentModule.featured_projects" ng-class="(data.modules.contentModule.featured_projects == true) ? 'text-success' : 'text-muted'" ></a>
+	
+	<a class="glyphicon glyphicon-star" tooltip="Featured Properties" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-model="data.modules.contentModule.featured_properties" ng-class="(data.modules.contentModule.featured_properties == true) ? 'text-success' : 'text-muted'" ></a>
+	
+	<a ng-model="data.seo" ng-class="(ind[$index + data.url + 'seo']) ? 'text-success open' : 'text-muted'" >
+		<span tooltip="Edit SEO" class="glyphicon glyphicon-flash" ng-click="ind[$index + data.url + 'seo'] = !ind[$index + data.url + 'seo']"></span>
+		<span class="dropdown-menu" ng-show="ind[$index + data.url + 'seo']">
+		<span class="close" ng-click="ind[$index + data.url + 'seo'] = false">X</span>
+			
+			<form name="seo" role="form" class="form-horizontal panel panel-default">
+				<div class="form-group">
+				<div class="col-sm-12">
+				<input type="text" class="form-control" ng-model="data.seo.title" placeholder="SEO Title"/>
+				</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6">
+					<textarea class="form-control" type="text" ng-model="data.seo.keywords" placeholder="SEO Keywords"></textarea>
+					</div>
+					<div class="col-sm-6">
+					<textarea class="form-control" type="text" ng-model="data.seo.description" placeholder="SEO Description"></textarea>
+					</div>
+				</div>
+			</form>
+		</span>
+	</a>
+	
+	
+	
+	
+	<!-- -->
+	<a ng-model="data.childMenu" ng-class="(ind[$index + data.url + 'childMenu']) ? 'text-success open' : 'text-muted'" >
+		<span tooltip="Add submenu" class="glyphicon glyphicon-plus" ng-click="ind[$index + data.url + 'childMenu'] = !ind[$index + data.url + 'childMenu']"></span>
+		<span class="dropdown-menu" ng-show="ind[$index + data.url + 'childMenu']">
+			<span class="close" ng-click="ind[$index + data.url + 'childMenu'] = false">X</span>
+				
+			<div class="form-group panel-body">
+				<div collapse="isCollapseds">
+					<form name="submenu1" role="form" class="form-horizontal panel panel-default" ng-init="websetting.config.menus[$index].childMenu = (websetting.config.menus[$index].childMenu == undefined || null) ? [] : websetting.config.menus[$index].childMenu" >
+					
+					<div class="well well-lg">
+					<h4>SubMenu</h4>
+						<div class="form-group">
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="submenuname" name="submenuname" ng-model="childMenu.name" placeholder="Name"/>
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="submenuurl" name="submenuurl" ng-model="childMenu.url" placeholder="URL" />
+							</div>
+						</div>
+						<h4>Seo</h4>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="childMenu.seo.title" placeholder="Title"/>
+								<input type="hidden" class="form-control" id="status" name="status" ng-model="childMenu.status" ng-init="childMenu.status = 1"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-6">
+								<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="childMenu.seo.keywords" placeholder="Keywords">
+								</textarea>
+							</div>
+							<div class="col-sm-6">
+								<textarea type="text" class="form-control" id="description" name="description" ng-model="childMenu.seo.description" placeholder="Description"></textarea>
+								<input type="hidden" ng-model="childMenu.customMenu" ng-init="childMenu.customMenu = 1" />
+							</div>
+						</div>
+						
+						<button class="btn btn-primary col-sm-offset-3" ng-click=" addToObject(childMenu, websetting.config.menus[$index].childMenu,'childMenu'); ind[$index + data.url + 'childMenu'] = !ind[$index + data.url + 'childMenu']">Add SubMenu</button>
+				
+					</div> 
+					</form>
+				</div>
+				<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.menus.submenu">
+					<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus.submenu" ng-include="'tree_item_renderer.html'" as-sortable-item>
+					</div>
+				</div>
+			</div>
+		</span>
+	</a>
+	
+	
+</span>
+<span ng-click="editMenu(ind, $index + data.url, data, childMenu); " ng-class="(!ind[$index + data.url]) ? 'pull-right glyphicon glyphicon-pencil' : 'glyphicon glyphicon-ok'" aria-hidden="true"></span>
+
+<div ng-if="data.childMenu">
+	<div as-sortable="dragControlListeners" ng-model="data.childMenu">
+		<div class="menudiv childMenu" collapse="isCollapsed" ng-repeat="data in data.childMenu" ng-include="'modules/websites/websettings/tree_item_renderer.html'" as-sortable-item>
+			<span class="caret pull-right" ng-if="data.childMenu"></span>
+		</div>
+	</div> 
+</div> 

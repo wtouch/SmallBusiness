@@ -87,6 +87,10 @@ class websiteManager{
 	}
 	function setModules($routes){
 		foreach($routes as $key => $value){
+			if(isset($value['childMenu']) && count($value['childMenu']) >= 1){
+				$this->setModules($value['childMenu']);
+			}
+			
 			if($_SERVER['REQUEST_URI'] === $value["url"]){
 				if(isset($value["modules"])){
 					$this->modules = $value["modules"];

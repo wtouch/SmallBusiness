@@ -197,7 +197,16 @@ define(['app'], function (app) {
 			console.log(websetting.config.menus);
 			$scope.websetting.config.menus.submenu.name = (websetting.config.menus.submenu) ? websetting.config.menus.submenu.name : {};	
 		};
-		
+		$scope.editMenu = function(ind, para, data, childMenu){
+			if(data.customMenu == 1){
+				ind[para + 'childMenu'] = (ind[para + 'childMenu']) ? false : true;
+				childMenu = data;
+				console.log(data);
+				console.log(childMenu);
+			}else{
+				ind[para] = (ind[para]) ? false : true;
+			}
+		}
 		$scope.uploads = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 				if(data.status === 'success'){
