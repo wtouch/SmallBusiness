@@ -56,7 +56,6 @@ $(document).ready(function(){
 	});
 	$('.bxslider1').bxSlider({
 		mode: sliderMode,
-		slideWidth: 680,
 		minSlides: minSlides,
 		maxSlides: maxSlides,
 		slideMargin: 15,

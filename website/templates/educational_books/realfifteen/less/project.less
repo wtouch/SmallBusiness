@@ -59,26 +59,19 @@
 		overflow: hidden;
 		height:500px;
 		.bx-viewport{
-			height:500px;
-			.carousslider li{
-				left:0;
+			min-height : 300px !important;
+			.carousslider {
+				min-height : 300px;
+				li{
+					left:0;
+					min-width : 100% !important;
+				}
 			}
 			img{
 				height:500px;
 			}
 		}
 		
-	}
-	.projectCarousal::after{
-		position : absolute;
-		content : "";
-		background-image : url('../img/family.png');
-		background-size: 100% 100%;
-		right :132px;
-		bottom : -1px;
-		z-index: 999;
-		height : 290px;
-		width : 250px;
 	}
 	.projectnav, .projsnap {
 		position : absolute;
@@ -155,17 +148,6 @@
 			}
 		}
 	}
-	/*.homeproject::after{
-		position : absolute;
-		content : "";
-		background-image : url('../img/lady.png');
-		background-size: 100% 100%;
-		right: 213px;
-		top: 10px;
-		z-index: 999;
-		height: 305px;
-		width: 120px;
-	}*/
 	#carousel {
 		.carousel-inner {
 			.item{
@@ -189,7 +171,17 @@
 		}
 	}
 }
-
+.homeproject::after{
+	position : absolute;
+	content : "";
+	background-image : url('../img/family.png');
+	background-size: 100% 100%;
+	right :180px;
+	bottom : -1px;
+	z-index: 999;
+	height : 175px;
+	width : 230px;
+}
 // single project nav css
 .project{
 	.navbar{
