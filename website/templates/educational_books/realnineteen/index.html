@@ -58,9 +58,17 @@
 					{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
-					{%if modules.headerModule.homeproject %}
-					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+						{%if modules.headerModule.homeproject %}
+							{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+						{%endif%}
+					</div>
 				</div>
 			</div>
 			<div class="row">
