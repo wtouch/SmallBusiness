@@ -39,7 +39,6 @@ $(document).ready(function(){
 	});
 	$('#associate').bxSlider({
 		mode:'horizontal',
-		slideWidth: 300,
 		minSlides: minSlides,
 		maxSlides: maxSlides,
 		slideMargin: 25,

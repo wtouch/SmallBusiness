@@ -30,7 +30,6 @@
 .homeproject {
 	position : relative;
 	.projectCarousal{
-		
 		position : relative;
 		border : 5px solid @colorwhite;
 		z-index : 99;
@@ -41,7 +40,6 @@
 		box-shadow: 0 0 15px;
 		border-radius : 50%;
 		overflow: hidden;
-		
 		.bx-viewport{
 			height:500px;
 			min-height : 300px !important;
@@ -57,9 +55,7 @@
 				height:500px;
 			}
 		}
-		
 	}
-	
 	.projectCarousal::after{
 		position : absolute;
 		content : "";
@@ -111,20 +107,16 @@
 	}
 	.projsnap{
 		p{
-			//border-bottom :1px solid @colorwhite;
-			padding:6px;
+			padding:3px;
+			color : @lightcolor;
 			&:last-child{
 				border:none;
 			}
 		}
-		
-	
 		right: 16px;
-		padding-left: 110px !important;
+		padding-left: 60px !important;
 		padding-top: 7px !important;
 		padding-right: 10px !important;
-		
-		
 		text-align : center;
 		img{
 			height : 110px;
@@ -133,9 +125,6 @@
 			border : 2px solid @lightcolor;
 			border-radius : 5px;
 			padding :4px;
-		}
-		p{
-			color : @lightcolor;
 		}
 		.viewproperty{
 			a{
@@ -171,10 +160,6 @@
 		}
 	}
 }
-
-
-
-
 // single project nav css
 .project{
 	.navbar{
@@ -260,15 +245,11 @@
 		.homeproject {
 			.projectCarousal{
 				position : static;
-				border : 5px solid @colorwhite;
 				width:auto;
 				height:300px;
 				margin : 0 ;
-				box-shadow: 0 0 15px;
 				border-radius :0px;
 				margin-bottom:5px;
-				margin-left: 10px;
-				
 			}
 			.projectCarousal::after{
 				position : absolute;
@@ -302,7 +283,6 @@
 			}
 			.projectnav, .projsnap {
 				position : static;
-				margin-left: 10px;
 				width:auto;
 			}
 		}
@@ -317,47 +297,8 @@
 		}
 	}
 	@media (max-width: 480px){
-		.homeproject {
-			.projectCarousal{
-				.carousslider{
-					height : 300px;
-				}
-				position : static;
-				border : 5px solid @colorwhite;
-				width:auto;
-				height:300px;
-				margin : 0 ;
-				box-shadow: 0 0 15px;
-				border-radius :0px;
-				margin-bottom:5px;
-				margin-left: 10px;
-				.bx-viewport img {
-					height: 300px;
-				}
-			}
-			.projsnap{
-				padding-left: 0px !important;
-			}
-			.projectnav{
-				.nav-stacked{
-					>li{
-						text-align: center;
-						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-							transform: translateX(0px);
-							width: 100%;
-							border-top-left-radius: 0px;
-							border-bottom-left-radius: 0px;
-							text-align: center;
-							padding-right: 50px;
-						}
-					}
-				}
-			}
-			.projectnav, .projsnap {
-				position : static;
-				margin-left: 10px;
-				width:auto;
-			}
+		.project .projImg{
+			float : none;
 		}
 	}
 	

@@ -194,9 +194,6 @@
   }
 }
 @media (max-width: 540px) {
-  .featuredProperty .bxslider1 li h4 {
-    padding-left: 10px;
-  }
   .featuredProperty .bxslider1 li .verify {
     width: 25%;
     left: 156px;
@@ -273,24 +270,28 @@
   background: -moz-linear-gradient(top, #b478e6, #18012b);
   background: linear-gradient(top, #b478e6, #18012b);
 }
-.homeproject .carousslider {
+.homeproject .bx-viewport {
+  min-height: 300px !important;
+}
+.homeproject .bx-viewport .carousslider {
   padding-left: 0px;
 }
-.homeproject .carousslider li {
+.homeproject .bx-viewport .carousslider li {
   border: 7px solid #a1c31a;
   background-color: #a1c31a;
   border-radius: 40px;
   transition: all 1s ease-in-out;
+  min-width: 100% !important;
 }
-.homeproject .carousslider li img {
+.homeproject .bx-viewport .carousslider li img {
   width: 100%;
   min-height: 303px;
 }
-.homeproject .carousslider li:hover {
+.homeproject .bx-viewport .carousslider li:hover {
   transform: scale(1.1);
   border-radius: 40px;
 }
-.homeproject .carousslider li.item {
+.homeproject .bx-viewport .carousslider li.item {
   overflow: hidden;
   height: 303px;
 }
@@ -307,7 +308,7 @@
 }
 .homeproject .projsnap p {
   margin: 0px 10px;
-  padding: 13px;
+  padding: 5px;
   border-bottom: 1px solid #18012b;
 }
 .homeproject .projsnap p:last-child {
@@ -1020,6 +1021,9 @@ footer {
 }
 .navbar-toggle .icon-bar {
   background-color: #ffffff;
+}
+button.navbar-toggle.collapsed.projdtls {
+  color: #ffffff;
 }
 @media (min-width: 320px) {
   .logo {
