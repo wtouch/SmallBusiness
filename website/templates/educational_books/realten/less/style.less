@@ -412,11 +412,6 @@
 		.cnctinfo{
 			display : none;
 		}
-		.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>li>a:hover{
-			background-color:@darkbackcolor;
-			color:@colorblack;
-			border-top:2px solid @back;
-		}
 	}
 	@media (min-width: 992px){
 		.logo{
@@ -443,6 +438,13 @@
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @colorwhite;
+	}
+	@media (max-width: 320px){
+		.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>li>a:hover{
+			background-color:@darkbackcolor;
+			color:@colorblack;
+			border:none;
+		}
 	}
 	@media (max-width: 540px){
 		header {
