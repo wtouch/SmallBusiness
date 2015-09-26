@@ -47,11 +47,13 @@
 		<div class="form-group">	
 			<label  for="email" class="col-sm-2 control-label">Email *</label>
 			<div class="col-sm-9">
-				<input type="Email" class="form-control" id="email" ng-model="modalOptions.contact.email" name="email" placeholder="Enter Email" required />
-				
+				<input type="Email" class="form-control" id="email" ng-model="modalOptions.contact.email" name="email" ng-pattern="/^[\.\w]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" placeholder="Enter Email" required />
 				<span class="help-block" ng-show="addcontactForm.email.$dirty && addcontactForm.email.$invalid">
-					<span class="text-danger" ng-show="addcontactForm.email.$error.required">Email is required.</span>
-					<span class="text-danger" ng-show="addcontactForm.email.$error.email">Invalid Email address.</span>
+				
+					<span ng-show="addcontactForm.email.$error.pattern && (addcontactForm.email.$dirty || submitted)" class="text-danger">Enter a valid email</span>
+				
+					<span ng-show="addcontactForm.email.$error.required" class="text-danger">Required Field.</span>
+					
 				</span>
 			</div>
 		</div> 

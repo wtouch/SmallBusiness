@@ -116,6 +116,7 @@ define(['app'], function (app) {
 		//code for select development status
 		$scope.changeStatusf={};
 		$scope.editDevelopmentStatus = function(colName, colValue, id, editStatus){
+			console.log(colName, colValue, id, editStatus);
 			$scope.changeStatusf[colName] = colValue;
 			if(editStatus==0){
 				 dataService.put("put/mytemplate/"+id,$scope.changeStatusf)
@@ -124,7 +125,21 @@ define(['app'], function (app) {
 					$notification[response.status]("Change Development Status", response.message);
 				}); 
 			}
+		};	
+
+		
+		$scope.changeStatusfs={};
+		$scope.editUser = function(colName, colValue, id){
+			console.log(colName, colValue, id);
+			$scope.changeStatusfs[colName] = colValue;
+				 dataService.put("put/mytemplate/"+id,$scope.changeStatusfs)
+				.then(function(response) { 
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Change User", response.message);
+				}); 
+			
 		};	 
+		
 		
 		//code for show development status
 		$scope.showInput = function($event,opened) 		{
@@ -141,6 +156,14 @@ define(['app'], function (app) {
 			if(development[x].id == id) development_status = development[x].development_status;
 			}
 			return development_status;
+		}
+		
+		$scope.changeOwnerUser = function(id, owner){
+			var owner_status;
+			for(var x in owner){
+			if(owner[x].id == id) owner_status = owner[x].owner_status;
+			}
+			return owner_status;
 		}
 	
 		$scope.changeScope = function(value, object){
