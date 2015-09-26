@@ -50,6 +50,11 @@ define(['app'], function (app) {
 			object.push(JSON.parse(dtlObj));
 			$scope.submenu = {};
 		}
+		$scope.removeCustomMenu = function(array, index, data){
+		 	if(data.customMenu == 1){
+			     array.splice(index, 1);
+			}
+		}
 		
 		//code for view single website details
 		dataService.get("getsingle/website/" + $routeParams.id)
