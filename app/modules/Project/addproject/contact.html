@@ -19,10 +19,14 @@
 <div class="form-group">
 	<label for="Email" class="col-sm-2 control-label">Email ID *</label>
 	<div class="col-sm-9">
-		<input type="email" class="form-control" id="Email" name="Email" placeholder="example@gmail.com" ng-model="project.contact_details.email" required>
-		<span  ng-show="contactForm.Email.$dirty && contactForm.Email.$invalid">
-			<span class="text-danger" ng-show="contactForm.Email.$error.required">Required Field.</span>
-			<span class="text-danger" ng-show="contactForm.Email.$error.email">Invalid Email address.</span>
+		<input type="Email" class="form-control" id="Email" ng-model="addbusiness.contact_profile.Email" ng-pattern="/^[\.\w]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" name="Email" placeholder="Enter Alternate Email" required>
+		
+		<span class="help-block" ng-show="contactForm.Email.$dirty && contactForm.Email.$invalid">
+		
+			<span ng-show="contactForm.Email.$error.pattern && (contactForm.Email.$dirty || submitted)" class="text-danger">Enter a valid email</span>
+		
+			<span ng-show="contactForm.Email.$error.required" class="text-danger">Required Field.</span>
+			
 		</span>
 	</div>
 </div>
