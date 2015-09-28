@@ -69,6 +69,19 @@ define(['app'], function (app) {
 			}
 		});
 		
+		
+		$scope.changeStatusfs={};
+		$scope.editUser = function(colName, colValue, id){
+			console.log(colName, colValue, id);
+			$scope.changeStatusfs[colName] = colValue;
+				 dataService.put("put/business/"+id,$scope.changeStatusfs)
+				.then(function(response) { 
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Change User", response.message);
+				}); 
+			
+		};	 
+		
 		$scope.changeStatus = function(statusCol, colValue) {
 			$scope.filterStatus= {};
 			(colValue == "") ? delete $scope.businessParams[statusCol] : $scope.filterStatus[statusCol] = colValue;
