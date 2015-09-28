@@ -17,6 +17,62 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		{% if data.template_params %}
+			<style>
+				.featrtesti img:hover{
+					border-color : {{data.template_params.color}};
+				}
+				a{
+					color : {{data.template_params.color}};
+				}
+				.navbar-default .navbar-nav > li > ul, .homeproject .bx-wrapper, .homeproject .projectnav, .homeproject .projsnap, .sidebar .nav-pills > li, .featrtesti img {
+					border-color : {{data.template_params.light_color}};
+				}
+				a:hover, .btn-info:hover, .btn-info[disabled]:hover, .btn-link:hover, .projlist .project .thumbnail .readmore a:hover{
+					color : {{data.template_params.light_color}};
+				}
+				.btn-primary:hover{
+					background-color : {{data.template_params.dark_color}};
+				}
+				.btn-primary:hover{
+					border-color : {{data.template_params.dark_color}};
+				}
+				.singleproperty .propDetails h3, .testimonial blockquote footer cite, .featrtesti blockquote footer cite, h1, h2, h3, h4,.contentModule .readmore a{
+					color : {{data.template_params.dark_color}};
+				}
+				.contentModule .sliderimg:hover, .panel-default, .thumbnail, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .projlist .project .thumbnail .projectimg:hover, .project ul.nav.navbar-nav > li, .sliderimg:hover,.propertylist .sliderimg:hover, .singleproperty .propDetails .table tbody tr td, .singleproperty .propDetails .table tbody tr th, .services #bxslider2 .servimage:hover, .products .thumbnail .prodimg:hover, .btn-primary{
+					border-color : {{data.template_params.background_color}};
+				}
+				.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .singleproperty .propDetails .table tbody tr th, .btn-primary{
+					background-color : {{data.template_params.background_color}};
+				}
+				.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .contact a:hover{
+					color : {{data.template_params.background_color}};
+				}
+				.homeproject .projectnav, .homeproject .projsnap, .homeproject .projectnav .nav-stacked, .homeproject .projsnap .nav-stacked, body, .navbar-default .navbar-nav > li > ul, .navbar-default .navbar-nav > li > ul > li ul{
+					background-color : {{data.template_params.background_color_dark}};
+				}
+				.project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus,.sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus, .sidebar .nav-pills > li > a:hover, .sidebar .nav-pills > li > a:focus,.contact a, body, .navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus, .sidebarModule .sections, .sidebarModule .sections h4, .sidebarModule .sections a, .sidebarModule .sections a:hover, .contentModule h3 small{
+					color : {{data.template_params.background_color_dark}};
+				}
+				.singleproperty .property, .singleproperty .property .table tbody tr td, .about .table tbody tr th, .contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td, .gallery .thumbnail, .navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus, hr{
+					border-color : {{data.template_params.background_color_dark}};
+				}
+				.homeproject .projectnav .nav-stacked > li.active > a, .homeproject .projsnap .nav-stacked > li.active > a, .homeproject .projectnav .nav-stacked > li.active:hover > a, .homeproject .projsnap .nav-stacked > li.active:hover > a, .homeproject .projectnav .nav-stacked > li.active > a:focus, .homeproject .projsnap .nav-stacked > li.active > a:focus, .homeproject .projectnav .nav-stacked > li:hover > a, .homeproject .projsnap .nav-stacked > li:hover > a, .homeproject .projectnav .nav-stacked > li:hover > a:focus, .homeproject .projsnap .nav-stacked > li:hover > a:focus, .homeproject .projectnav .nav-stacked > li > a:hover, .homeproject .projsnap .nav-stacked > li > a:hover, .homeproject .projectnav .nav-stacked > li > a:focus, .homeproject .projsnap .nav-stacked > li > a:focus,.sociallinks ul li, .navbar-default,.navbar-default .navbar-nav > li > ul > li:hover,.navbar-default .navbar-nav > li > ul > li ul li:hover{
+					background-image: -webkit-linear-gradient({{data.template_params.dark_color}}, {{data.template_params.background_color}}, {{data.template_params.dark_color}});
+					background-image: -moz-linear-gradient({{data.template_params.dark_color}}, {{data.template_params.background_color}}, {{data.template_params.dark_color}});
+					background-image: linear-gradient({{data.template_params.dark_color}}, {{data.template_params.background_color}}, {{data.template_params.dark_color}});
+				}
+				.project ul.nav.navbar-nav,.sidebar .nav-pills{
+					background: -webkit-linear-gradient(top, {{data.template_params.background_color}}, {{data.template_params.dark_color}}, {{data.template_params.background_color}});
+					background: -moz-linear-gradient(top,{{data.template_params.background_color}}, {{data.template_params.dark_color}}, {{data.template_params.background_color}});
+					background: linear-gradient(top, {{data.template_params.background_color}}, {{data.template_params.dark_color}}, {{data.template_params.background_color}});
+				}
+				.project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus,.sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus, .sidebar .nav-pills > li > a:hover, .sidebar .nav-pills > li > a:focus,.navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus{
+					background: linear-gradient({{data.template_params.background_color_light}}, {{data.template_params.light_color}}, {{data.template_params.background_color_light}});
+				}
+			</style>
+		{% endif %}
 	</head>
 	<body>
 		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}

@@ -18,6 +18,60 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		{% if data.template_params %}
+			<style>
+			.singleproperty .propDetails .table tbody tr th,.homeproject .projectnav .nav-stacked > li > a, .homeproject .projsnap .nav-stacked > li > a, .homeproject .projectnav .nav-stacked > li > a:focus, .homeproject .projsnap .nav-stacked > li > a:focus, .homeproject .projsnap p, .homeproject .projsnap .viewproperty a, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus, .featuretab .nav-tabs li a, .sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, .sociallinks ul li a, .sociallinks ul li a:hover, header .navbar-default .navbar-nav > li > a, header .navbar-default .navbar-nav > li ul li a, header .navbar-default .navbar-nav > li ul li > ul > li > a, main .back .contentModule .subhead, main .back .sidebarModule .subhead, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus,footer, footer a, footer a:hover{
+				color : {{data.template_params.color}};
+			}
+			.homeproject .projsnap img, .featrtesti img:hover{
+				border-color : {{data.template_params.color}};
+			}
+			.project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus, .sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus, .sidebar .nav-pills > li > a:hover, .sidebar .nav-pills > li > a:focus{
+				background-color : {{data.template_params.light_color}};
+			}
+			.featrtesti img{
+				border-color : {{data.template_params.light_color}};
+			}
+			.sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus, .sidebar .nav-pills > li > a:hover, .sidebar .nav-pills > li > a:focus, hr, main .back .contentModule, main .back .sidebarModule, .btn-info:hover, .btn-primary:hover, .thumbnail, .panel-default, .form-control, .form-control[disabled], .form-control[readonly],.pagination > .active > a, .pagination > .active > span,.pagination > .active > a:hover,.pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus,.pagination > li > a:hover,.pagination > li > span:hover,.pagination > li > a:focus,.pagination > li > span:focus,.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > .disabled > a:hover, .featuredProperty .bxslider1 li .sliderImg:hover, .featuredProperty .bxslider1 li .sliderDesc .readmore a:hover, .propertylist .btn-primary:hover, .propertylist img:hover, .propertylist .readmore a:hover, .singleproperty .property .mainimg, .singleproperty .btn-primary:hover, .bxslider li .projimg:hover, .project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus, .project .projImg:hover, .services .servimage:hover, .services .servdesc .readmore a:hover, .products .thumbnail .readmore a:hover {
+				border-color : {{data.template_params.dark_color}};
+			}
+			.testimonial blockquote footer cite, .featrtesti blockquote footer cite, .sidebarModule a, .sidebarModule a:hover,body,header .navbar-default .navbar-nav > li.active > a, header .navbar-default .navbar-nav > li.active:hover > a, header .navbar-default .navbar-nav > li.active > a:focus, header .navbar-default .navbar-nav > li:hover > a, header .navbar-default .navbar-nav > li:hover > a:focus, header .navbar-default .navbar-nav > li > a:hover, header .navbar-default .navbar-nav > li ul li:hover a, header .navbar-default .navbar-nav > li ul li > ul > li:hover a, main .back .contentModule .slide a, main .back .sidebarModule .slide a, h3, h4, h1, h2, a, a:hover, .btn-link, .btn-link:hover, .btn-info:hover, .btn-primary:hover,.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > .disabled > a:hover, .featuredProperty .bxslider1 li .sliderDesc .readmore a:hover, .propertylist .btn-primary:hover, .propertylist .readmore a:hover, .singleproperty .btn-primary:hover, .homeproject .projectnav .nav-stacked > li.active > a, .homeproject .projsnap .nav-stacked > li.active > a, .homeproject .projectnav .nav-stacked > li.active:hover > a, .homeproject .projsnap .nav-stacked > li.active:hover > a, .homeproject .projectnav .nav-stacked > li.active > a:focus, .homeproject .projsnap .nav-stacked > li.active > a:focus, .homeproject .projectnav .nav-stacked > li:hover > a, .homeproject .projsnap .nav-stacked > li:hover > a, .homeproject .projectnav .nav-stacked > li:hover > a:focus, .homeproject .projsnap .nav-stacked > li:hover > a:focus, .homeproject .projectnav .nav-stacked > li > a:hover, .homeproject .projsnap .nav-stacked > li > a:hover, .homeproject .projectnav .nav-stacked > li > a:focus, .homeproject .projsnap .nav-stacked > li > a:focus, .project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus, .services .servdesc .readmore a:hover, .products .thumbnail .readmore a:hover, .sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus,.sidebar .nav-pills > li > a:hover, .sidebar .nav-pills > li > a:focus{
+				color : {{data.template_params.dark_color}};
+			}
+			main .back .contentModule .subhead, main .back .sidebarModule .subhead, .btn-info, .btn-primary, .btn-info:focus, .btn-primary:focus, .btn-info:active, .btn-primary:active, .btn-info[disabled], .btn-primary[disabled],.pagination > .active > a,.pagination > .active > span,.pagination > .active > a:hover,.pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus,.pagination > li > a:hover,.pagination > li > span:hover,.pagination > li > a:focus,.pagination > li > span:focus, .navbar-toggle, .featuredProperty .bxslider1 li .sliderDesc .readmore a, .propertylist .btn-primary, .propertylist .readmore a, .singleproperty .propDetails .table tbody tr th,.singleproperty .btn-primary, .homeproject .projectnav, .homeproject .projsnap, .services .servdesc .readmore a,.products .thumbnail .readmore a, .featuretab .nav-tabs li a{
+				background-color : {{data.template_params.dark_color}};
+			}
+			.gallery .thumbnail, header .navbar-default .navbar-nav > li.active > a, header .navbar-default .navbar-nav > li.active:hover > a, header .navbar-default .navbar-nav > li.active > a:focus, header .navbar-default .navbar-nav > li:hover > a, header .navbar-default .navbar-nav > li:hover > a:focus, header .navbar-default .navbar-nav > li > a:hover,header .navbar-default .navbar-nav > li ul li:hover, header .navbar-default .navbar-nav > li ul li > ul > li:hover,.btn-info:hover, .btn-primary:hover, .featuredProperty .bxslider1 li .sliderDesc .readmore a:hover, .propertylist .btn-primary:hover,.propertylist .readmore a:hover, .singleproperty .btn-primary:hover,.homeproject .projectnav .nav-stacked > li.active > a, .homeproject .projsnap .nav-stacked > li.active > a, .homeproject .projectnav .nav-stacked > li.active:hover > a, .homeproject .projsnap .nav-stacked > li.active:hover > a, .homeproject .projectnav .nav-stacked > li.active > a:focus, .homeproject .projsnap .nav-stacked > li.active > a:focus, .homeproject .projectnav .nav-stacked > li:hover > a, .homeproject .projsnap .nav-stacked > li:hover > a, .homeproject .projectnav .nav-stacked > li:hover > a:focus, .homeproject .projsnap .nav-stacked > li:hover > a:focus, .homeproject .projectnav .nav-stacked > li > a:hover, .homeproject .projsnap .nav-stacked > li > a:hover, .homeproject .projectnav .nav-stacked > li > a:focus, .homeproject .projsnap .nav-stacked > li > a:focus, .services .servdesc .readmore a:hover, .products .thumbnail .readmore a:hover{
+				background-color : {{data.template_params.background_color}};
+			}
+			header .navbar-default .navbar-nav > li > a, header .navbar-default .navbar-nav > li ul, .homeproject .bx-viewport, .homeproject .projectnav, .homeproject .projsnap, .homeproject .projectnav .nav-stacked > li, .homeproject .projsnap .nav-stacked > li, .homeproject .projsnap p, .homeproject #carousel .carousel-inner{
+				border-color : {{data.template_params.background_color}};
+			}
+			.homeproject .projsnap .viewproperty a:hover{
+				color : {{data.template_params.background_color}};
+			}
+			main .back, .thumbnail, .panel, .pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > .disabled > a:hover{
+				background-color : {{data.template_params.background_color_light}};
+			}
+			.btn-info, .btn-primary, .btn-info:focus, .btn-primary:focus, .btn-info:active, .btn-primary:active, .btn-info[disabled], .btn-primary[disabled], .form-control, .form-control[disabled], .form-control[readonly],.featuredProperty .bxslider1 li .sliderDesc .readmore a,.propertylist .btn-primary,.propertylist .readmore a, .singleproperty .btn-primary, .services .servdesc .readmore a, .products .thumbnail .readmore a{
+				color : {{data.template_params.background_color_light}};
+			}
+			.propertylist, .homeproject .bx-viewport img:hover, .homeproject #carousel .carousel-inner:hover, .projlist, .project ul.nav.navbar-nav > li, .sidebar .nav-pills > li, .sociallinks ul li img{
+				border-color : {{data.template_params.background_color_light}};
+			}
+			.form-control, .form-control[disabled], .form-control[readonly],header,main{
+				background-color : {{data.template_params.background_color_dark}};
+			}
+			.singleproperty .property, .singleproperty .property .table tbody tr td,.singleproperty .propDetails .table tbody tr td,.singleproperty .propDetails .table tbody tr th, .featuretab .tab-content,.featuretab .nav-tabs,.featuretab .nav-tabs li a, .featuretab .nav-tabs li a:hover,.featuretab .nav-tabs li.active > a,.featuretab .nav-tabs li.active > a:hover,.featuretab .nav-tabs li.active > a:focus,.about .table tbody tr th,.contact .table tbody tr th,.about .table tbody tr td,.contact .table tbody tr td,.gallery .thumbnail{
+				border-color : {{data.template_params.background_color_dark}};
+			}
+			footer, .project ul.nav.navbar-nav,.sidebar .nav-pills, .sociallinks ul li,header .navbar-default,header .navbar-default .navbar-nav > li ul{
+				background: -webkit-linear-gradient(top, {{data.template_params.color}} -565%, {{data.template_params.dark_color}});
+				background: -moz-linear-gradient(top, {{data.template_params.color}} -565%, {{data.template_params.dark_color}});
+				background: linear-gradient(top, {{data.template_params.color}} -565%, {{data.template_params.dark_color}});
+			}
+			</style>
+		{% endif %}
 	</head>
 	<body>
 		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}

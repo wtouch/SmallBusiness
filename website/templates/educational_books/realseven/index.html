@@ -14,10 +14,32 @@
 		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
 		<script src="{{ path }}js/script.js"></script>
-		
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		{% if data.template_params %}
+			<style>
+				.sociallinks ul li, .block-menu .nav-child li > a:hover, .block-menu .nav-child li > a:focus, .block-menu .nav-child:hover > a, .homeproject .projectnav ul.nav.nav-stacked > li> a:hover,.homeproject .projectnav a:hover,.front, .back,.proj_nav > li > a:hover, .proj_nav > .active > a,.block-menu .child-menu > ul > li > a:hover, .btn:hover, .nav-pills li:hover > a, .nav-pills li > a:focus, .nav-pills .active :hover > a, .nav-pills .active:hover > a:focus, .nav-pills .active >a:hover, .nav-pills .active >a:focus, .projlist .project .thumbnail .readmore a:hover,.project .navbar	 ul.nav.navbar-nav>li.active > a, .project .navbar	 ul.nav.navbar-nav>li.active:hover > a, .project .navbar ul.nav.navbar-nav>li.active > a:focus, .project .navbar	 ul.nav.navbar-nav>li:hover > a, .project .navbar	 ul.nav.navbar-nav>li:hover > a:focus, .project .navbar ul.nav.navbar-nav>li>a:hover, .project .navbar ul.nav.navbar-nav>li>a:focus, .propertylist .panel-default img:hover{
+					background-color : {{data.template_params.background_color_dark}};
+				}
+				.imgborder .slimg:hover, .thumbnail, .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus,.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover, .sidebar table tr td, .projlist .project .thumbnail .projectimg	 img:hover, .modal-content, .modal-content h4, .singleproperty	.property, .singleproperty	.property .table tbody tr td, .singleproperty	.propDetails .table tbody tr th,.singleproperty	.propDetails .table tbody tr td, .singleproperty .property  .propDetails .table tbody tr th,.featrtesti img:hover{
+					border-color : {{data.template_params.background_color_dark}};
+				}
+				a:hover, .pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
+					color : {{data.template_params.background_color_dark}};
+				}
+				.projimg img:hover,.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover{
+					border-color : {{data.template_params.background_color}};
+				}
+				.block-menu .child-menu > ul > li > a,.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus, .nav-pills, .projlist .project .thumbnail .readmore a, .project .navbar	 ul.nav.navbar-nav, .featrtesti img, .navbar-toggle .icon-bar, button.navbar-toggle.projdtls,.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover, .content-box > h1 , .content-box > h2 , .sidebarModule > h3, .contentModule > h3,.block-menu, .navbar.navbar-default, .homeproject .projectnav,.homeproject .projsnap, .btn,.btn-info[disabled]{
+					background-color : {{data.template_params.background_color}};
+				}
+				.content-box > h2:before, .content-box > h1:before, .sidebarModule > h3:before, .contentModule > h3:before, .projimg img:hover{
+					border-top: 20px solid {{data.template_params.background_color}};
+					border-bottom: 20px solid {{data.template_params.background_color}};
+				}
+			</style>
+		{% endif %}
 	</head>
 	<body>
 		<!-- <div class="sociallinks">
