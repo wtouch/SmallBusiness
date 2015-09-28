@@ -66,7 +66,24 @@
 						<td><span as-sortable-item-handle >{{ ((bizListCurrentPage - 1) * pageItems) + $index + 1 }}</span></td>
 						<td>{{x.business_name}}</td>
 						<td>{{x.created_date}}</td>
-						<td>{{x.name}}</td>
+						<!-- <td>{{x.name}}</td> -->
+						
+						<td class="col-sm-2">
+							<div class="input-group">
+								<!--ng-hide="x.id ==0 || !x.id"-->
+								<!-- <p class="form-control-static" ng-hide="x.name ==1">{{x.name}}</p> -->
+								<select  class="form-control" id="name" name="name"  ng-model="x.user_id" ng-options="user.id as user.name for user in customerList | filter: { group_name : 'customer'}" ng-required="true">
+										<option value=""><p class="form-control-static" >{{x.name}}</p></option>
+								</select>{{user.id}}
+									
+								<div class="input-group-btn"><!--ng-if="userDetails.group_name == 'admin' || userDetails.group_name == 'superadmin'"-->
+									<a type="button" ng-class="(!x.user_id) ? 'btn btn-info' : 'btn btn-success'" ng-model="x.user_id" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editUser('user_id', x.user_id, x.id);  x.user_id = changeOwnerUser(x.user_id, owner)"  tooltip="Edit User">
+										<span ng-class="(x.user_id) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'" ></span> {{x.user_id}}
+									</a>
+								</div>
+							</div>
+						</td>
+						
 						<td><span ng-if="x.manager==null">-</span><span ng-if="x.manager!=null">{{x.manager}}</span></td>
 						<td><span ng-if="x.admin==null">-</span><span ng-if="x.admin!=null">{{x.admin}}</span></td>
 						<td class="tdwidth">

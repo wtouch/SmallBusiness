@@ -199,6 +199,17 @@ define(['app'], function (app) {
 				}); 
 			}
 		};	
+		
+		$scope.editUser = function(colName, colValue, id, editStatus){
+			$scope.changStatus[colName] = colValue;
+			if(editStatus==0){
+				 dataService.put("put/user/"+id,$scope.changStatus)
+				.then(function(response) { 
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Edit Group Name", response.message);
+				}); 
+			}
+		};	
 		$scope.showDropDown = function($event,opened){
 			$scope.user_groups = []; 				  				
 			$event.preventDefault();
