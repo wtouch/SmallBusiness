@@ -19,11 +19,32 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 		{% if data.template_params %}
 			<style>
-				.bxslider li a{
+				.bxslider li a,.bxslider li a:hover,.homeproject .projectCarousal .projsnap img, .featrtesti img:hover,body a,body .btn-info,body .btn-info:focus,body .btn-info:active,body .btn-info[disabled],body .btn-link{
 					color : {{data.template_params.color}};
 				}
-				.propertylist .btn-primary, .singleproperty .btn-primary{
+				.propertylist .btn-primary, .singleproperty .btn-primary,body .sidebarModule .btn-info,body .sidebarModule .btn-info:focus,body .sidebarModule .btn-info:active,body .sidebarModule .btn-info[disabled]{
 					background-color : {{data.template_params.background_color}};
+				}
+				.project ul.nav.navbar-nav > li.active > a,.project ul.nav.navbar-nav > li.active:hover > a,.project ul.nav.navbar-nav > li.active > a:focus,.project ul.nav.navbar-nav > li:hover > a,.project ul.nav.navbar-nav > li:hover > a:focus,.project ul.nav.navbar-nav > li > a:hover,.project ul.nav.navbar-nav > li > a:focus,.sidebar .nav-pills > li.active > a,.sidebar .nav-pills > li.active:hover > a,.sidebar .nav-pills > li.active > a:focus,.sidebar .nav-pills > li:hover > a,.sidebar .nav-pills > li:hover > a:focus,.sidebar .nav-pills > li > a:hover,.sidebar .nav-pills > li > a:focus,body header .sidenav .nav li ul > li > a:hover,body header .sidenav .nav li ul > li > ul > li > a:hover{
+					color : {{data.template_params.light_color}};
+				}
+				.featrtesti img{
+					border-color : {{data.template_params.light_color}};
+				}
+				.testimonial blockquote footer cite,.featrtesti blockquote footer cite,body .featured_services h3,body a:hover,body h1,body h2,body h3,body h4,body .tagline,body .tagline1,body .btn-info:hover,body .btn-link:hover{
+					color : {{data.template_params.dark_color}};
+				}
+				body .sidebarModule .btn-info:hover,.navbar-toggle,.featuretab .nav-tabs li a:hover,.featuretab .nav-tabs li.active > a,.featuretab .nav-tabs li.active > a:hover,.featuretab .nav-tabs li.active > a:focus{
+					background-color : {{data.template_params.dark_color}};
+				}
+				.featuredProperty .bxslider1 li .sliderImg:hover,.bxslider li .projimg:hover,.services .servimage:hover{
+					border-color : {{data.template_params.dark_color}};
+				}
+				body header .sidenav .nav li,body header .sidenav .nav li ul > li > ul > li,.propertylist,.homeproject .projectnav .nav-stacked > li,.project .navbar,.project ul.nav.navbar-nav > li,.sidebar .nav-pills > li {
+					border-color : {{data.template_params.background_color_light}};
+				}
+				body main .container{
+					background-color : {{data.template_params.background_color_light}};
 				}
 			</style>
 		{% endif %}
