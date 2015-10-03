@@ -2,20 +2,67 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
 	<head>
-			<meta charset="utf-8">
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-			<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
-			<link rel="stylesheet" href="{{ path }}css/style.css">
-			<script src="{{ path }}js/jquery.min.js"></script>
-			
-			<script src="{{ path }}js/angular.min.js"></script>
-			<script src="{{ path }}js/angular-route.min.js"></script>
-			<script src="{{ path }}js/bootstrap.min.js"></script>
-			<script src="{{ path }}js/script.js"></script>
-			<title>{{seo.title}} | {{data.business_name}}</title>
-			<meta name="description" content="{{ seo.description }}">
-			<meta name="keywords" content="{{ seo.keywords }}">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}">
+		{% if data.template_params %}
+			<style>
+				.header .bizname .tagline{
+					color : {{data.template_params.color}};
+				}
+				.header .bizname .tagline{
+					border-color : {{data.template_params.color}};
+				}
+				address, .navbar-default .navbar-nav > li > a, .navbar a, p, footer, blockquote a, footer a, .nav>li>a.dropdown-caret + .dropdown-toggle, .navbar-default .navbar-nav > li > a{
+					color : {{data.template_params.light_color}};
+				}
+				.navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a,
+				.navbar-default .navbar-nav > li:hover > a:focus,.navbar-default .navbar-nav > li > ul, .navbar-default .navbar-nav > li > ul > li > ul, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus, .send, .send:hover, .sociallinks ul li {
+					background-color : {{data.template_params.dark_color}};
+				}
+				.btn-info, .btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info, h1, h2, h3, h4, .read:hover, .read:focus, .btn-link, .btn-link:hover, .btn-link:focus, li>a, blockquote a:hover, .bizname h1 {
+					color : {{data.template_params.dark_color}};
+				}
+				.navbar-default{
+					border-color : {{data.template_params.dark_color}};
+				}
+				.slogan, .ftrlink3{
+					background-color : {{data.template_params.background_color}};
+				}
+				.header .logo{
+					border-color : {{data.template_params.background_color}};
+				}
+				.read{
+					color : {{data.template_params.background_color}};
+				}
+				.arrowimg{
+					color : {{data.template_params.background_color_light}};
+				}
+				.arrowimg::before,.ftrlink3 p::after{
+					border-color : {{data.template_params.background_color_light}};
+				}
+				.header .logo{
+					box-shadow : 7px 6px 10px {{data.template_params.background_color_light}};
+				}
+				.header .bizname .tagline1{
+					color : {{data.template_params.background_color_dark}};
+				}
+				body{
+					background-color : {{data.template_params.background_color_dark}};
+				}
+			</style>
+		{% endif %}
 	</head>
 	<body>
 		<div class="sociallinks">
