@@ -1,0 +1,157 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}">
+		{% if data.template_params %}
+			<style>
+				.header .bizname .tagline{
+					color : {{data.template_params.color}};
+				}
+				.header .bizname .tagline{
+					border-color : {{data.template_params.color}};
+				}
+				address, .navbar-default .navbar-nav > li > a, .navbar a, p, footer, blockquote a, footer a, .nav>li>a.dropdown-caret + .dropdown-toggle, .navbar-default .navbar-nav > li > a{
+					color : {{data.template_params.light_color}};
+				}
+				.navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a,
+				.navbar-default .navbar-nav > li:hover > a:focus,.navbar-default .navbar-nav > li > ul, .navbar-default .navbar-nav > li > ul > li > ul, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus, .send, .send:hover, .sociallinks ul li {
+					background-color : {{data.template_params.dark_color}};
+				}
+				.btn-info, .btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info, h1, h2, h3, h4, .read:hover, .read:focus, .btn-link, .btn-link:hover, .btn-link:focus, li>a, blockquote a:hover, .bizname h1 {
+					color : {{data.template_params.dark_color}};
+				}
+				.navbar-default{
+					border-color : {{data.template_params.dark_color}};
+				}
+				.slogan, .ftrlink3{
+					background-color : {{data.template_params.background_color}};
+				}
+				.header .logo{
+					border-color : {{data.template_params.background_color}};
+				}
+				.read{
+					color : {{data.template_params.background_color}};
+				}
+				.arrowimg{
+					color : {{data.template_params.background_color_light}};
+				}
+				.arrowimg::before,.ftrlink3 p::after{
+					border-color : {{data.template_params.background_color_light}};
+				}
+				.header .logo{
+					box-shadow : 7px 6px 10px {{data.template_params.background_color_light}};
+				}
+				.header .bizname .tagline1{
+					color : {{data.template_params.background_color_dark}};
+				}
+				body{
+					background-color : {{data.template_params.background_color_dark}};
+				}
+			</style>
+		{% endif %} 
+	</head>
+	<body>
+		<div class="sociallinks">
+			<ul>
+				{% if data.website_config.sociallinks.facebook %}
+					<li>
+						<a href="{{data.website_config.sociallinks.facebook}}" target="_blank" title="Facebook">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.google %}
+					<li>
+						<a href="{{data.website_config.sociallinks.google}}" target="_blank" title="Google">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.twitter %}
+					<li>
+						<a href="{{data.website_config.sociallinks.twitter}}" target="_blank" title="Twitter">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.linkedin %}
+					<li>
+						<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank" title="Linkedin">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+		<div class="container header">
+			{% include [templatePath ~ '/includes/header.html', 'default/default/includes/header.html']%}
+		</div>
+		<div class="container">
+			<div class="row info">
+				<div class="{{(modules.contentModule.featured_services) ? 'col-sm-8' : 'col-sm-12' }}">
+					<div class="row">
+					{%if modules.headerModule.carousal %}
+							{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider}  %}
+					{%endif%}
+					</div>
+					{%if modules.contentModule.featured_products %}
+						<div class="row">
+							{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+						</div>
+					{%endif%}
+					<div class="row content">
+						<div class="{{(modules.sidebarModule.enquiry) ? 'col-sm-9' : 'col-sm-12' }}">
+							{% include contentPath %}
+						</div>
+						{% if modules.sidebarModule.enquiry %}
+						<div class="col-sm-3">
+							{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
+						</div>
+						{% endif %}
+					</div>
+				</div>
+
+				{%if modules.contentModule.featured_services %}
+					<div class="col-sm-4">
+						{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+					</div>
+				{%endif%}
+			</div>
+		</div>
+		<div class="container">
+			<div class="row subftr">
+				<div class="col-sm-6 col-md-6">
+					<h4>CONTACT US</h4>
+					<p>{%if data.contact_profile.telephone%}
+						Telephone:{{data.contact_profile.telephone}}
+					{% endif %}<br>
+					<p>Mobile: {{data.contact_profile.mobile}}<br>
+					<p>E-mail: {{data.contact_profile.email}},&nbsp;
+					{{data.contact_profile.alternate_email}}
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<h4>ADDRESS</h4>
+					<address>
+						{{data.contact_profile.address}},<br>
+						{{data.city}},&nbsp;{{data.state|capitalize}},&nbsp;{{data.country|capitalize}},&nbsp;{{data.pincode}}
+					</address>
+				</div>
+			</div>
+		</div>
+		<footer class="container">
+			{% block footer %}
+			<p class="text-center">&copy; 2015 <a href="/">{{data.business_name}}</a>&nbsp;|&nbsp;
+			Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>&nbsp;|&nbsp;
+			<a target="_blank" href="/sitemap.xml">SITEMAP</a>
+			</p>
+			{% endblock %}
+		</footer>
+	</body>
+</html>
+{% endspaceless %}
