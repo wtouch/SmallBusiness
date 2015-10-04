@@ -1,27 +1,27 @@
 {% autoescape false %}
 {% if featured_products | length >= 1 %}
-	<div class="row sidesec1">	
-		<div class="slogan">
-			<p class="text-center">Our Services</p>
-		</div>
-	</div>
-	<div class="row">
-	<div class="content">
+	<div class="row text-center">
+		<div class="col-sm-12"><h2>Services</h2></div>
 		{% set break = 0 %}{% set i = 0 %}
 		{% for x in featured_products if break == 0 %}
 		{% if x.type == 'service' %}
-			<div class="features">
-				<h3>{{x.product_service_name}}</h3>
-				<p>{{ x.description |length > 200 ?x.description|slice(start, 200)~ '...' : x.description}}</p>
-				<a class="read" href="services/{{x.product_service_name}}/{{x.id}}">View Details</a>
-			</div>
+			<div class="col-sm-3">
+				<div class="featureimg">
+					<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" alt="{{x.product_image.0.file_relative_path}}">
+					<div class="featuredisc">
+						<h4>{{x.product_service_name}}</h4>
+						<div class="caption">{{ x.description}}</div>
+						<a class="read" href="services/{{x.product_service_name}}/{{x.id}}">View Details</a>
+					</div>
+				</div>
+			</div> 
 			{% set i = (i + 1) %}
-			{% if i == 3 %}
+			{% if i == 4 %}
 				{% set break = 1 %}
 			{% endif %}
 		{% endif %}
 		{% endfor %}
 	</div>
-	</div>
 {% endif %}
 {% endautoescape %}
+<!-- <p>{{ x.description |length > 200 ?x.description|slice(start, 200)~ '...' : x.description}}</p> -->

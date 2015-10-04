@@ -16,7 +16,7 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		{% if data.template_params %}
+		<!-- {% if data.template_params %}
 			<style>
 				.header .bizname .tagline{
 					color : {{data.template_params.color}};
@@ -40,9 +40,6 @@
 				.slogan, .ftrlink3{
 					background-color : {{data.template_params.background_color}};
 				}
-				.header .logo{
-					border-color : {{data.template_params.background_color}};
-				}
 				.read{
 					color : {{data.template_params.background_color}};
 				}
@@ -52,9 +49,6 @@
 				.arrowimg::before,.ftrlink3 p::after{
 					border-color : {{data.template_params.background_color_light}};
 				}
-				.header .logo{
-					box-shadow : 7px 6px 10px {{data.template_params.background_color_light}};
-				}
 				.header .bizname .tagline1{
 					color : {{data.template_params.background_color_dark}};
 				}
@@ -62,7 +56,7 @@
 					background-color : {{data.template_params.background_color_dark}};
 				}
 			</style>
-		{% endif %} 
+		{% endif %}  -->
 	</head>
 	<body>
 		<div class="sociallinks">
@@ -93,38 +87,35 @@
 			{% include [templatePath ~ '/includes/header.html', 'default/default/includes/header.html']%}
 		</div>
 		<div class="container">
-			<div class="row info">
-				<div class="{{(modules.contentModule.featured_services) ? 'col-sm-8' : 'col-sm-12' }}">
-					<div class="row">
+			<div class="row">
+				<div class="col-sm-12 caros">
 					{%if modules.headerModule.carousal %}
-							{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider}  %}
+						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider}  %}
 					{%endif%}
-					</div>
-					{%if modules.contentModule.featured_products %}
-						<div class="row">
-							{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-						</div>
-					{%endif%}
-					<div class="row content">
-						<div class="{{(modules.sidebarModule.enquiry) ? 'col-sm-9' : 'col-sm-12' }}">
-							{% include contentPath %}
-						</div>
-						{% if modules.sidebarModule.enquiry %}
-						<div class="col-sm-3">
-							{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
-						</div>
-						{% endif %}
-					</div>
 				</div>
-
-				{%if modules.contentModule.featured_services %}
-					<div class="col-sm-4">
-						{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12'}}">
+					{% include contentPath %}
+				</div>
+				{% if modules.sidebarModule >= 1 %}
+					<div class="col-xs-12 col-md-4 col-lg-3 sidebar">
+						{%if modules.sidebarModule.contact %}
+							{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+						{%endif%}
+								
+						{%if modules.sidebarModule.enquiry %}
+							{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry:{user_id : data.user_id,owner_email:data.owner_email}} %}
+						{%endif%}
 					</div>
-				{%endif%}
+				{% endif %}
 			</div>
+			{%if modules.contentModule.featured_products %}
+				{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+			{%endif%}
+			{%if modules.contentModule.featured_services %}
+				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html']%} 
+			{%endif%}
 		</div>
-		<div class="container">
+		<!-- <div class="container">
 			<div class="row subftr">
 				<div class="col-sm-6 col-md-6">
 					<h4>CONTACT US</h4>
@@ -143,15 +134,8 @@
 					</address>
 				</div>
 			</div>
-		</div>
-		<footer class="container">
-			{% block footer %}
-			<p class="text-center">&copy; 2015 <a href="/">{{data.business_name}}</a>&nbsp;|&nbsp;
-			Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>&nbsp;|&nbsp;
-			<a target="_blank" href="/sitemap.xml">SITEMAP</a>
-			</p>
-			{% endblock %}
-		</footer>
+		</div> -->
+		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html>
 {% endspaceless %}
