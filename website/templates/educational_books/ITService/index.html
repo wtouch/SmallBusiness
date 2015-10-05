@@ -1,141 +1,89 @@
-{% spaceless %}
+
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
-		<link rel="stylesheet" href="{{ path }}css/style.css">
-		<script src="{{ path }}js/jquery.min.js"></script>
+	<head>		<meta charset="utf-8">		<meta http-equiv="X-UA-Compatible" content="IE=edge">		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="google-site-verification" content="xv_7TVb38wcem1jzXEBzqOKRs_i-vLYFRyQs-SVn6wI" />
+		<link rel="stylesheet" type="text/css" href="{{ path }}script/fancy-box/jquery.fancybox.css"/>
+		<link href="{{ path }}css/style.css" rel="stylesheet" type="text/css" />		<link rel="stylesheet" type="text/css" href="{{ path }}script/slider/bx_styles/bx_styles.css"/>		<link rel="stylesheet" type="text/css" href="{{ path }}script/fancy-box/jquery.fancybox.css"/>		
+		<script type="text/javascript" src="{{ path }}script/jquery-1.6.2.min.js"></script>
+		<script type="text/javascript" src="{{ path }}script/slider/jquery.bxSlider.min.js"></script>
+		<script type="text/javascript" src="{{ path }}script/fancy-box/jquery.fancybox.js?v=2.1.4"></script>
+		<script type="text/javascript">			$(document).ready(function(){				$('.hm-slider #slider').bxSlider({
+					mode: 'fade',
+					auto: true,
+					controls: false,					autoHover : true,				});				$('.slider').bxSlider({					mode: 'fade',					auto: true,					controls: false,					autoHover : true,					pager  : true				});				$('.home-bx-slide ul').bxSlider({					mode: 'vertical',					auto: true,					controls: false,					autoHover : true,					displaySlideQty : 1,					moveSlideQty : 1				});								// This function is used for displaying submenu with jQuery and css ***************************************************				$(".nav li ul").hide();				$(".nav li").hover(function(){					$(this).find('ul:first').css({visibility: "visible",display: "none", background:""}).show(500);				},function(){					$(this).find('ul:first').css({visibility: "hidden",display: "none"});				});								$("div.slider .fancybox").fancybox({					'height'  : '100%',					'autoScale'  : false,					width    : '400px',					type    : 'image',					openEffect  : 'elastic',					openSpeed  : 300,					closeEffect : 'elastic',					closeSpeed  : 300,					autoPlay  : true,					loop    : true				});								$(".nav a").each(function() {   					if (this.href == window.location.href) {						$(this).parent(".nav li").addClass("active");					}				});			});
+		</script>
+	</head>
+<body >
+<div class="header">
+  <div class="logo"><img src="{{ path }}images/shivbaba.png" width="116" height="58" /></div>
+	<div class="menu"> 
+		<!-- Main Navigation -->
+			{% include [templatePath ~ '/includes/header.html','default/default/includes/header.html' ] %}
+		<!-- Main Navigation -->
+		<!-- Contact Navigation -->
+			{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+		<!-- Contact Navigation -->
+		<div class="clr"></div>
+		<div id="title">Mob:. 09881502939, 09881331689<br />
+			Email: propertydemand@gmail.com
+		</div>
+</div>
+</div>
+<div class="main">
+  <div class="hm-slider">    <div id="title2">        <img src="{{ path }}images/logo - pd.png" alt="" width="180" height="55" />    </div>    <div id="slider">        <img src="{{ path }}images/slide1.png" width="960" height="300" />        <img src="{{ path }}images/slide2.png" width="960" height="300" />        <img src="{{ path }}images/slide4.png" width="960" height="300" />    </div>  </div>
+
+{% if (modules.contentModule | length) >= 1 %}<!-- Home Message -->  <div class="home">    <!-- Home Featured Property -->    <div class="home-box">      <h1>Featured Property</h1>      <div class="home-bx-slide">		{% include [templatePath ~ '/includes/featured_properties.html','default/default/includes/featured_properties.html'] %}      </div>    </div>    <!-- End Home Featured Property -->
+    <!-- Home Featured Project -->    <div class="home-project">		<h1>Featured Project:</h1>
+		{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}    </div>
+    <!-- End Home Featured Project -->
+    <!-- Home Message -->
+    <div class="home-msg">
+		<div class="moduletable">
+			<h1 class="">Contact Us</h1>
+			<div class="custom">
+				<p><span><strong>Address:&nbsp;</strong></span><span style="line-height: 1.3em;">Park Street, Nr Mahindra Woods, Hinjewadi Aundh Wakad Road, Wakad</span></p>
+				<p><span style="line-height: 1.3em;"><strong>Mobile</strong>: +91&nbsp;<span>9881502939,&nbsp;<span>9881331689</span></span></span></p>
+				<p><span style="line-height: 1.3em;"><span><span><span><strong>Email</strong>: propertydemand@gmail.com</span></span></span></span></p>
+			</div>
+		</div>
+    </div>
+    <!-- End Home Message-->
+    <div class="clr"></div>
+  </div>
+<!-- End Home -->{% endif %}
+
+{% if not (modules.contentModule | length) >= 1 %}
+<!-- Other Pages -->  <div class="main-cont">    <div class="left_sidebar">    <!-- Sidebar Modules -->    <!-- all sidebarModules here -->
+		{% if modules.sidebarModule.searchProp %}
+			{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+		{% endif %}
 		
-		<script src="{{ path }}js/angular.min.js"></script>
-		<script src="{{ path }}js/angular-route.min.js"></script>
-		<script src="{{ path }}js/bootstrap.min.js"></script>
-		<script src="{{ path }}js/script.js"></script>
-		<title>{{seo.title}} | {{data.business_name}}</title>
-		<meta name="description" content="{{ seo.description }}">
-		<meta name="keywords" content="{{ seo.keywords }}">
-		<!-- {% if data.template_params %}
-			<style>
-				.header .bizname .tagline{
-					color : {{data.template_params.color}};
-				}
-				.header .bizname .tagline{
-					border-color : {{data.template_params.color}};
-				}
-				address, .navbar-default .navbar-nav > li > a, .navbar a, p, footer, blockquote a, footer a, .nav>li>a.dropdown-caret + .dropdown-toggle, .navbar-default .navbar-nav > li > a{
-					color : {{data.template_params.light_color}};
-				}
-				.navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a,
-				.navbar-default .navbar-nav > li:hover > a:focus,.navbar-default .navbar-nav > li > ul, .navbar-default .navbar-nav > li > ul > li > ul, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus, .send, .send:hover, .sociallinks ul li {
-					background-color : {{data.template_params.dark_color}};
-				}
-				.btn-info, .btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info, h1, h2, h3, h4, .read:hover, .read:focus, .btn-link, .btn-link:hover, .btn-link:focus, li>a, blockquote a:hover, .bizname h1 {
-					color : {{data.template_params.dark_color}};
-				}
-				.navbar-default{
-					border-color : {{data.template_params.dark_color}};
-				}
-				.slogan, .ftrlink3{
-					background-color : {{data.template_params.background_color}};
-				}
-				.read{
-					color : {{data.template_params.background_color}};
-				}
-				.arrowimg{
-					color : {{data.template_params.background_color_light}};
-				}
-				.arrowimg::before,.ftrlink3 p::after{
-					border-color : {{data.template_params.background_color_light}};
-				}
-				.header .bizname .tagline1{
-					color : {{data.template_params.background_color_dark}};
-				}
-				body{
-					background-color : {{data.template_params.background_color_dark}};
-				}
-			</style>
-		{% endif %}  -->
-	</head>
-	<body>
-		<div class="sociallinks">
-			<ul>
-				{% if data.website_config.sociallinks.facebook %}
-					<li>
-						<a href="{{data.website_config.sociallinks.facebook}}" target="_blank" title="Facebook">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.google %}
-					<li>
-						<a href="{{data.website_config.sociallinks.google}}" target="_blank" title="Google">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.twitter %}
-					<li>
-						<a href="{{data.website_config.sociallinks.twitter}}" target="_blank" title="Twitter">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.linkedin %}
-					<li>
-						<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank" title="Linkedin">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
-					</li>
-				{% endif %}
-			</ul>
-		</div>
-		<div class="container header">
-			{% include [templatePath ~ '/includes/header.html', 'default/default/includes/header.html']%}
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					{%if modules.headerModule.carousal %}
-						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider}  %}
-					{%endif%}
-				</div>
-				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12'}}">
-					{% include contentPath %}
-				</div>
-				{% if modules.sidebarModule >= 1 %}
-					<div class="col-xs-12 col-md-4 col-lg-3 sidebars">
-						{%if modules.sidebarModule.contact %}
-							{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-						{%endif%}
-								
-						{%if modules.sidebarModule.enquiry %}
-							{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry:{user_id : data.user_id,owner_email:data.owner_email}} %}
-						{%endif%}
-					</div>
-				{% endif %}
-			</div>
-			{%if modules.contentModule.featured_products %}
-				{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-			{%endif%}
-			{%if modules.contentModule.featured_services %}
-				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html']%} 
-			{%endif%}
-		</div>
-		<!-- <div class="container">
-			<div class="row subftr">
-				<div class="col-sm-6 col-md-6">
-					<h4>CONTACT US</h4>
-					<p>{%if data.contact_profile.telephone%}
-						Telephone:{{data.contact_profile.telephone}}
-					{% endif %}<br>
-					<p>Mobile: {{data.contact_profile.mobile}}<br>
-					<p>E-mail: {{data.contact_profile.email}},&nbsp;
-					{{data.contact_profile.alternate_email}}
-				</div>
-				<div class="col-sm-6 col-md-6">
-					<h4>ADDRESS</h4>
-					<address>
-						{{data.contact_profile.address}},<br>
-						{{data.city}},&nbsp;{{data.state|capitalize}},&nbsp;{{data.country|capitalize}},&nbsp;{{data.pincode}}
-					</address>
-				</div>
-			</div>
-		</div> -->
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-	</body>
+		{% if modules.sidebarModule.enquiry %}
+			{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
+		{% endif %}
+		
+		{% if modules.sidebarModule.sidemenu %}
+			{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+		{% endif %}
+		
+		{% if modules.sidebarModule.contact %}
+			{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+		{% endif %}    <!-- End Sidebar Modules -->    </div>
+    <div class="content">    <!-- Content -->
+		{% include contentPath %}
+    <!-- End Content -->
+    </div>
+    <div class="clr"></div>
+  </div>
+<!-- End Other Pages -->
+</div>{% endif %}
+<div class="footer">
+  <div class="footer-copy">
+    <p>Copyright: Property Demand</p>
+    <p>Design By <a href="http://www.wtouch.in">Web Touch</a></p>
+  </div>
+  <div class="footer-logo">Property Demand</div>
+</div>
+</body>
 </html>
-{% endspaceless %}
