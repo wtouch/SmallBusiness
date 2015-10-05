@@ -17,9 +17,63 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		{% if data.template_params %}
+			<style>
+				.bxslider li a,.bxslider li a:hover,.homeproject .projectCarousal .projsnap img, .featrtesti img:hover,body a,body .btn-info,body .btn-info:focus,body .btn-info:active,body .btn-info[disabled],body .btn-link{
+					color : {{data.template_params.color}};
+				}
+				.propertylist .btn-primary, .singleproperty .btn-primary,body .sidebarModule .btn-info,body .sidebarModule .btn-info:focus,body .sidebarModule .btn-info:active,body .sidebarModule .btn-info[disabled]{
+					background-color : {{data.template_params.background_color}};
+				}
+				.project ul.nav.navbar-nav > li.active > a,.project ul.nav.navbar-nav > li.active:hover > a,.project ul.nav.navbar-nav > li.active > a:focus,.project ul.nav.navbar-nav > li:hover > a,.project ul.nav.navbar-nav > li:hover > a:focus,.project ul.nav.navbar-nav > li > a:hover,.project ul.nav.navbar-nav > li > a:focus,.sidebar .nav-pills > li.active > a,.sidebar .nav-pills > li.active:hover > a,.sidebar .nav-pills > li.active > a:focus,.sidebar .nav-pills > li:hover > a,.sidebar .nav-pills > li:hover > a:focus,.sidebar .nav-pills > li > a:hover,.sidebar .nav-pills > li > a:focus,body header .sidenav .nav li ul > li > a:hover,body header .sidenav .nav li ul > li > ul > li > a:hover{
+					color : {{data.template_params.light_color}};
+				}
+				.featrtesti img{
+					border-color : {{data.template_params.light_color}};
+				}
+				.testimonial blockquote footer cite,.featrtesti blockquote footer cite,body .featured_services h3,body a:hover,body h1,body h2,body h3,body h4,body .tagline,body .tagline1,body .btn-info:hover,body .btn-link:hover{
+					color : {{data.template_params.dark_color}};
+				}
+				body .sidebarModule .btn-info:hover,.navbar-toggle,.featuretab .nav-tabs li a:hover,.featuretab .nav-tabs li.active > a,.featuretab .nav-tabs li.active > a:hover,.featuretab .nav-tabs li.active > a:focus{
+					background-color : {{data.template_params.dark_color}};
+				}
+				.featuredProperty .bxslider1 li .sliderImg:hover,.bxslider li .projimg:hover,.services .servimage:hover{
+					border-color : {{data.template_params.dark_color}};
+				}
+				body header .sidenav .nav li,body header .sidenav .nav li ul > li > ul > li,.propertylist,.homeproject .projectnav .nav-stacked > li,.project .navbar,.project ul.nav.navbar-nav > li,.sidebar .nav-pills > li {
+					border-color : {{data.template_params.background_color_light}};
+				}
+				body main .container{
+					background-color : {{data.template_params.background_color_light}};
+				}
+				.propertylist .btn-primary:hover, .singleproperty .propDetails .table tbody tr th, .singleproperty .btn-primary:hover, .project ul.nav.navbar-nav, .project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus, .sidebar .nav-pills, .sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus, .sidebar .nav-pills > li > a:hover, .sidebar .nav-pills > li > a:focus, .about .table tbody tr th, .contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td,body header .sidenav, body .contentModule h3, body .sidebarModule h3, .propertylist .btn-primary:hover{
+					background-color : {{data.template_params.background_color_dark}};
+				}
+				.propertylist .panel-default, .singleproperty .property, .singleproperty .property .table tbody tr td, .singleproperty .propDetails .table tbody tr td, .singleproperty .propDetails .table tbody tr th, .products .thumbnail, .singleproduct .thumbnail, .featuretab .tab-content, .featuretab .nav-tabs, .featuretab .nav-tabs li a,.featuretab .nav-tabs li a:hover,.featuretab .nav-tabs li.active > a,.featuretab .nav-tabs li.active > a:hover, .featuretab .nav-tabs li.active > a:focus, .gallery .thumbnail,body .contentModule, body .sidebarModule, body .thumbnail{
+					border-color : {{data.template_params.background_color_dark}};
+				}
+				body .sociallinks ul li, body header .sidenav, body header .sidenav .nav li ul,body footer,.homeproject .projectnav{
+					background-image: -webkit-linear-gradient(left, {{data.template_params.background_color_dark}}, {{data.template_params.dark_color}} 93%,{{data.template_params.background_color_dark}});
+					background-image: -moz-linear-gradient(left, {{data.template_params.background_color_dark}}, {{data.template_params.dark_color}} 93%, {{data.template_params.background_color_dark}});
+					background-image: linear-gradient(left,{{data.template_params.background_color_dark}}, {{data.template_params.dark_color}} 93%, {{data.template_params.background_color_dark}});
+				}
+				body header .sidenav .nav li > a:hover, body header .sidenav .nav li > a:focus{
+					background-image: -webkit-linear-gradient(left, {{data.template_params.background_color}}, #ffffff 93%, {{data.template_params.background_color}});
+					background-image: -moz-linear-gradient(left,{{data.template_params.background_color}}, #ffffff 93%, {{data.template_params.background_color}});
+					background-image: -linear-gradient(left, {{data.template_params.background_color}}, #ffffff 
+					93%, {{data.template_params.background_color}});
+				}
+				.homeproject .projectnav .nav-stacked > li > a:hover,.homeproject .projectnav .nav-stacked > li > a:focus:hover{
+					background-image: -webkit-linear-gradient(right, {{data.template_params.background_color}}, #ffffff 93%, {{data.template_params.background_color}});
+					background-image: -moz-linear-gradient(right,{{data.template_params.background_color}}, #ffffff 93%, {{data.template_params.background_color}});
+					background-image: -linear-gradient(right, {{data.template_params.background_color}}, #ffffff 
+					93%, {{data.template_params.background_color}});
+				}
+			</style>
+		{% endif %}
 	</head>
 <body>
-	<!-- <div class="sociallinks">
+	<div class="sociallinks">
 		<ul>
 			{% if data.website_config.sociallinks.facebook %}
 				<li>
@@ -42,7 +96,7 @@
 				</li>
 			{% endif %}
 		</ul>
-	</div>  -->
+	</div>
 	<header>
 		<div class="container">
 			<div class="logo">
