@@ -135,10 +135,14 @@
 				<div class="form-group">
 					<label for="welcome_note" class="col-sm-2 control-label">Welcome Note*</label>	
 						<div class="col-sm-10">
-							<textarea type="text" id="welcome_note" class="form-control" name="welcome_note" placeholder="WelCome Note For Website" ng-model="websetting.config.welcome_note" required></textarea>
-								<span class="help-block" ng-show="websettingsForm.welcome_note.$dirty && websettingsForm.welcome_note.$invalid">
-								<span class="text-danger" ng-show="websettingsForm.welcome_note.$error.required">Contact Name Required.</span>
-								</span>
+							<textarea type="text" id="welcome_note" class="form-control" name="welcome_note" placeholder="WelCome Note For Website" ng-model="websetting.config.welcome_note" ui-tinymce></textarea>
+							
+							<p ng-hide="websettingsForm.welcome_note.$error.maxlength">
+								{{ 5000 - websetting.config.welcome_note.length + " Chars left"}} 
+							</p>
+							<span class="help-block" ng-show="websettingsForm.welcome_note.$dirty && businessProfileForm.welcome_note.$invalid">
+								<span class="text-danger" ng-show="businessProfileForm.welcome_note.$error.maxlength">Sorry You are Exceeding the Limit</span>
+							</span>		
 						</div>
 				</div>
 				
