@@ -1,31 +1,28 @@
 .featuretab{
-		margin-top : 20px;
+		margin-top : 10px;
 		.tab-content{
-			border : 1px solid @darkbackcolor;
+			border : 1px solid @lightcolor;
 			border-top : none;
 			position: relative;
 			margin-bottom: 25px;
-			padding : 1px 20px 15px;
-			background: -webkit-gradient(linear, left top, right top, from(@lightbackcolor), to(@colorwhite));
-			background-image: -webkit-linear-gradient(left, @lightbackcolor 1%, @colorwhite 20%);
+			padding : 1px 30px;
+			padding:10px;
 		}
 		.nav-tabs{
-			border-bottom: 1px solid @darkbackcolor;
+			border-bottom: 1px solid @lightcolor;
 			li{
 				a{
-					border : 1px solid @darkcolor;
-					background : @darkbackcolor;
-					color : @darkcolor;
+					border: 1px solid @darkbackcolor;
+					font:16px 'Alex Brush', cursive;
 					&:hover{
-						background-color : @darkcolor;
-						border : 1px solid @darkbackcolor;
-						color:@colorwhite;
+						color: @colorwhite;
+						background-color: @back;
 					}
 				}
 				&.active>a, &.active>a:hover, &.active>a:focus{
-						background-color : @darkcolor;
-						border : 1px solid @darkbackcolor;
-						color:@colorwhite;
+					color: @colorwhite;
+					background-color: @back;
+					border: 1px solid @darkbackcolor;
 				}
 			}
 		}
@@ -37,69 +34,64 @@
 }
 
 .sidebarModule{
-	&.sidemenu{
-		padding:35px 35px 25px;
-		color: @lightcolor;
-		border : none;
-		top: -5px;
-		background: -webkit-gradient(linear, left top, right top, from(@lightbackcolor), to(@colorwhite));
-		background-image: -webkit-linear-gradient(left, @lightbackcolor 1%,  @colorwhite 20%);
-		ul{
-			padding : 0;
-			list-style : none;
-			li{
-				margin-bottom : 10px;
-			}
+		
+		.panel-default{
+			border : none;
 		}
-		a{
-			display : inline-block;
-			height : 90px;
-			width : 98%;
-			background-size:100% 100%;
-			background-repeat : no-repeat;
-			background-position: center; 
-			text-indent : -9999px;
-			overflow : hidden;
-			&.area_converter{
-				background-image : url('../img/area-converter.png');
+		&.sidemenu{
+			/*background-color:@contentback;*/
+			padding:10px;
+			border:1px solid @lightcolor;
+			ul{
+				padding : 0;
+				list-style : none;
+				li{
+					margin-bottom : 10px;
+				}
 			}
-			&.emi_calculator{
-				background-image : url('../img/emi-calculator.png');
-			}
-			&.post_your_property{
-				background-image : url('../img/post-your-property.jpg');
-			}
-			&.post_your_requirement{
-				background-image : url('../img/post-your-requirement.jpg');
+			a{
+				display : inline-block;
+				height : 100px;
+				width : 100%;
+				background-size:100% 100%;
+				background-repeat : no-repeat;
+				background-position: center; 
+				text-indent : -9999px;
+				overflow : hidden;
+				&.area_converter{
+					background-image : url('../img/area-converter.png');
+				}
+				&.emi_calculator{
+					background-image : url('../img/emi-calculator.png');
+				}
+				&.post_your_property{
+					background-image : url('../img/post-your-property.jpg');
+				}
+				&.post_your_requirement{
+					background-image : url('../img/post-your-requirement.jpg');
+				}
 			}
 		}
 	}
-}
-
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background-color:@darkbackcolor;
+			background-color: @darkbackcolor;
 			>li{
 				border-right : 1px solid @lightbackcolor;
 				>a, > a:focus{
 					color : @colorwhite;
-					font : bold 15px/1em Arial, Helvetica, sans-serif;
-					position : relative;
-					text-transform : uppercase;
-					border : 1px solid transparent;
+					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					color : @colorwhite;
-					background-color:@darkcolor;
+					color : @lightcolor;
+					background-color: @darkbackcolor;
 				}
 			}
 		}
-		
 	}
 	.about, .contact{
 		.table{
-			
 			tbody{
 				tr{
 					th,td{
@@ -116,21 +108,23 @@
 	}
 	.infrastructure{
 		.thumbnail{
-			height: 330px;
+			background-color:@lightbackcolor;
+			border:1px solid @darkbackcolor;
+			/*box-shadow: 3px 3px 6px #ADADAD;*/
+			background-color:@colorwhite;
+			
+			height: 395px;
 			img{
-				height : 116px;
+				height : 190px;
 			}
 			.caption{
 				height: 155px;
-				overflow : hidden;
-				margin-bottom : 10px;
+				color : @colorblack;
 			}
 		}
 	}
 	//contactus page css
 	.contact{
-		
-		padding:15px;
 		img{
 			max-height: 125px;
 		}
@@ -141,7 +135,9 @@
 	#googleMap{
 		height:395px;
 	}
-	
+	.radio-inline+.radio-inline{
+		margin-left:5px;
+	}
 	
 	//testimonials
 	.testimonial, .featrtesti{
@@ -169,7 +165,6 @@
 		}
 	}
 	.testimonial{
-		
 		blockquote{
 			padding-left : 15px;
 			footer{
@@ -188,45 +183,29 @@
 		img{
 			max-height : 100px;
 			padding : 4px;
-			border : 3px solid @lightcolor;
-			&:hover{
-				border : 3px solid @color;
-			}
+			border : 3px solid #732C7B;
 		}
 	} 
-	
 	.gallery{
+		border-radius:5px;
+		border : 1px solid @border;
 		padding:10px;
-		
+		margin:1px;
 		.thumbnail{
-			background: -webkit-gradient(linear, left top, right top, from(@lightbackcolor), to(@colorwhite));
-			background-image: -webkit-linear-gradient(left, @lightbackcolor 0%,  @colorwhite 5%);
-			h4{
-				border : none;
-				padding-bottom : 0px;
+				border-color : @border;
+				/*background-color:@back;*/
+				.caption .description{
+					overflow: hidden;
+					height: 160px;
+					color:@colorblack;
+				}
 			}
-			.description{
-				color:@colorblack;
-			}
 		}
-	}
-		
-	.enquiry{
-		.panel-body{
-			padding-bottom : 0px;
-		}
-	}
-	.contactus{
-		h4{
-			margin-top : 0px;
-			margin-bottom : 0px;
-		}
-	}
 	//gallery
 	@media (min-width: 320px) {
 		.gallery{
 			.thumbnail{
-				height:380px;
+				height:390px;
 			}
 		}
 	}
@@ -234,10 +213,10 @@
 	@media (min-width: 992px) { 
 		.gallery{
 			.thumbnail{
-				height:365px;
+				height:390px;
 				img{
-					max-height : 155px;
-					width:100%;
+					max-height: 155px;
+					width: 100%;
 				}
 			}
 		}
@@ -246,10 +225,10 @@
 	@media (min-width: 1200px){
 		.gallery{
 			.thumbnail{
-				height:380px;
+				height:390px;
 				img{
-					max-height : 200px;
-					width:100%;
+					max-height: 200px;
+					width: 100%;
 				}
 			}
 		}

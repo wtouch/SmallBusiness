@@ -2,10 +2,14 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
 	<head>		<meta charset="utf-8">		<meta http-equiv="X-UA-Compatible" content="IE=edge">		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta name="google-site-verification" content="xv_7TVb38wcem1jzXEBzqOKRs_i-vLYFRyQs-SVn6wI" />
+		<meta name="google-site-verification" content="xv_7TVb38wcem1jzXEBzqOKRs_i-vLYFRyQs-SVn6wI" />		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+
 		<link rel="stylesheet" type="text/css" href="{{ path }}script/fancy-box/jquery.fancybox.css"/>
 		<link href="{{ path }}css/style.css" rel="stylesheet" type="text/css" />		<link rel="stylesheet" type="text/css" href="{{ path }}script/slider/bx_styles/bx_styles.css"/>		<link rel="stylesheet" type="text/css" href="{{ path }}script/fancy-box/jquery.fancybox.css"/>		
 		<script type="text/javascript" src="{{ path }}script/jquery-1.6.2.min.js"></script>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
 		<script type="text/javascript" src="{{ path }}script/slider/jquery.bxSlider.min.js"></script>
 		<script type="text/javascript" src="{{ path }}script/fancy-box/jquery.fancybox.js?v=2.1.4"></script>
 		<script type="text/javascript">			$(document).ready(function(){				$('.hm-slider #slider').bxSlider({
@@ -22,7 +26,7 @@
 			{% include [templatePath ~ '/includes/header.html','default/default/includes/header.html' ] %}
 		<!-- Main Navigation -->
 		<!-- Contact Navigation -->
-			{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+			{# {% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %} #}
 		<!-- Contact Navigation -->
 		<div class="clr"></div>
 		<div id="title">Mob:. 09881502939, 09881331689<br />
@@ -33,7 +37,7 @@
 <div class="main">
   <div class="hm-slider">    <div id="title2">        <img src="{{ path }}images/logo - pd.png" alt="" width="180" height="55" />    </div>    <div id="slider">        <img src="{{ path }}images/slide1.png" width="960" height="300" />        <img src="{{ path }}images/slide2.png" width="960" height="300" />        <img src="{{ path }}images/slide4.png" width="960" height="300" />    </div>  </div>
 
-{% if (modules.contentModule | length) >= 1 %}<!-- Home Message -->  <div class="home">    <!-- Home Featured Property -->    <div class="home-box">      <h1>Featured Property</h1>      <div class="home-bx-slide">		{% include [templatePath ~ '/includes/featured_properties.html','default/default/includes/featured_properties.html'] %}      </div>    </div>    <!-- End Home Featured Property -->
+{% if modules.contentModule.featured_properties or modules.contentModule.featured_projects %}<!-- Home Message -->  <div class="home">    <!-- Home Featured Property -->    <div class="home-box">      <h1>Featured Property</h1>      <div class="home-bx-slide">		{% include [templatePath ~ '/includes/featured_properties.html','default/default/includes/featured_properties.html'] %}      </div>    </div>    <!-- End Home Featured Property -->
     <!-- Home Featured Project -->    <div class="home-project">		<h1>Featured Project:</h1>
 		{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}    </div>
     <!-- End Home Featured Project -->
@@ -53,7 +57,7 @@
   </div>
 <!-- End Home -->{% endif %}
 
-{% if not (modules.contentModule | length) >= 1 %}
+{% if not (modules.contentModule.featured_properties or modules.contentModule.featured_projects) %}
 <!-- Other Pages -->  <div class="main-cont">    <div class="left_sidebar">    <!-- Sidebar Modules -->    <!-- all sidebarModules here -->
 		{% if modules.sidebarModule.searchProp %}
 			{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}

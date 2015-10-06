@@ -5,80 +5,51 @@ jQuery(document).ready(function() {
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
 });
-
 $(document).ready(function(){
-	var sliderMode, minSlides, maxSlides;
-	//$(window).resize(function(){
-		if($(window).width() <= "480"){
-			sliderMode = "horizontal";
-			minSlides = 1;
-			maxSlides = 1;
-			
-		}else{
-			sliderMode = "vertical";
-			minSlides = 3;
-			maxSlides = 3;
-		}
-	//})
-	$('#bxslider').bxSlider({
+	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideWidth: 250,
-		minSlides: minSlides,
-		maxSlides: maxSlides,
-		slideMargin: 25,
+		slideMargin: 5,
+		minSlides :3,
+		maxSlides: 3,
+		moveSlides: 1,
+		slideWidth: 225,
 		auto: true, 
 		autoDirection:'next',
-		moveSlides: 1,
-		pause:3000,
-		pager:true,
-		pagerType:'full',
-		autoControls: true, 
-		controls:true, 
-		autoHover:true,
-		speed:1000,
-	});
-	$('#associate').bxSlider({
-		mode:'horizontal',
-		slideWidth: 300,
-		minSlides: minSlides,
-		maxSlides: maxSlides,
-		slideMargin: 25,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
-		pause:3000,
-		pager:true,
-		pagerType:'full',
-		autoControls: true, 
-		controls:true, 
-		autoHover:true,
-		speed:1000,
-	});
-	$('.bxslider1').bxSlider({
-		mode: sliderMode,
-		slideWidth: 680,
-		minSlides: minSlides,
-		maxSlides: maxSlides,
-		slideMargin: 15,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
 		pause:3000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
 		controls:false, 
 		autoHover:true,
-		speed:1000,
+		speed : 1000
 	});
-	$('.carousslider').bxSlider({ 
+	
+	$('.bxslider1').bxSlider({
+		mode:'vertical',
+		slideWidth: 600,
+		minSlides: 3,
+		maxSlides:3,
+		slideMargin: 5,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 2,
+		pause:5000,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed:2000,
+	});
+	$('#carousslider').bxSlider({
 		mode:'fade',
-		minSlides:1,
-		maxSlides: 1,
+		slideWidth: 600,
+		slideHeight:500,
+		
 		auto: true, 
 		autoDirection:'next',
 		pause:2500,
-		pager:false,
+		pager:true,
 		pagerType:'full',
 		autoControls: false, 
 		controls:false, 
@@ -89,14 +60,12 @@ $(document).ready(function(){
 var app = angular.module('myApp',[]);
 
 app.config(function($locationProvider) {
-	
   /* $routeProvider
    .when('/:view', {
     templateUrl: function(rd) { return hostUrl+"/"+rd.view+'.html';}
   })
   .otherwise({ redirectTo: '/home' }); */
 });
-
 app.controller('enquiryController', function($scope,$http, $location) {
 	$scope.hostUrl = hostUrl;
 	var today = new Date();
@@ -106,6 +75,7 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	var hour = today.getHours();
 	var min = today.getMinutes();
 	var sec = today.getSeconds();
+	$scope.mailSent = false;
 	
 	var params = {table : "config", config_name : "property"};
 	$http({
@@ -120,25 +90,18 @@ app.controller('enquiryController', function($scope,$http, $location) {
 			$scope.propertyConfig = results.data.data;
 		}
 	});
-	$scope.mailSent = false;
-
 	$scope.enquiry = {
-		message : {
-			property_for :0
-		},
-		subject : 'Website Enquiry',
 		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 	};
 	$scope.postData = function(enquiry){
 		$scope.loading = true;
 		console.log(enquiry);
-		 $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-			 $scope.loading = false;
+		  $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+			$scope.loading = false;
 			$scope.mailSent = true;
-		});
+		}); 
 	};
 });	
-
 	app.controller('aboutController', function($scope,$http, $location) {
 		var s = $location.path();
 		$scope.url = s.substr(1);
