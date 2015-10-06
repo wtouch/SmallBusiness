@@ -1,21 +1,28 @@
+
 {% autoescape false %}
 {% if featured_projects %}
-<div class="row-fluid featured_project">
-	<ul>
-		{% set break = 0 %}{% set i = 0 %}
-		{% for x in featured_projects if break == 0 %}
-			<li>
-				<a href="projects/{{x.title}}/{{x.id}}">{{x.title}}</a>
-			</li>
-			{% set i = (i + 1) %}
-			{% if i == 4 %}
-				{% set break = 1 %}
-			{% endif %}
-		{% endfor %}
-	</ul>
-	<div class="clearfix"></div>
-	<div class="span12 ViewAll">
-		<a class="btn btn-info span12" href="/projects" title="Click Here to View All Projects">View All Projects</a>
+<div class="contentModule">
+	<h3 class="subhead">Featured Project</h3>
+	<div class="sections text-center">
+		<ul class="bxslider" id="bxslider">
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_projects if break == 0 %}
+				<li>
+					<div class="projimg">
+						<img class="img-responsive center-block" src="{{x.project_images.0.file_relative_path}}" />
+					</div>
+					<div class="readmore">
+						<a href="projects/{{x.title}}/{{x.id}}"><h4>{{x.title}}</h4></a>
+					</div>
+					<p>Location : {{x.location}}</p>
+					<p>Type : {{x.type}}</p>
+				</li>
+				{% set i = (i + 1) %}
+				{% if i == 4 %}
+					{% set break = 1 %}
+				{% endif %}
+			{% endfor %}
+		</ul>
 	</div>
 </div>
 {% endif %}

@@ -1,11 +1,13 @@
 {% autoescape false %}
-<ul class="nav menu" id="home-nav">
-{% for x in sidebar %}
-	{% if x.status == 1 %}
-		<li>
-			<a class="{{ x.name | lower | replace({" ":'_'})}}" href="{{ x.url }}">{{ x.name }}</a>
-		</li>
-	{% endif %}
-{% endfor %}
-</ul>
+<div class="sidebarModule sidemenu text-center">
+	<ul>
+	{% for x in sidebar %}
+		{% if x.status == 1 %}
+			<li>
+				<a class="{{ x.name | lower | replace({" ":'_'})}}" href="{{ x.url }}">{{ x.name }}</a>
+			</li>
+		{% endif %}
+	{% endfor %}
+	</ul>
+</div>
 {% endautoescape %}

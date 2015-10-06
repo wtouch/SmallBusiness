@@ -1,62 +1,6 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
-jQuery(document).ready(function() {
-	jQuery(".subimgs").click(function(){
-		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
-	})
-});
-$(document).ready(function(){
-	$('.bxslider').bxSlider({
-		mode:'horizontal',
-		slideMargin: 5,
-		minSlides :3,
-		maxSlides: 3,
-		moveSlides: 1,
-		slideWidth: 225,
-		auto: true, 
-		autoDirection:'next',
-		pause:3000,
-		pager:false,
-		pagerType:'full',
-		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed : 1000
-	});
-	
-	$('.bxslider1').bxSlider({
-		mode:'vertical',
-		slideWidth: 600,
-		minSlides: 3,
-		maxSlides:3,
-		slideMargin: 5,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 2,
-		pause:5000,
-		pager:false,
-		pagerType:'full',
-		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed:2000,
-	});
-	$('#carousslider').bxSlider({
-		mode:'fade',
-		slideWidth: 600,
-		slideHeight:500,
-		
-		auto: true, 
-		autoDirection:'next',
-		pause:2500,
-		pager:true,
-		pagerType:'full',
-		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed:1000,
-	});
-});
+
 var app = angular.module('myApp',[]);
 
 app.config(function($locationProvider) {
