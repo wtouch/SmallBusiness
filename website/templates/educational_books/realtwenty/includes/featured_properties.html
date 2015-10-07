@@ -1,0 +1,23 @@
+{% autoescape false %}
+{% if featured_properties %}
+<div class="row-fluid featured-property">
+	<ul>
+		{% set break = 0 %}{% set i = 0 %}
+		{% for x in featured_properties if break == 0 %}
+			<li>
+				<img src="{{x.property_images.0.file_relative_path}}" alt="{{x.title}}">
+				<a href="properties/{{x.title}}/{{x.id}}">{{x.title}}</a>
+			</li>
+			{% set i = (i + 1) %}
+			{% if i == 4 %}
+				{% set break = 1 %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+	<div class="clearfix"></div>
+	<div class="span12 ViewAll">
+		<a class="btn btn-info span12" href="/properties" title="Click Here to View All Properties">View All Properties</a>
+	</div>
+</div>
+{% endif %}
+{% endautoescape %}
