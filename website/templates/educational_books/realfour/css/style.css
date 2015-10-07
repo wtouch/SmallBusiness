@@ -231,6 +231,9 @@
 .homeproject .projectCarousal .bx-viewport {
   height: 342px!important;
 }
+.homeproject .projectCarousal .bx-controls {
+  margin: 10px 0;
+}
 .homeproject .projectCarousal .carousslider {
   padding-left: 0px;
 }
@@ -251,7 +254,8 @@
   height: 342px;
   opacity: 0;
   background-color: rgba(115, 146, 184, 0.7);
-  transform: translateX(530px);
+  z-index: 51;
+  transform: translateX(510px);
   transition: all 800ms ease-in;
   position: absolute;
   overflow: hidden;
@@ -288,13 +292,17 @@
 }
 .homeproject .projectCarousal:hover .projsnap {
   opacity: 1;
-  width: 529px;
+  width: 508px;
   transform: translateX(0px);
 }
 .homeproject .projectnav {
   display: inline-block;
+  position: relative;
+  float: right;
+  width: 222px;
   height: 342px;
   padding: 0px 15px 15px;
+  z-index: 52;
   background-image: -webkit-linear-gradient(left, #2d4065, #23527c 93%, #2d4065);
   background-image: -moz-linear-gradient(left, #2d4065, #23527c 93%, #2d4065);
   background-image: linear-gradient(left, #2d4065, #23527c 93%, #2d4065);
@@ -746,6 +754,7 @@ body header .caro {
 }
 body header .caro .content {
   padding-left: 20px;
+  border-top: 1px solid #2d4065;
 }
 body header .logo img {
   max-width: 100%;

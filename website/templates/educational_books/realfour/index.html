@@ -17,7 +17,7 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		{% if data.template_params %}
+		<!-- {% if data.template_params %}
 			<style>
 				.bxslider li a,.bxslider li a:hover,.homeproject .projectCarousal .projsnap img, .featrtesti img:hover,body a,body .btn-info,body .btn-info:focus,body .btn-info:active,body .btn-info[disabled],body .btn-link{
 					color : {{data.template_params.color}};
@@ -70,92 +70,103 @@
 					93%, {{data.template_params.background_color}});
 				}
 			</style>
-		{% endif %}
+		{% endif %} -->
 	</head>
-<body>
-	<div class="sociallinks">
-		<ul>
-			{% if data.website_config.sociallinks.facebook %}
-				<li>
-					<a href="{{data.website_config.sociallinks.facebook}}" target="_blank">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
-				</li>
-			{% endif %}
-			{% if data.website_config.sociallinks.google %}
-				<li>
-					<a href="{{data.website_config.sociallinks.google}}" target="_blank">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
-				</li>
-			{% endif %}
-			{% if data.website_config.sociallinks.twitter %}
-				<li>
-					<a href="{{data.website_config.sociallinks.twitter}}" target="_blank">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
-				</li>
-			{% endif %}
-			{% if data.website_config.sociallinks.linkedin %}
-				<li>
-					<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
-				</li>
-			{% endif %}
-		</ul>
-	</div>
-	<header>
-		<div class="container">
-			<div class="logo">
-				{% if data.website_config.website_logo %}
-						
-				<img src="{{data.website_config.website_logo.file_relative_path}}" alt="{{data.business_name}}">
-				{% else %}
-				
-				<img src="{{data.business_logo.file_relative_path}}" alt="{{data.business_name}}">
+	<body>
+		<div class="sociallinks">
+			<ul>
+				{% if data.website_config.sociallinks.facebook %}
+					<li>
+						<a href="{{data.website_config.sociallinks.facebook}}" target="_blank">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
+					</li>
 				{% endif %}
-			</div>
+				{% if data.website_config.sociallinks.google %}
+					<li>
+						<a href="{{data.website_config.sociallinks.google}}" target="_blank">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.twitter %}
+					<li>
+						<a href="{{data.website_config.sociallinks.twitter}}" target="_blank">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.linkedin %}
+					<li>
+						<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
+					</li>
+				{% endif %}
+			</ul>
 		</div>
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+		<header>
+			<div class="container">
+				<div class="logo">
+					{% if data.website_config.website_logo %}
+							
+					<img src="{{data.website_config.website_logo.file_relative_path}}" alt="{{data.business_name}}">
+					{% else %}
+					
+					<img src="{{data.business_logo.file_relative_path}}" alt="{{data.business_name}}">
+					{% endif %}
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-12 col-md-4 col-lg-3 nava">
-					<div class="sidenav">
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav nav-pills nav-stacked">
-								{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-							</ul>
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-4 col-lg-3 nava">
+						<div class="sidenav">
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav nav-pills nav-stacked">
+									{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+								</ul>
+							</div>
 						</div>
+						{%if modules.sidebarModule.searchProp %}
+							{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+						{%endif%}
+						{%if modules.sidebarModule.contact %}
+							{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+						{%endif%}
+						{%if modules.sidebarModule.enquiry %}
+							{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
+						{%endif%}
+						{%if modules.sidebarModule.sidemenu %}
+							{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+						{%endif%}
 					</div>
-				</div>
-				<div class="col-xs-12 col-md-8 col-lg-9 caro">
-					{%if modules.headerModule.carousal %}
-					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-					{%if modules.headerModule.homeproject %}
-					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-				</div>
-				<div class="col-md-push-4 col-lg-push-3 col-xs-12 col-md-8 col-lg-9">
-					<div class="content clearfix">
-						{% include contentPath %}
-						
-						{%if modules.contentModule.featured_products %}
-							{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-						{%endif%}
-						
-						{%if modules.contentModule.featured_properties %}
-							{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
+					<div class="col-xs-12 col-md-8 col-lg-9 caro">
+						<div class="clearfix">
+							{%if modules.headerModule.carousal %}
+							{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+							{%endif%}
+							{%if modules.headerModule.homeproject %}
+							{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+							{%endif%}
+						</div>
+						<div class="content clearfix">
+							{% include contentPath %}
 							
-							{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+							{%if modules.contentModule.featured_products %}
+								{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+							{%endif%}
 							
-						{%endif%}
-						
-						{%if modules.contentModule.featured_projects %}
-							{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-						{%endif%}
-						
-						{% if (modules.contentModule.featured_services)%}
+							{%if modules.contentModule.featured_properties %}
+								{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
+								
+								{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+							{%endif%}
+							
+							{%if modules.contentModule.featured_projects %}
+								{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
+							{%endif%}
+							
+							{% if (modules.contentModule.featured_services)%}
 								<div class="featuretab">
 									<!-- Nav tabs -->
 									<ul class="nav nav-tabs" role="tablist">
@@ -186,27 +197,12 @@
 										</div>
 									</div>
 								</div>
-								{% endif %}
+							{% endif %}
+						</div>
 					</div>
 				</div>
-				<div class="col-md-pull-8 col-lg-pull-9 col-xs-12 col-md-4 col-lg-3">
-					{%if modules.sidebarModule.searchProp %}
-						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
-					{%endif%}
-					{%if modules.sidebarModule.contact %}
-						{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-					{%endif%}
-					{%if modules.sidebarModule.enquiry %}
-						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
-					{%endif%}
-					{%if modules.sidebarModule.sidemenu %}
-						{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
-					{%endif%}
-					
-				</div>
 			</div>
-		</div>
-	</header>
+		</header>
 	</body>
 	{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 </html>
