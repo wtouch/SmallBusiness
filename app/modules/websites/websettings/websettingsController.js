@@ -158,7 +158,13 @@ define(['app'], function (app) {
 						newMenu[y].seo = oldMenu[x].seo;
 						newMenu[y].modules = oldMenu[x].modules;
 						newMenu[y].status = oldMenu[x].status;
+						
 						//newMenu[y].childMenu = oldMenu[x].childMenu;
+						if (newMenu[y].childMenu == undefined && oldMenu[x].childMenu != undefined) {
+							//newMenu[y].childMenu = [];
+							//$scope.replaceMenu(newMenu[y].childMenu, oldMenu[x].childMenu);
+							newMenu[y].childMenu = oldMenu[x].childMenu;
+						}
 						if (newMenu[y].childMenu != undefined && oldMenu[x].childMenu != undefined) {
 							$scope.replaceMenu(newMenu[y].childMenu, oldMenu[x].childMenu);
 						}
