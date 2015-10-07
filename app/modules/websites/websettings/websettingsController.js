@@ -6,7 +6,8 @@ define(['app'], function (app) {
 	var websettingsController = function ($scope, $rootScope, $injector, $routeParams, $location, dataService, upload, modalService, $notification) {
 		$scope.permission = $rootScope.userDetails.permission.website_module;
 		$scope.sidebar = {};
-		//$scope.submenu = {};
+		$scope.submenu = {};
+		//$scope.childMenu = {};
 		$scope.path = "/website";
 		$scope.userInfo = {
 			user_id : $rootScope.userDetails.id
@@ -48,7 +49,8 @@ define(['app'], function (app) {
 		$scope.addToObjects = function(data, object, resetObj){
 			var dtlObj = JSON.stringify(data);
 			object.push(JSON.parse(dtlObj));
-			$scope.submenu = {};
+			//$scope.submenu = {};
+			$scope.object = {};
 		}
 		$scope.removeCustomMenu = function(array, index, data){
 		 	if(data.customMenu == 1){
@@ -156,7 +158,7 @@ define(['app'], function (app) {
 						newMenu[y].seo = oldMenu[x].seo;
 						newMenu[y].modules = oldMenu[x].modules;
 						newMenu[y].status = oldMenu[x].status;
-						newMenu[y].childMenu = oldMenu[x].childMenu;
+						//newMenu[y].childMenu = oldMenu[x].childMenu;
 						if (newMenu[y].childMenu != undefined && oldMenu[x].childMenu != undefined) {
 							$scope.replaceMenu(newMenu[y].childMenu, oldMenu[x].childMenu);
 						}
@@ -197,11 +199,13 @@ define(['app'], function (app) {
 			$scope.websetting.config.sidebar.name = (websetting.config.sidebar) ? websetting.config.sidebar.name : {};	
 		};
 		
-		$scope.addsubmenu = function(websetting){
+		 $scope.addsubmenu = function(websetting){
 			$scope.websetting.config.menus.submenu = (websetting.config.menus.submenu) ? websetting.config.menus.submenu : {};
 			console.log(websetting.config.menus);
 			$scope.websetting.config.menus.submenu.name = (websetting.config.menus.submenu) ? websetting.config.menus.submenu.name : {};	
-		};
+		}; 
+		
+		
 		$scope.editMenu = function(ind, para, data, childMenu){
 			if(data.customMenu == 1){
 				ind[para + 'childMenu'] = (ind[para + 'childMenu']) ? false : true;
