@@ -14,7 +14,6 @@
 			padding : 4px;
 			border : 3px solid transparent;
 			&:hover{ 
-				border : 3px solid @color;
 			}
 		}
 		.readmore{
@@ -23,16 +22,14 @@
 			a{
 				h4
 				{ 
-					margin-right:10px;
 					font: 2em/1.2em Amaranth-Regular;
 					font-size:16px;
 					font-weight:bold;
 					/*font: 16px 'Alex Brush', cursive;*/
-					
 					color : @colorwhite;
 					padding : 5px 15px;
 					text-decoration:none;
-					border-color : @colorwhite;
+					//border-color : @colorblack;
 				}
 				
 			}
@@ -47,7 +44,7 @@
 	}
 }
 #carousel {
-		background-color: @lightbackcolor;
+		//background-color: @lightbackcolor;
 		.carousel-inner {
 			.item{
 				max-height: 298px;
@@ -72,14 +69,14 @@
 	position : relative;
 	#carousel
 	{
-		box-shadow : 0px 0px 10px 0px black;
-		border : 5px solid @colorwhite;
+		/*box-shadow : 0px 0px 10px 0px @colorblack;
+		border : 5px solid @colorwhite;*/
 	}
-	.bx-wrapper{
-		box-shadow : 0px 0px 10px 0px black;
-		border : 5px solid @colorwhite;
-		margin-top : 5px !important;
-		border-radius : 4px;
+	/*.bx-wrapper{
+		box-shadow : 0px 0px 10px 0px @back;
+		border : 5px solid @colorblack;
+		margin-top : 5px ;
+		border-radius : 4px;*/
 	}
 	.bx-viewport{
 		min-height : 300px !important;
@@ -104,16 +101,15 @@
 			min-width : 100%;
 		}
 	}
-	
 	/*margin-bottom:10px;*/
 	.projectnav {
 		.nav-stacked>li>a {
 		  position: relative;
 		  display: block;
+		  background-color :@colorwhite;
 		  padding: 10px 8px;
 		}
-	
-		box-shadow : 0px 0px 10px 0px black;
+		box-shadow : 0px 0px 10px 0px @back;
 		border : 5px solid @colorwhite;
 		margin-top : 5px;
 		border-radius : 4px;
@@ -121,18 +117,16 @@
 		height:312px;
 		a, a:focus{
 			background : none;
-			/*background-color : black;*/
+			background-color : @darkbackcolor;
 			border: 1px solid @back;
 			margin : 5px;
 			font:2em/1.2em GandhiSans-Bold;
 			font-size:16px;
 			font-weight:bold;
 			/*font: bold 14px/1.5em Arial, Helvetica, sans-serif;*/
-			color: @back;
 			&:hover{
-				color: @colorwhite;
 				text-decoration:none; 
-				background-color : @back;
+				background-color : @darkbackcolor;
 				/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
 				/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
 				/*background: linear-gradient(right,#ccc,#0D8375);*/
@@ -142,7 +136,7 @@
 	}
 	
 	.projsnap{
-		box-shadow : 0px 0px 10px 0px black;
+		box-shadow : 0px 0px 10px 0px @back;
 		border : 5px solid @colorwhite;
 		text-align : center;
 		margin-top : 5px;
@@ -198,7 +192,6 @@
 			background: none;
 		}
 	}
-}
 .homeproject::after{
 	position : absolute;
 	content : "";
@@ -221,7 +214,7 @@
 				border:4px solid @color; 
 			}
 		}
-		border:1px solid @border;
+		border:1px solid @colorblack;
 		border-radius : 5px;
 		/*background-color:@back;*/
 		padding:10px;
@@ -231,7 +224,7 @@
 				height:400px;
 				padding-top : 15px;
 				
-				border-color : @border;
+				border-color : @colorblack;
 				.btn-info
 				{
 					background-color:@back;
@@ -290,8 +283,8 @@
 			.pagination{
 				li,.disabled{
 					a{
-						background-color: @colorwhite;
-						border-color : @border;
+						background-color: @back;
+						border-color : @colorblack;
 						
 						&:hover{
 							background-color:@back;

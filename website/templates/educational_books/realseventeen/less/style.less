@@ -15,31 +15,32 @@
 		font-family:'Kirsty';
 		src:url('../fonts/Kirsty.ttf');
 	}
-	@color : #B89D6C;
-	@lightcolor : #BBBBBB;
-	@darkcolor : #02071A;
-	@back : #005596;
-	@darkbackcolor : #23235C;
-	@lightbackcolor :#F3EAFF; 
-	@contentback: #B7B8BA;
-	@hover:#B0B5B8;
+	
+	@color:#006;
+	@darkcolor : #C00;
+	@lightcolor:#e4e6e7;
+	
+	
+	@lightbackcolor:#d2ffb7;
+	@back: #060; 
+	@darkbackcolor:#0c4204;
+	
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
-	@contentlink:#6ba72b;
-	@navbackground:#E3E3ED;
-	@headingcolor:#034206;
-	@border: #B8B8C3;
+	
+	
 	@import "property.less";
 	@import "project.less";
-	@import "product.less";
+	@import "product.less"; 
 	@import "service.less";
 	@import "general.less";
 	
 	body{
 		background-color :@lightbackcolor;
-		/*background-image:-webkit-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
-		/*background-image:-moz-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
-		/*background-image:linear-gradient(@darkcolor,@lightbackcolor 50%);*/
+		color:@color;
+		/*background-image:-webkit-linear-gradient(@lightbackcolor 50%);*/
+		/*background-image:-moz-linear-gradient(@lightbackcolor 50%);*/
+		/*background-image:linear-gradient(@lightbackcolor 50%);*/
 	}
 	.sociallinks{
 		top: 50%;
@@ -95,7 +96,7 @@
 	}
 	
 	*, hr{
-		border-color : @border;
+		border-color : @back;
 	}
 	*{
 		transition:300ms;
@@ -177,17 +178,11 @@
 	{
 		border:none;
 		min-height : 50px;
+        height:30px;
 	}
 	
-	.contentModule .sections .readmore .btn-info {
-		 background-color: @back; 
-		 &:hover{
-			background-color:@darkbackcolor;
-		 }
-	}
-
 	.navbar-default {
-		background-color: @darkbackcolor;
+		background-image: linear-gradient(@darkbackcolor,@back);
 		margin-bottom :0px;
 		border-radius: 0;
 		.navbar-nav{
@@ -198,15 +193,15 @@
 				
 				> a, > a:focus {
 					color :@colorwhite;
-					/*padding : 15px 10px;*/
+					padding : 5px 25px;
 					border-right: 1px solid white;
 					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
 				}
 				&.active > a
 				{
-					background-color :@navbackground;
-					color: @colorblack;
+					background-color :@colorwhite;
+					color: @darkbackcolor;
 				}
 				&.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					//-webkit-transition: all 0.4s;
@@ -219,10 +214,10 @@
 					width: 245px;
 					z-index: 999;
 					background-color: @darkbackcolor;
-					padding: 12px;
+					padding: 15px;
 					list-style: none;
 					text-align: left;
-					top : 50px;
+					top : 30px;
 					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					>li{
@@ -236,10 +231,14 @@
 							}
 						}
 						&:hover{
-							background-color : @hover;
+							background-color : @back;
 							/*background: -webkit-linear-gradient(right,#ccc,#0D8375);
 							background: -moz-linear-gradient(right,#ccc,#0D8375);
 							background: linear-gradient(right,#ccc,#0D8375);*/
+						}
+						&:focus{
+							background-color:@colorwhite;
+							color:@darkbackcolor;
 						}
 						ul{
 							list-style: none;
@@ -269,29 +268,29 @@
 		border:1px solid @darkbackcolor;
 		/*box-shadow:2px 2px 2px @lightcolor;*/
 		text-align: center;
-		background-color :@darkbackcolor;
+		background-color :none;
 		/*background: -webkit-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
 		/*background: -moz-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
 		/*background: linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
 		border-radius: 7px;
 		padding: 4px 10px;
 		position: relative;
-		color: @colorwhite;
+		color: @back;
 	}
 	
 	h1{
-		color: @headingcolor;
+		color: @back;
 		font: 2em/1.2em Amaranth-Regular;
 		letter-spacing: 1px;
 		border-bottom: 1px solid #ccc;
 	}
 	
 	h2,h3,h5{
-		color : @headingcolor;
+		color : @darkbackcolor;
 	}
 	h3
 	{
-		color : @headingcolor;
+		color : @darkbackcolor;
 		font: 2em/1.2em Amaranth-Regular;
 	}
 	h2,h5{
@@ -300,13 +299,12 @@
 	}
 	
 	h4{
-		border-bottom : 1px solid #ccc;
 		padding-bottom: 8px;
 		font: 1.5em/1.2em Amaranth-Regular;
 	}
 	.btn-link{
 		padding-left : 0px;
-		color : @headingcolor;
+		color : @back;
 	}
 	.panel{
 		/*background-color:@contentback;*/
@@ -320,22 +318,17 @@
 			/*border:1px solid @darkbackcolor;*/
 			/*box-shadow:2px 2px 2px @lightcolor;*/
 			border-radius : 5px;
+			border: 1px solid @back;
 			img{
 				width : 100%;
 				padding : 4px;
 				border : 3px solid transparent;
+				max-height: 138px;
+				min-height:138px;
 			}
 			.readmore{
 				margin-bottom :10px;
 				margin-top:10px;
-				margin-right:10px;
-				.btn-info{
-					font-family: Amaranth-Regular;
-				}
-				a{
-					font-family: Amaranth-Regular;
-					color : @colorwhite;
-				}
 			}
 		}
 		
@@ -356,19 +349,21 @@
 				height : 38px;
 				>a, > a:focus{
 					padding : 10px;
-					color : @colorwhite;
+					color:@darkbackcolor;
 					font-weight : bold;
+					text-align:center;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					background-color: @back ;
-					color : @colorwhite;
+					color : @darkbackcolor;
+					text-align:center;
 				}
 			}
 		}
 	}
 	.contactus{
 		h4{
-			border : none;
+			border:none;
 			padding-bottom : 0px;
 		}
 	}
@@ -436,7 +431,7 @@
 		}
 	}
 	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
-		border : 1px solid @lightcolor;
+		border : 1px solid @color;
 		
 		input,textarea{
 			color:@colorblack;
