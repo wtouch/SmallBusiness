@@ -6,24 +6,28 @@
 			<h3 class="col-sm-offset-2 col-sm-9">Edit Profile</h3>
 			
 			<form name="editProfileForm" class="form-horizontal" role="form" ng-submit="editProfileForm.$valid" novalidate>
+				
 				<div class="form-group">
-					<label for="userimg" class="col-sm-2 control-label">Profile Picture</label>
-					<div class="col-sm-6">
-						<input type="file" id="userimg" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change="generateThumb($files)" ng-model="userimg">
-							<file-preview url="userimg"></file-preview>
-							<!-- This button will show if file/s selected -->
-							<button ng-show="userimg" ng-click="upload(userimg,editprofile.id + path,userInfo,editprofile.user_img)" type="button">Upload</button>
+					<label for="userimg" class="col-sm-2 control-label">Edit Profile</label>
+						<div class="col-sm-3">
+							<input type="file" id="user_img" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" 
+							ng-file-change= "upload(userimg, editprofile.id + path,userInfo,'user_img')" 
+							ng-model="userimg">
 							<input type="hidden" ng-model="editprofile.user_img">
-							<span class="thumbs" ng-repeat="(key, value) in editprofile.user_img">
-								<img class="img-thumbnail" width="40px"ng-src="{{appConfig.assetPath + editprofile.user_img}}" />
-								<span class="close" ng-click="removeImg(key,editprofile.user_img)">X</span>
-							</span>		
+						</div>
+				</div>
+				
+				<div class="form-group">						 
+					<div class="col-sm-6 col-sm-offset-3">
+						<span class="thumbs" ng-if="editprofile.user_img">
+							<img class="img-thumbnail" ng-src="{{editprofile.user_img}}" ng-click="editprofile.imgkey = key; "/>
+						</span>
 					</div>
 					<div class="col-sm-3">
-						<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + editprofile.user_img}}" width="150px" />
-					</div>
-				</div> 
-				
+						<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + editprofile.user_img}}" width="140px" />
+					</div> 
+				</div>	
+			
 				<div class="form-group">
 					<label  for="name" class="col-sm-2 control-label">Name *</label>
 					<div class="col-sm-9">

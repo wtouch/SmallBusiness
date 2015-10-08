@@ -58,7 +58,7 @@
 						</select>
 						
 						<div  ng-if="permission.assign_user_group" class="input-group-btn" >
-							<a type="button" ng-class="(users.boxId == 0 || !users.boxId) ? 'btn btn-info' : 'btn btn-success'" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId); users.group_name = changeGroupName(users.group_id, groups)" tooltip="Edit User Group">
+							<a ng-disabled="users.group_name == 'superadmin'|| users.group_name == 'admin'" type="button" ng-class="(users.boxId == 0 || !users.boxId) ? 'btn btn-info' : 'btn btn-success'" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('group_id', users.group_id, users.id, users.boxId); users.group_name = changeGroupName(users.group_id, groups)" tooltip="Edit User Group">
 								<span ng-class="(users.boxId ==1) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'"></span>
 							</a>
 						</div>
@@ -75,7 +75,7 @@
 						</select>
 						
 						<div  class="input-group-btn">
-							<a type="button" ng-class="(users.boxId == 0 || !users.boxId) ? 'btn btn-info' : 'btn btn-success'" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('user_id', users.user_id, users.id, users.boxId); users.group_name = changeGroupName(users.group_id, groups)" tooltip="Edit User Group">
+							<a type="button" ng-class="(users.boxId == 0 || !users.boxId) ? 'btn btn-info' : 'btn btn-success'" ng-disabled="users.group_name == 'superadmin'|| users.group_name == 'admin'" ng-model="users.boxId" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'" ng-change="editGroupName('user_id', users.user_id, users.id, users.boxId); users.group_name = changeGroupName(users.group_id, groups)" tooltip="Edit User Group">
 								<span ng-class="(users.boxId ==1) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-pencil'"></span>
 							</a>
 						</div>
@@ -87,7 +87,7 @@
 				<td>{{users.register_date}}</td>
 				<td>
 					<div ng-if="permission.reset_user_password" class="btn-group">
-						<a ng-disabled="users.group_name == 'superadmin'" type="button" tooltip="Reset Password" class="btn btn-info " ng-model="users.email" ng-click="forgotPass('email', users.email, users.id)">
+						<a ng-disabled="users.group_name == 'superadmin'|| users.group_name == 'admin'" type="button" tooltip="Reset Password" class="btn btn-info " ng-model="users.email" ng-click="forgotPass('email', users.email, users.id)">
 							<span class="glyphicon glyphicon-refresh"></span>
 						</a>
 					</div>

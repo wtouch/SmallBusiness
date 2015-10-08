@@ -6,6 +6,15 @@
 	{% if data.business_info.alternate_tagline %}
 		<div class="tagline1 text-center">{{ data.business_info.alternate_tagline}}</div>
 	{% endif %}
-	<div class="description">{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}</div>
+	
+	<div class="description">
+	{% if data.website_config.welcome_note %}
+		{{ data.website_config.welcome_note}}
+	
+	{% else %}
+		{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}
+	{% endif %}
 	<a href="about-us" class="btn btn-link">Read More..</a>
+	</div>
+	
 {% endautoescape %}
