@@ -15,24 +15,21 @@
 		font-family:'Kirsty';
 		src:url('../fonts/Kirsty.ttf');
 	}
-	@color : #B89D6C;
-	@lightcolor : #BBBBBB;
-	@darkcolor : #02071A;
-	@back : #005596;
-	@darkbackcolor : #23235C;
-	@lightbackcolor :#F3EAFF; 
-	@contentback: #B7B8BA;
-	@hover:#B0B5B8;
-	@colorblack : #02071A;
-	@colorwhite	: #fff;
-	@contentlink:#6ba72b;
-	@navbackground:#E3E3ED;
-	@headingcolor:#034206;
-	@border: #B8B8C3;
+	@color :#900;
+	@lightcolor : #FFC;
+	@darkcolor :#08c ;
+	
+	@back :#F90;
+	@darkbackcolor :#300;
+	@lightbackcolor :#D6D6D6; 
+	 
+	@colorblack : #000;
+	@colorwhite	:#FFF;
+	
 	@import "property.less";
 	@import "project.less";
 	@import "product.less";
-	@import "service.less";
+	
 	@import "general.less";
 	
 	body{
@@ -53,7 +50,8 @@
 				padding: 4px 0px 4px 10px;
 				background-color: @darkbackcolor;
 				margin: 5px;
-				border-top-right-radius: 30px;border-bottom-right-radius: 30px;
+				border-top-right-radius: 30px;
+				border-bottom-right-radius: 30px;
 				text-align : right;
 				width : 125px;
 				a{
@@ -91,11 +89,11 @@
 	}
 	.content
 	{
-		background-color :@colorwhite;
+		background-color :@lightcolor;
 	}
 	
 	*, hr{
-		border-color : @border;
+		border-color : @colorwhite;
 	}
 	*{
 		transition:300ms;
@@ -119,14 +117,8 @@
 		text-decoration : none;
 		color: @colorwhite;
 	}
-	.btn-info, .btn-info[disabled],.btn-primary,.readmore a,.readmore a h4,.btn-info:focus{
-		background-color: @back;
-	}
-	.btn-info:hover, .btn-info[disabled]:hover,.readmore a:hover, .readmore a h4:hover,.btn-primary:hover{
-		/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
-		/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
-		/*background: linear-gradient(right,#ccc,#0D8375);*/
-		background-color: @darkbackcolor;
+	.btn-info{
+		background-color:@darkbackcolor;
 	}
 	
 	a
@@ -150,12 +142,20 @@
 	}
 	.btn-info,.btn-primary{
 		font-family: Amaranth-Regular;
+		background-color:@darkbackcolor;
+		
+	}
+	.btn-info:hover{
+	background-color:@back;
 	}
 	.btn-info{
 		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info{
 			border : none;
 			color :@colorwhite;
 			font-weight: bold;
+			
+			
+			
 		}
 	}
 	.cnctinfo{
@@ -180,9 +180,9 @@
 	}
 	
 	.contentModule .sections .readmore .btn-info {
-		 background-color: @back; 
+		  background-color:@darkbackcolor;
 		 &:hover{
-			background-color:@darkbackcolor;
+			background-color: @back;
 		 }
 	}
 
@@ -205,12 +205,13 @@
 				}
 				&.active > a
 				{
-					background-color :@navbackground;
+					background-color :@back;
 					color: @colorblack;
 				}
 				&.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					//-webkit-transition: all 0.4s;
-					color : @colorwhite;
+					color : @darkbackcolor;
+					background-color:@back;
 				}
 				> ul {
 					transition: all 300ms ease-in;
@@ -218,7 +219,7 @@
 					position: absolute;
 					width: 245px;
 					z-index: 999;
-					background-color: @darkbackcolor;
+					background-color: @back;
 					padding: 12px;
 					list-style: none;
 					text-align: left;
@@ -236,7 +237,7 @@
 							}
 						}
 						&:hover{
-							background-color : @hover;
+							background-color : @darkbackcolor ;
 							/*background: -webkit-linear-gradient(right,#ccc,#0D8375);
 							background: -moz-linear-gradient(right,#ccc,#0D8375);
 							background: linear-gradient(right,#ccc,#0D8375);*/
@@ -280,18 +281,22 @@
 	}
 	
 	h1{
-		color: @headingcolor;
+		color: @color;
 		font: 2em/1.2em Amaranth-Regular;
 		letter-spacing: 1px;
 		border-bottom: 1px solid #ccc;
 	}
 	
-	h2,h3,h5{
-		color : @headingcolor;
+	h2{
+	color: @color;
+	}
+	
+	h5{
+		color : @back;
 	}
 	h3
 	{
-		color : @headingcolor;
+		color : @back;
 		font: 2em/1.2em Amaranth-Regular;
 	}
 	h2,h5{
@@ -300,19 +305,24 @@
 	}
 	
 	h4{
+		color : @back;
 		border-bottom : 1px solid #ccc;
 		padding-bottom: 8px;
 		font: 1.5em/1.2em Amaranth-Regular;
 	}
+	h3:hover,h4:hover{
+	color:@darkcolor;
+	}
 	.btn-link{
 		padding-left : 0px;
-		color : @headingcolor;
+		color : @colorwhite;
 	}
 	.panel{
-		/*background-color:@contentback;*/
+		/*background-color:@darkbackcolor;*/
 	}
 	.sections
 	{
+	
 		padding:10px;
 	}
 	.contentModule {
@@ -331,10 +341,11 @@
 				margin-right:10px;
 				.btn-info{
 					font-family: Amaranth-Regular;
+					background-color:@darkbackcolor;
 				}
 				a{
 					font-family: Amaranth-Regular;
-					color : @colorwhite;
+					color : @back;
 				}
 			}
 		}
@@ -361,7 +372,7 @@
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					background-color: @back ;
-					color : @colorwhite;
+					color : @darkbackcolor;
 				}
 			}
 		}
@@ -434,6 +445,9 @@
 			margin-top : 0px;
 			font-size : 18px;
 		}
+		h3{
+		
+		}
 	}
 	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
 		border : 1px solid @lightcolor;
@@ -441,9 +455,7 @@
 		input,textarea{
 			color:@colorblack;
 		}
-		.btn-info{
-		color:@colorwhite;
-		}
+		
 	}
 	.services{
 			border : none;
@@ -488,7 +500,7 @@
 					border:1px solid transparent;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color : @darkcolor;
+					background-color : @back;
 					color : @colorwhite;
 					/*border:1px solid @darkbackcolor;*/
 				}
