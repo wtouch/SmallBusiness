@@ -91,34 +91,30 @@
 	}
 	/*margin-bottom:10px;*/
 	.projectnav {
-		.nav-stacked>li>a {
-			position: relative;
-			display: block;
-			background-color :@colorwhite;
-			padding: 10px 8px;
-		}
 		box-shadow : 0px 0px 10px 0px @back;
 		border : 5px solid @colorwhite;
 		border-radius : 4px;
 		height:312px;
-		a, a:focus{
-			background : none;
-			background-color : @darkbackcolor;
-			border: 1px solid @back;
-			margin : 5px;
-			font:2em/1.2em GandhiSans-Bold;
-			font-size:16px;
-			font-weight:bold;
-			/*font: bold 14px/1.5em Arial, Helvetica, sans-serif;*/
-			&:hover{
-				text-decoration:none; 
-				background-color : @darkbackcolor;
-				/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
-				/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
-				/*background: linear-gradient(right,#ccc,#0D8375);*/
+		.nav-stacked{
+			>li{
+				>a {
+					position: relative;
+					display: block;
+					border: 1px solid @back;
+					margin : 8px 5px;
+					font:16px GandhiSans-Bold;
+					font-weight:bold;
+				}
+				&:hover{
+					text-decoration : none; 
+					a{
+						color : @colorwhite;
+						text-decoration : none;
+						background-color : @darkbackcolor;
+					}
+				}
 			}
 		}
-		
 	}
 	
 	.projsnap{
@@ -127,7 +123,6 @@
 		text-align : center;
 		border-radius : 4px;
 		height : 312px;
-		
 		img{
 			max-height : 110px;
 			margin-top: 10px;
@@ -148,8 +143,8 @@
 			}
 		}
 		p{
-			margin: 5px 5px;
-			padding: 1px;
+			margin: 5px;
+			padding: 4px;
 			border : 1px solid @back;
 			color : @back;
 		}

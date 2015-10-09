@@ -312,27 +312,18 @@
 .homeproject .projectnav .nav-stacked > li > a {
   position: relative;
   display: block;
-  background-color: #ffffff;
-  padding: 10px 8px;
-}
-.homeproject .projectnav a,
-.homeproject .projectnav a:focus {
-  background: none;
-  background-color: #0c4204;
   border: 1px solid #006600;
-  margin: 5px;
-  font: 2em/1.2em GandhiSans-Bold;
-  font-size: 16px;
+  margin: 8px 5px;
+  font: 16px GandhiSans-Bold;
   font-weight: bold;
-  /*font: bold 14px/1.5em Arial, Helvetica, sans-serif;*/
 }
-.homeproject .projectnav a:hover,
-.homeproject .projectnav a:focus:hover {
+.homeproject .projectnav .nav-stacked > li:hover {
+  text-decoration: none;
+}
+.homeproject .projectnav .nav-stacked > li:hover a {
+  color: #ffffff;
   text-decoration: none;
   background-color: #0c4204;
-  /*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
-  /*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
-  /*background: linear-gradient(right,#ccc,#0D8375);*/
 }
 .homeproject .projsnap {
   box-shadow: 0px 0px 10px 0px #006600;
@@ -361,8 +352,8 @@
   text-decoration: underline;
 }
 .homeproject .projsnap p {
-  margin: 5px 5px;
-  padding: 1px;
+  margin: 5px;
+  padding: 4px;
   border: 1px solid #006600;
   color: #006600;
 }
@@ -537,17 +528,6 @@
   text-align: center;
   margin-top: 20px;
 }
-.services .servdesc .readmore a {
-  background-color: #006600;
-  color: #ffffff;
-  border: 2px solid transparent;
-  border-radius: 0px;
-}
-.services .servdesc .readmore a:hover {
-  color: #ffffff;
-  background-color: #0c4204;
-  border: 1px solid #ffffff;
-}
 .products .thumbnail .prodimg {
   width: 200px;
   height: 150px;
@@ -563,11 +543,11 @@
   border: 3px solid #006600;
 }
 .products .thumbnail .caption {
-  height: 200px;
+  height: 180px;
   overflow: hidden;
 }
 .products .thumbnail .readmore {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
 }
 .services .thumbnail,
@@ -620,7 +600,7 @@
   margin-top: 10px;
 }
 .featuretab .tab-content {
-  border: 1px solid #e4e6e7;
+  border: 1px solid #0c4204;
   border-top: none;
   position: relative;
   margin-bottom: 25px;
@@ -628,7 +608,7 @@
   padding: 10px;
 }
 .featuretab .nav-tabs {
-  border-bottom: 1px solid #e4e6e7;
+  border-bottom: 1px solid #0c4204;
 }
 .featuretab .nav-tabs li a {
   border: 1px solid #0c4204;
@@ -654,8 +634,7 @@
   border: none;
 }
 .sidebarModule.sidemenu {
-  /*background-color:@contentback;*/
-  padding: 10px;
+  padding: 15px 15px 0px;
   border: 1px solid #0c4204;
 }
 .sidebarModule.sidemenu ul {
@@ -908,9 +887,6 @@ hr {
 a {
   color: #006600;
 }
-footer a {
-  color: #ffffff;
-}
 .btn {
   border-radius: 0px;
 }
@@ -1071,9 +1047,6 @@ h4 {
   padding-left: 0px;
   color: #006600;
 }
-.panel {
-  /*background-color:@contentback;*/
-}
 .sections {
   padding: 10px;
   border-radius: 5px;
@@ -1093,25 +1066,11 @@ h4 {
   margin-bottom: 10px;
   margin-top: 10px;
 }
+.contentModule .services {
+  border: none;
+}
 hr {
   margin: 5px 0px;
-}
-footer {
-  background-color: #0c4204;
-  padding: 5px;
-}
-footer .footlink ul {
-  color: #ffffff;
-  list-style: none;
-}
-footer .footlink ul li {
-  display: inline;
-  border-right: 1px solid #ccc;
-  padding: 5px;
-}
-footer .footlink ul li a {
-  color: #ffffff;
-  font-size: 10px;
 }
 .service {
   margin-bottom: 10px;
@@ -1129,24 +1088,12 @@ footer .footlink ul li a {
 .searchProperty,
 .sections,
 .enquiry .panel-default,
-.searchProp .panel-default {
+.searchProp .panel-default,
+.form-control {
   border: 1px solid #000066;
 }
-.searchProperty input,
-.sections input,
-.enquiry .panel-default input,
-.searchProp .panel-default input,
-.searchProperty textarea,
-.sections textarea,
-.enquiry .panel-default textarea,
-.searchProp .panel-default textarea {
-  color: #02071a;
-}
-.searchProperty .btn-info,
-.sections .btn-info,
-.enquiry .panel-default .btn-info,
-.searchProp .panel-default .btn-info {
-  color: #ffffff;
+.thumbnail {
+  border-color: #0c4204;
 }
 .services {
   border: none;
@@ -1163,6 +1110,15 @@ footer {
   margin-top: 10px;
   color: #e4e6e7;
   font-weight: bold;
+  background-color: #0c4204;
+  padding: 5px;
+}
+footer a {
+  color: #ffffff;
+}
+footer a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 @media (min-width: 320px) {
   .logo {
