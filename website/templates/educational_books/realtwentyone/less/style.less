@@ -90,10 +90,11 @@
 	.content
 	{
 		background-color :@lightcolor;
+		border:2px solid @darkbackcolor;
 	}
 	
 	*, hr{
-		border-color : @colorwhite;
+		border-color : @darkbackcolor;
 	}
 	*{
 		transition:300ms;
@@ -110,12 +111,13 @@
 	}
 	
 	.project .thumbnail{
-		/*background-color:@back;*/
+		background-color:transparent;
+		border: 1px solid @darkbackcolor;
 	}
 	
 	.propertylist .text-center a:hover{
 		text-decoration : none;
-		color: @colorwhite;
+		color: @darkbackcolor;
 	}
 	.btn-info{
 		background-color:@darkbackcolor;
@@ -136,28 +138,42 @@
 	}
 	.btn.send{
 		margin-right : 8px;
+		background-color:@darkbackcolor;
+	}
+	.btn.send:hover{
+	
+		background-color:@back;
+		color:@darkbackcolor;
 	}
 	.btn + .btn {
 		margin-left : 10px;
+		background-color:@darkbackcolor;
+	}
+	.btn + .btn:hover {
+	background-color:@back;
+	color:@darkbackcolor;
 	}
 	.btn-info,.btn-primary{
 		font-family: Amaranth-Regular;
 		background-color:@darkbackcolor;
-		
+		border:none;
 	}
+
 	.btn-info:hover{
 	background-color:@back;
+	color:@darkbackcolor;
 	}
 	.btn-info{
-		&,&:hover, &:focus, &:active,.open>.dropdown-toggle.btn-info{
+		 &:focus, &:active,.open>.dropdown-toggle.btn-info{
 			border : none;
 			color :@colorwhite;
 			font-weight: bold;
-			
-			
-			
 		}
 	}
+	.btn-danger{
+	border:none;
+	}
+	
 	.cnctinfo{
 		color:@color;
 		font-weight : bold;
@@ -183,6 +199,8 @@
 		  background-color:@darkbackcolor;
 		 &:hover{
 			background-color: @back;
+			color:@darkbackcolor;
+			
 		 }
 	}
 
@@ -198,7 +216,7 @@
 				
 				> a, > a:focus {
 					color :@colorwhite;
-					/*padding : 15px 10px;*/
+				
 					border-right: 1px solid white;
 					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
@@ -227,7 +245,7 @@
 					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					>li{
-						border-bottom: 1px solid @lightbackcolor;
+						border-bottom: 1px solid @darkbackcolor;
 						padding: 7px;
 						>a{
 							color:@colorwhite;
@@ -284,7 +302,7 @@
 		color: @color;
 		font: 2em/1.2em Amaranth-Regular;
 		letter-spacing: 1px;
-		border-bottom: 1px solid #ccc;
+		border-bottom: 1px solid @darkbackcolor;
 	}
 	
 	h2{
@@ -306,7 +324,7 @@
 	
 	h4{
 		color : @back;
-		border-bottom : 1px solid #ccc;
+		border-bottom : 1px solid @darkbackcolor;
 		padding-bottom: 8px;
 		font: 1.5em/1.2em Amaranth-Regular;
 	}
@@ -318,7 +336,7 @@
 		color : @colorwhite;
 	}
 	.panel{
-		/*background-color:@darkbackcolor;*/
+		background-color:transparent;
 	}
 	.sections
 	{
@@ -326,15 +344,14 @@
 		padding:10px;
 	}
 	.contentModule {
-		.sections{
-			/*border:1px solid @darkbackcolor;*/
-			/*box-shadow:2px 2px 2px @lightcolor;*/
+		.sections{		
 			border-radius : 5px;
 			img{
 				width : 100%;
 				padding : 4px;
-				border : 3px solid transparent;
+				border : 3px solid @darkbackcolor;
 			}
+			
 			.readmore{
 				margin-bottom :10px;
 				margin-top:10px;
@@ -342,40 +359,21 @@
 				.btn-info{
 					font-family: Amaranth-Regular;
 					background-color:@darkbackcolor;
+					color:@colorwhite;
 				}
+				
 				a{
 					font-family: Amaranth-Regular;
-					color : @back;
+					
 				}
 			}
 		}
 		
 	}
-	.project{
-		.navbar{
-			background-color: @darkbackcolor;
-			border-bottom: 4px solid @lightbackcolor;
-			border-radius: 0;
-			margin-bottom:10px;
-			width:auto;
-		}
-		ul.nav.navbar-nav {
-			color:@colorwhite;
-			background-color: @darkbackcolor;
-			>li{
-				border-right : 1px solid @lightbackcolor;
-				height : 38px;
-				>a, > a:focus{
-					padding : 10px;
-					color : @colorwhite;
-					font-weight : bold;
-				} 
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @back ;
-					color : @darkbackcolor;
-				}
-			}
-		}
+	.form-control{
+		background-color:transparent;
+		border:1px solid @darkbackcolor;
+	
 	}
 	.contactus{
 		h4{
@@ -391,7 +389,7 @@
 		margin-top: 20px;
 		border-radius: 5px;
 		.nav-tabs{
-			border-bottom: 1px solid transparent;
+			border-bottom: 1px solid @darkbackcolor;
 			li{
 				a{
 					border: 1px solid @back;
@@ -410,6 +408,36 @@
 			}
 		}
 	}*/
+	
+nav {
+			.pagination{
+				li,.disabled{
+					a{
+						background-color: @darkbackcolor;
+						color:@back;
+						border:none;		
+						
+						&:hover{
+							background-color:@back;
+							color:@darkbackcolor;
+						}
+					}
+				}
+				>.active>a{
+					background-color:@back;
+					color:@darkbackcolor;
+					
+				
+				}
+				>.active>a:hover{
+				background-color:@back;
+					color:@darkbackcolor;
+				}
+			}
+			
+		} 
+	
+
 	hr{
 		margin :5px 0px;
 	}
@@ -449,9 +477,10 @@
 		
 		}
 	}
+	
 	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
-		border : 1px solid @lightcolor;
-		
+		border : 1px solid @darkbackcolor;
+		background-color:transperent;
 		input,textarea{
 			color:@colorblack;
 		}
@@ -462,7 +491,7 @@
 		}
 	.formsec{
 		color : #E5DFDF;
-		border-bottom: 1px solid #ccc;
+		border-bottom: 1px solid @darkbackcolor;
 		margin-bottom:10px;
 		.form-control{
 			background-color: blue ;
@@ -488,16 +517,16 @@
 	.sidebar{
 		.nav-pills{
 			background-color: @darkbackcolor;
-			border-bottom: 4px solid @lightbackcolor;
+			border-bottom: 4px solid @darkbackcolor;
 			>li{
-				border-right : 1px solid @lightbackcolor;
+				border-right : 1px solid @darkbackcolor;
 				height : 38px;
 				>a, > a:focus{
 					padding-top : 9px;
 					padding-bottom : 9px;
 					color : @colorwhite;
 					font-weight : bold;
-					border:1px solid transparent;
+					border:1px solid @darkbackcolor;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					background-color : @back;
@@ -512,7 +541,7 @@
 			tbody{
 				tr{
 					th,td{
-						border-color : @lightbackcolor;
+						border-color : @darkbackcolor;
 					}
 				}
 			}
@@ -526,16 +555,6 @@
 	.modal-body	{
 		p{
 			color:@colorblack;
-		}
-	}
-	
-	//Common effect
-	.contact, .myjobs{
-		.panel-default {
-			border-color: @lightbackcolor;
-		}
-		.panel{
-			background-color : @back;
 		}
 	}
 	
@@ -674,6 +693,7 @@
 	.projdtls{
 		color : @colorwhite;
 		background-color: @darkbackcolor;
+		
 	}
 	@media (max-width: 540px){
 		header {

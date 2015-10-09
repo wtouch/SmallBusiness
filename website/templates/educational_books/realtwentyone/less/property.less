@@ -10,15 +10,17 @@
 		list-style :none;
 		li{
 			.sliderImg{
-				height :150px;
+				height : 155px;
 				width : 200px;
 				overflow : hidden;
-				border : 2px solid transparent;
+				margin : 0 auto;
 				.slimg{
 					min-height: 150px;
-				}
-				&:hover{
-					border : 2px solid @darkcolor;
+					padding : 4px;
+					border : 3px solid @darkbackcolor;
+					&:hover{ 
+						border : 3px solid @color;
+					}
 				}
 			}
 			.verify{
@@ -50,7 +52,7 @@
 
 //propertiesList 
 .propertylist{
-	border: 1px solid @colorwhite;
+
 	border-radius : 5px;
 	color:@colorwhite;
 	padding: 20px 20px 0px;
@@ -65,18 +67,24 @@
 		}
 	}
 	.panel-default{
-		border-color : @lightbackcolor;
-		/*background-color:@darkbackcolor;*/
+		border-color : @darkbackcolor;
+		background-color:@lightcolor;
 		color : @colorblack;
-		img{
-			max-height: 215px;
-			width : 100%;
-			padding : 4px;
-			border : 3px solid transparent;
-			&:hover{ 
-				border : 3px solid @back;
+		.sliderImg{
+			height : 150px;
+			width : 200px;
+			overflow : hidden;
+			margin : 0 auto;
+			img{
+				min-height: 150px;
+				padding : 4px;
+				border : 3px solid @darkbackcolor;
+				&:hover{ 
+					border : 3px solid @color;
+				}
 			}
 		}
+		
 	}
 	.table{
 		td{
@@ -151,7 +159,7 @@
 		.mainimg {
 			img {
 				height: 130px;
-				border: 1px solid @colorwhite;
+				border: 1px solid @darkbackcolor;
 			}
 		}
 	}

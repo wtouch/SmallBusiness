@@ -29,10 +29,10 @@
 					font-weight:bold;
 					/*font: 16px 'Alex Brush', cursive;*/
 					
-					color : @colorwhite;
+					
 					padding : 5px 15px;
 					text-decoration:none;
-					border-color : @colorwhite;
+					border-color : @darkbackcolor;
 				}
 				
 			}
@@ -221,17 +221,17 @@
 				border:4px solid @color; 
 			}
 		}
-		border:1px solid @colorwhite;
+		/*border:1px solid @colorwhite;*/
 		border-radius : 5px;
 		/*background-color:@back;*/
 		padding:10px;
 		.project{
 			.thumbnail{
-				background-color:@colorwhite;
+				background-color:transparent;
 				height:400px;
 				padding-top : 15px;
-				
-				border-color : @colorwhite;
+				border:1px solid @darkbackcolor;
+		
 				.btn-info
 				{
 					background-color:@darkbackcolor;
@@ -272,6 +272,30 @@
 		
 		
 	.project{
+		.navbar{
+			background-color: @darkbackcolor;
+			border-bottom: 4px solid @darkbackcolor;
+			border-radius: 0;
+			margin-bottom:10px;
+			width:auto;
+		}
+		ul.nav.navbar-nav {
+			color:@colorwhite;
+			background-color: @darkbackcolor;
+			>li{
+				border-right : 1px solid @lightbackcolor;
+				height : 38px;
+				>a, > a:focus{
+					padding : 10px;
+					color : @colorwhite;
+					font-weight : bold;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					background-color: @back ;
+					color : @darkbackcolor;
+				}
+			}
+		}
 		.projectgallery{ 
 			/*background-color : @back;*/
 			border : 1px solid @back;
@@ -294,18 +318,19 @@
 				li,.disabled{
 					a{
 						background-color: @darkbackcolor;
-						border-color : @colorwhite;
+						color:@back;
+						
 						
 						&:hover{
 							background-color:@back;
-							color:@colorwhite;
+							color:@darkbackcolor;
 						}
 					}
 				}
 				>.active>a{
 					background-color:@back;
-					color:@colorwhite;
-					border-color : @colorblack;
+					color:@darkbackcolor;
+					
 				}
 			}
 			
