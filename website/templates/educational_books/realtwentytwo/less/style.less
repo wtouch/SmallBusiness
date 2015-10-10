@@ -146,29 +146,27 @@
 					display: none;
 					position: absolute;
 					width: 245px;
+					top : 66px;
 					z-index: 999;
-					background-color: @darkbackcolor;
+					background-color: @back;
 					padding: 12px;
 					list-style: none;
 					text-align: left;
-					top : 50px;
+					border : 1px solid @darkbackcolor;
 					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					>li{
-						border-bottom: 1px solid @lightbackcolor;
+						border-bottom: 2px solid @color;
 						padding: 7px;
 						>a{
-							color:@colorwhite;
-							&:hover{
-								text-decoration: underline;
-								-webkit-transition: all 0.4s;
-							}
+							color : @colorwhite;
+							
 						}
-						&:hover{
-							background-color : @color;
-							/*background: -webkit-linear-gradient(right,#ccc,#0D8375);
-							background: -moz-linear-gradient(right,#ccc,#0D8375);
-							background: linear-gradient(right,#ccc,#0D8375);*/
+						&:hover>a {
+							color : @colorwhite;
+							text-decoration: underline;
+							border-color : @darkcolor;
+							-webkit-transition: all 0.4s;
 						}
 						ul{
 							list-style: none;
@@ -177,7 +175,7 @@
 								a{
 									text-transform : lowercase;
 									font-size: 17px;
-									color: #fff;
+									color: @colorwhite;
 								}
 							}
 						
@@ -194,7 +192,6 @@
 	.content
 	{
 		background-color :@colorwhite;
-		border : 1px solid @darkbackcolor;
 		padding: 0px 20px 20px;
 	}
 	
@@ -229,13 +226,9 @@
 	.btn + .btn {
 		margin-left : 10px;
 	}
-	.sections
-	{
-		padding:10px;
-	}
+	
 	.contentModule {
 		.sections{
-			border-radius : 5px;
 			img{
 				width : 100%;
 				padding : 4px;
@@ -245,6 +238,19 @@
 		.services{
 			border : none;
 		}
+	}
+	.sections
+	{
+		padding:15px;
+	}
+	.contactus .sections{
+		h4{
+			margin-top : 0px;
+		}
+	}
+	.sections, .panel-default, .thumbnail{
+		border : 1px solid @darkbackcolor;
+		border-radius : 5px;
 	}
 	.project{
 		.navbar{
@@ -280,17 +286,6 @@
 	}
 	hr{
 		margin :5px 0px;
-	}
-	
-	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
-		border : 1px solid @darkbackcolor;
-		
-		input,textarea{
-			color:@colorblack;
-		}
-		.btn-info{
-		color:@colorwhite;
-		}
 	}
 	
 	.bx-wrapper .bx-controls-direction a {

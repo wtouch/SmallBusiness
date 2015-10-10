@@ -1,8 +1,8 @@
 <form name="businessProfileForm" role="form" class="form-horizontal">
 	<div class="form-group">
-		<label for="business_type" class="col-sm-3 control-label" name="business_type" >Primary Business Type*</label>
+		<label for="business_type" class="col-sm-3 control-label" name="business_type" >Primary Business Type</label>
 		<div class="col-sm-9">
-			<select class="form-control" name="business_type" id="business_type"  ng-model="addbusiness.business_profile.business_type" required ng-options="item as item for item in biz.business_type">	
+			<select class="form-control" name="business_type" id="business_type"  ng-model="addbusiness.business_profile.business_type" ng-options="item as item for item in biz.business_type">	
 				<option value="">Select Type</option>
 			</select>
 			<span class="help-block" ng-show="businessProfileForm.business_type.$dirty && businessProfileForm.business_type.$invalid">

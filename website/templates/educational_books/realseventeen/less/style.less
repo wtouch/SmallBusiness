@@ -15,32 +15,40 @@
 		font-family:'Kirsty';
 		src:url('../fonts/Kirsty.ttf');
 	}
-	@color : #B89D6C;
-	@lightcolor : #BBBBBB;
-	@darkcolor : #02071A;
-	@back : #005596;
-	@darkbackcolor : #23235C;
-	@lightbackcolor :#F3EAFF; 
-	@contentback: #B7B8BA;
-	@hover:#B0B5B8;
+	
+	@color:#006;
+	@darkcolor : #C00;
+	@lightcolor:#e4e6e7;
+	
+	
+	@lightbackcolor:#d2ffb7;
+	@back: #060; 
+	@darkbackcolor:#0c4204;
+	
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
-	@contentlink:#6ba72b;
-	@navbackground:#E3E3ED;
-	@headingcolor:#034206;
-	@border: #B8B8C3;
+	
+	
 	@import "property.less";
 	@import "project.less";
-	@import "product.less";
+	@import "product.less"; 
 	@import "service.less";
 	@import "general.less";
 	
 	body{
 		background-color :@lightbackcolor;
-		/*background-image:-webkit-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
-		/*background-image:-moz-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
-		/*background-image:linear-gradient(@darkcolor,@lightbackcolor 50%);*/
+		color:@color;
+		/*background-image:-webkit-linear-gradient(@lightbackcolor 50%);*/
+		/*background-image:-moz-linear-gradient(@lightbackcolor 50%);*/
+		/*background-image:linear-gradient(@lightbackcolor 50%);*/
 	}
+	.container{
+		max-width:992px !important;
+	}
+	*{
+		transition:300ms;
+	}
+	
 	.sociallinks{
 		top: 50%;
 		position: fixed;
@@ -84,25 +92,13 @@
 	{
 		background-color : @back;
 	}
-	
-	
-	.container{
-		max-width:992px !important;
-	}
 	.content
 	{
 		background-color :@colorwhite;
 	}
 	
 	*, hr{
-		border-color : @border;
-	}
-	*{
-		transition:300ms;
-	}
-	.form-control{
-		/*background-color:@back !important;*/
-		/*color:@colorwhite;*/
+		border-color : @back;
 	}
 	
 	.logo {
@@ -111,31 +107,16 @@
 		max-width: 100%;
 	}
 	
-	.project .thumbnail{
-		/*background-color:@back;*/
-	}
-	
-	.propertylist .text-center a:hover{
-		text-decoration : none;
-		color: @colorwhite;
-	}
 	.btn-info, .btn-info[disabled],.btn-primary,.readmore a,.readmore a h4,.btn-info:focus{
 		background-color: @back;
 	}
 	.btn-info:hover, .btn-info[disabled]:hover,.readmore a:hover, .readmore a h4:hover,.btn-primary:hover{
-		/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
-		/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
-		/*background: linear-gradient(right,#ccc,#0D8375);*/
 		background-color: @darkbackcolor;
 	}
 	
 	a
 	{
 		color:@back;
-	}
-	
-	footer a{
-		color:@colorwhite;
 	}
 	
 	.btn
@@ -177,17 +158,11 @@
 	{
 		border:none;
 		min-height : 50px;
+        height:40px;
 	}
 	
-	.contentModule .sections .readmore .btn-info {
-		 background-color: @back; 
-		 &:hover{
-			background-color:@darkbackcolor;
-		 }
-	}
-
 	.navbar-default {
-		background-color: @darkbackcolor;
+		background-image: linear-gradient(@darkbackcolor,@back);
 		margin-bottom :0px;
 		border-radius: 0;
 		.navbar-nav{
@@ -198,19 +173,14 @@
 				
 				> a, > a:focus {
 					color :@colorwhite;
-					/*padding : 15px 10px;*/
+					padding : 10px 25px;
 					border-right: 1px solid white;
 					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
 				}
-				&.active > a
-				{
-					background-color :@navbackground;
-					color: @colorblack;
-				}
-				&.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					//-webkit-transition: all 0.4s;
-					color : @colorwhite;
+				&.active>a, &.active:hover > a, &.active:hover > a:hover, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					background-color :@colorwhite;
+					color: @darkbackcolor;
 				}
 				> ul {
 					transition: all 300ms ease-in;
@@ -219,10 +189,10 @@
 					width: 245px;
 					z-index: 999;
 					background-color: @darkbackcolor;
-					padding: 12px;
+					padding: 15px;
 					list-style: none;
 					text-align: left;
-					top : 50px;
+					top : 40px;
 					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					>li{
@@ -236,10 +206,14 @@
 							}
 						}
 						&:hover{
-							background-color : @hover;
-							/*background: -webkit-linear-gradient(right,#ccc,#0D8375);
-							background: -moz-linear-gradient(right,#ccc,#0D8375);
-							background: linear-gradient(right,#ccc,#0D8375);*/
+							background-color : @colorwhite;
+							a{
+								color : @back;
+							}
+						}
+						&:focus{
+							background-color:@colorwhite;
+							color:@darkbackcolor;
 						}
 						ul{
 							list-style: none;
@@ -269,30 +243,30 @@
 		border:1px solid @darkbackcolor;
 		/*box-shadow:2px 2px 2px @lightcolor;*/
 		text-align: center;
-		background-color :@darkbackcolor;
+		background-color :none;
 		/*background: -webkit-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
 		/*background: -moz-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
 		/*background: linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
 		border-radius: 7px;
 		padding: 4px 10px;
 		position: relative;
-		color: @colorwhite;
+		color: @back;
 	}
 	
 	h1{
-		color: @headingcolor;
+		color: @back;
 		font: 2em/1.2em Amaranth-Regular;
 		letter-spacing: 1px;
 		border-bottom: 1px solid #ccc;
 	}
 	
 	h2,h3,h5{
-		color : @headingcolor;
+		color : @darkbackcolor;
 	}
 	h3
 	{
-		color : @headingcolor;
-		font: 2em/1.2em Amaranth-Regular;
+		color : @darkbackcolor;
+		font: 1.5em/1.0em Amaranth-Regular;
 	}
 	h2,h5{
 		font: 2em/1.2em Amaranth-Regular;
@@ -300,128 +274,41 @@
 	}
 	
 	h4{
-		border-bottom : 1px solid #ccc;
 		padding-bottom: 8px;
 		font: 1.5em/1.2em Amaranth-Regular;
 	}
 	.btn-link{
 		padding-left : 0px;
-		color : @headingcolor;
-	}
-	.panel{
-		/*background-color:@contentback;*/
+		color : @back;
 	}
 	.sections
 	{
 		padding:10px;
+		border-radius: 5px;
 	}
 	.contentModule {
 		.sections{
-			/*border:1px solid @darkbackcolor;*/
-			/*box-shadow:2px 2px 2px @lightcolor;*/
 			border-radius : 5px;
+			border: 1px solid @back;
 			img{
 				width : 100%;
 				padding : 4px;
 				border : 3px solid transparent;
+				max-height: 138px;
+				min-height:138px;
 			}
 			.readmore{
 				margin-bottom :10px;
 				margin-top:10px;
-				margin-right:10px;
-				.btn-info{
-					font-family: Amaranth-Regular;
-				}
-				a{
-					font-family: Amaranth-Regular;
-					color : @colorwhite;
-				}
 			}
 		}
-		
-	}
-	.project{
-		.navbar{
-			background-color: @darkbackcolor;
-			border-bottom: 4px solid @lightbackcolor;
-			border-radius: 0;
-			margin-bottom:10px;
-			width:auto;
-		}
-		ul.nav.navbar-nav {
-			color:@colorwhite;
-			background-color: @darkbackcolor;
-			>li{
-				border-right : 1px solid @lightbackcolor;
-				height : 38px;
-				>a, > a:focus{
-					padding : 10px;
-					color : @colorwhite;
-					font-weight : bold;
-				} 
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @back ;
-					color : @colorwhite;
-				}
-			}
-		}
-	}
-	.contactus{
-		h4{
+		.services{
 			border : none;
-			padding-bottom : 0px;
 		}
 	}
-	/*.featuretab{
-		
-		position: relative;
-		margin-bottom: 25px;
-		padding : 15px 30px 15px;
-		margin-top: 20px;
-		border-radius: 5px;
-		.nav-tabs{
-			border-bottom: 1px solid transparent;
-			li{
-				a{
-					border: 1px solid @back;
-					font: 2em/1.2em Amaranth-Regular;
-					font-size:18px;
-					&:hover{
-						color: @back;
-						background-color: @colorwhite;
-					}
-				}
-				&.active>a, &.active>a:hover, &.active>a:focus{
-					color: @colorwhite;
-					background-color: @back;
-					border: 1px solid @darkbackcolor;
-				}
-			}
-		}
-	}*/
 	hr{
 		margin :5px 0px;
 	}
-	footer{
-		background-color : @darkbackcolor;
-		padding:5px;
-		.footlink{
-			ul{
-				color :@colorwhite;
-				list-style: none;
-				li{
-					display:inline;
-					border-right:1px solid #ccc;
-					padding:5px;
-					a{
-						color :@colorwhite;
-						font-size:10px;
-					}
-				}
-			}
-		}
-	}
-	
 	.service{
 		margin-bottom: 10px;
 		margin-top: 10px;
@@ -435,32 +322,16 @@
 			font-size : 18px;
 		}
 	}
-	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
-		border : 1px solid @lightcolor;
-		
-		input,textarea{
-			color:@colorblack;
-		}
-		.btn-info{
-		color:@colorwhite;
-		}
+	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default, .form-control{
+		border : 1px solid @color;
+	}
+	.thumbnail{
+		border-color : @darkbackcolor;
 	}
 	.services{
-			border : none;
-		}
-	.formsec{
-		color : #E5DFDF;
-		border-bottom: 1px solid #ccc;
-		margin-bottom:10px;
-		.form-control{
-			background-color: blue ;
-			/*!important*/
-		}
-		
+		border : none;
 	}
-	.sideimg{
-		margin-top: 20px;
-	}
+	
 	.email{
 		&:hover{
 			text-decoration : none;
@@ -472,103 +343,20 @@
 	.bx-wrapper .bx-controls-direction a {
 		margin-top:-35px;
 	}
-	//aboutus page css
-	.sidebar{
-		.nav-pills{
-			background-color: @darkbackcolor;
-			border-bottom: 4px solid @lightbackcolor;
-			>li{
-				border-right : 1px solid @lightbackcolor;
-				height : 38px;
-				>a, > a:focus{
-					padding-top : 9px;
-					padding-bottom : 9px;
-					color : @colorwhite;
-					font-weight : bold;
-					border:1px solid transparent;
-				} 
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color : @darkcolor;
-					color : @colorwhite;
-					/*border:1px solid @darkbackcolor;*/
-				}
-			}
-		}
-	}
-	.about, .contact, .charges{
-		.table{
-			tbody{
-				tr{
-					th,td{
-						border-color : @lightbackcolor;
-					}
-				}
-			}
-		}
-	}
-	.about{
-		.table{
-			margin-top: 20px;
-		}
-	}
-	.modal-body	{
-		p{
-			color:@colorblack;
-		}
-	}
 	
-	//Common effect
-	.contact, .myjobs{
-		.panel-default {
-			border-color: @lightbackcolor;
-		}
-		.panel{
-			background-color : @back;
-		}
-	}
-	
-	//contactus page css
-	.contact{
-		img{
-			max-height: 110px;
-		}
-	}
-	#googleMap{
-		height:325px;
-	}
-	
-	//gallery
-	.mygallery{
-		.thumbnail{
-			height:400px;
-		}
-	}
-	
-	//testimonials
-	.mytesti{
-		blockquote{
-			font-size : inherit;
-			border-left: 3px solid @lightbackcolor;
-			img{
-				max-height : 70px;
-				display : inline-block;
-				margin-right : 10px;
-			}
-			a{
-				color : @color;
-				font-size : 17.5px;
-			}
-		}
-	}
-	
-	//charges
-	.highlight{
-		color :@back;
-	}
 	footer{
 		margin-top : 10px;
 		color:@lightcolor;
 		font-weight : bold;
+		background-color : @darkbackcolor;
+		padding:5px;
+		a{
+			color :@colorwhite;
+			&:hover{
+				color : @colorwhite;
+				text-decoration : underline;
+			}
+		}
 	}
 	@media (min-width: 320px){
 		.logo{

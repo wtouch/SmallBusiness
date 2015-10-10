@@ -152,17 +152,7 @@
 .projlist {
   border: 1px solid #20003d;
   border-radius: 5px;
-  /*background-color:@back;*/
   padding: 10px;
-}
-.projlist .panel-default {
-  background-color: #0088cc;
-}
-.projlist .panel-default img {
-  border: 2px solid #e4e6e7;
-}
-.projlist .panel-default img:hover {
-  border: 4px solid #0088cc;
 }
 .projlist .project .thumbnail {
   background-color: #ffffff;
@@ -270,7 +260,8 @@
 .featuredProperty .bxslider1 li .row {
   border: 1px solid #20003d;
   box-shadow: 2px 2px 10px #000000;
-  padding: 15px 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border-radius: 5px;
 }
 .featuredProperty .bxslider1 li .sliderImg {
@@ -300,6 +291,13 @@
 .featuredProperty .bxslider1 li .table tbody tr td {
   border: none;
   padding: 3px 10px;
+}
+.propertylist {
+  border: 1px solid #20003d;
+  padding: 15px;
+}
+.propertylist .btn-primary {
+  margin-bottom: 10px;
 }
 .propertylist .panel-default {
   border: 1px solid #20003d;
@@ -476,9 +474,12 @@
   margin-bottom: 25px;
   padding: 1px 30px;
   padding: 10px;
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 .featuretab .nav-tabs {
-  border-bottom: 1px solid #e4e6e7;
+  border-bottom: 1px solid #20003d;
 }
 .featuretab .nav-tabs li a {
   border: 1px solid #20003d;
@@ -500,13 +501,10 @@
   border: 1px solid #e4e6e7;
   padding: 10px;
 }
-.sidebarModule .panel-default {
-  border: none;
-}
 .sidebarModule.sidemenu {
-  /*background-color:@contentback;*/
-  padding: 10px;
-  border: 1px solid #e4e6e7;
+  padding: 15px;
+  border: 1px solid #20003d;
+  border-radius: 5px;
 }
 .sidebarModule.sidemenu ul {
   padding: 0;
@@ -566,6 +564,10 @@
 }
 .about .table {
   margin-top: 20px;
+}
+.contact {
+  border: 1px solid #20003d;
+  border-radius: 5px;
 }
 .infrastructure .thumbnail {
   background-color: #e4e6e7;
@@ -689,6 +691,12 @@
   text-align: center;
   margin-top: 20px;
 }
+.products {
+  border: 1px solid #20003d;
+  border-radius: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 .products .thumbnail img {
   border: 4px solid transparent;
   padding: 6px;
@@ -705,12 +713,6 @@
   text-align: center;
 }
 @media (min-width: 320px) {
-  .products {
-    border: 1px solid #0088cc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 1px;
-  }
   .products .thumbnail {
     height: 430px;
   }
@@ -857,31 +859,28 @@ header {
   display: none;
   position: absolute;
   width: 245px;
+  top: 66px;
   z-index: 999;
-  background-color: #20003d;
+  background-color: #0088cc;
   padding: 12px;
   list-style: none;
   text-align: left;
-  top: 50px;
+  border: 1px solid #20003d;
   border-top-left-radius: 0px;
   transition: all 500ms ease-in-out;
 }
 .navbar-default .navbar-nav > li > ul > li {
-  border-bottom: 1px solid #e4e6e7;
+  border-bottom: 2px solid #0088cc;
   padding: 7px;
 }
 .navbar-default .navbar-nav > li > ul > li > a {
   color: #ffffff;
 }
-.navbar-default .navbar-nav > li > ul > li > a:hover {
+.navbar-default .navbar-nav > li > ul > li:hover > a {
+  color: #ffffff;
   text-decoration: underline;
+  border-color: #005580;
   -webkit-transition: all 0.4s;
-}
-.navbar-default .navbar-nav > li > ul > li:hover {
-  background-color: #0088cc;
-  /*background: -webkit-linear-gradient(right,#ccc,#0D8375);
-							background: -moz-linear-gradient(right,#ccc,#0D8375);
-							background: linear-gradient(right,#ccc,#0D8375);*/
 }
 .navbar-default .navbar-nav > li > ul > li ul {
   list-style: none;
@@ -892,14 +891,13 @@ header {
 .navbar-default .navbar-nav > li > ul > li ul li a {
   text-transform: lowercase;
   font-size: 17px;
-  color: #fff;
+  color: #ffffff;
 }
 .navbar-default .navbar-nav > li:hover > ul {
   display: block;
 }
 .content {
   background-color: #ffffff;
-  border: 1px solid #20003d;
   padding: 0px 20px 20px;
 }
 .subhead {
@@ -936,12 +934,6 @@ a,
 .btn + .btn {
   margin-left: 10px;
 }
-.sections {
-  padding: 10px;
-}
-.contentModule .sections {
-  border-radius: 5px;
-}
 .contentModule .sections img {
   width: 100%;
   padding: 4px;
@@ -949,6 +941,18 @@ a,
 }
 .contentModule .services {
   border: none;
+}
+.sections {
+  padding: 15px;
+}
+.contactus .sections h4 {
+  margin-top: 0px;
+}
+.sections,
+.panel-default,
+.thumbnail {
+  border: 1px solid #20003d;
+  border-radius: 5px;
 }
 .project .navbar {
   background-color: #20003d;
@@ -987,28 +991,6 @@ a,
 }
 hr {
   margin: 5px 0px;
-}
-.searchProperty,
-.sections,
-.enquiry .panel-default,
-.searchProp .panel-default {
-  border: 1px solid #20003d;
-}
-.searchProperty input,
-.sections input,
-.enquiry .panel-default input,
-.searchProp .panel-default input,
-.searchProperty textarea,
-.sections textarea,
-.enquiry .panel-default textarea,
-.searchProp .panel-default textarea {
-  color: #000000;
-}
-.searchProperty .btn-info,
-.sections .btn-info,
-.enquiry .panel-default .btn-info,
-.searchProp .panel-default .btn-info {
-  color: #ffffff;
 }
 .bx-wrapper .bx-controls-direction a {
   margin-top: -35px;

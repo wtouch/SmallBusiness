@@ -10,15 +10,17 @@
 		list-style :none;
 		li{
 			.sliderImg{
-				height :150px;
+				height : 155px;
 				width : 200px;
 				overflow : hidden;
-				border : 2px solid transparent;
+				margin : 0 auto;
 				.slimg{
 					min-height: 150px;
-				}
-				&:hover{
-					border : 2px solid @darkcolor;
+					padding : 4px;
+					border : 3px solid @darkbackcolor;
+					&:hover{ 
+						border : 3px solid @color;
+					}
 				}
 			}
 			.verify{
@@ -50,33 +52,39 @@
 
 //propertiesList 
 .propertylist{
-	border: 1px solid @border;
+
 	border-radius : 5px;
 	color:@colorwhite;
 	padding: 20px 20px 0px;
 	.btn-primary{
 		margin-bottom: 10px;
-		background-color : @back;
+		background-color : @darkbackcolor;
 		color : @colorwhite;
 		border-radius : 0px;
 		font-weight: bold;
 		&:hover{
-			background-color : @darkbackcolor;
+			background-color : @back;
 		}
 	}
 	.panel-default{
-		border-color : @lightbackcolor;
-		/*background-color:@darkbackcolor;*/
+		border-color : @darkbackcolor;
+		background-color:@lightcolor;
 		color : @colorblack;
-		img{
-			max-height: 215px;
-			width : 100%;
-			padding : 4px;
-			border : 3px solid transparent;
-			&:hover{ 
-				border : 3px solid @back;
+		.sliderImg{
+			height : 150px;
+			width : 200px;
+			overflow : hidden;
+			margin : 0 auto;
+			img{
+				min-height: 150px;
+				padding : 4px;
+				border : 3px solid @darkbackcolor;
+				&:hover{ 
+					border : 3px solid @color;
+				}
 			}
 		}
+		
 	}
 	.table{
 		td{
@@ -88,8 +96,8 @@
 		.pagination{
 			li,.disabled{
 				a{
-					background-color: @colorwhite;
-					border-color : @border;
+					background-color: @darkbackcolor;
+					border-color : @colorwhite;
 					
 					&:hover{
 						background-color:@back;
@@ -115,7 +123,7 @@
 		margin-bottom : 10px;
 		padding: 10px 15px;
 		border-radius :5px;
-		border : 1px solid @border;
+		border : 1px solid @colorwhite;
 		h3{
 			border :none;
 		}
@@ -123,7 +131,7 @@
 			tbody{
 				tr{
 					td{
-						border-top : 1px solid @border;
+						border-top : 1px solid @colorwhite;
 					}
 				}
 			}
@@ -151,7 +159,7 @@
 		.mainimg {
 			img {
 				height: 130px;
-				border: 1px solid @colorwhite;
+				border: 1px solid @darkbackcolor;
 			}
 		}
 	}
@@ -225,6 +233,7 @@
 					}
 					td, th{
 						border: 1px solid @darkbackcolor;
+						
 					}
 				}
 			}
@@ -232,12 +241,12 @@
 	}
 	.btn-primary{
 		margin-bottom : 10px;
-		background-color : @back;
+		background-color : @darkbackcolor;
 		color : @colorwhite;
 		border-radius : 0px;
 		font-weight: bold;
 		&:hover{
-			background-color : @darkbackcolor;
+			background-color : @back;
 		}
 	}
 }
