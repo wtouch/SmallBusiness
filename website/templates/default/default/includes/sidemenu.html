@@ -4,7 +4,7 @@
 	{% for x in sidebar %}
 		{% if x.status == 1 %}
 			<li>
-				<a class="{{ x.name | lower | replace({" ":'_'})}}" href="{{ x.url }}">{{ x.name }}</a>
+				<a class="{{ x.name | lower | replace({" ":'_'})}}" href="{{ ((x.url | slice(0, 1) == '/') or (x.url | slice(0, 4) == 'http')) ? x.url : '/' ~ x.url }}">{{ x.name }}</a>
 			</li>
 		{% endif %}
 	{% endfor %}
