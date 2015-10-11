@@ -19,7 +19,7 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		{% if data.template_params %}
+		<!--{% if data.template_params %}
 			<style>	
 				.singleproperty .propDetails .table tbody tr th ,.featuretab .nav-tabs li a, .navbar-default .navbar-nav > li.active > a,.navbar-default .navbar-nav > li.active:hover > a,.navbar-default .navbar-nav > li.active > a:focus,.navbar-default .navbar-nav > li:hover > a,.navbar-default .navbar-nav > li:hover > a:focus,.form-control, .btn-info, .btn-info[disabled], .btn-primary, .pagination > .active > a,.pagination > .active > span,.pagination > .active > a:hover, .pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus,.btn-info:hover,.btn-info[disabled]:hover,.btn-primary:hover,.featuretab .nav-tabs li a:hover{
 					background-color: {{data.template_params.color}};	
@@ -77,12 +77,15 @@
 					background-image: -linear-gradient(top,{{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
 				}
 			</style>
-		{% endif %}
+		{% endif %} -->
+		
 	</head>
 	<body>
-		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+		<marquee direction="right" width="70%"  behavior="alternate">
+			<h1>WeL-Come to WebTouch</h1></marquee>
+		<!-- {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %} -->
 		<header>
-			<div class="container">
+			<!--div class="container">
 				<div class="col-xs-12 col-md-12 col-lg-12">
 					{% if data.website_config.website_logo %}
 					
@@ -92,7 +95,7 @@
 					<img class="logo" src="{{data.business_logo.file_relative_path}}">
 					{% endif %}
 				</div>
-			</div>
+			</div-->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
@@ -103,19 +106,30 @@
 			</div>
 		</header>
 		<nav class="navbar navbar-default">
+			<div class="brand">  
+				<a class="navbar-brand" href="#">{{data.business_name}}</a>
+			</div>
 			<div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
+					
+					<ul class="nav navbar-nav ">
 						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
+					<ul class="nav navbar-nav navbar-right" >
+						<li>Sign up</li>
+						<li>login</li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>
 		</nav>
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-md-12 col-lg-12">
+				<div class="col-lg-3 col-md-3 col-xs-12">
+					
+				</div>
+				<div class="col-xs-12 col-md-9 col-lg-9 img-respons">
 					{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
