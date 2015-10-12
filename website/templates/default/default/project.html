@@ -9,30 +9,46 @@
 		<div class="col-xs-12 col-sm-12 col-lg-12">
 			<nav class="navbar">
 				<ul class="nav navbar-nav">
+					{% if project.overview %}
 					<li {{ projectPage == 'overview' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/overview">Overview</a>
 					</li>
+					{% endif %}
+					{% if project.amenities %}
 					<li {{ projectPage == 'amenities' ? 'class="active"' }}>
-						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/amenities">Amenities/Specifications</a>
+						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/amenities">Amenities</a>
 					</li>
+					{% endif %}
+					{% if project.locationmap %}
 					<li {{ projectPage == 'locationmap' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/locationmap">Location Map</a>
 					</li>
+					{% endif %}
+					{% if project.projecttestimonials %}
 					<li {{ projectPage == 'layoutplan' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/layoutplan">Layout Plan</a>
 					</li>
+					{% endif %}
+					{% if project.projecttestimonials %}
 					<li {{ projectPage == 'floorplans' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/floorplans">Floor Plans</a>
 					</li>
+					{% endif %}
+					{% if project.projecttestimonials %}
 					<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projgallery">Gallery</a>
 					</li>
+					{% endif %}
+					{% if project.projecttestimonials %}
 					<li {{ projectPage == 'projecttestimonials' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projecttestimonials">Testimonials</a>
 					</li>
+					{% endif %}
+					{% if project.projecttestimonials %}
 					<li {{ projectPage == 'projcontact' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projcontact">Contact</a>
 					</li>
+					{% endif %}
 				</ul>
 			</nav>
 		</div>
