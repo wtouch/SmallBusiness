@@ -28,25 +28,32 @@
 }
 .bx-wrapper {
   overflow: hidden;
+  width: 100%;
   border-bottom-right-radius: 50%;
   border-bottom-left-radius: 50%;
   height: 300px;
 }
 .bx-viewport {
   min-height: 300px !important;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
 }
-.bx-viewport .carousslider li {
+.bx-viewport .carousslider ul {
+  overflow: hidden;
+}
+.bx-viewport .carousslider ul li {
   left: 0;
   min-width: 100% !important;
 }
-.bx-viewport .carousslider li img {
+.bx-viewport .carousslider ul li img {
+  overflow: hidden;
   min-height: 450px;
   width: 100%;
 }
 .sidebar .nav-pills {
-  background: -webkit-linear-gradient(top, #28281f, #848a05, #28281f);
-  background: -moz-linear-gradient(top, #28281f, #848a05, #28281f);
-  background: linear-gradient(top, #28281f, #848a05, #28281f);
+  background: -webkit-linear-gradient(top, #28281f, #bac617, #28281f);
+  background: -moz-linear-gradient(top, #28281f, #bac617, #28281f);
+  background: linear-gradient(top, #28281f, #bac617, #28281f);
 }
 .sidebar .nav-pills > li {
   border-right: 1px solid #e99310;
@@ -63,8 +70,10 @@
 .sidebar .nav-pills > li:hover > a:focus,
 .sidebar .nav-pills > li > a:hover,
 .sidebar .nav-pills > li > a:focus {
-  color: white;
-  background-color: #848a05;
+  color: #e99310;
+  background: none;
+  font-weight: bold;
+  transition: 265ms linear;
 }
 .about .table tbody tr th,
 .contact .table tbody tr th,
@@ -72,11 +81,16 @@
 .contact .table tbody tr td {
   border-color: #797a4c;
 }
+.about .table tbody tr a,
+.contact .table tbody tr a {
+  color: #e99310;
+}
 .about .table {
   margin-top: 20px;
 }
 .infrastructure .thumbnail {
   height: 395px;
+  background-color: none;
 }
 .infrastructure .thumbnail img {
   height: 190px;
@@ -108,7 +122,7 @@
 .testimonial blockquote footer cite,
 .featrtesti blockquote footer cite {
   font-size: 17px;
-  color: #848a05;
+  color: #bac617;
 }
 .testimonial blockquote::before,
 .featrtesti blockquote::before {
@@ -226,7 +240,7 @@
   min-height: 150px;
 }
 .featuredProperty .bxslider1 li .sliderImg:hover {
-  border: 2px solid #848a05;
+  border: 2px solid #bac617;
 }
 .featuredProperty .bxslider1 li .table {
   margin-bottom: 10px;
@@ -282,7 +296,7 @@
   width: 195px;
   overflow: hidden;
   margin: 0 auto;
-  border: 2px solid #848a05;
+  border: 2px solid #bac617;
 }
 .singleproperty .property .mainimg img {
   min-height: 175px;
@@ -360,12 +374,12 @@
   margin-top: 20px;
 }
 .singleproperty .propDetails .table tbody tr th {
-  background-color: #848a05;
+  background-color: #bac617;
   color: white;
 }
 .singleproperty .propDetails .table tbody tr td,
 .singleproperty .propDetails .table tbody tr th {
-  border: 1px solid #848a05;
+  border: 1px solid #bac617;
 }
 .singleproperty .btn-primary {
   margin-bottom: 10px;
@@ -510,6 +524,7 @@
 }
 .homeproject .projsnap .viewproperty a {
   text-decoration: underline;
+  color: white;
 }
 .homeproject .projsnap .viewproperty a:hover {
   text-decoration: none;
@@ -521,7 +536,6 @@
 .homeproject #carousel .carousel-inner .item > img {
   width: auto;
   min-height: 500px;
-  border-radius: 50%;
 }
 .homeproject #carousel a.left.carousel-control {
   left: 40px;
@@ -540,6 +554,9 @@
   height: 20px;
   width: auto;
 }
+.project ul.nav.navbar-nav a {
+  color: white;
+}
 .project ul.nav.navbar-nav > li > a,
 .project ul.nav.navbar-nav > li > a:focus {
   padding: 9px 8px;
@@ -556,7 +573,7 @@
   float: left;
 }
 .project .projectgallery .thumbnail.floor {
-  height: 275px;
+  height: 300px;
 }
 .project .projectgallery .thumbnail .projectImags {
   width: 205px;
@@ -569,6 +586,7 @@
 }
 .projlist .project .thumbnail {
   height: 385px;
+  border: 1 px solid transparent;
 }
 .projlist .project .thumbnail .projectimg {
   width: 205px;
@@ -580,6 +598,9 @@
   min-height: 170px;
   border: 2px solid transparent;
   padding: 4px;
+}
+.projlist .project .thumbnail .projectimg img:hover {
+  border: 2px solid #292920;
 }
 .projlist .project .thumbnail .caption {
   padding: 9px 5px;
@@ -665,6 +686,17 @@
 .services .servdesc .readmore {
   text-align: center;
   margin-top: 10px;
+  background: linear-gradient(#e99310, #bac617);
+}
+.services .servdesc .readmore {
+  text-align: center;
+  margin-top: 10px;
+  background: linear-gradient(#bac617, #e99310);
+}
+.services .servdesc .readmore:active {
+  text-align: center;
+  margin-top: 10px;
+  background-color: none;
 }
 .services .servdesc h4 {
   text-align: center;
@@ -737,6 +769,7 @@ body {
 }
 .container {
   max-width: 992px !important;
+  background-color: #28281f;
 }
 .logo {
   height: 80px;
@@ -766,8 +799,9 @@ a:hover,
   padding: 0px;
 }
 .navbar-toggle {
-  border: 1px solid #848a05;
+  border: 1px solid #bac617;
   margin-top: 8px;
+  background-color: #e99310;
 }
 .navbar-toggle .icon-bar {
   background-color: #797a4c;
@@ -800,7 +834,7 @@ a:hover,
   font: bold 15px/1em Arial, Helvetica, sans-serif;
   position: relative;
   text-transform: uppercase;
-  border: 3px solid transparent;
+  border: none;
 }
 .navbar-default .navbar-nav > li.active > a,
 .navbar-default .navbar-nav > li.active:hover > a,
@@ -809,11 +843,11 @@ a:hover,
 .navbar-default .navbar-nav > li:hover > a:focus {
   /*background : linear-gradient(@back, #FF6F00);*/
   /*background: linear-gradient(#F3C22C,#F97115);*/
-  background: linear-gradient(#292920 75%, #848a05);
-  border: 3px solid #797a4c;
+  background: linear-gradient(#292920 75%, #bac617);
+  border-top: 3px solid transparent;
   color: #e99310;
   padding: 22px 15px;
-  margin-top: -12px;
+  border-right: 2px solid white;
 }
 .navbar-default .navbar-nav > li > ul {
   display: none;
@@ -822,7 +856,7 @@ a:hover,
   z-index: 999;
   /*background : linear-gradient(@back, @color);*/
   /*background-color:@darkbackcolor;*/
-  background: linear-gradient(#6479f5, #e8e9e3 3%);
+  background: #28281f;
   padding: 2px;
   list-style: none;
   text-align: left;
@@ -836,16 +870,17 @@ a:hover,
   color: white;
 }
 .navbar-default .navbar-nav > li > ul > li > a:hover {
-  color: white;
+  color: #e99310;
 }
 .navbar-default .navbar-nav > li > ul > li:hover {
   /*background : linear-gradient(@darkcolor, @darkbackcolor);*/
   /*background : linear-gradient(@back, #FF6F00);*/
-  background: linear-gradient(#ff9800, #f57f17);
+  background: linear-gradient(#292920 75%, #bac617);
+  border-top: 2px solid transparent;
   -webkit-transition: all 0.4s;
 }
 .navbar-default .navbar-nav > li > ul > li ul {
-  background: linear-gradient(#28281f, #ff6f00);
+  background: #28281f;
   border: 1px solid #797a4c;
   list-style: none;
   display: none;
@@ -855,16 +890,19 @@ a:hover,
   padding: 2px;
 }
 .navbar-default .navbar-nav > li > ul > li ul li {
+  background: #28281f;
   padding: 10px;
 }
 .navbar-default .navbar-nav > li > ul > li ul li a {
   color: white;
 }
 .navbar-default .navbar-nav > li > ul > li ul li:hover {
-  background: linear-gradient(#28281f, #ff6f00);
+  background: linear-gradient(#292920 75%, #bac617);
+  border-top: 2px solid #797a4c;
+  color: #292920;
 }
 .navbar-default .navbar-nav > li > ul > li ul li:hover a {
-  color: white;
+  color: #e99310;
 }
 .navbar-default .navbar-nav > li > ul > li:hover ul {
   display: block;
@@ -873,7 +911,7 @@ a:hover,
   display: block;
 }
 .content {
-  background-color: #848a05;
+  background-color: #28281f;
   border-radius: 7px;
   margin-top: 15px;
   color: white;
@@ -908,12 +946,19 @@ h2 {
 .sidebarModule .panel,
 .sidebarModule .sections,
 .contentModule .sections {
-  background: transparent;
+  background: #797a4c;
   border: 1px solid #797a4c;
   border-radius: 4px;
 }
 .featured_services .sections {
   border: none;
+}
+.featured_services .sections h3 {
+  color: #bac617;
+}
+.featured_services .sections h4 {
+  color: #28281f;
+  padding-bottom: 2px;
 }
 .form-control {
   background: transparent;
@@ -926,32 +971,39 @@ h2 {
 .btn-primary {
   border: none;
   /*background: linear-gradient(@lightbackcolor 75%,@darkcolor);*/
-  background: linear-gradient(#6479f5, #e8e9e3);
+  background: linear-gradient(#e99310, #bac617);
   color: white;
   font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 }
 .btn-info:hover,
 .btn-primary:hover,
 .btn-info:hover,
-.btn-primary:hover {
-  background-color: #797a4c;
+.btn-primary:hover,
+.btn-info:active,
+.btn-primary:active {
+  background-color: linear-gradient(#bac617, #292920);
   color: white;
 }
 .subhead {
-  font-size: 18px;
-  /*background : linear-gradient(#536DFE, @darkbackcolor);*/
-  /*background: linear-gradient(#F57F17 75%,#F9A825);*/
-  /*background-color:@color;*/
-  /*background: -linear-gradient(#6479F5,@color);*/
-  background: linear-gradient(#6479f5, #e8e9e3);
-  border-radius: 7px;
-  color: white;
+  font-size: 24px;
+  background-color: #797a4c;
+  color: #bac617 !important;
   padding: 4px 15px 12px;
   position: relative;
+  bottom: -15px;
+  width: 200px;
+  margin-left: 50px;
+  height: 50px;
+  /* top: 20px; */
+  padding: 10px;
+  /* text-align: center; */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
 }
 hr {
-  border-style: dashed;
-  border-color: #28281f;
+  border-style: none;
+  border-color: none;
   margin: 0px 0px 10px;
 }
 .sidebarModule .sections,
@@ -990,11 +1042,20 @@ hr {
   color: white;
 }
 footer {
-  margin-top: 15px;
+  background-image: radial-gradient(#28281f, black, #797a4c);
+  margin-top: -5px;
   padding: 15px 0;
+  color: white;
+}
+footer a {
+  color: #e99310;
 }
 * {
   transition: 300ms;
+}
+.thumbnail {
+  border: 1px solid #e99310 !important;
+  background-color: #797a4c;
 }
 @media (max-width: 540px) {
   header .navbar {
@@ -1009,11 +1070,11 @@ footer {
   header .navbar-default .navbar-nav > li:hover > a,
   header .navbar-default .navbar-nav > li:hover > a:focus,
   header .navbar-default .navbar-nav > li:hover > a:focus {
-    background: linear-gradient(#848a05, #797a4c);
+    background: linear-gradient(#bac617, #797a4c);
     top: 0px;
     padding: 10px 15px;
     margin-top: 0px;
-    background-color: #848a05;
+    background-color: #bac617;
     border: 1px solid #797a4c;
     color: white;
   }
@@ -1028,7 +1089,7 @@ footer {
   .navbar-default .navbar-nav > li:hover > a,
   .navbar-default .navbar-nav > li:hover > a:focus,
   .navbar-default .navbar-nav > li:hover > a:focus {
-    background-color: #848a05;
+    background-color: #bac617;
     margin-top: 0px;
     padding: 10px 17px;
     top: 0px;

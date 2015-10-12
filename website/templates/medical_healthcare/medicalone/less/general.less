@@ -29,24 +29,30 @@
 	}
 	.bx-wrapper{
 		overflow : hidden;
+		width:100%;
 		border-bottom-right-radius : 50%;
 		border-bottom-left-radius : 50%;
 		height:300px;
 	}
 	.bx-viewport{
-		
 		min-height : 300px !important;
+		border-bottom-right-radius : 50%;
+		border-bottom-left-radius : 50%;
 		.carousslider{
-			li{
-				left:0;
-				//min-height : 300px;
-				min-width : 100% !important;
-				img{
-					min-height:450px;
-					width : 100%;
+			ul{
+				overflow:hidden;
+				li{
+					left:0;
+					//min-height : 300px;
+					min-width : 100% !important;
+					img{
+						overflow : hidden;
+						min-height:450px;
+						width : 100%;
+					}
 				}
-			}
-		} 
+			} 
+		}
 	}
 	//aboutus page css
 	.sidebar{
@@ -61,8 +67,10 @@
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					color : @colorwhite;
-					background-color: @darkcolor;
+					color : @lightcolor;
+					background:none;
+					font-weight:bold;
+					transition: 265ms linear;
 				}
 			}
 		}
@@ -73,6 +81,9 @@
 				tr{
 					th,td{
 						border-color : @darkbackcolor;
+					}
+					a{
+					color:@lightcolor;
 					}
 				}
 			}
@@ -86,6 +97,7 @@
 	.infrastructure{
 		.thumbnail{
 			height: 395px;
+			background-color:none;
 			img{
 				height : 190px;
 			}

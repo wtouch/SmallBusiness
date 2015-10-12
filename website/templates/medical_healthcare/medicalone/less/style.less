@@ -1,12 +1,12 @@
 
     @color:#E8E9E3;//white
 	@lightcolor:#E99310;//orange color
-	@darkcolor : #848A05;//darkcoloronly
+	@darkcolor : #BAC617;//darkcoloronly green shade
 
 	@colorwhite:white;
 	@colorblack:black;
 	
-	@back:#28281F;
+	@back:#28281F;//content background
 	@lightbackcolor:#292920;//contentcolor
 	@darkbackcolor:#797A4C;//background-color
 	
@@ -65,6 +65,7 @@
 	}
 	.container{
 		max-width : 992px !important;
+		background-color:@back;
 	}
 	.logo {
 		height: 80px;
@@ -93,6 +94,7 @@
 	.navbar-toggle {
 		border : 1px solid @darkcolor;
 		margin-top : 8px;
+		background-color:@lightcolor;
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @darkbackcolor;
@@ -131,17 +133,18 @@
 					font : bold 15px/1em Arial, Helvetica, sans-serif;
 					position : relative;
 					text-transform : uppercase;
-					border : 3px solid transparent;
+					border : none;
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					/*background : linear-gradient(@back, #FF6F00);*/
 					/*background: linear-gradient(#F3C22C,#F97115);*/
 					background: linear-gradient(@lightbackcolor 75%,@darkcolor);
-					border: 3px solid @darkbackcolor;
+					border-top: 3px solid transparent;
 					color : @lightcolor;
 					padding : 22px 15px;
-					margin-top : -12px;
+					border-right:2px solid @colorwhite;
 				}
+				
 				> ul{
 					display: none;
 					position: absolute;
@@ -149,32 +152,29 @@
 					z-index: 999;
 					/*background : linear-gradient(@back, @color);*/
 					/*background-color:@darkbackcolor;*/
-					background: linear-gradient(#6479F5,@color 3%);
-					
-					
-					
+					background: @back;
 					padding: 2px;
 					list-style: none;
 					text-align: left;
 					>li{
-						
 						padding : 10px;
 						text-transform : uppercase;
 						position : relative;
 						>a{
-							color : @colorwhite;
-							&:hover{
 								color : @colorwhite;
+							&:hover{
+								color : @lightcolor;
 							}
 						}
 						&:hover{
 							/*background : linear-gradient(@darkcolor, @darkbackcolor);*/
 							/*background : linear-gradient(@back, #FF6F00);*/
-							background : linear-gradient(#FF9800, #F57F17);
+							background: linear-gradient(@lightbackcolor 75%,@darkcolor);
+							border-top: 2px solid transparent;
 							-webkit-transition: all 0.4s;
 						}
 						ul{
-							background : linear-gradient(@back, #FF6F00);
+					        background:@back;
 							border:1px solid @darkbackcolor;
 							list-style: none;
 							display : none;
@@ -183,14 +183,17 @@
 							width: 180px;
 							padding : 2px;
 							li{
+							    background:@back;
 								padding : 10px;
 								a{
 									color : @colorwhite;
 								}
 								&:hover{
-								background : linear-gradient(@back, #FF6F00);
+								background: linear-gradient(@lightbackcolor 75%,@darkcolor);
+								border-top:2px solid @darkbackcolor;
+								color : @lightbackcolor;
 									a{
-										color : @colorwhite;
+										color : @lightcolor;
 									}
 								}
 							}
@@ -211,7 +214,7 @@
 	}
 	
 	.content{
-		background-color : @darkcolor;
+		background-color : @back;
 		border-radius : 7px;
 		margin-top : 15px;
 		color:@colorwhite;
@@ -240,13 +243,21 @@
 		font-weight:bold;
 	}
 	.sidebarModule .panel,.sidebarModule .sections, .contentModule .sections{
-		background : transparent;
+		background : @darkbackcolor;
 		border:1px solid @darkbackcolor;
 		border-radius : 4px;
 	}
 	.featured_services{
 		.sections{
 			border : none;
+			h3{
+			color:@darkcolor;
+			
+			}
+			h4{
+			color:@back;
+			padding-bottom:2px;
+			}
 		}
 	}
 	.form-control{
@@ -259,29 +270,37 @@
 	.btn-info,.btn-primary{
 		border : none;
 		/*background: linear-gradient(@lightbackcolor 75%,@darkcolor);*/
-		background: linear-gradient(#6479F5,@color);
+		background: linear-gradient(@lightcolor,@darkcolor);
 		color : @colorwhite;
 		font: bold 13px/1.5em Arial, Helvetica, sans-serif;
-		&:hover, &:hover{
-			background-color:@darkbackcolor;
+		&:hover, &:hover, &:active{
+			background-color:linear-gradient(@darkcolor,@lightbackcolor);
 			color : @colorwhite;
 		}
 	}
 	.subhead{
-		font-size: 18px;
-		/*background : linear-gradient(#536DFE, @darkbackcolor);*/
-		/*background: linear-gradient(#F57F17 75%,#F9A825);*/
-		/*background-color:@color;*/
-		/*background: -linear-gradient(#6479F5,@color);*/
-		background: linear-gradient(#6479F5,@color);
-		border-radius : 7px;
-		color : @colorwhite;
-		padding: 4px 15px 12px;
-		position : relative;
-	}
+			font-size: 24px;
+			background-color:@darkbackcolor;
+			color: @darkcolor !important;
+			padding: 4px 15px 12px;
+			position: relative;
+			bottom: -15px;
+			width: 200px;
+			margin-left: 50px;
+			height: 50px;
+			/* top: 20px; */
+			padding: 10px;
+			
+			/* text-align: center; */
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			text-align: center;
+			
+			
+		}
 	hr{
-		border-style:dashed;
-		border-color:@back;
+		border-style:none;
+		border-color:none;
 		margin: 0px 0px 10px;
 	}
 	.sidebarModule, .contentModule{
@@ -312,13 +331,21 @@
 		color : @colorwhite;
 	}
 	footer{
-		margin-top : 15px;
+	    background-image:radial-gradient(@back,@colorblack  ,@darkbackcolor);
+		margin-top : -5px;
 		padding: 15px 0;
+		color:@colorwhite;
+		a{
+		color:@lightcolor;
+		}
 	}
 	*{
 		transition:300ms;
 	}
-	
+	.thumbnail{
+	border:1px solid @lightcolor !important;
+	background-color:@darkbackcolor;
+	}
 	@media (max-width: 540px){
 		header {
 			.navbar{
