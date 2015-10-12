@@ -26,7 +26,7 @@
 	}
 	.container{
 		max-width : 992px !important;
-		border:1px solid pink;
+		border:1px solid @back;
 	}
 	body{
 		background-color:@darkbackcolor;
@@ -83,6 +83,10 @@
 		margin:15px;
 		
 	}
+	.navbar{
+		margin-left:-15px;
+		margin-right:-15px;
+	}
 	.navbar-default {
 		/*background-image: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
 		background-image: -moz-linear-gradient(top, @lightbackcolor, @darkbackcolor);
@@ -90,8 +94,6 @@
 		border : none;
 		border-radius: 0;
 		top:0px;
-		margin-left: -15px;
-		margin-right: -15px;
 		.navbar-nav{
 			> li{
 				text-transform:uppercase;
@@ -120,7 +122,7 @@
 					top : 53px;
 					z-index: 999;
 					display: none;
-					background : transparent;
+					background : @back;
 					border: 3px solid @lightcolor;
 					border-radius:3px;
 					border-top-left-radius: 0px;
@@ -155,21 +157,28 @@
 			}
 		}
 	}
-	
 	.thumbnail{
-		display:block;
-		height: 480px;
-		width: 280px;
-		margin-left:-5px;
-		background:transparent;
-		border:1px solid transparent;
-		border:1px solid @back;
+	background-color:@darkbackcolor;
+	border:1px solid @back;
+	height: 480px;
+	overflow:hidden;
+	top: -20px;
+	}
+	.btn-info{
+		margin-left:75px;
+	
 	}
 	.img-respons{
 		height: 480px;
 		min-width:70%;
-		//border:1px solid @back;
 		overflow:hidden;
+		top: -20px;
+		margin-right: -15px;
+		margin-left: -12px; 
+	 
+	}
+	.services{
+	background-color:@colorwhite;
 	}
 	.subhead {
 		position: relative;
@@ -177,34 +186,25 @@
 		padding: 4px 10px;
 		text-align: center;
 		color : @back;
-	/*	background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
+		/*background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
 		background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
 		background: linear-gradient(top, @lightcolor, @darkcolor);*/
 		border : 1px solid @lightcolor;
 		border-radius: 5px;
 		box-shadow : 0px 1px 2px @back;
-	
 	}
-	 .sidemenu,.tab-content{
+	.content, .sections, .sidemenu,.tab-content{
 		background-color : @back;
-		border:1px solid @darkbackcolor;
+		//border:1px solid @darkbackcolor;
 		border-radius : 4px;
 	}
-	.sections{
-		    margin: -20px;
-			margin-top: -182px;
-	}
 	.content{
-		background-color:@colorwhite;
-		padding: 0px 20px 20px;
-		margin-right: -15px;
-		margin-left: -15px;
-		margin-top: -20px;
-		height: 260px;
+		margin-top : 20px;
+		padding : 0px 20px 20px;
 	}
 	.sections{
-		padding: 15px;
-		margin-top: -375px;
+		padding:15px;
+		margin-top:-20px;
 	}
 	.sidebarModule{
 		.panel-body{
@@ -250,7 +250,6 @@
 		background-color : @color;
 		color : @back;
 	}
-
 	.btn-info, .btn-info[disabled], .btn-primary{
 		background-color: @color;
 		color : @back;
@@ -265,7 +264,6 @@
 		transition-property: color;
 		-webkit-transition-duration: 0.3s;
 		transition-duration: 0.3s;
-		margin-left: 95px;
 		&:before{
 			content: "";
 			position: absolute;
@@ -326,9 +324,9 @@
 		padding-top : 10px;
 		color:@color;
 		font-weight : bold;
-		/*background: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
+		background: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
 		background: -moz-linear-gradient(top,  @lightbackcolor, @darkbackcolor);
-		background: linear-gradient(top,  @lightbackcolor, @darkbackcolor);*/
+		background: linear-gradient(top,  @lightbackcolor, @darkbackcolor);
 	}
 	.navbar-toggle{
 		background-color : @darkcolor;
