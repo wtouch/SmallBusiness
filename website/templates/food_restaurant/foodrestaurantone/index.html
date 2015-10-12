@@ -106,12 +106,12 @@
 			</div>
 		</header>
 		<div class="container">
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default navbar-right">
 			
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav ">
 						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 					</ul>
 					
@@ -131,7 +131,9 @@
 					{%endif%}
 				</div>
 			</div> 
-			<div class="row"> 
+		
+			
+			<<!-- div class="row"> 
 				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-md-push-4 col-lg-push-3 col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12 ' }}">
 					<div class="content">{% include contentPath %}</div>
 					{%if modules.contentModule.featured_properties %}
@@ -161,8 +163,12 @@
 				</div>
 				{% endif %}
 				
-			</div>
+			</div> -->
+			
 			<div class="row">
+			{%if modules.contentModule.featured_products %}
+						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+					{%endif%}
 				<div class="col-xs-12 col-md-12 col-lg-12">
 					{% if (modules.contentModule.featured_services)%}
 					<div class="featuretab">
@@ -197,9 +203,7 @@
 					</div>
 					{% endif %}
 						
-					{%if modules.contentModule.featured_products %}
-						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-					{%endif%}
+					
 				</div>
 			</div>
 		</div>
