@@ -1,0 +1,33 @@
+<div class="main-content">
+	<ng-include src="'modules/component/toolbar.html'"></ng-include>
+	<div class="row">
+		<div class="col-sm-12">
+
+			<input type="file" id="website_logo" ng-file-select ng-multiple="false" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ng-file-change= "uploads($files)" ng-model="website_logo">
+{{website_logo}}
+			<div class="table-responsive">		
+				<table class="table table-bordered table-hover">
+					<thead>
+						<th>Sr.No.</th>
+						<th>Site/Domain Name</th>
+						<th>Site Online</th>
+						<th>Module Copied</th>
+						<th>Payment Received</th>
+						<th>Payment Type</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in list">
+							<td>{{((currentPage - 1) * pageItems) + $index + 1 }}</td>
+							<td>{{x.site_domain_name}}</td>
+							<td>{{x.site_online}}</td>
+							<td>{{x.module_copied}}</td>
+							<td>{{x.payment_received}}</td>
+							<td>{{x.payment_type}}</td>
+						</tr>
+					</tbody>					
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+	
