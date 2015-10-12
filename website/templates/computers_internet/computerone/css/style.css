@@ -719,6 +719,7 @@
 }
 .container {
   max-width: 992px !important;
+  border: 1px solid pink;
 }
 body {
   background-color: #303030;
@@ -774,12 +775,14 @@ body {
   margin: 15px;
 }
 .navbar-default {
-  background-image: -webkit-linear-gradient(top, #606060, #303030);
-  background-image: -moz-linear-gradient(top, #606060, #303030);
-  background-image: -linear-gradient(top, #606060, #303030);
+  /*background-image: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
+		background-image: -moz-linear-gradient(top, @lightbackcolor, @darkbackcolor);
+		background-image: -linear-gradient(top, @lightbackcolor, @darkbackcolor);*/
   border: none;
   border-radius: 0;
   top: 0px;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 .navbar-default .navbar-nav > li {
   text-transform: uppercase;
@@ -814,7 +817,7 @@ body {
   top: 53px;
   z-index: 999;
   display: none;
-  background: #202020;
+  background: transparent;
   border: 3px solid #6699ff;
   border-radius: 3px;
   border-top-left-radius: 0px;
@@ -844,10 +847,18 @@ body {
 .navbar-default .navbar-nav > li:hover > ul {
   display: block;
 }
+.thumbnail {
+  display: block;
+  height: 480px;
+  width: 280px;
+  margin-left: -5px;
+  background: transparent;
+  border: 1px solid transparent;
+  border: 1px solid #202020;
+}
 .img-respons {
   height: 480px;
   min-width: 70%;
-  border: 5px solid #202020;
   overflow: hidden;
 }
 .subhead {
@@ -856,25 +867,30 @@ body {
   padding: 4px 10px;
   text-align: center;
   color: #202020;
-  background: -webkit-linear-gradient(top, #6699ff, #85adff);
-  background: -moz-linear-gradient(top, #6699ff, #85adff);
-  background: linear-gradient(top, #6699ff, #85adff);
+  /*	background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
+		background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
+		background: linear-gradient(top, @lightcolor, @darkcolor);*/
   border: 1px solid #6699ff;
   border-radius: 5px;
   box-shadow: 0px 1px 2px #202020;
 }
-.content,
-.sections,
 .sidemenu,
-.thumbnail,
 .tab-content {
   background-color: #202020;
   border: 1px solid #303030;
   border-radius: 4px;
 }
+.sections {
+  margin: -20px;
+  margin-top: -182px;
+}
 .content {
-  margin-top: 20px;
+  background-color: #ffffff;
   padding: 0px 20px 20px;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: -20px;
+  height: 260px;
 }
 .sections {
   padding: 15px;
@@ -940,6 +956,7 @@ hr {
   transition-property: color;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
+  margin-left: 95px;
 }
 .btn-info:before,
 .btn-info[disabled]:before,

@@ -81,8 +81,7 @@
 		
 	</head>
 	<body>
-		<marquee direction="right" width="70%"  behavior="alternate">
-			<h1>WeL-Come to WebTouch</h1></marquee>
+		
 		<!-- {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %} -->
 		<header>
 			<!--div class="container">
@@ -104,12 +103,12 @@
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-		</header>
+		
 		<nav class="navbar navbar-default">
 			<div class="brand">  
 				<a class="navbar-brand" href="#">{{data.business_name}}</a>
 			</div>
-			<div class="container">
+			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -124,24 +123,61 @@
 				</div><!-- /.navbar-collapse -->
 			</div>
 		</nav>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-3 col-xs-12">
+		</header>
+			<marquee direction="right" width="80%"  behavior="alternate">
+			<h1>WeL-Come to WebTouch</h1></marquee>
+	<div class="container">
+		<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+		</div>
+		<nav class="navbar navbar-default">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					
+					<ul class="nav navbar-nav ">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
+					<ul class="nav navbar-nav navbar-right" >
+						<li>Sign up</li>
+						<li>login</li>
+					</ul>
 				</div>
-				<div class="col-xs-12 col-md-9 col-lg-9 img-respons">
+		</nav>
+			<div class="row">
+				<div class="col-lg-3 col-md-3 col-xs-12 proddesc">
+					<div class="thumbnail">
+						<img src="{{path}}img/key.png"/>
+						<h4>{{x.product_service_name}}</h4>
+					<div class="description">{{ x.description|length > 75 ?x.description|slice(start, 75) : x.description }}</div>
+					<div class="readmore">
+						<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
+					</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-9 col-lg-9 ">
+					<div class="img-respons">
 					{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
 					{%if modules.headerModule.homeproject %}
 					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
+					</div>
 				</div>
 			</div> 
 			<div class="row">
-				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-md-push-4 col-lg-push-3 col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12 ' }}">
-					<div class="content">{% include contentPath %}</div>
-					{%if modules.contentModule.featured_properties %}
+				<!-- <div class="{{ (modules.sidebarModule >=1 ) ? 'col-md-push-4 col-lg-push-3 col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12 ' }}"> -->
+				<div class="col-lg-12 col-md-12 col-xs-12">
+					<div class="content"><!-- {% include contentPath %} -->
+					</div>
+					
+					<!-- {%if modules.contentModule.featured_properties %}
 						{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
 						
 						{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
@@ -149,7 +185,8 @@
 					{%endif%}
 					{%if modules.contentModule.featured_projects %}
 						{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-					{%endif%}					
+					{%endif%} -->
+					
 				</div>
 				{% if modules.sidebarModule >= 1 %}
 				<div class="col-md-pull-8 col-lg-pull-9 col-xs-12 col-md-4 col-lg-3">
@@ -204,12 +241,12 @@
 					</div>
 					{% endif %}
 						
-					{%if modules.contentModule.featured_products %}
-						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-					{%endif%}
+					
 				</div>
 			</div>
 		</div>
+		
+	</div>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html> 
