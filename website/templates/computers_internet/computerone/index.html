@@ -81,8 +81,7 @@
 		
 	</head>
 	<body>
-		<marquee direction="right" width="70%"  behavior="alternate">
-			<h1>WeL-Come to WebTouch</h1></marquee>
+		
 		<!-- {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %} -->
 		<header>
 			<!--div class="container">
@@ -104,13 +103,12 @@
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-		</header>
+		
 		<nav class="navbar navbar-default">
 			<div class="brand">  
 				<a class="navbar-brand" href="#">{{data.business_name}}</a>
 			</div>
-			<div class="container">
-				<!-- Brand and toggle get grouped for better mobile display -->
+							<!-- Brand and toggle get grouped for better mobile display -->
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					
@@ -122,11 +120,52 @@
 						<li>login</li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
-			</div>
+			
 		</nav>
+		
+		</header>
+		<marquee direction="right" width="85%"  behavior="alternate">
+			<h1>WeL-Come to WebTouch</h1></marquee>
 		<div class="container">
+		<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+		
+		<nav class="navbar navbar-default">
+			<!-- <div class="brand">  
+				<a class="navbar-brand" href="#">{{data.business_name}}</a>
+			</div> -->
+							<!-- Brand and toggle get grouped for better mobile display -->
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					
+					<ul class="nav navbar-nav ">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
+					<ul class="nav navbar-nav navbar-right" >
+						<li>Sign up</li>
+						<li>login</li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			
+		</nav>
+		
 			<div class="row">
-				<div class="col-lg-3 col-md-3 col-xs-12">
+				<div class="col-lg-3 col-md-3 col-xs-12 thumbnail prodesc ">
+					<div>
+						<img  src="img/key.png" alt="..." />
+					</div>
+					<h4>{{x.product_service_name}}</h4>
+					<div class="description">{{ x.description|length > 75 ?x.description|slice(start, 75) : x.description }}
+					</div>
+					<div class="readmore">
+						<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
+					</div>
 					
 				</div>
 				<div class="col-xs-12 col-md-9 col-lg-9 img-respons">
@@ -138,9 +177,11 @@
 					{%endif%}
 				</div>
 			</div> 
-			<div class="row">
+			<div class="content"> 
+			<div class="row ">
+			
 				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-md-push-4 col-lg-push-3 col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12 ' }}">
-					<div class="content">{% include contentPath %}</div>
+					<div class="content">{% include contentPath %} </div>
 					{%if modules.contentModule.featured_properties %}
 						{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
 						
@@ -169,11 +210,15 @@
 				{% endif %}
 				
 			</div>
-			<div class="row">
-				<div class="col-xs-12 col-md-12 col-lg-12">
-					{% if (modules.contentModule.featured_services)%}
+			</div>
+			<div class="row services">
+				{%if modules.contentModule.featured_services %}
+					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+				{%endif%}
+				<!-- <div class="col-xs-12 col-md-12 col-lg-12">
+					<!-- {% if (modules.contentModule.featured_services)%} - ->
 					<div class="featuretab">
-						<!-- Nav tabs -->
+						<!-- Nav tabs - ->
 						<ul class="nav nav-tabs" role="tablist">
 							{%if modules.contentModule.featured_services %}
 							<li role="presentation" class="active">
@@ -187,7 +232,7 @@
 								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
 							</li>
 						</ul>
-						<!-- Tab panes -->
+						<!-- Tab panes  - ->
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="featrserv">
 							{%if modules.contentModule.featured_services %}
@@ -207,7 +252,7 @@
 					{%if modules.contentModule.featured_products %}
 						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
 					{%endif%}
-				</div>
+				</div> -->
 			</div>
 		</div>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
