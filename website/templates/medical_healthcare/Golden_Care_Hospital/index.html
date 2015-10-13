@@ -87,8 +87,19 @@
 		</div>  -->
 		<header>
 			<div class="container">
-				<div class="col-xs-12">
-					<div class="logo"><h1 class="text-center">{{data.business_name}}</h1></div>
+				<div class="col-xs-2">
+					<div class="logo">
+						<img class="logo" src="{{data.business_logo.file_relative_path}}">
+					</div>
+				</div>
+				<div class="col-xs-10">
+					<div class="heading">
+						<h1 class="text-center">{{data.business_name}}</h1>
+						{% if data.business_info.tagline %}
+							<p>{{data.business_info.tagline}}</p>
+						{% endif %}
+					</div>
+					<p class="cnct text-center"><strong>Website :</strong> {{data.contact_profile.contact_website}}, <strong>Contact :</strong> {{data.contact_profile.mobile}}</p>
 				</div>
 			</div>
 		</header>
