@@ -69,13 +69,6 @@
 						
 					}
 				}
-				/* CREATE TABLE  `excel` (
-				 `id` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-				 `eid` VARCHAR( 100 ) NOT NULL ,
-				 `name` VARCHAR( 200 ) NOT NULL ,
-				 `email` VARCHAR( 200 ) NOT NULL ,
-				 `dob` VARCHAR( 40 ) NOT NULL
-				) ENGINE = MYISAM ; */
 				$data['cols'] = $tableCols;
 				$data['tableData'] = $tableArr;
 				$response = $db->insert($table, $data);
