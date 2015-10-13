@@ -95,8 +95,11 @@
 				<div class="col-xs-10">
 					<div class="heading">
 						<h1 class="text-center">{{data.business_name}}</h1>
+						{% if data.business_info.tagline %}
+							<p>{{data.business_info.tagline}}</p>
+						{% endif %}
 					</div>
-					<p class="cnct text-center"><strong>E-mail :</strong> {{data.contact_profile.email}}, <strong>Contact :</strong> {{data.contact_profile.mobile}}</p>
+					<p class="cnct text-center"><strong>Website :</strong> {{data.contact_profile.contact_website}}, <strong>Contact :</strong> {{data.contact_profile.mobile}}</p>
 				</div>
 			</div>
 		</header>
