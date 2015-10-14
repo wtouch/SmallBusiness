@@ -26,17 +26,19 @@
 	}
 	.container{
 		max-width : 992px !important;
-		border:1px solid @back;
+		box-shadow:3px 3px 3px @darkcolor;
+		border: 1px solid @darkbackcolor;
 	}
 	body{
 		background-color:@darkbackcolor;
 		color: @darkcolor;
 	}
 	.sociallinks{
-		top: 50%;
+		top: 45%;
 		position: fixed;
 		z-index : 999;
-		width : 5px;
+		width : 20px;
+		left:0px;
 		ul{
 			list-style : none;
 			li{
@@ -115,9 +117,9 @@
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					color : @back;
 					background:linear-gradient(to right,@darkcolor,@darkbackcolor,@darkcolor);
-					border: 2px solid @lightcolor;
+					border: 1px solid @darkbackcolor;
 					top: -8px;
-					box-shadow:3px 3px 3px @color;
+					
 					padding: 15px 9px;
 					animation-name:animat;
 					animation-duration:10s;
@@ -186,6 +188,7 @@
 			.btn-info{
 				margin-left: 75px;
 				margin-top: 15px;
+				border-radius:50%;
 			}
 			
 		}
@@ -204,9 +207,21 @@
 					100%{transform:rotateX(0deg);}
 		
 		}
+		@keyframes myanim{
+					0%{transform:rotateX(360deg);}
+					100%{transform:rotateX(0deg);}
+		
+		}
+		.slides{
+		
+			animation-name:myanim;
+			animation-duration:7s;
+			aniamtion-iteration-count:1;
+		
+		}
 	.img-respons{
 		height: 481px;
-		min-width:100%;
+		min-width:80%;
 		margin-right: -15px;
 		margin-left: -55px; 
 		overflow:hidden;
@@ -249,6 +264,23 @@
 			padding : 15px 15px 0px;
 		}
 	}
+	.serv{
+		position:relative;
+		.readmore{
+			display:none;
+			position:absolute;
+		}
+	}
+	.serv:hover {
+		background-color:black;
+		opacity:0.5;
+		.readmore{
+				display:block;
+				top:60px;
+				margin-left:400px;
+		}
+	}
+	
 	.contactus{
 		h4{
 			margin-top : 0px;
@@ -259,13 +291,14 @@
 	}
 	//global css
 	h1,h2,h3,h4,h5{
-		color : @color;
-		font-family : 'Amaranth-Regular';
-	}
-	h1,h2,h3,h4,h5:hover{
+			color : @color;
+			font-family : 'Amaranth-Regular';
 			animation-name:animate;
-			animation-duration:15s;
+			animation-duration:10s;
 			aniamtion-iteration-count:2;
+		&:hover{
+			color:@darkbackcolor
+			}
 			}
 	h1,h2{
 		text-align : center;
@@ -307,6 +340,10 @@
 		transition-property: color;
 		-webkit-transition-duration: 0.3s;
 		transition-duration: 0.3s;
+		transform:scale(1.1,1.1);
+		border-radius:50%;
+			
+		
 		&:before{
 			content: "";
 			position: absolute;
@@ -326,10 +363,11 @@
 			transition-duration: 0.3s;
 			-webkit-transition-timing-function: ease-out;
 			transition-timing-function: ease-out;
-		}
+			}
 		.btn-info{
 			margin-left: -30px;
 			margin-top: 15px;
+			border-radius:50%;
 			&:hover{
 					background: @color;
 					color : @darkcolor;
@@ -339,8 +377,14 @@
 		}
 		
 		&:hover:before, &:focus:before, &:active:before {
-			-webkit-transform: scaleX(1);
-			transform: scaleX(1);
+				border-radius:50%;
+				animation-name:animat;
+				animation-duration:2s;
+				aniamtion-iteration-count:infinite;
+					
+			//-webkit-transform: scaleY(1);
+			//transform: scaleX(1);
+			
 		}
 	}
 	.btn + .btn {
@@ -367,30 +411,26 @@
 	.navbar-toggle .icon-bar {
 		background-color: @lightcolor;
 	} 
-	.news{
-		
-	}
 	.conta{
 		margin-top:15px;
-		margin-left:12px;
+		//margin-left:12px;
 		border:none;
 		-webkit-column-count: 4; /* Chrome, Safari, Opera */
 		-moz-column-count: 4; /* Firefox */
 		column-count: 4;
-		padding:10px;
+		padding:30px;
 	}
 	footer{
-		    margin-top: -180px;
-			color: #47a3ff;
-			height: 200px;
-			font-weight: bold;
+		
+			padding-top: 10px;
+			margin-top: -180px;
+			height: 250px;
 			position: absolute;
 			z-index: -1;
-			width: 100%;
-			margin-left:-15px;
+			width:100%;
+			margin-left: -192px;
 			background-color:@colorblack;
-		
-	}
+			}
 	.navbar-toggle{
 		background-color : @darkcolor;
 		border-color : @colorwhite;
@@ -417,9 +457,8 @@
 				>li{
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
 						border : none;
-						border-radius : 0px;
 						top : 0px;
-						border-radius:40px;
+						border-radius:50px;
 						
 					}
 				}
@@ -434,7 +473,7 @@
 		}
 		.homeimg{
 			float:left;
-			width:100%;
+			width:90%;
 			margin-bottom: 20px;
 		}
 	}
@@ -447,10 +486,9 @@
 				margin: 0px;
 				>li{
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
-						border: 4px solid @lightcolor;
+						border: 1px solid @darkbackcolor;
 						top: -8px;
 						padding-top: 20px;
-						border-radius:30px;
 						transform:scale(1.1,1.1);
 					}
 				}
@@ -470,7 +508,7 @@
 			overflow: hidden;
 		}
 		.carousel-inner>.item>img{
-			width :100%;
+			width :90%;
 			min-height : 310px;
 		}
 		.homeimg{
@@ -497,7 +535,7 @@
 			overflow: hidden;
 		} 
 		.carousel-inner>.item>img{
-			width :100%;
+			width :90%;
 			min-height: 312px;
 		}
 		.homeimg{
