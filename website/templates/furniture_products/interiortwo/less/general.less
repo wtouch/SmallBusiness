@@ -103,18 +103,18 @@
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
-			background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
-			background: linear-gradient(top, @lightcolor, @darkcolor);
+			background-color:@color;
 			>li{
 				border-right : 1px solid @lightcolor;
 				>a, > a:focus{
-					color : @back;
+					color : @colorwhite;
 					font-weight : bold;
+					background-color:none;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @darkcolor ;
-					color : @colorwhite;
+					color: black;
+					transition: 500ms;
+					background:transparent;
 				}
 			}
 		}
@@ -124,7 +124,7 @@
 			tbody{
 				tr{
 					th,td{
-						border-color : @darkbackcolor;
+						border-color : @color;
 					}
 				}
 			}
