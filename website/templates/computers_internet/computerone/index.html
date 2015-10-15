@@ -19,82 +19,10 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		<!--{% if data.template_params %}
-			<style>	
-				.singleproperty .propDetails .table tbody tr th ,.featuretab .nav-tabs li a, .navbar-default .navbar-nav > li.active > a,.navbar-default .navbar-nav > li.active:hover > a,.navbar-default .navbar-nav > li.active > a:focus,.navbar-default .navbar-nav > li:hover > a,.navbar-default .navbar-nav > li:hover > a:focus,.form-control, .btn-info, .btn-info[disabled], .btn-primary, .pagination > .active > a,.pagination > .active > span,.pagination > .active > a:hover, .pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus,.btn-info:hover,.btn-info[disabled]:hover,.btn-primary:hover,.featuretab .nav-tabs li a:hover{
-					background-color: {{data.template_params.color}};	
-				}
-				.homeproject .projectnav a ,.project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus, .testimonial blockquote footer cite, .featrtesti blockquote footer cite, .sociallinks ul li a, .sociallinks ul li a:hover, .navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > ul > li > a, .navbar-default .navbar-nav > li > ul > li ul > li > a,h1,h2,h3,h4,h5, a,.btn-link, .btn-link:hover, .pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, footer{
-					color: {{data.template_params.color}};	
-				}
-				.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus,.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .singleproperty .propDetails .table tbody tr td, .singleproperty .propDetails .table tbody tr th, .homeproject .projectnav, .homeproject .projsnap, .homeproject .bx-wrapper, .featrtesti img:hover, .sociallinks ul li img ,.btn-info:hover, .btn-info[disabled]:hover, .btn-primary:hover{
-					border-color : {{data.template_params.color}};	
-				}
-				.navbar-toggle .icon-bar,.btn-info:before,.btn-info[disabled]:before,.btn-primary:before, .featuretab .nav-tabs li a:before,.featuretab .nav-tabs li.active > a{
-					background-color: {{data.template_params.light_color}};
-				}
-				.project ul.nav.navbar-nav > li, .featuretab .nav-tabs li a,.featrtesti img,.navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus,.navbar-default .navbar-nav > li > ul,.subhead, .btn-info, .btn-info[disabled], .btn-primary, .navbar-toggle{
-					border-color : {{data.template_params.light_color}};	
-				}
-				.sidebar .nav-pills > li,.project ul.nav.navbar-nav > li {
-					border-right : {{data.template_params.light_color}};	
-				}
-				.sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus, .sidebar .nav-pills > li > a:hover, .sidebar .nav-pills > li > a:focus {
-					background-color: {{data.template_params.dark_color}};
-				}
-				body,.btn-info:hover, .btn-info[disabled]:hover, .btn-primary:hover,.featuretab .nav-tabs li a:hover{
-					color: {{data.template_params.dark_color}};
-				}
-				hr, .featuredProperty .bxslider1 li, .featuredProperty .bxslider1 li .sliderImg:hover, .propertylist .panel-default .sliderImg:hover, .singleproperty .property .mainimg,.bxslider li .projimg:hover, .homeproject .projsnap img,.featured_services .services .servimage:hover,.sidebarModule.sidemenu a,{
-					border-color : {{data.template_params.dark_color}};	
-				}
-				.homeproject .projsnap p{
-					border-bottom : {{data.template_params.dark_color}};	
-				}
-				.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .homeproject .projectnav,.homeproject .projsnap,.homeproject .bx-wrapper, .project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover,.project ul.nav.navbar-nav > li > a:focus, .content, .sections, .sidemenu, .thumbnail, .tab-content, .panel,.navbar-default .navbar-nav > li > ul{
-					background-color: {{data.template_params.background_color}};
-				}
-				.featuretab .nav-tabs li a,.sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, .navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus, .subhead,.btn-info, .btn-info[disabled], .btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .homeproject .projectnav a:hover, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus{
-					color: {{data.template_params.background_color}};
-				}
-				.about .table tbody tr th, .contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td, .content,.sections,.sidemenu,.thumbnail,.tab-content,.panel-default, .singleproperty .property, .projlist .project .thumbnail .projectimg img:hover, .products .thumbnail .prodimg img:hover, .singleproperty .property .table tbody tr td, .featuretab .nav-tabs{
-					border-color : {{data.template_params.background_color_dark}};	
-				}
-				.homeproject .carousslider li,{
-					background-color: {{data.template_params.background_color_light}};
-				}
-				.homeproject .carousslider li, .homeproject .bx-viewport .carousslider li {
-					border-color : {{data.template_params.background_color_light}};	
-				}
-				.subhead, .homeproject .projectnav a:hover,.sidebar .nav-pills{
-					background: -webkit-linear-gradient(top, {{data.template_params.light_color}},  {{data.template_params.dark_color}});
-					background: -moz-linear-gradient(top, {{data.template_params.light_color}},  {{data.template_params.dark_color}});
-					background: linear-gradient(top, {{data.template_params.light_color}},  {{data.template_params.dark_color}});
-				}
-				.navbar-default, .sociallinks ul li,footer{
-					background-image: -webkit-linear-gradient(top,{{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
-					background-image: -moz-linear-gradient(top, {{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
-					background-image: -linear-gradient(top,{{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
-				}
-			</style>
-		{% endif %} -->
-		
 	</head>
 	<body>
-		
-		<!-- {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %} -->
-		<header>
-			<!--div class="container">
-				<div class="col-xs-12 col-md-12 col-lg-12">
-					{% if data.website_config.website_logo %}
-					
-					<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
-					{% else %}
-					
-					<img class="logo" src="{{data.business_logo.file_relative_path}}">
-					{% endif %}
-				</div>
-			</div-->
+<div class="container-fluid">
+	<header>	
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
@@ -103,95 +31,58 @@
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-		
-		<nav class="navbar navbar-default">
-			<div class="brand">  
-				<a class="navbar-brand" href="#">{{data.business_name}}</a>
-			</div>
-							<!-- Brand and toggle get grouped for better mobile display -->
-				<!-- Collect the nav links, forms, and other content for toggling -->
+			<nav class="navbar navbar-default">
+				<div class="brand">  
+					<a class="navbar-brand" href="#">{{data.business_name}}</a>
+				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					
 					<ul class="nav navbar-nav ">
 						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 					</ul>
 					<ul class="nav navbar-nav navbar-right" >
-						<li>Sign up</li>
-						<li>login</li>
+						<li><a href="#">Sign up</a></li>
+						<li> <a href="#">login </a></li>
 					</ul>
-				</div><!-- /.navbar-collapse -->
-			
-		</nav>
-		
-		</header>
-		<marquee direction="right" width="85%"  behavior="alternate">
-			<h1>WeL-Come to WebTouch</h1></marquee>
-		<div class="container">
-		<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-		
-		<nav class="navbar navbar-default">
-			<!-- <div class="brand">  
-				<a class="navbar-brand" href="#">{{data.business_name}}</a>
-			</div> -->
-							<!-- Brand and toggle get grouped for better mobile display -->
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					
-					<ul class="nav navbar-nav ">
-						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-					</ul>
-					<ul class="nav navbar-nav navbar-right" >
-						<li>Sign up</li>
-						<li>login</li>
-					</ul>
-				</div><!-- /.navbar-collapse -->
-			
-		</nav>
-		
-			<div class="row">
-				<div class="col-lg-3 col-md-3 col-xs-12 thumbnail prodesc ">
-					<div>
-						<img  src="img/key.png" alt="..." />
-					</div>
-					<h4>{{x.product_service_name}}</h4>
-					<div class="description">{{ x.description|length > 75 ?x.description|slice(start, 75) : x.description }}
-					</div>
+				</div>
+			</nav>
+	</header>
+</div>
+	<marquee direction="right" width="90%"  behavior="alternate">
+		<h1>WeL-Come to WebTouch</h1>
+	</marquee>
+<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-3 col-xs-12 thumbnail ">
+					<img  class="img-responsive img1" src="{{path}}/img/key.png" />
+					<p class="text-center">sdfsdfsdfsdfsdfsdfsdf<br>sdfsdfsdfsdfsdfsfsfsfsd</p>
 					<div class="readmore">
 						<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
 					</div>
-					
 				</div>
-				<div class="col-xs-12 col-md-9 col-lg-9 img-respons">
-					{%if modules.headerModule.carousal %}
-					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-					{%if modules.headerModule.homeproject %}
-					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
+				<div class="col-xs-12 col-md-9 col-lg-9 ">
+					<div class="img-respons">
+						{%if modules.headerModule.carousal %}
+						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+						{%endif%}
+						{%if modules.headerModule.homeproject %}
+						{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+						{%endif%}
+					</div>
 				</div>
 			</div> 
-			<div class="content"> 
-			<div class="row ">
-			
-				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-md-push-4 col-lg-push-3 col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12 ' }}">
-					<div class="content">{% include contentPath %} </div>
-					{%if modules.contentModule.featured_properties %}
-						{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
-						
-						{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
-						
-					{%endif%}
-					{%if modules.contentModule.featured_projects %}
-						{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-					{%endif%}					
-				</div>
+		<div class="row ">
+			<div class=" col-lg-12 col-md-12 col-xs-12 content"> 
+					<div>{% include contentPath %} </div>
+						{%if modules.contentModule.featured_properties %}
+							{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
+							
+							{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+							
+						{%endif%}
+						{%if modules.contentModule.featured_projects %}
+							{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
+						{%endif%}					
+			</div>
 				{% if modules.sidebarModule >= 1 %}
 				<div class="col-md-pull-8 col-lg-pull-9 col-xs-12 col-md-4 col-lg-3">
 					{%if modules.sidebarModule.searchProp %}
@@ -208,54 +99,73 @@
 					{%endif%}
 				</div>
 				{% endif %}
-				
-			</div>
-			</div>
-			<div class="row services">
-				{%if modules.contentModule.featured_services %}
-					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-				{%endif%}
-				<!-- <div class="col-xs-12 col-md-12 col-lg-12">
-					<!-- {% if (modules.contentModule.featured_services)%} - ->
-					<div class="featuretab">
-						<!-- Nav tabs - ->
-						<ul class="nav nav-tabs" role="tablist">
-							{%if modules.contentModule.featured_services %}
-							<li role="presentation" class="active">
-								<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
-							</li>
-							{%endif%}
-							<li role="presentation">
-								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
-							</li>
-							<li role="presentation">
-								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
-							</li>
-						</ul>
-						<!-- Tab panes  - ->
-						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="featrserv">
-							{%if modules.contentModule.featured_services %}
-								{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-							{%endif%}
-							</div>
-							<div role="tabpanel" class="tab-pane" id="featrtesti">
-							{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
-							</div>
-							<div role="tabpanel" class="tab-pane" id="ourassoc">
-								{% include [templatePath ~ '/includes/our_associates.html', 'default/default/includes/our_associates.html'] %}
-							</div>
-						</div>
+		</div>
+		<div class="row slides">
+			<div class="col-lg-3 col-md-3 col-xs-12 thumbnail " id="thumb">
+				<img  class="img-responsive img1" src="{{path}}/img/key.png" />
+					<p class="text-center">
+						sdfsdfsdfsdfsdfsdfsdf<br>
+						sdfsdfsdfsdfsdfsfsfsfsd
+					</p>
+					<div class="readmore">
+						<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
 					</div>
-					{% endif %}
-						
-					{%if modules.contentModule.featured_products %}
-						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-					{%endif%}
-				</div> -->
+			</div>
+			<div class="col-lg-9 col-md-9 col-xs-12 services">
+				{%if modules.contentModule.featured_services %}
+				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+				{%endif%}
 			</div>
 		</div>
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+		<div class="row ">
+			<div class="col-md-12 col-lg-12 col-xs-12">
+					<div class="sections clearfix services">
+						{% set break = 0 %}{% set i = 0 %}
+						{% for x in featured_products if break == 0 %}
+						{% if x.type == 'product' %}
+					<div class="serv">
+						<div class="col-sm-6 col-md-3 prodimage">
+							<a href="#">
+								<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" alt="...">
+							</a>
+						</div>
+						<div class="col-sm-6 col-md-3 proddesc">
+							<h4>{{x.product_service_name}}</h4>
+								<div class="description">
+									{{ x.description|length > 75 ?x.description|slice(start, 75) : x.description }}
+								</div>
+						</div>	
+							{% set i = (i + 1) %}
+							{% if i == 2 %}
+								{% set break = 1 %}
+							{% endif %}
+							{% endif %}
+						{% endfor %}
+						<div class="readmore">
+							<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row ">
+			<div class="col-md-12 col-lg-12 col-xs-12 conta" >
+					Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie cons	quat, vel illum dolore eu
+			</div>
+		</div>
+			<div class="row ">
+				<div class="col-md-12 col-lg-12 col-xs-12 " >
+					{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+				</div>
+			</div>
+</div>
+		 <div class="container-fluid">
+			<div class="row">
+					{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+			</div>
+		</div>
+			 
+			
 	</body>
 </html> 
 {% endspaceless %}
