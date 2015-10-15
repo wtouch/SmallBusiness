@@ -1,7 +1,12 @@
 {% autoescape false %}
 
 <div class="sidebarModule enquiry">
-	<h3 class="subhead">Send Enquiry</h3>
+	<h3 class="subhead">Send Enquiry 
+	{% if enquiry.property_category %}
+		<span style="font-size:75%">- ({{enquiry.property_title}})</span>
+	{% endif %}
+	</h3>
+	
 	<div class="panel panel-default">
 		<div class="panel-body" ng-controller="enquiryController">
 			<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-hide="mailSent" novalidate>
@@ -17,7 +22,16 @@
 				
 						<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.subject" {{ (enquiry.subject) ? 'ng-init="enquiry.subject=\''~enquiry.subject~'\'"' : 'ng-init="enquiry.subject=\'Website Enquiry\'"'}}>
 						
-						<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.message.category" {{ (enquiry.message.category) ? 'ng-init="enquiry.subject=\''~enquiry.message.category~'\'"' : 'ng-init="enquiry.subject=\'Website Enquiry\'"'}}>
+						{% if enquiry.property_category %}
+							<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.message.property_category" {{ (enquiry.property_category) ? 'ng-init="enquiry.message.property_category=\''~enquiry.property_category~'\'"' : 'ng-init="enquiry.message.property_category=\'Website Enquiry\'"'}}>
+						{% endif %}
+						
+						
+						
+						{% if enquiry.property_link %}
+							<input type="hidden" class="form-control" id="subject" name="subject" ng-model="enquiry.message.property_link" 
+							ng-init="enquiry.message.property_link={params : {property_title : '{{enquiry.property_title}}', property_category : '{{property_category}}', property_id : '{{property_id}}' }}">
+						{% endif %}
 						
 						<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true">	
 							<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
@@ -62,6 +76,9 @@
 			</div>
 			<div ng-show="mailSent" class="text-center mailSentMsg" style="clear:both;">
 				Your enquiry has been sent successfully. Our representative call you shortly.
+			</div>
+			<div ng-show="mailError" class="text-center mailSentMsg" style="clear:both;">
+				{{errorMessage}} fsdfsaf 
 			</div>
 		</div>
 	</div>

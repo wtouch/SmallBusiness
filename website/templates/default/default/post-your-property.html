@@ -2,9 +2,12 @@
 <h2>Post Your Property</h2>
 <div class="panel panel-default" >
 	<div class="panel-body" ng-controller="enquiryController">
-	<div ng-show="mailSent" class="text-center mailSentMsg" style="clear:both;">
-	Your Property enquiry send successfully .Our representative call you shortly.
-	</div>
+		<div ng-show="mailSent" class="text-center mailSentMsg" style="clear:both;">
+		Your Property enquiry send successfully .Our representative call you shortly.
+		</div>
+		<div ng-show="errorMessage" class="text-center mailSentMsg" style="clear:both;">
+			{{errorMessage}}
+		</div>
 		<form class="form-horizontal" name="postpropertyForm" ng-submit="postpropertyForm.$valid" novalidate ng-hide="mailSent" >
 			<div class="form-group">							
 				<label for="property_for" class="col-xs-12 col-sm-3 col-lg-2 control-label">* Property for </label>	
@@ -191,7 +194,7 @@
 			<div class="form-group">
 				<label for="email" class="col-xs-12 col-sm-3 col-lg-2 control-label">* Email ID  </label>
 				<div class="col-xs-9">
-					<input type="email"  id="from_email.from" class="form-control" name="from_email.from" ng-model="enquiry.from_email.from" ng-pattern=" /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required />					
+					<input type="email"  id="from_email.from" class="form-control" name="from_email.from" ng-model="enquiry.to_email.replyTo" ng-pattern=" /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" required />					
 					<span class="text-danger" ng-show="postpropertyForm.email.$error.pattern && (postpropertyForm.email.$dirty)"> invalid email! </span>
 					
 					<span class="text-danger" ng-show="postpropertyForm.email.$error.required && (postpropertyForm.email.$dirty)">Email is required.</span>							

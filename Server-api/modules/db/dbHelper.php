@@ -367,7 +367,7 @@ class dbHelper {
     function insert($table, $inputData) {
 	
         try{
-			(is_Array($inputData)) ? $inputData : $inputData = json_decode($inputData);
+			(is_Array($inputData)) ? $inputData : $inputData = json_decode($inputData, true);
 			
 			$dataKey = array();
 			$dataValue = array();
@@ -420,7 +420,7 @@ class dbHelper {
 				$colNames = implode(",",$dataKey);
 				$colValues = ":".implode(",:",$dataKey);
 				$sql = "INSERT INTO $table($colNames) VALUES($colValues)";
-				echo $sql;
+				//echo $sql;
 				$stmt =  $this->db->prepare($sql);
 				$stmt->execute($dataValue);
 			}

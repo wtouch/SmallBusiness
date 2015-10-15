@@ -67,13 +67,6 @@
 									<td>{{property.price}}</td>			
 								</tr>
 								{% endif %}
-								{% if property.category %}
-								<tr>
-									<td><b>Posted On</b></td>
-									<td>:</td>
-									<td>{{property.date}}</td>			
-								</tr>
-								{% endif %}
 								{% if property.contact_details.contact_person %}
 								<tr>
 									<td><b>Contact</b> </td> 
@@ -112,18 +105,19 @@
 				{% if property.optional_property_details.property_floor %}
 					<li><b>Total Number of Floors :</b> {{property.optional_property_details.property_floor}}</li>
 				{% endif %}
-				{% if property.optional_property_details.property_age %}
+				{% if property.optional_property_details.facing %}
 					<li><b>Facing :</b> {{property.optional_property_details.facing}}</li>
 				{% endif %}
-				{% if property.optional_property_details.property_age %}
+				{% if property.optional_property_details.parking %}
 					<li><b>Parking :</b> {{property.optional_property_details.parking}}</li>
 				{% endif %}
-				{% if property.optional_property_details.property_age %}
+				{% if property.optional_property_details.transType %}
 					<li><b>Transaction Type :</b> {{property.optional_property_details.transType}}</li>
 				{% endif %}
-				{% if property.optional_property_details.property_age %}
+				{% if property.optional_property_details.bedrooms %}
 					<li><b>Bedrooms :</b> {{property.property_info.bedrooms}}</li>
 				{% endif %}
+				{% if property.optional_property_details.bathrooms %}
 				<li><b>Bathrooms :</b> {{property.property_info.bathrooms}}</li>
 				{% endif %}
 				<!-- <li><b>Reserved Parking :</b> 1</li> -->
@@ -174,7 +168,7 @@
 			</div>
 		</div>
 		<div class="col-xs-12 text-center">
-		 <a href="/enquiry?category={{property.category}}&id={{property.id}}&title={{property.title}}"class="btn btn-info">Send Enquiry</a> 
+		 <a href="/enquiry?property_category={{property.category}}&property_id={{property.id}}&property_title={{property.title}}"class="btn btn-info">Send Enquiry</a> 
 		<!-- 	<button type="button" class="btn btn-primary">SEND ENQUIRY</button> -->
 		</div>
 	</div>
