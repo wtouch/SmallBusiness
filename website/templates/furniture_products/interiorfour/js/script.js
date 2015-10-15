@@ -84,7 +84,7 @@ $(document).ready(function(){
 		controls:false, 
 		autoHover:true,
 		speed:1000,
-	});
+		
 });
 var app = angular.module('myApp',[]);
 

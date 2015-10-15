@@ -12,191 +12,138 @@
 		<script src="{{ path }}js/bootstrap.min.js"></script>
 		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
-		<script src="{{ path }}js/angular.min.js"></script>
+		<!-- <script src="{{ path }}js/angular.min.js"></script> -->
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script>
-		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		{% if data.template_params %}
-			<style>	
-				.singleproperty .propDetails .table tbody tr th ,.featuretab .nav-tabs li a, .navbar-default .navbar-nav > li.active > a,.navbar-default .navbar-nav > li.active:hover > a,.navbar-default .navbar-nav > li.active > a:focus,.navbar-default .navbar-nav > li:hover > a,.navbar-default .navbar-nav > li:hover > a:focus,.form-control, .btn-info, .btn-info[disabled], .btn-primary, .pagination > .active > a,.pagination > .active > span,.pagination > .active > a:hover, .pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus,.btn-info:hover,.btn-info[disabled]:hover,.btn-primary:hover,.featuretab .nav-tabs li a:hover{
-					background-color: {{data.template_params.color}};	
-				}
-				.homeproject .projectnav a ,.project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus, .testimonial blockquote footer cite, .featrtesti blockquote footer cite, .sociallinks ul li a, .sociallinks ul li a:hover, .navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > ul > li > a, .navbar-default .navbar-nav > li > ul > li ul > li > a,h1,h2,h3,h4,h5, a,.btn-link, .btn-link:hover, .pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, footer{
-					color: {{data.template_params.color}};	
-				}
-				.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus,.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .singleproperty .propDetails .table tbody tr td, .singleproperty .propDetails .table tbody tr th, .homeproject .projectnav, .homeproject .projsnap, .homeproject .bx-wrapper, .featrtesti img:hover, .sociallinks ul li img ,.btn-info:hover, .btn-info[disabled]:hover, .btn-primary:hover{
-					border-color : {{data.template_params.color}};	
-				}
-				.navbar-toggle .icon-bar,.btn-info:before,.btn-info[disabled]:before,.btn-primary:before, .featuretab .nav-tabs li a:before,.featuretab .nav-tabs li.active > a{
-					background-color: {{data.template_params.light_color}};
-				}
-				.project ul.nav.navbar-nav > li, .featuretab .nav-tabs li a,.featrtesti img,.navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus,.navbar-default .navbar-nav > li > ul,.subhead, .btn-info, .btn-info[disabled], .btn-primary, .navbar-toggle{
-					border-color : {{data.template_params.light_color}};	
-				}
-				.sidebar .nav-pills > li,.project ul.nav.navbar-nav > li {
-					border-right : {{data.template_params.light_color}};	
-				}
-				.sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus, .sidebar .nav-pills > li > a:hover, .sidebar .nav-pills > li > a:focus {
-					background-color: {{data.template_params.dark_color}};
-				}
-				body,.btn-info:hover, .btn-info[disabled]:hover, .btn-primary:hover,.featuretab .nav-tabs li a:hover{
-					color: {{data.template_params.dark_color}};
-				}
-				hr, .featuredProperty .bxslider1 li, .featuredProperty .bxslider1 li .sliderImg:hover, .propertylist .panel-default .sliderImg:hover, .singleproperty .property .mainimg,.bxslider li .projimg:hover, .homeproject .projsnap img,.featured_services .services .servimage:hover,.sidebarModule.sidemenu a,{
-					border-color : {{data.template_params.dark_color}};	
-				}
-				.homeproject .projsnap p{
-					border-bottom : {{data.template_params.dark_color}};	
-				}
-				.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .homeproject .projectnav,.homeproject .projsnap,.homeproject .bx-wrapper, .project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover,.project ul.nav.navbar-nav > li > a:focus, .content, .sections, .sidemenu, .thumbnail, .tab-content, .panel,.navbar-default .navbar-nav > li > ul{
-					background-color: {{data.template_params.background_color}};
-				}
-				.featuretab .nav-tabs li a,.sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, .navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus, .subhead,.btn-info, .btn-info[disabled], .btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .homeproject .projectnav a:hover, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus{
-					color: {{data.template_params.background_color}};
-				}
-				.about .table tbody tr th, .contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td, .content,.sections,.sidemenu,.thumbnail,.tab-content,.panel-default, .singleproperty .property, .projlist .project .thumbnail .projectimg img:hover, .products .thumbnail .prodimg img:hover, .singleproperty .property .table tbody tr td, .featuretab .nav-tabs{
-					border-color : {{data.template_params.background_color_dark}};	
-				}
-				.homeproject .carousslider li,{
-					background-color: {{data.template_params.background_color_light}};
-				}
-				.homeproject .carousslider li, .homeproject .bx-viewport .carousslider li {
-					border-color : {{data.template_params.background_color_light}};	
-				}
-				.subhead, .homeproject .projectnav a:hover,.sidebar .nav-pills{
-					background: -webkit-linear-gradient(top, {{data.template_params.light_color}},  {{data.template_params.dark_color}});
-					background: -moz-linear-gradient(top, {{data.template_params.light_color}},  {{data.template_params.dark_color}});
-					background: linear-gradient(top, {{data.template_params.light_color}},  {{data.template_params.dark_color}});
-				}
-				.navbar-default, .sociallinks ul li,footer{
-					background-image: -webkit-linear-gradient(top,{{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
-					background-image: -moz-linear-gradient(top, {{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
-					background-image: -linear-gradient(top,{{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
-				}
-			</style>
-		{% endif %}
-	</head>
+		<script>
+		    $(document).ready(function(){
+    $("div.container-fluid>div>div.a>div").click(function(){
+	    $("div.container-fluid>ul>li:nth-child(1)").toggleClass("a1");
+		$("div.container-fluid>ul>li:nth-child(2)").toggleClass("a2");
+		$("div.container-fluid>ul>li:nth-child(3)").toggleClass("a3");
+		$("div.container-fluid>ul>li:nth-child(4)").toggleClass("a4");
+		
+	});
+});
+		</script>
+<script>
+
+window.onscroll = function() {myFunction()};
+
+function myFunction() {
+   if (document.body.scrollTop || document.documentElement.scrollTop > 50) {
+            document.getElementById("myP1").className = "bb";
+			document.getElementById("myP").className = "logo1";
+		
+			
+    } else {
+	   
+			document.getElementById("myP1").className = "";
+			document.getElementById("myP").className = "";
+			
+		
+   }
+	
+}
+
+
+//window.onscroll = function() {myFunction1()};
+
+ //function myFunction1() {
+  // if (document.body.scrollTop || document.documentElement.scrollTop > 500) {
+            
+		//document.getElementById("myP2").className = "logo3";
+		//document.getElementById("myP3").className = "dd";
+    //} else {
+	   
+		//document.getElementById("myP2").className = ""; 
+		//document.getElementById("myP3").className = ""; 
+ //}
+	
+//} 
+</script>
+
+		
+</head>
 	<body>
-		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-		<header>
-			<div class="container">
-				<div class="col-xs-12 col-md-12 col-lg-12">
-					{% if data.website_config.website_logo %}
-					
-					<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
-					{% else %}
-					
-					<img class="logo" src="{{data.business_logo.file_relative_path}}">
-					{% endif %}
-				</div>
-			</div>
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-		</header>
-		<nav class="navbar navbar-default">
-			<div class="container">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div>
-		</nav>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-md-12 col-lg-12">
+<div class="container-fluid">
+	<div class=" navi">
+		<div class="a"><div class="glyphicon glyphicon-th"></div></div>
+	</div>
+		<ul>
+			<li class="b1">Home</li>
+			<li class="b2">About </li>
+			<li class="b3">Gallary</li>
+			<li class="b4">Contact </li>
+		</ul>
+			
+	<div class="row" >
+		<img src="{{path}}img/pic5.jpg" class="img-responsive" width="100%" class="panel1"> 
+	</div>
+	
+	<div class="row" >
+	     <div class=" col-md-6 logo" >
+			<img src="{{path}}img/logo.png"  class="imglogo">
+		</div>
+	</div>
+     
+	<div class="row ">
+		<img src="{{path}}img/pic1.jpg" class="img-responsive" width="100%" class="panel2">	
+	</div>
+		<div id="myP" class="col-md-12">
+       </div> 
+	   <div class="row">
+		  <div class="col-md-6 aa">
+		           {%include contentPath%}
+		  </div> 
+		  <div id="myP1" class="col-md-6 bb">
+			<img src="{{path}}img/chair.png"> 
+		  </div>
+	    </div>
+	</div>
+	
+	<div class="row ">
+		<img src="{{path}}img/pic4.jpg" class="img-responsive" width="100%" class="panel3">
+		     <div class="col-md-12 logo2">
+	         </div>	
+			  <div class="slider">
+			 
 					{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
-					{%if modules.headerModule.homeproject %}
+				    {%if modules.headerModule.homeproject %}
 					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-				</div>
-			</div> 
-			<div class="row">
-				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-md-push-4 col-lg-push-3 col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12 ' }}">
-					<div class="content">{% include contentPath %}</div>
-					{%if modules.contentModule.featured_properties %}
-						{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
-						
-						{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
-						
-					{%endif%}
-					{%if modules.contentModule.featured_projects %}
-						{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-					{%endif%}					
-				</div>
-				{% if modules.sidebarModule >= 1 %}
-				<div class="col-md-pull-8 col-lg-pull-9 col-xs-12 col-md-4 col-lg-3">
-					{%if modules.sidebarModule.searchProp %}
-						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
-					{%endif%}
-					{%if modules.sidebarModule.contact %}
-						{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-					{%endif%}
-					{%if modules.sidebarModule.enquiry %}
-						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry:{user_id : data.user_id,owner_email:data.owner_email}} %}
-					{%endif%}
-					{%if modules.sidebarModule.sidemenu %}
-						{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
-					{%endif%}
-				</div>
-				{% endif %}
+					{%endif%} 
 				
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-md-12 col-lg-12">
-					{% if (modules.contentModule.featured_services)%}
-					<div class="featuretab">
-						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" role="tablist">
-							{%if modules.contentModule.featured_services %}
-							<li role="presentation" class="active">
-								<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
-							</li>
-							{%endif%}
-							<li role="presentation">
-								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
-							</li>
-							<li role="presentation">
-								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
-							</li>
-						</ul>
-						<!-- Tab panes -->
-						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="featrserv">
-							{%if modules.contentModule.featured_services %}
-								{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-							{%endif%}
-							</div>
-							<div role="tabpanel" class="tab-pane" id="featrtesti">
-							{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
-							</div>
-							<div role="tabpanel" class="tab-pane" id="ourassoc">
-								{% include [templatePath ~ '/includes/our_associates.html', 'default/default/includes/our_associates.html'] %}
-							</div>
-						</div>
-					</div>
-					{% endif %}
-						
-					{%if modules.contentModule.featured_products %}
-						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-					{%endif%}
-				</div>
-			</div>
+	           </div>
+	</div>
+
+	<div class="row">
+		<div id="myP2" class="col-md-6 logo3">
 		</div>
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-	</body>
+		<div class="row">
+		<div id="myP3" class="col-md-6 dd">     
+	       <h2>CONTACT</h2>
+				{{data.contact_profile.contact_person}}<br>
+				{{data.contact_profile.address}}<br>
+				{{data.city}}-{{data.pincode}},<br>
+				{{data.state|capitalize}},<br>
+				{{data.country|capitalize}}.<br>
+				{% if data.contact_profile.telephone%}Telephone : {{data.contact_profile.telephone}}<br>{%endif%}
+			{% if data.contact_profile.alternate_email%}Email:{{data.contact_profile.alternate_email}}
+			{%endif%}
+	   
+	    </div>
+		<div class="col-md-6 ee">
+			<img src="{{path}}img/pillo.png">
+		</div>
+		</div>
+
+	</div>
+</div>
+</body>
 </html> 
 {% endspaceless %}
