@@ -1,4 +1,15 @@
+
+
 //project
+.readmore{
+    padding-top: 28px;
+}
+.thumbnail {
+		> h4{
+		color:@back;
+	}
+}
+
 //css for featured project slider
 .bxslider{ 
 	padding:5px;
@@ -57,6 +68,9 @@
 	}
 	.bx-viewport{
 		min-height : 300px !important;
+		min-width:100%;
+		overflow:hidden;
+		
 		.carousslider{
 			padding-left: 0px;
 			li{
@@ -64,10 +78,11 @@
 				background-color: @lightbackcolor;
 				border-radius:40px;
 				transition: all 1s ease-in-out ;
+				min-height : 300px !important;
 				min-width : 100% !important;
 				img{
-					width : 100%;
-					min-height : 303px;
+					min-width : 100% !important;
+					min-height : 303px !important;
 				}
 				&:hover{
 					transform: scale(1.1);
@@ -115,17 +130,20 @@
 	.projlist{
 		.project{
 			.thumbnail{
-				height:385px;
+				height:450px;
+				padding-top:1px;
+				background-color:@color5;
 				.projectimg{
 					height : 148px;
-					width : 180px;
+					width : 210px;
 					overflow : hidden;
 					margin : 0 auto;
 					img{
 						min-height : 148px;
 						border : 2px solid transparent;
 						&:hover{
-							border : 2px solid @darkbackcolor;
+							border : 2px solid @back;
+							
 						}
 					}
 				}
