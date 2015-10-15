@@ -1,50 +1,69 @@
-.featured_services{
-	.sections{
-		border : none;
-		background : none;
-		box-shadow : 0 0 0;
-	}
-	.services{
-		.servimage{
-			border : 4px solid transparent;
-			padding : 6px;
-			&:hover{
-				border : 4px solid @darkcolor;
-			}
+//featured servieces
+.services{
+	.servimage{
+		border-radius : 2px;
+		padding : 6px;
+		&:hover{
+			//border : 4px solid @back;
+			animation-name: ani;
+			animation-duration:1s;
+			animation-iteration-count:1;
 		}
-		.servdesc{
-			height : 220px;
-			.description{
-				height : 75px;
-				overflow : hidden;
-			}
-			.readmore{
-				text-align : center;
-				margin-top : 10px;
-			}
+		@keyframes ani{
+	 0%{transform:rotate(30deg);}
+	 100%{transform:rotate(90deg);}
+	}
+	}
+	
+	.sections clearfix services>ul{
+	list-style-type:none;
+	
+	}
+	.servdesc{
+		height : 225px;
+		.description{
+			height : 75px;
+			overflow : hidden;
+		}
+		.readmore{
+			text-align : center;
+			margin-top: 10px;
+		}
+		.readmore{
+			text-align : center;
+			margin-top: 10px;
+		}
+		.readmore:active{
+			text-align : center;
+			margin-top: 10px;
+			background:@darkcolor !important;
+		}
+		h4{
+			text-align : center;
+			
 		}
 	}
 }
 
 .products{
 	.thumbnail{
-		height:385px;
 		.prodimg{
+			width : 188px;
 			height : 148px;
-			width : 195px;
 			overflow : hidden;
-			margin : 0 auto;
+			margin :0 auto;
 			img{
 				min-height : 148px;
-				border : 2px solid transparent;
-				padding : 4px;
-				&:hover{
-					border : 2px solid @darkbackcolor;
-				}
+				padding:5px;
 			}
+			img:hover{
+				min-height : 148px;
+				padding:5px;
+				border:1px solid @back;
+			}	
 		}
 		.caption{
-			height: 182px;
+			height: 190px;
 			margin-bottom : 10px;
 			.description{
 				height : 75px;
