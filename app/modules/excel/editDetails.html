@@ -1,0 +1,45 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+</div>
+ 
+<div class="modal-body">
+	
+	<h3 class="text-center">Update Details</h3>
+<form class="form-horizontal" name="editDetailsForm" role="form" novalidate ng-submit="editDetailsForm.$valid">
+	<div class="form-group">
+		<label for="patientName" class="col-sm-2 control-label">Patient Name *</label>
+		<div class="col-sm-9">
+			<input type="text" class="form-control" id="patientName" name="patientName" placeholder="Patient Name" ng-model="modalOptions.patientlist.Patient_Name" required>
+			<span class="block" ng-show="editDetailsForm.patientName.$invalid && editDetailsForm.patientName.$dirty">
+				<span ng-show="editDetailsForm.patientName.$error.required" class="text-danger">Required Field.</span>
+			</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="Age" class="col-sm-2 control-label">Age *</label>
+		<div class="col-sm-9">
+			<input type="text" class="form-control" id="Age" name="Age" placeholder="Age" ng-model="modalOptions.patientlist.Age" required />
+			<span class="block" ng-show="editDetailsForm.Age.$invalid && editDetailsForm.Age.$dirty">
+				<span ng-show="editDetailsForm.Age.$error.required" class="text-danger">Required Field.</span>
+			</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="HB" class="col-sm-2 control-label">HB *</label>
+		<div class="col-sm-9">
+			<input type="text" class="form-control" id="HB" name="HB" placeholder="Contact Person" ng-model="modalOptions.patientlist.HB" required />
+			<span class="block" ng-show="editDetailsForm.HB.$invalid && editDetailsForm.HB.$dirty">
+				<span ng-show="editDetailsForm.HB.$error.required" class="text-danger">Required Field.</span>
+			</span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-9">
+			<button type="submit" class="btn btn-primary" ng-disabled="editDetailsForm.$invalid" ng-click="modalOptions.updateData(modalOptions.patientlist);modalOptions.ok()">Update Details</button> 
+			
+			<button type="reset" class="btn btn-danger" ng-click="modalOptions.ok()" >Cancel</button>
+		</div>
+	</div>
+</form>
+</div>

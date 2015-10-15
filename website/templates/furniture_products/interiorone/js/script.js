@@ -6,6 +6,24 @@ jQuery(document).ready(function() {
 	})
 });
 
+$(window).scroll(function() {
+  $( ".new" ).fadeIn(3000);
+    $( ".new1" ).fadeIn(5000);
+	});
+	
+	
+$(document).ready(function(){
+$(window).scroll(function(e){
+    var scrollTop = $(document).scrollTop();
+    if(scrollTop > 0){
+        console.log(scrollTop);
+        $('.b').removeClass('navbar-static-top').addClass("navbar-inverse navbar-fixed-top navbar-right");
+    } else {
+        $('.b').removeClass("navbar-inverse navbar-fixed-top navbar-right").addClass('navbar-static-top');
+    }
+});	
+});
+	
 $(document).ready(function(){
 	var sliderMode, minSlides, maxSlides;
 	//$(window).resize(function(){
@@ -84,7 +102,11 @@ $(document).ready(function(){
 		controls:false, 
 		autoHover:true,
 		speed:1000,
+		height:150,
+		width:500,
 	});
+	
+	
 });
 var app = angular.module('myApp',[]);
 

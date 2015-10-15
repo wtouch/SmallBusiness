@@ -6,9 +6,9 @@
 		font-family:'QumpellkaNo12';
 		src:url('../fonts/QumpellkaNo12.otf');
 	}
-	@color : #47A3FF;
-	@lightcolor : #6699FF;
-	@darkcolor :#3F6892;
+	@color : #297DD4;
+	@lightcolor : #55676A;
+	@darkcolor :rgb(88, 136, 153);
 	
 	@back : #202020 ;
 	@darkbackcolor : #303030 ;
@@ -26,8 +26,8 @@
 	}
 	.container{
 		max-width : 992px !important;
-		box-shadow:3px 3px 3px @darkcolor;
-		border: 1px solid @darkbackcolor;
+		//box-shadow:3px 3px 3px @darkcolor;
+		//border: 1px solid @darkbackcolor;
 	}
 	body{
 		background-color:@darkbackcolor;
@@ -179,23 +179,29 @@
 			aniamtion-iteration-count:2;
 			}
 	.thumbnail{
-		background:linear-gradient(to right,@darkcolor,@darkbackcolor,@darkcolor);
-		border:1px solid @back;
+		background:linear-gradient(to right,@darkcolor,@darkcolor);
+		border:none;
 		height: 500px;
 		overflow:hidden;
 		border-radius:0px;
 		top: 0px;
+			p{
+				margin:15px 45px 10px;
+				position:absolute;
+				color:@darkbackcolor;
+			
+			}
 			.btn-info{
 				margin-left: 75px;
-				margin-top: 15px;
-				border-radius:50%;
+				margin-top: 80px;
+				&:hover{
+					border-radius:50%;
+				}
 			}
-			
 		}
 		@keyframes anim{
 					0%{transform:rotateY(90deg);}
 					100%{transform:rotateY(0deg);}
-		
 		}
 		@keyframes animate{
 					0%{transform:rotateY(-90deg);}
@@ -205,19 +211,20 @@
 		@keyframes animat{
 					0%{transform:rotateX(-90deg);}
 					100%{transform:rotateX(0deg);}
-		
 		}
 		@keyframes myanim{
 					0%{transform:rotateX(360deg);}
 					100%{transform:rotateX(0deg);}
-		
+		}
+		@keyframes myam{
+					0%{transform:scale(0.4,0.4); transform:rotateY(360deg);}
+					50%{transform:scale(1.1,1.1); transform:rotateY(180deg);}
+					100%{transform:rotateY(0deg);}
 		}
 		.slides{
-		
 			animation-name:myanim;
 			animation-duration:7s;
 			aniamtion-iteration-count:1;
-		
 		}
 	.img-respons{
 		height: 481px;
@@ -238,13 +245,13 @@
 		/*background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
 		background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
 		background: linear-gradient(top, @lightcolor, @darkcolor);*/
-		border : 1px solid @lightcolor;
+		border : 1px solid @darkbackcolor;
 		border-radius: 5px;
 		box-shadow : 0px 1px 2px @back;
 	}
 	.content, .sections, .sidemenu,.tab-content{
 		background-color : @back;
-		border:1px solid @darkbackcolor;
+		//border:1px solid @darkbackcolor;
 		//border-radius : 4px;
 	}
 	.content{
@@ -272,16 +279,16 @@
 		}
 	}
 	.serv:hover {
-		background-color:black;
-		opacity:0.5;
+		background-color:@color;
+		opacity:0.7;
 		.readmore{
+				position:absolute;
 				display:block;
-				top:60px;
+				top:70px;
 				margin-left:400px;
 		}
 	}
-	
-	.contactus{
+		.contactus{
 		h4{
 			margin-top : 0px;
 		}
@@ -291,14 +298,14 @@
 	}
 	//global css
 	h1,h2,h3,h4,h5{
-			color : @color;
+			color : @darkcolor;
 			font-family : 'Amaranth-Regular';
 			animation-name:animate;
 			animation-duration:10s;
 			aniamtion-iteration-count:2;
-		&:hover{
-			color:@darkbackcolor
-			}
+			&:hover{
+				color:@color;
+				}
 			}
 	h1,h2{
 		text-align : center;
@@ -320,7 +327,7 @@
 		border-color : @darkbackcolor;
 	}
 	hr{
-		border-color : @darkcolor;
+		border-color : @darkbackcolor;
 	}
 	.form-control{
 		background-color : @color;
@@ -329,7 +336,7 @@
 	.btn-info, .btn-info[disabled], .btn-primary{
 		background-color: @color;
 		color : @back;
-		border-color : @lightcolor;
+		border:none;
 		position: relative;
 		-webkit-transform: translateZ(0);
 		transform: translateZ(0);
@@ -341,9 +348,7 @@
 		-webkit-transition-duration: 0.3s;
 		transition-duration: 0.3s;
 		transform:scale(1.1,1.1);
-		border-radius:50%;
-			
-		
+
 		&:before{
 			content: "";
 			position: absolute;
@@ -371,20 +376,14 @@
 			&:hover{
 					background: @color;
 					color : @darkcolor;
-					border-color : @color;
+					box-shadow:2px 2px 2px @darkbackcolor;
 				}
-		
 		}
-		
-		&:hover:before, &:focus:before, &:active:before {
+			&:hover:before, &:focus:before, &:active:before {
 				border-radius:50%;
 				animation-name:animat;
 				animation-duration:2s;
 				aniamtion-iteration-count:infinite;
-					
-			//-webkit-transform: scaleY(1);
-			//transform: scaleX(1);
-			
 		}
 	}
 	.btn + .btn {
@@ -393,8 +392,7 @@
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus
 	{
 		background-color : @color;
-		color : @back;
-		border : 1px solid @color;
+		color : @back;	
 	}
 	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
 		background-color : @back;
@@ -405,26 +403,26 @@
 		padding :0px;
 	}
 	.navbar-toggle {
-		border : 1px solid @lightcolor;
+		border : 1px solid @darkbackcolor;
 		margin-top : 45px;
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @lightcolor;
 	} 
 	.conta{
-		margin-top:15px;
-		//margin-left:12px;
+		
+		margin-left:0px;
+		margin-right:0px;
+		background-color:@back;
 		border:none;
 		-webkit-column-count: 4; /* Chrome, Safari, Opera */
 		-moz-column-count: 4; /* Firefox */
 		column-count: 4;
-		padding:30px;
+		padding:20px;
 	}
-	
 	footer{
-		
 			padding-top: 10px;
-			margin-top: -180px;
+			margin-top: -136px;
 			height: 250px;
 			position: absolute;
 			z-index: -1;
@@ -432,12 +430,10 @@
 			margin-left: -192px;
 			background-color:@colorblack;
 			> p{
-			
 			padding-top: 10px;
 			margin-top: 180px;
 			margin-left:20px;
-	
-				}
+			}
 	}
 	.navbar-toggle{
 		background-color : @darkcolor;
@@ -466,8 +462,7 @@
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
 						border : none;
 						top : 0px;
-						border-radius:50px;
-						
+						border-radius:50px;	
 					}
 				}
 			}
