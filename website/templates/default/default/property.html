@@ -11,56 +11,76 @@
 					<div class="col-xs-12 col-sm-6 col-lg-8">	
 						<div class="table-responsive">
 							<table class="table">
+								{% if property.category %}
 								<tr>
 									<td><b>Property Category</b> </td>
 									<td>:</td>
 									<td>{{property.category}}</td>					
 								</tr>
+								{% endif %}
+								{% if property.type %}
 								<tr>
 									<td><b>Property Type</b> </td>
 									<td>:</td>
 									<td>{{property.type}}</td>					
 								</tr>
+								{% endif %}
+								{% if property.property_for %}
 								<tr>
 									 <td><b>Property For</b></td>
 									 <td>:</td>
 									 <td>{{property.property_for}}</td>	
 								</tr>
+								{% endif %}
+								{% if property.location %}
 								<tr>
 									<td><b>Location</b></td>
 									<td>:</td>
 									<td>{{property.location}}, {{property.area}}, {{property.city}}</td>
 								</tr>
+								{% endif %}
+								{% if property.buildup_area %}
 								<tr>
 									<td><b>Built Up Area</b></td> 
 									<td>:</td>
 									<td>{{property.property_info.buildup_area}}{{property.property_info.build_unit}}</td>					
 								</tr>
+								{% endif %}
+								{% if property.property_info.land_area %}
 								<tr>
 									<td><b>Land Area</b></td>
 									<td>:</td>
 									<td>{{property.property_info.land_area}}{{property.property_info.land_unit}}</td>					
 								</tr>
+								{% endif %}
+								{% if property.property_info.carpet_area %}
 								<tr>
 									<td><b>Carpet Area</b></td>
 									<td>:</td>
 									<td>{{property.property_info.carpet_area}}{{property.property_info.carpet_unit}}</td>					
 								</tr>
+								{% endif %}
+								{% if property.price %}
 								<tr>
 									<td><b>Price</b></td>
 									<td>:</td>
 									<td>{{property.price}}</td>			
 								</tr>
+								{% endif %}
+								{% if property.category %}
 								<tr>
 									<td><b>Posted On</b></td>
 									<td>:</td>
 									<td>{{property.date}}</td>			
 								</tr>
+								{% endif %}
+								{% if property.contact_details.contact_person %}
 								<tr>
 									<td><b>Contact</b> </td> 
 									<td>:</td>
 									<td>{{property.contact_details.contact_person}}, {{property.contact_details.mobile}}</td>
 								</tr>
+								{% endif %}
 							</table>
 						</div>
 					</div>
@@ -80,15 +100,32 @@
 		<div class="col-xs-12 propDetails">
 			<h3>Addtional Details</h3>
 			<ul class="list-inline">
-				<li><b>Property Age :</b> {{property.optional_property_details.property_age}}</li>
-				<li><b>Furnishing :</b> {{property.optional_property_details.furnished}}</li>
-				<li><b>Ownership :</b> {{property.optional_property_details.ownership}}</li>
-				<li><b>Total Number of Floors :</b> {{property.optional_property_details.property_floor}}</li>
-				<li><b>Facing :</b> {{property.optional_property_details.facing}}</li>
-				<li><b>Parking :</b> {{property.optional_property_details.parking}}</li>
-				<li><b>Transaction Type :</b> {{property.optional_property_details.transType}}</li>
-				<li><b>Bedrooms :</b> {{property.property_info.bedrooms}}</li>
+				{% if property.optional_property_details.property_age %}
+					<li><b>Property Age :</b> {{property.optional_property_details.property_age}}</li>
+				{% endif %}
+				{% if property.optional_property_details.furnished %}
+					<li><b>Furnishing :</b> {{property.optional_property_details.furnished}}</li>
+				{% endif %}
+				{% if property.optional_property_details.ownership %}
+					<li><b>Ownership :</b> {{property.optional_property_details.ownership}}</li>
+				{% endif %}
+				{% if property.optional_property_details.property_floor %}
+					<li><b>Total Number of Floors :</b> {{property.optional_property_details.property_floor}}</li>
+				{% endif %}
+				{% if property.optional_property_details.property_age %}
+					<li><b>Facing :</b> {{property.optional_property_details.facing}}</li>
+				{% endif %}
+				{% if property.optional_property_details.property_age %}
+					<li><b>Parking :</b> {{property.optional_property_details.parking}}</li>
+				{% endif %}
+				{% if property.optional_property_details.property_age %}
+					<li><b>Transaction Type :</b> {{property.optional_property_details.transType}}</li>
+				{% endif %}
+				{% if property.optional_property_details.property_age %}
+					<li><b>Bedrooms :</b> {{property.property_info.bedrooms}}</li>
+				{% endif %}
 				<li><b>Bathrooms :</b> {{property.property_info.bathrooms}}</li>
+				{% endif %}
 				<!-- <li><b>Reserved Parking :</b> 1</li> -->
 			</ul>
 		</div>

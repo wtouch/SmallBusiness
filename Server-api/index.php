@@ -2,6 +2,7 @@
 
 // load required files
 require_once 'lib/Slim/Slim.php';
+require_once 'lib/PHPExcel/PHPExcel.php';
 require_once 'lib/PHPMailer/PHPMailerAutoload.php';
 require_once 'modules/db/session.php';
 
@@ -20,6 +21,7 @@ $body = $app->request->getBody();
 }); */
 //use these uri for all get requests {Vilas}
 $app->post('/upload(/:postParams)', 'uploadFiles' );
+$app->post('/excel(/:postParams)', 'excelFiles' );
 $app->post('/sendmail(/:postParams)', 'sendMail' );
 
 //Use this uri for multiple records with limit {Vilas}
@@ -148,6 +150,24 @@ function uploadFiles($postParams = null){
 				throw new Exception('There is no file input!');
 		}else{
 			include 'modules/upload.php';
+		}
+	}
+	catch(Exception $e) {
+		$response["status"] = "error";
+        $response["message"] = "Error: '".$e->getMessage()."'";
+        $response["data"] = null;
+		echoResponse(200, $response);
+    }
+}
+function excelFiles($postParams = null){
+	$app = new \Slim\Slim();
+	$body = $app->request->getBody();
+
+	try{
+		if(!isset($_FILES)){
+				throw new Exception('There is no file input!');
+		}else{
+			include 'modules/excel.php';
 		}
 	}
 	catch(Exception $e) {

@@ -1,0 +1,23 @@
+{% autoescape false %}
+{% if featured_products | length >= 4 %}
+	<div class="contentModule featured_services">
+		<h3 class="subhead">Featured Services</h3>
+		<div class="sections clearfix services">
+		<ul>
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_products if break == 0 %}
+				{% if x.type == 'service' %}
+					
+						<h4><li><a href="services/{{x.product_service_name}}/{{x.id}}"><h4>{{x.product_service_name}}</h4></a></li>
+						
+					{% set i = (i + 1) %}
+					{% if i == 4 %}
+						{% set break = 1 %}
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</ul>
+		</div>
+	</div>
+	{% endif %}
+{% endautoescape %}

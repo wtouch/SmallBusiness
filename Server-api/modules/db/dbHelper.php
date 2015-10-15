@@ -371,22 +371,61 @@ class dbHelper {
 			
 			$dataKey = array();
 			$dataValue = array();
-			foreach($inputData as $key => $val) // $inputData holds input json data
-			{
-				$value = ($key!=='password')
-						? (is_object($val) || is_array($val))
-							? (json_encode($val))
-							: ($val)
-						: passwordHash::hash($val);
-				//echo ($key=='password')	? passwordHash::hash($val) : "not pass";
-				array_push($dataKey,$key);
-				//array_push($dataValue,"'".$value."'");
-				$dataValue[":".$key] = $value;
+			$colNames = "";
+			$colValues = "";
+			
+			//$pdo->beginTransaction();
+			if(isset($inputData['cols']) && isset($inputData['tableData'])){
+				/* $colNames = implode(",",$inputData['cols']);
+				foreach($inputData['tableData'] as $row){
+					$colValues .= implode
+				} */
+				
+				function placeholders($text, $count=0, $separator=","){
+					$result = array();
+					if($count > 0){
+						for($x=0; $x<$count; $x++){
+							$result[] = $text;
+						}
+					}
+
+					return implode($separator, $result);
+				}
+				//$pdo->beginTransaction(); // also helps speed up your inserts.
+				$insert_values = array();
+				foreach($inputData['tableData'] as $d){
+					$question_marks[] = '('  . placeholders('?', sizeof($d)) . ')';
+					$insert_values = array_merge($insert_values, array_values($d));
+				}
+				
+				$sql = "INSERT INTO $table (" . implode(",", $inputData['cols'] ) . ") VALUES " . implode(',', $question_marks);
+				//echo $sql;
+				$stmt = $this->db->prepare($sql);
+				//print_r($inputData);
+				$stmt->execute($insert_values);
+
+			}else{
+				foreach($inputData as $key => $val) // $inputData holds input json data
+				{
+					$value = ($key!=='password')
+							? (is_object($val) || is_array($val))
+								? (json_encode($val))
+								: ($val)
+							: passwordHash::hash($val);
+					//echo ($key=='password')	? passwordHash::hash($val) : "not pass";
+					array_push($dataKey,$key);
+					//array_push($dataValue,"'".$value."'");
+					$dataValue[":".$key] = $value;
+				}
+				$colNames = implode(",",$dataKey);
+				$colValues = ":".implode(",:",$dataKey);
+				$sql = "INSERT INTO $table($colNames) VALUES($colValues)";
+				echo $sql;
+				$stmt =  $this->db->prepare($sql);
+				$stmt->execute($dataValue);
 			}
-			$colNames = implode(",",$dataKey);
-			$colValues = ":".implode(",:",$dataKey);
-		    $stmt =  $this->db->prepare("INSERT INTO $table($colNames) VALUES($colValues)");
-            $stmt->execute($dataValue);
+			
+		    
 			$id = $this->db->lastInsertId();
             $affected_rows = $stmt->rowCount();
             $response["status"] = "success";
