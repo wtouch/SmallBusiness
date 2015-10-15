@@ -25,31 +25,39 @@
 							</div>
 							<div class="table-responsive">
 								<table class="table">
+									{% if x.property_for %}
 									<tr>
 										<td>Property Type</td>
 										<td>:</td>
-										<td>{{x.type}}</td>
+										<td>{{x.type}}&nbsp;=> &nbsp;<b>{{x.property_for}}</td>
 									</tr>
+									{% endif %}
+									{% if x.buildup_area %}
 									<tr>
 										<td>Built Up Area</td>
 										<td>:</td>
 										<td>{{x.property_info.buildup_area}}{{x.property_info.build_unit}}</td>					
 									</tr>
+									{% endif %}
+									{% if x.location %}
 									<tr>
 										<td>Location</td>
 										<td>:</td>
 										<td>{{x.location}}</td>
 									</tr>
+									{% endif %}
+									{% if x.price %}
 									<tr>
 										<td>Price</td>
 										<td>:</td>
 										<td>{{x.price}}</td>
 									</tr>
+									{% endif %}
 								</table>
 							</div>
 							<div class="readmore">
 								<a href="properties/{{x.title}}/{{x.id}}" class="btn btn-info head">More Details</a>
-								 <a href="/enquiry?category={{x.category}}&id={{x.id}}&title={{x.title}}"class="btn btn-info head">Send Enquiry</a> 
+								 <a href="/enquiry?property_category={{x.category}}&property_id={{x.id}}&property_title={{x.title}}"class="btn btn-info head">Send Enquiry</a> 
 							</div>
 						</div>
 					</div>

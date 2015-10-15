@@ -63,12 +63,20 @@
 			$from['email'] = trim($input->from_email->from);
 			$from['name'] = trim($input->name);
 			
+			// check cc email address given or not
 			(property_exists ($input->to_email, 'cc')) ? $ccMail = explode(",", trim($input->to_email->cc)) : $ccMail = null;
 			
+			// recipients mail IDs to send mail
 			$recipients = explode(",", trim($input->to_email->to));
-			(property_exists($input->to_email, 'replyTo1')) ? $replyTo = array("email" => trim($input->to_email->replyTo), "name" => $from['name']) : $replyTo = null;
-			$subject = "need your resume" ;//trim($input->subject);
-			$message = "<table><tr><td>Name: </td><td>".$from['name']."</td></tr><tr><td>Email: </td><td>".$from['email']."</td></tr>";
+			
+			// check replyTo email given or not
+			(property_exists($input->to_email, 'replyTo')) ? $replyTo = array("email" => trim($input->to_email->replyTo), "name" => $from['name']) : $replyTo = null;
+			
+			// subject
+			$subject = trim($input->subject);
+			
+			// Message Part
+			$message = "<table><tr><td>Name: </td><td>".$from['name']."</td></tr><tr><td>Email: </td><td>".$input->to_email->replyTo."</td></tr>";
 			if(is_object($input->message)){
 				foreach($input->message as $key => $value){
 					$message .= "<tr><td>".$key.":</td><td>".$value."</td></tr>";
@@ -77,9 +85,12 @@
 				$message .= "<tr><td>Message: </td><td>".$input->message."</td></tr>";
 			}
 			$message .= "</table>";
+			//print_r($input);
 			$message = trim($message);
-
+			
+			// Send Mail
 			$mail = $db->sendMail($from, $recipients, $subject, $message, $replyTo, $attachments = null, $ccMail, $bccMail = null, $messageText = null);
+			//print_r($mail);
 			 if($mail['status'] == 'success'){
 				$insert = $db->insert("enquiry", $body);
 				$insert['message'] = $insert['message']." " .$mail['message'];
@@ -91,7 +102,7 @@
 		}catch(Exception $e){
 			$response["status"] = "warning";
 			$response["message"] = 'Error: ' .$e->getMessage();
-			print_r($response["message"]);
+			//print_r($response["message"]);
 			$response["data"] = null;
 			echo json_encode($response);
 		}

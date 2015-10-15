@@ -24,7 +24,11 @@
 							<td>{{x.HB}}</td>
 							<td>
 								<div class="btn-group">
-									<a href="#/dashboard/business/adddetails/{{x.id}}" class="btn btn-primary  glyphicon glyphicon-info-sign" tooltip="Add/Edit Details"></a>
+									<a ng-click="open('modules/excel/viewDetails.html', x)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="View Details"></a>
+								</div>
+								
+								<div class="btn-group">
+									<a ng-click="open('modules/excel/editDetails.html', x)" class="btn btn-primary glyphicon glyphicon-pencil" tooltip="Edit Details"></a>
 								</div>
 							</td>
 						</tr>
@@ -35,7 +39,7 @@
 	</div>
 </div>
 
-<div class="text-center">				
-	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(currentPage)"></pagination>				
+<div class="text-center" >				
+	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(currentPage)"></pagination>				
 	<pre>Page: {{currentPage}} / {{numPages}}</pre>
 </div>	

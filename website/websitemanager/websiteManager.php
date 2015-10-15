@@ -202,7 +202,8 @@ class websiteManager{
 			$response["currentPage"] = $this->currentPage;
 			$response["itemsOnPage"] = $this->itemsOnPage;
 			
-			if(isset($_GET['category'])&&isset($_GET['title'])){
+			if(isset($_GET['property_category'])&&isset($_GET['property_title'])){
+				//print_r($_GET);
 				foreach($_GET as $key=>$value){
 					$response[$key]=$value;
 				}
@@ -499,21 +500,22 @@ class websiteManager{
 			
 			if($businessData['status'] == 'success' && $businessData['data'] != null) {
 				$properties = $this->getProperties($businessData['data']["user_id"],$search);
-				if($properties==1){
+				//print_r($properties);
+				//if($properties==1){
 					$response["properties"] = $properties['data'];
 					$response["totalRecords"] = $properties["totalRecords"];
-				}else{
+				/* }else{
 					$response["status"] = "error";
 					$response["message"] ="Data not Found";
 					$response["data"] = null;
 					$response = $this->getTemplate('error', $response);
-				}
+				} */
 				
 			}else{
 				throw new Exception($businessData['message']);
 			}
 			
-			if(count($response["properties"]) >= 1){
+			/* if(count($response["properties"]) >= 1){
 				foreach($response["properties"] as $key => $value){
 					$categories[] = $value["category"];
 					if($value["category"] == $category){
@@ -529,7 +531,7 @@ class websiteManager{
 				if(!isset($_GET['property_for'])){
 					$response["prop_category"] = array_unique($categories);
 				}
-			}
+			} */
 			
 			// assign data to response
 			$response = array_merge($response, $businessData);

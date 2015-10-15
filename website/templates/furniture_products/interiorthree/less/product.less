@@ -1,30 +1,67 @@
+@lightbackcolor :#d8664e; 
+@colorblack : #02071A;
+
+
+		
 .featured_services{
 	.sections{
+	position:relative;
 		border : none;
-		background : none;
+	
 		box-shadow : 0 0 0;
+		
 	}
+	
+		.servs{
+	position:relative;
+	}
+	
 	.services{
+	
 		.servimage{
-			border : 4px solid transparent;
-			padding : 6px;
+		background-color :@lightbackcolor ;
+			//border : 1px solid black;
+			height:200px;
 			&:hover{
-				border : 4px solid @darkcolor;
+				//border : 1px solid black;
 			}
 		}
 		.servdesc{
-			height : 220px;
+			height : 200px;
+			background-color:@lightbackcolor;
+			//border-bottom:1px solid black;
+			//border-top-style:@colorwhite;
 			.description{
 				height : 75px;
 				overflow : hidden;
 			}
-			.readmore{
-				text-align : center;
-				margin-top : 10px;
-			}
 		}
 	}
+	.readmore{
+			position : absolute;
+		    top: 0px;
+			left: -240px;
+
+			text-align : center;
+			margin-top : 10px;
+			width: 482px;
+			height: 201px;
+			overflow : hidden;
+			margin : 0 auto;
+			border-radius : inherit;
+			opacity: 0;
+			background-color: rgba(3, 13, 130, 0.49);
+			transition: all 0.4s ease-in-out;
+			overflow : hidden;
+			border-radius : inherit;
+			}
+		.servs:hover .readmore{
+		background-color:@colorblack;
+		opacity:0.7;
+		}
 }
+
+
 
 .products{
 	.thumbnail{
@@ -39,7 +76,7 @@
 				border : 2px solid transparent;
 				padding : 4px;
 				&:hover{
-					border : 2px solid @darkbackcolor;
+					//border : 2px solid @darkbackcolor;
 				}
 			}
 		}
