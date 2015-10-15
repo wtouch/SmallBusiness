@@ -1,9 +1,8 @@
 //project
 //css for featured project slider
-.bxslider{ 
+.bxslider{  
 	padding:5px;
 	li{
-		width:100px;
 		height : 325px;
 		.projimg{
 			height : 175px;
@@ -13,121 +12,227 @@
 			img{
 				min-height: 175px;
 			}
-			&:hover{
-				border : 2px solid @darkcolor;
+		}
+		.btn-info{
+			margin-bottom : 10px;
+			&:hover,&active{
+				padding : 6px 40px;
 			}
 		}
 		p{
 			margin-bottom : 5px;
 		}
-		.readmore{
-			margin-bottom :10px;
-			margin-top:10px;
-		}
 	}
 }
-
 .homeproject {
 	position : relative;
-	margin-top:10px;
-	margin-bottom:10px;
-	.projectnav, .projsnap{
-		border-radius : 4px;
-		padding:3px;
-	}  
-	.projectnav, .projsnap, .bx-wrapper{
-		background-color: @back;
-		border: 6px solid @color;
-		height : 315px;
-	}
-	.projectnav {
-		a{
-			font: bold 14px/1.5em Arial, Helvetica, sans-serif;
-			color: @color;
-			padding : 13px 15px;
-			&:hover{
-				color: @back;
-				text-decoration:none;
-				background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
-				background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
-				background: linear-gradient(top, @lightcolor, @darkcolor);
+	.projectCarousal{
+		position : relative;
+		z-index : 99;
+		width : 500px;
+		margin : 0 auto;
+		float : none;
+		z-index : 1;
+		box-shadow: 0 0 15px;
+		border-radius : 50%;
+		overflow: hidden;
+		.bx-viewport{
+			height:500px;
+			min-height : 300px !important;
+			.carousslider{
+				min-height : 300px;
+				li{
+					left:0;
+					min-height : 300px;
+					min-width : 100% !important;
+				}
+			} 
+			img{
+				height:500px;
 			}
 		}
-		
 	}
-	.bx-viewport{
-		min-height : 300px !important;
-		.carousslider{
-			padding-left: 0px;
-			li{
-				border:7px solid @lightbackcolor;
-				background-color: @lightbackcolor;
-				border-radius:40px;
-				transition: all 1s ease-in-out ;
-				min-width : 100% !important;
-				img{
-					width : 100%;
-					min-height : 303px;
+	.projectnav, .projsnap {
+		position : absolute;
+		height: 320px;
+		width : 300px;
+		top : 100px;
+		box-sizing : border-box;
+	}
+	.projectnav{
+		padding : 5px;
+		left :10;
+		left : 0;
+		.nav-stacked{
+			>li{
+				+li {
+					margin-top: 10px;
 				}
-				&:hover{
-					transform: scale(1.1);
-					 border-radius: 40px;
-				}
-				&.item{
-					overflow : hidden;
-					height : 303px;
+				>a, > a:focus{
+					//color : @lightbackcolor;
+					padding: 10px 15px;
+					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
+					text-transform : uppercase;
+					margin-top: 15px;
+					margin-bottom: 15px;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					text-decoration : none;
+					//background : linear-gradient(@darkcolor, @darkbackcolor);
+					//color : @colorwhite;
+					transform: translateX(-50px);
+					width: 330px;
+					border-top-left-radius: 20px;
+					border-bottom-left-radius: 20px;
+					text-align: right;
+					padding-right: 50px;
 				}
 			}
 		}
 	}
 	.projsnap{
+		h4{
+			border : none;
+			//color : @lightcolor;
+		}
+		ul{
+			li{
+				//color : @lightcolor;
+				font-size : 13px;
+				padding: 10px 15px;
+				font: bold 13px/1.5em Arial, Helvetica, sans-serif;
+			}
+		}
+		p{
+			padding:3px;
+			//color : @lightcolor;
+			&:last-child{
+				border:none;
+			}
+		}
+		right: 16px;
+		padding-left: 60px !important;
+		padding-top: 7px !important;
+		padding-right: 10px !important;
 		text-align : center;
 		img{
-			max-height : 110px;
+			height : 110px;
 			margin-top: 10px;
 			margin-bottom: 10px;
-			border : 2px solid @darkcolor;
+			//border : 2px solid @lightcolor;
 			border-radius : 5px;
 			padding :4px;
 		}
-		p{
-			margin: 0px 10px;
-			padding: 5px;
-			border-bottom : 1px solid @darkcolor;
-			&:last-child{
-				border : none;
+		.viewproperty{
+			a{
+				//color : @lightcolor;
+				text-decoration : underline;
+				color:@colorwhite;
+				&:hover{
+					//color : @colorwhite;
+					text-decoration : none;
+				}
+			}
+		}
+	}
+	#carousel {
+		.carousel-inner {
+			.item{
+				height: 500px;
+				overflow: hidden;
+				>img{
+					width : auto;
+					min-height : 500px;
+					
+				}
+			}
+		}
+		a.left.carousel-control{
+			left : 40px;
+		}
+		a.right.carousel-control {
+			right : 40px;
+		}
+		a.left.carousel-control, a.right.carousel-control {
+			background: none;
+		}
+	}
+}
+// single project nav css
+.project{
+	.navbar{
+		//border: 1px solid @lightbackcolor;
+		border-radius: 0;
+		margin-top:10px;
+		margin-bottom:10px;
+		height : 20px;
+		width:auto;
+	}
+	ul.nav.navbar-nav {
+		//background : linear-gradient(@back, @color);
+		a{
+		color:@colorwhite;
+		}
+		>li{
+			//border-right : 1px solid @lightbackcolor;
+			>a, > a:focus{
+				padding : 9px 8px;
+				//color : @lightcolor;
+				position : relative;
+				font-size : 13px;
+			} 
+			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+				background : linear-gradient(@darkcolor, @darkbackcolor);
+				color : @lightcolor;
+			}
+		}
+	}
+	.projHead, .projImg{
+		margin-top : 10px;
+	}
+	.projImg{
+		max-height : 175px;
+		margin-right : 10px;
+		float :left;
+	}
+	.projectgallery{ 
+		.thumbnail{
+			&.floor{
+				height : 300px;
+			}
+			.projectImags{
+				width: 205px;
+				height: 170px;
+				overflow: hidden;
+				margin : 0 auto;
+				img{
+					min-height : 170px;
+				}
 			}
 		}
 	}
 }
-.homeproject::after{
-	position : absolute;
-	content : "";
-	background-image : url('../img/key.png');
-	background-size: 100% 100%;
-	left :140px;
-	top : 120px;
-	z-index: 999;
-	height : 230px;
-	width : 230px;
-}
-//css for project list
+
+//css for single project & project list
 	.projlist{
 		.project{
 			.thumbnail{
 				height:385px;
+				border:1 px solid transparent;
 				.projectimg{
-					height : 148px;
-					width : 180px;
+					width : 205px;
+					height : 170px;
 					overflow : hidden;
 					margin : 0 auto;
 					img{
-						min-height : 148px;
+						min-height : 170px;
 						border : 2px solid transparent;
+						padding : 4px;
 						&:hover{
-							border : 2px solid @darkbackcolor;
+							border : 2px solid @lightbackcolor;
 						}
 					}
+					
 				}
 				.caption{
 					padding : 9px 5px;
@@ -136,96 +241,54 @@
 						margin-bottom : 0px;
 					}
 				}
-				hr {
-					margin-top: 10px;
-					margin-bottom: 10px;
-				}
+
 			}
 		}
 	}
-	
-	//for single project
-	.project{
-		.navbar{
-			background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
-			background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
-			background: linear-gradient(top, @lightcolor, @darkcolor);
-			border-radius: 0;
-			margin-bottom:10px;
-			width:auto;
-		}
-		ul.nav.navbar-nav {
-			>li{
-				border-right : 1px solid @lightcolor;
-				height : 38px;
-				>a, > a:focus{
-					padding : 7px 7px 10px;
-					color : @back;
-					font-weight : bold;
-				} 
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @back ;
-					color : @color;
-				}
+	@media (max-width: 768px){
+		.homeproject {
+			.projectCarousal{
+				position : static;
+				width:auto;
+				height:300px;
+				margin : 0 ;
+				border-radius :0px;
+				margin-bottom:5px;
 			}
-		}
-		.projectgallery{ 
-			.thumbnail{
-				&.floor{
-					height : 275px;
-				}
-				.projectImags{
-					width: 190px;
-					height: 148px;
-					overflow: hidden;
-					margin : 0 auto;
-					img{
-						min-height : 148px;
+			.projectCarousal::after{
+				position : absolute;
+				content : "";
+				background-image : url('../img/lady.png');
+				background-size: 100% 100%;
+				bottom : -3px;
+				z-index: 999;
+				height : 290px;
+				width : 120px;
+				left: 17px;
+
+			}
+			.projsnap{
+				padding-left: 0px !important;
+			}
+			.projectnav{
+				.nav-stacked{
+					>li{
+						text-align: center;
+						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+							transform: translateX(0px);
+							width: 100%;
+							color: @lightcolor;
+							border-top-left-radius: 0px;
+							border-bottom-left-radius: 0px;
+							text-align: center;
+							padding-right: 50px;
+						}
 					}
 				}
-				.caption{
-					height: 173px;
-					overflow: hidden;
-					margin-bottom: 10px;
-				}
 			}
-		}
-	}
-	
-	@media (min-width: 320px){
-		.projImg{
-			float :none;
-			max-height : 175px;
-			margin-right:10px;
-		}
-	}
-	@media (min-width: 992px){
-		.projImg{
-			float : left;
-			max-height : 175px;
-			margin-right : 10px;
-		}
-	}
-	@media (min-width: 1200px){
-		.projImg{
-			float :left;
-			max-height : 175px;
-			margin-right:10px;
-		}
-	}
-	@media (max-width: 480px){
-		.homeproject::after{
-			display : none;
-			width : 0px;
-		}
-		.featuredProperty {
-			.bxslider1{
-				li{
-					.verify{
-						width: 45%;
-						right: 0;
-					}
-				} 
+			.projectnav, .projsnap {
+				position : static;
+				width:auto;
 			}
 		}
 	}
@@ -234,11 +297,14 @@
 			display : none;
 			width : 0px;
 		}
-		.project .navbar {
-			
-			
-			height: 320px;
-			width: auto;
-			padding: 7px 32px 0px;
+		.project .navbar{
+			height : 300px;
 		}
 	}
+	@media (max-width: 480px){
+		.project .projImg{
+			float : none;
+		}
+	}
+	
+	
