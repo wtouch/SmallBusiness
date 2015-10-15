@@ -1,0 +1,23 @@
+{% autoescape false %}
+	{% if data.testimonials | length >= 1 %}
+		<h1 class="clr-1">Testimonials</h1>
+		{% set break = 0 %}{% set i = 0 %}
+		{% for key, value in data.testimonials if break == 0 %}
+			<div class="row featrtesti">
+				<div class="col-xs-12 col-sm-4 col-lg-4">
+					<img class="img-responsive center-block" src="{{value.image.file_relative_path}}">
+				</div>
+				<div class="{{ (value.image.file_relative_path) ? 'col-xs-12 col-sm-8 col-lg-8' : 'col-xs-offset-1 col-xs-11 col-sm-offset-1 col-sm-11 col-lg-offset-1 col-lg-11'}}">
+					<blockquote class="clr-1">
+						<div class="description"><h6 class="clr-1">{{ value.description }}</h6></div>
+						<footer><cite>{{value.heading}}</cite></footer>
+					</blockquote>
+				</div>
+			</div>
+			{% set i = (i + 1) %}
+			{% if i == 5 %}
+				{% set break = 1 %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endautoescape %}
