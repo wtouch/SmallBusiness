@@ -18,8 +18,8 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		<script>
-		    $(document).ready(function(){
+<script>
+   $(document).ready(function(){
     $("div.container-fluid>div>div.a>div").click(function(){
 	    $("div.container-fluid>ul>li:nth-child(1)").toggleClass("a1");
 		$("div.container-fluid>ul>li:nth-child(2)").toggleClass("a2");
@@ -28,32 +28,30 @@
 		
 	});
 });
-		</script>
-<script>
-
-window.onscroll = function() {myFunction()};
-
-function myFunction() {
-   if (document.body.scrollTop || document.documentElement.scrollTop > 50) {
-            document.getElementById("myP1").className = "bb";
-			document.getElementById("myP").className = "logo1";
 		
+//window.onscroll = function() {myFunction()};
+
+//function myFunction() {
+  // if (document.body.scrollTop || document.documentElement.scrollTop >50) {
+  
+          //  document.getElementById("myP1").className = "bb";
+			//document.getElementById("myP").className = "logo1";
+		    
 			
-    } else {
+    //} else {
 	   
-			document.getElementById("myP1").className = "";
-			document.getElementById("myP").className = "";
-			
+			//document.getElementById("myP1").className = "";
+			//document.getElementById("myP").className = "";
 		
-   }
-	
-}
+			
+		//}
+	//} 
 
 
 //window.onscroll = function() {myFunction1()};
 
  //function myFunction1() {
-  // if (document.body.scrollTop || document.documentElement.scrollTop > 500) {
+   //if (document.body.scrollTop || document.documentElement.scrollTop > 0) {
             
 		//document.getElementById("myP2").className = "logo3";
 		//document.getElementById("myP3").className = "dd";
@@ -73,27 +71,25 @@ function myFunction() {
 	<div class=" navi">
 		<div class="a"><div class="glyphicon glyphicon-th"></div></div>
 	</div>
+
 		<ul>
 			<li class="b1">Home</li>
 			<li class="b2">About </li>
 			<li class="b3">Gallary</li>
 			<li class="b4">Contact </li>
 		</ul>
-			
-	<div class="row" >
-		<img src="{{path}}img/pic5.jpg" class="img-responsive" width="100%" class="panel1"> 
-	</div>
 	
 	<div class="row" >
-	     <div class=" col-md-6 logo" >
+		<img src="{{path}}img/pic5.jpg" class="img-responsive" width="100%" class="panel1"> 
+	    <div class=" col-md-6 logo" >
 			<img src="{{path}}img/logo.png"  class="imglogo">
 		</div>
 	</div>
      
 	<div class="row ">
 		<img src="{{path}}img/pic1.jpg" class="img-responsive" width="100%" class="panel2">	
-	</div>
-		<div id="myP" class="col-md-12">
+	
+		<div id="myP" class="col-md-12 logo1">
        </div> 
 	   <div class="row">
 		  <div class="col-md-6 aa">
@@ -122,8 +118,8 @@ function myFunction() {
 	</div>
 
 	<div class="row">
-		<div id="myP2" class="col-md-6 logo3">
-		</div>
+		<div id="myP2" class="col-md-12 logo3">
+		 </div>
 		<div class="row">
 		<div id="myP3" class="col-md-6 dd">     
 	       <h2>CONTACT</h2>
@@ -141,9 +137,10 @@ function myFunction() {
 			<img src="{{path}}img/pillo.png">
 		</div>
 		</div>
-
+       
 	</div>
 </div>
 </body>
+{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html']%}
 </html> 
 {% endspaceless %}
