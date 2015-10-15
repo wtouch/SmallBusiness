@@ -9,14 +9,16 @@ define(['app'], function (app) {
 		$scope.totalRecords = "";
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
-		
+		$scope.numPages = "";
+		$scope.excelPart = $routeParams.excelPart;
 		
 		$scope.getData = function(){
-			dataService.get("getmultiple/excel/1/100", {})
+			dataService.get("getmultiple/excel/1/10", {})
 			.then(function(response) {  
 				console.log(response);
 				if(response.status == 'success'){
 					$scope.list = response.data;
+					$scope.totalRecords = response.totalRecords;
 				}else{
 					$notification.error("Get Business", "You didn't added any business! Please add business first.");
 				}
@@ -24,8 +26,16 @@ define(['app'], function (app) {
 		}
 		$scope.getData();
 		
+		$scope.pageChanged = function(page) {
+			//(featured) ? angular.extend($scope.businessParams, featured) : "";
+			dataService.get("getmultiple/excel/"+page+"/"+$scope.pageItems)
+			.then(function(response) { 
+				$scope.list = response.data;			
+			});
+		};
+		
 		$scope.uploads = function(files){
-			upload.upload(files,"excel",{url : "../server-api/index.php/excel", table : "excel_jaidev"},function(response){
+			upload.upload(files,"excel",{url : "../server-api/index.php/excel", table : "excel"},function(response){
 				if(response.status === 'success'){
 					$scope.getData();
 				}

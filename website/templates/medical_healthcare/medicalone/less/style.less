@@ -16,7 +16,7 @@
 	@import "product.less";
 	
 	body{
-		background-color :@darkbackcolor;
+		background-image: linear-gradient(@darkbackcolor,@darkcolor,@back);
 		position : relative;
 		
 	}
@@ -231,7 +231,25 @@
 		margin-top : 15px;
 		color:@colorwhite;
 		padding: 10px 20px 30px;
-	}
+		}
+		.content.anim {
+			  display: block;
+			  animation-name: con;
+			  animation-duration: 2s;
+			  animation-iteration-count: 1;
+			}
+		@keyframes con {
+		  0% {
+			margin-top: 800px;
+			transform:rotate(1deg);
+			
+		  }
+		  100% {
+			margin-top: 20px;
+			transition:1s;
+			transform:rotate(1deg);
+		  }
+		}
 	h1 {
 		border-bottom: 1px solid @lightcolor;
 		font-weight:bold;
@@ -283,10 +301,10 @@
 	.btn-info,.btn-primary{
 		border : none;
 		/*background: linear-gradient(@lightbackcolor 75%,@);*/
-		background-color:@darkcolor;
+		background-color:@lightcolor;
 		color : @back;
 		padding:7px !important;
-		font: bold 13px/1.5em Arial, Helvetica, sans-serif;
+		font: bold  13px/1.5em Arial, Helvetica, sans-serif;
 		&:hover, &:hover, &:active{
 			display: inline-block;
 			vertical-align: middle;
@@ -298,7 +316,7 @@
 			-moz-osx-font-smoothing: grayscale;
 			position: relative;
 			overflow: hidden;
-			background: @back;
+			background: @darkcolor;
 			color:@colorwhite;
 			-webkit-transition-property: color;
 			transition-property: color;
@@ -454,8 +472,19 @@
 			z-index: 999;
 			text-shadow: -2px -1px 5px @darkcolor;
 		}
-		.send:hover{
+		.send11:hover{
 		      width:200px;
 			}
-			
-	
+			.btn-info[disabled], fieldset[disabled] .btn-info, .btn-info.disabled:hover, .btn-info[disabled]:hover, fieldset[disabled] .btn-info:hover, .btn-info.disabled:focus, .btn-info[disabled]:focus, fieldset[disabled] .btn-info:focus, .btn-info.disabled.focus, .btn-info[disabled].focus, fieldset[disabled] .btn-info.focus, .btn-info.disabled:active, .btn-info[disabled]:active, fieldset[disabled] .btn-info:active, .btn-info.disabled.active, .btn-info[disabled].active, fieldset[disabled] .btn-info.active {
+				background-color: @darkcolor; 
+				border-color: none; 
+		}
+	.gallery .thumbnail img {
+			max-height: 200px;
+			width: 100%;
+			padding: 20px;
+			min-height: 200px;
+				img:hover{
+						border:1px solid @darkcolor;
+					}
+		}

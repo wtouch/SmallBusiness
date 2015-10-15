@@ -6,11 +6,11 @@
 		font-family:'QumpellkaNo12';
 		src:url('../fonts/QumpellkaNo12.otf');
 	}
-	@color : #421266;
+	@color : #24600B;
 	@lightcolor : #B478E6;
-	@darkcolor : #18012B;
+	@darkcolor : #540505;
 	@back : ##822424;
-	@darkbackcolor : #4A5F0A;
+	@darkbackcolor : rgb(175, 31, 84);
 	@lightbackcolor :#A1C31A; 
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
@@ -28,26 +28,14 @@
 	body {
     
 		background-image:url(../img/pic7.jpg);
-		-webkit-animation-name: example; /* Chrome, Safari, Opera */
-		-webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
 		
-		animation-name: example;
-		animation-duration: 2s;
-		animation-iteration-count:infinite;
-		z-index: 100;
-	}
-
-/* Chrome, Safari, Opera */
-@-webkit-keyframes example {
-    0%   {background-image:url(../img/pic7.jpg);background-size:cover;}
-    25%  {background-image:url(../img/pic8.jpg);background-size:cover;}
    
     
 }
 
 	.logo {
 		height:230px;
-		width:350px;
+		width:300px;
 		margin-left:10px;
         margin-top:15px;
         background-image:url('../img/logo.jpg');
@@ -55,9 +43,12 @@
 	}
 	.sociallinks{
 		top: 50%;
+		left:0;
 		position: fixed;
 		z-index : 999;
 		width : 5px;
+		margin-top:100px;
+		background-color:@darkcolor;
 		ul{
 			list-style : none;
 			li{
@@ -99,49 +90,40 @@
 		//background-image: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
 		//background-image: -moz-linear-gradient(top, @lightbackcolor, @darkbackcolor);
 		//background-image: -linear-gradient(top, @lightbackcolor, @darkbackcolor);
-		background-color:transparent;
+		
+background-color:transparent;
 		border : none;
 		border-radius: 0;
-		    top: -119px;
-            left: 260px;
-		margin-bottom:40px;
-	    display: inline-block;
-		text-decoration: none;
-		margin-right:130px;
-		
+		    top: 64px;
+            left: 78px;
+			right:50px;
+			width: 800px;
+		    margin-bottom:40px;
+			margin-top:55px;
+	        display: inline-block;
+		    text-decoration: none;
+            margin-right:170px;
+			
+		   
 		
 		.navbar-nav{
 			> li{
+			color:@colorwhite;
 				text-transform:uppercase;
 				position : relative;
 				margin-right: 10px;
-				> a, > a:focus {
-				    color:@colorwhite;
-					//padding : 9px;
-					padding-top:10px;
-					//border: 4px solid transparent;
-					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
-					position: relative;
-				}
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					//color : @back;
-					
-					
-					//padding: 15px 9px;
-					//background-color : @color;
-					//border: 4px solid @lightcolor;
-					//border-top-left-radius: 19px;
-					//border-bottom-right-radius: 19px;
-					//top: -8px;
-				}
+			    
 		
 				> ul {
+					color:@colorwhite;
 					list-style: none;
 					position: absolute;
 					width: 245px;
 					top : 53px;
 					z-index: 999;
 					display: none;
+					
+					
 					//background : @back;
 					//border: 3px solid //@lightcolor;
 					//border-radius:19px;
@@ -151,18 +133,25 @@
 					transition : all 500ms ease-in-out;
 					>li{
 						padding: 7px;
+						color:@colorwhite;
 						>a{
-							//color : @color;
+							color : @colorwhite;
 							&:hover{
 								text-decoration: underline;
+								color:@colorwhite;
+								
 							}
 						}
 						ul{
+							color:@colorwhite;
 							list-style: none;
 							padding: 7px;
 							>li{
+								color:@colorwhite;
 								>a{
 									//color : @color;
+									
+									color:@colorwhite;
 									&:hover{
 										text-decoration: underline;
 									}
@@ -174,6 +163,7 @@
 				&:hover > ul {
 					display: block;
 				}
+				
 			}
 		}
 	}
@@ -183,30 +173,44 @@
 		font : 1.5em/1.5em Amaranth-Regular;
 		padding: 4px 10px;
 		text-align: center;
-		color : @back;
-		background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
-		background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
-		background: linear-gradient(top, @lightcolor, @darkcolor);
-		border : 1px solid @lightcolor;
-		border-radius: 5px;
-		box-shadow : 0px 1px 2px @back;
+		//color : @back;
+		//background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
+		//background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
+		//background: linear-gradient(top, @lightcolor, @darkcolor);
+		//border : 1px solid @lightcolor;
+		//border-radius: 5px;
+		//box-shadow : 0px 1px 2px @back;
 	}
 	.content, .sections, .sidemenu,  .tab-content{
-		background-color : @back;
-		border:1px solid @darkbackcolor;
-		border-radius : 4px;
+		//background-color : @back;
+		//border:1px solid @darkbackcolor;
+		//border-radius : 4px;
+	
 	}
 	.thumbnail
 	{
-	 @color:@back;
-	 @background-color:@darkbackcolor;
+	 color:@colorwhite;
+	 background-color:@darkcolor;
+	 border:none;
+	 height:200%:
+	 width:200px;
+	 
+	 
 	}
+	.readmore{
+	position:relative;
+    border:1px solid @colorblack;
+	
+
+	}
+	
+	
 	.content{
 	    @color:@back;
 		margin-top : 20px;
 		padding : 0px 20px 20px;
 	
-	}
+	        }
 	.sections{
 		padding:15px;
 	}
@@ -258,6 +262,7 @@
 		background-color: @color;
 		color : @back;
 		border-color : @lightcolor;
+		margin-top:70px;
 		position: relative;
 		-webkit-transform: translateZ(0);
 		transform: translateZ(0);
@@ -326,7 +331,7 @@
 	footer{
 		margin-top : 10px;
 		padding-top : 10px;
-		color:@color;
+		color:@colorwhite;
 		font-weight : bold;
 		background: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
 		background: -moz-linear-gradient(top,  @lightbackcolor, @darkbackcolor);
@@ -355,11 +360,14 @@
 		.navbar-default{
 			.navbar-nav {
 				margin: 0px;
+				color:@colorwhite;
 				>li{
+					color:@colorwhite;
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
 						border : none;
 						border-radius : 0px;
 						top : 0px;
+						color:@colorwhite;
 						background-color : @color;
 						color : @back;
 					}
@@ -372,6 +380,8 @@
 		}
 		.carousel-inner>.item>img{
 			width :100%;
+			background-color:none;
+			
 		}
 		.homeimg{
 			float:left;
@@ -388,11 +398,12 @@
 				margin: 0px;
 				>li{
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
-						border: 4px solid @lightcolor;
-						border-top-left-radius: 19px;
-						border-bottom-right-radius: 19px;
-						background-color : @color;
-						color :  @back;
+						border-top: 4px solid @lightcolor;
+						//border-top-left-radius: 19px;
+						//border-bottom-right-radius: 19px;
+						background:transparent;
+						//color :  @back;
+						color:@colorwhite;
 						top: -8px;
 						padding-top: 20px;
 					}
@@ -413,8 +424,10 @@
 			overflow: hidden;
 		}
 		.carousel-inner>.item>img{
-			width :100%;
+			
 			min-height : 310px;
+			background-color:none;
+			padding-left:0px;
 		}
 		.homeimg{
 			float:right;
@@ -453,3 +466,42 @@
 			max-width:802px;
 		}
 	}
+	.thumbs{
+	    background-color:@darkcolor;
+		color:@colorwhite;
+		    height: 340px;
+	}
+	h3{
+	    color:@colorwhite;
+	   
+	  } 
+        .readmore{
+				position : absolute;
+				top: 0;
+				left: -239px;
+				width: 470px;
+				height: 201px;
+				text-align : center;
+				overflow : hidden;
+				margin : 0 auto;
+				border-radius : inherit;
+				opacity: 0;
+				background-color: rgba(3, 13, 130, 0.49);
+				transition: all 0.4s ease-in-out;
+				overflow : hidden;
+				border-radius : inherit;
+		}
+				
+			.servs{
+			position:relative;
+			}
+			.servs:hover .readmore{
+				background-color:@colorblack;
+				opacity:0.7;
+			}
+		.social_links{
+		    position:fixed;
+			background-color:@darkcolor;
+			margin-top:100px;
+		}
+			

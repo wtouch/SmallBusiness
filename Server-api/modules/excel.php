@@ -6,7 +6,7 @@
 	
 	if($reqMethod=="GET"){
 		
-		$table = $db->setTable("excel_jaidev");
+		$table = $db->setTable("excel");
 		//$db->setColumns($table, $selectInnerJoinCols);
 		$data = $db->select();
 		echo json_encode($data);
@@ -38,41 +38,54 @@
 				$return = array();
 				$tableCols = array();
 				$tableArr = array();
+				$skippedSheets = 0;
+				$skippedRows = array();
 				//echo($worksheetNames[0]);
-				if(count($worksheetNames) > 1){
+				if(count($worksheetNames) >= 1){
 					foreach($worksheetNames as $key => $sheetName){
-						//set the current active worksheet by name
-						$excelObj->setActiveSheetIndexByName($sheetName);
-						//create an assoc array with the sheet name as key and the sheet contents array as value
-						$return[$sheetName] = $excelObj->getActiveSheet()->toArray(null, true,true,true);
+						if($key == 0){
+							//echo $sheetName;
+							//set the current active worksheet by name
+							$excelObj->setActiveSheetIndexByName($sheetName);
+							//create an assoc array with the sheet name as key and the sheet contents array as value
+							$return[$sheetName] = $excelObj->getActiveSheet()->toArray(null, true,true,true);
+							foreach($return[$sheetName] as $sheetRows => $sheetRowValue){
+								if($sheetRows == 1){
+									foreach($sheetRowValue as $sheetColumns => $sheetColumnsValues){
+										//print_r($values);
+										$tableCols[] = str_replace(".","_",str_replace("/","_",str_replace(" ","_",strtolower($sheetColumnsValues))));
+									}
+									
+								}else{
+									$checkData = array();
+									foreach($sheetRowValue as $sheetColumns => $sheetColumnsValues){
+										
+										$checkData[] = $sheetColumnsValues;
+									}
+									if(count($checkData) <= 0){
+										$skippedRows[] = $tableArr[$sheetRows];
+									}else{
+										array_push($tableArr, $checkData);
+									}
+									
+								}
+								//echo $sheetRows, " " ;
+							}
+						}else{
+							$skippedSheets += 1;
+							
+						}							
 					}
 				}else{
-					foreach($worksheetNames as $key => $sheetName){
-						//set the current active worksheet by name
-						$excelObj->setActiveSheetIndexByName($sheetName);
-						//create an assoc array with the sheet name as key and the sheet contents array as value
-						$return[$sheetName] = $excelObj->getActiveSheet()->toArray(null, true,true,true);
-						foreach($return[$sheetName] as $sheetKey => $sheetValue){
-							if($sheetKey == 1){
-								foreach($sheetValue as $columns => $values){
-									//print_r($values);
-									$tableCols[] = str_replace(".","_",str_replace("/","_",str_replace(" ","_",strtolower($values))));
-								}
-								
-							}else{
-								foreach($sheetValue as $cols => $values){
-									$tableArr[$sheetKey][] = $values;
-								}
-							}
-							//echo $sheetKey, " " ;
-						}
-						
-					}
+					throw new Exception('No Sheets Found!');
 				}
+
 				$data['cols'] = $tableCols;
 				$data['tableData'] = $tableArr;
+				$response = [];
 				$response = $db->insert($table, $data);
-				//echo json_encode($insert);
+				($skippedSheets >= 1) ? $response["skippedSheets"] = $skippedSheets : "";
+				//echo json_encode($data);
 				
 			}else{
 				throw new Exception('No Excel Found!');

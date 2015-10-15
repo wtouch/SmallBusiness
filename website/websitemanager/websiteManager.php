@@ -371,6 +371,7 @@ class websiteManager{
 		$limit[1] = $this->itemsOnPage;
 		$this->db->setLimit($limit);
 		$this->db->setColumns($table, array("*"));
+		//$this->db->setOrderBy(array("rand()"), $table);
 		$projectData = $this->db->select();
 		return $projectData;
 		
