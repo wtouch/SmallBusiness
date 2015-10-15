@@ -5,6 +5,7 @@
 		<div class="sections clearfix services">
 			{% set break = 0 %}{% set i = 0 %}
 			<div class="row">
+			<h4>{{x.product_service_name}}</h4>
 			{% for x in featured_products if break == 0 %}
 				{% if x.type == 'product' %}
 				<!-- <div class="col-sm-6 col-md-2 prodimage">
@@ -20,7 +21,7 @@
 					</div>
 				</div> -->	
 				
-					<div class="col-sm-6 col-md-4">
+					<div class="col-sm-6 col-md-4 carosal">
 						<div class="thumbnail">
 						<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" alt="...">
 						<h4>{{x.product_service_name}}</h4>
@@ -37,6 +38,7 @@
 				{% endif %}
 			{% endfor %}
 		</div>
+	</div>
 	</div>
 	{% endif %}
 {% endautoescape %}

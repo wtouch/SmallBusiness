@@ -353,6 +353,7 @@ class websiteManager{
 	}
 	function getProperties($user_id, $search = array(), $featured = null, $project_id = null){
 		//$category = str_replace("-", " ", $category);
+		
 		$where['status'] = 1;
 		$where['user_id'] = $user_id;
 		if(isset($_GET['project_id'])){
@@ -372,8 +373,8 @@ class websiteManager{
 		$this->db->setColumns($table, array("*"));
 		//$this->db->setOrderBy(array("rand()"), $table);
 		$projectData = $this->db->select();
-		
 		return $projectData;
+		
 	}
 	//to get project data
 	function getProjectData($page){
@@ -498,8 +499,16 @@ class websiteManager{
 			
 			if($businessData['status'] == 'success' && $businessData['data'] != null) {
 				$properties = $this->getProperties($businessData['data']["user_id"],$search);
-				$response["properties"] = $properties['data'];
-				$response["totalRecords"] = $properties["totalRecords"];
+				if($properties==1){
+					$response["properties"] = $properties['data'];
+					$response["totalRecords"] = $properties["totalRecords"];
+				}else{
+					$response["status"] = "error";
+					$response["message"] ="Data not Found";
+					$response["data"] = null;
+					$response = $this->getTemplate('error', $response);
+				}
+				
 			}else{
 				throw new Exception($businessData['message']);
 			}
