@@ -72,9 +72,9 @@ $(document).ready(function(){
 		speed:1000,
 	});
 	$('.carousslider').bxSlider({ 
-		mode:'fade',
+		mode:'horizontal',
 		minSlides:1,
-		maxSlides: 1,
+		maxSlides: 4,
 		auto: true, 
 		autoDirection:'next',
 		pause:2500,
@@ -84,6 +84,8 @@ $(document).ready(function(){
 		controls:false, 
 		autoHover:true,
 		speed:1000,
+		height:670,
+		
 	});
 });
 var app = angular.module('myApp',[]);
