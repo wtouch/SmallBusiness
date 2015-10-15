@@ -177,7 +177,7 @@ define(['app'], function (app) {
 						var file = files[i];
 						$upload.upload({
 							
-							url: '../server-api/index.php/upload',
+							url: (userinfo.url) ? userinfo.url : '../server-api/index.php/upload',
 							fields: {'path': 'uploads/'+ path, userInfo:userinfo},
 							file: file
 						}).progress(function (evt) {

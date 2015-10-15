@@ -1,0 +1,41 @@
+<div class="main-content">
+	<ng-include src="'modules/component/toolbar.html'"></ng-include>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="pull-right">
+					<input type="file" id="website_logo" ng-file-select ng-multiple="false" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ng-file-change= "uploads($files)" ng-model="website_logo"/>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="table-responsive">		
+				<table class="table table-bordered table-hover">
+					<thead>
+						<th>Sr.No.</th>
+						<th>Patient Name</th>
+						<th>Age</th>
+						<th>HB</th>
+						<th>Manage</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in list">
+							<td>{{ ((currentPage - 1) * pageItems) + $index + 1 }}</td>
+							<td>{{x.Patient_Name}}</td>
+							<td>{{x.Age}}</td>
+							<td>{{x.HB}}</td>
+							<td>
+								<div class="btn-group">
+									<a href="#/dashboard/business/adddetails/{{x.id}}" class="btn btn-primary  glyphicon glyphicon-info-sign" tooltip="Add/Edit Details"></a>
+								</div>
+							</td>
+						</tr>
+					</tbody>					
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="text-center">				
+	<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged(currentPage)"></pagination>				
+	<pre>Page: {{currentPage}} / {{numPages}}</pre>
+</div>	

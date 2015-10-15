@@ -105,6 +105,8 @@ define(['angular',
 				.when('/dashboard/sms', route.resolve({controller: 'sms',template: 'sms',label:"SMS"}, 'sms/'))
 				 
 				.when('/dashboard/contact', route.resolve({controller: 'contact',template: 'contact',label:"Contact"}, 'contact/'))
+				
+				.when('/dashboard/excel', route.resolve({controller: 'excel',template: 'excel',label:"Excel Management"}, 'excel/'))
 					
                 .otherwise({ redirectTo: '/' });
 				

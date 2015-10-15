@@ -1,51 +1,45 @@
 //featured properties
 .featuredProperty{
-	
 	.bxslider1{
-		padding-left:0px;
 		list-style :none;
-		li{
-			.verify{
-				width:55%;
-				border:none;
-				margin-left:10px;
-				position:absolute;
-				right : -40px;
-				bottom : -15px;
-				z-index : 999;
-			}
-			border : 1px solid @darkcolor;
-			padding-left : 10px;
+		h4{
+			padding-left:25px;
+			font-weight : bold;
+		}
+		.row{
 			padding-bottom : 10px;
-			h4{
-				margin-left : 25px;
-			}
+		}
+		li{
+			height : 250px;
 			.sliderImg{
-				height :165px;
-				width : 195px;
+				height :150px;
+				width : 200px;
 				overflow : hidden;
 				padding : 4px;
-				border : 4px solid transparent;
-				.slimg{
+				border : 2px solid transparent;
+				img{
 					min-height: 150px;
 				}
 				&:hover{
-					border : 4px solid @darkcolor;
+					border : 2px solid @darkcolor;
 				}
 			}
-			
-			.sliderDesc{
-				.table{
-					margin-bottom : 10px;
-					tbody{
-						tr{
-							td{
-								border :none;
-								padding: 3px 10px;
-							}
+			.table{
+				margin-bottom : 10px;
+				tbody{
+					tr{
+						td{
+							border :none;
+							padding: 3px 10px;
 						}
-					
 					}
+				
+				}
+			}
+			.readmore{
+				margin-bottom :10px;
+				a{
+					padding : 6px 12px;
 				}
 			}
 		}
@@ -57,6 +51,7 @@
 .propertylist{
 	.btn-primary{
 		margin-bottom: 10px;
+		padding: 6px 7px;
 	}
 	.panel-default{
 		.sliderImg{
@@ -69,14 +64,19 @@
 				min-height: 150px;
 			}
 			&:hover{
-				border : 4px solid @darkcolor;
+				border : 4px solid @darkbackcolor;
 			}
 		}
 	}
 	.table{
 		td{
-			border :none;
-			padding: 3px 10px;
+			border : none;
+			padding: 1px 1px;
+		}
+	}
+	.readmore{
+		a{
+			padding : 6px 12px;
 		}
 	}
 }
@@ -188,18 +188,23 @@
 			tbody{
 				tr{
 					th{
-						background-color : @color;
+						background-color : @darkcolor;
 						color : @colorwhite;
 					}
 					td, th{
-						border: 1px solid @color;
+						border: 1px solid @darkcolor;
 					}
 				}
 			}
 		}
 	}
+	.btn-primary{
+		margin-bottom : 10px;
+	}
 }
-@media (min-width: 320px){
+
+	
+@media (min-width: 992px){
 	.propDetails{
 		ul{
 			li{
@@ -214,50 +219,6 @@
 				max-width : 100%;
 			}
 		}
-	}
-	.propertylist .panel-default .readmore a {
-		margin-right: -9px;
-	}
-	.sliderDesc .table-responsive>.table {
-		margin-bottom: 15px;
-	}
-	
-	}
-	
-@media (min-width: 992px){
-	.propDetails{
-		ul{
-			li{
-				width: 224px;
-			}
-		}
-	}
-	.property{
-		.mainimg {
-			img {
-				height: 130px;
-				border: 1px solid @colorwhite;
-			}
-		}
-	}
-}
-@media (max-width: 540px){
-	.featuredProperty{
-		.bxslider1{
-			li{
-				.verify{
-					width: 25%;
-					left: 156px;
-					bottom: -16px;
-				}
-			}
-		}
-	}
-	.propertylist .panel-default .readmore a {
-		margin-right: -9px;
-	}
-	.sliderDesc .table-responsive>.table {
-		margin-bottom: 15px;
 	}
 }
 @media (min-width: 1200px){

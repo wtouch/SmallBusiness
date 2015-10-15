@@ -1,120 +1,80 @@
-.featuretab{
-	margin-top : 20px;
-	h3{
-		margin-top : 15px;
-	}
-	.tab-content{
-		border-top : none;
-		position: relative;
-		margin-bottom: 25px;
-		padding : 1px 15px 15px;
-		border-top-left-radius : 0px;
-		border-top-right-radius : 0px;
-	}
-	.nav-tabs{
-		border-bottom: 1px solid @darkbackcolor;
-		li{
-			a{
-				background-color: @color;
-				color : @back;
-				border-color : @lightcolor;
-				transform: translateZ(0);
-				-webkit-backface-visibility: hidden;
-				backface-visibility: hidden;
-				position: relative;
-				transition-property: color;
-				-webkit-transition-duration: 0.3s;
-				transition-duration: 0.3s;
-				&:before, &.active>a{
-					content: "";
-					position: absolute;
-					z-index: -1;
-					top: 0;
-					bottom: 0;
-					left: 0;
-					right: 0;
-					background: @lightcolor;
-					-webkit-transform: scaleX(0);
-					transform: scaleX(0);
-					-webkit-transform-origin: 50%;
-					transform-origin: 50%;
-					-webkit-transition-property: transform;
-					transition-property: transform;
-					-webkit-transition-duration: 0.3s;
-					transition-duration: 0.3s;
-					-webkit-transition-timing-function: ease-out;
-					transition-timing-function: ease-out;
-				}
-				&:hover{
-					background-color: @darkcolor;
-					color : @darkcolor;
-					border-color : @color;
-				}
-				&:hover:before, &:focus:before, &:active:before, &.active>a:hover, &.active>a:focus {
-					-webkit-transform: scaleX(1);
-					transform: scaleX(1);
-				}
-			}
-			&.active>a{
-				color: @darkcolor;
-				background-color: @lightcolor;
-				border: 1px solid @color;
-			}
+	.featuretab{
+		margin-top : 10px;
+		.tab-content{
+			border : 1px solid @darkbackcolor;
+			
+			border-top : none;
+			position: relative;
+			margin-bottom: 25px;
+			padding : 1px 30px;
 		}
-	}
-}
-
-.sidebarModule{
-	&.sidemenu{
-		padding:15px 15px 0px;
-		margin-top : 20px;
-		ul{
-			padding : 0;
-			list-style : none;
+		.nav-tabs{
+			border-bottom: 1px solid @darkbackcolor;
 			li{
-				margin-bottom : 10px;
-			}
-		}
-		a{
-			display : inline-block;
-			height : 90px;
-			width : 100%;
-			background-size:100% 100%;
-			background-repeat : no-repeat;
-			background-position: center; 
-			text-indent : -9999px;
-			overflow : hidden;
-			border : 2px solid @darkcolor;
-			&.area_converter{
-				background-image : url('../img/area-converter.png');
-			}
-			&.emi_calculator{
-				background-image : url('../img/emi-calculator.png');
-			}
-			&.post_your_property{
-				background-image : url('../img/post-your-property.jpg');
-			}
-			&.post_your_requirement{
-				background-image : url('../img/post-your-requirement.jpg');
+				a{
+					border: 1px solid @darkbackcolor;
+					font:16px 'Alex Brush', cursive;
+					&:hover{
+						color: @colorwhite;
+						background-color: @back;
+					}
+				}
+				&.active>a, &.active>a:hover, &.active>a:focus{
+					color: @colorwhite;
+					background-color: @back;
+					border: 1px solid @darkbackcolor;
+				}
 			}
 		}
 	}
-}
+	.bx-wrapper{
+		overflow : hidden;
+		width:100%;
+		height:450px;
+		border-bottom-left-radius : 350px;
+		border-bottom-right-radius : 350px;
+		border-bottom:0px;
+		border:5px solid @colorwhite;
+	}
+	.bx-viewport{
+		overflow : hidden;
+		min-height : 300px !important;
+		.carousslider{
+				
+			ul{
+				overflow:hidden;
+				padding-left:0px;
+				li{
+					left:0;
+					min-width : 100% !important;
+					img{
+						border-bottom-left-radius : 350px !important;
+						border-bottom-right-radius : 350px !important;
+						border-bottom:0px !important;
+						min-height:300px;
+						width : 100%;
+					}
+				}
+			} 
+		}
+	}
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
-			background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
-			background: linear-gradient(top, @lightcolor, @darkcolor);
+			background : -webkit-linear-gradient(top, @back, @darkcolor, @back);
+			background : -moz-linear-gradient(top, @back, @darkcolor, @back);
+			background : linear-gradient(top, @back, @darkcolor, @back);
 			>li{
 				border-right : 1px solid @lightcolor;
 				>a, > a:focus{
-					color : @back;
+					color : @color;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @darkcolor ;
-					color : @colorwhite;
+					color : @lightcolor;
+					background:none;
+					font-weight:bold;
+					transition: 265ms linear;
 				}
 			}
 		}
@@ -125,6 +85,9 @@
 				tr{
 					th,td{
 						border-color : @darkbackcolor;
+					}
+					a{
+					color:@lightcolor;
 					}
 				}
 			}
@@ -138,11 +101,14 @@
 	.infrastructure{
 		.thumbnail{
 			height: 395px;
+			background-color:none;
 			img{
 				height : 190px;
 			}
 			.caption{
-				height: 138px;
+				height: 135px;
+				overflow: hidden;
+				margin-bottom: 10px;
 			}
 		}
 	}
@@ -159,6 +125,7 @@
 		height:395px;
 	}
 	
+	
 	//testimonials
 	.testimonial, .featrtesti{
 		blockquote{
@@ -169,7 +136,7 @@
 				padding : 0px;
 				cite{
 					font-size : 17px;
-					color : @color;
+					color : @darkcolor;
 				}
 			}
 			&::before{
@@ -203,25 +170,64 @@
 		img{
 			max-height : 100px;
 			padding : 4px;
-			border : 3px solid @lightcolor;
-			&:hover{
-				border : 3px solid @color;
-			}
+			border : 3px solid #732C7B;
 		}
 	} 
-	.gallery{
-		.thumbnail{
-			.caption .description{
-					overflow: hidden;
-					height: 160px;
+	.sidebarModule{
+		.panel-default{
+			border : none;
+		}
+		
+		.radio label{
+			padding-left : 15px;
+		}
+		&.sidemenu{
+			ul{
+				padding : 0;
+				list-style : none;
+				li{
+					margin-bottom : 15px;
+				}
+			}
+			a{
+				display: inline-block;
+				height: 87px;
+				width: 88%;
+				background-repeat: no-repeat;
+				background-position: center;
+				text-indent: -9999px;
+				background-size: 100% 100%;
+				overflow: hidden;
+				&.area_converter{
+					background-image : url('../img/area_converter.png');
+				}
+				&.emi_calculator{
+					background-image : url('../img/emi_calculator.png');
+				}
+				&.post_your_property{
+					background-image : url('../img/post_your_property.jpg');
+				}
+				&.post_your_requirement{
+					background-image : url('../img/post_your_requirement.jpg');
 				}
 			}
 		}
+	}
 	//gallery
+	.gallery{
+		.thumbnail{
+			border-color : @darkbackcolor;
+			.description {
+				height: 140px;
+				overflow: hidden;
+			}
+		}
+	}
+
 	@media (min-width: 320px) {
 		.gallery{
 			.thumbnail{
-				height:390px;
+				height:380px;
 			}
 		}
 	}
@@ -229,10 +235,10 @@
 	@media (min-width: 992px) { 
 		.gallery{
 			.thumbnail{
-				height:390px;
+				height:365px;
 				img{
-					max-height: 155px;
-					width: 100%;
+					max-height : 155px;
+					width:100%;
 				}
 			}
 		}
@@ -241,10 +247,10 @@
 	@media (min-width: 1200px){
 		.gallery{
 			.thumbnail{
-				height:390px;
+				height:380px;
 				img{
-					max-height: 200px;
-					width: 100%;
+					max-height : 200px;
+					width:100%;
 				}
 			}
 		}

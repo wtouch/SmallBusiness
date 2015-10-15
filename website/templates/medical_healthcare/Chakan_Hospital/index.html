@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<head>
+<title>Chakan Hospital</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel='stylesheet' id='fluid_dg-css'  href='css/fluid_dg.css' type='text/css' media='all'>
+<link rel="stylesheet" type="text/css" href="css/coin-slider.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/coin-slider.min.js"></script>
+
+<style type="text/css">
+#marqueecontainer {
+	position: relative;
+	width: 260px; /*marquee width */
+	height: 200px; /*marquee height */
+	/*background-color: white;*/
+	overflow: hidden;
+	/*border: 3px solid orange;*/
+	padding: 2px;
+	padding-left: 4px;
+}
+</style>
+<script type="text/javascript">
+var delayb4scroll=2000 //Specify initial delay before marquee starts to scroll on page (2000=2 seconds)
+var marqueespeed=1 //Specify marquee scroll speed (larger is faster 1-10)
+var pauseit=1 //Pause marquee onMousever (0=no. 1=yes)?
+
+////NO NEED TO EDIT BELOW THIS LINE////////////
+
+var copyspeed=marqueespeed
+var pausespeed=(pauseit==0)? copyspeed: 0
+var actualheight=''
+
+function scrollmarquee(){
+if (parseInt(cross_marquee.style.top)>(actualheight*(-1)+8))
+cross_marquee.style.top=parseInt(cross_marquee.style.top)-copyspeed+"px"
+else
+cross_marquee.style.top=parseInt(marqueeheight)+8+"px"
+}
+
+function initializemarquee(){
+cross_marquee=document.getElementById("vmarquee")
+cross_marquee.style.top=0
+marqueeheight=document.getElementById("marqueecontainer").offsetHeight
+actualheight=cross_marquee.offsetHeight
+if (window.opera || navigator.userAgent.indexOf("Netscape/7")!=-1){ //if Opera or Netscape 7x, add scrollbars to scroll and exit
+cross_marquee.style.height=marqueeheight+"px"
+cross_marquee.style.overflow="scroll"
+return
+}
+setTimeout('lefttime=setInterval("scrollmarquee()",30)', delayb4scroll)
+}
+
+if (window.addEventListener)
+window.addEventListener("load", initializemarquee, false)
+else if (window.attachEvent)
+window.attachEvent("onload", initializemarquee)
+else if (document.getElementById)
+window.onload=initializemarquee
+</script>
+</style>
+</head>
+
+<body>
+
+<div class="container"> 
+	<nav class="nav1">
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">About Us</a></li>
+			<li><a href="#">Surgeries</a></li>
+			<li><a href="#"> Appendicectomy</a></li>
+			<li><a href="#">Day care surgery</a></li>
+			<li><a href="#">Gynaecology</a></li>
+			<li><a href="#">Single incision surgery</a></li>
+			<li><a href="#">Contact Us</a></li>
+			<span style="color:white;"><img src="images/mobile-icon.png" width="9" height="21" border="0" align="absmiddle">&nbsp;&nbsp;+91 9730820889</span>
+		</ul>
+	</nav>
+	<nav class="nav2" class="justify">
+		<ul>
+			<li><a href="#">Academics</a></li>
+			<li><a href="#">patient Info </a></li>
+			<li><a href="#">Cashless Facility</a></li>
+			<li><a href="#"> Facility</a></li>
+			<li><a href="#">Services</a></li>
+			<li><a href="#">Photo gallery</a></li>
+			<li><a href="#">Videos</a></li>
+			<li><a href="#">News</a></li>
+			<li><a href="#">Doctors</a></li>	
+		</ul>
+	</nav>
+		<div class="row">
+			<div class="col-sm-8">
+				<a href="#"><img src="images/title.png" class="img img-responsive"style="min-width:120px; "></a>
+			</div>
+			<div class="col-sm-4" style="margin-top:3%;">
+				<a href="#"class="img img-responsive"style="min-width:120px; " target="_blank"><img src="images/DownloadBrochure_Icon.jpg" style="min-width:150px;" /></a>
+			</div>
+		</div>
+		
+		
+		<div class="row">
+			<div class="col-sm-8">
+
+				<div class="row">
+			         <div class="col-sm-1">
+					 </div>
+					<div class="col-sm-9" style="margin-left:5.5%;">
+						<div id="coin-slider"> <a href="#"><img src="images/slide1.jpg" alt="" /><span>Chakan Critaical care has been providing innovative and quality care to patients in and around Coimbatore for the past 23 years.</span></a> 
+							<a href="#"><img src="images/slide3.jpg"  alt="" /><span>Chakan Critaical care has been providing innovative and quality care to patients in and around Coimbatore for the past 23 years.</span></a> <a href="#"><img src="images/slide1.jpg"  alt="" /><span>Chakan Critaical care has been providing innovative and quality care to patients in and around Coimbatore for the past 23 years.</span></a>
+						</div>
+					</div>
+					
+				</div>
+		   <div class="row" >
+		   
+			<div class="col-sm-1">
+			</div>
+				`<div class="col-sm-5 red">
+					<img src="images/Dr.jpg" class="img img-responsive" alt="logo">
+					<br>
+					<h2><a href="#">Welcome to Chakan Critaical care</a></h2>
+					<p> <b>Chakan Critaical care</b> has been providing innovative and quality care to patients in and around Coimbatore for the past 23 years. To fulﬁll our vision of providing the most innovative surgical techniques our chairman Dr.XYZ underwent his laparoscopic training in Germany in 1995 and has been offering the same for the past 18 years. Dly invasive surgery training in France.</p>
+					<a class="readmore" href="#">Read More ..</a>
+				</div>
+				
+				<div class="col-sm-5 red" >		
+					<img src="images/Dr1.jpg"  class="img img-responsive" alt="logo">
+					<h2><a href="#">Chakan Critaical care</a></h2>
+					<p> <b>Chakan Critaical care</b> has been providing innovative and quality care to patients in and around Coimbatore for the past 23 years. To fulﬁll our vision of providing the most innovative surgical techniques our chairman Dr.XYZ underwent his laparoscopic training in Germany in 1995 and has been offering the same for the past 18 years. Dr. Ashwin underwent his Minimally invasive surgery training in France.</p>
+					<a class="readmore" href="#">Read More ..</a> 
+				</div>
+				
+				
+		   </div>
+		   </br></br>
+			<div class="row" >
+			<div class="col-sm-1">
+			</div>
+					<div class="col-sm-5 red">
+						<img src="images/news.jpg" class="img img-responsive" >
+						<br>
+						<h2><a href="#"><br>
+								News &amp; Events</a></h2>
+					  <div id="marqueecontainer" onmouseover="copyspeed=pausespeed" onmouseout="copyspeed=">
+					  <div id="vmarquee" style="position: absolute; top: -94px;">
+									<p><font style="color:#F00">✰</font>&nbsp;
+						  <a href="#" style="text-decoration:none; color:#000; font-weight:bold">Chakan Cancer centre </a>            </p><p><font style="color:#F00">✰</font>&nbsp;
+						  <a href="#" style="text-decoration:none; color:#000; font-weight:bold">Chakan Hospital is servicing for past 5 years </a>            </p>  
+					  </div>
+					  </div>
+					</div>
+				
+		    
+					<div class="col-sm-5 red" >		
+							<img src="images/contact.jpg"  class="img img-responsive" alt="logo">
+								<h2><a href="#">Welcome to Chakan Critaical care</a></h2>
+							<address> Chakan Hospital<br>
+							  Extra special care<br>
+							  1197, Shikrapur Road,<br> 
+							  Landmark: Near to Bus Stand<br>
+						      chakan. pune<br>
+							  pin-410501
+							</address>
+							<a class="readmore" href="#">Read More ..</a>
+					</div>
+					<div class="col-sm-2">
+				</div>
+			</div>
+		 </div>
+	   <div class="col-sm-4 glys" >
+			<h4>Department</h4>
+			<nav class="nav3">
+				<ul>
+					<li class="p1"><a href="#">Orthopaedics</a></li>
+					<li class="p2"><a href="#">Gynaecology</a></li>
+					<li class="p3"><a href="#">Obstetrics</a></li>
+					<li class="p4"><a href="#">Obesity</a></li>
+					<li class="p5"><a href="#">Diabetology</a></li>
+					<li class="p6"><a href="#">Obstetrics</a></li>
+				</ul>
+				</nav>
+
+		<div class="box">
+			  <h4>Surgical Videos</h2>
+			  <div class="video"> <img src="images/video.jpg" class="img img-responsive"style="min-width:120px; "" border=0"> </div>
+			</div>
+		<nav class="nav3"> 
+			  <!-- begin pages -->
+			  <h4>Facilities</h4>
+			  <ul>
+					<li><a href="#">24 hour trauma and emergency</a></li>
+					<li><a href="#">Ambulance</a></li>
+					<li><a href="#">Fully equipped Intensive care unit [ ICU ]</a></li>
+					<li><a href="#">Arthroscopy and Joint replacement clinic</a></li>
+					<li><a href="#">Diabetes and Podiatric clinic</a></li>
+					<li><a href="#">Dental centre</a></li>
+					<li><a href="#">Physiotherapy and rehabilitation centre</a></li>
+					<li><a href="#">Endoscopy, colonoscopy and ERCP facilities</a></li>
+					<li><a href="#">Ultrasonogram</a></li>
+					<li><a href="#">Echo and TMT</a></li>
+					<li><a href="#">Digital X-ray and Mammogram</a></li>
+					<li><a href="#">Brachytherapy</a></li>
+					<li><a href="#">External beam Radiotherapy</a></li>
+					<li><a href="#">3D planning system</a></li>
+			  </ul>
+			  
+		 </nav>
+			<div align="center"><a href="#">More...</a></div>
+			<div class="r"> 
+			  
+				  
+				  <table class="table-responsive " style="text-align:center;">
+				  <thead>
+					<tr>
+						<th><h4>Insurance</h4> </th> 
+						<th><h4>Follows us</h4> </th> 
+					</tr>
+					<tr>
+						<td><a href="#">State INDIA</a></td>
+						<td><a><img src="images/facebook-icon.png"  height="30" border="0" title="Facebook"></a></td>
+					</tr>
+					<tr>
+						<td><a href="#">Medi Assist</a></td>
+						<td><a href="#"><img src="images/twitter-icon.png"  width="30" height="30" border="0" title="Twitter"></a></td>
+					</tr>
+					<tr>
+						<td><a href="#">Star Health</a></td>
+						<td><a href="#"><img src="images/linkedin-icon.png" width="30" height="30" border="0" title="Linkedin"></a></td>
+					</tr>
+					
+				 
+				  
+				 </thead>
+				</table>
+			</div>
+		</div>
+	</div>
+			 
+		<div class="row footer">
+			<span>Copyright © <a href="#">Apnasite.in</a> · All Rights Reserved</span>
+			<img src="images/logo1.png"class="img img-responsive"style="min-width:120px; " width="118"style="text-align:left;" height="40" border="0" alt="website design company in coimbatore" title="website design company in coimbatore" align="absmiddle">
+			<span style="float:right;margin-top:10px;margin-left:20px">powered by</span>
+		</div>
+ </div>
+		   
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
