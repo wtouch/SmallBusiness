@@ -162,7 +162,7 @@ function uploadFiles($postParams = null){
 function excelFiles($postParams = null){
 	$app = new \Slim\Slim();
 	$body = $app->request->getBody();
-
+	echo $body;
 	try{
 		if(!isset($_FILES)){
 				throw new Exception('There is no file input!');
@@ -194,6 +194,7 @@ function sendMail($postParams = null){
 function putRecord($getRequest, $id){
 	$app = new \Slim\Slim();
 	$body = $app->request->getBody();
+	print_r($body);
 	// this will get current url
 	$posIndex = strpos( $_SERVER['PHP_SELF'], '/index.php');
 	$baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex).'/index.php'; 
