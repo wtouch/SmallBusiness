@@ -44,21 +44,16 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				patientlist: patientlist, 
-				
 				updateData : function(patientlist) {
-					 dataService.put("put/excel/"+patientlist.id)
+					dataService.put("put/excel/"+patientlist.id,patientlist)
 					.then(function(response) {	
-						if(response.status == "success"){
-							$location.path("/dashboard/excel/excellist");
-						}
-						if(response.status == undefined){
-							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-							$notification.error("Edit Details", response.message);
-						}else{
-							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-							$notification[response.status]("Edit Details", response.message);
-						}	
-					});
+					//console.log(response);
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Update Record", response.message);
+						
+					
+					}); 
+			
 				},
 			};
 			modalService.showModal(modalDefaults, modalOptions).then(function (result) {
