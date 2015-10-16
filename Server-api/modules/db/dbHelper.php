@@ -441,7 +441,6 @@ class dbHelper {
     }
 	
     function update($table, $inputData, $where){
-        
         try{
             $a = array();
             $w = "";
@@ -453,7 +452,6 @@ class dbHelper {
 			$updateTable = array();
 			foreach($inputData as $key => $val) // $inputData holds input json data
 			{
-			
 				$value = (is_object($val) || is_array($val)) ? (json_encode($val)) : ($val);
 				array_push($updateTable,$key." = :".$key);
 				$a[":".$key] = $value;
