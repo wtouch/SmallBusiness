@@ -98,12 +98,18 @@
 			echo json_encode($response);
         }
 	}
-	
+	 
 	if($reqMethod=="PUT" || $reqMethod=="DELETE"){
-		echo "currently no need to update for media!";
-		/* $table = 'media';
+		$where['id'] = $id; // need where clause to update/delete record
+		$update = $db->update("excel", $body, $where);
+		echo json_encode($update);
+	} 
+	
+	/* if($reqMethod=="PUT" || $reqMethod=="DELETE"){
+		$table = 'excel';
 		$where['id'] = $id;
 		$update = $db->update($table, $body, $where);
-		echo json_encode($update); */
-	}
+		echo json_encode($update);
+	} 
+	 */
  ?>
