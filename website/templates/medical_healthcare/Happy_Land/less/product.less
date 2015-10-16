@@ -6,13 +6,7 @@
 		&:hover{
 			//border : 4px solid @back;
 			animation-name: ani;
-			animation-duration:1s;
-			animation-iteration-count:1;
 		}
-		@keyframes ani{
-	 0%{transform:rotate(30deg);}
-	 100%{transform:rotate(90deg);}
-	}
 	}
 	
 	.sections clearfix services>ul{
@@ -21,9 +15,15 @@
 	}
 	.servdesc{
 		height : 225px;
+		background-color:white;
+		padding:5px;
+		h4{
+		height:50px;
+		}
 		.description{
 			height : 75px;
 			overflow : hidden;
+			padding:10px;
 		}
 		.readmore{
 			text-align : center;
@@ -44,23 +44,44 @@
 		}
 	}
 }
-
-.products{
-	.thumbnail{
-		.prodimg{
-			width : 188px;
-			height : 148px;
+.animation{
+animation-duration:1s;
+animation-name:amar;
+.prodimage{
+			height:210px;
 			overflow : hidden;
 			margin :0 auto;
+			background-color:@back;
+			h4:hover{
+			color:@color;
+			}
+			.description{
+			padding:10px;
+			
+			}
 			img{
 				min-height : 148px;
 				padding:5px;
 			}
 			img:hover{
-				min-height : 148px;
-				padding:5px;
-				border:1px solid @back;
-			}	
+			//border : 4px solid @back;
+			animation-name: ani;
+			animation-duration:0.2s;
+			animation-iteration-count:1;
+		}
+}
+}
+		@keyframes ani{
+	 0%{}
+	 100%{transform:rotateZ(360deg); transition-transform:2s;}
+	}
+	@keyframes amar{
+	0%{margin-left:-200px; }
+	 100% {margin-left: -20px;transition: 1s;}
+	}
+.products{
+	.thumbnail{
+		
 		}
 		.caption{
 			height: 190px;
@@ -74,4 +95,3 @@
 			text-align : center;
 		}
 	}
-}

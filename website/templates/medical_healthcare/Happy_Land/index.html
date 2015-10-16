@@ -82,52 +82,52 @@
 	<body>
 		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 		<div class="container-fluid">
-		<header>
-			<div class="container-fluid">
-				<div class="col-xs-12 col-md-12 col-lg-12">
-					{% if data.website_config.website_logo %}
-					
-					<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
-					{% else %}
-					
-					<img class="logo" src="{{data.business_logo.file_relative_path}}">
-					{% endif %}
+			<div class="row header">
+					<div class="col-xs-12 col-md-12 col-lg-12">
+						{% if data.website_config.website_logo %}
+						
+						<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						{% else %}
+						
+						<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+				
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+			
+				<nav class="navbar navbar-default">
+					<div class="row">
+						<div class="col-sm-12 col-md-12">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav pull-right">
+									{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+								</ul>
+							</div><!-- /.navbar-collapse -->
+						</div>
+					</div>
+				</nav>
+					<div class="container">
+						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+					</div>
+			</div>
+			<div class="content">
+				<div class="container">
+					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 				</div>
 			</div>
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-		
-		<nav class="navbar navbar-default">
-			<div class="row">
-				<div class="col-sm-12 col-md-12">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav pull-right">
-							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-						</ul>
-					</div><!-- /.navbar-collapse -->
-				</div>
-			</div>
-		</nav>
-		
-		<div class="row">
-			<div class="col-sm-12">
-			<div class="row">
-				{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-			</div>
-			</div>
+			
+			{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 		</div>
-		</header>
 		
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-		</div>
 	</body>
 </html> 
 {% endspaceless %}

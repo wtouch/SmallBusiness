@@ -367,7 +367,7 @@ class dbHelper {
     function insert($table, $inputData) {
 	
         try{
-			(is_Array($inputData)) ? $inputData : $inputData = json_decode($inputData);
+			(is_Array($inputData)) ? $inputData : $inputData = json_decode($inputData, true);
 			
 			$dataKey = array();
 			$dataValue = array();

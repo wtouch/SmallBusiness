@@ -6,10 +6,16 @@ jQuery(document).ready(function() {
 	})
 });
 
-jQuery(document).ready(function() {
-$(".p1").click(function(){
-    $("this").hide();
-});
+$(document).ready(function(){
+$(window).scroll(function(e){
+    var scrollTop = $(document).scrollTop();
+    if(scrollTop > 0){
+        console.log(scrollTop);
+        $('.b').removeClass('navbar-static-top').addClass("navbar-inverse navbar-fixed-top navbar-right");
+    } else {
+        $('.b').removeClass("navbar-inverse navbar-fixed-top navbar-right").addClass('navbar-static-top');
+    }
+});	
 });
 
 

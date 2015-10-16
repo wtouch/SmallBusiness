@@ -1,5 +1,6 @@
 {% autoescape false %}
 {% if properties >=1 %}
+{{totalRecords}}
 <h2>Properties</h2>
 <div class="propertylist clearfix">
 	{#% if prop_category %}
@@ -55,7 +56,7 @@
 					</div>
 					<div class="readmore">
 						<a href="/properties/{{x.title}}/{{x.id}}" class="btn btn-info viewdtls">View Details</a>
-						<a href="/enquiry?category={{x.category}}&id={{x.id}}&title={{x.title}}"class="btn btn-info">Send Enquiry</a> 
+						<a href="/enquiry?property_category={{x.category}}&property_id={{x.id}}&property_title={{x.title}}"class="btn btn-info">Send Enquiry</a> 
 					</div>
 				</div>
 			</div>
