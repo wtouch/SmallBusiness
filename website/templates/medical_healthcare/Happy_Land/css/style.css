@@ -182,9 +182,9 @@ logo {
   background-color: rgba(255, 255, 255, 0.65);
   border: none;
   border-radius: 0;
+  position: relative;
   top: 10px;
   z-index: 999;
-  position: relative;
 }
 .navbar-default .navbar-nav > li {
   text-transform: uppercase;
@@ -205,6 +205,7 @@ logo {
 .navbar-default .navbar-nav > li:hover > a:focus {
   color: #24252b;
   background-color: #fed136;
+  margin-top: 10px;
 }
 .navbar-default .navbar-nav > li > ul {
   list-style: none;
@@ -309,7 +310,79 @@ logo {
   -webkit-transition: -webkit-transform 0.3s ease-in;
   transition: transform 0.3s ease-in;
 }
+.projects1 {
+  background-color: white;
+}
+.projects1 h3 {
+  text-align: center;
+  padding-top: 10px;
+  font: 24px/1em 'Droid Serif';
+}
+.projects1 .prodimage {
+  padding-left: 25px;
+}
+.projects1 img {
+  min-height: 148px;
+  padding: 5px;
+  max-height: 148px;
+  width: 100%;
+}
+.projects1 .btn {
+  padding-left: 35%;
+  color: #999999;
+  font: italic 16px/1em 'Droid Serif';
+}
+.projects1 h4 {
+  font: 18px/1em 'Droid Serif';
+  text-align: center;
+}
+.projects1 h4:hover {
+  font: 18px/1em 'Droid Serif';
+  text-align: center;
+  color: #fed136;
+}
+.gallery {
+  background-color: #fed136;
+  min-height: 300px;
+  margin-top: 25px;
+  color: #ffffff;
+  position: relative;
+  animation-name: animate;
+  animation-name: moveDown;
+  animation-duration: 2s;
+}
+.gallery img {
+  max-height: 150px;
+  min-hight: 150px;
+  width: 100%;
+  margin: auto;
+  padding: 5px;
+}
+.gallery .parent:hover {
+  opacity: 0.7;
+  left: 0px;
+  top: 0;
+  transition: all 0.35s;
+}
+.animate {
+  animation: moveDown 0.6s ease-in-out 0.2s backwards;
+}
+@keyframes moveDown {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
 h3,
 h2 {
   color: #02071a;
+}
+footer {
+  background-color: #02071a;
+  color: #ffffff;
+  height: 30px;
 }
