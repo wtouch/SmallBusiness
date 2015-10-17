@@ -7,6 +7,18 @@ jQuery(document).ready(function() {
 });
 
 $(document).ready(function(){
+    $("featured_services.html").onload(function(){
+        $(".this").fadeIn();
+        $(".this").fadeIn("slow");
+        $(".this").fadeIn(3000);
+    });
+});
+
+
+
+
+
+$(document).ready(function(){
 	var sliderMode, minSlides, maxSlides;
 	//$(window).resize(function(){
 		if($(window).width() <= "480"){

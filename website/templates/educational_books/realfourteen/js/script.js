@@ -5,29 +5,26 @@ jQuery(document).ready(function() {
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
 });
+
 $(document).ready(function(){
-	$('#bxslider').bxSlider({
+	var sliderMode, minSlides, maxSlides;
+	//$(window).resize(function(){
+		if($(window).width() <= "480"){
+			sliderMode = "horizontal";
+			minSlides = 1;
+			maxSlides = 1;
+			
+		}else{
+			sliderMode = "vertical";
+			minSlides = 3;
+			maxSlides = 3;
+		}
+	//})
+	$('.bxslider').bxSlider({
 		mode:'horizontal',
 		slideWidth: 250,
-		minSlides:3,
-		maxSlides: 3,
-		slideMargin: 25,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
-		pause:3000,
-		pager:true,
-		pagerType:'full',
-		autoControls: true, 
-		controls:true, 
-		autoHover:true,
-		speed:1000,
-	});
-	$('#associate').bxSlider({
-		mode:'horizontal',
-		slideWidth: 300,
-		minSlides:3,
-		maxSlides: 3,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
 		slideMargin: 25,
 		auto: true, 
 		autoDirection:'next',
@@ -41,10 +38,10 @@ $(document).ready(function(){
 		speed:1000,
 	});
 	$('.bxslider1').bxSlider({
-		mode:'vertical',
+		mode: sliderMode,
 		slideWidth: 680,
-		minSlides: 3,
-		maxSlides:3,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
 		slideMargin: 15,
 		auto: true, 
 		autoDirection:'next',
@@ -59,8 +56,6 @@ $(document).ready(function(){
 	});
 	$('.carousslider').bxSlider({ 
 		mode:'fade',
-		slideWidth: 1000,
-		slideHeight : 800,
 		minSlides:1,
 		maxSlides: 1,
 		auto: true, 
@@ -101,30 +96,36 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		method: "GET",
 		params: params
 	}).then(function (results) {
-		console.log(results);
 		if(results.data.status == 'success'){
 			$scope.propertyConfig = results.data.data.config_data;
 		}else{
 			$scope.propertyConfig = results.data.data;
 		}
 	});
+	
+	// Don't change following code
+	/* start email code */
 	$scope.mailSent = false;
-
 	$scope.enquiry = {
-		message : {
-			property_for :0
-		},
-		subject : 'Website Enquiry',
 		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 	};
 	$scope.postData = function(enquiry){
 		$scope.loading = true;
-		console.log(enquiry);
-		 $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-			 $scope.loading = false;
-			$scope.mailSent = true;
+		if(enquiry.message.property_link){
+			enquiry.message.property_link = "<a href=\""+ location.origin +"/properties/"+ enquiry.message.property_link.params.property_title + "/" + enquiry.message.property_link.params.property_id + "\">"+enquiry.message.property_link.params.property_title+"</a>";
+		}
+		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+			$scope.loading = false;
+			if(response.status == "success"){
+				$scope.mailSent = true;
+			}else{
+				$scope.mailSent = false;
+				$scope.errorMessage = response.message;
+				console.log(response);
+			}
 		});
 	};
+	/* End email code */
 });	
 
 	app.controller('aboutController', function($scope,$http, $location) {

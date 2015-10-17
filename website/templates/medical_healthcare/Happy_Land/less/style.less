@@ -99,7 +99,6 @@
 	.btn + .btn{
 		margin-left:10px;
 	}
-	
 
 	
 	.navbar-default {
@@ -124,6 +123,7 @@
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					color : @darkcolor;
 					background-color : @color;
+					margin-top:10px;
 					
 				}
 				> ul {
@@ -170,17 +170,151 @@
 			}
 		}
 	}
+	
 	.content{
 	background-image:url("../img/pattern.png");
+	}
+	.subhead {
+		position: relative;
+		font : 1.5em/1.5em Amaranth-Regular;
+		padding: 4px 10px;
+		text-align: center;
+		color : @colorblack;
+		/*background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
+		background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
+		background: linear-gradient(top, @lightcolor, @darkcolor);*/
+		border : 1px solid @lightcolor;
+		border-radius: 5px;
+		box-shadow : 0px 1px 2px @lightcolor;
+	}
+	.btn-info{
+    display: inline-block;
+    text-decoration: none;
+    margin: 0;
+    padding: 10px 28px;
+    border: 0;
+    color: @colorwhite;
+    vertical-align: middle;
+    font: 14px/18px Arial, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    position: relative;
+    z-index: 1;
+    background: #fed136;
+    color: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition: background-color .3s ease-in, color .3s ease-in;
+    transition: background-color .3s ease-in, color .3s ease-in;
+}
+.btn-info:hover:after {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+    transform: rotate3d(0, 0, 1, 0deg);
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.btn-info:hover{
+    background-color:@colorblack;
+	color:white;
+}
+.btn-info:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px 28px;
+    border-radius: 4px;
+    color: #fff;
+    -webkit-transform-origin: -25% 50%;
+    transform-origin: -25% 50%;
+    -webkit-transform: rotate3d(0, 0, 1, 45deg);
+    transform: rotate3d(0, 0, 1, 45deg);
+    -webkit-transition: -webkit-transform .3s ease-in;
+    transition: transform .3s ease-in;
+}
+.projects1{
+			background-color:white;
+		h3{
+			text-align:center;
+			padding-top:10px;
+			font: 24px/1em 'Droid Serif';
+		}
+	.prodimage{
+			padding-left: 25px;
+		}
+		img{
+			min-height: 148px;
+			padding: 5px;
+			max-height: 148px;
+			width: 100%;
+		}
+	.btn{
+		padding-left:35%;
+		color:@lightcolor;
+		font:italic 16px/1em 'Droid Serif';
+	}
+	h4{
+		font: 18px/1em 'Droid Serif';
+		text-align:center;
+	}
+	h4:hover{
+		font: 18px/1em 'Droid Serif';
+		text-align:center;
+		color:@color;
+	}
+}
+.gallery{
+		background-color:@color;
+		min-height:300px;
+		margin-top:25px;
+		color:@colorwhite;
+		position:relative;
+		animation-name:animate;
+		animation-name:moveDown;
+		animation-duration:2s;
+	img{
+		max-height: 150px;
+		min-hight: 150px;
+		width: 100%;
+		margin: auto;
+		padding: 5px;
+	}
+	.parent:hover{
+	opacity:0.7;
+	left:0px;
+	top:0;
+	transition: all .35s
 	
 	}
-	
-	h3,h2{
+
+}
+.animate {
+    animation: moveDown 0.6s ease-in-out 0.2s backwards;
+}
+@keyframes moveDown{
+    0% { 
+        transform: translateY(-40px); 
+        opacity: 0;
+    }
+    100% { 
+        transform: translateY(0px);  
+        opacity: 1;
+    }
+}
+
+h3,h2{
 	color:@colorblack;
 	}
 	
 	
+	footer{
+	background-color:@colorblack;
+	color:@colorwhite;
+	height:30px;
 	
+	}
 	
 	
 	
