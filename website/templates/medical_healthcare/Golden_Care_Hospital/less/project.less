@@ -33,12 +33,12 @@
 		position : relative;
 		border : 5px solid @colorwhite;
 		z-index : 99;
-		width : 500px;
+		width : 100%;
 		margin : 0 auto;
 		float : none;
 		z-index : 1;
 		box-shadow: 0 0 15px;
-		border-radius : 50%;
+		
 		overflow: hidden;
 		.bx-viewport{
 			height:500px;
@@ -143,12 +143,15 @@
 	#carousel {
 		.carousel-inner {
 			.item{
-				height: 500px;
-				overflow: hidden;
+
+			height: 300px;
+			overflow: hidden;
+			
 				>img{
-					width : auto;
+					height:300px;
+					width : 100%;
 					min-height : 500px;
-					border-radius : 50%;
+					 
 				}
 				h2{
 					border : none;
@@ -157,14 +160,22 @@
 		}
 		a.left.carousel-control{
 			left : 40px;
+			
 		}
 		a.right.carousel-control {
 			right : 40px;
+			
 		}
 		a.left.carousel-control, a.right.carousel-control {
 			background: none;
 		}
 	}
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    line-height: 1;
+    height: 300px;
+    width: 100%;
 }
 // single project nav css
 .project{
