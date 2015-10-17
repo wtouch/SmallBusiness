@@ -18,13 +18,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
-
 $(document).ready(function(){
 	var sliderMode, minSlides, maxSlides;
 	//$(window).resize(function(){
