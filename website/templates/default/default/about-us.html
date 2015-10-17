@@ -13,8 +13,12 @@
 				<div class="table-responsive">
 				<table class="table table-bordered">
 					<tr>
-						<th>Primary Business Type</th>
-						<th>Year Of Establishment</th>
+						{% if data.business_profile.business_type %}
+							<th>Primary Business Type</th>
+						{% endif %}
+						{% if data.business_profile.establishment %}
+							<th>Year Of Establishment</th>
+						{% endif %}
 						{% if data.business_profile.no_of_employees %}
 							<th>No. Of Employees</th>
 						{% endif %}
@@ -26,8 +30,12 @@
 						{% endif %}
 					</tr>
 					<tr>
-						<td>{{data.business_profile.business_type}}</td>
-						<td>{{data.business_profile.establishment}}</td>
+						{% if data.business_profile.business_type %}
+							<td>{{data.business_profile.business_type}}</td>
+						{% endif %}
+						{% if data.business_profile.establishment %}
+							<td>{{data.business_profile.establishment}}</td>
+						{% endif %}
 						{% if data.business_profile.no_of_employees %}
 							<td>{{data.business_profile.no_of_employees}}</td>
 						{% endif %}
