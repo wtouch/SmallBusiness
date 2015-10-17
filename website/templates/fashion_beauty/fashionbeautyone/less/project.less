@@ -15,7 +15,18 @@
 			}
 			&:hover{
 				border : 2px solid @darkcolor;
+				animation-name:focus1;
+					animation-duration:3s;
+					animation-iteration-count:1;
+				
 			}
+			@keyframes focus1{
+							0%{transform:rotateX(180deg);}
+							//25%{transform:scale(1.8);}
+							100%{transform:rotate(-360deg);}
+							//100%{transform:scale(1);}
+							
+		}
 		}
 		p{
 			margin-bottom : 5px;
@@ -58,8 +69,10 @@
 	.bx-viewport{
 		min-height : 300px !important;
 		.carousslider{
+			
 			padding-left: 0px;
 			li{
+				
 				border:7px solid @lightbackcolor;
 				background-color: @lightbackcolor;
 				border-radius:40px;
@@ -151,21 +164,26 @@
 			background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
 			background: linear-gradient(top, @lightcolor, @darkcolor);
 			border-radius: 0;
-			margin-bottom:10px;
+			//margin-bottom:10px;
 			width:auto;
+			color:@colorblack;
 		}
 		ul.nav.navbar-nav {
 			>li{
-				border-right : 1px solid @lightcolor;
-				height : 38px;
+				border-left : 1px solid @color;
+				height : 50px;
+				
 				>a, > a:focus{
-					padding : 7px 7px 10px;
-					color : @back;
+					//padding : 7px 7px 10px;
+					
+					color:@colorblack;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @back ;
+					background:linear-gradient(to right @darkbackcolor,@lightbackcolor,@darkbackcolor) ;
 					color : @color;
+					//border-left:1px solid @color;
+					//border-left:1px solid @color;
 				}
 			}
 		}
