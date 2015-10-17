@@ -1,17 +1,24 @@
-﻿<!DOCTYPE html>
-<head>
-<title>Chakan Hospital</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel='stylesheet' id='fluid_dg-css'  href='css/fluid_dg.css' type='text/css' media='all'>
-<link rel="stylesheet" type="text/css" href="css/coin-slider.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="js/coin-slider.min.js"></script>
+﻿{% spaceless %}
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}">		
 
 <style type="text/css">
 #marqueecontainer {
@@ -65,39 +72,23 @@ window.onload=initializemarquee
 </script>
 </style>
 </head>
-
 <body>
 
 <div class="container"> 
 	<nav class="nav1">
 		<ul>
-			<li><a href="#">Home</a></li>
-			<li><a href="#">About Us</a></li>
-			<li><a href="#">Surgeries</a></li>
-			<li><a href="#"> Appendicectomy</a></li>
-			<li><a href="#">Day care surgery</a></li>
-			<li><a href="#">Gynaecology</a></li>
-			<li><a href="#">Single incision surgery</a></li>
-			<li><a href="#">Contact Us</a></li>
-			<span style="color:white;"><img src="images/mobile-icon.png" width="9" height="21" border="0" align="absmiddle">&nbsp;&nbsp;+91 9730820889</span>
+
+			{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 		</ul>
 	</nav>
 	<nav class="nav2" class="justify">
 		<ul>
-			<li><a href="#">Academics</a></li>
-			<li><a href="#">patient Info </a></li>
-			<li><a href="#">Cashless Facility</a></li>
-			<li><a href="#"> Facility</a></li>
-			<li><a href="#">Services</a></li>
-			<li><a href="#">Photo gallery</a></li>
-			<li><a href="#">Videos</a></li>
-			<li><a href="#">News</a></li>
-			<li><a href="#">Doctors</a></li>	
+	
 		</ul>
 	</nav>
 		<div class="row">
 			<div class="col-sm-8">
-				<a href="#"><img src="images/title.png" class="img img-responsive"style="min-width:120px; "></a>
+				<img class="logo" src="{{data.business_logo.file_relative_path}}">
 			</div>
 			<div class="col-sm-4" style="margin-top:3%;">
 				<a href="#"class="img img-responsive"style="min-width:120px; " target="_blank"><img src="images/DownloadBrochure_Icon.jpg" style="min-width:150px;" /></a>
@@ -112,15 +103,13 @@ window.onload=initializemarquee
 			         <div class="col-sm-1">
 					 </div>
 					<div class="col-sm-9" style="margin-left:5.5%;">
-						<div id="coin-slider"> <a href="#"><img src="images/slide1.jpg" alt="" /><span>Chakan Critaical care has been providing innovative and quality care to patients in and around Coimbatore for the past 23 years.</span></a> 
-							<a href="#"><img src="images/slide3.jpg"  alt="" /><span>Chakan Critaical care has been providing innovative and quality care to patients in and around Coimbatore for the past 23 years.</span></a> <a href="#"><img src="images/slide1.jpg"  alt="" /><span>Chakan Critaical care has been providing innovative and quality care to patients in and around Coimbatore for the past 23 years.</span></a>
-						</div>
+							{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					</div>
 					
 				</div>
 		   <div class="row" >
 		   
-			<div class="col-sm-1">
+		<!-- 	<div class="col-sm-1">
 			</div>
 				`<div class="col-sm-5 red">
 					<img src="images/Dr.jpg" class="img img-responsive" alt="logo">
@@ -136,7 +125,8 @@ window.onload=initializemarquee
 					<p> <b>Chakan Critaical care</b> has been providing innovative and quality care to patients in and around Coimbatore for the past 23 years. To fulﬁll our vision of providing the most innovative surgical techniques our chairman Dr.XYZ underwent his laparoscopic training in Germany in 1995 and has been offering the same for the past 18 years. Dr. Ashwin underwent his Minimally invasive surgery training in France.</p>
 					<a class="readmore" href="#">Read More ..</a> 
 				</div>
-				
+				 -->
+				 				{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
 				
 		   </div>
 		   </br></br>
@@ -243,19 +233,17 @@ window.onload=initializemarquee
 		</div>
 	</div>
 			 
-		<div class="row footer">
+		<!-- <div class="row footer">
 			<span>Copyright © <a href="#">Apnasite.in</a> · All Rights Reserved</span>
 			<img src="images/logo1.png"class="img img-responsive"style="min-width:120px; " width="118"style="text-align:left;" height="40" border="0" alt="website design company in coimbatore" title="website design company in coimbatore" align="absmiddle">
 			<span style="float:right;margin-top:10px;margin-left:20px">powered by</span>
-		</div>
+		</div> -->
  </div>
-		   
-
-
+	{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} 
 </body>
 </html>
 
-
+{% endspaceless %}
 
 
 
