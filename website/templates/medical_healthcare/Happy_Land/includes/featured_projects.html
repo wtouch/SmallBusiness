@@ -1,0 +1,34 @@
+{% autoescape false %}
+	{% if featured_products | length >= 2 %}
+	<div class="contentModule projects1">
+		<h3 class="subhead1">Our Teaching Staff</h3>
+		<div class="sections clearfix services">
+			<div class="row">
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_products if break == 0 %}
+				{% if x.type == 'product' %}
+				<div class="col-sm-3 col-lg-3  col-md-3 col-xs-12 ">
+					<div class="prodimage">
+					<div class="row">
+						<a href="#">
+							<img class="img-responsive thumbnail center-block " src="{{x.product_image.0.file_relative_path}}" alt="...">
+						</a>
+							<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn default">Teacher</a>
+							<h4 class="text-center">{{x.product_service_name}}{{ x.product_service_name|length > 8 ?x.product_service_name|slice(start, 8) : x.product_service_name }}</h4>
+							
+							
+					</div>
+					</div>
+				</div>	
+				
+				{% set i = (i + 1) %}
+				{% if i == 5 %}
+					{% set break = 1 %}
+				{% endif %}
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+	{% endif %}
+{% endautoescape %}
