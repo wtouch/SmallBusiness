@@ -111,3 +111,15 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		$scope.makeActive($scope.url);
 		
 	});
+	
+	
+	
+	app.controller('mycontrole', function($scope) {
+    $scope.student = '';
+	 
+	
+	   };
+	     
+        
+ 
+});
