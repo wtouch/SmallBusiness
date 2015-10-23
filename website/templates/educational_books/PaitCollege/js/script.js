@@ -114,12 +114,6 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	
 	
 	
-	app.controller('mycontrole', function($scope) {
-    $scope.student = '';
-	 
-	
-	   };
-	     
-        
- 
-});
+	app.controller('applicationController', function($scope) {
+		console.log("application Controller");
+	});
