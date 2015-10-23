@@ -245,7 +245,7 @@
 				border-right : 1px solid @lightbackcolor;
 				height : 38px;
 				>a, > a:focus{
-					padding : 9px 6px 9px 5px;
+					padding : 9px 11px;
 					color : @colorwhite;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
@@ -262,36 +262,21 @@
 			.thumbnail{
 				.projectImags{
 					width: 190px;
-					height: 148px;
+					height: 150px;
 					overflow: hidden;
 					margin : 0 auto;
 					img{
-						min-height : 148px;
+						min-height : 150px;
 					}
+				}
+				.caption{
+					height : 150px;
 				}
 			}
 		}
-		nav {
-			.pagination{
-				li,.disabled{
-					a{
-						background-color: @back;
-						border-color : @colorblack;
-						
-						&:hover{
-							background-color:@back;
-							color:@colorwhite;
-						}
-					}
-				}
-				>.active>a{
-					background-color:@back;
-					color:@colorwhite;
-					border-color : @colorblack;
-				}
-			}
-			
-		} 
+		.panel-default{
+			border-color : @back;
+		}
 	}
 	@media (max-width: 768px){
 		.homeproject::after{
@@ -302,11 +287,19 @@
 			margin-bottom : 10px !important;
 		}
 	}
-	@media (min-width: 320px){
+	@media (max-width: 320px){
 		.projImg{
 			float :none;
-			max-height : 175px;
-			margin-right:10px;
+			margin:auto;
+		}
+		.projHead{
+			text-align: center;
+			margin-top: 15px;
+		}
+		.homeproject{
+			.projectnav{
+				margin-top : 10px;
+			}
 		}
 	}
 	@media (min-width: 992px){

@@ -5,7 +5,7 @@
 		{% set break = 0 %}{% set i = 0 %}
 		{% for x in featured_projects if break == 0 %}
 			<li>
-				<a href="projects/{{x.title}}/{{x.id}}">{{x.title}}</a>
+				<a href="projects/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}">{{x.title}}</a>
 			</li>
 			{% set i = (i + 1) %}
 			{% if i == 4 %}

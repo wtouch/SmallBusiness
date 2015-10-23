@@ -279,7 +279,6 @@
   font: 2em/1.2em Amaranth-Regular;
   font-size: 16px;
   font-weight: bold;
-  /*font: 16px 'Alex Brush', cursive;*/
   padding: 5px 15px;
   text-decoration: none;
   border-color: #330000;
@@ -440,51 +439,20 @@
   height: 197px;
   width: 120px;
 }
-.projlist {
-  /*border:1px solid @colorwhite;*/
-  border-radius: 5px;
-  /*background-color:@back;*/
-  padding: 10px;
-}
-.projlist .panel-default {
-  background-color: #ff9900;
-}
-.projlist .panel-default img {
-  border: 2px solid #d6d6d6;
-}
-.projlist .panel-default img:hover {
-  border: 4px solid #990000;
-}
 .projlist .project .thumbnail {
-  background-color: transparent;
   height: 400px;
-  padding-top: 15px;
-  border: 1px solid #330000;
 }
-.projlist .project .thumbnail .btn-info {
-  background-color: #330000;
-}
-.projlist .project .thumbnail .btn-info:hover {
-  background-color: #ff9900;
-}
-.projlist .project .thumbnail img {
-  max-height: 183px;
+.projlist .project .thumbnail .projectimg {
+  width: 200px;
+  height: 150px;
   overflow: hidden;
-  border: 0 solid #333239;
-  text-align: center;
-  transition: all 0.2s ease;
+  margin: 0 auto;
 }
-.projlist .project .thumbnail img:hover {
-  transition: all 0.2s ease;
+.projlist .project .thumbnail .projectimg img {
+  min-height: 150px;
 }
 .projlist .project .thumbnail .caption {
-  height: 190px;
-}
-.projlist .project .thumbnail .caption p {
-  color: #000000;
-}
-.projlist .project .pagination {
-  align: center;
+  height: 200px;
 }
 .projlist .project .projImg {
   margin-right: 20px;
@@ -584,43 +552,17 @@
     margin-right: 10px;
   }
 }
-.products,
-.singleproduct {
-  border: 1px solid none;
-}
-.products .thumbnail,
-.singleproduct .thumbnail {
-  background-color: #ffffcc;
-  border: 1px solid #330000;
-}
-.products .thumbnail img,
-.singleproduct .thumbnail img {
-  max-height: 180px;
+.services .servimage {
+  border: 4px solid transparent;
+  padding: 6px;
 }
 .services .servdesc {
   height: 220px;
   margin-bottom: 10px;
 }
-.services .servimage {
-  border: 4px solid transparent;
-  padding: 6px;
-}
 .services .servdesc .description {
   height: 75px;
   overflow: hidden;
-}
-.services .servdesc .readmore {
-  text-align: center;
-  margin-top: 20px;
-}
-.services .servdesc .readmore a {
-  background-color: #ff9900;
-  color: #330000;
-  border-radius: 0px;
-}
-.services .servdesc .readmore a:hover {
-  color: colorwhite;
-  background-color: #330000;
 }
 .products .caption {
   color: #000000;
@@ -639,10 +581,6 @@
 .products .thumbnail .readmore {
   margin-top: 10px;
   text-align: center;
-}
-.contentModule .sections .readmore .btn-info {
-  background-color: #330000;
-  border: none;
 }
 @media (min-width: 320px) {
   .products {
@@ -696,7 +634,7 @@
   margin-top: 10px;
 }
 .featuretab .tab-content {
-  border: 1px solid #ffffcc;
+  border: 1px solid #330000;
   border-top: none;
   position: relative;
   margin-bottom: 25px;
@@ -704,21 +642,21 @@
   padding: 10px;
 }
 .featuretab .nav-tabs {
-  border-bottom: 1px solid #ffffcc;
+  border-bottom: 1px solid #330000;
 }
 .featuretab .nav-tabs li a {
   border: 1px solid #330000;
-  font: 16px 'Alex Brush', cursive;
+  font: 16px 'Alex Brush', Amaranth-Regular;
 }
 .featuretab .nav-tabs li a:hover {
-  color: #ffffff;
+  color: #330000;
   background-color: #ff9900;
 }
 .featuretab .nav-tabs li.active > a,
 .featuretab .nav-tabs li.active > a:hover,
 .featuretab .nav-tabs li.active > a:focus {
   color: #ffffff;
-  background-color: #ff9900;
+  background-color: #330000;
   border: 1px solid #330000;
 }
 .mailSentMsg {
@@ -794,10 +732,6 @@
   margin-top: 20px;
 }
 .infrastructure .thumbnail {
-  background-color: #d6d6d6;
-  border: 1px solid #330000;
-  /*box-shadow: 3px 3px 6px #ADADAD;*/
-  background-color: #ffffff;
   height: 395px;
 }
 .infrastructure .thumbnail img {
@@ -866,10 +800,6 @@
   border: 1px solid #ffffff;
   padding: 10px;
   margin: 1px;
-}
-.gallery .thumbnail {
-  border-color: #ffffff;
-  /*background-color:@back;*/
 }
 .gallery .thumbnail .caption .description {
   overflow: hidden;
@@ -970,7 +900,7 @@ hr {
   margin-top: 5px;
   max-width: 100%;
 }
-.project .thumbnail {
+.thumbnail {
   background-color: transparent;
   border: 1px solid #330000;
 }
@@ -978,53 +908,11 @@ hr {
   text-decoration: none;
   color: #330000;
 }
-.btn-info {
-  background-color: #330000;
-}
 a {
   color: #ff9900;
 }
 footer a {
   color: #ffffff;
-}
-.btn {
-  border-radius: 0px;
-}
-.btn.send {
-  margin-right: 8px;
-  background-color: #330000;
-}
-.btn.send:hover {
-  background-color: #ff9900;
-  color: #330000;
-}
-.btn + .btn {
-  margin-left: 10px;
-  background-color: #330000;
-}
-.btn + .btn:hover {
-  background-color: #ff9900;
-  color: #330000;
-}
-.btn-info,
-.btn-primary {
-  font-family: Amaranth-Regular;
-  background-color: #330000;
-  border: none;
-}
-.btn-info:hover {
-  background-color: #ff9900;
-  color: #330000;
-}
-.btn-info:focus,
-.btn-info:active,
-.btn-info .open > .dropdown-toggle.btn-info {
-  border: none;
-  color: #ffffff;
-  font-weight: bold;
-}
-.btn-danger {
-  border: none;
 }
 .cnctinfo {
   color: #990000;
@@ -1045,12 +933,22 @@ footer a {
   border: none;
   min-height: 50px;
 }
-.contentModule .sections .readmore .btn-info {
+.btn-info,
+.btn-primary,
+.btn-info[disabled] {
   background-color: #330000;
+  font-family: Amaranth-Regular;
+  border-radius: 0px;
+  border: none;
 }
-.contentModule .sections .readmore .btn-info:hover {
+.btn-info:hover,
+.btn-primary:hover,
+.btn-info[disabled]:hover {
   background-color: #ff9900;
   color: #330000;
+}
+.btn + .btn {
+  margin-left: 5px;
 }
 .navbar-default {
   background-color: #330000;
@@ -1189,17 +1087,7 @@ h4:hover {
   border: 3px solid #330000;
 }
 .contentModule .sections .readmore {
-  margin-bottom: 10px;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-.contentModule .sections .readmore .btn-info {
-  font-family: Amaranth-Regular;
-  background-color: #330000;
-  color: #ffffff;
-}
-.contentModule .sections .readmore a {
-  font-family: Amaranth-Regular;
+  margin-top: 15px;
 }
 .form-control {
   background-color: transparent;
