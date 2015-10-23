@@ -110,7 +110,7 @@
 		max-width: 100%;
 	}
 	
-	.project .thumbnail{
+	.thumbnail{
 		background-color:transparent;
 		border: 1px solid @darkbackcolor;
 	}
@@ -119,10 +119,6 @@
 		text-decoration : none;
 		color: @darkbackcolor;
 	}
-	.btn-info{
-		background-color:@darkbackcolor;
-	}
-	
 	a
 	{
 		color:@back;
@@ -131,49 +127,6 @@
 	footer a{
 		color:@colorwhite;
 	}
-	
-	.btn
-	{
-		border-radius : 0px;
-	}
-	.btn.send{
-		margin-right : 8px;
-		background-color:@darkbackcolor;
-	}
-	.btn.send:hover{
-	
-		background-color:@back;
-		color:@darkbackcolor;
-	}
-	.btn + .btn {
-		margin-left : 10px;
-		background-color:@darkbackcolor;
-	}
-	.btn + .btn:hover {
-	background-color:@back;
-	color:@darkbackcolor;
-	}
-	.btn-info,.btn-primary{
-		font-family: Amaranth-Regular;
-		background-color:@darkbackcolor;
-		border:none;
-	}
-
-	.btn-info:hover{
-	background-color:@back;
-	color:@darkbackcolor;
-	}
-	.btn-info{
-		 &:focus, &:active,.open>.dropdown-toggle.btn-info{
-			border : none;
-			color :@colorwhite;
-			font-weight: bold;
-		}
-	}
-	.btn-danger{
-	border:none;
-	}
-	
 	.cnctinfo{
 		color:@color;
 		font-weight : bold;
@@ -195,15 +148,19 @@
 		min-height : 50px;
 	}
 	
-	.contentModule .sections .readmore .btn-info {
-		  background-color:@darkbackcolor;
-		 &:hover{
-			background-color: @back;
-			color:@darkbackcolor;
-			
-		 }
+	.btn-info, .btn-primary, .btn-info[disabled]{
+		background-color:@darkbackcolor;
+		font-family: Amaranth-Regular;
+		border-radius : 0px;
+		border : none;
 	}
-
+	.btn-info:hover, .btn-primary:hover, .btn-info[disabled]:hover{
+		background-color: @back;
+		color:@darkbackcolor;
+	}
+	.btn + .btn{
+		margin-left : 5px;
+	}
 	.navbar-default {
 		background-color: @darkbackcolor;
 		margin-bottom :0px;
@@ -351,21 +308,8 @@
 				padding : 4px;
 				border : 3px solid @darkbackcolor;
 			}
-			
 			.readmore{
-				margin-bottom :10px;
-				margin-top:10px;
-				margin-right:10px;
-				.btn-info{
-					font-family: Amaranth-Regular;
-					background-color:@darkbackcolor;
-					color:@colorwhite;
-				}
-				
-				a{
-					font-family: Amaranth-Regular;
-					
-				}
+				margin-top:15px;
 			}
 		}
 		
@@ -409,33 +353,33 @@
 		}
 	}*/
 	
-nav {
-			.pagination{
-				li,.disabled{
-					a{
-						background-color: @darkbackcolor;
-						color:@back;
-						border:none;		
-						
-						&:hover{
-							background-color:@back;
-							color:@darkbackcolor;
-						}
+	nav {
+		.pagination{
+			li,.disabled{
+				a{
+					background-color: @darkbackcolor;
+					color:@back;
+					border:none;		
+					
+					&:hover{
+						background-color:@back;
+						color:@darkbackcolor;
 					}
 				}
-				>.active>a{
-					background-color:@back;
-					color:@darkbackcolor;
-					
-				
-				}
-				>.active>a:hover{
-				background-color:@back;
-					color:@darkbackcolor;
-				}
 			}
+			>.active>a{
+				background-color:@back;
+				color:@darkbackcolor;
+				
 			
-		} 
+			}
+			>.active>a:hover{
+			background-color:@back;
+				color:@darkbackcolor;
+			}
+		}
+		
+	} 
 	
 
 	hr{

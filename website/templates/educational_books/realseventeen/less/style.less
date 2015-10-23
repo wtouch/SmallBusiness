@@ -157,8 +157,7 @@
 	.navbar
 	{
 		border:none;
-		min-height : 50px;
-        height:40px;
+		min-height : 40px;
 	}
 	
 	.navbar-default {
@@ -328,10 +327,26 @@
 	.thumbnail{
 		border-color : @darkbackcolor;
 	}
-	.services{
-		border : none;
-	}
-	
+	nav {
+		.pagination{
+			li,.disabled{
+				a{
+					background-color: @colorwhite;
+					border-color : @color;
+					&:hover{
+						background-color:@back;
+						color:@colorwhite;
+						border-color : @color;
+					}
+				}
+			}
+			>.active>a{
+				background-color:@back;
+				color:@colorwhite;
+				border-color : @colorblack;
+			}
+		}
+	} 
 	.email{
 		&:hover{
 			text-decoration : none;

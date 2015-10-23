@@ -13,7 +13,7 @@
 				height :150px;
 				width : 200px;
 				overflow : hidden;
-				border : 2px solid transparent;
+				border : 2px solid @back;
 				.slimg{
 					min-height: 150px;
 				}
@@ -49,6 +49,8 @@
 
 //propertiesList 
 .propertylist{
+	border : 1px solid @back;
+	padding : 0px 10px;
 	.btn-primary{
 		margin-bottom: 10px;
 	}
@@ -66,9 +68,9 @@
 			img{
 				min-height: 150px;
 				padding : 4px;
-				border : 3px solid transparent;
+				border : 2px solid @back;
 				&:hover{ 
-					border : 3px solid @back;
+					border : 2px solid @darkcolor;
 				}
 			}
 		}
@@ -80,28 +82,6 @@
 			padding: 1px 1px;
 		}
 	}
-	nav {
-		.pagination{
-			li,.disabled{
-				a{
-					background-color: @colorwhite;
-					border-color : @color;
-					
-					&:hover{
-						background-color:@back;
-						color:@colorwhite;
-					}
-				}
-			}
-			>.active>a{
-				background-color:@back;
-				color:@colorwhite;
-				border-color : @colorblack;
-			}
-		}
-		
-	} 
-	
 }
 
 //single property view
@@ -237,7 +217,7 @@
 		}
 	}
 }
-@media (min-width: 320px){
+@media (max-width: 320px){
 	.propDetails{
 		ul{
 			li{
@@ -253,8 +233,15 @@
 			}
 		}
 	}
+	.propertylist{
+		.sliderImg{
+			margin : auto;
+		}
+		.sliderDesc {
+			text-align : center;
+		}
 	}
-	
+}
 @media (min-width: 992px){
 	.propDetails{
 		ul{
@@ -271,6 +258,7 @@
 			}
 		}
 	}
+	
 }
 @media (min-width: 1200px){
 	.propDetails{
