@@ -1,9 +1,6 @@
 {% autoescape false %}
-<div class="row">
-	<div class="col-xs-9">
-		<h2>{{project.title}}</h2>
-	</div>	
-</div>
+<h2>{{project.title}}</h2>
+
 <div class="row project">
 	{% if homeproject != 'true' %}
 		<div class="col-xs-12 col-sm-12 col-lg-12">
@@ -24,17 +21,17 @@
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/locationmap">Location Map</a>
 					</li>
 					{% endif %}
-					{% if project.projecttestimonials %}
+					{% if project.layoutplan %}
 					<li {{ projectPage == 'layoutplan' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/layoutplan">Layout Plan</a>
 					</li>
 					{% endif %}
-					{% if project.projecttestimonials %}
+					{% if project.floorplans %}
 					<li {{ projectPage == 'floorplans' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/floorplans">Floor Plans</a>
 					</li>
 					{% endif %}
-					{% if project.projecttestimonials %}
+					{% if project.projgallery %}
 					<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projgallery">Gallery</a>
 					</li>
@@ -44,7 +41,7 @@
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projecttestimonials">Testimonials</a>
 					</li>
 					{% endif %}
-					{% if project.projecttestimonials %}
+					{% if project.projcontact %}
 					<li {{ projectPage == 'projcontact' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projcontact">Contact</a>
 					</li>
