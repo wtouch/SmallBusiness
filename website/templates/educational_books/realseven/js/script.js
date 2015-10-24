@@ -98,7 +98,6 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	var hour = today.getHours();
 	var min = today.getMinutes();
 	var sec = today.getSeconds();
-	$scope.mailSent = false;
 	
 	var params = {table : "config", config_name : "property"};
 	$http({
@@ -106,7 +105,6 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		method: "GET",
 		params: params
 	}).then(function (results) {
-		console.log(results);
 		if(results.data.status == 'success'){
 			$scope.propertyConfig = results.data.data.config_data;
 		}else{
@@ -114,22 +112,29 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		}
 	});
 	
+	// Don't change following code
+	/* start email code */
+	$scope.mailSent = false;
 	$scope.enquiry = {
-				subject : 'Website Enquiry',
-				date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
-			};
+		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
+	};
 	$scope.postData = function(enquiry){
 		$scope.loading = true;
+		if(enquiry.message.property_link){
+			enquiry.message.property_link = "<a href=\""+ location.origin +"/properties/"+ enquiry.message.property_link.params.property_title + "/" + enquiry.message.property_link.params.property_id + "\">"+enquiry.message.property_link.params.property_title+"</a>";
+		}
 		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-				if(response.status == 'success'){
-					$scope.loading = false;
-					$scope.mailSent = true;
-				}
-				else{
-					alert(response.message);
-				}
+			$scope.loading = false;
+			if(response.status == "success"){
+				$scope.mailSent = true;
+			}else{
+				$scope.mailSent = false;
+				$scope.errorMessage = response.message;
+				console.log(response);
+			}
 		});
 	};
+	/* End email code */
 });	
 	app.controller('aboutController', function($scope,$http, $location) {
 		var s = $location.path();
