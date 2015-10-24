@@ -16,8 +16,8 @@ $(document).ready(function(){
 			
 		}else{
 			sliderMode = "vertical";
-			minSlides = 3;
-			maxSlides = 3;
+			minSlides = 1;
+			maxSlides = 1;
 		}
 	//})
 	$('.bxslider').bxSlider({
