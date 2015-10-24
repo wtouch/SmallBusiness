@@ -12,7 +12,7 @@
 	@back:#BAA304;//tiranga color
 	
 	@lightcolor:#B19E1A;
-	
+	@darkbackcolor:#777070;
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	
@@ -118,7 +118,7 @@
 .modal-content {
 		-webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
 		box-shadow: 0 5px 15px rgba(0,0,0,.5);
-		background-image:url('../img/img1.jpg');
+		background-color:@darkbackcolor;
 		
 	.btn-success {
 		color: @colorwhite;
@@ -127,8 +127,8 @@
 	}
 	.btn-info {
 		color: #fff;
-		background-color: #5bc0de;
-		border-color: #46b8da;
+		background-color:@lightcolor;
+		border-color: @colorwhite;
 		width: 201px;
 	}
     .well{
@@ -143,9 +143,21 @@
 		margin-left: 20px;
 		border-radius: 5px;
 	}
-	.model-body>ul{
-		list-style-type:none;
-		margin-left:6%;
+	ul{
+	
+	}
+	h3{
+		text-shadow: 1px 3px 4px #000;
+		font-weight:bold;
+	    text-align:center;
+	}
+	.modal-header{
+	border-bottom:1px solid @lightcolor;
+	
+	}
+	.modal-footer{
+	border-top:1px solid @lightcolor;
+	
 	}
 }
 .form-control {
@@ -173,6 +185,7 @@
 		background-color:transparent;
 	h3{
 		color:@color;
+	    text-align:center;
 	}
 }
 .modal-header .close {
@@ -186,26 +199,29 @@
 
 
 .nav-tabs{
-			border-bottom: 1px solid @darkbackcolor;
+			border-bottom: 1px solid @lightcolor;
 			li{
 				a{
 					color : @colorwhite;
 					border: 1px solid @colorwhite;
 					font : 2em/1.2em Amaranth-Regular;
 					font-size :16px;
-					background-color:@darkbackcolor;
+					background-color:@color;
+					border-radius: 4px 4px 0 0 !important;
 					&:hover{
-						color: @colorwhite;
+						color: @color;
 						background-color:@back;
-						
-						border: 1px solid @colorwhite;
+						border: 1px solid @color;
+						border-radius:4px 4px 0 0;
 					}
 				}
 				&.active>a, &.active>a:hover, &.active>a:focus{
 					color: @colorwhite;
-						background-color:@back;
-					border: 1px solid @colorwhite;
+					background-color:@back;
+					border: 1px solid @color;
+					border-radius:4px 4px 0 0;
 				}
+				
 			}
 		}
 
