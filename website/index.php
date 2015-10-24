@@ -57,16 +57,6 @@ $app->get('/sitedata', function() use($app, $config) {
 });
 
 $app->get('/', function() use($app, $config, $web) {
-	$modules['headerModule']['carousal'] = true;
-	$modules['headerModule']['homeproject'] = true;
-	$modules['sidebarModule']['searchProp'] = true;
-	$modules['sidebarModule']['enquiry'] = true;
-	$modules['sidebarModule']['contact'] = true;
-	$modules['sidebarModule']['sidemenu'] = true;
-	$modules['contentModule']["featured_products"] = true;
-	$modules['contentModule']["featured_services"] = true;
-	$modules['contentModule']["featured_projects"] = true;
-	$modules['contentModule']["featured_properties"] = true;
 	$title = "Home";
 	$web->getBusinessData('home', $title);
 });

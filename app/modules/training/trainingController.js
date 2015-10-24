@@ -12,8 +12,8 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		$scope.user_id = "";
 		
 		$scope.getTraining = function(page, user_id, trainingParam){
-			$scope.trainingParam = (trainingParam) ? trainingParam : {status : 1, user_id : user_id};
-			angular.extend($scope.trainingParam, {user_id : user_id});
+			$scope.trainingParam = (trainingParam) ? trainingParam : {status : 1};
+			
 			dataService.get("/getmultiple/training/"+page+"/"+$scope.pageItems, $scope.trainingParam)
 			.then(function(response) {
 				if(response.status == 'success'){				
