@@ -1,73 +1,57 @@
 .featured_product{
-					//width: 300px;
-					.product_div{
-								   width: 286px;
-									border:2px solid @color;
-									position:relative;	
-								
-										.servimage{
-												width : 260px;
-												height : 260px;	
-												overflow : hidden;
-												margin : 0 auto;
-												border : 5px solid #fff;
-												position : relative;					
-										
-														.prod_img{
-																min-height: 232px;
-														   }
-										
-											}//servimg
-											
-							.servdesc{
-								position : absolute;
-								top : 0;
-								left : 11px;
-								
-								width : 260px;
-								height: 260px;
-								margin:auto 0;
-								//opacity: 0;
-								background-color: rgba(3, 13, 130, 0.49);
-								transition: all 0.4s ease-in-out;
-								overflow:hidden;
-								
-							}
-										
-								&:hover{
-									z-index : 0;
-									overflow : hidden;
-								
-								 a.read{
-									transition-delay: 0.3s;
-									opacity: 1;
-									transform: translateY(0px);
-									}
-									
-						}//servimghover
-					
-			}//prod_div
-			
-						h4{
-									//transform: translateY(-100px);
-									//opacity: 0;
-									//transition: all 0.2s ease-in-out;
-									font-size: 20px;
-									padding: 5px 0px;
-									margin : 10px 20px;
-									max-height : 75px;
-									background-color: rgba(213, 7, 168, 0.49);
-									
-								}
-						.caption{		 
-									//transform: translateY(100px);
-								//	opacity: 0;
-									transition: all 0.2s linear;
-									height : auto;
-									overflow : hidden;
-									margin-bottom : 10px;
-								}                                                  
-}//featured_product
+		.servimage{
+				width : 260px;
+				height : 260px;
+				overflow : hidden;
+				margin : 0 auto;
+				border : 5px solid #fff;
+				position : relative;
+				.servimage img{
+					min-height : 260px;
+				}
+				.servdesc{
+					opacity: 0;
+					background-color: rgba(3, 13, 130, 0.49);
+					transition: all 0.4s ease-in-out;
+					position : absolute;
+					width : 100%;
+					height : 100%;
+					overflow : hidden;
+					padding : 25px;
+					border-radius : inherit;
+					top : 0;
+					left : 0;
+					h4{
+						transform: translateY(-100px);
+						opacity: 0;
+						transition: all 0.2s ease-in-out;
+						font-size: 20px;
+						padding: 5px 0px;
+						margin : 10px 20px;
+						max-height : 75px;
+						background-color: rgba(213, 7, 168, 0.49);
+					}
+					.caption{		 
+						transform: translateY(100px);
+						opacity: 0;
+						transition: all 0.2s linear;
+						height : 80px;
+						overflow : hidden;
+						margin-bottom : 10px;
+					}
+				}
+				&:hover{
+					z-index : 0;
+					overflow : hidden;
+				
+				 a.read{
+					transition-delay: 0.3s;
+					opacity: 1;
+					transform: translateY(0px);
+					}
+		}//servimghover
+}//servimg	
+}
 
 .featured_services{
 	.sections{
@@ -86,8 +70,6 @@
 		}
 		.servdesc{
 			height : 220px;
-			background-color:red;
-			position:absolute;
 			.description{
 				height : 75px;
 				overflow : hidden;
