@@ -11,7 +11,18 @@
 	<script src="{{ path }}js/bootstrap.min.js"></script>
 	<style>
 	body{
-		background-color : {{(code == 101) ? 'blue' : 'green'}};
+		{% if code == 101 or code == 102 or code == 103 %}
+			background-color : green;
+		{% endif %}
+		{% if code == 104 or code == 105 %}
+			background-color : red;
+		{% endif %}
+		{% if code == 100 %}
+			background-color : blue;
+		{% endif %}
+	}
+	h2{
+		color : red;
 	}
 	.erorimg{
 		height : 100px;
@@ -20,12 +31,27 @@
 </head>
 <body>
 	<div class="container">
-	<div class="errorback">
-		<div class="msg">
-			<h2>{{(code == 101) ? "" : website_status}}<img class="erorimg" src="{{(code == 101) ? path ~ 'img/comingsoon.png' : path ~ 'img/errorface.png'}}"></h2>
-			<h3>{{message}}</h3>
+		{{status}}
+		{{code}}
+		{{website_status}}
+		<div class="errorback">
+			<div class="msg">
+				<h2>
+					{{(code == 101 or code == 102 or code == 103 or code == 100) ? "" : website_status}}
+					 <img class="erorimg" src="{{(code == 101) ? path ~ 'img/comingsoon.png' : path ~ 'img/errorface.png'}}"> 
+					<!-- {% if code == 101 or code == 102 or code == 103 or code == 100 %}
+						<img class="erorimg" src="{{path}}/img/comingsoon.png">
+					{% endif %}
+					{% if code == 104 %}
+						<img class="erorimg" src="{{path}}/img/errorface.png">
+					{% endif %}
+					{% if code == 105 %}
+						<img class="erorimg" src="{{path}}/img/errorface.png">
+					{% endif %} -->
+				</h2>
+				<h3>{{message}}</h3>
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>
