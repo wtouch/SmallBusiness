@@ -19,10 +19,10 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 		{% if data.template_params %}
 			<style>
-				.sociallinks ul li, .block-menu .nav-child li > a:hover, .block-menu .nav-child li > a:focus, .block-menu .nav-child:hover > a, .homeproject .projectnav ul.nav.nav-stacked > li> a:hover,.homeproject .projectnav a:hover,.front, .back,.proj_nav > li > a:hover, .proj_nav > .active > a,.block-menu .child-menu > ul > li > a:hover, .btn:hover, .nav-pills li:hover > a, .nav-pills li > a:focus, .nav-pills .active :hover > a, .nav-pills .active:hover > a:focus, .nav-pills .active >a:hover, .nav-pills .active >a:focus, .projlist .project .thumbnail .readmore a:hover,.project .navbar	 ul.nav.navbar-nav>li.active > a, .project .navbar	 ul.nav.navbar-nav>li.active:hover > a, .project .navbar ul.nav.navbar-nav>li.active > a:focus, .project .navbar	 ul.nav.navbar-nav>li:hover > a, .project .navbar	 ul.nav.navbar-nav>li:hover > a:focus, .project .navbar ul.nav.navbar-nav>li>a:hover, .project .navbar ul.nav.navbar-nav>li>a:focus, .propertylist .panel-default img:hover{
+				.sociallinks ul li, .block-menu .nav-child li > a:hover, .block-menu .nav-child li > a:focus, .block-menu .nav-child:hover > a, .homeproject .projectnav ul.nav.nav-stacked > li> a:hover,.homeproject .projectnav a:hover,.front, .back,.proj_nav > li > a:hover, .proj_nav > .active > a,.block-menu .child-menu > ul > li > a:hover, .btn:hover, .nav-pills li:hover > a, .nav-pills li > a:focus, .nav-pills .active :hover > a, .nav-pills .active:hover > a:focus, .nav-pills .active >a:hover, .nav-pills .active >a:focus, .projlist .project .thumbnail .readmore a:hover,.project .navbar	 ul.nav.navbar-nav>li.active > a, .project .navbar	 ul.nav.navbar-nav>li.active:hover > a, .project .navbar ul.nav.navbar-nav>li.active > a:focus, .project .navbar	 ul.nav.navbar-nav>li:hover > a, .project .navbar	 ul.nav.navbar-nav>li:hover > a:focus, .project .navbar ul.nav.navbar-nav>li>a:hover, .project .navbar ul.nav.navbar-nav>li>a:focus{
 					background-color : {{data.template_params.background_color_dark}};
 				}
-				.imgborder .slimg:hover, .thumbnail, .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus,.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover, .sidebar table tr td, .projlist .project .thumbnail .projectimg	 img:hover, .modal-content, .modal-content h4, .singleproperty	.property, .singleproperty	.property .table tbody tr td, .singleproperty	.propDetails .table tbody tr th,.singleproperty	.propDetails .table tbody tr td, .singleproperty .property  .propDetails .table tbody tr th,.featrtesti img:hover{
+				.imgborder .slimg:hover, .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus,.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover, .sidebar table tr td, .projlist .project .thumbnail .projectimg	 img:hover, .modal-content, .modal-content h4, .singleproperty .property  .propDetails .table tbody tr th,.featrtesti img:hover, .propertylist .panel-default .sliderImg img:hover{
 					border-color : {{data.template_params.background_color_dark}};
 				}
 				a:hover, .pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
@@ -109,7 +109,7 @@
 			<div class="main-content">
 				<div class="container">
 					<div class="row">
-						<div class="{{ (modules.sidebarModule >=1 ) ? 'col-md-push-4 col-lg-push-3 col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12'}}">
+						<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-push-4 col-md-push-3 col-xs-12 col-sm-8 col-md-9' : 'col-xs-12 col-sm-12 col-md-12'}}">
 							<div class="content-box">
 								{% include contentPath %}
 							</div>
@@ -159,7 +159,7 @@
 							
 						</div>
 						{% if modules.sidebarModule >= 1 %}
-						<div class="col-md-pull-8 col-lg-pull-9 col-xs-12 col-md-4 col-lg-3">
+						<div class="col-sm-pull-8 col-md-pull-9 col-xs-12 col-sm-4 col-md-3">
 							{%if modules.sidebarModule.searchProp %}
 								{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
 							{%endif%}

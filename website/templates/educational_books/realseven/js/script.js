@@ -4,82 +4,91 @@ jQuery(document).ready(function() {
 	jQuery(".subimgs").click(function(){
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
+	$(".block-menu >li >a").addClass('three-d').append(function(n,txt){
+
+            return '<span class="three-d-box"><span class="front">'+ txt +'</span><span class="back">'+ txt +'</span></span>';
+
+        });
 });
 
+			jQuery(document).ready(function(){
+
+		jQuery('#featuredProject,#featuredProp,#featuredService, #featuredProduct').carousel({
+
+		  interval: 4000
+
+		})
+
+		jQuery('.carousel .item').each(function(){
+
+		  var next = jQuery(this).next();
+
+		  if (!next.length) {
+
+			next = jQuery(this).siblings(':first');
+
+		  }
+
+		  next.children(':first-child').clone().appendTo(jQuery(this));
+
+		  for (var i=0;i<2;i++) {
+
+			next=next.next();
+
+			if (!next.length) {
+
+				next = jQuery(this).siblings(':first');
+
+			}
+
+			next.children(':first-child').clone().appendTo(jQuery(this));
+
+		  }
+
+		});	
+
+	});
 $(document).ready(function(){
-	var sliderMode, minSlides, maxSlides;
-	//$(window).resize(function(){
-		if($(window).width() <= "480"){
-			sliderMode = "horizontal";
-			minSlides = 1;
-			maxSlides = 1;
-			
-		}else{
-			sliderMode = "vertical";
-			minSlides = 3;
-			maxSlides = 3;
-		}
-	//})
+	$('.carousslider').bxSlider({
+		mode:'fade',
+		minSlides: 1,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 1,
+		pause:4000,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed : 1000
+	});
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
+		slideMargin: 10,
+		minSlides :1,
+		maxSlides: 3,
+		moveSlides: 2,
 		slideWidth: 250,
-		minSlides: minSlides,
-		maxSlides: maxSlides,
-		slideMargin: 25,
 		auto: true, 
 		autoDirection:'next',
-		moveSlides: 1,
-		pause:3000,
-		pager:true,
+		pause:4000,
+		pager:false,
 		pagerType:'full',
-		autoControls: true, 
+		autoControls: false, 
 		controls:true, 
-		autoHover:true,
-		speed:1000,
-	});
-	$('.bxslider1').bxSlider({
-		mode: sliderMode,
-		slideWidth: 680,
-		minSlides: minSlides,
-		maxSlides: maxSlides,
-		slideMargin: 15,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
-		pause:3000,
-		pager:false,
-		pagerType:'full',
-		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed:1000,
-	});
-	$('.carousslider').bxSlider({ 
-		mode:'fade',
-		minSlides:1,
-		maxSlides: 1,
-		auto: true, 
-		autoDirection:'next',
-		pause:2500,
-		pager:false,
-		pagerType:'full',
-		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed:1000,
+		autoHover:true
 	});
 });
 var app = angular.module('myApp',[]);
 
 app.config(function($locationProvider) {
-	
   /* $routeProvider
    .when('/:view', {
     templateUrl: function(rd) { return hostUrl+"/"+rd.view+'.html';}
   })
   .otherwise({ redirectTo: '/home' }); */
 });
-
 app.controller('enquiryController', function($scope,$http, $location) {
 	$scope.hostUrl = hostUrl;
 	var today = new Date();
@@ -127,7 +136,6 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	};
 	/* End email code */
 });	
-
 	app.controller('aboutController', function($scope,$http, $location) {
 		var s = $location.path();
 		$scope.url = s.substr(1);
