@@ -43,7 +43,7 @@
 			<div class="form-group">
 				<label for="type" class="col-xs-12 col-sm-3 col-lg-2 control-label" ng-if="enquiry.message.category" >* Property Type </label>
 				<div class="col-xs-12 col-sm-9 col-lg-10">
-					<select  id="type" ng-if="enquiry.message.category" name="type" ng-model="enquiry.message.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types  | filter : {'category_name' : property.category}">
+					<select  id="type" ng-if="enquiry.message.category" name="type" ng-model="enquiry.message.type" class="form-control" required ng-options="item.type as item.type for item in propertyConfig.types  | filter : {'category_name' : enquiry.message.category}">
 						<option value="">Select Property Type</option>		
 					</select>
 					<span class="text-danger" ng-show="postRequirementForm.type.$dirty && postRequirementForm.type.$invalid">
@@ -89,7 +89,7 @@
 						<option value="In Rupees">In Rupees.</option>
 						<option value="Thousands">Thousands</option>
 						<option value="Lac">Lac</option>
-						<option value="Carror">Carror</option>
+						<option value="Crore">Crore</option>
 					</select>
 					<span class="text-danger" ng-show="postRequirementForm.currency.$dirty && postRequirementForm.currency.$invalid">
 						<span ng-show="postRequirementForm.currency.$error.required">This is required .</span>

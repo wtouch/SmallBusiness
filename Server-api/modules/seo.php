@@ -36,11 +36,11 @@
 		
 		$home = array("name" => "Home", "url" => "/", "status" => "1");
 		$about = array("name" => "About Us", "url" => "/about-us", "status" => "1");
-		$contact = array("name" => "Contact Us", "url" => "/contact-us", "status" => "1");
+		
 		$projects = array("name" => "Projects", "url" => "/projects", "status" => "1");
 		$properties = array("name" => "Properties", "url" => "/properties", "status" => "1");
 		
-		$menus = array($home, $about, $contact, $projects, $properties);
+		$menus = array($home, $about, $projects, $properties);
 		
 		if($data['status'] == "success"){
 			if($data['data'][0]['testimonials']) $menus[] = array("name" => "Testimonials", "url" => "/testimonials", "status" => "1");
@@ -64,10 +64,10 @@
 			$serviceCategory = array();
 			foreach($data['data'] as $key => $value){
 				if($value['product_type'] == "product"){
-					$productCategory[$value['product_category']][] = array("name" => $value['product_name'], "url" => "/products/".$value['product_name']."/".$value['product_id'], "status" => "1");
+					$productCategory[$value['product_category']][] = array("name" => $value['product_name'], "url" => "/products/".str_replace('/','_',$value['product_name'])."/".$value['product_id'], "status" => "1");
 				}
 				if($value['product_type'] == "service"){
-					$serviceCategory[$value['product_category']][] = array("name" => $value['product_name'], "url" => "/services/".$value['product_name']."/".$value['product_id'], "status" => "1");
+					$serviceCategory[$value['product_category']][] = array("name" => $value['product_name'], "url" => "/services/".str_replace('/','_',$value['product_name'])."/".$value['product_id'], "status" => "1");
 				}
 				
 			}
@@ -100,7 +100,7 @@
 			}
 			
 		}
-		
+		array_push($menus,array("name" => "Contact Us", "url" => "/contact-us", "status" => "1"));
 		$response["status"] = "success";
 		$response["message"] = "Menus selected!";
 		$response["data"] = $menus;

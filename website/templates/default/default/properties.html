@@ -55,8 +55,8 @@
 						</table>
 					</div>
 					<div class="readmore">
-						<a href="/properties/{{x.title}}/{{x.id}}" class="btn btn-info viewdtls">View Details</a>
-						<a href="/enquiry?property_category={{x.category}}&property_id={{x.id}}&property_title={{x.title}}"class="btn btn-info">Send Enquiry</a> 
+						<a href="/properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info viewdtls">View Details</a>
+						<a href="/enquiry?property_category={{x.category| replace({' ':'-', '/':'_'})}}&property_id={{x.id}}&property_title={{x.title}}"class="btn btn-info">Send Enquiry</a> 
 					</div>
 				</div>
 			</div>

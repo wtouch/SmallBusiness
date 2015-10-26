@@ -3,7 +3,7 @@
 	<div class="projlist clearfix">
 		<div class="row project">
 			{% for key, x in projects %}
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+				<div class="col-xs-12 col-sm-6 col-md-4">
 					<div class="thumbnail">
 						<h4 class="text-center">{{x.title}}</h4>
 						<div class="projectimg">
@@ -14,7 +14,7 @@
 							<hr class="cnctdtls">
 							<p>- {{x.location}}</p>
 							<div class="readmore">
-								<a href="projects/{{x.title}}/{{x.id}}" class="btn btn-info">View Details</a>
+								<a href="projects/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">View Details</a>
 							</div>
 						</div>
 					</div>

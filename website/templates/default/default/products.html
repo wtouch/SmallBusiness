@@ -15,10 +15,10 @@
 				</div>
 				<div class="readmore">
 					{% if x.type == 'service' %}
-						<a href="/services/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More..</a>
+						<a href="/services/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More..</a>
 					{% endif %}
 					{% if x.type == 'product' %}
-						<a href="/products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More..</a>
+						<a href="/products/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More..</a>
 					{% endif %}
 				</div>
 			</div>
