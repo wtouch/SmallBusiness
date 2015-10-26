@@ -6,11 +6,11 @@
 		font-family:'QumpellkaNo12';
 		src:url('../fonts/QumpellkaNo12.otf');
 	}
-	@color :  #ad2f00;
+	@color :  #6682a7;
 	@lightcolor : #B478E6;
 	@darkcolor : #18012B;
 	@back : #8FB902;
-	@darkbackcolor : #4A5F0A;
+	@darkbackcolor : #2B3856;
 	@lightbackcolor :#2B65EC;
 	@colorblack : #02071A;
 	@colorwhite	: white;
@@ -26,14 +26,13 @@
 	.container{
 		max-width : 992px !important;
 	}
-	.back{
+	/*.back{
 		height:695px;
 		width:100%;
 		background-image : url('../img/img23.jpg');
 		background-size:100% 100%;
 		background-repeat:no-repeat;
 		color: @darkcolor;
-		overflow-y:scroll;
 		animation-name:body;
 		animation-duration:10s;
 		animation-delay:2s;
@@ -63,7 +62,13 @@
 			background-size:100% 100%;
 		}
 	
-	}
+	}*/
+	.nback{	
+				margin-top:100px;
+				height:160px;
+				width:100%;;
+				background-color:@darkbackcolor;
+			}
  	.logo {
 		height:130px;
 		width:200px;
@@ -119,6 +124,7 @@
 		//border-radius: 0;
 		background:transparent;
 		top:50px;
+		margin-right:100px;
 		.navbar-nav{
 			> li{
 				text-transform:uppercase;
@@ -132,7 +138,6 @@
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					color : @color;
-					text-shadow:1px 1px 1px @color;
 					
 				}
 				> ul {
@@ -182,12 +187,10 @@
 		font : 1.5em/1.5em Amaranth-Regular;
 		padding: 4px 10px;
 		text-align: center;
-		color : @color;
+		color : @darkbackcolor;
 	}
 	.content, .sections, .sidemenu, .thumbnail, .tab-content{
 		background-color : @colorwhite;
-		border:1px solid @color;
-		border-radius : 4px;
 	}
 	.content{
 		margin-top : 20px;
@@ -196,20 +199,18 @@
 		opacity:0.9;
 		overflow:scroll;
 		display : none;
-		&.anim{
 			display : block;
 			animation-name:con;
 			animation-duration:1.5s;
 			animation-iteration-count:1;
-		}
 		
 	}
 	@keyframes con{
 			0%{ 
-				margin-top:800px;
+				transform: translate(0px);
 			}
 			100%{
-				margin-top:20px;				
+				transform: translate(1000px);			
 			}
 		}
 		.close{
@@ -238,7 +239,7 @@
 	}
 	//global css
 	h1,h2,h3,h4,h5{
-		color : @color;
+		color : @darkbackcolor;
 		font-family : 'Amaranth-Regular';
 	}
 	h1,h2{
