@@ -65,7 +65,7 @@
 									<th>Image</th>
 									<th>Project Title</th>
 									<th>Project Details</th>
-									<th>Other Domains</th>
+									<!-- <th>Other Domains</th> -->
 									<th>Manage</th>
 								</tr>
 							</thead>
@@ -86,6 +86,10 @@
 									<td>{{x.title}}</td>
 									<td>
 										<table class="table table-bordered table-responsive">
+											<tr>
+												<td>Project Id</td>
+												<td>{{x.id}}</td>
+											</tr>
 											<tr>
 												<td>Created Date</td>
 												<td>{{x.created_date}}</td>
@@ -108,7 +112,7 @@
 											</tr>
 										</table>
 									</td>	
-									<td class="col-sm-2">
+									<!-- <td class="col-sm-2">
 									<ul class="list-unstyled">
 										<li ng-repeat="domain in domains">
 											<label>
@@ -117,7 +121,7 @@
 											</label>
 										</li>
 									</ul>
-									</td>				
+									</td> -->
 									<td class="col-sm-3">
 									<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status,user_id)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
 									</button>

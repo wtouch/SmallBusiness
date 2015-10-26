@@ -1,8 +1,8 @@
 <accordion close-others="oneAtATime">
-<form class="form-horizontal exam"  name="myForm"   ng-controller="applicationController" novalidate>
-	<h2>Student Information</h2>
 	
-		<accordion-group heading="Personal Details">
+<form class="form-horizontal exam"  name="myForm"   ng-controller="applicationController" novalidate>
+	<h3 class="text-center">Online Application Form</h3>
+		<accordion-group heading="Basic Information" is-open="status.isFirstOpen" >
 			<div class="form-group">
 				 <label for="fname" class="col-sm-2 control-label">Firstname*</label>
 				 <div class="col-sm-10">
@@ -12,7 +12,6 @@
 						</span>
 				</div>
 			</div>
-			
 			<div class="form-group">
 				 <label for="lname" class="col-sm-2 control-label" >Lastname*:</label>
 				  <div class="col-sm-10">
@@ -179,7 +178,7 @@
 				</div>
 			</div>	
 	</accordion-group>
-	<accordion-group heading="Educational Details">
+	<accordion-group heading="Educational Details" is-open="status.open" >
 		<div class="form-group ">
 		
 				<h4	 class="text-center"> Previously Passed Exam Details</h4>
@@ -356,5 +355,6 @@
 				</div>
 			</div>
 		</accordion-group>
+			
 	</form>
-</accordion>
+	</accordion>

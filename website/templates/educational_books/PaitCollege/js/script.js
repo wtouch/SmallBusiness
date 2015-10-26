@@ -102,18 +102,21 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		}); 
 	};
 });	
-	app.controller('aboutController', function($scope,$http, $location) {
-		var s = $location.path();
-		$scope.url = s.substr(1);
-		$scope.makeActive = function(url){
-			$scope.id = url;
-		}
-		$scope.makeActive($scope.url);
-		
-	});
+app.controller('aboutController', function($scope,$http, $location) {
+	var s = $location.path();
+	$scope.url = s.substr(1);
+	$scope.makeActive = function(url){
+		$scope.id = url;
+	}
+	$scope.makeActive($scope.url);
 	
-	
-	
-	app.controller('applicationController', function($scope) {
-		console.log("application Controller");
-	});
+});
+app.controller('applicationController', function($scope,$http) {
+	$scope.oneAtATime = true;
+	// to next button code
+	 $scope.status = {
+		isFirstOpen: true,
+		isFirstDisabled: false,
+	};
+	console.log("application Controller");
+});
