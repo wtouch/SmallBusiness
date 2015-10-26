@@ -16,22 +16,22 @@
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/amenities">Amenities</a>
 					</li>
 					{% endif %}
-					{% if project.locationmap %}
+					{% if project.location_map %}
 					<li {{ projectPage == 'locationmap' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/locationmap">Location Map</a>
 					</li>
 					{% endif %}
-					{% if project.layoutplan %}
+					{% if project.layout_map %}
 					<li {{ projectPage == 'layoutplan' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/layoutplan">Layout Plan</a>
 					</li>
 					{% endif %}
-					{% if project.floorplans %}
+					{% if project.floor_plan %}
 					<li {{ projectPage == 'floorplans' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/floorplans">Floor Plans</a>
 					</li>
 					{% endif %}
-					{% if project.projgallery %}
+					{% if project.project_gallery %}
 					<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projgallery">Gallery</a>
 					</li>
@@ -41,7 +41,7 @@
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projecttestimonials">Testimonials</a>
 					</li>
 					{% endif %}
-					{% if project.projcontact %}
+					{% if project.contact_details %}
 					<li {{ projectPage == 'projcontact' ? 'class="active"' }}>
 						<a href="/projects/{{project.title | replace({" ":'-'})}}/{{project.id}}/projcontact">Contact</a>
 					</li>
@@ -82,13 +82,13 @@
 			<div class="projectgallery">
 				<div class="row">
 				{% for key, value in project.floor_plan %}
-					<div class="col-xs-12 col-sm-6 col-lg-4">
+					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="thumbnail floor">
-							<div class="projectImags">
-								<a type="button" data-toggle="modal" data-target="#myModal1{{loop.index}}" style="cursor : pointer;">
+							
+								<a type="button" data-toggle="modal" data-target="#myModal1{{loop.index}}" style="cursor : pointer;"><div class="projectImags">
 									<img src="{{value.image}}" class="img-responsive center-block" alt="{{value.title}}" title="{{value.title}}">
-								</a>
-							</div>
+								</div></a>
+							
 							<div class="caption text-center">
 								<p><b>{{value.title}}</b></p>
 							</div>
@@ -97,7 +97,9 @@
 					<div id="myModal1{{loop.index}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								</div>
 								<div class="modal-body">
 									<div class="row">
 										<img class="img-responsive center-block" src="{{value.image}}"/>
@@ -150,7 +152,9 @@
 					<div id="myModal{{loop.index}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								</div>
 								<div class="modal-body">
 									<div class="row">
 										<img class="img-responsive center-block" src="{{value.image}}"/>
@@ -183,7 +187,7 @@
 			{% endfor %}
 		</div>
 	{% endif %}
-	{% if projectPage == 'projcontact' and project.project_gallery >=1 %}
+	{% if projectPage == 'projcontact' %}
 		<div class="col-xs-12 col-sm-12 col-md-12">
 			<h3>Contact Details :</h3>
 			<p>Contact Person : {{project.contact_details.name}}
