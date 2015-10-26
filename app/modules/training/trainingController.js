@@ -3,7 +3,7 @@ define(['app'], function (app) {
 var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataService','modalService','$notification'];
   // This is controller for this view
 	var trainingController = function ($scope, $injector,$routeParams,$rootScope,dataService,modalService,$notification) {
-		$rootScope.metaTitle = "Real Estate Project";
+		$rootScope.metaTitle = "training ";
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.currentPage = 1;
@@ -44,6 +44,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		};	
 		
 		$scope.open = function (url, viewData) {
+			
 			var modalDefaults = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
