@@ -9,7 +9,7 @@ define(['app'], function (app) {
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.CurrentPage = 1;
-		$scope.pageItems = 10;
+		$scope.pageItems = 300;
 		$scope.numPages = "";
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
 		$scope.currentDate = dataService.currentDate;
