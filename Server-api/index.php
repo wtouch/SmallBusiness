@@ -123,7 +123,7 @@ function postRecord($getRequest, $postParams=null){
 	
 	try{
 		
-		if(!isset($_SESSION['username']) && $postParams != ("login" || "forgotpass" || "changepass") && $getRequest != "enquiry"){
+		if(!isset($_SESSION['username']) && $postParams != ("login" || "forgotpass" || "changepass") && $getRequest != "enquiry" && $getRequest != "training"){
 			throw new Exception('You are not logged in!');
 		}
 		if($body===""){
