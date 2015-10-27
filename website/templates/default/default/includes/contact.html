@@ -11,9 +11,9 @@
 		<p><b>Mobile : </b><br>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? ", " ~ data.contact_profile.alternate_mobile}}
 		</p>
 		<hr>
-		<b>Email Address : </b><br><a class="email" href="#">{{data.contact_profile.email}}</a>
+		<b>Email Address : </b><br><a class="email" href="mailto:{{data.contact_profile.email}}">{{data.contact_profile.email}}</a>
 		{%if data.contact_profile.alternate_email%}
-			<br><a class="email" href="#">{{data.contact_profile.alternate_email}}</a>
+			<br><a class="email" href="mailto: {{data.contact_profile.alternate_email}}">{{data.contact_profile.alternate_email}}</a>
 		{% endif %}
 	</div>
 </div>
