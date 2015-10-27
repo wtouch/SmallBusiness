@@ -228,7 +228,7 @@ app.controller('trainingController', function($scope,$http, $location) {
 			});
 			}, 
 			updateData : function(id,traningData) {
-				dataService.put("put/traning/"+ contactData.id,traningData)
+				dataService.put("put/traning/"+ traningData.id,traningData)
 				.then(function(response) {
 					if(response.status == "success"){
 						$scope.getContact($scope.CurrentPage);
