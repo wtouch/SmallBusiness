@@ -27,7 +27,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 							$scope.getTraining(currentPage, user_id,trainingParam);
 					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-						$notification[response.status]("Add Record", response.message);
+						$notification[response.status]("Add Record Successfully..", response.message);
 					}); 
 				},
 				
@@ -46,7 +46,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 							
 						}
 						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-						$notification[response.status]("Submit Custom Template", response.message);
+						$notification[response.status]("Update Record Successfully..", response.message);
 					}); 
 				}
 			};
