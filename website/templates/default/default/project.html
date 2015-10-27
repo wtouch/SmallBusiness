@@ -88,11 +88,11 @@
 				{% for key, value in project.floor_plan %}
 					<div class="col-xs-12 col-sm-6 col-md-4">
 						<div class="thumbnail floor">
-							
-								<a type="button" data-toggle="modal" data-target="#myModal1{{loop.index}}" style="cursor : pointer;"><div class="projectImags">
+							<a type="button" data-toggle="modal" data-target="#myModal1{{loop.index}}" style="cursor : pointer;">
+								<div class="projectImags">
 									<img src="{{value.image}}" class="img-responsive center-block" alt="{{value.title}}" title="{{value.title}}">
-								</div></a>
-							
+								</div>
+							</a>
 							<div class="caption text-center">
 								<p><b>{{value.title}}</b></p>
 							</div>
@@ -182,6 +182,9 @@
 								<a type="button" data-toggle="modal" data-target="#myModal{{loop.index}}" style="cursor : pointer;">
 									<img class="center-block img-responsive" src="{{value.image}}" alt="{{value.title}}" title="{{value.description}}">
 								</a>
+							</div>
+							<div class="caption text-center">
+								<p><b>{{value.title}}</b></p>
 							</div>
 						</div>
 					</div>
