@@ -1,4 +1,4 @@
-<div id="form" ng-if="isSend==false" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: none;">
+<div id="form"  class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: none;">
 	<div class="modal-backdrop fade in" style="height: 697px;"></div>
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -16,8 +16,7 @@
 									<label for="name" class="col-sm-2 control-label">Name *</label>
 									<div class="col-sm-4">
 										<input type="hidden" ng-model="addtraining.status" ng-init="addtraining.status = 1" >
-										<input type="hidden" ng-model="addtraining.user_id" ng-init="addtraining.user_id = 8" >
-										
+										<input type="hidden" ng-model="addtraining.user_id" ng-init="addtraining.user_id = 9" >
 										<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="addtraining.name" required>
 										 <span class="help-block" ng-show="addtrainingForm.name.$dirty && addtrainingForm.name.$invalid">
 											<span class="text-danger" ng-show="addtrainingForm.name.$error.required">Required Field.</span> 
@@ -36,10 +35,10 @@
 									<label for="custom" class="col-sm-2 control-label">Marital Status</label>
 									<div class="col-sm-4">
 										<label class="radio-inline">
-											<input type="radio" name="martial_status" id="Married" value="1" ng-model="addtraining.marital_status">Married
+											<input type="radio" name="marital_status" id="Married" value="married" ng-model="addtraining.marital_status">Married
 										</label>
 										<label class="radio-inline">
-											<input type="radio" name="martial_status" id="Single" value="0"  ng-model="addtraining.marital_status" ng-init="addtraining.marital_status='0'">Single
+											<input type="radio" name="marital_status" id="Single" value="single"  ng-model="addtraining.marital_status" ng-init="addtraining.marital_status='single'">Single
 										</label>
 									</div>
 			
@@ -77,7 +76,7 @@
 								</div>
 								
 								<div class="form-group">
-									<label for="type" class="col-sm-2 control-label">TrainingPeriod *</label>
+									<label for="type" class="col-sm-2 control-label">Training Period *</label>
 									<div class="col-sm-10">
 										<select class="form-control" name="period" id="period" ng-model="addtraining.period" required>
 											<option value="">Select Training Period</option>
@@ -118,7 +117,7 @@
 									<label for="address" class="col-sm-2 control-label">Address *</label>
 									<div class="col-sm-10">
 										<textarea  class="form-control" id="address" ng-model="addtraining.address" name="address" placeholder="Enter address" ng-maxlength="150" required></textarea>
-										<p ng-hide="addtrainingForm.address.$error.maxlength">{{ 150 - addtraining.address.length + " Characters left"}}</p>
+										<p ng-hide="addtrainingForm.address.$error.maxlength">{{ 150 - addtraining.address.length + " Chars left" }}</p>
 										<span class="help-block" ng-show="addtrainingForm.address.$dirty &&  addtrainingForm.address.$invalid">
 											<span class="text-danger" ng-show="addtrainingForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
 											<span class="text-danger" ng-show="addtrainingForm.address.$error.required">Required Field.</span>
@@ -208,7 +207,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">close</span></button>
+					
 				</div>
 			</div>
 		</div>

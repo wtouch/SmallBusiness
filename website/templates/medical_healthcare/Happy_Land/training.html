@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-controller="trainingController">
+<div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-12 training">
 			<h2 class="text-center"> Saksham Web Touch Pvt. Ltd.</h2>
@@ -10,14 +10,13 @@
 			<h3 class="text-center">Training Activity</h3>
 		</div>
 	</div>
-	
-	<div class="row" ng-if="isSend==true">
-		<div class="col-md-12 clr">
-			<h3> Your Application Sent successfully....</h3>
-		</div>
-	</div>
 
 	<div class="row training" ng-controller="trainingController">
+		<div class="row" ng-if="isSend==true">
+			<div class="col-md-12 clr">
+				<h3> Your Application Done successfully....</h3>
+			</div>
+		</div>
 		<div class="col-sm-3">
 			<div class="parent1 text-center">
 				<img src="{{path}}img/1.png" class="img img-responsive center-block">
@@ -50,38 +49,7 @@
 		{% include [templatePath ~ '/training/details2.html'] %}
 		{% include [templatePath ~ '/training/details3.html'] %}
 	</div>
-	
+	<div ng-if="isSend==false">
 	{% include [templatePath ~ '/training/form.html'] %}
-
-<!-- details 4 -->
-										<input type="hidden" ng-model="addtraining.user_id" ng-init="addtraining.user_id = 9" value="{{addtraining.user_id}}">
-										
-	<div id="detail4" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: none;">
-		<div class="modal-backdrop fade in" style="height: 697px;"></div>
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3> for One month</h3>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-sm-12">
-						<ul>
-							<li>html css</li>
-							<li>html css</li>
-							<li>html css</li>
-							<li>html css</li>
-						</ul>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-			</div>
-		</div>
-<	/div>
-</div>	
+	</div>
+</div>
