@@ -1,0 +1,67 @@
+<div class="row">	
+	<div class="col-sm-12">
+		<div class="main-content">
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
+			
+			
+			<div class="col-sm-2 pull-right"> 
+				<label class="control-label"> </label><br>
+				<a href="#/dashboard/project/addproject" class="btn btn-primary" title="Add new project">Add New Trainee</a>
+			</div>		
+			
+			
+			<h3 class="text-center"> Trainee Details</h3>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="table-responsive">
+						<table class="table table-bordered ">
+							<thead>
+								<tr>
+									<th>Sr.No.</th>
+									<th>Trainee Name</th>
+									<th>Email</th>
+									<th>Mobile</th>
+									<th>Manage</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr ng-repeat="x in training | orderBy:title ">
+									<td>{{((CurrentPage - 1) * pageItems) + $index + 1}}</td>
+									<td>{{x.name}}</td>
+									<td>{{x.email}}</td>
+									<td>{{x.mobile}}</td>
+									<td class="col-sm-3">
+									<button type="button" tooltip="{{dynamicTooltip(x.status, 'Delete This','Make It Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" ng-change="deleted( x.id,x.status,user_id)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'">
+									</button>
+									
+									<div class="btn-group">
+										<button type="button" tooltip="{{dynamicTooltip(x.featured, ' Featured', 'Non Featured')}}" ng-class="(x.featured==1) ? 'btn btn-warning glyphicon glyphicon-star' : 'btn btn-danger glyphicon glyphicon-star-empty'" ng-model="x.featured" ng-change="feature(x.id, x.featured,user_id)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"></button>
+									</div> 
+									
+									<div class="btn-group">
+										<button type="button" tooltip="{{dynamicTooltip(x.verified, 'No Verify', 'Make Verify')}}" ng-class="(x.verified==1) ? 'btn btn-primary' : 'btn btn-warning'" ng-model="x.verified" ng-change="verify(x.id, x.verified,user_id)" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"><span class="glyphicon glyphicon-ok"></span></button>
+									</div>
+									
+									<div class="btn-group">	
+										<a class="btn btn-success" href="#/dashboard/project/addproject/{{x.id}}" tooltip="Edit Project Details">
+											<span class="glyphicon glyphicon-pencil"></span>
+										</a>
+									</div>										
+									<div class="btn-group">	
+										<a ng-click="open('modules/project/viewproject.html', x.id)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="View Project Details"></a>
+									</div>	
+									</td>
+								</tr>				
+							</tbody>
+						</table>
+					</div>
+				<div class="text-center">				
+					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="CurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getProject(CurrentPage,user_id,projectParam)"></pagination>
+					<pre>Page: {{CurrentPage}} / {{numPages}}</pre>
+				</div>	
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
