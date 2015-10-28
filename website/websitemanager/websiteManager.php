@@ -150,16 +150,24 @@ class websiteManager{
 			// check website status if deleted or expired or data null
 			if($result['status'] == 'success' && $result['data'] != null) {
 				if($result['data']['expired'] == 1){
+					$response['website_status']= 'expired';
 					throw new Exception('Website is expired, please renew soon!');
 				}
 				if($result['data']['website_status'] != 1){
+					$response['website_status']= 'deleted';
 					throw new Exception('Website is not activated, please contact system administrator!');
 				}
+				if($result['data']['website_status'] == 2){
+					$response['website_status']= 'requested';
+					throw new Exception('Website is Under Construction!');
+				}
 				if(empty($result['data']['website_config'])){
-					throw new Exception('Please add website details!');
+					$response['website_status']= 'requested';
+					throw new Exception('Website is Under Construction! Please add website details!');
 				}
 				if(($result['data']['template_name']) == ""){
-					throw new Exception('Please add template details!');
+					$response['website_status']= 'requested';
+					throw new Exception('Website is Under Construction! Please add template details!');
 				}
 				
 			}else{
@@ -269,6 +277,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
+            $response["path"] = $this->config['httpTempPath']."default/default/";
 			$response = $this->getTemplate('error', $response);
 			//print_r($response);
 		}
@@ -299,6 +308,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
+			 $response["path"] = $this->config['httpTempPath']."default/default/";
 			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
@@ -332,6 +342,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
+			$response["path"] = $this->config['httpTempPath']."default/default/";
 			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
@@ -401,6 +412,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
+			$response["path"] = $this->config['httpTempPath']."default/default/";
 			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
@@ -448,6 +460,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
+			$response["path"] = $this->config['httpTempPath']."default/default/";
 			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
@@ -483,6 +496,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
+			$response["path"] = $this->config['httpTempPath']."default/default/";
 			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
@@ -544,6 +558,7 @@ class websiteManager{
 			$response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null;
+			$response["path"] = $this->config['httpTempPath']."default/default/";
 			$response = $this->getTemplate('error', $response);
 		}
 		return $response;
