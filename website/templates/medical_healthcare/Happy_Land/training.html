@@ -1,220 +1,249 @@
- 
-<div class="row training" ng-controller="trainingController" >
-	<h2 class="text-center">Web Touch India Solution</h2>
-	<h3 class="text-center">Training Activity</h3>
-		<div class="col-sm-3">
-			<div class="parent text-center">
-				<img src="{{path}}img/1.png" class="img img-responsive center-block">
-				<input  type="button"data-toggle="modal" data-target="#detail1" class="btn btn-info" value="Details">
-				<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
-			</div>
-		</div>
-		<div class="col-sm-3 ">
-			<div class="parent text-center">
-				<img src="{{path}}img/2.png" class="img img-responsive center-block">
-				<input  type="button"data-toggle="modal" data-target="#detail2" class="btn btn-info" value="Details">
-				<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
-			</div>
-		</div>
-		<div class="col-sm-3 text-center">
-			<div class="parent">
-				<img src="{{path}}img/3.png" class="img img-responsive center-block">
-				<input  type="button"data-toggle="modal" data-target="#detail3" class="btn btn-info" value="Details">
-				<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
-			</div>
-		</div>
-		<div class="col-sm-3 text-center ">
-			<div class="parent">
-				<img src="{{path}}img/ind.png" class="img img-responsive center-block">
-				<input  type="button"data-toggle="modal" data-target="#detail4" class="btn btn-info" value="Details">
-				<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
-			</div>
-		</div>
+ <div class="container-fluid">
+<div class="row" ng-controller="trainingController" >
+	<div class="col-sm-12 training">
+		<h2 class="text-center">Web Touch India Solution</h2>
+		<h3 class="text-center">Training Activity</h3>
+	</div>
 </div>
+</div>
+	<div class="container-fliud">
+			<div class="col-sm-12 training">
+				<div class="col-sm-3">
+					<div class="parent text-center">
+						<img src="{{path}}img/1.png" class="img img-responsive center-block">
+						<input  type="button"data-toggle="modal" data-target="#detail1" class="btn btn-info" value="Details">
+						<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
+					</div>
+				</div>
+				<div class="col-sm-3 ">
+					<div class="parent text-center">
+						<img src="{{path}}img/2.png" class="img img-responsive center-block">
+						<input  type="button"data-toggle="modal" data-target="#detail2" class="btn btn-info" value="Details">
+						<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
+					</div>
+				</div>
+				<div class="col-sm-3 text-center">
+					<div class="parent">
+						<img src="{{path}}img/3.png" class="img img-responsive center-block">
+						<input  type="button"data-toggle="modal" data-target="#detail3" class="btn btn-info" value="Details">
+						<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
+					</div>
+				</div>
+				<div class="col-sm-3 text-center ">
+					<div class="parent">
+						<img src="{{path}}img/11.png" class="img img-responsive center-block">
+						<input  type="button"data-toggle="modal" data-target="#detail4" class="btn btn-info" value="Details">
+						<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
+					</div>
+				</div>
+		</div>
+	</div>
 
 <div id="form" class="modal fade in" tabindex="-1" ng-controller="trainingController" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: none;">
 	<div class="modal-backdrop fade in" style="height: 697px;"></div>
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3> Apply here</h3>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h3 class="text-center"> Apply here</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
 			</div>
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-sm-12">
-						<form class="form-horizontal" name="addtrainingForm" role="form" ng-submit="addtrainingForm.$valid" novalidate>
-							<div class="form-group">
-								<label for="name" class="col-sm-2 control-label">Name *</label>
-									<div class="col-sm-4">
-										<input type="hidden" ng-model="addtraining.status" ng-init="addtraining.status = 1" value="{{addtraining.status}}">
-										<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="addtraining.name" required>
-										 <span class="help-block" ng-show="addtrainingForm.name.$dirty && addtrainingForm.name.$invalid">
-											<span class="text-danger" ng-show="addtrainingForm.name.$error.required">Required Field.</span> 
-										 </span>
- 								</div>
-								<label for="surname" class="col-sm-2 control-label">Surname*</label>
-									<div class="col-sm-4">
-										<input type="text" id="surname" class="form-control" name="surname" placeholder="Surname" ng-model="addtraining.surname" required>
-										<span class="help-block" ng-show="addtrainingForm.surname.$dirty && addtrainingForm.surname.$invalid">
-											<span class="text-danger" ng-show="addtrainingForm.surname.$error.required">Required Field.</span>
-										</span>
+					<div class="panel panel-default">
+						<div class="panel panel-body">
+								<form class="form-horizontal" name="addtrainingForm" role="form" ng-submit="addtrainingForm.$valid" novalidate>
+									<div class="form-group">
+										<label for="name" class="col-sm-2 control-label">Name *</label>
+											<div class="col-sm-4">
+												<input type="hidden" ng-model="addtraining.status" ng-init="addtraining.status = 1" value="{{addtraining.status}}">
+												<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="addtraining.name" required>
+												 <span class="help-block" ng-show="addtrainingForm.name.$dirty && addtrainingForm.name.$invalid">
+													<span class="text-danger" ng-show="addtrainingForm.name.$error.required">Required Field.</span> 
+												 </span>
+										</div>
+										<label for="surname" class="col-sm-2 control-label">Surname*</label>
+											<div class="col-sm-4">
+												<input type="text" id="surname" class="form-control" name="surname" placeholder="Surname" ng-model="addtraining.surname" required>
+												<span class="help-block" ng-show="addtrainingForm.surname.$dirty && addtrainingForm.surname.$invalid">
+													<span class="text-danger" ng-show="addtrainingForm.surname.$error.required">Required Field.</span>
+												</span>
+											</div>
 									</div>
-							</div>
-							
-							<div class="form-group">
-								<label for="custom" class="col-sm-2 control-label">Marital Status</label>
-									<div class="col-sm-4">
-										<label class="radio-inline">
-											<input type="radio" name="martial" id="Married" value="1" ng-model="addtraining.marital_status">Married
-										</label>
-										<label class="radio-inline">
-											<input type="radio" name="martial" id="Single" value="0"  ng-model="addtraining.marital_status">Single
-										</label>
+									
+									<div class="form-group">
+										<label for="custom" class="col-sm-2 control-label">Marital Status</label>
+											<div class="col-sm-4">
+												<label class="radio-inline">
+													<input type="radio" name="martial" id="Married" value="1" ng-model="addtraining.marital_status">Married
+												</label>
+												<label class="radio-inline">
+													<input type="radio" name="martial" id="Single" value="0"  ng-model="addtraining.marital_status">Single
+												</label>
+											</div>
+				
+										<label  for="dob" class="col-sm-2 control-label">DOB*</label>
+											<div class="col-sm-4">
+												<div class="input-group">
+													<input type="text" placeholder="YYYY-DD-MM" id="dob" name="dob" class="form-control" ng-model="addtraining.dob" datepicker-popup="{{format}}" is-open="opened" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"   ng-required="true" close-text="Close" ng-click="open($event)"   /  >
+													<span class="input-group-btn">
+														<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+													</span>
+												</div>
+												<span class="help-block" ng-show="addtrainingForm.dob.$dirty && addtrainingForm.dob.$invalid">
+													<span class="text-danger" ng-show="addtrainingForm.dob.$error.required || submitted">Date of birth required in YYYY-DD-MM format.</span>
+												</span>
+											</div>
 									</div>
-								<label  for="dob" class="col-sm-2 control-label">DOB *</label>
-								<div class="col-sm-4">
-									<p class="input-group">
-										<input type="text" id="dob" name="dob" placeholder="YYYY-DD-MM" class="form-control" datepicker-popup="{{format}}" ng-model="addtraining.dob" is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required close-text="Close" ng-click="open($event)" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-										</span>
-									</p>
-									<span class="help-block" ng-show="addtrainingForm.dob.$dirty && addtrainingForm.dob.$invalid">
-											<span class="text-danger" ng-show="addtrainingForm.dob.$error.required">Date of birth required in YYYY-DD-MM format.</span>
-									</span>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label for="mobile" class="col-sm-2 control-label">Mobile *</label>
-								<div class="col-sm-4">
-									<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addtraining.mobile" placeholder="Enter Mobile No." ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
-									<span class="help-block" ng-show="addtrainingForm.mobile.$dirty && addtrainingForm.mobile.$invalid">
-										<span ng-show="addtrainingForm.mobile.$error.required" class="text-danger">Required Field.</span>
-										<span ng-show="addtrainingForm.mobile.$error.pattern && (addtrainingForm.mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
-									</span>
-								</div>
+									
+									<div class="form-group">
+										<label for="mobile" class="col-sm-2 control-label">Mobile *</label>
+										<div class="col-sm-4">
+											<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addtraining.mobile" placeholder="Enter Mobile No." ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+											<span class="help-block" ng-show="addtrainingForm.mobile.$dirty && addtrainingForm.mobile.$invalid">
+												<span ng-show="addtrainingForm.mobile.$error.required" class="text-danger">Required Field.</span>
+												<span ng-show="addtrainingForm.mobile.$error.pattern && (addtrainingForm.mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
+											</span>
+										</div>
+										
+										<label  for="email" class="col-sm-2 control-label">Email</label>
+											<div class="col-sm-4">
+												<input type="Email" class="form-control" id="email" ng-model="addtraining.email" ng-pattern="/^[\.\w]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" name="email" placeholder="Enter Alternate Email">
+												
+												<span class="help-block" ng-show="addtrainingForm.email.$dirty && addtrainingForm.email.$invalid">
+												
+													<span ng-show="addtrainingForm.email.$error.pattern && (addtrainingForm.email.$dirty || submitted)" class="text-danger">Enter a valid email</span>
+												
+													<span ng-show="addtrainingForm.email.$error.required" class="text-danger">Required Field.</span>
+												</span>
+											</div>
+									</div>
+									<div class="form-group">
+										<label  for="doj" class="col-sm-2 control-label">DOJ*</label>
+										<div class="col-sm-10">
+											<p class="input-group">
+												<input type="text" id="doj" name="doj" placeholder="YYYY-DD-MM" class="form-control" datepicker-popup="{{format}}" ng-model="addtraining.doj" is-open="opened1" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required close-text="Close" ng-click="open1($event)" />
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+												</span>
+											</p>
+											<span class="help-block" ng-show="addtrainingForm.doj.$dirty && addtrainingForm.doj.$invalid">
+													<span class="text-danger" ng-show="addtrainingForm.doj.$error.required">Date of birth required in YYYY-DD-MM format.</span>
+											</span>
+										</div>
+										
+									</div>
+									
+									<div class="form-group">
+										<label for="custom" class="col-sm-2 control-label">Sex</label>
+										<div class="col-sm-4">
+												<label class="radio-inline">
+													<input type="radio" name="sex" id="Married" value="1" ng-model="addtraining.sex">male
+												</label>
+												<label class="radio-inline">
+													<input type="radio" name="sex" id="Single" value="0"  ng-model="addtraining.sex">female
+												</label>
+											</div>
+									</div>
 								
-								<label  for="email" class="col-sm-2 control-label">Email</label>
-									<div class="col-sm-4">
-										<input type="Email" class="form-control" id="email" ng-model="addtraining.email" ng-pattern="/^[\.\w]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" name="email" placeholder="Enter Alternate Email">
-										
-										<span class="help-block" ng-show="addtrainingForm.email.$dirty && addtrainingForm.email.$invalid">
-										
-											<span ng-show="addtrainingForm.email.$error.pattern && (addtrainingForm.email.$dirty || submitted)" class="text-danger">Enter a valid email</span>
-										
-											<span ng-show="addtrainingForm.email.$error.required" class="text-danger">Required Field.</span>
-										</span>
+									
+									<div class="form-group">
+										<label for="address" class="col-sm-2 control-label">Address *</label>
+										<div class="col-sm-10">
+											<textarea  class="form-control" id="address" ng-model="addtraining.address" name="address" placeholder="Enter address" ng-maxlength="150" required></textarea>
+											<p ng-hide="addtrainingForm.address.$error.maxlength">{{ 150 - addtraining.address.length + " Characters left"}}</p>
+											<span class="help-block" ng-show="addtrainingForm.address.$dirty &&  addtrainingForm.address.$invalid">
+												<span class="text-danger" ng-show="addtrainingForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+												<span class="text-danger" ng-show="addtrainingForm.address.$error.required">Required Field.</span>
+											</span>
+										</div>
 									</div>
-							</div>
-							<div class="form-group">
-								<label  for="doj" class="col-sm-2 control-label">DOJ*</label>
-								<div class="col-sm-10">
-									<p class="input-group">
-										<input type="text" id="doj" name="doj" placeholder="YYYY-DD-MM" class="form-control" datepicker-popup="{{format}}" ng-model="addtraining.doj" is-open="opened1" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" required close-text="Close" ng-click="open1($event)" />
-										<span class="input-group-btn">
-											<button type="button" class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-										</span>
-									</p>
-									<span class="help-block" ng-show="addtrainingForm.doj.$dirty && addtrainingForm.doj.$invalid">
-											<span class="text-danger" ng-show="addtrainingForm.doj.$error.required">Date of birth required in YYYY-DD-MM format.</span>
-									</span>
-								</div>
-								
-							</div>
-							
-							<div class="form-group">
-								<label for="custom" class="col-sm-2 control-label">Sex</label>
-								<div class="col-sm-4">
-										<label class="radio-inline">
-											<input type="radio" name="sex" id="Married" value="1" ng-model="addtraining.sex">male
-										</label>
-										<label class="radio-inline">
-											<input type="radio" name="sex" id="Single" value="0"  ng-model="addtraining.sex">female
-										</label>
+									
+									<div class="form-group">
+											<label for="state" class="col-sm-2 control-label">State *</label>
+											<div class="col-sm-4">
+											<input type="text" id="state" name="state" class="form-control" ng-model="addtraining.state" placeholder="Enter state" required/>
+												<span class="help-block" ng-show="addtrainingForm.state.$dirty && addtrainingForm.state.$invalid">
+													<span class="text-danger" ng-show="addtrainingForm.state.$error.required">Required Field.</span>
+												</span>			
+											</div>	
+											<label for="city" class="col-sm-2 control-label">City *</label>
+											<div class="col-sm-4" >
+												<input type="text" name="city" id="city" ng-model="addtraining.city"placeholder="Enter Your City" class="form-control" required/>
+												<span class="help-block" ng-show="addtrainingForm.city.$dirty && addtrainingForm.city.$invalid">
+													<span class="text-danger" ng-show="addtrainingForm.city.$error.required">Required Field.</span>
+												</span>			
+											</div>							
 									</div>
-							</div>
-						
-							
-							<div class="form-group">
-								<label for="address" class="col-sm-2 control-label">Address *</label>
-								<div class="col-sm-10">
-									<textarea  class="form-control" id="address" ng-model="addtraining.address" name="address" placeholder="Enter address" ng-maxlength="150" required></textarea>
-									<p ng-hide="addtrainingForm.address.$error.maxlength">{{ 150 - addtraining.address.length + " Characters left"}}</p>
-									<span class="help-block" ng-show="addtrainingForm.address.$dirty &&  addtrainingForm.address.$invalid">
-										<span class="text-danger" ng-show="addtrainingForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
-										<span class="text-danger" ng-show="addtrainingForm.address.$error.required">Required Field.</span>
-									</span>
-								</div>
-							</div>
-							
-							<div class="form-group">
-									<label for="state" class="col-sm-2 control-label">State *</label>
-									<div class="col-sm-4">
-									<input type="text" id="state" name="state" class="form-control" ng-model="addtraining.state" placeholder="Enter state" required/>
-										<span class="help-block" ng-show="addtrainingForm.state.$dirty && addtrainingForm.state.$invalid">
-											<span class="text-danger" ng-show="addtrainingForm.state.$error.required">Required Field.</span>
-										</span>			
-									</div>	
-									<label for="city" class="col-sm-2 control-label">City *</label>
-									<div class="col-sm-4" >
-										<input type="text" name="city" id="city" ng-model="addtraining.city"placeholder="Enter Your City" class="form-control" required/>
-										<span class="help-block" ng-show="addtrainingForm.city.$dirty && addtrainingForm.city.$invalid">
-											<span class="text-danger" ng-show="addtrainingForm.city.$error.required">Required Field.</span>
-										</span>			
-									</div>							
-							</div>
-							<div class="form-group">
-								<label for="technologies" class="col-sm-2 control-label">Technologies*</label>
-								<div class="form-group"> 
-									<div class="col-sm-2">
-										<input type="checkbox" name="technologies" value="HTML" id="technology" ng-model="addtraining.technologies.HTML">HTML
+									<div class="form-group">
+										<label for="technologies" class="col-sm-2 control-label">Technologies*</label>
+										<div class="form-group"> 
+											<div class="col-sm-2">
+												<label for="html"class="control-label">
+													<input type="checkbox" name="technologies" value="HTML" id="html" ng-model="addtraining.technologies.HTML">HTML
+												</label>
+											</div>
+											<div class="col-sm-2">
+												<label for="css"class="control-label">
+													<input  id="css" type="checkbox" name="technologies" value="CSS" ng-model="addtraining.technologies.CSS">CSS
+												</label>
+											</div>
+											<div class="col-sm-2">
+												<label for="Javascript" class="control-label">
+													<input type="checkbox" id="Javascript" name="technologies" value="Javascript" ng-model="addtraining.technologies.Javascript">Javascript
+												</label>
+											</div>
+											<div class="col-sm-2">
+												<label for="BOOTSTARP"class="control-label">
+													<input type="checkbox"id="BOOTSTARP" name="technologies" value="Bootstrap" ng-model="addtraining.technologies.Bootstrap">Bootstrap
+												</label>
+											</div>
+										</div>
+										<label for="technologies" class="col-sm-2 control-label"></label>
+										<div class="form-group"> 
+											<div class="col-sm-2">
+												<label for="angular" class="control-label">
+													<input type="checkbox"id="angular" name="technologies" value="Angular" ng-model="addtraining.technologies.Angular">Angular
+												</label>
+											</div>
+											<div class="col-sm-2">
+											<label for="php"class="control-label">
+												<input type="checkbox" id="php" name="technologies" value="PHP" ng-model="addtraining.technologies.PHP">PHP
+											</label>
+											</div>
+											<div class="col-sm-2">
+											<label for="andriod"class="control-label">
+												<input type="checkbox" id="andriod"name="technologies" value="Android" ng-model="addtraining.technologies.Android">Android
+											</label>
+											</div>
+										</div>
 									</div>
-									<div class="col-sm-2">
-										<input type="checkbox" name="technologies" value="CSS" ng-model="addtraining.technologies.CSS">CSS
+									
+									<div class="form-group">
+										<label for="remark" class="col-sm-2 control-label">Remark *</label>
+										<div class="col-sm-10">
+											<textarea  class="form-control" id="remark" ng-model="addtraining.remark" name="remark" placeholder="Enter remark" ng-maxlength="350" required></textarea>
+											<p ng-hide="addtrainingForm.remark.$error.maxlength">{{ 350 - addtraining.remark.length + " Characters left"}}</p>
+											<span class="help-block" ng-show="addtrainingForm.remark.$dirty &&  addtrainingForm.remark.$invalid">
+												<span class="text-danger" ng-show="addtrainingForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+												<span class="text-danger" ng-show="addtrainingForm.remark.$error.required">Required Field.</span>
+											</span>
+										</div>
 									</div>
-									<div class="col-sm-2">
-										<input type="checkbox" name="technologies" value="Javascript" ng-model="addtraining.technologies.Javascript">Javascript
-									</div>
-									<div class="col-sm-2">
-										<input type="checkbox" name="technologies" value="Bootstrap" ng-model="addtraining.technologies.Bootstrap">Bootstrap
-									</div>
-								</div>
-								<label for="technologies" class="col-sm-2 control-label"></label>
-								<div class="form-group"> 
-									<div class="col-sm-2">
-										<input type="checkbox" name="technologies" value="Angular" ng-model="addtraining.technologies.Angular">Angular
-									</div>
-									<div class="col-sm-2">
-										<input type="checkbox" name="technologies" value="PHP" ng-model="addtraining.technologies.PHP">PHP
-									</div>
-									<div class="col-sm-2">
-										<input type="checkbox" name="technologies" value="Android" ng-model="addtraining.technologies.Android">Android
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-9">
+											<button type="submit"ng-disabled="addtrainingForm.$invalid" class="btn btn-success" ng-click="postData(addtraining)" ng-if="!editUserId">Submit </button>
+											<button type="reset" class="btn btn-danger">Cancel</button>
+										</div>
 									</div>
 								</div>
 							</div>
-							
-							<div class="form-group">
-								<label for="remark" class="col-sm-2 control-label">Remark *</label>
-								<div class="col-sm-10">
-									<textarea  class="form-control" id="remark" ng-model="addtraining.remark" name="remark" placeholder="Enter remark" ng-maxlength="350" required></textarea>
-									<p ng-hide="addtrainingForm.remark.$error.maxlength">{{ 350 - addtraining.remark.length + " Characters left"}}</p>
-									<span class="help-block" ng-show="addtrainingForm.remark.$dirty &&  addtrainingForm.remark.$invalid">
-										<span class="text-danger" ng-show="addtrainingForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-										<span class="text-danger" ng-show="addtrainingForm.remark.$error.required">Required Field.</span>
-									</span>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-9">
-									<button type="submit" class="btn btn-success" ng-click="postData(addtraining)" ng-if="!editUserId">Submit </button>
-									<button type="reset" class="btn btn-danger">Cancel</button>
-								</div>
-							</div>						
 						</form>		
 					</div>
 				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">close</span></button>
 			</div>
 		</div>
 	</div>
