@@ -15,7 +15,6 @@
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script>
-		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
@@ -24,6 +23,7 @@ $(document).ready(function(){
     $("nav>div>div>ul>li:nth-child(1)").click(function(){
 			$("#apnasite").removeClass("apna");
 			$("#service").removeClass("servicess");
+			$("#contact").removeClass("contact");
 			$("#aboutus").addClass("aboutus");
 			if($(this).hasClass("m1")){
 			$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
@@ -53,6 +53,7 @@ $(document).ready(function(){
 			$("#apnasite").addClass("apna");
 			$("#service").removeClass("servicess");
 			$("#aboutus").removeClass("aboutus");
+			$("#contact").removeClass("contact");
 			if($(this).hasClass("m2")){
 			$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
 			$("nav>div>div>ul>li:nth-child(2)").addClass("m22");
@@ -83,6 +84,7 @@ $(document).ready(function(){
 			$("#apnasite").removeClass("apna");
 			$("#service").removeClass("servicess");
 			$("#aboutus").removeClass("aboutus");
+			$("#contact").removeClass("contact");
 			if($(this).hasClass("m3")){
 			$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
 			$("nav>div>div>ul>li:nth-child(3)").addClass("m33");
@@ -111,6 +113,7 @@ $(document).ready(function(){
 			$("#apnasite").removeClass("apna");
 			$("#service").addClass("servicess");
 			$("#aboutus").removeClass("aboutus");
+			$("#contact").removeClass("contact");
 			if($(this).hasClass("m4")){
 			$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
 			$("nav>div>div>ul>li:nth-child(4)").addClass("m44");
@@ -139,6 +142,7 @@ $(document).ready(function(){
 			$("#apnasite").removeClass("apna");
 			$("#service").removeClass("servicess");
 			$("#aboutus").removeClass("aboutus");
+			$("#contact").addClass("contact");
 			if($(this).hasClass("m5")){
 			$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
 			$("nav>div>div>ul>li:nth-child(5)").addClass("m55");
@@ -218,68 +222,6 @@ $("section>div:nth-child(1)").mouseover(function(){
     });
 });
 </script>
-		
-		
-
-		<!--{% if data.template_params %}
-			<style>	
-				.singleproperty .propDetails .table tbody tr th ,.featuretab .nav-tabs li a, .navbar-default .navbar-nav > li.active > a,.navbar-default .navbar-nav > li.active:hover > a,.navbar-default .navbar-nav > li.active > a:focus,.navbar-default .navbar-nav > li:hover > a,.navbar-default .navbar-nav > li:hover > a:focus,.form-control, .btn-info, .btn-info[disabled], .btn-primary, .pagination > .active > a,.pagination > .active > span,.pagination > .active > a:hover, .pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus,.btn-info:hover,.btn-info[disabled]:hover,.btn-primary:hover,.featuretab .nav-tabs li a:hover{
-					background-color: {{data.template_params.color}};	
-				}
-				.homeproject .projectnav a ,.project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus, .testimonial blockquote footer cite, .featrtesti blockquote footer cite, .sociallinks ul li a, .sociallinks ul li a:hover, .navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > ul > li > a, .navbar-default .navbar-nav > li > ul > li ul > li > a,h1,h2,h3,h4,h5, a,.btn-link, .btn-link:hover, .pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, footer{
-					color: {{data.template_params.color}};	
-				}
-				.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus,.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .singleproperty .propDetails .table tbody tr td, .singleproperty .propDetails .table tbody tr th, .homeproject .projectnav, .homeproject .projsnap, .homeproject .bx-wrapper, .featrtesti img:hover, .sociallinks ul li img ,.btn-info:hover, .btn-info[disabled]:hover, .btn-primary:hover{
-					border-color : {{data.template_params.color}};	
-				}
-				.navbar-toggle .icon-bar,.btn-info:before,.btn-info[disabled]:before,.btn-primary:before, .featuretab .nav-tabs li a:before,.featuretab .nav-tabs li.active > a{
-					background-color: {{data.template_params.light_color}};
-				}
-				.project ul.nav.navbar-nav > li, .featuretab .nav-tabs li a,.featrtesti img,.navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus,.navbar-default .navbar-nav > li > ul,.subhead, .btn-info, .btn-info[disabled], .btn-primary, .navbar-toggle{
-					border-color : {{data.template_params.light_color}};	
-				}
-				.sidebar .nav-pills > li,.project ul.nav.navbar-nav > li {
-					border-right : {{data.template_params.light_color}};	
-				}
-				.sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus, .sidebar .nav-pills > li > a:hover, .sidebar .nav-pills > li > a:focus {
-					background-color: {{data.template_params.dark_color}};
-				}
-				body,.btn-info:hover, .btn-info[disabled]:hover, .btn-primary:hover,.featuretab .nav-tabs li a:hover{
-					color: {{data.template_params.dark_color}};
-				}
-				hr, .featuredProperty .bxslider1 li, .featuredProperty .bxslider1 li .sliderImg:hover, .propertylist .panel-default .sliderImg:hover, .singleproperty .property .mainimg,.bxslider li .projimg:hover, .homeproject .projsnap img,.featured_services .services .servimage:hover,.sidebarModule.sidemenu a,{
-					border-color : {{data.template_params.dark_color}};	
-				}
-				.homeproject .projsnap p{
-					border-bottom : {{data.template_params.dark_color}};	
-				}
-				.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .homeproject .projectnav,.homeproject .projsnap,.homeproject .bx-wrapper, .project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover,.project ul.nav.navbar-nav > li > a:focus, .content, .sections, .sidemenu, .thumbnail, .tab-content, .panel,.navbar-default .navbar-nav > li > ul{
-					background-color: {{data.template_params.background_color}};
-				}
-				.featuretab .nav-tabs li a,.sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, .navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus, .subhead,.btn-info, .btn-info[disabled], .btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .homeproject .projectnav a:hover, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus{
-					color: {{data.template_params.background_color}};
-				}
-				.about .table tbody tr th, .contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td, .content,.sections,.sidemenu,.thumbnail,.tab-content,.panel-default, .singleproperty .property, .projlist .project .thumbnail .projectimg img:hover, .products .thumbnail .prodimg img:hover, .singleproperty .property .table tbody tr td, .featuretab .nav-tabs{
-					border-color : {{data.template_params.background_color_dark}};	
-				}
-				.homeproject .carousslider li,{
-					background-color: {{data.template_params.background_color_light}};
-				}
-				.homeproject .carousslider li, .homeproject .bx-viewport .carousslider li {
-					border-color : {{data.template_params.background_color_light}};	
-				}
-				.subhead, .homeproject .projectnav a:hover,.sidebar .nav-pills{
-					background: -webkit-linear-gradient(top, {{data.template_params.light_color}},  {{data.template_params.dark_color}});
-					background: -moz-linear-gradient(top, {{data.template_params.light_color}},  {{data.template_params.dark_color}});
-					background: linear-gradient(top, {{data.template_params.light_color}},  {{data.template_params.dark_color}});
-				}
-				.navbar-default, .sociallinks ul li,footer{
-					background-image: -webkit-linear-gradient(top,{{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
-					background-image: -moz-linear-gradient(top, {{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
-					background-image: -linear-gradient(top,{{data.template_params.background_color_light}}, {{data.template_params.background_color_dark}});
-				}
-			</style>
-		{% endif %}-->
 	</head>
 	<body>
 		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
@@ -300,464 +242,18 @@ $("section>div:nth-child(1)").mouseover(function(){
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<img src="{{path}}img/logo.png">
 					<ul class="nav navbar-nav">
-					<li>About Us</li>
-					<li>Apnasite</li>
-					<li>Home</li>
-					<li>Services</li>
-					<li>ContactUs</li>
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 					</ul>
-					
 				</div><!-- /.navbar-collapse -->
 			</div>
 		</nav>
 		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-md-12 col-lg-12">
-					{%if modules.headerModule.carousal %}
-					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-					{%if modules.headerModule.homeproject %}
-					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
+			<div class="col-md-12">
+				<div class="content">
+					{%include contentPath%}
 				</div>
-			</div> 
-			<!-- <div class="row">
-				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-md-push-4 col-lg-push-3 col-xs-12 col-md-8 col-lg-9' : 'col-xs-12 col-md-12 col-lg-12 ' }}">
-					<div class="content">{% include contentPath %}</div>
-					{%if modules.contentModule.featured_properties %}
-						{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
-						
-						{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
-						
-					{%endif%}
-					{%if modules.contentModule.featured_projects %}
-						{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-					{%endif%}					
-				</div>
-				{% if modules.sidebarModule >= 1 %}
-				<div class="col-md-pull-8 col-lg-pull-9 col-xs-12 col-md-4 col-lg-3">
-					{%if modules.sidebarModule.searchProp %}
-						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
-					{%endif%}
-					{%if modules.sidebarModule.contact %}
-						{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-					{%endif%}
-					{%if modules.sidebarModule.enquiry %}
-						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry:{user_id : data.user_id,owner_email:data.owner_email}} %}
-					{%endif%}
-					{%if modules.sidebarModule.sidemenu %}
-						{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
-					{%endif%}
-				</div>
-				{% endif %}
-				
-			</div>-->
-			<!--<div class="row">
-				<div class="col-xs-12 col-md-12 col-lg-12">
-					{% if (modules.contentModule.featured_services)%}
-					<div class="featuretab">
-					
-						<ul class="nav nav-tabs" role="tablist">
-							{%if modules.contentModule.featured_services %}
-							<li role="presentation" class="active">
-								<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
-							</li>
-							{%endif%}
-							<li role="presentation">
-								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
-							</li>
-							<li role="presentation">
-								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
-							</li>
-						</ul>
-						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="featrserv">
-							{%if modules.contentModule.featured_services %}
-								{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-							{%endif%}
-							</div>
-							<div role="tabpanel" class="tab-pane" id="featrtesti">
-							{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
-							</div>
-							<div role="tabpanel" class="tab-pane" id="ourassoc">
-								{% include [templatePath ~ '/includes/our_associates.html', 'default/default/includes/our_associates.html'] %}
-							</div>
-						</div>
-					</div>
-					{% endif %}
-						
-					{%if modules.contentModule.featured_products %}
-						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-					{%endif%}
-				</div>
-			</div>-->
 			
 		</div>
-		
-	<div class="container">
-			<div class="content col-sm-10" id="apnasite">
-			<div class="row">
-				<h2 class="text-center">APNASITE.IN</h2>
-				<div class="info col-sm-12">
-					<h4>What is ApnaSite.in?</h4>
-					<p>ApnaSite.in is online business search engine and website creator tool. Which allows you to promote your business or organization over internet through ApnaSite.in. ApnaSite allows you to create business/organization's website in 4 easy steps. After creation of website & submission of your business/organization to ApnaSite portal, ApnaSite will promote your website as well as your business, products, services on popular search engines like Google, Bing and Yahoo. ApnaSite gives opportunity to manage your website, business/organization information, product information or services information of your own with very simple admin panel.</p> 
-					
-				</div>
-				</div>
-					<div>
-					<h4>Why ApnaSite?</h4>
-						<div class="row">
-						<div class="col-sm-4">
-						<p><b>Business Promotion :</b> 
-							We promote your business on ApnaSite.in as well as popular search engines like Google, Yahoo, Bing etc.
-						
-						</div>
-						<div class="col-sm-4">
-						<p><b>Dynamic Website :</b>
-							You can manage your website at your end with various free and professional templates having customization facility. You can modify your website content at any time. And modifications will activate immediately.
-						
-						</div>
-						<div class="col-sm-4">
-						<p><b>Enquiry Generation :</b>  
-							ApnaSite will allow you to generate enquiry from portal and website. ApnaSite will never charge for any enquiry.
-						
-						</div>
-						</div>
-						<div class="row">
-						<div class="col-sm-4">
-						<p><b>Direct Communication :</b>
-							Customer/End User or buyer can direct communicate to Seller. ApnaSite will never charge for any enquiry. No hidden charges.
-						
-						</div>
-						<div class="col-sm-4">
-						<p><b>Website Promotion :</b>
-							ApnaSite will promote your website on Google, Yahoo and Bing search engine.
-						
-						</div>
-						<div class="col-sm-4">
-						<p><b>Grow Business :</b>
-							We will help you through newsletters to grow your business speedily. 
-						
-						</div>
-						</div>
-					</div>
-					
-					<div class="col-sm-12">
-					<h4>Features</h4>
-					<ol list-style-type="1">
-						<li><p><b>Manage Website :</b> 
-							Add, edit or delete any information from your website.
-						</li>
-						<li><p><b>Website Template :</b>
-							Get new template, customize template.
-						</li>
-						<li><p><b>Business Details :</b>  
-							Add, edit or delete business details like facilities, infrastructures etc.
-						</li>
-						<li><p><b>Testimonials :</b>
-							Add your customer feedback & publish it on website.
-						</li>
-						<li><p><b>Manage Products :</b>
-							Add, edit or delete products.
-						</li>
-						<li><p><b>Manage Services :</b>
-							Add, edit or delete services.
-						</li>
-						<li><p><b>Job and Careers :</b>
-							You can post current openings and publish on website easily.
-						</li>
-						<li><p><b>Activities/News Coverage :</b>
-							You can publish your news coverage articles or any other activities like anniversary.
-						</li>
-						<li><p><b>Gallery :</b>
-							Add business images, function photos into gallery.
-						</li>
-						<li><p><b>ApnaSite Search Engine :</b>
-							End user can search business, services and products on ApnaSite.in with powerful Search Engine.
-						</li>
-						<li><p><b>Google Map :</b>
-							With the help of google map user can easily fine your business location.
-						</li>
-						<li><p><b>Enquiry Management :</b>
-							You will notify by SMS and Email when customer send enquiry from website or ApnaSite portal.
-						</li>
-						<li><p><b>10 Year Validity :</b>
-							First time in the History of IT industry, ApnaSite will give you opportunity to pay once for 10 Years. Your business validity on ApnaSite is 10years with no hidden charges. Only charges will apply for your website maintenance.
-						</li>
-					</ol>
-					</div>
-					
-					<div class="col-sm-12">
-					<h4>Packages</h4>
-					<div class="row packages">
-						<div class="col-sm-6 col-md-3">
-							<div class="thumbnail bronz">
-								<h3 class="text-center">Bronz Package</h3>
-								<div class="caption">
-									<p><b>Validity – 2 Year</b></p>
-									<p><b>INR 4000/-</b></p>
-									<ul>
-										<li>Subdomain</li> 
-										<li>Hosting</li> 
-										<li>Free Business listing on ApnaSite.in</li> 
-										<li>10 Products</li> 
-										<li>10 Services</li> 
-										<li>Galley</li> 
-										<li>Testimonials</li> 
-										<li>News Coverage</li> 
-										<li>Google Map</li> 
-										<li>SMS alert – 700</li> 
-										<li>Email Notification</li> 
-										<li>SEO for Google, Bing, Yahoo</li> 
-										<li>Subdomain Validity – 2 Year</li> 
-										<li>Business Listing Validity – 10 Year</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-md-3">
-							<div class="thumbnail silver">
-								<h3 class="text-center">Silver Package</h3>
-								<div class="caption">
-									<p><b>Validity – 1 Year</b></p>
-									<p><b>INR 6000/-</b></p>
-									<ul>
-										<li>.com, .co.in or .in </li> 
-										<li>Hosting</li> 
-										<li>2 corporate email IDs with 2GB space each</li> 
-										<li>Free Business listing on ApnaSite.in</li>
-										<li>Unlimited  Products</li> 
-										<li>Unlimited  Services</li> 
-										<li>Galley</li> 
-										<li>Testimonials</li> 
-										<li>Job Management</li>
-										<li>News Coverage</li> 
-										<li>Google Map</li>
-										<li>SMS alert – 1000</li> 
-										<li>Email Notification</li> 
-										<li>SEO for Google, Bing, Yahoo</li>
-										<li>Social Media Integration (Facebook, Google+)</li> 
-										<li>Domain Validity – 1 Year</li> 
-										<li>Business Listing Validity – 10 Year</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-md-3">
-							<div class="thumbnail gold">
-								<h3 class="text-center">Gold Package</h3>
-								<div class="caption">
-									<p><b>Validity – 3 Year</b></p>
-									<p><b>INR 12600/- </b>(30% discount)</p>
-									<ul>
-										<li>Subdomain</li> 
-										<li>Hosting</li> 
-										<li>5 corporate email IDs with 2GB space each</li> 
-										<li>Free Business listing on ApnaSite.in</li>
-										<li>Unlimited  Products</li> 
-										<li>Unlimited  Services</li>
-										<li>Galley</li> 
-										<li>Testimonials</li> 
-										<li>Job Management</li>
-										<li>News Coverage</li>
-										<li>Google Map</li>
-										<li>Google Place</li>
-										<li>SMS alert – 3000</li>
-										<li>Email Notification</li> 
-										<li>SEO for Google, Bing, Yahoo</li> 
-										<li>Social Media Integration (Facebook, Google+, Twitter)</li>
-										<li>Domain Validity – 3 Year</li> 
-										<li>Business Listing Validity – 10 Year</li> 
-										<li>Business Listing as a Featured Business</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-md-3">
-							<div class="thumbnail diamond">
-								<h3 class="text-center">Diamond Package</h3>
-								<div class="caption">	
-									<p><b>Validity – 5 Year</b></p>
-									<p><b>INR 19500/- </b>(35% discount)</p>
-									<ul>
-										<li>Subdomain</li> 
-										<li>Hosting</li> 
-										<li>10 corporate email IDs with 2GB space each</li> 
-										<li>Free Business listing on ApnaSite.in</li>
-										<li>Unlimited  Products</li>
-										<li>Unlimited  Services</li>
-										<li>Galley</li>
-										<li>Testimonials</li>
-										<li>Job Management</li>
-										<li>News Coverage</li> 
-										<li>Google Map</li> 
-										<li>Google Place</li> 
-										<li>SMS alert – 5000</li>
-										<li>Email Notification</li> 
-										<li>SEO for Google, Bing, Yahoo</li>
-										<li>Social Media Integration (Facebook, Google+, Twitter)</li> 
-										<li>Domain Validity – 5 Year</li> 
-										<li>Business Listing Validity – 10 Year</li>
-										<li>Business Listing as a Featured Business</li> 
-										<li>One Custom Template Available</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		
-		<div class="container" id="service">
-				<div class="row">
-					<h2 class="text-center">SERVICES</h2>
-				</div>
-				<div class="row">
-								<div class="col-md-3">
-									<img class="col-md-12" src="{{path}}img/webdevlop.jpg">
-								</div>
-								<div class="col-md-3">
-									<div class="col-md-12">
-									<h4 class="text-center">Web Development</h4>
-									<ul>
-										<li>Web Application Development</li>
-										<li>Website Designing</li>
-										<li>Domain Name</li>
-										<li>Web Hosting</li>
-										<li>SEO Search Engine Optimization</li>
-										<li>Online Marketing Solutions</li>
-									</ul>
-									</div>
-								</div>	
-								<div class="col-md-3">
-										<img class="col-md-12" src="{{path}}img/software.jpg">			
-								</div>
-								<div class="col-md-3">
-									<div class="col-md-12">
-									<h4 class="text-center">Software Development</h4>
-									<ul>
-										<li>Software Development</li>
-										<li>Customized Product Development</li>
-										<li>Software Support</li>
-										<li>Software Testing</li>
-										<li>Software Marketing</li>
-									</ul>
-									</div>
-								</div>					
-				</div>
-					<div class="row">		
-									<div class="col-md-3">
-										<img class="col-md-12" src="{{path}}img/mobile.jpg">
-									</div>						
-								<div class="col-md-3">
-									<div class="col-md-12">
-									<h4 class="text-center">Android and Mobile Development</h4>
-									<ul>
-										<li>Android Development</li>
-										<li>Java Mobile Development</li>
-										<li>Win8 Mobile Development</li>
-										<li>Mobile Application Development</li>
-									</ul>
-									</div>
-								</div>	
-									<div class="col-md-3">
-										<img class="col-md-12" src="{{path}}img/hard.jpg">
-									</div>							
-								<div class="col-md-3">
-									<div class="col-md-12">
-									<h4 class="text-center">Hardware Networking</h4>
-									<ul>
-										<li>Annual Maintenance – Home & Business</li>
-										<li>Computer Hardware Sell</li>
-										<li>Networking Support</li>
-										<li>Hardware Installation</li>
-										<li>Software Installation</li>
-										<li>Online Support</li>
-									</ul>
-									</div>
-								</div>
-					</div>
-					<div class="row">							
-									<div class="col-md-3">
-										<img class="col-md-12" src="{{path}}img/Training.jpg">
-								</div>
-								
-								<div class="col-md-3">
-									<div class="col-md-12">
-									<h4 class="text-center">Training</h4>
-									<ul>
-										<li>Programming Languages Training</li>
-										<li>Software Training</li>
-										<li>Web Development Training</li>
-										<li>Corporate Training</li>
-										<li>Career Guidance</li>
-										<li>Mobile Development Training</li>
-										<li>Graphic Designing Training</li>
-										<li>Hardware Networking Training</li>
-										<li>Diploma & Certificate Training</li>
-									</ul>
-									</div>
-								</div>
-									<div class="col-md-3">
-										<img class="col-md-12" src="{{path}}img/market.jpg">
-									</div>								
-								<div class="col-md-3">
-									<div class="col-md-12">
-									<h4 class="text-center">Product Marketing</h4>
-									<ul>
-										<li>Hardware & Software Product Marketing</li>
-										<li>Web Product Selling – Online/Offline</li>
-										<li>Online Business Marketing Support</li>
-										<li>Social Network Marketing</li>
-										<li>Business Development Consulting</li>
-									</ul>
-									</div>
-								</div>		
-					</div>
-</div>
-<div class="container">
-			<div class="text-center">
-				<a href="#"><img src="img/getImage.png" class="logoimg"></a>
-			</div>
-			<div id="aboutus">
-				<h2 class="text-center">ABOUT US</h2>
-				<div class="info">
-					<h4>Our Vision</h4>
-					<p>Work Till Client’s Satisfaction.</p>
-					<h4>About Us</h4>
-					<p>Web Touch India Solutions founded in 2012, has more than 4+ years of experience in the Web Development and IT Services. Web Touch have highly skilled employee. Web Touch is a speedily growing company in Pune City.</p> 
-					<p>We fulfilling the requirements of the customers in the areas of web site designing and development, Web Application Development (ASP.NET, PHP), Mobile Application Development (Android, iOS, Windows).</p>
-					<p>We also provide service for Print Media. We offer Brochures desing, Logo design, Press Advertisements, CD Rom / Corporate Multimedia Presentations, etc., Custom made designs to suit your unique business needs and requirements.</p>
-					<p>Alternatively if you are looking for something a little more specific; outline your ideas for us and our designers and developers can create a bespoke professional brochure, website as per your requirements.</p>
-					<p>Also Web Touch is developing Educational Online Portal for Students from primary to higher education. It helps students for self-study, self-improvement & self-development.</p>
-					<h4>Our Team</h4>
-					<p>We believe that people really are at the heart of our success.  The final component that brings it all together is our team.  We hire the very best and the brightest; innovators, problem solvers, communicators.  Our team takes service delivery personally. We will go the extra mile to give our customers throughout the world all the support they require to realize all their online goals and visions.</p>
-					<h4>What We Did?</h4>
-						<p>Developed more than 50 web projects.</p>
-						<p>Sold more than 10+ software to our clients.</p>
-						<p>Provide a very good service to our clients.</p>
-						<p>We earn satisfied clients more than money.</p>
-				</div>
-			</div>
-	</div>
- <!-- <section class="row">
-			 <div>
-			 </div>
-			 <div>
-			 </div>
-			 <div>
-			 </div>
-			 <div>
-			 </div>
-			 <div>
-			 </div>
-</section>
-<footer>
-		<p>copyright&copy;2012 <a href="http://wtouch.in" target="_blank">Apnasite</a></p>
-</footer> -->
-
  </body>
 </html> 
 {% endspaceless %}

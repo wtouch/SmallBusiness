@@ -23,7 +23,7 @@
 				<tr>
 					<td>
 						<a href="#">
-							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive" alt="{{data.business_name}}"/>
+							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
 						</a>
 					</td>
 					<td>
@@ -74,13 +74,15 @@
 				</tr>
 				<tr>
 					<td><b>E-mail Id</b></td>
-					<td>{{data.contact_profile.email}}<br>
-					{{data.contact_profile.alternate_email}}</td>
+					<td>
+						<a class="email" href="mailto: {{data.contact_profile.email}}">{{data.contact_profile.email}}</a><br>
+						<a class="email" href="mailto: {{data.contact_profile.alternate_email}}">{{data.contact_profile.alternate_email}}</a>
+					</td>
 				</tr>
 				{%if data.contact_profile.contact_website%}
 				<tr>
 					<td><b>Website</b></td>
-					<td><a href="#">{{data.contact_profile.contact_website}}</a>
+					<td><a href="/{{data.contact_profile.contact_website}}">{{data.contact_profile.contact_website}}</a>
 					</td>
 				</tr>
 				{% endif %}

@@ -33,7 +33,8 @@
 							ng-init="enquiry.message.property_link={params : {property_title : '{{enquiry.property_title}}', property_category : '{{property_category}}', property_id : '{{property_id}}' }}">
 						{% endif %}
 						
-						<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true">	
+						<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true" ng-pattern="/^(\D)+$/">
+							<span ng-show="enquiryForm.name.$error.pattern && (enquiryForm.name.$dirty)" class="text-danger">Enter only Alphabets!</span>
 							<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
 					</div>	
 				</div>

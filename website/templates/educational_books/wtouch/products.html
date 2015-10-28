@@ -1,0 +1,17 @@
+{% autoescape false %}
+<h2>{{title}}</h2>
+<div class="row">
+	<div class="col-md-12">
+		<h2 class="text-center">SERVICES</h2>
+	</div>
+	{% for key, x in products %}
+		<div class="col-md-3">
+			<img src="{{x.product_image.0.file_relative_path}}" class="img-responsive center-block" alt="{{key}}"/>
+		</div>
+		<div class="col-md-3">
+			<h4 class="text-center">{{ x.product_service_name }}</h4>
+			{{ x.description }}
+		</div>		
+	{%endfor%}
+</div>
+{% endautoescape %}

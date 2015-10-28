@@ -1,5 +1,5 @@
 {% autoescape false %}
-{% if home_properties %}
+{% if home_properties >= 1 %}
 
 <div class="content-box">
 
@@ -24,7 +24,7 @@
 				<div class="item {{ (i == 0) ? 'active' }}">
 					<div class="col-xs-12 col-md-3 col-lg-3 text-center">
 						<div class="shadow">
-							<a href="properties/{{x.title}}/{{x.id}}">
+							<a href="properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}">
 								<div class="imgborder">
 									<img src="{{x.property_images.0.file_relative_path}}" alt="" style="max-width:93%" class="slimg"/>
 									{% if x.verified %}
@@ -33,13 +33,13 @@
 								</div>
 							</a>
 							<div class="proj-title">
-								<a href="properties/{{x.title}}/{{x.id}}" class="head">{{x.title}}</a>
+								<a href="properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="head">{{x.title}}</a>
 								<small>{{x.type}}<br>
 								{{x.property_info.buildup_area}}{{x.property_info.build_unit}}
 								</small>
 							</div>
 							<div class="view-link">
-								<a class="btn " href="properties/{{x.title}}/{{x.id}}" >View Detail</a>
+								<a class="btn " href="properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}" >View Detail</a>
 							</div>
 						</div>
 					</div>
