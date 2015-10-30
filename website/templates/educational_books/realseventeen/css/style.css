@@ -25,7 +25,7 @@
   height: 150px;
   width: 200px;
   overflow: hidden;
-  border: 2px solid transparent;
+  border: 2px solid #006600;
 }
 .featuredProperty .bxslider1 li .sliderImg .slimg {
   min-height: 150px;
@@ -48,6 +48,10 @@
   border: none;
   padding: 3px 10px;
 }
+.propertylist {
+  border: 1px solid #006600;
+  padding: 0px 10px;
+}
 .propertylist .btn-primary {
   margin-bottom: 10px;
 }
@@ -67,29 +71,14 @@
 .propertylist .panel-default .sliderImg img {
   min-height: 150px;
   padding: 4px;
-  border: 3px solid transparent;
+  border: 2px solid #006600;
 }
 .propertylist .panel-default .sliderImg img:hover {
-  border: 3px solid #006600;
+  border: 2px solid #cc0000;
 }
 .propertylist .table td {
   border: none;
   padding: 1px 1px;
-}
-.propertylist nav .pagination li a,
-.propertylist nav .pagination .disabled a {
-  background-color: #ffffff;
-  border-color: #000066;
-}
-.propertylist nav .pagination li a:hover,
-.propertylist nav .pagination .disabled a:hover {
-  background-color: #006600;
-  color: #ffffff;
-}
-.propertylist nav .pagination > .active > a {
-  background-color: #006600;
-  color: #ffffff;
-  border-color: #02071a;
 }
 .singleproperty .property {
   margin-top: 15px;
@@ -202,13 +191,19 @@
 .singleproperty .btn-primary:hover {
   background-color: #0c4204;
 }
-@media (min-width: 320px) {
+@media (max-width: 320px) {
   .propDetails ul li {
     width: 224px;
   }
   .property .mainimg img {
     max-height: 145px;
     max-width: 100%;
+  }
+  .propertylist .sliderImg {
+    margin: auto;
+  }
+  .propertylist .sliderDesc {
+    text-align: center;
   }
 }
 @media (min-width: 992px) {
@@ -437,7 +432,7 @@
 }
 .project ul.nav.navbar-nav > li > a,
 .project ul.nav.navbar-nav > li > a:focus {
-  padding: 9px 6px 9px 5px;
+  padding: 9px 11px;
   color: #ffffff;
 }
 .project ul.nav.navbar-nav > li.active > a,
@@ -458,27 +453,18 @@
 }
 .project .projectgallery .thumbnail .projectImags {
   width: 190px;
-  height: 148px;
+  height: 150px;
   overflow: hidden;
   margin: 0 auto;
 }
 .project .projectgallery .thumbnail .projectImags img {
-  min-height: 148px;
+  min-height: 150px;
 }
-.project nav .pagination li a,
-.project nav .pagination .disabled a {
-  background-color: #006600;
-  border-color: #02071a;
+.project .projectgallery .thumbnail .caption {
+  height: 150px;
 }
-.project nav .pagination li a:hover,
-.project nav .pagination .disabled a:hover {
-  background-color: #006600;
-  color: #ffffff;
-}
-.project nav .pagination > .active > a {
-  background-color: #006600;
-  color: #ffffff;
-  border-color: #02071a;
+.project .panel-default {
+  border-color: #006600;
 }
 @media (max-width: 768px) {
   .homeproject::after {
@@ -491,11 +477,17 @@
     margin-bottom: 10px !important;
   }
 }
-@media (min-width: 320px) {
+@media (max-width: 320px) {
   .projImg {
     float: none;
-    max-height: 175px;
-    margin-right: 10px;
+    margin: auto;
+  }
+  .projHead {
+    text-align: center;
+    margin-top: 15px;
+  }
+  .homeproject .projectnav {
+    margin-top: 10px;
   }
 }
 @media (min-width: 992px) {
@@ -511,6 +503,9 @@
     max-height: 175px;
     margin-right: 10px;
   }
+}
+.services {
+  border: none;
 }
 .services .servdesc {
   height: 220px;
@@ -529,18 +524,18 @@
   margin-top: 20px;
 }
 .products .thumbnail .prodimg {
-  width: 200px;
+  width: 208px;
   height: 150px;
   overflow: hidden;
   margin: 0px auto;
 }
 .products .thumbnail .prodimg img {
   min-height: 150px;
-  border: 3px solid transparent;
-  padding: 6px;
+  border: 1px solid transparent;
+  padding: 2px;
 }
 .products .thumbnail .prodimg img:hover {
-  border: 3px solid #006600;
+  border: 1px solid #006600;
 }
 .products .thumbnail .caption {
   height: 180px;
@@ -612,7 +607,7 @@
 }
 .featuretab .nav-tabs li a {
   border: 1px solid #0c4204;
-  font: 16px 'Alex Brush', cursive;
+  font: 16px 'Alex Brush', Amaranth-Regular;
 }
 .featuretab .nav-tabs li a:hover {
   color: #ffffff;
@@ -926,8 +921,7 @@ a {
 }
 .navbar {
   border: none;
-  min-height: 50px;
-  height: 40px;
+  min-height: 40px;
 }
 .navbar-default {
   background-image: linear-gradient(#0c4204, #006600);
@@ -1095,8 +1089,21 @@ hr {
 .thumbnail {
   border-color: #0c4204;
 }
-.services {
-  border: none;
+nav .pagination li a,
+nav .pagination .disabled a {
+  background-color: #ffffff;
+  border-color: #000066;
+}
+nav .pagination li a:hover,
+nav .pagination .disabled a:hover {
+  background-color: #006600;
+  color: #ffffff;
+  border-color: #000066;
+}
+nav .pagination > .active > a {
+  background-color: #006600;
+  color: #ffffff;
+  border-color: #02071a;
 }
 .email:hover {
   text-decoration: none;
