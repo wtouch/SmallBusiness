@@ -2,32 +2,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
-		<link rel="stylesheet" href="{{ path }}css/errorstyle.css">
-		<script src="{{ path }}js/jquery.min.js"></script>
-		<script src="{{ path }}js/bootstrap.min.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ path }}css/errorstyle.css">
+	<script src="{{ path }}js/jquery.min.js"></script>
+	<script src="{{ path }}js/bootstrap.min.js"></script>
+	<style>
+	body{
+		{% if code == 101 or code == 102 or code == 103 %}
+			background-color : green;
+		{% endif %}
+		{% if code == 104 or code == 105 %}
+			background-color : red;
+		{% endif %}
+		{% if code == 100 %}
+			background-color : blue;
+		{% endif %}
+	}
+	h2{
+		color : red;
+	}
+	.erorimg{
+		height : 100px;
+	}
+	</style>
 </head>
 <body>
 	<div class="container">
-	<div class="errorback">
-		<div class="msg">
-			<h2>ERROR !<img src="{{path}}errorface.png"></h2>
-			<h3>{{message}}</h3>
-			{#{% if website_status == 'expired'%}
-				<h1>ERROR !<img src="{{path}}errorface.png"></h1>
+		{{status}}
+		{{code}}
+		{{website_status}}
+		<div class="errorback">
+			<div class="msg">
+				<h2>
+					{{(code == 101 or code == 102 or code == 103 or code == 100) ? "" : website_status}}
+					 <img class="erorimg" src="{{(code == 101) ? path ~ 'img/comingsoon.png' : path ~ 'img/errorface.png'}}"> 
+					<!-- {% if code == 101 or code == 102 or code == 103 or code == 100 %}
+						<img class="erorimg" src="{{path}}/img/comingsoon.png">
+					{% endif %}
+					{% if code == 104 %}
+						<img class="erorimg" src="{{path}}/img/errorface.png">
+					{% endif %}
+					{% if code == 105 %}
+						<img class="erorimg" src="{{path}}/img/errorface.png">
+					{% endif %} -->
+				</h2>
 				<h3>{{message}}</h3>
-			{% endif %}
-			{% if website_status == 'deleted' %}
-				<h2 style="color : green">{{message}}</h2>
-			{% endif %}
-			{% if website_status == 'requested' %}
-				<h2 style="color : blue">{{message}}</h2>
-			{% endif %}#}
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

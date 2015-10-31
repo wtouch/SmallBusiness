@@ -16,8 +16,8 @@ $(document).ready(function(){
 			
 		}else{
 			sliderMode = "vertical";
-			minSlides = 3;
-			maxSlides = 3;
+			minSlides = 1;
+			maxSlides = 1;
 		}
 	//})
 	$('.bxslider').bxSlider({
@@ -30,7 +30,7 @@ $(document).ready(function(){
 		autoDirection:'next',
 		moveSlides: 1,
 		pause:3000,
-		pager:true,
+		pager:false,
 		pagerType:'full',
 		autoControls: true, 
 		controls:true, 

@@ -1,0 +1,20 @@
+{% autoescape false %}
+<div class="sidebarModule contactus">
+	<h3 class="subhead">Contact Us</h3>
+	<div class="sections">
+		<h4>{{ data.business_name }}</h4>
+		<hr>
+		{%if data.contact_profile.telephone%}
+			<p><b>Telephone : </b><br>{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}</p>
+			<hr>
+		{% endif %}
+		<p><b>Mobile : </b><br>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? ", " ~ data.contact_profile.alternate_mobile}}
+		</p>
+		<hr>
+		<b>Email Address : </b><br><a class="email" href="mailto:{{data.contact_profile.email}}">{{data.contact_profile.email}}</a>
+		{%if data.contact_profile.alternate_email%}
+			<br><a class="email" href="mailto: {{data.contact_profile.alternate_email}}">{{data.contact_profile.alternate_email}}</a>
+		{% endif %}
+	</div>
+</div>
+{% endautoescape %}

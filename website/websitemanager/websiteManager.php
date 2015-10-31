@@ -1,4 +1,18 @@
 <?php
+class CustomException extends \Exception
+{
+
+    private $_options;
+
+    public function __construct($options = array()) 
+    {
+        parent::__construct();
+
+        $this->_options = $options; 
+    }
+
+    public function getErrorMessage() { return $this->_options; }
+}
 
 class websiteManager{
 	private $domain;
@@ -150,28 +164,42 @@ class websiteManager{
 			// check website status if deleted or expired or data null
 			if($result['status'] == 'success' && $result['data'] != null) {
 				if($result['data']['expired'] == 1){
-					$response['website_status']= 'expired';
-					throw new Exception('Website is expired, please renew soon!');
+					$response['status']= 'Website Expired';
+					$response['code']= 104;
+					$response['message']= 'Website is expired, please renew soon!';
+					throw new CustomException($response);
 				}
-				if($result['data']['website_status'] != 1){
-					$response['website_status']= 'deleted';
-					throw new Exception('Website is not activated, please contact system administrator!');
+				if($result['data']['website_status'] == 0){
+					
+					$response['status']= 'Website Deleted';
+					$response['code']= 105;
+					$response['message']= 'Website is not activated, please contact system administrator!';
+					throw new CustomException($response);
 				}
 				if($result['data']['website_status'] == 2){
-					$response['website_status']= 'requested';
-					throw new Exception('Website is Under Construction!');
+					$response['status']= 'Coming Soon';
+					$response['code']= 101;
+					$response['message']= 'Website is Under Construction!';
+					throw new CustomException($response);
 				}
 				if(empty($result['data']['website_config'])){
-					$response['website_status']= 'requested';
-					throw new Exception('Website is Under Construction! Please add website details!');
+					$response['status']= 'Coming Soon';
+					$response['code']= 102;
+					$response['message']= 'Website is Under Construction! Please add website details!';
+					throw new CustomException($response);
 				}
 				if(($result['data']['template_name']) == ""){
-					$response['website_status']= 'requested';
-					throw new Exception('Website is Under Construction! Please add template details!');
+					$response['status']= 'Coming Soon';
+					$response['code']= 103;
+					$response['message']= 'Website is Under Construction! Please add template details!';
+					throw new CustomException($response);
 				}
 				
 			}else{
-				throw new Exception('Website is Under Construction!');
+				$response['status']= 'Coming Soon';
+				$response['code']= 100;
+				$response['message']= 'Domain Registered! Website is Under Construction!';
+				throw new CustomException($response);
 			}
 			
 			$response['status'] = "success";
@@ -217,10 +245,13 @@ class websiteManager{
 				}
 			}
 			
-		}catch(Exception $e){
+		}catch(CustomException $e){
+			$exception = $e->getErrorMessage();
 			$response["status"] = "error";
-            $response["message"] = $e->getMessage();
+            $response["message"] = $exception['message'];
+            $response["website_status"] = (isset($exception['status'])) ? $exception['status'] : "";
             $response["data"] = null;
+			$response["path"] = $this->config['httpTempPath']."default/default/";
 			//print_r($response);
 		}
 		return $response;
@@ -254,7 +285,7 @@ class websiteManager{
 		try{
 			$businessData = $this->getConfigData(true);
 			if($businessData["status"] != "success"){
-				throw new Exception($businessData["message"]);
+				throw new CustomException($businessData);
 			}
 			
             $response = $businessData;
@@ -274,10 +305,12 @@ class websiteManager{
             
 			$response = $this->getTemplate($page, $response);
 		}catch(Exception $e){
-			$response["status"] = "error";
+			/* $response["status"] = "error";
             $response["message"] = $e->getMessage();
-            $response["data"] = null;
-            $response["path"] = $this->config['httpTempPath']."default/default/";
+            $response["data"] = null; */
+            $response = $e->getErrorMessage();
+			
+			$response["path"] = $this->config['httpTempPath']."default/default/";
 			$response = $this->getTemplate('error', $response);
 			//print_r($response);
 		}

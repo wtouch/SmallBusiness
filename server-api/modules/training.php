@@ -21,26 +21,21 @@
 		}else{
 			
 			$like = array();
-			$userId = 0;
 			$limit[0] = $pageNo;
 			$limit[1] = $records;
 			$where = array();
-			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
 			
 			if(isset($_GET['search']) && $_GET['search'] == true){
 				(isset($_GET['name'])) ? $like['name'] = $_GET['name'] : "";
 			} 
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
-			
-			$userCols['name'] = "name";
-			$userCols['username'] = "username";
-			$user = $db->getUsers($userId,$userCols);
+		
 			$db->setLimit($limit);
-			$table = $db->setJoinString("INNER JOIN", "training", array("user_id"=>$user.".id"));
+			$table = $db->setTable("training");
 			$db->setWhere($where, $table);
 			$db->setWhere($like, $table, true);
-			$selectInnerJoinCols[0] = "*";
-			$db->setColumns($table, $selectInnerJoinCols);
+			$selectCols[0] = "*";
+			$db->setColumns($table, $selectCols);
 			$data = $db->select();
 			echo json_encode($data);
 		}
