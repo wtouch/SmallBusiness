@@ -15,12 +15,12 @@
 	
 	@color:#361560;//grey color
 	@back:#BAA304;//tiranga color
-	
+	@darkcolor:#CD7F32;
 	@lightcolor:#B19E1A;
 	@darkbackcolor:#777070;
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
-	
+	@lightbakcolor:#57819E;
 	/*@import "property.less";
 	@import "project.less";*/
 	@import "product.less";
@@ -33,31 +33,65 @@
 	border-radius:0px !important;
 	}
 	body{
-		background-image:url('../img/img1.jpg');
+		background-color:@lightbakcolor;
 		color: @colorwhite;
 		
 	}
 	.training{
 			margin-top:60px;
-		.parent{
+		.parent1{
+			background-color:@darkcolor;
+			border:1px solid @colorwhite;
+			box-shadow: 0px 0px 10px @colorwhite;
+			margin-top:10px;
+			margin-bottom:10px;
+		}
+		.parent1:hover{
 			background-color:@color;
 			border:1px solid @colorwhite;
 			box-shadow: 0px 0px 10px @colorwhite;
 			margin-top:10px;
+			margin-bottom:10px;
+		}
+		.parent2{
+				background-color:@color;
+				border:1px solid @colorwhite;
+				box-shadow: 0px 0px 10px @colorwhite;
+				margin-top:10px;
+				margin-bottom:10px;
+			}
+		.parent2:hover{
+		background-color:@darkbackcolor;
+		
+		}
+			.parent3{
+			background-color:@darkbackcolor;
+			border:1px solid @colorwhite;
+			box-shadow: 0px 0px 10px @colorwhite;
+			margin-top:10px;
+			margin-bottom:10px;
+		}
+		.parent3:hover {
+			z-index: 9999999;
+			transition: 300ms linear;
+			background-color: @color;
 		}
 		img{
 		height:150px;
 		}
 		h2{
-			text-shadow: 1px 5px 6px #000;
+			text-shadow: 1px 5px 6px @colorblack;
 			font-size: 60px;
 			font-style: italic;
 		}
 		h3 {
-				text-shadow: 1px 5px 6px #000;
+				text-shadow: 1px 5px 6px @colorblack;
 				 font-size: 35px;
 				font-style: italic;
 			}
+		 p {
+				text-shadow: 1px 2px 1px @colorblack;
+		   }
 	}
 	
 	
@@ -106,19 +140,6 @@
 		-ms-user-select: none;
 		user-select: none;
 		background-image: none;
-		border: 1px solid transparent;
-		border-top-color: transparent;
-		border-top-style: solid;
-		border-top-width: 1px;
-		border-right-color: transparent;
-		border-right-style: solid;
-		border-right-width: 1px;
-		border-bottom-color: transparent;
-		border-bottom-style: solid;
-		border-bottom-width: 1px;
-		border-left-color: transparent;
-		border-left-style: solid;
-		border-left-width: 1px;
 	}
 .modal-content {
 		-webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);

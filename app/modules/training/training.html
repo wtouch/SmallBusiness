@@ -1,0 +1,53 @@
+<div class="row">	
+	<div class="col-sm-12">
+		<div class="main-content">
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
+			
+			<div class="col-sm-2 pull-right"> 
+				<label class="control-label"> </label><br>
+				<a href="#/dashboard/project/addproject" class="btn btn-primary" title="Add new project">Add New Trainee</a>
+			</div>		
+			
+			<h3 class="text-center"> Trainee Details</h3>
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="table-responsive" ng-init="getTraining(currentPage, user_id)">
+						<table class="table table-bordered ">
+							<thead>
+								<tr>
+									<th>Sr.No.</th>
+									<th>Trainee Name</th>
+									<th>Email</th>
+									<th>Mobile</th>
+									<th>Manage</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr ng-repeat="x in training | orderBy:title ">
+									<td>{{((currentPage - 1) * pageItems) + $index + 1}}</td>
+									<td>{{x.name}}</td>
+									<td>{{x.email}}</td>
+									<td>{{x.mobile}}</td>
+									<td class="col-sm-3">
+										<div class="btn-group">	
+											<a ng-click="open('modules/training/singleview.html', x)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="View Candidate Details"></a>
+										</div>				
+										<div class="btn-group">	
+											<button ng-change="update('status',x.status,x.id)" tooltip="{{dynamicTooltip(x.status, 'Delete This','Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"></button>
+										</div>
+										
+									</td>
+								</tr>				
+							</tbody>
+						</table>
+					</div>
+				<div class="text-center">				
+					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getTraining(currentPage,8,projectParam)"></pagination>
+					<pre>Page: {{currentPage}} / {{numPages}}</pre>
+				</div>	
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

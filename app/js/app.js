@@ -98,8 +98,6 @@ define(['angular',
 					
 				.when('/dashboard/project/addproject/:id?', route.resolve({controller: 'addproject',template: 'addproject',label: "Add Project"}, 'project/addproject/'))
 					
-				/* .when('/dashboard/training/addtraining/:id?', route.resolve({controller: 'training',template: 'addtraining',label: "Add Training"}, 'training/addtraining/')) */
-				
 				
 				.when('/dashboard/websites/websettings/:id', route.resolve({controller:'websettings', template: 'websettings',label:"Website Settings"}, 'websites/websettings/'))
 				
@@ -111,7 +109,7 @@ define(['angular',
 				
 				.when('/dashboard/excel', route.resolve({controller: 'excel',template: 'excel',label:"Excel Management"}, 'excel/'))
 				
-				.when('/dashboard/training', route.resolve({controller: 'training',template: 'traininglist',label: "Training"}, 'training/'))
+				.when('/dashboard/training', route.resolve({controller: 'training',template: 'training',label: "Training"}, 'training/'))
 					
                 .otherwise({ redirectTo: '/' });
 				
