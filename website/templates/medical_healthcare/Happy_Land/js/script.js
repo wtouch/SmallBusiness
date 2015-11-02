@@ -17,9 +17,9 @@ app.controller('trainingController', function($scope,$http, $location) {
 		$scope.isCollapsed = true;
 	};
 	$scope.isSend = false;
-	$scope.postData = function(training){
-		console.log(training);
-		$http.post("/server-api/index.php/post/training", training).success(function(response) {
+	$scope.postData = function(addtraining){
+		console.log(addtraining);
+		$http.post("/server-api/index.php/post/training", addtraining).success(function(response) {
 				if(response.status=='success'){
 					$scope.isSend = true;
 					//alert("Record Inserted Successfully");
