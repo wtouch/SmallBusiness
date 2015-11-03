@@ -19,55 +19,50 @@ body{
 	@colorblack : #000;
 	@colorwhite	: #fff;
 	
-#site-header-wrapper{
-	background-color: @color;
-    clear: both;
-    position: fixed;
-    display: block;
-    margin-left: -15px;
-    padding: 0;
-    width: 100%;
-    height: 62px;
-    z-index: 90;
+header{
+		background-color: @colorblack;
+		clear: both;
+		//position: fixed;
+		display: block;
+		padding: 0;
+		width: 100%;
+		z-index: 90;
 }
-#site-header-left {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 7%;
-    height: 100%;
-    background: @colorblack;
-    z-index: 91;
+.container-fluid{
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+
 }
 
 .navbar-default {
-	position: relative;
-    margin-left: 136px;
-    padding: 0;
-    background-color: transparent;
-    z-index: 92;
-    border: none;
-		.navbar-brand{
-						    margin-left: -45px;
+				margin-left:90px;
+				padding: 0;
+				background-color: @color;
+				z-index: 92;
+				border: none;
+				border-radius: 0px;
+					.navbar-brand{ 
+					//margin-left: -60px !important;					
 						padding-top:20px;
 						color:@colorwhite;
-						
-						&:hover{
-							color:@colorwhite;
-							background: black;
-							height: 62px;
-						}
+							&:hover{
+								color:@colorwhite;
+								background: black;
+								height: 62px;
+							
+							}
 					}
 		.navbar-nav{
-			margin-left: 300px;
-			position:absolute;
+						//	margin-left: 300px;
 				li{
 					margin-left:8px;
 					> ul{
 							list-style: none;
 							position: absolute;
 							width: 245px;
-							top : 62px;
+							top : 61px;
 							z-index: 999;
 							display: none;
 							background-color:@colorblack;
@@ -134,6 +129,7 @@ body{
 			background-repeat:repeat-x;
 			background-size:100% 100%;
 	.product{
+				position:relative;
 				height:500px;
 				border-radius:0px;
 				padding:0px;
@@ -178,6 +174,14 @@ body{
 					font-size:20px;
 						color:@color;
 					}
+					.readmore1{
+					position:absolute;
+					bottom:10px;
+					left:0;
+					right:0;
+					margin:0 auto;
+					width:200px;
+					}
 					
 				
 	}
@@ -212,8 +216,8 @@ body{
 				}
 	}
 	
-		footer{
-		
+		.ftr{
+			position:relative;
 			a{
 			color:@color;
 				&:hover{
@@ -221,21 +225,22 @@ body{
 				}
 			}
 			color:@darkcolor;
-			
-			position:absolute;
 			padding-top: 80px;
 			height: 150px;
 			width:100%;
-			margin-left: -15px;
 			background-color:@colorblack;
 	}
 	
 	.sociallinks{
-			margin-left: 520px;;
-			position:absolute;
-			z-index:999;
-			margin-top:-70px;
-			border:none;
+				position: absolute;
+				z-index: 999;
+				/* margin-top: -83px; */
+				border: none;
+				top: -71px;
+				left: 0px;
+				right: 0px;
+				margin: 0 auto;
+				width: 300px;
 				ul{
 					list-style-type: none;
 				li{
@@ -293,7 +298,25 @@ body{
 			h1{
 				color:@darkcolor;
 				text-align:center;
+				font:30px/25px  Georgia,Arial,Helvetica,sans-serif;
 			}
+			h2{
+				color:@darkcolor;
+				text-align:center;
+				font:30px/25px  Georgia,Arial,Helvetica,sans-serif;
+			
+			}
+				h3{
+				color:@darkcolor;
+				text-align:left;
+				font:30px/25px  Georgia,Arial,Helvetica,sans-serif;
+			
+			}
+.contact{
+	color:@darkcolor;
+	text-align:left;
+			
+}
 				.tagline{
 						color:@darkcolor;
 						font-weight:bold;
@@ -324,7 +347,7 @@ body{
 						    margin-bottom: 20px;
 							padding: 35px 0 0;
 							color:@darkcolor;
-							font: 24px/18px "proxima-nova",sans-serif;
+							font: 30px/25px Georgia,Arial,Helvetica,sans-serif;
 						
 								&::before{
 								    right: 0.5em;
@@ -546,4 +569,10 @@ body{
 	background-color:@colorblack;
 	color:@colorwhite;
 	}
+	}
+	
+	@media (max-width:768px){
+		.navbar-brand{
+			float:none;
+		}
 	}
