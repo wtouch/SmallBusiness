@@ -37,17 +37,16 @@ header{
 }
 
 .navbar-default {
-				margin-left: 90px;
+				margin-left:90px;
 				padding: 0;
 				background-color: @color;
 				z-index: 92;
 				border: none;
 				border-radius: 0px;
 					.navbar-brand{ 
-					margin-left: -60px !important;					
+					//margin-left: -60px !important;					
 						padding-top:20px;
 						color:@colorwhite;
-						
 							&:hover{
 								color:@colorwhite;
 								background: black;
@@ -217,7 +216,7 @@ header{
 				}
 	}
 	
-		footer{
+		.ftr{
 			position:relative;
 			a{
 			color:@color;
@@ -233,11 +232,15 @@ header{
 	}
 	
 	.sociallinks{
-		position:absolute;
-		    margin-left: 39%;
-			z-index:999;
-			margin-top:-70px;
-			border:none;
+				position: absolute;
+				z-index: 999;
+				/* margin-top: -83px; */
+				border: none;
+				top: -71px;
+				left: 0px;
+				right: 0px;
+				margin: 0 auto;
+				width: 300px;
 				ul{
 					list-style-type: none;
 				li{
@@ -566,4 +569,10 @@ header{
 	background-color:@colorblack;
 	color:@colorwhite;
 	}
+	}
+	
+	@media (max-width:768px){
+		.navbar-brand{
+			float:none;
+		}
 	}
