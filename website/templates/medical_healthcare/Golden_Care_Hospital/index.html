@@ -106,9 +106,15 @@
 						
 					</div>
 					<div class="two">
-					<br/><br/>
-					<p class="cnct text-left"> <strong>Address :</strong> {{data.contact_profile.address}}
-					<br/><strong>Website :</strong> {{data.contact_profile.contact_website}}, <br/> <strong>Contact :</strong> {{data.contact_profile.mobile}} .</p>
+						<br/><br/>
+						<p class="cnct text-left"> <strong>Address :</strong> {{data.contact_profile.address}}
+						<br/><strong>Website :</strong> {{data.contact_profile.contact_website}}, <br/> <strong>Contact :</strong> 
+						{% if data.contact_profile.telephone %}
+							{{data.contact_profile.telephone}} 
+						{% endif %}
+						{% if data.contact_profile.alternate_telephone %}
+							,{{data.contact_profile.alternate_telephone}} 
+						{% endif %}</p>
 					</div>
 				</div>
 			</div>

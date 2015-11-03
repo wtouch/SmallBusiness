@@ -109,7 +109,7 @@ define(['angular',
 				
 				.when('/dashboard/excel', route.resolve({controller: 'excel',template: 'excel',label:"Excel Management"}, 'excel/'))
 				
-				.when('/dashboard/training', route.resolve({controller: 'training',template: 'training',label: "Training"}, 'training/'))
+				.when('/dashboard/training/:id?', route.resolve({controller: 'training',template: 'training',label: "Training"}, 'training/'))
 					
                 .otherwise({ redirectTo: '/' });
 				
