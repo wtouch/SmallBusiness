@@ -88,6 +88,22 @@ define(['angular',
 				
 				.when('/dashboard/business/:businessView?', route.resolve({controller:'business', template: 'business',label:"Business"}, 'business/'))
 				
+				.when('/dashboard/crm/addquotation/:id?', route.resolve({controller:'quotation', template: 'addquotation',label:"Add New Quotation"}, 'crm/quotation/'))
+				
+				.when('/dashboard/crm/quotationlist', route.resolve({controller:'quotation', template: 'quotationlist',label:"Quotation List"}, 'crm/quotation/'))
+				
+				.when('/dashboard/crm/addinvoice/:id?', route.resolve({controller:'invoice', template: 'addinvoice',label:"Add New Invoice"}, 'crm/invoice/'))
+				
+				.when('/dashboard/crm/invoicelist', route.resolve({controller:'invoice', template: 'invoicelist',label:"Invoice List"}, 'crm/invoice/'))
+				
+				.when('/dashboard/crm/addpurchase/:id?', route.resolve({controller:'purchase', template: 'addpurchase',label:"Add Purchase Order"}, 'crm/purchaseorder/'))
+				
+				.when('/dashboard/crm/purchaselist', route.resolve({controller:'purchase', template: 'purchaselist',label:"Purchase List"}, 'crm/purchaseorder/'))
+				
+				.when('/dashboard/crm/addreceipt/:id?', route.resolve({controller:'receipt', template: 'addreceipt',label:"Receipt"}, 'crm/receipt/'))
+				
+				.when('/dashboard/crm/receiptlist', route.resolve({controller:'receipt', template: 'receiptlist',label:"Receipt"}, 'crm/receipt/'))
+				
 				.when('/dashboard/property', route.resolve({controller: 'property', template: 'property',
 				 label: "Property"}, 'property/'))
 				 
@@ -110,7 +126,8 @@ define(['angular',
 				.when('/dashboard/excel', route.resolve({controller: 'excel',template: 'excel',label:"Excel Management"}, 'excel/'))
 				
 				.when('/dashboard/training/:id?', route.resolve({controller: 'training',template: 'training',label: "Training"}, 'training/'))
-					
+				
+				.when('/dashboard/crm', route.resolve({controller: 'accounting',template: 'accounting',label: "CRM"}, 'crm/'))
                 .otherwise({ redirectTo: '/' });
 				
 	}]);
