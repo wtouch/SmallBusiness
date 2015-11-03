@@ -1,7 +1,7 @@
  {% spaceless %}
 <!DOCTYPE html>
 <!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="wtouchSite">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,28 +19,35 @@
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
 		<script>
-$(document).ready(function(){
-				
-			$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
-			$("nav>div>div>ul>li:nth-child(3)").addClass("m33");
-			$("nav>div>div>ul>li:nth-child(2)").addClass("m22");
-			$("nav>div>div>ul>li:nth-child(4)").addClass("m44");
-			$("nav>div>div>ul>li:nth-child(5)").addClass("m55");
-			
-			if($(nav>div>div>ul>li:nth-child(4)).hasClass("active")){
-			$("nav>div>div>ul>li:nth-child(4)").removeClass("m44");
-			$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
-			$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
-			$("nav>div>div>ul>li:nth-child(3)").removeClass("m33");
-			$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
-			$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
-			$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
-			$("nav>div>div>ul>li:nth-child(2)").removeClass("m22");
-			$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
-			$("nav>div>div>ul>li:nth-child(5)").removeClass("m55");
-		}
 		
-		$()
+		$(document).ready(function(){
+			$("nav>div>div>ul>li:nth-child(1)>a").click(function(){
+					$("#aboutUs").addClass("aboutus");
+					$("#contactUs").addClass("contact");
+				if($(this).hasClass("m1")){
+					$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
+					$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
+					$("nav>div>div>ul>li:nth-child(3)").addClass("m33");
+					$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
+					$("nav>div>div>ul>li:nth-child(2)").addClass("m22");
+					$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
+					$("nav>div>div>ul>li:nth-child(4)").addClass("m44");
+					$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
+					$("nav>div>div>ul>li:nth-child(5)").addClass("m55");
+					$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
+				}else{
+					$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
+					$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
+					$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
+					$("nav>div>div>ul>li:nth-child(3)").removeClass("m33");
+					$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
+					$("nav>div>div>ul>li:nth-child(2)").removeClass("m22");
+					$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
+					$("nav>div>div>ul>li:nth-child(4)").removeClass("m44");
+					$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
+					$("nav>div>div>ul>li:nth-child(5)").removeClass("m55");
+			}
+	});
 		
 	});
 </script>
@@ -71,7 +78,16 @@ $(document).ready(function(){
 		</nav>
 		<div class="container">
 			<div class="col-md-12">
-					{%include contentPath%}
+				<!-- <div id="aboutUs">
+					{% include [templatePath ~ '/about-us.html', 'default/default/about-us.html'] %}
+				</div> -->
+				<!-- <div id="apnasite">
+					{% include [templatePath ~ '/page.html', 'default/default/page.html'] %}
+				</div> -->
+				<div id="contactUs">
+					{% include [templatePath ~ '/contact-us.html', 'default/default/contact-us.html'] %}
+				</div>
+				
 			</div>
 		</div>
 <!-- 		<section class="row">
@@ -87,5 +103,5 @@ $(document).ready(function(){
 					 </div>
 				</section> -->
  </body>
-</html> 
+</html>
 {% endspaceless %}

@@ -29,13 +29,20 @@
 				(isset($_GET['name'])) ? $like['name'] = $_GET['name'] : "";
 			} 
 			(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : "";
-		
+			if(isset($_GET['user_id'])) $userId = $_GET['user_id'];
+			
+			$userCols['name'] = "name";
+			$userCols['username'] = "username";
+			$user = $db->getUsers($userId,$userCols);
+			
 			$db->setLimit($limit);
-			$table = $db->setTable("training");
+			
+			$table = $db->setJoinString("INNER JOIN", "training", array("user_id"=>$user.".id"));
 			$db->setWhere($where, $table);
 			$db->setWhere($like, $table, true);
-			$selectCols[0] = "*";
-			$db->setColumns($table, $selectCols);
+			$selectInnerJoinCols[0] = "*";
+			$db->setColumns($table, $selectInnerJoinCols);
+			
 			$data = $db->select();
 			echo json_encode($data);
 		}
