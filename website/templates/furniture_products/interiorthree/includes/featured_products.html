@@ -9,8 +9,9 @@
 				{% if x.type == 'product' %}
 					<div class="col-sm-6 col-md-4">
 						<div class="thumbnail">
+						<div class="prodimg"><img class="img-responsive center-block centerblock" src="{{x.product_image.0.file_relative_path}}" alt="..."></div>
 							<h4 class="text-center">{{x.product_service_name}}</h4>
-							<div class="prodimg"><img class="img-responsive center-block centerblock" src="{{x.product_image.0.file_relative_path}}" alt="..."></div>	
+								
 							<div class="description">{{ x.description|length > 75 ?x.description|slice(start, 75) : x.description }}</div>
 							<div class="readmore">
 								<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
