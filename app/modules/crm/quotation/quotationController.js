@@ -33,6 +33,19 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				userDetails : $rootScope.userDetails,
 				userInfo : $scope.userInfo,
+				addquotation : (addquotation) ? x : {},
+				postData : function(addquotation) {
+					addquotation.particular = JSON.stringify(addquotation.particular);
+					addquotation.termsnconditions = JSON.stringify(addquotation.termsnconditions);
+					dataService.post("post/quotation",quotation).then(function(response){
+						if(response.status == "success"){
+							//$scope.getData($scope.currentPage, "quotation", "quotationlist", $scope.params);
+						}
+						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification[response.status]("Add record", response.message);
+					});
+				},
+				
 			};
 			modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 				console.log(result);
