@@ -18,10 +18,11 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		
 		<script>
 		
 		$(document).ready(function(){
-			$("nav>div>div>ul>li:nth-child(1)>a").click(function(){
+			$("nav>div>div>ul>li:nth-child(1)").click(function(){
 					$("#aboutUs").addClass("aboutus");
 					$("#contactUs").addClass("contact");
 				if($(this).hasClass("m1")){
@@ -78,10 +79,10 @@
 		</nav>
 		<div class="container">
 			<div class="col-md-12">
-				<!-- <div id="aboutUs">
+				 <!-- <div id="aboutUs">
 					{% include [templatePath ~ '/about-us.html', 'default/default/about-us.html'] %}
-				</div> -->
-				<!-- <div id="apnasite">
+				</div>
+				 <div id="apnasite">
 					{% include [templatePath ~ '/page.html', 'default/default/page.html'] %}
 				</div> -->
 				<div id="contactUs">
