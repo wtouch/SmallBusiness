@@ -22,9 +22,10 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 	</head>
 	<body>
-<div class="container-fluid">
+
 	<header>
 			<nav class="navbar navbar-default">
+			<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 							<span class="sr-only">Toggle navigation</span>
@@ -41,20 +42,20 @@
 							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 						</ul>
 					</div>
-				
+			</div>
 			</nav>
 	</header>
-</div>
-<div class="container">
-		<div class="row slider1">
-				<div class="col-md-12">
+
+
+		
+				<div >
 					{%if modules.headerModule.carousal %}
 						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
 				</div>
-		</div>
+
 		
-	
+	<div class="container">
 			<div class="content">{% include contentPath %}</div>
 	
 			<div class="row">
@@ -62,11 +63,12 @@
 			</div>
 </div>
 <div class="container-fluid">
-	
 	<div class="ftr">
+		<div>
 			{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+		</div>
 			{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-		</div> 
+	</div> 
 </div>	
 
 			 
