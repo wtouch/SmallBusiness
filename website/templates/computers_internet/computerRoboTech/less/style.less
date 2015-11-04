@@ -2,18 +2,15 @@
 	font-family:'tehuti';
 	src:url('../fonts/tehuti.otf');
 }
-
 @color : #f90;
 @lightcolor : #efefef;
 @darkcolor :#666;
-
 @back : #2A2A2A;
 @darkbackcolor :#ccc;
 @lightbackcolor :#d37f00; 
-
 @colorblack : #000;
 @colorwhite	: #fff;
-	
+
 body{
 	background-color:@colorwhite;
 }
@@ -21,7 +18,6 @@ body{
 header{
 	background-color: @colorblack;
 	clear: both;
-	//position: fixed;
 	display: block;
 	padding: 0;
 	width: 100%;
@@ -32,10 +28,9 @@ header{
     padding-right: 0px;
     padding-left: 0px;
 }
-
 .navbar-default {
 	margin-left:90px;
-	padding: 0;
+	padding:0px;
 	background-color: @color;
 	z-index: 92;
 	border: none;
@@ -76,21 +71,16 @@ header{
 				  transition-duration: 0.3s;
 				  -webkit-transition-timing-function: ease-out;
 				  transition-timing-function: ease-out;
-
 		}
-							
 							&:hover, &:focus, &:active {
-														color: white;
+														color: @colorwhite;
 												}
-
-&:hover:before, &:focus:before,&:active:before {
-  -webkit-transform: scaleY(1);
-  transform: scaleY(1);
-  }
-						
+		&:hover:before, &:focus:before,&:active:before {
+		  -webkit-transform: scaleY(1);
+		  transform: scaleY(1);
+		  }	
 					}
 		.navbar-nav{
-						//	margin-left: 300px;
 				li{
 					margin-left:8px;
 					> ul{
@@ -106,7 +96,6 @@ header{
 							>li{
 								padding: 10px;
 									>a{
-										
 										color : @colorwhite;
 										font: 14px/18px sans-serif;
 										font-style: normal;
@@ -135,19 +124,14 @@ header{
 								color:@colorwhite;
 								background:transparent;
 								border-top:10px solid @colorblack;
-								transition-timing-function: linear;
-								transition: border-top 3s;
 								}
 					}
 				.active>a, .active>a:hover, .active>a:focus{
 					color:@colorwhite;
 					background-color:@colorblack;
-					padding-top: 17px;
-					padding-bottom: 19px;
+					padding-bottom:23px;
 				}
 				>li.child-menu{
-				
-				
 				display: inline-block;
 					  vertical-align: middle;
 					  -webkit-transform: translateZ(0);
@@ -163,7 +147,6 @@ header{
 					  transition-duration: 0.3s;
 
 							&:before{
-						
 									  content: "";
 									  position: absolute;
 									  z-index: -1;
@@ -184,16 +167,14 @@ header{
 									  transition-timing-function: ease-out;
 
 							}
-							
 							&:hover, &:focus, &:active {
 														color: white;
 												}
-
-					&:hover:before, &:focus:before,&:active:before {
-													  -webkit-transform: scaleY(1);
-													  transform: scaleY(1);
-					  }
-				
+							&:hover:before, &:focus:before,&:active:before {
+															  -webkit-transform: scaleY(1);
+															  transform: scaleY(1);
+							  }
+						
 				
 				
 				&::after {
@@ -329,51 +310,40 @@ header{
 			    padding-bottom: 30px;
 			}
 			}
-			
-			
 	}
 	.ftr>div{
 		    position: relative;
 			top: -20px;
-	
 	}
 	.sociallinks{
-				
-				
 				text-align : center;
 				ul{
 					list-style-type: none;
 					padding-left : 0px;
-				li{
-						 display: inline;
-						 a{
-						 
-							width: 36px;
-							height:36px;
-							display:inline-block;
-							margin-left:10px;
-							
-						 
-						 }
+					li{
+							 display: inline;
+							 a{
+								width: 36px;
+								height:36px;
+								display:inline-block;
+								margin-left:10px;
+							 }
 						}
+					}
+						#facebook{
+								background: url("../img/sprite_social.png") 0px 0px;
+								&:hover{
+									background: url("../img/sprite_social.png") 0px -38px;
+										}
 								}
-						#facebook {
-							
-							background: url("../img/sprite_social.png") 0px 0px;
-							&:hover{
-								background: url("../img/sprite_social.png") 0px -38px;
-								}
-						}
 						#google {
-							
-							background: url("../img/sprite_social.png") -114px 0;
-								&:hover{	
-									
-									background: url("../img/sprite_social.png") -114px -38px;
+								background: url("../img/sprite_social.png") -114px 0;
+									&:hover{	
+										
+										background: url("../img/sprite_social.png") -114px -38px;
+									}
 								}
-						}
 						#twitter{
-			
 							background: url("../img/sprite_social.png") -38px  0;
 							&:hover{	
 									background: url("../img/sprite_social.png") -38px -38px;
@@ -390,11 +360,8 @@ header{
 							&:hover{	
 									background: url("../img/sprite_social.png") -152px  -38px;
 								}
-									
 							}
 				}
-	
-	
 	.content{	
 			h1{
 				color:@darkcolor;
@@ -424,25 +391,22 @@ header{
 											width: 45.6%;
 											left: 0.5em;
 											margin-right:-50%;
-										
 								}
-			
 			}
 				h3{
 				color:@darkcolor;
 				text-align:left;
 				font:30px/25px  tehuti,Arial,Helvetica,sans-serif;
-			
 			}
-.contact{
-	color:@darkcolor;
-	text-align:left;
-	p{
-	margin: 15px 0 16px;
-font: 14px/19px Helvetica, sans-serif;
-	}
-			
-}
+		.contact{
+			color:@darkcolor;
+			text-align:left;
+			p{
+			margin: 15px 0 16px;
+		font: 14px/19px Helvetica, sans-serif;
+			}
+					
+		}
 				.tagline{
 						color:@darkcolor;
 						font-weight:bold;
@@ -476,7 +440,7 @@ font: 14px/19px Helvetica, sans-serif;
 	.enquiry{
 	h3{
 	    font: 48px/25px tehuti, Arial, Helvetica, sans-serif;
-	}
+		}
 	}
 	.featured_services{
 						.data{
@@ -512,12 +476,8 @@ font: 14px/19px Helvetica, sans-serif;
 										
 								}
 						}
-						
 	}
-
-
 		.nav{
-			
 					>li{
 					a{
 						color:@color;
@@ -527,9 +487,7 @@ font: 14px/19px Helvetica, sans-serif;
 							}
 						}
 					}
-			
 		}
-	
 	.infrastructure{
 			background-color:@lightcolor;
 				.Ititle{
@@ -537,8 +495,7 @@ font: 14px/19px Helvetica, sans-serif;
 							padding: 35px 0 0;
 							color:@darkcolor;
 							    font: 48px/25px tehuti, Arial, Helvetica, sans-serif;
-					
-								&::before{
+								/*&::before{
 								    right: 0.5em;
 										background-color:@darkbackcolor;
 										content: "";
@@ -546,7 +503,6 @@ font: 14px/19px Helvetica, sans-serif;
 										height: 1px;
 										vertical-align: middle;
 										width: 43%;
-									
 								}
 								&::after{
 										    background-color: @darkbackcolor;
@@ -557,19 +513,12 @@ font: 14px/19px Helvetica, sans-serif;
 											width: 29.4%;
 											left: 0.5em;
 											margin-right:-50%;
-										
-								}
-							
-						
+								}*/
 						}
 							p{
 							    font: 14px/19px Arial, Helvetica, sans-serif;
-							
 							text-align:justify;
-						
-								}
-								
-	
+							}
 	}
 	.infrastructr{
 		.infrastruct{
@@ -577,7 +526,6 @@ font: 14px/19px Helvetica, sans-serif;
 				border:1px solid @darkbackcolor;
 				border-radius:0px;
 				padding:0px;
-					
 							img{
 								width:100%;
 								height:200px;
@@ -586,8 +534,6 @@ font: 14px/19px Helvetica, sans-serif;
 								opacity:0.8;
 								}
 							}
-				
-					
 					a{
 							&:hover{
 									color:@colorblack;
@@ -601,12 +547,9 @@ font: 14px/19px Helvetica, sans-serif;
 					h4{
 					font: 40px/25px tehuti, Arial, Helvetica, sans-serif;
 					}
-				
-	
 	}
 	}
 	.thumbnail{
-			
 				border:1px solid @darkbackcolor;
 				border-radius:0px;
 				padding:0px;
@@ -632,7 +575,6 @@ font: 14px/19px Helvetica, sans-serif;
 								overflow:hidden;
 					    font: 14px/19px Arial,Helvetica,sans-serif;
 						    text-align: justify;
-						
 								h3{
 						        margin: 0 0 6px 0;
 								padding: 0;
@@ -667,35 +609,25 @@ font: 14px/19px Helvetica, sans-serif;
 													}
 								}
 					}
-					
 	}
 	.contact{
 		.table{
-		
 		background:url('../img/divide.png');
 		background-position:right;
 		background-repeat:no-repeat;
 		}
-	
 	}
 	.form{
-				
 				float:left;
 				width:350px;
 				color : @back;
 				//border:2px solid @colorblack;
 				margin-top:-60px;
-			
-				
 	}
 	.image{
-	
 		float:right;
 		height:200px;
 		margin-top:-60px;
-		
-		
-		
 	}
 	.panel{
 				border:none;
@@ -707,7 +639,7 @@ font: 14px/19px Helvetica, sans-serif;
 	.img1{
 		width:100%;
 		height:100%;
-	}
+		}
 	}
 	h2{
 	text-align:left;
@@ -720,23 +652,18 @@ font: 14px/19px Helvetica, sans-serif;
 		}
 	}
 	.send{
-	
 	background-color:@color;
 	color:@colorwhite;
 	&:hover{
 	background-color:@colorblack;
 	color:@colorwhite;
+		}
 	}
-	}
-	
 	@media (max-width:768px){
 		.navbar-brand{
 			float:none;
 		}
 	}
-	
-
-	
 	@media (max-width:320px){
 			.navbar-default{
 					margin-left:0px;
@@ -747,13 +674,8 @@ font: 14px/19px Helvetica, sans-serif;
 							}
 							.navbar-default .navbar-toggle .icon-bar{
 							background-color:@colorwhite;
-							
 							}
-							
-							
-				
 		}
-		
 		@media (max-width:320px){
 						.fstitle{
 								&::before{
@@ -764,17 +686,24 @@ font: 14px/19px Helvetica, sans-serif;
 										height: 1px;
 										vertical-align: middle;
 										width: 0%;
-									
 								}
-								
 								&::after{
 									content:"";
-								
 								}
 							}
 }
-	@media (min-width: 768px){
-.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-    margin-left: -61px;
-}
-}
+		@media (min-width: 768px){
+		.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+			margin-left: -61px;
+						}
+		}
+		.item{
+		height:400px;
+		overflow:hidden;
+			img{
+					min-height:400px;
+					width:100%;
+					
+			}
+		
+		}
