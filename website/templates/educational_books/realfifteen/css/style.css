@@ -430,7 +430,7 @@
   width: 100px;
 }
 .bxslider li .projimg {
-  height: 175px;
+  height: 150px;
   overflow: hidden;
   padding: 6px;
   border: 2px solid transparent;
@@ -438,7 +438,7 @@
 .bxslider li .projimg img {
   min-height: 175px;
 }
-.bxslider li .projimg:hover {
+.bxslider li .projimg img:hover {
   border: 2px solid #f3dc96;
 }
 .bxslider li a h4 {
@@ -676,6 +676,23 @@
 .projlist .project .projImg {
   margin-right: 20px;
   max-height: 175px;
+}
+.project .projectgallery .thumbnail {
+  background: none;
+  padding-top: 15px;
+  border-color: #0260a5;
+}
+.project .projectgallery .thumbnail .projectImags {
+  margin-right: 20px;
+  height: 150px;
+  width: 100%;
+}
+.project .projectgallery .thumbnail .projectImags img {
+  height: 150px;
+  width: 100%;
+}
+.project .projectgallery .thumbnail .caption {
+  height: 150px;
 }
 @media (max-width: 768px) {
   .homeproject .projectCarousal {
@@ -1005,7 +1022,7 @@ a:hover,
   display: none;
   position: absolute;
   width: 245px;
-  z-index: 999;
+  z-index: 9999;
   /*background : linear-gradient(@back, @color);*/
   /*background-color:@darkbackcolor;*/
   background: linear-gradient(#6479f5, #0260a5 3%);
@@ -1219,5 +1236,32 @@ footer {
     top: 0px;
     border: 1px solid #094688;
     color: #ffffff;
+  }
+}
+@media (max-width: 768px) {
+  .homeproject::after {
+    display: none;
+  }
+}
+@media (max-width: 768px) and (max-width: 728px) {
+  .featuredProperty .bxslider1 li .verify {
+    width: 40%;
+    border: none;
+    margin-left: 10px;
+    position: absolute;
+    right: 189px;
+    bottom: -28px;
+    z-index: 999;
+  }
+}
+@media (max-width: 768px) and (min-width: 320px) and (max-width: 428px) {
+  .featuredProperty .bxslider1 li .verify {
+    width: 40%;
+    border: none;
+    margin-left: 10px;
+    position: absolute;
+    right: 33px;
+    bottom: -17px;
+    z-index: 999;
   }
 }

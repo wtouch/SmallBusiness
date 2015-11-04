@@ -1,0 +1,176 @@
+	@font-face{
+		font-family:'Amaranth-Regular';
+		src:url('../fonts/Amaranth-Regular.otf');
+	}
+	@font-face{
+		font-family:'QumpellkaNo12';
+		src:url('../fonts/QumpellkaNo12.otf');
+	}
+	
+	
+	@color : #24600B;
+	@darkcolor : #ef0b56;
+	@back:#262626;
+	@colorblack : #02071A;
+	@colorwhite	: #fff;
+	@lightbackcolor:#DDDDDD;
+	@darkbackcolor:rgb(175, 31, 84);
+	@bimg: url('../img/bg_main.jpg');
+	@logobgimg: url('../img/logo.png');
+	@trangle: url('../img/arr_bg.png');
+	@bullet: url('../img/bullet.png');
+	
+	@import "product.less";
+	@import "property.less";
+	@import "general.less";
+	
+	hr{
+			border-top:none;
+			}
+	.navbar{
+		height:110px;
+	
+	}
+	.navbar-toggle {
+		border : 1px solid ;
+		margin-top : 45px;
+	}
+	.navbar-toggle .icon-bar {
+		background-color: @darkcolor;
+	}
+	.navbar-default .navbar-nav>.active>a{
+		background-color: @darkcolor !important;
+		color : @colorwhite !important;
+	}
+	.navbar-default {
+		border: 1px solid @back;
+		background-color:@back;
+			.navbar-brand{
+						color:@colorwhite;
+						margin-top: 2%;
+						margin-left: 10%;
+						font-size: 216%;
+						font-weight: 900;
+						}
+			
+		.navbar-nav{
+			> li{
+				position : relative;
+				margin-top: 4%;
+				padding-left: 50px;
+				font-size: 100%;
+				text-transform: uppercase;
+				a {
+					color :@colorwhite;
+				}
+				
+				a:hover{
+					background-color: @darkcolor !important;
+					color : @colorwhite !important;	
+				}
+				> ul {
+					display: none;
+					position: absolute;
+					width: 160px;
+					z-index: 999;
+					background-color: @back ;
+					padding: 12px 0px 0px 0px;
+					list-style: none;
+					text-align: center;
+					top : 49px;
+					transition : all 500ms ease-in-out;
+					
+					>li{	
+							padding-top:11px;
+							height: 43px;
+							background-color:@colorblack;
+						
+
+					&:hover{
+							background-color:@darkcolor;
+							
+							
+							>a{
+								color:@colorwhite;
+								&:hover{
+									 text-decoration: none;
+								}
+							}
+						}
+					}
+					
+				}
+				&:hover > ul {
+					display: block;
+					
+				}
+			}
+			
+			>li:nth-child(4)>a:hover {
+							background-color: transparent !important;
+							color:@darkcolor !important;
+					}
+			>li:nth-child(4)::after  {
+											 content: "";
+											 width: 5px;
+											 height: 5px;
+											 display: inline-block;
+											 background: transparent;
+											 position: absolute;
+											 top: 70%;
+											 right: 45px;
+											 border-top: 10px solid white;
+											 border-left: 5px solid transparent;
+											 border-right: 5px solid transparent;
+											 border-bottom: 0px solid transparent;
+										}	
+		}
+		
+	}
+	
+	.cont_social{	
+					height:327px;
+					margin-top:19px;
+					background-color:@lightbackcolor;
+			.map1{
+					height:395px;
+			}
+			.sociallinks{
+				ul{
+					li{
+						    line-height: 58px;
+						a{
+						  img{
+						  height:45px;
+						  }
+						}
+					}
+				}
+			}
+	}
+		  #googleMap{
+		height:395px;
+	             }
+		.carousel-inner>.item>img{
+			ovrflow:hidden;
+			min-height:300px;
+			max-height:400px;
+			width :100%;
+			
+			
+		}
+		span.glyphicon.glyphicon-chevron-right,span.glyphicon.glyphicon-chevron-left 
+         		{
+					display: none;
+					}
+		.carousel-indicators li {
+					display: none;
+		}
+		.slider_height{
+		     box-shadow: 0px 10px 10px @back;
+		}
+		
+			
+.homeAboutus{
+   display:none;
+}

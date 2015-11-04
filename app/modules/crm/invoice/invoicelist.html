@@ -1,0 +1,87 @@
+<div class="row">	
+	<div class="col-sm-12">
+		<div class="main-content">
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>	
+			<ng-include src="'modules/crm/toolbar.html'"></ng-include>	
+				
+			<h3> Invoice Details</h3>
+			
+			<div class="row bottom-space">
+				<div class="col-sm-2"> 
+					<div class="bottomspace">
+						<label for="search" class="control-label">Search </label>
+							<input id="search" type="text" class="form-control" ng-model="searchProper" ng-change="searchFilter('name', searchProper,user_id)" placeholder="search"/>
+					</div>
+				</div>			 				  
+				<div class="col-sm-2">
+					<label for="sort" class="control-label">Sort by Order</label>
+					<select id="sort" class="form-control" ng-model="title"> 
+						<option value="">Select Order</option>	
+						<option value="-name">Desending</option>
+						<option value="name">Asending</option>  
+					</select>
+				</div>
+				<div class="col-sm-2">
+					<label for="status" class="control-label">Filter By Status</label>
+					<select id="status" class="form-control" 
+					ng-change="changeStatus('status',showStatus,user_id)" ng-model="showStatus">
+					<option value="">Select Status</option>	
+						<option value="1">Active</option>
+						<option value="0">Deleted</option>
+					</select>
+				</div>
+				<div class="col-sm-2 pull-right">
+					<label for="status" class="control-label"></label>
+					<a class="btn btn-primary" ng-click="openModel('modules/crm/invoice/addinvoice.html')" tooltip="Add New Invoice">Add New Invoice</a>
+				</div>
+			</div> 
+			
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="table-responsive" ng-init="getTraining(currentPage, user_id)">
+						<table class="table table-bordered ">
+							<thead>
+								<tr>
+									<th>Sr.No.</th>
+									<th>Candidate Name</th>
+									<th>Email</th>
+									<th>Mobile</th>
+									<th>Manage</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<tr ng-repeat="x in training | orderBy:title ">
+									<td>{{((currentPage - 1) * pageItems) + $index + 1}}</td>
+									<td>{{x.name}}</td>
+									<td>{{x.email}}</td>
+									<td>{{x.mobile}}</td>
+									<td class="col-sm-3">
+										<div class="btn-group">	
+											<a ng-click="open('modules/training/singleview.html', x)" class="btn btn-primary glyphicon glyphicon-eye-open" tooltip="View Candidate Details"></a>
+										</a>		
+										</div>												
+										<div class="btn-group">	
+											<button ng-change="update('status',x.status,x.id)" tooltip="{{dynamicTooltip(x.status, 'Delete This','Active')}}" ng-class="(x.status==1) ? 'btn btn-success glyphicon glyphicon-ok' : 'btn btn-danger glyphicon glyphicon-remove'" ng-model="x.status" btn-checkbox btn-checkbox-true="'1'" btn-checkbox-false="'0'"></button>
+										</div>
+										
+										<div class="btn-group">	
+											<a class="btn btn-success" ng-click="openForm('modules/training/form.html',x)" tooltip="Edit Trainee Details">
+												<span class="glyphicon glyphicon-pencil"></span>
+											</a>
+										</div>	
+										
+									</td>
+								</tr>				
+							</tbody>
+						</table>
+					</div>
+				<div class="text-center">				
+					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getTraining(currentPage,8,projectParam)"></pagination>
+					<pre>Page: {{currentPage}} / {{numPages}}</pre>
+				</div>	
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

@@ -1,0 +1,214 @@
+<div id="form"  class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: none;">
+	<div class="modal-backdrop fade in" style="height: 697px;"></div>
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="text-center"> Apply here</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="panel panel-body">
+							<form class="form-horizontal" name="addtrainingForm" role="form" ng-submit="addtrainingForm.$valid" novalidate>
+								<div class="form-group">
+									<label for="name" class="col-sm-2 control-label">Name *</label>
+									<div class="col-sm-4">
+										<input type="hidden" ng-model="addtraining.status" ng-init="addtraining.status = 1" >
+										<input type="hidden" ng-model="addtraining.user_id" ng-init="addtraining.user_id = 9" >
+										<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="addtraining.name" required>
+										 <span class="help-block" ng-show="addtrainingForm.name.$dirty && addtrainingForm.name.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.name.$error.required">Required Field.</span> 
+										 </span>
+									</div>
+									<label for="surname" class="col-sm-2 control-label">Surname*</label>
+									<div class="col-sm-4">
+										<input type="text" id="surname" class="form-control" name="surname" placeholder="Surname" ng-model="addtraining.surname" required>
+										<span class="help-block" ng-show="addtrainingForm.surname.$dirty && addtrainingForm.surname.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.surname.$error.required">Required Field.</span>
+										</span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="custom" class="col-sm-2 control-label">Marital Status</label>
+									<div class="col-sm-4">
+										<label class="radio-inline">
+											<input type="radio" name="marital_status" id="Married" value="married" ng-model="addtraining.marital_status">Married
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="marital_status" id="Single" value="single"  ng-model="addtraining.marital_status" ng-init="addtraining.marital_status='single'">Single
+										</label>
+									</div>
+			
+									<label  for="dob" class="col-sm-2 control-label">DOB*</label>
+									<div class="col-sm-4">
+											<input type="date" class="form-control" id="date" placeholder="date" ng-model="addtraining.dob" required />
+										
+										<span class="help-block" ng-show="addtrainingForm.dob.$dirty && addtrainingForm.dob.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.dob.$error.required || submitted">Date of birth required in YYYY-DD-MM format.</span>
+										</span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="mobile" class="col-sm-2 control-label">Mobile *</label>
+									<div class="col-sm-4">
+										<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addtraining.mobile" placeholder="Enter Mobile No." ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+										<span class="help-block" ng-show="addtrainingForm.mobile.$dirty && addtrainingForm.mobile.$invalid">
+											<span ng-show="addtrainingForm.mobile.$error.required" class="text-danger">Required Field.</span>
+											<span ng-show="addtrainingForm.mobile.$error.pattern && (addtrainingForm.mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
+										</span>
+									</div>
+									
+									<label  for="email" class="col-sm-2 control-label">Email</label>
+									<div class="col-sm-4">
+										<input type="Email" class="form-control" id="email" ng-model="addtraining.email" ng-pattern="/^[\.\w]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" name="email" placeholder="Enter Email">
+										
+										<span class="help-block" ng-show="addtrainingForm.email.$dirty && addtrainingForm.email.$invalid">
+										
+											<span ng-show="addtrainingForm.email.$error.pattern && (addtrainingForm.email.$dirty || submitted)" class="text-danger">Enter a valid email</span>
+										
+											<span ng-show="addtrainingForm.email.$error.required" class="text-danger">Required Field.</span>
+										</span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="type" class="col-sm-2 control-label">Training Period *</label>
+									<div class="col-sm-10">
+										<select class="form-control" name="period" id="period" ng-model="addtraining.period" required>
+											<option value="">Select Training Period</option>
+											<option value="One Month">One Month</option>
+											<option value="Two Month">Two Month</option>
+											<option value="Three Month">Three Month</option>
+											<option value="Enternship">Enternship</option>
+											
+										</select>
+										<span class="block" ng-show="addtrainingForm.period.$invalid && addtrainingForm.period.$dirty">
+											<span ng-show="addtrainingForm.period.$error.required" class="text-danger">Required Field.</span>
+										</span>
+									</div>
+								</div>
+	
+								<div class="form-group">
+									<label  for="doj" class="col-sm-2 control-label">DOJ*</label>
+									<div class="col-sm-10">
+										<input type="date" class="form-control" id="date1" placeholder="date" ng-model="addtraining.doj" required />
+									</div>
+									
+								</div>
+								
+								<div class="form-group">
+									<label for="custom" class="col-sm-2 control-label">Sex</label>
+									<div class="col-sm-4">
+										<label class="radio-inline">
+											<input type="radio" name="sex" id="Male" value="male" ng-model="addtraining.sex" ng-init="addtraining.sex ='male'">Male
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="sex" id="Female" value="female"  ng-model="addtraining.sex">Female
+										</label>
+									</div>
+								</div>
+							
+								
+								<div class="form-group">
+									<label for="address" class="col-sm-2 control-label">Address *</label>
+									<div class="col-sm-10">
+										<textarea  class="form-control" id="address" ng-model="addtraining.address" name="address" placeholder="Enter address" ng-maxlength="150" required></textarea>
+										<p ng-hide="addtrainingForm.address.$error.maxlength">{{ 150 - addtraining.address.length + " Chars left" }}</p>
+										<span class="help-block" ng-show="addtrainingForm.address.$dirty &&  addtrainingForm.address.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+											<span class="text-danger" ng-show="addtrainingForm.address.$error.required">Required Field.</span>
+										</span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="state" class="col-sm-2 control-label">State *</label>
+									<div class="col-sm-4">
+										<input type="text" id="state" name="state" class="form-control" ng-model="addtraining.state" placeholder="Enter state" required/>
+										<span class="help-block" ng-show="addtrainingForm.state.$dirty && addtrainingForm.state.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.state.$error.required">Required Field.</span>
+										</span>			
+									</div>	
+									<label for="city" class="col-sm-2 control-label">City *</label>
+									<div class="col-sm-4" >
+										<input type="text" name="city" id="city" ng-model="addtraining.city"placeholder="Enter Your City" class="form-control" required/>
+										<span class="help-block" ng-show="addtrainingForm.city.$dirty && addtrainingForm.city.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.city.$error.required">Required Field.</span>
+										</span>			
+									</div>							
+								</div>
+								<div class="form-group">
+									<label for="technologies" class="col-sm-2 control-label">Technologies*</label>
+									<div class="form-group"> 
+										<div class="col-sm-2">
+											<label for="html"class="control-label">
+												<input type="checkbox" name="technologies" value="HTML" id="html" ng-model="addtraining.technologies.HTML">HTML
+											</label>
+										</div>
+										<div class="col-sm-2">
+											<label for="css"class="control-label">
+												<input  id="css" type="checkbox" name="technologies" value="CSS" ng-model="addtraining.technologies.CSS">CSS
+											</label>
+										</div>
+										<div class="col-sm-2">
+											<label for="Javascript" class="control-label">
+												<input type="checkbox" id="Javascript" name="technologies" value="Javascript" ng-model="addtraining.technologies.Javascript">Javascript
+											</label>
+										</div>
+										<div class="col-sm-2">
+											<label for="BOOTSTARP"class="control-label">
+												<input type="checkbox"id="BOOTSTARP" name="technologies" value="Bootstrap" ng-model="addtraining.technologies.Bootstrap">Bootstrap
+											</label>
+										</div>
+									</div>
+									<label for="technologies" class="col-sm-2 control-label"></label>
+									<div class="form-group"> 
+										<div class="col-sm-2">
+											<label for="angular" class="control-label">
+												<input type="checkbox"id="angular" name="technologies" value="Angular" ng-model="addtraining.technologies.Angular">Angular
+											</label>
+										</div>
+										<div class="col-sm-2">
+										<label for="php"class="control-label">
+											<input type="checkbox" id="php" name="technologies" value="PHP" ng-model="addtraining.technologies.PHP">PHP
+										</label>
+										</div>
+										<div class="col-sm-2">
+										<label for="andriod"class="control-label">
+											<input type="checkbox" id="andriod"name="technologies" value="Android" ng-model="addtraining.technologies.Android">Android
+										</label>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="remark" class="col-sm-2 control-label">Remark *</label>
+									<div class="col-sm-10">
+										<textarea  class="form-control" id="remark" ng-model="addtraining.remark" name="remark" placeholder="Enter remark" ng-maxlength="350" required></textarea>
+										<p ng-hide="addtrainingForm.remark.$error.maxlength">{{ 350 - addtraining.remark.length + " Characters left"}}</p>
+										<span class="help-block" ng-show="addtrainingForm.remark.$dirty &&  addtrainingForm.remark.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+											<span class="text-danger" ng-show="addtrainingForm.remark.$error.required">Required Field.</span>
+										</span>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-9">
+										<button type="submit"ng-disabled="addtrainingForm.$invalid" class="btn btn-success" ng-click="postData(addtraining)" data-dismiss="modal" ng-if="!editUserId">Submit </button>
+										<button type="reset" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					
+				</div>
+			</div>
+		</div>
+	</div>

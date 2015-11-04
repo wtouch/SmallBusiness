@@ -1,0 +1,183 @@
+<div class="container-fluid" ng-controller="trainingController">
+	<div class="row">
+		<div class="col-sm-12 training">
+			<h2 class="text-center"> Saksham Web Touch Pvt. Ltd.</h2>
+			<p class="text-center">Flat No. 12, Bajirao Classic Building,
+Beyond datta mandir,Pavana Sahkari Bank Kalewadi Fata,
+Pimpari-Chinchwad,Pune,
+Maharashtra 411 033.</p>
+			<h3 class="text-center">Training Activity</h3>
+		</div>
+	</div>
+	
+	<div class="row" ng-if="isSend==true">
+		<div class="col-md-12 clr">
+			<h3> Your Application Sent successfully....</h3>
+		</div>
+	</div>
+
+	<div class="row training" ng-controller="trainingController">
+		<div class="col-sm-3">
+			<div class="parent text-center">
+				<img src="{{path}}img/1.png" class="img img-responsive center-block">
+				<input type="button" data-toggle="modal" data-target="#detail1" class="btn btn-info" value="Details">
+				<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="parent text-center">
+				<img src="{{path}}img/2.png" class="img img-responsive center-block">
+				<input  type="button"data-toggle="modal" data-target="#detail2" class="btn btn-info" value="Details">
+				<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
+			</div>
+		</div>
+		<div class="col-sm-3 text-center">
+			<div class="parent">
+				<img src="{{path}}img/3.png" class="img img-responsive center-block">
+				<input  type="button"data-toggle="modal" data-target="#detail3" class="btn btn-info" value="Details">
+				<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
+			</div>
+		</div>
+		<div class="col-sm-3 text-center">
+			<div class="parent">
+				<img src="{{path}}img/11.png" class="img img-responsive center-block">
+				<input  type="button"data-toggle="modal" data-target="#detail4" class="btn btn-info" value="Details">
+				<button  data-toggle="modal" data-target="#form" type="button"  class="btn btn-info" value="Apply">Apply</button>
+			</div>
+		</div>
+		{% include [templatePath ~ '/training/detail1.html'] %}
+		{% include [templatePath ~ '/training/details2.html'] %}
+		{% include [templatePath ~ '/training/details3.html'] %}
+	</div>
+<<<<<<< HEAD
+
+
+<div id="form" ng-if="isSend==false" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: none;">
+	<div class="modal-backdrop fade in" style="height: 697px;"></div>
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="text-center"> Apply here</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">X</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="panel panel-body">
+							<form class="form-horizontal" name="addtrainingForm" role="form" ng-submit="addtrainingForm.$valid" novalidate>
+								<div class="form-group">
+									<label for="name" class="col-sm-2 control-label">Name *</label>
+									<div class="col-sm-4">
+										<input type="hidden" ng-model="addtraining.status" ng-init="addtraining.status = 1" value="{{addtraining.status}}">
+										<input type="hidden" ng-model="addtraining.user_id" ng-init="addtraining.user_id = 9" value="{{addtraining.user_id}}">
+										
+										<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="addtraining.name" required>
+										 <span class="help-block" ng-show="addtrainingForm.name.$dirty && addtrainingForm.name.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.name.$error.required">Required Field.</span> 
+										 </span>
+									</div>
+									<label for="surname" class="col-sm-2 control-label">Surname*</label>
+									<div class="col-sm-4">
+										<input type="text" id="surname" class="form-control" name="surname" placeholder="Surname" ng-model="addtraining.surname" required>
+										<span class="help-block" ng-show="addtrainingForm.surname.$dirty && addtrainingForm.surname.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.surname.$error.required">Required Field.</span>
+										</span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="custom" class="col-sm-2 control-label">Marital Status</label>
+									<div class="col-sm-4">
+										<label class="radio-inline">
+											<input type="radio" name="martial" id="Married" value="1" ng-model="addtraining.marital_status">Married
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="martial" id="Single" value="0"  ng-model="addtraining.marital_status" ng-init="addtraining.marital_status='0'">Single
+										</label>
+									</div>
+			
+									<label  for="dob" class="col-sm-2 control-label">DOB*</label>
+									<div class="col-sm-4">
+											<input type="date" class="form-control" id="date" placeholder="date" ng-model="addtraining.dob" required />
+										
+										<span class="help-block" ng-show="addtrainingForm.dob.$dirty && addtrainingForm.dob.$invalid">
+											<span class="text-danger" ng-show="addtrainingForm.dob.$error.required || submitted">Date of birth required in YYYY-DD-MM format.</span>
+										</span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="mobile" class="col-sm-2 control-label">Mobile *</label>
+									<div class="col-sm-4">
+										<input type="text" id="mobile" name="mobile" class="form-control" ng-model="addtraining.mobile" placeholder="Enter Mobile No." ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+										<span class="help-block" ng-show="addtrainingForm.mobile.$dirty && addtrainingForm.mobile.$invalid">
+											<span ng-show="addtrainingForm.mobile.$error.required" class="text-danger">Required Field.</span>
+											<span ng-show="addtrainingForm.mobile.$error.pattern && (addtrainingForm.mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
+										</span>
+									</div>
+									
+									<label  for="email" class="col-sm-2 control-label">Email</label>
+									<div class="col-sm-4">
+										<input type="Email" class="form-control" id="email" ng-model="addtraining.email" ng-pattern="/^[\.\w]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" name="email" placeholder="Enter Email">
+										
+										<span class="help-block" ng-show="addtrainingForm.email.$dirty && addtrainingForm.email.$invalid">
+										
+											<span ng-show="addtrainingForm.email.$error.pattern && (addtrainingForm.email.$dirty || submitted)" class="text-danger">Enter a valid email</span>
+										
+											<span ng-show="addtrainingForm.email.$error.required" class="text-danger">Required Field.</span>
+										</span>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label for="type" class="col-sm-2 control-label">TrainingPeriod *</label>
+									<div class="col-sm-10">
+										<select class="form-control" name="period" id="period" ng-model="addtraining.period" required>
+											<option value="">Select Training Period</option>
+											<option value="One Month">One Month</option>
+											<option value="Two Month">Two Month</option>
+											<option value="Three Month">Three Month</option>
+											<option value="Enternship">Enternship</option>
+											
+										</select>
+										<span class="block" ng-show="addtrainingForm.period.$invalid && addtrainingForm.period.$dirty">
+											<span ng-show="addtrainingForm.period.$error.required" class="text-danger">Required Field.</span>
+										</span>
+									</div>
+								</div>
+=======
+>>>>>>> single view controller is created  for training
+	
+	{% include [templatePath ~ '/training/form.html'] %}
+
+<!-- details 4 -->
+	<div id="detail4" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false" style="display: none;">
+		<div class="modal-backdrop fade in" style="height: 697px;"></div>
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3> for One month</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-12">
+						<ul>
+							<li>html css</li>
+							<li>html css</li>
+							<li>html css</li>
+							<li>html css</li>
+						</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+			</div>
+		</div>
+<	/div>
+</div>	

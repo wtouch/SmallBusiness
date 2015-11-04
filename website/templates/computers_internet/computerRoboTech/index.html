@@ -1,0 +1,76 @@
+ {% spaceless %}
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
+		
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}">
+	</head>
+	<body>
+<div class="container-fluid">
+	<header>
+			<nav class="navbar navbar-default">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<div class="brand">  
+						<a class="navbar-brand" href="#">{{data.business_name}}</a>
+						</div>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-right">
+							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+						</ul>
+					</div>
+				
+			</nav>
+	</header>
+</div>
+<div class="container">
+		<div class="row slider1">
+				<div class="col-md-12">
+					{%if modules.headerModule.carousal %}
+						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+				</div>
+		</div>
+		
+	
+			<div class="content">{% include contentPath %}</div>
+	
+			<div class="row">
+				 {% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %} 
+			</div>
+</div>
+<div class="container-fluid">
+	
+	<div class="ftr">
+			{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+			{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+		</div> 
+</div>	
+
+			 
+			
+	</body>
+</html> 
+{% endspaceless %}
