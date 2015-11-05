@@ -1,0 +1,256 @@
+.featuretab{
+		margin-top : 20px;
+		.tab-content{
+			border : 1px solid @darkbackcolor;
+			border-top : none;
+			position: relative;
+			margin-bottom: 25px;
+			padding : 1px 20px 15px;
+			background: -webkit-gradient(linear, left top, right top, from(@lightbackcolor), to(@colorwhite));
+			background-image: -webkit-linear-gradient(left, @lightbackcolor 90, @colorwhite 20%);
+		}
+		.nav-tabs{
+			border-bottom: 1px solid @darkbackcolor;
+			li{
+				a{
+					border : 1px solid @darkcolor;
+					background : @darkbackcolor;
+					color : @colorwhite;
+					&:hover{
+						background-color : @lightcolor;
+						border : 1px solid @darkbackcolor;
+						color:@colorwhite;
+					}
+				}
+				&.active>a, &.active>a:hover, &.active>a:focus{
+						background-color : @lightcolor;
+						border : 1px solid @darkbackcolor;
+						color:@colorwhite;
+				}
+			}
+		}
+	}
+.mailSentMsg{
+	font: 1.2em/2.5em QumpellkaNo12;
+	border:1px solid @lightcolor;
+	padding:10px;
+}
+
+.sidebarModule{
+	&.sidemenu{
+		padding:35px 35px 25px;
+		color: @lightcolor;
+		border : none;
+		top: -5px;
+		background: -webkit-gradient(linear, left top, right top, from(@lightbackcolor), to(@colorwhite));
+		background-image: -webkit-linear-gradient(left, @lightbackcolor 90,  @colorwhite 20%);
+		ul{
+			padding : 0;
+			list-style : none;
+			li{
+				margin-bottom : 10px;
+			}
+		}
+		a{
+			display : inline-block;
+			height : 90px;
+			width : 98%;
+			background-size:100% 100%;
+			background-repeat : no-repeat;
+			background-position: center; 
+			text-indent : -9999px;
+			overflow : hidden;
+			&.area_converter{
+				background-image : url('../img/area-converter.png');
+			}
+			&.emi_calculator{
+				background-image : url('../img/emi-calculator.png');
+			}
+			&.post_your_property{
+				background-image : url('../img/post-your-property.jpg');
+			}
+			&.post_your_requirement{
+				background-image : url('../img/post-your-requirement.jpg');
+			}
+		}
+	}
+}
+
+	//aboutus page css
+	.sidebar{
+		.nav-pills{
+			background-color:@darkbackcolor;
+			>li{
+				border-right : 1px solid @lightbackcolor;
+				>a, > a:focus{
+					color : @colorwhite;
+					font : bold 15px/1em Arial, Helvetica, sans-serif;
+					position : relative;
+					text-transform : uppercase;
+					border : 1px solid transparent;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					color : @colorwhite;
+					background-color:@lightcolor;
+				}
+			}
+		}
+		
+	}
+	.about, .contact{
+		.table{
+			
+			tbody{
+				tr{
+					th,td{
+						border-color : @darkbackcolor;
+					}
+				}
+			}
+		}
+	}
+	.about{
+		.table{
+			margin-top: 20px;
+		}
+	}
+	.infrastructure{
+		.thumbnail{
+			height: 330px;
+			img{
+				height : 116px;
+			}
+			.caption{
+				height: 155px;
+				overflow : hidden;
+				margin-bottom : 10px;
+			}
+		}
+	}
+	//contactus page css
+	.contact{
+		
+		padding:15px;
+		img{
+			max-height: 125px;
+		}
+		h4{
+			margin-top : 0px;
+		}
+	}
+	#googleMap{
+		height:395px;
+	}
+	
+	
+	//testimonials
+	.testimonial, .featrtesti{
+		blockquote{
+			font-size : inherit;
+			border-left: none;
+			footer{
+				background:none;
+				padding : 0px;
+				cite{
+					font-size : 17px;
+					color : @color;
+				}
+			}
+			&::before{
+				content : '\201c';
+				position : absolute;
+				display : inline-block;
+				top : 5px;
+				left : 0;
+				line-height : 40px;
+				font-family : Times New Roman,Serif;
+				font-size : 55px;
+			}
+		}
+	}
+	.testimonial{
+		
+		blockquote{
+			padding-left : 15px;
+			footer{
+				img{
+					max-height: 70px;
+					width: 70px;
+					margin-right : 10px;
+				}
+			} 
+		}
+	}
+	.featrtesti{
+		blockquote{
+			padding : 5px 15px;
+		}
+		img{
+			max-height : 100px;
+			padding : 4px;
+			border : 3px solid @lightcolor;
+			&:hover{
+				border : 3px solid @color;
+			}
+		}
+	} 
+	
+	.gallery{
+		padding:10px;
+		
+		.thumbnail{
+			background: -webkit-gradient(linear, left top, right top, from(@lightbackcolor), to(@colorwhite));
+			background-image: -webkit-linear-gradient(left, @lightbackcolor 0%,  @colorwhite 5%);
+			h4{
+				border : none;
+				padding-bottom : 0px;
+			}
+			.description{
+				color:@colorblack;
+			}
+		}
+	}
+		
+	.enquiry{
+		.panel-body{
+			padding-bottom : 0px;
+		}
+	}
+	.contactus{
+		h4{
+			margin-top : 0px;
+			margin-bottom : 0px;
+		}
+	}
+	//gallery
+	@media (min-width: 320px) {
+		.gallery{
+			.thumbnail{
+				height:380px;
+			}
+		}
+	}
+
+	@media (min-width: 992px) { 
+		.gallery{
+			.thumbnail{
+				height:365px;
+				img{
+					max-height : 155px;
+					width:100%;
+				}
+			}
+		}
+	}
+
+	@media (min-width: 1200px){
+		.gallery{
+			.thumbnail{
+				height:380px;
+				img{
+					max-height : 200px;
+					width:100%;
+				}
+			}
+		}
+	}
