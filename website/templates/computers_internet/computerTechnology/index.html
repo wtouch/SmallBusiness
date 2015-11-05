@@ -35,7 +35,33 @@
 					marker.setMap(map);
 				}
 				google.maps.event.addDomListener(window, 'load', initialize);
-			</script>
+</script>				
+<script>				
+function myFunction() {
+				  if (document.body.scrollTop>350) {
+				  
+						  document.getElementById("myP1").className = "contact";
+						document.getElementById("myP").className = "social";
+					
+							
+				   } else {
+					   
+						    document.getElementById("myP1").className = "";
+							document.getElementById("myP").className = "";
+						
+							
+					}
+					if (document.body.scrollTop>150) {
+					document.getElementById("mypage").className = "animation";
+					
+					} else {
+							document.getElementById("mypage").className = "";
+					}
+} 
+window.onscroll = function() {myFunction()};
+</script>
+
+	
 		<!-- {% if data.template_params %}
 			<style>	
 				.singleproperty .propDetails .table tbody tr th ,.featuretab .nav-tabs li a, .navbar-default .navbar-nav > li.active > a,.navbar-default .navbar-nav > li.active:hover > a,.navbar-default .navbar-nav > li.active > a:focus,.navbar-default .navbar-nav > li:hover > a,.navbar-default .navbar-nav > li:hover > a:focus,.form-control, .btn-info, .btn-info[disabled], .btn-primary, .pagination > .active > a,.pagination > .active > span,.pagination > .active > a:hover, .pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus,.btn-info:hover,.btn-info[disabled]:hover,.btn-primary:hover,.featuretab .nav-tabs li a:hover{
@@ -99,8 +125,8 @@
 	</head>
 	
 	<body>
-		<nav class="navbar navbar-default">
-			<div class="container">
+		<nav class="navbar navbar-default navi">
+			<div class="container1">
 				<div class="navbar-header navbar">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span>
@@ -119,46 +145,39 @@
 				</div>
 			</div>
 		</nav>
-			<div class="container">
+	<div class="container">
 			
-					<div class="slider_height">
-					{%if modules.headerModule.carousal %}
-					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-					{%if modules.headerModule.homeproject %}
-					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-					</div>
-				
-			<div class="row">
-				<div class="col-sm-12 content">
-						 {% include contentPath %}
-				</div>
-			</div>
-				 
-					
-			{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+	   <div class="slider_height">
+				{%if modules.headerModule.carousal %}
+				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
+				{%if modules.headerModule.homeproject %}
+				{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
+		</div>
 			
-		
-
-	
-	
-	</div>
-	   
-			<div class="cont_social">
-			<div class="container">
-			<div class="contact">
-							{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-			</div>
-			<div class="social">
-				 {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-			</div>					
-					<div id="googleMap1"></div>	
+	   <div class="row">
+		   <div class="col-sm-12 content">
+			  {% include contentPath %}
 			</div>
 		</div>
-
-
-		  {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+			 
+			<div id="mypage" class="animation2">
+		       {% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+			</div>
+		
+		<div class="cont_social">
+				<div id="myP1">
+					{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+				</div>
+				<div id="myP">
+					 {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+				</div>					
+				<div id="googleMap1"></div>	
+		</div>
+	</div>
+		
+      {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html> 
 {% endspaceless %}
