@@ -15,17 +15,11 @@
 			background-color : green;
 		{% endif %}
 		{% if code == 104 or code == 105 %}
-			background-color : red;
+			background-color : #BA0505;
 		{% endif %}
 		{% if code == 100 %}
 			background-color : #BF1F54;
 		{% endif %}
-	}
-	.coming{
-		height : 250px;
-	}
-	.erorimg{
-		height : 100px;
 	}
 	</style>
 </head>
@@ -53,9 +47,9 @@
 			{% endif %}
 			{% if code == 104 or code == 105 %}
 			<div class="error row">
-				<div class="col-sm-3">
-					<h2>{{code}}</h2>
-					<img class="erorimg" src="{{path}}/img/errorface.png">
+				<div class="col-sm-3 code">
+					<p>{{code}}</p>
+					<img src="{{path}}/img/errorface.png">
 				</div>
 				<div class="col-sm-9">
 					<h2>{{website_status}}</h2>

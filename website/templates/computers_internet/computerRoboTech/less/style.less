@@ -104,6 +104,7 @@ header{
 												border:none;
 												text-decoration: none;
 												color:#f90;
+												
 											}
 										}
 										&:hover >ul{
@@ -124,6 +125,8 @@ header{
 								color:@colorwhite;
 								background:transparent;
 								border-top:10px solid @colorblack;
+								transition-timing-function: linear;
+								transition: border-top 3s;
 								}
 					}
 				.active>a, .active>a:hover, .active>a:focus{
@@ -213,7 +216,7 @@ header{
 							
 								&:hover{
 								background-color:@darkbackcolor;
-								opacity:0.8;
+								
 								}
 							}
 					}
@@ -659,6 +662,38 @@ header{
 	color:@colorwhite;
 		}
 	}
+	.item{
+		//background-color:@darkbackcolor;
+		height:380px;
+		overflow:hidden;
+			img{
+					min-height:380px;
+					width:100%;
+					margin-left:80px;
+					
+			}
+			.carousel-caption {
+			
+			color:@color;
+			right: 20%;
+			left: 40%;
+			padding-bottom: 230px;
+				h2{
+						font-size:30px;
+						text-align:center;
+				}
+			}
+		}
+		.carousel-control.right{
+				background:none;
+		}
+		.carousel-control.left{
+				background:none;
+		}
+		
+		
+		
+		
 	@media (max-width:768px){
 		.navbar-brand{
 			float:none;
@@ -697,13 +732,4 @@ header{
 			margin-left: -61px;
 						}
 		}
-		.item{
-		height:400px;
-		overflow:hidden;
-			img{
-					min-height:400px;
-					width:100%;
-					
-			}
 		
-		}
