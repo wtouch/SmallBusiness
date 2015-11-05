@@ -16,9 +16,26 @@
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script>
 		<script src="{{ path }}js/myscript.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js">
+	</script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		<script>
+				function initialize() {
+					var mapProp = {
+						center:new google.maps.LatLng(51.508742,-0.120850),
+						zoom:12,
+						mapTypeId:google.maps.MapTypeId.ROADMAP
+					};
+					var map=new google.maps.Map(document.getElementById("googleMap1"), mapProp);
+					var marker=new google.maps.Marker({
+						position:new google.maps.LatLng(51.508742,-0.120850),
+					});
+					marker.setMap(map);
+				}
+				google.maps.event.addDomListener(window, 'load', initialize);
+			</script>
 		<!-- {% if data.template_params %}
 			<style>	
 				.singleproperty .propDetails .table tbody tr th ,.featuretab .nav-tabs li a, .navbar-default .navbar-nav > li.active > a,.navbar-default .navbar-nav > li.active:hover > a,.navbar-default .navbar-nav > li.active > a:focus,.navbar-default .navbar-nav > li:hover > a,.navbar-default .navbar-nav > li:hover > a:focus,.form-control, .btn-info, .btn-info[disabled], .btn-primary, .pagination > .active > a,.pagination > .active > span,.pagination > .active > a:hover, .pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus,.btn-info:hover,.btn-info[disabled]:hover,.btn-primary:hover,.featuretab .nav-tabs li a:hover{
@@ -78,23 +95,7 @@
 				}
 			</style>
 		{% endif %} --><!-- next -->
-			<script src="http://maps.googleapis.com/maps/api/js">
-			</script>
-			<script>
-				function initialize() {
-					var mapProp = {
-						center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
-						zoom:12,
-						mapTypeId:google.maps.MapTypeId.ROADMAP
-					};
-					var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
-					var marker=new google.maps.Marker({
-						position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
-					});
-					marker.setMap(map);
-				}
-				google.maps.event.addDomListener(window, 'load', initialize);
-			</script>
+			
 	</head>
 	
 	<body>
@@ -119,8 +120,7 @@
 			</div>
 		</nav>
 			<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-md-12 col-lg-12">
+			
 					<div class="slider_height">
 					{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
@@ -129,37 +129,36 @@
 					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
 					</div>
-				</div>
-			</div> 
+				
 			<div class="row">
 				<div class="col-sm-12 content">
 						 {% include contentPath %}
 				</div>
 			</div>
 				 
-					<div class="row">
-						<div class="col-xs-12 col-md-12 col-lg-12">
-							{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-						</div>
-					</div>
-		
+					
+			{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 			
-			<div class="row cont_social">
-			    <div class="col-xs-12 col-sm-12 col-md-3">
-					{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-				</div>
-					<div class="col-xs-12 col-sm-12 col-md-6">
-						<div id="map1"></div>
-					</div>
-					<div class="col-xs-12 col-sm-12 col-md-3">
-					 {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-					</div>
-				  
+		
+
+	
+	
+	</div>
+	   
+			<div class="cont_social">
+			<div class="container">
+			<div class="contact">
+							{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+			</div>
+			<div class="social">
+				 {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+			</div>					
+					<div id="googleMap1"></div>	
 			</div>
 		</div>
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-		
-	
+
+
+		  {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html> 
 {% endspaceless %}
