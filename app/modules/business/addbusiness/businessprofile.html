@@ -51,9 +51,9 @@
 		<label for="aboutDescription" class="col-sm-3 control-label">About Us*</br>
 		<small>This will show on Website About Us Page</small></label>
 		<div class="col-sm-9">
-			<textarea type="text" class="form-control" id="aboutDescription" name="aboutDescription" ng-model="addbusiness.business_info.aboutDescription" cols="30" rows="4" ng-maxlength="5000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
+			<textarea type="text" class="form-control" id="aboutDescription" name="aboutDescription" ng-model="addbusiness.business_info.aboutDescription" cols="30" rows="4" ng-maxlength="10000" placeholder="Detailed Description of Company" ui-tinymce required></textarea>
 				<p ng-hide="businessProfileForm.aboutDescription.$error.maxlength">
-					{{ 5000 - addbusiness.business_info.aboutDescription.length + " Chars left"}} 
+					{{ 10000 - addbusiness.business_info.aboutDescription.length + " Chars left"}} 
 				</p>
 				<span class="help-block" ng-show="businessProfileForm.aboutDescription.$dirty && businessProfileForm.aboutDescription.$invalid">
 					<span class="text-danger" ng-show="businessProfileForm.aboutDescription.$error.maxlength">Sorry You are Exceeding the Limit</span>
