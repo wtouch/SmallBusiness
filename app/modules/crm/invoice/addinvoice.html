@@ -1,7 +1,89 @@
 <div class="modal-header">
 	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
-</div>
+</div>	
 <div class="modal-body">
-	<h3 class="text-center" >Add New Invoice</h3>
-	
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h3 class="text-center"> Add New Invoice </h3>
+			<form name="invoiceform" role="form" class="form-horizontal"  ng-submit="invoiceform.$valid" novalidate="novalidate">
+				<div class="form-group">
+					<label for="date" class="col-sm-2 control-label">Date</label>
+					<div class="col-sm-9">
+						<input type="text" name="date" id="date" ng-model="modalOptions.addinvoice.date" class="form-control" ng-init="modalOptions.addinvoice.date = modalOptions.currentDate">
+					</div>
+				</div>	
+				<div class="form-group" ng-if="partyType">
+					<label for="name" class="col-sm-2 control-label">Party</label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" id="name" placeholder="name" ng-model="partyType.name" readonly>
+						<input type="hidden" class="form-control" id="name" placeholder="name" ng-model="modalOptions.addinvoice.party_id" >
+						<input type="hidden" class="form-control" id="department" placeholder="department" ng-model="modalOptions.addinvoice.department_id"  >
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="party" class="col-sm-2 control-label">Select Department</label>
+						<div class="col-sm-9">
+							<select class="form-control" ng-model="partyType" ng-options="item as item.department group by item.name for item in modalOptions.partylist"ng-change="addinvoice.party_name = partyType.name; addinvoice.department = partyType.department;modalOptions.addinvoice.party_id = partyType.id;partyType.department;modalOptions.addinvoice.department_id = partyType.id;" required>
+								<option value="">Select Department</option>
+							</select>
+							<span class="text-danger" ng-show=	"addmeasurmentForm.party.$dirty && addmeasurmentForm.party.$invalid">
+								<span ng-show="addmeasurmentForm.party.$error.required" class="text-danger">Required Field.</span>
+							</span>	
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="fromdate" class="col-sm-2 control-label">From Date *</label>
+					<div class="col-sm-3"> 
+						<div class="input-group">
+							<input type="date" class="form-control" id="date" placeholder="date" ng-model="modalOptions.addmeasurement.date" required>
+								<span class="block" ng-show="addmeasurmentForm.date.$invalid && addmeasurmentForm.date.$dirty">
+								<span ng-show="addmeasurmentForm.date.$error.required" class="text-danger">Required Field</span>
+								</span>
+						</div>
+					</div>
+					<label  for="todate" class="col-sm-2 control-label">To Date *</label>
+					<div class="col-sm-3">
+						<div class="input-group">
+							<input type="date" class="form-control" id="dates" placeholder="dates" ng-model="modalOptions.addmeasurement.dates" required>
+								<span class="block" ng-show="addmeasurmentForm.dates.$invalid && addmeasurmentForm.dates.$dirty">
+								<span ng-show="addmeasurmentForm.dates.$error.required" class="text-danger">Required Field</span>
+								</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="bill" class="col-sm-2 control-label">Bill Amount</label>
+					<div class="col-sm-9">
+						<input type="text"  name="bill" id="bill" ng-model="modalOptions.addinvoice.bill" placeholder="5240" readOnly class="form-control" ng-init="invoice.bill=5240" >
+					</div>
+				</div>	
+				<div class="form-group">
+					<label for="servicetax" class="col-sm-2 control-label">Service Tax</label>
+					<div class="col-sm-9">
+						<input type="text"  name="servicetax" id="servicetax" ng-model="modalOptions.addinvoice.servicetax" placeholder="12%" readOnly class="form-control" >
+								
+					</div>
+				</div>	
+				<div class="form-group">
+					<label for="VAT" class="col-sm-2 control-label">VAT</label>
+					<div class="col-sm-9">
+						<input type="text"  name="VAT" id="VAT" ng-model="modalOptions.addinvoice.vat" placeholder="2%" readOnly class="form-control" ng-init="invoice.vat=2.5">
+					</div>
+				</div>	
+				<div class="form-group">
+					<label for="total" class="col-sm-2 control-label">Total Amount</label>
+					<div class="col-sm-9">
+						<input type="text"  name="total" id="total" ng-model="modalOptions.addinvoice.total" placeholder="8240" readOnly class="form-control" ng-init="invoice.total=8240" >
+					</div>
+				</div>	
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-9">
+					  <button type="submit" class="btn btn-primary" ng-disabled="invoiceform.$invalid"  ng-click="modalOptions.postData(modalOptions.addinvoice);modalOptions.ok()">Generate</button>
+					  <button type="submit" class="btn btn-success"  ng-disabled="invoiceform.$invalid" ng-click="updateData(addinvoice);modalOptions.ok()">Edit Invoice </button>
+					  <button type="reset" class="btn btn-danger" ng-click="modalOptions.ok()">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

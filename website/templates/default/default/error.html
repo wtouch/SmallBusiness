@@ -18,11 +18,11 @@
 			background-color : red;
 		{% endif %}
 		{% if code == 100 %}
-			background-color : blue;
+			background-color : #BF1F54;
 		{% endif %}
 	}
-	h2{
-		color : red;
+	.coming{
+		height : 250px;
 	}
 	.erorimg{
 		height : 100px;
@@ -35,22 +35,34 @@
 		{{code}}
 		{{website_status}}
 		<div class="errorback">
+			{% if code == 100 or code == 102 or code == 103 or code == 101 %}
 			<div class="msg">
 				<h2>
 					{{(code == 101 or code == 102 or code == 103 or code == 100) ? "" : website_status}}
-					 <img class="erorimg" src="{{(code == 101) ? path ~ 'img/comingsoon.png' : path ~ 'img/errorface.png'}}"> 
-					<!-- {% if code == 101 or code == 102 or code == 103 or code == 100 %}
-						<img class="erorimg" src="{{path}}/img/comingsoon.png">
+					<!-- <img class="erorimg" src="{{(code == 101) ? path ~ 'img/comingsoon.png' : path ~ 'img/errorface.png'}}">  -->
+					{% if code == 101 or code == 102 or code == 103 %}
+						<img class="coming" src="{{path}}/img/coming-soon.png">
 					{% endif %}
-					{% if code == 104 %}
-						<img class="erorimg" src="{{path}}/img/errorface.png">
+					{% if code == 100 %}
+						<img src="{{path}}/img/come soon.png">
 					{% endif %}
-					{% if code == 105 %}
-						<img class="erorimg" src="{{path}}/img/errorface.png">
-					{% endif %} -->
+					
 				</h2>
 				<h3>{{message}}</h3>
 			</div>
+			{% endif %}
+			{% if code == 104 or code == 105 %}
+			<div class="error row">
+				<div class="col-sm-3">
+					<h2>{{code}}</h2>
+					<img class="erorimg" src="{{path}}/img/errorface.png">
+				</div>
+				<div class="col-sm-9">
+					<h2>{{website_status}}</h2>
+					<h3>{{message}}</h3>
+				</div>
+			</div>
+			{% endif %}
 		</div>
 	</div>
 </body>

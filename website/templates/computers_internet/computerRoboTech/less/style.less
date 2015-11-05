@@ -1,19 +1,16 @@
 @font-face{
-	font-family:'Georgia';
-	src:url('../fonts/asd.ttf');
+	font-family:'tehuti';
+	src:url('../fonts/tehuti.otf');
 }
-
 @color : #f90;
 @lightcolor : #efefef;
 @darkcolor :#666;
-
 @back : #2A2A2A;
 @darkbackcolor :#ccc;
 @lightbackcolor :#d37f00; 
-
 @colorblack : #000;
 @colorwhite	: #fff;
-	
+
 body{
 	background-color:@colorwhite;
 }
@@ -21,7 +18,6 @@ body{
 header{
 	background-color: @colorblack;
 	clear: both;
-	//position: fixed;
 	display: block;
 	padding: 0;
 	width: 100%;
@@ -32,10 +28,9 @@ header{
     padding-right: 0px;
     padding-left: 0px;
 }
-
 .navbar-default {
 	margin-left:90px;
-	padding: 0;
+	padding:0px;
 	background-color: @color;
 	z-index: 92;
 	border: none;
@@ -43,7 +38,7 @@ header{
 	.navbar-brand{ 				
 		padding-top:20px;
 		color:@colorwhite;
-		height: 62px;
+		height: 66px;
 		display: inline-block;
 		vertical-align: middle;
 		-webkit-transform: translateZ(0);
@@ -76,21 +71,16 @@ header{
 				  transition-duration: 0.3s;
 				  -webkit-transition-timing-function: ease-out;
 				  transition-timing-function: ease-out;
-
 		}
-							
 							&:hover, &:focus, &:active {
-														color: white;
+														color: @colorwhite;
 												}
-
-&:hover:before, &:focus:before,&:active:before {
-  -webkit-transform: scaleY(1);
-  transform: scaleY(1);
-  }
-						
+		&:hover:before, &:focus:before,&:active:before {
+		  -webkit-transform: scaleY(1);
+		  transform: scaleY(1);
+		  }	
 					}
 		.navbar-nav{
-						//	margin-left: 300px;
 				li{
 					margin-left:8px;
 					> ul{
@@ -106,9 +96,8 @@ header{
 							>li{
 								padding: 10px;
 									>a{
-										   
 										color : @colorwhite;
-										font: 14px/18px "proxima-nova",sans-serif;
+										font: 14px/18px sans-serif;
 										font-style: normal;
 										text-transform:lowercase;
 											&:hover{
@@ -135,19 +124,14 @@ header{
 								color:@colorwhite;
 								background:transparent;
 								border-top:10px solid @colorblack;
-								transition-timing-function: linear;
-								transition: border-top 3s;
 								}
 					}
 				.active>a, .active>a:hover, .active>a:focus{
 					color:@colorwhite;
 					background-color:@colorblack;
-					padding-top: 17px;
-					padding-bottom: 19px;
+					padding-bottom:23px;
 				}
 				>li.child-menu{
-				
-				
 				display: inline-block;
 					  vertical-align: middle;
 					  -webkit-transform: translateZ(0);
@@ -163,7 +147,6 @@ header{
 					  transition-duration: 0.3s;
 
 							&:before{
-						
 									  content: "";
 									  position: absolute;
 									  z-index: -1;
@@ -184,16 +167,14 @@ header{
 									  transition-timing-function: ease-out;
 
 							}
-							
 							&:hover, &:focus, &:active {
 														color: white;
 												}
-
-					&:hover:before, &:focus:before,&:active:before {
-													  -webkit-transform: scaleY(1);
-													  transform: scaleY(1);
-					  }
-				
+							&:hover:before, &:focus:before,&:active:before {
+															  -webkit-transform: scaleY(1);
+															  transform: scaleY(1);
+							  }
+						
 				
 				
 				&::after {
@@ -244,8 +225,9 @@ header{
 								color:@darkcolor;
 								height:110px;
 								overflow:hidden;
-								    font: 14px/19px Arial,Helvetica,sans-serif;
-									}
+								    font: 14px/19px Helvetica,sans-serif;
+									text-align: justify;
+					}
 					}
 					a{
 						margin-left:50%;
@@ -261,7 +243,7 @@ header{
 					height:50px;
 					}
 					h3{
-						font:30px/25px  Georgia,Arial,Helvetica,sans-serif;
+						font:30px/25px  tehuti,Arial,Helvetica,sans-serif;
 						font-weight:bold;
 						text-align:center;
 						color:@color;
@@ -300,7 +282,8 @@ header{
 				background-color: transparent;
 				border-color: transparent;
 				margin-left:7px;
-				padding-top: 15px;				
+				padding-top: 15px;	
+				padding-bottom: 21px;				
 				&:hover{
 						color:@colorblack;
 						background-color: transparent;
@@ -313,65 +296,54 @@ header{
 		margin-top: 17px;
 	}
 		.ftr{
-			position:relative;
-			    top: 50px;
+			color:@darkcolor;
+			background-color:@colorblack;
+			margin-top: 70px;
 			a{
 			color:@color;
 				&:hover{
 					color:@colorwhite;
 				}
 			}
-			color:@darkcolor;
-			padding-top: 80px;
-			height: 150px;
-			width:100%;
-			background-color:@colorblack;
+			footer{
+			p{
+			    padding-bottom: 30px;
+			}
+			}
 	}
-	
+	.ftr>div{
+		    position: relative;
+			top: -20px;
+	}
 	.sociallinks{
-				position: absolute;
-				z-index: 999;
-				/* margin-top: -83px; */
-				border: none;
-				top: -71px;
-				left: 0px;
-				right: 0px;
-				margin: 0 auto;
-				width: 300px;
 				text-align : center;
 				ul{
 					list-style-type: none;
 					padding-left : 0px;
-				li{
-						 display: inline;
-						 a{
-						 
-							width: 36px;
-							height:36px;
-							display:inline-block;
-							margin-left:10px;
-							margin-top:50px;
-						 
-						 }
+					li{
+							 display: inline;
+							 a{
+								width: 36px;
+								height:36px;
+								display:inline-block;
+								margin-left:10px;
+							 }
 						}
+					}
+						#facebook{
+								background: url("../img/sprite_social.png") 0px 0px;
+								&:hover{
+									background: url("../img/sprite_social.png") 0px -38px;
+										}
 								}
-						#facebook {
-							
-							background: url("../img/sprite_social.png") 0px 0px;
-							&:hover{
-								background: url("../img/sprite_social.png") 0px -38px;
-								}
-						}
 						#google {
-							
-							background: url("../img/sprite_social.png") -114px 0;
-								&:hover{	
-									
-									background: url("../img/sprite_social.png") -114px -38px;
+								background: url("../img/sprite_social.png") -114px 0;
+									&:hover{	
+										
+										background: url("../img/sprite_social.png") -114px -38px;
+									}
 								}
-						}
 						#twitter{
-			
 							background: url("../img/sprite_social.png") -38px  0;
 							&:hover{	
 									background: url("../img/sprite_social.png") -38px -38px;
@@ -388,44 +360,71 @@ header{
 							&:hover{	
 									background: url("../img/sprite_social.png") -152px  -38px;
 								}
-									
 							}
 				}
-	
-	
 	.content{	
 			h1{
 				color:@darkcolor;
 				text-align:center;
-				font:30px/25px  Georgia,Arial,Helvetica,sans-serif;
+				font: 48px/25px tehuti, Arial, Helvetica, sans-serif;
 			}
 			h2{
 				color:@darkcolor;
-				text-align:center;
-				font:40px/25px  Georgia,Arial,Helvetica,sans-serif;
-			
+			    font: 48px/25px tehuti, Arial, Helvetica, sans-serif;
+				
+					&::before{
+								    right: 0.5em;
+										background-color:@darkbackcolor;
+										content: "";
+										display: inline-block;
+										height: 1px;
+										vertical-align: middle;
+										width: 45%;
+									
+								}
+								&::after{
+										    background-color: @darkbackcolor;
+											content: "";
+											display: inline-block;
+											height: 1px;
+											vertical-align: middle;
+											width: 45.6%;
+											left: 0.5em;
+											margin-right:-50%;
+								}
 			}
 				h3{
 				color:@darkcolor;
 				text-align:left;
-				font:30px/25px  Georgia,Arial,Helvetica,sans-serif;
-			
+				font:30px/25px  tehuti,Arial,Helvetica,sans-serif;
 			}
-.contact{
-	color:@darkcolor;
-	text-align:left;
-			
-}
+		.contact{
+			color:@darkcolor;
+			text-align:left;
+			p{
+			margin: 15px 0 16px;
+		font: 14px/19px Helvetica, sans-serif;
+			}
+					
+		}
 				.tagline{
 						color:@darkcolor;
 						font-weight:bold;
-						 font:30px/25px  Georgia,Arial,Helvetica,sans-serif;
+						font: 14px/19px Arial, Helvetica, sans-serif;
+						text-align:center;
+				}
+				.tagline1{
+						color:@darkcolor;
+						font-weight:bold;
+						font: 14px/19px Arial, Helvetica, sans-serif;
+						text-align:center;
 				}
 				.description{
 							p{
 								text-align:center;
-								 font:15px/25px  Georgia,Arial,Helvetica,sans-serif;
+								font: 14px/19px Arial, Helvetica, sans-serif;
 								 color:@darkcolor;
+								 text-align:justify;
 							}
 						.btn-link{
 								color:@color;
@@ -438,7 +437,11 @@ header{
 						}
 				}
 	}
-	
+	.enquiry{
+	h3{
+	    font: 48px/25px tehuti, Arial, Helvetica, sans-serif;
+		}
+	}
 	.featured_services{
 						.data{
 						padding:10px;
@@ -449,7 +452,7 @@ header{
 						    margin-bottom: 20px;
 							padding: 35px 0 0;
 							color:@darkcolor;
-							font: 30px/25px Georgia,Arial,Helvetica,sans-serif;
+							font: 48px/25px tehuti,Arial,Helvetica,sans-serif;
 						
 								&::before{
 								    right: 0.5em;
@@ -473,12 +476,8 @@ header{
 										
 								}
 						}
-						
 	}
-
-
 		.nav{
-			
 					>li{
 					a{
 						color:@color;
@@ -488,18 +487,15 @@ header{
 							}
 						}
 					}
-			
 		}
-	
 	.infrastructure{
 			background-color:@lightcolor;
 				.Ititle{
 						    margin-bottom: 20px;
 							padding: 35px 0 0;
 							color:@darkcolor;
-							font: 24px/18px "proxima-nova",sans-serif;
-						
-								&::before{
+							    font: 48px/25px tehuti, Arial, Helvetica, sans-serif;
+								/*&::before{
 								    right: 0.5em;
 										background-color:@darkbackcolor;
 										content: "";
@@ -507,7 +503,6 @@ header{
 										height: 1px;
 										vertical-align: middle;
 										width: 43%;
-									
 								}
 								&::after{
 										    background-color: @darkbackcolor;
@@ -515,21 +510,15 @@ header{
 											display: inline-block;
 											height: 1px;
 											vertical-align: middle;
-											width: 35.70%;
+											width: 29.4%;
 											left: 0.5em;
 											margin-right:-50%;
-										
-								}
-							
-						
+								}*/
 						}
 							p{
-							height: 40px;
-							text-align:left;
-							padding:10px;
-								}
-								
-	
+							    font: 14px/19px Arial, Helvetica, sans-serif;
+							text-align:justify;
+							}
 	}
 	.infrastructr{
 		.infrastruct{
@@ -537,7 +526,6 @@ header{
 				border:1px solid @darkbackcolor;
 				border-radius:0px;
 				padding:0px;
-					
 							img{
 								width:100%;
 								height:200px;
@@ -546,8 +534,6 @@ header{
 								opacity:0.8;
 								}
 							}
-				
-					
 					a{
 							&:hover{
 									color:@colorblack;
@@ -559,14 +545,11 @@ header{
 					margin-top:20px;
 					}
 					h4{
-					font: 20px/18px Georgia,Arial,Helvetica,sans-serif;
+					font: 40px/25px tehuti, Arial, Helvetica, sans-serif;
 					}
-				
-	
 	}
 	}
 	.thumbnail{
-			
 				border:1px solid @darkbackcolor;
 				border-radius:0px;
 				padding:0px;
@@ -591,13 +574,13 @@ header{
 								height:109px;
 								overflow:hidden;
 					    font: 14px/19px Arial,Helvetica,sans-serif;
-						
+						    text-align: justify;
 								h3{
 						        margin: 0 0 6px 0;
 								padding: 0;
 								a{
 								color:@colorblack;
-								font:22px/25px "Georgia",Arial,Helvetica,sans-serif;
+								font:40px/25px tehuti,Arial,Helvetica,sans-serif;
 								&:hover{
 									color:@color;
 								}
@@ -612,38 +595,39 @@ header{
 					}
 					.sername{
 							margin: 0;
-							padding: 16px 18px 5px 18px;
-						
-							
-						
+							padding: 16px 18px 5px 18px;	
 					}
-	
+					.servimg{
+							height:200px;
+							width:100%;
+								img{
+									min-height:200px;
+									width:100%;
+									&:hover{
+													background-color:@darkbackcolor;
+													opacity:0.8;
+													}
+								}
+					}
 	}
-	.cont{
-		
+	.contact{
+		.table{
 		background:url('../img/divide.png');
 		background-position:right;
 		background-repeat:no-repeat;
-	
+		}
 	}
 	.form{
-				
 				float:left;
 				width:350px;
 				color : @back;
 				//border:2px solid @colorblack;
 				margin-top:-60px;
-			
-				
 	}
 	.image{
-	
 		float:right;
 		height:200px;
 		margin-top:-60px;
-		
-		
-		
 	}
 	.panel{
 				border:none;
@@ -655,7 +639,7 @@ header{
 	.img1{
 		width:100%;
 		height:100%;
-	}
+		}
 	}
 	h2{
 	text-align:left;
@@ -668,37 +652,18 @@ header{
 		}
 	}
 	.send{
-	
 	background-color:@color;
 	color:@colorwhite;
 	&:hover{
 	background-color:@colorblack;
 	color:@colorwhite;
+		}
 	}
-	}
-	
 	@media (max-width:768px){
 		.navbar-brand{
 			float:none;
 		}
 	}
-	
-	.servicedata{
-	
-	.servimg{
-		height:200px;
-		width:100%;
-			img{
-				min-height:200px;
-				width:100%;
-				&:hover{
-								background-color:@darkbackcolor;
-								opacity:0.8;
-								}
-			}
-	}
-	}
-	
 	@media (max-width:320px){
 			.navbar-default{
 					margin-left:0px;
@@ -709,13 +674,8 @@ header{
 							}
 							.navbar-default .navbar-toggle .icon-bar{
 							background-color:@colorwhite;
-							
 							}
-							
-							
-				
 		}
-		
 		@media (max-width:320px){
 						.fstitle{
 								&::before{
@@ -726,13 +686,24 @@ header{
 										height: 1px;
 										vertical-align: middle;
 										width: 0%;
-									
 								}
-								
 								&::after{
 									content:"";
-								
 								}
 							}
 }
-	
+		@media (min-width: 768px){
+		.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+			margin-left: -61px;
+						}
+		}
+		.item{
+		height:400px;
+		overflow:hidden;
+			img{
+					min-height:400px;
+					width:100%;
+					
+			}
+		
+		}
