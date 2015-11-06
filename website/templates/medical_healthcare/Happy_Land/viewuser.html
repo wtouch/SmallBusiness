@@ -1,0 +1,153 @@
+<!-- <div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="modal-body">
+	<div class="panel panel-default">
+	{{modalOptions.addemployee.id}}
+	{{modalOptions.addemployee.user_id}}
+		{{modalOptions.addemployee.name}}
+		{{modalOptions.addemployee.permanent_address}}
+		{{modalOptions.addemployee.city}}
+		
+	</div>
+</div> -->
+<div class="modal-content">		
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-sm-12">
+						<table class="table table-responsive table-bordered">
+							<tr>
+								<th>Employee Details</th>
+								<th>Employee Details</th>
+								<th>Certificates Details</th>
+								<th>Marks Details</th>
+								<th>Photo</th>
+							</tr>
+							<tr>
+								<td>
+									<table class="table table-responsive">
+										<tr>
+										    <th>Id</th>
+											<td>{{modalOptions.addemployee.id}}</td>
+										</tr>
+										<tr>
+											<th>User Id</th>
+											<td>{{modalOptions.addemployee.user_id}}</td>
+										</tr>
+										<tr>
+											<th>Group Id</th>
+											<td>{{modalOptions.addemployee.group_id}}</td>
+										</tr>
+										<tr>
+											<th>Name</th>
+											<td>{{modalOptions.addemployee.name}} {{modalOptions.addemployee.surname}}</td>
+										</tr>
+										<tr>
+											<th>Sex</th>
+											<td>{{modalOptions.addemployee.sex}}</td>
+										</tr>
+										<tr>
+											<th>Mobile No.</th>
+											<td>{{modalOptions.addemployee.mobile}}</td>
+										</tr>
+										<tr>
+											<th>Email</th>
+											<td>{{modalOptions.addemployee.email}}</td>
+										</tr>
+										
+									</table>
+								</td>
+								
+								<td>
+									<table class="table table-responsive">
+										<tr>
+											<th>Address</th>
+											<td>{{modalOptions.addemployee.address}}</td>
+										</tr>
+										<tr>
+											<th>Permanent Address</th>
+											<td>{{modalOptions.addemployee.permanent_address}}</td>
+										</tr>
+										<tr>
+											<th>City</th>
+											<td>{{modalOptions.addemployee.city}}</td>
+										</tr>
+										<tr>
+											<th>State</th>
+											<td>{{modalOptions.addemployee.state}}</td>
+										</tr>									
+										<tr>
+											<th>Marital Status</th>
+											<td>{{modalOptions.addemployee.marital_status}}</td>
+										</tr>
+										<tr>
+											<th>DOB</th>
+											<td>{{modalOptions.addemployee.dob}}</td>
+										</tr>
+										<tr>
+											<th>DOJ</th>
+											<td>{{modalOptions.addemployee.doj}}</td>
+										</tr>
+									</table>
+								</td>
+								<td>
+									<table class="table table-responsive">
+										<tr>
+											<input type="checkbox" name="checkbox1" ng-model="modalOptions.addemployee.certificates.ssc_marksheet" value="ssc_marksheet">SSC Marksheet<br>	
+										</tr>
+										<tr>
+											<input type="checkbox" name="checkbox1" ng-model="modalOptions.addemployee.certificates.ssc_certificate" value="ssc_certificate">SSC certificate<br>	
+										</tr>
+										<tr>
+											<input type="checkbox" name="checkbox1" ng-model="modalOptions.addemployee.certificates.hsc_marksheet" value="hsc_marksheet">HSC Marksheet<br>	
+										</tr>
+										<tr>
+											<input type="checkbox" name="checkbox1" ng-model="modalOptions.addemployee.certificates.hsc_certificate" value="hsc_certificate">HSC certificate<br>	
+										</tr>
+										<tr>
+											<input type="checkbox" name="checkbox1" ng-model="modalOptions.addemployee.certificates.degree_marksheet" value="degree_marksheet">Degree Marksheet<br>	
+										</tr>
+										<tr>
+											<input type="checkbox" name="checkbox1" ng-model="modalOptions.addemployee.certificates.degree_certificate" value="degree_certificate">Degree Certificate<br>	
+										</tr>
+										<tr>
+											<input type="checkbox" name="checkbox1" ng-model="modalOptions.addemployee.certificates.pg_marksheet" value="pg_marksheet">PG Marksheet<br>	
+										</tr>
+										<tr>
+											<input type="checkbox" name="checkbox1" ng-model="modalOptions.addemployee.certificates.pg_certificate" value="pg_certificate">PG Certificate<br>	
+										</tr>
+									</table>
+								</td>
+								<td>examination
+									<table class="table table-responsive">
+										<tr>
+											<input type="checkbox" name="checkbox1" ng-model="modalOptions.addemployee.qualification.examination" value="ssc_marksheet">SSC Marksheet<br>	
+										</tr>
+									</table>
+								</td>
+								<td>
+									<table class="table table-responsive">
+										
+										<tr>
+											<th>Photo</th>
+											<td>
+												<span "value.file_relative_path" in 		modalOptions.addemployee.user_img>
+													<img class="imgwidth" ng-src="{{appConfig.assetPath + '/' +  
+													modalOptions.addemployee.user_img}}"/>
+												</span>
+											</td>
+										</tr>			
+									</table>
+								</td>
+							</tr>	
+						</table>	
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="modalOptions.ok()">OK</button>
+	</div>
+</div>		
