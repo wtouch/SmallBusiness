@@ -1,0 +1,173 @@
+@font-face {
+  font-family: 'tehuti';
+  src: url('../fonts/tehuti.otf');
+}
+body {
+  background: url(../img/hbg.png) left top no-repeat, url(../img/footer.png) right bottom no-repeat, url(../img/b3.jpg) left top no-repeat;
+  padding-left: 50px;
+  background-size: 550px,233px,100%;
+  color: #ffffff;
+}
+.navbar-default {
+  background-color: transparent;
+  border-color: transparent;
+  top: 59px;
+  display: inline-block;
+}
+.navbar-default .navbar-brand {
+  color: #000000;
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  margin-top: 13px;
+  background-image: url(../img/logo.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.navbar-default .navbar-nav {
+  margin-top: 15%;
+}
+.navbar-default .navbar-nav .active > a {
+  background-color: transparent;
+  color: #ffffff;
+}
+.navbar-default .navbar-nav .active > a:hover {
+  background-color: transparent;
+  color: #000000;
+}
+.navbar-default .navbar-nav > li {
+  float: none;
+  display: block;
+}
+.navbar-default .navbar-nav > li > a {
+  font: 40px/25px tehuti, Arial, Helvetica, sans-serif;
+  color: #ffffff;
+  background-color: transparent;
+}
+.navbar-default .navbar-nav > li > a:hover {
+  color: #000000;
+}
+.navbar-default .navbar-nav > li > a:hover::before {
+  content: "";
+  border-left: 10px solid #ffffff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  display: inline-block;
+  top: 55%;
+  height: 10px;
+  margin-left: -30px;
+  margin-right: 20px;
+  animation-name: ab;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+}
+@keyframes ab {
+  0% {
+    border-left: 0px solid white;
+  }
+  100% {
+    border-left: 10px solid white;
+  }
+}
+.navbar-default .navbar-nav > li > ul {
+  position: absolute;
+  list-style: none;
+  display: none;
+  background-color: #000000;
+  text-align: left;
+  left: -123px;
+  top: -28px;
+  margin-left: 255px;
+}
+.navbar-default .navbar-nav > li > ul::before {
+  content: "";
+  position: absolute;
+  border-right: 10px solid #000000;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  display: inline-block;
+  height: 10px;
+  margin-left: -50px;
+  top: 46px;
+}
+.navbar-default .navbar-nav > li > ul > li > a {
+  color: #ffffff;
+  font-style: normal;
+  text-transform: lowercase;
+}
+.navbar-default .navbar-nav > li > ul > li > a:hover {
+  border: none;
+  text-decoration: none;
+  color: #f90;
+  background-color: transparent;
+}
+.navbar-default .navbar-nav > li > ul > li:hover > ul {
+  display: none;
+}
+.navbar-default .navbar-nav > li:hover > ul {
+  display: block;
+}
+.anim {
+  display: block;
+  animation-name: con;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+.data {
+  height: 400px;
+  width: 80%;
+  overflow: hidden;
+  display: inline-block;
+  background-color: #392c26;
+  z-index: -40;
+  margin-top: 300px;
+}
+@keyframes con {
+  0% {
+    position: absolute;
+    left: -500px;
+    top: -500px;
+    opacity: 0;
+  }
+  100% {
+    position: absolute;
+    left: 0px;
+    top: 50px;
+  }
+}
+/*@media (min-width: 1200px){
+.container {
+    width: 100%;
+}
+}*/
+.sociallinks {
+  text-align: center;
+  margin-top: 155px;
+}
+.sociallinks ul {
+  list-style-type: none;
+  padding-left: 0px;
+}
+.sociallinks ul li {
+  display: inline;
+  margin-top: 155px;
+}
+.sociallinks ul li a {
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  margin-left: 10px;
+}
+.sociallinks #facebook {
+  background: url("../img/sprite_social.png") 0px 0px;
+}
+.sociallinks #facebook:hover {
+  padding-bottom: 10px;
+  background: url("../img/sprite_social.png") 0px -38px;
+}
+.sociallinks #twitter {
+  background: url("../img/sprite_social.png") -38px 0;
+}
+.sociallinks #twitter:hover {
+  background: url("../img/sprite_social.png") -38px -38px;
+}
