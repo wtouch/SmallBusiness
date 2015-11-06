@@ -1,61 +1,53 @@
 {% autoescape false %}
-	<span ng-bind="id"></span>
+<div class="about">
 	<h2>About us</h2>
-	<div class="sidebar" id="navbar-example">
-		<ul class="nav nav-pills" >
-			<li ng-class="{active:id=='about'}" ng-click="makeActive('about')"><a href="#about">About Us</a></li>
-			<li ng-class="{active:id=='infrastructure'}" ng-click="makeActive('infrastructure')"><a href="#infrastructure">Infrastructure/Facilities</a></li>
-		</ul>
-	</div>
-	<div class="about" id="about">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-lg-12">
-				<div class="table-responsive">
-				<table class="table table-bordered">
-					<tr>
-						{% if data.business_profile.business_type %}
-							<th>Primary Business Type</th>
-						{% endif %}
-						{% if data.business_profile.establishment %}
-							<th>Year Of Establishment</th>
-						{% endif %}
-						{% if data.business_profile.no_of_employees %}
-							<th>No. Of Employees</th>
-						{% endif %}
-						{% if data.ownership %}
-							<th>Ownership Type</th>
-						{% endif %}	
-						{% if data.business_profile.additional_business %}
-							<th>Additional Business</th>
-						{% endif %}
-					</tr>
-					<tr>
-						{% if data.business_profile.business_type %}
-							<td>{{data.business_profile.business_type}}</td>
-						{% endif %}
-						{% if data.business_profile.establishment %}
-							<td>{{data.business_profile.establishment}}</td>
-						{% endif %}
-						{% if data.business_profile.no_of_employees %}
-							<td>{{data.business_profile.no_of_employees}}</td>
-						{% endif %}
-						{% if data.ownership %}
-							<td>{{data.ownership}}</td>
-						{% endif %}
-						{% if data.business_profile.additional_business %}
-						<td>
-							<ul>
-							{% for x in data.business_profile.additional_business %}
-								<li>{{x}}</li>
-							{% endfor %}
-							</ul>
-						</td>
-						{% endif %}
-					</tr>
-				</table>
-				</div>
-				{{data.business_info.aboutDescription}}
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-lg-12">
+			<div class="table-responsive">
+			<table class="table table-bordered">
+				<tr>
+					{% if data.business_profile.business_type %}
+						<th>Primary Business Type</th>
+					{% endif %}
+					{% if data.business_profile.establishment %}
+						<th>Year Of Establishment</th>
+					{% endif %}
+					{% if data.business_profile.no_of_employees %}
+						<th>No. Of Employees</th>
+					{% endif %}
+					{% if data.ownership %}
+						<th>Ownership Type</th>
+					{% endif %}	
+					{% if data.business_profile.additional_business %}
+						<th>Additional Business</th>
+					{% endif %}
+				</tr>
+				<tr>
+					{% if data.business_profile.business_type %}
+						<td>{{data.business_profile.business_type}}</td>
+					{% endif %}
+					{% if data.business_profile.establishment %}
+						<td>{{data.business_profile.establishment}}</td>
+					{% endif %}
+					{% if data.business_profile.no_of_employees %}
+						<td>{{data.business_profile.no_of_employees}}</td>
+					{% endif %}
+					{% if data.ownership %}
+						<td>{{data.ownership}}</td>
+					{% endif %}
+					{% if data.business_profile.additional_business %}
+					<td>
+						<ul>
+						{% for x in data.business_profile.additional_business %}
+							<li>{{x}}</li>
+						{% endfor %}
+						</ul>
+					</td>
+					{% endif %}
+				</tr>
+			</table>
 			</div>
+			{{data.business_info.aboutDescription}}
 		</div>
 	</div>
 	
@@ -107,5 +99,6 @@
 				{% endfor %}
 			</div>
 		</div>
+</div>
 	{% endif %}
 {% endautoescape %}

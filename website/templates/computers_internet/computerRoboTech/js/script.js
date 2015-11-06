@@ -138,7 +138,17 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		});
 	};
 });	
-
+$(document).ready(function(){
+$(window).scroll(function(e){
+    var scrollTop = $(document).scrollTop();
+    if(scrollTop > 0){
+        console.log(scrollTop);
+        $('nav').removeClass('navbar-static-top').addClass("navbar-fixed-top");
+    } else {
+        $('nav').removeClass("navbar-fixed-top").addClass('navbar-static-top');
+    }
+});	
+});	
 	app.controller('aboutController', function($scope,$http, $location) {
 		var s = $location.path();
 		$scope.url = s.substr(1);

@@ -35,7 +35,10 @@
 							<span class="icon-bar"></span>
 						</button>
 						<div class="brand">  
-							<a class="navbar-brand" href="#">{{data.business_name}}</a> 
+							<a class="navbar-brand" href="#">
+								<img class="logo" src="{{data.business_logo.file_relative_path}}">
+							</a> 
+							
 							{#{% if data.business_logo %}
 								<img class="logo" src="{{data.business_logo.file_relative_path}}">
 							{% endif %}#}
@@ -61,12 +64,15 @@
 			</div>
 			{%endif%}
 		</div>
-		<div class="ftr">
-			<div>
-				{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+		{%if modules.headerModule.carousal %}
+		<div class="imageGallery">
+			<div class="container">
+				{% include [templatePath ~ '/includes/featured_gallery.html', 'default/default/includes/featured_gallery.html'] %} 
 			</div>
-				{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-		</div> 
+		</div>
+		{%endif%}
+		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html> 
 {% endspaceless %}

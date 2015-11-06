@@ -14,12 +14,14 @@
 	font-family:'Enriqueta-Regular';
 	src:url('../fonts/Enriqueta-Regular.otf');
 }
+
 @color : #f90;
 @lightcolor : #efefef;
 @darkcolor :#666;
-@back : #2A2A2A;
-@darkbackcolor :#ccc;
-@lightbackcolor :#d37f00; 
+@back : #f90;
+@darkbackcolor :#333;
+@lightbackcolor :#3d3f3f; 
+
 @colorblack : #000;
 @colorwhite	: #fff;
 
@@ -47,18 +49,17 @@ header{
 	margin-bottom : 0px;
 }
 .navbar-default {
-	margin-left:90px;
 	padding:0px;
-	background-color: @color;
+	background-color: @back;
 	z-index: 92;
 	border: none;
 	border-radius: 0px;
 	.navbar-brand{ 				
-		padding-top:20px;
+		padding : 0px;
 		font : 700 20px/1.5em Arial,Helvetica,sans-serif;
 		color:@colorwhite;
 		height: 66px;
-		display: inline-block;
+		/*display: inline-block;
 		vertical-align: middle;
 		-webkit-transform: translateZ(0);
 		transform: translateZ(0);
@@ -90,14 +91,15 @@ header{
 		  transition-duration: 0.3s;
 		  -webkit-transition-timing-function: ease-out;
 		  transition-timing-function: ease-out;
-		}
-		&:hover, &:focus, &:active {
+		}*/
+		/*&:hover, &:focus, &:active {
 			color: @colorwhite;
 		}
 		&:hover:before, &:focus:before,&:active:before {
 			-webkit-transform: scaleY(1);
 			transform: scaleY(1);
-		}	
+		}*/
+			
 	}
 	.navbar-nav{
 		>li{
@@ -142,7 +144,7 @@ header{
 									&:hover{
 										border:none;
 										text-decoration: none;
-										color:#f90;
+										color:@color;
 										
 									}
 								}
@@ -212,29 +214,36 @@ header{
 		}
 	}
 }
-
-h1,h2,h3{
+.logo{
+	height : 90px;
+}
+h1,h3{
 	color : @color;
 }
 h1{
 	text-transform : uppercase;
+	text-align : center;
+	margin : 60px auto 30px;
 	font: 35px Enriqueta-Regular, Arial, Helvetica, sans-serif;
 }
 h2{
 	color:@darkcolor;
 	font: normal 75px/100px "Georgia",Arial,Helvetica,sans-serif;
 }
-h3{
+h4{
 	font : 25px/29px "Georgia",Arial,Helvetica,sans-serif;
-	color : #333;
+	color : @darkbackcolor;
+}
+p{
+	line-height: 25px;
 }
 .btn-info{
 	font-weight: bold;
     padding: 6px 20px;
     margin-bottom: -20px;
     font-size: 15px;
-	background:linear-gradient(@colorblack, @back,@colorblack);
-	box-shadow: 0 2px 4px @back;
+	background:linear-gradient(@colorblack, @lightbackcolor,@colorblack);
+	box-shadow: 0 2px 4px @lightbackcolor;
     border: none;
 	&:hover{
 		background:@color !important;
@@ -260,33 +269,27 @@ h3{
 	padding: 7px 22px;
 	margin-top: 17px;
 }
-.ftr{
-	color:@darkcolor;
+footer{
+	padding: 30px 15px;
 	background-color:@colorblack;
-	margin-top: 70px;
-	a{
-		color:@color;
-		&:hover{
-			color:@colorwhite;
+	margin-top: 10px;
+	p{
+		margin: 15px 10px 15px 10px;
+		a{
+			color:@color;
+			&:hover{
+				color:@colorwhite;
+			}
 		}
 	}
-	footer{
-		p{
-			padding-bottom: 30px;
-		}
-	}
-}
-.ftr>div{
-	position: relative;
-	top: -20px;
-}
-	
+}	
 
 
 .content{	
-	background-image : url('../img/bg1.jpg');
-	background-repeat : no-repeat;
-	background-size : 100%;
+	*{
+		position : relative;
+		z-index : 3;
+	}
 	h2{
 		/*&::before{
 			right: 0.5em;
@@ -330,11 +333,6 @@ h3{
 		text-align:center;
 	}
 }
-.enquiry{
-h3{
-	font: 48px/25px Enriqueta-Regular, Arial, Helvetica, sans-serif;
-	}
-}	
 .nav{
 	>li{
 		a{
@@ -346,68 +344,33 @@ h3{
 		}
 	}
 }
-	.infrastructure{
-			background-color:@lightcolor;
-				.Ititle{
-						    margin-bottom: 20px;
-							padding: 35px 0 0;
-							color:@darkcolor;
-							    font: 48px/25px Enriqueta-Regular, Arial, Helvetica, sans-serif;
-								/*&::before{
-								    right: 0.5em;
-										background-color:@darkbackcolor;
-										content: "";
-										display: inline-block;
-										height: 1px;
-										vertical-align: middle;
-										width: 43%;
-								}
-								&::after{
-										    background-color: @darkbackcolor;
-											content: "";
-											display: inline-block;
-											height: 1px;
-											vertical-align: middle;
-											width: 29.4%;
-											left: 0.5em;
-											margin-right:-50%;
-								}*/
-						}
-							p{
-							    font: 14px/19px Arial, Helvetica, sans-serif;
-							text-align:justify;
-							}
-	}
-	.infrastructr{
-		.infrastruct{
-				height:380px;
-				border:1px solid @darkbackcolor;
-				border-radius:0px;
-				padding:0px;
-							img{
-								width:100%;
-								height:200px;
-								&:hover{
-								background-color:@darkbackcolor;
-								opacity:0.8;
-								}
-							}
-					a{
+.infrastructr{
+	.infrastruct{
+			height:380px;
+			border:1px solid @darkbackcolor;
+			border-radius:0px;
+			padding:0px;
+						img{
+							width:100%;
+							height:200px;
 							&:hover{
-									color:@colorblack;
-									text-decoration:none;
+							background-color:@darkbackcolor;
+							opacity:0.8;
 							}
-					}
-					.btn-info{
-					margin-left:30%;
-					margin-top:20px;
-					}
-					h4{
-					font: 40px/25px Enriqueta-Regular, Arial, Helvetica, sans-serif;
-					}
+						}
+				a{
+						&:hover{
+								color:@colorblack;
+								text-decoration:none;
+						}
+				}
+				.btn-info{
+				margin-left:30%;
+				margin-top:20px;
+				}
 	}
-	}
-	.thumbnail{
+}
+	/*.thumbnail{
 				border:1px solid @darkbackcolor;
 				border-radius:0px;
 				padding:0px;
@@ -466,14 +429,7 @@ h3{
 													}
 								}
 					}
-	}
-	.contact{
-		.table{
-		background:url('../img/divide.png');
-		background-position:right;
-		background-repeat:no-repeat;
-		}
-	}
+	}*/
 	.form{
 				float:left;
 				width:350px;
@@ -526,22 +482,13 @@ h3{
 			float:none;
 		}
 	}
-	@media (max-width:320px){
-			.navbar-default{
-					margin-left:0px;
-				}
-					.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
-							background-color:@colorblack;
-							border-color:@colorwhite;
-							}
-							.navbar-default .navbar-toggle .icon-bar{
-							background-color:@colorwhite;
-							}
-		}
-		
-		@media (min-width: 768px){
-		.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-			margin-left: -61px;
-						}
-		}
+@media (max-width:320px){
+	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+		background-color:@colorblack;
+		border-color:@colorwhite;
+	}
+	.navbar-default .navbar-toggle .icon-bar{
+		background-color:@colorwhite;
+	}
+}
 		
