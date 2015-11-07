@@ -26,16 +26,9 @@
 		<div class="clearfix" style="margin : 10px;">
 			<div> <h1>Catering Service</h1></div>
 		</div>
-		<div class="row">
-			<div class="col-md-6 fruit">
-			<img src="{{ path }}img/img4.jpg">
-			
-			</div>
-			<div class="col-md-6">
-			<img src="{{ path }}img/img5.jpg">
-		
-			</div>
-		</div>
+					{%if modules.headerModule.carousal %}
+					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
 			<nav class="navbar navbar-default navbar-fixed-bottom">
 				
 				<div class="container">
@@ -54,6 +47,11 @@
 					</div>
 				</div>
 			</nav>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content">{% include contentPath %}</div>
+				</div>
+			</div>
 	</body>
 </html> 
 {% endspaceless %}
