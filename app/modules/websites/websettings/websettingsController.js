@@ -235,12 +235,29 @@ define(['app'], function (app) {
 				}
 			});
 		};
+		$scope.uploads1 = function(files,path,userInfo, picArr){ 
+			upload.upload(files,path,userInfo,function(data){
+				if(data.status === 'success'){
+					if(picArr == "website_logo1"){
+						$scope.websetting.config.website_logo1 = data.data;
+					}
+				}
+				else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification.error("Upload Image", data.message);
+				}
+			});
+		};
 		$scope.removeImg = function(imgObject) {
 			console.log(imgObject);
 			$scope.websetting.config.website_logo = "";
 		
 		};
+		$scope.removeImg1 = function(imgObject) {
+			console.log(imgObject);
+			$scope.websetting.config.website_logo1 = "";
 		
+		};
 		//update method for website settings form
 		$scope.editWebsitedetails = function (config) {
 			dataService.put("put/website/" + $routeParams.id, config)

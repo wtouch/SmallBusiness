@@ -77,6 +77,23 @@ $(document).ready(function(){
 		autoHover:true,
 		speed:1000,
 	});
+	$('#bxslider2').bxSlider({
+		mode: sliderMode,
+		slideWidth: 680,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
+		slideMargin: 15,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 1,
+		pause:3000,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed:1000,
+	});
 	$('.carousslider').bxSlider({ 
 		mode:'fade',
 		minSlides:1,

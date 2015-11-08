@@ -304,7 +304,7 @@ class websiteManager{
 			}
             
 			$response = $this->getTemplate($page, $response);
-		}catch(Exception $e){
+		}catch(CustomException $e){
 			/* $response["status"] = "error";
             $response["message"] = $e->getMessage();
             $response["data"] = null; */
