@@ -24,18 +24,20 @@
 	<body>	
 		<div class="container">	    
 		<div class="clearfix" style="margin : 10px;">
-			<div> <h1>Catering Service</h1></div>
+		 <h1>Catering Service
+				<div class="logo">
+					{% if data.website_config.website_logo %}
+						<img class="logo" src="{{data.business_logo.file_relative_path}}">
+					{% else %}
+						<img class="logo" src="{{data.business_logo.file_relative_path}}">
+					{% endif %}
+				</div>
+			</h1>
 		</div>
-		<div class="row">
-			<div class="col-md-6 fruit">
-			<img src="{{ path }}img/img4.jpg">
-			
-			</div>
-			<div class="col-md-6">
-			<img src="{{ path }}img/img5.jpg">
-		
-			</div>
-		</div>
+					{%if modules.headerModule.carousal %}
+					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+				
 			<nav class="navbar navbar-default navbar-fixed-bottom">
 				
 				<div class="container">
@@ -54,6 +56,11 @@
 					</div>
 				</div>
 			</nav>
+			<div class="row">
+				<div class="col-md-12 shutter">
+					<div class="content">{% include contentPath %}</div>
+				</div>
+			</div>
 	</body>
 </html> 
 {% endspaceless %}
