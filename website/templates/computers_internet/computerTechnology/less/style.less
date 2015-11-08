@@ -65,6 +65,9 @@
 	}
 	.navbar{
 	border-radius:1px;
+		.container{
+			background-color:transparent;
+		}
 	}
 	.navbar-default {
 		border-radius:none !important;
@@ -79,8 +82,8 @@
 				color:@colorwhite;
 				margin-top: 35px;
 				margin-left: 150px;
-				font-size: 30px;
-				font-weight: 900;
+				font-size: 28px;
+				font-weight: 700;
 			}
 			.navbar-brand:focus{
 				color:@colorwhite;
@@ -433,8 +436,8 @@ h3.subhead{
    }
    
 	}
-.btn-info{
- display: inline-block;
+.btn-info {
+  display: inline-block;
   vertical-align: middle;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
@@ -443,23 +446,23 @@ h3.subhead{
   backface-visibility: hidden;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-  background: @darkcolor;
+  background:@darkcolor;
   -webkit-transition-property: color;
   transition-property: color;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-.btn-info::before{
- content: "";
+.btn-info:before {
+  content: "";
   position: absolute;
   z-index: -1;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: @darkcolor;
-  -webkit-transform: scale(1);
-  transform: scale(1);
+  background: @colorblack;
+  -webkit-transform: scale(0);
+  transform: scale(0);
   -webkit-transition-property: transform;
   transition-property: transform;
   -webkit-transition-duration: 0.3s;
@@ -467,14 +470,16 @@ h3.subhead{
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
-.btn-info:hover::before{
- -webkit-transform: scale(0);
-  transform: scale(0);
+.btn-info:hover, .btn-info:focus, .btn-info:active {
+  color: white;
+  background-color:@darkcolor;
+  border-color: @darkcolor;
 }
-.btn-info:hover{
-background-color:@colorblack;
+.btn-info:hover:before, .btn-info:focus:before, .btn-info:active:before {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
 
-}
 	h1{
 		font-family : 'AlegreyaSC-Regular';
 		font-size:48px;

@@ -450,6 +450,9 @@ hr {
 .navbar {
   border-radius: 1px;
 }
+.navbar .container {
+  background-color: transparent;
+}
 .navbar-default {
   border-radius: none !important;
   background-color: #262626;
@@ -461,8 +464,8 @@ hr {
   color: #ffffff;
   margin-top: 35px;
   margin-left: 150px;
-  font-size: 30px;
-  font-weight: 900;
+  font-size: 28px;
+  font-weight: 700;
 }
 .navbar-default .navbar-brand .navbar-brand:focus {
   color: #ffffff;
@@ -829,7 +832,7 @@ h3.subhead {
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
-.btn-info::before {
+.btn-info:before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -837,9 +840,9 @@ h3.subhead {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #ef0b56;
-  -webkit-transform: scale(1);
-  transform: scale(1);
+  background: #02071a;
+  -webkit-transform: scale(0);
+  transform: scale(0);
   -webkit-transition-property: transform;
   transition-property: transform;
   -webkit-transition-duration: 0.3s;
@@ -847,12 +850,18 @@ h3.subhead {
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
-.btn-info:hover::before {
-  -webkit-transform: scale(0);
-  transform: scale(0);
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active {
+  color: white;
+  background-color: #ef0b56;
+  border-color: #ef0b56;
 }
-.btn-info:hover {
-  background-color: #02071a;
+.btn-info:hover:before,
+.btn-info:focus:before,
+.btn-info:active:before {
+  -webkit-transform: scale(1);
+  transform: scale(1);
 }
 h1 {
   font-family: 'AlegreyaSC-Regular';
