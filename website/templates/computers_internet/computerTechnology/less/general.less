@@ -17,14 +17,43 @@
 			overflow: hidden;
 			margin: 0 auto;
 			padding: 0px;
+			position: relative;
+			&::before {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				z-index: 2;
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				background: rgba(216, 66, 66, 0.42);
+				border-radius: 100%;
+				animation-direction:reverse;
+				-webkit-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+				opacity: 0;
+			}
+			&:hover::before {
+				-webkit-animation: circle .75s;
+				animation: circle .75s;
+			}
+			@-webkit-keyframes circle {
+				0% {opacity: 1;}
+				40% {opacity: 1;}
+				100% {width: 200%;height: 200%;opacity: 0;}
+			}
+			@keyframes circle {
+					0% {	opacity: 1;	}
+					40% {opacity: 1;}
+					100% {	width: 200%;height: 200%;opacity: 0;}
+				}
 			   img.img-responsive {
 					min-height: 165px;
 					width: 345px;
 				}
 
-			&:hover{
-				
-				  box-shadow: 0px 10px 10px @colorblack;
+			&:hover{	
 			}
 			
 			
@@ -38,31 +67,52 @@
 			h4{
 				height: 23px;
 				}
-		.readmore{
-			a{
-				background-color:@darkcolor;
-				border-radius: 0px;
-				border-color:@darkcolor;
-			}
-		}
-		
 	}
 	
 		.thumbnail{
 			.prodimg{
 			    height: 170px;
-				width: 345px;
+				width: 100%;
 				overflow: hidden;
 				margin: 0 auto;
-				padding: 0px;
+				padding: 0px;	
+				position: relative;
+			&::before {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				z-index: 2;
+				display: block;
+				content: '';
+				width: 0;
+				height: 0;
+				background: rgba(216, 66, 66, 0.42);
+				border-radius: 100%;
+				-webkit-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+				opacity: 0;
+			}
+			&:hover::before {
+				-webkit-animation: circle .75s;
+				animation: circle .75s;
+			}
+			@-webkit-keyframes circle {
+				0% {opacity: 1;}
+				40% {opacity: 1;}
+				100% {width: 200%;height: 200%;opacity: 0;}
+			}
+			@keyframes circle {
+					0% {	opacity: 1;	}
+					40% {opacity: 1;}
+					100% {	width: 200%;height: 200%;opacity: 0;}
+				}
+							
 			img.img-responsive.center-block {
 					min-height: 170px;
-					width: 345px;
+					width: 100%;
 				}
 				&:hover{
 
-				       box-shadow: 10px 10px 10px @colorblack;
-					
 				}
 				
 			}
@@ -77,15 +127,14 @@
                                 }
 				.readmore{
 							text-align:center;
-							    margin-bottom: 10px;
-							}
+							margin-bottom: 10px;
+						}
 						
 					a{
 						background-color:@darkcolor;
 						border-radius: 0px;
 						border-color:@darkcolor;
-						
-						align:center;
+						text-align:center;
 					}
 			}	
 	}
