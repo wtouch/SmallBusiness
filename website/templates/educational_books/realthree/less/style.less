@@ -90,10 +90,19 @@
 			color:@colorwhite;
 		}
 	}
-	
-	.logo {
-		height: 80px;
-		max-width: 100%;
+	header{
+		margin : 10px auto 20px;
+		.weblogo{
+			background-color : @colorwhite;
+			padding : 10px;
+		}
+		.logo{
+			max-width: 100%;
+			height : 100px;
+		}
+		.cntdtl{
+			padding-top: 25px;
+		}
 	}
 	a, .btn.btn-link,.btn .btn-info{
 		color: @color;
@@ -151,7 +160,6 @@
 	}
 	.navbar-toggle {
 		border : 1px solid @lightcolor;
-		margin-top : 45px;
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @lightcolor;
@@ -467,9 +475,7 @@
 		font-weight : bold;
 	}
 	@media (min-width: 320px){
-		.logo{
-			float:left;
-		}
+		
 		.cnctinfo{
 			display : none;
 		}
@@ -504,9 +510,6 @@
 		}
 	}
 	@media (min-width: 992px){
-		.logo{
-			float:none;
-		}
 		.navbar-default{
 			.navbar-nav {
 				margin: 0px;
@@ -547,9 +550,6 @@
 		}
 	}
 	@media (min-width: 1200px){
-		.logo{
-			float:none;
-		}
 		.cnctinfo{
 			display : block;
 		}
@@ -575,5 +575,13 @@
 		}
 		.slider{
 			max-width:802px;
+		}
+	}
+	@media (max-width: 480px){
+		.weblogo, .cntdtl{
+			text-align : center;
+		}
+		.logo{
+			margin-bottom : 10px;
 		}
 	}
