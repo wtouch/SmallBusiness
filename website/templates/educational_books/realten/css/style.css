@@ -979,19 +979,18 @@ body {
 .sociallinks ul li:hover {
   transform: translateX(-45px);
 }
-header {
-  margin: 0 auto;
-  border-top: 3px solid #a5bc33;
-}
 .container {
   max-width: 992px !important;
 }
-.logo {
-  height: 80px;
+header {
+  margin: 10px auto 20px;
+}
+header .logo {
   max-width: 100%;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  z-index: 3;
+  max-height: 100px;
+}
+header .cntdtl {
+  padding-top: 25px;
 }
 a,
 .btn.btn-link {
@@ -1326,30 +1325,6 @@ footer {
 * {
   transition: 300ms;
 }
-@media (min-width: 320px) {
-  .logo {
-    float: left;
-  }
-  .cnctinfo {
-    display: none;
-  }
-}
-@media (min-width: 992px) {
-  .logo {
-    float: none;
-  }
-  .cnctinfo {
-    display: block;
-  }
-}
-@media (min-width: 1200px) {
-  .logo {
-    float: none;
-  }
-  .cnctinfo {
-    display: block;
-  }
-}
 .navbar-toggle {
   background-color: #5a6b08;
   border-color: #ffffff;
@@ -1367,11 +1342,20 @@ footer {
     border: none;
   }
 }
+@media (max-width: 480px) {
+  .weblogo,
+  .cntdtl {
+    text-align: center;
+  }
+  .logo {
+    margin-bottom: 10px;
+  }
+}
 @media (max-width: 540px) {
-  header .navbar {
+  .navbar {
     min-height: 1px;
   }
-  header .navbar-default .navbar-nav {
+  .navbar-default .navbar-nav {
     margin: 0px;
   }
 }
