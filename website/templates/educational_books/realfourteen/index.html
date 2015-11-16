@@ -45,17 +45,30 @@
 				{% endif %}
 			</ul>
 		</div> 
-		<header >
-			<div class="container">
-				<div class="companyLogo">
-					{% if data.website_config.website_logo %}
-					<img class="logo"  src="{{data.website_config.website_logo.file_relative_path}}">
-					{% else %}
-					
-					<img class="logo"  src="{{data.business_logo.file_relative_path}}">
-					{% endif %}
+		<header>
+			<div class="container">	
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 weblogo">
+						{% if data.website_config.website_logo %}
+							<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-4 text-center">
+						{% if data.website_config.website_logo1 %}
+							<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
+						{% else %}
+							<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-4 text-right cntdtl">	
+						<p><strong>Mobile :</strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
+						<p>
+						<p><strong>E-mail ID :</strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
+						<p>
+					</div>
 				</div>
 			</div>
+		</header>
 			<nav class="navbar navbar-default">
 				<div class="container">
 					<!-- Brand and toggle get grouped for better mobile display -->
@@ -75,7 +88,6 @@
 					</div><!-- /.navbar-collapse -->
 				</div>
 			</nav>
-		</header>
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-offset-4 col-md-8 col-lg-offset-3 col-lg-9">

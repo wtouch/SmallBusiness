@@ -33,8 +33,8 @@
 	
 	body{
 		color:@darkcolor;
-		background-image:url('../img/bg.jpg');
-		background-color : @back;
+		
+		background-color : @colorwhite;
 		background-repeat:no-repeat;
 		background-size: 100% 100%;
 		background-attachment :fixed;
@@ -80,14 +80,14 @@
 		}
 	}
 	header{
-		margin: 0 auto;
-		border-top: 3px solid #ccb129;
-	}
-	.logo {
-		height: 80px;
-		max-height: 100px;
-		margin-top: 20px;
-		z-index: 3;
+		margin : 10px auto 20px;
+		.logo{
+			max-width: 100%;
+			height : 100px;
+		}
+		.cntdtl{
+			padding-top: 25px;
+		}
 	}
 	a,.btn.btn-link{
 		color: @darkcolor;
@@ -429,3 +429,10 @@
 		}
 		
 	}
+	@media (max-width: 480px){
+		.weblogo, .cntdtl{
+			text-align : center;
+		}
+		.logo{
+			margin-bottom : 10px;
+		}

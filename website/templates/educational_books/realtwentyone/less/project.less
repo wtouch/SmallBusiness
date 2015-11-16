@@ -116,6 +116,8 @@
 		border-radius : 4px;
 		padding:5px;
 		height:312px;
+		background-color :@back;
+		color:@darkbackcolor;
 		a, a:focus{
 			background : none;
 			/*background-color : black;*/
@@ -125,11 +127,11 @@
 			font-size:16px;
 			font-weight:bold;
 			/*font: bold 14px/1.5em Arial, Helvetica, sans-serif;*/
-			color: @back;
+			color:@darkbackcolor;
 			&:hover{
-				color: @colorwhite;
+				color: @back;
 				text-decoration:none; 
-				background-color : @back;
+				background-color : @darkbackcolor;
 				/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
 				/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
 				/*background: linear-gradient(right,#ccc,#0D8375);*/
@@ -146,6 +148,7 @@
 		border-radius : 4px;
 		padding : 5px;
 		height : 312px;
+		background-color :@back;
 		
 		img{
 			max-height : 110px;
@@ -169,8 +172,8 @@
 		p{
 			margin: 5px 5px;
 			padding: 1px;
-			border : 1px solid @back;
-			color : @back;
+			border : 1px solid @darkbackcolor;
+			color:@darkbackcolor;
 		}
 	}
 	
@@ -199,7 +202,7 @@
 .homeproject::after{
 	position : absolute;
 	content : "";
-	background-image : url('../img/home.png');
+	background-image : url('../img/home.jpg');
 	background-size: 100% 100%;
 	left :200px;
 	top : 143px;
@@ -213,7 +216,7 @@
 			.thumbnail{
 				height:400px;
 				.projectimg{
-					width : 200px;
+					width : 100%;
 					height : 150px;
 					overflow : hidden;
 					margin : 0 auto;
@@ -266,7 +269,7 @@
 			padding: 20px 20px 0px;
 			.thumbnail{
 			.projectImags{
-					width: 190px;
+					width: 100%;
 					height: 148px;
 					overflow: hidden;
 					margin : 0 auto;

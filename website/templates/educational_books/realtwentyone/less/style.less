@@ -78,12 +78,6 @@
 			}
 		}
 	}
-	header
-	{
-		background-color : @back;
-	}
-	
-	
 	.container{
 		max-width:992px !important;
 	}
@@ -106,10 +100,15 @@
 		/*color:@colorwhite;*/
 	}
 	
-	.logo {
-		height: 80px;
-		margin-top: 5px;
-		max-width: 100%;
+	header{
+		//margin : 10px auto 20px;
+		.logo{
+			max-width: 100%;
+			height : 100px;
+		}
+		.cntdtl{
+			padding-top: 25px;
+		}
 	}
 	
 	.thumbnail{
@@ -640,6 +639,14 @@
 		color : @colorwhite;
 		background-color: @darkbackcolor;
 		
+	}
+	@media (max-width: 480px){
+		.weblogo, .cntdtl{
+			text-align : center;
+		}
+		.logo{
+			margin-bottom : 10px;
+		}
 	}
 	@media (max-width: 540px){
 		header {
