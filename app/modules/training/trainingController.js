@@ -9,8 +9,8 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
-		$scope.user_id = $rootScope.userDetails.id;
-		console.log($rootScope.userDetails.id);
+		//$scope.user_id = $rootScope.userDetails.id;
+		//console.log($rootScope.userDetails.id);
 		
 		$scope.openForm = function (url,addtraining) {
 			var x = angular.copy(addtraining);
@@ -84,21 +84,27 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 	/****************************************************************************************/
 		
 		$scope.getTraining = function(page, user_id, trainingParam){
-			$scope.trainingParam = {
+			$scope.params = {
 				where : {
 					status : 1,
-					user_id : user_id
+					user_id : 8
 				},
 				cols : ["*"],
-				limit : {
-					page : 1,
-					records : 10
-				}
 			};
-			
-			dataService.get(false, 'training', $scope.trainingParam)
+			if(page){
+				angular.extend($scope.params, {
+					limit : {
+						page : page,
+						records : $scope.pageItems
+					}
+				})
+			}
+			dataService.get(false, 'training', $scope.params)
 			.then(function(response) {
-				if(response.status == 'success'){
+				$scope.totalRecords = response.totalRecords;
+				$scope.training = response.data;
+				console.log(response);
+				/* if(response.status == 'success'){
 					//$scope.viewData.technologies = Json_stringify(modalOptions.viewData.technologies);
 					$scope.totalRecords = response.totalRecords;
 					$scope.training = response.data;
@@ -108,7 +114,7 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 						$scope.training = 0;
 						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status](response.message);
-					}
+					} */
 			}); 
 		}
 		

@@ -146,7 +146,7 @@ define(['angular',
 				assetPath : '..'
 			};
 			
-			var nextUrl = next.$$route.originalPath;
+			/* var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout' || dataService.auth == false){
 				dataService.logout();
 				$rootScope.userDetails = null;
@@ -164,7 +164,7 @@ define(['angular',
 					$location.path("/dashboard");
 				}
 				
-			};
+			};  */
 			if($rootScope.userDetails != null){
 				if($rootScope.userDetails.group_id == 4){
 					if($rootScope.userDetails.config.addbusiness === undefined){

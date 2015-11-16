@@ -32,7 +32,7 @@ $app->get('/login/:getRequest','login');
 // use thi uri for single record {Vilas}
 $app->get('/getsingle/:getRequest(/:id)', 'getRecord' );
 //use this uri for post new record into database - like create
-$app->post('/post/:getRequest(/:postParams)', 'postRecord' );
+$app->post('/', 'postRecord' );
 //use this uri for put/update record from database
 $app->put('/put/:getRequest/:id', 'putRecord' );
 //use this uri for delete record from database
@@ -89,37 +89,30 @@ function getRecords(){
 	$db = new dbHelper();
 	try{
 		$params = json_decode($_GET['params'],true);
-		$table = $_GET['table'];
+		$table = $db->setTable($_GET['table']);
 		$single = $_GET['single'];
-		//if($table && $single){ // For single request
+		$cols = $params['cols'];
+		//$search = $params['search'];
+		 // For single request
 		
-			//print_r(($params));
-			//print_r($table);
-			
-			$like = array();
 			if($params['limit']){
 				$limit[0] = $params['limit']['page'];
 				$limit[1] = $params['limit']['records'];
 			}
-			//print_r($limit);
+			if(isset($params['search']) && ($params['search'] == true)){
+				(isset($_GET['name'])) ? $like['name'] = $_GET['name'] : "";
+			} 
 			$where = array();
-			$userId = $params['where']['user_id'];
-			$userCols['name'] = "name";
-			$userCols['username'] = "username";
-			$user = $db->getUsers($userId,$userCols);
-			
 			$db->setLimit($limit);
-			
-			$table = $db->setJoinString("INNER JOIN", "training", array("user_id"=>$user.".id"));
+		
 			if(isset($params['where'])){
-				$db->setWhere($params['where'], $table);
+				$db->setWhere($params['where'], $table,true);
 			}
-			
-			$db->setWhere($like, $table, true);
-			$selectInnerJoinCols[0] = "*";
-			$db->setColumns($table, $selectInnerJoinCols);
-			
+		
+			$db->setColumns($table,$cols);
+			//print_r($db->setColumns($table,$cols));
 			$data = $db->select();
+			//print_r($data);
 			echo json_encode($data);
 		//}else{ // For Multiple request
 			
@@ -135,28 +128,29 @@ function getRecords(){
 		
 };
 
-function postRecord($getRequest, $postParams=null){
+function postRecord(){
 	$app = new \Slim\Slim();
 	$body = $app->request->getBody();
 	// this will get current url
-	$posIndex = strpos( $_SERVER['PHP_SELF'], '/index.php');
-	$baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex).'/index.php'; 
+	$posIndex = strpos( $_SERVER['PHP_SELF'], '/index1.php');
+	$baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex).'/index1.php'; 
 	
 	try{
 		
-		if(!isset($_SESSION['username']) && $postParams != ("login" || "forgotpass" || "changepass") && $getRequest != "enquiry" && $getRequest != "training"){
+		/* if(!isset($_SESSION['username']) && $postParams != ("login" || "forgotpass" || "changepass") && $getRequest != "enquiry" && $getRequest != "training"){
 			throw new Exception('You are not logged in!');
-		}
+		} */
 		if($body===""){
 			throw new Exception('There is no input!');
 		}else{
-			include 'modules/'.$getRequest.'.php';
+			include 'modules/user.php';
 		}
 	}
 	catch(Exception $e) {
 		//echo $postParams;
 		$response["status"] = "error";
         $response["message"] = "Error: '".$e->getMessage()."'";
+		//print_r( $response["message"]);
         $response["data"] = null;
 		echoResponse(200, $response);
     }
