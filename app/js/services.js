@@ -225,7 +225,7 @@ define(['app'], function (app) {
 	  app.service("dataService", ['$http', '$window','$rootScope', '$cookieStore', '$cookies', '$location','$timeout','$notification', '$q', 'dbHelper',
 		function ($http, $window,$rootScope,$cookieStore,$cookies,$location,$timeout, $notification, $q, dbHelper) { // This service connects to our REST API
 
-			var serviceBase = '../server-api/index.php/';
+			var serviceBase = '../server-api/index1.php/';
 			var today = new Date();
 			var year = today.getFullYear();
 			var month = today.getMonth() + 1;
@@ -409,18 +409,36 @@ define(['app'], function (app) {
 					
 				});
 			};
+	
 			
 			// Method for Insert Query
 			obj.post = function (table, object) {
 				$rootScope.loading = true;
-				object = obj.stringify(object);
-				return dbHelper.post(table, object).then(function(response){
+				if($rootScope.sqLite){
+					object = obj.stringify(object);
+					return dbHelper.post(table, object).then(function(response){
 					if(response.status != "success"){
 						$notification[response.status](table, response.message);
 					}
 					$rootScope.loading = false;
 					return response;
 				})
+				}else{
+					var reqParams = {
+						table : table,
+					}
+					return $http({
+						url:"../server-api/index1.php",
+						method: "POST",
+						data: object,
+						params: reqParams
+					}).then(function (results) {
+						$rootScope.loading = false;
+						return results.data;
+					});
+				}
+				
+				
 			};
 			// Method for Update Query
 			obj.put = function (table, object, params) {
@@ -436,7 +454,6 @@ define(['app'], function (app) {
 			};
 			
 			obj.get = function (single, table, params) {
-				
 				$rootScope.loading = true;
 				if($rootScope.sqLite){
 					return dbHelper.selectData(table, single, params).then(function(response){
@@ -457,11 +474,13 @@ define(['app'], function (app) {
 						url: '../server-api/index1.php',
 						method: "GET",
 						params: reqParams
+						
 					}).then(function (results) {
 						$rootScope.loading = false;
 						return results.data;
 						
 					});
+					console.log(params);
 				}
 			};
 			return obj;
