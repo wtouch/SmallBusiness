@@ -50,6 +50,7 @@
   top: -5px;
   background: -webkit-gradient(linear, left top, right top, from(#3275bc), to(#ffffff));
   background-image: -webkit-linear-gradient(left, #3275bc 90, #ffffff 20%);
+  box-shadow: 1px 1px 5px #000d69;
 }
 .sidebarModule.sidemenu ul {
   padding: 0;
@@ -601,7 +602,7 @@
   position: absolute;
   left: 700px;
   top: -5px;
-  width: 245px;
+  width: 270px;
 }
 .homeproject .projectnav .nav-stacked {
   margin: 5px;
@@ -655,7 +656,7 @@
   display: block;
   position: absolute;
   top: 49px;
-  left: 219px;
+  left: 244px;
   border-top: 10px solid #000d69;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
@@ -702,10 +703,10 @@
   background-image: url('../img/home.png');
   background-size: 100% 100%;
   right: -23px;
-  top: 65px;
+  bottom: 0px;
   z-index: 999;
-  height: 356px;
-  width: 435px;
+  height: 245px;
+  width: 350px;
 }
 .project .navbar {
   border-radius: 0;
@@ -848,8 +849,6 @@
 }
 body {
   color: #000000;
-  background: url('../img/bg.jpg') fixed;
-  background-repeat: no-repeat;
 }
 .sociallinks {
   top: 50%;
@@ -891,17 +890,17 @@ body {
   transform: translateX(-45px);
 }
 header {
-  margin: 0 auto;
-  border-top: 3px solid #000d69;
+  margin: 10px auto 20px;
+}
+header .logo {
+  max-width: 100%;
+  max-height: 100px;
+}
+header .cntdtl {
+  padding-top: 10px;
 }
 .container {
   width: 992px !important;
-}
-.logo {
-  height: 80px;
-  max-height: 100px;
-  margin-top: 20px;
-  z-index: 3;
 }
 a,
 .btn.btn-link {
@@ -933,15 +932,13 @@ a:hover,
 .modal-body p {
   color: #000000;
 }
-html {
-  min-width: 1022px;
-}
 .btn + .btn {
   margin-left: 5px;
 }
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > li > a:hover {
   background-color: transparent;
   color: #a92159;
   border-top: 10px solid #000d69;
@@ -963,7 +960,6 @@ html {
   position: relative;
   padding: 0 5px;
   float: left;
-  z-index: 4;
 }
 .navbar-default .navbar-nav > li > a,
 .navbar-default .navbar-nav > li > a:focus {
@@ -980,7 +976,7 @@ html {
   display: none;
   position: absolute;
   width: 170px;
-  z-index: 999;
+  z-index: 9999;
   padding: 2px;
   list-style: none;
   text-align: left;

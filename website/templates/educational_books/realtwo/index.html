@@ -14,7 +14,6 @@
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script> 
-		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
@@ -84,35 +83,44 @@
 		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 		<header>
 			<div class="container">
-				<div class="head">
-					<div class="text-center">
-					{% if data.website_config.website_logo %}
-					
-					<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}" alt="{{data.business_name}}">
-					{% else %}
-					
-					<img class="logo" src="{{data.business_logo.file_relative_path}}" alt="{{data.business_name}}">
-					{% endif %}
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 weblogo">
+						{% if data.website_config.website_logo %}
+							<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						{% endif %}
 					</div>
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
+					<div class="col-xs-12 col-sm-4 text-center">
+						{% if data.website_config.website_logo1 %}
+							<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
+						{% else %}
+							<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						{% endif %}
 					</div>
-					<nav class="navbar navbar-default">
-						<!-- Brand and toggle get grouped for better mobile display -->
-						
-						<!-- Collect the nav links, forms, and other content for toggling -->
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav">
-								{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-							</ul>
-						</div><!-- /.navbar-collapse -->
-					</nav>
+					<div class="col-xs-12 col-sm-4 text-right cntdtl">	
+						<p><strong>Mobile :</strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
+						<p>
+						<p><strong>E-mail ID :</strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
+						<p>
+					</div>
+				</div> 
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>Main Menus
+						<!-- <span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span> -->
+					</button>
 				</div>
+				<nav class="navbar navbar-default">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+						</ul>
+					</div><!-- /.navbar-collapse -->
+				</nav>
 				{%if modules.headerModule.carousal %}
 				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 				{%endif%}

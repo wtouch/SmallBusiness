@@ -27,11 +27,6 @@
 	
 	body{
 		color:@colorblack;
-		//-webkit-gradient(linear, left top, right top, from(#fff3ce), to(#efefef))
-		//background-image:url('../img/bg.png'), linear-gradient( @lightbackcolor ,@colorwhite );
-		background: url('../img/bg.jpg') fixed;
-		
-		background-repeat:no-repeat;
 	}
 	.sociallinks{
 		top: 50%;
@@ -74,23 +69,18 @@
 		}
 	}
 	header{
-		margin: 0 auto;
-		border-top: 3px solid @darkbackcolor;
+		margin : 10px auto 20px;
+		.logo{
+			max-width: 100%;
+			max-height : 100px;
+		}
+		.cntdtl{
+			padding-top: 10px;
+		}
 	}
 	
 	.container{
 		width:992px !important;
-		//background-image: url('../img/bg.png');
-		//position:relative;
-		
-	}
-	
-	.logo {
-		height: 80px;
-		max-height: 100px;
-		margin-top: 20px;
-		z-index: 3;
-		
 	}
 	a, .btn.btn-link{
 		color: @darkbackcolor;
@@ -122,13 +112,10 @@
 			color:@colorblack;
 		}
 	}
-	html{
-		min-width:1022px;
-	}
 	.btn + .btn{
 		margin-left : 5px;
 	}
-	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
+	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>li>a:hover{
 		background-color:transparent;
 		color:@color;
 		border-top: 10px solid @darkbackcolor;
@@ -149,7 +136,6 @@
 				position : relative;
 				padding: 0 5px;
 				float: left;
-				z-index: 4;
 				>a, > a:focus {
 					color:@colorblack;
 					padding: 8px 15px;
@@ -165,7 +151,7 @@
 					display: none;
 					position: absolute;
 					width: 170px;
-					z-index: 999;
+					z-index: 9999;
 					padding: 2px;
 					list-style: none;
 					text-align: left;
