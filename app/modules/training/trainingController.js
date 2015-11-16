@@ -84,12 +84,19 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 	/****************************************************************************************/
 		
 		$scope.getTraining = function(page, user_id, trainingParam){
-			$scope.trainingParam = (trainingParam) ? trainingParam : {
+			$scope.trainingParam = {
+				where : {
 					status : 1,
 					user_id : user_id
-				};
+				},
+				cols : ["*"],
+				limit : {
+					page : 1,
+					records : 10
+				}
+			};
 			
-			dataService.get("/getmultiple/training/"+page+"/"+$scope.pageItems, $scope.trainingParam)
+			dataService.get(false, 'training', $scope.trainingParam)
 			.then(function(response) {
 				if(response.status == 'success'){
 					//$scope.viewData.technologies = Json_stringify(modalOptions.viewData.technologies);
