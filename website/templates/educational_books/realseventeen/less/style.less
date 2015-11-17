@@ -94,7 +94,7 @@
 	}
 	.content
 	{
-		background-color :@colorwhite;
+		background-color :@lightbackcolor;
 	}
 	
 	*, hr{
@@ -171,15 +171,17 @@
 				position : relative;
 				
 				> a, > a:focus {
-					color :@colorwhite;
+					color :@lightbackcolor;
 					padding : 10px 25px;
 					border-right: 1px solid white;
 					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
 				}
 				&.active>a, &.active:hover > a, &.active:hover > a:hover, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					background-color :@colorwhite;
+					background-color :@lightbackcolor;
 					color: @darkbackcolor;
+					border-top:2px solid @darkbackcolor;
+					border-bottom:2px solid @darkbackcolor;
 				}
 				> ul {
 					transition: all 300ms ease-in;
@@ -200,12 +202,13 @@
 						>a{
 							color:@colorwhite;
 							&:hover{
+								
 								text-decoration: underline;
 								-webkit-transition: all 0.4s;
 							}
 						}
 						&:hover{
-							background-color : @colorwhite;
+							background-color:@lightbackcolor;
 							a{
 								color : @back;
 							}

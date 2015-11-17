@@ -11,16 +11,18 @@
 			border-bottom: 1px solid @darkbackcolor;
 			li{
 				a{
+					background: linear-gradient(@lightcolor,@color);
 					border: 1px solid @darkbackcolor;
 					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
+					color: @colorwhite;
 					&:hover{
 						color: @colorwhite;
-						background: linear-gradient(#01579b, #0277bd);
+						background: linear-gradient(@lightbackcolor 75%,@darkcolor);
 					}
 				}
 				&.active>a, &.active>a:hover, &.active>a:focus{
 					color: @colorwhite;
-					background: linear-gradient(#01579b, #0277bd);
+					background: linear-gradient(@lightbackcolor 75%,@darkcolor);
 					border: 1px solid @darkbackcolor;
 				}
 			}
