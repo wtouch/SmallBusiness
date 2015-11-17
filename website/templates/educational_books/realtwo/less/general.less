@@ -14,14 +14,21 @@
 				a{
 					border: 1px solid @darkbackcolor;
 					font:16px 'Alex Brush', cursive;
+					background-color: @back;
+					color: @colorwhite;
 					&:hover{
-						color: @colorwhite;
+						color: @back;
 						background-color: @back;
+						background : -webkit-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : linear-gradient(top,@back, @lightbackcolor,@back);
 					}
 				}
 				&.active>a, &.active>a:hover, &.active>a:focus{
-					color: @colorwhite;
-					background-color: @back;
+					color: @back;
+					background : -webkit-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : linear-gradient(top,@back, @lightbackcolor,@back);
 					border: 1px solid @darkbackcolor;
 				}
 			}

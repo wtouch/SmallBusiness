@@ -125,7 +125,7 @@
 					margin-top: 10px;
 				}
 				>a, > a:focus{
-					color : @color;
+					color : @colorwhite;
 					padding: 11px 15px;
 					text-transform : uppercase;
 					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
@@ -133,7 +133,10 @@
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration : none;
 					background-color: @darkcolor;
-					color : @colorwhite;
+					color : @back;
+					background : -webkit-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : linear-gradient(top,@back, @lightbackcolor,@back);
 				}
 			}
 		}

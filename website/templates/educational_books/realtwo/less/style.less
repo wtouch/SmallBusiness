@@ -93,22 +93,25 @@
 			background : -webkit-linear-gradient(top, @back, @darkcolor, @back);
 			background : -moz-linear-gradient(top, @back, @darkcolor, @back);
 			background : linear-gradient(top, @back, @darkcolor, @back);
-			border : none;
+			border : 2px solid @colorwhite;
 			.navbar-nav{
 				>li{
 					position :relative;
 					>a{
-						color : @color;
+						color : @colorwhite;
 						text-shadow: 1px 1px @colorblack;
-						border-right: 1px solid @back; 
+						border-right: 1px solid @colorwhite; 
 						text-transform : uppercase;
 						font: bold 15px/1.5em Arial, Helvetica, sans-serif;
 					}
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-						color: @colorwhite;
+						color: @back;
 						cursor: pointer;
 						text-shadow: 1px 1px @colorblack;
 						background: @darkcolor;
+						background : -webkit-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : linear-gradient(top,@back, @lightbackcolor,@back);
 					}
 					ul{
 						display : none;
@@ -317,12 +320,11 @@
 			font: 16px 'Alex Brush', cursive;
 		}
 		&:hover{
-			//background-color:@darkcolor;
-			background : -webkit-linear-gradient(right, @back, @lightbackcolor,@back);
-			background : -moz-linear-gradient(right, @back, @lightbackcolor,@back);
-			background : linear-gradient(right, @back, @lightbackcolor,@back);
+			background : -webkit-linear-gradient(top,@back, @lightbackcolor,@back);
+			background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
+			background : linear-gradient(top,@back, @lightbackcolor,@back);
 			border: 1px solid @back;
-			color: @back;
+			color: white;
 		}
 	}
 	.btn-info:hover{

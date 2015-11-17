@@ -105,8 +105,8 @@
 			//background : -moz-linear-gradient(top, @back, @darkcolor, @back);
 			//background : linear-gradient(top, @back, @darkcolor, @back);
 			background-color : @back;
+			border:2px solid @colorwhite;
 			z-index: 9999;
-			border : none;
 			.navbar-nav{
 				>li{
 				
@@ -120,9 +120,9 @@
 						
 					position :relative;
 					>a{
-						color : @color;
+						color : @colorwhite;
 						text-shadow: 1px 1px @colorblack;
-						border-right: 1px solid @darkcolor; 
+						border-right: 1px solid @colorwhite; 
 						text-transform : uppercase;
 						font: bold 15px/1.5em Arial, Helvetica, sans-serif;
 					}
@@ -311,7 +311,7 @@
 			}
 			.featuredProperty{
 				.sections{
-					height : 250px;
+					//height : 250px;
 				}
 			}
 		article{ 
@@ -328,9 +328,10 @@
 	
 	//global css
 	a{
-		color : @darkcolor;
+		background-color:@back;
+		color : @colorwhite;
 		&:hover{
-			color : @back;
+			background-color:@darkcolor;
 		}
 	}
 	h2, h3, h4{
@@ -362,7 +363,7 @@
 			background : -moz-linear-gradient(right, @back, @lightbackcolor,@back);
 			background : linear-gradient(right, @back, @lightbackcolor,@back);
 			border: 1px solid @back;
-			color: @back;
+			color: @colorwhite;
 		}
 	}
 	.btn-info:hover{
