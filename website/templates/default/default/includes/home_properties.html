@@ -47,13 +47,17 @@
 										<td>{{x.location}}</td>
 									</tr>
 									{% endif %}
-									{% if x.price %}
 									<tr>
 										<td>Price</td>
 										<td>:</td>
-										<td>{{x.price}}</td>
+										<td>
+											{% if x.price %}
+												{{x.price}}
+											{% else%}
+												Call For Price - {{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}
+											{% endif %}
+										</td>
 									</tr>
-									{% endif %}
 								</table>
 							</div>
 							<div class="readmore">
