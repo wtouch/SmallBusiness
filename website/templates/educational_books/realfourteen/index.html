@@ -15,7 +15,6 @@
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script>
-		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
@@ -74,10 +73,7 @@
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
+							<span class="sr-only">Toggle navigation</span>Main Menus
 						</button>
 					</div>
 					<!-- Collect the nav links, forms, and other content for toggling -->
@@ -116,15 +112,14 @@
 				</div>
 				{% if modules.sidebarModule >= 1 %}
 				<div class="col-xs-12 col-md-4 col-lg-3">
-					{%if modules.sidebarModule.enquiry %}
-						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry:{user_id : data.user_id,owner_email:data.owner_email}} %}
-					{%endif%}
-					
-					{%if modules.sidebarModule.contact %}
-					{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-					{%endif%}
 					{%if modules.sidebarModule.searchProp %}
 						{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.contact %}
+						{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+					{%endif%}
+					{%if modules.sidebarModule.enquiry %}
+						{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry:{user_id : data.user_id,owner_email:data.owner_email}} %}
 					{%endif%}
 					{% if modules.sidebarModule.sidemenu %}
 						{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}

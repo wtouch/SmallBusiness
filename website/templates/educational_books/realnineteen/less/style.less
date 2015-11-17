@@ -15,7 +15,7 @@
 //background color shade
 	@back : #ff0000; //remaining
 	@darkbackcolor :#000D69;// #2F46E4;//#57102C 
-	@lightbackcolor :#3275BC;//#7EC2AA 
+	@lightbackcolor :#B6D8FB;//#7EC2AA 
 	
 //common color shade
 	@colorblack : #000000;
@@ -75,7 +75,10 @@
 			max-height : 100px;
 		}
 		.cntdtl{
-			padding-top: 10px;
+			padding-top: 20px;
+		}
+		.weblogo{
+			padding-top: 15px;
 		}
 	}
 	
@@ -118,14 +121,14 @@
 	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>li>a:hover{
 		background-color:transparent;
 		color:@color;
-		border-top: 10px solid @darkbackcolor;
+		border-bottom: 10px solid @darkbackcolor;
 	}
 	.navbar-default {
 		background:transparent;
 		border:none;
 		.navbar-nav{
+			border-top: 1px solid @darkbackcolor;
 			>li:hover{
-				
 				color:@back;
 			}
 			>li >a:active,>li >a:hover,>li >a:focus{
@@ -150,7 +153,7 @@
 				> ul{
 					display: none;
 					position: absolute;
-					width: 170px;
+					width: 260px;
 					z-index: 9999;
 					padding: 2px;
 					list-style: none;
@@ -166,11 +169,11 @@
 							color : @colorwhite;
 							&:hover{
 								color : @colorwhite;
-								
+								text-decoration : none;
 							}
 						}
 						&:hover{
-							background-color:@darkbackcolor;
+							
 						}
 						
 						ul{
@@ -200,7 +203,7 @@
 						
 						}
 						&:hover{
-							background-color:@colorblack;
+							background-color:@lightcolor;
 							ul{
 								display : block;
 							}
@@ -358,8 +361,8 @@
 		.panel,.sections{
 			color: @colorblack;
 			top: -5px;
-			background: -webkit-gradient(linear, left top, right top, from(@lightbackcolor), to(@colorwhite));
-			background-image: -webkit-linear-gradient(left, @lightbackcolor 90 , @colorwhite 20%);
+			background: -webkit-gradient(linear, left top, right top, from(@colorwhite), to(@lightbackcolor));
+			background-image: -webkit-linear-gradient(left, @colorwhite 90 , @lightbackcolor 20%);
 			border-top:1px solid @darkbackcolor;
 			box-shadow: 1px 1px 5px @darkbackcolor;
 		}
