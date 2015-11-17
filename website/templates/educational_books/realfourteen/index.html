@@ -142,19 +142,22 @@
 						<ul class="nav nav-tabs" role="tablist">
 							{%if modules.contentModule.featured_services %}
 							<li role="presentation" class="active">
+								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
+							</li>
+							<li role="presentation" >
 								<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
 							</li>
 							{%endif%}
 							<li role="presentation">
 								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
 							</li>
-							<li role="presentation">
-								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
-							</li>
+							
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="featrserv">
+						
+						
+							<div role="tabpanel" class="tab-pane " id="featrserv">
 							{%if modules.contentModule.featured_services %}
 								{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 							{%endif%}
@@ -162,7 +165,7 @@
 							<div role="tabpanel" class="tab-pane" id="featrtesti">
 							{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
 							</div>
-							<div role="tabpanel" class="tab-pane" id="ourassoc">
+							<div role="tabpanel" class="tab-pane active" id="ourassoc">
 								{% include [templatePath ~ '/includes/our_associates.html', 'default/default/includes/our_associates.html'] %}
 							</div>
 						</div>
