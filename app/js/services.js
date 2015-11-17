@@ -443,14 +443,30 @@ define(['app'], function (app) {
 			// Method for Update Query
 			obj.put = function (table, object, params) {
 				$rootScope.loading = true;
-				object = obj.stringify(object);
-				return dbHelper.put(table, object, params).then(function(response){
-					if(response.status != "success"){
-						$notification[response.status](table, response.message);
+				if($rootScope.sqLite){
+					object = obj.stringify(object);
+					return dbHelper.put(table, object, params).then(function(response){
+						if(response.status != "success"){
+							$notification[response.status](table, response.message);
+						}
+						$rootScope.loading = false;
+						return response;
+					})
+				}else{
+					var reqParams = {
+						table : table,
+						params: params
 					}
-					$rootScope.loading = false;
-					return response;
-				})
+					return $http({
+						url:"../server-api/index1.php",
+						method: "PUT",
+						data: object,
+						params: reqParams
+					}).then(function (results) {
+						$rootScope.loading = false;
+						return results.data;
+					});
+				}
 			};
 			
 			obj.get = function (single, table, params) {

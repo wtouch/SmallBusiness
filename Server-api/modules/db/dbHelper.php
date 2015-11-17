@@ -121,7 +121,10 @@ class dbHelper {
 		}
 		return $table;
 	}
-	function setLimit($limit = array(1,10)){
+	function setLimit($limit = null){
+		if($limit === null){
+			return;
+		}
 		$lmt = ($limit[0] == 0 ) ? $limit[0] : $limit[0] - 1;
 		$startLimit = $lmt * $limit[1];
 		
