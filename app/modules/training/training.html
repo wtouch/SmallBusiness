@@ -14,22 +14,22 @@
 				<div class="col-sm-2"> 
 					<div class="bottomspace">
 						<label for="search" class="control-label">Search </label>
-							<input id="search" type="text" class="form-control" ng-model="searchProper" ng-change="filterData('name', searchProper,user_id)" placeholder="search"/>
+						<input id="search" type="text" class="form-control" ng-model="search" ng-change="filter('name',search,true)" placeholder="search"/>
 					</div>
 				</div>			 				  
 				<div class="col-sm-2">
 					<label for="sort" class="control-label">Sort by Order</label>
-					<select id="sort" class="form-control" ng-model="title"> 
-						<option value="">Select Order</option>	
-						<option value="-name">Desending</option>
-						<option value="name">Asending</option>  
-					</select>
+						<select class="form-control" ng-model="sort" ng-change="orderBy('title', sort)">
+							<option value="">Sort By</option>
+							<option value="asc">Ascending</option>
+							<option value="desc">Descending</option>
+						</select>
 				</div>
 				<div class="col-sm-2">
 					<label for="status" class="control-label">Filter By Status</label>
-					<select id="status" class="form-control" 
-					ng-change="filterData('status',showStatus,user_id)" ng-model="showStatus">
-					<option value="">Select Status</option>	
+					<select id="status"  ng-model="status" class="form-control" 
+					ng-change="filter('status', status)">
+						<option value="">Select Status</option>	
 						<option value="1">Active</option>
 						<option value="0">Deleted</option>
 					</select>
@@ -38,7 +38,7 @@
 			
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="table-responsive" ng-init="getData(currentPage)">
+					<div class="table-responsive" ng-init="getData(currentPage, 'training', 'trainingList' )">
 						<table class="table table-bordered ">
 							<thead>
 								<tr>
@@ -51,7 +51,7 @@
 							</thead>
 							
 							<tbody>
-								<tr ng-repeat="x in training | orderBy:title ">
+								<tr ng-repeat="x in trainingList">
 									<td>{{((currentPage - 1) * pageItems) + $index + 1}}</td>
 									<td>{{x.name}}</td>
 									<td>{{x.email}}</td>
@@ -79,7 +79,7 @@
 						</table>
 					</div>
 				<div class="text-center">				
-					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(currentPage)"></pagination>
+					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(currentPage, 'training', 'trainingList' ,params)"></pagination>
 					<pre>Page: {{currentPage}} / {{numPages}}</pre>
 				</div>	
 				</div>

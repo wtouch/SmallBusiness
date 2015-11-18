@@ -47,36 +47,41 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			});
 		};	
 		
-		// global method for filter  {sunita}
-		$scope.params = {
-			where : {
-				status : 1,
-				user_id : 8
-			},
-			cols : ["*"],
-		};
-		$scope.filterData = function(searchCol, searchValue,user_id) {
-			if(searchCol == 'status'){
-				$scope.params = {
-					cols : ["*"]
-				};
+		// global method for filter  
+		$scope.filter = function(col, value, search){
+			if(search == true){
+				if(value == "" || value == undefined){
+					delete $scope.params.search[col];
+				}else{
+					if(!$scope.params.search) $scope.params.search = {};
+					$scope.params.search[col] = value;
+				}
+			}else{
+				if(value == "" || value == undefined){
+					delete $scope.params.where[col];
+				}else{
+					if(!$scope.params.where) $scope.params.where = { status : 1};
+					$scope.params.where[col] = value;
+				}
 			}
-			$scope.filterStatus = { search : {}};
-			$scope.filterStatus.search[searchCol] = searchValue;
-			(searchValue =="") ? delete $scope.params.search[searchCol] : "";
-			
-			angular.extend($scope.params, $scope.filterStatus);
-			$scope.getData($scope.currentPage,user_id,$scope.params);
+			$scope.getData($scope.currentPage, "training", "trainingList", $scope.params);
+		}
+		
+		// order by filter
+		$scope.orderBy = function(col, value){
+			if(!$scope.params.orderBy) $scope.params.orderBy = {};
+			$scope.params.orderBy[col] = value;
+			console.log($scope.params);
+			$scope.getData($scope.currentPage, "training", "trainingList", $scope.params);
 		};
-	
-		// global method for get request  {sunita}
-		$scope.getData = function(page, user_id, params){
-			$scope.params = (params)? params :{
+		
+		// global method for get request  
+		$scope.getData = function(page, table, subobj, params, modalOptions) {
+			$scope.params = (params) ? params : {
 				where : {
-					status : 1,
-					user_id : 8
+					status : 1
 				},
-				cols : ["*"],
+				cols : ["*"]
 			};
 			if(page){
 				angular.extend($scope.params, {
@@ -86,19 +91,29 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 					}
 				})
 			}
-			dataService.get(false, 'training', $scope.params)
-			.then(function(response) {
+			dataService.get(false,table,$scope.params).then(function(response) {
 				if(response.status == 'success'){
-					$scope.totalRecords = response.totalRecords;
-					$scope.training = response.data;
+					if(modalOptions != undefined){
+						modalOptions[subobj] = angular.copy(response.data);
+						modalOptions.totalRecords = response.totalRecords;
+					}else{
+						$scope[subobj] = angular.copy(response.data);
+						$scope.totalRecords = response.totalRecords;
+						console.log($scope[subobj]);
+					}
 				}else{
-					$scope.totalRecords = [];
-					$scope.training = 0;
+					if(modalOptions != undefined){
+						modalOptions[subobj] = [];
+						modalOptions.totalRecords = 0;
+					}else{
+						$scope[subobj] = [];
+						$scope.totalRecords = 0;
+					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status](response.message);
-				}  
-			}); 
-		}
+					$notification[response.status]("Get Transactions", response.message);
+				}
+			});
+		};
 		
 		$scope.changeCol = function(colName, colValue, id){
 			$scope.changeStatus = {};
@@ -108,22 +123,21 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			.then(function(response) {
 				console.log(response);
 				if(response.status == "success"){
-					$scope.getData($scope.currentPage);
+					$scope.getData($scope.currentPage, "training", "trainingList", $scope.params);
 				}if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Update Record Successfully..", response.message);
 			});
 		};	
 		
 		$scope.open = function (url, viewData) {
-			
 			var modalDefaults = {
-				templateUrl: url,	// apply template to modal
+				templateUrl: url,
 				size : 'lg'
 			};
 			var modalOptions = {
-				viewData : viewData  // assign data to modal
+				viewData : viewData 
 			};
-			//console.log(response.data);
+			
 			modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 				console.log("modalOpened");
 			});
