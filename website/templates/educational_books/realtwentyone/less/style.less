@@ -34,9 +34,6 @@
 	
 	body{
 		background-color :@lightbackcolor;
-		/*background-image:-webkit-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
-		/*background-image:-moz-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
-		/*background-image:linear-gradient(@darkcolor,@lightbackcolor 50%);*/
 	}
 	.sociallinks{
 		top: 50%;
@@ -95,38 +92,24 @@
 	*{
 		transition:300ms;
 	}
-	.form-control{
-		/*background-color:@back !important;*/
-		/*color:@colorwhite;*/
-	}
 	
 	header{
-		//margin : 10px auto 20px;
+		margin-bottom : 10px;
 		.logo{
 			max-width: 100%;
 			height : 100px;
 		}
 		.cntdtl{
-			padding-top: 25px;
+			padding-top: 15px;
 		}
 	}
-	
 	.thumbnail{
 		background-color:transparent;
 		border: 1px solid @darkbackcolor;
 	}
-	
-	.propertylist .text-center a:hover{
-		text-decoration : none;
-		color: @darkbackcolor;
-	}
 	a
 	{
 		color:@back;
-	}
-	
-	footer a{
-		color:@colorwhite;
 	}
 	.cnctinfo{
 		color:@color;
@@ -174,7 +157,6 @@
 				
 				> a, > a:focus {
 					color :@colorwhite;
-				
 					border-right: 1px solid white;
 					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
@@ -182,44 +164,31 @@
 				&.active > a
 				{
 					background-color :@back;
-					color: @colorblack;
+					color: @darkbackcolor;
 				}
 				&.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					//-webkit-transition: all 0.4s;
 					color : @darkbackcolor;
 					background-color:@back;
 				}
 				> ul {
-					transition: all 300ms ease-in;
 					display: none;
 					position: absolute;
 					width: 245px;
 					z-index: 999;
 					background-color: @back;
-					padding: 12px;
+					padding: 5px;
 					list-style: none;
 					text-align: left;
 					top : 50px;
-					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					>li{
-						border-bottom: 1px solid @darkbackcolor;
-						padding: 7px;
+						padding: 10px;
 						>a{
-							color:@colorwhite;
-							&:hover{
-								text-decoration: underline;
-								-webkit-transition: all 0.4s;
-							}
-						}
-						&:hover{
-							background-color : @darkbackcolor ;
-							/*background: -webkit-linear-gradient(right,#ccc,#0D8375);
-							background: -moz-linear-gradient(right,#ccc,#0D8375);
-							background: linear-gradient(right,#ccc,#0D8375);*/
+							color:@darkbackcolor;
 						}
 						ul{
 							list-style: none;
+							display : none;
 							li{
 								font-size:10px;
 								a{
@@ -229,6 +198,16 @@
 								}
 							}
 						
+						}
+						&:hover{
+							background-color : @darkbackcolor ;
+							a{
+								color : @colorwhite;
+								text-decoration : none;
+							}
+							ul{
+								display : block;
+							}
 						}
 					}
 				}
@@ -255,39 +234,27 @@
 		position: relative;
 		color: @colorwhite;
 	}
-	
-	h1{
+	h1, h2, h3{
 		color: @color;
+	}
+	h1, h2, h3{
+		font-family : Amaranth-Regular;
+	}
+	h1{
 		font: 2em/1.2em Amaranth-Regular;
-		letter-spacing: 1px;
 		border-bottom: 1px solid @darkbackcolor;
 	}
-	
-	h2{
-	color: @color;
-	}
-	
-	h5{
+	h5, h4{
 		color : @back;
 	}
-	h3
-	{
-		color : @back;
-		font: 2em/1.2em Amaranth-Regular;
-	}
-	h2,h5{
-		font: 2em/1.2em Amaranth-Regular;
-		
-	}
-	
 	h4{
-		color : @back;
 		border-bottom : 1px solid @darkbackcolor;
 		padding-bottom: 8px;
+		margin-top : 0px;
 		font: 1.5em/1.2em Amaranth-Regular;
 	}
-	h3:hover,h4:hover{
-	color:@darkcolor;
+	h4:hover{
+		color:@darkcolor;
 	}
 	.btn-link{
 		padding-left : 0px;
@@ -298,7 +265,6 @@
 	}
 	.sections
 	{
-	
 		padding:10px;
 	}
 	.contentModule {
@@ -309,16 +275,12 @@
 				padding : 4px;
 				border : 3px solid @darkbackcolor;
 			}
-			.readmore{
-				margin-top:15px;
-			}
 		}
 		
 	}
 	.form-control{
 		background-color:transparent;
 		border:1px solid @darkbackcolor;
-	
 	}
 	.contactus{
 		h4{
@@ -326,69 +288,45 @@
 			padding-bottom : 0px;
 		}
 	}
-	/*.featuretab{
-		
-		position: relative;
-		margin-bottom: 25px;
-		padding : 15px 30px 15px;
-		margin-top: 20px;
-		border-radius: 5px;
-		.nav-tabs{
-			border-bottom: 1px solid @darkbackcolor;
-			li{
-				a{
-					border: 1px solid @back;
-					font: 2em/1.2em Amaranth-Regular;
-					font-size:18px;
-					&:hover{
-						color: @back;
-						background-color: @colorwhite;
-					}
-				}
-				&.active>a, &.active>a:hover, &.active>a:focus{
-					color: @colorwhite;
-					background-color: @back;
-					border: 1px solid @darkbackcolor;
-				}
-			}
-		}
-	}*/
-	
 	nav {
 		.pagination{
 			li,.disabled{
 				a{
 					background-color: @darkbackcolor;
-					color:@back;
-					border:none;		
-					
+					border-color : @darkbackcolor;
+					color:@colorwhite;
 					&:hover{
 						background-color:@back;
 						color:@darkbackcolor;
+						border-color : @darkbackcolor;
 					}
 				}
 			}
 			>.active>a{
 				background-color:@back;
 				color:@darkbackcolor;
-				
-			
+				border-color : @colorblack;
 			}
-			>.active>a:hover{
-			background-color:@back;
+			.active>a:hover{
+				background-color:@back;
 				color:@darkbackcolor;
+				border-color : @darkbackcolor;
 			}
 		}
 		
 	} 
-	
-
 	hr{
 		margin :5px 0px;
 	}
 	footer{
 		background-color : @darkbackcolor;
-		padding:5px;
+		padding : 10px 10px 0px;
+		margin-top : 10px;
+		color:@lightcolor;
+		font-weight : bold;
+		a{
+			color:@back;
+		}
 		.footlink{
 			ul{
 				color :@darkbackcolor;
@@ -423,17 +361,20 @@
 		}
 	}
 	
-	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default{
+	.searchProperty,.sections{
 		border : 1px solid @darkbackcolor;
-		background-color:transperent;
+		background-color : transperent;
 		input,textarea{
 			color:@colorblack;
 		}
 		
 	}
+	.panel-default{
+		border-color : @darkbackcolor;
+	}
 	.services{
-			border : none;
-		}
+		border : none;
+	}
 	.formsec{
 		color : #E5DFDF;
 		border-bottom: 1px solid @darkbackcolor;
@@ -541,11 +482,6 @@
 	.highlight{
 		color :@back;
 	}
-	footer{
-		margin-top : 10px;
-		color:@lightcolor;
-		font-weight : bold;
-	}
 	@media (min-width: 320px){
 		.logo{
 			float:left;
@@ -560,9 +496,6 @@
 		.item.active, .projnav{
 			height: 120px;
 			overflow: hidden;
-		}
-		.carousel-inner>.item>img{
-			width :100%;
 		}
 		.homeimg{
 			float:left;
@@ -587,10 +520,6 @@
 			height: 312px;
 			overflow: hidden;
 		}
-		.carousel-inner>.item>img{
-			width :100%;
-			min-height : 310px;
-		}
 		.homeimg{
 			float:right;
 			margin-left: 25px;
@@ -604,9 +533,6 @@
 		.cnctinfo{
 			display : block;
 		}
-		.navbar{
-			
-		}
 		.projnav{
 			height: 322px;
 		}
@@ -614,10 +540,6 @@
 			height: 312px;
 			overflow: hidden;
 		} 
-		.carousel-inner>.item>img{
-			width :100%;
-			min-height: 312px;
-		}
 		.homeimg{
 			float:right;
 			margin-left: 25px;
