@@ -54,7 +54,7 @@
 				.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .homeproject .projectnav,.homeproject .projsnap,.homeproject .bx-wrapper, .project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover,.project ul.nav.navbar-nav > li > a:focus, .content, .sections, .sidemenu, .thumbnail, .tab-content, .panel,.navbar-default .navbar-nav > li > ul{
 					background-color: {{data.template_params.background_color}};
 				}
-				.featuretab ,.sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a:focus, .btn-info[disabled], .btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .homeproject .projectnav a:hover, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus{
+				.featuretab ,.sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a:focus, .btn-info[disabled], .btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus{
 					color: {{data.template_params.background_color}};
 				}
 				.about .table tbody tr th, .contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td, .content,.sections,.sidemenu,.thumbnail,.tab-content,.panel-default, .singleproperty .property, .projlist .project .thumbnail .projectimg img:hover, .products .thumbnail .prodimg img:hover, .singleproperty .property .table tbody tr td, .featuretab .nav-tabs{
@@ -82,17 +82,29 @@
 	<body>
 		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 		<header>
-			<div class="container">
-				<div class="col-xs-12 col-md-12 col-lg-12">
-					{% if data.website_config.website_logo %}
-					
-					<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
-					{% else %}
-					
-					<img class="logo" src="{{data.business_logo.file_relative_path}}">
-					{% endif %}
+			<div class="container">	
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 weblogo">
+						{% if data.website_config.website_logo %}
+							<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-4 text-center">
+						{% if data.website_config.website_logo1 %}
+							<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
+						{% else %}
+							<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-4 text-right cntdtl">	
+						<p><strong>Mobile :</strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
+						<p>
+						<p><strong>E-mail ID :</strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
+						<p>
+					</div>
 				</div>
 			</div>
+		</header>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
@@ -101,7 +113,6 @@
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-		</header>
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
