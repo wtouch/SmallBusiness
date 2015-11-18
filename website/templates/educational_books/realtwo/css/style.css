@@ -269,38 +269,6 @@
   height: 400px;
   min-width: 100%;
 }
-.homeproject .projectCarousal::after {
-  content: "";
-  height: 41px;
-  display: block;
-  position: absolute;
-  top: -256px;
-  right: -305px;
-  border-bottom: 276px solid #34B981;
-  border-right: 350px solid transparent;
-  z-index: -999;
-}
-.homeproject .projectCarousal::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: -256px;
-  left: -105px;
-  border-bottom: 276px solid #e3dbbe;
-  border-left: 350px solid transparent;
-  z-index: -999;
-}
-.homeproject .projectCarousal::after {
-  position: absolute;
-  content: "";
-  background-image: url('../img/homekey.png');
-  background-size: 100% 100%;
-  left: -127px;
-  bottom: -5px;
-  z-index: 999;
-  height: 178px;
-  width: 175px;
-}
 .homeproject .projectnav,
 .homeproject .projsnap {
   position: absolute;
@@ -775,29 +743,24 @@ body {
 .thumbnail {
   background-color: #e3dbbe;
 }
-header {
-  margin: 10px auto 20px;
+header .head {
+  margin: 35px auto 35px;
 }
-header .logo {
+header .head .logo {
   max-width: 100%;
   max-height: 100px;
 }
-header .cntdtl {
+header .head .cntdtl {
   padding-top: 25px;
 }
-header .weblogo {
+header .head .weblogo {
   padding-top: 10px;
-}
-header .head {
-  background-image: url('bg_image.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
 }
 header .navbar {
   min-height: 50px;
 }
 header .navbar-default {
+  position: relative;
   background: -webkit-linear-gradient(top, #772b3d, #951544, #772b3d);
   background: -moz-linear-gradient(top, #772b3d, #951544, #772b3d);
   background: linear-gradient(top, #772b3d, #951544, #772b3d);
@@ -882,6 +845,20 @@ header .navbar-default .navbar-nav > li:hover > ul {
 }
 header .navbar-default .navbar-collapse {
   padding: 0px;
+}
+header .navbar-default::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -172px;
+  background-image: url('../img/about1.png');
+  background-repeat: no-repeat;
+  height: 165px;
+  width: 230px;
+  z-index: -999;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 main .back {
   background-image: url('../img/bg.jpg');
