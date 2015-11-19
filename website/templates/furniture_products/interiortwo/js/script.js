@@ -6,7 +6,16 @@ jQuery(document).ready(function() {
 	})
 });
 
+
 $(document).ready(function(){
+	
+	$(".content2").height($(window).height() - $(".content1").outerHeight() - $("footer").outerHeight());
+	console.log($(window).height() - $(".content1").outerHeight() - $("footer").outerHeight());
+	
+	$(window).resize(function(){
+		$(".content2").height($(window).height() - $(".content1").outerHeight() - $("footer").outerHeight());
+	});
+	
 	var sliderMode, minSlides, maxSlides;
 	//$(window).resize(function(){
 		if($(window).width() <= "480"){
