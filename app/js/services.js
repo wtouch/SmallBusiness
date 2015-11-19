@@ -583,7 +583,7 @@ define(['app'], function (app) {
 					}
 				}
 				callback($rootScope.filterParams);
-			}
+			} 
 			
 			$rootScope.addToObject = function(object, data){
 				object.push(angular.copy(data));
