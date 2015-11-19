@@ -52,7 +52,13 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			if(search == true){
 				if(value == "" || value == undefined){
 					delete $scope.params.search[col];
-				}else{
+			},
+			cols : ["*"],
+		};
+		$scope.filterData = function(searchCol, searchValue,user_id) {
+			if(searchCol == 'status'){
+				$scope.params = {
+					cols : ["*"]
 					if(!$scope.params.search) $scope.params.search = {};
 					$scope.params.search[col] = value;
 				}
@@ -66,13 +72,20 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			}
 			$scope.getData($scope.currentPage, "training", "trainingList", $scope.params);
 		}
-		
+			$scope.filterStatus.search[searchCol] = searchValue;
+			(searchValue =="") ? delete $scope.params.search[searchCol] : "";
+			
+			angular.extend($scope.params, $scope.filterStatus);
+			$scope.getData($scope.currentPage,user_id,$scope.params);
+	
 		// order by filter
 		$scope.orderBy = function(col, value){
 			if(!$scope.params.orderBy) $scope.params.orderBy = {};
 			$scope.params.orderBy[col] = value;
 			console.log($scope.params);
 			$scope.getData($scope.currentPage, "training", "trainingList", $scope.params);
+				},
+				cols : ["*"],
 		};
 		
 		// global method for get request  
