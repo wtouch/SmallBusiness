@@ -33,7 +33,7 @@
 	
 	if($reqMethod=="POST"){
 		if(isset($postParams) && $postParams == 'login'){
-			print_r($body);
+			//print_r($body);
 			doLogin($body);
 		}elseif(isset($postParams) && $postParams == 'register'){
 			registerUser($body, $appPath);

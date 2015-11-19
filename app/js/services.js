@@ -225,7 +225,7 @@ define(['app'], function (app) {
 	  app.service("dataService", ['$http', '$window','$rootScope', '$cookieStore', '$cookies', '$location','$timeout','$notification', '$q', 'dbHelper',
 		function ($http, $window,$rootScope,$cookieStore,$cookies,$location,$timeout, $notification, $q, dbHelper) { // This service connects to our REST API
 
-			var serviceBase = '../server-api/index1.php/';
+			var serviceBase = '../server-api/index.php/';
 			var today = new Date();
 			var year = today.getFullYear();
 			var month = today.getMonth() + 1;
@@ -412,30 +412,42 @@ define(['app'], function (app) {
 	
 			
 			// Method for Insert Query
-			obj.post = function (table, object) {
+			obj.post = function (table, object, params) {
 				$rootScope.loading = true;
 				if($rootScope.sqLite){
 					object = obj.stringify(object);
-					return dbHelper.post(table, object).then(function(response){
-					if(response.status != "success"){
-						$notification[response.status](table, response.message);
-					}
-					$rootScope.loading = false;
-					return response;
-				})
-				}else{
-					var reqParams = {
-						table : table,
-					}
-					return $http({
-						url:"../server-api/index1.php",
-						method: "POST",
-						data: object,
-						params: reqParams
-					}).then(function (results) {
+						return dbHelper.post(table, object).then(function(response){
+						if(response.status != "success"){
+							$notification[response.status](table, response.message);
+						}
 						$rootScope.loading = false;
-						return results.data;
-					});
+						return response;
+					})
+				}else{
+					if($rootScope.serverApiV2){
+						var reqParams = {
+							table : table,
+						}
+						return $http({
+							url:"../server-api/index1.php",
+							method: "POST",
+							data: object,
+							params: reqParams
+						}).then(function (results) {
+							$rootScope.loading = false;
+							return results.data;
+						});
+					}else{
+						return $http({
+							url: serviceBase + table,
+							method: "POST",
+							data: object,
+							params: params
+						}).then(function (results) {
+							$rootScope.loading = false;
+							return results.data;
+						});
+					}
 				}
 				
 				
@@ -453,19 +465,31 @@ define(['app'], function (app) {
 						return response;
 					})
 				}else{
-					var reqParams = {
-						table : table,
-						params: params
+					if($rootScope.serverApiV2){
+						var reqParams = {
+							table : table,
+							params: params
+						}
+						return $http({
+							url:"../server-api/index1.php",
+							method: "PUT",
+							data: object,
+							params: reqParams
+						}).then(function (results) {
+							$rootScope.loading = false;
+							return results.data;
+						});
+					}else{
+						return $http({
+							url: serviceBase + table,
+							method: "PUT",
+							data: object,
+							params: params
+						}).then(function (results) {
+							$rootScope.loading = false;
+							return results.data;
+						});
 					}
-					return $http({
-						url:"../server-api/index1.php",
-						method: "PUT",
-						data: object,
-						params: reqParams
-					}).then(function (results) {
-						$rootScope.loading = false;
-						return results.data;
-					});
 				}
 			};
 			
@@ -481,24 +505,93 @@ define(['app'], function (app) {
 						return response;
 					})
 				}else{
-					var reqParams = {
-						table : table,
-						params : params,
-						single : single
+					if($rootScope.serverApiV2){
+						console.log(params);
+						var reqParams = {
+							table : table,
+							params : params,
+							single : single
+						}
+						return $http({
+							url: '../server-api/index1.php',
+							method: "GET",
+							params: reqParams
+							
+						}).then(function (results) {
+							$rootScope.loading = false;
+							return results.data;
+							
+						});
+					}else{
+						return $http({
+							url: serviceBase + single, // old parameter was q
+							method: "GET",
+							params: table // old parameter was params
+						}).then(function (results) {
+							$rootScope.loading = false;
+							return results.data;
+							
+						});
 					}
-					return $http({
-						url: '../server-api/index1.php',
-						method: "GET",
-						params: reqParams
-						
-					}).then(function (results) {
-						$rootScope.loading = false;
-						return results.data;
-						
-					});
-					console.log(params);
 				}
 			};
+			// Global Functions
+			// For Post (Insert Data into DB)
+			$rootScope.postData = function(table, input, callback) {
+				obj.post(table, input).then(function(response) {
+					callback(response);
+				});
+			}
+			
+			// For Put (Update Data into DB)
+			$rootScope.updateData = function(table, input, id, callback) {
+				var params = {};
+				params.where = {
+					id : (id) ? id : input.id
+				}
+				if(input.id) delete input.id;
+				obj.put(table, input, params).then(function(response) {
+					callback(response);
+				});
+			}
+			$rootScope.changeCol = function(table, colName, colValue, id, callback){
+				$rootScope.changeStatus = {};
+				$rootScope.changeStatus[colName] = colValue;
+				obj.put(table,$rootScope.changeStatus,{where : { id : id}})
+				.then(function(response) {
+					callback(response);
+				});
+			}
+			
+			// For Filter by columns
+			$rootScope.filterData = function(col, value, search, callback){
+				if(value == "") value = undefined;
+				$rootScope.filterParams = ($rootScope.filterParams) ? $rootScope.filterParams : {};
+				if(search == true){
+					if(value == "" || value == undefined){
+						delete $rootScope.filterParams.search[col];
+					}else{
+						if(!$rootScope.filterParams.search) $rootScope.filterParams.search = {};
+						$rootScope.filterParams.search[col] = value;
+					}
+				}else{
+					if(value == "" || value == undefined){
+						delete $rootScope.filterParams.where[col];
+					}else{
+						if(!$rootScope.filterParams.where) $rootScope.filterParams.where = {};
+						$rootScope.filterParams.where[col] = value;
+					}
+				}
+				callback($rootScope.filterParams);
+			}
+			
+			$rootScope.addToObject = function(object, data){
+				object.push(angular.copy(data));
+			}
+			
+			$rootScope.removeObject = function(object, index){
+				object.splice(index, 1);
+			}
 			return obj;
 	}]);
 	

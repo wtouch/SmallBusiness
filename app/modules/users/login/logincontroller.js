@@ -9,8 +9,8 @@ define(['app'], function (app) {
 		
 		//function to login user
 		$scope.insert = function(login){
-				$location.path("/dashboard");
-			/* dataService.post("post/user/login",$scope.login)
+			//$location.path("/dashboard");
+			dataService.post("post/user/login",$scope.login)
 			.then(function(response) {
 				console.log(response);
 				if(response.status == 'success'){
@@ -24,7 +24,7 @@ define(['app'], function (app) {
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Login", response.message); 
-			})*/
+			})
 		}
 		
 		//function to forgot password
