@@ -1,0 +1,369 @@
+@font-face{
+	font-family:'negotiate_free';
+	src:url('../fonts/negotiate_free.ttf');
+}
+@font-face{
+	font-family:'Enriqueta-Regular';
+	src:url('../fonts/Enriqueta-Regular.otf');
+}
+
+//text color shade
+	@color : #264903; // #C4DE9B green
+	@lightcolor : #48D4E0; //faint blue
+	//@darkcolor : #038478;  //dark blue
+	 @darkcolor : #2BCABB;
+//background color shade
+	@back : #49741E; // green color
+	@darkbackcolor : #EC3A05;   //dark pink color
+	@lightbackcolor :#F98153;   //faint pink color
+	
+//common color shade
+	@colorblack : #000000;
+	@colorwhite	: #ffffff;
+	@import "general.less";
+	@import "property.less";
+	@import "project.less";
+	@import "product.less";
+	
+	body{	
+		background-image:url('../img/a.jpg');
+		background-attachment:fixed;
+		background-size:100% 100%;
+		position : relative;
+		color:@darkbackcolor;
+	}
+	h2{
+		background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+		padding-left:10px;
+		border-radius:4px;
+		border:1px solid @darkbackcolor;
+		text-align:center;
+		color:@colorwhite !important;
+	}
+	.sociallinks{
+		top: 50%;
+		width : 5px;
+		position: fixed;
+		z-index : 999;
+		ul{
+			list-style : none;
+			li{
+				transform: translateX(-123px);
+				padding: 4px 4px 4px 10px;
+				background: -webkit-linear-gradient(@darkcolor, @darkbackcolor);
+				background: -moz-linear-gradient(@darkcolor, @darkbackcolor);
+				background: linear-gradient(@darkcolor, @darkbackcolor);
+				margin: 5px;
+				border-top-right-radius: 30px;
+				border-bottom-right-radius: 30px;
+				text-align : right;
+				width : 130px;
+				a{
+					color : @colorwhite;
+					&:hover{
+						color : @colorwhite;
+						text-decoration : underline;
+					}
+				}
+				img{
+					width : 35px;
+					margin-left : 10px;
+					border : 2px solid @colorwhite;
+				}
+				span{
+					height : 20px;
+					width :20px;
+					margin-right: 6px;
+				}
+				
+				&:hover{
+					  transform: translateX(-45px);
+				}
+			}
+		}
+	}
+	.container{
+		width:992px !important;
+	}
+	.logo {
+		height: 80px;
+		margin-top: 25px;
+		margin-left: 15px;
+		max-height: 100px;
+	}
+	a, .btn.btn-link{
+		color: @colorwhite;
+		&:hover, &:hover{
+			text-decoration : none;
+			color: @colorwhite;
+		}
+	}
+	.btn.btn-link{
+		font-size : 17.5px;
+		padding-left : 0px;
+	}
+	
+	.cnctinfo{
+		margin: 40px 15px 40px 0;
+	}
+	.navbar-collapse{
+		padding :0px;
+	}
+	.navbar-toggle {
+		border : 1px solid @lightcolor;
+		margin-top : 45px;
+	}
+	.navbar-toggle .icon-bar {
+		background-color: @lightcolor;
+	}
+	.modal-body	{
+		p{
+			color:@darkbackcolor;
+		}
+	}
+	p
+	{
+		color:@colorwhite;
+	}
+	html{
+		min-width:1022px;
+	}
+	.btn + .btn{
+		margin-left:10px;
+	}
+	.navbar-default {
+		background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+		border: 2px solid @colorwhite;
+		border-radius: 0;
+		.navbar-nav{
+			> li{
+				margin-bottom:0px;
+				float:none;
+				position : relative;
+				> a, > a:focus {
+					color : @colorwhite;
+					font : bold 15px/1em Arial, Helvetica, sans-serif;
+					position : relative;
+					text-transform : uppercase;
+					border-right : 2px solid @colorwhite;
+				}
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+					color : @darkbackcolor;
+					padding : 22px 15px;
+					margin-top : -12px;
+				}
+				> ul{
+					display: none;
+					position: absolute;
+					width: 245px;
+					z-index: 1000;
+					background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+					//background : linear-gradient(@back, @color);
+					padding: 2px;
+					list-style: none;
+					text-align: left;
+					>li{
+						padding : 10px;
+						text-transform : uppercase;
+						position : relative;
+						>a{
+							color : @colorwhite;
+							&:hover{
+								color : @darkbackcolor;
+							}
+						}
+						&:hover{
+						//background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+						background: linear-gradient(to left,@lightbackcolor, @colorwhite);;
+							-webkit-transition: all 0.4s;
+						}
+						ul{
+							//background : linear-gradient(@back, @color);
+							background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+							list-style: none;
+							display : none;
+							position : absolute;
+							left: 150px;
+							width: 180px;
+							padding : 2px;
+							
+							li{
+								padding : 10px;
+								a{
+									color : @colorwhite;
+								}
+								&:hover{
+									a{
+										color : @colorwhite;
+									}
+									background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+									//background : linear-gradient(@darkcolor, @darkbackcolor);
+								}
+							}
+						
+						}
+						&:hover{
+							ul{
+								display : block;
+							}
+						}
+					}
+				}
+				&:hover > ul {
+					display: block;
+				}
+			}
+		}
+	}
+	
+	.content{
+		background-color : @darkbackcolor;
+		border-radius : 7px;
+		margin-top : 15px;
+		padding: 10px 20px 30px;
+	}
+	h1 {
+		border-bottom: 1px solid @darkbackcolor;
+		font-weight:bold;
+		letter-spacing: 1px;
+		padding-bottom:10px;
+		font: 2.3em/1.2em negotiate_free;
+		color: @colorwhite;
+		text-align:center;
+	}
+	h2, h3, h4 {
+		color: @darkbackcolor;
+		border-bottom: 1px solid @darkbackcolor;
+		padding-bottom:10px;
+	}
+	
+	h3,h4,h5{
+		font-family: 'negotiate_free';
+	}
+	h2{
+		font: 2.0em/1.2em negotiate_free;
+		line-height:1.5em;
+		font-weight:bold;
+	}
+	.sidebarModule .panel,.sidebarModule .sections, .contentModule .sections{
+		background : transparent;
+		border:1px solid @darkbackcolor;
+		border-radius : 4px;
+		background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+	}
+	
+	.sidebarModule{
+		.panel-body{
+			padding : 15px 15px 0px;
+		}
+	}
+	.featured_services{
+		.sections{
+			border : none;
+		}
+	}
+	.form-control{
+		background : transparent;
+		border-color : @darkbackcolor;
+		&:focus{
+			border-color : @back;
+		}
+	}
+	.btn-info,.btn-primary{
+		border : none;
+		background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+		color : @colorwhite;
+		font: bold 13px/1.5em Arial, Helvetica, sans-serif;
+		&:hover, &:hover{
+			background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+			color : @darkbackcolor;
+			border:1px solid @darkbackcolor;
+		}
+	}
+	.subhead{
+		font-size: 18px;
+		background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+		border-radius : 7px;
+		color : @colorwhite;
+		padding: 4px 15px 12px;
+		position : relative;
+	}
+	hr{
+		border-style:dashed;
+		border-color:@back;
+		margin: 0px 0px 10px;
+	}
+	.sidebarModule, .contentModule{
+		.sections{
+			padding:10px;
+			p{
+			color:@darkbackcolor;				
+			}
+		}
+	}
+	.sidebarModule{	
+		h4{
+			border : none;
+		}
+	}
+	.thumbnail{
+		border-color : @darkbackcolor;
+		background : none;
+	}
+	.panel{
+		background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+	}
+	.panel-default{
+		border : 1px solid @darkbackcolor;
+	}
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
+	{
+		background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+		color : @colorwhite;
+		border : 1px solid @darkbackcolor;
+	}
+	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
+		background-color : @darkbackcolor;
+		border : 1px solid @back;
+		color : @colorwhite;
+	}
+	footer{
+		margin-top : 15px;
+		padding: 15px 0;
+	}
+	*{
+		transition:300ms;
+	}
+	
+	//for responsive
+	@media (min-width: 320px){
+		.logo{
+			float:left;
+		}
+		.cnctinfo{
+			display : none;
+		}
+	}
+	@media (min-width: 992px){
+		.logo{
+			float:none;
+		}
+		.cnctinfo{
+			display : block;
+		}
+		
+	
+	}
+	@media (min-width: 1200px){
+		.logo{
+			float:none;
+		}
+		.cnctinfo{
+			display : block;
+		}
+		
+	}
+	.thumbnail{
+	background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+	}
