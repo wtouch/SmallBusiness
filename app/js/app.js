@@ -134,6 +134,7 @@ define(['angular',
 	
 		
 	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams','$notification','$timeout', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies,$routeParams,$notification,$timeout) {
+		$rootScope.sqLite = false;
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
 			$rootScope.userDetails = dataService.userDetails;
 			$rootScope.currentSite = location.protocol+'//'+location.hostname;
@@ -145,7 +146,7 @@ define(['angular',
 				assetPath : '..'
 			};
 			
-			var nextUrl = next.$$route.originalPath;
+			/* var nextUrl = next.$$route.originalPath;
 			if(nextUrl == '/logout' || dataService.auth == false){
 				dataService.logout();
 				$rootScope.userDetails = null;
@@ -163,7 +164,7 @@ define(['angular',
 					$location.path("/dashboard");
 				}
 				
-			};
+			};  */
 			if($rootScope.userDetails != null){
 				if($rootScope.userDetails.group_id == 4){
 					if($rootScope.userDetails.config.addbusiness === undefined){

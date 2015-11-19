@@ -30,7 +30,7 @@
 			$db->setColumns($t[1], $selectInnerJoinCols);
 			
 			$data = $db->selectSingle();
-
+			print_r($data);
 			if($data['status'] == 'error' || $data['status'] == 'warning' || $data['data'] == "" ){
 				throw new Exception('You are not registered user!');
 			}
@@ -54,6 +54,7 @@
             $response["status"] = "error";
             $response["message"] = 'Error: ' .$e->getMessage();
             $response["data"] = null;
+			print_r( $response["message"]);
 			echo json_encode($response);
         }
 		

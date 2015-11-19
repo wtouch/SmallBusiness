@@ -9,8 +9,8 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
-		$scope.user_id = $rootScope.userDetails.id;
-		console.log($rootScope.userDetails.id);
+		//$scope.user_id = $rootScope.userDetails.id;
+		//console.log($rootScope.userDetails.id);
 		
 		$scope.openForm = function (url,addtraining) {
 			var x = angular.copy(addtraining);
@@ -22,110 +22,122 @@ var injectParams = ['$scope', '$injector','$routeParams','$rootScope','dataServi
 			var modalOptions = {
 				addtraining : (addtraining) ? x : {},
 				postData : function(addtraining){
-					dataService.post("post/training",addtraining).then(function(response) {
-						if(response.status=='success'){
-							$scope.getTraining(currentPage, user_id,trainingParam);
-					}
-					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-						$notification[response.status]("Add Record Successfully..", response.message);
-					}); 
-				},
-				
-				updateData : function(addtraining) {
-					$scope.addtraining =(addtraining);
-					delete addtraining.admin;
-					delete addtraining.manager;
-					delete addtraining.userCount;
-					delete addtraining.username;
-					delete addtraining.admin_id;
-					//delete addtraining.admin_id;
-					console.log($scope.addtraining);
-					dataService.put("put/training/"+addtraining.id,addtraining)
-					.then(function(response) {
+					dataService.post("training", addtraining).then(function(response) {
 						if(response.status == "success"){
-							
+							$scope.getData($scope.currentPage);
 						}
 						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+						$notification[response.status]("Add Record Successfully..", response.message);
+					});
+				},
+				updateData : function(addtraining) {
+					var params={where:{id:addtraining.id}};
+					delete addtraining.id;
+					dataService.put("training",addtraining,params)
+					.then(function(response) {
+						if(response.status == "success"){
+							$scope.getData($scope.currentPage);
+						}if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 						$notification[response.status]("Update Record Successfully..", response.message);
-					}); 
+					});
 				}
 			};
-			//console.log(response.data);
 			modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 				console.log("modalOpened");
 			});
 		};	
 		
-		$scope.searchFilter = function(statusCol, searchProp,user_id) {
-			$scope.filterStatus= {search: true};
-			(searchProp =="") ? delete $scope.trainingParam[statusCol] : $scope.filterStatus[statusCol] = searchProp;
-			angular.extend($scope.trainingParam, $scope.filterStatus);
-			$scope.getTraining(1,user_id,$scope.trainingParam);
-		};
-	/***************************************************************************************/
-	// code for filter data as per satus (delete/active)		
-		$scope.changeStatus = function(statusCol, showStatus,user_id) {
-			$scope.filterStatus= {};
-			(showStatus =="") ? delete $scope.trainingParam[statusCol] : $scope.filterStatus[statusCol] = showStatus;
-			angular.extend($scope.trainingParam, $scope.filterStatus);
-			dataService.get("getmultiple/training/1/"+$scope.pageItems, $scope.trainingParam)
-			.then(function(response) {  
-				if(response.status == 'success'){
-					$scope.training = response.data;
-					$scope.totalRecords = response.totalRecords;
+		// global method for filter  
+		$scope.filter = function(col, value, search){
+			if(search == true){
+				if(value == "" || value == undefined){
+					delete $scope.params.search[col];
 				}else{
-					$scope.training = {};
-					$scope.totalRecords = {};
+					if(!$scope.params.search) $scope.params.search = {};
+					$scope.params.search[col] = value;
+				}
+			}else{
+				if(value == "" || value == undefined){
+					delete $scope.params.where[col];
+				}else{
+					if(!$scope.params.where) $scope.params.where = { status : 1};
+					$scope.params.where[col] = value;
+				}
+			}
+			$scope.getData($scope.currentPage, "training", "trainingList", $scope.params);
+		}
+		
+		// order by filter
+		$scope.orderBy = function(col, value){
+			if(!$scope.params.orderBy) $scope.params.orderBy = {};
+			$scope.params.orderBy[col] = value;
+			console.log($scope.params);
+			$scope.getData($scope.currentPage, "training", "trainingList", $scope.params);
+		};
+		
+		// global method for get request  
+		$scope.getData = function(page, table, subobj, params, modalOptions) {
+			$scope.params = (params) ? params : {
+				where : {
+					status : 1
+				},
+				cols : ["*"]
+			};
+			if(page){
+				angular.extend($scope.params, {
+					limit : {
+						page : page,
+						records : $scope.pageItems
+					}
+				})
+			}
+			dataService.get(false,table,$scope.params).then(function(response) {
+				if(response.status == 'success'){
+					if(modalOptions != undefined){
+						modalOptions[subobj] = angular.copy(response.data);
+						modalOptions.totalRecords = response.totalRecords;
+					}else{
+						$scope[subobj] = angular.copy(response.data);
+						$scope.totalRecords = response.totalRecords;
+						console.log($scope[subobj]);
+					}
+				}else{
+					if(modalOptions != undefined){
+						modalOptions[subobj] = [];
+						modalOptions.totalRecords = 0;
+					}else{
+						$scope[subobj] = [];
+						$scope.totalRecords = 0;
+					}
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-					$notification[response.status](response.message);
+					$notification[response.status]("Get Transactions", response.message);
 				}
 			});
 		};
-	/****************************************************************************************/
 		
-		$scope.getTraining = function(page, user_id, trainingParam){
-			$scope.trainingParam = (trainingParam) ? trainingParam : {
-					status : 1,
-					user_id : user_id
-				};
-			
-			dataService.get("/getmultiple/training/"+page+"/"+$scope.pageItems, $scope.trainingParam)
-			.then(function(response) {
-				if(response.status == 'success'){
-					//$scope.viewData.technologies = Json_stringify(modalOptions.viewData.technologies);
-					$scope.totalRecords = response.totalRecords;
-					$scope.training = response.data;
-					console.log(response);
-				}else{
-						$scope.totalRecords = [];
-						$scope.training = 0;
-						if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-						$notification[response.status](response.message);
-					}
-			}); 
-		}
-		
-		$scope.update = function(colName, colValue, id){
+		$scope.changeCol = function(colName, colValue, id){
 			$scope.changeStatus = {};
 			$scope.changeStatus[colName] = colValue;
-			
-			 dataService.put("put/training/"+id,$scope.changeStatus)
-			.then(function(response) { 
-				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-				$notification[response.status]("Training Record!", response.message);
-			}); 
+			console.log($scope.changeStatus);
+			dataService.put("training",$scope.changeStatus,{where : { id : id}})
+			.then(function(response) {
+				console.log(response);
+				if(response.status == "success"){
+					$scope.getData($scope.currentPage, "training", "trainingList", $scope.params);
+				}if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+				$notification[response.status]("Update Record Successfully..", response.message);
+			});
 		};	
 		
 		$scope.open = function (url, viewData) {
-			
 			var modalDefaults = {
-				templateUrl: url,	// apply template to modal
+				templateUrl: url,
 				size : 'lg'
 			};
 			var modalOptions = {
-				viewData : viewData  // assign data to modal
+				viewData : viewData 
 			};
-			//console.log(response.data);
+			
 			modalService.showModal(modalDefaults, modalOptions).then(function (result) {
 				console.log("modalOpened");
 			});
