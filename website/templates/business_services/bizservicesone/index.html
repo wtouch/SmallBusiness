@@ -85,12 +85,12 @@
 				
 		<div id="myDiv"></div>
 		<div class="container">
-			<div class="row">
-				<div class="col-md-3">
+			<div class="row yellow">
+				<div class="col-md-2">
 					<img class="loimg" src="{{data.business_logo.file_relative_path}}">
 				</div>
-				<div class="col-md-9">
-					<nav class="navbar navbar-default">
+				<div class="col-md-10">
+					<nav class="navbar navbar-default navig">
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
 								{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
@@ -98,25 +98,33 @@
 						</div>
 					</nav>
 				</div>
-			</div>
 			
-			<div class="row slider1">
-				<div class="col-md-12">
+			
+			
+				<div class="col-md-12 imhghw">
 						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 				</div>
 			</div>
-			<div class="row">
-			
-						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-			</div>
-			<div class="row">
+			<div class="row mid">
 				<div class="col-md-12">
 						{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
 				</div>
 			</div>
+				<div class="col-md-12">
+							{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+				</div>
+				</div>
+			</div>
+			<div class="row blue">
+				<div class="col-md-12">
+					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+
+				</div>
+				</div>
+			</div>
+			
 		
 			<div class="row">
-						{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 			</div>
 			
 		</div>
