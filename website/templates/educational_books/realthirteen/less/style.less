@@ -24,11 +24,9 @@
 		min-width : 1022px;
 	}
 	body{
-		background-image:url('../img/backg.jpg');
-		//background-attachment: fixed;
-		//background-image:url('../img/back1.jpg');
-		//background-image:url('../img/home.png');
-		//background-color:#F8981D;
+		background-image:url('../img/nature.jpg');
+		background-attachment: fixed;
+		background-size:100% 100%;
 		background-repeat : repeat;
 	}
 	.sociallinks{
@@ -84,11 +82,12 @@
 			max-height : 100px;
 		}
 		.cntdtl{
+			margin-top:60px;
 			padding-top: 25px;
 		}
 	}
 	header{	
-		background-image:url('../img/nature.jpg');
+		
 		//background-attachment: fixed; 
 		background-repeat: no-repeat;
 		background-size:100% 100%;
@@ -117,16 +116,8 @@
 			z-index: 9999;
 			.navbar-nav{
 				>li{
-				
-				
-				
-						/*border: 4px transparent;
-						//border-top-left-radius: 19px;
-						//border-bottom-right-radius: 19px;
-						//background-color : @darkcolor;
-						color : @colorwhite;*/
-						
-					position :relative;
+						float:none;
+						position :relative;
 					>a{
 						color : @colorwhite;
 						text-shadow: 1px 1px @colorblack;
@@ -169,13 +160,12 @@
 							position : relative;
 							>a{
 								text-decoration:none;
-								color : @color;
+								color : @colorwhite;
 							}
 							&:hover{
 								background: @darkcolor;
 								a{
 									color : @colorwhite;
-									text-decoration : underline;
 								}
 							}
 							
@@ -194,7 +184,7 @@
 										background: @darkcolor;
 										a{
 											color : @colorwhite;
-											text-decoration : underline;
+											
 										}
 									}
 								}
@@ -219,7 +209,7 @@
 	main{ 
 		.back{
 			//background-image:url('../img/bg.jpg');
-			background-image:url('../img/backg.jpg');
+			//background-image:url('../img/backg.jpg');
 			background-repeat : repeat;
 			padding: 20px;
 				.featuredProperty, .featuredProject{
@@ -312,8 +302,7 @@
 				.content{
 					border:1px solid @darkbackcolor;
 					border-radius:10px;
-					background: -webkit-gradient(linear, right top, left bottom, from(@lightbackcolor), to(@lightcolor));
-					//background-color : @lightbackcolor;
+					background: linear-gradient(to left,@lightbackcolor, @lightcolor);
 					padding : 0px 15px 10px;
 				}
 			}
@@ -336,23 +325,21 @@
 	
 	//global css
 	a{
-		background-color:@back;
-		color : @colorwhite;
+		color : @back;
 		&:hover{
-			background-color:@darkcolor;
 		}
 	}
 	h2, h3, h4{
 		font : 16px 'Alex Brush', cursive;
 	}
 	h2{
-		text-align : center;
+		//text-align : center;
+		color:@darkcolor;
 	}
 	h3, h4{
 		color : @darkcolor;
 	}
 	h1, h2{
-		color : @darkbackcolor;
 		font : 2.5em/1em 'Alex Brush', cursive;
 	}
 	.btn-info, .btn-primary{
