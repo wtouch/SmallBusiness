@@ -1,0 +1,23 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="main-content">
+			<h1> This is Vilas Module</h1>
+			<input type="text" ng-model="search" ng-change="filter('account_name', search, 'account', 'accountList', true)">
+			<select ng-model="status" ng-change="filter('status', status, 'account', 'accountList')">
+				<option value="">Select Status</option>
+				<option value="1">Active</option>
+				<option value="0">Deleted</option>
+			</select>
+			<button ng-click="openModal('modules/vilas/modal.html')">Modal Open!</button>
+			<table ng-init="getData(false, currentPage, 'account','accountList')">
+				<tr>
+					<td>Sr.No.</td>
+					<td>Account Name</td>
+				</tr>
+				<tr ng-repeat="x in accountList">
+					<td>{{x.id}}</td>
+					<td>{{x.account_name}}</td>
+				</tr>
+		</div>
+	</div>
+</div> 

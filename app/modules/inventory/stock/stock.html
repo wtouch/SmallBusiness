@@ -1,0 +1,35 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="main-content">
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>
+			<div class="row">
+				<div class="col-sm-2">
+					<h3 class="text-center">Stock</h3>
+				</div>
+			</div>
+			 <div class="row">
+				 <div class="col-sm-2">
+					<div class="bottomspace">
+						<label for="page_item" class="control-label" >Page Item</label>
+						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'stock', 'stockList', params)" ng-model="pageItems">
+							<option value="10">10</option>	
+							<option value="20">20</option>	
+							<option value="30">30</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="col-sm-2 pull-right">
+					<button type="button" class="btn btn-primary"tooltip-animation="true" tooltip="Add stock Information" ng-click="openModal('modules/stock/addstock.html')">Add stock</button>
+				</div>
+			</div> 
+			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'stock','stockList')">
+			  <div ui-grid="stockList"></div>
+			 </div>
+			<div class="text-center">				
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'stock','stockList')"></pagination>
+				<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,117 @@
+<div class="main-content">
+	<div class="modal-header" style="margin-bottom: 14px">
+		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+		<h3 class="text-center" ng-if="!modalOptions.addexpence.id">Add Expense</h3>
+		<h3 class="text-center" ng-if="modalOptions.addexpence.id">Edit Expense</h3>
+	</div>
+		<form name="addexpenceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addexpenceForm.$valid">
+			<!-- <div ng-if = "type =='Rent'"> -->
+			 <div class="form-group">
+			 <div ng-init="modalOptions.getData(false,false,'user','userList', params, modalOptions)">
+				<label for="User" class="col-sm-2 control-label">User *</label>
+						<div class="col-sm-9">
+							<select id="user_id" class="form-control" ng-model="modalOptions.addexpence.user_id" ng-options="item.id as item.name for item in modalOptions.userList">
+									<option value="">Select User</option>
+									</select>		 
+							<span class="help-block" ng-show="addexpenceForm.user_id.$dirty && addexpenceForm.user_id.$invalid">
+								<span ng-show="addexpenceForm.user_id.$error.required" class="text-danger">Customer is required.</span>
+							</span>	
+						</div>
+				</div>
+			</div> 
+			<div class="form-group">
+				<label for="category" class="col-sm-2 control-label">Category</label>
+					<div class="col-sm-9">
+						<input type="text" id="category" name="category" class="form-control" ng-model="modalOptions.addexpence.category" required/>	
+						<span class="help-block" ng-show="addexpenceForm.category.$dirty && addexpenceForm.category.$invalid">
+							<span ng-show="addexpenceForm.category.$error.required" class="text-danger">Required Field.</span>
+						</span>		
+					</div>
+			</div> 
+			<span>
+					<input type="hidden" class="form-control" ng-model="modalOptions.addexpence.description.user_id"/>
+					<input type="hidden" class="form-control" ng-model="modalOptions.addexpence.user_id"/> 
+					{{modalOptions.addexpence}}
+					
+				</span>
+				
+			<div class="form-group">
+				<label for="account_no" class="col-sm-2 control-label">Account Name* </label>
+					<div class="col-sm-9">
+					<input type="text" id="account_no" name="account_no" class="form-control" ng-model="modalOptions.addexpence.account_no" required/>	
+					
+					<span class="help-block" ng-show="addexpenceForm.account_no.$dirty && addexpenceForm.account_no.$invalid">
+						<span ng-show="addexpenceForm.account_no.$error.required" class="text-danger">Customer is required.</span>
+					</span>
+					</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="previous_amount" class="col-sm-2 control-label">Balance</label>
+				<div class="col-sm-9">
+					<input type="text" id="balance" name="balance" class="form-control" ng-model="modalOptions.addexpence.balance" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" required/>
+						<span class="help-block" ng-show="addexpenceForm.balance.$dirty && addexpenceForm.balance.$invalid">
+								<span ng-show="addexpenceForm.balance.$error.required" class="text-danger">Required Field</span>
+								<span ng-show="addexpenceForm.balance.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+						</span>
+					</span>
+					</div>
+			</div>
+		
+			<!-- <input type="hidden" class="form-control" ng-model="userDetails.id"/>
+			<input type="hidden"  ng-if="type !='other'" ng-model="modalOptions.addexpence.category"/> -->
+			
+			<input type="hidden" ng-model="modalOptions.addexpence.type" ng-init="modalOptions.addexpence.type='expense'"/> 
+			
+			<input type="hidden" ng-model="modalOptions.addexpence.status" ng-init="modalOptions.addexpence.status=1"/> 
+			
+			<div class="form-group">	
+				<label  for="date" class="col-sm-2 control-label">Date</label>
+					<div class="col-sm-9">
+						<input type="text" id="date" class="form-control" ng-model="modalOptions.addexpence.date" ng-init="modalOptions.addexpence.date = modalOptions.expenceDate.date"  name="date" readonly 
+						placeholder="date">
+					</div>						
+			</div>
+			
+			<div class="form-group">
+				<label  for="due_amount" class="col-sm-2 control-label">Due Amount</label>
+					<div class="col-sm-9">
+						<input type="text" id="due_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addexpence.due_amount" ng-change="modalOptions.totalAmount(modalOptions)" name="due_amount" placeholder="Amount" required />
+						<span class="help-block" ng-show="addexpenceForm.due_amount.$dirty && addexpenceForm.due_amount.$invalid">
+								<span ng-show="addexpenceForm.due_amount.$error.required" class="text-danger">Required Field</span>
+								<span ng-show="addexpenceForm.due_amount.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+						</span>
+					</div>						
+			</div>
+			<div class="form-group">
+				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
+					<div class="col-sm-9">
+						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" ng-model="modalOptions.addexpence.debit_amount" ng-change="modalOptions.totalAmount(modalOptions)" name="debit_amount" placeholder="Amount" required />
+							<span class="help-block" ng-show="addexpenceForm.debit_amount.$dirty && addexpenceForm.debit_amount.$invalid">
+								<span ng-show="addexpenceForm.debit_amount.$error.required" class="text-danger">Required Field</span>
+								<span ng-show="addexpenceForm.debit_amount.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+						</span>
+					</div>						
+			</div>
+			<div class="form-group">
+				<label for="description" class="col-sm-2 control-label">Description</label>
+					<div class="col-sm-9">
+						<textarea type="text" id="description" ng-model="modalOptions.addexpence.description" class="form-control" name="description"   placeholder="Enter Description" ng-maxlength="250" required></textarea>
+						<span ng-hide="addexpenceForm.description.$error.maxlength">
+								{{ 250 - modalOptions.addexpence.description.length + " Chars left" }}
+						</span>	
+						 <span class="help-block" ng-show="addexpenceForm.description.$dirty && addexpenceForm.description.$invalid">
+								<span class="text-danger" ng-show="addexpenceForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+								<span ng-show="addexpenceForm.description.$error.required" class="text-danger">Required Field</span>
+						</span>
+					</div>		
+			</div>
+			
+			<div class="form-group modal-footer">
+				<div class="col-sm-11"><!--ng-disabled="addexpenceForm.$invalid"-->
+					<button type="submit" class="btn btn-success"  ng-click="modalOptions.postData('transactions',modalOptions.addexpence); modalOptions.ok()" ng-disabled="addexpenceForm.$invalid">Submit</button>
+					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+				</div>
+			</div>		
+		</form>
+</div><!--ng-if="!modalOptions.propertyData.id-->

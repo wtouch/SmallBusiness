@@ -1,0 +1,42 @@
+<div class="modal-content">
+	<div class="main-content">
+		<form name="addAccountForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addAccountForm.$valid">
+			<div class="form-group">
+				<label for="accountname" class="col-sm-2 control-label">Account Name * </label>
+				<div class="col-sm-9">
+					<input type="text"  id="accountname" class="form-control" name="accountname" placeholder="Account Name" ng-model="modalOptions.account.account_name" required>
+
+					<span class="help-block" ng-show="addAccountForm.accountname.$dirty && addAccountForm.accountname.$invalid">
+						<span class="text-danger" ng-show="addAccountForm.accountname.$error.minlength"> Account Name is too short !</span>
+						<span class="text-danger" ng-show="addAccountForm.accountname.$error.required"> Account Name is required.</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="account_no" class="col-sm-2 control-label">Account Number * </label>
+				<div class="col-sm-9">
+					<input type="text" id="account_no" name="account_no" class="form-control" ng-model="modalOptions.account.account_no" placeholder="Enter Account Number" ng-pattern="/^\d{0,100}[0-9]$/" required>
+					<input type="hidden" ng-model="modalOptions.account.status" ng-init="modalOptions.account.status = 1">
+					
+					<span class="help-block" ng-show="addAccountForm.account_no.$dirty && addAccountForm.account_no.$invalid">
+						<span ng-show="(addAccountForm.account_no.$dirty || submitted)" class="text-danger">Enter a valid Account Number</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="description" class="col-sm-2 control-label">Description * </label>
+				<div class="col-sm-9">
+					<textarea  class="form-control" id="description" ng-model="modalOptions.account.description" name="description" placeholder="Enter Description" maxlength="150" required></textarea>
+					
+					<p ng-hide="addAccountForm.description.$error.maxlength">{{ 150 - account.description.length + " Characters left"}}</p>
+					<span class="help-block" ng-show="addAccountForm.description.$dirty &&  adduserForm.description.$invalid">
+						<span class="text-danger" ng-show="addAccountForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+						<span class="text-danger" ng-show="addAccountForm.description.$error.required">Description is required.</span>
+					</span>	
+				</div>
+			</div>
+			<button type="submit" ng-click="modalOptions.postData('account',modalOptions.account); modalOptions.ok()">Submit</button>
+		</form>
+		
+	</div>
+</div>

@@ -1,9 +1,10 @@
 'use strict';
 
-require.config({
+requirejs.config({
 	paths: {
 		angular: '../lib/angular/angular.min',
 		lodash: '../lib/lodash',
+		uiGrid: '../lib/ui-grid/ui-grid.min',
 		googleMap: '../lib/google-map/angular-google-maps.min',
 		googleMapApi: '../lib/google-map/angular-google-maps.min',
 		ngSanitize: '../lib/angular/angular-sanitize',
@@ -16,7 +17,7 @@ require.config({
 		directives: '../js/directives', 
 		services: '../js/services',
 		filters: '../js/filters',
-		jquery: '../lib/jquery/jquery',
+		jquery: '../lib/jquery/jquery.min',
 		tinymce: '../lib/tinymce/tinymce.min',
 		angularRoute: '../lib/angular/angular-route',
 		angularMocks: '../lib/angular/angular-mocks',
@@ -30,6 +31,7 @@ require.config({
 		'routeResolver': { "deps": ['angular', 'angularRoute'] },
 		'breadcrumbs':  { "deps": ['angular', 'angularRoute'] },
 		'bootstrap': { "deps": ['angular'] },
+		'uiGrid': { "deps": ['angular'] },
 		'ngSortable': { "deps": ['angular'] },
 		'googleMap': { "deps": ['angular', 'lodash'] },
 		'filters':  { "deps": ['angular'] },
@@ -52,7 +54,7 @@ require.config({
 	
 });
 
-require([
+requirejs([
 	'angular',
 	'angularRoute',
 	'app'

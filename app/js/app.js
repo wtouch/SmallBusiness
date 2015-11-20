@@ -1,8 +1,11 @@
 'use strict'; 
-
+var $routeProviderReference;
+var route;
 define(['angular',
 	'angularRoute',
 	'ngCookies',
+	'jquery',
+	'uiGrid',
 	'ngSanitize',
 	'routeResolver',
 	'bootstrap',
@@ -12,11 +15,11 @@ define(['angular',
 	'ngSortable',
 	'googleMap',
 	'upload','uploadShim',
-	'css!../css/bootstrap.min','css!../css/style'
-], function(angular, angularRoute, ngCookies) {
+	'css!../css/bootstrap.min','css!../css/style','css!../lib/ui-grid/ui-grid.min'
+], function(angular, angularRoute, ngCookies, $) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
-	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps', 'ui.sortable'
+	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps', 'ui.sortable','ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav','ui.grid.pagination'
 	]);
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
                 '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 'uiGmapGoogleMapApiProvider',
@@ -40,8 +43,8 @@ define(['angular',
 				};
 				
 				//Define routes - controllers will be loaded dynamically
-				var route = routeResolverProvider.route;
-				
+				route = routeResolverProvider.route;
+				$routeProviderReference = $routeProvider;
 				$routeProvider
                 
                 .when('/', route.resolve({controller:'login', template: 'login', label:"Home"}, 'users/login/')) 
@@ -133,21 +136,59 @@ define(['angular',
 	}]);
 	
 		
-	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams','$notification','$timeout', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies,$routeParams,$notification,$timeout) {
+	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams','$notification','$timeout', '$route', '$http', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies, $routeParams, $notification, $timeout, $route,$http) {
 		$rootScope.sqLite = false;
+		$rootScope.$routeProviderReference = $routeProviderReference;
+		
+		
+		$rootScope.setRoutes = function(routes, subModule){
+			
+			var routes = (routes) ? routes : (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
+			
+			if(subModule){
+				var parentPath = "/dashboard/";
+			}else{
+				var parentPath = "/";
+			}
+			
+			if(routes.moduleName){
+				parentPath = "/dashboard/";
+				var moduleRoutes = routes.moduleRoutes;
+				var currentRoutes = (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
+				//localStorage.module_roots = JSON.stringify(currentRoutes.concat(moduleRoutes));
+			}else{
+				moduleRoutes = routes;
+			}
+			//console.log(parentPath, routes);
+			angular.forEach(moduleRoutes, function(value, key){
+				//console.log(value.path);
+				$routeProviderReference.when(parentPath + value.path, route.resolve({controller: value.controller,template: value.template,label: value.label}, value.modulePath));
+			})
+			
+			
+		}
+		//if(localStorage.module_roots){
+			//$rootScope.setRoutes();
+			//console.log(JSON.parse(localStorage.module_roots));
+		//}
+		
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
+			//console.log(localStorage);
 			$rootScope.userDetails = dataService.userDetails;
 			$rootScope.currentSite = location.protocol+'//'+location.hostname;
 			$rootScope.breadcrumbs = breadcrumbs;
 			$rootScope.serverApiV2 = false;
+			
+			$rootScope.currentPath = (next.$$route) ? next.$$route.originalPath : "";
 			$rootScope.appConfig = {
 				metaTitle : "Small Business",
 				headerTitle : (next.$$route.label) ? next.$$route.label:"",
 				subTitle : (next.$$route.label) ? next.$$route.label : "",
 				assetPath : '..'
 			};
+			//console.log($route);
 			
-			var nextUrl = next.$$route.originalPath;
+			var nextUrl = (next.$$route) ? next.$$route.originalPath : "";
 			if(nextUrl == '/logout' || dataService.auth == false){
 				dataService.logout();
 				$rootScope.userDetails = null;
@@ -167,6 +208,20 @@ define(['angular',
 				
 			};
 			if($rootScope.userDetails != null){
+				if($rootScope.userDetails.config.modules){
+					var routes = [];
+					angular.forEach($rootScope.userDetails.config.modules, function(value, key){
+						$http.get("modules/"+value.name+"/inventory.json").success(function(response){
+							//console.log(response);
+							var routes = {
+								moduleRoutes : response,
+								moduleName : "inventory"
+							}
+							$rootScope.setRoutes(routes, true);
+						})
+					})
+					//$rootScope.setRoutes(routes, true);
+				}
 				if($rootScope.userDetails.group_id == 4){
 					if($rootScope.userDetails.config.addbusiness === undefined){
 						

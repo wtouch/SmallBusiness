@@ -1,0 +1,77 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="main-content">
+			<div class="row border-bottom">
+				<div class="col-md-12">
+					<nav class="nav navbar navbar-default">
+						<div class="container-fluid"> 
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav nav-pills">
+									<li><a class="bottomspace" type="button" go-back tooltip="Back"> 
+										<span class="glyphicon glyphicon glyphicon-arrow-left">	</span>
+									</a></li>
+									<li><a class=" glyphicon glyphicon-home" href="#/dashboard"><span class="sr-only"></span></a></li>
+									<li><a  href="#/dashboard/bill">Purchase Bill</a></li>
+									<li><a  href="#/dashboard/invoice">Invoice</a></li>
+									<li><a href="#/dashboard/transaction">Transaction</a></li>
+									<li><a  href="#/dashboard/stock">Stock</a></li>
+									<li><a href="#/dashboard/account">Accounts</a></li>
+									<li><a  href="#/dashboard/balance">Balancesheet</a></li>
+									<li><a  href="#/dashboard/users">Party List</a></li>
+								</ul>
+								<ul class="nav navbar-nav nav-pills navbar-right">
+									<li class="btn-group" dropdown> 
+										<a class=" dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+											<span class="glyphicon glyphicon-th-large dropdown-toggle"></span>
+										</a>
+										<ul class="dropdown-menu dropd" role="menu" aria-labelledby="dropdownMenu1">	
+											<li role="presentation">
+												<a role="menuitem" tabindex="-1" href="#/editprofile">
+													<span class="glyphicon glyphicon-pencil"></span> Edit Profile
+												</a>
+											</li>
+											<li role="presentation">
+												<a role="menuitem" tabindex="-1" href="#/changepass">
+													<span class="glyphicon glyphicon-pencil"></span> Change Password
+												</a>
+											</li>
+											<li class="divider"></li>
+											<li role="presentation">
+												<a role="menuitem" tabindex="-1" href="#/logout">
+													<span class="glyphicon glyphicon-off"></span> Sign Out
+												</a>
+											</li>
+										</ul>
+									</li> 
+								</ul>
+							</div> 
+						</div>
+					</nav>
+				</div>
+			</div>
+			<a class="btn btn-primary" ng-click="openModal('modules/bill/addbill.html')">Add Purchase Bill</a></span>
+		<h3>Purchase Bills</h3>
+			<div class="row">	 				  
+				<div class="col-sm-2">
+					<div class="bottomspace">
+						<label for="payment_status" class="control-label" >Payment Status</label>
+						<select id="payment_status" class="form-control" ng-change="getData(false, currentPage,'bill', 'billData', params)" ng-model="pageItems">
+							<option value="10">10</option>	
+							<option value="20">20</option>	
+							<option value="30">30</option>
+						</select>
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="table-responsive" ng-init="getData(false,currentPage, 'bill', 'billData', params); getData(false,false,'user', 'userData', params)">
+			 <div ui-grid="billData"></div>
+			</div>
+			<div class="text-center">				
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage,'bill', 'billData', params)"> </pagination>
+				<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			</div>
+		</div>
+	</div>
+</div> 
