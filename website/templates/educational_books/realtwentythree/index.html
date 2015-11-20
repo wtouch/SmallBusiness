@@ -150,7 +150,7 @@
 					</button>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 					</ul>
@@ -214,15 +214,15 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							{%if modules.contentModule.featured_services %}
+							<li role="presentation" class="active">
+								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
+							</li>
 							<li role="presentation" >
 								<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
 							</li>
 							{%endif%}
 							<li role="presentation">
 								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
-							</li>
-							<li role="presentation" class="active">
-								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
 							</li>
 						</ul>
 						<!-- Tab panes -->

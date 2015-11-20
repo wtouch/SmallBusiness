@@ -28,7 +28,7 @@
 	body{
 		color:@colorblack;
 		//-webkit-gradient(linear, left top, right top, from(#fff3ce), to(#efefef))
-		background-image:url('../img/bg.png'), linear-gradient( @lightbackcolor ,@colorwhite );
+		background-image:linear-gradient( @lightbackcolor ,@colorwhite );
 		background-repeat:no-repeat;
 	}
 	.sociallinks{
@@ -104,12 +104,6 @@
 	.navbar-collapse{
 		padding :0px;
 	} 
-	.navbar-toggle {
-		margin-top : 45px;
-	}
-	.navbar-toggle .icon-bar {
-		background-color: @darkbackcolor;
-	}
 	.modal-body	{
 		p{
 			color:@colorblack;
@@ -118,11 +112,11 @@
 	.btn + .btn{
 		margin-left : 5px;
 	}
-	.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>li>a:hover{
+	/*.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>li>a:hover{
 		background-color:transparent;
 		color:@darkcolor;
 		border-top: 10px solid @darkbackcolor;
-	}
+	}*/
 	.navbar{
 		min-height : 50px;
 	}
@@ -130,27 +124,45 @@
 		background:transparent;
 		border:none;
 		.navbar-nav{
-			>li:hover{
-				color:@back;
-			}
-			>li >a:active,>li >a:hover,>li >a:focus{
-				color:@darkcolor;
-			}
+			display : inline-block;
+			float : none;
 			>li{
 				margin-bottom:0px;
 				position : relative;
 				padding: 0 5px;
 				>a, > a:focus {
 					color:@colorblack;
-					padding: 8px 15px;
 					text-transform: uppercase;
 					font: normal 14px/1.5em 'Arial', Helvetica, sans-serif;
-					transition: all 0.2s ease;
-					-o-transition: all 0.2s ease;
-					-moz-transition: all 0.2s ease;
-					-webkit-transition: all 0.2s ease;
+					padding-top : 30px;
+					padding-bottom : 10px;
+					margin : 2px 4px 2px 0px;
+					font-weight : bold;
+				}
+				&.active>a{
+					background : none;
+				}
+				&.active>a, &.active > a:hover, &> a:hover{
+					color : @darkcolor;
+					padding-bottom : 30px;
+					border-bottom : 3px solid @darkcolor;
+					background-color : transparent;
+					padding-top : 10px;
 				}
 				
+				&.active > a:after, &.active > a:hover:after, &>a:hover:after{
+					content: " ";
+					display: block;
+					width: 28px;
+					height: 25px;
+					position: absolute;
+					background: url(../img/right-icon1.png);
+					bottom: 5px;
+					left: 0px;
+					right: 0px;
+					margin: 0 auto;
+					transition: 300ms;
+				}
 				> ul{
 					display: none;
 					position: absolute;
@@ -211,11 +223,13 @@
 						}
 					}
 				}
-				&:hover > ul {
-					display: block;
+				&:hover{
+					color:@back;
+					> ul {
+						display: block;
+					}
 				}
 			}
-			
 		}
 	}
 	.content{
@@ -408,9 +422,14 @@
 	.navbar-toggle{
 		background-color : @darkcolor;
 		border-color : @colorwhite;
+		margin : 0px 15px 0px 0px;
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @colorwhite;
+	}
+	button.navbar-toggle.collapsed.projdtls {
+		margin-right: 0px;
+		color: #fff;
 	}
 	@media (max-width: 320px){
 		.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus,.navbar-default .navbar-nav>li>a:hover{
