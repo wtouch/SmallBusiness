@@ -392,8 +392,9 @@ class websiteManager{
 		$limit[1] = $this->itemsOnPage;
 		$this->db->setLimit($limit);
 		$this->db->setColumns($table, array("*"));
+		$this->db->setOrderBy(array("RAND()"=>"")); 
 		$projectData = $this->db->select();
-		
+		 
 		return $projectData;
 	}
 	function getProperties($user_id, $search = array(), $featured = null, $project_id = null){
@@ -416,6 +417,7 @@ class websiteManager{
 		$limit[1] = $this->itemsOnPage;
 		$this->db->setLimit($limit);
 		$this->db->setColumns($table, array("*"));
+		$this->db->setOrderBy(array("RAND()"=>""));
 		//$this->db->setOrderBy(array("rand()"), $table);
 		$projectData = $this->db->select();
 		return $projectData;
