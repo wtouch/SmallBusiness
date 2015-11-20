@@ -54,6 +54,7 @@
 				border-bottom-right-radius: 30px;
 				text-align : right;
 				width : 125px;
+				
 				a{
 					color : @colorwhite;
 					&:hover{
@@ -131,28 +132,25 @@
 	  background: linear-gradient(#F3C22C,#F97115);
 	}
 	.navbar-default {
-		/*background-color:@color;*/
-		/*background: linear-gradient(#0277bd,#3F51B5);*/
-		/*background: linear-gradient(#0277bd,#283593);*/
 		background: linear-gradient(@lightcolor,@color);
 		border: 1px solid @back;
 		border-radius: 0;
 		.navbar-nav{
+			display:inline-block;
+			float:none;
 			> li{
 				margin-bottom:0px;
 				position : relative;
 				> a, > a:focus {
 					color : @colorwhite;
-					font : bold 15px/1em Arial, Helvetica, sans-serif;
+					font : bold 13px/1em Arial, Helvetica, sans-serif;
 					position : relative;
 					text-transform : uppercase;
 					border : 3px solid transparent;
+					
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					/*background : linear-gradient(@back, #FF6F00);*/
-					/*background: linear-gradient(#F3C22C,#F97115);*/
 					background: linear-gradient(@lightbackcolor 75%,@darkcolor);
-					//border: 3px solid @darkbackcolor;
 					color : @colorwhite;
 					padding : 22px 15px;
 					margin-top : -12px;
@@ -162,17 +160,11 @@
 					position: absolute;
 					width: 245px;
 					z-index: 9999;
-					/*background : linear-gradient(@back, @color);*/
-					/*background-color:@darkbackcolor;*/
 					background: linear-gradient(#6479F5,@color 3%);
-					
-					
-					
 					padding: 2px;
 					list-style: none;
 					text-align: left;
 					>li{
-						
 						padding : 10px;
 						text-transform : uppercase;
 						position : relative;
@@ -279,6 +271,7 @@
 		&:hover, &:hover{
 			background: linear-gradient(@lightbackcolor 75%,@darkcolor);
 			color : @colorwhite;
+			
 		}
 	}
 	.subhead{
@@ -316,8 +309,8 @@
 	}
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
 	{
-		background-color : @back;
-		color : @lightcolor;
+		background: linear-gradient(@lightbackcolor 75%,@darkcolor);
+		color : @colorwhite;
 		border : 1px solid @darkbackcolor;
 	}
 	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
