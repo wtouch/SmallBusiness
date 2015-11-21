@@ -12,7 +12,7 @@ define(['app'], function (app) {
 		//function to login user
 		$scope.insert = function(login){
 				$location.path("/dashboard");
-			/* dataService.post("post/user/login",login)
+			dataService.post("post/user/login",login)
 			.then(function(response) {
 				if(response.status == 'success'){
 					$location.path("/dashboard");
@@ -25,7 +25,7 @@ define(['app'], function (app) {
 				}
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Login", response.message);
-			}) */
+			}) 
 		}
 	};
 	// Inject controller's dependencies
