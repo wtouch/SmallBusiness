@@ -86,7 +86,7 @@
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav nav-justified">
 					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 				</ul>
 			</div><!-- /.navbar-collapse -->
@@ -127,16 +127,19 @@
 				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12' }}">
 					<div class="row">
 						<div class="{{ (modules.sidebarModule =='searchProp' ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12' }}">
-							{% include contentPath %}
-							{%if modules.contentModule.featured_properties %}
-								{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
-								
-								{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
-								
-							{%endif%}
-							{%if modules.contentModule.featured_projects %}
-								{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
-							{%endif%}
+							<div class="content">
+								{% include contentPath %}
+							</div>
+								{%if modules.contentModule.featured_properties %}
+									{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
+									
+									{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+									
+								{%endif%}
+								{%if modules.contentModule.featured_projects %}
+									{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
+								{%endif%}
+							
 						</div>
 					</div>
 				</div>

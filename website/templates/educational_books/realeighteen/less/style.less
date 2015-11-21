@@ -138,10 +138,10 @@
 		background-color:@darkbackcolor;
 		border: 2px solid @colorwhite;
 		.navbar-nav{
-		display:inline-block;
-		float:none;
+		
 			> li{
 				margin-bottom:0px;
+				float:none;
 				position : relative;
 				> a, > a:focus {
 					color : @colorwhite;
@@ -162,7 +162,7 @@
 					position: absolute;
 					width: 245px;
 					z-index: 1000;
-					background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+					background-color: @darkbackcolor;
 					padding: 2px;
 					list-style: none;
 					text-align: left;
@@ -172,19 +172,21 @@
 						position : relative;
 						>a{
 							color : @colorwhite;
-							&:hover{
-								color : @darkbackcolor;
-							}
+							
 						}
 						&:hover{
 						//background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
-						background: linear-gradient(to left,@lightbackcolor, @colorwhite);;
+						background: linear-gradient(to top,@lightbackcolor, @colorwhite);;
 							-webkit-transition: all 0.4s;
 							border:none;
+							text-decoration:none;
+							a{
+							color : @darkbackcolor;
+							}
 						}
 						ul{
 							//background : linear-gradient(@back, @color);
-							background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+							background-image: -webkit-linear-gradient(to top @lightbackcolor, @colorwhite);
 							list-style: none;
 							display : none;
 							position : absolute;
@@ -200,6 +202,7 @@
 								&:hover{
 									a{
 										color : @colorwhite;
+										text-decoration:none;
 									}
 									background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
 									//background : linear-gradient(@darkcolor, @darkbackcolor);
@@ -279,18 +282,19 @@
 	}
 	.btn-info,.btn-primary{
 		border:1px solid @darkbackcolor;
-		background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+		//background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+		background-color:@darkbackcolor;
 		color : @colorwhite;
 		font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 		&:hover, &:hover{
-			background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+			background: linear-gradient(to top,@lightbackcolor, @colorwhite);
 			color : @darkbackcolor;
 			border:1px solid @darkbackcolor;
 		}
 	}
 	.subhead{
 		font-size: 18px;
-		background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+		background:@darkbackcolor;
 		border-radius : 7px;
 		color : @colorwhite;
 		padding: 4px 15px 12px;
@@ -319,14 +323,14 @@
 		background : none;
 	}
 	.panel{
-		background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+		background: linear-gradient(to top,@lightbackcolor, @colorwhite);
 	}
 	.panel-default{
 		border : 1px solid @darkbackcolor;
 	}
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
 	{
-		background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+		background: linear-gradient(to top,@lightbackcolor, @colorwhite);
 		color : @darkbackcolor;
 		border : 1px solid @darkbackcolor;
 	}
@@ -372,7 +376,7 @@
 		
 	}
 	.thumbnail{
-	background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+	background: linear-gradient(to top,@lightbackcolor, @colorwhite);
 	}
 	.email{
 		color:@darkbackcolor;

@@ -542,9 +542,9 @@
   border: 6px solid #ffffff;
   background-color: #700470;
   padding: 5px;
-  left: 10px;
-  left: 0;
-  border-radius: 0 50% 50% 0;
+  right: 0;
+  margin: 10px;
+  border-radius: 50% 0 0 50%;
 }
 .homeproject .projectnav .nav-stacked > li + li {
   margin-top: 10px;
@@ -552,7 +552,7 @@
 .homeproject .projectnav .nav-stacked > li > a,
 .homeproject .projectnav .nav-stacked > li > a:focus {
   color: #ffffff;
-  padding: 15px 20px;
+  padding: 15px 85px;
   font: bold 13px/1.5em Arial, Helvetica, sans-serif;
   text-transform: uppercase;
 }
@@ -564,21 +564,22 @@
 .homeproject .projectnav .nav-stacked > li > a:hover,
 .homeproject .projectnav .nav-stacked > li > a:focus {
   text-decoration: none;
-  background: linear-gradient(to left, #df0708, #ffffff);
+  background: linear-gradient(to top, #df0708, #ffffff);
   color: #700470;
-  transform: translateX(-80px);
+  transform: translateX(53px);
   width: 340px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border: 2px solid #196619;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   padding-right: 50px;
+  text-align: right;
   border: 1px solid #700470;
 }
 .homeproject .projsnap {
   background-color: #700470;
   border: 6px solid #ffffff;
-  border-radius: 50% 0 0 50%;
-  right: 0;
-  padding-left: 90px !important;
+  border-radius: 0% 50% 50% 0% ;
+  left: 0;
   padding-top: 12px !important;
   padding-right: 10px !important;
   text-align: center;
@@ -884,12 +885,9 @@ html {
   background-color: #700470;
   border: 2px solid #ffffff;
 }
-.navbar-default .navbar-nav {
-  display: inline-block;
-  float: none;
-}
 .navbar-default .navbar-nav > li {
   margin-bottom: 0px;
+  float: none;
   position: relative;
 }
 .navbar-default .navbar-nav > li > a,
@@ -916,7 +914,7 @@ html {
   position: absolute;
   width: 245px;
   z-index: 1000;
-  background-image: -webkit-linear-gradient(#700470, #df0708);
+  background-color: #700470;
   padding: 2px;
   list-style: none;
   text-align: left;
@@ -929,16 +927,17 @@ html {
 .navbar-default .navbar-nav > li > ul > li > a {
   color: #ffffff;
 }
-.navbar-default .navbar-nav > li > ul > li > a:hover {
-  color: #700470;
-}
 .navbar-default .navbar-nav > li > ul > li:hover {
-  background: linear-gradient(to left, #df0708, #ffffff);
+  background: linear-gradient(to top, #df0708, #ffffff);
   -webkit-transition: all 0.4s;
   border: none;
+  text-decoration: none;
+}
+.navbar-default .navbar-nav > li > ul > li:hover a {
+  color: #700470;
 }
 .navbar-default .navbar-nav > li > ul > li ul {
-  background-image: -webkit-linear-gradient(#700470, #df0708);
+  background-image: -webkit-linear-gradient(to top #df0708, #ffffff);
   list-style: none;
   display: none;
   position: absolute;
@@ -958,6 +957,7 @@ html {
 }
 .navbar-default .navbar-nav > li > ul > li ul li:hover a {
   color: #ffffff;
+  text-decoration: none;
 }
 .navbar-default .navbar-nav > li > ul > li:hover ul {
   display: block;
@@ -1023,7 +1023,7 @@ h2 {
 .btn-info,
 .btn-primary {
   border: 1px solid #700470;
-  background-image: -webkit-linear-gradient(#700470, #df0708);
+  background-color: #700470;
   color: #ffffff;
   font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 }
@@ -1031,13 +1031,13 @@ h2 {
 .btn-primary:hover,
 .btn-info:hover,
 .btn-primary:hover {
-  background: linear-gradient(to left, #df0708, #ffffff);
+  background: linear-gradient(to top, #df0708, #ffffff);
   color: #700470;
   border: 1px solid #700470;
 }
 .subhead {
   font-size: 18px;
-  background-image: -webkit-linear-gradient(#700470, #df0708);
+  background: #700470;
   border-radius: 7px;
   color: #ffffff;
   padding: 4px 15px 12px;
@@ -1064,7 +1064,7 @@ hr {
   background: none;
 }
 .panel {
-  background: linear-gradient(to left, #df0708, #ffffff);
+  background: linear-gradient(to top, #df0708, #ffffff);
 }
 .panel-default {
   border: 1px solid #700470;
@@ -1079,7 +1079,7 @@ hr {
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  background: linear-gradient(to left, #df0708, #ffffff);
+  background: linear-gradient(to top, #df0708, #ffffff);
   color: #700470;
   border: 1px solid #700470;
 }
@@ -1123,7 +1123,7 @@ footer {
   }
 }
 .thumbnail {
-  background: linear-gradient(to left, #df0708, #ffffff);
+  background: linear-gradient(to top, #df0708, #ffffff);
 }
 .email {
   color: #700470;
