@@ -1,6 +1,7 @@
 .featuretab{
 	margin-top : 20px;
 		.tab-content{
+			background: linear-gradient(to left,@lightbackcolor, @colorwhite);
 			border : 1px solid @darkbackcolor;
 			border-top : none;
 			position: relative;
@@ -11,17 +12,18 @@
 			border-bottom: 1px solid @darkbackcolor;
 			li{
 				a{
+					background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
 					border: 1px solid @darkbackcolor;
 					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 					&:hover{
-						color: @colorwhite;
+						color: @darkbackcolor;
 						//background-color: @back;
-						background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+						background: linear-gradient(to left,@lightbackcolor, @colorwhite);
 					}
 				}
 				&.active>a, &.active>a:hover, &.active>a:focus{
-					color: @colorwhite;
-					background-image: -webkit-linear-gradient(@darkbackcolor,@lightbackcolor);
+					color: @darkbackcolor;
+					background: linear-gradient(to left,@lightbackcolor, @colorwhite);
 					border: 1px solid @darkbackcolor;
 				}
 			}
@@ -96,6 +98,12 @@
 		
 	}
 	.about, .contact{
+		p{
+			color:@darkbackcolor;
+		}
+		a{
+			color:@darkbackcolor;
+		}
 		.table{
 			tbody{
 				tr{
@@ -130,6 +138,9 @@
 	}
 	//contactus page css
 	.contact{
+		margin-top:20px;
+		background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+		padding:20px;
 		img{
 			max-height: 125px;
 		}
@@ -168,6 +179,12 @@
 		}
 	}
 	.testimonial{
+				background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+				margin:0px;
+		padding:20px;
+		p{
+			color:@darkbackcolor;
+		}
 		blockquote{
 			padding-left : 15px;
 			footer{
@@ -250,3 +267,28 @@
 			}
 		}
 	}
+	.homeAboutus{
+		h1{
+			color:@darkbackcolor;
+		}
+		.description{
+		p{
+		background-color:darkbackcolor;
+		color:@darkbackcolor;
+		}
+		}
+	
+	}
+	.singleproduct{
+		margin-top:20px;
+		background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+		padding:20px;
+		p{
+			color:@darkbackcolor;
+		}
+	}
+	.about>.row{
+		margin-top:20px;
+		background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+		padding:20px;
+		}
