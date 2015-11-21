@@ -1,0 +1,227 @@
+	.featuretab{
+		margin-top : 10px;
+		.tab-content{
+			border : 1px solid @darkbackcolor;
+			border-top : none;
+			position: relative;
+			margin-bottom: 25px;
+			padding : 1px 30px;
+			background-color : @lightbackcolor;
+		}
+		.nav-tabs{
+			border-bottom: 1px solid @darkbackcolor;
+			li{
+				a{
+					border: 1px solid @darkbackcolor;
+					font:16px 'Alex Brush', cursive;
+					background-color: @back;
+					color: @colorwhite;
+					&:hover{
+						color: @back;
+						background-color: @back;
+						background : -webkit-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : linear-gradient(top,@back, @lightbackcolor,@back);
+					}
+				}
+				&.active>a, &.active>a:hover, &.active>a:focus{
+					color: @back;
+					background : -webkit-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
+						background : linear-gradient(top,@back, @lightbackcolor,@back);
+					border: 1px solid @darkbackcolor;
+				}
+			}
+		}
+	}
+	//aboutus page css
+	.sidebar{
+		.nav-pills{
+			background : -webkit-linear-gradient(top, @back, @darkcolor, @back);
+			background : -moz-linear-gradient(top, @back, @darkcolor, @back);
+			background : linear-gradient(top, @back, @darkcolor, @back);
+			>li{
+				border-right : 1px solid @lightcolor;
+				>a, > a:focus{
+					color : @color;
+					font-weight : bold;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					color : @colorwhite;
+					background-color: @darkcolor;
+				}
+			}
+		}
+	}
+	.about, .contact{
+		.table{
+			tbody{
+				tr{
+					th,td{
+						border-color : @darkbackcolor;
+					}
+				}
+			}
+		}
+	}
+	.about{
+		.table{
+			margin-top: 20px;
+		}
+	}
+	.infrastructure{
+		.thumbnail{
+			height: 395px;
+			img{
+				height : 190px;
+			}
+			.caption{
+				height: 135px;
+				overflow: hidden;
+				margin-bottom: 10px;
+			}
+		}
+	}
+	//contactus page css
+	.contact{
+		img{
+			max-height: 125px;
+		}
+		h4{
+			margin-top : 0px;
+		}
+	}
+	#googleMap{
+		height:395px;
+	}
+	
+	
+	//testimonials
+	.testimonial, .featrtesti{
+		blockquote{
+			font-size : inherit;
+			border-left: none;
+			footer{
+				background:none;
+				padding : 0px;
+				cite{
+					font-size : 17px;
+					color : @darkcolor;
+				}
+			}
+			&::before{
+				content : '\201c';
+				position : absolute;
+				display : inline-block;
+				top : 5px;
+				left : 0;
+				line-height : 40px;
+				font-family : Times New Roman,Serif;
+				font-size : 55px;
+			}
+		}
+	}
+	.testimonial{
+		blockquote{
+			padding-left : 15px;
+			footer{
+				img{
+					max-height: 70px;
+					width: 70px;
+					margin-right : 10px;
+				}
+			} 
+		}
+	}
+	.featrtesti{
+		blockquote{
+			padding : 5px 15px;
+		}
+		img{
+			max-height : 100px;
+			padding : 4px;
+			border : 3px solid #732C7B;
+		}
+	} 
+	.sidebarModule{
+		.panel-default{
+			border : none;
+		}
+		
+		.radio label{
+			padding-left : 15px;
+		}
+		&.sidemenu{
+			ul{
+				padding : 0;
+				list-style : none;
+				li{
+					margin-bottom : 15px;
+				}
+			}
+			a{
+				display: inline-block;
+				height: 87px;
+				width: 88%;
+				background-repeat: no-repeat;
+				background-position: center;
+				text-indent: -9999px;
+				background-size: 100% 100%;
+				overflow: hidden;
+				&.area_converter{
+					background-image : url('../img/area_converter.png');
+				}
+				&.emi_calculator{
+					background-image : url('../img/emi_calculator.png');
+				}
+				&.post_your_property{
+					background-image : url('../img/post_your_property.jpg');
+				}
+				&.post_your_requirement{
+					background-image : url('../img/post_your_requirement.jpg');
+				}
+			}
+		}
+	}
+	//gallery
+	.gallery{
+		.thumbnail{
+			border-color : @darkbackcolor;
+			.description {
+				height: 140px;
+				overflow: hidden;
+			}
+		}
+	}
+
+	@media (min-width: 320px) {
+		.gallery{
+			.thumbnail{
+				height:380px;
+			}
+		}
+	}
+
+	@media (min-width: 992px) { 
+		.gallery{
+			.thumbnail{
+				height:365px;
+				img{
+					max-height : 155px;
+					width:100%;
+				}
+			}
+		}
+	}
+
+	@media (min-width: 1200px){
+		.gallery{
+			.thumbnail{
+				height:380px;
+				img{
+					max-height : 200px;
+					width:100%;
+				}
+			}
+		}
+	}

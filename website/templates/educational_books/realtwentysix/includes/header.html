@@ -1,0 +1,40 @@
+{% autoescape false %}
+<div class="clearfix">
+	<div class="logo">
+		<a href="/"><img src="{{data.business_logo.file_relative_path}}"></a>
+	</div>
+	<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNav">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		</div>
+	<div class="bizname text-center">
+		<h1>{{ data.business_name }}</h1>
+		{% if data.business_info.tagline %}
+		<p class="tagline">{{ data.business_info.tagline}}</p>
+		{% endif %}
+		{% if data.business_info.alternate_tagline %}
+		<p class="tagline1">{{ data.business_info.alternate_tagline}}</p>
+		{% endif %}
+	</div>
+	<div class="addrs">
+		<address class="pull-right">
+			{%if data.contact_profile.telephone%}
+				Telephone : {{data.contact_profile.telephone}}<br>
+			{% endif %}
+			Mobile : {{data.contact_profile.mobile}}<br> 
+			E-mail : {{data.contact_profile.email}}
+		</address>
+	</div>
+</div>
+<nav class="navbar navbar-default">
+	<div class="collapse navbar-collapse" id="mainNav">
+		<ul class="nav navbar-nav">
+			{% include templatePath ~ '/' ~ "includes/links.html" with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+		</ul>
+	</div>
+</nav>
+{% endautoescape %}
