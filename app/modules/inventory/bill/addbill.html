@@ -5,12 +5,12 @@
 	<h3 ng-if="!modalOptions.addBill.id">Add Purchase Bill</h3>
 	<h3 ng-if="modalOptions.addBill.id">Update Purchase Bill</h3>
 </div>
-<div class="modal-body" >
-	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=		"generalForm.$valid" id="generalForm">
-		<div class="form-group">
+<div class="modal-body">
+	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
+		<div class="form-group" ng-init="modalOptions.getData(false,false,'party', 'partyList',params,modalOptions)">
 			<label for="customer" class="col-sm-2 control-label">Select Party *</label>
 			<div class="col-sm-2">
-				<select class="form-control" name="user_id" id="user_id" ng-model="modalOptions.addBill.user_id" required>
+				<select class="form-control" name="user_id" id="user_id" ng-model="modalOptions.addBill.user_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
 					<option value="">Select Party</option>
 					<option value="1">1</option>
 					<option value="2">2</option>

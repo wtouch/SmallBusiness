@@ -109,6 +109,9 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				
+				getData: $scope.getData,
+				
 				addToObject : $rootScope.addToObject,
 				reset : $rootScope.reset,
 				removeObject : $rootScope.removeObject
@@ -136,7 +139,7 @@ define(['app'], function (app) {
 				console.log(response);
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
-						modalOptions[subobj].data = angular.copy(response.data);
+						modalOptions[subobj] = angular.copy(response.data);
 						modalOptions.totalRecords = response.totalRecords;
 					}else{
 						($scope[subobj]) ? $scope[subobj].data = angular.copy(response.data) : $scope[subobj] = angular.copy(response.data) ;
@@ -144,7 +147,7 @@ define(['app'], function (app) {
 					}
 				}else{
 					if(modalOptions != undefined){
-						modalOptions[subobj].data = [];
+						modalOptions[subobj] = [];
 						modalOptions.totalRecords = 0;
 					}else{
 						($scope[subobj]) ? $scope[subobj].data = [] : $scope[subobj] = [] ;
