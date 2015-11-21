@@ -1,98 +1,187 @@
 <div class="row">
+
 	<div class="col-md-12">
+	
 		<div class="main-content">
-			<ng-include src="'modules/component/toolbar.html'"></ng-include>
-			<div class="row">
-				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-					<div class="gridblock">
-						<h4>
-							<span tooltip="Add new business, edit/modify business, add business details like facilities, features etc. Add your customer testimonials. Add/modify your business activities. Create your image gallery! To manage your business click below!" class="glyphicon glyphicon-info-sign"></span> Busines
-						</h4>
+		<ng-include src="'modules/component/toolbar.html'"></ng-include>
+			
+		<div class="row">
+			<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+				<div class="gridblock">
+					<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/business.png">
+						</div>
+						<div class="title col-md-8"> 
+								<h4>Busines</h4>
+							<div class="desc">Add new business, edit/modify business, add business details like facilities, features etc.</div> 
+						</div>
+					</div>
+					<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/business/businesslist">Business</a>
 					</div>
 				</div>
-				
-				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+			</div>
+			<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
-						<h4>
-							<span tooltip="Add products/services to your business. Add product photo, title, description." class="glyphicon glyphicon-info-sign"></span>Product/Services 
-						</h4>
+					<div class="col-md-4"> 
+							<img class="dashimg"src="img/product.png">
+						</div>
+						<div class="title col-md-8"> 
+						<h4>Product/Services </h4>
+							<div class="desc"> Add products/services to your business. Add product photo, title, description.</div>
+							</div>
+						<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/business/products">Manage Products</a>
+						</div>
 					</div>
-				</div>
+			</div>
 					
-				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+			<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
-						<h4>
-							<span tooltip="Choose template for your website from available template list. Request for custome template. Customize your template." class="glyphicon glyphicon-info-sign"></span> Template
-						</h4>
+						<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/template.png">
+						</div>
+						<div class="title col-md-8"> 
+							<h4>Template</h4>
+						<div class="desc">Choose template for your website from available template list. Request for custome template. Customize your template.</div> 
+						</div>
+					</div>
+							<div class="row text-center">
 						<a  class="btn btn-primary center-block" name="btn1" href="#/dashboard/templates/listoftemplates">Template</a>
 					</div>
-				</div>
+					</div>
+			</div>
 				
-				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
+			<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
-						<h4>
-							<span tooltip="Request for website name/domain with free and paid option. Apply business & template to your website. Add google map settings which will show in contact us page." class="glyphicon glyphicon-info-sign"></span> WebSite
+						<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/web.png">
+						</div>
+						<div class="title col-md-8"> 
+							<h4>WebSite
 						</h4>
+							<div class="desc">Request for website name/domain with free and paid option. Apply business & template to your website. Add google map settings which will show in contact us page.</div> 
+						</div>
+					</div>
+							<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/websites/websiteslist">Website</a>
 					</div>
-				</div>
-					
+					</div>
+			</div>
+		</div>	
+		<div class="row">
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
-						<h4>
-							<span tooltip="In this enquiry area you will find all enquiries from your site or portal. Send, reply mail from Enquiry Box!" class="glyphicon glyphicon-info-sign"></span> Enquiry Box 
+						<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/enquiry.png">
+						</div>
+						<div class="title col-md-8"> 
+						<h4>Enquiry Box 
 						</h4>
+							<div class="desc">In this enquiry area you will find all enquiries from your site or portal. Send, reply mail from Enquiry Box!</div> 
+						</div>
+					</div>
+							<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/enquiry">Enquiry Box</a>
+						</div>
 					</div>
 				</div>
 				
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock" ng-if="userDetails.permission.user_module.user_list">
-						<h4>
-							<span tooltip="List of users you have added!" class="glyphicon glyphicon-info-sign"></span> Users
+					<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/user.png">
+						</div>
+						<div class="title col-md-8"> 
+							<h4>Users
 						</h4>
+							<div class="desc">List of users you have added!</div> 
+						</div>
+					</div>
+					<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/users/userslist">Users</a>
+						</div>
 					</div>
 				</div>
 				
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
-						<h4>
-							<span tooltip="List of Students addmited for Training!" class="glyphicon glyphicon-info-sign"></span> Training
+						<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/trainning.png">
+						</div>
+						<div class="title col-md-8"> 
+						<h4>Training
 						</h4>
+							<div class="desc">List of Students addmited for Training!</div> 
+						</div>
+						</div>
+						<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/training">Training</a>
+						</div>
 					</div>
 				</div>
-				
+			
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
-						<h4>
-							<span tooltip="Create Quotation,Invoice,Receipt Generation!" class="glyphicon glyphicon-info-sign"></span> CRM
+					<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/crm.png">
+						</div>
+						<div class="title col-md-8"> 
+						<h4> CRM
 						</h4>
+							<div class="desc">Create Quotation,Invoice,Receipt Generation!</div>
+						</div>
+					</div>
+						
+						<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/crm">CRM</a>
+						</div>
 					</div>
 				</div>
 				
-			</div>
+		</div>
 			<h3>Real Estate</h3>
 			<div class="row">
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
-						<h4>
-							<span tooltip="In this area you will find all the projects!" class="glyphicon glyphicon-info-sign"></span> Project 
+						<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/proj.png">
+						</div>
+						<div class="title col-md-8"> 
+						<h4>Project 
 						</h4>
+							<div class="desc">In this area you will find all the projects!</div> 
+						</div>
+					</div>
+						<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/project">Project</a>
+						</div>
 					</div>
 				</div>
 				
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
-						<h4>
-							<span tooltip="In this area you will find all properties which you want to buy or sale.You can post your property for sale!" class="glyphicon glyphicon-info-sign"></span> Property
+						<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/proj.png">
+						</div>
+						<div class="title col-md-8"> 
+						<h4>Property
 						</h4>
+						<div class="desc">In this area you will find all properties which you want to buy or sale.You can post your property for sale!</div> 
+						</div>
+					</div>
+						<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/property">Property</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -100,10 +189,20 @@
 			<div class="row">
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
 					<div class="gridblock">
-						<h4>
-							<span tooltip="You can send SMS!" class="glyphicon glyphicon-info-sign"></span> Excel Update
+					<div class="row">
+						<div class="col-md-4"> 
+							<img class="dashimg"src="img/excel.png">
+						</div>
+						<div class="title col-md-8"> 
+						<h4>Excel Update
 						</h4>
+						<div class="desc">You can send SMS!</div> 
+						</div>
+					</div>
+						
+						<div class="row text-center">
 						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/excel">Excel Update</a>
+						</div>
 					</div>
 				</div>
 				
