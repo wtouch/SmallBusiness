@@ -1,19 +1,20 @@
 {% autoescape false %}
-<h2>Solutions</h2>
+<h2>{{title}}</h2>
 <div class="row products">
 	{% for key, x in products %}
 		<div class="col-xs-12 col-sm-6 col-md-6">
-			<div class="thumbnail">
+			<div class="thumbnail product">
+					<h3 class="text-center">{{ x.product_service_name }}</h3>
 				<div class="prodimg"> 
 					<img src="{{x.product_image.0.file_relative_path}}" class="img-responsive center-block" alt="{{key}}"/>
 				</div>
-				<h4>{{ x.product_service_name }}</h4>
 				<div class="caption">
+					
 					<div class="description">
 					{{ x.description }}
 					</div>
 				</div>
-				<div class="readmore">
+				<div class="readmore1">
 					{% if x.type == 'service' %}
 						<a href="/services/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More..</a>
 					{% endif %}

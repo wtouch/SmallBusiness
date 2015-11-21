@@ -15,22 +15,17 @@
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
 		
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		
-		
 	</head>
 	<body>
-		<div class="col-md-12 anim2">
-			<img src="{{ path }}img/robot.gif" alt="image missing">
-		</div>
-		<h1 class="anim4">MOVEIN <br>ROBOTECH</h1>
-		<div class="anim1">
-		<header>
+
+	<header>
 			<nav class="navbar navbar-default">
-				<div class="container">
+			<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 							<span class="sr-only">Toggle navigation</span>
@@ -39,13 +34,7 @@
 							<span class="icon-bar"></span>
 						</button>
 						<div class="brand">  
-							<a class="navbar-brand" href="#">
-								<img class="logo" src="{{data.business_logo.file_relative_path}}">
-							</a> 
-							
-							{#{% if data.business_logo %}
-								<img class="logo" src="{{data.business_logo.file_relative_path}}">
-							{% endif %}#}
+						<a class="navbar-brand" href="#">{{data.business_name}}</a>
 						</div>
 					</div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -53,31 +42,37 @@
 							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 						</ul>
 					</div>
-				</div>
+			</div>
 			</nav>
-		</header>
-		{%if modules.headerModule.carousal %}
-			{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-		{%endif%}
+	</header>
+
+
 		
-		<div class="container">
+				<div >
+					{%if modules.headerModule.carousal %}
+						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+				</div>
+
+		
+	<div class="container">
 			<div class="content">{% include contentPath %}</div>
-			{%if modules.contentModule.featured_services %}
+	
 			<div class="row">
 				 {% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %} 
 			</div>
-			{%endif%}
+</div>
+<div class="container-fluid">
+	<div class="ftr">
+		<div>
+			{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 		</div>
-		{%if modules.headerModule.carousal %}
-		<div class="imageGallery">
-			<div class="container">
-				{% include [templatePath ~ '/includes/featured_gallery.html', 'default/default/includes/featured_gallery.html'] %} 
-			</div>
-		</div>
-		{%endif%}
-		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-	</div>
+			{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+	</div> 
+</div>	
+
+			 
+			
 	</body>
 </html> 
 {% endspaceless %}

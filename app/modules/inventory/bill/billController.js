@@ -15,6 +15,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.sqlDateFormate(dataService.currentDate);
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
+		console.log('Hello');
 		$scope.billData = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -32,7 +33,7 @@ define(['app'], function (app) {
 				},
 				{
 					name:'User Name',
-					filterHeaderTemplate: '<select id="user_id" class="form-control" ng-change="grid.appScope.filter(\'user_id\', partyFilter, \'user\', \'userData\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.userData">'
+					filterHeaderTemplate: '<select id="user_id" class="form-control" ng-change="grid.appScope.filter(\'user_id\', partyFilter, \'party\', \'userData\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.userData">'
 							+'<option value="" selected>Payment Status</option>'
 							+'<option value="0">Unpaid</option>'
 							+'<option value="1">Paid</option>	'
@@ -66,7 +67,7 @@ define(['app'], function (app) {
 					} 
 				},
 				{ name:'manage', enableSorting: false, enableFiltering: false, 
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete bill" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
 				}
