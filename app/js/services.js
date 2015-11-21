@@ -425,6 +425,7 @@ define(['app'], function (app) {
 					})
 				}else{
 					if($rootScope.serverApiV2){
+						table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
 						var reqParams = {
 							table : table,
 						}
@@ -466,6 +467,7 @@ define(['app'], function (app) {
 					})
 				}else{
 					if($rootScope.serverApiV2){
+						table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
 						var reqParams = {
 							table : table,
 							params: params
@@ -506,7 +508,7 @@ define(['app'], function (app) {
 					})
 				}else{
 					if($rootScope.serverApiV2){
-						console.log(params);
+						table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
 						var reqParams = {
 							table : table,
 							params : params,
