@@ -16,7 +16,8 @@ define(['app'], function (app) {
 		$scope.numPages = "";		
 		$scope.currentDate = dataService.currentDate;
 		$scope.transactionView = true;
-		
+		$rootScope.serverApiV2 = true;
+		$rootScope.module = "inventory";
 		$scope.transactionList = {
 			enableSorting: true,
 			enableFiltering: true,
