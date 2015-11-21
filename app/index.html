@@ -14,11 +14,26 @@
 	<div  ng-include="'modules/component/header.html'">
 	</div>
 	<div class="ng-cloak container" ng-cloak ng-view></div>
-	<div ng-show="loading" style="display: block; position: fixed; top: 0; right: 0; left: 0; bottom: 0; background: rgba(0, 0, 0, 0.05);z-index: 10000;">
-		<div style="margin: 0 auto;font-size: 26px;color: transparent;width: 128px;text-align: center;margin-top: 10%;font-family: arial, helvetica, sans-serif;background: url(img/loader-leaf-purple.gif) no-repeat center center;height: 128px;">
-			Loading...
+
+		<div ng-show="loading" style="display: block; position: fixed; top: 0; right: 0; left: 0; bottom: 0; background: rgba(255, 255, 255, 0.87);z-index: 10000;" class="ng-hide">
+			<div class="cssload-dots">
+				<div class="cssload-dot"></div>
+				<div class="cssload-dot"></div>
+				<div class="cssload-dot"></div>
+				<div class="cssload-dot"></div>
+				<div class="cssload-dot"></div>
+			</div>
+
+			<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<defs>
+					<filter id="goo">
+						<feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="12" ></feGaussianBlur>
+						<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0	0 1 0 0 0	0 0 1 0 0	0 0 0 18 -7" result="goo" ></feColorMatrix>
+						<!--<feBlend in2="goo" in="SourceGraphic" result="mix" ></feBlend>-->
+					</filter>
+				</defs>
+			</svg>
 		</div>
-	</div>
 <footer class="navbar navbar-default text-center"><p>&copy 2015 Apna Site.in</p></footer>
     <!-- Require JS -->
     <script data-main="js/main" src="lib/requirejs/require.js"></script>
