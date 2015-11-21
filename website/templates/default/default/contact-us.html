@@ -1,0 +1,95 @@
+{% autoescape false %}
+	<script src="http://maps.googleapis.com/maps/api/js">
+	</script>
+	<script>
+		function initialize() {
+			var mapProp = {
+				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+				zoom:12,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			var marker=new google.maps.Marker({
+				position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+			});
+			marker.setMap(map);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+	<h2>Contact Us</h2>
+	<div class="row contact">
+		<div class="col-xs-12 col-sm-12 col-lg-12">
+			<table class="table">
+				<tr>
+					<td>
+						<a href="#">
+							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
+						</a>
+					</td>
+					<td>
+						<h4>{{data.contact_profile.contact_person}}</h4>
+						<b>Address</b>
+						<address>
+							{{data.contact_profile.address}}<br>
+							{{data.city}}-{{data.pincode}},<br>
+							{{data.state|capitalize}},<br>
+							{{data.country|capitalize}}.
+						</address>
+					</td>
+				</tr>
+				{%if (data.contact_profile.address1) or (data.contact_profile.address2) or (data.contact_profile.address3) or (data.contact_profile.address4)%}
+				<tr>
+					<td colspan="2">
+						{%if data.contact_profile.address1%}
+							<span>{{data.contact_profile.address1}}</span>
+						{% endif %}
+						
+						{%if data.contact_profile.address2%}
+							<hr/>
+							<span>{{data.contact_profile.address2}}</span>
+						{% endif %}
+						
+						{%if data.contact_profile.address3%}
+							<hr/>
+							<span>{{data.contact_profile.address3}}</span>
+						{% endif %}
+						
+						{%if data.contact_profile.address4%}
+							<hr/>
+							<span>{{data.contact_profile.address4}}</span>
+						{% endif %}
+					</td>
+				</tr>
+				{% endif %}
+				{%if data.contact_profile.telephone%}
+				<tr>
+					<td><b>Telephone</b></td>
+					<td>{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}
+					</td>
+				</tr>
+				{% endif %}
+				<tr>
+					<td><b>Mobile</b></td>
+					<td>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? ", " ~ data.contact_profile.alternate_mobile}}</td>
+				</tr>
+				<tr>
+					<td><b>E-mail Id</b></td>
+					<td>
+						<a class="email" href="mailto: {{data.contact_profile.email}}">{{data.contact_profile.email}}</a><br>
+						<a class="email" href="mailto: {{data.contact_profile.alternate_email}}">{{data.contact_profile.alternate_email}}</a>
+					</td>
+				</tr>
+				{%if data.contact_profile.contact_website%}
+				<tr>
+					<td><b>Website</b></td>
+					<td><a href="/{{data.contact_profile.contact_website}}">{{data.contact_profile.contact_website}}</a>
+					</td>
+				</tr>
+				{% endif %}
+			</table>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-lg-12">
+			<div id="googleMap"></div>
+		</div>
+	</div>
+{% endautoescape %}

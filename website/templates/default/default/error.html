@@ -1,0 +1,64 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="{{ path }}css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ path }}css/errorstyle.css">
+	<script src="{{ path }}js/jquery.min.js"></script>
+	<script src="{{ path }}js/bootstrap.min.js"></script>
+	<style>
+	body{
+		{% if code == 101 or code == 102 or code == 103 %}
+			background-color : green;
+		{% endif %}
+		{% if code == 104 or code == 105 %}
+			background-color : #BA0505;
+		{% endif %}
+		{% if code == 100 %}
+			background-color : #BF1F54;
+		{% endif %}
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		{{status}}
+		{{code}}
+		{{website_status}}
+		<div class="errorback">
+			{% if code == 100 or code == 102 or code == 103 or code == 101 %}
+			<div class="msg">
+				<h2>
+					{{(code == 101 or code == 102 or code == 103 or code == 100) ? "" : website_status}}
+					<!-- <img class="erorimg" src="{{(code == 101) ? path ~ 'img/comingsoon.png' : path ~ 'img/errorface.png'}}">  -->
+					{% if code == 101 or code == 102 or code == 103 %}
+						<img class="coming" src="{{path}}/img/coming-soon.png">
+					{% endif %}
+					{% if code == 100 %}
+						<img src="{{path}}/img/come soon.png">
+					{% endif %}
+					
+				</h2>
+				<h3>{{message}}</h3>
+			</div>
+			{% endif %}
+			{% if code == 104 or code == 105 %}
+			<div class="error row">
+				<div class="col-sm-3 code">
+					<p>{{code}}</p>
+					<img src="{{path}}/img/errorface.png">
+				</div>
+				<div class="col-sm-9">
+					<h2>{{website_status}}</h2>
+					<h3>{{message}}</h3>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</body>
+</html>
+{% endspaceless %}
