@@ -21,17 +21,17 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 	</head>
 	<body>
-		<div class="back">
+		<div class="container-fluid back">
 		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-			<div class="container content1">
+			<div class="container-fluid content1">
 				<div class="col-md-3">
 					
 						{% if data.website_config.website_logo %}
 						
-						<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						<img class="logo img-responsive" src="{{data.website_config.website_logo.file_relative_path}}">
 						{% else %}
 						
-						<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						<img class="logo img-responsive" src="{{data.business_logo.file_relative_path}}">
 						{% endif %}
 					
 				</div>
