@@ -18,7 +18,7 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		
-		console.log('hi');
+		
 		$scope.party = {
 			enableSorting: true,
 			enableFiltering: true,
