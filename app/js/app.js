@@ -173,6 +173,7 @@ define(['angular',
 		//}
 		
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
+			$rootScope.module = false;
 			//console.log(localStorage);
 			$rootScope.userDetails = dataService.userDetails;
 			$rootScope.currentSite = location.protocol+'//'+location.hostname;

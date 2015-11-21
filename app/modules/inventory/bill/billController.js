@@ -13,6 +13,8 @@ define(['app'], function (app) {
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
 		$scope.currentDate = dataService.sqlDateFormate(dataService.currentDate);
+		$rootScope.serverApiV2 = true;
+		$rootScope.module = "inventory";
 		$scope.billData = {
 			enableSorting: true,
 			enableFiltering: true,

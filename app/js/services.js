@@ -790,6 +790,7 @@ define(['app'], function (app) {
 				setDb : setDb,
 				selectData : function(table, single, params){
 					//console.log(single, tableName, params);
+					table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
 					var obj = new selectDbData(table, single, params);
 					var db = obj.db;
 					var qs = obj.getQueryString();
@@ -838,6 +839,7 @@ define(['app'], function (app) {
 					return deferred.promise;
 				},
 				put : function(table, data, params){
+					table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
 					var obj = new selectDbData(table,false,params);
 					var deferred = $q.defer();
 					var queryString="";
@@ -876,6 +878,7 @@ define(['app'], function (app) {
 					return deferred.promise;
 				},
 				post : function(table, data){
+					table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
 					$rootScope.loading = true;
 					var obj = new selectDbData(table,false);
 					var deferred = $q.defer();

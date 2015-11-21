@@ -5,7 +5,8 @@ define(['app'], function (app) {
     
     // This is controller for this view
 	var invoiceController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
-	
+		$rootScope.serverApiV2 = true;
+		$rootScope.module = "inventory";
 		$scope.invoice=true;
 		
 		// Global Data Objects
