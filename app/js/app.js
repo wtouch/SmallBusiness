@@ -212,11 +212,11 @@ define(['angular',
 				if($rootScope.userDetails.config.modules){
 					var routes = [];
 					angular.forEach($rootScope.userDetails.config.modules, function(value, key){
-						$http.get("modules/"+value.name+"/inventory.json").success(function(response){
+						$http.get("modules/"+value.name+"/"+value.name+".json").success(function(response){
 							//console.log(response);
 							var routes = {
 								moduleRoutes : response,
-								moduleName : "inventory"
+								moduleName : value.name
 							}
 							$rootScope.setRoutes(routes, true);
 						})
