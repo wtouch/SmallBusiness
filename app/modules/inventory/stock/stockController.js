@@ -16,7 +16,10 @@ define(['app'], function (app) {
 		$scope.numPages = "";		
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
-		$scope.currentDate = dataService.currentDate;
+		$scope.currentDate = dataService.sqlDateFormate(dataService.currentDate);
+		$rootScope.serverApiV2 = true;
+		$rootScope.module = "inventory";
+		console.log('Hello');
 		//$scope.stockList = {};
 		$scope.stockList = {
 			enableSorting: true,
