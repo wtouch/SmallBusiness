@@ -17,10 +17,15 @@ footer p {
 .navbar h2 {
   color: #ffffff;
 }
-@media (min-width: 768px) {
-  .navbar {
-    border-radius: 0px;
-  }
+.navbar-default .navbar-nav li .login {
+  margin-top: 25px;
+  right: 30px;
+  background: linear-gradient(#b80000, #700000);
+  color: #ffffff;
+}
+.navbar-default .navbar-nav li .login:hover {
+  background: linear-gradient(#b80000, #700000);
+  color: #ffffff;
 }
 .main-content {
   background-color: #ffffff;
@@ -44,70 +49,42 @@ thead {
 .gridblock {
   border: 1px solid black;
   margin-top: 20px;
-  height: 150px;
+  height: 160px;
 }
 .gridblock .btn {
+  margin-top: 10px;
   width: 150px;
   border-radius: 0px;
   border: 1px solid transparent;
   background-color: #b80000;
   display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-  position: relative;
   background: #b80000;
-  -webkit-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-}
-.gridblock .btn:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, #b80000 0%, #700000 100%);
-  -webkit-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
 }
 .gridblock .btn:hover,
 .gridblock .btn:focus,
 .gridblock .btn:active {
   color: white;
   background-color: #b80000;
-  border-color: #214277;
-}
-.gridblock .btn:hover:before,
-.gridblock .btn:focus:before,
-.gridblock .btn:active:before {
-  -webkit-transform: scale(1);
-  transform: scale(1);
+  border-color: transparent;
 }
 .gridblock .dashimg {
-  height: 100px;
-  max-width: 90px;
+  height: 75px;
+  max-width: 75px;
 }
 .gridblock .desc {
-  height: 60px;
+  height: 65px;
   overflow: hidden;
+  text-align: justify;
+  padding: 10px;
 }
 .dashboard {
   background: linear-gradient(#b80000, #700000);
   text-align: center;
+  padding-top: 1px;
+  padding-bottom: 5px;
+}
+.dashboard h2 {
+  margin-top: 15px;
 }
 .img-circle {
   margin-top: 15px;
@@ -117,6 +94,8 @@ thead {
 }
 body {
   background-color: #ffffff;
+  font-size: 12px;
+  line-height: 14px;
 }
 .dr-notification-container {
   position: fixed;
@@ -244,50 +223,11 @@ p.dr-notification-text {
 .btn-primary {
   border-radius: 0px;
   background-color: #b80000;
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
-  position: relative;
-  background: #b80000;
-  -webkit-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
+  border-color: transparent;
 }
-.btn-primary:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, #000000 0%, #b80000 100%);
-  opacity: 0.5;
-  -webkit-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active {
-  color: white;
-}
-.btn-primary:hover:before,
-.btn-primary:focus:before,
-.btn-primary:active:before {
-  -webkit-transform: scale(1);
-  transform: scale(1);
+.btn-primary:hover {
+  background: linear-gradient(45deg, #700000 0%, #b80000 100%);
+  border-color: transparent;
 }
 .btn-success {
   border-radius: 0px;
@@ -295,6 +235,14 @@ p.dr-notification-text {
 .btn-danger {
   border-radius: 0px;
   background: linear-gradient(45deg, #b80000 0%, #700000 100%);
+}
+.btn-warning {
+  border-radius: 0px;
+  background-color: #ef8318;
+}
+.btn-info {
+  border-radius: 0px;
+  background-color: #ef8318;
 }
 /* Loading Animation */
 .cssload-dots {
