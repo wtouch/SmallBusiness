@@ -1,0 +1,62 @@
+{% autoescape false %}
+{% if featured_properties >= 1 %}
+
+<div class="content-box">
+
+	<h2 id="ribbon-container">
+
+		<span id="ribbon">Additional Property</span>
+
+	</h2>
+
+	<div class="row services">
+
+		<div class="carousel slide" id="featuredProp">
+
+			<a class="left carousel-control" href="#featuredProp" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+
+			<a class="right carousel-control" href="#featuredProp" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+
+			<div class="carousel-inner">
+
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_properties if break == 0 %}
+				<div class="item {{ (i == 0) ? 'active' }}">
+					<div class="col-xs-12 col-md-3 col-lg-3 text-center">
+						<div class="shadow">
+							<a href="properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}">
+								<div class="imgborder">
+									<img src="{{x.property_images.0.file_relative_path}}" alt="" style="max-width:93%" class="slimg"/>
+									{% if x.verified %}
+										<span  tooltip="Business Verified" ><img src="{{path}}img/verify.png" class="verify"/></span>
+									{% endif %}
+								</div>
+							</a>
+							<div class="proj-title">
+								<a href="properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="head">{{x.title}}</a>
+								<small>{{x.type}}<br>
+								{{x.property_info.buildup_area}}{{x.property_info.build_unit}}
+								</small>
+							</div>
+							<div class="view-link">
+								<a class="btn " href="properties/{{x.title}}/{{x.id}}" >View Detail</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{% set i = (i + 1) %}
+				{% if i == 4 %}
+					{% set break = 1 %}
+				{% endif %}
+			{% endfor %}
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+{% endif %}
+{% endautoescape %}
