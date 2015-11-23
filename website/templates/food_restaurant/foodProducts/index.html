@@ -15,7 +15,6 @@
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script>
-		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
@@ -80,44 +79,49 @@
 		{% endif %} -->
 	</head>
 	<body>
-	    <div class="container">
-			    <div class="row">
-					<div class="col-md-3">
-						
-							<div class="logo">
-								{% if data.website_config.website_logo %}
-									<img class="logo" src="{{data.business_logo.file_relative_path}}">
-								{% else %}
-									<img class="logo" src="{{data.business_logo.file_relative_path}}">
-								{% endif %}
-							</div>
+	 <div class="container-fluid back">
+		<header>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-2">
+						<div class="logo">
+							{% if data.website_config.website_logo %}
+								<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+							{% else %}
+								<img class="logo" src="{{data.business_logo.file_relative_path}}">
+							{% endif %}
+						</div>
 					</div>
-					<div class="col-md-9 social_link " id="social_menu" background-color="fff" height=50>
+					<div class="col-md-4">
+						 <h2>{{data.business_name}}</h2>
+					</div>
+				
+					<div class="col-md-6 social_link">
 						        {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-
 					</div>
 				</div>
-				 <div class="row">
-					<nav class="nav navbar-default"> 
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-					
-				
+			</div>
+			<nav class="nav navbar-default  navbar-static-top b"> 
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+			
+				<div class="container">
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav nav-justified navbar-static-top b">
+						<ul class="nav nav-justified">
 							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 						</ul>
 					</div>
-		
-					</nav>
-					</div>
-			<div class="row r1">
+				</div>
+			</nav>
+		</header>
+	    <div class="container">
+			<div class="row">
 				
 					{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
@@ -127,26 +131,25 @@
 					{%endif%}
 				
 			</div> 
-			<div class="row r1">
-					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+			{% if modules.contentModule.featured_services%}
+			<div class="row">
+				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 			</div>
+			{% endif %}
 		</div>
-		
+		</div>
 		 <div class="container-fluid sback">
-		 <div class="container">
-			<div class="row r1">
-			    {% include contentPath%}
+			 <div class="container">
+				<div class="row">
+					{% if modules.contentModule.featured_products%}
 						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-			</div>
-				</div>	     
-		</div>	
-			 <div class="social_link " id="social_menu" background-color="fff" height=50>
+					{% endif %}
+					{% include contentPath%}
+				</div>
+				
+			</div> 
 				 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-			  </div>
-					
-	            
-			               
-	            
+		</div>
 	</body>
 </html> 
 {% endspaceless %}

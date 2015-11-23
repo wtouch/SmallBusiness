@@ -64,26 +64,40 @@
 	}
 }
 .carousel{
+background:linear-gradient(@colorblack,@darkbackcolor);
+box-shadow:0px 4px 4px  @colorblack;
 	.item{
 		height : 300px;
 		overflow : hidden;
-		//margin-top:76px;
 		img{
-			min-height : 300px;
+			margin-left: 50px;
+			min-height : 250px;
 			
 		}
-		
 	}
 }
+.carousel-caption {
+			right:50px;
+			h2{
+				color:@darkcolor;
+				text-align:right;
+			}
+			p{
+				color:@colorwhite;
+				margin-left:250px;
+			}
+		}
+.carousel-control.left {
+display:none;
+}
+.carousel-control.right {
+display:none;
+}
     .carousel-inner {
-		//position: relative;
-		width: 100%;
+		//width: 100%;
 		overflow: hidden;
-		//margin-top: 90px;
-		   }
 		
-	
-    
+		   }
 .sidebarModule{
 	&.sidemenu{
 		padding:15px 15px 0px;
@@ -123,55 +137,89 @@
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
-			background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
-			background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
-			background: linear-gradient(top, @lightcolor, @darkcolor);
+		border-top:1px solid @darkbackcolor;
+		border-bottom:1px solid @darkbackcolor;
 			>li{
-				border-right : 1px solid @lightcolor;
 				>a, > a:focus{
 					color : @back;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @darkcolor ;
-					color : @colorwhite;
+				text-decoration:underline;
+				background-color:transparent;
 				}
 			}
 		}
 	}
 	.about, .contact{
+		color:@darkbackcolor;
+						
 		.table{
 			tbody{
 				tr{
 					th,td{
-					    border:1px solid ;
-						border-color : @colorblack;
-						background-color:@darkcolor;
+						color:@darkbackcolor;
+						
 					}
 				}
 			}
 		}
 	}
 	.about{
+		
 		.table{
 			margin-top: 20px;
 		
 		}
 	}
 	.infrastructure{
+		h2{
+			color:@colorwhite;
+			}
 		.thumbnail{
 			height: 395px;
-			img{
-				height : 190px;
-			}
+			background-color:transparent;
+			.infraImg{
+					img{
+						height : 190px;
+						width:500px;
+						padding:2px;
+						&:hover{
+						transform:scale(1.1,1.1);
+						transition:transform 300ms;
+						}
+					}
+				}
 			.caption{
-				height: 138px;
+				padding:0px;
+				height: 110px;
+				color:@darkbackcolor;
+				text-align:left;
+				padding-bottom:0px;
+			}
+			h4{
+			fonts-size:30px;
+			color:@colorwhite;
+			text-transform:uupercase;
+			&:hover{
+					color:@color;
+			}
 			}
 		}
 	}
-	contactus page css
+	//contactus page css
 	.contact{
-		
+			.table{
+			tbody{
+				tr{
+					th,td{
+						color:@darkbackcolor;
+						border-top:0px;
+						
+						}
+				}
+			}
+			}
 		img{
 			max-height: 125px;
 		}
@@ -204,7 +252,7 @@
 				top : 5px;
 				left : 0;
 				line-height : 40px;
-				font-family : Times New Roman,Serif;
+				font-family : 'OpenSansRegular';
 				font-size : 55px;
 				border:1px solid @darkcolor;
 			}
@@ -240,64 +288,45 @@
 	} 
 	.gallery{
 		.thumbnail{
-			.caption .description{
+			background-color:transparent;
+		img{
+				height:200px;
+				&:hover{
+						transform:scale(1.1,1.1);
+						}
+			}
+			.caption{
+				h4{
+					text-align:left;
+					text-transform:uppercase;
+						
+				}
+			.description{
+					text-align:left;
 					overflow: hidden;
 					height: 160px;
-					color:@colorwhite;
+					color:@darkbackcolor;
 				}
 			}
 			h4{
 			color:@colorwhite;
 			}
 		}
-	//gallery
-	@media (min-width: 320px) {
-		.gallery{
-			.thumbnail{
-				height:390px;
-			}
-		}
 	}
-
-	@media (min-width: 992px) { 
-		.gallery{
-			.thumbnail{
-				height:390px;
-				img{
-					max-height: 155px;
-					width: 100%;
-				}
-			}
-		}
-	}
-
-	@media (min-width: 1200px){
-		.gallery{
-			.thumbnail{
-				height:390px;
-				img{
-					max-height: 200px;
-					width: 100%;
-				}
-			}
-		}
-	}
-	
-	.bxslider1{
+	.bxslider{
 		padding-left:0px;
 		list-style :none;
 		li{
 			.verify{
 				width:55%;
 			    border:none;
-				margin-left:10px;
+				//margin-left:10px;
 				position:absolute;
 				right : -40px;
 				bottom : -15px;
 				z-index : 999;
 			}
-			border : 1px solid @darkcolor;
-			padding-left : 10px;
+			padding : 10px;
 			padding-bottom : 10px;
 			h4{
 				margin-left : 25px;
@@ -359,4 +388,23 @@
 			}
 		}
 	}
-	
+.homeAboutus{
+			h1{
+			//text-align:center;
+			}
+			.tagline{
+			text-align:left;
+				font-size:25px;
+				color:@darkcolor;
+			}
+			.tagline1{
+			text-align:left;
+				font-size:25px;
+				color:@darkcolor;
+					padding-bottom:10px;
+			}
+			.description{
+			color:@darkbackcolor;
+			
+			}
+}

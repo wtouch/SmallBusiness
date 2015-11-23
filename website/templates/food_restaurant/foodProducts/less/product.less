@@ -1,36 +1,37 @@
 .featured_services{
+		height:550px;
 	.feature{
 		background-color:@colorblack;
 		height:80px;
+		box-shadow:4px 4px 4px  @colorblack;
+		
 	}
+	h2{
+		padding:25px;
+		}
+
 	.sections{
+		
 		background : none;
 		box-shadow : 0 0 0;
-	    margin-bottom:80px;
+		margin-bottom:80px;
 		color:@colorwhite;
-		height:90%;
-		width:90%;
 		background-color:@darkbackcolor;
-		height:100%;
+		height:200px;
 		width:100%;
 		.a:hover{
 		border:1px solid @colorblack;
 		}
 	}
-
-	
 	.services{
+	box-shadow:4px 4px 4px  @colorblack;
 		.servimage{
 		border : 4px solid transparent;
 		padding : 6px;
-		&:hover{
-		//border : 4px solid @darkcolor;
-			
-			
-			
 			}
 		}
 		.servdesc{
+			
 			height : 220px;
 			.description{
 			height : 75px;
@@ -38,47 +39,53 @@
 			}
 			.readmore{
 				text-align : center;
-				
-				
-				
 			}
 		}
 	}
-}
 
-.description p{
-color:@colorblack;
-}
 
 .products{
+	h2{
+	text-transform:uppercase;
+	}
 	.thumbnail{ 
-		height:385px;
-		.prodimg{
-		    height: 132px;
-			width : 195px;
+		height:230px;
+		background-color:transparent;
+		margin-bottom:50px;
+		h4{
+			text-align:left;
+			text-transform:uppercase;
+			
+		}
+		
+		img{
+		    height: 150px;
+			width : 310px;
 			overflow : hidden;
 			margin : 0 auto;
-			img{
-				min-height : 148px;
-			    height: 300px;
-				border : 2px solid @darkbackcolor;
-				padding : 4px;
-				&:hover{
-				border : 2px solid @darkbackcolor;
-				}
-			}
+			/*transform:scale(1.1,1.1);
+			transition:transform 300ms;*/
 		}
+		
 		.caption{
-			height: 182px;
-			margin-bottom : 10px;
+			height: 50px;
 			.description{
-				height : 75px;
-				overflow : hidden;
 				
+			>p{
+				color:@colorblack;
+					
+				}
+				height : 0px;
+				overflow : hidden;
+				visibility:hidden;
+				opacity:1;
 			}
-		}
-		.readmore{
-			text-align : center;
+			}
+			&:hover .description{
+			//background-color:red;
+			visibility:visible;
+			height:60px;
+			margin-top:-150px;
+			}
 		}
 	}
-}

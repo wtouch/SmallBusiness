@@ -1,10 +1,10 @@
 	@font-face{
-		font-family:'Amaranth-Regular';
-		src:url('../fonts/Amaranth-Regular.otf');
+	font-family:'OpenSansRegular';
+	src:url('../fonts/OpenSans-Regular.ttf');
 	}
 	@font-face{
-		font-family:'QumpellkaNo12';
-		src:url('../fonts/QumpellkaNo12.otf');
+		font-family:'OpenSans Regular';
+		src:url('../fonts/OpenSans-Regular.ttf');
 	}
 
 	@color : #ffdc63;
@@ -16,91 +16,146 @@
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	
-	@import "property.less";
-	@import "project.less";
+	//@import "property.less";
+	//@import "project.less";
 	@import "product.less";
 	@import "general.less";
 	*{
 		transition:300ms;
-		border-radius:0 !important;
+		border-radius:0px !important;
+	}
+	p{
+	color:@darkbackcolor;
 	}
 	.container{
 		max-width : 992px !important;
 	}
-	body {
+	.back{
     
-		background-image:url(../img/bg-top.jpg);
+		background-image:url(../img/back.png);
+		background-size:100% 100%;
 		background-repeat:no-repeat;
 		color:@colorwhite;
 		border:1px solid @colorblack;
-	}
+
+}
 
 	.logo {
 		height:100px;
-		width:100px;
-		margin-top:15px;
-     	float:left;
+		width:150px;
+		//margin-left:10px;
+        margin-top:15px;
+        background-image:url('../img/logo.jpg');
+		float:left;
+		
+		}
+		header{
+		h2{
+		margin-top:60px;
+		margin-left:0px;
+		}
+		
+		
 	}
 	.sociallinks{
-		width : 5px;
-		background-color:@darkcolor;
-		//float:right;
 		ul{
-			list-style : none;
-			display:inline-flex;
+			margin-top:50px;
+			float:right;
 			li{
-				//transform: translateX(-123px);
+				display:inline;
 				padding: 4px 0px 4px 10px;
 				margin: 5px;
-				//border-top-right-radius: 30px;
-				//border-bottom-right-radius: 30px;
 				text-align : right;
-				//width : 125px;
-				a{
-					color:@color;
-					&:hover{
-						color:@color;
-						text-decoration : underline;
-					}
-				}
-				img{
-					width : 35px;
-				}
-				span{
-					height : 20px;
-					width :20px;
-					margin-right: 6px;
-				}
+				
 			}
 		}
 	}
-	.homeAboutus{
-	display:none;
-	}
+			.img3{
+					width : 40px;
+					height:40px;
+					display:inline-flex;
+				}
+				#img1{
+					background:url('../img/sprite.png') 2px 2px;
+					&:hover{
+					background:url('../img/sprite.png') 2px -37px;
+					}
+				
+				}
+				#img2{
+					background:url("../img/sprite.png") -36px 2px ;
+					&:hover{
+					background:url('../img/sprite.png') -36px -37px;
+					}
+				}
+				#img3{
+					background:url("../img/sprite.png") -74px 2px ;
+					&:hover{
+					background:url('../img/sprite.png') -74px -37px;
+					}
+				}
+				#img4{
+					background:url("../img/sprite.png") -150px 2px;
+					&:hover{
+					background:url('../img/sprite.png') -150px -37px;
+					}
+				}
 	
 	.navbar-default {
-		background-color:@darkcolor;
+		
+		background-color:transparent;
 		border : none;
 		border-radius: 0;
-		margin-top:50px;
+		nav{
+		position:relative;
+		}
+		.nav>ul>li{
 		
-			.nav > li > a{
+		position:relative;
+		}
+		.nav > li > a{
+			font:'Open Sans' , sans-serif;
+			text-shadow:2px 2px 2px @colorblack;
+			text-transform:uppercase;
 			background-color:@darkcolor;
-				color:@colorwhite;
-				border-left:1px solid @lightcolor;
-				border-right:1px solid @lightcolor;
-				height: 60px;
-				padding:20px;
-				&:hover{
-					background-color:@lightcolor;
-				}
+			color:@colorwhite;
+			border-left:1px solid @lightcolor;
+			border-right:1px solid @lightcolor;
+			height: 60px;
+			padding-top:20px;
+			&:hover{
+				background-color:@lightcolor;
 			}
-		}	
+			
+		}
+		.nav>li>ul>li{
+			display:none;
+	}	
+	.nav > ul>li {
 	
-		.r1{
-			margin-top:10px;
+	&:hover ul{
+	position:absolute;
+	display:block;
+	}
+	}
+	}
+	.navbar-static-top{
+	margin-top:40px;
+		.container{
+			background-color : @darkcolor;
+			padding-left : 0px;
+			padding-right : 0px;
+			
+		}
+	}
+	.navbar-fixed-top{
+		background-color : @darkcolor;
+		.container{
+			padding-left : 0px;
+			padding-right : 0px;
 			}
-	.sback{
+	}
+	.sback{	
 	background-color:@colorblack;
 	}
 	.subhead {
@@ -119,8 +174,6 @@
 	 color:@colorwhite;
 	 border:none;
 	 height:200%;
-	 &:hover{
-	 transform: scale(1.1,1.1);
 	 }
 	 h4{
 	 color:@colorwhite;
@@ -128,18 +181,14 @@
 	 color:@color;
 	 }
 	 }
+	.a{
+	height:500px;
 	}
 	
-	.readmore{
-		position:relative;
-		border:1px solid @colorblack;
-	}
 		
 	.btn{
-	background-color:@darkcolor;
 		&:hover{
-		background-color:@color;
-			color:@colorblack;
+			color:@colorwhite;
 			}
 		}	
 	
@@ -151,14 +200,40 @@
 		
 	  
 	        }
-	.sections{
-		padding:15px;
-	}
+	.fproduct{
+		margin-top:-250px;
+		
+.sections>div>div{
+		height:350px;
+		box-shadow:4px 4px 4px  @darkbackcolor;
+		border:0px;
+		padding:10px;
+		h4{
+			color:@darkcolor;
+			text-transform:uppercase;
+			&:hover{
+			color:@color;
+			}
+		}
+		img{
+			height:200px;
+			width:300px;
+			margin:0px;
+		}
+		.description{
+			color:@darkbackcolor;
+			text-align:left;
+			}
+			}
 	.sidebarModule{
 		.panel-body{
 			padding : 15px 15px 0px;
 		}
 	}
+	}
+	
+	
+	
 	.contactus{
 		h4{
 			margin-top : 0px;
@@ -170,9 +245,11 @@
 	}
 	//global css
 	h1,h2,h3,h4,h5{
-		color : @color;
-		font-family : 'Amaranth-Regular';
+		color : @colorwhite;
+		font-family : 'OpenSansRegular';
 		text-align:left;
+		text-transform:uppercase;
+		text-shadow:1px 1px 1px @darkcolor;
 	}
 	
 	.btn-link{
@@ -186,29 +263,42 @@
 		}
 	}
 	.panel{
-		background-color : @back;
+		background-color :transparent;
 	}
 	.panel-default{
 		border-color : @darkbackcolor;
 	}
 	hr{
-		border-color : @darkcolor;
+		border-color : @colorwhite;
 	}
 	.form-control{
-		background-color : @color;
-		color : @back;
+		background-color : transparent;
+		color : @colorwhite;
 	}
 	
+	.readmore>.btn-info ,.btn-primary{
+		border:0px;
+		background-color:@darkcolor;
+		float:left;
+		&:hover{
+		background-color:@color;
+		color:@darkcolor;
+		}
+	}
+	.btn + .btn {
+	
+		margin-left : 20px;
+	}
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus
 	{
 		background-color : @color;
-		color : @back;
-		border : 1px solid @color;
+		color : @darkcolor;
+		border:0px;
 	}
 	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
-		background-color : @back;
-		border : 1px solid @color;
+		background-color : @darkcolor;
 		color : @color;
+			border:0px;
 	}
 	.navbar-collapse{
 		padding :0px;
@@ -222,13 +312,18 @@
 	} 
 	
 	footer{
+		a, .btn-link{
+		color : @darkbackcolor;
+		&:hover{
+		color:@darkbackcolor;
+		text-decoration:underline;
+		}
+		}
 		margin-top : 10px;
-		padding-top : 10px;
-		color:@colorwhite;
+		//padding-top : 10px;
+		color:@darkbackcolor;
 		font-weight : bold;
-		background: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
-		background: -moz-linear-gradient(top,  @lightbackcolor, @darkbackcolor);
-		background: linear-gradient(top,  @lightbackcolor, @darkbackcolor);
+		background:transparent;
 	}
 	.navbar-toggle{
 		background-color : @darkcolor;
@@ -251,22 +346,6 @@
 	h3{
 	    color:@color;
 	   } 
-        .readmore{
-				position : absolute;
-				top: 0;
-				left: -239px;
-				width: 470px;
-				height: 201px;
-				text-align : center;
-				overflow : hidden;
-				margin : 0 auto;
-				border-radius : inherit;
-				opacity: 0;
-				background-color: rgba(3, 13, 130, 0.49);
-				transition: all 0.4s ease-in-out;
-				overflow : hidden;
-				border-radius : inherit;
-		}
 				
 			.servs{
 			position:relative;
