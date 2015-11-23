@@ -33,7 +33,7 @@ define(['app'], function (app) {
 				},
 				{
 					name:'Party Name',
-					filterHeaderTemplate: '<select id="user_id" class="form-control" ng-change="grid.appScope.filter(\'user_id\', partyFilter, \'party\', \'userData\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.userData">'
+					filterHeaderTemplate: '<select id="user_id" class="form-control" ng-change="grid.appScope.filter(\'user_id\', partyFilter, \'party\', \'partyList\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.partyList">'
 							+'<option value="" selected>Party name</option>'
 							+'<option value="0">Unpaid</option>'
 							+'<option value="1">Paid</option>	'
