@@ -61,7 +61,15 @@
 					</span>
 					</div>
 				</div>
-				
+				<div class="form-group">
+					<label for="balance" class="col-sm-2 control-label">Account Balance * </label>
+					<div class="col-sm-9">
+						<input type="text" id="balance" name="balance" class="form-control" ng-model="modalOptions.account.balance" placeholder="Enter Account Balance" ng-pattern="/^\d{0,100}[0-9]$/" required>
+					<span class="help-block" ng-show="addAccountForm.balance.$dirty && addAccountForm.balance.$invalid">
+						<span ng-show="(addAccountForm.balance.$dirty || submitted)" class="text-danger">Enter a valid Account Number</span>
+					</span>
+					</div>
+				</div>
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">Description * </label>
 					<div class="col-sm-9">

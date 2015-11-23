@@ -89,6 +89,7 @@ define(['app'], function (app) {
 					id : data.id,
 					account_name : data.account_name,
 					account_no : data.account_no,
+					balance: data.balance,
 					description : data.description,
 					user_id : data.user_id,
 					category : data.category,
