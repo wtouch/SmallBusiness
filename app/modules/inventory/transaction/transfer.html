@@ -27,7 +27,7 @@
 			<div class="form-group" ng-init="modalOptions.getData(false,false,'account','accountList', accountParams, modalOptions)">
 				<label for="transfer_to" class="col-sm-2 control-label">Transfer To* </label>
 					<div class="col-sm-9">
-					<select class="form-control" name="transfer_to" id="transfer_to" ng-model="modalOptions.transfer.transfer_to"  ng-options="item.id as item.name for item in modalOptions.accountList" required>
+					<select class="form-control" name="transfer_to" id="transfer_to" ng-model="modalOptions.transfer.transfer_to"  ng-options="item.id as item.account_name for item in modalOptions.accountList" required>
 						<option value="" selected>Select Account Name</option>
 					</select>
 					<span class="help-block" ng-show="transferForm.transfer_to.$dirty && transferForm.transfer_to.$invalid">
