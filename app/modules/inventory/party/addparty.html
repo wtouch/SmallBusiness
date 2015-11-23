@@ -52,7 +52,7 @@
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">Address *</label>
 				<div class="col-sm-9">
-					<textarea  class="form-control" id="address" ng-model="modalOptions.adduser.address" name="address" placeholder="Enter address" ng-pattern="/^[a-zA-Z0-9-/]*$/" ng-maxlength="250" required></textarea>
+					<textarea  class="form-control" id="address" ng-model="modalOptions.adduser.address" name="address" placeholder="Enter address" ng-pattern="/^[a-zA-Z0-9-,-/]*$/" ng-maxlength="250" required></textarea>
 					<span class="text-danger"  ng-show="adduserForm.address.$error.pattern">please Enter Valid Address</span>
 					<span ng-hide="adduserForm.address.$error.maxlength">{{ 250 - modalOptions.adduser.address.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="adduserForm.address.$dirty &&  adduserForm.address.$invalid">
@@ -150,7 +150,7 @@
 					<label for="designation" class="col-sm-2 control-label">Designation *</label>
 					<div class="col-sm-9">
 					<input type="hidden" ng-model="modalOptions.adduser.status" ng-init="modalOptions.adduser.status = '1'">
-						<input type="text" id="designation" name="designation" class="form-control" ng-model="modalOptions.adduser.designation" placeholder="Enter designation" ng-pattern="/^[a-zA-Z]*$/"required>
+						<input type="text" id="designation" name="designation" class="form-control" ng-model="modalOptions.adduser.designation" placeholder="Enter designation" ng-pattern="/^[a-zA-Z- ]*$/"required>
 						<span class="text-danger"  ng-show="adduserForm.designation.$error.pattern">please Enter Valid Designation</span>
 						<span class="help-block" ng-show="adduserForm.designation.$dirty && adduserForm.designation.$invalid">
 						<span ng-show="adduserForm.designation.$error.required" class="text-danger">Designation is required</span>					
