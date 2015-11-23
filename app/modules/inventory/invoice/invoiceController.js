@@ -40,7 +40,7 @@ define(['app'], function (app) {
 				},
 				{
 					name:'Account Name',
-					filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'user_id\', accountFilter, \'account\', \'accountList\')" ng-model="accountFilter" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
+					filterHeaderTemplate: '<select id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_no\', account_name, \'account\', \'accountList\')" ng-model="account_name" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
 							+'<option value="" selected>Account Name</option>'
 						+'</select>',
 					filter: {
