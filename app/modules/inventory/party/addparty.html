@@ -52,7 +52,7 @@
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">Address *</label>
 				<div class="col-sm-9">
-					<textarea  class="form-control" id="address" ng-model="modalOptions.adduser.address" name="address" placeholder="Enter address" ng-pattern="/^[a-zA-Z0-9-,-/]*$/" ng-maxlength="250" required></textarea>
+					<textarea  class="form-control" id="address" ng-model="modalOptions.adduser.address" name="address" placeholder="Enter address" ng-pattern="/^[a-zA-Z0-9-,- -/]*$/" ng-maxlength="250" required></textarea>
 					<span class="text-danger"  ng-show="adduserForm.address.$error.pattern">please Enter Valid Address</span>
 					<span ng-hide="adduserForm.address.$error.maxlength">{{ 250 - modalOptions.adduser.address.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="adduserForm.address.$dirty &&  adduserForm.address.$invalid">
@@ -78,7 +78,7 @@
 			<div class="form-group">
 				<label for="area" class="col-sm-2 control-label">Area *</label>
 				<div class="col-sm-9">
-					<input type="text" id="area" name="area" class="form-control" ng-model="modalOptions.adduser.area" placeholder="Enter area" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+					<input type="text" id="area" name="area" class="form-control" ng-model="modalOptions.adduser.area" placeholder="Enter area" ng-pattern="/^[a-zA-Z0-9- -]*$/" required>
 					<span class="text-danger"  ng-show="adduserForm.area.$error.pattern">please Enter Valid Area</span>
 					<span class="help-block" ng-show="adduserForm.area.$dirty && adduserForm.area.$invalid">
 					<span ng-show="adduserForm.area.$error.required" class="text-danger">Area is Required</span>					
@@ -183,7 +183,7 @@
 			</div>
 		<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-					<button type="submit" class="btn btn-success" ng-if="!modalOptions.adduser.id"  ng-click="modalOptions.postData('party',modalOptions.adduser);modalOptions.ok()">Add party</button>
+					<button type="submit" class="btn btn-success" ng-if="!modalOptions.adduser.id" ng-disabled="adduserForm.$invalid" ng-click="modalOptions.postData('party',modalOptions.adduser);modalOptions.ok()">Add party</button>
 					
 					<button type="submit" ng-if="modalOptions.adduser.id" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="modalOptions.updateData('party',modalOptions.adduser,modalOptions.adduser.id);modalOptions.ok()">Update Party</button>
 					
