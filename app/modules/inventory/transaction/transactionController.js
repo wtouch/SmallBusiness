@@ -26,10 +26,10 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false
 				},
 				{ name:'id',enableSorting: false ,
-				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'transactions\', \'transactionList\')" ng-model="id" placeholder="Id">',
+				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'transaction\', \'transactionList\')" ng-model="id" placeholder="Id">',
 					},
 				{ name:'category', enableSorting: false, 
-					filterHeaderTemplate: '<input id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transactions\', \'transactionList\')" ng-model="category" placeholder="Category">',
+					filterHeaderTemplate: '<input id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\')" ng-model="category" placeholder="Category">',
 					},
 				{ name:'description',enableSorting: false, enableFiltering: false},
 				{ name:'type',enableSorting: false,
@@ -44,16 +44,16 @@ define(['app'], function (app) {
 					  options: [ { value: 'income', label: 'Income' }, { value: 'expense', label: 'Expence' }]
 					} },
 				{ name:'credit_amount',
-					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transactions\', \'transactionList\')" ng-model="credit_amount" placeholder="Amount">',
+					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\')" ng-model="credit_amount" placeholder="Amount">',
 					},
 				{ name:'debit_amount',
-					filterHeaderTemplate: '<input id="debit_amount" class="form-control" ng-change="grid.appScope.filter(\'debit_amount\', debit_amount, \'transactions\', \'transactionList\')" ng-model="debit_amount" placeholder="Amount">',
+					filterHeaderTemplate: '<input id="debit_amount" class="form-control" ng-change="grid.appScope.filter(\'debit_amount\', debit_amount, \'transaction\', \'transactionList\')" ng-model="debit_amount" placeholder="Amount">',
 					},
 				{ name:'balance',
-					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transactions\', \'transactionList\')" ng-model="balance" placeholder="Amount">',
+					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\')" ng-model="balance" placeholder="Amount">',
 					},
 				{ name:'status',
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transactions\', \'transactionList\')" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transaction\', \'transactionList\')" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -66,7 +66,7 @@ define(['app'], function (app) {
 				},
 				
 				{ name:'Manage', enableSorting: false, enableFiltering: false, 
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/transactions/addincome.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/transaction/addincome.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'transactions\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
 				}
@@ -108,18 +108,20 @@ define(['app'], function (app) {
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							console.log(response);
-							$scope.getData(false, $scope.currentPage, 'transactions','transactionList');
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'transactions','transactionList');
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
 						}
 					})
 				},
-				getData : $scope.getData
+				getData : $scope.getData,
+				addToObject : $rootScope.addToObject,
+				removeObject : $rootScope.removeObject
 			};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -128,7 +130,7 @@ define(['app'], function (app) {
 		}
 		
 		
-		$scope.openAddexpence = function(url,data){
+		$scope.openAddexpense = function(url,data){
 			
 			var modalDefault = {
 				templateUrl:url,	// apply template to modal
@@ -156,18 +158,20 @@ define(['app'], function (app) {
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							console.log(response);
-							$scope.getData(false, $scope.currentPage, 'transactions','transactionList');
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'transactions','transactionList');
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
 						}
 					})
 				},
-				getData : $scope.getData
+				getData : $scope.getData,
+				addToObject : $rootScope.addToObject,
+				removeObject : $rootScope.removeObject
 			};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
