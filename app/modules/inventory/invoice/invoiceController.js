@@ -31,8 +31,8 @@ define(['app'], function (app) {
 				
 				{
 					name:'User Name',
-					filterHeaderTemplate: '<select class="form-control" ng-change="grid.appScope.filter(\'id\', userFilter, \'user\', \'userList\')" ng-model="userFilter" ng-options="item.id as item.name for item in grid.appScope.userList">'
-							+'<option value="" selected>User Name</option>'
+					filterHeaderTemplate: '<select class="form-control" ng-change="grid.appScope.filter(\'user_id\', partyFilter, \'party\', \'partyList\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.partyList">'
+							+'<option value="" selected>Party Name</option>'
 						+'</select>',
 					filter: {
 					  placeholder: 'User Name'

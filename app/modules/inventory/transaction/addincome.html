@@ -111,6 +111,8 @@
 			
 			<div class="form-group modal-footer">
 				<div class="col-sm-11"><!--ng-disabled="addIncomeForm.$invalid"-->
+					<button type="submit"  class="btn btn-success" ng-if="modalOptions.addincome.id"  ng-disabled="addIncomeForm.$invalid" ng-click="modalOptions.updateData('transaction',modalOptions.addincome,modalOptions.addincome.id); modalOptions.ok()">Update</button>
+					
 					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addincome.id" ng-click="modalOptions.postData('transaction',modalOptions.addincome); modalOptions.ok();" ng-disabled="addIncomeForm.$invalid">Submit</button>
 					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 				</div>

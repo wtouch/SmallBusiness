@@ -8,11 +8,11 @@
 	<!--THE HIDDEN Generate Date and Due_date and User ID-->
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="generalForm.$valid" id="generalForm">
 		<div class="form-group">
-				<div ng-init="modalOptions.getData(false,false,'user','userList', params, modalOptions)">
+				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="user_id" class="col-sm-2 control-label"> User Name * </label>
 					<div class="col-sm-4">
-						<select id="user_id" class="form-control" ng-model="user_id" ng-options="item.id as item.name for item in modalOptions.userList">
-							<option value="">Select User</option>
+						<select id="user_id" class="form-control" ng-model="user_id" ng-options="item.id as item.name for item in modalOptions.partyList">
+							<option value="">Select Party</option>
 						</select>
 						<span class="help-block" ng-show="addInvoiceForm.user_id.$dirty && addInvoiceForm.user_id.$invalid">
 						<span ng-show="addInvoiceForm.user_id.$error.required" class="text-danger">user name is required.</span>
