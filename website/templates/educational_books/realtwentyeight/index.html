@@ -1,0 +1,185 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<script src="{{ path }}js/script.js"></script>
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}">
+		{% if data.template_params %}
+			<style>
+				.sociallinks ul li, .block-menu .nav-child li > a:hover, .block-menu .nav-child li > a:focus, .block-menu .nav-child:hover > a,.front, .back,.proj_nav > li > a:hover, .proj_nav > .active > a,.block-menu .child-menu > ul > li > a:hover, .btn:hover, .nav-pills li:hover > a, .nav-pills li > a:focus, .nav-pills .active :hover > a, .nav-pills .active:hover > a:focus, .nav-pills .active >a:hover, .nav-pills .active >a:focus, .projlist .project .thumbnail .readmore a:hover,.project .navbar	 ul.nav.navbar-nav>li.active > a, .project .navbar	 ul.nav.navbar-nav>li.active:hover > a, .project .navbar ul.nav.navbar-nav>li.active > a:focus, .project .navbar	 ul.nav.navbar-nav>li:hover > a, .project .navbar	 ul.nav.navbar-nav>li:hover > a:focus, .project .navbar ul.nav.navbar-nav>li>a:hover, .project .navbar ul.nav.navbar-nav>li>a:focus{
+					background-color : {{data.template_params.background_color_dark}};
+				}
+				.imgborder .slimg:hover, .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus,.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover, .sidebar table tr td, .projlist .project .thumbnail .projectimg	 img:hover, .modal-content, .modal-content h4, .singleproperty .property  .propDetails .table tbody tr th,.featrtesti img:hover, .propertylist .panel-default .sliderImg img:hover{
+					border-color : {{data.template_params.background_color_dark}};
+				}
+				.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
+					color : {{data.template_params.background_color_dark}};
+				}
+				.projimg img:hover,.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover{
+					border-color : {{data.template_params.background_color}};
+				}
+				.block-menu .child-menu > ul > li > a,.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus, .nav-pills, .projlist .project .thumbnail .readmore a, .project .navbar	 ul.nav.navbar-nav, .featrtesti img, .navbar-toggle .icon-bar, button.navbar-toggle.projdtls,.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover, .content-box > h1 , .content-box > h2 , .sidebarModule > h3, .contentModule > h3,.block-menu, .navbar.navbar-default, .homeproject .projectnav,.homeproject .projsnap, .btn,.btn-info[disabled]{
+					background-color : {{data.template_params.background_color}};
+				}
+				.content-box > h2:before, .content-box > h1:before, .sidebarModule > h3:before, .contentModule > h3:before, .projimg img:hover{
+					border-top: 20px solid {{data.template_params.background_color}};
+					border-bottom: 20px solid {{data.template_params.background_color}};
+				}
+			</style>
+		{% endif %}
+	</head>
+	<body>
+		<!-- <div class="sociallinks">
+			<ul>
+				{% if data.website_config.sociallinks.facebook %}
+					<li>
+						<a href="{{data.website_config.sociallinks.facebook}}" target="_blank">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.google %}
+					<li>
+						<a href="{{data.website_config.sociallinks.google}}" target="_blank">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.twitter %}
+					<li>
+						<a href="{{data.website_config.sociallinks.twitter}}" target="_blank">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
+					</li>
+				{% endif %}
+				{% if data.website_config.sociallinks.linkedin %}
+					<li>
+						<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>  -->
+		<nav class="navbar navbar-default ">
+			<div class="container">
+					<a  class="brand pull-left" href="#">
+						{% if data.website_config.website_logo %}
+						<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						{% else %}
+						<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						{% endif %}
+					</a>
+						<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+					
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						
+					</div>
+					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+						<ul class="nav menu block-menu">
+							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+						</ul>
+					</div>
+				</div>
+		</nav>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-md-12 col-lg-12">
+				{%if modules.headerModule.carousal %}
+					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+					{%if modules.headerModule.homeproject %}
+					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
+				</div>
+			</div>
+		</div>
+		<main>
+			<div class="main-content">
+				<div class="container">
+					<div class="row">
+						<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-push-4 col-md-push-3 col-xs-12 col-sm-8 col-md-9' : 'col-xs-12 col-sm-12 col-md-12'}}">
+							<div class="content-box">
+								{% include contentPath %}
+							</div>
+							
+							{%if modules.contentModule.featured_properties %}
+								{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
+								{% include [templatePath ~ '/includes/featured_properties.html', 'default/default/includes/featured_properties.html'] %}
+								
+							{%endif%}
+							
+							{%if modules.contentModule.featured_projects %}
+							{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}
+							{%endif%}
+							{%if modules.contentModule.featured_services %}
+							<div class="featuretab">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active">
+										<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
+									</li>
+									<li role="presentation">
+										<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Featured Testimonials</a>
+									</li>
+									<li role="presentation">
+											<a href="#associates" aria-controls="profile" role="tab" data-toggle="tab">Associates</a>
+										</li>
+								</ul>
+								<!-- Tab panes -->
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane active" id="featrserv">
+									{%if modules.contentModule.featured_services %}
+										{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+									{%endif%}
+									</div>
+									<div role="tabpanel" class="tab-pane" id="featrtesti">
+									{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
+									</div>
+									<div role="tabpanel" class="tab-pane" id="associates">
+										{% include [templatePath ~ '/includes/our_associates.html', 'default/default/includes/our_associates.html'] %}
+										</div>
+								</div>
+							</div>
+							{%endif%}
+							{%if modules.contentModule.featured_products %}
+							{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+							{%endif%}
+							
+						</div>
+						{% if modules.sidebarModule >= 1 %}
+						<div class="col-sm-pull-8 col-md-pull-9 col-xs-12 col-sm-4 col-md-3">
+							{%if modules.sidebarModule.searchProp %}
+								{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
+							{%endif%}
+							{%if modules.sidebarModule.contact %}
+								{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+							{%endif%}
+							{%if modules.sidebarModule.enquiry %}
+								{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html']with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
+							{%endif%}
+							{%if modules.sidebarModule.sidemenu %}
+								{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+							{%endif%}
+							
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</main>
+		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+	</body>
+</html>
+{% endspaceless %}
