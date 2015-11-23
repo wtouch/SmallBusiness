@@ -25,7 +25,7 @@ define(['app'], function (app) {
 				{ name:'SrNo', 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false
 				},
-				{ name:'id',enableSorting: false ,
+				{ name:'account_id',enableSorting: false ,
 				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'transaction\', \'transactionList\')" ng-model="id" placeholder="Id">',
 					},
 				{ name:'category', enableSorting: false, 
