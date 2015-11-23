@@ -5,17 +5,17 @@
 	</div>
 	{{modalOptions.transfer}}
 		<form name="transferForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="transferForm.$valid">
-			<div class="form-group">
-					<label for="transfer_from" class="col-sm-2 control-label">Transfer From* </label>
-					<div class="col-sm-9">
-					<select class="form-control" name="transfer_from" id="transfer_from" ng-model="modalOptions.transfer.transfer_from"  required>
-						<option value="" selected>Select Account Name</option>
-					</select>
-					<span class="help-block" ng-show="transferForm.transfer_from.$dirty && transferForm.transfer_from.$invalid">
-						<span ng-show="transferForm.transfer_from.$error.required" class="text-danger">Account No is required.</span>
-						<span ng-show="(transferForm.transfer_from.$dirty || submitted)" class="text-danger">Enter Numbers Only!</span>
-					</span>
-					</div>
+			<div class="form-group" ng-init="modalOptions.getData(false,false,'account','accountList', accountParams, modalOptions)">
+				<label for="transfer_from" class="col-sm-2 control-label">Transfer From* </label>
+				<div class="col-sm-9">
+				<select class="form-control" name="transfer_from" id="transfer_from" ng-model="modalOptions.transfer.transfer_from"  required>
+					<option value="" selected>Select Account Name</option>
+				</select>
+				<span class="help-block" ng-show="transferForm.transfer_from.$dirty && transferForm.transfer_from.$invalid">
+					<span ng-show="transferForm.transfer_from.$error.required" class="text-danger">Account No is required.</span>
+					<span ng-show="(transferForm.transfer_from.$dirty || submitted)" class="text-danger">Enter Numbers Only!</span>
+				</span>
+				</div>
 			</div>
 			<div class="form-group">
 				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
@@ -23,7 +23,7 @@
 					<input type="text" id="" name="" readonly class="form-control" ng-model="modalOptions.transfer.previousBalancefrom"/>		
 					</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" ng-init="modalOptions.getData(false,false,'account','accountList', accountParams, modalOptions)">
 				<label for="transfer_to" class="col-sm-2 control-label">Transfer To* </label>
 					<div class="col-sm-9">
 					<select class="form-control" name="transfer_to" id="transfer_to" ng-model="modalOptions.transfer.transfer_to"   required>
