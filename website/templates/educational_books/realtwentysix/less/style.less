@@ -1,9 +1,9 @@
 @color : #F7CBCE;
 @lightcolor : #ff8087;
-@darkcolor : #337AB7;
+@darkcolor : #951544;
 @back : #D9EDF7;
-@darkbackcolor : #440A02;
-@lightbackcolor :#E3DBBE; 
+@darkbackcolor : #FFD700; 
+@lightbackcolor :#ff9900;
 @colorblack : #000000;
 @colorwhite	: #ffffff;
 @import "property.less";
@@ -17,8 +17,10 @@
 		max-width : 992px !important;
 	}
 	body{
-		background-image:url('../img/bg.jpg');
-		background-repeat : repeat;
+		color:@colorwhite;
+		background-image:url('../img/bg2.png');
+		background-attachment:fixed;
+		background-size:100% 100%;
 	}
 	.sociallinks{
 		top: 50%;
@@ -87,18 +89,19 @@
 		}
 		.navbar-default {
 			position : relative;
-			background : -webkit-linear-gradient(top, @darkcolor, @back);
-			background : -moz-linear-gradient(top,@darkcolor, @back);
-			background : linear-gradient(top, @darkcolor, @back);
-			border : 2px solid @colorwhite;
+			background-color:@lightbackcolor;
+			//background : -webkit-linear-gradient(top, @darkcolor, @back);
+			//background : -moz-linear-gradient(top,@darkcolor, @back);
+			//background : linear-gradient(top, @darkcolor, @back);
+			border : 2px solid @darkcolor;
+			
 			.navbar-nav{
 				>li{
 					float:none;
 					position :relative;
 					>a{
-						color : @colorwhite;
-						text-shadow: 1px 1px @colorblack;
-						border-right: 1px solid @colorwhite; 
+						color : @darkcolor;
+						border-right: 1px solid @darkcolor; 
 						text-transform : uppercase;
 						font: bold 15px/1.5em Arial, Helvetica, sans-serif;
 					}
@@ -107,18 +110,16 @@
 						cursor: pointer;
 						text-shadow: 1px 1px @colorblack;
 						background: @darkcolor;
-						background : -webkit-linear-gradient(top,@back, @lightbackcolor,@back);
-						background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
-						background : linear-gradient(top,@back, @lightbackcolor,@back);
+						background : -webkit-linear-gradient(top,@darkcolor, @lightbackcolor);
+						background : -moz-linear-gradient(top,@darkcolor, @lightbackcolor);
+						background : linear-gradient(top,@darkcolor, @lightbackcolor);
 					}
 					ul{
 						display : none;
 						position : absolute;
 						width : 270px;
 						z-index : 999;
-						background : -webkit-linear-gradient(top, @back, @darkbackcolor 157%);
-						background : -moz-linear-gradient(top, @back, @darkbackcolor 157%);
-						background : linear-gradient(top, @back, @darkbackcolor 157%);
+						background-color:@lightbackcolor;
 						padding : 15px;
 						list-style : none;
 						text-align : left;
@@ -128,12 +129,15 @@
 						>li{
 							padding : 10px;
 							position : relative;
+						
 							>a{
 								text-decoration:none;
-								color : @color;
+								color:@darkcolor;
 							}
 							&:hover{
-								background: @darkcolor;
+								background : -webkit-linear-gradient(top,@darkcolor, @lightbackcolor);
+								background : -moz-linear-gradient(top,@darkcolor, @lightbackcolor);
+								background : linear-gradient(top,@darkcolor, @lightbackcolor);
 								a{
 									color : @colorwhite;
 									
@@ -149,10 +153,12 @@
 								>li{
 									>a{
 										text-decoration:none;
-										color : @color;
+										color : @darkcolor;
 									}
 									&:hover{
-										background: @darkcolor;
+										background : -webkit-linear-gradient(top,@darkcolor, @lightbackcolor);
+										background : -moz-linear-gradient(top,@darkcolor, @lightbackcolor);
+										background : linear-gradient(top,@darkcolor, @lightbackcolor);
 										a{
 											color : @colorwhite;
 											
@@ -193,8 +199,7 @@
 	}
 	main{ 
 		.back{
-			background-image:url('../img/bg.jpg');
-			background-repeat : repeat;
+			
 				.featuredProperty, .featuredProject{
 					padding:25px 10px 0px;
 				}
@@ -212,7 +217,7 @@
 				}
 				.featuredProperty, .featuredProject, .sidebarModule{
 					margin: 30px 0px 0px; 
-					border:1px solid @darkbackcolor;
+					border:1px solid @darkcolor;
 					border-radius:10px;
 					background-color : @lightbackcolor;
 					position:relative;
@@ -220,7 +225,7 @@
 						position : absolute;
 						left:10px;
 						top:-37px;
-						background-color : @back;
+						background-color : @darkcolor;
 						color : @colorwhite;
 						padding:4px;
 						font:16px 'Alex Brush', cursive;
@@ -284,8 +289,13 @@
 				.content{
 					border:1px solid @darkbackcolor;
 					border-radius:10px;
-					background-color : @lightbackcolor;
+					//background-color : @lightbackcolor;
 					padding : 0px 15px 10px;
+					//color:@colorwhite;
+					background : -webkit-linear-gradient(30deg,@darkcolor, @lightbackcolor);
+					background : -moz-linear-gradient(30deg,@darkcolor, @lightbackcolor);
+					background : linear-gradient(30deg,@darkcolor, @lightbackcolor);
+					
 				}
 			}
 		article{ 
@@ -317,12 +327,13 @@
 		color : @darkcolor;
 	}
 	h1, h2{
-		color : @darkbackcolor;
+		color : @darkcolor;
+		text-align:center;
 		font : 2.5em/1em 'Alex Brush', cursive;
 	}
 	.btn-info, .btn-primary{
 		&, &:focus, &:active, &[disabled]{
-			background-color : @back;
+			background-color : @lightbackcolor;
 			color : @colorwhite;
 			transition : padding 250ms;
 			border : 1px solid transparent;
@@ -331,11 +342,11 @@
 			font: 16px 'Alex Brush', cursive;
 		}
 		&:hover{
-			background : -webkit-linear-gradient(top,@back, @lightbackcolor,@back);
-			background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
-			background : linear-gradient(top,@back, @lightbackcolor,@back);
-			border: 1px solid @back;
-			color: white;
+			background : -webkit-linear-gradient(top,@darkcolor, @lightbackcolor);
+										background : -moz-linear-gradient(top,@darkcolor, @lightbackcolor);
+										background : linear-gradient(top,@darkcolor, @lightbackcolor);
+			border: 1px solid @darkcolor;
+		
 		}
 	}
 	.btn-info:hover{
@@ -361,10 +372,13 @@
 		margin-right : 8px;
 	}
 	.panel{
-		background-color : @lightbackcolor;
+	background : -webkit-linear-gradient(30deg,@darkcolor, @lightbackcolor);
+					background : -moz-linear-gradient(30deg,@darkcolor, @lightbackcolor);
+					background : linear-gradient(30deg,@darkcolor, @lightbackcolor);
+		
 	}
 	.panel-default, .thumbnail{
-		border-color : @darkbackcolor;
+		border :1px solid @darkcolor;
 	}
 	
 	.sidebarModule.enquiry{
@@ -372,14 +386,17 @@
 			border-radius : 5px;
 			&, &:focus, &:active, &[disabled]{
 				background-color : @back;
-				color : @colorwhite;
+				color : @darkbackcolor;
 				padding : 10px 20px;
 				border : none;
 				border-radius : 0px;
 				font: 16px 'Alex Brush', cursive;
 			}
 			&:hover{
-				background-color:@darkcolor;
+				background : -webkit-linear-gradient(top,@darkcolor, @lightbackcolor);
+										background : -moz-linear-gradient(top,@darkcolor, @lightbackcolor);
+										background : linear-gradient(top,@darkcolor, @lightbackcolor);
+				
 			}
 		}
 		
@@ -435,4 +452,8 @@
 			margin-top : 5px;
 			margin-left : 0px;
 		}
+	}
+	.btn-danger{
+	
+	background-color: @lightbackcolor;
 	}
