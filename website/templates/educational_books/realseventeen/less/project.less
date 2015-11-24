@@ -20,16 +20,21 @@
 			margin-bottom :10px;
 			margin-top:10px;
 			a{
+				background:none;
+				&:hover{
+					text-decoration:none;
+					}
 				h4
 				{ 
 					font: 2em/1.2em Amaranth-Regular;
 					font-size:16px;
 					font-weight:bold;
 					/*font: 16px 'Alex Brush', cursive;*/
-					color : @colorwhite;
+					color : @darkbackcolor;
 					padding : 5px 15px;
 					text-decoration:none;
 					//border-color : @colorblack;
+					
 				}
 				
 			}
@@ -60,131 +65,154 @@
 	}
 	
 .homeproject {
-	margin-top : 20px;
+	margin-bottom:20px;
 	position : relative;
-	.bx-wrapper{
-		box-shadow : 0px 0px 10px 0px @back;
-		border-radius : 4px;
-		
-	}
-	.bx-viewport{
-		min-height : 313px !important;
+	.projectCarousal{
+		position : relative;
+		border : 5px solid @colorwhite;
+		z-index : 999;
+		width : 500px;
+		margin : 0 auto;
+		top:14px;
+		float : none;
+		box-shadow: 0 0 15px;
 		.carousslider{
 			padding-left: 0px;
 			li{
-				padding : 4px;
-				min-height : 300px;
-				min-width : 100% !important;
+				border: 3px solid #f9f4da;
 				img{
 					width : 100%;
-					min-height : 305px;
+					min-height : 395px;
 				}
 				&.item{
 					overflow : hidden;
-					height : 305px;
-				}
-			}
-		}
-		img{
-			height:400px;
-			min-width : 100%;
-		}
-	}
-	/*margin-bottom:10px;*/
-	.projectnav {
-		box-shadow : 0px 0px 10px 0px @back;
-		//border : 5px solid @colorwhite;
-		border-radius : 4px;
-		height:312px;
-		background:linear-gradient(to right,@lightbackcolor,@colorwhite,@lightbackcolor);
-		.nav-stacked{
-			>li{
-				>a {
-					position: relative;
-					display: block;
-					border: 1px solid @back;
-					margin : 8px 5px;
-					font:16px GandhiSans-Bold;
-					font-weight:bold;
-				}
-				&:hover{
-					text-decoration : none; 
-					a{
-						color : @colorwhite;
-						text-decoration : none;
-						background-color : @darkbackcolor;
-					}
+					height : 395px;
 				}
 			}
 		}
 	}
 	
+	.projectCarousal::after{
+		position : absolute;
+		content : "";
+		background-image : url('../img/home.png');
+		background-size: 100% 100%;
+		right :200px;
+		bottom : -2px;
+		z-index: 999;
+		height : 290px;
+		width : 120px;
+	}
+	.projectnav, .projsnap {
+		position: absolute;
+		//background-color: rgba(0, 125, 0, 0.58);
+		height: 380px;
+		width: 300px;
+		top: 28px;
+		border-radius: 50%;
+		z-index:9;
+		box-sizing: border-box;
+		border: 5px solid #ffffff;
+		p{
+			color:@colorwhite;
+		}
+	}
+	.projectnav{
+		//background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+		border:6px solid @colorwhite;
+		background-color:@darkbackcolor;
+		padding: 5px;
+		right: 0;
+		margin: 10px;
+		border-radius: 50% 0 0 50%;
+		.nav-stacked{
+			>li{
+				+li {
+					margin-top: 10px;
+				}
+				>a, > a:focus{
+					color : @colorwhite;
+					padding: 15px 85px;
+					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
+					text-transform : uppercase;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					text-decoration : none;
+						background: linear-gradient(@color, @darkcolor);
+					color : @colorwhite;
+					transform: translateX(53px);
+					width: 340px;
+					    border: 2px solid #196619;
+						border-top-right-radius: 20px;
+						border-bottom-right-radius: 20px;
+						padding-right: 50px;
+						text-align: right;
+					border:1px solid @darkbackcolor;
+				}
+			}
+		}
+	}
 	.projsnap{
-		box-shadow : 0px 0px 10px 0px @back;
+	//background: linear-gradient(to left,@lightbackcolor, @colorwhite);
+	background-color:@darkbackcolor;
+	border:6px solid @colorwhite;
+	border-radius:   0% 50% 50% 0% ;
+		p{
+			padding:14px;
+			margin:10px;
+			&:last-child{
+				border:none;
+			}
+		}
+		
+		left : 0;
+		padding-top: 12px !important;
+		padding-right: 10px !important;
+	
 		text-align : center;
-		border-radius : 4px;
-		height : 312px;
-		background:linear-gradient(to left,@lightbackcolor 60%,@colorwhite);
 		img{
-			max-height : 110px;
+			height : 110px;
 			margin-top: 10px;
 			margin-bottom: 10px;
-			border : 1px solid @lightbackcolor;
+			border : 2px solid @lightcolor;
 			border-radius : 5px;
 			padding :4px;
 		}
 		.viewproperty{
-			margin-top : 25px;
 			a{
-				color : @back;
-				margin-top : 10px;
+				color : @colorwhite;
+				text-decoration : underline;
 				&:hover{
-					color : @back;
-					text-decoration : underline;
+					color : @colorwhite;
+					text-decoration : none;
 				}
 			}
-		}
-		p{
-			margin: 5px;
-			padding: 4px;
-			border : 1px solid @back;
-			color : @back;
 		}
 	}
-	
-	#carousel { 
-		height:312px;
-		margin-top : 5px;
-		background-color: @lightbackcolor;
+	#carousel {
 		.carousel-inner {
 			.item{
-				min-height: 303px;
+				height: 500px;
 				overflow: hidden;
 				>img{
-					width :100%;
-					min-height : 312px;
-				}
-				&:hover{
+					width : auto;
+					min-height : 500px;
+					border-radius : 50%;
 				}
 			}
-			
+		}
+		a.left.carousel-control{
+			left : 40px;
+		}
+		a.right.carousel-control {
+			right : 40px;
 		}
 		a.left.carousel-control, a.right.carousel-control {
 			background: none;
 		}
 	}
 }
-	.homeproject::after{
-		position : absolute;
-		content : "";
-		background-image : url('../img/home.png');
-		background-size: 100% 100%;
-		left :200px;
-		top : 120px;
-		z-index: 999;
-		height : 197px;
-		width : 120px;
-	}
+
 //css for single project & project list
 	.projlist{
 		.panel-default{
@@ -251,8 +279,8 @@
 					color : @colorwhite;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					background-color: @colorwhite ;
-					color : @darkbackcolor;
+					background: linear-gradient(@color, @darkcolor);
+					color : @colorwhite;
 					text-align:center;
 				}
 			}

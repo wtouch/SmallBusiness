@@ -16,11 +16,11 @@
 		src:url('../fonts/Kirsty.ttf');
 	}
 	
-	@color:#006;
-	@darkcolor : #C00;
+	@color:#e2271f;
+	@darkcolor : #3a0c0a;
 	@lightcolor:#e4e6e7;
 	
-	
+	//e2271f
 	@lightbackcolor:#d2ffb7;
 	@back: #060; 
 	@darkbackcolor:#0c4204;
@@ -36,8 +36,8 @@
 	@import "general.less";
 	
 	body{
-		background-color :@colorwhite;
-		color:@color;
+		background-color :@lightbackcolor;
+		color:@back;
 		/*background-image:-webkit-linear-gradient(@lightbackcolor 50%);*/
 		/*background-image:-moz-linear-gradient(@lightbackcolor 50%);*/
 		/*background-image:linear-gradient(@lightbackcolor 50%);*/
@@ -107,11 +107,11 @@
 		max-width: 100%;
 	}
 	
-	.btn-info, .btn-info[disabled],.btn-primary,.readmore a,.readmore a h4,.btn-info:focus{
+	.btn-info, .btn-info[disabled],.btn-primary,.btn-info:focus{
 		background-color: @back;
 	}
-	.btn-info:hover, .btn-info[disabled]:hover,.readmore a:hover, .readmore a h4:hover,.btn-primary:hover{
-		background-color: @darkbackcolor;
+	.btn-info:hover, .btn-info[disabled]:hover,.btn-primary:hover{
+			background: linear-gradient(@color, @darkcolor);
 	}
 	
 	a
@@ -166,20 +166,19 @@
 		border-radius: 0;
 		.navbar-nav{
 			> li{
-				
+				float:none;
 				text-transform:uppercase;
 				position : relative;
 				
 				> a, > a:focus {
-					color :@lightbackcolor;
-					padding : 10px 25px;
+					color :@colorwhite;
 					border-right: 1px solid white;
 					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
 					position: relative;
 				}
 				&.active>a, &.active:hover > a, &.active:hover > a:hover, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					background:linear-gradient(to left ,@lightbackcolor 60%,@colorwhite);
-					color: @darkbackcolor;
+					background: linear-gradient(@color, @darkcolor);
+					color: @colorwhite;
 					border-top:2px solid @darkbackcolor;
 					border-bottom:2px solid @darkbackcolor;
 				}
@@ -188,7 +187,7 @@
 					display: none;
 					position: absolute;
 					width: 245px;
-					z-index: 999;
+					z-index: 1000;
 					background-color: @darkbackcolor;
 					padding: 15px;
 					list-style: none;
@@ -203,14 +202,14 @@
 							color:@colorwhite;
 							&:hover{
 								
-								text-decoration: underline;
+								text-decoration:none;
 								-webkit-transition: all 0.4s;
 							}
 						}
 						&:hover{
-							background-color:@lightbackcolor;
+							background: linear-gradient(@color, @darkcolor);
 							a{
-								color : @back;
+								color : @colorwhite;
 							}
 						}
 						&:focus{
@@ -242,7 +241,7 @@
 		font: 2em/1.2em Amaranth-Regular;
 		font-size:18px;
 		font-weight:bold;
-		border:1px solid @darkbackcolor;
+		border:1px solid @darkcolor;
 		/*box-shadow:2px 2px 2px @lightcolor;*/
 		text-align: center;
 		background-color :none;
@@ -291,7 +290,7 @@
 	.contentModule {
 		.sections{
 			border-radius : 5px;
-			border: 1px solid @back;
+			border: 1px solid @darkcolor;
 			img{
 				width : 100%;
 				padding : 4px;
@@ -325,7 +324,7 @@
 		}
 	}
 	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default, .form-control{
-		border : 1px solid @color;
+		border : 1px solid @darkcolor;
 	}
 	.thumbnail{
 		border-color : @darkbackcolor;
@@ -335,18 +334,18 @@
 			li,.disabled{
 				a{
 					background-color: @colorwhite;
-					border-color : @color;
+					border-color : @darkcolor;
 					&:hover{
 						background-color:@back;
 						color:@colorwhite;
-						border-color : @color;
+						border-color : @darkcolor;
 					}
 				}
 			}
 			>.active>a{
 				background-color:@back;
 				color:@colorwhite;
-				border-color : @colorblack;
+				border-color : @darkcolor;
 			}
 		}
 	} 

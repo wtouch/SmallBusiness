@@ -21,9 +21,9 @@
 			margin-top : 0px;
 		}
 		a{
-			color:@color;
+			color:@colorwhite;
 			font-weight : bold;
-			text-decoration:underline;
+			
 			&:hover{
 				color:@color;
 				text-decoration:none;
@@ -34,18 +34,22 @@
 //homeproject
 .homeproject{
 	margin-bottom: 10px;
+	
 	.projectCarousal{
+			margin-top:20px;
+border:3px solid @darkbackcolor;
 		display : inline-block;
 		float : left;
 		position : relative;
+		z-idex:1000;
 		.bx-viewport{
 			height : 342px!important;
 		}
 		.bx-controls {
 			margin: 10px 0;
 		}
-		.carousslider{
-			padding-left : 0px;
+		
+			
 			.item{
 				height : 342px;
 				overflow: hidden;
@@ -53,7 +57,7 @@
 					min-height : 342px;
 					width : 100%;
 				}
-			}
+			
 			.carousel-caption{
 				h2{
 					border : none;
@@ -114,14 +118,16 @@
 	.projectnav{
 		display : inline-block;
 		position : relative;
-		float : right;
-		width : 222px;
+		left:0;
+		width : 220px;
 		height : 342px;
-		padding:0px 15px 15px;
+		margin-top:20px;
+		//padding:0px 15px 15px;
 		z-index : 52;
-		background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
-		background-image: -moz-linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
-		background-image: linear-gradient(left,@darkbackcolor,@darkcolor 93%, @darkbackcolor);
+		background-image: -webkit-linear-gradient(left,@darkbackcolor,@darkcolor);
+			background-image: -moz-linear-gradient(left,@darkbackcolor,@darkcolor);
+			background-image: linear-gradient(left,@darkbackcolor,@darkcolor);
+		border-radius:0 50% 50% 0%;
 		.builderLogo{
 			img{
 				max-height : 56px;
@@ -132,20 +138,20 @@
 			>li{
 				padding: 2px 4px;
 				border-bottom:1px dotted @lightbackcolor ;
+				position:relative;
 				>a, > a:focus{
 					color : @colorwhite;
 					padding: 10px 15px;
 					&:hover
 					{
 						text-decoration: none;
-						background-image: -webkit-linear-gradient(right, #337ab7, #ffffff 111%, #337ab7);
-						color: @colorwhite;
-						transform: translateX(-24px);
-						width: 235px;
+						background-image: -webkit-linear-gradient(right,#337ab7 , #ffffff);
+						color: @darkcolor;
+						transform: translateX(21px);
+						width: 200px;
 						text-align: right;
 						padding-right: 20px;
 						border-radius:4px;
-						
 					}
 				} 
 				
