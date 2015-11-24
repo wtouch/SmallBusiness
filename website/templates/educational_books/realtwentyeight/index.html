@@ -17,7 +17,7 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		{% if data.template_params %}
+		<!-- {% if data.template_params %}
 			<style>
 				.sociallinks ul li, .block-menu .nav-child li > a:hover, .block-menu .nav-child li > a:focus, .block-menu .nav-child:hover > a,.front, .back,.proj_nav > li > a:hover, .proj_nav > .active > a,.block-menu .child-menu > ul > li > a:hover, .btn:hover, .nav-pills li:hover > a, .nav-pills li > a:focus, .nav-pills .active :hover > a, .nav-pills .active:hover > a:focus, .nav-pills .active >a:hover, .nav-pills .active >a:focus, .projlist .project .thumbnail .readmore a:hover,.project .navbar	 ul.nav.navbar-nav>li.active > a, .project .navbar	 ul.nav.navbar-nav>li.active:hover > a, .project .navbar ul.nav.navbar-nav>li.active > a:focus, .project .navbar	 ul.nav.navbar-nav>li:hover > a, .project .navbar	 ul.nav.navbar-nav>li:hover > a:focus, .project .navbar ul.nav.navbar-nav>li>a:hover, .project .navbar ul.nav.navbar-nav>li>a:focus{
 					background-color : {{data.template_params.background_color_dark}};
@@ -39,10 +39,10 @@
 					border-bottom: 20px solid {{data.template_params.background_color}};
 				}
 			</style>
-		{% endif %}
+		{% endif %} -->
 	</head>
 	<body>
-		<!-- <div class="sociallinks">
+		<div class="sociallinks">
 			<ul>
 				{% if data.website_config.sociallinks.facebook %}
 					<li>
@@ -65,33 +65,48 @@
 					</li>
 				{% endif %}
 			</ul>
-		</div>  -->
-		<nav class="navbar navbar-default ">
-			<div class="container">
-					<a  class="brand pull-left" href="#">
+		</div>  
+		<header>
+			<div class="container">	
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 weblogo">
 						{% if data.website_config.website_logo %}
-						<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
-						{% else %}
-						<img class="logo" src="{{data.business_logo.file_relative_path}}">
+							<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
 						{% endif %}
-					</a>
-						<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header">
-					
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						
 					</div>
-					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-						<ul class="nav menu block-menu">
-							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-						</ul>
+					<div class="col-xs-12 col-sm-4 text-center">
+						{% if data.website_config.website_logo1 %}
+							<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
+						{% else %}
+							<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-4 text-right cntdtl">	
+						<p><strong>Mobile :</strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
+						<p>
+						<p><strong>E-mail ID :</strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
+						<p>
 					</div>
 				</div>
+			</div>
+		</header>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav nav-justified">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
+				</div>
+			</div>
 		</nav>
 		<div class="container">
 			<div class="row">
