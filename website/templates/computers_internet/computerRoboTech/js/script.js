@@ -1,90 +1,41 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
-jQuery(document).ready(function() {
+
+$(document).ready(function(){
 	jQuery(".subimgs").click(function(){
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
-});
-
-$(document).ready(function(){
-	var sliderMode, minSlides, maxSlides;
-	//$(window).resize(function(){
-		if($(window).width() <= "480"){
-			sliderMode = "horizontal";
-			minSlides = 1;
-			maxSlides = 1;
-			
-		}else{
-			sliderMode = "vertical";
-			minSlides = 3;
-			maxSlides = 3;
+	$(window).scroll(function(e){
+		var scrollTop = $(document).scrollTop();
+		if(scrollTop > 0){
+			console.log(scrollTop);
+			$('nav').removeClass('navbar-static-top').addClass("navbar-fixed-top");
+		} else {
+			$('nav').removeClass("navbar-fixed-top").addClass('navbar-static-top');
 		}
-	//})
-	$('#bxslider').bxSlider({
-		mode:'horizontal',
-		slideWidth: 250,
-		minSlides: minSlides,
-		maxSlides: maxSlides,
-		slideMargin: 25,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
-		pause:3000,
-		pager:true,
-		pagerType:'full',
-		autoControls: true, 
-		controls:true, 
-		autoHover:true,
-		speed:1000,
 	});
-	$('#associate').bxSlider({
-		mode:'horizontal',
-		slideWidth: 300,
-		minSlides: minSlides,
-		maxSlides: maxSlides,
-		slideMargin: 25,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
-		pause:3000,
-		pager:true,
-		pagerType:'full',
-		autoControls: true, 
-		controls:true, 
-		autoHover:true,
-		speed:1000,
-	});
-	$('.bxslider1').bxSlider({
-		mode: sliderMode,
-		slideWidth: 680,
-		minSlides: minSlides,
-		maxSlides: maxSlides,
-		slideMargin: 15,
-		auto: true, 
-		autoDirection:'next',
-		moveSlides: 1,
-		pause:3000,
-		pager:false,
-		pagerType:'full',
-		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed:1000,
-	});
-	$('.carousslider').bxSlider({ 
-		mode:'fade',
-		minSlides:1,
-		maxSlides: 1,
-		auto: true, 
-		autoDirection:'next',
-		pause:2500,
-		pager:false,
-		pagerType:'full',
-		autoControls: false, 
-		controls:false, 
-		autoHover:true,
-		speed:1000,
-	});
+	
+	// This is for Cookie
+	function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1);
+			if (c.indexOf(name) == 0) return true;
+		}
+		return false;
+	}
+	var cookieExpiry = new Date();
+	cookieExpiry.setMinutes(cookieExpiry.getMinutes() + 30);
+	var cookieTime = cookieExpiry.toUTCString();
+	if(getCookie('anim') == false){
+		document.cookie="anim=true; expires=" + cookieTime;
+	}else{
+		$(".anim2, .anim4").hide();
+		$(".anim1").removeClass("anim1");
+		console.log(getCookie('anim'));
+	}
 });
 var app = angular.module('myApp',[]);
 
@@ -138,13 +89,3 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		});
 	};
 });	
-
-	app.controller('aboutController', function($scope,$http, $location) {
-		var s = $location.path();
-		$scope.url = s.substr(1);
-		$scope.makeActive = function(url){
-			$scope.id = url;
-		}
-		$scope.makeActive($scope.url);
-		
-	});
