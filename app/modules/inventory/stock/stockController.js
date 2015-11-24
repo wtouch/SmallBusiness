@@ -128,8 +128,8 @@ define(['app'], function (app) {
 					goods_type : data.goods_type,
 					category : data.category,
 					quantity : data.quantity,
-					price : data.price,
 					unit : data.unit,
+					price : data.price,
 					status : data.status,
 					date : data.date
 				} : {
