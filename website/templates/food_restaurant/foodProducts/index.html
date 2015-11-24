@@ -15,6 +15,7 @@
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
@@ -86,7 +87,7 @@
 					<div class="col-md-2">
 						<div class="logo">
 							{% if data.website_config.website_logo %}
-								<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+								<img class="logo" src="{{data.business_logo.file_relative_path}}">
 							{% else %}
 								<img class="logo" src="{{data.business_logo.file_relative_path}}">
 							{% endif %}
@@ -131,22 +132,19 @@
 					{%endif%}
 				
 			</div> 
-			{% if modules.contentModule.featured_services%}
 			<div class="row">
-				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 			</div>
-			{% endif %}
 		</div>
 		</div>
 		 <div class="container-fluid sback">
 			 <div class="container">
 				<div class="row">
-					{% if modules.contentModule.featured_products%}
-						{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-					{% endif %}
-					{% include contentPath%}
+					
+							{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+					
+							{% include contentPath%}
 				</div>
-				
 			</div> 
 				 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 		</div>

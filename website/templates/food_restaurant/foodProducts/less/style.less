@@ -17,7 +17,7 @@
 	@colorwhite	: #fff;
 	
 	//@import "property.less";
-	//@import "project.less";
+	@import "project.less";
 	@import "product.less";
 	@import "general.less";
 	*{
@@ -37,8 +37,7 @@
 		background-repeat:no-repeat;
 		color:@colorwhite;
 		border:1px solid @colorblack;
-
-}
+	}
 
 	.logo {
 		height:100px;
@@ -51,7 +50,7 @@
 		}
 		header{
 		h2{
-		margin-top:60px;
+		margin-top:25px;
 		margin-left:0px;
 		}
 		
@@ -106,38 +105,104 @@
 		background-color:transparent;
 		border : none;
 		border-radius: 0;
-		nav{
-		position:relative;
-		}
-		.nav>ul>li{
 		
-		position:relative;
-		}
-		.nav > li > a{
-			font:'Open Sans' , sans-serif;
-			text-shadow:2px 2px 2px @colorblack;
-			text-transform:uppercase;
-			background-color:@darkcolor;
-			color:@colorwhite;
-			border-left:1px solid @lightcolor;
-			border-right:1px solid @lightcolor;
-			height: 60px;
-			padding-top:20px;
-			&:hover{
-				background-color:@lightcolor;
-			}
+		.nav>li{
 			
+		vertical-align: middle;
+	/*	 -webkit-transform: translateZ(0);
+		transform: translateZ(0);
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		-moz-osx-font-smoothing: grayscale;
+		position: relative;
+		-webkit-transition-property: color;
+		transition-property: color;
+		-webkit-transition-duration: 0.3s;
+		transition-duration: 0.3s;
+		&:before{
+				  content: "";
+				  position: absolute;
+				  z-index: 99;
+				  top: 0;
+				  left: 0;
+				  right: 0;
+				  bottom: 0;
+				  background: @lightcolor;
+				  -webkit-transform: scaleY(0);
+				  transform: scaleY(0);
+				  -webkit-transform-origin: 50% 0;
+				  transform-origin: 50% 0;
+				  -webkit-transition-property: transform;
+				  transition-property: transform;
+				  -webkit-transition-duration: 0.3s;
+				  transition-duration: 0.3s;
+				  -webkit-transition-timing-function: ease-out;
+				  transition-timing-function: ease-out;
 		}
-		.nav>li>ul>li{
-			display:none;
-	}	
-	.nav > ul>li {
-	
-	&:hover ul{
-	position:absolute;
-	display:block;
-	}
-	}
+		
+						&:hover, &:focus, &:active {
+							color: @colorwhite;
+							z-index:8000;
+								}
+					&:hover:before, &:focus:before,&:active:before {
+						  -webkit-transform: scaleY(1);
+						  transform: scaleY(1);
+						  color: @colorwhite;
+						}*/
+					a{
+						font:'Open Sans' , sans-serif;
+						text-shadow:2px 2px 2px @colorblack;
+						text-transform:uppercase;
+						background-color:@darkcolor;
+						color:@colorwhite;
+						border-left:1px solid @lightcolor;
+						border-right:1px solid @lightcolor;
+						height: 60px;
+						padding-top:20px;
+						
+							&:hover{
+								background-color:@lightcolor;
+								//display:block;
+								color:@colorwhite;
+							}
+			
+					}	
+					> ul{
+						position:absolute;
+						display:none;
+						z-index:900;
+						width: 250px;
+						margin-left: -40px;
+							li {
+								padding: 25px 25px 5px; 
+								list-style-type:none;
+								background-color:@darkbackcolor;
+								border-bottom: 1px solid @colorwhite;
+								a{
+								border-left:1px solid transparent;
+								border-right:1px solid transparent;
+								
+								background-color:transparent;
+								color:@colorwhite;
+									&:hover{
+									color:@colorblack;
+									background-color:@darkbackcolor;
+									text-shadow:2px 2px 2px @darkbackcolor;
+									}
+								}
+								>ul{
+									display:none;
+								}
+								}
+						}
+				&:hover > ul {
+					display: block;
+					
+				}	
+		
+		}
+
 	}
 	.navbar-static-top{
 	margin-top:40px;
@@ -169,6 +234,17 @@
 		color:@colorwhite;
 		}
 	
+	.well{
+	
+	h4{
+	color:@darkcolor;
+	text-shadow:none;
+	
+	&:hover{
+	color:@darkcolor;
+	}
+	}
+	}
 	.thumbnail
 	{
 	 color:@colorwhite;
@@ -203,12 +279,13 @@
 	.fproduct{
 		margin-top:-250px;
 		
-.sections>div>div{
+		.sections>div>div{
 		height:350px;
 		box-shadow:4px 4px 4px  @darkbackcolor;
 		border:0px;
 		padding:10px;
-		h4{
+		.subhead{
+			text-align:center;
 			color:@darkcolor;
 			text-transform:uppercase;
 			&:hover{
@@ -219,10 +296,12 @@
 			height:200px;
 			width:300px;
 			margin:0px;
+			overflow:hidden;
 		}
 		.description{
 			color:@darkbackcolor;
 			text-align:left;
+			margin-bottom:20px;
 			}
 			}
 	.sidebarModule{

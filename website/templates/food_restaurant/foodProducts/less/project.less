@@ -1,118 +1,145 @@
 //project
 //css for featured project slider
 .bxslider{ 
-	padding:5px;
-	li{
-		width:100px;
-		height : 100px;
-		.projimg{
-			height : 175px;
-			overflow : hidden;
-			padding : 6px;
-			border : 2px solid transparent;
-			img{
-				min-height: 175px;
+		li{
+			width:200px;
+			height : 100px;
+			>a{
+				>img{
+						position:relative;		
+						//padding-top:20px;
+						//padding-left:20px;
+						//padding-right:20px;
+						//border: none;
+						//background-color: transparent;
+						margin-top:10px;
+						&:hover{
+						opacity: 0.2;
+						filter: alpha(opacity=40); 
+						}
+					}
+				}
+			/*.projimg{
+				height : 160px;
+				overflow : hidden;
+				padding : 6px;
+				border : 2px solid transparent;
+				img{
+					min-height: 175px;
+				}
+				&:hover{
+					border : 2px solid @darkcolor;
+				}
 			}
-			&:hover{
-				border : 2px solid @darkcolor;
+			p{
+				margin-bottom : 5px;
 			}
-		}
-		p{
-			margin-bottom : 5px;
-		}
-		.readmore{
-			margin-bottom :10px;
-			margin-top:10px;
+			.readmore{
+				margin-bottom :10px;
+				margin-top:10px;
+			}*/
+			&:hover .servdesc{
+				margin-left:25px;
+				width:165px;
+				visibility:visible;
+				height:50px;
+				//overflow:hidden;
+				margin-top:10px;
+				p{
+				color:@colorwhite;
+				}
+			}
 		}
 	}
-}
-
+	.bx-wrapper .bx-controls-direction a {
+		top: 35% !important;
+	}
 	.homeproject {
 			position : relative;
 			margin-top:10px;
 			margin-bottom:10px;
 			.projectnav, .projsnap{
-			border-radius : 4px;
-			padding:3px;
-	}  
-	.projectnav, .projsnap, .bx-wrapper{
-		background-color: @back;
-		border: 6px solid @color;
-		height : 315px;
-	}
-	.projectnav {
-		a{
-			font: bold 14px/1.5em Arial, Helvetica, sans-serif;
-			color: @color;
-			padding : 13px 15px;
-			&:hover{
-				color: @back;
-				text-decoration:none;
-				background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
-				background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
-				background: linear-gradient(top, @lightcolor, @darkcolor);
+				border-radius : 4px;
+				padding:3px;
+			}  
+			.projectnav, .projsnap, .bx-wrapper{
+				background-color: @back;
+				border: 6px solid @color;
+				height : 315px;
 			}
-		}
-		
-	}
-	.bx-viewport{
-		min-height : 300px !important;
-		.carousslider{
-			padding-left: 0px;
-			li{
-				//border:7px solid @lightbackcolor;
-				//background-color: @lightbackcolor;
-				//border-radius:40px;
-				//transition: all 1s ease-in-out ;
-				min-width : 100% !important;
-				max-height:500px;
+			.projectnav {
+				a{
+					font: bold 14px/1.5em Arial, Helvetica, sans-serif;
+					color: @color;
+					padding : 13px 15px;
+					&:hover{
+						color: @back;
+						text-decoration:none;
+						background: -webkit-linear-gradient(top, @lightcolor, @darkcolor);
+						background: -moz-linear-gradient(top,  @lightcolor, @darkcolor);
+						background: linear-gradient(top, @lightcolor, @darkcolor);
+					}
+				}
+				
+			}
+			.bx-viewport{
+				min-height : 300px !important;
+				.carousslider{
+					padding-left: 0px;
+					li{
+						//border:7px solid @lightbackcolor;
+						//background-color: @lightbackcolor;
+						//border-radius:40px;
+						//transition: all 1s ease-in-out ;
+						min-width : 100% !important;
+						max-height:500px;
+						img{
+							width : 100%;
+							min-height : 303px;
+							height:500px;
+						}
+						&:hover{
+							transform: scale(1.1);
+							 border-radius: 40px;
+						}
+						&.item{
+							overflow : hidden;
+							height : 500px;
+						}
+					}
+				}
+			}
+			.projsnap{
+				text-align : center;
 				img{
-					width : 100%;
-					min-height : 303px;
-					height:500px;
+					max-height : 110px;
+					margin-top: 10px;
+					margin-bottom: 10px;
+					border : 2px solid @darkcolor;
+					border-radius : 5px;
+					padding :4px;
 				}
-				&:hover{
-					transform: scale(1.1);
-					 border-radius: 40px;
-				}
-				&.item{
-					overflow : hidden;
-					height : 500px;
+				p{
+					margin: 0px 10px;
+					padding: 5px;
+					border-bottom : 1px solid @darkcolor;
+					&:last-child{
+						border : none;
+					}
 				}
 			}
 		}
-	}
-	.projsnap{
-		text-align : center;
-		img{
-			max-height : 110px;
-			margin-top: 10px;
-			margin-bottom: 10px;
-			border : 2px solid @darkcolor;
-			border-radius : 5px;
-			padding :4px;
+		.homeproject::after{
+			position : absolute;
+			content : "";
+			background-image : url('../img/key.png');
+			background-size: 100% 100%;
+			left :140px;
+			top : 120px;
+			z-index: 999;
+			height : 230px;
+			width : 230px;
 		}
-		p{
-			margin: 0px 10px;
-			padding: 5px;
-			border-bottom : 1px solid @darkcolor;
-			&:last-child{
-				border : none;
-			}
-		}
-	}
-}
-.homeproject::after{
-	position : absolute;
-	content : "";
-	background-image : url('../img/key.png');
-	background-size: 100% 100%;
-	left :140px;
-	top : 120px;
-	z-index: 999;
-	height : 230px;
-	width : 230px;
-}
 //css for project list
 	.projlist{
 		.project{

@@ -22,10 +22,10 @@ $(document).ready(function(){
 	//})
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideWidth: 250,
+		slideWidth: 800,
 		minSlides: 4,
 		maxSlides: 4,
-		slideMargin: 25,
+		slideMargin: 20,
 		auto: true, 
 		autoDirection:'next',
 		moveSlides: 1,
@@ -150,12 +150,14 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	});
 	
 	
-	$(window).scroll(function() {
-		$( ".well" ).fadeIn("slow");
-		});
+$(window).scroll(function() {
+	$( ".well" ).fadeIn("slow");
+	});
 
-	
-	$(document).ready(function(){
+$(window).load(function() {
+		$( ".cap" ).animate({top: '40px'});
+		});
+$(document).ready(function(){
 	$(window).scroll(function(e){
     var scrollTop = $(document).scrollTop();
     if(scrollTop > 0){
@@ -165,3 +167,5 @@ app.controller('enquiryController', function($scope,$http, $location) {
     }
 	});	
 	});
+	
+	
