@@ -20,9 +20,8 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo'
-					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
-					enableSorting: false, enableFiltering: false,
+				{ name:'SrNo', 
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false,
 					
 				},
 				
@@ -101,12 +100,19 @@ define(['app'], function (app) {
 				postData : function(table,input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							
 							$scope.stockData = {};
-							$scope.stockData.goods_name = response.data.goods_name;
-							$scope.stockData.quantity = response.data.quantity;
-							$scope.stockData.price = response.data.price;
-							$rootScope.postData("stock", $scope.stockData);
+							$scope.stockData.user_id = input.user_id;
+							$scope.stockData.goods_name = input.particular[0].particular_name;
+							$scope.stockData.quantity ="-"+ input.particular[0].quantity;
+							$scope.stockData.price = input.particular[0].price;
 							console.log($scope.stockData);
+							console.log(input);
+							$rootScope.postData("stock", $scope.stockData,function(response){
+								
+							});
+							
+							
 							$scope.getData(false, $scope.currentPage, 'bill','billData');
 						}
 					})
