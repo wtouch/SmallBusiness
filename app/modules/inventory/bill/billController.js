@@ -101,6 +101,12 @@ define(['app'], function (app) {
 				postData : function(table,input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							$scope.stockData = {};
+							$scope.stockData.goods_name = response.data.goods_name;
+							$scope.stockData.quantity = response.data.quantity;
+							$scope.stockData.price = response.data.price;
+							$rootScope.postData("stock", $scope.stockData);
+							console.log($scope.stockData);
 							$scope.getData(false, $scope.currentPage, 'bill','billData');
 						}
 					})
