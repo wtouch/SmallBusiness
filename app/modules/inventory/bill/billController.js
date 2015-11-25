@@ -18,12 +18,12 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo', 
+				{ name:'SrNo', width:50,
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false,
 					
 				},
 				
-				{ name:'id', 
+				{ name:'id', width:50,
 					filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'bill\', \'billData\')" ng-model="id" placeholder="Bill No">',
 				},
 				{
@@ -44,7 +44,21 @@ define(['app'], function (app) {
 				     filterHeaderTemplate: '<input id="remark" class="form-control" ng-change="grid.appScope.filter(\'remark\', remark, \'bill\', \'billData\')" ng-model="remark" placeholder="search">',
             
 				},
-				{ name:'total_amount', 
+				{ name:'payment_status',
+				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\')" ng-model="payment_status" placeholder="search">'
+					+'<option value="" selected>payment status</option>'
+							+'<option value="1">Paid</option>'
+							+'<option value="0">Unpaid</option>	'
+							+'<option value="2">PartialPaid</option>	'
+						+'</select>', 
+					filter: {
+					  //type: uiGridConstants.filter.SELECT,
+					 
+					  options: [ { value: '1', label: 'Paid' }, { value: '0', label: 'Unpaid' }, { value: '2', label: 'PartialPaid' }]
+					} 
+            
+				},
+				{ name:'total_amount',width:50, 
 					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\')" ng-model="total_amount" placeholder="search">',
 					cellTemplate : "<span>{{row.entity.particular[0].total_amount}}</span>",
 					filter:{
@@ -53,13 +67,13 @@ define(['app'], function (app) {
 					}
 				},
 				/* { name:'Paid Amount',enableSorting: false, enableFiltering: false,}, */
-				{ name:'Due_Amount',
+				{ name:'Due_Amount',width:50,
 					filterHeaderTemplate: '<input id="Due_Amount" class="form-control" ng-change="grid.appScope.filter(\'Due_Amount\', Due_Amount, \'bill\', \'billData\')" ng-model="Due_Amount" placeholder="search">',},
 				
-				{ name:'due_date',
+				{ name:'due_date',width:80,
 					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'bill\', \'billData\')" ng-model="remark" placeholder="search">',},
 				{
-					name:'status',
+					name:'status',width:50,
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\')" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
@@ -77,8 +91,11 @@ define(['app'], function (app) {
 					+ '<a type="button" tooltip="Delete bill" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/paybill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
-					+
-					'<a ng-disabled="(row.entity.payment_status == 0)" ng-click="grid.appScope.openModal(\'modules/inventory/bill/paybill.html\')" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open" disabled="disabled"></span></a>'
+							+
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/paybill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+							+
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/paybill.html\')" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					
 				}
 			],
 			onRegisterApi: function( gridApi ) {

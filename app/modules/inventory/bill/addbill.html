@@ -10,7 +10,7 @@
 		<div class="form-group" ng-init="modalOptions.getData(false,false,'party', 'partyList',params,modalOptions)">
 			<label for="customer" class="col-sm-2 control-label">Select Party *</label>
 			<div class="col-sm-2">
-				<select class="form-control" name="party_id" id="party_id" ng-model="modalOptions.addBill.party_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
+				<select class="form-control" name="party_id" id="party_id" ng-model="modalOptions.addBill.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter :{type :'vendor'}" required>
 					<option value="">Select Party</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -57,7 +57,7 @@
 	
 	<div class="col-sm-12" ng-init="modalOptions.addBill.particular = (modalOptions.addBill.particular) ? modalOptions.addBill.particular : []">
 	<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">
-		<div class="table-responsive">
+		<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
 			<table class="table table-bordered" >
 						<thead>
 							<tr>
@@ -143,7 +143,7 @@
 		</form>
 	</div>
 </div>
-	<div class="table-responsive">
+	<div class="table-responsive" ng-if="modalOptions.singleparticular">
 		<table class="table table-bordered" >
 			<thead>
 				<tr >
