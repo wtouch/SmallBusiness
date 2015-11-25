@@ -68,10 +68,11 @@ define(['app'], function (app) {
 				{ name:'manage', enableSorting: false, enableFiltering: false, 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					
-					+ '<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/bill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					
 					+ '<a type="button" tooltip="Delete bill" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					
+					+
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewbill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+
+					'<a ng-disabled="(row.entity.payment_status == 0)" ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewbill.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open" disabled="disabled"></span></a>'
 				}
 			],
 			onRegisterApi: function( gridApi ) {
