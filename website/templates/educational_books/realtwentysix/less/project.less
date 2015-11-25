@@ -31,10 +31,11 @@
 	margin-top:10px;
 	margin-bottom :20px;
 	position: relative;
+	z-index:999;
 	.projectCarousal{
 		position : relative;
-		border : 5px solid @darkcolor;
-		z-index : 99;
+		border : 5px solid @colorwhite;
+		//z-index : 999;
 		width : 500px;
 		margin : 0 auto;
 		float : none;
@@ -48,7 +49,7 @@
 					left:0;
 					min-height : 300px;
 					min-width : 100% !important;
-					border: 3px solid #f9f4da;
+					border: 3px solid @colorwhite;
 				}
 			}
 			img{
@@ -57,41 +58,71 @@
 			}
 		}
 	}
+	
+	.projectCarousal::after {
+		content: "";
+    height: 41px;
+    display: block;
+    position: absolute;
+    top: -210px;
+    right: -105px;
+    border-bottom: 276px solid @darkcolor;
+    border-right: 350px solid transparent;
+    z-index:-99;
+}
+	.projectCarousal::before {
+	content: "";
+    height: 41px;
+    display: block;
+    position: absolute;
+    top: -210px;
+    left: -105px;
+    border-bottom: 276px solid @darkcolor;
+    border-left: 350px solid transparent;
+	border-right:2px solid @colorwhite;
+    z-index:-99;
+		
+	}
 	.projectnav, .projsnap {
 		position : absolute;
 		background-color: @lightbackcolor;
-		border : 1px solid @darkcolor;
+		border : 1px solid @colorwhite;
 		height: 320px;
 		width : 300px;
 		top : 25px;
 		box-sizing : border-box;
 		border : 5px solid @colorwhite;
+		z-index:-99;
+		
 		
 	}
 	.projectnav{
-		left : 0;
-		padding-right : 85px !important;
-		
+		right: 0;
+		//padding-right : 85px !important;
+		z-index:-89;
+	
 	}
 	.projsnap {
+		z-index:-99;
 		p{
-			border-bottom:1px solid @darkcolor;
+			border-bottom:1px solid @colorwhite;
 			padding:6px;
 			color:@darkcolor;
 			&:last-child{
 				border:none;
 			}
 		}
-		right : 0;
-		padding-left: 90px;
+		left : 0;
+		padding-left: 38px;
 		padding-top: 12px !important;
 		padding-right: 10px !important;
 		right : 10px;
+		
 		img{
 			height : 110px;
 			margin-top: 10px;
 			margin-bottom: 10px;
-			border : 1px solid @color;
+			border : 1px solid @colorwhite;
 			border-radius : 5px;
 			padding :4px;
 		}
@@ -107,10 +138,12 @@
 	}
 	.projectnav{
 		padding : 4px;
-		left : 10px;
+		//left : 10px;
+		padding-left:70px;
+		
 		.nav-stacked{
 			>li{
-				border-bottom:1px solid @darkcolor;
+				border-bottom:1px solid @colorwhite;
 				+li {
 					margin-top: 10px;
 				}
@@ -132,6 +165,7 @@
 		}
 	}
 }
+
 
 //css for single project & project list
 	.projlist{

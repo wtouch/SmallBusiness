@@ -3,7 +3,7 @@
 @darkcolor : #951544;
 @back : #D9EDF7;
 @darkbackcolor : #FFD700; 
-@lightbackcolor :#ff9900;
+@lightbackcolor :#FFD700;
 @colorblack : #000000;
 @colorwhite	: #ffffff;
 @import "property.less";
@@ -73,17 +73,24 @@
 	header{
 		.head{
 			margin : 10px auto 20px;
+			margin-top:8px;
 		.logo{
 			max-width: 100%;
 			max-height : 100px;
-		}
-		.cntdtl{
-			padding-top: 25px;
-		}
-			.weblogo{
-				padding-top: 10px;
 			}
-		}
+			img.logo1 {
+				position: absolute;
+				z-index: 9999;
+				width: 119px;
+				left: 108px;
+				height: 100px;
+			}
+	.cntdtl p{
+			padding-top:7px;
+			color:@darkcolor;
+		}	
+	}	
+
 		.navbar{
 			min-height : 50px;
 		}
@@ -93,7 +100,8 @@
 			//background : -webkit-linear-gradient(top, @darkcolor, @back);
 			//background : -moz-linear-gradient(top,@darkcolor, @back);
 			//background : linear-gradient(top, @darkcolor, @back);
-			border : 2px solid @darkcolor;
+			border : 2px solid @colorwhite;
+			z-index:9999;
 			
 			.navbar-nav{
 				>li{
@@ -101,7 +109,7 @@
 					position :relative;
 					>a{
 						color : @darkcolor;
-						border-right: 1px solid @darkcolor; 
+						border-right: 1px solid @colorwhite; 
 						text-transform : uppercase;
 						font: bold 15px/1.5em Arial, Helvetica, sans-serif;
 					}
@@ -123,7 +131,7 @@
 						padding : 15px;
 						list-style : none;
 						text-align : left;
-						border : 1px solid @darkcolor;
+						border : 1px solid  @colorwhite;
 						box-shadow : 0 0 15px 0px @colorblack;
 						border-radius : 7px;
 						>li{
@@ -186,10 +194,10 @@
 				display: block;
 				position: absolute;
 				top: -172px;
-				background-image : url('../img/about1.png');
+				
 				background-repeat : no-repeat;
 				height : 165px;
-				width : 230px;
+				width : 1px;
 				z-index:-999;
 				left : 0;
 				right : 0;
@@ -292,9 +300,10 @@
 					//background-color : @lightbackcolor;
 					padding : 0px 15px 10px;
 					//color:@colorwhite;
-					background : -webkit-linear-gradient(30deg,@darkcolor, @lightbackcolor);
-					background : -moz-linear-gradient(30deg,@darkcolor, @lightbackcolor);
-					background : linear-gradient(30deg,@darkcolor, @lightbackcolor);
+					
+					background : -webkit-radial-gradient(ellipse at center, @lightbackcolor);
+					background : -moz-radial-gradient(ellipse at center, @darkcolor, @lightbackcolor);
+					background : radial-gradient(ellipse at center, @darkcolor, @lightbackcolor);
 					
 				}
 			}
@@ -309,6 +318,8 @@
 			}
 		}
 	}
+		
+	
 	
 	//global css
 	a{
@@ -371,14 +382,10 @@
 	.send{
 		margin-right : 8px;
 	}
-	.panel{
-	background : -webkit-linear-gradient(30deg,@darkcolor, @lightbackcolor);
-					background : -moz-linear-gradient(30deg,@darkcolor, @lightbackcolor);
-					background : linear-gradient(30deg,@darkcolor, @lightbackcolor);
-		
-	}
+	
 	.panel-default, .thumbnail{
 		border :1px solid @darkcolor;
+		background-color:transparent;
 	}
 	
 	.sidebarModule.enquiry{
@@ -457,3 +464,4 @@
 	
 	background-color: @lightbackcolor;
 	}
+	
