@@ -25,16 +25,11 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo', 
+				{ name:'SrNo', width: 60,
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false,
 					
 				},
 				
-				/* { name:'account_name',
-					filter: {
-					  placeholder: ' Search Account name'
-					}
-				}, */
 				{
 				    name:'account_name',
 					filterHeaderTemplate: '<input id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_name\', account_name, \'account\', \'accountList\')" ng-model="account_name" placeholder="search">'
