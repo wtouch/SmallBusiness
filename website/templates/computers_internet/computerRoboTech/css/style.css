@@ -212,12 +212,14 @@ header {
   margin-bottom: 0px;
 }
 .navbar-default {
-  position: relative;
+  position: fixed;
+  width: 100%;
   padding: 0;
   background-color: #ff9900;
   z-index: 92;
   border: none;
   border-radius: 0px;
+  margin-bottom: 30px;
 }
 .navbar-default:before {
   position: absolute;
@@ -458,10 +460,6 @@ footer p a {
 }
 footer p a:hover {
   color: #ffffff;
-}
-.content * {
-  position: relative;
-  z-index: 3;
 }
 .content h2 {
   /*&::before{
@@ -760,4 +758,13 @@ body {
 }
 .orange {
   color: #ff9900;
+}
+@media (max-width: 360px) {
+  .navbar-default:before {
+    display: none;
+  }
+}
+div.container > div.content {
+  z-index: 3;
+  margin-top: 70px;
 }

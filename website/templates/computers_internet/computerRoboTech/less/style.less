@@ -55,13 +55,14 @@ header{
 						height:66px;
 						z-index:500;
 				}
-	position:relative;
+	position:fixed;
+	width:100%;
     padding: 0;
     background-color: @color;
     z-index: 92;
     border: none;
     border-radius: 0px;
-
+	margin-bottom:30px;
 	.navbar-brand{ 				
 		padding : 15px;
 		font : 700 20px/1.5em Arial,Helvetica,sans-serif;
@@ -295,11 +296,7 @@ footer{
 
 
 .content{	
-	*{
-		position : relative;
-		z-index : 3;
-		
-	}
+	
 	h2{
 		/*&::before{
 			right: 0.5em;
@@ -577,4 +574,20 @@ body{
 }
 .orange{
 color:@color;
+}
+@media (max-width:360px){
+
+
+.navbar-default {
+				&:before{
+						display:none;
+				}
+}
+}
+div.container>div.content
+{
+	
+    z-index: 3;
+   margin-top: 70px;
+
 }
