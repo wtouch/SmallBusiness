@@ -126,6 +126,21 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				
+				/* ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" */
+				
+				
+				totalCalculate : function(modalOptions){
+					modalOptions.subTotal = 0;
+					modalOptions.total_amount = 0;
+					modalOptions.tax = {service_tax:0,other_tax:0,tds:0};
+					for(var x in modalOptions.addBill.singleparticular){
+						modalOptions.tax = dataService.calculateTax(modalOptions.singleparticular.particulars[x].tax, modalOptions.singleparticular.singleparticular[x].amount,modalOptions.tax);
+						modalOptions.subTotal += modalOptions.singleparticular.particulars[x].amount;
+						modalOptions.singleparticular.total_amount =   modalOptions.singleparticular.price + modalOptions.singleparticular.quantity;
+					}
+					return modalOptions;
+				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){

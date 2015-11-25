@@ -81,7 +81,7 @@
 							</span> 
 						</td>
 						<td>
-							<input type="text" class="form-control" id="price" name="price" ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-model="modalOptions.singleparticular.price"   ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+							<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"   ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
 							
 							<span class="help-block" ng-show="addbillForm.price.$dirty && addbillForm.price.$invalid">
 							
@@ -91,7 +91,6 @@
 						</td>	
 						<td>
 							<input type="number" class="form-control" id="quantity"   name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/"  
-							ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
 							required />
 							<span class="help-block" ng-show="addbillForm.quantity.$dirty && addbillForm.quantity.$invalid">
 								<span ng-show="addbillForm.quantity.$error.required" class="text-danger">Quantity Required</span>
@@ -99,7 +98,7 @@
 							</span>
 						</td>
 						<td>
-							<input type="text" class="form-control" id="total_amount" name="total_amount" ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" ng-model="modalOptions.singleparticular.total_amount"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+							<input type="text" class="form-control" id="total_amount" name="total_amount" ng-click="modalOptions.totalCalculate(modalOptions)"ng-model="modalOptions.singleparticular.total_amount"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
 							<span class="help-block" ng-show="addbillForm.total_amount.$dirty && addbillForm.total_amount.$invalid">
 								<span ng-show="addbillForm.total_amount.$error.required" class="text-danger">Total Amount Required.</span>
 								<span ng-show="addbillForm.total_amount.$error.pattern" class="text-danger">Enter numbers only</span>
