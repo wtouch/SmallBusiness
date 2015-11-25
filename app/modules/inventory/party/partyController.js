@@ -37,23 +37,38 @@ define(['app'], function (app) {
                 },
 				
 				
-				{ name:'email',	
-					enableSorting: false,
-					enableFiltering: false,
-				},
+			/* 	{
+				    name:'email',
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\')" ng-model="email" placeholder="search">',
+                }, */
+				   {
+				    name:'email',
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\')" ng-model="email" placeholder="search">',
+                },
+				
 			   {
 				    name:'address',
 					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\')" ng-model="address" placeholder="search">',
                 },
 				
+				
 				{
 				    name:'city',
-					filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\')" ng-model="city" placeholder="search">',
+				     filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\')" ng-model="city" placeholder="search">', 
                 },
 				
 				{
 				    name:'type',
-					filterHeaderTemplate: '<input id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'party\', \'party\')" ng-model="type" placeholder="search">',
+					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'party\', \'party\')" ng-model="type">'
+							+'<option value="" selected>Type</option>' 
+							+'<option value="0">Client</option>'
+							+'<option value="1">Vender</option>	'
+							+'<option value="1">Employee</option>	'
+						+'</select>', 
+				 filter: {
+					   type: uiGridConstants.filter.SELECT,  
+					  selectOptions: [ { value: 'Client', label: 'Client' }, { value: 'Vender', label: 'Vender'},{ value: 'Employee', label: 'Employee' }]
+					} 
                 },
 				{ name:'designation',
 					enableSorting: false,
