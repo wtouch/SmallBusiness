@@ -1,6 +1,6 @@
-<header class="navbar navbar-default">
+<header class="navbar navbar-default ">
 <div class="container">
-<div class="row">
+<div class="row ">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" ng-click="collapse = !collapse" ng-init="collapse = false">
 				<span class="sr-only">Toggle navigation</span>
@@ -9,7 +9,7 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="/">
-				<img id="brand" width="200px" src="img/logo.png" class="img-responsive">
+				<img id="brand" class="logo" width="200px" src="img/logo.png" class="img-responsive">
 			</a>
 		</div>
 		
@@ -53,8 +53,7 @@
 <div class="row ">
 	<div class="col-md-12 ">
 		<div class="dashboard">
-		
-					<h2 class="text-center">{{appConfig.subTitle}}</h2>
+			<h2 class="text-center">{{appConfig.subTitle}}</h2>
 		</div>
 	</div>
 </div>	
@@ -62,3 +61,12 @@
 </div>
 				
 </header>
+<script>
+$(document).on("scroll", function () {
+	if ($(document).scrollTop() > 200) {
+		$("header").addClass("small");
+	} else {
+		$("header").removeClass("small");
+	}
+});
+</script>
