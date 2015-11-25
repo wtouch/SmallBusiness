@@ -5,12 +5,12 @@
 		<h3 class="text-center" ng-if="modalOptions.account.id">Update Account</h3>
 	</div>
 	<div class="modal-body">
-		<form name="addAccountForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addAccountForm.$valid">
+		<form name="addAccountForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addAccountForm.$valid">{{modalOptions.account}}
 				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList', params, modalOptions)">
-					<label for="user_id" class="col-sm-2 control-label"> User id * </label>
+					<label for="party_id" class="col-sm-2 control-label"> Party id * </label>
 					<div class="col-sm-9">
-						<select id="user_id" class="form-control" ng-model="modalOptions.account.user_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
-							<option value="">Select User</option>
+						<select id="party_id" class="form-control" ng-model="modalOptions.account.party_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
+							<option value="">Select Party</option>
 						</select>
 						<!-- <span class="help-block" ng-show="addAccountForm.user_id.$dirty && addAccountForm.user_id.$invalid">
 						<span ng-show="addAccountForm.user_id.$error.required" class="text-danger">user id is required.</span>
@@ -20,6 +20,9 @@
 						</span>
 					</div>
 				</div> 
+				
+				<input type="hidden" class="form-control" ng-model="modalOptions.account.user_id" ng-init="modalOptions.account.user_id = userDetails.id" readonly/>
+								
 				<div class="form-group">
 					<label for="category" class="col-sm-2 control-label">Account Category * </label>
 					<div class="col-sm-9">
