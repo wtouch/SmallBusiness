@@ -542,9 +542,9 @@
   border: 6px solid #ffffff;
   background-color: #ec3a05;
   padding: 5px;
-  left: 10px;
-  left: 0;
-  border-radius: 0 50% 50% 0;
+  right: 0;
+  text-align: center;
+  border-radius: 50% 0 0 50% ;
 }
 .homeproject .projectnav .nav-stacked > li + li {
   margin-top: 10px;
@@ -552,7 +552,8 @@
 .homeproject .projectnav .nav-stacked > li > a,
 .homeproject .projectnav .nav-stacked > li > a:focus {
   color: #ffffff;
-  padding: 15px 20px;
+  padding: 15px 0px;
+  padding-left: 10px;
   font: bold 13px/1.5em Arial, Helvetica, sans-serif;
   text-transform: uppercase;
 }
@@ -566,25 +567,27 @@
   text-decoration: none;
   background: linear-gradient(to left, #f98153, #ffffff);
   color: #ec3a05;
-  transform: translateX(-80px);
-  width: 340px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  padding-right: 50px;
+  width: 300px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding-left: 20px;
   border: 1px solid #ec3a05;
+  text-align: center;
+}
+.homeproject .projectnav .nav-stacked > li:hover {
+  transform: translateX(50px);
 }
 .homeproject .projsnap {
   background-color: #ec3a05;
   border: 6px solid #ffffff;
-  border-radius: 50% 0 0 50%;
-  right: 0;
-  padding-left: 90px !important;
+  border-radius: 0% 50% 50% 0%;
+  left: 0;
   padding-top: 12px !important;
   padding-right: 10px !important;
-  text-align: center;
+  text-align: left;
 }
 .homeproject .projsnap p {
-  padding: 14px;
+  padding: 10px;
   margin: 10px;
 }
 .homeproject .projsnap p:last-child {
@@ -889,6 +892,7 @@ html {
   float: none;
 }
 .navbar-default .navbar-nav > li {
+  border-right: 2px solid #ffffff;
   margin-bottom: 0px;
   position: relative;
 }
@@ -898,7 +902,7 @@ html {
   font: bold 15px/1em Arial, Helvetica, sans-serif;
   position: relative;
   text-transform: uppercase;
-  border-right: 2px solid #ffffff;
+  border: 1px solid transparent;
 }
 .navbar-default .navbar-nav > li.active > a,
 .navbar-default .navbar-nav > li.active:hover > a,
@@ -909,7 +913,7 @@ html {
   color: #ec3a05;
   padding: 22px 15px;
   margin-top: -12px;
-  border: none;
+  border: 1px solid #ec3a05;
 }
 .navbar-default .navbar-nav > li > ul {
   display: none;
@@ -929,13 +933,13 @@ html {
 .navbar-default .navbar-nav > li > ul > li > a {
   color: #ffffff;
 }
-.navbar-default .navbar-nav > li > ul > li > a:hover {
-  color: #ec3a05;
-}
 .navbar-default .navbar-nav > li > ul > li:hover {
   background: linear-gradient(to left, #f98153, #ffffff);
   -webkit-transition: all 0.4s;
   border: none;
+}
+.navbar-default .navbar-nav > li > ul > li:hover a {
+  color: #ec3a05;
 }
 .navbar-default .navbar-nav > li > ul > li ul {
   background-image: -webkit-linear-gradient(#ec3a05, #f98153);

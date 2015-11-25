@@ -28,10 +28,9 @@
 				.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
 					color : {{data.template_params.background_color_dark}};
 				}
-				.projimg img:hover,.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover{
-					border-color : {{data.template_params.background_color}};
+				.projimg img:hover,.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus,  : {{data.template_params.background_color}};
 				}
-				.block-menu .child-menu > ul > li > a,.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus, .nav-pills, .projlist .project .thumbnail .readmore a, .project .navbar	 ul.nav.navbar-nav, .featrtesti img, .navbar-toggle .icon-bar, button.navbar-toggle.projdtls,.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover, .content-box > h1 ,  .contentModule > h3,.block-menu,  .homeproject .projectnav,.homeproject .projsnap, .btn,.btn-info[disabled]{
+				.block-menu .child-menu > ul > li > a,.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus, .nav-pills, .projlist .project .thumbnail .readmore a, .project .navbar	 ul.nav.navbar-nav, .featrtesti img, .navbar-toggle .icon-bar, button.navbar-toggle.projdtls,.content-box > h1 ,  .contentModule > h3,.block-menu,  .homeproject .projectnav,.homeproject .projsnap, .btn,.btn-info[disabled]{
 					background-color : {{data.template_params.background_color}};
 				}
 			</style>
@@ -78,9 +77,9 @@
 						{% endif %}
 					</div>
 					<div class="col-xs-12 col-sm-4 text-right cntdtl">	
-						<p><strong>Mobile :</strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
+						<p><strong>Mobile: </strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
 						<p>
-						<p><strong>E-mail ID :</strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
+						<p><strong>E-mail ID: </strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
 						<p>
 					</div>
 				</div>
@@ -99,8 +98,8 @@
 						</button>
 						
 					</div>
-					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-						<ul class="nav menu navbar-nav">
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav menu navbar-nav nav-justified">
 							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 						</ul>
 					</div>
