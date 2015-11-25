@@ -47,8 +47,12 @@ define(['app'], function (app) {
 					  placeholder: 'Account Name'
 					}
 				},
-				{ name:'generated_date', enableFiltering: false,enableSorting: false},
-				{ name:'due_date', enableFiltering: false,enableSorting: false},
+				{ name:'generated_date', enableSorting: false,
+				filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\')" ng-model="generated_date" placeholder="Date">',
+				},
+				{ name:'due_date', enableSorting: false,
+				filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'invoice\', \'invoiceList\')" ng-model="due_date" placeholder="Date">',
+					},
 				{ name:'status',
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'invoice\', \'invoiceList\')" ng-model="status">'
 							+'<option value="" selected>Status</option>'
@@ -61,7 +65,8 @@ define(['app'], function (app) {
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} 
 				},
-				{ name:'amount',enableSorting: false , enableFiltering: false, cellTemplate : "<span>{{row.entity.particulars[0].amount}}</span>"},
+				{ name:'amount',enableSorting: false , 
+				cellTemplate : "<span>{{row.entity.particulars[0].amount}}</span>"},
 				{ name:'price',enableSorting: false , enableFiltering: false, cellTemplate : "<span>{{row.entity.particulars[0].price}}</span>"},
 				{ name:'Manage', enableSorting: false, enableFiltering: false, 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'

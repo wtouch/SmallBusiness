@@ -11,7 +11,7 @@
 				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="user_id" class="col-sm-2 control-label"> User Name * </label>
 					<div class="col-sm-4">
-						<select id="user_id" class="form-control" ng-model="user_id" ng-options="item.id as item.name for item in modalOptions.partyList">
+						<select id="user_id" class="form-control" ng-model="user_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}">
 							<option value="">Select Party</option>
 						</select>
 						<span class="help-block" ng-show="addInvoiceForm.user_id.$dirty && addInvoiceForm.user_id.$invalid">
