@@ -53,16 +53,30 @@
 				<span class="icon-bar"></span>
 			</button>
 		</div>
-		<div class="container">
-			<div class="col-xs-12">
-				{% if data.website_config.website_logo %}
-				<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
-				{% else %}
-				
-				<img class="logo" src="{{data.business_logo.file_relative_path}}">
-				{% endif %}
+		<header>
+			<div class="container">	
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 weblogo">
+						{% if data.website_config.website_logo %}
+							<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-4 text-center">
+						{% if data.website_config.website_logo1 %}
+							<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
+						{% else %}
+							<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-4 text-right cntdtl">	
+						<p><strong>Mobile :</strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
+						<p>
+						<p><strong>E-mail ID :</strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
+						<p>
+					</div>
+				</div>
 			</div>
-		</div>
+		</header>
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -74,13 +88,13 @@
 				</div><!-- /.navbar-collapse -->
 			</div>
 		</nav>
-		<div class="content container">
+		<div class="container">
 			{%if modules.headerModule.homeproject %}
 			{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
 			{%endif%}
 			<div class="row">
 				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-push-4 col-md-push-3 col-xs-12 col-sm-8 col-md-9' : 'col-xs-12 col-sm-12 col-md-12' }}">
-					{% include contentPath %}
+					<div class="content ">{% include contentPath %}</div>
 					{%if modules.contentModule.featured_properties %}
 						{% include [templatePath ~ '/includes/home_properties.html', 'default/default/includes/home_properties.html'] %}
 						

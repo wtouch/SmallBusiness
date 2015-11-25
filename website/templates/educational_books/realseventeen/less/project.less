@@ -95,98 +95,63 @@
 	.projectCarousal::after{
 		position : absolute;
 		content : "";
-		background-image : url('../img/home.png');
+		background-image : url('../img/Authorized.png');
 		background-size: 100% 100%;
-		right :200px;
-		bottom : -2px;
+		left : -36px;
+		bottom : -14px;
 		z-index: 999;
-		height : 290px;
-		width : 120px;
+		height : 200px;
+		width : 200px;
 	}
 	.projectnav, .projsnap {
 		position: absolute;
-		//background-color: rgba(0, 125, 0, 0.58);
 		height: 380px;
 		width: 300px;
 		top: 28px;
-		border-radius: 50%;
 		z-index:9;
+		background-color:@darkbackcolor;
+		border: 6px solid #ffffff;
 		box-sizing: border-box;
-		border: 5px solid #ffffff;
-		p{
-			color:@colorwhite;
-		}
 	}
 	.projectnav{
-		//background: linear-gradient(to left,@lightbackcolor, @colorwhite);
-		border:6px solid @colorwhite;
-		background-color:@darkbackcolor;
-		padding: 5px;
+		padding: 20px 10px 20px 5px;
 		right: 0;
-		margin: 10px;
 		border-radius: 50% 0 0 50%;
 		.nav-stacked{
 			>li{
-				+li {
-					margin-top: 10px;
+				& + li {
+					margin-top: 15px;
 				}
 				>a, > a:focus{
 					color : @colorwhite;
-					padding: 15px 85px;
+					text-align : right;
 					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
 					text-transform : uppercase;
+					border:1px solid transparent;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
 					text-decoration : none;
-						background: linear-gradient(@color, @darkcolor);
+					background: linear-gradient(@color, @darkcolor);
 					color : @colorwhite;
 					transform: translateX(53px);
 					width: 340px;
-					    border: 2px solid #196619;
-						border-top-right-radius: 20px;
-						border-bottom-right-radius: 20px;
-						padding-right: 50px;
-						text-align: right;
+					border: 2px solid #196619;
+					border-top-right-radius: 20px;
+					border-bottom-right-radius: 20px;
+					padding-right: 50px;
+					text-align: right;
 					border:1px solid @darkbackcolor;
 				}
 			}
 		}
 	}
 	.projsnap{
-	//background: linear-gradient(to left,@lightbackcolor, @colorwhite);
-	background-color:@darkbackcolor;
-	border:6px solid @colorwhite;
-	border-radius:   0% 50% 50% 0% ;
+		border-radius:   0% 50% 50% 0% ;
+		padding: 25px 70px 10px 25px;
 		p{
-			padding:14px;
-			margin:10px;
-			&:last-child{
-				border:none;
-			}
-		}
-		
-		left : 0;
-		padding-top: 12px !important;
-		padding-right: 10px !important;
-	
-		text-align : center;
-		img{
-			height : 110px;
-			margin-top: 10px;
-			margin-bottom: 10px;
-			border : 2px solid @lightcolor;
-			border-radius : 5px;
-			padding :4px;
-		}
-		.viewproperty{
-			a{
-				color : @colorwhite;
-				text-decoration : underline;
-				&:hover{
-					color : @colorwhite;
-					text-decoration : none;
-				}
-			}
+			margin-bottom: 25px;
+			color:@colorwhite;
+			font: 15px/1.5em Arial, Helvetica, sans-serif;
 		}
 	}
 	#carousel {

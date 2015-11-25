@@ -36,11 +36,11 @@
 	@import "general.less";
 	
 	body{
-		background-color :@lightbackcolor;
 		color:@back;
-		/*background-image:-webkit-linear-gradient(@lightbackcolor 50%);*/
-		/*background-image:-moz-linear-gradient(@lightbackcolor 50%);*/
-		/*background-image:linear-gradient(@lightbackcolor 50%);*/
+		background-image: url('../img/bg.jpg');
+		background-repeat : no-repeat;
+		background-attachment : fixed;
+		background-size : 100%;
 	}
 	.container{
 		max-width:992px !important;
@@ -88,11 +88,13 @@
 			}
 		}
 	}
-	header
-	{
-		background-color : @back;
+	.content{
+		padding : 1px 20px 20px 20px;
+		margin-top : 20px;
+		border-radius : 5px;
+		border: 1px solid @darkcolor;
 	}
-	.content
+	.content, .sections, .panel-default
 	{
 		background-color :@lightbackcolor;
 	}
@@ -100,12 +102,19 @@
 	*, hr{
 		border-color : @back;
 	}
-	
-	.logo {
-		height: 80px;
-		margin-top: 5px;
-		max-width: 100%;
+	header{
+		background : @lightbackcolor;
+		.logo {
+			max-height: 100px;
+		}
+		.cntdtl{
+			padding-top : 10px;
+		}
+		.weblogo, .cntdtl{
+			margin-top : 15px;
+		}
 	}
+	
 	
 	.btn-info, .btn-info[disabled],.btn-primary,.btn-info:focus{
 		background-color: @back;
@@ -113,7 +122,6 @@
 	.btn-info:hover, .btn-info[disabled]:hover,.btn-primary:hover{
 			background: linear-gradient(@color, @darkcolor);
 	}
-	
 	a
 	{
 		color:@back;
@@ -138,11 +146,6 @@
 			color :@colorwhite;
 			font-weight: bold;
 		}
-	}
-	.cnctinfo{
-		color:@color;
-		font-weight : bold;
-		margin: 40px 15px 40px 0;
 	}
 	.navbar-collapse{
 		padding :0px;
@@ -192,7 +195,7 @@
 					padding: 15px;
 					list-style: none;
 					text-align: left;
-					top : 40px;
+					top : 55px;
 					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					>li{
@@ -242,16 +245,12 @@
 		font-size:18px;
 		font-weight:bold;
 		border:1px solid @darkcolor;
-		/*box-shadow:2px 2px 2px @lightcolor;*/
 		text-align: center;
-		background-color :none;
-		/*background: -webkit-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
-		/*background: -moz-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
-		/*background: linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
+		background: linear-gradient(@color, @darkcolor);
 		border-radius: 7px;
 		padding: 4px 10px;
 		position: relative;
-		color: @back;
+		color: @colorwhite;
 	}
 	
 	h1{
@@ -271,9 +270,7 @@
 	}
 	h2,h5{
 		font: 2em/1.2em Amaranth-Regular;
-		
 	}
-	
 	h4{
 		padding-bottom: 8px;
 		font: 1.5em/1.2em Amaranth-Regular;
@@ -305,6 +302,7 @@
 		}
 		.services{
 			border : none;
+			background : transparent;
 		}
 	}
 	hr{
@@ -325,6 +323,9 @@
 	}
 	.searchProperty,.sections,.enquiry .panel-default,.searchProp .panel-default, .form-control{
 		border : 1px solid @darkcolor;
+	}
+	.form-control{
+		background : transparent;
 	}
 	.thumbnail{
 		border-color : @darkbackcolor;
