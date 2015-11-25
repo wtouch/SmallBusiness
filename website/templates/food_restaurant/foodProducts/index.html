@@ -80,24 +80,31 @@
 		{% endif %} -->
 	</head>
 	<body>
-	 <div class="container-fluid back">
+	<div>
+							{% if data.website_config.website_logo %}
+								<img class="logo1 log" src="{{data.business_logo.file_relative_path}}">
+							{% else %}
+								<img class="logo1 log" src="{{data.business_logo.file_relative_path}}">
+							{% endif %}
+						</div>
+	 <div class="container-fluid back anim">
 		<header>
 			<div class="container">
 				<div class="row">
-					<div class="col-md-2">
-						<div class="logo">
+					<div class="col-md-2 col-sm-6 col-xs-4">
+						<div>
 							{% if data.website_config.website_logo %}
-								<img class="logo" src="{{data.business_logo.file_relative_path}}">
+								<img class="logo log" src="{{data.business_logo.file_relative_path}}">
 							{% else %}
-								<img class="logo" src="{{data.business_logo.file_relative_path}}">
+								<img class="logo log" src="{{data.business_logo.file_relative_path}}">
 							{% endif %}
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4 col-sm-6 col-xs-8">
 						 <h2>{{data.business_name}}</h2>
 					</div>
 				
-					<div class="col-md-6 social_link">
+					<div class="col-md-6 col-xs-12 col-sm-12 social_link">
 						        {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 					</div>
 				</div>
@@ -137,7 +144,7 @@
 			</div>
 		</div>
 		</div>
-		 <div class="container-fluid sback">
+		 <div class="container-fluid sback anim">
 			 <div class="container">
 				<div class="row">
 					

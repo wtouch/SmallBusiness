@@ -166,6 +166,31 @@ $(document).ready(function(){
         $('.b').removeClass("navbar-fixed-top").addClass('navbar-static-top');
     }
 	});	
+	
+	// This is for Cookie
+	function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1);
+			if (c.indexOf(name) == 0) return true;
+		}
+		return false;
+	}
+	var cookieExpiry = new Date();
+	cookieExpiry.setMinutes(cookieExpiry.getMinutes() + 30);
+	var cookieTime = cookieExpiry.toUTCString();
+	if(getCookie('anim') == false){
+		document.cookie="anim=true; expires=" + cookieTime;
+	}else{
+		
+		$(".logo").removeClass("logo");
+		$(".logo1").addClass("log1");
+		$(".logo1").removeClass("logo1");
+		$(".anim").removeClass("anim");
+		console.log(getCookie('anim'));
+	}
 	});
 	
 	
