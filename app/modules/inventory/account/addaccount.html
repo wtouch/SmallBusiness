@@ -9,7 +9,7 @@
 				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList', params, modalOptions)">
 					<label for="party_id" class="col-sm-2 control-label"> Party id * </label>
 					<div class="col-sm-9">
-						<select id="party_id" class="form-control" ng-model="modalOptions.account.party_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
+						<select id="party_id" class="form-control" ng-model="modalOptions.account.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter: { type : 'client'}" required>
 							<option value="">Select Party</option>
 						</select>
 						<!-- <span class="help-block" ng-show="addAccountForm.user_id.$dirty && addAccountForm.user_id.$invalid">
