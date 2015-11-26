@@ -2,50 +2,13 @@
 	<ng-include src="'modules/component/toolbar.html'"></ng-include>
 		<div class="row">
 			<div class="col-md-12">
-				<div class="row bottomspace">
-					<div class="col-sm-3">
-						<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="filter('name', searchUser, 'user', 'userList', true)" ng-model="searchUser" placeholder="Search">
-						<input id="search" type="text" class="form-control" ng-if="userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUserGroup)" ng-model="searchUserGroup" placeholder="Search">
-					</div>
-					
-					<div class="col-sm-9 text-right">
-						<a href="#/dashboard/users" class="btn btn-default">Party List</a>
-						<a class="btn btn-default" ng-click="openModal('modules/users/manageuser/adduser.html')">Add New Party</a>
-					</div>
-				</div>
+				<ng-include src="'modules/users/manageuser/usertoolbar.html'"></ng-include>
 			</div>
-		
-	  <!--   <div class="col-sm-2">
-			<div class="bottomspace">
-				<label for="filterbycustomerid" class="control-label">Filter By Party</label>
-					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="usersList(usersListCurrentPage,'user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
-						<option value="">Select Party</option>
-					</select>
-			</div> 
-		</div>  -->
-		<div class="col-sm-2">
-			<div class="bottomspace">
-				<label for="partyList_status" class="control-label" >partyList Status</label>
-				<select id="partyList_status" class="form-control" ng-change="getData(false, currentPage,'inventory_party', 'manageuser', params)" ng-model="pageItems">
-					
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-				</select>
-			</div>
-		</div>
-	</div>
-	
-	
-	<div class="table-responsive" ng-init="getData(false, currentPage, 'inventory_party','manageuser',params);">
-		<div ui-grid="manageuser"></div>
-	</div>
-	
-	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'inventory_party','manageuser',params)"></pagination>
-		<pre>Page: {{currentPage}} / {{numPages}}</pre>
-	</div>	
-
+			<div class="col-md-12">	
+				<ng-include ng-if="userViews=='userslist'" src="'modules/users/manageuser/userslist.html'"></ng-include>
+				<ng-include ng-if="userViews=='usersgroup'" src="'modules/users/manageuser/usersgroup.html'"></ng-include>
+				<ng-include ng-if="userViews=='adduser'" src="'modules/users/manageuser/adduser.html'"></ng-include>
+				<ng-include ng-if="userViews=='createusergroup'" src="'modules/users/manageuser/createusergroup.html'"></ng-include>
 			</div>
 		</div>
 </div>

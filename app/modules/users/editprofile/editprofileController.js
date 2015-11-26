@@ -1,4 +1,3 @@
-
 'use strict';
 
 define(['app'], function (app) {
@@ -6,7 +5,7 @@ define(['app'], function (app) {
 	
 	var editprofileController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,upload,$notification) {
 		$scope.userInfo = {user_id : $rootScope.userDetails.id};
-		$scope.path = "user/profile/"+$scope.userInfo.user_id; // path to store images on server
+		$scope.path = "/profile"; // path to store images on server
 		$scope.formats = ['yyyy/MM/dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		
@@ -31,9 +30,6 @@ define(['app'], function (app) {
 			upload.generateThumbs(files);
 		};
 		
-		$scope.removeImg = function(item, imgObject) {
-			imgObject.splice(item, 1);     
-		},
 		$scope.getData = function(location){
 			$scope.readOnly = true;
 			$scope.editprofile.address.location = location.location;
@@ -57,6 +53,7 @@ define(['app'], function (app) {
 			$scope.editprofile = dataService.parse(response.data);
 			if($scope.editprofile.user_img == (undefined)) $scope.editprofile.user_img = "";
 		});
+		
 		
 		//Upload Function for uploading files 
 		$scope.upload = function(files,path,userInfo,picArr){ // this function for uploading files
