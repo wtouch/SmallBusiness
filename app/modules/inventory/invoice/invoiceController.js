@@ -105,15 +105,18 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							console.log(input);
 							$scope.stockData = {};
-							$scope.stockData.user_id = input.id;
-							//$scope.stockData.goods_type = input.goods_type;
-							//$scope.stockData.category = input.category;
-							$scope.stockData.goods_name = input.particular[0].particular_name;
-							$scope.stockData.quantity = input.particular[0].quantity;
-							$scope.stockData.price = "-" + input.particular[0].price;
+							$scope.stockData.user_id = input.user_id;
+							$scope.stockData.goods_name = input.particulars[0].particular_name;
+							$scope.stockData.quantity = input.particulars[0].quantity;
+							$scope.stockData.price = "-" + input.particulars[0].price;
+							$scope.stockData.goods_type = input.particulars[0].goods_type;
+							$scope.stockData.category = input.particulars[0].category;
 							console.log($scope.stockData);
+							
 							$rootScope.postData("stock", $scope.stockData,function(response){
+								
 							});
 						$scope.getData(false, $scope.currentPage, 'invoice','invoiceList');
 						}

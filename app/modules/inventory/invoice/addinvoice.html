@@ -13,6 +13,8 @@
 					<div class="col-sm-4">
 						<select id="party_id" class="form-control" ng-model="party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}">
 							<option value="">Select Party</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
 						</select>
 						<span class="help-block" ng-show="addInvoiceForm.party_id.$dirty && addInvoiceForm.party_id.$invalid">
 						<span ng-show="addInvoiceForm.party_id.$error.required" class="text-danger">user name is required.</span>
@@ -82,24 +84,37 @@
 								
 							</td>
 							<td>
-								
-								<input type="text" class="form-control " placeholder="type" id="type" name="particular_name" ng-model="modalOptions.addinvoice.type" required/>
-								
-								<span class="help-block" ng-show="addInvoiceForm.type.$dirty && addInvoiceForm.type.$invalid">
-								<span ng-show="addInvoiceForm.type.$error.required" class="text-danger">particular_name Required.</span>
-								</span>
-								
-							</td>
-							<td>
-								
-								<input type="text" class="form-control " placeholder="Category" id="category" name="category" ng-model="modalOptions.addinvoice.category" required/>
-								
-								<span class="help-block" ng-show="addInvoiceForm.category.$dirty && addInvoiceForm.category.$invalid">
-								<span ng-show="addInvoiceForm.category.$error.required" class="text-danger">Category Required.</span>
-								</span>
-								
-							</td>
+							<div class="form-group">
+								<label for="goods_type" class="col-sm-2 control-label">Type</label>
 							
+									<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type" required>
+										<option value="" selected>Select Type</option>
+										<option value="type1" >Type1</option>
+										<option value="type2">Type2</option>
+										<option value="type3">Type3</option>
+										<option value="type4">Type4</option>
+									</select>
+									<span class="help-block" ng-show="addInvoiceForm.goods_type.$dirty && addInvoiceForm.goods_type.$invalid">
+										<span ng-show="addInvoiceForm.goods_type.$error.required" class="text-danger">Required field.</span>
+									</span>	
+							</div> 
+						</td>
+						<td>
+							<div class="form-group">
+								<label for="category" class="col-sm-2 control-label">Category</label>
+									
+										<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
+										<option value="" selected>Select Category</option>
+										<option value="category1">Category1</option>
+										<option value="category2">Category2</option>
+										<option value="category3">Category3</option>
+										<option value="category4">Category4</option>
+										</select>
+										<span class="help-block" ng-show="addInvoiceForm.category.$dirty && addInvoiceForm.category.$invalid">
+											<span ng-show="addInvoiceForm.category.$error.required" class="text-danger">Required field.</span>
+										</span>	
+								</div>
+						</td>
 							<td>
 								<input type="text" class="form-control " placeholder="price" id="price" name="price" ng-model="modalOptions.singleparticular.price"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
 								<span class="help-block" ng-show="addInvoiceForm.price.$dirty && addInvoiceForm.price.$invalid">
