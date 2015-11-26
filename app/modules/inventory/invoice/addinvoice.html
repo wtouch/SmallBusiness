@@ -11,7 +11,7 @@
 				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="party_id" class="col-sm-2 control-label"> Select Party * </label>
 					<div class="col-sm-4">
-						<select id="party_id" class="form-control" ng-model="party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}">
+						<select id="party_id" class="form-control" ng-model="modalOptions.addinvoice.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}">
 							<option value="">Select Party</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -57,7 +57,7 @@
 	<div class="col-sm-12" ng-init="modalOptions.addinvoice.particulars = (modalOptions.addinvoice.particulars) ? modalOptions.addinvoice.particulars : []">
 		<form name="addInvoiceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addInvoiceForm.$valid" id="addInvoiceForm">
 		
-			<div class="table-responsive" >
+			<div class="table-responsive" ng-if="modalOptions.addinvoice.party_id">
 				<table class="table table-bordered" >
 					<thead>
 						<tr>
@@ -186,7 +186,7 @@
 	</div>
 </div>
 	<br>
-		<div class="table-responsive" >
+		<div class="table-responsive" ng-if="modalOptions.addinvoice.party_id">
 				<table class="table table-bordered">
 					<thead>
 						<tr>
