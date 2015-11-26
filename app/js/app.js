@@ -220,8 +220,8 @@ define(['angular',
 							}
 							$rootScope.setRoutes(routes, true);
 						})
+						$rootScope.setRoutes(value.routes, true);
 					})
-					//$rootScope.setRoutes(routes, true);
 				}
 				if($rootScope.userDetails.group_id == 4){
 					if($rootScope.userDetails.config.addbusiness === undefined){
@@ -283,5 +283,11 @@ define(['angular',
 		
 		//(userDetails.config.chooseTemplate=='true')
 	}]);
+	
+	// Write custome code
+	$(document).ready(function(){
+		console.log("custom js");
+	})
 	return app;
 });
+

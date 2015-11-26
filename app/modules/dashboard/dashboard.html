@@ -143,8 +143,28 @@
 						</div>
 					</div>
 				</div>
-				
-		</div>
+			</div>
+			<h3>My Apps</h3>
+			<div class="row">
+				<div ng-repeat="x in userDetails.config.modules">
+					<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12" ng-repeat="y in x.routes">
+						<div class="gridblock">
+							<div class="row">
+								<div class="col-md-4"> 
+									<img class="dashimg" ng-src="{{y.moduleIcon}}">
+								</div>
+								<div class="title col-md-8"> 
+									<h4>{{y.title}}</h4>
+									<div class="desc">{{y.description}}</div> 
+								</div>
+							</div>
+							<div class="row text-center">
+								<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/{{y.path}}">{{y.title}}</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<h3>Real Estate</h3>
 			<div class="row">
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
@@ -183,6 +203,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<h3>Bulk SMS</h3>
 			<div class="row">
 				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
@@ -203,24 +224,6 @@
 						</div>
 					</div>
 				</div>
-				
-				<!-- <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-					<div class="gridblock">
-						<h4>
-							<span tooltip="You can send SMS!" class="glyphicon glyphicon-info-sign"></span> SMS
-						</h4>
-						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/sms">SMS</a>
-					</div>
-				</div>
-				
-				 <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
-					<div class="gridblock">
-						<h4>
-							<span tooltip="You can add Contacts!" class="glyphicon glyphicon-info-sign"></span> Contacts
-						</h4>
-						<a class="btn btn-primary center-block" name="btn1" href="#/dashboard/contact">Contact</a>
-					</div>
-				</div>	 -->
 			</div>
 		</div>
 	</div>

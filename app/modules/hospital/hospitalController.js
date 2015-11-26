@@ -3,7 +3,7 @@
 define(['app'], function (app) {
     var injectParams = ['$scope', '$injector', 'dataService', '$rootScope', '$http'];
 	var inventoryController = function ($scope, $injector, dataService, $rootScope, $http) {
-			console.log("inventoryController");
+		
 			$http.get("modules/inventory/inventory.json").success(function(response){
 				$scope.dashboardList = response;
 			})
