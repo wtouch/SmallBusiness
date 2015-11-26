@@ -9,7 +9,9 @@
 			{% for x in featured_projects if break == 0 %}
 				<li>
 					<div class="projimg">
-						<img class="img-responsive center-block" src="{{x.project_images.0.file_relative_path}}" />
+						<a href="projects/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="head">
+							<img class="img-responsive center-block" src="{{x.project_images.0.file_relative_path}}" />
+						</a>
 					</div>
 					<div class="readmore">
 						<a href="projects/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="head"><h4>{{x.title}}</h4></a>

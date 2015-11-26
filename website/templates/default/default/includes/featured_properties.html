@@ -13,7 +13,9 @@
 						</div>
 						<div class="col-xs-12 col-sm-4 col-lg-4">
 							<div class="sliderImg">
-								<img src="{{x.property_images.0.file_relative_path}}" class="slimg"/>
+								<a href="properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}">
+									<img src="{{x.property_images.0.file_relative_path}}" class="slimg"/>
+								</a>
 								{% if x.verified %}
 									<span  tooltip="Business Verified" ><img src="{{path}}img/verify.png" class="verify"/></span>
 								{% endif %}
@@ -32,9 +34,9 @@
 										<td>{{x.type}}&nbsp;=> &nbsp;<b>{{x.property_for}}</td>
 									</tr>
 									{% endif %}
-									{% if x.buildup_area %}
+									{% if x.property_info.buildup_area %}
 									<tr>
-										<td>Built Up Area</td>
+										<td>Salable Area</td>
 										<td>:</td>
 										<td>{{x.property_info.buildup_area}}{{x.property_info.build_unit}}</td>					
 									</tr>

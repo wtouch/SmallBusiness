@@ -14,11 +14,15 @@
 	{% for key, x in properties %}
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<h4>{{x.title}}</h4>
+			<a href="/properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="head">
+				<h4>{{x.title}}</h4>
+			</a>
 			<div class="row">
 				<div class="col-xs-12 col-sm-5 col-lg-4">
 					<div class="sliderImg">
-						<img class="img-responsive" src="{{x.property_images.0.file_relative_path}}" alt="...">
+						<a href="/properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="head">
+							<img class="img-responsive" src="{{x.property_images.0.file_relative_path}}" alt="...">
+						</a>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-7 col-lg-8 sliderDesc">
@@ -31,9 +35,9 @@
 								<td>{{x.type}}&nbsp;=> &nbsp;<b>{{x.property_for}}</b></td>
 							</tr>
 							{% endif %}
-							{% if x.buildup_area %}
+							{% if x.property_info.buildup_area %}
 							<tr>
-								<td>Built Up Area</td>
+								<td>Salable Area</td>
 								<td>:</td>
 								<td>{{x.property_info.buildup_area}}{{x.property_info.build_unit}}</td>					
 							</tr>
