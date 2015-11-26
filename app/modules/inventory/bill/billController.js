@@ -150,7 +150,7 @@ define(['app'], function (app) {
 				totalCalculate : function(modalOptions){
 					modalOptions.subTotal = 0;
 					modalOptions.total_amount = 0;
-					modalOptions.tax = {service_tax:0,other_tax:0,tds:0};
+					//modalOptions.tax = {service_tax:0,other_tax:0,tds:0};
 					for(var x in modalOptions.addBill.singleparticular){
 						modalOptions.tax = dataService.calculateTax(modalOptions.singleparticular.particulars[x].tax, modalOptions.singleparticular.singleparticular[x].amount,modalOptions.tax);
 						modalOptions.subTotal += modalOptions.singleparticular.particulars[x].amount;
