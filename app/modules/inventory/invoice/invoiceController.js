@@ -62,12 +62,20 @@ define(['app'], function (app) {
 					filter: {
 					  //type: uiGridConstants.filter.SELECT,
 					 
-					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
+						options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} 
 				},
-				{ name:'amount',enableSorting: false , 
-				cellTemplate : "<span>{{row.entity.particulars[0].amount}}</span>"},
-				{ name:'price',enableSorting: false , enableFiltering: false, cellTemplate : "<span>{{row.entity.particulars[0].price}}</span>"},
+				{
+					name:'amount',
+					enableSorting: false, 
+					cellTemplate : "<span>{{row.entity.particulars[0].amount}}</span>"
+				},
+				{
+					name:'price',
+					enableSorting: false ,
+					enableFiltering: false,
+					cellTemplate : "<span>{{row.entity.particulars[0].price}}</span>"
+				},
 				{ name:'Manage', enableSorting: false, enableFiltering: false, 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
