@@ -90,7 +90,7 @@ define(['app'], function (app) {
 					
 					+ '<a type="button" tooltip="Delete bill" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/paybill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/payBill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
 							+
 					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/paybill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 							+
@@ -118,6 +118,13 @@ define(['app'], function (app) {
 					due_date : data.due_date,
 					remark:data.remark,
 					particular:data.particular
+				} : {
+					//date : dataService.sqlDateFormate()
+				},
+				payBill : (data) ? {
+			
+					pay_date:data.pay_date
+					
 				} : {
 					//date : dataService.sqlDateFormate()
 				},
