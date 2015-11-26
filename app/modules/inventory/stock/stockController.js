@@ -38,8 +38,8 @@ define(['app'], function (app) {
 				
 				}, */
 				{
-				    name:'user_id',
-					filterHeaderTemplate: '<input id="user_id" class="form-control" ng-change="grid.appScope.filter(\'user_id\', user_id, \'stock\', \'stockList\')" ng-model="user_id" placeholder="search user id">',
+				    name:'party_id',
+					filterHeaderTemplate: '<input id="party_id" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'stock\', \'stockList\')" ng-model="party_id" placeholder="search user id">',
                 },
 				/* { name:'goods_name',
 				filter: {
