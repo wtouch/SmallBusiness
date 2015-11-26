@@ -16,6 +16,7 @@
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	@background_img:url(../img/back.png);
+	@background_img1:url(../img/bg1.jpg);
 	//@import "property.less";
 	@import "project.less";
 	@import "product.less";
@@ -28,7 +29,9 @@
 	color:@darkbackcolor;
 	}
 	body{
-	background-image:@background_img;
+	background-image:@background_img1;
+	background-size:100% 100%;
+	background-repeat:no-repeat;
 	}
 	.container{
 		max-width : 992px !important;
@@ -77,8 +80,6 @@
 		0%{top:500px;left:300px;height:0px;width:0px;}
 		50%{top:300px;left:300px;height:250px;width:350px;transform:rotate(0deg);}
 		100%{transform:rotate(360deg);left:200px;top:0px;}
-		
-	
 	}
 	.title1
 	{
@@ -101,8 +102,6 @@
 		0%{top:400px;left:2000px;height:0px;width:0px;}
 		50%{top:400px;left:550px;height:250px;width:350px;transform:rotateY(360deg);}
 		100%{transform:rotateY(720deg);left:350px;top:20px;}
-		
-	
 	}
 		header{
 		h2{
@@ -468,6 +467,78 @@
         background-image:url('../img/logo.jpg');
 		float:left;
 		}
+		.anim
+	{
+		-webkit-animation-name: anim1;
+		-webkit-animation-duration:8s;
+	}
+	@-webkit-keyframes anim1
+	{
+		0%{opacity:0px;position:relative;top:1000px;}
+		50%{opacity:1px;position:relative;top:1000px;}
+		100%{position:relative;top:0px;}
+	}
+	.log
+	{
+		height:100px;
+		width:150px;
+        margin-top:15px;
+        background-image:url('../img/logo.jpg');
+		float:left;
+		position:absolute;
+		left:50px;
+		top:0px;
+		z-index:1;
+	}
+	.logo1
+	{
+		position:absolute;
+		left:50px;
+		top:0px;
+		z-index:1;
+		-webkit-animation-name: anim;
+		-webkit-animation-duration:6s;
+		}
+	@-webkit-keyframes anim
+	{
+		0%{top:400px;left:100px;height:0px;width:0px;}
+		50%{top:200px;left:50px;height:150px;width:150px;transform:rotate(0deg);}
+		100%{transform:rotate(360deg);left:50px;top:0px;}
+	}
+	.title1
+	{
+		position:absolute;
+		left:250px;
+		z-index:1;
+		top:20px;
+		h2{
+		font-size:20px;
+		}
+	}
+	.title
+	{
+		position:absolute;
+		left:150px;
+		z-index:1;
+		top:20px;
+		h2{
+		font-size:20px;
+		}
+		-webkit-animation-name: anim2;
+		-webkit-animation-duration:6s;
+		}
+	@-webkit-keyframes anim2
+	{
+		0%{top:300px;left:500px;height:0px;width:0px;}
+		50%{top:300px;left:180px;height:80px;width:350px;transform:rotateY(360deg);}
+		100%{transform:rotateY(720deg);left:150px;top:20px;}
+	}
+	.sociallinks{ 
+					ul {
+					margin-top: 150px;
+					float: left;
+				}
+			}
 		.infrastructure {
 			h2 {
 				color: #ffffff;
@@ -490,6 +561,78 @@
 	
 		@media (max-width: 720px){
 		
+	.anim
+	{
+		-webkit-animation-name: anim1;
+		-webkit-animation-duration:8s;
+	}
+	@-webkit-keyframes anim1
+	{
+		0%{opacity:0px;position:relative;top:1000px;}
+		50%{opacity:1px;position:relative;top:1000px;}
+		100%{position:relative;top:0px;}
+	}
+	.log
+	{
+		height:100px;
+		width:150px;
+        margin-top:15px;
+        background-image:url('../img/logo.jpg');
+		float:left;
+		position:absolute;
+		left:50px;
+		top:0px;
+		z-index:1;
+	}
+	.logo1
+	{
+		position:absolute;
+		left:50px;
+		top:0px;
+		z-index:1;
+		-webkit-animation-name: anim;
+		-webkit-animation-duration:6s;
+		}
+	@-webkit-keyframes anim
+	{
+		0%{top:400px;left:100px;height:0px;width:0px;}
+		50%{top:200px;left:50px;height:150px;width:150px;transform:rotate(0deg);}
+		100%{transform:rotate(360deg);left:50px;top:0px;}
+	}
+	.title1
+	{
+		position:absolute;
+		left:250px;
+		z-index:1;
+		top:20px;
+		h2{
+		font-size:20px;
+		}
+	}
+	.title
+	{
+		position:absolute;
+		left:150px;
+		z-index:1;
+		top:20px;
+		h2{
+		font-size:20px;
+		}
+		-webkit-animation-name: anim2;
+		-webkit-animation-duration:6s;
+		}
+	@-webkit-keyframes anim2
+	{
+		0%{top:300px;left:500px;height:0px;width:0px;}
+		50%{top:300px;left:180px;height:80px;width:350px;transform:rotateY(360deg);}
+		100%{transform:rotateY(720deg);left:150px;top:20px;}
+	}
+	.sociallinks{ 
+					ul {
+					margin-top: 150px;
+					float: left;
+				}
+			}
 		.infrastructure {
 			h2 {
 				color: #ffffff;
@@ -521,10 +664,5 @@
 				font-size: 20px;
 			}
 			}
-			.sociallinks{ 
-					ul {
-					margin-top: 50px;
-					float: left;
-				}
-			}
+			
 		}

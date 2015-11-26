@@ -708,7 +708,9 @@ p {
   color: #787878;
 }
 body {
-  background-image: url(../img/back.png);
+  background-image: url(../img/bg1.jpg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 .container {
   max-width: 992px !important;
@@ -1142,6 +1144,109 @@ h3 {
     background-image: url('../img/logo.jpg');
     float: left;
   }
+  .anim {
+    -webkit-animation-name: anim1;
+    -webkit-animation-duration: 8s;
+  }
+  @-webkit-keyframes anim1 {
+    0% {
+      opacity: 0px;
+      position: relative;
+      top: 1000px;
+    }
+    50% {
+      opacity: 1px;
+      position: relative;
+      top: 1000px;
+    }
+    100% {
+      position: relative;
+      top: 0px;
+    }
+  }
+  .log {
+    height: 100px;
+    width: 150px;
+    margin-top: 15px;
+    background-image: url('../img/logo.jpg');
+    float: left;
+    position: absolute;
+    left: 50px;
+    top: 0px;
+    z-index: 1;
+  }
+  .logo1 {
+    position: absolute;
+    left: 50px;
+    top: 0px;
+    z-index: 1;
+    -webkit-animation-name: anim;
+    -webkit-animation-duration: 6s;
+  }
+  @-webkit-keyframes anim {
+    0% {
+      top: 400px;
+      left: 100px;
+      height: 0px;
+      width: 0px;
+    }
+    50% {
+      top: 200px;
+      left: 50px;
+      height: 150px;
+      width: 150px;
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+      left: 50px;
+      top: 0px;
+    }
+  }
+  .title1 {
+    position: absolute;
+    left: 250px;
+    z-index: 1;
+    top: 20px;
+  }
+  .title1 h2 {
+    font-size: 20px;
+  }
+  .title {
+    position: absolute;
+    left: 150px;
+    z-index: 1;
+    top: 20px;
+    -webkit-animation-name: anim2;
+    -webkit-animation-duration: 6s;
+  }
+  .title h2 {
+    font-size: 20px;
+  }
+  @-webkit-keyframes anim2 {
+    0% {
+      top: 300px;
+      left: 500px;
+      height: 0px;
+      width: 0px;
+    }
+    50% {
+      top: 300px;
+      left: 180px;
+      height: 80px;
+      width: 350px;
+      transform: rotateY(360deg);
+    }
+    100% {
+      transform: rotateY(720deg);
+      left: 150px;
+      top: 20px;
+    }
+  }
+  .sociallinks ul {
+    margin-top: 150px;
+    float: left;
+  }
   .infrastructure h2 {
     color: #ffffff;
     font-size: 20px;
@@ -1158,6 +1263,109 @@ h3 {
   }
 }
 @media (max-width: 720px) {
+  .anim {
+    -webkit-animation-name: anim1;
+    -webkit-animation-duration: 8s;
+  }
+  @-webkit-keyframes anim1 {
+    0% {
+      opacity: 0px;
+      position: relative;
+      top: 1000px;
+    }
+    50% {
+      opacity: 1px;
+      position: relative;
+      top: 1000px;
+    }
+    100% {
+      position: relative;
+      top: 0px;
+    }
+  }
+  .log {
+    height: 100px;
+    width: 150px;
+    margin-top: 15px;
+    background-image: url('../img/logo.jpg');
+    float: left;
+    position: absolute;
+    left: 50px;
+    top: 0px;
+    z-index: 1;
+  }
+  .logo1 {
+    position: absolute;
+    left: 50px;
+    top: 0px;
+    z-index: 1;
+    -webkit-animation-name: anim;
+    -webkit-animation-duration: 6s;
+  }
+  @-webkit-keyframes anim {
+    0% {
+      top: 400px;
+      left: 100px;
+      height: 0px;
+      width: 0px;
+    }
+    50% {
+      top: 200px;
+      left: 50px;
+      height: 150px;
+      width: 150px;
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+      left: 50px;
+      top: 0px;
+    }
+  }
+  .title1 {
+    position: absolute;
+    left: 250px;
+    z-index: 1;
+    top: 20px;
+  }
+  .title1 h2 {
+    font-size: 20px;
+  }
+  .title {
+    position: absolute;
+    left: 150px;
+    z-index: 1;
+    top: 20px;
+    -webkit-animation-name: anim2;
+    -webkit-animation-duration: 6s;
+  }
+  .title h2 {
+    font-size: 20px;
+  }
+  @-webkit-keyframes anim2 {
+    0% {
+      top: 300px;
+      left: 500px;
+      height: 0px;
+      width: 0px;
+    }
+    50% {
+      top: 300px;
+      left: 180px;
+      height: 80px;
+      width: 350px;
+      transform: rotateY(360deg);
+    }
+    100% {
+      transform: rotateY(720deg);
+      left: 150px;
+      top: 20px;
+    }
+  }
+  .sociallinks ul {
+    margin-top: 150px;
+    float: left;
+  }
   .infrastructure h2 {
     color: #ffffff;
     font-size: 20px;
@@ -1184,9 +1392,5 @@ h3 {
   .infrastructure h2 {
     color: #ffffff;
     font-size: 20px;
-  }
-  .sociallinks ul {
-    margin-top: 50px;
-    float: left;
   }
 }
