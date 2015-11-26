@@ -35,13 +35,7 @@ define(['app'], function (app) {
 				    name:'name',
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'party\', \'party\')" ng-model="name" placeholder="search">',
                 },
-				
-				
-			/* 	{
-				    name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\')" ng-model="email" placeholder="search">',
-                }, */
-				   {
+				{
 				    name:'email',
 					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\')" ng-model="email" placeholder="search">'
                 },
@@ -61,24 +55,33 @@ define(['app'], function (app) {
 				    name:'type',
 					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'party\', \'party\')" ng-model="type">'
 							+'<option value="" selected>Type</option>' 
-							+'<option value="0">Client</option>'
-							+'<option value="1">Vender</option>	'
-							+'<option value="1">Employee</option>	'
+							+'<option value="client">Client</option>'
+							+'<option value="vender">Vender</option>	'
+							+'<option value="Employee">Employee</option>	'
 						+'</select>', 
 				 filter: {
 					   type: uiGridConstants.filter.SELECT,  
-					  selectOptions: [ { value: 'Client', label: 'Client' }, { value: 'Vender', label: 'Vender'},{ value: 'Employee', label: 'Employee' }]
+					  selectOptions: [ { value: 'client', label: 'Client' }, { value: 'vender', label: 'Vender'},{ value: 'Employee', label: 'Employee' }]
 					} 
                 },
 				{ name:'designation',
-					enableSorting: false,
-					enableFiltering: false,},
+					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'party\', \'party\')" ng-model="designation" placeholder="search">'
+				},
 				{ name:'department',
-					enableSorting: false,
-					enableFiltering: false,},
+					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'party\', \'party\')" ng-model="department">'
+							+'<option value="" selected>Department</option>' 
+							+'<option value="IT">IT</option>'
+							+'<option value="CIVIL">CIVIL</option>'
+							+'<option value="MECH">MECH</option>'
+						+'</select>', 
+				 filter: {
+					   type: uiGridConstants.filter.SELECT,  
+					  selectOptions: [ { value: 'IT', label: 'IT' }, { value: 'CIVIL', label: 'CIVIL'},{ value: 'MECH', label: 'MECH' }]
+					} 
+					
+				},
 				{ name:'salary',
-					enableSorting: false,
-					enableFiltering: false,},
+					filterHeaderTemplate: '<input id="salary" class="form-control" ng-change="grid.appScope.filter(\'salary\', salary, \'party\', \'party\')" ng-model="salary" placeholder="search">'},
 				{ name:'status',
 				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\')" ng-model="status">'
 							/* +'<option value="" selected>Status</option>' */
