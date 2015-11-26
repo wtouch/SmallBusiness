@@ -8,7 +8,7 @@
 
 			<input type="hidden" ng-model="modalOptions.addincome.status" ng-init="modalOptions.addincome.status= 1 "/> 
 					
-			<!-- <div ng-if = "type =='Rent'"> -->
+			
 			 <div class="form-group">
 				<div ng-init="modalOptions.getData(false,false,'party','partyList', params, modalOptions)">
 					<label for="party" class="col-sm-2 control-label">Party *</label>
@@ -16,8 +16,8 @@
 							<select id="party_id" class="form-control" ng-model="modalOptions.addincome.party_id" ng-options="item.id as item.name for item in modalOptions.partyList">
 							<option value="">Select Party</option>
 							</select>	 
-							<span class="help-block" ng-show="addIncomeForm.customer.$dirty && addIncomeForm.customer.$invalid">
-								<span ng-show="addIncomeForm.customer.$error.required" class="text-danger">required field.</span>
+							<span class="help-block" ng-show="addIncomeForm.party.$dirty && addIncomeForm.party.$invalid">
+								<span ng-show="addIncomeForm.party.$error.required" class="text-danger">required field.</span>
 							</span>	
 						</div>
 				</div>
@@ -43,7 +43,7 @@
 					{{modalOptions.addincome}}
 					
 				</span> 
-			<!-- </div> -->
+			
 			
 			<!-- <div class="form-group">
 				<label for="account_no" class="col-sm-2 control-label">Account Name* </label>
@@ -66,8 +66,8 @@
 							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_no as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.account" >
 							<option value="">Select Account</option>
 							</select>	 
-							<span class="help-block" ng-show="addIncomeForm.customer.$dirty && addIncomeForm.customer.$invalid">
-								<span ng-show="addIncomeForm.customer.$error.required" class="text-danger">required field.</span>
+							<span class="help-block" ng-show="addIncomeForm.account.$dirty && addIncomeForm.account.$invalid">
+								<span ng-show="addIncomeForm.account.$error.required" class="text-danger">required field.</span>
 							</span>	
 						</div>
 				</div>
@@ -115,7 +115,7 @@
 			<div class="form-group" ng-if="modalOptions.addincome.payment_type.type == 'Cheque' || modalOptions.addincome.payment_type.type == 'Net Banking' || modalOptions.addincome.payment_type.type == 'DD'">
 				<label for="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
 				<label for="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
-				<label for="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
+				<label for="refferance_no" ng-if="modalOptions.addincome.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
 					<div class="col-sm-9">
 						<input type="text" id="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'Net Banking'" ng-model="modalOptions.addincome.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="addIncomeForm.refferance_no.$dirty && addIncomeForm.refferance_no.$invalid">
@@ -128,7 +128,7 @@
 							<span ng-show="addIncomeForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 							
 						</span>
-						<input type="text" id="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'DD'" ng-model="modalOptions.addincome.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<input type="text" id="DD_no" ng-if="modalOptions.addincome.payment_type.type == 'DD'" ng-model="modalOptions.addincome.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="addIncomeForm.DD_no.$dirty && addIncomeForm.DD_no.$invalid">
 							<span ng-show="addIncomeForm.DD_no.$error.required" class="text-danger">DD no required.</span>
 							<span ng-show="addIncomeForm.DD_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
