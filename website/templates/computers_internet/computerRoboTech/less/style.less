@@ -55,14 +55,14 @@ header{
 						height:66px;
 						z-index:500;
 				}
-	position:fixed;
+	
 	width:100%;
     padding: 0;
     background-color: @color;
     z-index: 92;
     border: none;
     border-radius: 0px;
-	margin-bottom:30px;
+	
 	.navbar-brand{ 				
 		padding : 15px;
 		font : 700 20px/1.5em Arial,Helvetica,sans-serif;
@@ -294,7 +294,9 @@ footer{
 	}
 }	
 
-
+footer>p>a
+{color:#333 !important;
+text-decoration:underline !important;}
 .content{	
 	
 	h2{
@@ -464,9 +466,7 @@ footer{
 				border:none;
 	}
 	.about{
-	background-image:url('../img/robot.png'),url('../img/robo1.png'); 
-	background-position:right top,right bottom ;
-	background-size:35% 40%,37% 60%;
+	
 	
 	p{
 	    text-align: justify;
@@ -575,8 +575,27 @@ body{
 .orange{
 color:@color;
 }
-@media (max-width:360px){
-
+@media (max-width:320px){
+.anim4
+{
+	position:absolute;
+	left:-10000px;
+	top:-10000px;
+	opacity:0;
+	font-size:15px;
+	-webkit-animation-name: anim4;
+	-webkit-animation-duration:4s;
+	-webkit-animation-delay:4s;
+}
+@-webkit-keyframes anim4
+{
+	0%{opacity:1;left:200px;top:20px;}
+	10%{opacity:1;left:200px;top:20px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;}
+	30%{opacity:1;left:200px;top:20px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px purple, 0 0 5px purple;}
+	50%{opacity:1;left:200px;top:20px;color: #144FFF;}
+	70%{opacity:1;left:200px;top:20px;color: #ff9900;transform:rotate(0deg);}
+	100%{opacity:1;left:200px;top:20px;color: #ff9900;transform:rotate(360deg)}
+}
 
 .navbar-default {
 				&:before{
@@ -584,10 +603,60 @@ color:@color;
 				}
 }
 }
+@media (max-width:480px){
+.anim4
+{
+	position:absolute;
+	left:-10000px;
+	top:-10000px;
+	opacity:0;
+	font-size:15px;
+	-webkit-animation-name: anim4;
+	-webkit-animation-duration:4s;
+	-webkit-animation-delay:4s;
+}
+@-webkit-keyframes anim4
+{
+	0%{opacity:1;left:300px;top:20px;}
+	10%{opacity:1;left:300px;top:20px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;}
+	30%{opacity:1;left:300px;top:20px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px purple, 0 0 5px purple;}
+	50%{opacity:1;left:300px;top:20px;color: #144FFF;}
+	70%{opacity:1;left:300px;top:20px;color: #ff9900;transform:rotate(0deg);}
+	100%{opacity:1;left:300px;top:20px;color: #ff9900;transform:rotate(360deg)}
+}
+
+
+}
+@media (max-width:768px){
+.anim4
+{
+	position:absolute;
+	left:-10000px;
+	top:-10000px;
+	opacity:0;
+	font-size:25px;
+	-webkit-animation-name: anim4;
+	-webkit-animation-duration:4s;
+	-webkit-animation-delay:4s;
+}
+@-webkit-keyframes anim4
+{
+	0%{opacity:1;left:500px;top:100px;}
+	10%{opacity:1;left:500px;top:100px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;}
+	30%{opacity:1;left:500px;top:100px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px purple, 0 0 5px purple;}
+	50%{opacity:1;left:500px;top:100px;color: #144FFF;}
+	70%{opacity:1;left:500px;top:100px;color: #ff9900;transform:rotate(0deg);}
+	100%{opacity:1;left:500px;top:100px;color: #ff9900;transform:rotate(360deg)}
+}
+}
 div.container>div.content
 {
 	
     z-index: 3;
-   margin-top: 70px;
+ 
 
 }
+.navbar>.container .navbar-brand{margin-left: -30% !important;}
+
+.tit
+{color: #f90;font-size:50px;text-align:center;}

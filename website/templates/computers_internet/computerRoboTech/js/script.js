@@ -15,7 +15,7 @@ $(document).ready(function(){
 		}
 	}); 
 	
-	// This is for Cookie
+ 	// This is for Cookie
 	function getCookie(cname) {
 		var name = cname + "=";
 		var ca = document.cookie.split(';');
@@ -35,7 +35,7 @@ $(document).ready(function(){
 		$(".anim2, .anim4").hide();
 		$(".anim1").removeClass("anim1");
 		console.log(getCookie('anim'));
-	}
+	} 
 });
 var app = angular.module('myApp',[]);
 
