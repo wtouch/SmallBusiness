@@ -15,31 +15,22 @@
 		font-family:'Kirsty';
 		src:url('../fonts/Kirsty.ttf');
 	}
-	@color : #B89D6C;
+	@color : #034206;//#B89D6C
 	@lightcolor : #BBBBBB;
 	@darkcolor : #02071A;
-	@back : #005596;
+	@back : #cc9900;
 	@darkbackcolor : #23235C;
 	@lightbackcolor :#F3EAFF; 
-	@contentback: #B7B8BA;
-	@hover:#B0B5B8;
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
-	@contentlink:#6ba72b;
-	@navbackground:#E3E3ED;
-	@headingcolor:#034206;
 	@border: #B8B8C3;
 	@import "property.less";
 	@import "project.less";
 	@import "product.less";
-	@import "service.less";
 	@import "general.less";
 	
-	body{
-		background-color :@lightbackcolor;
-		/*background-image:-webkit-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
-		/*background-image:-moz-linear-gradient(@darkcolor,@lightbackcolor 50%);*/
-		/*background-image:linear-gradient(@darkcolor,@lightbackcolor 50%);*/
+	.container{
+		max-width:992px !important;
 	}
 	.sociallinks{
 		top: 50%;
@@ -53,7 +44,8 @@
 				padding: 4px 0px 4px 10px;
 				background-color: @darkbackcolor;
 				margin: 5px;
-				border-top-right-radius: 30px;border-bottom-right-radius: 30px;
+				border-top-right-radius: 30px;
+				border-bottom-right-radius: 30px;
 				text-align : right;
 				width : 125px;
 				a{
@@ -80,35 +72,87 @@
 			}
 		}
 	}
+	body{
+		background-color :@lightbackcolor;
+	}
 	header
 	{
-		background-color : @back;
+		.logo{
+			max-height : 100px;
+		}
+		.weblogo, .cntdtl{
+			margin-top : 15px;
+		}
 	}
-	
-	
-	.container{
-		max-width:992px !important;
+	.navbar-default {
+		background-color: @darkbackcolor;
+		margin-bottom :0px;
+		border-radius: 0;
+		.navbar-nav{
+			> li{
+				float : none;
+				text-transform:uppercase;
+				position : relative;
+				&:first-child{
+					border-left: 1px solid white;
+				}
+				> a, > a:focus {
+					color :@colorwhite;
+					border-right: 1px solid white;
+					//font : bold 14px/1.5em Arial, Helvetica, sans-serif;
+					font-family:'Amaranth-Regular';
+					position: relative;
+				}
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus
+				{
+					background-color :@back;
+					color: @colorwhite;
+				}
+				> ul {
+					transition: all 300ms ease-in;
+					display: none;
+					position: absolute;
+					width: 245px;
+					z-index: 999;
+					background-color: @darkbackcolor;
+					padding: 12px;
+					list-style: none;
+					text-align: left;
+					top : 50px;
+					border-top-left-radius: 0px;
+					transition : all 500ms ease-in-out;
+					li{
+						border-bottom: 1px solid @lightbackcolor;
+						padding: 7px;
+						a{
+							color:@colorwhite;
+						}
+						&:hover{
+							background-color : @back;
+							a{
+								text-decoration : none;
+								color : @colorwhite;
+							}
+						}
+					}
+				}
+				&:hover > ul {
+					display: block;
+				}
+			}
+		}
 	}
 	.content
 	{
 		background-color :@colorwhite;
+		padding : 15px;
 	}
 	
 	*, hr{
-		border-color : @border;
+		border-color : @darkbackcolor;
 	}
 	*{
 		transition:300ms;
-	}
-	.form-control{
-		/*background-color:@back !important;*/
-		/*color:@colorwhite;*/
-	}
-	
-	.logo {
-		height: 80px;
-		margin-top: 5px;
-		max-width: 100%;
 	}
 	
 	.project .thumbnail{
@@ -123,9 +167,6 @@
 		background-color: @back;
 	}
 	.btn-info:hover, .btn-info[disabled]:hover,.readmore a:hover, .readmore a h4:hover,.btn-primary:hover{
-		/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
-		/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
-		/*background: linear-gradient(right,#ccc,#0D8375);*/
 		background-color: @darkbackcolor;
 	}
 	
@@ -186,93 +227,15 @@
 		 }
 	}
 
-	.navbar-default {
-		background-color: @darkbackcolor;
-		margin-bottom :0px;
-		border-radius: 0;
-		.navbar-nav{
-			> li{
-				
-				text-transform:uppercase;
-				position : relative;
-				
-				> a, > a:focus {
-					color :@colorwhite;
-					/*padding : 15px 10px;*/
-					border-right: 1px solid white;
-					font:bold 14px/1.5em Arial, Helvetica, sans-serif;
-					position: relative;
-				}
-				&.active > a
-				{
-					background-color :@navbackground;
-					color: @colorblack;
-				}
-				&.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					//-webkit-transition: all 0.4s;
-					color : @colorwhite;
-				}
-				> ul {
-					transition: all 300ms ease-in;
-					display: none;
-					position: absolute;
-					width: 245px;
-					z-index: 999;
-					background-color: @darkbackcolor;
-					padding: 12px;
-					list-style: none;
-					text-align: left;
-					top : 50px;
-					border-top-left-radius: 0px;
-					transition : all 500ms ease-in-out;
-					>li{
-						border-bottom: 1px solid @lightbackcolor;
-						padding: 7px;
-						>a{
-							color:@colorwhite;
-							&:hover{
-								text-decoration: underline;
-								-webkit-transition: all 0.4s;
-							}
-						}
-						&:hover{
-							background-color : @hover;
-							/*background: -webkit-linear-gradient(right,#ccc,#0D8375);
-							background: -moz-linear-gradient(right,#ccc,#0D8375);
-							background: linear-gradient(right,#ccc,#0D8375);*/
-						}
-						ul{
-							list-style: none;
-							li{
-								font-size:10px;
-								a{
-									text-transform : lowercase;
-									font-size: 17px;
-									color: #fff;
-								}
-							}
-						
-						}
-					}
-				}
-				&:hover > ul {
-					display: block;
-				}
-			}
-		}
-	}
+	
 	
 	.subhead {
 		font: 2em/1.2em Amaranth-Regular;
 		font-size:18px;
 		font-weight:bold;
 		border:1px solid @darkbackcolor;
-		/*box-shadow:2px 2px 2px @lightcolor;*/
 		text-align: center;
 		background-color :@darkbackcolor;
-		/*background: -webkit-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
-		/*background: -moz-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
-		/*background: linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
 		border-radius: 7px;
 		padding: 4px 10px;
 		position: relative;
@@ -280,18 +243,18 @@
 	}
 	
 	h1{
-		color: @headingcolor;
+		color: @color;
 		font: 2em/1.2em Amaranth-Regular;
 		letter-spacing: 1px;
 		border-bottom: 1px solid #ccc;
 	}
 	
 	h2,h3,h5{
-		color : @headingcolor;
+		color : @color;
 	}
 	h3
 	{
-		color : @headingcolor;
+		color : @color;
 		font: 2em/1.2em Amaranth-Regular;
 	}
 	h2,h5{
@@ -306,7 +269,7 @@
 	}
 	.btn-link{
 		padding-left : 0px;
-		color : @headingcolor;
+		color : @darkbackcolor;
 	}
 	.panel{
 		/*background-color:@contentback;*/

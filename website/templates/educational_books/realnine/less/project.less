@@ -25,10 +25,6 @@
 				{ 
 					margin-right:10px;
 					font: 2em/1.2em Amaranth-Regular;
-					font-size:16px;
-					font-weight:bold;
-					/*font: 16px 'Alex Brush', cursive;*/
-					
 					color : @colorwhite;
 					padding : 5px 15px;
 					text-decoration:none;
@@ -40,40 +36,37 @@
 		
 	}
 }
-.projlist .readmore a{
-		background-color : transparent;
-	&:hover{
-		background-color :transparent;
+
+.homeproject{
+	position : relative;
+	.projectCarousal{
+		width : 620px;
 	}
-}
-#carousel {
-		background-color: @lightbackcolor;
-		.carousel-inner {
-			.item{
-				max-height: 298px;
-				overflow: hidden;
-				height:200px;
-				>img{
-					width :100%;
-					min-height : 200px;
-				}
-				&:hover{
+	.projectnav {
+		position : absolute;
+		width : 200px;
+		height : 312px;
+		top :5px;
+		right : 0px;
+		background : @darkbackcolor;
+		border : 3px solid @back;
+		border-radius : 0% 50% 50% 0%;
+		.nav-stacked{
+			>li{
+				margin-bottom : 10px;
+				a, a:focus{
+					background : none;
+					margin : 5px;
+					font : 1.2em/1.2em Amaranth-Regular;
+					color: @colorwhite;
+					&:hover{
+						color: @colorwhite;
+						text-decoration:none; 
+						background-color : @back;
+					}
 				}
 			}
-			
 		}
-		a.left.carousel-control, a.right.carousel-control {
-			background: none;
-		}
-	}
-	
-.homeproject {
-	margin-top : 20px;
-	position : relative;
-	#carousel
-	{
-		box-shadow : 0px 0px 10px 0px black;
-		border : 5px solid @colorwhite;
 	}
 	.bx-wrapper{
 		box-shadow : 0px 0px 10px 0px black;
@@ -105,41 +98,6 @@
 		}
 	}
 	
-	/*margin-bottom:10px;*/
-	.projectnav {
-		.nav-stacked>li>a {
-		  position: relative;
-		  display: block;
-		  padding: 10px 8px;
-		}
-	
-		box-shadow : 0px 0px 10px 0px black;
-		border : 5px solid @colorwhite;
-		margin-top : 5px;
-		border-radius : 4px;
-		padding:5px;
-		height:312px;
-		a, a:focus{
-			background : none;
-			/*background-color : black;*/
-			border: 1px solid @back;
-			margin : 5px;
-			font:2em/1.2em GandhiSans-Bold;
-			font-size:16px;
-			font-weight:bold;
-			/*font: bold 14px/1.5em Arial, Helvetica, sans-serif;*/
-			color: @back;
-			&:hover{
-				color: @colorwhite;
-				text-decoration:none; 
-				background-color : @back;
-				/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
-				/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
-				/*background: linear-gradient(right,#ccc,#0D8375);*/
-			}
-		}
-		
-	}
 	
 	.projsnap{
 		box-shadow : 0px 0px 10px 0px black;
