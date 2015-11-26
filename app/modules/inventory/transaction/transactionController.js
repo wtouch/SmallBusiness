@@ -67,6 +67,7 @@ define(['app'], function (app) {
 				
 				{ name:'Manage', enableSorting: false, enableFiltering: false, 
 					cellTemplate : '<a ng-click="grid.appScope.openAddincome(\'modules/inventory/transaction/addincome.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					
 					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'transactions\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
 				}
@@ -96,19 +97,20 @@ define(['app'], function (app) {
 					customer : data.customer,
 					user_id : data.user_id,
 					balance : data.balance,
+					payment_type : data.payment_type,
 					date : data.date,
 					amount : data.amount,
 					due_amount : data.due_amount,
 					description : data.description 
 				} : {
-					//date : dataService.sqlDateFormate()
+					date : dataService.sqlDateFormate()
 				},
 				
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							console.log(response);
-							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
+							//$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
 						}
 					})
 				},

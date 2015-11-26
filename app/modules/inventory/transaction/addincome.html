@@ -11,10 +11,10 @@
 			<!-- <div ng-if = "type =='Rent'"> -->
 			 <div class="form-group">
 				<div ng-init="modalOptions.getData(false,false,'party','partyList', params, modalOptions)">
-					<label for="User" class="col-sm-2 control-label">User *</label>
+					<label for="party" class="col-sm-2 control-label">Party *</label>
 						<div class="col-sm-9">
-							<select id="user_id" class="form-control" ng-model="modalOptions.addincome.user_id" ng-options="item.id as item.name for item in modalOptions.partyList">
-							<option value="">Select User</option>
+							<select id="party_id" class="form-control" ng-model="modalOptions.addincome.party_id" ng-options="item.id as item.name for item in modalOptions.partyList">
+							<option value="">Select Party</option>
 							</select>	 
 							<span class="help-block" ng-show="addIncomeForm.customer.$dirty && addIncomeForm.customer.$invalid">
 								<span ng-show="addIncomeForm.customer.$error.required" class="text-danger">required field.</span>
@@ -22,15 +22,21 @@
 						</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="category" class="col-sm-2 control-label">Category</label>
-					<div class="col-sm-9">
-						<input type="text" id="category" name="category" class="form-control" ng-model="modalOptions.addincome.category"/>	
-						<span class="help-block" ng-show="addIncomeForm.category.$dirty && addIncomeForm.category.$invalid">
-							<span ng-show="addIncomeForm.category.$error.required" class="text-danger">Type is required.</span>
-						</span>		
-					</div>
-			</div> 
+				<div class="form-group">
+					<label for="category" class="col-sm-2 control-label">Category</label>
+									<div class="col-sm-9">
+										<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
+										<option value="" selected>Select Category</option>
+										<option value="category1">Category1</option>
+										<option value="category2">Category2</option>
+										<option value="category3">Category3</option>
+										<option value="category4">Category4</option>
+										</select>
+									</div>
+										<span class="help-block" ng-show="addIncomeForm.category.$dirty && addIncomeForm.category.$invalid">
+											<span ng-show="addIncomeForm.category.$error.required" class="text-danger">Required field.</span>
+										</span>	
+								</div>
 				<span>
 					<input type="hidden" class="form-control" ng-model="modalOptions.addincome.description.user_id"/>
 					<input type="hidden" class="form-control" ng-model="modalOptions.addincome.user_id"/> 
@@ -39,7 +45,7 @@
 				</span> 
 			<!-- </div> -->
 			
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label for="account_no" class="col-sm-2 control-label">Account Name* </label>
 					<div class="col-sm-9">
 					<input type="text" id="account_no" name="account_no" class="form-control" ng-model="modalOptions.addincome.account_no"/>	
@@ -49,17 +55,33 @@
 						<span ng-show="(addIncomeForm.account_no.$dirty || submitted)" class="text-danger">Enter Numbers Only!</span>
 					</span>
 					</div>
-			</div>
+			</div> -->
+			
+			
+			
 			<div class="form-group">
-				<label for="previous_amount" class="col-sm-2 control-label">Balance</label>
+				<div ng-init="modalOptions.getData(false,false,'account','accountList', params, modalOptions)">
+					<label for="account" class="col-sm-2 control-label">Account Name*</label>
+						<div class="col-sm-9">
+							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_no as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.account" >
+							<option value="">Select Account</option>
+							</select>	 
+							<span class="help-block" ng-show="addIncomeForm.customer.$dirty && addIncomeForm.customer.$invalid">
+								<span ng-show="addIncomeForm.customer.$error.required" class="text-danger">required field.</span>
+							</span>	
+						</div>
+				</div>
+			</div>
+			
+			<div class="form-group" ng-if="modalOptions.balance || modalOptions.balance == 0">
+				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
 				<div class="col-sm-9">
-					<input type="text" id="balance" name="balance" class="form-control" ng-model="modalOptions.addincome.balance" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" required/>		
-						<span class="help-block" ng-show="addIncomeForm.balance.$dirty && addIncomeForm.balance.$invalid">
-								<span ng-show="addIncomeForm.balance.$error.required" class="text-danger">Required Field</span>
-								<span ng-show="addIncomeForm.balance.$error.pattern" class="text-danger">Enter like 0.00 only</span>
-						</span>
+					<input type="text" id="balance" name="" readonly class="form-control" ng-model="modalOptions.balance"/>			
 					</div>
 			</div>
+			
+			<input type="hidden"  ng-model="modalOptions.addincome.balance"/>
+		
 		
 		<!-- 	<input type="hidden" class="form-control" ng-model="userDetails.id"  readonly/> -->
 			<!-- <input type="hidden"  ng-if="type !='other'" ng-model="modalOptions.addincome.category"/> -->
@@ -73,27 +95,88 @@
 					</div>						
 			</div>
 			
+			
+			<div class="form-group">
+				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
+					<div class="col-sm-9">
+						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.addincome.payment_type.type" required>
+						<option value="" selected>Select Type</option>
+						<option value="Cash" >Cash</option>
+						<option value="Cheque">Cheque</option>
+						<option value="Net Banking">Net Banking</option>
+						<option value="DD">DD</option>
+						</select>
+						<span class="help-block" ng-show="addIncomeForm.payment_type.$dirty && addIncomeForm.payment_type.$invalid">
+							<span ng-show="addIncomeForm.payment_type.$error.required" class="text-danger">Payment Type is required.</span>
+						</span>	
+					</div>
+			</div> 
+
+			<div class="form-group" ng-if="modalOptions.addincome.payment_type.type == 'Cheque' || modalOptions.addincome.payment_type.type == 'Net Banking' || modalOptions.addincome.payment_type.type == 'DD'">
+				<label for="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
+				<label for="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
+				<label for="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
+					<div class="col-sm-9">
+						<input type="text" id="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'Net Banking'" ng-model="modalOptions.addincome.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<span class="help-block" ng-show="addIncomeForm.refferance_no.$dirty && addIncomeForm.refferance_no.$invalid">
+							<span ng-show="addIncomeForm.refferance_no.$error.required" class="text-danger">Ref No is required.</span>
+							<span ng-show="addIncomeForm.refferance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+						</span>
+						<input type="text" id="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'Cheque'" ng-model="modalOptions.addincome.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<span class="help-block" ng-show="addIncomeForm.cheque_no.$dirty && addIncomeForm.cheque_no.$invalid">
+							<span ng-show="addIncomeForm.cheque_no.$error.required" class="text-danger">Cheque No is required.</span>
+							<span ng-show="addIncomeForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+							
+						</span>
+						<input type="text" id="refferance no" ng-if="modalOptions.addincome.payment_type.type == 'DD'" ng-model="modalOptions.addincome.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<span class="help-block" ng-show="addIncomeForm.DD_no.$dirty && addIncomeForm.DD_no.$invalid">
+							<span ng-show="addIncomeForm.DD_no.$error.required" class="text-danger">DD no required.</span>
+							<span ng-show="addIncomeForm.DD_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+							
+						</span>
+					</div>		
+			</div> 
+			
+						<div class="form-group" ng-if="modalOptions.addincome.payment_type.type == 'Cheque' || modalOptions.addincome.payment_type.type == 'Net Banking' || modalOptions.addincome.payment_type.type == 'DD'">
+				<label for="Date" class="col-sm-2 control-label">Date</label>
+				 <div class="col-sm-9">
+					<input type="text" id="date" class="form-control"   ng-model="modalOptions.addincome.date" ng-init="modalOptions.addincome.date = modalOptions.incomeDate.date"  name="date" 
+					placeholder="date">
+				</div>					
+			</div>
+			
+			<div class="form-group" ng-if="modalOptions.addincome.payment_type.type == 'Cheque' || modalOptions.addincome.payment_type.type == 'Net Banking' || modalOptions.addincome.payment_type.type == 'DD'">
+				<label for="Bank" class="col-sm-2 control-label">Bank Name</label>
+					<div class="col-sm-9">
+						<input type="text" id="Bank" ng-model="modalOptions.addincome.payment_type.Bank" class="form-control" name="Bank"   placeholder="Enter Bank Name" required/>
+						<span class="text-danger" ng-show="addIncomeForm.Bank.$dirty && addIncomeForm.Bank.$invalid">
+							<span ng-show="addIncomeForm.Bank.$error.required">Bank Name is Required.</span>
+						</span>	
+					</div>		
+			</div>
+			
+			<div class="form-group" ng-if="modalOptions.addincome.payment_type.type == 'Cheque' || modalOptions.addincome.payment_type.type == 'Net Banking' || modalOptions.addincome.payment_type.type == 'DD'">
+				<label for="Branch" class="col-sm-2 control-label">Branch</label>
+					<div class="col-sm-9">
+						<input type="text" id="Branch" ng-model="modalOptions.addincome.payment_type.Branch" class="form-control" name="Branch"   placeholder="Enter Branch" required/>
+						<span class="text-danger" ng-show="addIncomeForm.Branch.$dirty && addIncomeForm.Branch.$invalid">
+							<span ng-show="addIncomeForm.Branch.$error.required">Branch Name is Required.</span>
+						</span>	
+					</div>		
+			</div>
+			
 			<div class="form-group">
 				<label  for="credit_amount" class="col-sm-2 control-label">Amount</label>
 					<div class="col-sm-9">
-						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" ng-model="modalOptions.addincome.credit_amount"  name="credit_amount" placeholder="Amount" required />
-						<span class="help-block" ng-show="addIncomeForm.credit_amount.$dirty && addIncomeForm.credit_amount.$invalid">
-								<span ng-show="addIncomeForm.credit_amount.$error.required" class="text-danger">Required Field</span>
-								<span ng-show="addIncomeForm.credit_amount.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addincome.credit_amount" ng-change="modalOptions.totalAmount(modalOptions)" name="amount" placeholder="Amount" required />
+						<span class="help-block" ng-show="addIncomeForm.amount.$dirty && addIncomeForm.amount.$invalid">
+							<span ng-show="addIncomeForm.amount.$error.required" class="text-danger">Amount is required.</span>
+							<span ng-show="addIncomeForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 						</span>
 					</div>						
 			</div>
 			
-			<div class="form-group">
-				<label  for="due_amount" class="col-sm-2 control-label">Due Amount</label>
-					<div class="col-sm-9">
-						<input type="text" id="due_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addincome.due_amount" name="due_amount" placeholder="Due Amount" required />
-						<span class="help-block" ng-show="addIncomeForm.due_amount.$dirty && addIncomeForm.due_amount.$invalid">
-								<span ng-show="addIncomeForm.due_amount.$error.required" class="text-danger">Required Field</span>
-								<span ng-show="addIncomeForm.due_amount.$error.pattern" class="text-danger">Enter like 0.00 only</span>
-						</span>
-					</div>						
-			</div>
+			
 			
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">Description</label>
@@ -118,4 +201,4 @@
 				</div>
 			</div>		
 		</form>
-</div><!--ng-if="!modalOptions.propertyData.id-->
+</div>
