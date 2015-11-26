@@ -22,5 +22,33 @@
 					</span>
 					</div>
 			</div>
+
+			<div class="form-group">
+				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
+					<div class="col-sm-9">
+						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.billPayment.description.payment_type.type" required>
+						<option value="" selected>Select Type</option>
+						<option value="Cash" >Cash</option>
+						<option value="Cheque">Cheque</option>
+						<option value="Net Banking">Net Banking</option>
+						<option value="DD">DD</option>
+						</select>
+						<span class="help-block" ng-show="payBillForm.payment_type.$dirty && payBillForm.payment_type.$invalid">
+							<span ng-show="payBillForm.payment_type.$error.required" class="text-danger">Payment Type is required.</span>
+						</span>	
+					</div>
+			</div> 
+			
+			
+				<div class="form-group"  >
+				<label  for="due_amount" class="col-sm-2 control-label">Amount</label>
+					<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
+						<input type="text"  id="due_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.billPayment.account_no" name="due_amount" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList" ng-init="modalOptions.billPayment.due_amount = modalOptions.billPayment.due_amount"  required/>
+						<span class="help-block" ng-show="payBillForm.amount.$dirty && payBillForm.due_amount.$invalid">
+							<span ng-show="payBillForm.due_amount.$error.required" class="text-danger">Amount is required.</span>
+							<span ng-show="payBillForm.due_amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+						</span>
+					</div>						
+			</div>
 		</form>
 </div>
