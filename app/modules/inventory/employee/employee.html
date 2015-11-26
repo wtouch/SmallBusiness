@@ -1,0 +1,34 @@
+<div class="main-content">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row bottomspace">
+					<div class="col-sm-9 text-right">
+						<a href="#/dashboard/employee" class="btn btn-primary">Employee List</a>
+						<a class="btn btn-primary" ng-click="openModal('modules/inventory/employee/addemployee.html')">Add New Employee</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="bottomspace">
+					<label for="partyList_status" class="control-label" >partyList Status</label>
+					<select id="partyList_status" class="form-control" ng-change="getData(false, currentPage,'party', 'party', params)" ng-model="pageItems">
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+					</select>
+				</div>
+			</div>
+	</div>
+	
+	<div class="table-responsive" ng-init="getData(false, currentPage, 'party','party',params);">
+		<div ui-grid="party"></div>
+	</div>
+	
+	<div class="text-center">				
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'party','party',params)"></pagination>
+		<pre>Page: {{currentPage}} / {{numPages}}</pre>
+	</div>	
+
+			</div>
+		</div>
+</div>

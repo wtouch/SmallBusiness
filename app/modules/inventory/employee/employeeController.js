@@ -18,7 +18,7 @@ define(['app'], function (app) {
 		$rootScope.module = "inventory";
 		
 		
-		$scope.party = {
+		$scope.employeeData = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -32,27 +32,27 @@ define(['app'], function (app) {
 				
 				{
 				    name:'name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'party\', \'party\')" ng-model="name" placeholder="search">',
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'employee\', \'employeeData\')" ng-model="name" placeholder="search">',
                 },
 				{
 				    name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\')" ng-model="email" placeholder="search">'
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'employee\', \'employeeData\')" ng-model="email" placeholder="search">'
                 },
 				
 			   {
 				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\')" ng-model="address" placeholder="search">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'employee\', \'employeeData\')" ng-model="address" placeholder="search">',
                 },
 				
 				
 				{
 				    name:'city',
-				     filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\')" ng-model="city" placeholder="search">', 
+				     filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'employee\', \'employeeData\')" ng-model="city" placeholder="search">', 
                 },
 				
 				{
 				    name:'type',
-					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'party\', \'party\')" ng-model="type">'
+					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'employee\', \'employeeData\')" ng-model="type">'
 							+'<option value="" selected>Type</option>' 
 							+'<option value="client">Client</option>'
 							+'<option value="vender">Vender</option>	'
@@ -64,10 +64,10 @@ define(['app'], function (app) {
 					} 
                 },
 				{ name:'designation',
-					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'party\', \'party\')" ng-model="designation" placeholder="search">'
+					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'employee\', \'employeeData\')" ng-model="designation" placeholder="search">'
 				},
 				{ name:'department',
-					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'party\', \'party\')" ng-model="department">'
+					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'employee\', \'employeeData\')" ng-model="department">'
 							+'<option value="" selected>Department</option>' 
 							+'<option value="IT">IT</option>'
 							+'<option value="CIVIL">CIVIL</option>'
@@ -78,20 +78,6 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: 'IT', label: 'IT' }, { value: 'CIVIL', label: 'CIVIL'},{ value: 'MECH', label: 'MECH' }]
 					} 
 					
-				},
-				{ name:'salary',
-					filterHeaderTemplate: '<input id="salary" class="form-control" ng-change="grid.appScope.filter(\'salary\', salary, \'party\', \'party\')" ng-model="salary" placeholder="search">'},
-				{ name:'status',
-				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\')" ng-model="status">'
-							/* +'<option value="" selected>Status</option>' */
-							+'<option value="0">Deleted</option>'
-							+'<option value="1">Active</option>	'
-						+'</select>', 
-				 filter: {
-					   type: uiGridConstants.filter.SELECT,  
-					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
-					  ]
-					} 
 				},
 				
 				{ name:'Manage', enableSorting: false, enableFiltering: false, 
@@ -134,14 +120,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'party','party');
+							$scope.getData(false, $scope.currentPage, 'employee','employeeData');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'party','party');
+							$scope.getData(false, $scope.currentPage, 'employee','employeeData');
 						}
 					})
 				}
