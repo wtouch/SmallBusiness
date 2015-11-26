@@ -9,13 +9,13 @@
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="generalForm.$valid" id="generalForm">
 		<div class="form-group">
 				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
-					<label for="user_id" class="col-sm-2 control-label"> User Name * </label>
+					<label for="party_id" class="col-sm-2 control-label"> Select Party * </label>
 					<div class="col-sm-4">
-						<select id="user_id" class="form-control" ng-model="user_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}">
+						<select id="party_id" class="form-control" ng-model="party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}">
 							<option value="">Select Party</option>
 						</select>
-						<span class="help-block" ng-show="addInvoiceForm.user_id.$dirty && addInvoiceForm.user_id.$invalid">
-						<span ng-show="addInvoiceForm.user_id.$error.required" class="text-danger">user name is required.</span>
+						<span class="help-block" ng-show="addInvoiceForm.party_id.$dirty && addInvoiceForm.party_id.$invalid">
+						<span ng-show="addInvoiceForm.party_id.$error.required" class="text-danger">user name is required.</span>
 						</span>	
 					</div>
 			</div>
@@ -48,14 +48,20 @@
 	<br>
 	<!--THE HIDDEN Generate Date and Due_date and User ID Ends Here-->
 	<div class="row" >
+	<input type="hidden" ng-model="modalOptions.addinvoice.status" ng-init="modalOptions.addinvoice.status = 1">
+
+	<input type="hidden" class="form-control" ng-model="modalOptions.addinvoice.user_id" ng-init="modalOptions.addinvoice.user_id = userDetails.id" readonly/>
+	
 	<div class="col-sm-12" ng-init="modalOptions.addinvoice.particulars = (modalOptions.addinvoice.particulars) ? modalOptions.addinvoice.particulars : []">
 		<form name="addInvoiceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addInvoiceForm.$valid" id="addInvoiceForm">
 		
-			<div class="table-responsive">
+			<div class="table-responsive" >
 				<table class="table table-bordered" >
 					<thead>
 						<tr>
 							<th>Particular Name</th>
+							<th>Type</th>
+							<th>Category</th>
 							<th>Price</th>
 							<th>Quantity</th>
 							<th>Amount</th>
@@ -67,11 +73,29 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="hidden" ng-model="modalOptions.addinvoice.status" ng-init="modalOptions.addinvoice.status = 1">
+								
 								<input type="text" class="form-control " placeholder="Particular Name" id="particular_name" name="particular_name" ng-model="modalOptions.singleparticular.particular_name" required/>
 								
 								<span class="help-block" ng-show="addInvoiceForm.particular_name.$dirty && addInvoiceForm.particular_name.$invalid">
 								<span ng-show="addInvoiceForm.particular_name.$error.required" class="text-danger">particular_name Required.</span>
+								</span>
+								
+							</td>
+							<td>
+								
+								<input type="text" class="form-control " placeholder="type" id="type" name="particular_name" ng-model="modalOptions.addinvoice.type" required/>
+								
+								<span class="help-block" ng-show="addInvoiceForm.type.$dirty && addInvoiceForm.type.$invalid">
+								<span ng-show="addInvoiceForm.type.$error.required" class="text-danger">particular_name Required.</span>
+								</span>
+								
+							</td>
+							<td>
+								
+								<input type="text" class="form-control " placeholder="Category" id="category" name="category" ng-model="modalOptions.addinvoice.category" required/>
+								
+								<span class="help-block" ng-show="addInvoiceForm.category.$dirty && addInvoiceForm.category.$invalid">
+								<span ng-show="addInvoiceForm.category.$error.required" class="text-danger">Category Required.</span>
 								</span>
 								
 							</td>
@@ -141,13 +165,13 @@
 				</span>
 			</div>
 			
-			<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars, modalOptions.singleparticular)">+Add This Particular</button>	
+			<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular)">+Add This Particular</button>	
 			
 		</form>
 	</div>
 </div>
 	<br>
-		<div class="table-responsive">
+		<div class="table-responsive" >
 				<table class="table table-bordered">
 					<thead>
 						<tr>
