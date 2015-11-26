@@ -56,12 +56,14 @@
 	<input type="hidden" class="form-control" ng-model="modalOptions.addBill.user_id" ng-init="modalOptions.addBill.user_id = userDetails.id" readonly/>
 	
 	<div class="col-sm-12" ng-init="modalOptions.addBill.particular = (modalOptions.addBill.particular) ? modalOptions.addBill.particular : []">
-	<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">
+	<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">{{modalOptions.singleparticular}}
 		<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
 			<table class="table table-bordered" >
 						<thead>
 							<tr>
 								<th>Particular Name</th>
+								<th>Goods Type</th>
+								<th>Category</th>
 								<th>Price</th>
 								<th>Quantity</th>
 								<th>Total Amount</th>
@@ -79,6 +81,38 @@
 							<span class="help-block" ng-show="addbillForm.particular.$dirty && addbillForm.particular.$invalid">
 								<span ng-show="addbillForm.particular.$error.required" class="text-danger">Particular Name is necessary.</span>
 							</span> 
+						</td>
+						<td>
+							<div class="form-group">
+								<label for="goods_type" class="col-sm-2 control-label">Type</label>
+							
+									<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type" required>
+										<option value="" selected>Select Type</option>
+										<option value="type1" >Type1</option>
+										<option value="type2">Type2</option>
+										<option value="type3">Type3</option>
+										<option value="type4">Type4</option>
+									</select>
+									<span class="help-block" ng-show="addbillForm.goods_type.$dirty && addbillForm.goods_type.$invalid">
+										<span ng-show="addbillForm.goods_type.$error.required" class="text-danger">Required field.</span>
+									</span>	
+							</div> 
+						</td>
+						<td>
+							<div class="form-group">
+								<label for="category" class="col-sm-2 control-label">Category</label>
+									
+										<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
+										<option value="" selected>Select Category</option>
+										<option value="category1">Category1</option>
+										<option value="category2">Category2</option>
+										<option value="category3">Category3</option>
+										<option value="category4">Category4</option>
+										</select>
+										<span class="help-block" ng-show="addbillForm.category.$dirty && addbillForm.category.$invalid">
+											<span ng-show="addbillForm.category.$error.required" class="text-danger">Required field.</span>
+										</span>	
+								</div>
 						</td>
 						<td>
 							<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"   ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
@@ -149,6 +183,8 @@
 				<tr >
 					<th class="col-sm-2">Sr.No.</th>
 					<th class="col-sm-3">Particular Name</th>
+					<th class="col-sm-3">Goods_type</th>
+					<th class="col-sm-3">Category </th>
 					<th class="col-sm-2 text-right">Price</th>
 					<th class="col-sm-2 text-right">Quantity</th>
 					<th class="col-sm-2 text-right">Total Amount</th>
@@ -161,7 +197,9 @@
 			<tbody >
 				<tr ng-repeat="x in modalOptions.addBill.particular">
 					<td>{{$index + 1}}</td>
-					<td>{{x.particular}}</td>
+					<td>{{x.particular_name}}</td>
+					<td>{{x.goods_type}}</td>
+					<td>{{x.category}}</td>
 					<td class="text-right">{{x.price}}</td>
 					<td class="text-right">{{x.quantity}}</td>
 					<td class="text-right">{{x.total_amount}}</td>
