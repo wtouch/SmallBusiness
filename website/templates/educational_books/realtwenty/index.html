@@ -2,8 +2,7 @@
 <html lang="en" ng-app="myApp">
 	<head>		<meta charset="utf-8">		<meta http-equiv="X-UA-Compatible" content="IE=edge">		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="google-site-verification" content="xv_7TVb38wcem1jzXEBzqOKRs_i-vLYFRyQs-SVn6wI" />		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="{{ path }}script/fancy-box/jquery.fancybox.css"/>
-		<link href="{{ path }}css/style.css" rel="stylesheet" type="text/css" />		<link rel="stylesheet" type="text/css" href="{{ path }}script/slider/bx_styles/bx_styles.css"/>		<link rel="stylesheet" type="text/css" href="{{ path }}script/fancy-box/jquery.fancybox.css"/>
+		<link rel="stylesheet" type="text/css" href="{{ path }}script/fancy-box/jquery.fancybox.css"/>		<link rel="stylesheet" type="text/css" href="{{ path }}script/slider/bx_styles/bx_styles.css"/>		<link rel="stylesheet" type="text/css" href="{{ path }}script/fancy-box/jquery.fancybox.css"/>
 		<script type="text/javascript" src="{{ path }}script/jquery-1.6.2.min.js"></script>
 		<script src="{{ path }}js/jquery.min.js"></script>
 		<script src="{{ path }}js/bootstrap.min.js"></script>
@@ -14,6 +13,7 @@
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
 		<script src="{{ path }}js/script.js"></script>
 		<script type="text/javascript" src="{{ path }}script/fancy-box/jquery.fancybox.js?v=2.1.4"></script>
+		<link href="{{ path }}css/style.css" rel="stylesheet" type="text/css" />
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
@@ -23,28 +23,46 @@
 					controls: false,					autoHover : true,				});				$('.slider').bxSlider({					mode: 'fade',					auto: true,					controls: false,					autoHover : true,					pager  : true				});				$('.home-bx-slide ul').bxSlider({					mode: 'vertical',					auto: true,					controls: false,					autoHover : true,					displaySlideQty : 1,					moveSlideQty : 1				});								// This function is used for displaying submenu with jQuery and css ***************************************************				$(".nav li ul").hide();				$(".nav li").hover(function(){					$(this).find('ul:first').css({visibility: "visible",display: "none", background:""}).show(500);				},function(){					$(this).find('ul:first').css({visibility: "hidden",display: "none"});				});								$("div.slider .fancybox").fancybox({					'height'  : '100%',					'autoScale'  : false,					width    : '400px',					type    : 'image',					openEffect  : 'elastic',					openSpeed  : 300,					closeEffect : 'elastic',					closeSpeed  : 300,					autoPlay  : true,					loop    : true				});								$(".nav a").each(function() {   					if (this.href == window.location.href) {						$(this).parent(".nav li").addClass("active");					}				});			});
 		</script> 
 	</head>
-<body >
-<div class="header">
-	<div class="logo"><img src="{{ path }}images/shivbaba.png" width="116" height="58" /></div>
-	<div class="menu"> 
-		<!-- Main Navigation -->
-			{% include [templatePath ~ '/includes/header.html','default/default/includes/header.html' ] %}
-		<!-- Main Navigation -->
-		<!-- Contact Navigation -->
-		<ul class="nav menu" id="home-nav">
-			<li><a href="about-us">About Us</a></li>
-			<li><a href="contact-us">Contact Us</a></li>
-		</ul>
-		<!-- Contact Navigation -->
-		<div class="clr"></div>
-		<div id="title">Mob:. 09881502939, 09881331689<br />
-			Email: propertydemand@gmail.com
-		</div>
+<body>
+	<header>
+		<div class="container">	
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 weblogo">
+					{% if data.website_config.website_logo %}
+						<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+					{% endif %}
+				</div>
+				<div class="col-xs-12 col-sm-4 text-center">
+					{% if data.website_config.website_logo1 %}
+						<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
+					{% else %}
+						<img class="logo" src="{{data.business_logo.file_relative_path}}">
+					{% endif %}
+				</div>
+				<div class="col-xs-12 col-sm-4 text-right cntdtl">	
+					<p><strong>Mobile :</strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
+					<p>
+					<p><strong>E-mail ID :</strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
+					<p>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="header">
+		<div class="menu"> 
+			<!-- Main Navigation -->
+				{% include [templatePath ~ '/includes/header.html','default/default/includes/header.html' ] %}
+			<!-- Main Navigation -->
+			<!-- Contact Navigation -->
+			<ul class="nav menu" id="home-nav">
+				<li><a href="about-us">About Us</a></li>
+				<li><a href="contact-us">Contact Us</a></li>
+			</ul>
+		</div>
 	</div>
-</div>
 <div class="main">
-	{%if modules.headerModule.carousal %}
-		{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+	{%if modules.headerModule.homeproject %}
+		{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
 	{%endif%}
 
 	{% if modules.contentModule.featured_properties or modules.contentModule.featured_projects %}	<!-- Home Message -->	<div class="home">		<!-- Home Featured Property -->			<div class="home-box">				<h1>Featured Property</h1>				<div class="home-bx-slide">					{% include [templatePath ~ '/includes/featured_properties.html','default/default/includes/featured_properties.html'] %}				</div>			</div>		<!-- End Home Featured Property -->

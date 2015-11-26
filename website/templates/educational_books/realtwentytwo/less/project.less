@@ -5,7 +5,7 @@
 	li{
 		width:100px;
 		.projimg{
-			height : 200px;
+			height : 150px;
 			overflow:hidden;
 			img{
 				min-height: 200px;
@@ -19,137 +19,105 @@
 	}
 }
 
-#carousel {
-	background-color: @lightbackcolor;
-	.carousel-inner {
-		.item{
-			max-height: 298px;
-			overflow: hidden;
-			height:200px;
-			>img{
-				width :100%;
-				min-height : 200px;
-			}
-			&:hover{
-			}
-		}
-		
-	}
-	a.left.carousel-control, a.right.carousel-control {
-		background: none;
-	}
-}
-	
-.homeproject {
-	
-	margin-top : 20px;
+.homeproject{
 	position : relative;
-	#carousel
-	{
-		box-shadow : 0px 0px 10px 0px black;
-		border : 5px solid @colorwhite;
-	}
-	.bx-wrapper, .projectnav, .projsnap{
-		box-shadow : 0px 0px 10px #999;
-		border : 1px solid @lightbackcolor;
-	}
-	.bx-wrapper{
-		margin-top : 5px !important;
-		border-radius : 4px;
-	}
-	.bx-viewport{
-		min-height : 300px !important;
-		.carousslider{
-			padding-left: 0px;
-			li{
-				border: 3px solid #f9f4da;
-				min-height : 300px;
-				min-width : 100% !important;
-				img{
-					width : 100%;
-					min-height : 305px;
+	.projectCarousal{
+		width : 620px;
+		position : relative;
+		z-idex:1000;
+		.bx-wrapper{
+			border : 3px solid @back;
+			.bx-viewport{
+				min-height : 300px !important;
+				.carousslider{
+					padding-left: 0px;
+					li{
+						border: 3px solid #f9f4da;
+						min-height : 300px;
+						min-width : 100% !important;
+						img{
+							width : 100%;
+							min-height : 305px;
+						}
+						&.item{
+							overflow : hidden;
+							height : 305px;
+						}
+					}
 				}
-				&.item{
-					overflow : hidden;
-					height : 305px;
+				img{
+					height:400px;
+					min-width : 100%;
 				}
 			}
 		}
-		img{
-			height:400px;
-			min-width : 100%;
+		.projsnap{
+			padding:10px;
+			width : 0px;
+			height : 311px;
+			opacity : 0;
+			background-color : rgba(51, 0, 51, 0.78);
+			border : 3px solid @back;
+			z-index : 51;
+			transform: translateX(0px);
+			transition: all 800ms ease-in;
+			position: absolute;
+			overflow: hidden;
+			top: 0;
+			left: 0;
+			p{
+				margin: 5px;
+				color : @colorwhite;
+				font-size : 17px;
+				font-family : Amaranth-Regular; 
+			}
 		}
-	}
-	.projectnav, .projsnap{
-		padding : 5px;
-		height:312px;
-		margin-top : 5px;
+		&:hover{
+			.projsnap{
+				opacity : 1;
+				width : 620px;
+				transform: translateX(0px);
+			}
+		}
 	}
 	.projectnav {
-		.nav-stacked 
+		position : absolute;
+		width : 300px;
+		height : 311px;
+		top :0;
+		right : 0px;
+		background : @darkbackcolor;
+		border : 3px solid @back;
+		border-radius : 0% 50% 50% 0%;
+		overflow : hidden;
+		.nav-stacked{
 			>li{
-				>a , a:focus{
-					position: relative;
-					display: block;
-					padding: 10px 8px;
+				margin-bottom : 10px;
+				a, a:focus{
 					background : none;
-					border: 5px solid @lightbackcolor;
-					font-weight:bold;
+					margin : 5px;
+					font : 1.2em/1.2em Amaranth-Regular;
 					color: @color;
 					&:hover{
-						color: @colorwhite;
+						color: @darkcolor;
 						text-decoration:none; 
 						background-color : @back;
-						/*background: -webkit-linear-gradient(right,#ccc,#0D8375);*/
-						/*background: -moz-linear-gradient(right,#ccc,#0D8375);*/
-						/*background: linear-gradient(right,#ccc,#0D8375);*/
 					}
 				}
 			}
 		}
-	
-	.projsnap{
-		p{
-			margin: 5px 5px;
-			text-align : center;
-			padding: 1px;
-			border : 5px solid @lightbackcolor;
-			color : @color;
-		}
 	}
-	
-	#carousel { 
-		height:312px;
-		margin-top : 5px;
-		background-color: @lightbackcolor;
-		.carousel-inner {
-			.item{
-				min-height: 303px;
-				overflow: hidden;
-				>img{
-					width :100%;
-					min-height : 312px;
-				}
-				&:hover{
-				}
-			}
-			
-		}
-		a.left.carousel-control, a.right.carousel-control {
-			background: none;
-		}
+	&::after{
+		position : absolute;
+		content : "";
+		background-image : url('../img/Authorized.png');
+		background-size: 100% 100%;
+		right :295px;
+		bottom : 0;
+		z-index: 999;
+		height : 120px;
+		width : 120px;
 	}
-}
-.homeproject::after{
-	position : absolute;
-	content : "";
-	background-image : url('../img/home.png');
-	background-size: 100% 100%;
-	left :200px;
-	top : 123px;
-	z-index: 999;
-	height : 197px;
-	width : 120px;
 }
 //css for single project & project list
 	.projlist{

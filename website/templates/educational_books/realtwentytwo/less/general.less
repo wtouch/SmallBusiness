@@ -15,15 +15,17 @@
 		border-bottom: 1px solid @darkbackcolor;
 		li{
 			a{
-				border: 1px solid @darkbackcolor;
-				color : @darkcolor;
+				border: 1px solid @back;
+				background-color: @darkbackcolor;
+				color : @color;
 				&:hover{
-					color: @colorwhite;
+					color: @darkcolor;
 					background-color: @back;
+					border: 1px solid @darkbackcolor;
 				}
 			}
 			&.active>a, &.active>a:hover, &.active>a:focus{
-				color: @colorwhite;
+				color: @darkcolor;
 				background-color: @back;
 				border: 1px solid @darkbackcolor;
 			}
@@ -32,7 +34,7 @@
 }
 .mailSentMsg{
 	font: 1.2em/2.5em QumpellkaNo12;
-	border:1px solid @lightcolor;
+	border:1px solid @back;
 	padding:10px;
 }
 
@@ -77,13 +79,13 @@
 		.nav-pills{
 			background-color: @darkbackcolor;
 			>li{
-				border-right : 1px solid @lightbackcolor;
+				border-right : 1px solid @back;
 				>a, > a:focus{
 					color : @colorwhite;
 					font-weight : bold;
 				} 
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					color : @lightcolor;
+					color : @back;
 					background-color: @darkbackcolor;
 				}
 			}
@@ -94,7 +96,7 @@
 			tbody{
 				tr{
 					th,td{
-						border-color : @lightbackcolor;
+						border-color : @back;
 					}
 				}
 			}
@@ -111,7 +113,7 @@
 	}
 	.infrastructure{
 		.thumbnail{
-			background-color:@lightbackcolor;
+			background-color:@back;
 			border:1px solid @darkbackcolor;
 			/*box-shadow: 3px 3px 6px #ADADAD;*/
 			background-color:@colorwhite;
@@ -152,7 +154,7 @@
 				padding : 0px;
 				cite{
 					font-size : 17px;
-					color : @darkcolor;
+					color : @color;
 				}
 			}
 			&::before{

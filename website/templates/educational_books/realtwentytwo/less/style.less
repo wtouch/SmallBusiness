@@ -16,13 +16,11 @@
 		src:url('../fonts/Kirsty.ttf');
 	}
 	
-	@color : #0088cc;//blue-anchor 
-	@lightcolor : #e4e6e7;
-	@darkcolor : #005580;//darkblue-anchor hover
+	@color : #F3CB06;//yellow
+	@darkcolor : #330033;
 	
-	@back : #0088cc;
-	@darkbackcolor : #20003D;//violet
-	@lightbackcolor :#e4e6e7; 
+	@back : #A9973F;//dark yellow
+	@darkbackcolor : #330033;//dark violet
 	
 	@colorblack : #000;
 	@colorwhite	: #fff;
@@ -33,14 +31,11 @@
 	@import "product.less";
 	
 	body{
-			overflow: scroll;
-			
+		overflow: scroll;
+		background : @back;	
 	}
 	.container{
 		max-width:992px !important;
-		border : 1px solid @lightbackcolor;
-		margin-top : 10px;
-		padding : 15px 0px;
 	}
 	*{
 		transition:300ms;
@@ -85,118 +80,117 @@
 		}
 	}
 	
-	.logo {
-		height: 80px;
-		margin-top: 5px;
-		max-width: 100%;
-		margin-left : 15px;
-	}
-	
 	.navbar-collapse{
 		padding :0px;
 	}
 	.navbar-toggle {
-		border : 1px solid @lightcolor;
+		border : 1px solid @back;
 		margin-top : 45px;
 	}
 	.navbar-toggle .icon-bar {
-		background-color: @lightcolor;
+		background-color: @back;
 	} 
 	
 	header
 	{
-		background-color : @back;
-	}
-	
-	.navbar-default {
-		background-color: transparent;
-		border : none;
-		.navbar-nav{
-			> li{
-				position : relative;
-				> a{
-					color :@color;
-					padding-top : 30px;
-					padding-bottom : 10px;
-					margin : 2px 4px 2px 0px;
-					font-weight : bold;
-				}
-				&.active>a{
-					background : none;
-				}
-				&.active>a, &.active > a:hover, &> a:hover{
-					color : @darkcolor;
-					padding-bottom : 30px;
-					border-bottom : 3px solid @darkcolor;
-					background-color : transparent;
-					padding-top : 10px;
-				}
-				
-				&.active > a:after, &.active > a:hover:after, &>a:hover:after{
-					content: " ";
-					display: block;
-					width: 28px;
-					height: 25px;
-					position: absolute;
-					background: url(../img/right-icon.png);
-					bottom: 5px;
-					left: 0px;
-					right: 0px;
-					margin: 0 auto;
-					transition: 300ms;
-				}
-				> ul {
-					transition: all 300ms ease-in;
-					display: none;
-					position: absolute;
-					width: 245px;
-					top : 66px;
-					z-index: 999;
-					background-color: @back;
-					padding: 12px;
-					list-style: none;
-					text-align: left;
-					border : 1px solid @darkbackcolor;
-					border-top-left-radius: 0px;
-					transition : all 500ms ease-in-out;
-					>li{
-						border-bottom: 2px solid @color;
-						padding: 7px;
-						>a{
-							color : @colorwhite;
-							
-						}
-						&:hover>a {
-							color : @colorwhite;
-							text-decoration: underline;
-							border-color : @darkcolor;
-							-webkit-transition: all 0.4s;
-						}
-						ul{
-							list-style: none;
-							li{
-								font-size:10px;
-								a{
-									text-transform : lowercase;
-									font-size: 17px;
-									color: @colorwhite;
+		.logo{
+			max-height : 100px;
+		}
+		.weblogo, .cntdtl{
+			margin-top : 10px;
+		}
+		.container{
+			border : none;
+		}
+		.navbar-default {
+			background-color: @darkbackcolor;
+			border : none;
+			.navbar-nav{
+				display : inline-block;
+				float : none;
+				> li{
+					position : relative;
+					> a{
+						color :@colorwhite;
+						padding-top : 30px;
+						padding-bottom : 10px;
+						margin : 2px 4px 2px 0px;
+						font : 1.1em/1.1em Amaranth-Regular;
+					}
+					&.active>a, &.active > a:hover, &> a:hover{
+						color : @color;
+						padding-bottom : 40px;
+						border-bottom : 3px solid @color;
+						background-color : transparent;
+						padding-top : 10px;
+					}
+					&.active > a:after, &.active > a:hover:after, &>a:hover:after{
+						content: " ";
+						display: block;
+						width: 28px;
+						height: 25px;
+						position: absolute;
+						background: url(../img/right-icon.png);
+						bottom: 5px;
+						left: 0px;
+						right: 0px;
+						margin: 0 auto;
+						transition: 300ms;
+					}
+					> ul {
+						transition: all 300ms ease-in;
+						display: none;
+						position: absolute;
+						width: 245px;
+						top : 66px;
+						z-index: 999;
+						background-color: @darkbackcolor;
+						padding: 12px;
+						list-style: none;
+						text-align: left;
+						border : 1px solid @darkbackcolor;
+						border-top-left-radius: 0px;
+						transition : all 500ms ease-in-out;
+						li{
+							padding: 5px;
+							a{
+								color : @colorwhite;
+								font : 1.1em/1.1em Amaranth-Regular;
+							}
+							&:hover {
+								background-color : @back;
+								a {
+									color : @darkcolor;
+									text-decoration: none;
+									border-color : @color;
 								}
 							}
-						
+							ul{
+								list-style: none;
+								li{
+									font-size:10px;
+									a{
+										text-transform : lowercase;
+										font-size: 17px;
+										color: @colorwhite;
+									}
+								}
+							
+							}
 						}
 					}
-				}
-				&:hover > ul {
-					display: block;
+					&:hover > ul {
+						display: block;
+					}
 				}
 			}
 		}
 	}
-	
 	.content
 	{
 		background-color :@colorwhite;
-		padding: 0px 20px 20px;
+		border : 1px solid @darkbackcolor;
+		padding: 20px 20px 20px;
 	}
 	
 	.subhead {
@@ -204,34 +198,77 @@
 		font-size:18px;
 		font-weight:bold;
 		border:1px solid @darkbackcolor;
-		/*box-shadow:2px 2px 2px @lightcolor;*/
 		text-align: center;
 		background-color :@darkbackcolor;
-		/*background: -webkit-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
-		/*background: -moz-linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
-		/*background: linear-gradient(right, #02071A -16%, @lightbackcolor, #02071A 110%);*/
 		border-radius: 7px;
 		padding: 4px 10px;
 		position: relative;
-		color: @colorwhite;
+		color: @color;
 	}
 	
-	h1,h2,h3,h4,h5{
+	h1,h2,h3,h5{
 		color: @darkcolor;
 		font-family :  Amaranth-Regular;
 	}
-	a, .btn-link{
-		color:@color;
+	h1, h2{
+		text-align : center;
 	}
-	.btn-link{
-		padding-left : 0px;
+	a{
+		color:@darkcolor;
+		&:hover{
+			color : @back;
+			text-decoration : none;
+		}
 	}
-	
 	.btn + .btn {
 		margin-left : 10px;
-		
 	}
-	
+	.btn-info{
+		background-color : @back;
+		color : @color;
+		font-family : Amaranth-Regular;
+		border-color : transparent;
+		display: inline-block;
+		vertical-align: middle;
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		-moz-osx-font-smoothing: grayscale;
+		position: relative;
+		-webkit-transition-property: color;
+		transition-property: color;
+		-webkit-transition-duration: 0.3s;
+		transition-duration: 0.3s;
+		&::before{
+			  content: "";
+			  position: absolute;
+			  z-index: -1;
+			  top: 0;
+			  left: 0;
+			  right: 0;
+			  bottom: 0;
+			  background: @darkbackcolor;
+			  -webkit-transform: scale(1);
+			  transform: scale(1);
+			  -webkit-transition-property: transform;
+			  transition-property: transform;
+			  -webkit-transition-duration: 0.3s;
+			  transition-duration: 0.3s;
+			  -webkit-transition-timing-function: ease-out;
+			  transition-timing-function: ease-out;
+		}
+		&:hover{
+			background : @back;
+			border-color : @darkbackcolor;
+			color : @darkcolor;
+		}
+		&:hover::before{
+			-webkit-transform: scale(0);
+			transform: scale(0);
+		}
+	}
 	.contentModule {
 		.sections{
 			img{
@@ -260,7 +297,7 @@
 	.project{
 		.navbar{
 			background-color: @darkbackcolor;
-			border-bottom: 4px solid @lightbackcolor;
+			border-bottom: 4px solid @back;
 			border-radius: 0;
 			margin-bottom:10px;
 			width:auto;
@@ -269,7 +306,7 @@
 			color:@colorwhite;
 			background-color: @darkbackcolor;
 			>li{
-				border-right : 1px solid @lightbackcolor;
+				border-right : 1px solid @back;
 				height : 38px;
 				>a, > a:focus{
 					padding : 10px;
@@ -309,7 +346,7 @@
 		background-color : @darkbackcolor;
 		padding:5px;
 		margin-top : 10px;
-		color:@lightcolor;
+		color:@back;
 		font-weight : bold;
 		.footlink{
 			ul{
@@ -412,7 +449,7 @@
 		}
 	}
 	.navbar-toggle{
-		background-color : @darkcolor;
+		background-color : @color;
 		border-color : @colorwhite;
 	}
 	.navbar-toggle .icon-bar {
