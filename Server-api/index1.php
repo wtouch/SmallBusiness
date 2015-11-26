@@ -27,6 +27,7 @@ function getRecords(){
 	$body = $app->request->getBody();
 	$db = new dbHelper();
 	try{
+		//echo $_GET['params'];
 		$params = json_decode($_GET['params'],true);
 		$table = $db->setTable($_GET['table']);
 		$single = $_GET['single'];
@@ -43,9 +44,24 @@ function getRecords(){
 		}
 
 		if(isset($params['where'])){
-			$db->setWhere($params['where'], $table,true);
+			$db->setWhere($params['where'], $table);
 		}
 		$db->setColumns($table,$cols);
+		//print_r($params);
+		if(isset($params['join'])){
+			//print_r($params['join']);
+			if(is_array($params['join'])){
+				foreach($params['join'] as $key => $value) {
+					//print_r($value);
+					$joinClause = $db->setJoinString($value['joinType'], $value['joinTable'], $value['joinOn']);
+					if(isset($value['cols'])){
+						$db->setColumns($joinClause, $value['cols']);
+					}
+					
+				}
+			}
+		}
+		//echo $db->getQueryString();
 		$data = $db->select();
 		echo json_encode($data);
 	}catch(Exception $e) {

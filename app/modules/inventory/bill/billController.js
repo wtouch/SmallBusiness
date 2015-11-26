@@ -28,7 +28,7 @@ define(['app'], function (app) {
 				},
 				{
 					name:'Party Name',
-					filterHeaderTemplate: '<select id="user_id" class="form-control" ng-change="grid.appScope.filter(\'user_id\', partyFilter, \'party\', \'partyList\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.partyList">'
+					filterHeaderTemplate: '<select id="user_id" class="form-control" ng-change="grid.appScope.filter(\'party_id\', partyFilter, \'party\', \'partyList\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.partyList">'
 							+'<option value="" selected>Party name</option>'
 							+'<option value="0">Unpaid</option>'
 							+'<option value="1">Paid</option>	'
@@ -134,6 +134,7 @@ define(['app'], function (app) {
 							console.log(input);
 							$scope.stockData = {};
 							$scope.stockData.user_id = input.user_id;
+							$scope.stockData.party_id = input.party_id;
 							$scope.stockData.goods_name = input.particular[0].particular_name;
 							$scope.stockData.quantity = input.particular[0].quantity;
 							$scope.stockData.price = input.particular[0].price;
@@ -186,8 +187,19 @@ define(['app'], function (app) {
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					status : 1
+					status : 1,
+					user_id : $rootScope.userDetails.id
 				},
+				join : [
+					{
+						joinType : 'INNER JOIN',
+						joinTable : "inventory_party",
+						joinOn : {
+							party_id : "t0.party_id"
+						},
+						cols : {name : "party_name"}
+					}
+				],
 				cols : ["*"]
 			};
 			if(page){
