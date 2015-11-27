@@ -5,7 +5,25 @@ jQuery(document).ready(function() {
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
 });
-
+$('.nav.nav-tabs a').on('shown.bs.tab', function(e) {
+		$('#ourassoc .bxslider').bxSlider({
+			mode:'horizontal',
+			slideWidth: 250,
+			minSlides: minSlides,
+			maxSlides: maxSlides,
+			slideMargin: 25,
+			auto: true, 
+			autoDirection:'next',
+			moveSlides: 1,
+			pause:3000,
+			pager:true,
+			pagerType:'full',
+			autoControls: true, 
+			controls:true, 
+			autoHover:true,
+			speed:1000,
+		});
+	});
 $(document).ready(function(){
 	var sliderMode, minSlides, maxSlides;
 	//$(window).resize(function(){

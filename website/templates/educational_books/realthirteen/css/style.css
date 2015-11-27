@@ -37,6 +37,9 @@
 .featuredProperty .bxslider1 li .readmore a {
   padding: 6px 12px;
 }
+a:hover {
+  text-decoration: none !important;
+}
 .propertylist .btn-primary {
   margin-bottom: 10px;
   padding: 6px 7px;
@@ -275,12 +278,10 @@
   border: 5px solid #ffffff;
 }
 .homeproject .projectnav {
-  left: 0;
-  padding-right: 85px !important;
+  right: 0;
 }
 .homeproject .projsnap {
-  right: 0;
-  padding-left: 90px !important;
+  left: 0;
   padding-top: 5px !important;
   z-index: -99;
 }
@@ -289,7 +290,8 @@
 }
 .homeproject .projectnav {
   padding: 4px;
-  left: 10px;
+  right: 10px;
+  text-align: right;
 }
 .homeproject .projectnav .nav-stacked > li {
   border-bottom: 1px solid #f7cbce;
@@ -317,7 +319,7 @@
 }
 .homeproject .projsnap {
   padding: 5px 15px;
-  right: 10px;
+  left: 10px;
   /*p{
 			color : @color;
 			margin-top:5px;
@@ -335,7 +337,7 @@
 .homeproject .projsnap p {
   border-bottom: 1px solid #f7cbce;
   color: #ffffff;
-  padding: 10px;
+  padding: 5px;
 }
 .homeproject .projsnap p:last-child {
   border: none;
@@ -477,18 +479,20 @@
   border-bottom: 1px solid #34b981;
 }
 .featuretab .nav-tabs li a {
+  background-color: #074028;
+  color: #ffffff;
   border: 1px solid #34b981;
   font: 16px 'Alex Brush', cursive;
 }
 .featuretab .nav-tabs li a:hover {
   color: #ffffff;
-  background-color: #074028;
+  background: -webkit-linear-gradient(right, #117e50, #46ce94, #117e50);
 }
 .featuretab .nav-tabs li.active > a,
 .featuretab .nav-tabs li.active > a:hover,
 .featuretab .nav-tabs li.active > a:focus {
   color: #ffffff;
-  background-color: #074028;
+  background: -webkit-linear-gradient(right, #117e50, #46ce94, #117e50);
   border: 1px solid #34b981;
 }
 .sidebar .nav-pills {
@@ -654,7 +658,7 @@
   transition: 300ms;
 }
 .container {
-  width: 992px !important;
+  max-width: 992px !important;
 }
 html {
   min-width: 1022px;
@@ -939,6 +943,7 @@ main .back .featuredProperty .bx-wrapper .bx-pager.bx-default-pager a:hover,
 main .back .featuredProject .bx-wrapper .bx-pager.bx-default-pager a:hover,
 main .back .sidebarModule .bx-wrapper .bx-pager.bx-default-pager a:hover {
   background: #6d1a1f;
+  text-decoration: none;
 }
 main .back .featuredProperty .bx-wrapper .bx-pager.bx-default-pager a.active,
 main .back .featuredProject .bx-wrapper .bx-pager.bx-default-pager a.active,
@@ -1056,22 +1061,21 @@ hr {
 .pagination > .active > a:hover,
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
-.pagination > .active > span:focus,
-.pagination > li > a:hover,
-.pagination > li > span:hover,
-.pagination > li > a:focus,
-.pagination > li > span:focus {
-  background-color: #074028;
-  color: #f7cbce;
-  border: 1px solid #074028;
+.pagination > .active > span:focus {
+  background-color: #f7cbce;
+  color: #117e50;
+  border: 1px solid #f7cbce;
 }
 .pagination > li > a,
 .pagination > li > span,
 .pagination > .disabled > a,
-.pagination > .disabled > a:hover {
-  background-color: #46ce94;
-  border: 1px solid #074028;
-  color: #074028;
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  background-color: #117e50;
+  border: 1px solid #f7cbce;
+  color: #f7cbce;
 }
 footer {
   background-image: -webkit-linear-gradient(top, #117e50, #34b981 157%);
@@ -1086,4 +1090,14 @@ footer p {
 footer a,
 footer a:hover {
   color: #f7cbce;
+}
+@media (max-width: 320px) {
+  header .logo {
+    max-width: 100%;
+    max-height: 100px;
+  }
+  header .cntdtl {
+    margin-top: 60px;
+    padding-top: 25px;
+  }
 }

@@ -18,7 +18,7 @@
 		transition : 300ms;
 	}
 	.container{
-		width : 992px !important;
+		max-width : 992px !important;
 	}
 	html{
 		min-width : 1022px;
@@ -293,6 +293,7 @@
 						}
 						a:hover{
 							background: #6d1a1f;
+							text-decoration:none;
 						}
 						a.active{
 							background: #6d1a1f;
@@ -409,16 +410,16 @@
 		}
 		
 	}
-	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
+	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus
 	{
-		background-color : @darkcolor;
-		color : @color;
-		border : 1px solid @darkcolor;
+		background-color : @color;
+		color : @back;
+		border : 1px solid @color;
 	}
-	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>.disabled>a:hover{
-		background-color : @lightbackcolor;
-		border : 1px solid @darkcolor;
-		color : @darkcolor;
+	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
+		background-color : @back;
+		border : 1px solid @color;
+		color : @color;
 	}
 	footer{
 		background-image : -webkit-linear-gradient(top, @back, @darkbackcolor 157%);;
@@ -431,5 +432,18 @@
 		}
 		a, a:hover{
 			color : @color;
+		}
+	}
+	
+	@media(max-width:320px){
+		header{
+			.logo{
+				max-width: 100%;
+				max-height : 100px;
+			}
+			.cntdtl{
+				margin-top:60px;
+				padding-top: 25px;
+			}
 		}
 	}
