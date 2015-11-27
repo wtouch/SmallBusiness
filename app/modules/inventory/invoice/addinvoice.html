@@ -24,8 +24,9 @@
 			
 			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
 			<div class="col-sm-4">
-					<input type="date" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addinvoice.generated_date" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"/>		
+					<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addinvoice.generated_date" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"/>		
 			</div>
+			<input type="hidden" ng-model="modalOptions.addinvoice.modified_date" ng-init="modalOptions.addinvoice.modified_date=modalOptions.date">
 		</div>
 	</form>{{modalOptions.addinvoice}}
 	<br>

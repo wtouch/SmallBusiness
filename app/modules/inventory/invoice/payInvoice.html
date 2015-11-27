@@ -23,6 +23,12 @@
 					</span>
 				</div>
 			</div>
+			<div class="form-group" ng-if="modalOptions.invoicePayment.account_no">
+				<label for="account_no" class="col-sm-2 control-label">Previous Amount</label>
+				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
+					<input type="text" id="account_no" name="account_no" readonly class="form-control" ng-options="item.id as item.balance for item in modalOptions.transactionList" ng-model="modalOptions.invoicePayment.account_no"/>			
+					</div>
+			</div>
 			
 			<div class="form-group">
 				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
@@ -62,6 +68,13 @@
 						</span>
 					</div>		
 			</div> 
+			<div class="form-group" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Cheque' || modalOptions.invoicePayment.description.payment_type.type == 'Net Banking' || modalOptions.invoicePayment.description.payment_type.type == 'DD'">
+				<label for="Date" class="col-sm-2 control-label">Date</label>
+				 <div class="col-sm-9">
+					<input type="date" id="date" class="form-control" ng-model="modalOptions.invoicePayment.description.date" name="date" 
+					placeholder="date">
+				</div>					
+			</div>
 			<div class="form-group" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Cheque' || modalOptions.invoicePayment.description.payment_type.type == 'Net Banking' || modalOptions.invoicePayment.description.payment_type.type == 'DD'">
 				<label for="Bank" class="col-sm-2 control-label">Bank Name</label>
 					<div class="col-sm-9">

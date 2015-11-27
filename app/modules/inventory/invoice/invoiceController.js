@@ -103,7 +103,7 @@ define(['app'], function (app) {
 					addinvoice : (data) ? {
 						id : data.id,
 						generated_date : data.generated_date,
-						//due_date : data.due_date,
+						modified_date : data.modified_date,
 						particulars:data.particulars,
 						remark : data.remark
 					} : {
