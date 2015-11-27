@@ -141,19 +141,19 @@ define(['app'], function (app) {
 			
 			var modalOptions = {
 				expenceDate : { date : $scope.currentDate},
-				
+			
 				addexpence : (data) ? {
 					id : data.id,
 					category : data.category,
 					customer : data.customer,
 					user_id : data.user_id,
 					balance : data.balance,
-					expenceDate : data.date,
+					date : data.date,
 					amount : data.amount,
 					due_amount : data.due_amount,
 					description : data.description 
 				} : {
-					//date : dataService.sqlDateFormate()
+					date : dataService.sqlDateFormate()
 				},
 				
 				postData : function(table, input){

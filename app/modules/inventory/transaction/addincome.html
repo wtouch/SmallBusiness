@@ -4,8 +4,7 @@
 		<h3 class="text-center" ng-if="!modalOptions.addincome.id">Add Income</h3>
 		<h3 class="text-center" ng-if="modalOptions.addincome.id">Edit Income</h3>
 	</div>
-		<form name="addIncomeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addIncomeForm.$valid">
-
+		<form name="addIncomeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addIncomeForm.$valid">{{modalOptions.addincome}}
 			<input type="hidden" ng-model="modalOptions.addincome.status" ng-init="modalOptions.addincome.status= 1 "/> 
 					
 			
@@ -27,36 +26,23 @@
 									<div class="col-sm-9">
 										<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
 										<option value="" selected>Select Category</option>
-										<option value="category1">Category1</option>
-										<option value="category2">Category2</option>
-										<option value="category3">Category3</option>
-										<option value="category4">Category4</option>
+										<option value="type1" >Licence Fees</option>
+										<option value="type2">Agriculture</option>
+										<option value="type3">Commisions</option>
+										<option value="type4">Fees & Chagrges</option>
+										<option value="type5">Investments</option>
+										<option value="type6">Non Profit</option>
+										<option value="type7">Other Income</option>v
+										<option value="type8">Proffesional Services</option>
+										<option value="type9">Sales products & services</option>
 										</select>
 									</div>
 										<span class="help-block" ng-show="addIncomeForm.category.$dirty && addIncomeForm.category.$invalid">
 											<span ng-show="addIncomeForm.category.$error.required" class="text-danger">Required field.</span>
 										</span>	
-								</div>
-				<span>
-					<input type="hidden" class="form-control" ng-model="modalOptions.addincome.description.user_id"/>
-					<input type="hidden" class="form-control" ng-model="modalOptions.addincome.user_id"/> 
-					{{modalOptions.addincome}}
-					
-				</span> 
+				</div>
 			
-			
-			<!-- <div class="form-group">
-				<label for="account_no" class="col-sm-2 control-label">Account Name* </label>
-					<div class="col-sm-9">
-					<input type="text" id="account_no" name="account_no" class="form-control" ng-model="modalOptions.addincome.account_no"/>	
-					
-					<span class="help-block" ng-show="addIncomeForm.account_no.$dirty && addIncomeForm.account_no.$invalid">
-						<span ng-show="addIncomeForm.account_no.$error.required" class="text-danger">Account Name is required.</span>
-						<span ng-show="(addIncomeForm.account_no.$dirty || submitted)" class="text-danger">Enter Numbers Only!</span>
-					</span>
-					</div>
-			</div> -->
-			
+					<input type="hidden" class="form-control" ng-model="modalOptions.addincome.user_id" ng-init="modalOptions.addincome.user_id = userDetails.id" readonly/>	
 			
 			
 			<div class="form-group">
@@ -73,10 +59,10 @@
 				</div>
 			</div>
 			
-			<div class="form-group" ng-if="modalOptions.balance || modalOptions.balance == 0">
+			<div class="form-group" ng-if="modalOptions.addincome.account">
 				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
 				<div class="col-sm-9">
-					<input type="text" id="balance" name="" readonly class="form-control" ng-model="modalOptions.balance"/>			
+					<input type="text" id="balance" name="balance" readonly class="form-control"/>			
 					</div>
 			</div>
 			
@@ -94,6 +80,9 @@
 						placeholder="date">
 					</div>						
 			</div>
+			
+			
+			<input type="hidden" ng-model="modalOptions.addincome.modified_date" ng-init="modalOptions.addincome.modified_date = modalOptions.incomeDate.date" />
 			
 			
 			<div class="form-group">
@@ -196,7 +185,7 @@
 				<div class="col-sm-11"><!--ng-disabled="addIncomeForm.$invalid"-->
 					<button type="submit"  class="btn btn-success" ng-if="modalOptions.addincome.id"  ng-disabled="addIncomeForm.$invalid" ng-click="modalOptions.updateData('transaction',modalOptions.addincome,modalOptions.addincome.id); modalOptions.ok()">Update</button>
 					
-					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addincome.id" ng-click="modalOptions.postData('transaction',modalOptions.addincome); modalOptions.ok();" ng-disabled="addIncomeForm.$invalid">Submit</button>
+					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addincome.id" ng-click="modalOptions.postData('transaction',modalOptions.addincome); modalOptions.ok();">Submit</button>
 					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 				</div>
 			</div>		
