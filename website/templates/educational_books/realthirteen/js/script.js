@@ -20,6 +20,25 @@ $(document).ready(function(){
 			maxSlides = 3;
 		}
 	//})
+	$('.nav.nav-tabs a').on('shown.bs.tab', function(e) {
+		$('#ourassoc .bxslider').bxSlider({
+			mode:'horizontal',
+			slideWidth: 250,
+			minSlides: minSlides,
+			maxSlides: maxSlides,
+			slideMargin: 25,
+			auto: true, 
+			autoDirection:'next',
+			moveSlides: 1,
+			pause:3000,
+			pager:true,
+			pagerType:'full',
+			autoControls: true, 
+			controls:true, 
+			autoHover:true,
+			speed:1000,
+		});
+	});
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
 		slideWidth: 250,
