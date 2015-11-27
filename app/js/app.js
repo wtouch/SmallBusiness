@@ -278,6 +278,38 @@ define(['angular',
 						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step active';
 					}
 				}
+				
+				console.log($rootScope.userDetails.config);
+				
+				if($rootScope.userDetails.config == ""){
+					$rootScope.userDetails.config = {};
+				}
+				if($rootScope.userDetails.config.inventory == undefined) $rootScope.userDetails.config.inventory = {};
+				
+				$rootScope.taxData = {
+					tax : [{
+						taxName : "service_tax",
+						displayName : "Service Tax",
+						taxValue : 14
+					},{
+						taxName : "vat",
+						displayName : "Vat",
+						taxValue : 5
+					}],
+					pan_no : "DIPPS1619D",
+					tin_no : "DIPPS1619DST001"
+				};
+				
+				$rootScope.userDetails.config.inventory.taxData = $rootScope.taxData;
+				
+				dataService.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
+					if(response.status == "success"){
+						dataService.setUserDetails(JSON.stringify($rootScope.userDetails));
+						$rootScope.userDetails = dataService.parse(dataService.userDetails);
+					}
+				})
+				
+				//console.log($rootScope.userDetails.config);
 			}
 		});
 		
