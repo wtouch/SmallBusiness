@@ -8,8 +8,8 @@
 	}
 
 	@color : #24600B;
-	@lightcolor : #B478E6;
-	@darkcolor : #540505;
+	@lightcolor : #EC1F26;
+	@darkcolor : rgba(46, 27, 17, 0.59);
 	@back : ##822424;
 	@darkbackcolor : rgb(175, 31, 84);
 	@lightbackcolor :#A1C31A; 
@@ -27,7 +27,7 @@
 	}
 	body {
     
-		background-image:url(../img/bg2.png);
+		background-image:url(../img/pic7.jpg);
 		background-repeat:no-repeat;
 		background-attachment:fixed;
 		background-size:100% 100%;
@@ -48,55 +48,44 @@
 		
 	}
 	.sociallinks{
-		top: 50%;
+		top: 22%;
+		text-align:center;
 		left:0;
-		position: fixed;
+		right:0;
+		margin:auto;
 		z-index : 999;
-		width : 5px;
-		margin-top:100px;
-		background-color:@darkcolor;
+		width : 300px;
+		position:absolute;
+		display: inline-block;
 		ul{
-			list-style : none;
+			
+			list-style-type : none;
 			li{
-				transform: translateX(-123px);
-				padding: 4px 0px 4px 10px;
-				background-image: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
-				background-image: -moz-linear-gradient(top, @lightbackcolor, @darkbackcolor);
-				background-image: -linear-gradient(top, @lightbackcolor, @darkbackcolor);
-				margin: 5px;
-				border-top-right-radius: 30px;
-				border-bottom-right-radius: 30px;
-				text-align : right;
-				width : 125px;
+				display:inline;
 				a{
-					color:@color;
+					color:@lightcolor;
+					display:inline-block;
+					width: 36px;
+					height:36px;
+					margin-left:10px;-
 					&:hover{
 						color:@color;
 						text-decoration : underline;
 					}
 				}
-				img{
-					width : 35px;
+				.img{
+					background-image:url('../img/sprite.png');
 					margin-left : 10px;
-					border : 2px solid @color;
+					width : 40px;
+					height:38px;
 				}
-				span{
-					height : 20px;
-					width :20px;
-					margin-right: 6px;
-				}
-				&:hover{
-					transform: translateX(-45px);
-				}
+			
 			}
 		}
 	}
 	
 	
 	.navbar-default {
-		//background-image: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
-		//background-image: -moz-linear-gradient(top, @lightbackcolor, @darkbackcolor);
-		//background-image: -linear-gradient(top, @lightbackcolor, @darkbackcolor);
 		
 		background-color:transparent;
 		border : none;
@@ -104,12 +93,12 @@
 		    top: 64px;
             left: 78px;
 			right:50px;
-			width: 800px;
+			
 		    margin-bottom:40px;
 			margin-top:55px;
 	        display: inline-block;
 		    text-decoration: none;
-            margin-right:170px;
+           
 			
 		   
 		
@@ -123,18 +112,13 @@
 		
 				> ul {
 					color:@colorwhite;
+					background-color:@lightcolor;
 					list-style: none;
 					position: absolute;
 					width: 245px;
 					top : 53px;
 					z-index: 999;
 					display: none;
-					
-					
-					//background : @back;
-					//border: 3px solid //@lightcolor;
-					//border-radius:19px;
-					//border-top-left-radius: 0px;
 					padding: 15px;
 					text-align: left;
 					transition : all 500ms ease-in-out;
@@ -144,17 +128,21 @@
 						>a{
 							color : @colorwhite;
 							&:hover{
-								text-decoration: underline;
+								//text-decoration: underline;
 								color:@colorwhite;
+								background-color:@darkcolor;
+								
 								
 							}
 						}
 						ul{
 							color:@colorwhite;
+							
 							list-style: none;
 							padding: 7px;
 							>li{
 								color:@colorwhite;
+								
 								>a{
 									//color : @color;
 									
@@ -253,12 +241,16 @@
 		padding-left : 0px;
 	}
 	a, .btn-link{
-		color : @color;
+		color : @lightcolor;
 		&:hover{
 			text-decoration : underline;
 			color : @color;
 		}
 	}
+	.btn-info{
+	background-color:transparent;
+	}
+	
 	.panel{
 		background-color : @back;
 	}
@@ -273,9 +265,9 @@
 		color : @back;
 	}
 	.btn-info, .btn-info[disabled], .btn-primary{
-		background-color: @color;
+		
 		color : @back;
-		border-color : @lightcolor;
+		border-color : @colorwhite ;
 		margin-top:70px;
 		position: relative;
 		-webkit-transform: translateZ(0);
@@ -295,7 +287,8 @@
 			bottom: 0;
 			left: 0;
 			right: 0;
-			background: @lightcolor;
+			//background: @lightcolor ;
+			//border-color:@lightcolor;
 			-webkit-transform: scaleX(0);
 			transform: scaleX(0);
 			-webkit-transform-origin: 50%;
@@ -308,9 +301,9 @@
 			transition-timing-function: ease-out;
 		}
 		&:hover{
-			background: @color;
-			color : @darkcolor;
-			border-color : @color;
+			background:transparent;
+			color : @lightcolor;
+			border-color :@lightcolor;
 		}
 		&:hover:before, &:focus:before, &:active:before {
 			-webkit-transform: scaleX(1);
@@ -320,6 +313,7 @@
 	.btn + .btn {
 		margin-left : 10px;
 	}
+	
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus
 	{
 		background-color : @color;
@@ -341,15 +335,15 @@
 	.navbar-toggle .icon-bar {
 		background-color: @lightcolor;
 	} 
-	
 	footer{
-		margin-top : 10px;
-		padding-top : 10px;
+		margin-top : 15px;
+		padding-top : 100px;
 		color:@colorwhite;
 		font-weight : bold;
-		background: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
-		background: -moz-linear-gradient(top,  @lightbackcolor, @darkbackcolor);
-		background: linear-gradient(top,  @lightbackcolor, @darkbackcolor);
+		background-color:@darkcolor;
+		position: relative;
+		height:150px;
+			
 	}
 	.navbar-toggle{
 		background-color : @darkcolor;
@@ -502,7 +496,8 @@
 			margin-right: auto;
 			margin-left: auto;
 			height: 300px;
-			border:1px solid @colorblack;
+			border-bottom:3px solid @lightcolor;
+			
 		}
 		
 	.navbar-default .navbar-nav>li>a {
@@ -518,3 +513,14 @@
 					overflow: hidden;
 					margin-top: 28px;
 					}
+				.about{
+				 background-color:@darkcolor;
+				}
+				.gallery .thumbnail .caption .description {
+					overflow: hidden;
+					height: 122px;
+					color: white;
+				}
+				
+				
+				
