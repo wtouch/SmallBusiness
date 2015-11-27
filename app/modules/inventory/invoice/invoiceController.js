@@ -147,8 +147,7 @@ define(['app'], function (app) {
 					}
 					return modalOptions;
 				},
-			
-				updateData : function(table, input, id){
+			updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
 							$scope.getData(false, $scope.currentPage, 'invoice','invoiceList');
