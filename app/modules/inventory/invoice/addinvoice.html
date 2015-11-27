@@ -24,7 +24,8 @@
 			
 			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
 			<div class="col-sm-4">
-					<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addinvoice.generated_date" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"/>		
+				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addinvoice.generated_date"  
+				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
 			<input type="hidden" ng-model="modalOptions.addinvoice.modified_date" ng-init="modalOptions.addinvoice.modified_date=modalOptions.date">
 		</div>
