@@ -8,47 +8,22 @@
 <div class="modal-body">
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
 		<div class="form-group" ng-init="modalOptions.getData(false,false,'party', 'partyList',params,modalOptions)">
-			<label for="customer" class="col-sm-2 control-label">Select Party *</label>
-			<div class="col-sm-2">
+			<label for="party_id" class="col-sm-2 control-label">Select Vendor *</label>
+			<div class="col-sm-4 form-group">
 				<select class="form-control" name="party_id" id="party_id" ng-model="modalOptions.addBill.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter :{type :'vendor'}" required>
-					<option value="">Select Party</option>
+					<option value="">Select Vendor</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
 				</select>	
 			</div>
-			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addBill.generated_date" ng-init="modalOptions.addBill.generated_date = modalOptions.date"/>
-			</div>
-			<label  for="due_date" class="col-sm-2 control-label">due Date *</label>
-			<div class="col-sm-2">
-				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="due_date" name="due_date" ng-model="modalOptions.addBill.due_date" ng-init="modalOptions.addBill.due_date = modalOptions.date"/>
+			<label  for="bill_date" class="col-sm-2 control-label">Bill Date *</label>
+			<div class="col-sm-4 form-group">
+				<input type="date" class="form-control " placeholder="YYYY-DD-MM" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date" ng-init="modalOptions.addBill.bill_date = modalOptions.date"/>
+			</div> 
+			<input type="hidden" class="form-control " id="bill_date" name="bill_date" ng-model="modalOptions.addBill.modified_date" ng-init="modalOptions.addBill.modified_date = modalOptions.date"/>
 			</div>
 			
-			<div class="col-sm-6">
-				<label for="remark">Remark</label>
-				<input type="textarea" rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" required />
-				<span ng-hide="addbillForm.remark.$error.maxlength">
-					{{ 200 - modalOptions.addBill.remark.length + " Chars left" }}
-				</span>	
-				<span class="help-block" ng-show="addbillForm.remark.$dirty &&  addbillForm.remark.$invalid">
-					<span class="text-danger" ng-show="addbillForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="addbillForm.remark.$error.required">Remark is required.</span>
-				</span>	
-			</div>
-			<div class="col-sm-3">
-				<label for="payment_status" class="control-label" >Payment Status</label>
-				<select id="payment_status" class="form-control" name="payment_status"  ng-model="modalOptions.addBill.payment_status" required>
-					<option value="">Payment Status</option>
-					<option value="0">Unpaid</option>	
-					<option value="1">Paid</option>	
-					<option value="2">Partial Paid</option>
-				</select>
-				<span class="help-block" ng-show="addbillForm.payment_status.$dirty && addbillForm.payment_status.$invalid">
-					<span ng-show="addbillForm.payment_status.$error.required" class="text-danger">Payment Status is required.</span>
-				</span>	
-			</div>			
-		</div>
+		</div>	
 	</form>
 <div class="row">
 	<input type="hidden"  id="status" class="form-control" name="status" placeholder=" addBill" ng-model="modalOptions.addBill.status" ng-init="modalOptions.addBill.status = '1'"/>
@@ -56,80 +31,53 @@
 	<input type="hidden" class="form-control" ng-model="modalOptions.addBill.user_id" ng-init="modalOptions.addBill.user_id = userDetails.id" readonly/>
 	
 	<div class="col-sm-12" ng-init="modalOptions.addBill.particular = (modalOptions.addBill.particular) ? modalOptions.addBill.particular : []">
-	<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">{{modalOptions.singleparticular}}
+	<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">
 		<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
-			<table class="table table-bordered" >
-						<thead>
-							<tr>
-								<th>Particular Name</th>
-								<th>Goods Type</th>
-								<th>Category</th>
-								<th>Price</th>
-								<th>Quantity</th>
-								<th>Total Amount</th>
-								<th >Tax</th>
-								<th >Previous Due</th>
-								<th >Subtotal</th>
-								<th >Duration</th>
-							</tr>
-						</thead>
-				<tbody>
-					<tr>
-						<td>
-							<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" required 
-							ng-change=""/>
-							<span class="help-block" ng-show="addbillForm.particular.$dirty && addbillForm.particular.$invalid">
-								<span ng-show="addbillForm.particular.$error.required" class="text-danger">Particular Name is necessary.</span>
-							</span> 
-						</td>
-						<td>
-							<div class="form-group">
-								<label for="goods_type" class="col-sm-2 control-label">Type</label>
-							
-									<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type" required>
-										<option value="" selected>Select Type</option>
-										<option value="type1" >Type1</option>
-										<option value="type2">Type2</option>
-										<option value="type3">Type3</option>
-										<option value="type4">Type4</option>
-									</select>
-									<span class="help-block" ng-show="addbillForm.goods_type.$dirty && addbillForm.goods_type.$invalid">
-										<span ng-show="addbillForm.goods_type.$error.required" class="text-danger">Required field.</span>
-									</span>	
-							</div> 
-						</td>
-						<td>
-							<div class="form-group">
-								<label for="category" class="col-sm-2 control-label">Category</label>
-									
-										<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
-										<option value="" selected>Select Category</option>
-										<option value="category1">Category1</option>
-										<option value="category2">Category2</option>
-										<option value="category3">Category3</option>
-										<option value="category4">Category4</option>
-										</select>
-										<span class="help-block" ng-show="addbillForm.category.$dirty && addbillForm.category.$invalid">
-											<span ng-show="addbillForm.category.$error.required" class="text-danger">Required field.</span>
-										</span>	
-								</div>
-						</td>
-						<td>
-							<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"   ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
+		<div class="col-sm-6">
+			<div class="form-group">
+				<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" required 
+				ng-change=""  placeholder="particulars Name"/>
+				<span class="help-block" ng-show="addbillForm.particular.$dirty && addbillForm.particular.$invalid">
+					<span ng-show="addbillForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
+				</span> 
+			</div>
+			<div class="form-group">
+				<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type"  required>
+					<option value="" selected>Select Type</option>
+					<option value="type1" >Type1</option>
+					<option value="type2">Type2</option>
+					<option value="type3">Type3</option>
+					<option value="type4">Type4</option>
+				</select>
+				<span class="help-block" ng-show="addbillForm.goods_type.$dirty && addbillForm.goods_type.$invalid">
+				<span ng-show="addbillForm.goods_type.$error.required" class="text-danger">Required field.</span>
+				</span>	
+				</div>		
+				<div class="form-group">
+				<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
+					<option value="" selected>Select Category</option>
+					<option value="category1">Category1</option>
+					<option value="category2">Category2</option>
+					<option value="category3">Category3</option>
+					<option value="category4">Category4</option>
+					</select>
+					<span class="help-block" ng-show="addbillForm.category.$dirty && addbillForm.category.$invalid">
+						<span ng-show="addbillForm.category.$error.required" class="text-danger">Required field.</span>
+					</span>	
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
 							ng-init="modalOptions.singleparticular.price = 1;  modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
-								
-								ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
-								/>
 							
+							ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
 							
 							<span class="help-block" ng-show="addbillForm.price.$dirty && addbillForm.price.$invalid">
-							
-								<span ng-show="addbillForm.price.$error.required" class="text-danger">Price Required.</span>
-								<span ng-show="addbillForm.price.$error.pattern" class="text-danger">Enter number only</span>
+							<span ng-show="addbillForm.price.$error.required" class="text-danger">Price Required.</span>
+							<span ng-show="addbillForm.price.$error.pattern" class="text-danger">Enter number only</span>
 							</span>
-						</td>	
-						<td>
-							<input type="number" class="form-control" id="quantity"   name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  
+						</div>
+						<div class="form-group">
+							<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  
 							
 							ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" required />
 							
@@ -137,48 +85,23 @@
 								<span ng-show="addbillForm.quantity.$error.required" class="text-danger">Quantity Required</span>
 								<span ng-show="addbillForm.quantity.$error.pattern" class="text-danger">Enter number only</span>
 							</span>
-						</td>
-						<td>
-							<input type="text" class="form-control" id="total_amount" name="total_amount" ng-click="modalOptions.totalCalculate(modalOptions)" ng-init="modalOptions.singleparticular.total_amount"  ng-model="modalOptions.singleparticular.total_amount"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required readonly />
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="total_amount" name="total_amount" ng-click="modalOptions.totalCalculate(modalOptions)" ng-init="modalOptions.singleparticular.total_amount"  ng-model="modalOptions.singleparticular.total_amount"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required readonly  placeholder="Total_amount" />
 							<span class="help-block" ng-show="addbillForm.total_amount.$dirty && addbillForm.total_amount.$invalid">
 								<span ng-show="addbillForm.total_amount.$error.required" class="text-danger">Total total_amount Required.</span>
 								<span ng-show="addbillForm.total_total_amount.$error.pattern" class="text-danger">Enter numbers only</span>
 							</span>
-						</td>
-						<td >
-							<input type="text" class="form-control" id="tax" name="tax" ng-model="modalOptions.singleparticular.tax"   ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="tax" placeholder="Tax" name="tax" ng-model="modalOptions.singleparticular.tax"   ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
 							<span class="help-block" ng-show="addbillForm.tax.$dirty && addbillForm.tax.$invalid">
 								<span ng-show="addbillForm.tax.$error.required" class="text-danger">Tax Required.</span>
 								<span ng-show="addbillForm.tax.$error.pattern" class="text-danger">Enter number only</span>
 							</span>
-						</td>
-						<td>
-							<input type="text" class="form-control" id="previous_due" name="previous_due" ng-model="modalOptions.singleparticular.previous_due" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/"required/>
-							<span class="help-block" ng-show="addbillForm.previous_due.$dirty && addbillForm.previous_due.$invalid">
-								<span ng-show="addbillForm.previous_due.$error.required" class="text-danger">Previous Due is necessary.</span>
-								<span ng-show="addbillForm.previous_due.$error.pattern" class="text-danger">Enter number only</span>
-							</span> 
-						</td>
-						<td>
-							<input type="text" class="form-control" id="subtotal" name="subtotal" ng-model="modalOptions.singleparticular.subtotal" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
-							ng-change=""/>
-							<span class="help-block" ng-show="addbillForm.subtotal.$dirty && addbillForm.subtotal.$invalid">
-								<span ng-show="addbillForm.subtotal.$error.required" class="text-danger">subtotal is necessary.</span>
-								<span ng-show="addbillForm.subtotal.$error.pattern" class="text-danger">Enter number only</span>
-							</span> 
-						</td>
-						<td>
-							<input type="text" class="form-control" id="duration" name="duration" ng-model="modalOptions.singleparticular.duration"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
-							<span class="help-block" ng-show="addbillForm.duration.$dirty && addbillForm.duration.$invalid">
-								<span ng-show="addbillForm.duration.$error.required" class="text-danger">duration Required.</span>
-								<span ng-show="addbillForm.duration.$error.pattern" class="text-danger">Enter number only</span>
-							</span>
-						</td>
-					</tr>
-					
-				</tbody>
-			</table>
-		</div>		
+						</div>
+					</div>
+				</div>			
 			<button type="submit" class="btn btn-success"ng-disabled="addbillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addBill.particular, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular)">	+Add This Particular
 			</button>
 		</form>
@@ -196,10 +119,8 @@
 					<th class="col-sm-2 text-right">Quantity</th>
 					<th class="col-sm-2 text-right">Total Amount</th>
 					<th >Tax</th>
-					<th >Previous Due</th>
-					<th >Subtotal</th>
-					<th>Duration</th>
-				</tr>
+					<th ></th>
+				</tr> 
 			</thead>
 			<tbody >
 				<tr ng-repeat="x in modalOptions.addBill.particular">
@@ -211,13 +132,23 @@
 					<td class="text-right">{{x.quantity}}</td>
 					<td class="text-right">{{x.total_amount}}</td>
 					<td class="text-right">{{x.tax}}</td>
-					<td class="text-right">{{x.previous_due}}</td>
-					<td class="text-right">{{x.subtotal}}</td>
-					<td class="text-right">{{x.duration}}</td>
+					
+				
 					<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index)">X</button></td>
 				</tr>
 			</tbody>
 		</table>
+			<label  for="remark" class="col-sm-2 control-label">Remark *</label>			
+			<div class="col-sm-4 form-group">
+				<input type="textarea" rows="4" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" placeholder="please Remark here.." required />
+				<span ng-hide="addbillForm.remark.$error.maxlength">
+					{{ 200 - modalOptions.addBill.remark.length + " Chars left" }}
+				</span>	
+				<span class="help-block" ng-show="addbillForm.remark.$dirty &&  addbillForm.remark.$invalid">
+					<span class="text-danger" ng-show="addbillForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="addbillForm.remark.$error.required">Remark is required.</span>
+				</span>	
+			</div>
 	</div>
 <div class="modal-footer">
 	<button type="submit" ng-if="modalOptions.addBill.id"  class="btn btn-success" ng-click="modalOptions.updateData('bill',modalOptions.addBill,modalOptions.addBill.id); modalOptions.ok()">Update Purchase Bill</button>

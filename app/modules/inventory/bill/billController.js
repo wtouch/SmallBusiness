@@ -37,12 +37,8 @@ define(['app'], function (app) {
 					  placeholder: 'Party Name'
 					}
 				},
-				{ name:'generated_date',
-					filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'bill\', \'billData\')" ng-model="generated_date" placeholder="search">',
-				},
-				{ name:'remark',
-				     filterHeaderTemplate: '<input id="remark" class="form-control" ng-change="grid.appScope.filter(\'remark\', remark, \'bill\', \'billData\')" ng-model="remark" placeholder="search">',
-            
+				{ name:'bill_date',
+					filterHeaderTemplate: '<input id="bill_date" class="form-control" ng-change="grid.appScope.filter(\'bill_date\', bill_date, \'bill\', \'billData\')" ng-model="bill_date" placeholder="search">',
 				},
 				{ name:'payment_status',
 				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\')" ng-model="payment_status" placeholder="search">'
@@ -66,26 +62,20 @@ define(['app'], function (app) {
 					
 					}
 				},
-				/* { name:'Paid Amount',enableSorting: false, enableFiltering: false,}, */
 				{ name:'Due_Amount',width:50,
 					filterHeaderTemplate: '<input id="Due_Amount" class="form-control" ng-change="grid.appScope.filter(\'Due_Amount\', Due_Amount, \'bill\', \'billData\')" ng-model="Due_Amount" placeholder="search">',},
 				
 				{ name:'due_date',width:80,
 					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'bill\', \'billData\')" ng-model="remark" placeholder="search">',},
-				{
-					name:'status',width:50,
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\')" ng-model="status">'
+				{ name:'manage',
+				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\')" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
 						+'</select>', 
 					filter: {
-					  //type: uiGridConstants.filter.SELECT,
-					 
-					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
-					} 
-				},
-				{ name:'manage', enableSorting: false, enableFiltering: false, 
+					   options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
+					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					+ '<a type="button" tooltip="Delete bill" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
