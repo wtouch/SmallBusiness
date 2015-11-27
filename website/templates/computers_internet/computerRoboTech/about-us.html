@@ -1,61 +1,52 @@
 {% autoescape false %}
-	<div class="about">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-4 tit">
-				The Faces Behind MoveIn RoboTech...
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-8">
-				{{data.business_info.aboutDescription}}
-			</div>
-		</div>
-	</div>	
-	{% if data.infrastructure %}
-	<hr>
-	<div class="infrastructure" id="infrastructure">
-		<h3 class="text-center">Infrastructure/Facilities</h3>
-		<div class="row">
-			{% for key, value in data.infrastructure %}
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-					<div class="thumbnail">
-						<div class="infraImg">
-							<img class="img-responsive " src="{{value.image.file_relative_path}}"/>
-						</div>
-						<div class="caption text-center" ng-controller="aboutController">
-							<h4>{{value.heading}}</h4>
-							{{value.description|length >100 ? value.description|slice(start,100)~ '...' : value.description}}
-						</div>
-						<div class="readmore text-center">
-							<a type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal{{loop.index}}">Read More..</a>
-						</div>
-					</div>
-				</div>
-				<!-- modal -->	
-				<div id="myModal{{loop.index}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title" id="myModalLabel">Infrastructure Details</h4>
-							</div>
-							<div class="modal-body">
-								<div class="row">
-									<div class="col-xs-12 col-sm-4 col-lg-3">
-										<a href="#">
-										  <img class="img-responsive" src="{{value.image.file_relative_path}}"/>
-										</a>
-									</div>
-									<div class="col-xs-12 col-sm-8 col-lg-9">
-										<h4>{{value.heading}}</h4>
-										<p>{{value.description}}</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--modal end-->
-			{% endfor %}
+	
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-sm-12 col-lg-12">
+			
 		</div>
 	</div>
-	{% endif %}
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-sm-4 col-lg-4 a">
+			<h1>The faces behind MoveIn RoboTech</h1>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-sm-8 col-lg-8 b">
+				<h4>Abhijit Shrigiriwar</h4>
+				<p><strong>Director</strong>&nbsp;:</p>
+				<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Abhijit, a young enthusiastic leader in his passionate way is a Mechanical Engineer with having Masters in technology in CAD. Abhijit has worked exclusively for development and enterprise level solutions for Robotics over a decade. During this time, he has developed unrivalled search knowledge and a unique perspective on the growth and movement of the industry internationally. Abhijit&rsquo;s extensive experience has helped MoveIn RoboTech grow in more ways than one. His keen eye for details and people management skills has helped Refine immensely to build a brand image that MoveIn RoboTech is proud of. He has got vast experience in designing and manufacturing of many complex and task specific industrial robots. He is specialized in design analysis and optimization with wide knowledge of developing robots for education and entertainment industry.</p>
+				<h4>Atish Tirpude</h4>
+				<p><strong>Creative Director :</strong></p>
+				<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Atish has extensive experience in internet, email, and online marketing and international business development. He has experience in web analytics as well. Atish is Computer Engineer with specialty in Software Engineering and Process Management and MBA in marketing and Information Technology. Atish has a strong internet marketing background which is an indispensible asset to the company. Atish is involved in the initiation and development of any new HR policy or procedure. Bringing notable improvement in employee retention and satisfaction, Atish has excelled himself in improving employee morale. He has also played a major role in improving the benefits program or launch of new employee benefits in MoveIn RoboTech. He has contributed significantly in planning effective strategies for screening and recruitment.</p>
+				<h4>Swapnil Thakre</h4>
+				<p><strong>Co-Founder and Customer Relationship/People Manager :</strong></p>
+				<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Having an experience of over a decade, Swapnil, an Electronics Engineer having MTech in VLSI had started of his career with Indorama and then moved on to MoveIn RoboTech. Currently working, He has helped build a positive relationship which has lasted for over a year now. He helps the company to track and organize its contacts with its current and prospective customers. He improves services provided to customers, and uses customer contact information for targeted marketing. Swapnil brings a holistic approach to handling customer relationships which helps to retain our customers and build strong and meaningful relationships for a long term. Conceptualizing customized Robotic Education plans for every level of students and giving them guaranteed lead generation (proper training with effective ways and ethics) proposals, Swapnil has proved himself to be indispensable to the MoveIn RoboTech family.</p>
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-sm-4 col-lg-4 a">
+			<h1>Vision & Mission</h1>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-sm-8 col-lg-8 b">
+				To provide quality education to trainee, a well equipped and good infrastructure along with well informed, motivated faculty is crucial. Areas like course curriculum, faculty development and educational infrastructure have been identified as key areas of improvement. Our Mission is to provide engineering solutions to other companies in fields of product design, analysis and layout & bridge the gap between Industrial requirement and Academic education.
+
+				We provide a platform to learners and equip them with technologies to perform and show their creativity in our workshops and Internship Programs.
+
+				MoveIn RoboTech believes in extensive full depth training to the students, on the practical projects they want to work upon as per their choice. 
+				
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-sm-4 col-lg-4 a">
+			<h1>Objectives</h1>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-sm-8 col-lg-8 b">
+			<ul>
+			<li>To provides cost effective and quality education at par with the best in the facilities.</li>
+			<li>To develop sense of responsibility, discipline, commitment professional ethics and inculcate sprit of Entrepreneurship among students.</li>
+			<li>To provide the best learning in the field of robotics and automation to the student who are studying engineering in various disciplines and to all those who want to make their career in the field of robotics and automation industry.</li>
+			<li>To bridge the gap between the theoretical and practical learning by providing students in depth knowledge of various machines.</li>
+			<li>To work upon the best and latest technologies in the ever fast changing world and also train students on various modules in engineering disciplines.</li>
+			</ul>
+		</div>
+	</div>
 {% endautoescape %}
