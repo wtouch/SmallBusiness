@@ -8,7 +8,7 @@
 	<!--THE HIDDEN Generate Date and Due_date and User ID-->
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="generalForm.$valid" id="generalForm">
 		<div class="form-group">
-				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
+			<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="party_id" class="col-sm-2 control-label"> Select Party * </label>
 					<div class="col-sm-4">
 						<select id="party_id" class="form-control" ng-model="modalOptions.addinvoice.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}">
@@ -22,31 +22,12 @@
 					</div>
 			</div>
 			
-			<label  for="payment_status" class="col-sm-2 control-label">Payment Status</label>
-				<div class="col-sm-4">
-					<select id="payment_status" class="form-control" name="payment_status"  ng-model="modalOptions.addinvoice.payment_status" required>
-						<option value="" selected>Payment Status</option>
-						<option value="0">Unpaid</option>	
-						<option value="1">Paid</option>	
-						<option value="2">Partial Paid</option>
-					</select>
-					<span class="help-block" ng-show="addInvoiceForm.payment_status.$dirty && addInvoiceForm.addinvoice.payment_status.$invalid">
-							<span ng-show="addInvoiceForm.payment_status.$error.required" class="text-danger">Payment Status is required.</span>
-					</span>	
-				</div><br> <br>
-				
 			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
 			<div class="col-sm-4">
 					<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addinvoice.generated_date" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"/>		
 			</div>
-			
-			<label  for="due_date" class="col-sm-2 control-label">Due Date *</label>
-			<div class="col-sm-4">
-					<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="due_date" name="due_date" ng-model="modalOptions.addinvoice.due_date" ng-init="modalOptions.addinvoice.due_date = modalOptions.date" /> 
-			</div>
-				
-			</div>
-	</form>
+		</div>
+	</form>{{modalOptions.addinvoice}}
 	<br>
 	<!--THE HIDDEN Generate Date and Due_date and User ID Ends Here-->
 	<div class="row" >
@@ -60,35 +41,29 @@
 			<div class="table-responsive" ng-if="modalOptions.addinvoice.party_id">
 				<table class="table table-bordered" >
 					<thead>
-						<tr>
+						<!-- <tr>
 							<th>Particular Name</th>
 							<th>Type</th>
 							<th>Category</th>
 							<th>Price</th>
 							<th>Quantity</th>
 							<th>Amount</th>
-							<th>Duration</th>
 							<th>Previous Due</th>
 							<th colspan="3">Tax</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
 							<td>
-								
-								<input type="text" class="form-control " placeholder="Particular Name" id="particular_name" name="particular_name" ng-model="modalOptions.singleparticular.particular_name" required/>
+								<input type="text" class="form-control" placeholder="Particular Name" id="particular_name" name="particular_name" ng-model="modalOptions.singleparticular.particular_name" required/>
 								
 								<span class="help-block" ng-show="addInvoiceForm.particular_name.$dirty && addInvoiceForm.particular_name.$invalid">
 								<span ng-show="addInvoiceForm.particular_name.$error.required" class="text-danger">particular_name Required.</span>
 								</span>
-								
 							</td>
 							<td>
-							<div class="form-group">
-								<label for="goods_type" class="col-sm-2 control-label">Type</label>
-							
-									<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type" required>
-										<option value="" selected>Select Type</option>
+								<select id="goods_type" class="form-control" placeholder="Type" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type" required>
+										<option value="" selected>Type</option>
 										<option value="type1" >Type1</option>
 										<option value="type2">Type2</option>
 										<option value="type3">Type3</option>
@@ -97,29 +72,24 @@
 									<span class="help-block" ng-show="addInvoiceForm.goods_type.$dirty && addInvoiceForm.goods_type.$invalid">
 										<span ng-show="addInvoiceForm.goods_type.$error.required" class="text-danger">Required field.</span>
 									</span>	
-							</div> 
-						</td>
-						<td>
-							<div class="form-group">
-								<label for="category" class="col-sm-2 control-label">Category</label>
-									
-										<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
-										<option value="" selected>Select Category</option>
-										<option value="category1">Category1</option>
-										<option value="category2">Category2</option>
-										<option value="category3">Category3</option>
-										<option value="category4">Category4</option>
-										</select>
-										<span class="help-block" ng-show="addInvoiceForm.category.$dirty && addInvoiceForm.category.$invalid">
-											<span ng-show="addInvoiceForm.category.$error.required" class="text-danger">Required field.</span>
-										</span>	
-								</div>
-						</td>
+							</td>
+							<td>
+								<select id="category" class="form-control" name="category" placeholder="Category" ng-model="modalOptions.singleparticular.category" required>
+											<option value="" selected>Category</option>
+											<option value="category1">Category1</option>
+											<option value="category2">Category2</option>
+											<option value="category3">Category3</option>
+											<option value="category4">Category4</option>
+											</select>
+								<span class="help-block" ng-show="addInvoiceForm.category.$dirty && addInvoiceForm.category.$invalid">
+									<span ng-show="addInvoiceForm.category.$error.required" class="text-danger">Required field.</span>
+								</span>	
+							</td>
 							<td>
 								<input type="text" class="form-control " placeholder="price" id="price" name="price" ng-model="modalOptions.singleparticular.price"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/"
 								ng-init="modalOptions.singleparticular.price = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
 								
-								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"								required/>
+								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"	required/>
 								<span class="help-block" ng-show="addInvoiceForm.price.$dirty && addInvoiceForm.price.$invalid">
 								<span ng-show="addInvoiceForm.price.$error.required" class="text-danger">Price Required.</span>
 								<span ng-show="addInvoiceForm.price.$error.pattern" class="text-danger">Enter like 0.00 only</span>
@@ -127,7 +97,6 @@
 							</td>
 							
 							<td>
-								
 								<input type="text" class="form-control " placeholder="Quantity" id="quantity" name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" ng-init="modalOptions.singleparticular.quantity = 1" 
 							
 								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" 
@@ -143,32 +112,20 @@
 								<input type="text" class="form-control " placeholder="Amount" id="amount" name="amount" ng-model="modalOptions.singleparticular.amount" ng-init="modalOptions.singleparticular.amount" readonly/>
 							</td>
 							<td>
-								<input type="text" class="form-control" id="duration" name="duration" placeholder="duration"ng-model="modalOptions.addinvoice.duration"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
-								<span class="help-block" ng-show="addInvoiceForm.duration.$dirty && addInvoiceForm.duration.$invalid">
-									<span ng-show="addInvoiceForm.duration.$error.required" class="text-danger">duration Required.</span>
-									<span ng-show="addInvoiceForm.duration.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+								<input type="text" class="form-control" id="previous_due" name="previous_due" placeholder="Previous due" ng-model="modalOptions.addinvoice.previous_due" required 
+								ng-change=""/>
+								<span class="help-block" ng-show="addInvoiceForm.previous_due.$dirty && addInvoiceForm.previous_due.$invalid">
+									<span ng-show="addInvoiceForm.previous_due.$error.required" class="text-danger">Previous Due is necessary.</span>
+								</span> 
+							</td> 
+							<td>
+								<input type="text" class="form-control " placeholder="Tax" id="tax" name="tax" ng-model="modalOptions.addinvoice.tax" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" required/>
+								
+								<span class="help-block" ng-show="addInvoiceForm.tax.$dirty && addInvoiceForm.tax.$invalid">
+								<span ng-show="addInvoiceForm.tax.$error.required" class="text-danger">tax Required.</span>
+								<span ng-show="addInvoiceForm.tax.$error.pattern" class="text-danger">Enter like 0.00 only</span>
 								</span>
 							</td>
-							<td>
-							<input type="text" class="form-control" id="previous_due" name="previous_due" placeholder="Previous due" ng-model="modalOptions.addinvoice.previous_due" required 
-							ng-change=""/>
-							<span class="help-block" ng-show="addInvoiceForm.previous_due.$dirty && addInvoiceForm.previous_due.$invalid">
-								<span ng-show="addInvoiceForm.previous_due.$error.required" class="text-danger">Previous Due is necessary.</span>
-							</span> 
-						</td>
-							<td>
-							<label class="col-sm-3">
-									Other Tax<input type="checkbox" name="tax1" ng-model="modalOptions.addinvoice.tax.tax1" >
-							</label>
-							<label class="col-sm-3">
-									Other Tax<input type="checkbox" name="tax2" ng-model="modalOptions.addinvoice.tax.tax2">
-							</label>
-							<label class="col-sm-3">
-									Other Tax<input type="checkbox" name="tax3" ng-model="modalOptions.addinvoice.tax.tax3">
-							</label>
-							
-							</td>
-							
 						</tr>
 					</tbody>
 				</table>
