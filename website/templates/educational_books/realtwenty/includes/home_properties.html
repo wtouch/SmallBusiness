@@ -1,10 +1,11 @@
+
 {% autoescape false %}
-{% if featured_properties >= 1%}
-<div class="row-fluid">
+{% if home_properties >= 1 %}
+<div class="row">
 	<div class="featuredProperty">
-		<ul class="bxslider1">
+		<ul class="bxslider">
 			{% set break = 0 %}{% set i = 0 %}
-			{% for x in featured_properties if break == 0 %}
+			{% for x in home_properties if break == 0 %}
 				<li class="row">
 					<div class="col-xs-12 col-md-6">
 						<a href="properties/{{x.title| replace({' ':'-', '/':'_'})}}/{{x.id}}">

@@ -20,7 +20,7 @@
 		<script type="text/javascript">			$(document).ready(function(){				$('.hm-slider #slider').bxSlider({
 					mode: 'fade',
 					auto: true,
-					controls: false,					autoHover : true,				});				$('.slider').bxSlider({					mode: 'fade',					auto: true,					controls: false,					autoHover : true,					pager  : true				});				$('.home-bx-slide ul').bxSlider({					mode: 'vertical',					auto: true,					controls: false,					autoHover : true,					displaySlideQty : 1,					moveSlideQty : 1				});								// This function is used for displaying submenu with jQuery and css ***************************************************				$(".nav li ul").hide();				$(".nav li").hover(function(){					$(this).find('ul:first').css({visibility: "visible",display: "none", background:""}).show(500);				},function(){					$(this).find('ul:first').css({visibility: "hidden",display: "none"});				});								$("div.slider .fancybox").fancybox({					'height'  : '100%',					'autoScale'  : false,					width    : '400px',					type    : 'image',					openEffect  : 'elastic',					openSpeed  : 300,					closeEffect : 'elastic',					closeSpeed  : 300,					autoPlay  : true,					loop    : true				});								$(".nav a").each(function() {   					if (this.href == window.location.href) {						$(this).parent(".nav li").addClass("active");					}				});			});
+					controls: false,					autoHover : true,				});				$('.slider').bxSlider({					mode: 'fade',					auto: true,					controls: false,					autoHover : true,					pager  : false				});				$('.home-bx-slide ul').bxSlider({					mode: 'vertical',					auto: true,					controls: false,					autoHover : true,					displaySlideQty : 1,					moveSlideQty : 1				});								// This function is used for displaying submenu with jQuery and css ***************************************************				$(".nav li ul").hide();				$(".nav li").hover(function(){					$(this).find('ul:first').css({visibility: "visible",display: "none", background:""}).show(500);				},function(){					$(this).find('ul:first').css({visibility: "hidden",display: "none"});				});								$("div.slider .fancybox").fancybox({					'height'  : '100%',					'autoScale'  : false,					width    : '400px',					type    : 'image',					openEffect  : 'elastic',					openSpeed  : 300,					closeEffect : 'elastic',					closeSpeed  : 300,					autoPlay  : true,					loop    : true				});								$(".nav a").each(function() {   					if (this.href == window.location.href) {						$(this).parent(".nav li").addClass("active");					}				});			});
 		</script> 
 	</head>
 <body>
@@ -65,13 +65,20 @@
 		{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
 	{%endif%}
 
-	{% if modules.contentModule.featured_properties or modules.contentModule.featured_projects %}	<!-- Home Message -->	<div class="home">		<!-- Home Featured Property -->			<div class="home-box">				<h1>Featured Property</h1>				<div class="home-bx-slide">					{% include [templatePath ~ '/includes/featured_properties.html','default/default/includes/featured_properties.html'] %}				</div>			</div>		<!-- End Home Featured Property -->
-    <!-- Home Featured Project -->    <div class="home-project">		<h1>Featured Project:</h1>
-		{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}    </div>
-    <!-- End Home Featured Project -->
-    <!-- Home Message -->
-    <div class="home-msg">
-		<div class="moduletable">
+	{% if modules.contentModule.featured_properties or modules.contentModule.featured_projects %}	<!-- Home Message -->	<div class="home">		<!-- Home Project Property -->			<div class="home-box">				<h1>Project Property</h1>				<div class="home-bx-slide">					{% include [templatePath ~ '/includes/home_properties.html','default/default/includes/home_properties.html'] %}				</div>			</div>		<!-- End Home Featured Property -->		<!-- Home Featured Property -->
+			<div class="home-box">
+				<h1>Featured Property</h1>
+				<div class="home-bx-slide">
+					{% include [templatePath ~ '/includes/featured_properties.html','default/default/includes/featured_properties.html'] %}
+				</div>
+			</div>
+		<!-- End Home Featured Property -->
+		<!-- Home Featured Project -->		<div class="home-project">			<h1>Featured Project:</h1>
+			{% include [templatePath ~ '/includes/featured_projects.html', 'default/default/includes/featured_projects.html'] %}		</div>
+		<!-- End Home Featured Project -->
+		<!-- Home Message - ->
+		<div class="home-msg">
+			<div class="moduletable">
 				<h1 class="">Contact Us</h1>
 				<div class="custom">
 					<p><span><strong>Address:&nbsp;</strong></span><span style="line-height: 1.3em;">Park Street, Nr Mahindra Woods, Hinjewadi Aundh Wakad Road, Wakad</span></p>
@@ -111,8 +118,11 @@
 			</div>		{% endif %}
 		<div class="footer">
 			<div class="footer-copy">
-				<p>Copyright: Property Demand</p>
-				<p>Design By <a href="http://www.wtouch.in">Web Touch</a></p>
+				<p class="text-center">
+					&copy; 2015 <a href="/">{{data.business_name}}</a>
+					&nbsp;|&nbsp;Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>
+					&nbsp;|&nbsp;<a target="_blank" href="/sitemap.xml">SITEMAP</a>
+				</p>
 			</div>
 			<div class="footer-logo">Property Demand</div>
 		</div>
