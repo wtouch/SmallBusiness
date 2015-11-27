@@ -50,7 +50,7 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="debit_amount" class="form-control" ng-change="grid.appScope.filter(\'debit_amount\', debit_amount, \'transaction\', \'transactionList\')" ng-model="debit_amount" placeholder="Amount">',
 					},
 				{ name:'balance',
-					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\')" ng-model="balance" placeholder="Amount">',
+					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\')" ng-model="balance" placeholder="Balance">',
 					},
 				{ name:'status',
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transaction\', \'transactionList\')" ng-model="status">'
