@@ -1,31 +1,48 @@
 <div class="main-content">
+	<ng-include src="'modules/component/toolbar.html'"></ng-include>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="row bottomspace">
+					<div class="col-sm-3">
+						<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="filter('name', searchUser, 'user', 'userList', true)" ng-model="searchUser" placeholder="Search">
+						<input id="search" type="text" class="form-control" ng-if="userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUserGroup)" ng-model="searchUserGroup" placeholder="Search">
+					</div>
+					
 					<div class="col-sm-9 text-right">
-						<a href="#/dashboard/employee" class="btn btn-primary">Employee List</a>
-						<a class="btn btn-primary" ng-click="openModal('modules/inventory/employee/addemployee.html')">Add New Employee</a>
+						<a href="#/dashboard/employee" class="btn btn-primary">employee List</a>
+						<a class="btn btn-primary" ng-click="openModal('modules/inventory/employee/addemployee.html')">Add New employee</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-2">
-				<div class="bottomspace">
-					<label for="partyList_status" class="control-label" >partyList Status</label>
-					<select id="partyList_status" class="form-control" ng-change="getData(false, currentPage,'party', 'party', params)" ng-model="pageItems">
-							<option value="10">10</option>
-							<option value="20">20</option>
-							<option value="30">30</option>
+		
+	  <!--   <div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="filterbycustomerid" class="control-label">Filter By employee</label>
+					<select id="filterbycustomerid" class="form-control" ng-model="filterbycustomerid"  ng-change="usersList(usersListCurrentPage,'user_id', filterbycustomerid)" ng-options="user.id as user.name for user in customerList">
+						<option value="">Select employee</option>
 					</select>
-				</div>
+			</div> 
+		</div>  -->
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="employeeList_status" class="control-label" >employeeList Status</label>
+				<select id="employeeList_status" class="form-control" ng-change="getData(false, currentPage,'employee', 'employee', params)" ng-model="pageItems">
+					
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+				</select>
 			</div>
+		</div>
 	</div>
 	
-	<div class="table-responsive" ng-init="getData(false, currentPage, 'party','party',params);">
-		<div ui-grid="party"></div>
+	
+	<div class="table-responsive" ng-init="getData(false, currentPage, 'employee','employee',params);">
+		<div ui-grid="employee"></div>
 	</div>
 	
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'party','party',params)"></pagination>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'employee','employee',params)"></pagination>
 		<pre>Page: {{currentPage}} / {{numPages}}</pre>
 	</div>	
 
