@@ -7,7 +7,7 @@
 </div>
 <div class="modal-body">
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
-		<div class="form-group" ng-init="modalOptions.getData(false,false,'party', 'partyList',params,modalOptions)">
+		<div ng-init="modalOptions.getData(false,false,'party', 'partyList',params,modalOptions)">
 			<label for="party_id" class="col-sm-2 control-label">Select Vendor *</label>
 			<div class="col-sm-4 form-group">
 				<select class="form-control" name="party_id" id="party_id" ng-model="modalOptions.addBill.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter :{type :'vendor'}" required>
@@ -16,23 +16,38 @@
 					<option value="2">2</option>
 				</select>	
 			</div>
-			<label  for="bill_date" class="col-sm-2 control-label">Bill Date *</label>
+		</div>
+		<label  for="bill_date" class="col-sm-2 control-label">Bill Date *</label>
 			<div class="col-sm-4 form-group">
-				<input type="date" class="form-control " placeholder="YYYY-DD-MM" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date" ng-init="modalOptions.addBill.bill_date = modalOptions.date"/>
-			</div> 
-			<input type="hidden" class="form-control " id="bill_date" name="bill_date" ng-model="modalOptions.addBill.modified_date" ng-init="modalOptions.addBill.modified_date = modalOptions.date"/>
+				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date" 	
+			 datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addBill.bill_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
+			<input type="hidden" class="form-control " id="bill_date" name="bill_date" ng-model="modalOptions.addBill.modified_date" ng-init="modalOptions.addBill.modified_date = modalOptions.date"/>
 			
-		</div>	
-	</form>
+				<label  for="remark" class="col-sm-2 control-label">Remark *</label>			
+			<div class="col-sm-6 form-group">
+				<textarea rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" placeholder="please Remark here.." required > </textarea>
+				<span ng-hide="addbillForm.remark.$error.maxlength">
+					{{ 200 - modalOptions.addBill.remark.length + " Chars left" }}
+				</span>	
+				<span class="help-block" ng-show="addbillForm.remark.$dirty &&  addbillForm.remark.$invalid">
+					<span class="text-danger" ng-show="addbillForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="addbillForm.remark.$error.required">Remark is required.</span>
+				</span>	
+			</div>
+	</div>	
+</form>
 <div class="row">
+	
 	<input type="hidden"  id="status" class="form-control" name="status" placeholder=" addBill" ng-model="modalOptions.addBill.status" ng-init="modalOptions.addBill.status = '1'"/>
 
 	<input type="hidden" class="form-control" ng-model="modalOptions.addBill.user_id" ng-init="modalOptions.addBill.user_id = userDetails.id" readonly/>
 	
-	<div class="col-sm-12" ng-init="modalOptions.addBill.particular = (modalOptions.addBill.particular) ? modalOptions.addBill.particular : []">
+	<div class=" col-sm-offset-2 col-sm-12" ng-init="modalOptions.addBill.particular = (modalOptions.addBill.particular) ? modalOptions.addBill.particular : []">
 	<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">
 		<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
+		<h4>Add Perticular</h4>
+	
 		<div class="col-sm-6">
 			<div class="form-group">
 				<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" required 
@@ -138,17 +153,7 @@
 				</tr>
 			</tbody>
 		</table>
-			<label  for="remark" class="col-sm-2 control-label">Remark *</label>			
-			<div class="col-sm-4 form-group">
-				<input type="textarea" rows="4" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" placeholder="please Remark here.." required />
-				<span ng-hide="addbillForm.remark.$error.maxlength">
-					{{ 200 - modalOptions.addBill.remark.length + " Chars left" }}
-				</span>	
-				<span class="help-block" ng-show="addbillForm.remark.$dirty &&  addbillForm.remark.$invalid">
-					<span class="text-danger" ng-show="addbillForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="addbillForm.remark.$error.required">Remark is required.</span>
-				</span>	
-			</div>
+		
 	</div>
 <div class="modal-footer">
 	<button type="submit" ng-if="modalOptions.addBill.id"  class="btn btn-success" ng-click="modalOptions.updateData('bill',modalOptions.addBill,modalOptions.addBill.id); modalOptions.ok()">Update Purchase Bill</button>
