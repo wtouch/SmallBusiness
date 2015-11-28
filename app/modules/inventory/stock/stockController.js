@@ -31,12 +31,12 @@ define(['app'], function (app) {
 				},
 				{
 				    name:'party_id',
-					filterHeaderTemplate: '<input id="party_id" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'stock\', \'stockList\')" ng-model="party_id" placeholder="search user id">',
+					filterHeaderTemplate: '<input id="party_id" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'stock\', \'stockList\',true)" ng-model="party_id" placeholder="search user id">',
                 },
 				
 				{
 				    name:'goods_name',
-					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\')" ng-model="goods_name" placeholder="search">',
+					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\',true)" ng-model="goods_name" placeholder="search">',
                 },
 					{
 					name:'goods_type',
