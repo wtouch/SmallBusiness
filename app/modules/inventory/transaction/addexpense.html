@@ -8,7 +8,7 @@
 			<!-- <div ng-if = "type =='Rent'"> -->
 			
 		 <div class="form-group">
-				<div ng-init="modalOptions.getData(false,false,'party','partyList', params, modalOptions)">
+				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="party" class="col-sm-2 control-label">Party *</label>
 						<div class="col-sm-9">
 							<select id="party_id" class="form-control" ng-model="modalOptions.addexpence.party_id" ng-options="item.id as item.name for item in modalOptions.partyList">
@@ -20,6 +20,15 @@
 						</div>
 				</div>
 			</div>
+			<input type="hidden"  ng-model="modalOptions.addexpence.balance"/>
+			<input type="hidden" class="form-control" ng-model="modalOptions.addexpence.user_id" ng-init="modalOptions.addexpence.user_id = userDetails.id" readonly/>	
+			
+			<input type="hidden" ng-model="modalOptions.addexpence.type" ng-init="modalOptions.addexpence.type='expence'"/> 
+			
+			<input type="hidden" ng-model="modalOptions.addexpence.modified_date" ng-init="modalOptions.addexpence.modified_date = modalOptions.incomeDate.date" />
+			
+			<input type="hidden" ng-model="modalOptions.addexpence.status" ng-init="modalOptions.addexpence.status = 1" />
+			
 				<div class="form-group">
 					<label for="category" class="col-sm-2 control-label">Category</label>
 									<div class="col-sm-9">
@@ -41,9 +50,7 @@
 										</span>	
 								</div>
 				<span>
-					<input type="hidden" class="form-control" ng-model="modalOptions.addexpence.description.user_id"/>
-					<input type="hidden" class="form-control" ng-model="modalOptions.addexpence.user_id"/> 
-					{{modalOptions.addexpence}}
+					
 					
 				</span> 
 			
@@ -51,7 +58,7 @@
 				<div ng-init="modalOptions.getData(false,false,'account','accountList', params, modalOptions)">
 					<label for="account" class="col-sm-2 control-label">Account Name*</label>
 						<div class="col-sm-9">
-							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_no as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addexpence.account" >
+							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_no as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addexpence.account_no" >
 							<option value="">Select Account</option>
 							</select>	 
 							<span class="help-block" ng-show="addexpenceForm.customer.$dirty && addexpenceForm.customer.$invalid">
@@ -61,10 +68,10 @@
 				</div>
 			</div>
 			
-			<div class="form-group">	
+			<div class="form-group"><!--ng-model="modalOptions.addexpence.date"-->	
 				<label  for="date" class="col-sm-2 control-label">Date</label>
 					<div class="col-sm-9">
-						<input type="text" id="date" class="form-control" ng-model="modalOptions.addexpence.date" ng-init="modalOptions.addexpence.date = modalOptions.incomeDate.date"  name="date" readonly 
+						<input type="text" id="date" class="form-control" ng-model="modalOptions.addexpence.date" ng-init="modalOptions.addexpence.date = modalOptions.expenceDate.date"  name="date" readonly 
 						placeholder="date">
 					</div>						
 			</div>

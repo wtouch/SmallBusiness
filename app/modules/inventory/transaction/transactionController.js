@@ -117,7 +117,7 @@ define(['app'], function (app) {
 			};
 			
 			var modalOptions = {
-				//incomeDate : { date : $scope.currentDate},
+				incomeDate : { date : $scope.currentDate},
 				
 				addincome : (data) ? {
 					id : data.id,
@@ -251,12 +251,20 @@ define(['app'], function (app) {
 			})
 		}
 		
+		$scope.transactionParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
+		}
 		
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					status : 1
+					status : 1,
+					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]
 			};
