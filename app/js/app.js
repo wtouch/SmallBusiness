@@ -155,24 +155,38 @@ define(['angular',
 				parentPath = "/dashboard/";
 				var moduleRoutes = routes.moduleRoutes;
 				var currentRoutes = (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
-				//localStorage.module_roots = JSON.stringify(currentRoutes.concat(moduleRoutes));
+				localStorage.module_roots = JSON.stringify(currentRoutes.concat(moduleRoutes));
 			}else{
 				moduleRoutes = routes;
+				
+				var currentRoutes = (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
+				localStorage.module_roots = JSON.stringify(currentRoutes.concat(moduleRoutes));
+				
+				//localStorage.module_roots = JSON.stringify(moduleRoutes);
 			}
+			$rootScope.getRoutes(moduleRoutes, parentPath);
 			//console.log(parentPath, routes);
+			
+		}
+		$rootScope.getRoutes = function(moduleRoutes, parentPath){
+			if(!parentPath) parentPath = "";
 			angular.forEach(moduleRoutes, function(value, key){
 				//console.log(value.path);
 				$routeProviderReference.when(parentPath + value.path, route.resolve({controller: value.controller,template: value.template,label: value.label}, value.modulePath));
 			})
-			
-			
 		}
-		//if(localStorage.module_roots){
-			//$rootScope.setRoutes();
-			//console.log(JSON.parse(localStorage.module_roots));
-		//}
+		//$routeProviderReference.when("/dashboard/inventory", route.resolve({controller: "inventory",template: "inventory",label: "inventory"}, "inventory/"));
+		if(localStorage.module_roots){
+			console.log(JSON.parse(localStorage.module_roots));
+			console.log($route);
+			
+			$rootScope.getRoutes(JSON.parse(localStorage.module_roots), "/dashboard/");
+		}
 		
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
+			/* if(localStorage.module_roots){
+				$rootScope.getRoutes(JSON.parse(localStorage.module_roots), "/dashboard/");
+			} */
 			$rootScope.module = false;
 			//console.log(localStorage);
 			$rootScope.userDetails = dataService.userDetails;
@@ -181,13 +195,15 @@ define(['angular',
 			$rootScope.serverApiV2 = false;
 			
 			$rootScope.currentPath = (next.$$route) ? next.$$route.originalPath : "";
-			$rootScope.appConfig = {
-				metaTitle : "Small Business",
-				headerTitle : (next.$$route.label) ? next.$$route.label:"",
-				subTitle : (next.$$route.label) ? next.$$route.label : "",
-				assetPath : '..'
-			};
-			//console.log($route);
+			if(next.$$route){
+				$rootScope.appConfig = {
+					metaTitle : "Small Business",
+					headerTitle : (next.$$route.label) ? next.$$route.label:"",
+					subTitle : (next.$$route.label) ? next.$$route.label : "",
+					assetPath : '..'
+				};
+			}
+			console.log($route);
 			
 			var nextUrl = (next.$$route) ? next.$$route.originalPath : "";
 			if(nextUrl == '/logout' || dataService.auth == false){
@@ -279,7 +295,8 @@ define(['angular',
 					}
 				}
 				
-				console.log($rootScope.userDetails.config);
+				// For TaxData in user config
+				//console.log($rootScope.userDetails.config);
 				
 				if($rootScope.userDetails.config == ""){
 					$rootScope.userDetails.config = {};
