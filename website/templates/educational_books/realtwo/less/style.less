@@ -67,7 +67,6 @@
 	.thumbnail{
 		background-color : @lightbackcolor;
 	}
-	
 	header{
 		.head{
 			margin : 35px auto 35px;
@@ -100,7 +99,7 @@
 						text-shadow: 1px 1px @colorblack;
 						border-right: 1px solid @colorwhite; 
 						text-transform : uppercase;
-						font: bold 15px/1.5em Arial, Helvetica, sans-serif;
+						font: bold 14px/1.0em Arial, Helvetica, sans-serif;
 					}
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 						color: @back;
@@ -304,7 +303,8 @@
 	a{
 		color : @darkcolor;
 		&:hover{
-			color : @back;
+			text-decoration : none;
+			color : @darkbackcolor;
 		}
 	}
 	h2, h3, h4{
@@ -313,12 +313,24 @@
 	h2{
 		text-align : center;
 	}
-	h3, h4{
+	h3{
 		color : @darkcolor;
 	}
 	h1, h2{
+		text-align : center;
 		color : @darkbackcolor;
 		font : 2.5em/1em 'Alex Brush', cursive;
+	}
+	.tagline1{
+		font-size : 16px;
+	}
+	.tagline{
+		font-size: 20px;
+	}
+	.tagline, .tagline1{
+		color: @darkbackcolor;
+		margin-top: 10px;
+		font-family : 'Alex Brush', cursive;
 	}
 	.btn-info, .btn-primary{
 		&, &:focus, &:active, &[disabled]{
@@ -335,7 +347,7 @@
 			background : -moz-linear-gradient(top,@back, @lightbackcolor,@back);
 			background : linear-gradient(top,@back, @lightbackcolor,@back);
 			border: 1px solid @back;
-			color: white;
+			color: @back;
 		}
 	}
 	.btn-info:hover{
@@ -411,6 +423,7 @@
 	.navbar-toggle{
 		background-color : @darkcolor;
 		border-color : @colorwhite;
+		color : @colorwhite;
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @colorwhite;
@@ -420,20 +433,36 @@
 	}
 
 	@media (max-width: 540px){
-		header {
+		header{
+			.head{
+				margin : 5px auto 0px;
+				.weblogo, .cntdtl{
+					text-align : center;
+				}
+				.cntdtl{
+					padding-top : 0px;
+				}
+			}
 			.navbar{
-				min-height : 1px;
+				min-height : 0px;
 			}
 			.navbar-default{
+				border : none;
+				margin-bottom : 0px;
 				.navbar-nav {
 					margin: 0px;
 				}
+				&::before{
+					display : none;
+				}
 			}	
-		
+		}
+		footer{
+			margin-top : 10px;
+		}
 	}
 	@media (max-width: 480px){
 		.btn + .btn{
-			margin-top : 5px;
-			margin-left : 0px;
+			margin-left : 5px;
 		}
 	}

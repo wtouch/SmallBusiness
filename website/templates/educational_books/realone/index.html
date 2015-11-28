@@ -60,7 +60,7 @@
 		{% endif %} 
 	</head>
 	<body>
-		<!-- <div class="sociallinks">
+		<div class="sociallinks">
 			<ul>
 				{% if data.website_config.sociallinks.facebook %}
 					<li>
@@ -83,7 +83,7 @@
 					</li>
 				{% endif %}
 			</ul>
-		</div>  -->
+		</div> 
 		<header>
 			<div class="container">	
 				<div class="row">
@@ -108,22 +108,21 @@
 				</div>
 			</div>
 		</header>
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>Main
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
 		<nav class="navbar navbar-default"> 
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-					
 				<!-- Brand and toggle get grouped for better mobile display -->
 				
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
+					<ul class="nav navbar-nav nav-justified">
 						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 					</ul>
 				</div><!-- /.navbar-collapse -->
@@ -180,24 +179,24 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active">
+								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
+							</li>
+							<li role="presentation">
 								<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
 							</li>
 							<li role="presentation">
 								<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
 							</li>
-							<li role="presentation">
-								<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
-							</li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="featrserv">
+							<div role="tabpanel" class="tab-pane" id="featrserv">
 							{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 							</div>
 							<div role="tabpanel" class="tab-pane" id="featrtesti">
 							{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
 							</div>
-							<div role="tabpanel" class="tab-pane" id="ourassoc">
+							<div role="tabpanel" class="tab-pane active" id="ourassoc">
 								{% include [templatePath ~ '/includes/our_associates.html', 'default/default/includes/our_associates.html'] %}
 							</div>
 						</div>

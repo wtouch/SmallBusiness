@@ -17,7 +17,7 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		{% if data.template_params %}
+		<!-- {% if data.template_params %}
 			<style>	
 				.homeproject .projsnap p, .homeproject .projsnap .viewproperty a, .homeproject .projsnap .viewproperty a:hover, .homeproject .projectnav .nav-stacked > li > a:focus, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus, .sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus ,header .navbar-default .navbar-nav > li ul > li > a, header .navbar-default .navbar-nav > li ul > li > ul > li > a ,.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, footer, footer a, footer a:hover{
 					color : {{data.template_params.color}};
@@ -43,7 +43,7 @@
 				.sidebarModule.enquiry .btn-info, .sidebarModule.enquiry .btn-info:focus, .sidebarModule.enquiry .btn-info:active, .sidebarModule.enquiry .btn-info[disabled], .btn-info,.btn-primary, .btn-info:focus, .btn-primary:focus, .btn-info:active, .btn-primary:active, .btn-info[disabled], .btn-primary[disabled],main .back .featuredProperty h3, main .back .featuredProject h3, main .back .sidebarModule h3, .featuretab .nav-tabs li.active > a, .featuretab .nav-tabs li.active > a:hover, .featuretab .nav-tabs li.active > a:focus, .featuretab .nav-tabs li a:hover, .project ul.nav.navbar-nav > li, .homeproject .projectnav, .homeproject .projsnap{
 					background-color : {{data.template_params.background_color}};
 				}
-				.btn-link, .btn-info:hover, .btn-primary:hover, a:hover {
+				.btn-link, .btn-info:hover, .btn-primary:hover {
 					color : {{data.template_params.background_color}};
 				}
 				.btn-info:hover, .btn-primary:hover, .services .servimage:hover, hr{
@@ -52,7 +52,7 @@
 				.panel-default,	.thumbnail, main .back .content, main .back .featuredProperty, main .back .featuredProject, main .back .sidebarModule, .gallery .thumbnail,.about .table tbody tr th, .contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td, .featuretab .nav-tabs li.active > a, .featuretab .nav-tabs li.active > a:hover, .featuretab .nav-tabs li.active > a:focus, .featuretab .nav-tabs li a, .featuretab .nav-tabs, .featuretab .tab-content, .project .projectgallery .thumbnail .projectImags, .bxslider li .projimg:hover, .singleproperty .property .table tbody tr td, .singleproperty .property, .propertylist .panel-default .sliderImg:hover{
 					border-color : {{data.template_params.background_color_dark}};
 				}
-				h1, h2{
+				h1, h2, a:hover{
 					color : {{data.template_params.background_color_dark}};
 				}
 				.panel, .pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > .disabled > a:hover, .thumbnail, main .back .featuredProperty, main .back .featuredProject, main .back .sidebarModule, main .back .content, .featuretab .tab-content {
@@ -77,7 +77,7 @@
 					background: linear-gradient(top, {{data.template_params.background_color}}, {{data.template_params.background_color_light}}, {{data.template_params.background_color}});
 				} 
 			</style>
-		{% endif %} 
+		{% endif %}  -->
 	</head>
 	<body>
 		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
@@ -160,19 +160,19 @@
 									<ul class="nav nav-tabs" role="tablist">
 										{%if modules.contentModule.featured_services %}
 										<li role="presentation" class="active">
+											<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
+										</li>
+										<li role="presentation">
 											<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
 										</li>
 										{%endif%}
 										<li role="presentation">
 											<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Testimonials</a>
 										</li>
-										<li role="presentation">
-											<a href="#ourassoc" aria-controls="profile" role="tab" data-toggle="tab">Our Associates</a>
-										</li>
 									</ul>
 									<!-- Tab panes -->
 									<div class="tab-content">
-										<div role="tabpanel" class="tab-pane active" id="featrserv">
+										<div role="tabpanel" class="tab-pane" id="featrserv">
 										{%if modules.contentModule.featured_services %}
 											{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 										{%endif%}
@@ -180,7 +180,7 @@
 										<div role="tabpanel" class="tab-pane" id="featrtesti">
 										{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
 										</div>
-										<div role="tabpanel" class="tab-pane" id="ourassoc">
+										<div role="tabpanel" class="tab-pane active" id="ourassoc">
 											{% include [templatePath ~ '/includes/our_associates.html', 'default/default/includes/our_associates.html'] %}
 										</div>
 									</div>

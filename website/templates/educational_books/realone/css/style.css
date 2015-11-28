@@ -22,16 +22,14 @@
 .featuretab .nav-tabs li a {
   border: 1px solid #3a0c0a;
   font: bold 13px/1.5em Arial, Helvetica, sans-serif;
-}
-.featuretab .nav-tabs li a:hover {
-  color: #ffffff;
-  background-color: #49741e;
+  background: linear-gradient(#49741e, #264903);
+  color: #ccffcc;
 }
 .featuretab .nav-tabs li.active > a,
 .featuretab .nav-tabs li.active > a:hover,
 .featuretab .nav-tabs li.active > a:focus {
+  background: linear-gradient(#e2271f, #3a0c0a);
   color: #ffffff;
-  background-color: #49741e;
   border: 1px solid #3a0c0a;
 }
 .mailSentMsg {
@@ -219,12 +217,12 @@
   list-style: none;
 }
 .featuredProperty .bxslider1 li .verify {
-  width: 55%;
+  width: 40%;
   border: none;
   margin-left: 10px;
   position: absolute;
-  right: -55px;
-  bottom: 7px;
+  right: 0;
+  bottom: 0;
   z-index: 999;
 }
 .featuredProperty .bxslider1 li .sliderImg {
@@ -379,7 +377,7 @@
 .singleproperty .btn-primary {
   margin-bottom: 10px;
 }
-@media (min-width: 320px) {
+@media (max-width: 320px) {
   .featuredProperty .bxslider1 li .verify {
     width: 55%;
     border: none;
@@ -402,22 +400,13 @@
     padding-left: 10px;
   }
   .featuredProperty .bxslider1 li .verify {
-    width: 40%;
+    width: 30%;
     left: 165px;
-    bottom: -20px;
+    bottom: 0px;
     z-index: 999;
   }
 }
 @media (min-width: 992px) {
-  .featuredProperty .bxslider1 li .verify {
-    width: 50%;
-    border: none;
-    margin-left: 10px;
-    position: absolute;
-    right: 10px;
-    bottom: -20px;
-    z-index: 999;
-  }
   .propDetails ul li {
     width: 275px;
   }
@@ -497,8 +486,8 @@
   right: 132px;
   bottom: -1px;
   z-index: 999;
-  height: 290px;
-  width: 250px;
+  height: 200px;
+  width: 260px;
 }
 .homeproject .projectnav,
 .homeproject .projsnap {
@@ -867,16 +856,14 @@ a:hover,
   padding: 0px;
 }
 .navbar-toggle {
-  border: 1px solid #e2271f;
+  border: 1px solid #49741e;
   margin-top: 8px;
-}
-.projdtls {
   background: linear-gradient(#49741e, #264903);
   border-color: #49741e;
   color: #ffffff;
 }
 .navbar-toggle .icon-bar {
-  background-color: #3a0c0a;
+  background-color: linear-gradient(#49741e, #264903);
 }
 .modal-body p {
   color: #000000;
@@ -890,6 +877,7 @@ a:hover,
   border-radius: 0;
 }
 .navbar-default .navbar-nav > li {
+  float: none;
   margin-bottom: 0px;
   position: relative;
 }
@@ -1087,9 +1075,6 @@ footer {
   transition: 300ms;
 }
 @media (max-width: 540px) {
-  header .navbar {
-    min-height: 1px;
-  }
   header .navbar-default .navbar-nav {
     margin: 0px;
   }
@@ -1106,12 +1091,23 @@ footer {
   }
 }
 @media (max-width: 480px) {
-  .weblogo,
-  .cntdtl {
+  header {
+    margin-bottom: 0px;
+  }
+  header .weblogo,
+  header .cntdtl {
     text-align: center;
   }
-  .logo {
-    margin-bottom: 10px;
+  header .cntdtl {
+    padding-top: 5px;
+  }
+  .projdtls {
+    margin: 0px;
+  }
+  .navbar-default {
+    min-height: 0px;
+    margin-bottom: 0px;
+    border: 0px solid transparent;
   }
   .navbar-default .navbar-nav {
     margin: 0px;

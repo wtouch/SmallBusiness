@@ -13,14 +13,12 @@
 				a{
 					border: 1px solid @darkbackcolor;
 					font: bold 13px/1.5em Arial, Helvetica, sans-serif;
-					&:hover{
-						color: @colorwhite;
-						background-color: @back;
-					}
+					background : linear-gradient(@back, @color);
+					color: @lightcolor;
 				}
 				&.active>a, &.active>a:hover, &.active>a:focus{
-					color: @colorwhite;
-					background-color: @back;
+					background : linear-gradient(@darkcolor, @darkbackcolor);
+					color : @colorwhite;
 					border: 1px solid @darkbackcolor;
 				}
 			}
