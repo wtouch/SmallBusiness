@@ -5,7 +5,7 @@
 		<h3 class="col-sm-offset-2 col-sm-9"  ng-if="!modalOptions.addemployee.id"><center>Add New Employee</center></h3>
 		<h3 class="col-sm-offset-2 col-sm-9"  ng-if="modalOptions.addemployee.id"> <center>Edit Employee</center></h3>
 	</div>
-		<form class="form-horizontal" name="addemployeeForm" role="form" ng-submit="addemployeeForm.$valid" novalidate="novalidate">{{modalOptions.addemployee}}
+		<form class="form-horizontal" name="addemployeeForm" role="form" ng-submit="addemployeeForm.$valid" novalidate="novalidate">
 		
 		     <input type="hidden" class="form-control" ng-model="modalOptions.addemployee.user_id" ng-init="modalOptions.addemployee.user_id = userDetails.id" readonly/>
 			 
@@ -105,8 +105,7 @@
 						<span ng-show="addemployeeForm.state.$error.required" class="text-danger">State is required.</span>
 					</span>				
 				</div>
-			</div> 
-
+			</div>
 			<div class="form-group">
 				<label for="country" class="col-sm-2 control-label">Country *</label>
 				<div class="col-sm-9">
@@ -117,7 +116,6 @@
 					</span>				
 				</div>
 			</div>	
-			
 			<div class="form-group">
 				<label for="pincode" class="col-sm-2 control-label">Pincode *</label>
 				<div class="col-sm-9">
@@ -127,26 +125,14 @@
 					</span>
 				</div>						
 			</div>
-			
-			 <div class="form-group">
-					<label  for="date" class="col-sm-2 control-label">Date * </label>
-					<div class="col-sm-9">
-						<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.employeedate.date"/>
-					</div>
-				</div> 
-		
-			<!-- <div class="form-group">
-				<label for="type" class="col-sm-2 control-label">Type*</label>
+			<div class="form-group">
+				<label  for="date" class="col-sm-2 control-label">Date * </label>
 				<div class="col-sm-9">
-						<select id="type" name="type" class="form-control" 
-						ng-model="modalOptions.addemployee.type">
-						<option value="" selected>Select type</option>
-						<option value="client">client</option>
-						<option value="vendor">vendor</option>
-						<option value="Employee">Employee</option>
-						</select>
+					<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.employeedate.date"/>
 				</div>
-			</div> -->
+			</div> 
+		
+			
 
 			    <div class="form-group">
 					<label for="designation" class="col-sm-2 control-label">Designation *</label>
@@ -185,9 +171,9 @@
 			</div>
 		<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addemployee.id" ng-disabled="addemployeeForm.$invalid" ng-click="modalOptions.postData('party',modalOptions.addemployee);modalOptions.ok()">Add party</button>
+					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addemployee.id" ng-disabled="addemployeeForm.$invalid" ng-click="modalOptions.postData('employee',modalOptions.addemployee);modalOptions.ok()">Add employee</button>
 					
-					<button type="submit" ng-if="modalOptions.employee.id" class="btn btn-success" ng-disabled="addemployeeForm.$invalid" ng-click="modalOptions.updateData('employee',modalOptions.addemployee,modalOptions.addemployee.id);modalOptions.ok()">Update Party</button>
+					<button type="submit" ng-if="modalOptions.addemployee.id" class="btn btn-success" ng-disabled="addemployeeForm.$invalid" ng-click="modalOptions.updateData('employee',modalOptions.addemployee,modalOptions.addemployee.id);modalOptions.ok()">Update employee</button>
 					
 					<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
 				</div>

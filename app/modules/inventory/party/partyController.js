@@ -35,18 +35,18 @@ define(['app'], function (app) {
                 },
 				{
 				    name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\')" ng-model="email" placeholder="search">'
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\',true)" ng-model="email" placeholder="search">'
                 },
 				
 			   {
 				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\')" ng-model="address" placeholder="search">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\',true)" ng-model="address" placeholder="search">',
                 },
 				
 				
 				{
 				    name:'city',
-				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\')" ng-model="city" placeholder="search">', 
+				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\',true)" ng-model="city" placeholder="search">', 
                 },
 				
 				{
@@ -63,7 +63,7 @@ define(['app'], function (app) {
 					} 
                 },
 				{ name:'designation',
-					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'party\', \'party\')" ng-model="designation" placeholder="search">'
+					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'party\', \'party\',true)" ng-model="designation" placeholder="search">'
 				},
 				{ name:'department',
 					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'party\', \'party\')" ng-model="department">'
@@ -79,7 +79,7 @@ define(['app'], function (app) {
 					
 				},
 				{ name:'salary',
-					filterHeaderTemplate: '<input id="salary" class="form-control" ng-change="grid.appScope.filter(\'salary\', salary, \'party\', \'party\')" ng-model="salary" placeholder="search">'},
+					filterHeaderTemplate: '<input id="salary" class="form-control" ng-change="grid.appScope.filter(\'salary\', salary, \'party\', \'party\',true)" ng-model="salary" placeholder="search">'},
 				{ name:'status',
 				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\')" ng-model="status">'
 							/* +'<option value="" selected>Status</option>' */
