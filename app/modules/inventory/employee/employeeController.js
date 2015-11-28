@@ -96,9 +96,8 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				employeedate:{date : $scope.currentDate},
-				addemployee : (data) ? {
-					/* id : data.id, */
-					employee:employee.id,
+				/* addemployee : (data) ? {
+					id : data.id,
 					name : data.name,
 					email : data.email,
 					phone: data.phone,
@@ -115,8 +114,9 @@ define(['app'], function (app) {
 					salary: data.salary
 					} : {
 						date : dataService.sqlDateFormate()
-					},
+					}, */
 					postData : function(table, input){
+						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
 								$scope.getData(false, $scope.currentPage, 'employee','employeeList');

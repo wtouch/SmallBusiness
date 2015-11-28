@@ -2,8 +2,8 @@
 
 	<div class="modal-header" style="margin-bottom: 14px">
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
-		<h3 class="col-sm-offset-2 col-sm-9"  ng-if="!modalOptions.addemployee.id"><center>Add New Party</center></h3>
-		<h3 class="col-sm-offset-2 col-sm-9"  ng-if="modalOptions.addemployee.id"> <center>Edit Party</center></h3>
+		<h3 class="col-sm-offset-2 col-sm-9"  ng-if="!modalOptions.addemployee.id"><center>Add New Employee</center></h3>
+		<h3 class="col-sm-offset-2 col-sm-9"  ng-if="modalOptions.addemployee.id"> <center>Edit Employee</center></h3>
 	</div>
 		<form class="form-horizontal" name="addemployeeForm" role="form" ng-submit="addemployeeForm.$valid" novalidate="novalidate">{{modalOptions.addemployee}}
 		
@@ -185,7 +185,7 @@
 			</div>
 		<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addemployee.id" ng-disabled="addemployeeForm.$invalid" ng-click="modalOptions.postData('employee',modalOptions.addemployee);modalOptions.ok()">Add party</button>
+					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addemployee.id" ng-disabled="addemployeeForm.$invalid" ng-click="modalOptions.postData('party',modalOptions.addemployee);modalOptions.ok()">Add party</button>
 					
 					<button type="submit" ng-if="modalOptions.employee.id" class="btn btn-success" ng-disabled="addemployeeForm.$invalid" ng-click="modalOptions.updateData('employee',modalOptions.addemployee,modalOptions.addemployee.id);modalOptions.ok()">Update Party</button>
 					

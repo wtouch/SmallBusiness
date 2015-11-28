@@ -80,6 +80,34 @@ define(['app'], function (app) {
 			}
 		};
 		
+		$scope.verticalSum = function(inputArray, column, subobj){
+			/* if(!$scope[subobj])  */$scope[subobj] = 0;
+			
+			angular.forEach(inputArray, function(value, key){
+				$scope[subobj] += parseFloat(value[column]);
+			})
+			return $scope[subobj];
+		}
+		
+		$scope.verticalProductSum = function(inputArray, column1, column2, calculation, subobj){
+			console.log(inputArray, column1, column2, calculation, subobj);
+			/* if(!$scope[subobj])  */
+			$scope[subobj] = 0;
+			
+			angular.forEach(inputArray, function(value, key){
+				$scope[subobj] += eval(parseFloat(value[column1]) + calculation +parseFloat(value[column2]));
+			})
+			return $scope[subobj];
+		}
+		
+		$scope.$watch(function(){ return $scope.transactionList.data},function(newValue){
+			if(angular.isArray(newValue)){
+				if(newValue.length >= 1){
+					var balance = $scope.verticalProductSum(newValue, 'credit_amount', 'debit_amount', '-', 'balance');
+					console.log(balance);
+				}
+			}
+		})
 		//Add Income form pop up 
 		$scope.openAddincome = function(url,data){
 			

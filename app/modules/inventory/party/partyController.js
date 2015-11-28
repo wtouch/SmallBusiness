@@ -23,17 +23,15 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo',enableSorting: false,
-			enableFiltering: false, 
-					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
-					filter: {
-					  //placeholder: 'ends with'
-					}
+				{
+					name:'SrNo',
+					enableSorting: false,
+					enableFiltering: false, 
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
 				},
-				
 				{
 				    name:'name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'party\', \'party\')" ng-model="name" placeholder="search">',
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'party\', \'party\', true)" ng-model="name" placeholder="search">',
                 },
 				{
 				    name:'email',
@@ -48,7 +46,7 @@ define(['app'], function (app) {
 				
 				{
 				    name:'city',
-				     filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\')" ng-model="city" placeholder="search">', 
+				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\')" ng-model="city" placeholder="search">', 
                 },
 				
 				{
@@ -152,6 +150,14 @@ define(['app'], function (app) {
 				
 			})
 			
+		}
+		
+		$scope.partyParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
 		}
 		
 		// For Get (Select Data from DB)
