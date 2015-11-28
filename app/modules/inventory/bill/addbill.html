@@ -7,9 +7,11 @@
 </div>
 <div class="modal-body">
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
+	
+		<div class=" col-sm-offset-2 col-sm-6">
 		<div ng-init="modalOptions.getData(false,false,'party', 'partyList',params,modalOptions)">
-			<label for="party_id" class="col-sm-2 control-label">Select Vendor *</label>
-			<div class="col-sm-4 form-group">
+		<!-- 	<label for="party_id" class="col-sm-2 control-label">Select Vendor *</label> -->
+			<div class="form-group">
 				<select class="form-control" name="party_id" id="party_id" ng-model="modalOptions.addBill.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter :{type :'vendor'}" required>
 					<option value="">Select Vendor</option>
 					<option value="1">1</option>
@@ -17,15 +19,15 @@
 				</select>	
 			</div>
 		</div>
-		<label  for="bill_date" class="col-sm-2 control-label">Bill Date *</label>
-			<div class="col-sm-4 form-group">
-				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date" 	
+		<!-- <label  for="bill_date" class="col-sm-2 control-label">Bill Date *</label> -->
+			<div class="form-group">
+				<input type="text" class="form-control " placeholder=" Bill Date" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date" 	
 			 datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addBill.bill_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
 			<input type="hidden" class="form-control " id="bill_date" name="bill_date" ng-model="modalOptions.addBill.modified_date" ng-init="modalOptions.addBill.modified_date = modalOptions.date"/>
 			
-				<label  for="remark" class="col-sm-2 control-label">Remark *</label>			
-			<div class="col-sm-6 form-group">
+			<!-- <label  for="remark" class="col-sm-2 control-label">Remark *</label>			 -->
+			<div class="form-group">
 				<textarea rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" placeholder="please Remark here.." required > </textarea>
 				<span ng-hide="addbillForm.remark.$error.maxlength">
 					{{ 200 - modalOptions.addBill.remark.length + " Chars left" }}
@@ -35,6 +37,7 @@
 					<span class="text-danger" ng-show="addbillForm.remark.$error.required">Remark is required.</span>
 				</span>	
 			</div>
+		</div>
 	</div>	
 </form>
 <div class="row">
@@ -82,9 +85,9 @@
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
-							ng-init="modalOptions.singleparticular.price = 1;  modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
+							ng-init="modalOptions.singleparticular.price = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
 							
-							ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
+							ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
 							
 							<span class="help-block" ng-show="addbillForm.price.$dirty && addbillForm.price.$invalid">
 							<span ng-show="addbillForm.price.$error.required" class="text-danger">Price Required.</span>
@@ -94,7 +97,7 @@
 						<div class="form-group">
 							<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  
 							
-							ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" required />
+							ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" required />
 							
 							<span class="help-block" ng-show="addbillForm.quantity.$dirty && addbillForm.quantity.$invalid">
 								<span ng-show="addbillForm.quantity.$error.required" class="text-danger">Quantity Required</span>
@@ -102,10 +105,10 @@
 							</span>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="total_amount" name="total_amount" ng-click="modalOptions.totalCalculate(modalOptions)" ng-init="modalOptions.singleparticular.total_amount"  ng-model="modalOptions.singleparticular.total_amount"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required readonly  placeholder="Total_amount" />
-							<span class="help-block" ng-show="addbillForm.total_amount.$dirty && addbillForm.total_amount.$invalid">
-								<span ng-show="addbillForm.total_amount.$error.required" class="text-danger">Total total_amount Required.</span>
-								<span ng-show="addbillForm.total_total_amount.$error.pattern" class="text-danger">Enter numbers only</span>
+							<input type="text" class="form-control" id="amount" name="amount" ng-click="modalOptions.totalCalculate(modalOptions)" ng-init="modalOptions.singleparticular.amount"  ng-model="modalOptions.singleparticular.amount"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required readonly  placeholder="Amount" />
+							<span class="help-block" ng-show="addbillForm.amount.$dirty && addbillForm.amount.$invalid">
+								<span ng-show="addbillForm.amount.$error.required" class="text-danger">Total amount Required.</span>
+								<span ng-show="addbillForm.amount.$error.pattern" class="text-danger">Enter numbers only</span>
 							</span>
 						</div>
 						<div class="form-group">
@@ -127,13 +130,13 @@
 			<thead>
 				<tr >
 					<th class="col-sm-2">Sr.No.</th>
-					<th class="col-sm-3">Particular Name</th>
-					<th class="col-sm-3">Goods_type</th>
-					<th class="col-sm-3">Category </th>
-					<th class="col-sm-2 text-right">Price</th>
-					<th class="col-sm-2 text-right">Quantity</th>
-					<th class="col-sm-2 text-right">Total Amount</th>
-					<th >Tax</th>
+					<th class="col-sm-2">Particular Name</th>
+					<th class="col-sm-2">Goods_type</th>
+					<th class="col-sm-2">Category </th>
+					<th class="col-sm-2 ">Price</th>
+					<th class="col-sm-2">Quantity</th>
+					<th class="col-sm-2"> Amount</th>
+					<th>Tax</th>
 					<th ></th>
 				</tr> 
 			</thead>
@@ -143,14 +146,44 @@
 					<td>{{x.particular_name}}</td>
 					<td>{{x.goods_type}}</td>
 					<td>{{x.category}}</td>
-					<td class="text-right">{{x.price}}</td>
-					<td class="text-right">{{x.quantity}}</td>
-					<td class="text-right">{{x.total_amount}}</td>
-					<td class="text-right">{{x.tax}}</td>
+					<td>{{x.price}}</td>
+					<td>{{x.quantity}}</td>
+					<td>{{x.amount}}</td>
+					<td>{{x.tax}}</td>
 					
 				
 					<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index)">X</button></td>
 				</tr>
+				<tr >
+							<td colspan="5"></td>
+							<td class="text-right"><strong>Sub Total</strong></td>
+							<td class="text-right">{{ modalOptions.subTotal  | number : 2}}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="5"></td>
+							<td class="text-right"><strong>Total Service Tax</strong></td>
+							<td class="text-right">{{ modalOptions.tax.service_tax  | number : 2}}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="5"></td>
+							<td class="text-right"><strong>Total Other Tax</strong></td>
+							<td class="text-right">{{ modalOptions.tax.other_tax  | number : 2}}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="5"></td>
+							<td class="text-right"><strong>Less TDS</strong></td>
+							<td class="text-right">{{ modalOptions.tax.tds  | number : 2}}</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td colspan="5"></td>
+							<td class="text-right"><strong>Total</strong></td>
+							<td class="text-right">{{ modalOptions.total  | number : 2}}</td>
+							<td></td>
+						</tr>
 			</tbody>
 		</table>
 		
