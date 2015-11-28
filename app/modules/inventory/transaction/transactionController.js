@@ -89,28 +89,26 @@ define(['app'], function (app) {
 			};
 			
 			var modalOptions = {
-				incomeDate : { date : $scope.currentDate},
+				//incomeDate : { date : $scope.currentDate},
 				
 				addincome : (data) ? {
 					id : data.id,
 					category : data.category,
-					customer : data.customer,
 					user_id : data.user_id,
 					balance : data.balance,
 					payment_type : data.payment_type,
 					date : data.date,
 					amount : data.amount,
-					due_amount : data.due_amount,
 					description : data.description 
 				} : {
-					date : dataService.sqlDateFormate()
+					//date : dataService.sqlDateFormate()
 				},
 				
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							console.log(response);
-							//$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
 						}
 					})
 				},
