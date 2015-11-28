@@ -1,5 +1,14 @@
 {% autoescape false %}
 	<div class="homeAboutus">
+		<div class="img1">
+			<img src="{{path}}img/j1.jpg" alt="Smiley face" >
+		</div>
+		<div class="img2">
+			<img src="{{path}}img/j2.jpg" alt="Smiley face" >
+		</div>
+		<div class="img3">
+		   <img src="{{path}}img/j3.jpg" alt="Smiley face" >
+	     </div>
 		<h1>{{ data.business_name }}</h1>
 		{% if data.business_info.tagline %}
 			<div class="tagline text-center">{{ data.business_info.tagline}}</div>
@@ -13,7 +22,7 @@
 			{{ data.website_config.welcome_note}}
 		
 		{% else %}
-			{{ data.business_info.description}}
+			<!-- {{ data.business_info.description}} -->
 		{% endif %} 
 		</div>
 	</div>
