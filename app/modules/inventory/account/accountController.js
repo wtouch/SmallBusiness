@@ -117,7 +117,8 @@ define(['app'], function (app) {
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					status : 1
+					status : 1,
+					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]
 			};

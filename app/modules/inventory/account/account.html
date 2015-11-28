@@ -4,9 +4,6 @@
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>
 			<ng-include src="'modules/inventory/component/navbar.html'"></ng-include>
 			<div class="row">
-				<!-- <div class="col-sm-2">
-					<h3>Accounts</h3>
-				</div> -->
 				 <div class="col-sm-2">
 					<div class="bottomspace">
 						<label for="page_item" class="control-label" >Page Items</label>
@@ -23,27 +20,6 @@
 			</div> 
 			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'account','accountList')">
 			  <div ui-grid="accountList"></div>
-			  <!-- <table  class="table  table-hover table-bordered">
-				<thead>
-					<th>Sr.No</th>
-					<th>Account name</th>
-					<th>Category</th>
-					<th>Description</th>
-					<th>Manage</th>
-				</thead>
-				<tbody>
-					<tr ng-repeat="x in accountList">
-						<td>{{ ((currentPage - 1) * pageItems ) +$index+1 }}</td>
-						<td>{{ x.account_name }}</td>
-						<td>{{ x.category }}</td>
-						<td>{{ x.description}}</td>
-						<td>
-							<a ng-click="openModal('modules/account/addaccount.html',x)" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>
-							<a type="button" tooltip="Delete Account" ng-class="(x.status==1) ? 'btn btn-success' : 'btn btn-danger'" ng-model="x.status" ng-change="changeCol('account', 'status',x.status, x.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success"><span class="glyphicon glyphicon-remove"></span></a>
-						</td>
-					</tr>
-				</tbody>
-			  </table>-->
 			</div> 
 			<div class="text-center">				
 				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'account','accountList')"></pagination>

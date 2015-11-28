@@ -29,23 +29,11 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
 				},
-				
-				/* { name:'user_id',
-					
-					filter: {
-					  placeholder: ' user_id '
-					}
-				
-				}, */
 				{
 				    name:'party_id',
 					filterHeaderTemplate: '<input id="party_id" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'stock\', \'stockList\')" ng-model="party_id" placeholder="search user id">',
                 },
-				/* { name:'goods_name',
-				filter: {
-					  placeholder: ' Search Goods name '
-					}
-				}, */
+				
 				{
 				    name:'goods_name',
 					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\')" ng-model="goods_name" placeholder="search">',
@@ -66,14 +54,6 @@ define(['app'], function (app) {
 					  { value: 'type3', label: 'type3'}, { value: 'type4', label: 'type4' } ]
 					} 
 				},
-				/* { name:'category',
-				
-				filter: {
-					   type: uiGridConstants.filter.SELECT,  
-					  selectOptions: [ { value: 'category1', label: 'category1' }, { value: 'category2', label: 'category2' },
-					  { value: 'category3', label: 'category3'}, { value: 'category4', label: 'category4' } ]
-					} 
-				}, */
 				{
 					name:'category',
 					filterHeaderTemplate: '<select id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'stock\', \'stockList\')" ng-model="category">'
@@ -158,7 +138,8 @@ define(['app'], function (app) {
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					status : 1
+					status : 1,
+					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]
 			};
