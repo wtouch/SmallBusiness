@@ -21,12 +21,11 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo', width:50,
-					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,enableFiltering: false
-					
+				{ name:'SrNo',enableSorting: false,enableFiltering: false, 
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 				},
 				{ name:'id',  width:50, enableSorting: false ,
-				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'invoice\', \'invoiceList\')" ng-model="id" placeholder="Id">',
+				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'invoice\', \'invoiceList\',true)" ng-model="id" placeholder="Id">',
 				},
 				
 				{
@@ -48,10 +47,10 @@ define(['app'], function (app) {
 					}
 				},
 				{ name:'generated_date',width:150, enableSorting: false,
-				filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\')" ng-model="generated_date" placeholder="Date">',
+				filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true)" ng-model="generated_date" placeholder="Date">',
 				},
 				{ name:'due_date', width:150, enableSorting: false,
-				filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'invoice\', \'invoiceList\')" ng-model="due_date" placeholder="Date">',
+				filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'invoice\', \'invoiceList\',true)" ng-model="due_date" placeholder="Date">',
 					},
 				{ 
 					name:'amount',width:80,
@@ -164,6 +163,13 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 				
 			})
+		}
+		$scope.invoiceParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
 		}
 		
 		// For Get (Select Data from DB)

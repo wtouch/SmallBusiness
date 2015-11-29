@@ -23,8 +23,7 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo',enableSorting: false,
-			enableFiltering: false, 
+				{ name:'SrNo',enableSorting: false,enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 					filter: {
 					  //placeholder: 'ends with'
