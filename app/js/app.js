@@ -16,7 +16,7 @@ define(['angular',
 	'googleMap',
 	'upload','uploadShim',
 	'css!../css/bootstrap.min','css!../css/style','css!../lib/ui-grid/ui-grid.min'
-], function(angular, angularRoute, ngCookies, $) {
+], function(angular, angularRoute, ngCookies, sona) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
 	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps', 'ui.sortable','ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav','ui.grid.pagination'
@@ -44,6 +44,7 @@ define(['angular',
 				
 				//Define routes - controllers will be loaded dynamically
 				route = routeResolverProvider.route;
+				console.log(route,$routeProvider);
 				$routeProviderReference = $routeProvider;
 				$routeProvider
                 
@@ -334,7 +335,7 @@ define(['angular',
 	}]);
 	
 	// Write custome code
-	$(document).ready(function(){
+	sona(document).ready(function(){
 		console.log("custom js");
 	})
 	return app;
