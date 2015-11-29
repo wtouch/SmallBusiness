@@ -21,12 +21,14 @@ define(['app'], function (app) {
 		$scope.transactionList = {
 			enableSorting: true,
 			enableFiltering: true,
+			//showGridFooter: true,
+			showColumnFooter: true,
 			columnDefs: [
 				{ name:'SrNo', 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false
 				},
-				{ name:'account_id',enableSorting: false ,
-				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'transaction\', \'transactionList\')" ng-model="id" placeholder="Id">',
+				{ name:'account_name',enableSorting: false ,
+				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'transaction\', \'transactionList\',true)" ng-model="id" placeholder="Id">',
 					},
 				{ name:'category', enableSorting: false, 
 					filterHeaderTemplate: '<input id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\')" ng-model="category" placeholder="Category">',
@@ -44,13 +46,16 @@ define(['app'], function (app) {
 					  options: [ { value: 'income', label: 'Income' }, { value: 'expense', label: 'Expence' }]
 					} },
 				{ name:'credit_amount',
-					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\')" ng-model="credit_amount" placeholder="Amount">',
+					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\',true)" ng-model="credit_amount" placeholder="Amount">',
+					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit}}</div>'
 					},
 				{ name:'debit_amount',
 					filterHeaderTemplate: '<input id="debit_amount" class="form-control" ng-change="grid.appScope.filter(\'debit_amount\', debit_amount, \'transaction\', \'transactionList\')" ng-model="debit_amount" placeholder="Amount">',
+					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalDebit}}</div>'
 					},
 				{ name:'balance',
 					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\')" ng-model="balance" placeholder="Balance">',
+					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit - grid.appScope.totalDebit}}</div>'
 					},
 				{ name:'status',
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transaction\', \'transactionList\')" ng-model="status">'
@@ -103,8 +108,9 @@ define(['app'], function (app) {
 		$scope.$watch(function(){ return $scope.transactionList.data},function(newValue){
 			if(angular.isArray(newValue)){
 				if(newValue.length >= 1){
-					var balance = $scope.verticalProductSum(newValue, 'credit_amount', 'debit_amount', '-', 'balance');
-					console.log(balance);
+					
+					$scope.verticalSum($scope.transactionList.data, 'credit_amount', 'totalCredit');
+					$scope.verticalSum($scope.transactionList.data, 'debit_amount', 'totalDebit');
 				}
 			}
 		})
@@ -266,6 +272,16 @@ define(['app'], function (app) {
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
+				join : [
+					{
+						joinType : 'INNER JOIN',
+						joinTable : "inventory_account",
+						joinOn : {
+							account_id : "t0.account_id"
+						},
+						cols : {account_name : "account_name",category:"category"}
+					}
+				],
 				cols : ["*"]
 			};
 			if(page){
@@ -310,7 +326,6 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
-		
 	 };
 	// Inject controller's dependencies
 	transactionController.$inject = injectParams;

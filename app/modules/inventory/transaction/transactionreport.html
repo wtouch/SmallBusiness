@@ -1,6 +1,6 @@
 <h3 class="text-center">Transaction Report</h3>
 	<div class="row" ng-init="">	 				  
-		<!-- <div class="col-sm-2">
+		<div class="col-sm-2">
 			<div class="bottomspace" ng-init="type = 'daily'; calcDuration(type, duration);">
 				<label for="year" class="control-label" >View Report</label>
 					<select id="year" class="form-control" ng-model="type" ng-init="type = 'daily'">
@@ -10,16 +10,10 @@
 						<option value="custom">Custom Report</option>
 					</select>
 			</div>
-		</div> -->
-		{{ verticalSum(transactionList.data, 'credit_amount', 'totalCredit') }} - {{totalCredit}}</br>
-		{{ verticalSum(transactionList.data, 'debit_amount', 'totalDebit') }} - {{totalDebit}}
-		</br>
-		{{balance}} --------
-		
-		
+		</div>
 		<div class="col-sm-2" ng-if="type == 'daily'">
 			<div class="bottomspace">
-			<label for="date" class="control-label"></label>
+			<label for="date" class="control-label">View Day-wise report</label>
 				<p class="input-group">
 				  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="rentdate1" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event,'rentdate1')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" />
 						<span class="input-group-btn">
@@ -32,7 +26,7 @@
 	
 		<div class="col-sm-2" ng-if="type == 'month'">
 			<div class="bottomspace">
-			<label for="month" class="control-label"></label>
+			<label for="month" class="control-label">View Monthly Report</label>
 				<select id="month"  class="form-control " ng-model="duration" ng-init="duration = today.getMonth() + 1; calcDuration(type, duration)" ng-change="calcDuration(type, duration)"> 
 					<option value="1" selected>January</option>	
 					<option value="2">February</option>	
@@ -50,7 +44,7 @@
 			</div>
 		</div> 
 		
-		<!-- <div class="col-sm-2" ng-if="type == 'year'">
+		<div class="col-sm-2" ng-if="type == 'year'">
 			<div class="bottomspace">
 				<label for="year1" class="control-label">View  duration report</label>
 					<select id="year1" class="form-control" ng-model="duration" ng-init="duration = today.getFullYear(); calcDuration(type, duration)" ng-options="item for item in [2010,2019] | range"
@@ -58,7 +52,7 @@
 						<option value="">Select Year</option>
 					</select> 
 			</div>
-		</div>  -->
+		</div>
 		<div  ng-if="type == 'custom'">
 			<div class="col-sm-2"><!--ng-model="duration.start"-->
 					<div class="bottomspace">
@@ -85,35 +79,16 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div class="col-sm-2">
-			<label for="type" class="control-label">Select Type</label>
-				<select id="type" class="form-control" ng-model="types" title="type"  ng-change="changeStatus('type',types)">
-					<option value="">Select Type</option>
-					<option value="income">Income</option>
-					<option value="expense">Expense</option>
-					<option value="invoice_payment">Invoice Payment</option>
-					<option value="bill_payment">Bill Payment</option>
-				</select>
-		</div> -->
 		<div class="col-sm-2" ng-if="types == 'income' || types == 'expense'">
 			<label for="category" class="control-label">Select Category</label>
 				<select class="form-control" name="category" id="category" ng-model="filterCategory" ng-options="item.system_name as item.name for item in categoryConfig.category | filter : { 'type' : types}" ng-change="addincome.category = type;changeStatus('category',filterCategory)" required>
 					<option value="" selected>Select Category</option>
 				</select>
 		</div>
-		
-		<!-- <div class="col-sm-2">
-			<label for="account_no" class="control-label" ng-init="getAccount(addincome.account_no)">Account Name*</label>
-				<select class="form-control" name="account_no" id="account_no" ng-change="changeStatus('account_no',account_name)" ng-model="account_name"  ng-options="item.id as item.account_name for item in accountList" required>
-					<option value="" selected>Select Account</option>
-				</select>
-		</div> -->
 	</div>
 	
-	<div class="row">
-		 <div class="table-responsive" ng-init="getData(false, currentPage, 'transaction','transactionList',params)">
-		 <div ui-grid="transactionList"></div>
-		</div>			
+	 <div class="table-responsive" ng-init="getData(false, currentPage, 'transaction','transactionList',params)">
+	 <div ui-grid="transactionList"></div>
 	</div>
 	<div class="text-center">				
 			<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'transaction','transactionList',params)"></pagination>
