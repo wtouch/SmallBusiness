@@ -168,7 +168,7 @@ $(document).ready(function(){
 	});	 */
 	
 	// This is for Cookie
-	 /*  function getCookie(cname) {
+	    function getCookie(cname) {
 		var name = cname + "=";
 		var ca = document.cookie.split(';');
 		for(var i=0; i<ca.length; i++) {
@@ -185,13 +185,19 @@ $(document).ready(function(){
 		document.cookie="anim=true; expires=" + cookieTime;
 	}else{
 		
-		$(".logo").removeClass("logo");
-		$(".logo1").addClass("log1");
-		$(".logo1").removeClass("logo1");
+		$(".log").removeClass("logo1");
 		$(".anim").removeClass("anim");
-		$(".title").removeClass("title");
+		$(".h1").addClass("h");
+		$(".h2").addClass("h");
+		$(".h3").addClass("h");
+		$(".h1").removeClass("h1");
+		$(".h2").removeClass("h2");
+		$(".h3").removeClass("h3");
+		/* $("div.container-fluid>div.container>div.row").addClass("ss3");
+		$("header").addClass("ss1");
+		$("#carousel").addClass("ss2"); */
 		console.log(getCookie('anim'));
-	}   */
+	}   
 	});
-	
+	 
 	
