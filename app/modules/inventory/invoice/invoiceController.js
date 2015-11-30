@@ -21,31 +21,22 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo',enableSorting: false,enableFiltering: false, 
+				{ name:'SrNo',width:50, enableSorting: false,enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 				},
-				{ name:'id',  width:50, enableSorting: false ,
-				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'invoice\', \'invoiceList\',true)" ng-model="id" placeholder="Id">',
+				{ name:'invoice_id',  width:150, enableSorting: false ,displayName: "Invoice No",
+				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'invoice_id\', invoice_id, \'invoice\', \'invoiceList\',true)" ng-model="invoice_id" placeholder="Invoice No">',
 				},
-				
-				{
-					name:'User Name', width:150,
-					filterHeaderTemplate: '<select class="form-control" ng-change="grid.appScope.filter(\'user_id\', partyFilter, \'party\', \'partyList\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.partyList">'
+				 {
+					name:'Party Name', width:150,
+					filterHeaderTemplate: '<select class="form-control" ng-change="grid.appScope.filter(\'name\', partyFilter, \'party\', \'partyList\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.partyList">'
 							+'<option value="" selected>Party Name</option>'
 						+'</select>',
 					filter: {
-					  placeholder: 'User Name'
+					  placeholder: 'Party Name'
 					}
-				},
-				{
-					name:'Account Name', width:150,
-					filterHeaderTemplate: '<select id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_no\', account_name, \'account\', \'accountList\')" ng-model="account_name" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
-							+'<option value="" selected>Account Name</option>'
-						+'</select>',
-					filter: {
-					  placeholder: 'Account Name'
-					}
-				},
+				}, 
+				
 				{ name:'generated_date',width:150, enableSorting: false,
 				filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true)" ng-model="generated_date" placeholder="Date">',
 				},
@@ -57,7 +48,8 @@ define(['app'], function (app) {
 					enableSorting: false ,
 					enableFiltering: false, 
 					cellTemplate : "<span>{{row.entity.particulars[0].amount}}</span>"
-				},
+								
+					},
 				{
 					name:'price',width:80,
 					enableSorting: false ,
@@ -80,6 +72,8 @@ define(['app'], function (app) {
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/payInvoice.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-usd"></span></a>'
+					+'<a ng-click="openGenerateinvoice(\'modules/accounting/invoice/viewinvoice.html\',x)" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="View Invoice"><span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-disabled="(x.payment_status == 0)" ng-click="viewReceipt(\'modules/accounting/invoice/viewreceipt.html\',x)"  class="btn btn-warning" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			],
@@ -90,6 +84,25 @@ define(['app'], function (app) {
 				})
 			}
 		};
+		
+		$scope.verticalSum = function(inputArray, column, subobj){
+			 /*  if(!$scope[subobj])    */
+				 $scope[subobj] = 0;
+			
+			angular.forEach(inputArray, function(value, key){
+				$scope[subobj] += parseFloat(value[column]);
+			})
+			return $scope[subobj];
+		};
+		$scope.$watch(function(){ return $scope.invoiceList.data},function(newValue){
+			if(angular.isArray(newValue)){
+				if(newValue.length >= 1){
+					$scope.verticalSum($scope.invoiceList.data, 'particulars[0].amount', 'totalAmount');
+					//$scope.verticalSum($scope.transactionList.data, 'debit_amount', 'totalDebit');
+				}
+			}
+		})
+		
 		$scope.openModal = function(url , data){
 			
 			var modalDefault = {
@@ -134,18 +147,7 @@ define(['app'], function (app) {
 						}
 					})
 				},
-				subTotal : 0,
-				totalCalculate : function(modalOptions){
-					modalOptions.subTotal = 0;
-					//modalOptions.total_amount = 0;
-					//modalOptions.tax = {service_tax:0,other_tax:0,tds:0};
-					for(var x in modalOptions.addInvoice.singleparticular){
-						//modalOptions.tax = dataService.calculateTax(modalOptions.singleparticular.particulars[x].tax, modalOptions.singleparticular.singleparticular[x].amount,modalOptions.tax);
-						modalOptions.subTotal += modalOptions.singleparticular.particulars[x].amount;
-						//modalOptions.singleparticular.total_amount =   modalOptions.singleparticular.price + modalOptions.singleparticular.quantity;
-					}
-					return modalOptions;
-				},
+				
 			updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
@@ -172,13 +174,25 @@ define(['app'], function (app) {
 			cols : ["*"]
 		}
 		
+		
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					status : 1
+					status : 1,
+					user_id : $rootScope.userDetails.id
 				},
-				cols : ["*"]
+				 /* join : [
+					{
+						joinType : 'INNER JOIN',
+						joinTable : "inventory_party",
+						joinOn : {
+							party_id : "t0.party_id"
+						},
+						cols : {name : "name"}
+					}
+				],  */
+				 cols : ["*"] 
 			};
 			if(page){
 				angular.extend($scope.params, {

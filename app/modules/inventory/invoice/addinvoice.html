@@ -179,10 +179,10 @@
 							<td class="text-right">{{x.amount}}</td>
 							<td><a ng-click="modalOptions.removeObject(modalOptions.addinvoice.particulars, $index)"><span class="glyphicon glyphicon-remove"></span></a></td>
 						</tr>
-							<tr >
+							<tr ng-repeat="x in modalOptions.addinvoice.particulars">
 							<td colspan="3"></td>
 							<td class="text-right"><strong>Sub Total</strong></td>
-							<td class="text-right">{{ modalOptions.subTotal  | number : 2}}</td>
+							<td class="text-right" ng-init="modalOptions.verticalSum(modalOptions.addinvoice.particulars,x.amount,totalAmount)">{{ }}</td>
 							<td></td>
 						</tr>
 						<tr>
