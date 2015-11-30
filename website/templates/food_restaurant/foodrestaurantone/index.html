@@ -154,15 +154,34 @@
 					     
 				    
 		</div>	
-					 <div class="social_link" background-color="fff" height=50>
-		               
-
+<div class="sociallinks">
+	<ul>
+		{% if data.website_config.sociallinks.facebook %}
+			<li>
+				<a href="{{data.website_config.sociallinks.facebook}}" target="_blank"><div class="img" id="img1"></div></a>
+			</li>
+		{% endif %}
+		{% if data.website_config.sociallinks.google %}
+			<li>
+				<a href="{{data.website_config.sociallinks.google}}" target="_blank"><div class="img" id="img2"></div></a>
+			</li>
+		{% endif %}
+		{% if data.website_config.sociallinks.twitter %}
+			<li>
+				<a href="{{data.website_config.sociallinks.twitter}}" target="_blank"><div class="img" id="img3"></div></a>
+			</li>
+		{% endif %}
+		{% if data.website_config.sociallinks.linkedin %}
+			<li>
+				<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank"><div class="img" id="img1"></div></a>
+			</li>
+		{% endif %}
+	</ul>
+</div> 
+					<div class="footer" background-color="fff" height=50>
 						 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-		              </div>
+					</div>
 					
-	            
-			               
-	            
 	</body>
 </html> 
 {% endspaceless %}
