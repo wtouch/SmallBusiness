@@ -16,11 +16,26 @@ define(['app'], function (app) {
 		$scope.numPages = "";		
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
-		$scope.currentDate = dataService.sqlDateFormate(dataService.currentDate);
+		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		console.log('Hello');
 		//$scope.stockList = {};
+		
+		$rootScope.moduleMenus = [
+			{
+				name : "Add Stock",
+				path : "#/dashboard/inventory/stock",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/inventory/stock/addstock.html");
+					}
+				}
+			},{
+				name : "Stock List",
+				path : "#/dashboard/inventory/stock"
+			}
+		]
 		$scope.stockList = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -29,11 +44,12 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
 				},
-				{
+				 /* {
 				    name:'party_id',
 					filterHeaderTemplate: '<input id="party_id" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'stock\', \'stockList\',true)" ng-model="party_id" placeholder="search user id">',
-                },
-				
+                }, */ 
+				{ name:'name',enableSorting: false ,enableFiltering: true
+				},
 				{
 				    name:'goods_name',
 					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\',true)" ng-model="goods_name" placeholder="search">',
@@ -100,7 +116,8 @@ define(['app'], function (app) {
 			};
 			console.log(data);
 			var modalOptions = {
-				stockdate:{date : $scope.currentDate},
+				date : $scope.currentDate,
+				stockdate:$scope.currentData,
 				stock : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
@@ -109,11 +126,13 @@ define(['app'], function (app) {
 					category : data.category,
 					quantity : data.quantity,
 					unit : data.unit,
+					date:data.stockdate,
 					price : data.price,
 					status : data.status,
-					date : data.date
+					date : data.date,
 				} : {
-					date : dataService.sqlDateFormate()
+					date : dataService.sqlDateFormate(),
+					stockdate: dataService.sqlDateFormate()
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -134,6 +153,23 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})
 		}
+		$scope.stockParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "inventory_party",
+					joinOn : {
+						party_id : "t0.party_id"
+					},
+					cols : {name : "name"}
+				}
+			],
+			cols : ["*"]
+		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -141,7 +177,7 @@ define(['app'], function (app) {
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
-				cols : ["*"]
+				cols : ["*"]	
 			};
 			if(page){
 				angular.extend($scope.params, {
@@ -151,22 +187,22 @@ define(['app'], function (app) {
 					}
 				})
 			}
-			dataService.get(false,table,$scope.params).then(function(response) {
+			dataService.get(single,table,$scope.params).then(function(response) {
 				console.log(response);
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
 						modalOptions[subobj] = angular.copy(response.data);
 						modalOptions.totalRecords = response.totalRecords;
 					}else{
-						$scope[subobj].data = angular.copy(response.data);
+						($scope[subobj]) ? $scope[subobj].data = angular.copy(response.data) : $scope[subobj] = angular.copy(response.data) ;
 						$scope.totalRecords = response.totalRecords;
 					}
 				}else{
 					if(modalOptions != undefined){
-						modalOptions[subobj].data = [];
+						modalOptions[subobj] = [];
 						modalOptions.totalRecords = 0;
 					}else{
-						$scope[subobj].data = [];
+						($scope[subobj]) ? $scope[subobj].data = [] : $scope[subobj] = [] ;
 						$scope.totalRecords = 0;
 					}
 				}

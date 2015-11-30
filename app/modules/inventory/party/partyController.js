@@ -48,13 +48,14 @@ define(['app'], function (app) {
 					enableSorting: false,
 					enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
+					
 				},
 				{
 				    name:'name',
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'party\', \'party\', true)" ng-model="name" placeholder="search">',
                 },
 				{
-				    name:'email',
+					name:'email',
 					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\',true)" ng-model="email" placeholder="search">'
                 },
 				
@@ -62,29 +63,15 @@ define(['app'], function (app) {
 				    name:'address',
 					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\',true)" ng-model="address" placeholder="search">',
                 },
-				
-				
 				{
 				    name:'city',
 				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\',true)" ng-model="city" placeholder="search">', 
                 },
-				
 				{
 				    name:'type',
-					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'party\', \'party\')" ng-model="type">'
-							+'<option value="" selected>Type</option>' 
-							+'<option value="client">Client</option>'
-							+'<option value="vender">Vender</option>	'
-							+'<option value="Employee">Employee</option>	'
-						+'</select>', 
-				 filter: {
-					   type: uiGridConstants.filter.SELECT,  
-					  selectOptions: [ { value: 'client', label: 'Client' }, { value: 'vender', label: 'Vender'},{ value: 'Employee', label: 'Employee' }]
-					} 
+					enableSorting: false,
+					enableFiltering: false,
                 },
-				{ name:'designation',
-					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'party\', \'party\',true)" ng-model="designation" placeholder="search">'
-				},
 				{ name:'department',
 					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'party\', \'party\')" ng-model="department">'
 							+'<option value="" selected>Department</option>' 
@@ -98,22 +85,18 @@ define(['app'], function (app) {
 					} 
 					
 				},
-				{ name:'salary',
-					filterHeaderTemplate: '<input id="salary" class="form-control" ng-change="grid.appScope.filter(\'salary\', salary, \'party\', \'party\',true)" ng-model="salary" placeholder="search">'},
-				{ name:'status',
-				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\')" ng-model="status">'
-							/* +'<option value="" selected>Status</option>' */
+				{ name:'Manage', 
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\')" ng-model="status">'
+							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
 						+'</select>', 
-				 filter: {
+					filter: {
 					   type: uiGridConstants.filter.SELECT,  
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
-					} 
-				},
+					} ,
 				
-				{ name:'Manage', enableSorting: false, enableFiltering: false, 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/party/addparty.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit party" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'party\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
@@ -128,8 +111,7 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			var modalOptions = {
-				
-				adduserdate:{date : $scope.currentDate},
+				date : $scope.currentDate,
 				adduser : (data) ? {
 					id : data.id,
 					name : data.name,
@@ -142,11 +124,9 @@ define(['app'], function (app) {
 					state: data.state,
 					country: data.country,
 					pincode: data.pincode,
-					date : data.date,					
+					date : data.date,
 					type: data.type,
-					designation: data.designation,
 					department: data.department,
-					salary: data.salary,
 			} : {
 					date : dataService.sqlDateFormate()
 				},
@@ -171,7 +151,6 @@ define(['app'], function (app) {
 			})
 			
 		}
-		
 		$scope.partyParams = {
 			where : {
 				status : 1,
@@ -180,12 +159,13 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
-		
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					status : 1
+					status : 1,
+					user_id : $rootScope.userDetails.id,
+					type : ($routeParams.party == "client") ? "client" : "vendor"
 				},
 				cols : ["*"]
 			};
@@ -197,7 +177,7 @@ define(['app'], function (app) {
 					}
 				})
 			}
-			dataService.get(single,table,$scope.params).then(function(response) {
+			dataService.get(single,table,$scope.params, subobj, params, modalOptions).then(function(response) {
 				console.log(response);
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
@@ -209,7 +189,7 @@ define(['app'], function (app) {
 					}
 				}else{
 					if(modalOptions != undefined){
-						modalOptions[subobj].data = [];
+						modalOptions[subobj] = [];
 						modalOptions.totalRecords = 0;
 					}else{
 						($scope[subobj]) ? $scope[subobj].data = [] : $scope[subobj] = [] ;
@@ -222,6 +202,7 @@ define(['app'], function (app) {
 		$scope.filter = function(col, value, table, subobj, search){
 			value = (value) ? value : undefined;
 			$rootScope.filterData(col, value, search, function(response){
+				console.log($scope.params, response);
 				angular.extend($scope.params, response);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
@@ -233,7 +214,6 @@ define(['app'], function (app) {
 		}
 		
 	 };
-		
 	// Inject controller's dependencies
 	partyController.$inject = injectParams;
 	// Register/apply controller dynamically

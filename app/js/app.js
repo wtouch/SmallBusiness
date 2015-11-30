@@ -16,7 +16,7 @@ define(['angular',
 	'googleMap',
 	'upload','uploadShim',
 	'css!../css/bootstrap.min','css!../css/style','css!../lib/ui-grid/ui-grid.min'
-], function(angular, angularRoute, ngCookies, sona) {
+], function(angular, angularRoute, ngCookies, $) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
 	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps', 'ui.sortable','ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav','ui.grid.pagination'
@@ -44,7 +44,6 @@ define(['angular',
 				
 				//Define routes - controllers will be loaded dynamically
 				route = routeResolverProvider.route;
-				console.log(route,$routeProvider);
 				$routeProviderReference = $routeProvider;
 				$routeProvider
                 
@@ -178,8 +177,6 @@ define(['angular',
 		}
 		//$routeProviderReference.when("/dashboard/inventory", route.resolve({controller: "inventory",template: "inventory",label: "inventory"}, "inventory/"));
 		if(localStorage.module_roots){
-			console.log(JSON.parse(localStorage.module_roots));
-			console.log($route);
 			
 			$rootScope.getRoutes(JSON.parse(localStorage.module_roots), "/dashboard/");
 		}
@@ -204,7 +201,6 @@ define(['angular',
 					assetPath : '..'
 				};
 			}
-			console.log($route);
 			
 			var nextUrl = (next.$$route) ? next.$$route.originalPath : "";
 			if(nextUrl == '/logout' || dataService.auth == false){
@@ -335,8 +331,8 @@ define(['angular',
 	}]);
 	
 	// Write custome code
-	sona(document).ready(function(){
-		console.log("custom js");
+	$(document).ready(function(){
+		//console.log("custom js");
 	})
 	return app;
 });

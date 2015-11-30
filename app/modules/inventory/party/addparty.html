@@ -9,7 +9,7 @@
 		
 		     <input type="hidden" class="form-control" ng-model="modalOptions.adduser.user_id" ng-init="modalOptions.adduser.user_id = userDetails.id" readonly/>
 			 
-			<div class="form-group">{{userDetails.config.inventory.taxData.tax}}
+			<div class="form-group"><!-- {{userDetails.config.inventory.taxData.tax}} -->
 				<label for="name" class="col-sm-2 control-label">Name *</label>
 				<div class="col-sm-9">
 					<input type="hidden" ng-model="modalOptions.adduser.status" ng-init="modalOptions.adduser.status = '1'">
@@ -54,7 +54,7 @@
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">Address *</label>
 				<div class="col-sm-9">
-					<textarea  class="form-control" id="address" ng-model="modalOptions.adduser.address" name="address" placeholder="Enter address" ng-pattern="/^[a-zA-Z0-9-,- -/]*$/" ng-maxlength="250" required></textarea>
+					<textarea  class="form-control" id="address" ng-model="modalOptions.adduser.address" name="address" placeholder="Enter address"  ng-maxlength="250" required></textarea>
 					<span class="text-danger"  ng-show="adduserForm.address.$error.pattern">please Enter Valid Address</span>
 					<span ng-hide="adduserForm.address.$error.maxlength">{{ 250 - modalOptions.adduser.address.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="adduserForm.address.$dirty &&  adduserForm.address.$invalid">
@@ -87,7 +87,7 @@
 					</span>
 				</div>						
 			</div>			
-			
+			<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.adduser.modified_date" ng-init="modalOptions.adduser.modified_date = modalOptions.date"/>
 			<div class="form-group">
 				<label for="city" class="col-sm-2 control-label">City *</label>
 				<div class="col-sm-4" >
@@ -128,12 +128,18 @@
 				</div>						
 			</div>
 			
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label  for="date" class="col-sm-2 control-label">Date * </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.adduser.date"/>
 				</div>
-			</div> 
+			</div>  -->
+			<div class="form-group">
+				<label  for="date" class="col-sm-2 control-label">Date * </label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder=" date" id="date" name="date" ng-model="modalOptions.adduser.date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.adduser.date = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
+				</div>
+			</div>
 		
 			<div class="form-group">
 				<label for="type" class="col-sm-2 control-label">Type*</label>
@@ -143,22 +149,11 @@
 						<option value="" selected>Select type</option>
 						<option value="client">client</option>
 						<option value="vendor">vendor</option>
-						<option value="Employee">Employee</option>
 						</select>
 				</div>
 			</div>
 
-			    <div class="form-group">
-					<label for="designation" class="col-sm-2 control-label">Designation *</label>
-					<div class="col-sm-9">
-					<input type="hidden" ng-model="modalOptions.adduser.status" ng-init="modalOptions.adduser.status = '1'">
-						<input type="text" id="designation" name="designation" class="form-control" ng-model="modalOptions.adduser.designation" placeholder="Enter designation" ng-pattern="/^[a-zA-Z- ]*$/"required>
-						<span class="text-danger"  ng-show="adduserForm.designation.$error.pattern">please Enter Valid Designation</span>
-						<span class="help-block" ng-show="adduserForm.designation.$dirty && adduserForm.designation.$invalid">
-						<span ng-show="adduserForm.designation.$error.required" class="text-danger">Designation is required</span>					
-						</span>
-					</div>						
-				</div> 
+			   
 
 				<div class="form-group">
 					<label for="select type" class="col-sm-2 control-label">Department *</label>
@@ -171,17 +166,6 @@
 							<option value="MECH">MECH</option>
 							</select>
 					</div>
-				</div>
-				
-				<div class="form-group" ng-if = "modalOptions.adduser.type =='Employee'" >
-					<label for="salary" class="col-sm-2 control-label">salary *</label>
-					<div class="col-sm-9">
-						<input ng-disabled="readOnly" type="text" id="salary" name="salary" class="form-control" ng-model="modalOptions.adduser.salary" placeholder="Enter salary " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" required>
-						<span class="help-block" ng-show="adduserForm.salary.$dirty && adduserForm.salary.$invalid">
-							<span ng-show="adduserForm.salary.$error.pattern && (adduserForm.salary.$dirty || submitted)" class="text-danger">please enter number</span>
-							
-						</span>
-					</div>						
 				</div>
 		<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">

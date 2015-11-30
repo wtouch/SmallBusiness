@@ -95,7 +95,7 @@ define(['app'], function (app) {
 			};
 			console.log(data);
 			var modalOptions = {
-				accountdate:{date : $scope.currentDate},
+				date : $scope.currentDate,
 				account : (data) ? {
 					id : data.id,
 					account_name : data.account_name,
@@ -128,7 +128,13 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})
 		}
-		
+		$scope.accountParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id,
+			},
+			cols : ["*"]
+		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
