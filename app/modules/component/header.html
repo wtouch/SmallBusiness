@@ -1,6 +1,7 @@
 <header class="navbar navbar-default ">
 <div class="container">
 <div class="row">
+		<div class="col-md-4">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" ng-click="collapse = !collapse" ng-init="collapse = false">
 				<span class="sr-only">Toggle navigation</span>
@@ -12,12 +13,13 @@
 				<img id="brand" class="logo" width="200px" src="img/logo.png" class="img-responsive">
 			</a>
 		</div>
-		<ul class="nav navbar-nav text-center">
-			<li>
-			<h2 style="color:black">{{appConfig.subTitle}}</h2>
-			</li>	
-		</ul>
+		</div>
+		<div class="col-md-4">
 			
+			<h2 style="color:black">{{appConfig.subTitle}}</h2>
+				
+		</div>
+		<div class="col-md-4">	
 		<ul ng-if="!userDetails.username" class="nav navbar-nav navbar-right">
 			<li><a class="btn btn-primary login" href="#login">Login</a></li>
 			<li><a class="btn btn-primary login" href="#register">Register</a></li>
@@ -57,6 +59,7 @@
 				</ul>
 			</li>
 		</ul>
+	</div>
 </div>
 </div>
 <div ng-if="userDetails.username" ng-include="'modules/component/nav.html'"></div>			
