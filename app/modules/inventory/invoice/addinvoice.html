@@ -33,24 +33,25 @@
 	<br>
 	<!--THE HIDDEN Generate Date and Due_date and User ID Ends Here-->
 	<div class="row" >
-	<input type="hidden" ng-model="modalOptions.addinvoice.status" ng-init="modalOptions.addinvoice.status = 1">
-
-	<input type="hidden" class="form-control" ng-model="modalOptions.addinvoice.user_id" ng-init="modalOptions.addinvoice.user_id = userDetails.id" readonly/>
+		<input type="hidden" ng-model="modalOptions.addinvoice.status" ng-init="modalOptions.addinvoice.status = 1">
+		<input type="hidden" class="form-control" ng-model="modalOptions.addinvoice.user_id" ng-init="modalOptions.addinvoice.user_id = userDetails.id" readonly/>
 	
-	<div class="col-sm-8 col-sm-offset-2 " ng-init="modalOptions.addinvoice.particulars = (modalOptions.addinvoice.particulars) ? modalOptions.addinvoice.particulars : []">
-		<form name="addInvoiceForm" class="form-horizontal text-center" role="form" novalidate="novalidate" ng-submit="addInvoiceForm.$valid" id="addInvoiceForm">
+		<div class="col-sm-8 col-sm-offset-2 " ng-init="modalOptions.addinvoice.particulars = (modalOptions.addinvoice.particulars) ? modalOptions.addinvoice.particulars : []">
 		
-			<div  ng-if="modalOptions.addinvoice.party_id">
+				<form name="addInvoiceForm" class="form-horizontal text-center well" role="form" novalidate="novalidate" ng-submit="addInvoiceForm.$valid" id="addInvoiceForm" ng-if="modalOptions.addinvoice.party_id">
 				
-							<div class="form-group col-sm-8">
+					<div  class="row" >
+						<div class="col-sm-12">
+						<div class="form-group">
+							<div class="col-sm-6">
 								<input type="text" class="form-control " placeholder="Particular Name" id="particular_name" name="particular_name" ng-model="modalOptions.singleparticular.particular_name" required/>
 								
 								<span class="help-block" ng-show="addInvoiceForm.particular_name.$dirty && addInvoiceForm.particular_name.$invalid">
 								<span ng-show="addInvoiceForm.particular_name.$error.required" class="text-danger">particular_name Required.</span>
 								</span>
 							</div>
-							
-							<div class="form-group col-sm-8">
+									
+							<div class="col-sm-6">
 								<select id="goods_type" class="form-control" placeholder="Type" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type" required>
 										<option value="" selected>Type</option>
 										<option value="type1" >Type1</option>
@@ -62,8 +63,9 @@
 										<span ng-show="addInvoiceForm.goods_type.$error.required" class="text-danger">Required field.</span>
 									</span>
 							</div>									
-							
-							<div class="form-group col-sm-8">
+							</div>		
+							<div class="form-group">
+							<div class="col-sm-6">
 								<select id="category" class="form-control" name="category" placeholder="Category" ng-model="modalOptions.singleparticular.category" required>
 											<option value="" selected>Category</option>
 											<option value="category1">Category1</option>
@@ -76,7 +78,7 @@
 								</span>	
 							</div>
 							
-							<div class="form-group col-sm-8">
+							<div class="col-sm-6">
 								<input type="text" class="form-control " placeholder="price" id="price" name="price" ng-model="modalOptions.singleparticular.price"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/"
 								ng-init="modalOptions.singleparticular.price = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
 								
@@ -86,8 +88,9 @@
 								<span ng-show="addInvoiceForm.price.$error.pattern" class="text-danger">Enter like 0.00 only</span>
 								</span>
 							</div>
-							
-							<div class="form-group col-sm-8">
+							</div>		
+							<div class="form-group">
+							<div class="col-sm-6">
 								<input type="text" class="form-control " placeholder="Quantity" id="quantity" name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" ng-init="modalOptions.singleparticular.quantity = 1" 
 							
 								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" 
@@ -98,62 +101,65 @@
 								<span ng-show="addInvoiceForm.quantity.$error.pattern" class="text-danger">Enter like 0.00 only</span>
 								</span>
 							</div>
-							
-							<div class="form-group col-sm-8">
+									
+							<div class="col-sm-6">
 								<input type="text" class="form-control " placeholder="Amount" id="amount" name="amount" ng-model="modalOptions.singleparticular.amount" ng-init="modalOptions.singleparticular.amount" readonly/>
 							</div>
-							
-							<div class="form-group col-sm-8">
+							</div>		
+							<div class="form-group">
+							<div class="col-sm-6">
 								<input type="text" class="form-control" id="previous_due" name="previous_due" placeholder="Previous due" ng-model="modalOptions.addinvoice.previous_due" required 
 								ng-change=""/>
 								<span class="help-block" ng-show="addInvoiceForm.previous_due.$dirty && addInvoiceForm.previous_due.$invalid">
 									<span ng-show="addInvoiceForm.previous_due.$error.required" class="text-danger">Previous Due is necessary.</span>
 								</span> 
 							</div>
-							
-							<div class="form-group col-sm-8">
-								<input type="text" class="form-control " placeholder="Tax" id="tax" name="tax" ng-model="modalOptions.addinvoice.tax" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" required/>
-								
-								<span class="help-block" ng-show="addInvoiceForm.tax.$dirty && addInvoiceForm.tax.$invalid">
-								<span ng-show="addInvoiceForm.tax.$error.required" class="text-danger">tax Required.</span>
-								<span ng-show="addInvoiceForm.tax.$error.pattern" class="text-danger">Enter like 0.00 only</span>
-								</span>
-								
-								
-									<div collapse="!isCollapsed1">
-									<div class="form-group">
-										<label for="remark" class="col-sm-2 control-label" >Remark </label>
+						
+						<div class="col-sm-3">
+						<div class="col-sm-3">
+						<input type="checkbox"  id="tax" placeholder="Tax" name="tax" value="tax"  ng-click="isCollapsed1 = !isCollapsed1"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required /><label>Tax</label>
+						<span class="help-block" ng-show="addbillForm.tax.$dirty && addbillForm.tax.$invalid">
+							<span ng-show="addbillForm.tax.$error.required" class="text-danger">Tax Required.</span>
+							<span ng-show="addbillForm.tax.$error.pattern" class="text-danger">Enter number only</span>
+						</span>
+						</div>
+						
+						<div collapse="!isCollapsed1"><!--ng-repeat="x in taxList.config.taxData.tax"-->
+							<div class="col-sm-3">
+									<!--{{userDetails.config.inventory.taxData.tax}}-->
+									<div class="form-group" ng-init="taxData=[];modalOptions.singleparticular.tax=taxData">
 										<div class="col-sm-9">
-											<textarea class="form-control" rows="3" id="remark" name="remark" placeholder="remark" ng-maxlength="1000" ng-model="modalOptions.addmisions.remark" required></textarea>
-											<span ng-hide="addmisionForm.remark.$error.maxlength">
-												{{ 1000 - modalOptions.addmisions.remark.length + " Chars left" }}
-											</span>	
-											<span class="help-block ng-hide" ng-show="addmisionForm.remark.$dirty && addmisionForm.remark.$invalid">
-												<span class="text-danger" ng-show="addmisionForm.remark.$error.required">Required Field.</span>
-												<span class="text-danger" ng-show="addmisionForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-											</span>	
+										<div class="checkbox col-sm-3">
+											<label ng-repeat="x in userDetails.config.inventory.taxData.tax">
+											  <input type="checkbox" checklist-model="taxData" ng-change=""checklist-value="x"> {{x.displayName}}
+											</label>
 										</div>
+										</div> 
 									</div>
-									<button type="submit" class="btn btn-primary col-sm-offset-3" ng-click="isCollapsed1 = !isCollapsed1;modalOptions.postData('complaints', modalOptions.addcomplaint)">Add</button> 
-								</div>
+							</div>
+						</div>
+						</div><!------------end of checkbox col--------> 
+						</div>
+						<div class="form-group">
+							<div class="col-sm-12">
+								<textarea class="form-control" id="remark" name="remark" ng-model="modalOptions.addinvoice.remark" ng-maxlength="250" placeholder="Remark" required></textarea>
+								<span ng-hide="addInvoiceForm.remark.$error.maxlength">
+												{{ 250 - modalOptions.addinvoice.remark.length + " Chars left" }}
+								</span>	
+								 <span class="help-block" ng-show="addInvoiceForm.remark.$dirty && addInvoiceForm.remark.$invalid">
+									<span class="text-danger" ng-show="addInvoiceForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+									<span ng-show="addInvoiceForm.remark.$error.required" class="text-danger">Required Field</span>
+								</span>
 							</div>
 							
-			</div>
-				
-			<div class="form-group col-sm-12">
-				<textarea class="form-control" id="remark" name="remark" ng-model="modalOptions.addinvoice.remark" ng-maxlength="250" placeholder="Remark" required></textarea>
-				<span ng-hide="addInvoiceForm.remark.$error.maxlength">
-								{{ 250 - modalOptions.addinvoice.remark.length + " Chars left" }}
-				</span>	
-				 <span class="help-block" ng-show="addInvoiceForm.remark.$dirty && addInvoiceForm.remark.$invalid">
-					<span class="text-danger" ng-show="addInvoiceForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span ng-show="addInvoiceForm.remark.$error.required" class="text-danger">Required Field</span>
-				</span>
-			</div>
-			<div class=" form-group col-sm-8">
-			<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular)">+Add This Particular</button>	
-			</div>
-		</form>
+							<div class="col-sm-4">
+								<button type="submit" class="btn btn-success center" ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular)">+Add This Particular</button>							
+							</div>
+						</div>	
+					</div>
+					</div>
+					
+				</form>
 	</div>
 </div>
 	<br>
