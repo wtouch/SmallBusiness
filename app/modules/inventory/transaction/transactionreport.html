@@ -15,9 +15,9 @@
 			<div class="bottomspace">
 			<label for="date" class="control-label">View Day-wise report</label>
 				<p class="input-group">
-				  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="rentdate1" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event,'rentdate1')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" />
+				  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="dailydate" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event,'dailydate')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" />
 						<span class="input-group-btn">
-							<button type="button" class="btn btn-default" ng-click="open($event, 'rentdate1')">
+							<button type="button" class="btn btn-default" ng-click="open($event, 'dailydate')">
 							<i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
 				</p>
@@ -87,7 +87,7 @@
 		</div>
 	</div>
 	
-	 <div class="table-responsive" ng-init="getData(false, currentPage, 'transaction','transactionList',params)">
+	 <div class="table-responsive" ng-init="getData(false, currentPage, 'transaction','transactionList',params);getData(false,false,'account','accountList', params);">
 	 <div ui-grid="transactionList"></div>
 	</div>
 	<div class="text-center">				

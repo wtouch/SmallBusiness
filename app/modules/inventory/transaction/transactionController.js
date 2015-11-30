@@ -18,24 +18,96 @@ define(['app'], function (app) {
 		$scope.transactionView = true;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
+		$scope.today = new Date();
+		$scope.todayDt = $scope.today.getFullYear() + "-" + ($scope.today.getMonth() + 1) + "-" + $scope.today.getDate();
+		$scope.duration = {start : $scope.todayDt};
+		
+		$scope.open = function($event,rentdate){
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope[rentdate] = !$scope[rentdate];
+		};
+		
+		
+		$scope.calcDuration = function(type, duration){
+			console.log(type, duration);
+			var curDate = new Date();
+			if(type == 'custom'){
+				var dateS = new Date(duration.start);
+				var dateE = new Date(duration.end);
+				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
+				var endtDt = dateE.getFullYear() + "-" + (dateE.getMonth() + 1) + "-" + (dateE.getDate() + 1 );
+			}
+			if(type == 'daily'){
+				var dateS = new Date(duration.start);
+				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
+				var endtDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + (dateS.getDate() + 1);
+			}
+			if(type == 'month'){
+				duration = parseInt(duration);
+				var today = new Date();
+				var start = new Date(today.getFullYear(), (duration - 1), 1);
+				var endt = new Date(today.getFullYear(), (duration - 1) + 1, 0);
+				
+				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
+				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate() + 1);
+			}
+			if(type == 'year'){
+				duration = parseInt(duration);
+				var today = new Date();
+				var start = new Date(duration, 3, 1);
+				var endt = new Date(duration + 1, 3, 1);
+				
+				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
+				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate());
+			}
+			
+			$scope.transactionParams.endtDt = endtDt;
+			$scope.transactionParams.startDt = startDt;
+			console.log($scope.transactionParams);
+			//$scope.getTransaction($scope.CurrentPage, $scope.transactionParams);
+		}
+		
+		
+		
 		$scope.transactionList = {
 			enableSorting: true,
 			enableFiltering: true,
 			//showGridFooter: true,
 			showColumnFooter: true,
 			columnDefs: [
+				/*{
+					name: 'date',
+					cellFilter: 'date:\'MM/dd/yyyy\'',
+					filters: [
+					  { placeholder: 'from...',
+						condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+						id:"date", ngChange:"grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true)", ngModel:"date" },
+					  { placeholder: 'to...',
+						condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+						id:"date", ngChange:"grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true)", ngModel:"date" }
+						]
+				},*/
 				{ name:'SrNo', 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false
 				},
 				{ name:'account_name',enableSorting: false ,
-				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'transaction\', \'transactionList\',true)" ng-model="id" placeholder="Id">',
+				filterHeaderTemplate: '<select id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_id\', account_id, \'transaction\', \'transactionList\',true)" ng-model="account_id" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
+							+'<option value="" selected>Account Name</option>'
+						+'</select>',
 					},
 				{ name:'category', enableSorting: false, 
-					filterHeaderTemplate: '<input id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\')" ng-model="category" placeholder="Category">',
+					filterHeaderTemplate: '<input id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true)" ng-model="category" placeholder="Category">',
 					},
-				{ name:'description',enableSorting: false, enableFiltering: false},
+				{ name:'description',
+				enableSorting: false, enableFiltering: false,
+					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true)" ng-model="description" placeholder="description">'},
+				{ name:'date',
+				enableSorting: false, enableFiltering: false,
+					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true)" ng-model="date" placeholder="date">',
+					},
 				{ name:'type',enableSorting: false,
-					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transactions\', \'transactionList\')" ng-model="type">'
+					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true)" ng-model="type">'
 							+'<option value="" selected>type</option>'
 							+'<option value="expense">Expence</option>'
 							+'<option value="income">Income</option>	'
@@ -46,11 +118,11 @@ define(['app'], function (app) {
 					  options: [ { value: 'income', label: 'Income' }, { value: 'expense', label: 'Expence' }]
 					} },
 				{ name:'credit_amount',
-					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\',true)" ng-model="credit_amount" placeholder="Amount">',
+					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\',true)" ng-model="credit_amount" placeholder="Credit Amount">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit}}</div>'
 					},
 				{ name:'debit_amount',
-					filterHeaderTemplate: '<input id="debit_amount" class="form-control" ng-change="grid.appScope.filter(\'debit_amount\', debit_amount, \'transaction\', \'transactionList\')" ng-model="debit_amount" placeholder="Amount">',
+					filterHeaderTemplate: '<input id="debit_amount" class="form-control" ng-change="grid.appScope.filter(\'debit_amount\', debit_amount, \'transaction\', \'transactionList\',true)" ng-model="debit_amount" placeholder="Debit Amount">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalDebit}}</div>'
 					},
 				{ name:'balance',
