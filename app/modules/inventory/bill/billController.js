@@ -180,7 +180,7 @@ define(['app'], function (app) {
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
-				join : [
+				/* join : [
 					{
 						joinType : 'INNER JOIN',
 						joinTable : "inventory_party",
@@ -189,7 +189,7 @@ define(['app'], function (app) {
 						},
 						cols : {name : "party_name"}
 					}
-				],
+				], */
 				cols : ["*"]
 			};
 			if(page){

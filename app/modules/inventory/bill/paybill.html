@@ -13,7 +13,7 @@
 			</div>
 				<div class="form-group">
 				<label for="account_no" class="col-sm-2 control-label">Account Name* </label>
-					<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'account','accountList', accountParams, modalOptions)">
+					<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'account','accountList',accountParams, modalOptions)">
 					<select class="form-control" name="account_no" id="account_no" ng-model="modalOptions.billPayment.account_no"  ng-options="item.id as item.account_name for item in modalOptions.accountList" required>
 						<option value="" selected>Select Account Name</option>
 					</select>
@@ -41,7 +41,7 @@
 			</div> 
 			
 			
-			<div class="form-group"  >
+			<div class="form-group">
 				<label  for="due_amount" class="col-sm-2 control-label">Amount</label>
 				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
 					<input type="text"  id="due_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.billPayment.account_no" name="due_amount" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList" ng-init="modalOptions.billPayment.due_amount = modalOptions.billPayment.due_amount"  required/>
