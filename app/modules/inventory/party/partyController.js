@@ -23,16 +23,19 @@ define(['app'], function (app) {
 		}
 		$rootScope.moduleMenus = [
 			{
-				name : "Clients",
+				name : "Add Clients",
 				path : "#/dashboard/inventory/party/client",
 				events : {
 					click : function(){
-						return $scope.openModal("");
+						return $scope.openModal("modules/inventory/party/addparty.html");
 					}
 				}
 			},{
 				name : "Vendors",
 				path : "#/dashboard/inventory/party/vendor"
+			},{
+				name : "Client",
+				path : "#/dashboard/inventory/party/client"
 			}
 		]
 		

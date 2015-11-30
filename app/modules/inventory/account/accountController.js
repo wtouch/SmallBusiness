@@ -20,6 +20,22 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		console.log('Hello');
+		
+		$rootScope.moduleMenus = [
+			{
+				name : "Add Account",
+				path : "#/dashboard/inventory/account",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/inventory/account/addaccount.html");
+					}
+				}
+			},{
+				name : "Account List",
+				path : "#/dashboard/inventory/account/account"
+			}
+		]
+		
 		//$scope.accountList = {};
 		$scope.accountList = {
 			enableSorting: true,
