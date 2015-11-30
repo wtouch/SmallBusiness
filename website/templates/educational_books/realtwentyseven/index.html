@@ -37,7 +37,7 @@
 		{% endif %}
 	</head>
 	<body>
-		<!-- <div class="sociallinks">
+		<div class="sociallinks">
 			<ul>
 				{% if data.website_config.sociallinks.facebook %}
 					<li>
@@ -60,7 +60,7 @@
 					</li>
 				{% endif %}
 			</ul>
-		</div>  -->
+		</div>  
 		<header>
 			<div class="container">	
 				<div class="row">
@@ -84,27 +84,25 @@
 					</div>
 				</div>
 			</div>
-		</header>
-		<nav class="navbar navbar-default ">
-			<div class="container">
-						<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="navbar-header">
-					
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						
-					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav menu navbar-nav nav-justified">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<nav class="navbar navbar-default">
+				<div class="container">
+					<div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
 							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 						</ul>
 					</div>
 				</div>
-		</nav>
+			</nav>
+		</header>
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-12 col-lg-12">
