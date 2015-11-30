@@ -8,7 +8,7 @@
 <div class="modal-body">
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
 	
-		<div class=" col-sm-offset-2 col-sm-6">
+		<div class=" col-sm-offset-2 col-sm-4">
 		<div ng-init="modalOptions.getData(false,false,'party', 'partyList',params,modalOptions)">
 		<!-- 	<label for="party_id" class="col-sm-2 control-label">Select Vendor *</label> -->
 			<div class="form-group">
@@ -19,14 +19,18 @@
 				</select>	
 			</div>
 		</div>
-		<!-- <label  for="bill_date" class="col-sm-2 control-label">Bill Date *</label> -->
+		</div>	
+		<div class=" col-sm-offset-1 col-sm-4">
 			<div class="form-group">
 				<input type="text" class="form-control " placeholder=" Bill Date" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date" 	
 			 datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addBill.bill_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
+		</div>
+		
 			<input type="hidden" class="form-control " id="bill_date" name="bill_date" ng-model="modalOptions.addBill.modified_date" ng-init="modalOptions.addBill.modified_date = modalOptions.date"/>
 			
-			<!-- <label  for="remark" class="col-sm-2 control-label">Remark *</label>			 -->
+			
+		<div class=" col-sm-offset-2 col-sm-4">	
 			<div class="form-group">
 				<textarea rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" placeholder="please Remark here.." required > </textarea>
 				<span ng-hide="addbillForm.remark.$error.maxlength">
@@ -178,24 +182,6 @@
 							<td colspan="5"></td>
 							<td class="text-right"><strong>Sub Total</strong></td>
 							<td class="text-right">{{ modalOptions.subTotal  | number : 2}}</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td colspan="5"></td>
-							<td class="text-right"><strong>Total Service Tax</strong></td>
-							<td class="text-right">{{ modalOptions.tax.service_tax  | number : 2}}</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td colspan="5"></td>
-							<td class="text-right"><strong>Total Other Tax</strong></td>
-							<td class="text-right">{{ modalOptions.tax.other_tax  | number : 2}}</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td colspan="5"></td>
-							<td class="text-right"><strong>Less TDS</strong></td>
-							<td class="text-right">{{ modalOptions.tax.tds  | number : 2}}</td>
 							<td></td>
 						</tr>
 						<tr>
