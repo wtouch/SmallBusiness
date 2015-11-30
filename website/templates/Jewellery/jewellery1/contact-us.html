@@ -1,29 +1,28 @@
 {% autoescape false %}
-	<script src="http://maps.googleapis.com/maps/api/js">
-	</script>
 	<script>
-		function initialize() {
-			var mapProp = {
-				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
-				zoom:12,
-				mapTypeId:google.maps.MapTypeId.ROADMAP
-			};
-			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
-			var marker=new google.maps.Marker({
-				position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
-			});
-			marker.setMap(map);
-		}
-		google.maps.event.addDomListener(window, 'load', initialize);
-	</script>
-	<h2>Contact Us</h2>
-	<div class="row contact">
+				function initialize() {
+					var mapProp = {
+						center:new google.maps.LatLng(18.6052055,73.7748031),
+						zoom:20,
+						mapTypeId:google.maps.MapTypeId.ROADMAP
+					};
+					var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+					var marker=new google.maps.Marker({
+						position:new google.maps.LatLng(18.6052055,73.7748031),
+					});
+					marker.setMap(map);
+				}
+				google.maps.event.addDomListener(window, 'load', initialize);
+</script>				
+	
+	<div class="row contact ">
 		<div class="col-xs-12 col-sm-12 col-lg-12">
+		<h2>Contact Us</h2>
 			<table class="table">
 				<tr>
 					<td>
 						<a href="#">
-							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
+							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive" alt="{{data.business_name}}"/>
 						</a>
 					</td>
 					<td>
@@ -37,7 +36,7 @@
 						</address>
 					</td>
 				</tr>
-				{%if (data.contact_profile.address1) or (data.contact_profile.address2) or (data.contact_profile.address3) or (data.contact_profile.address4)%}
+				<!-- {%if (data.contact_profile.address1) or (data.contact_profile.address2) or (data.contact_profile.address3) or (data.contact_profile.address4)%}
 				<tr>
 					<td colspan="2">
 						{%if data.contact_profile.address1%}
@@ -45,22 +44,22 @@
 						{% endif %}
 						
 						{%if data.contact_profile.address2%}
-							<hr/>
+							
 							<span>{{data.contact_profile.address2}}</span>
 						{% endif %}
 						
 						{%if data.contact_profile.address3%}
-							<hr/>
+						
 							<span>{{data.contact_profile.address3}}</span>
 						{% endif %}
 						
 						{%if data.contact_profile.address4%}
-							<hr/>
+						
 							<span>{{data.contact_profile.address4}}</span>
 						{% endif %}
 					</td>
 				</tr>
-				{% endif %}
+				{% endif %} -->
 				{%if data.contact_profile.telephone%}
 				<tr>
 					<td><b>Telephone</b></td>
@@ -74,22 +73,27 @@
 				</tr>
 				<tr>
 					<td><b>E-mail Id</b></td>
-					<td>
-						<a class="email" href="mailto: {{data.contact_profile.email}}">{{data.contact_profile.email}}</a><br>
-						<a class="email" href="mailto: {{data.contact_profile.alternate_email}}">{{data.contact_profile.alternate_email}}</a>
-					</td>
+					<td>{{data.contact_profile.email}}<br>
+					{{data.contact_profile.alternate_email}}</td>
 				</tr>
 				{%if data.contact_profile.contact_website%}
 				<tr>
 					<td><b>Website</b></td>
-					<td><a href="/{{data.contact_profile.contact_website}}">{{data.contact_profile.contact_website}}</a>
+					<td><a href="#">{{data.contact_profile.contact_website}}</a>
 					</td>
 				</tr>
 				{% endif %}
 			</table>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-lg-12">
-			<div id="googleMap"></div>
+		<div class="col-xs-12 col-sm-12 col-lg-12 enquiry">
+				{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
 		</div>
 	</div>
+	
+	 <div class="row">
+	    <div class="col-lg-12">
+			<div id="googleMap"></div>
+	    </div>
+		</div>
+	
 {% endautoescape %}
