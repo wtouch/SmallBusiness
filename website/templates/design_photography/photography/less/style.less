@@ -26,33 +26,37 @@
 	
 	header{
 			background-image:url('../img/bg1.png');
+			height:300px;
 			.logo{
-			height:200px;
+					height:100px;
+					width:100px;
+					margin-top:18%;
+			}
+			h1{
+			margin-top:-15px;
 			}
 	}
-	body{
+
+	h1,h2,h3{
+	color:@colorblack;
+	text-align:center;
 	}
-	.content{
-	
-	background-color:@darkbackcolor;
-	}
-	h1,h2,p{
-	
-	color:@colorwhite;
-	}
-	h3{
-			color:@colorblack;
-			text-align:center;
+	container-fluid {
+    padding-right: -15px;
+    padding-left: -15px;
+    margin-right: auto;
+    margin-left: auto;
 	}
 	.navbar-default {
-		background-color:transparent;
-		margin-bottom:0px;
+		background-image:url('../img/bg1.png');
+		opacity:0.9;
+		margin-bottom:-1px;
 		border:none;
-	
+		border-top:1px solid @colorwhite;
+		
 		.navbar-nav{
-					
-					
 			> li{
+					padding:-5px;
 				float:none;
 				margin-bottom:0px;
 				position : relative;
@@ -62,11 +66,13 @@
 					position : relative;
 					text-transform : uppercase;
 					padding:35px;
+					padding-right:10px;
+					
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					background:none;
 					color : @lightcolor;
-					border-top:2px solid @colorwhite;
+					//border-top:2px solid @colorwhite;
 				}
 				> ul{
 					display: none;
@@ -113,10 +119,9 @@
 										color : @colorwhite;
 									}
 									background-color:@lightbackcolor;
-									//background : linear-gradient(@darkcolor, @darkbackcolor);
+									
 								}
 							}
-						
 						}
 						&:hover{
 							ul{
@@ -130,52 +135,30 @@
 				}
 			}
 		}
-	
-	
-	}
-	@keyframes navbar{
-						0%{opacity:0};
-						100%{opacity:1};
 	}
 	 .homeAboutus{
-					margin-top:50px;
+					
 					text-align:center;
-	 
+					background-color:@darkbackcolor;
+					margin-top:-20px;
+					
+					h1{
+								padding:60px;
+					}
+					.tagline{
+					color:@colorwhite;
+					}
+					.tagline1{
+					color:@colorwhite;
+					}
 	 }
+	 
 	 .row{
 		margin:0px;
 	 }
 	
-	.contentModule{
-			.products{
-						
-					background-color:transparent;
-					.thumbnail{
-							background:transparent;
-							border:1px solid @colorblack;
-							padding:10px;
-							margin:10px;
-							width:350px;
-							height:500px;
-							overflow:hidden;
-							}
-									img{
-									border:5px solid transparent;
-									&:hover{
-											//border:5px solid red;
-											opacity:0.5;
-									}
-									}
-					p,h4{
-					color:@darkcolor;
-					text-align:center;
-					padding:20px;
-					}
-					}
-		}
-	
 	.btn-info{
-	//margin-left:40%;
+	
 	border:1px solid @colorblack;
 	color:@colorblack;
 	background-color:transparent;
@@ -184,136 +167,31 @@
 				background-color:@darkcolor;
 				}
 	}
-	
 .bg1{
 		height:400px;
 		width:100%;
 		background-image:url('../img/bg3.jpg');
 		background-size:100% 100%;
 }
-
 footer{
-
 			background-image:url('../img/bg1.png');
 			height:100px;
-}
-.services{
-			.servdesc{
-			
-					.readmore{
-					
-					a{
-							border:1px solid @colorblack;
-							background-color:transparent;
-							&:hover{
-									background-color:@darkcolor;
-									color:@colorwhite;
-									border:1px solid transparent;
-							}
-					}
-					
-					}
+			p{
+					padding-top:4%;
+			}
+			a{
+					color:@colorblack;
 			}
 }
 .panel-default{
 				color:@colorwhite;
 				background-color:transparent;
 				border:none;
+				width:386px;
+}
 
-}
-div.sections>div:nth-child(1)
-{
-	//background-color:black !important;
-	
-	animation-name:serv1;
-	animation-duration:2s;
-	aniamtion-iteration-count:1;
-}
-@keyframes serv1{
-		
-				0%{left:-500px;}
-				100%{left:0px;}
-}
-div.sections>div:nth-child(3)
-{
-	//background-color:black !important;
-	
-	animation-name:serv2;
-	animation-duration:2s;
-	aniamtion-iteration-count:1;
-}
-@keyframes serv2{
-		
-				0%{right:-500px;}
-				100%{right:0px;}
-}
-.services{
-				height:600px;
-				overflow:hidden;
-				margin-left:105px;
-				
-				.servimage{
-							height:250px;
-							width:450px;
-							border:1px solid @colorblack;
-							padding:10px;
-							margin:10px;
-							&:hover{
-								border:1px solid @colorblack;
-							}
-				}
-				.readmore{
-					text-align:center;
-					padding:20px;
-							a{
-									//padding:20px;
-							}
-				}
-		}
-div.sections1>div:nth-child(1)
-{
-	animation-name:prod1;
-	animation-duration:2s;
-	aniamtion-iteration-count:1;
-}
-@keyframes prod1{
-		
-				0%{opacity:0;}
-				100%{opacity:1;}
-}
-div.sections1>div:nth-child(2)
-{
-	animation-name:prod2;
-	animation-duration:3s;
-	aniamtion-iteration-count:1;
-}
-@keyframes prod2{
-		
-				0%{opacity:0;}
-				
-				100%{opacity:1;}
-}
-div.sections1>div:nth-child(3)
-{
-	animation-name:prod3;
-	animation-duration:4s;
-	aniamtion-iteration-count:1;
-}
-@keyframes prod3{
-		
-				0%{opacity:0;}
-				
-				100%{opacity:1;}
-}
-div.sections1>div:nth-child(4)
-{
-	animation-name:prod4;
-	animation-duration:5s;
-	aniamtion-iteration-count:1;
-}
-@keyframes prod4{
-		
-				0%{opacity:0;}
-				
-				100%{opacity:1;}
+.about{
+			p{
+				text-align:justified;
+			}
 }

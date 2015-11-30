@@ -1,4 +1,21 @@
 {% autoescape false %}
+<script src="http://maps.googleapis.com/maps/api/js">
+	</script>
+	<script>
+		function initialize() {
+			var mapProp = {
+				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+				zoom:12,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			var marker=new google.maps.Marker({
+				position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+			});
+			marker.setMap(map);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
 	<div class="homeAboutus">
 		<h1>{{ data.business_name }}</h1>
 		{% if data.business_info.tagline %}
@@ -17,4 +34,24 @@
 		{% endif %} 
 		</div>
 	</div>
+		<div class="container">
+				{%if modules.contentModule.featured_products%}
+				{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+				{%endif%}
+			</div>	
+	
+				{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
+					
+		
+		<div class="container">
+				<div class="col-sm-6 col-md-6">
+					{% include [templatePath ~ '/includes/activities.html', 'default/default/includes/activities.html'] %}
+				</div>
+				<div class="col-sm-6 col-md-6">
+					{% include [templatePath ~ '/includes/featured_gallery.html', 'default/default/includes/featured_gallery.html'] %}
+				</div>
+		</div>
+		 <div class="col-xs-12 col-sm-12 col-lg-12">
+			<div id="googleMap"></div>
+		</div> 
 {% endautoescape %}

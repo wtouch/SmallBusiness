@@ -27,7 +27,7 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 	</head>
 	<body>
-		<div class="sociallinks">
+		<!-- <div class="sociallinks">
 			<ul>
 				{% if data.website_config.sociallinks.facebook %}
 					<li>
@@ -50,7 +50,7 @@
 					</li>
 				{% endif %}
 			</ul>
-		</div> 
+		</div> --> 
 		<header>
 			<div class="container">
 				<div class="row">
@@ -65,15 +65,16 @@
 						{% else %}
 							<img class="logo" src="{{data.business_logo.file_relative_path}}">
 						{% endif %}
-					</div>
-					<div class="col-xs-12 col-sm-4 text-right cntdtl">	
-						<p><strong>Mobile: </strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
-						<p>
-						<p><strong>E-mail ID: </strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
-						<p>
+						<h1>{{ data.business_name }}</h1>
+						{% if data.business_info.tagline %}
+							<div class="tagline text-center">{{ data.business_info.tagline}}</div>
+						{% endif %}
+						
 					</div>
 				</div>
-			<nav class="navbar navbar-default">
+			</div>
+		</header>
+		<nav class="navbar navbar-default navbar-static-top">
 	
 			<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -91,38 +92,16 @@
 				</ul>
 			</div><!-- /.navbar-collapse -->
 	
-			</nav>
-		</div>
-	</header>
+		</nav>
+		
+	
 		{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
 		
-			<div class="container-fluid content">
-				{% include contentPath %}
-			</div>
-			<div class="container">
-				{%if modules.contentModule.featured_products%}
-				{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-				{%endif%}
-			</div>	
-			<div class="container-fluid">
-				<div class="row ">
-					<div class="col-sm-12 col-md-12 bg1">
-					</div>
-				</div>
-			</div>
-		<div class="container">
-				<div class="col-sm-6 col-md-12">
-				{%if modules.contentModule.featured_services %}
-					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-					{%endif%}
-				</div>
-				
+		{% include contentPath %}
+		
 			
-				
-		</div>
-	
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 		
 		
