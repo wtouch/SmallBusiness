@@ -158,17 +158,17 @@ $(window).load(function() {
 		$( ".cap" ).animate({top: '40px'});
 		});
 $(document).ready(function(){
-	$(window).scroll(function(e){
+	/* $(window).scroll(function(e){
     var scrollTop = $(document).scrollTop();
     if(scrollTop > 0){
         $('.b').removeClass('navbar-static-top').addClass("navbar-fixed-top");
     } else {
         $('.b').removeClass("navbar-fixed-top").addClass('navbar-static-top');
     }
-	});	
+	});	 */
 	
 	// This is for Cookie
-	  function getCookie(cname) {
+	 /*  function getCookie(cname) {
 		var name = cname + "=";
 		var ca = document.cookie.split(';');
 		for(var i=0; i<ca.length; i++) {
@@ -191,7 +191,7 @@ $(document).ready(function(){
 		$(".anim").removeClass("anim");
 		$(".title").removeClass("title");
 		console.log(getCookie('anim'));
-	}  
+	}   */
 	});
 	
 	
