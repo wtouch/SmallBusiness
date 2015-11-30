@@ -349,7 +349,7 @@ define(['app'], function (app) {
 						joinType : 'INNER JOIN',
 						joinTable : "inventory_account",
 						joinOn : {
-							account_id : "t0.account_id"
+							account_no : "t0.account_no"
 						},
 						cols : {account_name : "account_name",category:"category"}
 					}
