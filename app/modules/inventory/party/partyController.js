@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
+    var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
     
     // This is controller for this view
-	var partyController= function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var partyController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
 		$scope.invoice = true;
@@ -18,6 +18,23 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		
+		if(!$routeParams.party){
+			$location.path("/dashboard/inventory/party/client");
+		}
+		$rootScope.moduleMenus = [
+			{
+				name : "Clients",
+				path : "#/dashboard/inventory/party/client",
+				events : {
+					click : function(){
+						return $scope.openModal("");
+					}
+				}
+			},{
+				name : "Vendors",
+				path : "#/dashboard/inventory/party/vendor"
+			}
+		]
 		
 		$scope.party = {
 			enableSorting: true,
@@ -155,7 +172,8 @@ define(['app'], function (app) {
 		$scope.partyParams = {
 			where : {
 				status : 1,
-				user_id : $rootScope.userDetails.id
+				user_id : $rootScope.userDetails.id,
+				type : ($routeParams.party == "client") ? "client" : "vendor"
 			},
 			cols : ["*"]
 		}

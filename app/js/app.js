@@ -194,7 +194,7 @@ define(['angular',
 			$rootScope.currentSite = location.protocol+'//'+location.hostname;
 			$rootScope.breadcrumbs = breadcrumbs;
 			$rootScope.serverApiV2 = false;
-			
+			$rootScope.moduleMenus = [];
 			$rootScope.currentPath = (next.$$route) ? next.$$route.originalPath : "";
 			if(next.$$route){
 				$rootScope.appConfig = {
