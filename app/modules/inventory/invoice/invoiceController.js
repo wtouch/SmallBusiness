@@ -114,6 +114,7 @@ define(['app'], function (app) {
 					date : $scope.currentDate,
 					addinvoice : (data) ? {
 						id : data.id,
+						party_id :data.party_id,
 						generated_date : data.generated_date,
 						modified_date : data.modified_date,
 						particulars:data.particulars,
