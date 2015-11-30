@@ -49,35 +49,101 @@ jQuery(document).ready(function() {
 
 	});
 $(document).ready(function(){
-	$('.carousslider').bxSlider({
-		mode:'fade',
-		minSlides: 1,
+	var sliderMode, minSlides, maxSlides;
+	//$(window).resize(function(){
+	if($(window).width() <= "480"){
+		sliderMode = "horizontal";
+		minSlides = 1;
+		maxSlides = 1;
+		
+	}else{
+		sliderMode = "vertical";
+		minSlides = 3;
+		maxSlides = 3;
+	}
+	$('.nav.nav-tabs a').on('shown.bs.tab', function(e) {
+		$('#ourassoc .bxslider').bxSlider({
+			mode:'horizontal',
+			slideWidth: 250,
+			minSlides: minSlides,
+			maxSlides: maxSlides,
+			slideMargin: 25,
+			auto: true, 
+			autoDirection:'next',
+			moveSlides: 1,
+			pause:3000,
+			pager:true,
+			pagerType:'full',
+			autoControls: true, 
+			controls:true, 
+			autoHover:true,
+			speed:1000,
+		});
+	});
+	$('.bxslider').bxSlider({
+		mode:'horizontal',
+		slideWidth: 250,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
+		slideMargin: 25,
 		auto: true, 
 		autoDirection:'next',
 		moveSlides: 1,
-		pause:4000,
+		pause:3000,
+		pager:true,
+		pagerType:'full',
+		autoControls: true, 
+		controls:true, 
+		autoHover:true,
+		speed:1000,
+	});
+	$('.bxslider1').bxSlider({
+		mode: sliderMode,
+		slideWidth: 680,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
+		slideMargin: 15,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 1,
+		pause:3000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
 		controls:false, 
 		autoHover:true,
-		speed : 1000
+		speed:1000,
 	});
-	$('.bxslider').bxSlider({
-		mode:'horizontal',
-		slideMargin: 10,
-		minSlides :1,
-		maxSlides: 3,
-		moveSlides: 2,
-		slideWidth: 250,
+	$('#bxslider2').bxSlider({
+		mode: sliderMode,
+		slideWidth: 680,
+		minSlides: minSlides,
+		maxSlides: maxSlides,
+		slideMargin: 15,
 		auto: true, 
 		autoDirection:'next',
-		pause:4000,
+		moveSlides: 1,
+		pause:3000,
 		pager:false,
 		pagerType:'full',
 		autoControls: false, 
-		controls:true, 
-		autoHover:true
+		controls:false, 
+		autoHover:true,
+		speed:1000,
+	});
+	$('.carousslider').bxSlider({ 
+		mode:'fade',
+		minSlides:1,
+		maxSlides: 1,
+		auto: true, 
+		autoDirection:'next',
+		pause:2500,
+		pager:false,
+		pagerType:'full',
+		autoControls: false, 
+		controls:false, 
+		autoHover:true,
+		speed:1000,
 	});
 });
 var app = angular.module('myApp',[]);
