@@ -111,14 +111,31 @@
 								<span ng-show="addbillForm.amount.$error.pattern" class="text-danger">Enter numbers only</span>
 							</span>
 						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" id="tax" placeholder="Tax" name="tax" ng-model="modalOptions.singleparticular.tax"   ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+						
+					 	<input type="checkbox"  id="tax" placeholder="Tax" name="tax" value="tax" ng-model="modalOptions.singleparticular.tax" ng-click="isCollapsed1 = !isCollapsed1;"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
 							<span class="help-block" ng-show="addbillForm.tax.$dirty && addbillForm.tax.$invalid">
 								<span ng-show="addbillForm.tax.$error.required" class="text-danger">Tax Required.</span>
 								<span ng-show="addbillForm.tax.$error.pattern" class="text-danger">Enter number only</span>
 							</span>
+
+								<div collapse="!isCollapsed1">
+									<div class="form-group">
+										<label for="remark" class="col-sm-2 control-label" >Remark </label>
+										<div class="col-sm-9">
+											<textarea class="form-control" rows="3" id="remark" name="remark" placeholder="remark" ng-maxlength="1000" ng-model="modalOptions.addmisions.remark" required></textarea>
+											<span ng-hide="addmisionForm.remark.$error.maxlength">
+												{{ 1000 - modalOptions.addmisions.remark.length + " Chars left" }}
+											</span>	
+											<span class="help-block ng-hide" ng-show="addmisionForm.remark.$dirty && addmisionForm.remark.$invalid">
+												<span class="text-danger" ng-show="addmisionForm.remark.$error.required">Required Field.</span>
+												<span class="text-danger" ng-show="addmisionForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+											</span>	
+										</div>
+									</div>
+									<button type="submit" class="btn btn-primary col-sm-offset-3" ng-click="isCollapsed1 = !isCollapsed1;modalOptions.postData('complaints', modalOptions.addcomplaint)">Add</button> 
+								</div>							
+							
 						</div>
-					</div>
 				</div>			
 			<button type="submit" class="btn btn-success"ng-disabled="addbillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addBill.particular, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular)">	+Add This Particular
 			</button>

@@ -118,6 +118,24 @@
 								<span ng-show="addInvoiceForm.tax.$error.required" class="text-danger">tax Required.</span>
 								<span ng-show="addInvoiceForm.tax.$error.pattern" class="text-danger">Enter like 0.00 only</span>
 								</span>
+								
+								
+									<div collapse="!isCollapsed1">
+									<div class="form-group">
+										<label for="remark" class="col-sm-2 control-label" >Remark </label>
+										<div class="col-sm-9">
+											<textarea class="form-control" rows="3" id="remark" name="remark" placeholder="remark" ng-maxlength="1000" ng-model="modalOptions.addmisions.remark" required></textarea>
+											<span ng-hide="addmisionForm.remark.$error.maxlength">
+												{{ 1000 - modalOptions.addmisions.remark.length + " Chars left" }}
+											</span>	
+											<span class="help-block ng-hide" ng-show="addmisionForm.remark.$dirty && addmisionForm.remark.$invalid">
+												<span class="text-danger" ng-show="addmisionForm.remark.$error.required">Required Field.</span>
+												<span class="text-danger" ng-show="addmisionForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+											</span>	
+										</div>
+									</div>
+									<button type="submit" class="btn btn-primary col-sm-offset-3" ng-click="isCollapsed1 = !isCollapsed1;modalOptions.postData('complaints', modalOptions.addcomplaint)">Add</button> 
+								</div>
 							</div>
 							
 			</div>
