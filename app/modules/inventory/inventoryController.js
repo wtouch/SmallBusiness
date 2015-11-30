@@ -4,16 +4,6 @@ define(['app'], function (app) {
     var injectParams = ['$scope', '$injector', 'dataService', '$rootScope', '$http'];
 	var inventoryController = function ($scope, $injector, dataService, $rootScope, $http) {
 		
-		$rootScope.moduleMenus = [
-			{
-				name : "Inventory",
-				path : "/dashboard/inventory"
-				
-			},{
-				name : "Party",
-				path : "/dashboard/inventory"
-			}
-		]
 		
 			console.log(app);
 			$http.get("modules/inventory/inventory.json").success(function(response){
