@@ -201,16 +201,16 @@ define(['app'], function (app) {
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
-				 /* join : [
+				  join : [
 					{
 						joinType : 'INNER JOIN',
 						joinTable : "inventory_party",
 						joinOn : {
-							party_id : "t0.party_id"
+							party_id : "t0.party_id",
 						},
 						cols : {name : "name"}
 					}
-				], */
+				], 
 				 cols : ["*"] 
 			};
 			if(page){

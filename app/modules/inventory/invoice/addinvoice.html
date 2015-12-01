@@ -11,7 +11,7 @@
 			<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="party_id" class="col-sm-2 control-label"> Select Party * </label>
 					<div class="col-sm-4">
-						<select id="party_id" class="form-control" ng-model="modalOptions.addinvoice.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}">
+						<select id="party_id" class="form-control" ng-model="modalOptions.addinvoice.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}" required>
 							<option value="">Select Party</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -119,7 +119,8 @@
 								</span> 
 						</td>
 						<td>
-						<input type="button"  id="tax" class=" dropdown dropdown-toggle" placeholder="Tax" name="tax" value="tax"  ng-click="isCollapsed1 = !isCollapsed1"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+						<button type="button" tooltip="Add Tax" id="tax" class="dropdown dropdown-toggle glyphicon glyphicon-plus" placeholder="Tax" name="tax" value="tax"  ng-click="isCollapsed1 = !isCollapsed1"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+					</button> 
 						<span class="help-block" ng-show="addbillForm.tax.$dirty && addbillForm.tax.$invalid">
 							<span ng-show="addbillForm.tax.$error.required" class="text-danger">Tax Required.</span>
 							<span ng-show="addbillForm.tax.$error.pattern" class="text-danger">Enter number only</span>
@@ -145,7 +146,7 @@
 						</table>
 						</div>
 						<div class="col-sm-4">
-								<button type="submit" class="btn btn-success center" ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular)">+Add This Particular</button>							
+								<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular)">+Add This Particular</button>							
 							</div>
 					</div>
 					</div>
