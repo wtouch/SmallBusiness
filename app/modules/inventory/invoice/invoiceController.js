@@ -39,16 +39,11 @@ define(['app'], function (app) {
 				{ name:'invoice_id',  width:150, enableSorting: false ,displayName: "Invoice No",
 				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'invoice_id\', invoice_id, \'invoice\', \'invoiceList\',true)" ng-model="invoice_id" placeholder="Invoice No">',
 				},
-				 {
-					name:'Party Name', width:150,
-					filterHeaderTemplate: '<select class="form-control" ng-change="grid.appScope.filter(\'name\', partyFilter, \'party\', \'partyList\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.partyList">'
-							+'<option value="" selected>Party Name</option>'
-						+'</select>',
-					filter: {
-					  placeholder: 'Party Name'
+				{ name:'name',enableSorting: false ,enableFiltering: true,
+				filter:{
+					placeholder:'Name'
 					}
 				}, 
-				
 				{ 
 					name:'generated_date',
 					width:150, 
@@ -90,8 +85,8 @@ define(['app'], function (app) {
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/payInvoice.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-usd"></span></a>'
-					+'<a ng-click="openGenerateinvoice(\'modules/accounting/invoice/viewinvoice.html\',x)" class="btn btn-primary" type="button" tooltip-animation="true" tooltip="View Invoice"><span class="glyphicon glyphicon-eye-open"></span></a>'
-					+'<a ng-disabled="(x.payment_status == 0)" ng-click="viewReceipt(\'modules/accounting/invoice/viewreceipt.html\',x)"  class="btn btn-warning" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-click="openGenerateinvoice(\'modules/accounting/invoice/viewinvoice.html\',x)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Invoice"><span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-disabled="(x.payment_status == 0)" ng-click="viewReceipt(\'modules/accounting/invoice/viewreceipt.html\',x)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			],
@@ -190,38 +185,38 @@ define(['app'], function (app) {
 				status : 1,
 				user_id : $rootScope.userDetails.id
 			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "inventory_party",
+					joinOn : {
+						id : "t0.party_id"
+					},
+					cols : {name : "name"}
+				}
+			],
 			cols : ["*"]
 		}
 		
 		
 		// For Get (Select Data from DB)
-		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
-			$scope.params = (params) ? params : {
+		$scope.getData = function(single, page, table, subobj, invoiceParams, modalOptions) {
+			$scope.invoiceParams = (invoiceParams) ? invoiceParams : {
 				where : {
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
-				  join : [
-					{
-						joinType : 'INNER JOIN',
-						joinTable : "inventory_party",
-						joinOn : {
-							party_id : "t0.party_id",
-						},
-						cols : {name : "name"}
-					}
-				], 
-				 cols : ["*"] 
+				cols : ["*"] 
 			};
 			if(page){
-				angular.extend($scope.params, {
+				angular.extend($scope.invoiceParams, {
 					limit : {
 						page : page,
 						records : $scope.pageItems
 					}
 				})
 			}
-			dataService.get(single,table,$scope.params).then(function(response) {
+			dataService.get(single,table,$scope.invoiceParams).then(function(response) {
 				console.log(response);
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
@@ -247,15 +242,15 @@ define(['app'], function (app) {
 		$scope.filter = function(col, value, table, subobj, search){
 			value = (value) ? value : undefined;
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, response);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
+				angular.extend($scope.invoiceParams, response);
+				$scope.getData(false, $scope.currentPage, table, subobj, $scope.invoiceParams);
 			})
 		}
 		$scope.orderBy = function(col, value){
-			if(!$scope.params.orderBy) $scope.params.orderBy = {};
-			$scope.params.orderBy[col] = value;
-			console.log($scope.params);
-			$scope.getData(false,$scope.currentPage, 'invoice', 'invoiceList', $scope.params);
+			if(!$scope.invoiceParams.orderBy) $scope.invoiceParams.orderBy = {};
+			$scope.invoiceParams.orderBy[col] = value;
+			console.log($scope.invoiceParams);
+			$scope.getData(false,$scope.currentPage, 'invoice', 'invoiceList', $scope.invoiceParams);
 		}
 	};
 		
