@@ -38,7 +38,7 @@
 					</span>
 					</div>
 				</div> 
-				<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.account.modified_date" ng-init="modalOptions.account.modified_date = modalOptions.date"/>
+				<!-- <input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.account.modified_date" ng-init="modalOptions.account.modified_date = modalOptions.date"/> -->
 				
 				<div class="form-group">
 					<label for="account_no" class="col-sm-2 control-label">Account Number * </label>
@@ -78,10 +78,19 @@
 						<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.account.date"/>
 					</div>
 				</div> --> 
-				 <div class="form-group">
+				 <!-- <div class="form-group">
 				 <label  for="date" class="col-sm-2 control-label">Date * </label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder=" date" id="date" name="date" ng-model="modalOptions.account.date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.account.date = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
+					</div>
+				</div>  -->
+				<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.account.date" ng-init="modalOptions.account.date = modalOptions.date"/>
+				<div class="form-group">
+				<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.account.modified_date" ng-init="modalOptions.account.modified_date = modalOptions.date"/>
+				<div class="form-group">
+				 <label  for="date" class="col-sm-2 control-label">Date * </label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder="Account Date" id="accountdate" name="accountdate" ng-model="modalOptions.account.accountdate" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.account.accountdate = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
 					</div>
 				</div> 
 				<div class="form-group modal-footer">

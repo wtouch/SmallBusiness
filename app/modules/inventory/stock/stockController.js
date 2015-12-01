@@ -43,12 +43,9 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
 				},
-				  {
-				    name:'name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'stock\', \'stockList\',true)" ng-model="party_id" placeholder="search user id">',
-                }, 
-				/* { name:'name',enableSorting: false ,enableFiltering: true
-				}, */
+				  
+				  { name:'name',enableSorting: true ,enableFiltering: true
+				},    
 				{
 				    name:'goods_name',
 					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\',true)" ng-model="goods_name" placeholder="search">',
@@ -103,7 +100,7 @@ define(['app'], function (app) {
 				},
 				{ name:'manage', enableSorting: false, enableFiltering: false, 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/stock/addstock.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit stock Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock\', \'status\',row.entity.status, row.entity.id)"  btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
 				}
 			]
@@ -162,7 +159,7 @@ define(['app'], function (app) {
 					joinType : 'INNER JOIN',
 					joinTable : "inventory_party",
 					joinOn : {
-						party_id : "t0.party_id"
+						id : "t0.party_id"
 					},
 					cols : {name : "name"}
 				}
@@ -211,15 +208,15 @@ define(['app'], function (app) {
 		$scope.filter = function(col, value, table, subobj, search){
 			value = (value) ? value : undefined;
 			$rootScope.filterData(col, value, search, function(response){
-				console.log($scope.params, response);
-				angular.extend($scope.params, response);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
+				console.log($scope.stockParams, response);
+				angular.extend($scope.stockParams, response);
+				$scope.getData(false, $scope.currentPage, table, subobj, $scope.stockParams);
 			})
 		}
 		$scope.orderBy = function(col, value, table, subobj){
-			if(!$scope.params.orderBy) $scope.params.orderBy = {};
-			$scope.params.orderBy[col] = value;
-			$scope.getData($scope.currentPage, table, subobj, $scope.params);
+			if(!$scope.stockParams.orderBy) $scope.stockParams.orderBy = {};
+			$scope.stockParams.orderBy[col] = value;
+			$scope.getData($scope.currentPage, table, subobj, $scope.stockParams);
 		}
 		
 	 };

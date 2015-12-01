@@ -16,7 +16,7 @@ define(['app'], function (app) {
 		$scope.numPages = "";		
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
-		$scope.currentDate = dataService.sqlDateFormate(dataService.currentDate);
+		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		console.log('Hello');
@@ -136,8 +136,8 @@ define(['app'], function (app) {
 			cols : ["*"]
 		}
 		// For Get (Select Data from DB)
-		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
-			$scope.params = (params) ? params : {
+		$scope.getData = function(single, page, table, subobj, accountParams, modalOptions) {
+			$scope.accountParams = (accountParams) ? accountParams : {
 				where : {
 					status : 1,
 					user_id : $rootScope.userDetails.id
@@ -145,14 +145,14 @@ define(['app'], function (app) {
 				cols : ["*"]
 			};
 			if(page){
-				angular.extend($scope.params, {
+				angular.extend($scope.accountParams, {
 					limit : {
 						page : page,
 						records : $scope.pageItems
 					}
 				})
 			}
-			dataService.get(false,table,$scope.params).then(function(response) {
+			dataService.get(false,table,$scope.accountParams).then(function(response) {
 				console.log(response);
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
@@ -177,14 +177,14 @@ define(['app'], function (app) {
 		$scope.filter = function(col, value, table, subobj, search){
 			value = (value) ? value : undefined;
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, response);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
+				angular.extend($scope.accountParams, response);
+				$scope.getData(false, $scope.currentPage, table, subobj, $scope.accountParams);
 			})
 		}
 		$scope.orderBy = function(col, value, table, subobj){
-			if(!$scope.params.orderBy) $scope.params.orderBy = {};
-			$scope.params.orderBy[col] = value;
-			$scope.getData(false,$scope.currentPage, 'account', 'accountList', $scope.params);
+			if(!$scope.accountParams.orderBy) $scope.accountParams.orderBy = {};
+			$scope.accountParams.orderBy[col] = value;
+			$scope.getData(false,$scope.currentPage, 'account', 'accountList', $scope.accountParams);
 		}
 	 };
 		

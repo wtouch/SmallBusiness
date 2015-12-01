@@ -6,7 +6,7 @@
 	</div>
 	<div class="modal-body">
 		<form name="addStockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStockForm.$valid">
-				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList', params, modalOptions)">
+				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList', stockParams, modalOptions)">
 					<label for="party_id" class="col-sm-2 control-label"> User id * </label>
 					<div class="col-sm-9">
 						<select id="party_id" class="form-control" ng-model="modalOptions.stock.party_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
@@ -90,6 +90,7 @@
 						</div>						
 				</div>
 				<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.stock.modified_date" ng-init="modalOptions.stock.modified_date = modalOptions.date"/>
+				<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.stock.date" ng-init="modalOptions.stock.date = modalOptions.date"/>
 				<div class="form-group">
 				 <label  for="date" class="col-sm-2 control-label">Date * </label>
 					<div class="col-sm-9">
