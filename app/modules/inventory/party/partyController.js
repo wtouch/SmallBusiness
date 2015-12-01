@@ -24,7 +24,6 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Party",
-				path : "#/dashboard/inventory/party/client",
 				SubTitle :"Add Party",
 				events : {
 					click : function(){
@@ -41,13 +40,8 @@ define(['app'], function (app) {
 				SubTitle :"Client List"
 			}
 		]
-		
-		$scope.ModuleSubTitle ="";
-		$scope.setSubtitle =function(SubTitle)
-		{
-			$scope.ModuleSubTitle = SubTitle;
-		} 
-		
+		$scope.currentPath = $location.path();
+				
 		$scope.party = {
 			enableSorting: true,
 			enableFiltering: true,
