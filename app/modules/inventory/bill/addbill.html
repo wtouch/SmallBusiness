@@ -9,7 +9,7 @@
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
 	
 		<div class=" col-sm-offset-2 col-sm-4">
-			<div ng-init="modalOptions.getData(false,false,'party', 'partyList',params,modalOptions)">
+			<div ng-init="modalOptions.getData(false,false,'party', 'partyList',billParams,modalOptions)">
 				<div class="form-group">
 					<select class="form-control" name="party_id" id="party_id" ng-model="modalOptions.addBill.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter :{type :'vendor'}" required>
 						<option value="">Select Vendor</option>

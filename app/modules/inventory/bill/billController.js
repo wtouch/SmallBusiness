@@ -26,7 +26,9 @@ define(['app'], function (app) {
 				{ name:'id', width:50,
 					filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'bill\', \'billData\')" ng-model="id" placeholder="Bill No">',
 				},
-				{
+				 { name:'name',enableSorting: false ,enableFiltering: true
+				}, 
+				/* {
 					name:'Party Name',
 					filterHeaderTemplate: '<select id="user_id" class="form-control" ng-change="grid.appScope.filter(\'party_id\', partyFilter, \'party\', \'partyList\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.partyList">'
 							+'<option value="" selected>Party name</option>'
@@ -36,7 +38,7 @@ define(['app'], function (app) {
 					filter: {
 					  placeholder: 'Party Name'
 					}
-				},
+				}, */
 				{ name:'bill_date',
 					filterHeaderTemplate: '<input id="bill_date" class="form-control" ng-change="grid.appScope.filter(\'bill_date\', bill_date, \'bill\', \'billData\')" ng-model="bill_date" placeholder="search">',
 				},
@@ -173,34 +175,43 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
+		
+		$scope.billParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "inventory_party",
+					joinOn : {
+						id : "t0.party_id"
+					},
+					cols : {name : "name"}
+				}
+			],
+			cols : ["*"]
+		}
 		// For Get (Select Data from DB)
-		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
-			$scope.params = (params) ? params : {
+		$scope.getData = function(single, page, table, subobj, billParams, modalOptions) {
+			$scope.billParams = (billParams) ? billParams : {
 				where : {
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
-				/* join : [
-					{
-						joinType : 'INNER JOIN',
-						joinTable : "inventory_party",
-						joinOn : {
-							party_id : "t0.party_id"
-						},
-						cols : {name : "party_name"}
-					}
-				], */
+				 
 				cols : ["*"]
 			};
 			if(page){
-				angular.extend($scope.params, {
+				angular.extend($scope.billParams, {
 					limit : {
 						page : page,
 						records : $scope.pageItems
 					}
 				})
 			}
-			dataService.get(single,table,$scope.params).then(function(response) {
+			dataService.get(single,table,$scope.billParams).then(function(response) {
 				console.log(response);
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
@@ -224,14 +235,14 @@ define(['app'], function (app) {
 		$scope.filter = function(col, value, table, subobj, search){
 			value = (value) ? value : undefined;
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, response);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
+				angular.extend($scope.billParams, response);
+				$scope.getData(false, $scope.currentPage, table, subobj, $scope.billParams);
 			})
 		}
 		$scope.orderBy = function(col, value){
-			if(!$scope.params.orderBy) $scope.params.orderBy = {};
-			$scope.params.orderBy[col] = value;
-			$scope.getData(false,$scope.currentPage, 'bill', 'billData', $scope.params);
+			if(!$scope.billParams.orderBy) $scope.billParams.orderBy = {};
+			$scope.billParams.orderBy[col] = value;
+			$scope.getData(false,$scope.currentPage, 'bill', 'billData', $scope.billParams);
 		}
 	};	
 	// Inject controller's dependencies
