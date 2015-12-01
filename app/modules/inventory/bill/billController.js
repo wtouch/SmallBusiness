@@ -19,7 +19,7 @@ define(['app'], function (app) {
 			{
 				name : "Add Bill",
 				path : "#/dashboard/inventory/bill",
-				SubTitle :"Add Purchase Bill",
+				SubTitle :" Purchase Bill",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/inventory/bill/addbill.html");
@@ -42,17 +42,7 @@ define(['app'], function (app) {
 				},
 				 { name:'name',enableSorting: false ,enableFiltering: true
 				}, 
-				/* {
-					name:'Party Name',
-					filterHeaderTemplate: '<select id="user_id" class="form-control" ng-change="grid.appScope.filter(\'party_id\', partyFilter, \'party\', \'partyList\')" ng-model="partyFilter" ng-options="item.id as item.name for item in grid.appScope.partyList">'
-							+'<option value="" selected>Party name</option>'
-							+'<option value="0">Unpaid</option>'
-							+'<option value="1">Paid</option>	'
-						+'</select>',
-					filter: {
-					  placeholder: 'Party Name'
-					}
-				}, */
+			
 				{ name:'bill_date',
 					filterHeaderTemplate: '<input id="bill_date" class="form-control" ng-change="grid.appScope.filter(\'bill_date\', bill_date, \'bill\', \'billData\')" ng-model="bill_date" placeholder="search">',
 				},
@@ -111,6 +101,22 @@ define(['app'], function (app) {
 				})
 			}
 		};
+		$scope.verticalSum = function(inputArray, column, subobj){
+			/* if(!$scope[subobj])  */$scope[subobj] = 0;
+			
+			angular.forEach(inputArray, function(value, key){
+				$scope[subobj] += parseFloat(value[column]);
+			})
+			return $scope[subobj];
+		}
+		$scope.$watch(function(){ return $scope.billData.data},function(newValue){
+			if(angular.isArray(newValue)){
+				if(newValue.length >= 1){
+					
+					$scope.verticalSum($scope.billData.data, 'particular[0].amount', 'totalAmount');
+				}
+			}
+		})
 		$scope.openModal = function(url,data){
 				var modalDefault = {
 				templateUrl: url, // apply template to modal
