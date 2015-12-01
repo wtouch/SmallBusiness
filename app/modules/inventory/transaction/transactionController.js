@@ -55,6 +55,8 @@ define(['app'], function (app) {
 			}
 		]
 		
+		
+		
 		$scope.calcDuration = function(type, duration){
 			console.log(type, duration);
 			var curDate = new Date();
