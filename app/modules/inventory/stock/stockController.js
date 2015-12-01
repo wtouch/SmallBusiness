@@ -43,14 +43,16 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
 				},
-				  
-				  /* {
-				    name:'name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'stock\', \'stockList\',true)" ng-model="name" placeholder="search">',
-                },  */
-				{
+
+				 {
 					name:'name',enableSorting: true,enableFiltering: true,			
-				},
+				}, 
+				/* { name:'name',enableSorting: false ,
+				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'stock\', \'stockList\',true)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">'
+							+'<option value="" >Account Name</option>'
+						+'</select>',
+					}, */
+				
 				{
 				    name:'goods_name',
 					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\',true)" ng-model="goods_name" placeholder="search">',
