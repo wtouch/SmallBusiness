@@ -32,7 +32,8 @@ define(['app'], function (app) {
 				}
 			},{
 				name : "Vendors List",
-				path : "#/dashboard/inventory/party/vendor"
+				path : "#/dashboard/inventory/party/vendor",
+				SubTitle :"vendor List"
 			},{
 				name : "Client",
 				path : "#/dashboard/inventory/party/client"
