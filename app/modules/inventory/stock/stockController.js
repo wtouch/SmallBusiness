@@ -85,7 +85,7 @@ define(['app'], function (app) {
 				 { name:'quantity',enableSorting: false, enableFiltering: false,},
 				{ name:'price',enableSorting: false, enableFiltering: false,},
 				{ name:'unit',enableSorting: false, enableFiltering: false,},
-				{
+				/* {
 					name:'status',
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\')" ng-model="status">'
 							+'<option value="" selected>Account Status</option>'
@@ -97,8 +97,18 @@ define(['app'], function (app) {
 					 
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} 
-				},
-				{ name:'manage', enableSorting: false, enableFiltering: false, 
+				}, */
+				{ name:'Manage', 
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\')" ng-model="status">'
+							 +'<option value="" selected>Status</option>' 
+							+'<option value="0">Deleted</option>'
+							+'<option value="1">Active</option>	'
+						+'</select>', 
+					filter: {
+					   type: uiGridConstants.filter.SELECT,  
+					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
+					  ]
+					} , 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/stock/addstock.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit stock Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock\', \'status\',row.entity.status, row.entity.id)"  btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
