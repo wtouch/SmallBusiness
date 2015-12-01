@@ -23,8 +23,9 @@ define(['app'], function (app) {
 		}
 		$rootScope.moduleMenus = [
 			{
-				name : "Add Clients",
+				name : "Add Party",
 				path : "#/dashboard/inventory/party/client",
+				SubTitle :"Add Party",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/inventory/party/addparty.html");
@@ -36,9 +37,16 @@ define(['app'], function (app) {
 				SubTitle :"vendor List"
 			},{
 				name : "Client",
-				path : "#/dashboard/inventory/party/client"
+				path : "#/dashboard/inventory/party/client",
+				SubTitle :"Client List"
 			}
 		]
+		
+		$scope.ModuleSubTitle ="";
+		$scope.setSubtitle =function(SubTitle)
+		{
+			$scope.ModuleSubTitle = SubTitle;
+		} 
 		
 		$scope.party = {
 			enableSorting: true,
