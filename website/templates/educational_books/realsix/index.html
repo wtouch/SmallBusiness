@@ -25,13 +25,13 @@
 				.featuredProperty .sections .bxslider1 li .sliderImg:hover,.propertylist .panel-default .sliderImg img:hover, .homeproject .projsnap img, .bxslider li .projimg:hover, .services .servimage:hover, .services .servdesc .readmore a,.services .servdesc .readmore a:hover,.featrtesti img:hover,.btn-info, .btn-primary, .btn-info:focus, .btn-primary:focus, .btn-info:active, .btn-primary:active, .btn-info[disabled], .btn-primary[disabled],.btn-info:hover,.btn-primary:hover{
 					border-color : {{data.template_params.color}};
 				}
-				.homeproject .projsnap .viewproperty a, .homeproject .projsnap .viewproperty a:hover, .bxslider li .head, .bxslider li .head:hover, .highlight,.services .servdesc .readmore a:hover, .featuretab .nav-tabs li a,.testimonial blockquote footer cite, .featrtesti blockquote footer cite,.contactinfo, a, a:hover,h1, h2, h3, h4, .btn-link, .btn-link:hover,.btn-info:hover,.btn-primary:hover,.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+				.homeproject .projsnap .viewproperty a, .homeproject .projsnap .viewproperty a:hover, .bxslider li .head, .bxslider li .head:hover, .highlight,.services .servdesc .readmore a:hover, .featuretab .nav-tabs li a,.testimonial blockquote footer cite, .featrtesti blockquote footer cite,.contactinfo, a,h1, h2, h3, .btn-link, .btn-link:hover,.btn-info:hover,.btn-primary:hover,.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
 					color : {{data.template_params.color}};
 				}
 				.project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover, .project ul.nav.navbar-nav > li > a:focus, .services .servdesc .readmore a,.featuretab .nav-tabs li a:hover,.featuretab .nav-tabs li.active > a,.featuretab .nav-tabs li.active > a:hover,.featuretab .nav-tabs li.active > a:focus,.sidebar .nav-pills > li.active > a, .sidebar .nav-pills > li.active:hover > a, .sidebar .nav-pills > li.active > a:focus, .sidebar .nav-pills > li:hover > a, .sidebar .nav-pills > li:hover > a:focus, .sidebar .nav-pills > li > a:hover,.sidebar .nav-pills > li > a:focus,.sociallinks ul li,.navbar-default .navbar-nav > li.active > a, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a, .navbar-default .navbar-nav > li:hover > a:focus,.navbar-default .navbar-nav > li > ul,.btn-info,.btn-primary,.btn-info:focus,.btn-primary:focus,.btn-info:active,.btn-primary:active,.btn-info[disabled],.btn-primary[disabled], .navbar-toggle .icon-bar{
 					background-color : {{data.template_params.color}};
 				}
-				.homeproject .bx-viewport, .homeproject #carousel .carousel-inner,.bxslider li .projimg, .featrtesti img,.navbar-toggle{
+				.homeproject .bx-viewport, .homeproject #carousel .carousel-inner,.bxslider li .projimg, .featrtesti img,.navbar-toggle, a:hover{
 					border-color : {{data.template_params.light_color}};
 				}
 				.homeproject .projectnav .nav-stacked > li > a, .homeproject .projsnap .nav-stacked > li > a, .homeproject .projectnav .nav-stacked > li > a:focus, .homeproject .projsnap .nav-stacked > li > a:focus, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus, .sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, body, .navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:focus,.thumbnail .caption,.form-control, .form-control[disabled], .form-control[readonly], .sidebarModule .email, .sidebarModule .email:hover, footer, footer a, footer a:hover{
@@ -65,34 +65,40 @@
 		{% endif %}
 	</head>
 	<body>
-		
 		<header>
-			<div class="container">
-				<div class="col-xs-12">
-					{% if data.website_config.website_logo %}
-					<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
-					{% else %}
-					
-					<img class="logo" src="{{data.business_logo.file_relative_path}}">
-					{% endif %}
+			<div class="container">	
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 weblogo">
+						{% if data.website_config.website_logo %}
+							<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-4 text-center">
+						{% if data.website_config.website_logo1 %}
+							<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
+						{% else %}
+							<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						{% endif %}
+					</div>
+					<div class="col-xs-12 col-sm-4 text-right cntdtl">	
+						<p><strong>Mobile: </strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
+						<p>
+						<p><strong>E-mail ID: </strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
+						<p>
+					</div>
 				</div>
 			</div>
 		</header>
 		<nav class="navbar navbar-default">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>Main Menu
+				</button>
+			</div>
 			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-	
 				<!-- Brand and toggle get grouped for better mobile display -->
-				
 				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 					</ul>
@@ -131,6 +137,9 @@
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
 									<li role="presentation" class="active">
+											<a href="#associates" aria-controls="profile" role="tab" data-toggle="tab">Associates</a>
+									</li>
+									<li role="presentation">
 										<a href="#featrserv" aria-controls="home" role="tab" data-toggle="tab">Featured Services</a>
 									</li>
 									{% if data.testimonials %}
@@ -138,19 +147,16 @@
 										<a href="#featrtesti" aria-controls="profile" role="tab" data-toggle="tab">Featured Testimonials</a>
 									</li>
 									{% endif %}
-									<li role="presentation">
-											<a href="#associates" aria-controls="profile" role="tab" data-toggle="tab">Associates</a>
-									</li>
 								</ul>
 								<!-- Tab panes -->
 								<div class="tab-content">
-									<div role="tabpanel" class="tab-pane active" id="featrserv">
+									<div role="tabpanel" class="tab-pane" id="featrserv">
 										{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 									</div>
 									<div role="tabpanel" class="tab-pane" id="featrtesti">
 									{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
 									</div>
-									<div role="tabpanel" class="tab-pane" id="associates">
+									<div role="tabpanel" class="tab-pane active" id="associates">
 										{% include [templatePath ~ '/includes/our_associates.html', 'default/default/includes/our_associates.html'] %}
 									</div>
 								</div>

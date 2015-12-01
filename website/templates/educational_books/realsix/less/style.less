@@ -11,7 +11,7 @@
 @darkcolor : #212501;
 @back : #272600;
 @darkbackcolor : #171600;
-@lightbackcolor :#2F3826; 
+@lightbackcolor :#2F3826;
 @colorblack : #000;
 @colorwhite	: #fff;
 @import "property.less";
@@ -66,17 +66,19 @@
 			}
 		}
 	}
-	.logo {
-		height: 80px;
-		margin-top: 10px;
-		margin-bottom: 30px;
-		max-width: 100%;
+	header{
+		margin-bottom : 20px;
+		.weblogo,.cntdtl {
+			padding-top: 20px;
+		}
+		.logo{
+			max-height: 100px;
+		}
+		.cntdtl{
+			color:@color;
+		}
 	}
-	.contactinfo{
-		color:@color;
-		font-weight : bold;
-		margin: 40px 15px 40px 0;
-	}
+	
 	.navbar-collapse{
 		padding :0px;
 	}
@@ -87,10 +89,19 @@
 	.navbar-toggle .icon-bar {
 		background-color: @lightcolor;
 	} 
+	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+		background-color : @lightbackcolor;
+	}
+	.projdtls{
+		background-color : @darkbackcolor;
+		color : @lightcolor;
+	}
 	.navbar-default {
 		background-image: linear-gradient(@darkbackcolor, @back);
 		border: 1px solid @lightbackcolor;
 		.navbar-nav{
+			float : none;
+			display : inline-block;
 			> li{
 				position : relative;
 				margin-right: 0px;
@@ -155,17 +166,22 @@
 						padding: 7px;
 						>a{
 							color:@colorblack;
-							&:hover{
-								 text-decoration: underline;
+						}
+						&:hover{
+							background-color : @darkbackcolor;
+							a{
+								text-decoration: none;
+								color : @lightcolor;
 							}
+							
 						}
 						> ul{
-							list-style : disc;
+							list-style : none;
 							>li{
 								>a{
 									color:@colorblack;
 									&:hover{
-										text-decoration: underline;
+										text-decoration: none;
 									}
 								}
 							}
@@ -187,12 +203,14 @@
 	a{
 		color : @color;
 		&:hover{
-			color : @color;
-			text-decoration : underline;
+			color : @lightcolor;
+			text-decoration : none;
 		}
 	}
 	h1,h2,h3,h4{
 		font-family:'Amaranth-Regular';
+	}
+	h1,h2,h3{
 		color :@color; 
 	}
 	h1,h2{
@@ -258,11 +276,10 @@
 		padding-bottom : 0px;
 	}
 	.thumbnail{
-		background : none;
+		background-color : transparent;
 		border-color : @lightbackcolor;
 		.caption{
 			color : @lightcolor;
-			
 		}
 	}
 	.btn-link{
@@ -361,53 +378,11 @@
 		}
 	}
 	@media (max-width: 540px){
-		header {
-			.btn + .btn{
-				margin-top : 5px;
-				margin-left : 0px;
-				margin-bottom : 5px;
-			}
-			.navbar{
-				min-height : 1px;
-			}
-			.navbar-default{
-				.navbar-nav {
-					margin: 0px;
-						>li{
-							padding-left: 0px;
-							&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
-								background-color : @color;
-								color : @colorblack;
-								border-bottom-left-radius : 0px;
-								border-bottom-right-radius : 0px;
-								top: 0px;
-								padding-top: 10px;
-								//background:none;
-								//background-image:-webkit-linear-gradient( @color 99%,@darkbackcolor) ;
-							}
-					}
-				}
-			}
-		}
-	}
-	@media (max-width: 480px){
-		.navbar-default{
-			.navbar-nav {
-				margin: 0px;
-					>li{
-						padding-left: 0px;
-						&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
-							background-color : @color;
-							color : @colorblack;
-							border-bottom-left-radius : 0px;
-							border-bottom-right-radius : 0px;
-							top: 0px;
-							padding-top: 10px;
-							height: auto;
-							//background:none;
-							//background-image:-webkit-linear-gradient( @color 99%,@darkbackcolor) ;	
-						}
-				}
+		header{
+			margin-bottom : 0px;
+			.weblogo,.cntdtl {
+				padding-top: 0px;
+				text-align : center;
 			}
 		}
 		.btn + .btn{
@@ -415,5 +390,23 @@
 			margin-left : 0px;
 			margin-bottom : 5px;
 		}
-		
+		.navbar{
+			min-height : 1px;
+		}
+		.navbar-default{
+			.navbar-nav {
+				margin: 0px;
+				>li{
+					padding-left: 0px;
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
+						background-color : @color;
+						color : @colorblack;
+						border-bottom-left-radius : 0px;
+						border-bottom-right-radius : 0px;
+						top: 0px;
+						padding-top: 10px;
+					}
+				}
+			}
+		}
 	}

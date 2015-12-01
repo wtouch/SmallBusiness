@@ -20,7 +20,7 @@ $(document).ready(function(){
 			maxSlides = 3;
 		}
 	//})
-	$('.bxslider').bxSlider({
+	$('#bxslider').bxSlider({
 		mode:'horizontal',
 		slideWidth: 250,
 		minSlides: minSlides,
@@ -30,12 +30,31 @@ $(document).ready(function(){
 		autoDirection:'next',
 		moveSlides: 1,
 		pause:3000,
-		pager:true,
+		pager:false,
 		pagerType:'full',
-		autoControls: true, 
-		controls:true, 
+		autoControls: false, 
+		controls:false, 
 		autoHover:true,
 		speed:1000,
+	});
+	$('.nav.nav-tabs a').on('shown.bs.tab', function(e) {
+		$('#ourassoc .bxslider').bxSlider({
+			mode:'horizontal',
+			slideWidth: 250,
+			minSlides: minSlides,
+			maxSlides: maxSlides,
+			slideMargin: 25,
+			auto: true, 
+			autoDirection:'next',
+			moveSlides: 1,
+			pause:3000,
+			pager:false,
+			pagerType:'full',
+			autoControls: false, 
+			controls:false, 
+			autoHover:true,
+			speed:1000,
+		});
 	});
 	$('.bxslider1').bxSlider({
 		mode: sliderMode,
@@ -56,6 +75,8 @@ $(document).ready(function(){
 	});
 	$('.carousslider').bxSlider({ 
 		mode:'fade',
+		slideWidth: 1000,
+		slideHeight : 800,
 		minSlides:1,
 		maxSlides: 1,
 		auto: true, 
@@ -96,36 +117,30 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		method: "GET",
 		params: params
 	}).then(function (results) {
+		console.log(results);
 		if(results.data.status == 'success'){
 			$scope.propertyConfig = results.data.data.config_data;
 		}else{
 			$scope.propertyConfig = results.data.data;
 		}
 	});
-	
-	// Don't change following code
-	/* start email code */
 	$scope.mailSent = false;
+
 	$scope.enquiry = {
+		message : {
+			property_for :0
+		},
+		subject : 'Website Enquiry',
 		date : year + "-" + month + "-" + date + " " + hour + ":" + min + ":"+sec
 	};
 	$scope.postData = function(enquiry){
 		$scope.loading = true;
-		if(enquiry.message.property_link){
-			enquiry.message.property_link = "<a href=\""+ location.origin +"/properties/"+ enquiry.message.property_link.params.property_title + "/" + enquiry.message.property_link.params.property_id + "\">"+enquiry.message.property_link.params.property_title+"</a>";
-		}
-		$http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
-			$scope.loading = false;
-			if(response.status == "success"){
-				$scope.mailSent = true;
-			}else{
-				$scope.mailSent = false;
-				$scope.errorMessage = response.message;
-				console.log(response);
-			}
+		console.log(enquiry);
+		 $http.post("/server-api/index.php/post/enquiry", $scope.enquiry).success(function(response) {
+			 $scope.loading = false;
+			$scope.mailSent = true;
 		});
 	};
-	/* End email code */
 });	
 
 	app.controller('aboutController', function($scope,$http, $location) {

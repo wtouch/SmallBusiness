@@ -107,11 +107,12 @@
 	.navbar-collapse{
 		padding :0px;
 	}
-	.navbar-toggle {
-		margin-top : 45px;
-	}
 	.navbar-toggle .icon-bar {
 		background-color: @darkbackcolor;
+		color : @colorwhite;
+	}
+	.projdtls{
+		margin-right : 0px;
 	}
 	.modal-body	{
 		p{
@@ -419,21 +420,33 @@
 			border:none;
 		}
 	}
-	@media (max-width: 480px){
-		.weblogo, .cntdtl{
-			text-align : center;
-		}
-		.logo{
-			margin-bottom : 10px;
-		}
-	}
 	@media (max-width: 540px){
+		header{
+			margin-bottom : 0px;
+			.cntdtl{
+				padding-top:0px;
+			}
+			.weblogo, .cntdtl{
+				text-align : center;
+			}
+			.logo{
+				margin-bottom : 10px;
+			}
+		}
 		.navbar{
 			min-height : 1px;
+			margin-bottom:0px;
 		}
 		.navbar-default{
 			.navbar-nav {
 				margin: 0px;
+			}
+		}
+		.subhead{
+			font-size : 14px;
+			padding: 12px 0px 12px 5px;
+			&::after{
+				border-bottom: 44px solid @darkbackcolor;
 			}
 		}
 	}

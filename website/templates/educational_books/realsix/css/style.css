@@ -11,7 +11,7 @@
   list-style: none;
 }
 .featuredProperty .sections .bxslider1 h4 {
-  padding-left: 25px;
+  padding-left: 5px;
 }
 .featuredProperty .sections .bxslider1 .row {
   padding-bottom: 10px;
@@ -30,7 +30,7 @@
 }
 .featuredProperty .sections .bxslider1 li .sliderImg {
   height: 150px;
-  width: 200px;
+  width: 100%;
   overflow: hidden;
   padding: 4px;
   border: 2px solid transparent;
@@ -169,7 +169,7 @@
 }
 .propertylist .panel-default .sliderImg {
   height: 165px;
-  width: 195px;
+  width: 100%;
   overflow: hidden;
   padding: 4px;
 }
@@ -281,7 +281,7 @@
 }
 .homeproject .projsnap p {
   border-bottom: 1px solid #2f3826;
-  padding: 6px;
+  padding-bottom: 5px;
   margin-bottom: 5px;
 }
 .homeproject .projsnap p:last-child {
@@ -391,28 +391,23 @@
   margin-bottom: 20px;
   max-height: 175px;
 }
-.projectgallery,
-.projlist {
+.projectgallery {
   background-color: #272600;
   border: 1px solid #2f3826;
   padding: 20px 20px 0px;
 }
-.projectgallery .thumbnail,
-.projlist .thumbnail {
+.projectgallery .thumbnail {
   background-color: #171600;
 }
-.projectgallery .thumbnail .projectImags,
-.projlist .thumbnail .projectImags {
+.projectgallery .thumbnail .projectImags {
   height: 150px;
   width: 182px;
   overflow: hidden;
 }
-.projectgallery .thumbnail .projectImags img,
-.projlist .thumbnail .projectImags img {
+.projectgallery .thumbnail .projectImags img {
   min-height: 150px;
 }
-.projectgallery .thumbnail .caption,
-.projlist .thumbnail .caption {
+.projectgallery .thumbnail .caption {
   height: 173px;
   overflow: hidden;
   margin-bottom: 10px;
@@ -425,7 +420,7 @@
   height: 385px;
 }
 .projlist .project .thumbnail .projectimg {
-  width: 190px;
+  width: 100%;
   height: 148px;
   overflow: hidden;
 }
@@ -779,16 +774,18 @@ body {
 .sociallinks ul li:hover {
   transform: translateX(-45px);
 }
-.logo {
-  height: 80px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  max-width: 100%;
+header {
+  margin-bottom: 20px;
 }
-.contactinfo {
+header .weblogo,
+header .cntdtl {
+  padding-top: 20px;
+}
+header .logo {
+  max-height: 100px;
+}
+header .cntdtl {
   color: #bccb3d;
-  font-weight: bold;
-  margin: 40px 15px 40px 0;
 }
 .navbar-collapse {
   padding: 0px;
@@ -800,9 +797,21 @@ body {
 .navbar-toggle .icon-bar {
   background-color: #bbbbbb;
 }
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #2f3826;
+}
+.projdtls {
+  background-color: #171600;
+  color: #bbbbbb;
+}
 .navbar-default {
   background-image: linear-gradient(#171600, #272600);
   border: 1px solid #2f3826;
+}
+.navbar-default .navbar-nav {
+  float: none;
+  display: inline-block;
 }
 .navbar-default .navbar-nav > li {
   position: relative;
@@ -880,17 +889,21 @@ body {
 .navbar-default .navbar-nav > li > ul > li > a {
   color: #000000;
 }
-.navbar-default .navbar-nav > li > ul > li > a:hover {
-  text-decoration: underline;
+.navbar-default .navbar-nav > li > ul > li:hover {
+  background-color: #171600;
+}
+.navbar-default .navbar-nav > li > ul > li:hover a {
+  text-decoration: none;
+  color: #bbbbbb;
 }
 .navbar-default .navbar-nav > li > ul > li > ul {
-  list-style: disc;
+  list-style: none;
 }
 .navbar-default .navbar-nav > li > ul > li > ul > li > a {
   color: #000000;
 }
 .navbar-default .navbar-nav > li > ul > li > ul > li > a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 .navbar-default .navbar-nav > li:hover > ul {
   display: block;
@@ -905,14 +918,18 @@ a {
   color: #bccb3d;
 }
 a:hover {
-  color: #bccb3d;
-  text-decoration: underline;
+  color: #bbbbbb;
+  text-decoration: none;
 }
 h1,
 h2,
 h3,
 h4 {
   font-family: 'Amaranth-Regular';
+}
+h1,
+h2,
+h3 {
   color: #bccb3d;
 }
 h1,
@@ -971,7 +988,7 @@ h3 {
   padding-bottom: 0px;
 }
 .thumbnail {
-  background: none;
+  background-color: transparent;
   border-color: #2f3826;
 }
 .thumbnail .caption {
@@ -1093,35 +1110,22 @@ footer a:hover {
   }
 }
 @media (max-width: 540px) {
-  header .btn + .btn {
+  header {
+    margin-bottom: 0px;
+  }
+  header .weblogo,
+  header .cntdtl {
+    padding-top: 0px;
+    text-align: center;
+  }
+  .btn + .btn {
     margin-top: 5px;
     margin-left: 0px;
     margin-bottom: 5px;
   }
-  header .navbar {
+  .navbar {
     min-height: 1px;
   }
-  header .navbar-default .navbar-nav {
-    margin: 0px;
-  }
-  header .navbar-default .navbar-nav > li {
-    padding-left: 0px;
-  }
-  header .navbar-default .navbar-nav > li.active > a,
-  header .navbar-default .navbar-nav > li.active:hover > a,
-  header .navbar-default .navbar-nav > li.active > a:focus,
-  header .navbar-default .navbar-nav > li:hover > a,
-  header .navbar-default .navbar-nav > li:hover > a:focus,
-  header .navbar-default .navbar-nav > li:hover > a:focus {
-    background-color: #bccb3d;
-    color: #000000;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-    top: 0px;
-    padding-top: 10px;
-  }
-}
-@media (max-width: 480px) {
   .navbar-default .navbar-nav {
     margin: 0px;
   }
@@ -1140,11 +1144,5 @@ footer a:hover {
     border-bottom-right-radius: 0px;
     top: 0px;
     padding-top: 10px;
-    height: auto;
-  }
-  .btn + .btn {
-    margin-top: 5px;
-    margin-left: 0px;
-    margin-bottom: 5px;
   }
 }
