@@ -4,7 +4,7 @@
 		<h3 class="text-center" ng-if="!modalOptions.addexpence.id">Add Expense</h3>
 		<h3 class="text-center" ng-if="modalOptions.addexpence.id">Edit Expense</h3>
 	</div>
-		<form name="addexpenceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addexpenceForm.$valid">
+		<form name="addexpenceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addexpenceForm.$valid">{{modalOptions.addexpence}}
 			<!-- <div ng-if = "type =='Rent'"> -->
 			
 		 <div class="form-group">
@@ -25,14 +25,14 @@
 			
 			<input type="hidden" ng-model="modalOptions.addexpence.type" ng-init="modalOptions.addexpence.type='expence'"/> 
 			
-			<input type="hidden" ng-model="modalOptions.addexpence.modified_date" ng-init="modalOptions.addexpence.modified_date = modalOptions.incomeDate.date" />
+			<input type="hidden" ng-model="modalOptions.addexpence.modified_date" ng-init="modalOptions.addexpence.modified_date = modalOptions.expenceDate.date" />
 			
 			<input type="hidden" ng-model="modalOptions.addexpence.status" ng-init="modalOptions.addexpence.status = 1" />
 			
 				<div class="form-group">
 					<label for="category" class="col-sm-2 control-label">Category</label>
 									<div class="col-sm-9">
-										<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
+										<select id="category" class="form-control" name="category"  ng-model="modalOptions.addexpence.category" required>
 										<option value="" selected>Select Category</option>
 										<option value="type1" >Licence Fees</option>
 										<option value="type2">Agriculture</option>
@@ -58,7 +58,7 @@
 				<div ng-init="modalOptions.getData(false,false,'account','accountList', params, modalOptions)">
 					<label for="account" class="col-sm-2 control-label">Account Name*</label>
 						<div class="col-sm-9">
-							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_no as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addexpence.account_no" >
+							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addexpence.account_id" >
 							<option value="">Select Account</option>
 							</select>	 
 							<span class="help-block" ng-show="addexpenceForm.customer.$dirty && addexpenceForm.customer.$invalid">
@@ -66,6 +66,13 @@
 							</span>	
 						</div>
 				</div>
+			</div>
+			
+			<div class="form-group" ng-if="modalOptions.addexpence.account_id">
+				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
+				<div class="col-sm-9">
+					<input type="text" id="balance" name="balance" readonly class="form-control"/>			
+					</div>
 			</div>
 			
 			<div class="form-group"><!--ng-model="modalOptions.addexpence.date"-->	
@@ -76,21 +83,11 @@
 					</div>						
 			</div>
 			
-			<div class="form-group">
-				<label  for="credit_amount" class="col-sm-2 control-label">Amount</label>
-					<div class="col-sm-9">
-						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" ng-model="modalOptions.addexpence.credit_amount"  name="credit_amount" placeholder="Amount" required />
-						<span class="help-block" ng-show="addexpenceForm.credit_amount.$dirty && addexpenceForm.credit_amount.$invalid">
-								<span ng-show="addexpenceForm.credit_amount.$error.required" class="text-danger">Required Field</span>
-								<span ng-show="addexpenceForm.credit_amount.$error.pattern" class="text-danger">Enter like 0.00 only</span>
-						</span>
-					</div>						
-			</div>
 			
 				<div class="form-group">
 				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
 					<div class="col-sm-9">
-						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.addexpence.description.payment_type.type" required>
+						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.addexpence.payment_type.type" required>
 						<option value="" selected>Select Type</option>
 						<option value="Cash" >Cash</option>
 						<option value="Cheque">Cheque</option>
@@ -103,30 +100,69 @@
 					</div>
 			</div> 
 			
-			<div class="form-group" ng-if="modalOptions.addexpence.description.payment_type.type == 'Cheque' || modalOptions.addexpence.description.payment_type.type == 'Net Banking' || modalOptions.addexpence.description.payment_type.type == 'DD'">
-				<label for="refferance no" ng-if="modalOptions.addexpence.description.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
-				<label for="refferance no" ng-if="modalOptions.addexpence.description.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
-				<label for="refferance no" ng-if="modalOptions.addexpence.description.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
+			<div class="form-group" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque' || modalOptions.addexpence.payment_type.type == 'Net Banking' || modalOptions.addexpence.payment_type.type == 'DD'">
+				<label for="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
+				<label for="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
+				<label for="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
 					<div class="col-sm-9">
-						<input type="text" id="refferance no" ng-if="modalOptions.addexpence.description.payment_type.type == 'Net Banking'" ng-model="modalOptions.addexpence.description.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<input type="text" id="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'Net Banking'" ng-model="modalOptions.addexpence.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="addexpenceForm.refferance_no.$dirty && addexpenceForm.refferance_no.$invalid">
 							<span ng-show="addexpenceForm.refferance_no.$error.required" class="text-danger">Ref No is required.</span>
 							<span ng-show="addexpenceForm.refferance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 						</span>
-						<input type="text" id="refferance no" ng-if="modalOptions.addexpence.description.payment_type.type == 'Cheque'" ng-model="modalOptions.addexpence.description.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<input type="text" id="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque'" ng-model="modalOptions.addexpence.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="addexpenceForm.cheque_no.$dirty && addexpenceForm.cheque_no.$invalid">
 							<span ng-show="addexpenceForm.cheque_no.$error.required" class="text-danger">Cheque No is required.</span>
 							<span ng-show="addexpenceForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 							
 						</span>
-						<input type="text" id="refferance no" ng-if="modalOptions.addexpence.description.payment_type.type == 'DD'" ng-model="modalOptions.addexpence.description.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<input type="text" id="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'DD'" ng-model="modalOptions.addexpence.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="addexpenceForm.DD_no.$dirty && addexpenceForm.DD_no.$invalid">
 							<span ng-show="addexpenceForm.DD_no.$error.required" class="text-danger">DD no required.</span>
 							<span ng-show="addexpenceForm.DD_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 							
 						</span>
-					</div>		
+					</div>
 			</div> 
+			
+			<div class="form-group" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque' || modalOptions.addexpence.payment_type.type == 'Net Banking' || modalOptions.addexpence.payment_type.type == 'DD'">
+				<label for="Date" class="col-sm-2 control-label">Date</label>
+				 <div class="col-sm-9">
+					<input type="text" id="date" class="form-control"   ng-model="modalOptions.addexpence.date" ng-init="modalOptions.addexpence.date = modalOptions.expenceDate.date"  name="date" 
+					placeholder="date">
+				</div>					
+			</div>
+			
+			<div class="form-group" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque' || modalOptions.addexpence.payment_type.type == 'Net Banking' || modalOptions.addexpence.payment_type.type == 'DD'">
+				<label for="Bank" class="col-sm-2 control-label">Bank Name</label>
+					<div class="col-sm-9">
+						<input type="text" id="Bank" ng-model="modalOptions.addexpence.payment_type.Bank" class="form-control" name="Bank"   placeholder="Enter Bank Name" required/>
+						<span class="text-danger" ng-show="addexpenceForm.Bank.$dirty && addexpenceForm.Bank.$invalid">
+							<span ng-show="addexpenceForm.Bank.$error.required">Bank Name is Required.</span>
+						</span>	
+					</div>		
+			</div>
+			
+			<div class="form-group" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque' || modalOptions.addexpence.payment_type.type == 'Net Banking' || modalOptions.addexpence.payment_type.type == 'DD'">
+				<label for="Branch" class="col-sm-2 control-label">Branch</label>
+					<div class="col-sm-9">
+						<input type="text" id="Branch" ng-model="modalOptions.addexpence.payment_type.Branch" class="form-control" name="Branch"   placeholder="Enter Branch" required/>
+						<span class="text-danger" ng-show="addexpenceForm.Branch.$dirty && addexpenceForm.Branch.$invalid">
+							<span ng-show="addexpenceForm.Branch.$error.required">Branch Name is Required.</span>
+						</span>	
+					</div>		
+			</div>
+			
+			<div class="form-group">
+				<label  for="credit_amount" class="col-sm-2 control-label">Amount</label>
+					<div class="col-sm-9">
+						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" ng-model="modalOptions.addexpence.credit_amount"  name="credit_amount" placeholder="Amount" required />
+						<span class="help-block" ng-show="addexpenceForm.credit_amount.$dirty && addexpenceForm.credit_amount.$invalid">
+								<span ng-show="addexpenceForm.credit_amount.$error.required" class="text-danger">Required Field</span>
+								<span ng-show="addexpenceForm.credit_amount.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+						</span>
+					</div>						
+			</div>
 			
 	<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">Description</label>

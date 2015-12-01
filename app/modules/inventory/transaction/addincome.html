@@ -22,7 +22,7 @@
 			<div class="form-group">
 				<label for="category" class="col-sm-2 control-label">Category</label>
 								<div class="col-sm-9">
-									<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
+									<select id="category" class="form-control" name="category"  ng-model="modalOptions.addincome.category" required>
 									<option value="" selected>Select Category</option>
 									<option value="type1" >Licence Fees</option>
 									<option value="type2">Agriculture</option>
@@ -46,7 +46,7 @@
 				<div ng-init="modalOptions.getData(false,false,'account','accountList', params, modalOptions)">
 					<label for="account" class="col-sm-2 control-label">Account Name*</label>
 						<div class="col-sm-9">
-							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_no as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.account_no" >
+							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.account_id" >
 							<option value="">Select Account</option>
 							</select>	 
 							<span class="help-block" ng-show="addIncomeForm.account.$dirty && addIncomeForm.account.$invalid">
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 			
-			<div class="form-group" ng-if="modalOptions.addincome.account_no">
+			<div class="form-group" ng-if="modalOptions.addincome.account_id">
 				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
 				<div class="col-sm-9">
 					<input type="text" id="balance" name="balance" readonly class="form-control"/>			

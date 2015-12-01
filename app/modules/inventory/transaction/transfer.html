@@ -3,10 +3,9 @@
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3>Transfer</h3>
 	</div>
-	{{modalOptions.transfer}}
+	<!--{{modalOptions.transfer}}-->
 		<form name="transferForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="transferForm.$valid">
-			<div class="form-group">
-			<div ng-init="modalOptions.getData(false,false,'account','accountList', accountParams, modalOptions)">
+			<div class="form-group" ng-init="modalOptions.getData(false,false,'account','accountList', accountParams, modalOptions)">
 				<label for="account_no" class="col-sm-2 control-label">Transfer From* </label>
 				<div class="col-sm-9">
 				<select class="form-control" id="account_no"  ng-model="modalOptions.transfer.account_no" ng-options="item.id as item.account_name for item in modalOptions.accountList" required>

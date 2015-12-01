@@ -29,6 +29,32 @@ define(['app'], function (app) {
 		};
 		
 		
+		$rootScope.moduleMenus = [
+			{
+				name : "Add Income",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/inventory/transaction/addincome.html");
+					}
+				}
+			},{
+				name : "Add Expence",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/inventory/transaction/addexpence.html");
+					}
+				}
+			},
+			{
+				name : "Transfer",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/inventory/transaction/transfer.html");
+					}
+				}
+			}
+		]
+		
 		$scope.calcDuration = function(type, duration){
 			console.log(type, duration);
 			var curDate = new Date();
@@ -76,23 +102,11 @@ define(['app'], function (app) {
 			//showGridFooter: true,
 			showColumnFooter: true,
 			columnDefs: [
-				/*{
-					name: 'date',
-					cellFilter: 'date:\'MM/dd/yyyy\'',
-					filters: [
-					  { placeholder: 'from...',
-						condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-						id:"date", ngChange:"grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true)", ngModel:"date" },
-					  { placeholder: 'to...',
-						condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-						id:"date", ngChange:"grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true)", ngModel:"date" }
-						]
-				},*/
 				{ name:'SrNo', 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false
 				},
 				{ name:'account_name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_id\', account_id, \'transaction\', \'transactionList\',true)" ng-model="account_id" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
+				filterHeaderTemplate: '<select id="account_id" class="form-control" ng-change="grid.appScope.filter(\'account_id\', account_id, \'transaction\', \'transactionList\',true)" ng-model="account_id" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
 							+'<option value="" selected>Account Name</option>'
 						+'</select>',
 					},
@@ -199,12 +213,14 @@ define(['app'], function (app) {
 				
 				addincome : (data) ? {
 					id : data.id,
+					party_id : data.party_id,
+					account_id : data.account_id,
 					category : data.category,
 					user_id : data.user_id,
 					balance : data.balance,
 					payment_type : data.payment_type,
 					date : data.date,
-					amount : data.amount,
+					credit_amount : data.credit_amount,
 					description : data.description 
 				} : {
 					//date : dataService.sqlDateFormate()
@@ -334,6 +350,16 @@ define(['app'], function (app) {
 				status : 1,
 				user_id : $rootScope.userDetails.id
 			},
+				join : [
+					{
+						joinType : 'INNER JOIN',
+						joinTable : "inventory_account",
+						joinOn : {
+							account_id : "t0.account_id"
+						},
+						cols : {account_name : "account_name",category:"category"}
+					}
+				],
 			cols : ["*"]
 		}
 		
@@ -344,16 +370,6 @@ define(['app'], function (app) {
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
-				join : [
-					{
-						joinType : 'INNER JOIN',
-						joinTable : "inventory_account",
-						joinOn : {
-							account_no : "t0.account_no"
-						},
-						cols : {account_name : "account_name",category:"category"}
-					}
-				],
 				cols : ["*"]
 			};
 			if(page){
