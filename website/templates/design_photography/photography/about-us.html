@@ -1,58 +1,27 @@
 {% autoescape false %}
-<div class="about">
-	<h2>About us</h2>
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-lg-12">
-			<!-- <div class="table-responsive">
-				<table class="table table-bordered">
-					<tr>
-						{% if data.business_profile.business_type %}
-							<th>Primary Business Type</th>
-						{% endif %}
-						{% if data.business_profile.establishment %}
-							<th>Year Of Establishment</th>
-						{% endif %}
-						{% if data.business_profile.no_of_employees %}
-							<th>No. Of Employees</th>
-						{% endif %}
-						{% if data.ownership %}
-							<th>Ownership Type</th>
-						{% endif %}	
-						{% if data.business_profile.additional_business %}
-							<th>Additional Business</th>
-						{% endif %}
-					</tr>
-					<tr>
-						{% if data.business_profile.business_type %}
-							<td>{{data.business_profile.business_type}}</td>
-						{% endif %}
-						{% if data.business_profile.establishment %}
-							<td>{{data.business_profile.establishment}}</td>
-						{% endif %}
-						{% if data.business_profile.no_of_employees %}
-							<td>{{data.business_profile.no_of_employees}}</td>
-						{% endif %}
-						{% if data.ownership %}
-							<td>{{data.ownership}}</td>
-						{% endif %}
-						{% if data.business_profile.additional_business %}
-						<td>
-							<ul>
-							{% for x in data.business_profile.additional_business %}
-								<li>{{x}}</li>
-							{% endfor %}
-							</ul>
-						</td>
-						{% endif %}
-					</tr>
-				</table>
-			</div> -->
-			{{data.business_info.aboutDescription}}
-			
+	<div class="container">
+	<div class="row pad">
+		<div class="col-xs-12 col-sm-12 col-lg-4 about">
+			<h2>About us</h2>
+				<img class=" img-circle center-block" src="{{path}}/../img/111.jpg">
+				{{data.business_info.aboutDescription}}
+		</div>
+		
+		<div class="col-xs-12 col-sm-12 col-lg-4">
+				
+				{% include [templatePath ~ '/includes/activities.html', 'default/default/includes/activities.html'] %}
+				
+		</div>
+		<div class="col-xs-12 col-sm-12 col-lg-4 testimonials">
+			{% include [templatePath ~ '/includes/testimonials.html', 'default/default/includes/testimonials.html'] %}
 		</div>
 	</div>
-</div>	
-	{% if data.infrastructure %}
+</div>
+
+	{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
+	
+	<div class="container">
+		{% if data.infrastructure %}
 		<hr>
 		<div class="infrastructure" id="infrastructure">
 			<h3 class="text-center">Infrastructure/Facilities</h3>
@@ -100,5 +69,6 @@
 				{% endfor %}
 			</div>
 		</div>
+	</div>
 	{% endif %}
 {% endautoescape %}

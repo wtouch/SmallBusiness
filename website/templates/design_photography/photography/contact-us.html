@@ -8,7 +8,7 @@
 				zoom:12,
 				mapTypeId:google.maps.MapTypeId.ROADMAP
 			};
-			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			var map=new google.maps.Map(document.getElementById("googleMap1"), mapProp);
 			var marker=new google.maps.Marker({
 				position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
 			});
@@ -18,7 +18,7 @@
 	</script>
 	<h2>Contact Us</h2>
 	<div class="row contact">
-		<div class="col-xs-12 col-sm-12 col-lg-6">
+		<div class="col-xs-12 col-sm-12 col-lg-12">
 			<table class="table">
 				<tr>
 					<td>
@@ -88,11 +88,11 @@
 				{% endif %}
 			</table>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-lg-6">
-		{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}
+		<div class="col-xs-12 col-sm-12 col-lg-12">
+		{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
 		</div>
-		<!-- <div class="col-xs-12 col-sm-12 col-lg-12">
-			<div id="googleMap"></div>
-		</div> -->
+		<div class="col-xs-12 col-sm-12 col-lg-12">
+			<div id="googleMap1"></div>
+		</div>
 	</div>
 {% endautoescape %}

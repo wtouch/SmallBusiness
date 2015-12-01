@@ -27,30 +27,7 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 	</head>
 	<body>
-		<!-- <div class="sociallinks">
-			<ul>
-				{% if data.website_config.sociallinks.facebook %}
-					<li>
-						<a href="{{data.website_config.sociallinks.facebook}}" target="_blank">Facebook<img src="{{path}}img/facebook.jpg" class="img-circle"><span class="social fb"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.google %}
-					<li>
-						<a href="{{data.website_config.sociallinks.google}}" target="_blank">Google<img src="{{path}}img/google.jpg" class="img-circle"><span class="social lkdin"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.twitter %}
-					<li>
-						<a href="{{data.website_config.sociallinks.twitter}}" target="_blank">Twitter<img src="{{path}}img/twitter.jpg" class="img-circle"><span class="social gplus"></span></a>
-					</li>
-				{% endif %}
-				{% if data.website_config.sociallinks.linkedin %}
-					<li>
-						<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank">Linkedin<img src="{{path}}img/linkedin.jpg" class="img-circle"><span class="social twit"></span></a>
-					</li>
-				{% endif %}
-			</ul>
-		</div> --> 
+		
 		<header>
 			<div class="container">
 				<div class="row">
@@ -86,11 +63,13 @@
 					</button>
 				</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="container">
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav nav-justified">
 					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 				</ul>
 			</div><!-- /.navbar-collapse -->
+			</div>
 	
 		</nav>
 		
@@ -101,8 +80,13 @@
 		
 		{% include contentPath %}
 		
-			
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+	
+		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} 
+		 
+		
+		
+				
+		
 		
 		
 	</body>
