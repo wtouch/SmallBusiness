@@ -3,12 +3,7 @@
 define(['app'], function (app) {
     var injectParams = ['$scope', '$injector', '$http','$cookieStore','$cookies','$rootScope'];
 	var dashboardController = function ($scope, $injector, $http, $cookieStore, $cookies, $rootScope) {
-		$rootScope.moduleMenus = [
-			{
-				name : "Inventory",
-				path : "/dashboard/inventory"
-			}
-		]
+		
 		$scope.goBack = function() {
 			window.history.back();
 		};
