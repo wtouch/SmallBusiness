@@ -1,6 +1,8 @@
 @font-face {
   font-family: 'CreditValley';
   src: url('../fonts/CreditValley.ttf');
+  font-family: 'SixCaps';
+  src: url('../fonts/SixCaps.ttf');
 }
 .sidebar .nav-pills > li > a {
   color: #ffffff;
@@ -74,6 +76,10 @@
 .contact {
   padding: 60px 105px 0px 137px;
 }
+.panel-default {
+  border-color: #ddd;
+  background-color: transparent;
+}
 body {
   width: 100%;
   background-image: url('../img/b1.jpg');
@@ -99,24 +105,26 @@ body {
   height: 766px;
 }
 .navbar-default {
-  margin-top: 245px;
+  margin-top: 110px;
   color: #ffffff;
   background-color: transparent;
   border-color: transparent;
 }
-.navbar-default .navbar-nav {
-  margin-left: 71px;
-}
 .navbar-default .navbar-nav .active > a {
-  color: #ffffff;
+  color: #bbbbbb;
   background-color: transparent;
 }
-.navbar-default .navbar-nav .active:hover {
-  background-color: transparent;
+.navbar-default .navbar-nav .active > a:hover {
+  background-color: transparent !important;
 }
 .navbar-default .navbar-nav > li {
   font-size: 50%;
   text-transform: uppercase;
+  float: none;
+  border-right: 3px solid transparent;
+}
+.navbar-default .navbar-nav > li:hover {
+  border-right: 3px solid;
 }
 .navbar-default .navbar-nav > li > li:nth-child(4) > a:hover {
   display: block;
@@ -125,14 +133,13 @@ body {
   left: 45px;
 }
 .navbar-default .navbar-nav > li a {
-  color: #ffffff;
-  font-family: 'CreditValley';
-  font-size: 20px;
+  color: #bbbbbb;
+  font-family: 'SixCaps';
+  font-size: 44px;
 }
 .navbar-default .navbar-nav > li a:hover {
   color: #ffffff !important;
-  font-family: 'CreditValley';
-  font-size: 20px;
+  font-family: 'SixCaps';
 }
 .navbar-default .navbar-nav > li > ul {
   display: none;
@@ -140,10 +147,9 @@ body {
   z-index: 999;
   background-color: rgba(8, 8, 8, 0.6);
   list-style: none;
-  text-align: center;
-  transition: all 500ms ease-in-out;
+  text-align: left;
   position: absolute;
-  left: 100px;
+  left: 140px;
   top: 0;
 }
 .navbar-default .navbar-nav > li > ul:hover > a {
@@ -172,8 +178,8 @@ body {
   margin-left: 10px;
   margin-top: 50px;
 }
-.sociallinks ul li a:hover {
-  margin-top: 0px;
+.sociallinks ul li a > img:hover {
+  margin-top: -10px;
   transition: margin 0.5s;
 }
 .soc {
@@ -208,10 +214,12 @@ footer {
   font-size: 9px;
 }
 .head {
-  margin: -29px 0px 0px -27px;
-  width: 233px;
-  position: absolute;
-  top: 96px;
+  margin: -28px;
+  position: relative;
+  top: -61px;
+  border: 23px solid #0c0e12;
+  border-radius: 107px;
+  width: 220px;
 }
 .homeAboutus {
   margin-top: 350px;
@@ -329,8 +337,4 @@ h2 {
 }
 .prdct {
   padding: 0px 105px 0px 137px;
-}
-.sociallinks ul li a:hover {
-  /* margin-bottom: 50px; */
-  margin-top: -5px;
 }

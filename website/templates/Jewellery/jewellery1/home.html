@@ -1,6 +1,6 @@
 {% autoescape false %}
 	<div class="homeAboutus">
-		<div class="img1">
+		<!-- <div class="img1">
 			<img src="{{path}}img/j1.jpg" alt="Smiley face" >
 		</div>
 		<div class="img2">
@@ -8,7 +8,10 @@
 		</div>
 		<div class="img3">
 		   <img src="{{path}}img/j3.jpg" alt="Smiley face" >
-	     </div>
+	     </div> -->
+		 {%if modules.headerModule.carousal %}
+				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
 		<h1>{{ data.business_name }}</h1>
 		{% if data.business_info.tagline %}
 			<div class="tagline text-center">{{ data.business_info.tagline}}</div>

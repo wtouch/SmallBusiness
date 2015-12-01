@@ -2,15 +2,18 @@
   <!-- Wrapper for slides -->
   <ul class="carousslider" id="carousslider">
 	{% for key, value in sliderData %}
-		<li class="item {{ (key == 0) ? 'active' }}">
-		  <img class="img-responsive" src="{{value.image ? value.image : value is iterable ? value.file_relative_path : value}}" alt="{{value.title}}">
-		  {% if value.title %}
-		  <div class="carousel-caption">
-			<h2>{{value.title}}</h2>
-			<p>{{value.description}}</p>
-		  </div>
-		  {% endif %}
-		</li>
+		{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_products if break == 0 %}
+		  <li>
+		     <img class="img-responsive" src="{{value.image ? value.image : value is iterable ? value.file_relative_path : value}}" alt="{{value.title}}">
+		  
+		  </li>
+		{% set i = (i + 1) %}
+					{% if i == 3 %}
+						{% set break = 1 %}
+					{% endif %}
+				{% endif %}
+			
 	{% endfor %}
   </ul>
 {% endif %}
