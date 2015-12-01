@@ -7,10 +7,10 @@
 	<div class="modal-body">
 		<form name="addStockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStockForm.$valid">
 				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList', stockParams, modalOptions)">
-					<label for="party_id" class="col-sm-2 control-label"> User id * </label>
+					<label for="party_id" class="col-sm-2 control-label"> party id * </label>
 					<div class="col-sm-9">
 						<select id="party_id" class="form-control" ng-model="modalOptions.stock.party_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
-							<option value="">Select User</option>
+							<option value="">Select Party</option>
 						</select>
 						<span class="help-block" ng-show="addStockForm.user_id.$dirty && addStockForm.user_id.$invalid">
 						<span ng-show="addStockForm.user_id.$error.required" class="text-danger">user id is required.</span>

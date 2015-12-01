@@ -44,8 +44,13 @@ define(['app'], function (app) {
 			enableFiltering: false,	
 				},
 				  
-				  { name:'name',enableSorting: true ,enableFiltering: true
-				},    
+				  /* {
+				    name:'name',
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'stock\', \'stockList\',true)" ng-model="name" placeholder="search">',
+                },  */
+				{
+					name:'name',enableSorting: true,enableFiltering: true,			
+				},
 				{
 				    name:'goods_name',
 					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\',true)" ng-model="goods_name" placeholder="search">',
@@ -85,19 +90,6 @@ define(['app'], function (app) {
 				 { name:'quantity',enableSorting: false, enableFiltering: false,},
 				{ name:'price',enableSorting: false, enableFiltering: false,},
 				{ name:'unit',enableSorting: false, enableFiltering: false,},
-				/* {
-					name:'status',
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\')" ng-model="status">'
-							+'<option value="" selected>Account Status</option>'
-							+'<option value="1">Active</option>'
-							+'<option value="0">Delete</option>	'
-						+'</select>', 
-					filter: {
-					  //type: uiGridConstants.filter.SELECT,
-					 
-					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
-					} 
-				}, */
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\')" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
@@ -127,6 +119,7 @@ define(['app'], function (app) {
 				stock : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
+					party_id:data.party_id,
 					goods_name: data.goods_name,
 					goods_type : data.goods_type,
 					category : data.category,
@@ -143,7 +136,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'stock','stockList');
+							$scope.getData(false, $scope.currentPage, 'stock','stockList',stockParams);
 						}
 					})
 				},
