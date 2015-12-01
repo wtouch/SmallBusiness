@@ -1,12 +1,12 @@
 {% autoescape false %}
 
 <div class="sidebarModule enquiry">
-	<h3 class="subhead">Send Enquiry 
+	<h3 class="subhead" style="font-size:30px;">Send Enquiry 
 	{% if enquiry.property_category %}
 		<span style="font-size:75%">- ({{enquiry.property_title}})</span>
 	{% endif %}
 	</h3>
-	
+	<p style="font-weight:bold;font-size:20px;">Our inbox is always open and we are exceptionally pleasant on the phone.</p>
 	<div class="panel panel-default">
 		<div class="panel-body" ng-controller="enquiryController">
 			<form class="form-horizontal form-border" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-hide="mailSent" novalidate>
@@ -33,7 +33,7 @@
 							ng-init="enquiry.message.property_link={params : {property_title : '{{enquiry.property_title}}', property_category : '{{property_category}}', property_id : '{{property_id}}' }}">
 						{% endif %}
 						
-						Name<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name"  ng-required="true" ng-pattern="/^(\D)+$/">
+						Name<input type="text"class="form-control" id="name" ng-model="enquiry.name" name="name"  ng-required="true" ng-pattern="/^(\D)+$/">
 							<span ng-show="enquiryForm.name.$error.pattern && (enquiryForm.name.$dirty)" class="text-danger">Enter only Alphabets!</span>
 							<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
 					</div>	
@@ -65,6 +65,7 @@
 					</div>
 				</div>
 			</form>
+			
 			<div ng-if="loading" style="display: block; position: fixed; top: 0; right: 0; left: 0; bottom: 0; background: rgba(0, 0, 0, 0.05);z-index: 10000;">
 				<div style="margin: 0 auto;font-size: 26px;color: transparent;width: 128px;text-align: center;margin-top: 10%;font-family: arial, helvetica, sans-serif;background: url({{path}}/img/loader-leaf-purple.gif) no-repeat center center;height: 128px;">Loading...
 				</div>
@@ -78,5 +79,6 @@
 		</div>
 	</div>
 </div>
-
+<p>We hate spam as much as you. We will never sell or give your contact information to another party.
+See our complete privacy policy for details.</p>
 {% endautoescape %}

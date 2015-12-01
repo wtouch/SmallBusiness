@@ -280,9 +280,20 @@ p{
 	margin-top: 17px;
 }
 footer{
+	>a:nth-child(1){
+		float:right;
+		font-size:30px;
+		color:@colorwhite;
+		font: 22px/22px "Georgia",Arial,Helvetica,sans-serif;
+		&:hover{
+				color:@color;
+				text-decoration:none;
+			}
+	}
 	padding: 30px 15px;
 	background-color:@colorblack;
 	margin-top: 10px;
+	color:#666 !important;
 	p{
 		margin: 15px 10px 15px 10px;
 		a{
@@ -295,7 +306,7 @@ footer{
 }	
 
 footer>p>a
-{color:#333 !important;
+{color:#666 !important;
 text-decoration:underline !important;}
 .content{	
 	
@@ -323,8 +334,8 @@ text-decoration:underline !important;}
 	.btn-info[disabled]{background: linear-gradient(@color,@color) !important;}
 	.contact{
 		background:url("../img/img3.jpg") no-repeat top right;
-		background-size:35% 40%;
-		>div:nth-child(2){
+		background-size:35% 50%;
+		>div:nth-child(1){
 			background:url('../img/divide.png') right;
 			background-repeat:no-repeat;
 			
@@ -364,7 +375,7 @@ text-decoration:underline !important;}
 			
 			}
 	}
-	.email{
+	.email1{
 		padding-bottom:20px;
 	 border-bottom: 1px solid #e6e6e6;
 		a{
@@ -553,14 +564,16 @@ text-decoration:underline !important;}
 			
 	}
 }	
-@media (max-width:1024px){
+@media (min-width:1024px){
+.navbar > .container .navbar-brand {
+    margin-left: 15% !important;}
 	div.content>div.contact{
 				
 			background:none;
 			background-size:100% 100%;		
 	}
 }		
-		
+			
 		
 	
 @media (max-width:320px){
@@ -627,6 +640,8 @@ body{
 color:@color;
 }
 @media (max-width:320px){
+.navbar > .container .navbar-brand {
+    margin-left: 20% !important;}
 .anim4
 {
 	position:absolute;
@@ -655,6 +670,8 @@ color:@color;
 }
 }
 @media (max-width:480px){
+.navbar > .container .navbar-brand {
+    margin-left: 20% !important;}
 .anim4
 {
 	position:absolute;
@@ -704,11 +721,17 @@ div.container>div.content
 {
 	
     z-index: 3;
- 
-
 }
-.navbar>.container .navbar-brand{margin-left: -30% !important;}
+.navbar>.container .navbar-brand{margin-left: -30%;}
 
 .tit
 {color: #f90;font-size:50px;text-align:center;}
 .b{text-align: justify;}
+
+
+.content>.row>div{
+	img{
+		width:100%;
+	}
+
+}
