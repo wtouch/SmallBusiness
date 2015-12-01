@@ -41,7 +41,7 @@ ul.nav.navbar-nav.navbar-right.ng-scope {
 	border:1px solid transparent;
 	border-radius:0px;
 		.navbar-nav{
-	
+			background:linear-gradient(@darkbackcolor ,@lightbackcolor );
 				>li{
 					a{
 						color:@colorwhite;
@@ -49,11 +49,27 @@ ul.nav.navbar-nav.navbar-right.ng-scope {
 								color:@colorwhite;
 							}
 					}
-				
 					
-					&:hover{
-							display:block;
+					.dropdown-menu{
+					display:none;	
+					background:linear-gradient(@darkbackcolor ,@lightbackcolor );
+					left:-90px;
+						>li{
+							a{
+								&:hover{
+								background:linear-gradient(@darkbackcolor ,@lightbackcolor );
+								}
 							}
+						}
+					}
+					&:hover{
+						.dropdown-menu{
+						
+						display:block;
+						z-index:1000;
+						}
+					}
+					
 				}
 		}
 }			
