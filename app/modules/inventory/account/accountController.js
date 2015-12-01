@@ -66,21 +66,11 @@ define(['app'], function (app) {
 					  options: [ { value: 'Bank', label: 'Bank Account' }, { value: 'Cash', label: 'cash Account' },
 					  { value: 'Credit', label: 'credit card'}, { value: 'Loan', label: 'loan' } ]
 					} 
-				},
+				},{ name:'account_no',filterHeaderTemplate: '<input id="account_no" class="form-control" ng-change="grid.appScope.filter(\'account_no\', account_no, \'account\', \'accountList\',true)" ng-model="account_no" placeholder="search">'},
+				{ name:'balance',filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'account\', \'accountList\',true)" ng-model="balance" placeholder="search">'},
 				{ name:'description',enableSorting: false, enableFiltering: false,},
-				/* {
-					name:'status',
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'account\', \'accountList\')" ng-model="status">'
-							+'<option value="" selected>Account Status</option>'
-							+'<option value="1">Active</option>'
-							+'<option value="0">Delete</option>	'
-						+'</select>', 
-					filter: {
-					  //type: uiGridConstants.filter.SELECT,
-					 
-					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
-					} 
-				}, */
+
+				
 				{  name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'account\', \'accountList\')" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
@@ -105,6 +95,7 @@ define(['app'], function (app) {
 			};
 			console.log(data);
 			var modalOptions = {
+
 				date : $scope.currentDate,
 				account : (data) ? {
 					id : data.id,

@@ -1,4 +1,5 @@
 'use strict';
+'use strict';
 
 define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService', 'uiGridConstants'];
@@ -210,11 +211,11 @@ define(['app'], function (app) {
 			});
 		}
 		
-		$scope.filter = function(col, value, table, subobj, search){
+		$scope.filter = function(col, value, table, subobj,params, search){
 			value = (value) ? value : undefined;
 			$rootScope.filterData(col, value, search, function(response){
 				console.log($scope.stockParams, response);
-				angular.extend($scope.stockParams, response);
+				angular.extend($scope.stockParams,params, response);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.stockParams);
 			})
 		}

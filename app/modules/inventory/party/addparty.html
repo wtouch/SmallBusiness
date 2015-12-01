@@ -87,7 +87,7 @@
 					</span>
 				</div>						
 			</div>			
-			<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.adduser.modified_date" ng-init="modalOptions.adduser.modified_date = modalOptions.date"/>
+			
 			<div class="form-group">
 				<label for="city" class="col-sm-2 control-label">City *</label>
 				<div class="col-sm-4" >
@@ -127,20 +127,16 @@
 					</span>
 				</div>						
 			</div>
-			
-			<!-- <div class="form-group">
-				<label  for="date" class="col-sm-2 control-label">Date * </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.adduser.date"/>
-				</div>
-			</div>  -->
+			<!-- hidden date field -->
+			<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.adduser.modified_date" ng-init="modalOptions.adduser.modified_date = modalOptions.date"/>
+			<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.adduser.date" ng-init="modalOptions.adduser.date = modalOptions.date"/>
+			<!-- hidden field  end -->
 			<div class="form-group">
-				<label  for="date" class="col-sm-2 control-label">Date * </label>
+			 <label  for="date" class="col-sm-2 control-label">Date * </label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder=" date" id="date" name="date" ng-model="modalOptions.adduser.date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.adduser.date = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
+					<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder=" Bill Date" id="partydate" name="partydate" ng-model="modalOptions.adduser.partydate" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.adduser.partydate = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
 				</div>
-			</div>
-		
+			</div>  
 			<div class="form-group">
 				<label for="type" class="col-sm-2 control-label">Type*</label>
 				<div class="col-sm-9">
@@ -153,9 +149,7 @@
 				</div>
 			</div>
 
-			   
-
-				<div class="form-group">
+			<div class="form-group">
 					<label for="select type" class="col-sm-2 control-label">Department *</label>
 					<div class="col-sm-9">
 							<select id="department" name="department" class="form-control" 
