@@ -333,6 +333,7 @@ define(['angular',
 	// Write custome code
 	$(document).ready(function(){
 		//console.log("custom js");
+	
 	})
 	return app;
 });
