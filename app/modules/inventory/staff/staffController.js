@@ -130,7 +130,12 @@ define(['app'], function (app) {
 					date : data.date,				
 					designation: data.designation,
 					department: data.department,
-					salary: data.salary
+					salary: data.salary,
+					deduction:data.deduction,
+					advance:data.advance,
+					loan:data.loan,
+					staff_type:data.staff_type
+					
 					} : {
 						date : dataService.sqlDateFormate()
 					}, 
