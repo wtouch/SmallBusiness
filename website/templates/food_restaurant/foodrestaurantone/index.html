@@ -123,11 +123,13 @@
 					{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
+			</div>
+				<div class="col-xs-12 col-md-12 col-lg-12">
 					{%if modules.headerModule.homeproject %}
 					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
 					{%endif%}
 				
-			</div> 
+				</div> 
 		
 			<div class="row r1">
 			    {% include contentPath%}
@@ -154,30 +156,9 @@
 					     
 				    
 		</div>	
-<div class="sociallinks">
-	<ul>
-		{% if data.website_config.sociallinks.facebook %}
-			<li>
-				<a href="{{data.website_config.sociallinks.facebook}}" target="_blank"><div class="img" id="img1"></div></a>
-			</li>
-		{% endif %}
-		{% if data.website_config.sociallinks.google %}
-			<li>
-				<a href="{{data.website_config.sociallinks.google}}" target="_blank"><div class="img" id="img2"></div></a>
-			</li>
-		{% endif %}
-		{% if data.website_config.sociallinks.twitter %}
-			<li>
-				<a href="{{data.website_config.sociallinks.twitter}}" target="_blank"><div class="img" id="img3"></div></a>
-			</li>
-		{% endif %}
-		{% if data.website_config.sociallinks.linkedin %}
-			<li>
-				<a href="{{data.website_config.sociallinks.linkedin}}" target="_blank"><div class="img" id="img1"></div></a>
-			</li>
-		{% endif %}
-	</ul>
-</div> 
+		<div class="sociallinks1">
+			 {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+			 </div>
 					<div class="footer" background-color="fff" height=50>
 						 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 					</div>
