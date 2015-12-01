@@ -101,13 +101,25 @@ define(['app'], function (app) {
 				})
 			}
 		};
-		$scope.verticalSum = function(inputArray, column, subobj){
-			/* if(!$scope[subobj])  */$scope[subobj] = 0;
+		
+
+		
+		$scope.verticalSum = function(inputArray, column, subobj, modalOptions){
+			if(modalOptions){
+				modalOptions[subobj] = 0;
+				angular.forEach(inputArray, function(value, key){
+					modalOptions[subobj] += parseFloat(value[column]);
+				})
+				return modalOptions[subobj];
+			}else{
+				$scope[subobj] = 0;
+				angular.forEach(inputArray, function(value, key){
+					$scope[subobj] += parseFloat(value[column]);
+				})
+				return $scope[subobj];
+			}
 			
-			angular.forEach(inputArray, function(value, key){
-				$scope[subobj] += parseFloat(value[column]);
-			})
-			return $scope[subobj];
+			
 		}
 		$scope.$watch(function(){ return $scope.billData.data},function(newValue){
 			if(angular.isArray(newValue)){
@@ -126,12 +138,15 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				addBill : (data) ? {
 					id : data.id,
+					party_id : data.party_id,
+					user_id : data.user_id,
 					generated_date : data.generated_date,
 					due_date : data.due_date,
-					remark:data.remark,
-					particular:data.particular
+					remark : data.remark,
+					particular : data.particular
 				} : {
-					//date : dataService.sqlDateFormate()
+					date : dataService.sqlDateFormate(),
+					modified_date : dataService.sqlDateFormate()
 				},
 				payBill : (data) ? {
 					
@@ -140,6 +155,17 @@ define(['app'], function (app) {
 				} : {
 					//date : dataService.sqlDateFormate()
 				},
+				/* totalCalculate : function(modalOptions){
+					modalOptions.subTotal = 0;
+					modalOptions.total = 0;
+					modalOptions.tax = {service_tax:0,other_tax:0,tds:0};
+					for(var x in modalOptions.singleparticular){
+						modalOptions.tax = dataService.calculateTax(modalOptions.singleparticular[x].tax, modalOptions.singleparticular[x].amount,modalOptions.tax);
+						modalOptions.subTotal += modalOptions.singleparticular[x].amount;
+						modalOptions.total = modalOptions.subTotal + modalOptions.tax;
+					}
+					return modalOptions;
+				}, */
 				postData : function(table,input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
@@ -167,16 +193,39 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				taxCalculate : function(modalOptions){
+					modalOptions.singleparticular.tax = {};
 					
+					angular.forEach($rootScope.userDetails.config.inventory.taxData.tax, function(value, key){
+						if(modalOptions.taxInfo[value.taxName]){
+							//console.log(value.taxName, value.taxValue, modalOptions.singleparticular.amount);
+							modalOptions.singleparticular.tax[value.taxName] = (modalOptions.singleparticular.tax[value.taxName]) ? modalOptions.singleparticular.tax[value.taxName] + (value.taxValue * modalOptions.singleparticular.amount / 100) : (value.taxValue * modalOptions.singleparticular.amount / 100);
+						}
+					})
+					//console.log(modalOptions.singleparticular.tax);
+				},
 				totalCalculate : function(modalOptions){
-					modalOptions.subTotal = 0;
-					modalOptions.total_amount = 0;
-					//modalOptions.tax = {service_tax:0,other_tax:0,tds:0};
-					for(var x in modalOptions.addBill.singleparticular){
-						modalOptions.tax = dataService.calculateTax(modalOptions.singleparticular.particulars[x].tax, modalOptions.singleparticular.singleparticular[x].amount,modalOptions.tax);
-						modalOptions.subTotal += modalOptions.singleparticular.particulars[x].amount;
-						modalOptions.singleparticular.total_amount =   modalOptions.singleparticular.price + modalOptions.singleparticular.quantity;
-					}
+					modalOptions.addBill.subtotal = 0;
+					modalOptions.addBill.amount = 0;
+					modalOptions.addBill.tax = {};
+					console.log(modalOptions.addBill.particular);
+					
+					angular.forEach(modalOptions.addBill.particular, function(value, key){
+						modalOptions.addBill.subtotal += value.amount;
+						angular.forEach(value.tax,function(value, key){
+							console.log(value, key);
+							modalOptions.addBill.tax[key] = (modalOptions.addBill.tax[key]) ? modalOptions.addBill.tax[key] + value : value;
+						})
+						
+					})
+					
+					var taxSubtotal = 0;
+					angular.forEach(modalOptions.addBill.tax, function(value, key){
+						taxSubtotal += value;
+					})
+					
+					modalOptions.addBill.amount = modalOptions.addBill.subtotal + taxSubtotal;
+					
 					return modalOptions;
 				},
 				updateData : function(table, input, id){
