@@ -17,6 +17,18 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
 		$scope.currentDate = dataService.currentDate;
+		$rootScope.moduleMenus = [
+			{
+				name : "Add Invoice",
+				path : "#/dashboard/inventory/invoice",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/inventory/invoice/addinvoice.html");
+					}
+				}
+			},
+		]
+		
 		$scope.invoiceList = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -37,25 +49,31 @@ define(['app'], function (app) {
 					}
 				}, 
 				
-				{ name:'generated_date',width:150, enableSorting: false,
-				filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true)" ng-model="generated_date" placeholder="Date">',
+				{ 
+					name:'generated_date',
+					width:150, 
+					enableSorting: false,
+					filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true)" ng-model="generated_date" placeholder="Date">',
 				},
-				{ name:'due_date', width:150, enableSorting: false,
-				filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'invoice\', \'invoiceList\',true)" ng-model="due_date" placeholder="Date">',
-					},
+				{ 
+					name:'due_date', 
+					width:150, 
+					enableSorting: false,
+					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'invoice\', \'invoiceList\',true)" ng-model="due_date" placeholder="Date">',
+				},
 				{ 
 					name:'amount',width:80,
 					enableSorting: false ,
 					enableFiltering: false, 
 					cellTemplate : "<span>{{row.entity.particulars[0].amount}}</span>"
 								
-					},
+				},
 				{
 					name:'price',width:80,
 					enableSorting: false ,
 					enableFiltering: false, 
 					cellTemplate : "<span>{{row.entity.particulars[0].price}}</span>"
-					},
+				},
 				{
 					name:'Manage', 
 					enableSorting: false, 
@@ -192,7 +210,7 @@ define(['app'], function (app) {
 						},
 						cols : {name : "name"}
 					}
-				],  */
+				], */
 				 cols : ["*"] 
 			};
 			if(page){
