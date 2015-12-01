@@ -1,9 +1,9 @@
 {% if sliderData >= 1 %}
   <!-- Wrapper for slides -->
-  <ul class="carousslider" id="carousslider">
+  <ul class="aa" id="carousslider">
 	{% for key, value in sliderData %}
 		{% set break = 0 %}{% set i = 0 %}
-			{% for x in featured_products if break == 0 %}
+			
 		  <li>
 		     <img class="img-responsive" src="{{value.image ? value.image : value is iterable ? value.file_relative_path : value}}" alt="{{value.title}}">
 		  
@@ -12,7 +12,7 @@
 					{% if i == 3 %}
 						{% set break = 1 %}
 					{% endif %}
-				{% endif %}
+				
 			
 	{% endfor %}
   </ul>

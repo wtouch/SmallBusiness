@@ -54,6 +54,11 @@
 				padding: 0px;	
 				position: relative;
 				border-radius: 50%;
+				&:hover{
+				 opacity:0.5;
+				transition:2s;
+		         }
+				
 				
 			}
 	          img.img-responsive.center-block {
@@ -97,8 +102,60 @@
 .contact{
         padding: 60px 105px 0px 137px;
 }
-.panel-default {
-    border-color: #ddd;
-    background-color: transparent;
-   
+.panel-default, .form-control{
+           color: @colorwhite !important;
+        background-color: transparent;
 	}
+	
+	
+//for home images
+	
+.aa{
+    >h1{
+    font-family: 'AlexBrush-Regular';
+   }
+     li{
+	  list-style-type:none;
+	 
+	 }
+        li>img{
+		 border-radius: 100px;
+			height: 200px;
+			width: 220px;
+		    }
+       li:first-child {
+	      position:absolute;
+			z-index:99;
+			top: 100px;
+            left: 190px;
+		&:hover{
+			  margin-top:-25px;
+			  transition:margin 0.5s;
+			
+			}
+	   }
+	   li:nth-child(2) {
+	      position:absolute;
+			z-index:999;
+			top: 170px;
+			left: 304px;
+			&:hover{
+			  margin-top:-25px;
+			  transition:margin 0.5s;
+			
+			}
+	   }
+	    li:nth-child(3) {
+	     position:absolute;
+			z-index:9999;
+			top: 100px;
+            left: 426px;
+			&:hover{
+			   margin-top:-25px;
+			  transition:margin 0.5s;
+			
+			}
+	   }
+
+}
+
