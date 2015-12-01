@@ -6,7 +6,7 @@
 		<h3 class="col-sm-offset-2 col-sm-9"  ng-if="modalOptions.addstaff.id"> <center>Edit Staff</center></h3>
 	</div>
 		<form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
-		
+		{{modalOptions.addstaff}}
 		     <input type="hidden" class="form-control" ng-model="modalOptions.addstaff.user_id" ng-init="modalOptions.addstaff.user_id = userDetails.id" readonly/>
 			 
 			<div class="form-group">
@@ -23,6 +23,7 @@
 			
 			<div>
 				<input type="hidden" ng-model="modalOptions.addstaff.user_id">
+				<input type="hidden" ng-model="modalOptions.addstaff.modified_date" ng-init="modalOptions.addstaff.modified_date = modalOptions.staffdate.date">
 			</div>	
 			
 			<div class="form-group">	
@@ -128,7 +129,7 @@
 			<div class="form-group">
 				<label  for="date" class="col-sm-2 control-label">Date * </label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.staffdate.date"/>
+					<input type="text" class="form-control" readonly placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.staffdate.date" />
 				</div>
 			</div> 
 		

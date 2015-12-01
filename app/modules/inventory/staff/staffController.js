@@ -17,9 +17,8 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		
-		console.log('Hello');
 		
-				$rootScope.moduleMenus = [
+		$rootScope.moduleMenus = [
 			{
 				name : "Add Staff",
 				path : "#/dashboard/inventory/staff/",
@@ -28,14 +27,20 @@ define(['app'], function (app) {
 						return $scope.openModal("modules/inventory/staff/addstaff.html");
 					}
 				}
+			},{
+				name : "Staff List",
+				path : "#/dashboard/inventory/party/vendor",
+				SubTitle :"staff List"
 			}
+			
+			
 		]
 		
 		$scope.staff = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo',enableSorting: false,enableFiltering: false, 
+				{ name:'SrNo',width:50,enableSorting: false,enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 					filter: {
 					  //placeholder: 'ends with'
@@ -52,7 +57,7 @@ define(['app'], function (app) {
                 },
 				
 			   {
-				    name:'address',
+				    name:'address',width:60,
 					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true)" ng-model="address" placeholder="search">',
                 },
 				
@@ -61,7 +66,7 @@ define(['app'], function (app) {
 				    name:'city',
 				     filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true)" ng-model="city" placeholder="search">', 
                 },
-				{ name:'designation',
+				{ name:'designation',width:80,
 					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'staff\', \'staff\',true)" ng-model="designation" placeholder="search">'
 				},
 				{ name:'department',
@@ -77,7 +82,7 @@ define(['app'], function (app) {
 					} 
 					
 				},
-				{ name:'status',
+				{ name:'status',width:50,
 				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
 							/* +'<option value="" selected>Status</option>' */
 							+'<option value="0">Deleted</option>'
@@ -92,7 +97,12 @@ define(['app'], function (app) {
 				
 				 { name:'Manage', enableSorting: false, enableFiltering: false, 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/addstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					
 					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view payslip" > <span class="glyphicon glyphicon-eye-open"></span></a>'
+					
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewpayslip.html\')" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				} 
 			]
@@ -117,7 +127,7 @@ define(['app'], function (app) {
 					state: data.state,
 					country: data.country,
 					pincode: data.pincode,
-					date : data.date,					
+					date : data.date,				
 					designation: data.designation,
 					department: data.department,
 					salary: data.salary
