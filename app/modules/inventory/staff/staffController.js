@@ -4,7 +4,7 @@ define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
     
     // This is controller for this view
-	var employeeController= function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var staffController= function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
 		$scope.type = "year";
@@ -19,7 +19,19 @@ define(['app'], function (app) {
 		
 		console.log('Hello');
 		
-		$scope.employee = {
+				$rootScope.moduleMenus = [
+			{
+				name : "Add Staff",
+				path : "#/dashboard/inventory/staff/",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/inventory/staff/addstaff.html");
+					}
+				}
+			}
+		]
+		
+		$scope.staff = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -32,28 +44,28 @@ define(['app'], function (app) {
 				
 					{
 				    name:'name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'employee\', \'employee\',true)" ng-model="name" placeholder="search">',
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="search">',
                 },
 				{
 				    name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'employee\', \'employee\',true)" ng-model="email" placeholder="search">'
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'staff\', \'staff\',true)" ng-model="email" placeholder="search">'
                 },
 				
 			   {
 				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'employee\', \'employee\',true)" ng-model="address" placeholder="search">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true)" ng-model="address" placeholder="search">',
                 },
 				
 				
 				{
 				    name:'city',
-				     filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'employee\', \'employee\',true)" ng-model="city" placeholder="search">', 
+				     filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true)" ng-model="city" placeholder="search">', 
                 },
 				{ name:'designation',
-					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'employee\', \'employee\',true)" ng-model="designation" placeholder="search">'
+					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'staff\', \'staff\',true)" ng-model="designation" placeholder="search">'
 				},
 				{ name:'department',
-					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'employee\', \'employee\')" ng-model="department">'
+					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'staff\', \'staff\')" ng-model="department">'
 							+'<option value="" selected>Department</option>' 
 							+'<option value="IT">IT</option>'
 							+'<option value="CIVIL">CIVIL</option>'
@@ -66,7 +78,7 @@ define(['app'], function (app) {
 					
 				},
 				{ name:'status',
-				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'employee\', \'employee\')" ng-model="status">'
+				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
 							/* +'<option value="" selected>Status</option>' */
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -79,8 +91,8 @@ define(['app'], function (app) {
 				},
 				
 				 { name:'Manage', enableSorting: false, enableFiltering: false, 
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/employee/addemployee.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit employee" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'employee\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/addstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
 				} 
 			]
@@ -92,8 +104,8 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			var modalOptions = {
-				employeedate:{date : $scope.currentDate},
-				addemployee : (data) ? {
+				staffdate:{date : $scope.currentDate},
+				addstaff : (data) ? {
 					id : data.id,
 					name : data.name,
 					email : data.email,
@@ -116,14 +128,14 @@ define(['app'], function (app) {
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'employee','employee');
+								$scope.getData(false, $scope.currentPage, 'staff','staff');
 							}
 						})
 					},
 					updateData : function(table, input, id){
 						$rootScope.updateData(table, input, id, function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'employee','employee');
+								$scope.getData(false, $scope.currentPage, 'staff','staff');
 							}
 						})
 					}
@@ -134,7 +146,7 @@ define(['app'], function (app) {
 			})
 			
 		}
-		$scope.employeeParams = {
+		$scope.staffParams = {
 			where : {
 				status : 1,
 				user_id : $rootScope.userDetails.id
@@ -195,7 +207,7 @@ define(['app'], function (app) {
 		
 	 };
 	// Inject controller's dependencies
-	employeeController.$inject = injectParams;
+	staffController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('employeeController', employeeController);
+    app.register.controller('staffController', staffController);
 });
