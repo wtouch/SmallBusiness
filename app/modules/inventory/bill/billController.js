@@ -10,10 +10,24 @@ define(['app'], function (app) {
 		$scope.alerts = [];
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
-		$scope.currentDate = dataService.sqlDateFormate(dataService.currentDate);
+		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		console.log('Hello');
+		
+		$rootScope.moduleMenus = [
+			{
+				name : "Add Bill",
+				path : "#/dashboard/inventory/bill",
+				SubTitle :"Add Purchase Bill",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/inventory/bill/addbill.html");
+					}
+				}
+			}
+		]
+		
 		$scope.billData = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -42,7 +56,7 @@ define(['app'], function (app) {
 				{ name:'bill_date',
 					filterHeaderTemplate: '<input id="bill_date" class="form-control" ng-change="grid.appScope.filter(\'bill_date\', bill_date, \'bill\', \'billData\')" ng-model="bill_date" placeholder="search">',
 				},
-				{ name:'payment_status',
+				{ name:'payment_status',width:100,
 				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\')" ng-model="payment_status" placeholder="search">'
 					+'<option value="" selected>payment status</option>'
 							+'<option value="1">Paid</option>'
@@ -56,7 +70,7 @@ define(['app'], function (app) {
 					} 
             
 				},
-				{ name:'total_amount',width:50, 
+				{ name:'total_amount',width:100, 
 					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\')" ng-model="total_amount" placeholder="search">',
 					cellTemplate : "<span>{{row.entity.particular[0].total_amount}}</span>",
 					filter:{
@@ -64,7 +78,7 @@ define(['app'], function (app) {
 					
 					}
 				},
-				{ name:'Due_Amount',width:50,
+				{ name:'Due_Amount',width:100,
 					filterHeaderTemplate: '<input id="Due_Amount" class="form-control" ng-change="grid.appScope.filter(\'Due_Amount\', Due_Amount, \'bill\', \'billData\')" ng-model="Due_Amount" placeholder="search">',},
 				
 				{ name:'due_date',width:80,
@@ -84,9 +98,9 @@ define(['app'], function (app) {
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/payBill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
 							+
-					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/paybill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewbills.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 							+
-					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/paybill.html\')" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewreceipt.html\')" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			],
@@ -127,7 +141,11 @@ define(['app'], function (app) {
 							$scope.stockData = {};
 							$scope.stockData.user_id = input.user_id;
 							$scope.stockData.party_id = input.party_id;
+							$scope.stockData.date=input.date;
+							$scope.stockData.modified_date=input.modified_date;
+							//$scope.stockData.modified_date=input.modified_date;
 							$scope.stockData.goods_name = input.particular[0].particular_name;
+							
 							$scope.stockData.quantity = input.particular[0].quantity;
 							$scope.stockData.price = input.particular[0].price;
 							$scope.stockData.goods_type = input.particular[0].goods_type;
@@ -143,10 +161,7 @@ define(['app'], function (app) {
 						}
 					})
 				},
-				
-				/* ng-change="modalOptions.singleparticular.total_amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" */
-				
-				
+					
 				totalCalculate : function(modalOptions){
 					modalOptions.subTotal = 0;
 					modalOptions.total_amount = 0;
