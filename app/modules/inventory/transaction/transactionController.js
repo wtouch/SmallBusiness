@@ -153,25 +153,6 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\', false, grid.appScope.transactionParams)" ng-model="balance" placeholder="Balance">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit - grid.appScope.totalDebit}}</div>'
 					},
-				/*{ name:'status',
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transaction\', \'transactionList\', false, grid.appScope.transactionParams)" ng-model="status">'
-							+'<option value="" selected>Status</option>'
-							+'<option value="0">Deleted</option>'
-							+'<option value="1">Active</option>	'
-						+'</select>', 
-					filter: {
-					  //type: uiGridConstants.filter.SELECT,
-					 
-					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
-					} 
-				},
-				
-				{ name:'Manage', enableSorting: false, enableFiltering: false, 
-					cellTemplate : '<a ng-click="grid.appScope.openAddincome(\'modules/inventory/transaction/addincome.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					
-					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'transactions\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					
-				}*/
 			],
 			onRegisterApi: function( gridApi ) {
 			  $scope.gridApi = gridApi;
