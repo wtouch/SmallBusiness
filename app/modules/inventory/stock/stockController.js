@@ -49,7 +49,7 @@ define(['app'], function (app) {
 					name:'name',enableSorting: true,enableFiltering: true,			
 				},  */
 				{ name:'name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'stock\', \'stockList\',true, grid.appScope.stockParams)" ng-model="party_id" ng-options="item.party_id as item.name for item in grid.appScope.partyList">'
+				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'stock\', \'stockList\',true, grid.appScope.stockParams)" ng-model="party_id" ng-options="item.party_id as item.name for item in grid.appScope.partyList">' 
 							+'<option value="">Select Party</option>'
 						+'</select>',
 					},

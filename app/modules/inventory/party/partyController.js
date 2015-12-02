@@ -53,7 +53,7 @@ define(['app'], function (app) {
 			enableFiltering: true,
 			columnDefs: [
 				{
-					name:'SrNo',
+					name:'SrNo',width:50,
 					enableSorting: false,
 					enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
@@ -67,7 +67,10 @@ define(['app'], function (app) {
 					name:'email',
 					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="email" placeholder="search">'
                 },
-				
+				{
+					name:'phone',
+					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="phone" placeholder="search">'
+                },
 			   {
 				    name:'address',
 					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="address" placeholder="search">',
@@ -77,7 +80,7 @@ define(['app'], function (app) {
 				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="city" placeholder="search">', 
                 },
 				{
-				    name:'type',
+				    name:'type',width:110,
 					enableSorting: false,
 					enableFiltering: false,
                 },
