@@ -87,7 +87,7 @@ define(['app'], function (app) {
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/payBill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
 							+
-					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewbill2.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewbill2.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 							+
 					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewreceipt.html\')" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view Receipt Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					
@@ -137,9 +137,10 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				addBill : (data) ? {
 					id : data.id,
+					bill_id :data.bill_id,
 					party_id : data.party_id,
 					user_id : data.user_id,
-					generated_date : data.generated_date,
+					bill_date : data.bill_date,
 					due_date : data.due_date,
 					remark : data.remark,
 					particular : data.particular,
