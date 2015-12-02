@@ -48,12 +48,11 @@ define(['app'], function (app) {
 				
 				{
 				    name:'account_name',
-					filterHeaderTemplate: '<input id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_name\', account_name, \'account\', \'accountList\',true)" ng-model="account_name" placeholder="search">'
+					filterHeaderTemplate: '<input id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_name\', account_name, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_name" placeholder="search">'
                 }, 
-				
 				{
 					name:'category',
-					filterHeaderTemplate: '<select id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'account\', \'accountList\')" ng-model="category">'
+					filterHeaderTemplate: '<select id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'account\', \'accountList\',true,grid.appScope.accountParams)" ng-model="category">'
 							+'<option value="" selected>Account category</option>'
 							+'<option value="Bank">Bank</option>'
 							+'<option value="Cash">Cash</option>	'
@@ -66,13 +65,19 @@ define(['app'], function (app) {
 					  options: [ { value: 'Bank', label: 'Bank Account' }, { value: 'Cash', label: 'cash Account' },
 					  { value: 'Credit', label: 'credit card'}, { value: 'Loan', label: 'loan' } ]
 					} 
-				},{ name:'account_no',filterHeaderTemplate: '<input id="account_no" class="form-control" ng-change="grid.appScope.filter(\'account_no\', account_no, \'account\', \'accountList\',true)" ng-model="account_no" placeholder="search">'},
-				{ name:'balance',filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'account\', \'accountList\',true)" ng-model="balance" placeholder="search">'},
-				{ name:'description',enableSorting: false, enableFiltering: false,},
+				},
+				{
+					name:'account_no',filterHeaderTemplate: '<input id="account_no" class="form-control" ng-change="grid.appScope.filter(\'account_no\', account_no, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_no" placeholder="search">'
+				},
+				{ 
+				name:'balance',filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'account\', \'accountList\',true,grid.appScope.accountParams)" ng-model="balance" placeholder="search">'},
+				{ 
+				name:'description',enableSorting: false, enableFiltering: false,
+				},
 
 				
 				{  name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'account\', \'accountList\')" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'account\', \'accountList\',true,grid.appScope.accountParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -88,6 +93,7 @@ define(['app'], function (app) {
 				}
 			]
 		};
+		/* post And update data */
 		$scope.openModal = function(url,data){
 			var modalDefault = {
 				templateUrl:url,	// apply template to modal
@@ -129,6 +135,7 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})
 		}
+		/* get user_id */
 		$scope.accountParams = {
 			where : {
 				status : 1,
@@ -136,9 +143,9 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
-		// For Get (Select Data from DB)
-		$scope.getData = function(single, page, table, subobj, accountParams, modalOptions) {
-			$scope.accountParams = (accountParams) ? accountParams : {
+		/* get data */
+		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
+			$scope.params = (params) ? params : {
 				where : {
 					status : 1,
 					user_id : $rootScope.userDetails.id
@@ -146,15 +153,14 @@ define(['app'], function (app) {
 				cols : ["*"]
 			};
 			if(page){
-				angular.extend($scope.accountParams, {
+				angular.extend($scope.params, {
 					limit : {
 						page : page,
 						records : $scope.pageItems
 					}
 				})
 			}
-			dataService.get(false,table,$scope.accountParams).then(function(response) {
-				console.log(response);
+			dataService.get(single,table,$scope.params).then(function(response) {
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
 						modalOptions[subobj] = angular.copy(response.data);
@@ -174,21 +180,22 @@ define(['app'], function (app) {
 				}
 			});
 		}
-		
-		$scope.filter = function(col, value, table, subobj, search){
+		/* filter  dynamic*/
+		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
+			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.accountParams, response);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.accountParams);
+				angular.extend($scope.params, params, response);
+				console.log($scope.params);
+				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
 		}
 		$scope.orderBy = function(col, value, table, subobj){
-			if(!$scope.accountParams.orderBy) $scope.accountParams.orderBy = {};
-			$scope.accountParams.orderBy[col] = value;
-			$scope.getData(false,$scope.currentPage, 'account', 'accountList', $scope.accountParams);
+			if(!$scope.params.orderBy) $scope.params.orderBy = {};
+			$scope.params.orderBy[col] = value;
+			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
 	 };
-		
 	// Inject controller's dependencies
 	accountController.$inject = injectParams;
 	// Register/apply controller dynamically
