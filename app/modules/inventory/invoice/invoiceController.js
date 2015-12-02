@@ -57,10 +57,10 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'invoice\', \'invoiceList\',true)" ng-model="due_date" placeholder="Date">',
 				},
 				{ 
-					name:'amount',width:80,
+					name:'total_amount',width:80,
 					enableSorting: false ,
 					enableFiltering: false, 
-					cellTemplate : "<span>{{row.entity.particulars[0].amount}}</span>"
+					cellTemplate : "<span>{{row.entity.total_amount}}</span>"
 								
 				},
 				{
@@ -174,9 +174,10 @@ define(['app'], function (app) {
 				},
 				totalCalculate : function(modalOptions){
 					modalOptions.addinvoice.subtotal = 0;
-					modalOptions.addinvoice.amount = 0;
+					modalOptions.addinvoice.total_amount = 0;
 					modalOptions.addinvoice.tax = {};
 					console.log(modalOptions.addinvoice.particulars);
+					
 					
 					angular.forEach(modalOptions.addinvoice.particulars, function(value, key){
 						modalOptions.addinvoice.subtotal += value.amount;
@@ -192,11 +193,13 @@ define(['app'], function (app) {
 						taxSubtotal += value;
 					})
 					
-					modalOptions.addinvoice.amount = modalOptions.addinvoice.subtotal + taxSubtotal;
-					
+					modalOptions.addinvoice.total_amount = modalOptions.addinvoice.subtotal + taxSubtotal;
+					console.log(modalOptions.addinvoice.subtotal);
+					console.log(taxSubtotal);
+					console.log(modalOptions.addinvoice.total_amount);
+						
 					return modalOptions;
 				},
-				
 				
 				
 				updateData : function(table, input, id){
