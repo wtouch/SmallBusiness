@@ -31,13 +31,13 @@ define(['app'], function (app) {
 					}
 				}
 			},{
+				name : "Clients List",
+				path : "#/dashboard/inventory/party/client",
+				SubTitle :"client List"
+			},{
 				name : "Vendors List",
 				path : "#/dashboard/inventory/party/vendor",
 				SubTitle :"vendor List"
-			},{
-				name : "Client",
-				path : "#/dashboard/inventory/party/client",
-				SubTitle :"Client List"
 			}
 		]
 		$scope.currentPath = $location.path();
@@ -80,7 +80,7 @@ define(['app'], function (app) {
 				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="city" placeholder="search">', 
                 },
 				{
-				    name:'type',width:110,
+				    name:'type',width:85,
 					enableSorting: false,
 					enableFiltering: false,
                 },

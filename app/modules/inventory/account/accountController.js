@@ -32,7 +32,7 @@ define(['app'], function (app) {
 				}
 			},{
 				name : "Account List",
-				path : "#/dashboard/inventory/account/account"
+				path : "#/dashboard/inventory/account/account.html"
 			}
 		]
 		
