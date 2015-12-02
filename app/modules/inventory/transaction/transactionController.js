@@ -34,14 +34,14 @@ define(['app'], function (app) {
 				name : "Add Income",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/transaction/addincome.html");
+						return $scope.openAddincome("modules/inventory/transaction/addincome.html");
 					}
 				}
 			},{
 				name : "Add Expence",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/transaction/addexpence.html");
+						return $scope.openAddexpense("modules/inventory/transaction/addexpense.html");
 					}
 				}
 			},
@@ -241,7 +241,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
 				},
@@ -290,14 +290,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
 				},
