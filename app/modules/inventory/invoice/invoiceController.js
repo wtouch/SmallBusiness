@@ -85,8 +85,8 @@ define(['app'], function (app) {
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/payInvoice.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-usd"></span></a>'
-					+'<a ng-click="openGenerateinvoice(\'modules/accounting/invoice/viewinvoice.html\',x)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Invoice"><span class="glyphicon glyphicon-eye-open"></span></a>'
-					+'<a ng-disabled="(x.payment_status == 0)" ng-click="viewReceipt(\'modules/accounting/invoice/viewreceipt.html\',x)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewReceipt.html\',row.entity)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			],
@@ -127,6 +127,8 @@ define(['app'], function (app) {
 					date : $scope.currentDate,
 					addinvoice : (data) ? {
 						id : data.id,
+						invoice_id : data.invoice_id,
+						user_id : data.user_id,
 						party_id :data.party_id,
 						generated_date : data.generated_date,
 						modified_date : data.modified_date,
@@ -135,10 +137,10 @@ define(['app'], function (app) {
 					} : {
 						//generated_date : dataService.sqlDateFormate()
 					},
-					invoicePayment: (data) ? {
-						pay_date : data.pay_date,
+					payInvoice : (data) ? {
+					pay_date:data.pay_date
 					} : {
-						//generated_date : dataService.sqlDateFormate()
+						//date : dataService.sqlDateFormate()
 					},
 				
 				postData : function(table, input){

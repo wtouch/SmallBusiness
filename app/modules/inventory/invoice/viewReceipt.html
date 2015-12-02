@@ -1,0 +1,95 @@
+<div class="modal-header" ng-init="modalOptions.getData(modalOptions.invoice)">
+		<button type="button" class="close buttondistance" ng-click="modalOptions.close()">
+		<span aria-hidden="true">&times;</span></button>
+		<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('invoice')">Print</button>
+		<h3>RECEIPT</h3>
+</div>
+<br>
+<div class="form-group">
+				<label for="receipts" class="col-sm-2 control-label">Receipt Date</label>
+				<div class="col-sm-9">
+					<select class="form-control" name="receipts" id="receipts" ng-model="receipts" ng-options="item as item.receipt_date for item in modalOptions.receiptList" ng-init="receipts = modalOptions.receiptList[0]; modalOptions.addinvoice = receipts" ng-change="modalOptions.addinvoice = receipts">
+						<option value="">Select Date</option>
+					</select>
+				</div>
+</div>
+</br>
+<div class="modal-body">
+		<div id="invoice">
+	<div class="panel panel-default">
+		<div class="panel-heading text-center"><h2>Receipt</h2></div>
+		<div class="panel-body row">
+			<div class="col-xs-6">
+				<address class="text-center">
+					<strong>{{userDetails.name | uppercase}}</strong><br>
+					{{userDetails.address.address}}<br>
+					E-Mail : {{userDetails.email}}
+				</address>
+				<hr>
+				<p>To,<br>
+					<strong>{{modalOptions.addinvoice.name | uppercase}}</strong><br>
+					{{modalOptions.addinvoice.address.address}}<br>{{modalOptions.addinvoice.address.location}}<br>{{modalOptions.addinvoice.address.city}}<br>{{modalOptions.addinvoice.address.area}}<br>{{modalOptions.addinvoice.address.pincode}}<br>				
+				</P>
+			</div>
+			<div class="col-xs-6">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<tr class="amt">
+							<td><strong>Receipt No.</strong><br>{{modalOptions.addinvoice.receipt_id}}
+							</td>
+							<td><strong>Dated</strong><br>
+							{{modalOptions.addinvoice.receipt_date}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<div class="table-responsive col-xs-12">
+				<table class="table table-bordered">
+					<thead>
+						<tr class="head">
+							<th class=" col-xs-12">Particulars</th>
+							<th class=" col-xs-12">Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Paid By <strong>{{modalOptions.addinvoice.description.payment_type.type}}</strong> Against Invoice No.<strong>{{modalOptions.addinvoice.id}}</strong>
+							<p ng-if="modalOptions.addinvoice.description.payment_type.type != 'Cash'">
+								<span ng-repeat="(key, value) in modalOptions.addinvoice.description.payment_type">
+									<strong>{{key}}</strong><span> {{value}} </span></br>
+								</span>
+							</p>
+							</td>
+							<td>{{modalOptions.addinvoice.paid | number : 2}}</td>
+						</tr>
+						<!-- <tr>
+							<td class="text-right"><strong>Total Invoice Amount</strong></td>
+							<td class="text-right">{{modalOptions.addinvoice.total_amount | number : 2}}</td>
+						</tr> -->
+						<tr>
+							<td class="text-right"><strong>Received Amount</strong></td>
+							<td class="text-right">{{modalOptions.addinvoice.paid | number : 2}}</td>
+						</tr>
+						<!-- <tr>
+							<td class="text-right"><strong>Balance Amount</strong></td>
+							<td class="text-right">{{modalOptions.addinvoice.due_amount | number : 2}}</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="col-xs-12">
+				<p>Received Amount (in words):
+				<strong><em>{{ modalOptions.inWords(modalOptions.addinvoice.paid) | uppercase}}</em></strong></p>
+				
+				<hr/>
+				<p><strong>Company's Service Tax No: </strong>{{modalOptions.accountConfig.service_tax_no}}</p>
+				<p><strong>Company's Pan: </strong>{{modalOptions.accountConfig.pan_no}} </strong></p>
+				<p class="text-right">For <strong><em>{{userDetails.name}}</em></strong><br><br><br>
+				Authorised Signatory</p>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
