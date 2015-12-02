@@ -29,6 +29,8 @@
 			</div>
 			<input type="hidden" ng-model="modalOptions.addinvoice.modified_date" ng-init="modalOptions.addinvoice.modified_date=modalOptions.date">
 			
+			<input type="hidden" ng-model="modalOptions.addinvoice.date" ng-init="modalOptions.addinvoice.date=modalOptions.date">
+			
 			<input type="hidden" ng-model="modalOptions.addinvoice.tax" ng-init="modalOptions.addinvoice.tax = modalOptions.singleparticular.tax">
 			
 		</div>
@@ -162,7 +164,9 @@
 		<thead>
 			<tr>
 				<th class="col-sm-2">Sr.No.</th>
-				<th class="col-sm-3">Particular Name</th>
+				<th class="col-sm-2">Particular Name</th>
+				<th class="col-sm-2">Goods_type</th>
+				<th class="col-sm-2">Category </th>
 				<th class="col-sm-2 text-right">Price</th>
 				<th class="col-sm-2 text-right">Quantity</th>
 				<th class="col-sm-2 text-right">Amount</th>
@@ -173,6 +177,8 @@
 			<tr ng-repeat="x in modalOptions.addinvoice.particulars">
 				<td>{{ $index + 1 }}</td>
 				<td>{{x.particular_name}}</td>
+				<td>{{x.goods_type}}</td>
+				<td>{{x.category}}</td>
 				<td class="text-right">{{x.price}}</td>
 				<td class="text-right">{{x.quantity}}</td>
 				<td class="text-right">{{x.amount}}</td>
@@ -183,21 +189,19 @@
 					<td class="text-right"><strong>Sub Total</strong></td>
 					<td class="text-right">{{ modalOptions.addinvoice.subtotal | number : 2}}</td>
 					<td>{{modalOptions.addinvoice.tax}}</td>
-				</tr>
-				<tr ng-repeat="(key, value) in modalOptions.addinvoice.tax">
-					<td colspan="5"></td>
-					<td class="text-right"><strong>{{key}}</strong></td>
-					<td class="text-right">{{ value  | number : 2}}</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="5"></td>
-					<td class="text-right"><strong>Total</strong></td>
-					<td class="text-right">{{ modalOptions.addinvoice.total_amount  | number : 2}}</td>
-					<td></td>
-				</tr>
-				
-				
+			</tr>
+			<tr ng-repeat="(key, value) in modalOptions.addinvoice.tax">
+				<td colspan="5"></td>
+				<td class="text-right"><strong>{{key}}</strong></td>
+				<td class="text-right">{{ value  | number : 2}}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="5"></td>
+				<td class="text-right"><strong>Total</strong></td>
+				<td class="text-right">{{ modalOptions.addinvoice.total_amount  | number : 2}}</td>
+				<td></td>
+			</tr>
 		</tbody>
 	</table>
 	<label class="col-sm-3">Remark</label>
