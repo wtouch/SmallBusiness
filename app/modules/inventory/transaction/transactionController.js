@@ -56,8 +56,7 @@ define(['app'], function (app) {
 		]
 		
 		$http.get("modules/inventory/config.json").success(function(response){
-				$scope.inventory ={ config:response};
-				console.log($scope.inventory.config);
+				$scope.inventoryConfig = response;
 			})
 		
 		
@@ -98,7 +97,7 @@ define(['app'], function (app) {
 			//$scope.getTransaction($scope.CurrentPage, $scope.transactionParams);
 		}
 		
-		
+		$scope.transactionCategory = [];
 		console.log(uiGridConstants.scrollbars);
 		$scope.transactionList = {
 			enableSorting: true,
@@ -116,22 +115,25 @@ define(['app'], function (app) {
 							+'<option value="" selected>Account Name</option>'
 						+'</select>',
 					},
-				{ name:'category', enableSorting: false, 
-					filterHeaderTemplate: '<select id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="account_id" ng-options="item.system_name as item.name for item in grid.appScope.inventory.config.income_category">'
-							+'<option value="" selected>Category</option>'
-						+'</select>',
-					},
-					{ name:'type',enableSorting: false,
-					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="type">'
+				{
+					name:'type',
+					enableSorting: false,
+					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams);grid.appScope.transactionCategory = grid.appScope.inventoryConfig[type]" ng-model="type">'
 							+'<option value="" selected>type</option>'
 							+'<option value="expense">Expence</option>'
 							+'<option value="income">Income</option>'
 						+'</select>',
 					filter: {
-					  //type: uiGridConstants.filter.SELECT,
-					 
-					  options: [ { value: 'income', label: 'Income' }, { value: 'expense', label: 'Expence' }]
-					} },
+						//type: uiGridConstants.filter.SELECT,
+						options: [{ value: 'income', label: 'Income' }, { value: 'expense', label: 'Expence' }]
+					} 
+				},
+				{ name:'category', enableSorting: false, 
+					filterHeaderTemplate: '<select ng-if="grid.appScope.transactionCategory" id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="account_id" ng-options="item.system_name as item.name for item in grid.appScope.transactionCategory">'
+							+'<option value="" selected>Category</option>'
+						+'</select>',
+					},
+					
 				{ name:'description',
 				enableSorting: false, enableFiltering: false,
 					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="description" placeholder="description">'},
