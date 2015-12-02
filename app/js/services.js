@@ -253,13 +253,13 @@ define(['app'], function (app) {
 				var hour = (dt.getHours() < 10) ? "0" + dt.getHours() : dt.getHours();
 				var min = (dt.getMinutes() < 10) ? "0" + dt.getMinutes() : dt.getMinutes();
 				var sec = (dt.getSeconds() < 10) ? "0" + dt.getSeconds() : dt.getSeconds();
-				if(format && format == "yyyy-MM-dd HH:MM:SS"){
-					
+				if(format && (format == "yyyy-MM-dd HH:MM:SS" || format == "datetime")){
 						sqlDate = year + "-" + month + "-" + day+ " " + hour + ":" + min + ":"+sec;
-				
+				}else if(format && format == "date"){
+						sqlDate = year + "-" + month + "-" + day;
 				}else{
 						sqlDate = year + "-" + month + "-" + day;
-					}
+				}
 				//console.log(sqlDate);
 				input = sqlDate;
 				return sqlDate;

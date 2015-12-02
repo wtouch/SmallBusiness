@@ -13,7 +13,6 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
-		console.log('Hello');
 		
 		$rootScope.moduleMenus = [
 			{
@@ -143,11 +142,11 @@ define(['app'], function (app) {
 					generated_date : data.generated_date,
 					due_date : data.due_date,
 					remark : data.remark,
-					particular : data.particular
-					
+					particular : data.particular,
+					modified_date : dataService.sqlDateFormate(false,"datetime")
 				} : {
-					date : dataService.sqlDateFormate(),
-					modified_date : dataService.sqlDateFormate()
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime")
 				},
 				payBill : (data) ? {
 					account_no : data.account_no,
@@ -167,9 +166,7 @@ define(['app'], function (app) {
 							$scope.stockData.date=input.date;
 							$scope.stockData.stockdate=input.bill_date;
 							$scope.stockData.modified_date=input.modified_date;
-							//$scope.stockData.modified_date=input.modified_date;
 							$scope.stockData.goods_name = input.particular[0].particular_name;
-							
 							$scope.stockData.quantity = input.particular[0].quantity;
 							$scope.stockData.price = input.particular[0].price;
 							$scope.stockData.goods_type = input.particular[0].goods_type;
@@ -201,7 +198,7 @@ define(['app'], function (app) {
 					modalOptions.addBill.subtotal = 0;
 					modalOptions.addBill.total_amount = 0;
 					modalOptions.addBill.tax = {};
-					console.log(modalOptions.addBill.particular);
+					//console.log(modalOptions.addBill.particular);
 					
 					
 					angular.forEach(modalOptions.addBill.particular, function(value, key){
@@ -233,7 +230,7 @@ define(['app'], function (app) {
 						}
 					})
 				},
-				
+				setDate : $scope.setDate,	
 				getData: $scope.getData,
 				
 				addToObject : $rootScope.addToObject,
@@ -243,6 +240,21 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
+		
+		$scope.setDate = function(date, days, sql){
+			var curDate = new Date(date);
+			var newDate = curDate.setDate(curDate.getDate() + days);
+			var finalDate;
+			if(sql == "date"){
+				finalDate = dataService.sqlDateFormate(newDate);
+			}else if(sql == "datetime"){
+				finalDate = dataService.sqlDateFormate(newDate, "datetime");
+			}else{
+				finalDate = new Date(newDate);
+			}
+			return finalDate;
+		}
+		
 		
 		$scope.billParams = {
 			where : {
