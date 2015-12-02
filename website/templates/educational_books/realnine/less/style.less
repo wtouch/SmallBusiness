@@ -122,8 +122,10 @@
 					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					li{
-						border-bottom: 1px solid @lightbackcolor;
 						padding: 7px;
+						ul{
+							list-style : none;
+						}
 						a{
 							color:@colorwhite;
 						}
@@ -142,12 +144,10 @@
 			}
 		}
 	}
-	.content
-	{
+	.content{
 		background-color :@colorwhite;
 		padding : 15px;
 	}
-
 	a:hover{
 		color : @color;
 		text-decoration : none;
@@ -166,12 +166,9 @@
 		background-color: @darkbackcolor;
 		text-decoration : none;
 	}
-	
-	a
-	{
+	a{
 		color:@back;
 	}
-	
 	footer a{
 		color:@colorwhite;
 	}
@@ -202,7 +199,7 @@
 	}
 	.navbar-toggle {
 		border : 1px solid @lightcolor;
-		margin-top : 45px;
+		margin-top : 10px;
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @lightcolor;
@@ -212,16 +209,12 @@
 		border:none;
 		min-height : 50px;
 	}
-	
 	.contentModule .sections .readmore .btn-info {
 		 background-color: @back; 
 		 &:hover{
 			background-color:@darkbackcolor;
 		 }
 	}
-
-	
-	
 	.subhead {
 		font: 2em/1.2em Amaranth-Regular;
 		font-size:18px;
@@ -516,7 +509,12 @@
 			}
 		}
 	}
-	
+	.enquir{
+		display : none;
+		position : fixed;
+		bottom : 60px;
+		right : 20px;
+	}
 	//charges
 	.highlight{
 		color :@back;
@@ -527,16 +525,6 @@
 		font-weight : bold;
 	}
 	@media (min-width: 320px){
-		.logo{
-			float:left;
-		}
-		.cnctinfo{
-			display : none;
-		}
-		.navbar{
-			min-height: 0px;
-			
-		}
 		.item.active, .projnav{
 			height: 120px;
 			overflow: hidden;
@@ -551,15 +539,6 @@
 		}
 	}
 	@media (min-width: 992px){
-		.logo{
-			float:none;
-		}
-		.cnctinfo{
-			display : block;
-		}
-		.navbar{
-			
-		}
 		.projnav{
 			height: 322px;
 		}
@@ -578,15 +557,6 @@
 		}
 	}
 	@media (min-width: 1200px){
-		.logo{
-			float:none;
-		}
-		.cnctinfo{
-			display : block;
-		}
-		.navbar{
-			
-		}
 		.projnav{
 			height: 322px;
 		}
@@ -619,8 +589,16 @@
 		color : @colorwhite;
 		background-color: @darkbackcolor;
 	}
+	@media (max-width: 768px){
+		.enquir{
+			display : block;
+		}
+	}
 	@media (max-width: 540px){
-		header {
+		header{
+			.weblogo, .cntdtl{
+				text-align :center;
+			}
 			.navbar{
 				min-height : 1px;
 			}

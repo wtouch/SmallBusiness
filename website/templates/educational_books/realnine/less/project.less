@@ -38,11 +38,7 @@
 }
 
 .homeproject{
-	position : relative;
 	.projectCarousal{
-		width : 635px;
-		position : relative;
-		z-idex:1000;
 		.bx-wrapper{
 			border : 3px solid @back;
 			.bx-viewport{
@@ -69,45 +65,26 @@
 				}
 			}
 		}
-		.projsnap{
-			padding:10px;
-			width : 0px;
-			height : 311px;
-			opacity : 0;
-			background-color : rgba(35, 35, 92, 0.66);
-			border : 3px solid @back;
-			z-index : 51;
-			transform: translateX(0px);
-			transition: all 800ms ease-in;
-			position: absolute;
-			overflow: hidden;
-			top: 0;
-			left: 0;
-			p{
-				margin: 5px;
-				color : @colorwhite;
-				font-size : 17px;
-				font-family : Amaranth-Regular; 
-			}
-		}
-		&:hover{
-			.projsnap{
-				opacity : 1;
-				width : 635px;
-				transform: translateX(0px);
-			}
-		}
 	}
-	.projectnav {
-		position : absolute;
-		width : 300px;
-		height : 311px;
-		top :0;
-		right : 0px;
+	.projsnap, .projectnav{
 		background : @darkbackcolor;
 		border : 3px solid @back;
-		border-radius : 0% 50% 50% 0%;
-		overflow : hidden;
+	}
+	.projectCarousal, .projsnap, .projectnav{
+		width : auto;
+		position : static;
+	} 
+	.projsnap{
+		display : block;
+		padding:10px;
+		p{
+			margin: 5px;
+			color : @colorwhite;
+			font-size : 17px;
+			font-family : Amaranth-Regular; 
+		}
+	}
+	.projectnav{
 		.nav-stacked{
 			>li{
 				margin-bottom : 10px;
@@ -236,10 +213,13 @@
 			
 		} 
 	}
+	
 	@media (max-width: 768px){
-		.homeproject::after{
-			display : none;
-			width : 0px;
+		.homeproject{
+			&::after{
+				display : none;
+				width : 0px;
+			}
 		}
 		.projectnav, .projsnap, .bx-wrapper{
 			margin-bottom : 10px !important;
@@ -252,7 +232,64 @@
 			margin-right:10px;
 		}
 	}
-	@media (min-width: 992px){
+	
+	@media (min-width: 1024px){
+		.homeproject{
+			position : relative;
+			.projectCarousal{
+				width : 635px;
+				position : relative;
+				z-idex:1000;
+				.projsnap{
+					width : 0px;
+					height : 311px;
+					opacity : 0;
+					background-color : rgba(35, 35, 92, 0.66);
+					border : 3px solid @back;
+					z-index : 51;
+					transform: translateX(0px);
+					transition: all 800ms ease-in;
+					position: absolute;
+					overflow: hidden;
+					top: 0;
+					left: 0;
+				}
+				&:hover{
+					.projsnap{
+						opacity : 1;
+						width : 635px;
+						transform: translateX(0px);
+					}
+				}
+			}
+			.projectnav {
+				position : absolute;
+				width : 300px;
+				height : 311px;
+				top :0;
+				right : 0px;
+				background : @darkbackcolor;
+				border : 3px solid @back;
+				border-radius : 0% 50% 50% 0%;
+				overflow : hidden;
+				.nav-stacked{
+					>li{
+						margin-bottom : 10px;
+						a, a:focus{
+							background : none;
+							margin : 5px;
+							font : 1.2em/1.2em Amaranth-Regular;
+							color: @colorwhite;
+							&:hover{
+								color: @colorwhite;
+								text-decoration:none; 
+								background-color : @back;
+							}
+						}
+					}
+				}
+			}
+		}
 		.projImg{
 			float : left;
 			max-height : 175px;
