@@ -1,22 +1,35 @@
 {% autoescape false %}
 	<div class="homeAboutus">
-		<h1>Welcome to {{ data.business_name }}</h1>
-		{% if data.business_info.tagline %}
-			<div class="tagline text-center">{{ data.business_info.tagline}}</div>
-		{% endif %}
-		{% if data.business_info.alternate_tagline %}
-			<div class="tagline1 text-center">{{ data.business_info.alternate_tagline}}</div>
-		{% endif %}
-		
-		<div class="description">
-		{% if data.website_config.welcome_note %}
-			{{ data.website_config.welcome_note}}
-		
-		{% else %}
-			{{ data.business_info.description|length >1500 ? data.business_info.description|slice(start,1500)~ '...' : data.business_info.description}}
-		{% endif %}
-		<a href="about-us" class="btn btn-link">Read More..</a>
+		<h1>OUR PRODUCTS</h1>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<div>
+				<a href="http://sealtechengineers.wtouch.in/products/Pharamceutical-Machinerys" target="_self"><h3>PHARAMCEUTICAL</h3></a>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<div>
+				<a href="http://sealtechengineers.wtouch.in/products/Food-Processing-Machinery" target="_self"><h3>FOOD</h3></a>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<div>
+				<a href="http://sealtechengineers.wtouch.in/products/Dairy-Plants-And-Equipments" target="_self"><h3>DAIRY</h3></a>
+				</div>
+			</div>
 		</div>
+		<!-- <div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<img src="{{path}}img/turnkey-project.gif" alt="image missing">
+				Turnkey Projects
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<img class="img-responsive" src="{{path}}img/fully-automatic-homogenizer.jpg" alt="image missing">
+				Fully Automatic Homogenizers And High Pressure Pumps
+			</div> -->
+		</div>
+		
+		
 	</div>
 	
 {% endautoescape %}
