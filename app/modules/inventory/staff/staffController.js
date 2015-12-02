@@ -27,12 +27,7 @@ define(['app'], function (app) {
 						return $scope.openModal("modules/inventory/staff/addstaff.html");
 					}
 				}
-			},{
-				name : "Staff List",
-				path : "#/dashboard/inventory/party/vendor",
-				SubTitle :"staff List"
-			}
-			
+			},
 			
 		]
 		
@@ -48,30 +43,30 @@ define(['app'], function (app) {
 				},
 				
 					{
-				    name:'name',width:100,
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="search">',
+				    name:'name',width:200,
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="Name">',
                 },
 				{
-				    name:'email',width:100,
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'staff\', \'staff\',true)" ng-model="email" placeholder="search">'
+				    name:'email',width:130,
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'staff\', \'staff\',true)" ng-model="email" placeholder="Email">'
                 },
 				
 			   {
-				    name:'address',width:110,
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true)" ng-model="address" placeholder="search">',
+				    name:'address',width:130,
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true)" ng-model="address" placeholder="Address">',
                 },
 				
 				
 				{
 				    name:'city',width:90,
-				     filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true)" ng-model="city" placeholder="search">', 
+				     filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true)" ng-model="city" placeholder="City">', 
                 },
 				{ name:'designation',width:100,
-					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'staff\', \'staff\',true)" ng-model="designation" placeholder="search">'
+					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'staff\', \'staff\',true)" ng-model="designation" placeholder="Designation">'
 				},
 				{ name:'department',width:120,
-					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'staff\', \'staff\')" ng-model="department">'
-							+'<option value="" selected>Department</option>' 
+					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'staff\', \'staff\',true)" ng-model="department">'
+							+'<option value="" selected>--Select--</option>' 
 							+'<option value="IT">IT</option>'
 							+'<option value="CIVIL">CIVIL</option>'
 							+'<option value="MECH">MECH</option>'
@@ -84,9 +79,9 @@ define(['app'], function (app) {
 				},
 				
 				
-				 { name:'Manage', width:200,
+				 { name:'Manage', width:250,
 				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
-							/* +'<option value="" selected>Status</option>' */
+							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
 						+'</select>', 
@@ -101,9 +96,11 @@ define(['app'], function (app) {
 					
 					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewpayslip.html\')" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view payslip" > <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewpayslip.html\')" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="view payslip" > <span class="glyphicon glyphicon-eye-open"></span></a>'
 					
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
+					
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="View Staff"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/staff_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-user"></span></a>'
 				} 
@@ -138,7 +135,9 @@ define(['app'], function (app) {
 					advance:data.advance,
 					loan:data.loan,
 					staff_type:data.staff_type,
-					staff_id:data.staff_id
+					staff_id:data.staff_id,
+					modified_date:data.modified_date,
+					registration_date:data.registration_date
 					
 					} : {
 						date : dataService.sqlDateFormate()
