@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
+    var injectParams = ['$scope','$rootScope','$http','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
     
     // This is controller for this view
-	var transactionController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var transactionController = function ($scope,$rootScope,$http,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
 		$scope.transactions = true;
@@ -55,6 +55,10 @@ define(['app'], function (app) {
 			}
 		]
 		
+		$http.get("modules/inventory/config.json").success(function(response){
+				$scope.inventory ={ config:response};
+				console.log($scope.inventory.config);
+			})
 		
 		
 		$scope.calcDuration = function(type, duration){
@@ -113,17 +117,8 @@ define(['app'], function (app) {
 						+'</select>',
 					},
 				{ name:'category', enableSorting: false, 
-					filterHeaderTemplate: '<select id="category" class="form-control" ng-change="grid.appScope.filter(\'category\',category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="transaction_category">'
-							+'<option value="" selected>Select Category</option>'
-								+'<option value="type1" >Licence Fees</option>'
-								+'<option value="type2">Agriculture</option>'
-								+'<option value="type3">Commisions</option>'
-								+'<option value="type4">Fees & Chagrges</option>'
-								+'<option value="type5">Investments</option>'
-								+'<option value="type6">Non Profit</option>'
-								+'<option value="type7">Other Income</option>'
-								+'<option value="type8">Proffesional Services</option>'
-								+'<option value="type9">Sales products & services</option>'
+					filterHeaderTemplate: '<select id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="account_id" ng-options="item.system_name as item.name for item in grid.appScope.inventory.config.income_category">'
+							+'<option value="" selected>Category</option>'
 						+'</select>',
 					},
 					{ name:'type',enableSorting: false,
