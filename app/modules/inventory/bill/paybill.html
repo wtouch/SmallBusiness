@@ -14,19 +14,19 @@
 			<div class="form-group">
 			<label for="account_name" class="col-sm-2 control-label">Account Name* </label>
 				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'account','accountList',accountParams, modalOptions)">
-				<select class="form-control" name="account_name" id="account_name" ng-model="modalOptions.billPayment.account_id"  ng-options="item.id as item.account_name for item in modalOptions.accountList" required>
+				<select class="form-control" name="account_name" id="account_name" ng-model="modalOptions.billPayment.account_id"  ng-options="item.account_id as item.account_name for item in modalOptions.accountList" required>
 					<option value="" selected>Select Account Name</option>
 				</select>
-				<span class="help-block" ng-show="payBillForm.account_id.$dirty && payBillForm.account_id.$invalid">
-					<span ng-show="payBillForm.account_id.$error.required" class="text-danger">Account Name is required.</span>
-					<span ng-show="(payBillForm.account_id.$dirty || submitted)" class="text-danger">Enter Numbers Only!</span>
+				<span class="help-block" ng-show="payBillForm.account_name.$dirty && payBillForm.account_name.$invalid">
+					<span ng-show="payBillForm.account_name.$error.required" class="text-danger">Account Name is required.</span>
+					<span ng-show="(payBillForm.account_name.$dirty || submitted)" class="text-danger">Enter Numbers Only!</span>
 				</span>
 			</div>
 		</div>
-			<div class="form-group" >
-				<label for="due_amount" class="col-sm-2 control-label">Previous Amount</label>
+			<div class="form-group" ng-if="modalOptions.billPayment.account_id" >
+				<label for="credit_amount" class="col-sm-2 control-label">Previous Amount</label>
 				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList',transactionParams, modalOptions)">
-					<input type="text" id="" name="due_amount" readonly class="form-control" ng-model="modalOptions.billPayment.account_id"  ng-options="item.id as item.due_amount for item in modalOptions.transactionList"/>			
+					<input type="text" id="" name="credit_amount" readonly class="form-control" ng-model="modalOptions.billPayment.credit"  ng-options="item.credit_amount as item.due_amount for item in modalOptions.transactionList"/>			
 					</div>
 			</div>
 
@@ -48,12 +48,12 @@
 			
 			
 			<div class="form-group">
-				<label  for="due_amount" class="col-sm-2 control-label">Amount</label>
+				<label  for="credit_amount" class="col-sm-2 control-label">Amount</label>
 				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
-					<input type="text"  id="due_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.billPayment.account_id" name="due_amount" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList" ng-init="modalOptions.billPayment.due_amount = modalOptions.billPayment.due_amount"  required/>
-					<span class="help-block" ng-show="payBillForm.amount.$dirty && payBillForm.due_amount.$invalid">
-						<span ng-show="payBillForm.due_amount.$error.required" class="text-danger">Amount is required.</span>
-						<span ng-show="payBillForm.due_amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+					<input type="text"  id="credit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.billPayment.debit_amount" name="credit_amount" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList" ng-init="modalOptions.billPayment.credit_amount = modalOptions.billPayment.debit_amount"  required/>
+					<span class="help-block" ng-show="payBillForm.amount.$dirty && payBillForm.credit_amount.$invalid">
+						<span ng-show="payBillForm.credit_amount.$error.required" class="text-danger">Amount is required.</span>
+						<span ng-show="payBillForm.credit_amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 					</span>
 				</div>						
 			</div>

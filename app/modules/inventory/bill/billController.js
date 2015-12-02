@@ -37,8 +37,8 @@ define(['app'], function (app) {
 					
 				},
 				
-				{ name:'id', width:50,
-					filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'id\', id, \'bill\', \'billData\')" ng-model="id" placeholder="Bill No">',
+				{ name:'bill_id', width:50,
+					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'bill\', \'billData\')" ng-model="id" placeholder="Bill No">',
 				},
 				 { name:'name',enableSorting: false ,enableFiltering: true
 				}, 
@@ -149,7 +149,7 @@ define(['app'], function (app) {
 					modified_date : dataService.sqlDateFormate()
 				},
 				payBill : (data) ? {
-					
+					account_no : data.account_no,
 					pay_date:data.pay_date
 					
 				} : {
