@@ -52,12 +52,12 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="search">',
                 },
 				{
-				    name:'email',
+				    name:'email',width:100,
 					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'staff\', \'staff\',true)" ng-model="email" placeholder="search">'
                 },
 				
 			   {
-				    name:'address',width:100,
+				    name:'address',width:110,
 					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true)" ng-model="address" placeholder="search">',
                 },
 				
@@ -69,7 +69,7 @@ define(['app'], function (app) {
 				{ name:'designation',width:100,
 					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'staff\', \'staff\',true)" ng-model="designation" placeholder="search">'
 				},
-				{ name:'department',width:100,
+				{ name:'department',width:120,
 					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'staff\', \'staff\')" ng-model="department">'
 							+'<option value="" selected>Department</option>' 
 							+'<option value="IT">IT</option>'
@@ -82,7 +82,9 @@ define(['app'], function (app) {
 					} 
 					
 				},
-				{ name:'status',width:60,
+				
+				
+				 { name:'Manage', width:200,
 				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
 							/* +'<option value="" selected>Status</option>' */
 							+'<option value="0">Deleted</option>'
@@ -93,9 +95,8 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} 
-				},
-				
-				 { name:'Manage', enableSorting: false, enableFiltering: false, 
+				,
+				 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/addstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
@@ -142,6 +143,7 @@ define(['app'], function (app) {
 					} : {
 						date : dataService.sqlDateFormate()
 					}, 
+					
 					postData : function(table, input){
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
@@ -158,6 +160,7 @@ define(['app'], function (app) {
 						})
 					}
 				};
+			
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 				
