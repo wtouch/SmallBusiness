@@ -62,9 +62,9 @@ define(['app'], function (app) {
 				},
 				{ name:'total_amount',width:100, 
 					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\')" ng-model="total_amount" placeholder="search">',
-					cellTemplate : "<span>{{row.entity.particular[0].total_amount}}</span>",
+					cellTemplate : "<span>{{row.entity.total_amount}}</span>",
 					filter:{
-					placeholder: 'Total Amount'
+					placeholder: 'Total amount'
 					
 					}
 				},
@@ -155,17 +155,7 @@ define(['app'], function (app) {
 				} : {
 					//date : dataService.sqlDateFormate()
 				},
-				/* totalCalculate : function(modalOptions){
-					modalOptions.subTotal = 0;
-					modalOptions.total = 0;
-					modalOptions.tax = {service_tax:0,other_tax:0,tds:0};
-					for(var x in modalOptions.singleparticular){
-						modalOptions.tax = dataService.calculateTax(modalOptions.singleparticular[x].tax, modalOptions.singleparticular[x].amount,modalOptions.tax);
-						modalOptions.subTotal += modalOptions.singleparticular[x].amount;
-						modalOptions.total = modalOptions.subTotal + modalOptions.tax;
-					}
-					return modalOptions;
-				}, */
+				
 				postData : function(table,input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
@@ -174,6 +164,7 @@ define(['app'], function (app) {
 							$scope.stockData.user_id = input.user_id;
 							$scope.stockData.party_id = input.party_id;
 							$scope.stockData.date=input.date;
+							$scope.stockData.stockdate=input.bill_date;
 							$scope.stockData.modified_date=input.modified_date;
 							//$scope.stockData.modified_date=input.modified_date;
 							$scope.stockData.goods_name = input.particular[0].particular_name;
@@ -206,9 +197,10 @@ define(['app'], function (app) {
 				},
 				totalCalculate : function(modalOptions){
 					modalOptions.addBill.subtotal = 0;
-					modalOptions.addBill.amount = 0;
+					modalOptions.addBill.total_amount = 0;
 					modalOptions.addBill.tax = {};
 					console.log(modalOptions.addBill.particular);
+					
 					
 					angular.forEach(modalOptions.addBill.particular, function(value, key){
 						modalOptions.addBill.subtotal += value.amount;
@@ -224,7 +216,11 @@ define(['app'], function (app) {
 						taxSubtotal += value;
 					})
 					
-					modalOptions.addBill.amount = modalOptions.addBill.subtotal + taxSubtotal;
+					modalOptions.addBill.total_amount = modalOptions.addBill.subtotal + taxSubtotal;
+					console.log(modalOptions.addBill.subtotal);
+					console.log(taxSubtotal);
+					console.log(modalOptions.addBill.total_amount);
+						
 					
 					return modalOptions;
 				},
