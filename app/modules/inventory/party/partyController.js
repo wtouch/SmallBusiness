@@ -61,20 +61,20 @@ define(['app'], function (app) {
 				},
 				{
 				    name:'name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'party\', \'party\', true)" ng-model="name" placeholder="search">',
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'party\', \'party\', true, grid.appScope.partyParams)" ng-model="name" placeholder="search">',
                 },
 				{
 					name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\',true)" ng-model="email" placeholder="search">'
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="email" placeholder="search">'
                 },
 				
 			   {
 				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\',true)" ng-model="address" placeholder="search">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="address" placeholder="search">',
                 },
 				{
 				    name:'city',
-				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\',true)" ng-model="city" placeholder="search">', 
+				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="city" placeholder="search">', 
                 },
 				{
 				    name:'type',
@@ -82,7 +82,7 @@ define(['app'], function (app) {
 					enableFiltering: false,
                 },
 				{ name:'department',
-					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'party\', \'party\')" ng-model="department">'
+					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="department">'
 							+'<option value="" selected>Department</option>' 
 							+'<option value="IT">IT</option>'
 							+'<option value="CIVIL">CIVIL</option>'
@@ -95,7 +95,7 @@ define(['app'], function (app) {
 					
 				},
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\')" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -170,8 +170,8 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
-		// For Get (Select Data from DB)
-		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
+		/*get data */
+		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
 					status : 1,
@@ -188,11 +188,10 @@ define(['app'], function (app) {
 					}
 				})
 			}
-			dataService.get(single,table,$scope.params, subobj, params, modalOptions).then(function(response) {
-				console.log(response);
+			dataService.get(single,table,$scope.params).then(function(response) {
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
-						modalOptions[subobj].data = angular.copy(response.data);
+						modalOptions[subobj] = angular.copy(response.data);
 						modalOptions.totalRecords = response.totalRecords;
 					}else{
 						($scope[subobj]) ? $scope[subobj].data = angular.copy(response.data) : $scope[subobj] = angular.copy(response.data) ;
@@ -209,12 +208,13 @@ define(['app'], function (app) {
 				}
 			});
 		}
-		
-		$scope.filter = function(col, value, table, subobj, search){
+		/* filter  dynamic*/
+		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
+			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				console.log($scope.params, response);
-				angular.extend($scope.params, response);
+				angular.extend($scope.params, params, response);
+				console.log($scope.params);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
 		}
