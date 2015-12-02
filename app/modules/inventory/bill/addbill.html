@@ -21,15 +21,12 @@
 			</div>
 			<label  for="generated_date" class="col-sm-2 control-label">Bill Date *</label>
 			<div class="col-sm-4">
-			<input type="text" class="form-control " placeholder=" Bill Date" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date"datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addBill.bill_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
+			<input type="text" class="form-control " placeholder=" Bill Date" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date"datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addBill.bill_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addBill.bill_date,10); modalOptions.sqlDateFormat(modalOptions.addBill.bill_date, modalOptions.addBill.bill_date)"/>
 			</div>
 		</div>
 	</form>
 
 <div class="row">
-	<input type="hidden"  id="status" class="form-control" name="status" placeholder=" addBill" ng-model="modalOptions.addBill.status" ng-init="modalOptions.addBill.status = '1'"/>
-
-	<input type="hidden" class="form-control" ng-model="modalOptions.addBill.user_id" ng-init="modalOptions.addBill.user_id = userDetails.id" readonly/>
 	
 	<div class="col-sm-12" ng-init="modalOptions.addBill.particular = (modalOptions.addBill.particular) ? modalOptions.addBill.particular : []">
 		<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">		

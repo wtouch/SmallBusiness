@@ -134,7 +134,7 @@ define(['app'], function (app) {
 				size : 'lg'
 				};
 			var modalOptions = {
-				date : $scope.currentDate,
+				date : dataService.sqlDateFormate(),
 				addBill : (data) ? {
 					id : data.id,
 					bill_id :data.bill_id,
@@ -147,7 +147,10 @@ define(['app'], function (app) {
 					modified_date : dataService.sqlDateFormate(false,"datetime")
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
-					modified_date : dataService.sqlDateFormate(false,"datetime")
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
+					status : 1,
+					user_id : $rootScope.userDetails.id
 				},
 				payBill : (data) ? {
 					account_no : data.account_no,
@@ -231,9 +234,15 @@ define(['app'], function (app) {
 						}
 					})
 				},
-				setDate : $scope.setDate,	
+				setDate : function(date, days){
+					var dueDate = $scope.setDate(date, days, "date");
+					modalOptions.addBill.due_date = dueDate;
+				},
+				sqlDateFormat : function(date, object){
+					var sqlDate = dataService.sqlDateFormate(date,"date");
+					object = sqlDate;
+				},
 				getData: $scope.getData,
-				
 				addToObject : $rootScope.addToObject,
 				reset : $rootScope.reset,
 				removeObject : $rootScope.removeObject
