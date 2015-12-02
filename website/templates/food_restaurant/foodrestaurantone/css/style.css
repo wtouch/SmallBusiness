@@ -249,6 +249,11 @@
 .header h3 {
   font-size: 28px;
 }
+.products {
+  animation-name: services;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
 .products .thumbnail {
   height: 385px;
 }
@@ -256,9 +261,7 @@
   margin-top: 38px;
 }
 .products .thumbnail .prodimg {
-  height: 100%;
   width: 100%;
-  overflow: hidden;
   margin: 0 auto;
 }
 .products .thumbnail .prodimg img1 {
@@ -276,11 +279,20 @@
 }
 .products .thumbnail .caption .description {
   height: 75px;
-  overflow: hidden;
   color: #ffffff;
 }
 .products .thumbnail .readmore1 {
   text-align: center;
+}
+@keyframes services {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 .featuretab {
   margin-top: 20px;
@@ -369,7 +381,7 @@ span.glyphicon.glyphicon-chevron-left {
   position: relative;
   width: 100%;
   overflow: hidden;
-  margin-top: 90px;
+  margin-top: 15px;
 }
 .sidebarModule.sidemenu {
   padding: 15px 15px 0px;
@@ -433,11 +445,16 @@ span.glyphicon.glyphicon-chevron-left {
 .about .table tbody tr td,
 .contact .table tbody tr td {
   border: 1px solid ;
-  border-color: #02071a;
+  border-color: #4a2b1b;
   background-color: #2e1b11;
 }
 .about .table {
   margin-top: 20px;
+}
+.infrastructure {
+  animation-name: infra;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
 }
 .infrastructure .thumbnail {
   height: 395px;
@@ -446,9 +463,22 @@ span.glyphicon.glyphicon-chevron-left {
   height: 190px;
   width: 100%;
 }
+.infrastructure .thumbnail img:hover {
+  opacity: 0.7;
+}
 .infrastructure .thumbnail .caption {
   height: 138px;
   color: #ffffff;
+}
+@keyframes infra {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }
 contactus page css .contact img {
   max-height: 125px;
@@ -513,12 +543,27 @@ contactus page css .contact h4 {
   }
 }
 @media (min-width: 992px) {
+  .gallery {
+    animation-name: gallery;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+  }
   .gallery .thumbnail {
     height: 390px;
   }
   .gallery .thumbnail img {
     max-height: 155px;
     width: 100%;
+  }
+}
+@keyframes gallery {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }
 @media (min-width: 1200px) {
@@ -624,7 +669,7 @@ body {
     background-repeat: no-repeat;
   }
 }
-.logo {
+.logo one {
   height: 289px;
   width: 263px;
   margin-left: -8px;
@@ -652,36 +697,21 @@ body {
 .sociallinks ul li a {
   color: #ec1f26;
   display: inline-block;
-  width: 36px;
-  height: 36px;
+  width: 60px;
+  height: 60px;
   margin-left: 10px;
+  border: 2px solid #4a2b1b;
+  border-radius: 50%;
+  padding: 8px;
 }
 .sociallinks ul li a:hover {
-  color: #24600b;
+  color: #ffffff;
   text-decoration: underline;
+  border: 2px solid #ffffff;
 }
-.sociallinks ul li .img {
-  margin-left: 10px;
-  width: 38px;
-  height: 38px;
-}
-.sociallinks ul li #img1 {
-  background: url('../img/sprite.png');
-}
-.sociallinks ul li #img1:hover {
-  background: url('../img/sprite.png') 0px -38px;
-}
-.sociallinks ul li #img2 {
-  background: url('../img/sprite.png') -38px 0px;
-}
-.sociallinks ul li #img2:hover {
-  background: url('../img/sprite.png') -38px -38px;
-}
-.sociallinks ul li #img3 {
-  background: url('../img/sprite.png') -75px 0px;
-}
-.sociallinks ul li #img3:hover {
-  background: url('../img/sprite.png') -75px -38px;
+.sociallinks ul li a img {
+  width: 40px;
+  height: 40px;
 }
 .sociallinks1 {
   position: relative;
@@ -769,9 +799,6 @@ body {
   text-align: center;
   color: #ec1f26;
 }
-.sections {
-  padding: 15px;
-}
 .sidebarModule .panel-body {
   padding: 15px 15px 0px;
 }
@@ -810,17 +837,36 @@ a:hover,
   background-color: transparent;
 }
 .panel {
-  background-color: #707070;
+  background-color: #2e1b11;
 }
 .panel-default {
   border-color: #4a2b1b;
+  animation-name: form;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
+@keyframes form {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }
 hr {
-  border-color: #2e1b11;
+  border-color: #4a2b1b;
 }
 .form-control {
-  background-color: #24600b;
+  background-color: #2e1b11;
   color: #707070;
+  border-color: #4a2b1b;
+}
+.btn-info[disabled] {
+  background-color: transparent;
+  border-color: #ffffff;
+  color: #ffffff;
 }
 .btn-info,
 .btn-info[disabled],
@@ -1102,6 +1148,7 @@ h3 {
   margin-top: 20px;
 }
 /*.carousel-inner {
+			
 					position: relative;
 					width: 100%;
 					height: 340px;
@@ -1152,7 +1199,7 @@ h3 {
   position: absolute;
   top: 0;
   left: -1px;
-  width: 354px;
+  width: 368px;
   height: 200px;
   text-align: center;
   margin: 0 auto;
@@ -1172,7 +1219,23 @@ h3 {
 .description {
   overflow: hidden;
   height: 100px;
+  padding: 15px;
 }
 a.btn.btn-info.read1 {
   margin-top: 88px;
+}
+.anim {
+  animation-name: anim;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
+@keyframes anim {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }

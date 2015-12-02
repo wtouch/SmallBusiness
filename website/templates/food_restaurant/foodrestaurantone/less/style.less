@@ -47,7 +47,7 @@
 	background-repeat:no-repeat;}
 }
 
-	.logo {
+	.logo one{
 		    height: 289px;
 			width: 263px;
 			margin-left: -8px;
@@ -80,38 +80,26 @@
 				a{
 					color:@lightcolor;
 					display:inline-block;
-					width: 36px;
-					height:36px;
+					width: 60px;
+					height:60px;
 					margin-left:10px;
+					border:2px solid @darkbackcolor;
+					border-radius:50%;
+					padding:8px;
+					padding:8px;
+					
 					&:hover{
-						color:@color;
+						color:@colorwhite;
 						text-decoration : underline;
+						border:2px solid @colorwhite;
+						
+					}
+					img{
+					width: 40px;
+					height:40px;
 					}
 				}
-				.img{
-					//background:url('../img/sprite.png');
-					margin-left : 10px;
-					width : 38px;
-					height:38px;
-				}
-					#img1{
-					background:url('../img/sprite.png');
-					&:hover{
-					background:url('../img/sprite.png')0px -38px ;
-					}
-					}
-					#img2{
-					background:url('../img/sprite.png')-38px 0px ;
-					&:hover{
-					background:url('../img/sprite.png')-38px -38px  ;
-					}
-					}
-					#img3{
-					background:url('../img/sprite.png')-75px 0px;
-					&:hover{
-					background:url('../img/sprite.png')-75px -38px  ;
-					}
-					}
+
 			}
 		}
 	}
@@ -232,9 +220,7 @@
 				text-align: center;
 				color:@lightcolor;
 			}
-	.sections{
-		padding:15px;
-	}
+	
 	.sidebarModule{
 		.panel-body{
 			padding : 15px 15px 0px;
@@ -273,17 +259,34 @@
 	}
 	
 	.panel{
-		background-color : @back;
+		background-color : @darkcolor;
 	}
 	.panel-default{
 		border-color : @darkbackcolor;
+		
+		animation-name:form;
+		animation-duration:2s;
+		animation-iteration-count:1;
+		
 	}
+	@keyframes form{
+	
+			0%{opacity:0;transform:translateX(-20px);}
+			100%{opacity:1;transform:translateX(0px);}
+	}
+	
 	hr{
-		border-color : @darkcolor;
+		border-color : @darkbackcolor;
 	}
 	.form-control{
-		background-color : @color;
+		background-color : @darkcolor;
 		color : @back;
+		border-color:@darkbackcolor;
+	}
+	.btn-info[disabled]{
+		background-color: transparent;
+		border-color:@colorwhite;
+		color:@colorwhite;
 	}
 	.btn-info, .btn-info[disabled], .btn-primary{
 		
@@ -485,7 +488,7 @@
 	.thumbs{
 	    background-color:@darkcolor;
 		color:@colorwhite;
-		    height: 340px;
+		height: 340px;
 	}
 	h3{
 	    color:@colorwhite;
@@ -534,9 +537,6 @@
 			}
 			.servs:nth-child(3)readmore{
 				left:300px;
-				
-			
-				
 			}
 			
 			
@@ -562,6 +562,7 @@
 			margin-top:20px;
 			}
 			/*.carousel-inner {
+			
 					position: relative;
 					width: 100%;
 					height: 340px;
@@ -622,7 +623,7 @@
 						position : absolute;
 						top: 0;
 						left: -1px;
-						width: 354px;
+						width: 368px;
 						height: 200px;
 						text-align : center;
 						overflow : hidden;
@@ -646,6 +647,7 @@
 					.description{
 						overflow:hidden;
 						height:100px;
+						padding:15px;
 					}
 					a.btn.btn-info.read1 {
 									margin-top: 88px;
@@ -653,5 +655,20 @@
 								}
 								
 
+								
+	.anim{
+		animation-name:anim;
+		animation-duration:2s;
+		animation-iteration-count:1;
+		
+	}
+	@keyframes anim{
+	
+			0%{opacity:0;transform:translateX(20px);}
+			100%{opacity:1;transform:translateX(0px);}
+	}	
+
+							
+						
 			
 					
