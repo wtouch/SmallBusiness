@@ -58,7 +58,6 @@ define(['app'], function (app) {
 		
 		
 		$scope.calcDuration = function(type, duration){
-			console.log(type, duration);
 			var curDate = new Date();
 			if(type == 'custom'){
 				var dateS = new Date(duration.start);
@@ -92,61 +91,73 @@ define(['app'], function (app) {
 			
 			$scope.transactionParams.endtDt = endtDt;
 			$scope.transactionParams.startDt = startDt;
-			console.log($scope.transactionParams);
 			//$scope.getTransaction($scope.CurrentPage, $scope.transactionParams);
 		}
 		
 		
-		
+		console.log(uiGridConstants.scrollbars);
 		$scope.transactionList = {
 			enableSorting: true,
 			enableFiltering: true,
 			//showGridFooter: true,
 			showColumnFooter: true,
+			enableHorizontalScrollbar : uiGridConstants.scrollbars.NEVER,
+			enableVerticalScrollbar : uiGridConstants.scrollbars.NEVER,
 			columnDefs: [
 				{ name:'SrNo', 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false
 				},
 				{ name:'account_name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="account_id" class="form-control" ng-change="grid.appScope.filter(\'account_id\', account_id, \'transaction\', \'transactionList\',true)" ng-model="account_id" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
+				filterHeaderTemplate: '<select id="account_id" class="form-control" ng-change="grid.appScope.filter(\'account_id\', account_id, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="account_id" ng-options="item.account_id as item.account_name for item in grid.appScope.accountList">'
 							+'<option value="" selected>Account Name</option>'
 						+'</select>',
 					},
 				{ name:'category', enableSorting: false, 
-					filterHeaderTemplate: '<input id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true)" ng-model="category" placeholder="Category">',
+					filterHeaderTemplate: '<select id="category" class="form-control" ng-change="grid.appScope.filter(\'category\',category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="transaction_category">'
+							+'<option value="" selected>Select Category</option>'
+								+'<option value="type1" >Licence Fees</option>'
+								+'<option value="type2">Agriculture</option>'
+								+'<option value="type3">Commisions</option>'
+								+'<option value="type4">Fees & Chagrges</option>'
+								+'<option value="type5">Investments</option>'
+								+'<option value="type6">Non Profit</option>'
+								+'<option value="type7">Other Income</option>'
+								+'<option value="type8">Proffesional Services</option>'
+								+'<option value="type9">Sales products & services</option>'
+						+'</select>',
 					},
-				{ name:'description',
-				enableSorting: false, enableFiltering: false,
-					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true)" ng-model="description" placeholder="description">'},
-				{ name:'date',
-				enableSorting: false, enableFiltering: false,
-					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true)" ng-model="date" placeholder="date">',
-					},
-				{ name:'type',enableSorting: false,
-					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true)" ng-model="type">'
+					{ name:'type',enableSorting: false,
+					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="type">'
 							+'<option value="" selected>type</option>'
 							+'<option value="expense">Expence</option>'
-							+'<option value="income">Income</option>	'
-						+'</select>', 
+							+'<option value="income">Income</option>'
+						+'</select>',
 					filter: {
 					  //type: uiGridConstants.filter.SELECT,
 					 
 					  options: [ { value: 'income', label: 'Income' }, { value: 'expense', label: 'Expence' }]
 					} },
+				{ name:'description',
+				enableSorting: false, enableFiltering: false,
+					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="description" placeholder="description">'},
+				{ name:'date',
+				enableSorting: false, enableFiltering: false,
+					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="date" placeholder="date">',
+					},
 				{ name:'credit_amount',
 					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\',true)" ng-model="credit_amount" placeholder="Credit Amount">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit}}</div>'
 					},
 				{ name:'debit_amount',
-					filterHeaderTemplate: '<input id="debit_amount" class="form-control" ng-change="grid.appScope.filter(\'debit_amount\', debit_amount, \'transaction\', \'transactionList\',true)" ng-model="debit_amount" placeholder="Debit Amount">',
+					filterHeaderTemplate: '<input id="debit_amount" class="form-control" ng-change="grid.appScope.filter(\'debit_amount\', debit_amount, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="debit_amount" placeholder="Debit Amount">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalDebit}}</div>'
 					},
 				{ name:'balance',
-					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\')" ng-model="balance" placeholder="Balance">',
+					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\', false, grid.appScope.transactionParams)" ng-model="balance" placeholder="Balance">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit - grid.appScope.totalDebit}}</div>'
 					},
 				{ name:'status',
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transaction\', \'transactionList\')" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transaction\', \'transactionList\', false, grid.appScope.transactionParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -183,7 +194,6 @@ define(['app'], function (app) {
 		}
 		
 		$scope.verticalProductSum = function(inputArray, column1, column2, calculation, subobj){
-			console.log(inputArray, column1, column2, calculation, subobj);
 			/* if(!$scope[subobj])  */
 			$scope[subobj] = 0;
 			
@@ -231,7 +241,6 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							console.log(response);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
 						}
 					})
@@ -281,7 +290,6 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							console.log(response);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
 						}
 					})
@@ -325,7 +333,6 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							console.log(response);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
 						}
 					})
@@ -359,7 +366,7 @@ define(['app'], function (app) {
 						joinOn : {
 							account_id : "t0.account_id"
 						},
-						cols : {account_name : "account_name",category:"category"}
+						cols : {account_name : "account_name",category:"transaction_category"}
 					}
 				],
 			cols : ["*"]
@@ -383,7 +390,6 @@ define(['app'], function (app) {
 				})
 			}
 			dataService.get(single,table,$scope.params).then(function(response) {
-				console.log(response);
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
 						modalOptions[subobj] = angular.copy(response.data);
@@ -403,11 +409,12 @@ define(['app'], function (app) {
 				}
 			});
 		}
-		
-		$scope.filter = function(col, value, table, subobj, search){
+		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
+			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, response);
+				angular.extend($scope.params, params, response);
+				console.log($scope.params);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
 		}

@@ -4,7 +4,7 @@
 		<h3 class="text-center" ng-if="!modalOptions.addincome.id">Add Income</h3>
 		<h3 class="text-center" ng-if="modalOptions.addincome.id">Edit Income</h3>
 	</div>
-		<form name="addIncomeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addIncomeForm.$valid">{{modalOptions.addincome}}
+		<form name="addIncomeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addIncomeForm.$valid">
 			<input type="hidden" ng-model="modalOptions.addincome.status" ng-init="modalOptions.addincome.status= 1 "/> 
 			<div class="form-group">
 				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
@@ -46,7 +46,7 @@
 				<div ng-init="modalOptions.getData(false,false,'account','accountList', params, modalOptions)">
 					<label for="account" class="col-sm-2 control-label">Account Name*</label>
 						<div class="col-sm-9">
-							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.account_id" >
+							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.account_id" >
 							<option value="">Select Account</option>
 							</select>	 
 							<span class="help-block" ng-show="addIncomeForm.account.$dirty && addIncomeForm.account.$invalid">
