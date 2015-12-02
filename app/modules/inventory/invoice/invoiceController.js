@@ -161,8 +161,45 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				taxCalculate : function(modalOptions){
+					modalOptions.singleparticular.tax = {};
+					
+					angular.forEach($rootScope.userDetails.config.inventory.taxData.tax, function(value, key){
+						if(modalOptions.taxInfo[value.taxName]){
+							//console.log(value.taxName, value.taxValue, modalOptions.singleparticular.amount);
+							modalOptions.singleparticular.tax[value.taxName] = (modalOptions.singleparticular.tax[value.taxName]) ? modalOptions.singleparticular.tax[value.taxName] + (value.taxValue * modalOptions.singleparticular.amount / 100) : (value.taxValue * modalOptions.singleparticular.amount / 100);
+						}
+					})
+					//console.log(modalOptions.singleparticular.tax);
+				},
+				totalCalculate : function(modalOptions){
+					modalOptions.addinvoice.subtotal = 0;
+					modalOptions.addinvoice.amount = 0;
+					modalOptions.addinvoice.tax = {};
+					console.log(modalOptions.addinvoice.particulars);
+					
+					angular.forEach(modalOptions.addinvoice.particulars, function(value, key){
+						modalOptions.addinvoice.subtotal += value.amount;
+						angular.forEach(value.tax,function(value, key){
+							console.log(value, key);
+							modalOptions.addinvoice.tax[key] = (modalOptions.addinvoice.tax[key]) ? modalOptions.addinvoice.tax[key] + value : value;
+						})
+						
+					})
+					
+					var taxSubtotal = 0;
+					angular.forEach(modalOptions.addinvoice.tax, function(value, key){
+						taxSubtotal += value;
+					})
+					
+					modalOptions.addinvoice.amount = modalOptions.addinvoice.subtotal + taxSubtotal;
+					
+					return modalOptions;
+				},
 				
-			updateData : function(table, input, id){
+				
+				
+				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
 							$scope.getData(false, $scope.currentPage, 'invoice','invoiceList');
@@ -171,10 +208,9 @@ define(['app'], function (app) {
 					
 				},
 				getData : $scope.getData,
-				
-				addToObject : $rootScope.addToObject,
-				removeObject : $rootScope.removeObject
-			};
+					addToObject : $rootScope.addToObject,
+					removeObject : $rootScope.removeObject
+				};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 				

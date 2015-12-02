@@ -1,7 +1,7 @@
 <div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions)">
 	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 	<h3  ng-if="!modalOptions.addinvoice.id" class="text-center">Add Invoice</h3>
-	<h3  ng-if="modalOptions.addinvoice.id" class="text-center">Update Invoice</h3>
+	<h3  ng-if="modalOptions.addinvoice.id" class="text-center" ng-init="modalOptions.totalCalculate(modalOptions)">Update Invoice</h3>
 	<!--<h3>Update Invoice</h3>-->
 </div>
 <div class="modal-body">
@@ -129,18 +129,19 @@
 								
 								<div collapse="!isCollapsed1" style="z-index:2;position:absolute;right:20px;width:155px;top:70px;padding:1px;" class="well"><!--ng-repeat=x in taxList.config.taxData.tax"-->
 									<div class="col-sm-3">
-											<!--{{userDetails.config.inventory.taxData.tax}}-->
-											<div class="form-group" ng-init="taxData=[];modalOptions.singleparticular.tax=taxData">
-												<ul style="list-style-type:none">
-												<li>
-												<div class="checkbox col-sm-3 ">
-													<label ng-repeat="x in userDetails.config.inventory.taxData.tax">
-													  <input type="checkbox" checklist-model="taxData" ng-change=""checklist-value="x"> {{x.displayName}}
-													</label>
-												</div>
+										
+
+										<div class="form-group" ng-init="modalOptions.taxInfo = {}">
+											<ul style="list-style-type:none">
+												<li>{{modalOptions.taxInfo}}
+													<div class="checkbox col-sm-3 ">
+														<label ng-repeat="x in userDetails.config.inventory.taxData.tax">
+														<input type="checkbox" ng-model="modalOptions.taxInfo[x.taxName]" ng-change="modalOptions.taxCalculate(modalOptions)" checklist-value="x"/> {{x.displayName}}
+														</label>
+													</div>
 												</li>
-												</ul> 
-											</div>
+											</ul> 
+										</div>
 									</div>
 								</div>
 							</td>
@@ -149,7 +150,7 @@
 					</table>
 				</div>
 						<div class="col-sm-4">
-								<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular)">+Add This Particular</button>							
+								<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular);modalOptions.totalCalculate(modalOptions);">+Add This Particular</button>							
 						</div>
 				</form>
 		</div>
@@ -176,6 +177,25 @@
 				<td class="text-right">{{x.amount}}</td>
 				<td><a ng-click="modalOptions.removeObject(modalOptions.addinvoice.particulars, $index)"><span class="glyphicon glyphicon-remove"></span></a></td>
 			</tr>
+			<tr>
+					<td colspan="5"></td>
+					<td class="text-right"><strong>Sub Total</strong></td>
+					<td class="text-right">{{ modalOptions.addinvoice.subtotal | number : 2}}</td>
+					<td>{{modalOptions.addinvoice.tax}}</td>
+				</tr>
+				<tr ng-repeat="(key, value) in modalOptions.addinvoice.tax">
+					<td colspan="5"></td>
+					<td class="text-right"><strong>{{key}}</strong></td>
+					<td class="text-right">{{ value  | number : 2}}</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="5"></td>
+					<td class="text-right"><strong>Total</strong></td>
+					<td class="text-right">{{ modalOptions.addinvoice.amount  | number : 2}}</td>
+					<td></td>
+				</tr>
+				
 				
 		</tbody>
 	</table>
