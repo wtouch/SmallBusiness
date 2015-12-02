@@ -178,7 +178,6 @@ define(['app'], function (app) {
 					modalOptions.addinvoice.tax = {};
 					console.log(modalOptions.addinvoice.particulars);
 					
-					
 					angular.forEach(modalOptions.addinvoice.particulars, function(value, key){
 						modalOptions.addinvoice.subtotal += value.amount;
 						angular.forEach(value.tax,function(value, key){
