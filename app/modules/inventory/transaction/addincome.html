@@ -33,29 +33,23 @@
 			<input type="hidden" class="form-control" ng-model="modalOptions.addincome.user_id" ng-init="modalOptions.addincome.user_id = userDetails.id" readonly/>	
 	
 			<div class="form-group">
-				<div ng-init="modalOptions.getData(false,false,'account','accountList', params, modalOptions)">
 					<label for="account" class="col-sm-2 control-label">Account Name*</label>
-						<div class="col-sm-9">
-							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.account_id" >
-							<option value="">Select Account</option>
-							</select>	 
-							<span class="help-block" ng-show="addIncomeForm.account.$dirty && addIncomeForm.account.$invalid">
-								<span ng-show="addIncomeForm.account.$error.required" class="text-danger">required field.</span>
-							</span>	
-						</div>
-				</div>
-			</div>
-			
-			<div class="form-group" ng-if="modalOptions.addincome.account_id">
-				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
-				<div class="col-sm-9">
-					<input type="text" id="balance" name="balance" readonly class="form-control"/>			
+					<div class="col-sm-9">
+						<select id="account" class="form-control" ng-change="modalOptions.getBalance(modalOptions.addincome.account_id, modalOptions)" ng-init="modalOptions.getData(false,false,'account','accountList', false, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.account_id" >
+						<option value="">Select Account</option>
+						</select>
+						<span class="help-block" ng-show="addIncomeForm.account.$dirty && addIncomeForm.account.$invalid">
+							<span ng-show="addIncomeForm.account.$error.required" class="text-danger">required field.</span>
+						</span>	
 					</div>
 			</div>
 			
-			<input type="hidden"  ng-model="modalOptions.addincome.balance"/>
-		
-			<input type="hidden" ng-model="modalOptions.addincome.type" ng-init="modalOptions.addincome.type='income'"/> 
+			<div class="form-group" ng-if="modalOptions.previous_balance">
+				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
+				<div class="col-sm-9">
+					<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" readonly class="form-control"/>			
+					</div>
+			</div>
 			
 			<div class="form-group">	
 				<label  for="date" class="col-sm-2 control-label">Date</label>
@@ -139,12 +133,12 @@
 			<div class="form-group">
 				<label  for="credit_amount" class="col-sm-2 control-label">Amount</label>
 					<div class="col-sm-9">
-						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addincome.credit_amount" ng-change="modalOptions.totalAmount(modalOptions)" name="amount" placeholder="Amount" required />
+						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addincome.credit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.addincome.credit_amount, modalOptions)" name="amount" placeholder="Amount" required />
 						<span class="help-block" ng-show="addIncomeForm.amount.$dirty && addIncomeForm.amount.$invalid">
 							<span ng-show="addIncomeForm.amount.$error.required" class="text-danger">Amount is required.</span>
 							<span ng-show="addIncomeForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 						</span>
-					</div>						
+					</div>					
 			</div>
 			
 			

@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope','$http','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
+    var injectParams = ['$scope','$rootScope','$http','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants','$timeout'];
     
     // This is controller for this view
-	var transactionController = function ($scope,$rootScope,$http,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var transactionController = function ($scope,$rootScope,$http,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,$timeout) {
 		
 		//global scope objects
 		$scope.transactions = true;
@@ -49,7 +49,7 @@ define(['app'], function (app) {
 				name : "Transfer",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/transaction/transfer.html");
+						return $scope.openAddtransaction("modules/inventory/transaction/transfer.html");
 					}
 				}
 			}
@@ -111,7 +111,7 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false
 				},
 				{ name:'account_name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="account_id" class="form-control" ng-change="grid.appScope.filter(\'account_id\', account_id, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="account_id" ng-options="item.account_id as item.account_name for item in grid.appScope.accountList">'
+				filterHeaderTemplate: '<select id="account_id" class="form-control" ng-change="grid.appScope.filter(\'account_id\', account_id, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="account_id" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
 							+'<option value="" selected>Account Name</option>'
 						+'</select>',
 					},
@@ -120,16 +120,16 @@ define(['app'], function (app) {
 					enableSorting: false,
 					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams);grid.appScope.transactionCategory = grid.appScope.inventoryConfig[type]" ng-model="type">'
 							+'<option value="" selected>type</option>'
-							+'<option value="expense">Expence</option>'
+							+'<option value="expense">Expense</option>'
 							+'<option value="income">Income</option>'
 						+'</select>',
 					filter: {
 						//type: uiGridConstants.filter.SELECT,
-						options: [{ value: 'income', label: 'Income' }, { value: 'expense', label: 'Expence' }]
+						options: [{ value: 'income', label: 'Income' }, { value: 'expense', label: 'Expense' }]
 					} 
 				},
 				{ name:'category', enableSorting: false, 
-					filterHeaderTemplate: '<select ng-if="grid.appScope.transactionCategory" id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="account_id" ng-options="item.system_name as item.name for item in grid.appScope.transactionCategory">'
+					filterHeaderTemplate: '<select ng-if="grid.appScope.transactionCategory" id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="category" ng-options="item.system_name as item.name for item in grid.appScope.transactionCategory">'
 							+'<option value="" selected>Category</option>'
 						+'</select>',
 					},
@@ -142,7 +142,7 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="date" placeholder="date">',
 					},
 				{ name:'credit_amount',
-					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\',true)" ng-model="credit_amount" placeholder="Credit Amount">',
+					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\',true,grid.appScope.transactionParams)" ng-model="credit_amount" placeholder="Credit Amount">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit}}</div>'
 					},
 				{ name:'debit_amount',
@@ -153,7 +153,7 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\', false, grid.appScope.transactionParams)" ng-model="balance" placeholder="Balance">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit - grid.appScope.totalDebit}}</div>'
 					},
-				{ name:'status',
+				/*{ name:'status',
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transaction\', \'transactionList\', false, grid.appScope.transactionParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
@@ -171,7 +171,7 @@ define(['app'], function (app) {
 					
 					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'transactions\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
-				}
+				}*/
 			],
 			onRegisterApi: function( gridApi ) {
 			  $scope.gridApi = gridApi;
@@ -232,7 +232,32 @@ define(['app'], function (app) {
 					credit_amount : data.credit_amount,
 					description : data.description 
 				} : {
-					//date : dataService.sqlDateFormate()
+					date : dataService.sqlDateFormate(false, "datetime"),
+					modified_date : dataService.sqlDateFormate(false, "datetime"),
+					type : "income",
+					user_id : $rootScope.userDetails.id,
+					status : 1,
+					credit_amount : 0
+				},
+				
+				getBalance : function(accountId, modalOptions) {
+					//console.log(accountId, modalOptions);
+					var accountParams = {
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status : 1,
+							account_id : accountId
+						},
+						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+					}
+					dataService.get(false,'transaction', accountParams).then(function(response) {
+						console.log(response);
+						modalOptions.previous_balance = response.data[0].previous_balance;
+					})
+					
+				},
+				calcBalance : function(previousBal, amount, modalOptions){
+					modalOptions.addincome.balance = parseFloat(previousBal) + parseFloat(amount);
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -244,7 +269,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
 				},
@@ -349,7 +374,6 @@ define(['app'], function (app) {
 		
 			})
 		}
-		
 		$scope.transactionParams = {
 			where : {
 				status : 1,
@@ -360,9 +384,9 @@ define(['app'], function (app) {
 						joinType : 'INNER JOIN',
 						joinTable : "inventory_account",
 						joinOn : {
-							account_id : "t0.account_id"
+							id : "t0.account_id"
 						},
-						cols : {account_name : "account_name",category:"transaction_category"}
+						cols : {account_name : "account_name", category:"transaction_category"}
 					}
 				],
 			cols : ["*"]

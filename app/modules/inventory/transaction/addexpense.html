@@ -1,70 +1,70 @@
 <div class="main-content">
 	<div class="modal-header" style="margin-bottom: 14px">
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
-		<h3 class="text-center" ng-if="!modalOptions.addexpence.id">Add Expense</h3>
-		<h3 class="text-center" ng-if="modalOptions.addexpence.id">Edit Expense</h3>
+		<h3 class="text-center" ng-if="!modalOptions.addexpense.id">Add Expense</h3>
+		<h3 class="text-center" ng-if="modalOptions.addexpense.id">Edit Expense</h3>
 	</div>
-		<form name="addexpenceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addexpenceForm.$valid">{{modalOptions.addexpence}}
+		<form name="addexpenseForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addexpenseForm.$valid">{{modalOptions.addexpense}}
 			<!-- <div ng-if = "type =='Rent'"> -->
 			
 		 <div class="form-group">
 				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="party" class="col-sm-2 control-label">Party *</label>
 						<div class="col-sm-9">
-							<select id="party_id" class="form-control" ng-model="modalOptions.addexpence.party_id" ng-options="item.id as item.name for item in modalOptions.partyList">
+							<select id="party_id" class="form-control" ng-model="modalOptions.addexpense.party_id" ng-options="item.id as item.name for item in modalOptions.partyList">
 							<option value="">Select Party</option>
 							</select>	 
-							<span class="help-block" ng-show="addexpenceForm.customer.$dirty && addexpenceForm.customer.$invalid">
-								<span ng-show="addexpenceForm.customer.$error.required" class="text-danger">required field.</span>
+							<span class="help-block" ng-show="addexpenseForm.customer.$dirty && addexpenseForm.customer.$invalid">
+								<span ng-show="addexpenseForm.customer.$error.required" class="text-danger">required field.</span>
 							</span>	
 						</div>
 				</div>
 			</div>
-			<input type="hidden"  ng-model="modalOptions.addexpence.balance"/>
-			<input type="hidden" class="form-control" ng-model="modalOptions.addexpence.user_id" ng-init="modalOptions.addexpence.user_id = userDetails.id" readonly/>	
+			<input type="hidden"  ng-model="modalOptions.addexpense.balance"/>
+			<input type="hidden" class="form-control" ng-model="modalOptions.addexpense.user_id" ng-init="modalOptions.addexpense.user_id = userDetails.id" readonly/>	
 			
-			<input type="hidden" ng-model="modalOptions.addexpence.type" ng-init="modalOptions.addexpence.type='expence'"/> 
+			<input type="hidden" ng-model="modalOptions.addexpense.type" ng-init="modalOptions.addexpense.type='expense'"/> 
 			
-			<input type="hidden" ng-model="modalOptions.addexpence.modified_date" ng-init="modalOptions.addexpence.modified_date = modalOptions.expenceDate.date" />
+			<input type="hidden" ng-model="modalOptions.addexpense.modified_date" ng-init="modalOptions.addexpense.modified_date = modalOptions.expenceDate.date" />
 			
-			<input type="hidden" ng-model="modalOptions.addexpence.status" ng-init="modalOptions.addexpence.status = 1" />
+			<input type="hidden" ng-model="modalOptions.addexpense.status" ng-init="modalOptions.addexpense.status = 1" />
 			
 			<div class="form-group">
 				<label for="category" class="col-sm-2 control-label">Category</label>
 				<div class="col-sm-9">
-					<select id="category" class="form-control" ng-model="modalOptions.addexpence.category" ng-options="item.system_name as item.name for item in modalOptions.Category.expense">
+					<select id="category" class="form-control" ng-model="modalOptions.addexpense.category" ng-options="item.system_name as item.name for item in modalOptions.Category.expense">
 					<option value="" selected>Category</option>
 					</select>
 				</div>
-				<span class="help-block" ng-show="addexpenceForm.category.$dirty && addexpenceForm.category.$invalid">
-					<span ng-show="addexpenceForm.category.$error.required" class="text-danger">Required field.</span>
+				<span class="help-block" ng-show="addexpenseForm.category.$dirty && addexpenseForm.category.$invalid">
+					<span ng-show="addexpenseForm.category.$error.required" class="text-danger">Required field.</span>
 				</span>	
 			</div>
 			<div class="form-group">
 				<div ng-init="modalOptions.getData(false,false,'account','accountList', params, modalOptions)">
 					<label for="account" class="col-sm-2 control-label">Account Name*</label>
 						<div class="col-sm-9">
-							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.account_id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addexpence.account_id" >
+							<select id="account" class="form-control" ng-change="modalOptions.getData(false,false,'account','accountList', params, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addexpense.account_id" >
 							<option value="">Select Account</option>
 							</select>	 
-							<span class="help-block" ng-show="addexpenceForm.customer.$dirty && addexpenceForm.customer.$invalid">
-								<span ng-show="addexpenceForm.customer.$error.required" class="text-danger">required field.</span>
+							<span class="help-block" ng-show="addexpenseForm.customer.$dirty && addexpenseForm.customer.$invalid">
+								<span ng-show="addexpenseForm.customer.$error.required" class="text-danger">required field.</span>
 							</span>	
 						</div>
 				</div>
 			</div>
 			
-			<div class="form-group" ng-if="modalOptions.addexpence.account_id">
+			<div class="form-group" ng-if="modalOptions.addexpense.account_id">
 				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
 				<div class="col-sm-9">
 					<input type="text" id="balance" name="balance" readonly class="form-control"/>			
 					</div>
 			</div>
 			
-			<div class="form-group"><!--ng-model="modalOptions.addexpence.date"-->	
+			<div class="form-group"><!--ng-model="modalOptions.addexpense.date"-->	
 				<label  for="date" class="col-sm-2 control-label">Date</label>
 					<div class="col-sm-9">
-						<input type="text" id="date" class="form-control" ng-model="modalOptions.addexpence.date" ng-init="modalOptions.addexpence.date = modalOptions.expenceDate.date"  name="date" readonly 
+						<input type="text" id="date" class="form-control" ng-model="modalOptions.addexpense.date" ng-init="modalOptions.addexpense.date = modalOptions.expenceDate.date"  name="date" readonly 
 						placeholder="date">
 					</div>						
 			</div>
@@ -73,68 +73,68 @@
 				<div class="form-group">
 				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
 					<div class="col-sm-9">
-						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.addexpence.payment_type.type" required>
+						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.addexpense.payment_type.type" required>
 						<option value="" selected>Select Type</option>
 						<option value="Cash" >Cash</option>
 						<option value="Cheque">Cheque</option>
 						<option value="Net Banking">Net Banking</option>
 						<option value="DD">DD</option>
 						</select>
-						<span class="help-block" ng-show="addexpenceForm.payment_type.$dirty && addexpenceForm.payment_type.$invalid">
-							<span ng-show="addexpenceForm.payment_type.$error.required" class="text-danger">Payment Type is required.</span>
+						<span class="help-block" ng-show="addexpenseForm.payment_type.$dirty && addexpenseForm.payment_type.$invalid">
+							<span ng-show="addexpenseForm.payment_type.$error.required" class="text-danger">Payment Type is required.</span>
 						</span>	
 					</div>
 			</div> 
 			
-			<div class="form-group" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque' || modalOptions.addexpence.payment_type.type == 'Net Banking' || modalOptions.addexpence.payment_type.type == 'DD'">
-				<label for="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
-				<label for="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
-				<label for="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
+			<div class="form-group" ng-if="modalOptions.addexpense.payment_type.type == 'Cheque' || modalOptions.addexpense.payment_type.type == 'Net Banking' || modalOptions.addexpense.payment_type.type == 'DD'">
+				<label for="refferance no" ng-if="modalOptions.addexpense.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
+				<label for="refferance no" ng-if="modalOptions.addexpense.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
+				<label for="refferance no" ng-if="modalOptions.addexpense.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
 					<div class="col-sm-9">
-						<input type="text" id="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'Net Banking'" ng-model="modalOptions.addexpence.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
-						<span class="help-block" ng-show="addexpenceForm.refferance_no.$dirty && addexpenceForm.refferance_no.$invalid">
-							<span ng-show="addexpenceForm.refferance_no.$error.required" class="text-danger">Ref No is required.</span>
-							<span ng-show="addexpenceForm.refferance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+						<input type="text" id="refferance no" ng-if="modalOptions.addexpense.payment_type.type == 'Net Banking'" ng-model="modalOptions.addexpense.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<span class="help-block" ng-show="addexpenseForm.refferance_no.$dirty && addexpenseForm.refferance_no.$invalid">
+							<span ng-show="addexpenseForm.refferance_no.$error.required" class="text-danger">Ref No is required.</span>
+							<span ng-show="addexpenseForm.refferance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 						</span>
-						<input type="text" id="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque'" ng-model="modalOptions.addexpence.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
-						<span class="help-block" ng-show="addexpenceForm.cheque_no.$dirty && addexpenceForm.cheque_no.$invalid">
-							<span ng-show="addexpenceForm.cheque_no.$error.required" class="text-danger">Cheque No is required.</span>
-							<span ng-show="addexpenceForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+						<input type="text" id="refferance no" ng-if="modalOptions.addexpense.payment_type.type == 'Cheque'" ng-model="modalOptions.addexpense.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<span class="help-block" ng-show="addexpenseForm.cheque_no.$dirty && addexpenseForm.cheque_no.$invalid">
+							<span ng-show="addexpenseForm.cheque_no.$error.required" class="text-danger">Cheque No is required.</span>
+							<span ng-show="addexpenseForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 							
 						</span>
-						<input type="text" id="refferance no" ng-if="modalOptions.addexpence.payment_type.type == 'DD'" ng-model="modalOptions.addexpence.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
-						<span class="help-block" ng-show="addexpenceForm.DD_no.$dirty && addexpenceForm.DD_no.$invalid">
-							<span ng-show="addexpenceForm.DD_no.$error.required" class="text-danger">DD no required.</span>
-							<span ng-show="addexpenceForm.DD_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+						<input type="text" id="refferance no" ng-if="modalOptions.addexpense.payment_type.type == 'DD'" ng-model="modalOptions.addexpense.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<span class="help-block" ng-show="addexpenseForm.DD_no.$dirty && addexpenseForm.DD_no.$invalid">
+							<span ng-show="addexpenseForm.DD_no.$error.required" class="text-danger">DD no required.</span>
+							<span ng-show="addexpenseForm.DD_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 							
 						</span>
 					</div>
 			</div> 
 			
-			<div class="form-group" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque' || modalOptions.addexpence.payment_type.type == 'Net Banking' || modalOptions.addexpence.payment_type.type == 'DD'">
+			<div class="form-group" ng-if="modalOptions.addexpense.payment_type.type == 'Cheque' || modalOptions.addexpense.payment_type.type == 'Net Banking' || modalOptions.addexpense.payment_type.type == 'DD'">
 				<label for="Date" class="col-sm-2 control-label">Date</label>
 				 <div class="col-sm-9">
-					<input type="text" id="date" class="form-control"   ng-model="modalOptions.addexpence.date" ng-init="modalOptions.addexpence.date = modalOptions.expenceDate.date"  name="date" 
+					<input type="text" id="date" class="form-control"   ng-model="modalOptions.addexpense.date" ng-init="modalOptions.addexpense.date = modalOptions.expenceDate.date"  name="date" 
 					placeholder="date">
 				</div>					
 			</div>
 			
-			<div class="form-group" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque' || modalOptions.addexpence.payment_type.type == 'Net Banking' || modalOptions.addexpence.payment_type.type == 'DD'">
+			<div class="form-group" ng-if="modalOptions.addexpense.payment_type.type == 'Cheque' || modalOptions.addexpense.payment_type.type == 'Net Banking' || modalOptions.addexpense.payment_type.type == 'DD'">
 				<label for="Bank" class="col-sm-2 control-label">Bank Name</label>
 					<div class="col-sm-9">
-						<input type="text" id="Bank" ng-model="modalOptions.addexpence.payment_type.Bank" class="form-control" name="Bank"   placeholder="Enter Bank Name" required/>
-						<span class="text-danger" ng-show="addexpenceForm.Bank.$dirty && addexpenceForm.Bank.$invalid">
-							<span ng-show="addexpenceForm.Bank.$error.required">Bank Name is Required.</span>
+						<input type="text" id="Bank" ng-model="modalOptions.addexpense.payment_type.Bank" class="form-control" name="Bank"   placeholder="Enter Bank Name" required/>
+						<span class="text-danger" ng-show="addexpenseForm.Bank.$dirty && addexpenseForm.Bank.$invalid">
+							<span ng-show="addexpenseForm.Bank.$error.required">Bank Name is Required.</span>
 						</span>	
 					</div>		
 			</div>
 			
-			<div class="form-group" ng-if="modalOptions.addexpence.payment_type.type == 'Cheque' || modalOptions.addexpence.payment_type.type == 'Net Banking' || modalOptions.addexpence.payment_type.type == 'DD'">
+			<div class="form-group" ng-if="modalOptions.addexpense.payment_type.type == 'Cheque' || modalOptions.addexpense.payment_type.type == 'Net Banking' || modalOptions.addexpense.payment_type.type == 'DD'">
 				<label for="Branch" class="col-sm-2 control-label">Branch</label>
 					<div class="col-sm-9">
-						<input type="text" id="Branch" ng-model="modalOptions.addexpence.payment_type.Branch" class="form-control" name="Branch"   placeholder="Enter Branch" required/>
-						<span class="text-danger" ng-show="addexpenceForm.Branch.$dirty && addexpenceForm.Branch.$invalid">
-							<span ng-show="addexpenceForm.Branch.$error.required">Branch Name is Required.</span>
+						<input type="text" id="Branch" ng-model="modalOptions.addexpense.payment_type.Branch" class="form-control" name="Branch"   placeholder="Enter Branch" required/>
+						<span class="text-danger" ng-show="addexpenseForm.Branch.$dirty && addexpenseForm.Branch.$invalid">
+							<span ng-show="addexpenseForm.Branch.$error.required">Branch Name is Required.</span>
 						</span>	
 					</div>		
 			</div>
@@ -142,10 +142,10 @@
 			<div class="form-group">
 				<label  for="credit_amount" class="col-sm-2 control-label">Amount</label>
 					<div class="col-sm-9">
-						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" ng-model="modalOptions.addexpence.credit_amount"  name="credit_amount" placeholder="Amount" required />
-						<span class="help-block" ng-show="addexpenceForm.credit_amount.$dirty && addexpenceForm.credit_amount.$invalid">
-								<span ng-show="addexpenceForm.credit_amount.$error.required" class="text-danger">Required Field</span>
-								<span ng-show="addexpenceForm.credit_amount.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" ng-model="modalOptions.addexpense.credit_amount"  name="credit_amount" placeholder="Amount" required />
+						<span class="help-block" ng-show="addexpenseForm.credit_amount.$dirty && addexpenseForm.credit_amount.$invalid">
+								<span ng-show="addexpenseForm.credit_amount.$error.required" class="text-danger">Required Field</span>
+								<span ng-show="addexpenseForm.credit_amount.$error.pattern" class="text-danger">Enter like 0.00 only</span>
 						</span>
 					</div>						
 			</div>
@@ -153,20 +153,20 @@
 	<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-9">
-						<textarea type="text" id="description" ng-model="modalOptions.addexpence.description" class="form-control" name="description"   placeholder="Enter Description" ng-maxlength="250" required></textarea>
-						<span ng-hide="addexpenceForm.description.$error.maxlength">
-								{{ 250 - modalOptions.addexpence.description.length + " Chars left" }}
+						<textarea type="text" id="description" ng-model="modalOptions.addexpense.description" class="form-control" name="description"   placeholder="Enter Description" ng-maxlength="250" required></textarea>
+						<span ng-hide="addexpenseForm.description.$error.maxlength">
+								{{ 250 - modalOptions.addexpense.description.length + " Chars left" }}
 						</span>	
-						 <span class="help-block" ng-show="addexpenceForm.description.$dirty && addexpenceForm.description.$invalid">
-								<span class="text-danger" ng-show="addexpenceForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-								<span ng-show="addexpenceForm.description.$error.required" class="text-danger">Required Field</span>
+						 <span class="help-block" ng-show="addexpenseForm.description.$dirty && addexpenseForm.description.$invalid">
+								<span class="text-danger" ng-show="addexpenseForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+								<span ng-show="addexpenseForm.description.$error.required" class="text-danger">Required Field</span>
 						</span>
 					</div>		
 			</div>
 			<div class="form-group modal-footer">
-				<div class="col-sm-11"><!--ng-disabled="addexpenceForm.$invalid"-->
-				<button type="submit"  class="btn btn-success" ng-if="modalOptions.addexpence.id"  ng-disabled="addexpenceForm.$invalid" ng-click="modalOptions.updateData('transaction',modalOptions.addexpence,modalOptions.addexpence.id); modalOptions.ok()">Update</button>
-					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addexpence.id" ng-click="modalOptions.postData('transaction',modalOptions.addexpence); modalOptions.ok()" ng-disabled="addexpenceForm.$invalid">Submit</button>
+				<div class="col-sm-11"><!--ng-disabled="addexpenseForm.$invalid"-->
+				<button type="submit"  class="btn btn-success" ng-if="modalOptions.addexpense.id"  ng-disabled="addexpenseForm.$invalid" ng-click="modalOptions.updateData('transaction',modalOptions.addexpense,modalOptions.addexpense.id); modalOptions.ok()">Update</button>
+					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addexpense.id" ng-click="modalOptions.postData('transaction',modalOptions.addexpense); modalOptions.ok()" ng-disabled="addexpenseForm.$invalid">Submit</button>
 					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 				</div>
 			</div>		
