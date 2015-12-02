@@ -6,7 +6,7 @@
 	</div>
 	<div class="modal-body">
 		<form name="addStockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStockForm.$valid">
-				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList', stockParams, modalOptions)">
+				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="party_id" class="col-sm-2 control-label"> party id * </label>
 					<div class="col-sm-9">
 						<select id="party_id" class="form-control" ng-model="modalOptions.stock.party_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
@@ -100,7 +100,7 @@
 				<div class="form-group modal-footer">
 					<div class="col-sm-offset-2 col-sm-9">
 						
-						<button type="submit" ng-if="!modalOptions.stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('stock',modalOptions.stock)"
+						<button type="submit" ng-if="!modalOptions.stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('stock',modalOptions.stock)">
 							<span>Submit</span>
 						</button>
 						
