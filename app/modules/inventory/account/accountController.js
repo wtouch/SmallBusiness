@@ -77,7 +77,7 @@ define(['app'], function (app) {
 
 				
 				{  name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'account\', \'accountList\',true,grid.appScope.accountParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'account\', \'accountList\',true,grid.appScope.statusParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -139,6 +139,12 @@ define(['app'], function (app) {
 		$scope.accountParams = {
 			where : {
 				status : 1,
+				user_id : $rootScope.userDetails.id,
+			},
+			cols : ["*"]
+		}
+		$scope.statusParams = {
+			where : {
 				user_id : $rootScope.userDetails.id,
 			},
 			cols : ["*"]
