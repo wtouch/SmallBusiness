@@ -3,9 +3,8 @@
 .bxslider{ 
 	padding:5px;
 	li{
-		width:100px;
 		.projimg{
-			height:150px;
+			height:125px;
 			overflow:hidden;
 		}
 		img{
@@ -20,25 +19,16 @@
 		.readmore{
 			margin-bottom :10px;
 			margin-top:10px;
-			a{
-				h4
-				{ 
-					margin-right:10px;
-					font: 2em/1.2em Amaranth-Regular;
-					color : @colorwhite;
-					padding : 5px 15px;
-					text-decoration:none;
-					border-color : @colorwhite;
-				}
-				
-			}
 		}
 		
 	}
 }
 
 .homeproject{
+	position : relative;
 	.projectCarousal{
+		width : 450px;
+		margin : 0 auto;
 		.bx-wrapper{
 			border : 3px solid @back;
 			.bx-viewport{
@@ -67,20 +57,25 @@
 		}
 	}
 	.projsnap, .projectnav{
+		position : absolute;
+		width : 240px;
+		height : 310px;
+		top : 0;
 		background : @darkbackcolor;
 		border : 3px solid @back;
 	}
-	.projectCarousal, .projsnap, .projectnav{
-		width : auto;
-		position : static;
-	} 
+	.projectnav{
+		right : 0;
+		border-radius: 0% 50% 50% 0%;
+		overflow : hidden;
+	}
 	.projsnap{
-		display : block;
-		padding:10px;
+		text-align : right;
+		border-radius: 50% 0% 0% 50%;
+		padding :15px;
 		p{
-			margin: 5px;
 			color : @colorwhite;
-			font-size : 17px;
+			font-size : 16px;
 			font-family : Amaranth-Regular; 
 		}
 	}
@@ -216,6 +211,16 @@
 	
 	@media (max-width: 768px){
 		.homeproject{
+			.projectnav, .projsnap,.projectCarousal{
+				width : auto;
+				position : static;
+			}
+			.projectnav, .projsnap{
+				border-radius : 0;
+			}
+			.projsnap{
+				text-align : center;
+			}
 			&::after{
 				display : none;
 				width : 0px;
@@ -234,62 +239,6 @@
 	}
 	
 	@media (min-width: 1024px){
-		.homeproject{
-			position : relative;
-			.projectCarousal{
-				width : 635px;
-				position : relative;
-				z-idex:1000;
-				.projsnap{
-					width : 0px;
-					height : 311px;
-					opacity : 0;
-					background-color : rgba(35, 35, 92, 0.66);
-					border : 3px solid @back;
-					z-index : 51;
-					transform: translateX(0px);
-					transition: all 800ms ease-in;
-					position: absolute;
-					overflow: hidden;
-					top: 0;
-					left: 0;
-				}
-				&:hover{
-					.projsnap{
-						opacity : 1;
-						width : 635px;
-						transform: translateX(0px);
-					}
-				}
-			}
-			.projectnav {
-				position : absolute;
-				width : 300px;
-				height : 311px;
-				top :0;
-				right : 0px;
-				background : @darkbackcolor;
-				border : 3px solid @back;
-				border-radius : 0% 50% 50% 0%;
-				overflow : hidden;
-				.nav-stacked{
-					>li{
-						margin-bottom : 10px;
-						a, a:focus{
-							background : none;
-							margin : 5px;
-							font : 1.2em/1.2em Amaranth-Regular;
-							color: @colorwhite;
-							&:hover{
-								color: @colorwhite;
-								text-decoration:none; 
-								background-color : @back;
-							}
-						}
-					}
-				}
-			}
-		}
 		.projImg{
 			float : left;
 			max-height : 175px;

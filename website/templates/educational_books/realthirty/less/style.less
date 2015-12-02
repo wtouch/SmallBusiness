@@ -15,12 +15,12 @@
 		font-family:'Kirsty';
 		src:url('../fonts/Kirsty.ttf');
 	}
-	@color : #034206;//#B89D6C
-	@lightcolor : #BBBBBB;
+	@color : #034206;
+	@lightcolor : #b478e6;
 	@darkcolor : #02071A;
-	@back : #cc9900;
-	@darkbackcolor : #23235C;
-	@lightbackcolor :#F3EAFF; 
+	@back : #421266;
+	@darkbackcolor : #4A5F0A;
+	@lightbackcolor :#A1C31A; 
 	@colorblack : #02071A;
 	@colorwhite	: #fff;
 	@border: #B8B8C3;
@@ -73,40 +73,57 @@
 		}
 	}
 	body{
-		background-color :@lightbackcolor;
+		background-image: url('../img/bg.jpg');
 	}
 	header
-	{
+	{	
+		margin : 10px auto 10px;
 		.logo{
 			max-height : 100px;
 		}
 		.weblogo, .cntdtl{
 			margin-top : 15px;
 		}
+		.cntdtl{
+			color : @colorwhite;
+		}
 	}
 	.navbar-default {
-		background-color: @darkbackcolor;
-		margin-bottom :0px;
+		background-image: -webkit-linear-gradient(top, @lightbackcolor, @darkbackcolor);
 		border-radius: 0;
 		.navbar-nav{
+			display : inline-block;
+			float : none;
 			> li{
-				float : none;
-				text-transform:uppercase;
+				text-transform : uppercase;
 				position : relative;
-				&:first-child{
-					border-left: 1px solid white;
-				}
-				> a, > a:focus {
+				> a, > a:focus{
 					color :@colorwhite;
-					border-right: 1px solid white;
-					//font : bold 14px/1.5em Arial, Helvetica, sans-serif;
+					padding-top : 30px;
+					padding-bottom : 10px;
+					margin : 2px 4px 2px 0px;
 					font-family:'Amaranth-Regular';
 					position: relative;
 				}
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus
-				{
-					background-color :@back;
-					color: @colorwhite;
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					color: @back;
+					padding-bottom : 40px;
+					border-bottom : 3px solid @back;
+					background-color : transparent;
+					padding-top : 10px;
+				}
+				&.active > a:after, &.active > a:hover:after, &>a:hover:after{
+					content: " ";
+					display: block;
+					width: 28px;
+					height: 25px;
+					position: absolute;
+					background: url(../img/right-icon1.png);
+					bottom: 5px;
+					left: 0px;
+					right: 0px;
+					margin: 0 auto;
+					transition: 300ms;
 				}
 				> ul {
 					transition: all 300ms ease-in;
@@ -118,7 +135,7 @@
 					padding: 12px;
 					list-style: none;
 					text-align: left;
-					top : 50px;
+					top : 75px;
 					border-top-left-radius: 0px;
 					transition : all 500ms ease-in-out;
 					li{
@@ -162,15 +179,12 @@
 		background-color: @back;
 		border-radius : 6px;
 	}
-	.btn-info:hover, .btn-info[disabled]:hover,.readmore a:hover, .readmore a h4:hover,.btn-primary:hover{
+	.btn-info:hover, .btn-info[disabled]:hover,.btn-primary:hover{
 		background-color: @darkbackcolor;
 		text-decoration : none;
 	}
 	a{
 		color:@back;
-	}
-	footer a{
-		color:@colorwhite;
 	}
 	
 	.btn.send{
@@ -266,8 +280,6 @@
 	}
 	.contentModule {
 		.sections{
-			/*border:1px solid @darkbackcolor;*/
-			/*box-shadow:2px 2px 2px @lightcolor;*/
 			border-radius : 5px;
 			img{
 				width : 100%;
@@ -283,7 +295,6 @@
 				}
 				a{
 					font-family: Amaranth-Regular;
-					color : @colorwhite;
 				}
 			}
 		}
@@ -321,56 +332,9 @@
 			padding-bottom : 0px;
 		}
 	}
-	/*.featuretab{
-		
-		position: relative;
-		margin-bottom: 25px;
-		padding : 15px 30px 15px;
-		margin-top: 20px;
-		border-radius: 5px;
-		.nav-tabs{
-			border-bottom: 1px solid transparent;
-			li{
-				a{
-					border: 1px solid @back;
-					font: 2em/1.2em Amaranth-Regular;
-					font-size:18px;
-					&:hover{
-						color: @back;
-						background-color: @colorwhite;
-					}
-				}
-				&.active>a, &.active>a:hover, &.active>a:focus{
-					color: @colorwhite;
-					background-color: @back;
-					border: 1px solid @darkbackcolor;
-				}
-			}
-		}
-	}*/
 	hr{
 		margin :5px 0px;
 	}
-	footer{
-		background-color : @darkbackcolor;
-		padding:5px;
-		.footlink{
-			ul{
-				color :@colorwhite;
-				list-style: none;
-				li{
-					display:inline;
-					border-right:1px solid #ccc;
-					padding:5px;
-					a{
-						color :@colorwhite;
-						font-size:10px;
-					}
-				}
-			}
-		}
-	}
-	
 	.service{
 		margin-bottom: 10px;
 		margin-top: 10px;
@@ -521,8 +485,17 @@
 	}
 	footer{
 		margin-top : 10px;
-		color:@lightcolor;
+		padding-top : 10px;
+		color:@colorwhite;
+		background-color : @darkbackcolor;
 		font-weight : bold;
+		a{
+			color : @back;
+			&:hover{
+				color : @colorwhite;
+				text-decoration : none;
+			}
+		}
 	}
 	@media (min-width: 320px){
 		.item.active, .projnav{
@@ -596,6 +569,20 @@
 			}
 			.navbar{
 				min-height : 1px;
+			}
+		}
+		.navbar-default {
+			.navbar-nav{
+				> li{
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+						padding-bottom : 10px;
+						background-color : transparent;
+						padding-top : 30px;
+					}
+					&.active > a:after, &.active > a:hover:after, &>a:hover:after{
+						display: none;
+					}
+				}
 			}
 		}
 		.navbar-nav {
