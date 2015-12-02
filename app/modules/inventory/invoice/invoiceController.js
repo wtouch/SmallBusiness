@@ -131,11 +131,12 @@ define(['app'], function (app) {
 						user_id : data.user_id,
 						party_id :data.party_id,
 						generated_date : data.generated_date,
-						modified_date : data.modified_date,
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						particulars:data.particulars,
 						remark : data.remark
 					} : {
-						//generated_date : dataService.sqlDateFormate()
+						date : dataService.sqlDateFormate(false,"datetime"),
+					 modified_date : dataService.sqlDateFormate(false,"datetime")
 					},
 					payInvoice : (data) ? {
 					pay_date:data.pay_date
@@ -149,6 +150,10 @@ define(['app'], function (app) {
 							console.log(input);
 							$scope.stockData = {};
 							$scope.stockData.user_id = input.user_id;
+							$scope.stockData.party_id = input.party_id;
+							$scope.stockData.date=input.date;
+							$scope.stockData.stockdate=input.generated_date;
+							$scope.stockData.modified_date=input.modified_date;
 							$scope.stockData.goods_name = input.particulars[0].particular_name;
 							$scope.stockData.quantity = input.particulars[0].quantity;
 							$scope.stockData.price = "-" + input.particulars[0].price;
