@@ -33,7 +33,21 @@
 								height:100%;
 							}
 					}
+					h3{
+						font: 400 36px/48px "Arbutus Slab", sans-serif;	
+					}
+					&.anim1{
+					animation-name:gallery1;
+					animation-duration:3s;
+					aniamtion-iteration-count:1;
+					}
+					
 			
+}
+@keyframes gallery1{
+				0%{opacity:0;transform:translateY(300px);}
+				100%{opacity:1;transform:translateY(0);}
+
 }
 .infrastructure{
 		height:500px;
@@ -109,4 +123,28 @@ div.infrastructure>div.row>div:nth-child(7){
 }
 div.infrastructure>div.row>div:nth-child(9){
 display:none;
+}
+
+.activity{
+			h2{
+				text-align:left;
+				font: 400 36px/48px "Arbutus Slab", sans-serif;
+			}
+			.panel-body{
+					padding:0px !important;
+					>.row>div{
+					padding:0px !important;
+					}
+			}
+			h3{
+				text-align:left;
+				padding:10px;
+				font: 400 26px/48px "Arbutus Slab", sans-serif;
+			}
+			.btn-info{
+						background-color:@back;
+						color:@colorwhite;
+						padding:15px;
+						margin:10px;
+			}
 }

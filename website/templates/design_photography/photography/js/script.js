@@ -14,6 +14,15 @@ $(document).ready(function(){
 			$('nav').removeClass("navbar-fixed-top").addClass('navbar-static-top')
 		}
 	}); 
+	$(window).scroll(function(e){
+		var scrollTop = $(document).scrollTop();
+		if(scrollTop > 800){
+			console.log(scrollTop);
+			$('featured_gallery').addClass("anim1");
+		} else {
+			$('featured_gallery').removeClass("anim1")
+		}
+	}); 
 	
  	// This is for Cookie
 	function getCookie(cname) {
