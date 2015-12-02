@@ -482,16 +482,6 @@
 		color :@back;
 	}
 	@media (min-width: 320px){
-		.logo{
-			float:left;
-		}
-		.cnctinfo{
-			display : none;
-		}
-		.navbar{
-			min-height: 0px;
-			
-		}
 		.item.active, .projnav{
 			height: 120px;
 			overflow: hidden;
@@ -503,15 +493,6 @@
 		}
 	}
 	@media (min-width: 992px){
-		.logo{
-			float:none;
-		}
-		.cnctinfo{
-			display : block;
-		}
-		.navbar{
-			
-		}
 		.projnav{
 			height: 322px;
 		}
@@ -526,12 +507,6 @@
 		}
 	}
 	@media (min-width: 1200px){
-		.logo{
-			float:none;
-		}
-		.cnctinfo{
-			display : block;
-		}
 		.projnav{
 			height: 322px;
 		}
@@ -550,9 +525,9 @@
 		}
 	}
 	.navbar-toggle{
-		background-color : @darkcolor;
+		background-color : @darkbackcolor;
 		border-color : @colorwhite;
-		margin-top : 0px;
+		margin-top : 10px;
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @colorwhite;
@@ -570,13 +545,25 @@
 			margin-bottom : 0px;
 		}
 	}
+	.enquir{
+		display : none;
+		position : fixed;
+		bottom : 10px;
+		right : 10px;
+	}
 	@media (max-width: 540px){
-		header {
+		header{
+			.weblogo, .cntdtl{
+				text-align :center;
+			}
 			.navbar{
 				min-height : 1px;
 			}
 		}
 		.navbar-nav {
 			margin: 0px;
+		}
+		.enquir{
+			display : block;
 		}
 	}

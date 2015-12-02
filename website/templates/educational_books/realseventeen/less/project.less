@@ -76,6 +76,9 @@
 		top:14px;
 		float : none;
 		box-shadow: 0 0 15px;
+		.bx-viewport{
+			min-height : 300px !important;
+		}
 		.carousslider{
 			padding-left: 0px;
 			li{
@@ -274,13 +277,23 @@
 		}
 	}
 	@media (max-width: 768px){
-		.homeproject::after{
-			display : none;
-			width : 0px;
+		.homeproject{
+			.projectCarousal, .projsnap, .projectnav{
+				position : static;
+				width : auto;
+			}
+			.projsnap, .projectnav{
+				border-radius : 0;
+			}
+			.projectCarousal::after{
+				display : none;
+				width : 0px;
+			}
 		}
 		.projectnav, .projsnap, .bx-wrapper{
 			margin-bottom : 10px !important;
 		}
+		
 	}
 	@media (max-width: 320px){
 		.projImg{
