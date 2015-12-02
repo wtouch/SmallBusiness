@@ -41,7 +41,13 @@ define(['app'], function (app) {
 			}
 		]
 		$scope.currentPath = $location.path();
-				
+		
+		var dueDate = new Date();
+		dueDate.setDate(dueDate.getDate() + 10);
+		var dueMonth = dueDate.getMonth() + 1;
+		dueMonth = (dueMonth <= 9) ? '0' + dueMonth : dueMonth;
+		$scope.dueDate = dueDate.getFullYear() + "-" + dueMonth + "-" + dueDate.getDate();
+		
 		$scope.party = {
 			enableSorting: true,
 			enableFiltering: true,
