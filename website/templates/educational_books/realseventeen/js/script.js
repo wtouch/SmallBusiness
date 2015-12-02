@@ -7,6 +7,16 @@ jQuery(document).ready(function() {
 });
 
 $(document).ready(function(){
+	f($(window).width() <= "540"){
+		$(window).scroll(function(e){
+			var scrollTop = $(document).scrollTop();
+			if(scrollTop > 20){
+				$('.navbar-default').removeClass('navbar-static-top').addClass("navbar-fixed-top");
+			} else {
+				$('.navbar-default').removeClass("navbar-fixed-top").addClass('navbar-static-top');
+			}
+		});
+	}
 	var sliderMode, minSlides, maxSlides;
 	//$(window).resize(function(){
 		if($(window).width() <= "480"){

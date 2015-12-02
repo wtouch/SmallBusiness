@@ -22,7 +22,7 @@
 }
 .featuredProperty .bxslider1 li .sliderImg {
   height: 150px;
-  width: 200px;
+  width: 100%;
   overflow: hidden;
   padding: 4px;
   border: 2px solid transparent;
@@ -968,6 +968,14 @@ body {
 .sociallinks ul li:hover {
   transform: translateX(-45px);
 }
+header .logo {
+  max-width: 100%;
+  max-height: 100px;
+}
+header .cntdtl {
+  padding-top: 50px;
+  color: #000000;
+}
 header {
   background-color: #177972;
 }
@@ -987,6 +995,9 @@ header .navbar-default {
   background: -moz-linear-gradient(top, #c0c0c0 -565%, #97310e);
   background: linear-gradient(top, #c0c0c0 -565%, #5f230e);
   border: none;
+}
+header .navbar-default .navbar-nav > li {
+  float: none;
 }
 header .navbar-default .navbar-nav > li > a {
   color: #ffffff;
@@ -1064,6 +1075,12 @@ header .navbar-default .navbar-nav > li:hover > ul {
 header .navbar-default .navbar-collapse {
   padding: 0px;
 }
+.enquir {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
 main {
   background-color: #e49e1c;
 }
@@ -1129,7 +1146,7 @@ main .back .sidebarModule .slide a .slideimg {
   border: 1px #999 solid;
   margin: auto;
   max-height: 200px;
-  max-width: 200px;
+  width: 100%;
 }
 main .back .contentModule .slide a .slideimg:hover,
 main .back .sidebarModule .slide a .slideimg:hover {
@@ -1340,10 +1357,25 @@ footer a:hover {
   }
 }
 @media (max-width: 540px) {
-  header .navbar {
-    min-height: 1px;
-  }
   header .navbar-default .navbar-nav {
     margin: 0px;
+  }
+  .enquir {
+    display: block;
+  }
+  header {
+    margin-bottom: 0px;
+  }
+  header .weblogo,
+  header .cntdtl {
+    text-align: center;
+  }
+  header .cntdtl {
+    padding-top: 5px;
+  }
+  header img.logo {
+    height: 80px;
+    margin: 0px 0px;
+    max-width: 100%;
   }
 }

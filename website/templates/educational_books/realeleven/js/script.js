@@ -7,6 +7,16 @@ jQuery(document).ready(function() {
 });
 
 $(document).ready(function(){
+	if($(window).width() <= "540"){
+		$(window).scroll(function(e){
+			var scrollTop = $(document).scrollTop();
+			if(scrollTop > 20){
+				$('.navbar-default').removeClass('navbar-static-top').addClass("navbar-fixed-top");
+			} else {
+				$('.navbar-default').removeClass("navbar-fixed-top").addClass('navbar-static-top');
+			}
+		});
+	}
 	var sliderMode, minSlides, maxSlides;
 	//$(window).resize(function(){
 		if($(window).width() <= "480"){
@@ -36,6 +46,25 @@ $(document).ready(function(){
 		controls:true, 
 		autoHover:true,
 		speed:1000,
+	});
+	$('.nav.nav-tabs a').on('shown.bs.tab', function(e) {
+		$('#ourassoc .bxslider').bxSlider({
+			mode:'horizontal',
+			slideWidth: 250,
+			minSlides: minSlides,
+			maxSlides: maxSlides,
+			slideMargin: 25,
+			auto: true, 
+			autoDirection:'next',
+			moveSlides: 1,
+			pause:3000,
+			pager:false,
+			pagerType:'full',
+			autoControls: false, 
+			controls:false, 
+			autoHover:true,
+			speed:1000,
+		});
 	});
 	$('.bxslider1').bxSlider({
 		mode: sliderMode,

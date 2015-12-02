@@ -68,6 +68,17 @@
 			}
 		}
 	}
+	header{
+		//margin : 10px auto 20px;
+		.logo{
+			max-width: 100%;
+			max-height : 100px;
+		}
+		.cntdtl{
+			padding-top: 50px;
+			color:@colorblack;
+		}
+	}
 	header{	
 		background-color : @lightbackcolor;
 		.head{
@@ -89,6 +100,7 @@
 			border : none;
 			.navbar-nav{
 				>li{
+				float:none;
 					>a{
 						color : @colorwhite;
 						font-size: 18px;
@@ -169,6 +181,12 @@
 			}
 		}
 	}
+	.enquir{
+		display : none;
+		position : fixed;
+		bottom : 10px;
+		right : 10px;
+	}
 	main{ 
 		background-color:@lightcolor;
 		.back{
@@ -223,7 +241,7 @@
 								border: 1px #999 solid;
 								margin: auto;
 								max-height:200px;
-								max-width:200px;
+								width:100%;
 							}
 							.slideimg:hover{
 								border: 1px #ccc solid
@@ -425,7 +443,6 @@
 	@media (max-width: 540px){
 		header {
 			.navbar{
-				min-height : 1px;
 			}
 			.navbar-default{
 				.navbar-nav {
@@ -433,4 +450,22 @@
 				}
 			}
 		}
+		.enquir{
+			display : block;
+		}
+		header{
+			margin-bottom : 0px;
+			.weblogo, .cntdtl{
+				text-align : center;
+			}
+			.cntdtl{
+				padding-top : 5px;
+			}
+			
 	}
+	header img.logo {
+			height: 80px;
+			margin: 0px 0px;
+			max-width: 100%;
+				}
+}
