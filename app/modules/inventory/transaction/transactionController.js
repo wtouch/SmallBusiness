@@ -219,7 +219,7 @@ define(['app'], function (app) {
 			
 			var modalOptions = {
 				incomeDate : { date : $scope.currentDate},
-				
+				Category : $scope.inventoryConfig,
 				addincome : (data) ? {
 					id : data.id,
 					party_id : data.party_id,
@@ -234,7 +234,6 @@ define(['app'], function (app) {
 				} : {
 					//date : dataService.sqlDateFormate()
 				},
-				
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
@@ -269,7 +268,7 @@ define(['app'], function (app) {
 			
 			var modalOptions = {
 				expenceDate : { date : $scope.currentDate},
-			
+				Category : $scope.inventoryConfig,
 				addexpence : (data) ? {
 					id : data.id,
 					category : data.category,
