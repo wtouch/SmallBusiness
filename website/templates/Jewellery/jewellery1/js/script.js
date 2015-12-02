@@ -137,3 +137,16 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		$scope.makeActive($scope.url);
 		
 	});
+$(document).ready(function(){
+							
+		if(location.pathname == "/"){
+			
+			$(".mid-content").removeClass("anim");
+			
+			$("nav li a[href='/']").click(function(){
+				event.preventDefault();
+				$(".mid-content").addClass("anim");
+				
+			}); 
+		}
+})
