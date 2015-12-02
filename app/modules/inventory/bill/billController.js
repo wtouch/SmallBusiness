@@ -49,14 +49,14 @@ define(['app'], function (app) {
 				{ name:'payment_status',width:100,
 				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\')" ng-model="payment_status" placeholder="search">'
 					+'<option value="" selected>payment status</option>'
-							+'<option value="1">Paid</option>'
-							+'<option value="0">Unpaid</option>	'
-							+'<option value="2">PartialPaid</option>	'
+							+'<option value="Paid">Paid</option>'
+							+'<option value="Unpaid">Unpaid</option>	'
+							+'<option value="PartialPaid">PartialPaid</option>	'
 						+'</select>', 
 					filter: {
 					  //type: uiGridConstants.filter.SELECT,
 					 
-					  options: [ { value: '1', label: 'Paid' }, { value: '0', label: 'Unpaid' }, { value: '2', label: 'PartialPaid' }]
+					  options: [ { value: 'Paid', label: 'Paid' }, { value: 'Unpaid', label: 'Unpaid' }, { value: 'PartialPaid', label: 'PartialPaid' }]
 					} 
             
 				},

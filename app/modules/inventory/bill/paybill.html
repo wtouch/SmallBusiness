@@ -14,7 +14,7 @@
 			<div class="form-group">
 			<label for="account_name" class="col-sm-2 control-label">Account Name* </label>
 				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'account','accountList',accountParams, modalOptions)">
-				<select class="form-control" name="account_name" id="account_name" ng-model="modalOptions.billPayment.account_no"  ng-options="item.id as item.account_name for item in modalOptions.accountList" required>
+				<select class="form-control" name="account_name" id="account_name" ng-model="modalOptions.billPayment.account_id"  ng-options="item.id as item.account_name for item in modalOptions.accountList" required>
 					<option value="" selected>Select Account Name</option>
 				</select>
 				<span class="help-block" ng-show="payBillForm.account_id.$dirty && payBillForm.account_id.$invalid">
