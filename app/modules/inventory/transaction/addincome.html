@@ -4,8 +4,7 @@
 		<h3 class="text-center" ng-if="!modalOptions.addincome.id">Add Income</h3>
 		<h3 class="text-center" ng-if="modalOptions.addincome.id">Edit Income</h3>
 	</div>
-		<form name="addIncomeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addIncomeForm.$valid">
-			<input type="hidden" ng-model="modalOptions.addincome.status" ng-init="modalOptions.addincome.status= 1 "/> 
+		<form name="addIncomeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addIncomeForm.$valid"> 
 			<div class="form-group">
 				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="party" class="col-sm-2 control-label">Party *</label>
@@ -30,8 +29,6 @@
 					<span ng-show="addIncomeForm.category.$error.required" class="text-danger">Required field.</span>
 				</span>	
 			</div>
-			<input type="hidden" class="form-control" ng-model="modalOptions.addincome.user_id" ng-init="modalOptions.addincome.user_id = userDetails.id" readonly/>	
-	
 			<div class="form-group">
 					<label for="account" class="col-sm-2 control-label">Account Name*</label>
 					<div class="col-sm-9">

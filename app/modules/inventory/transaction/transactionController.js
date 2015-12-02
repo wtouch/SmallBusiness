@@ -150,7 +150,7 @@ define(['app'], function (app) {
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalDebit}}</div>'
 					},
 				{ name:'balance',
-					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\', false, grid.appScope.transactionParams)" ng-model="balance" placeholder="Balance">',
+					filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'transaction\', \'transactionList\', true, grid.appScope.transactionParams)" ng-model="balance" placeholder="Balance">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit - grid.appScope.totalDebit}}</div>'
 					},
 			],
@@ -273,22 +273,46 @@ define(['app'], function (app) {
 			};
 			
 			var modalOptions = {
-				expenceDate : { date : $scope.currentDate},
+				expenseDate : { date : $scope.currentDate},
 				Category : $scope.inventoryConfig,
-				addexpence : (data) ? {
+				addexpense : (data) ? {
 					id : data.id,
+					party_id : data.party_id,
+					account_id : data.account_id,
 					category : data.category,
-					customer : data.customer,
 					user_id : data.user_id,
 					balance : data.balance,
+					payment_type : data.payment_type,
 					date : data.date,
-					amount : data.amount,
-					due_amount : data.due_amount,
+					debit_amount : data.debit_amount,
 					description : data.description 
 				} : {
-					date : dataService.sqlDateFormate()
+					date : dataService.sqlDateFormate(false, "datetime"),
+					modified_date : dataService.sqlDateFormate(false, "datetime"),
+					type : "expense",
+					user_id : $rootScope.userDetails.id,
+					status : 1,
+					debit_amount : 0
 				},
-				
+				getBalance : function(accountId, modalOptions) {
+					//console.log(accountId, modalOptions);
+					var accountParams = {
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status : 1,
+							account_id : accountId
+						},
+						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+					}
+					dataService.get(false,'transaction', accountParams).then(function(response) {
+						console.log(response);
+						modalOptions.previous_balance = response.data[0].previous_balance;
+					})
+					
+				},
+				calcBalance : function(previousBal, amount, modalOptions){
+					modalOptions.addexpense.balance = parseFloat(previousBal) - parseFloat(amount);
+				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
@@ -331,8 +355,39 @@ define(['app'], function (app) {
 				} : {
 					//date : dataService.sqlDateFormate()
 				},
-				
-				postData : function(table, input){
+				getBalance1 : function(accountId, modalOptions) {
+					//console.log(accountId, modalOptions);
+					var accountParams = {
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status : 1,
+							account_id : accountId
+						},
+						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+					}
+					dataService.get(false,'transaction', accountParams).then(function(response) {
+						console.log(response);
+						modalOptions.previous_balance1 = response.data[0].previous_balance;
+					})
+					
+				},
+				getBalance2 : function(accountId, modalOptions) {
+					//console.log(accountId, modalOptions);
+					var accountParams = {
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status : 1,
+							account_id : accountId
+						},
+						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+					}
+					dataService.get(false,'transaction', accountParams).then(function(response) {
+						console.log(response);
+						modalOptions.previous_balance2 = response.data[0].previous_balance;
+					})
+					
+				},
+				postData : function(table, input1,input2){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
