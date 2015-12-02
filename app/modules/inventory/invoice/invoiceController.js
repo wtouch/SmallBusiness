@@ -170,7 +170,7 @@ define(['app'], function (app) {
 							modalOptions.singleparticular.tax[value.taxName] = (modalOptions.singleparticular.tax[value.taxName]) ? modalOptions.singleparticular.tax[value.taxName] + (value.taxValue * modalOptions.singleparticular.amount / 100) : (value.taxValue * modalOptions.singleparticular.amount / 100);
 						}
 					})
-					//console.log(modalOptions.singleparticular.tax);
+					console.log(modalOptions.singleparticular.tax);
 				},
 				totalCalculate : function(modalOptions){
 					modalOptions.addinvoice.subtotal = 0;

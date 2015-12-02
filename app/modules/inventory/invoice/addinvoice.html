@@ -6,7 +6,7 @@
 </div>
 <div class="modal-body">
 	<!--THE HIDDEN Generate Date and Due_date and User ID-->
-	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="generalForm.$valid" id="generalForm">
+	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="generalForm.$valid" id="generalForm">{{modalOptions.addinvoice}}
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="party_id" class="col-sm-2 control-label"> Select Party * </label>
@@ -28,6 +28,9 @@
 				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
 			<input type="hidden" ng-model="modalOptions.addinvoice.modified_date" ng-init="modalOptions.addinvoice.modified_date=modalOptions.date">
+			
+			<input type="hidden" ng-model="modalOptions.addinvoice.tax" ng-init="modalOptions.addinvoice.tax = modalOptions.singleparticular.tax">
+			
 		</div>
 	</form>
 	<br>
