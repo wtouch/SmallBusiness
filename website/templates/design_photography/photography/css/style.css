@@ -86,12 +86,11 @@ div.infrastructure > div.row > div:nth-child(1) {
   animation-name: abt1;
   animation-duration: 2s;
   aniamtion-iteration-count: 1;
-  animation-delay: 2s;
 }
 @keyframes abt1 {
   0% {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-100px);
   }
   100% {
     opacity: 1;
@@ -102,44 +101,41 @@ div.infrastructure > div.row > div:nth-child(3) {
   animation-name: abt2;
   animation-duration: 2s;
   aniamtion-iteration-count: 1;
-  animation-delay: 3s;
 }
 @keyframes abt2 {
   0% {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateY(40px);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 div.infrastructure > div.row > div:nth-child(5) {
   animation-name: abt3;
-  animation-duration: 2s;
+  animation-duration: 3s;
   aniamtion-iteration-count: 1;
-  animation-delay: 4s;
 }
 @keyframes abt3 {
   0% {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateY(-40px);
   }
   100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 div.infrastructure > div.row > div:nth-child(7) {
   animation-name: abt4;
-  animation-duration: 2s;
+  animation-duration: 3s;
   aniamtion-iteration-count: 1;
-  animation-delay: 5s;
 }
 @keyframes abt4 {
   0% {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(40px);
   }
   100% {
     opacity: 1;
@@ -169,6 +165,14 @@ div.infrastructure > div.row > div:nth-child(9) {
   color: #ffffff;
   padding: 15px;
   margin: 10px;
+}
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
+  padding-right: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px;
 }
 .services .servdesc {
   padding: 30px;
@@ -541,6 +545,13 @@ footer a {
   color: #ffffff;
   background-color: #ef321f;
 }
+.panel-default .col-xs-12,
+.panel-default .col-sm-12,
+.panel-default .col-md-12,
+.panel-default .col-lg-12 {
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
 .about {
   height: 500px;
   overflow: hidden;
@@ -560,30 +571,27 @@ footer a {
   display: inline;
   width: 300px;
   right: 110px;
-  padding-top: 7%;
+  padding-top: 6%;
 }
 .sociallinks li {
   display: inline;
 }
-.sociallinks .img {
+.sociallinks a {
   border-radius: 50%;
   border: 1px solid transparent;
   display: inline-block;
   height: 58px;
   width: 58px;
   margin: 2px;
+  background-color: rgba(85, 85, 85, 0.25);
+  padding: 10px;
 }
-.sociallinks #img1 {
-  background: url('../img/social.png') -58px -1px;
+.sociallinks a:hover {
+  background-color: rgba(8, 8, 8, 0.54);
 }
-.sociallinks #img2 {
-  background: url('../img/social.png') -111px -1px;
-}
-.sociallinks #img3 {
-  background: url('../img/social.png') -171px -1px;
-}
-.sociallinks #img4 {
-  background: url('../img/social.png') -517px -1px;
+.sociallinks a img {
+  height: 40px;
+  width: 40px;
 }
 .testimonials {
   height: 500px;
@@ -604,6 +612,9 @@ footer a {
 .contact td {
   font: bold 20px/1em Arial, Helvetica, sans-serif;
 }
+.container + div {
+  padding: 0px;
+}
 .contactanim {
   animation-name: contact;
   animation-duration: 3s;
@@ -618,4 +629,7 @@ footer a {
     opacity: 1;
     transform: translateX(0px);
   }
+}
+#googleMap {
+  height: 300px;
 }

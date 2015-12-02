@@ -254,8 +254,12 @@ footer{
 								color:@colorwhite;
 								background-color:@darkcolor;
 						}
+			
 			}
-							
+			.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+				padding-right: 10px !important;
+				padding-left: 10px !important;
+			}						
 }
 
 .about{
@@ -276,35 +280,33 @@ footer{
 			}
 }
 .sociallinks{
-position:absolute;
-	display:inline;
+		position:absolute;
+		display:inline;
 			width:300px;
 			
 			right:110px;
-			padding-top:7%;
+			padding-top:6%;
 			li{
 					display:inline;
 					}
-				.img{
+				a{
 				border-radius:50%;
 				border:1px solid transparent;
 				display:inline-block;
 				height:58px;
 				width:58px;
 				margin:2px;
+				background-color:rgba(85, 85, 85, 0.25);
+				padding:10px;
+				&:hover{
+				background-color:rgba(8, 8, 8, 0.54);
 				}
-				#img1{
-				background:url('../img/social.png') -58px -1px;
+				img{
+					height:40px;
+					width:40px;	
 				}
-				#img2{
-				background:url('../img/social.png') -111px -1px;
 				}
-				#img3{
-				background:url('../img/social.png') -171px -1px;
-				}
-				#img4{
-				background:url('../img/social.png') -517px -1px;
-				}
+				
 }
 .testimonials{
 			
@@ -315,13 +317,14 @@ position:absolute;
 }
 .pad{
 		padding:20px;
+	
 }
 .contact{
 		table{
 				h4{
 						font : bold 20px/1em Arial, Helvetica, sans-serif;
 				}
-			address {
+				address {
 						font : bold 20px/1em Arial, Helvetica, sans-serif;
 					}
 				}
@@ -336,6 +339,11 @@ position:absolute;
 				
 				
 }
+.container{
+		+div{
+						padding:0px;
+				}
+}
 .contactanim{
 					animation-name:contact;
 					animation-duration:3s;
@@ -346,3 +354,8 @@ position:absolute;
 						0%{opacity:0;transform: translateX(-100px);}
 						100%{opacity:1;transform: translateX(0px);}
 		}	
+#googleMap{
+			
+			height:300px;
+			
+}
