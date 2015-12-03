@@ -589,6 +589,7 @@ define(['app'], function (app) {
 			
 			$rootScope.addToObject = function(object, data){
 				object.push(angular.copy(data));
+				data = {};
 			}
 			
 			$rootScope.removeObject = function(object, index){

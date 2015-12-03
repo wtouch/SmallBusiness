@@ -6,7 +6,7 @@
 	<h3 ng-if="modalOptions.addBill.id" ng-init="modalOptions.totalCalculate(modalOptions)">Update Purchase Bill</h3>
 </div>
 <div class="modal-body">
-	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">{{modalOptions.addBill}}
+	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
 	
 		<div class=" form-group">
 			<div ng-init="modalOptions.getData(false,false,'party', 'partyList',billParams,modalOptions)">
@@ -114,7 +114,7 @@
 									<div class="col-sm-3">
 										<div class="form-group" ng-init="modalOptions.taxInfo = {}">
 											<ul style="list-style-type:none">
-												<li>{{modalOptions.taxInfo}}
+												<li>
 													<div class="checkbox col-sm-3 ">
 														<label ng-repeat="x in userDetails.config.inventory.taxData.tax">
 														<input type="checkbox" ng-model="modalOptions.taxInfo[x.taxName]" ng-change="modalOptions.taxCalculate(modalOptions)" checklist-value="x"/> {{x.displayName}}
@@ -129,7 +129,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addbillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addBill.particular, modalOptions.singleparticular);modalOptions.reset(modalOptions.singleparticular);modalOptions.totalCalculate(modalOptions);">	+Add This Particular
+				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addbillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addBill.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">	+Add This Particular
 				</button>
 				<br/>
 			</div>													
@@ -167,13 +167,15 @@
 					<td colspan="5"></td>
 					<td class="text-right"><strong>Sub Total</strong></td>
 					<td class="text-right">{{ modalOptions.addBill.subtotal | number : 2}}</td>
-					<td>{{modalOptions.addBill.tax}}</td>
+					<td></td>
+					<!-- <td ng-repeat="(key, value) in modalOptions.addBill.tax">{{ value  | number : 2}}</td> -->
 				</tr>
 				<tr ng-repeat="(key, value) in modalOptions.addBill.tax">
 					<td colspan="5"></td>
 					<td class="text-right"><strong>{{key}}</strong></td>
 					<td class="text-right">{{ value  | number : 2}}</td>
 					<td></td>
+					<!-- <td ng-repeat="(key, value) in modalOptions.addBill.tax">{{ value  | number : 2}}</td> -->
 				</tr>
 				<tr>
 					<td colspan="5"></td>

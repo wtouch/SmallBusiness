@@ -37,16 +37,16 @@ define(['app'], function (app) {
 				},
 				
 				{ name:'bill_id', width:50,
-					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'bill\', \'billData\')" ng-model="id" placeholder="Bill No">',
+					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'bill\', \'billData\',true)" ng-model="id" placeholder="Bill No">',
 				},
 				 { name:'name',enableSorting: false ,enableFiltering: true
 				}, 
 			
 				{ name:'bill_date',
-					filterHeaderTemplate: '<input id="bill_date" class="form-control" ng-change="grid.appScope.filter(\'bill_date\', bill_date, \'bill\', \'billData\')" ng-model="bill_date" placeholder="search">',
+					filterHeaderTemplate: '<input id="bill_date" class="form-control" ng-change="grid.appScope.filter(\'bill_date\', bill_date, \'bill\', \'billData\',true)" ng-model="bill_date" placeholder="search">',
 				},
 				{ name:'payment_status',width:100,
-				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\')" ng-model="payment_status" placeholder="search">'
+				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\',true)" ng-model="payment_status" placeholder="search">'
 					+'<option value="" selected>payment status</option>'
 							+'<option value="Paid">Paid</option>'
 							+'<option value="Unpaid">Unpaid</option>	'
@@ -60,7 +60,7 @@ define(['app'], function (app) {
             
 				},
 				{ name:'total_amount',width:100, 
-					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\')" ng-model="total_amount" placeholder="search">',
+					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\',true)" ng-model="total_amount" placeholder="search">',
 					cellTemplate : "<span>{{row.entity.total_amount}}</span>",
 					filter:{
 					placeholder: 'Total amount'
@@ -68,12 +68,12 @@ define(['app'], function (app) {
 					}
 				},
 				{ name:'Due_Amount',width:100,
-					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\')" ng-model="total_amount" placeholder="search">',},
+					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\',true)" ng-model="total_amount" placeholder="search">',},
 				
 				{ name:'due_date',width:80,
-					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'bill\', \'billData\')" ng-model="remark" placeholder="search">',},
+					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'bill\', \'billData\',true)" ng-model="remark" placeholder="search">',},
 				{ name:'manage',
-				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\')" ng-model="status">'
+				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\',true)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -230,7 +230,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'bill','billData');
+							$scope.getData(false, $scope.currentPage, 'bill','billData',billParams);
 						}
 					})
 				},
@@ -243,8 +243,12 @@ define(['app'], function (app) {
 					object = sqlDate;
 				},
 				getData: $scope.getData,
-				addToObject : $rootScope.addToObject,
-				reset : $rootScope.reset,
+				//addToObject : $rootScope.addToObject,
+				addToObject : function(object,data,modalOptions){
+					$rootScope.addToObject(object,modalOptions[data]);
+					modalOptions[data] = {};
+				},
+				//reset : $rootScope.reset,
 				removeObject : $rootScope.removeObject
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -284,8 +288,8 @@ define(['app'], function (app) {
 			cols : ["*"]
 		}
 		// For Get (Select Data from DB)
-		$scope.getData = function(single, page, table, subobj, billParams, modalOptions) {
-			$scope.billParams = (billParams) ? billParams : {
+		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
+			$scope.params = (params) ? params : {
 				where : {
 					status : 1,
 					user_id : $rootScope.userDetails.id
@@ -294,14 +298,14 @@ define(['app'], function (app) {
 				cols : ["*"]
 			};
 			if(page){
-				angular.extend($scope.billParams, {
+				angular.extend($scope.params, {
 					limit : {
 						page : page,
 						records : $scope.pageItems
 					}
 				})
 			}
-			dataService.get(single,table,$scope.billParams).then(function(response) {
+			dataService.get(single,table,$scope.params).then(function(response) {
 				console.log(response);
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
@@ -322,17 +326,17 @@ define(['app'], function (app) {
 				}
 			});
 		}
-		$scope.filter = function(col, value, table, subobj, search){
+		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.billParams, response);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.billParams);
+				angular.extend($scope.params, response);
+				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
 		}
 		$scope.orderBy = function(col, value){
-			if(!$scope.billParams.orderBy) $scope.billParams.orderBy = {};
-			$scope.billParams.orderBy[col] = value;
-			$scope.getData(false,$scope.currentPage, 'bill', 'billData', $scope.billParams);
+			if(!$scope.params.orderBy) $scope.params.orderBy = {};
+			$scope.params.orderBy[col] = value;
+			$scope.getData(false,$scope.currentPage, 'bill', 'billData', $scope.params);
 		}
 	};	
 	// Inject controller's dependencies
