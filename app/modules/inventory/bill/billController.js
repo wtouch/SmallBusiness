@@ -67,8 +67,8 @@ define(['app'], function (app) {
 					
 					}
 				},
-				{ name:'Due_Amount',width:100,
-					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\',true)" ng-model="total_amount" placeholder="search">',},
+				{ name:'due_amount',width:100,
+					filterHeaderTemplate: '<input id="due_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\',true)" ng-model="total_amount" placeholder="search">',},
 				
 				{ name:'due_date',width:80,
 					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'bill\', \'billData\',true)" ng-model="remark" placeholder="search">',},
@@ -85,7 +85,7 @@ define(['app'], function (app) {
 					
 					+ '<a type="button" tooltip="Delete bill" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/payBill.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
+					'<a ng-click="grid.appScope.openPaybill(\'modules/inventory/bill/payBill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
 							+
 					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewbill2.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 							+
@@ -128,6 +128,27 @@ define(['app'], function (app) {
 				}
 			}
 		})
+		$scope.getBalance = function(accountId, modalOptions) {
+			//console.log(accountId, modalOptions);
+			var accountParams = {
+				where : {
+					user_id : $rootScope.userDetails.id,
+					status : 1,
+					account_id : accountId
+				},
+				cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+			}
+			dataService.get(false,'transaction', accountParams).then(function(response) {
+				console.log(response);
+				modalOptions.previous_balance = response.data[0].previous_balance;
+			})
+			
+		}
+		
+		$scope.calcBalance = function(previousBal, amount, modalOptions){
+			modalOptions.addincome.balance = parseFloat(previousBal) + parseFloat(amount);
+		}
+				
 		$scope.openModal = function(url,data){
 				var modalDefault = {
 				templateUrl: url, // apply template to modal
@@ -152,13 +173,9 @@ define(['app'], function (app) {
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
-				payBill : (data) ? {
-					account_no : data.account_no,
-					pay_date:data.pay_date
-					
-				} : {
-					//date : dataService.sqlDateFormate()
-				},
+				
+				getBalance : $scope.getBalance,
+				calcBalance : $scope.calcBalance,
 				
 				postData : function(table,input){
 					$rootScope.postData(table, input,function(response){
@@ -202,9 +219,6 @@ define(['app'], function (app) {
 					modalOptions.addBill.subtotal = 0;
 					modalOptions.addBill.total_amount = 0;
 					modalOptions.addBill.tax = {};
-					//console.log(modalOptions.addBill.particular);
-					
-					
 					angular.forEach(modalOptions.addBill.particular, function(value, key){
 						modalOptions.addBill.subtotal += value.amount;
 						angular.forEach(value.tax,function(value, key){
@@ -254,6 +268,62 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
+		
+		
+		
+		$scope.openPaybill = function(url,data){
+			console.log(data)
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+				payBill : (data) ? {
+					reference_id : data.id,
+					bill_id :data.bill_id,
+					party_id : data.party_id,
+					user_id : data.user_id,
+					bill_date : data.bill_date,
+					due_date : data.due_date,
+					total_amount : data.total_amount,
+					remark : data.remark,
+					particular : data.particular,
+					modified_date : dataService.sqlDateFormate(false,"datetime")
+				} : {
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
+					status : 1,
+					type : "bill_payment",
+					user_id : $rootScope.userDetails.id
+				},
+				getBalance : $scope.getBalance,
+				calcBalance : $scope.calcBalance,
+				postData : function(table,input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+				updateData : function(table, input, id){
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+				getData: $scope.getData,
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
+		
+		
+		
 		
 		$scope.setDate = function(date, days, sql){
 			var curDate = new Date(date);
