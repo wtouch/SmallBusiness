@@ -280,23 +280,18 @@ define(['app'], function (app) {
 			var modalOptions = {
 				date : dataService.sqlDateFormate(),
 				payBill : (data) ? {
-					reference_id : data.id,
-					bill_id :data.bill_id,
+					reference_id :data.id,
 					party_id : data.party_id,
 					user_id : data.user_id,
-					bill_date : data.bill_date,
-					due_date : data.due_date,
-					total_amount : data.total_amount,
-					remark : data.remark,
-					particular : data.particular,
-					modified_date : dataService.sqlDateFormate(false,"datetime")
-				} : {
-					date : dataService.sqlDateFormate(false,"datetime"),
+					date : data.bill_date,
+					due_amount : data.due_amount,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					status : 1,
 					type : "bill_payment",
-					user_id : $rootScope.userDetails.id
+				} : {
+					//date : dataService.sqlDateFormate(false,"datetime"),
+					
 				},
 				getBalance : $scope.getBalance,
 				calcBalance : $scope.calcBalance,
@@ -321,9 +316,6 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
-		
-		
-		
 		
 		$scope.setDate = function(date, days, sql){
 			var curDate = new Date(date);
