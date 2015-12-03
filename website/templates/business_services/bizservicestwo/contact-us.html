@@ -1,31 +1,14 @@
 {% autoescape false %}
-	<script src="http://maps.googleapis.com/maps/api/js">
-	</script>
-	<script>
-		function initialize() {
-			var mapProp = {
-				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
-				zoom:12,
-				mapTypeId:google.maps.MapTypeId.ROADMAP
-			};
-			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
-			var marker=new google.maps.Marker({
-				position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
-			});
-			marker.setMap(map);
-		}
-		google.maps.event.addDomListener(window, 'load', initialize);
-	</script>
-	<h2>Contact Us</h2>
+	
+	
 	<div class="row contact">
-		<div class="col-xs-12">
-			<table class="table">
-				<tr>
-					<td>
-						<a href="#">
-							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive" alt="{{data.business_name}}"/>
-						</a>
-					</td>
+	<h2>Contact Us</h2>
+		<div class="col-lg-6">
+		<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive" alt="{{data.business_name}}"/>
+		</div>
+		<div class="col-lg-6">
+			<!-- <table class="table">
+				 <tr>
 					<td>
 						<h4>{{data.contact_profile.contact_person}}</h4>
 						<b>Address</b>
@@ -36,7 +19,7 @@
 							{{data.country|capitalize}}.
 						</address>
 					</td>
-				</tr>
+				</tr> 
 				{%if (data.contact_profile.address1) or (data.contact_profile.address2) or (data.contact_profile.address3) or (data.contact_profile.address4)%}
 				<tr>
 					<td colspan="2">
@@ -84,10 +67,8 @@
 					</td>
 				</tr>
 				{% endif %}
-			</table>
+			</table> -->
 		</div>
-		<div class="col-xs-12">
-			<div id="googleMap"></div>
-		</div>
+		
 	</div>
 {% endautoescape %}
