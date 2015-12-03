@@ -2,7 +2,7 @@
 	<div class="modal-header" style="margin-bottom: 14px">
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3>Pay Invoice</h3>
-	</div>{{modalOptions.invoicePayment}}
+	</div>{{modalOptions.invoiceData}}
 		<form name="payInvoiceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="payInvoiceForm.$valid">
 		
 			<div class="form-group">
@@ -54,7 +54,7 @@
 			<div class="form-group">
 				<label  for="credit_amount" class="col-sm-2 control-label">Amount</label>
 				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
-					<input type="text"  id="credit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.invoicePayment.debit_amount" name="credit_amount" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList" ng-init="modalOptions.invoicePayment.credit_amount = modalOptions.invoicePayment.debit_amount"  required/>
+					<input type="text"  id="credit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.invoicePayment.debit_amount" name="credit_amount" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList" ng-init="modalOptions.invoicePayment.credit_amount = modalOptions.invoiceData."  required/>
 					<span class="help-block" ng-show="payBillForm.amount.$dirty && payBillForm.credit_amount.$invalid">
 						<span ng-show="payBillForm.credit_amount.$error.required" class="text-danger">Amount is required.</span>
 						<span ng-show="payBillForm.credit_amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>

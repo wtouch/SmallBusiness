@@ -37,15 +37,10 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 				},
 				{ name:'invoice_id',  width:150, enableSorting: false ,displayName: "Invoice No",
-				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'invoice_id\', invoice_id, \'invoice\', \'invoiceList\',true)" ng-model="invoice_id" placeholder="Invoice No">',
+				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'invoice_id\', invoice_id, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="invoice_id" placeholder="Invoice No">',
 				},
-				/* { name:'name',enableSorting: false ,enableFiltering: true,
-				filter:{
-					placeholder:'Name'
-					} 
-				},  */
-								{ name:'name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="party_id" ng-options="item.party_id as item.name for item in grid.appScope.partyList">' 
+				{ name:'name',enableSorting: false ,
+				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">' 
 							+'<option value="">Select Party</option>'
 						+'</select>',
 					},
@@ -53,13 +48,13 @@ define(['app'], function (app) {
 					name:'generated_date',
 					width:150, 
 					enableSorting: false,
-					filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true,)" ng-model="generated_date" placeholder="Date">',
+					filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true)" ng-model="generated_date" placeholder="Date">',
 				},
 				{ 
 					name:'due_date', 
 					width:150, 
 					enableSorting: false,
-					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'invoice\', \'invoiceList\',true)" ng-model="due_date" placeholder="Date">',
+					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="due_date" placeholder="Date">',
 				},
 				{ 
 					name:'total_amount',width:80,
@@ -77,7 +72,7 @@ define(['app'], function (app) {
 				{
 					name:'Manage', 
 					enableSorting: false, 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'invoice\', \'invoiceList\')" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'invoice\', \'invoiceList\',true,grid.appScope.manageParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -89,7 +84,7 @@ define(['app'], function (app) {
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/payInvoice.html\')" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-usd"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/payInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-usd"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewinvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewReceipt.html\',row.entity)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
@@ -130,6 +125,7 @@ define(['app'], function (app) {
 			
 			var modalOptions = {
 					date : $scope.currentDate,
+					invoiceData : data,
 					addinvoice : (data) ? {
 						id : data.id,
 						invoice_id : data.invoice_id,
@@ -144,7 +140,14 @@ define(['app'], function (app) {
 					 modified_date : dataService.sqlDateFormate(false,"datetime")
 					},
 					payInvoice : (data) ? {
-					pay_date:data.pay_date
+						id : data.id,
+						invoice_id : data.invoice_id,
+						user_id : data.user_id,
+						party_id :data.party_id,
+						generated_date : data.generated_date,
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+						particulars:data.particulars,
+						remark : data.remark
 					} : {
 						//date : dataService.sqlDateFormate()
 					},
@@ -222,7 +225,10 @@ define(['app'], function (app) {
 					
 				},
 				getData : $scope.getData,
-					addToObject : $rootScope.addToObject,
+					addToObject : function(object,data,modalOptions){
+					$rootScope.addToObject(object,modalOptions[data]);
+					modalOptions[data] = {};
+				},
 					removeObject : $rootScope.removeObject
 				};
 			
@@ -233,6 +239,22 @@ define(['app'], function (app) {
 		$scope.invoiceParams = {
 			where : {
 				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "inventory_party",
+					joinOn : {
+						id : "t0.party_id"
+					},
+					cols : {name : "name"}
+				}
+			],
+			cols : ["*"]
+		}
+		$scope.manageParams = {
+			where : {
 				user_id : $rootScope.userDetails.id
 			},
 			join : [
