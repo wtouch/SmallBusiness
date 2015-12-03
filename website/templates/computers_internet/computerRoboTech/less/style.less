@@ -233,7 +233,8 @@ h1,h3{
 h1{
 	text-transform : uppercase;
 	text-align : center;
-	margin : 50px auto 30px;
+	//margin : 50px auto 30px;
+	margin-top:0px;
 	font: 35px Enriqueta-Regular, Arial, Helvetica, sans-serif;
 }
 h2{
@@ -245,7 +246,7 @@ h4{
 	color : @darkbackcolor;
 }
 p{
-	line-height: 25px;
+	line-height: 30px;
 }
 .btn-info{
 	font-weight: bold;
@@ -280,24 +281,39 @@ p{
 	margin-top: 17px;
 }
 footer{
-	>a:nth-child(1){
-		float:right;
-		font-size:30px;
-		color:@colorwhite;
-		font: 22px/22px "Georgia",Arial,Helvetica,sans-serif;
-		&:hover{
-				color:@color;
-				text-decoration:none;
-			}
-	}
-	padding: 30px 15px;
+		//padding-bottom:0px;
+		>a:nth-child(2){
+		padding-right:20px;
+		margin-top:-40px;
+			float:right;
+			color:@darkcolor;
+			font: 10px/10px "Georgia",Arial,Helvetica,sans-serif;
+			&:hover{
+					color:@colorwhite !important;
+					text-decoration:none !important;
+					>span{
+					color:@color !important;
+					}
+				}
+				>span{
+				display:block;
+				padding-left:15px;
+				
+					color:@colorwhite !important;
+					text-decoration:none !important;
+					font: 20px/20px "Georgia",Arial,Helvetica,sans-serif;
+					
+				}
+		}
+		
+	padding-top: 30px;
 	background-color:@colorblack;
 	margin-top: 10px;
 	color:#666 !important;
 	p{
-		margin: 15px 10px 15px 10px;
+		//margin: 15px 10px 15px 10px;
 		a{
-			color:@color;
+			color:@darkcolor;
 			&:hover{
 				color:@colorwhite;
 			}
@@ -368,12 +384,11 @@ text-decoration:underline !important;}
 		
 		}
 	.lets-talk{
-	padding-bottom:20px;
-		    border-bottom: 1px solid #e6e6e6;
-			p{
-				font-size:20px;
-			
-			}
+	height:200px;
+	width:200px;
+	background-image:url('../img/cont.jpg');
+	background-size:100% 100%;
+	border:2px solid @darkcolor;
 	}
 	.email1{
 		padding-bottom:20px;
@@ -384,8 +399,15 @@ text-decoration:underline !important;}
 		}
 	}
 	.visit{
-		padding-bottom:20px;
+		padding-bottom:10px;
 	 border-bottom: 1px solid #e6e6e6;
+	 >.row>div{
+		padding-left:0px;
+	 }
+	 .logo {
+		width: 150px !important;
+		margin-top: -11px;
+		}	
 	 }
 	.table{
 		
@@ -526,6 +548,14 @@ text-decoration:underline !important;}
 	}
 	.panel{
 				border:none;
+				.btn-info{
+				background: linear-gradient(@color, @color);
+				padding:10px 20px 10px 20px;
+				font-size:20px;
+				&:hover{
+					background:@colorblack !important;
+				}
+				}
 	}
 	.about{
 	
@@ -731,7 +761,8 @@ div.container>div.content
 
 .tit
 {color: #f90;font-size:50px;text-align:center;}
-.b{text-align: justify;}
+.b{text-align: justify;
+line-height:30px;}
 
 
 .content>.row>div{
