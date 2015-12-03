@@ -32,14 +32,6 @@
 .bxslider li .projimg img:hover {
   border: 2px solid #f3cb06;
 }
-.homeproject {
-  position: relative;
-}
-.homeproject .projectCarousal {
-  width: 620px;
-  position: relative;
-  z-idex: 1000;
-}
 .homeproject .projectCarousal .bx-wrapper {
   border: 3px solid #a9973f;
 }
@@ -66,42 +58,26 @@
   height: 400px;
   min-width: 100%;
 }
-.homeproject .projectCarousal .projsnap {
-  padding: 10px;
-  width: 0px;
-  height: 311px;
-  opacity: 0;
-  background-color: rgba(51, 0, 51, 0.78);
+.homeproject .projsnap,
+.homeproject .projectnav {
+  background: #330033;
   border: 3px solid #a9973f;
-  z-index: 51;
-  transform: translateX(0px);
-  transition: all 800ms ease-in;
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  left: 0;
 }
-.homeproject .projectCarousal .projsnap p {
+.homeproject .projectCarousal,
+.homeproject .projsnap,
+.homeproject .projectnav {
+  width: auto;
+  position: static;
+}
+.homeproject .projsnap {
+  display: block;
+  padding: 10px;
+}
+.homeproject .projsnap p {
   margin: 5px;
   color: #ffffff;
   font-size: 17px;
   font-family: Amaranth-Regular;
-}
-.homeproject .projectCarousal:hover .projsnap {
-  opacity: 1;
-  width: 620px;
-  transform: translateX(0px);
-}
-.homeproject .projectnav {
-  position: absolute;
-  width: 300px;
-  height: 311px;
-  top: 0;
-  right: 0px;
-  background: #330033;
-  border: 3px solid #a9973f;
-  border-radius: 0% 50% 50% 0%;
-  overflow: hidden;
 }
 .homeproject .projectnav .nav-stacked > li {
   margin-bottom: 10px;
@@ -224,11 +200,66 @@
     margin-right: 10px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .projImg {
     float: left;
     max-height: 175px;
     margin-right: 10px;
+  }
+  .homeproject {
+    position: relative;
+  }
+  .homeproject .projectCarousal {
+    width: 620px;
+    position: relative;
+    z-idex: 1000;
+  }
+  .homeproject .projectCarousal .projsnap {
+    padding: 10px;
+    width: 0px;
+    height: 311px;
+    opacity: 0;
+    background-color: rgba(51, 0, 51, 0.78);
+    border: 3px solid #a9973f;
+    z-index: 51;
+    transform: translateX(0px);
+    transition: all 800ms ease-in;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+  }
+  .homeproject .projectCarousal:hover .projsnap {
+    opacity: 1;
+    width: 620px;
+    transform: translateX(0px);
+  }
+  .homeproject .projectnav {
+    position: absolute;
+    width: 300px;
+    height: 311px;
+    top: 0;
+    right: 0px;
+    background: #330033;
+    border: 3px solid #a9973f;
+    border-radius: 0% 50% 50% 0%;
+    overflow: hidden;
+  }
+  .homeproject .projectnav .nav-stacked > li {
+    margin-bottom: 10px;
+  }
+  .homeproject .projectnav .nav-stacked > li a,
+  .homeproject .projectnav .nav-stacked > li a:focus {
+    background: none;
+    margin: 5px;
+    font: 1.2em/1.2em Amaranth-Regular;
+    color: #f3cb06;
+  }
+  .homeproject .projectnav .nav-stacked > li a:hover,
+  .homeproject .projectnav .nav-stacked > li a:focus:hover {
+    color: #330033;
+    text-decoration: none;
+    background-color: #a9973f;
   }
 }
 .featuredProperty .bxslider1 {
@@ -781,8 +812,9 @@ body {
   padding: 0px;
 }
 .navbar-toggle {
+  background-color: #f3cb06;
+  border-color: #ffffff;
   border: 1px solid #a9973f;
-  margin-top: 45px;
 }
 .navbar-toggle .icon-bar {
   background-color: #a9973f;
@@ -1055,15 +1087,6 @@ footer .footlink ul li a {
   font-size: 10px;
 }
 @media (min-width: 320px) {
-  .logo {
-    float: left;
-  }
-  .cnctinfo {
-    display: none;
-  }
-  .navbar {
-    min-height: 0px;
-  }
   .item.active,
   .projnav {
     height: 120px;
@@ -1079,12 +1102,6 @@ footer .footlink ul li a {
   }
 }
 @media (min-width: 992px) {
-  .logo {
-    float: none;
-  }
-  .cnctinfo {
-    display: block;
-  }
   .projnav {
     height: 322px;
   }
@@ -1103,12 +1120,6 @@ footer .footlink ul li a {
   }
 }
 @media (min-width: 1200px) {
-  .logo {
-    float: none;
-  }
-  .cnctinfo {
-    display: block;
-  }
   .projnav {
     height: 322px;
   }
@@ -1129,13 +1140,6 @@ footer .footlink ul li a {
     max-width: 802px;
   }
 }
-.navbar-toggle {
-  background-color: #f3cb06;
-  border-color: #ffffff;
-}
-.navbar-toggle .icon-bar {
-  background-color: #ffffff;
-}
 .projdtls {
   color: #ffffff;
   background-color: #330033;
@@ -1147,6 +1151,17 @@ footer .footlink ul li a {
   right: 10px;
 }
 @media (max-width: 540px) {
+  header .navbar-default .navbar-nav > li.active > a,
+  header .navbar-default .navbar-nav > li.active > a:hover,
+  header .navbar-default .navbar-nav > li > a:hover {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  header .navbar-default .navbar-nav > li.active > a:after,
+  header .navbar-default .navbar-nav > li.active > a:hover:after,
+  header .navbar-default .navbar-nav > li > a:hover:after {
+    display: none;
+  }
   header .weblogo,
   header .cntdtl {
     text-align: center;

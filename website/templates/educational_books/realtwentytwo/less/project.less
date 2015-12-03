@@ -20,11 +20,7 @@
 }
 
 .homeproject{
-	position : relative;
 	.projectCarousal{
-		width : 620px;
-		position : relative;
-		z-idex:1000;
 		.bx-wrapper{
 			border : 3px solid @back;
 			.bx-viewport{
@@ -51,45 +47,26 @@
 				}
 			}
 		}
-		.projsnap{
-			padding:10px;
-			width : 0px;
-			height : 311px;
-			opacity : 0;
-			background-color : rgba(51, 0, 51, 0.78);
-			border : 3px solid @back;
-			z-index : 51;
-			transform: translateX(0px);
-			transition: all 800ms ease-in;
-			position: absolute;
-			overflow: hidden;
-			top: 0;
-			left: 0;
-			p{
-				margin: 5px;
-				color : @colorwhite;
-				font-size : 17px;
-				font-family : Amaranth-Regular; 
-			}
-		}
-		&:hover{
-			.projsnap{
-				opacity : 1;
-				width : 620px;
-				transform: translateX(0px);
-			}
+	}
+	.projsnap, .projectnav{
+		background : @darkbackcolor;
+		border : 3px solid @back;
+	}
+	.projectCarousal, .projsnap, .projectnav{
+		width : auto;
+		position : static;
+	} 
+	.projsnap{
+		display : block;
+		padding:10px;
+		p{
+			margin: 5px;
+			color : @colorwhite;
+			font-size : 17px;
+			font-family : Amaranth-Regular; 
 		}
 	}
 	.projectnav {
-		position : absolute;
-		width : 300px;
-		height : 311px;
-		top :0;
-		right : 0px;
-		background : @darkbackcolor;
-		border : 3px solid @back;
-		border-radius : 0% 50% 50% 0%;
-		overflow : hidden;
 		.nav-stacked{
 			>li{
 				margin-bottom : 10px;
@@ -231,11 +208,68 @@
 			margin-right : 10px;
 		}
 	}
-	@media (min-width: 1200px){
+	@media (min-width: 1024px){
 		.projImg{
 			float :left;
 			max-height : 175px;
 			margin-right:10px;
+		}
+		.homeproject{
+			position : relative;
+			.projectCarousal{
+				width : 620px;
+				position : relative;
+				z-idex:1000;
+				.projsnap{
+					padding:10px;
+					width : 0px;
+					height : 311px;
+					opacity : 0;
+					background-color : rgba(51, 0, 51, 0.78);
+					border : 3px solid @back;
+					z-index : 51;
+					transform: translateX(0px);
+					transition: all 800ms ease-in;
+					position: absolute;
+					overflow: hidden;
+					top: 0;
+					left: 0;
+				}
+				&:hover{
+					.projsnap{
+						opacity : 1;
+						width : 620px;
+						transform: translateX(0px);
+					}
+				}
+			}
+			.projectnav {
+				position : absolute;
+				width : 300px;
+				height : 311px;
+				top :0;
+				right : 0px;
+				background : @darkbackcolor;
+				border : 3px solid @back;
+				border-radius : 0% 50% 50% 0%;
+				overflow : hidden;
+				.nav-stacked{
+					>li{
+						margin-bottom : 10px;
+						a, a:focus{
+							background : none;
+							margin : 5px;
+							font : 1.2em/1.2em Amaranth-Regular;
+							color: @color;
+							&:hover{
+								color: @darkcolor;
+								text-decoration:none; 
+								background-color : @back;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	
