@@ -39,12 +39,12 @@
 	<!--THE HIDDEN Generate Date and Due_date and User ID Ends Here-->
 	<div class="row" >
 		<input type="hidden" ng-model="modalOptions.addinvoice.status" ng-init="modalOptions.addinvoice.status = 1">
+		
 		<input type="hidden" class="form-control" ng-model="modalOptions.addinvoice.user_id" ng-init="modalOptions.addinvoice.user_id = userDetails.id" readonly/>
 	
 		<div class="col-sm-12 " ng-init="modalOptions.addinvoice.particulars = (modalOptions.addinvoice.particulars) ? modalOptions.addinvoice.particulars : []">
 		
 			<form name="addInvoiceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addInvoiceForm.$valid" id="addInvoiceForm" ng-if="modalOptions.addinvoice.party_id">
-				
 				<div class="table-responsive">
 					<table class="table table-bordered" >
 						<thead>

@@ -18,17 +18,13 @@
 				
 			</div>
 				
-				<div class="table-responsive" ng-init="getData(false, currentPage, 'invoice','invoiceList', invoiceParams);getData(false,false,'party','partyList', invoiceParams);">
+				<div class="table-responsive" ng-init="getData(false, currentPage, 'invoice','invoiceList', invoiceParams);getData(false,false,'party','partyList', partyParams);">
 				<div ui-grid="invoiceList"></div>
 				</div>
 				<div class="text-center">				
 							<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'invoice','invoiceList', invoiceParams)"></pagination>
 							<pre>Page: {{currentPage}} / {{numPages}}</pre>
 				</div>
-				
-				
-				
-
 		</div>
 	</div>
 </div> 

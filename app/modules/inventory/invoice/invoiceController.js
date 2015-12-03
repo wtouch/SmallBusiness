@@ -39,16 +39,21 @@ define(['app'], function (app) {
 				{ name:'invoice_id',  width:150, enableSorting: false ,displayName: "Invoice No",
 				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'invoice_id\', invoice_id, \'invoice\', \'invoiceList\',true)" ng-model="invoice_id" placeholder="Invoice No">',
 				},
-				{ name:'name',enableSorting: false ,enableFiltering: true,
+				/* { name:'name',enableSorting: false ,enableFiltering: true,
 				filter:{
 					placeholder:'Name'
-					}
-				}, 
+					} 
+				},  */
+								{ name:'name',enableSorting: false ,
+				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="party_id" ng-options="item.party_id as item.name for item in grid.appScope.partyList">' 
+							+'<option value="">Select Party</option>'
+						+'</select>',
+					},
 				{ 
 					name:'generated_date',
 					width:150, 
 					enableSorting: false,
-					filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true)" ng-model="generated_date" placeholder="Date">',
+					filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true,)" ng-model="generated_date" placeholder="Date">',
 				},
 				{ 
 					name:'due_date', 
@@ -245,24 +250,25 @@ define(['app'], function (app) {
 		
 		
 		// For Get (Select Data from DB)
-		$scope.getData = function(single, page, table, subobj, invoiceParams, modalOptions) {
-			$scope.invoiceParams = (invoiceParams) ? invoiceParams : {
+		/*get data */
+		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
+			$scope.params = (params) ? params : {
 				where : {
 					status : 1,
-					user_id : $rootScope.userDetails.id
+					user_id : $rootScope.userDetails.id,
+					type : ($routeParams.party == "vendor") ? "vendor" : "client"
 				},
-				cols : ["*"] 
+				cols : ["*"]
 			};
 			if(page){
-				angular.extend($scope.invoiceParams, {
+				angular.extend($scope.params, {
 					limit : {
 						page : page,
 						records : $scope.pageItems
 					}
 				})
 			}
-			dataService.get(single,table,$scope.invoiceParams).then(function(response) {
-				console.log(response);
+			dataService.get(single,table,$scope.params).then(function(response) {
 				if(response.status == 'success'){
 					if(modalOptions != undefined){
 						modalOptions[subobj] = angular.copy(response.data);
@@ -282,21 +288,22 @@ define(['app'], function (app) {
 				}
 			});
 		}
-		
-		
-		$scope.filter = function(col, value, table, subobj, search){
+		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
+			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.invoiceParams, response);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.invoiceParams);
+				angular.extend($scope.params, params, response);
+				console.log($scope.params);
+				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
 		}
-		$scope.orderBy = function(col, value){
-			if(!$scope.invoiceParams.orderBy) $scope.invoiceParams.orderBy = {};
-			$scope.invoiceParams.orderBy[col] = value;
-			console.log($scope.invoiceParams);
-			$scope.getData(false,$scope.currentPage, 'invoice', 'invoiceList', $scope.invoiceParams);
+		$scope.orderBy = function(col, value, table, subobj){
+			if(!$scope.params.orderBy) $scope.params.orderBy = {};
+			$scope.params.orderBy[col] = value;
+			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
+		
+		
 	};
 		
 	// Inject controller's dependencies
