@@ -18,9 +18,7 @@ define(['app'], function (app) {
 		$scope.transactionView = true;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
-		$scope.today = new Date();
-		$scope.todayDt = $scope.today.getFullYear() + "-" + ($scope.today.getMonth() + 1) + "-" + $scope.today.getDate();
-		$scope.duration = {start : $scope.todayDt};
+		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Income",
@@ -62,6 +60,11 @@ define(['app'], function (app) {
 				$event.preventDefault();
 				$event.stopPropagation();
 				$scope.opened1 = ($scope.opened==true)?false:true;
+			};
+			$scope.open2 = function($event,opened){
+				$event.preventDefault();
+				$event.stopPropagation();
+				$scope.opened2 = ($scope.opened==true)?false:true;
 			};
 		
 		$scope.transactionCategory = [];
@@ -374,7 +377,8 @@ define(['app'], function (app) {
 						status : input.status,
 						balance : input.balance1,
 						debit_amount : input.amount,
-						description : input.description
+						description : input.description,
+						transfer_to : input.transfer_to,
 					}
 					var obj2 = {
 						date : input.date,
@@ -386,7 +390,8 @@ define(['app'], function (app) {
 						status : input.status,
 						balance : input.balance2,
 						credit_amount : input.amount,
-						description : input.description
+						description : input.description,
+						transfer_from : input.transfer_from
 					}
 					console.log(obj1,obj2);
 					$rootScope.postData(table, obj1,function(response){
@@ -430,6 +435,11 @@ define(['app'], function (app) {
 					}
 				],
 			cols : ["*"]
+		}
+		$scope.setTransactionDate = function(transfer){
+			$scope.transactionParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
+			+"'"];
+			console.log($scope.transactionsParams.whereRaw);
 		}
 		
 		// For Get (Select Data from DB)
