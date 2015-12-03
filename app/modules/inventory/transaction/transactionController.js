@@ -21,14 +21,6 @@ define(['app'], function (app) {
 		$scope.today = new Date();
 		$scope.todayDt = $scope.today.getFullYear() + "-" + ($scope.today.getMonth() + 1) + "-" + $scope.today.getDate();
 		$scope.duration = {start : $scope.todayDt};
-		
-		$scope.open = function($event,rentdate){
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope[rentdate] = !$scope[rentdate];
-		};
-		
-		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Income",

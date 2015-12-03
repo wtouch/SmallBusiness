@@ -18,13 +18,12 @@
 				<div class="col-sm-2" ng-if="type == 'daily'">
 					<div class="bottomspace">
 					<label for="date" class="control-label">View Day-wise report</label>
-						<p class="input-group">
-						  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="dailydate" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event,'dailydate')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" />
-								<span class="input-group-btn">
-									<button type="button" class="btn btn-default" ng-click="open($event, 'dailydate')">
-									<i class="glyphicon glyphicon-calendar"></i></button>
-								</span>
-						</p>
+						<div class="input-group">
+						<input type="text" placeholder="YYYY-DD-MM" id="fromDate" name="fromDate" class="form-control" ng-model="transfer.dailyDate" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  ng-required="true" close-text="Close" ng-click="open($event)"/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+					</div>
 					</div>
 				</div>
 			
@@ -61,7 +60,7 @@
 				<div class="col-sm-2"> <!-- ng-init="measurement.fromDate = currDate" -->
 					<label for="fromDate" class="control-label">From Date </label>
 					<div class="input-group">
-						<input type="text" placeholder="YYYY-DD-MM" id="fromDate" name="fromDate" class="form-control" ng-model="measurement.fromDate" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  ng-required="true" close-text="Close" ng-click="open($event)"/>
+						<input type="text" placeholder="YYYY-DD-MM" id="fromDate" name="fromDate" class="form-control" ng-model="transfer.fromDate" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  ng-required="true" close-text="Close" ng-click="open($event)"/>
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
@@ -70,7 +69,7 @@
 				<div class="col-sm-2"> 
 					<label for="toDate" class="control-label">To Date </label>
 					<div class="input-group">
-						<input type="text" placeholder="YYYY-DD-MM" id="toDate" name="toDate" class="form-control"  ng-model="measurement.toDate" ng-disabled="!measurement.fromDate" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open1($event)" ng-change="setMeasurementDate(measurement); sqlDateFormate(measurement.toDate, 'yyyy-MM-dd HH:MM:SS')"/>
+						<input type="text" placeholder="YYYY-DD-MM" id="toDate" name="toDate" class="form-control"  ng-model="transfer.toDate" ng-disabled="!transfer.fromDate" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open1($event)" ng-change="setTransferDate(transfer); sqlDateFormate(transfer.toDate, 'yyyy-MM-dd HH:MM:SS')"/>
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
