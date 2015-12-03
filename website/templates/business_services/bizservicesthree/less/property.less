@@ -1,42 +1,56 @@
-//featured properties
+//featured property
+
 .featuredProperty{
 	
-	.bxslider1{
-		padding-left:0px;
-		list-style :none;
-		li{
-			.verify{
-				width:55%;
-				border:none;
-				margin-left:10px;
-				position:absolute;
-				right : -40px;
-				bottom : -15px;
-				z-index : 999;
-			}
-			border : 1px solid @darkcolor;
-			padding-left : 10px;
-			padding-bottom : 10px;
+	.sections{
+		height : 270px;
+		.bxslider1{
+			padding-left: 15px;
+			list-style :none;
 			h4{
-				margin-left : 25px;
+				padding-left:25px;
 			}
-			.sliderImg{
-				height :165px;
-				width : 195px;
-				overflow : hidden;
-				padding : 4px;
-				border : 4px solid transparent;
-				.slimg{
-					min-height: 150px;
-				}
-				&:hover{
-					border : 4px solid @darkcolor;
-				}
+			.row{
+				padding-bottom : 10px;
 			}
-			
-			.sliderDesc{
+			li{
+				.verify{
+					img{
+						height:30px;
+						width:30px;
+						display:inline-block;
+					}
+				}
+				height : 260px;
+				.sliderImg{
+					height :150px;
+					width : 200px;
+					overflow : hidden;
+					padding : 4px;
+					border : 2px solid transparent;
+					img{
+						min-height: 150px;
+					}
+					&:hover{
+						border : 2px solid @color;
+					}
+				}
+				a{
+					color:@color;
+					font-weight : bold;
+					&:hover{
+						text-decoration : none;
+					}
+					&:hover{
+						color : @lightcolor;
+					}
+				}
+				.head{
+					margin-right : 10px;
+					margin-left : 10px;
+					color : @colorblack;
+				}
 				.table{
-					margin-bottom : 10px;
 					tbody{
 						tr{
 							td{
@@ -51,51 +65,27 @@
 		}
 	}
 }
-
-
-//propertiesList 
-.propertylist{
-	.btn-primary{
-		margin-bottom: 10px;
-	}
-	.panel-default{
-		.sliderImg{
-			height :165px;
-			width : 195px;
-			overflow : hidden;
-			padding : 4px;
-			border : 4px solid transparent;
-			img{
-				min-height: 150px;
-			}
-			&:hover{
-				border : 4px solid @darkcolor;
-			}
-		}
-	}
-	.table{
-		td{
-			border :none;
-			padding: 3px 10px;
-		}
-	}
+	
+//Property
+.property,.proplist{
+	background-color : @back;
+	border : 1px solid @lightbackcolor;
 }
 
-//single property view
 .singleproperty{
 	.property{
-		margin-top : 30px;
-		margin-bottom : 10px;
-		padding: 0px 20px;
-		border : 1px solid @darkbackcolor;
+		margin-bottom : 15px;
+		margin-top : 15px;
+		padding: 10px 15px;
 		h3{
 			border :none;
 		}
 		.table{
+			background-color : @darkbackcolor;
 			tbody{
 				tr{
 					td{
-						border-top : 1px dashed @darkbackcolor;
+						border-top : 1px dashed @lightbackcolor;
 					}
 				}
 			}
@@ -104,14 +94,13 @@
 			height : 175px;
 			width : 195px;
 			overflow : hidden;
-			margin : 0 auto;
-			border : 2px solid @darkcolor;
 			img{
-				min-height: 175px;
+				max-height: 175px;
 			}
 		}
 		.subimg{
 			margin-top: 10px;
+			
 			img{
 				height: 20px;
 				display : inline-block;
@@ -123,15 +112,14 @@
 	.propDetails{
 		ul{
 			li {
-				padding: 3px;
+				padding-left: 10px;
+				padding-bottom: 10px;
 			}
 		}
 		span{
 			height : 20px;
 			width :20px;
 			margin-right: 6px;
-			-webkit-filter: invert(1);
-			filter: invert(1);
 		}
 		.amenity{
 			background: url("../img/sprite_icons.png") transparent;
@@ -184,96 +172,67 @@
 			background-position: -60px -1px;
 		}
 		.table{
-			margin-top: 20px;
 			tbody{
 				tr{
 					th{
-						background-color : @color;
-						color : @colorwhite;
+						background-color : #1F1D01;
 					}
 					td, th{
-						border: 1px solid @color;
+						border: 1px solid @lightbackcolor;
 					}
 				}
 			}
 		}
 	}
-}
-@media (min-width: 320px){
-	.propDetails{
-		ul{
-			li{
-				width: 224px;
+	.btn-primary{
+		margin-bottom : 10px;
+	}
+}	
+	//propertyList 
+	.propertylist{
+			padding: 20px 20px 0px;
+			.btn-primary{
+				margin-right : 4px;
+				margin-bottom: 10px;
+				padding : 6px 10px;
 			}
-		}
-	}
-	.property{
-		.mainimg {
-			img{
-				max-height: 145px;
-				max-width : 100%;
+			.readmore{
+				text-align : center;
+				.viewdtls{
+					margin-right : 10px;
+				}
 			}
-		}
-	}
-	.propertylist .panel-default .readmore a {
-		margin-right: -9px;
-	}
-	.sliderDesc .table-responsive>.table {
-		margin-bottom: 15px;
-	}
-	
-	}
-	
-@media (min-width: 992px){
-	.propDetails{
-		ul{
-			li{
-				width: 224px;
+			.panel{
+				background-color : @darkbackcolor;
 			}
-		}
-	}
-	.property{
-		.mainimg {
-			img {
-				height: 130px;
-				border: 1px solid @colorwhite;
+			.panel-default{
+				border-color : @lightbackcolor;
 			}
-		}
+			.panel-body {
+				padding: 5px 15px 15px;
+			}
+			.table{
+				td{
+					border : none;
+					padding: 1px 10px;
+				}
+			}
 	}
-}
-@media (max-width: 540px){
-	.featuredProperty{
-		.bxslider1{
-			li{
-				.verify{
-					width: 25%;
-					left: 156px;
-					bottom: -16px;
+	@media (min-width: 992px){
+		.propDetails{
+			ul{
+				li{
+					width: 229px;
 				}
 			}
 		}
 	}
-	.propertylist .panel-default .readmore a {
-		margin-right: -9px;
-	}
-	.sliderDesc .table-responsive>.table {
-		margin-bottom: 15px;
-	}
-}
-@media (min-width: 1200px){
-	.propDetails{
-		ul{
-			li{
-				width: 274px;
+	@media (min-width: 1200px){
+		.propDetails{
+			ul{
+				li{
+					width: 229px;
+				}
 			}
 		}
 	}
-	.property{
-		.mainimg {
-			img{
-				max-height: 180px;
-				max-width : 100%;
-			}
-		}
-	}
-}
