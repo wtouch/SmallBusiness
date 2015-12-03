@@ -1,0 +1,415 @@
+.featuretab{
+	margin-top : 20px;
+	h3{
+		margin-top : 15px;
+	}
+	.tab-content{
+		border-top : none;
+		position: relative;
+		margin-bottom: 25px;
+		padding : 1px 15px 15px;
+		border-top-left-radius : 0px;
+		border-top-right-radius : 0px;
+	}
+	.nav-tabs{
+		border-bottom: 1px solid @darkbackcolor;
+		li{
+			a{
+				background-color: @color;
+				color : @back;
+				border-color : @lightcolor;
+				transform: translateZ(0);
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden;
+				position: relative;
+				transition-property: color;
+				-webkit-transition-duration: 0.3s;
+				transition-duration: 0.3s;
+				&:before, &.active>a{
+					content: "";
+					position: absolute;
+					z-index: -1;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					background: @lightcolor;
+					-webkit-transform: scaleX(0);
+					transform: scaleX(0);
+					-webkit-transform-origin: 50%;
+					transform-origin: 50%;
+					-webkit-transition-property: transform;
+					transition-property: transform;
+					-webkit-transition-duration: 0.3s;
+					transition-duration: 0.3s;
+					-webkit-transition-timing-function: ease-out;
+					transition-timing-function: ease-out;
+				}
+				&:hover{
+					background-color: @darkcolor;
+					color : @darkcolor;
+					border-color : @color;
+				}
+				&:hover:before, &:focus:before, &:active:before, &.active>a:hover, &.active>a:focus {
+					-webkit-transform: scaleX(1);
+					transform: scaleX(1);
+				}
+			}
+			&.active>a{
+				color: @darkcolor;
+				background-color: @lightcolor;
+				border: 1px solid @color;
+			}
+		}
+	}
+}
+	.carousel{
+			background:rgba(0, 0, 0, 0.22);;
+			box-shadow:0px 4px 4px  @colorblack;
+			.item{
+					height : 300px;
+					overflow : hidden;
+					img{
+						//margin-left: 50px;
+						min-height : 250px;
+					}
+					h2{
+						color:@darkcolor;
+						text-align:left;
+					}
+					p{
+						color:@colorwhite;
+					}
+				}
+		}
+	.carousel-caption {
+			right:50px;
+			h2{
+				color:@darkcolor;
+				text-align:left;
+			}
+			
+		}
+.carousel-control.left {
+display:none;
+}
+.carousel-control.right {
+display:none;
+}
+    .carousel-inner {
+		//width: 100%;
+		overflow: hidden;
+		
+		   }
+
+.sidebarModule{
+	&.sidemenu{
+		padding:15px 15px 0px;
+		margin-top : 20px;
+		ul{
+			padding : 0;
+			list-style : none;
+			li{
+				margin-bottom : 10px;
+			}
+		}
+		a{
+			display : inline-block;
+			height : 90px;
+			width : 100%;
+			background-size:100% 100%;
+			background-repeat : no-repeat;
+			background-position: center; 
+			text-indent : -9999px;
+			overflow : hidden;
+			border : 2px solid @darkcolor;
+			&.area_converter{
+				background-image : url('../img/area-converter.png');
+			}
+			&.emi_calculator{
+				background-image : url('../img/emi-calculator.png');
+			}
+			&.post_your_property{
+				background-image : url('../img/post-your-property.jpg');
+			}
+			&.post_your_requirement{
+				background-image : url('../img/post-your-requirement.jpg');
+			}
+		}
+	}
+}
+	//aboutus page css
+	.sidebar{
+		.nav-pills{
+		border-top:1px solid @darkbackcolor;
+		border-bottom:1px solid @darkbackcolor;
+			>li{
+				>a, > a:focus{
+					color : @back;
+					font-weight : bold;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+				text-decoration:underline;
+				background-color:transparent;
+				}
+			}
+		}
+	}
+	.about, .contact{
+		color:@darkbackcolor;
+						
+		.table{
+		margin-top:25px;
+			tbody{
+				tr{
+					th,td{
+						color:@darkbackcolor;
+						
+					}
+				}
+			}
+		}
+	}
+	.about{
+		
+		.table{
+			margin-top: 20px;
+		
+		}
+	}
+	.infrastructure{
+		h2{
+			color:@colorwhite;
+			}
+		.thumbnail{
+			height: 395px;
+			background-color:transparent;
+			.infraImg{
+					img{
+						height : 190px;
+						width:500px;
+						padding:2px;
+						&:hover{
+						transform:scale(1.1,1.1);
+						transition:transform 300ms;
+						}
+					}
+				}
+			.caption{
+				padding:0px;
+				height: 110px;
+				color:@darkbackcolor;
+				text-align:left;
+				padding-bottom:0px;
+			}
+			h4{
+			fonts-size:30px;
+			color:@colorwhite;
+			text-transform:uupercase;
+			&:hover{
+					color:@color;
+			}
+			}
+		}
+	}
+	//contactus page css
+	.contact{
+			.table{
+			tbody{
+				tr{
+					th,td{
+						color:@darkbackcolor;
+						border-top:0px;
+						
+						}
+				}
+			}
+			}
+		img{
+			max-height: 125px;
+		}
+		h4{
+			margin-top : 0px;
+		}
+	}
+	#googleMap{
+		height:395px;
+	}
+	
+	//testimonials
+	.testimonial, .featrtesti{
+		blockquote{
+			font-size : inherit;
+			border-left: none;
+		
+			footer{
+				background:none;
+				padding : 0px;
+				cite{
+					font-size : 17px;
+					color : @color;
+				}
+			}
+			&::before{
+				content : '\201c';
+				position : absolute;
+				display : inline-block;
+				top : 5px;
+				left : 0;
+				line-height : 40px;
+				font-family : 'OpenSansRegular';
+				font-size : 55px;
+				border:1px solid @darkcolor;
+			}
+		}
+	}
+	.testimonial{
+		blockquote{
+			padding-left : 15px;
+		
+			footer{
+				img{
+					max-height: 70px;
+					width: 70px;
+					margin-right : 10px;
+				}
+			} 
+		}
+	}
+	.featrtesti{
+		blockquote{
+			padding : 5px 15px;
+				
+			 
+		}
+		img{
+			max-height : 100px;
+			padding : 4px;
+			border : 3px solid @lightcolor;
+			&:hover{
+				border : 3px solid @color;
+			}
+		}
+	} 
+	.gallery{
+		.thumbnail{
+			background-color:transparent;
+		img{
+				height:200px;
+				&:hover{
+						transform:scale(1.1,1.1);
+						}
+			}
+			.caption{
+				h4{
+					text-align:left;
+					text-transform:uppercase;
+						
+				}
+			.description{
+					text-align:left;
+					overflow: hidden;
+					height: 160px;
+					color:@darkbackcolor;
+				}
+			}
+			h4{
+			color:@colorwhite;
+			}
+		}
+	}
+	.bxslider{
+		padding-left:0px;
+		list-style :none;
+		li{
+			.verify{
+				width:55%;
+			    border:none;
+				//margin-left:10px;
+				position:absolute;
+				right : -40px;
+				bottom : -15px;
+				z-index : 999;
+			}
+			padding : 10px;
+			padding-bottom : 10px;
+			h4{
+				margin-left : 25px;
+			}
+			.sliderImg{
+				height :165px;
+				width : 195px;
+				overflow : hidden;
+				padding : 4px;
+				border : 4px solid transparent;
+				.slimg{
+					min-height: 150px;
+				}
+				&:hover{
+					border : 4px solid @darkcolor;
+				}
+			}
+			
+			.sliderDesc{
+				.table{
+					margin-bottom : 10px;
+					tbody{
+						tr{
+							td{
+								border :none;
+								padding: 3px 10px;
+							}
+						}
+					
+					}
+				}
+			}
+		}
+	}
+
+.bx-viewport{
+		min-height : 300px !important;
+		.carousslider{
+			padding-left: 0px;
+			margin-top:100px;
+			li{
+				border:7px solid @lightbackcolor;
+				background-color: @lightbackcolor;
+				border-radius:40px;
+				transition: all 1s ease-in-out ;
+				min-width : 100% !important;
+				img{
+					width : 150%;
+					min-height : 400px;
+				}
+				&:hover{
+					transform: scale(1.1);
+					 border-radius: 40px;
+				}
+				&.item{
+					overflow : hidden;
+					height : 302px;
+				}
+			}
+		}
+	}
+.homeAboutus{
+			h1{
+			text-align:center;
+			}
+			.tagline{
+				text-align:center;
+				font-size:25px;
+				color:@darkcolor;
+			}
+			.tagline1{
+			text-align:center;
+				font-size:25px;
+				color:@darkcolor;
+					padding-bottom:10px;
+			}
+			.description{
+			color:@darkbackcolor;
+			
+			}
+}
