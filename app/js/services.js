@@ -409,7 +409,29 @@ define(['app'], function (app) {
 					
 				});
 			};
-	
+			
+			obj.progressSteps = function(key, value){
+				$rootScope.userDetails.config[key] = value;
+				obj.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
+					obj.setUserDetails(JSON.stringify($rootScope.userDetails));
+					$rootScope.userDetails = obj.parse(obj.userDetails);
+					if(response.status == "success"){
+						if($rootScope.userDetails.config.addbusiness == false){
+							$location.path("/dashboard/business/addbusiness");
+						}else if($rootScope.userDetails.config.addbusinessDetails != true){
+							$location.path("/dashboard/business/adddetails/"+$rootScope.userDetails.config.addbusinessDetails);
+						}else if($rootScope.userDetails.config.addProducts != true){
+							$location.path("/dashboard/business/products/"+$rootScope.userDetails.config.addProducts);
+						}else if($rootScope.userDetails.config.chooseTemplate == false){
+							$location.path("/dashboard/templates/listoftemplates");
+						}else if($rootScope.userDetails.config.requestSite == false){
+							$location.path("/dashboard/websites/requestnewsite");
+						}else if($rootScope.userDetails.config.requestSite == true){
+							$location.path("/dashboard");
+						}
+					}
+				})
+			}
 			
 			// Method for Insert Query
 			obj.post = function (table, object, params) {
