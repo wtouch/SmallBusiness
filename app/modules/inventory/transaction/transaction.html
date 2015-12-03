@@ -58,36 +58,30 @@
 					</div>
 				</div>
 				<div  ng-if="type == 'custom'">
-					<div class="col-sm-2"><!--ng-model="duration.start"-->
-							<div class="bottomspace">
-							<label for="date1" class="control-label"></label><!--ng-change="calcDuration(type,start)"-->
-									<p class="input-group">
-									  <input class="form-control" type="text"  id="date1" name="date1" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="rentdate2" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'rentdate2')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" />
-											<span class="input-group-btn">
-												<button type="button" class="btn btn-default" ng-click="open($event, 'rentdate2')">
-												<i class="glyphicon glyphicon-calendar"></i></button>
-											</span>
-									</p>
-							</div>
+				<div class="col-sm-2"> <!-- ng-init="measurement.fromDate = currDate" -->
+					<label for="fromDate" class="control-label">From Date </label>
+					<div class="input-group">
+						<input type="text" placeholder="YYYY-DD-MM" id="fromDate" name="fromDate" class="form-control" ng-model="measurement.fromDate" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  ng-required="true" close-text="Close" ng-click="open($event)"/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
 					</div>
-					<div class="col-sm-2"><!--ng-model="duration.start"-->
-						<div class="bottomspace">
-							<label for="year" class="control-label"></label>
-								<p class="input-group">
-								  <input class="form-control" type="text" ng-change="calcDuration(type, duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.end" is-open="rentdate3" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'rentdate3')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"/>
-									<span class="input-group-btn">
-										<button type="button" class="btn btn-default" ng-click="open($event, 'rentdate3')">
-										<i class="glyphicon glyphicon-calendar"></i></button>
-									</span>
-								</p>
-						</div>
+				</div>	
+				<div class="col-sm-2"> 
+					<label for="toDate" class="control-label">To Date </label>
+					<div class="input-group">
+						<input type="text" placeholder="YYYY-DD-MM" id="toDate" name="toDate" class="form-control"  ng-model="measurement.toDate" ng-disabled="!measurement.fromDate" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate"  datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-click="open1($event)" ng-change="setMeasurementDate(measurement); sqlDateFormate(measurement.toDate, 'yyyy-MM-dd HH:MM:SS')"/>
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
 					</div>
+				</div>
 				</div>
 				<div class="col-sm-2" ng-if="types == 'income' || types == 'expense'">
 					<label for="category" class="control-label">Select Category</label>
-						<select class="form-control" name="category" id="category" ng-model="filterCategory" ng-options="item.system_name as item.name for item in categoryConfig.category | filter : { 'type' : types}" ng-change="addincome.category = type;changeStatus('category',filterCategory)" required>
-							<option value="" selected>Select Category</option>
-						</select>
+					<select class="form-control" name="category" id="category" ng-model="filterCategory" ng-options="item.system_name as item.name for item in categoryConfig.category | filter : { 'type' : types}" ng-change="addincome.category = type;changeStatus('category',filterCategory)" required>
+						<option value="" selected>Select Category</option>
+					</select>
 				</div>
 			</div>
 			

@@ -1,8 +1,7 @@
 <div class="main-content">
 	<div class="modal-header" style="margin-bottom: 14px">
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
-		<h3 class="text-center" ng-if="!modalOptions.addincome.id">Add Income</h3>
-		<h3 class="text-center" ng-if="modalOptions.addincome.id">Edit Income</h3>
+		<h3 class="text-center">Add Income</h3>
 	</div>
 		<form name="addIncomeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addIncomeForm.$valid"> 
 			<div class="form-group">
@@ -156,9 +155,7 @@
 			
 			<div class="form-group modal-footer">
 				<div class="col-sm-11"><!--ng-disabled="addIncomeForm.$invalid"-->
-					<button type="submit"  class="btn btn-success" ng-if="modalOptions.addincome.id"  ng-disabled="addIncomeForm.$invalid" ng-click="modalOptions.updateData('transaction',modalOptions.addincome,modalOptions.addincome.id); modalOptions.ok()">Update</button>
-					
-					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addincome.id" ng-click="modalOptions.postData('transaction',modalOptions.addincome); modalOptions.ok()">Submit</button>
+					<button type="submit" class="btn btn-success" ng-click="modalOptions.postData('transaction',modalOptions.addincome); modalOptions.ok()">Submit</button>
 					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 				</div>
 			</div>		

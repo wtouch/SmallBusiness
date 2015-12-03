@@ -58,47 +58,21 @@ define(['app'], function (app) {
 		$http.get("modules/inventory/config.json").success(function(response){
 				$scope.inventoryConfig = response;
 			})
-		
-		
-		$scope.calcDuration = function(type, duration){
-			var curDate = new Date();
-			if(type == 'custom'){
-				var dateS = new Date(duration.start);
-				var dateE = new Date(duration.end);
-				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
-				var endtDt = dateE.getFullYear() + "-" + (dateE.getMonth() + 1) + "-" + (dateE.getDate() + 1 );
-			}
-			if(type == 'daily'){
-				var dateS = new Date(duration.start);
-				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
-				var endtDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + (dateS.getDate() + 1);
-			}
-			if(type == 'month'){
-				duration = parseInt(duration);
-				var today = new Date();
-				var start = new Date(today.getFullYear(), (duration - 1), 1);
-				var endt = new Date(today.getFullYear(), (duration - 1) + 1, 0);
-				
-				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
-				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate() + 1);
-			}
-			if(type == 'year'){
-				duration = parseInt(duration);
-				var today = new Date();
-				var start = new Date(duration, 3, 1);
-				var endt = new Date(duration + 1, 3, 1);
-				
-				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
-				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate());
-			}
-			
-			$scope.transactionParams.endtDt = endtDt;
-			$scope.transactionParams.startDt = startDt;
-			//$scope.getTransaction($scope.CurrentPage, $scope.transactionParams);
-		}
+		$scope.today = function() {
+				$scope.date = new Date();
+			};
+			$scope.open = function($event,opened){
+				$event.preventDefault();
+				$event.stopPropagation();
+				$scope.opened = ($scope.opened==true)?false:true;
+			};
+			$scope.open1 = function($event,opened){
+				$event.preventDefault();
+				$event.stopPropagation();
+				$scope.opened1 = ($scope.opened==true)?false:true;
+			};
 		
 		$scope.transactionCategory = [];
-		console.log(uiGridConstants.scrollbars);
 		$scope.transactionList = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -122,6 +96,7 @@ define(['app'], function (app) {
 							+'<option value="" selected>type</option>'
 							+'<option value="expense">Expense</option>'
 							+'<option value="income">Income</option>'
+							+'<option value="transfer">Transfer</option>'
 						+'</select>',
 					filter: {
 						//type: uiGridConstants.filter.SELECT,
@@ -305,7 +280,6 @@ define(['app'], function (app) {
 						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
-						console.log(response);
 						modalOptions.previous_balance = response.data[0].previous_balance;
 					})
 					
@@ -366,7 +340,6 @@ define(['app'], function (app) {
 						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
-						console.log(response);
 						modalOptions.previous_balance1 = response.data[0].previous_balance;
 					})
 					
@@ -382,15 +355,54 @@ define(['app'], function (app) {
 						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
-						console.log(response);
 						modalOptions.previous_balance2 = response.data[0].previous_balance;
 					})
 					
 				},
-				postData : function(table, input1,input2){
-					$rootScope.postData(table, input,function(response){
+				transfer :{
+					date : dataService.sqlDateFormate(false, "datetime"),
+					modified_date : dataService.sqlDateFormate(false, "datetime"),
+					type : "transfer",
+					user_id : $rootScope.userDetails.id,
+					status : 1,
+					amount : 0,
+				},
+				calcBalance : function(previousBal1,previousBal2, amount, modalOptions){
+					modalOptions.transfer.balance1 = parseFloat(previousBal1) - parseFloat(amount);
+					modalOptions.transfer.balance2 = parseFloat(previousBal2) + parseFloat(amount);
+				},
+				postData : function(table, input){  
+					var obj1 = {
+						date : input.date,
+						account_id : input.transfer_from,
+						category : "transfer_from",
+						modified_date :input.modified_date,
+						type : input.type,
+						user_id : input.user_id,
+						status : input.status,
+						balance : input.balance1,
+						debit_amount : input.amount,
+						description : input.description
+					}
+					var obj2 = {
+						date : input.date,
+						account_id : input.transfer_to,
+						category : "transfer_to",
+						modified_date :input.modified_date,
+						type : input.type,
+						user_id : input.user_id,
+						status : input.status,
+						balance : input.balance2,
+						credit_amount : input.amount,
+						description : input.description
+					}
+					console.log(obj1,obj2);
+					$rootScope.postData(table, obj1,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'transaction','transactionList');
+						}
+					})
+					$rootScope.postData(table, obj2,function(response){
+						if(response.status == "success"){
 						}
 					})
 				},
