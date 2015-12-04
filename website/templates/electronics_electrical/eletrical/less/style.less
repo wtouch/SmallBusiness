@@ -1,0 +1,396 @@
+@font-face{
+	font-family:'negotiate_free';
+	src:url('../fonts/negotiate_free.ttf');
+}
+@font-face{
+	font-family:'Enriqueta-Regular';
+	src:url('../fonts/Enriqueta-Regular.otf');
+}
+@font-face{
+		font-family:'ArbutusSlab-Regular';
+		src:url('../fonts/ArbutusSlab-Regular.ttf');
+}
+//text color shade
+	 @color:#228B22; // #C4DE9B green
+	 @lightcolor : #d3eaa2; //sky green
+	 @darkcolor : #EF321F; //red
+
+	@back : #464646; // green color
+	@darkbackcolor : #3a322f;   //dark cof color
+	@lightbackcolor :rgba(0, 0, 0, 0.74);   //faint pink color
+	
+//common color shade
+	@colorblack : #000000;
+	@colorwhite	: #ffffff;
+	@import "general.less";
+	@import "service.less";
+	@import "project.less";
+	@import "product.less";
+	
+	
+	header{
+			position : relative;
+			background-image:url('../img/mob2.jpg');
+			background-size:100% 100%;
+			background-repeat:no-repeat;
+			height:520px;
+			.logo{
+					position:absolute;
+					height:120px;
+					width:120px;
+					//margin-top:5%;
+					border-radius:50%;
+					border:2px solid @colorwhite;
+					animation-name:logo;
+					animation-duration:5s;
+					animation-iteration-count:1;
+					
+			}
+			h1{
+			margin-top:30px;
+			font: 400 34px/48px "Arbutus Slab", sans-serif;
+			text-transform:uppercase;
+			color:@colorwhite;
+			}
+			.tagline{
+					font: 400 30px/30px "Arbutus Slab", sans-serif;
+					color:@colorwhite;
+					font-size:50px;
+					line-height:50px;
+					padding:30px;
+					}
+	}
+@keyframes logo{
+	0%{margin-left:0px;}
+	30%{margin-left:52%;margin-top:27%;}
+	60%{margin-left:-62%;margin-top:27%;}
+	100%{margin-left:0%;margin-top:0%;}
+	
+}
+	
+	.c1{
+		border:1px solid @colorwhite;
+				color:@colorwhite;
+				background-color:transparent;
+				text-transform:uppercase;
+						&:hover{
+						color:@colorwhite;
+						background-color:@darkcolor;
+						}
+	}
+	
+	h1,h2,h3{
+				color:@colorblack;
+				text-align:center;
+	}
+	.align{
+	text-align:left;
+	}
+	container-fluid {
+    padding-right: -15px;
+    padding-left: -15px;
+    margin-right: auto;
+    margin-left: auto;
+	}
+	.navbar-default {
+		position:absolute;
+		bottom:0px;
+		background: @lightbackcolor;
+		opacity:0.9;
+		margin-bottom:-1px;
+		border:none;
+		.navbar-nav{
+			> li{
+					padding:-5px;
+				float:none;
+				margin-bottom:0px;
+				position : relative;
+				> a {
+					color : @colorwhite;
+					font : bold 15px/1em Arial, Helvetica, sans-serif;
+					position : relative;
+					text-transform : uppercase;
+					padding:35px;
+					padding-right:10px;
+					
+				}
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					background:none;
+					color : @lightcolor;
+					
+				}
+				> ul{
+					display: none;
+					position: absolute;
+					width: 245px;
+					z-index: 999;
+					background-color:  @darkcolor;
+					//margin-top:22px;
+					padding: 2px;
+					list-style: none;
+					text-align: left;
+					>li{
+						padding : 10px;
+						text-transform : uppercase;
+						position : relative;
+						>a{
+							color : @colorwhite;
+							&:hover{
+								color : @colorwhite;
+							}
+						}
+						&:hover{
+						background-color:@darkcolor;
+							-webkit-transition: all 0.4s;
+						}
+						ul{
+							display:none;
+							//background : linear-gradient(@back, @color);
+							background-color: @colorwhite;
+							list-style: none;
+							display : none;
+							color:@darkcolor;
+							position : absolute;
+							left: 150px;
+							width: 180px;
+							padding : 2px;
+							li{
+								padding : 10px;
+								a{
+									color : @darkcolor;
+								}
+								&:hover{
+									a{
+										color : @colorwhite;
+									}
+									background-color:@lightbackcolor;
+									
+								}
+							}
+						}
+						&:hover{
+							ul{
+								display : block;
+							}
+						}
+					}
+				}
+				&:hover > ul {
+					display: block;
+				}
+			}
+		}
+		.navbar-collapse{
+				margin-left: 137px;
+					margin-right: 137px;
+		}
+	}
+	 .homeAboutus{
+					
+					text-align:center;
+					background-color:@darkbackcolor;
+					margin-top:-20px;
+					
+					h1{
+								padding:85px;
+								font: 400 36px/48px "Arbutus Slab", sans-serif;
+								color:@colorwhite;
+					}
+					.tagline{
+							color:@colorwhite;
+							margin-top:-76px;
+					}
+					.tagline1{
+								color:@colorwhite;
+					}
+					p{
+						color:@colorwhite;
+						text-align:justify;
+					}
+	 }
+	 
+	 .row{
+		margin:0px;
+	 }
+	.btn{
+			border-radius:0px !important; 
+	}
+	.btn-info{
+	
+	border:1px solid @colorblack;
+	color:@colorblack;
+	background-color:transparent;
+	text-transform:uppercase;
+				&:hover{
+				color:@colorwhite;
+				background-color:@darkcolor;
+				}
+	}
+.bg1{
+		height:400px;
+		width:100%;
+		background-image:url('../img/bg3.jpg');
+		background-size:100% 100%;
+}
+footer{
+			position:relative;
+			background-image:url('../img/bg1.png');
+			height:210px;
+			p{
+					padding-top:9%;
+			}
+			a{
+					color:@colorblack;
+			}
+}
+.panel-default{
+				color:@colorwhite;
+				background-color:@darkbackcolor;
+				border:none;
+				.form-control{
+							background-color:@darkbackcolor;
+						    display: inline-block;
+							//width: auto;
+							width:100%;
+							margin:5px;
+							vertical-align: middle;
+				}
+				input{
+						width:100%;
+						height:65px;
+				}
+				textarea{
+							height:246px;
+				}
+				.form-group{
+							display:inline-block;
+				}
+				h3{
+						font: 400 36px/48px "Arbutus Slab", sans-serif;
+						color:@colorwhite;
+				}
+				.btn{
+							border-radius:0px !important; 
+					}
+			.btn-info{
+						border:1px solid @colorwhite;
+						color:@colorwhite;
+						background-color:transparent;
+						text-transform:uppercase;
+						padding:15px;
+						margin:10px;
+						&:hover{
+								color:@colorwhite;
+								background-color:@darkcolor;
+						}
+			
+			}
+			.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+				padding-right: 10px !important;
+				padding-left: 10px !important;
+			}						
+}
+
+.about{
+			height:500px;
+			overflow:hidden;
+			padding:20px;
+			img{
+					height:200px;
+					width:200px;
+					border:1px solid @colorblack;
+					horizontal-align:center;
+					
+			}
+			h4{
+					text-align:center;
+					font:400 26px/48px "Arbutus Slab", sans-serif;
+				
+			}
+			center{
+						text-align:justify;
+						font:400 18px/20px "Arbutus Slab", sans-serif;
+
+			
+			}
+}
+.sociallinks{
+		position:absolute;
+		display:inline;
+			width:300px;
+			
+			right:110px;
+			padding-top:6%;
+			li{
+					display:inline;
+					}
+				a{
+				border-radius:50%;
+				border:1px solid transparent;
+				display:inline-block;
+				height:58px;
+				width:58px;
+				margin:2px;
+				background-color:rgba(85, 85, 85, 0.25);
+				padding:10px;
+				&:hover{
+				background-color:rgba(8, 8, 8, 0.54);
+				}
+				img{
+					height:40px;
+					width:40px;	
+				}
+				}
+				
+}
+.testimonials{
+			
+			height:500px;
+			overflow:hidden;
+			//padding:20px;
+
+}
+.pad{
+		padding:20px;
+	
+}
+.contact{
+		table{
+				h4{
+						font : bold 20px/1em Arial, Helvetica, sans-serif;
+				}
+				address {
+						font : bold 20px/1em Arial, Helvetica, sans-serif;
+					}
+				}
+				span{
+						p{
+						font : bold 20px/1em Arial, Helvetica, sans-serif;
+						}
+				}
+				td{
+						font : bold 20px/1em Arial, Helvetica, sans-serif;
+				}
+				
+				
+}
+.container{
+		+div{
+						padding:0px;
+				}
+}
+.contactanim{
+					animation-name:contact;
+					animation-duration:3s;
+					animation-iteration-count:1;
+		}
+		
+		@keyframes contact{
+						0%{opacity:0;transform: translateX(-100px);}
+						100%{opacity:1;transform: translateX(0px);}
+		}	
+#googleMap{
+			
+			height:300px;
+			
+}

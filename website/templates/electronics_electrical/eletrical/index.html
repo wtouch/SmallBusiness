@@ -1,0 +1,109 @@
+{% spaceless %}
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		
+		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
+		
+		
+		
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}">
+		
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<div class="row">
+					<!-- <div class="col-xs-12 col-sm-4 weblogo">
+						{% if data.website_config.website_logo %}
+							<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						{% endif %}
+					</div> -->
+					<div class="col-xs-12 col-sm-4 col-lg-12 text-center">
+						{% if data.website_config.website_logo1 %}
+							<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
+						{% else %}
+							<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						{% endif %}
+					
+					</div>
+				</div>
+				<div>
+				<h1>{{ data.business_name }}</h1>
+				{% if data.business_info.tagline %}
+							<div class="tagline text-center">{{ data.business_info.tagline}}</div>
+					{% endif %}
+				</div>
+			</div>
+			<nav class="navbar navbar-default navbar-static-top">
+	
+			<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="container-fluid">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav nav-justified">
+					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+				</ul>
+			</div><!-- /.navbar-collapse -->
+			</div>
+	
+		</nav>
+		</header>
+		<div class="acti">
+			<div class="row">
+			<div class="container">
+				<div class="col-xs-12 col-sm-4 col-lg-6">
+				</div>
+				<div class="col-xs-12 col-sm-4 col-lg-6">
+							{% include [templatePath ~ '/includes/activities.html', 'default/default/includes/activities.html'] %}
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="produ">
+		<div class="row">
+			<div class="container">
+				{%include[templatePath ~ '/includes/featured_products.html','default/default/includes/featured_products.html']%}
+			</div>
+		</div>	
+		</div>
+		<div class="testi">
+		<div class="row">
+			<div class="container">
+				{%include[templatePath ~ '/includes/featured_testimonials.html','default/default/includes/featured_testimonials.html']%}
+			</div>
+		</div>	
+		</div>
+		<!-- {% include contentPath %} -->
+		
+	
+		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} 
+		
+	</body>
+</html>
+{% endspaceless %}

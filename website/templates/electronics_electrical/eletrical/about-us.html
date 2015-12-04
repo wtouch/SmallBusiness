@@ -1,0 +1,75 @@
+{% autoescape false %}
+	<div class="container">
+	<div class="row pad">
+		<div class="col-xs-12 col-sm-12 col-lg-4 about">
+			<h2>About us</h2>
+				<img class=" img-circle center-block" src="{{path}}/../img/111.jpg">
+				<h4>Garden Decoration</h4>
+				{{data.business_info.aboutDescription}}
+		</div>
+		
+		<div class="col-xs-12 col-sm-12 col-lg-4">
+				
+				{% include [templatePath ~ '/includes/activities.html', 'default/default/includes/activities.html'] %}
+				
+		</div>
+		<div class="col-xs-12 col-sm-12 col-lg-4 testimonials">
+			{% include [templatePath ~ '/includes/testimonials.html', 'default/default/includes/testimonials.html'] %}
+		</div>
+	</div>
+</div>
+
+	{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
+	
+	<div class="container">
+		{% if data.infrastructure %}
+		<hr>
+		<div class="infrastructure" id="infrastructure">
+			<h3 class="text-center">Infrastructure/Facilities</h3>
+			<div class="row">
+				{% for key, value in data.infrastructure %}
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 thumbnail">
+						
+							<div class="infraImg">
+								<img class="img-responsive " src="{{value.image.file_relative_path}}"/>
+							</div>
+							<div class="caption text-center" ng-controller="aboutController">
+								<h4>{{value.heading}}</h4>
+								{{value.description|length >100 ? value.description|slice(start,100)~ '...' : value.description}}
+							</div>
+							<div class="readmore text-center">
+								<a type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal{{loop.index}}">Read More..</a>
+							</div>
+						</div>
+					
+					<!-- modal -->	
+					<div id="myModal{{loop.index}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Infrastructure Details</h4>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-xs-12 col-sm-4 col-lg-3">
+											<a href="#">
+											  <img class="img-responsive" src="{{value.image.file_relative_path}}"/>
+											</a>
+										</div>
+										<div class="col-xs-12 col-sm-8 col-lg-9">
+											<h4>{{value.heading}}</h4>
+											<p>{{value.description}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--modal end-->
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
+{% endautoescape %}
