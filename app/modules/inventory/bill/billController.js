@@ -148,6 +148,11 @@ define(['app'], function (app) {
 		$scope.calcBalance = function(previousBal, amount, modalOptions){
 			modalOptions.addincome.balance = parseFloat(previousBal) + parseFloat(amount);
 		}
+		
+		$scope.calcDueAmount = function(previousBal, amount, modalOptions){
+			modalOptions.payBill.due_amount1 = modalOptions.payBill.due_amount - modalOptions.payBill.debit_amount;
+			console.log(modalOptions.payBill.due_amount);
+		}
 				
 		$scope.openModal = function(url,data){
 				var modalDefault = {
@@ -286,15 +291,14 @@ define(['app'], function (app) {
 					date : data.bill_date,
 					due_amount : data.due_amount,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					status : 1,
 					type : "bill_payment",
 				} : {
 					//date : dataService.sqlDateFormate(false,"datetime"),
-					
 				},
 				getBalance : $scope.getBalance,
 				calcBalance : $scope.calcBalance,
+				calcDueAmount :	$scope.calcDueAmount,
 				postData : function(table,input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
