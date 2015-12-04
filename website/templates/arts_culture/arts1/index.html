@@ -1,6 +1,5 @@
- {% spaceless %}
+{% spaceless %}
 <!DOCTYPE html>
-<!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
 <html lang="en" ng-app="myApp">
 	<head>
 		<meta charset="utf-8">
@@ -14,19 +13,52 @@
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
-		<script src="{{ path }}js/script.js"></script>
-		<script src="{{ path }}js/myscript.js"></script>
-		<script src="{{path}}js/ang.js"></script>
+		<script src="{{ path }}js/anim.js"></script> 
+		<script src="{{ path }}js/script.js"></script> 
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
-		<meta name="keywords" content="{{ seo.keywords }}">
-		
+		<meta name="keywords" content="{{ seo.keywords }}"> 
 	</head>
 	<body>
+	<div class="conjtainer fluid">
+	<!-- <div class="header">
+			<div class="col-xs-12 col-sm-4 weblogo">
+				{% if data.website_config.website_logo %}
+					<img src="{{data.website_config.website_logo.file_relative_path}}">
+				{% endif %}
+			</div>
 		
+		<div class="col-xs-12 col-sm-4 text-right cntdtl">	
+						<p><strong>Mobile: </strong>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? " / " ~ data.contact_profile.alternate_mobile}}</p>
+						<p>
+						<p><strong>E-mail ID: </strong>{{data.contact_profile.email}}{{(data.contact_profile.alternate_email) ? ", " ~ data.contact_profile.alternate_email}}</p>
+						<p>
+		</div>
+		</div>
+	
+	
+	</div> -->
+	<div class="container-fluid ak">
 		
-	</body>
-</html> 
-{% endspaceless %}
-		
+		<nav class="navbar navbar-default ">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>Main Menus
+					< <span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div> 
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<div class="contianer">
+					<ul class="nav navbar-nav ">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
+				</div>
+			</div> 
+		</nav>
+	</div>
 
+	</body>
+</html>
+{% endspaceless %}

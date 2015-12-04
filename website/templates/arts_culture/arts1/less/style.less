@@ -1,0 +1,117 @@
+@color : #480B0A; //dark chocalate
+@lightcolor :#ae8f4e; //color
+@darkcolor : #ff8400;// nav color
+@back : #272727;
+@darkbackcolor : #101010; //darkcolor black nav
+@lightbackcolor :#FFD700;
+@colorblack : #000000;
+@colorwhite	: #ffffff;
+@import "property.less";
+@import "project.less";
+@import "product.less";
+@import "general.less";
+
+
+body{
+.container-fluid{
+padding-right:0px;
+padding-left:0px;
+
+}
+.nav{
+
+
+}
+.navbar-default {
+			//position : relative;
+			//background-color:@darkbackcolor;
+			background : -webkit-linear-gradient(top, @darkbackcolor, @back);
+			background : -moz-linear-gradient(top,@darkbackcolor, @back);
+			//background : linear-gradient(top, @darkcolor, @back);
+			z-index:9999;
+			
+			.navbar-nav{
+				>li{
+					float:left;
+					position :relative;
+					>a{
+						color : @darkcolor;
+						border-right: 1px solid @colorwhite; 
+						text-transform : uppercase;
+						font: bold 15px/1.5em Arial, Helvetica, sans-serif;
+					}
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+						color: @back;
+						cursor: pointer;
+						text-shadow: 1px 1px @colorblack;
+						background: @darkcolor;
+						background : -webkit-linear-gradient(top,@darkcolor, @lightbackcolor);
+						background : -moz-linear-gradient(top,@darkcolor, @lightbackcolor);
+						background : linear-gradient(top,@darkcolor, @lightbackcolor);
+					}
+					ul{
+						display : none;
+						position : absolute;
+						width : 270px;
+						z-index : 999;
+						background-color:@lightbackcolor;
+						padding : 15px;
+						list-style : none;
+						text-align : left;
+						border : 1px solid  @colorwhite;
+						box-shadow : 0 0 15px 0px @colorblack;
+						border-radius : 7px;
+						>li{
+							padding : 10px;
+							position : relative;
+						
+							>a{
+								text-decoration:none;
+								color:@darkcolor;
+							}
+							&:hover{
+								background : -webkit-linear-gradient(top,@darkcolor, @lightbackcolor);
+								background : -moz-linear-gradient(top,@darkcolor, @lightbackcolor);
+								background : linear-gradient(top,@darkcolor, @lightbackcolor);
+								a{
+									color : @colorwhite;
+									
+								}
+							}
+							
+							> ul{
+								display: none;
+								list-style :none;
+								left: 70%;
+								top: 10px;
+								border-top-left-radius: 0px;
+								>li{
+									>a{
+										text-decoration:none;
+										color : @darkcolor;
+									}
+									&:hover{
+										background : -webkit-linear-gradient(top,@darkcolor, @lightbackcolor);
+										background : -moz-linear-gradient(top,@darkcolor, @lightbackcolor);
+										background : linear-gradient(top,@darkcolor, @lightbackcolor);
+										a{
+											color : @colorwhite;
+											
+										}
+									}
+								}
+							}
+							&:hover > ul {
+								display: block;
+							}
+						}
+					}
+					&:hover{
+						>ul{
+							display:block;
+						}
+					}
+				}
+			}
+}	
+}
