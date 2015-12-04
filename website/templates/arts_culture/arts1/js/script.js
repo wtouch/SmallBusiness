@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
 	})
 });
 
-$(document).ready(function(){
+/* $(document).ready(function(){
 		if($(window).width() <= "540"){
 		$(window).scroll(function(e){
 			var scrollTop = $(document).scrollTop();
@@ -78,6 +78,41 @@ $(document).ready(function(){
 		autoHover:true,
 		speed:1000,
 	});
+}); */
+$(document).ready(function(){
+	jQuery(".subimgs").click(function(){
+		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
+	})
+	 $(window).scroll(function(e){
+		var scrollTop = $(document).scrollTop();
+		if(scrollTop > 35){
+			console.log(scrollTop);
+			$('nav').removeClass('navbar-static-top').addClass("navbar-fixed-top");
+		} else {
+			$('nav').removeClass("navbar-fixed-top").addClass('navbar-static-top')
+		}
+	}); 
+ 	// This is for Cookie
+	function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1);
+			if (c.indexOf(name) == 0) return true;
+		}
+		return false;
+	}
+	var cookieExpiry = new Date();
+	cookieExpiry.setMinutes(cookieExpiry.getSeconds() + 10);
+	var cookieTime = cookieExpiry.toUTCString();
+	if(getCookie('anim') == false){
+		document.cookie="anim=true; expires=" + cookieTime;
+	}else{
+		$(".anim2, .anim4,.anim.js").hide();
+		$(".anim1").removeClass("anim1,anim.js");
+		console.log(getCookie('anim'));
+	} 
 });
 var app = angular.module('myApp',[]);
 
@@ -147,3 +182,4 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		$scope.makeActive($scope.url);
 		
 	});
+	 
