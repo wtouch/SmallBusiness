@@ -108,3 +108,96 @@ header{
 				}
 				
 }
+.navbar-default {
+		background-color:transparent;
+		opacity:0.9;
+		margin-bottom:-1px;
+		border:none;
+		border-top:1px solid @colorwhite;
+		
+		.navbar-nav{
+			> li{
+					padding:-5px;
+				float:none;
+				margin-bottom:0px;
+				position : relative;
+				> a {
+					color : @colorwhite;
+					font : bold 15px/1em Arial, Helvetica, sans-serif;
+					position : relative;
+					text-transform : uppercase;
+					padding:35px;
+					padding-right:10px;
+					
+				}
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					background:none;
+					color : @color;
+					
+				}
+				> ul{
+					display: none;
+					position: absolute;
+					width: 245px;
+					z-index: 999;
+					background-color: @lightcolor;
+					//margin-top:22px;
+					padding: 2px;
+					list-style: none;
+					text-align: left;
+					>li{
+						padding : 10px;
+						text-transform : uppercase;
+						position : relative;
+						>a{
+							color : @colorwhite;
+							&:hover{
+								color : @colorwhite;
+							}
+						}
+						&:hover{
+						background-color:@lightcolor;
+							-webkit-transition: all 0.4s;
+						}
+						ul{
+							display:none;
+							//background : linear-gradient(@back, @color);
+							background-color: @colorwhite;
+							list-style: none;
+							display : none;
+							color:@darkcolor;
+							position : absolute;
+							left: 150px;
+							width: 180px;
+							padding : 2px;
+							li{
+								padding : 10px;
+								a{
+									color : @lightcolor;
+								}
+								&:hover{
+									a{
+										color : @colorwhite;
+									}
+									background-color:@lightbackcolor;
+									
+								}
+							}
+						}
+						&:hover{
+							ul{
+								display : block;
+							}
+						}
+					}
+				}
+				&:hover > ul {
+					display: block;
+				}
+			}
+		}
+		.navbar-collapse{
+				margin-left: 137px;
+					margin-right: 137px;
+		}
+	}
