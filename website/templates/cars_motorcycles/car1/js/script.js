@@ -22,7 +22,7 @@ $(document).ready(function(){
 	//})
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideWidth: 250,
+		slideWidth: 300,
 		minSlides: minSlides,
 		maxSlides: maxSlides,
 		slideMargin: 25,

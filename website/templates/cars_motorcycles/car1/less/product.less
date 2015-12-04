@@ -1,10 +1,66 @@
-.feature > h2{
-background-color:@color;
-color:@colorwhite;
+.feature {
+		> h1{
+				background: linear-gradient(90deg, @colorblack , @colorwhite);
+				color:@lightcolor;
+				font-size:30px;
+				padding:2px 4px 2px 4px;
+				font-family:Amarnath;
+			}
+	}		
+
+//multiple products
+.products{
+	.thumbnail{
+		.prodimg{
+			width: 200px;
+			height: 173px;
+			overflow: hidden;
+			margin: auto;
+			padding: 25px;
+
+			img{
+				min-height : 148px;
+				border: 1px solid @darkcolor;
+				&:hover{
+				opacity:0.8;
+				border: 3px solid @colorblack;
+				}
+			}
+		}
+		.caption{
+			height: 190px;
+			> h4{
+				font-size:25px;
+				color:@darkcolor;
+				text-transform:uppercase;
+					&:hover{
+						color:@colorblack;
+					}
+			}
+			.description{
+				height : 75px;
+				overflow : hidden;
+			}
+		}
+		.readmore{
+			margin-top : 130px;
+			text-align : center;
+			a{
+				background-color : @darkcolor;
+				color : @lightbackcolor;
+				padding : 6px 12px;
+				border : 2px solid transparent;
+				border-radius : 0px;
+				font: 16px 'Cinzel-Regular', cursive;
+				&:hover{
+					color : @darkcolor;
+					background-color : @back;
+					border : 2px solid @darkcolor;
+				}
+			}
+		}
+	}
 }
-
-
-
 
 
 
@@ -65,44 +121,7 @@ color:@colorwhite;
 		}
 	}
 }
-//multiple products
-.products{
-	.thumbnail{
-		.prodimg{
-			width : 198px;
-			height : 148px;
-			overflow : hidden;
-			margin:auto;
-			img{
-				min-height : 148px;
-			}
-		}
-		.caption{
-			height: 190px;
-			.description{
-				height : 75px;
-				overflow : hidden;
-			}
-		}
-		.readmore{
-			margin-top : 10px;
-			text-align : center;
-			a{
-				background-color : @darkcolor;
-				color : @lightbackcolor;
-				padding : 6px 12px;
-				border : 2px solid transparent;
-				border-radius : 0px;
-				font: 16px 'Cinzel-Regular', cursive;
-				&:hover{
-					color : @darkcolor;
-					background-color : @back;
-					border : 2px solid @darkcolor;
-				}
-			}
-		}
-	}
-}
+
 
 @media (min-width: 320px) {
 	.products{

@@ -1,229 +1,45 @@
-	.featuretab{
-		margin-top : 20px;
-		.tab-content{
-			border : 1px solid @darkbackcolor;
-			border-top : none;
-			position: relative;
-			margin-bottom: 25px;
-			padding : 15px 30px 15px;
-		}
-		.nav-tabs{
-			border-bottom: 1px solid @darkbackcolor;
-			li{
-				a{
-					color : @color;
-					border: 2px solid @darkbackcolor;
-					font-size :16px;
-					background-color:@darkcolor;
-					&:hover{
-						color : @darkcolor;
-						background-color : @back;
-						border: 2px solid @darkbackcolor;
-					}
-				}
-				&.active>a, &.active>a:hover, &.active>a:focus{
-					color : @darkcolor;
-					background-color : @back;
-					border: 2px solid @darkbackcolor;
-				}
-			}
-		}
-	}
-	.associates{
-		/*ul{
-			padding-left:0px;
-			margin-bottom:0px;
-		}*/
-		li{
-			display:block;
-			height:250px;
-			width:210px;
-			/*.aslogo{
-				height : 175px;
-				overflow : hidden;
-				padding : 6px;
-				border : 2px solid transparent;
-				img{
-					min-height: 175px;
-				}
-				&:hover{
-					border : 2px solid @darkcolor;
-				}
-			}*/
-		}
-	}
-		
-	
-	//aboutus page css
-	.sidebar{
-		.nav-pills{
-			background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
-			background : -moz-linear-gradient(top, @color -565%,@darkcolor);
-			background : linear-gradient(top, @color -565%,@darkcolor);
-			>li{
-				border-right : 1px solid @lightbackcolor;
-				>a, > a:focus{
-					color : @color;
-					background : transparent;
-					font-weight : bold;
-					border : 1px solid transparent;
-				} 
-				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-					color: @darkcolor;
-					background : @lightcolor;
-					border : 1px solid @darkcolor;
-				}
-			}
-		}
-	}
-	.about, .contact{
-		.table{
-			tbody{
-				tr{
-					th,td{
-						border-color : @darkbackcolor;
-					}
-				}
-			}
-		}
-	}
-	.about{
-		.table{
-			margin-top: 20px;
-		}
-	}
-	.infrastructure{
-		.thumbnail{
-			height: 395px;
-			img{
-				height : 190px;
-			}
-			.caption{
-				height: 138px;
-			}
-		}
-	}
-	//contactus page css
-	.contact{
-		img{
-			max-height: 125px;
-		}
-		h4{
-			margin-top : 0px;
-		}
-	}
-	#googleMap{
-		height:395px;
+.about , .contact , .gallery{
+	> h2{
+		color:@darkcolor;
+		font-size:30px;
+		padding:2px 4px 2px 4px;
+		text-transform:uppercase;
+		font-family:Amarnath;
+		padding-top: 15px;
 	}
 	
-	//testimonials
-	.testimonial, .featrtesti{
-		blockquote{
-			font-size : inherit;
-			border-left: none;
-			footer{
-				background:none;
-				padding : 0px;
-				cite{
-					font-size : 17px;
-					color : @darkcolor;
-				}
-			}
-			&::before{
-				content : '\201c';
-				position : absolute;
-				display : inline-block;
-				top : 5px;
-				left : 0;
-				line-height : 40px;
-				font-family : Times New Roman,Serif;
-				font-size : 55px;
-			}
-		}
+}
+p{
+	strong{
+	color:@colorblack;
+	font-size:18px;
 	}
-	.testimonial{
-		blockquote{
-			padding-left : 15px;
-			footer{
-				img{
-					max-height: 70px;
-					width: 70px;
-					margin-right : 10px;
-				}
-			} 
-		}
+	em{
+		strong{
+			color:@colorblack;
+			}
 	}
-	.featrtesti{
-		blockquote{
-			padding : 5px 15px;
-		}
-		img{
-			max-height : 100px;
-			padding : 4px;
-			border : 3px solid @lightcolor;
-			&:hover{
-				border : 3px solid @color;
-			}
-		}
-	} 
-	
-	//modules css
-	
-	hr{
-		border-style : dashed;
-		border-color: @darkcolor;
-		margin :5px 0px;
+
+}
+h3{
+	color:@colorblack;
+	font-family:Amarnath;
+}
+center{
+		color:@lightcolor;
+		font-size:18px;
 	}
-	
-	.sidebarModule{
-		.panel-default{
-			border : none;
+.gallery1{
+		> h2{
+			color:@darkcolor;
+			font-size:30px;
+			padding:2px 4px 2px 4px;
+			text-transform:uppercase;
+			font-family:Amarnath;
+			padding-top: 15px;
 		}
-		.radio label{
-			padding-left : 15px;
-		}
-		a{
-			color : @darkcolor;
-			font-size : 12px;
-			&:hover{
-				color : @darkcolor;
-			}
-		}
-		&.sidemenu{
-			padding: 20px 10px 5px;
-			ul{
-				padding : 0;
-				list-style : none;
-				li{
-					margin-bottom : 10px;
-				}
-			}
-			a{
-				  display: inline-block;
-				  height: 75px;
-				  width: 90%;
-				  background-repeat: no-repeat;
-				  background-position: center;
-				  text-indent: -9999px;
-				  background-size: 100% 100%;
-				  overflow: hidden;
-				&.area_converter{
-					background-image : url('../img/area_converter.png');
-				}
-				&.emi_calculator{
-					background-image : url('../img/emi_calculator.png');
-				}
-				&.post_your_property{
-					background-image : url('../img/post_your_property.jpg');
-				}
-				&.post_your_requirement{
-					background-image : url('../img/post_your_requirement.jpg');
-				}
-			}
-		}
-	}
-	
-	.gallery{
+}	
+.gallery{
 		.thumbnail{
 				border-color : @darkbackcolor;
 				background-color:@back;
@@ -234,37 +50,5 @@
 				}
 			}
 		}
-		
-	//gallery
-	@media (min-width: 320px) {
-		.gallery{
-			.thumbnail{
-				height:380px;
-			}
-		}
-	}
 
-	@media (min-width: 992px) { 
-		.gallery{
-			.thumbnail{
-				height:365px;
-				img{
-					max-height : 155px;
-					width:100%;
-				}
-			}
-		}
-	}
 
-	@media (min-width: 1200px){
-		.gallery{
-			.thumbnail{
-				height:380px;
-				img{
-					max-height : 200px;
-					width:100%;
-				}
-			}
-		}
-	}
-	

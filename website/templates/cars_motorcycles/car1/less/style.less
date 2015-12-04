@@ -1,6 +1,6 @@
 @font-face{
-	font-family : 'Cinzel-Regular';
-	src:url('../fonts/Cinzel-Regular.otf');
+	font-family : 'Amaranth';
+	src:url('../fonts/Amaranth-BoldItalic.ttf');
 }
 @color : #1b1b1b;
 @lightcolor : #ffc549; // yellow
@@ -11,6 +11,9 @@
 @colorblack : #000000;
 @colorwhite	: #ffffff;
 @background_img:url(../img/back2.jpg);
+@background_img1:url(../img/body_bg.jpg);
+@back1:url(../img/watch.jpg);
+@back2:url(../img/car1.png);
 @nav_img:url(../img/menu-rgt.jpg);
 
 
@@ -23,48 +26,196 @@
 		transition : 300ms;
 	}
 .container{
-	max-width : 992px !important;
+		max-width : 992px !important;
 }
 body{
-	background-image:@background_img;
-	background-size:100%;
-	background-repeat:no-repeat;
-	background-color:@lightbackcolor;
-	font-family : 'Cinzel-Regular';
+		background-image:@background_img1;
+		font-family : 'Cinzel-Regular';
 	}
+.back1{
+		background-image:@back1;
+		background-repeat:no-repeat;
+		background-size:70%;
+		height: 500px;
+}	
+.back2{
+		margin: 0px;
+		height: 530px;
+		background-image:@back2;
+		background-repeat:no-repeat;
+		background-size:100%;
+		background-position:10% 100%;
+}
+.maincontent{
+width:960px;
+}
+.well{
+    height:200px;
+    width: 955px;
+    margin-left: 190px;
+}
+.well1{
+    height:500px;
+    width: 955px;
+    margin-left: 0px;
+}
 .logo{
 	width: 200px;
     height: 150px;
     margin: 0px 0px 1px 0px;
+	 -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+    -webkit-animation-delay: 1s; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 1s;
+    animation-delay: 1s;
+}
+
+@-webkit-keyframes example {
+   
+    0%   {transform:rotate(60deg);}
+    25%  {transform:rotate(180deg);}
+    50%  {transform:rotate(300deg);}
+    100% {transform:rotate(360deg);}
+}
+
+/* Standard syntax */
+@keyframes example {
+
+      0%   {transform:rotate(60deg);}
+    25%  {transform:rotate(180deg);}
+    50%  {transform:rotate(300deg);}
+    100% {transform:rotate(360deg);}
+}
+.log{
+	background-image:@background_img;
+	background-repeat:no-repeat;
+	background-size:100% 100%;
 }	
-.nav > li > a{
- color:@colorwhite;
- text-transform:uppercase;
- height: 48px;
- background: @color url(../img/menu-rgt.jpg) right no-repeat;
-	&:hover{
-	color:@colorwhite;
-	background-color:@color;
+
+.navbar{
+		min-height : 50px;
+	}
+.navbar-default{
+		background-color: @color;
+		width:955px;
+	}
+.nav {
+	> li {
+		> a{
+			 color:@colorwhite;
+			 text-transform:uppercase;
+			 height: 48px;
+			 background: @color url(../img/menu-rgt.jpg) right no-repeat;
+			&:hover{
+					color:@colorwhite;
+					background-color:@color;
+					}
+			}
+						
+		> ul{
+				position:absolute;
+				display:none;
+				z-index:900;
+				width: 250px;
+				margin-left: -40px;
+					li {
+						padding: 25px 25px 5px; 
+						list-style-type:none;
+						background-color:rgba(6, 6, 6, 0.7);
+						border-bottom: 1px solid @colorwhite;
+						a{
+						border-left:1px solid transparent;
+						border-right:1px solid transparent;
+						
+						background-color:transparent;
+						color:@colorwhite;
+							&:hover{
+							
+							}
+						}
+						>ul{
+							display:none;
+						}
+						}
+			}
+			&:hover > ul {
+					display: block;
+
+				}	
+		}
+}
+
+.homeAboutus{
+		>h1{
+		color:@lightcolor;
+		background: linear-gradient(90deg, @colorblack , @colorwhite);
+		font-size:30px;
+		padding:2px 4px 2px 4px;
+		}
+		>.tagline{
+		color:@darkcolor;
+		font-family:Amaranth;
+		font-size:20px;
+		}
+		>.tagline1{
+			color:@lightcolor;
+			font-size:18px;
+		}
+		> .description{
+			height:110px;
+			overflow:hidden;
+			font-size:16px;
+		}
+		> .readmore
+		{
+		margin-top:15px;
+			> .btn-primary{
+				background-color:@colorblack;
+			}
+		}
+	}
+.btn{
+	background-color:@colorblack;
+}
+.enquiry{
+	.btn{
+		background-color:@colorblack;
 	}
 }
-.navbar{
-min-height : 50px;
+.data{
+	bottom:35px;
+	padding:15px;
+}	
+.data1{
+	bottom: 210px;
+	padding:15px;
+	margin:0px;
 }
-.navbar-default{
-background-color: @color;
+.data3{
+	bottom: 100px;
+	padding:15px;
+	height:800px;
 }
+	h3.subhead {
+		color:@colorwhite;
+		font-size:20px;
+		padding:5px 4px 2px 75px;
+		background: linear-gradient(90deg, @colorblack , @color);
+		height: 37px;
+		font-family:Amaranth;
+		width: 295px;
+		border-radius:5px;
 
-
-
-
-
-
-
-
-
-
-
-
+	}
+.panel.panel-default {
+    width: 295px;
+}	
+.sidebarModule .panel-default {
+    border: 1px solid @darkcolor;
+}	
+	
+	
 
 /*
 
@@ -440,33 +591,6 @@ background-color: @color;
 	.navbar-toggle .icon-bar {
 		background-color: @colorwhite;
 	}
-	@media (min-width: 1200px){
-		.logo{
-			float:none;
-		}
-		.carousel-inner>.item>img{
-			width :100%;
-			min-height: 312px;
-		}
-		.homeimg{
-			float:right;
-			margin-left: 25px;
-			//width:25%;
-			max-height: 210px;
-		}
-	}
 	
-	@media (max-width: 540px){
-		header {
-			.navbar{
-				min-height : 1px;
-			}
-			.navbar-default{
-				.navbar-nav {
-					margin: 0px;
-				}
-			}
-		}
-	}
 */
 	
