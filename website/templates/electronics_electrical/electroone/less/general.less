@@ -63,43 +63,31 @@
 		}
 	}
 }
+.carousel-inner>.item{
+				height:450px;
+			img{
+			     min-height:100%;
+				 width: 100%;
+				}
+		}
+		span.glyphicon.glyphicon-chevron-right,span.glyphicon.glyphicon-chevron-left 
+         		{
+					display: none;
+					}
+			.carousel-indicators li{
+					display:none;
+					}
+					
+    .carousel-inner {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		margin-top: 15px;
+		   }
+		   
+	
+    
 
-.sidebarModule{
-	&.sidemenu{
-		padding:15px 15px 0px;
-		margin-top : 20px;
-		ul{
-			padding : 0;
-			list-style : none;
-			li{
-				margin-bottom : 10px;
-			}
-		}
-		a{
-			display : inline-block;
-			height : 90px;
-			width : 100%;
-			background-size:100% 100%;
-			background-repeat : no-repeat;
-			background-position: center; 
-			text-indent : -9999px;
-			overflow : hidden;
-			border : 2px solid @darkcolor;
-			&.area_converter{
-				background-image : url('../img/area-converter.png');
-			}
-			&.emi_calculator{
-				background-image : url('../img/emi-calculator.png');
-			}
-			&.post_your_property{
-				background-image : url('../img/post-your-property.jpg');
-			}
-			&.post_your_requirement{
-				background-image : url('../img/post-your-requirement.jpg');
-			}
-		}
-	}
-}
 	//aboutus page css
 	.sidebar{
 		.nav-pills{
@@ -120,34 +108,57 @@
 		}
 	}
 	.about, .contact{
-		.table{
-			tbody{
-				tr{
-					th,td{
-						border-color : @darkbackcolor;
+		background: url('../img/ab.jpg');
+			.table{
+				tbody{
+					tr{
+						th,td{
+							border:1px solid ;
+							border-color : @darkbackcolor;
+							
+						}
 					}
 				}
 			}
 		}
-	}
 	.about{
 		.table{
 			margin-top: 20px;
+		
 		}
 	}
 	.infrastructure{
 		.thumbnail{
 			height: 395px;
+
 			img{
 				height : 190px;
+				width:100%;
+				&:hover{
+					opacity:0.7;
+					
+				}
 			}
 			.caption{
 				height: 138px;
+				color:@colorwhite;
 			}
+			
 		}
+		
+		animation-name:infra;
+		animation-duration:2s;
+		animation-iteration-count:1;
+		
 	}
-	//contactus page css
+	@keyframes infra{
+	
+			0%{opacity:0;transform:translateX(-20px);}
+			100%{opacity:1;transform:translateX(0px);}
+	}
+	contactus page css
 	.contact{
+		
 		img{
 			max-height: 125px;
 		}
@@ -157,9 +168,13 @@
 	}
 	#googleMap{
 		height:395px;
+		
+		
+		
 	}
 	
-	//testimonials
+	
+//testimonials
 	.testimonial, .featrtesti{
 		blockquote{
 			font-size : inherit;
@@ -203,7 +218,7 @@
 		img{
 			max-height : 100px;
 			padding : 4px;
-			border : 3px solid @lightcolor;
+			//border : 3px solid @lightcolor;
 			&:hover{
 				border : 3px solid @color;
 			}
@@ -213,7 +228,7 @@
 		.thumbnail{
 			.caption .description{
 					overflow: hidden;
-					height: 160px;
+					height: 80px;
 				}
 			}
 		}
@@ -235,7 +250,17 @@
 					width: 100%;
 				}
 			}
+		animation-name:gallery;
+		animation-duration:2s;
+		animation-iteration-count:1;
 		}
+		
+		
+	}
+	@keyframes gallery{
+	
+			0%{opacity:0;transform:translateY(-100px);}
+			100%{opacity:1;transform:translateY(0px);}
 	}
 
 	@media (min-width: 1200px){
@@ -248,4 +273,83 @@
 				}
 			}
 		}
+		
 	}
+	
+	.bxslider1{
+		padding-left:0px;
+		list-style :none;
+		li{
+			.verify{
+				width:55%;
+			    border:none;
+				margin-left:10px;
+				position:absolute;
+				right : -40px;
+				bottom : -15px;
+				z-index : 999;
+			}
+			border : 1px solid @darkcolor;
+			padding-left : 10px;
+			padding-bottom : 10px;
+			h4{
+				margin-left : 25px;
+			}
+			.sliderImg{
+				height :165px;
+				width : 195px;
+				overflow : hidden;
+				padding : 4px;
+				border : 4px solid transparent;
+				.slimg{
+					min-height: 150px;
+				}
+				&:hover{
+					border : 4px solid @darkcolor;
+				}
+			}
+			
+			.sliderDesc{
+				.table{
+					margin-bottom : 10px;
+					tbody{
+						tr{
+							td{
+								border :none;
+								padding: 3px 10px;
+							}
+						}
+					
+					}
+				}
+			}
+		}
+	}
+
+.bx-viewport{
+		min-height : 300px !important;
+		.carousslider{
+			padding-left: 0px;
+			margin-top:100px;
+			li{
+				border:7px solid @lightbackcolor;
+				background-color: @lightbackcolor;
+				border-radius:40px;
+				transition: all 1s ease-in-out ;
+				min-width : 100% !important;
+				img{
+					width : 150%;
+					min-height : 400px;
+				}
+				&:hover{
+					transform: scale(1.1);
+					 border-radius: 40px;
+				}
+				&.item{
+					overflow : hidden;
+					height : 302px;
+				}
+			}
+		}
+	}
+	
