@@ -16,8 +16,8 @@ $(document).ready(function(){
 			
 		}else{
 			sliderMode = "vertical";
-			minSlides = 3;
-			maxSlides = 3;
+			minSlides = 6;
+			maxSlides = 6;
 		}
 	//})
 	$('#bxslider').bxSlider({
@@ -25,7 +25,7 @@ $(document).ready(function(){
 		slideWidth: 250,
 		minSlides: minSlides,
 		maxSlides: maxSlides,
-		slideMargin: 25,
+		slideMargin: 0,
 		auto: true, 
 		autoDirection:'next',
 		moveSlides: 1,

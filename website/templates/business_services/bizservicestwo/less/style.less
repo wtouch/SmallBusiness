@@ -6,33 +6,88 @@
 	@colorblack : #000000;
 	@colorwhite	: #f4f4f4;
 	
-	//@import "property.less";
-	//@import "project.less";
-	//@import "product.less";
+	@nav_img: url('../img/nav-btmbg.jpg');
+	@import "product.less";
 	@import "general.less";
 	
 body
 {
-background-color:black;
+	background-color:black;
+	position:relative;
 }
-.container{
-			background-color:@colorblack;
-			.navbar_right{
-							
-						li{
-							background-color:@colorblack;
-							a{
-								color:@colorwhite;
+/*.wrap_nav{
+		position:absolute;
+		width:280px;
+		height:auto;
+		left:10px;
+		z-index: 9999;
+		left: 25px;
+	}*/
+
+				.navbar-default{
+								background-color:transparent;
+								border-color:transparent;
+								
+								.brand{
+										height: 260px;
+										width: 260px;
+										padding-left: 15px;
+										img{
+											height: 250px;
+											width: 245px
+										}
+										.navbar-brand{
+													padding:0px;
+										}
+								}
+								
+					.nav-pills,nav-stacked{
+						display:block;
+						float:none;
+						margin-top: 270px;
+							&::after{
+								background-image:@nav_img;
+								height: 105px;
+								width: 245px;
 							}
-							a:hover{
-							background-color:@lightbackcolor;
-							color : @colorwhite;	
-				            }
-						}
+						
+							li{
+								background-color:@colorblack;
+								border-radius: 5px;
+								a{
+									color:@colorwhite;
+								}	
+								
+								&.active>a, &.active:hover>a , &.active:focus>a ,&:hover>a{
+										background-color:@lightbackcolor;
+										color : @colorwhite;	
+										}
+								
+							}
+					}
+				}
+				
+.homeAboutus{
+			.description{
+					p{
+						color:@colorwhite;
+					}
 			}
-}
+			h1{
+			color:@colorwhite;
+			}
+			.btn-info{
+			background:@lightbackcolor;
+			border-color: @lightbackcolor;
+			border-radius: 0px;
+			    margin-top: 30px;
+			}
+			
+}				
+
 .contact{
 		h2{
 			color:@colorwhite;
 		}
 }
+

@@ -1,37 +1,33 @@
 {% autoescape false %}
 {% if featured_products | length >= 2 %}
 	<div class="contentModule featured_services">
-		<!-- <h3>Featured Services</h3> -->
-		<div class="sections clearfix services ">
+		<h3>Featured Services</h3>
+		<div class="sections clearfix services">
+		<ul class="bxslider" id="bxslider">
 			{% set break = 0 %}{% set i = 0 %}
 			{% for x in featured_products if break == 0 %}
 				{% if x.type == 'service' %}
-				<div class="servs">
-				
-					<div class="col-xs-12 col-md-3 col-lg-3 servimage">
+					<div class="col-xs-12 col-md-2 col-lg-2 servimage">
 						<a href="services/{{x.product_service_name}}/{{x.id}}">
-							<img class="img-responsive center-block serimg" src="{{x.product_image.0.file_relative_path}}" alt="{{x.product_image.0.file_relative_path}}">
+							<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" alt="{{x.product_image.0.file_relative_path}}">
 						</a>
 					</div>
-					<div class="col-xs-12 col-md-3 col-lg-3 servdesc">
-					
-						 <h4>{{x.product_service_name}}</h4> 
-						 <div class="description">
+					<!--<div class="col-xs-12 col-md-4 col-lg-4 servdesc">
+					<h4>{{x.product_service_name}}</h4> -->
+						<!-- <div class="description">
 							{{ x.description }}
+						</div> -->
+						<!-- <div class="readmore">
+							<a href="services/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More</a>
 						</div> 
-					
-						<div class="readmore">
-							<a href="services/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
-					    </div>
-					</div>
-				</div>	
-				
+					</div>-->
 					{% set i = (i + 1) %}
 					{% if i == 4 %}
 						{% set break = 1 %}
 					{% endif %}
 				{% endif %}
 			{% endfor %}
+			</ul>
 		</div>
 	</div>
 	{% endif %}

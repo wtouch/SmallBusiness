@@ -21,78 +21,43 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		<script>
-				function initialize() {
-					var mapProp = {
-						center:new google.maps.LatLng(18.6052055,73.7748031),
-						zoom:20,
-						mapTypeId:google.maps.MapTypeId.ROADMAP
-					};
-					var map=new google.maps.Map(document.getElementById("googleMap1"), mapProp);
-					var marker=new google.maps.Marker({
-						position:new google.maps.LatLng(18.6052055,73.7748031),
-					});
-					marker.setMap(map);
-				}
-				google.maps.event.addDomListener(window, 'load', initialize);
-</script>				
-
 	</head>
 	
 	<body>		
-		<nav class="navbar navbar-default navi">
-			<div class="container">
-				<div class="navbar-header navbar">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<div class="brand">  
-					<a class="navbar-brand" href="#">{{data.business_name}}</a>
-				</div>
-				<div class="collapse navbar-collapse link" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar_right">
-						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-					</ul>
-				</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3">
+					<nav class="navbar navbar-default navi">
+						<div class="navbar-header navbar">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<div class="brand">  
+								<a class="navbar-brand" href="#"><img src="{{data.business_logo.file_relative_path}}"></a>
+							</div>
+						</div>
+						<div class="collapse navbar-collapse link" id="bs-example-navbar-collapse-1">
+							<ul class="nav nav-pills nav-stacked ">
+								{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+							</ul>
+						</div>
+					</nav>
+					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
 			</div>
-		</nav>
-	<div class="container">
-			
-	   <div class="slider_height">
+			<div class="col-sm-9">
 				{%if modules.headerModule.carousal %}
-				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 				{%endif%}
-				{%if modules.headerModule.homeproject %}
-				{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-				{%endif%}
+				{% include contentPath %}
+				
+			</div>
 		</div>
-			
-		{% include contentPath %}
-			
-			
-			<!--  {% include contentPath %}
-		       {% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %} -->
-			
-		<div id="mypage" class="featured_products">
-		{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-		</div>
-		
-		<div class="cont_social">
-				<div id="myP1">
-					{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-				</div>
-				<div id="myP">
-					 {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-				</div>					
-				<div id="googleMap1"></div>	
-		</div>
+		{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</div>
-		
-      {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html> 
 {% endspaceless %}
