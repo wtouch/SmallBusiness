@@ -148,3 +148,16 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		$scope.makeActive($scope.url);
 		
 	});
+	
+/* $(document).ready(function(){
+       
+  if(location.pathname == "/"){
+   
+   $(".navbar-default").removeClass("navbar-fixed-top");
+   
+   $("nav li a[href='/']").click(function(){
+    $('.navbar-default').addClass("navbar-fixed-top");
+    
+   }); 
+  }
+ }); */
