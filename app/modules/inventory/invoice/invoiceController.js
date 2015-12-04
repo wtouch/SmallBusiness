@@ -29,6 +29,20 @@ define(['app'], function (app) {
 			},
 		]
 		
+		$scope.setDate = function(date, days, sql){
+			var curDate = new Date(date);
+			var newDate = curDate.setDate(curDate.getDate() + days);
+			var finalDate;
+			if(sql == "date"){
+				finalDate = dataService.sqlDateFormate(newDate);
+			}else if(sql == "datetime"){
+				finalDate = dataService.sqlDateFormate(newDate, "datetime");
+			}else{
+				finalDate = new Date(newDate);
+			}
+			return finalDate;
+		}
+		
 		$scope.invoiceList = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -84,7 +98,7 @@ define(['app'], function (app) {
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/payInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-usd"></span></a>'
+					+'<a ng-click="grid.appScope.openPayInvoice(\'modules/inventory/invoice/payInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-usd"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewinvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewReceipt.html\',row.entity)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
@@ -139,19 +153,6 @@ define(['app'], function (app) {
 						date : dataService.sqlDateFormate(false,"datetime"),
 					 modified_date : dataService.sqlDateFormate(false,"datetime")
 					},
-					payInvoice : (data) ? {
-						id : data.id,
-						invoice_id : data.invoice_id,
-						user_id : data.user_id,
-						party_id :data.party_id,
-						generated_date : data.generated_date,
-						modified_date : dataService.sqlDateFormate(false,"datetime"),
-						particulars:data.particulars,
-						remark : data.remark
-					} : {
-						//date : dataService.sqlDateFormate()
-					},
-				
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
@@ -236,6 +237,53 @@ define(['app'], function (app) {
 				
 			})
 		}
+		
+		$scope.openPayInvoice = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+				payInvoice : (data) ? {
+					reference_id : data.id,
+					party_id : data.party_id,
+					user_id : data.user_id,
+					credit_amount : data.total_amount,
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					date : dataService.sqlDateFormate(false,"datetime"),
+					status : 1,
+					type : "invoice_payment",
+				} : {
+				},
+				getBalance : $scope.getBalance,
+				calcBalance : function(previousBal, amount, modalOptions){
+			modalOptions.payInvoice.balance = parseFloat(previousBal) + parseFloat(amount)
+				},
+				
+				
+				postData : function(table,input){
+					console.log(table,input);
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+				updateData : function(table, input, id){
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				getData: $scope.getData,
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
+		
 		$scope.invoiceParams = {
 			where : {
 				status : 1,
@@ -270,6 +318,24 @@ define(['app'], function (app) {
 			cols : ["*"]
 		}
 		
+		$scope.getBalance = function(accountId, modalOptions) {
+			//console.log(accountId, modalOptions);
+			var accountParams = {
+				where : {
+					user_id : $rootScope.userDetails.id,
+					status : 1,
+					account_id : accountId
+				},
+				cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+			}
+			dataService.get(false,'transaction', accountParams).then(function(response) {
+				console.log(response);
+				modalOptions.previous_balance = response.data[0].previous_balance;
+			})
+			
+		}
+		
+		
 		
 		// For Get (Select Data from DB)
 		/*get data */
@@ -278,7 +344,7 @@ define(['app'], function (app) {
 				where : {
 					status : 1,
 					user_id : $rootScope.userDetails.id,
-					type : ($routeParams.party == "vendor") ? "vendor" : "client"
+					//type : ($routeParams.party == "vendor") ? "vendor" : "client"
 				},
 				cols : ["*"]
 			};

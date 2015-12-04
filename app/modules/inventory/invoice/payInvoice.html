@@ -2,20 +2,19 @@
 	<div class="modal-header" style="margin-bottom: 14px">
 		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3>Pay Invoice</h3>
-	</div>{{modalOptions.addinvoice}}
+	</div>{{modalOptions.payInvoice}}
 		<form name="payInvoiceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="payInvoiceForm.$valid">
 		
 			<div class="form-group">
-				<label  for="pay_date" class="col-sm-2 control-label">Date</label>
+				<label  for="date" class="col-sm-2 control-label">Date</label>
 					<div class="col-sm-9">
-						<input type="text" id="pay_date" class="form-control" ng-model="modalOptions.invoicePayment.pay_date" ng-init="modalOptions.invoicePayment.pay_date = modalOptions.date" name="pay_date" placeholder="date" readonly>
+						<input type="text" id="date" class="form-control" ng-model="modalOptions.payInvoice.date" ng-init="modalOptions.payInvoice.date = modalOptions.date" name="pay_date" placeholder="date" readonly>
 					</div>						
 			</div>
-			{{modalOptions.invoicePayment}}
-			<div class="form-group" ng-init="modalOptions.getData(false,false,'account','accountList', params, modalOptions)">
+			<div class="form-group" ng-init="modalOptions.getData( false, false,'account', 'accountList', false, modalOptions)">
 					<label for="account_id" class="col-sm-2 control-label">Account Name </label>
 					<div class="col-sm-9">
-						<select id="account_id" class="form-control" ng-model="modalOptions.invoicePayment.account_id" ng-options="item.id as item.account_name for item in modalOptions.accountList" required>
+						<select id="account_id"  ng-change="modalOptions.getBalance(modalOptions.payInvoice.account_id, modalOptions)" class="form-control" ng-model="modalOptions.payInvoice.account_id" ng-options="item.id as item.account_name for item in modalOptions.accountList" required>
 							<option value="">Select Account</option>
 						</select>
 						<span class="help-block" ng-show="payInvoiceForm.user_id.$dirty && payInvoiceForm.user_id.$invalid">
@@ -25,20 +24,16 @@
 			</div>
 			
 			
-			<div class="form-group" ng-if="modalOptions.invoicePayment.account_no">
-				<label for="balance" class="col-sm-2 control-label">Previous Amount</label>
-				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
-					<input type="text" id="balance" name="balance" readonly class="form-control" ng-options="item.id as item.balance for item in modalOptions.transactionList" ng-model="modalOptions.invoicePayment.account_no"/>			
-				</div>
+			<div class="form-group" ng-if="modalOptions.previous_balance">
+				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
+				<div class="col-sm-9">
+					<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" ng-init="modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payInvoice.credit_amount, modalOptions)" disabled class="form-control"/>		
+					</div>
 			</div>
-			
-			
-
-			
 			<div class="form-group">
 				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
 					<div class="col-sm-9">
-						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.invoicePayment.description.payment_type.type" required>
+						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.payInvoice.description.payment_type.type" required>
 						<option value="" selected>Select Type</option>
 						<option value="Cash" >Cash</option>
 						<option value="Cheque">Cheque</option>
@@ -51,50 +46,50 @@
 					</div>
 			</div>
 			
-			<div class="form-group" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Cheque' || modalOptions.invoicePayment.description.payment_type.type == 'Net Banking' || modalOptions.invoicePayment.description.payment_type.type == 'DD'">
-				<label for="refferance no" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
-				<label for="refferance no" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
-				<label for="refferance no" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
+			<div class="form-group" ng-if="modalOptions.payInvoice.description.payment_type.type == 'Cheque' || modalOptions.payInvoice.description.payment_type.type == 'Net Banking' || modalOptions.payInvoice.description.payment_type.type == 'DD'">
+				<label for="refferance no" ng-if="modalOptions.payInvoice.description.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
+				<label for="refferance no" ng-if="modalOptions.payInvoice.description.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
+				<label for="refferance no" ng-if="modalOptions.payInvoice.description.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
 					<div class="col-sm-9">
-						<input type="text" id="refferance no" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Net Banking'" ng-model="modalOptions.invoicePayment.description.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<input type="text" id="refferance no" ng-if="modalOptions.payInvoice.description.payment_type.type == 'Net Banking'" ng-model="modalOptions.payInvoice.description.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="payInvoiceForm.refferance_no.$dirty && payInvoiceForm.refferance_no.$invalid">
 							<span ng-show="payInvoiceForm.refferance_no.$error.required" class="text-danger">Ref No is required.</span>
 							<span ng-show="payInvoiceForm.refferance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 						</span>
-						<input type="text" id="refferance no" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Cheque'" ng-model="modalOptions.invoicePayment.description.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<input type="text" id="refferance no" ng-if="modalOptions.payInvoice.description.payment_type.type == 'Cheque'" ng-model="modalOptions.payInvoice.description.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="payInvoiceForm.cheque_no.$dirty && payInvoiceForm.cheque_no.$invalid">
 							<span ng-show="payInvoiceForm.cheque_no.$error.required" class="text-danger">Cheque No is required.</span>
 							<span ng-show="payInvoiceForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 							
 						</span>
-						<input type="text" id="refferance no" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'DD'" ng-model="modalOptions.invoicePayment.description.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<input type="text" id="refferance no" ng-if="modalOptions.payInvoice.description.payment_type.type == 'DD'" ng-model="modalOptions.payInvoice.description.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="payInvoiceForm.DD_no.$dirty && payInvoiceForm.DD_no.$invalid">
 							<span ng-show="payInvoiceForm.DD_no.$error.required" class="text-danger">DD no required.</span>
 							<span ng-show="payInvoiceForm.DD_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 						</span>
 					</div>		
 			</div> 
-			<div class="form-group" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Cheque' || modalOptions.invoicePayment.description.payment_type.type == 'Net Banking' || modalOptions.invoicePayment.description.payment_type.type == 'DD'">
+			<div class="form-group" ng-if="modalOptions.payInvoice.description.payment_type.type == 'Cheque' || modalOptions.payInvoice.description.payment_type.type == 'Net Banking' || modalOptions.payInvoice.description.payment_type.type == 'DD'">
 				<label for="Date" class="col-sm-2 control-label">Date</label>
 				 <div class="col-sm-9">
-					<input type="date" id="date" class="form-control" ng-model="modalOptions.invoicePayment.description.date" name="date" 
+					<input type="date" id="date" class="form-control" ng-model="modalOptions.payInvoice.description.date" name="date" 
 					placeholder="date">
 				</div>					
 			</div>
-			<div class="form-group" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Cheque' || modalOptions.invoicePayment.description.payment_type.type == 'Net Banking' || modalOptions.invoicePayment.description.payment_type.type == 'DD'">
+			<div class="form-group" ng-if="modalOptions.payInvoice.description.payment_type.type == 'Cheque' || modalOptions.payInvoice.description.payment_type.type == 'Net Banking' || modalOptions.payInvoice.description.payment_type.type == 'DD'">
 				<label for="Bank" class="col-sm-2 control-label">Bank Name</label>
 					<div class="col-sm-9">
-						<input type="text" id="Bank" ng-model="modalOptions.invoicePayment.description.payment_type.Bank" class="form-control" name="Bank"   placeholder="Enter Bank Name" required/>
+						<input type="text" id="Bank" ng-model="modalOptions.payInvoice.description.payment_type.Bank" class="form-control" name="Bank"   placeholder="Enter Bank Name" required/>
 						<span class="text-danger" ng-show="payInvoiceForm.Bank.$dirty && payInvoiceForm.Bank.$invalid">
 							<span ng-show="payInvoiceForm.Bank.$error.required">Bank Name is Required.</span>
 						</span>	
 					</div>		
 			</div>
 			
-			<div class="form-group" ng-if="modalOptions.invoicePayment.description.payment_type.type == 'Cheque' || modalOptions.invoicePayment.description.payment_type.type == 'Net Banking' || modalOptions.invoicePayment.description.payment_type.type == 'DD'">
+			<div class="form-group" ng-if="modalOptions.payInvoice.description.payment_type.type == 'Cheque' || modalOptions.payInvoice.description.payment_type.type == 'Net Banking' || modalOptions.payInvoice.description.payment_type.type == 'DD'">
 				<label for="Branch" class="col-sm-2 control-label">Branch</label>
 					<div class="col-sm-9">
-						<input type="text" id="Branch" ng-model="modalOptions.invoicePayment.description.payment_type.Branch" class="form-control" name="Branch"   placeholder="Enter Branch" required/>
+						<input type="text" id="Branch" ng-model="modalOptions.payInvoice.description.payment_type.Branch" class="form-control" name="Branch"   placeholder="Enter Branch" required/>
 						<span class="text-danger" ng-show="payInvoiceForm.Branch.$dirty && payInvoiceForm.Branch.$invalid">
 							<span ng-show="payInvoiceForm.Branch.$error.required">Branch Name is Required.</span>
 						</span>	
@@ -103,19 +98,16 @@
 			<div class="form-group">
 				<label  for="Amount" class="col-sm-2 control-label">Amount</label>
 				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
-					<input type="text"  id="Amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.invoicePayment.amount" name="credit_amount" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList" ng-init="modalOptions.invoicePayment.amount = modalOptions.invoiceData.total_amount"  required/>
-					<span class="help-block" ng-show="payBillForm.amount.$dirty && payBillForm.amount.$invalid">
-						<span ng-show="payBillForm.amount.$error.required" class="text-danger">Amount is required.</span>
-						<span ng-show="payBillForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+					<input type="text"  id="Amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.payInvoice.credit_amount" name="credit_amount" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList"ng-change="modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payInvoice.credit_amount, modalOptions)" required/>
+					<span class="help-block" ng-show="payInvoiceForm.credit_amount.$dirty && payInvoiceForm.amount.$invalid">
+						<span ng-show="payInvoiceForm.credit_amount.$error.required" class="text-danger">Amount is required.</span>
+						<span ng-show="payInvoiceForm.credit_amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 					</span>
 				</div>						
 			</div>
-			
-			
-			<input type="hidden" id="user_id" class="form-control" ng-model="modalOptions.invoicePayment.user_id" name="user_id" placeholder="User ID" ng-init="modalOptions.invoicePayment.user_id = modalOptions.user_id" required/>
 			<div class="form-group modal-footer">
 				<div class="col-sm-11">
-					<button type="submit" class="btn btn-success" ng-disabled="payInvoiceForm.$invalid" ng-click="modalOptions.payInvoice(modalOptions.invoicePayment);modalOptions.close()">Pay Invoice</button>
+					<button type="submit" class="btn btn-success" ng-disabled="payInvoiceForm.$invalid" ng-click="modalOptions.postData('transaction',modalOptions.payInvoice);modalOptions.ok()">Pay Invoice</button>
 					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 				</div>
 			</div>		

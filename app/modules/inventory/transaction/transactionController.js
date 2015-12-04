@@ -92,6 +92,8 @@ define(['app'], function (app) {
 							+'<option value="expense">Expense</option>'
 							+'<option value="income">Income</option>'
 							+'<option value="transfer">Transfer</option>'
+							+'<option value="invoice_payment">Invoice Payment</option>'
+							+'<option value="bill_payment">Bill Payment</option>'
 						+'</select>',
 					filter: {
 						//type: uiGridConstants.filter.SELECT,
