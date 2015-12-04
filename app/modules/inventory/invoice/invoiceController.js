@@ -326,7 +326,7 @@ define(['app'], function (app) {
 					status : 1,
 					account_id : accountId
 				},
-				cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+				cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 			}
 			dataService.get(false,'transaction', accountParams).then(function(response) {
 				console.log(response);
@@ -334,8 +334,6 @@ define(['app'], function (app) {
 			})
 			
 		}
-		
-		
 		
 		// For Get (Select Data from DB)
 		/*get data */

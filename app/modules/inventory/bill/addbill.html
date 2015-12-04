@@ -161,7 +161,7 @@
 					<td>{{x.price}}</td>
 					<td>{{x.quantity}}</td>
 					<td>{{x.amount}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index)">X</button></td>
+					<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index);modalOptions.totalCalculate(modalOptions);">X</button></td>
 				</tr>
 				<tr>
 					<td colspan="5"></td>
@@ -185,6 +185,7 @@
 				</tr>
 			</tbody>
 		</table>
+		
 			<label class="col-sm-1">Remark</label>
 			<div class="col-sm-8 form-group">
 				<textarea rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" placeholder="please Remark here.." required > </textarea>

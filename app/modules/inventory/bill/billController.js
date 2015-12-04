@@ -39,7 +39,10 @@ define(['app'], function (app) {
 				{ name:'bill_id', width:50,
 					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'bill\', \'billData\',true)" ng-model="id" placeholder="Bill No">',
 				},
-				 { name:'name',enableSorting: false ,enableFiltering: true
+				{
+					name:'name',
+					enableSorting: false,
+					enableFiltering: false
 				}, 
 			
 				{ name:'bill_date',
@@ -67,13 +70,17 @@ define(['app'], function (app) {
 					
 					}
 				},
+				{ name:'paid_amount',width:100,
+				},
 				{ name:'due_amount',width:100,
 					filterHeaderTemplate: '<input id="due_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\',true)" ng-model="total_amount" placeholder="search">',},
 				
 				{ name:'due_date',width:80,
 					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date, \'bill\', \'billData\',true)" ng-model="remark" placeholder="search">',},
-				{ name:'manage',
-				filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\',true)" ng-model="status">'
+				{
+					name:'manage',
+					width:200,
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\',true)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -89,7 +96,7 @@ define(['app'], function (app) {
 							+
 					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewbill2.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 							+
-					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewreceipt.html\')" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view Receipt Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/viewreceipt.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view Receipt Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			],
@@ -136,24 +143,19 @@ define(['app'], function (app) {
 					status : 1,
 					account_id : accountId
 				},
-				cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+				cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 			}
 			dataService.get(false,'transaction', accountParams).then(function(response) {
 				console.log(response);
 				modalOptions.previous_balance = response.data[0].previous_balance;
 			})
 			
-		}
+		}	
 		
 		$scope.calcBalance = function(previousBal, amount, modalOptions){
 			modalOptions.addincome.balance = parseFloat(previousBal) + parseFloat(amount);
 		}
-		
-		$scope.calcDueAmount = function(previousBal, amount, modalOptions){
-			modalOptions.payBill.due_amount1 = modalOptions.payBill.due_amount - modalOptions.payBill.debit_amount;
-			console.log(modalOptions.payBill.due_amount);
-		}
-				
+			
 		$scope.openModal = function(url,data){
 				var modalDefault = {
 				templateUrl: url, // apply template to modal
@@ -181,7 +183,18 @@ define(['app'], function (app) {
 				
 				getBalance : $scope.getBalance,
 				calcBalance : $scope.calcBalance,
-				
+				receiptData : {
+					name : data.name
+				},
+				receiptParams : {
+					where : {
+						reference_id : data.id,
+						type : "bill_payment",
+						user_id : $rootScope.userDetails.id,
+						status : 1
+					},
+					cols : ["*"]
+				},
 				postData : function(table,input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
@@ -203,8 +216,7 @@ define(['app'], function (app) {
 								
 							});
 							
-							
-							$scope.getData(false, $scope.currentPage, 'bill','billData');
+							$scope.getData(false, $scope.currentPage, 'bill','billData',$scope.billParams);
 						}
 					})
 				},
@@ -240,9 +252,6 @@ define(['app'], function (app) {
 					
 					modalOptions.addBill.total_amount = modalOptions.addBill.subtotal + taxSubtotal;
 					console.log(modalOptions.addBill.subtotal);
-					console.log(taxSubtotal);
-					console.log(modalOptions.addBill.total_amount);
-						
 					
 					return modalOptions;
 				},
@@ -267,7 +276,7 @@ define(['app'], function (app) {
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};
 				},
-				//reset : $rootScope.reset,
+				
 				removeObject : $rootScope.removeObject
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -284,29 +293,39 @@ define(['app'], function (app) {
 				};
 			var modalOptions = {
 				date : dataService.sqlDateFormate(),
-				payBill : (data) ? {
-					reference_id :data.id,
+				payBill : {
+					reference_id : data.id,
 					party_id : data.party_id,
 					user_id : data.user_id,
+					debit_amount : data.due_amount,
 					date : data.bill_date,
-					due_amount : data.due_amount,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					status : 1,
-					type : "bill_payment",
-				} : {
-					//date : dataService.sqlDateFormate(false,"datetime"),
+					type : "bill_payment"
 				},
 				getBalance : $scope.getBalance,
 				calcBalance : $scope.calcBalance,
-				calcDueAmount :	$scope.calcDueAmount,
+				getPaidAmount :	$scope.getPaidAmount,
+				checkPaidStatus : function(value, modalOptions){
+					if((parseFloat(data.due_amount) - parseFloat(value)) == 0){
+						modalOptions.payment_status = 1;
+					}else{
+						modalOptions.payment_status = 2;
+					}
+					return modalOptions.payment_status;
+				},
 				postData : function(table,input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							
+							var paymentStatus = {
+								payment_status : (modalOptions.payment_status) ? modalOptions.payment_status : modalOptions.checkPaidStatus(modalOptions.payBill.debit_amount, modalOptions)
+							}
+							$rootScope.updateData("bill", paymentStatus, data.id, function(response){
+								
+							})
 						}
 					})
 				},
-				
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
@@ -349,9 +368,19 @@ define(['app'], function (app) {
 						id : "t0.party_id"
 					},
 					cols : {name : "name"}
+				},{
+					joinType : "left join",
+					joinTable : "inventory_transaction",
+					joinOn : {
+						reference_id : "t0.id"
+					},
+					cols : ['debit_amount, IFNULL(sum(t2.debit_amount),0) as paid_amount']
 				}
 			],
-			cols : ["*"]
+			groupBy : {
+				id : "id"
+			},
+			cols : ["*, (t0.total_amount - IFNULL(sum(t2.debit_amount),0)) as due_amount"]
 		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {

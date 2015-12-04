@@ -1,23 +1,25 @@
-<div class="modal-header" ng-init="modalOptions.getData(modalOptions.Bill)">
+<div class="modal-header" ng-init="modalOptions.getData(false,false,'transaction', 'viewreceipt',modalOptions.receiptParams,modalOptions)">
 		<button type="button" class="close buttondistance" ng-click="modalOptions.close()">
 			<span aria-hidden="true">&times;</span></button>
 		<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('addBill')">Print</button>
 		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3>RECEIPT</h3>
 </div>
+
 	<br>
 	<div class="form-group">
 		<label for="bill_date" class="col-sm-2 control-label">Receipt Date</label>
 		<div class="col-sm-9">
-			<select class="form-control" name="bill_date" id="bill_date" ng-model="modalOptions.addBill.bill_date" ng-init="modalOptions.addBill.bill_date = modalOptions.date">
+			<select class="form-control" name="bill_date" id="bill_date" ng-model="receiptData" ng-options="item as item.date for item in modalOptions.viewreceipt">
 				<option value="bill_date">Select Date</option>
 			</select>
 		</div>
 	</div>
-	</br>
+	{{receiptData}}
+	</br>{{modalOptions.receiptData}}
 <div class="modal-body">
 	<div id="Bill">
-	<div class="panel panel-default"ng-if="modalOptions.addBill">
+	<div class="panel panel-default" ng-if="modalOptions.addBill">
 		<div class="panel-heading text-center">
 			<h2>Receipt</h2>
 		</div>
@@ -30,18 +32,18 @@
 				</address>
 				<hr>
 				<p>To,<br>
-					<strong>{{modalOptions.rentList.name | uppercase}}</strong><br>
-					{{modalOptions.rentList.address.address}}<br>{{modalOptions.rentList.address.location}}<br>{{modalOptions.rentList.address.city}}<br>{{modalOptions.rentList.address.area}}<br>{{modalOptions.rentList.address.pincode}}<br>				
+					<strong>{{modalOptions.receiptData.name}}</strong><br>
+					{{modalOptions.receiptData.address}}<br>{{modalOptions.rentList.address.city}}<br>{{modalOptions.rentList.address.pincode}}<br>				
 				</P>
 			</div>
 			<div class="col-xs-6">
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<tr class="amt">
-							<td><strong>Receipt No.</strong><br>{{modalOptions.addBill.receipt_id}}
+							<td><strong>Receipt No.</strong><br>{{receiptData.transaction_id}}
 							</td>
 							<td><strong>Dated</strong><br>
-							{{modalOptions.addBill.receipt_date}}</td>
+							{{receiptData.transaction_date}}</td>
 						</tr>
 					</table>
 				</div>
@@ -75,8 +77,8 @@
 			</div>
 			<div class="col-xs-12">
 				<p>Received Amount (in words):
-				<strong><em>{{ modalOptions.inWords(modalOptions.addBill.paid) | uppercase}}</em></strong></p>
-				
+				<strong><em>{{inWords(receiptData.debit_amount) | uppercase}}</em></strong></p>
+
 				<hr/>
 				<p><strong>Company's Service Tax No: </strong>{{modalOptions.accountConfig.service_tax_no}}</p>
 				<p><strong>Company's Pan: </strong>{{modalOptions.accountConfig.pan_no}} </strong></p>
