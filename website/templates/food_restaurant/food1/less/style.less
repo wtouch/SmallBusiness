@@ -8,10 +8,10 @@
 	@lightcolor : #54190C;
 	@darkcolor : #3E2709;
 	@back : #1d0200;
-	@darkbackcolor : #043D80;
+	@darkbackcolor : #F5D892;
 	@lightbackcolor :#634928; 
 	@colorblack : #000000;
-	@colorwhite	: rgba(255, 255, 255,0.5);
+	@colorwhite	:  #fff ;
 	
 	@import "property.less";
 	@import "project.less";
@@ -23,10 +23,21 @@
 	.container{
 		max-width : 992px !important;
 	}
-body, fieldset, form, h1, h2, h3, h4, h5, h6, p 
+body, fieldset, form, h1, h2, h3, h4, h5, h6
 {
     margin: 0px;
     padding: 0px;
+	color:@colorwhite;
+}
+h2{
+	&::after{
+				content : url('../img/heading-graphic.gif');
+				position : absolute;
+				left : 50px;
+				bottom: 114px;
+				z-index : -1;
+			}
+
 }
 
 body {
@@ -47,7 +58,9 @@ header{
 		background-image:url("../img/food1.jpg");
 	}
 }
-
+h1,h2,h3{
+	color:@colorwhite;
+	}
 .navbar-default {
    background:transparent;
     border-color: transparent;
@@ -81,7 +94,8 @@ header{
 						position : absolute;
 						width : 270px;
 						z-index : 999;
-						//background : -webkit-linear-gradient(top, @back, @darkbackcolor 157%);
+						background-color :  @color;
+						color: @darkcolor;
 						padding : 15px;
 						list-style : none;
 						text-align : left;
@@ -93,9 +107,9 @@ header{
 							position : relative;
 							>a{
 								text-decoration:none;
-								color : @color;
+								color : @darkcolor;
 								&:hover{
-									color : @lightcolor;
+									color : @darkcolor;
 								}
 							}
 							> ul{
@@ -107,9 +121,9 @@ header{
 								>li{
 									>a{
 										text-decoration:none;
-										color : @color;
+										color : @darkcolor;
 										&:hover{
-											color : @lightcolor;
+											color : @darkcolor;
 										}
 									}
 								}
@@ -147,22 +161,42 @@ header{
 				}
 		}
 		.gallery{
-			background-image:url("../img/frame.gif");
 			.thumbnail{
-				
-				    display: block;
-					padding: 4px;
-					margin-bottom: 4px;
-					margin-top: 30px;
-					line-height: 1.42857143;
-					background-color: transparent;
-					border:none;
-					border-radius: 0px;
-					max-height:180px;
-					width:180px;
+				background-image:url("../img/frame.gif");
+				padding : 40px;
+				padding-top: 38px;
+				background-color: transparent;
+				border:none;
+				.imgs{
+					height: 114px;
+					width: 165px;
+					overflow: hidden;
+					margin: 0 auto;
+					margin-left: -5px;
+					img{
+						min-height : 180px;
+					}
 				}
+			}
 		}
+		.activity{
+				background-color:transparent;
+				
+			
+			.panel{
+			background-color:transparent;
+			border:none;
+			border-bottom:1px solid @darkcolor;
+				.media-heading{
+					color:@colorwhite;
+				}
+				.description{
+						overflow:hidden;
+						height:100px;
+				}
+			}
 		
+		}
 footer{
 		color:@color;
 		}

@@ -1,3 +1,4 @@
+
 .featured_services{
 	.sections{
 		border : none;
@@ -6,6 +7,7 @@
 	}
 	.services{
 		.servimage{
+		
 			border : 4px solid transparent;
 			padding : 6px;
 			&:hover{
@@ -25,34 +27,108 @@
 		}
 	}
 }
-
-.products{
-	.thumbnail{
-		height:385px;
+.product{
+				background-color:transparent;
+				border:none;
+				h4{
+					border-bottom:1px solid @darkcolor;
+				}
 		.prodimg{
-			height : 148px;
-			width : 195px;
-			overflow : hidden;
-			margin : 0 auto;
-			img{
-				min-height : 148px;
-				border : 2px solid transparent;
-				padding : 4px;
-				&:hover{
-					border : 2px solid @darkbackcolor;
+			    width: 250px;
+				height: 210px;
+				margin-top: 25px;
+				}
+		.description{
+				overflow:hidden;
+				height:148px;
+				border-bottom:1px solid @darkcolor;
+				border-image: url("../img/line-gred.jpg");
+				border-image-width: 0 0 1px 0;
+			}
+		.readmore{
+				margin-left:490px;
+				
+				.btn-info{
+				background-image:url("../img/send-enquiry.jpg");
+				border:none;
+				padding: 21px 82px;
+				margin-top: 15px;
 				}
 			}
-		}
-		.caption{
-			height: 182px;
-			margin-bottom : 10px;
-			.description{
-				height : 75px;
-				overflow : hidden;
+			&::after{
+				content : url('../img/vector-sep.jpg');
+				position : absolute;
+				left : 0px;
+				bottom: 10px;
+				z-index : -1;
 			}
+}
+
+.services{
+		margin-top:150px;
+	.products{
+		.thumbnail{
+			background: url(../img/box-bg.jpg) repeat-y;
+			width:293px;
+			margin-left:8px;
+			border-radius:0px;
+			border:0px;
+			padding: 25px;
+			background-color:@darkbackcolor;
+			h3{
+				
+				    position: absolute;
+					top: -70px;
+					left: 95px;
+					
+			}
+			h4{
+				 position: absolute;
+					//top: -70px;
+					left: 158px;
+					color:@back;
+			}
+			
+			&::before{
+			content : url('../img/box-top.jpg');
+			position : absolute;
+			left :23px;
+			top : -119px;
+			
+			}
+		&::after{
+			content : url('../img/box-bot.jpg');
+			position : absolute;
+			left : 23px;
+			bottom: -53px;
+			z-index : -1;
 		}
-		.readmore{
-			text-align : center;
-		}
+			.prodimg{
+				height : 148px;
+				width : 180px;
+				overflow : hidden;
+				margin : 0 auto;
+				background-color:@color;
+				img{
+					min-height : 148px;
+					border : 2px solid transparent;
+					padding : 10px;
+					&:hover{
+						border : 2px solid @darkbackcolor;
+					}
+				}
+			}
+			.caption{
+				//height: 182px;
+				margin-bottom : 10px;
+				.description{
+					height : 75px;
+					overflow : hidden;
+				}
+			}
+			.readmore{
+				text-align : center;
+			}
 	}
+}
 }
