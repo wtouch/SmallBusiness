@@ -41,10 +41,21 @@ header{
 					font: 400 34px/40px "Arbutus Slab", sans-serif;
 					color:@colorwhite;
 					padding-top:67px;
+					
+					animation-name:tagline;
+					animation-duration:3s;
+					animation-iteration-count:1;
 					}
-		.tagline1{
-				color:@colorwhite;
-		}
+			.tagline1{
+					color:@colorwhite;
+					animation-name:tagline;
+					animation-duration:3s;
+					animation-iteration-count:1;
+					}
+}
+@keyframes tagline{
+					0%{opacity:0;transform:translateY(-200px);}
+					100%{opacity:1;transform:translateY(0px);}
 }
 .btn-info {
 		color: @colorblack; 
@@ -59,4 +70,41 @@ header{
 				background-color:@lightcolor;
 		}
 }
+	#googleMap{
+			height:300px;
+			border:1px solid @colorblack;
+			margin:20px;
+	}
 	
+	.contact{
+					h2{
+							text-align:center;
+					}
+					.logo{
+					height:150px;
+					
+			}
+	}
+	.sociallinks{
+			li{
+					display:inline;
+					}
+				a{
+				border-radius:50%;
+				border:1px solid transparent;
+				display:inline-block;
+				height:58px;
+				width:58px;
+				margin:2px;
+				background-color:rgba(85, 85, 85, 0.25);
+				padding:10px;
+				&:hover{
+				background-color:rgba(8, 8, 8, 0.54);
+				}
+				img{
+					height:40px;
+					width:40px;	
+				}
+				}
+				
+}

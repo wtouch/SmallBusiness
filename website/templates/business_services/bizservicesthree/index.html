@@ -18,17 +18,32 @@
 		
 		<script src="{{ path }}js/script.js"></script>
 		<script src="{{ path }}js/myscript.js"></script>
-		
-		
-		
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		<script src="http://maps.googleapis.com/maps/api/js">
+		</script>
+<script>
+		function initialize() {
+			var mapProp = {
+				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+				zoom:12,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			var marker=new google.maps.Marker({
+				position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+			});
+			marker.setMap(map);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
 		
-	</head>
-	<body>
-		<header>
+</head>
+
+<body>
+	<header>
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-4 weblogo">
@@ -55,64 +70,17 @@
 			
 			{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %} 
 			</div>
-		</header>
+	</header>
 		
 		<!--  {% include contentPath %}-->
 		{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %} 
 	
-		
-<div class="container">
-		{% if data.infrastructure %}
-		<hr>
-		<div class="infrastructure" id="infrastructure">
-			<h3 class="text-center">Infrastructure/Facilities</h3>
-			<div class="row">
-				{% for key, value in data.infrastructure %}
-					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 thumbnail">
-						
-							<div class="infraImg">
-								<img class="img-responsive " src="{{value.image.file_relative_path}}"/>
-							</div>
-							<div class="caption text-center" ng-controller="aboutController">
-								<h4>{{value.heading}}</h4>
-								{{value.description|length >100 ? value.description|slice(start,100)~ '...' : value.description}}
-							</div>
-							<div class="readmore text-center">
-								<a type="button" class="btn btn-info"  data-toggle="modal" data-target="#myModal{{loop.index}}">Read More..</a>
-							</div>
-						</div>
-					
-					<!-- modal -->	
-					<div id="myModal{{loop.index}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-						<div class="modal-dialog modal-lg">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title" id="myModalLabel">Infrastructure Details</h4>
-								</div>
-								<div class="modal-body">
-									<div class="row">
-										<div class="col-xs-12 col-sm-4 col-lg-3">
-											<a href="#">
-											  <img class="img-responsive" src="{{value.image.file_relative_path}}"/>
-											</a>
-										</div>
-										<div class="col-xs-12 col-sm-8 col-lg-9">
-											<h4>{{value.heading}}</h4>
-											<p>{{value.description}}</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--modal end-->
-				{% endfor %}
-			</div>
-		</div>
-	</div>
-	{% endif %}
-		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} 
+		{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}  
+	
+	<div id="googleMap"></div>
+			{% include [templatePath ~ '/includes/contact-us.html', 'default/default/includes/contact-us.html'] %} 
+	
+		<!--  {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}  -->
 	</body>
 </html>
 {% endspaceless %}
