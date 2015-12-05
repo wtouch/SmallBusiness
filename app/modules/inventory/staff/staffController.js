@@ -250,15 +250,12 @@ define(['app'], function (app) {
 				staffattendance : (data) ? {
 					id : data.id,
 					name : data.name,
-					login:data.login,
-					logout:data.logout
+					
 				}:{
 						date : dataService.sqlDateFormate(),
 						user_id : $rootScope.userDetails.id,
 						status:1,
 						modified_date : dataService.sqlDateFormate(),
-						
-						
 				}, 
 				getData:$scope.getData,	
 				postData : function(table, input){

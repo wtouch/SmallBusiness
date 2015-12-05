@@ -23,13 +23,12 @@
 				</span>
 			</div>
 			<label for="name" class="col-sm-1 control-label">Type*</label>
-			<div class="col-sm-1">
-				<input type="radio" name="type" value="paid">Paid
+			 <div class="radio col-sm-1">
+				<label><input type="radio" name="type" value="1" ng-model="modalOptions.addleave.type">Paid</label>
 			</div>
-			<div class="col-sm-2">
-				<input type="radio" name="type" value="unpaid">Unpaid
-			</div>
-		
+			<div class="radio col-sm-2">
+			<label><input type="radio" name="type" value="0" ng-model="modalOptions.addleave.type">Unpaid</label>
+				</div>
 		</div>
 		<div class="form-group">
 			<label  for="date" class="col-sm-2 control-label">Date *</label>
@@ -81,16 +80,15 @@
 		</div>
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Leave for*</label>
-		
-			<div class="col-sm-2">
-				<input type="radio" name="type" value="0.5" checked>Half Day
-					</div>
-			<div class="col-sm-2">
-				<input type="radio" name="type" value="1">Full Day
-					</div>
-			<div class="col-sm-2">
-				<input type="radio" name="type" value="3">No of Days
+			<div class="radio col-sm-2">
+			<label><input type="radio" name="leave" value="0.5" ng-model="modalOptions.addleave.leaves_for">Half Day</label>
 			</div>
+			<div class="radio col-sm-2">
+			<label><input type="radio" name="leave" value="1" ng-model="modalOptions.addleave.leaves_for">Full Day</label>
+				</div>
+			<div class="radio col-sm-2">
+			<label><input type="radio" name="leave" value="2" ng-model="modalOptions.addleave.leaves_for">No of Days</label>
+				</div>
 		</div>
 </form>	
 </div>
