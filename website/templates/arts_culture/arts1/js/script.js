@@ -85,14 +85,14 @@ $(document).ready(function(){
 	})
 	 $(window).scroll(function(e){
 		var scrollTop = $(document).scrollTop();
-		if(scrollTop > 35){
+		if(scrollTop > 30){
 			console.log(scrollTop);
 			$('nav').removeClass('navbar-static-top').addClass("navbar-fixed-top");
 		} else {
 			$('nav').removeClass("navbar-fixed-top").addClass('navbar-static-top')
 		}
 	}); 
- 	// This is for Cookie
+ 	/* // This is for Cookie
 	function getCookie(cname) {
 		var name = cname + "=";
 		var ca = document.cookie.split(';');
@@ -110,7 +110,28 @@ $(document).ready(function(){
 		document.cookie="anim=true; expires=" + cookieTime;
 	}else{
 		$(".anim2, .anim4,.anim.js").hide();
-		$(".anim1").removeClass("anim1,anim.js");
+		$(".anim1").removeClass("anim1");
+		console.log(getCookie('anim'));
+	}  */
+		// This is for Cookie
+	function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i=0; i<ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') c = c.substring(1);
+			if (c.indexOf(name) == 0) return true;
+		}
+		return false;
+	}
+	var cookieExpiry = new Date();
+	cookieExpiry.setMinutes(cookieExpiry.getMinutes() + 30);
+	var cookieTime = cookieExpiry.toUTCString();
+	if(getCookie('anim') == false){
+		document.cookie="anim=true; expires=" + cookieTime;
+	}else{
+		$(".anim2, .anim4").hide();
+		$(".anim1").removeClass("anim1");
 		console.log(getCookie('anim'));
 	} 
 });

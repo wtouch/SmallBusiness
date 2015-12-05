@@ -7,14 +7,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/ normalize.css">
 		<script src="{{ path }}js/jquery.min.js"></script>
 		<script src="{{ path }}js/bootstrap.min.js"></script>
 		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
-		<script src="{{ path }}js/anim.js"></script> 
-		<script src="{{ path }}js/script.js"></script> 
+		<script src="{{ path }}js/script.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}"> 
@@ -22,13 +22,19 @@
 	<body>
 		<div class="col-md-12 anim2">
 			<img class="img-responsive" src="{{ path }}img/robot.gif" alt="image missing">
+			<script src="{{ path }}js/anim.js"></script> 
 		</div>
-		<h1 class="anim4">MOVEIN <br>ROBOTECH</h1>
+		<h1 class="anim4">Kashmir <br>Art</h1>
+		 <!-- <script src="{{ path }}js/anim.js"></script>  -->
 		<div class="anim1">
 	<div class="anim">
+		
 		<header>
-			<img class="logo" src="{{data.business_logo.file_relative_path}}">
+			<div class="container">
+				<img class="logo" src="{{data.business_logo.file_relative_path}}">
+			<div>
 		</header>
+		
 		<nav class="navbar navbar-default ">
 			<div class="contianer">
 				<div class="navbar-header">
@@ -54,11 +60,11 @@
 						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 						{%endif%}
 					{%if modules.sidebarModule.sidemenu %}	
-						<div class="col-sm-3 col-md-4">
+						<div class="col-sm-3 col-md-3">
 							{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
 						</div>
 					{%endif%}
-					<div class="content {{modules.sidebarModule.sidemenu ? 'col-sm-9 col-md-8':'col-sm-12 col-md-12'}}">
+					<div class="content {{modules.sidebarModule.sidemenu ? 'col-sm-9 col-md-9':'col-sm-12 col-md-12'}}">
 						 {% include contentPath %}
 					</div>
 				</div>

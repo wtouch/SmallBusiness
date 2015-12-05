@@ -2,10 +2,33 @@
 <footer>
 	
 	<div class="container">
-		<p class="  text-center">
-			&copy; 2015 <a href="/">{{data.business_name}}</a>
-			&nbsp;|&nbsp;Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>
-			&nbsp;|&nbsp;<a target="_blank" href="/sitemap.xml">SITEMAP</a>
-		</p>
+	
+			<div class="col-xs-6 col-sm-6 col-md-4">
+			<h2 class="am">contact us</h2>
+			<p class="wt">{{data.business_name}}:</p>
+			<h3 class="am">{{data.contact_profile.contact_person}}</h3>
+						<b class="wt">Address</b>
+						<address class="wt">
+							{{data.contact_profile.address}}
+							{{data.city}}-{{data.pincode}},
+							{{data.state|capitalize}},
+							{{data.country|capitalize}}.
+						</address>
+				<strong class="wt">E-mail Id</strong>
+					{{data.contact_profile.email}}
+					
+				<p class="wt">{{data.contact_profile.alternate_email}}</p>
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 vk">
+				<p class=" wt text-center">
+					&copy; 2015 <a href="/">{{data.business_name}}</a>
+					&nbsp;|&nbsp;Designed By - <a href="http://www.apnasite.in" target="_blank">ApnaSite.in</a>
+					&nbsp;|&nbsp;<a target="_blank"class="wt" href="/sitemap.xml">SITEMAP</a>
+				</p>
+				
+			</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 ">
+			<img class="logo wt" src="{{data.business_logo.file_relative_path}}">	
+			</div>
 	</div>
 </footer>
