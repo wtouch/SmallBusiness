@@ -15,13 +15,13 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="name" class="col-sm-2 control-label">Surname *</label>
+				<label for="surname" class="col-sm-2 control-label">Surname *</label>
 				<div class="col-sm-9">
 					<input type="hidden" ng-model="modalOptions.addstaff.status" ng-init="modalOptions.addstaff.status = '1'">
-					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.name"required>
-					 <span class="text-danger"  ng-show="addstaffForm.name.$error.pattern">Required Field.</span>
-					<span class="help-block" ng-show="addstaffForm.name.$dirty && addstaffForm.name.$invalid">
-						<span class="text-danger" ng-show="addstaffForm.name.$error.required">Name is required.</span>
+					<input type="text" id="surname" class="form-control" name="surname" placeholder="Surname" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.surname"required>
+					 <span class="text-danger"  ng-show="addstaffForm.surname.$error.pattern">Required Field.</span>
+					<span class="help-block" ng-show="addstaffForm.surname.$dirty && addstaffForm.surname.$invalid">
+						<span class="text-danger" ng-show="addstaffForm.surname.$error.required">Name is required.</span>
 					</span>
 				</div>
 			</div>
@@ -136,11 +136,7 @@
 			</div> 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-				<button type="submit" class="btn btn-success" ng-if="!modalOptions.addstaff.id" ng-disabled="addstaffForm.$invalid" ng-click="modalOptions.postData('staff',modalOptions.addstaff);modalOptions.ok()">Add staff</button>
-				
-				<button type="submit" ng-if="modalOptions.addstaff.id" class="btn btn-success" ng-disabled="addstaffForm.$invalid" ng-click="modalOptions.updateData('staff',modalOptions.addstaff,modalOptions.addstaff.id);modalOptions.ok()">Update staff</button>
-				
-				<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
+				<button type="submit" class="btn btn-primary" title="Save" ng-disabled="addstaffForm.$invalid" ng-click="modalOptions.showFormPart('officialDetails',modalOptions)">Next</button>
 				</div>
 			</div>		
 </form>	

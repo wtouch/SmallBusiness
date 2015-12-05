@@ -17,7 +17,13 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		
-		
+		$scope.staffParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
+		}
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Staff",
@@ -33,7 +39,7 @@ define(['app'], function (app) {
 				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/staff/staff_attendence.html");
+						return $scope.openModal("modules/inventory/staff/staffattendence.html");
 					}
 				}
 			},
@@ -221,8 +227,9 @@ define(['app'], function (app) {
 						})
 					},
 					formPart : 'personalDetails',
-					showFormPart : function(formPart){
-						$scope.formPart = formPart;
+					showFormPart : function(formPart, modalOptions){
+						console.log(formPart);
+						modalOptions.formPart = formPart;
 					}
 				};
 			
@@ -232,13 +239,76 @@ define(['app'], function (app) {
 			})
 			
 		}
-		$scope.staffParams = {
-			where : {
-				status : 1,
-				user_id : $rootScope.userDetails.id
-			},
-			cols : ["*"]
+		$scope.openModal = function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions = {
+				staffdate: dataService.sqlDateFormate(),
+				date:{date : $scope.currentDate},
+				staffattendance : (data) ? {
+					id : data.id,
+					name : data.name,
+					login:data.login,
+					logout:data.logout
+				}:{
+						date : dataService.sqlDateFormate(),
+						user_id : $rootScope.userDetails.id,
+						status:1,
+						modified_date : dataService.sqlDateFormate(),
+						
+						
+				}, 
+				getData:$scope.getData,	
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
 		}
+		
+			$scope.openModal = function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions = {
+				staffdate: dataService.sqlDateFormate(),
+				date:{date : $scope.currentDate},
+				addleave : (data) ? {
+					id : data.id,
+					name : data.name,
+				}:{
+						date : dataService.sqlDateFormate(),
+						user_id : $rootScope.userDetails.id,
+						status:1,
+						modified_date : dataService.sqlDateFormate(),
+						
+						
+				}, 
+				getData:$scope.getData,	
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
+		
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {

@@ -5,10 +5,10 @@
 </div>
 	<ul class="nav nav-tabs">			
 		<li role="presentation" ng-class="{active: modalOptions.formPart=='personalDetails'}">
-			<a ng-click="modalOptions.showFormPart('personalDetails')">Personal Details</a>
+			<a ng-click="modalOptions.showFormPart('personalDetails', modalOptions)">Personal Details</a>
 		</li>	
 		<li role="presentation" ng-class="{active: modalOptions.formPart=='officialDetails'}">
-			<a ng-click="modalOptions.showFormPart('officialDetails')">Official Details</a>
+			<a ng-click="modalOptions.showFormPart('officialDetails', modalOptions)">Official Details</a>
 		</li>
 	</ul>
 		<ng-include  ng-show="modalOptions.formPart=='personalDetails'" 	src="'modules/inventory/staff/personalDetails.html'">
