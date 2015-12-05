@@ -98,7 +98,7 @@
 			<div class="form-group">
 				<label  for="Amount" class="col-sm-2 control-label">Amount</label>
 				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
-					<input type="text"  id="Amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.payInvoice.credit_amount" name="credit_amount" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList"ng-change="modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payInvoice.credit_amount, modalOptions)" required/>
+					<input type="text"  id="Amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.payInvoice.credit_amount" name="credit_amount" placeholder="Amount" ng-options="item.id as item.account_name for item in modalOptions.transactionList" ng-change="modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payInvoice.credit_amount, modalOptions);modalOptions.checkPaidStatus(modalOptions.payInvoice.credit_amount,modalOptions)" required/>
 					<span class="help-block" ng-show="payInvoiceForm.credit_amount.$dirty && payInvoiceForm.amount.$invalid">
 						<span ng-show="payInvoiceForm.credit_amount.$error.required" class="text-danger">Amount is required.</span>
 						<span ng-show="payInvoiceForm.credit_amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>

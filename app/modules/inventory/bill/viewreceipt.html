@@ -1,12 +1,9 @@
 <div class="modal-header" ng-init="modalOptions.getData(false,false,'transaction', 'viewreceipt',modalOptions.receiptParams,modalOptions)">
-		<button type="button" class="close buttondistance" ng-click="modalOptions.close()">
-			<span aria-hidden="true">&times;</span></button>
+		
 		<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('addBill')">Print</button>
 		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3>RECEIPT</h3>
 </div>
-
-	<br>
 	<div class="form-group">
 		<label for="bill_date" class="col-sm-2 control-label">Receipt Date</label>
 		<div class="col-sm-9">
@@ -15,10 +12,9 @@
 			</select>
 		</div>
 	</div>
-	{{receiptData}}
-	</br>{{modalOptions.receiptData}}
+	</br>
 <div class="modal-body">
-	<div id="Bill">
+	<div id="Bill">{{modalOptions.addinvoice}}
 	<div class="panel panel-default" ng-if="modalOptions.addBill">
 		<div class="panel-heading text-center">
 			<h2>Receipt</h2>
@@ -33,17 +29,17 @@
 				<hr>
 				<p>To,<br>
 					<strong>{{modalOptions.receiptData.name}}</strong><br>
-					{{modalOptions.receiptData.address}}<br>{{modalOptions.rentList.address.city}}<br>{{modalOptions.rentList.address.pincode}}<br>				
+					<br>{{modalOptions.rentList.address.city}}<br>{{modalOptions.rentList.address.pincode}}<br>				
 				</P>
 			</div>
 			<div class="col-xs-6">
 				<div class="table-responsive">
 					<table class="table table-bordered">
 						<tr class="amt">
-							<td><strong>Receipt No.</strong><br>{{receiptData.transaction_id}}
+							<td><strong>Receipt No.</strong>:{{receiptData.reference_id}}
 							</td>
 							<td><strong>Dated</strong><br>
-							{{receiptData.transaction_date}}</td>
+							{{receiptData.modified_date}}</td>
 						</tr>
 					</table>
 				</div>
@@ -59,18 +55,15 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>Paid By <strong>{{modalOptions.rentList.description.payment_type.type}}</strong> Against Invoice No.<strong>{{modalOptions.addBill.id}}</strong>
-							<p ng-if="modalOptions.rentList.description.payment_type.type != 'Cash'">
-								<span ng-repeat="(key, value) in modalOptions.rentList.description.payment_type">
-									<strong>{{key}}</strong><span> {{value}} </span></br>
-								</span>
-							</p>
-							</td>
+							<tr ng-repeat="x in modalOptions.addBill.particular">
+									<td>{{x.particular_name}}</td>
+									<td>{{x.amount}}</td>
+							</tr>
 							<td>{{modalOptions.addBill.paid | number : 2}}</td>
 						</tr>
 						<tr>
 							<td class="text-right"><strong>Received Amount</strong></td>
-							<td class="text-right">{{modalOptions.addBill.paid | number : 2}}</td>
+							<td class="text-right">{{modalOptions.addBill.debit_amount}}</td>
 						</tr>
 						</tbody>
 				</table>
@@ -80,8 +73,8 @@
 				<strong><em>{{inWords(receiptData.debit_amount) | uppercase}}</em></strong></p>
 
 				<hr/>
-				<p><strong>Company's Service Tax No: </strong>{{modalOptions.accountConfig.service_tax_no}}</p>
-				<p><strong>Company's Pan: </strong>{{modalOptions.accountConfig.pan_no}} </strong></p>
+				<p><strong>Company's Service Tax No: </strong>{{userDetails.config.inventory.taxData.tin_no}}</p>
+				<p><strong>Company's Pan: </strong>{{userDetails.config.inventory.taxData.pan_no}} </strong></p>
 				<p class="text-right">For <strong><em>{{userDetails.name}}</em></strong><br><br><br>
 				Authorised Signatory</p>
 			</div>

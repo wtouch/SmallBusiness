@@ -251,7 +251,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'bill','billData',billParams);
+							$scope.getData(false, $scope.currentPage, 'bill','billData',$scope.billParams);
 						}
 					})
 				},
@@ -275,8 +275,6 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
-		
-		
 		
 		$scope.openPaybill = function(url,data){
 			console.log(data)
