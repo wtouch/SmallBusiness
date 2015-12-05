@@ -25,7 +25,7 @@
 	.container {
 		width: 1200px;
 	}
- .logo {
+	.logo {
 		float: left;
 		margin-top: 0px;
 		margin-left: -57px;
@@ -39,31 +39,36 @@
 		background-size: cover;
 	}
 	.carousel-inner>.item{
-				height:450px;
-		
-				z-index:1;
-			img{
-			     min-height:450px;
-				 width: 100%;
-				}
+		height:450px;
+		z-index:1;
+		img{
+			min-height:450px;
+			width: 100%;
+		}
 		.carousel-caption{
-	
-			background-color:rgba(46, 50, 60, 0.62);
+			background-color:transparent;
 			border-bottom:transparent;
-			border-top:276px solid rgba(46, 50, 60, 0.62);
-			border-right: 350px solid transparent;
 			right:20%;
 			padding bottom:30px;
 			left: 0;
 			right: 0;
 			top: 0;
 			bottom: 123px;
+			z-index : 99;
+			&::before{	
+			position: absolute;
+			content: '';
+			left: 0;
+			top: 0;
+			z-index: -99;
+			border-top: 408px solid @lightbackcolor;
+			border-left: 388px solid @lightbackcolor;
+			border-right: 701px solid transparent;
+			border-bottom: 280px solid transparent;
 			
+			}
 		}
-				}
-			
-		
-			
+	}		
 	.navbar-default {	
 		background-color:transparent;
 		border : none;
@@ -75,24 +80,20 @@
 		margin-top:80px;
 	    display: inline-block;
 		text-decoration: none;
+		border-bottom:2px solid @lightbackcolor;
            .navbar-nav{
 				   padding:0;
 				   text-align: left;
-			
 			> li{
 				position : relative;
-				
 				color:@colorwhite;
 				text-transform:uppercase;
-				
 				margin-right: 10px;
 				font-weight: 500;
 				font-size: 22px;
 				line-height: 22px;
 				letter-spacing: 1px;
 				display: inline-block;
-				
-				
 				> ul {
 						display: none;
 						position: absolute;
@@ -116,7 +117,7 @@
 					&:hover{
 							
 							>a{
-								color:red;
+								color:@color;
 								a {
 								font: inherit;
 								color: inherit;
@@ -161,12 +162,7 @@
 		letter-spacing: 1px;
 		right:335px;
 	}
-	.content, .sections, .sidemenu,  .tab-content{
-		//background-color : @back;
-		//border:1px solid @darkbackcolor;
-		//border-radius : 4px;
 	
-	}
 	.thumbnail
 	{
 	 color:@lightbackcolor;
@@ -176,25 +172,26 @@
 	 width:200px;
 	 padding: 10px;
 	 margin-top: 60px;
-	 
+	    margin-top: 5px;
+		font-size: 12px;
+		line-height: 15px;
+		font-weight: 300;
 	}
 	.content{
 	    @color:@back;
 		margin-top : 20px;
 		padding : 0px 20px 20px;
-		}
-		
-			
-			.text-center {
-				text-align: center;
-				color:@lightcolor;
-			}
-	
-	.sidebarModule{
-		.panel-body{
-			padding : 15px 15px 0px;
-		}
 	}
+.text-center{
+	text-align: center;
+	color:@colorwhite;
+}
+	
+.sidebarModule{
+	.panel-body{
+	padding : 15px 15px 0px;
+	}
+}
 	.contactus{
 		h4{
 			margin-top : 0px;
@@ -217,10 +214,10 @@
 		padding-left : 0px;
 	}
 	a, .btn-link{
-		color : @back;
+		color : @colorwhite;
 		&:hover{
-			text-decoration : underline;
-			color : @back;
+			text-decoration : none;
+			color : @color;
 		}
 	}
 	.btn-info{
@@ -306,13 +303,13 @@
 	
 	.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus
 	{
-		background-color : @darkcolor;
+		background-color : @lightbackcolor;
 		color : @back;
-		border : 1px solid @darkbackcolor;
+		border : 1px solid @color;
 	}
 	.pagination>li>a, .pagination>li>span, .pagination>.disabled>a, .pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus{
-		background-color : @darkcolor;
-		border : 1px solid @darkbackcolor;
+		background-color : @lightbackcolor;
+		border : 1px solid @color;
 		color : @colorwhite;
 		&:hover{
 		   color:@lightcolor;
@@ -320,18 +317,16 @@
 	}
 	
 	footer{
-		//margin-top : 15px;
-		padding-top : 70px;
-		color:@back;
-		font-weight : bold;
-		background-color:@darkcolor;
-		position: relative;
-		height:150px;
+		font-size: 11px;
+		line-height: 19px;
+		text-align: left;
+		text-transform: uppercase;
+		
 			
 	}
 	.text-center1 {
-				text-align: center;
-				color:@back;
+				margin-top:88px;
+				color:@colorwhite;
 			}
 	.navbar-toggle{
 		background-color : @darkcolor;
@@ -389,6 +384,8 @@
 		.logo{
 			float:none;
 		}
+		
+			
 		.cnctinfo{
 			display : block;
 		}
@@ -428,7 +425,7 @@
 			margin-right: auto;
 			margin-left: auto;
 			height: 300px;
-			border-bottom:3px solid @lightcolor;
+			
 			
 		}
 		
@@ -462,14 +459,11 @@
 					overflow: hidden;
 					margin-top: 28px;
 					}*/
-				.about{
-				 background-color:@darkcolor;
-				 padding:15px;
-				}
+				
 				.gallery .thumbnail .caption .description {
 					overflow: hidden;
 					height: 122px;
-					color: white;
+					color: @lightbackcolor;
 				}
 			
 				
@@ -485,7 +479,8 @@
 					-moz-transition: all 0.6s ease;
 					-o-transition: all 0.6s ease;
 					-webkit-transition: all 0.6s ease;
-					transition: all 0.6s ease;	
+					transition: all 0.6s ease;
+					margin-right: 241px;					
 					&:hover{
 						color:red;
 					}
@@ -498,6 +493,27 @@
 				}
 			
 			
-		.contactus{
-			background: url('../img/ab.jpg');
-		}
+.contact {
+	background: url('../img/abc.jpg');
+	height: 600px;
+	margin-top: 120px;
+	background-size: 100% 100%;
+	
+	.col-lg-4 {
+		width: 33.33333333%;
+		padding-top: 210px; 
+	}
+}
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+	
+}
+
+.about{
+	 background-color:@back;
+	 padding:15px;
+	 color:@lightbackcolor;
+}

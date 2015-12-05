@@ -31,25 +31,25 @@
 				{% else %}
 					<img class="logo" src="{{data.business_logo.file_relative_path}}">
 				{% endif %}
-			</div>
-			
-			<nav class="navbar navbar-default"> 
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
 				</div>
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav ">
-					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-				</ul>
+			
+				<nav class="navbar navbar-default"> 
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav ">
+							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+						</ul>
+					</div>
+		
+				</nav>
 			</div>
-	
-			</nav>
-		</div>
 		</div>		
 </header>
 		
@@ -67,14 +67,16 @@
 </div> 
 
 <div class="container">
+					{%if modules.contentModule.featured_products %}
 					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+					{%endif%}
 </div>	
-
+<div class="container-fluid contact">
 					{%if modules.sidebarModule.contact %}
 					{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
 					{%endif%}
-					
-			
+</div>					
+				{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 		
 </body>
 </html> 
