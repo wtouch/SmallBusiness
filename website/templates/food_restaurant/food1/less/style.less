@@ -8,7 +8,7 @@
 	@lightcolor : #54190C;
 	@darkcolor : #3E2709;
 	@back : #1d0200;
-	@darkbackcolor : #F5D892;
+	@darkbackcolor : #2f0805;
 	@lightbackcolor :#634928; 
 	@colorblack : #000000;
 	@colorwhite	:  #fff ;
@@ -67,48 +67,24 @@ header{
 .navbar-default {
    background:transparent;
     border-color: transparent;
-	top: 21px;
+	top: 28px;
     margin-right: -15px;
 	
 		.navbar-nav{
 				>li{
-				
 					position :relative;
-					display: inline-block;
-				  vertical-align: middle;
-				  -webkit-transform: translateZ(0);
-				  transform: translateZ(0);
-				  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-				  -webkit-backface-visibility: hidden;
-				  backface-visibility: hidden;
-				  -moz-osx-font-smoothing: grayscale;
-				  -webkit-transition-duration: 0.3s;
-				  transition-duration: 0.3s;
-				  -webkit-transition-property: transform;
-				  transition-property: transform;
-				  -webkit-transition-timing-function: ease-out;
-				  transition-timing-function: ease-out;
-			
-				  &:hover,&:focus,&:active {
-						  -webkit-transform: translateY(-8px);
-						  transform: translateY(-8px);
-						}
 				>a{
 						background:linear-gradient(@lightbackcolor,@lightcolor);
 						color : @color;
 						border:1px solid @colorblack;
-						//text-shadow: 1px 1px @colorblack;
 						font-size: 14px;
 						font-weight:bold;
-						
 						border-right: 1px solid @back; 
 						border-top-left-radius: 10px;
-						//border-top-right-radius: 10px;
 					}
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 						color: @darkcolor;
 						cursor: pointer;
-						//text-shadow: 1px 1px @colorblack;
 						background: @color;
 					}
 					ul{
@@ -162,7 +138,7 @@ header{
 					}
 				}
 			}
-}
+	}
 .carousel{
 			background:rgba(0, 0, 0, 0.22);;
 			box-shadow:0px 4px 4px  @colorblack;
@@ -185,6 +161,7 @@ header{
 		.gallery{
 			.thumbnail{
 				background-image:url("../img/frame.gif");
+				background-repeat:no-repeat;
 				padding : 40px;
 				padding-top: 38px;
 				background-color: transparent;
@@ -203,8 +180,6 @@ header{
 		}
 		.activity{
 				background-color:transparent;
-				
-			
 			.panel{
 			background-color:transparent;
 			border:none;
@@ -217,25 +192,26 @@ header{
 						height:100px;
 				}
 			}
-		
-		}
-		
+		}	
 	#googleMap{
 		height:395px;
 	}
-	
-	
 	.about{
-	
-		margin:20px;
-		padding:10px;
-	
+		center{
+			margin:20px;
+		
+		}
+		p{
+			padding-top:5px;
+			strong{
+			margin-left:5px;
+			}
+		}
 	}
 	.form-control{
 			color:@color;
 			border:1px solid @darkcolor;
-			background-color:transparent;background-color:transparent;
-			
+			background-color:@darkbackcolor;	
 		}
 	.enquiry{
 			h3{
@@ -249,19 +225,20 @@ header{
 					color:@color;	
 				
 					.btn-info{
-					background-image:url("../img/btn-bg.jpg");
-					border:none; 
-					height: 27px;
-					width: 81px;				
+						background-color:@color;
+						border:none; 
+						height: 27px;
+						width: 81px;
+						color:@darkcolor;					
 				}
 			&::before{
 				content : url('../img/vector-sep.jpg');
 				position : absolute;
 				z-index : -1;
-			    left: -390px;
+			    left: -405px;;
 				top: 400px;
 				transform: rotate(90deg);
-			}				
+		}				
 	}
 }
 .table>tbody>tr>td,{
@@ -270,45 +247,54 @@ header{
 		border-top:none;
 	}
 }
-
-.pagination{	
+	.pagination{	
+		border-bottom:1px solid @darkcolor;
 		li{
 			background-color: @lightcolor;
 			a{
 				color: @color;
 				background-color: @lightcolor;
-				border-color:@darkcolor;
-					
+				border-color:transparent;
 				&:hover,&:active,&:focus{
 				color:@lightcolor;
 				background-color: @color;
-				border-color:@darkcolor;
-				.disabled{
-					>a{
-					color:@lightcolor;
-					background-color: @color;
-					border-color:@darkcolor;
-				}
-			}
-				
-			}
-			
-			}
+				border-color:transparent;
+				}			
+			}	
 		}
-		
-		
-	}
-	
-.pagination>.active>a{
+		.active>a{
 				color:@lightcolor;
 				background-color: @color;
-				border-color:@darkcolor;
-}
-	
+				border-color:transparent;
+				&:hover{
+					color:@lightcolor;
+					background-color: @color;
+					border-color:transparent;
+					}
+				}
+		.disabled{
+				>a{
+				color: @color;
+				background-color: @lightcolor;
+				border-color:transparent;
+				&:hover{
+					color:@lightcolor;
+					background-color: @color;
+					border-color:transparent
+				}
+				}	
+			}	
+		&::before{
+				content : url('../img/line-grid.jpg');
+				position : absolute;
+				z-index : -1;
+			}				
+	}
 footer{
 		color:@color;
-		margin-top:30px;
-		
+		margin-top: 100px;
+		padding: 20px;
+	
 		a{
 		
 			color:@colorwhite;
@@ -325,3 +311,15 @@ footer{
 		border-radius: 0;
 		}
 }
+@media (max-width: 320px){
+	
+	.products {
+    margin-top: 180px;
+	border:none;
+	.thumbnail{
+		border:none;
+		}
+	}
+}
+		
+		
