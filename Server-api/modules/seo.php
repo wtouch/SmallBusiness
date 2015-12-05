@@ -16,7 +16,7 @@
 		
 		(isset($_GET['status'])) ? $where['status'] = $_GET['status'] : 1;
 		if(isset($_GET['business_id'])) $where['id'] = $_GET['business_id'];
-		
+		//echo $_GET['business_id'];
 		$userCols['name'] = "name";
 		$userCols['username'] = "username";
 		$user = $db->getUsers($userId,$userCols);
@@ -50,7 +50,7 @@
 			if($data['data'][0]['news_coverage']) $menus[] = array("name" => "Activities", "url" => "/activities", "status" => "1"); 
 			
 			if($data['data'][0]['gallery']) $menus[] = array("name" => "Gallery", "url" => "/gallery", "status" => "1");
-			
+			//print_r($data['data']);
 			if($data['data'][0]['custom_details']){
 				if(count($data['data'][0]['custom_details']) >=1 ){
 					foreach($data['data'][0]['custom_details'] as $key => $value){
