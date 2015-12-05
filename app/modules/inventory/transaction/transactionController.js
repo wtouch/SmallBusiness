@@ -300,7 +300,20 @@ define(['app'], function (app) {
 				},
 				getData : $scope.getData,
 				addToObject : $rootScope.addToObject,
-				removeObject : $rootScope.removeObject
+				removeObject : $rootScope.removeObject,
+				/*checkBalance : function(fieldName, fieldValue,modelOptions){
+					console.log(fieldName, fieldValue,modelOptions.previous_balance);
+					var possibleValue = modelOptions.previous_balance;
+					if(fieldValue != undefined && fieldValue.length >= possibleValue.length){
+						if(fieldValue<=possibleValue){
+								modelOptions.addexpenseForm[fieldName].$setValidity('available', true);
+						}
+						else{
+								modelOptions.addexpenseForm[fieldName].$setValidity('available', false);
+							modelOptions.availabilityMsg = "The Value Must Less than Previous amount";
+						}
+					}
+				}*/
 			};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -415,8 +428,11 @@ define(['app'], function (app) {
 				}, 
 				getData : $scope.getData,
 				addToObject : $rootScope.addToObject,
-				removeObject : $rootScope.removeObject
+				removeObject : $rootScope.removeObject,
+				
+				
 			};
+			
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 		

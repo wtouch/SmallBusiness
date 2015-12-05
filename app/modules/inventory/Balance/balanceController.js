@@ -30,12 +30,11 @@ define(['app'], function (app) {
 						joinOn : {
 							account_id : "t0.id"
 						},
-						cols : { credit_amount : "credit_amount", debit_amount:"debit_amount" }
+						cols : [ "id,account_name,(sum(t1.credit_amount)-sum(t1.debit_amount))as account_balance"]
 					},
 				],
 				groupBy : {
-					account_id : "account_id",
-					type : "type",
+					account_id : "account_id"
 				},
 			cols : ["*"]
 		}
