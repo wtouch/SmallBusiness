@@ -96,10 +96,10 @@ define(['app'], function (app) {
 					 
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openPayInvoice(\'modules/inventory/invoice/payInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-usd"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewinvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Invoice"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ '<a type="button" tooltip="Delete Invoice" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openPayInvoice(\'modules/inventory/invoice/payInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice"> <span class="glyphicon glyphicon-usd"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewinvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Invoice"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewReceipt.html\',row.entity)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
@@ -171,9 +171,9 @@ define(['app'], function (app) {
 							console.log($scope.stockData);
 							
 							$rootScope.postData("stock", $scope.stockData,function(response){
-								
+								$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 							});
-						$scope.getData(false, $scope.currentPage, 'invoice','invoiceList');
+						$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 						}
 					})
 				},
@@ -220,7 +220,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'invoice','invoiceList');
+							$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 						}
 					})
 					

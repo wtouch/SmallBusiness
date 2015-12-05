@@ -33,6 +33,10 @@ define(['app'], function (app) {
 						cols : { credit_amount : "credit_amount", debit_amount:"debit_amount" }
 					},
 				],
+				groupBy : {
+					account_id : "account_id",
+					type : "type",
+				},
 			cols : ["*"]
 		}
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
@@ -71,7 +75,7 @@ define(['app'], function (app) {
 				}
 			});
 		}
-		$scope.getData(false, false,'account', "transaction_list",$scope.transactionParams);
+		$scope.getData(false, true,'account', "transaction_list",$scope.transactionParams);
 		
 		
 		
