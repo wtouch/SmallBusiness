@@ -7,8 +7,8 @@
 	src:url('../fonts/Enriqueta-Regular.otf');
 }
 @font-face{
-		font-family:'ArbutusSlab-Regular';
-		src:url('../fonts/ArbutusSlab-Regular.ttf');
+		font-family:'pt-sans.narrow';
+		src:url('../fonts/pt-sans.narrow.ttf');
 }
 //text color shade
 	 @color:#f9ba2e; // orange#C4DE9B green
@@ -16,7 +16,7 @@
 	 @darkcolor : #EF321F; //red
 
 	@back : #464646; // green color
-	@darkbackcolor : #3a322f;   //dark cof color
+	@darkbackcolor :#ffa64d;   //dark cof color
 	@lightbackcolor :#196619;   //faint pink color
 	
 //common color shade
@@ -28,17 +28,19 @@
 	@import "product.less";
 	
 header{
-			background-image:url('../img/header.jpg');
-			background-size:100% 100%;
-			height:950px;
+			//background-image:url('../img/header.jpg');
+			//background-size:100% 100%;
+			//height:850px;
 			.logo{
 					height:150px;
 					width:150px;
-					margin-top:18%;
+					margin-top:8%;
 					border:1px solid @colorwhite;
+					background-color:@color;
+					padding-top:20px;
 			}
 			.tagline{
-					font: 400 34px/40px "Arbutus Slab", sans-serif;
+					font: 400 34px/40px "pt-sans.narrow" sans-serif;
 					color:@colorwhite;
 					padding-top:67px;
 					
@@ -48,6 +50,8 @@ header{
 					}
 			.tagline1{
 					color:@colorwhite;
+					padding:10px;
+					font: 400 20px/25px "pt-sans.narrow" sans-serif;
 					animation-name:tagline;
 					animation-duration:3s;
 					animation-iteration-count:1;
@@ -56,6 +60,11 @@ header{
 @keyframes tagline{
 					0%{opacity:0;transform:translateY(-200px);}
 					100%{opacity:1;transform:translateY(0px);}
+}
+body{
+			background-image:url('../img/products.jpg');
+			background-size:100% 100%;
+			background-attachment:fixed;
 }
 .btn-info {
 		color: @colorblack; 
@@ -71,19 +80,23 @@ header{
 		}
 }
 	#googleMap{
-			height:300px;
+			height:400px;
 			border:1px solid @colorblack;
-			margin:20px;
+			
 	}
 	
 	.contact{
 					h2{
 							text-align:center;
+							color:@colorwhite;
 					}
 					.logo{
 					height:150px;
 					
-			}
+					}
+					b,td{
+							color:@colorwhite;
+					}
 	}
 	.sociallinks{
 			li{
@@ -96,10 +109,10 @@ header{
 				height:58px;
 				width:58px;
 				margin:2px;
-				background-color:rgba(85, 85, 85, 0.25);
+				background-color:rgba(8, 8, 8, 0.54);
 				padding:10px;
 				&:hover{
-				background-color:rgba(8, 8, 8, 0.54);
+				background-color:rgba(53, 58, 76, 0.52);
 				}
 				img{
 					height:40px;
@@ -109,15 +122,16 @@ header{
 				
 }
 .navbar-default {
-		background-color:transparent;
-		opacity:0.9;
+		background-color:rgba(234, 171, 5, 0.44);
+		
 		margin-bottom:-1px;
 		border:none;
 		border-top:1px solid @colorwhite;
 		
 		.navbar-nav{
 			> li{
-					padding:-5px;
+				padding:-5px;
+				
 				float:none;
 				margin-bottom:0px;
 				position : relative;
@@ -126,7 +140,7 @@ header{
 					font : bold 15px/1em Arial, Helvetica, sans-serif;
 					position : relative;
 					text-transform : uppercase;
-					padding:35px;
+					padding:30px 15px;
 					padding-right:10px;
 					
 				}
@@ -201,3 +215,146 @@ header{
 					margin-right: 137px;
 		}
 	}
+ .homeAboutus{
+					background-color:rgba(249, 186, 46, 0.55);
+					height:220px;
+					margin-top:-21px;
+					h1{
+								text-align:center;
+								font: 400 30px/35px "pt-sans.narrow" sans-serif;
+								color:@colorwhite;
+								padding:16px;
+					}
+					p{
+						color:@colorwhite;
+						text-align:center;
+						font: 400 20px/25px "pt-sans.narrow" sans-serif;
+						padding:10px;
+					}
+	 }
+ .contact{
+		table{
+				h2{
+							font: 400 20px/25px "pt-sans.narrow" sans-serif;
+				}
+				h4{
+							font: 400 20px/1em "pt-sans.narrow" sans-serif;
+				}
+				address {
+							font: 400 20px/1em "pt-sans.narrow" sans-serif;
+					}
+				}
+				span{
+						p{
+							font: 400 20px/1empx "pt-sans.narrow" sans-serif;
+						}
+				}
+				td{
+							font: 400 20px/1em "pt-sans.narrow" sans-serif;
+				}
+				animation-name:contact;
+				animation-duration:3s;
+				animation-iteration-count:1;
+				
+}
+@keyframes contact{
+				0%{opacity:0;transform:translateX(-50px);}
+				100%{opacity:1;transform:translateX(0px);}
+
+}
+.panel-default{
+				color:@colorwhite;
+				background-color:rgba(187, 135, 18, 0.47);;
+				border:none;
+				.form-control{
+							background-color:rgba(249, 186, 46, 0.14);;
+						    display: inline-block;
+							width:100%;
+							margin:5px;
+							vertical-align: middle;
+				}
+				input{
+						width:100%;
+						height:65px;
+				}
+				textarea{
+							height:246px;
+				}
+				.form-group{
+							display:inline-block;
+				}
+				h3{
+						font: 400 36px/40px "pt-sans.narrow" sans-serif;
+						color:@colorwhite;
+						text-align:center;
+				}
+				.btn{
+							border-radius:0px !important; 
+					}
+			.btn-info{
+						border:1px solid @colorwhite;
+						color:@colorwhite;
+						background-color:transparent;
+						text-transform:uppercase;
+						padding:15px;
+						margin:10px;
+						&:hover{
+								color:@colorwhite;
+								background-color:@darkcolor;
+						}
+			
+			}
+			.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+				padding-right: 10px !important;
+				padding-left: 10px !important;
+			}						
+}
+.row{
+		margin:0px;
+}
+.about{
+			color:@colorwhite;
+			h2,h3{
+					text-align:center;
+					color:@color;
+					font: 400 36px/40px "pt-sans.narrow" sans-serif;
+			}
+			strong{
+					color:@color;
+					font: 400 20px/25px "pt-sans.narrow" sans-serif;
+			}
+			p{
+					text-align:justify;
+					font: 400 20px/25px "pt-sans.narrow" sans-serif;
+			}
+			center{
+					text-align:justify;
+					font: 400 20px/25px "pt-sans.narrow" sans-serif;
+			}
+			li{
+						font: 400 20px/25px "pt-sans.narrow" sans-serif;
+			}
+}
+footer{
+			p,a{
+				color:@colorwhite;
+				font: 400 15px/20px "pt-sans.narrow" sans-serif;
+				padding-top:10px;
+			}
+		
+}
+
+@media (min-width: 768px){
+	.sociallinks {
+			text-align: center;
+			}
+			
+	}
+.col-sm-6.col-md-3.thumbnail {
+			
+							margin-left: 200px;
+		}
+.col-xs-12.col-sm-12.col-lg-4 {
+		text-align: center;
+}
+

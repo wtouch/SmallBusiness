@@ -1,11 +1,13 @@
 {% autoescape false %}
 <h2>{{title}}</h2>
-<div class="container">
-		<!-- <div class="col-xs-12 col-sm-6 col-md-4">
+
+<div class="row products">
+	{% for key, x in products %}
+		<div class="col-xs-12 col-sm-6 col-md-12 col-lg-6">
 			<div class="thumbnail">
 				<div class="prodimg"> 
 					<img src="{{x.product_image.0.file_relative_path}}" class="img-responsive center-block" alt="{{key}}"/>
-				</div>
+				</div> 
 				<div class="caption">
 					<h4 class="text-center">{{ x.product_service_name }}</h4>
 					<div class="description">
@@ -21,16 +23,10 @@
 					{% endif %}
 				</div>
 			</div>
-		</div> -->
-		<div class="col-xs-12 col-sm-6 col-md-12">
-			{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
 		</div>
+	
+	{% endfor %}
+	
+	
 </div>
-		<div class="container-fluid">
-				{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
-		</div>
-		<div class="container">	
-				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-		
-		</div>
 {% endautoescape %}

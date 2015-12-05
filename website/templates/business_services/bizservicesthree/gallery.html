@@ -1,29 +1,27 @@
-	{% autoescape false %}
-	<h2>Gallery</h2>
-	<div class="row gallery">
-		{% if data.gallery %}
-			{% set category = "" %}
-			{% for key, value in data.gallery %}
-			
-				{% if category != value.category %}
-					{% set category = value.category %}
-					{{ category }}
-				{% endif %}
-				
-			{% endfor %}
-			
-			{% for key, value in data.gallery %}
-
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-				<div class="thumbnail">
-					<img class="img-responsive" src="{{value.image.file_relative_path}}" alt="{{key}}" />
-					<div class="caption">
-						<h4 class="text-center">{{value.heading}}</h4>
-						<div class="description">{{ value.description }}</div>
+{% autoescape false %}
+	{% if data.gallery | length >= 1 %}
+<div class="container">
+	<div class="row featrGallery anim1">
+		<h3 class="text-center">Gallery</h3>
+		{% set break = 0 %}{% set i = 0 %}
+		{% for key, value in data.gallery if break == 0 %}
+				<div class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+						<div class="galleryimage">
+							<img class="img-responsive" src="{{value.image.file_relative_path}}" alt="{{key}}" />
+						</div>
+						<div class="caption">
+							<h4 class="text-center">{{value.heading}}</h4>
+							<div class="description">{{ value.description }}</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			{% endfor %}
-		{% endif %}
+			{% set i = (i + 1) %}
+			{% if i == 6 %}
+				{% set break = 1 %}
+			{% endif %}
+		{% endfor %}
 	</div>
-	{% endautoescape %}
+</div>`
+	{% endif %}
+{% endautoescape %}

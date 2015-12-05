@@ -1,0 +1,38 @@
+{% autoescape false %}
+{% if data.news_coverage %}
+	<div class="container">
+		<div class="row activity">
+		<div class="col-xs-12 col-lg-12">
+			<h2>News & Events</h2>
+			{% for key, value in data.news_coverage if break == 0 %}
+				<div class="panel">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-4 col-lg-2">
+								<div class="testimage">
+								<a href="#">
+									<img class=" img-responsive" src="{{value.image.file_relative_path}}">
+								</a>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-lg-6">
+								 <h3 class="media-heading">{{value.heading}}</h3>
+								 <div class="description">{{ value.newsdetails }}</div> 
+							</div>
+							<div class=" col-xs-12 col-sm-8 col-lg-2 readmore">
+								<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More Details</a>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+				
+			{% endfor %}
+			
+		</div>
+	</div>
+	</div>
+	
+{% endif %}
+{% endautoescape %}

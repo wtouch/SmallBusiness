@@ -1,7 +1,7 @@
 .testicontainer{
 				background-image:url('../img/testi.jpg');
 				background-size:100% 100%;
-				padding:50px;
+				//padding:50px;
 }
 .featrtesti{
 			>div:hover blockquote {
@@ -14,8 +14,8 @@
 					
 				h3{
 					color:@colorwhite;
-					//padding:26px;
-					font: 400 34px/48px "Arbutus Slab", sans-serif;
+					padding:26px;
+						font: 400 30px/35px "pt-sans.narrow" sans-serif;
 					text-transform:uppercase;
 					text-align:center;
 				}
@@ -38,7 +38,7 @@
 							.description{
 											p{
 											color:@colorwhite;
-											font: 400 15px/20px "Arbutus Slab", sans-serif;
+											font: 400 20px/25px "pt-sans.narrow" sans-serif;
 											margin:50px;
 											vertical-align:middle;
 											
@@ -60,106 +60,35 @@
 }
 
 .featrGallery{
+			h3{
+				color:@colorwhite;
+					font: 400 36px/35px "pt-sans.narrow" sans-serif;
+			}
 			.thumbnail{
-						width:200px;
-						height:200px;
-						img{
-								width:100%;
-								height:100%;
-							}
-					}
-					h3{
-						font: 400 36px/48px "Arbutus Slab", sans-serif;	
-					}
-				
-					animation-name:gallery1;
-					animation-duration:3s;
-					aniamtion-iteration-count:1;
-				
-					
-			
-}
-@keyframes gallery1{
-				0%{opacity:0;transform:translateY(300px);}
-				100%{opacity:1;transform:translateY(0);}
-
-}
-#gallery{display:none;}
-
-.infrastructure{
-		height:500px;
-		//padding:20px;
-		.thumbnail{
-				
-				overflow:hidden;
-				//margin:10px;
-				//padding:20px;
-				height:450px;
-					.infraImg{
-						height:200px;
-						//width:100%;
-							img{
+					.galleryimage{
 							height:200px;
 							width:100%;
+							overflow:hidden;
+							img{
+								min-height:200px;
+								}	
 							}
-						}
-						.caption{
-							height:150px;
-							
-						}
-				}
-}
-div.infrastructure>div.row>div:nth-child(1){
-		
-		animation-name:abt1;
-		animation-duration:2s;
-		aniamtion-iteration-count:1;
-		//animation-delay:2s;
-}
-@keyframes abt1{
-				0%{opacity:0;transform: translateX(-100px)}
-				100%{opacity:1; transform: translateX(0);}
-
-}
-div.infrastructure>div.row>div:nth-child(3){
-		
-		animation-name:abt2;
-		animation-duration:2s;
-		aniamtion-iteration-count:1;
-		//animation-delay:3s;
-}
-@keyframes abt2{
-				0%{opacity:0;transform: translateY(40px)}
-				100%{opacity:1; transform: translateY(0);}
-
-}
-div.infrastructure>div.row>div:nth-child(5){
-		
-		
-		animation-name:abt3;
-		animation-duration:3s;
-		aniamtion-iteration-count:1;
-		//animation-delay:4s;
-}
-@keyframes abt3{
-				0%{opacity:0;transform: translateY(-40px)}
-				100%{opacity:1; transform: translateY(0);}
-
-}
-div.infrastructure>div.row>div:nth-child(7){
-	
-		animation-name:abt4;
-		animation-duration:3s;
-		aniamtion-iteration-count:1;
-		//animation-delay:5s;
-}
-@keyframes abt4{
-				0%{opacity:0;transform: translateX(40px)}
-				100%{opacity:1; transform: translateX(0);}
-
-}
-div.infrastructure>div.row>div:nth-child(9){
-display:none;
+							.caption{
+										.description{
+											height:150px;
+											font: 400 20px/25px "pt-sans.narrow" sans-serif;
+											overflow:hidden;
+											}
+							}
+					}
+					animation-name:gallery;
+					animation-duration:2s;
+					animation-iteration-count:1;
+					
+		}
+@keyframes gallery{
+				0%{opacity:0px;transform:translateY(300px);}
+				100%{opacity:1;transform:translateY(0px);}
 }
 
 .activity{
@@ -172,16 +101,32 @@ display:none;
 					>.row>div{
 					padding:0px !important;
 					}
+					
+					.testimage{
+									padding:10px;
+									width:100%;
+									img{
+											min-height:100px;
+											
+									}
+					
+					}
 			}
 			h3{
 				text-align:left;
-				padding:10px;
+				
 				font: 400 18px/48px "Arbutus Slab", sans-serif;
 			}
 			.btn-info{
 						background-color:@back;
 						color:@colorwhite;
-						padding:15px;
-						margin:10px;
+						padding:12px;
+						margin:43px;
 			}
+			.description{
+			
+				margin:10px;
+				overflow:hidden;				
+			}
+			
 }

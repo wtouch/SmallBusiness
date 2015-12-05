@@ -56,53 +56,55 @@
 					</button>
 				</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="container">
+		
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav nav-justified">
 					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 				</ul>
 			</div><!-- /.navbar-collapse -->
-			</div>
+	
 	
 		</nav>
-			<div class="container">
+		<div class="container">
 				<div class="row">
-					<div class="col-xs-12 col-sm-4 weblogo">
+					<div class="col-xs-12 col-sm-12 weblogo">
 						{% if data.website_config.website_logo %}
 							<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
 						{% endif %}
 					</div>
-					<div class="col-xs-12 col-sm-4 col-lg-12 text-center">
+					<!-- <div class="col-xs-12 col-sm-12 col-lg-12 text-center">
 						{% if data.website_config.website_logo1 %}
 							<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
 						{% else %}
 							<img class="logo" src="{{data.business_logo.file_relative_path}}">
 						{% endif %}
-						<!-- <h1>{{ data.business_name }}</h1> -->
+						 <!-- <h1>{{ data.business_name }}</h1> 
 						{% if data.business_info.tagline %}
 							<div class="tagline text-center">{{ data.business_info.tagline}}</div>
 						{% endif %}
 						{% if data.business_info.alternate_tagline %}
 						<div class="tagline1 text-center">{{ data.business_info.alternate_tagline}}</div>
-						{% endif %}
+						{% endif %} 
 						
-					</div>
+					</div> -->
 				</div>
+				
+		
 			
+			{% if modules.contentModule.featured_products %}
 			{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %} 
-			</div>
+				{% endif %}
+	</div>
+</header>
+		{%if modules.headerModule.carousal %}
+			{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+			{%endif%}
 		
-	</header>
-		
-		<!--  {% include contentPath %}-->
-		{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %} 
+				{% include contentPath %}
 	
-		{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}  
+			
 	
-	<div id="googleMap"></div>
-			{% include [templatePath ~ '/includes/contact-us.html', 'default/default/includes/contact-us.html'] %} 
-	
-		<!--  {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}  -->
+		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}  
 	</body>
 </html>
 {% endspaceless %}
