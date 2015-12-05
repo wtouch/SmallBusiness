@@ -1,0 +1,19 @@
+{% autoescape false %}
+	<h2>{{ product.product_service_name }}</h2>
+	<div class="row singleproduct">
+		<div class="col-xs-12">
+			<ul class="bxslider" id="bxslider">
+			{% for key, value in product.product_image %}
+				<li>
+					<div class="projimg">
+						<img class="img-responsive" src="{{value.file_relative_path}}"> 
+					</div>
+				</li>
+			{% endfor %}
+			</ul>
+		</div> 
+		<div class="col-xs-12">
+			<div class="description">{{product.description}}</div>
+		</div>
+	</div>
+{% endautoescape %}
