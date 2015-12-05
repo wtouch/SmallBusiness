@@ -183,10 +183,11 @@ define(['app'], function (app) {
 				
 				getBalance : $scope.getBalance,
 				calcBalance : $scope.calcBalance,
-				receiptData : {
+				receiptData : (data) ?{
 					name : data.name
+				}:{	
 				},
-				receiptParams : {
+				receiptParams : (data) ?{
 					where : {
 						reference_id : data.id,
 						type : "bill_payment",
@@ -194,6 +195,7 @@ define(['app'], function (app) {
 						status : 1
 					},
 					cols : ["*"]
+				}:{
 				},
 				postData : function(table,input){
 					$rootScope.postData(table, input,function(response){
