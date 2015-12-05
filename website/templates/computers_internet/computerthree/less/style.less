@@ -22,28 +22,30 @@
 	@darkbackcolor:#1C3D5C;
 	
 	@import "product.less";
-	//@import "property.less";
-	//@import "general.less";
+	@import "general.less";
 	body{
 	    background-color:@darkbackcolor;
 		color:@colorwhite;
-	}
-	.navbar-default .navbar-nav>.active>a{
-		background-color: transparent !important;
-		color : @colorwhite !important;
-		border-radius:none !important;
 	}
 	
 	.navbar-default {
 	    border-radius: 0px !important;
 		background-color:@darkbackcolor;
 		.navbar-nav{
+		        
 			> li{
 				  border-right: 1px solid @color;
 				  float:none;
 				  font-size: 20px;
 				  text-transform: uppercase;
-				
+				&.active>a{
+							background-color: @darkbackcolor ; 
+							color : @colorwhite !important;
+							border-radius:none !important;
+							&:hover{
+							    background-color: @lightbackcolor ;
+							}
+						}
 			  a {
 				    color :@colorwhite;
 					font-size: 19px;
@@ -77,6 +79,8 @@
 								color:@colorwhite;
 								&:hover{
 									text-decoration: none;
+									background-color:transparent;
+									color:@lightbackcolor;
 								}
 							}
 						
@@ -88,7 +92,7 @@
 					display: block;	
 				}
 			}
-			>li:nth-child(4)::after  {
+			/*>li:nth-child(4)::after  {
 									 content: "";
 									 width: 5px;
 									 height: 5px;
@@ -101,7 +105,7 @@
 									 border-left: 5px solid transparent;
 									 border-right: 5px solid transparent;
 									 border-bottom: 0px solid transparent;
-									 }
+									 }*/
 			>li:last-child {
 							border: none;
 						}
@@ -118,6 +122,10 @@
 					background-color: @darkbackcolor;
 				}
 	}
+ .navbar-collapse {
+						padding-right: 0px !important;
+						padding-left: 0px !important;
+					}
 .carousel-inner>.item{
 				height:600px;
 			img{
@@ -149,10 +157,37 @@
 				}
 			}
    
-.carousel-indicators li {
-					display: none;
-		}
+
+		
 	}
+ol.carousel-indicators {
+             display: none;
+        }
+	
+
+.carousel-control.left{
+                    top: 469px;
+					bottom: 54px;
+					left: 256px;
+					width: 5%;
+					height: 8%;
+					border-top-left-radius: 100%;
+					border-bottom-left-radius: 100%;
+					color: @colorblack;
+					background-color: @colorwhite;
+}	
+.carousel-control.right{
+                top: 469px;
+				bottom: 60px;
+				left: 280px;
+				width: 5%;
+				height: 8%;
+				border-top-right-radius: 50%;
+				border-bottom-right-radius: 50%;
+				background-color: @colorwhite;
+				color: @colorblack;
+}	
+
 .soc{
       background-color: @back;
 }
@@ -193,4 +228,93 @@ footer{
 }
 .homeAboutus{
 			display:none;
+}
+img{
+   width:100%;
+}
+.btn-info{
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.btn-info:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:@darkbackcolor;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.btn-info:hover, .btn-info:focus, .btn-info:active {
+  color: white;
+}
+.btn-info:hover:before, .btn-info:focus:before, .btn-info:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+@media (max-width: 768px){
+    footer .bb {
+			margin-top: -56px;
+			padding-left: 529px;
+		}
+   .carousel-inner > .item .carousel-caption {
+				position: absolute;
+				top: 173px;
+			   left: 0%;
+			}
+	.carousel-control.left{
+	          display:none;
+	}
+	.carousel-control.right{
+	          display:none;
+	}
+}
+@media (max-width: 320px){
+    footer .bb {
+			    margin-top: -5px;
+				padding-left: 10px;
+		}
+    .carousel-inner > .item .carousel-caption {
+				position: absolute;
+				top: 173px;
+			   left: 0%;
+			   height: 250px;
+				width: 250px;
+			}
+.thumbnail .infraImg {
+    height: 211px;
+    width: 254px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+	.carousel-control.left{
+	          display:none;
+	}
+	.carousel-control.right{
+	          display:none;
+	}
 }

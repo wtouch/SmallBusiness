@@ -20,6 +20,7 @@
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		<script src="http://maps.googleapis.com/maps/api/js"></script>
 		<script>
 		function initialize() {
 			var mapProp = {
@@ -38,21 +39,28 @@
 </head>
 <body>
 <div class="container">
-    <!--  {% include contentPath%} -->
+    
 	<div class="row ">
 		<div class="col-md-2">
 			<img class="logo" src="{{data.business_logo.file_relative_path}}">
 		 </div>
 	</div>
+	
 	<div class="row">
 		<div class="col-md-12">
-					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+				{%if modules.headerModule.carousal %}
+				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
+				{%if modules.headerModule.homeproject %}
+				{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
 		</div>
 	</div>
 	<div class="row ">
 		<div class="col-md-12">
 		
 		{% if uri != "/" %}
+		
 			<nav class="navbar navbar-default navbar-fixed-top">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -73,12 +81,12 @@
 				{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 			</div>
 		   </nav>
+		  
 		{% endif %}
-		 
+
 		
 			<div class="content">
-			
-			{%include contentPath%}
+				{%include contentPath%}
 			</div>
 		
 		
