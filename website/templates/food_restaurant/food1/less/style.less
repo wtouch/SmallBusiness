@@ -32,15 +32,13 @@ body, fieldset, form, h1, h2, h3, h4, h5, h6
 h1{
 		margin-top: 30px;
 		border-bottom:1px solid @darkcolor;
-	
 	&::after{
 				content : url('../img/heading-graphic.gif');
 				position : absolute;
 				z-index : -1;
 					padding: 3px;
 			}
-
-}
+	}
 h2{
 		margin-top: 30px;
 		padding: 3px;
@@ -240,23 +238,73 @@ header{
 			
 		}
 	.enquiry{
-			
-		.panel{
-			border:1px solid transparent;
-			background-color:transparent;
-		}
-		.panel-body{
-			.btn-info{
-				background-image:url("../img/btn-bg.jpg");
-				border:none; 
-				height: 27px;
-				width: 81px;
-
-			
+			h3{
+				color:@color;
 			}
-			
+			.panel{
+				border:1px solid transparent;
+				background-color:transparent;
+			}
+			.panel-body{
+					color:@color;	
+				
+					.btn-info{
+					background-image:url("../img/btn-bg.jpg");
+					border:none; 
+					height: 27px;
+					width: 81px;				
+				}
+			&::before{
+				content : url('../img/vector-sep.jpg');
+				position : absolute;
+				z-index : -1;
+			    left: -390px;
+				top: 400px;
+				transform: rotate(90deg);
+			}				
 	}
 }
+.table>tbody>tr>td,{
+	border-top:none;
+	hr{
+		border-top:none;
+	}
+}
+
+.pagination{	
+		li{
+			background-color: @lightcolor;
+			a{
+				color: @color;
+				background-color: @lightcolor;
+				border-color:@darkcolor;
+					
+				&:hover,&:active,&:focus{
+				color:@lightcolor;
+				background-color: @color;
+				border-color:@darkcolor;
+				.disabled{
+					>a{
+					color:@lightcolor;
+					background-color: @color;
+					border-color:@darkcolor;
+				}
+			}
+				
+			}
+			
+			}
+		}
+		
+		
+	}
+	
+.pagination>.active>a{
+				color:@lightcolor;
+				background-color: @color;
+				border-color:@darkcolor;
+}
+	
 footer{
 		color:@color;
 		margin-top:30px;
@@ -270,6 +318,8 @@ footer{
 			}
 		}
 		}
+		
+		
 @media (min-width: 768px){
 	.navbar {
 		border-radius: 0;
