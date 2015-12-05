@@ -25,21 +25,33 @@
 	}
 body, fieldset, form, h1, h2, h3, h4, h5, h6
 {
-    margin: 0px;
-    padding: 0px;
+  
 	color:@colorwhite;
 }
-h2{
+
+h1{
+		margin-top: 30px;
+		border-bottom:1px solid @darkcolor;
+	
 	&::after{
 				content : url('../img/heading-graphic.gif');
 				position : absolute;
-				left : 50px;
-				bottom: 114px;
 				z-index : -1;
+					padding: 3px;
 			}
 
 }
-
+h2{
+		margin-top: 30px;
+		padding: 3px;
+		border-bottom:1px solid @darkcolor;
+	&::after{
+				content : url('../img/heading-graphic.gif');
+				position : absolute;
+				margin-left: 0px;
+				z-index : -1;
+			}
+		}
 body {
     background:@back ;
     font: 12px Arial, Helvetica, sans-serif;
@@ -49,18 +61,11 @@ body {
 	height:80px;
 	width:80px;
 }
-
-
-
 header{
 	.container{
-	
 		background-image:url("../img/food1.jpg");
 	}
 }
-h1,h2,h3{
-	color:@colorwhite;
-	}
 .navbar-default {
    background:transparent;
     border-color: transparent;
@@ -71,7 +76,26 @@ h1,h2,h3{
 				>li{
 				
 					position :relative;
-					>a{
+					display: inline-block;
+				  vertical-align: middle;
+				  -webkit-transform: translateZ(0);
+				  transform: translateZ(0);
+				  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+				  -webkit-backface-visibility: hidden;
+				  backface-visibility: hidden;
+				  -moz-osx-font-smoothing: grayscale;
+				  -webkit-transition-duration: 0.3s;
+				  transition-duration: 0.3s;
+				  -webkit-transition-property: transform;
+				  transition-property: transform;
+				  -webkit-transition-timing-function: ease-out;
+				  transition-timing-function: ease-out;
+			
+				  &:hover,&:focus,&:active {
+						  -webkit-transform: translateY(-8px);
+						  transform: translateY(-8px);
+						}
+				>a{
 						background:linear-gradient(@lightbackcolor,@lightcolor);
 						color : @color;
 						border:1px solid @colorblack;
@@ -197,8 +221,54 @@ h1,h2,h3{
 			}
 		
 		}
+		
+	#googleMap{
+		height:395px;
+	}
+	
+	
+	.about{
+	
+		margin:20px;
+		padding:10px;
+	
+	}
+	.form-control{
+			color:@color;
+			border:1px solid @darkcolor;
+			background-color:transparent;background-color:transparent;
+			
+		}
+	.enquiry{
+			
+		.panel{
+			border:1px solid transparent;
+			background-color:transparent;
+		}
+		.panel-body{
+			.btn-info{
+				background-image:url("../img/btn-bg.jpg");
+				border:none; 
+				height: 27px;
+				width: 81px;
+
+			
+			}
+			
+	}
+}
 footer{
 		color:@color;
+		margin-top:30px;
+		
+		a{
+		
+			color:@colorwhite;
+			&:hover{
+				color:@colorwhite;
+				text-decoration:underline;
+			}
+		}
 		}
 @media (min-width: 768px){
 	.navbar {

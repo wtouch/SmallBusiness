@@ -568,15 +568,27 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0px;
-  padding: 0px;
   color: #ffffff;
+}
+h1 {
+  margin-top: 30px;
+  border-bottom: 1px solid #3e2709;
+}
+h1::after {
+  content: url('../img/heading-graphic.gif');
+  position: absolute;
+  z-index: -1;
+  padding: 3px;
+}
+h2 {
+  margin-top: 30px;
+  padding: 3px;
+  border-bottom: 1px solid #3e2709;
 }
 h2::after {
   content: url('../img/heading-graphic.gif');
   position: absolute;
-  left: 50px;
-  bottom: 114px;
+  margin-left: 0px;
   z-index: -1;
 }
 body {
@@ -591,11 +603,6 @@ body {
 header .container {
   background-image: url("../img/food1.jpg");
 }
-h1,
-h2,
-h3 {
-  color: #ffffff;
-}
 .navbar-default {
   background: transparent;
   border-color: transparent;
@@ -604,6 +611,26 @@ h3 {
 }
 .navbar-default .navbar-nav > li {
   position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.navbar-default .navbar-nav > li:hover,
+.navbar-default .navbar-nav > li:focus,
+.navbar-default .navbar-nav > li:active {
+  -webkit-transform: translateY(-8px);
+  transform: translateY(-8px);
 }
 .navbar-default .navbar-nav > li > a {
   background: linear-gradient(#634928, #54190c);
@@ -718,8 +745,38 @@ h3 {
   overflow: hidden;
   height: 100px;
 }
+#googleMap {
+  height: 395px;
+}
+.about {
+  margin: 20px;
+  padding: 10px;
+}
+.form-control {
+  color: #fbe7ab;
+  border: 1px solid #3e2709;
+  background-color: transparent;
+}
+.enquiry .panel {
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+.enquiry .panel-body .btn-info {
+  background-image: url("../img/btn-bg.jpg");
+  border: none;
+  height: 27px;
+  width: 81px;
+}
 footer {
   color: #fbe7ab;
+  margin-top: 30px;
+}
+footer a {
+  color: #ffffff;
+}
+footer a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 @media (min-width: 768px) {
   .navbar {
