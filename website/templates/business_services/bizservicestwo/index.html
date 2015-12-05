@@ -47,7 +47,7 @@
 					</nav>
 					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
 			</div>
-			<div class="col-sm-9">
+			<div class="col-sm-9 item">
 				{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 				{%endif%}
@@ -56,7 +56,14 @@
 			</div>
 		</div>
 		{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+		<div class="row main_foter">
+			<div class="col-md-6 social">
+			{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+			</div>
+			<div class="col-md-6 foter">
+			{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+			</div>
+		</div>
 	</div>
 	</body>
 </html> 

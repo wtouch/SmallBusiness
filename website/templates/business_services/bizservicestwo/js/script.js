@@ -11,8 +11,8 @@ $(document).ready(function(){
 	//$(window).resize(function(){
 		if($(window).width() <= "480"){
 			sliderMode = "horizontal";
-			minSlides = 1;
-			maxSlides = 1;
+			minSlides = 6;
+			maxSlides = 6;
 			
 		}else{
 			sliderMode = "vertical";
