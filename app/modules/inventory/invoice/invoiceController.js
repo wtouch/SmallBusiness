@@ -257,8 +257,18 @@ define(['app'], function (app) {
 				} : {
 				},
 				getBalance : $scope.getBalance,
+				getPaidAmount :	$scope.getPaidAmount,
+				checkPaidStatus : function(value, modalOptions){
+					if((parseFloat(data.due_amount) - parseFloat(value)) == 0){
+						modalOptions.payment_status = 1;
+					}else{
+						modalOptions.payment_status = 2;
+					}
+					return modalOptions.payment_status;
+				},
+				
 				calcBalance : function(previousBal, amount, modalOptions){
-			modalOptions.payInvoice.balance = parseFloat(previousBal) + parseFloat(amount)
+				modalOptions.payInvoice.balance = parseFloat(previousBal) + parseFloat(amount)
 				},
 				
 				
