@@ -33,7 +33,7 @@ define(['app'], function (app) {
 				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/staff/addattendance.html");
+						return $scope.openModal("modules/inventory/staff/staff_attendence.html");
 					}
 				}
 			},
@@ -69,7 +69,7 @@ define(['app'], function (app) {
 				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/staff/holidays.html");
+						return $scope.openModal("modules/inventory/staff/addholidays.html");
 					}
 				}
 			},
