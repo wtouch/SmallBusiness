@@ -1,3 +1,16 @@
+
+#carousel{
+	bottom:20px;
+	height:355px;
+}
+.carousel-control{
+display:none;
+}
+.img-responsive{
+width:100%
+}
+
+
 .about , .contact , .gallery{
 	> h2{
 		color:@darkcolor;
@@ -5,9 +18,25 @@
 		padding:2px 4px 2px 4px;
 		text-transform:uppercase;
 		font-family:Amarnath;
-		padding-top: 15px;
+		padding: 15px;
+	}
+	p{
+	    padding-left: 25px;
+    padding-right: 25px;
 	}
 	
+}
+.gallery {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.contactus{
+		>.sections {
+				border: 1px solid @darkcolor;
+				border-radius: 4px;
+				padding: 10px;
+			    width: 295px;
+		}
 }
 p{
 	strong{
@@ -26,7 +55,7 @@ h3{
 	font-family:Amarnath;
 }
 center{
-		color:@lightcolor;
+		color:@colorblack;
 		font-size:18px;
 	}
 .gallery1{
@@ -50,5 +79,91 @@ center{
 				}
 			}
 		}
+		
+.contactimg{
+    width: 200px;
+}
+div#googleMap {
+    height: 504px;
+    padding: -32px;
+    width: 938px;
+    margin-left: 40px;
+}
 
 
+//testimonials
+	.testimonial, .featrtesti{
+		blockquote{
+			font-size : inherit;
+			border-left: none;
+			footer{
+				background:none;
+				padding : 0px;
+				cite{
+					font-size : 17px;
+					color : @darkcolor;
+				}
+			}
+			&::before{
+				content : '\201c';
+				position : absolute;
+				display : inline-block;
+				top : 5px;
+				left : 22px;
+				line-height : 40px;
+				font-family : Times New Roman,Serif;
+				font-size : 55px;
+			}
+		}
+	}
+	.testimonial{
+		blockquote{
+			padding-left : 35px;
+			footer{
+				img{
+					max-height: 70px;
+					width: 70px;
+					margin-right : 10px;
+				}
+			} 
+		}
+	}
+	.featrtesti{
+		blockquote{
+			padding : 5px 15px;
+		}
+		img{
+			max-height : 100px;
+			padding : 4px;
+			border : 3px solid @lightcolor;
+			&:hover{
+				border : 3px solid @color;
+			}
+		}
+	} 
+	
+	
+@media (max-width: 320px){
+		#carousel{
+			height:94px;
+		}
+		.contact_img{
+           width: 75px;
+		}
+}
+@media (min-width: 321px) and(max-width: 768px){
+		#carousel{
+				height: 130px;
+		}
+		.contact_img{
+				width: 80px;
+			}
+		contact > h2, .gallery > h2 {
+			padding-top: 95px;
+		}
+		div#googleMap {
+			width: 560px;
+		}
+}	
+
+	

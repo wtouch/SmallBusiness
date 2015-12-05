@@ -26,7 +26,7 @@ $(document).ready(function(){
 		minSlides: minSlides,
 		maxSlides: maxSlides,
 		slideMargin: 25,
-		auto: true, 
+		auto: false, 
 		autoDirection:'next',
 		moveSlides: 1,
 		pause:3000,

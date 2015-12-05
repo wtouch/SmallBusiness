@@ -23,91 +23,72 @@
 	<body>
 	<header class="log">
 		<div class="container ">
-				<div class="row ">
-					<div class="col-sm-12 col-xs-12 col-md-12">
-						{% if data.website_config.website_logo %}
-						<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}" alt="{{data.business_name}}">
-						{% else %}
-						<img class="logo" src="{{data.business_logo.file_relative_path}}" alt="{{data.business_name}}">
-						{% endif %}
-						{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-					
-						<nav class="navbar navbar-default">
-							<!-- Brand and toggle get grouped for better mobile display -->
-							<div class="navbar-header">
-								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-								</button>
-							</div>
-							<!-- Collect the nav links, forms, and other content for toggling -->
-							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-								<ul class="nav nav-justified">
-									{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-								</ul>
-							</div><!-- /.navbar-collapse -->
-						</nav>
-					</div>
-				</div>
+			{% if data.website_config.website_logo %}
+				<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}" alt="{{data.business_name}}">
+			{% else %}
+				<img class="logo" src="{{data.business_logo.file_relative_path}}" alt="{{data.business_name}}">
+			{% endif %}
+				
+			{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 		</div>
 	</header>
-	
 	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 col-xs-12 col-md-12">
-				{%if modules.headerModule.carousal %}
+		<nav class="navbar navbar-default ">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav nav-justified">
+					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+		{%if modules.headerModule.carousal %}
 				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-				{%endif%}
-				{%if modules.headerModule.homeproject %}
-				{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-				{%endif%} 
-			</div>
-		</div>
-		</div>
-		<div class="container maincontent">
-		<div class="row" style="background-color:white" >
-			<div class="{{modules.sidebarModule.searchProp ? 'col-md-8' : 'col-md-12'}} data ">
-				{% include contentPath%}
-			</div> 
-			
-			{%if modules.sidebarModule.searchProp %}
-			<div class="col-xs-12 col-sm-12 col-md-4 data">
-				{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
-			</div>
-			{% endif %} 
-			
-			{%if modules.sidebarModule.contact %}
-			<div class="col-xs-12 col-sm-12 col-md-4 ">
-			{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
-			</div>
-			{%endif%}
-			
-			{%if modules.sidebarModule.sidemenu %}
-			<div class="col-xs-12 col-sm-12 col-md-4 ">
-			{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
-			</div>
-			{%endif%}
-		
-		</div>
-		{%if modules.contentModule.featured_services %}
-		<div class="row" style="background-color:white">
-		
-			{%if modules.sidebarModule.enquiry %}
-			<div class="col-md-8 data1">
-			{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-			</div>
-			{%endif%}
-
-			{%if modules.sidebarModule.enquiry %}
-			<div class="col-md-4 data1">
-			{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}}%}
-			</div>
-			{%endif%}
-			
-		</div>
 		{%endif%}
+		<div class="content" style="background-color:white">
+			<div class="row">
+				<div class="{{modules.sidebarModule.contact ? 'col-xs-12 col-md-8' : 'col-xs-12 col-md-12'}}">
+					{% include contentPath%}
+				</div> 
+			
+				{%if modules.sidebarModule.contact %}
+				<div class="col-xs-12 col-sm-12 col-md-4 ">
+				{% include [templatePath ~ '/includes/contact.html', 'default/default/includes/contact.html'] %}
+				</div>
+				{%endif%}
+				
+				{#{%if modules.sidebarModule.sidemenu %}
+				<div class="col-xs-12 col-sm-12 col-md-4 ">
+				{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+				</div>
+				{%endif%}#}
+				
+			</div>
+			{%if modules.contentModule.featured_services %}
+			<div class="row">
+				{%if modules.sidebarModule.enquiry %}
+				<div class="col-md-8">
+				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+				</div>
+				{%endif%}
+
+				{%if modules.sidebarModule.enquiry %}
+				<div class="col-md-4">
+				{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}}%}
+				</div>
+				{%endif%}
+				
+			</div>
+			{%endif%}
+		</div>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 		</div>
 	</body>
