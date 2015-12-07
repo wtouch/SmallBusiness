@@ -7,20 +7,39 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
-		<script src="js/jquery.min.js"></script>
+		<script src="{{ path }}js/jquery.min.js"></script>
 		
-		<script src="jquery-1.8.3.min.js"></script>
-		<script src="animatescroll.min.js?v=1.0.7"></script>
-		<script src="animatescroll.js"></script>
+		<script src="{{ path }}animatescroll.min.js?v=1.0.7"></script>
+		<script src="{{ path }}animatescroll.js"></script>
 		
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.bxslider.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
-		<script src="js/angular.min.js"></script>
-		<script src="js/angular-route.min.js"></script>
-		<script src="js/script.js"></script>
-		<script src="js/myscript.js"></script>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		
 		<script src="http://maps.googleapis.com/maps/api/js">
+		</script>
+		<script>
+			$(document).ready(function(){
+				$("div.logo").click(function(){
+						$("li:nth-child(1)").toggleClass("li1");
+						$("li:nth-child(2)").toggleClass("li2");
+						$("li:nth-child(3)").toggleClass("li3");
+						$("li:nth-child(4)").toggleClass("li4");
+						$("li:nth-child(5)").toggleClass("li5");
+						$("li:nth-child(6)").toggleClass("li6");
+						$("li:nth-child(7)").toggleClass("li7");
+						$("li:nth-child(1)").toggleClass("hide1");
+						$("li:nth-child(2)").toggleClass("hide2");
+						$("li:nth-child(3)").toggleClass("hide3");
+						$("li:nth-child(4)").toggleClass("hide4");
+						$("li:nth-child(5)").toggleClass("hide5");
+						$("li:nth-child(6)").toggleClass("hide6");
+						$("li:nth-child(7)").toggleClass("hide7");
+				});
+			});
 		</script>
 		<script>				
 			function myFunction() {
@@ -84,14 +103,13 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 				<ul>
-					<!-- <li><button class="btn" onclick="$('#services').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">home</button></li>
-					 --> <li><a href="" target="_self">HOME</a></li> 
-					<li><a href="#about" target="_self">ABOUT US</a></li>
-					<li><a href="#" target="_self">PROJECTS</a></li>
-					<li><a href="#services" target="_self">SERVICES</a></li>
-					<li><a href="#" target="_self">LEGAL</a></li>
-					<li><a href="#associates" target="_self">ASSOCIATES</a></li>
-					<li><a href="#contact" target="_self">CONTACT US</a></li>
+					<li class="hide1"><a href="" target="_self">HOME</a></li> 
+					<li class="hide2"><a onclick="$('#about').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">ABOUT US</a></li>
+					<li class="hide3"><a href="#" target="_self">PROJECTS</a></li>
+					<li class="hide4"><a onclick="$('#services').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">SERVICES</a></li>
+					<li class="hide5"><a href="#" target="_self">LEGAL</a></li>
+					<li class="hide6"><a onclick="$('#associates').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">ASSOCIATES</a></li>
+					<li class="hide7"><a onclick="$('#contact').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">CONTACT US</a></li>
 				</ul>
 				</div>
 			</div>
@@ -111,10 +129,14 @@
 					<h1>M</h1>
 					</div>
 					<div class="logo">
-					<!-- 	<img src="back.jpg" alt="image missing"> -->
+						<div class="click"></div>
+						<div><h3 class="click1">click us to see our <br>world</h3></div>
+						 
 					</div>
+					<div class="click7"><img class="img-responsive" src="{{path}}img/gg.gif"></div>
+					<div class="click8"><h3>Don't tell me the sky is the limit. When there are footprints on the moon.</h3></div>
 					<div class="desc">
-					<h2>We Care<br> For You</h2>
+						<h2>We Make<br>You Capable</h2>
 					</div>
 				</div>
 			</div>
@@ -235,7 +257,7 @@
 					<div class="row">
 						<div class="col-md-6 col-sm-12 col-xs-12">
 							<h3>FOR WEB WORLD</h3>
-							<img src="{{path}}img/webtouch.png" alt"missing">
+							<img class="img-responsive" src="{{path}}img/webtouch.png" alt"missing">
 							<h3><a href="http://www.wtouch.in" target="_self">VISIT US</a></h3>
 						</div>
 						<div class="col-md-6 col-sm-12 col-xs-12">
@@ -250,12 +272,12 @@
 						<div class="col-md-6 col-sm-12 col-xs-12">
 							<h3>FOR REAL WORLD</h3>
 							<div class="row">
-								<div class="col-md-4 col-sm-12 col-xs-12">
+								<div class="col-md-4 col-sm-4 col-xs-4">
 								</div>
-								<div class="col-md-4 col-sm-12 col-xs-12">
-									<img src="{{path}}img/edgespot.png" alt"missing">
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img class="img-responsive" src="{{path}}img/edgespot.png" alt"missing">
 								</div>
-								<div class="col-md-4 col-sm-12 col-xs-12">
+								<div class="col-md-4 col-sm-4 col-xs-4">
 								</div>
 								<div class="col-md-12 col-sm-12 col-xs-12">
 									<h3 style="margin-right:40px;" ><a href="http://www.edgespot.in" target="_self">VISIT US</a></h3>
@@ -278,7 +300,7 @@
 				</div>
 				<div class="col-md-3 col-sm-12 col-xs-12">
 					<div class="row">
-						<div class="col-md-12 col-sm-9 col-xs-9">
+						<div class="col-md-12 col-sm-12 col-xs-12">
 								<h3>Address:</h3><br>
 								<p>Saksham Agro<br>
 								Shop No.1 ,<br>
