@@ -48,13 +48,13 @@ header{
 			
 	
 .navbar-default {
-				&:before{
-						position:absolute;
-						background-color:@colorblack;
-						width:100px;
-						height:66px;
-						z-index:500;
-				}
+	&:before{
+			position:absolute;
+			background-color:@colorblack;
+			width:100px;
+			height:66px;
+			z-index:500;
+	}
 	
 	width:100%;
     padding: 0;
@@ -223,7 +223,7 @@ header{
 	}
 }
 .logo{
-	height : 86px;
+	max-height : 60px;
 	margin-top:-11px;
 	
 }
@@ -244,6 +244,13 @@ h2{
 h4{
 	font : 25px/29px "Georgia",Arial,Helvetica,sans-serif;
 	color : @darkbackcolor;
+}
+a{
+	color : @darkcolor;
+	&:hover{
+		text-decoration : none;
+		color : @color;
+	}
 }
 p{
 	line-height: 30px;
@@ -383,32 +390,29 @@ text-decoration:underline !important;}
 				}
 		
 		}
-	.lets-talk{
+		
+	/*.lets-talk{
 	height:200px;
 	width:200px;
 	background-image:url('../img/cont.jpg');
 	background-size:100% 100%;
 	border:2px solid @darkcolor;
-	}
+	}*/
 	.email1{
 		padding-bottom:20px;
-	 border-bottom: 1px solid #e6e6e6;
+		border-bottom: 1px solid #e6e6e6;
 		a{
 			font-weight:bold;
-			color:@darkcolor;
 		}
 	}
 	.visit{
 		padding-bottom:10px;
-	 border-bottom: 1px solid #e6e6e6;
-	 >.row>div{
-		padding-left:0px;
-	 }
-	 .logo {
-		width: 150px !important;
-		margin-top: -11px;
+		border-bottom: 1px solid #e6e6e6;
+		.logo {
+			width: 150px !important;
+			margin-top: -11px;
 		}	
-	 }
+	}
 	.table{
 		
 		background:url('../img/divide.png');
@@ -474,66 +478,6 @@ text-decoration:underline !important;}
 				}
 	}
 }
-	/*.thumbnail{
-				border:1px solid @darkbackcolor;
-				border-radius:0px;
-				padding:0px;
-					.prodimg{
-							height:250px;
-							width:100%;
-							overflow:hidden;
-							margin:0 auto;
-							img{
-								width:100%;
-								min-height:250px;
-								&:hover{
-								background-color:@darkbackcolor;
-								opacity:0.8;
-								}
-							}
-					}
-					.description{
-							margin: 0;
-								color:@darkcolor;
-								height:109px;
-								overflow:hidden;
-					    font: 14px/19px Arial,Helvetica,sans-serif;
-						    text-align: justify;
-								h3{
-						        margin: 0 0 6px 0;
-								padding: 0;
-								a{
-								color:@colorblack;
-								font:40px/25px Enriqueta-Regular,Arial,Helvetica,sans-serif;
-								&:hover{
-									color:@color;
-								}
-								}
-							}	
-					}
-					a{
-							&:hover{
-									color:@colorblack;
-									text-decoration:none;
-							}
-					}
-					.sername{
-							margin: 0;
-							padding: 16px 18px 5px 18px;	
-					}
-					.servimg{
-							height:200px;
-							width:100%;
-								img{
-									min-height:200px;
-									width:100%;
-									&:hover{
-													background-color:@darkbackcolor;
-													opacity:0.8;
-													}
-								}
-					}
-	}*/
 	.form{
 				float:left;
 				width:350px;
@@ -558,21 +502,18 @@ text-decoration:underline !important;}
 				}
 	}
 	.about{
-	
-	
-	p{
-	    text-align: justify;
-	}
-	.img1{
-		width:100%;
-		height:100%;
+		p{
+			text-align: justify;
+		}
+		.img1{
+			width:100%;
+			height:100%;
 		}
 	}
 	h2{
 	text-align:left;
 	}
 	.email{
-	color:@colorblack;
 		&:hover{
 			color:@color;
 		
@@ -658,8 +599,8 @@ div.content>div.contact{
 	10%{opacity:1;left:850px;top:200px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;}
 	30%{opacity:1;left:850px;top:200px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px purple, 0 0 5px purple;}
 	50%{opacity:1;left:850px;top:200px;color: #144FFF;}
-	70%{opacity:1;left:850px;top:200px;color: #ff9900;transform:rotate(0deg);}
-	100%{opacity:1;left:850px;top:200px;color: #ff9900;transform:rotate(360deg)}
+	70%{opacity:1;left:850px;top:200px;color: @color;transform:rotate(0deg);}
+	100%{opacity:1;left:850px;top:200px;color: @color;transform:rotate(360deg)}
 }
 body{
 	background-color: @colorwhite;
@@ -689,8 +630,8 @@ color:@color;
 	10%{opacity:1;left:200px;top:20px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;}
 	30%{opacity:1;left:200px;top:20px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px purple, 0 0 5px purple;}
 	50%{opacity:1;left:200px;top:20px;color: #144FFF;}
-	70%{opacity:1;left:200px;top:20px;color: #ff9900;transform:rotate(0deg);}
-	100%{opacity:1;left:200px;top:20px;color: #ff9900;transform:rotate(360deg)}
+	70%{opacity:1;left:200px;top:20px;color: @color;transform:rotate(0deg);}
+	100%{opacity:1;left:200px;top:20px;color: @color;transform:rotate(360deg)}
 }
 
 .navbar-default {
@@ -724,8 +665,8 @@ div.content>div.contact{
 	10%{opacity:1;left:300px;top:20px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;}
 	30%{opacity:1;left:300px;top:20px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px purple, 0 0 5px purple;}
 	50%{opacity:1;left:300px;top:20px;color: #144FFF;}
-	70%{opacity:1;left:300px;top:20px;color: #ff9900;transform:rotate(0deg);}
-	100%{opacity:1;left:300px;top:20px;color: #ff9900;transform:rotate(360deg)}
+	70%{opacity:1;left:300px;top:20px;color: @color;transform:rotate(0deg);}
+	100%{opacity:1;left:300px;top:20px;color: @color;transform:rotate(360deg)}
 }
 
 
@@ -748,8 +689,8 @@ div.content>div.contact{
 	10%{opacity:1;left:500px;top:100px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;}
 	30%{opacity:1;left:500px;top:100px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px purple, 0 0 5px purple;}
 	50%{opacity:1;left:500px;top:100px;color: #144FFF;}
-	70%{opacity:1;left:500px;top:100px;color: #ff9900;transform:rotate(0deg);}
-	100%{opacity:1;left:500px;top:100px;color: #ff9900;transform:rotate(360deg)}
+	70%{opacity:1;left:500px;top:100px;color: @color;transform:rotate(0deg);}
+	100%{opacity:1;left:500px;top:100px;color: @color;transform:rotate(360deg)}
 }
 }
 div.container>div.content
@@ -764,10 +705,3 @@ div.container>div.content
 .b{text-align: justify;
 line-height:30px;}
 
-
-.content>.row>div{
-	img{
-		width:100%;
-	}
-
-}

@@ -1,0 +1,17 @@
+{% autoescape false %}
+	{% if data.testimonials %}
+	<h2>Orgatination</h2>
+	<div class="row testimonial">
+		{% for key, value in data.testimonials if break == 0 %}
+		<div class="col-xs-12 col-sm-12 col-lg-12">
+			<blockquote>
+				
+				<footer><img class="img-circle" src="{{value.image.file_relative_path}}"> <cite title="Source Title">{{value.heading}}</cite></footer>
+				<hr>
+				<div class="description">{{ value.description }}</div>
+			</blockquote>
+		</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+{% endautoescape %}
