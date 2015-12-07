@@ -1,28 +1,23 @@
 {% autoescape false %}
-	<div class="container">
+<div class="container">
 	<div class="row pad">
-		<div class="col-xs-12 col-sm-12 col-lg-4 about">
+		<div class="col-xs-12 col-sm-12 col-lg-12 about">
 			<h2>About us</h2>
-				<img class=" img-circle center-block" src="{{path}}/../img/111.jpg">
-				<h4>Garden Decoration</h4>
+				
+				
 				{{data.business_info.aboutDescription}}
 		</div>
-		
-		<div class="col-xs-12 col-sm-12 col-lg-4">
-				
-				{% include [templatePath ~ '/includes/activities.html', 'default/default/includes/activities.html'] %}
-				
-		</div>
-		<div class="col-xs-12 col-sm-12 col-lg-4 testimonials">
-			{% include [templatePath ~ '/includes/testimonials.html', 'default/default/includes/testimonials.html'] %}
-		</div>
 	</div>
+	
+			{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %} 
+				
+	
 </div>
 
-	{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
 	
-	<div class="container">
-		{% if data.infrastructure %}
+	
+<!-- 
+ {% if data.infrastructure %}
 		<hr>
 		<div class="infrastructure" id="infrastructure">
 			<h3 class="text-center">Infrastructure/Facilities</h3>
@@ -43,7 +38,7 @@
 						</div>
 					
 					<!-- modal -->	
-					<div id="myModal{{loop.index}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+					<!--<div id="myModal{{loop.index}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -66,10 +61,10 @@
 							</div>
 						</div>
 					</div>
-					<!--modal end-->
+					modal end
 				{% endfor %}
 			</div>
 		</div>
-	</div>
-	{% endif %}
+  -->
+ {% endif %}
 {% endautoescape %}
