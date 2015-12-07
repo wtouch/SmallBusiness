@@ -1,10 +1,10 @@
 <div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions);">
-	<button type="button" class="close" ng-click="modalOptions.close()">
-	<span aria-hidden="true">&times;</span>
-	</button>
+	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+	
 	<h3 ng-if="!modalOptions.addBill.id">Add Purchase Bill</h3>
 	<h3 ng-if="modalOptions.addBill.id" ng-init="modalOptions.totalCalculate(modalOptions)">Update Purchase Bill</h3>
 </div>
+
 <div class="modal-body">
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
 	
@@ -161,7 +161,7 @@
 					<td>{{x.price}}</td>
 					<td>{{x.quantity}}</td>
 					<td>{{x.amount}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index)">X</button></td>
+					<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index);modalOptions.totalCalculate(modalOptions);">X</button></td>
 				</tr>
 				<tr>
 					<td colspan="5"></td>
@@ -185,6 +185,7 @@
 				</tr>
 			</tbody>
 		</table>
+		
 			<label class="col-sm-1">Remark</label>
 			<div class="col-sm-8 form-group">
 				<textarea rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" placeholder="please Remark here.." required > </textarea>

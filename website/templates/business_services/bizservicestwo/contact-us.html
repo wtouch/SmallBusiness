@@ -1,15 +1,17 @@
 {% autoescape false %}
-	
-	
-	<div class="row contact">
 	<h2>Contact Us</h2>
-		<div class="col-lg-6">
-		<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive" alt="{{data.business_name}}"/>
-		</div>
-		<div class="col-lg-6">
-			<!-- <table class="table">
-				 <tr>
+	<div class="row contact">
+	
+		<div class="col-xs-6 col-sm-12 col-lg-6 cont_info">
+		
+			<table class="table">
+				<tr>
 					<td>
+						<a href="#">
+							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
+						</a>
+					</td>
+				<!-- 	<td>
 						<h4>{{data.contact_profile.contact_person}}</h4>
 						<b>Address</b>
 						<address>
@@ -18,8 +20,8 @@
 							{{data.state|capitalize}},<br>
 							{{data.country|capitalize}}.
 						</address>
-					</td>
-				</tr> 
+					</td> -->
+				</tr>
 				{%if (data.contact_profile.address1) or (data.contact_profile.address2) or (data.contact_profile.address3) or (data.contact_profile.address4)%}
 				<tr>
 					<td colspan="2">
@@ -57,18 +59,22 @@
 				</tr>
 				<tr>
 					<td><b>E-mail Id</b></td>
-					<td>{{data.contact_profile.email}}<br>
-					{{data.contact_profile.alternate_email}}</td>
+					<td>
+						<a class="email" href="mailto: {{data.contact_profile.email}}">{{data.contact_profile.email}}</a><br>
+						<a class="email" href="mailto: {{data.contact_profile.alternate_email}}">{{data.contact_profile.alternate_email}}</a>
+					</td>
 				</tr>
 				{%if data.contact_profile.contact_website%}
 				<tr>
 					<td><b>Website</b></td>
-					<td><a href="#">{{data.contact_profile.contact_website}}</a>
+					<td><a href="/{{data.contact_profile.contact_website}}">{{data.contact_profile.contact_website}}</a>
 					</td>
 				</tr>
 				{% endif %}
-			</table> -->
+			</table>
 		</div>
-		
+		<div class="col-xs-6 col-sm-12 col-lg-6 cont_form">
+							{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
+		</div>
 	</div>
 {% endautoescape %}

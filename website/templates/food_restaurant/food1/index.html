@@ -1,7 +1,7 @@
  {% spaceless %}
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en"	ng-app="myApp">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,7 +26,7 @@
 		<header>
 			<div class="container">
 				<div>
-					<img class="logo" src="{{data.business_logo.file_relative_path}}">
+					<img class="logo" style="float:left;"src="{{data.business_logo.file_relative_path}}">
 				</div>
 				<nav class="navbar navbar-default navbar-right">
 					<div class="navbar-header">
@@ -58,7 +58,6 @@
 			<div class="row">
 				{% include contentPath %}
 			</div>
-			
 			<div class="row">
 				{%if modules.contentModule.featured_products %}
 					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}

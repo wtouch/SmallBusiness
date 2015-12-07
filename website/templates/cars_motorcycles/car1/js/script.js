@@ -22,11 +22,11 @@ $(document).ready(function(){
 	//})
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideWidth: 250,
+		slideWidth: 300,
 		minSlides: minSlides,
 		maxSlides: maxSlides,
 		slideMargin: 25,
-		auto: true, 
+		auto: false, 
 		autoDirection:'next',
 		moveSlides: 1,
 		pause:3000,

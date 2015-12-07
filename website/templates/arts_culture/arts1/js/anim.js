@@ -2,7 +2,7 @@
 var bits=90; // how many bits
 var speed=33; // how fast - smaller is faster
 var bangs=7; // how many can be launched simultaneously (note that using too many can slow the script down)
-var colours=new Array("#03f", "#f03", "#0e0", "#93f", "#0cf", "#f93", "#f0c");
+var colours=new Array("fa6903", "rgb(128, 0, 0)", "#ae8f4e;", "#323232", "#141414", "#FFD700", "#000000");
 //                     blue    red     green   purple  cyan    orange  pink
 /****************************
 *      Fireworks Effect     *

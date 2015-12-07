@@ -1,6 +1,4 @@
 <div class="modal-header">
-	<button type="button" class="close buttondistance" ng-click="modalOptions.close()">
-		<span aria-hidden="true">&times;</span></button>
 	<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv(' ViewBill')">Print</button>
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3>Bill</h3>
@@ -60,16 +58,15 @@
 							<tfoot>
 								<tr>
 									<td class="text-right"><strong>Total Bill</strong></td>
-									<td class="amt text-right" ng-init="modalOptions.totalCalculate(modalOptions); ">{{modalOptions.addBill.total_amount}}</td>
+									<td class="amt text-right" ng-init="modalOptions.totalCalculate(modalOptions);">{{modalOptions.addBill.total_amount}}</td>
 								</tr>
 							</tfoot>
 						</table>
 					</div>
 					<div class="col-xs-12">
-						<p>Amount Chargeable(in words) : 
-						<strong><em>{{modalOptions.inWords | uppercase}}</em></strong>
+						<p>Amount(in words) : 
+						<strong><em>{{inWords(addBill.total_amount) | uppercase}}</em></strong>
 						<p><strong>Remarks:</strong> <span ng-bind-html="modalOptions.addBill.remark"></span></p>
-						
 						<hr/>
 						<p><strong>Company's Service Tax No: </strong>{{modalOptions.accountConfig.service_tax_no}}</p>
 						<p><strong>Company's Pan: </strong>{{modalOptions.accountConfig.pan_no}} </strong></p>

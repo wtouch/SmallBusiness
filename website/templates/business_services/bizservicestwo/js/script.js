@@ -11,13 +11,13 @@ $(document).ready(function(){
 	//$(window).resize(function(){
 		if($(window).width() <= "480"){
 			sliderMode = "horizontal";
-			minSlides = 1;
-			maxSlides = 1;
+			minSlides = 6;
+			maxSlides = 6;
 			
 		}else{
 			sliderMode = "vertical";
-			minSlides = 3;
-			maxSlides = 3;
+			minSlides = 6;
+			maxSlides = 6;
 		}
 	//})
 	$('#bxslider').bxSlider({
@@ -25,7 +25,7 @@ $(document).ready(function(){
 		slideWidth: 250,
 		minSlides: minSlides,
 		maxSlides: maxSlides,
-		slideMargin: 25,
+		slideMargin: 0,
 		auto: true, 
 		autoDirection:'next',
 		moveSlides: 1,

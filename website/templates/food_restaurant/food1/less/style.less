@@ -8,10 +8,10 @@
 	@lightcolor : #54190C;
 	@darkcolor : #3E2709;
 	@back : #1d0200;
-	@darkbackcolor : #043D80;
+	@darkbackcolor : #2f0805;
 	@lightbackcolor :#634928; 
 	@colorblack : #000000;
-	@colorwhite	: rgba(255, 255, 255,0.5);
+	@colorwhite	:  #fff ;
 	
 	@import "property.less";
 	@import "project.less";
@@ -23,12 +23,33 @@
 	.container{
 		max-width : 992px !important;
 	}
-body, fieldset, form, h1, h2, h3, h4, h5, h6, p 
+body, fieldset, form, h1, h2, h3, h4, h5, h6
 {
-    margin: 0px;
-    padding: 0px;
+  
+	color:@colorwhite;
 }
 
+h1{
+		margin-top: 30px;
+		border-bottom:1px solid @darkcolor;
+	&::after{
+				content : url('../img/heading-graphic.gif');
+				position : absolute;
+				z-index : -1;
+					padding: 3px;
+			}
+	}
+h2{
+		margin-top: 30px;
+		padding: 3px;
+		border-bottom:1px solid @darkcolor;
+	&::after{
+				content : url('../img/heading-graphic.gif');
+				position : absolute;
+				margin-left: 0px;
+				z-index : -1;
+			}
+		}
 body {
     background:@back ;
     font: 12px Arial, Helvetica, sans-serif;
@@ -38,42 +59,32 @@ body {
 	height:80px;
 	width:80px;
 }
-
-
-
 header{
 	.container{
-	
 		background-image:url("../img/food1.jpg");
 	}
 }
-
 .navbar-default {
    background:transparent;
     border-color: transparent;
-	top: 21px;
+	top: 28px;
     margin-right: -15px;
 	
 		.navbar-nav{
 				>li{
-				
 					position :relative;
-					>a{
+				>a{
 						background:linear-gradient(@lightbackcolor,@lightcolor);
 						color : @color;
 						border:1px solid @colorblack;
-						//text-shadow: 1px 1px @colorblack;
 						font-size: 14px;
 						font-weight:bold;
-						
 						border-right: 1px solid @back; 
 						border-top-left-radius: 10px;
-						//border-top-right-radius: 10px;
 					}
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 						color: @darkcolor;
 						cursor: pointer;
-						//text-shadow: 1px 1px @colorblack;
 						background: @color;
 					}
 					ul{
@@ -81,7 +92,8 @@ header{
 						position : absolute;
 						width : 270px;
 						z-index : 999;
-						//background : -webkit-linear-gradient(top, @back, @darkbackcolor 157%);
+						background-color :  @color;
+						color: @darkcolor;
 						padding : 15px;
 						list-style : none;
 						text-align : left;
@@ -93,9 +105,9 @@ header{
 							position : relative;
 							>a{
 								text-decoration:none;
-								color : @color;
+								color : @darkcolor;
 								&:hover{
-									color : @lightcolor;
+									color : @darkcolor;
 								}
 							}
 							> ul{
@@ -107,9 +119,9 @@ header{
 								>li{
 									>a{
 										text-decoration:none;
-										color : @color;
+										color : @darkcolor;
 										&:hover{
-											color : @lightcolor;
+											color : @darkcolor;
 										}
 									}
 								}
@@ -126,7 +138,7 @@ header{
 					}
 				}
 			}
-}
+	}
 .carousel{
 			background:rgba(0, 0, 0, 0.22);;
 			box-shadow:0px 4px 4px  @colorblack;
@@ -147,27 +159,167 @@ header{
 				}
 		}
 		.gallery{
-			background-image:url("../img/frame.gif");
 			.thumbnail{
-				
-				    display: block;
-					padding: 4px;
-					margin-bottom: 4px;
-					margin-top: 30px;
-					line-height: 1.42857143;
-					background-color: transparent;
-					border:none;
-					border-radius: 0px;
-					max-height:180px;
-					width:180px;
+				background-image:url("../img/frame.gif");
+				background-repeat:no-repeat;
+				padding : 40px;
+				padding-top: 38px;
+				background-color: transparent;
+				border:none;
+				.imgs{
+					height: 114px;
+					width: 165px;
+					overflow: hidden;
+					margin: 0 auto;
+					margin-left: -5px;
+					img{
+						min-height : 180px;
+					}
 				}
+			}
 		}
+		.activity{
+				background-color:transparent;
+			.panel{
+			background-color:transparent;
+			border:none;
+			border-bottom:1px solid @darkcolor;
+				.media-heading{
+					color:@colorwhite;
+				}
+				.description{
+						overflow:hidden;
+						height:100px;
+				}
+			}
+		}	
+	#googleMap{
+		height:395px;
+	}
+	.about{
+		center{
+			margin:20px;
 		
+		}
+		p{
+			padding-top:5px;
+			strong{
+			margin-left:5px;
+			}
+		}
+	}
+	.form-control{
+			color:@color;
+			border:1px solid @darkcolor;
+			background-color:@darkbackcolor;	
+		}
+	.enquiry{
+			h3{
+				color:@color;
+			}
+			.panel{
+				border:1px solid transparent;
+				background-color:transparent;
+			}
+			.panel-body{
+					color:@color;	
+				
+					.btn-info{
+						background-color:@color;
+						border:none; 
+						height: 27px;
+						width: 81px;
+						color:@darkcolor;					
+				}
+			&::before{
+				content : url('../img/vector-sep.jpg');
+				position : absolute;
+				z-index : -1;
+			    left: -405px;;
+				top: 400px;
+				transform: rotate(90deg);
+		}				
+	}
+}
+.table>tbody>tr>td,{
+	border-top:none;
+	hr{
+		border-top:none;
+	}
+}
+	.pagination{	
+		border-bottom:1px solid @darkcolor;
+		li{
+			background-color: @lightcolor;
+			a{
+				color: @color;
+				background-color: @lightcolor;
+				border-color:transparent;
+				&:hover,&:active,&:focus{
+				color:@lightcolor;
+				background-color: @color;
+				border-color:transparent;
+				}			
+			}	
+		}
+		.active>a{
+				color:@lightcolor;
+				background-color: @color;
+				border-color:transparent;
+				&:hover{
+					color:@lightcolor;
+					background-color: @color;
+					border-color:transparent;
+					}
+				}
+		.disabled{
+				>a{
+				color: @color;
+				background-color: @lightcolor;
+				border-color:transparent;
+				&:hover{
+					color:@lightcolor;
+					background-color: @color;
+					border-color:transparent
+				}
+				}	
+			}	
+		&::before{
+				content : url('../img/line-grid.jpg');
+				position : absolute;
+				z-index : -1;
+			}				
+	}
 footer{
 		color:@color;
+		margin-top: 100px;
+		padding: 20px;
+	
+		a{
+		
+			color:@colorwhite;
+			&:hover{
+				color:@colorwhite;
+				text-decoration:underline;
+			}
 		}
+		}
+		
+		
 @media (min-width: 768px){
 	.navbar {
 		border-radius: 0;
 		}
 }
+@media (max-width: 320px){
+	
+	.products {
+    margin-top: 180px;
+	border:none;
+	.thumbnail{
+		border:none;
+		}
+	}
+}
+		
+		

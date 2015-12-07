@@ -3,11 +3,42 @@
 		<div class="main-content">
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>
 		<div class="row">
-			
-			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'account','accountList')"></pagination>
-				<pre>Page: {{currentPage}} / {{numPages}}</pre>
-			</div>
+		<div class="col-md-6">
+			<h4>Current Assets</h4>
+			<table class="table table-striped table-hover">
+				<tr>
+					<th>Account Name</th>
+					<th>Balance</th>
+				</tr>
+				<tr ng-repeat="x in transaction_list">
+					<td>{{x.account_name}}</td>
+					<td>{{x.account_balance}}</td>
+				</tr>
+				<tr>
+					<td>Total Balance</th>
+					<td>Here comes Total Balance</td>
+				</tr>
+			</table>
+			<h4>Receivable</h4>
+		</div>
+		<div class="col-md-6">
+			<h4>Liabilities</h4>
+			<table class="table table-striped table-hover">
+				<tr>
+					<th>Account Name</th>
+					<th>Balance</th>
+				</tr>
+				<tr ng-repeat="x in transaction_list">
+					<td>{{x.account_name}}</td>
+					<td>{{x.account_balance}}</td>
+				</tr>
+				<tr>
+					<td>Total Balance</td>
+					<td>Here comes Total Balance</td>
+				</tr>
+			</table>
+			<h4>Payable</h4>
+		</div>
 		</div>
 	</div>
 </div>

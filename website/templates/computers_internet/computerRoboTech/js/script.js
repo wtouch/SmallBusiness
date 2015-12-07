@@ -36,6 +36,23 @@ $(document).ready(function(){
 		$(".anim1").removeClass("anim1");
 		console.log(getCookie('anim'));
 	} 
+	$('.bxslider').bxSlider({
+		mode:'horizontal',
+		slideWidth: 250,
+		minSlides: 4,
+		maxSlides: 4,
+		slideMargin: 25,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 1,
+		pause:3000,
+		pager:true,
+		pagerType:'full',
+		autoControls: true, 
+		controls:true, 
+		autoHover:true,
+		speed:1000,
+	});
 });
 var app = angular.module('myApp',[]);
 

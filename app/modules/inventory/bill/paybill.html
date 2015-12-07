@@ -1,9 +1,9 @@
 <div class="main-content">
 	<div class="modal-header" style="margin-bottom: 14px">
-		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3>Pay Bill</h3>
 	</div>
-	<form name="payBillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="payBillForm.$valid">{{modalOptions.payBill}}
+	<form name="payBillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="payBillForm.$valid">
 			<div class="form-group">
 				<label  for="pay_date" class="col-sm-2 control-label">Date</label>
 					<div class="col-sm-9">
@@ -46,19 +46,17 @@
 						</span>	
 					</div>
 			</div> 
-			
+		
 			<div class="form-group">
-				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
-					<div class="col-sm-9">
-						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-init="modalOptions.payBill.debit_amount = modalOptions.payBill.due_amount" ng-model="modalOptions.payBill.debit_amount"  name="amount" placeholder="Amount" required />
-						<span class="help-block" ng-show="payBillForm.amount.$dirty && payBillForm.amount.$invalid">
-							<span ng-show="payBillForm.amount.$error.required" class="text-danger">Amount is required.</span>
-							<span ng-show="payBillForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
-						</span>
-					</div>					
+				<label  for="Amount" class="col-sm-2 control-label">Amount</label>
+				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
+					<input type="text"  id="Amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.payBill.debit_amount" name="credit_amount" ng-change="modalOptions.checkPaidStatus(modalOptions.payBill.debit_amount,modalOptions)" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList"ng-change="modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payInvoice.credit_amount, modalOptions)" required/>
+					<span class="help-block" ng-show="payInvoiceForm.credit_amount.$dirty && payInvoiceForm.amount.$invalid">
+						<span ng-show="payInvoiceForm.credit_amount.$error.required" class="text-danger">Amount is required.</span>
+						<span ng-show="payInvoiceForm.credit_amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+					</span>
+				</div>						
 			</div>
-			
-			<input type="text" id="amt" class="form-control" name="amt" ng-model="modalOptions.payBill.due_amount1"required />
 			
 			<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'DD'|| modalOptions.payBill.description.payment_type.type == 'Net Banking'  " >
 			<label for="refferance no" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
@@ -112,7 +110,7 @@
 			
 		<div class="form-group modal-footer">
 			<div class="col-sm-11">
-				<button type="submit" class="btn btn-success" ng-click="modalOptions.postData('transaction',modalOptions.payBill); modalOptions.ok()">Pay Bill</button>
+				<button type="submit" class="btn btn-success" ng-click="modalOptions.postData('transaction', modalOptions.payBill); modalOptions.ok()">Pay Bill</button>
 				<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 			</div>
 		</div>	

@@ -1,28 +1,102 @@
- {% spaceless %}
+
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
-		<script src="{{ path }}js/jquery.min.js"></script>
-		<script src="{{ path }}js/bootstrap.min.js"></script>
-		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
-		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
-		<script src="{{ path }}js/angular.min.js"></script>
-		<script src="{{ path }}js/angular-route.min.js"></script>
-		<script src="{{ path }}js/script.js"></script>
-		<script src="{{ path }}js/myscript.js"></script>
-		<title>{{seo.title}} | {{data.business_name}}</title>
-		<meta name="description" content="{{ seo.description }}">
-		<meta name="keywords" content="{{ seo.keywords }}">
+		<script src="js/jquery.min.js"></script>
 		
+		<script src="jquery-1.8.3.min.js"></script>
+		<script src="animatescroll.min.js?v=1.0.7"></script>
+		<script src="animatescroll.js"></script>
+		
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.bxslider.min.js"></script>
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-route.min.js"></script>
+		<script src="js/script.js"></script>
+		<script src="js/myscript.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js">
+		</script>
+		<script>				
+			function myFunction() {
+							  if (document.body.scrollTop>250) {
+									document.getElementById("abouttt").className = "left";
+									document.getElementById("aboutttt").className = "left";
+									document.getElementById("aboutt").className = "left";
+							   } else {
+									document.getElementById("abouttt").className = "";
+									document.getElementById("aboutttt").className = "";
+									document.getElementById("aboutt").className = "";
+								}
+							if (document.body.scrollTop>450) {
+								document.getElementById("serv").className = "left";
+								document.getElementById("serv1").className = "left";
+								document.getElementById("serv2").className = "left";
+								
+							} else {
+								document.getElementById("serv").className = "";
+								document.getElementById("serv1").className = "";
+								document.getElementById("serv2").className = "";
+								}
+							if (document.body.scrollTop>550) {
+								document.getElementById("serv3").className = "left";
+								document.getElementById("serv4").className = "left";
+								
+							} else {
+								document.getElementById("serv3").className = "";
+								document.getElementById("serv4").className = "";
+								}
+			} 
+			window.onscroll = function() {myFunction()};
+		</script>
+		<!-- http://plugins.compzets.com/animatescroll/ -->
+		
+		<script>
+			function initialize() {
+				var mapProp = {
+					center:new google.maps.LatLng({{18.604332}},{{73.7731988}}),
+					zoom:12,
+					mapTypeId:google.maps.MapTypeId.ROADMAP
+				};
+				var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+				var marker=new google.maps.Marker({
+					position:new google.maps.LatLng({{18.604332}},{{73.7731988}}),
+				});
+				marker.setMap(map);
+			}
+			google.maps.event.addDomListener(window, 'load', initialize);
+		</script>
+		<!-- <script>
+			$(document).ready(function(){
+				$("ul>li:nth-child(1)>a").click(function(){
+					$('#about').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});
+				});
+			});
+		</script> -->
 	</head>
 	<body>
-	
-		<div class="container">
+		<div class="container-fluid nav">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+				<ul>
+					<!-- <li><button class="btn" onclick="$('#services').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">home</button></li>
+					 --> <li><a href="" target="_self">HOME</a></li> 
+					<li><a href="#about" target="_self">ABOUT US</a></li>
+					<li><a href="#" target="_self">PROJECTS</a></li>
+					<li><a href="#services" target="_self">SERVICES</a></li>
+					<li><a href="#" target="_self">LEGAL</a></li>
+					<li><a href="#associates" target="_self">ASSOCIATES</a></li>
+					<li><a href="#contact" target="_self">CONTACT US</a></li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid back">
 			<div class="row">
 				<div class="col-md-3 col-sm-12 col-xs-12">
 				</div>
@@ -37,64 +111,197 @@
 					<h1>M</h1>
 					</div>
 					<div class="logo">
-						{% if data.website_config.website_logo %}
-							<img src="{{data.business_logo.file_relative_path}}">
-						{% else %}
-							<img src="{{data.business_logo.file_relative_path}}">
-						{% endif %}
+					<!-- 	<img src="back.jpg" alt="image missing"> -->
 					</div>
 					<div class="desc">
 					<h2>We Care<br> For You</h2>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-12 col-xs-12">
+			</div>
+		</div>
+		<div id="about" class="container-fluid about">
+			<div class="row about1">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h1 id="aboutt" >YOU KNOW WHO WE ARE?</h1>
+				</div>
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<h3>Our Mission To Stay Positive:</h3>
+					<p id="abouttt" >We will inspire and support schools and families to take positive action so that the scheme of every child is enhanced by good access to,
+					and use of, learning technologies when and where they need them.Saksham Agro was founded in , 
+					Saksham Agro was among the pioneers of the e-learning industry.  Over the years,
+					volunteer of the Phoenix e-learning team have had the honour to assist scheme over the Maharashtra.
+					We are truly fortunate to have gathered together a remarkable team of associates to help us create 
+					the very best quality solutions for our clients. We are proud to be one of only a few full-service 
+					learning product creation and deployment strategic business partners. With a focus on responsiveness, 
+					attention to deadlines and details, and care for the customer’s vision, we are on our way to becoming an industry leader.
+					Technology has a vital role to play in closing the attainment gap.</p>
+					<h3>Our Aim:</h3>
+					<p id="aboutttt">To ensure all children have access at home and at school to exciting learning resources to fulfill their
+					potential and overcome disadvantage, working in partnership with schools, parents, charities and businesses.</p>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div class="col-md-12 col-sm-12 col-xs-12 about2">
+						<!-- <img class="img-responsive" src="{{path}}img/about.gif" alt="image missing"> -->
+					</div>
 				</div>
 			</div>
-			<header>
-				<div class="row">
-					
-					<!-- <div class="col-md-4 col-sm-6 col-xs-6">
-						 <h2>{{data.business_name}}</h2>
-					</div> -->
-				
-					<!-- <div class="col-md-4 col-xs-12 col-sm-12 social_link">
-								{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-					</div> -->
+		</div>
+		<div id="services" class="container-fluid service">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h1 id="ser">WHAT WE SERVE?</h1>
 				</div>
-				<nav class="nav navbar-default  navbar-static-top b"> 
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div>
-				
-					<div class="container">
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav nav-justified">
-								{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-							</ul>
+			</div>
+			<div class="row service1">
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<h3>REAL ESTATE</h3>
+					<p id="ser1">Perched over a mountain plateau and nestled in pune's picturesque surroundings is your private retreat. 
+					This luxurious development with four towers of 12 storeys each offers you an exceptional opportunity to relive the relaxed and
+					unhurried lifestyle of erstwhile pune without giving up the pleasures of an urban living.</p>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="col-md-12 col-sm-12 col-xs-12 srv1">
+								<!-- <img class="srv1 img-responsive" src="{{path}}img/about.gif" alt="image missing"> -->
+							</div>
 						</div>
 					</div>
-				</nav>
-			</header>
-			<div class="row">
-				
-					{%if modules.headerModule.carousal %}
-					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-					{%if modules.headerModule.homeproject %}
-					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-				
-			</div> 
-			<!-- <div class="row">
-				{% include contentPath%}
-			</div> -->
+				</div>
+			</div>
+			<div class="row service1">
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<h3>GOAT FARMING</h3>
+					<p id="ser2">Goat is a multi functional animal and plays a significant role in the economy and nutrition of landless,
+					small and marginal farmers in the country. Goat rearing is an enterprise which has been practiced by a large 
+					section of population in rural areas</p>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="col-md-12 col-sm-12 col-xs-12 srv2">
+								<!-- <img class=" srv2 img-responsive" src="{{path}}img/about.gif" alt="image missing"> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row service1">
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<h3>FISHING</h3>
+					<p id="ser3">Fishing in India employs about 14.5 million people. The country's rich marine and inland water resources, 
+					fisheries and aquaculture offer an attractive and promising sector for employment, livelihood, and food security.
+					Fish products from India are well received by almost half of world's countries, creating export-driven employment 
+					opportunities in India and greater food security for the world. During the past decades the Indian fisheries and
+					aquaculture has witnessed improvements in craft, tackle and farming methods. Creation of required harvest and post-harvest
+					infrastructure has been receiving due attention of the central and state governments. All this has been inducing a steady growth.</p>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="col-md-12 col-sm-12 col-xs-12 srv3">
+								<!-- <img class="srv3 img-responsive" src="{{path}}img/about.gif" alt="image missing"> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row service1">
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					<h3>TRADING</h3>
+					<p id="ser4">Trade involves the transfer of the ownership of goods or services from one person or entity to another in exchange for other
+					goods or services or for money. Possible synonyms of "trade" include "commerce" and "financial transaction".
+					Types of trade include barter. A network that allows trade is called a market.</p>
+				</div>
+				<div class="col-md-4 col-sm-12 col-xs-12">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="col-md-12 col-sm-12 col-xs-12 srv4">
+								<!-- <img class="srv4 img-responsive" src="{{path}}img/about.gif" alt="image missing"> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!-- {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} -->
+		<div id="associates" class="container-fluid associates">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h1>Our Assocites</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="row">
+						<div class="col-md-6 col-sm-12 col-xs-12">
+							<h3>FOR WEB WORLD</h3>
+							<img src="{{path}}img/webtouch.png" alt"missing">
+							<h3><a href="http://www.wtouch.in" target="_self">VISIT US</a></h3>
+						</div>
+						<div class="col-md-6 col-sm-12 col-xs-12">
+							<iframe src="http://www.wtouch.in">
+								<p>Your browser does not support iframes.</p>
+							</iframe>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="row">
+						<div class="col-md-6 col-sm-12 col-xs-12">
+							<h3>FOR REAL WORLD</h3>
+							<div class="row">
+								<div class="col-md-4 col-sm-12 col-xs-12">
+								</div>
+								<div class="col-md-4 col-sm-12 col-xs-12">
+									<img src="{{path}}img/edgespot.png" alt"missing">
+								</div>
+								<div class="col-md-4 col-sm-12 col-xs-12">
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<h3 style="margin-right:40px;" ><a href="http://www.edgespot.in" target="_self">VISIT US</a></h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-12 col-xs-12">
+							<iframe src="http://www.edgespot.in">
+								<p>Your browser does not support iframes.</p>
+							</iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="contact" class="container-fluid contact">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h1>Feel Free To Contact Us</h1>
+				</div>
+				<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="row">
+						<div class="col-md-12 col-sm-9 col-xs-9">
+								<h3>Address:</h3><br>
+								<p>Saksham Agro<br>
+								Shop No.1 ,<br>
+								Bajirao Classic ,<br>
+								Near Apex Hospital ,<br>
+								Kalewadi Phata ,<br>
+								Thergaon Pune:411033<br>
+								</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<h3>Telephone: 020-65001777</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="col-md-12 col-sm-12 col-xs-12 map" id="googleMap">
+						
+					
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html> 
-{% endspaceless %}

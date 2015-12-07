@@ -50,7 +50,7 @@ define(['app'], function (app) {
 				{ name:'SrNo',width:50, enableSorting: false,enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 				},
-				{ name:'invoice_id',  width:150, enableSorting: false ,displayName: "Invoice No",
+				{ name:'invoice_id',  width:100, enableSorting: false ,displayName: "Invoice No",
 				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'invoice_id\', invoice_id, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="invoice_id" placeholder="Invoice No">',
 				},
 				{ name:'name',enableSorting: false ,
@@ -77,12 +77,9 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{row.entity.total_amount}}</span>"
 								
 				},
-				{
-					name:'price',width:80,
-					enableSorting: false ,
-					enableFiltering: false, 
-					cellTemplate : "<span>{{row.entity.particulars[0].price}}</span>"
+				{ name:'due_amount',width:100,enableSorting: false,enableFiltering: false,
 				},
+				
 				{
 					name:'Manage', 
 					enableSorting: false, 
@@ -96,10 +93,10 @@ define(['app'], function (app) {
 					 
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openPayInvoice(\'modules/inventory/invoice/payInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-usd"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewinvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Invoice"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ '<a type="button" tooltip="Delete Invoice" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPayInvoice(\'modules/inventory/invoice/payInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice"> <span class="glyphicon glyphicon-usd"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewinvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Invoice"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewReceipt.html\',row.entity)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
@@ -151,7 +148,8 @@ define(['app'], function (app) {
 						remark : data.remark
 					} : {
 						date : dataService.sqlDateFormate(false,"datetime"),
-					 modified_date : dataService.sqlDateFormate(false,"datetime")
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -171,9 +169,9 @@ define(['app'], function (app) {
 							console.log($scope.stockData);
 							
 							$rootScope.postData("stock", $scope.stockData,function(response){
-								
+								$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 							});
-						$scope.getData(false, $scope.currentPage, 'invoice','invoiceList');
+						$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 						}
 					})
 				},
@@ -220,7 +218,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'invoice','invoiceList');
+							$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 						}
 					})
 					
@@ -249,7 +247,7 @@ define(['app'], function (app) {
 					reference_id : data.id,
 					party_id : data.party_id,
 					user_id : data.user_id,
-					credit_amount : data.total_amount,
+					credit_amount : data.due_amount,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					date : dataService.sqlDateFormate(false,"datetime"),
 					status : 1,
@@ -257,16 +255,31 @@ define(['app'], function (app) {
 				} : {
 				},
 				getBalance : $scope.getBalance,
-				calcBalance : function(previousBal, amount, modalOptions){
-			modalOptions.payInvoice.balance = parseFloat(previousBal) + parseFloat(amount)
+				getPaidAmount :	$scope.getPaidAmount,
+				checkPaidStatus : function(value, modalOptions){
+					if((parseFloat(data.due_amount) - parseFloat(value)) == 0){
+						modalOptions.payment_status = 1;
+					}else{
+						modalOptions.payment_status = 2;
+					}
+					return modalOptions.payment_status;
 				},
+				
+				//calcBalance : function(previousBal, amount, modalOptions){
+				//modalOptions.payInvoice.balance = parseFloat(previousBal) + parseFloat(amount)
+				//},
 				
 				
 				postData : function(table,input){
 					console.log(table,input);
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							
+							var paymentStatus = {
+								payment_status : (modalOptions.payment_status) ? modalOptions.payment_status : modalOptions.checkPaidStatus(modalOptions.payInvoice.credit_amount, modalOptions)
+							}
+							$rootScope.updateData("invoice", paymentStatus, data.id, function(response){
+								
+							})
 						}
 					})
 				},
@@ -297,9 +310,19 @@ define(['app'], function (app) {
 						id : "t0.party_id"
 					},
 					cols : {name : "name"}
+				},{
+					joinType : "left join",
+					joinTable : "inventory_transaction",
+					joinOn : {
+						reference_id : "t0.id"
+					},
+					cols : ['credit_amount, IFNULL(sum(t2.credit_amount),0) as paid_amount']
 				}
 			],
-			cols : ["*"]
+			groupBy : {
+				id : "id"
+			},
+			cols : ["*, (t0.total_amount - IFNULL(sum(t2.credit_amount),0)) as due_amount"]
 		}
 		$scope.manageParams = {
 			where : {
@@ -326,7 +349,7 @@ define(['app'], function (app) {
 					status : 1,
 					account_id : accountId
 				},
-				cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+				cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 			}
 			dataService.get(false,'transaction', accountParams).then(function(response) {
 				console.log(response);
@@ -334,8 +357,6 @@ define(['app'], function (app) {
 			})
 			
 		}
-		
-		
 		
 		// For Get (Select Data from DB)
 		/*get data */

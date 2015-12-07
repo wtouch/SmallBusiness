@@ -1,11 +1,10 @@
 <div class="modal-content">
-
 	<div class="modal-header" style="margin-bottom: 14px">
-		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3 class="col-sm-offset-2 col-sm-9"  ng-if="!modalOptions.adduser.id"><center>Add New Party</center></h3>
 		<h3 class="col-sm-offset-2 col-sm-9"  ng-if="modalOptions.adduser.id"> <center>Edit Party</center></h3>
 	</div>
-		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate="novalidate">
+		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate="novalidate">{{modalOptions.adduser}}
 		
 		     <input type="hidden" class="form-control" ng-model="modalOptions.adduser.user_id" ng-init="modalOptions.adduser.user_id = userDetails.id" readonly/>
 			 
@@ -40,6 +39,7 @@
 					</span>
 				</div>
 			</div> 
+			
 			<div class="form-group">
 				<label for="phone" class="col-sm-2 control-label">Phone *</label>
 				<div class="col-sm-9">
@@ -66,8 +66,6 @@
 			
 	       <div class="form-group">
 				<label for="location" class="col-sm-2 control-label">Location *</label>
-
-				
 					<div class="col-sm-9">
 						<input type="text" name="location" id="location" ng-model="modalOptions.adduser.location" placeholder="Enter your location" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
 						<span class="text-danger"  ng-show="adduserForm.location.$error.pattern">please Enter Valid Location</span>
@@ -127,16 +125,18 @@
 					</span>
 				</div>						
 			</div>
-			<!-- hidden date field -->
+			
 			<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.adduser.modified_date" ng-init="modalOptions.adduser.modified_date = modalOptions.date"/>
+			
 			<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.adduser.date" ng-init="modalOptions.adduser.date = modalOptions.date"/>
-			<!-- hidden field  end -->
+			
 			<div class="form-group">
 			 <label  for="date" class="col-sm-2 control-label">Date * </label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder=" Bill Date" id="partydate" name="partydate" ng-model="modalOptions.adduser.partydate" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.adduser.partydate = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
 				</div>
 			</div>  
+			
 			<div class="form-group">
 				<label for="type" class="col-sm-2 control-label">Type*</label>
 				<div class="col-sm-9">
@@ -150,18 +150,18 @@
 			</div>
 
 			<div class="form-group">
-					<label for="select type" class="col-sm-2 control-label">Department *</label>
-					<div class="col-sm-9">
-							<select id="department" name="department" class="form-control" 
-							ng-model="modalOptions.adduser.department" required="required">
-							<option value="" selected>select Department</option>
-							<option value="IT">IT</option>
-							<option value="CIVIL">CIVIL</option>
-							<option value="MECH">MECH</option>
-							</select>
-					</div>
+				<label for="select type" class="col-sm-2 control-label">Department *</label>
+				<div class="col-sm-9">
+						<select id="department" name="department" class="form-control" 
+						ng-model="modalOptions.adduser.department" required="required">
+						<option value="" selected>select Department</option>
+						<option value="IT">IT</option>
+						<option value="CIVIL">CIVIL</option>
+						<option value="MECH">MECH</option>
+						</select>
 				</div>
-		<div class="form-group">
+			</div>
+			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
 					<button type="submit" class="btn btn-success" ng-if="!modalOptions.adduser.id" ng-disabled="adduserForm.$invalid" ng-click="modalOptions.postData('party',modalOptions.adduser);modalOptions.ok()">Add party</button>
 					

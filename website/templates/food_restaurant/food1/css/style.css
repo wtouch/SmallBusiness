@@ -67,13 +67,13 @@
   margin-top: 30px;
   margin-bottom: 10px;
   padding: 0px 20px;
-  border: 1px solid #043d80;
+  border: 1px solid #2f0805;
 }
 .singleproperty .property h3 {
   border: none;
 }
 .singleproperty .property .table tbody tr td {
-  border-top: 1px dashed #043d80;
+  border-top: 1px dashed #2f0805;
 }
 .singleproperty .property .mainimg {
   height: 175px;
@@ -159,7 +159,7 @@
 }
 .singleproperty .propDetails .table tbody tr th {
   background-color: #fbe7ab;
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
 }
 .singleproperty .propDetails .table tbody tr td,
 .singleproperty .propDetails .table tbody tr th {
@@ -186,7 +186,7 @@
   }
   .property .mainimg img {
     height: 130px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid #ffffff;
   }
 }
 @media (max-width: 540px) {
@@ -335,7 +335,7 @@
   border: 2px solid transparent;
 }
 .projlist .project .thumbnail .projectimg img:hover {
-  border: 2px solid #043d80;
+  border: 2px solid #2f0805;
 }
 .projlist .project .thumbnail .caption {
   padding: 9px 5px;
@@ -458,32 +458,100 @@
   text-align: center;
   margin-top: 10px;
 }
-.products .thumbnail {
-  height: 385px;
+.product {
+  background-color: transparent;
+  border: none;
 }
-.products .thumbnail .prodimg {
+.product h4 {
+  border-bottom: 1px solid #3e2709;
+}
+.product .prodimg {
+  width: 250px;
+  height: 210px;
+  margin: 0px auto;
+}
+.product .description {
+  overflow: hidden;
   height: 148px;
-  width: 195px;
+  border-bottom: 1px solid #3e2709;
+  border-image: url("../img/line-gred.jpg");
+  border-image-width: 0 0 1px 0;
+}
+.product .readmore {
+  margin-left: 490px;
+}
+.product .readmore .btn-info {
+  background-image: url("../img/send-enquiry.jpg");
+  border: none;
+  padding: 21px 82px;
+  margin-top: 15px;
+}
+.product::after {
+  content: url('../img/vector-sep.jpg');
+  position: absolute;
+  left: 0px;
+  bottom: 10px;
+  z-index: -1;
+}
+.services {
+  margin-top: 150px;
+}
+.services .products .thumbnail {
+  background: url(../img/box-bg.jpg) repeat-y;
+  width: 293px;
+  margin-left: 8px;
+  border-radius: 0px;
+  border: none;
+  padding: 25px;
+  background-color: #2f0805;
+}
+.services .products .thumbnail h3 {
+  position: absolute;
+  top: -85px;
+  left: 70px;
+  text-transform: uppercase;
+}
+.services .products .thumbnail h4 {
+  position: absolute;
+  left: 158px;
+  color: #1d0200;
+}
+.services .products .thumbnail::before {
+  content: url('../img/box-top.jpg');
+  position: absolute;
+  left: 23px;
+  top: -119px;
+}
+.services .products .thumbnail::after {
+  content: url('../img/box-bot.jpg');
+  position: absolute;
+  left: 23px;
+  bottom: -53px;
+  z-index: -1;
+}
+.services .products .thumbnail .prodimg {
+  height: 148px;
+  width: 180px;
   overflow: hidden;
   margin: 0 auto;
+  background-color: #fbe7ab;
 }
-.products .thumbnail .prodimg img {
+.services .products .thumbnail .prodimg img {
   min-height: 148px;
   border: 2px solid transparent;
-  padding: 4px;
+  padding: 10px;
 }
-.products .thumbnail .prodimg img:hover {
-  border: 2px solid #043d80;
+.services .products .thumbnail .prodimg img:hover {
+  border: 2px solid #2f0805;
 }
-.products .thumbnail .caption {
-  height: 182px;
+.services .products .thumbnail .caption {
   margin-bottom: 10px;
 }
-.products .thumbnail .caption .description {
+.services .products .thumbnail .caption .description {
   height: 75px;
   overflow: hidden;
 }
-.products .thumbnail .readmore {
+.services .products .thumbnail .readmore {
   text-align: center;
 }
 * {
@@ -500,10 +568,29 @@ h2,
 h3,
 h4,
 h5,
-h6,
-p {
-  margin: 0px;
-  padding: 0px;
+h6 {
+  color: #ffffff;
+}
+h1 {
+  margin-top: 30px;
+  border-bottom: 1px solid #3e2709;
+}
+h1::after {
+  content: url('../img/heading-graphic.gif');
+  position: absolute;
+  z-index: -1;
+  padding: 3px;
+}
+h2 {
+  margin-top: 30px;
+  padding: 3px;
+  border-bottom: 1px solid #3e2709;
+}
+h2::after {
+  content: url('../img/heading-graphic.gif');
+  position: absolute;
+  margin-left: 0px;
+  z-index: -1;
 }
 body {
   background: #1d0200;
@@ -520,7 +607,7 @@ header .container {
 .navbar-default {
   background: transparent;
   border-color: transparent;
-  top: 21px;
+  top: 28px;
   margin-right: -15px;
 }
 .navbar-default .navbar-nav > li {
@@ -549,6 +636,8 @@ header .container {
   position: absolute;
   width: 270px;
   z-index: 999;
+  background-color: #fbe7ab;
+  color: #3e2709;
   padding: 15px;
   list-style: none;
   text-align: left;
@@ -562,10 +651,10 @@ header .container {
 }
 .navbar-default .navbar-nav > li ul > li > a {
   text-decoration: none;
-  color: #fbe7ab;
+  color: #3e2709;
 }
 .navbar-default .navbar-nav > li ul > li > a:hover {
-  color: #54190c;
+  color: #3e2709;
 }
 .navbar-default .navbar-nav > li ul > li > ul {
   display: none;
@@ -576,10 +665,10 @@ header .container {
 }
 .navbar-default .navbar-nav > li ul > li > ul > li > a {
   text-decoration: none;
-  color: #fbe7ab;
+  color: #3e2709;
 }
 .navbar-default .navbar-nav > li ul > li > ul > li > a:hover {
-  color: #54190c;
+  color: #3e2709;
 }
 .navbar-default .navbar-nav > li ul > li:hover > ul {
   display: block;
@@ -603,28 +692,155 @@ header .container {
   text-align: left;
 }
 .carousel .item p {
-  color: rgba(255, 255, 255, 0.5);
-}
-.gallery {
-  background-image: url("../img/frame.gif");
+  color: #ffffff;
 }
 .gallery .thumbnail {
-  display: block;
-  padding: 4px;
-  margin-bottom: 4px;
-  margin-top: 30px;
-  line-height: 1.42857143;
+  background-image: url("../img/frame.gif");
+  background-repeat: no-repeat;
+  padding: 40px;
+  padding-top: 38px;
   background-color: transparent;
   border: none;
-  border-radius: 0px;
-  max-height: 180px;
-  width: 180px;
+}
+.gallery .thumbnail .imgs {
+  height: 114px;
+  width: 165px;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-left: -5px;
+}
+.gallery .thumbnail .imgs img {
+  min-height: 180px;
+}
+.activity {
+  background-color: transparent;
+}
+.activity .panel {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #3e2709;
+}
+.activity .panel .media-heading {
+  color: #ffffff;
+}
+.activity .panel .description {
+  overflow: hidden;
+  height: 100px;
+}
+#googleMap {
+  height: 395px;
+}
+.about center {
+  margin: 20px;
+}
+.about p {
+  padding-top: 5px;
+}
+.about p strong {
+  margin-left: 5px;
+}
+.form-control {
+  color: #fbe7ab;
+  border: 1px solid #3e2709;
+  background-color: #2f0805;
+}
+.enquiry h3 {
+  color: #fbe7ab;
+}
+.enquiry .panel {
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+.enquiry .panel-body {
+  color: #fbe7ab;
+}
+.enquiry .panel-body .btn-info {
+  background-color: #fbe7ab;
+  border: none;
+  height: 27px;
+  width: 81px;
+  color: #3e2709;
+}
+.enquiry .panel-body::before {
+  content: url('../img/vector-sep.jpg');
+  position: absolute;
+  z-index: -1;
+  left: -405px;
+  top: 400px;
+  transform: rotate(90deg);
+}
+.table > tbody > tr > td {
+  border-top: none;
+}
+.table > tbody > tr > td hr {
+  border-top: none;
+}
+.pagination {
+  border-bottom: 1px solid #3e2709;
+}
+.pagination li {
+  background-color: #54190c;
+}
+.pagination li a {
+  color: #fbe7ab;
+  background-color: #54190c;
+  border-color: transparent;
+}
+.pagination li a:hover,
+.pagination li a:active,
+.pagination li a:focus {
+  color: #54190c;
+  background-color: #fbe7ab;
+  border-color: transparent;
+}
+.pagination .active > a {
+  color: #54190c;
+  background-color: #fbe7ab;
+  border-color: transparent;
+}
+.pagination .active > a:hover {
+  color: #54190c;
+  background-color: #fbe7ab;
+  border-color: transparent;
+}
+.pagination .disabled > a {
+  color: #fbe7ab;
+  background-color: #54190c;
+  border-color: transparent;
+}
+.pagination .disabled > a:hover {
+  color: #54190c;
+  background-color: #fbe7ab;
+  border-color: transparent;
+}
+.pagination::before {
+  content: url('../img/line-grid.jpg');
+  position: absolute;
+  z-index: -1;
 }
 footer {
   color: #fbe7ab;
+  margin-top: 100px;
+  padding: 20px;
+}
+footer a {
+  color: #ffffff;
+}
+footer a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 @media (min-width: 768px) {
   .navbar {
     border-radius: 0;
+  }
+}
+@media (max-width: 320px) {
+  .products {
+    margin-top: 180px;
+    border: none;
+  }
+  .products .thumbnail {
+    border: none;
   }
 }

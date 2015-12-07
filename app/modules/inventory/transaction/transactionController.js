@@ -201,7 +201,7 @@ define(['app'], function (app) {
 							status : 1,
 							account_id : accountId
 						},
-						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
 						console.log(response);
@@ -274,7 +274,7 @@ define(['app'], function (app) {
 							status : 1,
 							account_id : accountId
 						},
-						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
 						modalOptions.previous_balance = response.data[0].previous_balance;
@@ -300,7 +300,20 @@ define(['app'], function (app) {
 				},
 				getData : $scope.getData,
 				addToObject : $rootScope.addToObject,
-				removeObject : $rootScope.removeObject
+				removeObject : $rootScope.removeObject,
+				/*checkBalance : function(fieldName, fieldValue,modelOptions){
+					console.log(fieldName, fieldValue,modelOptions.previous_balance);
+					var possibleValue = modelOptions.previous_balance;
+					if(fieldValue != undefined && fieldValue.length >= possibleValue.length){
+						if(fieldValue<=possibleValue){
+								modelOptions.addexpenseForm[fieldName].$setValidity('available', true);
+						}
+						else{
+								modelOptions.addexpenseForm[fieldName].$setValidity('available', false);
+							modelOptions.availabilityMsg = "The Value Must Less than Previous amount";
+						}
+					}
+				}*/
 			};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -334,7 +347,7 @@ define(['app'], function (app) {
 							status : 1,
 							account_id : accountId
 						},
-						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
 						modalOptions.previous_balance1 = response.data[0].previous_balance;
@@ -349,7 +362,7 @@ define(['app'], function (app) {
 							status : 1,
 							account_id : accountId
 						},
-						cols : ["account_id, (sum(t0.credit_amount) - sum(t0.debit_amount)) as previous_balance"]
+						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
 						modalOptions.previous_balance2 = response.data[0].previous_balance;
@@ -402,6 +415,7 @@ define(['app'], function (app) {
 					})
 					$rootScope.postData(table, obj2,function(response){
 						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
 				},
@@ -414,8 +428,11 @@ define(['app'], function (app) {
 				}, 
 				getData : $scope.getData,
 				addToObject : $rootScope.addToObject,
-				removeObject : $rootScope.removeObject
+				removeObject : $rootScope.removeObject,
+				
+				
 			};
+			
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 		

@@ -33,11 +33,11 @@ define(['app'], function (app) {
 			},{
 				name : "Clients List",
 				path : "#/dashboard/inventory/party/client",
-				SubTitle :"client List"
+				SubTitle :"Client List"
 			},{
 				name : "Vendors List",
 				path : "#/dashboard/inventory/party/vendor",
-				SubTitle :"vendor List"
+				SubTitle :"Vendor List"
 			}
 		]
 		$scope.currentPath = $location.path();

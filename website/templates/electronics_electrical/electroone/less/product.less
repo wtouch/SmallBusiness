@@ -1,58 +1,129 @@
 .featured_services{
-	.sections{
-		border : none;
-		background : none;
-		box-shadow : 0 0 0;
-	}
+		.sections {
+				background: none;
+				box-shadow: 0 0 0;
+				margin-bottom: 80px;
+				color: #ffffff;
+				height: 90%;
+				width: 90%;
+				height: 100%;
+				width: 100%;
+				padding: 0px;
+				}
+
 	.services{
 		.servimage{
-			border : 4px solid transparent;
-			padding : 6px;
+			padding:0px;
+		
+			p
 			&:hover{
-				border : 4px solid @darkcolor;
+		//border : 4px solid @darkcolor;
+
 			}
+		
 		}
 		.servdesc{
-			height : 220px;
-			.description{
-				height : 75px;
-				overflow : hidden;
-			}
-			.readmore{
-				text-align : center;
-				margin-top : 10px;
-			}
+		    padding: 0px;
+			
+			height:100px;
+			
+				.description{
+					height : 75px;
+					
+					margin-top:55px;
+				}
+			
 		}
 	}
+	
 }
 
-.products{
-	.thumbnail{
-		height:385px;
-		.prodimg{
-			height : 148px;
-			width : 195px;
-			overflow : hidden;
-			margin : 0 auto;
+.contentModule.featured_services {
+    margin-top: 180px;
+}
+
+	.id-color {
+			color: @lightcolor;
+			}
+		.header h3 {
+			font-size: 28px;
+		}
+
+.services{
+
+		.prodimage {
+			height: 200px;
+			width: 100%;
+			overflow: hidden;
+			position:relative;
+			transition: all 0.6s ease;
+			
 			img{
-				min-height : 148px;
-				border : 2px solid transparent;
-				padding : 4px;
-				&:hover{
-					border : 2px solid @darkbackcolor;
+				min-height : 200px;
+			}
+			
+		
+			.sale, .new_pr {
+				font-size: 13px;
+				text-transform: uppercase;
+				display: inline-block;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: #e8504f;
+				color: #FFF;
+				line-height: 24px;
+				padding: 2px 8px;
+				z-index: 9;
+			}
+			.caption{
+				height: 182px;
+				margin-bottom : 10px;
+				display:none;
+				.description{
+					height : 75px;
+					//overflow : hidden;
+					color:@colorwhite;
+				}
+			}
+			.glyphicon {
+			position: absolute;
+			top: 1px;
+			display: inline-block;
+			font-family: 'Glyphicons Halflings';
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			height: 22px;
+			width: 45px;
+			background-color: #e6b244;
+			z-index: 99;
+			right:0;
+			opacity:0;
+			
+			}
+			&:hover{
+				.glyphicon {
+					opacity:1;
 				}
 			}
 		}
-		.caption{
-			height: 182px;
-			margin-bottom : 10px;
-			.description{
-				height : 75px;
-				overflow : hidden;
-			}
-		}
-		.readmore{
-			text-align : center;
-		}
+		
+		
 	}
+	
+	
+.thumbnail .caption {
+    padding: 9px;
+    color: @lightbackcolor;
+	 .description{
+	    height: 200px;
+		overflow: hidden;
+	 }
 }
+
+
+
+	

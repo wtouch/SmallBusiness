@@ -38,6 +38,11 @@ function getRecords(){
 			$limit[1] = $params['limit']['records'];
 			$db->setLimit($limit);
 		}
+		// For limited records
+		if(isset($params['groupBy'])){
+			$db->setGroupBy($params['groupBy']);
+			$db->setLimit($limit);
+		}
 		//for filter
 		if(isset($params['search'])){
 			$db->setWhere($params['search'], $table, true);
