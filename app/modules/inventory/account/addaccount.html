@@ -49,15 +49,6 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="balance" class="col-sm-2 control-label">Account Balance * </label>
-					<div class="col-sm-9">
-						<input type="text" id="balance" name="balance" class="form-control" ng-model="modalOptions.account.balance" placeholder="Enter Account Balance" ng-pattern="/^\d{0,100}[0-9]$/" required>
-					<span class="help-block" ng-show="addAccountForm.balance.$dirty && addAccountForm.balance.$invalid">
-						<span ng-show="(addAccountForm.balance.$dirty || submitted)" class="text-danger">Enter a valid Account Number</span>
-					</span>
-					</div>
-				</div>
-				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">Description * </label>
 					<div class="col-sm-9">
 							<textarea  class="form-control" id="description" ng-model="modalOptions.account.description" name="description" placeholder="Enter Description" ng-maxlength="250" required></textarea>
@@ -89,7 +80,7 @@
 				<div class="form-group">
 				 <label  for="date" class="col-sm-2 control-label">Date * </label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder="Account Date" id="accountdate" name="accountdate" ng-model="modalOptions.account.accountdate" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.account.accountdate = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
+						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder="Account Date" id="accountdate" name="accountdate" ng-model="modalOptions.account.accountdate" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.account.accountdate = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
 					</div>
 				</div> 
 				<div class="form-group modal-footer">

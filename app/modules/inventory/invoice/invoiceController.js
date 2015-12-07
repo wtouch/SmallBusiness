@@ -230,7 +230,7 @@ define(['app'], function (app) {
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};
 				},
-					removeObject : $rootScope.removeObject
+					removeObject : $rootScope.removeObject,
 				};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -287,6 +287,12 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				
+				calcBalance : function(previousBal, amount, modalOptions){
+					modalOptions.payInvoice.balance = parseFloat(previousBal) + parseFloat(amount);
+				},
+				
+				
 				getData: $scope.getData,
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){

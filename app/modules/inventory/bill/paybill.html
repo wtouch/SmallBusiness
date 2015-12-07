@@ -4,6 +4,7 @@
 		<h3>Pay Bill</h3>
 	</div>
 	<form name="payBillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="payBillForm.$valid">
+	{{modalOptions.payBill}}
 			<div class="form-group">
 				<label  for="pay_date" class="col-sm-2 control-label">Date</label>
 					<div class="col-sm-9">
@@ -27,7 +28,7 @@
 			<div class="form-group" ng-if="modalOptions.previous_balance">
 				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
 				<div class="col-sm-9">
-					<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" readonly class="form-control"/>			
+					<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" ng-init="modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payBill.credit_amount, modalOptions)" disabled class="form-control"/>		
 					</div>
 			</div>
 			
@@ -46,17 +47,6 @@
 						</span>	
 					</div>
 			</div> 
-		
-			<div class="form-group">
-				<label  for="Amount" class="col-sm-2 control-label">Amount</label>
-				<div class="col-sm-9" ng-init="modalOptions.getData(false,false,'transaction','transactionList', transactionParams, modalOptions)">
-					<input type="text"  id="Amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.payBill.debit_amount" name="credit_amount" ng-change="modalOptions.checkPaidStatus(modalOptions.payBill.debit_amount,modalOptions)" placeholder="Amount"  ng-options="item.id as item.account_name for item in modalOptions.transactionList"ng-change="modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payInvoice.credit_amount, modalOptions)" required/>
-					<span class="help-block" ng-show="payInvoiceForm.credit_amount.$dirty && payInvoiceForm.amount.$invalid">
-						<span ng-show="payInvoiceForm.credit_amount.$error.required" class="text-danger">Amount is required.</span>
-						<span ng-show="payInvoiceForm.credit_amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
-					</span>
-				</div>						
-			</div>
 			
 			<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'DD'|| modalOptions.payBill.description.payment_type.type == 'Net Banking'  " >
 			<label for="refferance no" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
@@ -107,6 +97,17 @@
 					</span>	
 				</div>		
 		</div>
+		
+		<div class="form-group">
+				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
+					<div class="col-sm-9">
+						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.payBill.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payBill.debit_amount, modalOptions)" name="amount" placeholder="Amount" required />
+						<span class="help-block" ng-show="payBillForm.amount.$dirty && payBillForm.amount.$invalid">
+							<span ng-show="payBillForm.amount.$error.required" class="text-danger">Amount is required.</span>
+							<span ng-show="payBillForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+						</span>
+					</div>					
+			</div>
 			
 		<div class="form-group modal-footer">
 			<div class="col-sm-11">

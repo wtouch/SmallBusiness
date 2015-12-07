@@ -315,6 +315,12 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				
+				calcBalance : function(previousBal, amount, modalOptions){
+					modalOptions.payBill.balance = parseFloat(previousBal) + parseFloat(amount);
+				},
+				
+				
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){

@@ -155,7 +155,7 @@
 			<div class="form-group modal-footer">
 				<div class="col-sm-11"><!--ng-disabled="addexpenseForm.$invalid"-->
 				<button type="submit"  class="btn btn-success" ng-if="modalOptions.addexpense.id"  ng-disabled="addexpenseForm.$invalid" ng-click="modalOptions.updateData('transaction',modalOptions.addexpense,modalOptions.addexpense.id); modalOptions.ok()">Update</button>
-					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addexpense.id" ng-click="modalOptions.postData('transaction',modalOptions.addexpense); modalOptions.ok()" ng-disabled="addexpenseForm.$invalid;modalOptions.addexpense.debit_amount >= modalOptions.previous_balance">Submit</button>
+					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addexpense.id" ng-click="modalOptions.postData('transaction',modalOptions.addexpense); modalOptions.ok()" ng-disabled="addexpenseForm.$invalid;">Submit</button>
 					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 				</div>
 			</div>		

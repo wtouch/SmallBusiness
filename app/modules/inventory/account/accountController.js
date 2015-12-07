@@ -69,8 +69,6 @@ define(['app'], function (app) {
 					name:'account_no',filterHeaderTemplate: '<input id="account_no" class="form-control" ng-change="grid.appScope.filter(\'account_no\', account_no, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_no" placeholder="search">'
 				},
 				{ 
-				name:'balance',filterHeaderTemplate: '<input id="balance" class="form-control" ng-change="grid.appScope.filter(\'balance\', balance, \'account\', \'accountList\',true,grid.appScope.accountParams)" ng-model="balance" placeholder="search">'},
-				{ 
 				name:'description',enableSorting: false, enableFiltering: false,
 				},
 
@@ -106,7 +104,6 @@ define(['app'], function (app) {
 					id : data.id,
 					account_name : data.account_name,
 					account_no : data.account_no,
-					balance: data.balance,
 					description : data.description,
 					user_id : data.user_id,
 					category : data.category,
