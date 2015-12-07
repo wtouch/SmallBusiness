@@ -1,18 +1,23 @@
 {% autoescape false %}
-	<div class="container">
+<div class="container">
 	<div class="row pad">
 		<div class="col-xs-12 col-sm-12 col-lg-12 about">
 			<h2>About us</h2>
-				<h4>Garden Decoration</h4>
+				
+				
 				{{data.business_info.aboutDescription}}
 		</div>
 	</div>
+	
+			{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %} 
+				
+	
 </div>
 
-	{% include [templatePath ~ '/includes/featured_testimonials.html', 'default/default/includes/featured_testimonials.html'] %}
 	
-
-<!-- {% if data.infrastructure %}
+	
+<!-- 
+ {% if data.infrastructure %}
 		<hr>
 		<div class="infrastructure" id="infrastructure">
 			<h3 class="text-center">Infrastructure/Facilities</h3>
@@ -59,7 +64,7 @@
 					modal end
 				{% endfor %}
 			</div>
-		</div>-->
- 
-	{% endif %}
+		</div>
+  -->
+ {% endif %}
 {% endautoescape %}

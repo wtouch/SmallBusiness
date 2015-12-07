@@ -3,12 +3,12 @@
 	src:url('../fonts/negotiate_free.ttf');
 }
 @font-face{
-	font-family:'Enriqueta-Regular';
-	src:url('../fonts/Enriqueta-Regular.otf');
+	font-family:'Rokkitt';
+	src:url('../fonts/Rokkitt.otf');
 }
 @font-face{
-		font-family:'pt-sans.narrow';
-		src:url('../fonts/pt-sans.narrow.ttf');
+		font-family:'Lato-Regular';
+		src:url('../fonts/Lato-Regular.ttf');
 }
 //text color shade
 	 @color:#f9ba2e; // orange#C4DE9B green
@@ -65,6 +65,9 @@ body{
 			background-image:url('../img/products.jpg');
 			background-size:100% 100%;
 			background-attachment:fixed;
+}
+h2{
+		text-align:center;
 }
 .btn-info {
 		color: @colorblack; 
@@ -123,7 +126,6 @@ body{
 }
 .navbar-default {
 		background-color:rgba(234, 171, 5, 0.44);
-		
 		margin-bottom:-1px;
 		border:none;
 		border-top:1px solid @colorwhite;
@@ -131,10 +133,13 @@ body{
 		.navbar-nav{
 			> li{
 				padding:-5px;
-				
 				float:none;
 				margin-bottom:0px;
 				position : relative;
+				
+				animation-name:navbar;
+				animation-iteration-count:1;
+				animation-duration:3s;
 				> a {
 					color : @colorwhite;
 					font : bold 15px/1em Arial, Helvetica, sans-serif;
@@ -214,7 +219,13 @@ body{
 				margin-left: 137px;
 					margin-right: 137px;
 		}
-	}
+}
+
+@keyframes navbar{
+					0%{opacity:0;transform:translateX:20px;}
+					100%{opacity:1;transform:translateY:0px;}
+		
+}
  .homeAboutus{
 					background-color:rgba(249, 186, 46, 0.55);
 					height:220px;
@@ -357,4 +368,28 @@ footer{
 .col-xs-12.col-sm-12.col-lg-4 {
 		text-align: center;
 }
+@media (min-width:1024px){
+.navbar > .container .navbar-brand {
+    margin-left: 15% !important;}
+	
+}		
+@media (max-width:320px){
 
+	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+		background-color:@colorblack;
+		border-color:@colorwhite;
+	}
+	.navbar-default .navbar-toggle .icon-bar{
+		background-color:@colorwhite;
+	}
+}
+.navbar-collapse{
+		padding :0px;
+	}
+	.navbar-toggle {
+		border : 1px solid @lightcolor;
+		margin-top : 45px;
+	}
+	.navbar-toggle .icon-bar {
+		background-color: @lightcolor;
+	}

@@ -2,16 +2,16 @@
 <div class="container">
 		<div class="row contact">
 			<h2>Contact Us</h2>
-					<div class="col-xs-12 col-sm-12 col-lg-4">
+					<!-- <div class="col-xs-12 col-sm-12 col-lg-4">
 						{% if data.website_config.website_logo1 %}
 							<img class="logo" src="{{data.website_config.website_logo1.file_relative_path}}">
 						{% else %}
 							<img class="logo" src="{{data.business_logo.file_relative_path}}">
 						{% endif %}
-					</div>
+					</div> -->
 				
 				{%if data.contact_profile.telephone%}
-				<div class="col-xs-12 col-sm-12 col-lg-4">
+				<div class="col-xs-12 col-sm-12 col-lg-6">
 					<table class="table">
 						<tr>
 							<td><b>Telephone</b></td>
@@ -39,7 +39,7 @@
 						{% endif %}
 					</table>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-lg-4">
+				<div class="col-xs-12 col-sm-12 col-lg-6">
 						{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html']%}
 				</div>
 		</div>
