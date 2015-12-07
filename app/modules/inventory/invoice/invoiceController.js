@@ -136,7 +136,9 @@ define(['app'], function (app) {
 			
 			var modalOptions = {
 					date : $scope.currentDate,
-					invoiceData : data,
+					invoiceData : (data)?{
+						id : data.id
+					}:{},
 					addinvoice : (data) ? {
 						id : data.id,
 						invoice_id : data.invoice_id,
@@ -162,8 +164,8 @@ define(['app'], function (app) {
 							$scope.stockData.stockdate=input.generated_date;
 							$scope.stockData.modified_date=input.modified_date;
 							$scope.stockData.goods_name = input.particulars[0].particular_name;
-							$scope.stockData.quantity = input.particulars[0].quantity;
-							$scope.stockData.price = "-" + input.particulars[0].price;
+							$scope.stockData.quantity =  "-" + input.particulars[0].quantity;
+							$scope.stockData.price = input.particulars[0].price;
 							$scope.stockData.goods_type = input.particulars[0].goods_type;
 							$scope.stockData.category = input.particulars[0].category;
 							console.log($scope.stockData);
@@ -232,7 +234,7 @@ define(['app'], function (app) {
 				};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
-				
+				$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);;
 			})
 		}
 		
@@ -264,12 +266,6 @@ define(['app'], function (app) {
 					}
 					return modalOptions.payment_status;
 				},
-				
-				//calcBalance : function(previousBal, amount, modalOptions){
-				//modalOptions.payInvoice.balance = parseFloat(previousBal) + parseFloat(amount)
-				//},
-				
-				
 				postData : function(table,input){
 					console.log(table,input);
 					$rootScope.postData(table, input,function(response){
@@ -278,7 +274,7 @@ define(['app'], function (app) {
 								payment_status : (modalOptions.payment_status) ? modalOptions.payment_status : modalOptions.checkPaidStatus(modalOptions.payInvoice.credit_amount, modalOptions)
 							}
 							$rootScope.updateData("invoice", paymentStatus, data.id, function(response){
-								
+								$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 							})
 						}
 					})
@@ -287,7 +283,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							
+							$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 						}
 					})
 				},
@@ -340,7 +336,14 @@ define(['app'], function (app) {
 			],
 			cols : ["*"]
 		}
-		
+		$scope.partyParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+				type :"client"
+			},
+			cols : ["*"]
+		}
 		$scope.getBalance = function(accountId, modalOptions) {
 			//console.log(accountId, modalOptions);
 			var accountParams = {
@@ -403,7 +406,7 @@ define(['app'], function (app) {
 			$rootScope.filterData(col, value, search, function(response){
 				angular.extend($scope.params, params, response);
 				console.log($scope.params);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
+				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
 		}
 		$scope.orderBy = function(col, value, table, subobj){

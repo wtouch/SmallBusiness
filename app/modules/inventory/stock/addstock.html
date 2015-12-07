@@ -6,6 +6,7 @@
 	</div>
 	<div class="modal-body">
 		<form name="addStockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStockForm.$valid">
+		{{modalOptions.stock}}
 				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 					<label for="party_id" class="col-sm-2 control-label"> party id * </label>
 					<div class="col-sm-9">
@@ -74,7 +75,7 @@
 				<div class="form-group">
 					<label  for="unit" class="col-sm-2 control-label">Unit</label>
 						<div class="col-sm-9">
-							<input type="text" id="unit" class="form-control" ng-model="modalOptions.stock.unit" name="unit" placeholder="Unit" ng-pattern="/^\d{0,100}[0-9]$/" required />
+							<input type="text" id="unit" class="form-control" ng-model="modalOptions.stock.unit" name="unit" placeholder="Unit" required />
 							<span class="help-block" ng-show="addStockForm.unit.$dirty && addStockForm.unit.$invalid">
 								<span ng-show="(addStockForm.unit.$dirty)" class="text-danger">Enter Number Only!</span>
 							</span>
