@@ -25,7 +25,20 @@
 		
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		<script>
+		function myFunction{
+			if(document.body.scrollTop>0)
+			{
+				document.getElementById("serv").ClassName="contactanim";
+				
+			}
+			else{
+				document.getElementById("serv").ClassName="";
+			}
 		
+		}
+		window.onscroll = function() {myFunction()};
+		</script>
 	</head>
 	<body>
 		<header>
@@ -85,28 +98,7 @@
 				</div>
 			</div>	
 		</div> 
-		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} 
-		 <!-- <div class="acti">
-			<div class="row">
-			<div class="container">
-				<div class="col-xs-12 col-sm-4 col-lg-6">
-				</div>
-				<div class="col-xs-12 col-sm-4 col-lg-6">
-							{% include [templatePath ~ '/includes/activities.html', 'default/default/includes/activities.html'] %}
-				</div>
-			</div>
-			</div>
-		</div>  -->
-		
-		<!-- <div class="testi1">
-		<div class="row">
-			<div class="container">
-				{%include[templatePath ~ '/includes/testimonials.html','default/default/includes/testimonials.html']%}
-			</div>
-		</div>	
-		</div> -->
-		 
-		<!-- {% include contentPath %} -->
+		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 		
 	
 		

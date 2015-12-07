@@ -5,9 +5,9 @@ $(document).ready(function(){
 	jQuery(".subimgs").click(function(){
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
-	/*  $(window).scroll(function(e){
+	 /* $(window).scroll(function(e){
 		var scrollTop = $(document).scrollTop();
-		if(scrollTop > 0){
+		if(scrollTop > 40){
 			console.log(scrollTop);
 			$('nav').removeClass('navbar-static-top').addClass("navbar-fixed-top");
 		} else {
@@ -23,7 +23,16 @@ $(document).ready(function(){
 			$('featured_gallery').removeClass("anim1")
 		}
 	}); 
-	
+	$(window).scroll(function(e){
+		var scrollTop=$(document).scrollTop();
+		if(scrollTop>20){
+			$('contact').addClass("contactanim");
+		}
+		else{
+			$('contact').removeClass("contactanim");
+		}
+			
+		});
  	// This is for Cookie
 	function getCookie(cname) {
 		var name = cname + "=";

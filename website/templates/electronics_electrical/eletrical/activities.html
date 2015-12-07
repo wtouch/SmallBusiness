@@ -1,38 +1,33 @@
 {% autoescape false %}
 {% if data.news_coverage %}
+
 	
-	<div class="row activity">
-		
-		<div class="col-xs-12">
-			<h1>HOW IT WORKS</h1>
-			<p>Praesent justo dolor, lobortis quis, lobortis dignissim, pulvinar ac, lorem</p>
+	<div class="activity">
+<div class="container">
+		<h2>Activities</h2>
 			{% for key, value in data.news_coverage if break == 0 %}
-				<div class="panel">
+				<div class="panel panel-default">
 					<div class="panel-body">
-					
 						<div class="row">
-							<div class="col-xs-12 col-sm-4 col-lg-2 ">
+							<div class="col-xs-12 col-sm-4 col-lg-3">
 								<a href="#">
-									<img class="img-circle img-responsive " src="{{value.image.file_relative_path}}">
+									<img class="img-rounded img-responsive" src="{{value.image.file_relative_path}}">
 								</a>
 							</div>
 							<div class="col-xs-12 col-sm-8 col-lg-9">
-							<h3 class="media-heading">{{value.heading}}</h3>
+								<h3 class="media-heading">{{value.heading}}</h3>
 								<div class="description">{{ value.newsdetails }}</div>
 							</div>
-							
 						</div>
-						
 					</div>
 				</div>
 				{% set i = (i + 1) %}
 			{% if i == 3%}
-				{% set break = 1 %}
+				{% set break = 2 %}
 			{% endif %}
 			{% endfor %}
-		</div>
+		
 	</div>
-	
-	
+</div>
 {% endif %}
 {% endautoescape %}

@@ -149,7 +149,6 @@ display:none;
 font-family: 'Droid Serif';
     font-style: italic;
 color:@colorwhite !important;
-	float:right;
 	h1{
 		color:@colorwhite !important;
 				text-align:left;
@@ -168,8 +167,12 @@ color:@colorwhite !important;
 					}
 			}
 			h3{
+				padding-left:20px;
 				text-align:left;
 				
+			}
+			.description{
+			padding-left:20px;
 			}
 			.btn-info{
 						background-color:@back;
@@ -178,8 +181,7 @@ color:@colorwhite !important;
 						margin:10px;
 			}
 			img{
-				height:70px;
-				width:70px;
+				width:100%;
 				
 			}
 }
@@ -189,9 +191,9 @@ color:@colorwhite !important;
 				padding-left:0px;
 				padding-bottom:0px;
 }
-.acti{
+.activity{
 
-			background-image:url('../img/mob3.jpg');
+			background-image : linear-gradient(rgba(0, 0, 0, 0.52),rgba(0, 0, 0, 0.52)),url('../img/mob3.jpg');	
 			background-size:100% 100%;
 			background-repeat:no-repeat;
 			>.row{
@@ -209,4 +211,40 @@ color:@colorwhite !important;
 			background-size:100% 100%;
 			//background-repeat:no-repeat;
 			background-image : linear-gradient(rgba(0, 0, 0, 0.52),rgba(0, 0, 0, 0.52)),url('../img/mob7.jpg');			
+}
+.contact{
+	color:@colorwhite;
+	background-image : linear-gradient(rgba(0, 0, 0, 0.52),rgba(0, 0, 0, 0.52)),url('../img/mob7.jpg');	
+	background-size:100% 100%;
+		table{
+				h4{
+						font : bold 20px/1em Arial, Helvetica, sans-serif;
+				}
+				address {
+						font : bold 20px/1em Arial, Helvetica, sans-serif;
+					}
+				}
+				span{
+						p{
+						font : bold 20px/1em Arial, Helvetica, sans-serif;
+						}
+				}
+				td{
+						font : bold 20px/1em Arial, Helvetica, sans-serif;
+						border-top:none !important;
+				}	
+			&.contactanim{
+					animation-name:contact;
+					animation-duration:3s;
+					animation-iteration-count:1;
+		}
+		
+		@keyframes contact{
+						0%{opacity:0;transform: translateX(-100px);}
+						100%{opacity:1;transform: translateX(0px);}
+		}					
+}
+.jobs{
+background-image : linear-gradient(rgba(0, 0, 0, 0.52),rgba(0, 0, 0, 0.52)),url('../img/mob6.jpg');	
+
 }
