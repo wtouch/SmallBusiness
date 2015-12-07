@@ -26,7 +26,7 @@ define(['app'], function (app) {
 		}
 		$rootScope.moduleMenus = [
 			{
-				name : "Add Staff",
+				name : "Staff",
 				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
@@ -39,7 +39,7 @@ define(['app'], function (app) {
 				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/staff/staffattendence.html");
+						return $scope.openstaffattendance("modules/inventory/staff/staffattendence.html");
 					}
 				}
 			},
@@ -48,25 +48,16 @@ define(['app'], function (app) {
 				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/staff/addleaves.html");
+						return $scope.openAddleaves("modules/inventory/staff/addleaves.html");
 					}
 				}
 			},
 			{
-				name : "Pay by Staff",
+				name : "Staff Payment",
 				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/staff/pay_by_staff.html");
-					}
-				}
-			},
-			{
-				name : "Pay for Staff",
-				path : "#/dashboard/inventory/staff/",
-				events : {
-					click : function(){
-						return $scope.openModal("modules/inventory/staff/pay_for_staff.html");
+						return $scope.openStaffpayment("modules/inventory/staff/staffpayment.html");
 					}
 				}
 			},
@@ -75,19 +66,11 @@ define(['app'], function (app) {
 				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/staff/addholidays.html");
+						return $scope.openAddholiday("modules/inventory/staff/addholidays.html");
 					}
 				}
 			},
-			{
-				name : "View Holidays",
-				path : "#/dashboard/inventory/staff/",
-				events : {
-					click : function(){
-						return $scope.openModal("modules/inventory/staff/view_holiday.html");
-					}
-				}
-			},
+			
 		]
 		
 		$scope.staff = {
@@ -162,13 +145,13 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} ,
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewpayslip.html\')" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="Salary" > <span class="glyphicon glyphicon-eye-open"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewpayslip.html\')" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="Salary" > <span class="	glyphicon glyphicon-usd" ></span></a>'
 					
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="View Staff"><span class="glyphicon glyphicon-eye-open"></span></a>'
-					
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/staff_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-user"></span></a>'
+					/* +'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="View Staff"><span class="glyphicon glyphicon-eye-open"></span></a>' */
+					+ '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/staff_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/addstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
@@ -186,6 +169,7 @@ define(['app'], function (app) {
 				addstaff : (data) ? {
 					id : data.id,
 					name : data.name,
+					surname : data.surname,
 					email : data.email,
 					phone: data.phone,
 					address: data.address,
@@ -230,7 +214,7 @@ define(['app'], function (app) {
 					showFormPart : function(formPart, modalOptions){
 						console.log(formPart);
 						modalOptions.formPart = formPart;
-					}
+					},
 				};
 			
 			
@@ -239,18 +223,16 @@ define(['app'], function (app) {
 			})
 			
 		}
-		$scope.openModal = function(url,data){
+		$scope.openstaffattendance = function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
 			};
 			var modalOptions = {
-				staffdate: dataService.sqlDateFormate(),
+			attendancedate:dataService.sqlDateFormate(),
 				date:{date : $scope.currentDate},
 				staffattendance : (data) ? {
-					id : data.id,
-					name : data.name,
-					
+	
 				}:{
 						date : dataService.sqlDateFormate(),
 						user_id : $rootScope.userDetails.id,
@@ -272,22 +254,57 @@ define(['app'], function (app) {
 			})
 		}
 		
-			$scope.openModal = function(url,data){
+		$scope.openAddholiday = function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
 			};
 			var modalOptions = {
 				staffdate: dataService.sqlDateFormate(),
+				date:{date : $scope.currentDate},
+				addholiday : (data) ? {
+					id : data.id,
+					name : data.name,
+				}:{
+						date : dataService.sqlDateFormate(),
+						user_id : $rootScope.userDetails.id,
+						status:1,
+						modified_date : dataService.sqlDateFormate(),
+						
+						
+				}, 
+				getData:$scope.getData,	
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
+			
+			$scope.openAddleaves = function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions = {
+				leavedate: dataService.sqlDateFormate(),
 				date:{date : $scope.currentDate},
 				addleave : (data) ? {
 					id : data.id,
 					name : data.name,
+					//user_id:data.user_id,
 				}:{
 						date : dataService.sqlDateFormate(),
 						user_id : $rootScope.userDetails.id,
 						status:1,
-						modified_date : dataService.sqlDateFormate(),
+						modified_date : dataService.sqlDateFormate()
 						
 						
 				}, 
@@ -305,7 +322,39 @@ define(['app'], function (app) {
 				
 			})
 		}
-		
+			$scope.openStaffpayment= function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions = {
+				staffpaymentdate: dataService.sqlDateFormate(),
+				date:{date : $scope.currentDate},
+				staffpayment : (data) ? {
+					id : data.id,
+					name : data.name,
+				}:{
+						date : dataService.sqlDateFormate(),
+						user_id : $rootScope.userDetails.id,
+						status:1,
+						modified_date : dataService.sqlDateFormate()
+						
+						
+				}, 
+				getData:$scope.getData,	
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {

@@ -7,9 +7,6 @@
 <div class="modal-body">
 <form class="form-horizontal" name="addleaveForm" role="form" ng-submit="addleaveForm.$valid" novalidate="novalidate">
 {{modalOptions.addleave}}
-		
-		<input type="hidden" class="form-control" ng-model="modalOptions.addleave.user_id" ng-init="modalOptions.addleave.user_id = userDetails.id" readonly/>
-			 
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Approved By *</label>
 			<div class="col-sm-4">
@@ -34,7 +31,7 @@
 			<label  for="date" class="col-sm-2 control-label">Date *</label>
 			<div class="col-sm-4">
 				<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="modalOptions.addleave.leave_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addleave.leave_date = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addleave.leave_date,10); modalOptions.sqlDateFormat(modalOptions.addleave.leave_date, modalOptions.addleave.leave_date)"/>	
+					<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="modalOptions.addleave.leave_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addleave.leave_date = modalOptions.leavedate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addleave.leave_date,10); modalOptions.sqlDateFormat(modalOptions.addleave.leave_date, modalOptions.addleave.leave_date)"/>	
 					
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -88,7 +85,11 @@
 				</div>
 			<div class="radio col-sm-2">
 			<label><input type="radio" name="leave" value="2" ng-model="modalOptions.addleave.leaves_for">No of Days</label>
-				</div>
+			<input type="text" id="leave" class="form-control" nf-if="" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addleave.leaves_for" name="leave" placeholder="No of Days" required />
+		<span class="help-block" ng-show="addleaveForm.leave.$dirty && addleaveForm.leave.$invalid">
+		<span ng-show="(addleaveForm.leave.$dirty)" class="text-danger">Enter Number Only!</span></span>
+			</div>
+			
 		</div>
 </form>	
 </div>
