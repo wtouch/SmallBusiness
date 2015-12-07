@@ -8,7 +8,7 @@ h3{
 					background-color:transparent;
 					text-align:center;
 					.thumbnail{
-					 
+						
 							background:transparent;
 							border:none;
 							padding:10px;
@@ -27,10 +27,7 @@ h3{
 										text-align:center;
 										//border:5px solid transparent;
 										//border-radius:50%;
-									&:hover{
-											//border:5px solid red;
-											opacity:0.5;
-											}
+										
 									}
 									}
 										
@@ -51,10 +48,46 @@ h3{
 											
 									
 									}
-							}
 					}
+			}
+}
+
+div.products>div:nth-child(1){
+		&.anim{
+			animation-duration:2s;
+			animation-iteration-count:1;
+			animation-name:prod;
 		}
-		div.sections>div:nth-child(1)
+}
+@keyframes prod{
+	0%{opacity:0;transform:translateX(-200px);}
+	100%{opacity:1;transform:translateX(0px);}
+}
+div.products>div:nth-child(4){
+			animation-duration:2s;
+			animation-iteration-count:1;
+			animation-name:prod1;
+			}
+@keyframes prod1{
+	0%{opacity:0;transform:translateX(200px);}
+	100%{opacity:1;transform:translateX(0px);}
+}
+div.products>div:nth-child(2){
+			animation-duration:1s;
+			animation-iteration-count:1;
+			animation-name:prod2;
+			}
+div.products>div:nth-child(3){
+animation-duration:1s;
+animation-iteration-count:1;
+animation-name:prod2;
+}
+@keyframes prod2{
+	0%{opacity:0;transform:translatey(-200px);}
+	100%{opacity:1;transform:translatey(0px);}
+}	
+
+div.sections>div:nth-child(1)
 {
 	animation-name:serv1;
 	animation-duration:2s;
@@ -94,3 +127,36 @@ div.sections>div:nth-child(3)
 			background-size:100%;
 			background-repeat:no-repeat;
 }	
+.products{
+			background-image : linear-gradient(rgba(0, 0, 0, 0.52),rgba(0, 0, 0, 0.52)),url('../img/mob4.jpg');	
+					background-size:100% 100%;
+			background-repeat:no-repeat;
+					.thumbnail{
+						
+							background:transparent;
+							border:none;
+							padding:10px;
+							height:500px;
+							
+							.prodimg{
+									border:2px solid @colorwhite;;
+									padding:20px;
+									height:300px;
+									width:100%;
+									text-align:center;
+									//border-radius:50%;
+									img{
+										height:100%;
+										
+										text-align:center;
+										//border:5px solid transparent;
+										//border-radius:50%;
+										}
+							}
+							.caption{
+							overflow:hidden;
+									height:150px;
+								color:@colorwhite;
+							}
+						}
+}

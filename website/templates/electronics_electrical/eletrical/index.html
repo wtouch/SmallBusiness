@@ -25,7 +25,20 @@
 		
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		<script>
+		function myFunction{
+			if(document.body.scrollTop>0)
+			{
+				document.getElementById("serv").ClassName="contactanim";
+				
+			}
+			else{
+				document.getElementById("serv").ClassName="";
+			}
 		
+		}
+		window.onscroll = function() {myFunction()};
+		</script>
 	</head>
 	<body>
 		<header>
@@ -74,51 +87,21 @@
 	
 		</nav>
 		</header>
-		<div class="acti">
-			<div class="row">
-			<div class="container">
-				<div class="col-xs-12 col-sm-4 col-lg-6">
-				</div>
-				<div class="col-xs-12 col-sm-4 col-lg-6">
-							{% include [templatePath ~ '/includes/activities.html', 'default/default/includes/activities.html'] %}
-				</div>
-			</div>
-			</div>
-		</div>
-		<div class="produ">
-		<div class="row">
-			<div class="container">
-				{%include[templatePath ~ '/includes/featured_products.html','default/default/includes/featured_products.html']%}
-			</div>
-		</div>	
-		</div>
-		<div class="testi">
-		<div class="row">
-			<div class="container">
-				{%include[templatePath ~ '/includes/featured_testimonials.html','default/default/includes/featured_testimonials.html']%}
-			</div>
-		</div>	
-		</div>
-		<div class="testi1">
-		<div class="row">
-			<div class="container">
-				{%include[templatePath ~ '/includes/testimonials.html','default/default/includes/testimonials.html']%}
-			</div>
-		</div>	
-		</div>
+		{% include contentPath %}
+		
 		<div class="cont">
-		<div class="row">
-			<h1>Contact Us </h1>
-			<div class="container">
-			{%include[templatePath ~ '/includes/sociallinks.html','default/default/includes/sociallinks.html']%}
-			{%include[templatePath ~ '/includes/enquiry.html','default/default/includes/enquiry.html']%}
-			</div>
-		</div>	
-		</div>
-		<!-- {% include contentPath %} -->
+			<div class="row">
+				<h1>Contact Us </h1>
+				<div class="container">
+				{%include[templatePath ~ '/includes/sociallinks.html','default/default/includes/sociallinks.html']%}
+				{%include[templatePath ~ '/includes/enquiry.html','default/default/includes/enquiry.html']%}
+				</div>
+			</div>	
+		</div> 
+		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 		
 	
-		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} 
+		
 		
 	</body>
 </html>

@@ -38,40 +38,37 @@
 	</script>
 </head>
 <body>
-<div class="container">
-    
-	<div class="row ">
-		<div class="col-md-2">
-			<img class="logo" src="{{data.business_logo.file_relative_path}}">
-		 </div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-12">
-				{%if modules.headerModule.carousal %}
-				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-				{%endif%}
-				{%if modules.headerModule.homeproject %}
-				{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-				{%endif%}
+    <div class="container">
+         <div class="row ">
+			<div class="col-md-2">
+				<img class="logo" src="{{data.business_logo.file_relative_path}}">
+			 </div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+					{%if modules.headerModule.carousal %}
+					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+					{%if modules.headerModule.homeproject %}
+					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+					{%endif%}
+			</div>
 		</div>
 	</div>
-	<div class="row ">
-		<div class="col-md-12">
-		
-		{% if uri != "/" %}
-		
-			<nav class="navbar navbar-default navbar-fixed-top">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
+	{% if uri != "/" %}
+	<nav class="navbar navbar-default b">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="container">
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav nav-justified">
 					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
@@ -80,42 +77,40 @@
 			<div class="col-md-12 soc">
 				{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 			</div>
-		   </nav>
-		  
-		{% endif %}
-
+		</div>
+	</nav>
+	{% endif %}
+	
+	<div class="container">
 		
-			<div class="content">
-				{%include contentPath%}
-			</div>
-		
-		
-		
+		<div class="content">
+			{%include contentPath%}
+		</div>
 		{% if uri == "/" %}
 			<nav class="navbar navbar-default">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav nav-justified">
-					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-				</ul>
-			</div>
-			<div class="col-md-12 soc">
-				{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-			</div>
-		   </nav>
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav nav-justified">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
+				</div>
+				<div class="col-md-12 soc">
+					{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
+				</div>
+			</nav>
 		{%endif%}
-		</div>
-   </div>
-</div>			
+	</div>
+  
+		
 
 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 </body>

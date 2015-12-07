@@ -1,5 +1,3 @@
-	
-
 	@font-face{
 		font-family:'QumpellkaNo12';
 		src:url('../fonts/QumpellkaNo12.otf');
@@ -25,29 +23,27 @@
 	}
 body, fieldset, form, h1, h2, h3, h4, h5, h6
 {
-  
-	color:@colorwhite;
+  	color:@colorwhite;
 }
-
 h1{
-		margin-top: 30px;
-		border-bottom:1px solid @darkcolor;
+	margin-top: 30px;
+	border-bottom:1px solid @darkcolor;
 	&::after{
-				content : url('../img/heading-graphic.gif');
-				position : absolute;
-				z-index : -1;
-					padding: 3px;
+			content : url('../img/heading-graphic.gif');
+			position : absolute;
+			z-index : -1;
+				padding: 3px;
 			}
 	}
 h2{
-		margin-top: 30px;
-		padding: 3px;
-		border-bottom:1px solid @darkcolor;
+	margin-top: 30px;
+	padding: 3px;
+	border-bottom:1px solid @darkcolor;
 	&::after{
-				content : url('../img/heading-graphic.gif');
-				position : absolute;
-				margin-left: 0px;
-				z-index : -1;
+			content : url('../img/heading-graphic.gif');
+			position : absolute;
+			margin-left: 0px;
+			z-index : -1;
 			}
 		}
 body {
@@ -56,17 +52,17 @@ body {
     color: @color;
 }
 .logo{
-		position:absolute;
-		top:0px;
-		height:100px;
-		width:100px;
-		-webkit-animation-name: logoanim;
-		-webkit-animation-duration:3s;
+	position:absolute;
+	top:0px;
+	height:100px;
+	width:100px;
+	-webkit-animation-name: logoanim;
+	-webkit-animation-duration:3s;
 }
 @-webkit-keyframes logoanim{
-		0%{transform:rotate(60deg);}
-		100%{top:0px;transform:rotate(360deg);}
-		}
+	0%{transform:rotate(60deg);}
+	100%{top:0px;transform:rotate(360deg);}
+	}
 header{
 	.container{
 		background-image:url("../img/food1.jpg");
@@ -74,23 +70,40 @@ header{
 	}
 }
 .navbar-default {
-   background:transparent;
-    border-color: transparent;
+	background:transparent;
+	border-color: transparent;
 	top: 75px;
-    margin-right: -15px;
-	z-index:999;
-	
+	margin-right: -15px;
+	z-index:1;
 		.navbar-nav{
 				>li{
 					position :relative;
+					display: inline-block;
+				  vertical-align: middle;
+				  -webkit-transform: translateZ(0);
+				  transform: translateZ(0);
+				  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+				  -webkit-backface-visibility: hidden;
+				  backface-visibility: hidden;
+				  -moz-osx-font-smoothing: grayscale;
+				&:hover, &:focus, &:active {
+				  -webkit-animation-name: hvr-wobble-vertical;
+				  animation-name: hvr-wobble-vertical;
+				  -webkit-animation-duration: 1s;
+				  animation-duration: 1s;
+				  -webkit-animation-timing-function: ease-in-out;
+				  animation-timing-function: ease-in-out;
+				  -webkit-animation-iteration-count: 1;
+				  animation-iteration-count: 1;
+				}
 				>a{
-						background:linear-gradient(@lightbackcolor,@lightcolor);
-						color : @color;
-						border:1px solid @colorblack;
-						font-size: 14px;
-						font-weight:bold;
-						border-right: 1px solid @back; 
-						border-top-left-radius: 10px;
+					background:linear-gradient(@lightbackcolor,@lightcolor);
+					color : @color;
+					border:1px solid @colorblack;
+					font-size: 14px;
+					font-weight:bold;
+					border-right: 1px solid @back; 
+					border-radius: 10px 10px 0px 0px;;
 					}
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 						color: @darkcolor;
@@ -109,7 +122,7 @@ header{
 						text-align : left;
 						border : 1px solid @darkcolor;
 						box-shadow : 0 0 15px 0px @colorblack;
-						border-radius : 7px;
+						border-radius : 10px;
 						>li{
 							padding : 10px;
 							position : relative;
@@ -149,82 +162,7 @@ header{
 				}
 			}
 	}
-.carousel{
-			background:rgba(0, 0, 0, 0.22);;
-			box-shadow:0px 4px 4px  @colorblack;
-			.item{
-					height : 400px;
-					overflow : hidden;
-					img{
-						//margin-left: 50px;
-						min-height : 250px;
-					}
-					h2{
-						color:@darkcolor;
-						text-align:left;
-					}
-					p{
-						color:@colorwhite;
-					}
-				}
-		}
-		.gallery{
-			.thumbnail{
-				background-image:url("../img/frame.gif");
-				background-repeat:no-repeat;
-				padding : 40px;
-				padding-top: 38px;
-				background-color: transparent;
-				border:none;
-				.imgs{
-					height: 114px;
-					width: 165px;
-					overflow: hidden;
-					margin: 0 auto;
-					margin-left: -5px;
-					img{
-						min-height : 180px;
-					}
-				}
-			}
-		}
-		.activity{
-					background-color:transparent;
-				.img-rounded {
-						border-radius: 6px;
-						height:130px;
-						overflow: hidden;
-						margin: 0px auto;
-						z-index : -1;
-					}
-				.panel{
-					background-color:transparent;
-					border:none;
-					border-bottom:1px solid @darkcolor;
-				.media-heading{
-					color:@colorwhite;
-				}
-				.description{
-						overflow:hidden;
-						height:100px;
-						margin: 0px auto;
-				}
-			}
-		}	
-	#googleMap{
-		height:395px;
-	}
-	.about{
-		center{
-			margin:20px;
-		}
-		p{
-			padding-top:5px;
-			strong{
-			margin-left:5px;
-			}
-		}
-	}
+
 	.form-control{
 			color:@color;
 			border:1px solid @darkcolor;
@@ -324,7 +262,7 @@ header{
 	
 	.sociallinks{
 			margin-top: 100px; 
-			//margin-left:300px;
+			margin-left:530px;
 			ul{
 				list-style:none;
 				li{
@@ -347,7 +285,7 @@ header{
 	}
 footer{
 		color:@color;
-		padding: 15px;
+		padding:15px;
 		a{
 			color:@colorwhite;
 			&:hover{
@@ -365,13 +303,22 @@ footer{
 }
 @media (max-width: 320px){
 	
-	.products {
-    margin-top: 180px;
-	border:none;
-	.thumbnail{
-		border:none;
-		}
+	
+	.services{
+		margin-top:0px;
 	}
+	
+	.products {
+		margin-top: 180px;
+		border:none;
+		.thumbnail{
+			border:none;
+			}
+		}
+		
+		.featured_services{
+		margin-top:80px;
+		}
 }
 		
 		

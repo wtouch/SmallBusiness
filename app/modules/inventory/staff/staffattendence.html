@@ -6,14 +6,11 @@
 	{{modalOptions.staffattendance}}
 <div class="modal-body">
 <form class="form-horizontal" name="attendanceForm" role="form" ng-submit="attendanceForm.$valid" novalidate="novalidate">
-
-		 <input type="hidden" class="form-control" ng-model="modalOptions.staffattendance.user_id" ng-init="modalOptions.staffattendance.user_id = userDetails.id"/>
-		 
 		<div class="form-group" >
 			<label  for="date" class="col-sm-2 control-label">Date *</label>
 			<div class="col-sm-4">
 				<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="modalOptions.staffattendance.attendance_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.staffattendance.attendance_date = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.staffattendance.attendance_date,10); modalOptions.sqlDateFormat(modalOptions.staffattendance.attendance_date, modalOptions.staffattendance.attendance_date)"/>	
+					<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="modalOptions.staffattendance.attendance_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.staffattendance.attendance_date = modalOptions.attendancedate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.staffattendance.attendance_date,10); modalOptions.sqlDateFormat(modalOptions.staffattendance.attendance_date, modalOptions.staffattendance.attendance_date)"/>	
 					
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -22,7 +19,7 @@
 			</div>
 			
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
-				<label for="staff_id" class="col-sm-2 control-label"> Select Staff* </label>
+				<label for="staff_id" class="col-sm-1 control-label"> Select Staff* </label>
 				<div class="col-sm-4">
 					<select id="staff_id" class="form-control" ng-model="modalOptions.staffattendance.staff_id" ng-options="item.id as item.name for item in modalOptions.staffList">
 						<option value="">Select Staff</option>
