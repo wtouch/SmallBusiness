@@ -149,15 +149,13 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		
 	});
 	
-/* $(document).ready(function(){
-       
-  if(location.pathname == "/"){
-   
-   $(".navbar-default").removeClass("navbar-fixed-top");
-   
-   $("nav li a[href='/']").click(function(){
-    $('.navbar-default').addClass("navbar-fixed-top");
-    
-   }); 
-  }
- }); */
+   $(window).scroll(function(e){
+    var scrollTop = $(document).scrollTop();
+		if(scrollTop >0){
+			$('.b').addClass("navbar-fixed-top");
+		}
+			else{
+				$('.b').removeClass("navbar-fixed-top");
+			}  
+		 
+	});	

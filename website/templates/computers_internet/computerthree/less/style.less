@@ -14,9 +14,9 @@
 	
 	
 	@color : #566A7A;
-	@darkcolor : #0E1E2E;
+	@darkcolor :  #0E243C;
 	@back:#021223;
-	@colorblack : #02071A;
+	@colorblack : #02071A;            
 	@colorwhite	: #fff;
 	@lightbackcolor:#004E89;
 	@darkbackcolor:#1C3D5C;
@@ -30,36 +30,42 @@
 	
 	.navbar-default {
 	    border-radius: 0px !important;
-		background-color:@darkbackcolor;
+		border-color:transparent !important;
+		background-color:transparent;
+		       .b{
+			      border: 1px solid;
+			   }
 		.navbar-nav{
-		        
+		     border: 1px solid grey;
+		       background-color:@darkbackcolor;
 			> li{
+			      background-color:@darkcolor;
 				  border-right: 1px solid @color;
 				  float:none;
 				  font-size: 20px;
 				  text-transform: uppercase;
 				&.active>a{
-							background-color: @darkbackcolor ; 
+							background-color: @darkcolor ; 
 							color : @colorwhite !important;
 							border-radius:none !important;
 							&:hover{
 							    background-color: @lightbackcolor ;
 							}
 						}
-			  a {
+			   a {
 				    color :@colorwhite;
 					font-size: 19px;
 					font-weight: bold;
 					padding-top: 40px;
 					padding-bottom: 40px;
-				&:hover{
+				  &:hover{
 					    background-color: @lightbackcolor ;
 						color : @colorwhite !important;	
 					}
 				}
 				
 				> ul {
-				        
+				       
 						display: none;
 						position: absolute;
 						width: 280px;
@@ -73,14 +79,14 @@
 							padding-top:11px;
                             background-color:@back;
 							
-							>a{
+							a{
 							    font-size:12px;
 								margin-left:10px;
 								color:@colorwhite;
 								&:hover{
 									text-decoration: none;
 									background-color:transparent;
-									color:@lightbackcolor;
+									color:@darkbackcolor;
 								}
 							}
 						
@@ -117,6 +123,7 @@
 			.navbar-toggle {
 				border : 1px solid ;
 				margin-top : 45px;
+				background-color: @colorwhite;
 			}
 			.navbar-toggle .icon-bar {
 					background-color: @darkbackcolor;
@@ -137,7 +144,7 @@
 					width: 300px;
 					border-radius: 146px;
 					background-color:@darkcolor;
-				    padding-top: 73px;
+				    padding-top: 60px;
 					left: 2%;
 			}
 		.ctrl{
@@ -168,7 +175,7 @@ ol.carousel-indicators {
 .carousel-control.left{
                     top: 469px;
 					bottom: 54px;
-					left: 256px;
+					left: 237px;
 					width: 5%;
 					height: 8%;
 					border-top-left-radius: 100%;
@@ -179,7 +186,7 @@ ol.carousel-indicators {
 .carousel-control.right{
                 top: 469px;
 				bottom: 60px;
-				left: 280px;
+				left: 279px;
 				width: 5%;
 				height: 8%;
 				border-top-right-radius: 50%;
@@ -190,6 +197,8 @@ ol.carousel-indicators {
 
 .soc{
       background-color: @back;
+	  border: 1px solid grey;
+      border-top: 0px;
 }
 .sociallinks{
             padding-left: 25px;
@@ -277,9 +286,9 @@ img{
   transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
 @media (max-width: 768px){
-    footer .bb {
+    footer>.bb {
 			margin-top: -56px;
-			padding-left: 529px;
+			padding-left: 298px;
 		}
    .carousel-inner > .item .carousel-caption {
 				position: absolute;
@@ -317,4 +326,11 @@ img{
 	.carousel-control.right{
 	          display:none;
 	}
+.gallery .thumbnail .glry {
+    background-color: #ffffff;
+    height: 213px;
+    width: 281px;
+    overflow: hidden;
+    margin: 0 auto;
+}
 }
