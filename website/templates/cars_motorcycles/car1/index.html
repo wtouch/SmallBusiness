@@ -23,18 +23,18 @@
 	<body>
 	<header class="log">
 		<div class="container ">
-			<div class="row">
-				<div class="col-md-8 col-xs-12 social_link">
+			<!-- <div class="row">
+				<div class="col-md-8 col-xs-12 social_link"> -->
 					{% if data.website_config.website_logo %}
 						<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}" alt="{{data.business_name}}">
 					{% else %}
 						<img class="logo" src="{{data.business_logo.file_relative_path}}" alt="{{data.business_name}}">
 					{% endif %}
-				</div>
-				<div class="col-md-4 col-xs-12 social_link">
+				<!--</div>
+				 <div class="col-md-4 col-xs-12 social_link">
 					{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</header>
 	<div class="container">
@@ -54,7 +54,7 @@
 					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 				</ul>
 			</div><!-- /.navbar-collapse -->
-		</nav>
+	</nav>
 		{%if modules.headerModule.carousal %}
 				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 		{%endif%}
