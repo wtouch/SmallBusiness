@@ -74,7 +74,19 @@
 	
 		</nav>
 		</header>
-		<div class="acti">
+		{% include contentPath %}
+		
+		<div class="cont">
+			<div class="row">
+				<h1>Contact Us </h1>
+				<div class="container">
+				{%include[templatePath ~ '/includes/sociallinks.html','default/default/includes/sociallinks.html']%}
+				{%include[templatePath ~ '/includes/enquiry.html','default/default/includes/enquiry.html']%}
+				</div>
+			</div>	
+		</div> 
+		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} 
+		 <!-- <div class="acti">
 			<div class="row">
 			<div class="container">
 				<div class="col-xs-12 col-sm-4 col-lg-6">
@@ -84,41 +96,20 @@
 				</div>
 			</div>
 			</div>
-		</div>
-		<div class="produ">
-		<div class="row">
-			<div class="container">
-				{%include[templatePath ~ '/includes/featured_products.html','default/default/includes/featured_products.html']%}
-			</div>
-		</div>	
-		</div>
-		<div class="testi">
-		<div class="row">
-			<div class="container">
-				{%include[templatePath ~ '/includes/featured_testimonials.html','default/default/includes/featured_testimonials.html']%}
-			</div>
-		</div>	
-		</div>
-		<div class="testi1">
+		</div>  -->
+		
+		<!-- <div class="testi1">
 		<div class="row">
 			<div class="container">
 				{%include[templatePath ~ '/includes/testimonials.html','default/default/includes/testimonials.html']%}
 			</div>
 		</div>	
-		</div>
-		<div class="cont">
-		<div class="row">
-			<h1>Contact Us </h1>
-			<div class="container">
-			{%include[templatePath ~ '/includes/sociallinks.html','default/default/includes/sociallinks.html']%}
-			{%include[templatePath ~ '/includes/enquiry.html','default/default/includes/enquiry.html']%}
-			</div>
-		</div>	
-		</div>
+		</div> -->
+		 
 		<!-- {% include contentPath %} -->
 		
 	
-		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} 
+		
 		
 	</body>
 </html>
