@@ -26,7 +26,7 @@
 	<body>		
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-12 col-xs-12 col-md-3">
 					<nav class="navbar navbar-default navi">
 						<div class="navbar-header navbar">
 							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -35,10 +35,12 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<div class="brand">  
-								<a class="navbar-brand" href="#"><img src="{{data.business_logo.file_relative_path}}"></a>
-							</div>
+							
 						</div>
+						
+						<div class="brand">  
+								<a class="navbar-brand" href="#"><img src="{{data.business_logo.file_relative_path}}"></a>
+							</div> 
 						<div class="collapse navbar-collapse link" id="bs-example-navbar-collapse-1">
 							<ul class="nav nav-pills nav-stacked ">
 								{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
@@ -47,7 +49,7 @@
 					</nav>
 					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
 			</div>
-			<div class="col-sm-9 item">
+			<div class="col-sm-12 col-xs-12 col-md-9 item">
 				{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 				{%endif%}
@@ -57,10 +59,10 @@
 		</div>
 		{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 		<div class="row main_foter">
-			<div class="col-md-6 social">
+			<div class="col-md-12 col-xs-12 col-sm-12 social">
 			{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 			</div>
-			<div class="col-md-6 foter">
+			<div class="col-md-12 col-xs-12 col-sm-12 foter">
 			{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 			</div>
 		</div>
