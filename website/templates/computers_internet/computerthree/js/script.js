@@ -159,3 +159,13 @@ app.controller('enquiryController', function($scope,$http, $location) {
 			}  
 		 
 	});	
+	/* $(window).scroll(function(e){
+    var scrollTop = $(document).scrollTop();
+		if(scrollTop >20){
+			$('.b').addClass("content");
+		}
+			else{
+				$('.b').removeClass("content");
+			}  
+		 
+	});	 */
