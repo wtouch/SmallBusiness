@@ -1,5 +1,6 @@
 {% autoescape false %}
-<h2>{{title}}</h2>
+<div class="products">
+<h2><i>{{title}}</i></h2>
 <div class="row products">
 	{% for key, x in products %}
 		<div class="col-xs-12 col-sm-6 col-md-12">
@@ -26,5 +27,6 @@
 	{% endfor %}
 	
 	{% include [templatePath ~ '/includes/pagination.html', 'default/default/includes/pagination.html'] %}
+</div>
 </div>
 {% endautoescape %}

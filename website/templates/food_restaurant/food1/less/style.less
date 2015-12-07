@@ -56,19 +56,29 @@ body {
     color: @color;
 }
 .logo{
-	height:80px;
-	width:80px;
+		position:absolute;
+		top:0px;
+		height:100px;
+		width:100px;
+		-webkit-animation-name: logoanim;
+		-webkit-animation-duration:3s;
 }
+@-webkit-keyframes logoanim{
+		0%{transform:rotate(60deg);}
+		100%{top:0px;transform:rotate(360deg);}
+		}
 header{
 	.container{
 		background-image:url("../img/food1.jpg");
+		height: 128px;
 	}
 }
 .navbar-default {
    background:transparent;
     border-color: transparent;
-	top: 28px;
+	top: 75px;
     margin-right: -15px;
+	z-index:999;
 	
 		.navbar-nav{
 				>li{
@@ -179,17 +189,25 @@ header{
 			}
 		}
 		.activity{
-				background-color:transparent;
-			.panel{
-			background-color:transparent;
-			border:none;
-			border-bottom:1px solid @darkcolor;
+					background-color:transparent;
+				.img-rounded {
+						border-radius: 6px;
+						height:130px;
+						overflow: hidden;
+						margin: 0px auto;
+						z-index : -1;
+					}
+				.panel{
+					background-color:transparent;
+					border:none;
+					border-bottom:1px solid @darkcolor;
 				.media-heading{
 					color:@colorwhite;
 				}
 				.description{
 						overflow:hidden;
 						height:100px;
+						margin: 0px auto;
 				}
 			}
 		}	
@@ -199,7 +217,6 @@ header{
 	.about{
 		center{
 			margin:20px;
-		
 		}
 		p{
 			padding-top:5px;
@@ -223,7 +240,6 @@ header{
 			}
 			.panel-body{
 					color:@color;	
-				
 					.btn-info{
 						background-color:@color;
 						border:none; 
@@ -246,6 +262,21 @@ header{
 	hr{
 		border-top:none;
 	}
+}
+.testimonial{
+
+	blockquote {
+    padding: 5px 5px;
+    font-size: 12px;
+	border:none;
+	border-bottom:1px solid @darkcolor;
+	}
+	.img-circle {
+    border-radius: 20%;
+    height: 100px;
+	}
+
+
 }
 	.pagination{	
 		border-bottom:1px solid @darkcolor;
@@ -290,20 +321,41 @@ header{
 				z-index : -1;
 			}				
 	}
+	
+	.sociallinks{
+			margin-top: 100px; 
+			//margin-left:300px;
+			ul{
+				list-style:none;
+				li{
+					display:inline;
+					border-right:1px solid @color;
+					padding: 0px 5px;
+					a{
+						color:@color;
+						&:hover{
+							color:@colorwhite;
+						}
+					}
+					&:last-child{
+						border:none;
+	
+					}
+				}
+				
+			}
+	}
 footer{
 		color:@color;
-		margin-top: 100px;
-		padding: 20px;
-	
+		padding: 15px;
 		a{
-		
 			color:@colorwhite;
 			&:hover{
 				color:@colorwhite;
 				text-decoration:underline;
 			}
 		}
-		}
+	}
 		
 		
 @media (min-width: 768px){

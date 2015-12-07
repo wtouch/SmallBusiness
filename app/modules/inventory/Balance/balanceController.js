@@ -18,6 +18,33 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		
+				$scope.invoiceParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "inventory_party",
+					joinOn : {
+						id : "t0.party_id"
+					},
+					cols : {name : "name"}
+				},{
+					joinType : "left join",
+					joinTable : "inventory_transaction",
+					joinOn : {
+						reference_id : "t0.id"
+					},
+					cols : ['credit_amount, IFNULL(sum(t2.credit_amount),0) as paid_amount']
+				}
+			],
+			groupBy : {
+				id : "id"
+			},
+			cols : ["*, (t0.total_amount - IFNULL(sum(t2.credit_amount),0)) as due_amount"]
+		}
 		$scope.transactionParams = {
 			where : {
 				status : 1,
@@ -75,17 +102,32 @@ define(['app'], function (app) {
 			});
 		}
 		$scope.getData(false, true,'account', "transaction_list",$scope.transactionParams);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		$scope.getData(false, true,'invoice', "invoice_list",$scope.invoiceParams);
+		$scope.getData(false, true,'bill', "bill_list",$scope.invoiceParams);
+		$scope.getTotal = function(){
+				var total = 0;
+				for(var i = 0; i < $scope.invoice_list.length; i++){
+					var addition = $scope.invoice_list[i];
+					total += parseInt(addition.due_amount);
+				}
+				return total;
+		}
+		$scope.getTotalBill = function(){
+				var total = 0;
+				for(var i = 0; i < $scope.bill_list.length; i++){
+					var addition = $scope.bill_list[i];
+					total += parseInt(addition.due_amount);
+				}
+				return total;
+		}
+		$scope.getTotalBalance = function(){
+				var total = 0;
+				for(var i = 0; i < $scope.transaction_list.length; i++){
+					var addition = $scope.transaction_list[i];
+					total += parseInt(addition.account_balance);
+				}
+				return total;
+		}
 	 };
 		
 	// Inject controller's dependencies

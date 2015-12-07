@@ -19,7 +19,6 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
-		console.log('Hello');
 		
 		$rootScope.moduleMenus = [
 			{

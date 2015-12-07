@@ -1,34 +1,53 @@
-
 #carousel{
 	bottom:20px;
 	height:355px;
 }
 .carousel-control{
-display:none;
+	display:none;
 }
 .img-responsive{
-width:100%
+	width:100%
 }
 
-
-.about , .contact , .gallery{
+.about , .contact , .gallery,.testimonial,.activity , .gallery1{
 	> h2{
-		color:@darkcolor;
+		color:@lightcolor;
 		font-size:30px;
-		padding:2px 4px 2px 4px;
 		text-transform:uppercase;
-		font-family:Amarnath;
-		padding: 15px;
-	}
-	p{
-	    padding-left: 25px;
-    padding-right: 25px;
-	}
+		padding-left: 100px;
+		background: linear-gradient(90deg, @colorblack , @colorwhite);
+		margin-top: 0px;
+			&:hover{
+				color:@colorwhite;
+			}
+		}
 	
+	&::before{
+				position : absolute;
+				content: '';
+				width: 500px;
+				height:200px;
+				top: 2px;
+				left : 9px;
+				background:url(../img/hed_icon1.png) no-repeat;	
+			}
+			p{
+				padding-left: 25px;
+				padding-right: 25px;
+			}
 }
 .gallery {
     padding-left: 20px;
     padding-right: 20px;
+	.caption{
+		h4{
+		color:@darkcolor;
+		text-transform:uppercase;
+			&:hover{
+				color:@colorwhite;
+			}
+		}
+	}
 }
 .contactus{
 		>.sections {
@@ -46,9 +65,8 @@ p{
 	em{
 		strong{
 			color:@colorblack;
-			}
+		}
 	}
-
 }
 h3{
 	color:@colorblack;
@@ -60,26 +78,34 @@ center{
 	}
 .gallery1{
 		> h2{
-			color:@darkcolor;
+			color:@lightcolor;
 			font-size:30px;
-			padding:2px 4px 2px 4px;
+			//padding:2px 4px 2px 4px;
 			text-transform:uppercase;
 			font-family:Amarnath;
-			padding-top: 15px;
+			padding-left: 100px;
 		}
 }	
 .gallery{
 		.thumbnail{
 				border-color : @darkbackcolor;
 				background-color:@back;
-				.caption .description{
-					overflow: hidden;
-					height: 125px;
-					color:@colorblack;
+					.caption .description{
+						overflow: hidden;
+						height: 125px;
+						color:@colorblack;
+					}
+				img{
+					opacity:1;
+					border: 1px solid @lightcolor;
+					&:hover{
+						opacity:0.8;
+						border: 3px solid @colorblack;
+					}
 				}
 			}
 		}
-		
+			
 .contactimg{
     width: 200px;
 }
@@ -92,57 +118,75 @@ div#googleMap {
 
 
 //testimonials
-	.testimonial, .featrtesti{
-		blockquote{
-			font-size : inherit;
-			border-left: none;
-			footer{
-				background:none;
-				padding : 0px;
-				cite{
-					font-size : 17px;
-					color : @darkcolor;
-				}
-			}
-			&::before{
-				content : '\201c';
-				position : absolute;
-				display : inline-block;
-				top : 5px;
-				left : 22px;
-				line-height : 40px;
-				font-family : Times New Roman,Serif;
-				font-size : 55px;
+.testimonial, .featrtesti{
+	blockquote{
+		font-size : inherit;
+		border-left: none;
+		footer{
+			background:none;
+			padding : 0px;
+			cite{
+				font-size : 17px;
+				color : @darkcolor;
 			}
 		}
-	}
-	.testimonial{
-		blockquote{
-			padding-left : 35px;
-			footer{
-				img{
-					max-height: 70px;
-					width: 70px;
-					margin-right : 10px;
-				}
-			} 
+		&::before{
+			content : '\201c';
+			position : absolute;
+			display : inline-block;
+			top : 5px;
+			left : 22px;
+			line-height : 40px;
+			font-family : Times New Roman,Serif;
+			font-size : 55px;
 		}
 	}
-	.featrtesti{
-		blockquote{
-			padding : 5px 15px;
+}
+.testimonial{
+	blockquote{
+		padding-left : 35px;
+		footer{
+			img{
+				max-height: 70px;
+				width: 70px;
+				margin-right : 10px;
+			}
+		} 
+	}
+}
+.featrtesti{
+	blockquote{
+		padding : 5px 15px;
+	}
+	img{
+		max-height : 100px;
+		padding : 4px;
+		border : 3px solid @lightcolor;
+		&:hover{
+			border : 3px solid @color;
 		}
-		img{
-			max-height : 100px;
-			padding : 4px;
-			border : 3px solid @lightcolor;
+	}
+} 
+.activity{
+	.panel-body{
+		border-top:1px solid @darkcolor;
+	}
+	img{
+		opacity:1;
+		border : 1px solid @lightcolor;
 			&:hover{
-				border : 3px solid @color;
+				opacity:0.8;
+				border : 3px solid @darkcolor;
 			}
-		}
-	} 
-	
-	
+	}
+	.media-heading {
+			color: @darkcolor;
+			&:hover{
+						color: @colorblack;
+			}
+	}
+}
+
 @media (max-width: 320px){
 		#carousel{
 			height:94px;

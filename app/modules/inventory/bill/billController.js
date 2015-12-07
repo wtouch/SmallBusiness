@@ -36,8 +36,8 @@ define(['app'], function (app) {
 					
 				},
 				
-				{ name:'bill_id', width:70,
-					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'bill\', \'billData\',true,grid.appScope.billParams)" ng-model="id" placeholder="Bill No">',
+				{ name:'bill_id', width:70,enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'bill\', \'billData\',true,grid.appScope.billParams)" ng-model="bill_id" placeholder="Bill No">',
 				},
 				{
 					name:'name',width :110,enableSorting: false,enableFiltering: true,
@@ -52,19 +52,18 @@ define(['app'], function (app) {
 				{ name:'payment_status',width:110,
 				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\',true,grid.appScope.billParams)" ng-model="payment_status" placeholder="search">'
 					+'<option value="" selected>payment status</option>'
-							+'<option value="Paid">Paid</option>'
-							+'<option value="Unpaid">Unpaid</option>	'
-							+'<option value="PartialPaid">PartialPaid</option>	'
+							+'<option value="1">Paid</option>'
+							+'<option value="0">Unpaid</option>'
+							+'<option value="2">Partial Paid</option>'
 						+'</select>', 
-					filter: {
-					  //type: uiGridConstants.filter.SELECT,
-					 
-					  options: [ { value: 'Paid', label: 'Paid' }, { value: 'Unpaid', label: 'Unpaid' }, { value: 'PartialPaid', label: 'PartialPaid' }]
-					} 
+					/*filter: {
+					  type: uiGridConstants.filter.SELECT,
+					  options: [ { value: '1', label: 'Paid' }, { value: '0', label: 'Unpaid' }, { value: '2', label: 'Partial Paid' }]
+					}*/
             
 				},
-				{ name:'total_amount',width:110, 
-					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\',true,grid.appScope.billParams)" ng-model="total_amount" placeholder="search">',
+				{ name:'total_amount',width:110,enableSorting: false,enableFiltering: false,
+					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\',true,grid.appScope.billParams)" ng-model="total_amount" placeholder="Search">',
 					cellTemplate : "<span>{{row.entity.total_amount}}</span>",
 					filter:{
 					placeholder: 'Total amount'
@@ -119,7 +118,6 @@ define(['app'], function (app) {
 		$scope.$watch(function(){ return $scope.billData.data},function(newValue){
 			if(angular.isArray(newValue)){
 				if(newValue.length >= 1){
-					
 					$scope.verticalSum($scope.billData.data, 'particular[0].amount', 'totalAmount');
 				}
 			}
@@ -373,6 +371,14 @@ define(['app'], function (app) {
 			},
 			cols : ["*, (t0.total_amount - IFNULL(sum(t2.debit_amount),0)) as due_amount"]
 		}
+		$scope.partyParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+				type :"vendor"
+			},
+			cols : ["*"]
+		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -414,9 +420,11 @@ define(['app'], function (app) {
 		}
 		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
+			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, response);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
+				angular.extend($scope.params, params, response);
+				console.log($scope.params);
+				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
 		}
 		$scope.orderBy = function(col, value){

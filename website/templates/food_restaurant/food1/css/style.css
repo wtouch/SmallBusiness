@@ -466,9 +466,10 @@
   border-bottom: 1px solid #3e2709;
 }
 .product .prodimg {
-  width: 250px;
+  width: 200px;
   height: 210px;
   margin: 0px auto;
+  overflow: hidden;
 }
 .product .description {
   overflow: hidden;
@@ -504,6 +505,9 @@
   border: none;
   padding: 25px;
   background-color: #2f0805;
+}
+.services .products .thumbnail .img-responsive {
+  height: 180px;
 }
 .services .products .thumbnail h3 {
   position: absolute;
@@ -598,17 +602,32 @@ body {
   color: #fbe7ab;
 }
 .logo {
-  height: 80px;
-  width: 80px;
+  position: absolute;
+  top: 0px;
+  height: 100px;
+  width: 100px;
+  -webkit-animation-name: logoanim;
+  -webkit-animation-duration: 3s;
+}
+@-webkit-keyframes logoanim {
+  0% {
+    transform: rotate(60deg);
+  }
+  100% {
+    top: 0px;
+    transform: rotate(360deg);
+  }
 }
 header .container {
   background-image: url("../img/food1.jpg");
+  height: 128px;
 }
 .navbar-default {
   background: transparent;
   border-color: transparent;
-  top: 28px;
+  top: 75px;
   margin-right: -15px;
+  z-index: 999;
 }
 .navbar-default .navbar-nav > li {
   position: relative;
@@ -715,6 +734,13 @@ header .container {
 .activity {
   background-color: transparent;
 }
+.activity .img-rounded {
+  border-radius: 6px;
+  height: 130px;
+  overflow: hidden;
+  margin: 0px auto;
+  z-index: -1;
+}
 .activity .panel {
   background-color: transparent;
   border: none;
@@ -726,6 +752,7 @@ header .container {
 .activity .panel .description {
   overflow: hidden;
   height: 100px;
+  margin: 0px auto;
 }
 #googleMap {
   height: 395px;
@@ -775,6 +802,16 @@ header .container {
 .table > tbody > tr > td hr {
   border-top: none;
 }
+.testimonial blockquote {
+  padding: 5px 5px;
+  font-size: 12px;
+  border: none;
+  border-bottom: 1px solid #3e2709;
+}
+.testimonial .img-circle {
+  border-radius: 20%;
+  height: 100px;
+}
 .pagination {
   border-bottom: 1px solid #3e2709;
 }
@@ -818,10 +855,29 @@ header .container {
   position: absolute;
   z-index: -1;
 }
+.sociallinks {
+  margin-top: 100px;
+}
+.sociallinks ul {
+  list-style: none;
+}
+.sociallinks ul li {
+  display: inline;
+  border-right: 1px solid #fbe7ab;
+  padding: 0px 5px;
+}
+.sociallinks ul li a {
+  color: #fbe7ab;
+}
+.sociallinks ul li a:hover {
+  color: #ffffff;
+}
+.sociallinks ul li:last-child {
+  border: none;
+}
 footer {
   color: #fbe7ab;
-  margin-top: 100px;
-  padding: 20px;
+  padding: 15px;
 }
 footer a {
   color: #ffffff;
