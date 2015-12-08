@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
+    var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants','$http'];
     
     // This is controller for this view
-	var staffController= function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var staffController= function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,$http) {
 		
 		//global scope objects
 		$scope.type = "year";
@@ -16,6 +16,13 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
+		
+		
+		$http.get("modules/inventory/config.json").success(function(response){
+			console.log(response);
+				$scope.staffConfig = response;
+			})
+		
 		
 		$scope.staffParams = {
 			where : {
@@ -165,6 +172,7 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				staffdate:{date : $scope.currentDate},
+				department: $scope.staffConfig,
 				date:{date : $scope.currentDate},
 				addstaff : (data) ? {
 					id : data.id,
@@ -172,6 +180,7 @@ define(['app'], function (app) {
 					surname : data.surname,
 					email : data.email,
 					phone: data.phone,
+				staff_type:data.staff_type,
 					address: data.address,
 					location: data.location,
 					area: data.area,
@@ -329,9 +338,11 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				staffpaymentdate: dataService.sqlDateFormate(),
+				Category : $scope.staffConfig,
 				date:{date : $scope.currentDate},
 				staffpayment : (data) ? {
 					id : data.id,
+					category : data.category,
 					name : data.name,
 				}:{
 						date : dataService.sqlDateFormate(),
