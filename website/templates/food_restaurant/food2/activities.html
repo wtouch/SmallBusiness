@@ -1,0 +1,28 @@
+{% autoescape false %}
+{% if data.news_coverage %}
+<div class="activity">
+	<h1>Activities</h1>
+	<div class="row activity">
+		<div class="col-xs-12 col-md-12">
+			{% for key, value in data.news_coverage if break == 0 %}
+				<div class="panel">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-12 col-sm-4 col-md-4">
+								<a href="#">
+									<img class="img-rounded img-responsive" src="{{value.image.file_relative_path}}">
+								</a>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-8">
+								<h3 class="media-heading">{{value.heading}}</h3>
+								<div class="description">{{ value.newsdetails }}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	</div>
+{% endif %}
+{% endautoescape %}

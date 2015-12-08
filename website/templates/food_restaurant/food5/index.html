@@ -1,0 +1,73 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/ normalize.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}"> 
+	</head>
+	<body>
+	<header>
+			<div class="container">
+				<div class="col-sm-8 col-xs-12 ">
+					<img class="logo" src="{{data.business_logo.file_relative_path}}">
+				</div>
+				<div class="col-sm-4 col-xs-12 header1">
+				<h1>{{data.business_name}}:</h1>
+				<h3>{{data.contact_profile.contact_person}}</h3>
+				</div>
+			</div>
+	</header>	
+	<nav class="navbar navbar-default ">
+			<div class="contianer">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div> 
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="container">
+						<ul class="nav navbar-nav  nav nav-justified">
+							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+						</ul>
+					</div>
+				</div>
+			</div> 
+		</nav>
+		<div class="ak">
+			<div class="container">
+						{%if modules.headerModule.carousal %}
+						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+						{%endif%}
+					{%if modules.sidebarModule.sidemenu %}	
+						<div class="col-sm-3 col-md-3">
+							{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
+						</div>
+					{%endif%}
+					<div class="content {{modules.sidebarModule.sidemenu ? 'col-sm-9 col-md-9':'col-sm-12 col-md-12'}}">
+						 {% include contentPath %}
+					</div>
+				</div>
+		</div>
+		<footer  class="pk">
+		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+		</footer>
+	</body>
+</html>
+{% endspaceless %}

@@ -1,0 +1,38 @@
+{% autoescape false %}
+	{% if featured_products | length >= 2 %}
+	<div class="contentModule">
+		<!-- <h3 class="subhead">Featured Products</h3> -->
+		<div class="sections clearfix services">
+			{% set break = 0 %}{% set i = 0 %}
+			<div class="row">
+			<h4>{{x.product_service_name}}</h4>
+			{% for x in featured_products if break == 0 %}
+				{% if x.type == 'product' %}
+					<div class="col-sm-6 col-md-4 carosal">
+						<div class="thumbnail ">
+							<h3><span class="id-color">latest</span>
+								recipes
+							</h3>
+							<div class="img1">
+								<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" <alt="...">
+								<div class="readmore1">
+									<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info read1">Read More</a>
+								</div>
+							</div>
+							<h4>{{x.product_service_name}}</h4>
+							<div class="description">
+								{{ x.description }}
+							</div>
+						</div> 
+					</div>
+				{% set i = (i + 1) %}
+				{% if i == 4 %}
+					{% set break = 1 %}
+				{% endif %}
+				{% endif %}
+			{% endfor %}
+		
+	</div>
+	</div>
+	{% endif %}
+{% endautoescape %}

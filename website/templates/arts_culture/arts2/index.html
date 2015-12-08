@@ -1,0 +1,97 @@
+{% spaceless %}
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/ normalize.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}"> 
+	</head>
+	<body>
+		
+	<header>
+		<div class="container-fluid">
+		<nav class="navbar navbar-default ">
+			<div class="col-xs-12 col-md-2 ">
+				<img class="logo" src="{{data.business_logo.file_relative_path}}">
+			</div>
+			<div class="col-xs-12 col-md-10 ">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div> 
+			
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav nav-justified">
+							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+						</ul>
+				</div>
+			</div>
+			</nav>
+		</div> 
+	
+	</header>
+		<div class="container-fluid">
+			{%if modules.headerModule.carousal %}
+			{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+			{%endif%}	
+		</div>
+		<div class="container">
+			<div class="row">
+				{%if modules.contentModule.featured_products %}
+					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+				{%endif%}
+			</div>
+			<div class="row">
+				{% include contentPath %}
+			</div>
+			<div class="row">
+				{%if modules.contentModule.featured_services %}
+					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+				{%endif%}
+			</div>
+		</div> 
+		
+		<div class="container-fluid">
+		<nav class="navbar navbar-default nav-footer">
+			<div class="col-xs-12 col-md-10 ">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div> 
+			
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav nav-justified">
+							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+						</ul>
+				</div>
+			</div>
+			</nav>
+		</div> 
+		<footer >
+			{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+		</footer>
+	</div>	
+	</body>
+</html>
+{% endspaceless %}

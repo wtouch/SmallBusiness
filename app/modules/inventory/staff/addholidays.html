@@ -5,14 +5,11 @@
 </div>
 {{modalOptions.addholiday}}
 <div class="modal-body">
-<form class="form-horizontal" name="addholidayForm" role="form" ng-submit="addholidayForm.$valid" novalidate="novalidate">
-		
-		     
-	
+<form class="form-horizontal" name="addholidayForm" role="form" ng-submit="addholidayForm.$valid" novalidate="novalidate" ng-init="modalOptions.getData(false, false,'staffholidays', 'holidayList', modalOptions.holidayParams, modalOptions)">
 		<div class="form-group">
 	
 			<label  for="date" class="col-sm-2 control-label">Date *</label>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="input-group">
 					<input type="text" class="form-control " placeholder="Date" id="holiday_date" name="holiday_date" ng-model="modalOptions.addholiday.holiday_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addholiday.holiday_date = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addholiday.holiday_date,10); modalOptions.sqlDateFormat(modalOptions.addholiday.holiday_date, modalOptions.addholiday.holiday_date)"/>	
 					
@@ -23,7 +20,7 @@
 			</div>
 			
 			<label for="name" class="col-sm-2 control-label">Holiday Name *</label>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<input type="hidden" ng-model="modalOptions.addholiday.status" ng-init="modalOptions.addholiday.status = '1'">
 				
 				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addholiday.holiday_name"required>
@@ -34,16 +31,27 @@
 				
 				<span class="text-danger" ng-show="addholidayForm.name.$error.required">Name is required.</span>
 				</span>
-			</div>
-		</div>		
+			</div>		
+	<button type="submit" class="btn btn-success"  ng-disabled="addholidayForm.$invalid" ng-click="   modalOptions.postData('staffholidays',modalOptions.addholiday);modalOptions.ok()">Add Holidays</button>
+		</div>	
+<!-- <table class="table table-hover table-responsive table-bordered " ng-if="" >
+				<thead>
+					<tr >
+						<th>Date</th>
+						<th>Holiday</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="x in modalOptions.holidayList">
+				
+				</tr>
+					
+				</tbody>
+</table>		 -->
 </form>	
 </div>
 <div class="modal-footer">
 	
-	<button type="submit" class="btn btn-success" ng-if="!modalOptions.addholiday.id" ng-disabled="addholidayForm.$invalid" ng-click="modalOptions.postData('staffholidays',modalOptions.addholiday);modalOptions.ok()">Add Holidays</button>
-					
-	<button type="submit" ng-if="modalOptions.addholiday.id" class="btn btn-success" ng-disabled="addholidayForm.$invalid" ng-click="modalOptions.updateData('staffholidays',modalOptions.addholiday,modalOptions.addholiday.id);modalOptions.ok()">Update Holidays</button>
 
-	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
 </div>
 	
