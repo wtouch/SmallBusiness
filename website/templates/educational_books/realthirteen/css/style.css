@@ -423,6 +423,28 @@ a:hover {
   overflow: hidden;
   margin-bottom: 10px;
 }
+@media (max-width: 768px) {
+  .homeproject .projectnav,
+  .homeproject .projsnap,
+  .homeproject .projectCarousal {
+    position: static;
+    width: auto;
+  }
+  .homeproject .bx-viewport {
+    height: 400px;
+  }
+  .homeproject .projectCarousal .carousslider li.item {
+    height: 400px;
+  }
+  .homeproject .projsnap {
+    padding-left: 5px;
+  }
+  .homeproject .projectCarousal::after,
+  .homeproject .projectCarousal::before {
+    display: none;
+    width: 0px;
+  }
+}
 .services .servimage {
   border: 4px solid transparent;
   padding: 6px;
@@ -716,7 +738,6 @@ header .logo {
 }
 header .cntdtl {
   margin-top: 60px;
-  padding-top: 25px;
 }
 header {
   background-repeat: no-repeat;
@@ -728,12 +749,6 @@ header .head {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-}
-header img.logo {
-  height: 80px;
-  margin: 50px 0px;
-  z-index: 9999;
-  position: relative;
 }
 header .navbar-default {
   background-color: #117e50;
@@ -824,7 +839,6 @@ header .navbar-default .navbar-collapse {
 }
 main .back {
   background-repeat: repeat;
-  padding: 20px;
 }
 main .back .featuredProperty,
 main .back .featuredProject {
@@ -1088,13 +1102,24 @@ footer a,
 footer a:hover {
   color: #f7cbce;
 }
-@media (max-width: 320px) {
-  header .logo {
-    max-width: 100%;
-    max-height: 100px;
+.enquir {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+@media (max-width: 540px) {
+  header {
+    margin-bottom: 0px;
+  }
+  header .weblogo,
+  header .cntdtl {
+    text-align: center;
   }
   header .cntdtl {
-    margin-top: 60px;
-    padding-top: 25px;
+    margin-top: 5px;
+  }
+  .enquir {
+    display: block;
   }
 }

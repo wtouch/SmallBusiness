@@ -54,7 +54,7 @@
 				.pagination > li > a, .pagination > li > span, .pagination > .disabled > a, .pagination > li > a:hover, .pagination > li > span:hover, .pagination > li > a:focus, .pagination > li > span:focus, .homeproject .projectnav,.homeproject .projsnap,.homeproject .bx-wrapper, .project ul.nav.navbar-nav > li.active > a, .project ul.nav.navbar-nav > li.active:hover > a, .project ul.nav.navbar-nav > li.active > a:focus, .project ul.nav.navbar-nav > li:hover > a, .project ul.nav.navbar-nav > li:hover > a:focus, .project ul.nav.navbar-nav > li > a:hover,.project ul.nav.navbar-nav > li > a:focus, .content, .sections, .sidemenu, .thumbnail, .tab-content, .panel,.navbar-default .navbar-nav > li > ul{
 					background-color: {{data.template_params.background_color}};
 				}
-				.featuretab ,.sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a:focus, .btn-info[disabled], .btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus{
+				.sidebar .nav-pills > li > a, .sidebar .nav-pills > li > a:focus, .navbar-default .navbar-nav > li.active:hover > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li:hover > a:focus, .btn-info[disabled], .btn-primary, .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus, .project ul.nav.navbar-nav > li > a, .project ul.nav.navbar-nav > li > a:focus{
 					color: {{data.template_params.background_color}};
 				}
 				.about .table tbody tr th, .contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td, .content,.sections,.sidemenu,.thumbnail,.tab-content,.panel-default, .singleproperty .property, .projlist .project .thumbnail .projectimg img:hover, .products .thumbnail .prodimg img:hover, .singleproperty .property .table tbody tr td, .featuretab .nav-tabs{
@@ -105,6 +105,7 @@
 				</div>
 			</div>
 		</header>
+		<nav class="navbar navbar-default">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
@@ -113,7 +114,6 @@
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-		<nav class="navbar navbar-default">
 			<div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -126,14 +126,12 @@
 		</nav>
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-md-12 col-lg-12">
-					{%if modules.headerModule.carousal %}
+				{%if modules.headerModule.carousal %}
 					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-					{%if modules.headerModule.homeproject %}
+				{%endif%}
+				{%if modules.headerModule.homeproject %}
 					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-				</div>
+				{%endif%}
 			</div> 
 			<div class="row">
 				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-push-4 col-md-push-3 col-xs-12 col-sm-8 col-md-9' : 'col-xs-12 col-sm-12 col-md-12 ' }}">
@@ -207,6 +205,7 @@
 				</div>
 			</div>
 		</div>
+		<a class="btn btn-info enquir" href="/enquiry" target="_blank">Send Enquiry</a>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html> 

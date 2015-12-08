@@ -86,7 +86,6 @@
 		background-color:@darkbackcolor;
 		padding: 5px;
 		right: 0;
-		margin: 10px;
 		border-radius: 50% 0 0 50%;
 		.nav-stacked{
 			>li{
@@ -116,10 +115,9 @@
 		}
 	}
 	.projsnap{
-	//background: linear-gradient(to left,@lightbackcolor, @colorwhite);
-	background-color:@darkbackcolor;
-	border:6px solid @colorwhite;
-	border-radius:   0% 50% 50% 0% ;
+		background-color:@darkbackcolor;
+		border:6px solid @colorwhite;
+		border-radius:   0% 50% 50% 0% ;
 		p{
 			padding:14px;
 			margin:10px;
@@ -130,9 +128,8 @@
 		
 		left : 0;
 		padding-top: 12px !important;
-		padding-right: 10px !important;
-	
-		text-align : center;
+		padding-right: 60px;
+		text-align : right;
 		img{
 			height : 110px;
 			margin-top: 10px;
@@ -196,8 +193,7 @@
 				position : relative;
 			} 
 			&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
-									background: linear-gradient(to left,@lightbackcolor, @colorwhite);
-
+				background: linear-gradient(to left,@lightbackcolor, @colorwhite);
 				color : @darkbackcolor;
 			}
 		}
@@ -263,3 +259,52 @@
 			}
 		}
 	}
+	
+@media (max-width : 768px){
+	.homeproject{
+		.projectnav, .projsnap, .projectCarousal{
+			position : static;
+			width : auto;
+		}
+		.bx-viewport{
+			height : 400px;
+		}
+		.projectCarousal{
+			.carousslider{
+				li{
+					&.item{
+						height : 400px;
+					}
+				}
+			}
+		}
+		.projectnav{
+			.nav-stacked{
+				>li{
+					text-align: center;
+					&>a{
+						padding : 15px;
+					}
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+						transform: translateX(0px);
+						width: 100%;
+						border-radius: 0px;
+						text-align: center;
+						padding-right: 50px;
+					}
+				}
+			}
+		}
+		.projectnav,.projsnap{
+			border-radius: 0px;
+		}
+		.projsnap{
+			padding-left : 5px;
+		}
+		.projectCarousal::after{
+			display : none;
+			width : 0px;
+		}
+	}
+	
+}

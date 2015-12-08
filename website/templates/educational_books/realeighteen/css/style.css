@@ -275,7 +275,7 @@
 }
 .featuredProperty .bxslider1 li .sliderImg {
   height: 150px;
-  width: 200px;
+  width: 100%;
   overflow: hidden;
   padding: 4px;
   border: 4px solid transparent;
@@ -438,6 +438,9 @@
     max-height: 145px;
     max-width: 100%;
   }
+  .featuredProperty .bxslider1 li .verify {
+    right: -16px;
+  }
 }
 @media (min-width: 992px) {
   .propDetails ul li {
@@ -543,7 +546,6 @@
   background-color: #700470;
   padding: 5px;
   right: 0;
-  margin: 10px;
   border-radius: 50% 0 0 50%;
 }
 .homeproject .projectnav .nav-stacked > li + li {
@@ -581,8 +583,8 @@
   border-radius: 0% 50% 50% 0% ;
   left: 0;
   padding-top: 12px !important;
-  padding-right: 10px !important;
-  text-align: center;
+  padding-right: 60px;
+  text-align: right;
 }
 .homeproject .projsnap p {
   padding: 14px;
@@ -704,6 +706,50 @@
 }
 .projlist .project .thumbnail .caption a:hover {
   padding: 6px 40px;
+}
+@media (max-width: 768px) {
+  .homeproject .projectnav,
+  .homeproject .projsnap,
+  .homeproject .projectCarousal {
+    position: static;
+    width: auto;
+  }
+  .homeproject .bx-viewport {
+    height: 400px;
+  }
+  .homeproject .projectCarousal .carousslider li.item {
+    height: 400px;
+  }
+  .homeproject .projectnav .nav-stacked > li {
+    text-align: center;
+  }
+  .homeproject .projectnav .nav-stacked > li > a {
+    padding: 15px;
+  }
+  .homeproject .projectnav .nav-stacked > li.active > a,
+  .homeproject .projectnav .nav-stacked > li.active:hover > a,
+  .homeproject .projectnav .nav-stacked > li.active > a:focus,
+  .homeproject .projectnav .nav-stacked > li:hover > a,
+  .homeproject .projectnav .nav-stacked > li:hover > a:focus,
+  .homeproject .projectnav .nav-stacked > li > a:hover,
+  .homeproject .projectnav .nav-stacked > li > a:focus {
+    transform: translateX(0px);
+    width: 100%;
+    border-radius: 0px;
+    text-align: center;
+    padding-right: 50px;
+  }
+  .homeproject .projectnav,
+  .homeproject .projsnap {
+    border-radius: 0px;
+  }
+  .homeproject .projsnap {
+    padding-left: 5px;
+  }
+  .homeproject .projectCarousal::after {
+    display: none;
+    width: 0px;
+  }
 }
 .services {
   text-align: center;
@@ -830,13 +876,17 @@ h2 {
   transform: translateX(-45px);
 }
 .container {
-  width: 992px !important;
+  max-width: 992px !important;
 }
-.logo {
-  height: 80px;
-  margin-top: 25px;
-  margin-left: 15px;
+header {
+  margin: 10px auto 20px;
+}
+header .logo {
+  max-width: 100%;
   max-height: 100px;
+}
+header .cntdtl {
+  padding-top: 25px;
 }
 a,
 .btn.btn-link {
@@ -853,18 +903,11 @@ a:hover,
   font-size: 17.5px;
   padding-left: 0px;
 }
-.cnctinfo {
-  margin: 40px 15px 40px 0;
-}
-.cnctinfo a {
-  color: #700470;
-}
 .navbar-collapse {
   padding: 0px;
 }
 .navbar-toggle {
   border: 1px solid #48d4e0;
-  margin-top: 45px;
 }
 .navbar-toggle .icon-bar {
   background-color: #48d4e0;
@@ -874,9 +917,6 @@ a:hover,
 }
 p {
   color: #ffffff;
-}
-html {
-  min-width: 1022px;
 }
 .btn + .btn {
   margin-left: 10px;
@@ -905,9 +945,9 @@ html {
 .navbar-default .navbar-nav > li:hover > a:focus {
   background: linear-gradient(to top, #df0708, #ffffff);
   color: #700470;
-  padding: 22px 15px;
+  padding-top: 25px;
   margin-top: -12px;
-  border: none;
+  border-right: 2px solid transparent;
 }
 .navbar-default .navbar-nav > li > ul {
   display: none;
@@ -1098,27 +1138,24 @@ footer {
 * {
   transition: 300ms;
 }
-@media (min-width: 320px) {
-  .logo {
-    float: left;
-  }
-  .cnctinfo {
-    display: none;
-  }
+.enquir {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
 }
-@media (min-width: 992px) {
-  .logo {
-    float: none;
+@media (max-width: 540px) {
+  header {
+    margin-bottom: 0px;
   }
-  .cnctinfo {
-    display: block;
+  header .weblogo,
+  header .cntdtl {
+    text-align: center;
   }
-}
-@media (min-width: 1200px) {
-  .logo {
-    float: none;
+  header .cntdtl {
+    padding-top: 5px;
   }
-  .cnctinfo {
+  .enquir {
     display: block;
   }
 }

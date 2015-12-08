@@ -303,7 +303,6 @@
 	}
 	.navbar-toggle {
 		border : 1px solid @lightcolor;
-		margin-top : 45px;
 	}
 	.navbar-toggle .icon-bar {
 		background-color: @lightcolor;
@@ -328,16 +327,14 @@
 	button.navbar-toggle.collapsed.projdtls{
 		color : @colorwhite;
 	}
+	
+	.enquir{
+		display : none;
+		position : fixed;
+		bottom : 10px;
+		right : 10px;
+	}
 	@media (min-width: 320px){
-		.logo{
-			float:left;
-		}
-		.cnctinfo{
-			display : none;
-		}
-		.navbar{
-			min-height: 1px;
-		}
 		.navbar-default{
 			.navbar-nav {
 				margin: 0px;
@@ -366,9 +363,6 @@
 		}
 	}
 	@media (min-width: 992px){
-		.logo{
-			float:none;
-		}
 		.navbar-default{
 			.navbar-nav {
 				margin: 0px;
@@ -384,12 +378,6 @@
 					}
 				}
 			}
-		}
-		.cnctinfo{
-			display : block;
-		}
-		.navbar{
-			height : 50px;
 		}
 		.projnav{
 			height: 322px;
@@ -409,15 +397,6 @@
 		}
 	}
 	@media (min-width: 1200px){
-		.logo{
-			float:none;
-		}
-		.cnctinfo{
-			display : block;
-		}
-		.navbar{
-			height : 50px;
-		}
 		.projnav{
 			height: 322px;
 		}
@@ -437,5 +416,19 @@
 		}
 		.slider{
 			max-width:802px;
+		}
+	}
+	@media (max-width: 540px){
+		header{
+			margin-bottom : 0px;
+			.weblogo, .cntdtl{
+				text-align : center;
+			}
+			.cntdtl{
+				padding-top : 5px;
+			}
+		}
+		.enquir{
+			display : block;
 		}
 	}

@@ -258,6 +258,9 @@
   border: 6px solid #421266;
   height: 315px;
 }
+.homeproject .projectnav {
+  text-align: right;
+}
 .homeproject .projectnav a {
   font: bold 14px/1.5em Arial, Helvetica, sans-serif;
   color: #421266;
@@ -295,9 +298,6 @@
   overflow: hidden;
   height: 303px;
 }
-.homeproject .projsnap {
-  text-align: center;
-}
 .homeproject .projsnap img {
   max-height: 110px;
   margin-top: 10px;
@@ -307,6 +307,7 @@
   padding: 4px;
 }
 .homeproject .projsnap p {
+  color: #421266;
   margin: 0px 10px;
   padding: 5px;
   border-bottom: 1px solid #18012b;
@@ -317,13 +318,13 @@
 .homeproject::after {
   position: absolute;
   content: "";
-  background-image: url('../img/key.png');
+  background-image: url('../img/lady.png');
   background-size: 100% 100%;
-  left: 140px;
-  top: 120px;
+  right: 170px;
+  top: -12px;
   z-index: 999;
-  height: 230px;
-  width: 230px;
+  height: 340px;
+  width: 150px;
 }
 .projlist .project .thumbnail {
   height: 385px;
@@ -1021,7 +1022,6 @@ hr {
 }
 .navbar-toggle {
   border: 1px solid #b478e6;
-  margin-top: 45px;
 }
 .navbar-toggle .icon-bar {
   background-color: #b478e6;
@@ -1045,16 +1045,13 @@ footer {
 button.navbar-toggle.collapsed.projdtls {
   color: #ffffff;
 }
+.enquir {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
 @media (min-width: 320px) {
-  .logo {
-    float: left;
-  }
-  .cnctinfo {
-    display: none;
-  }
-  .navbar {
-    min-height: 1px;
-  }
   .navbar-default .navbar-nav {
     margin: 0px;
   }
@@ -1085,9 +1082,6 @@ button.navbar-toggle.collapsed.projdtls {
   }
 }
 @media (min-width: 992px) {
-  .logo {
-    float: none;
-  }
   .navbar-default .navbar-nav {
     margin: 0px;
   }
@@ -1104,12 +1098,6 @@ button.navbar-toggle.collapsed.projdtls {
     color: #ffffff;
     top: -8px;
     padding-top: 20px;
-  }
-  .cnctinfo {
-    display: block;
-  }
-  .navbar {
-    height: 50px;
   }
   .projnav {
     height: 322px;
@@ -1129,15 +1117,6 @@ button.navbar-toggle.collapsed.projdtls {
   }
 }
 @media (min-width: 1200px) {
-  .logo {
-    float: none;
-  }
-  .cnctinfo {
-    display: block;
-  }
-  .navbar {
-    height: 50px;
-  }
   .projnav {
     height: 322px;
   }
@@ -1156,5 +1135,20 @@ button.navbar-toggle.collapsed.projdtls {
   }
   .slider {
     max-width: 802px;
+  }
+}
+@media (max-width: 540px) {
+  header {
+    margin-bottom: 0px;
+  }
+  header .weblogo,
+  header .cntdtl {
+    text-align: center;
+  }
+  header .cntdtl {
+    padding-top: 5px;
+  }
+  .enquir {
+    display: block;
   }
 }

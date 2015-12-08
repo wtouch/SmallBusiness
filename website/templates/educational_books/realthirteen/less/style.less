@@ -80,7 +80,6 @@
 		}
 		.cntdtl{
 			margin-top:60px;
-			padding-top: 25px;
 		}
 	}
 	header{	
@@ -96,13 +95,6 @@
 			background-attachment: fixed;
 			background-position: center; 
 			
-		}
-		img.logo{
-			height: 80px;
-			margin: 50px 0px;
-			z-index: 9999;
-			position: relative;
-            			
 		}
 		.navbar-default {
 			//background : -webkit-linear-gradient(top, @back, @darkcolor, @back);
@@ -208,7 +200,6 @@
 			//background-image:url('../img/bg.jpg');
 			//background-image:url('../img/backg.jpg');
 			background-repeat : repeat;
-			padding: 20px;
 				.featuredProperty, .featuredProject{
 					padding:25px 10px 0px;
 				}
@@ -431,16 +422,23 @@
 			color : @color;
 		}
 	}
-	
-	@media(max-width:320px){
+	.enquir{
+		display : none;
+		position : fixed;
+		bottom : 10px;
+		right : 10px;
+	}
+	@media (max-width: 540px){
 		header{
-			.logo{
-				max-width: 100%;
-				max-height : 100px;
+			margin-bottom : 0px;
+			.weblogo, .cntdtl{
+				text-align : center;
 			}
 			.cntdtl{
-				margin-top:60px;
-				padding-top: 25px;
+				margin-top : 5px;
 			}
+		}
+		.enquir{
+			display : block;
 		}
 	}

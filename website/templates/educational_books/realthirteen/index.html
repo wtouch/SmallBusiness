@@ -81,7 +81,7 @@
 									<div class="content">{% include contentPath %}</div>
 								{%endif%}{%if not modules.contentModule.featured_services %}{%endif%}
 							</div> -->
-							<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-8 col-lg-9' : 'col-xs-12 col-lg-12'}}">
+							<div class="{{ (modules.sidebarModule >=1 ) ? 'col-xs-12 col-md-9' : 'col-xs-12 col-md-12'}}">
 								
 								<div class="content">{% include contentPath %}</div>
 								
@@ -137,7 +137,7 @@
 								
 							</div>
 							{% if modules.sidebarModule >= 1 %}
-							<div class="col-xs-4 col-lg-3">
+							<div class="col-xs-12 col-md-3">
 								{%if modules.sidebarModule.searchProp %}
 								{% include [templatePath ~ '/includes/searchProp.html', 'default/default/includes/searchProp.html'] %}
 								{%endif%}
@@ -157,6 +157,7 @@
 				</div>
 			</div>
 		</main>
+		<a class="btn btn-info enquir" href="/enquiry" target="_blank">Send Enquiry</a>
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html>
