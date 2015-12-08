@@ -1,0 +1,20 @@
+	{% autoescape false %}
+	<div class="gallery1">
+	<h1>Gallery</h1>
+	<div class="row gallery">
+		{% if data.gallery %}
+			{% for key, value in data.gallery %}
+			<div class="col-xs-12 col-sm-12 col-md-4">
+				<div class="thumbnail">
+					<img class="img-responsive" src="{{value.image.file_relative_path}}" alt="{{key}}" />
+					<!--<div class="caption">
+						 <h4 class="text-center">{{value.heading}}</h4>
+						<div class="description">{{ value.description }}</div>
+					</div> -->
+				</div>
+			</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+	</div>
+	{% endautoescape %}

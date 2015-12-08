@@ -1,0 +1,314 @@
+.sections.clearfix.services {
+    padding: 10px;
+}
+//project
+//css for featured project slider
+.bxslider{ 
+	padding : 0px;
+	li{
+		height : 325px;
+		margin-right:10px
+		.projimg{
+			height : 175px;
+			overflow : hidden;
+			padding : 6px;
+			border : 2px solid transparent;
+			img{
+				min-height: 175px;
+			}
+			&:hover{
+				border : 2px solid @darkcolor;
+			}
+		}
+		p{
+			margin-bottom : 5px;
+			margin-top : 5px;
+		}
+	}
+}
+
+.homeproject {
+	margin-top:10px;
+	margin-bottom :20px;
+	.bx-viewport{
+		position : ralative;
+		border :4px solid @back;
+		border-bottom-left-radius: 30px;
+		border-top-right-radius: 35px;
+		height:317px;
+		&:hover{
+			transform : scale(1.05);
+		}
+		.carousslider li{
+			left:0;
+		}
+		img{
+			height:317px;
+			width:100%;
+			border-bottom-left-radius: 35px;
+			border-top-right-radius: 35px;
+			
+			&:hover{
+				
+				z-index : 99;
+				border-color : @lightbackcolor;
+				border-bottom-left-radius: 35px;
+				border-top-right-radius: 35px;
+			}
+		}
+	}
+	
+.bx-viewport::after{
+	position : absolute;
+	content : "";
+	background-image : url('../img/lady.png');
+	background-size: 100% 100%;
+	right : 1px;
+	top : 21px;
+	z-index: 999;
+	height : 290px;
+	width : 120px;
+}
+	.projectnav,.projsnap {
+		background-color : @darkcolor;
+		border :6px solid @back;
+		border-bottom-left-radius: 35px;
+		border-top-right-radius: 35px;
+		padding:5px;
+		height:317px;
+		.nav-stacked{
+			margin: 5px;
+			>li{
+				border-bottom:1px solid @back;
+				+li {
+					margin-top: 10px;
+				}
+				>a, > a:focus{
+					color : @color;
+					padding: 10px 5px;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					text-decoration : none;
+					color: @darkcolor;
+					background : @back;
+				}
+			}
+		}
+	}
+	.projsnap{
+		p{
+			border-bottom:1px solid @back;
+			padding:6px;
+			&:last-child{
+				border:none;
+			}
+		}
+		padding:5px;
+		img{
+			height : 110px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border : 1px solid @color;
+			border-radius : 5px;
+			padding :4px;
+		}
+		p{
+			color : @color;
+		}
+		.viewproperty{
+			margin-top : 15px;
+			a{
+				color : @color;
+				font: 16px 'Cinzel-Regular', cursive;
+				&:hover{
+					color : @back;
+				}
+			}
+		}
+	}
+	#carousel {
+		overflow:hidden;
+		.carousel-inner {
+			border: 2px solid @back;
+			border-bottom-left-radius: 70px;
+			border-top-right-radius: 70px;
+			transition :  all 300ms linear;
+			border-bottom-left-radius: 35px;
+			border-top-right-radius: 35px;
+			.item{
+				height: 317px;
+				overflow: hidden;
+				border-bottom-left-radius: 68px;
+				border-top-right-radius: 68px;
+				>img{
+					width : 100%;
+					min-height : 317px;
+				}
+			}
+			&:hover{
+				transform : scale(1.05);
+				z-index : 99;
+				border-color : @lightbackcolor;
+				border-bottom-left-radius: 35px;
+				border-top-right-radius: 35px;
+			}
+		}
+		a.left.carousel-control, a.right.carousel-control {
+			background: none;
+		}
+	}
+}
+
+//css for single project & project list
+	.projlist{
+		background-color:@lightbackcolor;
+		padding:10px;
+		.project{
+			.thumbnail{
+				height:385px;
+				.projectimg{
+					width : 190px;
+					height : 148px;
+					overflow : hidden;
+					margin: 0 auto;
+					img{
+						min-height : 148px;
+					}
+				}
+				.caption{
+					padding : 9px 5px;
+					height : 120px;
+					p {
+						margin-bottom : 0px;
+					}
+				}
+			}
+		}
+	}
+	.project{
+		.navbar{
+			height:50px;
+			border-radius: 0;
+			margin-top:10px;
+			margin-bottom:40px;
+			height : 20px;
+			width:auto;
+		}
+		ul.nav.navbar-nav {
+			background : -webkit-linear-gradient(top, @color -565%,@darkcolor);
+			background : -moz-linear-gradient(top, @color -565%,@darkcolor);
+			background : linear-gradient(top, @color -565%,@darkcolor);
+			>li{
+				border-right : 1px solid @lightbackcolor;
+				height : 38px;
+				>a, > a:focus{
+					padding : 9px 14px;
+					color : @color;
+					font-weight : bold;
+					border : 1px solid transparent;
+				} 
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus, >a:hover, >a:focus{
+					color: @darkcolor;
+					background : @lightcolor;
+					border : 1px solid @darkcolor;
+				}
+			}
+		}
+		.projImg{
+			margin-right: 20px;
+			max-height : 175px;
+			border : 2px solid transparent;
+			padding : 6px;
+			&:hover{
+				border : 2px solid @darkcolor;
+			}
+		}
+		.projectgallery{ 
+			.thumbnail{
+				&.floor{
+					height : 275px;
+				}
+				.projectImags{
+					width: 190px;
+					height: 148px;
+					overflow: hidden;
+					margin : 0 auto;
+					img{
+						min-height : 148px;
+					}
+				}
+				.caption{
+					height : 115px;
+				}
+			}
+			.modal-body {
+				padding: 35px 50px 15px;
+			}
+		}
+	}
+	
+	
+	
+	@media (max-width: 480px){
+		.homeproject {
+			.projectnav,.projsnap {
+				border-bottom-left-radius: 0;
+				border-top-right-radius: 0;
+				border :none;
+			}
+			.bx-viewport{
+				border-bottom-left-radius: 0;
+				border-top-right-radius: 0;
+				border :none;
+				img{
+					height:317px;
+					width:100%;
+					border-bottom-left-radius: 0;
+					border-top-right-radius: 0;
+				}
+			}
+			.projectnav,.bx-viewport {
+				margin-bottom:10px !imoprtant;
+			}
+		}
+		.projImg{
+			float :none;
+			max-height : 175px;
+			margin-right:10px;
+		}
+	}
+	@media (max-width: 768px){
+		.homeproject {
+			.projectnav,.projsnap {
+				border-bottom-left-radius: 0;
+				border-top-right-radius: 0;
+				border :none;
+			}
+			.bx-viewport{
+				border-bottom-left-radius: 0;
+				border-top-right-radius: 0;
+				margin-top:15px;
+				border :none;
+				width:auto;
+				img{
+					height:317px;
+					width:100%;
+					border-bottom-left-radius: 0;
+					border-top-right-radius: 0;
+				}
+			}
+			.bx-wrapper
+			{
+				width:auto !important;
+			}
+			.projectnav,.bx-viewport {
+				margin-bottom:10px !imoprtant;
+			}
+		}
+		.projImg{
+			float :none;
+			max-height : 175px;
+			margin-right:10px;
+		}
+	}
+	
