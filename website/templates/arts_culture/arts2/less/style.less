@@ -330,5 +330,101 @@ footer{
 			}				
 		}
 	}
+.nav-footer{
 
+	background:url(../img/header-bg.jpg) repeat-x;
+
+
+.navbar-default {
+		border-top-left-radius:0px;
+		border-top-right-radius:0px;
+		background-color:transparent;
+		margin-bottom:0px;
+		min-height: 50px;
+		max-width: 100%;
+		border-bottom: none;
+		
+			.navbar-nav{
+					
+				>li{
+					position :relative;
+					
+					>a{
+						color: @colorwhite;
+						font: 12px Cinzel Decorative, Arial, Helvetica, sans-serif;
+						text-transform: uppercase;
+						padding:10px 10px;
+						text-shadow: 2px 2px 0px rgba(0, 0, 0, .2);
+						}
+					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+						
+						color: @colorwhite;
+						cursor: pointer;
+						border-top: 4px @lightbackcolor  solid;
+						background: @darkcolor;
+						padding:10x 10px;
+						font: 12px Cinzel Decorative, Arial, Helvetica, sans-serif;
+						
+					}
+					ul{
+						display : none;
+						position : absolute;
+						width : 270px;
+						z-index : 999;
+						background-color:#e3161d; ;
+						padding:10px 10px;
+						list-style : none;
+						text-align : left;
+						padding: 5px;
+						line-height: 26px;
+						font-weight: 600;
+						>li{
+							padding : 10px;
+							position : relative;
+							&:hover{
+									border-top: 5px @lightbackcolor  solid;
+									background: @darkcolor;
+									border-bottom:1px solid @colorblack;
+							}
+							>a{
+								text-decoration:none;
+								color:@colorwhite;
+							}
+							&:hover{
+								a{
+									color :@colorblack ;
+								}
+							}
+							
+							> ul{
+								display: none;
+								list-style :none;
+								left: 70%;
+								top: 10px;
+								
+								border-top-left-radius: 0px;
+								>li{
+									>a{
+										text-decoration:none;
+										color:@colorwhite;
+										&:hover{
+											color:@colorblack;
+											}
+									}
+								}
+							}
+							&:hover > ul {
+								display: block;
+							}
+						}
+					}
+					&:hover{
+						>ul{
+							display:block;
+						}
+					}
+				}
+			}
+		}
+}
 
