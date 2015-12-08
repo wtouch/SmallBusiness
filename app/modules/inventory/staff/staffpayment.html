@@ -67,6 +67,12 @@
 				</span>	
 			</div>
 		</div>
+		<div class="form-group" ng-if="modalOptions.previous_balance">
+			<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
+			<div class="col-sm-9">
+				<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" readonly class="form-control"/>			
+			</div>
+		</div>
 		<div class="form-group">
 				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
 					<div class="col-sm-9">
@@ -171,7 +177,7 @@
 			</div>		
 		</form>
 		
-		<form name="staffpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="staffpaymentForm.$valid" ng-if="modalOptions.staffpayment.type=='staff_credit'"> 
+<form name="staffpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="staffpaymentForm.$valid" ng-if="modalOptions.staffpayment.type=='staff_credit'"> 
 			<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
 				<label for="staff_id" class="col-sm-2 control-label"> Select Staff* </label>
@@ -295,9 +301,6 @@
 						</span>
 					</div>					
 			</div>
-			
-			
-			
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-9">
@@ -318,7 +321,7 @@
 					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 				</div>
 			</div>		
-		</form>
+</form>
 </div>
 <!-- <div class="modal-footer">
 	

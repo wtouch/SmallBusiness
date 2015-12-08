@@ -19,12 +19,13 @@
 					<label for="select type" class="col-sm-2 control-label">Department *</label>
 					<div class="col-sm-9">
 							<select id="department" name="department" class="form-control" 
-							ng-model="modalOptions.addstaff.department.staff.departments">
+							ng-model="modalOptions.addstaff.department"
+							ng-options="item.system_name as item.name for item in modalOptions.department.staff.departments">
 							<option value="" selected>select Department</option>
 							</select>
 					</div>
 				</div>
-				
+				{{modalOptions.department.staff.departments}}
 				<div class="form-group">
 					<label for="salary" class="col-sm-2 control-label">salary *</label>
 					<div class="col-sm-9">
@@ -70,7 +71,8 @@
 					<label for="select type" class="col-sm-2 control-label">Saff Type *</label>
 					<div class="col-sm-9">
 							<select id="staff_type" name="staff_type" class="form-control" 
-							ng-model="modalOptions.addstaff.staff_type.staff.staff_type">
+							ng-model="modalOptions.addstaff.staff_type"
+							ng-options="item.system_name as item.name for item in modalOptions.staff_type.staff.staff_type">
 							<option value="" selected>--Select Staff Type--</option>
 						
 							</select>
