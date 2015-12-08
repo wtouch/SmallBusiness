@@ -172,7 +172,10 @@ define(['app'], function (app) {
 					cols : {name : "name"}
 				}
 			],
-			cols : ["*"]
+			groupBy : {
+				"t0.goods_name" : "t0.goods_name"
+			},
+			cols : ["*, sum(t0.quantity) as quantity"]
 		}
 		$scope.statusParams = {
 			where : {
@@ -196,8 +199,7 @@ define(['app'], function (app) {
 			$scope.params = (params) ? params : {
 				where : {
 					status : 1,
-					user_id : $rootScope.userDetails.id,
-					type : ($routeParams.party == "client") ? "client" : "vendor"
+					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]
 			};

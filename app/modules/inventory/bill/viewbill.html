@@ -3,9 +3,9 @@
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3>Bill</h3>
 </div>
-<div class="modal-body">{{modalOptions.addBill}}
+<div class="modal-body">
 	<div  id="addBill">
-		<div class="panel panel-default"ng-if="modalOptions.addBill">
+		<div class="panel panel-default"ng-if="modalOptions.viewBill">
 			<div class="panel-heading text-center">
 				<h2>BILL</h2>
 			</div>
@@ -18,8 +18,8 @@
 						</address>
 						<hr>
 						<p>To,<br>
-							<strong>{{modalOptions.addBill.name | uppercase}}</strong><br>
-							{{modalOptions.addBill.address.address}}<br>{{modalOptions.addBill.address.location}}<br>{{modalOptions.addBill.address.city}}<br>{{modalOptions.addBill.address.area}}<br>{{modalOptions.addBill.address.pincode}}<br>				
+							<strong>{{modalOptions.viewBill.name | uppercase}}</strong><br>
+							{{modalOptions.viewBill.address}}<br>{{modalOptions.viewBill.location}}<br>{{modalOptions.viewBill.city}}<br>{{modalOptions.viewBill.area}}<br>{{modalOptions.viewBill.pincode}}<br>				
 						</P>
 					
 					</div>
@@ -27,15 +27,15 @@
 						<div class="table-responsive">
 						<table class="table table-bordered">
 							<tr >
-								<td><strong>Bill No.</strong><br>{{modalOptions.addBill.bill_id}}
+								<td><strong>Bill No.</strong><br>{{modalOptions.viewBill.bill_id}}
 								</td>
 								<td><strong>Dated</strong><br>
-								{{modalOptions.addBill.bill_date}}</td>
+								{{modalOptions.viewBill.date | date:'dd'}}</td>
 							</tr>
 							
 							<tr>
-								<td><strong>Bill Month</strong><br> {{modalOptions.addBill.bill_date}}</td>
-								<td><strong>Due Date</strong><br>{{modalOptions.addBill.due_date}}</td>
+								<td><strong>Bill Month</strong><br> {{modalOptions.viewBill.date | date : 'MMMM'}}</td>
+								<td><strong>Due Date</strong><br>{{modalOptions.viewBill.due_date | date : yyyy-MM-dd}}</td>
 							</tr>
 						</table>
 					</div>
@@ -49,27 +49,26 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="x in modalOptions.addBill.particular">
-									<td>{{x.particular_name}}</td>
-									<td>{{x.amount}}</td>
-								
+								<tr ng-repeat="x in modalOptions.viewBill.particular">
+									<td>{{x.particular_name}}({{x.goods_type}})({{x.category}})</td>
+									<td>{{x.amount}}(service-tax:{{x.tax.service_tax}})(Vat:{{x.tax.vat}})</td>
 								</tr>
 							</tbody>
 							<tfoot>
 								<tr>
 									<td class="text-right"><strong>Total Bill</strong></td>
-									<td class="amt text-right" ng-init="modalOptions.totalCalculate(modalOptions);">{{modalOptions.addBill.total_amount}}</td>
+									<td class="amt text-right" ng-init="modalOptions.totalCalculate(modalOptions);">{{modalOptions.viewBill.total_amount}}</td>
 								</tr>
 							</tfoot>
 						</table>
 					</div>
 					<div class="col-xs-12">
 						<p>Amount(in words) : 
-						<strong><em>{{inWords(addBill.total_amount) | uppercase}}</em></strong>
-						<p><strong>Remarks:</strong> <span ng-bind-html="modalOptions.addBill.remark"></span></p>
+						<strong><em>{{inWords(modalOptions.viewBill.total_amount) | uppercase}}</em></strong>
+						<p><strong>Remarks:</strong> <span ng-bind-html="modalOptions.viewBill.remark"></span></p>
 						<hr/>
-						<p><strong>Company's Service Tax No: </strong>{{modalOptions.accountConfig.service_tax_no}}</p>
-						<p><strong>Company's Pan: </strong>{{modalOptions.accountConfig.pan_no}} </strong></p>
+						<p><strong>Company's Service Tax No: </strong>{{userDetails.config.inventory.taxData.tin_no}}</p>
+						<p><strong>Company's Pan: </strong>{{userDetails.config.inventory.taxData.pan_no}} </strong></p>
 						<p class="text-right">For <strong><em>{{userDetails.name}}</em></strong><br><br><br>
 						Authorised Signatory</p>
 					</div>

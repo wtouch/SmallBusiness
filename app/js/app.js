@@ -295,7 +295,7 @@ define(['angular',
 				// For TaxData in user config
 				//console.log($rootScope.userDetails.config);
 				
-				if($rootScope.userDetails.config == ""){
+				/* if($rootScope.userDetails.config == ""){
 					$rootScope.userDetails.config = {};
 				}
 				if($rootScope.userDetails.config.inventory == undefined) $rootScope.userDetails.config.inventory = {};
@@ -321,7 +321,7 @@ define(['angular',
 						dataService.setUserDetails(JSON.stringify($rootScope.userDetails));
 						$rootScope.userDetails = dataService.parse(dataService.userDetails);
 					}
-				})
+				}) */
 				
 				//console.log($rootScope.userDetails.config);
 			}

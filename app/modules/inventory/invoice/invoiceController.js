@@ -97,7 +97,7 @@ define(['app'], function (app) {
 					+ '<a type="button" tooltip="Delete Invoice" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="1" btn-checkbox-false="0" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPayInvoice(\'modules/inventory/invoice/payInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice"> <span class="glyphicon glyphicon-usd"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewinvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Invoice"> <span class="glyphicon glyphicon-eye-open"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewReceipt.html\',row.entity)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-click="grid.appScope.openViewreceipt(\'modules/inventory/invoice/viewReceipt.html\',row.entity)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			],
@@ -128,7 +128,6 @@ define(['app'], function (app) {
 		})
 		
 		$scope.openModal = function(url , data){
-			
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
@@ -147,32 +146,39 @@ define(['app'], function (app) {
 						generated_date : data.generated_date,
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						particulars:data.particulars,
-						remark : data.remark
+						remark : data.remark,
+						total_amount : data.total_amount,
+						due_date : data.due_date
 					} : {
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					},
 				postData : function(table, input){
+					console.log(table, input);
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							console.log(input);
+							// For Insert each item from particulars into Stock Table
+							
 							$scope.stockData = {};
 							$scope.stockData.user_id = input.user_id;
 							$scope.stockData.party_id = input.party_id;
-							$scope.stockData.date=input.date;
-							$scope.stockData.stockdate=input.generated_date;
-							$scope.stockData.modified_date=input.modified_date;
-							$scope.stockData.goods_name = input.particulars[0].particular_name;
-							$scope.stockData.quantity =  "-" + input.particulars[0].quantity;
-							$scope.stockData.price = input.particulars[0].price;
-							$scope.stockData.goods_type = input.particulars[0].goods_type;
-							$scope.stockData.category = input.particulars[0].category;
-							console.log($scope.stockData);
+							if(input.date) $scope.stockData.date = input.date;
+							$scope.stockData.stockdate = input.generated_date;
+							$scope.stockData.modified_date = input.modified_date;
+							$scope.stockData.stock_type = 0;
 							
-							$rootScope.postData("stock", $scope.stockData,function(response){
-								$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
-							});
+							angular.forEach(input.particulars, function(value, key){
+								$scope.stockData.goods_name = value.particular_name;
+								$scope.stockData.quantity =  "-" + value.quantity;
+								$scope.stockData.price =value.price;
+								$scope.stockData.goods_type = value.goods_type;
+								$scope.stockData.category = value.category;
+								//console.log($scope.stockData);
+								$rootScope.postData("stock", angular.copy($scope.stockData),function(response){
+								});
+							})
+							
 						$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 						}
 					})
@@ -182,22 +188,17 @@ define(['app'], function (app) {
 					
 					angular.forEach($rootScope.userDetails.config.inventory.taxData.tax, function(value, key){
 						if(modalOptions.taxInfo[value.taxName]){
-							//console.log(value.taxName, value.taxValue, modalOptions.singleparticular.amount);
 							modalOptions.singleparticular.tax[value.taxName] = (modalOptions.singleparticular.tax[value.taxName]) ? modalOptions.singleparticular.tax[value.taxName] + (value.taxValue * modalOptions.singleparticular.amount / 100) : (value.taxValue * modalOptions.singleparticular.amount / 100);
 						}
 					})
-					console.log(modalOptions.singleparticular.tax);
 				},
 				totalCalculate : function(modalOptions){
 					modalOptions.addinvoice.subtotal = 0;
 					modalOptions.addinvoice.total_amount = 0;
 					modalOptions.addinvoice.tax = {};
-					console.log(modalOptions.addinvoice.particulars);
-					
 					angular.forEach(modalOptions.addinvoice.particulars, function(value, key){
 						modalOptions.addinvoice.subtotal += value.amount;
 						angular.forEach(value.tax,function(value, key){
-							console.log(value, key);
 							modalOptions.addinvoice.tax[key] = (modalOptions.addinvoice.tax[key]) ? modalOptions.addinvoice.tax[key] + value : value;
 						})
 						
@@ -209,10 +210,6 @@ define(['app'], function (app) {
 					})
 					
 					modalOptions.addinvoice.total_amount = modalOptions.addinvoice.subtotal + taxSubtotal;
-					console.log(modalOptions.addinvoice.subtotal);
-					console.log(taxSubtotal);
-					console.log(modalOptions.addinvoice.total_amount);
-						
 					return modalOptions;
 				},
 				
@@ -267,7 +264,6 @@ define(['app'], function (app) {
 					return modalOptions.payment_status;
 				},
 				postData : function(table,input){
-					console.log(table,input);
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							var paymentStatus = {
@@ -351,7 +347,6 @@ define(['app'], function (app) {
 			cols : ["*"]
 		}
 		$scope.getBalance = function(accountId, modalOptions) {
-			//console.log(accountId, modalOptions);
 			var accountParams = {
 				where : {
 					user_id : $rootScope.userDetails.id,
@@ -361,11 +356,48 @@ define(['app'], function (app) {
 				cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 			}
 			dataService.get(false,'transaction', accountParams).then(function(response) {
-				console.log(response);
 				modalOptions.previous_balance = response.data[0].previous_balance;
 			})
 			
 		}
+		
+		$scope.openViewreceipt = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+				Billdata : data,
+				receiptParams : (data) ?{
+					where : {
+						reference_id : data.id,
+						type : "invoice_payment",
+						user_id : $rootScope.userDetails.id,
+						status : 1
+					},
+					join:[
+						{
+							joinType : 'INNER JOIN',
+							joinTable : "inventory_party",
+							joinOn : {
+								party_id : "t0.party_id"
+							},
+							cols : ["*"]
+						}],
+					cols : ["*"]
+				}:{
+
+				},
+				getData : $scope.getData,
+				
+				
+				
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
+		
 		
 		// For Get (Select Data from DB)
 		/*get data */
@@ -411,7 +443,6 @@ define(['app'], function (app) {
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
 				angular.extend($scope.params, params, response);
-				console.log($scope.params);
 				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
 		}

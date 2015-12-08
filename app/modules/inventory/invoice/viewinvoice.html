@@ -3,7 +3,7 @@
 	<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('invoice')">Print</button>
 	<h3 class="text-center">INVOICE</h3>
 </div>
-<div class="modal-body">{{modalOptions.addinvoice}}
+<div class="modal-body"><!--{{modalOptions.addinvoice}}-->
 	<div  id="invoice">
 	<div class="panel panel-default" >
 		<!-- <div class="panel-heading text-center"><h2>INVOICE</h2></div> -->
@@ -43,21 +43,21 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="x in modalOptions.addinvoice.particulars">
-							<td>{{x.particular_name}}</td>
-							<td>{{x.amount}}</td>
+							<td>{{x.particular_name}}({{x.goods_type}})({{x.category}})</td>
+							<td>{{x.amount}}(service-tax:{{x.tax.service_tax}})</td>
 						</tr>	
 					</tbody>
 					<tfoot>
 						<tr>
 							<td class="text-right"><strong>Total Amount</strong></td>
-							<td class="amt" ng-init="modalOptions.totalCalculate(modalOptions);">{{modalOptions.addinvoice.total_amount | number : 2}}</td>
+							<td class="amt">{{modalOptions.addinvoice.total_amount | number : 2}}</td>
 						</tr>
 					</tfoot>
 				</table>
 				<div class="col-xs-12">
 					<p>Amount Chargeable(in words) : 
-					<strong><em>{{inWords(addinvoice.total_amount)}}</em></strong>
-					<p><strong>Remarks:</strong> <span ng-bind-html="modalOptions.addinvoice.remark"></span></p>
+					<strong><em>{{inWords(modalOptions.addinvoice.total_amount) | uppercase}}</em></strong>
+					<p><strong>Remarks:</strong> <span>{{modalOptions.addinvoice.remark}}</span></p>
 					
 					<hr/>
 					<p><strong>Company's Service Tax No: </strong>{{userDetails.config.inventory.taxData.tin_no}}</p>

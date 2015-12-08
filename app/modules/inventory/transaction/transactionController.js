@@ -2,7 +2,6 @@
 
 define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope','$http','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants','$timeout'];
-    
     // This is controller for this view
 	var transactionController = function ($scope,$rootScope,$http,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,$timeout) {
 		
@@ -18,6 +17,18 @@ define(['app'], function (app) {
 		$scope.transactionView = true;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
+		$scope.today = new Date();
+		$scope.todayDt = $scope.today.getFullYear() + "-" + ($scope.today.getMonth() + 1) + "-" + $scope.today.getDate();
+		$scope.duration = {start : $scope.todayDt};
+		$scope.toDate = function(date){
+			return new Date(date);
+		}
+		
+		$scope.open = function($event,rentdate){
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope[rentdate] = !$scope[rentdate];
+		};
 		
 		$rootScope.moduleMenus = [
 			{
@@ -215,6 +226,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							$notification[response.status]("Transaction Successfull", response.message);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
@@ -287,33 +299,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
-						}
-					})
-				},
-				updateData : function(table, input, id){
-					$rootScope.updateData(table, input, id, function(response){
-						if(response.status == "success"){
+							$notification[response.status]("Transaction Successfull", response.message);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
 				},
 				getData : $scope.getData,
 				addToObject : $rootScope.addToObject,
-				removeObject : $rootScope.removeObject,
-				/*checkBalance : function(fieldName, fieldValue,modelOptions){
-					console.log(fieldName, fieldValue,modelOptions.previous_balance);
-					var possibleValue = modelOptions.previous_balance;
-					if(fieldValue != undefined && fieldValue.length >= possibleValue.length){
-						if(fieldValue<=possibleValue){
-								modelOptions.addexpenseForm[fieldName].$setValidity('available', true);
-						}
-						else{
-								modelOptions.addexpenseForm[fieldName].$setValidity('available', false);
-							modelOptions.availabilityMsg = "The Value Must Less than Previous amount";
-						}
-					}
-				}*/
+				removeObject : $rootScope.removeObject
 			};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -458,7 +451,8 @@ define(['app'], function (app) {
 		$scope.setTransactionDate = function(transfer){
 			$scope.transactionParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
 			+"'"];
-			console.log($scope.transactionsParams.whereRaw);
+			console.log($scope.transactionParams);
+			$scope.getData(false, $scope.currentPage, "transaction", "transactionList", $scope.transactionParams);
 		}
 		
 		// For Get (Select Data from DB)
@@ -512,6 +506,47 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
+		
+		$scope.calcDuration = function(type, duration){
+			console.log(type, duration);
+			var curDate = new Date();
+			if(type == 'custom'){
+				var dateS = new Date(duration.start);
+				var dateE = new Date(duration.end);
+				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
+				var endtDt = dateE.getFullYear() + "-" + (dateE.getMonth() + 1) + "-" + (dateE.getDate() + 1 );
+			}
+			if(type == 'daily'){
+				var dateS = new Date(duration.start);
+				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
+				var endtDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + (dateS.getDate() + 1);
+			}
+			if(type == 'month'){
+				duration = parseInt(duration);
+				var today = new Date();
+				var start = new Date(today.getFullYear(), (duration - 1), 1);
+				var endt = new Date(today.getFullYear(), (duration - 1) + 1, 0);
+				
+				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
+				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate() + 1);
+			}
+			if(type == 'year'){
+				duration = parseInt(duration);
+				var today = new Date();
+				var start = new Date(duration, 3, 1);
+				var endt = new Date(duration + 1, 3, 1);
+				
+				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
+				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate());
+			}
+			var setDate={ "fromDate" : startDt,"toDate" : endtDt}
+			$scope.setTransactionDate(setDate);
+			
+		}
+		
+		
+		
+		
 	 };
 	// Inject controller's dependencies
 	transactionController.$inject = injectParams;

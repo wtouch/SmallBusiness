@@ -458,6 +458,10 @@ define(['app'], function (app) {
 							params: reqParams
 						}).then(function (results) {
 							$rootScope.loading = false;
+							
+							if(results.data.status == undefined) results.data = {status : "error", title : "Unknown Error!", message : results.data.message};
+							$notification[results.data.status](table, results.data.message);
+							
 							return results.data;
 						});
 					}else{
@@ -468,12 +472,14 @@ define(['app'], function (app) {
 							params: params
 						}).then(function (results) {
 							$rootScope.loading = false;
+							
+							if(results.data.status == undefined) results.data = {status : "error", title : "Unknown Error!", message : results.data.message};
+							$notification[results.data.status](table, results.data.message);
+							
 							return results.data;
 						});
 					}
 				}
-				
-				
 			};
 			// Method for Update Query
 			obj.put = function (table, object, params) {
@@ -501,6 +507,8 @@ define(['app'], function (app) {
 							params: reqParams
 						}).then(function (results) {
 							$rootScope.loading = false;
+							if(results.data.status == undefined) results.data = {status : "error", title : "Unknown Error!", message : results.data.message};
+							$notification[results.data.status](table, results.data.message);
 							return results.data;
 						});
 					}else{
@@ -511,6 +519,8 @@ define(['app'], function (app) {
 							params: params
 						}).then(function (results) {
 							$rootScope.loading = false;
+							if(results.data.status == undefined) results.data = {status : "error", title : "Unknown Error!", message : results.data.message};
+							$notification[results.data.status](table, results.data.message);
 							return results.data;
 						});
 					}
@@ -543,6 +553,10 @@ define(['app'], function (app) {
 							
 						}).then(function (results) {
 							$rootScope.loading = false;
+							if(results.data.status != "success"){
+								if(results.data.status == undefined) results.data = {status : "error", title : "Unknown Error!", message : results.data.message};
+								$notification[results.data.status](table, results.data.message);
+							}
 							return results.data;
 							
 						});
@@ -553,6 +567,10 @@ define(['app'], function (app) {
 							params: table // old parameter was params
 						}).then(function (results) {
 							$rootScope.loading = false;
+							if(results.data.status != "success"){
+								if(results.data.status == undefined) results.data = {status : "error", title : "Unknown Error!", message : results.data.message};
+								$notification[results.data.status](table, results.data.message);
+							}
 							return results.data;
 							
 						});
@@ -903,7 +921,7 @@ define(['app'], function (app) {
 							data : null
 						};
 						$notification.success(table, data.message);
-						deferred.resolve(data);;
+						deferred.resolve(data);
 					};
 					// Error Handler
 					function error(t, e) {
