@@ -1,0 +1,62 @@
+ {% spaceless %}
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
+		<script src="{{ path }}js/jquery.min.js"></script>
+		<script src="{{ path }}js/bootstrap.min.js"></script>
+		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
+		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
+		<title>{{seo.title}} | {{data.business_name}}</title>
+		<meta name="description" content="{{ seo.description }}">
+		<meta name="keywords" content="{{ seo.keywords }}">
+		
+	</head>
+	<body>
+	    <div class="container">
+		<h3> {{data.business_name}}</h3>
+		   <!--  <div class="text-center brand">  
+					<a class="navbar-brand" href="#">{{data.business_name}}</a>
+			</div> -->
+		     <nav class="navbar navbar-default">
+			
+				<div class="navbar-header navbar">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar_right">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
+				</div>
+			
+		</nav>
+		<!-- <div class="first">
+		  <img src="{{path}}img/55.png">
+		</div> -->
+		<!-- <div class="second">
+		   <img src="{{path}}img/3.png">
+		</div> -->
+		<div class="row">
+		   <div class="col-sm-12 content anim">
+			  {% include contentPath %}
+			</div>
+		</div>
+		</div>
+		  {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}  
+	</body>
+</html> 
+{% endspaceless %}
