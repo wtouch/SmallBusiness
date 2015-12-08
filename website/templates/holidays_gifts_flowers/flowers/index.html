@@ -20,17 +20,10 @@
 		<meta name="keywords" content="{{ seo.keywords }}"> 
 	</head>
 	<body>
-		<div class="col-md-12 anim2">
-			<img class="img-responsive" src="{{ path }}img/robot.gif" alt="image missing">
-		</div>
-		<h1 class="anim4">MOVEIN <br>ROBOTECH</h1>
-		<div class="anim1">
-	<div class="anim">
 		<header>
 			<img class="logo" src="{{data.business_logo.file_relative_path}}">
-		</header>
+	
 		<nav class="navbar navbar-default ">
-			<div class="contianer">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span>
@@ -46,27 +39,30 @@
 						</ul>
 					</div>
 				</div>
-			</div> 
 		</nav>
-		<div class="ak">
-			<div class="container">
-						{%if modules.headerModule.carousal %}
+		<div class="container">
+		
+			{%if modules.headerModule.carousal %}
 						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 						{%endif%}
-					{%if modules.sidebarModule.sidemenu %}	
-						<div class="col-sm-3 col-md-4">
-							{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
-						</div>
-					{%endif%}
-					<div class="content {{modules.sidebarModule.sidemenu ? 'col-sm-9 col-md-8':'col-sm-12 col-md-12'}}">
-						 {% include contentPath %}
-					</div>
-				</div>
+						
+				{% include contentPath %}
+			<div class="serv">	
+				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+				{% include contentPath%} 
+			</div>
+			<div class="produt">	
+							{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+
+			</div>
 		</div>
-		<footer  class="pk">
+		</header>
+		
+			
+	
 		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-		</footer>
-	</div>
+	
+
 	</body>
 </html>
 {% endspaceless %}
