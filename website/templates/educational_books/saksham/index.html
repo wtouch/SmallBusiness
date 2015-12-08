@@ -9,8 +9,8 @@
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
 		<script src="{{ path }}js/jquery.min.js"></script>
 		
-		<script src="{{ path }}animatescroll.min.js?v=1.0.7"></script>
-		<script src="{{ path }}animatescroll.js"></script>
+		<script src="{{ path }}js/animatescroll.min.js?v=1.0.7"></script>
+		<script src="{{ path }}js/animatescroll.js"></script>
 		
 		<script src="{{ path }}js/bootstrap.min.js"></script>
 		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
@@ -43,33 +43,33 @@
 		</script>
 		<script>				
 			function myFunction() {
-							  if (document.body.scrollTop>250) {
-									document.getElementById("abouttt").className = "left";
-									document.getElementById("aboutttt").className = "left";
-									document.getElementById("aboutt").className = "left";
-							   } else {
-									document.getElementById("abouttt").className = "";
-									document.getElementById("aboutttt").className = "";
-									document.getElementById("aboutt").className = "";
-								}
-							if (document.body.scrollTop>450) {
-								document.getElementById("serv").className = "left";
-								document.getElementById("serv1").className = "left";
-								document.getElementById("serv2").className = "left";
-								
-							} else {
-								document.getElementById("serv").className = "";
-								document.getElementById("serv1").className = "";
-								document.getElementById("serv2").className = "";
-								}
-							if (document.body.scrollTop>550) {
-								document.getElementById("serv3").className = "left";
-								document.getElementById("serv4").className = "left";
-								
-							} else {
-								document.getElementById("serv3").className = "";
-								document.getElementById("serv4").className = "";
-								}
+				if (document.body.scrollTop>250) {
+					document.getElementById("abouttt").className = "left";
+					document.getElementById("aboutttt").className = "left";
+					document.getElementById("aboutt").className = "left";
+				}else{
+					document.getElementById("abouttt").className = "";
+					document.getElementById("aboutttt").className = "";
+					document.getElementById("aboutt").className = "";
+				}
+				if (document.body.scrollTop>450) {
+					document.getElementById("serv").className = "left";
+					document.getElementById("serv1").className = "left";
+					document.getElementById("serv2").className = "left";
+					
+				} else {
+					document.getElementById("serv").className = "";
+					document.getElementById("serv1").className = "";
+					document.getElementById("serv2").className = "";
+					}
+				if (document.body.scrollTop>550) {
+					document.getElementById("serv3").className = "left";
+					document.getElementById("serv4").className = "left";
+					
+				} else {
+					document.getElementById("serv3").className = "";
+					document.getElementById("serv4").className = "";
+				}
 			} 
 			window.onscroll = function() {myFunction()};
 		</script>
@@ -106,15 +106,15 @@
 					<li class="hide1"><a href="" target="_self">HOME</a></li> 
 					<li class="hide2"><a onclick="$('#about').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">ABOUT US</a></li>
 					<li class="hide3"><a href="#" target="_self">PROJECTS</a></li>
-					<li class="hide4"><a onclick="$('#services').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">SERVICES</a></li>
+					<li class="hide4"><a onclick="$('#services').animatescroll({scrollSpeed:2000,easing:'easeOutBack'});">SERVICES</a></li>
 					<li class="hide5"><a href="#" target="_self">LEGAL</a></li>
 					<li class="hide6"><a onclick="$('#associates').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">ASSOCIATES</a></li>
-					<li class="hide7"><a onclick="$('#contact').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">CONTACT US</a></li>
+					<li class="hide7"><a onclick="$('#contact').animatescroll({scrollSpeed:3000,easing:'easeOutBack'});">CONTACT US</a></li>
 				</ul>
 				</div>
 			</div>
 		</div>
-		<div class="container-fluid back">
+		<div id="nav" class="container-fluid back">
 			<div class="row">
 				<div class="col-md-3 col-sm-12 col-xs-12">
 				</div>
@@ -129,14 +129,16 @@
 					<h1>M</h1>
 					</div>
 					<div class="logo">
-						<div class="click"></div>
 						<div><h3 class="click1">click us to see our <br>world</h3></div>
 						 
 					</div>
+					<div class="click"></div>
+					<div class="top"><h3><a onclick="$('#nav').animatescroll({scrollSpeed:3000,easing:'easeInOutBack'});">TOP</a></h3></div>
 					<div class="click7"><img class="img-responsive" src="{{path}}img/gg.gif"></div>
 					<div class="click8"><h3>Don't tell me the sky is the limit. When there are footprints on the moon.</h3></div>
 					<div class="desc">
 						<h2>We Make<br>You Capable</h2>
+						
 					</div>
 				</div>
 			</div>
@@ -230,10 +232,9 @@
 			</div>
 			<div class="row service1">
 				<div class="col-md-8 col-sm-12 col-xs-12">
-					<h3>TRADING</h3>
-					<p id="ser4">Trade involves the transfer of the ownership of goods or services from one person or entity to another in exchange for other
-					goods or services or for money. Possible synonyms of "trade" include "commerce" and "financial transaction".
-					Types of trade include barter. A network that allows trade is called a market.</p>
+					<h3>DAIRY</h3>
+					<p id="ser4">A dairy is a business enterprise established for the harvesting or processing (or both) of animal milk 
+					– mostly from cows or goats, but also from buffaloes, for human consumption.That is concerned with the harvesting of milk.</p>
 				</div>
 				<div class="col-md-4 col-sm-12 col-xs-12">
 					<div class="row">
@@ -322,6 +323,9 @@
 						
 					
 					</div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h5>© 2015 Saksham Agro & Properties Llp  | Designed By - ApnaSite.in </h5>
 				</div>
 			</div>
 		</div>
