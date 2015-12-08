@@ -1,66 +1,188 @@
-.carousel{
-		margin-top:10px;
-		border:10px solid @color;
-		border-radius:10px;
-		img{
-				width:100%;
-			}
-		.carousel-indicators{
-		float:left;
-		}
-		.carousel-caption {
-			right: -35%;
-			left: 22%;
-			padding-bottom: 30px;
-			top: 10%;
-		}
-		.carousel-indicators {
-			position: absolute;
-			bottom: 10px;
-			left: 20%;
-			z-index: 15;
-			width: 60%;
-			padding-left: 0;
-			margin-left: -30%;
-			text-align: center;
-			list-style: none;
-		}
-		.carousel-indicators li {
-			border: 1px solid @colorwhite;
-			width:16px;
-			height:16px;
-			background-color:@colorwhite;
-		}
-				.carousel-indicators .active {
-				width: 16px;
-				height: 16px;
-				margin: 0;
-				background-color: @color;
-				border:1px solid @color;
-			}
-		p{
-			color:@colorwhite;
-		}
-		.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
-    margin-right: -15px;
-    display: none;
+.featrGallery{
+				.thumbnail{
+							height:200px;
+							background:linear-gradient(to bottom,@lightbackcolor,@darkcolor,@lightbackcolor);
+							border:1px solid @lightcolor;
+							color:@colorwhite;
+							margin:10px;
+							.caption{
+									height:180px;
+									overflow:hidden;
+									color:@colorwhite;
+									text-align:justify;
+									padding-top:10px;
+									
+								}
+							img{
+								width:100%;
+								margin:12px 0px;
+								
+							}
+				
+				}
+
 }
-.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
-    margin-left: -15px;
-    display: none;
+.featrGallery1{
+				.thumbnail{
+							height:220px;
+							background:linear-gradient(to right,@darkcolor,@color,@darkcolor);
+							border:1px solid transparent;
+							color:@colorwhite;
+							&:hover{
+										background-image:url('../img/money.gif');
+										background-size:100% 100%;
+							}
+							&:hover img{
+									top:100px;
+							}
+							.description{
+											color:@colorwhite;
+							}
+							img{
+								    margin-top: 40px;
+							}
+				
+				}
+
 }
-	}
-.box{
-box-shadow: 0 0 12px #ccc;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    border: solid 1px #ccc\9;
-	padding:15px;
-	margin-top:25px;
-	}
-	.box:hover {
-    box-shadow: 0 0 25px @color;
-    color: @colorblack;
+
+.activity{
+			h2{
+				
+				font: 400 36px/48px "Arbutus Slab", sans-serif;
+			}
+			.panel{
+						background-color:rgba(56, 35, 15, 0.99);
+			}
+			.panel-body{
+					.testimage{
+									padding:10px;
+									width:100%;
+									height:100%;
+									img{
+
+											width:100%;
+											
+									}
+					
+					}
+			}
+			h3{
+				text-align:left;
+				color:@colorwhite;
+				font: 400 18px/48px "Arbutus Slab", sans-serif;
+			}
+			
+			.description{
+				height:100px;
+				overflow:hidden;	
+				color:@colorwhite;				
+			}
+			
+}
+.jobs{
+				.panel{
+						background-color:rgba(56, 35, 15, 0.99);
+					}
+					h3{
+							color:@back;
+							text-align:center;
+					}
+				.description{
+							p{
+									color:@colorwhite;
+									text-align:justify;
+							}	
+						}
+}
+		
+.featrtesti{
+				blockquote{
+						border-left:none !important;
+						color:@colorwhite;
+				}
+				img{
+						height:100px;
+						width:100px;
+						border:3px solid @colorwhite;
+				}
+				footer{
+						color:@back;
+				}
+}
+.infrastructure{
+		height:500px;
+		
+		
+		.thumbnail{
+				
+				overflow:hidden;
+				margin:10px;
+				padding:20px;
+				height:450px;
+					.infraImg{
+						height:200px;
+						//width:100%;
+							img{
+							height:200px;
+							width:100%;
+							}
+						}
+						.caption{
+							height:150px;
+							
+						}
+				}
+}
+div.infrastructure>div.row>div:nth-child(1){
+		
+		animation-name:abt1;
+		animation-duration:2s;
+		aniamtion-iteration-count:1;
+		//animation-delay:2s;
+}
+@keyframes abt1{
+				0%{opacity:0;transform: translateX(-100px)}
+				100%{opacity:1; transform: translateX(0);}
+
+}
+div.infrastructure>div.row>div:nth-child(3){
+		
+		animation-name:abt2;
+		animation-duration:2s;
+		aniamtion-iteration-count:1;
+		//animation-delay:3s;
+}
+@keyframes abt2{
+				0%{opacity:0;transform: translateY(40px)}
+				100%{opacity:1; transform: translateY(0);}
+
+}
+div.infrastructure>div.row>div:nth-child(5){
+		
+		
+		animation-name:abt3;
+		animation-duration:3s;
+		aniamtion-iteration-count:1;
+		//animation-delay:4s;
+}
+@keyframes abt3{
+				0%{opacity:0;transform: translateY(-40px)}
+				100%{opacity:1; transform: translateY(0);}
+
+}
+div.infrastructure>div.row>div:nth-child(7){
+	
+		animation-name:abt4;
+		animation-duration:3s;
+		aniamtion-iteration-count:1;
+		//animation-delay:5s;
+}
+@keyframes abt4{
+				0%{opacity:0;transform: translateX(40px)}
+				100%{opacity:1; transform: translateX(0);}
+
+}
+div.infrastructure>div.row>div:nth-child(9){
+display:none;
 }

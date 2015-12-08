@@ -1,36 +1,53 @@
 {% spaceless %}
 <!DOCTYPE html>
+<!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
 <html lang="en" ng-app="myApp">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="{{ path }}css/style.css">
 		<script src="{{ path }}js/jquery.min.js"></script>
 		<script src="{{ path }}js/bootstrap.min.js"></script>
+		
 		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
-		<script src="{{ path }}js/anim.js"></script> 
-		<script src="{{ path }}js/script.js"></script> 
+		
+		<script src="{{ path }}js/script.js"></script>
+		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
+		
 		<meta name="description" content="{{ seo.description }}">
-		<meta name="keywords" content="{{ seo.keywords }}"> 
-	</head>
-	<body>
-		<div class="col-md-12 anim2">
-			<img class="img-responsive" src="{{ path }}img/robot.gif" alt="image missing">
-		</div>
-		<h1 class="anim4">MOVEIN <br>ROBOTECH</h1>
-		<div class="anim1">
-	<div class="anim">
-		<header>
-			<img class="logo" src="{{data.business_logo.file_relative_path}}">
-		</header>
-		<nav class="navbar navbar-default ">
-			<div class="contianer">
+		<meta name="keywords" content="{{ seo.keywords }}">
+		<script src="http://maps.googleapis.com/maps/api/js">
+		</script>
+<script>
+		function initialize() {
+			var mapProp = {
+				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+				zoom:12,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			var marker=new google.maps.Marker({
+				position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+			});
+			marker.setMap(map);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+		
+</head>
+
+<body>
+	<header>
+	</header>
+		<nav class="navbar navbar-default navbar-static-top">
+	
+			<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span>
@@ -38,35 +55,36 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-				</div> 
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<div class="container">
-						<ul class="nav navbar-nav  nav nav-justified">
-							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-						</ul>
-					</div>
 				</div>
-			</div> 
+			<!-- Collect the nav links, forms, and other content for toggling -->
+		
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav nav-justified">
+					{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+				</ul>
+			</div><!-- /.navbar-collapse -->
+	
+	
 		</nav>
-		<div class="ak">
-			<div class="container">
-						{%if modules.headerModule.carousal %}
-						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-						{%endif%}
-					{%if modules.sidebarModule.sidemenu %}	
-						<div class="col-sm-3 col-md-4">
-							{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
-						</div>
-					{%endif%}
-					<div class="content {{modules.sidebarModule.sidemenu ? 'col-sm-9 col-md-8':'col-sm-12 col-md-12'}}">
-						 {% include contentPath %}
+		<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 weblogo">
+						{% if data.website_config.website_logo %}
+							<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}">
+						{% endif %}
 					</div>
 				</div>
 		</div>
-		<footer  class="pk">
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-		</footer>
-	</div>
+
+		{%if modules.headerModule.carousal %}
+			{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+			{%endif%}
+		
+				{% include contentPath %}
+	
+			
+	
+		 <!-- {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}   -->
 	</body>
 </html>
 {% endspaceless %}
