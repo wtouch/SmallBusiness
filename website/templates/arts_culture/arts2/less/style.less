@@ -1,7 +1,7 @@
 
 @font-face {
-  font-family: 'CinzelDecorative-Regular';
-  src:url('../fonts/CinzelDecorative-Regular.otff');
+  font-family: 'CinzelDecorative-Black';
+  src:url('../fonts/CinzelDecorative-Black.ttff');
 }
 
 @color : #fa6903; //dark chocalate
@@ -17,7 +17,7 @@
 @import "product.less";
 @import "general.less";
 body{
-	font-family:CinzelDecorative-Regular;
+	font-family:CinzelDecorative-Black;
 	.homeAboutus{
 		padding: 0px 20px 25px 0px;
 		text-align:center;
@@ -25,6 +25,9 @@ body{
 	.logo{
 		height:80px;
 		}
+	}
+	h1,h2,h3,h4{
+		font-family:CinzelDecorative-Black;
 	}
 header{
 	background:url(../img/header-bg.jpg) repeat-x;
@@ -45,11 +48,11 @@ header{
 				position :relative;
 				>a{
 					color: @colorwhite;
-					font-family:CinzelDecorative-Regular;
+					font-family:CinzelDecorative-Black;
 					text-transform: uppercase;
 					padding:29px 18px;
 					font-size:16px;
-					text-shadow: 2px 2px 0px rgba(0, 0, 0, .2);
+					text-shadow: 2px 2px 0px rgba(0, 0, 0,.2);
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					color: @colorwhite;
@@ -130,8 +133,11 @@ header{
 			margin: 0px 0 0 0;
 			}
 	}
+	 .carousel-indicators {
+		display:none;
+		width:0px;
+	}
 }
-
 // media query
 @media (max-width: 768px){
 		body .navbar-default .navbar-nav > li.active > a, body .navbar-default .navbar-nav > li.active:hover > a, body .navbar-default .navbar-nav > li.active > a:focus, body .navbar-default .navbar-nav > li:hover > a, body .navbar-default .navbar-nav > li:hover > a:focus{ 
@@ -142,46 +148,30 @@ header{
 		body .navbar-default .navbar-nav > li> a{ 
 			background:none;
 			border:0px;
-			background-image:none;
+			background:url('../img/header-bg.jpg') repeat-x;
 		}
-		body .navbar-default{
-			background:@back;
-			border-bottom: 0px solid @color !important;
+		body .navbar-default {
+			background:url('../img/header-bg.jpg') repeat-x;
 		}
 	}
 	.about{
-		
-			padding:15px;
-			h2{
-				color:red ;
-			}
-			strong{
-				font-family : 'FeFCrm2';
-			}
-	}
-	h3,h4{
-		font-size: 18px;
-		font-weight: bold;
-		}	
+		padding:15px;
+		strong{
+			font-family : 'FeFCrm2';
+		}
+	}	
 	strong{
-		font-family : 'FeFCrm2';
 		font-weight:900;
 		font-size:16px;
 	}
 .btn-info{
-		background: @colorblack;
-		padding: 3px 7px;
+		padding: 10px 10px;
 		border-radius: 3px;
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
 		color: @colorwhite;
 		border:none;
 		}
-.btn-info:hover{
-	background: @darkcolor;
-	transition:600ms;
-	border:none;
-}
 
 .sociallinks{
 	background-color:@colorwhite;
