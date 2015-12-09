@@ -43,32 +43,10 @@
 		</script>
 		<script>				
 			function myFunction() {
-				if (document.body.scrollTop>250) {
-					document.getElementById("abouttt").className = "left";
-					document.getElementById("aboutttt").className = "left";
-					document.getElementById("aboutt").className = "left";
+				if (document.body.scrollTop>650) {
+					document.getElementById("top").className = "top";
 				}else{
-					document.getElementById("abouttt").className = "";
-					document.getElementById("aboutttt").className = "";
-					document.getElementById("aboutt").className = "";
-				}
-				if (document.body.scrollTop>450) {
-					document.getElementById("serv").className = "left";
-					document.getElementById("serv1").className = "left";
-					document.getElementById("serv2").className = "left";
-					
-				} else {
-					document.getElementById("serv").className = "";
-					document.getElementById("serv1").className = "";
-					document.getElementById("serv2").className = "";
-					}
-				if (document.body.scrollTop>550) {
-					document.getElementById("serv3").className = "left";
-					document.getElementById("serv4").className = "left";
-					
-				} else {
-					document.getElementById("serv3").className = "";
-					document.getElementById("serv4").className = "";
+					document.getElementById("top").className = "";
 				}
 			} 
 			window.onscroll = function() {myFunction()};
@@ -103,13 +81,13 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
 				<ul>
-					<li class="hide1"><a href="" target="_self">HOME</a></li> 
-					<li class="hide2"><a onclick="$('#about').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">ABOUT US</a></li>
+					<li class="hide1"><a href="#" target="_self">HOME</a></li> 
+					<li class="hide2"><a href="#" onclick="$('#about').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">ABOUT US</a></li>
 					<li class="hide3"><a href="#" target="_self">PROJECTS</a></li>
-					<li class="hide4"><a onclick="$('#services').animatescroll({scrollSpeed:2000,easing:'easeOutBack'});">SERVICES</a></li>
+					<li class="hide4"><a href="#" onclick="$('#services').animatescroll({scrollSpeed:2000,easing:'easeOutBack'});">SERVICES</a></li>
 					<li class="hide5"><a href="#" target="_self">LEGAL</a></li>
-					<li class="hide6"><a onclick="$('#associates').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">ASSOCIATES</a></li>
-					<li class="hide7"><a onclick="$('#contact').animatescroll({scrollSpeed:3000,easing:'easeOutBack'});">CONTACT US</a></li>
+					<li class="hide6"><a href="#" onclick="$('#associates').animatescroll({scrollSpeed:3000,easing:'easeOutElastic'});">ASSOCIATES</a></li>
+					<li class="hide7"><a href="#" onclick="$('#contact').animatescroll({scrollSpeed:3000,easing:'easeOutBack'});">CONTACT US</a></li>
 				</ul>
 				</div>
 			</div>
@@ -129,11 +107,11 @@
 					<h1>M</h1>
 					</div>
 					<div class="logo">
-						<div><h3 class="click1">click us to see our <br>world</h3></div>
+						<div><h3 class="click1">click us to see our world</h3></div>
 						 
 					</div>
 					<div class="click"></div>
-					<div class="top"><h3><a onclick="$('#nav').animatescroll({scrollSpeed:3000,easing:'easeInOutBack'});">TOP</a></h3></div>
+					<div id="top" onclick="$('#nav').animatescroll({scrollSpeed:3000,easing:'easeInOutBack'});"></div>
 					<div class="click7"><img class="img-responsive" src="{{path}}img/gg.gif"></div>
 					<div class="click8"><h3>Don't tell me the sky is the limit. When there are footprints on the moon.</h3></div>
 					<div class="desc">
