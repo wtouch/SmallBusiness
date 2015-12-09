@@ -10,36 +10,20 @@
 	font-family:'DobkinScript';
 	src:url('../fonts/DobkinScript.ttf');
 }
-@font-face {
-  font-family: 'Dancing Script';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Dancing Script'), local('DancingScript'), url(http://fonts.gstatic.com/s/dancingscript/v6/DK0eTGXiZjN6yA8zAEyM2Ud0sm1ffa_JvZxsF_BEwQk.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-@font-face {
-  font-family: 'Dancing-Cursve';
-  src:url('../fonts/Dancing-Cursve.woff');
-}
+
 @font-face{
-	font-family : 'Italianno-Regular-OTF';
-	src : url('../fonts/Italianno-Regular-OTF.otf');
-}
-@font-face{
-	font-family : 'FeFCrm2';
-	src : url('../fonts/FeFCrm2.otf');
-}
-@font-face{
-	font-family : 'GreatVibes-Regular';
-	src : url('../fonts/GreatVibes-Regular.otf');
+	font-family : 'amarkalyane';
+	src : url('../fonts/amarkalyane.ttf');
 }
 
 @color : #fa6903; //dark chocalate
-@lightcolor :#800000; //color
-@darkcolor : #ae8f4e;// nav color
-@back : #323232;
-@darkbackcolor : #141414; //darkcolor black nav
-@lightbackcolor :#FFD700;//no use
+@lightcolor :#480506; //color
+@darkcolor : #ECD070;// nav active color 
+
+@back : #BF0002;//in use
+@darkbackcolor : red; //not use
+@lightbackcolor :#FFD700;//not use
+
 @colorblack : #000000;
 @colorwhite	: #ffffff;
 @import "property.less";
@@ -47,6 +31,9 @@
 @import "product.less";
 @import "general.less";
 body{
+		background: url(../img/body.png) fixed, url(../img/highlight.png) no-repeat center top fixed #6e0001;
+		background-attachment: scroll;
+		color:@colorwhite;
 
 	.homeAboutus{
 		padding: 0px 20px 25px 0px;
@@ -55,17 +42,16 @@ body{
 		padding-top:5px;
 	}
 	header{
-		background-color:@lightcolor;
+		background: url(../img/body.png) fixed, url(../img/highlight.png) no-repeat center top fixed #6e0001;
+		background-attachment: scroll;
 		.logo{
 			height:120px;
 		}
 	}
 	.header1{
-	h1,h3{
-	color:@colorwhite;
-	
-	}
-	
+		h1,h3{
+			color:@colorwhite;
+		}
 	}
 navbar-toogle{
 	background-color:@color;
@@ -79,37 +65,72 @@ navbar-toogle{
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
     background-color: @color;
 }
+
+
+.ribbon {
+ font-size: 16px !important;
+ /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */   
+ position: relative;
+ background: @back;
+ color: #fff;
+ text-align: center;
+ margin: 2em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+}
+.ribbon:before, .ribbon:after {
+ content: "";
+ position: absolute;
+ display: block;
+ bottom: -1em;
+ border: 1.5em solid @back;
+ z-index: -1;
+}
+.ribbon:before {
+ left: -2em;
+ border-right-width: 1.5em;
+ border-left-color: transparent;
+}
+.ribbon:after {
+ right: -2em;
+ border-left-width: 1.5em;
+ border-right-color: transparent;
+}
+.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+ content: "";
+ position: absolute;
+ display: block;
+ border-style: solid;
+ border-color: @lightcolor transparent transparent transparent;
+ bottom: -1em;
+}
+.ribbon .ribbon-content:before {
+	 left: 0;
+	 border-width: 1em 0 0 1em;
+}
+.ribbon .ribbon-content:after {
+	 right: 0;
+	 border-width: 1em 1em 0 0;
+}
 .navbar-default {
-			border-top-left-radius:0px;
-			border-top-right-radius:0px;
-			background: url(../img/navi-bg.jpg);
-			border-top:none;
-			margin-bottom:0px;
-			background-color:@colorblack;
-			border-bottom: 2px solid @color !important;
-			.navbar-nav{
+    background-color: @back;
+    border-color: @back;
+	.navbar-nav{
 					
 				>li{
 					position :relative;
 					>a{
 						color: @colorwhite;
 						font-family: 'Dancing Script';
-						//font-family:'DobkinScript';
-						border-right: 1px solid @colorwhite; 
-						padding:18px 20px;
-						font-size:24px;
-						border-right: solid 1px #545454;
-						border-left: solid 2px @colorblack;
-						background: url(../img/navi-tree-h.png) no-repeat center top;
+						background:none;
+						font-size: 20px;
+						font-family : 'amarkalyane';
 					}
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-						color: @color;
+						color: @darkcolor;
 						cursor: pointer;
 						text-shadow: 1px 1px @colorblack;
-						background: none;
-						//font-family:'DobkinScript';
-						font-family: 'Dancing Script';
-						background: url(../img/navi-tree.png) no-repeat center top;
+						background:none;
+						font-size: 20px;
+						font-family : 'amarkalyane';
 					}
 					ul{
 						display : none;
@@ -133,7 +154,7 @@ navbar-toogle{
 							}
 							&:hover{
 								a{
-									color :@color ;
+									color :@darkcolor ;
 									
 								}
 							}
@@ -148,12 +169,12 @@ navbar-toogle{
 								>li{
 									>a{
 										text-decoration:none;
-										color : @darkcolor;
+										color : @colorwhite;
 									}
 									&:hover{
 										color:@color;
 										a{
-											color : @colorwhite;
+											color : @darkcolor;
 											
 										}
 									}
@@ -171,23 +192,8 @@ navbar-toogle{
 					}
 				}
 			}
-}	
 }
-.content{
-	background-color:@colorwhite;
-	border-radius:5px;
-	margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.ak{
-		background: url(../img/main-bg.jpg) no-repeat center top #440709;
-		background-size:100%;
-}
-h2{
-	color:@lightcolor;
-	font-family:'Amar-kalyane';
-}
+	
 .navbar-nav>li {
      float: none; 
 }
@@ -211,33 +217,7 @@ h2{
     width:150px;
 }
 	}
-	.about{
-			padding:15px;
-		h2{
-			color:@lightcolor ;
-		}
-		strong{
-			font-family : 'FeFCrm2';
-		}
-	}
-	h1{
-		color:@lightcolor;
-		font-family:'Amar-kalyane';
-	}
-	h3,h4{
-		color:@lightcolor ;
-		font-size: 30px;
-		font-weight: bold;
-		font-family:'DobkinScript';
-	}	
-	strong{
-			font-family : 'FeFCrm2';
-			font-weight:900;
-			font-size:16px;
-		}
-	em {
-		color:@darkcolor;
-	}
+	
 	
 .btn-info {
 		background: @colorblack;
@@ -260,60 +240,7 @@ h2{
 hr{
 border-top: 1px solid @back;
 }
-
-.anim1
-{	
-	position:relative;
-	-webkit-animation-name: anim1;
-	-webkit-animation-duration:10s;
 }
-@-webkit-keyframes anim1
-{
-	0%{opacity:0}
-	80%{top:400px;opacity:0}
-	100%{top:0px;opacity:1}
-}
-.anim2
-{
-	position:absolute;
-	left:-10000px;
-	top:-10000px;
-	height:100%;
-	background-image:url("../img/index-bg.jpg");
-	opacity:0;
-	background-size:100% 100%;
-	-webkit-animation-name: anim2;
-	-webkit-animation-duration:8s;
-}
-@-webkit-keyframes anim2
-{
-	0%{opacity:1;left:0px;top:0px;}
-	100%{opacity:1;left:0px;top:0px;}
-}
-.anim4
-{
-	position:absolute;
-	left:-10000px;
-	top:-10000px;
-	opacity:0;
-	-webkit-animation-name: anim4;
-	-webkit-animation-duration:4s;
-	-webkit-animation-delay:4s;
-}
-@-webkit-keyframes anim4
-{
-	0%{opacity:1;left:850px;top:200px;}
-	10%{opacity:1;left:850px;top:200px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;}
-	30%{opacity:1;left:850px;top:200px;color: white;text-shadow: 1px 1px 2px black, 0 0 25px purple, 0 0 5px purple;}
-	50%{opacity:1;left:850px;top:200px;color: #144FFF;}
-	70%{opacity:1;left:850px;top:200px;color: #ff9900;transform:rotate(0deg);}
-	100%{opacity:1;left:850px;top:200px;color: #ff9900;transform:rotate(360deg)}
-}
-.img-circle {
-    border-radius: 50%;
-    width: 100%;
-}
-
 
 
 

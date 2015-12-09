@@ -30,9 +30,10 @@
 				<h3>{{data.contact_profile.contact_person}}</h3>
 				</div>
 			</div>
-	</header>	
-	<nav class="navbar navbar-default ">
-			<div class="contianer">
+	</header>
+	<div class="container">
+		<div class="ribbon">
+			<nav class="navbar navbar-default ribbon-content">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span>
@@ -41,15 +42,14 @@
 						<span class="icon-bar"></span>
 					</button>
 				</div> 
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<div class="container">
-						<ul class="nav navbar-nav  nav nav-justified">
-							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-						</ul>
-					</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">		
+					<ul class="nav navbar-nav  nav nav-justified">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
 				</div>
-			</div> 
-		</nav>
+			</nav>
+		</div>
+	</div>
 		<div class="ak">
 			<div class="container">
 						{%if modules.headerModule.carousal %}

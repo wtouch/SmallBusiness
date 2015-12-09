@@ -2,7 +2,50 @@
 <form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
 		
 		     <input type="hidden" class="form-control" ng-model="modalOptions.addstaff.user_id" ng-init="modalOptions.addstaff.user_id = userDetails.id" readonly/>
+		 <div class="form-group">
+			<label  for="date" class="col-sm-2 control-label">Date of joining*</label>
+			<div class="col-sm-9">
+				<div class="input-group">
+					<input type="text" class="form-control " placeholder="Date" id="doj" name="doj" ng-model="modalOptions.addstaff.doj" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addstaff.doj = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.doj,10); modalOptions.sqlDateFormat(modalOptions.addstaff.doj, modalOptions.addstaff.doj)"/>	
+					
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
 		
+		</div>
+		
+		<div class="form-group">
+			<label for="pan_no" class="col-sm-2 control-label">Pan no</label>
+			<div class="col-sm-9">
+				<input type="text" id="pan_no" name="pan_no" class="form-control" ng-model="modalOptions.addstaff.pan_no" placeholder="Enter pan_no" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="10" required>
+				<span class="help-block" ng-show="addstaffForm.pan_no.$dirty && addstaffForm.pan_no.$invalid">
+					<span ng-show="addstaffForm.pan_no.$error.pattern && (addstaffForm.pan_no.$dirty || submitted)" class="text-danger">please enter number</span>
+				</span>
+			</div>						
+		</div>
+				<div class="form-group">
+			<label for="uan_no" class="col-sm-2 control-label">UAN no</label>
+			<div class="col-sm-9">
+				<input type="text" id="uan_no" name="uan_no" class="form-control" ng-model="modalOptions.addstaff.UAN_no" placeholder="Enter uan_no" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="10" required>
+				<span class="help-block" ng-show="addstaffForm.uan_no.$dirty && addstaffForm.uan_no.$invalid">
+					<span ng-show="addstaffForm.uan_no.$error.pattern && (addstaffForm.uan_no.$dirty || submitted)" class="text-danger">please enter number</span>
+				</span>
+			</div>						
+		</div>
+	      < <div class="form-group">
+				<label for="qualification" class="col-sm-2 control-label">Qualification*</label>
+					<div class="col-sm-9">
+						<input type="text" name="qualification" id="qualification" ng-model="modalOptions.addstaff.qualification" placeholder="Enter your qualification" ng-pattern="/^[a-zA-Z/ ]*$/"  class="form-control" required>
+						
+						<span class="help-block" ng-show="addstaffForm.qualification.$dirty && addstaffForm.qualification.$invalid">
+							<span ng-show="addstaffForm.qualification.$error.required" class="text-danger">Required Field.</span>
+						</span>
+					</div>						
+			</div> 
+		 
+	
 			    <div class="form-group">
 					<label for="designation" class="col-sm-2 control-label">Designation *</label>
 					<div class="col-sm-9">

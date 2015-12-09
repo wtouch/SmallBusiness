@@ -32,11 +32,17 @@ body{
 }	
 .log{
 	background:@bg1;
-	//background-color:@lightcolor;
 	background-repeat:no-repeat;
 	background-size:100%;
 	border-bottom:8px solid @lightcolor;
 	height:230px;
+}
+.log1{
+	background:@bg1;
+	background-repeat:no-repeat;
+	background-size:100%;
+	border-bottom:8px solid @lightcolor;
+	height:580px;
 }
 	
 .logo{
@@ -46,15 +52,24 @@ body{
 }	
 
 .content{
-	background-color:@colorwhite;
-     animation-name:example;
-     animation-duration:1s;
+	 background-color:@colorwhite;
+	 animation-name:example;
+	 animation-duration:4s;
 	 position:relative;
-	
+	>.rowcontent{
+	 animation-name:example1;
+	 animation-duration:4s;
+	 position:relative;
+	}
 }
 @keyframes example{
          0%{position:relative;right:700px;}
 		100%{position:relative;right:0px;}
+
+}
+@keyframes example1{
+         0%{position:relative;left:2000px;}
+		100%{position:relative;left:0px;}
 
 }
 .content{
@@ -145,6 +160,8 @@ body{
 						&:hover{
 							color:@colorwhite;
 							background-color:@color;
+							font-size:18px;
+							text-decoration: underline;
 						}
 					}
 					&.active>a, &.active>a:hover,&.active>a:focus{
@@ -189,11 +206,17 @@ border-bottom:1px solid @lightcolor;
 			color:@darkcolor;
 			font-family:Arial;
 			font-size:20px;
+				&:hover{
+					color:@colorblack;
+				}
 		}
 		>.tagline1{
 			color:@colorblack;
 			font-size:15px;
 			padding: 10px;
+				&:hover{
+					color:@colorblack;
+				}
 		}
 		> .description{
 			height:110px;
@@ -226,7 +249,7 @@ border-bottom:1px solid @lightcolor;
 			}
 	}
 }	
-h1{
+h1,h2{
 		font-size:25px;
 		padding:20px 0px 10px 10px;
 	    color:@colorwhite;
@@ -235,7 +258,7 @@ h1{
 			&:hover{
 				color:@colorblack;
 			}
-}	
+}
 .sidebarModule.enquiry {
 		margin-top: 20px;
 	}
@@ -245,12 +268,16 @@ h1{
 
 h3.subhead {
 		color:@colorwhite;
-		font-size:20px;
-		padding:10px 4px 2px 100px;
-		background: @colorblack;
-		height: 45px;
+		font-size:25px;
+		padding:15px 0px 2px 58px;
+		background: linear-gradient(90deg, @darkcolor, @lightcolor);
+		height: 58px;
 		width: 295px;
 		border-radius:5px;
+		text-transform:uppercase;
+			&:hover{
+				color:@colorblack;
+			}
 	}
 .panel.panel-default {
 		width: 295px;
@@ -282,10 +309,72 @@ h3.subhead {
 		}
 	}	
 	
+@media (max-width: 320px){
+	.log1{
+	background:@bg1;
+	background-repeat:no-repeat;
+	background-size:100%;
+	border-bottom:8px solid @lightcolor;
+	height:280px;
+	}
+	.logo {
+		width: 100px;
+		height: 60px;
+		margin: 0px 0px 25px 17px;
+	}
+	.activity{ 
+		h3 {
+			padding-top: 15px;
+		}	
+	}
+}
 	
-	
-	
-	
+
+@media (min-width: 321px) and(max-width: 768px){
+	.log1{
+	background:@bg1;
+	background-repeat:no-repeat;
+	background-size:100%;
+	border-bottom:8px solid @lightcolor;
+	height:280px;
+	}
+	.logo {
+		width: 100px;
+		height: 60px;
+		margin: 0px 0px 25px 17px;
+	}
+	.activity{ 
+		h3 {
+			padding-top: 15px;
+		}	
+	}
+
+}	
+@media (min-width: 769px) and(max-width: 992px){
+	.log1{
+	background:@bg1;
+	background-repeat:no-repeat;
+	background-size:100%;
+	border-bottom:8px solid @lightcolor;
+	height:658px;
+	}
+	.logo {
+		width: 200px;
+		height: 200px;
+		margin: 0px 0px 25px 17px;
+	}
+	#carousel {
+		z-index: 3;
+		bottom: 20px;
+		height: 280px;
+	}
+	.activity{ 
+		h3 {
+			padding-top: 20px;
+		}	
+	}
+
+}	
 	
 	
 	
@@ -323,50 +412,5 @@ h3.subhead {
 	
 
 	
-@media (max-width: 320px){
-	.logo{
-		width: 100px;
-		height: 80px;
-	}	
-	.sidebarModule.contactus {
-		height: 500px;
-		padding-top: 28px;
-	}
-	.back2{
-		background-position: 10% 60%;
-	}
-}
-@media (min-width: 321px) and(max-width: 768px){
-	.logo{
-			width: 140px;
-			height: 100px;
-		}	
-	.sidebarModule.contactus {
-			height: 500px;
-			padding-top: 28px;
-		}
-	.back2{
-			background-position: 10% 60%;
-		}
-	.panel.panel-default {
-		width:352px;
-	}
-	.contactus > .sections {
-		border: 1px solid #4f3b09;
-		border-radius: 4px;
-		padding: 10px;
-		width: 352px;
-	}
-	h3.subhead {
-		color: #ffffff;
-		font-size: 20px;
-		padding: 5px 4px 2px 75px;
-		background: linear-gradient(90deg, #000000, #1b1b1b);
-		height: 37px;
-		width: 352px;
-		border-radius: 5px;
-		margin-top: 2px;
-	}
 
-}
 */

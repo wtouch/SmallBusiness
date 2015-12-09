@@ -6,14 +6,31 @@
 </div>
 <div class="modal-body">{{modalOptions.paysalary}}
 <form class="form-horizontal" name="paysalaryForm" role="form" ng-submit="paysalaryForm.$valid" novalidate="novalidate">
+		<div class="form-group">
+			<label for="account" class="col-sm-2 control-label">Account Name*</label>
+			<div class="col-sm-9">
+				<select id="account" class="form-control" ng-change="modalOptions.getBalance(modalOptions.paysalary.account_id, modalOptions)" ng-init="modalOptions.getData(false,false,'account','accountList', false, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.paysalary.account_id" >
+				<option value="">Select Account</option>
+				</select>
+				<span class="help-block" ng-show="paysalaryForm.account.$dirty && paysalaryForm.account.$invalid">
+					<span ng-show="paysalaryForm.account.$error.required" class="text-danger">required field.</span>
+				</span>	
+			</div>
+		</div>
+		<div class="form-group" ng-if="modalOptions.previous_balance">
+			<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
+			<div class="col-sm-9">
+				<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" readonly class="form-control"/>			
+			</div>
+		</div>
 			<div class="form-group">
-					<label for="gross_salary" class="col-sm-2 control-label">Gross Salary</label>
+					<label for="salary" class="col-sm-2 control-label">Gross Salary</label>
 					<div class="col-sm-9">
-						<input ng-disabled="readOnly" type="text" id="gross_salary" name="gross_salary" class="form-control" ng-model="modalOptions.paysalary.gross_salary" placeholder="Enter Gross Salary " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" required>
-						<span class="help-block" ng-show="paysalaryForm.gross_salary.$dirty && paysalaryForm.gross_salary.$invalid">
-							<span ng-show="paysalaryForm.gross_salary.$error.pattern && (paysalaryForm.gross_salary.$dirty || submitted)" class="text-danger">please enter number</span>
+						<input ng-disabled="readOnly" type="text" id="salary" name="salary" class="form-control" ng-model="modalOptions.paysalary.salary" placeholder="Enter Gross Salary " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" required>
+						<span class="help-block" ng-show="paysalaryForm.salary.$dirty && paysalaryForm.salary.$invalid">
+							<span ng-show="paysalaryForm.salary.$error.pattern && (paysalaryForm.salary.$dirty || submitted)" class="text-danger">please enter number</span>
 						</span>
-					</div>						
+					</div>
 			</div>
 			<div class="form-group">
 					<label for="working_day" class="col-sm-2 control-label">Working Days</label>
@@ -37,7 +54,7 @@
 			<div class="form-group">
 					<label for="unpaid_leaves" class="col-sm-2 control-label">Unpaid Leaves</label>
 					<div class="col-sm-9">
-						<input ng-disabled="readOnly" type="text" id="unpaid_leaves" name="unpaid_leaves" class="form-control" ng-model="modalOptions.paysalary.unpaid_leaves" placeholder="Enter Unpaid" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" required>
+						<input type="text" id="unpaid_leaves" name="unpaid_leaves" class="form-control" ng-model="modalOptions.paysalary.unpaid_leaves" placeholder="Enter Unpaid" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" ng-change="modalOptions.payableDays(modalOptions)" required>
 						<span class="help-block" ng-show="paysalaryForm.unpaid_leaves.$dirty && paysalaryForm.unpaid_leaves.$invalid">
 							<span ng-show="paysalaryForm.unpaid_leaves.$error.pattern && (paysalaryForm.unpaid_leaves.$dirty || submitted)" class="text-danger">please enter number</span>
 						</span>
@@ -46,7 +63,7 @@
 			<div class="form-group">
 					<label for="payable_day" class="col-sm-2 control-label">Payable Days</label>
 					<div class="col-sm-9">
-						<input ng-disabled="readOnly" type="text" id="payable_day" name="payable_day" class="form-control" ng-model="modalOptions.paysalary.payable_day" placeholder="Enter Payable days" ng-pattern="/^\d{0,9}[0-9]$/"  ng-change="totalSalary(modalOptions.paysalary)" maxlength="10" required>
+						<input type="text" id="payable_day" name="payable_day" class="form-control" ng-model="modalOptions.paysalary.payable_day" placeholder="Enter Payable days" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="10" required>
 						<span class="help-block" ng-show="paysalaryForm.payable_day.$dirty && paysalaryForm.payable_day.$invalid">
 							<span ng-show="paysalaryForm.payable_day.$error.pattern && (paysalaryForm.payable_day.$dirty || submitted)" class="text-danger">please enter number</span>
 						</span>
@@ -55,7 +72,7 @@
 			<div class="form-group">
 					<label for="cms" class="col-sm-2 control-label">Current Month Salary</label>
 					<div class="col-sm-9">
-						<input ng-disabled="readOnly" type="text" id="cms" name="cms" class="form-control" ng-model="modalOptions.paysalary.cms" placeholder="" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" readOnly required>
+						<input type="text" id="cms" name="cms" class="form-control" ng-model="modalOptions.paysalary.cms" placeholder=""  required>
 						<span class="help-block" ng-show="paysalaryForm.cms.$dirty && paysalaryForm.cms.$invalid">
 							<span ng-show="paysalaryForm.cms.$error.pattern && (paysalaryForm.cms.$dirty || submitted)" class="text-danger">please enter number</span>
 						</span>
@@ -76,7 +93,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						
+						<tr>
+						<td>{{modalOptions.paysalary.basic}}</td>
+						<td>{{modalOptions.paysalary.da}}</td>
+						<td>{{modalOptions.paysalary.hra}}</td>
+						<td>{{modalOptions.paysalary.cca}}</td>
+						<td>{{modalOptions.paysalary.conveyance}}</td>
+						<td>{{modalOptions.paysalary.total}}</td>
+						</tr>
 					</tbody>
 				</table>
 	
@@ -95,7 +119,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						
+						<tr>
+						<td>{{modalOptions.paysalary.pf}}</td>
+						<td>{{modalOptions.paysalary.esic}}</td>
+						<td>{{modalOptions.paysalary.pt}}</td>
+						<td>{{modalOptions.paysalary.td}}</td>
+						</tr>
 					</tbody>
 				</table>
 					</div>						
@@ -103,9 +132,8 @@
 			<div class="form-group">
 					<label for="nsp" class="col-sm-2 control-label">Net Salary Payable</label>
 					<div class="col-sm-9">
-						<input ng-disabled="readOnly" type="text" id="nsp" name="nsp" class="form-control" ng-model="modalOptions.paysalary.nsp" placeholder="" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" readOnly required>
+						<input type="text" id="nsp" name="nsp" class="form-control" ng-model="modalOptions.paysalary.nsp" placeholder=""  maxlength="10" readOnly required>
 						<span class="help-block" ng-show="paysalaryForm.nsp.$dirty && paysalaryForm.nsp.$invalid">
-							<span ng-show="paysalaryForm.nsp.$error.pattern && (paysalaryForm.nsp.$dirty || submitted)" class="text-danger">please enter number</span>
 						</span>
 					</div>						
 			</div>

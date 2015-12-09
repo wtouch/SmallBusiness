@@ -22,27 +22,26 @@
 	<body>
 		
 	<header>
-		<div class="container-fluid">
-		<nav class="navbar navbar-default ">
-			<div class="col-xs-12 col-md-2 ">
-				<img class="logo" src="{{data.business_logo.file_relative_path}}">
-			</div>
-			<div class="col-xs-12 col-md-10 ">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div> 
-			
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav nav-justified">
+		<div class="container">
+			<nav class="navbar navbar-default ">
+				<div class="col-xs-12 col-md-2 ">
+					<img class="logo" src="{{data.business_logo.file_relative_path}}">
+				</div>
+				<div class="col-xs-12 col-md-10 ">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div> 
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-right">
 							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 						</ul>
+					</div>
 				</div>
-			</div>
 			</nav>
 		</div> 
 	
@@ -53,11 +52,21 @@
 			{%endif%}	
 		</div>
 		<div class="container">
-			<div class="row">
+				<!-- <figure><img src="http://lorempixel.com/186/116/nature/1" alt=""></figure>
+				<figure><img src="http://lorempixel.com/186/116/nature/2" alt=""></figure>
+				<figure><img src="http://lorempixel.com/186/116/nature/3" alt=""></figure>
+				<figure><img src="http://lorempixel.com/186/116/nature/4" alt=""></figure>
+				<figure><img src="http://lorempixel.com/186/116/nature/5" alt=""></figure>
+				<figure><img src="http://lorempixel.com/186/116/nature/6" alt=""></figure>
+				<figure><img src="http://lorempixel.com/186/116/nature/7" alt=""></figure>
+				<figure><img src="http://lorempixel.com/186/116/nature/8" alt=""></figure>
+				<figure><img src="http://lorempixel.com/186/116/people/9" alt=""></figure> -->
 				{%if modules.contentModule.featured_products %}
-					{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-				{%endif%}
-			</div>
+				{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+			{%endif%}
+			
+		</div>
+		<div class="container">
 			<div class="row">
 				{% include contentPath %}
 			</div>
@@ -66,29 +75,19 @@
 					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 				{%endif%}
 			</div>
-		</div> 
+		</div>
 		
-		<div class="container-fluid">
-		<nav class="navbar navbar-default nav-footer">
-			<div class="col-xs-12 col-md-10 ">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div> 
-			
+		<nav class="navbar  nav-footer">
+			<div class="container">
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav nav-justified">
+					<ul class="nav navbar-nav ">
 							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-						</ul>
+					</ul>
 				</div>
-			</div>
-			</nav>
-		</div> 
-		<footer >
+			</div> 
+		</nav>
+		
+		<footer>
 			{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 		</footer>
 	</div>	
