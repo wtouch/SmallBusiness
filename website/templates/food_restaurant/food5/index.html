@@ -26,8 +26,8 @@
 					<img class="logo" src="{{data.business_logo.file_relative_path}}">
 				</div>
 				<div class="col-sm-4 col-xs-12 header1">
-				<h1>{{data.business_name}}:</h1>
-				<h3>{{data.contact_profile.contact_person}}</h3>
+				<h4>{{data.business_name}}:</h4>
+				<h4>{{data.contact_profile.contact_person}}</h4>
 				</div>
 			</div>
 	</header>
@@ -50,7 +50,6 @@
 			</nav>
 		</div>
 	</div>
-		<div class="ak">
 			<div class="container">
 						{%if modules.headerModule.carousal %}
 						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
@@ -60,14 +59,19 @@
 							{% include [templatePath ~ '/includes/sidemenu.html', 'default/default/includes/sidemenu.html'] %}
 						</div>
 					{%endif%}
-					<div class="content {{modules.sidebarModule.sidemenu ? 'col-sm-9 col-md-9':'col-sm-12 col-md-12'}}">
-						 {% include contentPath %}
+					
+					<div class=" {{modules.sidebarModule.sidemenu ? 'col-sm-9 col-md-9':'col-sm-12 col-md-12'}}">
+						<div class="content">
+							 {% include contentPath %}
+						</div>
+						<div class="content1">
+						{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+						</div>
 					</div>
-				</div>
-		</div>
-		<footer  class="pk">
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-		</footer>
+				
+			</div>
+		
+		
 	</body>
 </html>
 {% endspaceless %}
