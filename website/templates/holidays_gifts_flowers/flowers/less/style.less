@@ -17,10 +17,10 @@
 
 
 @color : #fa6903; //dark chocalate
-@lightcolor :rgb(128, 0, 0); //color
+@lightcolor :#FFA500; //color
 @darkcolor : #363333;//nav ul color
 @back : #729d04;
-@darkbackcolor : #435e01; //darkcolor black nav
+@darkbackcolor : #FFFF00; //darkcolor black nav
 @lightbackcolor :#e89d03;//no use
 @colorblack : #000000;
 @colorwhite	: #ffffff;
@@ -29,24 +29,17 @@
 @import "product.less";
 @import "general.less";
 
-
-
-
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
-    background-color: #fff;
+    background-color: @colorwhite;
 }
 			header{
-				
 				background-image:url('../img/mains.jpg');
-				height:900px;
 				width:100%;
 				background-size:100% 100%;
-				
-		
 			}
 			img.logo{
 					height:100px;
@@ -58,47 +51,48 @@ body {
 	.navbar-default {
 		background-image:url('../img/main.jpg');
 		background-size:100% 100%;
-		margin-bottom:-1px;
 		border:none;
+		top:-13px;
+		height:90px;
 		
 		.navbar-nav{
 			> li{
-				padding:-5px;
-				float:none;
-				margin-bottom:0px;
-				position : relative;
+				float: none;
+				margin-bottom: 0px;
+				position: relative;
+				padding: 0px 10px 10px;
 				> a {
-				
 					display: block;
 					font: 20px "Arial";
-					height: 21px;
-					padding: 24px 8px 14px 32px;
 					color : @colorwhite;
 					position:relative;
-			
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					background:none;
-					//color : @lightcolor;
-					//background-image:url('../img/hover.png');
-					background-image:url('../img/hover1.png');
-					height:100%;
-					width:100%;
-					background-repeat: no-repeat;
-			
-				}
-				&.active > a::before, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
-					background:none;
-					//color : @lightcolor;
-					background-image:url('../img/hover.png');
-					//background-image:url('../img/hover1.png');
-					height:100%;
-					width:100%;
-					background-repeat: no-repeat;
-					position:absolute;
+					background-color : @color;
+					color : @colorblack;
+					border-bottom-left-radius : 8px;
+					border-bottom-right-radius : 8px;
+					top: -10px;
+					padding-top: 34px;
 					right:20px;
-					
-			
+					background-image:-webkit-linear-gradient(bottom, @lightcolor 70%,@darkbackcolor) ;
+				}
+				&.active > a::after, &.active:hover > a::after, &.active > a:focus::after, &:hover > a::after, &:hover > a:focus::after
+				{
+					content: '';
+					position: absolute;
+					right: -8px;
+					top: 0px;
+					border-bottom: 6px solid @lightcolor;
+					border-left: 4px solid @lightcolor;
+					border-right: 4px solid transparent;
+					border-top: 4px solid transparent;
+					background-image:-webkit-linear-gradient(bottom, @lightcolor 70%,@darkbackcolor) ;
+				}
+				
+				
+				&:hover a::before, &:first-child a::before, &.active > a::before{
+					display : none;
 				}
 				
 				
@@ -120,7 +114,7 @@ body {
 						>a{
 							color : @colorwhite;
 							&:hover{
-								color : @darkbackcolor;
+								color : @back;
 								text-decoration: none; 
 							}
 						}
@@ -141,10 +135,7 @@ body {
 				}
 			}
 		}
-		.navbar-collapse{
-				margin-left: 137px;
-					margin-right: 137px;
-		}
+		
 	}
 		
 .homeAboutus {
@@ -161,34 +152,46 @@ body {
     background-image:url('../img/controls.jpg')
 	no-repeat -43px -32px;
 }
-h3{
+h2,  h3, {
 	color: @back;
     font-size: 18px;
     font-weight: normal;
     margin: 0;
-    padding-left: 30px;
+    //padding-left: 30px;
     padding-top: 25px;
     text-transform: capitalize;
 }
+h4, .h4 {
+			font-size: 18px;
+			color: @back;
+		}
 .btn-info {
-    color: #fff;
+    color: @colorwhite;
     background-color: @back;
-    border-color: @back;
+    border:1px solid @back;
+	border-radius: 100%;
 	
 	&:hover{
 		background-color:@lightbackcolor;
-		border:none;
+		 border:1px solid transparent;
 	}
 }
-.serv{
-	overflow: hidden;
-    padding-bottom: 10px;
-    margin-top: 30px;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 10px;
-    background: #fcfcfc;
-    padding: 0;
-    border-color: #FFFFFF #F5F5F5 #E5E5E5;
-	height: 166px;
-}
+
+
+footer{
+		font-size: 11px;
+		line-height: 19px;
+		text-align: left;
+		text-transform: uppercase;
+		margin-top: 80px;
+		color:@back;
+		
+		a {
+			color: @back;
+			text-decoration: none;
+			a:hover, a:focus {
+			color: @back ! important;
+			text-decoration: underline;
+			}
+		}		
+	}

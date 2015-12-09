@@ -13,7 +13,7 @@
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
-		<script src="{{ path }}js/anim.js"></script> 
+		
 		<script src="{{ path }}js/script.js"></script> 
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
@@ -21,48 +21,48 @@
 	</head>
 	<body>
 		<header>
-			<img class="logo" src="{{data.business_logo.file_relative_path}}">
-	
-		<nav class="navbar navbar-default ">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div> 
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<div class="container">
-						<ul class="nav navbar-nav  nav nav-justified">
-							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-						</ul>
+		<img class="logo" src="{{data.business_logo.file_relative_path}}"> 
+			<nav class="navbar navbar-default ">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+					</div> 
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<div class="container">
+							<ul class="nav navbar-nav  nav nav-justified">
+								{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+							</ul>
+						</div>
 					</div>
-				</div>
-		</nav>
-		<div class="container">
-		
-			{%if modules.headerModule.carousal %}
-						{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-						{%endif%}
+			</nav>
+			<div class="container">
+				{%if modules.headerModule.carousal %}
+					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+				{%endif%}
+				
 						
-				{% include contentPath %}
-			<div class="serv">	
-				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-				{% include contentPath%} 
 			</div>
-			<div class="produt">	
-							{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-
-			</div>
-		</div>
 		</header>
-		
-			
-	
-		{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-	
-
+			<div class="container">
+				{% include contentPath %}
+				
+					
+						{% if modules.contentModule.featured_services %}
+								{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
+							{% endif %}
+					
+						{% if modules.contentModule.featured_products %}
+								{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+							{% endif %}
+					
+					
+			</div>
+		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+ 
 	</body>
 </html>
 {% endspaceless %}
