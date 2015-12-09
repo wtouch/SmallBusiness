@@ -138,8 +138,14 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		
 	});
 	
-	$(document).ready(function(){
+	 $(document).ready(function(){
 		if(location.pathname == "/" ){
-			$("header").height(580);
+			/* $("header").height(580); */
+			$("header").removeClass('log');
+			$("header").addClass('log1');
 		}
-	});
+		else{
+			$("header").removeClass('log1');
+			$("header").addClass('log');
+		}
+	}); 

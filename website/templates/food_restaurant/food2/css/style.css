@@ -658,9 +658,21 @@
   background-color: #ba8c5f;
   border: 2px solid #4f3b09;
 }
+.row.singleproduct {
+  padding: 66px;
+}
+.row.singleproduct .thumbnail {
+  border: 1px solid #a78057;
+}
+.row.singleproduct .thumbnail > img {
+  height: 200px;
+}
+.row.singleproduct .thumbnail:hover {
+  border: 4px solid #a78057;
+}
 @media (max-width: 320px) {
   .products .thumbnail .readmore {
-    margin-top: 0px;
+    margin-top: -35px;
     text-align: center;
   }
   .feature::before {
@@ -740,6 +752,15 @@
 .gallery p {
   padding-left: 25px;
   padding-right: 25px;
+}
+.about p strong {
+  padding: 10px;
+  color: #a78057;
+  font-size: 25px;
+}
+.about h4 {
+  padding-left: 20px;
+  color: #4f3b09;
 }
 .gallery {
   padding-left: 20px;
@@ -886,6 +907,13 @@ body {
   border-bottom: 8px solid #a78057;
   height: 230px;
 }
+.log1 {
+  background: url(../img/bg1.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border-bottom: 8px solid #a78057;
+  height: 580px;
+}
 .logo {
   width: 200px;
   height: 150px;
@@ -894,7 +922,12 @@ body {
 .content {
   background-color: #ffffff;
   animation-name: example;
-  animation-duration: 1s;
+  animation-duration: 4s;
+  position: relative;
+}
+.content > .rowcontent {
+  animation-name: example1;
+  animation-duration: 4s;
   position: relative;
 }
 @keyframes example {
@@ -905,6 +938,16 @@ body {
   100% {
     position: relative;
     right: 0px;
+  }
+}
+@keyframes example1 {
+  0% {
+    position: relative;
+    left: 2000px;
+  }
+  100% {
+    position: relative;
+    left: 0px;
   }
 }
 .sociallinks ul {
@@ -1057,14 +1100,16 @@ body {
   background-color: #4f3b09;
   color: #ffffff;
 }
-h1 {
+h1,
+h2 {
   font-size: 25px;
   padding: 20px 0px 10px 10px;
   color: #ffffff;
   background: linear-gradient(90deg, #4f3b09, #a78057);
   text-transform: uppercase;
 }
-h1:hover {
+h1:hover,
+h2:hover {
   color: #000000;
 }
 .sidebarModule.enquiry {
@@ -1120,4 +1165,60 @@ footer p {
 footer a,
 footer a:hover {
   color: #1b1b1b;
+}
+@media (max-width: 320px) {
+  .log1 {
+    background: url(../img/bg1.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-bottom: 8px solid #a78057;
+    height: 280px;
+  }
+  .logo {
+    width: 100px;
+    height: 60px;
+    margin: 0px 0px 25px 17px;
+  }
+  .activity h3 {
+    padding-top: 15px;
+  }
+}
+@media (min-width: 321px) and (max-width: 768px) {
+  .log1 {
+    background: url(../img/bg1.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-bottom: 8px solid #a78057;
+    height: 280px;
+  }
+  .logo {
+    width: 100px;
+    height: 60px;
+    margin: 0px 0px 25px 17px;
+  }
+  .activity h3 {
+    padding-top: 15px;
+  }
+}
+@media (min-width: 769px) and (max-width: 992px) {
+  .log1 {
+    background: url(../img/bg1.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-bottom: 8px solid #a78057;
+    height: 658px;
+  }
+  .logo {
+    width: 200px;
+    height: 200px;
+    margin: 0px 0px 25px 17px;
+  }
+  #carousel {
+    z-index: 3;
+    bottom: 20px;
+    height: 280px;
+  }
+  .activity h3 {
+    padding-top: 20px;
+  }
 }
