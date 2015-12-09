@@ -171,7 +171,8 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			var modalOptions = {
-				staffdate:{date : $scope.currentDate},
+				staffdate:dataService.sqlDateFormate(),
+				doj:dataService.sqlDateFormate(),
 				department: $scope.staffConfig,
 				staff_type: $scope.staffConfig,
 				date:{date : $scope.currentDate},
@@ -181,6 +182,8 @@ define(['app'], function (app) {
 					surname : data.surname,
 					email : data.email,
 					phone: data.phone,
+					doj:data.doj,
+					confirmation_date:data.confirmation_date,
 					staff_type:data.staff_type,
 					address: data.address,
 					location: data.location,
@@ -230,7 +233,7 @@ define(['app'], function (app) {
 						where : {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
-							staff_id : data.id
+						
 						},
 						cols : ["*"]
 					},
@@ -238,7 +241,7 @@ define(['app'], function (app) {
 						where : {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
-							staff_id : data.id
+							
 						},
 						cols : ["*"]
 					}
@@ -297,6 +300,23 @@ define(['app'], function (app) {
 					modified_date : dataService.sqlDateFormate(),user_id : $rootScope.userDetails.id,
 					status:1
 				},
+				
+					getBalance : function(accountId, modalOptions) {
+					//console.log(accountId, modalOptions);
+					var accountParams = {
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status : 1,
+							account_id : accountId
+						},
+						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
+					}
+					dataService.get(false,'transaction', accountParams).then(function(response) {
+						console.log(response);
+						modalOptions.previous_balance = response.data[0].previous_balance;
+					})
+					
+				},
 				payableDays : function(modalOptions){
 					var obj = modalOptions.paysalary;
 					console.log(obj.working_day, obj.paid_leaves, obj.unpaid_leaves);
@@ -351,17 +371,27 @@ define(['app'], function (app) {
 							$scope.transData  = {};
 							$scope.transData.user_id=input.user_id;
 							$scope.transData.modified_date=input.modified_date;
+							$scope.transData.date=input.date;
+							$scope.transData.balance=input.balance;
+							$scope.transData.account_id=input.account_id;
 							$scope.transData.debit_amount = input.nsp;
 							$scope.transData.type=input.type;
 							$scope.transData.reference_id=input.staff_id;
-							
-						
-							
+							$scope.transData.description={
+								basic : input.basic,
+								da :input.da,
+								hra:input.hra,
+								esic:input.esic,
+								pf:input.pf,
+								pt:input.pt,
+								conveyance:input.conveyance,
+								total:input.total
+							};
 							console.log($scope.transData);
 							$rootScope.postData("transaction", $scope.transData,function(response){
 							});
 						},
-				
+					
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 				
@@ -387,11 +417,18 @@ define(['app'], function (app) {
 						
 				}, 
 				getData:$scope.getData,	
-			
+				holidayParams : {
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+							
+						},
+						cols : ["*"]
+					},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							
+								
 						}
 					})
 				},

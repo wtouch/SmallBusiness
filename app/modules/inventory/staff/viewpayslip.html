@@ -6,6 +6,23 @@
 </div>
 <div class="modal-body">{{modalOptions.paysalary}}
 <form class="form-horizontal" name="paysalaryForm" role="form" ng-submit="paysalaryForm.$valid" novalidate="novalidate">
+		<div class="form-group">
+			<label for="account" class="col-sm-2 control-label">Account Name*</label>
+			<div class="col-sm-9">
+				<select id="account" class="form-control" ng-change="modalOptions.getBalance(modalOptions.paysalary.account_id, modalOptions)" ng-init="modalOptions.getData(false,false,'account','accountList', false, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.paysalary.account_id" >
+				<option value="">Select Account</option>
+				</select>
+				<span class="help-block" ng-show="paysalaryForm.account.$dirty && paysalaryForm.account.$invalid">
+					<span ng-show="paysalaryForm.account.$error.required" class="text-danger">required field.</span>
+				</span>	
+			</div>
+		</div>
+		<div class="form-group" ng-if="modalOptions.previous_balance">
+			<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
+			<div class="col-sm-9">
+				<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" readonly class="form-control"/>			
+			</div>
+		</div>
 			<div class="form-group">
 					<label for="salary" class="col-sm-2 control-label">Gross Salary</label>
 					<div class="col-sm-9">
