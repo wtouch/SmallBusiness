@@ -12,13 +12,12 @@
 	{% for key, value in sliderData %}
 		<div class="item {{ (key == 0) ? 'active' }}">
 		  <img class="img-responsive" src="{{value.image ? value.image : value is iterable ? value.file_relative_path : value}}" alt="{{value.title}}">
-		  
+		  {% if value.title %}
 		  <div class="carousel-caption">
-			
-			<p1>{{value.description}}
-			<span class="glyphicon glyphicon-arrow-right right1"></span></p1>
+			<h1>{{value.title}}</h1>
+			<h3>{{value.description}}</h3>
 		  </div>
-		
+		  {% endif %}
 		</div>
 	{% endfor %}
   </div>
