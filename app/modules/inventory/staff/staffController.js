@@ -152,8 +152,9 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} ,
-					cellTemplate : '<a ng-click="grid.appScope.openSalary(\'modules/inventory/staff/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="Salary" > <span class="	glyphicon glyphicon-usd" ></span></a>'
-					
+					cellTemplate : '<a ng-click="grid.appScope.openSalary(\'modules/inventory/staff/salary.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="Salary" > <span class="	glyphicon glyphicon-usd" ></span></a>'
+					+
+					'<a ng-click="grid.appScope.openPayslip(\'modules/inventory/staff/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="viewpayslip" > <span class="glyphicon glyphicon-eye-open" ></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 					/* +'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="View Staff"><span class="glyphicon glyphicon-eye-open"></span></a>' */
@@ -253,6 +254,29 @@ define(['app'], function (app) {
 			})
 			
 		}
+		
+			$scope.openPayslip = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+				viewPayslip :data,
+					getData : $scope.getData,
+				salaryParams : {
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+							
+						},
+						cols : ["*"]
+					}
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
+		
 		$scope.openstaffattendance = function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
@@ -300,7 +324,7 @@ define(['app'], function (app) {
 					modified_date : dataService.sqlDateFormate(),user_id : $rootScope.userDetails.id,
 					status:1
 				},
-				
+			
 					getBalance : function(accountId, modalOptions) {
 					//console.log(accountId, modalOptions);
 					var accountParams = {
@@ -417,7 +441,7 @@ define(['app'], function (app) {
 						
 				}, 
 				getData:$scope.getData,	
-				holidayParams : {
+				holidayParams :{
 						where : {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
@@ -473,7 +497,7 @@ define(['app'], function (app) {
 				
 			})
 		}
-			$scope.openStaffpayment= function(url,data){
+		$scope.openStaffpayment= function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
@@ -523,6 +547,20 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 				
 			})
+		}
+		$scope.holidayParams ={
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+							
+						},
+						cols : ["*"]
+					}
+			$scope.setTransactionDate = function(transfer){
+			$scope.holidayParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
+			+"'"];
+			console.log($scope.holidayParams);
+			$scope.getData(false, $scope.currentPage, "staffholidays", "holidayList", $scope.holidayParams);
 		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
@@ -575,7 +613,32 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
-		
+		$scope.calcDuration = function(type, duration){
+			console.log(type, duration);
+			var curDate = new Date();
+			
+			if(type == 'monthly'){
+				duration = parseInt(duration);
+				var today = new Date();
+				var start = new Date(today.getFullYear(), (duration - 1), 1);
+				var endt = new Date(today.getFullYear(), (duration - 1) + 1, 0);
+				
+				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
+				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate() + 1);
+			}
+			if(type == 'year'){
+				duration = parseInt(duration);
+				var today = new Date();
+				var start = new Date(duration, 3, 1);
+				var endt = new Date(duration + 1, 3, 1);
+				
+				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
+				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate());
+			}
+			var setDate={ "fromDate" : startDt,"toDate" : endtDt}
+			$scope.setTransactionDate(setDate);
+			
+		}
 	 };
 	// Inject controller's dependencies
 	staffController.$inject = injectParams;
