@@ -3,7 +3,7 @@
   src: url('../fonts/DensiaSans.otf');
 }
 .featured_services {
-  background-color: #eef0ed;
+  background-color: #c3440f;
 }
 .featured_services h3 {
   text-align: center;
@@ -24,9 +24,26 @@
 .featured_services .bxslider .servdesc .description p {
   display: none;
 }
-.featured_product .product_div .caption {
+.prod .featured_product .product_div {
+  border: 2px dotted #c3440f;
+  margin-bottom: 10px;
+}
+.prod .featured_product .product_div h4 {
+  text-align: center;
+}
+.prod .featured_product .product_div a {
+  margin-left: 10px;
+  color: #fcc200;
+}
+.prod .featured_product .product_div .servimage {
+  padding: 5px;
+}
+.prod .featured_product .product_div .caption {
   height: 65px;
   overflow: hidden;
+  margin-left: 5px;
+  text-align: center;
+  padding: 1px;
 }
 .carousel-indicators {
   display: none;
@@ -45,15 +62,28 @@
   min-height: 440px;
   width: 100%;
 }
-.gallery .thumbnail img {
-  width: 100%;
-  border: 2px dotted #eef0ed;
-  padding: 10px;
+.gallery .thumbnail {
+  /*height:232px;
+				margin-bottom: 60px !important;*/
 }
-.gallery .thumbnail .caption .description {
+.gallery .thumbnail .glry {
+  background-color: #ffffff;
+  height: 225px;
+  width: 225px;
   overflow: hidden;
-  height: 160px;
-  display: none;
+  margin: 0 auto;
+}
+.gallery .thumbnail .glry img {
+  min-height: 211px;
+  width: 100%;
+  border: 2px solid transparent;
+  padding: 4px;
+  float: left;
+  -webkit-transition-duration: 0.5s;
+}
+.gallery .thumbnail .glry img:hover {
+  -webkit-transform: scale(0.9);
+  -webkit-box-shadow: 0px 0px 60px #c3440f;
 }
 .testimonial blockquote,
 .featrtesti blockquote {
@@ -65,10 +95,14 @@
   background: none;
   padding: 0px;
 }
+.testimonial blockquote footer img,
+.featrtesti blockquote footer img {
+  width: 100%;
+}
 .testimonial blockquote footer cite,
 .featrtesti blockquote footer cite {
   font-size: 17px;
-  color: #eef0ed;
+  color: #8f6d48;
 }
 .testimonial blockquote::before,
 .featrtesti blockquote::before {
@@ -82,62 +116,100 @@
 }
 .testimonial blockquote .description p,
 .featrtesti blockquote .description p {
-  color: #eef0ed;
+  color: #8f6d48;
 }
 .testimonial blockquote .description .caption p,
 .featrtesti blockquote .description .caption p {
-  color: #eef0ed;
+  color: #8f6d48;
 }
 .jobs .panel-default {
-  background-color: #02071a;
-}
-.jobs .panel-default h3 {
-  color: rgba(159, 24, 2, 0.8);
+  background-color: #fcc200;
 }
 .jobs .panel-default .description p {
   color: #ffffff;
+}
+.panel-default {
+  background-color: #fcc200;
+}
+.products .thumbnail .caption {
+  overflow: hidden;
+  height: 153px;
+}
+.products .thumbnail .readmore {
+  text-align: center;
+}
+.products .thumbnail .readmore a {
+  background-color: #fcc200;
+  border-color: #fcc200;
+}
+.enquiry .panel-default {
+  background-color: #fcc200;
 }
 body {
   background-image: url('../img/honey_bg.jpg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-.navbar {
-  border-radius: 1px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #6a0701;
 }
-.container .navbar-default {
-  border-radius: 20px 20px 5px 5px;
-  background: linear-gradient(90deg, rgba(159, 24, 2, 0.8), rgba(109, 8, 0, 0.9), rgba(159, 24, 2, 0.8), rgba(159, 24, 2, 0.8), rgba(109, 8, 0, 0.9), rgba(159, 24, 2, 0.8));
+.navbar-default {
+  position: relative;
+  background: linear-gradient(90deg, #a41a00, #6a0701, #a41a00, #6a0701, #a41a00, #6a0701, #a41a00);
   margin-top: 35px;
   margin-bottom: 0px;
+  height: 78px;
 }
-.container .navbar-default .navbar {
-  height: 50px;
+.navbar-default::before {
+  position: absolute;
+  z-index: 99;
+  background-image: url('../img/nav_before.png');
+  height: 100px;
+  width: 15px;
+  left: -14px;
+  content: '';
+  image-repeat: no-repeat;
+  margin-top: -1px;
 }
-.container .navbar-default .navbar-nav > li {
+.navbar-default::after {
+  position: absolute;
+  z-index: 99;
+  background-image: url('../img/nav_after.png');
+  height: 100px;
+  width: 15px;
+  right: -15px;
+  image-repeat: no-repeat;
+  margin-top: -73px;
+}
+.navbar-default .navbar-nav > li {
   margin-top: 10px;
   padding-left: 10px;
   font-size: 100%;
   text-transform: uppercase;
 }
-.container .navbar-default .navbar-nav > li a {
+.navbar-default .navbar-nav > li a {
   color: #fcc200;
   font-family: 'Georgia';
   font-size: 15px;
 }
-.container .navbar-default .navbar-nav > li a:hover {
+.navbar-default .navbar-nav > li a:hover {
   background-color: #fcc200 !important;
   color: #ffffff !important;
   font-family: 'Georgia';
   font-size: 15px;
   border-radius: 5px;
 }
-.container .navbar-default .navbar-nav > li.active > a,
-.container .navbar-default .navbar-nav > li.active:focus > a {
+.navbar-default .navbar-nav > li.active > a,
+.navbar-default .navbar-nav > li.active:focus > a {
   background-color: #8f6d48;
   border-radius: 20px;
 }
-.container .navbar-default .navbar-nav > li > ul {
+.navbar-default .navbar-nav > li > ul {
   display: none;
   position: absolute;
   width: 160px;
@@ -149,36 +221,49 @@ body {
   top: 49px;
   transition: all 500ms ease-in-out;
 }
-.container .navbar-default .navbar-nav > li > ul > li {
+.navbar-default .navbar-nav > li > ul > li {
   padding-top: 11px;
   height: 43px;
   background-color: #02071a;
 }
-.container .navbar-default .navbar-nav > li > ul > li:hover {
+.navbar-default .navbar-nav > li > ul > li:hover {
   background-color: #c3440f;
 }
-.container .navbar-default .navbar-nav > li > ul > li:hover > a {
+.navbar-default .navbar-nav > li > ul > li:hover > a {
   color: #ffffff;
 }
-.container .navbar-default .navbar-nav > li > ul > li:hover > a:hover {
+.navbar-default .navbar-nav > li > ul > li:hover > a:hover {
   text-decoration: none;
 }
-.container .navbar-default .navbar-nav > li:hover > ul {
+.navbar-default .navbar-nav > li:hover > ul {
   display: block;
+}
+.content {
+  position: relative;
+  margin-top: -15px;
 }
 .content_container {
   background-color: #eef0ed;
-  width: 1120px;
+  padding: 10px;
 }
 .cont {
   background-color: #ffffff;
   border: 1px solid #ccc;
-  margin-left: 0px;
   border-radius: 10px;
-  margin-top: 50px;
+  margin-top: 25px;
+  padding: 15px;
 }
 .main_foter {
-  background-color: rgba(109, 8, 0, 0.9);
+  background-color: #a41a00;
+  position: relative;
+  margin-top: -40px;
+  z-index: -90;
+  padding-top: 105px;
+  padding-bottom: 25px;
+}
+.main_foter .small_foter {
+  position: relative;
+  background-color: #6a0701;
 }
 .main_foter footer {
   text-align: left;
