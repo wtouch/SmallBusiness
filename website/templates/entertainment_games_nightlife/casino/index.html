@@ -43,11 +43,16 @@
 </head>
 
 <body>
+<div class="onload">
+</div>
+
+<div class="onload1">
 	<header>
 			<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
 						<h1>{{ data.business_name }}</h1>
 			</div> 
 	</header>
+	
 	<div class="container-fluid">
 		<nav class="navbar navbar-default ">
 			
@@ -74,12 +79,11 @@
 			{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
 			{%endif%}
 		
-				{% include contentPath %}
-	
-			
-	
+		
+		  {% include contentPath %}
+		  
 		  {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %} 
-	
+		</div>
 	</body>
 </html>
 {% endspaceless %}
