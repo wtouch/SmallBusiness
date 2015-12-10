@@ -99,30 +99,49 @@
 	}
 }
 //activities css
-.panel-default{
-	background-color:@link_color;
-}
+
 //products less
 .products{
-	.thumbnail{
+	.prodimg{
 		.caption{
+			position:absolute;
+			display:none;
+			z-index:999;
 			overflow: hidden;
-			height: 153px;
+			height: 90px;
+			padding: 5px;
+			color:@darkbackcolor;
+			
+		}
+		img{
+				position:relative;
+				z-index:998;
+		}
+		.readmore {
+			position:absolute;
+			z-index:999;
+			text-align: center;
+			margin-top: 100px;
+			margin-left: 70px;
+			display:none;
+					a{
+					background-color:@link_color;
+					border-color:@link_color;
+						}
+			}
+		
+			}
+
+		.prodimg:hover{
+					
+			.caption,.readmore{
+					display:block;
+					
+			}
 		}
 		
-		.readmore {
-			text-align: center;
-			a{
-			background-color:@link_color;
-			border-color:@link_color;
-			}
-		}
-		prodimg{
-			img{
-			}
-		}
 	}
-}
+
 //contact us
 .enquiry{
 	.panel-default{

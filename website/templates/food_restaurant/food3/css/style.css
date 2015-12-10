@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'DensiaSans';
-  src: url('../fonts/DensiaSans.otf');
+  font-family: 'WorkSans-Regular';
+  src: url('../fonts/WorkSans-Regular.otf');
 }
 .featured_services {
   background-color: #c3440f;
@@ -128,19 +128,35 @@
 .jobs .panel-default .description p {
   color: #ffffff;
 }
-.panel-default {
-  background-color: #fcc200;
-}
-.products .thumbnail .caption {
+.products .prodimg .caption {
+  position: absolute;
+  display: none;
+  z-index: 999;
   overflow: hidden;
-  height: 153px;
+  height: 90px;
+  padding: 5px;
+  color: #6a0701;
+  opacity: 0.3;
 }
-.products .thumbnail .readmore {
+.products .prodimg img {
+  position: relative;
+  z-index: 998;
+}
+.products .prodimg .readmore {
+  position: absolute;
+  z-index: 999;
   text-align: center;
+  margin-top: 100px;
+  margin-left: 70px;
+  display: none;
 }
-.products .thumbnail .readmore a {
+.products .prodimg .readmore a {
   background-color: #fcc200;
   border-color: #fcc200;
+}
+.products .prodimg:hover .caption,
+.products .prodimg:hover .readmore {
+  display: block;
 }
 .enquiry .panel-default {
   background-color: #fcc200;
@@ -159,7 +175,6 @@ h6 {
   color: #6a0701;
 }
 .navbar-default {
-  position: relative;
   background: linear-gradient(90deg, #a41a00, #6a0701, #a41a00, #6a0701, #a41a00, #6a0701, #a41a00);
   margin-top: 35px;
   margin-bottom: 0px;
@@ -182,13 +197,19 @@ h6 {
   background-image: url('../img/nav_after.png');
   height: 100px;
   width: 15px;
-  right: -15px;
+  right: -13px;
   image-repeat: no-repeat;
   margin-top: -73px;
 }
+.navbar-default .navbar-nav {
+  z-index: 10000;
+  position: relative;
+  background: linear-gradient(50deg, #a41a00, #6a0701, #a41a00, #6a0701, #a41a00, #6a0701, #a41a00);
+}
 .navbar-default .navbar-nav > li {
+  position: relative;
   margin-top: 10px;
-  padding-left: 10px;
+  padding-left: 8px;
   font-size: 100%;
   text-transform: uppercase;
 }
@@ -201,20 +222,23 @@ h6 {
   background-color: #fcc200 !important;
   color: #ffffff !important;
   font-family: 'Georgia';
-  font-size: 15px;
-  border-radius: 5px;
+  border-radius: 20px 0px 20px 0px;
+  padding-bottom: 9px;
+  padding-top: 12px;
 }
 .navbar-default .navbar-nav > li.active > a,
 .navbar-default .navbar-nav > li.active:focus > a {
-  background-color: #8f6d48;
+  background-color: #fcc200 !important;
   border-radius: 20px;
+  padding-bottom: 9px;
+  padding-top: 12px;
 }
 .navbar-default .navbar-nav > li > ul {
   display: none;
   position: absolute;
   width: 160px;
   z-index: 999;
-  background-color: #02071a;
+  background-color: #6a0701;
   padding: 12px 0px 0px 0px;
   list-style: none;
   text-align: center;
@@ -224,16 +248,37 @@ h6 {
 .navbar-default .navbar-nav > li > ul > li {
   padding-top: 11px;
   height: 43px;
-  background-color: #02071a;
+  background-color: #6a0701;
+  position: relative;
 }
 .navbar-default .navbar-nav > li > ul > li:hover {
-  background-color: #c3440f;
+  background-color: #fcc200 !important;
+  color: #ffffff !important;
+  font-family: 'Georgia';
+  font-size: 15px;
+  border-radius: 5px;
 }
 .navbar-default .navbar-nav > li > ul > li:hover > a {
   color: #ffffff;
 }
 .navbar-default .navbar-nav > li > ul > li:hover > a:hover {
   text-decoration: none;
+}
+.navbar-default .navbar-nav > li > ul > li > ul {
+  display: none;
+  list-style: none;
+  left: 70%;
+  top: 10px;
+  border-top-left-radius: 0px;
+}
+.navbar-default .navbar-nav > li > ul > li > ul > li > a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > li > ul > li > ul > li > a:hover {
+  color: #02071a;
+  background-color: #fcc200 !important;
+  color: #ffffff !important;
 }
 .navbar-default .navbar-nav > li:hover > ul {
   display: block;
@@ -248,7 +293,7 @@ h6 {
 }
 .cont {
   background-color: #ffffff;
-  border: 1px solid #ccc;
+  border: 1px solid #eef0ed;
   border-radius: 10px;
   margin-top: 25px;
   padding: 15px;
@@ -268,7 +313,6 @@ h6 {
 .main_foter footer {
   text-align: left;
   padding-top: 15px;
-  padding-left: 115px;
 }
 .main_foter footer p a {
   color: #ffffff;
@@ -276,6 +320,7 @@ h6 {
 .main_foter .sociallinks {
   float: right;
   margin-right: 115px;
+  padding-top: 5px;
 }
 .main_foter .sociallinks li {
   display: inline;

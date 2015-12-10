@@ -1,7 +1,7 @@
 
 @font-face{
-	font-family:'DensiaSans';
-	src:url('../fonts/DensiaSans.otf');
+	font-family:'WorkSans-Regular';
+	src:url('../fonts/WorkSans-Regular.otf');
 }
 
 	@link_color : #FCC200;//orenge
@@ -32,9 +32,8 @@
 	.navbar{
 		
 	}
-	.navbar-default {
-		position:relative;
-		background:linear-gradient(90deg,@lightbackcolor,@darkbackcolor,@lightbackcolor,@darkbackcolor,@lightbackcolor,@darkbackcolor,@lightbackcolor,);
+	
+	.navbar-default {				background:linear-gradient(90deg,@lightbackcolor,@darkbackcolor,@lightbackcolor,@darkbackcolor,@lightbackcolor,@darkbackcolor,@lightbackcolor);
 		margin-top: 35px;
 		margin-bottom: 0px;
 		height: 78px;
@@ -56,15 +55,19 @@
 				background-image:@nav_after;
 				height:100px;
 				width:15px;
-				right: -15px;
+				right: -13px;
 				image-repeat:no-repeat;
 				margin-top: -73px;
 		}
 		
 		.navbar-nav{
+			z-index: 10000;
+			position: relative;
+			background:linear-gradient(50deg,@lightbackcolor,@darkbackcolor,@lightbackcolor,@darkbackcolor,@lightbackcolor,@darkbackcolor,@lightbackcolor);
 			> li{
+				position :relative;
 				margin-top: 10px;
-				padding-left: 10px;
+				padding-left:8px;
 				font-size: 100%;
 				text-transform: uppercase;
 				a {
@@ -76,19 +79,22 @@
 					background-color:@link_color !important;
 					color : @colorwhite !important;	
 					font-family: 'Georgia';
-					font-size: 15px;
-					border-radius: 5px;
-				}
+					border-radius: 20px 0px 20px 0px;
+					padding-bottom: 9px;
+					padding-top: 12px;
+								}
 				&.active>a , &.active:focus>a{
-					background-color:@text;
+					background-color:@link_color !important;
 					border-radius: 20px;
+					padding-bottom: 9px;
+					padding-top: 12px;
 				}
 				> ul {
 						display: none;
 						position: absolute;
 						width: 160px;
 						z-index: 999;
-						background-color: @colorblack ;
+						background-color: @darkbackcolor;
 						padding: 12px 0px 0px 0px;
 						list-style: none;
 						text-align: center;
@@ -97,16 +103,42 @@
 					>li{	
 							padding-top:11px;
 							height: 43px;
-							background-color:@colorblack;
-					&:hover{
-							background-color:@darkcolor;
-							>a{
-								color:@colorwhite;
+							background-color:@darkbackcolor;
+							position : relative;
 								&:hover{
-									text-decoration: none;
+										background-color:@link_color !important;
+										color : @colorwhite !important;	
+										font-family: 'Georgia';
+										font-size: 15px;
+										border-radius: 5px;
+										>a{
+											color:@colorwhite;
+											&:hover{
+												text-decoration: none;
+												
+											}
+										}
+								}
+							> ul{
+								display: none;
+								list-style :none;
+								left: 70%;
+								top: 10px;
+								border-top-left-radius: 0px;
+								>li{
+									>a{
+										text-decoration:none;
+										color:@colorwhite;
+										&:hover{
+											color:@colorblack;
+											background-color:@link_color !important;
+											color : @colorwhite !important;	
+										}
+									}
 								}
 							}
-						}
+					
+					
 					}
 					
 				}
@@ -127,14 +159,15 @@
 		}
 	.cont{
 		background-color:@colorwhite;
-		border: 1px solid #ccc;
+		border: 1px solid @light_color;
 		border-radius: 10px;
 		margin-top: 25px;
 		padding: 15px;
-		.about{
-			h2{
-				
+		h2{
+			
 			}
+		.about{
+			
 		}
 	}
 
@@ -152,7 +185,6 @@
 			footer{
 				text-align: left;
 				padding-top: 15px;
-				padding-left: 115px;
 					p{
 						a{
 						color:@colorwhite;
@@ -162,6 +194,7 @@
 			.sociallinks{
 				float: right;
 				margin-right: 115px;
+				padding-top: 5px;
 				li{
 					display:inline;
 				}
