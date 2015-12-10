@@ -6,9 +6,8 @@
 	</div>
 	<div class="modal-body">
 		<form name="addStockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStockForm.$valid">
-		{{modalOptions.stock}}
-				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
-					<label for="party_id" class="col-sm-2 control-label"> party id * </label>
+				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList',modalOptions.partyParams,modalOptions)">
+					<label for="party_id" class="col-sm-2 control-label"> Party id * </label>
 					<div class="col-sm-9">
 						<select id="party_id" class="form-control" ng-model="modalOptions.stock.party_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
 							<option value="">Select Party</option>
@@ -25,7 +24,7 @@
 						<div class="col-sm-9">
 							<input type="text" id="goods_name" class="form-control"  ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.stock.goods_name" name="goods_name" placeholder="Name" required />
 							<span class="help-block" ng-show="addStockForm.goods_name.$dirty && addStockForm.goods_name.$invalid">
-							 <span class="text-danger"  ng-show="addStockForm.name.$error.pattern">please Enter Valid Name</span>
+							 <span class="text-danger"  ng-show="addStockForm.name.$error.pattern">Please Enter Valid Name</span>
 								<span ng-show="(addStockForm.goods_name.$dirty)" class="text-danger">Please Enter Name only!</span>
 							</span>
 						</div>						

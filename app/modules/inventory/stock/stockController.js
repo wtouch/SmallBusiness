@@ -1,5 +1,4 @@
 'use strict';
-'use strict';
 
 define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService', 'uiGridConstants'];
@@ -36,6 +35,14 @@ define(['app'], function (app) {
 				path : "#/dashboard/inventory/stock"
 			}
 		]
+		$scope.partyParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+				type :"vendor"
+			},
+			cols : ["*"]
+		}
 		$scope.stockList = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -107,11 +114,18 @@ define(['app'], function (app) {
 					  ]
 					} , 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/stock/addstock.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit stock Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock\', \'status\',row.entity.status, row.entity.id)"  btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
 				}
 			]
 		};
+		
+		$scope.callbackColChange = function(response){
+			console.log(response);
+			if(response.status == "success"){
+				$scope.getData(false, $scope.currentPage, "stock", "stockList", $scope.stockParams);
+			}
+		}
 			$scope.openModal = function(url,data){
 			var modalDefault = {
 				templateUrl:url,	// apply template to modal
@@ -119,6 +133,7 @@ define(['app'], function (app) {
 			};
 			console.log(data);
 			var modalOptions = {
+				partyParams : $scope.partyParams,
 				date : $scope.currentDate,
 				stockdate:$scope.currentData,
 				stock : (data) ? {
@@ -158,7 +173,8 @@ define(['app'], function (app) {
 		}
 		$scope.stockParams = {
 			where : {
-				user_id : $rootScope.userDetails.id
+				user_id : $rootScope.userDetails.id,
+				status : 1
 			},
 			join : [
 				{
