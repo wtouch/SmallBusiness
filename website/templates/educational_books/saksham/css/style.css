@@ -700,35 +700,16 @@
 .homeAboutus .description {
   color: #black;
 }
+* {
+  transition: 300ms;
+}
 .back {
-  background-image: url("../img/back.jpg");
+  background-image: url("../img/back3.jpg");
   background-size: auto 130%;
   height: 670px;
   -webkit-animation-name: back;
   -webkit-animation-duration: 15s;
   -webkit-animation-iteration-count: infinite;
-}
-@-webkit-keyframes back {
-  0% {
-    background-image: url("../img/back.jpg");
-    background-size: 100% 100%;
-  }
-  20% {
-    background-image: url("../img/back1.jpg");
-    background-size: 100% 100%;
-  }
-  60% {
-    background-image: url("../img/back2.jpg");
-    background-size: 100% 100%;
-  }
-  80% {
-    background-image: url("../img/back3.jpg");
-    background-size: 100% 100%;
-  }
-  100% {
-    background-image: url("../img/back.jpg");
-    background-size: 100% 100%;
-  }
 }
 .nav ul {
   color: white;
@@ -948,26 +929,28 @@
   }
 }
 .top {
-  height: 100px;
-  width: 100px;
-  text-align: center;
-  border-radius: 50%;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 35px solid white;
   position: fixed;
   z-index: 5;
   bottom: 0;
   right: 0;
-  border: 5px solid white;
-  font-size: 30px;
-  background-color: rgba(0, 0, 0, 0.65);
-  color: white;
-  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  margin: 10px;
+  -webkit-animation-name: top;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
 }
-.top h3 {
-  margin-top: 35px;
-}
-.top h3 a {
-  color: white;
-  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+@-webkit-keyframes top {
+  0% {
+    margin-bottom: 0px;
+  }
+  50% {
+    margin-bottom: 10px;
+  }
+  100% {
+    margin-bottom: 0px;
+  }
 }
 .trans {
   height: 00px;
@@ -1394,6 +1377,7 @@
   -webkit-animation-duration: 7s;
 }
 .logo h3 {
+  font-size: 20px;
   position: absolute;
   top: 200px;
   left: 0px;
@@ -1586,7 +1570,9 @@ ul.nav li {
 .about .about1 .about2 {
   margin-top: 20px;
   height: 300px;
-  adding: 20px;
+  padding: 20px;
+  border-radius: 5%;
+  box-shadow: 10px 10px 50px black;
   background-image: url("../img/about.gif");
   background-size: 100% 100%;
 }
@@ -1611,23 +1597,27 @@ ul.nav li {
   }
 }
 .service {
-  background-image: url("../img/fishing2.jpg");
-  background-size: auto 100%;
+  background-image: url("../img/contact2.jpg");
+  background-size: 72% 100%;
   color: white;
 }
 .service .service1 {
   padding: 60px;
-  background-color: rgba(0, 0, 0, 0.4);
   text-align: justify;
 }
 .service .service1 h3 {
   text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  padding: 10px;
 }
 .service .service1 p {
   text-align: justify;
   line-height: 1.7;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.65);
 }
 .service .srv1 {
+  border-radius: 5%;
+  box-shadow: 10px 10px 50px black;
   margin-top: 20px;
   height: 300px;
   padding: 20px;
@@ -1654,6 +1644,8 @@ ul.nav li {
   }
 }
 .service .srv2 {
+  border-radius: 5%;
+  box-shadow: 10px 10px 50px black;
   margin-top: 20px;
   height: 300px;
   padding: 20px;
@@ -1680,6 +1672,8 @@ ul.nav li {
   }
 }
 .service .srv3 {
+  border-radius: 5%;
+  box-shadow: 10px 10px 50px black;
   margin-top: 20px;
   height: 300px;
   padding: 20px;
@@ -1706,6 +1700,8 @@ ul.nav li {
   }
 }
 .service .srv4 {
+  border-radius: 5%;
+  box-shadow: 10px 10px 50px black;
   margin-top: 20px;
   height: 300px;
   padding: 20px;
@@ -1805,27 +1801,41 @@ ul.nav li {
   }
 }
 @media (max-width: 720px) {
+  .about1 {
+    padding: 20px !important;
+  }
+  .service1 {
+    padding: 20px !important;
+  }
+  .associates {
+    padding: 20px !important;
+  }
+  .contact {
+    padding: 20px !important;
+  }
   .top {
-    height: 100px;
-    width: 100px;
-    text-align: center;
-    border-radius: 50%;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 35px solid white;
     position: fixed;
     z-index: 5;
     bottom: 0;
     right: 0;
-    border: 5px solid white;
-    font-size: 30px;
-    background-color: black;
-    color: white;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+    margin: 10px;
+    -webkit-animation-name: top;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
   }
-  .top h3 {
-    margin-top: 35px;
-  }
-  .top h3 a {
-    color: white;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+  @-webkit-keyframes top {
+    0% {
+      margin-bottom: 0px;
+    }
+    50% {
+      margin-bottom: 10px;
+    }
+    100% {
+      margin-bottom: 0px;
+    }
   }
   .nav ul {
     color: white;
@@ -1836,7 +1846,7 @@ ul.nav li {
     top: 150px;
   }
   .nav ul li {
-    background-color: rgba(0, 0, 0, 0.66);
+    background-color: rgba(0, 0, 0, 0.4);
     font-size: 15px;
     border-radius: 50%;
     height: 100px;
@@ -1867,7 +1877,7 @@ ul.nav li {
     text-decoration: none;
   }
   .nav ul li:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.65);
   }
   .nav ul li:nth-child(1) {
     padding-top: 30px;
@@ -2055,7 +2065,7 @@ ul.nav li {
     height: 00px;
     width: 00px;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.4);
     -webkit-animation-name: trans;
     -webkit-animation-duration: 10s;
   }
@@ -2471,6 +2481,7 @@ ul.nav li {
   }
   .logo h3 {
     position: absolute;
+    font-size: 20px;
     top: 135px;
     left: 0px;
     text-align: center;
@@ -2576,6 +2587,30 @@ ul.nav li {
   }
 }
 @media (min-width: 768px) {
+  .top {
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 35px solid white;
+    position: fixed;
+    z-index: 5;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    -webkit-animation-name: top;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+  }
+  @-webkit-keyframes top {
+    0% {
+      margin-bottom: 0px;
+    }
+    50% {
+      margin-bottom: 10px;
+    }
+    100% {
+      margin-bottom: 0px;
+    }
+  }
   .nav ul {
     color: white;
     list-style: none;
@@ -2585,7 +2620,7 @@ ul.nav li {
     top: 150px;
   }
   .nav ul li {
-    background-color: rgba(0, 0, 0, 0.66);
+    background-color: rgba(0, 0, 0, 0.4);
     font-size: 15px;
     border-radius: 50%;
     height: 130px;
@@ -2616,7 +2651,7 @@ ul.nav li {
     text-decoration: none;
   }
   .nav ul li:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.65);
   }
   .nav ul li:nth-child(1) {
     padding-top: 50px;
@@ -2797,7 +2832,7 @@ ul.nav li {
     height: 00px;
     width: 00px;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.4);
     -webkit-animation-name: trans;
     -webkit-animation-duration: 10s;
   }
@@ -3213,6 +3248,7 @@ ul.nav li {
   }
   .logo h3 {
     position: absolute;
+    font-size: 20px;
     top: 135px;
     left: 0px;
     text-align: center;
@@ -3379,6 +3415,30 @@ ul.nav li {
   }
 }
 @media (min-width: 1025px) {
+  .top {
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 35px solid white;
+    position: fixed;
+    z-index: 5;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    -webkit-animation-name: top;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+  }
+  @-webkit-keyframes top {
+    0% {
+      margin-bottom: 0px;
+    }
+    50% {
+      margin-bottom: 10px;
+    }
+    100% {
+      margin-bottom: 0px;
+    }
+  }
   .nav ul {
     color: white;
     list-style: none;
@@ -3388,7 +3448,7 @@ ul.nav li {
     top: 150px;
   }
   .nav ul li {
-    background-color: rgba(0, 0, 0, 0.66);
+    background-color: rgba(0, 0, 0, 0.4);
     font-size: 20px;
     border-radius: 50%;
     height: 150px;
@@ -3419,7 +3479,7 @@ ul.nav li {
     text-decoration: none;
   }
   .nav ul li:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.65);
   }
   .nav ul li:nth-child(1) {
     padding: 60px 0px 0px 40px;
@@ -3600,7 +3660,7 @@ ul.nav li {
     height: 00px;
     width: 00px;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(0, 0, 0, 0.4);
     -webkit-animation-name: trans;
     -webkit-animation-duration: 10s;
   }
@@ -4022,6 +4082,7 @@ ul.nav li {
   }
   .logo h3 {
     position: absolute;
+    font-size: 20px;
     top: 200px;
     left: 0px;
     text-align: center;

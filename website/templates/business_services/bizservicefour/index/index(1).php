@@ -1,0 +1,2 @@
+		document.write('<img src="http://catalog.weblink.in/counters-img/black_format1_1.gif" class="vam" />&nbsp;<img src="http://catalog.weblink.in/counters-img/black_format1_1.gif" class="vam" />&nbsp;<img src="http://catalog.weblink.in/counters-img/black_format1_9.gif" class="vam" />&nbsp;<img src="http://catalog.weblink.in/counters-img/black_format1_3.gif" class="vam" />&nbsp;<img src="http://catalog.weblink.in/counters-img/black_format1_5.gif" class="vam" />&nbsp;');
+		

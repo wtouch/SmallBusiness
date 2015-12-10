@@ -3,10 +3,6 @@
 	src:url('../fonts/negotiate_free.ttf');
 }
 @font-face{
-	font-family:'Amar-kalyane';
-	src:url('../fonts/Amar-kalyane.ttf');
-}
-@font-face{
 	font-family:'DobkinScript';
 	src:url('../fonts/DobkinScript.ttf');
 }
@@ -21,8 +17,8 @@
 @darkcolor : #ECD070;// nav active color 
 
 @back : #BF0002;//in use
-@darkbackcolor : red; //not use
-@lightbackcolor :#FFD700;//not use
+@darkbackcolor : #6e0001; //not use
+@lightbackcolor :#111111;//footer 
 
 @colorblack : #000000;
 @colorwhite	: #ffffff;
@@ -31,85 +27,184 @@
 @import "product.less";
 @import "general.less";
 body{
-		background: url(../img/body.png) fixed, url(../img/highlight.png) no-repeat center top fixed #6e0001;
+		background: url(../img/body.png) fixed, url(../img/highlight.png) no-repeat center top fixed @darkbackcolor ;
 		background-attachment: scroll;
-		color:@colorwhite;
+		color:@colorblack;
 
 	.homeAboutus{
 		padding: 0px 20px 25px 0px;
 	}
-	.pk{
-		padding-top:5px;
-	}
 	header{
-		background: url(../img/body.png) fixed, url(../img/highlight.png) no-repeat center top fixed #6e0001;
+		background: url(../img/body.png) fixed, url(../img/highlight.png) no-repeat center top fixed @darkbackcolor ;
 		background-attachment: scroll;
 		.logo{
 			height:120px;
 		}
 	}
 	.header1{
-		h1,h3{
-			color:@colorwhite;
+		h3,h4{
+			color: @darkcolor;
+			background:none;
 		}
 	}
-navbar-toogle{
-	background-color:@color;
-}
-.navbar-toggle {
-    border-color: @colorwhite;
-}
-.navbar-toggle:hover{
-    background-color: @color;
-}
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-    background-color: @color;
-}
+	navbar-toogle{
+		background-color:@color;
+	}
+	.navbar-toggle {
+		border-color: @colorwhite;
+	}
+	.navbar-toggle:hover{
+		background-color: @color;
+	}
+	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+		background-color: @color;
+	}
+	h4{
+		font-size:30px;
+		color:@colorwhite;
+	}
+	h1{
+		width: 350px;
+		color: @darkcolor;
+		display:block;
+		line-height: 48px;
+		padding-left: 20px;
+		margin-left: -20px;
+		background-color: @back;
+	}
+	h2,h3{
+		background-color: @back;
+		width: 250px;
+		color:@darkcolor;
+		display:block;
+		line-height: 48px;
+		padding-left: 20px;
+		margin-left: -20px;
+	}
+	h2::after{
+		content: "";
+		height: 0;
+		width: 0;
+		display: block;
+		position: absolute;
+		top: 30px;
+		/* height: 45px; */
+		left: 226px;
+		border-top: 24px solid #BF0002;
+		border-bottom: 24px solid #BF0002;
+		border-right: 29px solid transparent;
+		border-left: 29px solid transparent;
+	}
+	h1::after{
+		content: "";
+		height: 0;
+		width: 0;
+		display: block;
+		position: absolute;
+		top: 30px;
+		/* height: 45px; */
+		left: 325px;
+		border-top: 24px solid #BF0002;
+		border-bottom: 24px solid #BF0002;
+		border-right: 29px solid transparent;
+		border-left: 29px solid transparent;
+	}
+	h1::before {
+		content: "";
+		position: absolute;
+		width: 10px;
+		height: 20px;
+		top: 78px;
+		left: 3px;
+		/* background: #000; */
+		border-top: 15px solid @colorblack;
+		border-left: 13px solid transparent;
+	}
+	h2::before {
+		content: "";
+		position: absolute;
+		width: 10px;
+		height: 20px;
+		top: 78px;
+		left: 3px;
+		/* background: #000; */
+		border-top: 15px solid @colorblack;
+		border-left: 13px solid transparent;
+	}
+	h3::after{
+	content: "";
+    height: 0;
+    width: 0;
+    display: block;
+    position: absolute;
+    top: 20px;
+    /* height: 45px; */
+    left: 215px;
+    border-top: 24px solid #BF0002;
+    border-bottom: 24px solid #BF0002;
+    border-right: 29px solid transparent;
+    border-left: 29px solid transparent;
+	}
 
-
-.ribbon {
- font-size: 16px !important;
- /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */   
- position: relative;
- background: @back;
- color: #fff;
- text-align: center;
- margin: 2em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
-}
-.ribbon:before, .ribbon:after {
- content: "";
- position: absolute;
- display: block;
- bottom: -1em;
- border: 1.5em solid @back;
- z-index: -1;
-}
-.ribbon:before {
- left: -2em;
- border-right-width: 1.5em;
- border-left-color: transparent;
-}
-.ribbon:after {
- right: -2em;
- border-left-width: 1.5em;
- border-right-color: transparent;
-}
-.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
- content: "";
- position: absolute;
- display: block;
- border-style: solid;
- border-color: @lightcolor transparent transparent transparent;
- bottom: -1em;
-}
-.ribbon .ribbon-content:before {
-	 left: 0;
-	 border-width: 1em 0 0 1em;
-}
-.ribbon .ribbon-content:after {
-	 right: 0;
-	 border-width: 1em 1em 0 0;
-}
+	.ribbon {
+		 font-size: 16px !important;
+		 /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */   
+		 position: relative;
+		 background: @back;
+		 color: #fff;
+		 text-align: center;
+		 margin: 2em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+	}
+	.ribbon:before, .ribbon:after {
+		 content: "";
+		 position: absolute;
+		 display: block;
+		 bottom: -1em;
+		 border: 1.5em solid @back;
+		 z-index: -1;
+	}
+	.ribbon:before {
+		 left: -2em;
+		 border-right-width: 1.5em;
+		 border-left-color: transparent;
+	}
+	.ribbon:after {
+		 right: -2em;
+		 border-left-width: 1.5em;
+		 border-right-color: transparent;
+	}
+	.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+		 content: "";
+		 position: absolute;
+		 display: block;
+		 border-style: solid;
+		 border-color: @lightcolor transparent transparent transparent;
+		 bottom: -1em;
+	}
+	.ribbon .ribbon-content:before {
+		 left: 0;
+		 border-width: 1em 0 0 1em;
+	}
+	.ribbon .ribbon-content:after {
+		 right: 0;
+		 border-width: 1em 1em 0 0;
+	}
+	.content{
+		background: @colorwhite url(../img/content-shadow.png) repeat-x top center;
+		padding:10px;
+		h1{
+			color: @darkcolor;
+			font-family: 'amarkalyane';
+			font-size: 40px;
+			padding-left: 47px;
+	}
+	}
+	.tagline{
+		margin-top:50px;
+	}
+	.tagline1{
+		margin-top:10px;
+	}
 .navbar-default {
     background-color: @back;
     border-color: @back;
@@ -218,20 +313,43 @@ navbar-toogle{
 }
 	}
 	
-	
+.readmore{
+position:relative;
+}	
 .btn-info {
-		background: @colorblack;
-		padding: 3px 7px;
-		border-radius: 3px;
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		color: @colorwhite;
-		border:none;
-	}
+    background: @back;
+    padding: 3px 7px;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    color: @colorwhite;
+    border: 0px;
+}
 .btn-info:hover{
-	background: @darkcolor;
-	transition:600ms;
-	border:none;
+	background:@back;
+	border:0px;
+}
+.btn-info:active{
+	background:@back;
+	border:0px;
+}
+.btn-info:focus{
+	background:@back;
+	border:0px;
+}
+.btn-info::after {
+    content: "";
+    width: 2px;
+	height:5px;
+    display: block;
+    position: absolute;
+    height: -35px;
+    top: 0px;
+    border-top: 16px solid transparent;
+    left: 215px;
+    border-bottom: 11px solid transparent;
+    border-left: 20px solid @back;
+    border-right: -1px solid transparent;
 }
 .pk {    
     background-color: #1A0202;
