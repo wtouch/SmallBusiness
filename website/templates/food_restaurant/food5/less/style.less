@@ -157,7 +157,7 @@ body{
 		 background: @back;
 		 color: #fff;
 		 text-align: center;
-		 margin: 2em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+		// margin: 2em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
 	}
 	.ribbon:before, .ribbon:after {
 		 content: "";
@@ -373,9 +373,38 @@ body{
 			background:@back;
 			border-bottom: 0px solid @color !important;
 		}
+		body .ribbon::before{
+		    content: "";
+			position: absolute;
+			display: block;
+			bottom: -1em;
+			border:0px solid #bf0002; 
+			z-index: -1;
+		}
 		.wt {
     width:150px;
 }
+	}
+	@media (max-width: 768px){
+	.ribbon::before{
+		content: "";
+			position: absolute;
+			display: block;
+			bottom: -1em;
+			border:0px solid #bf0002; 
+			z-index: -1;
+	
+	
+	}
+	.ribbon:after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1em;
+    border: 0px solid #bf0002; 
+    z-index: -1;
+}
+	
 	}
 	
 	

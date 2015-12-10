@@ -697,7 +697,7 @@
 .bx-wrapper {
   height: 200px;
   width: 100%;
-  background-color: #ecd070;
+  background-color: #6e0001;
 }
 .singleproduct img {
   border: solid 0px #ECD070;
@@ -922,7 +922,7 @@ fieldset[disabled] .btn-info.active {
   width: 100%;
 }
 .panel-default {
-  border-color: #6e0001;
+  border-color: #000000;
 }
 .form-control:focus {
   border-color: #ecd070;
@@ -1102,8 +1102,6 @@ body .ribbon {
   background: #bf0002;
   color: #fff;
   text-align: center;
-  margin: 2em auto 3em;
-  /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
 }
 body .ribbon:before,
 body .ribbon:after {
@@ -1308,8 +1306,34 @@ body .navbar-nav > li {
     background: #bf0002;
     border-bottom: 0px solid #fa6903 !important;
   }
+  body body .ribbon::before {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1em;
+    border: 0px solid #bf0002;
+    z-index: -1;
+  }
   body .wt {
     width: 150px;
+  }
+}
+@media (max-width: 768px) {
+  body .ribbon::before {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1em;
+    border: 0px solid #bf0002;
+    z-index: -1;
+  }
+  body .ribbon:after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1em;
+    border: 0px solid #bf0002;
+    z-index: -1;
   }
 }
 body .btn-info {
