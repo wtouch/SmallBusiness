@@ -754,6 +754,9 @@
   padding-left: 25px;
   padding-right: 25px;
 }
+.contact {
+  padding: 20px;
+}
 .about p strong {
   padding: 10px;
   color: #a78057;
@@ -820,9 +823,9 @@ center {
 }
 div#googleMap {
   height: 504px;
-  padding: -32px;
-  width: 938px;
-  margin-left: 40px;
+}
+.contact table tr td {
+  padding: 2px;
 }
 .testimonial blockquote,
 .featrtesti blockquote {
@@ -871,7 +874,7 @@ div#googleMap {
 }
 @media (max-width: 320px) {
   #carousel {
-    height: 94px;
+    height: 120px;
   }
   .contact_img {
     width: 75px;
@@ -879,7 +882,8 @@ div#googleMap {
 }
 @media (min-width: 321px) and (max-width: 768px) {
   #carousel {
-    height: 130px;
+    height: 160px;
+    overflow: hidden;
   }
   .contact_img {
     width: 80px;
@@ -887,9 +891,6 @@ div#googleMap {
   contact > h2,
   .gallery > h2 {
     padding-top: 95px;
-  }
-  div#googleMap {
-    width: 560px;
   }
 }
 * {
@@ -1033,8 +1034,8 @@ body {
 .navbar-default .navbar-nav > li > a:hover {
   color: #ffffff;
   background-color: #1b1b1b;
-  font-size: 18px;
-  text-decoration: underline;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
 }
 .navbar-default .navbar-nav > li.active > a,
 .navbar-default .navbar-nav > li.active > a:hover,
@@ -1136,15 +1137,11 @@ h3.subhead {
   padding: 15px 0px 2px 58px;
   background: linear-gradient(90deg, #4f3b09, #a78057);
   height: 58px;
-  width: 295px;
   border-radius: 5px;
   text-transform: uppercase;
 }
 h3.subhead:hover {
   color: #000000;
-}
-.panel.panel-default {
-  width: 295px;
 }
 .sidebarModule .pagination > .active > a,
 .pagination > .active > span,
@@ -1195,11 +1192,14 @@ footer a:hover {
     height: 60px;
     margin: 0px 0px 25px 17px;
   }
+  .navbar-default {
+    margin-top: -20px;
+  }
   .activity h3 {
     padding-top: 15px;
   }
 }
-@media (max-width: 768px) {
+@media (min-width: 320px) and (max-width: 768px) {
   .log1 {
     background: url(../img/bg1.jpg);
     background-repeat: no-repeat;
@@ -1212,41 +1212,10 @@ footer a:hover {
     height: 60px;
     margin: 0px 0px 25px 17px;
   }
-  h3.subhead {
-    width: 333px;
-  }
-  .panel.panel-default {
-    width: 295px;
+  .navbar-default {
+    margin-top: -20px;
   }
   .activity h3 {
     padding-top: 15px;
-  }
-}
-@media (max-width: 992px) {
-  .log1 {
-    background: url(../img/bg1.jpg);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    border-bottom: 8px solid #a78057;
-    height: 658px;
-  }
-  .logo {
-    width: 200px;
-    height: 200px;
-    margin: 0px 0px 25px 17px;
-  }
-  #carousel {
-    z-index: 3;
-    bottom: 20px;
-    height: 280px;
-  }
-  h3.subhead {
-    width: 720px;
-  }
-  .panel.panel-default {
-    width: 720px;
-  }
-  .activity h3 {
-    padding-top: 20px;
   }
 }

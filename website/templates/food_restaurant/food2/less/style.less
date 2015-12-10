@@ -160,8 +160,8 @@ body{
 						&:hover{
 							color:@colorwhite;
 							background-color:@color;
-							font-size:18px;
-							text-decoration: underline;
+							border-top:1px solid @colorwhite;
+							border-bottom:1px solid @colorwhite;
 						}
 					}
 					&.active>a, &.active>a:hover,&.active>a:focus{
@@ -272,17 +272,13 @@ h3.subhead {
 		padding:15px 0px 2px 58px;
 		background: linear-gradient(90deg, @darkcolor, @lightcolor);
 		height: 58px;
-		width: 295px;
 		border-radius:5px;
 		text-transform:uppercase;
 			&:hover{
 				color:@colorblack;
 			}
 	}
-.panel.panel-default {
-		width: 295px;
-	}
-	
+
 .sidebarModule 
 .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus,.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus
 	{
@@ -323,6 +319,9 @@ h3.subhead {
 		height: 60px;
 		margin: 0px 0px 25px 17px;
 	}
+	.navbar-default{
+		margin-top: -20px;
+	}
 	.activity{ 
 		h3 {
 			padding-top: 15px;
@@ -331,7 +330,7 @@ h3.subhead {
 }
 	
 
-@media(max-width: 768px){
+@media (min-width: 320px)and(max-width: 768px){
 	.log1{
 	background:@bg1;
 	background-repeat:no-repeat;
@@ -344,11 +343,8 @@ h3.subhead {
 		height: 60px;
 		margin: 0px 0px 25px 17px;
 	}
-	h3.subhead {
-		width: 333px;
-	}
-	.panel.panel-default {
-		width: 295px;
+	.navbar-default{
+		margin-top: -20px;
 	}
 	.activity{ 
 		h3 {
@@ -357,7 +353,7 @@ h3.subhead {
 	}
 
 }	
-@media(max-width: 992px){
+/* @media(max-width: 1024px){
 	.log1{
 	background:@bg1;
 	background-repeat:no-repeat;
@@ -375,17 +371,12 @@ h3.subhead {
 		bottom: 20px;
 		height: 280px;
 	}
-	h3.subhead {
-		width: 720px;
-	}
-	.panel.panel-default {
-		width: 720px;
-	}
+	
 	.activity{ 
 		h3 {
 			padding-top: 20px;
 		}	
 	}
 
-}	
+}	*/
 	
