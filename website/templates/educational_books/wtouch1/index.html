@@ -12,39 +12,163 @@
 		<script src="{{ path }}js/bootstrap.min.js"></script>
 		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
-		<script src="{{ path }}js/angular.min.js"></script>
-		<script src="{{ path }}js/angular-route.min.js"></script>
-		<script src="{{ path }}js/script.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		
 		<script>
-		
-		$(document).ready(function(){
-		
-			
-					//$("#aboutUs").addClass("aboutus");
-					//$("#contactUs").addClass("contact");
-				
+			$(document).ready(function(){
+				$("nav>div>div>ul>li:nth-child(1)").click(function(){
+						if($(this).hasClass("m1")){
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
 					
-					$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
-					$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
-					$("nav>div>div>ul>li:nth-child(3)").removeClass("m33");
-					$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
-					$("nav>div>div>ul>li:nth-child(2)").removeClass("m22");
-					$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
-					$("nav>div>div>ul>li:nth-child(4)").removeClass("m44");
-					$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
-					$("nav>div>div>ul>li:nth-child(5)").removeClass("m55");
-			
-
-		
-	});
-</script>
+					}else{
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
+						$("#about").addClass("about");
+						$("#service").removeClass("service");
+						$("#contact").removeClass("contact");
+						$(".navbar-default").css("height", "130px");
+					}
+				});
+				$("nav>div>div>ul>li:nth-child(2)").click(function(){
+						if($(this).hasClass("m2")){
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
+						
+					}else{
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
+						
+					}
+				});
+				$("nav>div>div>ul>li:nth-child(3)").click(function(){
+						if($(this).hasClass("m3")){
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
+						$("#about").removeClass("about");
+						$("#service").removeClass("service");
+						$("#contact").removeClass("contact");
+						$(".navbar-default").css("height", "400px");
+					}else{
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
+						$("#about").removeClass("about");
+						$("#service").removeClass("service");
+						$("#contact").removeClass("contact");
+					}
+				});
+				$("nav>div>div>ul>li:nth-child(4)").click(function(){
+						if($(this).hasClass("m4")){
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
+					}else{
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
+						$("#about").removeClass("about");
+						$("#service").addClass("service");
+						$("#contact").removeClass("contact");
+						$(".navbar-default").css("height", "130px");
+					}
+				});
+				$("nav>div>div>ul>li:nth-child(5)").click(function(){
+						if($(this).hasClass("m5")){
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
+					}else{
+						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
+						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
+						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
+						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
+						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
+						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
+						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
+						$("#about").removeClass("about");
+						$("#service").removeClass("service");
+						$("#contact").addClass("contact");
+						$(".navbar-default").css("height", "130px");
+					}
+				});
+				
+			});
+		</script>
 	</head>
 	<body>
-		{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 		<header>
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -68,21 +192,145 @@
 			</div>
 		</nav>
 		<div class="container">
-			<div class="col-md-12">
-				 <!-- <div id="aboutUs">
-					{% include [templatePath ~ '/about-us.html', 'default/default/about-us.html'] %}
-				</div> -->
-				 <!-- <div id="apnasite">
-					{% include [templatePath ~ '/page.html', 'default/default/page.html'] %}
-				</div> -->
-				<!-- <div id="contactUs">
-					{% include [templatePath ~ '/contact-us.html', 'default/default/contact-us.html'] %}
-				</div> -->
-				 {% include contentPath %}
-				
+		{% autoescape false %}
+		<div id="about" class="row">
+			{{data.business_info.aboutDescription}}
+		</div>
+		<div id="apna" class="row">
+		</div>
+		<div id="home" class="row">
+
+		</div>
+		<div id="service" class="row">
+			{% if featured_products | length >= 2 %}
+					<div class="contentModule featured_services">
+						<h3>Services</h3>
+						<div class="sections clearfix services">
+							{% set break = 0 %}{% set i = 0 %}
+							{% for x in featured_products if break == 0 %}
+								{% if x.type == 'service' %}
+									<div class="col-xs-12 col-md-2 col-lg-2 servimage">
+										<a href="services/{{x.product_service_name}}/{{x.id}}">
+											<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" alt="{{x.product_image.0.file_relative_path}}">
+										</a>
+									</div>
+									<div class="col-xs-12 col-md-4 col-lg-4 servdesc">
+										<h4>{{x.product_service_name}}</h4>
+										<div class="description">
+											{{ x.description }}
+										</div>
+										<div class="readmore">
+											<a href="services/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More</a>
+										</div>
+									</div>
+									{% set i = (i + 1) %}
+									{% if i == 6 %}
+										{% set break = 1 %}
+									{% endif %}
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+			{% endif %}
+		</div>
+		<div id="contact" class="row">
+			<script src="http://maps.googleapis.com/maps/api/js">
+			</script>
+			<script>
+				function initialize() {
+					var mapProp = {
+						center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+						zoom:12,
+						mapTypeId:google.maps.MapTypeId.ROADMAP
+					};
+					var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+					var marker=new google.maps.Marker({
+						position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+					});
+					marker.setMap(map);
+				}
+				google.maps.event.addDomListener(window, 'load', initialize);
+			</script>
+			<h2>Contact Us</h2>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12">
+					<table class="table">
+						<tr>
+							<td>
+								<a href="#">
+									<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
+								</a>
+							</td>
+							<td>
+								<h4>{{data.contact_profile.contact_person}}</h4>
+								<b>Address</b>
+								<address>
+									{{data.contact_profile.address}}<br>
+									{{data.city}}-{{data.pincode}},<br>
+									{{data.state|capitalize}},<br>
+									{{data.country|capitalize}}.
+								</address>
+							</td>
+						</tr>
+						{%if (data.contact_profile.address1) or (data.contact_profile.address2) or (data.contact_profile.address3) or (data.contact_profile.address4)%}
+						<tr>
+							<td colspan="2">
+								{%if data.contact_profile.address1%}
+									<span>{{data.contact_profile.address1}}</span>
+								{% endif %}
+								
+								{%if data.contact_profile.address2%}
+									<hr/>
+									<span>{{data.contact_profile.address2}}</span>
+								{% endif %}
+								
+								{%if data.contact_profile.address3%}
+									<hr/>
+									<span>{{data.contact_profile.address3}}</span>
+								{% endif %}
+								
+								{%if data.contact_profile.address4%}
+									<hr/>
+									<span>{{data.contact_profile.address4}}</span>
+								{% endif %}
+							</td>
+						</tr>
+						{% endif %}
+						{%if data.contact_profile.telephone%}
+						<tr>
+							<td><b>Telephone</b></td>
+							<td>{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}
+							</td>
+						</tr>
+						{% endif %}
+						<tr>
+							<td><b>Mobile</b></td>
+							<td>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? ", " ~ data.contact_profile.alternate_mobile}}</td>
+						</tr>
+						<tr>
+							<td><b>E-mail Id</b></td>
+							<td>
+								<a class="email" href="mailto: {{data.contact_profile.email}}">{{data.contact_profile.email}}</a><br>
+								<a class="email" href="mailto: {{data.contact_profile.alternate_email}}">{{data.contact_profile.alternate_email}}</a>
+							</td>
+						</tr>
+						{%if data.contact_profile.contact_website%}
+						<tr>
+							<td><b>Website</b></td>
+							<td><a href="/{{data.contact_profile.contact_website}}">{{data.contact_profile.contact_website}}</a>
+							</td>
+						</tr>
+						{% endif %}
+					</table>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-lg-12">
+					<div id="googleMap"></div>
+				</div>
 			</div>
 		</div>
-<!-- 		<section class="row">
+		{% endautoescape %}
+		</div>
+		<!--<section class="row">
 					 <div>
 					 </div>
 					 <div>
@@ -93,7 +341,7 @@
 					 </div>
 					 <div>
 					 </div>
-				</section> -->
- </body>
+		</section> -->
+	</body>
 </html>
 {% endspaceless %}
