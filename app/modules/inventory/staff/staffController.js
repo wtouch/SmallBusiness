@@ -157,9 +157,9 @@ define(['app'], function (app) {
 					'<a ng-click="grid.appScope.openPayslip(\'modules/inventory/staff/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="viewpayslip" > <span class="glyphicon glyphicon-eye-open" ></span></a>'
 					+'<a ng-click="grid.appScope.openViewleaves(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
-					/* +'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="View Staff"><span class="glyphicon glyphicon-eye-open"></span></a>' */
+					
 					+ '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
+					+'<a ng-click="grid.appScope.openViewattendance(\'modules/inventory/staff/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/addstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
@@ -200,8 +200,12 @@ define(['app'], function (app) {
 					deduction:data.deduction,
 					advance:data.advance,
 					loan:data.loan,
+					pan_no:data.pan_no,
+					qualification:data.qualification,
+					UAN_no:data.UAN_no,
+					marital_status:data.marital_status,
 					staff_type:data.staff_type,
-					staff_id:data.staff_id,
+				
 					modified_date:data.modified_date,
 					registration_date:data.registration_date
 				
@@ -231,14 +235,7 @@ define(['app'], function (app) {
 					},
 					getData : $scope.getData,
 				
-					attendanceParams : {
-						where : {
-							status : 1,
-							user_id : $rootScope.userDetails.id,
-							
-						},
-						cols : ["*"]
-					}
+					
 				};
 			
 			
@@ -246,6 +243,36 @@ define(['app'], function (app) {
 				
 			})
 			
+		}
+		
+			$scope.openViewattendance = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+				viewattendance:{
+						user_id : $rootScope.userDetails.id,
+						name:data.name,
+						staff_id : data.staff_id,
+						date : data.date,
+						//debit_amount:data.debit_amount
+					},
+					
+				getData : $scope.getData,
+					attendanceParams : {
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+							staff_id:data.staff_id
+							
+						},
+						cols : ["*"]
+					}
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
 		}
 		
 			$scope.openViewleaves = function(url,data){
@@ -268,6 +295,7 @@ define(['app'], function (app) {
 						where : {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
+								staff_id:data.staff_id
 						
 						},
 						cols : ["*"]
@@ -303,6 +331,25 @@ define(['app'], function (app) {
 							//category : "" // salary
 						},
 						cols : ["*"]
+					},
+			 myFunction:function(datetime) {
+				 console.log(datetime);
+						var month = new Array();
+						month[0] = "January";
+						month[1] = "February";
+						month[2] = "March";
+						month[3] = "April";
+						month[4] = "May";
+						month[5] = "June";
+						month[6] = "July";
+						month[7] = "August";
+						month[8] = "September";
+						month[9] = "October";
+						month[10] = "November";
+						month[11] = "December";
+					var d = new Date(datetime);
+					var n = month[d.getMonth()];
+					return n;
 					}
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
