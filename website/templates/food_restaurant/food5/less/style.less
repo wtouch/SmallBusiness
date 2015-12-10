@@ -88,6 +88,7 @@ body{
 		padding-left: 20px;
 		margin-left: -20px;
 	}
+	
 	h2::after{
 		content: "";
 		height: 0;
@@ -97,8 +98,8 @@ body{
 		top: 30px;
 		/* height: 45px; */
 		left: 226px;
-		border-top: 24px solid #BF0002;
-		border-bottom: 24px solid #BF0002;
+		border-top: 24px solid @back ;
+		border-bottom: 24px solid @back ;
 		border-right: 29px solid transparent;
 		border-left: 29px solid transparent;
 	}
@@ -111,8 +112,8 @@ body{
 		top: 30px;
 		/* height: 45px; */
 		left: 226px;
-		border-top: 24px solid #BF0002;
-		border-bottom: 24px solid #BF0002;
+		border-top: 24px solid @back ;
+		border-bottom: 24px solid @back ;
 		border-right: 29px solid transparent;
 		border-left: 29px solid transparent;
 	}
@@ -391,14 +392,13 @@ body{
 	@media (max-width: 768px){
 	.ribbon::before{
 		content: "";
-			position: absolute;
-			display: block;
-			bottom: -1em;
-			border:0px solid #bf0002; 
-			z-index: -1;
-	
-	
+		position: absolute;
+		display: block;
+		bottom: -1em;
+		border:0px solid #bf0002; 
+		z-index: -1;
 	}
+	
 	.ribbon:after {
     content: "";
     position: absolute;
@@ -407,41 +407,62 @@ body{
     border: 0px solid #bf0002; 
     z-index: -1;
 }
-	
+}
+@media (max-width: 992px){
+	.ribbon::before{
+		content: "";
+		position: absolute;
+		display: block;
+		bottom: -1em;
+		border:1px solid #bf0002; 
+		z-index: -1;
 	}
 	
-	
-.btn-info {
+	.ribbon:after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1em;
+    border: 1px solid #bf0002; 
+    z-index: -1;
+}
+	}
+	@media (max-width: 992px){	
+	.anim5{
+		background: #E9E9E9;
+		border-radius: 0px;
+		border: 5px solid #ECD070; 
+		padding: 45px 45px;
+		transition: all 300ms linear;
+	}
+	}	
+.btn-info, .btn-info[disabled] {
     background: @back;
     padding: 3px 7px;
     border-radius: 0px;
+	margin-bottom: 15px;
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
     color: @colorwhite;
 	position:relative;
     border: 0px;
 }
-.btn-info.disabled, .btn-info[disabled],{
-    background-color:@back;
-    border-color: none;
-    width: 100px;
-     height: 30px; 
-    padding: 3px 7px;
-
-}
 .btn-info:hover{
 	background:@back;
 	border:0px;
+	margin-bottom: 15px;
 }
 .btn-info:active{
 	background:@back;
 	border:0px;
+	margin-bottom: 15px;
 }
 .btn-info:focus{
 	background:@back;
 	border:0px;
+	margin-bottom: 15px;
 }
-.btn-info::after {
+.btn-info::after,.btn-info[disabled]::after {
     content: "";
     width: 2px;
 	height:5px;
