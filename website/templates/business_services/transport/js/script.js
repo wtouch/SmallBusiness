@@ -187,3 +187,27 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		$scope.makeActive($scope.url);
 		
 	});
+	
+	
+	$(document).ready(function(){
+		if($("about").hasClass("abt")){
+			$(".navbar").addClass("a");
+		}
+		});
+		
+		
+	$(document).ready(function(){
+							
+		if(location.pathname == "/"){
+			
+			$(".main").addClass("main1");
+			$(".main").removeClass("main2");
+			
+			$("nav li a[href='/']").click(function(){
+				
+				$(".main").removeClass("main1");
+				$(".main").addClass("main2");
+				
+			}); 
+		}			
+	});
