@@ -1,0 +1,30 @@
+{% autoescape false %}
+<h2>{{title}}</h2>
+<div class="row products">
+	{% for key, x in products %}
+		<div class="col-xs-12 col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<div class="prodimg"> 
+					<img src="{{x.product_image.0.file_relative_path}}" class="img-responsive center-block" alt="{{key}}"/>
+				</div>
+				<div class="caption">
+					<h4 class="text-center">{{ x.product_service_name }}</h4>
+					<div class="description">
+					{{ x.description }}
+					</div>
+				</div>
+				<div class="readmore">
+					{% if x.type == 'service' %}
+						<a href="/services/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More..</a>
+					{% endif %}
+					{% if x.type == 'product' %}
+						<a href="/products/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More..</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	
+	{% include [templatePath ~ '/includes/pagination.html', 'default/default/includes/pagination.html'] %}
+</div>
+{% endautoescape %}
