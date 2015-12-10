@@ -60,7 +60,7 @@
 		{%endif%}
 		<div class="content" style="background-color:white">
 			<div class="row">
-				<div class="{{modules.sidebarModule.contact ? 'col-xs-12 col-md-8' : 'col-xs-12 col-md-12'}}">
+				<div class="{{modules.sidebarModule.contact ? 'col-xs-12 col-sm-12 col-md-8' : 'col-xs-12 col-sm-12 col-md-12'}}">
 					{% include contentPath%}
 				</div> 
 			
@@ -80,13 +80,13 @@
 			{%if modules.contentModule.featured_services %}
 			<div class="row">
 				{%if modules.sidebarModule.enquiry %}
-				<div class="col-md-8">
+				<div class="col-md-8 col-xs-12 col-sm-12">
 				{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
 				</div>
 				{%endif%}
 
 				{%if modules.sidebarModule.enquiry %}
-				<div class="col-md-4">
+				<div class="col-md-4 col-xs-12 col-sm-12">
 				{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}}%}
 				</div>
 				{%endif%}

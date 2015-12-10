@@ -10,21 +10,67 @@ display:none;
 width:100%
 }
 
-
-.about , .contact , .gallery{
-	> h2{
-		color:@darkcolor;
-		font-size:30px;
-		padding:2px 4px 2px 4px;
-		text-transform:uppercase;
-		font-family:Amarnath;
-		padding: 15px;
+.activity{
+.panel-body {
+    padding: 19px;
+    border: 1px solid @colorblack;
+    border-radius: 0%;
+    margin: 10px;
 	}
+	.img-responsive {
+		opacity:0.8;
+		border: 1px solid @lightcolor;
+			&:hover{
+			border: 8px solid @lightcolor;
+			opacity:1;
+			}
+	}
+	h3{
+	color:@darkcolor;
+	text-transform:uppercase;
+		&:hover{
+		color:@colorblack;
+		}
+	}
+}
+.about , .contact , .gallery ,.activity{
+	>h2{
+			color:@lightcolor;
+			background: linear-gradient(90deg, @colorblack , @colorwhite);
+			font-size:30px;
+			margin-top: 2px;
+			padding-left: 100px;
+		}
+		&::before{
+				position : absolute;
+				content: '';
+				width: 500px;
+				height:100px;
+				top: 2px;
+				left : 9px;
+				background:url(../img/hed_icon1.png) no-repeat;	
+			}
 	p{
 	    padding-left: 25px;
     padding-right: 25px;
 	}
 	
+}
+.about{
+		p{
+			strong{
+				padding:10px;
+				color:@darkcolor;
+				font-size: 25px;
+				&:hover{
+				color:@colorblack;
+				}
+			}
+		}
+		h4{
+		padding-left:20px;
+		color:@colorblack;
+		}
 }
 .gallery {
     padding-left: 20px;
@@ -35,7 +81,7 @@ width:100%
 				border: 1px solid @darkcolor;
 				border-radius: 4px;
 				padding: 10px;
-			    width: 295px;
+			   
 		}
 }
 p{
@@ -59,14 +105,22 @@ center{
 		font-size:18px;
 	}
 .gallery1{
-		> h2{
-			color:@darkcolor;
+		>h2{
+			color:@lightcolor;
+			background: linear-gradient(90deg, @colorblack , @colorwhite);
 			font-size:30px;
-			padding:2px 4px 2px 4px;
-			text-transform:uppercase;
-			font-family:Amarnath;
-			padding-top: 15px;
+			margin-top: 2px;
+			padding-left: 100px;
 		}
+		&::before{
+				position : absolute;
+				content: '';
+				width: 500px;
+				height:100px;
+				top: 2px;
+				left : 9px;
+				background:url(../img/hed_icon1.png) no-repeat;	
+			}
 }	
 .gallery{
 		.thumbnail{
@@ -85,9 +139,9 @@ center{
 }
 div#googleMap {
     height: 504px;
-    padding: -32px;
-    width: 938px;
-    margin-left: 40px;
+    padding:50px;
+	width: 945px;
+	margin-left: 24px;
 }
 
 
@@ -117,6 +171,22 @@ div#googleMap {
 		}
 	}
 	.testimonial{
+	>h2{
+			color:@lightcolor;
+			background: linear-gradient(90deg, @colorblack , @colorwhite);
+			font-size:30px;
+			margin-top: 2px;
+			padding-left: 100px;
+		}
+		&::before{
+				position : absolute;
+				content: '';
+				width: 500px;
+				height:100px;
+				top: 2px;
+				left : 9px;
+				background:url(../img/hed_icon1.png) no-repeat;	
+			}
 		blockquote{
 			padding-left : 35px;
 			footer{
@@ -145,25 +215,38 @@ div#googleMap {
 	
 @media (max-width: 320px){
 		#carousel{
-			height:94px;
+			height:120px;
 		}
 		.contact_img{
            width: 75px;
 		}
-}
-@media (min-width: 321px) and(max-width: 768px){
-		#carousel{
-				height: 130px;
-		}
-		.contact_img{
-				width: 80px;
-			}
-		contact > h2, .gallery > h2 {
-			padding-top: 95px;
-		}
 		div#googleMap {
-			width: 560px;
+		width: 270px;
+	}
+}
+@media (min-width: 321px)and(max-width: 768px){
+	#carousel{
+			height:190px;
 		}
+	.contact_img{
+		width: 80px;
+	}
+	contact > h2, .gallery > h2 {
+		padding-top: 95px;
+	}
+	div#googleMap {
+		width: 480px;
+	}
 }	
-
+@media(max-width: 1024px){
+	.contact_img{
+			width: 80px;
+		}
+	contact > h2, .gallery > h2 {
+		padding-top: 95px;
+	}
+	div#googleMap {
+		//width: 560px;
+	}
+}	
 	

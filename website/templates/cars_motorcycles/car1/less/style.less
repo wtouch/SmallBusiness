@@ -185,6 +185,7 @@ body{
 			}*/
 }
 
+
 .homeAboutus{
 		>h1{
 			color:@lightcolor;
@@ -263,7 +264,6 @@ h2{
 		padding:5px 4px 2px 75px;
 		background: linear-gradient(90deg, @colorblack , @color);
 		height: 37px;
-		width: 295px;
 		border-radius:5px;
 		margin-top: 10px;
 
@@ -271,9 +271,7 @@ h2{
 .sidebarModule.enquiry {
     margin-top: -94px;
 }
-.panel.panel-default {
-    width: 295px;
-}	
+	
 .sidebarModule .panel-default {
     border: 1px solid @darkcolor;
 }	
@@ -394,6 +392,19 @@ h2{
 		width: 100px;
 		height: 80px;
 	}	
+	.navbar-default{
+		.navbar-nav{
+			>li{
+				>a{
+				background:none;
+				}
+			}
+		}
+		&::before{
+		background:none;
+		}
+		
+	}
 	.sidebarModule.contactus {
 		height: 500px;
 		padding-top: 28px;
@@ -401,37 +412,72 @@ h2{
 	.back2{
 		background-position: 10% 60%;
 	}
+	.activity{ 
+		h3 {
+			padding-top: 15px;
+		}	
+	}
 }
-@media (min-width: 321px) and(max-width: 768px){
+
+@media(max-width: 768px){
 	.logo{
 			width: 140px;
 			height: 100px;
 		}	
+		.navbar-default{
+			.navbar-nav{
+				>li{
+					>a{
+					background:none;
+					}
+				}
+			}
+			&::before{
+			background:none;
+			}
+		}
 	.sidebarModule.contactus {
 			height: 500px;
 			padding-top: 28px;
 		}
+	
 	.back2{
 			background-position: 10% 60%;
 		}
-	.panel.panel-default {
-		width:352px;
+.activity{ 
+		h3 {
+			padding-top: 15px;
+		}	
+	}		
+}
+@media(max-width: 1024px){
+	.logo{
+			width: 140px;
+			height: 100px;
+		}	
+		.navbar-default{
+			.navbar-nav{
+				>li{
+					>a{
+					background:none;
+					}
+				}
+			}
+			&::before{
+			background:none;
+			}
+		}
+	.sidebarModule.contactus {
+			height: 500px;
+			padding-top: 28px;
+		}
+	
+	.back2{
+			background-position: 10% 60%;
+		}	
+		.activity{ 
+		h3 {
+			padding-top: 20px;
+		}	
 	}
-	.contactus > .sections {
-		border: 1px solid #4f3b09;
-		border-radius: 4px;
-		padding: 10px;
-		width: 352px;
-	}
-	h3.subhead {
-		color: #ffffff;
-		font-size: 20px;
-		padding: 5px 4px 2px 75px;
-		background: linear-gradient(90deg, #000000, #1b1b1b);
-		height: 37px;
-		width: 352px;
-		border-radius: 5px;
-		margin-top: 2px;
-	}
-
 }

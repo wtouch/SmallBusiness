@@ -1,5 +1,4 @@
 <?php
-echo "fdjfkdsjfksd";
 require_once "config.php";
 
 if($config['host'] == 'portal.local' /*||  $config['host'] =="pragati.local"  /* ||  $config['host'] =="sunita.local"  */){
