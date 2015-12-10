@@ -14,7 +14,6 @@
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script>
-		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
@@ -22,7 +21,7 @@
 	</head>
 	<body>
 	    <div class="container">
-		<h3> {{data.business_name}}</h3>
+			<h3> {{data.business_name}}</h3>
 		   <!--  <div class="text-center brand">  
 					<a class="navbar-brand" href="#">{{data.business_name}}</a>
 			</div> -->
@@ -43,20 +42,19 @@
 					</ul>
 				</div>
 			
-		</nav>
-		<!-- <div class="first">
-		  <img src="{{path}}img/55.png">
-		</div> -->
-		<!-- <div class="second">
-		   <img src="{{path}}img/3.png">
-		</div> -->
-		<div class="row">
-		   <div class="col-sm-12 content anim">
-			  {% include contentPath %}
+			</nav>
+			
+			<div class="row">
+				<div class="mid-content">
+				   <div class=" col-md-12 content anim center-block">
+					  {% include contentPath %}
+					</div>
+				</div>
+				
 			</div>
+			  
 		</div>
-		</div>
-		  {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}  
+		  {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html> 
 {% endspaceless %}
