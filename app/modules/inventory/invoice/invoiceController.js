@@ -17,6 +17,15 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.numPages = "";		
 		$scope.currentDate = dataService.currentDate;
+		
+		
+		$scope.printDiv = function(divName) {
+			var printContents = document.getElementById(divName).innerHTML;
+			var popupWin = window.open('', '_blank', 'width=1000,height=620');
+			popupWin.document.open()
+			popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="css/style.css" /></head><body onload="window.print()">' + printContents + '</html>');
+			popupWin.document.close();
+		}
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Invoice",
@@ -178,11 +187,11 @@ define(['app'], function (app) {
 								$rootScope.postData("stock", angular.copy($scope.stockData),function(response){
 								});
 							})
-							
 						$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
 						}
 					})
 				},
+				printDiv : $scope.printDiv,
 				taxCalculate : function(modalOptions){
 					modalOptions.singleparticular.tax = {};
 					

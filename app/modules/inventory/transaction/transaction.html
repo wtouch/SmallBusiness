@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<div class="main-content">
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>
-			<h3 class="text-center">Transaction Report</h3>
+			<h3>Transaction Report</h3>
 			<div class="row" ng-init="">
 				<div class="col-sm-2">
 						<div class="bottomspace">
@@ -31,9 +31,9 @@
 			<div class="bottomspace">
 			<label for="date" class="control-label"></label>
 				<p class="input-group">
-				  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="rentdate1" min-date="minDate" ng-required="true" close-text="Close" ng-click="open($event,'rentdate1')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" />
+				  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened2" min-date="minDate" ng-required="true" close-text="Close" ng-click="open2($event,'opened')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" />
 						<span class="input-group-btn">
-							<button type="button" class="btn btn-default" ng-click="open($event, 'rentdate1')">
+							<button type="button" class="btn btn-default" ng-click="open2($event, 'opened')">
 							<i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
 				</p>
@@ -74,9 +74,9 @@
 					<div class="bottomspace">
 					<label for="date1" class="control-label"></label><!--ng-change="calcDuration(type,start)"-->
 							<p class="input-group">
-							  <input class="form-control" type="text"  id="date1" name="date1" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="rentdate2" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'rentdate2')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" />
+							  <input class="form-control" type="text"  id="date1" name="date1" datepicker-popup="{{dateFormat}}" ng-model="duration.start" is-open="opened1" min-date="minDate" max-date="maxDate" date-disabled="disabledDate(duration.start, mode)" ng-required="true" close-text="Close" ng-click="open1($event)"/>
 									<span class="input-group-btn">
-										<button type="button" class="btn btn-default" ng-click="open($event, 'rentdate2')">
+										<button type="button" class="btn btn-default" ng-click="open1($event)">
 										<i class="glyphicon glyphicon-calendar"></i></button>
 									</span>
 							</p>
@@ -85,13 +85,20 @@
 			<div class="col-sm-2"><!--ng-model="duration.start"-->
 				<div class="bottomspace">
 					<label for="year" class="control-label"></label>
-						<p class="input-group">
+					<p class="input-group">
+						  <input class="form-control" type="text"  id="date1" name="date1" datepicker-popup="{{dateFormat}}" ng-model="duration.end" is-open="opened" min-date="minDate" max-date="maxDate" date-disabled="disabledDate(duration.start, mode)" ng-required="true" ng-change="calcDuration(type, duration)" close-text="Close" ng-click="open($event)"/>
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="open($event)">
+									<i class="glyphicon glyphicon-calendar"></i></button>
+								</span>
+						</p>
+						<!-- <p class="input-group">
 						  <input class="form-control" type="text" ng-change="calcDuration(type, duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.end" is-open="rentdate3" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'rentdate3')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"/>
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default" ng-click="open($event, 'rentdate3')">
 								<i class="glyphicon glyphicon-calendar"></i></button>
 							</span>
-						</p>
+						</p> -->
 				</div>
 			</div>
 		</div>

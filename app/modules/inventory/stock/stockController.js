@@ -96,7 +96,7 @@ define(['app'], function (app) {
 				 { name:'price',enableSorting: false, enableFiltering: false,},
 				
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\',true,grid.appScope.statusParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\',true,grid.appScope.stockParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -132,7 +132,6 @@ define(['app'], function (app) {
 					unit : data.unit,
 					date:data.stockdate,
 					price : data.price,
-					status : data.status,
 					date : data.date,
 				} : {
 					date : dataService.sqlDateFormate(),
@@ -148,7 +147,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'stock','stockList');
+							$scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams);
 						}
 					})
 				},
@@ -159,7 +158,6 @@ define(['app'], function (app) {
 		}
 		$scope.stockParams = {
 			where : {
-				status : 1,
 				user_id : $rootScope.userDetails.id
 			},
 			join : [
@@ -177,28 +175,11 @@ define(['app'], function (app) {
 			},
 			cols : ["*, sum(t0.quantity) as quantity"]
 		}
-		$scope.statusParams = {
-			where : {
-				user_id : $rootScope.userDetails.id
-			},
-			join : [
-				{
-					joinType : 'INNER JOIN',
-					joinTable : "inventory_party",
-					joinOn : {
-						id : "t0.party_id"
-					},
-					cols : {name : "name"}
-				}
-			],
-			cols : ["*"]
-		}
 		// For Get (Select Data from DB)
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]

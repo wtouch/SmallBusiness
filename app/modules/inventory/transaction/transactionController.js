@@ -24,12 +24,6 @@ define(['app'], function (app) {
 			return new Date(date);
 		}
 		
-		$scope.open = function($event,rentdate){
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope[rentdate] = !$scope[rentdate];
-		};
-		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Income",
@@ -62,21 +56,21 @@ define(['app'], function (app) {
 		$scope.today = function() {
 				$scope.date = new Date();
 			};
-			$scope.open = function($event,opened){
-				$event.preventDefault();
-				$event.stopPropagation();
-				$scope.opened = ($scope.opened==true)?false:true;
-			};
-			$scope.open1 = function($event,opened){
-				$event.preventDefault();
-				$event.stopPropagation();
-				$scope.opened1 = ($scope.opened==true)?false:true;
-			};
-			$scope.open2 = function($event,opened){
-				$event.preventDefault();
-				$event.stopPropagation();
-				$scope.opened2 = ($scope.opened==true)?false:true;
-			};
+		$scope.open = function($event){
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.opened = ($scope.opened==true)?false:true;
+		};
+		$scope.open1 = function($event){
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.opened1 = ($scope.opened1==true)?false:true;
+		};
+		$scope.open2 = function($event){
+			$event.preventDefault();
+			$event.stopPropagation();
+			$scope.opened2 = ($scope.opened2==true)?false:true;
+		};
 		
 		$scope.transactionCategory = [];
 		$scope.transactionList = {
@@ -121,7 +115,7 @@ define(['app'], function (app) {
 				enableSorting: false, enableFiltering: false,
 					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="description" placeholder="description">'},
 				{ name:'date',
-				enableSorting: false, enableFiltering: false,
+				enableSorting: true, enableFiltering: false,
 					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="date" placeholder="date">',
 					},
 				{ name:'credit_amount',
@@ -299,7 +293,6 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$notification[response.status]("Transaction Successfull", response.message);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})

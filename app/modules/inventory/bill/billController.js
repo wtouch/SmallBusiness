@@ -14,6 +14,14 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		
+		$scope.printDiv = function(divName) {
+			var printContents = document.getElementById(divName).innerHTML;
+			var popupWin = window.open('', '_blank', 'width=1000,height=620');
+			popupWin.document.open()
+			popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="css/style.css" /></head><body onload="window.print()">' + printContents + '</html>');
+			popupWin.document.close();
+		}
+		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Bill",
@@ -82,7 +90,7 @@ define(['app'], function (app) {
 					+
 					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPaybill(\'modules/inventory/bill/payBill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
 							+
-					'<a ng-click="grid.appScope.openViewbill(\'modules/inventory/bill/viewbill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openViewbill(\'modules/inventory/bill/viewbill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 							+
 					'<a ng-click="grid.appScope.openViewreceipt(\'modules/inventory/bill/viewreceipt.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view Receipt Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					
@@ -184,31 +192,29 @@ define(['app'], function (app) {
 				}:{
 
 				},
-				postData : function(table,input){
-					console.log(table,input);
+				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							// For Insert each item from particulars into Stock Table
+							
 							$scope.stockData = {};
 							$scope.stockData.user_id = input.user_id;
 							$scope.stockData.party_id = input.party_id;
-							if(input.date) $scope.stockData.date=input.date;
-							$scope.stockData.stockdate=input.bill_date;
-							$scope.stockData.modified_date=input.modified_date;
-							$scope.stockData.stock_type = 0;
-							
-							angular.forEach(input.particulars, function(value, key){
+							if(input.date) $scope.stockData.date = input.date;
+							$scope.stockData.stockdate = input.generated_date;
+							$scope.stockData.modified_date = input.modified_date;
+							$scope.stockData.stock_type = 0; 
+							angular.forEach(input.particular, function(value, key){
 								$scope.stockData.goods_name = value.particular_name;
 								$scope.stockData.quantity =  "+" + value.quantity;
 								$scope.stockData.price =value.price;
 								$scope.stockData.goods_type = value.goods_type;
 								$scope.stockData.category = value.category;
-								//console.log($scope.stockData);
-								
 								$rootScope.postData("stock", angular.copy($scope.stockData),function(response){
 								});
 							})
 							
-							$scope.getData(false, $scope.currentPage, 'bill','billData',$scope.billParams);
+						$scope.getData(false, $scope.currentPage, 'bill','billData',$scope.billParams);
 						}
 					})
 				},
@@ -337,7 +343,8 @@ define(['app'], function (app) {
 				};
 			var modalOptions = {
 				date : dataService.sqlDateFormate(),
-				viewBill :data
+				viewBill :data,
+				printDiv : $scope.printDiv,
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})

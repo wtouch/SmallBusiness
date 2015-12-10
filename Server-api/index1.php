@@ -51,6 +51,9 @@ function getRecords(){
 		if(isset($params['where'])){
 			$db->setWhere($params['where'], $table);
 		}
+		if(isset($params['whereRaw'])){
+			$db->setWhere($params['whereRaw'], $table, false, true);
+		}
 		$db->setColumns($table,$cols);
 		//print_r($params);
 		if(isset($params['join'])){
