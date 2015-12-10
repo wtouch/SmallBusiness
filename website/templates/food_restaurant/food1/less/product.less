@@ -101,36 +101,42 @@
 				}
 			}
 }
-.product{
-				background-color:transparent;
-				border:none;
-				h4{
-					border-bottom:1px solid @darkcolor;
-				}
-		.prodimg{
-			    width: 200px;
-				height: 210px;
-			    margin: 0px auto;
-				overflow: hidden;
-				
-				
-				}
-		.description{
-				overflow:hidden;
-				height:148px;
+	.product{
+			background-color:transparent;
+			border:none;
+			h4{
 				border-bottom:1px solid @darkcolor;
-				border-image: url("../img/line-gred.jpg");
-				border-image-width: 0 0 1px 0;
+			}
+		.prodimg{
+			width: 200px;
+			height: 150px;
+			margin: 0px auto;
+			overflow: hidden;
+				img{
+					min-height :150px;
+					border : 2px solid transparent;
+					padding : 10px;
+					&:hover{
+						border : 2px solid @darkbackcolor;
+					}
+				}
+			}
+		.description{
+			overflow:hidden;
+			height:148px;
+			border-bottom:1px solid @darkcolor;
+			border-image: url("../img/line-gred.jpg");
+			border-image-width: 0 0 1px 0;
 			}
 		.readmore{
-				margin-left:490px;
-				
-				.btn-info{
-				background-image:url("../img/send-enquiry.jpg");
-				border:none;
-				padding: 21px 82px;
-				margin-top: 15px;
-				}
+			margin-left:490px;
+			
+			.btn-info{
+			background-image:url("../img/send-enquiry.jpg");
+			border:none;
+			padding: 21px 82px;
+			margin-top: 15px;
+			}
 			}
 			&::after{
 				content : url('../img/vector-sep.jpg');
@@ -139,24 +145,24 @@
 				bottom: 10px;
 				z-index : -1;
 			}
-}
-
-.services{
-		margin-top:150px;
-	.products{
-		.thumbnail{
-			background: url(../img/box-bg.jpg) repeat-y;
-			width:293px;
-			margin-left:8px;
-			border-radius:0px;
-			border:none;
-			padding: 25px;
-			background-color:@darkbackcolor;
-			.img-responsive{
-			
-				height:180px;
-			}
-			h3{
+	}
+.Featured_products{
+		margin-top:120px;
+		margin-bottom:70px;
+		
+		.products{
+			.thumbnail{
+				background: url(../img/box-bg.jpg) repeat-y;
+				width:293px;
+				margin-left:8px;
+				border-radius:0px;
+				border:none;
+				padding: 25px;
+				background-color:@darkbackcolor;
+				.img-responsive{
+					height:180px;
+				}
+				h3{
 				    position: absolute;
 					top: -85px;;
 					left: 70px;
@@ -179,7 +185,7 @@
 			content : url('../img/box-bot.jpg');
 			position : absolute;
 			left : 23px;
-			bottom: -53px;
+			bottom: -49px;
 			z-index : -1;
 		}
 			.prodimg{

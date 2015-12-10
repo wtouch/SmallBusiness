@@ -48,12 +48,11 @@ h2{
 		}
 body {
     background:@back ;
-    font: 12px Arial, Helvetica, sans-serif;
     color: @color;
 }
 .logo{
 	position:absolute;
-	top:0px;
+	top:40px;
 	height:70px;
 	width:70px;
 }
@@ -76,7 +75,6 @@ header{
 		.navbar-nav{
 				>li{
 					position :relative;
-					display: inline-block;
 				  vertical-align: middle;
 				  -webkit-transform: translateZ(0);
 				  transform: translateZ(0);
@@ -208,11 +206,13 @@ header{
 	border-bottom:1px solid @darkcolor;
 	}
 	.img-circle {
-    border-radius: 20%;
-    height: 100px;
+		border-radius: 40%;
+		height: 80px;
 	}
-
-
+	cite{
+		font-size:14px;
+		padding:15px;
+	}
 }
 	.pagination{	
 		border-bottom:1px solid @darkcolor;
@@ -259,8 +259,7 @@ header{
 	}
 	
 	.sociallinks{
-			margin-top: 100px; 
-			margin-left:530px;
+			margin-top: 50px; 
 			ul{
 				list-style:none;
 				li{
@@ -271,6 +270,7 @@ header{
 						color:@color;
 						&:hover{
 							color:@colorwhite;
+							text-decoration:none;
 						}
 					}
 					&:last-child{
@@ -301,7 +301,16 @@ footer{
 }
 @media (max-width: 320px){
 	
-	
+	h1{
+	&::after{
+			display:none
+			}
+	}
+h2{
+	&::after{
+			display:none
+			}
+		}
 	.services{
 		margin-top:0px;
 	}
@@ -309,12 +318,18 @@ footer{
 	.products {
 		margin-top: 180px;
 		border:none;
+
+		&:first-child{
+			margin-top: 0px;
+			}
 		.thumbnail{
 			border:none;
 			}
+		}		
+		.featured_products{
+		margin-top:-30px;
 		}
-		
-		.featured_services{
+.featured_services{
 		margin-top:80px;
 		}
 }

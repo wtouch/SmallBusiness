@@ -16,10 +16,12 @@
 @import "project.less";
 @import "product.less";
 @import "general.less";
-body{
-	p{
-				color:@colorblack;
-			}
+.sidebar{
+	height:200px;
+	background-color:red;
+}
+body,p{
+	color:@colorblack;	
 	font-family:CinzelDecorative-Black;
 	.homeAboutus{
 		padding: 0px 20px 25px 0px;
@@ -35,6 +37,8 @@ body{
 	}
 	h1,h2,h3,h4{
 		font-family:CinzelDecorative-Black;
+		/*background:url("../img/22.png");
+		background-repeat:no-repeat;*/
 	}
 header{
 	background:url(../img/header-bg.jpg) repeat-x;
@@ -42,6 +46,49 @@ header{
 		padding:0px;
 	}
 }
+
+
+#slider1_container{
+	position: relative; 
+	top: 0px; 
+	left: 0px;
+	width: 600px;
+    height: 500px;
+}
+  /* jssor slider arrow navigator skin 08 css */
+            /*
+            .jssora08l                  (normal)
+            .jssora08r                  (normal)
+            .jssora08l:hover            (normal mouseover)
+            .jssora08r:hover            (normal mouseover)
+            .jssora08l.jssora08ldn      (mousedown)
+            .jssora08r.jssora08rdn      (mousedown)
+            */
+            .jssora08l, .jssora08r {
+                display: block;
+                position: absolute;
+                /* size of arrow element */
+                width: 50px;
+                height: 50px;
+                cursor: pointer;
+                background: url(../img/a08.png) no-repeat;
+                overflow: hidden;
+                opacity: .4;
+                filter: alpha(opacity=40);
+            }
+            .jssora08l { background-position: -5px -35px; }
+            .jssora08r { background-position: -65px -35px; }
+            .jssora08l:hover { background-position: -5px -35px; opacity: .8; filter:alpha(opacity=80); }
+            .jssora08r:hover { background-position: -65px -35px; opacity: .8; filter:alpha(opacity=80); }
+            .jssora08l.jssora08ldn { background-position: -5px -35px; opacity: .3; filter:alpha(opacity=30); }
+            .jssora08r.jssora08rdn { background-position: -65px -35px; opacity: .3; filter:alpha(opacity=30); }
+			
+	.jssora08l{
+			top: 8px; left: 8px;
+	}
+	.jssora08r{
+			bottom: 8px; left: 8px;
+	}
 .navbar-default {
 		border-top-left-radius:0px;
 		border-top-right-radius:0px;
@@ -50,6 +97,7 @@ header{
 		margin-bottom:0px;
 		min-height: 80px;
 		max-width: 100%;
+		-webkit-transition: .3s linear all;
 		.navbar-nav{
 			>li{
 				position :relative;
@@ -68,6 +116,7 @@ header{
 					border-top: 4px @lightbackcolor  solid;
 					background: @darkcolor;
 					padding:29px 18px;
+				   -webkit-transition: .3s linear all;
 				}
 				ul{
 					display : none;
@@ -84,20 +133,21 @@ header{
 					>li{
 						padding : 10px;
 						position : relative;
+						border-bottom:1px solid @colorblack;
 						&:hover{
 								border-top: 5px @lightbackcolor  solid;
 								background: @darkcolor;
 								border-bottom:1px solid @colorblack;
+								-webkit-transition: .3s linear all;
 						}
 						>a{
 							text-decoration:none;
 							color:@colorwhite;
+							&:hover{
+								color :@colorblack;
 						}
-						&:hover{
-							a{
-								color :@colorblack ;
-							}
 						}
+						
 						> ul{
 							display: none;
 							list-style :none;
@@ -197,12 +247,22 @@ header{
 			li{
 				display:inline;
 				padding: 10px 15px;
+				
+				
 				a{
 					color:@colorblack;
 					font-weight:bold;
 					&:hover{
 						color:@colorblack;
 						font-weight:bold;
+					}
+					img{
+						height:50px;
+						width: 20%;
+					.img-circle {
+						border-radius: 50%;
+						
+						}
 					}
 				}
 				&:last-child{
@@ -211,10 +271,7 @@ header{
 			}	
 			}
 	}
-.img-circle {
-    border-radius: 50%;
-    width: 20%;
-	}
+
 footer{
 		color:@colorblack;
 		padding:15px;
@@ -238,6 +295,7 @@ footer{
 		}
 	}
 .nav-footer{
+	text-align:center;
 	background:url(../img/header-bg.jpg) repeat-x;
 	margin-bottom:0px;
 		.navbar-nav{
