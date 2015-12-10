@@ -9,8 +9,8 @@ jQuery(document).ready(function() {
 $(document).ready(function(){
 	
 	
-		var windowHeight = $(window).height();
-		$('body').css('min-height', windowHeight);
+		/* var windowHeight = $(window).height();
+		$('body').css('min-height', windowHeight); */
   
 	var sliderMode, minSlides, maxSlides;
 		if($(window).width() <= "480"){
