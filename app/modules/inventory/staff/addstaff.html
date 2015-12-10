@@ -11,10 +11,13 @@
 			<a ng-click="modalOptions.showFormPart('officialDetails', modalOptions)">Official Details</a>
 		</li>
 	</ul>
+<div class="modal-body">
+<form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
 		<ng-include  ng-show="modalOptions.formPart=='personalDetails'" 	src="'modules/inventory/staff/personalDetails.html'">
 		</ng-include> 
 		<ng-include  ng-show="modalOptions.formPart=='officialDetails'" src="'modules/inventory/staff/officialDetails.html'">
 		</ng-include> 
-
+</form>
+</div>
 
 

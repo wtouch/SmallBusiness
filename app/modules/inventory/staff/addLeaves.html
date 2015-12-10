@@ -6,7 +6,7 @@
 
 <div class="modal-body">
 <form class="form-horizontal" name="addleaveForm" role="form" ng-submit="addleaveForm.$valid" novalidate="novalidate">
-{{modalOptions.addleave}}
+<!-- {{modalOptions.addleave}} -->
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Approved By *</label>
 			<div class="col-sm-4">
@@ -41,7 +41,7 @@
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
 				<label for="staff_id" class="col-sm-1 control-label"> Select Staff* </label>
 				<div class="col-sm-4">
-					<select id="staff_id" class="form-control" ng-model="modalOptions.addleave.staff_id" ng-options="item.id as item.name for item in modalOptions.staffList">
+					<select id="staff_id" class="form-control" ng-model="modalOptions.addleave.staff_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
 						<option value="">Select Staff</option>
 						<option value="1">1</option>
 					</select>
@@ -68,7 +68,7 @@
 			<label for="select type" class="col-sm-1 control-label">Status*</label>
 			<div class="col-sm-4">
 					<select id="status" name="status" class="form-control" 
-					ng-model="modalOptions.addleave.status">
+					ng-model="modalOptions.addleave.status" required>
 					<option value="" selected>select Status</option>
 					<option value="1">APPROVED</option>
 					<option value="0">REJECTED</option>
@@ -78,14 +78,14 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Leave for*</label>
 			<div class="radio col-sm-2">
-			<label><input type="radio" name="leave" value="0.5" ng-model="modalOptions.addleave.leaves_for">Half Day</label>
+			<label><input type="radio" name="leave" value="0.5" ng-model="modalOptions.addleave.leaves_for" ng-click="otherLeaves = false">Half Day</label>
 			</div>
 			<div class="radio col-sm-2">
-			<label><input type="radio" name="leave" value="1" ng-model="modalOptions.addleave.leaves_for">Full Day</label>
+			<label><input type="radio" name="leave" value="1" ng-model="modalOptions.addleave.leaves_for" ng-click="otherLeaves = false">Full Day</label>
 				</div>
-			<div class="radio col-sm-2">
-			<label><input type="radio" name="leave" value="no_of_day" ng-model="modalOptions.addleave.leaves_for">No of Days</label>
-			<input type="text" id="leave" class="form-control" ng-if="modalOptions.addleave.leaves_for=='no_of_day'" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addleave.leaves_for" name="leave" placeholder="No of Days" required />
+			<div class="radio col-sm-2">{{otherLeaves}}
+			<label><input type="radio" name="leave" value="true" ng-click="otherLeaves = true">No of Days</label>
+			<input type="text" id="leave" class="form-control" ng-hide="!otherLeaves" ng-if="otherLeaves"  ng-model="modalOptions.addleave.leaves_for" name="leave" placeholder="No of Days" required />
 		<span class="help-block" ng-show="addleaveForm.leave.$dirty && addleaveForm.leave.$invalid">
 		<span ng-show="(addleaveForm.leave.$dirty)" class="text-danger">Enter Number Only!</span></span>
 			</div>

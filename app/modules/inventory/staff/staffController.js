@@ -155,7 +155,7 @@ define(['app'], function (app) {
 					cellTemplate : '<a ng-click="grid.appScope.openSalary(\'modules/inventory/staff/salary.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="Salary" > <span class="	glyphicon glyphicon-usd" ></span></a>'
 					+
 					'<a ng-click="grid.appScope.openPayslip(\'modules/inventory/staff/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="viewpayslip" > <span class="glyphicon glyphicon-eye-open" ></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-click="grid.appScope.openViewleaves(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 					/* +'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="View Staff"><span class="glyphicon glyphicon-eye-open"></span></a>' */
 					+ '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
@@ -230,14 +230,7 @@ define(['app'], function (app) {
 						modalOptions.formPart = formPart;
 					},
 					getData : $scope.getData,
-					leaveParams : {
-						where : {
-							status : 1,
-							user_id : $rootScope.userDetails.id,
-						
-						},
-						cols : ["*"]
-					},
+				
 					attendanceParams : {
 						where : {
 							status : 1,
@@ -255,6 +248,35 @@ define(['app'], function (app) {
 			
 		}
 		
+			$scope.openViewleaves = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+			viewleaves:{
+						user_id : $rootScope.userDetails.id,
+						name:data.name,
+						staff_id : data.staff_id,
+						date : data.date,
+						//debit_amount:data.debit_amount
+					},
+					
+				getData : $scope.getData,
+					leaveParams : {
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+						
+						},
+						cols : ["*"]
+					}
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
+		
 			$scope.openPayslip = function(url,data){
 				var modalDefault = {
 				templateUrl: url, // apply template to modal
@@ -262,13 +284,23 @@ define(['app'], function (app) {
 				};
 			var modalOptions = {
 				date : dataService.sqlDateFormate(),
-				viewPayslip :data,
-					getData : $scope.getData,
-				salaryParams : {
+			viewPayslip:{
+						user_id : $rootScope.userDetails.id,
+						salary:data.salary,
+						name:data.name,
+						staff_id : data.staff_id,
+						date : data.date,
+						//debit_amount:data.debit_amount
+					},
+					
+				getData : $scope.getData,
+				paysalaryParams : {
 						where : {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
-							
+							reference_id : data.id,
+							type : "salary" // staff_dr
+							//category : "" // salary
 						},
 						cols : ["*"]
 					}
@@ -321,7 +353,8 @@ define(['app'], function (app) {
 					staff_id : data.staff_id,
 					salary : data.salary,
 					date : dataService.sqlDateFormate(),
-					modified_date : dataService.sqlDateFormate(),user_id : $rootScope.userDetails.id,
+					modified_date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,
 					status:1
 				},
 			
@@ -363,7 +396,7 @@ define(['app'], function (app) {
 					obj.conveyance=800;
 					console.log(obj.conveyance);
 					
-					obj.total=parseFloat(parseFloat(obj.basic)+parseFloat(obj.da)+parseFloat(obj.hra)+parseFloat(obj.cca)+parseFloat(obj.conveyance)).toFixed(2);
+					obj.total=(parseFloat(parseFloat(obj.basic)+parseFloat(obj.da)+parseFloat(obj.hra)+parseFloat(obj.cca)+parseFloat(obj.conveyance))).toFixed(2);
 					console.log(obj.total);
 					
 					obj.pf=parseFloat(obj.basic)*0.12;
@@ -386,7 +419,8 @@ define(['app'], function (app) {
 						console.log(obj.td);
 						
 						obj.nsp=parseFloat(obj.total)-parseFloat(obj.td);
-						obj.type="salary";
+						obj.type="staff_Debit";
+						obj.category="salary";
 					console.log(obj.nsp);
 				},
 				getData:$scope.getData,	
@@ -402,14 +436,22 @@ define(['app'], function (app) {
 							$scope.transData.type=input.type;
 							$scope.transData.reference_id=input.staff_id;
 							$scope.transData.description={
+								working_day:input.working_day,
+								unpaid_leaves:input.unpaid_leaves,
+								paid_leaves:input.paid_leaves,
+								payable_day:input.payable_day,
+								cms:input.cms,
 								basic : input.basic,
 								da :input.da,
 								hra:input.hra,
 								esic:input.esic,
 								pf:input.pf,
 								pt:input.pt,
+								cca:input.cca,
+								td:input.td,
+								nsp:input.nsp,
 								conveyance:input.conveyance,
-								total:input.total
+								total:input.total,
 							};
 							console.log($scope.transData);
 							$rootScope.postData("transaction", $scope.transData,function(response){
