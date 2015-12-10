@@ -530,7 +530,6 @@
 }
 .products .thumbnail {
   background-color: #000000;
-  height: 200px;
   margin-top: 10px;
 }
 .products .prodimg {
@@ -608,12 +607,16 @@
   position: relative;
   margin-top: -51px;
   z-index: -9;
+  max-height: 450px;
   background: transparent;
   margin-left: 16px;
   margin-right: 16px;
 }
 .carousel img {
   width: 100%;
+}
+.carousel .carousel .item {
+  max-height: 450px;
 }
 .carousel .carousel-indicators li {
   border: 1px solid #ffffff;
@@ -627,12 +630,6 @@
   margin: 0;
   background-color: #fa6903;
   border: 1px solid #fa6903;
-}
-.carousel .item {
-  overflow: hidden;
-}
-.carousel .item active {
-  overflow: hidden;
 }
 .carousel ol {
   display: none;
@@ -654,10 +651,10 @@
   font-size: 30px;
 }
 .carousel .item {
-  height: 350px;
+  max-height: 450px;
 }
 .carousel .item active {
-  height: 350px;
+  max-height: 450px;
 }
 .carousel .glyphicon-chevron-left:before {
   content: "\e079";
@@ -700,7 +697,7 @@
 .bx-wrapper {
   height: 200px;
   width: 100%;
-  background-color: #ecd070;
+  background-color: #6e0001;
 }
 .singleproduct img {
   border: solid 0px #ECD070;
@@ -720,10 +717,31 @@
     transform: translateY(10px);
   }
 }
+.activity h4 {
+  color: #6e0001;
+  text-shadow: 1px 1px 2px #111111, 0 0 25px #bf0002, 0 0 1px #bf0002;
+  animation-name: amar1;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+}
 .activity p {
   margin: 0 0 10px;
   height: 100px;
   overflow: hidden;
+}
+@keyframes amar1 {
+  0% {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(10px);
+  }
+  100% {
+    margin-left: 50px;
+    margin-top: 25px;
+  }
 }
 .box {
   box-shadow: 0 0 12px #ccc;
@@ -856,8 +874,58 @@ fieldset[disabled] .btn-info.active {
 .contact .panel-default {
   background: none;
 }
+.contact h5 {
+  font-size: 26px;
+  text-align: center;
+  color: #6e0001;
+}
+.contact h4 {
+  color: #6e0001;
+  animation-name: amar5;
+  text-align: center;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+.contact h4:hover {
+  animation-name: amar6;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+.anim5 {
+  background: #E9E9E9;
+  border-radius: 50%;
+  border: 5px solid #ECD070;
+  padding: 45px 100px;
+  transition: all 300ms linear;
+}
+@keyframes amar5 {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+}
+@keyframes amar6 {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+}
 .img-responsive {
   width: 100%;
+}
+.panel-default {
+  border-color: #000000;
+}
+.form-control:focus {
+  border-color: #ecd070;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -934,11 +1002,11 @@ body .navbar-toggle {
   border-color: #ffffff;
 }
 body .navbar-toggle:hover {
-  background-color: #fa6903;
+  background-color: #480506;
 }
 body .navbar-default .navbar-toggle:hover,
 body .navbar-default .navbar-toggle:focus {
-  background-color: #fa6903;
+  background-color: #480506;
 }
 body h4 {
   font-size: 30px;
@@ -1034,8 +1102,6 @@ body .ribbon {
   background: #bf0002;
   color: #fff;
   text-align: center;
-  margin: 2em auto 3em;
-  /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
 }
 body .ribbon:before,
 body .ribbon:after {
@@ -1082,6 +1148,62 @@ body .content h1 {
   font-family: 'amarkalyane';
   font-size: 40px;
   padding-left: 47px;
+}
+body .content h4 {
+  padding-left: 20px;
+}
+body .content p {
+  padding-left: 25px;
+}
+body .content p strong {
+  color: #6e0001;
+}
+body .sociallinks ul {
+  float: right;
+  margin-top: -34px;
+}
+body .sociallinks ul li {
+  display: inline-block;
+  padding: 4px 0px 4px 10px;
+  text-align: right;
+}
+body .sociallinks ul li a {
+  display: block;
+  padding: 0px 3px;
+  width: 45px;
+  height: 45px;
+}
+body .sociallinks ul li a div {
+  border-radius: 50% !important;
+}
+body .img3 {
+  width: 38px;
+  height: 40px;
+  display: inline-block;
+}
+body #img1 {
+  background: url('../img/sprite.png') 2px -37px;
+}
+body #img1:hover {
+  background: url('../img/sprite.png') 2px 4px;
+}
+body #img2 {
+  background: url('../img/sprite.png') -36px -37px;
+}
+body #img2:hover {
+  background: url("../img/sprite.png") -36px 4px;
+}
+body #img3 {
+  background: url('../img/sprite.png') -74px -37px;
+}
+body #img3:hover {
+  background: url("../img/sprite.png") -74px 4px;
+}
+body #img4 {
+  background: url('../img/sprite.png') -149px -37px;
+}
+body #img4:hover {
+  background: url("../img/sprite.png") -149px 4px;
 }
 body .tagline {
   margin-top: 50px;
@@ -1184,12 +1306,35 @@ body .navbar-nav > li {
     background: #bf0002;
     border-bottom: 0px solid #fa6903 !important;
   }
+  body body .ribbon::before {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1em;
+    border: 0px solid #bf0002;
+    z-index: -1;
+  }
   body .wt {
     width: 150px;
   }
 }
-body .readmore {
-  position: relative;
+@media (max-width: 768px) {
+  body .ribbon::before {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1em;
+    border: 0px solid #bf0002;
+    z-index: -1;
+  }
+  body .ribbon:after {
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -1em;
+    border: 0px solid #bf0002;
+    z-index: -1;
+  }
 }
 body .btn-info {
   background: #bf0002;
@@ -1198,7 +1343,16 @@ body .btn-info {
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
   color: #ffffff;
+  position: relative;
   border: 0px;
+}
+body .btn-info.disabled,
+body .btn-info[disabled] {
+  background-color: #bf0002;
+  border-color: none;
+  width: 100px;
+  height: 30px;
+  padding: 3px 7px;
 }
 body .btn-info:hover {
   background: #bf0002;
@@ -1221,7 +1375,7 @@ body .btn-info::after {
   height: -35px;
   top: 0px;
   border-top: 16px solid transparent;
-  left: 215px;
+  left: 92px;
   border-bottom: 11px solid transparent;
   border-left: 20px solid #bf0002;
   border-right: -1px solid transparent;

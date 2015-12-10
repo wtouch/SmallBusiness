@@ -1,0 +1,95 @@
+{% autoescape false %}
+	<script src="http://maps.googleapis.com/maps/api/js">
+	</script>
+	<script>
+		function initialize() {
+			var mapProp = {
+				center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+				zoom:12,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
+			var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+			var marker=new google.maps.Marker({
+				position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
+			});
+			marker.setMap(map);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+<div class="content">
+	<div class="row contact">
+		<div class="col-xs-12 col-sm-12 col-lg-8">
+			<div class="row ">
+					<div class="col-xs-12 col-sm-12 col-lg-8">
+						<div id="googleMap"></div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-lg-4">
+								
+									
+										<b>Address</b>
+										
+											{{data.contact_profile.address}}<br>
+											{{data.city}}-{{data.pincode}},<br>
+											{{data.state|capitalize}},<br>
+											{{data.country|capitalize}}.
+										
+									
+								{%if (data.contact_profile.address1) or (data.contact_profile.address2) or (data.contact_profile.address3) or (data.contact_profile.address4)%}
+								
+									<td colspan="2">
+										{%if data.contact_profile.address1%}
+											<span>{{data.contact_profile.address1}}</span>
+										{% endif %}
+										
+										{%if data.contact_profile.address2%}
+										
+											<span>{{data.contact_profile.address2}}</span>
+										{% endif %}
+										
+										{%if data.contact_profile.address3%}
+										
+											<span>{{data.contact_profile.address3}}</span>
+										{% endif %}
+										
+										{%if data.contact_profile.address4%}
+											
+											<span>{{data.contact_profile.address4}}</span>
+										{% endif %}
+									
+								
+								{% endif %}
+								{%if data.contact_profile.telephone%}
+								
+									<b>Telephone</b>
+									{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}
+									
+								
+								{% endif %}
+								<b>Mobile</b>
+									<td>{{data.contact_profile.mobile}}{{(data.contact_profile.alternate_mobile) ? ", " ~ data.contact_profile.alternate_mobile}}</td>
+								
+								
+									<b>E-mail Id</b>
+									
+										<a class="email" href="mailto: {{data.contact_profile.email}}">{{data.contact_profile.email}}</a><br>
+										<a class="email" href="mailto: {{data.contact_profile.alternate_email}}">{{data.contact_profile.alternate_email}}</a>
+									
+								
+								{%if data.contact_profile.contact_website%}
+								<br>
+									<b>Website</b>
+									<a href="/{{data.contact_profile.contact_website}}">{{data.contact_profile.contact_website}}</a>
+									
+								
+								{% endif %}
+						
+					</div>
+					
+			</div>
+		</div>
+		<div class="col-lg-4">
+			{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html']  %}
+		</div>
+	</div>
+</div>	
+{% endautoescape %}

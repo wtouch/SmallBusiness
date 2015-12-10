@@ -18,14 +18,11 @@
 	</script>
 	<h2>Contact Us</h2>
 	<div class="row contact">
-		<div class="col-xs-12 col-md-6 col-sm-6">
-		{%include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html']%}
 		
-		</div>
-			<div class="col-xs-12 col-md-6 col-sm-6">
+			<div class="col-xs-12 anim5 col-md-6 col-sm-6">
 			<h4>Contact us</h4>
 			<p>{{data.business_name}}:</p>
-			<h4>{{data.contact_profile.contact_person}}</h4>
+			<h5>{{data.contact_profile.contact_person}}</h5>
 						<b>Address:</b>
 						<address>
 							{{data.contact_profile.address}}
@@ -43,6 +40,10 @@
 					{{data.contact_profile.email}}
 				</p>
 				<p>{{data.contact_profile.alternate_email}}</p>
+			</div>
+			<div class="col-xs-12 col-md-6 col-sm-6">
+				{%include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html']%}
+		
 			</div>
 		<div class="col-xs-12 col-md-12">
 			<div id="googleMap"></div>

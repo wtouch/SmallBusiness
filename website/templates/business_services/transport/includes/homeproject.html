@@ -1,0 +1,49 @@
+{% if home_project %}
+<div class="navbar-header">
+	<button type="button" class="navbar-toggle collapsed projdtls" data-toggle="collapse" data-target="#projDtls">{{home_project.title}} Details
+		<span class="sr-only">Toggle navigation</span>
+	</button>
+</div> 
+<div class="row homeproject collapse navbar-collapse" id="projDtls">
+	<div class="projectnav">
+			<ul class="nav nav-stacked">
+				<li {{ projectPage == 'overview' ? 'class="active"' }}>
+					<a href="/projects/{{home_project.title}}/{{home_project.id}}/overview?homeProject=true">Overview</a>
+				</li>
+				<li {{ projectPage == 'amenities' ? 'class="active"' }}>
+					<a href="/projects/{{home_project.title}}/{{home_project.id}}/amenities?homeProject=true">Amenities/Specifications</a>
+				</li>
+				<li {{ projectPage == 'locationmap' ? 'class="active"' }}>
+					<a href="/projects/{{home_project.title}}/{{home_project.id}}/locationmap?homeProject=true">Location Map</a>
+				</li>
+				<li {{ projectPage == 'layoutplan' ? 'class="active"' }}>
+					<a href="/projects/{{home_project.title}}/{{home_project.id}}/layoutplan?homeProject=true">Layout Plan</a>
+				</li>
+				<li {{ projectPage == 'floorplans' ? 'class="active"' }}>
+					<a href="/projects/{{home_project.title}}/{{home_project.id}}/floorplans?homeProject=true">Floor Plans</a>
+				</li>
+				<li {{ projectPage == 'projgallery' ? 'class="active"' }}>
+					<a href="/projects/{{home_project.title}}/{{home_project.id}}/projgallery?homeProject=true">Gallery</a>
+				</li> 
+			</ul>
+		</div>
+
+
+		<div class="projectCarousal">
+			{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : home_project.project_images } only %}
+		</div>
+
+		<div class="projsnap">
+				<p><strong>{{home_project.title}}</strong>
+				<br>{{home_project.overview.projectsubtitle}}</p>
+				<p>Project Type : <br><strong>{{home_project.type}}</strong></p>
+				{% if home_project.location %}
+					<p>Location : <br><strong>{{home_project.location}}</strong></p>
+				{% endif %}
+				<p>Area : <br><strong>{{home_project.project_info.buildup_area}} Sq.ft</strong></p>
+				
+				<p>Price :<br> <strong>Rs.{{home_project.price}}</strong></p>
+		</div>
+	
+</div>
+{% endif %}
