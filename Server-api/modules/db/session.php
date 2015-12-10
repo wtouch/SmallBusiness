@@ -66,10 +66,12 @@ class session {
 			}
 			session_unset();     // unset $_SESSION variable for the run-time 
 			session_destroy();   // destroy session data in storage
-			$msg = "Logged Out Successfully...";
+			$msg['status'] = "success";
+			$msg['message'] = "Logged Out Successfully...";
 		}
 		else{
-			$msg = "Not logged in...";
+			$msg['status'] = "warning";
+			$msg['message'] = "Not logged in...";
 		}
 		if (isset($_SERVER['HTTP_COOKIE'])) {
 			$cookies = explode(';', $_SERVER['HTTP_COOKIE']);

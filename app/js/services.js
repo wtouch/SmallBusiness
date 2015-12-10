@@ -360,14 +360,14 @@ define(['app'], function (app) {
 					$cookieStore.remove(k);
 				});
 			}
-			
-			obj.auth = ($cookies.auth) ? $cookieStore.get('auth') : false;
+			console.log($cookies.get("auth"));
+			obj.auth = ($cookies.get("auth")) ? $cookies.get("auth") : false;
 			
 			obj.userDetails = (localStorage.userDetails) ? JSON.parse(localStorage.userDetails) : null;
 			$timeout(function () {
-				$rootScope.$watch(function() { return $cookies.auth; }, function(newValue) {
-					//console.log('Cookie string: ' + $cookies.auth);
-					if($cookies.auth == undefined && obj.userDetails != null){
+				$rootScope.$watch(function() { return $cookies.get("auth"); }, function(newValue) {
+					//console.log('Cookie string: ' + $cookies.get("auth"));
+					if($cookies.get("auth") == undefined && obj.userDetails != null){
 						obj.logout();
 						$rootScope.userDetails = null;
 						$notification.warning("Login", "Session Expired, Please login again!");
