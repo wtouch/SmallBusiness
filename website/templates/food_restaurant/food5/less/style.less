@@ -16,9 +16,13 @@
 @lightcolor :#480506; //color
 @darkcolor : #ECD070;// nav active color 
 
-@back : #BF0002;//in use
-@darkbackcolor : #6e0001; //not use
+@back : #BF0002;//  ribbon red in use
+@darkbackcolor : #6e0001; //in use
 @lightbackcolor :#111111;//footer 
+
+@bg1:url(../img/bg1.jpg);
+@bg2:url(../img/bg2.jpg);
+@nav_img:url(../img/menu-rgt.jpg);
 
 @colorblack : #000000;
 @colorwhite	: #ffffff;
@@ -54,10 +58,10 @@ body{
 		border-color: @colorwhite;
 	}
 	.navbar-toggle:hover{
-		background-color: @color;
+		background-color: @lightcolor;
 	}
 	.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-		background-color: @color;
+		background-color:@lightcolor;
 	}
 	h4{
 		font-size:30px;
@@ -197,7 +201,68 @@ body{
 			font-family: 'amarkalyane';
 			font-size: 40px;
 			padding-left: 47px;
+		}
+		h4{
+			padding-left:20px;
+		}
+		p{
+			padding-left:25px;
+			strong{
+				color:@darkbackcolor;
+			}
+		}
 	}
+	.sociallinks{
+		ul{
+		float: right;
+		margin-top: -34px;
+			li{
+				display:inline-block;
+				padding: 4px 0px 4px 10px;
+				text-align : right;
+				a
+				{
+				    display: block;
+					padding: 0px 3px;
+					width: 45px;
+					height: 45px;
+					div
+					{
+						border-radius: 50% !important;
+					}
+				}
+				
+			}
+		}
+	}
+.img3{
+		width : 38px;
+		height:40px;
+		display:inline-block;
+	}
+	#img1{
+		background:url('../img/sprite.png') 2px -37px;
+		&:hover{
+		background:url('../img/sprite.png') 2px 4px;
+		}
+	}
+	#img2{
+		background:url('../img/sprite.png') -36px -37px;
+		&:hover{
+		background:url("../img/sprite.png") -36px 4px ;
+		}
+	}
+	#img3{
+		background:url('../img/sprite.png') -74px -37px;
+		&:hover{
+		background:url("../img/sprite.png") -74px 4px ;
+		}
+	}
+	#img4{
+		background:url('../img/sprite.png') -149px -37px;
+		&:hover{
+		background:url("../img/sprite.png") -149px 4px;
+		}
 	}
 	.tagline{
 		margin-top:50px;
@@ -313,9 +378,7 @@ body{
 }
 	}
 	
-.readmore{
-position:relative;
-}	
+	
 .btn-info {
     background: @back;
     padding: 3px 7px;
@@ -323,7 +386,16 @@ position:relative;
     -moz-border-radius: 0px;
     -webkit-border-radius: 0px;
     color: @colorwhite;
+	position:relative;
     border: 0px;
+}
+.btn-info.disabled, .btn-info[disabled],{
+    background-color:@back;
+    border-color: none;
+    width: 100px;
+     height: 30px; 
+    padding: 3px 7px;
+
 }
 .btn-info:hover{
 	background:@back;
@@ -346,7 +418,7 @@ position:relative;
     height: -35px;
     top: 0px;
     border-top: 16px solid transparent;
-    left: 215px;
+    left: 92px;
     border-bottom: 11px solid transparent;
     border-left: 20px solid @back;
     border-right: -1px solid transparent;
