@@ -13,17 +13,6 @@
   src: local('Dancing Script'), local('DancingScript'), url(http://fonts.gstatic.com/s/dancingscript/v6/DK0eTGXiZjN6yA8zAEyM2Ud0sm1ffa_JvZxsF_BEwQk.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
-.produt {
-  overflow: hidden;
-  padding-bottom: 10px;
-  margin-top: 30px;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 10px;
-  background: #fcfcfc;
-  padding: 0;
-  border-color: #FFFFFF #F5F5F5 #E5E5E5;
-}
 .featuredProperty .bx-viewport {
   padding-left: 10px;
 }
@@ -97,16 +86,68 @@
   border: 7px solid #ffffff;
   border-radius: 2px;
   float: left;
+  height: 100%;
+  width: 100%;
   margin-right: 21px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+.featured_services img:hover {
+  transform: scale(1.2);
 }
 .activity {
   background: #fcfcfc;
   border-color: #FFFFFF #F5F5F5 #E5E5E5;
+  animation-name: activity;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
 }
 .activity img {
   height: 200px;
   width: 100%;
+}
+@keyframes activity {
+  0% {
+    opacity: 0;
+    transform: translatex(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translatex(0px);
+  }
+}
+.featured_products .produt {
+  overflow: hidden;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  background: #fcfcfc;
+  padding: 0;
+  border-color: #FFFFFF #F5F5F5 #E5E5E5;
+}
+.featured_products .prodimg {
+  width: 198px;
+  height: 148px;
+  overflow: hidden;
+  margin: auto;
+}
+.featured_products .prodimg img {
+  min-height: 148px;
+}
+.featured_products .prodimg img:hover {
+  opacity: 1;
+}
+.featured_products .caption {
+  height: 190px;
+}
+.featured_products .bx-wrapper img {
+  max-width: 100%;
+  display: block;
+  height: 162px;
+}
+.featured_products .bx-wrapper img:hover {
+  background-image: url('../img/f1.jpg');
 }
 .carousel-inner > .item {
   height: 450px;
@@ -229,6 +270,10 @@ span.glyphicon.glyphicon-chevron-left {
   height: 190px;
   width: 200px;
   border: 3px solid #ffffff;
+}
+.featrtesti img:hover {
+  transform: scale(1.2);
+  border: 1px solid #729d04;
 }
 .featrtesti footer {
   color: #729d04;
@@ -378,7 +423,7 @@ h4,
   color: #ffffff;
   background-color: #729d04;
   border: 1px solid #729d04;
-  border-radius: 100%;
+  border-radius: 200px;
 }
 .btn-info:hover {
   background-color: #e89d03;
