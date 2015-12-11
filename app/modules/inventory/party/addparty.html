@@ -3,7 +3,7 @@
 		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3  ng-if="!modalOptions.adduser.id" class="text-center">Add New Party</h3>
 	<h3  ng-if="modalOptions.adduser.id" class="text-center">Edit Party</h3>
-	</div>
+	</div><br>
 		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate="novalidate"><!--{{modalOptions.adduser}}-->
 		
 		     <input type="hidden" class="form-control" ng-model="modalOptions.adduser.user_id" ng-init="modalOptions.adduser.user_id = userDetails.id" readonly/>
@@ -13,7 +13,7 @@
 				<div class="col-sm-9">
 					<input type="hidden" ng-model="modalOptions.adduser.status" ng-init="modalOptions.adduser.status = '1'">
 					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.adduser.name"required>
-					 <span class="text-danger"  ng-show="adduserForm.name.$error.pattern">please Enter Valid Name</span>
+					 <span class="text-danger"  ng-show="adduserForm.name.$error.pattern">Please enter valid name</span>
 					<span class="help-block" ng-show="adduserForm.name.$dirty && adduserForm.name.$invalid">
 						<span class="text-danger" ng-show="adduserForm.name.$error.required">Name is required.</span>
 					</span>
@@ -35,7 +35,7 @@
 					<span class="help-block" ng-show="adduserForm.email.$dirty && adduserForm.email.$invalid || EmailAvailable == false">
 						<span class="text-danger" ng-show="adduserForm.email.$dirty && EmailAvailable == false">{{availabilityMsg}}</span>
 						<span class="text-danger" ng-show="adduserForm.email.$error.required">Email is required.</span>
-						<span class="text-danger" ng-show="adduserForm.email.$error.email">Invalid Email address.</span>
+						<span class="text-danger" ng-show="adduserForm.email.$error.email">Invalid email address.</span>
 					</span>
 				</div>
 			</div> 
@@ -43,23 +43,21 @@
 			<div class="form-group">
 				<label for="phone" class="col-sm-2 control-label">Phone *</label>
 				<div class="col-sm-9">
-					<input type="text" id="phone" name="phone" class="form-control" ng-model="modalOptions.adduser.phone" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+					<input type="text" id="phone" name="phone" class="form-control" ng-model="modalOptions.adduser.phone" placeholder="Enter your phone number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 					<span class="help-block" ng-show="adduserForm.phone.$dirty && adduserForm.phone.$invalid">
-						<span ng-show="adduserForm.phone.$error.required" class="text-danger">Phone Number is required.</span>
-						<span class="text-danger" ng-show="adduserForm.phone.$error.pattern && (adduserForm.phone.$dirty || submitted)">Enter a valid Contact Number</span>
+						<span ng-show="adduserForm.phone.$error.required" class="text-danger">Phone number is required.</span>
+						<span class="text-danger" ng-show="adduserForm.phone.$error.pattern && (adduserForm.phone.$dirty || submitted)">Enter a valid contact number</span>
 					</span>
 				</div>						
 			</div>
-			
-			<div class="form-group">
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">Address *</label>
 				<div class="col-sm-9">
 					<textarea  class="form-control" id="address" ng-model="modalOptions.adduser.address" name="address" placeholder="Enter address"  ng-maxlength="250" required></textarea>
-					<span class="text-danger"  ng-show="adduserForm.address.$error.pattern">please Enter Valid Address</span>
+					<span class="text-danger"  ng-show="adduserForm.address.$error.pattern">Please enter valid address</span>
 					<span ng-hide="adduserForm.address.$error.maxlength">{{ 250 - modalOptions.adduser.address.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="adduserForm.address.$dirty &&  adduserForm.address.$invalid">
-						<span class="text-danger" ng-show="adduserForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+						<span class="text-danger" ng-show="adduserForm.address.$error.maxlength">Sorry you are exceeding the limit</span>
 						<span class="text-danger" ng-show="adduserForm.address.$error.required">Address is required.</span>
 					</span>
 				</div>
@@ -68,11 +66,11 @@
 	       <div class="form-group">
 				<label for="location" class="col-sm-2 control-label">Location *</label>
 					<div class="col-sm-9">
-						<input type="text" name="location" id="location" ng-model="modalOptions.adduser.location" placeholder="Enter your location" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
-						<span class="text-danger"  ng-show="adduserForm.location.$error.pattern">please Enter Valid Location</span>
+						<input type="text" name="location" id="location" ng-model="modalOptions.adduser.location" placeholder="Enter your location" ng-pattern="/^[a-zA-Z0-9- -]*$/" class="form-control" required>
+						<span class="text-danger"  ng-show="adduserForm.location.$error.pattern">Please enter valid location</span>
 						<span class="help-block" ng-show="adduserForm.location.$dirty && adduserForm.location.$invalid">
 							<span ng-show="adduserForm.location.$error.required" class="text-danger">Location is required.</span>
-						</span>
+						</span> 
 					</div>						
 			</div> 
 			
@@ -80,9 +78,9 @@
 				<label for="area" class="col-sm-2 control-label">Area *</label>
 				<div class="col-sm-9">
 					<input type="text" id="area" name="area" class="form-control" ng-model="modalOptions.adduser.area" placeholder="Enter area" ng-pattern="/^[a-zA-Z0-9- -]*$/" required>
-					<span class="text-danger"  ng-show="adduserForm.area.$error.pattern">please Enter Valid Area</span>
+					<span class="text-danger"  ng-show="adduserForm.area.$error.pattern">Please enter valid area</span>
 					<span class="help-block" ng-show="adduserForm.area.$dirty && adduserForm.area.$invalid">
-					<span ng-show="adduserForm.area.$error.required" class="text-danger">Area is Required</span>					
+					<span ng-show="adduserForm.area.$error.required" class="text-danger">Area is required</span>					
 					</span>
 				</div>						
 			</div>			
@@ -90,16 +88,16 @@
 			<div class="form-group">
 				<label for="city" class="col-sm-2 control-label">City *</label>
 				<div class="col-sm-4" >
-					<input type="text" id="city" name="city" class="form-control" ng-model="modalOptions.adduser.city" placeholder="Enter city" ng-pattern="/^[a-zA-Z]*$/" required>
-					<span class="text-danger"  ng-show="adduserForm.city.$error.pattern">please Enter Valid City</span>
+					<input type="text" id="city" name="city" class="form-control" ng-model="modalOptions.adduser.city" placeholder="Enter city" ng-pattern="/^[a-zA-Z\- ]+$/" required>
+					<span class="text-danger"  ng-show="adduserForm.city.$error.pattern">Please enter valid city</span>
 					<span class="help-block" ng-show="adduserForm.city.$dirty && adduserForm.state.$invalid">
 						<span ng-show="adduserForm.city.$error.required" class="text-danger">City is required.</span>
 					</span>						
 				</div>
 				<label for="state" class="col-sm-1 control-label">State *</label>
 				<div class="col-sm-4">
-				<input type="text" id="state" name="state" class="form-control" ng-model="modalOptions.adduser.state" placeholder="Enter state" ng-pattern="/^[a-zA-Z]*$/" required>
-				<span class="text-danger"  ng-show="adduserForm.state.$error.pattern">please Enter Valid state</span>
+				<input type="text" id="state" name="state" class="form-control" ng-model="modalOptions.adduser.state" placeholder="Enter state" ng-pattern="/^[a-zA-Z\- ]+$/" required>
+				<span class="text-danger"  ng-show="adduserForm.state.$error.pattern">Please enter valid state</span>
 					<span class="help-block" ng-show="adduserForm.state.$dirty && adduserForm.state.$invalid">
 						<span ng-show="adduserForm.state.$error.required" class="text-danger">State is required.</span>
 					</span>				
@@ -109,8 +107,8 @@
 			<div class="form-group">
 				<label for="country" class="col-sm-2 control-label">Country *</label>
 				<div class="col-sm-9">
-					<input type="text" required name="country" class="form-control" id="country" ng-model="modalOptions.adduser.country" placeholder="Enter Your country" ng-pattern="/^[a-zA-Z]*$/" required>
-					<span class="text-danger"  ng-show="adduserForm.country.$error.pattern">please Enter Valid country</span>
+					<input type="text" required name="country" class="form-control" id="country" ng-model="modalOptions.adduser.country" placeholder="Enter Your country" ng-pattern="/^[a-zA-Z\- ]+$/" required>
+					<span class="text-danger"  ng-show="adduserForm.country.$error.pattern">Please enter valid country</span>
 					<span class="help-block" ng-show="adduserForm.country.$dirty && adduserForm.country.$invalid">
 						<span ng-show="adduserForm.country.$error.required"class="text-danger">Country is required.</span>
 					</span>				
@@ -122,7 +120,7 @@
 				<div class="col-sm-9">
 					<input type="text" id="pincode" name="pincode" class="form-control" ng-model="modalOptions.adduser.pincode" placeholder="Enter pincode " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" required>
 					<span class="help-block" ng-show="adduserForm.pincode.$dirty && adduserForm.pincode.$invalid">
-						<span ng-show="adduserForm.pincode.$error.pattern && (adduserForm.pincode.$dirty || submitted)" class="text-danger">please enter number</span>
+						<span ng-show="adduserForm.pincode.$error.pattern && (adduserForm.pincode.$dirty || submitted)" class="text-danger">Please enter number</span>
 					</span>
 				</div>						
 			</div>
