@@ -7,11 +7,8 @@
 				<div class="col-sm-2">
 						<div class="bottomspace">
 							<label for="partyList_status" class="control-label">Select Records</label>
-							<select id="partyList_status" class="form-control" ng-model="pageItems" ng-change="getData(false,currentPage, 'transaction','transactionList',transactionParams);" >
-									<option value="" selected>Select type</option>
-									<option value="10">10</option>
-									<option value="20">20</option>
-									<option value="30">30</option>
+							<select id="partyList_status" class="form-control" ng-model="pageItems" ng-change="getData(false,currentPage, 'transaction','transactionList',transactionParams);"  ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
 							</select>
 						</div>
 				</div>

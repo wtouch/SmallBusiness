@@ -6,10 +6,8 @@
 				 <div class="col-sm-2">
 					<div class="bottomspace">
 						<label for="page_item" class="control-label" >Page Items</label>
-						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'account', 'accountList', accountParams)" ng-model="pageItems">
-							<option value="10">10</option>	
-							<option value="20">20</option>	
-							<option value="30">30</option>
+						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'account', 'accountList', accountParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
 						</select>
 					</div>
 				</div>

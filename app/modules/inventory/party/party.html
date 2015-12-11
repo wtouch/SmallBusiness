@@ -14,10 +14,8 @@
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="select_no_records" class="control-label" >Select Records</label>
-				<select id="select_no_records" class="form-control" ng-change="getData(false, currentPage,'party', 'party', partyParams)" ng-model="pageItems">
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
+				<select id="pageItems" name="pageItems" class="form-control" ng-change="getData(false, currentPage,'party', 'party', partyParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+					<option value="">Select Party</option>
 				</select>
 			</div>
 		</div>

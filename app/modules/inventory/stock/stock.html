@@ -4,17 +4,15 @@
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>
 			<div class="row">
 				<div class="col-sm-2">
-					<h3 class="text-center">Stock</h3>
+					<h3>Stock</h3>
 				</div>
 			</div>
 			 <div class="row">
 				 <div class="col-sm-2">
 					<div class="bottomspace">
 						<label for="page_item" class="control-label" >Page Item</label>
-						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'stock', 'stockList', stockParams)" ng-model="pageItems">
-							<option value="10">10</option>	
-							<option value="20">20</option>	
-							<option value="30">30</option>
+						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'stock', 'stockList', stockParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
 						</select>
 					</div>
 				</div>
