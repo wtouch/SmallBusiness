@@ -12,6 +12,8 @@ define(['app'], function (app) {
 		
 	 };
 	 
+	 
+	 
 	// Inject controller's dependencies
 	hospitalController.$inject = injectParams;
 	// Register/apply controller dynamically
