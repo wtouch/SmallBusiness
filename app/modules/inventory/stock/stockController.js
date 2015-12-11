@@ -103,7 +103,7 @@ define(['app'], function (app) {
 				 { name:'price',enableSorting: false, enableFiltering: false,},
 				
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\',true,grid.appScope.stockParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\',false,grid.appScope.stockParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -174,7 +174,7 @@ define(['app'], function (app) {
 		$scope.stockParams = {
 			where : {
 				user_id : $rootScope.userDetails.id,
-				status : 1
+				status:1,
 			},
 			join : [
 				{
