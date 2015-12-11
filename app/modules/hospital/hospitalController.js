@@ -7,13 +7,8 @@ define(['app'], function (app) {
 			$http.get("modules/hospital/hospital.json").success(function(response){
 				console.log(response);
 				$scope.dashboardList = response;
-				
 			})
-		
 	 };
-	 
-	 
-	 
 	// Inject controller's dependencies
 	hospitalController.$inject = injectParams;
 	// Register/apply controller dynamically
