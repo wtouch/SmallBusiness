@@ -15,8 +15,8 @@
 	@colorblack : #02071A;
 	@colorwhite	: white;
 	
-	@import "property.less";
-	@import "project.less";
+	//@import "property.less";
+	//@import "project.less";
 	@import "product.less";
 	@import "general.less";
 	*{
@@ -234,7 +234,15 @@
 		hr{
 			margin: 0px 0px 10px;
 		}
+		
+		
 	}
+	
+		.table{
+		       a{
+			       color:@color !important;
+			   }
+		}
 	//global css
 	h1,h2,h3,h4,h5{
 		color : @color;
@@ -355,7 +363,11 @@
 	button.navbar-toggle.collapsed.projdtls{
 		color : @colorwhite;
 	}
-	@media (min-width: 320px){
+	
+	
+@media (min-width: 320px){
+     
+       
 		.container{
 		  margin-top:37px;
 		}
@@ -477,10 +489,7 @@
 	{
 		overflow: hidden;
 	}
-	.gallery .thumbnail img
-	{
-		height:200px !important;
-	}
+	
 	.products .caption
 	{
 		    height: auto !important;
@@ -502,24 +511,30 @@
 		border-bottom: 3px solid @color !important;
 		color: @colorwhite !important;
 	}
-	.panel{background-color : transparent;}
+	.panel{
+		background-color : transparent;
+	}
 	.thumbnail{
-		//height:350px !important;
 		overflow:hidden !important;
 	}
 	.products
 	{
-		    height: auto !important;
+		height: auto !important;
 	}
 	div.amit>h3
 	{
 	    background-color: rgba(232, 153, 6, 0.58);
-    color: white !important;
-	text-align: center;
-    font-weight: bold;
-    text-shadow: 0px 0px 10px black;
-    font-family: monospace;
+		color: white !important;
+		text-align: center;
+		font-weight: bold;
+		text-shadow: 0px 0px 10px black;
+		font-family: monospace;
 	}
-	@media (max-width: 500px){
-		.content2{height:500px !important;padding:0px !important;}
+	
+	@media (max-width: 768px){
+		.content2{
+			height:500px !important;
+			padding:0px !important;
 		}
+			
+	}
