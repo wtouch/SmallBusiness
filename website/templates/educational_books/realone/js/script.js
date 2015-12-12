@@ -70,7 +70,7 @@ $(document).ready(function(){
 		autoHover:true,
 		speed:1000,
 	});
-	$('.bxslider1').bxSlider({
+	$('#bxslider1').bxSlider({
 		mode: sliderMode,
 		slideWidth: 680,
 		minSlides: minSlides,

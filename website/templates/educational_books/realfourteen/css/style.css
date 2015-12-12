@@ -457,233 +457,59 @@ a:hover {
 .homeproject {
   position: relative;
 }
+.homeproject .projectnav,
+.homeproject .projsnap,
 .homeproject .projectCarousal {
-  position: relative;
-  height: 400px;
+  position: static;
+  width: auto;
+}
+.homeproject .projsnap {
+  display: block;
+  text-align: center;
+}
+.homeproject .projsnap p {
+  color: #ffffff;
+}
+.homeproject .bx-viewport {
+  min-height: 300px !important;
+}
+.homeproject .bx-viewport img {
+  min-width: 100%;
+}
+.homeproject .projectnav,
+.homeproject .projsnap {
+  padding: 15px;
+  background-color: #580458;
+}
+.homeproject .projectnav .nav-stacked > li {
+  padding: 4px;
+}
+.homeproject .projectnav .nav-stacked > li a {
+  color: #ffffff;
+}
+.homeproject .projectCarousal {
   border: 10px solid #580458;
   background-color: #ffffff;
 }
 .homeproject .projectCarousal .bx-viewport {
-  height: 375px !important;
+  margin-bottom: 10px;
+  min-height: 300px !important;
 }
 .homeproject .projectCarousal .carousslider {
   padding-left: 0px;
 }
 .homeproject .projectCarousal .carousslider li {
-  border: 3px solid #f9f4da;
+  min-width: 100% !important;
 }
 .homeproject .projectCarousal .carousslider li img {
-  width: 100%;
-  min-height: 395px;
+  min-height: 300px;
 }
 .homeproject .projectCarousal .carousslider li.item {
   overflow: hidden;
-  height: 395px;
 }
-.homeproject .projectCarousal .projsnap {
+.homeproject::after {
+  display: none;
   width: 0px;
-  height: 375px;
-  z-index: 0;
-  background-color: rgba(88, 4, 88, 0.57);
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  -webkit-transform: translate(460px, -100px) rotate(180deg);
-  -moz-transform: translate(460px, -100px) rotate(180deg);
-  -o-transform: translate(460px, -100px) rotate(180deg);
-  -ms-transform: translate(460px, -100px) rotate(180deg);
-  transform: translate(460px, -100px) rotate(180deg);
-  -webkit-transition: all 0.1s 0.2s ease-in-out;
-  -moz-transition: all 0.1s 0.2s ease-in-out;
-  -o-transition: all 0.1s 0.2s ease-in-out;
-  -ms-transition: all 0.1s 0.2s ease-in-out;
-  transition: all 0.1s 0.2s ease-in-out;
-}
-.homeproject .projectCarousal .projsnap img {
-  margin-bottom: 10px;
-  border: 1px solid #c5ef27;
-  border-radius: 5px;
-  padding: 4px;
-  max-height: 295px;
-  -webkit-transition: all 0.2s ease-in;
-  -moz-transition: all 0.2s ease-in;
-  -o-transition: all 0.2s ease-in;
-  -ms-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
-}
-.homeproject .projectCarousal .projsnap p {
-  color: #ffffff;
-  text-align: right;
-  font-size: 17.5px;
-  -webkit-transform: translateX(300px) rotate(90deg);
-  -moz-transform: translateX(300px) rotate(90deg);
-  -o-transform: translateX(300px) rotate(90deg);
-  -ms-transform: translateX(300px) rotate(90deg);
-  transform: translateX(300px) rotate(90deg);
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-.homeproject .projectCarousal .projsnap .viewproperty {
-  background-color: #A5BC33;
-  padding: 10px;
-  box-shadow: 1px 2px 6px #000;
-  border-radius: 5px;
-  text-align: center;
-  -webkit-transform: translateY(-200px);
-  -moz-transform: translateY(-200px);
-  -o-transform: translateY(-200px);
-  -ms-transform: translateY(-200px);
-  transform: translateY(-200px);
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-.homeproject .projectCarousal .projsnap .viewproperty a {
-  font-weight: bold;
-}
-.homeproject .projectCarousal:hover {
-  z-index: 0;
-}
-.homeproject .projectCarousal:hover .projsnap {
-  z-index: 999;
-  width: 695px;
-  padding: 50px;
-  -webkit-transition-delay: 0s;
-  -moz-transition-delay: 0s;
-  -o-transition-delay: 0s;
-  -ms-transition-delay: 0s;
-  transition-delay: 0s;
-  -webkit-transform: translate(0px, 0px);
-  -moz-transform: translate(0px, 0px);
-  -o-transform: translate(0px, 0px);
-  -ms-transform: translate(0px, 0px);
-  transform: translate(0px, 0px);
-}
-.homeproject .projectCarousal:hover .projsnap p {
-  -webkit-transform: translateX(0px) rotate(0deg);
-  -moz-transform: translateX(0px) rotate(0deg);
-  -o-transform: translateX(0px) rotate(0deg);
-  -ms-transform: translateX(0px) rotate(0deg);
-  transform: translateX(0px) rotate(0deg);
-  -webkit-transition-delay: 0.4s;
-  -moz-transition-delay: 0.4s;
-  -o-transition-delay: 0.4s;
-  -ms-transition-delay: 0.4s;
-  transition-delay: 0.4s;
-}
-.homeproject .projectCarousal:hover .projsnap .viewproperty {
-  -webkit-transform: translateY(0px);
-  -moz-transform: translateY(0px);
-  -o-transform: translateY(0px);
-  -ms-transform: translateY(0px);
-  transform: translateY(0px);
-  -webkit-transition-delay: 0.3s;
-  -moz-transition-delay: 0.3s;
-  -o-transition-delay: 0.3s;
-  -ms-transition-delay: 0.3s;
-  transition-delay: 0.3s;
-}
-.homeproject .projectnav {
-  position: absolute;
-  left: -253px;
-  top: -5px;
-  width: 259px;
-}
-.homeproject .projectnav .nav-stacked {
-  margin: 5px;
-}
-.homeproject .projectnav .nav-stacked > li {
-  padding: 4px;
-  background-color: #580458;
-  margin-bottom: 20px;
-  text-align: right;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  position: relative;
-  -webkit-transition-property: color;
-  transition-property: color;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-}
-.homeproject .projectnav .nav-stacked > li > a,
-.homeproject .projectnav .nav-stacked > li > a:focus {
-  color: #ffffff;
-  padding: 9px 15px;
-  font-size: 17px;
-  font-weight: bold;
-}
-.homeproject .projectnav .nav-stacked > li.active > a,
-.homeproject .projectnav .nav-stacked > li.active:hover > a,
-.homeproject .projectnav .nav-stacked > li.active > a:focus,
-.homeproject .projectnav .nav-stacked > li:hover > a,
-.homeproject .projectnav .nav-stacked > li:hover > a:focus,
-.homeproject .projectnav .nav-stacked > li > a:hover,
-.homeproject .projectnav .nav-stacked > li > a:focus {
-  text-decoration: none;
-  background-color: transparent;
-  color: #ffffff;
-  -webkit-animation-name: moveanchor;
-  /* Chrome, Safari, Opera */
-  -webkit-animation-duration: 0.4s;
-  /* Chrome, Safari, Opera */
-  -webkit-animation-iteration-count: 1;
-  /* Chrome, Safari, Opera */
-  animation-name: moveanchor;
-  animation-duration: 0.4s;
-  animation-iteration-count: 1;
-}
-.homeproject .projectnav .nav-stacked > li::after {
-  content: "";
-  height: 30px;
-  display: block;
-  position: absolute;
-  top: 49px;
-  left: 0px;
-  border-top: 10px solid #580458;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-}
-.homeproject .projectnav .nav-stacked > li:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #c316c3;
-  -webkit-transform: scaleX(0);
-  transform: scaleX(0);
-  -webkit-transform-origin: 0 50%;
-  transform-origin: 0 50%;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-  -webkit-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
-}
-.homeproject .projectnav .nav-stacked > li:hover {
-  background-color: #580458;
-}
-.homeproject .projectnav .nav-stacked > li:hover::after {
-  border-top: 10px solid #c316c3;
-}
-.homeproject .projectnav .nav-stacked > li:hover:before,
-.homeproject .projectnav .nav-stacked > li:focus:before,
-.homeproject .projectnav .nav-stacked > li:active:before {
-  -webkit-transform: scaleX(1);
-  transform: scaleX(1);
-  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
-  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
 .homeproject::after {
   position: absolute;
@@ -769,6 +595,240 @@ a:hover {
 .projlist .project .projImg {
   margin-right: 20px;
   max-height: 175px;
+}
+@media (min-width: 1024px) {
+  .homeproject {
+    position: relative;
+  }
+  .homeproject .projectCarousal {
+    position: relative;
+    height: 400px;
+  }
+  .homeproject .projectCarousal .bx-viewport {
+    height: 375px !important;
+  }
+  .homeproject .projectCarousal .carousslider {
+    padding-left: 0px;
+  }
+  .homeproject .projectCarousal .carousslider li {
+    border: 3px solid #f9f4da;
+  }
+  .homeproject .projectCarousal .carousslider li img {
+    width: 100%;
+    min-height: 395px;
+  }
+  .homeproject .projectCarousal .carousslider li.item {
+    overflow: hidden;
+    height: 395px;
+  }
+  .homeproject .projectCarousal .projsnap {
+    width: 0px;
+    height: 375px;
+    z-index: 0;
+    padding: 0px;
+    background-color: rgba(88, 4, 88, 0.57);
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    -webkit-transform: translate(460px, -100px) rotate(180deg);
+    -moz-transform: translate(460px, -100px) rotate(180deg);
+    -o-transform: translate(460px, -100px) rotate(180deg);
+    -ms-transform: translate(460px, -100px) rotate(180deg);
+    transform: translate(460px, -100px) rotate(180deg);
+    -webkit-transition: all 0.1s 0.2s ease-in-out;
+    -moz-transition: all 0.1s 0.2s ease-in-out;
+    -o-transition: all 0.1s 0.2s ease-in-out;
+    -ms-transition: all 0.1s 0.2s ease-in-out;
+    transition: all 0.1s 0.2s ease-in-out;
+  }
+  .homeproject .projectCarousal .projsnap img {
+    margin-bottom: 10px;
+    border: 1px solid #c5ef27;
+    border-radius: 5px;
+    padding: 4px;
+    max-height: 295px;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    -ms-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+  }
+  .homeproject .projectCarousal .projsnap p {
+    color: #ffffff;
+    text-align: right;
+    font-size: 17.5px;
+    -webkit-transform: translateX(300px) rotate(90deg);
+    -moz-transform: translateX(300px) rotate(90deg);
+    -o-transform: translateX(300px) rotate(90deg);
+    -ms-transform: translateX(300px) rotate(90deg);
+    transform: translateX(300px) rotate(90deg);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  .homeproject .projectCarousal .projsnap .viewproperty {
+    background-color: #A5BC33;
+    padding: 10px;
+    box-shadow: 1px 2px 6px #000;
+    border-radius: 5px;
+    text-align: center;
+    -webkit-transform: translateY(-200px);
+    -moz-transform: translateY(-200px);
+    -o-transform: translateY(-200px);
+    -ms-transform: translateY(-200px);
+    transform: translateY(-200px);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  .homeproject .projectCarousal .projsnap .viewproperty a {
+    font-weight: bold;
+  }
+  .homeproject .projectCarousal:hover {
+    z-index: 0;
+  }
+  .homeproject .projectCarousal:hover .projsnap {
+    z-index: 999;
+    width: 695px;
+    padding: 50px;
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    -ms-transition-delay: 0s;
+    transition-delay: 0s;
+    -webkit-transform: translate(0px, 0px);
+    -moz-transform: translate(0px, 0px);
+    -o-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+  }
+  .homeproject .projectCarousal:hover .projsnap p {
+    -webkit-transform: translateX(0px) rotate(0deg);
+    -moz-transform: translateX(0px) rotate(0deg);
+    -o-transform: translateX(0px) rotate(0deg);
+    -ms-transform: translateX(0px) rotate(0deg);
+    transform: translateX(0px) rotate(0deg);
+    -webkit-transition-delay: 0.4s;
+    -moz-transition-delay: 0.4s;
+    -o-transition-delay: 0.4s;
+    -ms-transition-delay: 0.4s;
+    transition-delay: 0.4s;
+  }
+  .homeproject .projectCarousal:hover .projsnap .viewproperty {
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -o-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-transition-delay: 0.3s;
+    -moz-transition-delay: 0.3s;
+    -o-transition-delay: 0.3s;
+    -ms-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+  }
+  .homeproject .projectnav {
+    position: absolute;
+    left: -253px;
+    top: -5px;
+    width: 259px;
+    background: none;
+    padding: 0px;
+  }
+  .homeproject .projectnav .nav-stacked {
+    margin: 5px;
+  }
+  .homeproject .projectnav .nav-stacked > li {
+    padding: 4px;
+    background-color: #580458;
+    margin-bottom: 20px;
+    text-align: right;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+  .homeproject .projectnav .nav-stacked > li > a,
+  .homeproject .projectnav .nav-stacked > li > a:focus {
+    color: #ffffff;
+    padding: 9px 15px;
+    font-size: 17px;
+    font-weight: bold;
+  }
+  .homeproject .projectnav .nav-stacked > li.active > a,
+  .homeproject .projectnav .nav-stacked > li.active:hover > a,
+  .homeproject .projectnav .nav-stacked > li.active > a:focus,
+  .homeproject .projectnav .nav-stacked > li:hover > a,
+  .homeproject .projectnav .nav-stacked > li:hover > a:focus,
+  .homeproject .projectnav .nav-stacked > li > a:hover,
+  .homeproject .projectnav .nav-stacked > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    color: #ffffff;
+    -webkit-animation-name: moveanchor;
+    /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 0.4s;
+    /* Chrome, Safari, Opera */
+    -webkit-animation-iteration-count: 1;
+    /* Chrome, Safari, Opera */
+    animation-name: moveanchor;
+    animation-duration: 0.4s;
+    animation-iteration-count: 1;
+  }
+  .homeproject .projectnav .nav-stacked > li::after {
+    content: "";
+    height: 30px;
+    display: block;
+    position: absolute;
+    top: 49px;
+    left: 0px;
+    border-top: 10px solid #580458;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+  }
+  .homeproject .projectnav .nav-stacked > li:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #c316c3;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+  .homeproject .projectnav .nav-stacked > li:hover {
+    background-color: #580458;
+  }
+  .homeproject .projectnav .nav-stacked > li:hover::after {
+    border-top: 10px solid #c316c3;
+  }
+  .homeproject .projectnav .nav-stacked > li:hover:before,
+  .homeproject .projectnav .nav-stacked > li:focus:before,
+  .homeproject .projectnav .nav-stacked > li:active:before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+    transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  }
 }
 @media (min-width: 320px) {
   .projImg {
@@ -946,11 +1006,9 @@ header .cntdtl {
 .navbar-collapse {
   padding: 0px;
 }
-.navbar-toggle {
-  margin-top: 45px;
-}
 .navbar-toggle .icon-bar {
-  background-color: #ca9f04;
+  background-color: #580458;
+  color: #ffffff;
 }
 .modal-body p {
   color: #000000;
@@ -973,7 +1031,7 @@ header .cntdtl {
 .navbar-default .navbar-nav > li > a:focus {
   color: #580458;
   font-weight: bold;
-  padding: 10px 15px;
+  padding: 10px 6px;
   text-transform: uppercase;
   transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -992,7 +1050,7 @@ header .cntdtl {
   color: #ffffff;
   background-color: #580458;
   top: -5px;
-  padding: 14px;
+  padding: 14px 6px;
   text-shadow: none;
 }
 .navbar-default .navbar-nav > li > ul {
