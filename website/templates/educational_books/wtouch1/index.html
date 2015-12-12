@@ -1,7 +1,7 @@
  {% spaceless %}
 <!DOCTYPE html>
 <!-- saved from url=(0034)http://www.agarwalrealestates.com/ -->
-<html lang="en" ng-app="wtouchSite">
+<html lang="en" ng-app="myApp">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,179 +12,160 @@
 		<script src="{{ path }}js/bootstrap.min.js"></script>
 		<script src="{{ path }}js/jquery.bxslider.min.js"></script>
 		<link rel="stylesheet" type="text/css"  href="{{ path }}css/jquery.bxslider.css"/>
+		<script src="{{ path }}js/angular.min.js"></script>
+		<script src="{{ path }}js/angular-route.min.js"></script>
+		<script src="{{ path }}js/script.js"></script>
+
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
+		<script src="http://maps.googleapis.com/maps/api/js">
+		</script>
 		<script>
+			function initialize() {
+				var mapProp = {
+					center:new google.maps.LatLng({{18.604332}},{{73.7731988}}),
+					zoom:12,
+					mapTypeId:google.maps.MapTypeId.ROADMAP
+				};
+				var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+				var marker=new google.maps.Marker({
+					position:new google.maps.LatLng({{18.604332}},{{73.7731988}}),
+				});
+				marker.setMap(map);
+			}
+			google.maps.event.addDomListener(window, 'load', initialize);
+		</script>
+		 <script>
 			$(document).ready(function(){
+			var location = "";
+			
+			function checkHash(){
+				setTimeout(function(){ 
+					if(location !== window.location.hash){
+						location = window.location.hash;
+						var loc = location.replace("#/", "");
+						//alert(window.location.hash);
+							$(loc).addClass("up");
+						console.log("")
+					}
+					console.log(window.location.hash);
+					checkHash();
+				}, 200);
+			}
+			checkHash();
+			
+			$("nav>div>div>ul>li")
+			.on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+			 function(e){
+				 if($(this).hasClass("m1")){
+					$(this).addClass("topFix");
+				 }
+				 if($(this).hasClass("m2")){
+					$(this).removeClass("topFix");
+				 }
+			 });
+			
 				$("nav>div>div>ul>li:nth-child(1)").click(function(){
-						if($(this).hasClass("m1")){
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
-					
+					if($(this).hasClass("m1")){
+						$("nav>div>div>ul>li").removeClass();
+						$("nav>div>div>ul>li").addClass("m11");
 					}else{
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
-						$("#about").addClass("about");
-						$("#service").removeClass("service");
-						$("#contact").removeClass("contact");
-						$(".navbar-default").css("height", "130px");
+						$("nav>div>div>ul>li").removeClass("m11");
+						$("nav>div>div>ul>li").addClass("m1");
+						$("#service").removeClass("up");
+						$("#contact").removeClass("up");
+						$("#apna").removeClass("up");
+						$("#about").addClass("up");
+						$(".navbar-default").css("height", "150px");
 					}
 				});
 				$("nav>div>div>ul>li:nth-child(2)").click(function(){
-						if($(this).hasClass("m2")){
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
+						if($(this).hasClass("m1")){
+						$("nav>div>div>ul>li").removeClass();
+						$("nav>div>div>ul>li").addClass("m11");
 						
 					}else{
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
-						
+						$("nav>div>div>ul>li").removeClass("m11");
+						$("nav>div>div>ul>li").addClass("m1");
+						$("#service").removeClass("up");
+						$("#contact").removeClass("up");
+						$("#apna").addClass("up");
+						$("#about").removeClass("up");
+						$(".navbar-default").css("height", "150px");
 					}
 				});
 				$("nav>div>div>ul>li:nth-child(3)").click(function(){
-						if($(this).hasClass("m3")){
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
-						$("#about").removeClass("about");
-						$("#service").removeClass("service");
-						$("#contact").removeClass("contact");
+						if($(this).hasClass("m1")){
+						$("nav>div>div>ul>li").removeClass();
+						$("nav>div>div>ul>li").addClass("m11");
+						$("#about").removeClass("up");
+						$("#service").removeClass("up");
+						$("#contact").removeClass("up");
+						$("#apna").removeClass("up");
 						$(".navbar-default").css("height", "400px");
 					}else{
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
-						$("#about").removeClass("about");
-						$("#service").removeClass("service");
-						$("#contact").removeClass("contact");
+						$("nav>div>div>ul>li").removeClass("m11");
+						$("nav>div>div>ul>li").addClass("m1");
+						$("#about").removeClass("up");
+						$("#service").removeClass("up");
+						$("#contact").removeClass("up");
+						$("#apna").removeClass("up");
+						$(".navbar-default").css("height", "150px");
 					}
 				});
 				$("nav>div>div>ul>li:nth-child(4)").click(function(){
-						if($(this).hasClass("m4")){
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
+						if($(this).hasClass("m1")){
+						$("nav>div>div>ul>li").removeClass();
+						$("nav>div>div>ul>li").addClass("m11");
 					}else{
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
-						$("#about").removeClass("about");
-						$("#service").addClass("service");
-						$("#contact").removeClass("contact");
-						$(".navbar-default").css("height", "130px");
+						$("nav>div>div>ul>li").removeClass("m11");
+						$("nav>div>div>ul>li").addClass("m1");
+						$("#about").removeClass("up");
+						$("#service").addClass("up");
+						$("#contact").removeClass("up");
+						$("#apna").removeClass("up");
+						$(".navbar-default").css("height", "150px");
 					}
 				});
 				$("nav>div>div>ul>li:nth-child(5)").click(function(){
-						if($(this).hasClass("m5")){
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m5");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m3");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m1");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m2");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m11");
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m4");
+						if($(this).hasClass("m1")){
+						$("nav>div>div>ul>li").removeClass();
+						$("nav>div>div>ul>li").addClass("m11");
 					}else{
-						$("nav>div>div>ul>li:nth-child(5)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(5)").addClass("m5");
-						$("nav>div>div>ul>li:nth-child(3)").addClass("m3");
-						$("nav>div>div>ul>li:nth-child(3)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(1)").addClass("m1");
-						$("nav>div>div>ul>li:nth-child(1)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(2)").addClass("m2");
-						$("nav>div>div>ul>li:nth-child(2)").removeClass("m11");
-						$("nav>div>div>ul>li:nth-child(4)").addClass("m4");
-						$("nav>div>div>ul>li:nth-child(4)").removeClass("m11");
-						$("#about").removeClass("about");
-						$("#service").removeClass("service");
-						$("#contact").addClass("contact");
-						$(".navbar-default").css("height", "130px");
+						$("nav>div>div>ul>li").removeClass("m11");
+						$("nav>div>div>ul>li").addClass("m1");
+						$("#about").removeClass("up");
+						$("#service").removeClass("up");
+						$("#apna").removeClass("up");
+						$("#contact").addClass("up");
+						$(".navbar-default").css("height", "150px");
 					}
 				});
-				
 			});
 		</script>
 	</head>
 	<body>
 		<header>
-			<div class="navbar-header">
+			<!-- <div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-			</div>
+			</div> -->
 		</header>
 		<nav class="navbar navbar-default">
 			<div class="container">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<img src="{{path}}img/logo.png">
+				<div class="" >
+					{% if data.website_config.website_logo %}
+						<img class="logo" src="{{data.website_config.website_logo.file_relative_path}}" alt="{{data.business_name}}">
+					{% else %}
+						<img class="logo" src="{{data.business_logo.file_relative_path}}" alt="{{data.business_name}}">
+					{% endif %}
 					<ul class="nav navbar-nav">
 						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
 					</ul>
@@ -196,70 +177,61 @@
 		<div id="about" class="row">
 			{{data.business_info.aboutDescription}}
 		</div>
-		<div id="apna" class="row">
+		 <div id="apna" class="row">
+			{% for x in data.custom_details %}
+				<h2>{{x.heading}}</h2>
+					{{x.description}}
+			{% endfor %}
 		</div>
+		
+		 <!-- <div id="apna">
+				<h2>{{data.custom_details[0].heading | join(" - ")}}</h2>
+				{{data.custom_details[0].description | join(" - ")}}
+		</div> -->
 		<div id="home" class="row">
 
 		</div>
 		<div id="service" class="row">
 			{% if featured_products | length >= 2 %}
-					<div class="contentModule featured_services">
-						<h3>Services</h3>
-						<div class="sections clearfix services">
+						<h2>Services</h2>
 							{% set break = 0 %}{% set i = 0 %}
 							{% for x in featured_products if break == 0 %}
 								{% if x.type == 'service' %}
-									<div class="col-xs-12 col-md-2 col-lg-2 servimage">
+							
+							<div class="col-xs-12 col-md-6 col-lg-6">
+								<div class="row">
+									<div class="col-xs-12 col-md-6 col-lg-6 serv">
 										<a href="services/{{x.product_service_name}}/{{x.id}}">
 											<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" alt="{{x.product_image.0.file_relative_path}}">
 										</a>
 									</div>
-									<div class="col-xs-12 col-md-4 col-lg-4 servdesc">
+									<div class="col-xs-12 col-md-6 col-lg-6 serv">
 										<h4>{{x.product_service_name}}</h4>
 										<div class="description">
 											{{ x.description }}
 										</div>
-										<div class="readmore">
+										<!-- <div class="readmore">
 											<a href="services/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More</a>
-										</div>
+										</div> -->
 									</div>
+								</div>
+							</div>
 									{% set i = (i + 1) %}
 									{% if i == 6 %}
 										{% set break = 1 %}
 									{% endif %}
 								{% endif %}
 							{% endfor %}
-						</div>
-					</div>
 			{% endif %}
 		</div>
 		<div id="contact" class="row">
-			<script src="http://maps.googleapis.com/maps/api/js">
-			</script>
-			<script>
-				function initialize() {
-					var mapProp = {
-						center:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
-						zoom:12,
-						mapTypeId:google.maps.MapTypeId.ROADMAP
-					};
-					var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
-					var marker=new google.maps.Marker({
-						position:new google.maps.LatLng({{google_map.latitude}},{{google_map.longitude}}),
-					});
-					marker.setMap(map);
-				}
-				google.maps.event.addDomListener(window, 'load', initialize);
-			</script>
 			<h2>Contact Us</h2>
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-lg-12">
+				<div class="col-xs-12 col-sm-4 col-lg-4">
 					<table class="table">
 						<tr>
 							<td>
-								<a href="#">
-									<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
-								</a>
+								<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
 							</td>
 							<td>
 								<h4>{{data.contact_profile.contact_person}}</h4>
@@ -323,9 +295,13 @@
 						{% endif %}
 					</table>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-lg-12">
+				<div class="col-xs-12 col-sm-4 col-lg-4">
+				{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry:{user_id : data.user_id,owner_email:data.owner_email}} %}
+				</div>
+				<div class="col-xs-12 col-sm-4 col-lg-4">
 					<div id="googleMap"></div>
 				</div>
+				
 			</div>
 		</div>
 		{% endautoescape %}
