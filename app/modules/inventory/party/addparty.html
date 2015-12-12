@@ -1,9 +1,9 @@
-
 	<div class="modal-header">
 		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3  ng-if="!modalOptions.adduser.id" class="text-center">Add New Party</h3>
 	<h3  ng-if="modalOptions.adduser.id" class="text-center">Edit Party</h3>
-	</div><br>
+	</div>
+	<br>
 		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate="novalidate"><!--{{modalOptions.adduser}}-->
 		
 		     <input type="hidden" class="form-control" ng-model="modalOptions.adduser.user_id" ng-init="modalOptions.adduser.user_id = userDetails.id" readonly/>
@@ -27,13 +27,8 @@
 			<div class="form-group">	
 				<label  for="email" class="col-sm-2 control-label">Email *</label>
 				<div class="col-sm-9">
-					<input type="Email" class="form-control" id="email" ng-model="modalOptions.adduser.email" name="email" placeholder="Enter Email" ng-blur="checkuserAvailable('email', adduser.email)" required >
-					<span class="help-block">
-						<span class="text-success" ng-show="adduserForm.email.$dirty && adduserForm.email.$valid && EmailAvailable">{{availabilityMsg}}</span>
-					</span>
-					
-					<span class="help-block" ng-show="adduserForm.email.$dirty && adduserForm.email.$invalid || EmailAvailable == false">
-						<span class="text-danger" ng-show="adduserForm.email.$dirty && EmailAvailable == false">{{availabilityMsg}}</span>
+					<input type="Email" class="form-control" id="email" ng-model="modalOptions.adduser.email" name="email" placeholder="Enter Email"required>
+					<span class="help-block" ng-show="adduserForm.email.$dirty && adduserForm.email.$invalid">
 						<span class="text-danger" ng-show="adduserForm.email.$error.required">Email is required.</span>
 						<span class="text-danger" ng-show="adduserForm.email.$error.email">Invalid email address.</span>
 					</span>
@@ -53,7 +48,7 @@
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">Address *</label>
 				<div class="col-sm-9">
-					<textarea  class="form-control" id="address" ng-model="modalOptions.adduser.address" name="address" placeholder="Enter address"  ng-maxlength="250" required></textarea>
+					<textarea  class="form-control" id="address" ng-model="modalOptions.adduser.address" name="address" placeholder="Enter address"  maxlength="250" required></textarea>
 					<span class="text-danger"  ng-show="adduserForm.address.$error.pattern">Please enter valid address</span>
 					<span ng-hide="adduserForm.address.$error.maxlength">{{ 250 - modalOptions.adduser.address.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="adduserForm.address.$dirty &&  adduserForm.address.$invalid">
@@ -107,9 +102,9 @@
 			<div class="form-group">
 				<label for="country" class="col-sm-2 control-label">Country *</label>
 				<div class="col-sm-9">
-					<input type="text" required name="country" class="form-control" id="country" ng-model="modalOptions.adduser.country" placeholder="Enter Your country" ng-pattern="/^[a-zA-Z\- ]+$/" required>
-					<span class="text-danger"  ng-show="adduserForm.country.$error.pattern">Please enter valid country</span>
+					<input type="text" required name="country" class="form-control" id="country" ng-model="modalOptions.adduser.country" placeholder="Enter your country name" ng-pattern="/^[a-zA-Z\- ]+$/" required>
 					<span class="help-block" ng-show="adduserForm.country.$dirty && adduserForm.country.$invalid">
+						<span class="text-danger"  ng-show="adduserForm.country.$error.pattern">Please enter valid country</span>
 						<span ng-show="adduserForm.country.$error.required"class="text-danger">Country is required.</span>
 					</span>				
 				</div>
@@ -122,29 +117,20 @@
 					<span class="help-block" ng-show="adduserForm.pincode.$dirty && adduserForm.pincode.$invalid">
 						<span ng-show="adduserForm.pincode.$error.pattern && (adduserForm.pincode.$dirty || submitted)" class="text-danger">Please enter number</span>
 					</span>
-				</div>						
-			</div>
-			
-			<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.adduser.modified_date" ng-init="modalOptions.adduser.modified_date = modalOptions.date"/>
-			
-			<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.adduser.date" ng-init="modalOptions.adduser.date = modalOptions.date"/>
-			
-			<div class="form-group">
-			 <label  for="date" class="col-sm-2 control-label">Date * </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control ng-valid-date" placeholder=" Bill Date" id="partydate" name="partydate" ng-model="modalOptions.adduser.partydate" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.adduser.partydate = modalOptions.date" close-text="Close" ng-click="opened = !opened" readonly>
 				</div>
 			</div>
-			
 			<div class="form-group">
 				<label for="type" class="col-sm-2 control-label">Type*</label>
 				<div class="col-sm-9">
 						<select id="type" name="type" class="form-control" 
 						ng-model="modalOptions.adduser.type"  required="required">
 						<option value="" selected>Select type</option>
-						<option value="client">client</option>
-						<option value="vendor">vendor</option>
+						<option value="client">Client</option>
+						<option value="vendor">Vendor</option>
 						</select >
+						<span class="help-block" ng-show="adduserForm.type.$dirty && adduserForm.type.$invalid">
+						<span ng-show="adduserForm.type.$error.required"class="text-danger">Select party type</span>
+						</span>
 				</div>
 			</div>
 
@@ -152,18 +138,20 @@
 				<label for="select type" class="col-sm-2 control-label">Department *</label>
 				<div class="col-sm-9">
 						<select id="department" name="department" class="form-control" 
-						ng-model="modalOptions.adduser.department" required="required">
-						<option value="" selected>select Department</option>
+						ng-model="modalOptions.adduser.department" required>
+						<option value="" selected>Select Department</option>
 						<option value="IT">IT</option>
 						<option value="CIVIL">CIVIL</option>
 						<option value="MECH">MECH</option>
 						</select>
+						<span class="help-block" ng-show="adduserForm.department.$dirty && adduserForm.department.$invalid">
+						<span ng-show="adduserForm.department.$error.required"class="text-danger">Select department</span>
+						</span>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
 					<button type="submit" class="btn btn-success" ng-if="!modalOptions.adduser.id" ng-disabled="adduserForm.$invalid" ng-click="modalOptions.postData('party',modalOptions.adduser);modalOptions.ok()">Add party</button>
-					
 					<button type="submit" ng-if="modalOptions.adduser.id" class="btn btn-success" ng-disabled="adduserForm.$invalid" ng-click="modalOptions.updateData('party',modalOptions.adduser,modalOptions.adduser.id);modalOptions.ok()">Update Party</button>
 					
 					<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>

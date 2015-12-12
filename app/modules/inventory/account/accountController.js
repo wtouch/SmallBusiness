@@ -109,6 +109,7 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				account : (data) ? {
 					id : data.id,
+					status : 1,
 					account_name : data.account_name,
 					account_no : data.account_no,
 					description : data.description,
@@ -116,7 +117,12 @@ define(['app'], function (app) {
 					category : data.category,
 					date : data.date
 				} : {
-					date : dataService.sqlDateFormate()
+					date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,
+					date : dataService.sqlDateFormate(),
+					accountdate: dataService.sqlDateFormate(),
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){

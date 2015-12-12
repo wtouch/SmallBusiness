@@ -98,7 +98,7 @@ define(['app'], function (app) {
 					
 				},
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\',false, grid.appScope.partyParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -144,7 +144,9 @@ define(['app'], function (app) {
 					department: data.department,
 			} : {
 					date : dataService.sqlDateFormate(),
-					partydate: dataService.sqlDateFormate()
+					partydate: dataService.sqlDateFormate(),
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){

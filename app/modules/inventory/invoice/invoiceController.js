@@ -92,14 +92,13 @@ define(['app'], function (app) {
 				{
 					name:'Manage', 
 					enableSorting: false, 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'invoice\', \'invoiceList\',false,grid.appScope.manageParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'invoice\', \'invoiceList\',false,grid.appScope.invoiceParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
 						+'</select>', 
 					filter: {
 					  //type: uiGridConstants.filter.SELECT,
-					 
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Invoice"> <span class="glyphicon glyphicon-pencil"></span></a>'
