@@ -1,0 +1,150 @@
+@font-face{
+	font-family:'negotiate_free';
+	src:url('../fonts/negotiate_free.ttf');
+}
+@font-face{
+	font-family:'Enriqueta-Regular';
+	src:url('../fonts/Enriqueta-Regular.otf');
+}
+@font-face{
+		font-family:'ArbutusSlab-Regular';
+		src:url('../fonts/ArbutusSlab-Regular.ttf');
+}
+@color : #24600B;
+@lightcolor : #D3D3D3;
+@darkcolor : #414141;
+@back : #292929;
+@darkbackcolor : #777;
+@lightbackcolor :#A1C31A; 
+@colorblack : #02071A;
+@colorwhite	: #fff;
+
+@import "property.less";
+@import "product.less";
+@import "general.less";
+	
+	
+		   
+		   .logo{
+		    height: 100px;
+			width: 150px;
+		    margin-left: -15px;
+			margin-top:15px;
+	
+		}
+			.navbar-default {
+				background-color: transparent;
+				font: 14px 'Oswald',sans-serif;
+				border: none;
+				border-radius: 0;
+				top: 4px;
+				left: 15px;
+				right: 50px;
+				margin-bottom: 78px;
+				margin-top: 80px;
+				display: inline-block;
+				text-decoration: none;
+           .navbar-nav{
+			
+			> li{
+				color:@colorwhite;
+				text-transform:uppercase;
+				position : relative;
+				
+				color:@colorwhite ! important;
+			    
+			     >a{
+					color:@colorblack;
+					font: 14px 'Oswald',sans-serif;
+					background-color:transparent ! important;
+					padding: 10px 10px;
+					margin-right: 24px;
+					border-bottom:1px solid gray;
+					
+						&:hover::before{
+							 content:url('../img/bullet.png');
+							width: 8px;
+						}
+				}
+				&.active>a::before{
+					content:url('../img/bullet.png');
+					width: 8px;
+				}
+				
+				> ul {
+						display: none;
+						position: absolute;
+						width: 130px;
+						z-index: 999;
+						font: 14px 'Oswald',sans-serif;
+						padding: 12px 0px 0px 0px;
+						list-style: none;
+						text-align: center;
+						top : 49px;
+						transition : all 500ms ease-in-out;
+					>li{	
+							padding-top:11px;
+							height: 43px;
+							background-color:@colorblack;
+							
+							
+						>a{
+						    color:@colorwhite;
+							font: 14px 'Oswald',sans-serif;
+						}
+					&:hover{
+							background-color:@lightcolor;
+							>a{
+								color:@colorwhite;
+								&:hover{
+									text-decoration: none;
+								}
+							}
+						}
+					}
+					
+				}
+				&:hover > ul {
+					display: block;	
+				}
+			}
+		}
+	}
+	.nav-justified>li {
+		float: none; 
+	}
+
+	
+footer{
+		padding-top : 70px;
+		font-weight : bold;
+		background-image:url(../img/footer.png);
+		background-repeat:no-repeat;
+		background-attachment:fixed;
+		background-size:100% 100%;
+		position: relative;
+		height:100px;
+		margin-top: 146px;
+	a {
+		color: @darkbackcolor;
+		text-decoration: none;
+		&:hover{
+			color: @darkbackcolor;
+			text-decoration: underline;
+		}
+	}
+}
+
+.btn-info {
+    color:@back;
+	background-image:url(../img/sprite.png);
+    background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-size:100% 100%;
+	border:none;
+	background-color:transparent ! important;
+		&:hover{
+			color:@back;
+		}
+	}
+	
