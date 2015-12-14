@@ -28,22 +28,24 @@ font-family : 'SixCaps';
 	@import "project.less";
 	@import "product.less";
 	
-	body{
-		//background-image :url('../img/images.jpg');
-		//background-size:cover;
+	body{	
 		
+		scrollbar-base-color: orange; 
+		scrollbar-arrow-color: green;
+		scrollbar-DarkShadow-Color: blue; 
+		scrollbar-face-color: #b46868;
 		background-attachment:fixed;
 		background-image :url('../img/giphy.gif'), url('../img/images1.jpg');
 		background-position:center ,top left;
 		background-repeat:no-repeat,repeat;
-
+	
 	}
 	.man{
 	margin:auto;
 	background-image :url('../img/g.gif');
 	height:150px;
 	width:100px;
-	margin-top:-100px;
+	margin-top:50px;
 	}
 	.container{
 		max-width : 992px !important;
@@ -139,7 +141,7 @@ font-family : 'SixCaps';
 		margin-left:10px;
 	}
 .main1{
-margin-top:10%;
+	margin-top:10%;
 	animation-name:main1;
 	animation-duration:4s;
 	}
@@ -181,7 +183,7 @@ margin-top:10%;
 				float : none;
 				margin-bottom:0px;
 				position : relative;
-				&:hover{
+				&:hover,&.active{
 					background : @lightbackcolor;
 				}
 				> a, > a:focus {
@@ -192,6 +194,7 @@ margin-top:10%;
 					text-transform : uppercase;
 					
 					padding : 40px 15px;
+
 				}
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					background : transparent;
@@ -309,7 +312,7 @@ margin-top:10%;
 		font-weight:bold;
 		letter-spacing: 1px;
 		padding-bottom:10px;
-		font: 2.3em/1.2em negotiate_free;
+		font-family : SixCaps;
 		color: @colorwhite;
 		text-align:center;
 	}
@@ -317,12 +320,19 @@ margin-top:10%;
 		color: @colorwhite;
 		border-bottom: 1px solid @darkbackcolor;
 		padding-bottom:10px;
+		
+		
+	}
+	h3{
+		font-family : SixCaps;
+		font-size:50px;
 	}
 	h3,h4,h5{
-		font-family: 'negotiate_free';
+		
+		
 	}
 	h2{
-		font: 2.0em/1.2em negotiate_free;
+		font-family : SixCaps;
 		line-height:1.5em;
 		font-weight:bold;
 	}
@@ -363,7 +373,7 @@ margin-top:10%;
 		padding : 6px 40px;
 	}
 	.subhead{
-		font-size: 18px;
+		
 		border-radius : 7px;
 		color : @colorwhite;
 		padding: 6px 15px 12px;
@@ -406,13 +416,69 @@ margin-top:10%;
 		color : @colorwhite;
 	}
 	footer{
-		margin-top : 15px;
-		padding: 15px 0;
+		position:absolute;
+		bottom:0;
+		margin:auto;
+		left:0;
+		right:0;
+		color:@colorwhite;
+		a{
+		color:@colorwhite;
+		}
 	}
 	*{
 		transition:300ms;
 	}
+.content{
+	//position:absolute;
+	background-color:@darkbackcolor;
+	padding:20px;
+	z-index:999;
+	//margin-top:1000px;
+	color:@colorwhite;
+	max-height:450px;
+	box-shadow:2px 2px 2px @colorblack;
+	overflow:auto;
+	overflow-x:hidden;
+	animation-name:content;
+	animation-duration:2s;
+	 scrollbar-face-color: #b46868;
+}
+@keyframes content{
+0%{margin-top:1000px;}
+100%{margin-top:0px;}
+}
+
+@media (max-width: 1024px){
+
+	.content {
+				
+				max-height: 400px;
+			}
+	.navbar-default{
+			margin-top:50px;
+	}
+	.man{
+				margin-top: 30px;
+		}
+		.main1{
+			margin-top:0%;
+		}
+		.main2{
+				margin-top:-40px;
+			}
+
+}
+
 	@media (max-width: 540px){
+	body{
+		background-size:87% 65%;
+	
+	}
+	.content {
+			
+			max-height: 130px;
+		}
 		header {
 			.navbar-default{
 				.navbar-nav {
@@ -431,8 +497,21 @@ margin-top:10%;
 		.enquir{
 			display : block;
 		}
+		.man{
+				margin-top: -80px;
+		}
+		.main1{
+			margin-top:-20px;
+		}
+		.main2{
+				margin-top:-50px;
+			}
 	}
 	@media (max-width: 480px){
+	body{
+		background-size:120% 85%;
+	
+	}
 		header{
 			margin-bottom : 0px;
 			.weblogo, .cntdtl{
@@ -445,7 +524,12 @@ margin-top:10%;
 		.projdtls{
 			margin : 0px;
 		}
+		.content {
+			
+			max-height: 330px;
+		}
 		.navbar-default{
+			margin-top:-50px;
 			margin-bottom: 0px;
 			border: 0px solid transparent;
 			.navbar-nav {
@@ -454,7 +538,7 @@ margin-top:10%;
 					&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a,&:hover > a:focus, &:hover > a:focus{
 						background-color:@darkcolor;
 						margin-top:0px;
-						padding:10px 17px;
+						//padding:10px 17px;
 						top : 0px;
 
 						color : @colorwhite;
@@ -462,6 +546,15 @@ margin-top:10%;
 				}
 			}
 		}
+		.man{
+				margin-top: -60px;
+		}
+		.main1{
+			margin-top:60%;
+		}
+		.main2{
+				margin-top:35px;
+			}
 	}
 	.enquir{
 		display : none;
@@ -469,20 +562,4 @@ margin-top:10%;
 		bottom : 10px;
 		right : 10px;
 	}
-.content{
-	//position:absolute;
-	background-color:@darkbackcolor;
-	padding:20px;
-	z-index:999;
-	//margin-top:1000px;
-	color:@colorwhite;
-	max-height:450px;
-	overflow:auto;
-	overflow-x:hidden;
-	animation-name:content;
-	animation-duration:2s;
-}
-@keyframes content{
-0%{margin-top:1000px;}
-100%{margin-top:0px;}
-}
+
