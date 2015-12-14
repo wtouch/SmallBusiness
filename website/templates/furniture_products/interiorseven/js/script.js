@@ -14,6 +14,23 @@ $(document).ready(function(){
 			$('nav').removeClass("navbar-fixed-top").addClass('navbar-static-top')
 		}
 	});  */
+	$('#bxslider').bxSlider({
+		mode:'horizontal',
+		slideWidth: 250,
+		minSlides: 4,
+		maxSlides: 4,
+		slideMargin: 25,
+		auto: true, 
+		autoDirection:'next',
+		moveSlides: 1,
+		pause:3000,
+		pager:true,
+		pagerType:'full',
+		autoControls: true, 
+		controls:true, 
+		autoHover:true,
+		speed:1000,
+	});
 	$(window).scroll(function(e){
 		var scrollTop = $(document).scrollTop();
 		if(scrollTop > 800){
