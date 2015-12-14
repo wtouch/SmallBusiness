@@ -4,7 +4,7 @@ define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants','$http'];
     
     // This is controller for this view
-	var staffController= function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,$http) {
+	var hospitalstaffController= function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,$http) {
 		
 		//global scope objects
 		$scope.type = "year";
@@ -15,16 +15,16 @@ define(['app'], function (app) {
 		$scope.currentPage = 1;
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
-		$rootScope.module = "inventory";
+		$rootScope.module = "hospital";
 		
 		
 		$rootScope.moduleMenus = [
 			{
-				name : "Staff",
-				path : "#/dashboard/hospital/staff/",
+				name : " Add Staff",
+				path : "#/dashboard/hospital/hospitalstaff/",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/hospital/staff/addstaff.html");
+						return $scope.openModal("modules/hospital/hospitalstaff/addhospitalstaff.html");
 					}
 				}
 			},
@@ -82,27 +82,27 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} ,
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/addstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/addstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
 		};
-		$scope.openModal = function(url,data){
+		
+			$scope.openModal = function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
 			};
 			var modalOptions = {
 				staffdate:dataService.sqlDateFormate(),
-				
+				staff_type: $scope.staffConfig,
 				date:{date : $scope.currentDate},
 				addstaff : (data) ? {
 					id : data.id,
-					name : data.name,
-					
-								} : {
+				staff_type : data.staff_type,
+					} : {
 						date : dataService.sqlDateFormate()
 					}, 
 				
@@ -121,12 +121,7 @@ define(['app'], function (app) {
 							}
 						})
 					},
-					formPart : 'personalDetails',
-					showFormPart : function(formPart, modalOptions){
-						console.log(formPart);
-						modalOptions.formPart = formPart;
-					},
-					getData : $scope.getData,	
+					getData : $scope.getData,
 				};
 			
 			
@@ -135,11 +130,7 @@ define(['app'], function (app) {
 			})
 			
 		}
-
 		
-			
-
-	
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -194,7 +185,7 @@ define(['app'], function (app) {
 		
 	 };
 	// Inject controller's dependencies
-	staffController.$inject = injectParams;
+	hospitalstaffController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('staffController', staffController);
+    app.register.controller('hospitalstaffController', hospitalstaffController);
 });
