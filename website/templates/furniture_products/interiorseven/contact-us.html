@@ -18,28 +18,33 @@
 	</script>
 <div class="content">
 	<div class="container">
-	<h2>Contact Us</h2>
+	
 	<div class="row contact">
-		<div class="col-xs-12 col-sm-12 col-lg-12">
-			<table class="table">
-				<tr>
-					<td>
-						<a href="#">
-							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
-						</a>
-					</td>
-					<td>
-						<h4>{{data.contact_profile.contact_person}}</h4>
-						<b>Address</b>
-						<address>
-							{{data.contact_profile.address}}<br>
-							{{data.city}}-{{data.pincode}},<br>
-							{{data.state|capitalize}},<br>
-							{{data.country|capitalize}}.
-						</address>
-					</td>
-				</tr>
+		<h2>Contact Us</h2>
+			<div class="col-xs-12 col-sm-12 col-lg-6">
+				<table class="table">
+					<tr>
+						<td>
+							<a href="#">
+								<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
+							</a>
+						</td>
+						<td>
+							<h4>{{data.contact_profile.contact_person}}</h4>
+							<b>Address</b>
+							<address>
+								{{data.contact_profile.address}}<br>
+								{{data.city}}-{{data.pincode}},<br>
+								{{data.state|capitalize}},<br>
+								{{data.country|capitalize}}.
+							</address>
+						</td>
+					</tr>
+				</table>
+			</div>
+		<div class="col-xs-12 col-sm-12 col-lg-6 contact">
 				{%if (data.contact_profile.address1) or (data.contact_profile.address2) or (data.contact_profile.address3) or (data.contact_profile.address4)%}
+			<table class="table">
 				<tr>
 					<td colspan="2">
 						{%if data.contact_profile.address1%}
@@ -90,6 +95,7 @@
 				{% endif %}
 			</table>
 		</div>
+		
 		<div class="col-xs-12 col-sm-12 col-lg-12">
 			<div id="googleMap"></div>
 		</div>
