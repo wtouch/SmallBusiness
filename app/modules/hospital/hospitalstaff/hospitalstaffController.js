@@ -121,6 +121,11 @@ define(['app'], function (app) {
 							}
 						})
 					},
+					formPart : '',
+					showFormPart : function(formPart, modalOptions){
+						console.log(formPart);
+						modalOptions.formPart = formPart;
+					},
 					getData : $scope.getData,
 				};
 			
