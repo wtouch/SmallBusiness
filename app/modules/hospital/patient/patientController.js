@@ -132,7 +132,13 @@ define(['app'], function (app) {
 							$scope.getData(false, $scope.currentPage, 'party','party');
 						}
 					})
-				}
+				},
+				formPart :'',
+				showFormPart : function(formPart,modalOptions){
+					modalOptions.formPart = formPart;
+					
+				},
+				getData : $scope.getData,
 			};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
