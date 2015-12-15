@@ -1,7 +1,7 @@
 
 <div class="form-group">
 <div class="col-sm-1"></div>
-	<div class="col-sm-10">	
+	<div class="col-sm-10" ng-init="modalOptions.addstaff.specification = (modalOptions.addstaff.specification) ? modalOptions.addstaff.specification : []">	
 			<div class="table-responsive">
 				<table class="table table-bordered" >
 					<thead>
@@ -15,7 +15,7 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" class="form-control" id="experience" name="experience" ng-model="modalOptions.addstaff.qualification.exam_name" required 
+								<input type="text" class="form-control" id="experience" name="experience" ng-model="modalOptions.specification.experience" required 
 								ng-change=""  placeholder="Experience"/>
 								<span class="help-block" ng-show="addstaffForm.experience.$dirty && addstaffForm.experience.$invalid">
 									<span ng-show="addstaffForm.experience.$error.required" class="text-danger">Experience is necessary.</span>
@@ -23,14 +23,14 @@
 							</td>
 			
 							<td>						
-								<input type="text" class="form-control" id="dcn" name="dcn" ng-model="modalOptions.addstaff.qualification.dcn" required 
+								<input type="text" class="form-control" id="dcn" name="dcn" ng-model="modalOptions.specification.dcn" required 
 								ng-change=""  placeholder="Doctor Certificate No"/>
 								<span class="help-block" ng-show="addstaffForm.dcn.$dirty && addstaffForm.dcn.$invalid">
 									<span ng-show="addstaffForm.dcn.$error.required" class="text-danger">Doctor Certificate No is necessary.</span>
 								</span> 
 							</td>
 							<td>
-								<input type="text" class="form-control" id="ctc" name="ctc" ng-model="modalOptions.addstaff.qualification.ctc"  placeholder="CTC" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+								<input type="text" class="form-control" id="ctc" name="ctc" ng-model="modalOptions.specification.ctc"  placeholder="CTC" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
 									
 								<span class="help-block" ng-show="addstaffForm.percentage.$dirty && addstaffForm.ctc.$invalid">
 									<span ng-show="addstaffForm.ctc.$error.required" class="text-danger">CTC Required.</span>
@@ -38,7 +38,7 @@
 								</span>
 							</td>
 							<td>	
-								<button type="button" tooltip="Add " id="add" class="glyphicon glyphicon-plus" placeholder="add" name="add" value=""  ng-click=""  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+								<button type="button" tooltip="Add " id="add" class="glyphicon glyphicon-plus" placeholder="add" name="add" value=""  ng-click="modalOptions.addToObject(modalOptions.addstaff.specification, 'specification', modalOptions)"   ng-pattern=required />
 							</td>
 						</tr>
 					</tbody>
@@ -58,14 +58,14 @@
 					<th >Remove</th>
 				</tr> 
 			</thead>
-			
+			{{modalOptions.specification}}
 			<tbody >
-				<tr ng-repeat="x in modalOptions.addstaff.qualification">
+				<tr ng-repeat="x in modalOptions.addstaff.specification">
 					<td>{{$index + 1}}</td>
 					<td>{{x.experience}}</td>
 					<td>{{x.dcn}}</td>
 					<td>{{x.ctc}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addstaff.qualification, $index);">X</button></td>
+					<td><button ng-click="modalOptions.removeObject(modalOptions.addstaff.specification, $index);">X</button></td>
 				</tr>
 			
 				
