@@ -1,4 +1,80 @@
+
 <div class="form-group">
+<div class="col-sm-1"></div>
+	<div class="col-sm-10">	
+			<div class="table-responsive">
+				<table class="table table-bordered" >
+					<thead>
+						<tr>
+							<th>Experience</th>
+							<th>Doctor Certificate No</th>
+							<th>CTC</th>
+							<th>Submit</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<input type="text" class="form-control" id="experience" name="experience" ng-model="modalOptions.addstaff.qualification.exam_name" required 
+								ng-change=""  placeholder="Experience"/>
+								<span class="help-block" ng-show="addstaffForm.experience.$dirty && addstaffForm.experience.$invalid">
+									<span ng-show="addstaffForm.experience.$error.required" class="text-danger">Experience is necessary.</span>
+								</span> 
+							</td>
+			
+							<td>						
+								<input type="text" class="form-control" id="dcn" name="dcn" ng-model="modalOptions.addstaff.qualification.dcn" required 
+								ng-change=""  placeholder="Doctor Certificate No"/>
+								<span class="help-block" ng-show="addstaffForm.dcn.$dirty && addstaffForm.dcn.$invalid">
+									<span ng-show="addstaffForm.dcn.$error.required" class="text-danger">Doctor Certificate No is necessary.</span>
+								</span> 
+							</td>
+							<td>
+								<input type="text" class="form-control" id="ctc" name="ctc" ng-model="modalOptions.addstaff.qualification.ctc"  placeholder="CTC" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+									
+								<span class="help-block" ng-show="addstaffForm.percentage.$dirty && addstaffForm.ctc.$invalid">
+									<span ng-show="addstaffForm.ctc.$error.required" class="text-danger">CTC Required.</span>
+									<span ng-show="addstaffForm.ctc.$error.pattern" class="text-danger">Enter number only</span>
+								</span>
+							</td>
+							<td>	
+								<button type="button" tooltip="Add " id="add" class="glyphicon glyphicon-plus" placeholder="add" name="add" value=""  ng-click=""  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>													
+	</div>
+</div>
+
+<div class="table-responsive">
+		<table class="table table-bordered" >
+			<thead>
+				<tr>
+					<th class="col-sm-2">Sr.No.</th>
+					<th class="col-sm-2">Experience</th>
+					<th>Doctor Certificate No</th>
+					<th>CTC</th>
+					<th >Remove</th>
+				</tr> 
+			</thead>
+			
+			<tbody >
+				<tr ng-repeat="x in modalOptions.addstaff.qualification">
+					<td>{{$index + 1}}</td>
+					<td>{{x.experience}}</td>
+					<td>{{x.dcn}}</td>
+					<td>{{x.ctc}}</td>
+					<td><button ng-click="modalOptions.removeObject(modalOptions.addstaff.qualification, $index);">X</button></td>
+				</tr>
+			
+				
+			</tbody>
+		</table>
+</div>
+
+
+<div class="modal-footer">
 	<div class="col-sm-offset-2 col-sm-9">
 		<button type="submit" class="btn btn-success" ng-disabled="addstaffForm.$invalid" ng-click="modalOptions.postData('staff',modalOptions.addstaff);modalOptions.ok()"ng-if="!modalOptions.addstaff.id" >Add staff</button>
 		
