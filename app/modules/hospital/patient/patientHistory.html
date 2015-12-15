@@ -36,15 +36,15 @@
 				<div class="col-sm-8">
 					<input type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addpatient.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" required>
 					<span class="help-block" ng-show="addpatientForm.description.$dirty && addpatientForm.description.$invalid">
-						<span ng-show="addpatientForm.description.$error.required"class="text-danger">Country is required.</span>
+						<span ng-show="addpatientForm.description.$error.required"class="text-danger">Description is required.</span>
 					</span>				
 				</div>
 			</div> 	
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addpatient.id" ng-disabled="addpatientForm.$invalid" ng-click="modalOptions.postData('party',modalOptions.addpatient);modalOptions.ok()">Add Patient</button>
+					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addpatient.id" ng-disabled="addpatientForm.$invalid" ng-click="modalOptions.postData('patient',modalOptions.addpatient);modalOptions.ok()">Add Patient</button>
 					
-					<button type="submit" ng-if="modalOptions.addpatient.id" class="btn btn-success" ng-disabled="addpatientForm.$invalid" ng-click="modalOptions.updateData('patient',modalOptions.addpatient,modalOptions.addpatient.id);modalOptions.ok()">Update Party</button>
+					<button type="submit" ng-if="modalOptions.addpatient.id" class="btn btn-success" ng-disabled="addpatientForm.$invalid" ng-click="modalOptions.updateData('patient',modalOptions.addpatient,modalOptions.addpatient.id);modalOptions.ok()">Update Patient</button>
 					
 					<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
 				</div>
