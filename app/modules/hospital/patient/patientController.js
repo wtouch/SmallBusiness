@@ -99,7 +99,7 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
-				adduser : (data) ? {
+				addpatient : (data) ? {
 					id : data.id,
 					name : data.name,
 					email : data.email,
@@ -117,19 +117,19 @@ define(['app'], function (app) {
 					department: data.department,
 			} : {
 					date : dataService.sqlDateFormate(),
-					partydate: dataService.sqlDateFormate()
+					
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'party','party');
+							$scope.getData(false, $scope.currentPage, 'patient','patient');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'party','party');
+							$scope.getData(false, $scope.currentPage, 'patient','patient');
 						}
 					})
 				},
@@ -151,8 +151,7 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id,
-					type : ($routeParams.party == "vendor") ? "vendor" : "client"
+					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]
 			};
