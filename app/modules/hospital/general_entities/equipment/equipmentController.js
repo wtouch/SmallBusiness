@@ -4,7 +4,7 @@ define(['app'], function (app) {
     var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
     
     // This is controller for this view
-	var patientController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var equipmentController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
 		$scope.type = "year";
@@ -16,7 +16,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hospital";
-		
+		console.log("This is Equipement Controller");
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Equipment",
@@ -121,14 +121,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'party','party');
+							$scope.getData(false, $scope.currentPage, 'equipment','equipment');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'party','party');
+							$scope.getData(false, $scope.currentPage, 'equipment','equipment');
 						}
 					})
 				},
@@ -151,7 +151,7 @@ define(['app'], function (app) {
 			$scope.params = (params) ? params : {
 				where : {
 					user_id : $rootScope.userDetails.id,
-					type : ($routeParams.party == "vendor") ? "vendor" : "client"
+					type : ($routeParams.equipment == "vendor") ? "vendor" : "client"
 				},
 				cols : ["*"]
 			};
@@ -201,7 +201,7 @@ define(['app'], function (app) {
 		
 	 };
 	// Inject controller's dependencies
-	patientController.$inject = injectParams;
+	equipmentController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('patientController', patientController);
+    app.register.controller('equipmentController', equipmentController);
 });
