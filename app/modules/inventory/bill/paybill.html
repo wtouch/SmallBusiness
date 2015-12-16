@@ -1,8 +1,8 @@
-<div class="main-content">
 	<div class="modal-header" style="margin-bottom: 14px">
 		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3>Pay Bill</h3>
 	</div>
+	<div class="modal-body">
 	<form name="payBillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="payBillForm.$valid">
 	{{modalOptions.payBill}}
 			<div class="form-group">
@@ -16,7 +16,7 @@
 			<div class="form-group">
 				<label for="account" class="col-sm-2 control-label">Account Name*</label>
 				<div class="col-sm-9">
-					<select id="account" class="form-control" ng-change="modalOptions.getBalance(modalOptions.account.account_id, modalOptions)" ng-init="modalOptions.getData(false,false,'account','accountList', false, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.payBill.account_id" >
+					<select id="account" name="account" class="form-control" ng-change="modalOptions.getBalance(modalOptions.account.account_id, modalOptions)" ng-init="modalOptions.getData(false,false,'account','accountList', false, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.payBill.account_id" >
 					<option value="">Select Account</option>
 					</select>
 					<span class="help-block" ng-show="addIncomeForm.account.$dirty && addIncomeForm.account.$invalid">
@@ -104,6 +104,7 @@
 						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.payBill.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payBill.debit_amount, modalOptions)" name="amount" placeholder="Amount" required />
 						<span class="help-block" ng-show="payBillForm.amount.$dirty && payBillForm.amount.$invalid">
 							<span ng-show="payBillForm.amount.$error.required" class="text-danger">Amount is required.</span>
+							<span ng-show="payBillForm.amount.$error.required" class="text-danger">Amount is required.</span>
 							<span ng-show="payBillForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 						</span>
 					</div>					
@@ -116,4 +117,4 @@
 			</div>
 		</div>	
 	</form>
-</div>
+	</div>
