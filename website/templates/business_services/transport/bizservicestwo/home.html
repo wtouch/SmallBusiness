@@ -1,0 +1,23 @@
+{% autoescape false %}
+	<div class="homeAboutus">
+		<h1>{{ data.business_name }}</h1>
+		{% if data.business_info.tagline %}
+			<div class="tagline text-center">{{ data.business_info.tagline}}</div>
+		{% endif %}
+		{% if data.business_info.alternate_tagline %}
+			<div class="tagline1 text-center">{{ data.business_info.alternate_tagline}}</div>
+		{% endif %}
+		
+		<div class="description">
+		{% if data.website_config.welcome_note %}
+			{{ data.website_config.welcome_note}}
+		
+		{% else %}
+			{{ data.business_info.description}}
+		{% endif %} 
+		</div>
+		<div class="readmore">
+							<a href="services/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More</a>
+						</div>
+	</div>
+{% endautoescape %}
