@@ -3,7 +3,7 @@
 	<h3  ng-if="!modalOptions.adduser.id" class="text-center">Add New Party</h3>
 	<h3  ng-if="modalOptions.adduser.id" class="text-center">Edit Party</h3>
 	</div>
-	<br>
+	<div class="modal-body">
 		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate="novalidate"><!--{{modalOptions.adduser}}-->
 		
 		     <input type="hidden" class="form-control" ng-model="modalOptions.adduser.user_id" ng-init="modalOptions.adduser.user_id = userDetails.id" readonly/>
@@ -113,9 +113,9 @@
 			<div class="form-group">
 				<label for="pincode" class="col-sm-2 control-label">Pincode *</label>
 				<div class="col-sm-9">
-					<input type="text" id="pincode" name="pincode" class="form-control" ng-model="modalOptions.adduser.pincode" placeholder="Enter pincode " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" required>
+					<input type="text" id="pincode" name="pincode" class="form-control" ng-model="modalOptions.adduser.pincode" placeholder="Enter pincode " ng-pattern="/^([1-9])([0-9]){5}$/" required>
 					<span class="help-block" ng-show="adduserForm.pincode.$dirty && adduserForm.pincode.$invalid">
-						<span ng-show="adduserForm.pincode.$error.pattern && (adduserForm.pincode.$dirty || submitted)" class="text-danger">Please enter number</span>
+						<span ng-show="adduserForm.pincode.$error.pattern" class="text-danger">Please enter number e.g. 431741</span>
 					</span>
 				</div>
 			</div>
@@ -158,6 +158,6 @@
 				</div>
 			</div>						
 		</form>
-
+</div>
 
 

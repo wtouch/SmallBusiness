@@ -83,6 +83,7 @@ define(['app'], function (app) {
 				    name:'type',width:85,
 					enableSorting: false,
 					enableFiltering: false,
+					cellTemplate : '<span ng-if="row.entity.type==\'client\'">Client</span><span ng-if="row.entity.type==\'vendor\'">Vendor</span>'
                 },
 				{ name:'department',
 					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="department">'
@@ -98,7 +99,7 @@ define(['app'], function (app) {
 					
 				},
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\',false, grid.appScope.partyParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -114,6 +115,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
+				console.log($scope.partyParams);
 				$scope.getData(false, $scope.currentPage, "party", "party", $scope.partyParams);
 			}
 		}
@@ -151,14 +153,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'party','party');
+							$scope.getData(false, $scope.currentPage, 'party','party',$scope.partyParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'party','party');
+							$scope.getData(false, $scope.currentPage, 'party','party',$scope.partyParams);
 						}
 					})
 				}
@@ -187,7 +189,7 @@ define(['app'], function (app) {
 				cols : ["*"]
 			};
 			if(page){
-				angular.extend($scope.params, {
+				dataService.extendDeep($scope.params, {
 					limit : {
 						page : page,
 						records : $scope.pageItems
@@ -214,13 +216,13 @@ define(['app'], function (app) {
 				}
 			});
 		}
+		
 		/* filter  dynamic*/
 		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, params, response);
-				console.log($scope.params);
+				dataService.extendDeep($scope.params, params, response);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
 		}

@@ -34,10 +34,12 @@ define(['app'], function (app) {
 				}
 			}
 		]
+		var rowtpl='<div><div style="{\'background-color\': getBkgColorTable(myData[row.rowIndex].count)}" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }" ui-grid-cell></div></div>';
 		
 		$scope.billData = {
 			enableSorting: true,
 			enableFiltering: true,
+			rowTemplate:rowtpl,
 			columnDefs: [
 				{ name:'SrNo', width:50,
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false,
@@ -63,12 +65,8 @@ define(['app'], function (app) {
 							+'<option value="1">Paid</option>'
 							+'<option value="0">Unpaid</option>'
 							+'<option value="2">Partial Paid</option>'
-						+'</select>', 
-					/*filter: {
-					  type: uiGridConstants.filter.SELECT,
-					  options: [ { value: '1', label: 'Paid' }, { value: '0', label: 'Unpaid' }, { value: '2', label: 'Partial Paid' }]
-					}*/
-            
+						+'</select>',
+					cellTemplate : '<span ng-if="row.entity.payment_status==1">Paid</span><span ng-if="row.entity.payment_status==0">Unpaid</span><span ng-if="row.entity.payment_status==2">Partial Paid</span>',
 				},
 				{ name:'total_amount',width:110,enableSorting: false,enableFiltering: false,
 					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'bill\', \'billData\',true,grid.appScope.billParams)" ng-model="total_amount" placeholder="Search">',
@@ -445,14 +443,6 @@ define(['app'], function (app) {
 			},
 			cols : ["*, (t0.total_amount - IFNULL(sum(t2.debit_amount),0)) as due_amount"]
 		}
-		$scope.partyParams = {
-			where : {
-				user_id : $rootScope.userDetails.id,
-				status : 1,
-				type :"vendor"
-			},
-			cols : ["*"]
-		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -495,7 +485,7 @@ define(['app'], function (app) {
 			value = (value) ? value : undefined;
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, params, response);
+				dataService.extendDeep($scope.params, params, response);
 				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
 		}
