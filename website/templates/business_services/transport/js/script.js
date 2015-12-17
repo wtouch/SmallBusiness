@@ -189,11 +189,6 @@ app.controller('enquiryController', function($scope,$http, $location) {
 	});
 	
 	
-	$(document).ready(function(){
-		if($("about").hasClass("abt")){
-			$(".navbar").addClass("a");
-		}
-		});
 		
 		
 	$(document).ready(function(){
@@ -207,6 +202,7 @@ app.controller('enquiryController', function($scope,$http, $location) {
 				
 				$(".main").removeClass("main1");
 				$(".main").addClass("main2");
+				
 				
 			}); 
 		}			

@@ -1,0 +1,482 @@
+@font-face{
+	font-family:'negotiate_free';
+	src:url('../fonts/negotiate_free.ttf');
+}
+@font-face{
+	font-family:'Enriqueta-Regular';
+	src:url('../fonts/Enriqueta-Regular.otf');
+}
+@font-face{
+		font-family:'ArbutusSlab-Regular';
+		src:url('../fonts/ArbutusSlab-Regular.ttf');
+}
+//text color shade
+	 @color:#228B22; // #C4DE9B green
+	 @lightcolor : #d3eaa2; //sky green
+	 @darkcolor : #EF321F; //red
+
+	@back : #464646; // green color
+	@darkbackcolor : #3E3E3E;   //dark cof color
+	@lightbackcolor :rgba(0, 0, 0, 0.74);   //faint pink color
+	
+//common color shade
+	@colorblack : #000000;
+	@colorwhite	: #ffffff;
+	@import "general.less";
+	@import "service.less";
+	@import "project.less";
+	@import "product.less";
+	
+	body{
+	
+		color:@colorblack;
+	}
+	header{
+			position : relative;
+			background-image:url('../img/back.jpg');
+			background-repeat:no-repeat;
+			height:520px;
+			.logo{
+					position:absolute;
+					height:120px;
+					width:120px;
+					margin:auto;
+					left:0;
+					right:0;
+					//margin-top:5%;
+					border-radius:50%;
+					border:2px solid @colorwhite;
+					
+			}
+			h1{
+			//position:absolute;
+			margin-top:100px;
+			font: 400 34px/48px "Arbutus Slab", sans-serif;
+			text-transform:uppercase;
+			color:@colorblack;
+			animation-duration:3s;
+			animation-iteration-count:1;
+			animation-name:h;
+			@keyframes h{
+				0%{opacity:0;transform:translateX(-500px);}
+				100%{opacity:1;transform:translateX(0px);}
+			}
+			
+			}
+			.tagline{
+					font: 400 30px/30px "Arbutus Slab", sans-serif;
+					color:@colorwhite;
+					font-size:50px;
+					line-height:50px;
+					padding:30px;
+					animation-duration:3s;
+					animation-iteration-count:1;
+					animation-name:t;
+					@keyframes t{
+						0%{opacity:0;transform:translateX(500px);}
+						100%{opacity:1;transform:translateX(0px);}
+					}
+					}
+	}
+	
+	.c1{
+		border:1px solid @colorwhite;
+				color:@colorwhite;
+				background-color:transparent;
+				text-transform:uppercase;
+						&:hover{
+						color:@colorwhite;
+						background-color:@darkcolor;
+						}
+	}
+	
+	h1,h2,h3{
+				color:@colorblack;
+				text-align:center;
+	}
+	.align{
+	text-align:left;
+	}
+	container-fluid {
+    padding-right: -15px;
+    padding-left: -15px;
+    margin-right: auto;
+    margin-left: auto;
+	}
+	.navbar-default {
+		position:absolute;
+		bottom:0px;
+	
+		background: @lightbackcolor;
+		opacity:0.9;
+		margin-bottom:-1px;
+		border:none;
+		.navbar-nav{
+			> li{
+					padding:-5px;
+				float:none;
+				margin-bottom:0px;
+				position : relative;
+				> a {
+					
+					color : @colorwhite;
+					font : bold 15px/1em Arial, Helvetica, sans-serif;
+					position : relative;
+					text-transform : uppercase;
+					padding:35px;
+					padding-right:10px;
+					
+				}
+				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
+					background:none;
+					color : @darkcolor;
+					
+				}
+				> ul{
+					display: none;
+					position: absolute;
+					width: 245px;
+					z-index: 999;
+					background-color:  @darkcolor;
+					//margin-top:22px;
+					padding: 2px;
+					list-style: none;
+					text-align: left;
+					>li{
+						padding : 10px;
+						text-transform : uppercase;
+						position : relative;
+						>a{
+							
+							color : @colorwhite;
+							&:hover{
+								color : @colorwhite;
+							}
+						}
+						&:hover{
+						background-color:@darkcolor;
+							-webkit-transition: all 0.4s;
+						}
+						ul{
+							display:none;
+							//background : linear-gradient(@back, @color);
+							background-color: @colorwhite;
+							list-style: none;
+							display : none;
+							color:@darkcolor;
+							position : absolute;
+							left: 150px;
+							width: 180px;
+							padding : 2px;
+							li{
+								padding : 10px;
+								a{
+									color : @darkcolor;
+								}
+								&:hover{
+									a{
+										color : @colorwhite;
+									}
+									//background-color:@lightbackcolor;
+									
+								}
+							}
+						}
+						&:hover{
+							ul{
+								//display : block;
+							}
+						}
+					}
+				}
+				&:hover > ul {
+					//display: block;
+				}
+				
+			}
+		}
+		.navbar-collapse{
+				margin-left: 137px;
+					margin-right: 137px;
+		}
+	}
+	.navbar-nav>li:nth-child(1){
+		
+		animation-duration:1s;
+		animation-iteration-count:1;
+		animation-name:a;
+	}
+	.navbar-nav>li:nth-child(2){
+		
+		animation-duration:1.5s;
+		animation-iteration-count:1;
+		animation-name:a;
+	}
+	.navbar-nav>li:nth-child(3){
+		
+		animation-duration:2s;
+		animation-iteration-count:1;
+		animation-name:a;
+	}
+	.navbar-nav>li:nth-child(4){
+		
+		animation-duration:2.5s;
+		animation-iteration-count:1;
+		animation-name:a;
+	}
+	.navbar-nav>li:nth-child(5){
+		
+		animation-duration:3.5s;
+		animation-iteration-count:1;
+		animation-name:a;
+	}
+	.navbar-nav>li:nth-child(6){
+		
+		animation-duration:4s;
+		animation-iteration-count:1;
+		animation-name:a;
+	}
+	.navbar-nav>li:nth-child(7){
+		
+		animation-duration:4.5s;
+		animation-iteration-count:1;
+		animation-name:a;
+	}
+	@keyframes a{
+	
+		0%{top:-400px;}
+		//50%{transform:rotateZ(180deg);}
+		100%{top:0px;transform:scale(1.5);}
+	}
+	 .homeAboutus{
+					text-align:left;
+					margin-top:-20px;
+					padding:20px;
+					
+						img{
+							float:left;
+							height:150px;
+							width:300px;
+						}
+						h1{
+									padding-top:0px;
+									font: 600 36px/48px "Arbutus Slab", sans-serif;
+									color:@colorblack;
+						}
+						.tagline{
+								color:@colorblack;
+								padding:20px;
+								font-size:20px;
+						}
+						p{
+							
+							color:@colorblack;
+							text-align:justify;
+						}
+	 }
+	 
+	 .row{
+		margin:0px;
+	 }
+	.btn{
+			border-radius:0px !important; 
+	}
+	.btn-info{
+	
+	border:1px solid @colorblack;
+	color:@colorblack;
+	//background-color:transparent;
+	text-transform:uppercase;
+				&:hover{
+				color:@colorwhite;
+				background-color:transparent;
+				}
+	}
+.bg1{
+		height:400px;
+		width:100%;
+		background-image:url('../img/bg3.jpg');
+		background-size:100% 100%;
+}
+.footer{
+	background-color:@darkbackcolor;
+	footer{
+				position:relative;
+				//height:210px;
+				p{
+					color:@colorblack;
+						//padding-top:9%;
+				}
+				a{
+						color:@colorblack;
+				}
+	}
+}
+.panel-default{
+				color:@colorwhite;
+				background-color:transparent;
+				border:none;
+				.form-control{
+							background-color:transparent;
+						    display: inline-block;
+							//width: auto;
+							width:100%;
+							margin:5px;
+							vertical-align: middle;
+				}
+				input{
+						width:100%;
+						height:65px;
+				}
+				textarea{
+							height:246px;
+				}
+				.form-group{
+							display:inline-block;
+				}
+				h3{
+						font: 400 36px/48px "Arbutus Slab", sans-serif;
+						color:@colorwhite;
+				}
+				.btn{
+							border-radius:0px !important; 
+					}
+			.btn-info{
+						border:1px solid @colorwhite;
+						color:@colorwhite;
+						background-color:transparent;
+						text-transform:uppercase;
+						padding:15px;
+						margin:10px;
+						&:hover{
+								color:@colorwhite;
+								background-color:@darkcolor;
+						}
+			
+			}
+			.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+				padding-right: 10px !important;
+				padding-left: 10px !important;
+			}						
+}
+
+.about{
+			
+			
+			overflow:hidden;
+			padding:20px;
+			img{
+					height:200px;
+					width:200px;
+					border:1px solid @colorblack;
+					horizontal-align:center;
+					
+			}
+			h4{
+					text-align:center;
+					font:400 26px/48px "Arbutus Slab", sans-serif;
+				
+			}
+			center{
+						text-align:justify;
+						font:400 18px/20px "Arbutus Slab", sans-serif;
+
+			
+			}
+			h3{
+				text-align:center;
+			}
+			
+}
+.sociallinks{
+padding:100px;
+		.col-lg-3>div{
+			padding-top:12px;
+			border-radius:50%;
+			border:3px solid @colorwhite;
+			margin:10px;
+			height:180px;
+				width:180px;
+			
+		}
+			padding-top:6%;
+				a{
+				vertical-align:middle;
+				border-radius:50%;
+				border:1px solid transparent;
+				display:inline-block;
+				height:150px;
+				width:150px;
+				margin:2px;
+				background-color:rgba(85, 85, 85, 0.25);
+				padding:50px;
+				&:hover{
+				background-color:rgba(85, 85, 85, 0.25);
+				}
+				img{
+					height:40px;
+					width:40px;	
+				}
+				}
+				
+}
+.testimonials{
+			
+			height:500px;
+			overflow:hidden;
+			//padding:20px;
+
+}
+.pad{
+		padding:20px;
+	
+}
+
+.container{
+		+div{
+						padding:0px;
+				}
+}
+
+#googleMap{
+			
+			height:300px;
+			
+}
+.navbar-collapse{
+		padding :0px;
+	}
+	.navbar-toggle { 
+		border : 1px solid @back;
+		margin-top : 8px;
+		background : linear-gradient(@back, @color);
+		border-color : @back;
+		color : @colorwhite;
+	}
+	.navbar-toggle .icon-bar {
+		background-color: linear-gradient(@back, @color);
+	}
+.thumbnail
+	{
+	 color:@lightbackcolor;
+	 border:none;
+	 height:500px:
+	 padding: 10px;
+	 margin-top: 60px;
+	    margin-top: 5px;
+		font-size: 12px;
+		line-height: 15px;
+		font-weight: 300;
+		.prodimage{
+		height:200px;
+		img{
+			height:200px;
+		}
+		}
+	}
+ul{
+	list-style-type:none;
+	a{
+	color:@colorblack;
+	}
+}

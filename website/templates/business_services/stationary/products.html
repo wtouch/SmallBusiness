@@ -1,0 +1,67 @@
+{% autoescape false %}
+<div class="row products">
+<h2>{{title}}</h2>
+<div class="col-xs-12 col-sm-3 col-lg-3">
+	<h3>Categories</h3>
+	<ul>
+		{% for link in routes %}
+			{% if link.status == 1 %}
+				{% if link.url == "/services" %}
+						{% if link.childMenu %}
+							{% for link in link.childMenu %}
+								<li class="{{ (link.childMenu) ? 'child-menu' : '' }}{{ link.url == uri ? ' active' : '' }}" >
+									<a href="{{ link.url | replace({" ":'-'})}}">{{ link.name }}</a>
+									<hr>
+								</li>
+							{% endfor %}
+						{% endif %}
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+	<h3>Product Type</h3>
+	<ul>
+		{% for link in routes %}
+			{% if link.status == 1 %}
+				{% if link.url == "/products" %}
+						{% if link.childMenu %}
+							{% for link in link.childMenu %}
+								<li class="{{ (link.childMenu) ? 'child-menu' : '' }}{{ link.url == uri ? ' active' : '' }}" >
+									<a href="{{ link.url | replace({" ":'-'})}}">{{ link.name }}</a><hr>
+								</li>
+							{% endfor %}
+						{% endif %}
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+	</ul>
+</div>	
+<div class="col-xs-12 col-sm-3 col-lg-9">
+	{% for key, x in products %}
+		<div class="col-xs-12 col-sm-6 col-md-4 anim">
+			<div class="thumbnail">
+				<div class="prodimg"> 
+					<img src="{{x.product_image.0.file_relative_path}}" class="img-responsive center-block" alt="{{key}}"/>
+				</div>
+				<div class="caption">
+					<h4 class="text-center">{{ x.product_service_name }}</h4>
+					<div class="description">
+					{{ x.description }}
+					</div>
+				</div>
+				<div class="readmore text-center">
+					{% if x.type == 'service' %}
+						<a href="/services/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More..</a>
+					{% endif %}
+					{% if x.type == 'product' %}
+						<a href="/products/{{x.product_service_name| replace({' ':'-', '/':'_'})}}/{{x.id}}" class="btn btn-info">Read More..</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	
+	{% include [templatePath ~ '/includes/pagination.html', 'default/default/includes/pagination.html'] %}
+</div>
+</div>
+{% endautoescape %}

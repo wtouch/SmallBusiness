@@ -45,8 +45,14 @@ font-family : 'SixCaps';
 	background-image :url('../img/g.gif');
 	height:150px;
 	width:100px;
-	margin-top:50px;
-	}
+	margin-top:55px;
+	animation-name: man;
+	animation-duration:12s;
+}
+@-webkit-keyframes man{
+	0%{transform:translateX(-2000px)}
+	100%{transform:translateX(0px);transition:transform 6s}
+}
 	.container{
 		max-width : 992px !important;
 	}
@@ -563,3 +569,35 @@ font-family : 'SixCaps';
 		right : 10px;
 	}
 
+.anim{
+	position:absolute;
+	
+	height:100%;
+	width:100%;
+	background-image:url("../img/load.gif");
+	opacity:0;
+	background-size:100% 100%;
+	-webkit-animation-name: anim2;
+	-webkit-animation-duration:4s;
+	
+}
+@-webkit-keyframes anim2
+{
+	0%{opacity:1;left:0px;top:0px;}
+	100%{opacity:1;left:0px;top:0px;}
+}
+.anim1
+{	
+	position:relative;
+	
+	-webkit-animation-name: anim1;
+	-webkit-animation-duration:12s;
+	
+		
+}
+@-webkit-keyframes anim1
+{
+	0%{opacity:0}
+	80%{top:400px;opacity:0}
+	100%{top:0px;opacity:1}
+}
