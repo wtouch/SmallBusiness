@@ -97,13 +97,14 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				staffdate:dataService.sqlDateFormate(),
-				staff_type: $scope.staffConfig,
 				date:{date : $scope.currentDate},
 				addstaff : (data) ? {
 					id : data.id,
 				staff_type : data.staff_type,
 					} : {
-						date : dataService.sqlDateFormate()
+						date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,	
+					status : 1,
 					}, 
 				
 					postData : function(table, input){

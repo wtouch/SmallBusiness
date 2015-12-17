@@ -11,7 +11,7 @@
 			<label for="select type" class="col-sm-2 control-label">Select Staff Type*</label>
 			<div class="col-sm-4">
 					<select id="salary_type" name="salary_type" class="form-control" 
-					ng-model="modalOptions.addstaff.type">
+					ng-model="modalOptions.addstaff.staff_type">
 					<option value="" selected>select type</option>
 					<option value="doctor">Doctor</option>
 					<option value="nurse">Nurse</option>
@@ -22,7 +22,7 @@
 			</div>
 </div>
 </form>
-<ul class="nav nav-tabs" ng-if="modalOptions.addstaff.type=='doctor'">			
+<ul class="nav nav-tabs" ng-if="modalOptions.addstaff.staff_type=='doctor'">			
 		<li role="presentation" ng-class="{active: modalOptions.formPart=='personalDetails'}">
 			<a ng-click="modalOptions.showFormPart('personalDetails', modalOptions)">Personal Details</a>
 		</li>	
@@ -37,7 +37,7 @@
 		</li>	
 </ul>
 
-<ul class="nav nav-tabs" ng-if="modalOptions.addstaff.type=='nurse'|| modalOptions.addstaff.type=='ward_boy'||modalOptions.addstaff.type=='security_guard'|| modalOptions.addstaff.type=='driver'">			
+<ul class="nav nav-tabs" ng-if="modalOptions.addstaff.staff_type=='nurse'|| modalOptions.addstaff.staff_type=='ward_boy'||modalOptions.addstaff.staff_type=='security_guard'|| modalOptions.addstaff.staff_type=='driver'">			
 		<li role="presentation" ng-class="{active: modalOptions.formPart=='personalDetails'}">
 			<a ng-click="modalOptions.showFormPart('personalDetails', modalOptions)">Personal Details</a>
 		</li>	
@@ -52,6 +52,7 @@
 </div>
 {{modalOptions.addstaff}}
 <form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
+<div class="modal-body">
 		<ng-include  ng-show="modalOptions.formPart=='personalDetails'" 	src="'modules/hospital/hospitalstaff/personalDetails.html'">
 		</ng-include> 
 		<ng-include  ng-show="modalOptions.formPart=='officialDetails'" src="'modules/hospital/hospitalstaff/officialDetails.html'">
@@ -60,6 +61,7 @@
 		</ng-include> 
 		<ng-include  ng-show="modalOptions.formPart=='specializationDetails'" src="'modules/hospital/hospitalstaff/specializationDetails.html'">
 		</ng-include> 
+</div>
 </form>
 
 	

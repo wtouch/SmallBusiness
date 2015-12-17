@@ -19,7 +19,7 @@
 					<input type="text" class="form-control " placeholder="Date" id="staff_date" name="staff_date" ng-model="modalOptions.addstaff.staff_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addstaff.date = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.staff_date,10); modalOptions.sqlDateFormat(modalOptions.addstaff.staff_date, modalOptions.addstaff.staff_date)"/>	
 					
 					<span class="input-group-btn">
-					<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
+					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
 					</span>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 	<div class="form-group">
 		<label for="gender" class="col-sm-2 control-label">Gender*</label>
 		<div class="radio col-sm-2">
-			<label><input type="radio" name="gender" value="male"  ng-model="modalOptions.addstaff.gender" checked>Male</label>
+			<label><input type="radio" name="gender" value="male"  ng-model="modalOptions.addstaff.gender" ng-init="modalOptions.addstaff.gender='male'" checked>Male</label>
 		</div>
 		<div class="radio col-sm-2">
 			<label><input type="radio" name="gender" value="female" ng-model="modalOptions.addstaff.gender">Female</label>
@@ -48,11 +48,11 @@
 		<div class="col-sm-9">
 			<input type="Email" class="form-control" id="email" ng-model="modalOptions.addstaff.email" name="email" placeholder="Enter Email" ng-blur="checkuserAvailable('email', addstaff.email)" required >
 			<span class="help-block">
-				<span class="text-success" ng-show="addstaffForm.email.$dirty && addstaffForm.email.$valid && EmailAvailable">{{availabilityMsg}}</span>
+				<span class="text-success" ng-show="addstaffForm.email.$dirty && addstaffForm.email.$valid "></span>
 			</span>
 			
 			<span class="help-block" ng-show="addstaffForm.email.$dirty && addstaffForm.email.$invalid || EmailAvailable == false">
-				<span class="text-danger" ng-show="addstaffForm.email.$dirty && EmailAvailable == false">{{availabilityMsg}}</span>
+				<span class="text-danger" ng-show="addstaffForm.email.$dirty "></span>
 				<span class="text-danger" ng-show="addstaffForm.email.$error.required">Required Field.</span>
 				<span class="text-danger" ng-show="addstaffForm.email.$error.email">Invalid Email address.</span>
 			</span>
@@ -73,10 +73,10 @@
 	<div class="form-group">
 		<label for="marital_status" class="col-sm-2 control-label">Marital status*</label>
 		<div class="radio col-sm-2">
-		<label><input type="radio" name="marital_status" value="0" checked ng-model="modalOptions.addstaff.marital_status" >single</label>
+		<label><input type="radio" name="marital_status" value="single" checked ng-model="modalOptions.addstaff.marital_status"ng-init="modalOptions.addstaff.marital_status='single'" >single</label>
 		</div>
 		<div class="radio col-sm-2">
-		<label><input type="radio" name="marital_status" value="1" ng-model="modalOptions.addstaff.marital_status">Married</label>
+		<label><input type="radio" name="marital_status" value="married" ng-model="modalOptions.addstaff.marital_status">Married</label>
 			</div>
 
 	</div> 
@@ -84,7 +84,7 @@
 		<label  for="date" class="col-sm-2 control-label">Date of Birth*</label>
 		<div class="col-sm-4">
 			<div class="input-group">
-				<input type="text" class="form-control " placeholder="Select Date of Birth" id="dob" name="dob" ng-model="modalOptions.addstaff.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addstaff.dob = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.dob,10); modalOptions.sqlDateFormat(modalOptions.addstaff.dob, modalOptions.addstaff.dob)"/>	
+				<input type="text" class="form-control " placeholder="Select Date of Birth" id="dob" name="dob" ng-model="modalOptions.addstaff.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.dob,10); modalOptions.sqlDateFormat(modalOptions.addstaff.dob, modalOptions.addstaff.dob)"/>	
 				
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -103,25 +103,32 @@
 	<div class="form-group">
 		<label for="blood_group" class="col-sm-2 control-label">blood_group *</label>
 			<div class="col-sm-4">
-				<input type="text" id="blood_group" class="form-control" name="blood_group" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.blood_group" required>
-				<span class="text-danger"  ng-show="addstaffForm.blood_group.$error.pattern">Required Field.</span>
-				<span class="help-block" ng-show="addstaffForm.blood_group.$dirty && addstaffForm.blood_group.$invalid">
-				<span class="text-danger" ng-show="addstaffForm.blood_group.$error.required">Name is required.</span>
-				</span>
-			</div>
+				<select id="blood_group" name="blood_group" class="form-control" 
+				ng-model="modalOptions.addstaff.blood_group">
+					<option value="" selected>select type</option>
+					<option value="AB+">AB+</option>
+					<option value="AB-">AB-</option>
+					<option value="A+">A+</option>
+					<option value="A-">A-</option>
+					<option value="B+">B+</option>
+					<option value="B-">B-</option>
+					<option value="O+">O+</option>
+					<option value="O-">O-</option>
+					</select>
+				</div>
 
-		<label for="p_h" class="col-sm-1 control-label">P.H*</label>
+		<label for="disability" class="col-sm-1 control-label">Disability*</label>
 		<div class="radio col-sm-2">
-			<label><input type="radio" name="ph" value="no" ng-model="modalOptions.addstaff.ph" checked>No</label>
+			<label><input type="radio" name="disability" value="no" ng-model="modalOptions.addstaff.disability"  ng-init="modalOptions.addstaff.disability='no'"checked>No</label>
 		</div>
 		<div class="radio col-sm-2">
-			<label><input type="radio" name="p_h" value="yes"  ng-model="modalOptions.addstaff.ph">Yes</label>
+			<label><input type="radio" name="disability" value="yes"  ng-model="modalOptions.addstaff.disability">Yes</label>
 		</div>
 	</div> 	
 		
 	<div class="form-group">
 		<label for="current_address" class="col-sm-2 control-label">Current Address*</label>
-		<div class="col-sm-4">
+		<div class="col-sm-9">
 			<textarea  class="form-control" id="current_address" ng-model="modalOptions.addstaff.address.current_address" name="current_address" placeholder="Enter address" ng-maxlength="250" required></textarea>
 			<span class="text-danger"  ng-show="addstaffForm.current_address.$error.pattern">please Enter Valid Address</span>
 			<span ng-hide="addstaffForm.current_address.$error.maxlength">{{ 250 - modalOptions.addstaff.address.length + " Chars left"}}</span>
@@ -130,20 +137,12 @@
 				<span class="text-danger" ng-show="addstaffForm.current_address.$error.required">Required Field.</span>
 			</span>
 		</div>
-		
-		<label for="permanent_address" class="col-sm-1 control-label">Permanent Address*</label>
-		<div class="col-sm-4">
-			<textarea  class="form-control" id="permanent_address" ng-model="modalOptions.addstaff.address.permanent_address" name="permanent_address" placeholder="Enter address" ng-maxlength="250" required></textarea>
-			<span class="text-danger"  ng-show="addstaffForm.permanent_address.$error.pattern">please Enter Valid Address</span>
-			<span ng-hide="addstaffForm.permanent_address.$error.maxlength">{{ 250 - modalOptions.addstaff.address.length + " Chars left"}}</span>
-			<span class="help-block" ng-show="addstaffForm.permanent_address.$dirty &&  addstaffForm.permanent_address.$invalid">
-				<span class="text-danger" ng-show="addstaffForm.permanent_address.$error.maxlength">Sorry You are Exceeding the Limit</span>
-				<span class="text-danger" ng-show="addstaffForm.permanent_address.$error.required">Required Field.</span>
-			</span>
-		</div>
 	</div>
-			
-   <div class="form-group">
+	   <div class="form-group">
+		<label for="permanent_address" class=" col-sm-3 control-label">Permanent Address</label>
+		</div>
+	
+	<div class="form-group">
 		<label for="location" class="col-sm-2 control-label">Location*</label>
 			<div class="col-sm-4">
 				<input type="text" name="location" id="location" ng-model="modalOptions.addstaff.location" placeholder="Enter your location" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
