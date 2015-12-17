@@ -2,7 +2,7 @@
 			<label for="select type" class="col-sm-2 control-label">Select Category*</label>
 			<div class="col-sm-3">
 				<select id="category" name="category" class="form-control" 
-				ng-model="modalOptions.addpatient.category">
+				ng-model="modalOptions.addpatient.patient_history.category">
 				<option value="" selected>select category</option>
 				<option value="category">Pay by category</option>
 				<option value="category">Pay for category</option>
@@ -11,7 +11,7 @@
 			<label for="select type" class="col-sm-2 control-label">Select type*</label>
 				<div class="col-sm-3">
 					<select id="type" name="type" class="form-control" 
-					ng-model="modalOptions.addpatient.type">
+					ng-model="modalOptions.addpatient.patient_history.type">
 					<option value="" selected>select type</option>
 					<option value="type">Pay by type</option>
 					<option value="type">Pay for type</option>
@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label for="title" class="col-sm-2 control-label">Title *</label>
 				<div class="col-sm-8">
-				<input type="text" id="title" name="title" class="form-control" ng-model="modalOptions.addpatient.title" placeholder="Enter title" ng-pattern="/^[a-zA-Z]*$/" required>
+				<input type="text" id="title" name="title" class="form-control" ng-model="modalOptions.addpatient.patient_history.title" placeholder="Enter title" ng-pattern="/^[a-zA-Z]*$/" required>
 					<span class="help-block" ng-show="addpatientForm.title.$dirty && addpatientForm.title.$invalid">
 						<span ng-show="addpatientForm.title.$error.required" class="text-danger">title is required.</span>
 					</span>				
@@ -30,7 +30,7 @@
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">Description *</label>
 				<div class="col-sm-8">
-					<input type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addpatient.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" required>
+					<input type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addpatient.patient_history.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" required>
 					<span class="help-block" ng-show="addpatientForm.description.$dirty && addpatientForm.description.$invalid">
 						<span ng-show="addpatientForm.description.$error.required"class="text-danger">Description is required.</span>
 					</span>				
