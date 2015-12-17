@@ -1,22 +1,8 @@
-<!-- <div class="form-group">
-	<div ng-init="modalOptions.getData(false,false,'staff','staffList', false, modalOptions)">
-			<label for="staff_id" class="col-sm-2 control-label"> Select Staff* </label>
-			<div class="col-sm-9">
-				<select id="staff_id" class="form-control" ng-model="modalOptions.addleave.staff_id" ng-options="item.id as item.staff_type for item in modalOptions.staffList" required>
-					<option value="">Select Staff</option>
-					<option value="1">1</option>
-				</select>
-				<span class="help-block" ng-show="addleaveForm.staff_id.$dirty && addleaveForm.staff_id.$invalid">
-				<span ng-show="addleaveForm.staff_id.$error.required" class="text-danger">user name is required.</span>
-				</span>	
-			</div>
-	</div>
-<div> -->
-	<div class="form-group">
+<div class="form-group">
 		<label  for="date" class="col-sm-2 control-label">Date*</label>
 			<div class="col-sm-9">
 				<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="staff_date" name="staff_date" ng-model="modalOptions.addstaff.staff_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addstaff.date = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.staff_date,10); modalOptions.sqlDateFormat(modalOptions.addstaff.staff_date, modalOptions.addstaff.staff_date)"/>	
+					<input type="text" class="form-control " placeholder="Date" id="staff_date" name="staff_date" ng-model="modalOptions.addstaff.staff_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1"  max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.staff_date,10); modalOptions.sqlDateFormat(modalOptions.addstaff.staff_date, modalOptions.addstaff.staff_date)"/>	
 					
 					<span class="input-group-btn">
 					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
@@ -27,7 +13,7 @@
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">Name *</label>
 			<div class="col-sm-9">
-				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.name"required>
+				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.name" required>
 				<span class="text-danger"  ng-show="addstaffForm.name.$error.pattern">please Enter Valid Name</span>
 					<span class="help-block" ng-show="addstaffForm.name.$dirty && addstaffForm.name.$invalid">
 						<span class="text-danger" ng-show="addstaffForm.name.$error.required">Name is required.</span>
@@ -46,19 +32,13 @@
 	<div class="form-group">	
 		<label  for="email" class="col-sm-2 control-label">Email *</label>
 		<div class="col-sm-9">
-			<input type="Email" class="form-control" id="email" ng-model="modalOptions.addstaff.email" name="email" placeholder="Enter Email" ng-blur="checkuserAvailable('email', addstaff.email)" required >
-			<span class="help-block">
-				<span class="text-success" ng-show="addstaffForm.email.$dirty && addstaffForm.email.$valid "></span>
-			</span>
-			
-			<span class="help-block" ng-show="addstaffForm.email.$dirty && addstaffForm.email.$invalid || EmailAvailable == false">
-				<span class="text-danger" ng-show="addstaffForm.email.$dirty "></span>
-				<span class="text-danger" ng-show="addstaffForm.email.$error.required">Required Field.</span>
-				<span class="text-danger" ng-show="addstaffForm.email.$error.email">Invalid Email address.</span>
+			<input type="Email" class="form-control" id="email" ng-model="modalOptions.addstaff.email" name="email" placeholder="Enter Email"  ng-pattern="/^[\.\w]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" required >
+			<span class="help-block" ng-show="addstaffForm.email.$dirty && addstaffForm.email.$invalid">
+			<span ng-show="addstaffForm.email.$error.pattern && (addstaffForm.email.$dirty || submitted)" class="text-danger">Enter a valid email</span>
+			<span ng-show="addstaffForm.email.$error.required" class="text-danger">Required Field.</span>
 			</span>
 		</div>
 	</div>
-
 	<div class="form-group">
 		<label for="phone" class="col-sm-2 control-label">Phone *</label>
 		<div class="col-sm-9">
@@ -70,21 +50,20 @@
 		</div>						
 	</div>	
 	
-	<div class="form-group">
+	<div class="form-group"ng-init="modalOptions.addstaff.marital_status{{modalOptions.addstaff.marital_status=(modalOptions.addstaff.marital_status) ? modalOptions.addstaff.marital_status='single'">
 		<label for="marital_status" class="col-sm-2 control-label">Marital status*</label>
 		<div class="radio col-sm-2">
-		<label><input type="radio" name="marital_status" value="single" checked ng-model="modalOptions.addstaff.marital_status"ng-init="modalOptions.addstaff.marital_status='single'" >single</label>
+		<label><input type="radio" name="marital_status" value="single" checked ng-model="modalOptions.addstaff.marital_status">single</label>
 		</div>
 		<div class="radio col-sm-2">
 		<label><input type="radio" name="marital_status" value="married" ng-model="modalOptions.addstaff.marital_status">Married</label>
 			</div>
-
 	</div> 
 	<div class="form-group">
 		<label  for="date" class="col-sm-2 control-label">Date of Birth*</label>
 		<div class="col-sm-4">
 			<div class="input-group">
-				<input type="text" class="form-control " placeholder="Select Date of Birth" id="dob" name="dob" ng-model="modalOptions.addstaff.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.dob,10); modalOptions.sqlDateFormat(modalOptions.addstaff.dob, modalOptions.addstaff.dob)"/>	
+				<input type="text" class="form-control " placeholder="Select Date of Birth" id="dob" name="dob" ng-model="modalOptions.addstaff.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.dob,10); modalOptions.sqlDateFormat(modalOptions.addstaff.dob, modalOptions.addstaff.dob)"/>	
 				
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -93,7 +72,7 @@
 		</div>	
 		<label for="age" class="col-sm-1 control-label">Age*</label>
 		<div class="col-sm-4">
-			<input type="text" id="age" name="age" class="form-control" ng-model="modalOptions.addstaff.age" placeholder="Enter Age " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="3" required>
+			<input type="text" id="age" name="age" class="form-control" ng-model="modalOptions.addstaff.age" placeholder="Enter Age " ng-pattern="/^\d{0,2}[0-9]$/" maxlength="3" required>
 			 <span class="text-danger"  ng-show="addstaffForm.age.$error.pattern">please Enter Age in Numbers</span>
 			<span class="help-block" ng-show="addstaffForm.age.$dirty && addstaffForm.age.$invalid">
 				<span class="text-danger" ng-show="addstaffForm.age.$error.required">Age is required.</span>

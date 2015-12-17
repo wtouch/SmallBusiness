@@ -59,6 +59,12 @@
   padding: 10px;
   box-shadow: 0 8px 16px 0 rgba(252, 248, 227, 0.53), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: transparent;
+  border: none;
+}
+.featrGallery .thumbnail:hover {
+  transform: scale(0.9, 0.9);
+  transition: transform 1s;
+  z-index: 9999;
 }
 .featrGallery .thumbnail img {
   width: 100%;
@@ -67,13 +73,18 @@
 .featrGallery h3 {
   font: 400 36px/48px "Arbutus Slab", sans-serif;
 }
-.featrGallery > div:nth-child(3) {
-  animation-name: gall3;
+.featrGallery > div:nth-child(1) {
+  animation-name: gall1;
   animation-duration: 3s;
   aniamtion-iteration-count: 1;
 }
-.featrGallery > div:nth-child(1) {
-  animation-name: gall1;
+.featrGallery > div:nth-child(2) {
+  animation-name: gall2;
+  animation-duration: 3s;
+  aniamtion-iteration-count: 1;
+}
+.featrGallery > div:nth-child(3) {
+  animation-name: gall3;
   animation-duration: 3s;
   aniamtion-iteration-count: 1;
 }
@@ -89,14 +100,22 @@
 }
 @keyframes gall1 {
   0% {
-    z-index: 999;
     opacity: 0;
     transform: translateX(800px);
   }
   100% {
-    z-index: 999;
     opacity: 1;
     transform: translateX(0);
+  }
+}
+@keyframes gall2 {
+  0% {
+    opacity: 0;
+    transform: translateY(-1000px) rotate(180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 @keyframes gall3 {
@@ -229,15 +248,6 @@ div.infrastructure > div.row > div:nth-child(9) {
 .activity img {
   width: 100%;
 }
-.col-xs-12,
-.col-sm-12,
-.col-md-12,
-.col-lg-12,
-.col-lg-2 {
-  padding-right: 0px;
-  padding-left: 0px;
-  padding-bottom: 0px;
-}
 .activity {
   background-image: linear-gradient(rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)), url('../img/mob3.jpg');
   background-size: 100% 100%;
@@ -257,6 +267,12 @@ div.infrastructure > div.row > div:nth-child(9) {
   color: #ffffff;
   background-size: 100% 100%;
 }
+.contact h3 {
+  text-align: left;
+}
+.contact table {
+  margin-bottom: 0px;
+}
 .contact table h4 {
   font: bold 20px/1em Arial, Helvetica, sans-serif;
 }
@@ -274,7 +290,7 @@ div.infrastructure > div.row > div:nth-child(9) {
 @keyframes contact {
   0% {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateX(-300px);
   }
   100% {
     opacity: 1;
@@ -282,6 +298,7 @@ div.infrastructure > div.row > div:nth-child(9) {
   }
 }
 .contact .form-control {
+  color: #ffffff;
   animation-name: form;
   animation-duration: 2s;
   animation-iteration-count: 1;
@@ -320,6 +337,22 @@ div.infrastructure > div.row > div:nth-child(9) {
   100% {
     transform: translateY(0px);
   }
+}
+.contact .sub ul {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52));
+  list-style-type: none;
+  padding-left: 0px;
+}
+.contact .sub ul li {
+  padding: 20px;
+  border-bottom: 1px solid #ffffff;
+}
+.contact .sub ul li a {
+  color: #ffffff;
+  padding-left: 10px;
+}
+.contact .sub ul li:hover {
+  background: rgba(0, 0, 0, 0.74);
 }
 .services .servdesc {
   padding: 30px;
@@ -394,34 +427,35 @@ div.infrastructure > div.row > div:nth-child(9) {
 }
 .contentModule {
   /*
-div.products>div:nth-child(4){
-			animation-duration:2s;
-			animation-iteration-count:1;
-			animation-name:prod1;
-			}
-@keyframes prod1{
-	0%{opacity:0;transform:translateX(200px);}
-	100%{opacity:1;transform:translateX(0px);}
-}
+	div.products>div:nth-child(4){
+				animation-duration:2s;
+				animation-iteration-count:1;
+				animation-name:prod1;
+				}
+	@keyframes prod1{
+		0%{opacity:0;transform:translateX(200px);}
+		100%{opacity:1;transform:translateX(0px);}
+	}
 
-div.products>div:nth-child(2){
-			animation-duration:1s;
-			animation-iteration-count:1;
-			animation-name:prod2;
-			}
-div.products>div:nth-child(3){
-animation-duration:1s;
-animation-iteration-count:1;
-//animation-name:prod2;
-}
-@keyframes prod2{
-	0%{opacity:0;transform:translatey(-200px);}
-	100%{opacity:1;transform:translatey(0px);}
-}	
-*/
+	div.products>div:nth-child(2){
+		animation-duration:1s;
+		animation-iteration-count:1;
+		animation-name:prod2;
+	}
+	div.products>div:nth-child(3){
+		animation-duration:1s;
+		animation-iteration-count:1;
+		//animation-name:prod2;
+	}
+	@keyframes prod2{
+		0%{opacity:0;transform:translatey(-200px);}
+		100%{opacity:1;transform:translatey(0px);}
+	}	
+	*/
 }
 .contentModule h3 {
   color: #ffffff;
+  margin-bottom: 25px;
 }
 .contentModule .products {
   background-color: transparent;
@@ -536,7 +570,7 @@ animation-iteration-count:1;
 }
 .products .thumbnail .prodimg {
   position: relative;
-  height: 250px;
+  height: 200px;
   width: 100%;
   text-align: center;
 }
@@ -549,19 +583,27 @@ animation-iteration-count:1;
   z-index: 999;
   display: none;
   padding: 20px;
-  overflow: hidden;
-  height: 250px;
+  height: 200px;
   width: 100%;
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.46);
+}
+.products .thumbnail .prodimg .caption h4 a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.products .thumbnail .prodimg .caption .description {
+  height: 60px;
+  overflow: hidden;
+  margin: 20px;
 }
 .products .thumbnail .prodimg:hover .caption {
   display: block;
   animation-duration: 1s;
   animation-iteration-count: 1;
-  animation-name: caption;
+  animation-name: caption1;
 }
-@keyframes caption {
+@keyframes caption1 {
   0% {
     z-index: 999;
     opacity: 0;
@@ -586,6 +628,9 @@ animation-iteration-count:1;
 .products ul li a {
   color: #ffffff;
   padding-left: 10px;
+}
+.products ul li:hover {
+  background: rgba(0, 0, 0, 0.74);
 }
 .products .pagination li {
   padding: 0px;
@@ -612,7 +657,7 @@ header {
   position: relative;
   background-image: url('../img/back.jpg');
   background-repeat: no-repeat;
-  height: 520px;
+  height: 370px;
 }
 header .logo {
   position: absolute;
@@ -625,7 +670,6 @@ header .logo {
   border: 2px solid #ffffff;
 }
 header h1 {
-  margin-top: 100px;
   font: 400 34px/48px "Arbutus Slab", sans-serif;
   text-transform: uppercase;
   color: #ffffff;
@@ -648,7 +692,7 @@ header .tagline {
   color: #ffffff;
   font-size: 50px;
   line-height: 50px;
-  padding: 30px;
+  padding-bottom: 40px;
   animation-duration: 3s;
   animation-iteration-count: 1;
   animation-name: t;
@@ -689,15 +733,13 @@ container-fluid {
   margin-left: auto;
 }
 .navbar-default {
-  position: absolute;
-  bottom: 0px;
   background: rgba(0, 0, 0, 0.74);
   opacity: 0.9;
   margin-bottom: -1px;
   border: none;
 }
 .navbar-default .navbar-nav > li {
-  padding: -5px;
+  padding: 25px;
   float: none;
   margin-bottom: 0px;
   position: relative;
@@ -707,8 +749,18 @@ container-fluid {
   font: bold 15px/1em Arial, Helvetica, sans-serif;
   position: relative;
   text-transform: uppercase;
-  padding: 35px;
-  padding-right: 10px;
+}
+.navbar-default .navbar-nav > li a:before {
+  position: absolute;
+  content: "";
+  bottom: 0;
+  border-bottom: 2px solid #ffffff;
+  right: 100%;
+  left: 0;
+}
+.navbar-default .navbar-nav > li:hover a:before {
+  right: 0%;
+  transition: right 1s;
 }
 .navbar-default .navbar-nav > li.active > a,
 .navbar-default .navbar-nav > li.active:hover > a,
@@ -828,7 +880,7 @@ container-fluid {
 }
 .homeAboutus .tagline {
   color: #ffffff;
-  padding: 20px;
+  padding-bottom: 20px;
   font-size: 20px;
 }
 .homeAboutus p {
@@ -845,6 +897,7 @@ container-fluid {
   color: #ffffff;
   background-color: rgba(230, 158, 84, 0.47);
   border: none;
+  margin-bottom: 20px;
   text-transform: uppercase;
 }
 .btn-info:hover {
@@ -873,6 +926,7 @@ container-fluid {
   color: #ffffff;
 }
 .panel-default {
+  padding: 0px;
   color: #ffffff;
   background-color: transparent;
   border: none;
@@ -883,6 +937,9 @@ container-fluid {
   width: 100%;
   margin: 5px;
   vertical-align: middle;
+}
+.panel-default .panel-body {
+  padding: 0px;
 }
 .panel-default input {
   width: 100%;
@@ -913,18 +970,12 @@ container-fluid {
   color: #ffffff;
   background-color: #ef321f;
 }
-.panel-default .col-xs-12,
-.panel-default .col-sm-12,
-.panel-default .col-md-12,
-.panel-default .col-lg-12 {
-  padding-right: 10px !important;
-  padding-left: 10px !important;
-}
 .about {
   overflow: hidden;
   padding: 20px;
 }
 .about img {
+  margin-right: 10px;
   float: left;
   height: 200px;
   width: 200px;
@@ -966,6 +1017,9 @@ container-fluid {
   color: #ffffff;
   padding-left: 10px;
 }
+.about ul li:hover {
+  background: rgba(0, 0, 0, 0.74);
+}
 .about .desc {
   padding: 20px;
 }
@@ -983,38 +1037,36 @@ div.about > div > div:nth-child(2) {
   }
 }
 .sociallinks {
-  padding: 100px;
+  margin: auto;
+  width: 800px;
+  height: 200px;
   padding-top: 6%;
 }
-.sociallinks .col-lg-3 > div {
-  padding-top: 12px;
-  border-radius: 50%;
-  border: 3px solid #ffffff;
-  margin: 10px;
-  height: 180px;
-  width: 180px;
-}
-.sociallinks .col-lg-3 > div:hover {
-  box-shadow: 0px 5px 30px 6px rgba(252, 248, 227, 0.53), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.sociallinks li {
   margin-top: -20px;
-  transition: margin-top 0.7s;
+  display: inline;
+  background-color: rgba(85, 85, 85, 0.81);
+  border: 3px solid #ffffff;
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  border-radius: 50%;
+  padding: 50px;
 }
-.sociallinks a {
+.sociallinks li a {
   vertical-align: middle;
   border-radius: 50%;
   border: 1px solid transparent;
-  display: inline-block;
-  height: 150px;
-  width: 150px;
   margin: 2px;
-  background-color: rgba(85, 85, 85, 0.81);
-  padding: 50px;
 }
-.sociallinks a img {
+.sociallinks li a img {
   height: 40px;
   width: 40px;
 }
-.sociallinks > div {
+.sociallinks li:hover {
+  box-shadow: 0px 5px 30px 6px rgba(252, 248, 227, 0.53), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.sociallinks > li {
   animation-duration: 2s;
   animation-name: social;
 }
@@ -1051,21 +1103,65 @@ div.about > div > div:nth-child(2) {
 .navbar-toggle .icon-bar {
   background-color: linear-gradient(#464646, #228b22);
 }
-.thumbnail {
+.sections .thumbnail {
   background-color: rgba(0, 0, 0, 0.46);
   color: #ffffff;
   border: none;
-  height: 500px:
-	 padding: 10px;
-  margin-top: 60px;
-  margin-top: 5px;
+  box-shadow: 0 8px 16px 0 rgba(252, 248, 227, 0.53), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 20px !important;
   font-size: 12px;
   line-height: 15px;
   font-weight: 300;
 }
-.thumbnail .prodimage {
+.sections .thumbnail .prodimage {
+  position: relative;
   height: 200px;
+  width: 100%;
+  text-align: center;
 }
-.thumbnail .prodimage img {
+.sections .thumbnail .prodimage img {
+  height: 100%;
+  text-align: center;
+}
+.sections .thumbnail .prodimage .caption {
+  position: absolute;
+  z-index: 999;
+  display: none;
+  padding: 20px;
   height: 200px;
+  width: 100%;
+  color: #ffffff;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-name: caption;
+  background-color: rgba(0, 0, 0, 0.46);
+}
+.sections .thumbnail .prodimage .caption h4 a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.sections .thumbnail .prodimage .caption .description {
+  height: 60px;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+}
+.sections .thumbnail .prodimage:hover .caption,
+.sections .thumbnail .prodimage:hover .description {
+  display: block;
+}
+@keyframes caption {
+  0% {
+    z-index: 999;
+    opacity: 0;
+    top: -300px;
+    left: 300px;
+    transform: rotate(180deg);
+  }
+  100% {
+    z-index: 999;
+    opacity: 1;
+    top: 0px;
+    transition: top 2s;
+  }
 }

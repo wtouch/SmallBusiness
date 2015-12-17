@@ -6,7 +6,7 @@
 	</div>
 	<div class="modal-body">
 		<form name="addStockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStockForm.$valid">
-				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList',modalOptions.partyParams,modalOptions)">
+				<!-- <div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList',modalOptions.partyParams,modalOptions)">
 					<label for="party_id" class="col-sm-2 control-label"> Party id * </label>
 					<div class="col-sm-9">
 						<select id="party_id" class="form-control" ng-model="modalOptions.stock.party_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
@@ -16,7 +16,7 @@
 						<span ng-show="addStockForm.user_id.$error.required" class="text-danger">user id is required.</span>
 						</span>	
 					</div>
-				</div>
+				</div> -->
 				<input type="hidden"  id="status" class="form-control" name="status" placeholder=" stock Name"ng-model="modalOptions.stock.status" ng-init="modalOptions.stock.status = '1'"/>
 				<input type="hidden" class="form-control" ng-model="modalOptions.stock.user_id" ng-init="modalOptions.stock.user_id = userDetails.id" readonly/>
 				<div class="form-group">
@@ -61,7 +61,7 @@
 						</div>
 				</div> 
 				
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label  for="quantity" class="col-sm-2 control-label">quantity</label>
 						<div class="col-sm-9">
 							<input type="text" id="quantity" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.stock.quantity" name="quantity" placeholder="quantity" required />
@@ -69,7 +69,7 @@
 								<span ng-show="(addStockForm.quantity.$dirty)" class="text-danger">Enter Number Only!</span>
 							</span>
 						</div>						
-				</div>
+				</div> -->
 				
 				<div class="form-group">
 					<label  for="unit" class="col-sm-2 control-label">Unit</label>
@@ -89,7 +89,7 @@
 							</span>
 						</div>						
 				</div>
-				<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.stock.modified_date" ng-init="modalOptions.stock.modified_date = modalOptions.date"/>
+				<!-- <input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.stock.modified_date" ng-init="modalOptions.stock.modified_date = modalOptions.date"/> -->
 				<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.stock.date" ng-init="modalOptions.stock.date = modalOptions.date"/>
 				<div class="form-group">
 				 <label  for="date" class="col-sm-2 control-label">Date * </label>
@@ -100,11 +100,11 @@
 				<div class="form-group modal-footer">
 					<div class="col-sm-offset-2 col-sm-9">
 						
-						<button type="submit" ng-if="!modalOptions.stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('stock',modalOptions.stock)">
+						<button type="submit" ng-if="!modalOptions.stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('stock_items',modalOptions.stock)">
 							<span>Submit</span>
 						</button>
 						
-						<button type="submit" ng-if="modalOptions.stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('stock',modalOptions.stock, modalOptions.stock.id)">
+						<button type="submit" ng-if="modalOptions.stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('stock_items',modalOptions.stock, modalOptions.stock.id)">
 							<span>Update</span>
 						</button> 
 						<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>

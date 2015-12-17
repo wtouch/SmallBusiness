@@ -1,0 +1,213 @@
+<div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions)">
+	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+	<h3  ng-if="!modalOptions.addquotation.id" class="text-center">Add Quotation</h3>
+	<h3  ng-if="modalOptions.addquotation.id" class="text-center" ng-init="modalOptions.totalCalculate(modalOptions)">Update Quotation</h3>
+</div>
+<div class="modal-body">
+	
+	<form name="addquotationForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addquotationForm.$valid" id="addquotationForm">
+		<div class="form-group">
+			<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
+				<label for="party_id" class="col-sm-2 control-label"> Select Party * </label>
+				<div class="col-sm-4">
+					<select id="party_id" class="form-control" ng-model="modalOptions.addquotation.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}" required>
+						<option value="">Select Party</option>
+					</select>
+					<span class="help-block" ng-show="addquotationForm.party_id.$dirty && addquotationForm.party_id.$invalid">
+					<span ng-show="addquotationForm.party_id.$error.required" class="text-danger">user name is required.</span>
+					</span>	
+				</div>
+			</div>
+			
+			<div class="col-sm-4">
+			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
+				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addquotation.generated_date"  
+				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addquotation.generated_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
+			</div>
+			<input type="hidden" ng-model="modalOptions.addquotation.tax" ng-init="modalOptions.addquotation.tax = modalOptions.singleparticular.tax">
+			
+		</div>
+	</form>
+	
+	<!--THE HIDDEN Generate Date and Due_date and User ID Ends Here-->
+	<div class="row">
+		<div class="col-sm-12 " ng-init="modalOptions.addquotation.particulars = (modalOptions.addquotation.particulars) ? modalOptions.addquotation.particulars : []">
+		
+			<form name="addquotationForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addquotationForm.$valid" id="addquotationForm" ng-if="modalOptions.addquotation.party_id">
+				<div class="table-responsive">
+					<table class="table table-bordered" >
+						<thead>
+							<tr>
+								<th>Particular Name</th>
+								<th>Type</th>
+								<th>Category</th>
+								<th>Price</th>
+								<th>Quantity</th>
+								<th>Amount</th>
+								<th>Tax</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
+									ng-change="" placeholder="particulars Name"/>
+									
+									<span class="help-block" ng-show="addquotationForm.goods_name.$dirty && addquotationForm.goods_name.$invalid">
+									<span ng-show="addquotationForm.goods_name.$error.required" class="text-danger">goods_name Required.</span>
+									</span>
+								</td>
+								
+								<script type="text/ng-template" id="customTemplate.html">
+									<a>
+										<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+										<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
+									</a>
+								</script>
+								
+								<td>			
+									<select id="goods_type" class="form-control" placeholder="Type" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type" required>
+										<option value="" selected>Type</option>
+										<option value="type1" >Type1</option>
+										<option value="type2">Type2</option>
+										<option value="type3">Type3</option>
+										<option value="type4">Type4</option>
+									</select>
+									<span class="help-block" ng-show="addquotationForm.goods_type.$dirty && addquotationForm.goods_type.$invalid">
+										<span ng-show="addquotationForm.goods_type.$error.required" class="text-danger">Required field.</span>
+									</span>
+								</td>
+								<td>
+									<select id="category" class="form-control" name="category" placeholder="Category" ng-model="modalOptions.singleparticular.category" required>
+										<option value="" selected>Category</option>
+										<option value="category1">Category1</option>
+										<option value="category2">Category2</option>
+										<option value="category3">Category3</option>
+										<option value="category4">Category4</option>
+									</select>
+									<span class="help-block" ng-show="addquotationForm.category.$dirty && addquotationForm.category.$invalid">
+										<span ng-show="addquotationForm.category.$error.required" class="text-danger">Required field.</span>
+									</span>	
+								</td>
+								<td>
+									<input type="text" class="form-control " placeholder="price" id="price" name="price" ng-model="modalOptions.singleparticular.price"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/"
+									ng-init="modalOptions.singleparticular.price = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
+									
+									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"	required/>
+									<span class="help-block" ng-show="addquotationForm.price.$dirty && addquotationForm.price.$invalid">
+									<span ng-show="addquotationForm.price.$error.required" class="text-danger">Price Required.</span>
+									<span ng-show="addquotationForm.price.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+									</span>
+								</td>
+								<td>
+									<input type="text" class="form-control " placeholder="Quantity" id="quantity" name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" ng-init="modalOptions.singleparticular.quantity = 1" 
+								
+									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" 
+									required/>
+									
+									<span class="help-block" ng-show="addquotationForm.quantity.$dirty && addquotationForm.quantity.$invalid">
+									<span ng-show="addquotationForm.quantity.$error.required" class="text-danger">Quantity Required</span>
+									<span ng-show="addquotationForm.quantity.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+									</span>
+								</td>
+								<td>
+									<input type="text" class="form-control " placeholder="Amount" id="amount" name="amount" ng-model="modalOptions.singleparticular.amount" ng-init="modalOptions.singleparticular.amount" readonly/>
+								</td>
+								
+								<td>
+									<button type="button" tooltip="Add Tax" id="tax" class="dropdown dropdown-toggle glyphicon glyphicon-plus" placeholder="Tax" name="tax" value="tax"  ng-click="isCollapsed1 = !isCollapsed1"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+									</button>
+									<div collapse="!isCollapsed1" style="z-index:2;position:absolute;right:20px;width:155px;top:70px;padding:1px;" class="well"><!--ng-repeat=x in taxList.config.taxData.tax"-->
+										<div class="col-sm-3">
+											<div class="form-group" ng-init="modalOptions.taxInfo = {}">
+												<ul style="list-style-type:none">
+													<li>{{modalOptions.taxInfo}}
+														<div class="checkbox col-sm-3 ">
+															<label ng-repeat="x in userDetails.config.inventory.taxData.tax">
+															<input type="checkbox" ng-model="modalOptions.taxInfo[x.taxName]" ng-change="modalOptions.taxCalculate(modalOptions)" checklist-value="x"/> {{x.displayName}}
+															</label>
+														</div>
+													</li>
+												</ul> 
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-4">
+						<button type="submit" class="btn btn-success center" ng-disabled="addquotationForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addquotation.particulars,'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">+Add This Particular</button>							
+				</div>
+			</form>
+		</div>
+	</div>
+</div>	
+<div class="table-responsive col-sm-12" ng-if="modalOptions.addquotation.party_id">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th class="col-sm-2">Sr.No.</th>
+				<th class="col-sm-2">Particular Name</th>
+				<th class="col-sm-2">Goods_type</th>
+				<th class="col-sm-2">Category </th>
+				<th class="col-sm-2 text-right">Price</th>
+				<th class="col-sm-2 text-right">Quantity</th>
+				<th class="col-sm-2 text-right">Amount</th>
+				<th class="col-sm-2 text-right">Remove</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in modalOptions.addquotation.particulars">
+				<td>{{ $index + 1 }}</td>
+				<td>{{x.goods_name}}</td>
+				<td>{{x.goods_type}}</td>
+				<td>{{x.category}}</td>
+				<td class="text-right">{{x.price}}</td>
+				<td class="text-right">{{x.quantity}}</td>
+				<td class="text-right">{{x.amount}}</td>
+				<td><a ng-click="modalOptions.removeObject(modalOptions.addquotation.particulars, $index);modalOptions.totalCalculate(modalOptions);"><span class="glyphicon glyphicon-remove"></span></a></td>
+			</tr>
+			<tr>
+					<td colspan="5"></td>
+					<td class="text-right"><strong>Sub Total</strong></td>
+					<td class="text-right">{{ modalOptions.addquotation.subtotal | number : 2}}</td>
+					<td>{{modalOptions.addquotation.tax}}</td>
+			</tr>
+			<tr ng-repeat="(key, value) in modalOptions.addquotation.tax">
+				<td colspan="5"></td>
+				<td class="text-right"><strong>{{key}}</strong></td>
+				<td class="text-right">{{ value  | number : 2}}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="5"></td>
+				<td class="text-right"><strong>Total</strong></td>
+				<td class="text-right">{{ modalOptions.addquotation.total_amount  | number : 2}}</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	<label class="col-sm-3">Remark</label>
+	<div class="col-sm-9">
+		<textarea class="form-control" id="remark" name="remark" ng-model="modalOptions.addquotation.remark" ng-maxlength="250" placeholder="Remark" required></textarea>
+		<span ng-hide="addquotationForm.remark.$error.maxlength">
+						{{ 250 - modalOptions.addquotation.remark.length + " Chars left" }}
+		</span>	
+		 <span class="help-block" ng-show="addquotationForm.remark.$dirty && addquotationForm.remark.$invalid">
+			<span class="text-danger" ng-show="addquotationForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+			<span ng-show="addquotationForm.remark.$error.required" class="text-danger">Required Field</span>
+		</span>
+	</div>
+</div>
+
+<div class="modal-footer">
+	
+	<button type="submit"  class="btn btn-success" ng-if="modalOptions.addquotation.id"  ng-disabled="addquotation.$invalid" ng-click="modalOptions.updateData('quotation',modalOptions.addquotation,modalOptions.addquotation.id); modalOptions.ok()">Update Quotation</button>
+
+	<button type="submit"  class="btn btn-success" ng-if="!modalOptions.addquotation.id" ng-disabled="addQuotationForm.$invalid" ng-click="modalOptions.postData('quotation',modalOptions.addquotation); modalOptions.ok()">Add Quotation</button>
+	
+	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
+</div>
+	

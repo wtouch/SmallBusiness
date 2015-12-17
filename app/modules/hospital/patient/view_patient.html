@@ -1,7 +1,7 @@
 	<div class="modal-header">
 	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3 class="text-center">View Patient Details</h3>
-	</div>{{modalOptions.addpatient}}
+	</div>
 <div class="modal-body">
 <label>Patient Details:</label><br><br>
 	<table class="table table-hover table-responsive table-bordered">
@@ -19,9 +19,31 @@
 				 </td>	
 			</tr>
 			<tr>
+				 <td><b>Email</b></td>
+				 <td colspan='3'>						
+					{{modalOptions.addpatient.email}}
+				 </td>	
+			</tr>
+			<tr>
+				 <td><b>Mobile</b></td>
+				 <td colspan='3'>						
+					{{modalOptions.addpatient.mobile}}
+				 </td>	
+			</tr>
+			<tr>
 				 <td><b>Address</b></td>
 				 <td colspan='3'>						
 					{{modalOptions.addpatient.address}}
+				 </td>	
+			</tr>
+			<tr>
+				 <td><b>Mobile2</b></td>
+				 <td>						
+					{{modalOptions.addpatient.mobile2}}
+				 </td>	
+				  <td><b>Disability</b></td>
+				 <td>						
+					{{modalOptions.addpatient.disability}}
 				 </td>	
 			</tr>
 			<tr>
@@ -34,7 +56,7 @@
 					{{modalOptions.addpatient.blood_group}}
 				 </td>	
 			</tr>
-					<tr>
+			<tr>
 				 <td><b>Date of Birth</b></td>
 				 <td>						
 					{{modalOptions.addpatient.dob}}
@@ -42,16 +64,6 @@
 				  <td><b>Age</b></td>
 				 <td>						
 					{{modalOptions.addpatient.age}}
-				 </td>	
-			</tr>
-			<tr>
-				 <td><b>Email</b></td>
-				 <td>						
-					{{modalOptions.addpatient.email}}
-				 </td>	
-				  <td><b>Phone</b></td>
-				 <td>						
-					{{modalOptions.addpatient.phone}}
 				 </td>	
 			</tr>
 			<tr>
@@ -64,7 +76,6 @@
 					{{modalOptions.addpatient.area}}
 				 </td>	
 			</tr>
-			
 			<tr>
 				 <td><b>City</b></td>
 				 <td>						
@@ -75,7 +86,6 @@
 					{{modalOptions.addpatient.state}}
 				 </td>	
 			</tr>
-			
 			<tr>
 				 <td><b>Country</b></td>
 				 <td>						
@@ -98,23 +108,23 @@
 				 </td>	
 				 <td><b>Relation with Patient</b></td>
 				 <td>						
-					{{modalOptions.addpatient.doj}}
+					{{modalOptions.addpatient.guardian_details.relation}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Mobile</b></td>
 				 <td>						
-					{{modalOptions.addpatient.confirmation_date}}
+					{{modalOptions.addpatient.guardian_details.g_mobile}}
 				 </td>
 				<td><b>Email</b></td>
 				 <td>						
-					{{modalOptions.addpatient.qualification}}
+					{{modalOptions.addpatient.guardian_details.g_email}}
 				 </td>					 
 			</tr>
 			<tr>
 				 <td><b>Address</b></td>
 				 <td  colspan='3'>						
-					{{modalOptions.addpatient.department}}
+					{{modalOptions.addpatient.guardian_details.address1}}
 				 </td>	
 			</tr>
 			
@@ -127,21 +137,21 @@
 			<tr>
 				 <td><b>Category</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addpatient.patient_history.category}}
 				 </td>
 				<td><b>Type</b></td>
 				 <td>						
-					{{modalOptions.addpatient.staff_type}}
+					{{modalOptions.addpatient.patient_history.type}}
 				 </td>					 
 			</tr>
 			<tr>
 				 <td><b>Title </b></td>
 				 <td>						
-					{{modalOptions.addpatient.staff_type}}
+					{{modalOptions.addpatient.patient_history.title}}
 				 </td>	
 				 <td><b>Description</b></td>
 				 <td>						
-					{{modalOptions.addpatient.staff_type}}
+					{{modalOptions.addpatient.patient_history.description}}
 				 </td>	
 			</tr>
 			</tbody>

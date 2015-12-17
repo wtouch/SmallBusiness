@@ -4,7 +4,6 @@
 	<h3 ng-if="!modalOptions.addBill.id">Add Purchase Bill</h3>
 	<h3 ng-if="modalOptions.addBill.id" ng-init="modalOptions.totalCalculate(modalOptions)">Update Purchase Bill</h3>
 </div>
-
 <div class="modal-body">
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
 	{{modalOptions.addBill}}
@@ -47,12 +46,20 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" required 
+								<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
 								ng-change=""  placeholder="particulars Name"/>
 								<span class="help-block" ng-show="addbillForm.particular.$dirty && addbillForm.particular.$invalid">
 									<span ng-show="addbillForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
 								</span> 
 							</td>
+							
+							<script type="text/ng-template" id="customTemplate.html">
+								<a>
+									<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+									<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
+								</a>
+							</script>
+				
 							<td>
 								<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type"  required>
 									<option value="" selected>Select Type</option>
@@ -156,7 +163,7 @@
 			<tbody >
 				<tr ng-repeat="x in modalOptions.addBill.particular">
 					<td>{{$index + 1}}</td>
-					<td>{{x.particular_name}}</td>
+					<td>{{x.goods_name}}</td>
 					<td>{{x.goods_type}}</td>
 					<td>{{x.category}}</td>
 					<td>{{x.price}}</td>

@@ -36,6 +36,20 @@ define(['app'], function (app) {
 					}
 				}
 			},
+			{
+				name : "Add Quotation",
+				path : "#/dashboard/inventory/invoice",
+				events : {
+					click : function(){
+						return $scope.openModalQuotation("modules/inventory/invoice/addquotation.html");
+					}
+				}
+			},
+			{
+				name : "Quotations",
+				path : "#/dashboard/inventory/invoice/quotation",
+			},
+			                                                         
 		]
 		
 		$scope.setDate = function(date, days, sql){
@@ -72,7 +86,7 @@ define(['app'], function (app) {
 				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">' 
 							+'<option value="">Select Party</option>'
 						+'</select>',
-				cellTemplate : '<span>Hello</span>',
+				cellTemplate : '<span>{{row.entity.name}}</span>',
 					},
 				{ 
 					name:'generated_date',
@@ -82,7 +96,7 @@ define(['app'], function (app) {
 				},
 				
 				{ name:'payment_status',width:110,
-				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\',true,grid.appScope.billParams)" ng-model="payment_status" placeholder="search">'
+				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\',true,grid.appScope.invoiceParams)" ng-model="payment_status" placeholder="search">'
 					+'<option value="" selected>payment status</option>'
 							+'<option value="1">Paid</option>'
 							+'<option value="0">Unpaid</option>'
@@ -137,10 +151,74 @@ define(['app'], function (app) {
 			}
 		};
 		
+//Quotation Grid....		
+		$scope.quotationList = {
+			enableSorting: true,
+			enableFiltering: true,
+			rowTemplate:rowtpl,
+			columnDefs: [
+				{ name:'SrNo',width:110, enableSorting: false,enableFiltering: false, 
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
+				},
+				{ name:'quotation_id', width:110,enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="quotation_id" class="form-control" ng-change="grid.appScope.filter(\'quotation_id\', quotation_id, \'quotation\', \'quotationList\',true,grid.appScope.invoiceParams)" ng-model="quotation_id" placeholder="Quotation">',
+				},
+				{ name:'name',enableSorting: false ,
+				width:110,
+				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'quotation\', \'quotationList\',true, grid.appScope.quotationParams)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">' 
+							+'<option value="">Select Party</option>'
+						+'</select>',
+				cellTemplate : '<span>{{row.entity.name}}</span>',
+					},
+				{ 
+					name:'generated_date',
+					width:110, 
+					enableSorting: false,
+					filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'quotation\', \'quotationList\',true, grid.appScope.quotationParams)" ng-model="generated_date" placeholder="Date">',
+				},
+				{ 
+					name:'total_amount',width:110,
+					enableSorting: false ,
+					enableFiltering: false, 
+					cellTemplate : "<span>{{row.entity.total_amount}}</span>"
+								
+				},
+				{
+					name:'Manage', 
+					enableSorting: false, 
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'quotation\', \'quotationList\',false, grid.appScope.quotationParams)" ng-model="status">'
+							+'<option value="" selected>Status</option>'
+							+'<option value="0">Deleted</option>'
+							+'<option value="1">Active</option>	'
+						+'</select>', 
+					filter: {
+					  //type: uiGridConstants.filter.SELECT,
+					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
+					} ,
+					cellTemplate : '<a ng-click="grid.appScope.openModalQuotation(\'modules/inventory/invoice/addquotation.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Quotation"> <span class="glyphicon glyphicon-pencil"></span></a>'+
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/generateinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Generate Invoice">Genarate Invoice </a>'
+					+ '<a type="button" tooltip="Delete Quotation" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'quotation\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange1)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					
+				}
+			],
+			onRegisterApi: function( gridApi ) {
+			  $scope.gridApi = gridApi;
+				$scope.gridApi.core.on.filterChanged( $scope, function() {
+					
+				})
+			}
+		};
+		
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "invoice", "invoiceList", $scope.invoiceParams);
+			}
+		}
+		$scope.callbackColChange1 = function(response){
+			console.log(response);
+			if(response.status == "success"){
+				$scope.getData(false, $scope.currentPage, "quotation", "quotationList", $scope.quotationParams);
 			}
 		}
 		
@@ -183,8 +261,25 @@ define(['app'], function (app) {
 						particulars:data.particulars,
 						remark : data.remark,
 						total_amount : data.total_amount,
-						due_date : data.due_date
+						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
 					} : {
+						user_id : $rootScope.userDetails.user_id,
+						date : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
+					},
+					genarateinvoice : (data) ? {
+						invoice_id : data.invoice_id,
+						user_id : data.user_id,
+						party_id :data.party_id,
+						generated_date : data.generated_date,
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+						particulars:data.particulars,
+						remark : data.remark,
+						total_amount : data.total_amount,
+						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
+					} : {
+						user_id : $rootScope.userDetails.user_id,
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
@@ -217,6 +312,30 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				getTypeaheadData : function(table, searchColumn, searchValue){
+					//console.log(table, searchColumn, searchValue);
+					var locationParams = {
+						search : {},
+						cols : ["*"]
+					};
+					locationParams.search[searchColumn] = searchValue;
+					console.log(locationParams);
+					return dataService.get(false, 'stock_items', locationParams).then(function(response){
+						console.log(response);
+						if(response.status == 'success'){
+							return response.data;
+						}else{
+							return [];
+						}
+					}); 
+				},
+				assignData : function(object, formObject){
+					formObject.goods_name = object.goods_name;
+					formObject.goods_type = object.goods_type;
+					formObject.category = object.category;
+					console.log(object);
+				},
+				
 				printDiv : $scope.printDiv,
 				taxCalculate : function(modalOptions){
 					modalOptions.singleparticular.tax = {};
@@ -253,6 +372,117 @@ define(['app'], function (app) {
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
 							$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);
+						}
+					})
+					
+				},
+				getData : $scope.getData,
+					addToObject : function(object,data,modalOptions){
+					$rootScope.addToObject(object,modalOptions[data]);
+					modalOptions[data] = {};
+					modalOptions.taxInfo = {}
+				},
+					removeObject : $rootScope.removeObject,
+				};
+			
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				$scope.getData(false, $scope.currentPage, 'invoice','invoiceList',$scope.invoiceParams);;
+			})
+		}
+		
+//modal for Quotation Generation
+		$scope.openModalQuotation = function(url , data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			
+			var modalOptions = {
+					date : $scope.currentDate,
+					addquotation : (data) ? {
+						id : data.id,
+						quotation_id : data.quotation_id,
+						user_id : data.user_id,
+						party_id :data.party_id,
+						generated_date : data.generated_date,
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+						particulars:data.particulars,
+						remark : data.remark,
+						total_amount : data.total_amount,
+						due_date : data.due_date
+					} : {
+						date : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
+						user_id : $rootScope.userDetails.user_id
+					},
+				postData : function(table, input){
+					console.log(table, input);
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+						$scope.getData(false, $scope.currentPage, 'quotation','quotationList',$scope.quotationParams);
+						}
+					})
+				},
+				getTypeaheadData : function(table, searchColumn, searchValue){
+					//console.log(table, searchColumn, searchValue);
+					var locationParams = {
+						search : {},
+						cols : ["*"]
+					};
+					locationParams.search[searchColumn] = searchValue;
+					console.log(locationParams);
+					return dataService.get(false, 'stock_items', locationParams).then(function(response){
+						console.log(response);
+						if(response.status == 'success'){
+							return response.data;
+						}else{
+							return [];
+						}
+					}); 
+				},
+				assignData : function(object, formObject){
+					formObject.goods_name = object.goods_name;
+					formObject.goods_type = object.goods_type;
+					formObject.category = object.category;
+					console.log(object);
+				},
+				printDiv : $scope.printDiv,
+				taxCalculate : function(modalOptions){
+					modalOptions.singleparticular.tax = {};
+					
+					angular.forEach($rootScope.userDetails.config.inventory.taxData.tax, function(value, key){
+						if(modalOptions.taxInfo[value.taxName]){
+							modalOptions.singleparticular.tax[value.taxName] = (modalOptions.singleparticular.tax[value.taxName]) ? modalOptions.singleparticular.tax[value.taxName] + (value.taxValue * modalOptions.singleparticular.amount / 100) : (value.taxValue * modalOptions.singleparticular.amount / 100);
+						}
+					})
+				},
+				totalCalculate : function(modalOptions){
+					modalOptions.addquotation.subtotal = 0;
+					modalOptions.addquotation.total_amount = 0;
+					modalOptions.addquotation.tax = {};
+					angular.forEach(modalOptions.addquotation.particulars, function(value, key){
+						modalOptions.addquotation.subtotal += value.amount;
+						angular.forEach(value.tax,function(value, key){
+							modalOptions.addquotation.tax[key] = (modalOptions.addquotation.tax[key]) ? modalOptions.addquotation.tax[key] + value : value;
+						})
+						
+					})
+					
+					var taxSubtotal = 0;
+					angular.forEach(modalOptions.addquotation.tax, function(value, key){
+						taxSubtotal += value;
+					})
+					
+					modalOptions.addquotation.total_amount = modalOptions.addquotation.subtotal + taxSubtotal;
+					return modalOptions;
+				},
+				
+				
+				updateData : function(table, input, id){
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'quotation','quotationList',$scope.quotationParams);
 						}
 					})
 					
@@ -365,6 +595,25 @@ define(['app'], function (app) {
 			},
 			cols : ["*, (t0.total_amount - IFNULL(sum(t2.credit_amount),0)) as due_amount"]
 		}
+		
+		$scope.quotationParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "inventory_party",
+					joinOn : {
+						id : "t0.party_id"
+					},
+					cols : {name : "name",party_id : "party_id",user_id :"user_id"}
+				}
+			],
+			cols : ['id,quotation_id,generated_date,particulars,remark,tax,subtotal,total_amount']
+		}
+		
 		$scope.partyParams = {
 			where : {
 				user_id : $rootScope.userDetails.id,

@@ -1,0 +1,35 @@
+<div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions)">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	<h3  ng-if="!modalOptions.addholiday.id" class="text-center">Add Holiday</h3>
+	<h3  ng-if="modalOptions.addholiday.id" class="text-center" >Update Holidays</h3>
+</div>
+<!-- {{modalOptions.addholiday}} -->
+<div class="modal-body">
+<form class="form-horizontal" name="addholidayForm" role="form" ng-submit="addholidayForm.$valid" novalidate="novalidate" ng-init="modalOptions.getData(false, false,'staffholidays', 'holidayList', modalOptions.holidayParams, modalOptions)">
+
+		<div class="form-group">
+			<label  for="date" class="col-sm-2 control-label">Date *</label>
+			<div class="col-sm-3">
+				<div class="input-group">
+					<input type="text" class="form-control " placeholder="Date" id="holiday_date" name="holiday_date" ng-model="modalOptions.addholiday.holiday_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addholiday.holiday_date = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addholiday.holiday_date,10); modalOptions.sqlDateFormat(modalOptions.addholiday.holiday_date, modalOptions.addholiday.holiday_date)"/>	
+					
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+			
+			<label for="holiday_name" class="col-sm-2 control-label">Holiday Name *</label>
+			<div class="col-sm-3">
+				<input type="text" id="holiday_name" class="form-control" name="holiday_name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addholiday.holiday_name"required>
+				
+				 <span class="text-danger"  ng-show="addholidayForm.holiday_name.$error.pattern">Required Field.</span>
+				 
+				<span class="help-block" ng-show="addholidayForm.holiday_name.$dirty && addholidayForm.holiday_name.$invalid">
+				
+				<span class="text-danger" ng-show="addholidayForm.holiday_name.$error.required">Name is required.</span>
+				</span>
+			</div>		
+			<button type="submit" class="btn btn-success"  ng-disabled="addholidayForm.$invalid" ng-click="   modalOptions.postData('staffholidays',modalOptions.addholiday);modalOptions.ok()">Add Holidays</button>
+		</div>	
+</form>	

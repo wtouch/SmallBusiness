@@ -53,7 +53,7 @@
 <div class="form-group">
 	<label for="designation" class="col-sm-2 control-label">Designation *</label>
 	<div class="col-sm-9">
-	<input type="hidden" ng-model="modalOptions.addstaff.status" ng-init="modalOptions.addstaff.status = '1'">
+
 		<input type="text" id="designation" name="designation" class="form-control" ng-model="modalOptions.addstaff.designation" placeholder="Enter designation" ng-pattern="/^[a-zA-Z- ]*$/"required>
 		<span class="text-danger"  ng-show="addstaffForm.designation.$error.pattern">please Enter Valid Designation</span>
 		<span class="help-block" ng-show="addstaffForm.designation.$dirty && addstaffForm.designation.$invalid">
@@ -90,9 +90,10 @@
 	</div>		
 </div>
 
-<div class="modal-footer" ng-if="modalOptions.addstaff.type=='nurse'|| modalOptions.addstaff.type=='ward_boy'||modalOptions.addstaff.type=='security_guard'|| modalOptions.addstaff.type=='driver'">
+<div class="modal-footer">
 	<div class="col-sm-offset-2 col-sm-9">
-		<button type="submit" class="btn btn-success"  ng-click="modalOptions.postData('staff',modalOptions.addstaff);modalOptions.ok()"ng-if="!modalOptions.addstaff.id" >Add staff</button>
+		<button type="submit" ng-if="!modalOptions.addstaff.id" class="btn btn-success" ng-disabled="addstaffForm.$invalid"
+		ng-click="modalOptions.postData('staff',modalOptions.addstaff);modalOptions.ok()">Add staff</button>
 		
 		<button type="submit" ng-if="modalOptions.addstaff.id" class="btn btn-success" ng-disabled="addstaffForm.$invalid" ng-click="modalOptions.updateData('staff',modalOptions.addstaff,modalOptions.addstaff.id);modalOptions.ok()">Update staff</button>
 		

@@ -44,21 +44,30 @@ define(['app'], function (app) {
 					  //placeholder: 'ends with'
 					}
 				},
-				
-					{
+				{
+				    name:'staff_type',
+					width:100,
+					filterHeaderTemplate: '<input id="staff_type" class="form-control" ng-change="grid.appScope.filter(\'staff_type\', staff_type, \'staff\', \'staff\',true)" ng-model="staff_type" placeholder="Staff type">'
+                },
+				{
 				    name:'name',
 					width:200,
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="Name">',
                 },
 				{
+				    name:'phone',
+					width:150,
+					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'staff\', \'staff\',true)" ng-model="phone" placeholder="Phone">'
+                },
+				{
 				    name:'email',
-					width:130,
+					width:150,
 					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'staff\', \'staff\',true)" ng-model="email" placeholder="Email">'
                 },
 				
 			   {
 				    name:'address',
-					width:130,
+					width:150,
 					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true)" ng-model="address" placeholder="Address">',
                 },
 				
@@ -68,10 +77,8 @@ define(['app'], function (app) {
 				 width:90,
 				 filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true)" ng-model="city" placeholder="City">', 
                 },
-				
-				 { 
+			    { 
 				 name:'Manage',
-				 width:250,
 				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
 							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
@@ -81,14 +88,20 @@ define(['app'], function (app) {
 					   type: uiGridConstants.filter.SELECT,  
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
-					} ,
+					},
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/addstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					
-					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/addhospitalstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					+
+					'<a type="button" tooltip="Delete staff" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
 		};
+		$scope.callbackColChange = function(response){
+			console.log(response);
+			if(response.status == "success"){
+				$scope.getData(false, $scope.currentPage, "staff", "staff", $scope.staffParams);
+			}
+		}
 		
 			$scope.openModal = function(url,data){
 			var modalDefault = {
@@ -100,25 +113,55 @@ define(['app'], function (app) {
 				date:{date : $scope.currentDate},
 				addstaff : (data) ? {
 					id : data.id,
-				staff_type : data.staff_type,
+					staff_id:data.staff_id,
+					staff_type : data.staff_type,
+					name:data.name,
+					staff_date:data.staff_date,
+					fees:data.fees,
+					email:data.email,
+					phone:data.phone,
+					dob:data.dob,
+					gender:data.gender,
+					age:data.age,
+					marital_status:data.marital_status,
+					blood_group:data.blood_group,
+					disability:data.disability,
+					address:data.address,
+					location:data.location,
+					area:data.area,
+					city:data.city,
+					state:data.state,
+					country:data.country,
+					pincode:data.pincode,
+					qualification:data.qualification,
+					specification:data.specification,
+					joining_date:data.joining_date,
+					confirmation_date:data.confirmation_date,
+					pan_no:data.pan_no,
+					uan:data.uan,
+					adhaar_no:data.adhaar_no,
+					salary:data.salary,
+					department:data.department,
+					designation:data.designation
 					} : {
-						date : dataService.sqlDateFormate(),
-					user_id : $rootScope.userDetails.id,	
-					status : 1,
+					date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,
+					modified_date : dataService.sqlDateFormate(),
+					staff_date: dataService.sqlDateFormate()
 					}, 
 				
 					postData : function(table, input){
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff','staff',$scope.staffParams);
 							}
 						})
 					},
 					updateData : function(table, input, id){
 						$rootScope.updateData(table, input, id, function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff','staff',$scope.staffParams);
 							}
 						})
 					},
@@ -142,7 +185,13 @@ define(['app'], function (app) {
 			})
 			
 		}
-		
+		$scope.staffParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			cols : ["*"]
+		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {

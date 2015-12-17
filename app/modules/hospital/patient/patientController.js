@@ -104,7 +104,8 @@ define(['app'], function (app) {
 			};
 				var modalOptions = {
 				date : $scope.currentDate,
-				registered_date:dataService.sqlDateFormate(),
+				registered_date:$scope.currentDate,
+				/* registered_date:dataService.sqlDateFormate(), */
 				date:{date : $scope.currentDate},
 				addpatient : (data) ? {
 					id : data.id,
@@ -139,7 +140,8 @@ define(['app'], function (app) {
 			} : {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
-					registered_date: dataService.sqlDateFormate(),
+					registered_date:$scope.currentDate,
+					/* registered_date: dataService.sqlDateFormate(), */
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
@@ -147,14 +149,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'patient','patient');
+							$scope.getData(false, $scope.currentPage, 'patient','patient',$scope.patientParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'patient','patient');
+							$scope.getData(false, $scope.currentPage, 'patient','patient',$scope.patientParams);
 						}
 					})
 				},

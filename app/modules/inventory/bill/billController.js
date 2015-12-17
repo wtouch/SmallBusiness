@@ -25,13 +25,30 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Bill",
-				path : "#/dashboard/inventory/bill",
-				SubTitle :" Purchase Bill",
+				SubTitle :"Purchase Bill",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/inventory/bill/addbill.html");
 					}
 				}
+			},{
+				name : "Add Purchase Order",
+				SubTitle :"Purchase Order",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/inventory/bill/addPurchaseorder.html");
+					}
+				}
+			},
+			{
+				name : "Purchase Order",
+				path : "#/dashboard/inventory/purchaseorder",
+				SubTitle :"Purchase Order"
+			},
+			{
+				name : "Purchase Bill",
+				path : "#/dashboard/inventory/bill",
+				SubTitle :"Purchase Order"
 			}
 		]
 		var rowtpl='<div ng-class="{ \'my-css-class\': grid.appScope.rowFormatter( row ),\'text-success\':(row.entity.payment_status==1),\'text-danger\':(row.entity.payment_status==0),\'text-warning\':(row.entity.payment_status==2)}">' +
@@ -112,6 +129,69 @@ define(['app'], function (app) {
 			}
 		};
 		
+		//Grid For Purcahse Order	
+		$scope.PurchaseOrderData = {
+			enableSorting: true,
+			enableFiltering: true,
+			rowTemplate:rowtpl,
+			columnDefs: [
+				{ name:'SrNo', width:50,
+					enableSorting: false, enableFiltering: false,
+					cellTemplate : "<div class=\'ui-grid-cell-contents ng-binding ng-scope\'>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</div>",
+					
+				},
+				{
+					name:'name',width :110,enableSorting: false,enableFiltering: true,
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'bill\', \'PurchaseOrderData\',true, grid.appScope.billParams)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">' 
+							+'<option value="">Select Party</option>'
+						+'</select>',
+				}, 
+			
+				{ name:'purchase_order_date',width :110,
+					filterHeaderTemplate: '<input id="purchase_order_date" class="form-control" ng-change="grid.appScope.filter(\'purchase_order_date\', purchase_order_date, \'bill\', \'PurchaseOrderData\',true,grid.appScope.billParams)" ng-model="purchase_order_date" placeholder="Purchase Order Date">',
+				},
+				
+				{
+					name:'manage',width:250,enableSorting: false,enableFiltering: true,
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\',false,grid.appScope.billParams)" ng-model="status">'
+							 +'<option value="" selected>Status</option>' 
+							+'<option value="0">Deleted</option>'
+							+'<option value="1">Active</option>	'
+						+'</select>',
+					
+					
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					
+					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+
+					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPaybill(\'modules/inventory/bill/payBill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
+							+
+					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openViewbill(\'modules/inventory/bill/viewbill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+							+
+					'<a ng-click="grid.appScope.openViewreceipt(\'modules/inventory/bill/viewreceipt.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view Receipt Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					
+					+
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/generateBill.html\',row.entity)" class="btn btn-success btn-sm" type="button" tooltip-animation="true" tooltip="view Receipt Information"> <span class="glyphicon glyphicon-ok"></span></a>'
+				}
+			],
+			onRegisterApi: function( gridApi ) {
+			  $scope.gridApi = gridApi;
+				$scope.gridApi.core.on.filterChanged( $scope, function() {
+					
+				})
+			}
+		};
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+		
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
@@ -183,6 +263,26 @@ define(['app'], function (app) {
 					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					user_id : $rootScope.userDetails.id
 				},
+				//for generate Invoice
+				generateBill : (data) ? {
+					//id : data.id,
+					bill_id :data.bill_id,
+					party_id : data.party_id,
+					user_id : data.user_id,
+					bill_date : data.bill_date,
+					due_date : data.due_date,
+					due_amount : data.due_amount,
+					total_amount : data.total_amount,
+					remark : data.remark,
+					particular : data.particular,
+					modified_date : dataService.sqlDateFormate(false,"datetime")
+				} : {
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
+					user_id : $rootScope.userDetails.id
+				},
+				
 				getBalance : $scope.getBalance,
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -209,6 +309,30 @@ define(['app'], function (app) {
 						$scope.getData(false, $scope.currentPage, 'bill','billData',$scope.billParams);
 						}
 					})
+				},
+				
+				getTypeaheadData : function(table, searchColumn, searchValue){
+					//console.log(table, searchColumn, searchValue);
+					var locationParams = {
+						search : {},
+						cols : ["*"]
+					};
+					locationParams.search[searchColumn] = searchValue;
+					console.log(locationParams);
+					return dataService.get(false, 'stock_items', locationParams).then(function(response){
+						console.log(response);
+						if(response.status == 'success'){
+							return response.data;
+						}else{
+							return [];
+						}
+					}); 
+				},
+				assignData : function(object, formObject){
+					formObject.goods_name = object.goods_name;
+					formObject.goods_type = object.goods_type;
+					formObject.category = object.category;
+					console.log(object);
 				},
 				
 				taxCalculate : function(modalOptions){
@@ -255,6 +379,61 @@ define(['app'], function (app) {
 					var sqlDate = dataService.sqlDateFormate(date,"date");
 					object = sqlDate;
 				},
+				getData: $scope.getData,
+				//addToObject : $rootScope.addToObject,
+				addToObject : function(object,data,modalOptions){
+					$rootScope.addToObject(object,modalOptions[data]);
+					modalOptions[data] = {};
+				},
+				
+				removeObject : $rootScope.removeObject
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
+		
+		
+		//Modal for Quotation
+		$scope.openQuotation = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+				addPurchaseorder : (data) ? {
+					id : data.id,
+					purchase_order_id :data.purchase_order_id,
+					party_id : data.party_id,
+					//user_id : data.user_id,
+					purchase_order_date : data.purchase_order_date,
+					remark : data.remark,
+					particular : data.particular,
+					modified_date : dataService.sqlDateFormate(false,"datetime")
+				} : {
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					user_id : $rootScope.userDetails.id,
+					status : 1,
+				},
+				
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							// For Insert each item from particulars into Stock Table
+							$scope.getData(false, $scope.currentPage, 'purchase_order','purchaseorderData',$scope.purchaseorderParams);
+						}
+					})
+				},
+				
+				updateData : function(table, input, id){
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'purchase_order','purchaseorderData',$scope.billParams);
+						}
+					})
+				},
+				
 				getData: $scope.getData,
 				//addToObject : $rootScope.addToObject,
 				addToObject : function(object,data,modalOptions){
@@ -434,6 +613,25 @@ define(['app'], function (app) {
 				id : "id"
 			},
 			cols : ["*, (t0.total_amount - IFNULL(sum(t2.debit_amount),0)) as due_amount"]
+		}
+		
+        //Params For Purchase order
+		$scope.purchaseorderParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "inventory_party",
+					joinOn : {
+						id : "t0.party_id"
+					},
+					cols : {name : "name",party_id: "party_id", user_id :"user_id"}
+				}
+			],
+			cols : ['purchase_order_id,purchase_order_date,remark,particular,total_amount,duration,tax']
 		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {

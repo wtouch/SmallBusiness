@@ -35,6 +35,20 @@ define(['app'], function (app) {
 				path : "#/dashboard/inventory/stock"
 			}
 		]
+		
+		$scope.setDate = function(date, days, sql){
+			var curDate = new Date(date);
+			var newDate = curDate.setDate(curDate.getDate() + days);
+			var finalDate;
+			if(sql == "date"){
+				finalDate = dataService.sqlDateFormate(newDate);
+			}else if(sql == "datetime"){
+				finalDate = dataService.sqlDateFormate(newDate, "datetime");
+			}else{
+				finalDate = new Date(newDate);
+			}
+			return finalDate;
+		}
 		$scope.partyParams = {
 			where : {
 				user_id : $rootScope.userDetails.id,
@@ -47,19 +61,10 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo', 
+				{ name:'SrNo',width :60, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
 				},
-/* 
-				 {
-					name:'name',enableSorting: true,enableFiltering: true,			
-				},  */
-				{ name:'name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'stock\', \'stockList\',true, grid.appScope.stockParams)" ng-model="party_id" ng-options="item.party_id as item.name for item in grid.appScope.partyList">' 
-							+'<option value="">Select Party</option>'
-						+'</select>',
-					},
 				{
 				    name:'goods_name',
 					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\',true, grid.appScope.stockParams)" ng-model="goods_name" placeholder="search">',
@@ -139,26 +144,27 @@ define(['app'], function (app) {
 				stock : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
-					party_id:data.party_id,
+					//party_id:data.party_id,
 					goods_name: data.goods_name,
 					goods_type : data.goods_type,
 					category : data.category,
-					quantity : data.quantity,
+					//quantity : data.quantity,
 					unit : data.unit,
-					date:data.stockdate,
+					//date:data.stockdate,
 					price : data.price,
 					date : data.date,
 					modified_date : dataService.sqlDateFormate(false,"datetime")
 				} : {
+					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
-					//date : dataService.sqlDateFormate(),
-					//stockdate: dataService.sqlDateFormate()
+					status : 1,
+					user_id : $rootScope.userDetails.id
+					
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams);
+							$scope.getData(false, $scope.currentPage, 'stock_items','stockList',$scope.stockParams);
 						}
 					})
 				},
@@ -180,7 +186,7 @@ define(['app'], function (app) {
 				user_id : $rootScope.userDetails.id,
 				status:1,
 			},
-			join : [
+			/* join : [
 				{
 					joinType : 'INNER JOIN',
 					joinTable : "inventory_party",
@@ -192,8 +198,8 @@ define(['app'], function (app) {
 			],
 			groupBy : {
 				"t0.goods_name" : "t0.goods_name"
-			},
-			cols : ["*, sum(t0.quantity) as quantity"]
+			}, */
+			cols : ["*"]
 		}
 		// For Get (Select Data from DB)
 		/*get data */

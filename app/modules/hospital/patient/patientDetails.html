@@ -1,8 +1,8 @@
-		<div class="modal-body">
+		<div class="modal-body">{{modalOptions.addpatient}}
 			<div class="form-group">
 			 <label  for="registered_date" class="col-sm-2 control-label"> Registration Date * </label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" placeholder="Date" id="registered_date" name="registered_date" ng-model="modalOptions.addpatient.registered_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" ng-required="true" />
+					 <input type="text" class="form-control" placeholder="Date" id="registered_date" name="registered_date" ng-model="modalOptions.addpatient.registered_date" datepicker-popup="{{'dd-MM-yyyy hh:MM:ss'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" ng-required="true" /> 
 				</div>
 			</div>
 			<div class="form-group">
@@ -15,17 +15,17 @@
 					</span>
 				</div>
 			</div>			
-			<div class="form-group">
+			<div class="form-group" ng-init="modalOptions.addpatient.gender=(modalOptions.addpatient.gender)? modalOptions.addpatient.gender:'male'">
 				<label for="gender" class="col-sm-2 control-label">Gender*</label>	
 				<div class="col-sm-3">
 					<label class="radio-inline">
-						<input type="radio" name="gender" id="Male" value="Male" ng-model="modalOptions.addpatient.gender" ng-init="modalOptions.addpatient.gender ='Male'">Male
+						<input type="radio" name="gender" id="Male" value="male" ng-model="modalOptions.addpatient.gender">Male
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="gender" id="Female" value="Female"  ng-model="modalOptions.addpatient.gender" >Female
+						<input type="radio" name="gender" id="Female" value="female"  ng-model="modalOptions.addpatient.gender">Female
 					</label>
 				</div>
-				<label for="blood_group" class="col-sm-2 control-label">Select Blood Group*</label>
+				<label for="blood_group" class="col-sm-2 control-label">Select Blood Group</label>
 				<div class="col-sm-3">
 					<select id="blood_group" name="blood_group" class="form-control" 
 				ng-model="modalOptions.addpatient.blood_group">
@@ -43,26 +43,37 @@
 			</div>
 			<div class="form-group">
 				<label  for="dob" class="col-sm-2 control-label">DOB *</label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" id="dob" name="dob" placeholder="DOB"ng-model="modalOptions.addpatient.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1"  max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
+				</div>
+			</div>
+			<div class="form-group" ng-init="modalOptions.addpatient.disability=(modalOptions.addpatient.disability)?modalOptions.addpatient.disability:'no'">
+				<label for="disability" class="col-sm-2 control-label">Disability *</label>	
 				<div class="col-sm-3">
-				<input type="text" class="form-control" id="dob" name="dob" ng-model="modalOptions.addpatient.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
+					<label class="radio-inline">
+						<input type="radio" name="disability" id="yes" value="yes"  ng-model="modalOptions.addpatient.disability" >yes
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="disability" id="no" value="no" ng-model="modalOptions.addpatient.disability">no
+					</label>
 				</div>
 				<label  for="age" class="col-sm-2 control-label">Age *</label>
 				<div class="col-sm-3">
 					<input type="input" id="age" class="form-control" name="age" placeholder="Age" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="3" ng-model="modalOptions.addpatient.age"required>
-					 <span class="text-danger"  ng-show="addpatientForm.age.$error.pattern">please Enter Age in Numbers</span>
+					 <span class="text-danger"  ng-show="addpatientForm.age.$error.pattern">please enter age in numbers</span>
 					<span class="help-block" ng-show="addpatientForm.age.$dirty && addpatientForm.age.$invalid">
 						<span class="text-danger" ng-show="addpatientForm.age.$error.required">Age is required.</span>
 					</span>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group"ng-init="modalOptions.addpatient.marital_status=(modalOptions.addpatient.marital_status)? modalOptions.addpatient.marital_status:'single'">
 				<label for="marital_status" class="col-sm-2 control-label">Marital Status*</label>	
-				<div class="col-sm-10">
+				<div class="col-sm-5">
 					<label class="radio-inline">
-						<input type="radio" name="marital_status" id="married" value="married" ng-model="modalOptions.addpatient.marital_status">Married
+						<input type="radio" name="marital_status" id="single" value="single"  ng-model="modalOptions.addpatient.marital_status">Single
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="marital_status" id="single" value="single"  ng-model="modalOptions.addpatient.marital_status" ng-init="modalOptions.addpatient.marital_status='single'">Single
+						<input type="radio" name="marital_status" id="married" value="married" ng-model="modalOptions.addpatient.marital_status">Married
 					</label>
 					<label class="radio-inline">
 						<input type="radio" name="marital_status" id="divorced" value="divorced"  ng-model="modalOptions.addpatient.marital_status" >Divorced
@@ -71,7 +82,9 @@
 						<input type="radio" name="marital_status" id="widow" value="widow"  ng-model="modalOptions.addpatient.marital_status" >Widow
 					</label>
 				</div>
+				
 			</div>
+			
 			<div class="form-group">
 				<label for="address" class="col-sm-2 control-label">Address *</label>
 				<div class="col-sm-8">

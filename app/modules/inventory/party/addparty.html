@@ -119,7 +119,7 @@
 					</span>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group"  ng-if="!modalOptions.adduser.id">
 				<label for="type" class="col-sm-2 control-label">Type*</label>
 				<div class="col-sm-9">
 						<select id="type" name="type" class="form-control" 
@@ -130,22 +130,6 @@
 						</select >
 						<span class="help-block" ng-show="adduserForm.type.$dirty && adduserForm.type.$invalid">
 						<span ng-show="adduserForm.type.$error.required"class="text-danger">Select party type</span>
-						</span>
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="select type" class="col-sm-2 control-label">Department *</label>
-				<div class="col-sm-9">
-						<select id="department" name="department" class="form-control" 
-						ng-model="modalOptions.adduser.department" required>
-						<option value="" selected>Select Department</option>
-						<option value="IT">IT</option>
-						<option value="CIVIL">CIVIL</option>
-						<option value="MECH">MECH</option>
-						</select>
-						<span class="help-block" ng-show="adduserForm.department.$dirty && adduserForm.department.$invalid">
-						<span ng-show="adduserForm.department.$error.required"class="text-danger">Select department</span>
 						</span>
 				</div>
 			</div>

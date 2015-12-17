@@ -1,0 +1,80 @@
+	<div class="modal-header">
+		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+		<h3 class="text-center">CLASS</h3>
+	</div>
+	<div class="modal-body">
+		<div class="panel panel-default">
+		<div class="panel-heading text-center"><h2>CLASS</h2></div>
+			<div class="panel panel-body">
+				<table class="table table-hover table-responsive">
+						<tbody>
+						<tr>
+							 <td><b>Department No</b></td>
+							 <td>						
+								{{modalOptions.addClass.dept_id}}
+							 </td>	
+						</tr>
+						<tr>
+							 <td><b>Class Name</b></td>
+							 <td>						
+								{{modalOptions.addClass.class_name}}
+							 </td>	
+						</tr>
+						<tr>
+							 <td><b>Marks</b></td>
+							 <td>						
+								{{modalOptions.addClass.marks}}
+							 </td>	
+						</tr>
+						<tr>
+							 <td><b>Minimum Criteria</b></td>
+							 <td>						
+								{{modalOptions.addClass.minimum_criteria}}
+							 </td>	
+						</tr>
+					</tbody>
+				</table>
+				<br><br>
+				<div class="table-responsive col-xs-12">
+					<table class="table table-bordered">
+						
+							<tr class="head">
+								<th>Strength</th>
+								<th>Cast Name</th>
+								<th>Percentage</th>
+								<th>Reservation</th>
+							</tr>
+						
+							<tr ng-repeat="x in modalOptions.addClass.castwise_distribution">
+								<td>{{x.strength}}</td>
+								<td>{{x.cast_name}}</td>
+								<td>{{x.percentage}}</td>
+								<td>{{x.reservation}}</td>
+							</tr>
+						
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

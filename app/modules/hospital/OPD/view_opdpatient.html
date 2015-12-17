@@ -1,7 +1,7 @@
 	<div class="modal-header">
 	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3 class="text-center">View Patient Details</h3>
-	</div>{{modalOptions.addopdpatient}}
+	</div>{{modalOptions.addopdpatient.complaints}}
 <div class="modal-body">
 <label>Patient Details:</label><br><br>
 	<table class="table table-hover table-responsive table-bordered">
@@ -13,83 +13,89 @@
 				 </td>	
 			</tr>
 			<tr>
+				 <td><b>Emergency contact</b></td>
+				 <td colspan='3'>						
+					{{modalOptions.addopdpatient.emergency_contact}}
+				 </td>	
+			</tr>
+			<tr>
 				 <td><b>Name </b></td>
 				 <td colspan='3'>						
-					{{modalOptions.addpatient.patient_name}}
+					{{modalOptions.addopdpatient.patient_name}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Address</b></td>
 				 <td colspan='3'>						
-					{{modalOptions.addpatient.address}}
+					{{modalOptions.addopdpatient.address}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Gender</b></td>
 				 <td>						
-					{{modalOptions.addpatient.gender}}
+					{{modalOptions.addopdpatient.gender}}
 				 </td>	
 				  <td><b>Blood Group</b></td>
 				 <td>						
-					{{modalOptions.addpatient.blood_group}}
+					{{modalOptions.addopdpatient.blood_group}}
 				 </td>	
 			</tr>
 					<tr>
 				 <td><b>Date of Birth</b></td>
 				 <td>						
-					{{modalOptions.addpatient.dob}}
+					{{modalOptions.addopdpatient.dob}}
 				 </td>	
 				  <td><b>Age</b></td>
 				 <td>						
-					{{modalOptions.addpatient.age}}
+					{{modalOptions.addopdpatient.age}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Email</b></td>
 				 <td>						
-					{{modalOptions.addpatient.email}}
+					{{modalOptions.addopdpatient.email}}
 				 </td>	
 				  <td><b>Phone</b></td>
 				 <td>						
-					{{modalOptions.addpatient.phone}}
+					{{modalOptions.addopdpatient.emergency_contact}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Location</b></td>
 				 <td>						
-					{{modalOptions.addpatient.location}}
+					{{modalOptions.addopdpatient.location}}
 				 </td>	
 				  <td><b>Area</b></td>
 				 <td>						
-					{{modalOptions.addpatient.area}}
+					{{modalOptions.addopdpatient.area}}
 				 </td>	
 			</tr>
 			
 			<tr>
 				 <td><b>City</b></td>
 				 <td>						
-					{{modalOptions.addpatient.city}}
+					{{modalOptions.addopdpatient.city}}
 				 </td>	
 				  <td><b>State</b></td>
 				 <td>						
-					{{modalOptions.addpatient.state}}
+					{{modalOptions.addopdpatient.state}}
 				 </td>	
 			</tr>
 			
 			<tr>
 				 <td><b>Country</b></td>
 				 <td>						
-					{{modalOptions.addpatient.country}}
+					{{modalOptions.addopdpatient.country}}
 				 </td>	
 				  <td><b>Pincode</b></td>
 				 <td>						
-					{{modalOptions.addpatient.pincode}}
+					{{modalOptions.addopdpatient.pincode}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Consultant Dr.</b></td>
 				 <td colspan='3'>						
-					{{modalOptions.addpatient.country}}
+					{{modalOptions.addopdpatient.name}}
 				 </td>	
 			<tr>
 		</tbody>
@@ -98,23 +104,23 @@
 		<table class="table table-hover table-responsive table-bordered">
 		<tbody>
 			<tr>
-				 <td><b>Category</b></td>
+				 <td><b>Complaint Name</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addopdpatient.patient_complaint[0].complaint_name}}
 				 </td>
-				<td><b>Type</b></td>
+				<td><b>Category</b></td>
 				 <td>						
-					{{modalOptions.addpatient.staff_type}}
+					{{modalOptions.addopdpatient.patient_complaint[0].category}}
 				 </td>					 
 			</tr>
 			<tr>
-				 <td><b>Title </b></td>
+				 <td><b>Type </b></td>
 				 <td>						
-					{{modalOptions.addpatient.staff_type}}
+					{{modalOptions.addopdpatient.patient_complaint[0].type}}
 				 </td>	
 				 <td><b>Description</b></td>
 				 <td>						
-					{{modalOptions.addpatient.staff_type}}
+					{{modalOptions.addopdpatient.patient_complaint[0].complaints_description}}
 				 </td>	
 			</tr>
 			
@@ -127,21 +133,21 @@
 			<tr>
 				 <td><b>Category</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addopdpatient.patient_history.category}}
 				 </td>
 				<td><b>Type</b></td>
 				 <td>						
-					{{modalOptions.addpatient.staff_type}}
+					{{modalOptions.addopdpatient.patient_history.type}}
 				 </td>					 
 			</tr>
 			<tr>
 				 <td><b>Title </b></td>
 				 <td>						
-					{{modalOptions.addpatient.staff_type}}
+					{{modalOptions.addopdpatient.patient_history.title}}
 				 </td>	
-				 <td><b>Description</b></td>
+				 <td><b>description</b></td>
 				 <td>						
-					{{modalOptions.addpatient.staff_type}}
+					{{modalOptions.addopdpatient.patient_history.description}}
 				 </td>	
 			</tr>
 			</tbody>

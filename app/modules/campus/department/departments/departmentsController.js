@@ -74,7 +74,7 @@ define(['app'], function (app) {
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/department/departments/adddepartments.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Department"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete Department" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'department\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/department/viewdepartment.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Department"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/departments/viewdepartment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Department"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
