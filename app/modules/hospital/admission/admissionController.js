@@ -133,7 +133,7 @@ define(['app'], function (app) {
 						}
 					})
 				},
-				formPart :'patientDetails',
+				formPart :'',
 				showFormPart : function(formPart,modalOptions){
 					modalOptions.formPart = formPart;
 					
