@@ -120,7 +120,7 @@ define(['app'], function (app) {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
 					date : dataService.sqlDateFormate(),
-					accountdate: dataService.sqlDateFormate(),
+					account_date: dataService.sqlDateFormate(),
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},
