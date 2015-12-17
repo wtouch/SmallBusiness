@@ -4,7 +4,7 @@ define(['app'], function (app) {
     var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
     
     // This is controller for this view
-	var equipmentController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var generalentitiesController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
 		$scope.type = "year";
@@ -17,22 +17,48 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hospital";
 		console.log("This is Equipement Controller");
+		
+		/*if(!$routeParams.equipment){
+			$location.path("/dashboard/hospital/general_entities/equipment/equipment");
+		}*/
 		$rootScope.moduleMenus = [
 			{
-				name : "Add Equipment",
-				SubTitle :"Add Equipment",
-				events : {
-					click : function(){
-						return $scope.openModal("modules/hospital/general_entities/addequipment.html");
-					}
-				}
-			},{
-				name : "Equipment List",
-				path : "#/dashboard/hospital/equipment",
-				SubTitle :"Equipment List"
+				name : "Equipment",
+				SubTitle :"Equipment",
+				path : "#/dashboard/hospital/general_entities/equipment/equipment",
+			},
+			{
+			name : "Medicine",
+				//SubTitle :"Add Medicine",
+				path : "#/dashboard/hospital/general_entities/medicine/medicine",
+			},
+			{
+			name : "Ward",
+				//SubTitle :"Add Ward",
+				path : "#/dashboard/hospital/general_entities/ward/ward",
+			},
+			{
+			name : "Bed",
+				//SubTitle :"Add Bed",
+				path : "#/dashboard/hospital/general_entities/bed/bed",
+			},
+			{
+			name : "Test",
+				//SubTitle :"Add Test",
+				path : "#/dashboard/hospital/general_entities/test/test",
+			},
+			{
+			name : "Complaint",
+				//SubTitle :"Add complaint",
+				path : "#/dashboard/hospital/general_entities/complaint/complaint",
+			},
+			{
+			name : "History",
+				//SubTitle :"Add History",
+				path : "#/dashboard/hospital/general_entities/history/history",
 			}
 		]
-		
+		$scope.currentPath = $location.path();
 		$scope.equipment = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -50,19 +76,19 @@ define(['app'], function (app) {
                 },
 				{
 					name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="email" placeholder="search">'
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="email" placeholder="search">'
                 },
 				{
 					name:'phone',
-					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="phone" placeholder="search">'
+					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="phone" placeholder="search">'
                 },
 				{
 				    name:'DOB',
-				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="city" placeholder="search">', 
+				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="city" placeholder="search">', 
                 },
 			   {
 				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="address" placeholder="search">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="address" placeholder="search">',
                 },
 				
 				{
@@ -72,7 +98,7 @@ define(['app'], function (app) {
                 },
 				
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -83,12 +109,16 @@ define(['app'], function (app) {
 					  ]
 					} ,
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/party/addparty.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit party" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'party\', \'status\',row.entity.status, row.entity.id);$route.reload()" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+ '<a ng-click="grid.appScope.openModal(\'modules/inventory/party/viewparty.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  party" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general_entities/addequipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit equipment" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					
+					
+					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general_entities/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			]
 		};
+		
+
 		
 		$scope.openModal = function(url,data){
 			
@@ -111,12 +141,11 @@ define(['app'], function (app) {
 					country: data.country,
 					pincode: data.pincode,
 					date : data.date,
-					partydate:data.partydate,
 					type: data.type,
 					department: data.department,
 			} : {
 					date : dataService.sqlDateFormate(),
-					partydate: dataService.sqlDateFormate()
+				
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -145,7 +174,14 @@ define(['app'], function (app) {
 			})
 			
 		}
-		
+		$scope.equipmentParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+				type : ($routeParams.equipment == "equipment") ? "equipment" : "medicine"
+			},
+			cols : ["*"]
+		},
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -201,7 +237,7 @@ define(['app'], function (app) {
 		
 	 };
 	// Inject controller's dependencies
-	equipmentController.$inject = injectParams;
+	generalentitiesController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('equipmentController', equipmentController);
+    app.register.controller('generalentitiesController', generalentitiesController);
 });
