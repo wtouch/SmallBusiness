@@ -3,9 +3,16 @@
 define(['app'], function (app) {
     var injectParams = ['$scope', '$injector', 'dataService', '$rootScope', '$http'];
 	var departmentController = function ($scope, $injector, dataService, $rootScope, $http) {
-			$http.get("modules/campus/department/department.json").success(function(response){
-				//console.log("hello");
-				$scope.dashboardList = response;
+			$http.get("modules/campus/campus.json").success(function(response){
+				
+				angular.forEach(response, function(value, key){
+					
+					if(value.childMenu){
+						$scope.dashboardList = value.childMenu;
+					}
+					
+				})
+				
 			})
 		
 	 };
