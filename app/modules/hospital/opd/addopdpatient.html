@@ -1,0 +1,29 @@
+
+	<div class="modal-header">
+		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+	<h3  ng-if="!modalOptions.addopdpatient.id" class="text-center">Add New Patient</h3>
+	<h3  ng-if="modalOptions.addopdpatient.id" class="text-center">Edit Patient</h3>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal" name="addopdpatientForm" role="form" ng-submit="addpatientForm.$valid" novalidate="novalidate">{{modalOptions.addpatient}}	 
+			<ul class="nav nav-tabs">
+				<li role="presentation" ng-class="{active: modalOptions.formPart=='opdpatientDetails'}">
+					<a ng-click="modalOptions.showFormPart('opdpatientDetails', modalOptions)">Patient Details</a>
+				</li>
+				<li role="presentation" ng-class="{active: modalOptions.formPart=='opdpatientComplaint'}">
+					<a ng-click="modalOptions.showFormPart('opdpatientComplaint', modalOptions)">Complaint Details</a>
+				</li>	
+				<li role="presentation" ng-class="{active: modalOptions.formPart=='opdpatientHistory'}">
+					<a ng-click="modalOptions.showFormPart('opdpatientHistory', modalOptions)">patient History</a>
+				</li>
+			</ul>
+			<ng-include  ng-show="modalOptions.formPart=='opdpatientDetails'" 	src="'modules/hospital/opd/opdpatientDetails.html'">
+			</ng-include> 	
+			<ng-include  ng-show="modalOptions.formPart=='opdpatientComplaint'" 	src="'modules/hospital/opd/opdpatientComplaint.html'">
+			</ng-include> 
+			<ng-include  ng-show="modalOptions.formPart=='opdpatientHistory'" src="'modules/hospital/opd/opdpatientHistory.html'">
+			</ng-include> 						
+		</form>
+	</div>
+
+

@@ -20,21 +20,20 @@ define(['app'], function (app) {
 		
 		$rootScope.moduleMenus = [
 			{
-				name : "Add Patient",
-				SubTitle :"Add Patient",
+				name : "Add  Opd Patient",
+				SubTitle :"Add opd Patient",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/hospital/patient/addpatient.html");
+						return $scope.openModal("modules/hospital/opd/addopdpatient.html");
 					}
 				}
 			},{
-				name : "Patient List",
-				path : "#/dashboard/hospital/patient",
-				SubTitle :"Patient List"
+				name : "opd List",
+				path : "#/dashboard/hospital/opd",
+				SubTitle :"OPD List"
 			}
 		]
-		
-		$scope.patient = {
+		$scope.opd = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -44,7 +43,7 @@ define(['app'], function (app) {
 					enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
 					
-				},
+				},	
 				{
 				    name:'patient_name',
 					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'patient\', \'patient\', true, grid.appScope.patientParams)" ng-model="patient_name" placeholder="search name">',
@@ -54,20 +53,11 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="email" placeholder="search">'
                 },
 				{
-					name:'mobile',
-					filterHeaderTemplate: '<input id="mobile" class="form-control" ng-change="grid.appScope.filter(\'mobile\', mobile, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="mobile" placeholder="search">'
+					name:'emergancy contact',
+					filterHeaderTemplate: '<input id="emergancy_contact" class="form-control" ng-change="grid.appScope.filter(\'emergancy_contact\', emergancy_contact, \'opd\', \'opd\',true, grid.appScope.opdParams)" ng-model="mobile" placeholder="search">'
                 },
-				{
-				    name:'dob',
-				    filterHeaderTemplate: '<input id="dob" class="form-control" ng-change="grid.appScope.filter(\'dob\', dob, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="dob" placeholder="search">', 
-                },
-			   {
-				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="address" placeholder="search">',
-                },
-					
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'opd\', \'opd\',true, grid.appScope.patientParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -78,8 +68,8 @@ define(['app'], function (app) {
 					  ]
 					} ,
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/addpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'patient\', \'status\',row.entity.status, row.entity.id);$route.reload()" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/viewpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/addopdpatient.html\',row.entity.id)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'patient\', \'status\',row.entity.status, row.entity.id);$route.reload()" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/viewopd.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			]
@@ -93,6 +83,8 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
+				registered_date:dataService.sqlDateFormate(),
+				date:{date : $scope.currentDate},
 				addpatient : (data) ? {
 					id : data.id,
 					name : data.name,
@@ -120,18 +112,18 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'patient','patient');
+							$scope.getData(false, $scope.currentPage, 'opd','opd');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'patient','patient');
+							$scope.getData(false, $scope.currentPage, 'opd','opd');
 						}
 					})
 				},
-				formPart :'',
+				formPart :'opdpatientDetails',
 				showFormPart : function(formPart,modalOptions){
 					modalOptions.formPart = formPart;
 					
@@ -201,5 +193,5 @@ define(['app'], function (app) {
 	// Inject controller's dependencies
 	opdController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('opdController', opdController);
+    app.register.controller('opdController',opdController);
 });
