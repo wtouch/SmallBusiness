@@ -1,0 +1,80 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+		<h3 class="text-center">Casesheet</h3>
+</div>
+<div class="modal-body">
+	<label>Patient Details:</label><br><br>
+		<table class="table table-hover table-responsive table-bordered">
+		<tbody>
+			<tr>
+				 <td><b>Patient Name</b></td>
+				 <td colspan='3'>						
+					{{modalOptions.addpatient.salary}}
+				 </td>
+							 
+			</tr>
+			<tr>
+				 <td><b>Ward Name</b></td>
+				 <td>						
+					{{modalOptions.addpatient.staff_type}}
+				 </td>	
+				 <td><b>Bed No</b></td>
+				 <td>						
+					{{modalOptions.addpatient.staff_type}}
+				 </td>	
+			</tr>
+					<tr>
+				 <td><b>Consultant Dr.</b></td>
+				 <td>						
+					{{modalOptions.addpatient.staff_type}}
+				 </td>	
+				 <td><b>Complaints</b></td>
+				 <td>						
+					{{modalOptions.addpatient.staff_type}}
+				 </td>	
+			</tr>
+			</tbody>
+	</table>
+<form class="form-horizontal" name="addcasesheetForm" role="form" ng-submit="addcasesheetForm.$valid" novalidate="novalidate">
+	<div class="form-group">
+		<label  for="date" class="col-sm-2 control-label">Date*</label>
+			<div class="col-sm-9">
+				<div class="input-group">
+					<input type="text" class="form-control " placeholder="Date" id="casesheet_date" name="casesheet_date" ng-model="modalOptions.addcasesheet.casesheet_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.addcasesheet.staff_date,10); modalOptions.sqlDateFormat(modalOptions.addcasesheet.staff_date, modalOptions.addcasesheet.staff_date)"/>	
+					
+					<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+	</div>
+	<div class="form-group">
+		<label  for="date" class="col-sm-2 control-label">Diagnostic Test</label>
+			<div class="checkbox col-sm-1">
+			<label>
+			<input type="checkbox" ng-model="modalOptions.test"checklist-value="x"/> test
+			</label>
+			</div>
+			<div class="checkbox col-sm-1">
+			<label>
+			<input type="checkbox" ng-model="modalOptions.test3"checklist-value="x"/> test
+			</label>
+			</div>
+			<div class="checkbox col-sm-1">
+			<label>
+			<input type="checkbox" ng-model="modalOptions.test1"checklist-value="x"/> test
+			</label>
+			</div>
+			<div class="checkbox col-sm-1">
+			<label>
+			<input type="checkbox" ng-model="modalOptions.test2"checklist-value="x"/> test
+			</label>
+			</div>
+	</div>
+	<div class="form-group">
+			<button type="submit" class=" col-sm-offset-2 btn btn-success" ng-click="" >+Add Prescription
+		</button>
+	</div>
+</form>
+	
+</div>
