@@ -4,7 +4,7 @@ define(['app'], function (app) {
     var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
     
     // This is controller for this view
-	var equipmentController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var wardController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
 		$scope.type = "year";
@@ -100,27 +100,7 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			var modalOptions = {
-				date : $scope.currentDate,
-				adduser : (data) ? {
-					id : data.id,
-					name : data.name,
-					email : data.email,
-					phone: data.phone,
-					address: data.address,
-					location: data.location,
-					area: data.area,
-					city: data.city,
-					state: data.state,
-					country: data.country,
-					pincode: data.pincode,
-					date : data.date,
-					partydate:data.partydate,
-					type: data.type,
-					department: data.department,
-			} : {
-					date : dataService.sqlDateFormate(),
-					partydate: dataService.sqlDateFormate()
-				},
+			
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
@@ -204,7 +184,7 @@ define(['app'], function (app) {
 		
 	 };
 	// Inject controller's dependencies
-	equipmentController.$inject = injectParams;
+	wardController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('equipmentController', equipmentController);
+    app.register.controller('wardController', wardController);
 });
