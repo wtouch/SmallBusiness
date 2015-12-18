@@ -4,7 +4,7 @@ define(['app'], function (app) {
     var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
     
     // This is controller for this view
-	var patientController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var admissionController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
 		$scope.invoice = true;
@@ -20,21 +20,21 @@ define(['app'], function (app) {
 		
 		$rootScope.moduleMenus = [
 			{
-				name : "Add Patient",
-				SubTitle :"Add Patient",
+				name : "Add admission",
+				SubTitle :"Add admission",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/hospital/patient/addpatient.html");
+						return $scope.openModal("modules/hospital/admission/addadmission.html");
 					}
 				}
 			},{
-				name : "Patient List",
-				path : "#/dashboard/hospital/patient",
-				SubTitle :"Patient List"
+				name : "admission List",
+				path : "#/dashboard/hospital/admission",
+				SubTitle :"admission List"
 			}
 		]
 		
-		$scope.patient = {
+		$scope.admission = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -201,7 +201,7 @@ define(['app'], function (app) {
 		
 	 };
 	// Inject controller's dependencies
-	patientController.$inject = injectParams;
+	admissionController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('patientController', patientController);
+    app.register.controller('admissionController', admissionController);
 });

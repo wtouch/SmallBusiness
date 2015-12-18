@@ -1,0 +1,102 @@
+<div class="modal-header" ng-init="modalOptions.getData(false,false,'transaction','receiptList',modalOptions.receiptParams,modalOptions)">
+		<button type="button" class="close buttondistance" ng-click="modalOptions.close()">
+			<span aria-hidden="true">&times;</span></button>
+		<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('invoice')">Print</button>
+		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+		<h3>RECEIPT</h3>
+</div>
+<div>
+<!--{{modalOptions.receiptList}}-->
+</div>
+<br>
+<div class="form-group">
+				<label for="receipts" class="col-sm-2 control-label">Receipt Date</label>
+				<div class="col-sm-9">
+					<select class="form-control" name="receipts" id="receipts" ng-model="receipts" ng-options="item as item.modified_date for item in modalOptions.receiptList" ng-change="modalOptions.receiptList1 = receipts">
+						<option value="">Select Date</option>
+					</select>
+				</div>
+</div>
+</br>
+<div>
+<!--{{modalOptions.receiptList1}}-->
+</div>
+<div class="modal-body">
+<div id="invoice">
+	<div class="panel panel-default" ng-if="modalOptions.receiptList1">
+		<div class="panel-heading text-center"><h2>Receipt</h2></div>
+		<div class="panel-body row">
+			<div class="col-xs-6">
+				<address class="text-center">
+					<strong>{{userDetails.name | uppercase}}</strong><br>
+					{{userDetails.address.address}}<br>
+					E-Mail : {{userDetails.email}}
+				</address>
+				<hr>
+				<p>To,<br>
+					<strong>{{modalOptions.receiptList1.name | uppercase}}</strong><br>
+					{{modalOptions.receiptList1.address}}<br>{{modalOptions.receiptList1.location}}<br>{{modalOptions.receiptList1.city}}<br>{{modalOptions.receiptList1.area}}<br>{{modalOptions.receiptList1.pincode}}<br>				
+				</P>
+			</div>
+			<div class="col-xs-6">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<tr class="amt">
+							<td><strong>Receipt No.</strong><br>{{modalOptions.receiptList1.transaction_id}}
+							</td>
+							<td><strong>Dated</strong><br>
+							{{modalOptions.receiptList1.modified_date}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<div class="table-responsive col-xs-12">
+				<table class="table table-bordered">
+					<thead>
+						<tr class="head">
+							<th class=" col-xs-12">Particulars</th>
+							<th class=" col-xs-12">Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Paid By <strong>{{modalOptions.receiptList1.description.payment_type.type}}</strong> Against Bill No.<strong>{{modalOptions.receiptList1.transaction_id}}</strong>
+							<p ng-if="modalOptions.receiptList1.description.payment_type.type != 'Cash'">
+								<span ng-repeat="(key, value) in modalOptions.receiptList1description.payment_type">
+									<strong>{{key}}</strong><span> {{value}} </span></br>
+								</span>
+							</p>
+							</td>
+							<td>{{modalOptions.receiptList1.paid | number : 2}}</td>
+						</tr>
+						 <!--<tr>
+							<td class="text-right"><strong>Total Bill Amount</strong></td>
+							<td class="text-right">{{modalOptions.BillData.total_amount | number : 2}}</td>
+						</tr>-->
+						<tr>
+							<td class="text-right"><strong>Received Amount</strong></td>
+							<td class="text-right">{{modalOptions.receiptList1.debit_amount | number : 2}}</td>
+						</tr>
+						 <!--<tr>
+							<td class="text-right"><strong>Balance Amount</strong></td>
+							<td class="text-right">{{modalOptions.receiptList1.due_amount | number : 2}}</td>
+						</tr>-->
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="col-xs-12">
+				<p>Received Amount (in words):
+				<strong><em>{{inWords(modalOptions.receiptList1.debit_amount)|uppercase}}</em></strong></p>
+				
+				<hr/>
+				<p><strong>Company's Service Tax No: </strong>{{userDetails.config.inventory.taxData.tin_no}}</p>
+						<p><strong>Company's Pan: </strong>{{userDetails.config.inventory.taxData.pan_no}} </strong></p>
+						<p class="text-right">For <strong><em>{{userDetails.name}}</em></strong><br><br><br>
+						Authorised Signatory</p>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>

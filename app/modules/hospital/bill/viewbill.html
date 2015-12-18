@@ -1,0 +1,99 @@
+<div class="modal-header">
+	<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('addBill')">Print</button>
+	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+	<h3 class="text-center">BILL</h3>
+</div>
+<div class="modal-body">
+	<div  id="addBill">
+		<div class="panel panel-default" ng-if="modalOptions.viewBill">
+			<div class="panel-heading text-center">
+				<h2>BILL</h2>
+			</div>
+				<div class="panel-body row">
+					<div class="col-xs-6">
+						<address class="text-center">
+							<strong>{{userDetails.name | uppercase}}</strong><br>
+							{{userDetails.address.address}}<br>
+							E-Mail : {{userDetails.email}}
+						</address>
+						<hr>
+						<p>To,<br>
+							<strong>{{modalOptions.viewBill.name | uppercase}}</strong><br>
+							{{modalOptions.viewBill.address}}<br>{{modalOptions.viewBill.location}}<br>{{modalOptions.viewBill.city}}<br>{{modalOptions.viewBill.area}}<br>{{modalOptions.viewBill.pincode}}<br>				
+						</P>
+					
+					</div>
+					<div class="col-xs-6">
+						<div class="table-responsive">
+						<table class="table table-bordered">
+							<tr >
+								<td><strong>Bill No.</strong><br>{{modalOptions.viewBill.bill_id}}
+								</td>
+								<td><strong>Dated</strong><br>
+								{{modalOptions.viewBill.date}}</td>
+							</tr>
+							<tr>
+								<td><strong>Bill Month</strong><br> {{modalOptions.viewBill.date | date : 'MMM-yyyy'}}</td>
+								<td><strong>Due Date</strong><br>{{modalOptions.viewBill.due_date | date : 'yyyy-MM-dd'}}</td>
+							</tr>
+						</table>
+					</div>
+					</div>
+					<div class="table-responsive col-xs-12">
+						<table class="table table-bordered">
+							<thead>
+								<tr class="head">
+									<th class=" col-xs-2">Particulars</th>
+									<th class="col-xs-1 text-right">Quantity</th>
+									<th class="col-xs-1 text-right">Price {{"&#8377;"}}</th>
+									<th class=" col-xs-2 text-right">Subtotal</th>
+									<th class="col-xs-2 text-right">Service Tax ({{userDetails.config.inventory.taxData.tax[0].taxValue}}%)</th>
+									<th class="col-xs-2 text-right">Vat({{userDetails.config.inventory.taxData.tax[1].taxValue}}%)</th>
+									<th class=" col-xs-2 text-right">Total</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in modalOptions.viewBill.particular">
+									<td>{{x.particular_name}}{{x.goods_type}}
+									{{x.category}}</td>
+									<td class="amt text-right">{{x.quantity}}</td>
+									<td class="amt text-right">{{x.price}}</td>
+									<td class="amt text-right">{{x.amount}}</td>
+									<td class="amt text-right">{{x.tax.service_tax}}</td>
+									<td class="amt text-right">{{x.tax.vat}}</td>
+									<td class="amt text-right">{{x.amount+ x.tax.service_tax + x.tax.vat}}</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td class="amt text-right"><strong>Grand Total</strong></td>
+									<td class="amt text-right"></td>
+									<td class="amt text-right">
+									</td>
+									<td class="amt text-right">{{modalOptions.viewBill.subtotal}}</td>
+									<td class="amt text-right">{{modalOptions.viewBill.tax.service_tax}}</td>
+									<td class="amt text-right">{{modalOptions.viewBill.tax.vat}}</td>
+									<td class="amt text-right" ng-init="modalOptions.totalCalculate(modalOptions);"><strong>{{modalOptions.viewBill.total_amount}}</strong></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					<div class="col-xs-12">
+						<p>Amount(in words) : 
+						<strong><em>{{inWords(modalOptions.viewBill.total_amount) | uppercase}}</em></strong>
+						<p><strong>Remarks:</strong> <span ng-bind-html="modalOptions.viewBill.remark"></span></p>
+						<p><strong>Company's Service Tax No: </strong>{{userDetails.config.inventory.taxData.tin_no}}</p>
+						<p><strong>Company's Pan: </strong>{{userDetails.config.inventory.taxData.pan_no}} </strong></p>
+						<p class="text-right">For <strong><em>{{userDetails.name}}</em></strong><br><br><br>
+						Authorised Signatory</p>
+					</div>
+				</div>
+		</div>	
+			<div class="panel panel-default" id="invoice" ng-if="modalOptions.rentList.length <= 0">
+				<div class="panel-body">
+					<h2> No Data Found </h2>
+				</div>
+			</div>		
+	</div>		
+</div>
+
