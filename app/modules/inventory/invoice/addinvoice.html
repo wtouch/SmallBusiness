@@ -19,26 +19,18 @@
 				</div>
 			</div>
 			
-			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
 			<div class="col-sm-4">
+			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
 				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addinvoice.generated_date"  
 				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
-			<input type="hidden" ng-model="modalOptions.addinvoice.modified_date" ng-init="modalOptions.addinvoice.modified_date=modalOptions.date">
-			
-			<input type="hidden" ng-model="modalOptions.addinvoice.date" ng-init="modalOptions.addinvoice.date=modalOptions.date">
-			
 			<input type="hidden" ng-model="modalOptions.addinvoice.tax" ng-init="modalOptions.addinvoice.tax = modalOptions.singleparticular.tax">
 			
 		</div>
 	</form>
 	
 	<!--THE HIDDEN Generate Date and Due_date and User ID Ends Here-->
-	<div class="row" >
-		<input type="hidden" ng-model="modalOptions.addinvoice.status" ng-init="modalOptions.addinvoice.status = 1">
-		
-		<input type="hidden" class="form-control" ng-model="modalOptions.addinvoice.user_id" ng-init="modalOptions.addinvoice.user_id = userDetails.id" readonly/>
-	
+	<div class="row">
 		<div class="col-sm-12 " ng-init="modalOptions.addinvoice.particulars = (modalOptions.addinvoice.particulars) ? modalOptions.addinvoice.particulars : []">
 		
 			<form name="addInvoiceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addInvoiceForm.$valid" id="addInvoiceForm" ng-if="modalOptions.addinvoice.party_id">
@@ -59,7 +51,6 @@
 							<tr>
 								<td>
 									<input type="text" class="form-control " placeholder="Particular Name" id="particular_name" name="particular_name" ng-model="modalOptions.singleparticular.particular_name" required/>
-									
 									<span class="help-block" ng-show="addInvoiceForm.particular_name.$dirty && addInvoiceForm.particular_name.$invalid">
 									<span ng-show="addInvoiceForm.particular_name.$error.required" class="text-danger">particular_name Required.</span>
 									</span>
@@ -115,13 +106,7 @@
 								
 								<td>
 									<button type="button" tooltip="Add Tax" id="tax" class="dropdown dropdown-toggle glyphicon glyphicon-plus" placeholder="Tax" name="tax" value="tax"  ng-click="isCollapsed1 = !isCollapsed1"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
-									</button> 
-									<span class="help-block" ng-show="addbillForm.tax.$dirty && addInvoiceForm.tax.$invalid">
-										<span ng-show="addInvoiceForm.tax.$error.required" class="text-danger">Tax Required.</span>
-										<span ng-show="addInvoiceForm.tax.$error.pattern" class="text-danger">Enter number only</span>
-									</span>
-									
-									
+									</button>
 									<div collapse="!isCollapsed1" style="z-index:2;position:absolute;right:20px;width:155px;top:70px;padding:1px;" class="well"><!--ng-repeat=x in taxList.config.taxData.tax"-->
 										<div class="col-sm-3">
 											<div class="form-group" ng-init="modalOptions.taxInfo = {}">

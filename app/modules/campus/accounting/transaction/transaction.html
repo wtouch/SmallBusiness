@@ -1,0 +1,118 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="main-content">
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>
+			<h3>Transaction Report</h3>
+			<div class="row" ng-init="">
+				<div class="col-sm-2">
+						<div class="bottomspace">
+							<label for="partyList_status" class="control-label">Select Records</label>
+							<select id="partyList_status" class="form-control" ng-model="pageItems" ng-change="getData(false,currentPage, 'transaction','transactionList',transactionParams);"  ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
+							</select>
+						</div>
+				</div>
+				<div class="col-sm-2">
+			<div class="bottomspace" ng-init="type = 'daily'; calcDuration(type, duration);">
+				<label for="year" class="control-label" >View Report</label>
+					<select id="year" class="form-control" ng-model="type" ng-init="type = 'daily'">
+						<option value="daily">Daily Report</option>	
+						<option value="month">Monthly Report</option>	
+						<option value="year">Yearly Report</option>
+						<option value="custom">Custom Report</option>
+					</select>
+			</div>
+		</div>
+		
+		<div class="col-sm-2" ng-if="type == 'daily'">
+			<div class="bottomspace">
+			<label for="date" class="control-label"></label>
+				<p class="input-group">
+				  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened2" min-date="minDate" ng-required="true" close-text="Close" ng-click="open2($event,'opened')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" />
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open2($event, 'opened')">
+							<i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+				</p>
+			</div>
+		</div>
+	
+		<div class="col-sm-2" ng-if="type == 'month'">
+			<div class="bottomspace">
+			<label for="month" class="control-label"></label>
+				<select id="month"  class="form-control " ng-model="duration" ng-init="duration = today.getMonth() + 1; calcDuration(type, duration)" ng-change="calcDuration(type, duration)"> 
+					<option value="1" selected>January</option>	
+					<option value="2">February</option>	
+					<option value="3">March</option>	
+					<option value="4">April</option>	
+					<option value="5">May</option>	
+					<option value="6">June</option>	
+					<option value="7">July</option>
+					<option value="8">August</option>
+					<option value="9">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+			</div>
+		</div> 
+		
+		<div class="col-sm-2" ng-if="type == 'year'">
+			<div class="bottomspace">
+				<label for="year1" class="control-label">View  duration report</label>
+					<select id="year1" class="form-control" ng-model="duration" ng-init="duration = today.getFullYear(); calcDuration(type, duration)" ng-options="item for item in [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019]"
+					ng-change="calcDuration(type, duration)"> 
+						<option value="">Select Year</option>
+					</select> 
+			</div>
+		</div> 
+		<div  ng-if="type == 'custom'">
+			<div class="col-sm-2"><!--ng-model="duration.start"-->
+					<div class="bottomspace">
+					<label for="date1" class="control-label"></label><!--ng-change="calcDuration(type,start)"-->
+							<p class="input-group">
+							  <input class="form-control" type="text"  id="date1" name="date1" datepicker-popup="{{dateFormat}}" ng-model="duration.start" is-open="opened1" min-date="minDate" max-date="maxDate" date-disabled="disabledDate(duration.start, mode)" ng-required="true" close-text="Close" ng-click="open1($event)"/>
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default" ng-click="open1($event)">
+										<i class="glyphicon glyphicon-calendar"></i></button>
+									</span>
+							</p>
+					</div>
+			</div>
+			<div class="col-sm-2"><!--ng-model="duration.start"-->
+				<div class="bottomspace">
+					<label for="year" class="control-label"></label>
+					<p class="input-group">
+						  <input class="form-control" type="text"  id="date1" name="date1" datepicker-popup="{{dateFormat}}" ng-model="duration.end" is-open="opened" min-date="minDate" max-date="maxDate" date-disabled="disabledDate(duration.start, mode)" ng-required="true" ng-change="calcDuration(type, duration)" close-text="Close" ng-click="open($event)"/>
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="open($event)">
+									<i class="glyphicon glyphicon-calendar"></i></button>
+								</span>
+						</p>
+						<!-- <p class="input-group">
+						  <input class="form-control" type="text" ng-change="calcDuration(type, duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.end" is-open="rentdate3" min-date="minDate" max-date="'2015-06-22'" ng-required="true" close-text="Close" ng-click="open($event,'rentdate3')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"/>
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="open($event, 'rentdate3')">
+								<i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+						</p> -->
+				</div>
+			</div>
+		</div>
+				</div>
+				<div class="col-sm-2" ng-if="types == 'income' || types == 'expense'">
+					<label for="category" class="control-label">Select Category</label>
+					<select class="form-control" name="category" id="category" ng-model="filterCategory" ng-options="item.system_name as item.name for item in categoryConfig.category | filter : { 'type' : types}" ng-change="addincome.category = type;changeStatus('category',filterCategory)" required>
+						<option value="" selected>Select Category</option>
+					</select>
+				</div>
+			 <div class="table-responsive" ng-init="getData(false,currentPage, 'transaction','transactionList',transactionParams);getData(false,false,'account','accountList');">
+			 <div ui-grid="transactionList"></div>
+			</div>
+			<div class="text-center">				
+					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'transaction','transactionList',transactionParams)"></pagination>
+					<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			</div>
+		</div>
+		</div>
+	</div>

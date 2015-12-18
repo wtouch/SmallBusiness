@@ -52,27 +52,45 @@ define(['app'], function (app) {
 			return finalDate;
 		}
 		
+		var rowtpl='<div ng-class="{ \'my-css-class\': grid.appScope.rowFormatter( row ),\'text-success\':(row.entity.payment_status==1),\'text-danger\':(row.entity.payment_status==0),\'text-warning\':(row.entity.payment_status==2)}">' +
+                 '  <div ng-if="row.entity.merge">{{row.entity.title}}</div>' +
+                 '  <div ng-if="!row.entity.merge" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                 '</div>';
 		$scope.invoiceList = {
 			enableSorting: true,
 			enableFiltering: true,
+			rowTemplate:rowtpl,
 			columnDefs: [
 				{ name:'SrNo',width:50, enableSorting: false,enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 				},
-				{ name:'invoice_id',  width:100, enableSorting: false ,displayName: "Invoice No",
-				filterHeaderTemplate: '<input id="id" class="form-control" ng-change="grid.appScope.filter(\'invoice_id\', invoice_id, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="invoice_id" placeholder="Invoice No">',
+				{ name:'invoice_id', width:70,enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="invoice_id" class="form-control" ng-change="grid.appScope.filter(\'invoice_id\', invoice_id, \'invoice\', \'invoiceList\',true,grid.appScope.invoiceParams)" ng-model="invoice_id" placeholder="Invoice No">',
 				},
 				{ name:'name',enableSorting: false ,
+				width:110,
 				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">' 
 							+'<option value="">Select Party</option>'
 						+'</select>',
+				cellTemplate : '<span>Hello</span>',
 					},
 				{ 
 					name:'generated_date',
-					width:150, 
+					width:110, 
 					enableSorting: false,
-					filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true)" ng-model="generated_date" placeholder="Date">',
+					filterHeaderTemplate: '<input id="generated_date" class="form-control" ng-change="grid.appScope.filter(\'generated_date\', generated_date, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="generated_date" placeholder="Date">',
 				},
+				
+				{ name:'payment_status',width:110,
+				     filterHeaderTemplate: '<select id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billData\',true,grid.appScope.billParams)" ng-model="payment_status" placeholder="search">'
+					+'<option value="" selected>payment status</option>'
+							+'<option value="1">Paid</option>'
+							+'<option value="0">Unpaid</option>'
+							+'<option value="2">Partial Paid</option>'
+						+'</select>',
+					cellTemplate : '<span ng-if="row.entity.payment_status==1">Paid</span><span ng-if="row.entity.payment_status==0">Unpaid</span><span ng-if="row.entity.payment_status==2">Partial Paid</span>',
+				},
+				
 				{ 
 					name:'due_date', 
 					width:150, 
@@ -85,6 +103,8 @@ define(['app'], function (app) {
 					enableFiltering: false, 
 					cellTemplate : "<span>{{row.entity.total_amount}}</span>"
 								
+				},
+				{ name:'paid_amount',width:90,enableSorting: false,enableFiltering: false,
 				},
 				{ name:'due_amount',width:100,enableSorting: false,enableFiltering: false,
 				},
@@ -241,6 +261,7 @@ define(['app'], function (app) {
 					addToObject : function(object,data,modalOptions){
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};
+					modalOptions.taxInfo = {}
 				},
 					removeObject : $rootScope.removeObject,
 				};
@@ -262,11 +283,18 @@ define(['app'], function (app) {
 					party_id : data.party_id,
 					user_id : data.user_id,
 					credit_amount : data.due_amount,
+					description : {
+						total_amount : data.total_amount,
+						previous_payment : (data.paid_amount) ? data.paid_amount : 0
+					},
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					date : dataService.sqlDateFormate(false,"datetime"),
 					status : 1,
 					type : "invoice_payment",
 				} : {
+				},
+				calcDueAmount : function(modalOptions){
+					modalOptions.payInvoice.description.due_amount = data.due_amount - modalOptions.payInvoice.credit_amount;
 				},
 				getBalance : $scope.getBalance,
 				getPaidAmount :	$scope.getPaidAmount,
@@ -337,22 +365,6 @@ define(['app'], function (app) {
 			},
 			cols : ["*, (t0.total_amount - IFNULL(sum(t2.credit_amount),0)) as due_amount"]
 		}
-		$scope.manageParams = {
-			where : {
-				user_id : $rootScope.userDetails.id
-			},
-			join : [
-				{
-					joinType : 'INNER JOIN',
-					joinTable : "inventory_party",
-					joinOn : {
-						id : "t0.party_id"
-					},
-					cols : {name : "name"}
-				}
-			],
-			cols : ["*"]
-		}
 		$scope.partyParams = {
 			where : {
 				user_id : $rootScope.userDetails.id,
@@ -398,7 +410,7 @@ define(['app'], function (app) {
 							joinOn : {
 								party_id : "t0.party_id"
 							},
-							cols : ["*"]
+							cols : ['name, email, phone, address, location, area, city, state, country, pincode,department']
 						}],
 					cols : ["*"]
 				}:{
@@ -457,7 +469,7 @@ define(['app'], function (app) {
 			value = (value) ? value : undefined;
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, params, response);
+				dataService.extendDeep($scope.params, params, response);
 				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
 		}

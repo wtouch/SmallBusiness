@@ -5,9 +5,6 @@
 		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3>RECEIPT</h3>
 </div>
-<div>
-<!--{{modalOptions.receiptList}}-->
-</div>
 <br>
 <div class="form-group">
 				<label for="receipts" class="col-sm-2 control-label">Receipt Date</label>
@@ -68,20 +65,24 @@
 								</span>
 							</p>
 							</td>
-							<td>{{modalOptions.receiptList1.paid | number : 2}}</td>
+							<td>{{modalOptions.receiptList1.credit_amount | number : 2}}</td>
 						</tr>
-						 <!--<tr>
+						 <tr>
 							<td class="text-right"><strong>Total Bill Amount</strong></td>
-							<td class="text-right">{{modalOptions.BillData.total_amount | number : 2}}</td>
-						</tr>-->
+							<td class="text-right">{{modalOptions.receiptList1.description.total_amount | number : 2}}</td>
+						</tr>
+						<tr>
+							<td class="text-right"><strong>Previously Paid</strong></td>
+							<td class="text-right">{{modalOptions.receiptList1.description.previous_payment | number : 2}}</td>
+						</tr>
 						<tr>
 							<td class="text-right"><strong>Received Amount</strong></td>
 							<td class="text-right">{{modalOptions.receiptList1.credit_amount | number : 2}}</td>
 						</tr>
-						 <!--<tr>
-							<td class="text-right"><strong>Balance Amount</strong></td>
-							<td class="text-right">{{modalOptions.receiptList1.due_amount | number : 2}}</td>
-						</tr>-->
+						 <tr>
+							<td class="text-right"><strong>Due Amount</strong></td>
+							<td class="text-right">{{modalOptions.receiptList1.description.due_amount | number : 2}}</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

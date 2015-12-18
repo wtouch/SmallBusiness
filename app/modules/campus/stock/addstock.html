@@ -1,0 +1,115 @@
+<div class="main-content">
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="modalOptions.ok()"><span aria-hidden="true">&times;</span></button>
+		<h3 class="text-center" ng-if="!modalOptions.stock.id">Add stock</h3>
+		<h3 class="text-center" ng-if="modalOptions.stock.id">Update stock</h3>
+	</div>
+	<div class="modal-body">
+		<form name="addStockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStockForm.$valid">
+				<div class="form-group" ng-init="modalOptions.getData(false,false,'party','partyList',modalOptions.partyParams,modalOptions)">
+					<label for="party_id" class="col-sm-2 control-label"> Party id * </label>
+					<div class="col-sm-9">
+						<select id="party_id" class="form-control" ng-model="modalOptions.stock.party_id" ng-options="item.id as item.name for item in modalOptions.partyList" required>
+							<option value="">Select Party</option>
+						</select>
+						<span class="help-block" ng-show="addStockForm.user_id.$dirty && addStockForm.user_id.$invalid">
+						<span ng-show="addStockForm.user_id.$error.required" class="text-danger">user id is required.</span>
+						</span>	
+					</div>
+				</div>
+				<input type="hidden"  id="status" class="form-control" name="status" placeholder=" stock Name"ng-model="modalOptions.stock.status" ng-init="modalOptions.stock.status = '1'"/>
+				<input type="hidden" class="form-control" ng-model="modalOptions.stock.user_id" ng-init="modalOptions.stock.user_id = userDetails.id" readonly/>
+				<div class="form-group">
+						<label  for="goods_name" class="col-sm-2 control-label">Goods Name</label>
+						<div class="col-sm-9">
+							<input type="text" id="goods_name" class="form-control"  ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.stock.goods_name" name="goods_name" placeholder="Name" required />
+							<span class="help-block" ng-show="addStockForm.goods_name.$dirty && addStockForm.goods_name.$invalid">
+							 <span class="text-danger"  ng-show="addStockForm.name.$error.pattern">Please Enter Valid Name</span>
+								<span ng-show="(addStockForm.goods_name.$dirty)" class="text-danger">Please Enter Name only!</span>
+							</span>
+						</div>						
+				</div>
+				
+				<div class="form-group">
+					<label for="goods_type" class="col-sm-2 control-label">Type</label>
+						<div class="col-sm-9">
+							<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.stock.goods_type" required>
+								<option value="" selected>Select Type</option>
+								<option value="type1" >Type1</option>
+								<option value="type2">Type2</option>
+								<option value="type3">Type3</option>
+								<option value="type4">Type4</option>
+							</select>
+							<span class="help-block" ng-show="addStockForm.goods_type.$dirty && addStockForm.goods_type.$invalid">
+								<span ng-show="addStockForm.goods_type.$error.required" class="text-danger">Required field.</span>
+							</span>	
+						</div>
+				</div> 
+				<div class="form-group">
+					<label for="category" class="col-sm-2 control-label">Category</label>
+						<div class="col-sm-9">
+							<select id="category" class="form-control" name="category"  ng-model="modalOptions.stock.category" required>
+							<option value="" selected>Select Category</option>
+							<option value="category1">Category1</option>
+							<option value="category2">Category2</option>
+							<option value="category3">Category3</option>
+							<option value="category4">Category4</option>
+							</select>
+							<span class="help-block" ng-show="addStockForm.category.$dirty && addStockForm.category.$invalid">
+								<span ng-show="addStockForm.category.$error.required" class="text-danger">Required field.</span>
+							</span>	
+						</div>
+				</div> 
+				
+				<div class="form-group">
+					<label  for="quantity" class="col-sm-2 control-label">quantity</label>
+						<div class="col-sm-9">
+							<input type="text" id="quantity" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.stock.quantity" name="quantity" placeholder="quantity" required />
+							<span class="help-block" ng-show="addStockForm.quantity.$dirty && addStockForm.quantity.$invalid">
+								<span ng-show="(addStockForm.quantity.$dirty)" class="text-danger">Enter Number Only!</span>
+							</span>
+						</div>						
+				</div>
+				
+				<div class="form-group">
+					<label  for="unit" class="col-sm-2 control-label">Unit</label>
+						<div class="col-sm-9">
+							<input type="text" id="unit" class="form-control" ng-model="modalOptions.stock.unit" name="unit" placeholder="Unit" required />
+							<span class="help-block" ng-show="addStockForm.unit.$dirty && addStockForm.unit.$invalid">
+								<span ng-show="(addStockForm.unit.$dirty)" class="text-danger">Enter Number Only!</span>
+							</span>
+						</div>						
+				</div>
+				<div class="form-group">
+					<label  for="price" class="col-sm-2 control-label">Price</label>
+						<div class="col-sm-9">
+							<input type="text" id="price" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.stock.price" name="price" placeholder="Price" required />
+							<span class="help-block" ng-show="addStockForm.price.$dirty && addStockForm.price.$invalid">
+								<span ng-show="(addStockForm.price.$dirty)" class="text-danger">Enter Number Only!</span>
+							</span>
+						</div>						
+				</div>
+				<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.stock.modified_date" ng-init="modalOptions.stock.modified_date = modalOptions.date"/>
+				<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.stock.date" ng-init="modalOptions.stock.date = modalOptions.date"/>
+				<div class="form-group">
+				 <label  for="date" class="col-sm-2 control-label">Date * </label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder=" Bill Date" id="stockdate" name="stockdate" ng-model="modalOptions.stock.stockdate" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.stock.stockdate = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
+					</div>
+				</div> 
+				<div class="form-group modal-footer">
+					<div class="col-sm-offset-2 col-sm-9">
+						
+						<button type="submit" ng-if="!modalOptions.stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('stock',modalOptions.stock)">
+							<span>Submit</span>
+						</button>
+						
+						<button type="submit" ng-if="modalOptions.stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('stock',modalOptions.stock, modalOptions.stock.id)">
+							<span>Update</span>
+						</button> 
+						<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+					</div>
+				</div>
+		</form>
+		</div>
+</div>
