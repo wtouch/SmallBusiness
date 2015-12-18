@@ -1,51 +1,49 @@
 		<div class="modal-body">
+				
 			<div class="form-group">
-			<label for="select type" class="col-sm-2 control-label">Select Category*</label>
-			<div class="col-sm-3">
-				<select id="category" name="category" class="form-control" 
-				ng-model="modalOptions.addpatient.patient_history.category">
-				<option value="" selected>select category</option>
-				<option value="category">Pay by category</option>
-				<option value="category">Pay for category</option>
-				</select>
-			</div>
-			<label for="select type" class="col-sm-2 control-label">Select type*</label>
-				<div class="col-sm-3">
-					<select id="type" name="type" class="form-control" 
-					ng-model="modalOptions.addpatient.patient_history.type">
-					<option value="" selected>select type</option>
-					<option value="type">Pay by type</option>
-					<option value="type">Pay for type</option>
-					</select>
-				</div>
-			</div>			
-			<div class="form-group">
-				<label for="title" class="col-sm-2 control-label">Title *</label>
+				<label for="complaints_name" class="col-sm-2 control-label">complaints_name *</label>
 				<div class="col-sm-8">
-				<input type="text" id="title" name="title" class="form-control" ng-model="modalOptions.addpatient.patient_history.title" placeholder="Enter title" ng-pattern="/^[a-zA-Z]*$/" required>
-					<span class="help-block" ng-show="addpatientForm.title.$dirty && addpatientForm.title.$invalid">
-						<span ng-show="addpatientForm.title.$error.required" class="text-danger">title is required.</span>
+				<input type="text" id="complaints_name" name="complaints_name" class="form-control" ng-model="modalOptions.addadmission.patient_history.complaints_name" placeholder="Enter complaints_name" ng-pattern="/^[a-zA-Z]*$/" required />
+					<span class="help-block" ng-show="addnew_admissionForm.complaints_name.$dirty && addnew_admissionForm.complaints_name.$invalid">
+						<span ng-show="addnew_admissionForm.complaints_name.$error.required" class="text-danger">complaints_name is required.</span>
 					</span>				
 				</div>
+				
 			</div>
 			<div class="form-group">
-				<label for="description" class="col-sm-2 control-label">Description *</label>
+				<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
 				<div class="col-sm-8">
-					<input type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addpatient.patient_history.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" required>
-					<span class="help-block" ng-show="addpatientForm.description.$dirty && addpatientForm.description.$invalid">
-						<span ng-show="addpatientForm.description.$error.required"class="text-danger">Description is required.</span>
+					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.addadmission.patient_history.complaints_description" placeholder="Enter Your complaints_description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+					<span class="help-block" ng-show="addnew_admissionForm.complaints_description.$dirty && addnew_admissionForm.complaints_description.$invalid">
+						<span ng-show="addnew_admissionForm.complaints_description.$error.required"class="text-danger">Description is required.</span>
 					</span>				
 				</div>
-			</div> 	
+			</div> 
+			<div class="form-group">			
+				<div class="col-sm-offset-2 col-sm-2">
+					<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addnew_admissionForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addadmission.patient_history, 'patient_history', modalOptions)" disabled="disabled">	+Add 
+					</button>
+				</div>
+			</div>
+			<table class="table table-bordered" >
+				<thead>
+					<tr>
+						<th class="col-sm-2">Sr.No.</th>
+						<th class="col-sm-2">Complaints Name</th>
+						<th class="col-sm-2">Complaints Description</th>
+						<th >Remove</th>
+					</tr> 
+				</thead>
+				<tbody >
+					<tr ng-repeat="x in modalOptions.addadmission">
+						<td>{{$index + 1}}</td>
+						<td>{{x.complaints_name}}</td>
+						<td>{{x.complaints_description}}</td>
+						<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission, $index)">X</button></td>
+					</tr>
+				</tbody >
+			</table>
 		</div>	
-			<div class="modal-footer" >
-				<div class="col-sm-offset-2 col-sm-9">
-					<button type="submit" class="btn btn-success" ng-if="!modalOptions.addpatient.id" ng-disabled="addpatientForm.$invalid" ng-click="modalOptions.postData('patient',modalOptions.addpatient);modalOptions.ok()">Add Patient</button>
-					
-					<button type="submit" ng-if="modalOptions.addpatient.id" class="btn btn-success" ng-disabled="addpatientForm.$invalid" ng-click="modalOptions.updateData('patient',modalOptions.addpatient,modalOptions.addpatient.id);modalOptions.ok()">Update Patient</button>
-					
-					<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
-				</div>
-			</div>
+			
 		
 			

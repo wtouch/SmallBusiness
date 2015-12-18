@@ -1,180 +1,135 @@
-		<div class="modal-body">
-			<div class="form-group">
-			 <label  for="registered_date" class="col-sm-2 control-label"> Registration Date * </label>
-				<div class="col-sm-8">
-					<input type="text" class="form-control" placeholder="Date" id="registered_date" name="registered_date" ng-model="modalOptions.addpatient.registered_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" ng-required="true" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="patient_name" class="col-sm-2 control-label">Patient Name *</label>
-				<div class="col-sm-8">					
-					<input type="text" id="patient_name" class="form-control" name="patient_name" placeholder="Patient Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addpatient.patient_name"required>
-					 <span class="text-danger"  ng-show="addpatientForm.patient_name.$error.pattern">please Enter Valid Name</span>
-					<span class="help-block" ng-show="addpatientForm.patient_name.$dirty && addpatientForm.patient_name.$invalid">
-						<span class="text-danger" ng-show="addpatientForm.patient_name.$error.required">Name is required.</span>
-					</span>
-				</div>
-			</div>			
-			<div class="form-group">
-				<label for="gender" class="col-sm-2 control-label">Gender*</label>	
-				<div class="col-sm-3">
-					<label class="radio-inline">
-						<input type="radio" name="gender" id="Male" value="Male" ng-model="modalOptions.addpatient.gender" ng-init="modalOptions.addpatient.gender ='Male'">Male
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="gender" id="Female" value="Female"  ng-model="modalOptions.addpatient.gender" >Female
-					</label>
-				</div>
-				<label for="blood_group" class="col-sm-2 control-label">Select Blood Group*</label>
-				<div class="col-sm-3">
-					<select id="blood_group" name="blood_group" class="form-control" 
-				ng-model="modalOptions.addpatient.blood_group">
-					<option value="" selected>select type</option>
-					<option value="AB+">AB+</option>
-					<option value="AB-">AB-</option>
-					<option value="A+">A+</option>
-					<option value="A-">A-</option>
-					<option value="B+">B+</option>
-					<option value="B-">B-</option>
-					<option value="O+">O+</option>
-					<option value="O-">O-</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label  for="dob" class="col-sm-2 control-label">DOB *</label>
-				<div class="col-sm-3">
-				<input type="text" class="form-control" id="dob" name="dob" ng-model="modalOptions.addpatient.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
-				</div>
-				<label  for="age" class="col-sm-2 control-label">Age *</label>
-				<div class="col-sm-3">
-					<input type="input" id="age" class="form-control" name="age" placeholder="Age" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="3" ng-model="modalOptions.addpatient.age"required>
-					 <span class="text-danger"  ng-show="addpatientForm.age.$error.pattern">please Enter Age in Numbers</span>
-					<span class="help-block" ng-show="addpatientForm.age.$dirty && addpatientForm.age.$invalid">
-						<span class="text-danger" ng-show="addpatientForm.age.$error.required">Age is required.</span>
-					</span>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="marital_status" class="col-sm-2 control-label">Marital Status*</label>	
-				<div class="col-sm-10">
-					<label class="radio-inline">
-						<input type="radio" name="marital_status" id="married" value="married" ng-model="modalOptions.addpatient.marital_status">Married
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="marital_status" id="single" value="single"  ng-model="modalOptions.addpatient.marital_status" ng-init="modalOptions.addpatient.marital_status='single'">Single
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="marital_status" id="divorced" value="divorced"  ng-model="modalOptions.addpatient.marital_status" >Divorced
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="marital_status" id="widow" value="widow"  ng-model="modalOptions.addpatient.marital_status" >Widow
-					</label>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="address" class="col-sm-2 control-label">Address *</label>
-				<div class="col-sm-8">
-					<textarea  class="form-control" id="address" ng-model="modalOptions.addpatient.address" name="address" placeholder="Enter address"  ng-maxlength="250" required></textarea>
-					<span class="text-danger"  ng-show="addpatientForm.address.$error.pattern">please Enter Valid Address</span>
-					<span ng-hide="addpatientForm.address.$error.maxlength">{{ 250 - modalOptions.addpatient.address.length + " Chars left"}}</span>
-					<span class="help-block" ng-show="addpatientForm.address.$dirty &&  addpatientForm.address.$invalid">
-						<span class="text-danger" ng-show="addpatientForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
-						<span class="text-danger" ng-show="addpatientForm.address.$error.required">Address is required.</span>
-					</span>
-				</div>
-			</div>
-			  <div class="form-group">
-				<label for="location" class="col-sm-2 control-label">Location *</label>
-					<div class="col-sm-3">
-						<input type="text" name="location" id="location" ng-model="modalOptions.addpatient.location" placeholder="Enter your location" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
-						<span class="text-danger"  ng-show="addpatientForm.location.$error.pattern">please Enter Valid Location</span>
-						<span class="help-block" ng-show="addpatientForm.location.$dirty && addpatientForm.location.$invalid">
-							<span ng-show="addpatientForm.location.$error.required" class="text-danger">Location is required.</span>
-						</span>
-					</div>		
-					<label for="area" class="col-sm-2 control-label">Area *</label>
-					<div class="col-sm-3">
-						<input type="text" name="area" id="area" ng-model="modalOptions.addpatient.area" placeholder="Enter your area" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
-						<span class="text-danger"  ng-show="addpatientForm.area.$error.pattern">please Enter Valid Area</span>
-						<span class="help-block" ng-show="addpatientForm.area.$dirty && addpatientForm.area.$invalid">
-							<span ng-show="addpatientForm.area.$error.required" class="text-danger">Area is required.</span>
-						</span>
-					</div>
-				</div> 
-			<div class="form-group">
-				<label for="city" class="col-sm-2 control-label">City *</label>
-				<div class="col-sm-3" >
-					<input type="text" id="city" name="city" class="form-control" ng-model="modalOptions.addpatient.city" placeholder="Enter city" ng-pattern="/^[a-zA-Z]*$/" required>
-					<span class="text-danger"  ng-show="addpatientForm.city.$error.pattern">please Enter Valid City</span>
-					<span class="help-block" ng-show="addpatientForm.city.$dirty && addpatientForm.state.$invalid">
-						<span ng-show="addpatientForm.city.$error.required" class="text-danger">City is required.</span>
-					</span>						
-				</div>
-				<label for="pincode" class="col-sm-2 control-label">Pincode *</label>
-				<div class="col-sm-3">
-					<input type="text" id="pincode" name="pincode" class="form-control" ng-model="modalOptions.addpatient.pincode" placeholder="Enter pincode " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" required>
-					<span class="help-block" ng-show="addpatientForm.pincode.$dirty && addpatientForm.pincode.$invalid">
-						<span ng-show="addpatientForm.pincode.$error.pattern && (addpatientForm.pincode.$dirty || submitted)" class="text-danger">please enter number</span>
-						<span ng-show="addpatientForm.pincode.$error.required" class="text-danger">Pincode is required.</span>
-					</span>
-				</div>						
-			</div>
-			<div class="form-group">
-				<label for="state" class="col-sm-2 control-label">State *</label>
-				<div class="col-sm-3">
-				<input type="text" id="state" name="state" class="form-control" ng-model="modalOptions.addpatient.state" placeholder="Enter state" ng-pattern="/^[a-zA-Z]*$/" required>
-				<span class="text-danger"  ng-show="addpatientForm.state.$error.pattern">please Enter Valid state</span>
-					<span class="help-block" ng-show="addpatientForm.state.$dirty && addpatientForm.state.$invalid">
-						<span ng-show="addpatientForm.state.$error.required" class="text-danger">State is required.</span>
-					</span>				
-				</div>
-				<label for="country" class="col-sm-2 control-label">Country *</label>
-				<div class="col-sm-3">
-					<input type="text" required name="country" class="form-control" id="country" ng-model="modalOptions.addpatient.country" placeholder="Enter Your country" ng-pattern="/^[a-zA-Z]*$/" required>
-					<span class="text-danger"  ng-show="addpatientForm.country.$error.pattern">please Enter Valid country</span>
-					<span class="help-block" ng-show="addpatientForm.country.$dirty && addpatientForm.country.$invalid">
-						<span ng-show="addpatientForm.country.$error.required"class="text-danger">Country is required.</span>
-					</span>				
-				</div>
-			</div> 			
+<div class="modal-body">
+  <div class="form-group">
+	<label for="temprature" class="col-sm-2 control-label">Temprature </label>
+		<div class="col-sm-3">
+			<input type="text" name="temprature" id="temprature" ng-model="modalOptions.addadmission.temprature" placeholder="Enter your temprature" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
+			<span class="text-danger"  ng-show="addnew_admissionForm.temprature.$error.pattern">please Enter Valid Temprature</span>
+			<span class="help-block" ng-show="addnew_admissionForm.temprature.$dirty && addnew_admissionForm.temprature.$invalid">
+				<span ng-show="addnew_admissionForm.temprature.$error.required" class="text-danger">Location is required.</span>
+			</span>
+		</div>		
+		<label for="Pulse" class="col-sm-2 control-label">Pulse </label>
+		<div class="col-sm-3">
+			<input type="text" name="Pulse" id="Pulse" ng-model="modalOptions.addadmission.Pulse" placeholder="Enter your Pulse" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
+			<span class="text-danger"  ng-show="addnew_admissionForm.Pulse.$error.pattern">please Enter Valid Area</span>
+			<span class="help-block" ng-show="addnew_admissionForm.Pulse.$dirty && addnew_admissionForm.Pulse.$invalid">
+			</span>
+		</div>
+	</div> 
+	<div class="form-group">
+		<label for="Height" class="col-sm-2 control-label">Height </label>
+		<div class="col-sm-3" >
+			<input type="text" id="Height" name="Height" class="form-control" ng-model="modalOptions.addadmission.Height" placeholder="Enter Height" ng-pattern="/^[a-zA-Z]*$/" required>
+			<span class="text-danger"  ng-show="addnew_admissionForm.Height.$error.pattern">please Enter Valid City</span>
+			<span class="help-block" ng-show="addnew_admissionForm.Height.$dirty && addnew_admissionForm.bp.$invalid">
+				</span>						
+		</div>
+		<label for="weight" class="col-sm-2 control-label">weight </label>
+		<div class="col-sm-3">
+			<input type="text" id="weight" name="weight" class="form-control" ng-model="modalOptions.addadmission.weight" placeholder="Enter weight " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" required>
+			<span class="help-block" ng-show="addnew_admissionForm.weight.$dirty && addnew_admissionForm.weight.$invalid">
+				<span ng-show="addnew_admissionForm.weight.$error.pattern && (addnew_admissionForm.weight.$dirty || submitted)" class="text-danger">please enter number</span>
+			</span>
+		</div>						
+	</div>
+	<div class="form-group">
+		<label for="bp" class="col-sm-2 control-label">BP </label>
+		<div class="col-sm-3">
+			<input type="text" id="bp" name="bp" class="form-control" ng-model="modalOptions.addadmission.bp" placeholder="Enter blood pressure" ng-pattern="/^[a-zA-Z]*$/" required>
+			<span class="text-danger"  ng-show="addnew_admissionForm.bp.$error.pattern">please Enter Valid bp</span>
+			<span class="help-block" ng-show="addnew_admissionForm.bp.$dirty && addnew_admissionForm.bp.$invalid">
+				<span ng-show="addnew_admissionForm.bp.$error.required" class="text-danger">State is required.</span>
+			</span>				
+		</div>
+		<label for="RR" class="col-sm-2 control-label">RR </label>
+		<div class="col-sm-3">
+			<input type="text" required name="RR" class="form-control" id="RR" ng-model="modalOptions.addadmission.RR" placeholder="Enter Your RR" ng-pattern="/^[a-zA-Z]*$/" required>
+			<span class="text-danger"  ng-show="addnew_admissionForm.RR.$error.pattern">please Enter Valid RR</span>
+			<span class="help-block" ng-show="addnew_admissionForm.RR.$dirty && addnew_admissionForm.RR.$invalid">
+				<span ng-show="addnew_admissionForm.RR.$error.required"class="text-danger">RR is required.</span>
+			</span>				
+		</div>
+	</div> 			
+	
+	<div class="form-group">
+		<label for="pallor" class="col-sm-2 control-label">PALLOR</label>
+		<div class="col-sm-3">
+			<input type="text" id="pallor" name="pallor" class="form-control" ng-model="modalOptions.addadmission.pallor" placeholder="Enter PALLOR" ng-pattern="/^[789]\d{9}$/" maxlength="10" />
+		</div>	
+		<label for="ENT" class="col-sm-2 control-label">ENT</label>
+		<div class="col-sm-3">
+			<input type="text" id="ENT" name="ENT" class="form-control" ng-model="modalOptions.addadmission.ENT" placeholder=" Enter ENT" />
+		</div>						
+							 
+	</div>
+	<div class="form-group">
+		<label for="ICTERUS" class="col-sm-2 control-label">ICTERUS</label>
+		<div class="col-sm-3">
+			<input type="text" id="ICTERUS" name="ICTERUS" class="form-control" ng-model="modalOptions.addadmission.ICTERUS" placeholder=""  />
+		</div>	
+		<label for="CLUBBING" class="col-sm-2 control-label">CLUBBING</label>
+		<div class="col-sm-3">
+			<input type="text" id="CLUBBING" name="CLUBBING" class="form-control" ng-model="modalOptions.addadmission.CLUBBING" placeholder=" ENTER CLUBBING " />
+		</div>						
+							 
+	</div>
+	<div class="form-group">
+		<label for="OEDEMA" class="col-sm-2 control-label">OEDEMA</label>
+		<div class="col-sm-3">
+			<input type="text" id="OEDEMA" name="OEDEMA" class="form-control" ng-model="modalOptions.addadmission.OEDEMA" placeholder="ENTER OEDEMA"  />
+		</div>	
+		<label for="JVP" class="col-sm-2 control-label">JVP</label>
+		<div class="col-sm-3">
+			<input type="text" id="JVP" name="JVP" class="form-control" ng-model="modalOptions.addadmission.JVP" placeholder="ENTER JVP" />
+		</div>						
+							 
+	</div>
+	
+	<div class="form-group">
+		<label for="CYANOSIS" class="col-sm-2 control-label">CYANOSIS</label>
+		<div class="col-sm-3">
+			<input type="text" id="CYANOSIS" name="CYANOSIS" class="form-control" ng-model="modalOptions.addadmission.CYANOSIS" placeholder="Enter CYANOSIS"  />
+		</div>	
+		<label for="LYMPHADENOPATHY" class="col-sm-2 control-label">LYMPHADENOPATHY</label>
+		<div class="col-sm-3">
+			<input type="text" id="LYMPHADENOPATHY" name="LYMPHADENOPATHY" class="form-control" ng-model="modalOptions.addadmission.LYMPHADENOPATHY" placeholder="Enter LYMPHADENOPATHY" />
+		</div>						
+							 
+	</div>
+	<label  class="control-label">Systematic Examination</label>
+	<div class="form-group">
+		<label for="R.S" class="col-sm-2 control-label">R.S</label>
+		<div class="col-sm-3">
+			<input type="text" id="R.S" name="R.S" class="form-control" ng-model="modalOptions.addadmission.R.S" placeholder="Enter R.S "  />
+		</div>	
+		<label for="C.V.S" class="col-sm-2 control-label">C.V.S</label>
+		<div class="col-sm-3">
+			<input type="text" id="C.V.S" name="C.V.S" class="form-control" ng-model="modalOptions.addadmission.C.V.S" placeholder="Enter C.V.S" />
+		</div>						
+							 
+	</div>
+	<label  class="control-label">Abdominal System</label>
+	<div class="form-group">
+		<label for="C.N.S" class="col-sm-2 control-label">C.N.S</label>
+		<div class="col-sm-8">
+			<input type="text" id="C.N.S" name="C.N.S" class="form-control" ng-model="modalOptions.addadmission.C.N.S" placeholder="Enter C.N.S"  />
+		</div>								 
+	</div>
+	<label  class="control-label">Provisional Diagnosis</label>
+	<div class="form-group">
+		<label for="ProvisionalDiagnosis" class="col-sm-2 control-label">Provisional Diagnosis</label>
+		<div class="col-sm-8">
+			<textarea type="text" id="ProvisionalDiagnosis" name="ProvisionalDiagnosis" class="form-control" ng-model="modalOptions.addadmission.ProvisionalDiagnosis" placeholder="Enter your Provisional Diagnosis Details" ></textarea>
+		</div>								 
+	</div>	
+</div> 
+	<div class="modal-footer" >
+		<div class="col-sm-offset-2 col-sm-9">
+			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id" ng-disabled="addnew_admissionForm.$invalid" ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Add new IPD Patient</button>
 			
-			<div class="form-group">
-				<label for="mobile" class="col-sm-2 control-label">Mobile*</label>
-				<div class="col-sm-3">
-					<input type="text" id="mobile" name="mobile" class="form-control" ng-model="modalOptions.addpatient.mobile" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required/>
-					<span class="help-block" ng-show="addpatientForm.mobile.$dirty && addpatientForm.mobile.$invalid">
-						<span ng-show="addpatientForm.mobile.$error.required" class="text-danger">Mobile Number is required.</span>
-						<span class="text-danger" ng-show="addpatientForm.mobile.$error.pattern">Enter a valid Contact Number</span>
-					</span>
-				</div>						
-				 <label for="mobile2" class="col-sm-2 control-label">Mobile2</label>
-				<div class="col-sm-3">
-					<input type="text" id="mobile2" name="mobile2" class="form-control" ng-model="modalOptions.addpatient.mobile2" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" >
-					<span class="help-block" ng-show="addpatientForm.mobile2.$dirty && addpatientForm.mobile2.$invalid">
-						<span class="text-danger" ng-show="addpatientForm.mobile2.$error.pattern && addpatientForm.mobile2.$dirty ">Enter a valid Contact Number</span>
-					</span>
-				</div>						 
-			</div>
-			<div class="form-group">	
-				<label  for="email" class="col-sm-2 control-label">Email *</label>
-				<div class="col-sm-3">
-					<input type="Email" class="form-control" id="email" ng-model="modalOptions.addpatient.email" name="email" placeholder="Enter Email"  required/>
-					<span class="help-block" ng-show="addpatientForm.email.$dirty && addpatientForm.email.$invalid">
-						<span class="text-danger" ng-show="addpatientForm.email.$dirty "></span>
-						<span class="text-danger" ng-show="addpatientForm.email.$error.required">Email is required.</span>
-						<span class="text-danger" ng-show="addpatientForm.email.$error.email">Invalid Email address.</span>
-					</span>
-				</div>
-				<label  for="email2" class="col-sm-2 control-label">Email2 </label>
-				<div class="col-sm-3">
-					<input type="Email" class="form-control" id="email2" ng-model="modalOptions.addpatient.email2" name="email2" placeholder="Enter Email" />
-					<span class="help-block" ng-show="addpatientForm.email2.$dirty && addpatientForm.email2.$invalid">
-						<span class="text-danger" ng-show="addpatientForm.email2.$dirty "></span>
-						<span class="text-danger" ng-show="addpatientForm.email2.$error.required">Email is required.</span>
-						<span class="text-danger" ng-show="addpatientForm.email2.$error.email">Invalid Email address.</span>
-					</span>
-				</div> 
-			</div> 
-		</div> 
+			<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success" ng-disabled="addnew_admissionForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update IPD Patient</button>
 			
+			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+		</div>
+	</div>
+		

@@ -1,5 +1,10 @@
 		<div class="modal-body">
-			
+			<div class="form-group">
+				 <label  for="admission_date" class="col-sm-2 control-label"> Admission Date * </label>
+				<div class="col-sm-8">
+					<input type="text" class="form-control" placeholder="Date" id="admission_date" name="admission_date" ng-model="modalOptions.addadmission.admission_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" ng-required="true" />
+				</div>
+			</div>
 			<div class="form-group">
 				<label for="patient_name" class="col-sm-2 control-label">Patient Name *</label>
 				<div class="col-sm-8">					
@@ -11,10 +16,6 @@
 				</div>
 			</div>	
 			<div class="form-group">
-			 <label  for="admission_date" class="col-sm-2 control-label"> Admission Date * </label>
-				<div class="col-sm-3">
-					<input type="text" class="form-control" placeholder="Date" id="admission_date" name="admission_date" ng-model="modalOptions.addadmission.admission_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" ng-required="true" />
-				</div>
 				<label for="mobile" class="col-sm-2 control-label">Mobile*</label>
 				<div class="col-sm-3">
 					<input type="text" id="mobile" name="mobile" class="form-control" ng-model="modalOptions.addadmission.mobile" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required/>
@@ -23,8 +24,35 @@
 						<span class="text-danger" ng-show="addnew_admissionForm.mobile.$error.pattern">Enter a valid Contact Number</span>
 					</span>
 				</div>	
-			</div>			
+				<label for="mobile2" class="col-sm-2 control-label">Emergency Contact*</label>
+				<div class="col-sm-3">
+					<input type="text" id="mobile2" name="mobile2" class="form-control" ng-model="modalOptions.addadmission.mobile2" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required/>
+					<span class="help-block" ng-show="addnew_admissionForm.mobile2.$dirty && addnew_admissionForm.mobile2.$invalid">
+						<span ng-show="addnew_admissionForm.mobile2.$error.required" class="text-danger">Contact Number is required.</span>
+						<span class="text-danger" ng-show="addnew_admissionForm.mobile2.$error.pattern">Enter a valid Contact Number</span>
+					</span>
+				</div>	
+			</div>	
+			<div class="form-group">	
+				<label  for="email" class="col-sm-2 control-label">Email *</label>
+				<div class="col-sm-3">
+					<input type="Email" class="form-control" id="email" ng-model="modalOptions.addadmission.email" name="email" placeholder="Enter Email"  required/>
+					<span class="help-block" ng-show="addnew_admissionForm.email.$dirty && addnew_admissionForm.email.$invalid">
+						<span class="text-danger" ng-show="addnew_admissionForm.email.$dirty "></span>
+						<span class="text-danger" ng-show="addnew_admissionForm.email.$error.required">Email is required.</span>
+						<span class="text-danger" ng-show="addnew_admissionForm.email.$error.email">Invalid Email address.</span>
+					</span>
+				</div>	
+				<label  for="deposit" class="col-sm-2 control-label">Deposit *</label>
+				<div class="col-sm-3">
+					<input type="Email" class="form-control" id="deposit" ng-model="modalOptions.addadmission.deposit" name="deposit" placeholder="Enter Your deposit amount" ng-pattern="/^[789]\d{9}$/" />
+					<span class="help-block" ng-show="addnew_admissionForm.deposit.$dirty && addnew_admissionForm.deposit.$invalid">		
+						<span class="text-danger" ng-show="addnew_admissionForm.deposit.$error.pattern">Enter a valid </span>
+						</span>
 						
+				</div>
+			</div> 			
+			
 			<div class="form-group">
 				<label for="ward_name" class="col-sm-2 control-label">Ward Name*</label>
 				<div class="col-sm-3">
@@ -39,21 +67,21 @@
 					<input type="text" required name="bed_no" class="form-control" id="bed_no" ng-model="modalOptions.addadmission.bed_no" placeholder="Enter Your bed_no" ng-pattern="/^[a-zA-Z]*$/" required>
 					<span class="text-danger"  ng-show="addnew_admissionForm.bed_no.$error.pattern">please Enter Valid bed_no</span>
 					<span class="help-block" ng-show="addnew_admissionForm.bed_no.$dirty && addnew_admissionForm.bed_no.$invalid">
-						<span ng-show="addnew_admissionForm.bed_no.$error.required"class="text-danger">Country is required.</span>
+						<span ng-show="addnew_admissionForm.bed_no.$error.required"class="text-danger">Bed no is required.</span>
 					</span>				
 				</div>
 			</div> 	
-			
-			<div class="form-group">	
-				<label  for="email" class="col-sm-2 control-label">Email *</label>
-				<div class="col-sm-3">
-					<input type="Email" class="form-control" id="email" ng-model="modalOptions.addadmission.email" name="email" placeholder="Enter Email"  required/>
-					<span class="help-block" ng-show="addnew_admissionForm.email.$dirty && addnew_admissionForm.email.$invalid">
-						<span class="text-danger" ng-show="addnew_admissionForm.email.$dirty "></span>
-						<span class="text-danger" ng-show="addnew_admissionForm.email.$error.required">Email is required.</span>
-						<span class="text-danger" ng-show="addnew_admissionForm.email.$error.email">Invalid Email address.</span>
-					</span>
+			<div class="form-group">
+				<label for="consultant_dr" class="col-sm-2 control-label">Consultant DR.Name *</label>
+				<div class="col-sm-8">					
+					<select id="consultant_dr" class="form-control" name="consultant_dr" placeholder="Patient Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addadmission.consultant_dr"required>
+					<option value="" selected>select category</option>
+					<option value="consultant_dr">Pay by consultant_dr</option>
+					<option value="consultant_dr">Pay for Nurse</option>
+					</select>
 				</div>
-			</div> 
+			</div>	
+			
+			
 		</div> 
 			
