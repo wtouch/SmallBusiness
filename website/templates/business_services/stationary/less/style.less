@@ -29,7 +29,13 @@
 	
 	body{
 	
-		color:@colorblack;
+	color:@colorwhite;
+	}
+	.content{
+	
+	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/img8.jpg');
+	background-repeat:no-repeat;
+	background-size:100% 100%;
 	}
 	header{
 			position : relative;
@@ -53,7 +59,7 @@
 			margin-top:100px;
 			font: 400 34px/48px "Arbutus Slab", sans-serif;
 			text-transform:uppercase;
-			color:@colorblack;
+			color:@colorwhite;
 			animation-duration:3s;
 			animation-iteration-count:1;
 			animation-name:h;
@@ -91,7 +97,7 @@
 	}
 	
 	h1,h2,h3{
-				color:@colorblack;
+				color:@colorwhite;
 				text-align:center;
 	}
 	.align{
@@ -254,6 +260,7 @@
 					padding:20px;
 					
 						img{
+							margin-right:10px;
 							float:left;
 							height:150px;
 							width:300px;
@@ -261,16 +268,16 @@
 						h1{
 									padding-top:0px;
 									font: 600 36px/48px "Arbutus Slab", sans-serif;
-									color:@colorblack;
+									color:@colorwhite;
 						}
 						.tagline{
-								color:@colorblack;
+								color:@colorwhite;
 								padding:20px;
 								font-size:20px;
 						}
 						p{
 							
-							color:@colorblack;
+							color:@colorwhite;
 							text-align:justify;
 						}
 	 }
@@ -282,14 +289,15 @@
 			border-radius:0px !important; 
 	}
 	.btn-info{
-	
-	border:1px solid @colorblack;
-	color:@colorblack;
-	//background-color:transparent;
+	color:@colorwhite;
+	background-color:rgba(230, 158, 84, 0.47);
+	border:none;
 	text-transform:uppercase;
 				&:hover{
+				border:none;
+				background-color:rgba(230, 158, 84, 0.47);
 				color:@colorwhite;
-				background-color:transparent;
+				box-shadow: 0 8px 16px 0 rgba(252, 248, 227, 0.53), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 				}
 	}
 .bg1{
@@ -299,16 +307,17 @@
 		background-size:100% 100%;
 }
 .footer{
-	background-color:@darkbackcolor;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/img10.jpg');
+	background-size:100% 100%;
 	footer{
 				position:relative;
 				//height:210px;
 				p{
-					color:@colorblack;
+					color:@colorwhite;
 						//padding-top:9%;
 				}
 				a{
-						color:@colorblack;
+						color:@colorwhite;
 				}
 	}
 }
@@ -366,6 +375,7 @@
 			overflow:hidden;
 			padding:20px;
 			img{
+					float:left;
 					height:200px;
 					width:200px;
 					border:1px solid @colorblack;
@@ -386,7 +396,45 @@
 			h3{
 				text-align:center;
 			}
+			table,.row>div:nth-child(3){
+				ul{
+					
+					background-image : none;
+					list-style-type:none;
+					padding-left:0px;
+					li{
+						padding:0px;
+						border-bottom:none;
+					}
+				}
+			}
+			ul{
+				background-image : linear-gradient(rgba(0, 0, 0, 0.52),rgba(0, 0, 0, 0.52));
+				list-style-type:none;
+				padding-left:0px;
+				li{
+					padding:20px;
+					border-bottom:1px solid @colorwhite;
+					a{
+					color:@colorwhite;
+					padding-left:10px;
+					}
+				}
+		}
+		.desc{
+			padding:20px;
+		
+		}
+}
+div.about>div>div:nth-child(2){
 			
+			animation-duration:2s;
+			animation-iteration-count:1;
+			animation-name:abt;
+}
+@keyframes abt{
+	0%{transform:translateX(-200px);}
+	100%{transform:translateX(0px);}
 }
 .sociallinks{
 padding:100px;
@@ -397,6 +445,11 @@ padding:100px;
 			margin:10px;
 			height:180px;
 				width:180px;
+				&:hover{
+					box-shadow: 0 8px 16px 0 rgba(252, 248, 227, 0.53), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+					margin-top:-20px;
+					transition:margin-top 0.7s;
+				}
 			
 		}
 			padding-top:6%;
@@ -408,17 +461,23 @@ padding:100px;
 				height:150px;
 				width:150px;
 				margin:2px;
-				background-color:rgba(85, 85, 85, 0.25);
+				background-color:rgba(85, 85, 85, 0.81);
 				padding:50px;
-				&:hover{
-				background-color:rgba(85, 85, 85, 0.25);
-				}
+				
+				
 				img{
 					height:40px;
 					width:40px;	
 				}
 				}
-				
+	&>div:nth-child(1),&>div:nth-child(2),&>div:nth-child(3),&>div:nth-child(4){
+	animation-duration:2s;
+	animation-name:social;
+	}
+	@keyframes social{
+	0%{margin-left:-240px;transform:rotate(-180deg);border-radius:0%;}
+	100%{}
+	}
 }
 .testimonials{
 			
@@ -458,7 +517,8 @@ padding:100px;
 	}
 .thumbnail
 	{
-	 color:@lightbackcolor;
+		background-color : rgba(0, 0, 0, 0.46);
+	 color:@colorwhite;
 	 border:none;
 	 height:500px:
 	 padding: 10px;
@@ -474,9 +534,3 @@ padding:100px;
 		}
 		}
 	}
-ul{
-	list-style-type:none;
-	a{
-	color:@colorblack;
-	}
-}

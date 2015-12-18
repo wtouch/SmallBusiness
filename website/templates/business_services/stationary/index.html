@@ -27,13 +27,13 @@
 		<meta name="keywords" content="{{ seo.keywords }}">
 		<script>
 		function myFunction{
-			if(document.body.scrollTop>0)
+			if(document.body.scrollTop>100)
 			{
-				document.getElementById("serv").ClassName="contactanim";
+				document.getElementById("gall").ClassName="featrGallery";
 				
 			}
 			else{
-				document.getElementById("serv").ClassName="";
+				document.getElementById("gall").ClassName="";
 			}
 		
 		}
@@ -72,14 +72,18 @@
 	
 		</nav>
 		</header>
-		<div class="container">
-					{% include contentPath %}	
+		<div class=" content">
+			<div class="container ">
+						{% include contentPath %}	
+			</div>	
 		</div>	
 		<div class="footer">
+			<div class="container ">
 				{%include[templatePath ~ '/includes/sociallinks.html','default/default/includes/sociallinks.html']%}
 					
 				{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
-		</div>
+			</div>
+		</div>	
 		
 		
 	</body>
