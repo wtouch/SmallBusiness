@@ -19,21 +19,21 @@ define(['app'], function (app) {
 		console.log("This is Equipement Controller");
 		$rootScope.moduleMenus = [
 			{
-				name : "Add Equipment",
-				SubTitle :"Add Equipment",
+				name : "Add medicine",
+				SubTitle :"Add Medicine",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/hospital/general_entities/addequipment.html");
+						return $scope.openModal("modules/hospital/general/medicine/addmedicine.html");
 					}
 				}
 			},{
-				name : "Equipment List",
-				path : "#/dashboard/hospital/equipment",
-				SubTitle :"Equipment List"
+				name : "Medicine List",
+				path : "#/dashboard/hospital/medicine",
+				SubTitle :"Medicine List"
 			}
 		]
 		
-		$scope.equipment = {
+		$scope.medicine = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -45,34 +45,22 @@ define(['app'], function (app) {
 					
 				},
 				{
-				    name:'equipment_name',
-					filterHeaderTemplate: '<input id="equipment_name" class="form-control" ng-change="grid.appScope.filter(\'equipment_name\', equipment_name, \'equipment\', \'equipment\', true, grid.appScope.equipmentParams)" ng-model="equipment_name" placeholder="search">',
+				    name:'medicine_name',
+					filterHeaderTemplate: '<input id="medicine_name" class="form-control" ng-change="grid.appScope.filter(\'medicine_name\', medicine_name, \'medicine\', \'medicine\', true, grid.appScope.medicineParams)" ng-model="medicine_name" placeholder="search">',
                 },
 				{
-					name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="email" placeholder="search">'
+				    name:'medicine_type',
+					enableSorting: false,
+					enableFiltering: false,
                 },
-				{
-					name:'phone',
-					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="phone" placeholder="search">'
-                },
-				{
-				    name:'DOB',
-				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="city" placeholder="search">', 
-                },
-			   {
-				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="address" placeholder="search">',
-                },
-				
-				{
-				    name:'type',width:85,
+					{
+				    name:'medicine_category',
 					enableSorting: false,
 					enableFiltering: false,
                 },
 				
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'medicine\', \'medicine\',true, grid.appScope.medicineParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -83,10 +71,10 @@ define(['app'], function (app) {
 					  ]
 					} ,
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general_entities/addequipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit equipment" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/addmedicine.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit medicine" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					
-					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general_entities/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/medicineview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  medicine" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			]
@@ -104,14 +92,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'equipment','equipment');
+							$scope.getData(false, $scope.currentPage, 'medicine','medicine');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'equipment','equipment');
+							$scope.getData(false, $scope.currentPage, 'medicine','medicine');
 						}
 					})
 				},
@@ -132,11 +120,8 @@ define(['app'], function (app) {
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
-				where : {
-					user_id : $rootScope.userDetails.id,
-					type : ($routeParams.equipment == "vendor") ? "vendor" : "client"
-				},
-				cols : ["*"]
+				
+				
 			};
 			if(page){
 				angular.extend($scope.params, {
