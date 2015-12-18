@@ -155,7 +155,21 @@ define(['angular',
 				parentPath = "/dashboard/";
 				var moduleRoutes = routes.moduleRoutes;
 				var currentRoutes = (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
+				angular.forEach(moduleRoutes, function(value, key){
+					if(value.childMenu){
+						
+						if(angular.isArray(value.childMenu)){
+							angular.forEach(value.childMenu, function(value){
+								//console.log(value);
+								moduleRoutes.push(value);
+							})
+						}
+						//console.log(value.childMenu);
+					}
+				})
+				//console.log(moduleRoutes);
 				localStorage.module_roots = JSON.stringify(currentRoutes.concat(moduleRoutes));
+				
 			}else{
 				moduleRoutes = routes;
 				
@@ -171,14 +185,16 @@ define(['angular',
 		$rootScope.getRoutes = function(moduleRoutes, parentPath){
 			if(!parentPath) parentPath = "";
 			angular.forEach(moduleRoutes, function(value, key){
-				//console.log(value.path);
-				$routeProviderReference.when(parentPath + value.path, route.resolve({controller: value.controller,template: value.template,label: value.label}, value.modulePath));
+				//console.log(value.controller,value.template,value.label);
+				if(value.controller){
+					$routeProviderReference.when(parentPath + value.path, route.resolve({controller: value.controller,template: value.template,label: value.label}, value.modulePath));
+				}
 			})
 		}
 		//$routeProviderReference.when("/dashboard/inventory", route.resolve({controller: "inventory",template: "inventory",label: "inventory"}, "inventory/"));
 		if(localStorage.module_roots){
-			
 			$rootScope.getRoutes(JSON.parse(localStorage.module_roots), "/dashboard/");
+			console.log(JSON.parse(localStorage.module_roots));
 		}
 		
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {

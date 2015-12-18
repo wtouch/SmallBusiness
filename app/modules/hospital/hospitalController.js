@@ -5,7 +5,7 @@ define(['app'], function (app) {
 	var hospitalController = function ($scope, $injector, dataService, $rootScope, $http) {
 		
 			$http.get("modules/hospital/hospital.json").success(function(response){
-				console.log(response);
+				//console.log(response);
 				$scope.dashboardList = response;
 			})
 	 };
