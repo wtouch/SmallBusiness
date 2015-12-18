@@ -51,7 +51,7 @@ define([], function () {
 
             var resolve = function (baseName, path, controllerAs, secure) {
                 //baseName = {};
-				var ctrl, temp, dir, serv, dependencies = [];
+				var ctrl, temp, dir, serv, filter, dependencies = [];
 				
 				if(angular.isObject(baseName)){
 					var fName;
@@ -64,12 +64,16 @@ define([], function () {
 							dependencies.push(routeConfig.getControllersDirectory() + path + ctrl+".js");
 						}
 						if(fName == 'directive'){
-							dir = baseName[fName];
+							dir = baseName[fName]+"Directive";
 							dependencies.push(routeConfig.getDirectivesDirectory() + path + dir+".js");
 						}
 						if(fName == 'service'){
-							serv = baseName[fName];
+							serv = baseName[fName]+"Service";
 							dependencies.push(routeConfig.getServicesDirectory() + path + serv+".js");
+						}
+						if(fName == 'filter'){
+							filter = baseName[fName]+"Filter";
+							dependencies.push(routeConfig.getServicesDirectory() + path + filter+".js");
 						}
 					}
 				}else{

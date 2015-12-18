@@ -180,6 +180,7 @@ define(['angular',
 			}
 			$rootScope.getRoutes(moduleRoutes, parentPath);
 			//console.log(parentPath, routes);
+			
 		}
 		$rootScope.getRoutes = function(moduleRoutes, parentPath){
 			if(!parentPath) parentPath = "";
@@ -195,6 +196,7 @@ define(['angular',
 		//$routeProviderReference.when("/dashboard/inventory", route.resolve({controller: "inventory",template: "inventory",label: "inventory"}, "inventory/"));
 		if(localStorage.module_roots){
 			$rootScope.getRoutes(JSON.parse(localStorage.module_roots), "/dashboard/");
+			console.log(JSON.parse(localStorage.module_roots));
 		}
 		
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
