@@ -17,6 +17,7 @@ define(['app', 'tinymce'], function (app) {
 		};
 	});
 	
+	
 	/* filePreview directive for thumbnail preview while uploading images
 	**************************************************************************************/
 	app.directive('filePreview', ['$compile','upload',function ($compile,upload) {

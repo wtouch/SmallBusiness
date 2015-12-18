@@ -7,9 +7,10 @@
 				<div class="col-sm-9">
 					<input type="hidden" ng-model="adduser.adduser_date">
 					<input type="hidden" ng-model="adduser.status" ng-init="adduser.status = 1" value="{{adduser.status}}">
-					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="adduser.name" required>
+					<input firstname type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="adduser.name" required>
 					<span class="help-block" ng-show="adduserForm.name.$dirty && adduserForm.name.$invalid">
 						<span class="text-danger" ng-show="adduserForm.name.$error.required">Name is required.</span>
+						<span class="text-danger" ng-show="adduserForm.name.$error.firstname">firstname.</span>
 					</span>
 				</div>
 			</div>
