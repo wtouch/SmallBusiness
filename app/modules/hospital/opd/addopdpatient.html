@@ -13,16 +13,21 @@
 				<li role="presentation" ng-class="{active: modalOptions.formPart=='opdpatientComplaint'}">
 					<a ng-click="modalOptions.showFormPart('opdpatientComplaint', modalOptions)">Complaint Details</a>
 				</li>	
-				<li role="presentation" ng-class="{active: modalOptions.formPart=='opdpatientHistory'}">
-					<a ng-click="modalOptions.showFormPart('opdpatientHistory', modalOptions)">patient History</a>
+				<li role="presentation" ng-class="{active: modalOptions.formPart=='opdpatienthistory'}">
+					<a ng-click="modalOptions.showFormPart('opdpatienthistory', modalOptions)">patient History</a>
+				</li>
+				<li role="presentation" ng-class="{active: modalOptions.formPart=='generalExamination'}">
+					<a ng-click="modalOptions.showFormPart('generalExamination', modalOptions)">patient History</a>
 				</li>
 			</ul>
 			<ng-include  ng-show="modalOptions.formPart=='opdpatientDetails'" 	src="'modules/hospital/opd/opdpatientDetails.html'">
 			</ng-include> 	
 			<ng-include  ng-show="modalOptions.formPart=='opdpatientComplaint'" 	src="'modules/hospital/opd/opdpatientComplaint.html'">
 			</ng-include> 
-			<ng-include  ng-show="modalOptions.formPart=='opdpatientHistory'" src="'modules/hospital/opd/opdpatientHistory.html'">
-			</ng-include> 						
+			<ng-include  ng-show="modalOptions.formPart=='opdpatienthistory'" src="'modules/hospital/opd/opdpatienthistory.html'">
+			</ng-include> 
+			<ng-include  ng-show="modalOptions.formPart=='generalExamination'" 	src="'modules/hospital/opd/generalExamination.html'">
+			</ng-include> 
 		</form>
 	</div>
 

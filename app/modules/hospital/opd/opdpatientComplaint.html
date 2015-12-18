@@ -1,56 +1,49 @@
 		<div class="modal-body">
+				
 			<div class="form-group">
-				<label for="guardian_name" class="col-sm-2 control-label">Guardian Name *</label>
-				<div class="col-sm-8">					
-					<input type="text" id="guardian_name" class="form-control" name="guardian_name" placeholder="Guardian Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addpatient.guardian_details.name">
-					 <span class="text-danger"  ng-show="addpatientForm.guardian_name.$error.pattern">please Enter Valid Name</span>
-					<span class="help-block" ng-show="addpatientForm.guardian_name.$dirty && addpatientForm.guardian_name.$invalid">
-					</span>
-				</div>
-			</div>						
-			<div class="form-group">
-				<label for="relation" class="col-sm-2 control-label">Relation with Patient *</label>
+				<label for="complaints_name" class="col-sm-2 control-label">complaints_name *</label>
 				<div class="col-sm-8">
-				<input type="text" id="relation" name="relation" class="form-control" ng-model="modalOptions.addpatient.guardian_details.relation"  placeholder="Enter relation" ng-pattern="/^[a-zA-Z]*$/" required>
-					<span class="help-block" ng-show="addpatientForm.relation.$dirty && addpatientForm.relation.$invalid">Enter valid format
-						<span ng-show="addpatientForm.relation.$error.required" class="help-block">relation is required.</span>
+				<input type="text" id="complaints_name" name="complaints_name" class="form-control" ng-model="modalOptions.addopdpatient.complaints.complaints_name" placeholder="Enter complaints_name" ng-pattern="/^[a-zA-Z]*$/" required />
+					<span class="help-block" ng-show="addopdpatientForm.complaints_name.$dirty && addopdpatientForm.complaints_name.$invalid">
+						<span ng-show="addopdpatientForm.complaints_name.$error.required" class="text-danger">complaints_name is required.</span>
 					</span>				
 				</div>
+				
 			</div>
-				<div class="form-group">
-					<label for="mobile" class="col-sm-2 control-label">Mobile*</label>
-					<div class="col-sm-3">
-						<input type="text" id="mobile" name="mobile" class="form-control" ng-model="modalOptions.addpatient.guardian_details.mobile" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
-						<span class="help-block" ng-show="addpatientForm.mobile.$dirty && addpatientForm.mobile.$invalid">
-							<span ng-show="addpatientForm.mobile.$error.required" class="text-danger">Mobile Number is required.</span>
-							<span class="text-danger" ng-show="addpatientForm.mobile.$error.pattern && (addpatientForm.mobile.$dirty || submitted)">Enter a valid Contact Number</span>
-						</span>
-					</div>
-					<label  for="email" class="col-sm-2 control-label">Email *</label>
-					<div class="col-sm-3">
-					<input type="Email" class="form-control" id="email" ng-model="modalOptions.addpatient.guardian_details.email" name="email" placeholder="Enter Email" ng-blur="checkuserAvailable('email', addpatient.email)" required >
-					<span class="help-block">
-						<span class="text-success" ng-show="addpatientForm.email.$dirty && addpatientForm.email.$valid && EmailAvailable">{{availabilityMsg}}</span>
-					</span>
-					<span class="help-block" ng-show="addpatientForm.email.$dirty && addpatientForm.email.$invalid || EmailAvailable == false">
-						<span class="text-danger" ng-show="addpatientForm.email.$dirty && EmailAvailable == false">{{availabilityMsg}}</span>
-						<span class="text-danger" ng-show="addpatientForm.email.$error.required">Email is required.</span>
-						<span class="text-danger" ng-show="addpatientForm.email.$error.email">Invalid Email address.</span>
-					</span>
+			<div class="form-group">
+				<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
+				<div class="col-sm-8">
+					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.addopdpatient.complaints.complaints_description" placeholder="Enter Your complaints_description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+					<span class="help-block" ng-show="addopdpatientForm.complaints_description.$dirty && addopdpatientForm.complaints_description.$invalid">
+						<span ng-show="addopdpatientForm.complaints_description.$error.required"class="text-danger">Description is required.</span>
+					</span>				
 				</div>
-				</div>						
-				<div class="form-group">
-					<label for="address" class="col-sm-2 control-label">Address *</label>
-					<div class="col-sm-8">
-						<textarea  class="form-control" id="address" ng-model="modalOptions.addpatient.guardian_details.address" name="address" placeholder="Enter address"  ng-maxlength="250" required></textarea>
-						<span class="text-danger"  ng-show="addpatientForm.address.$error.pattern">please Enter Valid Address</span>
-						<span ng-hide="addpatientForm.address.$error.maxlength">{{ 250 - modalOptions.addpatient.address.length + " Chars left"}}</span>
-						<span class="help-block" ng-show="addpatientForm.address.$dirty &&  addpatientForm.address.$invalid">
-							<span class="text-danger" ng-show="addpatientForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
-							<span class="text-danger" ng-show="addpatientForm.address.$error.required">Address is required.</span>
-						</span>
-					</div>
+			</div> 
+			<div class="form-group">			
+				<div class="col-sm-offset-2 col-sm-2">
+					<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addopdpatientForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addopdpatient.complaints, 'patient_history', modalOptions)" disabled="disabled">	+Add 
+					</button>
 				</div>
-		</div>
+			</div>
+			<table class="table table-bordered" >
+				<thead>
+					<tr>
+						<th class="col-sm-2">Sr.No.</th>
+						<th class="col-sm-2">Complaints Name</th>
+						<th class="col-sm-2">Complaints Description</th>
+						<th >Remove</th>
+					</tr> 
+				</thead>
+				<tbody >
+					<tr ng-repeat="x in modalOptions.addopdpatient.complaints">
+						<td>{{$index + 1}}</td>
+						<td>{{x.complaints_name}}</td>
+						<td>{{x.complaints_description}}</td>
+						<td><button ng-click="modalOptions.removeObject(modalOptions.addopdpatient.complaints, $index)">X</button></td>
+					</tr>
+				</tbody >
+			</table>
+		</div>	
+			
 		
 			

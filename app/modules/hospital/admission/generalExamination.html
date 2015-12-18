@@ -17,11 +17,12 @@
 		</div>
 	</div> 
 	<div class="form-group">
-		<label for="Height" class="col-sm-2 control-label">Height </label>
+		<label for="height" class="col-sm-2 control-label">Height </label>
 		<div class="col-sm-3" >
-			<input type="text" id="Height" name="Height" class="form-control" ng-model="modalOptions.addadmission.general_examination.Height" placeholder="Enter Height" ng-pattern="/^[a-zA-Z]*$/" required>
-			<span class="text-danger"  ng-show="addnew_admissionForm.Height.$error.pattern">please Enter Valid City</span>
-			<span class="help-block" ng-show="addnew_admissionForm.Height.$dirty && addnew_admissionForm.bp.$invalid">
+			<input type="text" id="height" name="height" class="form-control" ng-model="modalOptions.addadmission.general_examination.height"ng-pattern="/^\d{0,9}[0-9]$/" placeholder="Enter Height" ng-pattern="/^[a-zA-Z]*$/" required>
+			<span class="text-danger"  ng-show="addnew_admissionForm.height.$error.pattern">please Enter Valid Height</span>
+			<span class="help-block" ng-show="addnew_admissionForm.height.$dirty && addnew_admissionForm.bp.$invalid">
+			<span ng-show="addnew_admissionForm.height.$error.pattern && (addnew_admissionForm.weight.$dirty || submitted)" class="text-danger">please enter number</span>
 				</span>						
 		</div>
 		<label for="weight" class="col-sm-2 control-label">weight </label>
