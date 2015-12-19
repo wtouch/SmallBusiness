@@ -37,7 +37,7 @@
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
 				<label for="referance_id" class="col-sm-2 control-label"> Select Staff* </label>
 				<div class="col-sm-4">
-					<select id="referance_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
+					<select id="refferance_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
 						<option value="">Select Staff</option>
 						<option value="1">1</option>
 					</select>
@@ -180,14 +180,14 @@
 <form name="staffpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="staffpaymentForm.$valid" ng-if="modalOptions.staffpayment.type=='staff_credit'"> 
 			<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
-				<label for="referance_id" class="col-sm-2 control-label"> Select Staff* </label>
+				<label for="refferance_id" class="col-sm-2 control-label"> Select Staff* </label>
 				<div class="col-sm-4">
-					<select id="referance_id" class="form-control" ng-model="modalOptions.stafpayment.referance_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
+					<select id="refferance_id" class="form-control" ng-model="modalOptions.staffpayment.refferance_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
 						<option value="">Select Staff</option>
 						<option value="1">1</option>
 					</select>
-					<span class="help-block" ng-show="staffpaymentForm.referance_id.$dirty && staffpaymentForm.referance_id.$invalid">
-					<span ng-show="staffpaymentForm.referance_id.$error.required" class="text-danger">user name is required.</span>
+					<span class="help-block" ng-show="staffpaymentForm.refferance_id.$dirty && staffpaymentForm.refferance_id.$invalid">
+					<span ng-show="staffpaymentForm.refferance_id.$error.required" class="text-danger">user name is required.</span>
 					</span>	
 				</div>
 			</div>
