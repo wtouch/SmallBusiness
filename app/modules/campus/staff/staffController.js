@@ -16,11 +16,11 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";	
-		
+		/* 
 		$http.get("modules/campus/config.json").success(function(response){
 			console.log(response);
 				$scope.staffConfig = response;
-			}) 
+			})  */
 			
 		$scope.staffParams = {
 			where : {
@@ -51,8 +51,11 @@ define(['app'], function (app) {
 			var modalOptions ={
 				addstaff:(data)?{
 					id:data.id,
-					name:data.name
-				}:{},
+					name:data.name,
+					particulars:data.particulars
+				}:{
+					user_id:$rootScope.userDetails.id
+				},
 				postData : function(table, input){
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
@@ -67,6 +70,13 @@ define(['app'], function (app) {
 						modalOptions.formPart = formPart;
 					},
 					getData : $scope.getData,
+					addToObject : function(object,data,modalOptions){
+						console.log(object,data,modalOptions);
+					$rootScope.addToObject(object,modalOptions[data]);
+					modalOptions[data] = {};
+				},
+				
+				removeObject : $rootScope.removeObject,
 					
 	 };
 	 modalService.showModal(modalDefault, modalOptions).then(function(){

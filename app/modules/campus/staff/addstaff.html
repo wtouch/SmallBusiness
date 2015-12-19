@@ -2,15 +2,20 @@
 	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 	<h3 class="text-center">Add Staff</h3>
 </div>
-	<ul class="nav nav-tabs">			
+<div class="modal-body">
+<ul class="nav nav-tabs">			
 		<li role="presentation" ng-class="{active: modalOptions.formPart=='personalDetails'}">
 			<a ng-click="modalOptions.showFormPart('personalDetails', modalOptions)">Personal Details</a>
 		</li>	
+		<li role="presentation" ng-class="{active: modalOptions.formPart=='educationalDetails'}">
+			<a ng-click="modalOptions.showFormPart('educationalDetails', modalOptions)">Educational Details</a>
+		</li>
 	</ul>
-<div class="modal-body">
 <form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
 		<ng-include  ng-show="modalOptions.formPart=='personalDetails'" src="'modules/campus/staff/personalDetails.html'">
 		</ng-include> 
+		<ng-include  ng-show="modalOptions.formPart=='educationalDetails'" src="'modules/campus/staff/educationalDetails.html'">
+		</ng-include>
 </form>
 </div>
 
