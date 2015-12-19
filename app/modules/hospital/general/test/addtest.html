@@ -3,7 +3,7 @@
 	<h3  ng-if="!modalOptions.addtest.id" class="text-center">Add Test</h3>
 	<h3  ng-if="modalOptions.addtest.id" class="text-center">Edit Test</h3>
 	</div>
-<div class="modal-body">
+<div class="modal-body">{{modalOptions.addtest}}
 	<form class="form-horizontal" name="addtestForm" role="form" ng-submit="addtestForm.$valid" novalidate="novalidate"><!--{{modalOptions.addpatient}}-->	 
 		<div class="form-group">
 			 <label  for="test_date" class="col-sm-2 control-label">Date * </label>
@@ -56,7 +56,7 @@
 		<div class="col-sm-offset-3 col-sm-9">
 			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addtest.id"  ng-click="modalOptions.postData('test',modalOptions.addtest);modalOptions.ok()">Add Test</button>
 			
-			<button type="submit" ng-if="modalOptions.addtest.id" class="btn btn-success" ng-disabled="addcomplaintForm.$invalid" ng-click="modalOptions.updateData('test',modalOptions.addtest,modalOptions.addtest.id);modalOptions.ok()">Update Test</button>
+			<button type="submit" ng-if="modalOptions.addtest.id" class="btn btn-success" ng-disabled="addtestForm.$invalid" ng-click="modalOptions.updateData('test',modalOptions.addtest,modalOptions.addtest.id);modalOptions.ok()">Update Test</button>
 			
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 		</div>
