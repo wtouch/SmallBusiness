@@ -23,7 +23,7 @@ define(['app'], function (app) {
 				SubTitle :"Add Equipment",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/hospital/general_entities/addequipment.html");
+						return $scope.openModal("modules/hospital/general/equipment/addequipment.html");
 					}
 				}
 			},{
@@ -38,38 +38,29 @@ define(['app'], function (app) {
 			enableFiltering: true,
 			columnDefs: [
 				{
-					name:'SrNo',width:50,
+					name:'Sr.No',width:50,
 					enableSorting: false,
 					enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
 					
 				},
 				{
-				    name:'equipment_name',
+				    name:'equipment name',
 					filterHeaderTemplate: '<input id="equipment_name" class="form-control" ng-change="grid.appScope.filter(\'equipment_name\', equipment_name, \'equipment\', \'equipment\', true, grid.appScope.equipmentParams)" ng-model="equipment_name" placeholder="search">',
                 },
 				{
-					name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="email" placeholder="search">'
+					name:'description',
+					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="description" placeholder="search">'
                 },
 				{
-					name:'phone',
-					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="phone" placeholder="search">'
+					name:'quantity',
+					filterHeaderTemplate: '<input id="phone" class="form-control"  ng-model="phone" placeholder="search">'
                 },
 				{
-				    name:'DOB',
-				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="city" placeholder="search">', 
+				    name:'price',
+				    filterHeaderTemplate: '<input id="price" class="form-control"  ng-model="price" >', 
                 },
-			   {
-				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="address" placeholder="search">',
-                },
-				
-				{
-				    name:'type',width:85,
-					enableSorting: false,
-					enableFiltering: false,
-                },
+			
 				
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="status">'
@@ -83,10 +74,10 @@ define(['app'], function (app) {
 					  ]
 					} ,
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general_entities/addequipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit equipment" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/addequipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit equipment" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					
-					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general_entities/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			]
@@ -101,25 +92,14 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
-				adduser : (data) ? {
-					id : data.id,
-					name : data.name,
-					email : data.email,
-					phone: data.phone,
-					address: data.address,
-					location: data.location,
-					area: data.area,
-					city: data.city,
-					state: data.state,
-					country: data.country,
-					pincode: data.pincode,
-					date : data.date,
-					partydate:data.partydate,
-					type: data.type,
-					department: data.department,
+				addeuipment : (data) ? {
+				
+			
+			
+			
 			} : {
 					date : dataService.sqlDateFormate(),
-					partydate: dataService.sqlDateFormate()
+					
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -154,7 +134,7 @@ define(['app'], function (app) {
 			$scope.params = (params) ? params : {
 				where : {
 					user_id : $rootScope.userDetails.id,
-					type : ($routeParams.equipment == "vendor") ? "vendor" : "client"
+					
 				},
 				cols : ["*"]
 			};

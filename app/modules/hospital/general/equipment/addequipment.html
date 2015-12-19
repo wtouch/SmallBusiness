@@ -1,24 +1,82 @@
-
-	<div class="modal-header">
+<div class="modal-header">
 		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3  ng-if="!modalOptions.addequipment.id" class="text-center">Add New Equipment</h3>
 	<h3  ng-if="modalOptions.addequipment.id" class="text-center">Edit Equipment</h3>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal" name="addequipmentForm" role="form" ng-submit="addequipmentForm.$valid" novalidate="novalidate"><!--{{modalOptions.addpatient}}-->	 
+		<div class="form-group">
+			 <label  for="equipment_date" class="col-sm-2 control-label">Date * </label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control ng-valid-date" placeholder="Date" id="equipment_date" name="equipment_date" ng-model="modalOptions.addequipment.equipment_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened">
+				</div>
+		</div>		
+		<div class="form-group">
+			<label for="equipment_name" class="col-sm-2 control-label">Equipment Name *</label>
+			<div class="col-sm-9">					
+				<input type="text" id="equipment_name" class="form-control" name="equipment_name" placeholder="Equipment Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addequipment.equipment_name"required>
+				 <span class="text-danger"  ng-show="addequipmentForm.equipment_name.$error.pattern">please Enter Valid Name</span>
+				<span class="help-block" ng-show="addequipmentForm.equipment_name.$dirty && addequipmentForm.equipment_name.$invalid">
+					<span class="text-danger" ng-show="addequipmentForm.equipment_name.$error.required">Name is required.</span>
+				</span>
+			</div>
+		</div>	
+		<div class="form-group">
+			<label for="quantity" class="col-sm-2 control-label">Quantity</label>
+			<div class="col-sm-4">
+				<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.addequipment.quantity" placeholder="Enter Your quantity" ng-pattern="/^\d{0,9}[0-9]$/" required>
+				<span class="text-danger"  ng-show="addequipmentForm.quantity.$error.pattern">please Enter Valid quantity</span>
+				<span class="help-block" ng-show="addequipmentForm.quantity.$dirty && addequipmentForm.quantity.$invalid">
+					<span ng-show="addequipmentForm.quantity.$error.required"class="text-danger">Quantity is required.</span>
+				</span>				
+			</div>	
+			<label for="price" class="col-sm-1 control-label">Price*</label>
+			<div class="col-sm-4">
+			<input type="text" id="price" name="price" class="form-control" ng-model="modalOptions.addequipment.price" placeholder="Enter price"ng-pattern="/^\d{0,9}[0-9]$/"required>
+			<span class="text-danger"  ng-show="addequipmentForm.price.$error.pattern">please Enter Valid price</span>
+				<span class="help-block" ng-show="addequipmentForm.price.$dirty && addequipmentForm.price.$invalid">
+					<span ng-show="addequipmentForm.price.$error.required" class="text-danger">price is required.</span>
+				</span>				
+			</div>
+		</div>
+		<div class="form-group">
+		<label for="unit" class="col-sm-2 control-label">Unit</label>
+			<div class="col-sm-4">
+				<input type="text" required name="unit" class="form-control" id="unit" ng-model="modalOptions.addequipment.unit" placeholder="Enter Your unit" ng-pattern="/^\d{0,9}[0-9]$/" required>
+				<span class="text-danger"  ng-show="addequipmentForm.unit.$error.pattern">please Enter Valid unit</span>
+				<span class="help-block" ng-show="addequipmentForm.unit.$dirty && addequipmentForm.unit.$invalid">
+					<span ng-show="addequipmentForm.unit.$error.required"class="text-danger">unit is required.</span>
+				</span>				
+			</div>	
+			<label for="equipment_charges" class="col-sm-1 control-label">Charges</label>
+			<div class="col-sm-4">
+				<input type="text" required name="equipment_charges" class="form-control" id="equipment_charges" ng-model="modalOptions.addequipment.equipment_charges" placeholder="Enter Your equipment_charges" ng-pattern="/^\d{0,9}[0-9]$/" required>
+				<span class="text-danger"  ng-show="addequipmentForm.equipment_charges.$error.pattern">please Enter Valid equipment_charges</span>
+				<span class="help-block" ng-show="addequipmentForm.equipment_charges.$dirty && addequipmentForm.equipment_charges.$invalid">
+					<span ng-show="addequipmentForm.equipment_charges.$error.required"class="text-danger">equipment charges is required.</span>
+				</span>				
+			</div>	
+		</div>
+		<div class="form-group">
+			<label for="equipment_description" class="col-sm-2 control-label">Description</label>
+				<div class="col-sm-9">
+					<textarea  type="text" required name="equipment_description" class="form-control" id="equipment_description" ng-model="modalOptions.addequipment.equipment_description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+					<span class="help-block" ng-show="addequipmentForm.equipment_description.$dirty && addequipmentForm.equipment_description.$invalid">
+						<span ng-show="addequipmentForm.equipment_description.$error.required"class="text-danger">Description is required.</span>
+					</span>			
+				</div>
+		</div>
+	</form>
+</div>
+	<div class="modal-footer" >
+		<div class="col-sm-offset-3 col-sm-9">
+			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addequipment.id"  ng-click="modalOptions.postData('equipment',modalOptions.addequipment);modalOptions.ok()">Add Equipment</button>
+			
+			<button type="submit" ng-if="modalOptions.addequipment.id" class="btn btn-success" ng-disabled="addmedicineForm.$invalid" ng-click="modalOptions.updateData('medicine',modalOptions.addequipment,modalOptions.addequipment.id);modalOptions.ok()">Update Equipment</button>
+			
+			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+		</div>
 	</div>
-	<div class="modal-body">
-		<form class="form-horizontal" name="addequipmentForm" role="form" ng-submit="addequipmentForm.$valid" novalidate="novalidate"><!--{{modalOptions.addpatient}}-->	 
-			<ul class="nav nav-tabs">
-				<li role="presentation" ng-class="{active: modalOptions.formPart=='equipmentDetails'}">
-					<a ng-click="modalOptions.showFormPart('equipmentDetails', modalOptions)">Equipment Details</a>
-				</li>	
-				<li role="presentation" ng-class="{active: modalOptions.formPart=='patientHistory'}">
-					<a ng-click="modalOptions.showFormPart('equipmentHistory', modalOptions)">Equipment History</a>
-				</li>
-			</ul>
-			<ng-include  ng-show="modalOptions.formPart=='patientDetails'" 	src="'modules/hospital/patient/patientDetails.html'">
-			</ng-include> 
-			<ng-include  ng-show="modalOptions.formPart=='patientHistory'" src="'modules/hospital/patient/patientHistory.html'">
-			</ng-include> 						
-		</form>
-	</div>
+
 
 

@@ -71,10 +71,10 @@ define(['app'], function (app) {
 					  ]
 					} ,
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/addmedicine.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit medicine" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/medicine/addmedicine.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit medicine" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					
-					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/medicineview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  medicine" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/medicine/medicineview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  medicine" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			]
@@ -88,6 +88,12 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			var modalOptions = {
+				date : $scope.currentDate,
+				addmedicine : (data) ? {
+						} : {
+					date : dataService.sqlDateFormate(),
+					
+				},
 			
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -116,7 +122,13 @@ define(['app'], function (app) {
 			})
 			
 		}
-		
+			$scope.medicineParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			cols : ["*"]
+		}
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {

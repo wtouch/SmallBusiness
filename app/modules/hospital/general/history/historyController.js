@@ -10,69 +10,49 @@ define(['app'], function (app) {
 		$scope.type = "year";
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
-		$scope.pageItems = 10;
-		$scope.numPages = "";	
 		$scope.currentPage = 1;
+		$scope.pageItems = 10;
+		$scope.numPages = "";		
+		$scope.currentPage = 1;
+		$scope.pageItems = 10;
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hospital";
-		console.log("This is Equipement Controller");
+		console.log('Hello');
+		
 		$rootScope.moduleMenus = [
 			{
-				name : "Add Equipment",
-				SubTitle :"Add Equipment",
+				name : "Add History",
+				path : "#/dashboard/hospital/general/history",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/hospital/general_entities/addequipment.html");
+						return $scope.openModal("modules/hospital/general/history/addhistory.html");
 					}
 				}
 			},{
-				name : "Equipment List",
-				path : "#/dashboard/hospital/equipment",
-				SubTitle :"Equipment List"
+				name : "history List",
+				path : "#/dashboard/hospital/general/history"
 			}
 		]
-		
-		$scope.equipment = {
+
+		$scope.historyList = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{
-					name:'SrNo',width:50,
-					enableSorting: false,
-					enableFiltering: false, 
-					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
-					
+				{ name:'SrNo', 
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
+			enableFiltering: false,	
 				},
 				{
-				    name:'equipment_name',
-					filterHeaderTemplate: '<input id="equipment_name" class="form-control" ng-change="grid.appScope.filter(\'equipment_name\', equipment_name, \'equipment\', \'equipment\', true, grid.appScope.equipmentParams)" ng-model="equipment_name" placeholder="search">',
-                },
+					name:'history_title',
+					filterHeaderTemplate: '<input id="history_title" class="form-control" ng-change="grid.appScope.filter(\'history_title\', history_title, \'history\', \'historyList\',true, grid.appScope.historyParams)" ng-model="history_title" placeholder="history title">',
+				},
 				{
-					name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="email" placeholder="search">'
-                },
-				{
-					name:'phone',
-					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="phone" placeholder="search">'
-                },
-				{
-				    name:'DOB',
-				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="city" placeholder="search">', 
-                },
-			   {
-				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="address" placeholder="search">',
-                },
-				
-				{
-				    name:'type',width:85,
-					enableSorting: false,
-					enableFiltering: false,
-                },
-				
+					name:'history_description',
+					filterHeaderTemplate: '<input id="history_description" class="form-control" ng-change="grid.appScope.filter(\'history_description\', history_description, \'history\', \'historyList\',true, grid.appScope.historyParams)" ng-model="history_description" placeholder="history_description">',
+				},
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'history\', \'historyList\',false,grid.appScope.historyParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -81,60 +61,79 @@ define(['app'], function (app) {
 					   type: uiGridConstants.filter.SELECT,  
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
-					} ,
-				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general_entities/addequipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit equipment" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					
-					
-					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general_entities/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
-					
+					} , 
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/history/addhistory.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit History Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ 
+					'<a type="button" tooltip="Delete history" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'history\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+ 
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/general/history/historyview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  history" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
 		
-		
-		$scope.openModal = function(url,data){
-			
+		$scope.callbackColChange = function(response){
+			console.log(response);
+			if(response.status == "success"){
+				$scope.getData(false, $scope.currentPage, "history", "historyList", $scope.historyParams);
+			}
+		}
+			$scope.openModal = function(url,data){
 			var modalDefault = {
-				templateUrl: url,	// apply template to modal
+				templateUrl:url,	// apply template to modal
 				size : 'lg'
 			};
 			var modalOptions = {
-				
+				date : $scope.currentDate,
+				history_date:$scope.currentDate,
+				modified_date:$scope.currentDate,
+				date:$scope.currentDate,
+				addhistory : (data) ? {
+					id : data.id,
+					user_id : data.user_id,
+					user_id : $rootScope.userDetails.id,
+					history_title: data.history_title,
+					history_description: data.history_description,
+					history_date:data.history_date,
+					modified_date:data.modified_date,
+					date : data.date,
+				} : {
+					date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,
+					modified_date : dataService.sqlDateFormate(),
+				history_date: dataService.sqlDateFormate()
+				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'equipment','equipment');
+							$scope.getData(false, $scope.currentPage, 'history','historyList');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'equipment','equipment');
+							$scope.getData(false, $scope.currentPage, 'history','historyList');
 						}
 					})
 				},
-				formPart :'',
-				showFormPart : function(formPart,modalOptions){
-					modalOptions.formPart = formPart;
-					
-				},
-				getData : $scope.getData,
+				getData : $scope.getData
 			};
-			
-			modalService.showModal(modalDefault, modalOptions).then(function(){
-				
+			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})
-			
 		}
-		
+		$scope.historyParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			cols : ["*"]
+		}
+	
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id,
-					type : ($routeParams.equipment == "vendor") ? "vendor" : "client"
+					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]
 			};
@@ -171,7 +170,7 @@ define(['app'], function (app) {
 			value = (value) ? value : undefined;
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, params, response);
+				dataService.extendDeep($scope.params, params, response);
 				console.log($scope.params);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
@@ -181,8 +180,8 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
-		
 	 };
+		
 	// Inject controller's dependencies
 	historyController.$inject = injectParams;
 	// Register/apply controller dynamically
