@@ -57,29 +57,27 @@
 </div>
 
 <div class="table-responsive">
-		<table class="table table-bordered" >
-			<thead>
-				<tr>
-					<th class="col-sm-2">Sr.No.</th>
-					<th class="col-sm-2">Exam Name</th>
-					<th class="col-sm-2">University/College</th>
-					<th>Percentage</th>
-					<th>Year of Passing</th>
-					<th >Remove</th>
-				</tr> 
-			</thead>
-			{{modalOptions.qualification}}
-			<tbody>
-				<tr ng-repeat="x in modalOptions.addstaff.qualification">
-					<td>{{$index + 1}}</td>
-					<td>{{x.exam_name}}</td>
-					<td>{{x.university}}</td>
-					<td>{{x.percentage}}</td>
-					<td>{{x.year}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addstaff.qualification, $index);">X</button></td>
-				</tr>
-			
-				
-			</tbody>
-		</table>
+	<table class="table table-bordered" >
+		<thead>
+			<tr>
+				<th class="col-sm-2">Sr.No.</th>
+				<th class="col-sm-2">Exam Name</th>
+				<th class="col-sm-2">University/College</th>
+				<th>Percentage</th>
+				<th>Year of Passing</th>
+				<th >Remove</th>
+			</tr> 
+		</thead>
+		{{modalOptions.qualification}}
+		<tbody>
+			<tr ng-repeat="x in modalOptions.addstaff.qualification">
+				<td>{{$index + 1}}</td>
+				<td>{{x.exam_name}}</td>
+				<td>{{x.university}}</td>
+				<td>{{x.percentage}}</td>
+				<td>{{x.year}}</td>
+				<td><button ng-click="modalOptions.removeObject(modalOptions.addstaff.qualification, $index);">X</button></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
