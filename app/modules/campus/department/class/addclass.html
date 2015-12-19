@@ -1,0 +1,125 @@
+<div class="modal-header">
+		<button type="button" class="close" ng-click="modalOptions.ok()">
+		<span aria-hidden="true">&times;</span></button>
+		<h3 class="text-center" ng-if="!modalOptions.addClass.id">Add Class</h3>
+		<h3 class="text-center" ng-if="modalOptions.addClass.id">Update Class</h3>
+	</div>
+	<div class="modal-body">
+	<form name="addClassForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addDivisionForm.$valid">
+		
+			<input type="hidden" class="form-control" ng-model="modalOptions.addClass.user_id" ng-init="modalOptions.addClass.user_id = userDetails.id" readonly/>
+			<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.addClass.modified_date" ng-init="modalOptions.addClass.modified_date = modalOptions.date"/>
+			<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.addClass.date" ng-init="modalOptions.addClass.date = modalOptions.date"/>
+			
+			<div class="form-group" ng-init="modalOptions.getData( false, false,'department', 'departmentList', false, modalOptions)">
+				<label for="dept_id" class="col-sm-2 control-label">Department Name </label>
+				<div class="col-sm-9">
+					<select id="dept_id" class="form-control" ng-model="modalOptions.addClass.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList" required>
+						<option value="">Select Department</option>
+					</select>
+					<span class="help-block" ng-show="addClassForm.dept_id.$dirty && addClassForm.dept_id.$invalid">
+					<span ng-show="addClassForm.dept_id.$error.required" class="text-danger">Department name is required.</span>
+					</span>	
+				</div>
+			</div>
+			<div class="form-group" ng-if="modalOptions.addClassForm.dept_id">
+				<label for="class_name" class="col-sm-2 control-label">Class Name </label>
+				<div class="col-sm-9">
+					<input type="text" id="class_name" class="form-control"  ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addClass.class_name" name="class_name" placeholder="Name" required />
+					<span class="help-block" ng-show="addClassForm.class_name.$dirty && addClassForm.class_name.$invalid">
+					<span class="text-danger"  ng-show="addClassForm.class_name.$error.pattern">Please Enter Valid Name</span>
+					<span ng-show="(addClassForm.class_name.$dirty)" class="text-danger">Please Enter Name only!</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="minimum_criteria" class="col-sm-2 control-label">Minimum Criteria</label>
+				<div class="col-sm-9">
+					<input type="text" id="minimum_criteria" class="form-control"  ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/"  ng-model="modalOptions.addClass.minimum_criteria" name="minimum_criteria" placeholder="Criteria" required />
+						<span class="help-block" ng-show="addClassForm.minimum_criteria.$dirty && addClassForm.minimum_criteria.$invalid">
+						<span ng-show="addClassForm.minimum_criteria.$error.required" class="text-danger">Required Field</span>
+						<span ng-show="addClassForm.minimum_criteria.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+						</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="strength" class="col-sm-2 control-label">Strength</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control " placeholder="strength" id="strength" name="strength" ng-model="modalOptions.singleparticular.strength" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" 
+					required/>
+					
+					<span class="help-block" ng-show="addClassForm.strength.$dirty && addClassForm.strength.$invalid">
+					<span ng-show="addClassForm.strength.$error.required" class="text-danger">Strength Required</span>
+					<span ng-show="addClassForm.strength.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+					</span>
+				</div>
+			</div>
+	</form>	
+		<div class="row">
+			<div class="col-sm-12 ">
+			
+				<form name="addCastForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addCastForm.$valid" id="addCastForm">
+					<div class="table-responsive">
+						<table class="table table-bordered" >
+							<thead>
+								<tr>
+									<th>cast Name</th>
+									<th>percentage</th>
+									<th>reservation</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input type="text" class="form-control " placeholder="cast Name" id="cast_name" name="cast_name" ng-model="modalOptions.castdistribution.cast_name" required/>
+										<span class="help-block" ng-show="addCastForm.cast_name.$dirty && addCastForm.cast_name.$invalid">
+										<span ng-show="addCastForm.cast_name.$error.required" class="text-danger">cast_name Required.</span>
+										</span>
+									</td>
+									<td>
+										<input type="text" class="form-control " placeholder="percentage" id="percentage" name="percentage" ng-model="modalOptions.castdistribution.percentage"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
+										<span class="help-block" ng-show="addCastForm.percentage.$dirty && addCastForm.percentage.$invalid">
+										<span ng-show="addCastForm.percentage.$error.required" class="text-danger">percentage Required.</span>
+										<span ng-show="addCastForm.percentage.$error.pattern" class="text-danger">Enter like % only</span>
+										</span>
+									</td>	
+									<td>
+										<input type="text" class="form-control " placeholder="reservation" id="reservation" name="reservation" ng-model="modalOptions.castdistribution.reservation"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
+										<span class="help-block" ng-show="addCastForm.reservation.$dirty && addCastForm.reservation.$invalid">
+										<span ng-show="addCastForm.reservation.$error.required" class="text-danger">reservation Required.</span>
+										<span ng-show="addCastForm.reservation.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-4">
+							<button type="submit" class="btn btn-success center" ng-disabled="addCastForm.$invalid">+Add Cast</button>							
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="table-responsive col-sm-12">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>cast Name</th>
+							<th>percentage</th>
+							<th>reservation</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+	<button type="submit"  class="btn btn-success" ng-if="modalOptions.addClass.id"  ng-disabled="addClass.$invalid" ng-click="modalOptions.updateData('class',modalOptions.addClass,modalOptions.addClass.id); modalOptions.ok()">Update Class</button>
+
+	<button type="submit"  class="btn btn-success" ng-if="!modalOptions.addclass.id" ng-disabled="addClassForm.$invalid" ng-click="modalOptions.postData('class',modalOptions.addClass); modalOptions.ok()">Add Class</button>
+	
+	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
+	</div>	

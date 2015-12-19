@@ -17,10 +17,10 @@
 				<label for="dept_id" class="col-sm-2 control-label">Department Name </label>
 				<div class="col-sm-9">
 					<select id="dept_id" class="form-control" ng-model="modalOptions.addDivision.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList" required>
-						<option value="">Select Division</option>
+						<option value="">Select Department</option>
 					</select>
 					<span class="help-block" ng-show="addDivisionForm.dept_id.$dirty && addDivisionForm.dept_id.$invalid">
-					<span ng-show="addDivisionForm.dept_id.$error.required" class="text-danger">user id is required.</span>
+					<span ng-show="addDivisionForm.dept_id.$error.required" class="text-danger">Department name is required.</span>
 					</span>	
 				</div>
 			</div>
@@ -28,18 +28,20 @@
 				<label for="class_id" class="col-sm-2 control-label">Class Name </label>
 				<div class="col-sm-9">
 					<select id="class_id" class="form-control" ng-model="modalOptions.addDivision.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList" required>
-						<option value="">Select Division</option>
+						<option value="">Select Class</option>
 					</select>
 					<span class="help-block" ng-show="addDivisionForm.class_id.$dirty && addDivisionForm.class_id.$invalid">
-					<span ng-show="addDivisionForm.dept_id.$error.required" class="text-danger">user id is required.</span>
+					<span ng-show="addDivisionForm.class_id.$error.required" class="text-danger">class name is required.</span>
 					</span>	
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="division_name" class="col-sm-2 control-label"> H.O.D </label>
+				<label for="division_name" class="col-sm-2 control-label"> Division Name </label>
 				<div class="col-sm-9">
 					<input type="text" id="division_name" class="form-control"  ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addDivision.division_name" name="division_name" placeholder="Name" required />
-					<span class="help-block" ng-show="addDepartmentForm.division_name.$dirty && addDivisionForm.division_name.$invalid">
+					
+					
+					<span class="help-block" ng-show="addDivisionForm.division_name.$dirty && addDivisionForm.division_name.$invalid">
 					 <span class="text-danger"  ng-show="addDivisionForm.division_name.$error.pattern">Please Enter Valid Name</span>
 					<span ng-show="(addDivisionForm.division_name.$dirty)" class="text-danger">Please Enter Name only!</span>
 					</span>
@@ -53,7 +55,7 @@
 					<span>Submit</span>
 				</button>
 				
-				<button type="submit" ng-if="modalOptions.adddivision.id" class="btn btn-success" ng-disabled="adddivisionForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('division',modalOptions.adddivision, modalOptions.adddivision.id)">
+				<button type="submit" ng-if="modalOptions.addDivision.id" class="btn btn-success" ng-disabled="addDivisionForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('division',modalOptions.addDivision, modalOptions.addDivision.id)">
 					<span>Update</span>
 				</button> 
 				<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>

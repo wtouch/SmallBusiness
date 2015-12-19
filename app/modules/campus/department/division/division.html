@@ -1,11 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="main-content">
-			<div class="row">
-				<div class="col-sm-2">
-					<h3>Division</h3>
-				</div>
-			</div>
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>
 			 <div class="row">
 				 <div class="col-sm-2">
 					<div class="bottomspace">
@@ -16,8 +12,8 @@
 					</div>
 				</div>
 			</div> 
-			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'division','divisionList',divParams);">
-			  <div ui-grid="departmentList"></div>
+			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'division','divisionList',divParams);getData(false,false,'department','departmentList',deptParams);getData(false,false,'class','classList',classParams)">
+			  <div ui-grid="divisionList"></div>
 			 </div>
 			<div class="text-center">				
 				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'division','divisionList',divParams);"></pagination>

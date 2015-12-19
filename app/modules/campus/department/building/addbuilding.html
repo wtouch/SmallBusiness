@@ -1,0 +1,53 @@
+<div class="main-content">
+
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="modalOptions.ok()">
+		<span aria-hidden="true">&times;</span></button>
+		<h3 class="text-center" ng-if="!modalOptions.addBuilding.id">Add Department</h3>
+		<h3 class="text-center" ng-if="modalOptions.addBuilding.id">Update Department</h3>
+	</div>
+	
+	<div class="modal-body">
+		<form name="addBuildingForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addDepartmentForm.$valid">
+		
+			<input type="hidden" class="form-control" ng-model="modalOptions.addBuilding.user_id" ng-init="modalOptions.addBuilding.user_id = userDetails.id" readonly/>
+			<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.addBuilding.modified_date" ng-init="modalOptions.addBuilding.modified_date = modalOptions.date"/>
+			<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.addBuilding.date" ng-init="modalOptions.addBuilding.date = modalOptions.date"/>
+			
+			<div class="form-group">
+				<label for="build_name" class="col-sm-2 control-label"> Building Name </label>
+				<div class="col-sm-9">
+					<input type="text" id="build_name" class="form-control"  ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addBuilding.build_name" name="build_name" placeholder="Name" required />
+					<span class="help-block" ng-show="addBuildingForm.build_name.$dirty && addBuildingForm.build_name.$invalid">
+					 <span class="text-danger"  ng-show="addBuildingForm.build_name.$error.pattern">Please Enter Valid Name</span>
+					<span ng-show="(addBuildingForm.build_name.$dirty)" class="text-danger">Please Enter Name only!</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="floor_no" class="col-sm-2 control-label">Floor No </label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control " placeholder="Floor NO" id="floor_no" name="floor_no" ng-model="modalOptions.addBuilding.floor_no" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,2}){0,1}$/" required/>
+									
+					<span class="help-block" ng-show="addBuildingForm.floor_no.$dirty && addBuildingForm.floor_no.$invalid">
+					<span ng-show="addBuildingForm.floor_no.$error.required" class="text-danger">Required Field</span>
+					<span ng-show="addBuildingForm.floor_no.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+					</span>
+				</div>
+			</div>
+		
+	</div>
+	<div class="modal-footer">
+		<div class="col-sm-offset-2 col-sm-9">
+			<button type="submit" ng-if="!modalOptions.addBuilding.id" class="btn btn-success" ng-disabled="addBuildingForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('building',modalOptions.addBuilding)">
+				<span>Submit</span>
+			</button>
+			
+			<button type="submit" ng-if="modalOptions.addBuilding.id" class="btn btn-success" ng-disabled="addBuildingForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('building',modalOptions.addBuilding, modalOptions.addBuilding.id)">
+				<span>Update</span>
+			</button> 
+			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+		</div>
+	</div>
+	</form>
+</div>

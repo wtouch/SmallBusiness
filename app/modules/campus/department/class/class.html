@@ -1,0 +1,24 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="main-content">
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>
+			 <div class="row">
+				 <div class="col-sm-2">
+					<div class="bottomspace">
+						<label for="page_item" class="control-label" >Page Item</label>
+						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'class', 'classList', classParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
+						</select>
+					</div>
+				</div>
+			</div> 
+			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'class','classList',classParams);getData(false,false,'department','departmentList',deptParams);">
+			  <div ui-grid="classList"></div>
+			 </div>
+			<div class="text-center">				
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'class','classList',classParams;"></pagination>
+				<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			</div>
+		</div>
+	</div>
+</div>
