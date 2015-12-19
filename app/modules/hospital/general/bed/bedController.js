@@ -44,6 +44,11 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
 				},
+				{ name:'ward_name',enableSorting: false ,
+				filterHeaderTemplate: '<select id="ward_name" class="form-control" ng-change="grid.appScope.filter(\'ward_id\', ward_id, \'bed\', \'bedList\',true, grid.appScope.bedParams)" ng-model="ward_id" ng-options="item.ward_id as item.ward_name for item in grid.appScope.wardList">' 
+							+'<option value="">Select Ward name</option>'
+						+'</select>',
+				},
 				{
 					name:'bed_number',
 					filterHeaderTemplate: '<input id="bed_number" class="form-control" ng-change="grid.appScope.filter(\'bed_number\', bed_number, \'bed\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_number" placeholder="bed_number">',
@@ -83,12 +88,14 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
+				wardParams : $scope.wardParams,
 				bed_date:$scope.currentDate,
 				modified_date:$scope.currentDate,
 				date:$scope.currentDate,
 				bed : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
+					ward_id:data.ward_id,
 					user_id : $rootScope.userDetails.id,
 					bed_number: data.bed_number,
 					bed_description: data.bed_description,
@@ -106,14 +113,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'bed','bedList');
+							$scope.getData(false, $scope.currentPage, 'bed','bedList',$scope.bedParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'bed','bedList');
+							$scope.getData(false, $scope.currentPage, 'bed','bedList',$scope.bedParams);
 						}
 					})
 				},
@@ -129,7 +136,6 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
-	
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {

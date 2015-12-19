@@ -5,10 +5,21 @@
 		<h3 class="text-center" ng-if="modalOptions.bed.id">Update bed</h3>
 	</div>
 	<div class="modal-body">
-		<form name="addbedForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbedForm.$valid">
-				<div class="form-group">
-					<label  for="bed_room" class="col-sm-2 control-label">Room Number</label>
-						<div class="col-sm-9">
+		<form name="addbedForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbedForm.$valid">{{wardList}}
+				<div class="form-group" ng-init="modalOptions.getData(false,false,'ward','wardList',params,modalOptions)">
+					<label for="ward_name" class="col-sm-2 control-label"> Select By Ward name</label>
+					<div class="col-sm-8">
+					<select id="ward_id" class="form-control" ng-model="modalOptions.bed.ward_id" ng-options="item.id as item.ward_name for item in modalOptions.wardList" required>
+					<option value="">Select Party</option>
+					</select>
+					<span class="help-block" ng-show="addbedForm.user_id.$dirty && addbedForm.user_id.$invalid">
+						<span ng-show="addbedForm.user_id.$error.required" class="text-danger">user id is required.</span>
+						</span>	
+					</div>
+				</div>
+				<div class="form-group"> 
+					<label  for="bed_room" class="col-sm-2 control-label">Room Number / Name</label>
+						<div class="col-sm-8">
 							<input type="text" id="bed_room" class="form-control"  ng-model="modalOptions.bed.bed_room" name="bed_room" placeholder="Room number" required />
 							<span class="help-block" ng-show="addbedForm.bed_room.$dirty && addbedForm.bed_room.$invalid">
 								<span ng-show="(addbedForm.bed_room.$dirty)" class="text-danger">Enter  bed Name Only!</span>
@@ -17,40 +28,54 @@
 				</div>
 				<div class="form-group">
 					<label  for="bed_number" class="col-sm-2 control-label">Bed number</label>
-						<div class="col-sm-9">
-							<input type="text" id="bed_number" class="form-control"  ng-model="modalOptions.bed.bed_number" name="bed_number" placeholder="bed_number"required />
+						<div class="col-sm-8">
+							<input type="text" id="bed_number" class="form-control"  ng-model="modalOptions.bed.bed_number"ng-pattern="/^\d{0,9}[0-9]$/" name="bed_number" placeholder="bed_number"required />
 							<span class="help-block" ng-show="addbedForm.bed_number.$dirty && addbedForm.bed_number.$invalid">
-								<span ng-show="(addbedForm.bed_number.$dirty)" class="text-danger">Enter  bed Name Only!</span>
+								<span ng-show="(addbedForm.bed_number.$dirty)" class="text-danger">Enter  be number Only!</span>
+								<span ng-show="(addbedForm.bed_number.$dirty)" class="text-danger">Enter Number Only!</span>
 							</span>
 						</div>						
 				</div>
 				<div class="form-group">
-					<label  for="bed_description" class="col-sm-2 control-label">Bed description</label>
-						<div class="col-sm-9">
-							<textarea  id="bed_description" class="form-control" ng-model="modalOptions.bed.bed_description" name="bed_description" placeholder="bed_description" required />
-							<span class="help-block" ng-show="addbedForm.bed_description.$dirty && addbedForm.bed_description.$invalid"></textarea>
-								<span ng-show="(addbedForm.bed_description.$dirty)" class="text-danger">Enter description!</span>
-							</span>
-						</div>						
+				<label for="bed_description" class="col-sm-2 control-label">bed description*</label>
+					<div class="col-sm-8">
+						<textarea  class="form-control" id="bed_description" ng-model="modalOptions.bed.bed_description" name="bed_description" placeholder="Enter bed description"  ng-maxlength="250" required></textarea>
+						<span class="text-danger"  ng-show="addbedForm.bed_description.$error.pattern">please Enter Valid bed description</span>
+						<span ng-hide="addbedForm.bed_description.$error.maxlength">{{ 250 - modalOptions.bed.bed_description.length + " Chars left"}}</span>
+						<span class="help-block" ng-show="addbedForm.bed_description.$dirty &&  addbedForm.bed_description.$invalid">
+							<span class="text-danger" ng-show="addbedForm.bed_description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+							<span class="text-danger" ng-show="addbedForm.bed_description.$error.required">Description is required.</span>
+						</span>
+					</div>
 				</div>
 				<div class="form-group">
 					<label  for="bed_charges" class="col-sm-2 control-label">bed charges</label>
-						<div class="col-sm-9">
-							<input  id="bed_charges" class="form-control" ng-model="modalOptions.bed.bed_charges" name="bed_charges" placeholder="bed_charges" required />
+						<div class="col-sm-8">
+							<input  id="bed_charges" class="form-control" ng-model="modalOptions.bed.bed_charges" ng-pattern="/^\d{0,9}[0-9]$/" name="bed_charges" placeholder="bed_charges" required />
 							<span class="help-block" ng-show="addbedForm.bed_charges.$dirty && addbedForm.bed_charges.$invalid"></textarea>
 								<span ng-show="(addbedForm.bed_charges.$dirty)" class="text-danger">Enter bed charges</span>
 							</span>
 						</div>						
+				</div>		
+				<div class="form-group">
+					<label for="bed_status" class="col-sm-2 control-label">Bed Status</label>	
+					<div class="col-sm-3">
+						<label class="radio-inline">
+							<input type="radio" name="bed_status" id="1" value="Available" ng-model="modalOptions.bed.bed_status" ng-init="modalOptions.bed.bed_status ='Available'">Available
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="bed_status" id="0" value="not available"  ng-model="modalOptions.bed.bed_status" >Not Available
+						</label>
+					</div>
 				</div>
 				<div class="form-group">
-				 <label  for="date" class="col-sm-2 control-label">Date * </label>
-					<div class="col-sm-9">
-						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder=" Bill Date" id="bed_date" name="bed_date" ng-model="modalOptions.bed.bed_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.bed.bed_date = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
+				 <label  for="date" class="col-sm-2 control-label">Date* </label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" placeholder=" Bed Date" id="bed_date" name="bed_date" ng-model="modalOptions.bed.bed_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.bed.bed_date = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
 					</div>
 				</div> 
 				<div class="form-group modal-footer">
 					<div class="col-sm-offset-2 col-sm-9">
-						
 						<button type="submit" ng-if="!modalOptions.bed.id" class="btn btn-success" ng-disabled="addbedForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('bed',modalOptions.bed)">
 							<span>Submit</span>
 						</button>
@@ -62,6 +87,5 @@
 					</div>
 				</div>
 		</form>
-		</div>
-</div>
+	</div>
 

@@ -8,7 +8,7 @@
 		<form name="addwardForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addwardForm.$valid">
 				<div class="form-group">
 					<label  for="ward_name" class="col-sm-2 control-label">Ward name</label>
-						<div class="col-sm-9">
+						<div class="col-sm-8">
 							<input type="text" id="ward_name" class="form-control"  ng-model="modalOptions.ward.ward_name" name="ward_name" placeholder="ward_name" required />
 							<span class="help-block" ng-show="addwardForm.ward_name.$dirty && addwardForm.ward_name.$invalid">
 								<span ng-show="(addwardForm.ward_name.$dirty)" class="text-danger">Enter  Ward Name Only!</span>
@@ -16,17 +16,20 @@
 						</div>						
 				</div>
 				<div class="form-group">
-					<label  for="ward_description" class="col-sm-2 control-label">Ward description</label>
-						<div class="col-sm-9">
-							<textarea  id="ward_description" class="form-control" ng-model="modalOptions.ward.ward_description" name="ward_description" placeholder="ward_description" required />
-							<span class="help-block" ng-show="addwardForm.ward_description.$dirty && addwardForm.ward_description.$invalid"></textarea>
-								<span ng-show="(addwardForm.ward_description.$dirty)" class="text-danger">Enter description!</span>
-							</span>
-						</div>						
+				<label for="ward_description" class="col-sm-2 control-label">Ward description*</label>
+					<div class="col-sm-8">
+						<textarea  class="form-control" id="ward_description" ng-model="modalOptions.ward.ward_description" name="ward_description" placeholder="Enter ward description"  ng-maxlength="250" required></textarea>
+						<span class="text-danger"  ng-show="addwardForm.ward_description.$error.pattern">please Enter Valid ward description</span>
+						<span ng-hide="addwardForm.ward_description.$error.maxlength">{{ 250 - modalOptions.ward.ward_description.length + " Chars left"}}</span>
+						<span class="help-block" ng-show="addwardForm.ward_description.$dirty &&  addwardForm.ward_description.$invalid">
+							<span class="text-danger" ng-show="addwardForm.ward_description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+							<span class="text-danger" ng-show="addwardForm.ward_description.$error.required">Address is required.</span>
+						</span>
+					</div>
 				</div>
 				<div class="form-group">
 				 <label  for="date" class="col-sm-2 control-label">Date * </label>
-					<div class="col-sm-9">
+					<div class="col-sm-8">
 						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder=" Bill Date" id="ward_date" name="ward_date" ng-model="modalOptions.ward.ward_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.ward.ward_date = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
 					</div>
 				</div> 
