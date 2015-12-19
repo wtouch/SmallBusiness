@@ -4,10 +4,9 @@ define(['app'], function (app) {
     var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
     
     // This is controller for this view
-	var partyController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var vendorController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
-		$scope.invoice = true;
 		$scope.type = "year";
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -16,5 +15,61 @@ define(['app'], function (app) {
 		$scope.currentPage = 1;
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
-		$rootScope.module = "inventory";
+		$rootScope.module = "campus";
+		
+		$scope.vendorParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
+		}
+		
+		$rootScope.moduleMenus = [
+			{
+				name : "Add vendor",
+				SubTitle :"Add vendor",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/campus/vendor/addvendor.html");
+					}
+				}
+			}
+		]
+		
+		$scope.openModal = function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions ={
+				addstaff:(data)?{
+					id:data.id,
+					name:data.name
+				}:{},
+				postData : function(table, input){
+						console.log(table, input);
+						$rootScope.postData(table, input,function(response){
+							if(response.status == "success"){
+								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+							}
+						})
+					},
+					formPart : 'personalDetails',
+					showFormPart : function(formPart, modalOptions){
+						console.log(formPart);
+						modalOptions.formPart = formPart;
+					},
+					getData : $scope.getData,
+					
+	 };
+	 modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+		})
+	}
+	}		
+	// Inject controller's dependencies
+	vendorController.$inject = injectParams;
+	// Register/apply controller dynamically
+    app.register.controller('vendorController', vendorController);
 });
