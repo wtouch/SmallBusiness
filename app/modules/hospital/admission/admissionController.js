@@ -50,20 +50,16 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'patient\', \'patient\', true, grid.appScope.patientParams)" ng-model="patient_name" placeholder="search name">',
                 },
 				{
-					name:'email',width:150,
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="email" placeholder="search">'
+				    name:'patient_id',width:150,
+					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'patient\', \'patient\', true, grid.appScope.patientParams)" ng-model="patient_name" placeholder="search name">',
+                },
+				{
+					name:'consultant_dr',width:150,
+					filterHeaderTemplate: '<input id="consultant_dr" class="form-control" ng-change="grid.appScope.filter(\'consultant_dr\', consultant_dr, \'staff\', \'staff\',true, grid.appScope.staffParams)" ng-model="consultant_dr" placeholder="search">'
                 },
 				{
 					name:'mobile',width:80,
 					filterHeaderTemplate: '<input id="mobile" class="form-control" ng-change="grid.appScope.filter(\'mobile\', mobile, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="mobile" placeholder="search">'
-                },
-				{
-				    name:'dob',width:100,
-				    filterHeaderTemplate: '<input id="dob" class="form-control" ng-change="grid.appScope.filter(\'dob\', dob, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="dob" placeholder="search">', 
-                },
-			   {
-				    name:'address',width:80,
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="address" placeholder="search">',
                 },
 					
 				{ name:'Manage', 
@@ -157,6 +153,12 @@ define(['app'], function (app) {
 				
 			})
 			
+		}
+		$scope.callbackColChange = function(response){
+			console.log(response);
+			if(response.status == "success"){
+				$scope.getData(false, $scope.currentPage, "admission", "admission", $scope.admissionParams);
+			}
 		}
 		
 		/*get data */

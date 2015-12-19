@@ -37,11 +37,11 @@
 			<div class="form-group">	
 				<label  for="email" class="col-sm-2 control-label">Email *</label>
 				<div class="col-sm-3">
-					<input type="Email" class="form-control" id="email" ng-model="modalOptions.addadmission.email" name="email" placeholder="Enter Email"  required/>
+					<input type="Email" class="form-control" id="email" ng-model="modalOptions.addadmission.email" name="email"  ng-pattern="/^[\.\w]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" placeholder="Enter Email"  required/>
 					<span class="help-block" ng-show="addnew_admissionForm.email.$dirty && addnew_admissionForm.email.$invalid">
-						<span class="text-danger" ng-show="addnew_admissionForm.email.$dirty "></span>
-						<span class="text-danger" ng-show="addnew_admissionForm.email.$error.required">Email is required.</span>
-						<span class="text-danger" ng-show="addnew_admissionForm.email.$error.email">Invalid Email address.</span>
+					<span ng-show="addnew_admissionForm.email.$error.pattern && (addnew_admissionForm.email.$dirty || submitted)" class="text-danger">Enter a valid email</span>
+					
+						<span ng-show="addnew_admissionForm.email.$error.required" class="text-danger">Required Field.</span>
 					</span>
 				</div>	
 				<label  for="deposit" class="col-sm-2 control-label">Deposit *</label>
@@ -71,13 +71,13 @@
 				</div>
 			</div> 	
 			<div class="form-group" ng-init="modalOptions.getData(false,false,'staff','staff',modalOptions.staffParams,modalOptions)">
-		<label for="staff_id" class="col-sm-2 control-label"> Consultant Dr </label>
+		<label for="consultant_dr" class="col-sm-2 control-label"> Consultant Dr </label>
 		<div class="col-sm-10">
-			<select id="staff_id" class="form-control" ng-model="modalOptions.addopdpatient.staff_id" ng-options="item.id as item.type for item in modalOptions.staff" required>
-				<option value="">Select Party</option>
+			<select id="consultant_dr" class="form-control" ng-model="modalOptions.addadmission.staff_id" ng-options="item.id as item.consultant_dr for item in modalOptions.staff" required>
+				<option value="">Select Consultant Dr</option>
 			</select>
-			<span class="help-block" ng-show="addopdpatientForm.user_id.$dirty && addopdpatientForm.user_id.$invalid">
-			<span ng-show="addopdpatientForm.user_id.$error.required" class="text-danger">user id is required.</span>
+			<span class="help-block" ng-show="addnew_admissionForm.consultant_dr.$dirty && addnew_admissionForm.consultant_dr.$invalid">
+			<span ng-show="addnew_admissionForm.consultant_dr.$error.required" class="text-danger">user id is required.</span>
 			</span>	
 		</div>
 	</div>
