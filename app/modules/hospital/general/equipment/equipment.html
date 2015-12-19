@@ -12,7 +12,7 @@
 			<div class="col-sm-2">
 				<div class="bottomspace">
 					<label for="select_no_records" class="control-label" >Select Records</label>
-					<select id="select_no_records" class="form-control" ng-change="getData(false, currentPage,'patient', 'patient', patientParams)" ng-model="pageItems">
+					<select id="select_no_records" class="form-control" ng-change="getData(false, currentPage,'equipment', 'equipmentList', equipmentParams)" ng-model="pageItems">
 							<option value="10">10</option>
 							<option value="20">20</option>
 							<option value="30">30</option>
@@ -20,11 +20,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="table-responsive" ng-init="getData(false, currentPage, 'equipment','equipment',params);">
-			<div ui-grid="equipment"></div>
+		<div class="table-responsive" ng-init="getData(false, currentPage, 'equipment','equipmentList',equipmentParams);">
+			<div ui-grid="equipmentList"></div>
 		</div>
 		<div class="text-center">				
-			<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'patient','patient',patientParams)"></pagination>
+			<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'equipment','equipmentList',equipmentParams)"></pagination>
 			<pre>Page: {{currentPage}} / {{numPages}}</pre>
 		</div>	
 </div>

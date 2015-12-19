@@ -84,7 +84,7 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
-				history_date:$scope.currentDate,
+				complaint_date:$scope.currentDate,
 				modified_date:$scope.currentDate,
 				date:$scope.currentDate,
 				addcomplaint : (data) ? {

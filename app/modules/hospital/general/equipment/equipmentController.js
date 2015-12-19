@@ -10,17 +10,20 @@ define(['app'], function (app) {
 		$scope.type = "year";
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
-		$scope.pageItems = 10;
-		$scope.numPages = "";	
 		$scope.currentPage = 1;
+		$scope.pageItems = 10;
+		$scope.numPages = "";		
+		$scope.currentPage = 1;
+		$scope.pageItems = 10;
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hospital";
-		console.log("This is Equipement Controller");
+		console.log('Hello');
+		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Equipment",
-				SubTitle :"Add Equipment",
+				path : "#/dashboard/hospital/general/equipment",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/hospital/general/equipment/addequipment.html");
@@ -28,42 +31,34 @@ define(['app'], function (app) {
 				}
 			},{
 				name : "Equipment List",
-				path : "#/dashboard/hospital/equipment",
-				SubTitle :"Equipment List"
+				path : "#/dashboard/hospital/general/equipment"
 			}
 		]
-		
-		$scope.equipment = {
+
+		$scope.equipmentList = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{
-					name:'Sr.No',width:50,
-					enableSorting: false,
-					enableFiltering: false, 
-					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
-					
+				{ name:'Sr.No', width:60,
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
+			enableFiltering: false,	
 				},
 				{
-				    name:'equipment name',
-					filterHeaderTemplate: '<input id="equipment_name" class="form-control" ng-change="grid.appScope.filter(\'equipment_name\', equipment_name, \'equipment\', \'equipment\', true, grid.appScope.equipmentParams)" ng-model="equipment_name" placeholder="search">',
-                },
+					name:'equipment_name',
+					filterHeaderTemplate: '<input id="equipment_name" class="form-control" ng-change="grid.appScope.filter(\'equipment_name\', equipment_name, \'equipment\', \'equipmentList\',true, grid.appScope.equipmentParams)" ng-model="equipment_name" placeholder="equipment name">',
+				},
 				{
-					name:'description',
-					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="description" placeholder="search">'
-                },
-				{
-					name:'quantity',
-					filterHeaderTemplate: '<input id="phone" class="form-control"  ng-model="phone" placeholder="search">'
-                },
-				{
-				    name:'price',
-				    filterHeaderTemplate: '<input id="price" class="form-control"  ng-model="price" >', 
-                },
-			
+					name:'equipment_description',
+					filterHeaderTemplate: '<input id="equipment_description" class="form-control" ng-change="grid.appScope.filter(\'equipment_description\', equipment_description, \'equipment\', \'equipmentList\',true, grid.appScope.equipmentParams)" ng-model="equipment_description" placeholder="equipment description">',
+				},
+				
+				{ name:'quantity',width:90,enableSorting: false,enableFiltering: false,
+				},
+				{ name:'price',width:90,enableSorting: false,enableFiltering: false,
+				},
 				
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'equipment\', \'equipment\',true, grid.appScope.equipmentParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'equipment\', \'equipmentList\',false,grid.appScope.equipmentParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -72,69 +67,83 @@ define(['app'], function (app) {
 					   type: uiGridConstants.filter.SELECT,  
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
-					} ,
-				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/addequipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit equipment" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					
-					
-					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
-					
+					} , 
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/addequipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Equipment Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ 
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					+ 
+					'<a type="button" tooltip="Delete equipment" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'equipment\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				}
 			]
 		};
 		
-		
-		$scope.openModal = function(url,data){
-			
+		$scope.callbackColChange = function(response){
+			console.log(response);
+			if(response.status == "success"){
+				$scope.getData(false, $scope.currentPage, "equipment", "equipmentList", $scope.equipmentParams);
+			}
+		}
+			$scope.openModal = function(url,data){
 			var modalDefault = {
-				templateUrl: url,	// apply template to modal
+				templateUrl:url,	// apply template to modal
 				size : 'lg'
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
-				addeuipment : (data) ? {
-				
-			
-			
-			
-			} : {
+				equipment_date:$scope.currentDate,
+				modified_date:$scope.currentDate,
+				date:$scope.currentDate,
+				addequipment : (data) ? {
+					id : data.id,
+					user_id : data.user_id,
+					user_id : $rootScope.userDetails.id,
+					modified_date:data.modified_date,
+					equipment_date : data.equipment_date,
+					price:data.price,
+					quantity:data.quantity,
+					equipment_name:data.equipment_name,
+					unit:data.unit,
+					equipment_charges:data.equipment_charges,
+					equipment_description:data.equipment_description
+				} : {
 					date : dataService.sqlDateFormate(),
-					
+					user_id : $rootScope.userDetails.id,
+					modified_date : dataService.sqlDateFormate(),
+					equipment_date: dataService.sqlDateFormate()
+				
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'equipment','equipment');
+							$scope.getData(false, $scope.currentPage, 'equipment','equipmentList');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'equipment','equipment');
+							$scope.getData(false, $scope.currentPage, 'equipment','equipmentList');
 						}
 					})
 				},
-				formPart :'',
-				showFormPart : function(formPart,modalOptions){
-					modalOptions.formPart = formPart;
-					
-				},
-				getData : $scope.getData,
+				getData : $scope.getData
 			};
-			
-			modalService.showModal(modalDefault, modalOptions).then(function(){
-				
+			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})
-			
 		}
-		
+		$scope.equipmentParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			cols : ["*"]
+		}
+	
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id,
-					
+					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]
 			};
@@ -171,7 +180,7 @@ define(['app'], function (app) {
 			value = (value) ? value : undefined;
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, params, response);
+				dataService.extendDeep($scope.params, params, response);
 				console.log($scope.params);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
@@ -181,7 +190,6 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
-		
 	 };
 	// Inject controller's dependencies
 	equipmentController.$inject = injectParams;

@@ -42,7 +42,7 @@
 		<div class="form-group">
 		<label for="unit" class="col-sm-2 control-label">Unit</label>
 			<div class="col-sm-4">
-				<input type="text" required name="unit" class="form-control" id="unit" ng-model="modalOptions.addequipment.unit" placeholder="Enter Your unit" ng-pattern="/^\d{0,9}[0-9]$/" required>
+				<input type="text" required name="unit" class="form-control" id="unit" ng-model="modalOptions.addequipment.unit" placeholder="Enter Your unit"  ng-pattern="/^[a-zA-Z/ ]*$/"required>
 				<span class="text-danger"  ng-show="addequipmentForm.unit.$error.pattern">please Enter Valid unit</span>
 				<span class="help-block" ng-show="addequipmentForm.unit.$dirty && addequipmentForm.unit.$invalid">
 					<span ng-show="addequipmentForm.unit.$error.required"class="text-danger">unit is required.</span>
@@ -70,9 +70,9 @@
 </div>
 	<div class="modal-footer" >
 		<div class="col-sm-offset-3 col-sm-9">
-			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addequipment.id"  ng-click="modalOptions.postData('equipment',modalOptions.addequipment);modalOptions.ok()">Add Equipment</button>
+			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addequipment.id" ng-disabled="addequipmentForm.$invalid" ng-click="modalOptions.postData('equipment',modalOptions.addequipment);modalOptions.ok()">Add Equipment</button>
 			
-			<button type="submit" ng-if="modalOptions.addequipment.id" class="btn btn-success" ng-disabled="addmedicineForm.$invalid" ng-click="modalOptions.updateData('medicine',modalOptions.addequipment,modalOptions.addequipment.id);modalOptions.ok()">Update Equipment</button>
+			<button type="submit" ng-if="modalOptions.addequipment.id" class="btn btn-success" ng-disabled="addequipmentForm.$invalid" ng-click="modalOptions.updateData('equipment',modalOptions.addequipment,modalOptions.addequipment.id);modalOptions.ok()">Update Equipment</button>
 			
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 		</div>

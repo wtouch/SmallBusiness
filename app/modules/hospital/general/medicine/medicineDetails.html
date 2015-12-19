@@ -1,15 +1,15 @@
 
 	<div class="modal-body">
-			<div class="form-group">{{modalOptions.addadmedicine}}
+			<div class="form-group">{{modalOptions.addmedicine}}
 				 <label  for="medicine_date" class="col-sm-2 control-label">Date * </label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" placeholder="Date" id="medicine_date" name="medicine_date" ng-model="modalOptions.addadmedicine.medicine_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" ng-required="true" />
+					<input type="text" class="form-control" placeholder="Date" id="medicine_date" name="medicine_date" ng-model="modalOptions.addmedicine.medicine_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" ng-required="true" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="medicine_name" class="col-sm-2 control-label">Medicine Name *</label>
 				<div class="col-sm-10">					
-					<input type="text" id="medicine_name" class="form-control" name="medicine_name" placeholder="Medicine Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addadmedicine.medicine_name"required>
+					<input type="text" id="medicine_name" class="form-control" name="medicine_name" placeholder="Medicine Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addmedicine.medicine_name"required>
 					 <span class="text-danger"  ng-show="addmedicineForm.medicine_name.$error.pattern">please Enter Valid Name</span>
 					<span class="help-block" ng-show="addmedicineForm.medicine_name.$dirty && addmedicineForm.medicine_name.$invalid">
 						<span class="text-danger" ng-show="addmedicineForm.medicine_name.$error.required">Name is required.</span>
@@ -20,16 +20,16 @@
 			<label for="medicine_category" class="col-sm-2 control-label">Select Category*</label>
 			<div class="col-sm-4">
 				<select id="medicine_category" name="medicine_category" class="form-control" 
-				ng-model="modalOptions.addadmedicine.medicine_category">
+				ng-model="modalOptions.addmedicine.medicine_category">
 				<option value="" selected>select category</option>
-				<option value="category"> medicine</option>
-				<option value="category">Capsules</option>
+				<option value="medicine"> medicine</option>
+				<option value="Capsules">Capsules</option>
 				</select>
 			</div>
 			<label for="medicine_type" class="col-sm-2 control-label">Select type*</label>
 				<div class="col-sm-4">
 					<select id="medicine_type" name="medicine_type" class="form-control" 
-					ng-model="modalOptions.addadmedicine.medicine_type">
+					ng-model="modalOptions.addmedicine.medicine_type">
 					<option value="" selected>select type</option>
 					<option value="medicine_type">liquid</option>
 					<option value="medicine_type">tablets</option>
@@ -40,7 +40,7 @@
 				
 				<label for="quantity" class="col-sm-2 control-label">Quantity</label>
 				<div class="col-sm-4">
-					<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.addadmedicine.quantity" placeholder="Enter Your quantity" ng-pattern="/^[a-zA-Z]*$/" required>
+					<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.addmedicine.quantity" placeholder="Enter Your quantity" ng-pattern="/^\d{0,9}[0-9]$/" required>
 					<span class="text-danger"  ng-show="addmedicineForm.quantity.$error.pattern">please Enter Valid quantity</span>
 					<span class="help-block" ng-show="addmedicineForm.quantity.$dirty && addmedicineForm.quantity.$invalid">
 						<span ng-show="addmedicineForm.quantity.$error.required"class="text-danger">Quantity is required.</span>
@@ -48,7 +48,7 @@
 				</div>
 				<label for="unit" class="col-sm-2 control-label">Unit*</label>
 				<div class="col-sm-4">
-				<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.addadmedicine.unit" placeholder="Enter unit" ng-pattern="/^[a-zA-Z]*$/" required>
+				<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.addmedicine.unit" placeholder="Enter unit" ng-pattern="/^[a-zA-Z]*$/" required>
 				<span class="text-danger"  ng-show="addmedicineForm.unit.$error.pattern">please Enter Valid state</span>
 					<span class="help-block" ng-show="addmedicineForm.unit.$dirty && addmedicineForm.unit.$invalid">
 						<span ng-show="addmedicineForm.unit.$error.required" class="text-danger">unit is required.</span>
@@ -58,7 +58,7 @@
 			<div class="form-group">
 				<label for="price" class="col-sm-2 control-label">Price*</label>
 				<div class="col-sm-4">
-				<input type="text" id="price" name="price" class="form-control" ng-model="modalOptions.addadmedicine.price" placeholder="Enter price" ng-pattern="/^[a-zA-Z]*$/" required>
+				<input type="text" id="price" name="price" class="form-control" ng-model="modalOptions.addmedicine.price" placeholder="Enter price" ng-pattern="/^\d{0,9}[0-9]$/" required>
 				<span class="text-danger"  ng-show="addmedicineForm.price.$error.pattern">please Enter Valid state</span>
 					<span class="help-block" ng-show="addmedicineForm.price.$dirty && addmedicineForm.price.$invalid">
 						<span ng-show="addmedicineForm.price.$error.required" class="text-danger">price is required.</span>
@@ -66,7 +66,7 @@
 				</div>
 				<label for="description" class="col-sm-2 control-label">Description</label>
 				<div class="col-sm-4">
-					<textarea  type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addadmedicine.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+					<textarea  type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addmedicine.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
 					<span class="help-block" ng-show="addmedicineForm.description.$dirty && addmedicineForm.description.$invalid">
 						<span ng-show="addmedicineForm.description.$error.required"class="text-danger">Description is required.</span>
 					</span>			
@@ -75,19 +75,19 @@
 				<div class="form-group">
 				 <label  for="package_date" class="col-sm-2 control-label"> Package Date * </label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" placeholder="Date" id="package_date" name="package_date" ng-model="modalOptions.addadmedicine.package_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened2" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened2 = !opened" ng-required="true" />
+					<input type="text" class="form-control" placeholder="Date" id="package_date" name="package_date" ng-model="modalOptions.addmedicine.package_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened2" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened2 = !opened" ng-required="true" />
 				</div>	 
 				<label  for="expiry_date" class="col-sm-2 control-label">Expiry Date * </label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" placeholder="Date" id="expiry_date" name="expiry_date" ng-model="modalOptions.addadmedicine.expiry_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
+					<input type="text" class="form-control" placeholder="Date" id="expiry_date" name="expiry_date" ng-model="modalOptions.addmedicine.expiry_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
 				</div>
 			</div>
 	</div>
 	<div class="modal-footer" >
 		<div class="col-sm-offset-3 col-sm-9">
-			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmedicine.id"  ng-click="modalOptions.postData('medicine',modalOptions.addadmedicine);modalOptions.ok()">Add new Medicines</button>
+			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addmedicine.id"  ng-click="modalOptions.postData('medicine',modalOptions.addmedicine);modalOptions.ok()">Add new Medicines</button>
 			
-			<button type="submit" ng-if="modalOptions.addadmedicine.id" class="btn btn-success" ng-disabled="addmedicineForm.$invalid" ng-click="modalOptions.updateData('medicine',modalOptions.addadmedicine,modalOptions.addadmedicine.id);modalOptions.ok()">Update Medicines</button>
+			<button type="submit" ng-if="modalOptions.addmedicine.id" class="btn btn-success" ng-click="modalOptions.updateData('medicine',modalOptions.addmedicine,modalOptions.addmedicine.id);modalOptions.ok()">Update Medicines</button>
 			
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 		</div>
