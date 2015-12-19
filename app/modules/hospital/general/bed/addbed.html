@@ -1,24 +1,67 @@
-
+<div class="main-content">
 	<div class="modal-header">
-		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
-	<h3  ng-if="!modalOptions.addequipment.id" class="text-center">Add New Equipment</h3>
-	<h3  ng-if="modalOptions.addequipment.id" class="text-center">Edit Equipment</h3>
+		<button type="button" class="close" ng-click="modalOptions.ok()"><span aria-hidden="true">&times;</span></button>
+		<h3 class="text-center" ng-if="!modalOptions.bed.id">Add bed</h3>
+		<h3 class="text-center" ng-if="modalOptions.bed.id">Update bed</h3>
 	</div>
 	<div class="modal-body">
-		<form class="form-horizontal" name="addequipmentForm" role="form" ng-submit="addequipmentForm.$valid" novalidate="novalidate"><!--{{modalOptions.addpatient}}-->	 
-			<ul class="nav nav-tabs">
-				<li role="presentation" ng-class="{active: modalOptions.formPart=='equipmentDetails'}">
-					<a ng-click="modalOptions.showFormPart('equipmentDetails', modalOptions)">Equipment Details</a>
-				</li>	
-				<li role="presentation" ng-class="{active: modalOptions.formPart=='patientHistory'}">
-					<a ng-click="modalOptions.showFormPart('equipmentHistory', modalOptions)">Equipment History</a>
-				</li>
-			</ul>
-			<ng-include  ng-show="modalOptions.formPart=='patientDetails'" 	src="'modules/hospital/patient/patientDetails.html'">
-			</ng-include> 
-			<ng-include  ng-show="modalOptions.formPart=='patientHistory'" src="'modules/hospital/patient/patientHistory.html'">
-			</ng-include> 						
+		<form name="addbedForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbedForm.$valid">
+				<div class="form-group">
+					<label  for="bed_room" class="col-sm-2 control-label">Room Number</label>
+						<div class="col-sm-9">
+							<input type="text" id="bed_room" class="form-control"  ng-model="modalOptions.bed.bed_room" name="bed_room" placeholder="Room number" required />
+							<span class="help-block" ng-show="addbedForm.bed_room.$dirty && addbedForm.bed_room.$invalid">
+								<span ng-show="(addbedForm.bed_room.$dirty)" class="text-danger">Enter  bed Name Only!</span>
+							</span>
+						</div>						
+				</div>
+				<div class="form-group">
+					<label  for="bed_number" class="col-sm-2 control-label">Bed number</label>
+						<div class="col-sm-9">
+							<input type="text" id="bed_number" class="form-control"  ng-model="modalOptions.bed.bed_number" name="bed_number" placeholder="bed_number"required />
+							<span class="help-block" ng-show="addbedForm.bed_number.$dirty && addbedForm.bed_number.$invalid">
+								<span ng-show="(addbedForm.bed_number.$dirty)" class="text-danger">Enter  bed Name Only!</span>
+							</span>
+						</div>						
+				</div>
+				<div class="form-group">
+					<label  for="bed_description" class="col-sm-2 control-label">Bed description</label>
+						<div class="col-sm-9">
+							<textarea  id="bed_description" class="form-control" ng-model="modalOptions.bed.bed_description" name="bed_description" placeholder="bed_description" required />
+							<span class="help-block" ng-show="addbedForm.bed_description.$dirty && addbedForm.bed_description.$invalid"></textarea>
+								<span ng-show="(addbedForm.bed_description.$dirty)" class="text-danger">Enter description!</span>
+							</span>
+						</div>						
+				</div>
+				<div class="form-group">
+					<label  for="bed_charges" class="col-sm-2 control-label">bed charges</label>
+						<div class="col-sm-9">
+							<input  id="bed_charges" class="form-control" ng-model="modalOptions.bed.bed_charges" name="bed_charges" placeholder="bed_charges" required />
+							<span class="help-block" ng-show="addbedForm.bed_charges.$dirty && addbedForm.bed_charges.$invalid"></textarea>
+								<span ng-show="(addbedForm.bed_charges.$dirty)" class="text-danger">Enter bed charges</span>
+							</span>
+						</div>						
+				</div>
+				<div class="form-group">
+				 <label  for="date" class="col-sm-2 control-label">Date * </label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder=" Bill Date" id="bed_date" name="bed_date" ng-model="modalOptions.bed.bed_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.bed.bed_date = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
+					</div>
+				</div> 
+				<div class="form-group modal-footer">
+					<div class="col-sm-offset-2 col-sm-9">
+						
+						<button type="submit" ng-if="!modalOptions.bed.id" class="btn btn-success" ng-disabled="addbedForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('bed',modalOptions.bed)">
+							<span>Submit</span>
+						</button>
+						
+						<button type="submit" ng-if="modalOptions.bed.id" class="btn btn-success" ng-disabled="addbedForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('bed',modalOptions.bed, modalOptions.bed.id)">
+							<span>Update</span>
+						</button> 
+						<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+					</div>
+				</div>
 		</form>
-	</div>
-
+		</div>
+</div>
 
