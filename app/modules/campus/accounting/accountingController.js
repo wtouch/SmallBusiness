@@ -7,10 +7,11 @@ define(['app'], function (app) {
 				
 				angular.forEach(response, function(value, key){
 					
+					if(value.path=="campus/accounting"){
 					if(value.childMenu){
 						$scope.dashboardList = value.childMenu;
 					}
-					
+					}
 				})
 				
 			})
