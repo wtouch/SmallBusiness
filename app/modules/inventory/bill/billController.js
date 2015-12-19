@@ -180,8 +180,7 @@ define(['app'], function (app) {
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
-					status : 1,
+					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
 					user_id : $rootScope.userDetails.id
 				},
 				getBalance : $scope.getBalance,
@@ -276,6 +275,7 @@ define(['app'], function (app) {
 				};
 			var modalOptions = {
 				date : dataService.sqlDateFormate(),
+				due_amount : (data.due_amount) ? data.due_amount : 0,
 				payBill : {
 					reference_id : data.id,
 					party_id : data.party_id,

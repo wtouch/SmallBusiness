@@ -1,33 +1,32 @@
 'use strict';
 
 define(['app'], function (app) {
-   
-   var firstname = function () {
+	var checkAmount = function () {
 		return {
 			restrict: "A", // A - Attribute, E - Element, EA - Attribute/Element
 			require: "?ngModel", // ngModel
+			scope : {
+				previous_balance : "=previousBalance",
+				due_amount : "=dueAmount"
+			},
 			link: function (scope, element, attributes, ngModel) {
-				console.log(ngModel);
-				ngModel.$validators.firstname = function (modelValue) {
-					console.log(ngModel);
-					if (modelValue == "Tony" || modelValue == "John") {
+				ngModel.$validators.checkAmount = function (modelValue) {
+					//console.log(ngModel.$viewValue);
+					//console.log(scope.previous_balance);
+					//console.log(scope.due_amount);
+					var amount = parseFloat(ngModel.$viewValue);
+					var due_amount = parseFloat(scope.due_amount);
+					var previous_balance = parseFloat(scope.previous_balance);
+					if((amount <= due_amount) && (amount <= previous_balance)){
+						console.log(ngModel.$viewValue, scope.due_amount, scope.previous_balance);
 						return true;
-					}
-					else return false;
-				};
-				ngModel.$validators.lkjfdk = function (modelValue) {
-					console.log(ngModel);
-					if (modelValue == "Tony" || modelValue == "John") {
-						return true;
-					}
-					else return false;
+					}else{
+						console.log(ngModel.$viewValue, scope.due_amount, scope.previous_balance);
+						return false;
+					} 
 				};
 			}
 		};
 	};
-	
-	// Inject controller's dependencies
-	//billController.$inject = injectParams;
-	// Register/apply controller dynamically
-    app.register.directive('firstname', firstname);
+    app.register.directive('checkAmount', checkAmount);
 });
