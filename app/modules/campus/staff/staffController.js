@@ -22,7 +22,7 @@ define(['app'], function (app) {
 				$scope.staffConfig = response;
 			})
 			
-				$scope.staffParams = {
+		$scope.staffParams = {
 			where : {
 				status : 1,
 				user_id : $rootScope.userDetails.id
@@ -30,9 +30,9 @@ define(['app'], function (app) {
 			cols : ["*"]
 		}
 		
-			$rootScope.moduleMenus = [
+		$rootScope.moduleMenus = [
 			{
-				name : "Staff",
+				name : "Add staff",
 				path : "#/dashboard/campus/staff/",
 				SubTitle :"Staff",
 				events : {
@@ -73,12 +73,6 @@ define(['app'], function (app) {
 				
 			})
 		}
-		/* $scope.staffparams{
-			where : {
-				user_id : $rootScope.userDetails.id,
-				status : 1,
-			}
-		} */
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
