@@ -26,16 +26,30 @@
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
 		<script>
-		function myFunction{
-			if(document.body.scrollTop>100)
-			{
-				document.getElementById("gall").ClassName="featrGallery";
-				
-			}
-			else{
-				document.getElementById("gall").ClassName="";
-			}
-		
+		function myFunction() {
+			 if (document.body.scrollTop>150) {
+				  
+						  document.getElementById("gall").className = "featrGallery";
+						
+				   } 
+				   else {
+					   
+						    document.getElementById("gall").className = "";	
+													
+					}
+					
+				  if (document.body.scrollTop>800) {
+				  
+						  document.getElementById("mod").className = "contentModule";
+						
+				   } 
+				   else {
+					   
+						    document.getElementById("mod").className = "";	
+													
+					}
+					
+					 
 		}
 		window.onscroll = function() {myFunction()};
 		</script>
@@ -77,15 +91,15 @@
 						{% include contentPath %}	
 			</div>	
 		</div>	
-		<div class="footer">
+		<div class="foot">
 			<div class="container ">
-				{%include[templatePath ~ '/includes/sociallinks.html','default/default/includes/sociallinks.html']%}
-					
-				{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+			
+					{%include[templatePath ~ '/includes/sociallinks.html','default/default/includes/sociallinks.html']%}
+			
 			</div>
+			{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 		</div>	
-		
-		
-	</body>
+	
+</body>
 </html>
 {% endspaceless %}
