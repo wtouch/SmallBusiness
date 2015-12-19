@@ -147,11 +147,11 @@ define(['app'], function (app) {
 					unit : data.unit,
 					date:data.stockdate,
 					price : data.price,
-					date : data.date,,
+					date : data.date,
 					modified_date : dataService.sqlDateFormate(false,"datetime")
 				} : {
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
+					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					date : dataService.sqlDateFormate(),
 					stockdate: dataService.sqlDateFormate()
 				},

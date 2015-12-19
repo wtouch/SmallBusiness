@@ -180,7 +180,7 @@ define(['app'], function (app) {
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
+					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					user_id : $rootScope.userDetails.id
 				},
 				getBalance : $scope.getBalance,

@@ -81,7 +81,7 @@ define(['app'], function (app) {
 			enableHorizontalScrollbar : uiGridConstants.scrollbars.NEVER,
 			enableVerticalScrollbar : uiGridConstants.scrollbars.NEVER,
 			columnDefs: [
-				{ name:'SrNo', 
+				{ name:'SrNo',  width:50,
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false
 				},
 				{ name:'account_name',enableSorting: false ,
@@ -105,15 +105,18 @@ define(['app'], function (app) {
 						options: [{ value: 'income', label: 'Income' }, { value: 'expense', label: 'Expense' }]
 					} 
 				},
-				{ name:'category', enableSorting: false, 
+				{ name:'category',enableSorting: false, 
 					filterHeaderTemplate: '<select ng-if="grid.appScope.transactionCategory" id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="category" ng-options="item.system_name as item.name for item in grid.appScope.transactionCategory">'
 							+'<option value="" selected>Category</option>'
 						+'</select>',
-					},
+					columnTemplate : ""
+				},
 					
 				{ name:'description',
 				enableSorting: false, enableFiltering: false,
-					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="description" placeholder="description">'},
+					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="description" placeholder="description">',
+					cellTemplate: '<span style="color:red">{{row.entity.description}}</span>'
+					},
 				{ name:'date',
 				enableSorting: true, enableFiltering: false,
 					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="date" placeholder="date">',
@@ -138,6 +141,8 @@ define(['app'], function (app) {
 				})
 			}
 		};
+		
+		
 		
 		$scope.verticalSum = function(inputArray, column, subobj){
 			/* if(!$scope[subobj])  */$scope[subobj] = 0;
