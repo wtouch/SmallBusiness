@@ -3,7 +3,7 @@
 			<div class="form-group">
 				<label for="complaints_name" class="col-sm-2 control-label">complaints_name *</label>
 				<div class="col-sm-8">
-				<input type="text" id="complaints_name" name="complaints_name" class="form-control" ng-model="modalOptions.addopdpatient.complaints.complaints_name" placeholder="Enter complaints_name" ng-pattern="/^[a-zA-Z]*$/" required />
+				<input type="text" id="complaints_name" name="complaints_name" class="form-control" ng-model="modalOptions.addopdpatient.patient_complaint.complaints_name" placeholder="Enter complaints_name" ng-pattern="/^[a-zA-Z]*$/" required />
 					<span class="help-block" ng-show="addopdpatientForm.complaints_name.$dirty && addopdpatientForm.complaints_name.$invalid">
 						<span ng-show="addopdpatientForm.complaints_name.$error.required" class="text-danger">complaints_name is required.</span>
 					</span>				
@@ -13,7 +13,7 @@
 			<div class="form-group">
 				<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
 				<div class="col-sm-8">
-					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.addopdpatient.complaints.complaints_description" placeholder="Enter Your complaints_description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.addopdpatient.patient_complaint.complaints_description" placeholder="Enter Your complaints_description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
 					<span class="help-block" ng-show="addopdpatientForm.complaints_description.$dirty && addopdpatientForm.complaints_description.$invalid">
 						<span ng-show="addopdpatientForm.complaints_description.$error.required"class="text-danger">Description is required.</span>
 					</span>				
@@ -21,7 +21,7 @@
 			</div> 
 			<div class="form-group">			
 				<div class="col-sm-offset-2 col-sm-2">
-					<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addopdpatientForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addopdpatient.complaints, 'patient_history', modalOptions)" disabled="disabled">	+Add 
+					<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addopdpatientForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addopdpatient.patient_complaint, 'patient_complaint', modalOptions)" disabled="disabled">	+Add 
 					</button>
 				</div>
 			</div>
@@ -35,11 +35,11 @@
 					</tr> 
 				</thead>
 				<tbody >
-					<tr ng-repeat="x in modalOptions.addopdpatient.complaints">
+					<tr ng-repeat="x in modalOptions.addopdpatient.patient_complaint">
 						<td>{{$index + 1}}</td>
 						<td>{{x.complaints_name}}</td>
 						<td>{{x.complaints_description}}</td>
-						<td><button ng-click="modalOptions.removeObject(modalOptions.addopdpatient.complaints, $index)">X</button></td>
+						<td><button ng-click="modalOptions.removeObject(modalOptions.addopdpatient.patient_complaint, $index)">X</button></td>
 					</tr>
 				</tbody >
 			</table>

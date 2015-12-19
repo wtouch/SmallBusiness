@@ -33,7 +33,7 @@ define(['app'], function (app) {
 				SubTitle :"OPD List"
 			}
 		]
-		$scope.opd = {
+		$scope.opdList = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -54,10 +54,10 @@ define(['app'], function (app) {
                 },
 				{
 					name:'emergancy contact',
-					filterHeaderTemplate: '<input id="emergancy_contact" class="form-control" ng-change="grid.appScope.filter(\'emergancy_contact\', emergancy_contact, \'opd\', \'opd\',true, grid.appScope.opdParams)" ng-model="mobile" placeholder="search">'
+					filterHeaderTemplate: '<input id="emergancy_contact" class="form-control" ng-change="grid.appScope.filter(\'emergancy_contact\', emergancy_contact, \'opd\', \'opdList\',true, grid.appScope.opdParams)" ng-model="mobile" placeholder="search">'
                 },
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'opd\', \'opd\',true, grid.appScope.patientParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'opd\', \'opdList\',true, grid.appScope.patientParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -88,7 +88,7 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				registered_date:dataService.sqlDateFormate(),
 				date:{date : $scope.currentDate},
-				addpatient : (data) ? {
+				addopdpatient : (data) ? {
 					id : data.id,
 					name : data.name,
 					email : data.email,
@@ -107,7 +107,6 @@ define(['app'], function (app) {
 			} : {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
-					registered_date: dataService.sqlDateFormate(),
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
@@ -115,14 +114,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'opd','opd');
+							$scope.getData(false, $scope.currentPage, 'opd','opdList');
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'opd','opd');
+							$scope.getData(false, $scope.currentPage, 'opd','opdList');
 						}
 					})
 				},
@@ -139,7 +138,13 @@ define(['app'], function (app) {
 			})
 			
 		}
-		
+		$scope.opdParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			cols : ["*"]
+		}
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
