@@ -165,7 +165,8 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams);
+							/* $scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams); */
+							$scope.getData(false, $scope.currentPage, 'stock','stockList');
 						}
 					})
 				},
