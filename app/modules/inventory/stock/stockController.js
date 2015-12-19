@@ -152,8 +152,8 @@ define(['app'], function (app) {
 				} : {
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
-					date : dataService.sqlDateFormate(),
-					stockdate: dataService.sqlDateFormate()
+					//date : dataService.sqlDateFormate(),
+					//stockdate: dataService.sqlDateFormate()
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
