@@ -99,22 +99,25 @@ define(['app'], function (app) {
 							+'<option value="transfer">Transfer</option>'
 							+'<option value="invoice_payment">Invoice Payment</option>'
 							+'<option value="bill_payment">Bill Payment</option>'
+							+'<option value="staff_payment">Staff Payment</option>'
 						+'</select>',
 					filter: {
 						//type: uiGridConstants.filter.SELECT,
 						options: [{ value: 'income', label: 'Income' }, { value: 'expense', label: 'Expense' }]
-					} 
+					} ,
+					cellTemplate:'<span>{{row.entity.type.replace("_"," ")|capitalize}}</span>'
 				},
 				{ name:'category',enableSorting: false, 
 					filterHeaderTemplate: '<select ng-if="grid.appScope.transactionCategory" id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="category" ng-options="item.system_name as item.name for item in grid.appScope.transactionCategory">'
 							+'<option value="" selected>Category</option>'
 						+'</select>',
+					cellTemplate:'<span>{{row.entity.category.replace("_"," ")|capitalize}}</span>'
 				},
 					
-				{ name:'description',visible:false,
-				enableSorting: false, enableFiltering: false,
+				{ name:'description',
+				enableSorting: false, visible : false,enableFiltering: false,
 					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="description" placeholder="description">',
-					cellTemplate: '<span style="color:red">{{row.entity.description}}</span>'
+					cellTemplate: '<span ng-repeat=" x in row.entity.description">{{x}}</span>'
 					},
 				{ name:'date',
 				enableSorting: true, enableFiltering: false,
@@ -188,11 +191,11 @@ define(['app'], function (app) {
 					account_id : data.account_id,
 					category : data.category,
 					user_id : data.user_id,
-					balance : data.balance,
+					balance : parseFloat(data.balance),
 					payment_type : data.payment_type,
 					date : data.date,
-					credit_amount : data.credit_amount,
-					description : data.description 
+					credit_amount : parseFloat(data.credit_amount),
+					description : data.description,
 				} : {
 					date : dataService.sqlDateFormate(false, "datetime"),
 					modified_date : dataService.sqlDateFormate(false, "datetime"),

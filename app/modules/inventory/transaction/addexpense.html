@@ -131,10 +131,11 @@
 			<div class="form-group">
 				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
 					<div class="col-sm-9">
-						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addexpense.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.addexpense.debit_amount, modalOptions);" name="amount" placeholder="Amount" required/>
+						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^(?=.s+)(?:[1-9]\d*|0)?(?:\.\d+)?$/" ng-model="modalOptions.addexpense.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.addexpense.debit_amount, modalOptions);" name="amount" placeholder="Amount" required check-amount previous-balance="modalOptions.previous_balance"/>
 						<span class="help-block" ng-show="addexpenseForm.amount.$dirty && addexpenseForm.amount.$invalid">
 							<span ng-show="addexpenseForm.amount.$error.required" class="text-danger">Amount is required.</span>
 							<span ng-show="addexpenseForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+							<span ng-show="addexpenseForm.amount.$error.checkAmount" class="text-danger">Amount must be less than or equal to previous account balance </span>
 						</span>
 					</div>					
 			</div>

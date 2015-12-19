@@ -37,7 +37,7 @@
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
 				<label for="referance_id" class="col-sm-2 control-label"> Select Staff* </label>
 				<div class="col-sm-4">
-					<select id="refferance_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
+					<select id="referance_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
 						<option value="">Select Staff</option>
 						<option value="1">1</option>
 					</select>
@@ -180,14 +180,14 @@
 <form name="staffpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="staffpaymentForm.$valid" ng-if="modalOptions.staffpayment.type=='staff_credit'"> 
 			<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
-				<label for="refferance_id" class="col-sm-2 control-label"> Select Staff* </label>
+				<label for="referance_id" class="col-sm-2 control-label"> Select Staff* </label>
 				<div class="col-sm-4">
-					<select id="refferance_id" class="form-control" ng-model="modalOptions.staffpayment.refferance_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
+					<select id="refferance_id" class="form-control" ng-model="modalOptions.staffpayment.referance_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
 						<option value="">Select Staff</option>
 						<option value="1">1</option>
 					</select>
-					<span class="help-block" ng-show="staffpaymentForm.refferance_id.$dirty && staffpaymentForm.refferance_id.$invalid">
-					<span ng-show="staffpaymentForm.refferance_id.$error.required" class="text-danger">user name is required.</span>
+					<span class="help-block" ng-show="staffpaymentForm.referance_id.$dirty && staffpaymentForm.referance_id.$invalid">
+					<span ng-show="staffpaymentForm.referance_id.$error.required" class="text-danger">user name is required.</span>
 					</span>	
 				</div>
 			</div>
@@ -294,7 +294,7 @@
 			<div class="form-group">
 				<label  for="credit_amount" class="col-sm-2 control-label">Amount</label>
 					<div class="col-sm-9">
-						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.staffpayment.credit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.staffpayment.credit_amount, modalOptions)" name="amount" placeholder="Amount" required />
+						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.staffpayment.credit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance1(modalOptions.previous_balance, modalOptions.staffpayment.credit_amount, modalOptions)" name="amount" placeholder="Amount" required />
 						<span class="help-block" ng-show="staffpaymentForm.amount.$dirty && staffpaymentForm.amount.$invalid">
 							<span ng-show="staffpaymentForm.amount.$error.required" class="text-danger">Amount is required.</span>
 							<span ng-show="staffpaymentForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
@@ -323,12 +323,3 @@
 			</div>		
 </form>
 </div>
-<!-- <div class="modal-footer">
-	
-	<button type="submit" class="btn btn-success" ng-if="!modalOptions.staffpayment.id" ng-disabled="staffpaymentForm.$invalid" ng-click="modalOptions.postData('staff_payment',modalOptions.staffpayment);modalOptions.ok()">Add Payment</button>
-					
-	<button type="submit" ng-if="modalOptions.staffpayment.id" class="btn btn-success" ng-disabled="staffpaymentForm.$invalid" ng-click="modalOptions.updateData('staff_payment',modalOptions.staffpayment,modalOptions.staffpayment.id);modalOptions.ok()">Update Payment</button>
-
-	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
-</div>
-	 -->
