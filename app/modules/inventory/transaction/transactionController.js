@@ -109,10 +109,9 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<select ng-if="grid.appScope.transactionCategory" id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="category" ng-options="item.system_name as item.name for item in grid.appScope.transactionCategory">'
 							+'<option value="" selected>Category</option>'
 						+'</select>',
-					columnTemplate : ""
 				},
 					
-				{ name:'description',
+				{ name:'description',visible:false,
 				enableSorting: false, enableFiltering: false,
 					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="description" placeholder="description">',
 					cellTemplate: '<span style="color:red">{{row.entity.description}}</span>'
@@ -120,7 +119,7 @@ define(['app'], function (app) {
 				{ name:'date',
 				enableSorting: true, enableFiltering: false,
 					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="date" placeholder="date">',
-					},
+				},
 				{ name:'credit_amount',
 					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\',true,grid.appScope.transactionParams)" ng-model="credit_amount" placeholder="Credit Amount">',
 					footerCellTemplate: '<div class="ui-grid-cell-contents">{{grid.appScope.totalCredit}}</div>'
