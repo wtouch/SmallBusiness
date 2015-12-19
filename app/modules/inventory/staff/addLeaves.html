@@ -1,0 +1,104 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	<h3  ng-if="!modalOptions.addleave.id" class="text-center">Add Leaves</h3>
+	<h3  ng-if="modalOptions.addleave.id" class="text-center" ng-init="modalOptions.totalCalculate(modalOptions)">Update Leaves</h3>
+</div>
+
+<div class="modal-body">
+<form class="form-horizontal" name="addleaveForm" role="form" ng-submit="addleaveForm.$valid" novalidate="novalidate">
+<!-- {{modalOptions.addleave}} -->
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">Approved By *</label>
+			<div class="col-sm-4">
+				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addleave.approved_by"required>
+				
+				 <span class="text-danger"  ng-show="addleaveForm.name.$error.pattern">Required Field.</span>
+				 
+				<span class="help-block" ng-show="addleaveForm.name.$dirty && addleaveForm.name.$invalid">
+				
+				<span class="text-danger" ng-show="addleaveForm.name.$error.required">Name is required.</span>
+				</span>
+			</div>
+			<label for="name" class="col-sm-1 control-label">Type*</label>
+			 <div class="radio col-sm-1">
+				<label><input type="radio" name="type" value="1" ng-model="modalOptions.addleave.type">Paid</label>
+			</div>
+			<div class="radio col-sm-2">
+			<label><input type="radio" name="type" value="0" ng-model="modalOptions.addleave.type">Unpaid</label>
+				</div>
+		</div>
+		<div class="form-group">
+			<label  for="date" class="col-sm-2 control-label">Date *</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="modalOptions.addleave.leave_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addleave.leave_date = modalOptions.leavedate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addleave.leave_date,10); modalOptions.sqlDateFormat(modalOptions.addleave.leave_date, modalOptions.addleave.leave_date)"/>	
+					
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
+			</div>
+			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
+				<label for="staff_id" class="col-sm-1 control-label"> Select Staff* </label>
+				<div class="col-sm-4">
+					<select id="staff_id" class="form-control" ng-model="modalOptions.addleave.staff_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
+						<option value="">Select Staff</option>
+						<option value="1">1</option>
+					</select>
+					<span class="help-block" ng-show="addleaveForm.staff_id.$dirty && addleaveForm.staff_id.$invalid">
+					<span ng-show="addleaveForm.staff_id.$error.required" class="text-danger">user name is required.</span>
+					</span>	
+				</div>
+			</div>
+		</div>
+	
+					
+		<div class="form-group">
+		<label for="name" class="col-sm-2 control-label">Reason</label>
+			<div class="col-sm-4">
+				<textarea class="form-control" id="reason" name="reason" ng-model="modalOptions.addleave.reason" ng-maxlength="250" placeholder="reason" required></textarea>
+				<span ng-hide="addleaveForm.reason.$error.maxlength">
+					{{ 250 - modalOptions.addleave.reason.length + " Chars left" }}
+				</span>	
+				 <span class="help-block" ng-show="addleaveForm.reason.$dirty && addleaveForm.reason.$invalid">
+					<span class="text-danger" ng-show="addleaveForm.reason.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span ng-show="addleaveForm.reason.$error.required" class="text-danger">Required Field</span>
+				</span>
+			</div>
+			<label for="select type" class="col-sm-1 control-label">Status*</label>
+			<div class="col-sm-4">
+					<select id="status" name="status" class="form-control" 
+					ng-model="modalOptions.addleave.status" required>
+					<option value="" selected>select Status</option>
+					<option value="1">APPROVED</option>
+					<option value="0">REJECTED</option>
+					</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">Leave for*</label>
+			<div class="radio col-sm-2">
+			<label><input type="radio" name="leave" value="0.5" ng-model="modalOptions.addleave.leaves_for" ng-click="otherLeaves = false">Half Day</label>
+			</div>
+			<div class="radio col-sm-2">
+			<label><input type="radio" name="leave" value="1" ng-model="modalOptions.addleave.leaves_for" ng-click="otherLeaves = false">Full Day</label>
+				</div>
+			<div class="radio col-sm-2">{{otherLeaves}}
+			<label><input type="radio" name="leave" value="true" ng-click="otherLeaves = true">No of Days</label>
+			<input type="text" id="leave" class="form-control" ng-hide="!otherLeaves" ng-if="otherLeaves"  ng-model="modalOptions.addleave.leaves_for" name="leave" placeholder="No of Days" required />
+		<span class="help-block" ng-show="addleaveForm.leave.$dirty && addleaveForm.leave.$invalid">
+		<span ng-show="(addleaveForm.leave.$dirty)" class="text-danger">Enter Number Only!</span></span>
+			</div>
+			
+		</div>
+</form>	
+</div>
+<div class="modal-footer">
+	
+	<button type="submit" class="btn btn-success" ng-if="!modalOptions.addleave.id" ng-disabled="addleaveForm.$invalid" ng-click="modalOptions.postData('saffleaves',modalOptions.addleave);modalOptions.ok()">Add Leave</button>
+					
+	<button type="submit" ng-if="modalOptions.addleave.id" class="btn btn-success" ng-disabled="addleaveForm.$invalid" ng-click="modalOptions.updateData('saffleaves',modalOptions.addleave,modalOptions.addleave.id);modalOptions.ok()">Update Leave</button>
+
+	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
+</div>
+	

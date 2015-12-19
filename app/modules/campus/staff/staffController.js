@@ -20,7 +20,7 @@ define(['app'], function (app) {
 		$http.get("modules/campus/config.json").success(function(response){
 			console.log(response);
 				$scope.staffConfig = response;
-			})
+			}) 
 			
 		$scope.staffParams = {
 			where : {

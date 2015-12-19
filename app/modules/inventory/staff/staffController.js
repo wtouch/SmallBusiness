@@ -693,7 +693,7 @@ define(['app'], function (app) {
 		$scope.filter = function(col, value, table, subobj, search){
 			value = (value) ? value : undefined;
 			$rootScope.filterData(col, value, search, function(response){
-				dataService.extendDeep($scope.params, params, response);
+				angular.extend($scope.params, response);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
 		}
