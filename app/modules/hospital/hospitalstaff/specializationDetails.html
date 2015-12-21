@@ -58,7 +58,7 @@
 					<th >Remove</th>
 				</tr> 
 			</thead>
-			{{modalOptions.specification}}
+			{{modalOptions.addstaff.specification}}
 			<tbody >
 				<tr ng-repeat="x in modalOptions.addstaff.specification">
 					<td>{{$index + 1}}</td>
@@ -74,12 +74,4 @@
 </div>
 
 
-<div class="modal-footer">
-	<div class="col-sm-offset-2 col-sm-9">
-		<button type="submit" class="btn btn-success" ng-disabled="addstaffForm.$invalid" ng-click="modalOptions.postData('staff',modalOptions.addstaff);modalOptions.ok()">Add staff</button>
-		
-		<button type="submit" ng-if="modalOptions.addstaff.id" class="btn btn-success" ng-disabled="addstaffForm.$invalid" ng-click="modalOptions.updateData('staff',modalOptions.addstaff,modalOptions.addstaff.id);modalOptions.ok()">Update staff</button>
-		
-		<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
-	</div>
-</div>	
+
