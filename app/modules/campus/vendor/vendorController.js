@@ -17,13 +17,9 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";
 		
-		$scope.vendorParams = {
-			where : {
-				status : 1,
-				user_id : $rootScope.userDetails.id
-			},
-			cols : ["*"]
-		}
+		/* if(!$routeParams.vendor){
+			$location.path("/dashboard/campus/vendor/vendor");
+		} */
 		
 		$rootScope.moduleMenus = [
 			{
@@ -36,9 +32,15 @@ define(['app'], function (app) {
 				}
 			}
 		]
+		$scope.currentPath = $location.path();
 		
+		var dueDate = new Date();
+		dueDate.setDate(dueDate.getDate() + 10);
+		var dueMonth = dueDate.getMonth() + 1;
+		dueMonth = (dueMonth <= 9) ? '0' + dueMonth : dueMonth;
+		$scope.dueDate = dueDate.getFullYear() + "-" + dueMonth + "-" + dueDate.getDate();
 		
-		$scope.vendor = {
+		$scope.vendorlist = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -51,26 +53,26 @@ define(['app'], function (app) {
 				},
 				{
 				    name:'name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'vendor\', \'vendor\', true, grid.appScope.vendorParams)" ng-model="name" placeholder="search">',
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'vendor\', \'vendorlist\', true, grid.appScope.vendorParams)" ng-model="name" placeholder="search">',
                 },
 				{
 					name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'vendor\', \'vendor\',true, grid.appScope.vendorParams)" ng-model="email" placeholder="search">'
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'vendor\', \'vendorlist\',true, grid.appScope.vendorParams)" ng-model="email" placeholder="search">'
                 },
 				{
 					name:'phone',
-					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'vendor\', \'vendor\',true, grid.appScope.vendorParams)" ng-model="phone" placeholder="search">'
+					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'vendor\', \'vendorlist\',true, grid.appScope.vendorParams)" ng-model="phone" placeholder="search">'
                 },
 			   {
 				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'vendor\', \'vendor\',true, grid.appScope.vendorParams)" ng-model="address" placeholder="search">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'vendor\', \'vendorlist\',true, grid.appScope.vendorParams)" ng-model="address" placeholder="search">',
                 },
 				{
 				    name:'city',
-				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'vendor\', \'vendor\',true, grid.appScope.vendorParams)" ng-model="city" placeholder="search">', 
+				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'vendor\', \'vendorlist\',true, grid.appScope.vendorParams)" ng-model="city" placeholder="search">', 
                 },
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'vendor\', \'vendor\',false, grid.appScope.vendorParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'vendor\', \'vendorlist\',false, grid.appScope.vendorParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -86,43 +88,111 @@ define(['app'], function (app) {
 			console.log(response);
 			if(response.status == "success"){
 				console.log($scope.vendorParams);
-				$scope.getData(false, $scope.currentPage, "vendor", "vendor", $scope.vendorParams);
+				$scope.getData(false, $scope.currentPage, "vendor", "vendorlist", $scope.vendorParams);
 			}
 		}
 		$scope.openModal = function(url,data){
-			var modalDefault = {
+			
+				var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
 			};
-			var modalOptions ={
-				addvendor:(data)?{
-					id:data.id,
-					name:data.name,
+			var modalOptions = {
+				date : $scope.currentDate,
+				addvendor : (data) ? {
+					id : data.id,
+					user_id : data.user_id,
+					vendor_id :data.vendor_id,
+					name : data.name,
+					email : data.email,
+					phone: data.phone,
+					address: data.address,
+					location: data.location,
+					area: data.area,
+					city: data.city,
+					state: data.state,
+					country: data.country,
+					pincode: data.pincode,
+					date : data.date,
 					
-				}:{
-					
+			} : {
+					user_id : $rootScope.userDetails.user_id,
+					date : dataService.sqlDateFormate(),
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},
 				postData : function(table, input){
-						console.log(table, input);
-						$rootScope.postData(table, input,function(response){
-							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'vendor','vendor',$Scope.vendorParams);
-							}
-						})
-					},
-					formPart : 'vendorDetails',
-					showFormPart : function(formPart, modalOptions){
-						console.log(formPart);
-						modalOptions.formPart = formPart;
-					},
-					getData : $scope.getData,
-					
-	 };
-	 modalService.showModal(modalDefault, modalOptions).then(function(){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'vendor','vendorlist',$scope.vendorParams);
+						}
+					})
+				},
+				updateData : function(table, input, id){
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'vendor','vendorlist',$scope.vendorParams);
+						}
+					})
+				}
+			};
+			
+			modalService.showModal(modalDefault, modalOptions).then(function(){
 				
-		})
+			})
 	}
-	}		
+	 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
+			$scope.params = (params) ? params : {
+				where : {
+					user_id : $rootScope.userDetails.id,
+					status:1,
+				},
+				cols : ["*"]
+			};
+			if(page){
+				dataService.extendDeep($scope.params, {
+					limit : {
+						page : page,
+						records : $scope.pageItems
+					}
+				})
+			}
+			dataService.get(single,table,$scope.params).then(function(response) {
+				if(response.status == 'success'){
+					if(modalOptions != undefined){
+						modalOptions[subobj] = angular.copy(response.data);
+						modalOptions.totalRecords = response.totalRecords;
+					}else{
+						($scope[subobj]) ? $scope[subobj].data = angular.copy(response.data) : $scope[subobj] = angular.copy(response.data) ;
+						$scope.totalRecords = response.totalRecords;
+					}
+				}else{
+					if(modalOptions != undefined){
+						modalOptions[subobj] = [];
+						modalOptions.totalRecords = 0;
+					}else{
+						($scope[subobj]) ? $scope[subobj].data = [] : $scope[subobj] = [] ;
+						$scope.totalRecords = 0;
+					}
+				}
+			});
+		}
+		/* filter  dynamic*/
+		$scope.filter = function(col, value, table, subobj, search, params){
+			value = (value) ? value : undefined;
+			if(!params) params = {};
+			$rootScope.filterData(col, value, search, function(response){
+				dataService.extendDeep($scope.params, params, response);
+				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
+			})
+		}
+		$scope.orderBy = function(col, value, table, subobj){
+			if(!$scope.params.orderBy) $scope.params.orderBy = {};
+			$scope.params.orderBy[col] = value;
+			$scope.getData($scope.currentPage, table, subobj, $scope.params);
+		}
+	
+	};		
 	// Inject controller's dependencies
 	vendorController.$inject = injectParams;
 	// Register/apply controller dynamically
