@@ -105,7 +105,9 @@ define(['app'], function (app) {
 					unit:data.unit,
 					medicine_category:data.medicine_category,
 					medicine_type:data.medicine_type,
-					description:data.description
+					description:data.description,
+					package_date:data.package_date,
+					expiry_date:data.expiry_date
 				} : {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
