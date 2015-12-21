@@ -26,7 +26,7 @@
 	<div class="form-group" ng-init="modalOptions.getData(false,false,'patient','patient',modalOptions.patientParams,modalOptions)">
 		<label for="patient_id" class="col-sm-2 control-label"> Patient name * </label>
 		<div class="col-sm-10">
-			<select id="patient_id" class="form-control" ng-model="modalOptions.addopdpatient.patient_id" ng-options="item.id as item.name for item in modalOptions.patient" required>
+			<select id="patient_id" class="form-control" ng-model="modalOptions.addopdpatient.patient_id" ng-options="item.id as item.patient_name for item in modalOptions.patient" required>
 				<option value="">Select Patient</option>
 			</select>
 			<span class="help-block" ng-show="addopdpatientForm.user_id.$dirty && addopdpatientForm.user_id.$invalid">
@@ -37,8 +37,8 @@
 	<div class="form-group" ng-init="modalOptions.getData(false,false,'staff','staff',modalOptions.staffParams,modalOptions)">
 		<label for="staff_id" class="col-sm-2 control-label"> Consultant Dr </label>
 		<div class="col-sm-10">
-			<select id="staff_id" class="form-control" ng-model="modalOptions.addopdpatient.staff_id" ng-options="item.id as item.type for item in modalOptions.staff" required>
-				<option value="">Select Party</option>
+			<select id="staff_id" class="form-control" ng-model="modalOptions.addopdpatient.staff_id" ng-options="item.id as item.name for item in modalOptions.staff | filter :{staff_type: 'doctor'}" required>
+				<option value="">Select Dr</option>
 			</select>
 			<span class="help-block" ng-show="addopdpatientForm.user_id.$dirty && addopdpatientForm.user_id.$invalid">
 			<span ng-show="addopdpatientForm.user_id.$error.required" class="text-danger">user id is required.</span>

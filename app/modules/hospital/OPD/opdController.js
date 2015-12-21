@@ -53,11 +53,11 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="email" placeholder="search">'
                 },
 				{
-					name:'emergancy contact',
-					filterHeaderTemplate: '<input id="emergancy_contact" class="form-control" ng-change="grid.appScope.filter(\'emergancy_contact\', emergancy_contact, \'opd\', \'opdList\',true, grid.appScope.opdParams)" ng-model="mobile" placeholder="search">'
+					name:'emergency_contact',
+					filterHeaderTemplate: '<input id="emergency_contact" class="form-control" ng-change="grid.appScope.filter(\'emergency_contact\', emergency_contact, \'opd\', \'opdList\',true, grid.appScope.opdParams)" ng-model="emergency_contact" placeholder="search">'
                 },
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'opd\', \'opdList\',true, grid.appScope.patientParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'opd\', \'opdList\',false, grid.appScope.opdParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -69,15 +69,19 @@ define(['app'], function (app) {
 					} ,
 				
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/addopdpatient.html\',row.entity.id)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					
 					+ 
-					'<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'patient\', \'status\',row.entity.status, row.entity.id);$route.reload()" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+ 
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/view_opdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
-					
+					+
+					'<a type="button" tooltip="Delete Patient details" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'opd\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				}
 			]
 		};
-		
+		$scope.callbackColChange = function(response){
+			console.log(response);
+			if(response.status == "success"){
+				$scope.getData(false, $scope.currentPage, "opd", "opdList", $scope.opdParams);
+			}
+		}
 		$scope.openModal = function(url,data){
 			
 			var modalDefault = {
