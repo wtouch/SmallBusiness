@@ -108,9 +108,10 @@ define(['app'], function (app) {
 					id : data.id,
 				staff_type : data.staff_type,
 					} : {
-						date : dataService.sqlDateFormate(),
-					user_id : $rootScope.userDetails.id,	
-					status : 1,
+					date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,
+					modified_date : dataService.sqlDateFormate(),
+					staff_date: dataService.sqlDateFormate()
 					}, 
 				
 					postData : function(table, input){

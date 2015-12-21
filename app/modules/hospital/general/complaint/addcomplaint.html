@@ -12,16 +12,23 @@
 				</div>
 		</div>		
 		<div class="form-group">
-			<label for="category" class="col-sm-2 control-label">Select Category*</label>
-			<div class="col-sm-9">
-				<select id="category" name="category" class="form-control" 
-				ng-model="modalOptions.addcomplaint.category">
-				<option value="" selected>select category</option>
-				<option value="category"> medicine</option>
-				<option value="category">Capsules</option>
-				</select>
+			<label for="category" class="col-sm-2 control-label">Category*</label>
+			<div class="col-sm-4">					
+				<input type="text" id="category" class="form-control" name="category" placeholder="History Title" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addcomplaint.category"required>
+				 <span class="text-danger"  ng-show="addcomplaintForm.category.$error.pattern">please Enter Valid Name</span>
+				<span class="help-block" ng-show="addcomplaintForm.category.$dirty && addcomplaintForm.category.$invalid">
+					<span class="text-danger" ng-show="addcomplaintForm.category.$error.required">Name is required.</span>
+				</span>
 			</div>
-		</div>
+				<label for="type" class="col-sm-1 control-label">Type*</label>
+			<div class="col-sm-4">					
+				<input type="text" id="type" class="form-control" name="type" placeholder="History Title" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addcomplaint.type"required>
+				 <span class="text-danger"  ng-show="addcomplaintForm.type.$error.pattern">please Enter Valid Name</span>
+				<span class="help-block" ng-show="addcomplaintForm.type.$dirty && addcomplaintForm.type.$invalid">
+					<span class="text-danger" ng-show="addcomplaintForm.type.$error.required">Name is required.</span>
+				</span>
+			</div>
+		</div>	
 			<div class="form-group">
 			<label for="complaint_description" class="col-sm-2 control-label">Description</label>
 				<div class="col-sm-9">
