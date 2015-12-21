@@ -1,7 +1,6 @@
 <div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions)">
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
-	<h3  ng-if="!modalOptions.addinvoice.id" class="text-center">Generate Invoice</h3>
-	<h3  ng-if="modalOptions.addinvoice.id" class="text-center" ng-init="modalOptions.totalCalculate(modalOptions)">Generate Invoice</h3>
+	<h3 class="text-center">Generate Invoice</h3>
 </div>
 <div class="modal-body">
 	
@@ -10,30 +9,30 @@
 			<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
 				<label for="party_id" class="col-sm-2 control-label"> Select Party * </label>
 				<div class="col-sm-4">
-					<select id="party_id" class="form-control" ng-model="modalOptions.addinvoice.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}" required>
+					<select id="party_id" class="form-control" ng-model="modalOptions.genarateinvoice.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}" required>
 						<option value="">Select Party</option>
 					</select>
-					<span class="help-block" ng-show="addInvoiceForm.party_id.$dirty && addInvoiceForm.party_id.$invalid">
-					<span ng-show="addInvoiceForm.party_id.$error.required" class="text-danger">user name is required.</span>
+					<span class="help-block" ng-show="genarateinvoiceForm.party_id.$dirty && genarateinvoiceForm.party_id.$invalid">
+					<span ng-show="genarateinvoiceForm.party_id.$error.required" class="text-danger">user name is required.</span>
 					</span>	
 				</div>
 			</div>
 			
 			<div class="col-sm-4">
 			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
-				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addinvoice.generated_date"  
-				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
+				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.genarateinvoice.generated_date"  
+				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.genarateinvoice.generated_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
-			<input type="hidden" ng-model="modalOptions.addinvoice.tax" ng-init="modalOptions.addinvoice.tax = modalOptions.singleparticular.tax">
+			<input type="hidden" ng-model="modalOptions.genarateinvoice.tax" ng-init="modalOptions.genarateinvoice.tax = modalOptions.singleparticular.tax">
 			
 		</div>
 	</form>
 	
 	<!--THE HIDDEN Generate Date and Due_date and User ID Ends Here-->
 	<div class="row">
-		<div class="col-sm-12 " ng-init="modalOptions.addinvoice.particulars = (modalOptions.addinvoice.particulars) ? modalOptions.addinvoice.particulars : []">
+		<div class="col-sm-12 " ng-init="modalOptions.genarateinvoice.particulars = (modalOptions.genarateinvoice.particulars) ? modalOptions.genarateinvoice.particulars : []">
 		
-			<form name="addInvoiceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addInvoiceForm.$valid" id="addInvoiceForm" ng-if="modalOptions.addinvoice.party_id">
+			<form name="genarateinvoiceForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="genarateinvoiceForm.$valid" id="genarateinvoiceForm" ng-if="modalOptions.genarateinvoice.party_id">
 				<div class="table-responsive">
 					<table class="table table-bordered" >
 						<thead>
@@ -51,8 +50,8 @@
 							<tr>
 								<td>
 									<input type="text" class="form-control " placeholder="Particular Name" id="particular_name" name="particular_name" ng-model="modalOptions.singleparticular.particular_name" required/>
-									<span class="help-block" ng-show="addInvoiceForm.particular_name.$dirty && addInvoiceForm.particular_name.$invalid">
-									<span ng-show="addInvoiceForm.particular_name.$error.required" class="text-danger">particular_name Required.</span>
+									<span class="help-block" ng-show="genarateinvoiceForm.particular_name.$dirty && genarateinvoiceForm.particular_name.$invalid">
+									<span ng-show="genarateinvoiceForm.particular_name.$error.required" class="text-danger">particular_name Required.</span>
 									</span>
 								</td>	
 								<td>			
@@ -63,8 +62,8 @@
 										<option value="type3">Type3</option>
 										<option value="type4">Type4</option>
 									</select>
-									<span class="help-block" ng-show="addInvoiceForm.goods_type.$dirty && addInvoiceForm.goods_type.$invalid">
-										<span ng-show="addInvoiceForm.goods_type.$error.required" class="text-danger">Required field.</span>
+									<span class="help-block" ng-show="genarateinvoiceForm.goods_type.$dirty && genarateinvoiceForm.goods_type.$invalid">
+										<span ng-show="genarateinvoiceForm.goods_type.$error.required" class="text-danger">Required field.</span>
 									</span>
 								</td>
 								<td>
@@ -75,8 +74,8 @@
 										<option value="category3">Category3</option>
 										<option value="category4">Category4</option>
 									</select>
-									<span class="help-block" ng-show="addInvoiceForm.category.$dirty && addInvoiceForm.category.$invalid">
-										<span ng-show="addInvoiceForm.category.$error.required" class="text-danger">Required field.</span>
+									<span class="help-block" ng-show="genarateinvoiceForm.category.$dirty && genarateinvoiceForm.category.$invalid">
+										<span ng-show="genarateinvoiceForm.category.$error.required" class="text-danger">Required field.</span>
 									</span>	
 								</td>
 								<td>
@@ -84,9 +83,9 @@
 									ng-init="modalOptions.singleparticular.price = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
 									
 									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"	required/>
-									<span class="help-block" ng-show="addInvoiceForm.price.$dirty && addInvoiceForm.price.$invalid">
-									<span ng-show="addInvoiceForm.price.$error.required" class="text-danger">Price Required.</span>
-									<span ng-show="addInvoiceForm.price.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+									<span class="help-block" ng-show="genarateinvoiceForm.price.$dirty && genarateinvoiceForm.price.$invalid">
+									<span ng-show="genarateinvoiceForm.price.$error.required" class="text-danger">Price Required.</span>
+									<span ng-show="genarateinvoiceForm.price.$error.pattern" class="text-danger">Enter like 0.00 only</span>
 									</span>
 								</td>
 								<td>
@@ -95,9 +94,9 @@
 									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" 
 									required/>
 									
-									<span class="help-block" ng-show="addInvoiceForm.quantity.$dirty && addInvoiceForm.quantity.$invalid">
-									<span ng-show="addInvoiceForm.quantity.$error.required" class="text-danger">Quantity Required</span>
-									<span ng-show="addInvoiceForm.quantity.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+									<span class="help-block" ng-show="genarateinvoiceForm.quantity.$dirty && genarateinvoiceForm.quantity.$invalid">
+									<span ng-show="genarateinvoiceForm.quantity.$error.required" class="text-danger">Quantity Required</span>
+									<span ng-show="genarateinvoiceForm.quantity.$error.pattern" class="text-danger">Enter like 0.00 only</span>
 									</span>
 								</td>
 								<td>
@@ -128,13 +127,13 @@
 					</table>
 				</div>
 				<div class="col-sm-4">
-						<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars,'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">+Add This Particular</button>							
+						<button type="submit" class="btn btn-success center" ng-disabled="genarateinvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.genarateinvoice.particulars,'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">+Add This Particular</button>							
 				</div>
 			</form>
 		</div>
 	</div>
 </div>	
-<div class="table-responsive col-sm-12" ng-if="modalOptions.addinvoice.party_id">
+<div class="table-responsive col-sm-12" ng-if="modalOptions.genarateinvoice.party_id">
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -149,7 +148,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="x in modalOptions.addinvoice.particulars">
+			<tr ng-repeat="x in modalOptions.genarateinvoice.particulars">
 				<td>{{ $index + 1 }}</td>
 				<td>{{x.particular_name}}</td>
 				<td>{{x.goods_type}}</td>
@@ -157,15 +156,15 @@
 				<td class="text-right">{{x.price}}</td>
 				<td class="text-right">{{x.quantity}}</td>
 				<td class="text-right">{{x.amount}}</td>
-				<td><a ng-click="modalOptions.removeObject(modalOptions.addinvoice.particulars, $index);modalOptions.totalCalculate(modalOptions);"><span class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a ng-click="modalOptions.removeObject(modalOptions.genarateinvoice.particulars, $index);modalOptions.totalCalculate(modalOptions);"><span class="glyphicon glyphicon-remove"></span></a></td>
 			</tr>
 			<tr>
 					<td colspan="5"></td>
 					<td class="text-right"><strong>Sub Total</strong></td>
-					<td class="text-right">{{ modalOptions.addinvoice.subtotal | number : 2}}</td>
-					<td>{{modalOptions.addinvoice.tax}}</td>
+					<td class="text-right">{{ modalOptions.genarateinvoice.subtotal | number : 2}}</td>
+					<td>{{modalOptions.genarateinvoice.tax}}</td>
 			</tr>
-			<tr ng-repeat="(key, value) in modalOptions.addinvoice.tax">
+			<tr ng-repeat="(key, value) in modalOptions.genarateinvoice.tax">
 				<td colspan="5"></td>
 				<td class="text-right"><strong>{{key}}</strong></td>
 				<td class="text-right">{{ value  | number : 2}}</td>
@@ -174,29 +173,26 @@
 			<tr>
 				<td colspan="5"></td>
 				<td class="text-right"><strong>Total</strong></td>
-				<td class="text-right">{{ modalOptions.addinvoice.total_amount  | number : 2}}</td>
+				<td class="text-right">{{ modalOptions.genarateinvoice.total_amount  | number : 2}}</td>
 				<td></td>
 			</tr>
 		</tbody>
 	</table>
 	<label class="col-sm-3">Remark</label>
 	<div class="col-sm-9">
-		<textarea class="form-control" id="remark" name="remark" ng-model="modalOptions.addinvoice.remark" ng-maxlength="250" placeholder="Remark" required></textarea>
-		<span ng-hide="addInvoiceForm.remark.$error.maxlength">
-						{{ 250 - modalOptions.addinvoice.remark.length + " Chars left" }}
+		<textarea class="form-control" id="remark" name="remark" ng-model="modalOptions.genarateinvoice.remark" ng-maxlength="250" placeholder="Remark" required></textarea>
+		<span ng-hide="genarateinvoiceForm.remark.$error.maxlength">
+						{{ 250 - modalOptions.genarateinvoice.remark.length + " Chars left" }}
 		</span>	
-		 <span class="help-block" ng-show="addInvoiceForm.remark.$dirty && addInvoiceForm.remark.$invalid">
-			<span class="text-danger" ng-show="addInvoiceForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-			<span ng-show="addInvoiceForm.remark.$error.required" class="text-danger">Required Field</span>
+		 <span class="help-block" ng-show="genarateinvoiceForm.remark.$dirty && genarateinvoiceForm.remark.$invalid">
+			<span class="text-danger" ng-show="genarateinvoiceForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+			<span ng-show="genarateinvoiceForm.remark.$error.required" class="text-danger">Required Field</span>
 		</span>
 	</div>
 </div>
 
 <div class="modal-footer">
-	
-	<button type="submit"  class="btn btn-success" ng-if="modalOptions.addinvoice.id"  ng-disabled="addinvoice.$invalid" ng-click="modalOptions.updateData('invoice',modalOptions.addinvoice,modalOptions.addinvoice.id); modalOptions.ok()">Update Invoice</button>
-
-	<button type="submit"  class="btn btn-success" ng-if="!modalOptions.addinvoice.id" ng-disabled="addInvoiceForm.$invalid" ng-click="modalOptions.postData('invoice',modalOptions.addinvoice); modalOptions.ok()">Add Invoice</button>
+	<button type="submit"  class="btn btn-success" ng-disabled="genarateinvoiceForm.$invalid" ng-click="modalOptions.postData('invoice',modalOptions.genarateinvoice); modalOptions.ok()">Generate Invoice</button>
 	
 	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
 </div>

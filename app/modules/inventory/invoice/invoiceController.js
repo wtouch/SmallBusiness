@@ -86,7 +86,7 @@ define(['app'], function (app) {
 				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'invoice\', \'invoiceList\',true, grid.appScope.invoiceParams)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">' 
 							+'<option value="">Select Party</option>'
 						+'</select>',
-				cellTemplate : '<span>Hello</span>',
+				cellTemplate : '<span>{{row.entity.name}}</span>',
 					},
 				{ 
 					name:'generated_date',
@@ -195,9 +195,9 @@ define(['app'], function (app) {
 					  //type: uiGridConstants.filter.SELECT,
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
-					cellTemplate : '<a ng-click="grid.appScope.openModalQuotation(\'modules/inventory/invoice/addquotation.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Quotation"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModalQuotation(\'modules/inventory/invoice/addquotation.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Quotation"> <span class="glyphicon glyphicon-pencil"></span></a>'+
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/generateinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Generate Invoice">Genarate Invoice </a>'
 					+ '<a type="button" tooltip="Delete Quotation" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'quotation\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange1)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openViewreceipt(\'modules/inventory/invoice/viewReceipt.html\',row.entity)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			],
@@ -261,9 +261,25 @@ define(['app'], function (app) {
 						particulars:data.particulars,
 						remark : data.remark,
 						total_amount : data.total_amount,
-						due_date : data.due_date
+						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
 					} : {
-						user_id : $rootScope.user_id,
+						user_id : $rootScope.userDetails.user_id,
+						date : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
+					},
+					genarateinvoice : (data) ? {
+						invoice_id : data.invoice_id,
+						user_id : data.user_id,
+						party_id :data.party_id,
+						generated_date : data.generated_date,
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+						particulars:data.particulars,
+						remark : data.remark,
+						total_amount : data.total_amount,
+						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
+					} : {
+						user_id : $rootScope.userDetails.user_id,
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
@@ -545,10 +561,10 @@ define(['app'], function (app) {
 					joinOn : {
 						id : "t0.party_id"
 					},
-					cols : {name : "name"}
+					cols : {name : "name",party_id : "party_id",user_id :"user_id"}
 				}
 			],
-			cols : ["*"]
+			cols : ['id,quotation_id,generated_date,particulars,remark,tax,subtotal,total_amount']
 		}
 		
 		$scope.partyParams = {
