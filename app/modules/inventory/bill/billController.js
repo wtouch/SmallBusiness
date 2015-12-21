@@ -26,10 +26,20 @@ define(['app'], function (app) {
 			{
 				name : "Add Bill",
 				path : "#/dashboard/inventory/bill",
-				SubTitle :" Purchase Bill",
+				SubTitle :"Purchase Bill",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/inventory/bill/addbill.html");
+					}
+				}
+			},
+			{
+				name : "Purchase Order",
+				path : "#/dashboard/inventory/bill",
+				SubTitle :"Purchase Order",
+				events : {
+					click : function(){
+						return $scope.openQuotation("modules/inventory/bill/purchaseorder.html");
 					}
 				}
 			}
@@ -255,6 +265,64 @@ define(['app'], function (app) {
 					var sqlDate = dataService.sqlDateFormate(date,"date");
 					object = sqlDate;
 				},
+				getData: $scope.getData,
+				//addToObject : $rootScope.addToObject,
+				addToObject : function(object,data,modalOptions){
+					$rootScope.addToObject(object,modalOptions[data]);
+					modalOptions[data] = {};
+				},
+				
+				removeObject : $rootScope.removeObject
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
+		
+		
+		//Modal for Quotation
+		$scope.openQuotation = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+				addQuotation : (data) ? {
+					id : data.id,
+					bill_id :data.bill_id,
+					party_id : data.party_id,
+					user_id : data.user_id,
+					bill_date : data.bill_date,
+					due_date : data.due_date,
+					due_amount : data.due_amount,
+					total_amount : data.total_amount,
+					remark : data.remark,
+					particular : data.particular,
+					modified_date : dataService.sqlDateFormate(false,"datetime")
+				} : {
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
+					user_id : $rootScope.userDetails.id
+				},
+				
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							// For Insert each item from particulars into Stock Table
+							$scope.getData(false, $scope.currentPage, 'purchase_order','purchaseorderData',$scope.billParams);
+						}
+					})
+				},
+				
+				updateData : function(table, input, id){
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'purchase_order','purchaseorderData',$scope.billParams);
+						}
+					})
+				},
+				
 				getData: $scope.getData,
 				//addToObject : $rootScope.addToObject,
 				addToObject : function(object,data,modalOptions){
