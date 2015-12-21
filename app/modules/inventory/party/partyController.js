@@ -85,19 +85,6 @@ define(['app'], function (app) {
 					enableFiltering: false,
 					cellTemplate : '<span ng-if="row.entity.type==\'client\'">Client</span><span ng-if="row.entity.type==\'vendor\'">Vendor</span>'
                 },
-				{ name:'department',
-					filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="department">'
-							+'<option value="" selected>Department</option>' 
-							+'<option value="IT">IT</option>'
-							+'<option value="CIVIL">CIVIL</option>'
-							+'<option value="MECH">MECH</option>'
-						+'</select>', 
-				 filter: {
-					   type: uiGridConstants.filter.SELECT,  
-					  selectOptions: [ { value: 'IT', label: 'IT' }, { value: 'CIVIL', label: 'CIVIL'},{ value: 'MECH', label: 'MECH' }]
-					} 
-					
-				},
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'party\', \'party\',false, grid.appScope.partyParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 

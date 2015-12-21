@@ -25,23 +25,30 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Bill",
-				path : "#/dashboard/inventory/bill",
 				SubTitle :"Purchase Bill",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/inventory/bill/addbill.html");
 					}
 				}
-			},
-			{
-				name : "Purchase Order",
-				path : "#/dashboard/inventory/bill",
+			},{
+				name : "Add Purchase Order",
 				SubTitle :"Purchase Order",
 				events : {
 					click : function(){
-						return $scope.openQuotation("modules/inventory/bill/addpurchaseorder.html");
+						return $scope.openModal("modules/inventory/bill/addPurchaseorder.html");
 					}
 				}
+			},
+			{
+				name : "Purchase Order",
+				path : "#/dashboard/inventory/purchaseorder",
+				SubTitle :"Purchase Order"
+			},
+			{
+				name : "Purchase Bill",
+				path : "#/dashboard/inventory/bill",
+				SubTitle :"Purchase Order"
 			}
 		]
 		var rowtpl='<div ng-class="{ \'my-css-class\': grid.appScope.rowFormatter( row ),\'text-success\':(row.entity.payment_status==1),\'text-danger\':(row.entity.payment_status==0),\'text-warning\':(row.entity.payment_status==2)}">' +
