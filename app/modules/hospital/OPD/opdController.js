@@ -135,6 +135,12 @@ define(['app'], function (app) {
 					
 				},
 				getData : $scope.getData,
+				addToObject : function(object,data,modalOptions){
+					console.log(object,data,modalOptions);
+					$rootScope.addToObject(object,modalOptions[data]);
+					modalOptions[data] = {};
+				},
+				removeObject : $rootScope.removeObject
 			};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){

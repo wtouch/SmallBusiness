@@ -1,15 +1,32 @@
 		<div class="modal-body" ng-init="modalOptions.addadmission.complaints = (modalOptions.addadmission.complaints) ? modalOptions.addadmission.complaints : []">{{modalOptions.complaints}}
 				
 			<div class="form-group">
-				<label for="complaints_name" class="col-sm-2 control-label">complaints_name *</label>
+				<label for="complaint_name" class="col-sm-2 control-label">complaints_name *</label>
 				<div class="col-sm-8">
-				<input type="text" id="complaints_name" name="complaints_name" class="form-control" ng-model="modalOptions.complaints.complaints_name" placeholder="Enter complaints_name" ng-pattern="/^[a-zA-Z]*$/" required />
-					<span class="help-block" ng-show="addnew_admissionForm.complaints_name.$dirty && addnew_admissionForm.complaints_name.$invalid">
-						<span ng-show="addnew_admissionForm.complaints_name.$error.required" class="text-danger">complaints_name is required.</span>
+				<input type="text" id="complaint_name" name="complaint_name" class="form-control" ng-model="modalOptions.complaints.complaint_name" placeholder="Enter complaint_name" ng-pattern="/^[a-zA-Z]*$/" required />
+					<span class="help-block" ng-show="addnew_admissionForm.complaint_name.$dirty && addnew_admissionForm.complaint_name.$invalid">
+						<span ng-show="addnew_admissionForm.complaint_name.$error.required" class="text-danger">complaints_name is required.</span>
 					</span>				
 				</div>
 				
 			</div>
+		<div class="form-group" ng-init="modalOptions.getData(false,false,'complaint','complaint',modalOptions.complaintParams,modalOptions)">
+			<label for="category" class="col-sm-2 control-label">Select Category*</label>
+			<div class="col-sm-3">
+				<select id="category" name="category" class="form-control" 
+				ng-model="modalOptions.complaints.category" ng-options="item.id as item.category for item in modalOptions.complaint" >
+				<option value="">select category</option>
+				
+				</select>
+			</div>
+			<label for="type" class="col-sm-2 control-label">Select type*</label>
+				<div class="col-sm-3">
+					<select id="type" name="type" class="form-control" 
+					ng-model="modalOptions.complaints.type" ng-options="item.id as item.type for item in modalOptions.complaint">
+					<option value="">select type</option>
+					</select>
+				</div>
+			</div>		
 			<div class="form-group">
 				<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
 				<div class="col-sm-8">
@@ -29,7 +46,9 @@
 				<thead>
 					<tr>
 						<th class="col-sm-2">Sr.No.</th>
-						<th class="col-sm-2">Complaints Name</th>
+						<th class="col-sm-2">Complaint Name</th>
+						<th class="col-sm-2">Complaints Category</th>
+						<th class="col-sm-2">Complaints Type</th>
 						<th class="col-sm-2">Complaints Description</th>
 						<th >Remove</th>
 					</tr> 
@@ -37,7 +56,9 @@
 				<tbody >{{modalOptions.addadmission.complaints}}
 					<tr ng-repeat="x in modalOptions.addadmission.complaints">
 						<td>{{$index + 1}}</td>
-						<td>{{x.complaints_name}}</td>
+						<td>{{x.complaint_name}}</td>
+						<td>{{x.category}}</td>
+						<td>{{x.type}}</td>
 						<td>{{x.complaints_description}}</td>
 						<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.complaints, $index)">X</button></td>
 					</tr>
