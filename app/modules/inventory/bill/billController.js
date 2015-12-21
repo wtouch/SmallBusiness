@@ -256,6 +256,26 @@ define(['app'], function (app) {
 					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					user_id : $rootScope.userDetails.id
 				},
+				//for generate Invoice
+				generateBill : (data) ? {
+					//id : data.id,
+					bill_id :data.bill_id,
+					party_id : data.party_id,
+					user_id : data.user_id,
+					bill_date : data.bill_date,
+					due_date : data.due_date,
+					due_amount : data.due_amount,
+					total_amount : data.total_amount,
+					remark : data.remark,
+					particular : data.particular,
+					modified_date : dataService.sqlDateFormate(false,"datetime")
+				} : {
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
+					user_id : $rootScope.userDetails.id
+				},
+				
 				getBalance : $scope.getBalance,
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
