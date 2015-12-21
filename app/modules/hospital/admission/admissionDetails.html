@@ -8,7 +8,7 @@
 			<div class="form-group" ng-init="modalOptions.getData(false,false,'patient','patient',modalOptions.patientParams,modalOptions)">
 		<label for="patient_id" class="col-sm-2 control-label"> Patient name * </label>
 		<div class="col-sm-8">
-			<select id="patient_id" class="form-control" ng-model="modalOptions.addopdpatient.patient_id" ng-options="item.id as item.name for item in modalOptions.patient" required>
+			<select id="patient_id" class="form-control" ng-model="modalOptions.addadmission.patient_id" ng-options="item.id as item.patient_name for item in modalOptions.patient" required>
 				<option value="">Select Patient</option>
 			</select>
 			<span class="help-block" ng-show="addopdpatientForm.user_id.$dirty && addopdpatientForm.user_id.$invalid">
@@ -55,7 +55,8 @@
 			<div class="form-group">
 				<label for="ward_id" class="col-sm-2 control-label">Ward Name*</label>
 				<div class="col-sm-3">
-				<input type="text" id="ward_id" name="ward_id" class="form-control" ng-model="modalOptions.addadmission.ward_id" placeholder="Enter ward name" ng-pattern="/^[a-zA-Z]*$/" required>
+				<select id="ward_id" class="form-control" ng-model="modalOptions.addadmission.ward_id" ng-options="item.id as item.ward_name for item in modalOptions.ward" required>
+				<option value="">Select ward </select>
 				<span class="text-danger"  ng-show="addnew_admissionForm.ward_id.$error.pattern">please Enter Valid state</span>
 					<span class="help-block" ng-show="addnew_admissionForm.ward_id.$dirty && addnew_admissionForm.ward_id.$invalid">
 						<span ng-show="addnew_admissionForm.ward_id.$error.required" class="text-danger">ward_id is required.</span>
@@ -73,7 +74,7 @@
 			<div class="form-group" ng-init="modalOptions.getData(false,false,'staff','staff',modalOptions.staffParams,modalOptions)">
 		<label for="consultant_dr" class="col-sm-2 control-label"> Consultant Dr </label>
 		<div class="col-sm-10">
-			<select id="consultant_dr" class="form-control" ng-model="modalOptions.addadmission.staff_id" ng-options="item.id as item.consultant_dr for item in modalOptions.staff" required>
+			<select id="consultant_dr" class="form-control" ng-model="modalOptions.addadmission.consultant_dr" ng-options="item.id as item.name for item in modalOptions.staff | filter :{staff_type :'doctor'}" required>
 				<option value="">Select Consultant Dr</option>
 			</select>
 			<span class="help-block" ng-show="addnew_admissionForm.consultant_dr.$dirty && addnew_admissionForm.consultant_dr.$invalid">
