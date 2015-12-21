@@ -1,207 +1,106 @@
-<div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions);">
-	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
-	<h3 ng-if="!modalOptions.addPurchaseorder.id">Add Purchase Order</h3>
-	<h3 ng-if="modalOptions.addPurchaseorder.id" ng-init="modalOptions.totalCalculate(modalOptions)">Update Purchase Order</h3>
+<div class="modal-header" ng-init="modalOptions.getData(false,false,'transaction','receiptList',modalOptions.receiptParams,modalOptions)">
+		<button type="button" class="close buttondistance" ng-click="modalOptions.close()">
+			<span aria-hidden="true">&times;</span></button>
+		<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('invoice')">Print</button>
+		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+		<h3>RECEIPT</h3>
 </div>
-
+<div>
+<!--{{modalOptions.receiptList}}-->
+</div>
+<br>
+<div class="form-group">
+				<label for="receipts" class="col-sm-2 control-label">Receipt Date</label>
+				<div class="col-sm-9">
+					<select class="form-control" name="receipts" id="receipts" ng-model="receipts" ng-options="item as item.modified_date for item in modalOptions.receiptList" ng-change="modalOptions.receiptList1 = receipts">
+						<option value="">Select Date</option>
+					</select>
+				</div>
+</div>
+</br>
+<div>
+<!--{{modalOptions.receiptList1}}-->
+</div>
 <div class="modal-body">
-	<form name="addPurchaseorderForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addPurchaseorderForm.$valid" id="addPurchaseorderForm">
-	{{modalOptions.addPurchaseorder}}
-		<div class=" form-group">
-			<div ng-init="modalOptions.getData(false,false,'party', 'partyList',billParams,modalOptions)">
-			<label for="party_id" class="col-sm-2 control-label"> Select Vendor * </label>
-			<div class="col-sm-4">
-				<select class="form-control" name="party_id" id="party_id" ng-model="modalOptions.addPurchaseorder.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter :{type :'vendor'}" required>
-					<option value="">Select Vendor</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-				</select>	
+<div id="invoice">
+	<div class="panel panel-default" ng-if="modalOptions.receiptList1">
+		<div class="panel-heading text-center"><h2>Receipt</h2></div>
+		<div class="panel-body row">
+			<div class="col-xs-6">
+				<address class="text-center">
+					<strong>{{userDetails.name | uppercase}}</strong><br>
+					{{userDetails.address.address}}<br>
+					E-Mail : {{userDetails.email}}
+				</address>
+				<hr>
+				<p>To,<br>
+					<strong>{{modalOptions.receiptList1.name | uppercase}}</strong><br>
+					{{modalOptions.receiptList1.address}}<br>{{modalOptions.receiptList1.location}}<br>{{modalOptions.receiptList1.city}}<br>{{modalOptions.receiptList1.area}}<br>{{modalOptions.receiptList1.pincode}}<br>				
+				</P>
 			</div>
+			<div class="col-xs-6">
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<tr class="amt">
+							<td><strong>Receipt No.</strong><br>{{modalOptions.receiptList1.transaction_id}}
+							</td>
+							<td><strong>Dated</strong><br>
+							{{modalOptions.receiptList1.modified_date}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
-			<label  for="generated_date" class="col-sm-2 control-label">Bill Date *</label>
-			<div class="col-sm-4">
-			<input type="text" class="form-control " placeholder=" Bill Date" id="bill_date" name="bill_date" ng-model="modalOptions.addPurchaseorder.bill_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addPurchaseorder.bill_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
-			</div>
-		</div>
-	</form>
-
-<div class="row">
-	
-	<div class="col-sm-12" ng-init="modalOptions.addPurchaseorder.particular = (modalOptions.addPurchaseorder.particular) ? modalOptions.addPurchaseorder.particular : []">
-		<form name="addPurchaseorderForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addPurchaseorderForm.$valid" id="addPurchaseorderForm">	
-			{{modalOptions.singleparticular}}
-			<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.party_id">
-				<table class="table table-bordered" >
+			
+			<div class="table-responsive col-xs-12">
+				<table class="table table-bordered">
 					<thead>
-						<tr>
-							<th>Particular Name</th>
-							<th>Type</th>
-							<th>Category</th>
-							<th>Price</th>
-							<th>Quantity</th>
-							<th>Amount</th>
-							<th>Tax</th>
+						<tr class="head">
+							<th class=" col-xs-12">Particulars</th>
+							<th class=" col-xs-12">Amount</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>
-								<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" required 
-								ng-change=""  placeholder="particulars Name"/>
-								<span class="help-block" ng-show="addPurchaseorderForm.particular.$dirty && addPurchaseorderForm.particular.$invalid">
-									<span ng-show="addPurchaseorderForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
-								</span> 
-							</td>
-							<td>
-								<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type"  required>
-									<option value="" selected>Select Type</option>
-									<option value="type1" >Type1</option>
-									<option value="type2">Type2</option>
-									<option value="type3">Type3</option>
-									<option value="type4">Type4</option>
-								</select>
-								<span class="help-block" ng-show="addPurchaseorderForm.goods_type.$dirty && addPurchaseorderForm.goods_type.$invalid">
-								<span ng-show="addPurchaseorderForm.goods_type.$error.required" class="text-danger">Required field.</span>
-								</span>	
-							</td>
-							<td>					
-								<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
-									<option value="" selected>Select Category</option>
-									<option value="category1">Category1</option>
-									<option value="category2">Category2</option>
-									<option value="category3">Category3</option>
-									<option value="category4">Category4</option>
-								</select>
-								<span class="help-block" ng-show="addPurchaseorderForm.category.$dirty && addPurchaseorderForm.category.$invalid">
-								<span ng-show="addPurchaseorderForm.category.$error.required" class="text-danger">Required field.</span>
-								</span>	
-							</td>
-							<td>						
-								<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
-									ng-init="modalOptions.singleparticular.price = 1"
-									
-									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
-									
-								<span class="help-block" ng-show="addPurchaseorderForm.price.$dirty && addPurchaseorderForm.price.$invalid">
-									<span ng-show="addPurchaseorderForm.price.$error.required" class="text-danger">Price Required.</span>
-									<span ng-show="addPurchaseorderForm.price.$error.pattern" class="text-danger">Enter number only</span>
+							<td>Paid By <strong>{{modalOptions.receiptList1.description.payment_type.type}}</strong> Against Bill No.<strong>{{modalOptions.receiptList1.transaction_id}}</strong>
+							<p ng-if="modalOptions.receiptList1.description.payment_type.type != 'Cash'">
+								<span ng-repeat="(key, value) in modalOptions.receiptList1description.payment_type">
+									<strong>{{key}}</strong><span> {{value}} </span></br>
 								</span>
+							</p>
 							</td>
-							<td>
-								<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  
-											
-								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" required />
-								<span class="help-block" ng-show="addPurchaseorderForm.quantity.$dirty && addPurchaseorderForm.quantity.$invalid">
-									<span ng-show="addPurchaseorderForm.quantity.$error.required" class="text-danger">Quantity Required</span>
-									<span ng-show="addPurchaseorderForm.quantity.$error.pattern" class="text-danger">Enter number only</span>
-								</span>
-							</td>			
-							<td>		
-								<input type="text" class="form-control" id="amount" name="amount" ng-model="modalOptions.singleparticular.amount" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required readonly  placeholder="Amount" />
-								<span class="help-block" ng-show="addPurchaseorderForm.amount.$dirty && addPurchaseorderForm.amount.$invalid">
-									<span ng-show="addPurchaseorderForm.amount.$error.required" class="text-danger">Total amount Required.</span>
-									<span ng-show="addPurchaseorderForm.amount.$error.pattern" class="text-danger">Enter numbers only</span>
-								</span>
-							</td>
-							<td >				
-								<button type="button" tooltip="Add Tax" id="tax" class="dropdown dropdown-toggle glyphicon glyphicon-plus" placeholder="Tax" name="tax" value="tax"  ng-click="isCollapsed1 = !isCollapsed1"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
-								</button> 
-									<span class="help-block" ng-show="addPurchaseorderForm.tax.$dirty && addPurchaseorderForm.tax.$invalid">
-										<span ng-show="addPurchaseorderForm.tax.$error.required" class="text-danger">Tax Required.</span>
-										<span ng-show="addPurchaseorderForm.tax.$error.pattern" class="text-danger">Enter number only</span>
-									</span>
-								<div collapse="!isCollapsed1" style="z-index:2;position:absolute;right:20px;width:155px;top:70px;padding:1px;" class="well">
-									<div class="col-sm-3">
-										<div class="form-group" ng-init="modalOptions.taxInfo = {}">
-											<ul style="list-style-type:none">
-												<li>
-													<div class="checkbox col-sm-3 ">
-														<label ng-repeat="x in userDetails.config.inventory.taxData.tax">
-														<input type="checkbox" ng-model="modalOptions.taxInfo[x.taxName]" ng-change="modalOptions.taxCalculate(modalOptions)" checklist-value="x"/> {{x.displayName}}
-														</label>
-													</div>
-												</li>
-											</ul> 
-										</div>
-									</div>
-								</div>
-							</td>
+							<td>{{modalOptions.receiptList1.debit_amount | number : 2}}</td>
+						</tr>
+						 <tr>
+							<td class="text-right"><strong>Total Bill Amount</strong></td>
+							<td class="text-right">{{modalOptions.receiptList1.description.total_amount | number : 2}}</td>
+						</tr>
+						<tr>
+							<td class="text-right"><strong>Previously Paid</strong></td>
+							<td class="text-right">{{modalOptions.receiptList1.description.previous_payment | number : 2}}</td>
+						</tr>
+						<tr>
+							<td class="text-right"><strong>Received Amount</strong></td>
+							<td class="text-right">{{modalOptions.receiptList1.debit_amount | number : 2}}</td>
+						</tr>
+						 <tr>
+							<td class="text-right"><strong>Due Amount</strong></td>
+							<td class="text-right">{{modalOptions.receiptList1.description.due_amount | number : 2}}</td>
 						</tr>
 					</tbody>
 				</table>
-				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addPurchaseorderForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addPurchaseorder.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">	+Add This Particular
-				</button>
-				<br/>
-			</div>													
-		</form>
-	</div>
-</div>
-
-	<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.party_id">
-		<table class="table table-bordered" >
-			<thead>
-				<tr>
-					<th class="col-sm-2">Sr.No.</th>
-					<th class="col-sm-2">Particular Name</th>
-					<th class="col-sm-2">Goods_type</th>
-					<th class="col-sm-2">Category </th>
-					<th class="col-sm-2 ">Price</th>
-					<th class="col-sm-2">Quantity</th>
-					<th class="col-sm-2"> Amount</th>
-					<th >Remove</th>
-				</tr> 
-			</thead>
+			</div>
 			
-			<tbody >
-				<tr ng-repeat="x in modalOptions.addPurchaseorder.particular">
-					<td>{{$index + 1}}</td>
-					<td>{{x.particular_name}}</td>
-					<td>{{x.goods_type}}</td>
-					<td>{{x.category}}</td>
-					<td>{{x.price}}</td>
-					<td>{{x.quantity}}</td>
-					<td>{{x.amount}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addPurchaseorder.particular, $index);modalOptions.totalCalculate(modalOptions);">X</button></td>
-				</tr>
-				<tr>
-					<td colspan="5"></td>
-					<td class="text-right"><strong>Sub Total</strong></td>
-					<td class="text-right">{{ modalOptions.addPurchaseorder.subtotal | number : 2}}</td>
-					<td></td>
-					<!-- <td ng-repeat="(key, value) in modalOptions.addPurchaseorder.tax">{{ value  | number : 2}}</td> -->
-				</tr>
-				<tr ng-repeat="(key, value) in modalOptions.addPurchaseorder.tax">
-					<td colspan="5"></td>
-					<td class="text-right"><strong>{{key}}</strong></td>
-					<td class="text-right">{{ value  | number : 2}}</td>
-					<td></td>
-					<!-- <td ng-repeat="(key, value) in modalOptions.addPurchaseorder.tax">{{ value  | number : 2}}</td> -->
-				</tr>
-				<tr>
-					<td colspan="5"></td>
-					<td class="text-right"><strong>Total</strong></td>
-					<td class="text-right">{{modalOptions.addPurchaseorder.total_amount | number : 2}}</td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-		
-			<label class="col-sm-1">Remark</label>
-			<div class="col-sm-8 form-group">
-				<textarea rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addPurchaseorder.remark"  maxlength="200" placeholder="please Remark here.." required > </textarea>
-				<span ng-hide="addPurchaseorderForm.remark.$error.maxlength">
-					{{ 200 - modalOptions.addPurchaseorder.remark.length + " Chars left" }}
-				</span>	
-				<span class="help-block" ng-show="addPurchaseorderForm.remark.$dirty &&  addPurchaseorderForm.remark.$invalid">
-					<span class="text-danger" ng-show="addPurchaseorderForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="addPurchaseorderForm.remark.$error.required">Remark is required.</span>
-				</span>	
+			<div class="col-xs-12">
+				<p>Received Amount (in words):
+				<strong><em>{{inWords(modalOptions.receiptList1.debit_amount)|uppercase}}</em></strong></p>
+				
+				<hr/>
+				<p><strong>Company's Service Tax No: </strong>{{userDetails.config.inventory.taxData.tin_no}}</p>
+						<p><strong>Company's Pan: </strong>{{userDetails.config.inventory.taxData.pan_no}} </strong></p>
+						<p class="text-right">For <strong><em>{{userDetails.name}}</em></strong><br><br><br>
+						Authorised Signatory</p>
 			</div>
 		</div>
-<div class="modal-footer">
-	<button type="submit" ng-if="modalOptions.addPurchaseorder.id"  class="btn btn-success" ng-click="modalOptions.updateData('purchase_order',modalOptions.addPurchaseorder,modalOptions.addPurchaseorder.id); modalOptions.ok()">Update Purchase Order</button>
-	
-	<button type="submit"  class="btn btn-success" ng-disabled="generalForm.$invalid"  ng-if="!modalOptions.addPurchaseorder.id" ng-click="modalOptions.postData('purchase_order',modalOptions.addPurchaseorder); modalOptions.ok()">Add Purchase Order</button>
-	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
-</div>
+	</div>
+	</div>
 </div>
