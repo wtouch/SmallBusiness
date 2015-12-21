@@ -35,6 +35,20 @@ define(['app'], function (app) {
 				path : "#/dashboard/inventory/stock"
 			}
 		]
+		
+		$scope.setDate = function(date, days, sql){
+			var curDate = new Date(date);
+			var newDate = curDate.setDate(curDate.getDate() + days);
+			var finalDate;
+			if(sql == "date"){
+				finalDate = dataService.sqlDateFormate(newDate);
+			}else if(sql == "datetime"){
+				finalDate = dataService.sqlDateFormate(newDate, "datetime");
+			}else{
+				finalDate = new Date(newDate);
+			}
+			return finalDate;
+		}
 		$scope.partyParams = {
 			where : {
 				user_id : $rootScope.userDetails.id,

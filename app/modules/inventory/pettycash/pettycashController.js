@@ -3,7 +3,7 @@
 define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope','$http','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants','$timeout'];
     // This is controller for this view
-	var petycashController = function ($scope,$rootScope,$http,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,$timeout) {
+	var pettycashController = function ($scope,$rootScope,$http,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,$timeout) {
 		
 		//global scope objects
 		$scope.transactions = true;
@@ -32,10 +32,10 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Staff Payment",
-				path : "#/dashboard/inventory/petycash/",
+				path : "#/dashboard/inventory/pettycash/",
 				events : {
 					click : function(){
-						return $scope.openStaffpayment("modules/inventory/petycash/staffpayment.html");
+						return $scope.openStaffpayment("modules/inventory/pettycash/staffpayment.html");
 					}
 				}
 			}
@@ -424,7 +424,7 @@ define(['app'], function (app) {
 		
 	 };
 	// Inject controller's dependencies
-	petycashController.$inject = injectParams;
+	pettycashController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('petycashController', petycashController);
+    app.register.controller('pettycashController', pettycashController);
 });
