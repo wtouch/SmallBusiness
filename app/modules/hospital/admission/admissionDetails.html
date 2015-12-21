@@ -1,4 +1,4 @@
-		<div class="modal-body">
+	<div class="modal-body">
 			<div class="form-group">
 				 <label  for="admission_date" class="col-sm-2 control-label"> Admission Date * </label>
 				<div class="col-sm-8">
@@ -52,19 +52,20 @@
 					</span>
 				</div>
 			</div> 			
-			<div class="form-group">
+			<div class="form-group" ng-init="modalOptions.getData(false,false,'ward','ward',modalOptions.wardParams,modalOptions)">
 				<label for="ward_id" class="col-sm-2 control-label">Ward Name*</label>
 				<div class="col-sm-3">
 				<select id="ward_id" class="form-control" ng-model="modalOptions.addadmission.ward_id" ng-options="item.id as item.ward_name for item in modalOptions.ward" required>
-				<option value="">Select ward </select>
+				<option value="">Select ward </option></select>
 				<span class="text-danger"  ng-show="addnew_admissionForm.ward_id.$error.pattern">please Enter Valid state</span>
 					<span class="help-block" ng-show="addnew_admissionForm.ward_id.$dirty && addnew_admissionForm.ward_id.$invalid">
 						<span ng-show="addnew_admissionForm.ward_id.$error.required" class="text-danger">ward_id is required.</span>
 					</span>				
 				</div>
 				<label for="bed_id" class="col-sm-2 control-label">Bed No</label>
-				<div class="col-sm-3">
-					<input type="text" required name="bed_id" class="form-control" id="bed_id" ng-model="modalOptions.addadmission.bed_id" placeholder="Enter Your bed_id" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required>
+				<div class="col-sm-3" ng-init="modalOptions.getData(false,false,'bed','bed',modalOptions.bedParams,modalOptions)">
+					<select id="bed_id" class="form-control" ng-model="modalOptions.addadmission.bed_id" ng-options="item.id as item.bed_number for item in modalOptions.bed" required>
+				<option value="">Select BED </option></select>
 					<span class="text-danger"  ng-show="addnew_admissionForm.bed_id.$error.pattern">please Enter Valid bed_id</span>
 					<span class="help-block" ng-show="addnew_admissionForm.bed_id.$dirty && addnew_admissionForm.bed_id.$invalid">
 						<span ng-show="addnew_admissionForm.bed_id.$error.required"class="text-danger">Bed no is required.</span>

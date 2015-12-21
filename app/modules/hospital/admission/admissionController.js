@@ -105,7 +105,7 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
-				date:{date : $scope.currentDate},
+				admission_date:$scope.currentDate,
 				patientParams: $scope.patientParams,
 				addadmission : (data) ? {
 					id : data.id,
@@ -121,11 +121,13 @@ define(['app'], function (app) {
 					complaints :data.complaints,
 					general_examination :data.general_examination,
 					staff_id :data.staff_id
-					} : {
+					} 
+					: {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					admission_date :$scope.currentDate,
 					
 				},
 				postData : function(table, input){
