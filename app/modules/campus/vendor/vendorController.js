@@ -43,15 +43,18 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			var modalOptions ={
-				addstaff:(data)?{
+				addvendor:(data)?{
 					id:data.id,
-					name:data.name
-				}:{},
+					name:data.name,
+					
+				}:{
+					
+				},
 				postData : function(table, input){
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'vendor','vendor',$Scope.vendorParams);
 							}
 						})
 					},
