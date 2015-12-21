@@ -17,10 +17,6 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";
 		
-		/* if(!$routeParams.vendor){
-			$location.path("/dashboard/campus/vendor/vendor");
-		} */
-		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add vendor",
@@ -113,7 +109,7 @@ define(['app'], function (app) {
 					state: data.state,
 					country: data.country,
 					pincode: data.pincode,
-					date : data.date,
+					date : data.date
 					
 			} : {
 					user_id : $rootScope.userDetails.user_id,

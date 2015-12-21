@@ -9,9 +9,9 @@
 		
 		
 		<div class="form-group">
-			<div ng-init="modalOptions.getData(false,false,'department','departmentlist', departmentParams, modalOptions)">
+			<div ng-init="modalOptions.getData(false,false,'department','departmentList', departmentParams, modalOptions)">
 				<label for="department" class="col-sm-2 control-label">Department * </label>
-				<div class="col-sm-4">
+				<div class="col-sm-9">
 					<select id="dept_id" class="form-control" ng-model="modalOptions.addtimetable.dept_id" ng-options="item.id as item.name for item in modalOptions.departmentlist | filter : {type:'department'}" required>
 						<option value="">Select department</option>
 					</select>
@@ -25,7 +25,7 @@
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'class','classlist', classParams, modalOptions)">
 				<label for="class" class="col-sm-2 control-label"> Class * </label>
-				<div class="col-sm-4">
+				<div class="col-sm-9">
 					<select id="class_id" class="form-control" ng-model="modalOptions.addtimetable.class_id" ng-options="item.id as item.name for item in modalOptions.classlist | filter : {type:'class'}" required>
 						<option value="">Select class</option>
 					</select>
@@ -39,7 +39,7 @@
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'division','divisionlist', divisionParams, modalOptions)">
 				<label for="division" class="col-sm-2 control-label">Division * </label>
-				<div class="col-sm-4">
+				<div class="col-sm-9">
 					<select id="div_id" class="form-control" ng-model="modalOptions.addtimetable.div_id" ng-options="item.id as item.name for item in modalOptions.divisionlist | filter : {type:'division'}" required>
 						<option value="">Select division</option>
 					</select>
@@ -53,7 +53,7 @@
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'subject','subjectlist', subjectParams, modalOptions)">
 				<label for="subject" class="col-sm-2 control-label"> Subject * </label>
-				<div class="col-sm-4">
+				<div class="col-sm-9">
 					<select id="sub_id" class="form-control" ng-model="modalOptions.addtimetable.sub_id" ng-options="item.id as item.name for item in modalOptions.subjectlist | filter : {type:'subject'}" required>
 						<option value="">Select subject</option>
 					</select>
@@ -67,7 +67,7 @@
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'room','roomlist', roomParams, modalOptions)">
 				<label for="room" class="col-sm-2 control-label"> Classroom * </label>
-				<div class="col-sm-4">
+				<div class="col-sm-9">
 					<select id="room_id" class="form-control" ng-model="modalOptions.addtimetable.room_id" ng-options="item.id as item.name for item in modalOptions.roomlist | filter : {type:'room'}" required>
 						<option value="">Select room</option>
 					</select>
@@ -81,7 +81,7 @@
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'staff','stafflist', staffParams, modalOptions)">
 				<label for="class" class="col-sm-2 control-label">Staff * </label>
-				<div class="col-sm-4">
+				<div class="col-sm-9">
 					<select id="staff_id" class="form-control" ng-model="modalOptions.addtimetable.staff_id" ng-options="item.id as item.name for item in modalOptions.stafflist | filter : {type:'staff'}" required>
 						<option value="">Select staff</option>
 					</select>
@@ -92,17 +92,8 @@
 			</div>
 		</div>
 		<div class="form-group">
-				<label for="day" class="col-sm-2 control-label">Day*</label>
-					<div class="col-sm-4">
-						
-						<input type="week" name="day" id="day" ng-model="modalOptions.addtimetable.day" ng-pattern="/^([0-9])$/:" class="form-control" required>
-						<span class="text-danger"  ng-show="addtimetable.day.$error.pattern">Please enter valid time</span>
-						<span class="help-block" ng-show="addtimetableform.day.$dirty && addtimetableform.day.$invalid">
-							<span ng-show="addtimetableform.day.$error.required" class="text-danger">Day is required.</span>
-						</span>
-					</div>
 				<label for="day" class="col-sm-2 control-label">Select day*</label>
-				<div class="col-sm-4">
+				<div class="col-sm-9">
 						<select id="day" name="day" class="form-control" 
 						ng-model="modalOptions.addtimetable.day"  required="required">
 						<option value="" selected>Select day</option>
@@ -150,9 +141,9 @@
 		</div>
 			
 		<div class="col-sm-offset-2 ">
-				<button type="submit" class="btn btn-success" ng-if="!modalOptions.addtimetable.id" ng-disabled="addtimetableform.$invalid" ng-click="modalOptions.postData('addtimetable',modalOptions.addtimetable);modalOptions.ok()">Save</button>
+				<button type="submit" class="btn btn-success" ng-if="!modalOptions.addtimetable.id" ng-disabled="addtimetableform.$invalid" ng-click="modalOptions.postData('timetable',modalOptions.addtimetable);modalOptions.ok()">Save</button>
 				
-				<button type="submit" class="btn btn-success" ng-if="modalOptions.addtimetable.id" ng-disabled="addtimetable.$invalid" ng-click="modalOptions.postData('timetable',modalOptions.addtimetable);modalOptions.ok()">Update Timetable</button>
+				<button type="submit" class="btn btn-success" ng-if="modalOptions.addtimetable.id" ng-disabled="addtimetable.$invalid" ng-click="modalOptions.updateData('timetable',modalOptions.addtimetable);modalOptions.ok()">Update Timetable</button>
 				
 				<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
 		</div>
