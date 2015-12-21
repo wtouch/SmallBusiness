@@ -93,6 +93,7 @@ define(['app'], function (app) {
 				modified_date:$scope.currentDate,
 				date:$scope.currentDate,
 				addtest : (data) ? {
+					id : data.id,
 					user_id : data.user_id,
 					user_id : $rootScope.userDetails.id,
 					test_description: data.test_description,

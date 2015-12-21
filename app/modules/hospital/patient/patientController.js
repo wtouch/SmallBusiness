@@ -1,22 +1,25 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
+    var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService', 'uiGridConstants'];
     
     // This is controller for this view
-	var patientController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
-		
+	var patientController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		//global scope objects
 		$scope.invoice = true;
 		$scope.type = "year";
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
-		$scope.pageItems = 10;
-		$scope.numPages = "";	
 		$scope.currentPage = 1;
+		$scope.pageItems = 10;
+		$scope.numPages = "";		
+		$scope.currentPage = 1;
+		$scope.pageItems = 10;
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hospital";
+		console.log('Hello');
+		//$scope.patientList = {};
 		
 		$rootScope.moduleMenus = [
 			{
@@ -34,6 +37,7 @@ define(['app'], function (app) {
 			}
 		]
 		
+
 		$scope.patient = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -67,7 +71,7 @@ define(['app'], function (app) {
                 },
 					
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'patient\', \'patient\',false, grid.appScope.patientParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -78,39 +82,58 @@ define(['app'], function (app) {
 					  ]
 					} ,
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/addpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/addpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit patient Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+				
 					+ 
-					'<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'patient\', \'status\',row.entity.status, row.entity.id);$route.reload()" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+ 
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/view_patient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
-					
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/view_patient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+						+ 
+					'<a type="button" tooltip="Delete patient" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'patient\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				}
 			]
 		};
-		
-		$scope.openModal = function(url,data){
-			
+		$scope.callbackColChange = function(response){
+			console.log(response);
+			if(response.status == "success"){
+				$scope.getData(false, $scope.currentPage, "patient", "patient",$scope.patientParams);
+			}
+		}
+			$scope.openModal = function(url,data){
 			var modalDefault = {
-				templateUrl: url,	// apply template to modal
+				templateUrl:url,	// apply template to modal
 				size : 'lg'
 			};
-			var modalOptions = {
+				var modalOptions = {
 				date : $scope.currentDate,
 				registered_date:dataService.sqlDateFormate(),
 				date:{date : $scope.currentDate},
 				addpatient : (data) ? {
 					id : data.id,
-					name : data.name,
+					user_id :data.user_id,
+					patient_id:data.patient_id,
+					user_id : $rootScope.userDetails.id,
+					registered_date:data.registered_date,
+					patient_name:data.patient_name,
 					email : data.email,
-					phone: data.phone,
+					email2 : data.email,
+					gender : data.gender,
+					blood_group :data.blood_group,
+					dob:data.dob,
+					age:data.age,
+					marital_status :data.marital_status,
+					disability :data.disability,
+					mobile: data.mobile,
+					mobile2 : data.	mobile2,
 					address: data.address,
 					location: data.location,
 					area: data.area,
+					patient_history:data.patient_history,
+					guardian_details:data.guardian_details,
 					city: data.city,
 					state: data.state,
 					country: data.country,
 					pincode: data.pincode,
 					date : data.date,
-					patientdate:data.patientdate,
+					/* patientdate:data.patientdate, */
 					type: data.type,
 					department: data.department,
 			} : {
@@ -148,7 +171,14 @@ define(['app'], function (app) {
 			})
 			
 		}
-		
+		$scope.patientParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			cols : ["*"]
+		}
+	
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -190,7 +220,7 @@ define(['app'], function (app) {
 			value = (value) ? value : undefined;
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, params, response);
+				dataService.extendDeep($scope.params, params, response);
 				console.log($scope.params);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
@@ -200,8 +230,8 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
-		
 	 };
+		
 	// Inject controller's dependencies
 	patientController.$inject = injectParams;
 	// Register/apply controller dynamically
