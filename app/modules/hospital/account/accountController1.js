@@ -35,7 +35,6 @@ define(['app'], function (app) {
 			}
 		]
 		
-		
 		//$scope.accountList = {};
 		$scope.accountList = {
 			enableSorting: true,
@@ -90,6 +89,7 @@ define(['app'], function (app) {
 				}
 			]
 		};
+		
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
@@ -110,7 +110,6 @@ define(['app'], function (app) {
 				account : (data) ? {
 					id : data.id,
 					status : 1,
-					account_id :data.account_id,
 					account_name : data.account_name,
 					account_no : data.account_no,
 					description : data.description,
@@ -121,6 +120,7 @@ define(['app'], function (app) {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
 					date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,
 					account_date: dataService.sqlDateFormate(),
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
@@ -128,7 +128,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'account','accountList',$scope.accountParams);
+							$scope.getData(false, $scope.currentPage, 'account','accountList');
 						}
 					})
 				},
@@ -156,7 +156,7 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id,
+					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]
 			};
@@ -193,7 +193,7 @@ define(['app'], function (app) {
 			value = (value) ? value : undefined;
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				dataService.extendDeep($scope.params, params, response);
+				angular.extend($scope.params, params, response);
 				console.log($scope.params);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
