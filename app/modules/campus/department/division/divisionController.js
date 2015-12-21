@@ -42,20 +42,20 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'dept_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_id\', dept_id, \'department\', \'departmentList\',true, grid.appScope.deptParams)" ng-model="dept_id" ng-options="item.id as item.dept_name for item in grid.appScope.departmentList">' 
-				},	
+					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'division_view\', \'divisionList\',false, grid.appScope.divParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">' 
+				},
 				{ 
 					name:'class_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'class\', \'classList\',true, grid.appScope.classParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'division_view\', \'divisionList\',true, grid.appScope.divParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
 				},		
 				{ 
 					name:'division_name',
-					filterHeaderTemplate: '<input id="division_name" class="form-control" ng-change="grid.appScope.filter(\'division_name\', division_name, \'division\', \'divisionList\',true,grid.appScope.divParams)" ng-model="division_name" placeholder="Division Name">',
+					filterHeaderTemplate: '<input id="division_name" class="form-control" ng-change="grid.appScope.filter(\'division_name\', division_name, \'division_view\', \'divisionList\',true,grid.appScope.divParams)" ng-model="division_name" placeholder="Division Name">',
 				},
 				{
 					name:'Manage', 
 					enableSorting: false, 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'division\', \'divisionList\',false,grid.appScope.divParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'division_view\', \'divisionList\',false,grid.appScope.divParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -65,15 +65,15 @@ define(['app'], function (app) {
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/department/division/adddivision.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Division"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete Division" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'division\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/department/viewdivision.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Division"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a type="button" tooltip="Delete Division" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'division_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/division/viewdivision.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Division"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "division", "divisionList", $scope.divParams);
+				$scope.getData(false, $scope.currentPage, "division_view", "divisionList", $scope.divParams);
 			}
 		}
 		
@@ -98,20 +98,21 @@ define(['app'], function (app) {
 						division_name : data.division_name,
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 					} : {
+						user_id : $rootScope.userDetails.id,
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 					},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'division','divisionList',$scope.divParams);
+							$scope.getData(false, $scope.currentPage, 'division_view','divisionList',$scope.divParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'division','divisionList',$scope.divParams);
+							$scope.getData(false, $scope.currentPage, 'division_view','divisionList',$scope.divParams);
 						}
 					})
 				},
@@ -120,13 +121,7 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})
 		}
-		/* $scope.deptParams = {
-			where : {
-				user_id : $rootScope.userDetails.id,
-				status:1,
-			}
-		} */
-	   // For Get (Select Data from DB)
+
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {

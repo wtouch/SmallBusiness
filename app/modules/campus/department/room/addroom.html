@@ -1,6 +1,4 @@
-<div class="main-content">
-
-	<div class="modal-header">
+<div class="modal-header">
 		<button type="button" class="close" ng-click="modalOptions.ok()">
 		<span aria-hidden="true">&times;</span></button>
 		<h3 class="text-center" ng-if="!modalOptions.addRoom.id">Add Room</h3>
@@ -9,10 +7,6 @@
 	
 	<div class="modal-body">
 		<form name="addRoomForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addRoomForm.$valid">
-		
-			<input type="hidden" class="form-control" ng-model="modalOptions.addRoom.user_id" ng-init="modalOptions.addRoom.user_id = userDetails.id" readonly/>
-			<input type="hidden" class="form-control " id="modified_date" name="modified_date" ng-model="modalOptions.addRoom.modified_date" ng-init="modalOptions.addRoom.modified_date = modalOptions.date"/>
-			<input type="hidden" class="form-control " id="date" name="date" ng-model="modalOptions.addRoom.date" ng-init="modalOptions.addRoom.date = modalOptions.date"/>
 		
 			<div class="form-group" ng-init="modalOptions.getData( false, false,'building','buildingList',false, modalOptions)">
 				<label for="build_id" class="col-sm-2 control-label">Building Name</label>
@@ -64,4 +58,3 @@
 		</div>
 	</div>
 	</form>
-</div>

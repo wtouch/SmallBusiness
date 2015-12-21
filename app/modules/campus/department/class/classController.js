@@ -42,16 +42,16 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'dept_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_id\', dept_id, \'department\', \'departmentList\',true, grid.appScope.deptParams)" ng-model="dept_id" ng-options="item.id as item.dept_name for item in grid.appScope.departmentList">' 
+					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'class_view\', \'classList\',false, grid.appScope.classParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">' 
 				},
 				{ 
 					name:'class_name',
-					filterHeaderTemplate: '<input id="class_name" class="form-control" ng-change="grid.appScope.filter(\'class_name\', class_name, \'class\', \'classList\',true,grid.appScope.classParams)" ng-model="class_name" placeholder="Class Name">',
+					filterHeaderTemplate: '<input id="class_name" class="form-control" ng-change="grid.appScope.filter(\'class_name\', class_name, \'class_view\', \'classList\',true,grid.appScope.classParams)" ng-model="class_name" placeholder="Class Name">',
 				},
 				{
 					name:'Manage', 
 					enableSorting: false, 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'class\', \'classList\',false,grid.appScope.classParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'class_view\', \'classList\',false,grid.appScope.classParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -61,15 +61,15 @@ define(['app'], function (app) {
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/department/class/addclass.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Class"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete Class" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'class\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/room/viewclass.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Class"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a type="button" tooltip="Delete Class" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'class_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/class/viewclass.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Class"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "class", "classList", $scope.roomParams);
+				$scope.getData(false, $scope.currentPage, "class_view", "classList", $scope.roomParams);
 			}
 		}
 		
@@ -79,7 +79,7 @@ define(['app'], function (app) {
 				templateUrl:url,	// apply template to modal
 				size : 'lg'
 			};
-			console.log(data);
+			
 			var modalOptions = {
 				date : $scope.currentDate,
 				classData : (data)?{
@@ -91,27 +91,37 @@ define(['app'], function (app) {
 						dept_id : data.dept_id,
 						class_id : data.class_id,
 						class_name : data.class_name,
+						marks : data.marks,
+						minimum_criteria : data.minimum_criteria,
+						castwise_distribution : data.castwise_distribution,
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						description : data.description,
 					} : {
+						user_id : $rootScope.userDetails.id,
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 					},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'class','classList',$scope.classParams);
+							$scope.getData(false, $scope.currentPage, 'class_view','classList',$scope.classParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'class','classList',$scope.classParams);
+							$scope.getData(false, $scope.currentPage, 'class_view','classList',$scope.classParams);
 						}
 					})
 				},
-				getData : $scope.getData
+				getData : $scope.getData,
+					addToObject : function(object,data,modalOptions){
+						console.log(object,data,modalOptions);
+					$rootScope.addToObject(object,modalOptions[data]);
+					modalOptions[data] = {};
+				},
+					removeObject : $rootScope.removeObject,
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})

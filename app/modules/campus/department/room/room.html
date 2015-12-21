@@ -12,11 +12,11 @@
 					</div>
 				</div>
 			</div> 
-			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'room','roomList',roomParams);">
+			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'room_view','roomList',roomParams);getData(false, currentPage, 'building','buildingList',buildParams);">
 			  <div ui-grid="roomList"></div>
 			 </div>
 			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'room','roomList',roomParams);"></pagination>
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'room_view','roomList',roomParams);"></pagination>
 				<pre>Page: {{currentPage}} / {{numPages}}</pre>
 			</div>
 		</div>

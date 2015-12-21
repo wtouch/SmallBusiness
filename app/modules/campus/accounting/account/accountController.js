@@ -18,20 +18,17 @@ define(['app'], function (app) {
 		$scope.pageItems = 10;
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
-		$rootScope.module = "inventory";
+		$rootScope.module = "campus";
 		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Account",
-				path : "#/dashboard/inventory/account",
+				path : "#/dashboard/campus/accounting/account",
 				events : {
 					click : function(){
-						return $scope.openModal("modules/inventory/account/addaccount.html");
+						return $scope.openModal("modules/campus/accounting/account/addaccount.html");
 					}
 				}
-			},{
-				name : "Account List",
-				path : "#/dashboard/inventory/account/account.html"
 			}
 		]
 		
@@ -68,11 +65,6 @@ define(['app'], function (app) {
 				{
 					name:'account_no',filterHeaderTemplate: '<input id="account_no" class="form-control" ng-change="grid.appScope.filter(\'account_no\', account_no, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_no" placeholder="search">'
 				},
-				{ 
-				name:'description',enableSorting: false, enableFiltering: false,
-				},
-
-				
 				{  name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'account\', \'accountList\',false,grid.appScope.accountParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
@@ -84,7 +76,7 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} , 
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/account/addaccount.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/accounting/account/addaccount.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'account\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				}
 			]
@@ -107,12 +99,13 @@ define(['app'], function (app) {
 			var modalOptions = {
 
 				date : $scope.currentDate,
-				account : (data) ? {
+				addAccount : (data) ? {
 					id : data.id,
 					status : 1,
 					account_name : data.account_name,
 					account_no : data.account_no,
-					description : data.description,
+					micr_no : data.micr_no,
+					ifsc_no :dat.ifsc_no,
 					user_id : data.user_id,
 					category : data.category,
 					date : data.date

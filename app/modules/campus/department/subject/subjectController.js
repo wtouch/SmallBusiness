@@ -37,28 +37,28 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'dept_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'dept_id\', dept_id, \'department\', \'departmentList\',true, grid.appScope.deptParams)" ng-model="dept_id" ng-options="item.id as item.dept_name for item in grid.appScope.departmentList">' 
+					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'subjects_view\', \'subjectList\',false, grid.appScope.subParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">' 
 				},	
 				{ 
 					name:'class_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'class\', \'classList\',true, grid.appScope.classParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="class_name" class="form-control" ng-change="grid.appScope.filter(\'class_name\', class_name, \'subjects_view\', \'subjectList\',false, grid.appScope.subParams)" ng-model="class_name" ng-options="item.class_name as item.class_name for item in grid.appScope.classList">' 
 				},	
 				{ 
 					name:'sub_no',
-					filterHeaderTemplate: '<input id="sub_no" class="form-control" ng-change="grid.appScope.filter(\'sub_no\', sub_no, \'subjects\', \'subjectList\',true,grid.appScope.subParams)" ng-model="sub_no" placeholder="Subject No">',
+					filterHeaderTemplate: '<input id="sub_no" class="form-control" ng-change="grid.appScope.filter(\'sub_no\', sub_no, \'subjects_view\', \'subjectList\',true,grid.appScope.subParams)" ng-model="sub_no" placeholder="Subject No">',
 				},
 				{ 
 					name:'sub_name',
-					filterHeaderTemplate: '<input id="sub_name" class="form-control" ng-change="grid.appScope.filter(\'sub_name\', sub_name, \'subjects\', \'subjectList\',true,grid.appScope.subParams)" ng-model="sub_name" placeholder="Subject Name">',
+					filterHeaderTemplate: '<input id="sub_name" class="form-control" ng-change="grid.appScope.filter(\'sub_name\', sub_name, \'subjects_view\', \'subjectList\',true,grid.appScope.subParams)" ng-model="sub_name" placeholder="Subject Name">',
 				},
 				{ 
 					name:'description',
-					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'subjects\', \'subjectList\',true,grid.appScope.subParams)" ng-model="description" placeholder="Description">',
+					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'subjects_view\', \'subjectList\',true,grid.appScope.subParams)" ng-model="description" placeholder="Description">',
 				},
 				{
 					name:'Manage', 
 					enableSorting: false, 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'subjects\', \'subjectList\',false,grid.appScope.subParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'subjects_view\', \'subjectList\',false,grid.appScope.subParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -68,15 +68,15 @@ define(['app'], function (app) {
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/department/subject/addsubject.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Subject"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete Subject" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'subjects\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/department/viewdivision.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Division"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a type="button" tooltip="Delete Subject" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'subjects_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/subject/viewsubject.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Division"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "subjects", "subjectList", $scope.subParams);
+				$scope.getData(false, $scope.currentPage, "subjects_view", "subjectList", $scope.subParams);
 			}
 		}
 		
@@ -105,20 +105,21 @@ define(['app'], function (app) {
 						description : data.description,
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 					} : {
+						user_id : $rootScope.userDetails.id,
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 					},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'subjects','subjectList',$scope.subParams);
+							$scope.getData(false, $scope.currentPage, 'subjects_view','subjectList',$scope.subParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'subjects','subjectList',$scope.subParams);
+							$scope.getData(false, $scope.currentPage, 'subjects_view','subjectList',$scope.subParams);
 						}
 					})
 				},

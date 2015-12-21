@@ -42,21 +42,21 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'build_id',width:150,
-					enableSorting: false, enableFiltering: true,
+					enableSorting: false,enableFiltering: true,
 					filterHeaderTemplate: '<input id="build_id" class="form-control" ng-change="grid.appScope.filter(\'build_id\', build_id, \'building\', \'buildingList\',true,grid.appScope.buildParams)" ng-model="build_id" placeholder="Building No">',
 				},
 				{ 
-					name:'build_name',enableSorting: false, enableFiltering: true,
-					filterHeaderTemplate: '<input id="build_name" class="form-control" ng-change="grid.appScope.filter(\'build_name\', build_name, \'building\', \'buildingList\',true,grid.appScope.buildParams)" ng-model="build_name" placeholder="Building Name">',
+					name:'build_name',enableSorting: false,width:150,enableFiltering: true,
+					filterHeaderTemplate: '<input id="build_name" class="form-control" ng-change="grid.appScope.filter(\'build_name\', build_name, \'room_view\', \'roomList\',false,grid.appScope.roomParams)" ng-model="build_name" ng-options="item.build_name as item.build_name for item in grid.appScope.buildingList" placeholder="Building Name">',
 				},
 				{ 
-					name:'floor_no',width:150,
-					filterHeaderTemplate: '<input id="floor_no" class="form-control" ng-change="grid.appScope.filter(\'floor_no\', floor_no, \'building\', \'buildingList\',true,grid.appScope.buildParams)" ng-model="floor_no" placeholder="Floor No">',
+					name:'floor_no',width:150,enableFiltering: true,
+					filterHeaderTemplate: '<input id="floor_no" class="form-control" ng-change="grid.appScope.filter(\'floor_no\', floor_no, \'room_view\', \'roomList\',false,grid.appScope.roomParams)" ng-model="floor_no" ng-options="item.floor_no as item.floor_no for item in grid.appScope.buildingList" placeholder="Floor No">',
 				},
 				{
 					name:'Manage', 
 					enableSorting: false, 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'room\', \'roomList\',false,grid.appScope.roomParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'room_view\', \'roomList\',false,grid.appScope.roomParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -66,15 +66,15 @@ define(['app'], function (app) {
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/department/room/addroom.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Room"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete Room" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'room\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/room/viewroom.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Room"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a type="button" tooltip="Delete Room" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'room_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/room/viewroom.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Room"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "room", "roomList", $scope.roomParams);
+				$scope.getData(false, $scope.currentPage, "room_view", "roomList", $scope.roomParams);
 			}
 		}
 		
@@ -99,20 +99,21 @@ define(['app'], function (app) {
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						description : data.description,
 					} : {
+						user_id : $rootScope.userDetails.id,
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 					},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'room','roomList',$scope.roomParams);
+							$scope.getData(false, $scope.currentPage, 'room_view','roomList',$scope.roomParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'room','roomList',$scope.roomParams);
+							$scope.getData(false, $scope.currentPage, 'room_view','roomList',$scope.roomParams);
 						}
 					})
 				},
