@@ -52,7 +52,7 @@ define(['app'], function (app) {
 				addstaff:(data)?{
 					id:data.id,
 					name:data.name,
-					particulars:data.particulars
+					
 				}:{
 					user_id:$rootScope.userDetails.id
 				},

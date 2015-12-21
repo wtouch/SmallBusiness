@@ -1,0 +1,72 @@
+	<div ng-init="modalOptions.addstaff.specialization = (modalOptions.addstaff.specialization) ? 
+		modalOptions.addstaff.particulars : []">
+		
+			<form name="addstaffForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addstaffForm.$valid" id="addstaff"">
+				<div class="table-responsive">
+					<table class="table table-bordered" >
+						<thead>
+							<tr>
+								<th>Subject Name</th>
+								<th>College Name</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody><div>{{modalOptions.singleparticular}}</div>
+							<tr>
+								<td>
+									<input type="text" class="form-control " placeholder="Subject Name" id="subject_name" name="subject_name" ng-model="modalOptions.singleparticular.subject_name" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+									 <span class="text-danger"  ng-show="addstaffForm.subject_name.$error.pattern">Text is required.</span>
+									<span class="help-block" ng-show="addstaffForm.subject_name.$dirty && addstaffForm.subject_name.$invalid">
+										<span class="text-danger" ng-show="addstaffForm.subject_name.$error.required">Required Field.</span>
+									</span>
+								</td>
+								<td>
+									<input type="text" class="form-control " placeholder="College Name" id="subject_name" name="college_name" ng-model="modalOptions.singleparticular.college_name" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+									 <span class="text-danger"  ng-show="addstaffForm.college_name.$error.pattern">Text is required.</span>
+									<span class="help-block" ng-show="addstaffForm.college_name.$dirty && addstaffForm.college_name.$invalid">
+										<span class="text-danger" ng-show="addstaffForm.college_name.$error.required">Required Field.</span>
+									</span>
+								</td>
+								<td>
+									<input type="text" class="form-control " placeholder="Description" id="description" name="description" ng-model="modalOptions.singleparticular.description" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+									 <span class="text-danger"  ng-show="addstaffForm.description.$error.pattern">Text is required.</span>
+									<span class="help-block" ng-show="addstaffForm.description.$dirty && addstaffForm.description.$invalid">
+										<span class="text-danger" ng-show="addstaffForm.description.$error.required">Required Field.</span>
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-4">
+						<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addstaff.specialization,'singleparticular', modalOptions);">+Add This Particular</button>
+				</div>	
+			</div>
+		</form>
+	</div>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="col-sm-2">Sr.No.</th>
+					<th class="col-sm-2">Subject Name</th>
+					<th class="col-sm-2">College Name</th>
+					<th class="col-sm-2">Description</th>
+					<th class="col-sm-2">Remove</th>	
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in modalOptions.addstaff.specialization">
+					<td>{{ $index + 1 }}</td>
+					<td>{{x.subject_name}}</td>
+					<td>{{x.college_name}}</td>
+					<td>{{x.description}}</td>
+					<td><a ng-click="modalOptions.removeObject(modalOptions.addstaff.specialization, $index);modalOptions.totalCalculate(modalOptions);"><span class="glyphicon glyphicon-remove"></span></a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-9">
+				 <button type="submit" class="btn btn-primary" title="submit" ng-click="modalOptions.showFormPart('experienceDetails',modalOptions)">Next</button> 
+				</div>
+</div>

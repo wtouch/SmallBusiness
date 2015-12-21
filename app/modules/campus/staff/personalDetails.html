@@ -1,4 +1,4 @@
-
+<!-- <div ng-init="modalOptions.addstaff.education = (modalOptions.addstaff.education) ? modalOptions.addstaff.education : []"> -->
 		     <input type="hidden" class="form-control" ng-model="modalOptions.addstaff.user_id" ng-init="modalOptions.addstaff.user_id = userDetails.id" readonly/>
 			 <div>{{modalOptions.addstaff}}</div>
 			<div class="form-group">
@@ -100,27 +100,28 @@
 			<div class="form-group">
 				<label for="merital_status" class="col-sm-2 control-label">Marital Status *</label>
 				<div class="radio col-sm-2">
-				<label><input type="radio" name="marital_status" value="0" checked ng-model="modalOptions.addstaff.marital_status">single</label>
+				<label><input type="radio" name="marital_status" value="Single" checked ng-model="modalOptions.addstaff.marital_status" ng-init="modalOptions.addstaff.marital_status = 'Single'">single</label>
 				</div>
 				<div class="radio col-sm-2">
-				<label><input type="radio" name="marital_status" value="1"  ng-model="modalOptions.addstaff.marital_status">Married</label>
+				<label><input type="radio" name="marital_status" value="Married"  ng-model="modalOptions.addstaff.marital_status" ng-init="modalOptions.addstaff.marital_status">Married</label>
 				</div>
 				<div class="radio col-sm-2">
-				<label><input type="radio" name="marital_status" value="2"  ng-model="modalOptions.addstaff.marital_status">Divorced</label>
+				<label><input type="radio" name="marital_status" value="Divorced"  ng-model="modalOptions.addstaff.marital_status" ng-init="modalOptions.addstaff.marital_status">Divorced</label>
 				</div>
 				<div class="radio col-sm-2">
-				<label><input type="radio" name="marital_status" value="3"  ng-model="modalOptions.addstaff.marital_status">Widows</label>
+				<label><input type="radio" name="marital_status" value="Widows"  ng-model="modalOptions.addstaff.marital_status" ng-init="modalOptions.addstaff.marital_status">Widows</label>
 				</div>
 			</div>
 			
 			<div class="form-group">
-			<label for="gender" class="col-sm-2 control-label">Gender *</label>
-				<div class="radio col-sm-2">
-				<label><input type="radio" name="gender" value="0" checked ng-model="modalOptions.addstaff.gender">Male</label>
-				</div>
-				<div class="radio col-sm-2">
-				<label><input type="radio" name="gender" value="1" checked ng-model="modalOptions.addstaff.gender">Female</label>
-				</div>
+				<label for="gender" class="col-sm-2 control-label">Gender *</label>
+					<div class="radio col-sm-2">
+						<label><input type="radio" name="gender" value="Male" ng-model="modalOptions.addstaff.gender"
+						ng-init="modalOptions.addstaff.gender = 'Male'">Male</label>
+					</div>
+					<div class="radio col-sm-2">
+						<label><input type="radio" name="gender" value="Female" ng-model="modalOptions.addstaff.gender" ng-init="modalOptions.addstaff.gender">Female</label>
+					</div>
 			</div>
 			
 			<div class="form-group">
@@ -140,36 +141,154 @@
 										</span>
 				</div>
 			</div>
+			
+			<hr>
+			<h4 style="text-align:center">Hobbies</h4>
 			<div class="form-group">
 				<label for="hobbies" class="col-sm-2 control-label">Hobby Name *</label>
 				<div class="col-sm-9">
-					<input type="text" id="hobbies" class="form-control" name="hobbies" placeholder="Hobby Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.hobbies"required>
+					<input type="text" id="hobbies" class="form-control" name="hobbies" placeholder="Hobby Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.hobbies.hobbies"required>
 					<span class="text-danger"  ng-show="addstaffForm.hobbies.$error.pattern">Text is required.</span>
 					<span class="help-block" ng-show="addstaffForm.hobbies.$dirty && addstaffForm.hobbies.$invalid">
 						<span class="text-danger" ng-show="addstaffForm.hobbies.$error.required">Required Field.</span>
 					</span>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label for="hobbies" class="col-sm-2 control-label">Hobby Descriptin *</label>
 				<div class="col-sm-9">
-					<textarea type="text" id="description" ng-model="modalOptions.addstaff.description" class="form-control" name="description"   placeholder="Enter Description" ng-maxlength="250" required></textarea>
-					<span ng-hide="addstaffForm.description.$error.maxlength">
-								{{ 250 - modalOptions.addstaff.description.length + " Chars left" }}
+					<textarea type="text" id="hobbiesdesc" ng-model="modalOptions.addstaff.hobbies.hobbiesdesc" class="form-control" name="hobbiesdesc"   placeholder="Enter Description" ng-maxlength="250" required></textarea>
+					<span ng-hide="addstaffForm.hobbiesdesc.$error.maxlength">
+								{{ 250 - modalOptions.addstaff.hobbiesdesc.length + " Chars left" }}
 						</span>
-						<span class="help-block" ng-show="addstaffForm.description.$dirty && addexpenseForm.description.$invalid">
-								<span class="text-danger" ng-show="addstaffForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-								<span ng-show="addstaffForm.description.$error.required" class="text-danger">Required Field</span>
+						<span class="help-block" ng-show="addstaffForm.hobbiesdesc.$dirty && addstaffForm.hobbiesdesc.$invalid">
+								<span class="text-danger" ng-show="addstaffForm.hobbiesdesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
+								<span ng-show="addstaffForm.hobbiesdesc.$error.required" class="text-danger">Required Field</span>
 						</span>
 				</div>
 			</div>
-		
+			<hr>
+			<h4 style="text-align:center">Medical Details</h4>
+			<div class="form-group">
+				<label for="phisicallyhandicapped" class="col-sm-2 control-label">Physically Handicapped *</label>
+					<div class="radio col-sm-2">
+						<label><input type="radio" name="phisicallyhandicapped" value="Yes" ng-model="modalOptions.addstaff.phisicallyhandicapped"
+						ng-init="modalOptions.addstaff.medical.phisicallyhandicapped = 'Yes'">Yes</label>
+					</div>
+					<div class="radio col-sm-2">
+						<label><input type="radio" name="phisicallyhandicapped" value="No" ng-model="modalOptions.addstaff.no" ng-init="modalOptions.addstaff.medical.phisicallyhandicapped">No</label>
+					</div>
+			</div>
+			<div class="form-group">
+				<label for="handicapdesc" class="col-sm-2 control-label">Handicapped Description</label>
+				<div class="col-sm-9">
+					<textarea type="text" id="handicapdesc" ng-model="modalOptions.addstaff.medical.handicapdesc" class="form-control" name="handicapdesc"   placeholder="Handicapped Description" ng-maxlength="250" required></textarea>
+					<span ng-hide="addstaffForm.handicapdesc.$error.maxlength">
+								{{ 250 - modalOptions.addstaff.handicapdesc.length + " Chars left" }}
+						</span>
+						<span class="help-block" ng-show="addstaffForm.handicapdesc.$dirty && addstaffForm.handicapdesc.$invalid">
+								<span class="text-danger" ng-show="addstaffForm.handicapdesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
+						</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="height" class="col-sm-2 control-label">Height *</label>
+				<div class="col-sm-9">
+					<input type="text" id="height" class="form-control" name="height" placeholder="Height" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" ng-model="modalOptions.addstaff.medical.height"required>
+					<span class="help-block" ng-show="addstaffForm.height.$dirty && addstaffForm.height.$invalid">
+						<span ng-show="addstaffForm.height.$error.pattern && (addstaffForm.height.$dirty || submitted)" class="text-danger">please enter number</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="weight" class="col-sm-2 control-label">Weight *</label>
+				<div class="col-sm-9">
+					<input type="text" id="weight" class="form-control" name="weight" placeholder="Weight" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" ng-model="modalOptions.addstaff.medical.weight"required>
+					<span class="help-block" ng-show="addstaffForm.weight.$dirty && addstaffForm.weight.$invalid">
+						<span ng-show="addstaffForm.weight.$error.pattern && (addstaffForm.weight.$dirty || submitted)" class="text-danger">please enter number</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="habbitname" class="col-sm-2 control-label">Habbit Name </label>
+				<div class="col-sm-9">
+					<input type="text" id="habbitname" class="form-control" name="habbitname" placeholder="Habbit Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.medical.habbitname"required>
+					<span class="text-danger"  ng-show="addstaffForm.habbitname.$error.pattern">Text is required.</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="habbitdesc" class="col-sm-2 control-label">Habbit Description </label>
+				<div class="col-sm-9">
+					<textarea type="text" id="habbitdesc" ng-model="modalOptions.addstaff.medical.habbitdesc" class="form-control" name="habbitdesc"   placeholder="Habbit Description" ng-maxlength="250" required></textarea>
+					<span ng-hide="addstaffForm.habbitdesc.$error.maxlength">
+								{{ 250 - modalOptions.addstaff.habbitdesc.length + " Chars left" }}
+						</span>
+						<span class="help-block" ng-show="addstaffForm.habbitdesc.$dirty && addstaffForm.habbitdesc.$invalid">
+								<span class="text-danger" ng-show="addstaffForm.habbitdesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
+						</span>
+				</div>
+			</div>
+			
+			<hr>
+			<h4 style="text-align:center">Bank Details</h4>
+			<div class="form-group">
+				<label for="bankname" class="col-sm-2 control-label">Bank Name </label>
+				<div class="col-sm-9">
+					<input type="text" id="bankname" class="form-control" name="bankname" placeholder="Bank Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.bank_details.bankname"required>
+					<span class="text-danger"  ng-show="addstaffForm.bankname.$error.pattern">Text is required.</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="branchname" class="col-sm-2 control-label">Branch</label>
+				<div class="col-sm-9">
+					<input type="text" id="branchname" class="form-control" name="branchname" placeholder="Branch Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.bank_details.branchname"required>
+					<span class="text-danger"  ng-show="addstaffForm.branchname.$error.pattern">Text is required.</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="accountno" class="col-sm-2 control-label">Account No</label>
+				<div class="col-sm-9">
+					<input type="text" id="accountno" class="form-control" name="accountno" placeholder="Account No" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addstaff.bank_details.accountno"required>
+						
+						<span class="help-block" ng-show="addstaffForm.accountno.$dirty && addstaffForm.accountno.$invalid">
+							<span class="text-danger" ng-show="addstaffForm.accountno.$error.required">Required Field.</span>
+							<span ng-show="addstaffForm.accountno.$error.pattern && (addstaffForm.accountno.$dirty)"class="text-danger">Enter Number</span>
+						</span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="accountno" class="col-sm-2 control-label">Account Type</label>
+				<div class="col-sm-9">		
+									<select id="account_type" class="form-control" placeholder="Type" name="account_type"  ng-model="modalOptions.addstaff.bank_details.account_type" required>
+										<option value="" selected>Type</option>
+										<option value="type1" >Saving</option>
+										<option value="type2">Current</option>
+									</select>
+									<span class="help-block" ng-show="addstaffForm.account_type.$dirty && addstaffForm.account_type.$invalid">
+										<span ng-show="addstaffForm.account_type.$error.required" class="text-danger">Required field.</span>
+									</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="ifsccode" class="col-sm-2 control-label">IFSC Code</label>
+				<div class="col-sm-9">
+					<input type="text" id="ifsccode" class="form-control" name="ifsccode" placeholder="IFSC Code"  ng-model="modalOptions.addstaff.bank_details.ifsccode"required>
+					<span class="text-danger"  ng-show="addstaffForm.ifsccode.$error.pattern">Text is required.</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="micrcode" class="col-sm-2 control-label">MICR Code</label>
+				<div class="col-sm-9">
+					<input type="text" id="micrcode" class="form-control" name="micrcode" placeholder="MICR Code"  ng-model="modalOptions.addstaff.bank_details.micrcode"required>
+					<span class="text-danger"  ng-show="addstaffForm.micrcode.$error.pattern">Text is required.</span>
+				</div>
+			</div>
+			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
-				 <button type="submit" class="btn btn-primary" title="Save" ng-disabled="addstaffForm.$invalid" ng-click="modalOptions.showFormPart('officialDetails',modalOptions)">Next</button> 
-				
-				<!-- <button type="submit" class="btn btn-success" ng-if="!modalOptions.addstaff.id" ng-disabled="addstaffForm.$invalid" ng-click="modalOptions.postData('staff',modalOptions.addstaff);modalOptions.ok()">Add Staff</button> -->
-				
+				 <button type="submit" class="btn btn-primary" title="submit" ng-click="modalOptions.showFormPart('educationalDetails',modalOptions)">Next</button> 
 				</div>	
 			</div>	
-			
+		
