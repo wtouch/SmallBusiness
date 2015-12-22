@@ -10,7 +10,7 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
 	{% for key, value in sliderData %}
-		<div class="item {{ (key == 0) ? 'active' }}">
+		<div class="item {{ (key == 0) ? 'active' }} {{uri=='/' ? 'homeItem':''}}">
 		  <img class="img-responsive" src="{{value.image ? value.image : value is iterable ? value.file_relative_path : value}}" alt="{{value.title}}">
 		  {% if value.title %}
 		  <div class="carousel-caption">

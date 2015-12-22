@@ -16,16 +16,17 @@
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
-	<h2>Contact Us</h2>
-	<div class="row contact">
-		<div class="col-xs-12 col-sm-8 col-lg-9">
+	
+<h2>Contact Us</h2>
+
+
+
+<div id="serv" class="row contact">
+	<div class="col-xs-12 col-sm-6 col-lg-6">
+		{%include[templatePath ~ '/includes/enquiry.html','default/default/includes/enquiry.html']%}
+		</div>
+		<div class="col-xs-12 col-sm-12 col-lg-6">
 			<table class="table">
-				<tr>
-					<td>
-						<a href="#">
-							<img src="{{data.contact_profile.contact_photo.file_relative_path}}" class="img-responsive profile" alt="{{data.business_name}}"/>
-						</a> 
-					</td>
 					<td>
 						<h4>{{data.contact_profile.contact_person}}</h4>
 						<b>Address</b>
@@ -36,32 +37,21 @@
 							{{data.country|capitalize}}.
 						</address>
 					</td>
-				</tr>
+			</table>
+	
+				
 				{%if (data.contact_profile.address1) or (data.contact_profile.address2) or (data.contact_profile.address3) or (data.contact_profile.address4)%}
-				<tr>
-					<td colspan="2">
-						{%if data.contact_profile.address1%}
-							<span>{{data.contact_profile.address1}}</span>
-						{% endif %}
+				
+					<table class="table">
+						<tr>
 						
-						{%if data.contact_profile.address2%}
-							<hr/>
-							<span>{{data.contact_profile.address2}}</span>
-						{% endif %}
-						
-						{%if data.contact_profile.address3%}
-							<hr/>
-							<span>{{data.contact_profile.address3}}</span>
-						{% endif %}
-						
-						{%if data.contact_profile.address4%}
-							<hr/>
-							<span>{{data.contact_profile.address4}}</span>
-						{% endif %}
-					</td>
-				</tr>
+					</tr>
+					</table>
+				
 				{% endif %}
 				{%if data.contact_profile.telephone%}
+				
+				<table class="table">
 				<tr>
 					<td><b>Telephone</b></td>
 					<td>{{data.contact_profile.telephone}}{{(data.contact_profile.alternate_telephone) ? ", " ~ data.contact_profile.alternate_telephone}}
@@ -86,9 +76,10 @@
 					</td>
 				</tr>
 				{% endif %}
-			</table>
-		</div>
+				</table>
+			</div>	
 		
 	
-	</div>
+</div>	
+<div id="googleMap"></div>
 {% endautoescape %}

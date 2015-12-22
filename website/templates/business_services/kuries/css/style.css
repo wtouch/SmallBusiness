@@ -31,11 +31,6 @@
   padding: 15px;
   text-align: justify;
 }
-.testicontainer {
-  background-image: url('../img/testi.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
 .homeAboutus img {
   vertical-align: middle;
   height: 100%;
@@ -58,6 +53,7 @@
   text-align: justify;
 }
 .products {
+  padding: 15px;
   animation-name: products;
   animation-duration: 2s;
   animation-iteration-count: 1;
@@ -85,6 +81,13 @@
 }
 .carousel-inner > .item img {
   height: 235px;
+  width: 100%;
+}
+.item.homeItem {
+  height: 347px;
+}
+.item.homeItem img {
+  height: 347px;
   width: 100%;
 }
 span.glyphicon.glyphicon-chevron-right,
@@ -195,8 +198,27 @@ body {
   color: #ffffff !important;
   position: relative;
 }
-.navbar-default .nav > li > a:hover {
-  background-color: transparent !important;
+.navbar-default .nav > li.active > a:before,
+.navbar-default .nav > li > a:before {
+  content: "";
+  position: absolute;
+  background-image: url('../img/active.gif');
+  background-repeat: no-repeat;
+  top: -10px;
+  width: 12px;
+  height: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.navbar-default .nav > li > a:before {
+  display: none;
+}
+.navbar-default .nav > li.active > a:before {
+  display: block;
+}
+.navbar-default .nav > li:hover > a:before {
+  display: block;
 }
 .navbar-default .nav > li > ul {
   display: none;
@@ -246,18 +268,17 @@ body {
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #c90d14;
 }
+.nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: transparent;
+  background-color: transparent !important;
 }
 .panel-default {
   color: #ffffff;
-  background-image: url('../img/testi.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
   border: none;
 }
 .panel-default .form-control {
+  background-image: url('../img/a1.gif');
   display: inline-block;
   height: 50px;
   width: 100%;
@@ -309,11 +330,6 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
   background-repeat: repeat-x;
 }
-.content1 {
-  background-image: url('../img/testi.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
 h1,
 h2,
 h4,
@@ -336,7 +352,6 @@ a.email {
   color: #696767;
 }
 a.email:hover {
-  text-decoration: none;
   color: #c90d14;
 }
 .btn-info {
@@ -369,8 +384,20 @@ a.email:hover {
     position: initial;
   }
 }
-.con {
+a {
+  color: #696767;
+  text-decoration: none;
+}
+a:hover {
+  color: #c90d14;
+}
+.col-sm-12 p {
+  text-align: justify;
+  padding: 15px;
+}
+.content1 {
   background-image: url('../img/testi.jpg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  margin-top: 0px;
 }
