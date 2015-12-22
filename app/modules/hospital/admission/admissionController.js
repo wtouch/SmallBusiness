@@ -120,9 +120,7 @@ define(['app'], function (app) {
 					patient_history:data.patient_history,
 					complaints :data.complaints,
 					general_examination :data.general_examination,
-					consultant_dr :data.consultant_dr
-					
-					
+					consultant_dr :data.consultant_dr,
 					staff_id :data.staff_id,
 					type: data.type,
 					emergency_contact :data.emergency_contact,
