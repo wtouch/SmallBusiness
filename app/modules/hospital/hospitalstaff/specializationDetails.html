@@ -3,10 +3,10 @@
 							<table class="table table-bordered" >
 								<thead>
 									<tr>
-										<th>Exam</th>
-										<th>University</th>
-										<th>Percentage</th>
-										<th>Passing Year</th>
+										<th>Experience</th>
+										<th>Doctor Certification No</th>
+										<th>CTC</th>
+									
 									</tr>
 								</thead>
 								<tbody><div>{{modalOptions.singleparticular}}</div>
@@ -19,7 +19,7 @@
 											</span>
 										</td>
 										<td>
-											<input type="text" class="form-control " placeholder="Doctor Certifiation No" id="dcn" name="dcn" ng-model="modalOptions.singleparticular.dcn" ng-pattern="/^\d{0,9}[0-9]$/" />
+											<input type="text" class="form-control " placeholder="Doctor Certification No" id="dcn" name="dcn" ng-model="modalOptions.singleparticular.dcn" ng-pattern="/^\d{0,9}[0-9]$/" />
 											 <span ng-show="addstaffForm.dcn.$error.pattern && (addstaffForm.dcn.$dirty || submitted)" class="text-danger">please enter number</span>
 											<span class="help-block" ng-show="addstaffForm.dcn.$dirty && addstaffForm.dcn.$invalid">
 												<span class="text-danger" ng-show="addstaffForm.dcn.$error.required">Required Field.</span>
@@ -56,7 +56,8 @@
 			<tbody>
 				<tr ng-repeat="x in modalOptions.addstaff.specification">
 					<td>{{ $index + 1 }}</td>
-					<td>{{x.Experience}}</td>	<td class="text-right">{{x.dcn}}</td>
+					<td>{{x.Experience}}</td>	
+					<td class="text-right">{{x.dcn}}</td>
 					<td>{{x.ctc}}</td>
 			
 					<td><a ng-click="modalOptions.removeObject(modalOptions.addstaff.specification, $index);modalOptions.totalCalculate(modalOptions);"><span class="glyphicon glyphicon-remove"></span></a></td>

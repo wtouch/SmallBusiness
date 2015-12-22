@@ -2,8 +2,8 @@
 	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3 class="text-center">View Staff Details</h3>
 	</div>{{modalOptions.addstaff}}
-<div class="modal-body">
-<div class="modal-body" ng-init="modalOptions.getData(false, false,'staff', 'staff', modalOptions.staffParams, modalOptions)">{{modalOptions.staff}}
+
+<div class="modal-body" ng-init="modalOptions.getData(false, false,'staff', 'staff', modalOptions.staffParams, modalOptions)"><!-- {{modalOptions.staff}} -->
 <label>Patient Details:</label><br><br>
 	<table class="table table-hover table-responsive table-bordered">
 			<tbody>
@@ -22,7 +22,7 @@
 			<tr>
 				 <td><b>Address</b></td>
 				 <td colspan='3'>						
-					{{modalOptions.addstaff.address}}
+					{{modalOptions.addstaff.address.current_address}}
 				 </td>	
 			</tr>
 			<tr>
@@ -88,63 +88,104 @@
 				 </td>	
 			</tr>
 		</tbody>
-		</table>
-		<label>Gardian Details:</label><br><br>
+		</table><!-- {{modalOptions.addstaff.qualification}} -->
+		<label>Qualification Details:</label><br><br>
 		<table class="table table-hover table-responsive table-bordered">
 		<tbody>
 			<tr>
-				 <td><b>Guardian Name</b></td>
+				 <td><b>Exam Name</b></td>
 				 <td>						
-					{{modalOptions.addpatient.guardian_details.name}}
+					{{modalOptions.addstaff.qualification[0].exam}}
 				 </td>	
-				 <td><b>Relation with Patient</b></td>
+				 <td><b>University</b></td>
 				 <td>						
-					{{modalOptions.addpatient.guardian_details.relation}}
+					{{modalOptions.addstaff.qualification[0].university}}
 				 </td>	
 			</tr>
 			<tr>
-				 <td><b>Mobile</b></td>
+				 <td><b>Percentage</b></td>
 				 <td>						
-					{{modalOptions.addpatient.guardian_details.g_mobile}}
+					{{modalOptions.addstaff.qualification[0].percentage}}
 				 </td>
-				<td><b>Email</b></td>
+				<td><b>Passing Year</b></td>
 				 <td>						
-					{{modalOptions.addpatient.guardian_details.g_email}}
+					{{modalOptions.addstaff.qualification[0].year}}
 				 </td>					 
 			</tr>
-			<tr>
-				 <td><b>Address</b></td>
-				 <td  colspan='3'>						
-					{{modalOptions.addpatient.guardian_details.address1}}
-				 </td>	
-			</tr>
+			
 			
 		</tbody>
 	</table>
-	
-	<label>Patient History:</label><br><br>
+	<!-- {{modalOptions.addstaff.specification}} -->
+	<label>Specialisation Details:</label><br><br>
 		<table class="table table-hover table-responsive table-bordered">
 		<tbody>
 			<tr>
-				 <td><b>Category</b></td>
+				 <td><b>Experience</b></td>
 				 <td>						
-					{{modalOptions.addpatient.patient_history.category}}
+					{{modalOptions.addstaff.specification[0].Experience}}
 				 </td>
-				<td><b>Type</b></td>
+				<td><b>Doctor Certification No</b></td>
 				 <td>						
-					{{modalOptions.addpatient.patient_history.type}}
+					{{modalOptions.addstaff.specification[0].dcn}}
 				 </td>					 
-			</tr>
+				<td><b>CTC</b></td>
+				 <td>						
+					{{modalOptions.addstaff.specification[0].ctc}}
+				 </td>	
+				</tr>
+			</tbody>
+	</table>
+
+	<label>Official Details:</label><br><br>
+		<table class="table table-hover table-responsive table-bordered">
+		<tbody>
 			<tr>
-				 <td><b>Title </b></td>
+				 <td><b>Joining Date</b></td>
 				 <td>						
-					{{modalOptions.addpatient.patient_history.title}}
-				 </td>	
-				 <td><b>Description</b></td>
+					{{modalOptions.addstaff.joining_date}}
+				 </td>
+				<td><b>Confirmation Dtae</b></td>
 				 <td>						
-					{{modalOptions.addpatient.patient_history.description}}
-				 </td>	
+					{{modalOptions.addstaff.confirmation_date}}
+				 </td>
 			</tr>
+			<tr>				 
+				<td><b>Pan No</b></td>
+				 <td>						
+					{{modalOptions.addstaff.pan_no}}
+				 </td>	
+				 <td><b>UAN No</b></td>
+				 <td>						
+					{{modalOptions.addstaff.uan}}
+				 </td>
+				 </tr>
+				 <tr>
+					<td><b>Adhaar No</b></td>
+				 <td colspan='3'>						
+					{{modalOptions.addstaff.adhaar_no}}
+				 </td>					 
+				</tr>
+				<tr>
+					<td><b>Department</b></td>
+				 <td>						
+					{{modalOptions.addstaff.department}}
+				 </td>
+					<td><b>Designation</b></td>
+				 <td>						
+					{{modalOptions.addstaff.designation}}
+				 </td>				 
+				</tr>
+				<tr>
+					<td><b>Salary</b></td>
+				 <td>						
+					{{modalOptions.addstaff.salary}}
+				 </td>	
+					<td><b>Fees</b></td>
+				 <td>						
+					{{modalOptions.addstaff.fees}}
+				 </td>				 
+				</tr>
 			</tbody>
 	</table>
 </div>
