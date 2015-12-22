@@ -36,7 +36,7 @@
 			
 				<label for="division" class="col-sm-2 control-label">Division * </label>
 				<div class="col-sm-9">
-					<select id="div_id" class="form-control" ng-model="modalOptions.addtimetable.div_id" ng-options="item.id as item.division_name for item in modalOptions.divisionList"  ng-change="modalOptions.classParams.where.div_id = modalOptions.addtimetable.div_id;modalOptions.getData(false, false,'subjects','subjectList', false, modalOptions)" required>
+					<select id="div_id" class="form-control" ng-model="modalOptions.addtimetable.div_id" ng-options="item.id as item.division_name for item in modalOptions.divisionList"  ng-change="modalOptions.classParams.where.div_id = modalOptions.addtimetable.div_id;modalOptions.getData(false, false,'subjects','subjectList', modalOptions.classParams, modalOptions)" required>
 						<option value="">Select division</option>
 					</select>
 					<span class="help-block" ng-show="addtimetableform.div_id.$dirty && addtimetableform.div_id.$invalid">
@@ -46,25 +46,24 @@
 		</div>
 	 
 		
-		<div class="form-group">
-			<div ng-init="modalOptions.getData(false,false,'subject','subjectlist', subjectParams, modalOptions)">
+		<div class="form-group" ng-if="modalOptions.subjectList && modalOptions.classParams.where.div_id">
 				<label for="subject" class="col-sm-2 control-label"> Subject * </label>
 				<div class="col-sm-9">
-					<select id="sub_id" class="form-control" ng-model="modalOptions.addtimetable.sub_id" ng-options="item.id as item.name for item in modalOptions.subjectlist | filter : {type:'subject'}" required>
+					<select id="sub_id" class="form-control" ng-model="modalOptions.addtimetable.sub_id" ng-options="item.id as item.sub_name for item in modalOptions.subjectList" ng-change="modalOptions.classParams.where.sub_id=modalOptions.addtimetable.sub_id" required>
 						<option value="">Select subject</option>
 					</select>
 					<span class="help-block" ng-show="addtimetableform.sub_id.$dirty && addtimetableform.sub_id.$invalid">
 					<span ng-show="addtimetableform.sub_id.$error.required" class="text-danger">subject is required.</span>
 					</span>	
 				</div>
-			</div>
 		</div>
+	
 		
-		<!-- <div class="form-group">
-			<div ng-init="modalOptions.getData(false,false,'room','roomlist', roomParams, modalOptions)">
+		 <div class="form-group">
+			<div ng-init="modalOptions.getData(false,false,'room','roomList', false, modalOptions)">
 				<label for="room" class="col-sm-2 control-label"> Classroom * </label>
 				<div class="col-sm-9">
-					<select id="room_id" class="form-control" ng-model="modalOptions.addtimetable.room_id" ng-options="item.id as item.name for item in modalOptions.roomlist | filter : {type:'room'}" required>
+					<select id="room_id" class="form-control" ng-model="modalOptions.addtimetable.room_id" ng-options="item.id as item.room_no for item in modalOptions.roomList"  required>
 						<option value="">Select room</option>
 					</select>
 					<span class="help-block" ng-show="addtimetableform.room_id.$dirty && addtimetableform.room_id.$invalid">
@@ -72,13 +71,13 @@
 					</span>	
 				</div>
 			</div>
-		</div> -->
+		</div>
 		
-		<!-- <div class="form-group">
-			<div ng-init="modalOptions.getData(false,false,'staff','stafflist', staffParams, modalOptions)">
+		 <div class="form-group">
+			<div ng-init="modalOptions.getData(false,false,'staff','staffList', false, modalOptions)">
 				<label for="class" class="col-sm-2 control-label">Staff * </label>
 				<div class="col-sm-9">
-					<select id="staff_id" class="form-control" ng-model="modalOptions.addtimetable.staff_id" ng-options="item.id as item.name for item in modalOptions.stafflist | filter : {type:'staff'}" required>
+					<select id="staff_id" class="form-control" ng-model="modalOptions.addtimetable.staff_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
 						<option value="">Select staff</option>
 					</select>
 					<span class="help-block" ng-show="addtimetableform.staff_id.$dirty && addtimetableform.staff_id.$invalid">
@@ -86,8 +85,8 @@
 					</span>	
 				</div>
 			</div>
-		</div> -->
-		<!-- <div class="form-group">
+		</div> 
+		 <div class="form-group">
 				<label for="day" class="col-sm-2 control-label">Select day*</label>
 				<div class="col-sm-9">
 						<select id="day" name="day" class="form-control" 
@@ -105,38 +104,38 @@
 						<span ng-show="addtimetableform.day.$error.required"class="text-danger">Select  Day</span>
 						</span>
 				</div>
-		</div> -->
+		</div> 
 		
-		<!-- <div class="form-group">
+		 <div class="form-group">
 				<label  for="date" class="col-sm-2 control-label">Date *</label>
 				<div class="col-sm-6">
 				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.addtimetable.date"  ng-init="modalOptions.addtimetable.date=modalOptions.date"
 				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addtimetable.date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>  
-		</div> -->
+		</div> 
 			
 			
-		<!-- <div class="form-group">
+		 <div class="form-group">
 				<label for="time" class="col-sm-2 control-label">Time *</label>
 					<div class="col-sm-3">
 						<label for="time" class="col-sm-2 control-label">From</label>
-						<input type="time" name="time" id="time" ng-model="modalOptions.addtimetable.formtime" placeholder="Enter time" class="form-control" required>
-						<span class="text-danger"  ng-show="addtimetable.time.$error.pattern">Please enter valid time</span>
+						<input type="time" name="time" id="time" ng-model="modalOptions.addtimetable.timefrom" placeholder="Enter time" class="form-control" required>
+						<span class="text-danger"  ng-show="addtimetableform.time.$error.pattern">Please enter valid time</span>
 						<span class="help-block" ng-show="addtimetableform.time.$dirty && addtimetableform.time.$invalid">
 							<span ng-show="addtimetableform.time.$error.required" class="text-danger">time is required.</span>
 						</span> 
 					</div>
 					<div class="col-sm-3">
 						<label for="time" class="col-sm-2 control-label">To</label>
-						<input type="time" name="time" id="time" ng-model="modalOptions.addtimetable.totime" placeholder="Enter time"  class="form-control" required>
-						<span class="text-danger"  ng-show="addtimetable.time.$error.pattern">Please enter valid time</span>
+						<input type="time" name="time" id="time" ng-model="modalOptions.addtimetable.timeto" placeholder="Enter time"  class="form-control" required>
+						<span class="text-danger"  ng-show="addtimetableform.time.$error.pattern">Please enter valid time</span>
 						<span class="help-block" ng-show="addtimetableform.time.$dirty && addtimetableform.time.$invalid">
 							<span ng-show="addtimetableform.time.$error.required" class="text-danger">time is required.</span>
 						</span> 
 					</div>						
-		</div> -->
+		</div> 
 			
-		<div class="col-sm-offset-2 ">
+		<div classF="col-sm-offset-2 ">
 				<button type="submit" class="btn btn-success" ng-if="!modalOptions.addtimetable.id" ng-disabled="addtimetableform.$invalid" ng-click="modalOptions.postData('timetable',modalOptions.addtimetable);modalOptions.ok()">Save</button>
 				
 				<button type="submit" class="btn btn-success" ng-if="modalOptions.addtimetable.id" ng-disabled="addtimetable.$invalid" ng-click="modalOptions.updateData('timetable',modalOptions.addtimetable);modalOptions.ok()">Update Timetable</button>

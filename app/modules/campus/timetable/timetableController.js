@@ -51,44 +51,38 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
 					
 				},
-				
-				{ 
-					name:'dept_id',
-					enableSorting: false, enableFiltering: true,
-					filterHeaderTemplate: '<input id="dept_id" class="form-control" ng-change="grid.appScope.filter(\'dept_id\', dept_id, \'department\', \'departmentList\',true,grid.appScope.deptParams)" ng-model="dept_id" placeholder="Department No">',
-				},
 				{ 
 					name:'dept_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'division_view\', \'divisionList\',false, grid.appScope.divParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">' 
+					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'timetable_view\', \'timetableList\',false, grid.appScope.divParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">'
 				},
 				{ 
 					name:'class_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'division_view\', \'divisionList\',true, grid.appScope.divParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'timetable_view\', \'timetableList\',true, grid.appScope.divParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
 				},	
-{ 
+				{ 
 					name:'division_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'div_id\', div_id, \'division_view\', \'divisionList\',true, grid.appScope.divParams)" ng-model="div_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'div_id\', div_id, \'timetable_view\', \'timetableList\',true, grid.appScope.divParams)" ng-model="div_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
 				},				
-				/* { name:'classRoom',enableSorting: false ,
-				filterHeaderTemplate: '<select id="room_id" class="form-control" ng-change="grid.appScope.filter(\'room_id\', room_id, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="room_id" ng-options="item.id as item.room_no for item in grid.appScope.roomList">'
+				 { name:'classRoom',enableSorting: false ,
+				filterHeaderTemplate: '<select id="room_id" class="form-control" ng-change="grid.appScope.filter(\'room_id\', room_id, \'timetable_view\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="room_id" ng-options="item.id as item.room_no for item in grid.appScope.roomList">'
 							+'<option value="" selected>Room No</option>'
 						+'</select>',
 				},
 				
 				{ name:'Staff_name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="staff_id" ng-options="item.id as item.staff_name for item in grid.appScope.staffList">'
+				filterHeaderTemplate: '<select id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'timetable_view\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="staff_id" ng-options="item.id as item.staff_name for item in grid.appScope.staffList">'
 							+'<option value="" selected>Staff Name</option>'
 						+'</select>',
 				},
 				
 				{ name:'date',
 				enableSorting: true, enableFiltering: false,
-					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'timetable\', \'timetableList\',true, grid.appScope.timetableList)" ng-model="date" placeholder="date">',
+					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'timetable_view\', \'timetableList\',true, grid.appScope.timetableList)" ng-model="date" placeholder="date">',
 				},
 				{
 					name:'day',
 					enableSorting: false,
-					filterHeaderTemplate: '<select id="day" class="form-control" ng-change="grid.appScope.filter(\'day\', day, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams);grid.appScope.timetableday = grid.appScope.campusConfig[day]" ng-model="day">'
+					filterHeaderTemplate: '<select id="day" class="form-control" ng-change="grid.appScope.filter(\'day\', day, \'timetable_view\', \'timetableList\',true, grid.appScope.timetableParams);grid.appScope.timetableday = grid.appScope.campusConfig[day]" ng-model="day">'
 							+'<option value="" selected>day</option>'
 							+'<option value="Sunday">Sunday</option>'
 							+'<option value="Monday">Monday</option>'
@@ -99,9 +93,9 @@ define(['app'], function (app) {
 							+'<option value="Saturday">Saturday</option>'
 						+'</select>'
 				}
-				,	 */
+				,	 
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'timetable\', \'timetableList\',false, grid.appScope.timetableParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'timetable_view\', \'timetableList\',false, grid.appScope.timetableParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -117,7 +111,7 @@ define(['app'], function (app) {
 			console.log(response);
 			if(response.status == "success"){
 				console.log($scope.timetableParams);
-				$scope.getData(false, $scope.currentPage, "timetable", "timetableList", $scope.timetableParams);
+				$scope.getData(false, $scope.currentPage, "timetable_view", "timetableList", $scope.timetableParams);
 			}
 		}
 		$scope.openModal = function(url,data){
@@ -139,7 +133,8 @@ define(['app'], function (app) {
 					div_id:data.div_id,
 					day:data.day,
 					date : data.date,
-					timeperiod:data.timeperiod,
+					timefrom:data.timefrom,
+					timeto:data.timeto,
 					room_id:data.room_id,
 					staff_id:data.staff_id,
 					
@@ -152,14 +147,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'timetable','timetableList',$scope.timetableParams);
+							$scope.getData(false, $scope.currentPage, 'timetable_view','timetableList',$scope.timetableParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'timetable','timetableList',$scope.timetableParams);
+							$scope.getData(false, $scope.currentPage, 'timetable_view','timetableList',$scope.timetableParams);
 						}
 					})
 				},
