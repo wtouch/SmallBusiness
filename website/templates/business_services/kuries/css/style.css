@@ -20,7 +20,7 @@
   padding: 15px;
 }
 .featured_services .servimage {
-  height: 150px;
+  height: 105px;
   width: 150px;
 }
 .featured_services .servimage img {
@@ -30,11 +30,6 @@
 .featured_services .description {
   padding: 15px;
   text-align: justify;
-}
-.testicontainer {
-  background-image: url('../img/testi.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
 }
 .homeAboutus img {
   vertical-align: middle;
@@ -58,6 +53,7 @@
   text-align: justify;
 }
 .products {
+  padding: 15px;
   animation-name: products;
   animation-duration: 2s;
   animation-iteration-count: 1;
@@ -85,6 +81,13 @@
 }
 .carousel-inner > .item img {
   height: 235px;
+  width: 100%;
+}
+.item.homeItem {
+  height: 347px;
+}
+.item.homeItem img {
+  height: 347px;
   width: 100%;
 }
 span.glyphicon.glyphicon-chevron-right,
@@ -195,28 +198,54 @@ body {
   color: #ffffff !important;
   position: relative;
 }
-.navbar-default .nav > li > a:hover {
-  background-color: transparent !important;
+.navbar-default .nav > li.active > a:before,
+.navbar-default .nav > li > a:before {
+  content: "";
+  position: absolute;
+  background-image: url('../img/active.gif');
+  background-repeat: no-repeat;
+  top: -10px;
+  width: 12px;
+  height: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.navbar-default .nav > li > a:before {
+  display: none;
+}
+.navbar-default .nav > li.active > a:before {
+  display: block;
+}
+.navbar-default .nav > li:hover > a:before {
+  display: block;
 }
 .navbar-default .nav > li > ul {
   display: none;
   position: absolute;
   width: 200px;
   z-index: 999;
-  background-color: #ba001f;
+  background: #c90d14;
+  border-bottom-width: 0;
   padding: 2px;
   list-style: none;
   text-align: left;
-  margin-top: 6px;
+  margin-top: 11px;
 }
 .navbar-default .nav > li > ul > li {
   padding: 10px;
+  border-bottom: 1px solid #444444;
+  text-indent: 3px;
+  font-family: Tahoma;
+  font-size: 14px;
+  font-weight: normal;
   position: relative;
 }
 .navbar-default .nav > li > ul > li > a {
   color: #ffffff;
 }
 .navbar-default .nav > li > ul > li > a:hover {
+  color: #696767;
   text-decoration: none;
 }
 .navbar-default .nav > li > ul > li:hover {
@@ -237,16 +266,19 @@ body {
   padding: 0px;
 }
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #ba001f;
+  background-color: #c90d14;
+}
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: transparent !important;
 }
 .panel-default {
   color: #ffffff;
-  background-image: url('../img/testi.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
   border: none;
 }
 .panel-default .form-control {
+  background-image: url('../img/a1.gif');
   display: inline-block;
   height: 50px;
   width: 100%;
@@ -266,7 +298,7 @@ body {
 .panel-default h3 {
   font-style: italic;
   font-weight: normal;
-  color: #ba001f;
+  color: #c90d14;
 }
 .panel-default .btn-info {
   border: 1px solid #ffffff;
@@ -298,40 +330,34 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
   background-repeat: repeat-x;
 }
-.content1 {
-  background-image: url('../img/testi.jpg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
 h1,
 h2,
 h4,
 h3 {
-  color: #ba001f;
+  color: #c90d14;
   font-style: italic;
   font-weight: normal;
 }
 cite {
-  color: #ba001f;
+  color: #c90d14;
 }
 footer a {
   color: #696767;
 }
 footer a:hover {
-  color: #ba001f;
+  color: #c90d14;
   text-decoration: none;
 }
 a.email {
   color: #696767;
 }
 a.email:hover {
-  text-decoration: none;
-  color: #ba001f;
+  color: #c90d14;
 }
 .btn-info {
   color: #ffffff;
-  background-color: #ba001f;
-  border-color: #ba001f;
+  background-color: #c90d14;
+  border-color: #c90d14;
 }
 .btn-info:hover {
   color: #ffffff;
@@ -358,8 +384,20 @@ a.email:hover {
     position: initial;
   }
 }
-.con {
+a {
+  color: #696767;
+  text-decoration: none;
+}
+a:hover {
+  color: #c90d14;
+}
+.col-sm-12 p {
+  text-align: justify;
+  padding: 15px;
+}
+.content1 {
   background-image: url('../img/testi.jpg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  margin-top: 0px;
 }
