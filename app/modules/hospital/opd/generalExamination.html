@@ -19,15 +19,14 @@
 	<div class="form-group">
 		<label for="Height" class="col-sm-2 control-label">Height </label>
 		<div class="col-sm-3" >
-			<input type="text" id="height" name="height" class="form-control" ng-model="modalOptions.addopdpatient.general_examination.height"ng-pattern="/^\d{0,9}[0-9]$/"  placeholder="Enter Height" ng-pattern="/^[a-zA-Z]*$/" required>
+			<input type="text" id="height" name="height" class="form-control" ng-model="modalOptions.addopdpatient.general_examination.height" ng-pattern="/^\d{0,9}[0-9]$/"  placeholder="Enter Height" />
 			<span class="text-danger"  ng-show="addopdpatientForm.height.$error.pattern">please Enter Valid height</span>
-			<span ng-show="addopdpatientForm.weight.$error.pattern && (addopdpatientForm.weight.$dirty || submitted)" class="text-danger">please enter number</span>
 			<span class="help-block" ng-show="addopdpatientForm.height.$dirty && addopdpatientForm.bp.$invalid">
 				</span>						
 		</div>
 		<label for="weight" class="col-sm-2 control-label">weight </label>
 		<div class="col-sm-3">
-			<input type="text" id="weight" name="weight" class="form-control" ng-model="modalOptions.addopdpatient.general_examination.weight" placeholder="Enter weight " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" required>
+			<input type="text" id="weight" name="weight" class="form-control" ng-model="modalOptions.addopdpatient.general_examination.weight" placeholder="Enter weight " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="3" >
 			<span class="help-block" ng-show="addopdpatientForm.weight.$dirty && addopdpatientForm.weight.$invalid">
 				<span ng-show="addopdpatientForm.weight.$error.pattern && (addopdpatientForm.weight.$dirty || submitted)" class="text-danger">please enter number</span>
 			</span>
@@ -36,7 +35,7 @@
 	<div class="form-group">
 		<label for="bp" class="col-sm-2 control-label">BP </label>
 		<div class="col-sm-3">
-			<input type="text" id="bp" name="bp" class="form-control" ng-model="modalOptions.addopdpatient.general_examination.bp" placeholder="Enter blood pressure" ng-pattern="/^[a-zA-Z]*$/" required>
+			<input type="text" id="bp" name="bp" class="form-control" ng-model="modalOptions.addopdpatient.general_examination.bp" placeholder="Enter blood pressure" ng-pattern="/^\d{0,9}[0-9]$/"  required>
 			<span class="text-danger"  ng-show="addopdpatientForm.bp.$error.pattern">please Enter Valid bp</span>
 			<span class="help-block" ng-show="addopdpatientForm.bp.$dirty && addopdpatientForm.bp.$invalid">
 				<span ng-show="addopdpatientForm.bp.$error.required" class="text-danger">State is required.</span>
@@ -66,7 +65,7 @@
 	<div class="form-group">
 		<label for="ICTERUS" class="col-sm-2 control-label">ICTERUS</label>
 		<div class="col-sm-3">
-			<input type="text" id="ICTERUS" name="ICTERUS" class="form-control" ng-model="modalOptions.addopdpatient.general_examination.ICTERUS" placeholder=""  />
+			<input type="text" id="ICTERUS" name="ICTERUS" class="form-control" ng-model="modalOptions.addopdpatient.general_examination.ICTERUS" placeholder=" Enter ICTERUS value"  />
 		</div>	
 		<label for="CLUBBING" class="col-sm-2 control-label">CLUBBING</label>
 		<div class="col-sm-3">
@@ -128,7 +127,7 @@
 		<div class="col-sm-offset-2 col-sm-9">
 			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addopdpatient.id"  ng-click="modalOptions.postData('opd',modalOptions.addopdpatient);modalOptions.ok()">Add new IPD Patient</button>
 			
-			<button type="submit" ng-if="modalOptions.addopdpatient.id" class="btn btn-success" ng-disabled="addopdpatientForm.$invalid" ng-click="modalOptions.updateData('opd',modalOptions.addopdpatient,modalOptions.addopdpatient.id);modalOptions.ok()">Update OPD Patient</button>
+			<button type="submit" ng-if="modalOptions.addopdpatient.id" class="btn btn-success"  ng-click="modalOptions.updateData('opd',modalOptions.addopdpatient,modalOptions.addopdpatient.id);modalOptions.ok()">Update OPD Patient</button>
 			
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 		</div>

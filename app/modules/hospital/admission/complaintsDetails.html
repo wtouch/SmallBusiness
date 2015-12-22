@@ -1,70 +1,67 @@
-		<div class="modal-body" ng-init="modalOptions.addadmission.complaints = (modalOptions.addadmission.complaints) ? modalOptions.addadmission.complaints : []">{{modalOptions.complaints}}
-				
-			<div class="form-group">
-				<label for="complaint_name" class="col-sm-2 control-label">complaints_name *</label>
-				<div class="col-sm-8">
-				<input type="text" id="complaint_name" name="complaint_name" class="form-control" ng-model="modalOptions.complaints.complaint_name" placeholder="Enter complaint_name" ng-pattern="/^[a-zA-Z]*$/" required />
-					<span class="help-block" ng-show="addnew_admissionForm.complaint_name.$dirty && addnew_admissionForm.complaint_name.$invalid">
-						<span ng-show="addnew_admissionForm.complaint_name.$error.required" class="text-danger">complaints_name is required.</span>
-					</span>				
-				</div>
-				
-			</div>
-		<div class="form-group" ng-init="modalOptions.getData(false,false,'complaint','complaint',modalOptions.complaintParams,modalOptions)">
-			<label for="category" class="col-sm-2 control-label">Select Category*</label>
+	<div class="modal-body" ng-init="modalOptions.addadmission.complaints = (modalOptions.addadmission.complaints) ? modalOptions.addadmission.complaints : []">{{modalOptions.complaints}}	
+		<div class="form-group">
+			<label for="complaint_name" class="col-sm-2 control-label">complaints_name *</label>
+			<div class="col-sm-8">
+			<input type="text" id="complaint_name" name="complaint_name" class="form-control" ng-model="modalOptions.complaints.complaint_name" placeholder="Enter complaint_name" ng-pattern="/^[a-zA-Z]*$/" required />
+				<span class="help-block" ng-show="addnew_admissionForm.complaint_name.$dirty && addnew_admissionForm.complaint_name.$invalid">
+					<span ng-show="addnew_admissionForm.complaint_name.$error.required" class="text-danger">complaints_name is required.</span>
+				</span>				
+			</div>	
+		</div>
+	<div class="form-group" ng-init="modalOptions.getData(false,false,'complaint','complaint',modalOptions.complaintParams,modalOptions)">
+		<label for="category" class="col-sm-2 control-label">Select Category</label>
+		<div class="col-sm-3">
+			<select id="category" name="category" class="form-control" 
+			ng-model="modalOptions.complaints.category" ng-options="item.id as item.category for item in modalOptions.complaint" >
+			<option value="">select category</option>
+			</select>
+		</div>
+		<label for="type" class="col-sm-2 control-label">Select type</label>
 			<div class="col-sm-3">
-				<select id="category" name="category" class="form-control" 
-				ng-model="modalOptions.complaints.category" ng-options="item.id as item.category for item in modalOptions.complaint" >
-				<option value="">select category</option>
-				
+				<select id="type" name="type" class="form-control" 
+				ng-model="modalOptions.complaints.type" ng-options="item.id as item.type for item in modalOptions.complaint">
+				<option value="">select type</option>
 				</select>
 			</div>
-			<label for="type" class="col-sm-2 control-label">Select type*</label>
-				<div class="col-sm-3">
-					<select id="type" name="type" class="form-control" 
-					ng-model="modalOptions.complaints.type" ng-options="item.id as item.type for item in modalOptions.complaint">
-					<option value="">select type</option>
-					</select>
-				</div>
-			</div>		
-			<div class="form-group">
-				<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
-				<div class="col-sm-8">
-					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.complaints.complaints_description" placeholder="Enter Your complaints_description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
-					<span class="help-block" ng-show="addnew_admissionForm.complaints_description.$dirty && addnew_admissionForm.complaints_description.$invalid">
-						<span ng-show="addnew_admissionForm.complaints_description.$error.required"class="text-danger">Description is required.</span>
-					</span>				
-				</div>
-			</div> 
-			<div class="form-group">			
-				<div class="col-sm-offset-2 col-sm-2">
-					<button type="submit" class=" col-sm-offset-2 btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.complaints, 'complaints', modalOptions)" >	+Add 
-					</button>
-				</div>
+		</div>		
+		<div class="form-group">
+			<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
+			<div class="col-sm-8">
+				<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.complaints.complaints_description" placeholder="Enter Your complaints_description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+				<span class="help-block" ng-show="addnew_admissionForm.complaints_description.$dirty && addnew_admissionForm.complaints_description.$invalid">
+					<span ng-show="addnew_admissionForm.complaints_description.$error.required"class="text-danger">Description is required.</span>
+				</span>				
 			</div>
-			<table class="table table-bordered" >
-				<thead>
-					<tr>
-						<th class="col-sm-2">Sr.No.</th>
-						<th class="col-sm-2">Complaint Name</th>
-						<th class="col-sm-2">Complaints Category</th>
-						<th class="col-sm-2">Complaints Type</th>
-						<th class="col-sm-2">Complaints Description</th>
-						<th >Remove</th>
-					</tr> 
-				</thead>
-				<tbody >{{modalOptions.addadmission.complaints}}
-					<tr ng-repeat="x in modalOptions.addadmission.complaints">
-						<td>{{$index + 1}}</td>
-						<td>{{x.complaint_name}}</td>
-						<td>{{x.category}}</td>
-						<td>{{x.type}}</td>
-						<td>{{x.complaints_description}}</td>
-						<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.complaints, $index)">X</button></td>
-					</tr>
-				</tbody >
-			</table>
-		</div>	
-			
+		</div> 
+		<div class="form-group">			
+			<div class="col-sm-offset-2 col-sm-2">
+				<button type="submit" class=" col-sm-offset-2 btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.complaints, 'complaints', modalOptions)" >	+Add 
+				</button>
+			</div>
+		</div>
+		<table class="table table-bordered" >
+			<thead>
+				<tr>
+					<th class="col-sm-2">Sr.No.</th>
+					<th class="col-sm-2">Complaint Name</th>
+					<th class="col-sm-2">Complaints Category</th>
+					<th class="col-sm-2">Complaints Type</th>
+					<th class="col-sm-2">Complaints Description</th>
+					<th >Remove</th>
+				</tr> 
+			</thead>
+			<tbody >
+				<tr ng-repeat="x in modalOptions.addadmission.complaints">
+					<td>{{$index + 1}}</td>
+					<td>{{x.complaint_name}}</td>
+					<td>{{x.category}}</td>
+					<td>{{x.type}}</td>
+					<td>{{x.complaints_description}}</td>
+					<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.complaints, $index)">X</button></td>
+				</tr>
+			</tbody >
+		</table>
+	</div>	
+		
 		
 			
