@@ -13,15 +13,19 @@
 						 
 						<!-- <div class="sale">Sale</div>
 						<span class="glyphicon glyphicon glyphicon-eye-open"></span> -->
+							<div class="caption">
+								<h4>{{x.product_service_name}}</h4>
+								<div class="description">{{ x.description|length > 75 ?x.description|slice(start, 75) : x.description }}
+								</div>
+								<div class="readmore">
+									<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
+								</div>
+							</div>
 							<a href="#">
 								<img class="img-responsive center-block" src="{{x.product_image.0.file_relative_path}}" alt="...">
 							</a>
 						</div>
-						<h4>{{x.product_service_name}}</h4>
-						<div class="description">{{ x.description|length > 75 ?x.description|slice(start, 75) : x.description }}</div>
-						 <div class="readmore">
-							<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-info">Read More</a>
-						</div> 
+						 
 					</div> 
 				</div>
 							

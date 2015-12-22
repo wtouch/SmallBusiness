@@ -107,3 +107,13 @@ app.controller('enquiryController', function($scope,$http, $location) {
 		});
 	};
 });	
+
+ /* $(window).scroll(function(e){
+    var scrollTop = $(document).scrollTop();
+    if(scrollTop > 0){
+        $('.b').removeClass('navbar-static-top').addClass("navbar-fixed-top");
+    }
+    } else {
+        $('.b').removeClass("navbar-fixed-top").addClass('navbar-static-top');
+		
+	});	 */
