@@ -4,9 +4,11 @@
 	<h3  ng-if="modalOptions.addstaff.id" class="text-center">Update Staff</h3>
 </div>
 	
-<div class="modal-body">
-<form class="form-horizontal" name="addstaffForm1" role="form" ng-submit="addstaffForm1.$valid" novalidate="novalidate">
 
+
+{{modalOptions.addstaff}}
+<form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
+<div class="modal-body">
 <div class="form-group">
 			<label for="select type" class="col-sm-2 control-label">Select Staff Type*</label>
 			<div class="col-sm-4">
@@ -21,7 +23,7 @@
 					</select>
 			</div>
 </div>
-</form>
+
 <ul class="nav nav-tabs" ng-if="modalOptions.addstaff.staff_type=='doctor'">			
 		<li role="presentation" ng-class="{active: modalOptions.formPart=='personalDetails'}">
 			<a ng-click="modalOptions.showFormPart('personalDetails', modalOptions)">Personal Details</a>
@@ -51,9 +53,7 @@
 		
 </ul>
 </div>
-{{modalOptions.addstaff}}
-<form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
-<div class="modal-body">
+
 		<ng-include  ng-show="modalOptions.formPart=='personalDetails'" 	src="'modules/hospital/hospitalstaff/personalDetails.html'">
 		</ng-include> 
 		<ng-include  ng-show="modalOptions.formPart=='officialDetails'" src="'modules/hospital/hospitalstaff/officialDetails.html'">

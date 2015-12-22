@@ -106,6 +106,7 @@ define(['app'], function (app) {
 				date:{date : $scope.currentDate},
 				addstaff : (data) ? {
 					id : data.id,
+					staff_id:data.staff_id,
 				staff_type : data.staff_type,
 					} : {
 					date : dataService.sqlDateFormate(),
@@ -118,14 +119,14 @@ define(['app'], function (app) {
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff','staff',$scope.staffParams);
 							}
 						})
 					},
 					updateData : function(table, input, id){
 						$rootScope.updateData(table, input, id, function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff','staff',$scope.staffParams);
 							}
 						})
 					},

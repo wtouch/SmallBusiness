@@ -1,18 +1,4 @@
-<!-- <div class="form-group">
-	<div ng-init="modalOptions.getData(false,false,'staff','staffList', false, modalOptions)">
-			<label for="staff_id" class="col-sm-2 control-label"> Select Staff* </label>
-			<div class="col-sm-9">
-				<select id="staff_id" class="form-control" ng-model="modalOptions.addleave.staff_id" ng-options="item.id as item.staff_type for item in modalOptions.staffList" required>
-					<option value="">Select Staff</option>
-					<option value="1">1</option>
-				</select>
-				<span class="help-block" ng-show="addleaveForm.staff_id.$dirty && addleaveForm.staff_id.$invalid">
-				<span ng-show="addleaveForm.staff_id.$error.required" class="text-danger">user name is required.</span>
-				</span>	
-			</div>
-	</div>
-<div> -->
-	<div class="form-group">
+<div class="form-group">
 		<label  for="date" class="col-sm-2 control-label">Date*</label>
 			<div class="col-sm-9">
 				<div class="input-group">
@@ -27,7 +13,7 @@
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">Name *</label>
 			<div class="col-sm-9">
-				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.name"required>
+				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.name" required>
 				<span class="text-danger"  ng-show="addstaffForm.name.$error.pattern">please Enter Valid Name</span>
 					<span class="help-block" ng-show="addstaffForm.name.$dirty && addstaffForm.name.$invalid">
 						<span class="text-danger" ng-show="addstaffForm.name.$error.required">Name is required.</span>
@@ -78,13 +64,12 @@
 		<div class="radio col-sm-2">
 		<label><input type="radio" name="marital_status" value="married" ng-model="modalOptions.addstaff.marital_status">Married</label>
 			</div>
-
 	</div> 
 	<div class="form-group">
 		<label  for="date" class="col-sm-2 control-label">Date of Birth*</label>
 		<div class="col-sm-4">
 			<div class="input-group">
-				<input type="text" class="form-control " placeholder="Select Date of Birth" id="dob" name="dob" ng-model="modalOptions.addstaff.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.dob,10); modalOptions.sqlDateFormat(modalOptions.addstaff.dob, modalOptions.addstaff.dob)"/>	
+				<input type="text" class="form-control " placeholder="Select Date of Birth" id="dob" name="dob" ng-model="modalOptions.addstaff.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.dob,10); modalOptions.sqlDateFormat(modalOptions.addstaff.dob, modalOptions.addstaff.dob)"/>	
 				
 				<span class="input-group-btn">
 					<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
