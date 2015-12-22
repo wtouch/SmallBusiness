@@ -4,7 +4,7 @@
 		<h3 class="text-center" ng-if="modalOptions.addAccount.id">Update Account</h3>
 	</div>
 	<div class="modal-body">
-		<form name="addAccountForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addAccountForm.$valid"><!-- {{modalOptions.account}} -->
+		<form name="addAccountForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addAccountForm.$valid">
 				<div class="form-group">
 					<label for="category" class="col-sm-2 control-label">Account Category * </label>
 					<div class="col-sm-9">
@@ -43,24 +43,29 @@
 					</div>
 				</div>
 				<div class="form-group">
-				 <label  for="accountdate" class="col-sm-2 control-label">Date * </label>
+					<label for="branch" class="col-sm-2 control-label">Branch Name * </label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder="Account Date" id="accountdate" name="accountdate" ng-model="modalOptions.addAccount.accountdate" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addAccount.accountdate = modalOptions.date" ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
+						<input type="text"  id="branch" class="form-control" name="branch" placeholder="Branch Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addAccount.branch" required/>
+						<span class="help-block" ng-show="addAccountForm.branch.$dirty && addAccountForm.branch.$invalid">
+						<span class="text-danger" ng-show="addAccountForm.branch.$error.minlength"> Account Name is too short !</span>
+						 <span class="text-danger"  ng-show="addAccountForm.branch.$error.pattern">Please enter valid name</span>
+						<span class="text-danger" ng-show="addAccountForm.branch.$error.required"> Account name is required.</span>
+					</span>
 					</div>
 				</div> 
 				<div class="form-group">
 					<label for="micr_no" class="col-sm-2 control-label">MICR NO * </label>
 					<div class="col-sm-9">
-						<input type="text"  id="micr_no" class="form-control" name="micr_no" placeholder="MICR NO" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addAccount.micr_no" required/>
+						<input type="text"  id="micr_no" name="micr_no" class="form-control" ng-model="modalOptions.addAccount.micr_no" placeholder="MICR NO" required>
 						<span class="help-block" ng-show="addAccountForm.micr_no.$dirty && addAccountForm.micr_no.$invalid">
 						<span class="text-danger" ng-show="addAccountForm.micr_no.$error.required">Required Field.</span>
-					</span>
+						</span>
 					</div>
 				</div> 
 				<div class="form-group">
 					<label for="ifsc_no" class="col-sm-2 control-label">IFSC NO * </label>
 					<div class="col-sm-9">
-						<input type="text"  id="ifsc_no" class="form-control" name="ifsc_no" placeholder="MICR NO" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addAccount.ifsc_no" required/>
+						<input type="text"  id="ifsc_no" class="form-control" name="ifsc_no" placeholder="IFSC NO" ng-model="modalOptions.addAccount.ifsc_no" required/>
 						<span class="help-block" ng-show="addAccountForm.ifsc_no.$dirty && addAccountForm.ifsc_no.$invalid">
 						<span class="text-danger" ng-show="addAccountForm.ifsc_no.$error.required">Required Field.</span>
 					</span>
@@ -69,7 +74,7 @@
 				<div class="modal-footer">
 					<div class="col-sm-offset-2 col-sm-9">
 						
-						<button type="submit" ng-if="!modalOptions.addAccount.id" class="btn btn-success" ng-disabled="addAccountForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('account',modalOptions.addAccount)">
+						<button type="submit" ng-if="!modalOptions.addAccount.id" class="btn btn-success" ng-disabled="addAccountForm.$invalid" ng-click="modalOptions.ok(); modalOptions.postData('account',modalOptions.addAccount);">
 							<span>Submit</span>
 						</button>
 						

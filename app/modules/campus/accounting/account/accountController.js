@@ -76,8 +76,9 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} , 
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/accounting/account/addaccount.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/accounting/account/addaccount.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'account\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/accounting/account/viewaccount.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Class"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
@@ -101,12 +102,12 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				addAccount : (data) ? {
 					id : data.id,
-					status : 1,
+					user_id : data.user_id,
 					account_name : data.account_name,
 					account_no : data.account_no,
 					micr_no : data.micr_no,
-					ifsc_no :dat.ifsc_no,
-					user_id : data.user_id,
+					ifsc_no : data.ifsc_no,
+					branch : data.branch,
 					category : data.category,
 					date : data.date
 				} : {
@@ -148,7 +149,8 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id
+					status : 1,
+					user_id : $rootScope.userDetails.id,
 				},
 				cols : ["*"]
 			};
