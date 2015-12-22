@@ -36,6 +36,7 @@ define(['app'], function (app) {
 			}
 		]
 
+
 		$scope.bedList = {
 			enableSorting: true,
 			enableFiltering: true,
