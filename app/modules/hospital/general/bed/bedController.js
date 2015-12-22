@@ -40,15 +40,16 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo', 
-					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
-			enableFiltering: false,	
+				{ name:'SrNo',width:50, enableSorting: false,enableFiltering: false, 
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 				},
 				{ name:'ward_name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="ward_name" class="form-control" ng-change="grid.appScope.filter(\'ward_id\', ward_id, \'bed\', \'bedList\',true, grid.appScope.bedParams)" ng-model="ward_id" ng-options="item.ward_id as item.ward_name for item in grid.appScope.wardList">' 
-							+'<option value="">Select Ward name</option>'
+				width:150,
+				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'ward_name\', ward_name, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="ward_name" ng-options="item.ward_name as item.ward_name for item in grid.appScope.wardList">' 
+							+'<option value="">Select ward</option>'
 						+'</select>',
-				},
+				cellTemplate : '<span>{{row.entity.ward_name}}</span>',
+					},
 				{
 					name:'bed_number',
 					filterHeaderTemplate: '<input id="bed_number" class="form-control" ng-change="grid.appScope.filter(\'bed_number\', bed_number, \'bed\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_number" placeholder="bed_number">',
@@ -58,7 +59,7 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="bed_description" class="form-control" ng-change="grid.appScope.filter(\'bed_description\', bed_description, \'bed\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_description" placeholder="bed_description">',
 				},
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bed\', \'bedList\',false,grid.appScope.bedParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bed_view\', \'bedList\',false,grid.appScope.bedParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -69,7 +70,7 @@ define(['app'], function (app) {
 					  ]
 					} , 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/bed/addbed.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bed Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete bed" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bed\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+ '<a type="button" tooltip="Delete bed" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bed_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 						
 					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/bed/bedview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  Bed" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
@@ -81,7 +82,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "bed", "bedList", $scope.bedParams);
+				$scope.getData(false, $scope.currentPage, "bed_view", "bedList", $scope.bedParams);
 			}
 		}
 			$scope.openModal = function(url,data){
@@ -116,14 +117,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'bed','bedList',$scope.bedParams);
+							$scope.getData(false, $scope.currentPage, 'bed_view','bedList',$scope.bedParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'bed','bedList',$scope.bedParams);
+							$scope.getData(false, $scope.currentPage, 'bed_view','bedList',$scope.bedParams);
 						}
 					})
 				},
@@ -139,6 +140,22 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
+	/* 	 $scope.wardParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "hospital_ward",
+					joinOn : {
+						id : "t0.ward_id"
+					},
+					cols : {ward_name : "ward_name",ward_id : "ward_id",user_id :"user_id"}
+				}
+			]	 
+		} */
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
