@@ -52,25 +52,24 @@ define(['app'], function (app) {
 					
 				},
 				
-				{ name:'department_name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="dept_id" class="form-control" ng-change="grid.appScope.filter(\'dept_id\', dept_id, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="dept_id" ng-options="item.id as item.department_name for item in grid.appScope.departmentList">'
-							+'<option value="" selected>Department Name</option>'
-						+'</select>',
+				{ 
+					name:'dept_id',
+					enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="dept_id" class="form-control" ng-change="grid.appScope.filter(\'dept_id\', dept_id, \'department\', \'departmentList\',true,grid.appScope.deptParams)" ng-model="dept_id" placeholder="Department No">',
 				},
-				{ name:'class_name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="class_id" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">'
-							+'<option value="" selected>class Name</option>'
-						+'</select>',
+				{ 
+					name:'dept_name',enableSorting: false ,
+					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'division_view\', \'divisionList\',false, grid.appScope.divParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">' 
 				},
-				
-			  { name:'Division_name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="div_id" class="form-control" ng-change="grid.appScope.filter(\'div_id\', div_id, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="div_id" ng-options="item.id as item.division_name for item in grid.appScope.divisionList">'
-							+'<option value="" selected>Division Name</option>'
-						+'</select>',
-				},
-				
-					
-				{ name:'classRoom',enableSorting: false ,
+				{ 
+					name:'class_name',enableSorting: false ,
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'division_view\', \'divisionList\',true, grid.appScope.divParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+				},	
+{ 
+					name:'division_name',enableSorting: false ,
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'div_id\', div_id, \'division_view\', \'divisionList\',true, grid.appScope.divParams)" ng-model="div_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+				},				
+				/* { name:'classRoom',enableSorting: false ,
 				filterHeaderTemplate: '<select id="room_id" class="form-control" ng-change="grid.appScope.filter(\'room_id\', room_id, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="room_id" ng-options="item.id as item.room_no for item in grid.appScope.roomList">'
 							+'<option value="" selected>Room No</option>'
 						+'</select>',
@@ -100,7 +99,7 @@ define(['app'], function (app) {
 							+'<option value="Saturday">Saturday</option>'
 						+'</select>'
 				}
-				,	
+				,	 */
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'timetable\', \'timetableList\',false, grid.appScope.timetableParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
@@ -128,6 +127,9 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
+				timetableData : (data)?{
+						id : data.id
+					}:{},
 				addtimetable : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
@@ -143,9 +145,9 @@ define(['app'], function (app) {
 					
 			} : {
 					user_id : $rootScope.userDetails.user_id,
-					date : dataService.sqlDateFormate(),
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					dept_id : 1,
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -160,6 +162,14 @@ define(['app'], function (app) {
 							$scope.getData(false, $scope.currentPage, 'timetable','timetableList',$scope.timetableParams);
 						}
 					})
+				},
+				getData : $scope.getData,
+				classParams : {
+					where : {
+					user_id : $rootScope.userDetails.id,
+					status:1,
+				},
+				cols : ["*"]
 				}
 			};
 			
@@ -168,6 +178,7 @@ define(['app'], function (app) {
 			})
 	}	
 	$scope.getData = function(single, page, table, subobj, params, modalOptions) {
+		console.log(params);
 			$scope.params = (params) ? params : {
 				where : {
 					user_id : $rootScope.userDetails.id,
