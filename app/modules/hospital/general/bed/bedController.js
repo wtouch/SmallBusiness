@@ -45,7 +45,7 @@ define(['app'], function (app) {
 				},
 				{ name:'ward_name',enableSorting: false ,
 				width:150,
-				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'ward_name\', ward_name, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="ward_name" ng-options="item.ward_name as item.ward_name for item in grid.appScope.wardList">' 
+				filterHeaderTemplate: '<select id="ward_name" class="form-control" ng-change="grid.appScope.filter(\'ward_name\', ward_name, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="ward_name" ng-options="item.ward_name as item.ward_name for item in grid.appScope.wardList">' 
 							+'<option value="">Select ward</option>'
 						+'</select>',
 				cellTemplate : '<span>{{row.entity.ward_name}}</span>',
@@ -92,14 +92,15 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
-				wardParams : $scope.wardParams,
+				/* wardParams : $scope.wardParams, */
 				bed_date:$scope.currentDate,
 				modified_date:$scope.currentDate,
 				date:$scope.currentDate,
+				modified_date:$scope.currentDate,
 				bed : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
-					ward_id:data.ward_id,
+					/* ward_id:data.ward_id, */
 					user_id : $rootScope.userDetails.id,
 					bed_number: data.bed_number,
 					bed_description: data.bed_description,
@@ -140,22 +141,6 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
-	/* 	 $scope.wardParams = {
-			where : {
-				status : 1,
-				user_id : $rootScope.userDetails.id
-			},
-			join : [
-				{
-					joinType : 'INNER JOIN',
-					joinTable : "hospital_ward",
-					joinOn : {
-						id : "t0.ward_id"
-					},
-					cols : {ward_name : "ward_name",ward_id : "ward_id",user_id :"user_id"}
-				}
-			]	 
-		} */
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
