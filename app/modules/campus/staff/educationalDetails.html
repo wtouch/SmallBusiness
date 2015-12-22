@@ -101,14 +101,13 @@
 		</table>
 		
 		<!-- <div class="col-sm-9"> -->
-		<label class="col-sm-3">Remark</label>
-			<textarea class="form-control" id="remark" name="remark" ng-model="modalOptions.addstaff.remark" ng-maxlength="250" placeholder="Remark" required></textarea>
+		<label class="col-sm-3">Description</label>
+			<textarea class="form-control" id="remark" name="remark" ng-model="modalOptions.addstaff.education.remark" ng-maxlength="250" placeholder="Remark" required></textarea>
 			<span ng-hide="addstaffForm.remark.$error.maxlength">
 							{{ 250 - modalOptions.addstaff.remark.length + " Chars left" }}
 			</span>	
 			<span class="help-block" ng-show="addstaffForm.remark.$dirty && addstaffForm.remark.$invalid">
 				<span class="text-danger" ng-show="addstaffForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-				<span ng-show="addstaffForm.remark.$error.required" class="text-danger">Required Field</span>
 			</span>
 		
 		<div class="form-group">

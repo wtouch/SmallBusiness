@@ -1,5 +1,4 @@
 <!-- <div ng-init="modalOptions.addstaff.education = (modalOptions.addstaff.education) ? modalOptions.addstaff.education : []"> -->
-		     <input type="hidden" class="form-control" ng-model="modalOptions.addstaff.user_id" ng-init="modalOptions.addstaff.user_id = userDetails.id" readonly/>
 			 <div>{{modalOptions.addstaff}}</div>
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">Name *</label>
@@ -97,37 +96,36 @@
 					</span>
 				</div>
 			</div>
-			<div class="form-group">
+			<div class="form-group" ng-init="modalOptions.addstaff.marital_status='single'">
 				<label for="merital_status" class="col-sm-2 control-label">Marital Status *</label>
 				<div class="radio col-sm-2">
-				<label><input type="radio" name="marital_status" value="Single" checked ng-model="modalOptions.addstaff.marital_status" ng-init="modalOptions.addstaff.marital_status = 'Single'">single</label>
+				<label><input type="radio" name="marital_status" value="single" ng-model="modalOptions.addstaff.marital_status">Single</label>
 				</div>
 				<div class="radio col-sm-2">
-				<label><input type="radio" name="marital_status" value="Married"  ng-model="modalOptions.addstaff.marital_status" ng-init="modalOptions.addstaff.marital_status">Married</label>
+				<label><input type="radio" name="marital_status" value="married"  ng-model="modalOptions.addstaff.marital_status">Married</label>
 				</div>
 				<div class="radio col-sm-2">
-				<label><input type="radio" name="marital_status" value="Divorced"  ng-model="modalOptions.addstaff.marital_status" ng-init="modalOptions.addstaff.marital_status">Divorced</label>
+				<label><input type="radio" name="marital_status" value="divorced"  ng-model="modalOptions.addstaff.marital_status">Divorced</label>
 				</div>
 				<div class="radio col-sm-2">
-				<label><input type="radio" name="marital_status" value="Widows"  ng-model="modalOptions.addstaff.marital_status" ng-init="modalOptions.addstaff.marital_status">Widows</label>
+				<label><input type="radio" name="marital_status" value="widows"  ng-model="modalOptions.addstaff.marital_status">Widows</label>
 				</div>
 			</div>
 			
-			<div class="form-group">
+			<div class="form-group" ng-init="modalOptions.addstaff.gender='male'">
 				<label for="gender" class="col-sm-2 control-label">Gender *</label>
 					<div class="radio col-sm-2">
-						<label><input type="radio" name="gender" value="Male" ng-model="modalOptions.addstaff.gender"
-						ng-init="modalOptions.addstaff.gender = 'Male'">Male</label>
+						<label><input type="radio" name="gender" value="male" ng-model="modalOptions.addstaff.gender">Male</label>
 					</div>
 					<div class="radio col-sm-2">
-						<label><input type="radio" name="gender" value="Female" ng-model="modalOptions.addstaff.gender" ng-init="modalOptions.addstaff.gender">Female</label>
+						<label><input type="radio" name="gender" value="female" ng-model="modalOptions.addstaff.gender" >Female</label>
 					</div>
 			</div>
 			
 			<div class="form-group">
 				<label  for="dob" class="col-sm-2 control-label">Birth Date * </label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="YYYY-DD-MM" id="dob" name="dob" ng-model="modalOptions.staffdate.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
+					<input type="text" class="form-control" placeholder="YYYY-DD-MM" id="dob" name="dob" ng-model="modalOptions.addstaff.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
 					
 				</div>
 			</div>
@@ -170,14 +168,13 @@
 			</div>
 			<hr>
 			<h4 style="text-align:center">Medical Details</h4>
-			<div class="form-group">
+			<div class="form-group" ng-init="modalOptions.addstaff.medical.phisicallyhandicapped='no'">
 				<label for="phisicallyhandicapped" class="col-sm-2 control-label">Physically Handicapped *</label>
 					<div class="radio col-sm-2">
-						<label><input type="radio" name="phisicallyhandicapped" value="Yes" ng-model="modalOptions.addstaff.phisicallyhandicapped"
-						ng-init="modalOptions.addstaff.medical.phisicallyhandicapped = 'Yes'">Yes</label>
+						<label><input type="radio" name="phisicallyhandicapped" value="yes" ng-model="modalOptions.addstaff.medical.phisicallyhandicapped">Yes</label>
 					</div>
 					<div class="radio col-sm-2">
-						<label><input type="radio" name="phisicallyhandicapped" value="No" ng-model="modalOptions.addstaff.no" ng-init="modalOptions.addstaff.medical.phisicallyhandicapped">No</label>
+						<label><input type="radio" name="phisicallyhandicapped" value="no" ng-model="modalOptions.addstaff.medical.phisicallyhandicapped">No</label>
 					</div>
 			</div>
 			<div class="form-group">
@@ -233,21 +230,21 @@
 			<hr>
 			<h4 style="text-align:center">Bank Details</h4>
 			<div class="form-group">
-				<label for="bankname" class="col-sm-2 control-label">Bank Name </label>
+				<label for="bankname" class="col-sm-2 control-label">Bank Name*</label>
 				<div class="col-sm-9">
 					<input type="text" id="bankname" class="form-control" name="bankname" placeholder="Bank Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.bank_details.bankname"required>
 					<span class="text-danger"  ng-show="addstaffForm.bankname.$error.pattern">Text is required.</span>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="branchname" class="col-sm-2 control-label">Branch</label>
+				<label for="branchname" class="col-sm-2 control-label">Branch*</label>
 				<div class="col-sm-9">
 					<input type="text" id="branchname" class="form-control" name="branchname" placeholder="Branch Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstaff.bank_details.branchname"required>
 					<span class="text-danger"  ng-show="addstaffForm.branchname.$error.pattern">Text is required.</span>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="accountno" class="col-sm-2 control-label">Account No</label>
+				<label for="accountno" class="col-sm-2 control-label">Account No*</label>
 				<div class="col-sm-9">
 					<input type="text" id="accountno" class="form-control" name="accountno" placeholder="Account No" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addstaff.bank_details.accountno"required>
 						
@@ -272,17 +269,21 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="ifsccode" class="col-sm-2 control-label">IFSC Code</label>
+				<label for="ifsccode" class="col-sm-2 control-label">IFSC Code*</label>
 				<div class="col-sm-9">
 					<input type="text" id="ifsccode" class="form-control" name="ifsccode" placeholder="IFSC Code"  ng-model="modalOptions.addstaff.bank_details.ifsccode"required>
-					<span class="text-danger"  ng-show="addstaffForm.ifsccode.$error.pattern">Text is required.</span>
+					<span class="help-block" ng-show="addstaffForm.ifsccode.$dirty && addstaffForm.ifsccode.$invalid">
+							<span class="text-danger" ng-show="addstaffForm.ifsccode.$error.required">Required Field.</span>
+						</span>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="micrcode" class="col-sm-2 control-label">MICR Code</label>
+				<label for="micrcode" class="col-sm-2 control-label">MICR Code*</label>
 				<div class="col-sm-9">
 					<input type="text" id="micrcode" class="form-control" name="micrcode" placeholder="MICR Code"  ng-model="modalOptions.addstaff.bank_details.micrcode"required>
-					<span class="text-danger"  ng-show="addstaffForm.micrcode.$error.pattern">Text is required.</span>
+					<span class="help-block" ng-show="addstaffForm.micrcode.$dirty && addstaffForm.micrcode.$invalid">
+							<span class="text-danger" ng-show="addstaffForm.micrcode.$error.required">Required Field.</span>
+						</span>
 				</div>
 			</div>
 			
