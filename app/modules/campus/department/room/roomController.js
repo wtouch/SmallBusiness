@@ -74,7 +74,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "room_view", "roomList", $scope.roomParams);
+				$scope.getData(false, $scope.currentPage, "room", "roomList", $scope.roomParams);
 			}
 		}
 		
@@ -113,7 +113,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'room_view','roomList',$scope.roomParams);
+							$scope.getData(false, $scope.currentPage, 'room','roomList',$scope.roomParams);
 						}
 					})
 				},

@@ -10,7 +10,7 @@
 		<div class="form-group" ng-init="modalOptions.getData( false, false,'department', 'departmentList', false, modalOptions)">
 				<label for="dept_id" class="col-sm-2 control-label">Department Name </label>
 				<div class="col-sm-9">
-					<select id="dept_id" class="form-control" ng-model="modalOptions.addDivision.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList" required>
+					<select id="dept_id" class="form-control" ng-model="modalOptions.addDivision.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList" ng-change="modalOptions.classParams.where.dept_id = modalOptions.addDivision.dept_id;modalOptions.getData(false, false,'class', 'classList',modalOptions.classParams, modalOptions)" required>
 						<option value="">Select Department</option>
 					</select>
 					<span class="help-block" ng-show="addDivisionForm.dept_id.$dirty && addDivisionForm.dept_id.$invalid">
@@ -21,7 +21,7 @@
 			<div class="form-group" ng-init="modalOptions.getData( false, false,'class', 'classList', false, modalOptions)">
 				<label for="class_id" class="col-sm-2 control-label">Class Name </label>
 				<div class="col-sm-9">
-					<select id="class_id" class="form-control" ng-model="modalOptions.addDivision.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList" required>
+					<select id="class_id" class="form-control" ng-model="modalOptions.addDivision.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList" ng-change="modalOptions.classParams.where.class_id = modalOptions.addDivision.class_id;modalOptions.getData(false, false,'division','divisionList', modalOptions.classParams, modalOptions)" required>
 						<option value="">Select Class</option>
 					</select>
 					<span class="help-block" ng-show="addDivisionForm.class_id.$dirty && addDivisionForm.class_id.$invalid">

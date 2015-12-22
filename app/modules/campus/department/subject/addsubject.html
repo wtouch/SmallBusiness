@@ -10,7 +10,7 @@
 			<div class="form-group" ng-init="modalOptions.getData( false, false,'department', 'departmentList', false, modalOptions)">
 				<label for="dept_id" class="col-sm-2 control-label">Department Name </label>
 				<div class="col-sm-9">
-					<select id="dept_id" class="form-control" ng-model="modalOptions.addSubject.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList" required>
+					<select id="dept_id" class="form-control" ng-model="modalOptions.addSubject.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList" ng-change="modalOptions.classParams.where.dept_id = modalOptions.addSubject.dept_id;modalOptions.getData(false, false,'class','classList',modalOptions.classParams, modalOptions)" required>
 						<option value="">Select Department</option>
 					</select>
 					<span class="help-block" ng-show="addSubjectForm.dept_id.$dirty && addSubjectForm.dept_id.$invalid">
@@ -18,10 +18,10 @@
 					</span>	
 				</div>
 			</div>
-			<div class="form-group" ng-init="modalOptions.getData( false, false,'class', 'classList', false, modalOptions)">
+			<div class="form-group" ng-if="modalOptions.classList && modalOptions.classParams.where.dept_id">
 				<label for="class_id" class="col-sm-2 control-label">Class Name </label>
 				<div class="col-sm-9">
-					<select id="class_id" class="form-control" ng-model="modalOptions.addSubject.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList" required>
+					<select id="class_id" class="form-control" ng-model="modalOptions.addSubject.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList" ng-change="modalOptions.classParams.where.class_id = modalOptions.addSubject.class_id;modalOptions.getData(false, false,'division','divisionList', modalOptions.classParams, modalOptions)" required>
 						<option value="">Select Class</option>
 					</select>
 					<span class="help-block" ng-show="addSubjectForm.class_id.$dirty && addSubjectForm.class_id.$invalid">
@@ -29,7 +29,17 @@
 					</span>	
 				</div>
 			</div>
-			
+			<div class="form-group" ng-if="modalOptions.divisionList && modalOptions.classParams.where.class_id">
+				<label for="div_id" class="col-sm-2 control-label">Division Name </label>
+				<div class="col-sm-9">
+					<select id="div_id" class="form-control" ng-model="modalOptions.addSubject.div_id" ng-options="item.id as item.division_name for item in modalOptions.divisionList" ng-change="modalOptions.classParams.where.div_id = modalOptions.addSubject.div_id;modalOptions.getData(false, false,'subjects','subjectList', modalOptions.classParams, modalOptions)" required>
+						<option value="">Select Division</option>
+					</select>
+					<span class="help-block" ng-show="addSubjectForm.div_id.$dirty && addSubjectForm.div_id.$invalid">
+					<span ng-show="addSubjectForm.div_id.$error.required" class="text-danger">Division name is required.</span>
+					</span>	
+				</div>
+			</div>
 			<div class="form-group">
 				<label for="sub_no" class="col-sm-2 control-label">Subject No </label>
 				<div class="col-sm-9">

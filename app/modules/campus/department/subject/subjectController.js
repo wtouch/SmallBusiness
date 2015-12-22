@@ -76,7 +76,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "subjects_view", "subjectList", $scope.subParams);
+				$scope.getData(false, $scope.currentPage, "subjects", "subjectList", $scope.subParams);
 			}
 		}
 		
@@ -119,11 +119,19 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'subjects_view','subjectList',$scope.subParams);
+							$scope.getData(false, $scope.currentPage, 'subjects','subjectList',$scope.subParams);
 						}
 					})
 				},
-				getData : $scope.getData
+				getData : $scope.getData,
+				classParams : {
+					where : {
+					user_id : $rootScope.userDetails.id,
+					status:1,
+				},
+				cols : ["*"]
+				},
+			
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})
