@@ -311,6 +311,34 @@ define(['app'], function (app) {
 					})
 				},
 				
+				getTypeaheadData : function(table, searchColumn, searchValue){
+					//console.log(table, searchColumn, searchValue);
+					var locationParams = {
+						search : {},
+						cols : ["*"]
+					};
+					locationParams.search[searchColumn] = searchValue;
+					console.log(locationParams);
+					return dataService.get(false, 'stock_items', locationParams).then(function(response){
+						console.log(response);
+						if(response.status == 'success'){
+							return response.data;
+						}else{
+							return [];
+						}
+					}); 
+				},
+				assignData : function(object, formObject){
+					formObject.patient_name = object.patient_name;
+					formObject.mobile = object.mobile;
+					formObject.email = object.email;
+					formObject.address = object.address;
+					formObject.dob = object.dob;
+					formObject.gender = object.gender;
+					//angular.extend(formObject, object);
+					console.log(object);
+				},
+				
 				taxCalculate : function(modalOptions){
 					modalOptions.singleparticular.tax = {};
 					
