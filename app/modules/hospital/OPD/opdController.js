@@ -109,21 +109,21 @@ define(['app'], function (app) {
 					general_examination :data.general_examination,
 					staff_id :data.staff_id,
 					type: data.type,
-					department: data.department,
-					
+				
+					emergency_contact :data.emergency_contact,
 					patient_name : data.patient_name,
 					address: data.address,
 					gender : data.gender,
 					dob : data.dob,
 					blood_group : data.blood_group,
 					age : data.age,
-					email :data.email,
 					location :data.location,
 					area:data.area,
 					city :data.city,
 					state :data.state,
 					country :data.country,
-					pincode :data.pincode
+					pincode :data.pincode,
+					//phone :data.phone,	
 			} : {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
