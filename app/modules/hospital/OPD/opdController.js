@@ -68,7 +68,7 @@ define(['app'], function (app) {
 					  ]
 					} ,
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/addopdpatient.html\',row.entity.id)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/addopdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ 
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/view_opdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+
@@ -90,27 +90,30 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
+				patientParams: $scope.patientParams,
+				checkup_date :$scope.currentDate,
 				registered_date:dataService.sqlDateFormate(),
 				date:{date : $scope.currentDate},
 				addopdpatient : (data) ? {
 					id : data.id,
 					name : data.name,
 					email : data.email,
-					phone: data.phone,
-					address: data.address,
-					location: data.location,
-					area: data.area,
-					city: data.city,
-					state: data.state,
-					country: data.country,
-					pincode: data.pincode,
-					date : data.date,
-					patientdate:data.patientdate,
+					checkup_date :data.checkup_date ,
+					mobile: data.mobile,
+					emergency_contact:data.emergency_contact,
+					ward_id :data.ward_id,
+					patient_id:data.patient_id,
+					bed_id :data.bed_id,
+					patient_history:data.patient_history,
+					complaints :data.complaints,
+					general_examination :data.general_examination,
+					staff_id :data.staff_id,
 					type: data.type,
 					department: data.department,
 			} : {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
+					checkup_date :$scope.currentDate,
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
@@ -149,6 +152,13 @@ define(['app'], function (app) {
 			
 		}
 		$scope.opdParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			cols : ["*"]
+		}
+		$scope.patientParams = {
 			where : {
 				user_id : $rootScope.userDetails.id,
 				status : 1
