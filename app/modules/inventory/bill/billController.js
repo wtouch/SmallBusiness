@@ -329,13 +329,9 @@ define(['app'], function (app) {
 					}); 
 				},
 				assignData : function(object, formObject){
-					formObject.patient_name = object.patient_name;
-					formObject.mobile = object.mobile;
-					formObject.email = object.email;
-					formObject.address = object.address;
-					formObject.dob = object.dob;
-					formObject.gender = object.gender;
-					//angular.extend(formObject, object);
+					formObject.goods_name = object.goods_name;
+					formObject.goods_type = object.goods_type;
+					formObject.category = object.category;
 					console.log(object);
 				},
 				
