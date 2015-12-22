@@ -50,7 +50,7 @@ define(['app'], function (app) {
                 },
 				{
 					name:'checkup_date',
-					filterHeaderTemplate: '<input id="checkup_date" class="form-control" ng-change="grid.appScope.filter(\'checkup_date\', checkup_date, \'opd\', \'opd\',true, grid.appScope.patientParams)" ng-model="checkup_date" placeholder="search">'
+					filterHeaderTemplate: '<input id="checkup_date" class="form-control" ng-change="grid.appScope.filter(\'checkup_date\', checkup_date, \'opd_view\', \'opd\',true, grid.appScope.patientParams)" ng-model="checkup_date" placeholder="search">'
                 },
 				{
 					name:'emergency_contact',
@@ -83,7 +83,7 @@ define(['app'], function (app) {
 			}
 		}
 		$scope.openModal = function(url,data){
-			
+			console.log(data);
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
@@ -105,11 +105,25 @@ define(['app'], function (app) {
 					patient_id:data.patient_id,
 					bed_id :data.bed_id,
 					patient_history:data.patient_history,
-					complaints :data.complaints,
+					patient_complaint:data.patient_complaint,
 					general_examination :data.general_examination,
 					staff_id :data.staff_id,
 					type: data.type,
 					department: data.department,
+					
+					patient_name : data.patient_name,
+					address: data.address,
+					gender : data.gender,
+					dob : data.dob,
+					blood_group : data.blood_group,
+					age : data.age,
+					email :data.email,
+					location :data.location,
+					area:data.area,
+					city :data.city,
+					state :data.state,
+					country :data.country,
+					pincode :data.pincode
 			} : {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
