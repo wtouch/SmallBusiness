@@ -11,7 +11,7 @@
 			<label  for="date" class="col-sm-2 control-label">Date *</label>
 			<div class="col-sm-3">
 				<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="holiday_date" name="holiday_date" ng-model="modalOptions.addholiday.holiday_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addholiday.holiday_date = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addholiday.holiday_date,10); modalOptions.sqlDateFormat(modalOptions.addholiday.holiday_date, modalOptions.addholiday.holiday_date)"/>	
+					<input type="text" class="form-control " placeholder="Date" id="holiday_date" name="holiday_date" ng-model="modalOptions.addholidays.holiday_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addholidays.holiday_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened" />	
 					
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -33,3 +33,5 @@
 			<button type="submit" class="btn btn-success"  ng-disabled="addholidayForm.$invalid" ng-click="   modalOptions.postData('staffholidays',modalOptions.addholiday);modalOptions.ok()">Add Holidays</button>
 		</div>	
 </form>	
+			<div class="col-sm-3">
+			<div class="col-sm-4" ng-if="type == 'monthly'">

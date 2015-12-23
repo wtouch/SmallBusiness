@@ -5,7 +5,6 @@ define(['app'], function (app) {
     
     // This is controller for this view
 	var staffController= function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,$http) {
-		
 		//global scope objects
 		$scope.type = "year";
 		$scope.maxSize = 5;
@@ -17,11 +16,6 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";	
-		/* 
-		$http.get("modules/campus/config.json").success(function(response){
-			console.log(response);
-				$scope.staffConfig = response;
-			})  */
 			
 		$scope.staffParams = {
 			where : {
@@ -34,7 +28,6 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Add staff",
-				SubTitle :"Staff",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/campus/staff/addstaff.html");
@@ -144,16 +137,20 @@ define(['app'], function (app) {
 					country:data.country,
 					pincode:data.pincode,
 					designation:data.designation,
-					joining_details:data.joining_details,
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					joining_details :data.joining_details,
 					education:data.education,
 					medical:data.medical,
+					specialization:data.specialization,
+					experiance:data.experiance,
+					attachments:data.attachments,
 					bank_details:data.bank_details,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
 				}:{
 					user_id:$rootScope.userDetails.id,
 					date : dataService.sqlDateFormate(false,"datetime"),
-						modified_date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},
 				postData : function(table, input){
 						console.log(table, input);
@@ -191,10 +188,11 @@ define(['app'], function (app) {
 			};
 			var modalOptions={
 				staffattendence:(data)?{
-					
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				}:{
 						user_id:$rootScope.userDetails.id,
-						status:1,
+						date : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},	
 				getData:$scope.getData,
 				postData : function(table, input){
@@ -217,11 +215,13 @@ define(['app'], function (app) {
 				size:'lg'
 			};
 			var modalOptions={
+				date : $scope.currentDate,
 				addleaves:(data)?{
-					
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				}:{
-						user_id:$rootScope.userDetails.id,
-						status:1,
+					user_id:$rootScope.userDetails.id,
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},	
 				getData:$scope.getData,
 				postData : function(table, input){
@@ -243,11 +243,21 @@ define(['app'], function (app) {
 				size:'lg'
 			};
 			var modalOptions={
-				addleaves:(data)?{
+				date : $scope.currentDate,
+				addholidays:(data)?{
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					
+						date : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+					
+				date : $scope.currentDate,
+				staffpayment:(data)?{
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
 				}:{
-						user_id:$rootScope.userDetails.id,
-						status:1,
+					user_id:$rootScope.userDetails.id,
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},	
 				getData:$scope.getData,
 				postData : function(table, input){
@@ -301,7 +311,19 @@ define(['app'], function (app) {
 				}
 			});
 		}
-	}		
+		$scope.filter = function(col, value, table, subobj, search, params){
+			value = (value) ? value : undefined;
+			if(!params) params = {};
+			$rootScope.filterData(col, value, search, function(response){
+				dataService.extendDeep($scope.params, params, response);
+				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
+			})
+		}
+		$scope.orderBy = function(col, value, table, subobj){
+			if(!$scope.params.orderBy) $scope.params.orderBy = {};
+			$scope.params.orderBy[col] = value;
+			$scope.getData($scope.currentPage, table, subobj, $scope.params);
+		}
 	// Inject controller's dependencies
 	staffController.$inject = injectParams;
 	// Register/apply controller dynamically
