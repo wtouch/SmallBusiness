@@ -85,7 +85,7 @@
 	</div>
 	<div class="modal-footer" >
 		<div class="col-sm-offset-3 col-sm-9">
-			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addmedicine.id"  ng-click="modalOptions.postData('medicine',modalOptions.addmedicine);modalOptions.ok()">Add new Medicines</button>
+			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addmedicine.id" ng-disabled="addmedicineForm.$invalid" ng-click="modalOptions.postData('medicine',modalOptions.addmedicine);modalOptions.ok()">Add new Medicines</button>
 			
 			<button type="submit" ng-if="modalOptions.addmedicine.id" class="btn btn-success" ng-click="modalOptions.updateData('medicine',modalOptions.addmedicine,modalOptions.addmedicine.id);modalOptions.ok()">Update Medicines</button>
 			

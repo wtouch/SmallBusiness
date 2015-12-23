@@ -82,7 +82,7 @@ define(['app'], function (app) {
 					'<a type="button" tooltip="Delete admission" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'admission_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_ipdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  IPDpatient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/casesheet.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  Casesheet" > <span >CS</span></a>'			
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_casesheet.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  Casesheet" > <span >CS</span></a>'			
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_drugsheet.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Drugsheet" > <span >VD</span></a>'
 					+
@@ -104,6 +104,45 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				admission_date:$scope.currentDate,
 				patientParams: $scope.patientParams,
+				view_admission : (data) ? {
+					id : data.id,
+					name : data.name,
+					email : data.email,
+					admission_date :data.admission_date ,
+					mobile: data.mobile,
+					emergency_contact:data.emergency_contact,
+					ward_id :data.ward_id,
+					patient_id:data.patient_id,
+					bed_id :data.bed_id,
+					patient_history:data.patient_history,
+					general_examination :data.general_examination,
+					staff_id :data.staff_id,
+					type: data.type,
+					guardian_details :data.guardian_details,
+					drug_sheet:data.drug_sheet,
+					patient_name : data.patient_name,
+					address: data.address,
+					gender : data.gender,
+					dob : data.dob,
+					blood_group : data.blood_group,
+					age : data.age,
+					location :data.location,
+					area:data.area,
+					city :data.city,
+					state :data.state,
+					country :data.country,
+					pincode :data.pincode,
+					deposit:data.deposit,
+					complaints :data.complaints,
+					//phone :data.phone,	
+			} : {
+					date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,
+					checkup_date :$scope.currentDate,
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					
+				},
 				addadmission : (data) ? {
 					id : data.id,
 					admission_date : data.admission_date,
@@ -117,25 +156,13 @@ define(['app'], function (app) {
 					patient_history:data.patient_history,
 					complaints :data.complaints,
 					general_examination :data.general_examination,
-				
 					staff_id :data.staff_id,
 					type: data.type,
-					emergency_contact :data.emergency_contact,
-					patient_name : data.patient_name,
-					address: data.address,
-					gender : data.gender,
-					dob : data.dob,
-					blood_group : data.blood_group,
-					age : data.age,
-					location :data.location,
-					area:data.area,
-					city :data.city,
-					state :data.state,
-					country :data.country,
-					name: data.name,
-					pincode :data.pincode,
-					general_examination :data.general_examination,
-					guardian_details :data.guardian_details
+					drug_sheet:data.drug_sheet,
+					diagnostic :data.diagnostic,
+					case_sheet :data.case_sheet,
+					medicine_prescribe :data.medicine_prescribe
+					
 					} 
 					: {
 					date : dataService.sqlDateFormate(),
@@ -154,7 +181,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
+							$scope.getData(false, $scope.currentPage, 'admission','admission', $scope.admissionParams);
 						}
 					})
 				},
@@ -206,7 +233,8 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id
+					user_id : $rootScope.userDetails.id,
+					status : 1
 				},
 				cols : ["*"]
 			};

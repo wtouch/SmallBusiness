@@ -2,7 +2,7 @@
 	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3 class="text-center">Medicine Prescribe</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body" ng-init="modalOptions.addadmission.medicine_prescribe = (modalOptions.addadmission.medicine_prescribe) ? modalOptions.addadmission.medicine_prescribe : []">
 	<label><b>Patient Details</b></label>
 	<table class="table table-bordered" >
 		<thead>
@@ -16,16 +16,16 @@
 		<tbody>
 			<tr>
 				<td>
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.view_admission.patient_name}}
 				</td>
 				<td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.view_admission.ward_id}}
 				</td>
 				<td>
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.view_admission.bed_id}}
 				</td>
 				<td>
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.view_admission.staff_id}}
 				</td>
 			</tr>
 		</tbody>
@@ -36,28 +36,26 @@
 				<label  for="date" class="col-sm-2 control-label">Date*</label>
 				<div class="col-sm-8">
 					<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="casesheet_date" name="drugsheet_date" ng-model="modalOptions.addadmission.drugsheet.drugsheet_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.drugsheet_date.staff_date,10); modalOptions.sqlDateFormat(modalOptions.drugsheet.staff_date, modalOptions.addcasesheet.staff_date)"/>	
+					<input type="text" class="form-control " placeholder="Date" id="casesheet_date" name="drugsheet_date" ng-model="modalOptions.medicine_prescribe.drugsheet_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.drugsheet_date.staff_date,10); modalOptions.sqlDateFormat(modalOptions.drugsheet.staff_date, modalOptions.addcasesheet.staff_date)"/>	
 						<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
 					</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="medicine_name" class="col-sm-2 control-label">Medicine Name *</label>
+			<div class="form-group"  ng-init= "modalOptions.getData(false,false,'medicine','medicineList',false,modalOptions)">
+			<label for="medicine_name" class="col-sm-2 control-label">Medicine Name *</label>
 				<div class="col-sm-8">					
-					<select id="medicine_name" name="medicine_name" class="form-control" 
-					ng-model="modalOptions.addadmission.drugsheet.medicine_name">
-					<option value="" selected>select category</option>
-					<option value="category">Pay by category</option>
-					<option value="category">Pay for category</option>
-					</select>
-				</div>
-			</div>	
+				<select id="medicine_name" name="medicine_name" class="form-control" 
+				ng-model="modalOptions.medicine_prescribe.medicine_name" ng-options="item.id as item.medicine_name for item in modalOptions.medicineList">
+				<option value="">select Medicine</option>
+				</select>
+			</div>
+			</div>		
 			<div class="form-group">
 				<label for="quantity" class="col-sm-2 control-label">Quantity</label>
 				<div class="col-sm-3">
-					<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.addadmedicine.quantity" placeholder="Enter Your quantity" ng-pattern="/^[a-zA-Z]*$/" required/>
+					<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.medicine_prescribe.quantity" placeholder="Enter Your quantity" ng-pattern="/^[a-zA-Z]*$/" required/>
 					<span class="text-danger"  ng-show="addmedicineForm.quantity.$error.pattern">please Enter Valid quantity</span>
 					<span class="help-block" ng-show="addmedicineForm.quantity.$dirty && addmedicineForm.quantity.$invalid">
 						<span ng-show="addmedicineForm.quantity.$error.required"class="text-danger">Quantity is required.</span>
@@ -65,7 +63,7 @@
 				</div>	
 				<label for="unit" class="col-sm-2 control-label">Unit*</label>
 			<div class="col-sm-3">
-			<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.addadmedicine.unit" placeholder="Enter unit" ng-pattern="/^[a-zA-Z]*$/" required>
+			<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.medicine_prescribe.unit" placeholder="Enter unit" ng-pattern="/^[a-zA-Z]*$/" required>
 			<span class="text-danger"  ng-show="addmedicineForm.unit.$error.pattern">please Enter Valid state</span>
 				<span class="help-block" ng-show="addmedicineForm.unit.$dirty && addmedicineForm.unit.$invalid">
 					<span ng-show="addmedicineForm.unit.$error.required" class="text-danger">unit is required.</span>
@@ -73,19 +71,19 @@
 			</div>
 			</div>
 			<div class="form-group">
-				<label for="test_name" class="col-sm-2 control-label">Description</label>
+				<label for="description" class="col-sm-2 control-label">Description</label>
 				<div class="col-sm-8">
-					<textarea type="text" required name="test_name" class="form-control" id="test_name" ng-model="modalOptions.addadmedicine.test_name" placeholder="Enter Your test_name" ng-pattern="/^[a-zA-Z]*$/" required/></textarea>
-					<span class="text-danger"  ng-show="addmedicineForm.test_name.$error.pattern">please Enter Valid test_name</span>
-					<span class="help-block" ng-show="addmedicineForm.test_name.$dirty && addmedicineForm.test_name.$invalid">
-						<span ng-show="addmedicineForm.test_name.$error.required"class="text-danger">test_name is required.</span>
+					<textarea type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.medicine_prescribe.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" required/></textarea>
+					<span class="text-danger"  ng-show="addmedicineForm.description.$error.pattern">please Enter Valid description</span>
+					<span class="help-block" ng-show="addmedicineForm.description.$dirty && addmedicineForm.description.$invalid">
+						<span ng-show="addmedicineForm.description.$error.required"class="text-danger">description is required.</span>
 					</span>				
 				</div>
 			</div>
 		</form>	
 		<div class="form-group">
 			<div class="col-sm-offset-2 ">
-				<button type="submit" class="btn btn-success" ng-click="" >Add 
+				<button type="submit" class="btn btn-success"  ng-click="modalOptions.addToObject(modalOptions.addadmission.medicine_prescribe, 'medicine_prescribe', modalOptions)" >Add 
 				</button>
 			</div>
 		</div>
@@ -103,32 +101,16 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>
-						{{modalOptions.addpatient.salary}}
-					</td>
-					<td>						
-						{{modalOptions.addpatient.salary}}
-					</td>
-					<td>
-						{{modalOptions.addpatient.salary}}
-					</td>
-					<td>
-						{{modalOptions.addpatient.salary}}
-					</td>
-					<td>
-						{{modalOptions.addpatient.salary}}
-					</td>
-					<td>
-						{{modalOptions.addpatient.salary}}
-					</td>
-					<td>
-						{{modalOptions.addpatient.salary}}
-					</td>
-					<td>
-						<button ng-click="modalOptions.removeObject(modalOptions.addstaff.qualification, $index);">X</button>
-					</td>
-				</tr>
+					<tr ng-repeat="x in modalOptions.addadmission.medicine_prescribe">
+				<td>{{$index + 1}}</td>
+				<td>{{x.date}}</td>
+				<td>{{x.name}}</td>
+				<td>{{x.medicine_name}}</td>
+				<td>{{x.quantity}}</td>
+				<td>{{x.unit}}</td>
+				<td>{{x.description}}</td>
+				<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.medicine_prescribe, $index)">X</button></td>
+			</tr>
 			</tbody>
 		</table>
 	<div class="modal-footer" >

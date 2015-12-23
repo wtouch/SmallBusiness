@@ -49,6 +49,10 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'opd_view\', \'opdList\', true, grid.appScope.opdParams)" ng-model="patient_name" placeholder="search name">',
                 },
 				{
+					name:'name',width:150,
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="name" placeholder="search">'
+                },
+				{
 					name:'checkup_date',
 					filterHeaderTemplate: '<input id="checkup_date" class="form-control" ng-change="grid.appScope.filter(\'checkup_date\', checkup_date, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="checkup_date" placeholder="search">'
                 },
@@ -94,7 +98,7 @@ define(['app'], function (app) {
 				checkup_date :$scope.currentDate,
 				registered_date:dataService.sqlDateFormate(),
 				date:{date : $scope.currentDate},
-				addopdpatient : (data) ? {
+				viewopd : (data) ? {
 					id : data.id,
 					name : data.name,
 					email : data.email,
@@ -123,6 +127,28 @@ define(['app'], function (app) {
 					state :data.state,
 					country :data.country,
 					pincode :data.pincode,
+					//phone :data.phone,	
+			} : {
+					date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,
+					checkup_date :$scope.currentDate,
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					
+				},
+				addopdpatient : (data) ? {
+					id : data.id,
+					checkup_date :data.checkup_date ,
+					mobile: data.mobile,
+					ward_id :data.ward_id,
+					patient_id:data.patient_id,
+					bed_id :data.bed_id,
+					patient_history:data.patient_history,
+					patient_complaint:data.patient_complaint,
+					general_examination :data.general_examination,
+					staff_id :data.staff_id,
+					type: data.type,
+					emergency_contact :data.emergency_contact
 					//phone :data.phone,	
 			} : {
 					date : dataService.sqlDateFormate(),
