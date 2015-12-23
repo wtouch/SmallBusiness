@@ -33,7 +33,7 @@ define(['app'], function (app) {
 		
 		$rootScope.moduleMenus = [
 			{
-				name : "Add staff",
+				name : "Staff",
 				SubTitle :"Staff",
 				events : {
 					click : function(){
@@ -54,6 +54,22 @@ define(['app'], function (app) {
 				events : {
 					click : function(){
 						return $scope.openstaffattendance("modules/campus/staff/addleaves.html");
+					}
+				}
+			},
+			{
+				name : "Holidays",
+				events : {
+					click : function(){
+						return $scope.openstaffholidays("modules/campus/staff/addholidays.html");
+					}
+				}
+			},
+			{
+				name : "Staff Payment",
+				events : {
+					click : function(){
+						return $scope.openstaffpayment("modules/campus/staff/staffpayment.html");
 					}
 				}
 			}
@@ -90,12 +106,13 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="city" placeholder="City">',
 				},
 				{ 
-					name:'designation',width:110,
-					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="designation" placeholder="Designation">',
+					name:'Designation',width:110, enableFiltering: false,
+					filterHeaderTemplate: '<input id="joining_details" class="form-control" ng-change="grid.appScope.filter(\'joining_details.post\', joining_details.post, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="joining_details" placeholder="Designation">',
+					cellTemplate : '<span>{{row.entity.joining_details.post}}</span>'
 				},
 				{ 
 					name:'dept_name',width:110,
-					filterHeaderTemplate: '<input id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'department\', \'staffList\',true,grid.appScope.staffParams)" ng-model="dept_name" placeholder="Department Name">',
+					filterHeaderTemplate: '<input id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'staff_view\', \'staffList\',true,grid.appScope.staffParams)" ng-model="dept_name" placeholder="Department Name">',
 				},
 				{ 
 					name:'contact_no',width:110,
@@ -132,6 +149,7 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			var modalOptions ={
+				date : $scope.currentDate,
 				addstaff:(data)?{
 					id:data.id,
 					name:data.name,
@@ -143,10 +161,13 @@ define(['app'], function (app) {
 					state:data.state,
 					country:data.country,
 					pincode:data.pincode,
-					designation:data.designation,
+					age:data.age,
+					dob:data.dob,
+					hobbies:data.hobbies,
 					joining_details:data.joining_details,
 					education:data.education,
 					medical:data.medical,
+					dept_id:data.dept_id,
 					bank_details:data.bank_details,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
@@ -159,8 +180,8 @@ define(['app'], function (app) {
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
-							}
+								$scope.getData(false, $scope.currentPage, 'staff_view','staff',$Scope.staffParams);
+							}'particulars[0].amount'
 						})
 				},
 					formPart : 'personalDetails',
@@ -190,6 +211,7 @@ define(['app'], function (app) {
 				size:'lg'
 			};
 			var modalOptions={
+				date : $scope.currentDate,
 				staffattendence:(data)?{
 					
 				}:{
@@ -218,7 +240,7 @@ define(['app'], function (app) {
 			};
 			var modalOptions={
 				addleaves:(data)?{
-					
+					date : $scope.currentDate,
 				}:{
 						user_id:$rootScope.userDetails.id,
 						status:1,
@@ -237,14 +259,14 @@ define(['app'], function (app) {
 			})
 		}
 										/* add hollidays */
-		$scope.openstaffattendance=function(url,data){
+		$scope.openstaffholidays=function(url,data){
 			var modalDefault={
 				templateUrl:url,// apply template to modal
 				size:'lg'
 			};
 			var modalOptions={
-				addleaves:(data)?{
-					
+				addholidays:(data)?{
+					date : $scope.currentDate,
 				}:{
 						user_id:$rootScope.userDetails.id,
 						status:1,
@@ -262,7 +284,32 @@ define(['app'], function (app) {
 				
 			})
 		}
-										
+				/* staff Payment */		
+		$scope.openstaffpayment=function(url,data){
+			var modalDefault={
+				templateUrl:url,// apply template to modal
+				size:'lg'
+			};
+			var modalOptions={
+				staffpayment:(data)?{
+					date : $scope.currentDate,
+				}:{
+						user_id:$rootScope.userDetails.id,
+						status:1,
+				},	
+				getData:$scope.getData,
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					}) 
+				},
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}		
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -301,7 +348,8 @@ define(['app'], function (app) {
 				}
 			});
 		}
-	}		
+		
+	};		
 	// Inject controller's dependencies
 	staffController.$inject = injectParams;
 	// Register/apply controller dynamically
