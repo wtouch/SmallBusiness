@@ -47,23 +47,23 @@ define(['app'], function (app) {
 				},
 				{
 				    name:'patient_name',width:150,
-					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'admission_view\', \'patient\', true, grid.appScope.admissionParams)" ng-model="patient_name" placeholder="search name">',
+					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'admission_view\', \'admission\', true, grid.appScope.admissionParams)" ng-model="patient_name" placeholder="search name">',
                 },
-				{
+				/* {
 				    name:'patient_id',width:150,
 					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'admission_view\', \'patient\', true, grid.appScope.patientParams)" ng-model="patient_name" placeholder="search name">',
+                }, */
+				{
+					name:'name',width:150,
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'admission_view\', \'admission\',true, grid.appScope.admissionParams)" ng-model="name" placeholder="search">'
                 },
 				{
-					name:'consultant_dr',width:150,
-					filterHeaderTemplate: '<input id="consultant_dr" class="form-control" ng-change="grid.appScope.filter(\'consultant_dr\', consultant_dr, \'staff\', \'staff\',true, grid.appScope.staffParams)" ng-model="consultant_dr" placeholder="search">'
+					name:'mobile',width:150,
+					filterHeaderTemplate: '<input id="mobile" class="form-control" ng-change="grid.appScope.filter(\'mobile\', mobile, \'admission_view\', \'admission\',true, grid.appScope.admissionParams)" ng-model="mobile" placeholder="search">'
                 },
 				{
-					name:'mobile',width:80,
-					filterHeaderTemplate: '<input id="mobile" class="form-control" ng-change="grid.appScope.filter(\'mobile\', mobile, \'admission\', \'admission\',true, grid.appScope.admissionParams)" ng-model="mobile" placeholder="search">'
-                },
-				{
-					name:'admission_date',width:80,
-					filterHeaderTemplate: '<input id="admission_date" class="form-control" ng-change="grid.appScope.filter(\'admission_date\', admission_date, \'admission\', \'admission\',true, grid.appScope.admissionParams)" ng-model="admission_date" placeholder="search">'
+					name:'admission_date',width:150,
+					filterHeaderTemplate: '<input id="admission_date" class="form-control" ng-change="grid.appScope.filter(\'admission_date\', admission_date, \'admission_view\', \'admission\',true, grid.appScope.admissionParams)" ng-model="admission_date" placeholder="search">'
                 },
 					
 				{ name:'Manage', 
@@ -77,7 +77,6 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} ,
-				
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/addadmission.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit  IPD patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ 
 					'<a type="button" tooltip="Delete admission" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'admission_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
@@ -91,12 +90,10 @@ define(['app'], function (app) {
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/medicine_Prescribe.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view medicine_Prescribe" > <span>MP</span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/assignEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >AE</span></a>'
-					
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/assignEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >AE</span></a>'	
 				}
 			]
 		};
-		
 		$scope.openModal = function(url,data){
 			
 			var modalDefault = {
@@ -120,7 +117,7 @@ define(['app'], function (app) {
 					patient_history:data.patient_history,
 					complaints :data.complaints,
 					general_examination :data.general_examination,
-					consultant_dr :data.consultant_dr,
+				
 					staff_id :data.staff_id,
 					type: data.type,
 					emergency_contact :data.emergency_contact,
@@ -135,16 +132,17 @@ define(['app'], function (app) {
 					city :data.city,
 					state :data.state,
 					country :data.country,
+					name: data.name,
 					pincode :data.pincode,
-					//phone :data.phone,	
+					general_examination :data.general_examination,
+					guardian_details :data.guardian_details
 					} 
 					: {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					admission_date :$scope.currentDate,
-					
+					admission_date :$scope.currentDate	
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -175,16 +173,8 @@ define(['app'], function (app) {
 			};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
-				
-			})
-			
+			})	
 		}
-		/* $scope.callbackColChange = function(response){
-			console.log(response);
-			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "admission", "admission", $scope.admissionParams);
-			}
-		} */
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
@@ -263,7 +253,6 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
-		
 	 };
 	// Inject controller's dependencies
 	admissionController.$inject = injectParams;

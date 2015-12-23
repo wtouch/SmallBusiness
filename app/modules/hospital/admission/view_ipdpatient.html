@@ -58,7 +58,7 @@
 				 </td>
 				 <td><b>Emergency Contact</b></td>
 				 <td>						
-					{{modalOptions.addadmission.emergency_Contact}}
+					{{modalOptions.addadmission.emergency_contact}}
 				 </td> 
 			</tr>
 			<tr>
@@ -96,17 +96,17 @@
 				<tr>
 				 <td><b>Ward Name</b></td>
 				 <td>						
-					{{modalOptions.addadmission.country}}
+					{{modalOptions.addadmission.ward_id}}
 				 </td>	
 				  <td><b>Bed No</b></td>
 				 <td>						
-					{{modalOptions.addadmission.pincode}}
+					{{modalOptions.addadmission.bed_id}}
 				 </td>	
 			</tr>
 				<tr>
 				 <td><b>Consultant Dr.</b></td>
 				 <td>						
-					{{modalOptions.addadmission.consultant_dr}}
+					{{modalOptions.addadmission.name}}
 				 </td>	
 				  <td><b>Deposit</b></td>
 				 <td>						
@@ -125,50 +125,42 @@
 				 </td>	
 				 <td><b>Relation with Patient</b></td>
 				 <td>						
-					{{modalOptions.addadmission.relation}}
+					{{modalOptions.addadmission.guardian_details.relation}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Mobile</b></td>
 				 <td>						
-					{{modalOptions.addadmission.mobile}}
+					{{modalOptions.addadmission.guardian_details.g_mobile}}
 				 </td>
 				<td><b>Email</b></td>
 				 <td>						
-					{{modalOptions.addadmission.email}}
+					{{modalOptions.addadmission.guardian_details.g_email}}
 				 </td>					 
-			</tr>
-			<tr>
-				 <td><b>Deposit</b></td>
-				 <td  colspan='3'>						
-					
-				 </td>	
-			</tr>
-			
+			</tr>			
 		</tbody>
 	</table>
-	
 	<label>Patient History:</label><br><br>
 		<table class="table table-hover table-responsive table-bordered">
 		<tbody>
 			<tr>
 				 <td><b>Category</b></td>
 				 <td>						
-					{{modalOptions.addadmission.salary}}
+					{{modalOptions.addadmission.patient_history.category}}
 				 </td>
 				<td><b>Type</b></td>
 				 <td>						
-					{{modalOptions.addadmission.staff_type}}
+					{{modalOptions.addadmission.patient_history.type}}
 				 </td>					 
 			</tr>
 			<tr>
 				 <td><b>Title </b></td>
 				 <td>						
-					{{modalOptions.addadmission.staff_type}}
+					{{modalOptions.addadmission.patient_history.title}}
 				 </td>	
 				 <td><b>Description</b></td>
 				 <td>						
-					{{modalOptions.addadmission.staff_type}}
+					{{modalOptions.addadmission.patient_history.description}}
 				 </td>	
 			</tr>
 			</tbody>
@@ -180,17 +172,21 @@
 			<tr>
 				 <td><b>Camplaint Name</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.complaints[0].complaint_name}}
 				 </td>
 				<td><b>Category</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.complaints[0].category}}
 				 </td>			 
 			</tr>
 			<tr>
+				 <td><b>Type</b></td>
+				 <td>						
+					{{modalOptions.addadmission.complaints[0].type}}
+				 </td>	
 				 <td><b>Description</b></td>
-				 <td colspan='3'>						
-					{{modalOptions.addpatient.staff_type}}
+				 <td>						
+					{{modalOptions.addadmission.complaints[0].complaints_description}}
 				 </td>	
 			</tr>
 			</tbody>
@@ -201,43 +197,43 @@
 			<tr>
 				 <td><b>Temperature</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.general_examination.temprature}}
 				 </td>
 				<td><b>Puls</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.general_examination.Pulse}}
 				 </td>	
 				<td><b>BP</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.general_examination.bp}}
 				 </td>						 
 			</tr>
 			<tr>
 				 <td><b>Height</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.general_examination.height}}
 				 </td>
 				<td><b>Weight</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.general_examination.weight}}
 				 </td>	
 				<td><b>Pallor</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.general_examination.pallor}}
 				 </td>						 
 			</tr>
-				<tr>
+			<tr>
 				 <td><b>RR</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.general_examination.RR}}
 				 </td>
 				<td><b>ENT</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.general_examination.ENT}}
 				 </td>	
 				<td><b>ICTERUS</b></td>
 				 <td>						
-					{{modalOptions.addpatient.salary}}
+					{{modalOptions.addadmission.general_examination.ICTERUS}}
 				 </td>						 
 			</tr>
 			</tbody>

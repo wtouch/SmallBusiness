@@ -50,11 +50,11 @@ define(['app'], function (app) {
                 },
 				{
 					name:'checkup_date',
-					filterHeaderTemplate: '<input id="checkup_date" class="form-control" ng-change="grid.appScope.filter(\'checkup_date\', checkup_date, \'opd_view\', \'opd\',true, grid.appScope.patientParams)" ng-model="checkup_date" placeholder="search">'
+					filterHeaderTemplate: '<input id="checkup_date" class="form-control" ng-change="grid.appScope.filter(\'checkup_date\', checkup_date, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="checkup_date" placeholder="search">'
                 },
 				{
 					name:'emergency_contact',
-					filterHeaderTemplate: '<input id="emergency_contact" class="form-control" ng-change="grid.appScope.filter(\'emergency_contact\', emergency_contact, \'opd\', \'opdList\',true, grid.appScope.opdParams)" ng-model="emergency_contact" placeholder="search">'
+					filterHeaderTemplate: '<input id="emergency_contact" class="form-control" ng-change="grid.appScope.filter(\'emergency_contact\', emergency_contact, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="emergency_contact" placeholder="search">'
                 },
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'opd_view\', \'opdList\',false, grid.appScope.opdParams)" ng-model="status">'
@@ -109,7 +109,7 @@ define(['app'], function (app) {
 					general_examination :data.general_examination,
 					staff_id :data.staff_id,
 					type: data.type,
-				
+					guardian_details :data.guardian_details,
 					emergency_contact :data.emergency_contact,
 					patient_name : data.patient_name,
 					address: data.address,
