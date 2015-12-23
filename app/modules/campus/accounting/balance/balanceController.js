@@ -16,7 +16,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.transactionView = true;
 		$rootScope.serverApiV2 = true;
-		$rootScope.module = "inventory";
+		$rootScope.module = "campus";
 		
 				$scope.invoiceParams = {
 			where : {
@@ -26,14 +26,14 @@ define(['app'], function (app) {
 			join : [
 				{
 					joinType : 'INNER JOIN',
-					joinTable : "inventory_party",
+					joinTable : "campus_vendor",
 					joinOn : {
 						id : "t0.party_id"
 					},
 					cols : {name : "name"}
 				},{
 					joinType : "left join",
-					joinTable : "inventory_transaction",
+					joinTable : "campus_transaction",
 					joinOn : {
 						reference_id : "t0.id"
 					},
@@ -53,15 +53,15 @@ define(['app'], function (app) {
 				join : [
 					{
 						joinType : 'INNER JOIN',
-						joinTable : "inventory_transaction",
+						joinTable : "campus_transaction",
 						joinOn : {
-							account_id : "t0.id"
+							acc_id : "t0.id"
 						},
 						cols : [ "id,account_name,(sum(t1.credit_amount)-sum(t1.debit_amount))as account_balance"]
 					},
 				],
 				groupBy : {
-					account_id : "account_id"
+					acc_id : "acc_id"
 				},
 			cols : ["*"]
 		}

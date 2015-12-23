@@ -5,14 +5,14 @@
 	</div>
 		<form name="addIncomeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addIncomeForm.$valid"> 
 			<div class="form-group">
-				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
-					<label for="party" class="col-sm-2 control-label">Party *</label>
+				<div ng-init="modalOptions.getData(false,false,'vendor','vendorList', vendorParams, modalOptions)">
+					<label for="vendor" class="col-sm-2 control-label">Party *</label>
 						<div class="col-sm-9">
-							<select id="party_id" class="form-control" ng-model="modalOptions.addincome.party_id" ng-options="item.id as item.name for item in modalOptions.partyList">
-							<option value="">Select Party</option>
+							<select id="vendor_id" class="form-control" ng-model="modalOptions.addincome.vendor_id" ng-options="item.id as item.name for item in modalOptions.vendorList">
+							<option value="">Select Vendor</option>
 							</select>	 
-							<span class="help-block" ng-show="addIncomeForm.party.$dirty && addIncomeForm.party.$invalid">
-								<span ng-show="addIncomeForm.party.$error.required" class="text-danger">required field.</span>
+							<span class="help-block" ng-show="addIncomeForm.vendor.$dirty && addIncomeForm.vendor.$invalid">
+								<span ng-show="addIncomeForm.vendor.$error.required" class="text-danger">required field.</span>
 							</span>	
 						</div>
 				</div>
@@ -31,7 +31,7 @@
 			<div class="form-group">
 					<label for="account" class="col-sm-2 control-label">Account Name*</label>
 					<div class="col-sm-9">
-						<select id="account" class="form-control" ng-change="modalOptions.getBalance(modalOptions.addincome.account_id, modalOptions)" ng-init="modalOptions.getData(false,false,'account','accountList', false, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.account_id" >
+						<select id="account" class="form-control" ng-change="modalOptions.getBalance(modalOptions.addincome.acc_id, modalOptions)" ng-init="modalOptions.getData(false,false,'account','accountList', false, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.addincome.acc_id" >
 						<option value="">Select Account</option>
 						</select>
 						<span class="help-block" ng-show="addIncomeForm.account.$dirty && addIncomeForm.account.$invalid">
