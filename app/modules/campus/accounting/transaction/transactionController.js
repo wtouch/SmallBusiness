@@ -16,7 +16,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$scope.transactionView = true;
 		$rootScope.serverApiV2 = true;
-		$rootScope.module = "inventory";
+		$rootScope.module = "campus";
 		$scope.today = new Date();
 		$scope.todayDt = $scope.today.getFullYear() + "-" + ($scope.today.getMonth() + 1) + "-" + $scope.today.getDate();
 		$scope.duration = {start : $scope.todayDt};
@@ -29,14 +29,14 @@ define(['app'], function (app) {
 				name : "Add Income",
 				events : {
 					click : function(){
-						return $scope.openAddincome("modules/inventory/transaction/addincome.html");
+						return $scope.openAddincome("modules/campus/accounting/transaction/addincome.html");
 					}
 				}
 			},{
 				name : "Add Expence",
 				events : {
 					click : function(){
-						return $scope.openAddexpense("modules/inventory/transaction/addexpense.html");
+						return $scope.openAddexpense("modules/campus/accounting/transaction/addexpense.html");
 					}
 				}
 			},
@@ -44,14 +44,14 @@ define(['app'], function (app) {
 				name : "Transfer",
 				events : {
 					click : function(){
-						return $scope.openAddtransaction("modules/inventory/transaction/transfer.html");
+						return $scope.openAddtransaction("modules/campus/accounting/transaction/transfer.html");
 					}
 				}
 			}
 		]
 		
-		$http.get("modules/inventory/config.json").success(function(response){
-				$scope.inventoryConfig = response;
+		$http.get("modules/campus/config.json").success(function(response){
+				$scope.campusConfig = response;
 			})
 		$scope.today = function() {
 				$scope.date = new Date();
@@ -85,14 +85,14 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false
 				},
 				{ name:'account_name',enableSorting: false ,
-				filterHeaderTemplate: '<select id="account_id" class="form-control" ng-change="grid.appScope.filter(\'account_id\', account_id, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="account_id" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
+				filterHeaderTemplate: '<select id="acc_id" class="form-control" ng-change="grid.appScope.filter(\'acc_id\', acc_id, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="acc_id" ng-options="item.id as item.account_name for item in grid.appScope.accountList">'
 							+'<option value="" selected>Account Name</option>'
 						+'</select>',
 					},
 				{
 					name:'type',
 					enableSorting: false,
-					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams);grid.appScope.transactionCategory = grid.appScope.inventoryConfig[type]" ng-model="type">'
+					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams);grid.appScope.transactionCategory = grid.appScope.campusConfig[type]" ng-model="type">'
 							+'<option value="" selected>type</option>'
 							+'<option value="expense">Expense</option>'
 							+'<option value="income">Income</option>'
@@ -177,11 +177,11 @@ define(['app'], function (app) {
 			
 			var modalOptions = {
 				incomeDate : { date : $scope.currentDate},
-				Category : $scope.inventoryConfig,
+				Category : $scope.campusConfig,
 				addincome : (data) ? {
 					id : data.id,
 					party_id : data.party_id,
-					account_id : data.account_id,
+					acc_id : data.acc_id,
 					category : data.category,
 					user_id : data.user_id,
 					balance : data.balance,
@@ -204,9 +204,9 @@ define(['app'], function (app) {
 						where : {
 							user_id : $rootScope.userDetails.id,
 							status : 1,
-							account_id : accountId
+							acc_id : accountId
 						},
-						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
+						cols : ["acc_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
 						console.log(response);
@@ -252,11 +252,11 @@ define(['app'], function (app) {
 			
 			var modalOptions = {
 				expenseDate : { date : $scope.currentDate},
-				Category : $scope.inventoryConfig,
+				Category : $scope.campusConfig,
 				addexpense : (data) ? {
 					id : data.id,
 					party_id : data.party_id,
-					account_id : data.account_id,
+					acc_id : data.acc_id,
 					category : data.category,
 					user_id : data.user_id,
 					balance : data.balance,
@@ -278,9 +278,9 @@ define(['app'], function (app) {
 						where : {
 							user_id : $rootScope.userDetails.id,
 							status : 1,
-							account_id : accountId
+							acc_id : accountId
 						},
-						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
+						cols : ["acc_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
 						modalOptions.previous_balance = response.data[0].previous_balance;
@@ -331,9 +331,9 @@ define(['app'], function (app) {
 						where : {
 							user_id : $rootScope.userDetails.id,
 							status : 1,
-							account_id : accountId
+							acc_id : accountId
 						},
-						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
+						cols : ["acc_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
 						modalOptions.previous_balance1 = response.data[0].previous_balance;
@@ -346,9 +346,9 @@ define(['app'], function (app) {
 						where : {
 							user_id : $rootScope.userDetails.id,
 							status : 1,
-							account_id : accountId
+							acc_id : accountId
 						},
-						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
+						cols : ["acc_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 					}
 					dataService.get(false,'transaction', accountParams).then(function(response) {
 						modalOptions.previous_balance2 = response.data[0].previous_balance;
@@ -370,7 +370,7 @@ define(['app'], function (app) {
 				postData : function(table, input){  
 					var obj1 = {
 						date : input.date,
-						account_id : input.transfer_from,
+						acc_id : input.transfer_from,
 						category : "transfer_from",
 						modified_date :input.modified_date,
 						type : input.type,
@@ -383,7 +383,7 @@ define(['app'], function (app) {
 					}
 					var obj2 = {
 						date : input.date,
-						account_id : input.transfer_to,
+						acc_id : input.transfer_to,
 						category : "transfer_to",
 						modified_date :input.modified_date,
 						type : input.type,
@@ -432,9 +432,9 @@ define(['app'], function (app) {
 				join : [
 					{
 						joinType : 'INNER JOIN',
-						joinTable : "inventory_account",
+						joinTable : "campus_account",
 						joinOn : {
-							id : "t0.account_id"
+							id : "t0.acc_id"
 						},
 						cols : {account_name : "account_name", category:"transaction_category"}
 					}
