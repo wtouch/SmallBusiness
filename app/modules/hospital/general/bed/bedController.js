@@ -53,11 +53,11 @@ define(['app'], function (app) {
 					},
 				{
 					name:'bed_number',
-					filterHeaderTemplate: '<input id="bed_number" class="form-control" ng-change="grid.appScope.filter(\'bed_number\', bed_number, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_number" placeholder="bed_number">',
+					filterHeaderTemplate: '<input id="bed_number" class="form-control" ng-change="grid.appScope.filter(\'bed_number\', bed_number, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_number" placeholder="Bed number">',
 				},
 				{
 					name:'bed_description',
-					filterHeaderTemplate: '<input id="bed_description" class="form-control" ng-change="grid.appScope.filter(\'bed_description\', bed_description, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_description" placeholder="bed_description">',
+					filterHeaderTemplate: '<input id="bed_description" class="form-control" ng-change="grid.appScope.filter(\'bed_description\', bed_description, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="Bed description" placeholder="bed_description">',
 				},
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bed_view\', \'bedList\',false,grid.appScope.bedParams)" ng-model="status">'

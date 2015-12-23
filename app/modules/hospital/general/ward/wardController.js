@@ -47,11 +47,11 @@ define(['app'], function (app) {
 				},
 				{
 					name:'ward_name',
-					filterHeaderTemplate: '<input id="ward_name" class="form-control" ng-change="grid.appScope.filter(\'ward_name\', ward_name, \'ward\', \'wardList\',true, grid.appScope.wardParams)" ng-model="ward_name" placeholder="ward_name">',
+					filterHeaderTemplate: '<input id="ward_name" class="form-control" ng-change="grid.appScope.filter(\'ward_name\', ward_name, \'ward\', \'wardList\',true, grid.appScope.wardParams)" ng-model="ward_name" placeholder="Ward name">',
 				},
 				{
 					name:'ward_description',
-					filterHeaderTemplate: '<input id="ward_description" class="form-control" ng-change="grid.appScope.filter(\'ward_description\', ward_description, \'ward\', \'wardList\',true, grid.appScope.wardParams)" ng-model="ward_description" placeholder="ward_description">',
+					filterHeaderTemplate: '<input id="ward_description" class="form-control" ng-change="grid.appScope.filter(\'ward_description\', ward_description, \'ward\', \'wardList\',true, grid.appScope.wardParams)" ng-model="ward_description" placeholder="Ward description">',
 				},
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'ward\', \'wardList\',false,grid.appScope.wardParams)" ng-model="status">'
