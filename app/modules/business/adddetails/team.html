@@ -2,99 +2,93 @@
 		<div class="row">
 			<div class="col-sm-12 text-right">
 				<button ng-if="!infra" type="button" class="btn btn-default btn-primary" title="next" ng-click="update(businessData)">Save Details</button>
-				<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra', 'gallery')">Add Team</button>
+				<button ng-if="!infra" class="btn btn-default btn-info" ng-click="showForm('infra', 'team')">Add Team</button>
 			</div>
 		</div>
 	</div>
 	 
-	<form name="galleryForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="galleryForm.$valid" novalidate="novalidate">
+	<form name="teamForm" ng-if="infra" role="form" class="form-horizontal" ng-submit="teamForm.$valid" novalidate="novalidate">
 		<div class="form-group" >
 			<div class="col-sm-9 col-sm-offset-3">
-				<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click=	"addToObject(gallery, businessData.gallery, 'gallery')" ng-disabled="galleryForm.$invalid">Add Gallery</button>
-				<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject('edit', businessData.gallery, 'gallery')" title="Add Gallery">Edit Details</button>
+				<button ng-if="infra && !edit" class="btn btn-default btn-primary" ng-click=	"addToObject(team, businessData.team, 'team')" ng-disabled="teamForm.$invalid">Add Team</button>
+				<button ng-if="infra && edit" class="btn btn-default btn-info" ng-click="addToObject('edit', businessData.team, 'team')" title="Add Team">Edit Details</button>
 				<button ng-if="infra" class="btn btn-default btn-danger" ng-click="showForm('infra')"><span ng-show="infra">Cancel</span></button>
 			</div>
 		</div>
-		
-	<div class="form-group">
-		<label for="image" class="col-sm-3 control-label">Add Images</label>
-		<div class="col-sm-5">
-			<input type="file" id="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="uploadgallery(image,businessData.user_id + path,userInfo,gallery.image)" ng-model="image">
-			<input type="hidden" ng-model="gallery.image">
+		<div class="form-group">
+			<label for="teamName" class="col-sm-3 control-label" name="teamName" >Team Member Name*</label>
+			<div class="col-sm-9">
+				<input type="text" class="form-control" name="teamName" id="teamName"  ng-model="team.heading" required ng-disabled="headingDisabled">
+				<span class="help-block" ng-show="teamForm.teamName.$dirty && teamForm.teamName.$invalid">
+			<span ng-show="teamForm.teamName.$error.required" class="text-danger">Required Field.</span>
+				</span>				
+			</div>
 		</div>
-		
-		<div class="col-sm-4" ng-if="gallery.image">
-			<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + gallery.image.file_relative_path}}" width="150px" />
+		<div class="form-group">
+			<label  for="Designation" class="col-sm-3 control-label">Designation*</label>
+			<div class="col-sm-9">
+				<input type="text" id="Designation" class="form-control" name="Designation" placeholder="Designation" ng-model="team.Designation" required >
+				<span class="help-block" ng-show="teamForm.Designation.$dirty && teamForm.Designation.$invalid">
+					<span ng-show="teamForm.Designation.$error.required" class="text-danger">Required Field.</span>
+				</span>
+			</div>						
 		</div>
-	</div>
-	
-	<div class="form-group">						 
-		<div class="col-sm-9 col-sm-offset-3">
-			<span class="thumbs" ng-if="gallery.image">
-				<img class="img-thumbnail" ng-src="{{appConfig.assetPath + '/' + gallery.image.file_relative_path}}" ng-click="gallery.imgkey = key; "/>
-				<span class="close" ng-click="removeImg(key, gallery.image)">X</span>
+		<div class="form-group">	
+			<label  for="email" class="col-sm-3 control-label">Email *</label>
+			<div class="col-sm-4">
+				<input type="email" ng-pattern="/^[\.\w]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/" class="form-control" id="email" ng-model="team.email" name="email" placeholder="Enter Email" required />
+				
+				<span class="help-block" ng-show="teamForm.email.$dirty && teamForm.email.$invalid">
+				
+					<span ng-show="teamForm.email.$error.pattern && (teamForm.email.$dirty || submitted)" class="text-danger">Enter a valid email</span>
+				
+					<span ng-show="teamForm.email.$error.required" class="text-danger">Required Field.</span>
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="mobile" class="col-sm-3 control-label">Mobile *</label>
+			<div class="col-sm-4">
+				<input type="text" id="mobile" name="mobile" class="form-control" ng-model="team.mobile" placeholder="Enter Mobile No." ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+				<span class="help-block" ng-show="teamForm.mobile.$dirty && teamForm.mobile.$invalid">
+					<span ng-show="teamForm.mobile.$error.required" class="text-danger">Mobile Phone is required.</span>
+					<span ng-show="teamForm.mobile.$error.pattern && (teamForm.mobile.$dirty || submitted)" class="text-danger">Enter a valid Contact Number</span>
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="image" class="col-sm-3 control-label">Add Images</label>
+			<div class="col-sm-5">
+				<input type="file" id="image" ng-file-select ng-multiple="true" accept="image/jpeg,image/png, image/gif" ng-file-change="uploadteam(image,businessData.user_id + path,userInfo,team.image)" ng-model="image">
+				<input type="hidden" ng-model="team.image">
+			</div>
+			
+			<div class="col-sm-4" ng-if="team.image">
+				<img ng-model="imgKey" ng-init="imgKey = key" ng-src="{{appConfig.assetPath + '/' + team.image.file_relative_path}}" width="150px" />
+			</div>
+		</div>
+		<div class="form-group">						 
+			<div class="col-sm-9 col-sm-offset-3">
+				<span class="thumbs" ng-if="team.image">
+					<img class="img-thumbnail" ng-src="{{appConfig.assetPath + '/' + team.image.file_relative_path}}" ng-click="team.imgkey = key; "/>
+					<span class="close" ng-click="removeImg(key, team.image)">X</span>
+				</span>
+			</div>
+		</div>
+		<div>
+			<input type="hidden" name="gallery" ng-model="addbusiness.gallery" />
+			<span class="help-block" ng-show="teamForm.gallery.$dirty && teamForm.gallery.$invalid">
+				<span ng-show="teamForm.gallery.$error.required" class="text-danger">Required Field.</span>
 			</span>
 		</div>
-	</div>
-	<div class="form-group">
-		<label for="infraHeading" class="col-sm-3 control-label" name="infraHeading" >Title*</label>
-		<div class="col-sm-9">
-			<input type="text" class="form-control" name="infraHeading" id="infraHeading"  ng-model="gallery.heading" required ng-disabled="headingDisabled">
-			<span class="help-block" ng-show="galleryForm.infraHeading.$dirty && galleryForm.infraHeading.$invalid">
-		<span ng-show="galleryForm.infraHeading.$error.required" class="text-danger">Required Field.</span>
-			</span>				
-		</div>
-	</div>
-		
-	<div class="form-group">
-		<label class="col-sm-3 control-label">Featured Gallery*</label>
-		<div class="col-sm-9 radio">
-			<label>
-				<input type="radio" name="featuredGallery" id="featuredGallery" value="0" ng-model="gallery.featured" required> No 
-			</label>
-			<label>
-				<input type="radio" name="featuredGallery" id="featuredGallery" value="1" ng-model="gallery.featured" ng-init="gallery.featured='1'" required> Yes
-			</label>
-			<span class="help-block" ng-show="galleryForm.featuredGallery.$dirty && galleryForm.featuredGallery.$invalid">
-			</span>				
-		</div>
-	</div>
-			
-	<div class="form-group">
-		<label for="category" class="col-sm-3 control-label">Category </label>
-			<div class="col-sm-9">
-				<input type="text" class="form-control" id="category" name="category" ng-model="gallery.category" placeholder="Enter Category" />
-			</div>
-	</div>
-						
-	<div class="form-group">
-		<label for="imgDesc" class="col-sm-3 control-label">Image Description*</label>
-		<div class="col-sm-9">
-			<textarea type="text" class="form-control" id="imgDesc" name="imgDesc" ng-model="gallery.description" cols="30" rows="4" ng-maxlength="2000" placeholder="Enter Image Description" required></textarea>
-				<p ng-hide="galleryForm.imgDesc.$error.maxlength">
-					{{ 2000 - gallery.description.length + " Chars left" }}
-				</p>					
-				<span class="help-block" ng-show="galleryForm.imgDesc.$dirty && galleryForm.imgDesc.$invalid">
-					<span class="text-danger" ng-show="galleryForm.imgDesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span ng-show="galleryForm.imgDesc.$error.required" class="text-danger">Required Field.</span>
-				</span>	
-		</div>
-	</div>
-	
-	<div>
-		<input type="hidden" name="gallery" ng-model="addbusiness.gallery" />
-		<span class="help-block" ng-show="galleryForm.gallery.$dirty && galleryForm.gallery.$invalid">
-			<span ng-show="galleryForm.gallery.$error.required" class="text-danger">Required Field.</span>
-		</span>
-	</div>
 	</form>
 
 <div class="row">
-	<div class="col-sm-12" ng-if="businessData.gallery.length>=1">
+	<div class="col-sm-12" ng-if="businessData.team.length>=1">
 		<div class="panel panel-default">
 			<h5 class="text-center border-bottom"><b>Gallery</b></h5>
 	<div as-sortable="dragControlListeners" ng-model="businessData.gallery">
-	<div ng-repeat="value in businessData.gallery" as-sortable-item>
+	<div ng-repeat="value in businessData.team" as-sortable-item>
 		<div class="clearfix border-bottom infras">
 				<span as-sortable-item-handle class="pull-left glyphicon glyphicon glyphicon-move"></span>
 			<div class="pull-right">

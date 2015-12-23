@@ -13,12 +13,15 @@ define(['app'], function (app) {
 			gallery : [],
 			associate : [],
 			job_careers : [],
-			
+			portfolio : [],
+			team : [],
 		};
 		dataService.get("getsingle/business/"+$routeParams.id)
 		.then(function(response) {
 			$scope.businessData = dataService.parse(response.data);
 			if($scope.businessData.infrastructure == "") $scope.businessData.infrastructure = [];
+			if($scope.businessData.portfolio =="") $scope.businessData.portfolio =[];
+			if($scope.businessData.team =="") $scope.businessData.team =[];
 			if($scope.businessData.testimonials == "") $scope.businessData.testimonials = [];
 			if($scope.businessData.custom_details == "") $scope.businessData.custom_details = [];
 			if($scope.businessData.news_coverage == "") $scope.businessData.news_coverage = [];
@@ -43,6 +46,8 @@ define(['app'], function (app) {
 		$scope.job_careers = {};
 		$scope.gallery = {};
 		$scope.associate = {};
+		$scope.team = {};
+		$scope.portfolio = {};
 		$scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 		$scope.format = $scope.formats[0];
 		$scope.isCollapsed = true;
@@ -87,7 +92,7 @@ define(['app'], function (app) {
 		};
 		
 		$scope.addToObject = function(data, object, resetObj){
-			
+			console.log(data, object, resetObj);
 			if(data == "edit"){
 				$scope.infra = false;
 				$scope.edit = false;
@@ -108,6 +113,8 @@ define(['app'], function (app) {
 			$scope.news_coverage.image = "";
 			$scope.gallery.image = "";
 			$scope.associate.image = "";
+			$scope.team.image = "";
+			$scope.portfolio.image = "";
 		};
 		
 		$scope.removeObject = function(index, object){
@@ -166,11 +173,28 @@ define(['app'], function (app) {
 					}
 			}); 
 		}; 
-		
 		$scope.uploadassociate = function(files,path,userInfo, picArr){ 
 			upload.upload(files,path,userInfo,function(data){
 					if(data.status === 'success'){
 						$scope.associate.image = data.data;
+					}else{
+						$notification.error("Upload Image", data.message);
+					}
+			}); 
+		}; 
+		$scope.uploadteam = function(files,path,userInfo, picArr){ 
+			upload.upload(files,path,userInfo,function(data){
+					if(data.status === 'success'){
+						$scope.team.image = data.data;
+					}else{
+						$notification.error("Upload Image", data.message);
+					}
+			}); 
+		}; 
+		$scope.uploadportfolio = function(files,path,userInfo, picArr){ 
+			upload.upload(files,path,userInfo,function(data){
+					if(data.status === 'success'){
+						$scope.portfolio.image = data.data;
 					}else{
 						$notification.error("Upload Image", data.message);
 					}
