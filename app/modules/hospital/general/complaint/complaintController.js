@@ -39,17 +39,26 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo', 
+				{ name:'SrNo',  width:60,
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
 				},
 				{
+					name:'complaint_name',
+					filterHeaderTemplate: '<input id="complaint_name" class="form-control" ng-change="grid.appScope.filter(\'complaint_name\', complaint_name, \'complaint\', \'complaintList\',true, grid.appScope.complaintParams)" ng-model="complaint_name" placeholder="Complaint Name">',
+				},
+				{
 					name:'category',
-					filterHeaderTemplate: '<input id="complaint_category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'complaint\', \'complaintList\',true, grid.appScope.complaintParams)" ng-model="category" placeholder="category">',
+					filterHeaderTemplate: '<input id="complaint_category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'complaint\', \'complaintList\',true, grid.appScope.complaintParams)" ng-model="category" placeholder="Category">',
+				},
+				
+				{
+					name:'type',
+					filterHeaderTemplate: '<input id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'complaint\', \'complaintList\',true, grid.appScope.complaintParams)" ng-model="type" placeholder="Type">',
 				},
 				{
 					name:'complaint_description',
-					filterHeaderTemplate: '<input id="complaint_description" class="form-control" ng-change="grid.appScope.filter(\'complaint_description\', complaint_description, \'complaint\', \'complaintList\',true, grid.appScope.complaintParams)" ng-model="complaint_description" placeholder="complaint_description">',
+					enableSorting: false,enableFiltering: false,
 				},
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'complaint\', \'complaintList\',false,grid.appScope.complaintParams)" ng-model="status">'
@@ -92,6 +101,8 @@ define(['app'], function (app) {
 					user_id : data.user_id,
 					user_id : $rootScope.userDetails.id,
 					category: data.category,
+					type:data.type,
+					complaint_name:data.complaint_name,
 					complaint_description: data.complaint_description,
 					complaint_date:data.complaint_date,
 					modified_date:data.modified_date,

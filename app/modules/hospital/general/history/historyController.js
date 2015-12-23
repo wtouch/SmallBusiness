@@ -29,9 +29,6 @@ define(['app'], function (app) {
 						return $scope.openModal("modules/hospital/general/history/addhistory.html");
 					}
 				}
-			},{
-				name : "history List",
-				path : "#/dashboard/hospital/general/history"
 			}
 		]
 

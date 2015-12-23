@@ -29,9 +29,6 @@ define(['app'], function (app) {
 						return $scope.openModal("modules/hospital/general/equipment/addequipment.html");
 					}
 				}
-			},{
-				name : "Equipment List",
-				path : "#/dashboard/hospital/general/equipment"
 			}
 		]
 
@@ -44,20 +41,20 @@ define(['app'], function (app) {
 			enableFiltering: false,	
 				},
 				{
-					name:'equipment_name',
-					filterHeaderTemplate: '<input id="equipment_name" class="form-control" ng-change="grid.appScope.filter(\'equipment_name\', equipment_name, \'equipment\', \'equipmentList\',true, grid.appScope.equipmentParams)" ng-model="equipment_name" placeholder="equipment name">',
+					name:'equipment_name',width:300,
+					filterHeaderTemplate: '<input id="equipment_name" class="form-control" ng-change="grid.appScope.filter(\'equipment_name\', equipment_name, \'equipment\', \'equipmentList\',true, grid.appScope.equipmentParams)" ng-model="equipment_name" placeholder="Equipment Name">',
 				},
 				{
-					name:'equipment_description',
-					filterHeaderTemplate: '<input id="equipment_description" class="form-control" ng-change="grid.appScope.filter(\'equipment_description\', equipment_description, \'equipment\', \'equipmentList\',true, grid.appScope.equipmentParams)" ng-model="equipment_description" placeholder="equipment description">',
+					name:'equipment_description',width:300,
+					filterHeaderTemplate: '<input id="equipment_description" class="form-control" ng-change="grid.appScope.filter(\'equipment_description\', equipment_description, \'equipment\', \'equipmentList\',true, grid.appScope.equipmentParams)" ng-model="equipment_description" placeholder="Equipment Description">',
 				},
 				
-				{ name:'quantity',width:90,enableSorting: false,enableFiltering: false,
+				{ name:'quantity',width:100,enableSorting: false,enableFiltering: false,
 				},
-				{ name:'price',width:90,enableSorting: false,enableFiltering: false,
+				{ name:'price',width:100,enableSorting: false,enableFiltering: false,
 				},
 				
-				{ name:'Manage', 
+				{ name:'Manage', width:200,
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'equipment\', \'equipmentList\',false,grid.appScope.equipmentParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
@@ -90,7 +87,7 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 				date : $scope.currentDate,
-				equipment_date:$scope.currentDate,
+				//equipment_date:$scope.currentDate,
 				modified_date:$scope.currentDate,
 				date:$scope.currentDate,
 				addequipment : (data) ? {
@@ -106,9 +103,9 @@ define(['app'], function (app) {
 					equipment_charges:data.equipment_charges,
 					equipment_description:data.equipment_description
 				} : {
-					date : dataService.sqlDateFormate(),
+					date : dataService.sqlDateFormate(false,"datetime"),
 					user_id : $rootScope.userDetails.id,
-					modified_date : dataService.sqlDateFormate(),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					equipment_date: dataService.sqlDateFormate()
 				
 				},
