@@ -41,6 +41,7 @@ define(['app'], function (app) {
 			enableFiltering: true,
 			columnDefs: [
 				{ name:'SrNo', 
+					width:75,
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
 				},
