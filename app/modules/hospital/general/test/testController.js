@@ -39,21 +39,21 @@ define(['app'], function (app) {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
-				{ name:'SrNo', 
+				{ name:'SrNo',width:60,
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
 				},
 				{
 					name:'test_name',
-					filterHeaderTemplate: '<input id="test_name" class="form-control" ng-change="grid.appScope.filter(\'test_name\', test_name, \'test\', \'testList\',true, grid.appScope.testParams)" ng-model="test_name" placeholder="test_name">',
+					filterHeaderTemplate: '<input id="test_name" class="form-control" ng-change="grid.appScope.filter(\'test_name\', test_name, \'test\', \'testList\',true, grid.appScope.testParams)" ng-model="test_name" placeholder="Test name">',
 				},
 					{
 					name:'test_type',
-					filterHeaderTemplate: '<input id="test_type" class="form-control" ng-change="grid.appScope.filter(\'test_type\', test_type, \'test\', \'testList\',true, grid.appScope.testParams)" ng-model="test_type" placeholder="test_type">',
+					filterHeaderTemplate: '<input id="test_type" class="form-control" ng-change="grid.appScope.filter(\'test_type\', test_type, \'test\', \'testList\',true, grid.appScope.testParams)" ng-model="test_type" placeholder="Test type">',
 				},
 				{
 					name:'test_description',
-					filterHeaderTemplate: '<input id="test_description" class="form-control" ng-change="grid.appScope.filter(\'test_description\', test_description, \'test\', \'testList\',true, grid.appScope.testParams)" ng-model="test_description" placeholder="test_description">',
+					filterHeaderTemplate: '<input id="test_description" class="form-control" ng-change="grid.appScope.filter(\'test_description\', test_description, \'test\', \'testList\',true, grid.appScope.testParams)" ng-model="test_description" placeholder="Test description">',
 				},
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'test\', \'testList\',false,grid.appScope.testParams)" ng-model="status">'
