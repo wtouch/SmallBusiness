@@ -1,0 +1,184 @@
+<h1>Campus Details</h1>
+	<div class="form-group">
+		<label for="name" class="col-sm-2 control-label">Name *</label>
+			<div class="col-sm-9">
+				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="campus.name" ng-pattern=" /^[a-zA-Z]+$/" required>
+				<span class="help-block" ng-show="CampusForm.name.$dirty && CampusForm.name.$invalid">
+					<span class="text-danger" ng-show="CampusForm.name.$error.required">Name is required.</span>
+					<span class="text-danger" ng-show="CampusForm.name.$error.pattern">Name is NAN</span>
+				</span>
+			</div>
+	</div>
+		<div class="form-group">
+					<label for="logo" class="col-sm-2 control-label">Logo *</label>
+						<div class="col-sm-4">
+							<input type="file" class="form-control " placeholder="upload file" id="upload_file" name="upload_file" ng-model="singleparticular.upload_file" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+							<span class="help-block" ng-show="CampusForm.upload_file.$dirty && CampusForm.upload_file.$invalid">
+							<span class="text-danger" ng-show="CampusForm.upload_file.$error.required">Required Field.</span>
+						</div>
+					<label for="year" class="col-sm-1 control-label">Establishment Year *</label>
+						<div class="col-sm-4">
+						<input type="date" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="campus.date"  ng-init="campus.date=date"
+						datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="campus.date = date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
+						</div>  
+				</div> 
+				
+				
+				 <div class="form-group">	
+					<label  for="email" class="col-sm-2 control-label">Email *</label>
+						<div class="col-sm-4">
+							<input type="Email" class="form-control" id="email" ng-model="campus.email" name="email" placeholder="Enter Email" ng-blur="checkuserAvailable('email', campus.email)" required >
+							<span class="help-block">
+								<span class="text-success" ng-show="CampusForm.email.$dirty && CampusForm.email.$valid && EmailAvailable">{{availabilityMsg}}</span>
+							</span>
+							
+							<span class="help-block" ng-show="CampusForm.email.$dirty && CampusForm.email.$invalid || EmailAvailable == false">
+								<span class="text-danger" ng-show="CampusForm.email.$dirty && EmailAvailable == false">{{availabilityMsg}}</span>
+								<span class="text-danger" ng-show="CampusForm.email.$error.required">Email is required.</span>
+								<span class="text-danger" ng-show="CampusForm.email.$error.email">Invalid Email address.</span>
+							</span>
+						</div>
+					<label  for="email" class="col-sm-1 control-label">Website *</label>
+						<div class="col-sm-4">
+							<input type="hidden" ng-model="Campus.adduser_date">
+							<input type="hidden" ng-model="Campus.status" ng-init="Campus.status = 1" value="{{Campus.status}}">
+							<input firstname type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="Campus.name" required>
+							<span class="help-block" ng-show="CampusForm.name.$dirty && CampusForm.name.$invalid">
+								<span class="text-danger" ng-show="CampusForm.name.$error.required">Website is required.</span>
+							</span>
+						</div>
+				</div> 
+				
+				<div class="form-group">
+					<label for="phone" class="col-sm-2 control-label">Phone *</label>
+					<div class="col-sm-9">
+						<input type="text" id="phone" name="phone" class="form-control" ng-model="campus.phone" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+						<span class="help-block" ng-show="CampusForm.phone.$dirty && CampusForm.phone.$invalid">
+							<span ng-show="CampusForm.phone.$error.required" class="text-danger">Phone Number is required.</span>
+						</span>
+					</div>						
+				</div>	
+				
+				<div class="form-group">
+					<label for="address" class="col-sm-2 control-label">Address *</label>
+						<div class="col-sm-9">
+							<textarea  class="form-control" id="address" ng-model="campus.address.address" name="address" placeholder="Enter address" ng-maxlength="75" required></textarea>
+							<p ng-hide="CampusForm.address.$error.maxlength">{{ 250 - campus.address.address.length + " Characters left"}}</p>
+							<span class="help-block" ng-show="CampusForm.address.$dirty &&  CampusForm.address.$invalid">
+								<span class="text-danger" ng-show="CampusForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
+								<span class="text-danger" ng-show="CampusForm.address.$error.required">Address is required.</span>
+							</span>
+						</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="location" class="col-sm-2 control-label">Location *</label>
+						<div class="col-sm-9">
+							<input type="text"  class="form-control" required name="location" id="location" ng-model="campus.address.location" >
+							<span class="help-block" ng-show="CampusForm.location.$dirty && CampusForm.location.$invalid ">							
+							<span class="text-danger" ng-show="CampusForm.location.$error.required">Location is required.</span>
+							</span>
+						</div>						
+				</div>
+				
+				<div class="form-group">
+					<label for="area" class="col-sm-2 control-label">Area *</label>
+						<div class="col-sm-4">
+							<input ng-disabled="readOnly" type="text" id="area" name="area" class="form-control" ng-model="campus.address.area" placeholder="Enter area" required>
+							<span class="help-block" ng-show="CampusForm.area.$dirty && CampusForm.area.$invalid">
+								<span class="text-danger" ng-show="CampusForm.area.$error.required">Area is required.</span>
+								<span ng-show="CampusForm.area.$error.pattern && (CampusForm.area.$dirty || submitted)" class="text-danger">Enter Area</span>
+								<span class="text-danger" ng-show="CampusForm.area.$error.minlength && (CampusForm.area.$dirty || submitted)">Enter correct Area.</span>
+							</span>
+						</div>	
+					<label for="city" class="col-sm-1 control-label">City *</label>
+					<div class="col-sm-4" >
+						<input type="text" required name="City" id="City" ng-model="campus.address.city"placeholder="Enter Your City"  ng-disabled="readOnly" class="form-control" autocomplete="off">	
+						<span class="help-block" ng-show="CampusForm.City.$dirty && CampusForm.City.$invalid || CampusForm.City.$dirty && !campus.address.city">
+							<span ng-show="CampusForm.City.$error.required || CampusForm.City.$dirty && !Campus.address.city" class="text-danger">City is required.</span>
+						</span>				
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="state" class="col-sm-2 control-label">State *</label>
+					<div class="col-sm-4">
+					<input ng-disabled="readOnly" type="text" id="state" name="state" class="form-control" ng-model="campus.state" placeholder="Enter state">
+						<span class="help-block" ng-show="CampusForm.state.$dirty && CampusForm.state.$invalid">
+							<span ng-show="CampusForm.state.$error.required" class="text-danger">State is required.</span>
+						</span>				
+					</div>	
+					<label for="Country" class="col-sm-1 control-label">Country *</label>
+						<div class="col-sm-4">
+							<input type="text" required name="Country" id="Country" ng-model="campus.country" placeholder="Enter Your Country" ng-disabled="readOnly" class="form-control" autocomplete="off">
+							<span class="help-block" ng-show="CampusForm.Country.$dirty && CampusForm.Country.$invalid || CampusForm.Country.$dirty && !campus.country">
+								<span ng-show="CampusForm.Country.$error.required || CampusForm.Country.$dirty && !campus.country" class="text-danger">Country is required.</span>
+							</span>				
+						</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="pincode" class="col-sm-2 control-label">Pin Code *</label>
+						<div class="col-sm-9">
+							<input ng-disabled="readOnly" type="text" id="pincode" name="pincode" class="form-control" ng-model="campus.address.pincode" placeholder="Enter Pin Code" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+							<span class="help-block" ng-show="CampusForm.pincode.$dirty && CampusForm.pincode.$invalid">
+								<span ng-show="CampusForm.pincode.$error.pattern && (CampusForm.pincode.$dirty || submitted)" class="text-danger">Enter a valid PIN Code</span>
+								<span class="text-danger" ng-show="CampusForm.pincode.$error.minlength && (CampusForm.pincode.$dirty || submitted)">Enter Valid Length Of Zip Code.</span>
+							</span>
+						</div>						
+				</div>
+
+				<div class="form-group">
+					<label for="university_no" class="col-sm-2 control-label">University No *</label>
+						<div class="col-sm-9">
+							<input type="text" id="university_no" name="university_no" class="form-control" ng-model="campus.address.university_no" placeholder="Enter University Number" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+							<span ng-show="CampusForm.university_no.$error.pattern && (CampusForm.university_no.$dirty || submitted)" class="text-danger">Enter a valid No</span>
+							</span>
+						</div>						
+				</div>
+				
+				<div class="form-group">
+					<label for="institute" class="col-sm-2 control-label">Institute Type *</label>
+					<div class="col-sm-4">
+						<select id="institute" class="form-control" name="institute"  ng-model="campus.institute" required>
+							<option value="" selected>Select Institute Type</option>
+							<option value="aided">Aided</option>
+							<option value="unaided">Unaided</option>
+							<option value="private">Private</option>
+						</select>
+						<span class="help-block" ng-show="CampusForm.institute.$dirty && CampusForm.institute.$invalid">
+							<span ng-show="CampusForm.institute.$error.required" class="text-danger">Required field.</span>
+							</span>	
+						</span>				
+					</div>
+				</div>
+				
+				 <div class="form-group">
+					<label for="campus_code" class="col-sm-2 control-label">Campus Code *</label>
+						<div class="col-sm-9">
+							<input ng-disabled="readOnly" type="text" id="campus_code" name="campus_code" class="form-control" ng-model="Campus.address.campus_code" placeholder="Enter Valid No" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+							<span class="help-block" ng-show="CampusForm.campus_code.$dirty && CampusForm.campus_code.$invalid">
+								<span ng-show="CampusForm.campus_code.$error.pattern && (CampusForm.campus_code.$dirty || submitted)" class="text-danger">Enter a valid No</span>
+							</span>
+						</div>						
+				</div>
+				<div class="form-group">
+						<label for="founder" class="col-sm-2 control-label">Founder *</label>
+						<div class="col-sm-9">
+							<input type="text" id="founder" class="form-control" name="founder" placeholder="founder" ng-model="campus.founder" ng-pattern=" /^[a-zA-Z]+$/" required>
+							<span class="help-block" ng-show="CampusForm.founder.$dirty && CampusForm.founder.$invalid">
+								<span class="text-danger" ng-show="CampusForm.founder.$error.required">Name is required.</span>
+							</span>
+						</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="principal" class="col-sm-2 control-label">Principal *</label>
+						<div class="col-sm-9">
+							<input type="text" id="principal" class="form-control" name="principal" placeholder="principal" ng-model="campus.principal" ng-pattern=" /^[a-zA-Z]+$/" required>
+							<span class="help-block" ng-show="CampusForm.principal.$dirty && CampusForm.principal.$invalid">
+								<span class="text-danger" ng-show="CampusForm.principal.$error.required">Name is required.</span>
+							</span>
+						</div>
+				</div>
+				<a ng-click="showFormPart('awarddetails')" class="btn btn-default btn-primary">NEXT</a>   

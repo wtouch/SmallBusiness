@@ -1,0 +1,59 @@
+<h1>Certificates</h1>
+<div class="form-group">
+						<label for="name" class="col-sm-2 control-label">Name *</label>
+						<div class="col-sm-9">
+							<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="campus.name" ng-pattern=" /^[a-zA-Z]+$/" required>
+							<span class="help-block" ng-show="CampusForm.name.$dirty && CampusForm.name.$invalid">
+								<span class="text-danger" ng-show="CampusForm.name.$error.required">Name is required.</span>
+								<span class="text-danger" ng-show="CampusForm.name.$error.pattern">Name is NAN</span>
+							</span>
+						</div>
+</div>
+	<div class="form-group">
+		<label for="description" class="col-sm-2 control-label">Description *</label>
+			<div class="col-sm-9">
+				<textarea  class="form-control" id="description" ng-model="campus.address.description" name="description" placeholder="Enter description" ng-maxlength="75" required></textarea>
+				<p ng-hide="CampusForm.description.$error.maxlength">{{ 256 - campus.address.description.length + " Characters left"}}</p>
+				<span class="help-block" ng-show="CampusForm.description.$dirty &&  CampusForm.description.$invalid">
+					<span class="text-danger" ng-show="CampusForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+					<span class="text-danger" ng-show="CampusForm.description.$error.required">Description is required.</span>
+				</span>
+			</div>
+	</div>
+	
+	<div class="form-group">
+		<label for="upload_attachment" class="col-sm-2 control-label">Upload Attachment *</label>
+			<div class="col-sm-9">
+				<input type="file" class="form-control " placeholder="upload file" id="upload_file" name="upload_file" ng-model="singleparticular.upload_file" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+							<span class="help-block" ng-show="CampusForm.upload_file.$dirty && CampusForm.upload_file.$invalid">
+							<span class="text-danger" ng-show="CampusForm.upload_file.$error.required">Required Field.</span>
+			</div>
+	</div>
+	
+<div class="col-sm-offset-2"><a class="btn btn-default btn-primary">+Add</a></div><br>
+	<div class="row">
+		<div class="col-sm-9 col-sm-offset-2">	
+			<div class="table-responsive">
+				<table class="table table-bordered" >
+					<thead>
+						<tr >
+							<th>Sr.No.</th>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Upload Attachment</th>
+						</tr>
+					</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td>sfgsfdg</td>
+								<td>sfdgsfdg</td>
+								<td>fgsgdfg</td>
+							</tr>
+						</tbody>
+				</table>
+			</div>
+		</div>
+  </div>
+<div class="col-sm-offset-2"><a class="btn btn-default btn-primary">Submit</a></div><br>
+<div class="col-sm-offset-2"><a ng-click="showFormPart('certificates')" class="btn btn-default btn-primary">Reset</a></div>
