@@ -12,7 +12,7 @@
 			<div class="col-sm-2">
 				<div class="bottomspace">
 					<label for="select_no_records" class="control-label" >Select Records</label>
-					<select id="select_no_records" class="form-control" ng-change="getData(false, currentPage,'admission','admission',admissionParams)" ng-model="pageItems">
+					<select id="select_no_records" class="form-control" ng-change="getData(false, currentPage,'admission_view','admission',admissionParams)" ng-model="pageItems">
 						<option value="10">10</option>
 						<option value="20">20</option>
 						<option value="30">30</option>
@@ -24,7 +24,7 @@
 			<div ui-grid="admission"></div>
 		</div>
 		<div class="text-center">				
-			<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'admission','admission',admissionParams)"></pagination>
+			<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'admission_view','admission',admissionParams)"></pagination>
 			<pre>Page: {{currentPage}} / {{numPages}}</pre>
 		</div>	
 </div>
