@@ -53,11 +53,11 @@ define(['app'], function (app) {
 					},
 				{
 					name:'bed_number',
-					filterHeaderTemplate: '<input id="bed_number" class="form-control" ng-change="grid.appScope.filter(\'bed_number\', bed_number, \'bed\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_number" placeholder="bed_number">',
+					filterHeaderTemplate: '<input id="bed_number" class="form-control" ng-change="grid.appScope.filter(\'bed_number\', bed_number, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_number" placeholder="bed_number">',
 				},
 				{
 					name:'bed_description',
-					filterHeaderTemplate: '<input id="bed_description" class="form-control" ng-change="grid.appScope.filter(\'bed_description\', bed_description, \'bed\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_description" placeholder="bed_description">',
+					filterHeaderTemplate: '<input id="bed_description" class="form-control" ng-change="grid.appScope.filter(\'bed_description\', bed_description, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_description" placeholder="bed_description">',
 				},
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bed_view\', \'bedList\',false,grid.appScope.bedParams)" ng-model="status">'
@@ -96,12 +96,11 @@ define(['app'], function (app) {
 				/* wardParams : $scope.wardParams, */
 				bed_date:$scope.currentDate,
 				modified_date:$scope.currentDate,
-				date:$scope.currentDate,
-				modified_date:$scope.currentDate,
+				date:$scope.currentDate, 
 				bed : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
-					/* ward_id:data.ward_id, */
+					ward_id:data.ward_id,
 					user_id : $rootScope.userDetails.id,
 					bed_number: data.bed_number,
 					bed_description: data.bed_description,
@@ -111,9 +110,10 @@ define(['app'], function (app) {
 					modified_date:data.modified_date,
 					date : data.date,
 				} : {
-					date : dataService.sqlDateFormate(),
+					/* date : dataService.sqlDateFormate(), */
 					user_id : $rootScope.userDetails.id,
-					modified_date : dataService.sqlDateFormate(),
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					bed_date: dataService.sqlDateFormate()
 				},
 				postData : function(table, input){

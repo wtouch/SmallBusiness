@@ -97,9 +97,10 @@ define(['app'], function (app) {
 					modified_date:data.modified_date,
 					date : data.date,
 				} : {
-					date : dataService.sqlDateFormate(),
+					/* date : dataService.sqlDateFormate(), */
 					user_id : $rootScope.userDetails.id,
-					modified_date : dataService.sqlDateFormate(),
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					ward_date: dataService.sqlDateFormate()
 				},
 				postData : function(table, input){
