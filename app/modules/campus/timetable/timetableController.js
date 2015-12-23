@@ -53,15 +53,15 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'dept_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'timetable_view\', \'timetableList\',false, grid.appScope.divParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">'
+					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'timetable_view\', \'timetableList\',false, grid.appScope.timetableParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">'
 				},
 				{ 
 					name:'class_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'timetable_view\', \'timetableList\',true, grid.appScope.divParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'timetable_view\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
 				},	
 				{ 
 					name:'division_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'div_id\', div_id, \'timetable_view\', \'timetableList\',true, grid.appScope.divParams)" ng-model="div_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'div_id\', div_id, \'timetable_view\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="div_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
 				},				
 				 { name:'classRoom',enableSorting: false ,
 				filterHeaderTemplate: '<select id="room_id" class="form-control" ng-change="grid.appScope.filter(\'room_id\', room_id, \'timetable_view\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="room_id" ng-options="item.id as item.room_no for item in grid.appScope.roomList">'
@@ -92,7 +92,14 @@ define(['app'], function (app) {
 							+'<option value="Friday">Friday</option>'
 							+'<option value="Saturday">Saturday</option>'
 						+'</select>'
-				}
+				},
+				{ name:'timefrom',
+					filterHeaderTemplate: '<input id="time" class="form-control" ng-change="grid.appScope.filter(\'time\', time, \'timetable_view\', \'timetableList\',true, grid.appScope.timetableList)" ng-model="timefrom" placeholder="timefrom">',
+				},
+				{ name:'timeto',
+				
+					filterHeaderTemplate: '<select id="timeto" class="form-control" ng-change="grid.appScope.filter(\'timeto\', timeto, \'timetable_view\', \'timetableList\',true, grid.appScope.timetableList)" ng-model="timeto" placeholder="timeto">',
+				},
 				,	 
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'timetable_view\', \'timetableList\',false, grid.appScope.timetableParams)" ng-model="status">'
