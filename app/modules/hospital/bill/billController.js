@@ -21,10 +21,6 @@ define(['app'], function (app) {
 			popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="css/style.css" /></head><body onload="window.print()">' + printContents + '</html>');
 			popupWin.document.close();
 		}
-		
-	
-		var rowtpl='<div><div style="{\'background-color\': getBkgColorTable(myData[row.rowIndex].count)}" ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }" ui-grid-cell></div></div>';
-		
 		$scope.billData = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -56,11 +52,7 @@ define(['app'], function (app) {
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/bill/generate_bill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip=" Generate bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+
-					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPaybill(\'modules/inventory/bill/payBill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
-							+
-					
-					'<a ng-click="grid.appScope.openViewreceipt(\'modules/inventory/bill/viewreceipt.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view Receipt Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+			'
 					
 				}
 			],
@@ -118,62 +110,7 @@ define(['app'], function (app) {
 				}:{
 
 				},
-				postData : function(table, input){
-					$rootScope.postData(table, input,function(response){
-						if(response.status == "success"){
-							// For Insert each item from particulars into Stock Table
-							
-							$scope.stockData = {};
-							$scope.stockData.user_id = input.user_id;
-							$scope.stockData.party_id = input.party_id;
-							if(input.date) $scope.stockData.date = input.date;
-							$scope.stockData.stockdate = input.generated_date;
-							$scope.stockData.modified_date = input.modified_date;
-							$scope.stockData.stock_type = 0; 
-							angular.forEach(input.particular, function(value, key){
-								$scope.stockData.goods_name = value.particular_name;
-								$scope.stockData.quantity =  "+" + value.quantity;
-								$scope.stockData.price =value.price;
-								$scope.stockData.goods_type = value.goods_type;
-								$scope.stockData.category = value.category;
-								$rootScope.postData("stock", angular.copy($scope.stockData),function(response){
-								});
-							})
-							
-						$scope.getData(false, $scope.currentPage, 'bill','billData',$scope.billParams);
-						}
-					})
-				},
 				
-				taxCalculate : function(modalOptions){
-					modalOptions.singleparticular.tax = {};
-					
-					angular.forEach($rootScope.userDetails.config.inventory.taxData.tax, function(value, key){
-						if(modalOptions.taxInfo[value.taxName]){
-							modalOptions.singleparticular.tax[value.taxName] = (modalOptions.singleparticular.tax[value.taxName]) ? modalOptions.singleparticular.tax[value.taxName] + (value.taxValue * modalOptions.singleparticular.amount / 100) : (value.taxValue * modalOptions.singleparticular.amount / 100);
-						}
-					})
-				},
-				totalCalculate : function(modalOptions){
-					modalOptions.addBill.subtotal = 0;
-					modalOptions.addBill.total_amount = 0;
-					modalOptions.addBill.tax = {};
-					angular.forEach(modalOptions.addBill.particular, function(value, key){
-						modalOptions.addBill.subtotal += value.amount;
-						angular.forEach(value.tax,function(value, key){
-							modalOptions.addBill.tax[key] = (modalOptions.addBill.tax[key]) ? modalOptions.addBill.tax[key] + value : value;
-						})
-						
-					})
-					
-					var taxSubtotal = 0;
-					angular.forEach(modalOptions.addBill.tax, function(value, key){
-						taxSubtotal += value;
-					})
-					
-					modalOptions.addBill.total_amount = modalOptions.addBill.subtotal + taxSubtotal;
-					return modalOptions;
-				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
@@ -202,134 +139,7 @@ define(['app'], function (app) {
 			})
 		}
 		
-		$scope.openPaybill = function(url,data){
-				var modalDefault = {
-				templateUrl: url, // apply template to modal
-				size : 'lg'
-				};
-			var modalOptions = {
-				date : dataService.sqlDateFormate(),
-				payBill : {
-					reference_id : data.id,
-					party_id : data.party_id,
-					user_id : data.user_id,
-					debit_amount : data.due_amount,
-					date : data.bill_date,
-					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					status : 1,
-					type : "bill_payment"
-				},
-				getBalance : $scope.getBalance,
-				calcBalance : $scope.calcBalance,
-				getPaidAmount :	$scope.getPaidAmount,
-				checkPaidStatus : function(value, modalOptions){
-					if((parseFloat(data.due_amount) - parseFloat(value)) == 0){
-						modalOptions.payment_status = 1;
-					}else{
-						modalOptions.payment_status = 2;
-					}
-					return modalOptions.payment_status;
-				},
-				postData : function(table,input){
-					$rootScope.postData(table, input,function(response){
-						if(response.status == "success"){
-							var paymentStatus = {
-								payment_status : (modalOptions.payment_status) ? modalOptions.payment_status : modalOptions.checkPaidStatus(modalOptions.payBill.debit_amount, modalOptions)
-							}
-							$rootScope.updateData("bill", paymentStatus, data.id, function(response){
-								
-							})
-						}
-					})
-				},
-				
-				calcBalance : function(previousBal, amount, modalOptions){
-					modalOptions.payBill.balance = parseFloat(previousBal) + parseFloat(amount);
-				},
-				
-				
-				updateData : function(table, input, id){
-					$rootScope.updateData(table, input, id, function(response){
-						if(response.status == "success"){
-							
-						}
-					})
-				},
-				
-				getData: $scope.getData,
-			};
-			modalService.showModal(modalDefault, modalOptions).then(function(){
-			})
-		}
 		
-		$scope.openViewbill = function(url,data){
-				var modalDefault = {
-				templateUrl: url, // apply template to modal
-				size : 'lg'
-				};
-			var modalOptions = {
-				date : dataService.sqlDateFormate(),
-				viewBill :data,
-				printDiv : $scope.printDiv,
-			};
-			modalService.showModal(modalDefault, modalOptions).then(function(){
-			})
-		}
-		
-		$scope.openViewreceipt = function(url,data){
-				var modalDefault = {
-				templateUrl: url, // apply template to modal
-				size : 'lg'
-				};
-			var modalOptions = {
-				date : dataService.sqlDateFormate(),
-				Billdata : data,
-				receiptParams : (data) ?{
-					where : {
-						reference_id : data.id,
-						type : "bill_payment",
-						user_id : $rootScope.userDetails.id,
-						status : 1
-					},
-					join:[
-						{
-							joinType : 'INNER JOIN',
-							joinTable : "inventory_party",
-							joinOn : {
-								party_id : "t0.party_id"
-							},
-							cols : ["*"]
-						}],
-					cols : ["*"]
-				}:{
-
-				},
-				getData : $scope.getData,
-				
-				
-				
-			};
-			modalService.showModal(modalDefault, modalOptions).then(function(){
-			})
-		}
-		
-		
-		
-		
-		
-		$scope.setDate = function(date, days, sql){
-			var curDate = new Date(date);
-			var newDate = curDate.setDate(curDate.getDate() + days);
-			var finalDate;
-			if(sql == "date"){
-				finalDate = dataService.sqlDateFormate(newDate);
-			}else if(sql == "datetime"){
-				finalDate = dataService.sqlDateFormate(newDate, "datetime");
-			}else{
-				finalDate = new Date(newDate);
-			}
-			return finalDate;
-		}
 		
 		
 		$scope.billParams = {
