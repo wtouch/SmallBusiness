@@ -39,14 +39,23 @@ define(['app'], function (app) {
 				{ name:'SrNo', 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 			enableFiltering: false,	
+				},{
+					name:'history_title',
+					filterHeaderTemplate: '<input id="history_title" class="form-control" ng-change="grid.appScope.filter(\'history_title\', history_title, \'history\', \'complaintList\',true, grid.appScope.historyParams)" ng-model="history_title" placeholder="History Title">',
 				},
 				{
-					name:'history_title',
-					filterHeaderTemplate: '<input id="history_title" class="form-control" ng-change="grid.appScope.filter(\'history_title\', history_title, \'history\', \'historyList\',true, grid.appScope.historyParams)" ng-model="history_title" placeholder="history title">',
+					name:'category',
+					filterHeaderTemplate: '<input id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'history\', \'complaintList\',true, grid.appScope.historyParams)" ng-model="category" placeholder="Category">',
 				},
+				
+				{
+					name:'type',
+					filterHeaderTemplate: '<input id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'complaint\', \'complaintList\',true, grid.appScope.historyParams)" ng-model="type" placeholder="Type">',
+				},
+				
 				{
 					name:'history_description',
-					filterHeaderTemplate: '<input id="history_description" class="form-control" ng-change="grid.appScope.filter(\'history_description\', history_description, \'history\', \'historyList\',true, grid.appScope.historyParams)" ng-model="history_description" placeholder="history_description">',
+					filterHeaderTemplate: '<input id="history_description" class="form-control" ng-change="grid.appScope.filter(\'history_description\', history_description, \'history\', \'historyList\',true, grid.appScope.historyParams)" ng-model="history_description" placeholder="History Description">',
 				},
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'history\', \'historyList\',false,grid.appScope.historyParams)" ng-model="status">'
@@ -88,15 +97,17 @@ define(['app'], function (app) {
 					id : data.id,
 					user_id : data.user_id,
 					user_id : $rootScope.userDetails.id,
+					category:data.category,
+					type:data.type,
 					history_title: data.history_title,
 					history_description: data.history_description,
 					history_date:data.history_date,
 					modified_date:data.modified_date,
 					date : data.date,
 				} : {
-					date : dataService.sqlDateFormate(),
+					date : dataService.sqlDateFormate(false,"datetime"),
 					user_id : $rootScope.userDetails.id,
-					modified_date : dataService.sqlDateFormate(),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				history_date: dataService.sqlDateFormate()
 				},
 				postData : function(table, input){

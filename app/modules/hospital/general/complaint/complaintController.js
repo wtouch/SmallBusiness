@@ -29,9 +29,6 @@ define(['app'], function (app) {
 						return $scope.openModal("modules/hospital/general/complaint/addcomplaint.html");
 					}
 				}
-			},{
-				name : "complaint List",
-				path : "#/dashboard/hospital/general/complaint"
 			}
 		]
 
