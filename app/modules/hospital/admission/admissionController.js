@@ -182,7 +182,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'admission','admission', $scope.admissionParams);
+							$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
 						}
 					})
 				},
