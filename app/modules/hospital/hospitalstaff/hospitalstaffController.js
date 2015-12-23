@@ -44,21 +44,30 @@ define(['app'], function (app) {
 					  //placeholder: 'ends with'
 					}
 				},
-				
-					{
+				{
+				    name:'staff_type',
+					width:100,
+					filterHeaderTemplate: '<input id="staff_type" class="form-control" ng-change="grid.appScope.filter(\'staff_type\', staff_type, \'staff\', \'staff\',true)" ng-model="staff_type" placeholder="Staff type">'
+                },
+				{
 				    name:'name',
 					width:200,
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="Name">',
                 },
 				{
+				    name:'phone',
+					width:150,
+					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'staff\', \'staff\',true)" ng-model="phone" placeholder="Phone">'
+                },
+				{
 				    name:'email',
-					width:130,
+					width:150,
 					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'staff\', \'staff\',true)" ng-model="email" placeholder="Email">'
                 },
 				
 			   {
 				    name:'address',
-					width:130,
+					width:150,
 					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true)" ng-model="address" placeholder="Address">',
                 },
 				
@@ -68,10 +77,8 @@ define(['app'], function (app) {
 				 width:90,
 				 filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true)" ng-model="city" placeholder="City">', 
                 },
-				
-				 { 
+			    { 
 				 name:'Manage',
-				 width:250,
 				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
 							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
@@ -81,7 +88,7 @@ define(['app'], function (app) {
 					   type: uiGridConstants.filter.SELECT,  
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
-					} ,
+					},
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/addhospitalstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+
