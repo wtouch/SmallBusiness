@@ -266,7 +266,7 @@ define(['app'], function (app) {
 						if(response.status == "success"){
 							// For Insert each item from particulars into Stock Table
 							
-							$scope.stockData = {};
+						/*	$scope.stockData = {};
 							$scope.stockData.user_id = input.user_id;
 							$scope.stockData.vendor_id = input.vendor_id;
 							if(input.date) $scope.stockData.date = input.date;
@@ -281,7 +281,7 @@ define(['app'], function (app) {
 								$scope.stockData.category = value.category;
 								$rootScope.postData("stock", angular.copy($scope.stockData),function(response){
 								});
-							})						
+							})	*/					
 						$scope.getData(false, $scope.currentPage, 'bill','billData',$scope.billParams);
 						}
 					})

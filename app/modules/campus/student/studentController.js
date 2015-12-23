@@ -30,13 +30,31 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Registration",
-				SubTitle :"Staff",
+				SubTitle :"Registration",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/campus/student/registeredstudent.html");
 					}
 				}
-			}	
+			},
+			{
+				name : "Merit List",
+				SubTitle :"Merit List",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/campus/student/meritlist.html");
+					}
+				}
+			},
+			{
+				name : "Student List",
+				SubTitle :"Student List",
+				events : {
+					click : function(){
+						return $scope.openModal("modules/campus/student/studentlist.html");
+					}
+				}
+			}			
 		]
 		$scope.registrationList={
 			enableSorting: true,
@@ -94,17 +112,24 @@ define(['app'], function (app) {
 					id:data.id,
 					user_id : data.user_id,
 					student_name : data.student_name,
-					email:data.email,
+					email_id:data.email_id,
 					contact_no:data.contact_no,
 					address:data.address,
 					city:data.city,
 					state:data.state,
 					country:data.country,
+					dob : data.dob,
+					age : data.age,		
 					pincode:data.pincode,
+					gender : data.gender,
 					marital_status : data.marital_status,
-					education:data.education,
 					hobbies : data.hobbies,
-					medical_details:data.medical_details,
+					education:data.education,
+					gardian : data.gardian,
+					cast : data.cast,
+					medical:data.medical,
+					attachments : data.attachments,
+					remark : data.remark,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
 				}:{
@@ -126,6 +151,13 @@ define(['app'], function (app) {
 						modalOptions.formPart = formPart;
 					},
 					getData : $scope.getData,
+					classParams : {
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status:1,
+						},
+					cols : ["*"]
+					},
 					addToObject : function(object,data,modalOptions){
 						console.log(object,data,modalOptions);
 					$rootScope.addToObject(object,modalOptions[data]);
