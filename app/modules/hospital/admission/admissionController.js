@@ -134,6 +134,7 @@ define(['app'], function (app) {
 					pincode :data.pincode,
 					deposit:data.deposit,
 					complaints :data.complaints,
+					equipment_sheet :data.equipment_sheet
 					//phone :data.phone,	
 			} : {
 					date : dataService.sqlDateFormate(),
