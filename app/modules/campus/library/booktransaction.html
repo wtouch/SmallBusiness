@@ -8,16 +8,49 @@
 	<div class="modal-body">
 		<form name="bookTransactionForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="bookTransactionForm.$valid">
 		
-			<div class="form-group">
-				<div ng-init="modalOptions.getData(false,false,'student','studentList',false,modalOptions)">
+			<div class="form-group">{{ modalOptions.studentList}}
+				<div >
 					<label for="student_id" class="col-sm-2 control-label">Select Student ID</label>
 					<div class="col-sm-4" >		
-							<select id="student_id" class="form-control" ng-model="modalOptions.addBook.student_id" ng-options="item.id as item.id for item in modalOptions.studentList" required>
-								<option value="">select Student ID</option>
+							<select id="student_id" class="form-control" ng-init="modalOptions.getData(false,false,'student','studentList',false,modalOptions)" ng-model="modalOptions.addBook.student" ng-options="item as item.student_id for item in modalOptions.studentList" ng-change="modalOptions.addBook.student_name = modalOptions.addBook.student.student_name">
+								<option value="">Select ID</option>
 							</select>
-
+								<span class="help-block" ng-show="bookTransactionForm.student_id.$dirty && bookTransactionForm.student_id.$invalid">
+						<span ng-show="bookTransactionForm.student_id.$error.required" class="text-danger">required field.</span>
+					</span>	
 					</div>
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="student_id" class="col-sm-2 control-label">Student Name *</label>
+				<div class="col-sm-3">
+					<input type="text" id="student_id" class="form-control" ng-model="modalOptions.addBook.student_name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label  for="issue_date" class="col-sm-2 control-label">Issue Date * </label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" placeholder="YYYY-DD-MM" id="issue_date" name="issue_date" ng-model="modalOptions.addBook.issue_date" ng-init="modalOptions.addBook.issue_date = modalOptions.date"datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" disabled ng-required="true" />	
+				</div>
+			</div>
+			<div class="form-group">
+				<label  for="due_date" class="col-sm-2 control-label">Due Date * </label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" placeholder="YYYY-DD-MM" id="due_date" name="due_date" ng-model="modalOptions.addBook.due_date" ng-init="modalOptions.addBook.due_date = modalOptions.date"datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" disabled ng-required="true" />	
+				</div>
+			</div>
+			<div class="form-group">
+				<label  for="return_date" class="col-sm-2 control-label">Return Date * </label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" placeholder="YYYY-DD-MM" id="return_date" name="return_date" ng-model="modalOptions.addBook.return_date" ng-init="modalOptions.addBook.return_date = modalOptions.date"datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" disabled />	
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="book_fine" class="col-sm-2 control-label">Fine If Any </label>
+				<div class="col-sm-4">
+					<input type="text" id="book_fine" class="form-control" name="book_fine" disabled ng-model="modalOptions.addstaff.book_fine" required>						
+				</div>
+			</div>
+			<button type="submit" class="btn btn-success"  ng-disabled="bookTransactionForm.$invalid" ng-click="   modalOptions.postData('book_transaction',modalOptions.addBook);modalOptions.ok()">Add Holidays</button>
 		</form>
 	</div>

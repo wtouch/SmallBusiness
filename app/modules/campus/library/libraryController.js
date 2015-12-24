@@ -36,6 +36,46 @@ define(['app'], function (app) {
 			}
 			]
 			
+			$scope.bookTransactionList={
+			enableSorting: true,
+			enableFiltering: true,
+			columnDefs: [
+				{
+					name:'SrNo', width:40,
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
+					enableFiltering: false,	
+				},
+				{ 
+					name:'student_id',width:90,
+					enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="student_id" class="form-control" ng-change="grid.appScope.filter(\'student_id\', student_id, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_id" placeholder="Student_id">',
+				},
+				{ 
+					name:'student_name',width:90,
+					enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
+				},{ 
+					name:'Book Name',width:100,
+					enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
+				},{ 
+					name:'Book No',width:100,
+					enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
+				},{ 
+					name:'Issue Date',width:100,
+					enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
+				}
+				]
+			};
+			$scope.callbackColChange = function(response){
+			console.log(response);
+				if(response.status == "success"){
+					$scope.getData(false, $scope.currentPage, "book_transaction", "bookTransactionList", $scope.bookParams);
+				}
+			}
+					/* add liabrary */
 		$scope.openModal=function(url,data){
 				var modalDefault={
 					templateUrl:url,
