@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants','upload'];
+    var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
     
     // This is controller for this view
-	var admissionController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,upload) {
+	var admissionController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
 		$scope.invoice = true;
@@ -75,7 +75,7 @@ define(['app'], function (app) {
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/addadmission.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit  IPD patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ 
-					'<a type="button" tooltip="Delete admission" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'admission\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
+					'<a type="button" tooltip="Delete admission" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'admission_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_ipdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  IPDpatient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_casesheet.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  Casesheet" > <span >CS</span></a>'			
@@ -87,8 +87,6 @@ define(['app'], function (app) {
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/medicine_Prescribe.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view medicine_Prescribe" > <span>MP</span></a>'
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/assignEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >AE</span></a>'	
-					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/generate_bill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span >GB</span></a>'	
 				}
 			]
 		};
@@ -102,8 +100,6 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				admission_date:$scope.currentDate,
 				patientParams: $scope.patientParams,
-				medicineParams:$scope.medicineParams,
-				medicine_usedParams: $scope.medicineParams,
 				view_admission : (data) ? {
 					id : data.id,
 					name : data.name,
@@ -134,8 +130,7 @@ define(['app'], function (app) {
 					pincode :data.pincode,
 					deposit:data.deposit,
 					complaints :data.complaints,
-					equipment_sheet :data.equipment_sheet,
-					medicine_prescribe :data.medicine_prescribe
+					equipment_sheet :data.equipment_sheet
 					//phone :data.phone,	
 			} : {
 					date : dataService.sqlDateFormate(),
@@ -174,51 +169,13 @@ define(['app'], function (app) {
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					admission_date :$scope.currentDate	
 				},
-				medicine_prescribe : (data) ? {
-					id : data.id,
-					user_id :data.user_id,
-					unit :data.unit,
-					quantity :data.quantity
-					
-					} 
-					: {
-					date : dataService.sqlDateFormate(),
-					user_id : $rootScope.userDetails.id,
-					date : dataService.sqlDateFormate(false,"datetime"),
-					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					
-				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
-									$scope.medicine_prescribeData = {};
-							$scope.medicine_prescribeData.user_id = input.user_id;
-							/* $scope.stockData.party_id = input.party_id; */
-							if(input.date) $scope.medicine_prescribeData.date = input.date;
-							$scope.medicine_prescribeData.medicine_used_date = input.medicine_used_date;
-							$scope.medicine_prescribeData.modified_date = input.modified_date;
-							$scope.medicine_prescribeData.stock_type = 0; 
-							angular.forEach(input.particular, function(value, key){
-								$scope.medicine_prescribeData.quantity =  "+" + value.quantity;
-								$scope.medicine_prescribeData.price =value.price;
-								
-								$rootScope.postData("medicine_used", angular.copy($scope.medicine_usedData),function(response){
-								});
 						}
 					})
 				},
-				uploadMultiple : function(files,path,userinfo, picArr){
-					upload.upload(files,path,userinfo,function(data){
-						if(data.status === 'success'){
-							picArr.diagnostic.dignos_report.push(data.data);
-						}else{
-							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-							$notification[response.status]("", response.message);
-						}
-					});
-				},
-		
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
@@ -256,21 +213,6 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
-		$scope.medicine_usedParams ={
-		 where : {
-				user_id : $rootScope.userDetails.id,
-				status : 1,
-			},
-			cols : ["*"]
-		}
-		$scope.medicineParams ={
-		 where : {
-				user_id : $rootScope.userDetails.id,
-				status : 1,
-			},
-			cols : ["*"]
-		}
-		
 		$scope.patientParams ={
 		 where : {
 				user_id : $rootScope.userDetails.id,
