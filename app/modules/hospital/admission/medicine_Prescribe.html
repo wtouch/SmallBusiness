@@ -33,10 +33,10 @@
 	<div class="modal-body">{{modalOptions.medicine_prescribe}}
 		<form class="form-horizontal" name="medicine_prescribeForm" role="form" ng-submit="medicine_prescribeForm.$valid" novalidate="novalidate">
 			<div class="form-group">
-				<label  for="date" class="col-sm-2 control-label">Date*</label>
+				<label  for="medicine_used_date" class="col-sm-2 control-label">Date*</label>
 				<div class="col-sm-8">
 					<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="date" name="date" ng-model="modalOptions.medicine_prescribe.date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.date,10); modalOptions.sqlDateFormat(modalOptions.medicine_prescribe, modalOptions.medicine_prescribe)"/>	
+					<input type="text" class="form-control " placeholder="Date" id="medicine_used_date" name="medicine_used_date" ng-model="modalOptions.medicine_prescribe.medicine_used_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.medicine_used_date,10); modalOptions.sqlDateFormat(modalOptions.medicine_prescribe, modalOptions.medicine_prescribe)"/>	
 						<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>

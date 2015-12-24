@@ -102,7 +102,8 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				admission_date:$scope.currentDate,
 				patientParams: $scope.patientParams,
-				medicineParams: $scope.medicineParams,
+				medicineParams:$scope.medicineParams,
+				medicine_usedParams: $scope.medicineParams,
 				view_admission : (data) ? {
 					id : data.id,
 					name : data.name,
@@ -191,6 +192,19 @@ define(['app'], function (app) {
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
+									$scope.medicine_prescribeData = {};
+							$scope.medicine_prescribeData.user_id = input.user_id;
+							/* $scope.stockData.party_id = input.party_id; */
+							if(input.date) $scope.medicine_prescribeData.date = input.date;
+							$scope.medicine_prescribeData.medicine_used_date = input.medicine_used_date;
+							$scope.medicine_prescribeData.modified_date = input.modified_date;
+							$scope.medicine_prescribeData.stock_type = 0; 
+							angular.forEach(input.particular, function(value, key){
+								$scope.medicine_prescribeData.quantity =  "+" + value.quantity;
+								$scope.medicine_prescribeData.price =value.price;
+								
+								$rootScope.postData("medicine_used", angular.copy($scope.medicine_usedData),function(response){
+								});
 						}
 					})
 				},
@@ -242,6 +256,21 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
+		$scope.medicine_usedParams ={
+		 where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+			},
+			cols : ["*"]
+		}
+		$scope.medicineParams ={
+		 where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+			},
+			cols : ["*"]
+		}
+		
 		$scope.patientParams ={
 		 where : {
 				user_id : $rootScope.userDetails.id,
