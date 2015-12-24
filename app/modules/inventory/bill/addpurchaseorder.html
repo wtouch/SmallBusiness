@@ -1,12 +1,12 @@
 <div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions);">
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3 ng-if="!modalOptions.addPurchaseorder.id">Add Purchase Order</h3>
-	<h3 ng-if="modalOptions.addPurchaseorder.id" ng-init="modalOptions.totalCalculate(modalOptions)">Update Purchase Order</h3>
+	<h3 ng-if="modalOptions.addPurchaseorder.id" ng-init="modalOptions.totalCalculate(modalOptions,'addPurchaseorder')">Update Purchase Order</h3>
 </div>
 
 <div class="modal-body">
 	<form name="addPurchaseorderForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addPurchaseorderForm.$valid" id="addPurchaseorderForm">
-	{{modalOptions.addPurchaseorder}}
+	
 		<div class=" form-group">
 			<div ng-init="modalOptions.getData(false,false,'party', 'partyList',billParams,modalOptions)">
 			<label for="party_id" class="col-sm-2 control-label"> Select Vendor * </label>
@@ -29,7 +29,6 @@
 	
 	<div class="col-sm-12" ng-init="modalOptions.addPurchaseorder.particular = (modalOptions.addPurchaseorder.particular) ? modalOptions.addPurchaseorder.particular : []">
 		<form name="addPurchaseorderForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addPurchaseorderForm.$valid" id="addPurchaseorderForm">	
-			{{modalOptions.singleparticular}}
 			<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.party_id">
 				<table class="table table-bordered" >
 					<thead>
@@ -136,7 +135,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addPurchaseorderForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addPurchaseorder.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">	+Add This Particular
+				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addPurchaseorderForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addPurchaseorder.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions,'addPurchaseorder');">	+Add This Particular
 				</button>
 				<br/>
 			</div>													
@@ -162,13 +161,13 @@
 			<tbody >
 				<tr ng-repeat="x in modalOptions.addPurchaseorder.particular">
 					<td>{{$index + 1}}</td>
-					<td>{{x.particular_name}}</td>
+					<td>{{x.goods_name}}</td>
 					<td>{{x.goods_type}}</td>
 					<td>{{x.category}}</td>
 					<td>{{x.price}}</td>
 					<td>{{x.quantity}}</td>
 					<td>{{x.amount}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addPurchaseorder.particular, $index);modalOptions.totalCalculate(modalOptions);">X</button></td>
+					<td><button ng-click="modalOptions.removeObject(modalOptions.addPurchaseorder.particular, $index);modalOptions.totalCalculate(modalOptions,'addPurchaseorder');">X</button></td>
 				</tr>
 				<tr>
 					<td colspan="5"></td>

@@ -64,16 +64,22 @@ define([], function () {
 							dependencies.push(routeConfig.getControllersDirectory() + path + ctrl+".js");
 						}
 						if(fName == 'directive'){
-							dir = baseName[fName]+"Directive";
-							dependencies.push(routeConfig.getDirectivesDirectory() + path + dir+".js");
+							if(baseName[fName] != null || baseName[fName] != undefined){
+								dir = baseName[fName]+"Directive";
+								dependencies.push(routeConfig.getDirectivesDirectory() + path + dir+".js");
+							}
 						}
 						if(fName == 'service'){
-							serv = baseName[fName]+"Service";
-							dependencies.push(routeConfig.getServicesDirectory() + path + serv+".js");
+							if(baseName[fName] != null || baseName[fName] != undefined){
+								serv = baseName[fName]+"Service";
+								dependencies.push(routeConfig.getServicesDirectory() + path + serv+".js");
+							}
 						}
 						if(fName == 'filter'){
-							filter = baseName[fName]+"Filter";
-							dependencies.push(routeConfig.getServicesDirectory() + path + filter+".js");
+							if(baseName[fName] != null || baseName[fName] != undefined){
+								filter = baseName[fName]+"Filter";
+								dependencies.push(routeConfig.getServicesDirectory() + path + filter+".js");
+							}
 						}
 					}
 				}else{

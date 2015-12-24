@@ -6,7 +6,6 @@
 
 <div class="modal-body">
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
-	{{modalOptions.generateBill}}
 		<div class=" form-group">
 			<div ng-init="modalOptions.getData(false,false,'party', 'partyList',billParams,modalOptions)">
 			<label for="party_id" class="col-sm-2 control-label"> Select Vendor * </label>
@@ -29,7 +28,6 @@
 	
 	<div class="col-sm-12" ng-init="modalOptions.generateBill.particular = (modalOptions.generateBill.particular) ? modalOptions.generateBill.particular : []">
 		<form name="generateBillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="generateBillForm.$valid" id="generateBillForm">	
-			{{modalOptions.singleparticular}}
 			<div class="table-responsive" ng-if="modalOptions.generateBill.party_id">
 				<table class="table table-bordered" >
 					<thead>
@@ -46,12 +44,21 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" required 
+								<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
 								ng-change=""  placeholder="particulars Name"/>
+								
 								<span class="help-block" ng-show="generateBillForm.particular.$dirty && generateBillForm.particular.$invalid">
 									<span ng-show="generateBillForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
 								</span> 
 							</td>
+							
+							<script type="text/ng-template" id="customTemplate.html">
+								<a>
+									<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+									<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
+								</a>
+							</script>
+							
 							<td>
 								<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type"  required>
 									<option value="" selected>Select Type</option>
@@ -155,7 +162,7 @@
 			<tbody >
 				<tr ng-repeat="x in modalOptions.generateBill.particular">
 					<td>{{$index + 1}}</td>
-					<td>{{x.particular_name}}</td>
+					<td>{{x.goods_name}}</td>
 					<td>{{x.goods_type}}</td>
 					<td>{{x.category}}</td>
 					<td>{{x.price}}</td>
@@ -168,7 +175,6 @@
 					<td class="text-right"><strong>Sub Total</strong></td>
 					<td class="text-right">{{ modalOptions.generateBill.subtotal | number : 2}}</td>
 					<td></td>
-					<!-- <td ng-repeat="(key, value) in modalOptions.generateBill.tax">{{ value  | number : 2}}</td> -->
 				</tr>
 				<tr ng-repeat="(key, value) in modalOptions.generateBill.tax">
 					<td colspan="5"></td>
