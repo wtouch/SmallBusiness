@@ -32,6 +32,47 @@ define(['app'], function (app) {
 				}
 			}
 		]
+		$scope.billList = {
+			enableSorting: true,
+			enableFiltering: true,
+			columnDefs: [
+				{ name:'Sr.No', width:60,
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
+			enableFiltering: false,	
+				},
+				{
+					name:'bill_id',width:300,
+					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'bill\', \'billList\',true, grid.appScope.billParams)" ng-model="bill_id" placeholder="Equipment Name">',
+				},
+				{
+					name:'patient_name',width:300,
+					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'bill\', \'billList\',true, grid.appScope.billParams)" ng-model="patient_name" placeholder="Equipment Description">',
+				},
+				
+				{ name:'paid_amount',width:100,enableSorting: false,enableFiltering: false,
+				},
+				{ name:'due_amount',width:100,enableSorting: false,enableFiltering: false,
+				},
+				
+				{ name:'Manage', width:200,
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billList\',false,grid.appScope.billParams)" ng-model="status">'
+							 +'<option value="" selected>Status</option>' 
+							+'<option value="0">Deleted</option>'
+							+'<option value="1">Active</option>	'
+						+'</select>', 
+					filter: {
+					   type: uiGridConstants.filter.SELECT,  
+					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
+					  ]
+					} , 
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/addequipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Equipment Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ 
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					+ 
+					 '<a type="button" tooltip="Delete equipment" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'equipment\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+				}
+			]
+		};
 		
 		$scope.openModal = function(url,data){
 			var modalDefault = {
