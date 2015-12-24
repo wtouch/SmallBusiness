@@ -46,11 +46,27 @@ define(['app'], function (app) {
 				name : "Add Leaves",
 				events : {
 					click : function(){
-						return $scope.openstaffattendance("modules/campus/staff/addleaves.html");
+						return $scope.openstaffleaves("modules/campus/staff/addleaves.html");
+					}
+				}
+			},
+			{
+				name : "Payment",
+				events : {
+					click : function(){
+						return $scope.openstaffpayment("modules/campus/staff/addleaves.html");
+					}
+				}
+			},
+			{
+				name : "Holidays",
+				events : {
+					click : function(){
+						return $scope.openstaffholidays("modules/campus/staff/addholidays.html");
 					}
 				}
 			}
-		]
+			]
 		$scope.staffList={
 			enableSorting: true,
 			enableFiltering: true,
@@ -83,12 +99,13 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="city" placeholder="City">',
 				},
 				{ 
-					name:'designation',width:110,
-					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="designation" placeholder="Designation">',
+					name:'Designation',width:110,
+					filterHeaderTemplate: '<input id="joining_details" class="form-control" ng-change="grid.appScope.filter(\'joining_details\', joining_details, \'staff_view\', \'staffList\',true,grid.appScope.staffParams)" ng-model="joining_details" placeholder="Designation">',
+					cellTemplate:'<span>{{row.entity.joining_details.post}}</span>'
 				},
 				{ 
 					name:'dept_name',width:110,
-					filterHeaderTemplate: '<input id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'department\', \'staffList\',true,grid.appScope.staffParams)" ng-model="dept_name" placeholder="Department Name">',
+					filterHeaderTemplate: '<input id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'staff_view\', \'staffList\',true,grid.appScope.staffParams)" ng-model="dept_name" placeholder="Department Name">',
 				},
 				{ 
 					name:'contact_no',width:110,
@@ -137,13 +154,20 @@ define(['app'], function (app) {
 					country:data.country,
 					pincode:data.pincode,
 					designation:data.designation,
+					joining_details:data.joining_details,
+					education:data.education,
+					medical:data.medical,
+					age:data.age,
+					dob:data.dob,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					hobbies:data.hobbies,
 					joining_details :data.joining_details,
 					education:data.education,
 					medical:data.medical,
 					specialization:data.specialization,
 					experiance:data.experiance,
 					attachments:data.attachments,
+					dept_id:data.dept_id,
 					bank_details:data.bank_details,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
@@ -157,6 +181,7 @@ define(['app'], function (app) {
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
 								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff_view','staff',$Scope.staffParams);
 							}
 						})
 				},
@@ -179,7 +204,7 @@ define(['app'], function (app) {
 				
 			})
 		}
-					/* staff attendence */
+						/* staff attendence */
 													
 		$scope.openstaffattendance=function(url,data){
 			var modalDefault={
@@ -207,9 +232,9 @@ define(['app'], function (app) {
 				
 			})
 		}
-						/* staff Leaves */
+								/* staff Leaves */
 													
-		$scope.openstaffattendance=function(url,data){
+		$scope.openstaffleaves=function(url,data){
 			var modalDefault={
 				templateUrl:url,// apply template to modal
 				size:'lg'
@@ -236,20 +261,14 @@ define(['app'], function (app) {
 				
 			})
 		}
-										/* add hollidays */
-		$scope.openstaffattendance=function(url,data){
+
+						/* staff Payment */		
+		$scope.openstaffpayment=function(url,data){
 			var modalDefault={
 				templateUrl:url,// apply template to modal
 				size:'lg'
 			};
 			var modalOptions={
-				date : $scope.currentDate,
-				addholidays:(data)?{
-					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					
-						date : dataService.sqlDateFormate(false,"datetime"),
-						modified_date : dataService.sqlDateFormate(false,"datetime"),
-					
 				date : $scope.currentDate,
 				staffpayment:(data)?{
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
@@ -272,7 +291,35 @@ define(['app'], function (app) {
 				
 			})
 		}
-										
+							/* add hollidays */
+		$scope.openstaffholidays=function(url,data){
+			var modalDefault={
+				templateUrl:url,// apply template to modal
+				size:'lg'
+			};
+			var modalOptions={
+				date : $scope.currentDate,
+				addholidays:(data)?{
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+				}:{
+					user_id:$rootScope.userDetails.id,
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+				},	
+				
+				updateData : function(table, input, id){ 
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'staff','staffList',$scope.deptParams);
+						}
+					})
+				},
+				getData:$scope.getData,
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -311,6 +358,7 @@ define(['app'], function (app) {
 				}
 			});
 		}
+	
 		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
 			if(!params) params = {};
@@ -324,6 +372,8 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
+	};
+	
 	// Inject controller's dependencies
 	staffController.$inject = injectParams;
 	// Register/apply controller dynamically

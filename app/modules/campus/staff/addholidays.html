@@ -31,7 +31,63 @@
 				</span>
 			</div>		
 			<button type="submit" class="btn btn-success"  ng-disabled="addholidayForm.$invalid" ng-click="   modalOptions.postData('staffholidays',modalOptions.addholiday);modalOptions.ok()">Add Holidays</button>
-		</div>	
+		</div>		
 </form>	
-			<div class="col-sm-3">
-			<div class="col-sm-4" ng-if="type == 'monthly'">
+<div class="row">
+	<div class="col-sm-3">
+			<div class="bottomspace" ng-init="type = 'monthly'; calcDuration(type, duration);">
+				<label for="year" class="control-label" >View Holidays</label>
+					<select id="year" class="form-control" ng-model="type" ng-init="type = 'monthly'">	
+						<option value="monthly">Monthly Holidays</option>	
+						<option value="year">Yearly Holidays</option>
+			
+					</select>
+			</div>
+		</div>
+		
+		<div class="col-sm-4" ng-if="type == 'monthly'">
+			<div class="bottomspace">
+			<label for="monthly" class="control-label"></label>
+				<select id="monthly"  class="form-control " ng-model="duration" ng-init="duration = today.getMonth() + 1; calcDuration(type, duration)" ng-change="calcDuration(type, duration)"> 
+					<option value="1" selected>January</option>	
+					<option value="2">February</option>	
+					<option value="3">March</option>	
+					<option value="4">April</option>	
+					<option value="5">May</option>	
+					<option value="6">June</option>	
+					<option value="7">July</option>
+					<option value="8">August</option>
+					<option value="9">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+			</div>
+		</div> 
+	<div class="col-sm-4" ng-if="type == 'year'">
+			<div class="bottomspace">
+				<label for="year1" class="control-label">View  duration holidays</label>
+					<select id="year1" class="form-control" ng-model="duration" ng-init="duration = today.getFullYear(); calcDuration(type, duration)" ng-options="item for item in [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019]"
+					ng-change="calcDuration(type, duration)"> 
+						<option value="">Select Year</option>
+					</select> 
+			</div>
+		</div> 
+</div>
+<div class="table-responsive " ng-init="modalOptions.getData(false, false,'staffholidays', 'holidayList', modalOptions.holidayParams, modalOptions)">
+	<table class="table table-bordered" >
+		<thead>
+			<tr>
+				
+				<th class="col-sm-4">Date</th>
+				<th class="col-sm-4">Holiday Name</th>
+			</tr> 
+		</thead>
+		
+		<tbody >
+			<tr ng-repeat="x in modalOptions.holidayList">
+				<td>{{x.holiday_date}}</td>
+				<td>{{x.holiday_name}}</td>
+		</tbody>
+	</table>
+	</div>	
