@@ -1,35 +1,39 @@
 <h1>Award Details</h1>
-	<div class="form-group">
-						<label for="name" class="col-sm-2 control-label">Name *</label>
-						<div class="col-sm-9">
-							<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="campus.name" ng-pattern=" /^[a-zA-Z]+$/" required>
-							<span class="help-block" ng-show="CampusForm.name.$dirty && CampusForm.name.$invalid">
-								<span class="text-danger" ng-show="CampusForm.name.$error.required">Name is required.</span>
-								<span class="text-danger" ng-show="CampusForm.name.$error.pattern">Name is NAN</span>
-							</span>
-						</div>
-	</div>
+{{campus.awarddetails}}
+{{awarddetail}}
+<div>
+<form class="form-horizontal" name="awardForm" role="form" ng-submit="awardForm.$valid" novalidate="novalidate">
+			<div class="form-group">
+								<label for="aname" class="col-sm-2 control-label">Name *</label>
+								<div class="col-sm-9">
+									<input type="text" id="aname" class="form-control" name="aname" placeholder="Name" ng-model="awarddetail.name" ng-pattern=" /^[a-zA-Z]+$/" required>
+									<span class="help-block" ng-show="awardForm.aname.$dirty && awardForm.aname.$invalid">
+										<span class="text-danger" ng-show="awardForm.aname.$error.required">Name is required.</span>
+										<span class="text-danger" ng-show="awardForm.aname.$error.pattern">Name is NAN</span>
+									</span>
+								</div>
+			</div>
 	
-		<div class="form-group">
-			<label for="year" class="col-sm-2 control-label">Year *</label>
+		 <div class="form-group">
+			<label for="date" class="col-sm-2 control-label">Date *</label>
 				<div class="col-sm-9">
-					<input type="date" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="campus.date"  ng-init="campus.date=date"
-					datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="campus.date = date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
+					<input type="text" class="form-control " placeholder="DD-MM-YYYY" id="date" name="date" ng-model="awarddetail.date"
+					datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 				</div>
 		</div>
-		
 		<div class="form-group">
 			<label for="description" class="col-sm-2 control-label">Description *</label>
 						<div class="col-sm-9">
-							<textarea  class="form-control" id="description" ng-model="campus.address.description" name="description" placeholder="Enter description" ng-maxlength="75" required></textarea>
-							<p ng-hide="CampusForm.description.$error.maxlength">{{ 256 - campus.address.description.length + " Characters left"}}</p>
-							<span class="help-block" ng-show="CampusForm.description.$dirty &&  CampusForm.description.$invalid">
-								<span class="text-danger" ng-show="CampusForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-								<span class="text-danger" ng-show="CampusForm.description.$error.required">Description is required.</span>
+							<textarea  class="form-control" id="description" ng-model="awarddetail.description" name="description" placeholder="Enter description" ng-maxlength="75" required></textarea>
+							<p ng-hide="awardForm.description.$error.maxlength">{{ 256 - awarddetail.description.length + " Characters left"}}</p>
+							<span class="help-block" ng-show="awardForm.description.$dirty &&  awardForm.description.$invalid">
+								<span class="text-danger" ng-show="awardForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+								<span class="text-danger" ng-show="awardForm.description.$error.required">Description is required.</span>
 							</span>
 						</div>
-				</div>
-	<div class="col-sm-offset-2"><a class="btn btn-default btn-primary">+Add</a></div><br>
+		</div>
+		<div class="col-sm-offset-2"><a ng-click="addToObject(campus.awarddetails,'awarddetail',awarddetail)" class="btn btn-default btn-primary">+Add</a></div>
+</form>
 <div class="row">
 	<div class="col-sm-9 col-sm-offset-2">	
 		<div class="table-responsive">
@@ -40,20 +44,23 @@
 					<th>Name</th>
 					<th>Year</th>
 					<th>Description</th>
+					<th>Remove</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>fdgsdfg</td>
-					<td>sfgsfdg</td>
-					<td>sfdgsfdg</td>
-					<td>fgsgdfg</td>
+				<tr ng-repeat="x in campus.awarddetails">
+					<td>{{$index + 1}}</td>
+					<td>{{x.name}}</td>
+					<td>{{x.date}}</td>
+					<td>{{x.description}}</td>
+					<td><button ng-click="removeObject(campus.awarddetails, $index);">X</button></td>
 				</tr>
 			</tbody>
 			</table>
 		</div>
 	</div>
 </div>
-	<div class="col-sm-offset-2"><a ng-click="showFormPart('certificates')" class="btn btn-default btn-primary">NEXT</a></div>
+<div class="col-sm-offset-2"><a ng-click="showFormPart('certificates')" class="btn btn-default btn-primary">NEXT</a></div>
+</div>
 	
 	
