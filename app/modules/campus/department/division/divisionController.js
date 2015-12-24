@@ -46,11 +46,11 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'class_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'division_view\', \'divisionList\',true, grid.appScope.divParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'division_view\', \'divisionList\',true, grid.appScope.divParams)" ng-model="class_id" ng-options="item.class_name as item.class_name for item in grid.appScope.classList">' 
 				},		
 				{ 
 					name:'division_name',
-					filterHeaderTemplate: '<input id="division_name" class="form-control" ng-change="grid.appScope.filter(\'division_name\', division_name, \'division_view\', \'divisionList\',true,grid.appScope.divParams)" ng-model="division_name" placeholder="Division Name">',
+					filterHeaderTemplate: '<input id="division_name" class="form-control" ng-change="grid.appScope.filter(\'division_name\', division_name, \'division_view\', \'divisionList\',true,grid.appScope.divParams)" ng-model="division_name" placeholder="Division Name">'
 				},
 				{
 					name:'Manage', 
@@ -73,7 +73,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "division", "divisionList", $scope.divParams);
+				$scope.getData(false, $scope.currentPage, "division_view", "divisionList", $scope.divParams);
 			}
 		}
 		

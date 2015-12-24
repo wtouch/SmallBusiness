@@ -76,7 +76,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "subjects", "subjectList", $scope.subParams);
+				$scope.getData(false, $scope.currentPage, "subjects_view", "subjectList", $scope.subParams);
 			}
 		}
 		

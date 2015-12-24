@@ -74,7 +74,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "room", "roomList", $scope.roomParams);
+				$scope.getData(false, $scope.currentPage, "room_view", "roomList", $scope.roomParams);
 			}
 		}
 		
