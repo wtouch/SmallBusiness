@@ -74,16 +74,37 @@
 					</span>				
 				</div>
 			</div>
+			
 			<div class="form-group">
-				<label for="upload_report" class="col-sm-2 control-label">Upload Report</label>
-				<div class="col-sm-3">
-				<input type="file" id="upload_report" name="upload_report" class="form-control" ng-model="modalOptions.diagnostic.upload_report"  ng-pattern="/^[a-zA-Z]*$/" >
-				<span class="text-danger"  ng-show="addmedicineForm.upload_report.$error.pattern">please Enter Valid state</span>
-					<span class="help-block" ng-show="addmedicineForm.upload_report.$dirty && addmedicineForm.upload_report.$invalid">
-						<span ng-show="addmedicineForm.upload_report.$error.required" class="text-danger">days is required.</span>
-					</span>				
+				<label for="dignos_report" class="col-sm-3 control-label">Dignos Report</label>
+				<div class="col-sm-9">
+					<input type="file" id="dignos_report" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "modalOptions.uploadMultiple(diagnostic.dignos_report,  modalOptions.diagnostic.user_id + path,userInfo,'modalOptions.diagnostic')" ng-model="dignos_report">
+					<input type="hidden" ng-model="addbusiness.contact_profile.dignos_report">
 				</div>
 			</div>
+			<div class="form-group">						 
+				<div class="col-sm-9 col-sm-offset-3">
+					<span class="thumbs" ng-if="addbusiness.contact_profile.contact_photo">
+						<img class="img-thumbnail" ng-src="{{addbusiness.contact_profile.contact_photo.file_relative_path}}" ng-click="addbusiness.imgkey = key; "/>
+					</span>
+				</div>
+			</div>			
+	
+			<div class="form-group">{{modalOptions.userDetails.id}}
+				<label for="dignos_report" class="col-sm-2 control-label">Dignostic Report</label>
+				<input type="file" id="dignos_report" ng-file-select ng-multiple="true" accept="image/jpeg,image/png,image/gif" ng-file-change="modalOptions.uploadMultiple(diagnostic.dignos_report,modalOptions.diagnostic.user_id + path,modalOptions.userDetails.id,modalOptions.diagnostic)" ng-model="dignos_report">
+				<input type="hidden" ng-model="modalOptions.diagnostic.dignos_report">
+			</div>
+			
+			<div class="form-group">						 
+				<div class="col-sm-4 col-sm-offset-8">
+					<span class="thumbs" ng-repeat="(key, value) in diagnostic.dignos_report">
+						<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="diagnostic.imgkey = key; "/>
+						<span class="close" ng-click="removeImg(key, diagnostic.dignos_report)">X</span>
+					</span>
+				</div>
+			</div>			
+	
 		</form>	
 		<div class="form-group">
 			<div class="col-sm-offset-2 ">
@@ -117,7 +138,7 @@
 		</table>
 	<div class="modal-footer" >
 		<div class="col-sm-offset-2 col-sm-8">
-			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id"  ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Save </button>
+			<!-- <button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id"  ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Save </button> -->
 			
 			<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success"  ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update</button>
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>

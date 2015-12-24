@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
+    var injectParams = ['$scope','$location','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants','upload'];
     
     // This is controller for this view
-	var admissionController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var admissionController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,upload) {
 		
 		//global scope objects
 		$scope.invoice = true;
@@ -176,6 +176,17 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				uploadMultiple : function(files,path,userinfo, picArr){
+					upload.upload(files,path,userinfo,function(data){
+						if(data.status === 'success'){
+							picArr.diagnostic.dignos_report.push(data.data);
+						}else{
+							if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+							$notification[response.status]("", response.message);
+						}
+					});
+				},
+		
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
