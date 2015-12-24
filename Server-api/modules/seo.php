@@ -24,7 +24,7 @@
 		$db->setLimit($limit);
 		$business = $db->setJoinString("INNER JOIN", "business", array("user_id"=>$user.".id"));
 		$db->setWhere($where, $business);
-		$businessCols = array("id","testimonials", "job_careers", "news_coverage", "gallery", "custom_details");
+		$businessCols = array("id","testimonials", "job_careers", "news_coverage", "gallery","portfolio","team","custom_details");
 		$db->setColumns($business, $businessCols);
 		
 		$product = $db->setJoinString("RIGHT JOIN", "product", array("business_id"=>$business.".id"));
@@ -50,6 +50,10 @@
 			if($data['data'][0]['news_coverage']) $menus[] = array("name" => "Activities", "url" => "/activities", "status" => "1"); 
 			
 			if($data['data'][0]['gallery']) $menus[] = array("name" => "Gallery", "url" => "/gallery", "status" => "1");
+			
+			if($data['data'][0]['portfolio']) $menus[] = array("name" => "Portfolio", "url" => "/portfolio", "status" => "1");
+			
+			if($data['data'][0]['team']) $menus[] = array("name" => "Our Team", "url" => "/team", "status" => "1");
 			//print_r($data['data']);
 			if($data['data'][0]['custom_details']){
 				if(count($data['data'][0]['custom_details']) >=1 ){
