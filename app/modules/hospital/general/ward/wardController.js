@@ -50,6 +50,10 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="ward_name" class="form-control" ng-change="grid.appScope.filter(\'ward_name\', ward_name, \'ward\', \'wardList\',true, grid.appScope.wardParams)" ng-model="ward_name" placeholder="Ward name">',
 				},
 				{
+					name:'ward_charges',
+					filterHeaderTemplate: '<input id="ward_charges" class="form-control" ng-change="grid.appScope.filter(\'ward_charges\', ward_charges, \'ward\', \'wardList\',true, grid.appScope.wardParams)" ng-model="ward_charges" placeholder="Ward charges">',
+				},
+				{
 					name:'ward_description',
 					filterHeaderTemplate: '<input id="ward_description" class="form-control" ng-change="grid.appScope.filter(\'ward_description\', ward_description, \'ward\', \'wardList\',true, grid.appScope.wardParams)" ng-model="ward_description" placeholder="Ward description">',
 				},
@@ -95,6 +99,7 @@ define(['app'], function (app) {
 					user_id : data.user_id,
 					user_id : $rootScope.userDetails.id,
 					ward_name: data.ward_name,
+					ward_charges:data.ward_charges,
 					ward_description: data.ward_description,
 					ward_date:data.ward_date,
 					modified_date:data.modified_date,
@@ -137,7 +142,8 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id
+					user_id : $rootScope.userDetails.id,
+					status : 1,
 				},
 				cols : ["*"]
 			};

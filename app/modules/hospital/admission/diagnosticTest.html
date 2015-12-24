@@ -65,12 +65,12 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="upload_report" class="col-sm-2 control-label">upload_report</label>
+				<label for="test_description" class="col-sm-2 control-label">Test Description</label>
 				<div class="col-sm-8">
-				<textarea type="text" id="upload_report" name="upload_report" class="form-control" ng-model="modalOptions.diagnostic.upload_report" placeholder="Enter upload_report" ng-pattern="/^[a-zA-Z]*$/" required> </textarea>
-				<span class="text-danger"  ng-show="addmedicineForm.upload_report.$error.pattern">please Enter Valid state</span>
-					<span class="help-block" ng-show="addmedicineForm.upload_report.$dirty && addmedicineForm.upload_report.$invalid">
-						<span ng-show="addmedicineForm.upload_report.$error.required" class="text-danger">days is required.</span>
+				<textarea type="text" id="test_description" name="test_description" class="form-control" ng-model="modalOptions.diagnostic.test_description" placeholder="Enter Test Description" ng-pattern="/^[a-zA-Z]*$/" required> </textarea>
+				<span class="text-danger"  ng-show="addmedicineForm.test_description.$error.pattern">please Enter Valid state</span>
+					<span class="help-block" ng-show="addmedicineForm.test_description.$dirty && addmedicineForm.test_description.$invalid">
+						<span ng-show="addmedicineForm.test_description.$error.required" class="text-danger">days is required.</span>
 					</span>				
 				</div>
 			</div>
@@ -99,6 +99,7 @@
 					<th>Test Type</th>
 					<th>Test Name</th>
 					<th>Description</th>
+					<td>UploadReport</td>
 					<th>Remove</th>
 				</tr>
 			</thead>
@@ -108,8 +109,8 @@
 				<td>{{x.diagnostic_date}}</td>
 				<td>{{x.test_type}}</td>
 				<td>{{x.test_name}}</td>
+				<td>{{x.test_description}}</td>
 				<td>{{x.upload_report}}</td>
-				<td>{{x.days}}</td>
 				<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.diagnostic, $index)">X</button></td>
 			</tr>
 			</tbody>

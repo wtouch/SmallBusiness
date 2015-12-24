@@ -50,6 +50,13 @@ define(['app'], function (app) {
 							+'<option value="">Select ward</option>'
 						+'</select>',
 				cellTemplate : '<span>{{row.entity.ward_name}}</span>',
+				},
+				{ name:'ward_charges',enableSorting: false ,
+				width:150,
+				filterHeaderTemplate: '<select id="ward_charges" class="form-control" ng-change="grid.appScope.filter(\'ward_charges\', ward_charges, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="ward_charges" ng-options="item.ward_charges as item.ward_charges for item in grid.appScope.wardList">' 
+							+'<option value="">Select ward</option>'
+						+'</select>',
+				cellTemplate : '<span>{{row.entity.ward_charges}}</span>',
 					},
 				{
 					name:'bed_number',
@@ -105,7 +112,6 @@ define(['app'], function (app) {
 					bed_number: data.bed_number,
 					bed_description: data.bed_description,
 					bed_date:data.bed_date,
-					bed_charges:data.bed_charges,
 					bed_room:data.bed_room,
 					modified_date:data.modified_date,
 					date : data.date,
@@ -146,7 +152,8 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id
+					user_id : $rootScope.userDetails.id,
+					status : 1,
 				},
 				cols : ["*"]
 			};

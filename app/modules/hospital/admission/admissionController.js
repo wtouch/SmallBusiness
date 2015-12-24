@@ -49,10 +49,6 @@ define(['app'], function (app) {
 				    name:'patient_name',width:150,
 					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'admission_view\', \'admission\', true, grid.appScope.admissionParams)" ng-model="patient_name" placeholder="search name">',
                 },
-				/* {
-				    name:'patient_id',width:150,
-					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'admission_view\', \'patient\', true, grid.appScope.patientParams)" ng-model="patient_name" placeholder="search name">',
-                }, */
 				{
 					name:'name',width:150,
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'admission_view\', \'admission\',true, grid.appScope.admissionParams)" ng-model="name" placeholder="search">'
@@ -162,7 +158,8 @@ define(['app'], function (app) {
 					drug_sheet:data.drug_sheet,
 					diagnostic :data.diagnostic,
 					case_sheet :data.case_sheet,
-					medicine_prescribe :data.medicine_prescribe
+					medicine_prescribe :data.medicine_prescribe,
+					equipment_sheet :data.equipment_sheet
 					
 					} 
 					: {

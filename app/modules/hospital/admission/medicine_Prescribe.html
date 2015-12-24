@@ -55,7 +55,7 @@
 			<div class="form-group">
 				<label for="quantity" class="col-sm-2 control-label">Quantity</label>
 				<div class="col-sm-3">
-					<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.medicine_prescribe.quantity" placeholder="Enter Your quantity" ng-pattern="/^[a-zA-Z]*$/" required/>
+					<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.medicine_prescribe.quantity" placeholder="Enter Your quantity" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
 					<span class="text-danger"  ng-show="addmedicineForm.quantity.$error.pattern">please Enter Valid quantity</span>
 					<span class="help-block" ng-show="addmedicineForm.quantity.$dirty && addmedicineForm.quantity.$invalid">
 						<span ng-show="addmedicineForm.quantity.$error.required"class="text-danger">Quantity is required.</span>
@@ -63,7 +63,7 @@
 				</div>	
 				<label for="unit" class="col-sm-2 control-label">Unit*</label>
 			<div class="col-sm-3">
-			<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.medicine_prescribe.unit" placeholder="Enter unit" ng-pattern="/^[a-zA-Z]*$/" required>
+			<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.medicine_prescribe.unit" placeholder="Enter unit" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required>
 			<span class="text-danger"  ng-show="addmedicineForm.unit.$error.pattern">please Enter Valid state</span>
 				<span class="help-block" ng-show="addmedicineForm.unit.$dirty && addmedicineForm.unit.$invalid">
 					<span ng-show="addmedicineForm.unit.$error.required" class="text-danger">unit is required.</span>
@@ -92,7 +92,6 @@
 				<tr>
 					<th>sr.no</th>
 					<th>Date</th>
-					<th>Consultant Dr.</th>
 					<th>Medicine Name.</th>
 					<th>Quantity</th>
 					<th>Unit</th>
@@ -104,7 +103,6 @@
 					<tr ng-repeat="x in modalOptions.addadmission.medicine_prescribe">
 				<td>{{$index + 1}}</td>
 				<td>{{x.date}}</td>
-				<td>{{x.name}}</td>
 				<td>{{x.medicine_name}}</td>
 				<td>{{x.quantity}}</td>
 				<td>{{x.unit}}</td>
