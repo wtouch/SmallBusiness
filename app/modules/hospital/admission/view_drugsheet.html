@@ -34,7 +34,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<form class="form-horizontal" name="adddrug_sheetForm" role="form" ng-submit="adddrug_sheetForm.$valid" novalidate="novalidate">
+	<form class="form-horizontal" name="adddrug_sheetForm" ng-submit="adddrug_sheetForm.$valid"role="form" ng-submit="adddrug_sheetForm.$valid" novalidate="novalidate">
 		<div class="form-group">
 			<label  for="date" class="col-sm-2 control-label">Date*</label>
 			<div class="col-sm-8">
@@ -101,7 +101,7 @@
 	</form>	
 	<div class="form-group">
 		<div class="col-sm-offset-2 ">
-			<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.drug_sheet, 'drug_sheet', modalOptions)" >Add 
+			<button type="submit" class="btn btn-success"ng-disabled="adddrug_sheetForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addadmission.drug_sheet, 'drug_sheet', modalOptions)" >Add 
 			</button>
 		</div>
 	</div>
@@ -130,7 +130,7 @@
 </div>
 <div class="modal-footer" >
 	<div class="col-sm-offset-2 col-sm-8">
-		<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id" ng-disabled="adddrug_sheetForm.$invalid" ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Save Drugsheet</button>
+		<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id"  ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Save Drugsheet</button>
 		
 		<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success" ng-disabled="adddrug_sheetForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update Drugsheet</button>
 		<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
