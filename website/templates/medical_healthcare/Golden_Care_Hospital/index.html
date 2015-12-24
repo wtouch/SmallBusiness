@@ -45,7 +45,7 @@
 				a, .btn.btn-link, h1,h2,h3,h4{
 					color: {{data.template_params.background_color_dark}};
 				}
-				.form-control,.thumbnail,.about .table tbody tr th,.contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td{
+				.thumbnail,.about .table tbody tr th,.contact .table tbody tr th, .about .table tbody tr td, .contact .table tbody tr td{
 					border-color: {{data.template_params.background_color_dark}};
 				}
 				.sidebar .nav-pills > li, .navbar-default, .project ul.nav.navbar-nav > li ,.project .navbar {
@@ -109,8 +109,8 @@
 						<br/><br/>
 						<p class="cnct text-left"> <strong>Address :</strong> {{data.contact_profile.address}}
 						<br/><strong>Website :</strong> {{data.contact_profile.contact_website}}, <br/> <strong>Contact :</strong> 
-						{% if data.contact_profile.telephone %}
-							{{data.contact_profile.telephone}} 
+						{% if data.contact_profile.mobile %}
+							{{data.contact_profile.mobile}} 
 						{% endif %}
 						{% if data.contact_profile.alternate_telephone %}
 							,{{data.contact_profile.alternate_telephone}} 
