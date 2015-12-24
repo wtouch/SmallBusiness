@@ -87,7 +87,6 @@
 							<td>						
 								<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
 									ng-init="modalOptions.singleparticular.price = 1"
-									
 									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
 									
 								<span class="help-block" ng-show="addbillForm.price.$dirty && addbillForm.price.$invalid">
@@ -96,8 +95,7 @@
 								</span>
 							</td>
 							<td>
-								<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  
-											
+								<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  			
 								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" required />
 								<span class="help-block" ng-show="addbillForm.quantity.$dirty && addbillForm.quantity.$invalid">
 									<span ng-show="addbillForm.quantity.$error.required" class="text-danger">Quantity Required</span>
@@ -105,13 +103,13 @@
 								</span>
 							</td>			
 							<td>		
-								<input type="text" class="form-control" id="amount" name="amount" ng-model="modalOptions.singleparticular.amount" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required readonly  placeholder="Amount" />
+								<input type="text" class="form-control" id="amount" name="amount" ng-model="modalOptions.singleparticular.amount" ng-init="  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required readonly  placeholder="Amount" />
 								<span class="help-block" ng-show="addbillForm.amount.$dirty && addbillForm.amount.$invalid">
 									<span ng-show="addbillForm.amount.$error.required" class="text-danger">Total amount Required.</span>
 									<span ng-show="addbillForm.amount.$error.pattern" class="text-danger">Enter numbers only</span>
 								</span>
 							</td>
-							<td >				
+							<td>				
 								<button type="button" tooltip="Add Tax" id="tax" class="dropdown dropdown-toggle glyphicon glyphicon-plus" placeholder="Tax" name="tax" value="tax"  ng-click="isCollapsed1 = !isCollapsed1"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
 								</button> 
 									<span class="help-block" ng-show="addbillForm.tax.$dirty && addbillForm.tax.$invalid">

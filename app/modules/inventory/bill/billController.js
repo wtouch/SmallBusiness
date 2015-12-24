@@ -331,6 +331,7 @@ define(['app'], function (app) {
 				assignData : function(object, formObject){
 					formObject.goods_name = object.goods_name;
 					formObject.goods_type = object.goods_type;
+					formObject.price = object.price;
 					formObject.category = object.category;
 					console.log(object);
 				},
