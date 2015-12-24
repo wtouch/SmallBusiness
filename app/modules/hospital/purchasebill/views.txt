@@ -1,0 +1,79 @@
+for class view
+
+SELECT campus_department.dept_id,dept_name, class_id, class_name,marks,
+minimum_criteria,strength,castwise_distribution 
+from campus_class INNER JOIN campus_department 
+where campus_department.dept_id=campus_class.dept_id ;
+
+/*************************************************************/
+campus_division_view
+
+SELECT campus_department.dept_id,dept_name,
+campus_class.class_id,class_name, campus_division.div_id,division_name,campus_division.strength
+from campus_division INNER JOIN campus_class 
+ON campus_class.class_id = campus_division.class_id INNER JOIN campus_department 
+ON  campus_department.dept_id =campus_division.dept_id 
+
+/*************************************************************/
+campus_subjects_view
+
+SELECT campus_department.dept_id,dept_name,
+campus_class.class_id,class_name, campus_division.div_id,division_name,
+campus_subjects.sub_id ,sub_no,sub_name,campus_subjects.description as sub_description,syllabus
+from campus_subjects INNER JOIN campus_division
+ON campus_division.div_id=campus_subjects.div_id 
+INNER JOIN campus_class 
+ON campus_class.class_id = campus_subjects.class_id INNER JOIN campus_department 
+ON campus_department.dept_id=campus_subjects.dept_id
+
+/*************************************************************/
+campus_room_view
+
+SELECT  campus_building.build_id ,build_name,floor_no
+room_id,room_no
+from campus_room INNER JOIN campus_building 
+ON campus_building.build_id = campus_room.build_id 
+
+/*************************************************************/
+campus_fees_view
+
+SELECT campus_department.dept_id,dept_name,
+campus_class.class_id,class_name, campus_fees.fees_id,fees
+from campus_fees INNER JOIN campus_class 
+ON campus_class.class_id = campus_fees.class_id INNER JOIN campus_department 
+ON  campus_department.dept_id =campus_fees.dept_id 
+
+
+/*************************************************************/
+campus_transaction_view
+
+
+SELECT campus_account.acc_id,campus_account.acc_name,campus_transaction.tr_id,
+campus_transaction.type,campus_transaction.category,campus_transaction.credit_amt,campus_transaction.debit_amt,campus_transaction.due_amt,campus_transaction.description
+from campus_transaction INNER JOIN campus_account 
+where campus_account.acc_id=campus_transaction.acc_id ;
+
+/*************************************************************/
+campus_bill_view
+
+SELECT name, campus_bill.*
+from campus_bill INNER JOIN campus_vendor 
+on campus_vendor.vendor_id=campus_bill.vendor_id 
+
+
+
+/*************************************************************/
+campus_timetable_view
+
+
+SELECT dept_name , class_name, division_name ,sub_name, room_no,campus_timetable.*
+from campus_timetable INNER JOIN campus_department 
+on campus_department.dept_id=campus_timetable.dept_id 
+INNER JOIN campus_class
+on campus_class.class_id=campus_timetable.class_id 
+INNER JOIN campus_division
+on campus_division.div_id=campus_timetable.div_id
+INNER JOIN campus_subjects
+on campus_subjects.sub_id=campus_timetable.sub_id
+INNER JOIN campus_room
+on campus_room.room_id=campus_timetable.room_id
