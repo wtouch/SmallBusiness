@@ -88,7 +88,7 @@ define(['app'], function (app) {
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/assignEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >AE</span></a>'	
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/generate_bill.html\',row.entity.id)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span >GB</span></a>'	
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/generate_bill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span >GB</span></a>'	
 				}
 			]
 		};
@@ -102,6 +102,7 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				admission_date:$scope.currentDate,
 				patientParams: $scope.patientParams,
+				medicineParams: $scope.medicineParams,
 				view_admission : (data) ? {
 					id : data.id,
 					name : data.name,
@@ -132,7 +133,8 @@ define(['app'], function (app) {
 					pincode :data.pincode,
 					deposit:data.deposit,
 					complaints :data.complaints,
-					equipment_sheet :data.equipment_sheet
+					equipment_sheet :data.equipment_sheet,
+					medicine_prescribe :data.medicine_prescribe
 					//phone :data.phone,	
 			} : {
 					date : dataService.sqlDateFormate(),
@@ -170,6 +172,20 @@ define(['app'], function (app) {
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					admission_date :$scope.currentDate	
+				},
+				medicine_prescribe : (data) ? {
+					id : data.id,
+					user_id :data.user_id,
+					unit :data.unit,
+					quantity :data.quantity
+					
+					} 
+					: {
+					date : dataService.sqlDateFormate(),
+					user_id : $rootScope.userDetails.id,
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					
 				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){

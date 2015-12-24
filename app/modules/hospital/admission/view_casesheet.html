@@ -36,10 +36,10 @@
 	</table>
 	<form class="form-horizontal" name="addcase_sheetForm" role="form" ng-submit="addcase_sheetForm.$valid" novalidate="novalidate">
 		<div class="form-group">
-			<label  for="date" class="col-sm-2 control-label">Date*</label>
+			<label  for="case_sheet_date" class="col-sm-2 control-label">Date*</label>
 			<div class="col-sm-8">
 				<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="case_sheet_date" name="case_sheet_date" ng-model="modalOptions.addcase_sheet.case_sheet_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.addcase_sheet.staff_date,10); modalOptions.sqlDateFormat(modalOptions.addcase_sheet.staff_date, modalOptions.addcase_sheet.staff_date)"/>	
+					<input type="text" class="form-control " placeholder="Date" id="case_sheet_date" name="case_sheet_date" ng-model="modalOptions.case_sheet.case_sheet_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.case_sheet.staff_date,10); modalOptions.sqlDateFormat(modalOptions.case_sheet.staff_date, modalOptions.case_sheet.staff_date)"/>	
 					
 					<span class="input-group-btn">
 					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
@@ -172,42 +172,12 @@
 			</tr>
 		</tbody>
 	</table>
-	<!-- <div class="form-group">
-		<div class="col-sm-offset-2 ">
-			<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.case_sheet, 'case_sheet', modalOptions)">Add 
-			</button>
-			
-		</div>
-	</div> -->
-	<!-- <table class="table table-bordered" >
-		<thead>
-			<tr>
-				<th>sr.no</th>
-				<th>Date</th>
-				<th>Consulting</th>
-				<th>Prescription</th>
-				<th>Remark</th>
-				<th>Remove</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="x in modalOptions.addadmission.case_sheet">
-					<td>{{$index + 1}}</td>
-					<td>{{x.case_sheet_date}}</td>
-					<td>{{x.Consulting}}</td>
-					<td>{{x.Prescription}}</td>
-					<td>{{x.Remark}}</td>
-					<td>{{x.Remove}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.case_sheet, $index)">X</button></td>
-				</tr>
-		</tbody>
-	</table>
-</div> -->
+
 <div class="modal-footer" >
 	<div class="col-sm-offset-2 col-sm-8">
-		<button type="submit" class="btn btn-success" ng-if="!modalOptions.addpatient.id" ng-disabled="addpatientForm.$invalid" ng-click="modalOptions.postData('patient',modalOptions.addpatient);modalOptions.ok()">Save Casesheet</button>
+		<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id" ng-disabled="addcase_sheetForm.$invalid" ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Save Casesheet</button>
 		
-		<button type="submit" ng-if="modalOptions.addpatient.id" class="btn btn-success" ng-disabled="addpatientForm.$invalid" ng-click="modalOptions.updateData('patient',modalOptions.addpatient,modalOptions.addpatient.id);modalOptions.ok()">Update Casesheet</button>
+		<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success" ng-disabled="addcase_sheetForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update Casesheet</button>
 		<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
 	</div>
 </div>
