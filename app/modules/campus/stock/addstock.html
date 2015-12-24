@@ -1,8 +1,8 @@
 <div class="modal-header">
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	
-	<h3 ng-if="!modalOptions.addstock.id">Add stock</h3>
-	<h3 ng-if="modalOptions.addstock.id" >Update stock</h3>
+	<h3 ng-if="!modalOptions.addstock.id" class="text-center">Add stock</h3>
+	<h3 ng-if="modalOptions.addstock.id" class="text-center" >Update stock</h3>
 </div>
 
 <div class="modal-body">
@@ -29,10 +29,10 @@
 				</select>	
 			</div>
 			</div>
-			<label  for="generated_date" class="col-sm-2 control-label">stock Date *</label>
+			<!-- <label  for="stock_date" class="col-sm-2 control-label">stock Date *</label>
 			<div class="col-sm-4">
 			<input type="text" class="form-control " placeholder=" stock Date" id="stock_date" name="stock_date" ng-model="modalOptions.addstock.stock_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addstock.stock_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
-			</div>
+			</div> -->
 		</div>
 	</form>
 
@@ -206,9 +206,11 @@
 			</div>
 		</div>
 <div class="modal-footer">
-	<button type="submit" ng-if="modalOptions.addstock.id"  class="btn btn-success" ng-click="modalOptions.updateData('stock',modalOptions.addstock,modalOptions.addstock.id); modalOptions.ok()">Update Stock LIst</button>
 	
 	<button type="submit"  class="btn btn-success" ng-disabled="generalForm.$invalid"  ng-if="!modalOptions.addstock.id" ng-click="modalOptions.postData('stock',modalOptions.addstock); modalOptions.ok()">Add stock</button>
+	
+	<button type="submit" ng-if="modalOptions.addstock.id"  class="btn btn-success" ng-click="modalOptions.updateData('stock',modalOptions.addstock,modalOptions.addstock.id); modalOptions.ok()">Update Stock LIst</button>
+	
 	
 	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
 </div>
