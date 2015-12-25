@@ -34,7 +34,6 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Staff",
-				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/inventory/staff/addstaff.html");
@@ -43,7 +42,6 @@ define(['app'], function (app) {
 			},
 			{
 				name : "Add Attendance",
-				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
 						return $scope.openstaffattendance("modules/inventory/staff/staffattendence.html");
@@ -52,7 +50,6 @@ define(['app'], function (app) {
 			},
 			{
 				name : "Add Leaves",
-				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
 						return $scope.openAddleaves("modules/inventory/staff/addleaves.html");
@@ -61,7 +58,6 @@ define(['app'], function (app) {
 			},
 			{
 				name : "Staff Payment",
-				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
 						return $scope.openStaffpayment("modules/inventory/staff/staffpayment.html");
@@ -70,7 +66,6 @@ define(['app'], function (app) {
 			},
 			{
 				name : "Holidays",
-				path : "#/dashboard/inventory/staff/",
 				events : {
 					click : function(){
 						return $scope.openAddholiday("modules/inventory/staff/addholidays.html");
@@ -96,36 +91,36 @@ define(['app'], function (app) {
 				
 					{
 				    name:'name',
-					width:200,
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="Name">',
+					width:150,
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true, grid.appScope.staffParams)" ng-model="name" placeholder="Name">',
                 },
 				{
 				    name:'email',
 					width:130,
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'staff\', \'staff\',true)" ng-model="email" placeholder="Email">'
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'staff\', \'staff\',true,grid.appScope.staffParams)" ng-model="email" placeholder="Email">'
                 },
 				
 			   {
 				    name:'address',
 					width:130,
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true)" ng-model="address" placeholder="Address">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true, grid.appScope.staffParams)" ng-model="address" placeholder="Address">',
                 },
 				
 				
 				{
 				 name:'city',
 				 width:90,
-				 filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true)" ng-model="city" placeholder="City">', 
+				 filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true, grid.appScope.staffParams)" ng-model="city" placeholder="City">', 
                 },
 				{ 
 				  name:'designation',
 				  width:100,
-					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'staff\', \'staff\',true)" ng-model="designation" placeholder="Designation">'
+					filterHeaderTemplate: '<input id="designation" class="form-control" ng-change="grid.appScope.filter(\'designation\', designation, \'staff\', \'staff\',true,grid.appScope.staffParams)" ng-model="designation" placeholder="Designation">'
 				},
 				{ 
 				  name:'department',
 				  width:120,
-				  filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'staff\', \'staff\',true)" ng-model="department">'
+				  filterHeaderTemplate: '<select id="department" class="form-control" ng-change="grid.appScope.filter(\'department\', department, \'staff\', \'staff\',true, grid.appScope.staffParams)" ng-model="department">'
 							+'<option value="" selected>--Select--</option>' 
 							+'<option value="IT">IT</option>'
 							+'<option value="CIVIL">CIVIL</option>'
@@ -141,9 +136,9 @@ define(['app'], function (app) {
 				
 				 { 
 				 name:'Manage',
-				 width:250,
-				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
-							 +'<option value="" selected>--Select--</option>' 
+				 width:300,
+				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\',false, grid.appScope.staffParams)" ng-model="status">'
+							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
 						+'</select>', 
@@ -162,10 +157,19 @@ define(['app'], function (app) {
 					+'<a ng-click="grid.appScope.openViewattendance(\'modules/inventory/staff/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/addstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					
-					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+ '<a type="button" tooltip="Delete Staff" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
 		};
+		
+		$scope.callbackColChange = function(response){
+			console.log(response);
+			if(response.status == "success"){
+				$scope.getData(false, $scope.currentPage, "staff", "staff", $scope.staffParams);
+			}
+		}
+		
+		
 		$scope.openModal = function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
@@ -205,12 +209,14 @@ define(['app'], function (app) {
 					UAN_no:data.UAN_no,
 					marital_status:data.marital_status,
 					staff_type:data.staff_type,
-				
-					modified_date:data.modified_date,
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					registration_date:data.registration_date
-				
-								} : {
-						date : dataService.sqlDateFormate()
+					} :
+					{
+					date : dataService.sqlDateFormate(),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+					marital_status :1,
+					user_id : $rootScope.userDetails.id
 					}, 
 				
 					postData : function(table, input){
@@ -690,11 +696,12 @@ define(['app'], function (app) {
 			});
 		}
 		
-		$scope.filter = function(col, value, table, subobj, search){
+		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
+			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
-				angular.extend($scope.params, response);
-				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
+				dataService.extendDeep($scope.params, params, response);
+				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
 		}
 		$scope.orderBy = function(col, value, table, subobj){

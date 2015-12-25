@@ -6,7 +6,6 @@
 </div>
 <div class="modal-body">
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
-	{{modalOptions.addBill}}
 		<div class=" form-group">
 			<div ng-init="modalOptions.getData(false,false,'party', 'partyList',billParams,modalOptions)">
 			<label for="party_id" class="col-sm-2 control-label"> Select Vendor * </label>
@@ -28,8 +27,7 @@
 <div class="row">
 	
 	<div class="col-sm-12" ng-init="modalOptions.addBill.particular = (modalOptions.addBill.particular) ? modalOptions.addBill.particular : []">
-		<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">	
-			{{modalOptions.singleparticular}}
+		<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">
 			<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
 				<table class="table table-bordered" >
 					<thead>
@@ -135,7 +133,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addbillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addBill.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">	+Add This Particular
+				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addbillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addBill.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions,'addBill');">	+Add This Particular
 				</button>
 				<br/>
 			</div>													
@@ -167,21 +165,19 @@
 					<td>{{x.price}}</td>
 					<td>{{x.quantity}}</td>
 					<td>{{x.amount}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index);modalOptions.totalCalculate(modalOptions);">X</button></td>
+					<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index);modalOptions.totalCalculate(modalOptions,'addBill');">X</button></td>
 				</tr>
 				<tr>
 					<td colspan="5"></td>
 					<td class="text-right"><strong>Sub Total</strong></td>
 					<td class="text-right">{{ modalOptions.addBill.subtotal | number : 2}}</td>
 					<td></td>
-					<!-- <td ng-repeat="(key, value) in modalOptions.addBill.tax">{{ value  | number : 2}}</td> -->
 				</tr>
 				<tr ng-repeat="(key, value) in modalOptions.addBill.tax">
 					<td colspan="5"></td>
 					<td class="text-right"><strong>{{key}}</strong></td>
 					<td class="text-right">{{ value  | number : 2}}</td>
 					<td></td>
-					<!-- <td ng-repeat="(key, value) in modalOptions.addBill.tax">{{ value  | number : 2}}</td> -->
 				</tr>
 				<tr>
 					<td colspan="5"></td>

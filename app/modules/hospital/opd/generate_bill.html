@@ -3,8 +3,9 @@
 	<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('bill')">Print</button>
 		<h3 class="text-center">BILL</h3>
 </div>
- {{modalOptions.admission}} 
-<div class="modal-body"  ng-init="modalOptions.getData(false, false,'admission_view', 'admission', modalOptions.admissionParams, modalOptions)">
+<!--  {{modalOptions.admission[0]}}  -->
+<div class="modal-body"  ng-init="modalOptions.getData(false, false,'opd_view', 'opd', modalOptions.opdParams, modalOptions)">
+<div id="bill">
 	<label>Patient Details:</label><br><br>
 	<table class="table table-hover table-responsive table-bordered">
 			<tbody>
@@ -12,129 +13,105 @@
 					
 				  <td><b>Admission Date</b></td>
 				 <td colspan='4'>						
-					{{modalOptions.view_admission.admission_date}}
+					{{modalOptions.opd[0].admission_date}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Name </b></td>
 				 <td>						
-					{{modalOptions.view_admission.patient_name}}
+					{{modalOptions.opd[0].patient_name}}
 				 </td>	
 				 <td><b>Gender</b></td>
 				 <td>						
-					{{modalOptions.view_admission.gender}}
+					{{modalOptions.opd[0].gender}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Mobile</b></td>
 				 <td>						
-					{{modalOptions.view_admission.mobile}}
+					{{modalOptions.opd[0].mobile}}
 				 </td>	
 				 <td><b>Address</b></td>
 				 <td>						
-					{{modalOptions.view_admission.address}}
+					{{modalOptions.opd[0].address}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Date of Birth</b></td>
 				 <td>						
-					{{modalOptions.view_admission.dob}}
+					{{modalOptions.opd[0].dob}}
 				 </td>	
 				  <td><b>Age</b></td>
 				 <td>						
-					{{modalOptions.view_admission.age}}
+					{{modalOptions.opd[0].age}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Ward</b></td>
 				 <td>						
-					{{modalOptions.view_admission.dob}}
+					{{modalOptions.opd[0].ward_name}}
 				 </td>	
 				  <td><b>Bed No</b></td>
 				 <td>						
-					{{modalOptions.view_admission.age}}
+					{{modalOptions.opd[0].bed_number}}
 				 </td>	
 			</tr>
 			<tr>
-				 <td><b>Date of Birth</b></td>
-				 <td>						
-					{{modalOptions.view_admission.dob}}
-				 </td>	
-				  <td><b>Age</b></td>
-				 <td>						
-					{{modalOptions.view_admission.age}}
-				 </td>	
-			</tr><tr>
 				 <td><b>Consultant Dr.</b></td>
 				 <td colspan='3'>						
-					{{modalOptions.view_admission.dob}}
+					{{modalOptions.opd[0].name}}
 				 </td>	
 			</tr>
 		</tbody>
-	</table>
-		
+	</table>	
 	<table class="table table-hover table-responsive table-bordered">
 		<thead>
 			<th>Sr.No</th>
-			<th>Description</th>
 			<th>Date</th>
-			<th>Quantity</th>
-			<th>Price</th>
+			<th>Description</th>
+			<th>Doctor fees</th>
 			<th>Net Amount</th>
 		</thead>
 		<tbody>
 			<tr>
 				<td>1</td>
+				<td>{{modalOptions.opd[0].admission_date}}</td>
 				<td>Bed Charges</td>
-					<td></td>
-						<td></td>
-							<td></td>
-								<td></td>
+				<td>{{modalOptions.opd[0].charges}}</td>
+				<td></td>
 			</tr>
 			<tr>
-				<td>2</td>
-				<td>Equipment Charges</td>
-					<td></td>
-						<td></td>
-							<td></td>
-								<td></td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>Medicine Charges</td>
-					<td></td>
-						<td></td>	<td></td>	<td></td>
-			</tr>
-			<tr>
-				<td>4</td>
-				<td>Dr. Fees</td>	<td></td>	<td></td>	<td></td>	<td></td>
-			</tr>
-			<tr>
-				<th  colspan='5' class="text-right">Total</th>
+				<th colspan='4' class="text-right">Total</th>
 				<td></td>
 			</tr>
 		</tbody>
 	</table>
-
-<label>Deposit Details:</label><br><br>
+<label>Medicine Details:</label><br><br>
 <table class="table table-hover table-responsive table-bordered">
+<thead>
+			<th>Sr.No</th>
+			<th>Date</th>
+			<th>Medicine Name</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>Net Amount</th>
+		</thead>
 		<tbody>
-			<tr>
-				<th colspan='5' class="text-right">Deposit</th>
+			<tr>   <!-- ng-repeat -->
+				<td>1</td>
+				<td>{{}}</td>
+				<td></td>
+				<td>{{}}</td>
+				<td></td>
 				<td></td>
 			</tr>
 			<tr>
-				<th colspan='5'  class="text-right">Net Amount</th>
+				<th colspan='5' class="text-right">Total</th>
 				<td></td>
-			</tr>
-			<tr>
-				<th colspan='6'>Amount in Word:</th>
-			
 			</tr>
 		</tbody>
-		
-
 </table>
+
 <div class="row">
 	<div class="col-sm-12">
 		<p><strong>Please Note :</strong></p>
@@ -144,5 +121,6 @@
 		</ul>
 		<p class="text-center"><strong>"Incase you have any queries please contact IP Billing @ Ext : 7682."</strong></p>
 	</div>
+</div>
 </div>
 </div>

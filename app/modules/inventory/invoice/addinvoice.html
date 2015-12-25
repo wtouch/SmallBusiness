@@ -8,8 +8,8 @@
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="generalForm.$valid" id="generalForm">
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
-				<label for="party_id" class="col-sm-2 control-label"> Select Party * </label>
-				<div class="col-sm-4">
+				<label for="party_id" class="col-sm-2 control-label">Select Party *</label>
+				<div class="col-sm-3">
 					<select id="party_id" class="form-control" ng-model="modalOptions.addinvoice.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter : {type:'client'}" required>
 						<option value="">Select Party</option>
 					</select>
@@ -19,8 +19,9 @@
 				</div>
 			</div>
 			
+			
+			<label  for="generated_date" class="col-sm-3 control-label">Generate Date*</label>
 			<div class="col-sm-4">
-			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
 				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addinvoice.generated_date"  
 				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
@@ -138,7 +139,7 @@
 					</table>
 				</div>
 				<div class="col-sm-4">
-						<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars,'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">+Add This Particular</button>							
+						<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars,'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions,'addinvoice');">+Add This Particular</button>							
 				</div>
 			</form>
 		</div>
@@ -167,7 +168,7 @@
 				<td class="text-right">{{x.price}}</td>
 				<td class="text-right">{{x.quantity}}</td>
 				<td class="text-right">{{x.amount}}</td>
-				<td><a ng-click="modalOptions.removeObject(modalOptions.addinvoice.particulars, $index);modalOptions.totalCalculate(modalOptions);"><span class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a ng-click="modalOptions.removeObject(modalOptions.addinvoice.particulars, $index);modalOptions.totalCalculate(modalOptions,'addinvoice');"><span class="glyphicon glyphicon-remove"></span></a></td>
 			</tr>
 			<tr>
 					<td colspan="5"></td>

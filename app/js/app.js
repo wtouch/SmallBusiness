@@ -185,11 +185,9 @@ define(['angular',
 			if(!parentPath) parentPath = "";
 			angular.forEach(moduleRoutes, function(value, key){
 				//console.log(value.controller,value.template,value.label);
-				if(value.directive){
-					$routeProviderReference.when(parentPath + value.path, route.resolve({controller: value.controller,template: value.template,label: value.label, directive : value.directive}, value.modulePath));
-				}else{
-					$routeProviderReference.when(parentPath + value.path, route.resolve({controller: value.controller,template: value.template,label: value.label}, value.modulePath));
-				}
+				//if(value.directive){
+					$routeProviderReference.when(parentPath + value.path, route.resolve({controller: value.controller,template: value.template,label: value.label, directive : value.directive, service : value.service, filter : value.filter}, value.modulePath));
+				//}
 			})
 		}
 		//$routeProviderReference.when("/dashboard/inventory", route.resolve({controller: "inventory",template: "inventory",label: "inventory"}, "inventory/"));

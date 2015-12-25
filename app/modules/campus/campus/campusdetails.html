@@ -2,7 +2,7 @@
 	<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">Name *</label>
 			<div class="col-sm-9">
-				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="campus.name" ng-pattern=" /^[a-zA-Z]+$/" required>
+				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="campus.name" ng-pattern=" /^[a-zA-Z ]+$/" required>
 				<span class="help-block" ng-show="CampusForm.name.$dirty && CampusForm.name.$invalid">
 					<span class="text-danger" ng-show="CampusForm.name.$error.required">Name is required.</span>
 					<span class="text-danger" ng-show="CampusForm.name.$error.pattern">Name is NAN</span>
@@ -10,21 +10,28 @@
 			</div>
 	</div>
 		<div class="form-group">
-					<label for="logo" class="col-sm-2 control-label">Logo *</label>
-						<div class="col-sm-4">
-							<input type="file" class="form-control " placeholder="upload file" id="upload_file" name="upload_file" ng-model="singleparticular.upload_file" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
-							<span class="help-block" ng-show="CampusForm.upload_file.$dirty && CampusForm.upload_file.$invalid">
-							<span class="text-danger" ng-show="CampusForm.upload_file.$error.required">Required Field.</span>
-						</div>
-					<label for="year" class="col-sm-1 control-label">Establishment Year *</label>
-						<div class="col-sm-4">
-						<input type="date" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="campus.date"  ng-init="campus.date=date"
-						datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="campus.date = date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
+			<label for="campus_logo" class="col-sm-2 control-label">Logo</label>
+			<div class="col-sm-4">
+				<input type="file" id="campus_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "upload(campus_logo, campus.user_id + path,userInfo,'campus_logo')" ng-model="campus_logo">
+				<input type="hidden" ng-model="campus.campus_logo">
+			</div>
+			
+		</div>
+		<div class="form-group">						 
+				<div class="col-sm-4 col-sm-offset-2">
+					<span class="thumbs" ng-if="campus.campus_logo">
+						<img class="img-thumbnail" ng-src="{{campus.campus_logo.file_relative_path}}" ng-click="campus.imgkey = key; "/>
+					</span>
+				</div>
+			</div>	
+			<div class="form-group">
+					<label for="date" class="col-sm-2 control-label">Establishment Date *</label>
+						<div class="col-sm-9">
+						<input type="text" class="form-control " placeholder="DD-MM-YYYY" id="date" name="date" ng-model="campus.establishment_date"
+						datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 						</div>  
-				</div> 
-				
-				
-				 <div class="form-group">	
+			</div>
+			<div class="form-group">	
 					<label  for="email" class="col-sm-2 control-label">Email *</label>
 						<div class="col-sm-4">
 							<input type="Email" class="form-control" id="email" ng-model="campus.email" name="email" placeholder="Enter Email" ng-blur="checkuserAvailable('email', campus.email)" required >
@@ -40,14 +47,12 @@
 						</div>
 					<label  for="email" class="col-sm-1 control-label">Website *</label>
 						<div class="col-sm-4">
-							<input type="hidden" ng-model="Campus.adduser_date">
-							<input type="hidden" ng-model="Campus.status" ng-init="Campus.status = 1" value="{{Campus.status}}">
-							<input firstname type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="Campus.name" required>
+							<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="campus.website" required>
 							<span class="help-block" ng-show="CampusForm.name.$dirty && CampusForm.name.$invalid">
 								<span class="text-danger" ng-show="CampusForm.name.$error.required">Website is required.</span>
 							</span>
 						</div>
-				</div> 
+			</div> 
 				
 				<div class="form-group">
 					<label for="phone" class="col-sm-2 control-label">Phone *</label>
@@ -131,7 +136,7 @@
 				<div class="form-group">
 					<label for="university_no" class="col-sm-2 control-label">University No *</label>
 						<div class="col-sm-9">
-							<input type="text" id="university_no" name="university_no" class="form-control" ng-model="campus.address.university_no" placeholder="Enter University Number" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+							<input type="text" id="university_no" name="university_no" class="form-control" ng-model="campus.university_no" placeholder="Enter University Number" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
 							<span ng-show="CampusForm.university_no.$error.pattern && (CampusForm.university_no.$dirty || submitted)" class="text-danger">Enter a valid No</span>
 							</span>
 						</div>						
@@ -156,7 +161,7 @@
 				 <div class="form-group">
 					<label for="campus_code" class="col-sm-2 control-label">Campus Code *</label>
 						<div class="col-sm-9">
-							<input ng-disabled="readOnly" type="text" id="campus_code" name="campus_code" class="form-control" ng-model="Campus.address.campus_code" placeholder="Enter Valid No" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
+							<input ng-disabled="readOnly" type="text" id="campus_code" name="campus_code" class="form-control" ng-model="campus.address.campus_code" placeholder="Enter Valid No" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6"  ng-minlength="6">
 							<span class="help-block" ng-show="CampusForm.campus_code.$dirty && CampusForm.campus_code.$invalid">
 								<span ng-show="CampusForm.campus_code.$error.pattern && (CampusForm.campus_code.$dirty || submitted)" class="text-danger">Enter a valid No</span>
 							</span>
@@ -165,7 +170,7 @@
 				<div class="form-group">
 						<label for="founder" class="col-sm-2 control-label">Founder *</label>
 						<div class="col-sm-9">
-							<input type="text" id="founder" class="form-control" name="founder" placeholder="founder" ng-model="campus.founder" ng-pattern=" /^[a-zA-Z]+$/" required>
+							<input type="text" id="founder" class="form-control" name="founder" placeholder="founder" ng-model="campus.founder" ng-pattern=" /^[a-zA-Z ]+$/" required>
 							<span class="help-block" ng-show="CampusForm.founder.$dirty && CampusForm.founder.$invalid">
 								<span class="text-danger" ng-show="CampusForm.founder.$error.required">Name is required.</span>
 							</span>
@@ -175,7 +180,7 @@
 				<div class="form-group">
 					<label for="principal" class="col-sm-2 control-label">Principal *</label>
 						<div class="col-sm-9">
-							<input type="text" id="principal" class="form-control" name="principal" placeholder="principal" ng-model="campus.principal" ng-pattern=" /^[a-zA-Z]+$/" required>
+							<input type="text" id="principal" class="form-control" name="principal" placeholder="principal" ng-model="campus.principal" ng-pattern=" /^[a-zA-Z ]+$/" required>
 							<span class="help-block" ng-show="CampusForm.principal.$dirty && CampusForm.principal.$invalid">
 								<span class="text-danger" ng-show="CampusForm.principal.$error.required">Name is required.</span>
 							</span>

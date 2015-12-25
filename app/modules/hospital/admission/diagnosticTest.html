@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3 class="text-center">Diagnostic Test</h3>
 </div>
 <div class="modal-body" ng-init="modalOptions.addadmission.diagnostic = (modalOptions.addadmission.diagnostic) ? modalOptions.addadmission.diagnostic : []">{{modalOptions.diagnostic}}
@@ -67,7 +67,7 @@
 			<div class="form-group">
 				<label for="test_description" class="col-sm-2 control-label">Test Description</label>
 				<div class="col-sm-8">
-				<textarea type="text" id="test_description" name="test_description" class="form-control" ng-model="modalOptions.diagnostic.test_description" placeholder="Enter Test Description" ng-pattern="/^[a-zA-Z]*$/" required> </textarea>
+				<textarea type="text" id="test_description" name="test_description" class="form-control" ng-model="modalOptions.diagnostic.test_description" placeholder="Enter Test Description"required> </textarea>
 				<span class="text-danger"  ng-show="addmedicineForm.test_description.$error.pattern">please Enter Valid state</span>
 					<span class="help-block" ng-show="addmedicineForm.test_description.$dirty && addmedicineForm.test_description.$invalid">
 						<span ng-show="addmedicineForm.test_description.$error.required" class="text-danger">days is required.</span>

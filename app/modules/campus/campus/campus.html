@@ -13,9 +13,9 @@
 						<a ng-click="showFormPart('certificates')">Certificates Details</a>
 					</li>
 			</ul>
-			
-		<div class="col-sm-12">	
+		<div class="col-sm-12">
 			<form class="form-horizontal" name="CampusForm" role="form" ng-submit="CampusForm.$valid" novalidate="novalidate">
+			{{campus}}
 				<ng-include ng-show=" formPart=='campusdetails'" src="'modules/campus/campus/campusdetails.html'"></ng-include> 
 				<ng-include  ng-show=" formPart=='awarddetails'" src="'modules/campus/campus/awarddetails.html'"></ng-include>
 				<ng-include  ng-show=" formPart=='certificates'" src="'modules/campus/campus/certificates.html'"></ng-include>
