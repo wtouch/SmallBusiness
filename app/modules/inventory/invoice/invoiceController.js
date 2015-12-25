@@ -1,10 +1,10 @@
 'use strict';
 
 define(['app'], function (app) {
-    var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants'];
+    var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants', 'invoiceService'];
     
     // This is controller for this view
-	var invoiceController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var invoiceController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants,invoiceService) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		$scope.invoice=true;
@@ -29,7 +29,6 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Invoice",
-				path : "#/dashboard/inventory/invoice",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/inventory/invoice/addinvoice.html");
@@ -38,7 +37,6 @@ define(['app'], function (app) {
 			},
 			{
 				name : "Add Quotation",
-				path : "#/dashboard/inventory/invoice",
 				events : {
 					click : function(){
 						return $scope.openModalQuotation("modules/inventory/invoice/addquotation.html");
@@ -47,7 +45,13 @@ define(['app'], function (app) {
 			},
 			{
 				name : "Quotations",
-				path : "#/dashboard/inventory/invoice/quotation",
+				path : "#/dashboard/inventory/quotation",
+				SubTitle :"Quotations"
+			},
+			{
+				name : "Invoices",
+				path : "#/dashboard/inventory/invoice",
+				SubTitle :"Invoices"
 			},
 			                                                         
 		]
@@ -164,7 +168,7 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="quotation_id" class="form-control" ng-change="grid.appScope.filter(\'quotation_id\', quotation_id, \'quotation\', \'quotationList\',true,grid.appScope.invoiceParams)" ng-model="quotation_id" placeholder="Quotation">',
 				},
 				{ name:'name',enableSorting: false ,
-				width:110,
+				width:150,
 				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'quotation\', \'quotationList\',true, grid.appScope.quotationParams)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">' 
 							+'<option value="">Select Party</option>'
 						+'</select>',
@@ -335,39 +339,9 @@ define(['app'], function (app) {
 					formObject.category = object.category;
 					console.log(object);
 				},
-				
 				printDiv : $scope.printDiv,
-				taxCalculate : function(modalOptions){
-					modalOptions.singleparticular.tax = {};
-					
-					angular.forEach($rootScope.userDetails.config.inventory.taxData.tax, function(value, key){
-						if(modalOptions.taxInfo[value.taxName]){
-							modalOptions.singleparticular.tax[value.taxName] = (modalOptions.singleparticular.tax[value.taxName]) ? modalOptions.singleparticular.tax[value.taxName] + (value.taxValue * modalOptions.singleparticular.amount / 100) : (value.taxValue * modalOptions.singleparticular.amount / 100);
-						}
-					})
-				},
-				totalCalculate : function(modalOptions){
-					modalOptions.addinvoice.subtotal = 0;
-					modalOptions.addinvoice.total_amount = 0;
-					modalOptions.addinvoice.tax = {};
-					angular.forEach(modalOptions.addinvoice.particulars, function(value, key){
-						modalOptions.addinvoice.subtotal += value.amount;
-						angular.forEach(value.tax,function(value, key){
-							modalOptions.addinvoice.tax[key] = (modalOptions.addinvoice.tax[key]) ? modalOptions.addinvoice.tax[key] + value : value;
-						})
-						
-					})
-					
-					var taxSubtotal = 0;
-					angular.forEach(modalOptions.addinvoice.tax, function(value, key){
-						taxSubtotal += value;
-					})
-					
-					modalOptions.addinvoice.total_amount = modalOptions.addinvoice.subtotal + taxSubtotal;
-					return modalOptions;
-				},
-				
-				
+				taxCalculate : invoiceService.taxCalc,
+				totalCalculate : invoiceService.totalCalculate,
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
@@ -598,8 +572,8 @@ define(['app'], function (app) {
 		
 		$scope.quotationParams = {
 			where : {
+				user_id : $rootScope.userDetails.id,
 				status : 1,
-				user_id : $rootScope.userDetails.id
 			},
 			join : [
 				{
@@ -608,10 +582,10 @@ define(['app'], function (app) {
 					joinOn : {
 						id : "t0.party_id"
 					},
-					cols : {name : "name",party_id : "party_id",user_id :"user_id"}
+					cols : {name : "name"}
 				}
 			],
-			cols : ['id,quotation_id,generated_date,particulars,remark,tax,subtotal,total_amount']
+			cols : ['*']
 		}
 		
 		$scope.partyParams = {
