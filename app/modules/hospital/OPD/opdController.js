@@ -18,6 +18,14 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hospital";
 		
+		$scope.printDiv = function(divName) {
+			var printContents = document.getElementById(divName).innerHTML;
+			var popupWin = window.open('', '_blank', 'width=1000,height=620');
+			popupWin.document.open()
+			popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="css/style.css" /></head><body onload="window.print()">' + printContents + '</html>');
+			popupWin.document.close();
+		}
+		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add  Opd Patient",
@@ -184,7 +192,8 @@ define(['app'], function (app) {
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};
 				},
-				removeObject : $rootScope.removeObject
+				removeObject : $rootScope.removeObject,
+				printDiv :$scope.printDiv,
 			};
 			
 			modalService.showModal(modalDefault, modalOptions).then(function(){
