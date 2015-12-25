@@ -12,26 +12,6 @@
 						ng-init="modalOptions.payBill.date = modalOptions.date"  ng-required="true" close-text="Close" readonly/>
 					</div>						
 			</div>
-
-			<div class="form-group">
-				<label for="account" class="col-sm-2 control-label">Account Name*</label>
-				<div class="col-sm-9">
-					<select id="account" name="account" class="form-control" ng-change="modalOptions.getBalance(modalOptions.account.account_id, modalOptions)" ng-init="modalOptions.getData(false,false,'account','accountList', false, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.payBill.account_id" >
-					<option value="">Select Account</option>
-					</select>
-					<span class="help-block" ng-show="addIncomeForm.account.$dirty && addIncomeForm.account.$invalid">
-						<span ng-show="addIncomeForm.account.$error.required" class="text-danger">required field.</span>
-					</span>	
-				</div>
-			</div>
-			
-			<div class="form-group" ng-if="modalOptions.previous_balance">
-				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
-				<div class="col-sm-9">
-					<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" ng-init="modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payBill.credit_amount, modalOptions)" disabled class="form-control"/>		
-					</div>
-			</div>
-			
 			<div class="form-group">
 				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
 					<div class="col-sm-9">
