@@ -523,9 +523,7 @@ define(['app'], function (app) {
 
 				},
 				getData : $scope.getData,
-				
-				
-				
+				printDiv : $scope.printDiv,
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
