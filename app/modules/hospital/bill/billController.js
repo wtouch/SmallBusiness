@@ -150,12 +150,12 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				//equipment_date:$scope.currentDate,
 				modified_date:$scope.currentDate,
-				date:$scope.currentDate,
+				transactionParams:$scope.transactionParams,
 				bill : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
 					user_id : $rootScope.userDetails.id,
-					modified_date:data.modified_date,
+					modified_date:data.modified_date
 					
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
@@ -164,10 +164,12 @@ define(['app'], function (app) {
 					bill_date: dataService.sqlDateFormate()
 				
 				},
+				
+				
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'bill','billList');
+							$scope.getData(false, $scope.currentPage, 'bill','billList',$scope.billParams);
 						}
 					})
 				},
@@ -186,7 +188,17 @@ define(['app'], function (app) {
 		$scope.billParams = {
 			where : {
 				status : 1,
-				user_id : $rootScope.userDetails.id,
+				user_id : $rootScope.userDetails.id
+				//patient_id : patient_id
+				//type : ($routeParams.party == "vendor") ? "vendor" : "client"
+			},
+			
+			cols : ["*"]
+		}
+		$scope.transactionParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
 				//patient_id : patient_id
 				//type : ($routeParams.party == "vendor") ? "vendor" : "client"
 			},

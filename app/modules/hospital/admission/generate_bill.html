@@ -3,8 +3,8 @@
 	<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('bill')">Print</button>
 		<h3 class="text-center">BILL</h3>
 </div>
- {{modalOptions.admission}} 
-<div class="modal-body"  ng-init="modalOptions.getData(false, false,'admission_view', 'admission', modalOptions.admissionParams, modalOptions)">
+ {{modalOptions.view_admission}} 
+<div class="modal-body"  >
 
 	<label>Patient Details:</label><br><br>
 	<table class="table table-hover table-responsive table-bordered">
@@ -13,53 +13,53 @@
 					
 				  <td><b>Admission Date</b></td>
 				 <td colspan='4'>						
-					{{modalOptions.admission[0].admission_date}}
+					{{modalOptions.view_admission.admission_date}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Name </b></td>
 				 <td>						
-					{{modalOptions.admission[0].patient_name}}
+					{{modalOptions.view_admission.patient_name}}
 				 </td>	
 				 <td><b>Gender</b></td>
 				 <td>						
-					{{modalOptions.admission[0].gender}}
+					{{modalOptions.view_admission.gender}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Mobile</b></td>
 				 <td>						
-					{{modalOptions.admission[0].mobile}}
+					{{modalOptions.view_admission.mobile}}
 				 </td>	
 				 <td><b>Address</b></td>
 				 <td>						
-					{{modalOptions.admission[0].address}}
+					{{modalOptions.view_admission.address}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Date of Birth</b></td>
 				 <td>						
-					{{modalOptions.admission[0].dob}}
+					{{modalOptions.view_admission.dob}}
 				 </td>	
 				  <td><b>Age</b></td>
 				 <td>						
-					{{modalOptions.admission[0].age}}
+					{{modalOptions.view_admission.age}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Ward</b></td>
 				 <td>						
-					{{modalOptions.admission[0].ward_name}}
+					{{modalOptions.view_admission.ward_name}}
 				 </td>	
 				  <td><b>Bed No</b></td>
 				 <td>						
-					{{modalOptions.admission[0].bed_number}}
+					{{modalOptions.view_admission.bed_number}}
 				 </td>	
 			</tr>
 			<tr>
 				 <td><b>Consultant Dr.</b></td>
 				 <td colspan='3'>						
-					{{modalOptions.admission[0].name}}
+					{{modalOptions.view_admission.name}}
 				 </td>	
 			</tr>
 		</tbody>
@@ -75,17 +75,17 @@
 		<tbody>
 			<tr>
 				<td>1</td>
-				<td>{{modalOptions.admission[0].admission_date}}</td>
+				<td>{{modalOptions.view_admission.admission_date}}</td>
 				<td>Bed Charges</td>
-				<td>{{modalOptions.admission[0].ward_charges}}</td>
+				<td>{{modalOptions.view_admission.ward_charges}}</td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>2</td>	
-				<td>{{modalOptions.admission[0].admission_date}}</td>
+				<td>{{modalOptions.view_admission.admission_date}}</td>
 				<td>Dr. Fees</td>		
-				<td>{{modalOptions.admission[0].fees}}</td>	
-				<td>{{modalOptions.admission[0].fees}}</td>
+				<td>{{modalOptions.view_admission.fees}}</td>	
+				<td>{{modalOptions.view_admission.fees}}</td>
 			</tr>
 			<tr>
 				<th colspan='4' class="text-right">Total</th>
@@ -184,7 +184,7 @@
 				<tbody>
 					<tr>
 						<th colspan='5' class="text-right">Deposit</th>
-						<td>{{modalOptions.admission[0].deposit}}</td>
+						<td>{{modalOptions.view_admission.deposit}}</td>
 					</tr>
 					<tr>
 						<th colspan='5'  class="text-right">Total Amount</th>
@@ -214,7 +214,7 @@
 </div>
 	<div class="modal-footer" >
 		<div class="col-sm-offset-2 col-sm-8">
-			<button type="submit"  class="btn btn-success" ng-disabled="medicine_prescribeForm.$invalid" ng-click="modalOptions.updateData('medicine_used',modalOptions.medicine_prescribe,modalOptions.medicine_prescribe.id);modalOptions.ok()">Update</button>
-			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
+			<button type="submit"  class="btn btn-success"  ng-click="modalOptions.updateData('bill',modalOptions.view_admission,modalOptions.view_admission.id);modalOptions.ok()">Update</button>
+			
 		</div>
 	</div>
