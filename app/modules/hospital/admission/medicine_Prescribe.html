@@ -2,8 +2,7 @@
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3 class="text-center">Medicine Prescribe</h3>
 </div>
-<div class="modal-body" <!-- ng-init="modalOptions.addadmission.medicine_prescribe = (modalOptions.addadmission.medicine_prescribe) ? modalOptions.addadmission.medicine_prescribe : []" -->>
-	<label><b>Patient Details</b></label>
+<div class="modal-body" <!-- ng-init="modalOptions.addadmission.medicine_prescribe = (modalOptions.addadmission.medicine_prescribe) ? modalOptions.addadmission.medicine_prescribe : []" -->	<label><b>Patient Details</b></label>{{modalOptions.view_admission}}
 	<table class="table table-bordered" >
 		<thead>
 			<tr>
@@ -19,13 +18,13 @@
 					{{modalOptions.view_admission.patient_name}}
 				</td>
 				<td>						
-					{{modalOptions.view_admission.ward_id}}
+					{{modalOptions.view_admission.ward_name}}
 				</td>
 				<td>
-					{{modalOptions.view_admission.bed_id}}
+					{{modalOptions.view_admission.bed_number}}
 				</td>
 				<td>
-					{{modalOptions.view_admission.staff_id}}
+					{{modalOptions.view_admission.name}}
 				</td>
 			</tr>
 		</tbody>
@@ -102,8 +101,8 @@
 			<tbody>
 					<tr ng-repeat="x in modalOptions.addadmission.medicine_prescribe">
 				<td>{{$index + 1}}</td>
-				<td>{{x.date}}</td>
-				<td>{{x.medicine_name}}</td>
+				<td>{{x.medicine_used_date}}</td>
+				<td>{{x.medicine_id}}</td>
 				<td>{{x.quantity}}</td>
 				<td>{{x.unit}}</td>
 				<td>{{x.description}}</td>
@@ -113,9 +112,9 @@
 		</table>
 	<div class="modal-footer" >
 		<div class="col-sm-offset-2 col-sm-8">
-			<button type="submit" class="btn btn-success" ng-if="!modalOptions.medicine_prescribe.id" ng-disabled="medicine_prescribeForm.$invalid" ng-click="modalOptions.postData('medicine_used',modalOptions.medicine_prescribe);modalOptions.ok()">Save </button>
+			<!-- <button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id" ng-disabled="medicine_prescribeForm.$invalid" ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Save </button> -->
 			
-			<button type="submit" ng-if="modalOptions.medicine_prescribe.id" class="btn btn-success" ng-disabled="medicine_prescribeForm.$invalid" ng-click="modalOptions.updateData('medicine_used',modalOptions.medicine_prescribe,modalOptions.medicine_prescribe.id);modalOptions.ok()">Update</button>
+			<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success" ng-disabled="medicine_prescribeForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update</button>
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
 		</div>
 	</div>

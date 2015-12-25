@@ -52,7 +52,7 @@ define(['app'], function (app) {
 				name : "Invoices",
 				path : "#/dashboard/inventory/invoice",
 				SubTitle :"Invoices"
-			},
+			}
 			                                                         
 		]
 		
@@ -229,7 +229,6 @@ define(['app'], function (app) {
 		$scope.verticalSum = function(inputArray, column, subobj){
 			 /*  if(!$scope[subobj])    */
 				 $scope[subobj] = 0;
-			
 			angular.forEach(inputArray, function(value, key){
 				$scope[subobj] += parseFloat(value[column]);
 			})
@@ -336,7 +335,10 @@ define(['app'], function (app) {
 				assignData : function(object, formObject){
 					formObject.goods_name = object.goods_name;
 					formObject.goods_type = object.goods_type;
+					formObject.price = object.price;
 					formObject.category = object.category;
+					formObject.quantity = 1;
+					formObject.amount = object.price*formObject.quantity;
 					console.log(object);
 				},
 				printDiv : $scope.printDiv,
@@ -418,41 +420,13 @@ define(['app'], function (app) {
 				assignData : function(object, formObject){
 					formObject.goods_name = object.goods_name;
 					formObject.goods_type = object.goods_type;
+					formObject.price = object.price;
 					formObject.category = object.category;
 					console.log(object);
 				},
 				printDiv : $scope.printDiv,
-				taxCalculate : function(modalOptions){
-					modalOptions.singleparticular.tax = {};
-					
-					angular.forEach($rootScope.userDetails.config.inventory.taxData.tax, function(value, key){
-						if(modalOptions.taxInfo[value.taxName]){
-							modalOptions.singleparticular.tax[value.taxName] = (modalOptions.singleparticular.tax[value.taxName]) ? modalOptions.singleparticular.tax[value.taxName] + (value.taxValue * modalOptions.singleparticular.amount / 100) : (value.taxValue * modalOptions.singleparticular.amount / 100);
-						}
-					})
-				},
-				totalCalculate : function(modalOptions){
-					modalOptions.addquotation.subtotal = 0;
-					modalOptions.addquotation.total_amount = 0;
-					modalOptions.addquotation.tax = {};
-					angular.forEach(modalOptions.addquotation.particulars, function(value, key){
-						modalOptions.addquotation.subtotal += value.amount;
-						angular.forEach(value.tax,function(value, key){
-							modalOptions.addquotation.tax[key] = (modalOptions.addquotation.tax[key]) ? modalOptions.addquotation.tax[key] + value : value;
-						})
-						
-					})
-					
-					var taxSubtotal = 0;
-					angular.forEach(modalOptions.addquotation.tax, function(value, key){
-						taxSubtotal += value;
-					})
-					
-					modalOptions.addquotation.total_amount = modalOptions.addquotation.subtotal + taxSubtotal;
-					return modalOptions;
-				},
-				
-				
+				taxCalculate : invoiceService.taxCalc,
+				totalCalculate : invoiceService.totalCalculate,
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){

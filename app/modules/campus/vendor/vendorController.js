@@ -9,9 +9,7 @@ define(['app'], function (app) {
 		//global scope objects
 		$scope.type = "year";
 		$scope.maxSize = 5;
-		$scope.totalRecords = "";
 		$scope.pageItems = 10;
-		$scope.numPages = "";	
 		$scope.currentPage = 1;
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;

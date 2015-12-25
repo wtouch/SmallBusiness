@@ -1,21 +1,19 @@
 <div class="modal-body">
-	<div class="form-group">
+	<div class="form-group"  ng-init="modalOptions.getData(false,false,'history','history',modalOptions.historyParams,modalOptions)">
 	<label for="select type" class="col-sm-2 control-label">Select Category*</label>
 	<div class="col-sm-3">
 		<select id="category" name="category" class="form-control" 
-		ng-model="modalOptions.addpatient.patient_history.category">
-		<option value="" selected>select category</option>
-		<option value="category">Pay by category</option>
-		<option value="category">Pay for category</option>
+		ng-model="modalOptions.addpatient.patient_history.category" ng-options="item.id as item.category for item in modalOptions.history">
+		<option value="" >select category</option>
+
 		</select>
 	</div>
 	<label for="select type" class="col-sm-2 control-label">Select type*</label>
 		<div class="col-sm-3">
 			<select id="type" name="type" class="form-control" 
-			ng-model="modalOptions.addpatient.patient_history.type">
-			<option value="" selected>select type</option>
-			<option value="type">Pay by type</option>
-			<option value="type">Pay for type</option>
+			ng-model="modalOptions.addpatient.patient_history.type" ng-options="item.id as item.type for item in modalOptions.history">
+			<option value="" >select type</option>
+		
 			</select>
 		</div>
 	</div>			
@@ -31,11 +29,13 @@
 	<div class="form-group">
 		<label for="description" class="col-sm-2 control-label">Description *</label>
 		<div class="col-sm-8">
-			<input type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addpatient.patient_history.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" required>
-			<span class="help-block" ng-show="addpatientForm.description.$dirty && addpatientForm.description.$invalid">
-				<span ng-show="addpatientForm.description.$error.required"class="text-danger">Description is required.</span>
-			</span>				
-		</div>
+			<textarea  class="form-control" id="patient_history" ng-model="modalOptions.addpatient.patient_history" name="patient_history" placeholder="Enter " ng-maxlength="250" required></textarea>
+			<span class="text-danger"  ng-show="addpatientForm.patient_history.$error.pattern">Please enter valid description</span>
+			<span ng-hide="addpatientForm.patient_history.$error.maxlength">{{ 250 - modalOptions.addpatient.address.length + " Chars left"}}</span>
+			<span class="help-block" ng-show="addpatientForm.patient_history.$dirty &&  addpatientForm.patient_history.$invalid">
+				<span class="text-danger" ng-show="addpatientForm.patient_history.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				<span class="text-danger" ng-show="addpatientForm.patient_history.$error.required">Required Field.</span>
+			</span>
 	</div> 	
 </div>	
 <div class="modal-footer" >

@@ -157,6 +157,7 @@ define(['app'], function (app) {
 			$scope.params = (params) ? params : {
 				where : {
 					user_id : $rootScope.userDetails.id,
+					status: 1,
 				},
 				cols : ["*"]
 			};

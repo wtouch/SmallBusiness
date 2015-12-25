@@ -4,34 +4,43 @@
 <div>
 <form class="form-horizontal" name="certificateForm" role="form" ng-submit="certificateForm.$valid" novalidate="novalidate">
 <div class="form-group">
-						<label for="name" class="col-sm-2 control-label">Name *</label>
-						<div class="col-sm-9">
-							<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-model="certificate.name" ng-pattern=" /^[a-zA-Z]+$/" required>
-							<span class="help-block" ng-show="certificateForm.name.$dirty && certificateForm.name.$invalid">
-								<span class="text-danger" ng-show="certificateForm.name.$error.required">Name is required.</span>
-								<span class="text-danger" ng-show="certificateForm.name.$error.pattern">Name is NAN</span>
-							</span>
-						</div>
+	<label for="name" class="col-sm-2 control-label">Name *</label>
+		<div class="col-sm-9">
+			<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="certificate.name"required>
+				<span class="text-danger"  ng-show="certificateForm.name.$error.pattern">Text is required.</span>
+					<span class="help-block" ng-show="certificateForm.name.$dirty && certificateForm.name.$invalid">
+					<span class="text-danger" ng-show="certificateForm.name.$error.required">Required Field.</span>
+				</span>
+		</div>
 </div>
 	<div class="form-group">
-			<label for="description" class="col-sm-2 control-label">Description *</label>
-						<div class="col-sm-9">
-							<textarea  class="form-control" id="description" ng-model="certificate.description" name="description" placeholder="Enter description" maxlength="256" required></textarea>
-							<p ng-hide="certificateForm.description.$error.maxlength">{{ 256 - certificate.description.length + " Characters left"}}</p>
-							<span class="help-block" ng-show="certificateForm.description.$dirty &&  certificateForm.description.$invalid">
-								<span class="text-danger" ng-show="certificateForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-								<span class="text-danger" ng-show="certificateForm.description.$error.required">Description is required.</span>
-							</span>
-						</div>
-	</div>
-	<div class="form-group">
-		<label for="upload_attachment" class="col-sm-2 control-label">Upload Attachment *</label>
+		<label for="description" class="col-sm-2 control-label">Description *</label>
 			<div class="col-sm-9">
-				<input type="file" class="form-control " placeholder="upload file" id="upload_file" name="upload_file" ng-model="certificate.upload_file" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
-							<span class="help-block" ng-show="certificateForm.upload_file.$dirty && certificateForm.upload_file.$invalid">
-							<span class="text-danger" ng-show="certificateForm.upload_file.$error.required">Required Field.</span>
+				<textarea  class="form-control" id="description" ng-model="certificate.description" name="description" placeholder="Enter description" maxlength="256" required></textarea>
+				<p ng-hide="certificateForm.description.$error.maxlength">{{ 256 - certificate.description.length + " Characters left"}}</p>
+					<span class="help-block" ng-show="certificateForm.description.$dirty &&  certificateForm.description.$invalid">
+						<span class="text-danger" ng-show="certificateForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
+						<span class="text-danger" ng-show="certificateForm.description.$error.required">Description is required.</span>
+					</span>
 			</div>
 	</div>
+	
+		<div class="form-group">
+			<label for="certificate" class="col-sm-2 control-label">Upload Attachment *</label>
+				<div class="col-sm-4">
+					<input type="file" id="certificate" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "uploads(certificates, certificate.user_id + path,userInfo,'certificates')" ng-model="certificates">
+					<input type="hidden" ng-model="certificate.certificates">
+				</div>
+		</div>
+	
+			<div class="form-group">						 
+				<div class="col-sm-4 col-sm-offset-2">
+					<span class="thumbs" ng-if="certificate.certificates">
+						<img class="img-thumbnail" ng-src="{{certificate.certificates.file_relative_path}}" ng-click="certificate.imgkey = key; "/>
+					</span>
+				</div>
+			</div>	
+		
 	
 <div class="col-sm-offset-2"><a ng-click="addToObject(campus.certificates,'certificate',certificate)" class="btn btn-default btn-primary">+Add</a></div>
 	
@@ -53,14 +62,14 @@
 								<td>{{$index + 1}}</td>
 								<td>{{x.name}}</td>
 								<td>{{x.description}}</td>
-								<td>{{x.attachment}}</td>
+								<td>{{x.certificate}}</td>
 								<td><button ng-click="removeObject(campus.certificates, $index);">X</button></td>
 							</tr>
 						</tbody>
 				</table>
 			</div>
 		</div>
-  </div>
-<div class="col-sm-offset-2"><a class="btn btn-default btn-primary">Submit</a>
+    </div>
+<div class="col-sm-offset-2"><a ng-click="showFormPart('certificates')" class="btn btn-default btn-primary">Submit</a>
 <a ng-click="showFormPart('certificates')" class="btn btn-default btn-primary">Reset</a></div>
 </div>

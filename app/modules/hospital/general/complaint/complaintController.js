@@ -35,6 +35,7 @@ define(['app'], function (app) {
 		$scope.complaintList = {
 			enableSorting: true,
 			enableFiltering: true,
+			enableColumnResizing: true,
 			columnDefs: [
 				{ name:'SrNo',  width:60,
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
@@ -141,7 +142,8 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id
+					user_id : $rootScope.userDetails.id,
+					staus:1
 				},
 				cols : ["*"]
 			};
