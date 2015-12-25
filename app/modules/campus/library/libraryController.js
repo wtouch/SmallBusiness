@@ -8,9 +8,7 @@ define(['app'], function (app) {
 		//global scope objects
 		$scope.type = "year";
 		$scope.maxSize = 5;
-		$scope.totalRecords = "";
-		$scope.pageItems = 10;
-		$scope.numPages = "";	
+		$scope.pageItems = 10;	
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");		
 		$scope.currentPage = 1;
 		$scope.currentDate = dataService.currentDate;
@@ -48,31 +46,58 @@ define(['app'], function (app) {
 				{ 
 					name:'student_id',width:90,
 					enableSorting: false, enableFiltering: true,
-					filterHeaderTemplate: '<input id="student_id" class="form-control" ng-change="grid.appScope.filter(\'student_id\', student_id, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_id" placeholder="Student_id">',
+					filterHeaderTemplate: '<input id="student_id" class="form-control" ng-change="grid.appScope.filter(\'student_id\', student_id, \'book_transaction_view\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_id" placeholder="Student_id">',
 				},
 				{ 
-					name:'student_name',width:90,
+					name:'student_name',width:110,
 					enableSorting: false, enableFiltering: true,
-					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
+					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction_view\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
 				},{ 
-					name:'Book Name',width:100,
+					name:'book_name',width:110,
 					enableSorting: false, enableFiltering: true,
-					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
+					filterHeaderTemplate: '<input id="book_name" class="form-control" ng-change="grid.appScope.filter(\'book_name\', book_name, \'book_transaction_view\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="book_name" placeholder="Book Name">',
+				}, { 
+					name:'book_no',width:100,
+					enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction_view\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
 				},{ 
-					name:'Book No',width:100,
+					name:'issue_date',width:100,
 					enableSorting: false, enableFiltering: true,
-					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
+					filterHeaderTemplate: '<input id="issue_date" class="form-control" ng-change="grid.appScope.filter(\'issue_date\',issue_date, \'book_transaction_view\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="issue_date" placeholder="Issue Date">',
 				},{ 
-					name:'Issue Date',width:100,
+					name:'return_date',width:100,
 					enableSorting: false, enableFiltering: true,
-					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'book_transaction\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="student_name" placeholder="student Name">',
+					filterHeaderTemplate: '<input id="return_date" class="form-control" ng-change="grid.appScope.filter(\'return_date\', return_date,\'book_transaction_view\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="return_date" placeholder="Return Date">',
+				},{ 
+					name:'due_date',width:100,
+					enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="due_date" class="form-control" ng-change="grid.appScope.filter(\'due_date\', due_date,\'book_transaction_view\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="due_date" placeholder="Due Date">',
+				},{ 
+					name:'book_fine',width:100,
+					enableSorting: false, enableFiltering: true,
+					filterHeaderTemplate: '<input id="book_fine" class="form-control" ng-change="grid.appScope.filter(\'book_fine\', book_fine, \'book_transaction_view\', \'bookTransactionList\',true,grid.appScope.bookParams)" ng-model="book_fine" placeholder="Fine">',
+				},{
+					name:'Manage', 
+					enableSorting: false, 
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'book_transaction_view\', \'bookTransactionList\',false,grid.appScope.bookParams)" ng-model="status">'
+							+'<option value="" selected>Status</option>'
+							+'<option value="0">Deleted</option>'
+							+'<option value="1">Active</option>	'
+						+'</select>', 
+					filter: {
+					  //type: uiGridConstants.filter.SELECT,
+					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
+					} ,
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/library/booktransaction.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Book Transaction"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ '<a type="button" tooltip="Delete Book Transaction" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'book_transaction\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/library/view_book_transaction.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Book Transaction"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 				]
 			};
 			$scope.callbackColChange = function(response){
 			console.log(response);
 				if(response.status == "success"){
-					$scope.getData(false, $scope.currentPage, "book_transaction", "bookTransactionList", $scope.bookParams);
+					$scope.getData(false, $scope.currentPage, "book_transaction_view", "bookTransactionList", $scope.bookParams);
 				}
 			}
 					/* add liabrary */
@@ -88,6 +113,11 @@ define(['app'], function (app) {
 					user_id:data.user_id,
 					student_id:data.student_id,
 					book_transaction_id:data.book_transaction_id,
+					issue_date:data.issue_date,
+					due_date:data.due_date,
+					return_date:data.return_date,
+					book_fine:data.book_fine,
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
 				}:{
 					user_id:$rootScope.userDetails.id,
@@ -98,9 +128,16 @@ define(['app'], function (app) {
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'book_transaction','book_transaction',$Scope.bookParams);
+								$scope.getData(false, $scope.currentPage, 'book_transaction','bookTransactionList',$Scope.bookParams);
 							}
 						})
+					},
+					updateData : function(table, input, id){ 
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage,'book_transaction','bookTransactionList',$scope.deptParams);
+						}
+					})
 					},
 					getData : $scope.getData,
 					addToObject : function(object,data,modalOptions){
@@ -116,6 +153,13 @@ define(['app'], function (app) {
 				
 				})
 		}
+		$scope.bookparams = {
+				where : {
+					status : 1,
+					user_id : $rootScope.userDetails.id
+				},
+				cols : ["*"]
+			};
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -153,6 +197,21 @@ define(['app'], function (app) {
 					}
 				}
 			});
+		}
+		/* filter  dynamic*/
+		$scope.filter = function(col, value, table, subobj, search, params){
+			value = (value) ? value : undefined;
+			if(!params) params = {};
+			$rootScope.filterData(col, value, search, function(response){
+				dataService.extendDeep($scope.params, params, response);
+				console.log($scope.params);
+				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
+			})
+		}
+		$scope.orderBy = function(col, value, table, subobj){
+			if(!$scope.params.orderBy) $scope.params.orderBy = {};
+			$scope.params.orderBy[col] = value;
+			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
 	};
 	// Inject controller's dependencies

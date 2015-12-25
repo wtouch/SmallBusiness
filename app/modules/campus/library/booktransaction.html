@@ -12,7 +12,7 @@
 				<div >
 					<label for="student_id" class="col-sm-2 control-label">Select Student ID</label>
 					<div class="col-sm-4" >		
-							<select id="student_id" class="form-control" ng-init="modalOptions.getData(false,false,'student','studentList',false,modalOptions)" ng-model="modalOptions.addBook.student" ng-options="item as item.student_id for item in modalOptions.studentList" ng-change="modalOptions.addBook.student_name = modalOptions.addBook.student.student_name">
+							<select id="student_id" class="form-control" ng-init="modalOptions.getData(false,false,'student','studentList',false,modalOptions)" ng-model="student" ng-options="item as item.student_id for item in modalOptions.studentList" ng-change="student_name = student.student_name;modalOptions.addBook.student_id = student.id">
 								<option value="">Select ID</option>
 							</select>
 								<span class="help-block" ng-show="bookTransactionForm.student_id.$dirty && bookTransactionForm.student_id.$invalid">
@@ -24,7 +24,20 @@
 			<div class="form-group">
 				<label for="student_id" class="col-sm-2 control-label">Student Name *</label>
 				<div class="col-sm-3">
-					<input type="text" id="student_id" class="form-control" ng-model="modalOptions.addBook.student_name">
+					<input type="text" id="student_id" class="form-control" ng-model="student_name">
+				</div>
+			</div>
+			<div class="form-group">
+				<div ng-init="modalOptions.getData(false,false,'stock','stockList',false,modalOptions)">
+					<label for="stock_id" class="col-sm-2 control-label">Select Book</label>
+					<div class="col-sm-4" >		
+							<select id="stock_id" class="form-control" ng-model="modalOptions.addstock.particular.stock_id" ng-options="item.id as item.name for item in modalOptions.stockList" required>
+								<option value="">select Book</option>
+							</select>
+							<span class="help-block" ng-show="bookTransactionForm.stock_id.$dirty && bookTransactionForm.stock_id.$invalid">
+								<span ng-show="bookTransactionForm.stock_id.$error.required" class="text-danger">Required field.</span>
+							</span>
+					</div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -48,9 +61,16 @@
 			<div class="form-group">
 				<label for="book_fine" class="col-sm-2 control-label">Fine If Any </label>
 				<div class="col-sm-4">
-					<input type="text" id="book_fine" class="form-control" name="book_fine" disabled ng-model="modalOptions.addstaff.book_fine" required>						
+					<input type="text" id="book_fine" class="form-control" name="book_fine" ng-model="modalOptions.addBook.book_fine" required>						
 				</div>
 			</div>
-			<button type="submit" class="btn btn-success"  ng-disabled="bookTransactionForm.$invalid" ng-click="   modalOptions.postData('book_transaction',modalOptions.addBook);modalOptions.ok()">Add Holidays</button>
+			<div class="modal-footer">
+			<div class="col-sm-offset-2 col-sm-9">
+			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addBook.id" ng-disabled="bookTransactionForm.$invalid" ng-click="   modalOptions.postData('book_transaction',modalOptions.addBook);modalOptions.ok()">Add Book Transaction</button>
+			
+			<button type="submit" class="btn btn-success" ng-if="modalOptions.addBook.id" ng-disabled="bookTransactionForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('book_transaction',modalOptions.addBook, modalOptions.addBook.id)">Update Book Transaction</button>			
+			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+			</div>
+			</div>	
 		</form>
 	</div>

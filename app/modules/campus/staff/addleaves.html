@@ -18,13 +18,15 @@
 				<span class="text-danger" ng-show="addleaveForm.name.$error.required">Name is required.</span>
 				</span>
 			</div>
-			<label for="leave_type" class="col-sm-1 control-label">Type*</label>
-			 <div class="radio col-sm-1">
-				<label><input type="radio" name="leave_type" value="paid" ng-model="modalOptions.addleave.leave_type">Paid</label>
-			</div>
-			<div class="radio col-sm-2">
-			<label><input type="radio" name="leave_type" value="unpaid" ng-model="modalOptions.addleave.leave_type">Unpaid</label>
+			<div class="form-group" ng-init="modalOptions.addleave.leave_type='paid'">
+				<label for="leave_type" class="col-sm-1 control-label">Type*</label>
+				 <div class="radio col-sm-1">
+					<label><input type="radio" name="leave_type" value="paid" ng-model="modalOptions.addleave.leave_type">Paid</label>
 				</div>
+				<div class="radio col-sm-2">
+				<label><input type="radio" name="leave_type" value="unpaid" ng-model="modalOptions.addleave.leave_type">Unpaid</label>
+				</div>
+			</div>	
 		</div>
 
 		<div class="form-group">
@@ -72,7 +74,7 @@
 					</select>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group" ng-init="modalOptions.addleave.leave_for='1'">
 			<label for="name" class="col-sm-2 control-label">Leave for*</label>
 			<div class="radio col-sm-2">
 				<label><input type="radio" name="leave" value="0.5" ng-model="modalOptions.addleave.leave_for" ng-click="otherLeaves = false">Half Day</label>

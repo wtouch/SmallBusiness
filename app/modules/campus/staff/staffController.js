@@ -8,9 +8,7 @@ define(['app'], function (app) {
 		//global scope objects
 		$scope.type = "year";
 		$scope.maxSize = 5;
-		$scope.totalRecords = "";
-		$scope.pageItems = 10;
-		$scope.numPages = "";	
+		$scope.pageItems = 10;	
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");		
 		$scope.currentPage = 1;
 		$scope.currentDate = dataService.currentDate;
@@ -79,24 +77,24 @@ define(['app'], function (app) {
 				{ 
 					name:'staff_id',width:90,
 					enableSorting: false, enableFiltering: true,
-					filterHeaderTemplate: '<input id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="staff_id" placeholder="Staff No">',
+					filterHeaderTemplate: '<input id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'staff_view\', \'staffList\',true,grid.appScope.staffParams)" ng-model="staff_id" placeholder="Staff No">',
 				},
 				{ 
 					name:'name',width:100,
-					filterHeaderTemplate: '<input id="staff_name" class="form-control" ng-change="grid.appScope.filter(\'staff_name\', staff_name, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="staff_name" placeholder="Staff Name">',
+					filterHeaderTemplate: '<input id="staff_name" class="form-control" ng-change="grid.appScope.filter(\'staff_name\', staff_name, \'staff_view\', \'staffList\',true,grid.appScope.staffParams)" ng-model="staff_name" placeholder="Staff Name">',
 					/* cellTemplate : '<span>{{row.entity.staff_id}}</span>' */
 				},
 				{ 
 					name:'email_id',width:120,
-					filterHeaderTemplate: '<input id="email_id" class="form-control" ng-change="grid.appScope.filter(\'email_id\', email_id, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="email_id" placeholder="Email ID">',
+					filterHeaderTemplate: '<input id="email_id" class="form-control" ng-change="grid.appScope.filter(\'email_id\', email_id, \'staff_view\', \'staffList\',true,grid.appScope.staffParams)" ng-model="email_id" placeholder="Email ID">',
 				},
 				{ 
 					name:'address',width:110,
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="address" placeholder="Address">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff_view\', \'staffList\',true,grid.appScope.staffParams)" ng-model="address" placeholder="Address">',
 				},
 				{ 
 					name:'city',width:100,
-					filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staffList\',true,grid.appScope.staffParams)" ng-model="city" placeholder="City">',
+					filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff_view\', \'staffList\',true,grid.appScope.staffParams)" ng-model="city" placeholder="City">',
 				},
 				{ 
 					name:'Designation',width:110,
@@ -114,7 +112,7 @@ define(['app'], function (app) {
 				{
 					name:'Manage', 
 					enableSorting: false, 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staffList\',false,grid.appScope.staffParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff_view\', \'staffList\',false,grid.appScope.staffParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -132,7 +130,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "staff", "staffList", $scope.staffParams);
+				$scope.getData(false, $scope.currentPage, "staff_view", "staffList", $scope.staffParams);
 			}
 		}
 							//add staff details
@@ -142,6 +140,7 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			var modalOptions ={
+				date : $scope.currentDate,
 				addstaff:(data)?{
 					id:data.id,
 					name:data.name,
@@ -159,11 +158,7 @@ define(['app'], function (app) {
 					medical:data.medical,
 					age:data.age,
 					dob:data.dob,
-					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					hobbies:data.hobbies,
-					joining_details :data.joining_details,
-					education:data.education,
-					medical:data.medical,
 					specialization:data.specialization,
 					experiance:data.experiance,
 					attachments:data.attachments,
@@ -180,10 +175,16 @@ define(['app'], function (app) {
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
-								$scope.getData(false, $scope.currentPage, 'staff_view','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff','staffList',$Scope.staffParams);
 							}
 						})
+				},
+				updateData : function(table, input, id){ 
+				$rootScope.updateData(table, input, id, function(response){
+					if(response.status == "success"){
+						$scope.getData(false, $scope.currentPage,'staff','staffList',$scope.staffParams);
+					}
+				})
 				},
 					formPart : 'personalDetails',
 					showFormPart : function(formPart, modalOptions){
@@ -212,6 +213,7 @@ define(['app'], function (app) {
 				size:'lg'
 			};
 			var modalOptions={
+				date : $scope.currentDate,
 				staffattendence:(data)?{
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				}:{
@@ -223,10 +225,17 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							
+							$scope.getData(false, $scope.currentPage, 'staff','staffList',$Scope.bookParams);
 						}
 					}) 
 				},
+				updateData : function(table, input, id){ 
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage,'staff','staffList',$scope.deptParams);
+						}
+					})
+					},
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 				
@@ -252,9 +261,16 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							
+							$scope.getData(false, $scope.currentPage, 'staff','staffList',$Scope.bookParams);
 						}
 					}) 
+				},
+				updateData : function(table, input, id){ 
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'staff','staffList',$scope.deptParams);
+						}
+					})
 				},
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -282,9 +298,16 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							
+							$scope.getData(false, $scope.currentPage, 'staff','staffList',$Scope.bookParams);
 						}
 					}) 
+				},
+				updateData : function(table, input, id){ 
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'staff','staffList',$scope.deptParams);
+						}
+					})
 				},
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -306,7 +329,13 @@ define(['app'], function (app) {
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},	
-				
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'staff','staffList',$Scope.bookParams);
+						}
+					}) 
+				},
 				updateData : function(table, input, id){ 
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){

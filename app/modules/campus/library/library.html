@@ -1,24 +1,34 @@
-<div class="row">
-	<div class="col-md-12">
-		<div class="main-content">
-		<ng-include src="'modules/component/toolbar.html'"></ng-include>
-		 <div class="row">
-				 <div class="col-sm-2">
-					<div class="bottomspace">
-						<label for="page_item" class="control-label" >Page Item</label>
-						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'book_transaction', 'bookTransactionList', bookParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
-							<option value="" selected>Select type</option>
-						</select>
+<div class="main-content">
+<ng-include src="'modules/component/toolbar.html'"></ng-include>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row bottomspace">
+					<div class="col-sm-3">
+						<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="filter('name', searchUser, 'user', 'userList', true)" ng-model="searchUser" placeholder="Search">
+						<input id="search" type="text" class="form-control" ng-if="userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUserGroup)" ng-model="searchUserGroup" placeholder="Search">
 					</div>
+					
+					
 				</div>
-			</div> 
-			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'book_transaction','bookTransactionList',bookParams);">
-			  <div ui-grid="bookTransactionList"></div>
-			 </div>
-			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'book_transaction','bookTransactionList',bookParams);"></pagination>
-				<pre>Page: {{currentPage}} / {{numPages}}</pre>
 			</div>
-		</div>
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="select_no_records" class="control-label" >Select Records</label>
+				<select id="pageItems" name="pageItems" class="form-control" ng-change="getData(false, currentPage,'book_transaction_view', 'bookTransactionList', bookParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+				</select>
+			</div>
+		</div> 
+		
 	</div>
+	
+	
+	<div class="table-responsive" ng-init="getData(false, currentPage, 'book_transaction_view','bookTransactionList');">
+		<div ui-grid="bookTransactionList"></div>
+	</div>
+	
+	<div class="text-center">				
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'book_transaction','book_transaction_view',bookParams)"></pagination>
+		<pre>Page: {{currentPage}} / {{numPages}}</pre>
+	</div>	
 </div>
+
