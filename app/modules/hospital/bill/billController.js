@@ -74,7 +74,7 @@ define(['app'], function (app) {
 					  ]
 					} , 
 					cellTemplate : 
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/bill/ipdbillview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  bill" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/bill/viewipdbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  bill" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+ 
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/bill/paybill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Pay bill" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+
@@ -96,19 +96,23 @@ define(['app'], function (app) {
 				},
 				{
 					name:'bill_id',width:100,
-					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'bill\', \'billList\',true, grid.appScope.billParams)" ng-model="bill_id" placeholder="Bill Id">',
+					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'bill\', \'opdbillList\',true, grid.appScope.opdbillParams)" ng-model="bill_id" placeholder="Bill Id">',
+				},
+				{
+					name:'opd_id',width:50,
+					filterHeaderTemplate: '<input id="opd_id" class="form-control" ng-change="grid.appScope.filter(\'opd_id\', opd_id, \'bill\', \'opdbillList\',true, grid.appScope.opdbillParams)" ng-model="bill_id" placeholder="Bill Id">',
 				},
 				{
 					name:'patient_name',width:150,
-					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'bill\', \'billList\',true, grid.appScope.billParams)" ng-model="patient_name" placeholder="Search">',
+					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'bill\', \'opdbillList\',true, grid.appScope.opdbillParams)" ng-model="patient_name" placeholder="Search">',
 				}, 
 				{
 					name:'payment_status',width:150,
-					filterHeaderTemplate: '<input id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'billList\',true, grid.appScope.billParams)" ng-model="payment_status" placeholder="Search">',
+					filterHeaderTemplate: '<input id="payment_status" class="form-control" ng-change="grid.appScope.filter(\'payment_status\', payment_status, \'bill\', \'opdbillList\',true, grid.appScope.opdbillParams)" ng-model="payment_status" placeholder="Search">',
 				}, 
 				{
 					name:'net_amount',width:150,
-					filterHeaderTemplate: '<input id="net_amount" class="form-control" ng-change="grid.appScope.filter(\'net_amount\', net_amount, \'bill\', \'billList\',true, grid.appScope.billParams)" ng-model="net_amount" placeholder="Search">',
+					filterHeaderTemplate: '<input id="net_amount" class="form-control" ng-change="grid.appScope.filter(\'net_amount\', net_amount, \'bill\', \'opdbillList\',true, grid.appScope.opdbillParams)" ng-model="net_amount" placeholder="Search">',
 				}, 
 				{ name:'paid_amount',width:100,enableSorting: false,enableFiltering: false,
 				},
@@ -116,7 +120,7 @@ define(['app'], function (app) {
 				},
 				
 				{ name:'Manage', width:200,
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billList\',false,grid.appScope.billParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'opdbillList\',false,grid.appScope.opdbillParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -127,7 +131,7 @@ define(['app'], function (app) {
 					  ]
 					} , 
 					cellTemplate : 
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/bill/billtview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  bill" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/bill/viewopdbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  bill" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+ 
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/bill/paybill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Pay bill" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+
@@ -147,7 +151,7 @@ define(['app'], function (app) {
 				//equipment_date:$scope.currentDate,
 				modified_date:$scope.currentDate,
 				date:$scope.currentDate,
-				addequipment : (data) ? {
+				bill : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
 					user_id : $rootScope.userDetails.id,
@@ -157,7 +161,7 @@ define(['app'], function (app) {
 					date : dataService.sqlDateFormate(false,"datetime"),
 					user_id : $rootScope.userDetails.id,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					equipment_date: dataService.sqlDateFormate()
+					bill_date: dataService.sqlDateFormate()
 				
 				},
 				postData : function(table, input){
@@ -180,6 +184,16 @@ define(['app'], function (app) {
 			})
 		}
 		$scope.billParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id,
+				//patient_id : patient_id
+				//type : ($routeParams.party == "vendor") ? "vendor" : "client"
+			},
+			
+			cols : ["*"]
+		}
+		$scope.opdbillParams = {
 			where : {
 				status : 1,
 				user_id : $rootScope.userDetails.id

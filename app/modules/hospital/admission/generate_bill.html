@@ -3,9 +3,9 @@
 	<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('bill')">Print</button>
 		<h3 class="text-center">BILL</h3>
 </div>
-<!--  {{modalOptions.admission[0]}}  -->
+ {{modalOptions.admission}} 
 <div class="modal-body"  ng-init="modalOptions.getData(false, false,'admission_view', 'admission', modalOptions.admissionParams, modalOptions)">
-<div id="bill">
+
 	<label>Patient Details:</label><br><br>
 	<table class="table table-hover table-responsive table-bordered">
 			<tbody>
@@ -212,4 +212,9 @@
 	</div>
 </div>
 </div>
-</div>
+	<div class="modal-footer" >
+		<div class="col-sm-offset-2 col-sm-8">
+			<button type="submit"  class="btn btn-success" ng-disabled="medicine_prescribeForm.$invalid" ng-click="modalOptions.updateData('medicine_used',modalOptions.medicine_prescribe,modalOptions.medicine_prescribe.id);modalOptions.ok()">Update</button>
+			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
+		</div>
+	</div>

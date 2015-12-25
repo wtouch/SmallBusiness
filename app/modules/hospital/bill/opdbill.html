@@ -6,17 +6,17 @@
 				<div class="col-sm-2">
 					<div class="bottomspace">
 						<label for="payment_status" class="control-label" >Select pageItems</label>
-						<select firstname id="payment_status" class="form-control" ng-change="getData(false, currentPage,'bill', 'opdbillList', billParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]" checkAmount>
+						<select firstname id="payment_status" class="form-control" ng-change="getData(false, currentPage,'bill', 'opdbillList', opdbillParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]" checkAmount>
 							<option value="" selected>Select type</option>
 						</select>
 					</div>
 				</div>
 			</div>
-		<div class="table-responsive" ng-initng-init="getData(false,currentPage, 'bill', 'opdbillList', billParams);">
+		<div class="table-responsive" ng-initng-init="getData(false,currentPage, 'bill', 'opdbillList', opdbillParams);">
 			<div ui-grid="opdbillList"></div>
 			</div>
 			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage,'bill', 'opdbillList', billParams)"> </pagination>
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage,'bill', 'opdbillList', opdbillParams)"> </pagination>
 				<pre>Page: {{currentPage}} / {{numPages}}</pre>
 			</div>
 		</div>
