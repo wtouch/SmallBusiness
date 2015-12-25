@@ -40,124 +40,8 @@
 	
 <div class="col-sm-12" ng-init="modalOptions.addstock.particular = (modalOptions.addstock.particular) ? modalOptions.addstock.particular : []">
 		<form name="addstockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addstockForm.$valid" id="addstockForm">		
-			<div class="table-responsive" ng-if="modalOptions.addstock.vendor_id && (modalOptions.addstock.type == 1 || modalOptions.addstock.type == 2 )">
-				<table class="table table-bordered" >
-					<thead>
-						<tr>
-							<th>Particular Name</th>
-							<th>Type</th>
-							<th>Category</th>
-							<th>Quantity</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" required 
-								ng-change=""  placeholder="particulars Name"/>
-								<span class="help-block" ng-show="addstockForm.particular.$dirty && addstockForm.particular.$invalid">
-									<span ng-show="addstockForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
-								</span> 
-							</td>
-							<td>
-								<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type"  required>
-									<option value="" selected>Select Type</option>
-									<option value="type1" >Type1</option>
-									<option value="type2">Type2</option>
-									<option value="type3">Type3</option>
-									<option value="type4">Type4</option>
-								</select>
-								<span class="help-block" ng-show="addstockForm.goods_type.$dirty && addstockForm.goods_type.$invalid">
-								<span ng-show="addstockForm.goods_type.$error.required" class="text-danger">Required field.</span>
-								</span>	
-							</td>
-							<td>					
-								<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
-									<option value="" selected>Select Category</option>
-									<option value="category1">Category1</option>
-									<option value="category2">Category2</option>
-									<option value="category3">Category3</option>
-									<option value="category4">Category4</option>
-								</select>
-								<span class="help-block" ng-show="addstockForm.category.$dirty && addstockForm.category.$invalid">
-								<span ng-show="addstockForm.category.$error.required" class="text-danger">Required field.</span>
-								</span>	
-							</td>
-							
-							<td>
-								<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/" required />
-								<span class="help-block" ng-show="addstockForm.quantity.$dirty && addstockForm.quantity.$invalid">
-									<span ng-show="addstockForm.quantity.$error.required" class="text-danger">Quantity Required</span>
-									<span ng-show="addstockForm.quantity.$error.pattern" class="text-danger">Enter number only</span>
-								</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addstockForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addstock.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">	+Add This stock
-				</button>
-				<br/>
-			</div>	
-
-
-			<div class="table-responsive" ng-if="modalOptions.addstock.vendor_id && modalOptions.addstock.type == 3">
-				<table class="table table-bordered" >
-					<thead>
-						<tr>
-							<th>Book Name</th>
-							<th>Author</th>
-							<th>Publisher</th>
-							<th>Edition</th>
-							<th>Quantity</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<input type="text" class="form-control" id="book_name" name="book_name" ng-model="modalOptions.singleparticular.book_name" required 
-								ng-change=""  placeholder="Book Name"/>
-								<span class="help-block" ng-show="addstockForm.book_name.$dirty && addstockForm.book_name.$invalid">
-									<span ng-show="addstockForm.book_name.$error.required" class="text-danger">Book Name is necessary.</span>
-								</span> 
-							</td>
-							<td>
-								<input type="text" class="form-control" id="author" name="author" ng-model="modalOptions.singleparticular.author" required 
-								ng-change=""  placeholder="Author Name"/>
-								<span class="help-block" ng-show="addstockForm.author.$dirty && addstockForm.author.$invalid">
-									<span ng-show="addstockForm.author.$error.required" class="text-danger">Author Name is necessary.</span>
-								</span> 
-							</td>
-							<td>
-								<input type="text" class="form-control" id="publisher" name="publisher" ng-model="modalOptions.singleparticular.publisher" required 
-								ng-change=""  placeholder="Publisher Name"/>
-								<span class="help-block" ng-show="addstockForm.publisher.$dirty && addstockForm.publisher.$invalid">
-									<span ng-show="addstockForm.publisher.$error.required" class="text-danger">Publisher Name is necessary.</span>
-								</span> 
-							</td>
-							<td>
-								<input type="text" class="form-control" id="edition" name="edition" ng-model="modalOptions.singleparticular.edition" required 
-								ng-change=""  placeholder="Edition Name"/>
-								<span class="help-block" ng-show="addstockForm.edition.$dirty && addstockForm.edition.$invalid">
-									<span ng-show="addstockForm.edition.$error.required" class="text-danger">Edition Name is necessary.</span>
-								</span> 
-							</td>
-						
-
-							<td>
-								<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  
-								 required />
-								<span class="help-block" ng-show="addstockForm.quantity.$dirty && addstockForm.quantity.$invalid">
-									<span ng-show="addstockForm.quantity.$error.required" class="text-danger">Quantity Required</span>
-									<span ng-show="addstockForm.quantity.$error.pattern" class="text-danger">Enter number only</span>
-								</span>
-							</td>	
-						</tr>
-					</tbody>
-				</table>
-				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addstockForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addstock.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">	+Add This Book
-				</button>
-				<br/>
-			</div>				
+			<ng-include ng-if="modalOptions.addstock.type==1||2" src="'modules/campus/stock/equipment.html'"></ng-include> 
+			<ng-include  ng-if="modalOptions.addstock.type==3" src="'modules/campus/stock/book.html'"></ng-include>
 		</form>
 	</div>
 </div>
@@ -182,10 +66,10 @@
 			<tbody >
 				<tr ng-repeat="x in modalOptions.addstock.particular">
 					<td>{{$index + 1}}</td>
-					<td ng-if="modalOptions.addstock.type != 3">{{x.particular_name}}</td>
+					<td >{{x.particular_name}}</td>
 					<td ng-if="modalOptions.addstock.type != 3">{{x.goods_type}}</td>
 					<td ng-if="modalOptions.addstock.type != 3">{{x.category}}</td>
-					<td ng-if="modalOptions.addstock.type == 3">{{x.book_name}}</td>
+					<!-- <td ng-if="modalOptions.addstock.type == 3">{{x.book_name}}</td> -->
 					<td ng-if="modalOptions.addstock.type == 3">{{x.author}}</td>
 					<td ng-if="modalOptions.addstock.type == 3">{{x.publisher}}</td>
 					<td ng-if="modalOptions.addstock.type == 3">{{x.edition}}</td>

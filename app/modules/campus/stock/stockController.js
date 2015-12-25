@@ -6,7 +6,6 @@ define(['app'], function (app) {
    var stockController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService, uiGridConstants) {
 		$rootScope.metaTitle = "campus";
 		$scope.maxSize = 5;
-		$scope.totalRecords = "";
 		$scope.alerts = [];
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
@@ -20,13 +19,14 @@ define(['app'], function (app) {
 			{
 				name : "Add stock",
 				path : "#/dashboard/campus/stock",
-			
+				subtitle:"stock List",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/campus/stock/addstock.html");
 					}
 				}
 			}
+			
 		]
 	
 		
@@ -35,13 +35,13 @@ define(['app'], function (app) {
 			enableFiltering: true,
 		
 			columnDefs: [
-				{ name:'SrNo',width:50,
-					enableSorting: false, enableFiltering: false,
-					cellTemplate : "<div class=\'ui-grid-cell-contents ng-binding ng-scope\'>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</div>",
-					
+				{
+					name:'SrNo', 
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
+					enableFiltering: false,	
 				},
 				{
-					name:'Stock Type',enableSorting: false,enableFiltering: true,
+					name:'Type',enableSorting: false,enableFiltering: true,
 					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'stock_view\', \'stockData\',true, grid.appScope.stockParams)" ng-model="type">' 
 							+'<option value="">Select Type</option>'
 							  +'<option value="1">Equipment</option>'
@@ -52,45 +52,35 @@ define(['app'], function (app) {
 				}, 
 				 
 				{
-				    name:'particular name',
+				    name:'particular',
 					filterHeaderTemplate: '<input id="particular" class="form-control" ng-change="grid.appScope.filter(\'particular\', particular, \'stock_view\', \'stockData\', true, grid.appScope.stockParams)" ng-model="particular" placeholder="search">',
-					cellTemplate :'<span>{{row.entity.particular[0].particular_name}}</span>'
                 },
 				{
-					name:'Vendor Name',enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'vendor_id\', vendor_id, \'stock_view\', \'stockData\',true, grid.appScope.stockParams)" ng-model="vendor_id" ng-options="item.id as item.name for item in grid.appScope.vendorList">' 
+					name:'vendor_name',enableSorting: false,enableFiltering: true,
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'vendor_name\', vendor_name, \'stock_view\', \'stockData\',false, grid.appScope.stockParams)" ng-model="vendor_name" ng-options="item.name as item.name for item in grid.appScope.vendorList">' 
 							+'<option value="">Select Vendor</option>'
 						+'</select>',
-						cellTemplate :'<span>{{row.entity.vendor_name}}</span>'
                 },
 				{
 					name:'manage',enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockData\',true,grid.appScope.stockParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock_view\', \'stockData\',false,grid.appScope.stockParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
 						+'</select>',
-					
-					
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/stock/addstock.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit stock"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					
-					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
-					'<a ng-click="grid.appScope.openModal(\'modules/campus/stock/stockView.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  vendor" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/stock/stockView.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  vendor" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			],
-			onRegisterApi: function( gridApi ) {
-			  $scope.gridApi = gridApi;
-				$scope.gridApi.core.on.filterChanged( $scope, function() {
-					
-				})
-			}
+		
 		};
 			
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "stock", "stockData", $scope.stockParams);
+				$scope.getData(false, $scope.currentPage, "stock_view", "stockData", $scope.stockParams);
 			}
 		}
 		
@@ -107,7 +97,6 @@ define(['app'], function (app) {
 					vendor_id : data.vendor_id,
 					user_id : data.user_id,
 					type : data.type,
-					category:data.category,
 					particular : data.particular,
 					remark : data.remark,
 					modified_date : dataService.sqlDateFormate(false,"datetime")
@@ -117,7 +106,15 @@ define(['app'], function (app) {
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
+				view : (data)?{
+				particular:data.particular,
+				vendor_name:data.vendor_name,
 				
+				
+			}:
+			{
+				
+			},
 		
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
@@ -132,9 +129,10 @@ define(['app'], function (app) {
 							$scope.stockData.modified_date = input.modified_date;
 							$scope.stockData.type = input.type; 
 							angular.forEach(input.particular, function(value, key){
-								$scope.stockData.quantity =  "+" + value.quantity;
-								/* $scope.stockData.goods_type = value.goods_type; */ 
-								/* $scope.stockData.category = value.category; */
+								$scope.stockData.particular_name = value.particular_name; 
+								$scope.stockData.goods_type = value.goods_type; 
+								$scope.stockData.category = value.category; 
+								$scope.stockData.quantity = value.quantity;
 								$rootScope.postData("stock", angular.copy($scope.stockData),function(response){
 								});
 							})						
@@ -145,7 +143,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'stock','stockData',$scope.stockParams);
+							$scope.getData(false, $scope.currentPage, 'stock_view','stockData',$scope.stockParams);
 						}
 					})
 				},
