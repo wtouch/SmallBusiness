@@ -31,7 +31,25 @@ define(['app'], function (app) {
 					if(picArr == "campus_logo"){
 						$scope.campus.campus_logo = data.data;
 					}
-				}else{
+					
+				}
+				
+				else{
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification.error("Upload Image", data.message);
+				}
+			});
+		};
+		$scope.uploads = function(files,path,userInfo, picArr){ 
+			upload.upload(files,path,userInfo,function(data){
+				if(data.status === 'success'){
+					if(picArr == "certificates"){
+						$scope.certificate.certificates = data.data;
+					}
+					
+				}
+				
+				else{
 					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 					$notification.error("Upload Image", data.message);
 				}
