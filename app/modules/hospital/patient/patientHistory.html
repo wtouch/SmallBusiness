@@ -1,21 +1,19 @@
 <div class="modal-body">
-	<div class="form-group">
+	<div class="form-group"  ng-init="modalOptions.getData(false,false,'history','history',modalOptions.historyParams,modalOptions)">
 	<label for="select type" class="col-sm-2 control-label">Select Category*</label>
 	<div class="col-sm-3">
 		<select id="category" name="category" class="form-control" 
-		ng-model="modalOptions.addpatient.patient_history.category">
-		<option value="" selected>select category</option>
-		<option value="category">Pay by category</option>
-		<option value="category">Pay for category</option>
+		ng-model="modalOptions.addpatient.patient_history.category" ng-options="item.id as item.category for item in modalOptions.history">
+		<option value="" >select category</option>
+
 		</select>
 	</div>
 	<label for="select type" class="col-sm-2 control-label">Select type*</label>
 		<div class="col-sm-3">
 			<select id="type" name="type" class="form-control" 
-			ng-model="modalOptions.addpatient.patient_history.type">
-			<option value="" selected>select type</option>
-			<option value="type">Pay by type</option>
-			<option value="type">Pay for type</option>
+			ng-model="modalOptions.addpatient.patient_history.type" ng-options="item.id as item.type for item in modalOptions.history">
+			<option value="" >select type</option>
+		
 			</select>
 		</div>
 	</div>			

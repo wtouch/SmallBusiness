@@ -104,6 +104,7 @@ define(['app'], function (app) {
 			};
 				var modalOptions = {
 				date : $scope.currentDate,
+				hostoryParams: $scope.hostoryParams,
 				registered_date:$scope.currentDate,
 				/* registered_date:dataService.sqlDateFormate(), */
 				date:{date : $scope.currentDate},
@@ -134,7 +135,6 @@ define(['app'], function (app) {
 					country: data.country,
 					pincode: data.pincode,
 					date : data.date,
-					/* patientdate:data.patientdate, */
 					type: data.type,
 					department: data.department,
 			} : {
@@ -177,6 +177,13 @@ define(['app'], function (app) {
 			where : {
 				user_id : $rootScope.userDetails.id,
 				status : 1
+			},
+			cols : ["*"]
+		}
+		$scope.historyParams ={
+		 where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
 			},
 			cols : ["*"]
 		}
