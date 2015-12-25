@@ -201,8 +201,6 @@ define(['app'], function (app) {
 				})
 				return $scope[subobj];
 			}
-			
-			
 		}
 		$scope.$watch(function(){ return $scope.billData.data},function(newValue){
 			if(angular.isArray(newValue)){
@@ -320,6 +318,8 @@ define(['app'], function (app) {
 					formObject.goods_name = object.goods_name;
 					formObject.goods_type = object.goods_type;
 					formObject.price = object.price;
+					formObject.quantity = 1;
+					formObject.amount = object.price*formObject.quantity;
 					formObject.category = object.category;
 					console.log(object);
 				},
@@ -346,6 +346,7 @@ define(['app'], function (app) {
 				addToObject : function(object,data,modalOptions){
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};
+					modalOptions.taxInfo = {}
 				},
 				
 				removeObject : $rootScope.removeObject
@@ -402,6 +403,7 @@ define(['app'], function (app) {
 				addToObject : function(object,data,modalOptions){
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};
+					modalOptions.taxInfo = {}
 				},
 				
 				removeObject : $rootScope.removeObject

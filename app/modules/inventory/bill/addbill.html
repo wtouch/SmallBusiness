@@ -45,7 +45,8 @@
 						<tr>
 							<td>
 								<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
-								ng-change=""  placeholder="particulars Name"/>
+								 ng-change="modalOptions.singleparticular.quantity = 1; modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"  placeholder="particulars Name"
+								 ng-init="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
 								<span class="help-block" ng-show="addbillForm.particular.$dirty && addbillForm.particular.$invalid">
 									<span ng-show="addbillForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
 								</span> 
@@ -84,7 +85,6 @@
 							</td>
 							<td>						
 								<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
-									ng-init="modalOptions.singleparticular.price = 1"
 									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
 									
 								<span class="help-block" ng-show="addbillForm.price.$dirty && addbillForm.price.$invalid">
@@ -175,7 +175,7 @@
 				</tr>
 				<tr ng-repeat="(key, value) in modalOptions.addBill.tax">
 					<td colspan="5"></td>
-					<td class="text-right"><strong>{{key}}</strong></td>
+					<td class="text-right"><strong>{{key.replace("_"," ")|capitalize}}</strong></td>
 					<td class="text-right">{{ value  | number : 2}}</td>
 					<td></td>
 				</tr>

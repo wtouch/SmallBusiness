@@ -4,7 +4,6 @@
 	<h3  ng-if="modalOptions.addinvoice.id" class="text-center" ng-init="modalOptions.totalCalculate(modalOptions)">Update Invoice</h3>
 </div>
 <div class="modal-body">
-	
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="generalForm.$valid" id="generalForm">
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
@@ -19,13 +18,12 @@
 				</div>
 			</div>
 			
-			
 			<label  for="generated_date" class="col-sm-3 control-label">Generate Date*</label>
 			<div class="col-sm-4">
 				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.addinvoice.generated_date"  
 				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addinvoice.generated_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
-			<input type="hidden" ng-model="modalOptions.addinvoice.tax" ng-init="modalOptions.addinvoice.tax = modalOptions.singleparticular.tax">
+			<input type="hidden" ng-model="modalOptions.addinvoice.tax" ng-init="modalOptions.addinvoice.tax = modalOptions.singleparticular.tax"/>
 			
 		</div>
 	</form>
@@ -52,7 +50,7 @@
 							<tr>
 								<td>
 									<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
-									ng-change="" placeholder="particulars Name"/>
+								    placeholder="particulars Name"/>
 								
 									<span class="help-block" ng-show="addInvoiceForm.particular_name.$dirty && addInvoiceForm.particular_name.$invalid">
 									<span ng-show="addInvoiceForm.particular_name.$error.required" class="text-danger">particular_name Required.</span>
@@ -91,10 +89,10 @@
 									</span>	
 								</td>
 								<td>
-									<input type="text" class="form-control " placeholder="price" id="price" name="price" ng-model="modalOptions.singleparticular.price"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/"
-									ng-init="modalOptions.singleparticular.price = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
+									<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
+									ng-init="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
 									
-									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"	required/>
+									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
 									<span class="help-block" ng-show="addInvoiceForm.price.$dirty && addInvoiceForm.price.$invalid">
 									<span ng-show="addInvoiceForm.price.$error.required" class="text-danger">Price Required.</span>
 									<span ng-show="addInvoiceForm.price.$error.pattern" class="text-danger">Enter like 0.00 only</span>
@@ -122,7 +120,7 @@
 										<div class="col-sm-3">
 											<div class="form-group" ng-init="modalOptions.taxInfo = {}">
 												<ul style="list-style-type:none">
-													<li>{{modalOptions.taxInfo}}
+													<li>
 														<div class="checkbox col-sm-3 ">
 															<label ng-repeat="x in userDetails.config.inventory.taxData.tax">
 															<input type="checkbox" ng-model="modalOptions.taxInfo[x.taxName]" ng-change="modalOptions.taxCalculate(modalOptions)" checklist-value="x"/> {{x.displayName}}
@@ -151,7 +149,7 @@
 			<tr>
 				<th class="col-sm-2">Sr.No.</th>
 				<th class="col-sm-2">Particular Name</th>
-				<th class="col-sm-2">Goods_type</th>
+				<th class="col-sm-2">Type</th>
 				<th class="col-sm-2">Category </th>
 				<th class="col-sm-2 text-right">Price</th>
 				<th class="col-sm-2 text-right">Quantity</th>
@@ -171,14 +169,14 @@
 				<td><a ng-click="modalOptions.removeObject(modalOptions.addinvoice.particulars, $index);modalOptions.totalCalculate(modalOptions,'addinvoice');"><span class="glyphicon glyphicon-remove"></span></a></td>
 			</tr>
 			<tr>
-					<td colspan="5"></td>
-					<td class="text-right"><strong>Sub Total</strong></td>
-					<td class="text-right">{{ modalOptions.addinvoice.subtotal | number : 2}}</td>
-					<td>{{modalOptions.addinvoice.tax}}</td>
+				<td colspan="5"></td>
+				<td class="text-right"><strong>Sub Total</strong></td>
+				<td class="text-right">{{ modalOptions.addinvoice.subtotal | number : 2}}</td>
+				<td></td>
 			</tr>
 			<tr ng-repeat="(key, value) in modalOptions.addinvoice.tax">
 				<td colspan="5"></td>
-				<td class="text-right"><strong>{{key}}</strong></td>
+				<td class="text-right"><strong>{{key.replace("_"," ")|capitalize}}</strong></td>
 				<td class="text-right">{{ value  | number : 2}}</td>
 				<td></td>
 			</tr>
@@ -196,7 +194,7 @@
 		<span ng-hide="addInvoiceForm.remark.$error.maxlength">
 						{{ 250 - modalOptions.addinvoice.remark.length + " Chars left" }}
 		</span>	
-		 <span class="help-block" ng-show="addInvoiceForm.remark.$dirty && addInvoiceForm.remark.$invalid">
+		<span class="help-block" ng-show="addInvoiceForm.remark.$dirty && addInvoiceForm.remark.$invalid">
 			<span class="text-danger" ng-show="addInvoiceForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
 			<span ng-show="addInvoiceForm.remark.$error.required" class="text-danger">Required Field</span>
 		</span>
@@ -204,7 +202,6 @@
 </div>
 
 <div class="modal-footer">
-	
 	<button type="submit"  class="btn btn-success" ng-if="modalOptions.addinvoice.id"  ng-disabled="addinvoice.$invalid" ng-click="modalOptions.updateData('invoice',modalOptions.addinvoice,modalOptions.addinvoice.id); modalOptions.ok()">Update Invoice</button>
 
 	<button type="submit"  class="btn btn-success" ng-if="!modalOptions.addinvoice.id" ng-disabled="addInvoiceForm.$invalid" ng-click="modalOptions.postData('invoice',modalOptions.addinvoice); modalOptions.ok()">Add Invoice</button>

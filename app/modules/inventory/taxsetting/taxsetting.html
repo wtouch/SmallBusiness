@@ -1,0 +1,59 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="main-content">
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>
+			<h3 class="text-center">Tax Information</h3>
+		<form class="form-horizontal" name="taxInfoForm" role="form" novalidate ng-submit="taxInfoForm.$valid" ng-init="getTax(taxinfo)">
+		{{taxinfo}}
+			
+			<div class="form-group" ng-repeat="x in taxinfo.tax">
+				<label for="VAT" class="col-sm-2 control-label">{{x.displayName}}</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="VAT" name="VAT" placeholder="VAT" ng-model="taxinfo.tax[$index].taxValue" ng-pattern="/^\d{0,9}(\.\d{1,9})?$/" required>
+					<span class="block" ng-show="taxInfoForm.VAT.$invalid && taxInfoForm.VAT.$dirty">
+						<span ng-show="taxInfoForm.VAT.$error.required" class="text-danger">Please Enter VAT.</span>
+						<span ng-show="taxInfoForm.VAT.$error.pattern" class="text-danger">Please Enter a Number.</span>
+					</span>
+				</div>
+			</div>
+			<hr>
+			<div class="form-group">
+				<label for="PAN" class="col-sm-2 control-label">Pan No. *</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="PAN" name="PAN" placeholder="Pan No." ng-model="taxinfo.pan_no" ng-pattern="/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/" maxlength="10" required>
+					 <span class="block" ng-show="taxInfoForm.PAN.$invalid && taxInfoForm.PAN.$dirty">
+						<span ng-show="taxInfoForm.PAN.$error.required" class="text-danger">Please Enter Pan No.</span>
+						<span ng-show="taxInfoForm.PAN.$error.pattern " class="text-danger">Enter a valid PAN Number</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="VATTIN" class="col-sm-2 control-label">VAT Tin No. *</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="VATTIN" name="VATTIN" placeholder="VAT Tin No." ng-model="taxinfo.tin_no" ng-pattern="/^$|^[0-9VCvc]{12}$/" maxlength="12" required>
+					<span class="block" ng-show="taxInfoForm.VATTIN.$invalid && taxInfoForm.VATTIN.$dirty">
+						<span ng-show="taxInfoForm.VATTIN.$error.required" class="text-danger">Please Enter VAT Tin No.</span>
+						<span ng-show="taxInfoForm.VATTIN.$error.pattern" class="text-danger">Please Enter Valid VAT Tin No.</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="ServTaxNo" class="col-sm-2 control-label">Service Tax No.*</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="ServTaxNo" name="ServTaxNo" placeholder="Service Tax No." ng-model="taxinfo.service_tax_no" ng-pattern="/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}([STSD]){2}([0-9]){3}?$/" maxlength="15" required>
+					<span class="block" ng-show="taxInfoForm.ServTaxNo.$invalid && taxInfoForm.ServTaxNo.$dirty">
+						<span ng-show="taxInfoForm.ServTaxNo.$error.required" class="text-danger">Please Enter Service Tax No.</span>
+						<span ng-show="taxInfoForm.ServTaxNo.$error.pattern" class="text-danger">Please Enter Valid Service Tax No.</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-9">
+					<button type="submit" class="btn btn-primary" ng-click="updateData(taxinfo)">Update</button>
+					<button type="reset" class="btn btn-danger">Cancel</button>
+				</div>
+			</div>
+		</form>
+		</div>
+	</div>
+</div>
