@@ -1,14 +1,13 @@
 		<div class="modal-body" ng-init="modalOptions.addopdpatient.patient_complaint = (modalOptions.addopdpatient.patient_complaint) ? modalOptions.addopdpatient.patient_complaint : []">
 				
 			<div class="form-group">
-				<label for="complaint_name" class="col-sm-2 control-label">complaints_name *</label>
+				<label for="complaint_name" class="col-sm-2 control-label">Complaints Name *</label>
 				<div class="col-sm-8">
-				<input type="text" id="complaint_name" name="complaint_name" class="form-control" ng-model="modalOptions.patient_complaint.complaint_name" placeholder="Enter complaints_name" ng-pattern="/^[a-zA-Z]*$/" required />
+				<input type="text" id="complaint_name" name="complaint_name" class="form-control" ng-model="modalOptions.patient_complaint.complaint_name" placeholder="Enter Complaints Name" ng-pattern="/^[a-zA-Z]*$/" required />
 					<span class="help-block" ng-show="addopdpatientForm.complaint_name.$dirty && addopdpatientForm.complaint_name.$invalid">
-						<span ng-show="addopdpatientForm.complaint_name.$error.required" class="text-danger">complaints_name is required.</span>
+						<span ng-show="addopdpatientForm.complaint_name.$error.required" class="text-danger">Complaints name is required.</span>
 					</span>				
 				</div>
-				
 			</div>
 			<div class="form-group" ng-init="modalOptions.getData(false,false,'complaint','complaint',modalOptions.complaintParams,modalOptions)">
 			<label for="category" class="col-sm-2 control-label">Select Category*</label>
@@ -30,7 +29,8 @@
 			<div class="form-group">
 				<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
 				<div class="col-sm-8">
-					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.patient_complaint.complaints_description" placeholder="Enter Your complaints_description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.patient_complaint.complaints_description" placeholder="Enter Your Complaints Description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+					<span ng-hide="addopdpatientForm.complaints_description.$error.maxlength">{{ 250 - modalOptions.addopdpatient.patient_complaint.complaints_description.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="addopdpatientForm.complaints_description.$dirty && addopdpatientForm.complaints_description.$invalid">
 						<span ng-show="addopdpatientForm.complaints_description.$error.required"class="text-danger">Description is required.</span>
 					</span>				

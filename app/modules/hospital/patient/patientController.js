@@ -140,7 +140,7 @@ define(['app'], function (app) {
 			} : {
 					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
-					registered_date:$scope.currentDate,
+					 registered_date:$scope.currentDate, 
 					/* registered_date: dataService.sqlDateFormate(), */
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),

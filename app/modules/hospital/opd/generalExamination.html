@@ -125,7 +125,7 @@
 </div> 
 	<div class="modal-footer" >
 		<div class="col-sm-offset-2 col-sm-9">
-			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addopdpatient.id"  ng-click="modalOptions.postData('opd',modalOptions.addopdpatient);modalOptions.ok()">Add new IPD Patient</button>
+			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addopdpatient.id" ng-disabled="addopdpatientForm.$invalid" ng-click="modalOptions.postData('opd',modalOptions.addopdpatient);modalOptions.ok()">Add New IPD Patient</button>
 			
 			<button type="submit" ng-if="modalOptions.addopdpatient.id" class="btn btn-success"  ng-click="modalOptions.updateData('opd',modalOptions.addopdpatient,modalOptions.addopdpatient.id);modalOptions.ok()">Update OPD Patient</button>
 			
