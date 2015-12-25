@@ -1,0 +1,70 @@
+<div ng-init="modalOptions.addStudent.attachments = (modalOptions.addStudent.attachments) ? modalOptions.addStudent.attachments : []">
+	<form name="addStudentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStudentForm.$valid" id="addStudent">
+		<div class="table-responsive">
+			<table class="table table-bordered" >
+				<thead>
+					<tr>
+						<th>Document Name</th>
+						<th>Description</th>
+						<th>Upload File</th>
+						
+					</tr>
+				</thead>
+				<tbody><div>{{modalOptions.singleparticular}}</div>
+					<tr>
+						<td>
+							<input type="text" class="form-control " placeholder="Document Name" id="document_name" name="document_name" ng-model="modalOptions.singleparticular.document_name" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+							<span class="text-danger"  ng-show="addStudentForm.document_name.$error.pattern">Text is required.</span>
+						<span class="help-block" ng-show="addStudentForm.document_name.$dirty && addStudentForm.document_name.$invalid">
+							<span class="text-danger" ng-show="addStudentForm.document_name.$error.required">Required Field.</span>
+						</span>
+						</td>
+						<td>
+							<input type="text" class="form-control " placeholder="Description" id="description" name="description" ng-model="modalOptions.singleparticular.description" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+							<span class="text-danger"  ng-show="addStudentForm.description.$error.pattern">Text is required.</span>
+						<span class="help-block" ng-show="addStudentForm.description.$dirty && addStudentForm.description.$invalid">
+							<span class="text-danger" ng-show="addStudentForm.description.$error.required">Required Field.</span>
+						</span>
+						</td>
+						<td>
+							 <input type="file" class="form-control " placeholder="upload file" id="upload_file" name="upload_file" ng-model="modalOptions.singleparticular.upload_file" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+							<span class="help-block" ng-show="addStudentForm.upload_file.$dirty && addStudentForm.upload_file.$invalid">
+								<span class="text-danger" ng-show="addStudentForm.upload_file.$error.required">Required Field.</span>
+							</span> 
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<div class="col-sm-4">
+	<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addStudent.attachments,'singleparticular', modalOptions);">+Add This Particular</button>
+	</div>
+	</form>
+</div>
+	<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="col-sm-2">Sr.No.</th>
+					<th class="col-sm-2">Document Name</th>
+					<th class="col-sm-2">Description</th>
+					<th class="col-sm-2">Upload File</th>
+					<th class="col-sm-2">Remove</th>		
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in modalOptions.addStudent.attachments">
+					<td>{{ $index + 1 }}</td>
+					<td>{{x.document_name}}</td>
+					<td>{{x.description}}</td>
+				    <td>{{x.upload_file}}</td> 
+					<td><a ng-click="modalOptions.removeObject(modalOptions.addStudent.attachments, $index);modalOptions.totalCalculate(modalOptions);"><span class="glyphicon glyphicon-remove"></span></a></td>
+				</tr>
+			</tbody>
+		</table>
+	<div class="modal-footer">
+		<div class="col-sm-offset-2 col-sm-9">
+			<!-- <button type="submit" class="btn btn-success" ng-if="!modalOptions.addStudent.id"  ng-click="modalOptions.postData('registration',modalOptions.addStudent);modalOptions.ok()">Add Student</button> -->
+			<button type="submit" ng-if="modalOptions.addStudent.id" class="btn btn-success"  ng-click="modalOptions.updateData('student',modalOptions.addStudent,modalOptions.addStudent.id);modalOptions.ok()">Update Student</button>
+			<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
+		</div>
+	</div>

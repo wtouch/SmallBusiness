@@ -6,7 +6,6 @@ define(['app'], function (app) {
    var divisionController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService, uiGridConstants) {
 		$rootScope.metaTitle = "campus";
 		$scope.maxSize = 5;
-		$scope.totalRecords = "";
 		$scope.alerts = [];
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
@@ -14,6 +13,13 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";
 	   
+	   $scope.divParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
+		},
 	  $rootScope.moduleMenus = [
 			{
 				name : "Add division",

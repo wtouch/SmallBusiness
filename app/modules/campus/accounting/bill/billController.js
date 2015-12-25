@@ -25,7 +25,6 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Bill",
-				path : "#/dashboard/campus/accounting/bill",
 				SubTitle :" Purchase Bill",
 				events : {
 					click : function(){
@@ -45,7 +44,6 @@ define(['app'], function (app) {
 				name : "Purchase Order",
 				path : "#/dashboard/campus/accounting/purchaseorder",
 				SubTitle :"Purchase Order"
-				
 			},
 			{
 				name : "Purchase Bill",
@@ -266,7 +264,7 @@ define(['app'], function (app) {
 						if(response.status == "success"){
 							// For Insert each item from particulars into Stock Table
 							
-						/*	$scope.stockData = {};
+							/* $scope.stockData = {};
 							$scope.stockData.user_id = input.user_id;
 							$scope.stockData.vendor_id = input.vendor_id;
 							if(input.date) $scope.stockData.date = input.date;
@@ -274,14 +272,14 @@ define(['app'], function (app) {
 							$scope.stockData.modified_date = input.modified_date;
 							$scope.stockData.type = input.type; 
 							angular.forEach(input.particular, function(value, key){
-								$scope.stockData.goods_name = value.particular_name; 
+								$scope.stockData.particular_name = value.particular_name;    
 								$scope.stockData.quantity =  "+" + value.quantity;
 								$scope.stockData.price =value.price;
-								$scope.stockData.goods_type = value.goods_type; 
-								$scope.stockData.category = value.category;
+							 	$scope.stockData.goods_type = value.goods_type; 
+								$scope.stockData.category = value.category;   
 								$rootScope.postData("stock", angular.copy($scope.stockData),function(response){
 								});
-							})	*/					
+							}) */					
 						$scope.getData(false, $scope.currentPage, 'bill','billData',$scope.billParams);
 						}
 					})
@@ -357,7 +355,7 @@ define(['app'], function (app) {
 					id : data.id,
 					purchase_order_id :data.purchase_order_id,
 					party_id : data.party_id,
-					//user_id : data.user_id,
+					             user_id : data.user_id,
 					purchase_order_date : data.purchase_order_date,
 					remark : data.remark,
 					particular : data.particular,

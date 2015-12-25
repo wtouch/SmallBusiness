@@ -14,10 +14,16 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";
 	   
+	    $scope.roomParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
+		}, 
 	  $rootScope.moduleMenus = [
 			{
 				name : "Add Room",
-				path : "#/dashboard/campus/department/room",
 				SubTitle :"Room",
 				events : {
 					click : function(){

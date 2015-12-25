@@ -14,10 +14,16 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";
 	   
+	    $scope.classParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
+		},
 	  $rootScope.moduleMenus = [
 			{
 				name : "Add Class",
-				path : "#/dashboard/campus/department/class",
 				SubTitle :"Class",
 				events : {
 					click : function(){
@@ -116,7 +122,7 @@ define(['app'], function (app) {
 					})
 				},
 				getData : $scope.getData,
-					addToObject : function(object,data,modalOptions){
+				addToObject : function(object,data,modalOptions){
 						console.log(object,data,modalOptions);
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};

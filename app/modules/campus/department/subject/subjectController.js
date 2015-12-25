@@ -6,7 +6,6 @@ define(['app'], function (app) {
    var subjectController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService, uiGridConstants) {
 		$rootScope.metaTitle = "campus";
 		$scope.maxSize = 5;
-		$scope.totalRecords = "";
 		$scope.alerts = [];
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;
@@ -14,10 +13,16 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";
 	   
+	     $scope.subParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
+		}
 	  $rootScope.moduleMenus = [
 			{
 				name : "Add Subject",
-				path : "#/dashboard/campus/department/subject",
 				SubTitle :"Subject",
 				events : {
 					click : function(){
@@ -136,12 +141,7 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})
 		}
-		/* $scope.deptParams = {
-			where : {
-				user_id : $rootScope.userDetails.id,
-				status:1,
-			}
-		} */
+	
 	   // For Get (Select Data from DB)
 		/*get data */
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
