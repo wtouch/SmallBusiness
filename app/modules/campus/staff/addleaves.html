@@ -2,8 +2,7 @@
 	<button type="button" class="close buttondistance" ng-click="modalOptions.close()">
 		<span aria-hidden="true">&times;</span><span></span></button>
 	<h3 class="text-center">Staff Leaves</h3>
-</div>
-{{modalOptions.addleave}} 
+</div> 
 <div class="modal-body">
 	<form class="form-horizontal" name="addleaveForm" role="form" ng-submit="addleaveForm.$valid" novalidate="novalidate">
 			<div class="form-group">
@@ -93,10 +92,11 @@
 </div>
 
 <div class="modal-footer">
-	
+	<div class="col-sm-12 text-right">
 	<button type="submit" class="btn btn-success" ng-if="!modalOptions.addleave.id" ng-disabled="addleaveForm.$invalid" ng-click="modalOptions.postData('staff_leaves',modalOptions.addleave);modalOptions.ok()">Add Leave</button>
 					
 	<button type="submit" ng-if="modalOptions.addleave.id" class="btn btn-success" ng-disabled="addleaveForm.$invalid" ng-click="modalOptions.updateData('staff_leaves',modalOptions.addleave,modalOptions.addleave.id);modalOptions.ok()">Update Leave</button>
 
 	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
+	</div>
 </div>

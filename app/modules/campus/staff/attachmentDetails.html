@@ -10,7 +10,7 @@
 											
 										</tr>
 									</thead>
-									<tbody><div>{{modalOptions.singleparticular}}</div>
+									<tbody>
 										<tr>
 											<td>
 												<input type="text" class="form-control " placeholder="Document Name" id="document_name" name="document_name" ng-model="modalOptions.singleparticular.document_name" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
@@ -32,13 +32,13 @@
 													<span class="text-danger" ng-show="addstaffForm.upload_file.$error.required">Required Field.</span>
 												</span>
 											</td>
+											<td>
+												<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addstaff.attachments,'singleparticular', modalOptions);"><span class="glyphicon glyphicon-plus"></button>
+											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
-						<div class="col-sm-4">
-						<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addstaff.attachments,'singleparticular', modalOptions);">+Add This Particular</button>
-						</div>
 	</form>
 </div>
 	<table class="table table-bordered">

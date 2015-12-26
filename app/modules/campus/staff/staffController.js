@@ -328,7 +328,8 @@ define(['app'], function (app) {
 					user_id:$rootScope.userDetails.id,
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-				},	
+				},
+				getData:$scope.getData,	
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
@@ -343,7 +344,7 @@ define(['app'], function (app) {
 						}
 					})
 				},
-				getData:$scope.getData,
+				
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 				
