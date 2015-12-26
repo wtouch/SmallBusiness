@@ -62,10 +62,10 @@
 											</span>	
 										</td>
 										<td>
-											<input type="text" class="form-control " placeholder="cgpa" id="cgpa" name="cgpa" ng-model="modalOptions.singleparticular.cgpa" ng-pattern="/^\d{0,9}[0-9]$/" required/>
-											 <span ng-show="addStudentForm.cgpa.$error.pattern && (addStudentForm.cgpa.$dirty || submitted)" class="text-danger">please enter number</span>
+											<input type="text" class="form-control " placeholder="cgpa" id="cgpa" name="cgpa" ng-model="modalOptions.singleparticular.cgpa" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/"  required/>
 											<span class="help-block" ng-show="addStudentForm.cgpa.$dirty && addStudentForm.cgpa.$invalid">
 												<span class="text-danger" ng-show="addStudentForm.cgpa.$error.required">Required Field.</span>
+												<span ng-show="addStudentForm.cgpa.$error.pattern && (addStudentForm.cgpa.$dirty || submitted)" class="text-danger">Enter Like 0.00 only</span>
 											</span>
 										</td>
 									</tr>
