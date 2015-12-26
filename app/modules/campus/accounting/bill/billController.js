@@ -75,6 +75,7 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'vendor_id\', vendor_id, \'bill_view\', \'billData\',true, grid.appScope.billParams)" ng-model="vendor_id" ng-options="item.id as item.name for item in grid.appScope.vendorList">' 
 							+'<option value="">Select Vendor</option>'
 						+'</select>',
+					cellTemplate : '<span>{{row.entity.name | capitalize}}</span>'	
 				}, 
 			
 				{ name:'bill_date',width :110,
@@ -264,7 +265,7 @@ define(['app'], function (app) {
 						if(response.status == "success"){
 							// For Insert each item from particulars into Stock Table
 							
-							/* $scope.stockData = {};
+							$scope.stockData = {};
 							$scope.stockData.user_id = input.user_id;
 							$scope.stockData.vendor_id = input.vendor_id;
 							if(input.date) $scope.stockData.date = input.date;
@@ -279,7 +280,7 @@ define(['app'], function (app) {
 								$scope.stockData.category = value.category;   
 								$rootScope.postData("stock", angular.copy($scope.stockData),function(response){
 								});
-							}) */					
+							}) 				
 						$scope.getData(false, $scope.currentPage, 'bill','billData',$scope.billParams);
 						}
 					})
@@ -537,7 +538,12 @@ define(['app'], function (app) {
 			return finalDate;
 		}
 		
-		
+		$scope.billParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+		}
 		$scope.billParams = {
 			where : {
 				status : 1,
@@ -553,7 +559,7 @@ define(['app'], function (app) {
 					cols : ['name, email, phone, address, location, area, city, state, country, pincode']
 				},{
 					joinType : "left join",
-					joinTable : "inventory_transaction",
+					joinTable : "campus_transaction",
 					joinOn : {
 						reference_id : "t0.id"
 					},
