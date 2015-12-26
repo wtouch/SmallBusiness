@@ -6,11 +6,11 @@
 	<div class="form-group">
 		<label for="aname" class="col-sm-2 control-label">Name *</label>
 			<div class="col-sm-9">
-				<input type="text" id="aname" class="form-control" name="aname" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="awarddetail.aname" required>
-					<span class="text-danger"  ng-show="awardForm.name.$error.pattern">Text is required.</span>
-						<span class="help-block" ng-show="awardForm.name.$dirty && awardForm.name.$invalid">
-							<span class="text-danger" ng-show="awardForm.name.$error.required">Required Field.</span>
-						</span>
+				<input type="text" id="aname" class="form-control" name="aname" placeholder=" Enter Name" ng-pattern="/^[a-zA-Z/ ]*$ /" ng-model="campus.aname"required>
+					<span class="help-block" ng-show="awardForm.aname.$dirty && awardForm.aname.$invalid">
+						<span class="text-danger"  ng-show="awardForm.aname.$error.pattern">Text is required.</span>
+					<span class="text-danger" ng-show="awardForm.aname.$error.required">Required Field.</span>
+				</span>
 			</div>
 	</div>
 	
@@ -53,7 +53,7 @@
 					<td>{{x.aname}}</td>
 					<td>{{x.date}}</td>
 					<td>{{x.description}}</td>
-					<td><button ng-click="removeObject(campus.awarddetails, $index);">X</button></td>
+					<td><a ng-click="removeObject(campus.awarddetails, $index);"><span class="glyphicon glyphicon-remove"></span></a></td>
 				</tr> 
 			</tbody>
 			</table>

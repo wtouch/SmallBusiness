@@ -4,12 +4,12 @@
 <div>
 <form class="form-horizontal" name="certificateForm" role="form" ng-submit="certificateForm.$valid" novalidate="novalidate">
 <div class="form-group">
-	<label for="name" class="col-sm-2 control-label">Name *</label>
+	<label for="bname" class="col-sm-2 control-label">Name *</label>
 		<div class="col-sm-9">
-			<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="certificate.name"required>
-				<span class="text-danger"  ng-show="certificateForm.name.$error.pattern">Text is required.</span>
-					<span class="help-block" ng-show="certificateForm.name.$dirty && certificateForm.name.$invalid">
-					<span class="text-danger" ng-show="certificateForm.name.$error.required">Required Field.</span>
+			<input type="text" id="bname" class="form-control" name="bname" placeholder=" Enter Name" ng-pattern="/^[a-zA-Z/ ]*$ /" ng-model="campus.bname"required>
+					<span class="help-block" ng-show="certificateForm.bname.$dirty && certificateForm.bname.$invalid">
+						<span class="text-danger"  ng-show="certificateForm.bname.$error.pattern">Text is required.</span>
+					<span class="text-danger" ng-show="certificateForm.bname.$error.required">Required Field.</span>
 				</span>
 		</div>
 </div>
@@ -43,7 +43,7 @@
 		
 	
 <div class="col-sm-offset-2"><a ng-click="addToObject(campus.certificates,'certificate',certificate)" class="btn btn-default btn-primary">+Add</a></div>
-	
+</form>
 	<div class="row">
 		<div class="col-sm-9 col-sm-offset-2">	
 			<div class="table-responsive">
@@ -62,14 +62,14 @@
 								<td>{{$index + 1}}</td>
 								<td>{{x.name}}</td>
 								<td>{{x.description}}</td>
-								<td>{{x.certificate}}</td>
-								<td><button ng-click="removeObject(campus.certificates, $index);">X</button></td>
+								<td>{{x.certificates}}</td>
+								<td><a ng-click="removeObject(campus.certificates, $index);"><span class="glyphicon glyphicon-remove"></span></a></td>
+								
 							</tr>
 						</tbody>
 				</table>
 			</div>
 		</div>
     </div>
-<div class="col-sm-offset-2"><a ng-click="showFormPart('certificates')" class="btn btn-default btn-primary">Submit</a>
-<a ng-click="showFormPart('certificates')" class="btn btn-default btn-primary">Reset</a></div>
+<div class="col-sm-offset-2"><a ng-click="showFormPart('distributions')" class="btn btn-default btn-primary">NEXT</a></div>
 </div>

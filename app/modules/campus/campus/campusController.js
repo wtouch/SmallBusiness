@@ -3,11 +3,14 @@
 define(['app'], function (app) {
     var injectParams = ['$scope', '$injector', 'dataService', '$rootScope', '$http','upload'];
 	var campusController = function ($scope, $injector, dataService, $rootScope, $http, upload) {
-		$scope.campus = {};
+		$scope.campusDetails = $rootScope.userDetails.config.campus.campusData;
+		$scope.campus = ($scope.campusDetails)?$scope.campusDetails:{};
 		$scope.awarddetail={};
 		$scope.certificate={};
-		$scope.campus.awarddetails = [];
-		$scope.campus.certificates = [];
+		//$scope.distribution={};
+		$scope.campus.awarddetails = ($scope.campusDetails.awarddetails)?$scope.campusDetails.awarddetails:[];
+		$scope.campus.certificates = ($scope.campusDetails.certificates)?$scope.campusDetails.certificates:[];
+		$scope.campus.distributions = ($scope.campusDetails.distributions.length>0)?$scope.campusDetails.distributions:[{"percentage":"100","category":"Higher Percentage Student"}];
 					$scope.formPart ='campusdetails';
 					$scope.showFormPart = function(formPart){
 						$scope.formPart = formPart;
@@ -17,8 +20,6 @@ define(['app'], function (app) {
 					console.log(object,awarddetail);
 					$rootScope.addToObject(object,awarddetail);
 					$scope[reset] = {};
-					
-				
 				}
 				$scope.removeObject = $rootScope.removeObject;
 				
@@ -59,31 +60,20 @@ define(['app'], function (app) {
 		$scope.generateThumb = function(files){  
 			upload.generateThumbs(files);
 		};
-				
-				
-				
-				
-				
-				/* if($rootScope.userDetails.config == ""){
-					$rootScope.userDetails.config = {};
-				}
-				if($rootScope.userDetails.config.inventory == undefined) $rootScope.userDetails.config.inventory = {};
-				
-				$rootScope.taxData = {
-					service_tax : 14,
-					vat : 5,
-					pan_no : "DIPPS1619D",
-					tin_no : "DIPPS1619DST001"
-				};
-				
-				$rootScope.userDetails.config.inventory.taxData = $rootScope.taxData;
-				
+			
+			
+			$scope.updateData = function(campus){
+				$rootScope.serverApiV2 = false;
+				$rootScope.userDetails.config.campus={campusData :campus};
+				console.log($rootScope.userDetails.config.campus.campusData);
 				dataService.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
 					if(response.status == "success"){
 						dataService.setUserDetails(JSON.stringify($rootScope.userDetails));
 						$rootScope.userDetails = dataService.parse(dataService.userDetails);
+						$rootScope.serverApiV2 = true;
 					}
-				}) */
+				})
+			};
 	 };
 	 
 	// Inject controller's dependencies
