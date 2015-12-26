@@ -7,7 +7,7 @@ define(['app'], function (app) {
 	var opdController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
-		$scope.invoice = true;
+
 		$scope.type = "year";
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -28,17 +28,13 @@ define(['app'], function (app) {
 		
 		$rootScope.moduleMenus = [
 			{
-				name : "Add  Opd Patient",
-				SubTitle :"Add opd Patient",
+				name : "Add  OPD Patient",
+				SubTitle :"OPD Patient",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/hospital/opd/addopdpatient.html");
 					}
 				}
-			},{
-				name : "opd List",
-				path : "#/dashboard/hospital/opd",
-				SubTitle :"OPD List"
 			}
 		]
 		$scope.opdList = {
@@ -80,12 +76,12 @@ define(['app'], function (app) {
 					  ]
 					} ,
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/addopdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/addopdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ 
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/view_opdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/view_opdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+
-					'<a type="button" tooltip="Delete Patient details" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'opd\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/generate_bill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span >GB</span></a>'	
+					'<a type="button" tooltip="Delete Patient Details" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'opd\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/opd/generate_bill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Generate Bill" > <span >GB</span></a>'	
 				}
 			]
 		};
@@ -136,6 +132,9 @@ define(['app'], function (app) {
 					state :data.state,
 					country :data.country,
 					pincode :data.pincode,
+					//patient_history:data.patient_history,
+					history_title:data.history_title,
+					description:data.description,
 					//phone :data.phone,	
 			} : {
 					date : dataService.sqlDateFormate(),
@@ -157,6 +156,7 @@ define(['app'], function (app) {
 					general_examination :data.general_examination,
 					staff_id :data.staff_id,
 					type: data.type,
+					description:data.description,
 					emergency_contact :data.emergency_contact
 					//phone :data.phone,	
 			} : {

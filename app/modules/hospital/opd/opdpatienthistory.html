@@ -1,37 +1,20 @@
 		<div class="modal-body">
 			<div class="form-group" ng-init="modalOptions.getData(false,false,'history','history',modalOptions.historyParams,modalOptions)">
-			<label for="select type" class="col-sm-2 control-label">Select Category*</label>
-			<div class="col-sm-3" >
-				<select id="category" name="category" class="form-control" 
-				ng-model="modalOptions.addopdpatient.patient_history.category" ng-options="item.id as item.category for item in modalOptions.history">
-				<option value="">select category</option>
+			<label for="select type" class="col-sm-2 control-label">Select History Title*</label>
+			<div class="col-sm-8" >
+				<select id="history_title" name="history_title" class="form-control" 
+				ng-model="modalOptions.addopdpatient.patient_history.history_title" ng-options="item.id as item.history_title for item in modalOptions.history">
+				<option value="">Select Title</option>
 				
 				</select>
 			</div>
-			<label for="select type" class="col-sm-2 control-label">Select type*</label>
-				<div class="col-sm-3">
-					<select id="type" name="type" class="form-control" 
-					ng-model="modalOptions.addopdpatient.patient_history.type" ng-options="item.id as item.type for item in modalOptions.history">
-					<option value="" selected>select type</option>
-					<option value="type">Pay by type</option>
-					<option value="type">Pay for type</option>
-					</select>
-				</div>
 			</div>			
-			<div class="form-group">
-				<label for="title" class="col-sm-2 control-label">Title *</label>
-				<div class="col-sm-8">
-				<input type="text" id="title" name="title" class="form-control" ng-model="modalOptions.addopdpatient.patient_history.title" placeholder="Enter title" ng-pattern="/^[a-zA-Z]*$/" required>
-					<span class="help-block" ng-show="addopdpatientForm.title.$dirty && addopdpatientForm.title.$invalid">
-						<span ng-show="addopdpatientForm.title.$error.required" class="text-danger">title is required.</span>
-					</span>				
-				</div>
-			</div>
+		
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">Description *</label>
 				<div class="col-sm-8">
-					<textarea  type="text" required name="description"id="description" class="form-control" id="description" ng-model="modalOptions.description.description" placeholder="Enter your patient history Description" ></textarea>
-					<span ng-hide="addopdpatientForm.complaints_description.$error.maxlength">{{ 250 - modalOptions.addopdpatient.patient_history.description.length + " Chars left"}}</span>
+					<textarea  type="text" required name="description"id="description" class="form-control" id="description" ng-model="modalOptions.addopdpatient.patient_history.description" placeholder="Enter Description" ng-maxlength = "250" ></textarea>
+					<span ng-hide="addopdpatientForm.addopdpatient.patient_history.description.$error.maxlength">{{ 250 - modalOptions.addopdpatient.patient_history.description.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="addopdpatientForm.description.$dirty && addopdpatientForm.description.$invalid">
 						<span ng-show="addopdpatientForm.description.$error.required"class="text-danger">Description is required.</span>
 					</span>				
