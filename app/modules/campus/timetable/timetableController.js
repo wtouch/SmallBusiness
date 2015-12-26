@@ -106,7 +106,7 @@ define(['app'], function (app) {
 					
 				},
 				{ name:'timefrom',width:130,	enableSorting: false,
-					filterHeaderTemplate: '<input id="date" class="form-control" ng-model="date" placeholder="timefrom">',
+					filterHeaderTemplate: '<input id="timefrom" class="form-control" ng-model="timefrom" placeholder="timefrom">',
 					
 				}, 
 				{ name:'timeto',width:130,	enableSorting: false,
@@ -173,7 +173,9 @@ define(['app'], function (app) {
 				sub_name:data.sub_name,
 				day:data.day,
 				date:data.date,
-				
+				timefrom:data.timefrom,
+				timeto:data.timeto,
+					
 			}:
 			{
 				
@@ -191,8 +193,8 @@ define(['app'], function (app) {
 								$scope.timetableData.staff_id = value.staff_id;
 								$scope.timetableData.day = value.day;
 								$scope.timetableData.date = value.date;
-								$scope.timetableData.from = value.from;
-								$scope.timetableData.to = value.to;
+								$scope.timetableData.timefrom = value.timefrom;
+								$scope.timetableData.timeto = value.timeto;
 								$rootScope.postData("timetable", angular.copy($scope.timetableData),function(response){
 									$scope.getData(false, $scope.currentPage, 'timetable_view1','timetableList',$scope.timetableParams); 
 								});

@@ -28,8 +28,6 @@ define(['app'], function (app) {
 			}
 			
 		]
-	
-		
 		$scope.stockData = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -41,29 +39,22 @@ define(['app'], function (app) {
 					enableFiltering: false,	
 				},
 				{
-					name:'Type',enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'stock_view\', \'stockData\',true, grid.appScope.stockParams)" ng-model="type">' 
+					name:'stock_type',enableSorting: false,enableFiltering: true,
+					filterHeaderTemplate: '<select id="stock_type" class="form-control" ng-change="grid.appScope.filter(\'stock_type\', stock_type, \'stock\', \'stockData\',true, grid.appScope.stockParams)" ng-model="stock_type">' 
 							+'<option value="">Select Type</option>'
 							  +'<option value="1">Equipment</option>'
 						      +'<option value="2">Stationary</option>'
-						     +' <option value="3">Book</option>'
-						+'</select>',
-						cellTemplate : '<span ng-if="row.entity.type==1">Equipment</span><span ng-if="row.entity.type==2">Stationary</span><span ng-if="row.entity.type==3">Book</span>',
-				}, 
-				 
-				{
-				    name:'particular',
-					filterHeaderTemplate: '<input id="particular" class="form-control" ng-change="grid.appScope.filter(\'particular\', particular, \'stock_view\', \'stockData\', true, grid.appScope.stockParams)" ng-model="particular" placeholder="search">',
-                },
+						+'</select>'
+				},
 				{
 					name:'vendor_name',enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'vendor_name\', vendor_name, \'stock_view\', \'stockData\',false, grid.appScope.stockParams)" ng-model="vendor_name" ng-options="item.name as item.name for item in grid.appScope.vendorList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'vendor_name\', vendor_name, \'stock\', \'stockData\',false, grid.appScope.stockParams)" ng-model="vendor_name" ng-options="item.name as item.name for item in grid.appScope.vendorList">' 
 							+'<option value="">Select Vendor</option>'
 						+'</select>',
                 },
 				{
 					name:'manage',enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock_view\', \'stockData\',false,grid.appScope.stockParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockData\',false,grid.appScope.stockParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -80,7 +71,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "stock_view", "stockData", $scope.stockParams);
+				$scope.getData(false, $scope.currentPage, "stock", "stockData", $scope.stockParams);
 			}
 		}
 		
@@ -94,87 +85,64 @@ define(['app'], function (app) {
 				addstock : (data) ? {
 					id : data.id,
 					stock_id :data.stock_id,
-					vendor_id : data.vendor_id,
 					user_id : data.user_id,
-					type : data.type,
-					particular : data.particular,
-					remark : data.remark,
-					modified_date : dataService.sqlDateFormate(false,"datetime")
+					vendor_id : data.vendor_id,
+					stock_type : data.stock_type,
+					goods_name: data.goods_name,
+					goods_type: data.goods_type,
+					category: data.category,
+					quantity: data.quantity,
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					status : 1,
 					user_id : $rootScope.userDetails.id
 				},
-				view : (data)?{
-				particular:data.particular,
-				vendor_name:data.vendor_name,
-				
-				
-			}:
-			{
-				
-			},
-		
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							// For Insert each item from particulars into Stock Table
-							
-							$scope.stockData = {};
-							$scope.stockData.user_id = input.user_id;
-							$scope.stockData.vendor_id = input.vendor_id;
-							if(input.date) $scope.stockData.date = input.date;
-							$scope.stockData.stockdate = input.generated_date;
-							$scope.stockData.modified_date = input.modified_date;
-							$scope.stockData.type = input.type; 
-							angular.forEach(input.particular, function(value, key){
-								$scope.stockData.particular_name = value.particular_name; 
-								$scope.stockData.goods_type = value.goods_type; 
-								$scope.stockData.category = value.category; 
-								$scope.stockData.quantity = value.quantity;
-								$rootScope.postData("stock", angular.copy($scope.stockData),function(response){
-								});
-							})						
-						$scope.getData(false, $scope.currentPage, 'stock','stockData',$scope.stockParams);
+							$scope.getData(false, $scope.currentPage, 'stock','stockData',$scope.stockParams);
+						
 						}
+					
 					})
+					
 				},
+				
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'stock_view','stockData',$scope.stockParams);
+							$scope.getData(false, $scope.currentPage, 'stock','stockData',$scope.stockParams);
 						}
 					})
 				},
-				
-				getData: $scope.getData,
-				stockParams : {
-					where : {
-					user_id : $rootScope.userDetails.id,
-					status:1,
-				},
-				cols : ["*"]
-				},
-				//addToObject : $rootScope.addToObject,
-				addToObject : function(object,data,modalOptions){
-					$rootScope.addToObject(object,modalOptions[data]);
-					modalOptions[data] = {};
-				},
-				
-				removeObject : $rootScope.removeObject
+				getData:$scope.getData,
 			};
+				
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
+			
 		}
 		$scope.stockParams = {
 			where : {
 				status : 1,
 				user_id : $rootScope.userDetails.id
 			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "campus_vendor",
+					joinOn : {
+						id : "t0.vendor_id"
+					},
+					cols : ['name, email, phone, address, location, area, city, state, country, pincode']
+				}
+			],
+			groupBy : {
+				id : "id"
+			},
 			cols : ["*"]
-		}	
-			
+		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -221,10 +189,10 @@ define(['app'], function (app) {
 				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
 		}
-		$scope.orderBy = function(col, value){
+		$scope.orderBy = function(col, value, table, subobj){
 			if(!$scope.params.orderBy) $scope.params.orderBy = {};
 			$scope.params.orderBy[col] = value;
-			$scope.getData(false,$scope.currentPage, 'stock', 'stockData', $scope.params);
+			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
 	};	
 	// Inject controller's dependencies

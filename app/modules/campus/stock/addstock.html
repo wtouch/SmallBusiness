@@ -6,96 +6,88 @@
 </div>
 
 <div class="modal-body">
-	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
+	<form name="addstockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addstockForm.$valid" id="addstockForm">
 		<div class=" form-group">
-				<label for="type" class="col-sm-2 control-label"> Select stock Type </label>
-				<div class="col-sm-10">
-					<select class="form-control" name="type" id="type" ng-model="modalOptions.addstock.type" required>
-						<option value="">Select Type</option>
-						<option value="1">Equipment</option>
-						<option value="2">Stationary</option>
-						<option value="3">Book</option>
+				<label for="stock_type" class="col-sm-2 control-label">stock Type </label>
+				<div class="col-sm-9">
+					<select class="form-control" name="stock_type" id="stock_type" ng-model="modalOptions.addstock.stock_type" required>
+						<option value="" selected>Select Type</option>
+						<option value="Equipment">Equipment</option>
+						<option value="Stationary">Stationary</option>
 					</select>	
 				</div>
 		</div>
-		<div class=" form-group">
-			<div ng-init="modalOptions.getData(false,false,'vendor', 'vendorList',vendorParams,modalOptions)">
-			<label for="vendor_id" class="col-sm-2 control-label"> Select Vendor * </label>
-			<div class="col-sm-4">
-				<select class="form-control" name="vendor_id" id="vendor_id" ng-model="modalOptions.addstock.vendor_id" ng-options="item.id as item.name for item in modalOptions.vendorList" required>
-					<option value="">Select Vendor</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-				</select>	
+		<div class="form-group">
+			<div ng-init="modalOptions.getData(false,false,'vendor', 'vendorList',false,modalOptions)">
+				<label for="vendor_id" class="col-sm-2 control-label">Vendor * </label>
+				<div class="col-sm-9">
+					<select class="form-control" name="vendor_id" id="vendor_id" ng-model="modalOptions.addstock.vendor_id" ng-options="item.id as item.name for item in modalOptions.vendorList" required>
+						<option value="">Select Vendor</option>
+					</select>	
+				</div>
 			</div>
+		</div>
+		<div class="form-group">
+			<label for="goods_name" class="col-sm-2 control-label">Goods Name * </label>
+				<div class="col-sm-9">
+				<input type="text" class="form-control" id="goods_name" name="goods_name" ng-model="modalOptions.addstock.goods_name" required 
+				ng-change=""  placeholder="Good Name"/>
+				<span class="help-block" ng-show="addstockForm.goods_name.$dirty && addstockForm.goods_name.$invalid">
+				<span ng-show="addstockForm.goods_name.$error.required" class="text-danger">Good Name is necessary.</span>
+				</span> 
 			</div>
-			<!-- <label  for="stock_date" class="col-sm-2 control-label">stock Date *</label>
-			<div class="col-sm-4">
-			<input type="text" class="form-control " placeholder=" stock Date" id="stock_date" name="stock_date" ng-model="modalOptions.addstock.stock_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addstock.stock_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
-			</div> -->
+	</div>
+		
+		<div class="form-group">
+				<label for="goods_type" class="col-sm-2 control-label">Goods Type * </label>
+			<div class="col-sm-9">
+				<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.addstock.goods_type"  required>
+				<option value="" selected>Select Type</option>
+				<option value="type1" >Type1</option>
+				<option value="type2">Type2</option>
+				<option value="type3">Type3</option>
+				<option value="type4">Type4</option>
+				</select>
+				<span class="help-block" ng-show="addstockForm.addstock.$dirty && addstockForm.addstock.$invalid">
+				<span ng-show="addstockForm.addstock.$error.required" class="text-danger">Required field.</span>
+				</span>	
+			</div>
+		</div>
+		<div class="form-group">
+		<label for="category" class="col-sm-2 control-label">Category * </label>
+			<div class="col-sm-9">
+				<select id="category" class="form-control" name="category"  ng-model="modalOptions.addstock.category" required>
+				<option value="" selected>Select Category</option>
+				<option value="category1">Category1</option>
+				<option value="category2">Category2</option>
+				<option value="category3">Category3</option>
+				<option value="category4">Category4</option>
+				</select>
+				<span class="help-block" ng-show="addstockForm.category.$dirty && addstockForm.category.$invalid">
+				<span ng-show="addstockForm.category.$error.required" class="text-danger">Required field.</span>
+				</span>	
+			</div>
+		</div>
+		<div class="form-group">
+		<label for="quantity" class="col-sm-2 control-label">Quantity  * </label>
+				<div class="col-sm-9">
+					<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.addstock.quantity" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/" required />
+					<span class="help-block" ng-show="addstockForm.quantity.$dirty && addstockForm.quantity.$invalid">
+					<span ng-show="addstockForm.quantity.$error.required" class="text-danger">Quantity Required</span>
+					<span ng-show="addstockForm.quantity.$error.pattern" class="text-danger">Enter number only</span>
+					</span>
+			</div>
 		</div>
 	</form>
-
-<div class="row">
 	
-<div class="col-sm-12" ng-init="modalOptions.addstock.particular = (modalOptions.addstock.particular) ? modalOptions.addstock.particular : []">
-		<form name="addstockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addstockForm.$valid" id="addstockForm">		
-			<ng-include ng-if="modalOptions.addstock.type==1||2" src="'modules/campus/stock/equipment.html'"></ng-include> 
-			<ng-include  ng-if="modalOptions.addstock.type==3" src="'modules/campus/stock/book.html'"></ng-include>
-		</form>
-	</div>
-</div>
-
-	<div class="table-responsive" ng-if="modalOptions.addstock.vendor_id && (modalOptions.addstock.type == 1 || modalOptions.addstock.type == 2 || modalOptions.addstock.type == 3)">
-		<table class="table table-bordered" >
-			<thead>
-				<tr>
-					<th class="col-sm-2">Sr.No.</th>
-					<th class="col-sm-2" ng-if="modalOptions.addstock.type != 3">Particular Name</th>
-					<th class="col-sm-2" ng-if="modalOptions.addstock.type != 3">Goods_type</th>
-					<th class="col-sm-2"ng-if="modalOptions.addstock.type != 3">Category </th>
-					<th class="col-sm-2" ng-if="modalOptions.addstock.type == 3">Book Name</th>
-					<th class="col-sm-2" ng-if="modalOptions.addstock.type == 3">Author Name</th>
-					<th class="col-sm-2" ng-if="modalOptions.addstock.type == 3">Publisher Name</th>
-					<th class="col-sm-2" ng-if="modalOptions.addstock.type == 3">Edition</th>
-					<th class="col-sm-2">Quantity</th>
-					<th >Remove</th>
-				</tr> 
-			</thead>
-			
-			<tbody >
-				<tr ng-repeat="x in modalOptions.addstock.particular">
-					<td>{{$index + 1}}</td>
-					<td >{{x.particular_name}}</td>
-					<td ng-if="modalOptions.addstock.type != 3">{{x.goods_type}}</td>
-					<td ng-if="modalOptions.addstock.type != 3">{{x.category}}</td>
-					<!-- <td ng-if="modalOptions.addstock.type == 3">{{x.book_name}}</td> -->
-					<td ng-if="modalOptions.addstock.type == 3">{{x.author}}</td>
-					<td ng-if="modalOptions.addstock.type == 3">{{x.publisher}}</td>
-					<td ng-if="modalOptions.addstock.type == 3">{{x.edition}}</td>
-					<td>{{x.quantity}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addstock.particular, $index);">X</button></td>
-		</table>
-		
-			<label class="col-sm-1">Remark</label>
-			<div class="col-sm-8 form-group">
-				<textarea rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addstock.remark"  maxlength="200" placeholder="please Remark here.." required > </textarea>
-				<span ng-hide="addstockForm.remark.$error.maxlength">
-					{{ 200 - modalOptions.addstock.remark.length + " Chars left" }}
-				</span>	
-				<span class="help-block" ng-show="addstockForm.remark.$dirty &&  addstockForm.remark.$invalid">
-					<span class="text-danger" ng-show="addstockForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="addstockForm.remark.$error.required">Remark is required.</span>
-				</span>	
-			</div>
-		</div>
-<div class="modal-footer">
 	
-	<button type="submit"  class="btn btn-success" ng-disabled="generalForm.$invalid"  ng-if="!modalOptions.addstock.id" ng-click="modalOptions.postData('stock',modalOptions.addstock); modalOptions.ok()">Add stock</button>
+	
+	
+	<button type="submit"  class="btn btn-success" ng-disabled="addstockForm.$invalid"  ng-if="!modalOptions.addstock.id" ng-click="modalOptions.postData('stock',modalOptions.addstock);">Add stock</button>
 	
 	<button type="submit" ng-if="modalOptions.addstock.id"  class="btn btn-success" ng-click="modalOptions.updateData('stock',modalOptions.addstock,modalOptions.addstock.id); modalOptions.ok()">Update Stock LIst</button>
 	
 	
 	<button type="button" class="btn btn-warning" ng-click="modalOptions.close()">Cancel</button>
-</div>
+
 </div>

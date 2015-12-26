@@ -6,18 +6,20 @@
 	
 <div class="modal-body">
 		<form class="form-horizontal" name="generalform" role="form" ng-submit="generalform.$valid" novalidate="novalidate" ng-init="modalOptions.addexam.multipleentries=(modalOptions.addexam.multipleentries)?modalOptions.addexam.multipleentries:[]">
-		
+	<div class="row">
 		<div class="form-group">
-				<label for="exam_no" class="col-sm-2 control-label">Exam No *</label>
+				<label for="type" class="col-sm-2 control-label">Exam Type *</label>
 				<div class="col-sm-9">
-					<input type="text" id="exam_no" name="exam_no" class="form-control" ng-model="modalOptions.generalform.exam_no" placeholder="Enter exam_no "  ng-pattern="/^[a-zA-Z0-9- -]*$/"" required>
-					<span class="help-block" ng-show="generalform.exam_no.$dirty && generalform.exam_no.$invalid">
-						<span ng-show="generalform.exam_no.$error.pattern" class="text-danger">Please enter number </span>
-					</span>
+					<select class="form-control" name="type" id="type" ng-model="modalOptions.addstock.type" required>
+						<option value="">Select Type</option>
+						<option value="1">Unit Test</option>
+						<option value="2">Semester</option>
+						<option value="3">Annual</option>
+					</select>	
 				</div>
-			</div>
+		</div>
 		<div class="form-group" ng-init="modalOptions.getData( false, false,'department', 'departmentList', false, modalOptions)">
-				<label for="dept_id" class="col-sm-2 control-label">Department Name </label>
+				<label for="dept_id" class="col-sm-2 control-label">Department Name* </label>
 					<div class="col-sm-9">
 						<select id="dept_id" class="form-control" ng-model="modalOptions.addexam.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList"  ng-change="modalOptions.classParams.where.dept_id = modalOptions.addexam.dept_id;modalOptions.getData(false, false,'class', 'ClassList',modalOptions.classParams, modalOptions)" required>
 							<option value="">Select Department</option>
@@ -28,8 +30,8 @@
 					</div>
 		</div>
 		
-		<div class="form-group" ng-if="modalOptions.ClassList && modalOptions.classParams.where.dept_id">
-				<label for="class_name" class="col-sm-2 control-label">Class Name </label>
+		<div class="form-group" >
+				<label for="class_name" class="col-sm-2 control-label">Class Name* </label>
 				<div class="col-sm-9">
 					<select id="class_id" class="form-control" ng-model="modalOptions.addexam.class_id" ng-options="item.id as item.class_name for item in modalOptions.ClassList"  ng-change="modalOptions.classParams.where.class_id = modalOptions.addexam.class_id;modalOptions.getData(false, false,'division','divisionList', modalOptions.classParams, modalOptions)" required>
 							<option value="">Select class</option>
@@ -41,7 +43,7 @@
 				</div>
 		</div>
 			
-		 <div class="form-group" ng-if="modalOptions.divisionList && modalOptions.classParams.where.class_id">
+		 <div class="form-group" >
 			
 				<label for="division" class="col-sm-2 control-label">Division * </label>
 				<div class="col-sm-9">
@@ -54,10 +56,10 @@
 				</div>
 		</div>
 	 </form>
-	 
-	 <div class="row">
+	</div> 
+ <div class="row">
 	 <form class="form-horizontal" name="addexamform" role="form" ng-submit="addexamform.$valid" novalidate="novalidate">
-		<div class="form-group" ng-if="modalOptions.subjectList && modalOptions.classParams.where.div_id">
+		<div class="form-group">
 				<label for="subject" class="col-sm-2 control-label"> Subject * </label>
 				<div class="col-sm-9">
 					<select id="sub_id" class="form-control" ng-model="modalOptions.singleentry.sub_id" ng-options="item.id as item.sub_name for item in modalOptions.subjectList" ng-change="modalOptions.classParams.where.sub_id=modalOptions.addexam.sub_id" required>
@@ -70,7 +72,7 @@
 		</div>
 	
 		
-		 <div class="form-group">
+		 <!-- <div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'room','roomList', false, modalOptions)">
 				<label for="room" class="col-sm-2 control-label"> Classroom * </label>
 				<div class="col-sm-9">
@@ -82,9 +84,9 @@
 					</span>	
 				</div>
 			</div>
-		</div>
+		</div> -->
 		
-		 <div class="form-group">
+<!-- 		 <div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', false, modalOptions)">
 				<label for="staff" class="col-sm-2 control-label">Supervisor * </label>
 				<div class="col-sm-9">
@@ -96,7 +98,7 @@
 					</span>	
 				</div>
 			</div>
-		</div> 
+		</div>  -->
 		 
 		
 		 <div class="form-group">
@@ -131,19 +133,19 @@
 		 <div class="form-group">
 				<label for="timefrom" class="col-sm-2 control-label">Time *</label>
 					<div class="col-sm-3">
-						<label for="time" class="col-sm-2 control-label">From</label>
-						<input type="time" name="timefrom" id="timefrom" ng-model="modalOptions.singleentry.timefrom" placeholder="Enter time" class="form-control" required>
-						<span class="text-danger"  ng-show="addexamform.timefrom.$error.pattern">Please enter valid time</span>
-						<span class="help-block" ng-show="addexamform.timefrom.$dirty && addexamform.timefrom.$invalid">
-							<span ng-show="addexamform.time.$error.required" class="text-danger">time is required.</span>
+						<label for="from" class="col-sm-2 control-label">From</label>
+						<input type="text" name="from" id="from" ng-model="modalOptions.singleentry.from" placeholder="Enter time" class="form-control" required>
+						<span class="text-danger"  ng-show="addexamform.from.$error.pattern">Please enter valid time</span>
+						<span class="help-block" ng-show="addexamform.from.$dirty && addexamform.from.$invalid">
+							<span ng-show="addexamform.from.$error.required" class="text-danger">time is required.</span>
 						</span> 
 					</div>
 					<div class="col-sm-3">
-						<label for="timeto" class="col-sm-2 control-label">To</label>
-						<input type="time" name="timeto" id="timeto" ng-model="modalOptions.singleentry.timeto" placeholder="Enter time"  class="form-control" required>
-						<span class="text-danger"  ng-show="addexamform.timeto.$error.pattern">Please enter valid time</span>
-						<span class="help-block" ng-show="addexamform.timeto.$dirty && addexamform.timeto.$invalid">
-							<span ng-show="addexamform.timeto.$error.required" class="text-danger">time is required.</span>
+						<label for="to" class="col-sm-2 control-label">To</label>
+						<input type="text" name="to" id="to" ng-model="modalOptions.singleentry.to" placeholder="Enter time"  class="form-control" required>
+						<span class="text-danger"  ng-show="addexamform.to.$error.pattern">Please enter valid time</span>
+						<span class="help-block" ng-show="addexamform.to.$dirty && addexamform.timeto.$invalid">
+							<span ng-show="addexamform.to.$error.required" class="text-danger">time is required.</span>
 						</span> 
 					</div>						
 	
@@ -155,7 +157,7 @@
 		</div>
 	</div> 
 </form>
-	{{modalOptions.addexam.multipleentries}}
+	
 </div>
 <div class="table-responsive">
 	<table class="table table-bordered" >
@@ -163,8 +165,8 @@
 				<tr>
 					<th class="col-sm-2"style="width:20px;">Sr.No.</th>
 					<th class="col-sm-2">Subject Name</th>
-					<th class="col-sm-2">Room No</th>
-					<th class="col-sm-2">Staff Name</th>
+					<!-- <th class="col-sm-2">Room No</th>
+					<th class="col-sm-2">Staff Name</th> -->
 					<th class="col-sm-2">Day</th>
 					<th class="col-sm-2">Date</th>
 					<th class="col-sm-2">From</th>
@@ -176,12 +178,12 @@
 				<tr ng-repeat="x in modalOptions.addexam.multipleentries">
 					<td>{{$index + 1}}</td>
 					<td>{{x.sub_id}}</td>
-					<td>{{x.room_id}}</td>
-					<td>{{x.staff_id}}</td>
+					<!-- <td>{{x.room_id}}</td>
+					<td>{{x.staff_id}}</td> -->
 					<td>{{x.day}}</td>
 					<td>{{x.date}}</td>
-					<td>{{x.timefrom}}</td>
-					<td>{{x.timeto}}</td>
+					<td>{{x.from}}</td>
+					<td>{{x.to}}</td>
 					
 					<td><button ng-click="modalOptions.removeObject(modalOptions.addexam.multipleentries, $index)">X</button></td>
 				</tr>
