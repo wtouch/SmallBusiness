@@ -136,7 +136,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="generateBillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.generateBill.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">	+Add This Particular
+				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="generateBillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.generateBill.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions,'generateBill');">	+Add This Particular
 				</button>
 				<br/>
 			</div>													
@@ -168,7 +168,7 @@
 					<td>{{x.price}}</td>
 					<td>{{x.quantity}}</td>
 					<td>{{x.amount}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.generateBill.particular, $index);modalOptions.totalCalculate(modalOptions);">X</button></td>
+					<td><button ng-click="modalOptions.removeObject(modalOptions.generateBill.particular, $index);modalOptions.totalCalculate(modalOptions,'generateBill');">X</button></td>
 				</tr>
 				<tr>
 					<td colspan="5"></td>
@@ -178,7 +178,7 @@
 				</tr>
 				<tr ng-repeat="(key, value) in modalOptions.generateBill.tax">
 					<td colspan="5"></td>
-					<td class="text-right"><strong>{{key}}</strong></td>
+					<td class="text-right"><strong>{{key.replace("_"," ")|capitalize}}</strong></td>
 					<td class="text-right">{{ value  | number : 2}}</td>
 					<td></td>
 					<!-- <td ng-repeat="(key, value) in modalOptions.generateBill.tax">{{ value  | number : 2}}</td> -->

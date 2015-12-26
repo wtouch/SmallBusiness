@@ -41,12 +41,12 @@
 		<label for="description" class="col-sm-2 control-label">Description *</label>
 		<div class="col-sm-8">
 			<textarea  class="form-control" id="description" ng-model="modalOptions.addpatient.patient_history.description" name="description" placeholder="Enter description"  ng-maxlength="250" required></textarea>
-			<span class="text-danger"  ng-show="addpatientForm.description.$error.pattern">Please enter valid description</span>
-			<span ng-hide="addpatientForm.description.$error.maxlength">{{ 250 - modalOptions.addpatient.patient_history.description.length + " Chars left"}}</span>
-			<span class="help-danger" ng-show="addpatientForm.description.$dirty &&  addpatientForm.description.$invalid">
-				<span class="text-danger" ng-show="addpatientForm.description.$error.maxlength">Sorry you are exceeding the limit</span>
-				<span class="text-danger" ng-show="addpatientForm.description.$error.required">Description is required.</span>
-			</span>
+			<span class="text-danger help-block"  ng-show="addpatientForm.description.$error.pattern">Please Enter Valid Address</span>
+					<span ng-hide="addpatientForm.description.$error.maxlength">{{ 250 - modalOptions.addpatient.patient_history.description.length + " Chars left"}}</span>
+					<span class="help-block" ng-show="addpatientForm.description.$dirty &&  addpatientForm.description.$invalid">
+						<span class="text-danger" ng-show="addpatientForm.description.$error.maxlength">Sorry you are exceeding the limit</span>
+						<span class="text-danger" ng-show="addpatientForm.description.$error.required">Description is required.</span>
+					</span>
 		</div>
 	</div> 
 <div class="modal-footer" >

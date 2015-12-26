@@ -45,11 +45,11 @@ define(['app'], function (app) {
 				},
 				{
 					name:'medicine_name',
-					filterHeaderTemplate: '<input id="medicine_name" class="form-control" ng-change="grid.appScope.filter(\'medicine_name\', medicine_name, \'medicine\', \'medicineList\',true, grid.appScope.medicineParams)" ng-model="medicine_name" placeholder="medicine name">',
+					filterHeaderTemplate: '<input id="medicine_name" class="form-control" ng-change="grid.appScope.filter(\'medicine_name\', medicine_name, \'medicine\', \'medicineList\',true, grid.appScope.medicineParams)" ng-model="medicine_name" placeholder="Medicine Name">',
 				},
 				{
 					name:'description',
-					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'medicine\', \'medicineList\',true, grid.appScope.medicineParams)" ng-model="description" placeholder="medicine description">',
+					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'medicine\', \'medicineList\',true, grid.appScope.medicineParams)" ng-model="description" placeholder="Medicine Description">',
 				},
 				
 				{ name:'quantity',width:90,enableSorting: false,enableFiltering: false,
@@ -68,11 +68,11 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} , 
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/medicine/addmedicine.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit medicine Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/medicine/addmedicine.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Medicine Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ 
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/general/medicine/medicineview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  medicine" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/general/medicine/medicineview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View  Medicine" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+ 
-					'<a type="button" tooltip="Delete medicine" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'medicine\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					'<a type="button" tooltip="Delete Medicine" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'medicine\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				}
 			]
 		};
@@ -151,7 +151,8 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id
+					user_id : $rootScope.userDetails.id,
+					status : 1
 				},
 				cols : ["*"]
 			};

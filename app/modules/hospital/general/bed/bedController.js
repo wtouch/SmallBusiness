@@ -60,11 +60,11 @@ define(['app'], function (app) {
 					},
 				{
 					name:'bed_number',
-					filterHeaderTemplate: '<input id="bed_number" class="form-control" ng-change="grid.appScope.filter(\'bed_number\', bed_number, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_number" placeholder="bed_number">',
+					filterHeaderTemplate: '<input id="bed_number" class="form-control" ng-change="grid.appScope.filter(\'bed_number\', bed_number, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_number" placeholder="Bed number">',
 				},
 				{
 					name:'bed_description',
-					filterHeaderTemplate: '<input id="bed_description" class="form-control" ng-change="grid.appScope.filter(\'bed_description\', bed_description, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_description" placeholder="bed_description">',
+					filterHeaderTemplate: '<input id="bed_description" class="form-control" ng-change="grid.appScope.filter(\'bed_description\', bed_description, \'bed_view\', \'bedList\',true, grid.appScope.bedParams)" ng-model="bed_description" placeholder="Bed Description">',
 				},
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bed_view\', \'bedList\',false,grid.appScope.bedParams)" ng-model="status">'
@@ -77,10 +77,10 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} , 
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/bed/addbed.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bed Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete bed" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bed_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/bed/addbed.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Bed Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ '<a type="button" tooltip="Delete Bed" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bed_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 						
-					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/bed/bedview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  Bed" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/bed/bedview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View  Bed" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 					
 				}

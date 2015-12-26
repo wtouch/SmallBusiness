@@ -8,57 +8,60 @@
 		<div class="form-group">
 			 <label  for="test_date" class="col-sm-2 control-label">Date * </label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control ng-valid-date" placeholder="Date" id="test_date" name="test_date" ng-model="modalOptions.addtest.test_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened">
+					<input type="text" class="form-control ng-valid-date" placeholder="Date" id="test_date" name="test_date" ng-model="modalOptions.addtest.test_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required>
+					<span class=" text-danger error" ng-show="addtestForm.test_date.$error.required">
+					Required!</span>
+					<span class=" text-danger error" ng-show="addtestForm.test_date.$error.date">
+					Not a valid date!</span>
 				</div>
 		</div>	
-	
-			<div class="form-group">
-				<label for="test_name" class="col-sm-2 control-label">Test Name *</label>
-				<div class="col-sm-9">					
-					<input type="text" id="test_name" class="form-control" name="test_name" placeholder="Test Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addtest.test_name"required>
-					 <span class="text-danger"  ng-show="addtestForm.test_name.$error.pattern">please Enter Valid Name</span>
-					<span class="help-block" ng-show="addtestForm.test_name.$dirty && addtestForm.test_name.$invalid">
-						<span class="text-danger" ng-show="addtestForm.test_name.$error.required">Name is required.</span>
-					</span>
-				</div>
+		<div class="form-group">
+			<label for="test_name" class="col-sm-2 control-label">Test Name *</label>
+			<div class="col-sm-9">					
+				<input type="text" id="test_name" class="form-control" name="test_name" placeholder="Test Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addtest.test_name"required>
+				 <span class="text-danger"  ng-show="addtestForm.test_name.$error.pattern">please Enter Valid Name</span>
+				<span class="help-block" ng-show="addtestForm.test_name.$dirty && addtestForm.test_name.$invalid">
+					<span class="text-danger" ng-show="addtestForm.test_name.$error.required">Name is required.</span>
+				</span>
+			</div>
 		</div>	
 		<div class="form-group">
 			<label for="test_type" class="col-sm-2 control-label">Test Type*</label>
 			<div class="col-sm-4">					
 				<input type="text" id="test_type" class="form-control" name="test_type" placeholder="Test Type" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addtest.test_type"required>
-				 <span class="text-danger"  ng-show="addtestForm.test_type.$error.pattern">please Enter Valid type</span>
+				 <span class="text-danger"  ng-show="addtestForm.test_type.$error.pattern">Please enter valid type</span>
 				<span class="help-block" ng-show="addtestForm.test_type.$dirty && addtestForm.test_type.$invalid">
 					<span class="text-danger" ng-show="addtestForm.test_type.$error.required">Type is required.</span>
 				</span>
 			</div>
-			<label for="test_charges" class="col-sm-1 control-label">Charges</label>
+			<label for="test_charges" class="col-sm-1 control-label">Test Charges</label>
 			<div class="col-sm-4">
-				<input type="text" required name="test_charges" class="form-control" id="test_charges" ng-model="modalOptions.addtest.test_charges" placeholder="Enter Your test_charges" ng-pattern="/^\d{0,9}[0-9]$/" required>
-				<span class="text-danger"  ng-show="addtestForm.test_charges.$error.pattern">please Enter Valid test_charges</span>
+				<input type="text" required name="test_charges" class="form-control" id="test_charges" ng-model="modalOptions.addtest.test_charges" placeholder="Enter your test charges" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required>
+				<span class="text-danger"  ng-show="addtestForm.test_charges.$error.pattern">Please enter valid test charges like 11.00</span>
 				<span class="help-block" ng-show="addtestForm.test_charges.$dirty && addtestForm.test_charges.$invalid">
-					<span ng-show="addtestForm.test_charges.$error.required"class="text-danger">equipment charges is required.</span>
+					<span ng-show="addtestForm.test_charges.$error.required"class="text-danger">Equipment charges is required.</span>
 				</span>				
 			</div>	
 		</div>	
 		<div class="form-group">
 			<label for="test_description" class="col-sm-2 control-label">Description</label>
-				<div class="col-sm-9">
-					<textarea  type="text" required name="test_description" class="form-control" id="test_description" ng-model="modalOptions.addtest.test_description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
-					<span class="help-block" ng-show="addtestForm.test_description.$dirty && addtestForm.test_description.$invalid">
-						<span ng-show="addtestForm.test_description.$error.required"class="text-danger">Description is required.</span>
-					</span>			
-				</div>
+			<div class="col-sm-9">
+				<textarea  type="text" required name="test_description" class="form-control" id="test_description" ng-model="modalOptions.addtest.test_description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+				<span class="text-danger"  ng-show="addtestForm.test_description.$error.pattern">Please enter valid description</span>
+				<span ng-hide="addtestForm.test_description.$error.maxlength">{{ 250 - modalOptions.addtest.test_description.length + " Chars left"}}</span>
+				<span class="help-block" ng-show="addtestForm.test_description.$dirty &&  addtestForm.test_description.$invalid">
+					<span class="text-danger" ng-show="addtestForm.test_description.$error.maxlength">Sorry You are exceeding the Limit</span>
+					<span class="text-danger" ng-show="addtestForm.test_description.$error.required">Description is required.</span>
+				</span>			
+			</div>
 		</div>					
 	</form>
 </div>
 <div class="modal-footer" >
-
-		<div class="col-sm-offset-3 col-sm-9">
-			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addtest.id"  ng-click="modalOptions.postData('test',modalOptions.addtest);modalOptions.ok()">Add Test</button>
-			
-			<button type="submit" ng-if="modalOptions.addtest.id" class="btn btn-success" ng-disabled="addtestForm.$invalid" ng-click="modalOptions.updateData('test',modalOptions.addtest,modalOptions.addtest.id);modalOptions.ok()">Update Test</button>
-			
-			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
-		</div>
+	<div class="col-sm-offset-3 col-sm-9">
+		<button type="submit" class="btn btn-success" ng-if="!modalOptions.addtest.id"  ng-click="modalOptions.postData('test',modalOptions.addtest);modalOptions.ok()">Add Test</button>
+		<button type="submit" ng-if="modalOptions.addtest.id" class="btn btn-success" ng-disabled="addtestForm.$invalid" ng-click="modalOptions.updateData('test',modalOptions.addtest,modalOptions.addtest.id);modalOptions.ok()">Update Test</button>
+		<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+	</div>
 </div>
 

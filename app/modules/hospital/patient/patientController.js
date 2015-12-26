@@ -51,23 +51,23 @@ define(['app'], function (app) {
 				},
 				{
 				    name:'patient_name',
-					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'patient\', \'patient\', true, grid.appScope.patientParams)" ng-model="patient_name" placeholder="search name">',
+					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'patient\', \'patient\', true, grid.appScope.patientParams)" ng-model="patient_name" placeholder="Search by Name">',
                 },
 				{
 					name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="email" placeholder="search">'
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="email" placeholder="Search by Email">'
                 },
 				{
 					name:'mobile',
-					filterHeaderTemplate: '<input id="mobile" class="form-control" ng-change="grid.appScope.filter(\'mobile\', mobile, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="mobile" placeholder="search">'
+					filterHeaderTemplate: '<input id="mobile" class="form-control" ng-change="grid.appScope.filter(\'mobile\', mobile, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="mobile" placeholder="Search by Mobile">'
                 },
 				{
 				    name:'dob',
-				    filterHeaderTemplate: '<input id="dob" class="form-control" ng-change="grid.appScope.filter(\'dob\', dob, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="dob" placeholder="search">', 
+				    filterHeaderTemplate: '<input id="dob" class="form-control" ng-change="grid.appScope.filter(\'dob\', dob, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="dob" placeholder="Search Dob">', 
                 },
 			   {
 				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="address" placeholder="search">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'patient\', \'patient\',true, grid.appScope.patientParams)" ng-model="address" placeholder="Search by Address">',
                 },
 					
 				{ name:'Manage', 
@@ -82,12 +82,12 @@ define(['app'], function (app) {
 					  ]
 					} ,
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/addpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit patient Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/addpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Patient Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 				
 					+ 
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/view_patient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/patient/view_patient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Patient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 						+ 
-					'<a type="button" tooltip="Delete patient" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'patient\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					'<a type="button" tooltip="Delete Patient" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'patient\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				}
 			]
 		};

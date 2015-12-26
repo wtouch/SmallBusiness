@@ -25,7 +25,6 @@
 	</form>
 
 <div class="row">
-	
 	<div class="col-sm-12" ng-init="modalOptions.addBill.particular = (modalOptions.addBill.particular) ? modalOptions.addBill.particular : []">
 		<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">
 			<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
@@ -85,7 +84,7 @@
 							</td>
 							<td>						
 								<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
-									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
+								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
 									
 								<span class="help-block" ng-show="addbillForm.price.$dirty && addbillForm.price.$invalid">
 									<span ng-show="addbillForm.price.$error.required" class="text-danger">Price Required.</span>

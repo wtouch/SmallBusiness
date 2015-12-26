@@ -101,12 +101,8 @@ define(['app'], function (app) {
 					  { value: 'category3', label: 'category3'}, { value: 'category4', label: 'category4' } ]
 					} 
 				},
-				{name:'quantity',
-					filterHeaderTemplate: '<input id="quantity" class="form-control" ng-change="grid.appScope.filter(\'quantity\', quantity, \'stock\', \'stockList\',true, grid.appScope.stockParams)" ng-model="quantity" placeholder="quantity">',
-				},
-				 { name:'unit',enableSorting: false, enableFiltering: false,},
-				 { name:'price',enableSorting: false, enableFiltering: false,},
-				
+				{ name:'unit',enableSorting: false, enableFiltering: false,},
+				{ name:'price',enableSorting: false, enableFiltering: false,},
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\',false,grid.appScope.stockParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
