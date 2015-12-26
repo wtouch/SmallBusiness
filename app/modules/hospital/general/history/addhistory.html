@@ -6,27 +6,30 @@
 <div class="modal-body">
 	<form class="form-horizontal" name="addhistoryForm" role="form" ng-submit="addhistoryForm.$valid" novalidate="novalidate"><!--{{modalOptions.addpatient}}-->	 
 		<div class="form-group">
-			 <label  for="history_date" class="col-sm-2 control-label">Date * </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control ng-valid-date" placeholder="Date" id="history_date" name="history_date" ng-model="modalOptions.addhistory.history_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened">
-				</div>
+			<label  for="history_date" class="col-sm-2 control-label">Date * </label>
+			<div class="col-sm-9">
+				<input type="text" class="form-control ng-valid-date" placeholder="Date" id="history_date" name="history_date" ng-model="modalOptions.addhistory.history_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened">
+				<span class=" text-danger error" ng-show="addhistoryForm.history_date.$error.required">
+				Required!</span>
+				<span class=" text-danger error" ng-show="addhistoryForm.history_date.$error.date">
+				Not a valid date!</span>
+			</div>
 		</div>		
 		<div class="form-group">
 			<label for="history_title" class="col-sm-2 control-label">History Title*</label>
 			<div class="col-sm-9">					
 				<input type="text" id="history_title" class="form-control" name="history_title" placeholder="History Title" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addhistory.history_title"required>
-				 <span class="text-danger"  ng-show="addhistoryForm.history_title.$error.pattern">please Enter Valid Name</span>
+				 <span class="text-danger"  ng-show="addhistoryForm.history_title.$error.pattern">Please enter valid title</span>
 				<span class="help-block" ng-show="addhistoryForm.history_title.$dirty && addhistoryForm.history_title.$invalid">
 					<span class="text-danger" ng-show="addhistoryForm.history_title.$error.required">History title is required.</span>
 				</span>
 			</div>
 		</div>	
-		
 		<div class="form-group">
 			<label for="category" class="col-sm-2 control-label">Category*</label>
 			<div class="col-sm-4">					
 				<input type="text" id="category" class="form-control" name="category" placeholder="Category" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addhistory.category"required>
-				 <span class="text-danger"  ng-show="addhistoryForm.category.$error.pattern">please Enter Valid category</span>
+				 <span class="text-danger"  ng-show="addhistoryForm.category.$error.pattern">Please enter valid category</span>
 				<span class="help-block" ng-show="addhistoryForm.category.$dirty && addhistoryForm.category.$invalid">
 					<span class="text-danger" ng-show="addhistoryForm.category.$error.required">Category is required.</span>
 				</span>
@@ -34,23 +37,23 @@
 				<label for="type" class="col-sm-1 control-label">Type*</label>
 			<div class="col-sm-4">					
 				<input type="text" id="type" class="form-control" name="type" placeholder="Type" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addhistory.type"required>
-				 <span class="text-danger"  ng-show="addhistoryForm.type.$error.pattern">please Enter Valid Name</span>
+				 <span class="text-danger"  ng-show="addhistoryForm.type.$error.pattern">Please enter valid name</span>
 				<span class="help-block" ng-show="addhistoryForm.type.$dirty && addhistoryForm.type.$invalid">
 					<span class="text-danger" ng-show="addhistoryForm.type.$error.required">Type is required.</span>
 				</span>
 			</div>
 		</div>	
-			<div class="form-group">
+		<div class="form-group">
 			<label for="history_description" class="col-sm-2 control-label">Description</label>
-				<div class="col-sm-9">
-					<textarea  type="text" required name="history_description" class="form-control" id="history_description" ng-model="modalOptions.addhistory.history_description" placeholder="Enter History description"></textarea>
-						<span class="text-danger"  ng-show="addhistoryForm.history_description.$error.pattern">please Enter Valid ward description</span>
-						<span ng-hide="addhistoryForm.history_description.$error.maxlength">{{ 250 - modalOptions.addhistory.history_description.length + " Chars left"}}</span>
-						<span class="help-block" ng-show="addhistoryForm.history_description.$dirty &&  addhistoryForm.history_description.$invalid">
-							<span class="text-danger" ng-show="addhistoryForm.history_description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-							<span class="text-danger" ng-show="addhistoryForm.history_description.$error.required">Description is required.</span>
-						</span>		
-				</div>
+			<div class="col-sm-9">
+				<textarea  type="text" required name="history_description" class="form-control" id="history_description" ng-model="modalOptions.addhistory.history_description" placeholder="Enter History description"></textarea>
+				<span class="text-danger"  ng-show="addhistoryForm.history_description.$error.pattern">Please enter valid ward description</span>
+				<span ng-hide="addhistoryForm.history_description.$error.maxlength">{{ 250 - modalOptions.addhistory.history_description.length + " Chars left"}}</span>
+				<span class="help-block" ng-show="addhistoryForm.history_description.$dirty &&  addhistoryForm.history_description.$invalid">
+						<span class="text-danger" ng-show="addhistoryForm.history_description.$error.maxlength">Sorry You are exceeding the limit</span>
+						<span class="text-danger" ng-show="addhistoryForm.history_description.$error.required">Description is required.</span>
+				</span>		
+			</div>
 		</div>						
 	</form>
 </div>

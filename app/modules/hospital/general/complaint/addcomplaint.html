@@ -5,13 +5,17 @@
 </div>
 <div class="modal-body">
 	<form class="form-horizontal" name="addcomplaintForm" role="form" ng-submit="addcomplaintForm.$valid" novalidate="novalidate"><!--{{modalOptions.addpatient}}-->	 
-	<div class="form-group">
-			 <label  for="complaint_date" class="col-sm-2 control-label">Date * </label>
-				<div class="col-sm-9">
-					<input type="text" class="form-control ng-valid-date" placeholder="Date" id="complaint_date" name="complaint_date" ng-model="modalOptions.addcomplaint.complaint_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened">
-				</div>
+		<div class="form-group">
+			<label  for="complaint_date" class="col-sm-2 control-label">Date * </label>
+			<div class="col-sm-9">
+				<input type="text" class="form-control ng-valid-date" placeholder="Date" id="complaint_date" name="complaint_date" ng-model="modalOptions.addcomplaint.complaint_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required>
+				<span class=" text-danger error" ng-show="addcomplaintForm.complaint_date.$error.required">
+					Required!</span>
+				<span class=" text-danger error" ng-show="addcomplaintForm.complaint_date.$error.date">
+				Not a valid date!</span>
+			</div>
 		</div>	
-	<div class="form-group">
+		<div class="form-group">
 			<label for="complaint_name" class="col-sm-2 control-label">Complaint Title*</label>
 			<div class="col-sm-9">					
 				<input type="text" id="complaint_name" class="form-control" name="complaint_name" placeholder="Complaint Title" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addcomplaint.complaint_name"required>
@@ -30,7 +34,7 @@
 					<span class="text-danger" ng-show="addcomplaintForm.category.$error.required">Category is required.</span>
 				</span>
 			</div>
-				<label for="type" class="col-sm-1 control-label">Type*</label>
+			<label for="type" class="col-sm-1 control-label">Type*</label>
 			<div class="col-sm-4">					
 				<input type="text" id="type" class="form-control" name="type" placeholder="Type" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addcomplaint.type"required>
 				 <span class="text-danger"  ng-show="addcomplaintForm.type.$error.pattern">please Enter Valid Name</span>
@@ -39,29 +43,26 @@
 				</span>
 			</div>
 		</div>	
-			<div class="form-group">
+		<div class="form-group">
 			<label for="complaint_description" class="col-sm-2 control-label">Description</label>
-				<div class="col-sm-9">
-					<textarea  type="text" required name="complaint_description" class="form-control" id="complaint_description" ng-model="modalOptions.addcomplaint.complaint_description" placeholder="Enter Your description" ></textarea>
-				<span class="text-danger"  ng-show="addcomplaintForm.complaint_description.$error.pattern">please Enter Valid ward description</span>
-						<span ng-hide="addcomplaintForm.complaint_description.$error.maxlength">{{ 250 - modalOptions.addcomplaint.complaint_description.length + " Chars left"}}</span>
-						<span class="help-block" ng-show="addcomplaintForm.complaint_description.$dirty &&  addcomplaintForm.complaint_description.$invalid">
-							<span class="text-danger" ng-show="addcomplaintForm.complaint_description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-							<span class="text-danger" ng-show="addcomplaintForm.complaint_description.$error.required">Description is required.</span>
-						</span>		
-				</div>
+			<div class="col-sm-9">
+				<textarea  type="text" required name="complaint_description" class="form-control" id="complaint_description" ng-maxlenghth="250"ng-model="modalOptions.addcomplaint.complaint_description" placeholder="Enter Your description" ></textarea>
+			<span class="text-danger"  ng-show="addcomplaintForm.complaint_description.$error.pattern">Please enter valid ward description</span>
+					<span ng-hide="addcomplaintForm.complaint_description.$error.maxlength">{{ 250 - modalOptions.addcomplaint.complaint_description.length + " Chars left"}}</span>
+					<span class="help-block" ng-show="addcomplaintForm.complaint_description.$dirty &&  addcomplaintForm.complaint_description.$invalid">
+						<span class="text-danger" ng-show="addcomplaintForm.complaint_description.$error.maxlength">Sorry you are exceeding the limit</span>
+						<span class="text-danger" ng-show="addcomplaintForm.complaint_description.$error.required">Description is required.</span>
+					</span>		
+			</div>
 		</div>						
 	</form>
 </div>
 <div class="modal-footer" >
-
-		<div class="col-sm-offset-3 col-sm-9">
-			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addcomplaint.id" ng-disabled="addcomplaintForm.$invalid" ng-click="modalOptions.postData('complaint',modalOptions.addcomplaint);modalOptions.ok()">Add Complaint</button>
-			
-			<button type="submit" ng-if="modalOptions.addcomplaint.id" class="btn btn-success" ng-disabled="addcomplaintForm.$invalid" ng-click="modalOptions.updateData('complaint',modalOptions.addcomplaint,modalOptions.addcomplaint.id);modalOptions.ok()">Update Complaint</button>
-			
-			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
-		</div>
+	<div class="col-sm-offset-3 col-sm-9">
+		<button type="submit" class="btn btn-success" ng-if="!modalOptions.addcomplaint.id" ng-disabled="addcomplaintForm.$invalid" ng-click="modalOptions.postData('complaint',modalOptions.addcomplaint);modalOptions.ok()">Add Complaint</button>
+		<button type="submit" ng-if="modalOptions.addcomplaint.id" class="btn btn-success" ng-disabled="addcomplaintForm.$invalid" ng-click="modalOptions.updateData('complaint',modalOptions.addcomplaint,modalOptions.addcomplaint.id);modalOptions.ok()">Update Complaint</button>
+		<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+	</div>
 </div>
 
 
