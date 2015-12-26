@@ -18,7 +18,6 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Add stock",
-				path : "#/dashboard/campus/stock",
 				subtitle:"stock List",
 				events : {
 					click : function(){
@@ -47,8 +46,8 @@ define(['app'], function (app) {
 						+'</select>'
 				},
 				{
-					name:'vendor_name',enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'vendor_name\', vendor_name, \'stock\', \'stockData\',false, grid.appScope.stockParams)" ng-model="vendor_name" ng-options="item.name as item.name for item in grid.appScope.vendorList">' 
+					name:'name',enableSorting: false,enableFiltering: true,
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'name\',name, \'stock\', \'stockData\',false, grid.appScope.stockParams)" ng-model="name" ng-options="item.id as item.name for item in grid.appScope.vendorList">' 
 							+'<option value="">Select Vendor</option>'
 						+'</select>',
                 },
@@ -101,12 +100,10 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							modalOptions.addstock = {};
 							$scope.getData(false, $scope.currentPage, 'stock','stockData',$scope.stockParams);
-						
 						}
-					
 					})
-					
 				},
 				
 				updateData : function(table, input, id){
@@ -117,6 +114,7 @@ define(['app'], function (app) {
 					})
 				},
 				getData:$scope.getData,
+				stockParams : $scope.stockParams,
 			};
 				
 			modalService.showModal(modalDefault, modalOptions).then(function(){
@@ -135,13 +133,10 @@ define(['app'], function (app) {
 					joinOn : {
 						id : "t0.vendor_id"
 					},
-					cols : ['name, email, phone, address, location, area, city, state, country, pincode']
+					cols : ['name']
 				}
 			],
-			groupBy : {
-				id : "id"
-			},
-			cols : ["*"]
+			cols : ['*']
 		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {

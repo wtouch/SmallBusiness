@@ -54,33 +54,33 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'class_name',width:60,enableSorting: false ,
-					filterHeaderTemplate: '<select id="class_name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'exam_view1\', \'examList\',true, grid.appScope.examParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="class_name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'exam_view\', \'examList\',true, grid.appScope.examParams)" ng-model="class_id" ng-options="item.id as item.class_name for item in grid.appScope.classList">' 
 					+'<option value="" selected>class Name</option>'
 						+'</select>',
 				},	
 				{ 
 					name:'division_name',width:50,enableSorting: false ,
-					filterHeaderTemplate: '<select id="division_name" class="form-control" ng-change="grid.appScope.filter(\'div_id\', div_id, \'exam_view1\', \'examList\',true, grid.appScope.examParams)" ng-model="div_id" ng-options="item.id as item.division_name for item in grid.appScope.divisionList">' 
+					filterHeaderTemplate: '<select id="division_name" class="form-control" ng-change="grid.appScope.filter(\'div_id\', div_id, \'exam_view\', \'examList\',true, grid.appScope.examParams)" ng-model="div_id" ng-options="item.id as item.division_name for item in grid.appScope.divisionList">' 
 					+'<option value="" selected>div Name</option>'
 						+'</select>',
 						
 				},	
 				
 				{ name:'room_no',width:50,enableSorting: false ,
-				filterHeaderTemplate: '<select id="room_no" class="form-control" ng-change="grid.appScope.filter(\'room_id\', room_id, \'exam_view1\', \'examList\',true, grid.appScope.examParams)" ng-model="room_id" ng-options="item.id as item.room_no for item in grid.appScope.roomList">'
+				filterHeaderTemplate: '<select id="room_no" class="form-control" ng-change="grid.appScope.filter(\'room_id\', room_id, \'exam_view\', \'examList\',true, grid.appScope.examParams)" ng-model="room_id" ng-options="item.id as item.room_no for item in grid.appScope.roomList">'
 							+'<option value="" selected>Room No</option>'
 						+'</select>',
 					//cellTemplate:'<span>{{row.entity.multipleentries[0].room_id}}</span>'
 				},
 				
 				{ name:'name',width:100,enableSorting: false ,
-				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'exam_view1\', \'examList\',true, grid.appScope.examParams)" ng-model="name" ng-options="item.id as item.name for item in grid.appScope.staffList">'
+				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'exam_view\', \'examList\',true, grid.appScope.examParams)" ng-model="name" ng-options="item.id as item.name for item in grid.appScope.staffList">'
 							+'<option value="" selected>Staff Name</option>'
 						+'</select>',
 							//cellTemplate:'<span>{{row.entity.multipleentries[0].name}}</span>'
 				},
 				{ name:'sub_name',width:100,enableSorting: false ,
-				filterHeaderTemplate: '<select id="sub_name" class="form-control" ng-change="grid.appScope.filter(\'sub_id\', sub_id, \'exam_view1\', \'examList\',true, grid.appScope.examParams)" ng-model="sub_name" ng-options="item.id as item.sub_name for item in grid.appScope.subjectList">'
+				filterHeaderTemplate: '<select id="sub_name" class="form-control" ng-change="grid.appScope.filter(\'sub_id\', sub_id, \'exam_view\', \'examList\',true, grid.appScope.examParams)" ng-model="sub_name" ng-options="item.id as item.sub_name for item in grid.appScope.subjectList">'
 							+'<option value="" selected>subject Name</option>'
 						+'</select>',
 						//cellTemplate:'<span>{{row.entity.multipleentries[0].sub_name}}</span>'
@@ -88,7 +88,7 @@ define(['app'], function (app) {
 				
 				{  name:'date',width:130,
 				enableSorting: true, enableFiltering: false,
-					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'exam_view1\', \'examList\',true, grid.appScope.examList)" ng-model="date" placeholder="date">',
+					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'exam_view\', \'examList\',true, grid.appScope.examList)" ng-model="date" placeholder="date">',
 				},
 				{
 					name:'day',width:90,
@@ -116,7 +116,7 @@ define(['app'], function (app) {
 				
 					 
 				{ name:'manage',enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'exam_view1\', \'examList\',false,grid.appScope.stockParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'exam_view\', \'examList\',false,grid.appScope.stockParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -133,7 +133,7 @@ define(['app'], function (app) {
 			console.log(response);
 			if(response.status == "success"){
 				console.log($scope.examParams);
-				$scope.getData(false, $scope.currentPage, "exam_view1", "examList", $scope.examParams);
+				$scope.getData(false, $scope.currentPage, "exam_view", "examList", $scope.examParams);
 			}
 		}
 		$scope.openModal = function(url,data){
@@ -204,7 +204,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'exam_view1','examList',$scope.examParams);
+							$scope.getData(false, $scope.currentPage, 'exam_view','examList',$scope.examParams);
 						}
 					})
 				}, 
