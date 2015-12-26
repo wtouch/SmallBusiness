@@ -14,10 +14,8 @@ define(['app'], function (app) {
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
 		$scope.currentPage = 1;
-		$scope.pageItems = 10;
-		$scope.numPages = "";		
+		$scope.pageItems = 10;		
 		$scope.currentDate = dataService.currentDate;
-		
 		
 		$scope.printDiv = function(divName) {
 			var printContents = document.getElementById(divName).innerHTML;
@@ -614,14 +612,10 @@ define(['app'], function (app) {
 
 				},
 				getData : $scope.getData,
-				
-				
-				
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
-		
 		
 		// For Get (Select Data from DB)
 		/*get data */
@@ -675,7 +669,6 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
-		
 		
 	};
 		
