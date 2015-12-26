@@ -124,7 +124,7 @@ define(['app'], function (app) {
 					fees:data.fees,
 					ward_charges:data.ward_charges,
 					bed_number:data.bed_number,
-					//name:data.name,
+					//test_description :data.test_description,
 					patient_id:data.patient_id,
 					bed_id :data.bed_id,
 					patient_history:data.patient_history,

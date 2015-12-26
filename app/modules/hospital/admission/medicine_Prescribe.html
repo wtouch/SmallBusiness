@@ -29,17 +29,17 @@
 			</tr>
 		</tbody>
 	</table>
-	<div class="modal-body">{{modalOptions.medicine_prescribe}}
+	<div class="modal-body">
 		<form class="form-horizontal" name="medicine_prescribeForm" role="form" ng-submit="medicine_prescribeForm.$valid" novalidate="novalidate">
 			<div class="form-group">
 				<label  for="medicine_used_date" class="col-sm-2 control-label">Date*</label>
 				<div class="col-sm-8">
-					<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="medicine_used_date" name="medicine_used_date" ng-model="modalOptions.medicine_prescribe.medicine_used_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.medicine_used_date,10); modalOptions.sqlDateFormat(modalOptions.medicine_prescribe, modalOptions.medicine_prescribe)"/>	
-						<span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
-						</span>
-					</div>
+					<input type="text" class="form-control " placeholder="Date" id="medicine_used_date" name="medicine_used_date" ng-model="modalOptions.diagnostic.medicine_used_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required/>	
+						
+							<span class="text-danger"  ng-show="medicine_prescribeForm.medicine_used_date.$error.date">Please enter valid date</span>
+					<span class="help-block" ng-show="medicine_prescribeForm.medicine_used_date.$dirty && medicine_prescribeForm.medicine_used_date.$invalid">
+						<span ng-show="medicine_prescribeForm.medicine_used_date.$error.required"class="text-danger">date  is required.</span>
+					</span>	
 				</div>
 			</div>
 			<div class="form-group"  ng-init= "modalOptions.getData(false,false,'medicine','medicineList',false,modalOptions)">
