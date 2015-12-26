@@ -16,7 +16,6 @@
 					<option value="staff_credit">Pay by Staff</option>
 					<option value="staff_debit">Pay for Staff</option>
 					</select>
-			
 			</div>
 			<label  for="date" class="col-sm-1 control-label">Date *</label>
 			<div class="col-sm-4">
@@ -35,14 +34,14 @@
 <form name="staffpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="staffpaymentForm.$valid" ng-if="modalOptions.staffpayment.type=='staff_debit'"> 
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
-				<label for="referance_id" class="col-sm-2 control-label"> Select Staff* </label>
+				<label for="reference_id" class="col-sm-2 control-label"> Select Staff* </label>
 				<div class="col-sm-4">
-					<select id="refferance_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
+					<select id="reference_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
 						<option value="">Select Staff</option>
 						<option value="1">1</option>
 					</select>
-					<span class="help-block" ng-show="staffpaymentForm.referance_id.$dirty && staffpaymentForm.referance_id.$invalid">
-					<span ng-show="staffpaymentForm.referance_id.$error.required" class="text-danger">user name is required.</span>
+					<span class="help-block" ng-show="staffpaymentForm.reference_id.$dirty && staffpaymentForm.reference_id.$invalid">
+					<span ng-show="staffpaymentForm.reference_id.$error.required" class="text-danger">user name is required.</span>
 					</span>	
 				</div>
 				<label for="category" class="col-sm-1 control-label">Category</label>
@@ -90,16 +89,16 @@
 			</div> 
 
 			<div class="form-group" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque' || modalOptions.staffpayment.payment_type.type == 'Net Banking' || modalOptions.staffpayment.payment_type.type == 'DD'">
-				<label for="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
-				<label for="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
-				<label for="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
+				<label for="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
+				<label for="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
+				<label for="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
 					<div class="col-sm-9">
-						<input type="text" id="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'" ng-model="modalOptions.staffpayment.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
-						<span class="help-block" ng-show="staffpaymentForm.refferance_no.$dirty && staffpaymentForm.refferance_no.$invalid" required>
-							<span ng-show="staffpaymentForm.refferance_no.$error.required" class="text-danger">Ref No is required.</span>
-							<span ng-show="staffpaymentForm.refferance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+						<input type="text" id="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'" ng-model="modalOptions.staffpayment.payment_type.transaction_No" class="form-control" name="referance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<span class="help-block" ng-show="staffpaymentForm.referance_no.$dirty && staffpaymentForm.referance_no.$invalid" required>
+							<span ng-show="staffpaymentForm.referance_no.$error.required" class="text-danger">Ref No is required.</span>
+							<span ng-show="staffpaymentForm.referance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 						</span>
-						<input type="text" id="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" ng-model="modalOptions.staffpayment.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<input type="text" id="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" ng-model="modalOptions.staffpayment.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="staffpaymentForm.cheque_no.$dirty && staffpaymentForm.cheque_no.$invalid" required>
 							<span ng-show="staffpaymentForm.cheque_no.$error.required" class="text-danger">Cheque No is required.</span>
 							<span ng-show="staffpaymentForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
@@ -180,14 +179,14 @@
 <form name="staffpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="staffpaymentForm.$valid" ng-if="modalOptions.staffpayment.type=='staff_credit'"> 
 			<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
-				<label for="refferance_id" class="col-sm-2 control-label"> Select Staff* </label>
+				<label for="reference_id" class="col-sm-2 control-label"> Select Staff* </label>
 				<div class="col-sm-4">
-					<select id="refferance_id" class="form-control" ng-model="modalOptions.staffpayment.refferance_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
+					<select id="reference_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
 						<option value="">Select Staff</option>
 						<option value="1">1</option>
 					</select>
-					<span class="help-block" ng-show="staffpaymentForm.refferance_id.$dirty && staffpaymentForm.refferance_id.$invalid">
-					<span ng-show="staffpaymentForm.refferance_id.$error.required" class="text-danger">user name is required.</span>
+					<span class="help-block" ng-show="staffpaymentForm.reference_id.$dirty && staffpaymentForm.reference_id.$invalid">
+					<span ng-show="staffpaymentForm.reference_id.$error.required" class="text-danger">user name is required.</span>
 					</span>	
 				</div>
 			</div>
@@ -239,16 +238,16 @@
 			</div> 
 
 			<div class="form-group" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque' || modalOptions.staffpayment.payment_type.type == 'Net Banking' || modalOptions.staffpayment.payment_type.type == 'DD'">
-				<label for="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
-				<label for="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
-				<label for="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
+				<label for="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
+				<label for="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
+				<label for="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
 					<div class="col-sm-9">
-						<input type="text" id="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'" ng-model="modalOptions.staffpayment.payment_type.transaction_No" class="form-control" name="refferance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
-						<span class="help-block" ng-show="staffpaymentForm.refferance_no.$dirty && staffpaymentForm.refferance_no.$invalid">
-							<span ng-show="staffpaymentForm.refferance_no.$error.required" class="text-danger">Ref No is required.</span>
-							<span ng-show="staffpaymentForm.refferance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+						<input type="text" id="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'" ng-model="modalOptions.staffpayment.payment_type.transaction_No" class="form-control" name="referance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<span class="help-block" ng-show="staffpaymentForm.referance_no.$dirty && staffpaymentForm.referance_no.$invalid">
+							<span ng-show="staffpaymentForm.referance_no.$error.required" class="text-danger">Ref No is required.</span>
+							<span ng-show="staffpaymentForm.referance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
 						</span>
-						<input type="text" id="refferance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" ng-model="modalOptions.staffpayment.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						<input type="text" id="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" ng-model="modalOptions.staffpayment.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="staffpaymentForm.cheque_no.$dirty && staffpaymentForm.cheque_no.$invalid">
 							<span ng-show="staffpaymentForm.cheque_no.$error.required" class="text-danger">Cheque No is required.</span>
 							<span ng-show="staffpaymentForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>

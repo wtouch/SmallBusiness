@@ -420,6 +420,7 @@ define(['app'], function (app) {
 					formObject.goods_type = object.goods_type;
 					formObject.price = object.price;
 					formObject.category = object.category;
+					formObject.amount = object.price*formObject.quantity;
 					console.log(object);
 				},
 				printDiv : $scope.printDiv,
