@@ -1,3 +1,4 @@
+<div class="modal-body">
 <div ng-init="modalOptions.addstaff.qualification = (modalOptions.addstaff.qualification) ? modalOptions.addstaff.qualification : []">
 	<div class="table-responsive">
 		<table class="table table-bordered" >
@@ -7,12 +8,13 @@
 					<th>University</th>
 					<th>Percentage</th>
 					<th>Passing Year</th>
+					<th>Add</th>
 				</tr>
 			</thead>
 			<tbody><div>{{modalOptions.singleparticular}}</div>
 				<tr>
 					<td>
-						<input type="text" class="form-control " placeholder="exam Name" id="exam" name="exam" ng-model="modalOptions.singleparticular.exam" ng-pattern="/^[a-zA-Z/ ]*$/"/>
+						<input type="text" class="form-control " placeholder="Exam Name" id="exam" name="exam" ng-model="modalOptions.singleparticular.exam" ng-pattern="/^[a-zA-Z/ ]*$/"/>
 						 <span class="text-danger"  ng-show="addstaffForm.exam.$error.pattern">Text is required.</span>
 						<span class="help-block" ng-show="addstaffForm.exam.$dirty && addstaffForm.exam.$invalid">
 							<span class="text-danger" ng-show="addstaffForm.exam.$error.required">Required Field.</span>
@@ -41,24 +43,24 @@
 							<span class="text-danger" ng-show="addstaffForm.year.$error.required">Required Field.</span>
 						</span>	
 					</td>
+		
+					<td>
+					<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addstaff.qualification,'singleparticular', modalOptions);">+</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<div class="col-sm-4">
-		<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addstaff.qualification,'singleparticular', modalOptions);">+Add</button>
-	</div>		
-
 </div> 
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th class="col-sm-2">Sr.No.</th>
+					<th class="col-sm-1">Sr.No.</th>
 					<th class="col-sm-2">Exam Name</th>		
-					<th class="col-sm-2 text-right">University</th>
+					<th class="col-sm-2>University</th>
 					<th class="col-sm-2">Percentage</th>
 					<th class="col-sm-2 text-right">Passing Year</th>
-					<th class="col-sm-2">Remove</th>	
+					<th class="col-sm-1">Remove</th>	
 				</tr>
 			</thead>
 			<tbody>
@@ -71,5 +73,5 @@
 				</tr>
 			</tbody>
 		</table>
-		
+</div>	
 		
