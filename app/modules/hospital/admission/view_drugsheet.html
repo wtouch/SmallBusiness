@@ -23,14 +23,14 @@
 				</td>	
 			</tr>
 			<tr>
-				 <td><b>Consultant Dr.</b></td>
+				<td><b>Consultant Dr.</b></td>
 				 <td>						
 					{{modalOptions.view_admission.name}}
 				 </td>	
 				 <td><b>Complaints</b></td>
 				 <td>						
 					{{modalOptions.view_admission.complaints}}
-				 </td>	
+				</td>	
 			</tr>
 		</tbody>
 	</table>
@@ -40,10 +40,12 @@
 			<div class="col-sm-8">
 				<div class="input-group">
 					<input type="text" class="form-control " placeholder="Date" id="medicine_used_date" name="medicine_used_date" ng-model="modalOptions.diagnostic.medicine_used_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required/>	
-						
-							<span class="text-danger"  ng-show="adddrug_sheetForm.medicine_used_date.$error.date">Please enter valid date</span>
+					<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+					<span class="text-danger"  ng-show="adddrug_sheetForm.medicine_used_date.$error.date">Please enter valid date</span>
 					<span class="help-block" ng-show="adddrug_sheetForm.medicine_used_date.$dirty && adddrug_sheetForm.medicine_used_date.$invalid">
-						<span ng-show="adddrug_sheetForm.medicine_used_date.$error.required"class="text-danger">date  is required.</span>
+						<span ng-show="adddrug_sheetForm.medicine_used_date.$error.required"class="text-danger">Date  is required.</span>
 					</span>	
 				</div>
 			</div>
