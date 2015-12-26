@@ -1,13 +1,11 @@
 <div class="form-group">
 		<label  for="date" class="col-sm-2 control-label">Date*</label>
 			<div class="col-sm-9">
-				<div class="input-group">
+			
 					<input type="text" class="form-control " placeholder="Date" id="staff_date" name="staff_date" ng-model="modalOptions.addstaff.staff_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1"  max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.staff_date,10); modalOptions.sqlDateFormat(modalOptions.addstaff.staff_date, modalOptions.addstaff.staff_date)"/>	
-					
-					<span class="input-group-btn">
-					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
-					</span>
-				</div>
+					<span class="text-danger"ng-show="addstaffForm.staff_date.$error.date">Invalid date.</span>
+					<span class="text-danger" ng-show="addstaffForm.staff_date.$error.required">date is required.</span>
+		
 			</div>
 	</div>
 	<div class="form-group">

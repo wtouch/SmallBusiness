@@ -27,24 +27,24 @@
 <div class="form-group">
 	<label for="pan_no" class="col-sm-2 control-label">Pan No</label>
 	<div class="col-sm-4">
-		<input type="text" id="pan_no" name="pan_no" class="form-control" ng-model="modalOptions.addstaff.pan_no" placeholder="Enter Pan No" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="10" required>
+		<input type="text" id="pan_no" name="pan_no" class="form-control" ng-model="modalOptions.addstaff.pan_no" placeholder="Enter Pan No" ng-pattern="/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/"  maxlength="10" required>
 		<span class="help-block" ng-show="addstaffForm.pan_no.$dirty && addstaffForm.pan_no.$invalid">
-			<span ng-show="addstaffForm.pan_no.$error.pattern && (addstaffForm.pan_no.$dirty || submitted)" class="text-danger">please enter number</span>
+			<span ng-show="addstaffForm.pan_no.$error.pattern && (addstaffForm.pan_no.$dirty || submitted)" class="text-danger">Please enter pan no in valid format</span>
 		</span>
 	</div>	
 
 <label for="uan" class="col-sm-1 control-label">UAN No</label>
 	<div class="col-sm-4">
-		<input type="text" id="uan" name="uan" class="form-control" ng-model="modalOptions.addstaff.uan" placeholder="Enter UAN No" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="10" required>
+		<input type="text" id="uan" name="uan" class="form-control" ng-model="modalOptions.addstaff.uan" placeholder="Enter UAN No" ng-pattern="/^\d{0,11}[0-9]$/"  maxlength="12">
 		<span class="help-block" ng-show="addstaffForm.uan.$dirty && addstaffForm.uan.$invalid">
-			<span ng-show="addstaffForm.uan.$error.pattern && (addstaffForm.uan.$dirty || submitted)" class="text-danger">please enter number</span>
+			<span ng-show="addstaffForm.uan.$error.pattern && (addstaffForm.uan.$dirty || submitted)" class="text-danger">Please enter number</span>
 		</span>
 	</div>		
 </div>
 <div class="form-group">
 		<label for="adhaar_no" class="col-sm-2 control-label">Adhaar No</label>
 	<div class="col-sm-9">
-		<input type="text" id="adhaar_no" name="adhaar_no" class="form-control" ng-model="modalOptions.addstaff.adhaar_no" placeholder="Enter adhaar No" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="10" required>
+		<input type="text" id="adhaar_no" name="adhaar_no" class="form-control" ng-model="modalOptions.addstaff.adhaar_no" placeholder="Enter adhaar No" ng-pattern="/^\d{0,11}[0-9]$/"  maxlength="12" required>
 		<span class="help-block" ng-show="addstaffForm.adhaar_no.$dirty && addstaffForm.adhaar_no.$invalid">
 			<span ng-show="addstaffForm.adhaar_no.$error.pattern && (addstaffForm.adhaar_no.$dirty || submitted)" class="text-danger">please enter number</span>
 		</span>
