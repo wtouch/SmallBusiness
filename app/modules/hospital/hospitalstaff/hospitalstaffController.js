@@ -165,7 +165,7 @@ define(['app'], function (app) {
 							}
 						})
 					},
-					formPart : '',
+					formPart : 'personalDetails',
 					showFormPart : function(formPart, modalOptions){
 						console.log(formPart);
 						modalOptions.formPart = formPart;
