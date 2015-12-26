@@ -25,8 +25,14 @@ define(['app'], function (app) {
 				user_id : $rootScope.userDetails.id
 			},
 			cols : ["*"]
+		}, 
+		  $scope.studParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
 		} 
-		 
 		$rootScope.moduleMenus = [
 			{
 				name : "Registration",
@@ -47,12 +53,17 @@ define(['app'], function (app) {
 				}
 			},
 			{
+				name : "Registered List",
+				path : "#/dashboard/campus/registration",
+				SubTitle :"Registered List",
+				
+			},
+			{
 				name : "Student List",
-				path : "#/dashboard/campus/student/student",
+				path : "#/dashboard/campus/student",
 				SubTitle :"Student List",
 				
 			}
-			
 		]
 		$scope.registrationList={
 			enableSorting: true,
@@ -65,7 +76,8 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'student_name',
-					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'registration_view\', \'registrationList\',true,grid.appScope.regParams)" ng-model="student_name" placeholder="Student Name">'
+					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'registration_view\', \'registrationList\',true,grid.appScope.regParams)" ng-model="student_name" placeholder="Student Name">',
+					cellTemplate : "<span>{{row.entity.student_name| capitalize}} </span>",
 				},
 				{ 
 					name:'address',
@@ -87,11 +99,13 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'dept_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'registration_view\', \'registrationList\',true, grid.appScope.regParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">' 
+					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'registration_view\', \'registrationList\',true, grid.appScope.regParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">',
+					cellTemplate : "<span>{{row.entity.dept_name| capitalize}} </span>"	
 				},
 				{ 
 					name:'class_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'registration_view\', \'registrationList\',true, grid.appScope.regParams)" ng-model="class_id" ng-options="item.class_name as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'registration_view\', \'registrationList\',true, grid.appScope.regParams)" ng-model="class_id" ng-options="item.class_name as item.class_name for item in grid.appScope.classList">' ,
+					cellTemplate : "<span>{{row.entity.class_name| capitalize}} </span>"	
 				},
 				{ 
 					name:'Percentage',width:120,
@@ -134,7 +148,8 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'student_name',
-					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'student_view\', \'studentList\',true,grid.appScope.regParams)" ng-model="student_name" placeholder="Student Name">'
+					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'student_view\', \'studentList\',true,grid.appScope.regParams)" ng-model="student_name" placeholder="Student Name">',
+					cellTemplate : "<span>{{row.entity.student_name| capitalize}} </span>"	
 				},
 				{ 
 					name:'address',
@@ -156,11 +171,13 @@ define(['app'], function (app) {
 				},
 				{ 
 					name:'dept_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'student_view\', \'studentList\',true, grid.appScope.regParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">' 
+					filterHeaderTemplate: '<select id="dept_name" class="form-control" ng-change="grid.appScope.filter(\'dept_name\', dept_name, \'student_view\', \'studentList\',true, grid.appScope.regParams)" ng-model="dept_name" ng-options="item.dept_name as item.dept_name for item in grid.appScope.departmentList">',
+					cellTemplate : "<span>{{row.entity.dept_name| capitalize}} </span>"						
 				},
 				{ 
 					name:'class_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'student_view\', \'studentList\',true, grid.appScope.regParams)" ng-model="class_id" ng-options="item.class_name as item.class_name for item in grid.appScope.classList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'student_view\', \'studentList\',true, grid.appScope.regParams)" ng-model="class_id" ng-options="item.class_name as item.class_name for item in grid.appScope.classList">',
+					cellTemplate : "<span>{{row.entity.class_name| capitalize}} </span>"	
 				},
 				{ 
 					name:'Percentage',width:120,
@@ -170,7 +187,7 @@ define(['app'], function (app) {
 				{
 					name:'Manage', 
 					enableSorting: false, 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'student_view\', \'registrationList\',false,grid.appScope.regParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'student_view\', \'studentList\',false,grid.appScope.regParams)" ng-model="status">'
 							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -179,8 +196,8 @@ define(['app'], function (app) {
 					  //type: uiGridConstants.filter.SELECT,
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/student/registeredstudent.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Student"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete Student" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'registration\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openStudentModal(\'modules/campus/student/admittedStudent.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Student"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ '<a type="button" tooltip="Delete Student" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'student\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChangestud)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+'<a ng-click="grid.appScope.openModal(\'modules/campus/student/viewStudent.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Student"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			],
@@ -197,13 +214,15 @@ define(['app'], function (app) {
 				$scope.getData(false, $scope.currentPage, "registration_view", "registrationList", $scope.regParams);
 			}
 		}
-		$scope.callbackColChange = function(response){
+		
+		$scope.callbackColChangestud = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "registration_view", "registrationList", $scope.regParams);
+				$scope.getData(false, $scope.currentPage, "student_view", "studentList", $scope.studParams);
 			}
 		}
-							//add student details
+		
+		//add student details
 		$scope.openModal = function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
@@ -252,7 +271,7 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'registration','registrationList',$scope.regParams);
+							$scope.getData(false, $scope.currentPage, 'registration_view','registrationList',$scope.regParams);
 						}
 					})
 				},
@@ -282,7 +301,88 @@ define(['app'], function (app) {
 				
 			})
 		}
+		
+
+
+		//for student update modal
+		$scope.openStudentModal = function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions ={
+				addStudent:(data)?{
+					id:data.id,
+					user_id : data.user_id,
+					dept_id : data.dept_id,
+					class_id : data.class_id,
+					student_name : data.student_name,
+					email_id :data.email_id,
+					contact_no:data.contact_no,
+					address:data.address,
+					city:data.city,
+					state:data.state,
+					country:data.country,
+					dob : data.dob,
+					age : data.age,		
+					pincode:data.pincode,
+					gender : data.gender,
+					marital_status : data.marital_status,
+					hobbies : data.hobbies,
+					education:data.education,
+					gardian : data.gardian,
+					cast : data.cast,
+					medical:data.medical,
+					attachments : data.attachments,
+					remark : data.remark,
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
+				}:{
+					user_id:$rootScope.userDetails.id,
+					date : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+				},
+				postData : function(table, input){
+						console.log(table, input);
+						$rootScope.postData(table, input,function(response){
+							if(response.status == "success"){
+								$scope.getData(false, $scope.currentPage, 'student_view','studentList',$Scope.studParams);
+							}
+						})
+				},
+				updateData : function(table, input, id){
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'student_view','studentList',$scope.studParams);
+						}
+					})
+				},
+					formPart : 'studentPersonalDetails',
+					showFormPart : function(formPart, modalOptions){
+						console.log(formPart);
+						modalOptions.formPart = formPart;
+					},
+					getData : $scope.getData,
+					classParams : {
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status:1,
+						},
+					cols : ["*"]
+					},
+					addToObject : function(object,data,modalOptions){
+						console.log(object,data,modalOptions);
+					$rootScope.addToObject(object,modalOptions[data]);
+					modalOptions[data] = {};
+					},
+				
+				removeObject : $rootScope.removeObject,
+					
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
 										
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {

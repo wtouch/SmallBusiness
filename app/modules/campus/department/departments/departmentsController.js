@@ -14,10 +14,16 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";
 	   
+	    $scope.deptParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
+		}, 
 	  $rootScope.moduleMenus = [
 			{
 				name : "Add department",
-				path : "#/dashboard/campus/department/departments",
 				SubTitle :"Department",
 				events : {
 					click : function(){
@@ -73,8 +79,7 @@ define(['app'], function (app) {
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/department/departments/adddepartments.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Department"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete Department" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'department\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/departments/viewdepartment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Department"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a type="button" tooltip="Delete Department" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'department\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+'<a ng-click="grid.appScope.openModal(\'modules/campus/department/departments/viewdepartment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Department"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
@@ -125,7 +130,14 @@ define(['app'], function (app) {
 						}
 					})
 				},
-				getData : $scope.getData
+				getData : $scope.getData,
+				deptParams : {
+					where : {
+					user_id : $rootScope.userDetails.id,
+					status:1,
+				},
+				cols : ["*"]
+				}
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})

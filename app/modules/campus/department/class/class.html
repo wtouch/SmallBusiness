@@ -6,7 +6,7 @@
 				 <div class="col-sm-2">
 					<div class="bottomspace">
 						<label for="page_item" class="control-label" >Page Item</label>
-						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'class', 'classList', classParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+						<select id="page_item" class="form-control"  ng-change="getData(false, currentPage,'class_view', 'classList', classParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
 							<option value="" selected>Select type</option>
 						</select>
 					</div>
@@ -16,7 +16,7 @@
 			  <div ui-grid="classList"></div>
 			 </div>
 			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'class_view','classList',classParams;"></pagination>
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'class_view','classList',classParams);"></pagination>
 				<pre>Page: {{currentPage}} / {{numPages}}</pre>
 			</div>
 		</div>
