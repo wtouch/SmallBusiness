@@ -1,0 +1,67 @@
+<form name="addCategoryForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addCategoryForm.$valid" id="addCategoryForm">
+		<div class="row">
+					<div class="col-sm-10 table-responsive">
+						<table class="table table-bordered" >
+							<thead>
+								<tr>
+									<th>Category</th>
+									<th>Percentage</th>
+									<th>No of student Reserved</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<input type="text" class="form-control " placeholder="Category Name" id="category" name="category" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.castdistribution.category" required/>
+										<span class="help-block" ng-show="addCastForm.category.$dirty && addCastForm.category.$invalid">
+										<span class="text-danger"  ng-show="addCastForm.category.$error.pattern">Please Enter Valid Name</span>
+										<span ng-show="addCastForm.category.$error.required" class="text-danger">Category name is required.</span>
+										</span>
+									</td>
+									<td>
+										<input type="text" class="form-control " placeholder="percentage" id="percentage" name="percentage" ng-model="modalOptions.castdistribution.percentage"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" ng-init="modalOptions.castdistribution.percentage = 1" ng-change="modalOptions.castdistribution.reservation = (modalOptions.addClass.strength * modalOptions.castdistribution.percentage)/100" required />
+										<span class="help-block" ng-show="addCastForm.percentage.$dirty && addCastForm.percentage.$invalid">
+										<span ng-show="addCastForm.percentage.$error.required" class="text-danger">percentage Required.</span>
+										<span ng-show="addCastForm.percentage.$error.pattern" class="text-danger">Enter like % only</span>
+										</span>
+									</td>
+									<td>
+										<input type="text" class="form-control " placeholder="reservation" id="reservation" name="reservation" ng-model="modalOptions.castdistribution.reservation"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" readonly required/>
+										<span class="help-block" ng-show="addCastForm.reservation.$dirty && addCastForm.reservation.$invalid">
+										<span ng-show="addCastForm.reservation.$error.required" class="text-danger">reservation Required.</span>
+										<span ng-show="addCastForm.reservation.$error.pattern" class="text-danger">Enter like 0.00 only</span>
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-2">
+						<button type="submit" class="btn btn-success center" ng-disabled="addCastForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addClass.castwise_distribution,'castdistribution', modalOptions);">+Add Cast</button>							
+					</div>
+		</div>
+</form>
+<div class="row">
+			<div class="table-responsive col-sm-12">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Sr.No</th>
+							<th>Category</th>
+							<th>Percentage</th>
+							<th>Reservation</th>
+							<th>Remove</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in modalOptions.addClass.castwise_distribution">
+							<td>{{ $index + 1 }}</td>
+							<td>{{x.category}}</td>
+							<td>{{x.percentage}}</td>
+							<td>{{x.reservation}}</td>
+							<td><a ng-click="modalOptions.removeObject(modalOptions.addClass.castwise_distribution, $index);"><span class="glyphicon glyphicon-remove"></span></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+</div>
