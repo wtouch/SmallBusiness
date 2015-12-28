@@ -25,7 +25,6 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Bill",
-				SubTitle :" Purchase Bill",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/campus/accounting/bill/addbill.html");
@@ -33,7 +32,6 @@ define(['app'], function (app) {
 				}
 			},{
 				name : "Add Purchase Order",
-				SubTitle :"Purchase Order",
 				events : {
 					click : function(){
 						return $scope.openPurchaseorder("modules/campus/accounting/bill/addPurchaseorder.html");
@@ -48,7 +46,7 @@ define(['app'], function (app) {
 			{
 				name : "Purchase Bill",
 				path : "#/dashboard/campus/accounting/bill",
-				SubTitle :"Purchase Order"
+				SubTitle :"Purchase Bill"
 			}
 		]
 		var rowtpl='<div ng-class="{ \'my-css-class\': grid.appScope.rowFormatter( row ),\'text-success\':(row.entity.payment_status==1),\'text-danger\':(row.entity.payment_status==0),\'text-warning\':(row.entity.payment_status==2)}">' +
@@ -144,29 +142,29 @@ define(['app'], function (app) {
 				},
 				{
 					name:'name',width :110,enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'bill\', \'PurchaseOrderData\',true, grid.appScope.billParams)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'party_id\', party_id, \'bill\', \'PurchaseOrderData\',true, grid.appScope.purchaseorderParams)" ng-model="party_id" ng-options="item.id as item.name for item in grid.appScope.partyList">' 
 							+'<option value="">Select Party</option>'
 						+'</select>',
 				}, 
 			
 				{ name:'purchase_order_date',width :110,
-					filterHeaderTemplate: '<input id="purchase_order_date" class="form-control" ng-change="grid.appScope.filter(\'purchase_order_date\', purchase_order_date, \'bill\', \'PurchaseOrderData\',true,grid.appScope.billParams)" ng-model="purchase_order_date" placeholder="Purchase Order Date">',
+					filterHeaderTemplate: '<input id="purchase_order_date" class="form-control" ng-change="grid.appScope.filter(\'purchase_order_date\', purchase_order_date, \'bill\', \'PurchaseOrderData\',true,grid.appScope.purchaseorderParams)" ng-model="purchase_order_date" placeholder="Purchase Order Date">',
 				},
 				
 				{
 					name:'manage',width:250,enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\',false,grid.appScope.billParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'bill\', \'billData\',false,grid.appScope.purchaseorderParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
 						+'</select>',
 					
 					
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+
-					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPaybill(\'modules/inventory/bill/payBill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
+					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPaybill(\'modules/campus/bill/payBill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
 							+
 					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openViewbill(\'modules/inventory/bill/viewbill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 							+
@@ -245,7 +243,7 @@ define(['app'], function (app) {
 					user_id : data.user_id,
 					bill_date : data.bill_date,
 					due_date : data.due_date,
-					type : data.type,
+					stock_type : data.stock_type,
 					due_amount : data.due_amount,
 					total_amount : data.total_amount,
 					remark : data.remark,
@@ -271,9 +269,9 @@ define(['app'], function (app) {
 							if(input.date) $scope.stockData.date = input.date;
 							$scope.stockData.stockdate = input.generated_date;
 							$scope.stockData.modified_date = input.modified_date;
-							$scope.stockData.type = input.type; 
+							$scope.stockData.stock_type = input.stock_type; 
 							angular.forEach(input.particular, function(value, key){
-								$scope.stockData.particular_name = value.particular_name;    
+								$scope.stockData.goods_name = value.goods_name;    
 								$scope.stockData.quantity =  "+" + value.quantity;
 								$scope.stockData.price =value.price;
 							 	$scope.stockData.goods_type = value.goods_type; 
@@ -538,11 +536,12 @@ define(['app'], function (app) {
 			return finalDate;
 		}
 		
-		$scope.billParams = {
+		$scope.purchaseorderParams = {
 			where : {
 				status : 1,
 				user_id : $rootScope.userDetails.id
 			},
+			cols : ["*"]
 		}
 		$scope.billParams = {
 			where : {

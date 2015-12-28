@@ -44,21 +44,15 @@ define(['app'], function (app) {
 				}
 			},
 			{
+				name : "Registered List",
+				path : "#/dashboard/campus/registration",
+				SubTitle :"Registered List",
+				
+			},
+			{
 				name : "Merit Management",
 				SubTitle :"Merit Management",
 				path : "#/dashboard/campus/meritlist",
-			},
-			{
-				name : "Registered List",
-				path : "#/dashboard/campus/registration",
-				SubTitle :"Registered List",
-				
-			},
-			{
-				name : "Registered List",
-				path : "#/dashboard/campus/registration",
-				SubTitle :"Registered List",
-				
 			},
 			{
 				name : "Student List",

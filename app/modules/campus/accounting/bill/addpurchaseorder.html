@@ -8,9 +8,9 @@
 <div class="modal-body">
 <form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
 		<div class=" form-group">
-				<label for="type" class="col-sm-2 control-label"> Select Bill Type </label>
+				<label for="stock_type" class="col-sm-2 control-label"> Select Bill Type </label>
 				<div class="col-sm-10">
-					<select class="form-control" name="type" id="type" ng-model="modalOptions.addPurchaseorder.type" required>
+					<select class="form-control" name="stock_type" id="stock_type" ng-model="modalOptions.addPurchaseorder.stock_type" required>
 						<option value="">Select Type</option>
 						<option value="1">Equipment</option>
 						<option value="2">Stationary</option>
@@ -40,7 +40,7 @@
 	
 	<div class="col-sm-12" ng-init="modalOptions.addPurchaseorder.particular = (modalOptions.addPurchaseorder.particular) ? modalOptions.addPurchaseorder.particular : []">
 		<form name="addPurchaseorderForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addPurchaseorderForm.$valid" id="addPurchaseorderForm">		
-			<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.vendor_id && (modalOptions.addPurchaseorder.type == 1 || modalOptions.addPurchaseorder.type == 2 )">
+			<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.vendor_id && (modalOptions.addPurchaseorder.stock_type == 1 || modalOptions.addPurchaseorder.stock_type == 2 )">
 				<table class="table table-bordered" >
 					<thead>
 						<tr>
@@ -56,10 +56,10 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" required 
+								<input type="text" class="form-control" id="goods_name" name="goods_name" ng-model="modalOptions.singleparticular.goods_name" required 
 								ng-change=""  placeholder="particulars Name"/>
-								<span class="help-block" ng-show="addPurchaseorderForm.particular.$dirty && addPurchaseorderForm.particular.$invalid">
-									<span ng-show="addPurchaseorderForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
+								<span class="help-block" ng-show="addPurchaseorderForm.goods_name.$dirty && addPurchaseorderForm.goods_name.$invalid">
+									<span ng-show="addPurchaseorderForm.goods_name.$error.required" class="text-danger">Particulars Name is necessary.</span>
 								</span> 
 							</td>
 							<td>
@@ -144,7 +144,7 @@
 				<br/><br/><br/>
 			</div>	
 		
-		<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.vendor_id && modalOptions.addPurchaseorder.type == 3">
+		<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.vendor_id && modalOptions.addPurchaseorder.stock_type == 3">
 				<table class="table table-bordered" >
 					<thead>
 						<tr>
@@ -161,10 +161,10 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" class="form-control" id="book_name" name="book_name" ng-model="modalOptions.singleparticular.book_name" required 
+								<input type="text" class="form-control" id="goods_name" name="goods_name" ng-model="modalOptions.singleparticular.goods_name" required 
 								ng-change=""  placeholder="Book Name"/>
-								<span class="help-block" ng-show="addPurchaseorderForm.book_name.$dirty && addPurchaseorderForm.book_name.$invalid">
-									<span ng-show="addPurchaseorderForm.book_name.$error.required" class="text-danger">Book Name is necessary.</span>
+								<span class="help-block" ng-show="addPurchaseorderForm.goods_name.$dirty && addPurchaseorderForm.goods_name.$invalid">
+									<span ng-show="addPurchaseorderForm.goods_name.$error.required" class="text-danger">Book Name is necessary.</span>
 								</span> 
 							</td>
 							<td>
@@ -250,18 +250,18 @@
 	</div>
 </div>
 
-	<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.vendor_id && (modalOptions.addPurchaseorder.type == 1 || modalOptions.addPurchaseorder.type == 2 || modalOptions.addPurchaseorder.type == 3)">
+	<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.vendor_id && (modalOptions.addPurchaseorder.stock_type == 1 || modalOptions.addPurchaseorder.stock_type == 2 || modalOptions.addPurchaseorder.stock_type == 3)">
 		<table class="table table-bordered" >
 			<thead>
 				<tr>
 					<th class="col-sm-2">Sr.No.</th>
-					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.type != 3">Particular Name</th>
-					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.type != 3">Goods_type</th>
-					<th class="col-sm-2"ng-if="modalOptions.addPurchaseorder.type != 3">Category </th>
-					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.type == 3">Book Name</th>
-					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.type == 3">Author Name</th>
-					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.type == 3">Publisher Name</th>
-					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.type == 3">Edition</th>
+					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.stock_type != 3">Particular Name</th>
+					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.stock_type != 3">Goods_type</th>
+					<th class="col-sm-2"ng-if="modalOptions.addPurchaseorder.stock_type != 3">Category </th>
+					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.stock_type == 3">Book Name</th>
+					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.stock_type == 3">Author Name</th>
+					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.stock_type == 3">Publisher Name</th>
+					<th class="col-sm-2" ng-if="modalOptions.addPurchaseorder.stock_type == 3">Edition</th>
 					<th class="col-sm-2 ">Price</th>
 					<th class="col-sm-2">Quantity</th>
 					<th class="col-sm-2"> Amount</th>
@@ -272,13 +272,13 @@
 			<tbody >
 				<tr ng-repeat="x in modalOptions.addPurchaseorder.particular">
 					<td>{{$index + 1}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type != 3">{{x.particular_name}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type != 3">{{x.goods_type}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type != 3">{{x.category}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type == 3">{{x.book_name}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type == 3">{{x.author}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type == 3">{{x.publisher}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type == 3">{{x.edition}}</td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type != 3">{{x.goods_name}}</td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type != 3">{{x.goods_type}}</td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type != 3">{{x.category}}</td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type == 3">{{x.goods_name}}</td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type == 3">{{x.author}}</td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type == 3">{{x.publisher}}</td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type == 3">{{x.edition}}</td>
 					<td>{{x.price}}</td>
 					<td>{{x.quantity}}</td>
 					<td>{{x.amount}}</td>
@@ -288,21 +288,21 @@
 					<td colspan="6"></td>
 					<td class="text-right"><strong>Sub Total</strong></td>
 					<td class="text-right">{{ modalOptions.addPurchaseorder.subtotal | number : 2}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type == 3"></td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type == 3"></td>
 					<!-- <td ng-repeat="(key, value) in modalOptions.addPurchaseorder.tax">{{ value  | number : 2}}</td> -->
 				</tr>
 				<tr ng-repeat="(key, value) in modalOptions.addPurchaseorder.tax">
 					<td colspan="6"></td>
 					<td class="text-right"><strong>{{key}}</strong></td>
 					<td class="text-right">{{ value  | number : 2}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type == 3"></td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type == 3"></td>
 					<!-- <td ng-repeat="(key, value) in modalOptions.addPurchaseorder.tax">{{ value  | number : 2}}</td> -->
 				</tr>
 				<tr>
 					<td colspan="6"></td>
 					<td class="text-right"><strong>Total</strong></td>
 					<td class="text-right">{{modalOptions.addPurchaseorder.total_amount | number : 2}}</td>
-					<td ng-if="modalOptions.addPurchaseorder.type == 3"></td>
+					<td ng-if="modalOptions.addPurchaseorder.stock_type == 3"></td>
 				</tr>
 			</tbody>
 		</table>
