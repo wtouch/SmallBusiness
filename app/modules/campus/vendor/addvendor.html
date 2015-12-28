@@ -8,22 +8,23 @@
 		<form class="form-horizontal" name="addvendorform" role="form" ng-submit="addvendorform.$valid" novalidate="novalidate">
 		
 		
-		<div class="form-group">
+		<div class="form-group"><!-- {{userDetails.config.inventory.taxData.tax}} -->
 				<label for="name" class="col-sm-2 control-label">Name *</label>
 				<div class="col-sm-9">
-					
+					<input type="hidden" ng-model="modalOptions.addvendor.status" ng-init="modalOptions.addvendor.status = '1'">
 					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addvendor.name"required>
 					 <span class="text-danger"  ng-show="addvendorform.name.$error.pattern">Please enter valid name</span>
-					<span class="help-block" ng-show="addvendor.name.$dirty && addvendor.name.$invalid">
+					<span class="help-block" ng-show="addvendorform.name.$dirty && addvendorform.name.$invalid">
 						<span class="text-danger" ng-show="addvendorform.name.$error.required">Name is required.</span>
 					</span>
 				</div>
-		</div>
+			</div>
+			
 		
 		<div class="form-group">	
 				<label  for="email" class="col-sm-2 control-label">Email *</label>
 				<div class="col-sm-9">
-					<input type="Email" class="form-control" id="email" ng-model="modalOptions.addvendor.email" name="email" placeholder="Enter Email"required>
+					<input type="Email" class="form-control" id="email" ng-model="modalOptions.addvendor.email" name="email" placeholder="Enter Email" required>
 					<span class="help-block" ng-show="addvendorform.email.$dirty && addvendorform.email.$invalid">
 						<span class="text-danger" ng-show="addvendorform.email.$error.required">Email is required.</span>
 						<span class="text-danger" ng-show="addvendorform.email.$error.email">Invalid email address.</span>

@@ -154,7 +154,8 @@ define(['app'], function (app) {
 					class_id : data.class_id,
 					div_id : data.dept_id,
 					staff_id:data.staff_id,
-					multipleentries:data.multipleentries,
+					sub_id:data.sub_id,
+					day:data.day,
 					timefrom:data.timefrom,
 					timeto:data.timeto,
 					
@@ -181,26 +182,14 @@ define(['app'], function (app) {
 				
 			},
 			postData : function(table, input){
-				
-					$scope.timetableData = {};
-					$scope.timetableData.user_id =input.user_id;
-					$scope.timetableData.dept_id =input.dept_id;
-					$scope.timetableData.class_id =input.class_id;
-					$scope.timetableData.div_id =input.div_id;
-					angular.forEach(input.multipleentries, function(value, key){
-								$scope.timetableData.sub_id = value.sub_id;
-								$scope.timetableData.room_id = value.room_id;
-								$scope.timetableData.staff_id = value.staff_id;
-								$scope.timetableData.day = value.day;
-								$scope.timetableData.date = value.date;
-								$scope.timetableData.timefrom = value.timefrom;
-								$scope.timetableData.timeto = value.timeto;
-								$rootScope.postData("timetable", angular.copy($scope.timetableData),function(response){
-									$scope.getData(false, $scope.currentPage, 'timetable_view1','timetableList',$scope.timetableParams); 
-								});
-							})
-						
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							modalOptions.addstock = {};
+							$scope.getData(false, $scope.currentPage, 'timetable_view1','timetableList',$scope.timetableParams);
+						}
+					})
 				},
+				
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){

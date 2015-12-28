@@ -8,7 +8,7 @@ define(['app'], function (app) {
 		$scope.maxSize = 5;
 		$scope.alerts = [];
 		$scope.currentPage = 1;
-		$scope.pageItems = 10;
+		$scope.pageItems = 20;
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";
@@ -43,11 +43,11 @@ define(['app'], function (app) {
 							+'<option value="">Select Type</option>'
 							  +'<option value="1">Equipment</option>'
 						      +'<option value="2">Stationary</option>'
-						+'</select>'
+						+'</select>',
 				},
 				{
 					name:'name',enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'name\',name, \'stock\', \'stockData\',false, grid.appScope.stockParams)" ng-model="name" ng-options="item.id as item.name for item in grid.appScope.vendorList">' 
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'vendor_id\',vendor_id, \'stock\', \'stockData\',true, grid.appScope.stockParams)" ng-model="vendor_id" ng-options="item.id as item.name for item in grid.appScope.vendorlist">' 
 							+'<option value="">Select Vendor</option>'
 						+'</select>',
                 },
