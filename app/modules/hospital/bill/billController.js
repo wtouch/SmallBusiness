@@ -25,7 +25,7 @@ define(['app'], function (app) {
 			{
 				name : "Admission Bill List",
 				path : "#/dashboard/hospital/bill",
-				SubTitle :"OPD Patient List"
+				SubTitle :"Admission Patient List"
 			},
 			{
 				name : "OPD Bill List",

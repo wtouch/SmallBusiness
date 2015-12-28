@@ -174,6 +174,28 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				getTypeaheadData : function(table, searchColumn, searchValue){
+					//console.log(table, searchColumn, searchValue);
+					var locationParams = {
+						search : {},
+						cols : ["*"]
+					};
+					locationParams.search[searchColumn] = searchValue;
+					console.log(locationParams);
+					return dataService.get(false, 'patient', locationParams).then(function(response){
+						console.log(response);
+						if(response.status == 'success'){
+							return response.data;
+						}else{
+							return [];
+						}
+					}); 
+				},
+				assignData : function(object, formObject){
+					formObject.patient_id = object.patient_id;
+					formObject.patient_name = object.patient_name;
+					console.log(object);
+				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
