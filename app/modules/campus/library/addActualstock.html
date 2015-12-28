@@ -1,0 +1,70 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	<h3  ng-if="!modalOptions.addactualstock.id" class="text-center">Actual Library Stock</h3>
+	<h3  ng-if="modalOptions.addactualstock.id" class="text-center" >Update Actual Library Stock</h3>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal" name="addactualstockForm" role="form" ng-submit="addactualstockForm.$valid" novalidate="novalidate">
+			<div class="form-group">
+			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
+				<label for="staff_id" class="col-sm-2 control-label"> Select Book Name* </label>
+				<div class="col-sm-3">
+					<select id="staff_id" class="form-control" ng-model="modalOptions.addliabrarystock.staff_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
+						<option value="">Select Staff</option>
+					</select>
+					<span class="help-block" ng-show="addactualstockForm.staff_id.$dirty && addactualstockForm.staff_id.$invalid">
+					<span ng-show="addactualstockForm.staff_id.$error.required" class="text-danger">user name is required.</span>
+					</span>	
+				</div>
+			</div>
+			
+				<label for="author" class="col-sm-2 control-label">Author *</label>
+				<div class="col-sm-3">
+					<input type="text" id="author" class="form-control" name="author" required>
+					<span class="help-block" ng-show="addactualstockForm.author.$dirty && addactualstockForm.author.$invalid">
+						<span class="text-danger" ng-show="addactualstockForm.author.$error.required">Required Field.</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="publisher" class="col-sm-2 control-label">Publisher *</label>
+				<div class="col-sm-3">
+					<input type="text" id="publisher" class="form-control" name="publisher" required>
+					<span class="help-block" ng-show="addactualstockForm.publisher.$dirty && addactualstockForm.publisher.$invalid">
+						<span class="text-danger" ng-show="addactualstockForm.publisher.$error.required">Required Field.</span>
+					</span>
+				</div>
+				<label for="Edition" class="col-sm-2 control-label">Edition *</label>
+				<div class="col-sm-3">
+					<input type="text" id="edition" class="form-control" name="edition" required>
+					<span class="help-block" ng-show="addactualstockForm.edition.$dirty && addactualstockForm.edition.$invalid">
+						<span class="text-danger" ng-show="addactualstockForm.edition.$error.required">Required Field.</span>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="book_no" class="col-sm-2 control-label">Book No *</label>
+				<div class="col-sm-3">
+					<input type="text" id="book_no" class="form-control" name="book_no" placeholder="Book No" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addliabrarystock.book_no" required>
+					<span class="help-block" ng-show="addactualstockForm.book_no.$dirty && addactualstockForm.book_no.$invalid">
+						<span class="text-danger" ng-show="addactualstockForm.book_no.$error.required">Required Field.</span>
+					</span>
+				</div>
+				<label for="isbm_no" class="col-sm-2 control-label">ISBM NO *</label>
+				<div class="col-sm-3">
+					<input type="text" id="isbm_no" class="form-control" name="isbm_no" placeholder="ISBM NO" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addliabrarystock.isbm_no" required>
+					<span class="help-block" ng-show="addactualstockForm.isbm_no.$dirty && addactualstockForm.isbm_no.$invalid">
+						<span class="text-danger" ng-show="addactualstockForm.isbm_no.$error.required">Required Field.</span>
+					</span>
+				</div>	
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-offset-2 col-sm-9">
+				<button type="submit" class="btn btn-success" ng-if="!modalOptions.addliabrarystock.id" ng-disabled="addactualstockForm.$invalid" ng-click="   modalOptions.postData('campus_book',modalOptions.addliabrarystock);modalOptions.ok()">Add Stock </button>
+				
+				<button type="submit" class="btn btn-success" ng-if="modalOptions.addliabrarystock.id" ng-disabled="addactualstockForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('campus_book',modalOptions.addliabrarystock, modalOptions.addliabrarystock.id)">Update Stock</button>			
+				<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+				</div>
+			</div>
+	</form>
+</div>

@@ -1,0 +1,135 @@
+	<form name="addbookForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbookForm.$valid">
+			<div class="table-responsive">
+					<table class="table table-bordered" >
+						<thead>
+							<tr>
+								<th>Book Name</th>
+								<th>Author Name</th>
+								<th>Description</th>
+								<th>Publisher</th>
+								<th>Edition</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input type="text" id="book_name" class="form-control" name="book_name" placeholder="Book Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.book_name"required>
+									 <span class="text-danger"  ng-show="addbookForm.book_name.$error.pattern">Text is required.</span>
+									<span class="help-block" ng-show="addbookForm.book_name.$dirty && addbookForm.book_name.$invalid">
+										<span class="text-danger" ng-show="addbookForm.book_name.$error.required">Required Field.</span>
+									</span>
+								</td>
+
+								<td>
+									<div class="col-sm-3">
+										<input type="text" id="author" class="form-control" name="author" placeholder="Author Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.author"required>
+										 <span class="text-danger"  ng-show="addbookForm.author.$error.pattern">Text is required.</span>
+										<span class="help-block" ng-show="addbookForm.author.$dirty && addbookForm.author.$invalid">
+											<span class="text-danger" ng-show="addbookForm.author.$error.required">Required Field.</span>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div class="col-sm-3">
+										<input type="text" id="publisher" class="form-control" name="publisher" placeholder="Publisher" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.publisher"required>
+										 <span class="text-danger"  ng-show="addbookForm.publisher.$error.pattern">Text is required.</span>
+										<span class="help-block" ng-show="addbookForm.publisher.$dirty && addbookForm.publisher.$invalid">
+											<span class="text-danger" ng-show="addbookForm.publisher.$error.required">Required Field.</span>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div class="col-sm-3">
+										<input type="text" id="edition" class="form-control" name="edition" placeholder="Edition" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.edition"required>
+										 <span class="text-danger"  ng-show="addbookForm.edition.$error.pattern">Text is required.</span>
+										<span class="help-block" ng-show="addbookForm.edition.$dirty && addbookForm.edition.$invalid">
+											<span class="text-danger" ng-show="addbookForm.edition.$error.required">Required Field.</span>
+										</span>
+									</div>
+								</td>
+								<td>
+									<div class="col-sm-3">
+										<input type="text" id="price" class="form-control" name="price" placeholder="Price" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.price"required>
+										 <span class="text-danger"  ng-show="addbookForm.price.$error.pattern">Text is required.</span>
+										<span class="help-block" ng-show="addbookForm.price.$dirty && addbookForm.price.$invalid">
+											<span class="text-danger" ng-show="addbookForm.price.$error.required">Required Field.</span>
+										</span>
+									</div>
+								</td>
+			<div class="modal-footer">
+			<div class="col-sm-offset-2 col-sm-9">
+			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addbook.id" ng-disabled="addbookForm.$invalid" ng-click="   modalOptions.postData('campus_book',modalOptions.addbook);modalOptions.ok()">Add Book </button>
+			
+			<button type="submit" class="btn btn-success" ng-if="modalOptions.addbook.id" ng-disabled="addbookForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('campus_book',modalOptions.addbook, modalOptions.addbook.id)">Update Book</button>			
+			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+			</div>
+			</div>
+		</div>
+	</form>
+	
+	<!-- addbook -->
+<!--<div class="row">
+	<form name="addbookForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbookForm.$valid">
+			<div class="table-responsive">
+					<table class="table table-bordered" >
+						<thead>
+							<tr>
+								<th>Book Name</th>
+								<th>Author Name</th>
+								<th>Publisher</th>
+								<th>Edition</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input type="text" id="book_name" class="form-control" name="book_name" placeholder="Book Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.book_name"required>
+									 <span class="text-danger"  ng-show="addbookForm.book_name.$error.pattern">Text is required.</span>
+									<span class="help-block" ng-show="addbookForm.book_name.$dirty && addbookForm.book_name.$invalid">
+										<span class="text-danger" ng-show="addbookForm.book_name.$error.required">Required Field.</span>
+									</span>
+								</td>
+
+								<td>
+										<input type="text" id="author" class="form-control" name="author" placeholder="Author Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.author"required>
+										 <span class="text-danger"  ng-show="addbookForm.author.$error.pattern">Text is required.</span>
+										<span class="help-block" ng-show="addbookForm.author.$dirty && addbookForm.author.$invalid">
+											<span class="text-danger" ng-show="addbookForm.author.$error.required">Required Field.</span>
+										</span>
+								</td>
+								<td>
+							
+										<input type="text" id="publisher" class="form-control" name="publisher" placeholder="Publisher" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.publisher"required>
+										 <span class="text-danger"  ng-show="addbookForm.publisher.$error.pattern">Text is required.</span>
+										<span class="help-block" ng-show="addbookForm.publisher.$dirty && addbookForm.publisher.$invalid">
+											<span class="text-danger" ng-show="addbookForm.publisher.$error.required">Required Field.</span>
+										</span>
+								</td>
+								<td>
+										<input type="text" id="edition" class="form-control" name="edition" placeholder="Edition" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.edition"required>
+										 <span class="text-danger"  ng-show="addbookForm.edition.$error.pattern">Text is required.</span>
+										<span class="help-block" ng-show="addbookForm.edition.$dirty && addbookForm.edition.$invalid">
+											<span class="text-danger" ng-show="addbookForm.edition.$error.required">Required Field.</span>
+										</span>
+								</td>
+								<td>
+										<input type="text" id="price" class="form-control" name="price" placeholder="Price" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.price"required>
+										 <span class="text-danger"  ng-show="addbookForm.price.$error.pattern">Text is required.</span>
+										<span class="help-block" ng-show="addbookForm.price.$dirty && addbookForm.price.$invalid">
+											<span class="text-danger" ng-show="addbookForm.price.$error.required">Required Field.</span>
+										</span>
+								</td>
+			<div class="modal-footer">
+				<div class="col-sm-offset-2 col-sm-9">
+				<button type="submit" class="btn btn-success" ng-if="!modalOptions.addbook.id" ng-disabled="addbookForm.$invalid" ng-click="   modalOptions.postData('campus_book',modalOptions.addbook);modalOptions.ok()">Add Book </button>
+				
+				<button type="submit" class="btn btn-success" ng-if="modalOptions.addbook.id" ng-disabled="addbookForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('campus_book',modalOptions.addbook, modalOptions.addbook.id)">Update Book</button>			
+				<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	 </div> -->
+	 <!-- end addbook -->

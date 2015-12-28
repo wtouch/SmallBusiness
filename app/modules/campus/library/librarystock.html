@@ -1,0 +1,22 @@
+<div class="modal-header">
+	<button type="button" class="close buttondistance" ng-click="modalOptions.close()">
+		<span aria-hidden="true">&times;</span><span></span></button>
+	<h3 class="text-center">Staff Leaves</h3>
+</div> 
+<div class="modal-body">
+	<form class="form-horizontal" name="addliabrarystockForm" role="form" ng-submit="addliabrarystockForm.$valid" novalidate="novalidate">
+			<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">Approved By *</label>
+				<div class="col-sm-4">
+					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addleave.approved_by"required>
+					
+					 <span class="text-danger"  ng-show="addliabrarystockForm.name.$error.pattern">Required Field.</span>
+					 
+					<span class="help-block" ng-show="addliabrarystockForm.name.$dirty && addliabrarystockForm.name.$invalid">
+					
+					<span class="text-danger" ng-show="addliabrarystockForm.name.$error.required">Name is required.</span>
+					</span>
+				</div>
+			</div>
+	</form>
+</div>

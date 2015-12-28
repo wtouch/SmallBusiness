@@ -25,6 +25,28 @@ define(['app'], function (app) {
 		
 		$rootScope.moduleMenus = [
 			{
+				name : "+",
+				events : {
+					click : function(){
+						$scope.isCollapsed = !$scope.isCollapsed;
+						console.log($scope.isCollapsed);
+					}
+				}
+			},{
+				name : "Liabrary Stock",
+				events : {
+					click : function(){
+						return $scope.openLibrarystock("modules/campus/library/addlibrarystock.html");
+					}
+				}
+			},{
+				name : "Actual Stock",
+				events : {
+					click : function(){
+						return $scope.openActualstock("modules/campus/library/addActualstock.html");
+					}
+				}
+			},{
 				name : "Book Transaction",
 				events : {
 					click : function(){
@@ -33,6 +55,8 @@ define(['app'], function (app) {
 				}
 			}
 			]
+			
+			
 			
 			$scope.bookTransactionList={
 			enableSorting: true,
@@ -100,15 +124,87 @@ define(['app'], function (app) {
 					$scope.getData(false, $scope.currentPage, "book_transaction_view", "bookTransactionList", $scope.bookParams);
 				}
 			}
+					/* add lib stock */											
+		$scope.openLibrarystock=function(url,data){
+			var modalDefault={
+				templateUrl:url,// apply template to modal
+				size:'lg'
+			};
+			var modalOptions={
+				date : $scope.currentDate,
+				addliabrarystock:(data)?{
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+				}:{
+						user_id:$rootScope.userDetails.id,
+						date : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+				},	
+				getData:$scope.getData,
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'staff','staffList',$Scope.bookParams);
+						}
+					}) 
+				},
+				updateData : function(table, input, id){ 
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage,'staff','staffList',$scope.deptParams);
+						}
+					})
+					},
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}		
+		
+							/* add lib Actual stock */											
+		$scope.openActualstock=function(url,data){
+			var modalDefault={
+				templateUrl:url,// apply template to modal
+				size:'lg'
+			};
+			var modalOptions={
+				date : $scope.currentDate,
+				addactualstock:(data)?{
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
+				}:{
+						user_id:$rootScope.userDetails.id,
+						date : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime"),
+				},	
+				getData:$scope.getData,
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'staff','staffList',$Scope.bookParams);
+						}
+					}) 
+				},
+				updateData : function(table, input, id){ 
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage,'staff','staffList',$scope.deptParams);
+						}
+					})
+					},
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
+					
 					/* add liabrary */
-		$scope.openModal=function(url,data){
+		 $scope.openModal=function(url,data){
 				var modalDefault={
 					templateUrl:url,
 					size:'lg'
 				};
 			var modalOptions={	
 				date : $scope.currentDate,
-				addBook:(data)?{
+				addbookTransaction:(data)?{
 					id:data.id,
 					user_id:data.user_id,
 					student_id:data.student_id,
@@ -159,7 +255,7 @@ define(['app'], function (app) {
 					user_id : $rootScope.userDetails.id
 				},
 				cols : ["*"]
-			};
+			}; 
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
