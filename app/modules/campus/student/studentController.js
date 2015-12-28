@@ -89,9 +89,9 @@ define(['app'], function (app) {
 					cellTemplate : '<span>{{row.entity.education[0].marks}}</span>'
 				},
 				{ 
-					name:'Percentage',width:120,
-					filterHeaderTemplate: '<input id="education" class="form-control" ng-change="grid.appScope.filter(\'education\', education, \'registration_view\', \'registrationList\',true,grid.appScope.regParams)" ng-model="education" placeholder="Percentage">',
-					cellTemplate : '<span>{{row.entity.education[0].percentage}}</span>'
+					name:'high_percentage',width:120,
+					filterHeaderTemplate: '<input id="high_percentage" class="form-control" ng-change="grid.appScope.filter(\'high_percentage\', high_percentage, \'registration_view\', \'registrationList\',true,grid.appScope.regParams)" ng-model="high_percentage" placeholder="Percentage">',
+					
 				},
 				{ 
 					name:'dept_name',enableSorting: false ,
@@ -102,11 +102,6 @@ define(['app'], function (app) {
 					name:'class_name',enableSorting: false ,
 					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'registration_view\', \'registrationList\',true, grid.appScope.regParams)" ng-model="class_id" ng-options="item.class_name as item.class_name for item in grid.appScope.classList">' ,
 					cellTemplate : "<span>{{row.entity.class_name| capitalize}} </span>"	
-				},
-				{ 
-					name:'Percentage',width:120,
-					filterHeaderTemplate: '<input id="education" class="form-control" ng-change="grid.appScope.filter(\'education\', education, \'registration_view\', \'registrationList\',true,grid.appScope.regParams)" ng-model="education" placeholder="Percentage">',
-					cellTemplate : '<span>{{row.entity.education[0].percentage}}</span>'
 				},
 				{
 					name:'Manage', 
@@ -238,7 +233,8 @@ define(['app'], function (app) {
 					state:data.state,
 					country:data.country,
 					dob : data.dob,
-					age : data.age,		
+					age : data.age,	
+					high_percentage : data.high_percentage,					
 					pincode:data.pincode,
 					gender : data.gender,
 					marital_status : data.marital_status,

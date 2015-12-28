@@ -182,9 +182,10 @@
 			<div class="form-group">
 				<label for="height" class="col-sm-2 control-label">Height *</label>
 				<div class="col-sm-3">
-					<input type="text" id="height" class="form-control" name="height" placeholder="Height" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" ng-model="modalOptions.addStudent.medical.height"required>
+					<input type="text" id="height" class="form-control" name="height" placeholder="Height" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" maxlength="6" ng-model="modalOptions.addStudent.medical.height"required>
 					<span class="help-block" ng-show="addStudentForm.height.$dirty && addStudentForm.height.$invalid">
 						<span ng-show="addStudentForm.height.$error.pattern && (addStudentForm.height.$dirty || submitted)" class="text-danger">please enter number</span>
+						<span ng-show="addStudentForm.height.$error.pattern && (addStudentForm.height.$dirty || submitted)" class="text-danger">Enter Like 0.00 only</span>
 					</span>
 				</div>
 			<!-- </div>

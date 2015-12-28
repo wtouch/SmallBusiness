@@ -1,7 +1,18 @@
 	<!-- <div class="row">-->
 		<div ng-init="modalOptions.addStudent.education = (modalOptions.addStudent.education) ? modalOptions.addStudent.education : []">
 		
-				<form name="addStudentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStudentForm.$valid" id="addStudent"">
+				<form name="addStudentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStudentForm.$valid" id="addStudent">
+				
+						<div class="form-group" style="padding-top:20px;">
+							<label for="high_percentage" class="col-sm-2 control-label">Higher Percentage *</label>
+							<div class="col-sm-3">
+								<input type="text" id="high_percentage" class="form-control" name="high_percentage" placeholder="Percentage" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" maxlength="6" ng-model="modalOptions.addStudent.high_percentage"required>
+								<span class="help-block" ng-show="addStudentForm.high_percentage.$dirty && addStudentForm.high_percentage.$invalid">
+									<span ng-show="addStudentForm.high_percentage.$error.pattern && (addStudentForm.high_percentage.$dirty || submitted)" class="text-danger">please enter number</span>
+									<span ng-show="addStudentForm.high_percentage.$error.pattern && (addStudentForm.high_percentage.$dirty || submitted)" class="text-danger">Enter Like 0.00 only</span>
+								</span>
+							</div>
+						</div>
 						<div class="table-responsive">
 							<table class="table table-bordered" >
 								<thead>
@@ -145,7 +156,7 @@
 				</span>
 			</div>
 		</div>
-		<div class="form-group text-right">
+		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-9">
 			 <button type="submit" class="btn btn-primary" title="submit" ng-click="modalOptions.showFormPart('gardianDetails',modalOptions)">Next</button> 
 			</div>
