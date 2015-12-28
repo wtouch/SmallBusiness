@@ -3,16 +3,17 @@
 {{awarddetail}}
 <div>
 <form class="form-horizontal" name="awardForm" role="form" ng-submit="awardForm.$valid" novalidate="novalidate">
-	<div class="form-group">
+<div class="form-group">
 		<label for="aname" class="col-sm-2 control-label">Name *</label>
 			<div class="col-sm-9">
-				<input type="text" id="aname" class="form-control" name="aname" placeholder=" Enter Name" ng-pattern="/^[a-zA-Z/ ]*$ /" ng-model="campus.aname"required>
+				<input type="text" id="aname" name="aname" class="form-control" placeholder="Enter name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="awarddetail.aname"required  >	
 					<span class="help-block" ng-show="awardForm.aname.$dirty && awardForm.aname.$invalid">
 						<span class="text-danger"  ng-show="awardForm.aname.$error.pattern">Text is required.</span>
-					<span class="text-danger" ng-show="awardForm.aname.$error.required">Required Field.</span>
-				</span>
+						<span class="text-danger" ng-show="awardForm.aname.$error.required">Required Field.</span>
+					</span>	
 			</div>
-	</div>
+</div>
+	
 	
 		 <div class="form-group">
 			<label for="date" class="col-sm-2 control-label">Date *</label>

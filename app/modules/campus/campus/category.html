@@ -15,11 +15,11 @@
 							<tbody>
 								<tr>
 									<td>
-									<input type="text" id="category" class="form-control" name="category" placeholder="Category Name" ng-pattern="/^[a-zA-Z ]*$/" ng-model="distribution.category" required>
-									<span class="help-block" ng-show="addCategoryForm.category.$dirty && addCategoryForm.category.$invalid">
-										<span class="text-danger"  ng-show="addCategoryForm.category.$error.pattern">Text is required.</span>
-										<span class="text-danger" ng-show="addCategoryForm.category.$error.required">Required Field.</span>
-									</span>
+									<input type="text" id="category" name="category" class="form-control" placeholder="Category Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="distribution.category"required>
+									<span class="help-block" ng-show="addCategoryForm.founder.$dirty && 	addCategoryForm.founder.$invalid">
+									<span class="text-danger" ng-show="addCategoryForm.founder.$error.pattern">Text is required.</span>
+									<span class="text-danger" ng-show="addCategoryForm.founder.$error.required">Required Field.</span>
+									</span>	
 									</td>
 									<td>
 										<input type="text" class="form-control " placeholder="percentage" id="percentage" name="percentage" ng-model="distribution.percentage"   ng-pattern="/^([0-9]{1,2}){1}(\.[0-9]{1,2})?$/" required />

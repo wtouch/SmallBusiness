@@ -1,12 +1,13 @@
 <h1>Certificates</h1>
 {{campus.certificates}}
+
 {{certificate}}
 <div>
 <form class="form-horizontal" name="certificateForm" role="form" ng-submit="certificateForm.$valid" novalidate="novalidate">
 <div class="form-group">
 	<label for="bname" class="col-sm-2 control-label">Name *</label>
 		<div class="col-sm-9">
-			<input type="text" id="bname" class="form-control" name="bname" placeholder=" Enter Name" ng-pattern="/^[a-zA-Z ]*$/" ng-model="campus.bname"required>
+			<input type="text" id="bname" class="form-control" name="bname" placeholder=" Enter Name" ng-pattern="/^[a-zA-Z ]*$ /" ng-model="certificate.bname"required>
 					<span class="help-block" ng-show="certificateForm.bname.$dirty && certificateForm.bname.$invalid">
 						<span class="text-danger"  ng-show="certificateForm.bname.$error.pattern">Text is required.</span>
 					<span class="text-danger" ng-show="certificateForm.bname.$error.required">Required Field.</span>
