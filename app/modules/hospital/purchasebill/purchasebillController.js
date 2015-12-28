@@ -194,12 +194,32 @@ define(['app'], function (app) {
 					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					user_id : $rootScope.userDetails.id
 				},
-				
+				getTypeaheadData : function(table, searchColumn, searchValue){
+					//console.log(table, searchColumn, searchValue);
+					var locationParams = {
+						search : {},
+						cols : ["*"]
+					};
+					locationParams.search[searchColumn] = searchValue;
+					console.log(locationParams);
+					return dataService.get(false, 'stock_transaction', locationParams).then(function(response){
+						console.log(response);
+						if(response.status == 'success'){
+							return response.data;
+						}else{
+							return [];
+						}
+					}); 
+				},
 				assignData : function(object, formObject){
 					formObject.goods_name = object.goods_name;
 					formObject.goods_type = object.goods_type;
+					formObject.price = object.price;
+					formObject.quantity = 1;
+					formObject.amount = object.price*formObject.quantity;
 					formObject.category = object.category;
-					},
+					console.log(object);
+				},
 				
 				taxCalculate : function(modalOptions){
 					modalOptions.singleparticular.tax = {};

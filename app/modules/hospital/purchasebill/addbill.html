@@ -46,7 +46,8 @@
 						<tr>
 							<td>
 								<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
-								ng-change=""  placeholder="particulars Name"/>
+								 ng-change="modalOptions.singleparticular.quantity = 1; modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"  placeholder="particulars Name"
+								 ng-init="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
 								<span class="help-block" ng-show="addbillForm.particular.$dirty && addbillForm.particular.$invalid">
 									<span ng-show="addbillForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
 								</span> 
