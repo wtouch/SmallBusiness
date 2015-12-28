@@ -20,11 +20,43 @@ define(['app'], function (app) {
 		
 		$rootScope.moduleMenus = [
 			{
-				name : " Add Staff",
+				name : "Staff",
 				path : "#/dashboard/hospital/hospitalstaff/",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/hospital/hospitalstaff/addhospitalstaff.html");
+					}
+				}
+			},
+			{
+				name : "Add Attendance",
+				events : {
+					click : function(){
+						return $scope.openstaffattendance("modules/hospital/hospitalstaff/staffattendence.html");
+					}
+				}
+			},
+			{
+				name : "Add Leaves",
+				events : {
+					click : function(){
+						return $scope.openAddleaves("modules/hospital/hospitalstaff/addleaves.html");
+					}
+				}
+			},
+			{
+				name : "Staff Payment",
+				events : {
+					click : function(){
+						return $scope.openStaffpayment("modules/hospital/hospitalstaff/staffpayment.html");
+					}
+				}
+			},
+			{
+				name : "Holidays",
+				events : {
+					click : function(){
+						return $scope.openAddholiday("modules/hospital/hospitalstaff/addholidays.html");
 					}
 				}
 			},
@@ -51,7 +83,7 @@ define(['app'], function (app) {
                 },
 				{
 				    name:'name',
-					width:200,
+					width:150,
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="Name">',
                 },
 				{
@@ -78,7 +110,7 @@ define(['app'], function (app) {
 				 filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true)" ng-model="city" placeholder="City">', 
                 },
 			    { 
-				 name:'Manage',
+				 name:'Manage', width:400,
 				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
 							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
@@ -90,7 +122,13 @@ define(['app'], function (app) {
 					  ]
 					},
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/addhospitalstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					+
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/addhospitalstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					+
+				
+					'<a ng-click="grid.appScope.openViewattendance(\'modules/hospital/hospitalstaff/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
+					+
+					'<a ng-click="grid.appScope.openViewleaves(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					+
 					'<a type="button" tooltip="Delete staff" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
@@ -192,6 +230,230 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
+		
+		
+		$scope.openstaffattendance = function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions = {
+			attendancedate:dataService.sqlDateFormate(),
+				date:{date : $scope.currentDate},
+				staffattendance : (data) ? {
+	
+				}:{
+						date : dataService.sqlDateFormate(),
+						user_id : $rootScope.userDetails.id,
+						status:1,
+						modified_date : dataService.sqlDateFormate(),
+				}, 
+				getData:$scope.getData,	
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
+		
+		$scope.openAddleaves = function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions = {
+				leavedate: dataService.sqlDateFormate(),
+				date:{date : $scope.currentDate},
+				addleave : (data) ? {
+					id : data.id,
+					name : data.name,
+					//user_id:data.user_id,
+				}:{
+						date : dataService.sqlDateFormate(),
+						user_id : $rootScope.userDetails.id,
+						status:1,
+						modified_date : dataService.sqlDateFormate()
+						
+						
+				}, 
+				getData:$scope.getData,	
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
+		$scope.openAddholiday = function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions = {
+				staffdate: dataService.sqlDateFormate(),
+				date:{date : $scope.currentDate},
+				addholiday : (data) ? {
+					id : data.id,
+					name : data.name,
+				}:{
+						date : dataService.sqlDateFormate(),
+						user_id : $rootScope.userDetails.id,
+						status:1,
+						modified_date : dataService.sqlDateFormate(),
+						
+						
+				}, 
+				getData:$scope.getData,	
+				holidayParams :{
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+							
+						},
+						cols : ["*"]
+					},
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+								
+						}
+					})
+				},
+				
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
+		
+		
+		$scope.openStaffpayment= function(url,data){
+			var modalDefault = {
+				templateUrl: url,	// apply template to modal
+				size : 'lg'
+			};
+			var modalOptions = {
+				staffpaymentdate: dataService.sqlDateFormate(),
+				Category : $scope.staffConfig,
+				date:{date : $scope.currentDate},
+				staffpayment : (data) ? {
+					id : data.id,
+					staff_id:data.staff_id,
+					category : data.category,
+					name : data.name,
+				}:{
+						date : dataService.sqlDateFormate(),
+						user_id : $rootScope.userDetails.id,
+						status:1,
+						modified_date : dataService.sqlDateFormate()
+						
+						
+				}, 
+				getBalance : function(accountId, modalOptions) {
+					//console.log(accountId, modalOptions);
+					var accountParams = {
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status : 1,
+							account_id : accountId
+						},
+						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
+					}
+					dataService.get(false,'transactions', accountParams).then(function(response) {
+						console.log(response);
+						modalOptions.previous_balance = response.data[0].previous_balance;
+					})
+					
+				},
+				getData:$scope.getData,	
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							
+						}
+					})
+				},
+				
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+				
+			})
+		}
+		$scope.openViewattendance = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				dataS :data,
+				date : dataService.sqlDateFormate(),
+				viewattendance:{
+						user_id : $rootScope.userDetails.id,
+						name:data.name,
+						staff_id : data.staff_id,
+						date : data.date,
+						attendance_date:data.attendance_date,
+						login_time:data.login_time,
+						logout_time:data.logout_time
+					},
+					
+				getData : $scope.getData,
+					attendanceParams : {
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+							staff_id:data.id
+						},
+						cols : ["*"]
+					}
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
+		
+			$scope.openViewleaves = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+			viewleaves:{
+						user_id : $rootScope.userDetails.id,
+						name:data.name,
+						staff_id : data.staff_id,
+						date : data.date,
+						//debit_amount:data.debit_amount
+					},
+					
+				getData : $scope.getData,
+					leaveParams : {
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+								staff_id:data.id
+						
+						},
+						cols : ["*"]
+					}
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
+		
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
