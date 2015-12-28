@@ -5,14 +5,18 @@
 				<input type="text" class="form-control" placeholder="Date" id="admission_date" name="admission_date" ng-model="modalOptions.addadmission.admission_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" />
 			</div>
 		</div>
-		<div class="form-group" ng-init="modalOptions.getData(false,false,'patient','patient',modalOptions.patientParams,modalOptions)">
+		<div class="form-group" >
 			<label for="patient_id" class="col-sm-2 control-label"> Patient Name * </label>
 			<div class="col-sm-8">
-				<select id="patient_id" class="form-control" ng-model="modalOptions.addadmission.patient_id" 	ng-options="item.id as item.patient_name for item in modalOptions.patient" required>
-					<option value="">Select Patient </option>
-				</select>
-				<span class="help-block" ng-show="addopdpatientForm.patient_id.$dirty && addopdpatientForm.patient_id.$invalid">
-				<span ng-show="addopdpatientForm.patient_id.$error.required" class="text-danger">Patient name is required.</span>
+				<input id="patient_name" class="form-control" typeahead-template-url="customTemplate.html" ng-model="modalOptions.addadmission.patient_id" typeahead-on-select="modalOptions.assignData($item, modalOptions.addadmission)" typeahead="admission.patient_id for patient_name in modalOptions.getTypeaheadData('patient','patient_name', $viewValue)" 
+				typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required />
+				<script type="text/ng-template" id="customTemplate.html">
+					<a>
+						<span><small> ({{match.model.patient_name}})</small></span>
+					</a>
+				</script>{{match.model.patient_id}} 
+				<span class="help-block" ng-show="addnew_admissionForm.patient_id.$dirty && addnew_admissionForm.patient_id.$invalid">
+				<span ng-show="addnew_admissionForm.patient_id.$error.required" class="text-danger">Patient name is required.</span>
 				</span>	
 			</div>
 		</div>
