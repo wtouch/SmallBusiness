@@ -10,7 +10,7 @@
 		<div class="form-group" ng-init="modalOptions.getData( false, false,'department', 'departmentList', false, modalOptions)">
 				<label for="dept_id" class="col-sm-2 control-label">Department Name* </label>
 					<div class="col-sm-9">
-						<select id="dept_id" class="form-control" ng-model="modalOptions.addtimetable.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList"  ng-change="modalOptions.classParams.where.dept_id = modalOptions.addtimetable.dept_id;modalOptions.getData(false, false,'class', 'ClassList',modalOptions.classParams, modalOptions)" required>
+						<select id="dept_id" class="form-control" ng-model="modalOptions.addtimetable.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList"  ng-change="modalOptions.classParams.where.dept_id = modalOptions.addtimetable.dept_id;modalOptions.getData(false, false,'class', 'classList',modalOptions.classParams, modalOptions)" required>
 							<option value="">Select Department</option>
 						</select>
 						<span class="help-block" ng-show="addtimetableform.dept_id.$dirty && addtimetableform.dept_id.$invalid">
@@ -19,10 +19,10 @@
 					</div>
 		</div>
 		
-		<div class="form-group" ng-init="modalOptions.getData( false, false,'class', 'classList', false, modalOptions)">
+		<div class="form-group" ng-init="modalOptions.getData( false, false,'class', 'classList', modalOptions.classParams, modalOptions)">
 				<label for="class" class="col-sm-2 control-label">Class Name* </label>
 				<div class="col-sm-9">
-					<select id="class_id" class="form-control" ng-model="modalOptions.addtimetable.class_id" ng-options="item.id as item.class_name for item in modalOptions.ClassList"  ng-change="modalOptions.classParams.where.class_id = modalOptions.addtimetable.class_id;modalOptions.getData(false, false,'division','divisionList', modalOptions.classParams, modalOptions)" required>
+					<select id="class_id" class="form-control" ng-model="modalOptions.addtimetable.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList"  ng-change="modalOptions.classParams.where.class_id = modalOptions.addtimetable.class_id;modalOptions.getData(false, false,'division','divisionList', modalOptions.classParams, modalOptions)" required>
 							<option value="">Select class</option>
 						</select>
 					<span class="help-block" ng-show="addtimetableform.class_id.$dirty && addtimetableform.class_id.$invalid">
@@ -32,7 +32,7 @@
 				</div>
 		</div>
 			
-		 <div class="form-group"  ng-init="modalOptions.getData( false, false,'division', 'divisionList', false, modalOptions)">
+		 <div class="form-group"  ng-init="modalOptions.getData( false, false,'division', 'divisionList', modalOptions.classParams, modalOptions)">
 			
 				<label for="division" class="col-sm-2 control-label">Division * </label>
 				<div class="col-sm-9">
@@ -46,7 +46,7 @@
 		</div>
 		
 	
-		<div class="form-group"  ng-init="modalOptions.getData( false, false,'subjects', 'subjectList', false, modalOptions)">
+		<div class="form-group"  ng-init="modalOptions.getData( false, false,'subjects', 'subjectList', modalOptions.classParams, modalOptions)">
 				<label for="subject" class="col-sm-2 control-label"> Subject * </label>
 				<div class="col-sm-9">
 					<select id="sub_id" class="form-control" ng-model="modalOptions.addtimetable.sub_id" ng-options="item.id as item.sub_name for item in modalOptions.subjectList" ng-change="modalOptions.classParams.where.sub_id=modalOptions.addtimetable.sub_id" required>

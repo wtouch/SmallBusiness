@@ -90,7 +90,7 @@ define(['app'], function (app) {
 					goods_name: data.goods_name,
 					goods_type: data.goods_type,
 					category: data.category,
-					quantity: data.quantity,
+					quantity: data.quantity
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),

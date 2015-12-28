@@ -118,7 +118,7 @@ define(['app'], function (app) {
 					dept_id : data.dept_id,
 					class_id : data.class_id,
 					timefrom:data.timefrom,
-					timeto:data.timeto,
+					timeto:data.timeto
 					
 			} : {
 					user_id : $rootScope.userDetails.user_id,

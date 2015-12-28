@@ -24,7 +24,7 @@
 			<div class="form-group" ng-init="modalOptions.getData( false, false,'department', 'departmentList', false, modalOptions)">
 					<label for="dept_id" class="col-sm-2 control-label">Department Name* </label>
 						<div class="col-sm-9">
-							<select id="dept_id" class="form-control" ng-model="modalOptions.addexam.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList"  ng-change="modalOptions.classParams.where.dept_id = modalOptions.addexam.dept_id;modalOptions.getData(false, false,'class', 'ClassList',modalOptions.classParams, modalOptions)" required>
+							<select id="dept_id" class="form-control" ng-model="modalOptions.addexam.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList"  ng-change="modalOptions.classParams.where.dept_id = modalOptions.addexam.dept_id;modalOptions.getData(false, false,'class', 'classList',modalOptions.classParams, modalOptions)" required>
 								<option value="">Select Department</option>
 							</select>
 							<span class="help-block" ng-show="addexamform.dept_id.$dirty && addexamform.dept_id.$invalid">
@@ -32,15 +32,16 @@
 						</div>
 			</div>
 		
-			<div class="form-group" >
+			<div class="form-group" ng-init="modalOptions.getData( false, false,'class', 'classList', false, modalOptions) ">
 					<label for="class_name" class="col-sm-2 control-label">Class Name* </label>
 					<div class="col-sm-9">
-						<select id="class_id" class="form-control" ng-model="modalOptions.addexam.class_id" ng-options="item.id as item.class_name for item in modalOptions.ClassList"  ng-change="modalOptions.classParams.where.class_id = modalOptions.addexam.class_id;modalOptions.getData(false, false,'division','divisionList', modalOptions.classParams, modalOptions)" required>
+						<select id="class_id" class="form-control" ng-model="modalOptions.addexam.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList"  ng-change="modalOptions.classParams.where.class_id = modalOptions.addexam.class_id;modalOptions.getData(false, false,'division','divisionList', modalOptions.classParams, modalOptions)" required>
 								<option value="">Select class</option>
 							</select>
 						<span class="help-block" ng-show="addexamform.class_name.$dirty && addexamform.class_name.$invalid">
 						<span class="text-danger"  ng-show="addexamform.class_name.$error.pattern">Please Enter Valid Name</span>
 						<span ng-show="(addexamform)" class="text-danger">Please Enter Name only!</span>
+						<span ng-show="addexamform.class_name.$error.required" class="text-danger">Class Name is required.</span>
 						</span>
 					</div>
 			</div>
@@ -121,13 +122,14 @@
 					</div>	
 			</div>
 	
-
+		<div class="modal-footer">
 			<div class="col-sm-offset-2 ">
 					 <button type="submit" class="btn btn-success" ng-if="!modalOptions.addexam.id" ng-disabled="addexamform.$invalid" ng-click="modalOptions.postData('exam',modalOptions.addexam);modalOptions.ok()">Save</button>
 					
 					<button type="submit" class="btn btn-success" ng-if="modalOptions.addexam.id" ng-disabled="addexamform.$invalid" ng-click="modalOptions.updateData('exam',modalOptions.addexam);modalOptions.ok()">Update Exam</button> 
 					
 					 <button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a> 
+			</div>
 			</div>
 		</div> 
 	</form>

@@ -14,7 +14,12 @@
 						<option value="" selected>Select Type</option>
 						<option value="Equipment">Equipment</option>
 						<option value="Stationary">Stationary</option>
-					</select>	
+					</select>
+						<span class="help-block" ng-show="addstockForm.stock_type.$dirty && addstockForm.stock_type.$invalid">
+						<span class="text-danger"  ng-show="addstockForm.stock_type.$error.pattern">Please Enter Valid Name</span>
+						<span ng-show="(addstockForm)" class="text-danger">Please Enter Name only!</span>
+						<span ng-show="addstockForm.stock_type.$error.required" class="text-danger">Class Name is required.</span>
+						</span>					
 				</div>
 		</div>
 		<div class="form-group">
@@ -24,17 +29,21 @@
 					<select class="form-control" name="vendor_id" id="vendor_id" ng-model="modalOptions.addstock.vendor_id" ng-options="item.id as item.name for item in modalOptions.vendorList" required>
 						<option value="">Select Vendor</option>
 					</select>	
+					<span class="help-block" ng-show="addstockForm.vendor_id.$dirty && addstockForm.vendor_id.$invalid">
+						<span class="text-danger"  ng-show="addstockForm.vendor_id.$error.pattern">Please Enter Valid Name</span>
+						<span ng-show="(addstockForm)" class="text-danger">Please Enter Name only!</span>
+						<span ng-show="addstockForm.vendor_id.$error.required" class="text-danger">vendor Name is required.</span>
+						</span>		
 				</div>
 			</div>
 		</div>
 		<div class="form-group"><!-- {{userDetails.config.inventory.taxData.tax}} -->
 				<label for="name" class="col-sm-2 control-label">Goods Name *</label>
 				<div class="col-sm-9">
-					<input type="hidden" ng-model="modalOptions.addstock.status" ng-init="modalOptions.addstock.status = '1'">
-					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstock.name" required>
-					 <span class="text-danger"  ng-show="addstockForm.name.$error.pattern">Please enter valid name</span>
-					<span class="help-block" ng-show="addstockForm.name.$dirty && addstockForm.name.$invalid">
-						<span class="text-danger" ng-show="addstockForm.name.$error.required">Name is required.</span>
+					<input type="text" id="goods_name" class="form-control" name="goods_name" placeholder="goods_name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addstock.goods_name" required>
+					 <span class="text-danger"  ng-show="addstockForm.goods_name.$error.pattern">Please enter valid name</span>
+					<span class="help-block" ng-show="addstockForm.goods_name.$dirty && addstockForm.goods_name.$invalid">
+						<span class="text-danger" ng-show="addstockForm.goods_name.$error.required">Name is required.</span>
 					</span>
 				</div>
 		</div>
@@ -80,7 +89,7 @@
 			</div>
 		</div>
 	
-	<div class="header-footer">
+	<div class="modal-footer">
 	<button type="submit"  class="btn btn-success" ng-disabled="addstockForm.$invalid"  ng-if="!modalOptions.addstock.id" ng-click="modalOptions.postData('stock',modalOptions.addstock)">Add stock</button>
 	
 	<button type="submit" ng-if="modalOptions.addstock.id"  class="btn btn-success" ng-click="modalOptions.updateData('stock',modalOptions.addstock,modalOptions.addstock.id); modalOptions.ok()">Update Stock LIst</button>

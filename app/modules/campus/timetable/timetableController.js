@@ -152,9 +152,10 @@ define(['app'], function (app) {
 					timetable_id :data.timetable_id,
 					dept_id : data.dept_id,
 					class_id : data.class_id,
-					div_id : data.dept_id,
+					div_id : data.div_id,
 					staff_id:data.staff_id,
 					sub_id:data.sub_id,
+					room_id:data.room_id,
 					day:data.day,
 					timefrom:data.timefrom,
 					timeto:data.timeto,
@@ -175,8 +176,7 @@ define(['app'], function (app) {
 				day:data.day,
 				date:data.date,
 				timefrom:data.timefrom,
-				timeto:data.timeto,
-					
+				timeto:data.timeto
 			}:
 			{
 				
