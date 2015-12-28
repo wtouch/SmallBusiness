@@ -36,10 +36,6 @@
   height: 100%;
   width: 100%;
 }
-.homeAboutus .description {
-  padding: 15px;
-  text-align: justify;
-}
 .sidebarModule.contactus {
   padding: 15px;
 }
@@ -54,26 +50,37 @@
 }
 .products {
   padding: 15px;
-  animation-name: products;
-  animation-duration: 2s;
-  animation-iteration-count: 1;
 }
-.products .prodimg {
-  height: 150px;
-  width: 170px;
+.products .caption {
+  border-bottom: 1px dashed #e0e0e0;
+  background-color: #f4f4f4;
 }
-.products .prodimg img {
-  min-height: 100%;
+.products .caption h4 {
+  font-size: 22px;
+  font-style: italic;
+  color: red;
+  background-image: url('../img/hd.gif');
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
-@keyframes products {
-  0% {
-    opacity: 0;
-    transform: translatex(-100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translatex(0px);
-  }
+.featrtesti blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 17.5px;
+  border-left: none;
+  border: 1px solid #e1e0e0;
+}
+.featrtesti blockquote cite {
+  color: #c90d14;
+  float: right;
+}
+.featrtesti blockquote::before {
+  content: "";
+  position: absolute;
+  background-image: url('../img/icon.gif');
+  background-repeat: no-repeat;
+  top: 5px;
+  left: 0;
 }
 .carousel-inner > .item {
   height: 235px;
@@ -104,13 +111,11 @@ span.glyphicon.glyphicon-chevron-left {
   margin-top: 0px;
   height: 344px;
   padding: 15px;
-  animation-name: featrGallery;
-  animation-duration: 2s;
-  animation-iteration-count: 1;
 }
 .featrGallery .infraimg {
   height: 200px;
   width: 200px;
+  margin: 10px;
 }
 .featrGallery .infraimg img {
   min-height: 100%;
@@ -118,16 +123,6 @@ span.glyphicon.glyphicon-chevron-left {
 .featrGallery .description {
   padding: 15px;
   text-align: justify;
-}
-@keyframes featrGallery {
-  0% {
-    opacity: 0;
-    transform: translateY(-100px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
 }
 .bx-wrapper img {
   max-width: 100%;
@@ -141,7 +136,6 @@ span.glyphicon.glyphicon-chevron-left {
 }
 .featrGallery1 {
   margin-top: 82px;
-  height: 344px;
   padding: 15px;
 }
 .featrGallery1 .thumbnail {
@@ -234,7 +228,7 @@ body {
 }
 .navbar-default .nav > li > ul > li {
   padding: 10px;
-  border-bottom: 1px solid #444444;
+  border-bottom: 1px solid #f4f4f4;
   text-indent: 3px;
   font-family: Tahoma;
   font-size: 14px;
@@ -338,9 +332,6 @@ h3 {
   font-style: italic;
   font-weight: normal;
 }
-cite {
-  color: #c90d14;
-}
 footer a {
   color: #696767;
 }
@@ -391,13 +382,9 @@ a {
 a:hover {
   color: #c90d14;
 }
-.col-sm-12 p {
-  text-align: justify;
-  padding: 15px;
-}
 .content1 {
   background-image: url('../img/testi.jpg');
-  background-size: 100% 100%;
+  background-size: 100%;
   background-repeat: no-repeat;
   margin-top: 0px;
 }

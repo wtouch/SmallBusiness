@@ -26,10 +26,7 @@
 		height: 100%;
 		width: 100%;
 	}
-		.description{
-			padding:15px;
-			text-align:justify;
-		}
+	
 }
 .sidebarModule.contactus {
     padding: 15px;
@@ -49,19 +46,43 @@
 
  .products{
 	padding:15px;
-		.prodimg{
-			height:150px;
-			width:170px;
-			 img{
-				min-height:100%;
-			 }
+		.caption{
+			
+			border-bottom: 1px dashed #e0e0e0;
+			background-color:@lightbackcolor;
+
+		
+		h4{
+			font-size: 22px;
+			font-style: italic;
+			color:red;
+			background-image:url('../img/hd.gif');
+			background-size:100%;
+			background-repeat:no-repeat;
 		}
-	animation-name:products;
-	animation-duration:2s;
-	animation-iteration-count:1;
+		}
  }
- @keyframes products{
-	
-	0%{opacity:0;transform:translatex(-100px);}
-	100%{opacity:1;transform:translatex(0px);}
-}
+ //testimonials
+		.featrtesti{
+			blockquote {
+			padding: 10px 20px;
+			margin: 0 0 20px;
+			font-size: 17.5px;
+			border-left: none;
+			border: 1px solid @darkbackcolor;
+				cite {
+					color:@color;
+					float:right;
+				}
+					&::before{
+						content:"";
+						position : absolute;
+						background-image:url('../img/icon.gif');
+						background-repeat:no-repeat;
+						top : 5px;
+						left : 0;
+								
+					}
+			}
+		}
+	 
