@@ -137,13 +137,6 @@ define(['app'], function (app) {
 			}
 				
 		}
-/* 		$scope.$watch(function(){ return $scope.billData.data},function(newValue){
-			if(angular.isArray(newValue)){
-				if(newValue.length >= 1){
-					$scope.verticalSum($scope.billData.data, 'particular[0].amount', 'totalAmount');
-				}
-			}
-		}) */
 		$scope.getBalance = function(accountId, modalOptions) {
 			var accountParams = {
 				where : {
@@ -155,10 +148,8 @@ define(['app'], function (app) {
 			}
 			dataService.get(false,'transaction', accountParams).then(function(response) {
 				modalOptions.previous_balance = response.data[0].previous_balance;
-			})
-			
-		}	
-			
+			})	
+		}		
 		$scope.openModal = function(url,data){
 				var modalDefault = {
 				templateUrl: url, // apply template to modal
@@ -208,8 +199,7 @@ define(['app'], function (app) {
 					formObject.goods_name = object.goods_name;
 					formObject.goods_type = object.goods_type;
 					formObject.category = object.category;
-					console.log(object);
-				},
+					},
 				
 				taxCalculate : function(modalOptions){
 					modalOptions.singleparticular.tax = {};

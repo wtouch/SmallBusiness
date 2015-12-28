@@ -25,22 +25,22 @@
 					{{modalOptions.view_admission.bed_number}}
 				</td>
 				<td>
-					{{modalOptions.view_admission.bed_id}}
+					{{modalOptions.view_admission.name}}
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<div class="modal-body">{{modalOptions.equipment_sheet}}
+	<div class="modal-body">
 		<form class="form-horizontal" name="assignEquipementForm" role="form" ng-submit="assignEquipementForm.$valid" novalidate="novalidate">
 			<div class="form-group">
 				<label  for="date" class="col-sm-2 control-label">Date*</label>
 				<div class="col-sm-8">
-					<div class="input-group">
-						<input type="text" class="form-control " placeholder="Date" id="casesheet_date" name="assign_date" ng-model="modalOptions.equipment_sheet.assign_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.assign_date.staff_date,10); modalOptions.sqlDateFormat(modalOptions.equipment_sheet.staff_date, modalOptions.addcasesheet.staff_date)"/>	
-							<span class="input-group-btn">
-							<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
-							</span>
-					</div>
+					<input type="text" class="form-control " placeholder="Date" id="assign_date" name="assign_date" ng-model="modalOptions.equipment_sheet.assign_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required/>	
+						<span class="input-group-btn">
+						</span>
+						<span class="text-danger"  ng-show="assignEquipementForm.assign_date.$error.date">Please enter valid date</span>
+						<span class="help-block" ng-show="assignEquipementForm.assign_date.$dirty && assignEquipementForm.assign_date.$invalid">
+							<span ng-show="assignEquipementForm.assign_date.$error.required"class="text-danger">Date  is required.</span>
 				</div>
 			</div>
 			<div class="form-group" ng-init= "modalOptions.getData(false,false,'equipment','equipmentList',false,modalOptions)">
@@ -48,7 +48,7 @@
 				<div class="col-sm-8">					
 					<select id="equipment_name" name="equipment_name" class="form-control" 
 					ng-model="modalOptions.equipment_sheet.equipment_name" ng-options="item.id as item.equipment_name for item in modalOptions.equipmentList">
-					<option value="" selected>select category</option>
+					<option value="" selected>Select Equipment Name</option>
 					
 					</select>
 				</div>

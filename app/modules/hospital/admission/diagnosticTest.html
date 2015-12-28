@@ -39,7 +39,6 @@
 				
 						<input type="text" class="form-control " placeholder="Date" id="diagnostic_date" name="diagnostic_date" ng-model="modalOptions.diagnostic.diagnostic_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required/>	
 					<span class="input-group-btn">
-					<!-- <button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button> -->
 					</span>
 					<span class="text-danger"  ng-show="diagnosticForm.diagnostic_date.$error.date">Please enter valid date</span>
 					<span class="help-block" ng-show="diagnosticForm.diagnostic_date.$dirty && diagnosticForm.diagnostic_date.$invalid">
@@ -50,16 +49,19 @@
 			<div class="form-group"  ng-init= "modalOptions.getData(false,false,'test','testList',modalOptions.testParams,modalOptions)">
 				<label for="test_type" class="col-sm-2 control-label">Test Type</label>
 				<div class="col-sm-8">					
-					<select id="test_type" name="test_type" class="form-control" 
-				ng-model="modalOptions.diagnostic.test_type" ng-options="item.id as item.test_type for item in modalOptions.testList">
-				<option value="">Select Test Type</option>
+				<select id="test_type" name="test_type" class="form-control" 
+				ng-model="modalOptions.diagnostic.test_type" ng-options="item.id as item.test_type for item in modalOptions.testList" ng-change="modalOptions.testParams.where.test_id = modalOptions.addadmission.test_id;modalOptions.getData(false, false,'test', 'testList',modalOptions.testParams, modalOptions)" >
+					<option value="">Select Test Type</option>
 				</select>
 				</div>
 			</div>	
-			<div class="form-group">
+			
+			<div class="form-group" ng-init= "modalOptions.getData(false,false,'test','testList',modalOptions.testParams,modalOptions)">
 				<label for="test_name" class="col-sm-2 control-label">Test Name</label>
 				<div class="col-sm-8">
-					<input type="text"  name="test_name" class="form-control" id="test_name" ng-model="modalOptions.diagnostic.test_name" placeholder="Enter Your Test Name" ng-pattern="/^[a-zA-Z]*$/" required/>
+					<select type="text" id="test_name"  placeholder="Enter Your Test Name"  class="form-control" ng-model="modalOptions.diagnostic.test_name" ng-options="item.id as item.test_name for item in modalOptions.testList | filter : {test_type : 'blood test'}" required>
+					<option value="">Select Test Name</option>
+					</select>
 					<span class="text-danger"  ng-show="diagnosticForm.test_name.$error.pattern">Please enter valid test name</span>
 					<span class="help-block" ng-show="diagnosticForm.test_name.$dirty && diagnosticForm.test_name.$invalid">
 						<span ng-show="diagnosticForm.test_name.$error.required"class="text-danger">test name is required.</span>

@@ -111,6 +111,8 @@ define(['app'], function (app) {
 				admission_date:$scope.currentDate,
 				patientParams: $scope.patientParams,
 				complaintParams :$scope.complaintParams,
+				testParams :$scope.testParams,
+				bedParams :$scope.bedParams,
 				view_admission : (data) ? {
 					id : data.id,
 					user_id : data.user_id,
@@ -297,6 +299,13 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
+		$scope.bedParams ={
+		 where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+			},
+			cols : ["*"]
+		}
 		$scope.patientParams ={
 		 where : {
 				user_id : $rootScope.userDetails.id,
@@ -315,6 +324,7 @@ define(['app'], function (app) {
 		 where : {
 				user_id : $rootScope.userDetails.id,
 				status : 1,
+				
 			},
 			cols : ["*"]
 		}
