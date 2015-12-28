@@ -4,7 +4,7 @@
 		<h3 ng-if="modalOptions.addvendor.id" class="text-center">Update vendor</h3>
 </div>
 	
-<div class="modal-body">{{modalOptions.addvendor}}
+<div class="modal-body">
 		<form class="form-horizontal" name="addvendorform" role="form" ng-submit="addvendorform.$valid" novalidate="novalidate">
 		
 		
@@ -15,7 +15,7 @@
 					<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addvendor.name"required>
 					 <span class="text-danger"  ng-show="addvendorform.name.$error.pattern">Please enter valid name</span>
 					<span class="help-block" ng-show="addvendor.name.$dirty && addvendor.name.$invalid">
-						<span class="text-danger" ng-show="addvendor.name.$error.required">Name is required.</span>
+						<span class="text-danger" ng-show="addvendorform.name.$error.required">Name is required.</span>
 					</span>
 				</div>
 		</div>
@@ -46,8 +46,11 @@
 				<label for="address" class="col-sm-2 control-label">Address *</label>
 				<div class="col-sm-9">
 					<textarea  class="form-control" id="address" ng-model="modalOptions.addvendor.address" name="address" placeholder="Enter address"  maxlength="250" required></textarea>
+					<span ng-hide="addDepartmentForm.description.$error.maxlength">
+							{{ 250 - modalOptions.addvendor.address.length + " Chars left" }}
+					</span>	
 					<span class="text-danger"  ng-show="addvendorform.address.$error.pattern">Please enter valid address</span>
-					<span ng-hide="addvendorform.address.$error.maxlength">{{ 250 - modalOptions.adduser.address.length + " Chars left"}}</span>
+
 					<span class="help-block" ng-show="addvendorform.address.$dirty &&  addvendorform.address.$invalid">
 						<span class="text-danger" ng-show="addvendorform.address.$error.maxlength">Sorry you are exceeding the limit</span>
 						<span class="text-danger" ng-show="addvendorform.address.$error.required">Address is required.</span>

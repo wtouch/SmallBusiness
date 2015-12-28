@@ -6,6 +6,16 @@ jQuery(document).ready(function() {
 	})
 });
 $(document).ready(function(){
+	$(".texttype").click(function(){     
+		$(this).toggleClass("contentToggle");
+		if($(this).hasClass("contentToggle")){
+			$(this).text("English");
+			$(".english, .marathi").addClass("contentToggle");
+		}else{
+			$(this).text("मराठी");
+			$(".english, .marathi").removeClass("contentToggle");
+		}
+	})
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
 		slideMargin: 5,

@@ -403,7 +403,7 @@ define(['app'], function (app) {
 				if(data == (undefined || "")){
 					//console.log("data undefined: "+data);
 				}else{
-					localStorage.clear();
+					//localStorage.clear();
 					localStorage.userDetails = angular.isObject(data) ?  JSON.stringify(data) : data;
 					obj.userDetails = JSON.parse(localStorage.userDetails);
 				}

@@ -37,8 +37,7 @@ define(['app'], function (app) {
 			enableFiltering: true,
 			columnDefs: [
 				{ name:'SrNo',  width:60,
-					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
-			enableFiltering: false,	
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,enableFiltering: false,	
 				},
 				{
 					name:'complaint_name',
@@ -68,11 +67,11 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} , 
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/complaint/addcomplaint.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit complaint Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/complaint/addcomplaint.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Complaint Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ 
-					'<a type="button" tooltip="Delete complaint" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'complaint\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					'<a type="button" tooltip="Delete Complaint" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'complaint\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+ 
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/general/complaint/complaintview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view complaint" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/general/complaint/complaintview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Complaint" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
@@ -141,7 +140,8 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id
+					user_id : $rootScope.userDetails.id,
+					staus:1
 				},
 				cols : ["*"]
 			};

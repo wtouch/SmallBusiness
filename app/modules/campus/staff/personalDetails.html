@@ -1,5 +1,5 @@
 <!-- <div ng-init="modalOptions.addstaff.education = (modalOptions.addstaff.education) ? modalOptions.addstaff.education : []"> -->
-			 <div>{{modalOptions.addstaff}}</div>
+			
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">Name *</label>
 				<div class="col-sm-3">
@@ -142,19 +142,12 @@
 					</span>
 				</div>
 			</div>
-			<!-- <span ng-hide="addstaffForm.address.$error.maxlength">
-								{{ 250 - modalOptions.addstaff.address.length + " Chars left" }}
-						</span>
-						<span class="help-block" ng-show="addstaffForm.address.$dirty && addexpenseForm.address.$invalid">
-								<span class="text-danger" ng-show="addstaffForm.address.$error.maxlength">Sorry You are Exceeding the Limit</span>
-								<span ng-show="addstaffForm.address.$error.required" class="text-danger">Required Field</span>
-						</span> -->
 			<div class="form-group">
 				<label for="hobbiesdesc" class="col-sm-2 control-label">Hobby Description *</label>
 				<div class="col-sm-9">
 					<textarea type="text" id="hobbiesdesc" class="form-control" name="hobbiesdesc" placeholder="Hobby Description" ng-model="modalOptions.addstaff.hobbies.hobbiesdesc" ng-maxlength="250" required></textarea>
-					<span ng-hide="addstaffForm.addstaff.hobbies.$error.maxlength">
-								{{ 250 - modalOptions.addstaff.hobbies.length + " Chars left" }}
+					<span ng-hide="addstaffForm.hobbiesdesc.$error.maxlength">
+								{{ 250 - modalOptions.addstaff.hobbies.hobbiesdesc.length + " Chars left" }}
 						</span>
 						<span class="help-block" ng-show="addstaffForm.hobbiesdesc.$dirty && addstaffForm.hobbiesdesc.$invalid">
 								<span class="text-danger" ng-show="addstaffForm.hobbiesdesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
@@ -176,9 +169,9 @@
 			<div class="form-group">
 				<label for="handicapdesc" class="col-sm-2 control-label">Handicapped Description</label>
 				<div class="col-sm-9">
-					<textarea type="text" id="handicapdesc" ng-model="modalOptions.addstaff.medical.handicapdesc" class="form-control" name="handicapdesc"   placeholder="Handicapped Description" ng-maxlength="250" required></textarea>
+					<textarea type="text" id="handicapdesc" ng-model="modalOptions.addstaff.medical.handicapdesc" class="form-control" name="handicapdesc" placeholder="Handicapped Description" ng-maxlength="250" required></textarea>
 					<span ng-hide="addstaffForm.handicapdesc.$error.maxlength">
-								{{ 250 - modalOptions.addstaff.handicapdesc.length + " Chars left" }}
+								{{ 250 - modalOptions.addstaff.medical.handicapdesc.length + " Chars left" }}
 						</span>
 						<span class="help-block" ng-show="addstaffForm.handicapdesc.$dirty && addstaffForm.handicapdesc.$invalid">
 								<span class="text-danger" ng-show="addstaffForm.handicapdesc.$error.maxlength">Sorry You are Exceeding the Limit</span>
@@ -213,7 +206,7 @@
 				<div class="col-sm-9">
 					<textarea type="text" id="habbitdesc" ng-model="modalOptions.addstaff.medical.habbitdesc" class="form-control" name="habbitdesc"   placeholder="Habbit Description" ng-maxlength="250" required></textarea>
 					<span ng-hide="addstaffForm.habbitdesc.$error.maxlength">
-								{{ 250 - modalOptions.addstaff.habbitdesc.length + " Chars left" }}
+								{{ 250 - modalOptions.addstaff.medical.habbitdesc.length + " Chars left" }}
 						</span>
 						<span class="help-block" ng-show="addstaffForm.habbitdesc.$dirty && addstaffForm.habbitdesc.$invalid">
 								<span class="text-danger" ng-show="addstaffForm.habbitdesc.$error.maxlength">Sorry You are Exceeding the Limit</span>

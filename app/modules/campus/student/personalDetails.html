@@ -4,9 +4,9 @@
 				<label for="student_name" class="col-sm-2 control-label">Student Name *</label>
 				<div class="col-sm-9">
 					<input type="text" id="student_name" class="form-control" name="student_name" placeholder="Student Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.student_name" required>
-					<span class="text-danger"  ng-show="addStudentForm.student_name.$error.pattern">Text is required.</span>
 					<span class="help-block" ng-show="addStudentForm.student_name.$dirty && addStudentForm.student_name.$invalid">
 						<span class="text-danger" ng-show="addStudentForm.student_name.$error.required">Required Field.</span>
+						<span class="text-danger" ng-show="addStudentForm.student_name.$error.pattern">Text Required.</span>
 					</span>
 				</div>
 			</div>
@@ -14,7 +14,7 @@
 			<div class="form-group">
 				<label for="email_id" class="col-sm-2 control-label">Email ID *</label>
 				<div class="col-sm-3">
-					<input type="Email" id="email_id" class="form-control" name="email_id" placeholder="Email ID"  ng-model="modalOptions.addStudent.email_id"required>
+				<input type="Email" id="email_id" class="form-control" name="email_id" placeholder="Email ID"  ng-model="modalOptions.addStudent.email_id" required>
 						<span class="help-block" ng-show="addStudentForm.email_id.$dirty && addStudentForm.email_id.$invalid">
 						<span class="text-danger" ng-show="addStudentForm.email_id.$dirty "></span>
 						<span class="text-danger" ng-show="addStudentForm.email_id.$error.required">Required Field.</span>
@@ -51,10 +51,10 @@
 			<div class="form-group">
 				<label for="city" class="col-sm-2 control-label">City *</label>
 				<div class="col-sm-3">
-					<input type="text" id="city" class="form-control" name="city" placeholder="City" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.city"required>
-					<span class="text-danger"  ng-show="addStudentForm.city.$error.pattern">Text is required.</span>
+					<input type="text" id="city" class="form-control" name="city" placeholder="City" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.city" required>
 					<span class="help-block" ng-show="addStudentForm.city.$dirty && addStudentForm.city.$invalid">
 						<span class="text-danger" ng-show="addStudentForm.city.$error.required">Required Field.</span>
+						<span class="text-danger"  ng-show="addStudentForm.city.$error.pattern">Text is required.</span>
 					</span>
 				</div>
 <!-- 			</div>
@@ -62,9 +62,9 @@
 				<label for="state" class="col-sm-2 control-label">State *</label>
 				<div class="col-sm-4">
 					<input type="text" id="state" class="form-control" name="state" placeholder="State" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.state"required>
-					<span class="text-danger"  ng-show="addStudentForm.state.$error.pattern">Text is required.</span>
 					<span class="help-block" ng-show="addStudentForm.state.$dirty && addStudentForm.state.$invalid">
 						<span class="text-danger" ng-show="addStudentForm.state.$error.required">Required Field.</span>
+						<span class="text-danger"  ng-show="addStudentForm.state.$error.pattern">Text is required.</span>
 					</span>
 				</div>
 			</div>
@@ -72,9 +72,9 @@
 				<label for="country" class="col-sm-2 control-label">Country *</label>
 				<div class="col-sm-3">
 					<input type="text" id="country" class="form-control" name="country" placeholder="Country" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.country"required>
-					<span class="text-danger"  ng-show="addStudentForm.country.$error.pattern">Text is required.</span>
 					<span class="help-block" ng-show="addStudentForm.country.$dirty && addStudentForm.country.$invalid">
 						<span class="text-danger" ng-show="addStudentForm.country.$error.required">Required Field.</span>
+						<span class="text-danger"  ng-show="addStudentForm.country.$error.pattern">Text is required.</span>
 					</span>
 				</div>
 			<!-- </div>
@@ -116,7 +116,7 @@
 			<div class="form-group">
 				<label  for="dob" class="col-sm-2 control-label">Birth Date * </label>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" placeholder="YYYY-DD-MM" id="dob" name="dob" ng-model="modalOptions.addStudent.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
+					<input type="text" class="form-control" placeholder="YYYY-DD-MM" id="dob" name="dob" ng-model="modalOptions.addStudent.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1"max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
 				</div>
 			<!-- </div>
 			<div class="form-group"> -->
@@ -135,10 +135,10 @@
 			<div class="form-group">
 				<label for="hobbies" class="col-sm-2 control-label">Hobby Name *</label>
 				<div class="col-sm-9">
-					<input type="text" id="hobbies" class="form-control" name="hobbies" placeholder="Hobby Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.hobbies.hobbies"required>
-					<span class="text-danger"  ng-show="addStudentForm.hobbies.$error.pattern">Text is required.</span>
+					<input type="text" id="hobbies" class="form-control" name="hobbies" placeholder="Hobby Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.hobbies.hobbies" required>
 					<span class="help-block" ng-show="addStudentForm.hobbies.$dirty && addStudentForm.hobbies.$invalid">
 						<span class="text-danger" ng-show="addStudentForm.hobbies.$error.required">Required Field.</span>
+						<span class="text-danger"  ng-show="addStudentForm.hobbies.$error.pattern">Text is required.</span>
 					</span>
 				</div>
 			</div>
@@ -222,14 +222,14 @@
 			<div class="form-group">
 				<label for="cast" class="col-sm-2 control-label">Cast Name *</label>
 				<div class="col-sm-9">
-					<input type="text" id="cast" class="form-control" name="cast" placeholder="Cast Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.cast.cast_name"required>
+					<input type="text" id="cast" class="form-control" name="cast" placeholder="Cast Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.cast" required>
 					<span class="text-danger"  ng-show="addStudentForm.cast.$error.pattern">Text is required.</span>
 					<span class="help-block" ng-show="addStudentForm.cast.$dirty && addStudentForm.cast.$invalid">
 						<span class="text-danger" ng-show="addStudentForm.cast.$error.required">Required Field.</span>
 					</span>
 				</div>
 			</div>
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label for="cast" class="col-sm-2 control-label">Upload File</label>
 				<div class="col-sm-9">
 				<input type="file" class="form-control " placeholder="upload file" id="upload_file" name="upload_file" ng-model="modalOptions.cast.upload_file" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
@@ -237,7 +237,7 @@
 					<span class="text-danger" ng-show="addStudentForm.upload_file.$error.required">Required Field.</span>
 				</span>
 				</div>
-			</div> 
+			</div>  -->
 			
 			
 			<div class="form-group">

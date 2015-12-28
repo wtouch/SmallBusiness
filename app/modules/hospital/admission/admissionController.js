@@ -65,7 +65,7 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="mobile" class="form-control" ng-change="grid.appScope.filter(\'mobile\', mobile, \'admission_view\', \'admission\',true, grid.appScope.admissionParams)" ng-model="mobile" placeholder="search">'
                 },
 				{
-					name:'admission_date',width:150,
+					name:'admission_date',width:100,
 					filterHeaderTemplate: '<input id="admission_date" class="form-control" ng-change="grid.appScope.filter(\'admission_date\', admission_date, \'admission_view\', \'admission\',true, grid.appScope.admissionParams)" ng-model="admission_date" placeholder="search">'
                 },
 					
@@ -82,19 +82,21 @@ define(['app'], function (app) {
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/addadmission.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit  IPD patient" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ 
-					'<a type="button" tooltip="Delete admission" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'admission_view\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_ipdpatient.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  IPDpatient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a type="button" tooltip="Delete admission" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'admission\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_ipdpatient.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view  IPDpatient" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_casesheet.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  Casesheet" > <span >CS</span></a>'			
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_casesheet.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view  Casesheet" > <span >CS</span></a>'			
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/view_drugsheet.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Drugsheet" > <span >VD</span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/diagnosticTest.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view diagnosticTest" > <span >DT</span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/diagnosticTest.html\',row.entity)" class="btn btn-success btn-sm" type="button" tooltip-animation="true" tooltip="view diagnosticTest" > <span >DT</span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/medicine_Prescribe.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view medicine_Prescribe" > <span>MP</span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/medicine_Prescribe.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view medicine_Prescribe" > <span>MP</span></a>'
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/assignEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >AE</span></a>'	+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/generate_bill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span >GB</span></a>'	
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/generate_bill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span >GB</span></a>'	
+						+
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/dishcharge.html\',row.entity)" class="btn btn-success btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span>discharge</span></a>'	
 				}
 			]
 		};
@@ -108,14 +110,21 @@ define(['app'], function (app) {
 				date : $scope.currentDate,
 				admission_date:$scope.currentDate,
 				patientParams: $scope.patientParams,
+				complaintParams :$scope.complaintParams,
 				view_admission : (data) ? {
 					id : data.id,
+					user_id : data.user_id,
 					name : data.name,
 					email : data.email,
 					admission_date :data.admission_date ,
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
 					ward_id :data.ward_id,
+					ward_name:data.ward_name,
+					fees:data.fees,
+					ward_charges:data.ward_charges,
+					bed_number:data.bed_number,
+					//test_description :data.test_description,
 					patient_id:data.patient_id,
 					bed_id :data.bed_id,
 					patient_history:data.patient_history,
@@ -138,7 +147,9 @@ define(['app'], function (app) {
 					pincode :data.pincode,
 					deposit:data.deposit,
 					complaints :data.complaints,
-					equipment_sheet :data.equipment_sheet
+					equipment_sheet :data.equipment_sheet,
+					equipment_name :data.equipment_name,
+					equipment_charges :data.equipment_charges
 					//phone :data.phone,	
 			} : {
 					date : dataService.sqlDateFormate(),
@@ -180,13 +191,31 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
+							
+							 
+						$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
+							
+							$scope.medicine_Prescribe = {};
+							 $scope.medicine_Prescribe.user_id = user_id;
+							if(input.date) $scope.medicine_Prescribe.date = input.date;
+							 $scope.modified_date = input.modified_date;
+							 $scope.medicine_Prescribe.medicine_used_date = input.medicine_used_date;
+							  $scope.medicine_Prescribe.quantity = input.quantity;
+							  $scope.medicine_Prescribe.unit = input.unit;
+							 $scope.medicine_Prescribe.description = input.description;
+							 
+							 $scope.medicine_Prescribe.medicine_id = input.medicine_id;
+							 
+							$rootScope.postData("medicine_used", $scope,function(response){
+								console.log(response);
+								});
+								
 							$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
 						}
 					})
@@ -209,6 +238,9 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})	
 		}
+		
+		
+		
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
@@ -229,6 +261,20 @@ define(['app'], function (app) {
 			},
 			cols : ["*"]
 		}
+		$scope.medicineParams ={
+		 where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+			},
+			cols : ["*"]
+		}
+			$scope.equipmentParams ={
+		 where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+			},
+			cols : ["*"]
+		}
 		$scope.patientParams ={
 		 where : {
 				user_id : $rootScope.userDetails.id,
@@ -237,6 +283,13 @@ define(['app'], function (app) {
 			cols : ["*"]
 		}
 		$scope.staffParams ={
+		 where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+			},
+			cols : ["*"]
+		}
+		$scope.testParams ={
 		 where : {
 				user_id : $rootScope.userDetails.id,
 				status : 1,

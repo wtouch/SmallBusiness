@@ -1,15 +1,15 @@
 <div class="modal-body">
 	<div class="form-group">
-		<label for="temprature" class="col-sm-2 control-label">Temprature</label>
+		<label for="temprature" class="col-sm-2 control-label">Temperature</label>
 		<div class="col-sm-3">
-			<input type="text" name="temprature" id="temprature" ng-model="modalOptions.addadmission.general_examination.temprature" placeholder="Enter your temprature" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" />
-			<span class="text-danger"  ng-show="addnew_admissionForm.temprature.$error.pattern">please Enter Valid Tempeture</span>
+			<input type="text" name="temprature" id="temprature" ng-model="modalOptions.addadmission.general_examination.temprature" placeholder="Enter temprature" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" />
+			<span class="text-danger"  ng-show="addnew_admissionForm.temprature.$error.pattern">please Enter Valid Temperature</span>
 			<span class="help-block" ng-show="addnew_admissionForm.temprature.$dirty && addnew_admissionForm.temprature.$invalid">
 			</span>
 		</div>		
 		<label for="Pulse" class="col-sm-2 control-label">Pulse </label>
 		<div class="col-sm-3">
-			<input type="text" name="Pulse" id="Pulse" ng-model="modalOptions.addadmission.general_examination.Pulse" placeholder="Enter your Pulse" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
+			<input type="text" name="Pulse" id="Pulse" ng-model="modalOptions.addadmission.general_examination.Pulse" placeholder="Enter your Pulse" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" >
 			<span class="text-danger"  ng-show="addnew_admissionForm.Pulse.$error.pattern">please Enter Valid Area</span>
 			<span class="help-block" ng-show="addnew_admissionForm.Pulse.$dirty && addnew_admissionForm.Pulse.$invalid">
 			</span>
@@ -18,28 +18,28 @@
 	<div class="form-group">
 		<label for="height" class="col-sm-2 control-label">Height </label>
 		<div class="col-sm-3" >
-			<input type="text" id="height" name="height" class="form-control" ng-model="modalOptions.addadmission.general_examination.height"ng-pattern="/^\d{0,9}[0-9]$/" placeholder="Enter Height" ng-pattern="/^[a-zA-Z]*$/" required>
+			<input type="text" id="height" name="height" class="form-control" ng-model="modalOptions.addadmission.general_examination.height"ng-pattern="/^\d{0,9}[0-9]$/" placeholder="Enter Height" ng-pattern="/^[a-zA-Z]*$/" >
 			<span class="text-danger"  ng-show="addnew_admissionForm.height.$error.pattern">please Enter Valid Height</span>
 			<span class="help-block" ng-show="addnew_admissionForm.height.$dirty && addnew_admissionForm.height.$invalid">
 			</span>						
 		</div>
 		<label for="weight" class="col-sm-2 control-label">weight </label>
 		<div class="col-sm-3">
-			<input type="text" id="weight" name="weight" class="form-control" ng-model="modalOptions.addadmission.general_examination.weight" placeholder="Enter weight " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" required>
+			<input type="text" id="weight" name="weight" class="form-control" ng-model="modalOptions.addadmission.general_examination.weight" placeholder="Enter weight " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" >
 			<span class="help-block" ng-show="addnew_admissionForm.weight.$dirty && addnew_admissionForm.weight.$invalid">
-				<span ng-show="addnew_admissionForm.weight.$error.pattern && (addnew_admissionForm.weight.$dirty || submitted)" class="text-danger">please enter number</span>
+				<span ng-show="addnew_admissionForm.weight.$error.pattern && (addnew_admissionForm.weight.$dirty || submitted)" class="text-danger">Please enter number</span>
 			</span>
 		</div>						
 	</div>
 	<div class="form-group">
 		<label for="bp" class="col-sm-2 control-label">BP </label>
 		<div class="col-sm-3">
-			<input type="text" id="bp" name="bp" class="form-control" ng-model="modalOptions.addadmission.general_examination.bp" placeholder="Enter blood pressure" ng-pattern="/^[a-zA-Z]*$/" required/>
-			<span class="text-danger"  ng-show="addnew_admissionForm.bp.$error.pattern">please Enter Valid bp</span>
+			<input type="text" id="bp" name="bp" class="form-control" ng-model="modalOptions.addadmission.general_examination.bp" placeholder="Enter blood pressure" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="6" />
+			<span class="text-danger"  ng-show="addnew_admissionForm.bp.$error.pattern">please enter valid format</span>
 		</div>
 		<label for="RR" class="col-sm-2 control-label">RR </label>
 		<div class="col-sm-3">
-			<input type="text" required name="RR" class="form-control" id="RR" ng-model="modalOptions.addadmission.general_examination.RR" placeholder="Enter Your RR" ng-pattern="/^[a-zA-Z]*$/" required>
+			<input type="text"  name="RR" class="form-control" id="RR" ng-model="modalOptions.addadmission.general_examination.RR" placeholder="Enter Your RR" >
 			<span class="text-danger"  ng-show="addnew_admissionForm.RR.$error.pattern">please Enter Valid RR</span>
 		</div>
 	</div> 			
@@ -105,13 +105,13 @@
 	<div class="form-group">
 		<label for="ProvisionalDiagnosis" class="col-sm-2 control-label">Provisional Diagnosis</label>
 		<div class="col-sm-8">
-			<textarea type="text" id="ProvisionalDiagnosis" name="ProvisionalDiagnosis" class="form-control" ng-model="modalOptions.addadmission.general_examination.ProvisionalDiagnosis" placeholder="Enter your Provisional Diagnosis Details" ></textarea>
+			<textarea type="text" id="ProvisionalDiagnosis" name="ProvisionalDiagnosis" class="form-control" ng-model="modalOptions.addadmission.general_examination.ProvisionalDiagnosis" placeholder="Enter Your Provisional Diagnosis Details" ></textarea>
 		</div>								 
 	</div>	
 </div> 
 	<div class="modal-footer" >
 		<div class="col-sm-offset-2 col-sm-9">
-			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id"   ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Add new IPD Patient</button>
+			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id" ng-disabled="addnew_admissionForm.$invalid"  ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Add new IPD Patient</button>
 			
 			<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success" ng-disabled="addnew_admissionForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update IPD Patient</button>
 			

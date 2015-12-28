@@ -1,0 +1,70 @@
+<h1>Categary Wise Distribution</h1>
+{{campus.distributions}}
+{{distribution}}
+<div>
+<form name="addCategoryForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addCategoryForm.$invalid" id="addCategoryForm">
+		<div class="row">
+					<div class="col-sm-10 table-responsive">
+						<table class="table table-bordered" >
+							<thead>
+								<tr>
+									<th>Category</th>
+									<th>Percentage</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+									<input type="text" id="category" class="form-control" name="category" placeholder="Category Name" ng-pattern="/^[a-zA-Z ]*$/" ng-model="distribution.category" required>
+									<span class="help-block" ng-show="addCategoryForm.category.$dirty && addCategoryForm.category.$invalid">
+										<span class="text-danger"  ng-show="addCategoryForm.category.$error.pattern">Text is required.</span>
+										<span class="text-danger" ng-show="addCategoryForm.category.$error.required">Required Field.</span>
+									</span>
+									</td>
+									<td>
+										<input type="text" class="form-control " placeholder="percentage" id="percentage" name="percentage" ng-model="distribution.percentage"   ng-pattern="/^([0-9]{1,2}){1}(\.[0-9]{1,2})?$/" required />
+										<span ng-show="addCategoryForm.percentage.$error.pattern && (addCategoryForm.percentage.$dirty || submitted)" class="text-danger">Enter a valid No</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-sm-2">
+						<button type="submit" class="btn btn-success center" ng-disabled="addCategoryForm.$invalid" ng-click="addToObject(campus.distributions,'distribution',distribution);">+Add Category</button>							
+					</div>
+		</div>
+		{{distribution}}
+</form>
+<div class="row" ng-init="totalCalculate(campus.distributions)">
+			<div class="table-responsive col-sm-12">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Sr.No</th>
+							<th>Category</th>
+							<th>Percentage</th>
+							<th>Remove</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in campus.distributions">
+							<td>{{ $index + 1 }}</td>
+							<td>{{x.category}}</td>
+							<td>{{x.percentage}}</td>
+							<td><a ng-click="removeObject(campus.distributions, $index);totalCalculate(campus.distributions)"><span class="glyphicon glyphicon-remove"></span></a></td>
+						</tr>
+						<tr>
+							<td colspan="2" class="text-right"><strong>Total Percentage</strong></td>
+							<td><strong>{{percentage}}</strong></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+</div>
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-9">
+		<button type="submit" class="btn btn-primary" ng-click="updateData(campus)">Update</button>
+		<button type="reset" class="btn btn-danger">Cancel</button>
+	</div>
+</div>
+</div>

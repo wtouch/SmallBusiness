@@ -13,10 +13,10 @@
 				</div>
 			</div> 
 			<div class="table-responsive" ng-init="getData(false, currentPage,'student_view', 'studentList', studParams);getData(false, currentPage,'department', 'departmentList', deptParams);getData(false, currentPage,'class', 'classList', classParams);">
-			 <div ui-grid="studentList"></div>
+			<div ui-grid="studentList"></div>
 			</div>
 			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage,'student_view', 'studentList', studParams);"> </pagination>
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage,'student_view', 'studentList', studParams)"> </pagination>
 				<pre>Page: {{currentPage}} / {{numPages}}</pre>
 			</div>
 		</div>

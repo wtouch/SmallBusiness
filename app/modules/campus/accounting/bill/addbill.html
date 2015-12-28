@@ -1,8 +1,8 @@
 <div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions);">
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	
-	<h3 ng-if="!modalOptions.addBill.id">Add Purchase Bill</h3>
-	<h3 ng-if="modalOptions.addBill.id" ng-init="modalOptions.totalCalculate(modalOptions)">Update Purchase Bill</h3>
+	<h3 ng-if="!modalOptions.addBill.id" style="text-align:center">Add Bill</h3>
+	<h3 ng-if="modalOptions.addBill.id" ng-init="modalOptions.totalCalculate(modalOptions)" style="text-align:center">Update Bill</h3>
 </div>
 
 <div class="modal-body">
@@ -141,7 +141,7 @@
 				</table>
 				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addbillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addBill.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">	+Add This Particular
 				</button>
-				<br/>
+				<br/><br/><br/>
 			</div>	
 
 
@@ -162,10 +162,10 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" class="form-control" id="particular_name" name="particular_name" ng-model="modalOptions.singleparticular.particular_name" required 
+								<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" required 
 								ng-change=""  placeholder="Book Name"/>
-								<span class="help-block" ng-show="addbillForm.particular_name.$dirty && addbillForm.particular_name.$invalid">
-									<span ng-show="addbillForm.particular_name.$error.required" class="text-danger">Book Name is necessary.</span>
+								<span class="help-block" ng-show="addbillForm.particular.$dirty && addbillForm.particular.$invalid">
+									<span ng-show="addbillForm.particular.$error.required" class="text-danger">Book Name is necessary.</span>
 								</span> 
 							</td>
 							<td>

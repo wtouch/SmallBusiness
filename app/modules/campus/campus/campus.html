@@ -12,14 +12,18 @@
 					<li role="presentation" ng-class="{active: formPart=='certificates'}">
 						<a ng-click="showFormPart('certificates')">Certificates Details</a>
 					</li>
+					<li role="presentation" ng-class="{active: formPart=='distributions'}">
+						<a ng-click="showFormPart('distributions')">Category Wise Distribution</a>
+					</li>
 			</ul>
 		<div class="col-sm-12">
-			<form class="form-horizontal" name="CampusForm" role="form" ng-submit="CampusForm.$valid" novalidate="novalidate">
+			<form class="form-horizontal" name="CampusForm" role="form" ng-submit="CampusForm.$invalid" novalidate="novalidate">
 			{{campus}}
 				<ng-include ng-show=" formPart=='campusdetails'" src="'modules/campus/campus/campusdetails.html'"></ng-include> 
 				<ng-include  ng-show=" formPart=='awarddetails'" src="'modules/campus/campus/awarddetails.html'"></ng-include>
 				<ng-include  ng-show=" formPart=='certificates'" src="'modules/campus/campus/certificates.html'"></ng-include>
-			</form>	
+				<ng-include  ng-show=" formPart=='distributions'" src="'modules/campus/campus/category.html'"></ng-include>
+			</form>
 		</div>		
 		</div>
 </div>

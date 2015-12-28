@@ -67,9 +67,9 @@ define(['app'], function (app) {
 					} , 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/addequipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Equipment Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+ 
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/general/equipment/equipmentview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View  Equipment" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					+ 
-					 '<a type="button" tooltip="Delete equipment" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'equipment\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					 '<a type="button" tooltip="Delete Equipment" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'equipment\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				}
 			]
 		};
@@ -140,7 +140,8 @@ define(['app'], function (app) {
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
-					user_id : $rootScope.userDetails.id
+					user_id : $rootScope.userDetails.id,
+					staus: 1
 				},
 				cols : ["*"]
 			};

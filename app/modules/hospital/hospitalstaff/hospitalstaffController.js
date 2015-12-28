@@ -66,9 +66,9 @@ define(['app'], function (app) {
                 },
 				
 			   {
-				    name:'address',
+				    name:'address.current_address',
 					width:150,
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'staff\', \'staff\',true)" ng-model="address" placeholder="Address">',
+					filterHeaderTemplate: '<input id="address.current_address" class="form-control" ng-change="grid.appScope.filter(\'address.current_address\', address.current_address, \'staff\', \'staff\',true)" ng-model="address.current_address" placeholder="Address">',
                 },
 				
 				
@@ -165,7 +165,7 @@ define(['app'], function (app) {
 							}
 						})
 					},
-					formPart : '',
+					formPart : 'personalDetails',
 					showFormPart : function(formPart, modalOptions){
 						console.log(formPart);
 						modalOptions.formPart = formPart;

@@ -44,13 +44,15 @@ define(['app'], function (app) {
 				}
 			},
 			{
-				name : "Merit List",
-				SubTitle :"Merit List",
-				events : {
-					click : function(){
-						return $scope.openModal("modules/campus/student/meritlist.html");
-					}
-				}
+				name : "Merit Management",
+				SubTitle :"Merit Management",
+				path : "#/dashboard/campus/meritlist",
+			},
+			{
+				name : "Registered List",
+				path : "#/dashboard/campus/registration",
+				SubTitle :"Registered List",
+				
 			},
 			{
 				name : "Registered List",

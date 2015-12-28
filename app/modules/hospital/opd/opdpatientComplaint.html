@@ -1,36 +1,20 @@
 		<div class="modal-body" ng-init="modalOptions.addopdpatient.patient_complaint = (modalOptions.addopdpatient.patient_complaint) ? modalOptions.addopdpatient.patient_complaint : []">
-				
-			<div class="form-group">
-				<label for="complaint_name" class="col-sm-2 control-label">complaints_name *</label>
-				<div class="col-sm-8">
-				<input type="text" id="complaint_name" name="complaint_name" class="form-control" ng-model="modalOptions.patient_complaint.complaint_name" placeholder="Enter complaints_name" ng-pattern="/^[a-zA-Z]*$/" required />
-					<span class="help-block" ng-show="addopdpatientForm.complaint_name.$dirty && addopdpatientForm.complaint_name.$invalid">
-						<span ng-show="addopdpatientForm.complaint_name.$error.required" class="text-danger">complaints_name is required.</span>
-					</span>				
-				</div>
-				
-			</div>
+		
 			<div class="form-group" ng-init="modalOptions.getData(false,false,'complaint','complaint',modalOptions.complaintParams,modalOptions)">
-			<label for="category" class="col-sm-2 control-label">Select Category*</label>
-			<div class="col-sm-3">
-				<select id="category" name="category" class="form-control" 
-				ng-model="modalOptions.patient_complaint.category" ng-options="item.id as item.category for item in modalOptions.complaint" >
-				<option value="">select category</option>
+			<label for="complaint_name" class="col-sm-2 control-label">Select Complaint Name*</label>
+			<div class="col-sm-8">
+				<select id="complaint_name" name="complaint_name" class="form-control" 
+				ng-model="modalOptions.patient_complaint.complaint_name" ng-options="item.id as item.complaint_name for item in modalOptions.complaint" >
+				<option value="">Select Complaint Name</option>
 				
 				</select>
 			</div>
-			<label for="type" class="col-sm-2 control-label">Select type*</label>
-				<div class="col-sm-3">
-					<select id="type" name="type" class="form-control" 
-					ng-model="modalOptions.patient_complaint.type" ng-options="item.id as item.type for item in modalOptions.complaint">
-					<option value="">select type</option>
-					</select>
-				</div>
 			</div>		
 			<div class="form-group">
 				<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
 				<div class="col-sm-8">
-					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.patient_complaint.complaints_description" placeholder="Enter Your complaints_description" ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.patient_complaint.complaints_description" placeholder="Enter Your Complaints Description" ng-maxlength="250"  ></textarea>
+					<span ng-hide="addopdpatientForm.patient_complaint.complaints_description.$error.maxlength">{{ 250 - modalOptions.patient_complaint.complaints_description.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="addopdpatientForm.complaints_description.$dirty && addopdpatientForm.complaints_description.$invalid">
 						<span ng-show="addopdpatientForm.complaints_description.$error.required"class="text-danger">Description is required.</span>
 					</span>				
@@ -45,20 +29,16 @@
 			<table class="table table-bordered" >
 				<thead>
 					<tr>
-						<th class="col-sm-2">Sr.No.</th>
-						<th class="col-sm-2">Complaints Name</th>
-						<th class="col-sm-2">Complaints Category</th>
-						<th class="col-sm-2">Complaints Type</th>
-						<th class="col-sm-2">Complaints Description</th>
-						<th >Remove</th>
+						<th class="col-sm-1">Sr.No.</th>
+						<th class="col-sm-4">Complaints Name</th>
+						<th class="col-sm-5">Complaints Description</th>
+						<th class="col-sm-2">Remove</th>
 					</tr> 
 				</thead>
 				<tbody >
 					<tr ng-repeat="x in modalOptions.addopdpatient.patient_complaint">
 						<td>{{$index + 1}}</td> 
 						<td>{{x.complaint_name}}</td>
-						<td>{{x.category}}</td>
-						<td>{{x.type}}</td>
 						<td>{{x.complaints_description}}</td>
 						<td><button ng-click="modalOptions.removeObject(modalOptions.addopdpatient.patient_complaint, $index)">X</button></td>
 					</tr>

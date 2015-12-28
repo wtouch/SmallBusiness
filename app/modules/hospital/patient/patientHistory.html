@@ -1,43 +1,54 @@
 <div class="modal-body">
-	<div class="form-group">
+	<div class="form-group"  ng-init="modalOptions.getData(false,false,'history','history',modalOptions.historyParams,modalOptions)">
 	<label for="select type" class="col-sm-2 control-label">Select Category*</label>
 	<div class="col-sm-3">
 		<select id="category" name="category" class="form-control" 
-		ng-model="modalOptions.addpatient.patient_history.category">
-		<option value="" selected>select category</option>
-		<option value="category">Pay by category</option>
-		<option value="category">Pay for category</option>
+		ng-model="modalOptions.addpatient.patient_history.category" ng-options="item.id as item.category for item in modalOptions.history">
+		<option value="" >Select category</option>
+
 		</select>
 	</div>
 	<label for="select type" class="col-sm-2 control-label">Select type*</label>
 		<div class="col-sm-3">
 			<select id="type" name="type" class="form-control" 
-			ng-model="modalOptions.addpatient.patient_history.type">
-			<option value="" selected>select type</option>
-			<option value="type">Pay by type</option>
-			<option value="type">Pay for type</option>
+			ng-model="modalOptions.addpatient.patient_history.type" ng-options="item.id as item.type for item in modalOptions.history">
+			<option value="" >Select type</option>
 			</select>
 		</div>
 	</div>			
 	<div class="form-group">
-		<label for="title" class="col-sm-2 control-label">Title *</label>
+		<label for="title" class="col-sm-2 control-label">Title*</label>
 		<div class="col-sm-8">
 		<input type="text" id="title" name="title" class="form-control" ng-model="modalOptions.addpatient.patient_history.title" placeholder="Enter title" ng-pattern="/^[a-zA-Z]*$/" required>
 			<span class="help-block" ng-show="addpatientForm.title.$dirty && addpatientForm.title.$invalid">
-				<span ng-show="addpatientForm.title.$error.required" class="text-danger">title is required.</span>
+				<span ng-show="addpatientForm.title.$error.required" class="text-danger">Title is required.</span>
 			</span>				
 		</div>
 	</div>
-	<div class="form-group">
+	<!-- <div class="form-group">
 		<label for="description" class="col-sm-2 control-label">Description *</label>
 		<div class="col-sm-8">
-			<input type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addpatient.patient_history.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" required>
-			<span class="help-block" ng-show="addpatientForm.description.$dirty && addpatientForm.description.$invalid">
-				<span ng-show="addpatientForm.description.$error.required"class="text-danger">Description is required.</span>
-			</span>				
+			<textarea  class="form-control" id="description" ng-model="modalOptions..addpatient.patient_history.description" name="description" placeholder="Enter address"  ng-maxlength="250" required></textarea>
+			<span class="text-danger help-block"  ng-show="addpatientForm.description.$error.pattern">Please enter valid address</span>
+			<span ng-hide="addpatientForm.description.$error.maxlength">{{ 250 - modalOptions.addpatient.patient_history.description.length + " Chars left"}}</span>
+			<span class="help-block" ng-show="addpatientForm.description.$dirty &&  addpatientForm.description.$invalid">
+				<span class="text-danger" ng-show="addpatientForm.patient_history.description.$error.maxlength">Sorry you are exceeding the limit</span>
+				<span class="text-danger" ng-show="addpatientForm. .description.$error.required">Address is required.</span>
+			</span>
 		</div>
-	</div> 	
-</div>	
+	</div> -->
+	 <div class="form-group">
+		<label for="description" class="col-sm-2 control-label">Description *</label>
+		<div class="col-sm-8">
+			<textarea  class="form-control" id="description" ng-model="modalOptions.addpatient.patient_history.description" name="description" placeholder="Enter description"  ng-maxlength="250" required></textarea>
+			<span class="text-danger help-block"  ng-show="addpatientForm.description.$error.pattern">Please Enter Valid Address</span>
+					<span ng-hide="addpatientForm.description.$error.maxlength">{{ 250 - modalOptions.addpatient.patient_history.description.length + " Chars left"}}</span>
+					<span class="help-block" ng-show="addpatientForm.description.$dirty &&  addpatientForm.description.$invalid">
+						<span class="text-danger" ng-show="addpatientForm.description.$error.maxlength">Sorry you are exceeding the limit</span>
+						<span class="text-danger" ng-show="addpatientForm.description.$error.required">Description is required.</span>
+					</span>
+		</div>
+	</div> 
 <div class="modal-footer" >
 	<div class="col-sm-offset-2 col-sm-9">
 		<button type="submit" class="btn btn-success" ng-if="!modalOptions.addpatient.id" ng-disabled="addpatientForm.$invalid" ng-click="modalOptions.postData('patient',modalOptions.addpatient);modalOptions.ok()">Add Patient</button>

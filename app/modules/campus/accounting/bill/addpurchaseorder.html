@@ -1,13 +1,12 @@
 <div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions);">
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	
-	<h3 ng-if="!modalOptions.addPurchaseorder.id">Add Purchase Bill</h3>
-	<h3 ng-if="modalOptions.addPurchaseorder.id" ng-init="modalOptions.totalCalculate(modalOptions)">Update Purchase Bill</h3>
+	<h3 ng-if="!modalOptions.addPurchaseorder.id" style="text-align:center">Add Purchase Order</h3>
+	<h3 ng-if="modalOptions.addPurchaseorder.id" ng-init="modalOptions.totalCalculate(modalOptions)" style="text-align:center">Update Purchase Order</h3>
 </div>
 
 <div class="modal-body">
-{{modalOptions.addPurchaseorder}}
-	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
+<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
 		<div class=" form-group">
 				<label for="type" class="col-sm-2 control-label"> Select Bill Type </label>
 				<div class="col-sm-10">
@@ -142,11 +141,10 @@
 				</table>
 				<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addPurchaseorderForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addPurchaseorder.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);">	+Add This Particular
 				</button>
-				<br/>
+				<br/><br/><br/>
 			</div>	
-
-
-			<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.vendor_id && modalOptions.addPurchaseorder.type == 3">
+		
+		<div class="table-responsive" ng-if="modalOptions.addPurchaseorder.vendor_id && modalOptions.addPurchaseorder.type == 3">
 				<table class="table table-bordered" >
 					<thead>
 						<tr>

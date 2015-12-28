@@ -11,7 +11,7 @@
 								<th>Description</th>
 							</tr>
 						</thead>
-						<tbody><div>{{modalOptions.singleparticular}}</div>
+						<tbody>
 							<tr>
 								<td>
 									<input type="text" class="form-control " placeholder="Subject Name" id="subject_name" name="subject_name" ng-model="modalOptions.singleparticular.subject_name" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
@@ -31,13 +31,13 @@
 									<span class="help-block" ng-show="addstaffForm.description.$dirty && addstaffForm.description.$invalid">
 									</span>
 								</td>
+								<td>
+									<button type="submit" class="btn btn-success center" ng-click="modalOptions.addToObject(modalOptions.addstaff.specialization,'singleparticular', modalOptions);"><span class="glyphicon glyphicon-plus"></button>
+								</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<div class="col-sm-4">
-						<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addstaff.specialization,'singleparticular', modalOptions);">+Add This Particular</button>
-				</div>	
 			</div>
 		</form>
 	</div>

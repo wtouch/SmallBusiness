@@ -19,10 +19,10 @@
 					{{modalOptions.view_admission.patient_name}}
 				</td>
 				<td>						
-					{{modalOptions.view_admission.ward_id}}
+					{{modalOptions.view_admission.ward_name}}
 				</td>
 				<td>
-					{{modalOptions.view_admission.bed_id}}
+					{{modalOptions.view_admission.bed_number}}
 				</td>
 				<td>
 					{{modalOptions.view_admission.name}}
@@ -31,18 +31,20 @@
 		</tbody>
 	</table>
 
-	<div class="modal-body">{{modalOptions.diagnostic}}
-		<form class="form-horizontal" name="adddrugsheetForm" role="form" ng-submit="adddrugsheetForm.$valid" novalidate="novalidate">
+	<div class="modal-body">
+		<form class="form-horizontal" name="diagnosticForm" role="form" ng-submit="diagnosticForm.$valid" novalidate="novalidate">
 			<div class="form-group">
 				<label  for="date" class="col-sm-2 control-label">Date*</label>
 				<div class="col-sm-8">
-					<div class="input-group">
-						<input type="text" class="form-control " placeholder="Date" id="diagnostic_date" name="diagnostic_date" ng-model="modalOptions.diagnostic.diagnostic_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.diagnostic_date.staff_date,10); modalOptions.sqlDateFormat(modalOptions.diagnostic.staff_date, modalOptions.diagnostic.staff_date)"/>	
-						
-						<span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
-						</span>
-					</div>
+				
+						<input type="text" class="form-control " placeholder="Date" id="diagnostic_date" name="diagnostic_date" ng-model="modalOptions.diagnostic.diagnostic_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required/>	
+					<span class="input-group-btn">
+					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+					<span class="text-danger"  ng-show="diagnosticForm.diagnostic_date.$error.date">Please enter valid date</span>
+					<span class="help-block" ng-show="diagnosticForm.diagnostic_date.$dirty && diagnosticForm.diagnostic_date.$invalid">
+						<span ng-show="diagnosticForm.diagnostic_date.$error.required"class="text-danger">Date  is required.</span>
+					</span>		
 				</div>
 			</div>
 			<div class="form-group"  ng-init= "modalOptions.getData(false,false,'test','testList',modalOptions.medicineParams,modalOptions)">
@@ -50,65 +52,41 @@
 				<div class="col-sm-8">					
 					<select id="test_type" name="test_type" class="form-control" 
 				ng-model="modalOptions.diagnostic.test_type" ng-options="item.id as item.test_type for item in modalOptions.testList">
-				<option value="">select Medicine</option>
+				<option value="">Select Medicine</option>
 				</select>
 				</div>
 			</div>	
 			<div class="form-group">
 				<label for="test_name" class="col-sm-2 control-label">Test Name</label>
 				<div class="col-sm-8">
-					<input type="text" required name="test_name" class="form-control" id="test_name" ng-model="modalOptions.diagnostic.test_name" placeholder="Enter Your test_name" ng-pattern="/^[a-zA-Z]*$/" required/>
-					<span class="text-danger"  ng-show="addmedicineForm.test_name.$error.pattern">please Enter Valid test_name</span>
-					<span class="help-block" ng-show="addmedicineForm.test_name.$dirty && addmedicineForm.test_name.$invalid">
-						<span ng-show="addmedicineForm.test_name.$error.required"class="text-danger">test_name is required.</span>
+					<input type="text"  name="test_name" class="form-control" id="test_name" ng-model="modalOptions.diagnostic.test_name" placeholder="Enter Your Test Name" ng-pattern="/^[a-zA-Z]*$/" required/>
+					<span class="text-danger"  ng-show="diagnosticForm.test_name.$error.pattern">Please enter valid test name</span>
+					<span class="help-block" ng-show="diagnosticForm.test_name.$dirty && diagnosticForm.test_name.$invalid">
+						<span ng-show="diagnosticForm.test_name.$error.required"class="text-danger">test name is required.</span>
 					</span>				
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="test_description" class="col-sm-2 control-label">Test Description</label>
 				<div class="col-sm-8">
-				<textarea type="text" id="test_description" name="test_description" class="form-control" ng-model="modalOptions.diagnostic.test_description" placeholder="Enter Test Description"required> </textarea>
-				<span class="text-danger"  ng-show="addmedicineForm.test_description.$error.pattern">please Enter Valid state</span>
-					<span class="help-block" ng-show="addmedicineForm.test_description.$dirty && addmedicineForm.test_description.$invalid">
-						<span ng-show="addmedicineForm.test_description.$error.required" class="text-danger">days is required.</span>
-					</span>				
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="dignos_report" class="col-sm-3 control-label">Dignos Report</label>
-				<div class="col-sm-9">
-					<input type="file" id="dignos_report" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "modalOptions.uploadMultiple(diagnostic.dignos_report,  modalOptions.diagnostic.user_id + path,userInfo,'modalOptions.diagnostic')" ng-model="dignos_report">
-					<input type="hidden" ng-model="addbusiness.contact_profile.dignos_report">
-				</div>
-			</div>
-			<div class="form-group">						 
-				<div class="col-sm-9 col-sm-offset-3">
-					<span class="thumbs" ng-if="addbusiness.contact_profile.contact_photo">
-						<img class="img-thumbnail" ng-src="{{addbusiness.contact_profile.contact_photo.file_relative_path}}" ng-click="addbusiness.imgkey = key; "/>
+					<textarea type="text" required name="test_description" class="form-control" id="test_description" ng-model="modalOption.diagnostic.test_description" placeholder="Enter Your Description" ng-maxlength="250" > </textarea>
+					
+					<span ng-hide="diagnosticForm.diagnostic.test_description.$error.maxlength">{{ 250 - modalOptions.diagnostic.test_description.length + " Chars left"}}</span>
+					<span class="help-danger" ng-show="diagnosticForm.test_description.$dirty &&  diagnosticForm.test_description.$invalid">
+						<span class="text-danger" ng-show="diagnosticForm.test_description.$error.maxlength">Sorry you are exceeding the limit</span>
 					</span>
 				</div>
-			</div>			
-	
-			<div class="form-group">{{modalOptions.userDetails.id}}
+			</div>
+			<div class="form-group">
+			
 				<label for="dignos_report" class="col-sm-2 control-label">Dignostic Report</label>
 				<input type="file" id="dignos_report" ng-file-select ng-multiple="true" accept="image/jpeg,image/png,image/gif" ng-file-change="modalOptions.uploadMultiple(diagnostic.dignos_report,modalOptions.diagnostic.user_id + path,modalOptions.userDetails.id,modalOptions.diagnostic)" ng-model="dignos_report">
 				<input type="hidden" ng-model="modalOptions.diagnostic.dignos_report">
 			</div>
-			
-			<div class="form-group">						 
-				<div class="col-sm-4 col-sm-offset-8">
-					<span class="thumbs" ng-repeat="(key, value) in diagnostic.dignos_report">
-						<img class="img-thumbnail" width="40px" ng-src="{{appConfig.assetPath + value.file_relative_path}}" ng-click="diagnostic.imgkey = key; "/>
-						<span class="close" ng-click="removeImg(key, diagnostic.dignos_report)">X</span>
-					</span>
-				</div>
-			</div>			
-	
 		</form>	
 		<div class="form-group">
 			<div class="col-sm-offset-2 ">
-				<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.diagnostic, 'diagnostic', modalOptions)" >Add 
+				<button type="submit" class="btn btn-success"  ng-disabled="diagnosticForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addadmission.diagnostic, 'diagnostic', modalOptions)" >Add 
 				</button>
 			</div>
 		</div>
@@ -138,7 +116,6 @@
 		</table>
 	<div class="modal-footer" >
 		<div class="col-sm-offset-2 col-sm-8">
-			<!-- <button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id"  ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Save </button> -->
 			
 			<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success"  ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update</button>
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>

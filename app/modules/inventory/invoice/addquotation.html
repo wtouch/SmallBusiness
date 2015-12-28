@@ -50,10 +50,10 @@
 							<tr>
 								<td>
 									<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
-									ng-change="" placeholder="particulars Name"/>
+								    placeholder="particulars Name"/>
 									
 									<span class="help-block" ng-show="addquotationForm.goods_name.$dirty && addquotationForm.goods_name.$invalid">
-									<span ng-show="addquotationForm.goods_name.$error.required" class="text-danger">goods_name Required.</span>
+									<span ng-show="addquotationForm.goods_name.$error.required" class="text-danger">Goods Name Required.</span>
 									</span>
 								</td>
 								
@@ -120,7 +120,7 @@
 										<div class="col-sm-3">
 											<div class="form-group" ng-init="modalOptions.taxInfo = {}">
 												<ul style="list-style-type:none">
-													<li>{{modalOptions.taxInfo}}
+													<li>
 														<div class="checkbox col-sm-3 ">
 															<label ng-repeat="x in userDetails.config.inventory.taxData.tax">
 															<input type="checkbox" ng-model="modalOptions.taxInfo[x.taxName]" ng-change="modalOptions.taxCalculate(modalOptions)" checklist-value="x"/> {{x.displayName}}
@@ -150,7 +150,7 @@
 				<th class="col-sm-2">Sr.No.</th>
 				<th class="col-sm-2">Particular Name</th>
 				<th class="col-sm-2">Goods_type</th>
-				<th class="col-sm-2">Category </th>
+				<th class="col-sm-2">Category</th>
 				<th class="col-sm-2 text-right">Price</th>
 				<th class="col-sm-2 text-right">Quantity</th>
 				<th class="col-sm-2 text-right">Amount</th>
@@ -202,7 +202,6 @@
 </div>
 
 <div class="modal-footer">
-	
 	<button type="submit"  class="btn btn-success" ng-if="modalOptions.addquotation.id"  ng-disabled="addquotation.$invalid" ng-click="modalOptions.updateData('quotation',modalOptions.addquotation,modalOptions.addquotation.id); modalOptions.ok()">Update Quotation</button>
 
 	<button type="submit"  class="btn btn-success" ng-if="!modalOptions.addquotation.id" ng-disabled="addQuotationForm.$invalid" ng-click="modalOptions.postData('quotation',modalOptions.addquotation); modalOptions.ok()">Add Quotation</button>

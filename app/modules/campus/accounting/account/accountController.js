@@ -23,7 +23,6 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Account",
-				path : "#/dashboard/campus/accounting/account",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/campus/accounting/account/addaccount.html");
@@ -44,7 +43,8 @@ define(['app'], function (app) {
 				
 				{
 				    name:'account_name',
-					filterHeaderTemplate: '<input id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_name\', account_name, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_name" placeholder="search">'
+					filterHeaderTemplate: '<input id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_name\', account_name, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_name" placeholder="search">',
+					cellTemplate : '<span>{{row.entity.account_name | capitalize}}<span>'
                 }, 
 				{
 					name:'category',
@@ -77,8 +77,8 @@ define(['app'], function (app) {
 					  ]
 					} , 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/accounting/account/addaccount.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'account\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+'<a ng-click="grid.appScope.openModal(\'modules/campus/accounting/account/viewaccount.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Class"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'account\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/accounting/account/viewaccount.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Account"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};

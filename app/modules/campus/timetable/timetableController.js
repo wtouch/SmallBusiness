@@ -7,19 +7,14 @@ define(['app'], function (app) {
 	var timetableController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
 		//global scope objects
-		$scope.type = "year";
+		$rootScope.metaTitle = "campus";
 		$scope.maxSize = 5;
-		$scope.totalRecords = "";
-		$scope.pageItems = 10;
-		$scope.numPages = "";	
+		$scope.alerts = [];
 		$scope.currentPage = 1;
-		/* $scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS"); */
+		$scope.pageItems = 20;
+		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";
-		$scope.currentDate = dataService.currentDate;
-		
-		
-		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Timetable",
@@ -78,27 +73,27 @@ define(['app'], function (app) {
 					//cellTemplate:'<span>{{row.entity.multipleentries[0].room_id}}</span>'
 				},
 				
-				{ name:'name',enableSorting: false ,
+				{ name:'name',width:100,enableSorting: false ,
 				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'timetable_view1\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="name" ng-options="item.id as item.name for item in grid.appScope.staffList">'
 							+'<option value="" selected>Staff Name</option>'
 						+'</select>',
 							//cellTemplate:'<span>{{row.entity.multipleentries[0].name}}</span>'
 				},
-				{ name:'sub_name',enableSorting: false ,
+				{ name:'sub_name',width:100,enableSorting: false ,
 				filterHeaderTemplate: '<select id="sub_name" class="form-control" ng-change="grid.appScope.filter(\'sub_id\', sub_id, \'timetable_view1\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="sub_name" ng-options="item.id as item.sub_name for item in grid.appScope.subjectList">'
 							+'<option value="" selected>subject Name</option>'
 						+'</select>',
 						//cellTemplate:'<span>{{row.entity.multipleentries[0].sub_name}}</span>'
 				},
 				
-				{ name:'date',
+				{  name:'date',width:130,
 				enableSorting: true, enableFiltering: false,
 					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'timetable_view1\', \'timetableList\',true, grid.appScope.timetableList)" ng-model="date" placeholder="date">',
 				},
 				{
-					name:'day',width:50,
+					name:'day',width:90,
 					enableSorting: false,
-					filterHeaderTemplate: '<select id="day" class="form-control" ng-change="grid.appScope.filter(\'day\', day, \'timetable_view1\', \'timetableList\',true, grid.appScope.timetableParams);grid.appScope.timetableday = grid.appScope.campusConfig[day]" ng-model="day">'
+					filterHeaderTemplate: '<select id="day" class="form-control" ng-change="grid.appScope.filter(\'day\', day, \'timetable_view1\', \'timetableList\',true, grid.appScope.timetableParams);ng-model="day">'
 							+'<option value="" selected>day</option>'
 							+'<option value="Sunday">Sunday</option>'
 							+'<option value="Monday">Monday</option>'
@@ -108,27 +103,28 @@ define(['app'], function (app) {
 							+'<option value="Friday">Friday</option>'
 							+'<option value="Saturday">Saturday</option>'
 						+'</select>',
-						//cellTemplate:'<span>{{row.entity.multipleentries[0].day}}</span>'
+					
 				},
-				{ name:'timefrom',width:60,
-					filterHeaderTemplate: '<input id="time_from" class="form-control" ng-model="timefrom" placeholder="timefrom">',
-					//cellTemplate : '<span>{{row.entity.multipleentries[0].timefrom}}</span>'
+				{ name:'timefrom',width:130,	enableSorting: false,
+					filterHeaderTemplate: '<input id="timefrom" class="form-control" ng-model="timefrom" placeholder="timefrom">',
+					
 				}, 
-				 { name:'timeto',width:60,
+				{ name:'timeto',width:130,	enableSorting: false,
+					filterHeaderTemplate: '<input id="timeto" class="form-control" ng-model="timeto" placeholder="timeto">',
+					
+				}, 
 				
-					filterHeaderTemplate: '<select id="timeto" class="form-control" ng-model="timeto">',
-					//cellTemplate : '<span>{{row.entity.multipleentries[0].timeto}}</span>'
-				}, 
 					 
-				{ name:'Manage',
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'timetable_view1\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="status">'
+				{ name:'manage',enableSorting: false,enableFiltering: true,
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'timetable_view1\', \'timetableList\',false,grid.appScope.stockParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
 						+'</select>',
 				
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/timetable/addtimetable.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit timetable" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'timetable\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+ '<a ng-click="grid.appScope.openModal(\'modules/campus/timetable/viewtimetable.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  timetable" ><span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'timetable\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/timetable/viewtimetable.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  timetable" ><span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			]
@@ -137,7 +133,7 @@ define(['app'], function (app) {
 			console.log(response);
 			if(response.status == "success"){
 				console.log($scope.timetableParams);
-				$scope.getData(false, $scope.currentPage, "timetable", "timetableList", $scope.timetableParams);
+				$scope.getData(false, $scope.currentPage, "timetable_view1", "timetableList", $scope.timetableParams);
 			}
 		}
 		$scope.openModal = function(url,data){
@@ -154,16 +150,13 @@ define(['app'], function (app) {
 					id : data.id,
 					user_id : data.user_id,
 					timetable_id :data.timetable_id,
-					multipleentries : data.multipleentries,
-					dept_id:data.dept_id,
-					class_id :data.class_id,
-					div_id:data.div_id,
-					day:data.day,
-					date : data.date,
+					dept_id : data.dept_id,
+					class_id : data.class_id,
+					div_id : data.dept_id,
+					staff_id:data.staff_id,
+					multipleentries:data.multipleentries,
 					timefrom:data.timefrom,
 					timeto:data.timeto,
-					room_id:data.room_id,
-					staff_id:data.staff_id,
 					
 			} : {
 					user_id : $rootScope.userDetails.user_id,
@@ -178,13 +171,17 @@ define(['app'], function (app) {
 				room_no: data.room_no,
 				name: data.name,
 				sub_name:data.sub_name,
-				
+				day:data.day,
+				date:data.date,
+				timefrom:data.timefrom,
+				timeto:data.timeto,
+					
 			}:
 			{
 				
 			},
 			postData : function(table, input){
-				console.log(input);
+				
 					$scope.timetableData = {};
 					$scope.timetableData.user_id =input.user_id;
 					$scope.timetableData.dept_id =input.dept_id;

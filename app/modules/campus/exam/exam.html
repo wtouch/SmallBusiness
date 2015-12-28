@@ -14,19 +14,19 @@
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="select_no_records" class="control-label" >Select Records</label>
-				<select id="pageItems" name="pageItems" class="form-control" ng-change="getData(false, currentPage,'exam_view', 'examList', examParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+				<select id="pageItems" name="pageItems" class="form-control" ng-change="getData(false, currentPage,'exam', 'examList', examParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
 					<!-- <option value="">Select exam</option> -->
 				</select>
 			</div>
 		</div>
 	</div>
 
-	<div class="table-responsive" ng-init="getData(false, currentPage, 'exam_view','examList',examParams);getData(false, currentPage, 'department','departmentList',deptParams);getData(false, currentPage, 'class','classList',classParams);getData(false, currentPage, 'division','divisionList',divisionParams);getData(false, currentPage, 'room','roomList',roomParams);getData(false, currentPage, 'staff','staffList',staffParams);getData(false, currentPage, 'subjects','subjectList',subjectParams);">
+	<div class="table-responsive" ng-init="getData(false, currentPage, 'exam','examList',examParams);getData(false, currentPage, 'department','departmentList',deptParams);getData(false, currentPage, 'class','classList',classParams);getData(false, currentPage, 'division','divisionList',divisionParams);getData(false, currentPage, 'room','roomList',roomParams);getData(false, currentPage, 'staff','staffList',staffParams);getData(false, currentPage, 'subjects','subjectList',subjectParams);">
 		<div ui-grid="examList"></div>
 	</div>
 	
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'exam_view','examList',examParams)"></pagination>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'exam','examList',examParams)"></pagination>
 		<pre>Page: {{currentPage}} / {{numPages}}</pre>
 	</div>	
 </div>

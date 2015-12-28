@@ -68,11 +68,11 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					} , 
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/ward/addward.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit ward Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/ward/addward.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Ward Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					+ 
-					'<a type="button" tooltip="Delete ward" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'ward\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/ward/wardview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  ward" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a type="button" tooltip="Delete Ward" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'ward\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+ '<a ng-click="grid.appScope.openModal(\'modules/hospital/general/ward/wardview.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View  Ward" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			]

@@ -1,13 +1,11 @@
 <div class="form-group">
 		<label  for="date" class="col-sm-2 control-label">Date*</label>
 			<div class="col-sm-9">
-				<div class="input-group">
+			
 					<input type="text" class="form-control " placeholder="Date" id="staff_date" name="staff_date" ng-model="modalOptions.addstaff.staff_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1"  max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.addstaff.staff_date,10); modalOptions.sqlDateFormat(modalOptions.addstaff.staff_date, modalOptions.addstaff.staff_date)"/>	
-					
-					<span class="input-group-btn">
-					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
-					</span>
-				</div>
+					<span class="text-danger"ng-show="addstaffForm.staff_date.$error.date">Invalid date.</span>
+					<span class="text-danger" ng-show="addstaffForm.staff_date.$error.required">date is required.</span>
+		
 			</div>
 	</div>
 	<div class="form-group">
@@ -42,7 +40,7 @@
 	<div class="form-group">
 		<label for="phone" class="col-sm-2 control-label">Phone *</label>
 		<div class="col-sm-9">
-			<input type="text" id="phone" name="phone" class="form-control" ng-model="modalOptions.addstaff.phone" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+			<input type="text" id="phone" name="phone" class="form-control" ng-model="modalOptions.addstaff.phone" placeholder="Enter Your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 			<span class="help-block" ng-show="addstaffForm.phone.$dirty && addstaffForm.phone.$invalid">
 				<span ng-show="addstaffForm.phone.$error.required" class="text-danger">Required Field.</span>
 				<span class="text-danger" ng-show="addstaffForm.phone.$error.pattern && (addstaffForm.phone.$dirty)">Enter a valid Contact Number</span>
@@ -51,9 +49,9 @@
 	</div>	
 	
 	<div class="form-group"ng-init="modalOptions.addstaff.marital_status{{modalOptions.addstaff.marital_status=(modalOptions.addstaff.marital_status) ? modalOptions.addstaff.marital_status='single'">
-		<label for="marital_status" class="col-sm-2 control-label">Marital status*</label>
+		<label for="marital_status" class="col-sm-2 control-label">Marital Status*</label>
 		<div class="radio col-sm-2">
-		<label><input type="radio" name="marital_status" value="single" checked ng-model="modalOptions.addstaff.marital_status">single</label>
+		<label><input type="radio" name="marital_status" value="single" ng-model="modalOptions.addstaff.marital_status" ng-init="modalOptions.addstaff.marital_status='single'">Single</label>
 		</div>
 		<div class="radio col-sm-2">
 		<label><input type="radio" name="marital_status" value="married" ng-model="modalOptions.addstaff.marital_status">Married</label>
@@ -80,11 +78,11 @@
 		</div>							
 	</div>
 	<div class="form-group">
-		<label for="blood_group" class="col-sm-2 control-label">blood_group *</label>
+		<label for="blood_group" class="col-sm-2 control-label">Blood Group*</label>
 			<div class="col-sm-4">
 				<select id="blood_group" name="blood_group" class="form-control" 
 				ng-model="modalOptions.addstaff.blood_group">
-					<option value="" selected>select type</option>
+					<option value="" selected>Select Blood Group</option>
 					<option value="AB+">AB+</option>
 					<option value="AB-">AB-</option>
 					<option value="A+">A+</option>
@@ -108,7 +106,7 @@
 	<div class="form-group">
 		<label for="current_address" class="col-sm-2 control-label">Current Address*</label>
 		<div class="col-sm-9">
-			<textarea  class="form-control" id="current_address" ng-model="modalOptions.addstaff.address.current_address" name="current_address" placeholder="Enter address" ng-maxlength="250" required></textarea>
+			<textarea  class="form-control" id="current_address" ng-model="modalOptions.addstaff.address.current_address" name="current_address" placeholder="Enter Address" ng-maxlength="250" required></textarea>
 			<span class="text-danger"  ng-show="addstaffForm.current_address.$error.pattern">please Enter Valid Address</span>
 			<span ng-hide="addstaffForm.current_address.$error.maxlength">{{ 250 - modalOptions.addstaff.address.length + " Chars left"}}</span>
 			<span class="help-block" ng-show="addstaffForm.current_address.$dirty &&  addstaffForm.current_address.$invalid">
@@ -118,13 +116,13 @@
 		</div>
 	</div>
 	   <div class="form-group">
-		<label for="permanent_address" class=" col-sm-3 control-label">Permanent Address</label>
+		<label for="permanent_address" class=" col-sm-2 control-label">Permanent Address:</label>
 		</div>
 	
 	<div class="form-group">
 		<label for="location" class="col-sm-2 control-label">Location*</label>
 			<div class="col-sm-4">
-				<input type="text" name="location" id="location" ng-model="modalOptions.addstaff.location" placeholder="Enter your location" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
+				<input type="text" name="location" id="location" ng-model="modalOptions.addstaff.location" placeholder="Enter Location" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
 				<span class="text-danger"  ng-show="addstaffForm.location.$error.pattern">please Enter Valid Location</span>
 				<span class="help-block" ng-show="addstaffForm.location.$dirty && addstaffForm.location.$invalid">
 					<span ng-show="addstaffForm.location.$error.required" class="text-danger">Required Field.</span>
@@ -133,7 +131,7 @@
 
 			<label for="area" class="col-sm-1 control-label">Area*</label>
 			<div class="col-sm-4">
-				<input type="text" name="area" id="area" ng-model="modalOptions.addstaff.area" placeholder="Enter your Area" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
+				<input type="text" name="area" id="area" ng-model="modalOptions.addstaff.area" placeholder="Enter Area" ng-pattern="/^[a-zA-Z0-9]*$/" class="form-control" required>
 				<span class="text-danger"  ng-show="addstaffForm.area.$error.pattern">please Enter Valid area</span>
 				<span class="help-block" ng-show="addstaffForm.area.$dirty && addstaffForm.area.$invalid">
 					<span ng-show="addstaffForm.area.$error.required" class="text-danger">Required Field.</span>
@@ -143,7 +141,7 @@
 	<div class="form-group">
 		<label for="city" class="col-sm-2 control-label">City*</label>
 		<div class="col-sm-4" >
-			<input type="text" id="city" name="city" class="form-control" ng-model="modalOptions.addstaff.city" placeholder="Enter city" ng-pattern="/^[a-zA-Z]*$/" required>
+			<input type="text" id="city" name="city" class="form-control" ng-model="modalOptions.addstaff.city" placeholder="Enter City" ng-pattern="/^[a-zA-Z]*$/" required>
 			<span class="text-danger"  ng-show="addstaffForm.city.$error.pattern">please Enter Valid City</span>
 			<span class="help-block" ng-show="addstaffForm.city.$dirty && addstaffForm.state.$invalid">
 				<span ng-show="addstaffForm.city.$error.required" class="text-danger">Required Field.</span>
@@ -152,7 +150,7 @@
 		
 		<label for="pincode" class="col-sm-1 control-label">Pincode*</label>
 			<div class="col-sm-4">
-				<input type="text" id="pincode" name="pincode" class="form-control" ng-model="modalOptions.addstaff.pincode" placeholder="Enter pincode " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" required>
+				<input type="text" id="pincode" name="pincode" class="form-control" ng-model="modalOptions.addstaff.pincode" placeholder="Enter Pincode " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="6" required>
 				<span class="help-block" ng-show="addstaffForm.pincode.$dirty && addstaffForm.pincode.$invalid">
 					<span ng-show="addstaffForm.pincode.$error.pattern && (addstaffForm.pincode.$dirty || submitted)" class="text-danger">please enter number</span>
 				</span>
@@ -162,18 +160,18 @@
 	<div class="form-group">
 		<label for="state" class="col-sm-2 control-label">State*</label>
 			<div class="col-sm-4">
-				<input type="text" id="state" name="state" class="form-control" ng-model=	"modalOptions.addstaff.state" placeholder="Enter state" ng-pattern="/^[a-zA-Z]*$/" required>
+				<input type="text" id="state" name="state" class="form-control" ng-model=	"modalOptions.addstaff.state" placeholder="Enter State" ng-pattern="/^[a-zA-Z]*$/" required>
 				<span class="text-danger"  ng-show="addstaffForm.state.$error.pattern">please Enter Valid state</span>
 				<span class="help-block" ng-show="addstaffForm.state.$dirty && addstaffForm.state.$invalid">
-					<span ng-show="addstaffForm.state.$error.required" class="text-danger">Required Field.</span>
+					<span ng-show="addstaffForm.state.$error.required" class="text-danger">State is Required.</span>
 				</span>				
 			</div>
 			<label for="country" class="col-sm-1 control-label">Country*</label>
 			<div class="col-sm-4">
-				<input type="text" required name="country" class="form-control" id="country" ng-model="modalOptions.addstaff.country" placeholder="Enter Your country" ng-pattern="/^[a-zA-Z]*$/" required>
-				<span class="text-danger"  ng-show="addstaffForm.country.$error.pattern">please Enter Valid country</span>
+				<input type="text" required name="country" class="form-control" id="country" ng-model="modalOptions.addstaff.country" placeholder="Enter Country" ng-pattern="/^[a-zA-Z]*$/" required>
+				<span class="text-danger"  ng-show="addstaffForm.country.$error.pattern">Please Enter Valid country</span>
 				<span class="help-block" ng-show="addstaffForm.country.$dirty && addstaffForm.country.$invalid">
-					<span ng-show="addstaffForm.country.$error.required"class="text-danger">Required Field.</span>
+					<span ng-show="addstaffForm.country.$error.required"class="text-danger">Country is Required.</span>
 				</span>				
 			</div>
 		</div>	

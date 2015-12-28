@@ -1,0 +1,161 @@
+	<!-- <div class="row">-->
+		<div ng-init="modalOptions.addStudent.education = (modalOptions.addStudent.education) ? modalOptions.addStudent.education : []">
+		
+				<form name="addStudentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStudentForm.$valid" id="addStudent"">
+						<div class="table-responsive">
+							<table class="table table-bordered" >
+								<thead>
+									<tr>
+										<th>Class Name</th>
+										<th>Percentage</th>
+										<th>Marks</th>
+										<th>University</th>
+										<th>Organization Name</th>
+										<th>Passing Year</th>
+										<th>CGPA</th>
+									</tr>
+								</thead>
+								<tbody><div>{{modalOptions.singleparticular}}</div>
+									<tr>
+										<td>
+											<input type="text" class="form-control " placeholder="Class Name" id="class_name" name="class_name" ng-model="modalOptions.singleparticular.class_name" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+											 <span class="text-danger"  ng-show="addStudentForm.class_name.$error.pattern">Text is required.</span>
+											<span class="help-block" ng-show="addStudentForm.class_name.$dirty && addStudentForm.class_name.$invalid">
+												<span class="text-danger" ng-show="addStudentForm.class_name.$error.required">Required Field.</span>
+											</span>
+										</td>
+										
+										<td>
+											<input type="text" class="form-control " placeholder="Percentage" id="percentage" name="percentage" ng-model="modalOptions.singleparticular.percentage" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+											 <span ng-show="addStudentForm.percentage.$error.pattern && (addStudentForm.percentage.$dirty || submitted)" class="text-danger">please enter number</span>
+											<span class="help-block" ng-show="addStudentForm.percentage.$dirty && addStudentForm.percentage.$invalid">
+												<span class="text-danger" ng-show="addStudentForm.percentage.$error.required">Required Field.</span>
+											</span>
+										</td>
+										<td>
+											<input type="text" class="form-control " placeholder="Marks" id="marks" name="marks" ng-model="modalOptions.singleparticular.marks" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+											 <span ng-show="addStudentForm.marks.$error.pattern && (addStudentForm.marks.$dirty || submitted)" class="text-danger">please enter number</span>
+											<span class="help-block" ng-show="addStudentForm.marks.$dirty && addStudentForm.marks.$invalid">
+												<span class="text-danger" ng-show="addStudentForm.marks.$error.required">Required Field.</span>
+											</span>
+										</td>
+										<td>
+											<input type="text" class="form-control " placeholder="University" id="university" name="university" ng-model="modalOptions.singleparticular.university" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+											<span class="text-danger"  ng-show="addStudentForm.university.$error.pattern">Text is required.</span>
+											<span class="help-block" ng-show="addStudentForm.university.$dirty && addStudentForm.university.$invalid">
+												<span class="text-danger" ng-show="addStudentForm.university.$error.required">Required Field.</span>
+											</span>
+										</td>
+										<td>
+											<input type="text" class="form-control " placeholder="Organization" id="organization" name="organization" ng-model="modalOptions.singleparticular.organization" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+											 <span class="text-danger"  ng-show="addStudentForm.organization.$error.pattern">Text is required.</span>
+											<span class="help-block" ng-show="addStudentForm.organization.$dirty && addStudentForm.organization.$invalid">
+												<span class="text-danger" ng-show="addStudentForm.university.$error.required">Required Field.</span>
+											</span>
+										</td>
+										<td>
+											<input type="text" class="form-control " placeholder="Year" id="year" name="year" ng-model="modalOptions.singleparticular.year" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+	 
+											 <span ng-show="addStudentForm.year.$error.pattern && (addStudentForm.year.$dirty || submitted)" class="text-danger">please enter number</span>
+											<span class="help-block" ng-show="addStudentForm.year.$dirty && addStudentForm.year.$invalid">
+												<span class="text-danger" ng-show="addStudentForm.year.$error.required">Required Field.</span>
+											</span>	
+										</td>
+										<td>
+<<<<<<< HEAD
+											<input type="text" class="form-control " placeholder="cgpa" id="cgpa" name="cgpa" ng-model="modalOptions.singleparticular.cgpa" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+											 <span ng-show="addStudentForm.cgpa.$error.pattern && (addStudentForm.cgpa.$dirty || submitted)" class="text-danger">please enter number</span>
+											<span class="help-block" ng-show="addStudentForm.cgpa.$dirty && addStudentForm.cgpa.$invalid">
+												<span class="text-danger" ng-show="addStudentForm.cgpa.$error.required">Required Field.</span>
+=======
+											<input type="text" class="form-control " placeholder="cgpa" id="cgpa" name="cgpa" ng-model="modalOptions.singleparticular.cgpa" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
+											<span class="help-block" ng-show="addStudentForm.cgpa.$dirty && addStudentForm.cgpa.$invalid">
+												<span class="text-danger" ng-show="addStudentForm.cgpa.$error.required">Required Field.</span>
+												<span ng-show="addStudentForm.cgpa.$error.pattern && (addStudentForm.cgpa.$dirty || submitted)" class="text-danger">Enter Like 0.00 only</span>
+>>>>>>> 1188303e834d62a0129128e586c5f75e01d7e647
+											</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+							<div class="col-sm-4">
+								<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addStudent.education,'singleparticular', modalOptions);">+Add This Particular</button>
+							</div>		
+				</form>
+		 </div> 
+	<!-- </div> -->
+
+
+	<!-- <div class="table-responsive col-sm-12"> -->
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th class="col-sm-2">Sr.No.</th>
+					<th class="col-sm-2">Class Name</th>
+					<th class="col-sm-2">Percentage</th>
+					<th class="col-sm-2">Marks</th>
+					<th class="col-sm-2">University</th>
+					<th class="col-sm-2">Organization</th>
+					<th class="col-sm-2">Passing Year</th>
+					<th class="col-sm-2">CGPA</th>
+					<th class="col-sm-2">Remove</th>	
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in modalOptions.addStudent.education">
+					<td>{{ $index + 1 }}</td>
+					<td>{{x.class_name}}</td>
+					<td>{{x.percentage}}</td>
+					<td>{{x.marks}}</td>
+					<td>{{x.university}}</td>
+					<td>{{x.organization}}</td>
+					<td>{{x.year}}</td>
+					<td>{{x.cgpa}}</td>
+					<td><a ng-click="modalOptions.removeObject(modalOptions.addStudent.education, $index);modalOptions.totalCalculate(modalOptions);"><span class="glyphicon glyphicon-remove"></span></a></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="form-group" ng-init="modalOptions.getData( false, false,'department', 'departmentList', false, modalOptions)">
+				<label for="dept_id" class="col-sm-2 control-label">Department Name </label>
+				<div class="col-sm-9">
+					<select id="dept_id" class="form-control" ng-model="modalOptions.addStudent.dept_id" ng-options="item.id as item.dept_name for item in modalOptions.departmentList" ng-change="modalOptions.classParams.where.dept_id = modalOptions.addStudent.dept_id;modalOptions.getData(false, false,'class', 'classList',modalOptions.classParams, modalOptions)" required>
+						<option value="">Select Department</option>
+					</select>
+					<span class="help-block" ng-show="addDivisionForm.dept_id.$dirty && addStudentForm.dept_id.$invalid">
+					<span ng-show="addStudentForm.dept_id.$error.required" class="text-danger">Department name is required.</span>
+					</span>	
+				</div>
+			</div>
+			<div class="form-group" ng-init="modalOptions.getData( false, false,'class', 'classList', false, modalOptions)">
+				<label for="class_id" class="col-sm-2 control-label">Class Name </label>
+				<div class="col-sm-9">
+					<select id="class_id" class="form-control" ng-model="modalOptions.addStudent.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList" ng-change="modalOptions.classParams.where.class_id = modalOptions.addStudent.class_id;modalOptions.getData(false, false,'division','divisionList', modalOptions.classParams, modalOptions)" required>
+						<option value="">Select Class</option>
+					</select>
+					<span class="help-block" ng-show="addDivisionForm.class_id.$dirty && addStudentForm.class_id.$invalid">
+					<span ng-show="addStudentForm.class_id.$error.required" class="text-danger">class name is required.</span>
+					</span>	
+				</div>
+			</div>
+			
+		<!-- <div class="col-sm-9"> -->
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Description</label>
+			<div class="col-sm-9">
+				<textarea class="form-control" id="remark" name="remark" ng-model="modalOptions.addStudent.remark" maxlength="250" placeholder="Remark" required></textarea>
+				<span ng-hide="addStudentForm.remark.$error.maxlength">
+								{{ 250 - modalOptions.addStudent.remark.length + " Chars left" }}
+				</span>	
+				<span class="help-block" ng-show="addStudentForm.remark.$dirty && addStudentForm.remark.$invalid">
+					<span class="text-danger" ng-show="addStudentForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				</span>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-9">
+			 <button type="submit" class="btn btn-primary" title="submit" ng-click="modalOptions.showFormPart('studentGardianDetails',modalOptions)">Next</button> 
+			</div>
+		</div>
+		<!-- </div> -->
+	<!-- </div> -->
