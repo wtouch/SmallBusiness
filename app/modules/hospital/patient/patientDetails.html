@@ -48,10 +48,10 @@
 				<label  for="dob" class="col-sm-2 control-label">DOB *</label>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" id="dob" name="dob" placeholder=" DD-MM-YYYY  DOB"ng-model="modalOptions.addpatient.dob" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1"  max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
-					<span class="input-group-btn">
+					<!-- <span class="input-group-btn">
 					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
-					</span>
-					<span class="text-danger"  ng-show="addpatientForm.dob.$error.date">Please enter valid date</span>
+					</span> -->
+					<span class="text-danger"  ng-show="addpatientForm.dob.$error.date">Please enter valid date of birth</span>
 					<span class="help-block" ng-show="addpatientForm.dob.$dirty && addpatientForm.dob.$invalid">
 						<span ng-show="addpatientForm.dob.$error.required"class="text-danger">Date  is required.</span>
 					</span>	

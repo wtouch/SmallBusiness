@@ -74,7 +74,7 @@
 			</div>
 			<label for="description" class="col-sm-2 control-label">Description</label>
 			<div class="col-sm-3">
-				<textarea  type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addmedicine.description" placeholder="Enter your description here " ng-pattern="/^[a-zA-Z]*$/" ></textarea>
+				<textarea  type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.addmedicine.description" placeholder="Enter your description here " ></textarea>
 				<span class="text-danger"  ng-show="addmedicineForm.description.$error.pattern">Please enter valid ward description</span>
 				<span ng-hide="addmedicineForm.description.$error.maxlength">{{ 250 - modalOptions.addmedicine.description.length + " Chars left"}}</span>
 				<span class="help-block" ng-show="addmedicineForm.description.$dirty &&  addmedicineForm.description.$invalid">
@@ -87,18 +87,18 @@
 			<label  for="package_date" class="col-sm-2 control-label"> Package Date * </label>
 			<div class="col-sm-3">
 				<input type="text" class="form-control" placeholder="Date" id="package_date" name="package_date" ng-model="modalOptions.addmedicine.package_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened2" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened2 = !opened" ng-required="true" />
-				<span class=" text-danger error" ng-show="addmedicineForm.package_date.$error.required">
-				Required!</span>
-				<span class=" text-danger error" ng-show="addmedicineForm.package_date.$error.date">
-				Not a valid date!</span>
+				<span class="text-danger"  ng-show="addmedicineForm.package_date.$error.date">Please enter valid package  date </span>
+					<span class="help-block" ng-show="addmedicineForm.package_date.$dirty && addmedicineForm.package_date.$invalid">
+						<span ng-show="addmedicineForm.package_date.$error.required"class="text-danger">Package date  is required.</span>
+					</span>	
 			</div>	 
 			<label  for="expiry_date" class="col-sm-2 control-label">Expiry Date * </label>
 			<div class="col-sm-3">
 				<input type="text" class="form-control" placeholder="Date" id="expiry_date" name="expiry_date" ng-model="modalOptions.addmedicine.expiry_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened1 = !opened" ng-required="true" />
-				<span class=" text-danger error" ng-show="addmedicineForm.expiry_date.$error.required">
-				Required!</span>
-				<span class=" text-danger error" ng-show="addmedicineForm.expiry_date.$error.date">
-				Not a valid date!</span>
+				<span class="text-danger"  ng-show="addmedicineForm.expiry_date.$error.date">Please enter valid  expiry date </span>
+					<span class="help-block" ng-show="addmedicineForm.expiry_date.$dirty && addmedicineForm.expiry_date.$invalid">
+						<span ng-show="addmedicineForm.expiry_date.$error.required"class="text-danger">Expiry date  is required.</span>
+					</span>	
 			</div>
 		</div>
 	<div class="modal-footer" >
