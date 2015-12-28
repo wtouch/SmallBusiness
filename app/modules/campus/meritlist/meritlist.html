@@ -1,0 +1,78 @@
+<div class="main-content">
+	<ng-include src="'modules/component/toolbar.html'"></ng-include>
+	<h3>Merit List Creation</h3>
+	<div class="row"  collapse="!isCollapsed" class="collapse">
+		<div class="col-sm-12">
+			<div class="bottomspace">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-sm-6">
+								<h5>Merit Creation Tool</h5>
+								<div class="row">
+									<div class="col-sm-4"ng-init="getData( false, false,'department', 'departmentList', false)">
+										<div class="bottomspace">
+											<select id="page_item" class="form-control"ng-model="dept_id" ng-options="item.id as item.dept_name for item in departmentList" ng-change="classParams.where.dept_id = dept_id;getData(false, false,'class','classList',classParams)">
+												<option value="" selected>Select Department</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="bottomspace">
+											<select id="class" class="form-control" ng-model="classData" ng-options="item as item.class_name for item in classList">
+												<option value=""selected>Select Class</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="bottomspace">
+											<button class="btn btn-primary">Sort Out Merit List</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+							<h5>Category Wise Distribution</h5>
+								<div class="row">
+									<div class="table-responsive col-sm-12">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>Sr.No</th>
+													<th>Category</th>
+													<th>Percentage</th>
+													<th>No of Seats Reserved</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr ng-repeat="x in classData.castwise_distribution">
+													<td>{{ $index + 1 }}</td>
+													<td>{{x.category}}</td>
+													<td>{{x.percentage}}</td>
+													<td>{{x.reservation}}</td>
+												</tr>
+												<tr>
+													<td colspan="2" class="text-right"><strong>Total</strong></td>
+													<td><strong>100%</strong></td>
+													<td><strong>{{strength}}</strong></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="table-responsive" ng-init="getData(false, currentPage, 'registration_view','meritList',regParams)">
+			<div ui-grid="meritList"></div>
+	</div>
+	<div class="text-center">				
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'registration_view','meritlist',regParams)"></pagination>
+		<pre>Page: {{currentPage}} / {{numPages}}</pre>
+	</div>	
+</div>
+	

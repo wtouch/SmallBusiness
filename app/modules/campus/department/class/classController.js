@@ -88,6 +88,7 @@ define(['app'], function (app) {
 			
 			var modalOptions = {
 				date : $scope.currentDate,
+				distributions : $rootScope.userDetails.config.campus.campusData.distributions,
 				classData : (data)?{
 						id : data.id
 					}:{},
@@ -99,10 +100,12 @@ define(['app'], function (app) {
 						class_name : data.class_name,
 						marks : data.marks,
 						minimum_criteria : data.minimum_criteria,
+						strength : data.strength,
 						castwise_distribution : data.castwise_distribution,
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						description : data.description,
 					} : {
+						castwise_distribution : [],
 						user_id : $rootScope.userDetails.id,
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
@@ -122,6 +125,7 @@ define(['app'], function (app) {
 					})
 				},
 				getData : $scope.getData,
+				totalCalculate : $scope.totalCalculate,
 				addToObject : function(object,data,modalOptions){
 						console.log(object,data,modalOptions);
 					$rootScope.addToObject(object,modalOptions[data]);
@@ -184,8 +188,13 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
-		
-	   
+		  $scope.totalCalculate = function(strength,sendData,modalOptions){
+			  modalOptions.addClass.castwise_distribution = [];
+			  angular.forEach(sendData,function(object){
+				  object.reservation = (strength*object.percentage)/100;
+				  modalOptions.addClass.castwise_distribution.push(object);
+				});
+			}
    };
 	
 	// Inject controller's dependencies
