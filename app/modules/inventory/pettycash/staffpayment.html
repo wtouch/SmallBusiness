@@ -6,7 +6,7 @@
 
 <div class="modal-body">
 <form class="form-horizontal" name="staffpaymentForm" role="form" ng-submit="addleaveForm.$valid" novalidate="novalidate">
-<!-- {{modalOptions.staffpayment}} -->
+
 		<div class="form-group">
 			<label for="select type" class="col-sm-2 control-label">Staff transaction*</label>
 			<div class="col-sm-4">
@@ -46,8 +46,8 @@
 					</span>	
 				</div>
 				<label for="category" class="col-sm-1 control-label">Category</label>
-				<div class="col-sm-4">
-					<select id="category" class="form-control" ng-model="modalOptions.staffpayment.category" ng-options="item.system_name as item.name for item in modalOptions.Category.staff.debit" required>
+				<div class="col-sm-4">{{modalOptions.staffpayment.category}}
+					<select id="category" class="form-control" ng-model="modalOptions.staffpayment.category" ng-options="item.system_name as item.name for item in modalOptions.Category.staff.debits" required>
 					<option value="" selected>Category</option>
 					</select>
 				</div>

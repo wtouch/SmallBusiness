@@ -1,11 +1,47 @@
 <div class="row">
 	<div class="col-md-12">
-		<div class="main-content">
-			<ng-include src="'modules/component/toolbar.html'"></ng-include>
+	<div class="main-content">
+		<ng-include src="'modules/component/toolbar.html'"></ng-include>
 			<h3 class="text-center">Tax Information</h3>
-		<form class="form-horizontal" name="taxInfoForm" role="form" novalidate ng-submit="taxInfoForm.$valid" ng-init="getTax(taxinfo)">
-		{{taxinfo}}
-			
+	<form name="addTaxForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addTaxForm.$invalid" id="addTaxForm">
+		<div class="row">
+			<div class="col-sm-10 table-responsive">
+				<table class="table table-bordered" >
+					<thead>
+						<tr>
+							<th>Display Name</th>
+							<th>Tax Name</th>
+							<th>Tax Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+							<input type="text" id="displayName" class="form-control" name="displayName" placeholder="Display Name" ng-pattern="/^[a-zA-Z ]*$/" ng-model="taxdata.displayName" required />
+							<span class="help-block" ng-show="addTaxForm.displayName.$dirty && addTaxForm.displayName.$invalid">
+								<span class="text-danger"  ng-show="addTaxForm.displayName.$error.pattern">Text is required.</span>
+								<span class="text-danger" ng-show="addTaxForm.displayName.$error.required">Required Field.</span>
+							</span>
+							</td>
+							<td>
+								<input type="text" class="form-control " placeholder="Tax Name" id="name" name="name" ng-model="taxdata.taxName"required />
+								<span ng-show="addTaxForm.name.$error.pattern && (addTaxForm.name.$dirty || submitted)" class="text-danger">Enter a valid No</span>
+							</td>
+							<td>
+								<input type="text" class="form-control " placeholder="Tax Value" id="value" name="value" ng-model="taxdata.taxValue"   ng-pattern="/^([0-9]{1,2}){1}(\.[0-9]{1,2})?$/" required />
+								<span ng-show="addTaxForm.value.$error.pattern && (addTaxForm.value.$dirty || submitted)" class="text-danger">Enter a valid No</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-sm-2">
+				<button type="submit" class="btn btn-success center" ng-disabled="addTaxForm.$invalid" ng-click="addToObject(taxinfo.tax,'taxdata',taxdata);">+Add Tax</button>							
+			</div>
+		</div>
+	</form>
+
+	<form class="form-horizontal" name="taxInfoForm" role="form" novalidate ng-submit="taxInfoForm.$valid" ng-init="getTax(taxinfo)">
 			<div class="form-group" ng-repeat="x in taxinfo.tax">
 				<label for="VAT" class="col-sm-2 control-label">{{x.displayName}}</label>
 				<div class="col-sm-9">
@@ -53,7 +89,7 @@
 					<button type="reset" class="btn btn-danger">Cancel</button>
 				</div>
 			</div>
-		</form>
-		</div>
+	</form>
+	</div>
 	</div>
 </div>

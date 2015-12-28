@@ -4,23 +4,24 @@
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>
 			<div class="row">
 				<div class="col-sm-2">
-						<div class="bottomspace">
-							<label for="partyList_status" class="control-label">Select Records</label>
-							<select id="partyList_status" class="form-control" ng-model="pageItems" ng-change="getData(false, currentPage,'invoice','invoiceList',invoiceParams);" ng-options="item as item for item in [10,20,30]" >
-									<option value="" selected>Select type</option>
-							</select>
-						</div>
+					<div class="bottomspace">
+						<label for="partyList_status" class="control-label">Select Records</label>
+						<select id="partyList_status" class="form-control" ng-model="pageItems" ng-change="getData(false, currentPage,'invoice','invoiceList',invoiceParams);" ng-options="item as item for item in [10,20,30]" >
+							<option value="" selected>Select type</option>
+						</select>
+					</div>
 				</div>
 				
 			</div>
 				
-				<div class="table-responsive" ng-init="getData(false, currentPage, 'invoice','invoiceList', invoiceParams);getData(false,false,'party','partyList', $scope.partyParams);">
+			<div class="table-responsive" ng-init="getData(false, currentPage, 'invoice','invoiceList', invoiceParams);getData(false,false,'party','partyList', $scope.partyParams);">
 				<div ui-grid="invoiceList"></div>
-				</div>
-				<div class="text-center">
-					<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'invoice','invoiceList', invoiceParams)"></pagination>
-					<pre>Page: {{currentPage}} / {{numPages}}</pre>
-				</div>
+			</div>
+			
+			<div class="text-center">
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'invoice','invoiceList', invoiceParams)"></pagination>
+				<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			</div>
 		</div>
 	</div>
 </div> 

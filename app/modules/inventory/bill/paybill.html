@@ -1,8 +1,8 @@
-	<div class="modal-header" style="margin-bottom: 14px">
-		<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+<div class="modal-header" style="margin-bottom: 14px">
+	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3>Pay Bill</h3>
-	</div>
-	<div class="modal-body">
+</div>
+<div class="modal-body">
 	<form name="payBillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="payBillForm.$valid">
 	{{modalOptions.payBill}}
 			<div class="form-group">
@@ -71,34 +71,34 @@
 						</span>
 				</div>
 			</div>
-		<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'Net Banking' || modalOptions.payBill.description.payment_type.type == 'DD'">
-			<label for="Date" class="col-sm-2 control-label">Date</label>
-			 <div class="col-sm-9">
-				<input type="date" id="date" class="form-control" ng-model="modalOptions.payBill.description.date" name="date" 
-				placeholder="date">
-			</div>					
-		</div>
-		<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'Net Banking' || modalOptions.payBill.description.payment_type.type == 'DD'">
-			<label for="Bank" class="col-sm-2 control-label">Bank Name</label>
-				<div class="col-sm-9">
-					<input type="text" id="Bank" ng-model="modalOptions.payBill.description.payment_type.Bank" class="form-control" name="Bank"   placeholder="Enter Bank Name" required/>
-					<span class="text-danger" ng-show="payBillForm.Bank.$dirty && payBillForm.Bank.$invalid">
-						<span ng-show="payBillForm.Bank.$error.required">Bank Name is Required.</span>
-					</span>	
-				</div>		
-		</div>
+			<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'Net Banking' || modalOptions.payBill.description.payment_type.type == 'DD'">
+				<label for="Date" class="col-sm-2 control-label">Date</label>
+				 <div class="col-sm-9">
+					<input type="date" id="date" class="form-control" ng-model="modalOptions.payBill.description.date" name="date" 
+					placeholder="date">
+				</div>					
+			</div>
+			<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'Net Banking' || modalOptions.payBill.description.payment_type.type == 'DD'">
+				<label for="Bank" class="col-sm-2 control-label">Bank Name</label>
+					<div class="col-sm-9">
+						<input type="text" id="Bank" ng-model="modalOptions.payBill.description.payment_type.Bank" class="form-control" name="Bank"   placeholder="Enter Bank Name" required/>
+						<span class="text-danger" ng-show="payBillForm.Bank.$dirty && payBillForm.Bank.$invalid">
+							<span ng-show="payBillForm.Bank.$error.required">Bank Name is Required.</span>
+						</span>	
+					</div>		
+			</div>
 		
-		<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'Net Banking' || modalOptions.payBill.description.payment_type.type == 'DD'">
-			<label for="Branch" class="col-sm-2 control-label">Branch</label>
-				<div class="col-sm-9">
-					<input type="text" id="Branch" ng-model="modalOptions.payBill.description.payment_type.Branch" class="form-control" name="Branch"   placeholder="Enter Branch" required/>
-					<span class="text-danger" ng-show="payBillForm.Branch.$dirty && payBillForm.Branch.$invalid">
-						<span ng-show="payBillForm.Branch.$error.required">Branch Name is Required.</span>
-					</span>	
-				</div>		
-		</div>
+			<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'Net Banking' || modalOptions.payBill.description.payment_type.type == 'DD'">
+				<label for="Branch" class="col-sm-2 control-label">Branch</label>
+					<div class="col-sm-9">
+						<input type="text" id="Branch" ng-model="modalOptions.payBill.description.payment_type.Branch" class="form-control" name="Branch"   placeholder="Enter Branch" required/>
+						<span class="text-danger" ng-show="payBillForm.Branch.$dirty && payBillForm.Branch.$invalid">
+							<span ng-show="payBillForm.Branch.$error.required">Branch Name is Required.</span>
+						</span>	
+					</div>		
+			</div>
 		
-		<div class="form-group">
+			<div class="form-group">
 				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
 					<div class="col-sm-9" ng-init="modalOptions.calcDueAmount(modalOptions);">
 						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.payBill.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payBill.debit_amount, modalOptions);modalOptions.calcDueAmount(modalOptions)" name="amount" placeholder="Amount" required check-amount previous-balance="modalOptions.previous_balance" due-amount="modalOptions.due_amount" />
@@ -110,11 +110,12 @@
 						</span>
 					</div>					
 			</div>
-		<div class="form-group modal-footer">
-			<div class="col-sm-11"><!-- ng-disabled="payBillForm.$invalid"-->
-				<button type="submit" class="btn btn-success" ng-click="modalOptions.postData('transaction', modalOptions.payBill); modalOptions.ok()">Pay Bill</button>
-				<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
-			</div>
-		</div>	
+			
+			<div class="form-group modal-footer">
+				<div class="col-sm-11"><!-- ng-disabled="payBillForm.$invalid"-->
+					<button type="submit" class="btn btn-success" ng-click="modalOptions.postData('transaction', modalOptions.payBill); modalOptions.ok()">Pay Bill</button>
+					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+				</div>
+			</div>	
 	</form>
-	</div>
+</div>

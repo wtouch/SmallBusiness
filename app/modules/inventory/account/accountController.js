@@ -44,7 +44,6 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false, enableFiltering: false,
 					
 				},
-				
 				{
 				    name:'account_name',
 					filterHeaderTemplate: '<input id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_name\', account_name, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_name" placeholder="search">'
@@ -71,8 +70,6 @@ define(['app'], function (app) {
 				{ 
 				name:'description',enableSorting: false, enableFiltering: false,
 				},
-
-				
 				{  name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'account\', \'accountList\',false,grid.appScope.accountParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 

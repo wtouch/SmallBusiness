@@ -32,7 +32,6 @@ define(['app'], function (app) {
 		$rootScope.moduleMenus = [
 			{
 				name : "Staff Payment",
-				path : "#/dashboard/inventory/pettycash/",
 				events : {
 					click : function(){
 						return $scope.openStaffpayment("modules/inventory/pettycash/staffpayment.html");

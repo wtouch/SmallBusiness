@@ -22,6 +22,12 @@ define(['app'], function (app) {
 		
 		$scope.inventoryTax = $rootScope.userDetails.config.inventory.taxData;
 		
+		$scope.addToObject = function(inputArray,reset,formObject){
+			$rootScope.addToObject(inputArray,formObject);
+			$scope[reset] = {};
+			$scope.totalCalculate(inputArray);
+		}
+		
 		$scope.taxinfo = ($scope.inventoryTax) ? $scope.inventoryTax : {
 			tax : [{
 				taxName : "service_tax",
