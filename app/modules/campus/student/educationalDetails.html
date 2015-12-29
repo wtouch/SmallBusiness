@@ -4,7 +4,7 @@
 				<form name="addStudentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addStudentForm.$valid" id="addStudent">
 				
 						<div class="form-group" style="padding-top:20px;">
-							<label for="high_percentage" class="col-sm-2 control-label">Higher Percentage *</label>
+							<label for="high_percentage" class="col-sm-2 control-label">Previous Higher Percentage *</label>
 							<div class="col-sm-3">
 								<input type="text" id="high_percentage" class="form-control" name="high_percentage" placeholder="Percentage" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" maxlength="6" ng-model="modalOptions.addStudent.high_percentage"required>
 								<span class="help-block" ng-show="addStudentForm.high_percentage.$dirty && addStudentForm.high_percentage.$invalid">
@@ -30,17 +30,17 @@
 									<tr>
 										<td>
 											<input type="text" class="form-control " placeholder="Class Name" id="class_name" name="class_name" ng-model="modalOptions.singleparticular.class_name" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
-											 <span class="text-danger"  ng-show="addStudentForm.class_name.$error.pattern">Text is required.</span>
-											<span class="help-block" ng-show="addStudentForm.class_name.$dirty && addStudentForm.class_name.$invalid">
+											 <span class="help-block" ng-show="addStudentForm.class_name.$dirty && addStudentForm.class_name.$invalid">
 												<span class="text-danger" ng-show="addStudentForm.class_name.$error.required">Required Field.</span>
 											</span>
 										</td>
 										
 										<td>
-											<input type="text" class="form-control " placeholder="Percentage" id="percentage" name="percentage" ng-model="modalOptions.singleparticular.percentage" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+											<input type="text" class="form-control " placeholder="Percentage" id="percentage" name="percentage" ng-model="modalOptions.singleparticular.percentage" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
 											 <span ng-show="addStudentForm.percentage.$error.pattern && (addStudentForm.percentage.$dirty || submitted)" class="text-danger">please enter number</span>
 											<span class="help-block" ng-show="addStudentForm.percentage.$dirty && addStudentForm.percentage.$invalid">
 												<span class="text-danger" ng-show="addStudentForm.percentage.$error.required">Required Field.</span>
+												<span ng-show="addStudentForm.percentage.$error.pattern && (addStudentForm.percentage.$dirty || submitted)" class="text-danger">Enter Like 0.00 only</span>
 											</span>
 										</td>
 										<td>
@@ -58,7 +58,7 @@
 											</span>
 										</td>
 										<td>
-											<input type="text" class="form-control " placeholder="Organization" id="organization" name="organization" ng-model="modalOptions.singleparticular.organization" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+											<input type="text" class="form-control " placeholder="Organization" id="organization" name="organization" ng-model="modalOptions.singleparticular.organization" ng-pattern="/^[a-zA-Z/. ]*$/" required/>
 											 <span class="text-danger"  ng-show="addStudentForm.organization.$error.pattern">Text is required.</span>
 											<span class="help-block" ng-show="addStudentForm.organization.$dirty && addStudentForm.organization.$invalid">
 												<span class="text-danger" ng-show="addStudentForm.university.$error.required">Required Field.</span>
@@ -85,7 +85,7 @@
 						</div>
 							<div class="col-sm-4">
 								<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addStudent.education,'singleparticular', modalOptions);">+Add This Particular</button>
-							</div>		
+							</div><br><br><br><br>	
 				</form>
 		 </div> 
 	<!-- </div> -->
@@ -120,6 +120,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<h4>Application For Which Class?</h4>
 		<div class="form-group" ng-init="modalOptions.getData( false, false,'department', 'departmentList', false, modalOptions)">
 				<label for="dept_id" class="col-sm-2 control-label">Department Name </label>
 				<div class="col-sm-9">

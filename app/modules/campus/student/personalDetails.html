@@ -223,10 +223,12 @@
 			<div class="form-group">
 				<label for="cast" class="col-sm-2 control-label">Cast Name *</label>
 				<div class="col-sm-9">
-					<input type="text" id="cast" class="form-control" name="cast" placeholder="Cast Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addStudent.cast" required>
-					<span class="text-danger"  ng-show="addStudentForm.cast.$error.pattern">Text is required.</span>
+					<select id="category" class="form-control" ng-model="modalOptions.addStudent.cast" ng-options="item.category as item.category for item in userDetails.config.campus.campusData.distributions"required>
+						<option value="">Select Category</option>
+					</select>
 					<span class="help-block" ng-show="addStudentForm.cast.$dirty && addStudentForm.cast.$invalid">
-						<span class="text-danger" ng-show="addStudentForm.cast.$error.required">Required Field.</span>
+					<span class="text-danger"  ng-show="addStudentForm.cast.$error.pattern">Please Enter Valid Name</span>
+					<span ng-show="(addStudentForm.cast.$dirty)" class="text-danger">Please Enter Name only!</span>
 					</span>
 				</div>
 			</div>
