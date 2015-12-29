@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3  ng-if="!modalOptions.staffpayment.id" class="text-center">Staff Payment</h3>
 	<h3  ng-if="modalOptions.staffpayment.id" class="text-center" ng-init="modalOptions.totalCalculate(modalOptions)">Update Staff Payment</h3>
 </div>
@@ -62,7 +62,7 @@
 				<option value="">Select Account</option>
 				</select>
 				<span class="help-block" ng-show="staffpaymentForm.account.$dirty && staffpaymentForm.account.$invalid">
-					<span ng-show="staffpaymentForm.account.$error.required" class="text-danger">required field.</span>
+					<span ng-show="staffpaymentForm.account.$error.required" class="text-danger">Required field.</span>
 				</span>	
 			</div>
 		</div>
@@ -83,7 +83,7 @@
 						<option value="DD">DD</option>
 						</select>
 						<span class="help-block" ng-show="staffpaymentForm.payment_type.$dirty && staffpaymentForm.payment_type.$invalid">
-							<span ng-show="staffpaymentForm.payment_type.$error.required" class="text-danger">Payment Type is required.</span>
+							<span ng-show="staffpaymentForm.payment_type.$error.required" class="text-danger">Payment type is required.</span>
 						</span>	
 					</div>
 			</div> 
@@ -96,18 +96,18 @@
 						<input type="text" id="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'" ng-model="modalOptions.staffpayment.payment_type.transaction_No" class="form-control" name="referance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="staffpaymentForm.referance_no.$dirty && staffpaymentForm.referance_no.$invalid" required>
 							<span ng-show="staffpaymentForm.referance_no.$error.required" class="text-danger">Ref No is required.</span>
-							<span ng-show="staffpaymentForm.referance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+							<span ng-show="staffpaymentForm.referance_no.$error.pattern" class="text-danger">Enter numbers Only!</span>
 						</span>
 						<input type="text" id="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" ng-model="modalOptions.staffpayment.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="staffpaymentForm.cheque_no.$dirty && staffpaymentForm.cheque_no.$invalid" required>
 							<span ng-show="staffpaymentForm.cheque_no.$error.required" class="text-danger">Cheque No is required.</span>
-							<span ng-show="staffpaymentForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+							<span ng-show="staffpaymentForm.cheque_no.$error.pattern" class="text-danger">Enter numbers Only!</span>
 							
 						</span>
 						<input type="text" id="DD_no" ng-if="modalOptions.staffpayment.payment_type.type == 'DD'" ng-model="modalOptions.staffpayment.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 						<span class="help-block" ng-show="staffpaymentForm.DD_no.$dirty && staffpaymentForm.DD_no.$invalid" required>
 							<span ng-show="staffpaymentForm.DD_no.$error.required" class="text-danger">DD no required.</span>
-							<span ng-show="staffpaymentForm.DD_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+							<span ng-show="staffpaymentForm.DD_no.$error.pattern" class="text-danger">Enter numbers Only!</span>
 							
 						</span>
 					</div>		
@@ -118,6 +118,10 @@
 				 <div class="col-sm-9">
 					<input type="text" id="date" class="form-control"   ng-model="modalOptions.staffpayment.date" ng-init="modalOptions.staffpayment.date = modalOptions.staffpaymentdate.date"  name="date" 
 					placeholder="date" required>
+					<span class="text-danger"  ng-show="staffpaymentForm.date.$error.date">Please enter valid   date </span>
+					<span class="help-block" ng-show="staffpaymentForm.date.$dirty && staffpaymentForm.date.$invalid">
+						<span ng-show="staffpaymentForm.date.$error.required"class="text-danger">Date  is required.</span>
+					</span>	
 				</div>					
 			</div>
 			
@@ -279,6 +283,11 @@
 				 <div class="col-sm-9">
 					<input type="text" id="date" class="form-control"   ng-model="modalOptions.staffpayment.date" ng-init="modalOptions.staffpayment.date = modalOptions.incomeDate.date"  name="date" 
 					placeholder="date">
+					<span class="text-danger"  ng-show="staffpaymentForm.date.$error.date">Please enter valid   date </span>
+					<span class="help-block" ng-show="staffpaymentForm.date.$dirty && staffpaymentForm.date.$invalid">
+						<span ng-show="staffpaymentForm.date.$error.required"class="text-danger">Date  is required.</span>
+					</span>
+					
 				</div>					
 			</div>
 			

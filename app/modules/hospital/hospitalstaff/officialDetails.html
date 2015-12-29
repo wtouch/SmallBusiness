@@ -46,7 +46,7 @@
 	<div class="col-sm-9">
 		<input type="text" id="adhaar_no" name="adhaar_no" class="form-control" ng-model="modalOptions.addstaff.adhaar_no" placeholder="Enter adhaar No" ng-pattern="/^\d{0,11}[0-9]$/"  maxlength="12" required>
 		<span class="help-block" ng-show="addstaffForm.adhaar_no.$dirty && addstaffForm.adhaar_no.$invalid">
-			<span ng-show="addstaffForm.adhaar_no.$error.pattern && (addstaffForm.adhaar_no.$dirty || submitted)" class="text-danger">please enter number</span>
+			<span ng-show="addstaffForm.adhaar_no.$error.pattern && (addstaffForm.adhaar_no.$dirty || submitted)" class="text-danger">Please enter number</span>
 		</span>
 	</div>					
 </div>
@@ -55,7 +55,7 @@
 	<div class="col-sm-9">
 
 		<input type="text" id="designation" name="designation" class="form-control" ng-model="modalOptions.addstaff.designation" placeholder="Enter Designation" ng-pattern="/^[a-zA-Z- ]*$/"required>
-		<span class="text-danger"  ng-show="addstaffForm.designation.$error.pattern">please Enter Valid Designation</span>
+		<span class="text-danger"  ng-show="addstaffForm.designation.$error.pattern">Please Enter Valid Designation</span>
 		<span class="help-block" ng-show="addstaffForm.designation.$dirty && addstaffForm.designation.$invalid">
 		<span ng-show="addstaffForm.designation.$error.required" class="text-danger">Designation is required</span>					
 		</span>
@@ -65,10 +65,15 @@
 <div class="form-group">
 	<label for="select type" class="col-sm-2 control-label">Department *</label>
 	<div class="col-sm-9">
-			<select id="department" name="department" class="form-control" 
+			<!-- <select id="department" name="department" class="form-control" 
 			ng-model="modalOptions.addstaff.department">
 			<option value="" selected>Select Department</option>
 			<option value="General">General</option>
+			</select> -->
+			<select id="department" name="department" class="form-control" 
+				ng-model="modalOptions.addstaff.department"
+				ng-options="item.system_name as item.name for item in modalOptions.department.staff.departments">
+				<option value="" selected>Select Department</option>
 			</select>
 	</div>
 </div>
@@ -78,14 +83,14 @@
 	<div class="col-sm-4">
 		<input ng-disabled="readOnly" type="text" id="salary" name="salary" class="form-control" ng-model="modalOptions.addstaff.salary" placeholder="Enter salary " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" required>
 		<span class="help-block" ng-show="addstaffForm.salary.$dirty && addstaffForm.salary.$invalid">
-			<span ng-show="addstaffForm.salary.$error.pattern && (addstaffForm.salary.$dirty || submitted)" class="text-danger">please enter number</span>
+			<span ng-show="addstaffForm.salary.$error.pattern && (addstaffForm.salary.$dirty || submitted)" class="text-danger">Please enter number</span>
 		</span>
 	</div>	
 <label for="fees" class="col-sm-1 control-label">Fees*</label>
 	<div class="col-sm-4">
 		<input type="text" id="fees" name="fees" class="form-control" ng-model="modalOptions.addstaff.fees" placeholder="Enter fees " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" required>
 		<span class="help-block" ng-show="addstaffForm.fees.$dirty && addstaffForm.fees.$invalid">
-			<span ng-show="addstaffForm.fees.$error.pattern && (addstaffForm.fees.$dirty || submitted)" class="text-danger">please enter number</span>
+			<span ng-show="addstaffForm.fees.$error.pattern && (addstaffForm.fees.$dirty || submitted)" class="text-danger">Please enter number</span>
 		</span>
 	</div>		
 </div>
