@@ -1,10 +1,9 @@
-<div class="main-content">
-	<div class="modal-header" style="margin-bottom: 14px">
-		<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+<div class="modal-header" style="margin-bottom: 14px">
+		<button type="button" class="btn btn-danger pull-right" ng-click="modalOptions.close()">Close</button>
 		<h3 class="text-center" ng-if="!modalOptions.addexpense.id">Add Expense</h3>
 		<h3 class="text-center" ng-if="modalOptions.addexpense.id">Edit Expense</h3>
 	</div>
-		<form name="addexpenseForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addexpenseForm.$valid">{{modalOptions.addexpense}}
+		<form name="addexpenseForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addexpenseForm.$valid">
 			<!-- <div ng-if = "type =='Rent'"> -->
 			
 		 <div class="form-group">
@@ -161,4 +160,3 @@
 				</div>
 			</div>		
 		</form>
-</div><!--ng-if="!modalOptions.propertyData.id-->

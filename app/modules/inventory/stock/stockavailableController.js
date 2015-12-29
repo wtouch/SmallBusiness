@@ -4,7 +4,7 @@ define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService', 'uiGridConstants'];
     
     // This is controller for this view
-	var stockController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
+	var stockavailableController = function ($scope,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		//global scope objects
 		$scope.invoice = true;
 		$scope.type = "year";
@@ -16,6 +16,8 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
+		console.log('Hello');
+		//$scope.stockList = {};
 		
 		$rootScope.moduleMenus = [
 			{
@@ -36,7 +38,7 @@ define(['app'], function (app) {
 		$scope.postData = function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'stock_items','stockList',$scope.stockParams);
+							$scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams);
 							$scope.stock = {
 								user_id : $rootScope.userDetails.id,
 								stockdate : dataService.sqlDateFormate(false,"datetime"),
@@ -92,11 +94,11 @@ define(['app'], function (app) {
 				},
 				{
 				    name:'goods_name',
-					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock_items\', \'stockList\',true, grid.appScope.stockParams)" ng-model="goods_name" placeholder="search">',
+					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\',true, grid.appScope.stockParams)" ng-model="goods_name" placeholder="search">',
                 },
 					{
 					name:'goods_type',
-					filterHeaderTemplate: '<select id="goods_type" class="form-control" ng-change="grid.appScope.filter(\'goods_type\', goods_type, \'stock_items\', \'stockList\',true, grid.appScope.stockParams)" ng-model="goods_type">'
+					filterHeaderTemplate: '<select id="goods_type" class="form-control" ng-change="grid.appScope.filter(\'goods_type\', goods_type, \'stock\', \'stockList\',true, grid.appScope.stockParams)" ng-model="goods_type">'
 							+'<option value="" selected>goods type</option>'
 							+'<option value="type1">type1</option>'
 							+'<option value="type2">type2</option>	'
@@ -112,7 +114,7 @@ define(['app'], function (app) {
 				},
 				{
 					name:'category',
-					filterHeaderTemplate: '<select id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'stock_items\', \'stockList\',true, grid.appScope.stockParams)" ng-model="category">'
+					filterHeaderTemplate: '<select id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'stock\', \'stockList\',true, grid.appScope.stockParams)" ng-model="category">'
 							+'<option value="" selected>Account category</option>'
 							+'<option value="category1">category1</option>'
 							+'<option value="category2">category2</option>	'
@@ -129,7 +131,7 @@ define(['app'], function (app) {
 				{ name:'unit',enableSorting: false, enableFiltering: false,},
 				{ name:'price',enableSorting: false, enableFiltering: false,},
 				{ name:'Manage', 
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock_items\', \'stockList\',false,grid.appScope.stockParams)" ng-model="status">'
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock\', \'stockList\',false,grid.appScope.stockParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -140,7 +142,7 @@ define(['app'], function (app) {
 					  ]
 					} , 
 					cellTemplate : '<a ng-click="grid.appScope.editData(row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit stock Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock_items\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
 				}
 			]
@@ -149,7 +151,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "stock_items", "stockList", $scope.stockParams);
+				$scope.getData(false, $scope.currentPage, "stock", "stockList", $scope.stockParams);
 			}
 		}
 			$scope.openModal = function(url,data){
@@ -185,7 +187,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'stock_items','stockList',$scope.stockParams);
+							$scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams);
 						}
 					})
 				},
@@ -193,7 +195,7 @@ define(['app'], function (app) {
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
 							/* $scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams); */
-							$scope.getData(false, $scope.currentPage, 'stock_items','stockList');
+							$scope.getData(false, $scope.currentPage, 'stock','stockList');
 						}
 					})
 				},
@@ -276,7 +278,7 @@ define(['app'], function (app) {
 	 };
 		
 	// Inject controller's dependencies
-	stockController.$inject = injectParams;
+	stockavailableController.$inject = injectParams;
 	// Register/apply controller dynamically
-    app.register.controller('stockController', stockController);
+    app.register.controller('stockavailableController', stockavailableController);
 });

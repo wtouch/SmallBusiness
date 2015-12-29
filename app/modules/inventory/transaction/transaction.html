@@ -13,9 +13,9 @@
 						</div>
 				</div>
 				<div class="col-sm-2">
-			<div class="bottomspace" ng-init="type = 'daily'; calcDuration(type, duration);">
+			<div class="bottomspace" ng-init="type ='daily';calcDuration(type,duration)">
 				<label for="year" class="control-label" >View Report</label>
-					<select id="year" class="form-control" ng-model="type" ng-init="type = 'daily'">
+					<select id="year" class="form-control" ng-model="type">
 						<option value="daily">Daily Report</option>	
 						<option value="month">Monthly Report</option>	
 						<option value="year">Yearly Report</option>
@@ -23,23 +23,23 @@
 					</select>
 			</div>
 		</div>
-		
+		{{type}}
 		<div class="col-sm-2" ng-if="type == 'daily'">
 			<div class="bottomspace">
-			<label for="date" class="control-label"></label>
-				<p class="input-group">
-				  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened2" min-date="minDate" ng-required="true" close-text="Close" ng-click="open2($event,'opened')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" />
+			<label for="date" class="control-label">Select Date</label>
+				<div class="input-group">
+				  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened2" min-date="minDate" ng-required="true" close-text="Close" ng-click="open2($event,'opened')" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)"/>
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open2($event, 'opened')">
 							<i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
-				</p>
+				</div>
 			</div>
 		</div>
 	
 		<div class="col-sm-2" ng-if="type == 'month'">
 			<div class="bottomspace">
-			<label for="month" class="control-label"></label>
+			<label for="month" class="control-label">Select Month</label>
 				<select id="month"  class="form-control " ng-model="duration" ng-init="duration = today.getMonth() + 1; calcDuration(type, duration)" ng-change="calcDuration(type, duration)"> 
 					<option value="1" selected>January</option>	
 					<option value="2">February</option>	
@@ -69,7 +69,7 @@
 		<div  ng-if="type == 'custom'">
 			<div class="col-sm-2"><!--ng-model="duration.start"-->
 					<div class="bottomspace">
-					<label for="date1" class="control-label"></label><!--ng-change="calcDuration(type,start)"-->
+					<label for="date1" class="control-label">From Date</label><!--ng-change="calcDuration(type,start)"-->
 							<p class="input-group">
 							  <input class="form-control" type="text"  id="date1" name="date1" datepicker-popup="{{dateFormat}}" ng-model="duration.start" is-open="opened1" min-date="minDate" max-date="maxDate" date-disabled="disabledDate(duration.start, mode)" ng-required="true" close-text="Close" ng-click="open1($event)"/>
 									<span class="input-group-btn">
@@ -81,7 +81,7 @@
 			</div>
 			<div class="col-sm-2"><!--ng-model="duration.start"-->
 				<div class="bottomspace">
-					<label for="year" class="control-label"></label>
+					<label for="year" class="control-label">To Date</label>
 					<p class="input-group">
 						  <input class="form-control" type="text"  id="date1" name="date1" datepicker-popup="{{dateFormat}}" ng-model="duration.end" is-open="opened" min-date="minDate" max-date="maxDate" date-disabled="disabledDate(duration.start, mode)" ng-required="true" ng-change="calcDuration(type, duration)" close-text="Close" ng-click="open($event)"/>
 								<span class="input-group-btn">

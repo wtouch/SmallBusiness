@@ -1,7 +1,7 @@
 <div class="modal-header" ng-init="modalOptions.getAccountConfig();modalOptions.getParty(modalOptions)">
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3  ng-if="!modalOptions.addinvoice.id" class="text-center">Add Invoice</h3>
-	<h3  ng-if="modalOptions.addinvoice.id" class="text-center" ng-init="modalOptions.totalCalculate(modalOptions)">Update Invoice</h3>
+	<h3  ng-if="modalOptions.addinvoice.id" class="text-center" ng-init="modalOptions.totalCalculate(modalOptions,'addinvoice')">Update Invoice</h3>
 </div>
 <div class="modal-body">
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="generalForm.$valid" id="generalForm">
@@ -49,7 +49,7 @@
 						<tbody>
 							<tr>
 								<td>
-									<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
+									<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
 								    placeholder="particulars Name"/>
 								
 									<span class="help-block" ng-show="addInvoiceForm.particular_name.$dirty && addInvoiceForm.particular_name.$invalid">
@@ -160,7 +160,7 @@
 		<tbody>
 			<tr ng-repeat="x in modalOptions.addinvoice.particulars">
 				<td>{{ $index + 1 }}</td>
-				<td>{{x.goods_name}}</td>
+				<td>{{x.particular_name}}</td>
 				<td>{{x.goods_type}}</td>
 				<td>{{x.category}}</td>
 				<td class="text-right">{{x.price}}</td>
@@ -200,7 +200,6 @@
 		</span>
 	</div>
 </div>
-
 <div class="modal-footer">
 	<button type="submit"  class="btn btn-success" ng-if="modalOptions.addinvoice.id"  ng-disabled="addinvoice.$invalid" ng-click="modalOptions.updateData('invoice',modalOptions.addinvoice,modalOptions.addinvoice.id); modalOptions.ok()">Update Invoice</button>
 
