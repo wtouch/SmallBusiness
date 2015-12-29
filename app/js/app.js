@@ -15,7 +15,7 @@ define(['angular',
 	'ngSortable',
 	'googleMap',
 	'upload','uploadShim',
-	'css!../css/bootstrap.min','css!../css/style','css!../lib/ui-grid/ui-grid.min'
+	'css!../lib/ui-grid/ui-grid.min'
 ], function(angular, angularRoute, ngCookies, $) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
