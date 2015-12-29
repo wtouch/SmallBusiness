@@ -208,6 +208,7 @@ define(['app'], function (app) {
 					qualification:data.qualification,
 					UAN_no:data.UAN_no,
 					marital_status:data.marital_status,
+					gender:data.gender,
 					staff_type:data.staff_type,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					registration_date:data.registration_date
@@ -215,7 +216,8 @@ define(['app'], function (app) {
 					{
 					date : dataService.sqlDateFormate(),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					marital_status :1,
+					marital_status :"single",
+					gender:"male",
 					user_id : $rootScope.userDetails.id
 					}, 
 				
@@ -223,14 +225,14 @@ define(['app'], function (app) {
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff','staff',$scope.staffParams);
 							}
 						})
 					},
 					updateData : function(table, input, id){
 						$rootScope.updateData(table, input, id, function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff','staff',$scope.staffParams);
 							}
 						})
 					},

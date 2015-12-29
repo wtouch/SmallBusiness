@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3  ng-if="!modalOptions.addleave.id" class="text-center">Add Leaves</h3>
 	<h3  ng-if="modalOptions.addleave.id" class="text-center" ng-init="modalOptions.totalCalculate(modalOptions)">Update Leaves</h3>
 </div>
@@ -10,7 +10,7 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Approved By *</label>
 			<div class="col-sm-4">
-				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addleave.approved_by"required>
+				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ . ]*$/" ng-model="modalOptions.addleave.approved_by"required>
 				
 				 <span class="text-danger"  ng-show="addleaveForm.name.$error.pattern">Required Field.</span>
 				 
@@ -56,7 +56,7 @@
 		<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">Reason</label>
 			<div class="col-sm-4">
-				<textarea class="form-control" id="reason" name="reason" ng-model="modalOptions.addleave.reason" ng-maxlength="250" placeholder="reason" required></textarea>
+				<textarea class="form-control" id="reason" name="reason" ng-model="modalOptions.addleave.reason" ng-maxlength="250" placeholder="Reason" required></textarea>
 				<span ng-hide="addleaveForm.reason.$error.maxlength">
 					{{ 250 - modalOptions.addleave.reason.length + " Chars left" }}
 				</span>	
@@ -69,7 +69,7 @@
 			<div class="col-sm-4">
 					<select id="status" name="status" class="form-control" 
 					ng-model="modalOptions.addleave.status" required>
-					<option value="" selected>select Status</option>
+					<option value="" selected>Select Status</option>
 					<option value="1">APPROVED</option>
 					<option value="0">REJECTED</option>
 					</select>
@@ -83,7 +83,7 @@
 			<div class="radio col-sm-2">
 			<label><input type="radio" name="leave" value="1" ng-model="modalOptions.addleave.leaves_for" ng-click="otherLeaves = false">Full Day</label>
 				</div>
-			<div class="radio col-sm-2">{{otherLeaves}}
+			<div class="radio col-sm-2"><!-- {{otherLeaves}} -->
 			<label><input type="radio" name="leave" value="true" ng-click="otherLeaves = true">No of Days</label>
 			<input type="text" id="leave" class="form-control" ng-hide="!otherLeaves" ng-if="otherLeaves"  ng-model="modalOptions.addleave.leaves_for" name="leave" placeholder="No of Days" required />
 		<span class="help-block" ng-show="addleaveForm.leave.$dirty && addleaveForm.leave.$invalid">
