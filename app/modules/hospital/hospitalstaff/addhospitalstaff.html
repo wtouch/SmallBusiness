@@ -7,22 +7,8 @@
 
 
 {{modalOptions.addstaff}}
-<form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
-<div class="modal-body">
-<div class="form-group">
-			<label for="select type" class="col-sm-2 control-label">Select Staff Type*</label>
-			<div class="col-sm-4">
-					<select id="salary_type" name="salary_type" class="form-control" 
-					ng-model="modalOptions.addstaff.staff_type">
-					<option value="" selected>Select Staff Type</option>
-					<option value="doctor">Doctor</option>
-					<option value="nurse">Nurse</option>
-					<option value="ward_boy">Ward Boy</option>
-					<option value="security_guard">Security Guard</option>
-					<option value="driver">Driver</option>
-					</select>
-			</div>
-</div>
+
+
 
 <ul class="nav nav-tabs" ng-if="modalOptions.addstaff.staff_type=='doctor'">			
 		<li role="presentation" ng-class="{active: modalOptions.formPart=='personalDetails'}">
@@ -51,19 +37,21 @@
 			<a ng-click="modalOptions.showFormPart('officialDetails', modalOptions)">Official Details</a>
 		</li>	
 </ul>
-</form>
 
+<form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
 
 		<ng-include  ng-show="modalOptions.formPart=='personalDetails'" 	src="'modules/hospital/hospitalstaff/personalDetails.html'">
 		</ng-include> 
 		<ng-include  ng-show="modalOptions.formPart=='officialDetails'" src="'modules/hospital/hospitalstaff/officialDetails.html'">
 		</ng-include> 
+		
+</form>
 		<ng-include  ng-show="modalOptions.formPart=='qualificationDetails'" src="'modules/hospital/hospitalstaff/qualificationDetails.html'">
 		</ng-include> 
 		<ng-include  ng-show="modalOptions.formPart=='specializationDetails'" src="'modules/hospital/hospitalstaff/specializationDetails.html'">
 		</ng-include> 
 
-</div>
+
 
 	
 
