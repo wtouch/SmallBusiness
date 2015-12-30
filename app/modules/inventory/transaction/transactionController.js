@@ -75,7 +75,7 @@ define(['app'], function (app) {
 					name:'type',
 					enableSorting: false,
 					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams);grid.appScope.transactionCategory = grid.appScope.inventoryConfig[type]" ng-model="type">'
-							+'<option value="" selected>type</option>'
+							+'<option value="" selected>Type</option>'
 							+'<option value="expense">Expense</option>'
 							+'<option value="income">Income</option>'
 							+'<option value="transfer">Transfer</option>'
