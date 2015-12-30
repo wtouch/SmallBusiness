@@ -631,6 +631,14 @@ define(['app'], function (app) {
 					})
 					
 				},
+				calcDebitBalance : function(previousBal, amount, modalOptions){
+					modalOptions.staffpayment.balance = parseFloat(previousBal) - parseFloat(amount);
+					console.log(modalOptions.staffpayment.balance);
+				},
+				calcCreditBalance : function(previousBal, amount, modalOptions){
+					modalOptions.staffpayment.balance = parseFloat(previousBal) + parseFloat(amount);
+					console.log(modalOptions.staffpayment.balance);
+				},
 				getData:$scope.getData,	
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){

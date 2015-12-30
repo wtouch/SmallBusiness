@@ -53,24 +53,6 @@ define(['app'], function (app) {
 		$http.get("modules/inventory/config.json").success(function(response){
 				$scope.inventoryConfig = response;
 			})
-		$scope.today = function() {
-				$scope.date = new Date();
-			};
-		$scope.open = function($event){
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope.opened = ($scope.opened==true)?false:true;
-		};
-		$scope.open1 = function($event){
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope.opened1 = ($scope.opened1==true)?false:true;
-		};
-		$scope.open2 = function($event){
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope.opened2 = ($scope.opened2==true)?false:true;
-		};
 		
 		$scope.transactionCategory = [];
 		$scope.transactionList = {
@@ -167,11 +149,8 @@ define(['app'], function (app) {
 		
 		$scope.$watch(function(){ return $scope.transactionList.data},function(newValue){
 			if(angular.isArray(newValue)){
-				if(newValue.length >= 1){
-					
-					$scope.verticalSum($scope.transactionList.data, 'credit_amount', 'totalCredit');
-					$scope.verticalSum($scope.transactionList.data, 'debit_amount', 'totalDebit');
-				}
+				$scope.verticalSum($scope.transactionList.data, 'credit_amount', 'totalCredit');
+				$scope.verticalSum($scope.transactionList.data, 'debit_amount', 'totalDebit');
 			}
 		})
 		//Add Income form pop up 
@@ -451,7 +430,6 @@ define(['app'], function (app) {
 		$scope.setTransactionDate = function(transfer){
 			$scope.transactionParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
 			+"'"];
-			console.log($scope.transactionParams);
 			$scope.getData(false, $scope.currentPage, "transaction", "transactionList", $scope.transactionParams);
 		}
 		
@@ -508,7 +486,6 @@ define(['app'], function (app) {
 		}
 		
 		$scope.calcDuration = function(type, duration){
-			console.log(type, duration);
 			var curDate = new Date();
 			if(type == 'custom'){
 				var dateS = new Date(duration.start);
@@ -522,15 +499,17 @@ define(['app'], function (app) {
 				var endtDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + (dateS.getDate() + 1);
 			}
 			if(type == 'month'){
+				console.log(duration);
 				duration = parseInt(duration);
 				var today = new Date();
 				var start = new Date(today.getFullYear(), (duration - 1), 1);
-				var endt = new Date(today.getFullYear(), (duration - 1) + 1, 0);
+				var endt = new Date(today.getFullYear(), (duration - 1) + 1, -1);
 				
 				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
 				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate() + 1);
 			}
 			if(type == 'year'){
+				console.log(duration);
 				duration = parseInt(duration);
 				var today = new Date();
 				var start = new Date(duration, 3, 1);

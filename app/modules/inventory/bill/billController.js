@@ -300,12 +300,12 @@ define(['app'], function (app) {
 					//console.log(table, searchColumn, searchValue);
 					var locationParams = {
 						search : {},
-						cols : ["*"]
+						cols : ["*"],
+						status : 1,
+						user_id : $rootScope.userDetails.id
 					};
 					locationParams.search[searchColumn] = searchValue;
-					console.log(locationParams);
 					return dataService.get(false, 'stock_items', locationParams).then(function(response){
-						console.log(response);
 						if(response.status == 'success'){
 							return response.data;
 						}else{
@@ -320,7 +320,6 @@ define(['app'], function (app) {
 					formObject.quantity = 1;
 					formObject.amount = object.price*formObject.quantity;
 					formObject.category = object.category;
-					console.log(object);
 				},
 				
 				taxCalculate : billService.taxCalc,
