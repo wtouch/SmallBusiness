@@ -50,10 +50,10 @@
 							<tr>
 								<td>
 									<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.particular_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
-								    placeholder="particulars Name"/>
+								    placeholder="Particulars Name"/>
 								
 									<span class="help-block" ng-show="addInvoiceForm.particular_name.$dirty && addInvoiceForm.particular_name.$invalid">
-									<span ng-show="addInvoiceForm.particular_name.$error.required" class="text-danger">particular_name Required.</span>
+									<span ng-show="addInvoiceForm.particular_name.$error.required" class="text-danger">Particular_name Required.</span>
 									</span>
 								</td>
 
@@ -137,7 +137,7 @@
 					</table>
 				</div>
 				<div class="col-sm-4">
-						<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars,'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions,'addinvoice');">+Add This Particular</button>							
+						<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars,'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions,'addinvoice');isCollapsed1=!isCollapsed1">+Add This Particular</button>							
 				</div>
 			</form>
 		</div>
