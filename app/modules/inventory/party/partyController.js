@@ -114,7 +114,7 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			var modalOptions = {
-				date : $scope.currentDate,
+				//date : $scope.currentDate,
 				adduser : (data) ? {
 					id : data.id,
 					name : data.name,
@@ -127,14 +127,13 @@ define(['app'], function (app) {
 					state: data.state,
 					country: data.country,
 					pincode: data.pincode,
-					date : data.date,
+					//date : data.date,
 					partydate:data.partydate,
 					type: data.type,
 					department: data.department,
 			} : {
 					date : dataService.sqlDateFormate(),
 					partydate: dataService.sqlDateFormate(),
-					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},
 				postData : function(table, input){

@@ -16,104 +16,103 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row">
-								<h5 ng-if="!stock.id">Add Stock Item</h5>
-								<h5 ng-if="stock.id">Update Stock Item</h5>
-			<form name="addStockForm" class="form-inline" role="form" novalidate="novalidate" ng-submit="addStockForm.$valid">
-				<div class="form-group">
-						<label  for="goods_name">Goods Name</label><br/>
-						<input type="text" id="goods_name" class="form-control"  ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="stock.goods_name" name="goods_name" placeholder="Name" required />
-						<span class="help-block" ng-show="addStockForm.goods_name.$dirty && addStockForm.goods_name.$invalid">
-							 <span class="text-danger"  ng-show="addStockForm.name.$error.pattern">Please Enter Valid Name</span>
-								<span ng-show="(addStockForm.goods_name.$dirty)" class="text-danger">Please Enter Name only!</span>
-						</span>				
-				</div>
-				
-				<div class="form-group">
-					<label for="goods_type">Type</label><br/>
-							<select id="goods_type" class="form-control" name="goods_type"  ng-model="stock.goods_type" required>
-								<option value="" selected>Select Type</option>
-								<option value="type1" >Type1</option>
-								<option value="type2">Type2</option>
-								<option value="type3">Type3</option>
-								<option value="type4">Type4</option>
-							</select>
-							<span class="help-block" ng-show="addStockForm.goods_type.$dirty && addStockForm.goods_type.$invalid">
-								<span ng-show="addStockForm.goods_type.$error.required" class="text-danger">Required field.</span>
-							</span>	
-				</div> 
-				<div class="form-group">
-					<label for="category">Category</label><br/>
-							<select id="category" class="form-control" name="category"  ng-model="stock.category" required>
-							<option value="" selected>Select Category</option>
-							<option value="category1">Category1</option>
-							<option value="category2">Category2</option>
-							<option value="category3">Category3</option>
-							<option value="category4">Category4</option>
-							</select>
-							<span class="help-block" ng-show="addStockForm.category.$dirty && addStockForm.category.$invalid">
-								<span ng-show="addStockForm.category.$error.required" class="text-danger">Required field.</span>
-							</span>
-				</div> 
-				
-				<div class="form-group">
-					<label  for="unit">Unit</label><br/>
-							<select id="unit" name="unit"  ng-model="stock.unit"  class="form-control" required>
-							<option value="" selected>Select unit</option>
-							<option value="Box">Box</option>
-							<option value="Liter">Liter</option>
-							<option value="Kg">Kg</option>
-							<option value="Packets">Packets</option>
-							<option value="Grams">Grams</option>
-							</select>
-							<span class="help-block" ng-show="addStockForm.unit.$dirty && addStockForm.unit.$invalid">
-								<span ng-show="addStockForm.unit.$error.required" class="text-danger">Required field.</span>
-							</span>					
-				</div>
-				<div class="form-group">
-					<label  for="price">Price</label><br/>
-							<input type="text" id="price" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="stock.price" name="price" placeholder="Price" required />
-							<span class="help-block" ng-show="addStockForm.price.$dirty && addStockForm.price.$invalid">
-								<span ng-show="(addStockForm.price.$dirty)" class="text-danger">Enter Number Only!</span>
-							</span>				
-				</div>
-				<div class="form-group">
-				 <label  for="date">Date * </label><br/>
-						<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder="Date" id="date" name="date" ng-model="stock.stockdate" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
-				</div> 
-				<div class="form-group">
-						<br/>
-						<button type="submit" ng-if="!stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="postData('stock_items',stock)">
-							<span>Submit</span>
-						</button>
-						<button type="submit" ng-if="stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click=" updateData('stock_items',stock, stock.id)">
-							<span>Update</span>
-						</button> 
-				</div>
-		</form>
+							<h5 ng-if="!stock.id">Add Stock Item</h5>
+							<h5 ng-if="stock.id">Update Stock Item</h5>
+								<form name="addStockForm" class="form-inline" role="form" novalidate="novalidate" ng-submit="addStockForm.$valid">
+									<div class="form-group">
+											<label  for="goods_name">Goods Name</label><br/>
+											<input type="text" id="goods_name" class="form-control"  ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="stock.goods_name" name="goods_name" placeholder="Name" required />
+											<span class="help-block" ng-show="addStockForm.goods_name.$dirty && addStockForm.goods_name.$invalid">
+												 <span class="text-danger"  ng-show="addStockForm.name.$error.pattern">Please Enter Valid Name</span>
+													<span ng-show="(addStockForm.goods_name.$dirty)" class="text-danger">Please Enter Name only!</span>
+											</span>				
+									</div>
+									
+									<div class="form-group">
+										<label for="goods_type">Type</label><br/>
+												<select id="goods_type" class="form-control" name="goods_type"  ng-model="stock.goods_type" required>
+													<option value="" selected>Select Type</option>
+													<option value="type1" >Type1</option>
+													<option value="type2">Type2</option>
+													<option value="type3">Type3</option>
+													<option value="type4">Type4</option>
+												</select>
+												<span class="help-block" ng-show="addStockForm.goods_type.$dirty && addStockForm.goods_type.$invalid">
+													<span ng-show="addStockForm.goods_type.$error.required" class="text-danger">Required field.</span>
+												</span>	
+									</div> 
+									<div class="form-group">
+										<label for="category">Category</label><br/>
+												<select id="category" class="form-control" name="category"  ng-model="stock.category" required>
+												<option value="" selected>Select Category</option>
+												<option value="category1">Category1</option>
+												<option value="category2">Category2</option>
+												<option value="category3">Category3</option>
+												<option value="category4">Category4</option>
+												</select>
+												<span class="help-block" ng-show="addStockForm.category.$dirty && addStockForm.category.$invalid">
+													<span ng-show="addStockForm.category.$error.required" class="text-danger">Required field.</span>
+												</span>
+									</div> 
+									
+									<div class="form-group">
+										<label  for="unit">Unit</label><br/>
+												<select id="unit" name="unit"  ng-model="stock.unit"  class="form-control" required>
+												<option value="" selected>Select unit</option>
+												<option value="Box">Box</option>
+												<option value="Liter">Liter</option>
+												<option value="Kg">Kg</option>
+												<option value="Packets">Packets</option>
+												<option value="Grams">Grams</option>
+												</select>
+												<span class="help-block" ng-show="addStockForm.unit.$dirty && addStockForm.unit.$invalid">
+													<span ng-show="addStockForm.unit.$error.required" class="text-danger">Required field.</span>
+												</span>					
+									</div>
+									<div class="form-group">
+										<label  for="price">Price</label><br/>
+												<input type="text" id="price" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="stock.price" name="price" placeholder="Price" required />
+												<span class="help-block" ng-show="addStockForm.price.$dirty && addStockForm.price.$invalid">
+													<span ng-show="(addStockForm.price.$dirty)" class="text-danger">Enter Number Only!</span>
+												</span>				
+									</div>
+									<div class="form-group">
+										<label  for="date">Date * </label><br/>
+											<input type="text" class="form-control  ng-isolate-scope ng-pristine ng-valid-required ng-valid ng-valid-date" placeholder="Date" id="date" name="date" ng-model="stock.stockdate" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-click="opened = !opened" required="required">
+									</div> 
+									<div class="form-group">
+											<br/>
+											<button type="submit" ng-if="!stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click="postData('stock_items',stock)">
+												<span>Submit</span>
+											</button>
+											<button type="submit" ng-if="stock.id" class="btn btn-success" ng-disabled="addStockForm.$invalid" ng-click=" updateData('stock_items',stock, stock.id)">
+												<span>Update</span>
+											</button> 
+									</div>
+								</form>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
-			<div class="row">
-				 <div class="col-sm-2">
-					<div class="bottomspace">
-						<label for="page_item" class="control-label" >Page Item</label>
-						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'stock_items', 'stockList',false)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
-							<option value="" selected>Select type</option>
-						</select>
-					</div>
-				</div>
-			</div> 
-			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'stock_items','stockList',false);getData(false, false, 'party','partyList')">
-			  <div ui-grid="stockList"></div>
-			 </div>
-			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'stock_items','stockList',false)"></pagination>
-				<pre>Page: {{currentPage}} / {{numPages}}</pre>
+	<div class="row">
+		 <div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="page_item" class="control-label" >Page Item</label>
+				<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'stock_items', 'stockList',false)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+					<option value="" selected>Select type</option>
+				</select>
 			</div>
 		</div>
+	</div> 
+	<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'stock_items','stockList',false);getData(false, false, 'party','partyList')">
+	  <div ui-grid="stockList"></div>
+	</div>
+	<div class="text-center">				
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'stock_items','stockList',false)"></pagination>
+		<pre>Page: {{currentPage}} / {{numPages}}</pre>
+	</div>
+	</div>
 	</div>
 </div>

@@ -88,7 +88,7 @@ define(['app'], function (app) {
 		};
 		
 		$scope.callbackColChange = function(response){
-			console.log(response);
+			
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "account", "accountList", $scope.accountParams);
 			}
@@ -100,7 +100,7 @@ define(['app'], function (app) {
 				templateUrl:url,	// apply template to modal
 				size : 'lg'
 			};
-			console.log(data);
+			
 			var modalOptions = {
 
 				date : $scope.currentDate,
@@ -190,7 +190,7 @@ define(['app'], function (app) {
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
 				dataService.extendDeep($scope.params, params, response);
-				console.log($scope.params);
+				//console.log($scope.params);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
 		}

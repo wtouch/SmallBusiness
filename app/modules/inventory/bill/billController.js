@@ -174,13 +174,13 @@ define(['app'], function (app) {
 		};
 		
 		$scope.callbackColChange = function(response){
-			console.log(response);
+			//console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "bill", "billData", $scope.billParams);
 			}
 		}
 		$scope.callbackColChange1 = function(response){
-			console.log(response);
+			//console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "purchase_order", "PurchaseOrderData", $scope.purchaseorderParams);
 			}
@@ -415,9 +415,9 @@ define(['app'], function (app) {
 						cols : ["*"]
 					};
 					locationParams.search[searchColumn] = searchValue;
-					console.log(locationParams);
+					//console.log(locationParams);
 					return dataService.get(false, 'stock_items', locationParams).then(function(response){
-						console.log(response);
+					
 						if(response.status == 'success'){
 							return response.data;
 						}else{
@@ -432,7 +432,7 @@ define(['app'], function (app) {
 					formObject.quantity = 1;
 					formObject.amount = object.price*formObject.quantity;
 					formObject.category = object.category;
-					console.log(object);
+					
 				},
 				
 				taxCalculate : billService.taxCalc,

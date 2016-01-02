@@ -432,7 +432,7 @@ define(['app'], function (app) {
 				payableDays : function(modalOptions){
 					var obj = modalOptions.paysalary;
 					console.log(obj.working_day, obj.paid_leaves, obj.unpaid_leaves);
-					obj.payable_day = parseInt(obj.working_day) + parseInt(obj.unpaid_leaves);
+					obj.payable_day = parseInt(obj.working_day) - parseInt(obj.unpaid_leaves);
 					
 					obj.cms = (parseFloat(obj.salary) / obj.working_day * obj.payable_day).toFixed(2);
 					
