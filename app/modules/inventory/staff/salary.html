@@ -1,7 +1,5 @@
 <div class="modal-header">
-	<button type="button" class="close buttondistance" ng-click="modalOptions.close()">
-		<span aria-hidden="true">&times;</span></button>
-	
+	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3>Pay Salary</h3>
 </div>
 <div class="modal-body"><!-- {{modalOptions.paysalary}} -->
@@ -13,7 +11,7 @@
 				<option value="">Select Account</option>
 				</select>
 				<span class="help-block" ng-show="paysalaryForm.account.$dirty && paysalaryForm.account.$invalid">
-					<span ng-show="paysalaryForm.account.$error.required" class="text-danger">required field.</span>
+					<span ng-show="paysalaryForm.account.$error.required" class="text-danger">Required field.</span>
 				</span>	
 			</div>
 		</div>
@@ -28,7 +26,7 @@
 					<div class="col-sm-9">
 						<input ng-disabled="readOnly" type="text" id="salary" name="salary" class="form-control" ng-model="modalOptions.paysalary.salary" placeholder="Enter Gross Salary " ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" required>
 						<span class="help-block" ng-show="paysalaryForm.salary.$dirty && paysalaryForm.salary.$invalid">
-							<span ng-show="paysalaryForm.salary.$error.pattern && (paysalaryForm.salary.$dirty || submitted)" class="text-danger">please enter number</span>
+							<span ng-show="paysalaryForm.salary.$error.pattern && (paysalaryForm.salary.$dirty || submitted)" class="text-danger">Please enter number</span>
 						</span>
 					</div>
 			</div>
@@ -37,7 +35,7 @@
 					<div class="col-sm-9">
 						<input ng-disabled="readOnly" type="text" id="working_day" name="working_day" class="form-control" ng-model="modalOptions.paysalary.working_day" placeholder="Enter Working Days" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" required>
 						<span class="help-block" ng-show="paysalaryForm.working_day.$dirty && paysalaryForm.working_day.$invalid">
-							<span ng-show="paysalaryForm.working_day.$error.pattern && (paysalaryForm.working_day.$dirty || submitted)" class="text-danger">please enter number</span>
+							<span ng-show="paysalaryForm.working_day.$error.pattern && (paysalaryForm.working_day.$dirty || submitted)" class="text-danger">Please enter number</span>
 						</span>
 					</div>						
 			</div>
@@ -46,7 +44,7 @@
 					<div class="col-sm-9">
 						<input ng-disabled="readOnly" type="text" id="paid_leaves" name="paid_leaves" class="form-control" ng-model="modalOptions.paysalary.paid_leaves" placeholder="Enter Paid" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" required>
 						<span class="help-block" ng-show="paysalaryForm.paid_leaves.$dirty && paysalaryForm.paid_leaves.$invalid">
-							<span ng-show="paysalaryForm.paid_leaves.$error.pattern && (paysalaryForm.paid_leaves.$dirty || submitted)" class="text-danger">please enter number</span>
+							<span ng-show="paysalaryForm.paid_leaves.$error.pattern && (paysalaryForm.paid_leaves.$dirty || submitted)" class="text-danger">Please enter number</span>
 						</span>
 					</div>						
 			</div>
@@ -56,7 +54,7 @@
 					<div class="col-sm-9">
 						<input type="text" id="unpaid_leaves" name="unpaid_leaves" class="form-control" ng-model="modalOptions.paysalary.unpaid_leaves" placeholder="Enter Unpaid" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" ng-change="modalOptions.payableDays(modalOptions)" required>
 						<span class="help-block" ng-show="paysalaryForm.unpaid_leaves.$dirty && paysalaryForm.unpaid_leaves.$invalid">
-							<span ng-show="paysalaryForm.unpaid_leaves.$error.pattern && (paysalaryForm.unpaid_leaves.$dirty || submitted)" class="text-danger">please enter number</span>
+							<span ng-show="paysalaryForm.unpaid_leaves.$error.pattern && (paysalaryForm.unpaid_leaves.$dirty || submitted)" class="text-danger">Please enter number</span>
 						</span>
 					</div>						
 			</div>
@@ -65,83 +63,84 @@
 					<div class="col-sm-9">
 						<input type="text" id="payable_day" name="payable_day" class="form-control" ng-model="modalOptions.paysalary.payable_day" placeholder="Enter Payable days" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="10" required>
 						<span class="help-block" ng-show="paysalaryForm.payable_day.$dirty && paysalaryForm.payable_day.$invalid">
-							<span ng-show="paysalaryForm.payable_day.$error.pattern && (paysalaryForm.payable_day.$dirty || submitted)" class="text-danger">please enter number</span>
+							<span ng-show="paysalaryForm.payable_day.$error.pattern && (paysalaryForm.payable_day.$dirty || submitted)" class="text-danger">Please enter number</span>
 						</span>
 					</div>						
 			</div>
 			<div class="form-group">
 					<label for="cms" class="col-sm-2 control-label">Current Month Salary</label>
 					<div class="col-sm-9">
-						<input type="text" id="cms" name="cms" class="form-control" ng-model="modalOptions.paysalary.cms" placeholder=""  required>
-						<span class="help-block" ng-show="paysalaryForm.cms.$dirty && paysalaryForm.cms.$invalid">
-							<span ng-show="paysalaryForm.cms.$error.pattern && (paysalaryForm.cms.$dirty || submitted)" class="text-danger">please enter number</span>
+						<input type="text" id="cms" name="cms" class="form-control" ng-model="modalOptions.paysalary.cms" placeholder="Current  month salary" required>
+						<span class="help-block"ng-show="paysalaryForm.cms.$dirty && paysalaryForm.cms.$invalid">
+							<span ng-show="paysalaryForm.cms.$error.pattern && (paysalaryForm.cms.$dirty || submitted)" class="text-danger">Please enter number</span>
 						</span>
 					</div>						
 			</div>
 			<div class="form-group">
-			<label for="earning" class="col-sm-2 control-label">Earning</label>
-			<div class="col-sm-9">
-				<table class="table table-hover table-responsive table-bordered" >
-					<thead>
+			<label class="col-sm-2">Earning Salary</label>
+				<div class="col-sm-4">
+					<table class="table table-hover table-responsive table-bordered">
 						<tr>
 							<th>Basic</th>
-							<th>DA</th>
-							<th>HRA</th>
-							<th>CCA</th>
-							<th>Conveyance</th>
-							<th>Gross</th>
+							<td>{{modalOptions.paysalary.basic.toFixed(2)}}</td>
 						</tr>
-					</thead>
-					<tbody>
 						<tr>
-						<td>{{modalOptions.paysalary.basic}}</td>
-						<td>{{modalOptions.paysalary.da}}</td>
-						<td>{{modalOptions.paysalary.hra}}</td>
-						<td>{{modalOptions.paysalary.cca}}</td>
-						<td>{{modalOptions.paysalary.conveyance}}</td>
-						<td>{{modalOptions.paysalary.total}}</td>
+							<th>DA</th>
+							<td>{{modalOptions.paysalary.da.toFixed(2)}}</td>
 						</tr>
-					</tbody>
-				</table>
-	
-					</div>						
-			</div>
-			<div class="form-group">
-					<label for="deduction" class="col-sm-2 control-label">Deduction</label>
-					<div class="col-sm-9">
-						<table class="table table-hover table-responsive table-bordered" >
-					<thead>
+						<tr>
+							<th>HRA</th>
+							<td>{{modalOptions.paysalary.hra.toFixed(2)}}</td>
+						</tr>
+						<tr>
+							<th>CCA</th>
+							<td>{{modalOptions.paysalary.cca.toFixed(2)}}</td>
+						</tr>
+						<tr>
+							<th>Conveyance</th>
+							<td>{{modalOptions.paysalary.conveyance }}</td>
+						</tr>
+						<tr>
+							<th>Gross</th>
+							<td>{{modalOptions.paysalary.total.toFixed(2)}}</td>
+						</tr>
+					</table>
+				</div>
+				<label class="col-sm-1">Deduction Salary</label>
+				<div class="col-sm-4">
+					<table class="table table-hover table-responsive table-bordered">
 						<tr>
 							<th>PF</th>
-							<th>ESIC</th>
-							<th>PT</th>
-							<th>TOTAL DEDUCTION</th>
+							<td>{{modalOptions.paysalary.pf.toFixed(2)}}</td>
 						</tr>
-					</thead>
-					<tbody>
 						<tr>
-						<td>{{modalOptions.paysalary.pf}}</td>
-						<td>{{modalOptions.paysalary.esic}}</td>
-						<td>{{modalOptions.paysalary.pt}}</td>
-						<td>{{modalOptions.paysalary.td}}</td>
+							<th>ESIC</th>
+							<td>{{modalOptions.paysalary.esic.toFixed(2)}}</td>
 						</tr>
-					</tbody>
-				</table>
-					</div>						
+						<tr>
+							<th>PT</th>
+							<td>{{modalOptions.paysalary.pt.toFixed(2)}}</td>
+						</tr>
+						<tr>
+							<th>TOTAL DEDUCTION</th><!-- {{td}} -->
+							<td>{{(modalOptions.paysalary.pf + modalOptions.paysalary.esic + modalOptions.paysalary.pt).toFixed(2)}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div class="form-group">
-					<label for="nsp" class="col-sm-2 control-label">Net Salary Payable</label>
-					<div class="col-sm-9">
-						<input type="text" id="nsp" name="nsp" class="form-control" ng-model="modalOptions.paysalary.nsp" placeholder=""  maxlength="10" readOnly required>
-						<span class="help-block" ng-show="paysalaryForm.nsp.$dirty && paysalaryForm.nsp.$invalid">
-						</span>
-					</div>						
+				<label for="nsp" class="col-sm-2 control-label">Net Salary Payable</label>
+				<div class="col-sm-9">
+					<input type="text" id="nsp" name="nsp" class="form-control" ng-model="modalOptions.paysalary.nsp" placeholder=""  maxlength="10" readOnly required>
+					<span class="help-block" ng-show="paysalaryForm.nsp.$dirty && paysalaryForm.nsp.$invalid">
+					</span>
+				</div>						
 			</div>
-<div class="form-group modal-footer">
-	<div class="col-sm-11"><!--ng-disabled="addIncomeForm.$invalid"-->
+	</form>
+</div>
+<div class="modal-footer row">
+	<div class="col-sm-12">
 		<button type="submit" class="btn btn-success" ng-disabled="paysalaryForm.$invalid"ng-click="modalOptions.postData('transaction',modalOptions.paysalary); modalOptions.ok()">Submit</button>
 		<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 	</div>
 </div>	
-</form>
-</div>

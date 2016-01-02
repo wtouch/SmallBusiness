@@ -8,18 +8,20 @@
 	<form name="generalForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit=	"generalForm.$valid" id="generalForm">
 		<div class=" form-group">
 			<div ng-init="modalOptions.getData(false,false,'party', 'partyList',billParams,modalOptions)">
-			<label for="party_id" class="col-sm-2 control-label"> Select Vendor * </label>
-			<div class="col-sm-4">
-				<select class="form-control" name="party_id" id="party_id" ng-model="modalOptions.addBill.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter :{type :'vendor'}" required>
-					<option value="">Select Vendor</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-				</select>	
+				<label for="party_id" class="col-sm-2 control-label"> Select Vendor * </label>
+				<div class="col-sm-4">
+					<select class="form-control" name="party_id" id="party_id" ng-model="modalOptions.addBill.party_id" ng-options="item.id as item.name for item in modalOptions.partyList | filter :{type :'vendor'}" required>
+						<option value="">Select Vendor</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+					</select>	
+				</div>
 			</div>
-			</div>
-			<label  for="generated_date" class="col-sm-2 control-label">Bill Date *</label>
-			<div class="col-sm-4">
-			<input type="text" class="form-control " placeholder=" Bill Date" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addBill.bill_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
+			<div>
+				<label  for="bill_date" class="col-sm-2 control-label">Bill Date *</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control " placeholder=" Bill Date" id="bill_date" name="bill_date" ng-model="modalOptions.addBill.bill_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addBill.bill_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
+				</div>
 			</div>
 		</div>
 	</form>
@@ -32,8 +34,6 @@
 					<thead>
 						<tr>
 							<th>Particular Name</th>
-							<th>Type</th>
-							<th>Category</th>
 							<th>Price</th>
 							<th>Quantity</th>
 							<th>Amount</th>
@@ -43,45 +43,19 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
+								<input type="text" typeahead-template-url="particularList" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
 								ng-change="modalOptions.singleparticular.quantity = 1; modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"  placeholder="particulars Name"
 								 ng-init="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
 								<span class="help-block" ng-show="addbillForm.particular.$dirty && addbillForm.particular.$invalid">
 									<span ng-show="addbillForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
 								</span> 
 							</td>
-							
-							<script type="text/ng-template" id="customTemplate.html">
+							<script type="text/ng-template" id="particularList">
 								<a>
 									<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
-									<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
+									<span><small> ({{match.model.goods_type}} - {{match.model.category}})</small></span>
 								</a>
 							</script>
-				
-							<td>
-								<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type"  required>
-									<option value="" selected>Select Type</option>
-									<option value="type1" >Type1</option>
-									<option value="type2">Type2</option>
-									<option value="type3">Type3</option>
-									<option value="type4">Type4</option>
-								</select>
-								<span class="help-block" ng-show="addbillForm.goods_type.$dirty && addbillForm.goods_type.$invalid">
-								<span ng-show="addbillForm.goods_type.$error.required" class="text-danger">Required field.</span>
-								</span>	
-							</td>
-							<td>					
-								<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
-									<option value="" selected>Select Category</option>
-									<option value="category1">Category1</option>
-									<option value="category2">Category2</option>
-									<option value="category3">Category3</option>
-									<option value="category4">Category4</option>
-								</select>
-								<span class="help-block" ng-show="addbillForm.category.$dirty && addbillForm.category.$invalid">
-								<span ng-show="addbillForm.category.$error.required" class="text-danger">Required field.</span>
-								</span>	
-							</td>
 							<td>						
 								<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
 								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
@@ -140,65 +114,65 @@
 	</div>
 </div>
 
-	<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
-		<table class="table table-bordered" >
-			<thead>
-				<tr>
-					<th class="col-sm-2">Sr.No.</th>
-					<th class="col-sm-2">Particular Name</th>
-					<th class="col-sm-2">Goods_type</th>
-					<th class="col-sm-2">Category </th>
-					<th class="col-sm-2 ">Price</th>
-					<th class="col-sm-2">Quantity</th>
-					<th class="col-sm-2"> Amount</th>
-					<th >Remove</th>
-				</tr> 
-			</thead>
-			
-			<tbody >
-				<tr ng-repeat="x in modalOptions.addBill.particular">
-					<td>{{$index + 1}}</td>
-					<td>{{x.goods_name}}</td>
-					<td>{{x.goods_type}}</td>
-					<td>{{x.category}}</td>
-					<td>{{x.price}}</td>
-					<td>{{x.quantity}}</td>
-					<td>{{x.amount}}</td>
-					<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index);modalOptions.totalCalculate(modalOptions,'addBill');">X</button></td>
-				</tr>
-				<tr>
-					<td colspan="5"></td>
-					<td class="text-right"><strong>Sub Total</strong></td>
-					<td class="text-right">{{ modalOptions.addBill.subtotal | number : 2}}</td>
-					<td></td>
-				</tr>
-				<tr ng-repeat="(key, value) in modalOptions.addBill.tax">
-					<td colspan="5"></td>
-					<td class="text-right"><strong>{{key.replace("_"," ")|capitalize}}</strong></td>
-					<td class="text-right">{{ value  | number : 2}}</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td colspan="5"></td>
-					<td class="text-right"><strong>Total</strong></td>
-					<td class="text-right">{{modalOptions.addBill.total_amount | number : 2}}</td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
+	<table class="table table-bordered" >
+		<thead>
+			<tr>
+				<th class="col-sm-2">Sr.No.</th>
+				<th class="col-sm-2">Particular Name</th>
+				<th class="col-sm-2">Goods Type</th>
+				<th class="col-sm-2">Category</th>
+				<th class="col-sm-2 ">Price</th>
+				<th class="col-sm-2">Quantity</th>
+				<th class="col-sm-2"> Amount</th>
+				<th >Remove</th>
+			</tr> 
+		</thead>
 		
-			<label class="col-sm-1">Remark</label>
-			<div class="col-sm-8 form-group">
-				<textarea rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" placeholder="please Remark here.." required> </textarea>
-				<span ng-hide="addbillForm.remark.$error.maxlength">
-					{{ 200 - modalOptions.addBill.remark.length + " Chars left" }}
-				</span>	
-				<span class="help-block" ng-show="addbillForm.remark.$dirty &&  addbillForm.remark.$invalid">
-					<span class="text-danger" ng-show="addbillForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
-					<span class="text-danger" ng-show="addbillForm.remark.$error.required">Remark is required.</span>
-				</span>	
-			</div>
+		<tbody >
+			<tr ng-repeat="x in modalOptions.addBill.particular">
+				<td>{{$index + 1}}</td>
+				<td>{{x.goods_name}}</td>
+				<td>{{x.goods_type}}</td>
+				<td>{{x.category}}</td>
+				<td>{{x.price}}</td>
+				<td>{{x.quantity}}</td>
+				<td>{{x.amount}}</td>
+				<td><button ng-click="modalOptions.removeObject(modalOptions.addBill.particular, $index);modalOptions.totalCalculate(modalOptions,'addBill');">X</button></td>
+			</tr>
+			<tr>
+				<td colspan="5"></td>
+				<td class="text-right"><strong>Sub Total</strong></td>
+				<td class="text-right">{{ modalOptions.addBill.subtotal | number : 2}}</td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="(key, value) in modalOptions.addBill.tax">
+				<td colspan="5"></td>
+				<td class="text-right"><strong>{{key.replace("_"," ")|capitalize}}</strong></td>
+				<td class="text-right">{{ value  | number : 2}}</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="5"></td>
+				<td class="text-right"><strong>Total</strong></td>
+				<td class="text-right">{{modalOptions.addBill.total_amount | number : 2}}</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	
+		<label class="col-sm-1">Remark</label>
+		<div class="col-sm-8 form-group">
+			<textarea rows="3" class="form-control" id="remark" name="remark" ng-model="modalOptions.addBill.remark"  maxlength="200" placeholder="please Remark here.." required> </textarea>
+			<span ng-hide="addbillForm.remark.$error.maxlength">
+				{{ 200 - modalOptions.addBill.remark.length + " Chars left" }}
+			</span>	
+			<span class="help-block" ng-show="addbillForm.remark.$dirty &&  addbillForm.remark.$invalid">
+				<span class="text-danger" ng-show="addbillForm.remark.$error.maxlength">Sorry You are Exceeding the Limit</span>
+				<span class="text-danger" ng-show="addbillForm.remark.$error.required">Remark is required.</span>
+			</span>	
 		</div>
+	</div>
 <div class="modal-footer">
 	<button type="submit" ng-if="modalOptions.addBill.id"  class="btn btn-success" ng-click="modalOptions.updateData('bill',modalOptions.addBill,modalOptions.addBill.id); modalOptions.ok()">Update Purchase Bill</button>
 	

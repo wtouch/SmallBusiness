@@ -21,8 +21,8 @@ define(['app'], function (app) {
 		
 		$rootScope.moduleMenus = [
 			{
-				name : "Add Party",
-				SubTitle :"Add Party",
+				name : "Add Vendors",
+				SubTitle :"Add Vendors",
 				events : {
 					click : function(){
 						return $scope.openModal("modules/hospital/hospital_party/addparty.html");
@@ -55,23 +55,23 @@ define(['app'], function (app) {
 				},
 				{
 				    name:'name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'party\', \'party\', true, grid.appScope.partyParams)" ng-model="name" placeholder="search">',
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'party\', \'party\', true, grid.appScope.partyParams)" ng-model="name" placeholder="Search by vendors">',
                 },
 				{
 					name:'email',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="email" placeholder="search">'
+					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="email" placeholder="Search by email">'
                 },
 				{
 					name:'phone',
-					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="phone" placeholder="search">'
+					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="phone" placeholder="Search by Phone">'
                 },
 			   {
 				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="address" placeholder="search">',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="address" placeholder="Search by Address">',
                 },
 				{
 				    name:'city',
-				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="city" placeholder="search">', 
+				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'party\', \'party\',true, grid.appScope.partyParams)" ng-model="city" placeholder="Search by City">', 
                 },
 				{
 				    name:'type',width:85,
@@ -86,10 +86,10 @@ define(['app'], function (app) {
 							+'<option value="1">Active</option>	'
 						+'</select>',
 				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/hospital_party/addparty.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit party" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/hospital_party/addparty.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Vendors" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					
 					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'party\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospital_party/viewparty.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  party" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospital_party/viewparty.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View  Vendors" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
 					
 				}
 			]

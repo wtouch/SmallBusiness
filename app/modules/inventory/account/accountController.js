@@ -46,7 +46,7 @@ define(['app'], function (app) {
 				},
 				{
 				    name:'account_name',
-					filterHeaderTemplate: '<input id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_name\', account_name, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_name" placeholder="search">'
+					filterHeaderTemplate: '<input id="account_name" class="form-control" ng-change="grid.appScope.filter(\'account_name\', account_name, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_name" placeholder="Search">'
                 }, 
 				{
 					name:'category',
@@ -65,7 +65,7 @@ define(['app'], function (app) {
 					} 
 				},
 				{
-					name:'account_no',filterHeaderTemplate: '<input id="account_no" class="form-control" ng-change="grid.appScope.filter(\'account_no\', account_no, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_no" placeholder="search">'
+					name:'account_no',filterHeaderTemplate: '<input id="account_no" class="form-control" ng-change="grid.appScope.filter(\'account_no\', account_no, \'account\', \'accountList\',true, grid.appScope.accountParams)" ng-model="account_no" placeholder="Search">'
 				},
 				{ 
 				name:'description',enableSorting: false, enableFiltering: false,
@@ -82,13 +82,13 @@ define(['app'], function (app) {
 					  ]
 					} , 
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/account/addaccount.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Account Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'account\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+ '<a type="button" tooltip="Delete Account" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'account\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				}
 			]
 		};
 		
 		$scope.callbackColChange = function(response){
-			console.log(response);
+			
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "account", "accountList", $scope.accountParams);
 			}
@@ -100,7 +100,7 @@ define(['app'], function (app) {
 				templateUrl:url,	// apply template to modal
 				size : 'lg'
 			};
-			console.log(data);
+			
 			var modalOptions = {
 
 				date : $scope.currentDate,
@@ -190,7 +190,7 @@ define(['app'], function (app) {
 			if(!params) params = {};
 			$rootScope.filterData(col, value, search, function(response){
 				dataService.extendDeep($scope.params, params, response);
-				console.log($scope.params);
+				//console.log($scope.params);
 				$scope.getData(false, $scope.currentPage, table, subobj, $scope.params);
 			})
 		}

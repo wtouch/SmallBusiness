@@ -17,7 +17,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";	
-	
+	    console.log($rootScope.userDetails);
 			
 		  $scope.regParams = {
 			where : {

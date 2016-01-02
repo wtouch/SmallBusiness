@@ -40,21 +40,15 @@
 									<th class=" col-xs-2">Particulars</th>
 									<th class="col-xs-1 text-right">Quantity</th>
 									<th class="col-xs-1 text-right">Price {{"&#8377;"}}</th>
-									<th class=" col-xs-2 text-right">Subtotal</th>
-									<th class="col-xs-2 text-right">Service Tax ({{userDetails.config.inventory.taxData.tax[0].taxValue}}%)</th>
-									<th class="col-xs-2 text-right">Vat({{userDetails.config.inventory.taxData.tax[1].taxValue}}%)</th>
 									<th class=" col-xs-2 text-right">Total</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr ng-repeat="x in modalOptions.addinvoice.particulars">
-									<td>{{x.particular_name}}{{x.goods_type}}
-									{{x.category}}</td>
+									<td>{{x.particular_name}}
+									</br><small ng-repeat="(key,value) in x.tax">({{key.replace('_',' ')|capitalize}}:{{value}}) </small></td>
 									<td class="amt text-right">{{x.quantity}}</td>
 									<td class="amt text-right">{{x.price}}</td>
-									<td class="amt text-right">{{x.amount}}</td>
-									<td class="amt text-right">{{x.tax.service_tax}}</td>
-									<td class="amt text-right">{{x.tax.vat}}</td>
 									<td class="amt text-right">{{x.amount+ x.tax.service_tax + x.tax.vat}}</td>
 								</tr>
 							</tbody>
@@ -64,9 +58,6 @@
 									<td class="amt text-right"></td>
 									<td class="amt text-right">
 									</td>
-									<td class="amt text-right">{{modalOptions.addinvoice.subtotal}}</td>
-									<td class="amt text-right">{{modalOptions.addinvoice.tax.service_tax}}</td>
-									<td class="amt text-right">{{modalOptions.addinvoice.tax.vat}}</td>
 									<td class="amt text-right" ng-init="modalOptions.totalCalculate(modalOptions);"><strong>{{modalOptions.addinvoice.total_amount}}</strong></td>
 								</tr>
 							</tfoot>

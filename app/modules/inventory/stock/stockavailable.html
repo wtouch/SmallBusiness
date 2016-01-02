@@ -1,0 +1,135 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="main-content">
+			<ng-include src="'modules/component/toolbar.html'"></ng-include>
+			<div class="row">
+				<div class="col-sm-2">
+					<h3>Stock</h3>
+				</div>
+				<div class="col-sm-2 pull-right text-right">
+					<button class="btn btn-primary" ng-click="isCollapsed=!isCollapsed"tooltip-animation="true" tooltip="Add stock"><span ng-class="(isCollapsed)?'glyphicon glyphicon-minus':'glyphicon glyphicon-plus'"></span></button>
+				</div>
+			</div>
+			{{addstock}}
+	<div class="row collapse" collapse="!isCollapsed" style="height: auto;">
+		<div class="col-sm-12">
+			<div class="bottomspace">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="row">
+								<h5 ng-if="!stock.id">Add Stock</h5>
+								<h5 ng-if="stock.id">Update Stock</h5>
+								<form name="addstockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addstockForm.$valid" id="addstockForm">
+								<div class="table-responsive">
+									<table class="table table-bordered" >
+										<thead>
+											<tr>
+												<th>Particular Name</th>
+												<th>Type</th>
+												<th>Category</th>
+												<th>Price</th>
+												<th>Quantity</th>
+												<th>Amount</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="addstock.goods_name" typeahead-on-select="assignData($item,addstock)" typeahead="stock_items.goods_name for stock_items in getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
+													ng-change="addstock.quantity = 1; addstock.amount = (addstock.price * addstock.quantity)"  placeholder="particulars Name"
+													 ng-init="addstock.amount = (addstock.price * addstock.quantity)"/>
+													<span class="help-block" ng-show="addstockForm.particular.$dirty && addstockForm.particular.$invalid">
+														<span ng-show="addbillForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
+													</span> 
+												</td>
+												
+												<script type="text/ng-template" id="customTemplate.html">
+													<a>
+														<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+														<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
+													</a>
+												</script>
+									
+												<td>
+													<select id="goods_type" class="form-control" name="goods_type"  ng-model="addstock.goods_type"  required>
+														<option value="" selected>Select Type</option>
+														<option value="type1" >Type1</option>
+														<option value="type2">Type2</option>
+														<option value="type3">Type3</option>
+														<option value="type4">Type4</option>
+													</select>
+													<span class="help-block" ng-show="addstockForm.goods_type.$dirty && addstockForm.goods_type.$invalid">
+													<span ng-show="addstockForm.goods_type.$error.required" class="text-danger">Required field.</span>
+													</span>	
+												</td>
+												<td>					
+													<select id="category" class="form-control" name="category"  ng-model="addstock.category" required>
+														<option value="" selected>Select Category</option>
+														<option value="category1">Category1</option>
+														<option value="category2">Category2</option>
+														<option value="category3">Category3</option>
+														<option value="category4">Category4</option>
+													</select>
+													<span class="help-block" ng-show="addstockForm.category.$dirty && addstockForm.category.$invalid">
+													<span ng-show="addstockForm.category.$error.required" class="text-danger">Required field.</span>
+													</span>	
+												</td>
+												<td>						
+													<input type="text" class="form-control" id="price" name="price" ng-model="addstock.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
+													ng-change="addstock.amount = (addstock.price * addstock.quantity)"/>
+														
+													<span class="help-block" ng-show="addstockForm.price.$dirty && addstockForm.price.$invalid">
+														<span ng-show="addstockForm.price.$error.required" class="text-danger">Price Required.</span>
+														<span ng-show="addstockForm.price.$error.pattern" class="text-danger">Enter number only</span>
+													</span>
+												</td>
+												<td>
+													<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="addstock.quantity" ng-init="addstock.quantity = 1;  addstock.amount = (addstock.price * addstock.quantity)" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  			
+													ng-change="addstock.amount = (addstock.quantity * addstock.price)" required />
+													<span class="help-block" ng-show="addstockForm.quantity.$dirty && addstockForm.quantity.$invalid">
+														<span ng-show="addstockForm.quantity.$error.required" class="text-danger">Quantity Required</span>
+														<span ng-show="addstockForm.quantity.$error.pattern" class="text-danger">Enter number only</span>
+													</span>
+												</td>			
+												<td>		
+													<input type="text" class="form-control" id="amount" name="amount" ng-model="addstock.amount" ng-init="  addstock.amount = (addstock.price*addstock.quantity)" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required readonly  placeholder="Amount" />
+													<span class="help-block" ng-show="addstockForm.amount.$dirty && addstockForm.amount.$invalid">
+														<span ng-show="addstockForm.amount.$error.required" class="text-danger">Total amount Required.</span>
+														<span ng-show="addstockForm.amount.$error.pattern" class="text-danger">Enter numbers only</span>
+													</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									<button type="submit" class=" col-sm-offset-2 btn btn-success"ng-disabled="addstockForm.$invalid" ng-click="postData(addstock)">+Add This Stock
+									</button>
+									<br/>
+								</div>													
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+			<div class="row">
+				 <div class="col-sm-2">
+					<div class="bottomspace">
+						<label for="page_item" class="control-label" >Page Item</label>
+						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'stock', 'stockList',false)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
+						</select>
+					</div>
+				</div>
+			</div> 
+			<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'stock','stockList',false);getData(false, false, 'party','partyList')">
+			  <div ui-grid="stockList"></div>
+			 </div>
+			<div class="text-center">				
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'stock','stockList',false)"></pagination>
+				<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			</div>
+		</div>
+	</div>
+</div>

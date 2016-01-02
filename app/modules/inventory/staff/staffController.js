@@ -208,6 +208,7 @@ define(['app'], function (app) {
 					qualification:data.qualification,
 					UAN_no:data.UAN_no,
 					marital_status:data.marital_status,
+					gender:data.gender,
 					staff_type:data.staff_type,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					registration_date:data.registration_date
@@ -215,7 +216,8 @@ define(['app'], function (app) {
 					{
 					date : dataService.sqlDateFormate(),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					marital_status :1,
+					marital_status :"single",
+					gender:"male",
 					user_id : $rootScope.userDetails.id
 					}, 
 				
@@ -223,14 +225,14 @@ define(['app'], function (app) {
 						console.log(table, input);
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff','staff',$scope.staffParams);
 							}
 						})
 					},
 					updateData : function(table, input, id){
 						$rootScope.updateData(table, input, id, function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'staff','staff',$Scope.staffParams);
+								$scope.getData(false, $scope.currentPage, 'staff','staff',$scope.staffParams);
 							}
 						})
 					},
@@ -430,7 +432,7 @@ define(['app'], function (app) {
 				payableDays : function(modalOptions){
 					var obj = modalOptions.paysalary;
 					console.log(obj.working_day, obj.paid_leaves, obj.unpaid_leaves);
-					obj.payable_day = parseInt(obj.working_day) - parseInt(obj.unpaid_leaves) + parseInt(obj.paid_leaves);
+					obj.payable_day = parseInt(obj.working_day) - parseInt(obj.unpaid_leaves);
 					
 					obj.cms = (parseFloat(obj.salary) / obj.working_day * obj.payable_day).toFixed(2);
 					
@@ -628,6 +630,14 @@ define(['app'], function (app) {
 						modalOptions.previous_balance = response.data[0].previous_balance;
 					})
 					
+				},
+				calcDebitBalance : function(previousBal, amount, modalOptions){
+					modalOptions.staffpayment.balance = parseFloat(previousBal) - parseFloat(amount);
+					console.log(modalOptions.staffpayment.balance);
+				},
+				calcCreditBalance : function(previousBal, amount, modalOptions){
+					modalOptions.staffpayment.balance = parseFloat(previousBal) + parseFloat(amount);
+					console.log(modalOptions.staffpayment.balance);
 				},
 				getData:$scope.getData,	
 				postData : function(table, input){

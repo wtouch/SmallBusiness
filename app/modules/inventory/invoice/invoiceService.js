@@ -17,9 +17,9 @@ define(['app'], function (app) {
 				},
 				totalCalculate : function(modalOptions,object){
 					console.log(modalOptions,object);
-					modalOptions[object].subtotal = 0;
-					modalOptions[object].total_amount = 0;
-					modalOptions[object].tax = {};
+					modalOptions[object].subtotal =0;
+					modalOptions[object].total_amount =0;
+					modalOptions[object].tax ={};
 					angular.forEach(modalOptions[object].particulars, function(value, key){
 						modalOptions[object].subtotal += value.amount;
 						angular.forEach(value.tax,function(value, key){

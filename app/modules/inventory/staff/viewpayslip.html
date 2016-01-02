@@ -6,89 +6,88 @@
 {{singlePaySlip.description}}
 	<label for="select type"control-label">Select Date*</label>
 <select ng-model="singlePaySlip" ng-options="item as item.date for item in modalOptions.transactionList">
-</select>
-<div ng-if="singlePaySlip">
+</select><!--ng-if="singlePaySlip"-->
+<div >
 	<table class="table table-hover table-responsive table-bordered">
-				<tr>
-					<th>Staff Id</th>
-					<td>{{modalOptions.viewPayslip.staff_id}}</td>
-					<th>Gross Salary</th>
-					<td>{{modalOptions.viewPayslip.salary}}</td>
-				</tr>
-				<tr >
-					<th>Name</th>
-					<td>{{modalOptions.viewPayslip.name}}</td>
-					<th>Working Days</th>		
-					<td>{{singlePaySlip.description.working_day}}</td>
-				</tr>
-				<tr>
-					<th>Date</th>
-					<td>{{modalOptions.viewPayslip.date}}</td>
-					<th>Unaid Leaves</th>
-					<td>{{singlePaySlip.description.unpaid_leaves}}</td>
-				</tr>
-				<tr >
-					<th>Salary of the Month </th>
-					<td>{{modalOptions.myFunction(modalOptions.viewPayslip.date)}}</td>
-					<th>Paid Leaves</th>	
-					<td>{{singlePaySlip.description.paid_leaves}}</td>
-				</tr>
-				<tr>
-					<th>Current Month Salary</th>
-					<td>{{singlePaySlip.description.cms}}</td>
-					<th>Payable Days</th>
-					<td>{{singlePaySlip.description.payable_day}}</td>	
-
-				</tr>				
+		<tr>
+			<th>Staff Id</th>
+			<td>{{modalOptions.viewPayslip.staff_id}}</td>
+			<th>Gross Salary</th>
+			<td>{{modalOptions.viewPayslip.salary}}</td>
+		</tr>
+		<tr>
+			<th>Name</th>
+			<td>{{modalOptions.viewPayslip.name}}</td>
+			<th>Working Days</th>		
+			<td>{{singlePaySlip.description.working_day}}</td>
+		</tr>
+		<tr>
+			<th>Date</th>
+			<td>{{modalOptions.viewPayslip.date}}</td>
+			<th>Unaid Leaves</th>
+			<td>{{singlePaySlip.description.unpaid_leaves}}</td>
+		</tr>
+		<tr>
+			<th>Salary of the Month </th>
+			<td>{{modalOptions.myFunction(modalOptions.viewPayslip.date)}}</td>
+			<th>Paid Leaves</th>	
+			<td>{{singlePaySlip.description.paid_leaves}}</td>
+		</tr>
+		<tr>
+			<th>Current Month Salary</th>
+			<td>{{singlePaySlip.description.cms}}</td>
+			<th>Payable Days</th>
+			<td>{{singlePaySlip.description.payable_day}}</td>	
+		</tr>				
 	</table>
 	
-		<table class="table table-hover table-responsive table-bordered">
-				<tr>
-					<th>Description</th>
-					<th>Earning</th>
-					<th>Description</th>
-					<th>Deduction</th>	
-				</tr>
-				<tr >
-					<th>Basic</th>
-					<td>{{singlePaySlip.description.basic}}</td>
-					<th>PF</th>		
-					<td>{{singlePaySlip.description.pf}}</td>
-				</tr>
-					<tr>
-					<th>DA</th>
-					<td>{{singlePaySlip.description.da}}</td>
-					<th>ESIC</th>
-					<td>{{singlePaySlip.description.esic}}</td>
-				</tr>
-				<tr>
-					<th>HRA</th>
-					<td>{{singlePaySlip.description.hra}}</td>
-					<th>PT</th>
-					<td>{{singlePaySlip.description.pt}}</td>
-				</tr>
-				<tr >
-					<th>CCA</th>
-					<td>{{singlePaySlip.description.cca}}</td>
-					<th></th>	
-					<td></td>
-				</tr>
-				<tr>
-					<th>Conveyance</th>
-					<td>{{singlePaySlip.description.conveyance}}</td>
-					<th></th>
-					<td></td>	
-				</tr>
-				<tr>
-					<th>Gross Salary</th>
-					<td>{{modalOptions.viewPayslip.salary}}</td>
-					<th>Total Deduction</th>
-					<td>{{singlePaySlip.description.td}}</td>
-				</tr>
-				<tr>
-					<th colspan="3">Net Salary Payable</th>
-					<td>{{singlePaySlip.description.nsp}}</td>
-				</tr>
+	<table class="table table-hover table-responsive table-bordered">
+		<tr>
+			<th>Description</th>
+			<th>Earning</th>
+			<th>Description</th>
+			<th>Deduction</th>	
+		</tr>
+		<tr >
+			<th>Basic</th>
+			<td>{{singlePaySlip.description.basic}}</td>
+			<th>PF</th>		
+			<td>{{singlePaySlip.description.pf}}</td>
+		</tr>
+		<tr>
+			<th>DA</th>
+			<td>{{singlePaySlip.description.da}}</td>
+			<th>ESIC</th>
+			<td>{{singlePaySlip.description.esic}}</td>
+		</tr>
+		<tr>
+			<th>HRA</th>
+			<td>{{singlePaySlip.description.hra}}</td>
+			<th>PT</th>
+			<td>{{singlePaySlip.description.pt}}</td>
+		</tr>
+		<tr>
+			<th>CCA</th>
+			<td>{{singlePaySlip.description.cca}}</td>
+			<th></th>	
+			<td></td>
+		</tr>
+		<tr>
+			<th>Conveyance</th>
+			<td>{{singlePaySlip.description.conveyance}}</td>
+			<th></th>
+			<td></td>	
+		</tr>
+		<tr>
+			<th>Gross Salary</th>
+			<td>{{modalOptions.viewPayslip.salary}}</td>
+			<th>Total Deduction</th>
+			<td>{{singlePaySlip.description.td}}</td>
+		</tr>
+		<tr>
+			<th colspan="3">Net Salary Payable</th>
+			<td>{{singlePaySlip.description.nsp}}</td>
+		</tr>
 	</table>
 </div>
 </div>

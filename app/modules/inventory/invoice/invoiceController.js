@@ -12,7 +12,6 @@ define(['app'], function (app) {
 		// Global Data Objects
 		$scope.type = "year";
 		$scope.maxSize = 5;
-		$scope.totalRecords = "";
 		$scope.currentPage = 1;
 		$scope.pageItems = 10;		
 		$scope.currentDate = dataService.currentDate;
@@ -242,6 +241,7 @@ define(['app'], function (app) {
 		})
 		
 		$scope.openModal = function(url , data){
+			console.log(data);
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
@@ -260,7 +260,9 @@ define(['app'], function (app) {
 						generated_date : data.generated_date,
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						particulars:data.particulars,
+						tax : data.tax,
 						remark : data.remark,
+						subtotal : data.subtotal,
 						total_amount : data.total_amount,
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
 					} : {

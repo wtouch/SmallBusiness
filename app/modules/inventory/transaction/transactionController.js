@@ -53,24 +53,6 @@ define(['app'], function (app) {
 		$http.get("modules/inventory/config.json").success(function(response){
 				$scope.inventoryConfig = response;
 			})
-		$scope.today = function() {
-				$scope.date = new Date();
-			};
-		$scope.open = function($event){
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope.opened = ($scope.opened==true)?false:true;
-		};
-		$scope.open1 = function($event){
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope.opened1 = ($scope.opened1==true)?false:true;
-		};
-		$scope.open2 = function($event){
-			$event.preventDefault();
-			$event.stopPropagation();
-			$scope.opened2 = ($scope.opened2==true)?false:true;
-		};
 		
 		$scope.transactionCategory = [];
 		$scope.transactionList = {
@@ -93,7 +75,7 @@ define(['app'], function (app) {
 					name:'type',
 					enableSorting: false,
 					filterHeaderTemplate: '<select id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams);grid.appScope.transactionCategory = grid.appScope.inventoryConfig[type]" ng-model="type">'
-							+'<option value="" selected>type</option>'
+							+'<option value="" selected>Type</option>'
 							+'<option value="expense">Expense</option>'
 							+'<option value="income">Income</option>'
 							+'<option value="transfer">Transfer</option>'
@@ -116,12 +98,12 @@ define(['app'], function (app) {
 					
 				{ name:'description',
 				enableSorting: false, visible : false,enableFiltering: false,
-					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="description" placeholder="description">',
+					filterHeaderTemplate: '<input id="description" class="form-control" ng-change="grid.appScope.filter(\'description\', description, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="description" placeholder="Description">',
 					cellTemplate: '<span ng-repeat=" x in row.entity.description">{{x}}</span>'
 					},
 				{ name:'date',
 				enableSorting: true, enableFiltering: false,
-					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="date" placeholder="date">',
+					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'transaction\', \'transactionList\',true, grid.appScope.transactionParams)" ng-model="date" placeholder="Date">',
 				},
 				{ name:'credit_amount',
 					filterHeaderTemplate: '<input id="credit_amount" class="form-control" ng-change="grid.appScope.filter(\'credit_amount\', credit_amount, \'transaction\', \'transactionList\',true,grid.appScope.transactionParams)" ng-model="credit_amount" placeholder="Credit Amount">',
@@ -167,11 +149,8 @@ define(['app'], function (app) {
 		
 		$scope.$watch(function(){ return $scope.transactionList.data},function(newValue){
 			if(angular.isArray(newValue)){
-				if(newValue.length >= 1){
-					
-					$scope.verticalSum($scope.transactionList.data, 'credit_amount', 'totalCredit');
-					$scope.verticalSum($scope.transactionList.data, 'debit_amount', 'totalDebit');
-				}
+				$scope.verticalSum($scope.transactionList.data, 'credit_amount', 'totalCredit');
+				$scope.verticalSum($scope.transactionList.data, 'debit_amount', 'totalDebit');
 			}
 		})
 		//Add Income form pop up 
@@ -451,7 +430,6 @@ define(['app'], function (app) {
 		$scope.setTransactionDate = function(transfer){
 			$scope.transactionParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
 			+"'"];
-			console.log($scope.transactionParams);
 			$scope.getData(false, $scope.currentPage, "transaction", "transactionList", $scope.transactionParams);
 		}
 		
@@ -508,7 +486,6 @@ define(['app'], function (app) {
 		}
 		
 		$scope.calcDuration = function(type, duration){
-			console.log(type, duration);
 			var curDate = new Date();
 			if(type == 'custom'){
 				var dateS = new Date(duration.start);
@@ -522,15 +499,17 @@ define(['app'], function (app) {
 				var endtDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + (dateS.getDate() + 1);
 			}
 			if(type == 'month'){
+				console.log(duration);
 				duration = parseInt(duration);
 				var today = new Date();
 				var start = new Date(today.getFullYear(), (duration - 1), 1);
-				var endt = new Date(today.getFullYear(), (duration - 1) + 1, 0);
+				var endt = new Date(today.getFullYear(), (duration - 1) + 1, -1);
 				
 				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
 				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate() + 1);
 			}
 			if(type == 'year'){
+				console.log(duration);
 				duration = parseInt(duration);
 				var today = new Date();
 				var start = new Date(duration, 3, 1);

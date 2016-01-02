@@ -1,3 +1,5 @@
+<form class="form-horizontal" name="qualificationForm" role="form" ng-submit="qualificationForm.$valid" novalidate="novalidate">
+
 <div class="modal-body">
 <div ng-init="modalOptions.addstaff.qualification = (modalOptions.addstaff.qualification) ? modalOptions.addstaff.qualification : []">
 	<div class="table-responsive">
@@ -14,44 +16,44 @@
 			<tbody><div>{{modalOptions.singleparticular}}</div>
 				<tr>
 					<td>
-						<input type="text" class="form-control " placeholder="Exam Name" id="exam" name="exam" ng-model="modalOptions.singleparticular.exam" ng-pattern="/^[a-zA-Z/ ]*$/"/>
-						 <span class="text-danger"  ng-show="addstaffForm.exam.$error.pattern">Text is required.</span>
-						<span class="help-block" ng-show="addstaffForm.exam.$dirty && addstaffForm.exam.$invalid">
-							<span class="text-danger" ng-show="addstaffForm.exam.$error.required">Required Field.</span>
+						<input type="text" class="form-control " placeholder="Exam Name" id="exam" name="exam" ng-model="modalOptions.addstaff.qualification.exam" ng-pattern="/^[a-zA-Z/ ]*$/"/>
+						 <span class="text-danger"  ng-show="qualificationForm.exam.$error.pattern">Text is required.</span>
+						<span class="help-block" ng-show="qualificationForm.exam.$dirty && qualificationForm.exam.$invalid">
+							<span class="text-danger" ng-show="qualificationForm.exam.$error.required">Required Field.</span>
 						</span>
 					</td>
 					<td>
-						<input type="text" class="form-control " placeholder="University" id="university" name="university" ng-model="modalOptions.singleparticular.university" ng-pattern="/^[a-zA-Z/ ]*$/" />
-						<span class="text-danger"  ng-show="addstaffForm.university.$error.pattern">Text is required.</span>
-						<span class="help-block" ng-show="addstaffForm.university.$dirty && addstaffForm.university.$invalid">
-							<span class="text-danger" ng-show="addstaffForm.university.$error.required">Required Field.</span>
+						<input type="text" class="form-control " placeholder="University" id="university" name="university" ng-model="modalOptions.addstaff.qualification.university" ng-pattern="/^[a-zA-Z/ ]*$/" />
+						<span class="text-danger"  ng-show="qualificationForm.university.$error.pattern">Text is required.</span>
+						<span class="help-block" ng-show="qualificationForm.university.$dirty && qualificationForm.university.$invalid">
+							<span class="text-danger" ng-show="qualificationForm.university.$error.required">Required Field.</span>
 						</span>
 					</td>
 					<td>
-						<input type="text" class="form-control " placeholder="Percentage" id="percentage" name="percentage" ng-model="modalOptions.singleparticular.percentage" ng-pattern="/^\d{0,9}[0-9]$/" />
-						 <span ng-show="addstaffForm.percentage.$error.pattern && (addstaffForm.percentage.$dirty || submitted)" class="text-danger">Please enter number</span>
-						<span class="help-block" ng-show="addstaffForm.percentage.$dirty && addstaffForm.percentage.$invalid">
-							<span class="text-danger" ng-show="addstaffForm.percentage.$error.required">Required Field.</span>
+						<input type="text" class="form-control " placeholder="Percentage" id="percentage" name="percentage" ng-model="modalOptions.addstaff.qualification.percentage" ng-pattern="/^\d{0,9}[0-9]$/" />
+						 <span ng-show="qualificationForm.percentage.$error.pattern && (qualificationForm.percentage.$dirty || submitted)" class="text-danger">Please enter number</span>
+						<span class="help-block" ng-show="qualificationForm.percentage.$dirty && qualificationForm.percentage.$invalid">
+							<span class="text-danger" ng-show="qualificationForm.percentage.$error.required">Required Field.</span>
 						</span>
 					</td>
 			
 					<td>
-						<input type="text" class="form-control " placeholder="Year" id="year" name="year" ng-model="modalOptions.singleparticular.year" ng-pattern="/^\d{0,9}[0-9]$/" />
+						<input type="text" class="form-control " placeholder="Year" id="year" name="year" ng-model="modalOptions.addstaff.qualification.year" ng-pattern="/^\d{0,9}[0-9]$/" />
 
-						 <span ng-show="addstaffForm.year.$error.pattern && (addstaffForm.year.$dirty || submitted)" class="text-danger">Please enter number</span>
-						<span class="help-block" ng-show="addstaffForm.year.$dirty && addstaffForm.year.$invalid">
-							<span class="text-danger" ng-show="addstaffForm.year.$error.required">Required Field.</span>
+						 <span ng-show="qualificationForm.year.$error.pattern && (qualificationForm.year.$dirty || submitted)" class="text-danger">Please enter number</span>
+						<span class="help-block" ng-show="qualificationForm.year.$dirty && qualificationForm.year.$invalid">
+							<span class="text-danger" ng-show="qualificationForm.year.$error.required">Required Field.</span>
 						</span>	
 					</td>
 		
 					<td>
-					<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addstaff.qualification,'singleparticular', modalOptions);">+</button>
+					<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addstaff.qualification,'addstaff.qualification.', modalOptions);">+</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-</div> 
+</div> {{modalOptions.addstaff.qualification}}
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -74,4 +76,4 @@
 			</tbody>
 		</table>
 </div>	
-		
+</form>
