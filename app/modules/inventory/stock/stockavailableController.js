@@ -19,18 +19,46 @@ define(['app'], function (app) {
 		console.log('Hello');
 		//$scope.stockList = {};
 		
+		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
+					//console.log(table, searchColumn, searchValue);
+					var locationParams = {
+						search : {},
+						cols : ["*"],
+						status : 1,
+						user_id : $rootScope.userDetails.id
+					};
+					locationParams.search[searchColumn] = searchValue;
+					return dataService.get(false, 'stock_items', locationParams).then(function(response){
+						if(response.status == 'success'){
+							return response.data;
+						}else{
+							return [];
+						}
+					}); 
+				},
+				$scope.assignData = function(object, formObject){
+					formObject.goods_name = object.goods_name;
+					formObject.goods_type = object.goods_type;
+					formObject.price = object.price;
+					formObject.quantity = 1;
+					formObject.category = object.category;
+				},
+		
+		
 		$rootScope.moduleMenus = [
 			{
 				name : "Available Stock",
-				path : "#/dashboard/inventory/stockavailable"
+				path : "#/dashboard/inventory/stockavailable",
+				Subtitle : "Available Stock"
 			},
 			{
 				name : "Stock Master",
-				path : "#/dashboard/inventory/stock"
+				path : "#/dashboard/inventory/stock",
+				Subtitle : "Stock Master"
 			}
 		]
-		$scope.stock = ($scope.stock)?
-		$scope.stock:{
+		$scope.addstock = ($scope.addstock)?
+		$scope.addstock:{
 			user_id : $rootScope.userDetails.id,
 			stockdate : dataService.sqlDateFormate(false,"datetime"),
 			modified_date : dataService.sqlDateFormate(false,"datetime"),
@@ -39,7 +67,7 @@ define(['app'], function (app) {
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							$scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams);
-							$scope.stock = {
+							$scope.addstock = {
 								user_id : $rootScope.userDetails.id,
 								stockdate : dataService.sqlDateFormate(false,"datetime"),
 								modified_date : dataService.sqlDateFormate(false,"datetime"),};
@@ -47,14 +75,13 @@ define(['app'], function (app) {
 					})
 			},
 		$scope.updateData = function(table, input, id){
-					console.log(table, input, id);
-						
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){ 
-							$scope.stock = {
+							/* $scope.addstock = {
 								user_id : $rootScope.userDetails.id,
 								stockdate : dataService.sqlDateFormate(false,"datetime"),
-								modified_date : dataService.sqlDateFormate(false,"datetime")};
+								modified_date : dataService.sqlDateFormate(false,"datetime")
+							}; */
 								$scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams);
 						}
 					})

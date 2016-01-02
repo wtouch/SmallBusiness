@@ -211,13 +211,13 @@ define(['app'], function (app) {
 		};
 		
 		$scope.callbackColChange = function(response){
-			console.log(response);
+			//console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "invoice", "invoiceList", $scope.invoiceParams);
 			}
 		}
 		$scope.callbackColChange1 = function(response){
-			console.log(response);
+			//console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "quotation", "quotationList", $scope.quotationParams);
 			}
@@ -241,7 +241,6 @@ define(['app'], function (app) {
 		})
 		
 		$scope.openModal = function(url , data){
-			console.log(data);
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
@@ -288,7 +287,6 @@ define(['app'], function (app) {
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					},
 				postData : function(table, input){
-					console.log(table, input);
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							// For Insert each item from particulars into Stock Table

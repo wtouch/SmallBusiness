@@ -53,7 +53,7 @@ define(['app'], function (app) {
 								user_id : $rootScope.userDetails.id,
 								stockdate : dataService.sqlDateFormate(false,"datetime"),
 								modified_date : dataService.sqlDateFormate(false,"datetime")};
-								$scope.getData(false, $scope.currentPage, 'stock','stockList',$scope.stockParams);
+								$scope.getData(false, $scope.currentPage, 'stock_items','stockList',$scope.stockParams);
 						}
 					})
 				},

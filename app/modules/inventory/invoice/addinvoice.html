@@ -38,8 +38,6 @@
 						<thead>
 							<tr>
 								<th>Particular Name</th>
-								<th>Type</th>
-								<th>Category</th>
 								<th>Price</th>
 								<th>Quantity</th>
 								<th>Amount</th>
@@ -60,34 +58,10 @@
 								<script type="text/ng-template" id="customTemplate.html">
 									<a>
 										<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
-										<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
+										<span><small> ({{match.model.goods_type}} - {{match.model.category}})</small></span>
 									</a>
 								</script>
 							
-								<td>			
-									<select id="goods_type" class="form-control" placeholder="Type" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type" required>
-										<option value="" selected>Type</option>
-										<option value="type1" >Type1</option>
-										<option value="type2">Type2</option>
-										<option value="type3">Type3</option>
-										<option value="type4">Type4</option>
-									</select>
-									<span class="help-block" ng-show="addInvoiceForm.goods_type.$dirty && addInvoiceForm.goods_type.$invalid">
-										<span ng-show="addInvoiceForm.goods_type.$error.required" class="text-danger">Required field.</span>
-									</span>
-								</td>
-								<td>
-									<select id="category" class="form-control" name="category" placeholder="Category" ng-model="modalOptions.singleparticular.category" required>
-										<option value="" selected>Category</option>
-										<option value="category1">Category1</option>
-										<option value="category2">Category2</option>
-										<option value="category3">Category3</option>
-										<option value="category4">Category4</option>
-									</select>
-									<span class="help-block" ng-show="addInvoiceForm.category.$dirty && addInvoiceForm.category.$invalid">
-										<span ng-show="addInvoiceForm.category.$error.required" class="text-danger">Required field.</span>
-									</span>	
-								</td>
 								<td>
 									<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
 									ng-init="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
@@ -137,7 +111,7 @@
 					</table>
 				</div>
 				<div class="col-sm-4">
-						<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars,'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions,'addinvoice');isCollapsed1=!isCollapsed1">+Add This Particular</button>							
+						<button type="submit" class="btn btn-success center" ng-disabled="addInvoiceForm.$invalid"  ng-click="modalOptions.addToObject(modalOptions.addinvoice.particulars,'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions,'addinvoice');isCollapsed1 = !isCollapsed1">+Add This Particular</button>							
 				</div>
 			</form>
 		</div>

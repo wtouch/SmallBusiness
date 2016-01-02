@@ -93,6 +93,8 @@ define(['app'], function (app) {
 				},
 				{ name:'paid_amount',width:90,enableSorting: false,enableFiltering: false,
 				},
+				/* { name:'due_amount',width:100,enableSorting: false,enableFiltering: false,
+				}, */
 				{ name:'due_amount',width:100,enableSorting: false,enableFiltering: false,
 				cellTemplate :'<span>{{row.entity.due_amount}}</span>'
 				},
