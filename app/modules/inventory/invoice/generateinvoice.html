@@ -19,7 +19,7 @@
 			</div>
 			
 			<div class="col-sm-4">
-			<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
+				<label  for="generated_date" class="col-sm-2 control-label">Generate Date *</label>
 				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="generated_date" name="generated_date" ng-model="modalOptions.genarateinvoice.generated_date"  
 				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.genarateinvoice.generated_date = modalOptions.date"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
 			</div>
@@ -38,8 +38,6 @@
 						<thead>
 							<tr>
 								<th>Particular Name</th>
-								<th>Type</th>
-								<th>Category</th>
 								<th>Price</th>
 								<th>Quantity</th>
 								<th>Amount</th>
@@ -49,35 +47,11 @@
 						<tbody>
 							<tr>
 								<td>
-									<input type="text" class="form-control " placeholder="Particular Name" id="particular_name" name="particular_name" ng-model="modalOptions.singleparticular.particular_name" required/>
+									<input type="text" class="form-control " placeholder="Particular Name" id="particular_name" name="particular_name" ng-model="modalOptions.singleparticular.goods_name" required/>
 									<span class="help-block" ng-show="genarateinvoiceForm.particular_name.$dirty && genarateinvoiceForm.particular_name.$invalid">
-									<span ng-show="genarateinvoiceForm.particular_name.$error.required" class="text-danger">particular_name Required.</span>
+									<span ng-show="genarateinvoiceForm.particular_name.$error.required" class="text-danger">particular name Required.</span>
 									</span>
 								</td>	
-								<td>			
-									<select id="goods_type" class="form-control" placeholder="Type" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type" required>
-										<option value="" selected>Type</option>
-										<option value="type1" >Type1</option>
-										<option value="type2">Type2</option>
-										<option value="type3">Type3</option>
-										<option value="type4">Type4</option>
-									</select>
-									<span class="help-block" ng-show="genarateinvoiceForm.goods_type.$dirty && genarateinvoiceForm.goods_type.$invalid">
-										<span ng-show="genarateinvoiceForm.goods_type.$error.required" class="text-danger">Required field.</span>
-									</span>
-								</td>
-								<td>
-									<select id="category" class="form-control" name="category" placeholder="Category" ng-model="modalOptions.singleparticular.category" required>
-										<option value="" selected>Category</option>
-										<option value="category1">Category1</option>
-										<option value="category2">Category2</option>
-										<option value="category3">Category3</option>
-										<option value="category4">Category4</option>
-									</select>
-									<span class="help-block" ng-show="genarateinvoiceForm.category.$dirty && genarateinvoiceForm.category.$invalid">
-										<span ng-show="genarateinvoiceForm.category.$error.required" class="text-danger">Required field.</span>
-									</span>	
-								</td>
 								<td>
 									<input type="text" class="form-control " placeholder="price" id="price" name="price" ng-model="modalOptions.singleparticular.price"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/"
 									ng-init="modalOptions.singleparticular.price = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"
@@ -150,7 +124,7 @@
 		<tbody>
 			<tr ng-repeat="x in modalOptions.genarateinvoice.particulars">
 				<td>{{ $index + 1 }}</td>
-				<td>{{x.particular_name}}</td>
+				<td>{{x.goods_name}}</td>
 				<td>{{x.goods_type}}</td>
 				<td>{{x.category}}</td>
 				<td class="text-right">{{x.price}}</td>
