@@ -20,9 +20,15 @@ class dbHelper {
 	private $mailPort;
     function __construct() {
 	
+	
+	
         $dsn = 'mysql:host='.DB_HOST.';dbname='.DB_NAME;
         try {
             $this->db = new PDO($dsn, DB_USERNAME, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+			
+			$this->db->setAttribute(\PDO::ATTR_TIMEOUT, 600); // 10 mins
+			$this->db->setAttribute(\PDO::ATTR_PERSISTENT, true);
+			
         } catch (PDOException $e) {
             $response["status"] = "error";
             $response["message"] = 'Connection failed: ' . $e->getMessage();

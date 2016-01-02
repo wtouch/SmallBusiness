@@ -15,11 +15,10 @@
 		<script src="{{ path }}js/angular.min.js"></script>
 		<script src="{{ path }}js/angular-route.min.js"></script>
 		<script src="{{ path }}js/script.js"></script>
-		<script src="{{ path }}js/myscript.js"></script>
 		<title>{{seo.title}} | {{data.business_name}}</title>
 		<meta name="description" content="{{ seo.description }}">
 		<meta name="keywords" content="{{ seo.keywords }}">
-		{% if data.template_params %}
+		 <!-- {% if data.template_params %}
 			<style>	
 				a:hover,.btn.btn-link:hover{
 					color :  {{data.template_params.color}};	
@@ -58,7 +57,7 @@
 					background: linear-gradient({{data.template_params.dark_color}}, {{data.template_params.background_color_dark}});
 				}
 			</style>
-		{% endif %} 
+		{% endif %} -->  
 	</head>
 	<body>
 		<!-- <div class="sociallinks">
@@ -87,43 +86,36 @@
 		</div>  -->
 		<header>
 			<div class="container">
-				<div class="col-xs-3">
-					<div class="logo">
-						<img class="logo" src="{{data.business_logo.file_relative_path}}">
+				<div class="row">
+					<div class="col-xs-3">
+						<div class="logo">
+							<img class="logo" src="{{data.business_logo.file_relative_path}}">
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-9">
-				
-					
-				
-				
-					<div class="heading text-center one">
-						<!-- <h1>{{data.business_name}}</h1>
-						{% if data.business_info.tagline %}
-							<p>{{data.business_info.tagline}}</p>
-						{% endif %} -->
-						
-						
-					</div>
-					<div class="two">
-						<br/><br/>
-						<p class="cnct text-left"> <strong>Address :</strong> {{data.contact_profile.address}}
-						<br/><strong>Website :</strong> {{data.contact_profile.contact_website}}, <br/> <strong>Contact :</strong> 
-						{% if data.contact_profile.mobile %}
-							{{data.contact_profile.mobile}} 
-						{% endif %}
-						{% if data.contact_profile.alternate_telephone %}
-							,{{data.contact_profile.alternate_telephone}} 
-						{% endif %}</p>
+					<div class="col-xs-9">
+						<div class="heading text-center one">
+							<!-- <h1>{{data.business_name}}</h1>
+							{% if data.business_info.tagline %}
+								<p>{{data.business_info.tagline}}</p>
+							{% endif %} -->
+						</div>
+						<div class="two">
+							<br/><br/>
+							<p class="cnct text-right"> <strong>Address :</strong> {{data.contact_profile.address}}
+							<br/><strong>Website :</strong> {{data.contact_profile.contact_website}}, <br/> <strong>Contact :</strong> 
+							{% if data.contact_profile.mobile %}
+								{{data.contact_profile.mobile}} 
+							{% endif %}
+							{% if data.contact_profile.alternate_telephone %}
+								,{{data.contact_profile.alternate_telephone}} 
+							{% endif %}</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</header>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 ">
-			<nav class="navbar navbar-default"> 
-			<div>
+		<nav class="navbar navbar-default"> 
+			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span>
@@ -143,19 +135,10 @@
 				</div><!-- /.navbar-collapse -->
 			</div>
 		</nav>
-		</div>
-		</div>
-		</div>
-	
 		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 ">
-					{%if modules.headerModule.carousal %}
-					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-					
-				</div>
-			</div>
+			{%if modules.headerModule.carousal %}
+				{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+			{%endif%}
 			<div class="row">
 				<div class="{{ (modules.sidebarModule >=1 ) ? 'col-sm-push-4 col-md-push-3 col-xs-12 col-sm-8 col-md-9' : 'col-xs-12 col-sm-12 col-md-12 ' }}">
 					{% include contentPath %}

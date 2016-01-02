@@ -4,6 +4,7 @@ jQuery(document).ready(function() {
 	jQuery(".subimgs").click(function(){
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
 	})
+	
 });
 
 $(document).ready(function(){
