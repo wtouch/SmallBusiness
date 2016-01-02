@@ -1,12 +1,12 @@
 <div class="modal-header">
-	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3 class="text-center">View Payment Slip</h3>
 </div>
 <div class="modal-body" ng-init="modalOptions.getData(false, false,'transaction', 'transactionList', modalOptions.paysalaryParams, modalOptions)">
-{{singlePaySlip.description}}
-	<label for="select type"control-label">Select Date*</label>
+
+<label for="select type"control-label">Select Date*</label>
 <select ng-model="singlePaySlip" ng-options="item as item.date for item in modalOptions.transactionList">
-</select><!--ng-if="singlePaySlip"-->
+</select>
 <div >
 	<table class="table table-hover table-responsive table-bordered">
 		<tr>
@@ -41,7 +41,7 @@
 		</tr>				
 	</table>
 	
-	<table class="table table-hover table-responsive table-bordered">
+	<table class="table table-hover table-responsive table-bordered" ng-init="modalOptions.getData(false, false,'transaction','transactionList', modalOptions.paysalaryParams, modalOptions)">
 		<tr>
 			<th>Description</th>
 			<th>Earning</th>

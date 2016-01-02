@@ -6,8 +6,7 @@
 
 <div class="modal-body">
 <form class="form-horizontal" name="addleaveForm" role="form" ng-submit="addleaveForm.$valid" novalidate="novalidate">
-<!-- {{modalOptions.addleave}} -->
-		<div class="form-group">
+		<div class="form-group">{{modalOptions.addleave}}
 			<label for="name" class="col-sm-2 control-label">Approved By *</label>
 			<div class="col-sm-4">
 				<input type="text" id="name" class="form-control" name="name" placeholder="Name" ng-pattern="/^[a-zA-Z/ . ]*$/" ng-model="modalOptions.addleave.approved_by"required>
@@ -51,8 +50,7 @@
 				</div>
 			</div>
 		</div>
-	
-					
+			
 		<div class="form-group">
 		<label for="name" class="col-sm-2 control-label">Reason</label>
 			<div class="col-sm-4">
@@ -86,8 +84,8 @@
 			<div class="radio col-sm-2"><!-- {{otherLeaves}} -->
 			<label><input type="radio" name="leave" value="true" ng-click="otherLeaves = true">No of Days</label>
 			<input type="text" id="leave" class="form-control" ng-hide="!otherLeaves" ng-if="otherLeaves"  ng-model="modalOptions.addleave.leaves_for" name="leave" placeholder="No of Days" required />
-		<span class="help-block" ng-show="addleaveForm.leave.$dirty && addleaveForm.leave.$invalid">
-		<span ng-show="(addleaveForm.leave.$dirty)" class="text-danger">Enter Number Only!</span></span>
+				<span class="help-block" ng-show="addleaveForm.leave.$dirty && addleaveForm.leave.$invalid">
+				<span ng-show="(addleaveForm.leave.$dirty)" class="text-danger">Enter Number Only!</span></span>
 			</div>
 			
 		</div>

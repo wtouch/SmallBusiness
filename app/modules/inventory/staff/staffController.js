@@ -149,9 +149,8 @@ define(['app'], function (app) {
 					} ,
 					cellTemplate : '<a ng-click="grid.appScope.openSalary(\'modules/inventory/staff/salary.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="Salary" > <span class="	glyphicon glyphicon-usd" ></span></a>'
 					+
-					'<a ng-click="grid.appScope.openPayslip(\'modules/inventory/staff/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="viewpayslip" > <span class="glyphicon glyphicon-eye-open" ></span></a>'
+					'<a ng-click="grid.appScope.openPayslip(\'modules/inventory/staff/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="viewpayslip"> <span class="glyphicon glyphicon-eye-open" ></span></a>'
 					+'<a ng-click="grid.appScope.openViewleaves(\'modules/inventory/staff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
-					
 					
 					+ '<a ng-click="grid.appScope.openModal(\'modules/inventory/staff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
 					+'<a ng-click="grid.appScope.openViewattendance(\'modules/inventory/staff/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
@@ -303,8 +302,7 @@ define(['app'], function (app) {
 						where : {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
-								staff_id:data.staff_id
-						
+							staff_id : data.staff_id
 						},
 						cols : ["*"]
 					}
@@ -335,8 +333,7 @@ define(['app'], function (app) {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
 							reference_id : data.id,
-							type : "salary" // staff_dr
-							//category : "" // salary
+							type : "staff_debit" 
 						},
 						cols : ["*"]
 					},
@@ -389,6 +386,7 @@ define(['app'], function (app) {
 					})
 				},
 				
+				
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 				
@@ -412,21 +410,32 @@ define(['app'], function (app) {
 					user_id : $rootScope.userDetails.id,
 					status:1
 				},
+				
+				staffleavesParams : {
+					where : {
+						status : 1,
+						user_id : $rootScope.userDetails.id,
+						staff_id : data.staff_id,
+						//type : "Unpaid" // staff_dr
+						
+					},
+					cols : ["*"]
+				},
 			
-					getBalance : function(accountId, modalOptions) {
-					//console.log(accountId, modalOptions);
-					var accountParams = {
-						where : {
-							user_id : $rootScope.userDetails.id,
-							status : 1,
-							account_id : accountId
-						},
-						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
-					}
-					dataService.get(false,'transaction', accountParams).then(function(response) {
-						console.log(response);
-						modalOptions.previous_balance = response.data[0].previous_balance;
-					})
+				getBalance : function(accountId, modalOptions) {
+				//console.log(accountId, modalOptions);
+				var accountParams = {
+					where : {
+						user_id : $rootScope.userDetails.id,
+						status : 1,
+						account_id : accountId
+					},
+					cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
+				}
+				dataService.get(false,'transaction', accountParams).then(function(response) {
+					console.log(response);
+					modalOptions.previous_balance = response.data[0].previous_balance;
+				})
 					
 				},
 				payableDays : function(modalOptions){
