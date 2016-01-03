@@ -110,7 +110,7 @@ define([], function () {
 
             resolveDependencies = function ($q, $rootScope, dependencies) {
                 var defer = $q.defer();
-                require(dependencies, function () {
+                requirejs(dependencies, function () {
                     defer.resolve();
                     $rootScope.$apply()
                 });
