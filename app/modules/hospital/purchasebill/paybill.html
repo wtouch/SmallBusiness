@@ -4,7 +4,6 @@
 	</div>
 	<div class="modal-body">
 	<form name="payBillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="payBillForm.$valid">
-	{{modalOptions.payBill}}
 			<div class="form-group">
 				<label  for="pay_date" class="col-sm-2 control-label">Date</label>
 					<div class="col-sm-9">
@@ -12,7 +11,6 @@
 						ng-init="modalOptions.payBill.date = modalOptions.date"  ng-required="true" close-text="Close" readonly />
 					</div>						
 			</div>
-
 			<div class="form-group">
 				<label for="account" class="col-sm-2 control-label">Account Name*</label>
 				<div class="col-sm-9">
@@ -24,14 +22,12 @@
 					</span>	
 				</div>
 			</div>
-			
 			<div class="form-group" ng-if="modalOptions.previous_balance">
 				<label for="previous_amount" name="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
 				<div class="col-sm-9">
 					<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" ng-init="modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payBill.debit_amount, modalOptions)" disabled class="form-control"/>		
-					</div>
+				</div>
 			</div>
-			
 			<div class="form-group">
 				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
 					<div class="col-sm-9">
@@ -47,7 +43,6 @@
 						</span>	
 					</div>
 			</div> 
-			
 			<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'DD'|| modalOptions.payBill.description.payment_type.type == 'Net Banking'  " >
 			<label for="refferance no" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
 			
@@ -112,7 +107,7 @@
 			</div>
 		<div class="form-group modal-footer">
 			<div class="col-sm-11">
-				<button type="submit" class="btn btn-success"  ng-disabled="payBillForm.$invalid" ng-click="modalOptions.postData('transaction', modalOptions.payBill); modalOptions.ok()">Pay Bill</button>
+				<button type="submit" class="btn btn-success"  ng-disabled="payBillForm.$invalid" ng-click="modalOptions.postData('transactions', modalOptions.payBill); modalOptions.ok()">Pay Bill</button>
 				<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 			</div>
 		</div>	

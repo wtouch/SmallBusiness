@@ -40,7 +40,6 @@ define(['app'], function (app) {
 				SubTitle :"admission List"
 			}
 		]
-		
 		$scope.admission = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -50,7 +49,6 @@ define(['app'], function (app) {
 					enableSorting: false,
 					enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
-					
 				},
 				{
 				    name:'patient_name',width:150,

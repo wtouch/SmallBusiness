@@ -31,11 +31,6 @@ define(['app'], function (app) {
 						return $scope.openModal("modules/hospital/purchasebill/addbill.html");
 					}
 				}
-			},
-			{
-				name : "Purchase Bill",
-				path : "#/dashboard/hospital/bill",
-				SubTitle :"Purchase Order"
 			}
 		]
 		var rowtpl='<div ng-class="{ \'my-css-class\': grid.appScope.rowFormatter( row ),\'text-success\':(row.entity.payment_status==1),\'text-danger\':(row.entity.payment_status==0),\'text-warning\':(row.entity.payment_status==2)}">' +
@@ -52,10 +47,6 @@ define(['app'], function (app) {
 					enableSorting: false, enableFiltering: false,
 					cellTemplate : "<div class=\'ui-grid-cell-contents ng-binding ng-scope\'>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</div>",
 					
-				},
-				
-				{ name:'bill_id', width:70,enableSorting: false, enableFiltering: true,
-					filterHeaderTemplate: '<input id="bill_id" class="form-control" ng-change="grid.appScope.filter(\'bill_id\', bill_id, \'stock_transaction\', \'billData\',true,grid.appScope.billParams)" ng-model="bill_id" placeholder="Bill No">',
 				},
 				{
 					name:'name',width :110,enableSorting: false,enableFiltering: true,
@@ -146,7 +137,7 @@ define(['app'], function (app) {
 				},
 				cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 			}
-			dataService.get(false,'transaction', accountParams).then(function(response) {
+			dataService.get(false,'transactions', accountParams).then(function(response) {
 				modalOptions.previous_balance = response.data[0].previous_balance;
 			})	
 		}		
@@ -166,8 +157,8 @@ define(['app'], function (app) {
 					due_date : data.due_date,
 					due_amount : data.due_amount,
 					total_amount : data.total_amount,
+					goods_name : data.goods_name,
 					remark : data.remark,
-					particular : data.particular,
 					modified_date : dataService.sqlDateFormate(false,"datetime")
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
@@ -186,7 +177,6 @@ define(['app'], function (app) {
 					due_amount : data.due_amount,
 					total_amount : data.total_amount,
 					remark : data.remark,
-					particular : data.particular,
 					modified_date : dataService.sqlDateFormate(false,"datetime")
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
@@ -194,33 +184,12 @@ define(['app'], function (app) {
 					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
 					user_id : $rootScope.userDetails.id
 				},
-				getTypeaheadData : function(table, searchColumn, searchValue){
-					//console.log(table, searchColumn, searchValue);
-					var locationParams = {
-						search : {},
-						cols : ["*"]
-					};
-					locationParams.search[searchColumn] = searchValue;
-					console.log(locationParams);
-					return dataService.get(false, 'stock_transaction', locationParams).then(function(response){
-						console.log(response);
-						if(response.status == 'success'){
-							return response.data;
-						}else{
-							return [];
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
 						}
-					}); 
+					})
 				},
-				assignData : function(object, formObject){
-					formObject.goods_name = object.goods_name;
-					formObject.goods_type = object.goods_type;
-					formObject.price = object.price;
-					formObject.quantity = 1;
-					formObject.amount = object.price*formObject.quantity;
-					formObject.category = object.category;
-					console.log(object);
-				},
-				
 				taxCalculate : function(modalOptions){
 					modalOptions.singleparticular.tax = {};
 					
@@ -239,9 +208,7 @@ define(['app'], function (app) {
 						angular.forEach(value.tax,function(value, key){
 							modalOptions.addBill.tax[key] = (modalOptions.addBill.tax[key]) ? modalOptions.addBill.tax[key] + value : value;
 						})
-						
 					})
-					
 					var taxSubtotal = 0;
 					angular.forEach(modalOptions.addBill.tax, function(value, key){
 						taxSubtotal += value;
@@ -266,7 +233,6 @@ define(['app'], function (app) {
 					object = sqlDate;
 				},
 				getData: $scope.getData,
-				//addToObject : $rootScope.addToObject,
 				addToObject : function(object,data,modalOptions){
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};
@@ -277,62 +243,6 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
-		
-		
-		//Modal for Quotation
-		$scope.openQuotation = function(url,data){
-				var modalDefault = {
-				templateUrl: url, // apply template to modal
-				size : 'lg'
-				};
-			var modalOptions = {
-				date : dataService.sqlDateFormate(),
-				addPurchaseorder : (data) ? {
-					id : data.id,
-					purchase_order_id :data.purchase_order_id,
-					party_id : data.party_id,
-					//user_id : data.user_id,
-					purchase_order_date : data.purchase_order_date,
-					remark : data.remark,
-					particular : data.particular,
-					modified_date : dataService.sqlDateFormate(false,"datetime")
-				} : {
-					date : dataService.sqlDateFormate(false,"datetime"),
-					modified_date : dataService.sqlDateFormate(false,"datetime"),
-					user_id : $rootScope.userDetails.id,
-					status : 1,
-				},
-				
-				postData : function(table, input){
-					$rootScope.postData(table, input,function(response){
-						if(response.status == "success"){
-							// For Insert each item from particulars into Stock Table
-							$scope.getData(false, $scope.currentPage, 'purchase_order','purchaseorderData',$scope.purchaseorderParams);
-						}
-					})
-				},
-				
-				updateData : function(table, input, id){
-					$rootScope.updateData(table, input, id, function(response){
-						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'purchase_order','purchaseorderData',$scope.billParams);
-						}
-					})
-				},
-				
-				getData: $scope.getData,
-				//addToObject : $rootScope.addToObject,
-				addToObject : function(object,data,modalOptions){
-					$rootScope.addToObject(object,modalOptions[data]);
-					modalOptions[data] = {};
-				},
-				
-				removeObject : $rootScope.removeObject
-			};
-			modalService.showModal(modalDefault, modalOptions).then(function(){
-			})
-		}
-		
 		$scope.openPaybill = function(url,data){
 				var modalDefault = {
 				templateUrl: url, // apply template to modal
@@ -396,13 +306,11 @@ define(['app'], function (app) {
 						}
 					})
 				},
-				
 				getData: $scope.getData,
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
-		
 		$scope.openViewbill = function(url,data){
 				var modalDefault = {
 				templateUrl: url, // apply template to modal
@@ -416,7 +324,6 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
-		
 		$scope.openViewreceipt = function(url,data){
 				var modalDefault = {
 				templateUrl: url, // apply template to modal
@@ -435,29 +342,20 @@ define(['app'], function (app) {
 					join:[
 						{
 							joinType : 'INNER JOIN',
-							joinTable : "inventory_party",
+							joinTable : "hospital_party",
 							joinOn : {
-								party_id : "t0.party_id"
+								id : "t0.party_id"
 							},
 							cols : ['name, email, phone, address, location, area, city, state, country, pincode,department']
 						}],
 					cols : ["*"]
 				}:{
-
 				},
 				getData : $scope.getData,
-				
-				
-				
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 			})
 		}
-		
-		
-		
-		
-		
 		$scope.setDate = function(date, days, sql){
 			var curDate = new Date(date);
 			var newDate = curDate.setDate(curDate.getDate() + days);
@@ -471,8 +369,6 @@ define(['app'], function (app) {
 			}
 			return finalDate;
 		}
-		
-		
 		$scope.billParams = {
 			where : {
 				status : 1,
@@ -481,7 +377,7 @@ define(['app'], function (app) {
 			join : [
 				{
 					joinType : 'INNER JOIN',
-					joinTable : "inventory_party",
+					joinTable : "hospital_party",
 					joinOn : {
 						id : "t0.party_id"
 					},
@@ -499,25 +395,6 @@ define(['app'], function (app) {
 				id : "id"
 			},
 			cols : ["*, (t0.total_amount - IFNULL(sum(t2.debit_amount),0)) as due_amount"]
-		}
-		
-        //Params For Purchase order
-		$scope.purchaseorderParams = {
-			where : {
-				status : 1,
-				user_id : $rootScope.userDetails.id
-			},
-			join : [
-				{
-					joinType : 'INNER JOIN',
-					joinTable : "inventory_party",
-					joinOn : {
-						id : "t0.party_id"
-					},
-					cols : {name : "name",party_id: "party_id", user_id :"user_id"}
-				}
-			],
-			cols : ['purchase_order_id,purchase_order_date,remark,particular,total_amount,duration,tax']
 		}
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
