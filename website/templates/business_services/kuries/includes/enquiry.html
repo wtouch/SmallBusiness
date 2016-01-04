@@ -11,7 +11,7 @@
 		
 		<div class="panel-body" ng-controller="enquiryController">
 		<h3 class="subhead">Send Enquiry </h3>
-			<form class="form-inline" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-hide="mailSent" novalidate>
+			<form class="form-horizontal" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-hide="mailSent" novalidate>
 				<div class="form-group">
 						<input type="hidden" class="form-control col-xs-12 col-md-12 col-lg-12" id="user_id" ng-init="enquiry.user_id={{enquiry.user_id}}" ng-model="enquiry.user_id" name="user_id">
 						
@@ -35,12 +35,14 @@
 						{% endif %}
 						</div>
 							<div class="row">
-								<div class="col-xs-12 col-sm-12 col-lg-12">
+								<label class=" col-xs-4 col-sm-2 col-lg-2 ">Name</label>
+								<div class="col-xs-8 col-sm-8 col-lg-8">
 								<input type="text" class="form-control" id="name" ng-model="enquiry.name" name="name" placeholder="Name" ng-required="true" ng-pattern="/^(\D)+$/">
 									<span ng-show="enquiryForm.name.$error.pattern && (enquiryForm.name.$dirty)" class="text-danger">Enter only Alphabets!</span>
 									<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
 								</div>
-								<div class="col-xs-12 col-sm-12 col-lg-12">
+								<label class=" col-xs-4 col-sm-2 col-lg-2 ">E-mail</label>
+								<div class="col-xs-8 col-sm-8 col-lg-8">
 								<input type="hidden" class="form-control" id="from" name="from" ng-model="enquiry.from_email.from" ng-init="enquiry.from_email.from = 'admin@apnasite.in'">
 								<input type="email" class="form-control" id="from" name="from" placeholder="E-mail" ng-model="enquiry.to_email.replyTo" required>
 								<span  ng-show="enquiryForm.from.$dirty && enquiryForm.from.$invalid">
@@ -48,14 +50,16 @@
 									<span class="text-danger" ng-show="enquiryForm.from.$error.email">Invalid Email address.</span>
 								</span>
 							</div>
-						<div class="col-xs-12 col-sm-12 col-lg-12">
+						<label class=" col-xs-4 col-sm-2 col-lg-2 ">Phone</label>
+						<div class="col-xs-8 col-sm-8 col-lg-8">
 								<input type="text" class="form-control  " id="phone" ng-model="enquiry.message.phone" name="phone" placeholder="Contact Number"  ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 								<p ng-show="enquiryForm.phone.$error.pattern && (enquiryForm.phone.$dirty || submitted)" class="text-danger" >Enter a valid contact no.</p>
 						</div>	 
 					</div>				
 			
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-lg-12">
+				<label class=" col-xs-4 col-sm-2 col-lg-2 ">Phone</label>
+						<div class="col-xs-8 col-sm-8 col-lg-8">
 							<textarea id="message" name="message" class="form-control" placeholder="Message" rows="3" ng-model="enquiry.message.message" ng-minlength="2" ng-maxlength="356" required></textarea>
 				</div>
 			</div>
