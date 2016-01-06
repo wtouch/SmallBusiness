@@ -59,6 +59,7 @@
 										<label  for="unit">Unit</label><br/>
 												<select id="unit" name="unit"  ng-model="stock.unit"  class="form-control" required>
 												<option value="" selected>Select unit</option>
+												<option value="Numbers">Numbers</option>
 												<option value="Box">Box</option>
 												<option value="Liter">Liter</option>
 												<option value="Kg">Kg</option>
@@ -97,7 +98,7 @@
 		</div>
 	</div>
 	<div class="row">
-		 <div class="col-sm-2">
+		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="page_item" class="control-label" >Page Item</label>
 				<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'stock_items', 'stockList',false)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
@@ -105,13 +106,15 @@
 				</select>
 			</div>
 		</div>
-	</div> 
+	</div>
+	
 	<div class="table  table-hover table-bordered" ng-init="getData(false, currentPage, 'stock_items','stockList',false);getData(false, false, 'party','partyList')">
 	  <div ui-grid="stockList"></div>
 	</div>
+	
 	<div class="text-center">				
 		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'stock_items','stockList',false)"></pagination>
-		<pre>Page: {{currentPage}} / {{numPages}}</pre>
+			<pre>Page: {{currentPage}} / {{numPages}}</pre>
 	</div>
 	</div>
 	</div>

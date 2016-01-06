@@ -124,14 +124,14 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'account','accountList');
+							$scope.getData(false, $scope.currentPage, 'account','accountList', $scope.accountParams);
 						}
 					})
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'account','accountList');
+							$scope.getData(false, $scope.currentPage, 'account','accountList', $scope.accountParams);
 						}
 					})
 				},

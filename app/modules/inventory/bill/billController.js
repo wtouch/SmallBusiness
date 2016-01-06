@@ -239,7 +239,7 @@ define(['app'], function (app) {
 					user_id : data.user_id,
 					bill_date : data.bill_date,
 					due_date : data.due_date,
-					due_amount : data.due_amount,
+					//due_amount : data.due_amount,
 					total_amount : data.total_amount,
 					remark : data.remark,
 					particular : data.particular,
@@ -389,7 +389,6 @@ define(['app'], function (app) {
 					user_id : data.user_id,
 					purchase_order_date : data.purchase_order_date,
 					due_date : data.due_date,
-					due_amount : data.due_amount,
 					total_amount : data.total_amount,
 					remark : data.remark,
 					particular : data.particular,
@@ -600,10 +599,6 @@ define(['app'], function (app) {
 			})
 		}
 		
-		
-		
-		
-		
 		$scope.setDate = function(date, days, sql){
 			var curDate = new Date(date);
 			var newDate = curDate.setDate(curDate.getDate() + days);
@@ -617,7 +612,6 @@ define(['app'], function (app) {
 			}
 			return finalDate;
 		}
-		
 		
 		$scope.billParams = {
 			where : {
@@ -665,6 +659,7 @@ define(['app'], function (app) {
 			],
 			cols : ['*']
 		}
+		
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -703,6 +698,7 @@ define(['app'], function (app) {
 				}
 			});
 		}
+		
 		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
 			if(!params) params = {};
@@ -711,6 +707,7 @@ define(['app'], function (app) {
 				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
 		}
+		
 		$scope.orderBy = function(col, value){
 			if(!$scope.params.orderBy) $scope.params.orderBy = {};
 			$scope.params.orderBy[col] = value;
