@@ -28,250 +28,250 @@
 					<h4 class="text-center">Menus</h4>
 					</div>
 				</div>
-		<form name="websettingsForm" class="form-horizontal clearfix  role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">
-			<div class="bottomspace col-sm-6 panel panel-default">
-				<div class="form-group">
-					<div class="col-sm-5 col-sm-offset-2"> 
-						<div class="bottomspace">
-						<label  for="selectbusiness" class="col-sm-2 control-label">Business</label>
-						<select id="selectBusiness" name="business_name" class="form-control" ng-model="websetting.business_id" ng-change="getMenulist(websetting.user_id, websetting.business_id)" ng-options="item.id as item.business_name for item in businessList">
-							<option value="">Select Business</option>
-						</select>
-						<span class="help-block" ng-show="websettingsForm.business_name.$dirty && websettingsForm.business_name.$invalid">
-							<span ng-show="websettingsForm.business_name.$error.required" class="text-danger">Required Field.</span>
-						</span>	
+				<form name="websettingsForm" class="form-horizontal clearfix  role="form" novalidate="novalidate" ng-submit="websettingsForm.$valid">
+					<div class="bottomspace col-sm-6 panel panel-default">
+						<div class="form-group">
+							<div class="col-sm-5 col-sm-offset-2"> 
+								<div class="bottomspace">
+								<label  for="selectbusiness" class="col-sm-2 control-label">Business</label>
+								<select id="selectBusiness" name="business_name" class="form-control" ng-model="websetting.business_id" ng-change="getMenulist(websetting.user_id, websetting.business_id)" ng-options="item.id as item.business_name for item in businessList">
+									<option value="">Select Business</option>
+								</select>
+								<span class="help-block" ng-show="websettingsForm.business_name.$dirty && websettingsForm.business_name.$invalid">
+									<span ng-show="websettingsForm.business_name.$error.required" class="text-danger">Required Field.</span>
+								</span>	
+								</div>
+							</div>
+							<div class="col-sm-5"> 
+								<div class="bottomspace">
+								<label  for="selectbusiness" class="col-sm-2 control-label">Template</label>
+								<select id="selectTemplate" name="selectTemplate" class="form-control" ng-model="websetting.template_id" ng-options="item.id as item.template_name for item in templateList"> 
+									<option value="">Select Template</option>
+								</select>
+								<span class="help-block" ng-show="websettingsForm.selectTemplate.$dirty && websettingsForm.selectTemplate.$invalid">
+									<span ng-show="websettingsForm.selectTemplate.$error.required" class="text-danger">Required Field.</span>
+								</span>	
+								</div>
+							</div>	
 						</div>
-					</div>
-					<div class="col-sm-5"> 
-						<div class="bottomspace">
-						<label  for="selectbusiness" class="col-sm-2 control-label">Template</label>
-						<select id="selectTemplate" name="selectTemplate" class="form-control" ng-model="websetting.template_id" ng-options="item.id as item.template_name for item in templateList"> 
-							<option value="">Select Template</option>
-						</select>
-						<span class="help-block" ng-show="websettingsForm.selectTemplate.$dirty && websettingsForm.selectTemplate.$invalid">
-							<span ng-show="websettingsForm.selectTemplate.$error.required" class="text-danger">Required Field.</span>
-						</span>	
+						<div class="form-group" ng-if="projects">
+							<div class="col-sm-10 col-sm-offset-2">
+								<label  for="selectbusiness" class="col-sm-10">Home Project</label>
+								<select id="selectBusiness" name="selectBusiness" class="form-control" ng-model="websetting.config.project_id"  ng-options="item.id as item.title for item in projects">
+									<option value="">Select Project</option>
+								</select>
+								<span class="help-block" ng-show="websettingsForm.selectBusiness.$dirty && websettingsForm.selectBusiness.$invalid">
+									<span ng-show="websettingsForm.selectBusiness.$error.required" class="text-danger">Required Field.</span>
+								</span>	
+							</div>
 						</div>
-					</div>	
-				</div>
-				<div class="form-group" ng-if="projects">
-					<div class="col-sm-10 col-sm-offset-2">
-						<label  for="selectbusiness" class="col-sm-10">Home Project</label>
-						<select id="selectBusiness" name="selectBusiness" class="form-control" ng-model="websetting.config.project_id"  ng-options="item.id as item.title for item in projects">
-							<option value="">Select Project</option>
-						</select>
-						<span class="help-block" ng-show="websettingsForm.selectBusiness.$dirty && websettingsForm.selectBusiness.$invalid">
-							<span ng-show="websettingsForm.selectBusiness.$error.required" class="text-danger">Required Field.</span>
-						</span>	
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="contact_name" class="col-sm-2 control-label">Name*</label>	
-						<div class="col-sm-10">
-							<input type="text" id="contact_name" class="form-control" name="contact_name" placeholder="Name" ng-model="websetting.config.contact_details.contact_name" required >
-								<span class="help-block" ng-show="websettingsForm.contact_name.$dirty && websettingsForm.contact_name.$invalid">
-								<span class="text-danger" ng-show="websettingsForm.contact_name.$error.required">Contact Name Required.</span>
+						<div class="form-group">
+							<label for="contact_name" class="col-sm-2 control-label">Name*</label>	
+								<div class="col-sm-10">
+									<input type="text" id="contact_name" class="form-control" name="contact_name" placeholder="Name" ng-model="websetting.config.contact_details.contact_name" required >
+										<span class="help-block" ng-show="websettingsForm.contact_name.$dirty && websettingsForm.contact_name.$invalid">
+										<span class="text-danger" ng-show="websettingsForm.contact_name.$error.required">Contact Name Required.</span>
+										</span>
+								</div>
+						</div>
+						<div class="form-group">
+							<label for="contact" class="col-sm-2 control-label">Mobile*</label>
+							<div class="col-md-10">
+								<input type="text" id="contact" name="contact" class="form-control" ng-model="websetting.config.contact_details.contact" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+									<span class="help-block" ng-show="websettingsForm.contact.$dirty && websettingsForm.contact.$invalid">
+									<span ng-show="websettingsForm.contact.$error.pattern && (websettingsForm.contact.$dirty || submitted)" class="text-danger">Enter a valid Contact Number .</span>
+									</span>
+							</div>						
+						</div>
+						<div class="form-group">	
+							<label  for="contact_email" class="col-sm-2 control-label">Email*</label>	
+							<div class="col-sm-10">
+								<input type="Email" class="form-control" id="contact_email" ng-model="websetting.config.contact_details.contact_email" name="contact_email" placeholder="Enter Email" required >
+								<span class="help-block" ng-show="websettingsForm.contact_email.$dirty && websettingsForm.contact_email.$invalid">
+								<span ng-show="websettingsForm.contact_email.$error.required" class="text-danger"> Email is required.</span>
+								<span ng-show="websettingsForm.contact_email.$error.email" class="text-danger">Invalid Email address.</span>
 								</span>
+							</div>					
 						</div>
-				</div>
-				<div class="form-group">
-					<label for="contact" class="col-sm-2 control-label">Mobile*</label>
-					<div class="col-md-10">
-						<input type="text" id="contact" name="contact" class="form-control" ng-model="websetting.config.contact_details.contact" placeholder="Your Contact No" ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
-							<span class="help-block" ng-show="websettingsForm.contact.$dirty && websettingsForm.contact.$invalid">
-							<span ng-show="websettingsForm.contact.$error.pattern && (websettingsForm.contact.$dirty || submitted)" class="text-danger">Enter a valid Contact Number .</span>
-							</span>
-					</div>						
-				</div>
-				<div class="form-group">	
-					<label  for="contact_email" class="col-sm-2 control-label">Email*</label>	
-					<div class="col-sm-10">
-						<input type="Email" class="form-control" id="contact_email" ng-model="websetting.config.contact_details.contact_email" name="contact_email" placeholder="Enter Email" required >
-						<span class="help-block" ng-show="websettingsForm.contact_email.$dirty && websettingsForm.contact_email.$invalid">
-						<span ng-show="websettingsForm.contact_email.$error.required" class="text-danger"> Email is required.</span>
-						<span ng-show="websettingsForm.contact_email.$error.email" class="text-danger">Invalid Email address.</span>
-						</span>
-					</div>					
-				</div>
-				<!-- <div class="form-group">
-					<label for="" class="col-sm-2 control-label"></label>
-					<div class="col-sm-5"> 
-						<div class="bottomspace">
-						<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
-						<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="websetting.config.google_map.latitude" readonly />
-						<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
-							<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
-						</span>
+						<!-- <div class="form-group">
+							<label for="" class="col-sm-2 control-label"></label>
+							<div class="col-sm-5"> 
+								<div class="bottomspace">
+								<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
+								<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="websetting.config.google_map.latitude" readonly />
+								<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
+									<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
+								</span>
+								</div>
+							</div>
+							<div class="col-sm-5"> 
+								<div class="bottomspace">
+								<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
+								<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="websetting.config.google_map.longitude" readonly >
+									<span class="text-danger" ng-show="websettingsForm.Longitude.$dirty && websettingsForm.Longitude.$invalid">
+										<span ng-show="websettingsForm.Longitude.$error.required">Domain Name is required.</span>
+									</span>
+								</div>
+							</div>									
+						</div> -->
+						<h4>Website Logo</h4>
+						<div class="form-group">
+							<label for="website_logo" class="col-sm-2 control-label">Logo</label>
+							<div class="col-sm-4">
+								<input type="file" id="website_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "uploads($files, websetting.user_id + path,userInfo,'website_logo')" ng-model="website_logo">
+								<input type="hidden" ng-model="websetting.config.website_logo">
+							</div>
+							<div class="col-sm-4 col-sm-offset-2">
+								<span class="thumbs" ng-if="websetting.config.website_logo">
+									<img class="img-thumbnail" ng-src="{{websetting.config.website_logo.file_relative_path}}" ng-click="websetting.imgkey = key; "/>
+									<span class="close" ng-click="removeImg( websetting.config.website_logo)">X</span> 
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="website_logo1" class="col-sm-2 control-label">Logo1</label>
+							<div class="col-sm-4">
+								<input type="file" id="website_logo1" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "uploads1($files, websetting.user_id + path,userInfo,'website_logo1')" ng-model="website_logo1">
+								<input type="hidden" ng-model="websetting.config.website_logo1">
+							</div>
+							<div class="col-sm-4 col-sm-offset-2">
+								<span class="thumbs" ng-if="websetting.config.website_logo1">
+									<img class="img-thumbnail" ng-src="{{websetting.config.website_logo1.file_relative_path}}" ng-click="websetting.imgkey = key; "/>
+									<span class="close" ng-click="removeImg1( websetting.config.website_logo1)">X</span> 
+								</span>
+							</div>
+						</div>
+						
+						<h4>WelCome Note</h4>
+						<div class="form-group">
+							<label for="welcome_note" class="col-sm-2 control-label">Welcome Note*</label>	
+								<div class="col-sm-10">
+									<textarea type="text" id="welcome_note" class="form-control" name="welcome_note" placeholder="WelCome Note For Website" ng-model="websetting.config.welcome_note" ui-tinymce></textarea>
+									
+									<p ng-hide="websettingsForm.welcome_note.$error.maxlength">
+										{{ 5000 - websetting.config.welcome_note.length + " Chars left"}} 
+									</p>
+									<span class="help-block" ng-show="websettingsForm.welcome_note.$dirty && businessProfileForm.welcome_note.$invalid">
+										<span class="text-danger" ng-show="businessProfileForm.welcome_note.$error.maxlength">Sorry You are Exceeding the Limit</span>
+									</span>		
+								</div>
+						</div>
+						
+						<h4>Social Links</h4>
+						<div class ="form-group">	
+							<label  for="facebook" class="col-sm-2 control-label">Facebook</label>	
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="facebook" ng-model="websetting.config.sociallinks.facebook" name="facebook" />
+							</div>					
+						</div>
+						<div class="form-group">	
+							<label  for="google" class="col-sm-2 control-label">Google</label>	
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="google" id="google" ng-model="websetting.config.sociallinks.google"  />
+							</div>					
+						</div>
+						<div class="form-group">	
+							<label  for="twitter" class="col-sm-2 control-label">Twitter</label>	
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="twitter" name="twitter" ng-model="websetting.config.sociallinks.twitter"  />
+							</div>					
+						</div>
+						<div class="form-group">	
+							<label  for="linkedin" class="col-sm-2 control-label">LinkedIn</label>	
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="linkedin" name="linkedin" ng-model="websetting.config.sociallinks.linkedin"  />
+							</div>					
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label"></label>
+							<div class="col-sm-5"> 
+								<div class="bottomspace">
+								<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
+								<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="websetting.config.google_map.latitude" readonly />
+								<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
+									<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
+								</span>
+								</div>
+							</div>
+							<div class="col-sm-5"> 
+								<div class="bottomspace">
+								<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
+								<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="websetting.config.google_map.longitude" readonly >
+									<span class="text-danger" ng-show="websettingsForm.Longitude.$dirty && websettingsForm.Longitude.$invalid">
+										<span ng-show="websettingsForm.Longitude.$error.required">Domain Name is required.</span>
+									</span>
+								</div>
+							</div>									
 						</div>
 					</div>
-					<div class="col-sm-5"> 
-						<div class="bottomspace">
-						<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
-						<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="websetting.config.google_map.longitude" readonly >
-							<span class="text-danger" ng-show="websettingsForm.Longitude.$dirty && websettingsForm.Longitude.$invalid">
-								<span ng-show="websettingsForm.Longitude.$error.required">Domain Name is required.</span>
-							</span>
-						</div>
-					</div>									
-				</div> -->
-				<h4>Website Logo</h4>
-				<div class="form-group">
-					<label for="website_logo" class="col-sm-2 control-label">Logo</label>
-					<div class="col-sm-4">
-						<input type="file" id="website_logo" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "uploads($files, websetting.user_id + path,userInfo,'website_logo')" ng-model="website_logo">
-						<input type="hidden" ng-model="websetting.config.website_logo">
-					</div>
-					<div class="col-sm-4 col-sm-offset-2">
-						<span class="thumbs" ng-if="websetting.config.website_logo">
-							<img class="img-thumbnail" ng-src="{{websetting.config.website_logo.file_relative_path}}" ng-click="websetting.imgkey = key; "/>
-							<span class="close" ng-click="removeImg( websetting.config.website_logo)">X</span> 
-						</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="website_logo1" class="col-sm-2 control-label">Logo1</label>
-					<div class="col-sm-4">
-						<input type="file" id="website_logo1" ng-file-select ng-multiple="false" accept="image/jpeg,image/png, image/gif" ng-file-change= "uploads1($files, websetting.user_id + path,userInfo,'website_logo1')" ng-model="website_logo1">
-						<input type="hidden" ng-model="websetting.config.website_logo1">
-					</div>
-					<div class="col-sm-4 col-sm-offset-2">
-						<span class="thumbs" ng-if="websetting.config.website_logo1">
-							<img class="img-thumbnail" ng-src="{{websetting.config.website_logo1.file_relative_path}}" ng-click="websetting.imgkey = key; "/>
-							<span class="close" ng-click="removeImg1( websetting.config.website_logo1)">X</span> 
-						</span>
-					</div>
-				</div>
-				
-				<h4>WelCome Note</h4>
-				<div class="form-group">
-					<label for="welcome_note" class="col-sm-2 control-label">Welcome Note*</label>	
-						<div class="col-sm-10">
-							<textarea type="text" id="welcome_note" class="form-control" name="welcome_note" placeholder="WelCome Note For Website" ng-model="websetting.config.welcome_note" ui-tinymce></textarea>
+					<div class="col-sm-6" ng-init="ind = []">
+						<accordion close-others="true">
+						<accordion-group heading="Menus" is-open="isFirstOpen">
+							<button ng-click="getMenulist(websetting.user_id, websetting.business_id)"><span class="glyphicon glyphicon-refresh"></span></button>
 							
-							<p ng-hide="websettingsForm.welcome_note.$error.maxlength">
-								{{ 5000 - websetting.config.welcome_note.length + " Chars left"}} 
-							</p>
-							<span class="help-block" ng-show="websettingsForm.welcome_note.$dirty && businessProfileForm.welcome_note.$invalid">
-								<span class="text-danger" ng-show="businessProfileForm.welcome_note.$error.maxlength">Sorry You are Exceeding the Limit</span>
-							</span>		
-						</div>
-				</div>
-				
-				<h4>Social Links</h4>
-				<div class ="form-group">	
-					<label  for="facebook" class="col-sm-2 control-label">Facebook</label>	
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="facebook" ng-model="websetting.config.sociallinks.facebook" name="facebook" />
-					</div>					
-				</div>
-				<div class="form-group">	
-					<label  for="google" class="col-sm-2 control-label">Google</label>	
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="google" id="google" ng-model="websetting.config.sociallinks.google"  />
-					</div>					
-				</div>
-				<div class="form-group">	
-					<label  for="twitter" class="col-sm-2 control-label">Twitter</label>	
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="twitter" name="twitter" ng-model="websetting.config.sociallinks.twitter"  />
-					</div>					
-				</div>
-				<div class="form-group">	
-					<label  for="linkedin" class="col-sm-2 control-label">LinkedIn</label>	
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="linkedin" name="linkedin" ng-model="websetting.config.sociallinks.linkedin"  />
-					</div>					
-				</div>
-				<div class="form-group">
-					<label for="" class="col-sm-2 control-label"></label>
-					<div class="col-sm-5"> 
-						<div class="bottomspace">
-						<label  for="Latitude" class="col-sm-2 control-label">Latitude</label>
-						<input type="text" id="Latitude" class="form-control" name="google_map" placeholder="Google Latitude" ng-model="websetting.config.google_map.latitude" readonly />
-						<span class="text-danger" ng-show="websettingsForm.Latitude.$dirty && websettingsForm.Latitude.$invalid">
-							<span ng-show="websettingsForm.Latitude.$error.required">Domain Name is required.</span>
-						</span>
-						</div>
-					</div>
-					<div class="col-sm-5"> 
-						<div class="bottomspace">
-						<label  for="Longitude" class="col-sm-2 control-label">Longitude</label>
-						<input type="text" id="Longitude" class="form-control" name="Longitude" placeholder="Google Latitude" ng-model="websetting.config.google_map.longitude" readonly >
-							<span class="text-danger" ng-show="websettingsForm.Longitude.$dirty && websettingsForm.Longitude.$invalid">
-								<span ng-show="websettingsForm.Longitude.$error.required">Domain Name is required.</span>
-							</span>
-						</div>
-					</div>									
-				</div>
-			</div>
-			<div class="col-sm-6" ng-init="ind = []">
-				<accordion close-others="true">
-				<accordion-group heading="Menus" is-open="isFirstOpen">
-					<button ng-click="getMenulist(websetting.user_id, websetting.business_id)"><span class="glyphicon glyphicon-refresh"></span></button>
-					
-						<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.menus">
-							<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus" ng-include="'modules/websites/websettings/tree_item_renderer.html'" as-sortable-item>
-							</div>
-						</div> 
-				</accordion-group>
-				<accordion-group heading="Sidebar Menus">
-					<div class="form-group panel panel-default">
-							<div class="form-group">
-								<button ng-show="isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds">Add SideBar</button>
-								<button ng-show="!isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObject(sidebar, websetting.config.sidebar, 'sidebar')">Add SideBar</button>
-							</div>
-						<div class="form-group panel-body">
-						<div collapse="isCollapseds">
-							<form name="seo" role="form" class="form-horizontal panel panel-default">
-							<div class="well well-lg">
-							<h4>Sidebar</h4>
-								<div class="form-group">
-									<div class="col-sm-6">
-										<input type="text" class="form-control" id="sidebarname" name="sidebarname" ng-model="sidebar.name" placeholder="Name"/>
+								<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.menus">
+									<div class="list-group-item menudiv" ng-repeat="data in websetting.config.menus" ng-include="'modules/websites/websettings/tree_item_renderer.html'" as-sortable-item>
 									</div>
-									<div class="col-sm-6">
-										<input type="text" class="form-control" id="sidebarurl" name="sidebarurl" ng-model="sidebar.url" placeholder="URL" />
+								</div> 
+						</accordion-group>
+						<accordion-group heading="Sidebar Menus">
+							<div class="form-group panel panel-default">
+									<div class="form-group">
+										<button ng-show="isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds">Add SideBar</button>
+										<button ng-show="!isCollapseds" class="btn btn-primary col-sm-offset-3" ng-click="isCollapseds = !isCollapseds;addToObject(sidebar, websetting.config.sidebar, 'sidebar')">Add SideBar</button>
 									</div>
-								</div>
-								<h4>Seo</h4>
-								<div class="form-group">
-										<div class="col-sm-12">
-											<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.seo.title" placeholder="Title"/>
-											<input type="hidden" class="form-control" id="status" name="status" ng-model="sidebar.status" ng-init="sidebar.status = 1"/>
+								<div class="form-group panel-body">
+								<div collapse="isCollapseds">
+									<form name="seo" role="form" class="form-horizontal panel panel-default">
+									<div class="well well-lg">
+									<h4>Sidebar</h4>
+										<div class="form-group">
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="sidebarname" name="sidebarname" ng-model="sidebar.name" placeholder="Name"/>
+											</div>
+											<div class="col-sm-6">
+												<input type="text" class="form-control" id="sidebarurl" name="sidebarurl" ng-model="sidebar.url" placeholder="URL" />
+											</div>
 										</div>
+										<h4>Seo</h4>
+										<div class="form-group">
+												<div class="col-sm-12">
+													<input type="text" class="form-control" id="seotitle" name="seotitle" ng-model="sidebar.seo.title" placeholder="Title"/>
+													<input type="hidden" class="form-control" id="status" name="status" ng-model="sidebar.status" ng-init="sidebar.status = 1"/>
+												</div>
+										</div>
+										<div class="form-group">
+											<div class="col-sm-6">
+												<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="sidebar.seo.keywords" placeholder="Keywords">
+												</textarea>
+											</div>
+											<div class="col-sm-6">
+												<textarea type="text" class="form-control" id="description" name="description" ng-model="sidebar.seo.description" placeholder="Description"></textarea>
+											</div>
+										</div>
+									</div> 
+									</form>
 								</div>
-								<div class="form-group">
-									<div class="col-sm-6">
-										<textarea type="text" class="form-control" id="keywords" name="keywords" ng-model="sidebar.seo.keywords" placeholder="Keywords">
-										</textarea>
-									</div>
-									<div class="col-sm-6">
-										<textarea type="text" class="form-control" id="description" name="description" ng-model="sidebar.seo.description" placeholder="Description"></textarea>
+								<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.sidebar">
+									<div class="list-group-item menudiv" ng-repeat="data in websetting.config.sidebar" ng-include="'modules/websites/websettings/tree_item_renderer.html'" as-sortable-item>
 									</div>
 								</div>
-							</div> 
-							</form>
-						</div>
-						<div class="list-group" as-sortable="dragControlListeners" ng-model="websetting.config.sidebar">
-							<div class="list-group-item menudiv" ng-repeat="data in websetting.config.sidebar" ng-include="'modules/websites/websettings/tree_item_renderer.html'" as-sortable-item>
+								</div>
+							</div>
+						</accordion-group>
+					</div>	
+					<div class="panel-panel-default">
+						<div class="form-group panel-body" ng-click="getMapObject()">
+							<div class="col-sm-12 panel-body" id="map_canvas" style="position : relative;">
+								<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" control="googleMap">
+									<ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="TOP_LEFT"></ui-gmap-search-box>
+									<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+								</ui-gmap-google-map>
 							</div>
 						</div>
-						</div>
 					</div>
-				</accordion-group>
-			</div>	
-			<div class="panel-panel-default">
-				<div class="form-group panel-body" ng-click="getMapObject()">
-					<div class="col-sm-12 panel-body" id="map_canvas" style="position : relative;">
-						<ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" control="googleMap">
-							<ui-gmap-search-box template="searchbox.template" events="searchbox.events" position="TOP_LEFT"></ui-gmap-search-box>
-							<ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-						</ui-gmap-google-map>
-					</div>
-				</div>
+				</form>
 			</div>
-		</form>
-		</div>
 		</div> 
 	</div>	
 </div>

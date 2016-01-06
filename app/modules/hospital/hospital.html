@@ -3,18 +3,12 @@
 		<div class="main-content">
 			<ng-include src="'modules/component/toolbar.html'"></ng-include>
 			<div class="row">
-				<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12" ng-repeat="x in dashboardList" ng-if="x.dashboardMenu">
+				<div class="col-md-4 col-lg-3 col-sm-6 col-xs-12" ng-repeat="x in dashboardList" ng-if="x.dashboardMenu">
 					<div class="gridblock">
-						<div class="row">
-							<div class="col-md-4"> 
-								<img ng-if="x.moduleIcon" class="dashimg" ng-src="modules/{{x.moduleIcon}}">
-							</div>
-							<div class="title col-md-8"> 
-									<h4>{{x.title}}</h4>
-									<span>{{x.description}}</span>
-							</div>
-						</div>
-						<div class="row text-center">
+						<img ng-if="x.moduleIcon" class="dashimg" ng-src="modules/{{x.moduleIcon}}">
+						<h4>{{x.title}}</h4>
+						<div class="desc">{{x.description}}</div>
+						<div class="readmore">
 							<a class="btn btn-warning center-block" name="btn1" href="#/dashboard/{{x.path}}">{{x.title}}</a>
 						</div>
 					</div>	

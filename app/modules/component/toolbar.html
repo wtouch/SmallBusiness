@@ -55,74 +55,73 @@
 			<div class="btn-group " role="group" aria-label="..." ng-repeat="x in moduleMenus">
 				<a  class="btn btn-primary" type="button" ng-href="{{x.path}}" ng-click="x.events.click();">{{x.name}}</a>
 			</div>
-			<div class="btn-group" >
-				<button class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled" tooltip="List" dropdown>
-						<span class="glyphicon glyphicon-th-large dropdown-toggle"></span>
-				
-					<ul  class="dropdown-menu dropd" role="menu" aria-labelledby="dropdownMenu1">
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#/dashboard">Dashboard</a>
-						</li>
-						<li role="presentation" class="divider"></li>
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/enquiry/mails">Enquiry BOX</a>
-						</li>
-						<li role="presentation" class="divider"></li>
-						<li role="presentation" ng-if="userDetails.permission.business_module.business_list">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/business/businesslist">Business List</a>
-						</li>
-						<li role="presentation" ng-if="userDetails.permission.business_module.add_business">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/business/addbusiness">Add Business</a>
-						</li>
-						<li role="presentation" class="divider"></li>	
-						<li role="presentation" ng-if="userDetails.permission.business_module.business_list">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/business/products">Manage Products</a>
-						</li>
-						<li role="presentation" class="divider"></li>
-						<li role="presentation" ng-if="userDetails.permission.template_module.template_list">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/templates/listoftemplates">List Of Template</a>
-						</li>
-						<li role="presentation" ng-if="userDetails.permission.template_module.my_template">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/templates/mytemplates">My Template</a>
-						</li>
-						<li role="presentation" ng-if="userDetails.permission.template_module.request_custom_template">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/templates/requestcustomtemplates">Request Custom Template</a>
-						</li>
-						<li role="presentation" ng-if="userDetails.permission.template_module.request_custom_template">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/templates/custometemplates">Custom Template</a>
-						</li>	
-						<li role="presentation" class="divider"></li>					
-						<li role="presentation" ng-if="userDetails.permission.website_module.website_list">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/websites/websiteslist">Website List</a>
-						</li>
-						<li role="presentation" ng-if="userDetails.permission.website_module.request_site">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/websites/requestnewsite">Request New Website</a>
-						</li>
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/websites/requestedsitelist">Requested Site List</a>
-						</li>
-						<li role="presentation" class="divider"></li>		
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/property/addproperty">Add Property</a>
-						</li>
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/property">View Property</a>
-						</li>
-						<li role="presentation">
-							 <a role="menuitem" tabindex="-1" href="#/dashboard/project/addproject">Add Project</a>
-						</li>
-						<li role="presentation">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/project">View Project</a>
-						</li>
-						<li role="presentation" class="divider"></li>
-						<li role="presentation" ng-if="userDetails.permission.user_module.user_list">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/users">Users List</a>
-						</li>
-						<li role="presentation" ng-if="userDetails.permission.user_module.add_user">
-							<a role="menuitem" tabindex="-1" href="#/dashboard/users/adduser">	Add New Users</a>
-						</li>			
-					</ul>
+			<div class="btn-group" dropdown>
+				<button class="btn btn-primary dropdown-toggle bottomspace" dropdown-toggle ng-disabled="disabled" tooltip="List" aria-haspopup="true" aria-expanded="true">
+					<span class="glyphicon glyphicon-th-large"></span>
 				</button>
+				<ul  class="dropdown-menu dropd" role="menu" aria-labelledby="dropdownMenu1">
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="#/dashboard">Dashboard</a>
+					</li>
+					<li role="presentation" class="divider"></li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/enquiry/mails">Enquiry BOX</a>
+					</li>
+					<li role="presentation" class="divider"></li>
+					<li role="presentation" ng-if="userDetails.permission.business_module.business_list">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/business/businesslist">Business List</a>
+					</li>
+					<li role="presentation" ng-if="userDetails.permission.business_module.add_business">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/business/addbusiness">Add Business</a>
+					</li>
+					<li role="presentation" class="divider"></li>	
+					<li role="presentation" ng-if="userDetails.permission.business_module.business_list">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/business/products">Manage Products</a>
+					</li>
+					<li role="presentation" class="divider"></li>
+					<li role="presentation" ng-if="userDetails.permission.template_module.template_list">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/templates/listoftemplates">List Of Template</a>
+					</li>
+					<li role="presentation" ng-if="userDetails.permission.template_module.my_template">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/templates/mytemplates">My Template</a>
+					</li>
+					<li role="presentation" ng-if="userDetails.permission.template_module.request_custom_template">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/templates/requestcustomtemplates">Request Custom Template</a>
+					</li>
+					<li role="presentation" ng-if="userDetails.permission.template_module.request_custom_template">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/templates/custometemplates">Custom Template</a>
+					</li>	
+					<li role="presentation" class="divider"></li>					
+					<li role="presentation" ng-if="userDetails.permission.website_module.website_list">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/websites/websiteslist">Website List</a>
+					</li>
+					<li role="presentation" ng-if="userDetails.permission.website_module.request_site">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/websites/requestnewsite">Request New Website</a>
+					</li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/websites/requestedsitelist">Requested Site List</a>
+					</li>
+					<li role="presentation" class="divider"></li>		
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/property/addproperty">Add Property</a>
+					</li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/property">View Property</a>
+					</li>
+					<li role="presentation">
+						 <a role="menuitem" tabindex="-1" href="#/dashboard/project/addproject">Add Project</a>
+					</li>
+					<li role="presentation">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/project">View Project</a>
+					</li>
+					<li role="presentation" class="divider"></li>
+					<li role="presentation" ng-if="userDetails.permission.user_module.user_list">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/users">Users List</a>
+					</li>
+					<li role="presentation" ng-if="userDetails.permission.user_module.add_user">
+						<a role="menuitem" tabindex="-1" href="#/dashboard/users/adduser">	Add New Users</a>
+					</li>			
+				</ul>
 			</div>
 		</div>
 	</div>
