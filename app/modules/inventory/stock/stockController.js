@@ -40,7 +40,8 @@ define(['app'], function (app) {
 			cols : ["*"]
 		}
 		
-		$scope.postData = function(table, input){
+		$scope.
+		= function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
 							$scope.getData(false, $scope.currentPage, 'stock_items','stockList',$scope.stockParams);
