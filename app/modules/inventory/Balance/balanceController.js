@@ -18,7 +18,7 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		
-				$scope.invoiceParams = {
+		$scope.invoiceParams = {
 			where : {
 				status : 1,
 				user_id : $rootScope.userDetails.id
@@ -65,6 +65,17 @@ define(['app'], function (app) {
 				},
 			cols : ["*"]
 		}
+		$scope.taxParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id,
+				type : "tax_payment"
+			},
+			groupBy : {
+				account_id : "category"
+			},
+			cols : ["*, sum(t0.debit_amount) as tax_amount"]
+		}
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {
@@ -104,28 +115,34 @@ define(['app'], function (app) {
 		$scope.getData(false, true,'account', "transaction_list",$scope.transactionParams);
 		$scope.getData(false, true,'invoice', "invoice_list",$scope.invoiceParams);
 		$scope.getData(false, true,'bill', "bill_list",$scope.invoiceParams);
+		$scope.getData(false, true,'transaction', "tax_payment",$scope.taxParams);
+		//console.log($rootScope.userDetails.config.inventory.taxData.tax);
+		
+		// Total Invoice Amount
 		$scope.getTotal = function(){
-				var total = 0;
-				for(var i = 0; i < $scope.invoice_list.length; i++){
-					var addition = $scope.invoice_list[i];
-					total += parseInt(addition.due_amount);
-				}
-				return total;
+			var total = 0;
+			angular.forEach($scope.invoice_list, function(value, key){
+				total += parseFloat(value.due_amount);
+				$scope.taxPayment = dataService.taxPayment($scope.invoice_list, $scope.tax_payment);
+			})
+			
+			return total;
 		}
+		
+		// Total Bill Amount
 		$scope.getTotalBill = function(){
 				var total = 0;
-				for(var i = 0; i < $scope.bill_list.length; i++){
-					var addition = $scope.bill_list[i];
-					total += parseInt(addition.due_amount);
-				}
+				angular.forEach($scope.bill_list, function(value, key){
+					total += parseFloat(value.due_amount);
+				})
 				return total;
 		}
+		// for Account Balance
 		$scope.getTotalBalance = function(){
 				var total = 0;
-				for(var i = 0; i < $scope.transaction_list.length; i++){
-					var addition = $scope.transaction_list[i];
-					total += parseInt(addition.account_balance);
-				}
+				angular.forEach($scope.transaction_list, function(value, key){
+					total += parseFloat(value.account_balance);
+				})
 				return total;
 		}
 	 };
