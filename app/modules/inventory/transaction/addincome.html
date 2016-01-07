@@ -3,19 +3,7 @@
 		<h3 class="text-center">Add Income</h3>
 	</div>
 		<form name="addIncomeForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addIncomeForm.$valid"> 
-			<div class="form-group">
-				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
-					<label for="party" class="col-sm-2 control-label">Party *</label>
-						<div class="col-sm-9">
-							<select id="party_id" class="form-control" ng-model="modalOptions.addincome.party_id" ng-options="item.id as item.name for item in modalOptions.partyList">
-							<option value="">Select Party</option>
-							</select>	 
-							<span class="help-block" ng-show="addIncomeForm.party.$dirty && addIncomeForm.party.$invalid">
-								<span ng-show="addIncomeForm.party.$error.required" class="text-danger">Required field.</span>
-							</span>	
-						</div>
-				</div>
-			</div>
+			
 			<div class="form-group">
 				<label for="category" class="col-sm-2 control-label">Category</label>
 				<div class="col-sm-9">

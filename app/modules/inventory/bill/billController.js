@@ -107,7 +107,7 @@ define(['app'], function (app) {
 						+'</select>',
 					
 					
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Bill"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-disabled="row.entity.paid_amount > 0" ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Bill"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+
 					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPaybill(\'modules/inventory/bill/payBill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Bill"> <span class="glyphicon glyphicon-usd"></span></a>'
 					+

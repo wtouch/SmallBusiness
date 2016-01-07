@@ -70,6 +70,7 @@
 						</span>
 				</div>
 			</div>
+			
 			<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'Net Banking' || modalOptions.payBill.description.payment_type.type == 'DD'">
 				<label for="Date" class="col-sm-2 control-label">Date</label>
 				 <div class="col-sm-9">
@@ -77,6 +78,7 @@
 					placeholder="date">
 				</div>					
 			</div>
+			
 			<div class="form-group" ng-if="modalOptions.payBill.description.payment_type.type == 'Cheque' || modalOptions.payBill.description.payment_type.type == 'Net Banking' || modalOptions.payBill.description.payment_type.type == 'DD'">
 				<label for="Bank" class="col-sm-2 control-label">Bank Name</label>
 					<div class="col-sm-9">
@@ -99,9 +101,8 @@
 		
 			<div class="form-group">
 				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
-					<div class="col-sm-9" ng-init="modalOptions.calcDueAmount(modalOptions);">
-						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.payBill.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payBill.debit_amount, modalOptions);modalOptions.calcDueAmount(modalOptions)" name="amount" placeholder="Amount" required check-amount previous-balance="modalOptions.previous_balance" due-amount="modalOptions.due_amount" />
-						
+					<div class="col-sm-9" ng-init="modalOptions.calcDueAmount(modalOptions);"><!--ng-pattern="/^\d{0,9}[0-9]$/"-->
+						<input type="text" id="debit_amount" class="form-control"   ng-model="modalOptions.payBill.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.payBill.debit_amount, modalOptions);modalOptions.calcDueAmount(modalOptions)" name="amount" placeholder="Amount" required check-amount previous-balance="modalOptions.previous_balance" due-amount="modalOptions.due_amount"/>
 						<span class="help-block" ng-show="payBillForm.amount.$dirty && payBillForm.amount.$invalid">
 							<span ng-show="payBillForm.amount.$error.required" class="text-danger">Amount is required.</span>
 							<span ng-show="payBillForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>

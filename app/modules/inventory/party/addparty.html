@@ -74,18 +74,16 @@
 			
 	       <div class="form-group">
 				<label for="location" class="col-sm-2 control-label">Location *</label>
-					<div class="col-sm-9">
+					<div class="col-sm-4">
 						<input type="text" name="location" id="location" ng-model="modalOptions.adduser.location" placeholder="Enter your location" ng-pattern="/^[a-zA-Z0-9- -]*$/" class="form-control" required>
 						<span class="text-danger"  ng-show="adduserForm.location.$error.pattern">Please enter valid location</span>
 						<span class="help-block" ng-show="adduserForm.location.$dirty && adduserForm.location.$invalid">
 							<span ng-show="adduserForm.location.$error.required" class="text-danger">Location is required.</span>
 						</span> 
 					</div>						
-			</div> 
 			
-			<div class="form-group">
-				<label for="area" class="col-sm-2 control-label">Area *</label>
-				<div class="col-sm-9">
+				<label for="area" class="col-sm-1 control-label">Area *</label>
+				<div class="col-sm-4">
 					<input type="text" id="area" name="area" class="form-control" ng-model="modalOptions.adduser.area" placeholder="Enter area" ng-pattern="/^[a-zA-Z0-9- -]*$/" required>
 					<span class="text-danger"  ng-show="adduserForm.area.$error.pattern">Please enter valid area</span>
 					<span class="help-block" ng-show="adduserForm.area.$dirty && adduserForm.area.$invalid">
@@ -115,18 +113,15 @@
 
 			<div class="form-group">
 				<label for="country" class="col-sm-2 control-label">Country *</label>
-				<div class="col-sm-9">
+				<div class="col-sm-4">
 					<input type="text" required name="country" class="form-control" id="country" ng-model="modalOptions.adduser.country" placeholder="Enter your country name" ng-pattern="/^[a-zA-Z\- ]+$/" required>
 					<span class="help-block" ng-show="adduserForm.country.$dirty && adduserForm.country.$invalid">
 						<span class="text-danger"  ng-show="adduserForm.country.$error.pattern">Please enter valid country</span>
 						<span ng-show="adduserForm.country.$error.required"class="text-danger">Country is required.</span>
 					</span>				
 				</div>
-			</div>	
-			
-			<div class="form-group">
-				<label for="pincode" class="col-sm-2 control-label">Pincode *</label>
-				<div class="col-sm-9">
+				<label for="pincode" class="col-sm-1 control-label">Pincode *</label>
+				<div class="col-sm-4">
 					<input type="text" id="pincode" name="pincode" class="form-control" ng-model="modalOptions.adduser.pincode" placeholder="Enter pincode " ng-pattern="/^([1-9])([0-9]){5}$/" required>
 					<span class="help-block" ng-show="adduserForm.pincode.$dirty && adduserForm.pincode.$invalid">
 						<span ng-show="adduserForm.pincode.$error.pattern" class="text-danger">Please enter number e.g. 431741</span>
