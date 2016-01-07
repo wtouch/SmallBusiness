@@ -5,7 +5,7 @@
 	</div>
 		<form name="taxpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="taxpaymentForm.$valid">
 			
-			<div class="form-group">{{modalOptions.taxpayment}}
+			<div class="form-group">
 				<label for="category" class="col-sm-2 control-label">Category</label>
 				<div class="col-sm-9">
 					<select id="category" class="form-control" ng-change="modalOptions.getTaxAmount(modalOptions.taxpayment.category,modalOptions);" ng-model="modalOptions.taxpayment.category" ng-options="item.taxName as item.taxName for item in userDetails.config.inventory.taxData.tax">
@@ -20,7 +20,7 @@
 			<div class="form-group">
 				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
 					<div class="col-sm-9">
-						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^(?=.s+)(?:[1-9]\d*|0)?(?:\.\d+)?$/"  ng-model="modalOptions.taxpayment.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.taxpayment.debit_amount, modalOptions);" name="amount" placeholder="Amount" required  previous-balance="modalOptions.previous_balance"/>
+						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/"  ng-model="modalOptions.taxpayment.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.taxpayment.debit_amount, modalOptions);" name="amount" placeholder="Amount" required  previous-balance="modalOptions.previous_balance"/>
 						<span class="help-block" ng-show="taxpaymentForm.amount.$dirty && taxpaymentForm.amount.$invalid">
 							<span ng-show="taxpaymentForm.amount.$error.required" class="text-danger">Amount is required.</span>
 							<span ng-show="taxpaymentForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
@@ -56,7 +56,7 @@
 					</div>						
 			</div>
 			
-			<!-- <div class="form-group">
+			<div class="form-group">
 				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
 					<div class="col-sm-9">
 						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.taxpayment.payment_type.type" required>
@@ -70,9 +70,9 @@
 							<span ng-show="taxpaymentForm.payment_type.$error.required" class="text-danger">Payment type is required.</span>
 						</span>	
 					</div>
-			</div>  -->
+			</div> 
 			
-			<!-- <div class="form-group" ng-if="modalOptions.taxpayment.payment_type.type == 'Cheque' || modalOptions.taxpayment.payment_type.type == 'Net Banking' || modalOptions.taxpayment.payment_type.type == 'DD'">
+			<div class="form-group" ng-if="modalOptions.taxpayment.payment_type.type == 'Cheque' || modalOptions.taxpayment.payment_type.type == 'Net Banking' || modalOptions.taxpayment.payment_type.type == 'DD'">
 				<label for="refferance no" ng-if="modalOptions.taxpayment.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
 				<label for="refferance no" ng-if="modalOptions.taxpayment.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
 				<label for="refferance no" ng-if="modalOptions.taxpayment.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
@@ -100,7 +100,7 @@
 			<div class="form-group" ng-if="modalOptions.taxpayment.payment_type.type == 'Cheque' || modalOptions.taxpayment.payment_type.type == 'Net Banking' || modalOptions.taxpayment.payment_type.type == 'DD'">
 				<label for="Date" class="col-sm-2 control-label">Date</label>
 				 <div class="col-sm-9">
-					<input type="text" id="date" class="form-control"   ng-model="modalOptions.taxpayment.date" ng-init="modalOptions.taxpayment.date = modalOptions.expenseDate.date"  name="date" 
+					<input type="text" id="date" class="form-control"   ng-model="modalOptions.taxpayment.date" ng-init="modalOptions.taxpayment.date = modalOptions.taxpaymentDate.date"  name="date" 
 					placeholder="date">
 				</div>					
 			</div>
@@ -123,10 +123,8 @@
 							<span ng-show="taxpaymentForm.Branch.$error.required">Branch Name is Required.</span>
 						</span>	
 					</div>		
-			</div>-->
+			</div>
 			
-			
-				
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">Description</label>
 					<div class="col-sm-9">

@@ -175,13 +175,11 @@ define(['app'], function (app) {
 		};
 		
 		$scope.callbackColChange = function(response){
-			//console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "bill", "billData", $scope.billParams);
 			}
 		}
 		$scope.callbackColChange1 = function(response){
-			//console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "purchase_order", "PurchaseOrderData", $scope.purchaseorderParams);
 			}
@@ -259,6 +257,7 @@ define(['app'], function (app) {
 					bill_date : data.bill_date,
 					due_date : data.due_date,
 					due_amount : data.due_amount,
+					subtotal : data.subtotal,
 					total_amount : data.total_amount,
 					remark : data.remark,
 					particular : data.particular,
@@ -299,7 +298,6 @@ define(['app'], function (app) {
 				},
 				
 				getTypeaheadData : function(table, searchColumn, searchValue){
-					//console.log(table, searchColumn, searchValue);
 					var locationParams = {
 						search : {},
 						cols : ["*"],
@@ -383,7 +381,6 @@ define(['app'], function (app) {
 				},
 				//for generate Order
 				generateBill : (data) ? {
-					//id : data.id,
 					purchase_order_id :data.purchase_order_id,
 					party_id : data.party_id,
 					user_id : data.user_id,
@@ -410,13 +407,12 @@ define(['app'], function (app) {
 				},
 				
 				getTypeaheadData : function(table, searchColumn, searchValue){
-					//console.log(table, searchColumn, searchValue);
 					var locationParams = {
 						search : {},
 						cols : ["*"]
 					};
 					locationParams.search[searchColumn] = searchValue;
-					//console.log(locationParams);
+					
 					return dataService.get(false, 'stock_items', locationParams).then(function(response){
 					
 						if(response.status == 'success'){
@@ -454,7 +450,6 @@ define(['app'], function (app) {
 					object = sqlDate;
 				},
 				getData: $scope.getData,
-				//addToObject : $rootScope.addToObject,
 				addToObject : function(object,data,modalOptions){
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};

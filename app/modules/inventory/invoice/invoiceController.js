@@ -136,14 +136,13 @@ define(['app'], function (app) {
 					  //type: uiGridConstants.filter.SELECT,
 					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
 					} ,
-					cellTemplate : '<a ng-disabled="row.entity.paid_amount > 0"  ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Invoice"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					
+					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/addinvoice.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Invoice"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPayInvoice(\'modules/inventory/invoice/payInvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Invoice"> <span class="glyphicon glyphicon-usd"></span></a>'
-					
 					+'<a ng-click="grid.appScope.openModal(\'modules/inventory/invoice/viewinvoice.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Invoice"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					+'<a ng-click="grid.appScope.openViewreceipt(\'modules/inventory/invoice/viewReceipt.html\',row.entity)"  class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					+ 
 					'<a type="button" tooltip="Delete Invoice" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'invoice\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					
 				}
 			],
 			onRegisterApi: function( gridApi ) {
@@ -267,7 +266,7 @@ define(['app'], function (app) {
 						total_amount : data.total_amount,
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
 					} : {
-						user_id : $rootScope.userDetails.user_id,
+						user_id : $rootScope.userDetails.id,
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
@@ -283,7 +282,7 @@ define(['app'], function (app) {
 						total_amount : data.total_amount,
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date")
 					} : {
-						user_id : $rootScope.userDetails.user_id,
+						user_id : $rootScope.userDetails.id,
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
@@ -390,7 +389,7 @@ define(['app'], function (app) {
 						date : dataService.sqlDateFormate(false,"datetime"),
 						modified_date : dataService.sqlDateFormate(false,"datetime"),
 						due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
-						user_id : $rootScope.userDetails.user_id
+						user_id : $rootScope.userDetails.id
 					},
 				postData : function(table, input){
 					console.log(table, input);

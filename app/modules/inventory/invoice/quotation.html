@@ -11,14 +11,15 @@
 							</select>
 						</div>
 				</div>
+				
 			</div>
-			<div class="table-responsive" ng-init="getData(false, currentPage, 'quotation','quotationList', quotationParams);getData(false,false,'party','partyList', $scope.partyParams);">
+				<div class="table-responsive" ng-init="getData(false, currentPage, 'quotation','quotationList', quotationParams);getData(false,false,'party','partyList', $scope.partyParams);">
 				<div ui-grid="quotationList"></div>
-			</div>
-			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'quotation','quotationList', invoiceParams)"></pagination>
-				<pre>Page: {{currentPage}} / {{numPages}}</pre>
-			</div>
+				</div>
+				<div class="text-center">				
+							<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'quotation','quotationList', invoiceParams)"></pagination>
+							<pre>Page: {{currentPage}} / {{numPages}}</pre>
+				</div>
 		</div>
 	</div>
 </div> 

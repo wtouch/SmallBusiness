@@ -29,9 +29,6 @@ define(['app'], function (app) {
 						return $scope.openModal("modules/inventory/account/addaccount.html");
 					}
 				}
-			},{
-				name : "Account List",
-				path : "#/dashboard/inventory/account/account.html"
 			}
 		]
 		

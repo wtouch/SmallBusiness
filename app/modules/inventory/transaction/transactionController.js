@@ -58,8 +58,8 @@ define(['app'], function (app) {
 		]
 		
 		$http.get("modules/inventory/config.json").success(function(response){
-				$scope.inventoryConfig = response;
-			})
+			$scope.inventoryConfig = response;
+		})
 		
 		$scope.transactionCategory = [];
 		$scope.transactionList = {
@@ -133,8 +133,6 @@ define(['app'], function (app) {
 			}
 		};
 		
-		
-		
 		$scope.verticalSum = function(inputArray, column, subobj){
 			/* if(!$scope[subobj])  */$scope[subobj] = 0;
 			
@@ -163,7 +161,6 @@ define(['app'], function (app) {
 		
 		//Tax Payment model
 		$scope.openTaxPayment = function(url,data){
-			
 			var modalDefault = {
 				templateUrl:url,	// apply template to modal
 				size : 'lg'
@@ -255,7 +252,6 @@ define(['app'], function (app) {
 		
 		//Add Income form pop up 
 		$scope.openAddincome = function(url,data){
-			
 			var modalDefault = {
 				templateUrl:url,	// apply template to modal
 				size : 'lg'
@@ -379,6 +375,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							$notification[response.status]("Transaction Successfull", response.message);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
@@ -487,6 +484,7 @@ define(['app'], function (app) {
 					})
 					$rootScope.postData(table, obj2,function(response){
 						if(response.status == "success"){
+							$notification[response.status]("Transaction Successfull", response.message);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
