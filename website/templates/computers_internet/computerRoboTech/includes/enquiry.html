@@ -33,14 +33,16 @@
 							ng-init="enquiry.message.property_link={params : {property_title : '{{enquiry.property_title}}', property_category : '{{property_category}}', property_id : '{{property_id}}' }}">
 						{% endif %}
 						
-						Name<input type="text"class="form-control" id="name" ng-model="enquiry.name" name="name"  ng-required="true" ng-pattern="/^(\D)+$/">
+						<label>Name</label>
+						<input type="text"class="form-control" id="name" ng-model="enquiry.name" name="name"  ng-required="true" ng-pattern="/^(\D)+$/">
 							<span ng-show="enquiryForm.name.$error.pattern && (enquiryForm.name.$dirty)" class="text-danger">Enter only Alphabets!</span>
 							<span class="text-danger" ng-show="enquiryForm.name.$error.required && (enquiryForm.name.$dirty || submitted)" class="help-block">Name is required.</span>
 					</div>	
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12 col-md-12">
-						Email<input type="hidden" class="form-control" id="from" name="from" ng-model="enquiry.from_email.from" ng-init="enquiry.from_email.from = 'admin@apnasite.in'">
+						<label>Email</label>
+						<input type="hidden" class="form-control" id="from" name="from" ng-model="enquiry.from_email.from" ng-init="enquiry.from_email.from = 'admin@apnasite.in'">
 						<input type="email" class="form-control" id="from" name="from"  ng-model="enquiry.to_email.replyTo" required>
 						<span  ng-show="enquiryForm.from.$dirty && enquiryForm.from.$invalid">
 							<span class="text-danger" ng-show="enquiryForm.from.$error.required">E-mail ID is required.</span>
@@ -50,13 +52,15 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-12 col-md-12">
-						Phone Number<input type="text" class="form-control help-block" id="phone" ng-model="enquiry.message.phone" name="phone"   ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
+						<label>Phone Number</label>
+						<input type="text" class="form-control help-block" id="phone" ng-model="enquiry.message.phone" name="phone"   ng-pattern="/^[789]\d{9}$/" maxlength="10" required>
 						<p ng-show="enquiryForm.phone.$error.pattern && (enquiryForm.phone.$dirty || submitted)" class="text-danger" >Enter a valid contact no.</p>
 					</div>						
 				</div>	
 				<div class="form-group">
 					<div class="col-xs-12 col-md-12">
-						Comment<textarea id="address" name="address" class="form-control" rows="3" ng-model="enquiry.message.address" ng-minlength="2" ng-maxlength="356" required></textarea>
+						<label>Comment</label>
+						<textarea id="address" name="address" class="form-control" rows="3" ng-model="enquiry.message.address" ng-minlength="2" ng-maxlength="356" required></textarea>
 					</div>
 				</div>
 				<div class="form-group">

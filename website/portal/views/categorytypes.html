@@ -14,12 +14,12 @@
 				<h3> Popular Business Types</h3>
 				<div class="row">
 					<div class="col-md-12 ">
-							{% for x in data %}
-								<div class="products " >
-									<a href="/{{x.city| replace({' ' : '-'})}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}"><img src="{{path}}img/category/{{x.category_name}}/{{x.type_name}}.jpg" class="category center-block"/></a><br>
-									<a class="catp" href="/{{x.city| replace({' ' : '-'})}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}">{{x.type_name}}</a>
-								</div>
-							{% endfor %}
+						{% for x in data %}
+							<div class="prodcategory">
+								<a href="/{{x.city| replace({' ' : '-'})}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}"><img src="{{path}}img/category/{{x.category_name}}/{{x.type_name}}.jpg" class="category center-block"/></a>
+								<a class="catp" href="/{{x.city| replace({' ' : '-'})}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}">{{x.type_name}}</a>
+							</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>

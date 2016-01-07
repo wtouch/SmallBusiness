@@ -10,6 +10,18 @@
 {% endblock %}
 {% block content %}
 {% autoescape false %}
+<script>
+	$(document).ready(function(){
+	 $(window).scroll(function(e){
+    var scrollTop = $(document).scrollTop();
+    if(scrollTop > 0){
+        $('.b').removeClass('navbar-static-top').addClass("navbar-fixed-top");
+    } else {
+        $('.b').removeClass("navbar-fixed-top").addClass('navbar-static-top');
+    }
+	});
+	});
+</script>
 <script type="text/ng-template" id="city.html">
     <a>
      <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
@@ -41,23 +53,24 @@
 				<div class="input-group searchBlock">
 					<input type="text" typeahead-template-url="search.html" required name="location" id="location" ng-model="keyword" typeahead-on-select="getSearchResult(city, $item)" placeholder="Type to Search" typeahead="search.business_name for search in getSearchData($viewValue, city)" typeahead-loading="locationLoading" typeahead-editable="false" class="form-control " autocomplete="off">
 					<span class="input-group-btn">
-						<button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-search"></span></button>
+						<button class="btn btn-warning" type="button"><span class="glyphicon glyphicon-search"></span></button>
 					</span>
 				</div>
 			</div >
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12 ">
-			<div class="text-center">
-				{% for x in data %}
-					<div class="products " >
-						<a href="{{city| replace({' ' : '-'})}}/{{x.category | replace({' ' : '-'}) }}" ><img src="{{path}}img/category/{{x.category_name}}.jpg" class="category"/></a><br>
+		<div class="col-md-12 text-center">
+			{% for x in data %}
+				<div class="products " >
+					<a href="{{city| replace({' ' : '-'})}}/{{x.category | replace({' ' : '-'}) }}" >
+						<img src="{{path}}img/category/{{x.category_name}}.jpg" class="category"/>
+					</a>
+					<div class="cats text-center">
 						<a  class="catp" href="{{city| replace({' ' : '-'})}}/{{x.category | replace({' ' : '-'}) }}" >{{x.category_name}}</a>
 					</div>
-				{% endfor %}
-			</div>
-			
+				</div>
+			{% endfor %}
 		</div>
 	</div>
 </main>
