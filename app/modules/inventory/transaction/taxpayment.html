@@ -8,13 +8,25 @@
 			<div class="form-group">{{modalOptions.taxpayment}}
 				<label for="category" class="col-sm-2 control-label">Category</label>
 				<div class="col-sm-9">
-					<select id="category" class="form-control" ng-model="modalOptions.taxpayment.category" ng-options="item.taxName as item.taxName for item in userDetails.config.inventory.taxData.tax">
+					<select id="category" class="form-control" ng-change="modalOptions.getTaxAmount(modalOptions.taxpayment.category,modalOptions);" ng-model="modalOptions.taxpayment.category" ng-options="item.taxName as item.taxName for item in userDetails.config.inventory.taxData.tax">
 					<option value="" selected>Category</option>
 					</select>
 				</div>
 				<span class="help-block" ng-show="taxpaymentForm.category.$dirty && taxpaymentForm.category.$invalid">
 					<span ng-show="taxpaymentForm.category.$error.required" class="text-danger">Required field.</span>
 				</span>	
+			</div>
+			
+			<div class="form-group">
+				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
+					<div class="col-sm-9">
+						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^(?=.s+)(?:[1-9]\d*|0)?(?:\.\d+)?$/"  ng-model="modalOptions.taxpayment.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.taxpayment.debit_amount, modalOptions);" name="amount" placeholder="Amount" required  previous-balance="modalOptions.previous_balance"/>
+						<span class="help-block" ng-show="taxpaymentForm.amount.$dirty && taxpaymentForm.amount.$invalid">
+							<span ng-show="taxpaymentForm.amount.$error.required" class="text-danger">Amount is required.</span>
+							<span ng-show="taxpaymentForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
+							<span ng-show="taxpaymentForm.amount.$error.checkAmount" class="text-danger">Amount must be less than or equal to previous account balance </span>
+						</span>
+					</div>					
 			</div>
 			
 			<div class="form-group">
@@ -111,19 +123,9 @@
 							<span ng-show="taxpaymentForm.Branch.$error.required">Branch Name is Required.</span>
 						</span>	
 					</div>		
-			</div>
+			</div>-->
 			
-			<div class="form-group">
-				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
-					<div class="col-sm-9">
-						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^(?=.s+)(?:[1-9]\d*|0)?(?:\.\d+)?$/" ng-model="modalOptions.taxpayment.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.taxpayment.debit_amount, modalOptions);" name="amount" placeholder="Amount" required  previous-balance="modalOptions.previous_balance"/>
-						<span class="help-block" ng-show="taxpaymentForm.amount.$dirty && taxpaymentForm.amount.$invalid">
-							<span ng-show="taxpaymentForm.amount.$error.required" class="text-danger">Amount is required.</span>
-							<span ng-show="taxpaymentForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
-							<span ng-show="taxpaymentForm.amount.$error.checkAmount" class="text-danger">Amount must be less than or equal to previous account balance </span>
-						</span>
-					</div>					
-			</div> -->
+			
 				
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">Description</label>

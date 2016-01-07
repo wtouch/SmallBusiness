@@ -169,6 +169,18 @@ define(['app'], function (app) {
 				size : 'lg'
 			};
 			
+			$scope.taxParams = {
+				where : {
+					status : 1,
+					user_id : $rootScope.userDetails.id,
+					type : "tax_payment"
+				},
+				groupBy : {
+					account_id : "category"
+				},
+				cols : ["*, sum(t0.debit_amount) as tax_amount"]
+			}
+		
 			var modalOptions = {
 				taxpaymentDate : { date : $scope.currentDate},
 				taxpayment : (data) ? {
@@ -189,6 +201,16 @@ define(['app'], function (app) {
 					user_id : $rootScope.userDetails.id,
 					status : 1,
 				}, 
+				getTaxAmount : function(taxName,taxAmount){
+					$scope.getData(false, true,'transaction', "tax_payment",$scope.taxParams);
+					$scope.getData(false, true,'invoice', "invoice_list",$scope.invoicelist);
+					var TaxCal = dataService.taxPayment($scope.invoice_list,$scope.tax_payment);
+					taxAmount.taxpayment.debit_amount =  TaxCal.payableTax[taxName];
+					console.log(TaxCal);
+					console.log(taxName);
+					console.log(taxAmount);
+					
+				},
 				
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
