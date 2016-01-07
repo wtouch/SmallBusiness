@@ -50,20 +50,30 @@
 			
 			border-bottom: 1px dashed #e0e0e0;
 			background-color:@lightbackcolor;
-
-		
 		h4{
 			font-size: 22px;
 			font-style: italic;
 			color:red;
-			background-image:url('../img/hd.gif');
-			background-size:100%;
-			background-repeat:no-repeat;
+		}
+		.description{
+		height: 175px;
+		overflow: hidden;
 		}
 		}
  }
  //testimonials
 		.featrtesti{
+		.description{
+					
+		&::before{
+						content:url('../img/icon.gif');
+						position: relative;
+						top: 24px;
+					}
+		}
+		p{
+		text-indent:50px;
+		}
 			blockquote {
 			padding: 10px 20px;
 			margin: 0 0 20px;
@@ -74,15 +84,7 @@
 					color:@color;
 					float:right;
 				}
-					&::before{
-						content:"";
-						position : absolute;
-						background-image:url('../img/icon.gif');
-						background-repeat:no-repeat;
-						top : 5px;
-						left : 0;
-								
-					}
+					
 			}
 		}
 	 

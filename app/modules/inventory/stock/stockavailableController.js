@@ -10,14 +10,11 @@ define(['app'], function (app) {
 		$scope.type = "year";
 		$scope.maxSize = 5;
 		$scope.currentPage = 1;
-		$scope.pageItems = 10;	
-		$scope.currentPage = 1;
 		$scope.pageItems = 10;
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "inventory";
 		console.log('Hello');
-		//$scope.stockList = {};
 		
 		$scope.getTypeaheadData = function(table, searchColumn, searchValue){
 					//console.log(table, searchColumn, searchValue);
@@ -181,7 +178,7 @@ define(['app'], function (app) {
 				$scope.getData(false, $scope.currentPage, "stock", "stockList", $scope.stockParams);
 			}
 		}
-			$scope.openModal = function(url,data){
+		$scope.openModal = function(url,data){
 			var modalDefault = {
 				templateUrl:url,	// apply template to modal
 				size : 'lg'
@@ -231,26 +228,7 @@ define(['app'], function (app) {
 			modalService.showModal(modalDefault, modalOptions).then(function(){	
 			})
 		}
-		$scope.stockParams = {
-			where : {
-				user_id : $rootScope.userDetails.id,
-				status:1,
-			},/* ,
-			join : [
-				{
-					joinType : 'INNER JOIN',
-					joinTable : "inventory_party",
-					joinOn : {
-						id : "t0.party_id"
-					},
-					cols : {name : "name"}
-				}
-			],
-			groupBy : {
-				"t0.goods_name" : "t0.goods_name"
-			},*/
-			cols : ["*"] 
-		}
+		
 		 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
 				where : {

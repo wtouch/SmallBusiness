@@ -26,6 +26,13 @@ define(['app'], function (app) {
 		
 		$rootScope.moduleMenus = [
 			{
+				name : "Tax Payment",
+				events : {
+					click : function(){
+						return $scope.openTaxPayment("modules/inventory/transaction/taxpayment.html");
+					}
+				}
+			},{
 				name : "Add Income",
 				events : {
 					click : function(){
@@ -51,8 +58,8 @@ define(['app'], function (app) {
 		]
 		
 		$http.get("modules/inventory/config.json").success(function(response){
-				$scope.inventoryConfig = response;
-			})
+			$scope.inventoryConfig = response;
+		})
 		
 		$scope.transactionCategory = [];
 		$scope.transactionList = {
@@ -126,8 +133,6 @@ define(['app'], function (app) {
 			}
 		};
 		
-		
-		
 		$scope.verticalSum = function(inputArray, column, subobj){
 			/* if(!$scope[subobj])  */$scope[subobj] = 0;
 			
@@ -153,9 +158,100 @@ define(['app'], function (app) {
 				$scope.verticalSum($scope.transactionList.data, 'debit_amount', 'totalDebit');
 			}
 		})
+		
+		//Tax Payment model
+		$scope.openTaxPayment = function(url,data){
+			var modalDefault = {
+				templateUrl:url,	// apply template to modal
+				size : 'lg'
+			};
+			
+			$scope.taxParams = {
+				where : {
+					status : 1,
+					user_id : $rootScope.userDetails.id,
+					type : "tax_payment"
+				},
+				groupBy : {
+					account_id : "category"
+				},
+				cols : ["*, sum(t0.debit_amount) as tax_amount"]
+			}
+		
+			var modalOptions = {
+				taxpaymentDate : { date : $scope.currentDate},
+				taxpayment : (data) ? {
+					id : data.id,
+					party_id : data.party_id,
+					account_id : data.account_id,
+					category : data.category,
+					user_id : data.user_id,
+					balance : parseFloat(data.balance),
+					payment_type : data.payment_type,
+					date : data.date,
+					credit_amount : parseFloat(data.credit_amount),
+					description : data.description,
+				} : {
+					date : dataService.sqlDateFormate(false, "datetime"),
+					modified_date : dataService.sqlDateFormate(false, "datetime"),
+					type : "tax_payment",
+					user_id : $rootScope.userDetails.id,
+					status : 1,
+				}, 
+				getTaxAmount : function(taxName,taxAmount){
+					$scope.getData(false, true,'transaction', "tax_payment",$scope.taxParams);
+					$scope.getData(false, true,'invoice', "invoice_list",$scope.invoicelist);
+					var TaxCal = dataService.taxPayment($scope.invoice_list,$scope.tax_payment);
+					taxAmount.taxpayment.debit_amount =  TaxCal.payableTax[taxName];
+					console.log(TaxCal);
+					console.log(taxName);
+					console.log(taxAmount);
+					
+				},
+				
+				postData : function(table, input){
+					$rootScope.postData(table, input,function(response){
+						if(response.status == "success"){
+							$notification[response.status]("Transaction Successfull", response.message);
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
+						}
+					})
+				},
+				
+				getBalance : function(accountId, modalOptions) {
+					//console.log(accountId, modalOptions);
+					var accountParams = {
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status : 1,
+							account_id : accountId
+						},
+						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
+					}
+					dataService.get(false,'transaction', accountParams).then(function(response) {
+						console.log(response);
+						modalOptions.previous_balance = response.data[0].previous_balance;
+					})
+					
+				},
+				
+				updateData : function(table, input, id){
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){
+							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
+						}
+					})
+				},
+				getData : $scope.getData,
+			};
+			
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+		
+			})
+		}
+		
 		//Add Income form pop up 
 		$scope.openAddincome = function(url,data){
-			
 			var modalDefault = {
 				templateUrl:url,	// apply template to modal
 				size : 'lg'
@@ -279,6 +375,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							$notification[response.status]("Transaction Successfull", response.message);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})
@@ -387,6 +484,7 @@ define(['app'], function (app) {
 					})
 					$rootScope.postData(table, obj2,function(response){
 						if(response.status == "success"){
+							$notification[response.status]("Transaction Successfull", response.message);
 							$scope.getData(false, $scope.currentPage, 'transaction','transactionList',$scope.transactionParams);
 						}
 					})

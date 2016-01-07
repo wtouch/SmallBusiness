@@ -10,8 +10,6 @@ define(['app'], function (app) {
 		$scope.type = "year";
 		$scope.maxSize = 5;
 		$scope.currentPage = 1;
-		$scope.pageItems = 10;	
-		$scope.currentPage = 1;
 		$scope.pageItems = 10;
 		$scope.currentDate = dataService.sqlDateFormate(false, "yyyy-MM-dd HH:MM:SS");
 		$rootScope.serverApiV2 = true;
@@ -33,6 +31,15 @@ define(['app'], function (app) {
 			stockdate : dataService.sqlDateFormate(false,"datetime"),
 			modified_date : dataService.sqlDateFormate(false,"datetime"),
 		}
+		
+		$scope.stockParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			cols : ["*"]
+		}
+		
 		$scope.postData = function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){

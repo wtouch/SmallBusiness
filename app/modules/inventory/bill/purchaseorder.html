@@ -2,21 +2,21 @@
 	<div class="col-md-12">
 		<div class="main-content">
 		<ng-include src="'modules/component/toolbar.html'"></ng-include>
-		<div class="row">	 				  
+			<div class="row">	 				  
 				<div class="col-sm-2">
 					<div class="bottomspace">
 						<label for="payment_status" class="control-label" >Select pageItems</label>
-						<select firstname id="payment_status" class="form-control" ng-change="getData(false, currentPage,'bill', 'billData', billParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]" checkAmount>
+						<select firstname id="payment_status" class="form-control" ng-change="getData(false, currentPage,'purchase_order', 'PurchaseOrderData', purchaseorderParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]" checkAmount>
 							<option value="" selected>Select type</option>
 						</select>
 					</div>
 				</div>
 			</div>
-		<div class="table-responsive" ng-init="getData(false, currentPage, 'purchase_order', 'PurchaseOrderData',purchaseorderParams);getData(false,false,'party','partyList',partyParams)">
-			<div ui-grid="PurchaseOrderData"></div>
+			<div class="table-responsive" ng-init="getData(false, currentPage, 'purchase_order', 'PurchaseOrderData',purchaseorderParams);getData(false,false,'party','partyList',partyParams)">
+				<div ui-grid="PurchaseOrderData"></div>
 			</div>
 			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage,'purchase_order', 'PurchaseOrderData', billParams)"> </pagination>
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage,'purchase_order', 'PurchaseOrderData', purchaseorderParams)"> </pagination>
 				<pre>Page: {{currentPage}} / {{numPages}}</pre>
 			</div>
 		</div>

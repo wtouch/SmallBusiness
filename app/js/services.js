@@ -264,6 +264,27 @@ define(['app'], function (app) {
 				input = sqlDate;
 				return sqlDate;
 			}
+			obj.taxPayment = function(invoice_list, tax_payment){
+				var tax = {};
+				var totalTax = 0;
+				angular.forEach(invoice_list, function(value, key){
+					angular.forEach($rootScope.userDetails.config.inventory.taxData.tax, function(taxValue, taxKey){
+						if(value.tax[taxValue.taxName] != undefined){
+							if(!tax[taxValue.taxName]) tax[taxValue.taxName] = 0;
+							tax[taxValue.taxName] += value.tax[taxValue.taxName];
+							totalTax += value.tax[taxValue.taxName];
+						}
+					})
+				})
+				angular.forEach(tax_payment, function(value, key){
+					tax[value.category] = tax[value.category] - parseFloat(value.tax_amount);
+				})
+				
+				return {
+					payableTax : tax,
+					totalPayableTax : parseFloat(totalTax).toFixed(2)
+				}
+			}
 			obj.serviceTax = function(amount){
 				var st = amount * parseFloat($rootScope.userDetails.config.rentsetting.service_tax) / 100;
 				//console.log(st, 'st');

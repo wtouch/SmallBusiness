@@ -4,21 +4,6 @@
 		<h3 class="text-center" ng-if="modalOptions.addexpense.id">Edit Expense</h3>
 	</div>
 		<form name="addexpenseForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addexpenseForm.$valid">
-			<!-- <div ng-if = "type =='Rent'"> -->
-			
-		 <div class="form-group">
-				<div ng-init="modalOptions.getData(false,false,'party','partyList', partyParams, modalOptions)">
-					<label for="party" class="col-sm-2 control-label">Party *</label>
-						<div class="col-sm-9">
-							<select id="party_id" class="form-control" ng-model="modalOptions.addexpense.party_id" ng-options="item.id as item.name for item in modalOptions.partyList">
-							<option value="">Select Party</option>
-							</select>	 
-							<span class="help-block" ng-show="addexpenseForm.customer.$dirty && addexpenseForm.customer.$invalid">
-								<span ng-show="addexpenseForm.customer.$error.required" class="text-danger">Required field.</span>
-							</span>	
-						</div>
-				</div>
-			</div>
 			<div class="form-group">
 				<label for="category" class="col-sm-2 control-label">Category</label>
 				<div class="col-sm-9">
@@ -128,7 +113,7 @@
 			<div class="form-group">
 				<label  for="debit_amount" class="col-sm-2 control-label">Amount</label>
 					<div class="col-sm-9">
-						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^(?=.s+)(?:[1-9]\d*|0)?(?:\.\d+)?$/" ng-model="modalOptions.addexpense.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.addexpense.debit_amount, modalOptions);" name="amount" placeholder="Amount" required check-amount previous-balance="modalOptions.previous_balance"/>
+						<input type="text" id="debit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addexpense.debit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.addexpense.debit_amount, modalOptions);" name="amount" placeholder="Amount" required check-amount previous-balance="modalOptions.previous_balance"/>
 						<span class="help-block" ng-show="addexpenseForm.amount.$dirty && addexpenseForm.amount.$invalid">
 							<span ng-show="addexpenseForm.amount.$error.required" class="text-danger">Amount is required.</span>
 							<span ng-show="addexpenseForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>

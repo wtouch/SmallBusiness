@@ -107,15 +107,15 @@ define(['app'], function (app) {
 						+'</select>',
 					
 					
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Bill"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					
-					+ '<a type="button" tooltip="Delete Bill" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					cellTemplate : '<a ng-disabled="row.entity.paid_amount > 0" ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Bill"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+
 					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPaybill(\'modules/inventory/bill/payBill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="Pay Bill"> <span class="glyphicon glyphicon-usd"></span></a>'
-							+
+					+
 					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openViewbill(\'modules/inventory/bill/viewbill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="View Bill"><span class="glyphicon glyphicon-eye-open"></span></a>'
 					+
 					'<a ng-click="grid.appScope.openViewreceipt(\'modules/inventory/bill/viewreceipt.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Receipt"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+ 
+					'<a type="button" tooltip="Delete Bill" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'bill\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
 				}
 			],
@@ -159,12 +159,11 @@ define(['app'], function (app) {
 					
 					
 					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit"> <span class="glyphicon glyphicon-pencil"></span></a>'
-					
-					+ '<a type="button" tooltip="Delete Order" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'purchase_order\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange1)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
-					+		
-					'<a ng-click="grid.appScope.openViewOrder(\'modules/inventory/bill/vieworder.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Order"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/generateBill.html\',row.entity)" class="btn btn-success btn-sm" type="button" tooltip-animation="true" tooltip="Generate Bill"> <span class="glyphicon glyphicon-ok"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/inventory/bill/generateBill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Generate Bill">Generate Bill</a>'
+					+		
+					'<a ng-click="grid.appScope.openViewOrder(\'modules/inventory/bill/vieworder.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="View Order"> <span class="glyphicon glyphicon-eye-open"></span></a>'+
+					'<a type="button" tooltip="Delete Order" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'purchase_order\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange1)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				}
 			],
 			onRegisterApi: function( gridApi ) {
@@ -176,13 +175,11 @@ define(['app'], function (app) {
 		};
 		
 		$scope.callbackColChange = function(response){
-			//console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "bill", "billData", $scope.billParams);
 			}
 		}
 		$scope.callbackColChange1 = function(response){
-			//console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "purchase_order", "PurchaseOrderData", $scope.purchaseorderParams);
 			}
@@ -203,6 +200,7 @@ define(['app'], function (app) {
 				return $scope[subobj];
 			}
 		}
+		
 		$scope.$watch(function(){ return $scope.billData.data},function(newValue){
 			if(angular.isArray(newValue)){
 				if(newValue.length >= 1){
@@ -217,7 +215,7 @@ define(['app'], function (app) {
 					status : 1,
 					account_id : accountId
 				},
-				cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
+				cols : ["account_id, ROUND(IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0),2) as previous_balance"]
 			}
 			dataService.get(false,'transaction', accountParams).then(function(response) {
 				modalOptions.previous_balance = response.data[0].previous_balance;
@@ -239,7 +237,7 @@ define(['app'], function (app) {
 					user_id : data.user_id,
 					bill_date : data.bill_date,
 					due_date : data.due_date,
-					due_amount : data.due_amount,
+					subtotal : data.subtotal,
 					total_amount : data.total_amount,
 					remark : data.remark,
 					particular : data.particular,
@@ -259,6 +257,7 @@ define(['app'], function (app) {
 					bill_date : data.bill_date,
 					due_date : data.due_date,
 					due_amount : data.due_amount,
+					subtotal : data.subtotal,
 					total_amount : data.total_amount,
 					remark : data.remark,
 					particular : data.particular,
@@ -299,7 +298,6 @@ define(['app'], function (app) {
 				},
 				
 				getTypeaheadData : function(table, searchColumn, searchValue){
-					//console.log(table, searchColumn, searchValue);
 					var locationParams = {
 						search : {},
 						cols : ["*"],
@@ -383,13 +381,11 @@ define(['app'], function (app) {
 				},
 				//for generate Order
 				generateBill : (data) ? {
-					//id : data.id,
 					purchase_order_id :data.purchase_order_id,
 					party_id : data.party_id,
 					user_id : data.user_id,
 					purchase_order_date : data.purchase_order_date,
 					due_date : data.due_date,
-					due_amount : data.due_amount,
 					total_amount : data.total_amount,
 					remark : data.remark,
 					particular : data.particular,
@@ -411,13 +407,12 @@ define(['app'], function (app) {
 				},
 				
 				getTypeaheadData : function(table, searchColumn, searchValue){
-					//console.log(table, searchColumn, searchValue);
 					var locationParams = {
 						search : {},
 						cols : ["*"]
 					};
 					locationParams.search[searchColumn] = searchValue;
-					//console.log(locationParams);
+					
 					return dataService.get(false, 'stock_items', locationParams).then(function(response){
 					
 						if(response.status == 'success'){
@@ -455,7 +450,6 @@ define(['app'], function (app) {
 					object = sqlDate;
 				},
 				getData: $scope.getData,
-				//addToObject : $rootScope.addToObject,
 				addToObject : function(object,data,modalOptions){
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};
@@ -600,10 +594,6 @@ define(['app'], function (app) {
 			})
 		}
 		
-		
-		
-		
-		
 		$scope.setDate = function(date, days, sql){
 			var curDate = new Date(date);
 			var newDate = curDate.setDate(curDate.getDate() + days);
@@ -617,7 +607,6 @@ define(['app'], function (app) {
 			}
 			return finalDate;
 		}
-		
 		
 		$scope.billParams = {
 			where : {
@@ -638,13 +627,13 @@ define(['app'], function (app) {
 					joinOn : {
 						reference_id : "t0.id"
 					},
-					cols : ['debit_amount, IFNULL(sum(t2.debit_amount),0) as paid_amount']
+					cols : ['debit_amount, ROUND(IFNULL(sum(t2.debit_amount),0),2) as paid_amount']
 				}
 			],
 			groupBy : {
 				id : "id"
 			},
-			cols : ["*, (t0.total_amount - IFNULL(sum(t2.debit_amount),0)) as due_amount"]
+			cols : ["*, (ROUND(t0.total_amount - IFNULL(sum(t2.debit_amount),0),2)) as due_amount"]
 		}
 		
         //Params For Purchase order
@@ -665,6 +654,7 @@ define(['app'], function (app) {
 			],
 			cols : ['*']
 		}
+		
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -703,6 +693,7 @@ define(['app'], function (app) {
 				}
 			});
 		}
+		
 		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
 			if(!params) params = {};
@@ -711,6 +702,7 @@ define(['app'], function (app) {
 				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
 		}
+		
 		$scope.orderBy = function(col, value){
 			if(!$scope.params.orderBy) $scope.params.orderBy = {};
 			$scope.params.orderBy[col] = value;
