@@ -303,8 +303,7 @@ define(['app'], function (app) {
 						where : {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
-								staff_id:data.staff_id
-						
+							staff_id : data.staff_id
 						},
 						cols : ["*"]
 					}
@@ -335,7 +334,7 @@ define(['app'], function (app) {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
 							reference_id : data.id,
-							type : "salary" // staff_dr
+							type : "staff_debit" // staff_dr
 							//category : "" // salary
 						},
 						cols : ["*"]

@@ -2,7 +2,7 @@
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 	<h3>Pay Salary</h3>
 </div>
-<div class="modal-body"><!-- {{modalOptions.paysalary}} -->
+<div class="modal-body">
 <form class="form-horizontal" name="paysalaryForm" role="form" ng-submit="paysalaryForm.$valid" novalidate="novalidate">
 		<div class="form-group">
 			<label for="account" class="col-sm-2 control-label">Account Name*</label>
@@ -111,7 +111,7 @@
 					<table class="table table-hover table-responsive table-bordered">
 						<tr>
 							<th>PF</th>
-							<td>{{modalOptions.paysalary.pf.toFixed(2)}}</td>
+							<td>{{modalOptions.paysalary.pf.toFixed(2)}} <input type="hidden" ng-model="modalOptions.paysalary.pf.toFixed(2)"/></td>
 						</tr>
 						<tr>
 							<th>ESIC</th>
@@ -127,6 +127,7 @@
 						</tr>
 					</table>
 				</div>
+			
 			</div>
 			<div class="form-group">
 				<label for="nsp" class="col-sm-2 control-label">Net Salary Payable</label>
