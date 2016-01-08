@@ -49,15 +49,17 @@
 					</div>						
 			</div>
 			
-			<div class="form-group">
+			<div class="form-group" ng-init="modalOptions.getData(false, false,'saffleaves','staffleavesList', modalOptions.staffleavesParams, modalOptions)">
 					<label for="unpaid_leaves" class="col-sm-2 control-label">Unpaid Leaves</label>
-					<div class="col-sm-9">
-						<input type="text" id="unpaid_leaves" name="unpaid_leaves" class="form-control" ng-model="modalOptions.paysalary.unpaid_leaves" placeholder="Enter Unpaid" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" ng-change="modalOptions.payableDays(modalOptions)" required>
+					<div class="col-sm-9">{{modalOptions.staffleavesList}}
+						<input type="text
+						" id="unpaid_leaves" name="unpaid_leaves" class="form-control" ng-model="modalOptions.paysalary.unpaid_leaves" placeholder="Enter Unpaid" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" ng-change="modalOptions.payableDays(modalOptions)" required>
 						<span class="help-block" ng-show="paysalaryForm.unpaid_leaves.$dirty && paysalaryForm.unpaid_leaves.$invalid">
 							<span ng-show="paysalaryForm.unpaid_leaves.$error.pattern && (paysalaryForm.unpaid_leaves.$dirty || submitted)" class="text-danger">Please enter number</span>
 						</span>
 					</div>						
 			</div>
+			
 			<div class="form-group">
 					<label for="payable_day" class="col-sm-2 control-label">Payable Days</label>
 					<div class="col-sm-9">
@@ -67,6 +69,7 @@
 						</span>
 					</div>						
 			</div>
+			
 			<div class="form-group">
 					<label for="cms" class="col-sm-2 control-label">Current Month Salary</label>
 					<div class="col-sm-9">
