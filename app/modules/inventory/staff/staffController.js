@@ -333,8 +333,7 @@ define(['app'], function (app) {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
 							reference_id : data.id,
-							type : "staff_debit" // staff_dr
-							//category : "" // salary
+							type : "staff_debit" 
 						},
 						cols : ["*"]
 					},

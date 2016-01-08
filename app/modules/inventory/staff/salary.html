@@ -1,9 +1,9 @@
 <div class="modal-header">
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
-	<h3>Pay Salary</h3>
+	<h3 class="text-center">Pay Salary</h3>
 </div>
 <div class="modal-body">
-<form class="form-horizontal" name="paysalaryForm" role="form" ng-submit="paysalaryForm.$valid" novalidate="novalidate">
+	<form class="form-horizontal" name="paysalaryForm" role="form" ng-submit="paysalaryForm.$valid" novalidate="novalidate">
 		<div class="form-group">
 			<label for="account" class="col-sm-2 control-label">Account Name*</label>
 			<div class="col-sm-9">
@@ -50,10 +50,9 @@
 			</div>
 			
 			<div class="form-group" ng-init="modalOptions.getData(false, false,'saffleaves','staffleavesList', modalOptions.staffleavesParams, modalOptions)">
-					<label for="unpaid_leaves" class="col-sm-2 control-label">Unpaid Leaves</label>
-					<div class="col-sm-9">{{modalOptions.staffleavesList}}
-						<input type="text
-						" id="unpaid_leaves" name="unpaid_leaves" class="form-control" ng-model="modalOptions.paysalary.unpaid_leaves" placeholder="Enter Unpaid" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" ng-change="modalOptions.payableDays(modalOptions)" required>
+				<label for="unpaid_leaves" class="col-sm-2 control-label">Unpaid Leaves</label>
+					<div class="col-sm-9">
+						<input type="text" id="unpaid_leaves" name="unpaid_leaves" class="form-control" ng-model="modalOptions.staffleavesList.type" placeholder="Enter Unpaid" ng-pattern="/^\d{0,9}[0-9]$/" maxlength="10" ng-change="modalOptions.payableDays(modalOptions)" required>
 						<span class="help-block" ng-show="paysalaryForm.unpaid_leaves.$dirty && paysalaryForm.unpaid_leaves.$invalid">
 							<span ng-show="paysalaryForm.unpaid_leaves.$error.pattern && (paysalaryForm.unpaid_leaves.$dirty || submitted)" class="text-danger">Please enter number</span>
 						</span>
@@ -61,13 +60,13 @@
 			</div>
 			
 			<div class="form-group">
-					<label for="payable_day" class="col-sm-2 control-label">Payable Days</label>
-					<div class="col-sm-9">
-						<input type="text" id="payable_day" name="payable_day" class="form-control" ng-model="modalOptions.paysalary.payable_day" placeholder="Enter Payable days" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="10" required>
-						<span class="help-block" ng-show="paysalaryForm.payable_day.$dirty && paysalaryForm.payable_day.$invalid">
-							<span ng-show="paysalaryForm.payable_day.$error.pattern && (paysalaryForm.payable_day.$dirty || submitted)" class="text-danger">Please enter number</span>
-						</span>
-					</div>						
+				<label for="payable_day" class="col-sm-2 control-label">Payable Days</label>
+				<div class="col-sm-9">
+					<input type="text" id="payable_day" name="payable_day" class="form-control" ng-model="modalOptions.paysalary.payable_day" placeholder="Enter Payable days" ng-pattern="/^\d{0,9}[0-9]$/"  maxlength="10" required>
+					<span class="help-block" ng-show="paysalaryForm.payable_day.$dirty && paysalaryForm.payable_day.$invalid">
+						<span ng-show="paysalaryForm.payable_day.$error.pattern && (paysalaryForm.payable_day.$dirty || submitted)" class="text-danger">Please enter number</span>
+					</span>
+				</div>						
 			</div>
 			
 			<div class="form-group">
@@ -80,7 +79,7 @@
 					</div>						
 			</div>
 			<div class="form-group">
-			<label class="col-sm-2">Earning Salary</label>
+				<label class="col-sm-2">Earning Salary</label>
 				<div class="col-sm-4">
 					<table class="table table-hover table-responsive table-bordered">
 						<tr>
@@ -130,7 +129,6 @@
 						</tr>
 					</table>
 				</div>
-			
 			</div>
 			<div class="form-group">
 				<label for="nsp" class="col-sm-2 control-label">Net Salary Payable</label>
