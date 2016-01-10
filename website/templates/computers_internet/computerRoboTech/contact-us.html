@@ -121,10 +121,7 @@
 			
 		</div>
 		<div class="col-xs-12 col-sm-12 col-lg-4">
-					
-					
-							{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] %}
-						
+			{% include [templatePath ~ '/includes/enquiry.html', 'default/default/includes/enquiry.html'] with {enquiry : { user_id : data.user_id, owner_email : data.owner_email}} %}		
 		</div>
 		<div class="col-sm-12">
 		<div id="googleMap" style="height : 400px;">

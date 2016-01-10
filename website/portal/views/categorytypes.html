@@ -17,7 +17,9 @@
 						{% for x in data %}
 							<div class="prodcategory">
 								<a href="/{{x.city| replace({' ' : '-'})}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}"><img src="{{path}}img/category/{{x.category_name}}/{{x.type_name}}.jpg" class="category center-block"/></a>
-								<a class="catp" href="/{{x.city| replace({' ' : '-'})}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}">{{x.type_name}}</a>
+								<div class="cats text-center">
+									<a class="catp" href="/{{x.city| replace({' ' : '-'})}}/{{x.category  | replace({' ' : '-'}) }}/{{x.type  | replace({' ' : '-'})}}">{{x.type_name}}</a>
+								</div>
 							</div>
 						{% endfor %}
 					</div>

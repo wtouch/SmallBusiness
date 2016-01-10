@@ -100,19 +100,47 @@ main .home {
   width: 100%;
   max-width: 450px;
 }
+main .prodcategory,
 main .products {
   position: relative;
-  overflow: hidden;
   display: inline-block;
   border: 1px solid #ccc;
   padding-top: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
-  height: 160px;
-  width: 175px;
+  overflow: hidden;
 }
+main .prodcategory a,
 main .products a {
   display: block;
+}
+main .prodcategory .cats .catp,
+main .products .cats .catp {
+  color: #332F2F;
+  font-family: "OpenSans-Regular";
+  -webkit-transition: all 200ms linear;
+  -moz-transition: all 200ms linear;
+  -o-transition: all 200ms linear;
+  -ms-transition: all 200ms linear;
+  transition: all 200ms linear;
+}
+main .prodcategory {
+  width: 350px;
+}
+main .prodcategory .category {
+  max-width: 160px;
+  height: 150px;
+}
+main .prodcategory .cats {
+  height: 100px;
+}
+main .prodcategory .cats .catp {
+  font-size: 30px;
+  line-height: 50px;
+}
+main .products {
+  height: 160px;
+  width: 175px;
 }
 main .products span {
   font-size: 10px;
@@ -134,9 +162,9 @@ main .products .cats {
   bottom: 0;
   padding: 10px 5px;
   margin-top: 10px;
+  opacity: 0.8;
   vertical-align: middle;
   display: table;
-  opacity: 0.8;
   -webkit-transition: all 200ms linear;
   -moz-transition: all 200ms linear;
   -o-transition: all 200ms linear;
@@ -144,15 +172,8 @@ main .products .cats {
   transition: all 200ms linear;
 }
 main .products .cats .catp {
-  color: #332F2F;
-  font-family: "OpenSans-Regular";
   vertical-align: middle;
-  display: table-cell;
-  -webkit-transition: all 200ms linear;
-  -moz-transition: all 200ms linear;
-  -o-transition: all 200ms linear;
-  -ms-transition: all 200ms linear;
-  transition: all 200ms linear;
+  display: table;
 }
 main .products:hover {
   box-shadow: 0px 3px 5px #ccc;
@@ -191,9 +212,6 @@ main .products:hover .cats .catp {
 }
 #portalMenu {
   margin-right: 15px;
-}
-.cat {
-  width: 75%;
 }
 .searchBlock {
   margin-bottom: 30px;
