@@ -57,7 +57,8 @@
 body {
   line-height: normal;
   color: #7F8C8C;
-  overflow: scroll;
+  overflow-y: scroll;
+  background-image: url(http://sms.wtouch.in/img/patterns/bg_d.png);
 }
 header {
   left: 0;
@@ -65,12 +66,14 @@ header {
 }
 header .navbar-default {
   margin-bottom: 0px;
+  border: 0;
+  /* border-bottom: 1px solid #ccc; */
 }
 header .navbar-default .navbar-nav > li {
   padding: 5px;
 }
 header .navbar-default .navbar-nav > li > a {
-  color: #AD1F13;
+  color: #4C4C4C;
 }
 header .navbar-default .navbar-nav > li > a:before {
   position: absolute;
@@ -104,12 +107,14 @@ main .products {
   position: relative;
   overflow: hidden;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid #FFF;
   padding-top: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
   height: 160px;
   width: 175px;
+  background: rgba(255, 254, 254, 0.58);
+  box-shadow: 0px 0px 0px 1px #CCCCCC;
 }
 main .products a {
   display: block;
@@ -120,11 +125,6 @@ main .products span {
 main .products .category {
   height: 75px;
   width: 85px;
-  -webkit-transition: all 400ms linear;
-  -moz-transition: all 400ms linear;
-  -o-transition: all 400ms linear;
-  -ms-transition: all 400ms linear;
-  transition: all 400ms linear;
 }
 main .products .cats {
   position: absolute;
@@ -155,16 +155,11 @@ main .products .cats .catp {
   transition: all 200ms linear;
 }
 main .products:hover {
-  box-shadow: 0px 3px 5px #ccc;
+  box-shadow: 0px 3px 12px #ccc;
   background: #210101;
 }
-main .products:hover .category {
-  -webkit-animation: moveFromBottom 300ms ease;
-  -moz-animation: moveFromBottom 300ms ease;
-  -ms-animation: moveFromBottom 300ms ease;
-}
 main .products:hover .cats {
-  background: #CE1707;
+  background: #E53324;
   -webkit-animation: moveFromBottom 500ms ease;
   -moz-animation: moveFromBottom 500ms ease;
   -ms-animation: moveFromBottom 500ms ease;
@@ -176,7 +171,7 @@ main .products:hover .cats .catp {
   -ms-animation: smallToBig 300ms ease;
 }
 .footer {
-  background-color: #F6A30A;
+  /* background-color: #F6A30A; */
   width: 100%;
   color: #6d0019;
   margin-top: 20px;
@@ -185,6 +180,7 @@ main .products:hover .cats .catp {
 		background: -webkit-linear-gradient(top, #a90329 0%,#8f0222 44%,#6d0019 100%);
 		background: linear-gradient(to bottom, #a90329 0%,#8f0222 44%,#6d0019 100%);
 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 );*/
+  margin-bottom: 10px;
 }
 .footer p {
   margin: 10px 0;
