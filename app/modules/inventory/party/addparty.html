@@ -4,25 +4,23 @@
 	<h3  ng-if="modalOptions.adduser.id" class="text-center">Edit Party</h3>
 	</div>
 	<div class="modal-body">
-		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate="novalidate"><!--{{modalOptions.adduser}}-->
-		
+		<form class="form-horizontal" name="adduserForm" role="form" ng-submit="adduserForm.$valid" novalidate="novalidate">
 		    <input type="hidden" class="form-control" ng-model="modalOptions.adduser.user_id" ng-init="modalOptions.adduser.user_id = userDetails.id" readonly/>
 			<div class="form-group"  ng-if="!modalOptions.adduser.id">
 				<label for="type" class="col-sm-2 control-label">Type*</label>
 				<div class="col-sm-9">
-						<select id="type" name="type" class="form-control" 
-						ng-model="modalOptions.adduser.type"  required="required">
-						<option value="" selected>Select type</option>
-						<option value="client">Client</option>
-						<option value="vendor">Vendor</option>
-						</select >
-						<span class="help-block" ng-show="adduserForm.type.$dirty && adduserForm.type.$invalid">
-						<span ng-show="adduserForm.type.$error.required"class="text-danger">Select party type</span>
-						</span>
+					<select id="type" name="type" class="form-control" 
+					ng-model="modalOptions.adduser.type"  required="required">
+					<option value="" selected>Select type</option>
+					<option value="client">Client</option>
+					<option value="vendor">Vendor</option>
+					</select >
+					<span class="help-block" ng-show="adduserForm.type.$dirty && adduserForm.type.$invalid">
+					<span ng-show="adduserForm.type.$error.required"class="text-danger">Select party type</span>
+					</span>
 				</div>
 			</div>
-			
-			<div class="form-group"><!-- {{userDetails.config.inventory.taxData.tax}} -->
+			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">Name *</label>
 				<div class="col-sm-9">
 					<input type="hidden" ng-model="modalOptions.adduser.status" ng-init="modalOptions.adduser.status = '1'">
@@ -33,11 +31,9 @@
 					</span>
 				</div>
 			</div>
-			
 			<div>
 				<input type="hidden" ng-model="modalOptions.adduser.user_id">
 			</div>	
-			
 			<div class="form-group">	
 				<label  for="email" class="col-sm-2 control-label">Email *</label>
 				<div class="col-sm-9">
@@ -48,7 +44,6 @@
 					</span>
 				</div>
 			</div> 
-			
 			<div class="form-group">
 				<label for="phone" class="col-sm-2 control-label">Phone *</label>
 				<div class="col-sm-9">
@@ -71,8 +66,7 @@
 					</span>
 				</div>
 			</div>
-			
-	       <div class="form-group">
+			<div class="form-group">
 				<label for="location" class="col-sm-2 control-label">Location *</label>
 					<div class="col-sm-4">
 						<input type="text" name="location" id="location" ng-model="modalOptions.adduser.location" placeholder="Enter your location" ng-pattern="/^[a-zA-Z0-9- -]*$/" class="form-control" required>
@@ -91,7 +85,6 @@
 					</span>
 				</div>						
 			</div>			
-			
 			<div class="form-group">
 				<label for="city" class="col-sm-2 control-label">City *</label>
 				<div class="col-sm-4" >
@@ -110,7 +103,6 @@
 					</span>				
 				</div>
 			</div> 
-
 			<div class="form-group">
 				<label for="country" class="col-sm-2 control-label">Country *</label>
 				<div class="col-sm-4">
@@ -128,7 +120,6 @@
 					</span>
 				</div>
 			</div>
-			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-9">
 					<button type="submit" class="btn btn-success" ng-if="!modalOptions.adduser.id" ng-disabled="adduserForm.$invalid" ng-click="modalOptions.postData('party',modalOptions.adduser);modalOptions.ok()">Add party</button>
@@ -139,5 +130,3 @@
 			</div>						
 		</form>
 </div>
-
-
