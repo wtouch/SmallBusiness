@@ -278,6 +278,7 @@ define(['app'], function (app) {
 				})
 				angular.forEach(tax_payment, function(value, key){
 					tax[value.category] = tax[value.category] - parseFloat(value.tax_amount);
+					totalTax -= value.tax_amount;
 				})
 				
 				return {

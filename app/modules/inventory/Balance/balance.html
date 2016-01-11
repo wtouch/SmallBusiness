@@ -45,7 +45,25 @@
 						<td>{{value}}</td>
 					</tr>
 				</table>
+				<h4>Owner's Profit</h4>
+				<table class="table table-striped table-bordered table-hover">
+					<tr>
+						<th>Total Assets</th>
+						<td>{{addition(getTotalBalance(), getTotal())}}</td>
+					</tr>
+					<tr>
+						<th>Total Liabilities</th>
+						<th>{{addition(taxPayment.totalPayableTax, getTotalBill())}}</th>
+					</tr>
+					<tr>
+						<th>Total Profit</th>
+						<td>{{addition(getTotalBalance(), getTotal()) - addition(taxPayment.totalPayableTax, getTotalBill())}}</td>
+					</tr>
+				</table>
+				
 			</div>
+			Total Assets : {{ addition(getTotalBalance(), getTotal()) }} <br>
+			Total Liabilities : {{ addition(addition(taxPayment.totalPayableTax, getTotalBill()),addition(getTotalBalance(), getTotal()) - addition(taxPayment.totalPayableTax, getTotalBill())) }}
 		</div>
 	</div>
 </div>
