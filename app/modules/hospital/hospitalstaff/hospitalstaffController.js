@@ -209,10 +209,10 @@ define(['app'], function (app) {
 						modalOptions.formPart = formPart;
 					},
 					getData : $scope.getData,
-					: function(object,data,modalOptions){
-					$rootScope.addToObject(object,modalOptions[data]);
-					modalOptions[data] = {};
-					},
+					addToObject:function(object,data,modalOptions){
+						$rootScope.addToObject(object,modalOptions[data]);
+						modalOptions[data] = {};
+					}, 
 				
 				removeObject : $rootScope.removeObject
 				};
