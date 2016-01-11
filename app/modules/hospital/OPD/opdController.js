@@ -193,7 +193,8 @@ define(['app'], function (app) {
 				},
 				assignData : function(object, formObject){
 					formObject.patient_id = object.patient_id;
-					formObject.patient_name = object.patient_name;
+					formObject.mobile = object.mobile;
+					formObject.emergency_contact = object.emergency_contact;
 					console.log(object);
 				},
 				updateData : function(table, input, id){

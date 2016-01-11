@@ -4,40 +4,23 @@
 	<h3  ng-if="modalOptions.addstaff.id" class="text-center">Update Staff</h3>
 </div>
 	
-
-
 {{modalOptions.addstaff}}
 
-
-
-<ul class="nav nav-tabs" ng-if="modalOptions.addstaff.staff_type=='doctor'">			
-		<li role="presentation" ng-class="{active: modalOptions.formPart=='personalDetails'}">
+<ul class="nav nav-tabs">			
+		<li  role="presentation" ng-class="{active: modalOptions.formPart=='personalDetails'}">
 			<a ng-click="modalOptions.showFormPart('personalDetails', modalOptions)">Personal Details</a>
 		</li>	
 		<li role="presentation" ng-class="{active: modalOptions.formPart=='qualificationDetails'}">
 			<a ng-click="modalOptions.showFormPart('qualificationDetails', modalOptions)">Qualification</a>
 		</li>
 	
-		<li role="presentation" ng-class="{active: modalOptions.formPart=='specializationDetails'}">
+		<li ng-if="modalOptions.addstaff.staff_type=='doctor'" role="presentation" ng-class="{active: modalOptions.formPart=='specializationDetails'}">
 			<a ng-click="modalOptions.showFormPart('specializationDetails', modalOptions)">Specialisation</a>
 		</li>	
 			<li role="presentation" ng-class="{active: modalOptions.formPart=='officialDetails'}">
 			<a ng-click="modalOptions.showFormPart('officialDetails', modalOptions)">Official Details</a>
 		</li>	
 </ul>
-
-<ul class="nav nav-tabs" ng-if="modalOptions.addstaff.staff_type=='nurse'|| modalOptions.addstaff.staff_type=='ward_boy'||modalOptions.addstaff.staff_type=='security_guard'|| modalOptions.addstaff.staff_type=='driver'">			
-		<li role="presentation" ng-class="{active: modalOptions.formPart=='personalDetails'}">
-			<a ng-click="modalOptions.showFormPart('personalDetails', modalOptions)">Personal Details</a>
-		</li>	
-		<li role="presentation" ng-class="{active: modalOptions.formPart=='qualificationDetails'}">
-			<a ng-click="modalOptions.showFormPart('qualificationDetails', modalOptions)">Qualification</a>
-		</li>
-		<li role="presentation" ng-class="{active: modalOptions.formPart=='officialDetails'}">
-			<a ng-click="modalOptions.showFormPart('officialDetails', modalOptions)">Official Details</a>
-		</li>	
-</ul>
-
 <form class="form-horizontal" name="addstaffForm" role="form" ng-submit="addstaffForm.$valid" novalidate="novalidate">
 
 		<ng-include  ng-show="modalOptions.formPart=='personalDetails'" 	src="'modules/hospital/hospitalstaff/personalDetails.html'">

@@ -2,17 +2,11 @@
 	<div class="form-group" ng-init="modalOptions.getData(false,false,'patient','patient',modalOptions.patientParams,modalOptions)">
 		<label for="patient_id" class="col-sm-2 control-label"> Patient Name * </label>
 		<div class="col-sm-8">
-			<!-- <select id="patient_id" class="form-control" ng-model="modalOptions.addopdpatient.patient_id" ng-options="item.id as item.patient_name for item in modalOptions.patient" required>
-				<option value="">Select Patient</option>
-			</select>
-			<span class="help-block" ng-show="addopdpatientForm.user_id.$dirty && addopdpatientForm.user_id.$invalid">
-			<span ng-show="addopdpatientForm.user_id.$error.required" class="text-danger"></span>
-			</span>	 -->
-			<input id="patient_name" class="form-control" typeahead-template-url="customTemplate.html" ng-model="modalOptions.addopdpatient.patient_id" typeahead-on-select="modalOptions.assignData($item, modalOptions.addopdpatient)" typeahead="opd.patient_id for patient_name in modalOptions.getTypeaheadData('patient','patient_name', $viewValue)" 
+			<input id="patient_name" class="form-control" typeahead-template-url="customTemplate.html" ng-model="patient_name" typeahead="item.patient_name for item in modalOptions.getTypeaheadData('patient','patient_name', $viewValue)"  typeahead-on-select="modalOptions.assignData($item, modalOptions.addopdpatient)" 
 				typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required />
 				<script type="text/ng-template" id="customTemplate.html">
 					<a>
-						<span><small> ({{match.model.patient_name}})</small></span>
+						<span><small>{{match.model.patient_name}}</small></span>
 					</a>
 				</script>{{match.model.patient_id}}  
 				<span class="help-block" ng-show="addopdpatientForm.patient_id.$dirty && addopdpatientForm.patient_id.$invalid">

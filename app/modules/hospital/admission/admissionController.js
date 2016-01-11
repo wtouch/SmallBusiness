@@ -163,6 +163,7 @@ define(['app'], function (app) {
 					id : data.id,
 					admission_date : data.admission_date,
 					patient_id:data.patient_id,
+					patient_name:data.patient_name,
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
 					email : data.email,
@@ -216,7 +217,10 @@ define(['app'], function (app) {
 				},
 				assignData : function(object, formObject){
 					formObject.patient_id = object.patient_id;
-					formObject.patient_name = object.patient_name;
+					//formObject.patient_name = object.patient_name;
+					formObject.mobile = object.mobile;
+					formObject.emergency_contact = object.emergency_contact;
+					formObject.email = object.email;
 					console.log(object);
 				},
 				updateData : function(table, input, id){

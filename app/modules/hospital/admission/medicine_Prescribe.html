@@ -42,7 +42,9 @@
 						<span ng-show="medicine_prescribeForm.medicine_used_date.$error.required"class="text-danger">date  is required.</span>
 					</span>	
 				</div>
+				<button type="button" class="btn btn-primary" tooltip-animation="true" tooltip="Open Medicine Price scribe" ng-click="isCollapsed = !isCollapsed"> <span ng-class="(isCollapsed) ? 'glyphicon glyphicon-minus' : 'glyphicon glyphicon-plus'"></span></button>
 			</div>
+			<div collapse="!isCollapsed" class="collapse">
 			<div class="form-group"  ng-init= "modalOptions.getData(false,false,'medicine','medicineList',false,modalOptions)">
 			<label for="medicine_id" class="col-sm-2 control-label">Medicine Name *</label>
 				<div class="col-sm-8">					
@@ -80,6 +82,7 @@
 						<span ng-show="medicine_prescribeForm.description.$error.required"class="text-danger">description is required.</span>
 					</span>				
 				</div>
+			</div>
 			</div>
 		</form>	
 		<div class="form-group">
