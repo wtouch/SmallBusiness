@@ -8,7 +8,7 @@
 		<div class="form-group" >
 			<label for="patient_id" class="col-sm-2 control-label"> Patient Name * </label>
 			<div class="col-sm-8">
-				<input id="patient_id"  name= "patient_id" class="form-control" typeahead-template-url="customTemplate.html" ng-model="modalOptions.addadmission.patient_id" typeahead-on-select="modalOptions.assignData($item, modalOptions.addadmission)" typeahead="admission.patient_id for patient_name in modalOptions.getTypeaheadData('patient','patient_name', $viewValue)" 
+				<input id="patient_id"  name="patient_id" class="form-control" typeahead-template-url="customTemplate.html" ng-model="patient_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.addadmission)" typeahead="item.patient_name for item in modalOptions.getTypeaheadData('patient','patient_name', $viewValue)" 
 				typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required />
 				<script type="text/ng-template" id="customTemplate.html">
 					<a>
