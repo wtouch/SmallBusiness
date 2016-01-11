@@ -124,7 +124,7 @@ define(['app'], function (app) {
 					marital_status :data.marital_status,
 					disability :data.disability,
 					mobile: data.mobile,
-					mobile2 : data.	mobile2,
+					mobile2 : data.mobile2,
 					address: data.address,
 					location: data.location,
 					area: data.area,
