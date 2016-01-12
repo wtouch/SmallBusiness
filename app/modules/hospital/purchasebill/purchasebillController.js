@@ -159,6 +159,7 @@ define(['app'], function (app) {
 					total_amount : data.total_amount,
 					goods_name : data.goods_name,
 					remark : data.remark,
+					particular : data.particular,
 					modified_date : dataService.sqlDateFormate(false,"datetime")
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
@@ -177,6 +178,7 @@ define(['app'], function (app) {
 					due_amount : data.due_amount,
 					total_amount : data.total_amount,
 					remark : data.remark,
+					particular : data.particular,
 					modified_date : dataService.sqlDateFormate(false,"datetime")
 				} : {
 					date : dataService.sqlDateFormate(false,"datetime"),
@@ -190,6 +192,7 @@ define(['app'], function (app) {
 						}
 					})
 				},
+				
 				taxCalculate : function(modalOptions){
 					modalOptions.singleparticular.tax = {};
 					
@@ -384,7 +387,7 @@ define(['app'], function (app) {
 					cols : ['name, email, phone, address, location, area, city, state, country, pincode,department']
 				},{
 					joinType : "left join",
-					joinTable : "inventory_transaction",
+					joinTable : "hospital_transactions",
 					joinOn : {
 						reference_id : "t0.id"
 					},
