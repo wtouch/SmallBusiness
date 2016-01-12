@@ -3,7 +3,7 @@
 			<label for="complaint_name" class="col-sm-2 control-label">Select Complaint Name*</label>
 			<div class="col-sm-8">
 				<select id="complaint_name" name="complaint_name" class="form-control" 
-				ng-model="modalOptions.patient_complaint.complaint_name" ng-options="item.id as item.complaint_name for item in modalOptions.complaint" >
+				ng-model="modalOptions.patient_complaint.complaint_name" ng-options="item.complaint_name as item.complaint_name for item in modalOptions.complaint">
 				<option value="">Select Complaint Name</option>
 				
 				</select>
@@ -12,7 +12,7 @@
 			<div class="form-group">
 				<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
 				<div class="col-sm-8">
-					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.patient_complaint.complaints_description" placeholder="Enter Your Complaints Description" ng-maxlength="250"  ></textarea>
+					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.patient_complaint.complaints_description" placeholder="Enter Your Complaints Description" ng-maxlength="250"></textarea>
 					<span ng-hide="addopdpatientForm.patient_complaint.complaints_description.$error.maxlength">{{ 250 - modalOptions.patient_complaint.complaints_description.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="addopdpatientForm.complaints_description.$dirty && addopdpatientForm.complaints_description.$invalid">
 						<span ng-show="addopdpatientForm.complaints_description.$error.required"class="text-danger">Description is required.</span>

@@ -46,10 +46,7 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
 					
 				},	
-				/* {
-				    name:'patient_name',
-					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'opd_view\', \'opdList\', true, grid.appScope.opdParams)" ng-model="patient_name" placeholder="search name">',
-                }, */
+				
 				{
 					name:'patient_name',width:150,
 					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="patient_name" placeholder="search">'

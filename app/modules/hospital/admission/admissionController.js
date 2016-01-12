@@ -163,7 +163,6 @@ define(['app'], function (app) {
 					id : data.id,
 					admission_date : data.admission_date,
 					patient_id:data.patient_id,
-					patient_name:data.patient_name,
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
 					email : data.email,
@@ -180,7 +179,6 @@ define(['app'], function (app) {
 					case_sheet :data.case_sheet,
 					medicine_prescribe :data.medicine_prescribe,
 					equipment_sheet :data.equipment_sheet
-					
 					} 
 					: {
 					date : dataService.sqlDateFormate(),
@@ -192,14 +190,11 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							
-							 
 						$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
 						}
 					})
 				},
 				getTypeaheadData : function(table, searchColumn, searchValue){
-					//console.log(table, searchColumn, searchValue);
 					var locationParams = {
 						search : {},
 						cols : ["*"]
@@ -216,8 +211,7 @@ define(['app'], function (app) {
 					}); 
 				},
 				assignData : function(object, formObject){
-					formObject.patient_id = object.patient_id;
-					//formObject.patient_name = object.patient_name;
+					formObject.patient_id = object.id;
 					formObject.mobile = object.mobile;
 					formObject.emergency_contact = object.emergency_contact;
 					formObject.email = object.email;
@@ -226,7 +220,6 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							
 							$scope.medicine_Prescribe = {};
 							 $scope.medicine_Prescribe.user_id = user_id;
 							if(input.date) $scope.medicine_Prescribe.date = input.date;
