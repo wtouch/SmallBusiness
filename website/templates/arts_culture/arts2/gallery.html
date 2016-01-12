@@ -5,18 +5,16 @@
 			
 			
 			{% for key, value in data.gallery %}
-			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-					<div class="thumbnail ">
-						<div class="imgs">
-							<img class="img-responsive top" src="{{value.image.file_relative_path}}" alt="{{key}}" />
-							<h4 class="text-center">{{value.heading}}</h4>
-						</div>
-						<div class="caption">
-							
-							<div class="description">{{ value.description }}</div>
-						</div>  
+
+			<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+				<div class="thumbnail">
+					<img class="img-responsive" src="{{value.image.file_relative_path}}" alt="{{key}}" />
+					<div class="caption">
+						<h4 class="text-center">{{value.heading}}</h4>
+						<div class="description">{{ value.description }}</div>
 					</div>
-			</div> 
+				</div>
+			</div>
 			{% endfor %}
 		{% endif %}
 	</div>
