@@ -17,6 +17,10 @@ define(['app'], function (app) {
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hospital";
 		
+		$http.get("modules/hospital/config.json").success(function(response){
+			console.log(response);
+				$scope.staffConfig = response;
+			})
 		
 		$rootScope.moduleMenus = [
 			{
@@ -149,6 +153,8 @@ define(['app'], function (app) {
 			var modalOptions = {
 				staffdate:dataService.sqlDateFormate(),
 				date:{date : $scope.currentDate},
+				department: $scope.staffConfig,
+				staff_type: $scope.staffConfig,
 				addstaff : (data) ? {
 					id : data.id,
 					staff_id:data.staff_id,
@@ -348,6 +354,7 @@ define(['app'], function (app) {
 			var modalOptions = {
 				staffpaymentdate: dataService.sqlDateFormate(),
 				Category : $scope.staffConfig,
+				staff_type: $scope.staffConfig,
 				date:{date : $scope.currentDate},
 				staffpayment : (data) ? {
 					id : data.id,

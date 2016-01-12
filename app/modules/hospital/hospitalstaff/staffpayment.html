@@ -185,21 +185,16 @@
 			<label for="select type" class="col-sm-2 control-label">Select Staff Type*</label>
 			<div class="col-sm-4">
 					<select id="salary_type" name="salary_type" class="form-control" 
-					ng-model="modalOptions.addstaff.staff_type">
+					ng-model="modalOptions.addstaff.staff_type"  ng-options="item.system_name as item.name for item in modalOptions.staff_type.staff.staff_type">
 					<option value="" selected>Select Staff Type</option>
-					<option value="doctor">Doctor</option>
-					<option value="nurse">Nurse</option>
-					<option value="ward_boy">Ward Boy</option>
-					<option value="security_guard">Security Guard</option>
-					<option value="driver">Driver</option>
+					
 					</select>
 			</div>
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
 				<label for="reference_id" class="col-sm-1 control-label"> Select Staff* </label>
-				<div class="col-sm-4">
-					<select id="reference_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
+				<div class="col-sm-4">{{modalOptions.addstaff.staff_type}}
+					<select id="reference_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList | filter : {staff_type = modalOptions.addstaff.staff_type}" required>
 						<option value="">Select Staff</option>
-						<option value="1">1</option>
 					</select>
 					<span class="help-block" ng-show="staffpaymentForm.reference_id.$dirty && staffpaymentForm.reference_id.$invalid">
 					<span ng-show="staffpaymentForm.reference_id.$error.required" class="text-danger">user name is required.</span>

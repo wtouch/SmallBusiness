@@ -1,4 +1,6 @@
 <div class="modal-body">
+<form class="form-horizontal" name="specilazationForm" role="form" ng-submit="specilazationForm.$valid" novalidate="novalidate">
+
 <div ng-init="modalOptions.addstaff.specification = (modalOptions.addstaff.specification) ? modalOptions.addstaff.specification : []">
 	<div class="table-responsive">
 		<table class="table table-bordered" >
@@ -10,39 +12,40 @@
 					<th>ADD</th>
 				</tr>
 			</thead>
-			<tbody><div>{{modalOptions.singleparticular}}</div>
+			<tbody><div>{{modalOptions.specification}}</div>
 				<tr>
 					<td>
-						<input type="text" class="form-control " placeholder="Experience Name" id="Experience" name="Experience" ng-model="modalOptions.singleparticular.Experience" ng-pattern="/^[a-zA-Z/ ]*$/" />
-						 <span class="text-danger"  ng-show="addstaffForm.Experience.$error.pattern">Text is required.</span>
-						<span class="help-block" ng-show="addstaffForm.Experience.$dirty && addstaffForm.Experience.$invalid">
-							<span class="text-danger" ng-show="addstaffForm.Experience.$error.required">Required Field.</span>
+						<input type="text" class="form-control " placeholder="Experience Name" id="Experience" name="Experience" ng-model="modalOptions.specification.Experience" ng-pattern="/^[a-zA-Z/ ]*$/" required/>
+						 <span class="text-danger"  ng-show="specilazationForm.Experience.$error.pattern">Text is required.</span>
+						<span class="help-block" ng-show="specilazationForm.Experience.$dirty && specilazationForm.Experience.$invalid">
+							<span class="text-danger" ng-show="specilazationForm.Experience.$error.required">Required Field.</span>
 						</span>
 					</td>
 					<td>
-						<input type="text" class="form-control " placeholder="Doctor Certification No" id="dcn" name="dcn" ng-model="modalOptions.singleparticular.dcn" ng-pattern="/^\d{0,9}[0-9]$/" />
-						 <span ng-show="addstaffForm.dcn.$error.pattern && (addstaffForm.dcn.$dirty || submitted)" class="text-danger">please enter number</span>
-						<span class="help-block" ng-show="addstaffForm.dcn.$dirty && addstaffForm.dcn.$invalid">
-							<span class="text-danger" ng-show="addstaffForm.dcn.$error.required">Required Field.</span>
+						<input type="text" class="form-control " placeholder="Doctor Certification No" id="dcn" name="dcn" ng-model="modalOptions.specification.dcn" ng-pattern="/^\d{0,9}[0-9]$/" required/>
+						 <span ng-show="specilazationForm.dcn.$error.pattern && (specilazationForm.dcn.$dirty || submitted)" class="text-danger">please enter number</span>
+						<span class="help-block" ng-show="specilazationForm.dcn.$dirty && specilazationForm.dcn.$invalid">
+							<span class="text-danger" ng-show="specilazationForm.dcn.$error.required">Required Field.</span>
 						</span>
 					</td>
 			
 					<td>
-						<input type="text" class="form-control " placeholder="CTC" id="ctc" name="ctc" ng-model="modalOptions.singleparticular.ctc" ng-pattern="/^\d{0,9}[0-9]$/" />
+						<input type="text" class="form-control " placeholder="CTC" id="ctc" name="ctc" ng-model="modalOptions.specification.ctc" ng-pattern="/^\d{0,9}[0-9]$/" required/>
 
-						 <span ng-show="addstaffForm.ctc.$error.pattern && (addstaffForm.ctc.$dirty || submitted)" class="text-danger">please enter number</span>
-						<span class="help-block" ng-show="addstaffForm.ctc.$dirty && addstaffForm.ctc.$invalid">
-							<span class="text-danger" ng-show="addstaffForm.ctc.$error.required">Required Field.</span>
+						 <span ng-show="specilazationForm.ctc.$error.pattern && (specilazationForm.ctc.$dirty || submitted)" class="text-danger">please enter number</span>
+						<span class="help-block" ng-show="specilazationForm.ctc.$dirty && specilazationForm.ctc.$invalid">
+							<span class="text-danger" ng-show="specilazationForm.ctc.$error.required">Required Field.</span>
 						</span>	
 					</td>
 					<td>
-					<button type="submit" class="btn btn-success center"  ng-click="modalOptions.addToObject(modalOptions.addstaff.specification,'singleparticular', modalOptions);">+</button>
+					<button type="submit" class="btn btn-success center" ng-disabled="specilazationForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addstaff.specification,'specification', modalOptions);">+</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-</div> 
+ </div>	
+</form>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -60,9 +63,9 @@
 				<td class="text-right">{{x.dcn}}</td>
 				<td>{{x.ctc}}</td>
 		
-				<td><a ng-click="modalOptions.removeObject(modalOptions.addstaff.specification, $index);modalOptions.totalCalculate(modalOptions);"><span class="glyphicon glyphicon-remove"></span></a></td>
+				<td><a ng-click="modalOptions.removeObject(modalOptions.addstaff.specification, $index);"><span class="glyphicon glyphicon-remove"></span></a></td>
 			</tr>
 		</tbody>
 	</table>
-</div>		
-		
+	
+</div>	
