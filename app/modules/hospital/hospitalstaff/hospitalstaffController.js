@@ -87,7 +87,7 @@ define(['app'], function (app) {
                 },
 				{
 				    name:'name',
-					width:150,
+					width:100,
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="Staff Name">',
                 },
 				{
@@ -100,21 +100,20 @@ define(['app'], function (app) {
 					width:150,
 					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'staff\', \'staff\',true)" ng-model="email" placeholder="Email">'
                 },
-				
-			   {
-				    name:'address.current_address',
-					width:150,
-					filterHeaderTemplate: '<input id="address.current_address" class="form-control" ng-change="grid.appScope.filter(\'address.current_address\', address.current_address, \'staff\', \'staff\',true)" ng-model="address.current_address" placeholder="Address">',
-                },
-				
-				
 				{
 				 name:'city',
 				 width:90,
 				 filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'staff\', \'staff\',true)" ng-model="city" placeholder="City">', 
                 },
+			   {
+				    name:'address.current_address',width:100,
+					enableSorting: false, enableFiltering: false,	
+                },
+				
+				
+				
 			    { 
-				 name:'Manage', width:400,
+				 name:'Manage', width:300,
 				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
 							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
@@ -126,6 +125,8 @@ define(['app'], function (app) {
 					  ]
 					},
 					cellTemplate :  '<a ng-click="grid.appScope.openSalary(\'modules/hospital/hospitalstaff/salary.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="Salary" > <span class="	glyphicon glyphicon-usd" ></span></a>'
+					+
+					'<a ng-click="grid.appScope.openPayslip(\'modules/hospital/hospitalstaff/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="viewpayslip"> <span class="glyphicon glyphicon-eye-open" ></span></a>'
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
 					+
@@ -347,6 +348,55 @@ define(['app'], function (app) {
 			})
 		}
 		
+		$scope.openPayslip = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+			viewPayslip:{
+						user_id : $rootScope.userDetails.id,
+						salary:data.salary,
+						name:data.name,
+						staff_id : data.staff_id,
+						date : data.date,
+						//debit_amount:data.debit_amount
+					},
+					
+				getData : $scope.getData,
+				paysalaryParams : {
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+							reference_id : data.id,
+							type : "staff_debit" 
+						},
+						cols : ["*"]
+					},
+			 myFunction:function(datetime) {
+				 console.log(datetime);
+						var month = new Array();
+						month[0] = "January";
+						month[1] = "February";
+						month[2] = "March";
+						month[3] = "April";
+						month[4] = "May";
+						month[5] = "June";
+						month[6] = "July";
+						month[7] = "August";
+						month[8] = "September";
+						month[9] = "October";
+						month[10] = "November";
+						month[11] = "December";
+					var d = new Date(datetime);
+					var n = month[d.getMonth()];
+					return n;
+					}
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
 		
 		$scope.openStaffpayment= function(url,data){
 			var modalDefault = {
@@ -440,7 +490,7 @@ define(['app'], function (app) {
 					},
 					cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 				}
-				dataService.get(false,'transaction', accountParams).then(function(response) {
+				dataService.get(false,'transactions', accountParams).then(function(response) {
 					console.log(response);
 					modalOptions.previous_balance = response.data[0].previous_balance;
 				})
