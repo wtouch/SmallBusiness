@@ -7,12 +7,8 @@
 						<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="filter('name', searchUser, 'user', 'userList', true)" ng-model="searchUser" placeholder="Search">
 						<input id="search" type="text" class="form-control" ng-if="userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUserGroup)" ng-model="searchUserGroup" placeholder="Search">
 					</div>
-					
-					
 				</div>
 			</div>
-		
-	  
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="staffList_status" class="control-label" >Staff List Status</label>
@@ -25,11 +21,12 @@
 			</div>
 		</div>
 	</div>
-	<button class="btn btn-primary "  ng-click="openModal('modules/hospital/hospitalstaff/addhospitalstaff.html')"> add </button>
 	
+	
+	<button class="btn btn-primary "  ng-click="openStaffpayment('modules/hospital/hospitalstaff/staffpayment.html')"> add </button>
 	
 	<div class="table-responsive" ng-init="getData(false, currentPage, 'staff','staff',staffParams);">
-		<div ui-grid="staff"></div>
+		<div ui-grid="staff_payment"></div>
 	</div>
 	
 	<div class="text-center">				
