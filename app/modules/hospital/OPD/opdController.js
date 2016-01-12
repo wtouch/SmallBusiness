@@ -6,8 +6,6 @@ define(['app'], function (app) {
     // This is controller for this view
 	var opdController= function ($scope,$location,$rootScope,$injector,modalService, $routeParams,$notification,dataService,uiGridConstants) {
 		
-		//global scope objects
-
 		$scope.type = "year";
 		$scope.maxSize = 5;
 		$scope.totalRecords = "";
@@ -48,13 +46,13 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
 					
 				},	
-				{
+				/* {
 				    name:'patient_name',
 					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'opd_view\', \'opdList\', true, grid.appScope.opdParams)" ng-model="patient_name" placeholder="search name">',
-                },
+                }, */
 				{
-					name:'name',width:150,
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="name" placeholder="search">'
+					name:'patient_name',width:150,
+					filterHeaderTemplate: '<input id="patient_name" class="form-control" ng-change="grid.appScope.filter(\'patient_name\', patient_name, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="patient_name" placeholder="search">'
                 },
 				{
 					name:'checkup_date',
@@ -63,6 +61,14 @@ define(['app'], function (app) {
 				{
 					name:'emergency_contact',
 					filterHeaderTemplate: '<input id="emergency_contact" class="form-control" ng-change="grid.appScope.filter(\'emergency_contact\', emergency_contact, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="emergency_contact" placeholder="search">'
+                },
+				{
+					name:'dob',
+					filterHeaderTemplate: '<input id="dob" class="form-control" ng-change="grid.appScope.filter(\'dob\', dob, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="dob" placeholder="search">'
+                },
+				{
+					name:'blood_group',width:150,
+					filterHeaderTemplate: '<input id="blood_group" class="form-control" ng-change="grid.appScope.filter(\'blood_group\', blood_group, \'opd_view\', \'opdList\',true, grid.appScope.opdParams)" ng-model="blood_group" placeholder="search">'
                 },
 				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'opd_view\', \'opdList\',false, grid.appScope.opdParams)" ng-model="status">'
@@ -103,7 +109,7 @@ define(['app'], function (app) {
 				checkup_date :$scope.currentDate,
 				registered_date:dataService.sqlDateFormate(),
 				date:{date : $scope.currentDate},
-				viewopd : (data) ? {
+			viewopd : (data) ? {
 					id : data.id,
 					name : data.name,
 					email : data.email,
@@ -144,11 +150,12 @@ define(['app'], function (app) {
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					
 				},
-				addopdpatient : (data) ? {
+			addopdpatient : (data) ? {
 					id : data.id,
 					checkup_date :data.checkup_date ,
 					mobile: data.mobile,
 					ward_id :data.ward_id,
+					//
 					patient_id:data.patient_id,
 					bed_id :data.bed_id,
 					patient_history:data.patient_history,
@@ -192,7 +199,7 @@ define(['app'], function (app) {
 					}); 
 				},
 				assignData : function(object, formObject){
-					formObject.patient_id = object.patient_id;
+					formObject.patient_id = object.id;
 					formObject.mobile = object.mobile;
 					formObject.emergency_contact = object.emergency_contact;
 					console.log(object);
