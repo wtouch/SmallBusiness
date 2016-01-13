@@ -124,7 +124,7 @@ define(['app'], function (app) {
 					marital_status :data.marital_status,
 					disability :data.disability,
 					mobile: data.mobile,
-					mobile2 : data.mobile2,
+					emergency_contact : data.emergency_contact,
 					address: data.address,
 					location: data.location,
 					area: data.area,
@@ -160,11 +160,11 @@ define(['app'], function (app) {
 						}
 					})
 				},
-				formPart :'patientDetails',
+				 formPart :'patientDetails',
 				showFormPart : function(formPart,modalOptions){
 					modalOptions.formPart = formPart;
 					
-				},
+				}, 
 				getData : $scope.getData,
 			};
 			

@@ -1,13 +1,13 @@
 <div class="modal-body" ng-init="modalOptions.addopdpatient.patient_history = (modalOptions.addopdpatient.patient_history) ? modalOptions.addopdpatient.patient_history : []">
 	<div class="form-group" ng-init="modalOptions.getData(false,false,'history','history',modalOptions.historyParams,modalOptions)">
 	<label for="History" class="col-sm-2 control-label">History Title*</label>
-		<div class="col-sm-8">
+		<div class="col-sm-9">
 			<input type="text" id="history_title" name="history_title" class="form-control" ng-model="modalOptions.patient_history.history_title" placeholder="Enter your Phone Number" required />
 		</div>
 	</div>		
 	<div class="form-group">
 		<label for="history_description" class="col-sm-2 control-label">Description *</label>
-		<div class="col-sm-8">
+		<div class="col-sm-9">
 			<textarea  type="text" required name="history_description" class="form-control" id="history_description" ng-model="modalOptions.patient_history.history_description" placeholder="Enter Your Complaints Description" ng-maxlength="250" ></textarea>
 			<span ng-hide="addopdpatientForm.patient_history.history_description.$error.maxlength">{{ 250 - modalOptions.patient_history.history_description.length + " Chars left"}}</span>
 			<span class="help-block" ng-show="addopdpatientForm.history_description.$dirty && addopdpatientForm.history_description.$invalid">
@@ -39,4 +39,9 @@
 				</tr>
 			</tbody >
 		</table>
+		<div class="form-group modal-footer">
+				<div class="col-sm-offset-9  col-sm-2  ">
+				 <button type="submit" class="btn btn-primary" title="submit" ng-click="modalOptions.showFormPart('generalExamination',modalOptions)">Next</button> 
+				</div>
+			</div>
 </div>	
