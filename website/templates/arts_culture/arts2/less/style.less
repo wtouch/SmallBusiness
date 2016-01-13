@@ -6,12 +6,13 @@
 
 @color : #fa6903; //dark chocalate
 @lightcolor :#e5e5e5; // enquiryborder color
-@darkcolor : #EA5B4B;// nav color
+@darkcolor : #D35400;// nav color
 @back : #fffadc; //enquiry back
-@darkbackcolor : #f7edb4; //footer
-@lightbackcolor :#a84034;//border top
+@darkbackcolor : #D76515; //nav hover 
+@lightbackcolor :#938E68;//border top /*#a84034*/
 @colorblack : #000000;
 @colorwhite	: #ffffff;
+
 @import "property.less";
 @import "project.less";
 @import "product.less";
@@ -22,7 +23,6 @@
 }
 body,p{
 	color:@colorblack;	
-	font-family:CinzelDecorative-Black;
 	.homeAboutus{
 		padding: 0px 20px 25px 0px;
 		text-align:center;
@@ -112,8 +112,9 @@ header{
 				&.active > a, &.active:hover > a, &.active > a:focus, &:hover > a, &:hover > a:focus{
 					color: @colorwhite;
 					cursor: pointer;
+					font-family:CinzelDecorative-Black;
 					font-size:16px;
-					border-top: 4px @lightbackcolor  solid;
+					border-top: 4px solid @lightbackcolor;
 					background: @darkcolor;
 					padding:29px 18px;
 				   -webkit-transition: .3s linear all;
@@ -121,45 +122,73 @@ header{
 				ul{
 					display : none;
 					position : absolute;
-					width : 270px;
+					width : 200px;
 					z-index : 999;
-					background-color:#e3161d; ;
+					background-color:@darkcolor ; 
 					padding:28px 18px;
 					list-style : none;
 					text-align : left;
-					padding: 5px;
+					padding: 1px;
 					line-height: 26px;
 					font-weight: 600;
 					>li{
-						padding : 10px;
+						padding: 6px 0px 6px 0px;
 						position : relative;
-						border-bottom:1px solid @colorblack;
+						font-size: 16px;
+						line-height: 20px;
 						&:hover{
-								border-top: 5px @lightbackcolor  solid;
-								background: @darkcolor;
-								border-bottom:1px solid @colorblack;
-								-webkit-transition: .3s linear all;
+								background-color:@darkbackcolor;
 						}
 						>a{
-							text-decoration:none;
-							color:@colorwhite;
+								display: block;
+								position: relative;
+								padding: 10px 12px;
+								font-size: 16px;
+								line-height: 20px;
+								font-weight: 300;
+								color: #fff;
+								text-decoration:none;
+								outline: none;
 							&:hover{
-								color :@colorblack;
-						}
+									display: block;
+									position: relative;
+									padding: 10px 12px;
+									font-size: 16px;
+									line-height: 20px;
+									font-weight: 300;
+									color: #fff;
+									text-decoration:none;
+									outline: none;
+								}
 						}
 						
 						> ul{
 							display: none;
 							list-style :none;
-							left: 70%;
+							left: 100%;
 							top: 10px;
 							border-top-left-radius: 0px;
 							>li{
 								>a{
+									display: block;
+									position: relative;
+									padding: 10px 12px;
+									font-size: 16px;
+									line-height: 20px;
+									font-weight: 300;
+									color: #fff;
+									outline: none;
 									text-decoration:none;
-									color:@colorwhite;
 									&:hover{
-										color:@colorblack;
+										display: block;
+										position: relative;
+										padding: 10px 12px;
+										font-size: 16px;
+										line-height: 20px;
+										font-weight: 300;
+										color: #fff;
+										outline: none;
+										text-decoration:none;
 									}
 								}
 							}
@@ -275,7 +304,7 @@ header{
 footer{
 		color:@colorblack;
 		padding:15px;
-		background-color:@darkbackcolor;
+		background-color:@back;
 		a{
 			color:@colorblack;
 			&:hover{
