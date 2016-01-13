@@ -91,13 +91,30 @@ define(['app'], function (app) {
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/medicine_Prescribe.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view medicine_Prescribe" > <span>MP</span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/assignEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >AE</span></a>'	+
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/assignEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >AE</span></a>'	
+					+
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/releaseEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >RE</span></a>'	
+					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/generate_bill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span >GB</span></a>'	
-						+
+					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/dishcharge.html\',row.entity)" class="btn btn-success btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span>discharge</span></a>'	
 				}
 			]
 		};
+		var  date1 = "";
+		var date2 = "";
+		$scope.dateDifference = function(date1,date2){
+			console.log(date1,date2)
+			//var d1 = new Date(string1);
+			//var d2 = new Date(string2);
+			//var miliseconds = d2-d1;
+			//var seconds = miliseconds/1000;
+			//var minutes = seconds/60;
+			//var hours = minutes/60;
+			//var days = hours/24;
+			//console.log(days);
+		}  
+	//	$scope.dateDifference(date1,date2);
 		$scope.openModal = function(url,data){
 			
 			var modalDefault = {
@@ -116,7 +133,9 @@ define(['app'], function (app) {
 					user_id : data.user_id,
 					name : data.name,
 					email : data.email,
-					admission_date :data.admission_date ,
+					admission_date :data.admission_date,
+					discharge_date:data.discharge_date,
+					discharge_details :data.discharge_details,
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
 					ward_id :data.ward_id,
@@ -162,6 +181,7 @@ define(['app'], function (app) {
 				addadmission : (data) ? {
 					id : data.id,
 					admission_date : data.admission_date,
+					discharge_date :data.discharge_date,
 					patient_id:data.patient_id,
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
@@ -187,9 +207,24 @@ define(['app'], function (app) {
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					admission_date :$scope.currentDate	
 				},
+				dateDifference : function(date1,date2,bed_charges){
+					console.log(date1,date2)
+					var d1 = new Date(date1);
+					var d2 = new Date(date2);
+					var miliseconds = d2-d1;
+					var seconds = miliseconds/1000;
+					var minutes = seconds/60;
+					var hours = minutes/60;
+					var days = hours/24;
+					console.log(days);
+					var total=bed_charges*days;
+					console.log(total);
+					return total;
+				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							
 						$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
 						}
 					})
@@ -210,6 +245,8 @@ define(['app'], function (app) {
 						}
 					}); 
 				},
+				
+			
 				assignData : function(object, formObject){
 					formObject.patient_id = object.id;
 					formObject.mobile = object.mobile;
@@ -220,19 +257,19 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.medicine_Prescribe = {};
-							 $scope.medicine_Prescribe.user_id = user_id;
-							if(input.date) $scope.medicine_Prescribe.date = input.date;
-							 $scope.modified_date = input.modified_date;
-							 $scope.medicine_Prescribe.medicine_used_date = input.medicine_used_date;
-							  $scope.medicine_Prescribe.quantity = input.quantity;
-							  $scope.medicine_Prescribe.unit = input.unit;
-							 $scope.medicine_Prescribe.description = input.description;
-							 
-							 $scope.medicine_Prescribe.medicine_id = input.medicine_id;
-							 
-							$rootScope.postData("medicine_used", $scope,function(response){
-								console.log(response);
+						 	$scope.equipmentData = {};
+							 $scope.equipmentData.user_id =input.user_id;
+							 $scope.equipmentData.patient_id = input.patient_id;
+							if(input.date) $scope.equipmentData.date = input.date;
+							 $scope.equipmentData.modified_date = input.modified_date;
+							 $scope.equipmentData.assign_date = input.assign_date;
+							  $scope.equipmentData.equipment_name = input.equipment_name;
+							  $scope.equipmentData.equipment_charges = input.equipment_charges;
+							 $scope.equipmentData.description = input.description;
+							 $scope.equipmentData.equipment_id = input.equipment_id;
+							 console.log($scope.equipmentData);
+								$rootScope.postData("equipment_used", angular.copy($scope.equipmentData),function(response){
+									
 								});
 								
 							$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);

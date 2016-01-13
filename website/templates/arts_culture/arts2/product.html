@@ -1,0 +1,21 @@
+{% autoescape false %}
+	<h2>{{ product.product_service_name }}</h2>
+	<div class="row singleproduct">
+		<div class="col-xs-12 col-sm-12 col-lg-12">
+			{% for key, value in product.product_image %}
+			<div class="thumbnail grid">
+				<!-- <img class="img-responsive" src="{{value.file_relative_path}}">  -->
+				<figure class="effect-bubba">
+							 <img class="img-responsive" src="{{value.file_relative_path}}">  
+								<figcaption>
+								<h3>{{ product.product_service_name  }}</h3>
+								<figcaption>
+							</figure>
+			</div>
+			{% endfor %}
+		</div> 
+		<div class="col-xs-12 col-sm-12 col-lg-12">
+			<div class="description">{{product.description}}</div>
+		</div>
+	</div>
+{% endautoescape %}
