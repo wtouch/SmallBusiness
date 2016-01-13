@@ -1,6 +1,5 @@
 'use strict';
 var hostUrl = '/website/templates/default/';
-
 $(document).ready(function(){
 	jQuery(".subimgs").click(function(){
 		jQuery(".mainimgs").attr("src",(jQuery(this).attr("src")))
@@ -27,14 +26,16 @@ $(document).ready(function(){
 		return false;
 	}
 	var cookieExpiry = new Date();
-	cookieExpiry.setMinutes(cookieExpiry.getMinutes() + 30);
+	cookieExpiry.setMinutes(cookieExpiry.getMinutes() + 86400000);
 	var cookieTime = cookieExpiry.toUTCString();
 	if(getCookie('anim') == false){
 		document.cookie="anim=true; expires=" + cookieTime;
 	}else{
+		console.log(Date());
 		$(".anim2, .anim4").hide();
 		$(".anim1").removeClass("anim1");
 		console.log(getCookie('anim'));
+		console.log(Date());
 	} 
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
