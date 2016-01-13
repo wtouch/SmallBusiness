@@ -127,12 +127,12 @@
 			</div>
 			<button type="button" class="btn btn-primary" tooltip-animation="true" tooltip="Add Prescription" ng-click="isCollapsed1 = !isCollapsed1"> <span ng-class="(isCollapsed1) ? 'glyphicon glyphicon-minus' : 'glyphicon glyphicon-plus'"></span> Add Prescription</button>
 			<div collapse="!isCollapsed1" class="collapse">
-			<br/>{{modalOptions.case_sheet.prescription}}
+			<br/>
 				<div class="form-group" ng-init= "modalOptions.getData(false,false,'medicine','medicineList',modalOptions.medicineParams,modalOptions)">
 					<label for="medicine_name" class="col-sm-2 control-label">Medicine Name *</label>
 					<div class="col-sm-8">					
 						<select id="medicine_name" name="medicine_name" class="form-control" 
-							ng-model="modalOptions.case_sheet.prescription.medicine_name" ng-options="item.medicine_name as item.medicine_name for item in modalOptions.medicineList">
+							ng-model="modalOptions.prescription.medicine_name" ng-options="item.medicine_name as item.medicine_name for item in modalOptions.medicineList">
 						<option value="">select Medicine</option>
 						</select>
 					</div>
@@ -140,7 +140,7 @@
 				<div class="form-group">
 					<label for="quantity" class="col-sm-2 control-label">Quantity</label>
 					<div class="col-sm-3">
-						<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.case_sheet.prescription.quantity" placeholder="Enter Your quantity" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
+						<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.prescription.quantity" placeholder="Enter Your quantity" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
 						<span class="text-danger"  ng-show="addcase_sheetForm.quantity.$error.pattern">please Enter Valid format</span>
 						<span class="help-block" ng-show="addcase_sheetForm.quantity.$dirty && addcase_sheetForm.quantity.$invalid">
 							<span ng-show="addcase_sheetForm.quantity.$error.required"class="text-danger">Quantity is required.</span>
@@ -148,7 +148,7 @@
 					</div> 	
 					<label for="unit" class="col-sm-2 control-label">Unit*</label>
 					<div class="col-sm-3">
-					<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.case_sheet.prescription.unit" placeholder="Enter unit" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required>
+					<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.prescription.unit" placeholder="Enter unit" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required>
 					<span class="text-danger"  ng-show="addcase_sheetForm.unit.$error.pattern"></span>
 						<span class="help-block" ng-show="addcase_sheetForm.unit.$dirty && addcase_sheetForm.unit.$invalid">
 							<span ng-show="addcase_sheetForm.unit.$error.required" class="text-danger">unit is required.</span>
@@ -159,21 +159,21 @@
 					<label for="dose_time" class="col-sm-2 control-label">Dose Time</label>
 					<div class="checkbox col-sm-3">
 						<label>
-						<input type="checkbox" ng-model="modalOptions.case_sheet.prescription.dose_time.morning"checklist-value="morning"/> Morning
+						<input type="checkbox" ng-model="modalOptions.prescription.dose_time.morning"checklist-value="morning"/> Morning
 						</label>
 						<label>
-						<input type="checkbox" ng-model="modalOptions.case_sheet.prescription.dose_time.afternoon"checklist-value="afternoon"/> Afternoon
+						<input type="checkbox" ng-model="modalOptions.prescription.dose_time.afternoon"checklist-value="afternoon"/> Afternoon
 						</label>
 						<label>
-						<input type="checkbox" ng-model="modalOptions.case_sheet.prescription.dose_time.evening"checklist-value="evening"/>Evening
+						<input type="checkbox" ng-model="modalOptions.prescription.dose_time.evening"checklist-value="evening"/>Evening
 						</label>
 						<label>
-						<input type="checkbox" ng-model="modalOptions.case_sheet.prescription.dose_time.night"checklist-value="night"/>Night
+						<input type="checkbox" ng-model="modalOptions.prescription.dose_time.night"checklist-value="night"/>Night
 						</label>
 					</div>
 					<label for="days" class="col-sm-2 control-label">Days</label>
 					<div class="col-sm-3">
-					<input type="text" id="days" name="days" class="form-control" ng-model="modalOptions.case_sheet.prescription.days" placeholder="Enter days" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/ " required/>
+					<input type="text" id="days" name="days" class="form-control" ng-model="modalOptions.prescription.days" placeholder="Enter days" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/ " required/>
 							<span class="help-block" ng-show="addcase_sheetForm.days.$dirty && addcase_sheetForm.days.$invalid">
 							<span ng-show="addcase_sheetForm.days.$error.required" class="text-danger">days is required.</span>
 						</span>				
@@ -181,11 +181,11 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-9 ">
-						<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.case_sheet.prescription, 'case_sheet.prescription', modalOptions)" >Save Prescription
+						<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.prescription, 'prescription', modalOptions)" >Save Prescription
 						</button>
 					</div>
 				</div>
-				<table class="table table-bordered " >
+				<table class="table table-bordered ">
 					<thead>
 						<tr>
 							<th>sr.no</th>
@@ -198,7 +198,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="x in modalOptions.addadmission.case_sheet.prescription">
+						<tr ng-repeat="x in modalOptions.addadmission.prescription">
 							<td>{{$index + 1}}</td>
 							<td>{{x.medicine_name}}</td>
 							<td>{{x.quantity}}</td>
@@ -207,7 +207,7 @@
 								<input type="checkbox" checklist-model="dose_time" checklist-value="dosetime"> {{x}}
 							</label></td>
 							<td>{{x.days}}</td>
-							<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.case_sheet.prescription, $index)">X</button></td>
+							<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.prescription, $index)">X</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -215,11 +215,11 @@
 		</form>	
 			<div class="form-group">
 				<div class="col-sm-offset-9 ">
-					<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.case_sheet, 'case_sheet', modalOptions)" >Save Casesheet
+					<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.case_sheet, 'case_sheet', modalOptions)">Save Casesheet
 					</button>
 				</div>
 			</div>
-			<table class="table table-bordered " >
+			<table class="table table-bordered ">
 				<thead>
 					<tr>
 						<th>Sr.no</th>
