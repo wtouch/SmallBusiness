@@ -1,9 +1,10 @@
 <div class="modal-header">
+<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 	<h3  ng-if="!modalOptions.addequipment.id" class="text-center">Add New Equipment</h3>
 	<h3  ng-if="modalOptions.addequipment.id" class="text-center">Edit Equipment</h3>
 </div>
 <div class="modal-body">
-	<form class="form-horizontal" name="addequipmentForm" role="form" ng-submit="addequipmentForm.$valid" novalidate="novalidate"><!--{{modalOptions.addpatient}}-->	 
+	<form class="form-horizontal" name="addequipmentForm" role="form" ng-submit="addequipmentForm.$valid" novalidate="novalidate">
 		<div class="form-group">
 			<label  for="equipment_date" class="col-sm-2 control-label">Date * </label>
 			<div class="col-sm-9">
