@@ -114,9 +114,6 @@ define(['app'], function (app) {
 				    name:'address.current_address',width:100,
 					enableSorting: false, enableFiltering: false,	
                 },
-				
-				
-				
 			    { 
 				 name:'Manage', width:300,
 				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
@@ -157,28 +154,31 @@ define(['app'], function (app) {
 				  enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 					filter: {
-					  //placeholder: 'ends with'
 					}
 				},
 				{
 				    name:'attendance_date',
 					width:100,
-					filterHeaderTemplate: '<input id="attendance_date" class="form-control" ng-change="grid.appScope.filter(\'attendance_date\', attendance_date, \'staffattendance\', \'staffattendance\',true)" ng-model="staff_type" placeholder="Staff type">'
+					filterHeaderTemplate: '<input id="attendance_date" class="form-control" ng-change="grid.appScope.filter(\'attendance_date\', attendance_date, \'staffattendance\', \'staffattendance\',true)" ng-model="attendance_date" placeholder="attendance_date">'
+                },
+				{
+				    name:'name',
+					width:100,
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="name">'
                 },
 				{
 				    name:'login_time',
 					width:100,
-					filterHeaderTemplate: '<input id="login_time" class="form-control" ng-change="grid.appScope.filter(\'login_time\', login_time, \'staffattendance\', \'staffattendance\',true)" ng-model="name" placeholder="Staff Name">',
+					filterHeaderTemplate: '<input id="login_time" class="form-control" ng-change="grid.appScope.filter(\'login_time\', login_time, \'staffattendance\', \'staffattendance\',true)" ng-model="login_time" placeholder="login_time">',
                 },
 				{
 				    name:'logout_time',
 					width:150,
-					filterHeaderTemplate: '<input id="logout_time" class="form-control" ng-change="grid.appScope.filter(\'logout_time\', logout_time, \'staffattendance\', \'staffattendance\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="logout_time" class="form-control" ng-change="grid.appScope.filter(\'logout_time\', logout_time, \'staffattendance\', \'staffattendance\',true)" ng-model="logout_time" placeholder="logout_time">'
                 },
-				
 			    { 
 				 name:'Manage', width:300,
-				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
+				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staffattendance\', \'staffattendance\')" ng-model="status">'
 							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -190,23 +190,19 @@ define(['app'], function (app) {
 					},
 					cellTemplate :  '<a ng-click="grid.appScope.openSalary(\'modules/hospital/staffattendance/salary.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="Salary" > <span class="	glyphicon glyphicon-usd" ></span></a>'
 					+
-					'<a ng-click="grid.appScope.openPayslip(\'modules/hospital/staffattendance/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="viewpayslip"> <span class="glyphicon glyphicon-eye-open" ></span></a>'
-					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/staffattendance/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/staffattendance/addhospitalstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/staffattendance/staffattendance.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+
 				
 					'<a ng-click="grid.appScope.openViewattendance(\'modules/hospital/staffattendance/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
 					+
 					'<a ng-click="grid.appScope.openViewleaves(\'modules/hospital/staffattendance/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
-					
-				
+					+
+					'<a type="button" tooltip="Delete staffattendance" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staffattendance\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
 		};
-		
-		
 		$scope.staffleaves= {
 			enableSorting: true,
 			enableFiltering: true,
@@ -217,43 +213,47 @@ define(['app'], function (app) {
 				  enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
 					filter: {
-					  //placeholder: 'ends with'
 					}
 				},
 				{
 				    name:'leave_date',
 					width:100,
-					filterHeaderTemplate: '<input id="leave_date" class="form-control" ng-change="grid.appScope.filter(\'leave_date\', leave_date, \'staffleaves\', \'staffleaves\',true)" ng-model="staff_type" placeholder="Staff type">'
+					filterHeaderTemplate: '<input id="leave_date" class="form-control" ng-change="grid.appScope.filter(\'leave_date\', leave_date, \'staffleaves\', \'staffleaves\',true)" ng-model="leave_date" placeholder="leave_date">'
+                },
+				{
+				    name:'name',
+					width:100,
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="name">'
                 },
 				{
 				    name:'approved_by',
 					width:100,
-					filterHeaderTemplate: '<input id="approved_by" class="form-control" ng-change="grid.appScope.filter(\'approved_by\', approved_by, \'staffleaves\', \'staffleaves\',true)" ng-model="name" placeholder="Staff Name">',
+					filterHeaderTemplate: '<input id="approved_by" class="form-control" ng-change="grid.appScope.filter(\'approved_by\', approved_by, \'staffleaves\', \'staffleaves\',true)" ng-model="approved_by" placeholder="approved_by">',
                 },
 				{
 				    name:'reason',
 					width:150,
-					filterHeaderTemplate: '<input id="reason" class="form-control" ng-change="grid.appScope.filter(\'reason\', reason, \'staffleaves\', \'staffleaves\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="reason" class="form-control" ng-change="grid.appScope.filter(\'reason\', reason, \'staffleaves\', \'staffleaves\',true)" ng-model="reason" placeholder="reason">'
                 },
 				{
 				    name:'leaves_for',
 					width:150,
-					filterHeaderTemplate: '<input id="leaves_for" class="form-control" ng-change="grid.appScope.filter(\'leaves_for\', leaves_for, \'staffleaves\', \'staffleaves\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="leaves_for" class="form-control" ng-change="grid.appScope.filter(\'leaves_for\', leaves_for, \'staffleaves\', \'staffleaves\',true)" ng-model="leaves_for" placeholder="leaves_for">'
                 },
 				{
 				    name:'type',
 					width:150,
-					filterHeaderTemplate: '<input id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'staffleaves\', \'staffleaves\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'staffleaves\', \'staffleaves\',true)" ng-model="type" placeholder="type">'
                 },
 				{
 				    name:'leavestatus',
 					width:150,
-					filterHeaderTemplate: '<input id="leavestatus" class="form-control" ng-change="grid.appScope.filter(\'leavestatus\', leavestatus, \'staffleaves\', \'staffleaves\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="leavestatus" class="form-control" ng-change="grid.appScope.filter(\'leavestatus\', leavestatus, \'staffleaves\', \'staffleaves\',true)" ng-model="leavestatus" placeholder="leavestatus">'
                 },
 			    { 
 				 name:'Manage', width:300,
-				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
-							 +'<option value="" selected>--Select--</option>' 
+				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staffleaves\', \'staffleaves\')" ng-model="status">'
+							 +'<option value="" selected>--status--</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
 						+'</select>', 
@@ -264,22 +264,14 @@ define(['app'], function (app) {
 					},
 					cellTemplate :  '<a ng-click="grid.appScope.openSalary(\'modules/hospital/hospitalstaff/salary.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="Salary" > <span class="	glyphicon glyphicon-usd" ></span></a>'
 					+
-					'<a ng-click="grid.appScope.openPayslip(\'modules/hospital/hospitalstaff/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="viewpayslip"> <span class="glyphicon glyphicon-eye-open" ></span></a>'
-					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
-					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/addhospitalstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					+
-				
-					'<a ng-click="grid.appScope.openViewattendance(\'modules/hospital/hospitalstaff/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/addleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit leaves" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+
 					'<a ng-click="grid.appScope.openViewleaves(\'modules/hospital/hospitalstaff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
-					
-				
+					+
+					'<a type="button" tooltip="Delete staffleaves" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staffleaves\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
-		};
-			
+		};	
 		$scope.staff_payment= {
 			enableSorting: true,
 			enableFiltering: true,
@@ -296,36 +288,31 @@ define(['app'], function (app) {
 				{
 				    name:'payment_date',
 					width:100,
-					filterHeaderTemplate: '<input id="payment_date" class="form-control" ng-change="grid.appScope.filter(\'payment_date\', payment_date, \'staff_payment\', \'staff_payment\',true)" ng-model="staff_type" placeholder="Staff type">'
+					filterHeaderTemplate: '<input id="payment_date" class="form-control" ng-change="grid.appScope.filter(\'payment_date\', payment_date, \'staff_payment\', \'staff_payment\',true)" ng-model="payment_date" placeholder="payment date">'
                 },
 				{
 				    name:'payment_type',
 					width:100,
-					filterHeaderTemplate: '<input id="payment_type" class="form-control" ng-change="grid.appScope.filter(\'payment_type\', payment_type, \'staff_payment\', \'staff_payment\',true)" ng-model="name" placeholder="Staff Name">',
-                },
-				{
-				    name:'salary_type',
-					width:150,
-					filterHeaderTemplate: '<input id="reason" class="form-control" ng-change="grid.appScope.filter(\'reason\', reason, \'staff_payment\', \'staff_payment\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="payment_type" class="form-control" ng-change="grid.appScope.filter(\'payment_type\', payment_type, \'staff_payment\', \'staff_payment\',true)" ng-model="payment_type" placeholder="payment type">',
                 },
 				{
 				    name:'leaves_for',
 					width:150,
-					filterHeaderTemplate: '<input id="leaves_for" class="form-control" ng-change="grid.appScope.filter(\'leaves_for\', leaves_for, \'staffleaves\', \'staffleaves\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="leaves_for" class="form-control" ng-change="grid.appScope.filter(\'leaves_for\', leaves_for, \'staff_payment\', \'staff_payment\',true)" ng-model="phone" placeholder="Phone">'
                 },
 				{
-				    name:'type',
+				    name:'name',
 					width:150,
-					filterHeaderTemplate: '<input id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'staffleaves\', \'staffleaves\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff_payment\', \'staff_payment\',true)" ng-model="name" placeholder="name">'
                 },
 				{
 				    name:'leavestatus',
 					width:150,
-					filterHeaderTemplate: '<input id="leavestatus" class="form-control" ng-change="grid.appScope.filter(\'leavestatus\', leavestatus, \'staffleaves\', \'staffleaves\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="leavestatus" class="form-control" ng-change="grid.appScope.filter(\'leavestatus\', leavestatus, \'staff_payment\', \'staff_payment\',true)" ng-model="phone" placeholder="Phone">'
                 },
 			    { 
 				 name:'Manage', width:300,
-				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
+				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff_payment\', \'staff_payment\')" ng-model="status">'
 							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -341,18 +328,17 @@ define(['app'], function (app) {
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/view_staff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view Staff" > <span class="glyphicon glyphicon-user"></span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/addhospitalstaff.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/hospitalstaff/staffpayment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+
 				
 					'<a ng-click="grid.appScope.openViewattendance(\'modules/hospital/hospitalstaff/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
 					+
 					'<a ng-click="grid.appScope.openViewleaves(\'modules/hospital/hospitalstaff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
-					
-				
+					+
+					'<a type="button" tooltip="Delete staff_payment" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staff_payment\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
-		};
-			
+		};	
 		$scope.staffholidays= {
 			enableSorting: true,
 			enableFiltering: true,
@@ -365,21 +351,21 @@ define(['app'], function (app) {
 					filter: {
 					  //placeholder: 'ends with'
 					}
-				},
+					},
 				{
 				    name:'holiday_date',
 					width:100,
-					filterHeaderTemplate: '<input id="holiday_date" class="form-control" ng-change="grid.appScope.filter(\'holiday_date\', holiday_date, \'staffholidays\', \'staffholidays\',true)" ng-model="staff_type" placeholder="Staff type">'
+					filterHeaderTemplate: '<input id="holiday_date" class="form-control" ng-change="grid.appScope.filter(\'holiday_date\', holiday_date, \'staffholidays\', \'staffholidays\',true)" ng-model="holiday_date" placeholder="date">'
                 },
 				{
 				    name:'holiday_name',
 					width:100,
-					filterHeaderTemplate: '<input id="holiday_name" class="form-control" ng-change="grid.appScope.filter(\'holiday_name\', holiday_name, \'staffholidays\', \'staffholidays\',true)" ng-model="name" placeholder="Staff Name">',
+					filterHeaderTemplate: '<input id="holiday_name" class="form-control" ng-change="grid.appScope.filter(\'holiday_name\', holiday_name, \'staffholidays\', \'staffholidays\',true)" ng-model="holiday_name" placeholder="holiday Name">',
                 },
 				
 			    { 
 				 name:'Manage', width:300,
-				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff\', \'staff\')" ng-model="status">'
+				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staffholidays\', \'staffholidays\')" ng-model="status">'
 							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -401,8 +387,8 @@ define(['app'], function (app) {
 					'<a ng-click="grid.appScope.openViewattendance(\'modules/hospital/hospitalstaff/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
 					+
 					'<a ng-click="grid.appScope.openViewleaves(\'modules/hospital/hospitalstaff/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
-					
-				
+					+
+					'<a type="button" tooltip="Delete staffholidays" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staffholidays\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
 		};
