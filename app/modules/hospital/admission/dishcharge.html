@@ -1,21 +1,35 @@
 <div class="modal-header">
 	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
-		<h3 class="text-center">Dishcharge Card</h3>
-</div><!-- {{modalOptions.view_admission}} -->{{modalOptions.addadmission.discharge_details}}
+		<h3 class="text-center">Discharge Form</h3>
+		<!-- <h3 class="text-center">Discharge Card</h3> -->
+</div> {{modalOptions.view_admission}}
 <div class="modal-body">
 	<div class="modal-body">
-		<form class="form-horizontal" name="dischargeForm" role="form" ng-submit="dischargeForm.$valid" novalidate="novalidate">
+		<form class="form-horizontal" name="dischargeForm" role="form" ng-submit="dischargeForm.$valid" novalidate="novalidate"><!--ng-if="!modalOptions.view_admission.discharge_date"-->
 			<div class="form-group">
-				<label  for="discharge_date" class="col-sm-2 control-label">Date*</label>
+				<label  for="discharge_date" class="col-sm-2 control-label">Discharge Date*</label>
 				<div class="col-sm-8">
 					<div class="input-group">
-						<input type="text" class="form-control " placeholder="Date" id="discharge_date" name="assign_date" ng-model="modalOptions.addadmission.discharge_details.discharge_date" ng-init="modalOptions.addadmission.discharge_details.discharge_date= modalOptions.admission_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.assign_date.discharge_date,10); modalOptions.sqlDateFormat(modalOptions.addadmission.discharge_date, modalOptions.addadmission.discharge_date)"/>	
+						<input type="text" class="form-control " placeholder="Date" id="discharge_date" name="assign_date" ng-model="modalOptions.addadmission.discharge_date" ng-init="modalOptions.addadmission.discharge_date= modalOptions.admission_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.assign_date.discharge_date,10); modalOptions.sqlDateFormat(modalOptions.addadmission.discharge_date, modalOptions.addadmission.discharge_date)"/>	
 							<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
 							</span>
 					</div>
 				</div>
 			</div>	
+			
+			<div class="form-group">
+				<label  for="nextOpd_date" class="col-sm-2 control-label">To Attend OPD On*</label>
+				<div class="col-sm-8">
+					<div class="input-group">
+						<input type="text" class="form-control " placeholder="Date" id="nextOpd_date" name="assign_date" ng-model="modalOptions.addadmission.discharge_details.nextOpd_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="opened= !opened" ng-change=/>	
+							<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="opened= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
+					</div>
+				</div>
+			</div>	
+			
 			<div class="form-group">
 				<label for="diagnosis" class="col-sm-2 control-label">Diagnosis *</label>
 				<div class="col-sm-8">
@@ -65,6 +79,44 @@
 				</div>
 			</div> 
 		</form>
+		
+		<!-- <form class="form-horizontal" name="dischargeCardForm" role="form" ng-submit="dischargeCardForm.$valid" novalidate="novalidate" ng-if="modalOptions.view_admission.discharge_date">
+			<div class="form-group">
+				<label  for="Name" class="col-sm-2 control-label">Name*</label>
+				<div class="col-sm-9">
+						<input type="text" class="form-control " placeholder="Name" id="Name" name="Name" ng-model="modalOptions.view_admission.patient_name"/>	
+				</div>
+			</div>
+			<div class="form-group">
+				<label  for="Name" class="col-sm-2 control-label">Admitted*</label>
+				<div class="col-sm-4">
+						<input type="text" class="form-control " placeholder="Name" id="Name" name="Name" ng-model="modalOptions.view_admission.admission_date"/>
+				</div>
+			
+				<label  for="Name" class="col-sm-1 control-label">Discharged*</label>
+				<div class="col-sm-4">
+						<input type="text" class="form-control " placeholder="Name" id="Name" name="Name" ng-model="modalOptions.view_admission.discharge_date"/>
+				</div>
+			</div>	
+			<div class="form-group">
+				<label  for="consulting_dr" class="col-sm-2 control-label">Consulting Doctor*</label>
+				<div class="col-sm-9">
+						<input type="text" class="form-control " id="consulting_dr" name="consulting_dr" ng-model="modalOptions.view_admission.name"/>	
+				</div>
+			</div>
+			<div class="form-group">
+				<label  for="consulting_dr" class="col-sm-2 control-label">Next OPD Date*</label>
+				<div class="col-sm-9">
+						<input type="text" class="form-control " id="consulting_dr" name="consulting_dr" ng-model="modalOptions.view_admission.discharge_details.nextOpd_date"/>	
+				</div>
+			</div>
+			<div class="form-group">
+				<label  for="Name" class="col-sm-2 control-label">Diagnosis*</label>
+				<div class="col-sm-9">
+						<textarea type="text" class="form-control " placeholder="Name" id="Name" name="Name" ng-model="modalOptions.view_admission.discharge_details.diagnosis"></textarea>	
+				</div>
+			</div>
+		</form> -->
 	</div>
 	
 	<div class="modal-footer" >

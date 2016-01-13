@@ -133,8 +133,9 @@ define(['app'], function (app) {
 					user_id : data.user_id,
 					name : data.name,
 					email : data.email,
-					admission_date :data.admission_date ,
+					admission_date :data.admission_date,
 					discharge_date:data.discharge_date,
+					discharge_details :data.discharge_details,
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
 					ward_id :data.ward_id,
@@ -180,6 +181,7 @@ define(['app'], function (app) {
 				addadmission : (data) ? {
 					id : data.id,
 					admission_date : data.admission_date,
+					discharge_date :data.discharge_date,
 					patient_id:data.patient_id,
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
