@@ -1,0 +1,99 @@
+<div class="main-content">
+	<ng-include src="'modules/component/toolbar.html'"></ng-include>
+	
+	<div class="row">
+		<div class="col-sm-2">
+		<h4>Staff Attendance</h4>
+		</div>
+		<div class="col-sm-1">
+			<button class="btn btn-primary" ng-click="isCollapsed=!isCollapsed"tooltip-animation="true" tooltip="Add staff Attendance"><span ng-class="(isCollapsed)?'glyphicon glyphicon-minus':'glyphicon glyphicon-plus'"></span></button>
+		</div>
+	</div>
+	
+		<div class="row collapse" collapse="!isCollapsed" style="height: auto;">
+				<div class="col-sm-12">
+					<div class="bottomspace">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="row">
+									<h5 ng-if="!stock.id">Add Staff Attendance</h5>
+									<h5 ng-if="stock.id">Update Staff Attendance</h5>
+										<form class="form-inline" name="attendanceForm" role="form" ng-submit="attendanceForm.$valid" novalidate="novalidate">
+											<div class="form-group" >
+												<label  for="date" >Date *</label>
+													<div class="input-group">
+														<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="modalOptions.staffattendance.attendance_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.staffattendance.attendance_date = modalOptions.attendancedate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.staffattendance.attendance_date,10); modalOptions.sqlDateFormat(modalOptions.staffattendance.attendance_date, modalOptions.staffattendance.attendance_date)"/>	
+														
+														<span class="input-group-btn">
+															<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
+														</span>
+													</div>
+											</div>
+											<div class="form-group" >
+												<div ng-init="modalOptions.getData(false,false,'staff','staff', staffParams, modalOptions)"></div>
+													<label for="staff_id" > Select Staff* </label>
+													
+														<select id="staff_id" class="form-control" ng-model="modalOptions.staffattendance.staff_id" ng-options="item.id as item.name for item in modalOptions.staff" required>
+															<option value="">Select Staff</option>
+															<option value="1">1</option>
+														</select>
+														<span class="help-block" ng-show="attendanceForm.staff_id.$dirty && attendanceForm.staff_id.$invalid">
+														<span ng-show="attendanceForm.staff_id.$error.required" class="text-danger">user name is required.</span>
+														</span>
+											</div>
+											
+											<div class="form-group">
+												<label for="login_time"  control-label">Login Time</label>
+													<input type="text" id="login_time" class="form-control" name="login_time" ng-model="modalOptions.staffattendance.login_time" required>
+											</div>
+											<div class="form-group">
+												<label for="logout_time"  control-label">Logout Time</label>
+													<input type="text" id="logout_time" class="form-control" name="logout_time" ng-model="modalOptions.staffattendance.logout_time" required>
+											</div>
+											
+											
+										
+											<div class="form-group">
+												<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid"  ng-click="modalOptions.postData('staffattendance',modalOptions.staffattendance);modalOptions.ok()">Add</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row bottomspace">
+					<div class="col-sm-3">
+						<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="filter('name', searchUser, 'user', 'userList', true)" ng-model="searchUser" placeholder="Search">
+						<input id="search" type="text" class="form-control" ng-if="userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUserGroup)" ng-model="searchUserGroup" placeholder="Search">
+					</div>
+				</div>
+			</div>
+		
+	  
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="staffList_status" class="control-label" >Staff List Status</label>
+				<select id="staffList_status" class="form-control" ng-change="getData(false, currentPage,'staff', 'staff', staffattendanceParams)" ng-model="pageItems">
+					
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	
+	<div class="table-responsive" ng-init="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams);">
+		<div ui-grid="staffattendance"></div>
+	</div>
+	
+	<div class="text-center">				
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams)"></pagination>
+		<pre>Page: {{currentPage}} / {{numPages}}</pre>
+	</div>	
+</div>
+
