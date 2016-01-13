@@ -47,7 +47,7 @@ define(['app'], function (app) {
                 }, */
 				{ name:'name',enableSorting: false ,
 				width:150,
-				filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'staffattendance\', \'staffattendance\',true,grid.appScope.staffattendanceParams)" ng-model="staff_id" ng-options="item.id as item.name for item in grid.appScope.staffParams">' 
+				filterHeaderTemplate: '<select id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'staffattendance\', \'staffattendance\',false,grid.appScope.staffattendanceParams)" ng-model="staff_id" ng-options="item.id as item.name for item in grid.appScope.staffParams">' 
 							+'<option value="">Select staff</option>'
 						+'</select>',
 					},
@@ -94,7 +94,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffParams);
+				$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffattendanceParams);
 			}
 		}
 		
@@ -125,15 +125,25 @@ define(['app'], function (app) {
 			};
 			var modalOptions = {
 			attendancedate:dataService.sqlDateFormate(),
-				date:{date : $scope.currentDate},
-				staffattendance : (data) ? {
-	
-				}:{
-						date : dataService.sqlDateFormate(),
-						user_id : $rootScope.userDetails.id,
-						status:1,
-						modified_date : dataService.sqlDateFormate(),
-				}, 
+				
+		staffattendanceParams :(data) ?{
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			join: [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "hr_staff",
+					joinOn : {
+						staff_id : "t0.staff_id"
+					},
+					cols : ['name']
+				}],
+			
+			cols : ["*"]
+		} :{},
+		
 				getData:$scope.getData,	
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
