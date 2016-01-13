@@ -1,35 +1,28 @@
 {% autoescape false %}
-	{% if featured_products | length >= 2 %}
-	<div class="contentModule fproduct ">
-		<h1 class="subhead">Featured Products</h1>
-		<div class="sections clearfix services">
-			{% set break = 0 %}{% set i = 0 %}
-			{% for x in featured_products if break == 0 %}
-				{% if x.type == 'product' %}
-			
-					<div class="col-sm-4 col-xs-12 col-md-4 col-lg-4">
-					<div class=" text-center well " style="display:none;">
-					<div class="wrapper">
-					<a href="#">
-						<img class="img-responsive circle center-block" src="{{x.product_image.0.file_relative_path}}" alt="...">
+	{% if featured_products | length >= 1 %}
+	<div class="contentModule clearfix featureProd">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<h2 class="text-center">Our Products</h2>
+		</div>
+		{% set break = 0 %}{% set i = 0 %}
+		{% for x in featured_products if break == 0 %}
+			{% if x.type == 'product' %}
+				<div class="col-xs-12 col-md-4">
+					<div class="prodimage">
+						<a href="products/{{x.product_service_name}}/{{x.id}}">
+							<img class="img-responsive circle center-block" src="{{x.product_image.0.file_relative_path}}" alt="{{x.product_service_name}}">
+						</a>
+					</div>
+					<a href="products/{{x.product_service_name}}/{{x.id}}">
+						<h4 class="text-center">{{x.product_service_name}}</h4>
 					</a>
-					</div>
-					<div class="prod_desc">
-					<h4>{{x.product_service_name}}</h4>
-					<div class="description">{{ x.description|length > 75 ?x.description|slice(start, 75) : x.description }}
-						
-					</div>
-					<a href="products/{{x.product_service_name}}/{{x.id}}" class="btn btn-primary">Read More</a>
-					</div>
-					</div>
-					</div>
+				</div>
 				{% set i = (i + 1) %}
-				{% if i == 4 %}
+				{% if i == 3 %}
 					{% set break = 1 %}
 				{% endif %}
-				{% endif %}
-			{% endfor %}
-		</div>
+			{% endif %}
+		{% endfor %}
 	</div>
 	{% endif %}
 {% endautoescape %}

@@ -6,6 +6,10 @@
 		font-family:'OpenSans Regular';
 		src:url('../fonts/OpenSans-Regular.ttf');
 	}
+	@font-face{
+		font-family:'QumpellkaNo12';
+		src:url('../fonts/QumpellkaNo12.otf');
+	}
 
 	@color : #fff;
 	@lightcolor : #e4513e;//faint red
@@ -23,30 +27,132 @@
 	@import "general.less";
 	*{
 		transition:300ms;
-		border-radius:0px !important;
 	}
-	p{
-	color:@colorwhite;
-	}
-	strong{color:@colorwhite;}
 	
-	header h2 {
-    margin-top: 55px !important;
-    text-align: right !important;
-	}
 	body{
+		background-image:@background_img1;
+		background-size:cover;
+		background-repeat:no-repeat;
+		color:@colorwhite !important;
+		position : relative;
+		.container{
+			max-width : 992px !important;
+		}
+	}
+	.log{
+		position : absolute;
+		left : 190px;
+		top : 20px;
+		z-index : 1;
+	}
+	.logo1{
+		-webkit-animation-name: anim;
+		-webkit-animation-duration:10s;
+	}
 	
-	background-image:@background_img1;
-	background-size:cover;
-	background-repeat:no-repeat;
-	 color:@colorwhite !important;
+	header{
+		h1 {
+			margin-top: 55px !important;
+			text-align: right !important;
+		}
 	}
+	
+	.navbar-default {
+		background-color : rgba(1, 6, 33, 0.78);
+		border : none;
+		border-radius: 0;
+		margin-bottom : 0px;
+		.nav{
+			>li{
+				position : relative;
+				border-right:1px solid @colorwhite;
+				&:first-child{
+					border-left:1px solid @colorwhite;
+				}
+				>a{
+					text-shadow:2px 2px 2px @colorblack;
+					padding: 15px 15px;
+					text-transform : uppercase;
+					color : @colorwhite;
+					transition: all 300ms linear;
+					&:hover{
+						color:@colorwhite;
+						transform : scale(1.1);
+						background : transparent;
+					}
+				}	
+				> ul{
+					position:absolute;
+					display:none;
+					z-index:900;
+					width: 960px;
+					left : 0;
+					margin-left : auto;
+					margin-right : auto;
+					padding-left : 0;
+					background-color:rgba(6, 6, 6, 0.7);
+					>li {
+						padding : 20px; 
+						width : 25%;
+						list-style-type : none;
+						display : inline-block;
+						a{
+							border-left:1px solid transparent;
+							border-right:1px solid transparent;
+							background-color:transparent;
+							color:@colorwhite;
+						}
+						>ul{
+							display:none;
+						}
+					}
+				}
+				&:hover > ul {
+					display: block;
+				}	
+			}
+		}
+		.navbar-toggle {
+			margin-right : 8px;
+		}
+		.navbar-toggle .icon-bar {
+			background-color: 4d4dff;
+		} 
+	}
+	
+	.content{
+		background-color: rgba(1, 6, 33, 0.78);
+		padding: 30px 20px;
+		.tagline, .tagline1{
+			display : none;
+		}
+	}
+	h1, h2{
+		margin-bottom : 20px;
+	}	
 	h1, h2, h3, h4, h5 {
-		 text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue !important;
-		 color: @colorwhite !important;
+		font-family:'QumpellkaNo12';
+		text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue !important;
+		color: @colorwhite !important;
 	}
-	footer>div>div{background-color: rgba(6, 6, 6, 0.7);}
-	.homeAboutus{background-color: rgba(6, 6, 6, 0.7);}
+	
+	footer{
+		background-color: rgba(6, 6, 6, 0.7);
+		padding: 10px 10px 1px;
+		p{
+			font-weight : bold;
+			color : colorwhite;
+			a{
+				color : colorwhite;
+				&:hover{
+					color:@darkbackcolor;
+					text-decoration:underline;
+				}
+			}
+		}
+	}
+	
+	
 	.homeAboutus>div.row>div>div>a>h3{text-align:center;}
 	.homeAboutus>div.row>div>div>h3:hover{text-decoration:underline;}
 	.homeAboutus>div.row{div{div{background-color:black;margin-bottom: 25px;}}}
@@ -55,9 +161,7 @@
 	.products{background-color: rgba(6, 6, 6, 0.7);}
 	.row.contact{padding:15px 15px 0 15px;}
 
-	.container{
-		max-width : 992px !important;
-	}
+	
 	.back{
         color:@colorwhite;
 	}
@@ -73,18 +177,7 @@
 		80%{opacity:1px;position:relative;left:-2000px;}
 		100%{position:relative;left:0px;}
 	}
-	.log
-	{
-		position:absolute;
-		left:214px;
-		top:0px;
-		z-index:1;
-	}
-	.logo1
-	{
-		-webkit-animation-name: anim;
-		-webkit-animation-duration:10s;
-		}
+	
 	@-webkit-keyframes anim
 	{
 		0%{top:500px;left:200px;height:0px;width:0px;}
@@ -160,18 +253,17 @@
 			}
 		}
 	}
-			.img3{
-					width : 38px;
-					height:40px;
-					display:inline-block;
-				}
-				#img1{
-					background:url('../img/sprite.png') 2px 4px;
-					&:hover{
-					background:url('../img/sprite.png') 2px -37px;
-					}
-				
-				}
+	.img3{
+		width : 38px;
+		height:40px;
+		display:inline-block;
+	}
+	#img1{
+		background:url('../img/sprite.png') 2px 4px;
+		&:hover{
+			background:url('../img/sprite.png') 2px -37px;
+		}
+	}
 				#img2{
 					background:url("../img/sprite.png") -36px 4px ;
 					&:hover{
@@ -190,15 +282,13 @@
 					background:url('../img/sprite.png') -149px -37px;
 					}
 				}
-h2{margin-bottom:10px !important;margin-left:15px !important;}
 div.margin>div.container>div.row{background-color: rgba(6, 6, 6, 0.7);}
 p.text{margin: 10px 0 10px !important;}
 .margin{margin-top:15px;}
 .text1{background-color:black;}
-img.log:hover{transform: rotateY(360deg);transition:transform 2s;}
+
 .readmore > .btn-info{background-color:rgba(6, 6, 6, 0.7) !important;}
-.navbar-collapse>ul>li>a{padding-top:20px;}
-.navbar-collapse>ul>li>a:hover{font-size: 20px;}
+
 .products .thumbnail:hover .description {visibility:hidden !important;}
 .pagination > li > a{background-color:rgba(6, 6, 6, 0.7) !important;color:@colorwhite !important;}
 .table>tbody>tr>td{border-color:transparent !important;}
@@ -206,69 +296,7 @@ img.log:hover{transform: rotateY(360deg);transition:transform 2s;}
 .caption>h4{text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black !important;}
 td>h4{text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black !important;}
 .panel-body{background-color: rgba(0, 0, 0, 0.68) !important;}
-	.navbar-default {
-		
-		background-color:transparent;
-		border : none;
-		border-radius: 0;
-		
-		.nav>li{
-			
-		vertical-align: middle;
 	
-					a{
-						font:'Open Sans' , sans-serif;
-						text-shadow:2px 2px 2px @colorblack;
-						text-transform:uppercase;
-						background-color:rgba(6, 6, 6, 0.7);
-						color:@colorwhite;
-						border-left:1px solid @colorwhite;
-						border-right:1px solid @colorwhite;
-						height: 60px;
-						
-						
-							&:hover{
-								background-color:rgba(6, 6, 6, 0.7);
-								//display:block;
-								color:@colorwhite;
-								
-							}
-			
-					}	
-					> ul{
-						position:absolute;
-						display:none;
-						z-index:900;
-						width: 250px;
-						margin-left: -40px;
-							li {
-								padding: 25px 25px 5px; 
-								list-style-type:none;
-								background-color:rgba(6, 6, 6, 0.7);
-								border-bottom: 1px solid @colorwhite;
-								a{
-								border-left:1px solid transparent;
-								border-right:1px solid transparent;
-								
-								background-color:transparent;
-								color:@colorwhite;
-									&:hover{
-									
-									}
-								}
-								>ul{
-									display:none;
-								}
-								}
-						}
-				&:hover > ul {
-					display: block;
-					
-				}	
-		
-		}
-
-	}
 .prodimg {border-radius: 50% !important;background-color: rgba(211, 211, 211, 0.28);}
 .pagination{margin:0px 0px 5px 0px !important;}
 .products .thumbnail .prodimg img {padding:35px;}
@@ -376,14 +404,6 @@ td>h4{text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black !important;}
 			}
 		}	
 	
-	
-	.content{
-	    @color:@back;
-		margin-top : 20px;
-		padding : 0px 20px 20px;
-		
-	  
-	        }
 	.fproduct{
 		margin-top:-250px;
 		
@@ -430,14 +450,6 @@ td>h4{text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black !important;}
 		hr{
 			margin: 0px 0px 10px;
 		}
-	}
-	//global css
-	h1,h2,h3,h4,h5{
-		color : @colorwhite;
-		font-family : 'OpenSansRegular';
-		text-align:left;
-		text-transform:uppercase;
-		text-shadow:1px 1px 1px @darkcolor;
 	}
 	
 	.btn-link{
@@ -492,28 +504,6 @@ td>h4{text-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black !important;}
 	}
 	.navbar-collapse{
 		padding :0px;
-	}
-	.navbar-toggle {
-		border : 1px solid @lightcolor;
-		margin-top : 45px;
-	}
-	.navbar-toggle .icon-bar {
-		background-color: 4d4dff;
-	} 
-	
-	footer{
-		a, .btn-link{
-		color : @darkbackcolor;
-		&:hover{
-		color:@darkbackcolor;
-		text-decoration:underline;
-		}
-		}
-		margin-top : 10px;
-		//padding-top : 10px;
-		color:@darkbackcolor;
-		font-weight : bold;
-		background:transparent;
 	}
 	.navbar-toggle{
 		background-color : 4d4dff;

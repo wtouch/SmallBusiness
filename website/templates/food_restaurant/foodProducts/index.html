@@ -21,42 +21,33 @@
 		
 	</head>
 	<body>
-	<div>
-		{% if data.website_config.website_logo %}
-			<img class="logo1 log" src="{{data.business_logo.file_relative_path}}">
-		{% else %}
-			<img class="logo1 log" src="{{data.business_logo.file_relative_path}}">
-		{% endif %}
-		
-	</div>
+		<div>
+			{% if data.website_config.website_logo %}
+				<img class="logo1 log" src="{{data.business_logo.file_relative_path}}">
+			{% else %}
+				<img class="logo1 log" src="{{data.business_logo.file_relative_path}}">
+			{% endif %}
+			
+		</div>
 	<div style="color:white;">
-	<h1 class="h1">WELCOME TO SEALTECH ENGINEERS</h1>
-	<h1 class="h2">Presenting Innovative solutions for processing industry</h1>
-	<h1 class="h3">Dairy | Food | Pharma | Chemicals</h1>
+		<h1 class="h1">WELCOME TO {{data.business_name}}</h1>
+		<h1 class="h2">{{data.business_info.tagline}}</h1>
+		<h1 class="h3">{{data.business_info.alternate_tagline}}</h1>
 	</div>
-	 <div class="container back anim">
+	<div class="container back anim">
 		<header>
-			<div class="container">
-				<div class="row">
-					<!-- <div class="col-md-2 col-sm-6 col-xs-4">
-						  <div>
-							{% if data.website_config.website_logo %}
-								<img class="logo log" src="{{data.business_logo.file_relative_path}}">
-							{% else %}
-								<img class="logo log" src="{{data.business_logo.file_relative_path}}">
-							{% endif %}
-						</div> 
-					</div> -->
-					<div class="col-md-8 col-sm-12 col-xs-12">
-						 <h2>{{data.business_name}}</h2>
-					</div>
-				
-					<div class="col-md-4 col-xs-12 col-sm-12 social_link">
-						        {% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
-					</div>
+		
+			<div class="row">
+				<div class="col-md-8 col-sm-12 col-xs-12">
+					 <h1>{{data.business_name}}</h1>
+				</div>
+			
+				<div class="col-md-4 col-xs-12 col-sm-12 social_link">
+					{% include [templatePath ~ '/includes/sociallinks.html', 'default/default/includes/sociallinks.html'] %}
 				</div>
 			</div>
-			<nav class="nav navbar-default  navbar-static-top b"> 
+			
+			<nav class="navbar navbar-default  navbar-static-top b"> 
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span>
@@ -65,44 +56,31 @@
 						<span class="icon-bar"></span>
 					</button>
 				</div>
-			
-				<div class="container">
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav nav-justified">
-							{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
-						</ul>
-					</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav nav-justified">
+						{% include [templatePath ~ '/includes/links.html', 'default/default/includes/links.html']  with {'links' : routes, 'uri' : uri, 'templatePath' : templatePath } only %}
+					</ul>
 				</div>
 			</nav>
+			
 		</header>
-	    <div class="container margin">
-			<div class="row">
-				
-					{%if modules.headerModule.carousal %}
-					{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-					{%if modules.headerModule.homeproject %}
-					{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
-					{%endif%}
-				
-			</div> 
-			<!-- <div class="row">
-					{% include [templatePath ~ '/includes/featured_services.html', 'default/default/includes/featured_services.html'] %}
-			</div> -->
+		
+		{%if modules.headerModule.carousal %}
+			{% include [templatePath ~ '/includes/carousal.html', 'default/default/includes/carousal.html'] with {sliderData : data.template_params.slider} %}
+		{%endif%}
+		{%if modules.headerModule.homeproject %}
+			{% include [templatePath ~ '/includes/homeproject.html', 'default/default/includes/homeproject.html'] with {sliderData : data.template_params.slider} %}
+		{%endif%}
+		
+		<div class="content">
+			{% include contentPath%}
+			{%if modules.contentModule.featured_products %}
+				{% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
+			{%endif%}
 		</div>
-		</div>
-		 <div class="container margin anim">
-			 <div class="container">
-				<div class="row">
-					
-							<!-- {% include [templatePath ~ '/includes/featured_products.html', 'default/default/includes/featured_products.html'] %}
-					 -->
-							{% include contentPath%}
-				</div>
-			</div> 
-				
-		</div>
-		 {% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
+		
+	</div>
+	{% include [templatePath ~ '/includes/footer.html', 'default/default/includes/footer.html'] %}
 	</body>
 </html> 
 {% endspaceless %}
