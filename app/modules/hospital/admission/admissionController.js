@@ -222,6 +222,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							
 						$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
 						}
 					})
@@ -254,19 +255,19 @@ define(['app'], function (app) {
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.medicine_Prescribe = {};
-							 $scope.medicine_Prescribe.user_id = user_id;
-							if(input.date) $scope.medicine_Prescribe.date = input.date;
-							 $scope.modified_date = input.modified_date;
-							 $scope.medicine_Prescribe.medicine_used_date = input.medicine_used_date;
-							  $scope.medicine_Prescribe.quantity = input.quantity;
-							  $scope.medicine_Prescribe.unit = input.unit;
-							 $scope.medicine_Prescribe.description = input.description;
-							 
-							 $scope.medicine_Prescribe.medicine_id = input.medicine_id;
-							 
-							$rootScope.postData("medicine_used", $scope,function(response){
-								console.log(response);
+						 	$scope.equipmentData = {};
+							 $scope.equipmentData.user_id =input.user_id;
+							 $scope.equipmentData.patient_id = input.patient_id;
+							if(input.date) $scope.equipmentData.date = input.date;
+							 $scope.equipmentData.modified_date = input.modified_date;
+							 $scope.equipmentData.assign_date = input.assign_date;
+							  $scope.equipmentData.equipment_name = input.equipment_name;
+							  $scope.equipmentData.equipment_charges = input.equipment_charges;
+							 $scope.equipmentData.description = input.description;
+							 $scope.equipmentData.equipment_id = input.equipment_id;
+							 console.log($scope.equipmentData);
+								$rootScope.postData("equipment_used", angular.copy($scope.equipmentData),function(response){
+									
 								});
 								
 							$scope.getData(false, $scope.currentPage, 'admission_view','admission', $scope.admissionParams);
