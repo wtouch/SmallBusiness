@@ -25,7 +25,6 @@ define(['app'], function (app) {
 			popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="css/style.css" /></head><body onload="window.print()">' + printContents + '</html>');
 			popupWin.document.close();
 		}
-		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add admission",
@@ -60,15 +59,15 @@ define(['app'], function (app) {
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'admission_view\', \'admission\',true, grid.appScope.admissionParams)" ng-model="name" placeholder="search">'
                 },
 				{
-					name:'mobile',width:140,
+					name:'mobile',width:150,
 					filterHeaderTemplate: '<input id="mobile" class="form-control" ng-change="grid.appScope.filter(\'mobile\', mobile, \'admission_view\', \'admission\',true, grid.appScope.admissionParams)" ng-model="mobile" placeholder="search">'
                 },
 				{
-					name:'admission_date',width:90,
+					name:'admission_date',width:100,
 					filterHeaderTemplate: '<input id="admission_date" class="form-control" ng-change="grid.appScope.filter(\'admission_date\', admission_date, \'admission_view\', \'admission\',true, grid.appScope.admissionParams)" ng-model="admission_date" placeholder="search">'
                 },
 					
-				{ name:'Manage', width :500,
+				{ name:'Manage', 
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'admission_view\', \'admission\',false, grid.appScope.admissionParams)" ng-model="status">'
 							 +'<option value="" selected>Status</option>' 
 							+'<option value="0">Deleted</option>'
@@ -98,7 +97,7 @@ define(['app'], function (app) {
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/generate_bill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span >GB</span></a>'	
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/dishcharge.html\',row.entity)" class="btn btn-success btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span>DisCharge</span></a>'	
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/dishcharge.html\',row.entity)" class="btn btn-success btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span>discharge</span></a>'	
 				}
 			]
 		};
@@ -134,9 +133,14 @@ define(['app'], function (app) {
 					user_id : data.user_id,
 					name : data.name,
 					email : data.email,
-					admission_date :data.admission_date,
+<<<<<<< HEAD
+					admission_date :data.admission_date ,
 					discharge_date:data.discharge_date,
+=======
+					admission_date :data.admission_date,
+					discharge_date :data.discharge_date,
 					discharge_details :data.discharge_details,
+>>>>>>> dishcharge.html
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
 					ward_id :data.ward_id,

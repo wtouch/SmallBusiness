@@ -1,9 +1,9 @@
 
 <div class="modal-header">
-	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
 		<h3 class="text-center">Casesheet</h3>
 </div>
-<div class="modal-body" ng-init="modalOptions.addadmission.case_sheet = (modalOptions.addadmission.case_sheet) ? modalOptions.addadmission.case_sheet : [];isCollapsed=false">
+<div class="modal-body" ng-init="modalOptions.addadmission.case_sheet = (modalOptions.addadmission.case_sheet) ? modalOptions.addadmission.case_sheet : []; modalOptions.addadmission.case_sheet.prescription = (modalOptions.addadmission.case_sheet.prescription) ? modalOptions.addadmission.case_sheet.prescription : [];isCollapsed=false">
+
 	<label>Patient Details:</label>
 	<table class="table table-hover table-responsive table-bordered">
 		<tbody>
@@ -35,160 +35,215 @@
 			</tr>
 		</tbody>
 	</table>
-	<form class="form-horizontal" name="addcase_sheetForm" role="form" ng-submit="addcase_sheetForm.$valid" novalidate="novalidate">
-		<div class="form-group">
-			<label  for="case_sheet_date" class="col-sm-2 control-label">Date*</label>
-			<div class="col-sm-8">
-				<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="case_sheet_date" name="case_sheet_date" ng-model="modalOptions.case_sheet.case_sheet_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.case_sheet.case_sheet_date,10); modalOptions.sqlDateFormat(modalOptions.case_sheet.case_sheet_date, modalOptions.case_sheet.case_sheet_date)"/>	
-					<span class="text-danger"  ng-show="addcase_sheetForm.case_sheet_date.$error.date">Please enter valid date</span>
-					<span class="help-block" ng-show="addcase_sheetForm.case_sheet_date.$dirty && addcase_sheetForm.case_sheet_date.$invalid">
-						<span ng-show="addcase_sheetForm.case_sheet_date.$error.required"class="text-danger">Date  is required.</span>
-					</span>	
-					<span class="input-group-btn">
-					<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
-					</span>
+	<button type="button" class="btn btn-primary" tooltip-animation="true" tooltip="Add case sheet" ng-click="isCollapsed = !isCollapsed"> <span ng-class="(isCollapsed) ? 'glyphicon glyphicon-minus' : 'glyphicon glyphicon-plus'"></span>Add Casesheet</button>
+	<div collapse="!isCollapsed" class="collapse">
+	<br/>
+		<form class="form-horizontal" name="addcase_sheetForm" style="border:1px solid #ccc; padding:15px;" role="form" ng-submit="addcase_sheetForm.$valid" novalidate="novalidate">
+			<div class="form-group">
+				<label  for="case_sheet_date" class="col-sm-2 control-label">Date*</label>
+				<div class="col-sm-8">
+					<div class="input-group">
+						<input type="text" class="form-control " placeholder="Date" id="case_sheet_date" name="case_sheet_date" ng-model="modalOptions.case_sheet.case_sheet_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.case_sheet.case_sheet_date,10); modalOptions.sqlDateFormat(modalOptions.case_sheet.case_sheet_date, modalOptions.case_sheet.case_sheet_date)"/>	
+						<span class="text-danger"  ng-show="addcase_sheetForm.case_sheet_date.$error.date">Please enter valid date</span>
+						<span class="help-block" ng-show="addcase_sheetForm.case_sheet_date.$dirty && addcase_sheetForm.case_sheet_date.$invalid">
+							<span ng-show="addcase_sheetForm.case_sheet_date.$error.required"class="text-danger">Date  is required.</span>
+						</span>	
+						<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+					</div>
 				</div>
 			</div>
-			<!-- Case sheet link  -->
-			<button type="button" class="btn btn-primary" tooltip-animation="true" tooltip="Open case sheet" ng-click="isCollapsed = !isCollapsed"> <span ng-class="(isCollapsed) ? 'glyphicon glyphicon-minus' : 'glyphicon glyphicon-plus'"></span></button>
-			<!-- link ends -->
-		</div>
-	<div collapse="!isCollapsed" class="collapse">
-		<div class="form-group">
-			<label  for="diagnostic_test" class="col-sm-2 control-label">Diagnostic Test</label>
-			<div class="checkbox col-sm-2">
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test"checklist-value="x"/> Test1
-				</label>
+			<div class="form-group">
+				<label  for="diagnostic_test" class="col-sm-2 control-label">Diagnostic Test</label>
+				<div class="checkbox col-sm-2">
+					<label>
+					<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test"checklist-value="x"/> Test1
+					</label>
+				</div>
+				<div class="checkbox col-sm-2">
+					<label>
+					<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test1"checklist-value="x"/> Test2
+					</label>
+				</div>
+				<div class="checkbox col-sm-2">
+					<label>
+					<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test2"checklist-value="x"/> Test3
+					</label>
+				</div>
+				<div class="checkbox col-sm-2">
+					<label>
+					<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.tes3"checklist-value="x"/> Test4
+					</label>
+				</div>	
 			</div>
-			<div class="checkbox col-sm-2">
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test1"checklist-value="x"/> Test2
-				</label>
+			<div class="form-group">
+				<div class="checkbox col-sm-2  col-sm-offset-2">
+					<label>
+					<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test4"checklist-value="x"/> Test5
+					</label>
+				</div>
+				<div class="checkbox col-sm-2">
+					<label>
+					<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test5"checklist-value="x"/> Test6
+					</label>
+				</div>
+				<div class="checkbox col-sm-2">
+					<label>
+					<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test6"checklist-value="x"/> Test7
+					</label>
+				</div>
+				<div class="checkbox col-sm-2">
+					<label>
+					<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test7"checklist-value="x"/> Test8
+					</label>
+				</div>
 			</div>
-			<div class="checkbox col-sm-2">
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test2"checklist-value="x"/> Test3
-				</label>
+			<div class="form-group">
+				<label for="case_sheet_description" class="col-sm-2 control-label">Description *</label>
+				<div class="col-sm-8">
+					<textarea  type="text" required name="case_sheet_description" class="form-control" id="case_sheet_description" ng-model="modalOptions.case_sheet.case_sheet_description" placeholder="Enter Your casesheet Description"  ng-maxlength="250" ></textarea>
+					
+					<span class="text-danger"  ng-show="addcase_sheetForm.case_sheet_description.$error.pattern">Please enter valid description</span>
+					<span ng-hide="addcase_sheetForm.case_sheet.case_sheet_description.$error.maxlength">{{ 250 - modalOptions.case_sheet.case_sheet_description.length + " Chars left"}}</span>
+					<span class="help-danger" ng-show="addcase_sheetForm.case_sheet_description.$dirty &&  addcase_sheetForm.case_sheet_description.$invalid">
+					<span class="text-danger" ng-show="addcase_sheetForm.case_sheet_description.$error.maxlength">Sorry you are exceeding the limit</span>
+					<span class="text-danger" ng-show="addcase_sheetForm.case_sheet_description.$error.required">Description is required.</span>
+				</span>		
+				</div>
 			</div>
-			<div class="checkbox col-sm-2">
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.tes3"checklist-value="x"/> Test4
-				</label>
-			</div>	
-		</div>
-		<div class="form-group">
-			<div class="checkbox col-sm-2  col-sm-offset-2">
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test4"checklist-value="x"/> Test5
-				</label>
+				<div class="form-group">
+				<label for="remark" class="col-sm-2 control-label">Remark </label>
+				<div class="col-sm-8">
+					<textarea  type="text"  name="remark" class="form-control" id="remark" ng-model="modalOptions.case_sheet.remark" placeholder="Enter Your casesheet Remark"  ng-maxlength="250" ></textarea>
+					
+					<span class="text-danger"  ng-show="addcase_sheetForm.remark.$error.pattern">Please enter valid description</span>
+					<span ng-hide="addcase_sheetForm.case_sheet.remark.$error.maxlength">{{ 250 - modalOptions.case_sheet.remark.length + " Chars left"}}</span>
+					<span class="help-danger" ng-show="addcase_sheetForm.remark.$dirty &&  addcase_sheetForm.remark.$invalid">
+					<span class="text-danger" ng-show="addcase_sheetForm.remark.$error.maxlength">Sorry you are exceeding the limit</span>
+				</span>		
+				</div>
 			</div>
-			<div class="checkbox col-sm-2">
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test5"checklist-value="x"/> Test6
-				</label>
+			<button type="button" class="btn btn-primary" tooltip-animation="true" tooltip="Add Prescription" ng-click="isCollapsed1 = !isCollapsed1"> <span ng-class="(isCollapsed1) ? 'glyphicon glyphicon-minus' : 'glyphicon glyphicon-plus'"></span> Add Prescription</button>
+			<div collapse="!isCollapsed1" class="collapse">
+			<br/>{{modalOptions.case_sheet.prescription}}
+				<div class="form-group" ng-init= "modalOptions.getData(false,false,'medicine','medicineList',modalOptions.medicineParams,modalOptions)">
+					<label for="medicine_name" class="col-sm-2 control-label">Medicine Name *</label>
+					<div class="col-sm-8">					
+						<select id="medicine_name" name="medicine_name" class="form-control" 
+							ng-model="modalOptions.case_sheet.prescription.medicine_name" ng-options="item.medicine_name as item.medicine_name for item in modalOptions.medicineList">
+						<option value="">select Medicine</option>
+						</select>
+					</div>
+				</div>	
+				<div class="form-group">
+					<label for="quantity" class="col-sm-2 control-label">Quantity</label>
+					<div class="col-sm-3">
+						<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.case_sheet.prescription.quantity" placeholder="Enter Your quantity" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
+						<span class="text-danger"  ng-show="addcase_sheetForm.quantity.$error.pattern">please Enter Valid format</span>
+						<span class="help-block" ng-show="addcase_sheetForm.quantity.$dirty && addcase_sheetForm.quantity.$invalid">
+							<span ng-show="addcase_sheetForm.quantity.$error.required"class="text-danger">Quantity is required.</span>
+						</span>				
+					</div> 	
+					<label for="unit" class="col-sm-2 control-label">Unit*</label>
+					<div class="col-sm-3">
+					<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.case_sheet.prescription.unit" placeholder="Enter unit" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required>
+					<span class="text-danger"  ng-show="addcase_sheetForm.unit.$error.pattern"></span>
+						<span class="help-block" ng-show="addcase_sheetForm.unit.$dirty && addcase_sheetForm.unit.$invalid">
+							<span ng-show="addcase_sheetForm.unit.$error.required" class="text-danger">unit is required.</span>
+						</span>				
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="dose_time" class="col-sm-2 control-label">Dose Time</label>
+					<div class="checkbox col-sm-3">
+						<label>
+						<input type="checkbox" ng-model="modalOptions.case_sheet.prescription.dose_time.morning"checklist-value="morning"/> Morning
+						</label>
+						<label>
+						<input type="checkbox" ng-model="modalOptions.case_sheet.prescription.dose_time.afternoon"checklist-value="afternoon"/> Afternoon
+						</label>
+						<label>
+						<input type="checkbox" ng-model="modalOptions.case_sheet.prescription.dose_time.evening"checklist-value="evening"/>Evening
+						</label>
+						<label>
+						<input type="checkbox" ng-model="modalOptions.case_sheet.prescription.dose_time.night"checklist-value="night"/>Night
+						</label>
+					</div>
+					<label for="days" class="col-sm-2 control-label">Days</label>
+					<div class="col-sm-3">
+					<input type="text" id="days" name="days" class="form-control" ng-model="modalOptions.case_sheet.prescription.days" placeholder="Enter days" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/ " required/>
+							<span class="help-block" ng-show="addcase_sheetForm.days.$dirty && addcase_sheetForm.days.$invalid">
+							<span ng-show="addcase_sheetForm.days.$error.required" class="text-danger">days is required.</span>
+						</span>				
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-9 ">
+						<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.case_sheet.prescription, 'case_sheet.prescription', modalOptions)" >Save Prescription
+						</button>
+					</div>
+				</div>
+				<table class="table table-bordered " >
+					<thead>
+						<tr>
+							<th>sr.no</th>
+							<th>Medicine</th>
+							<th>Quantity</th>
+							<th>Unit</th>
+							<th>DoseTime</th>
+							<th>Days</th>
+							<th>Remove</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in modalOptions.addadmission.case_sheet.prescription">
+							<td>{{$index + 1}}</td>
+							<td>{{x.medicine_name}}</td>
+							<td>{{x.quantity}}</td>
+							<td>{{x.unit}}</td>
+							<td><label ng-repeat="x in x.dose_time" class="col-sm-3">
+								<input type="checkbox" checklist-model="dose_time" checklist-value="dosetime"> {{x}}
+							</label></td>
+							<td>{{x.days}}</td>
+							<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.case_sheet.prescription, $index)">X</button></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
-			<div class="checkbox col-sm-2">
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test6"checklist-value="x"/> Test7
-				</label>
+		</form>	
+			<div class="form-group">
+				<div class="col-sm-offset-9 ">
+					<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.case_sheet, 'case_sheet', modalOptions)" >Save Casesheet
+					</button>
+				</div>
 			</div>
-			<div class="checkbox col-sm-2">
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.diagnostic_test.test7"checklist-value="x"/> Test8
-				</label>
-			</div>
-		</div>
-		<div class="form-group" ng-init= "modalOptions.getData(false,false,'medicine','medicineList',modalOptions.medicineParams,modalOptions)">
-			<label for="medicine_name" class="col-sm-2 control-label">Medicine Name *</label>
-			<div class="col-sm-8">					
-				<select id="medicine_name" name="medicine_name" class="form-control" 
-					ng-model="modalOptions.case_sheet.medicine_name" ng-options="item.id as item.medicine_name for item in modalOptions.medicineList">
-				<option value="">select Medicine</option>
-				</select>
-			</div>
-		</div>	
-		<div class="form-group">
-			<label for="quantity" class="col-sm-2 control-label">Quantity</label>
-			<div class="col-sm-3">
-				<input type="text" required name="quantity" class="form-control" id="quantity" ng-model="modalOptions.case_sheet.quantity" placeholder="Enter Your quantity" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required/>
-				<span class="text-danger"  ng-show="addcase_sheetForm.quantity.$error.pattern">please Enter Valid format</span>
-				<span class="help-block" ng-show="addcase_sheetForm.quantity.$dirty && addcase_sheetForm.quantity.$invalid">
-					<span ng-show="addcase_sheetForm.quantity.$error.required"class="text-danger">Quantity is required.</span>
-				</span>				
-			</div> 	
-			<label for="unit" class="col-sm-2 control-label">Unit*</label>
-			<div class="col-sm-3">
-			<input type="text" id="unit" name="unit" class="form-control" ng-model="modalOptions.case_sheet.unit" placeholder="Enter unit" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required>
-			<span class="text-danger"  ng-show="addcase_sheetForm.unit.$error.pattern"></span>
-				<span class="help-block" ng-show="addcase_sheetForm.unit.$dirty && addcase_sheetForm.unit.$invalid">
-					<span ng-show="addcase_sheetForm.unit.$error.required" class="text-danger">unit is required.</span>
-				</span>				
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="dose_time" class="col-sm-2 control-label">Dose Time</label>
-			<div class="checkbox col-sm-3">
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.dose_time.morning"checklist-value="morning"/> Morning
-				</label>
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.dose_time.afternoon"checklist-value="afternoon"/> Afternoon
-				</label>
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.dose_time.evening"checklist-value="evening"/>Evening
-				</label>
-				<label>
-				<input type="checkbox" ng-model="modalOptions.case_sheet.dose_time.night"checklist-value="night"/>Night
-				</label>
-			</div>
-			<label for="days" class="col-sm-2 control-label">Days</label>
-			<div class="col-sm-3">
-			<input type="text" id="days" name="days" class="form-control" ng-model="modalOptions.case_sheet.days" placeholder="Enter days" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/ " required/>
-					<span class="help-block" ng-show="addcase_sheetForm.days.$dirty && addcase_sheetForm.days.$invalid">
-					<span ng-show="addcase_sheetForm.days.$error.required" class="text-danger">days is required.</span>
-				</span>				
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-10 ">
-				<button type="submit" class="btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addadmission.case_sheet, 'case_sheet', modalOptions)" >+Add 
-			</button>
-			</div>
-		</div>
+			<table class="table table-bordered " >
+				<thead>
+					<tr>
+						<th>Sr.no</th>
+						<th>Date</th>
+						<th>Description</th>
+						<th>Diagnostic Test</th>
+						<th style="width:100px;">Prescription</th>
+						<th>remark</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in modalOptions.addadmission.case_sheet">
+						<td>{{$index + 1}}</td>
+						<td>{{x.case_sheet_date}}</td>
+						<td>{{x.case_sheet_description}}</td>
+						<td>{{x.diagnostic_test}}</td>
+						<td>{{x.prescription}}</td>
+						<td>{{x.remark}}</td>
+						<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.case_sheet, $index)">X</button></td>
+					</tr>
+				</tbody>
+			</table>
 	</div>
-	</form>	
-
-				
-
-	
-	<table class="table table-bordered" >
-		<thead>
-			<tr>
-				<th>sr.no</th>
-				<th>Medicine</th>
-				<th>Quantity</th>
-				<th>DoseTime</th>
-				<th>Days</th>
-				<th>Remove</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="x in modalOptions.addadmission.case_sheet">
-				<td>{{$index + 1}}</td>
-				<td>{{x.medicine_name}}</td>
-				<td>{{x.quantity}}</td>
-				<td>{{x.dose_time}}</td>
-				<td>{{x.days}}</td>
-				<td><button ng-click="modalOptions.removeObject(modalOptions.addadmission.case_sheet, $index)">X</button></td>
-			</tr>
-		</tbody>
-	</table>
 </div>
-
-
-
 <div class="modal-footer" >
 	<div class="col-sm-offset-2 col-sm-8">
 		<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id" ng-disabled="addcase_sheetForm.$invalid" ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Save Casesheet</button>

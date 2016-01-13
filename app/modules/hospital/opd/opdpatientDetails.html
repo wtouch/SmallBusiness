@@ -1,7 +1,7 @@
 <div class="modal-body">
 	<div class="form-group" ng-init="modalOptions.getData(false,false,'patient','patient',modalOptions.patientParams,modalOptions)">
 		<label for="patient_id" class="col-sm-2 control-label"> Patient Name * </label>
-		<div class="col-sm-8">{{modalOptions.addopdpatient.patient_id}}
+		<div class="col-sm-9">{{modalOptions.addopdpatient.patient_id}}
 			<input id="patient_name" class="form-control" typeahead-template-url="customTemplate.html" ng-model="patient_name" typeahead="item.patient_name for item in modalOptions.getTypeaheadData('patient','patient_name', $viewValue)" typeahead-on-select="modalOptions.assignData($item, modalOptions.addopdpatient)" 
 				typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required />
 				
@@ -19,7 +19,7 @@
 	</div>
 	<div class="form-group">
 	 <label  for="checkup_date" class="col-sm-2 control-label"> Check Up Date * </label>
-		<div class="col-sm-8">
+		<div class="col-sm-9">
 			<input type="text" class="form-control" placeholder="Date" id="checkup_date" name="checkup_date" ng-model="modalOptions.addopdpatient.checkup_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" ng-required="true" required/>
 		</div>
 	</div>
@@ -33,7 +33,7 @@
 			</span>
 		</div>
 		<label for="mobile" class="col-sm-2 control-label">Mobile</label>
-		<div class="col-sm-3">
+		<div class="col-sm-4">
 		<input type="text" id="mobile" name="mobile" class="form-control" ng-model="modalOptions.addopdpatient.mobile" placeholder="Enter your Phone Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" />
 				<span class="help-block" ng-show="addopdpatientForm.mobile.$dirty && addopdpatientForm.mobile.$invalid">
 			<span class="help-block" ng-show="addopdpatientForm.emergency_contact.$error.pattern && addopdpatientForm.mobile.$dirty && addopdpatientForm.mobile.$invalid">Enter a valid contact number
@@ -42,13 +42,18 @@
 	</div>
 	<div class="form-group" ng-init="modalOptions.getData(false,false,'staff','staff',modalOptions.staffParams,modalOptions)">
 		<label for="staff_id" class="col-sm-2 control-label"> Consultant Dr </label>
-		<div class="col-sm-8">
+		<div class="col-sm-9">
 			<select id="staff_id" class="form-control" ng-model="modalOptions.addopdpatient.staff_id" ng-options="item.id as item.name for item in modalOptions.staff | filter :{staff_type: 'doctor'}" required>
 				<option value="">Select Dr</option>
 			</select>
 			<span class="help-block" ng-show="addopdpatientForm.user_id.$dirty && addopdpatientForm.user_id.$invalid">
 			<span ng-show="addopdpatientForm.user_id.$error.required" class="text-danger"></span>
 			</span>	
+		</div>
+	</div>
+	<div class="form-group modal-footer">
+		<div class="col-sm-offset-9  col-sm-2  ">
+		 <button type="submit" class="btn btn-primary" title="submit" ng-click="modalOptions.showFormPart('opdpatientComplaint',modalOptions)">Next</button> 
 		</div>
 	</div>
 </div>		

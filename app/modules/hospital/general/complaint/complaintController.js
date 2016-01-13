@@ -47,7 +47,6 @@ define(['app'], function (app) {
 					name:'category',
 					filterHeaderTemplate: '<input id="complaint_category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'complaint\', \'complaintList\',true, grid.appScope.complaintParams)" ng-model="category" placeholder="Category">',
 				},
-				
 				{
 					name:'type',
 					filterHeaderTemplate: '<input id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'complaint\', \'complaintList\',true, grid.appScope.complaintParams)" ng-model="type" placeholder="Type">',

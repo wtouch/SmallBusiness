@@ -1,7 +1,7 @@
 		<div class="modal-body" ng-init="modalOptions.addopdpatient.patient_complaint = (modalOptions.addopdpatient.patient_complaint) ? modalOptions.addopdpatient.patient_complaint : []">
 			<div class="form-group" ng-init="modalOptions.getData(false,false,'complaint','complaint',modalOptions.complaintParams,modalOptions)">
 			<label for="complaint_name" class="col-sm-2 control-label">Select Complaint Name*</label>
-			<div class="col-sm-8">
+			<div class="col-sm-9">
 				<select id="complaint_name" name="complaint_name" class="form-control" 
 				ng-model="modalOptions.patient_complaint.complaint_name" ng-options="item.complaint_name as item.complaint_name for item in modalOptions.complaint">
 				<option value="">Select Complaint Name</option>
@@ -11,7 +11,7 @@
 			</div>		
 			<div class="form-group">
 				<label for="complaints_description" class="col-sm-2 control-label">Description *</label>
-				<div class="col-sm-8">
+				<div class="col-sm-9">
 					<textarea  type="text" required name="complaints_description" class="form-control" id="complaints_description" ng-model="modalOptions.patient_complaint.complaints_description" placeholder="Enter Your Complaints Description" ng-maxlength="250"></textarea>
 					<span ng-hide="addopdpatientForm.patient_complaint.complaints_description.$error.maxlength">{{ 250 - modalOptions.patient_complaint.complaints_description.length + " Chars left"}}</span>
 					<span class="help-block" ng-show="addopdpatientForm.complaints_description.$dirty && addopdpatientForm.complaints_description.$invalid">
@@ -43,6 +43,11 @@
 					</tr>
 				</tbody >
 			</table>
+			<div class="form-group modal-footer">
+				<div class="col-sm-offset-9  col-sm-2  ">
+				 <button type="submit" class="btn btn-primary" title="submit" ng-click="modalOptions.showFormPart('opdpatienthistory',modalOptions)">Next</button> 
+				</div>
+			</div>
 		</div>	
 			
 		
