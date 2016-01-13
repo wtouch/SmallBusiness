@@ -1,16 +1,17 @@
 <div class="modal-header">
-	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
-		<h3 class="text-center">Discharge Form</h3>
-		<!-- <h3 class="text-center">Discharge Card</h3> -->
-</div> {{modalOptions.view_admission}}
-<div class="modal-body">
+	<!-- <button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button> -->
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+		<h3 class="text-center" ng-if="modalOptions.view_admission.discharge_date == '0000-00-00' || !modalOptions.view_admission.discharge_date">Discharge Form</h3>
+		<h3 class="text-center" ng-if="modalOptions.view_admission.discharge_date != '0000-00-00'">Discharge Card</h3> 
+</div> 
+<div class="modal-body">{{modalOptions.view_admission.patient_history}}
 	<div class="modal-body">
-		<form class="form-horizontal" name="dischargeForm" role="form" ng-submit="dischargeForm.$valid" novalidate="novalidate"><!--ng-if="!modalOptions.view_admission.discharge_date"-->
+		<form class="form-horizontal" name="dischargeForm" role="form" ng-submit="dischargeForm.$valid" novalidate="novalidate" ng-if="modalOptions.view_admission.discharge_date == '0000-00-00' || !modalOptions.view_admission.discharge_date"><!---->
 			<div class="form-group">
 				<label  for="discharge_date" class="col-sm-2 control-label">Discharge Date*</label>
 				<div class="col-sm-8">
 					<div class="input-group">
-						<input type="text" class="form-control " placeholder="Date" id="discharge_date" name="assign_date" ng-model="modalOptions.addadmission.discharge_date" ng-init="modalOptions.addadmission.discharge_date= modalOptions.admission_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"   ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.assign_date.discharge_date,10); modalOptions.sqlDateFormat(modalOptions.addadmission.discharge_date, modalOptions.addadmission.discharge_date)"/>	
+						<input type="text" class="form-control " placeholder="Date" id="discharge_date" name="assign_date" ng-model="modalOptions.addadmission.discharge_date" ng-init="modalOptions.addadmission.discharge_date= modalOptions.admission_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-click="opened1= !opened" ng-change="modalOptions.setDate(modalOptions.assign_date.discharge_date,10); modalOptions.sqlDateFormat(modalOptions.addadmission.discharge_date, modalOptions.addadmission.discharge_date)"/>	
 							<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="opened1= !opened" ><i class="glyphicon glyphicon-calendar"></i></button>
 							</span>
@@ -33,9 +34,9 @@
 			<div class="form-group">
 				<label for="diagnosis" class="col-sm-2 control-label">Diagnosis *</label>
 				<div class="col-sm-8">
-					<textarea  class="form-control" id="diagnosis" ng-model="modalOptions.addadmission.discharge_details.diagnosis" name="diagnosis" placeholder="Enter diagnosis"  ng-maxlength="250" required></textarea>
+					<textarea class="form-control" id="diagnosis" ng-model="modalOptions.addadmission.discharge_details.diagnosis" name="diagnosis" placeholder="Enter diagnosis"  ng-maxlength="500" ui-tinymce required></textarea>
 					<span class="text-danger help-block" ng-show="dischargeForm.diagnosis.$error.pattern">Please Enter Valid Address</span>
-							<span ng-hide="dischargeForm.diagnosis.$error.maxlength">{{ 250 - modalOptions.addadmission.discharge_details.diagnosis.length + " Chars left"}}</span>
+							<span ng-hide="dischargeForm.diagnosis.$error.maxlength">{{ 500 - modalOptions.addadmission.discharge_details.diagnosis.length + " Chars left"}}</span>
 							<span class="help-block" ng-show="dischargeForm.diagnosis.$dirty &&  dischargeForm.diagnosis.$invalid">
 								<span class="text-danger" ng-show="dischargeForm.diagnosis.$error.maxlength">Sorry you are exceeding the limit</span>
 								<span class="text-danger" ng-show="dischargeForm.diagnosis.$error.required">Required Field.</span>
@@ -45,9 +46,9 @@
 			<div class="form-group">
 				<label for="investigation" class="col-sm-2 control-label">Investigation *</label>
 				<div class="col-sm-8">
-					<textarea  class="form-control" id="investigation" ng-model="modalOptions.addadmission.discharge_details.investigation" name="investigation" placeholder="Enter Investigation"  ng-maxlength="250" required></textarea>
+					<textarea  class="form-control" id="investigation" ng-model="modalOptions.addadmission.discharge_details.investigation" name="investigation" placeholder="Enter Investigation"  ng-maxlength="500" ui-tinymce required></textarea>
 					<span class="text-danger help-block" ng-show="dischargeForm.investigation.$error.pattern">Please Enter Valid Address</span>
-							<span ng-hide="dischargeForm.investigation.$error.maxlength">{{ 250 - modalOptions.addadmission.discharge_details.investigation.length + " Chars left"}}</span>
+							<span ng-hide="dischargeForm.investigation.$error.maxlength">{{ 500 - modalOptions.addadmission.discharge_details.investigation.length + " Chars left"}}</span>
 							<span class="help-block" ng-show="dischargeForm.investigation.$dirty &&  dischargeForm.investigation.$invalid">
 								<span class="text-danger" ng-show="dischargeForm.investigation.$error.maxlength">Sorry you are exceeding the limit</span>
 								<span class="text-danger" ng-show="dischargeForm.investigation.$error.required">Required Field.</span>
@@ -57,9 +58,9 @@
 			<div class="form-group">
 				<label for="procedure" class="col-sm-2 control-label">Procedure Performed*</label>
 				<div class="col-sm-8">
-					<textarea  class="form-control" id="procedure" ng-model="modalOptions.addadmission.discharge_details.procedure" name="procedure" placeholder="Enter procedure"  ng-maxlength="250" required></textarea>
+					<textarea  class="form-control" id="procedure" ng-model="modalOptions.addadmission.discharge_details.procedure" name="procedure" placeholder="Enter procedure"  ng-maxlength="500" ui-tinymce required></textarea>
 					<span class="text-danger help-block" ng-show="dischargeForm.procedure.$error.pattern">Please Enter Valid Address</span>
-							<span ng-hide="dischargeForm.procedure.$error.maxlength">{{ 250 - modalOptions.addadmission.discharge_details.procedure.length + " Chars left"}}</span>
+							<span ng-hide="dischargeForm.procedure.$error.maxlength">{{ 500 - modalOptions.addadmission.discharge_details.procedure.length + " Chars left"}}</span>
 							<span class="help-block" ng-show="dischargeForm.procedure.$dirty &&  dischargeForm.procedure.$invalid">
 								<span class="text-danger" ng-show="dischargeForm.procedure.$error.maxlength">Sorry you are exceeding the limit</span>
 								<span class="text-danger" ng-show="dischargeForm.procedure.$error.required">Required Field.</span>
@@ -69,9 +70,9 @@
 			<div class="form-group">
 				<label for="treatment" class="col-sm-2 control-label">Treatment On Discharge*</label>
 				<div class="col-sm-8">
-					<textarea  class="form-control" id="treatment" ng-model="modalOptions.addadmission.discharge_details.treatment" name="treatment" placeholder="Enter treatment"  ng-maxlength="250" required></textarea>
+					<textarea class="form-control" id="treatment" ng-model="modalOptions.addadmission.discharge_details.treatment" name="treatment" placeholder="Enter treatment"  ng-maxlength="500" ui-tinymce required></textarea>
 					<span class="text-danger help-block" ng-show="dischargeForm.treatment.$error.pattern">Please Enter Valid Address</span>
-							<span ng-hide="dischargeForm.treatment.$error.maxlength">{{ 250 - modalOptions.addadmission.discharge_details.treatment.length + " Chars left"}}</span>
+							<span ng-hide="dischargeForm.treatment.$error.maxlength">{{ 500 - modalOptions.addadmission.discharge_details.treatment.length + " Chars left"}}</span>
 							<span class="help-block" ng-show="dischargeForm.treatment.$dirty &&  dischargeForm.treatment.$invalid">
 								<span class="text-danger" ng-show="dischargeForm.treatment.$error.maxlength">Sorry you are exceeding the limit</span>
 								<span class="text-danger" ng-show="dischargeForm.treatment.$error.required">Required Field.</span>
@@ -80,7 +81,7 @@
 			</div> 
 		</form>
 		
-		<!-- <form class="form-horizontal" name="dischargeCardForm" role="form" ng-submit="dischargeCardForm.$valid" novalidate="novalidate" ng-if="modalOptions.view_admission.discharge_date">
+		<form class="form-horizontal" name="dischargeCardForm" role="form" ng-submit="dischargeCardForm.$valid" novalidate="novalidate" ng-if="modalOptions.view_admission.discharge_date != '0000-00-00'">
 			<div class="form-group">
 				<label  for="Name" class="col-sm-2 control-label">Name*</label>
 				<div class="col-sm-9">
@@ -116,12 +117,20 @@
 						<textarea type="text" class="form-control " placeholder="Name" id="Name" name="Name" ng-model="modalOptions.view_admission.discharge_details.diagnosis"></textarea>	
 				</div>
 			</div>
-		</form> -->
+			
+			<tr ng-repeat="x in modalOptions.view_admission.patient_history">
+				<td>{{x.title}}</td>
+				<td>{{x.description}}</td>
+				<td>{{x.category}}</td>
+				<td>{{x.type}}</td>
+			</tr>
+								
+		</form>
 	</div>
 	
 	<div class="modal-footer" >
 		<div class="col-sm-offset-2 col-sm-8">
-			<button type="submit" class="btn btn-success" ng-disabled="dischargeForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update</button>
+			<button type="submit" class="btn btn-success" ng-disabled="dischargeForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Discharge</button>
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
 		</div>
 	</div>
