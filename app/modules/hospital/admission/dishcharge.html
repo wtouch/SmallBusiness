@@ -1,10 +1,10 @@
 <div class="modal-header">
-	<!-- <button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button> -->
+	<button type="button" class="btn btn-primary pull-right buttondistance" ng-click="modalOptions.printDiv('addadmission')">Print</button>
 	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3 class="text-center" ng-if="modalOptions.view_admission.discharge_date == '0000-00-00' || !modalOptions.view_admission.discharge_date">Discharge Form</h3>
 		<h3 class="text-center" ng-if="modalOptions.view_admission.discharge_date != '0000-00-00'">Discharge Card</h3> 
 </div> 
-<div class="modal-body">{{modalOptions.view_admission.patient_history}}
+<div class="modal-body">
 	<div class="modal-body">
 		<form class="form-horizontal" name="dischargeForm" role="form" ng-submit="dischargeForm.$valid" novalidate="novalidate" ng-if="modalOptions.view_admission.discharge_date == '0000-00-00' || !modalOptions.view_admission.discharge_date"><!---->
 			<div class="form-group">
@@ -80,7 +80,7 @@
 				</div>
 			</div> 
 		</form>
-		
+		<div id="addadmission">
 		<form class="form-horizontal" name="dischargeCardForm" role="form" ng-submit="dischargeCardForm.$valid" novalidate="novalidate" ng-if="modalOptions.view_admission.discharge_date != '0000-00-00'">
 			<div class="form-group">
 				<label  for="Name" class="col-sm-2 control-label">Name*</label>
@@ -118,19 +118,90 @@
 				</div>
 			</div>
 			
-			<tr ng-repeat="x in modalOptions.view_admission.patient_history">
-				<td>{{x.title}}</td>
-				<td>{{x.description}}</td>
-				<td>{{x.category}}</td>
-				<td>{{x.type}}</td>
-			</tr>
-								
+			<div class="form-group">
+				<label  for="Name" class="col-sm-2 control-label">Treatment On Discharge*</label>
+				<div class="col-sm-9">
+					<textarea type="text" class="form-control " placeholder="Name" id="Name" name="Name" ng-model="modalOptions.view_admission.discharge_details.treatment"></textarea>	
+				</div>
+			</div>
 		</form>
+		
+		<div class="row">
+			<label class="col-sm-2 text-right">History</label>
+			<div class="col-sm-9">
+				<table class="table table-bordered">
+					<thead>
+						<tr class="head">
+							<th>Title</th>
+							<th>Description</th>
+							<th>Category</th>
+							<th>Type</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>{{modalOptions.view_admission.patient_history.title}}</td>
+						<td>{{modalOptions.view_admission.patient_history.description}}</td>
+						<td>{{modalOptions.view_admission.patient_history.category}}</td>
+						<td>{{modalOptions.view_admission.patient_history.type}}</td>
+					</tr>
+				</table>
+			</div>
+			<label class="col-sm-2 text-right">Investigation Details:</label>
+			<div class="col-sm-9">
+				<table class="table table-hover table-responsive table-bordered">
+					<tbody>
+						<tr>
+							 <td><b>Temperature</b></td>
+							 <td>						
+								{{modalOptions.view_admission.general_examination.temprature}}
+							 </td>
+							<td><b>Puls</b></td>
+							 <td>						
+								{{modalOptions.view_admission.general_examination.Pulse}}
+							 </td>	
+							<td><b>BP</b></td>
+							 <td>						
+								{{modalOptions.view_admission.general_examination.bp}}
+							 </td>						 
+						</tr>
+						<tr>
+							 <td><b>Height</b></td>
+							 <td>						
+								{{modalOptions.view_admission.general_examination.height}}
+							 </td>
+							<td><b>Weight</b></td>
+							 <td>						
+								{{modalOptions.view_admission.general_examination.weight}}
+							 </td>	
+							<td><b>Pallor</b></td>
+							 <td>						
+								{{modalOptions.view_admission.general_examination.pallor}}
+							 </td>						 
+						</tr>
+						<tr>
+							 <td><b>RR</b></td>
+							 <td>						
+								{{modalOptions.view_admission.general_examination.RR}}
+							 </td>
+							<td><b>ENT</b></td>
+							 <td>						
+								{{modalOptions.view_admission.general_examination.ENT}}
+							 </td>	
+							<td><b>ICTERUS</b></td>
+							 <td>						
+								{{modalOptions.view_admission.general_examination.ICTERUS}}
+							 </td>						 
+						</tr>
+						</tbody>
+				</table>
+			</div>
+		</div>
+		</div>
 	</div>
 	
 	<div class="modal-footer" >
 		<div class="col-sm-offset-2 col-sm-8">
-			<button type="submit" class="btn btn-success" ng-disabled="dischargeForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Discharge</button>
+			<button type="submit" ng-if="modalOptions.view_admission.discharge_date == '0000-00-00' || !modalOptions.view_admission.discharge_date" class="btn btn-success" ng-disabled="dischargeForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Discharge</button>
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
 		</div>
 	</div>

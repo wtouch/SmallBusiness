@@ -25,6 +25,7 @@ define(['app'], function (app) {
 			popupWin.document.write('<html><head><link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" /><link rel="stylesheet" type="text/css" href="css/style.css" /></head><body onload="window.print()">' + printContents + '</html>');
 			popupWin.document.close();
 		}
+		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add admission",
