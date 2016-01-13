@@ -109,6 +109,7 @@ define(['app'], function (app) {
 			viewopd : (data) ? {
 					id : data.id,
 					name : data.name,
+					
 					email : data.email,
 					checkup_date :data.checkup_date ,
 					mobile: data.mobile,
@@ -152,7 +153,7 @@ define(['app'], function (app) {
 					checkup_date :data.checkup_date ,
 					mobile: data.mobile,
 					ward_id :data.ward_id,
-					//
+					patient_id : data.patient_id,
 					patient_id:data.patient_id,
 					bed_id :data.bed_id,
 					patient_history:data.patient_history,

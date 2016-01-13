@@ -2,7 +2,11 @@
 	<div class="form-group" ng-init="modalOptions.getData(false,false,'history','history',modalOptions.historyParams,modalOptions)">
 	<label for="History" class="col-sm-2 control-label">History Title*</label>
 		<div class="col-sm-9">
-			<input type="text" id="history_title" name="history_title" class="form-control" ng-model="modalOptions.patient_history.history_title" placeholder="Enter your Phone Number" required />
+			<input type="text" id="history_title" name="history_title" class="form-control" ng-model="modalOptions.patient_history.history_title" placeholder="Enter your Title" ng-pattern="/^[a-zA-Z\/ ]*$/" required />
+			<span class="text-danger" ng-show="addopdpatientForm.history_title.$error.pattern && addopdpatientForm.history_title.$dirty ">Enter a valid  Title</span>
+			<span class="help-block" ng-show="addopdpatientForm.history_title.$dirty && addopdpatientForm.history_title.$invalid">
+				<span ng-show="addopdpatientForm.history_title.$error.required"class="text-danger">Title is required.</span>
+			</span>	
 		</div>
 	</div>		
 	<div class="form-group">
