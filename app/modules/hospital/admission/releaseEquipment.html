@@ -31,19 +31,19 @@
 		</tbody>
 	</table>
 	<div class="modal-body">
-		<form class="form-horizontal" name="assignEquipementForm" role="form" ng-submit="assignEquipementForm.$valid" novalidate="novalidate">
+		<form class="form-horizontal" name="releaseEquipementForm" role="form" ng-submit="releaseEquipementForm.$valid" novalidate="novalidate">
 			<div class="form-group">
 				<label  for="date" class="col-sm-2 control-label">Date*</label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control " placeholder="Date" id="assign_date" name="assign_date" ng-model="modalOptions.equipment_sheet.assign_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required/>	
+					<input type="text" class="form-control " placeholder="Date" id="release_date" name="release_date" ng-model="modalOptions.equipment_sheet.release_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required/>	
 						<span class="input-group-btn">
 						</span>
-						<span class="text-danger"  ng-show="assignEquipementForm.assign_date.$error.date">Please enter valid date</span>
-						<span class="help-block" ng-show="assignEquipementForm.assign_date.$dirty && assignEquipementForm.assign_date.$invalid">
-							<span ng-show="assignEquipementForm.assign_date.$error.required"class="text-danger">Date  is required.</span>
+						<span class="text-danger"  ng-show="releaseEquipementForm.release_date.$error.date">Please enter valid date</span>
+						<span class="help-block" ng-show="releaseEquipementForm.release_date.$dirty && releaseEquipementForm.release_date.$invalid">
+							<span ng-show="releaseEquipementForm.release_date.$error.required"class="text-danger">Date  is required.</span>
 				</div>
 			</div>
-			<div class="form-group" ng-init= "modalOptions.getData(false,false,'equipment','equipmentList',false,modalOptions)">
+			<div class="form-group" ng-init= "modalOptions.getData(false,false,'equipment_used','equipmentList',false,modalOptions)">
 				<label for="equipment_name" class="col-sm-2 control-label">Equipment Name *</label>
 				<div class="col-sm-8">					
 					<select id="equipment_name" name="equipment_name" class="form-control" 
@@ -57,9 +57,9 @@
 				<label for="description" class="col-sm-2 control-label">Description</label>
 				<div class="col-sm-8">
 					<textarea type="text" required name="description" class="form-control" id="description" ng-model="modalOptions.equipment_sheet.description" placeholder="Enter Your description" ng-pattern="/^[a-zA-Z]*$/" required/></textarea>
-					<span class="text-danger"  ng-show="assignEquipementForm.description.$error.pattern">please Enter Valid description</span>
-					<span class="help-block" ng-show="assignEquipementForm.description.$dirty && assignEquipementForm.description.$invalid">
-						<span ng-show="assignEquipementForm.description.$error.required"class="text-danger">description is required.</span>
+					<span class="text-danger"  ng-show="releaseEquipementForm.description.$error.pattern">please Enter Valid description</span>
+					<span class="help-block" ng-show="releaseEquipementForm.description.$dirty && releaseEquipementForm.description.$invalid">
+						<span ng-show="releaseEquipementForm.description.$error.required"class="text-danger">description is required.</span>
 					</span>				
 				</div>
 			</div>
@@ -81,7 +81,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="x in modalOptions.addadmission.equipment_sheet">
+				<tr ng-repeat="x in modalOptions.addadmission.equipment_sheet">
 				<td>{{$index + 1}}</td>
 				<td>{{x.assign_date}}</td>
 				<td>{{x.equipment_name}}</td>
@@ -94,7 +94,7 @@
 		<div class="col-sm-offset-2 col-sm-8">
 			<button type="submit" class="btn btn-success" ng-if="!modalOptions.addadmission.id" ng-click="modalOptions.postData('admission',modalOptions.addadmission);modalOptions.ok()">Save </button>
 			
-			<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success" ng-disabled="assignEquipementForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update</button>
+			<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success" ng-disabled="releaseEquipementForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update</button>
 			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
 		</div>
 	</div>

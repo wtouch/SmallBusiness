@@ -91,13 +91,30 @@ define(['app'], function (app) {
 					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/medicine_Prescribe.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view medicine_Prescribe" > <span>MP</span></a>'
 					+
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/assignEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >AE</span></a>'	+
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/assignEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >AE</span></a>'	
+					+
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/releaseEquipment.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view assignEquipment" > <span >RE</span></a>'	
+					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/generate_bill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span >GB</span></a>'	
-						+
+					+
 					'<a ng-click="grid.appScope.openModal(\'modules/hospital/admission/dishcharge.html\',row.entity)" class="btn btn-success btn-sm" type="button" tooltip-animation="true" tooltip="view generate_bill" > <span>discharge</span></a>'	
 				}
 			]
 		};
+		var  date1 = "";
+		var date2 = "";
+		$scope.dateDifference = function(date1,date2){
+			console.log(date1,date2)
+			//var d1 = new Date(string1);
+			//var d2 = new Date(string2);
+			//var miliseconds = d2-d1;
+			//var seconds = miliseconds/1000;
+			//var minutes = seconds/60;
+			//var hours = minutes/60;
+			//var days = hours/24;
+			//console.log(days);
+		}  
+	//	$scope.dateDifference(date1,date2);
 		$scope.openModal = function(url,data){
 			
 			var modalDefault = {
@@ -117,6 +134,7 @@ define(['app'], function (app) {
 					name : data.name,
 					email : data.email,
 					admission_date :data.admission_date ,
+					discharge_date:data.discharge_date,
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
 					ward_id :data.ward_id,
@@ -187,6 +205,20 @@ define(['app'], function (app) {
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					admission_date :$scope.currentDate	
 				},
+				dateDifference : function(date1,date2,bed_charges){
+					console.log(date1,date2)
+					var d1 = new Date(date1);
+					var d2 = new Date(date2);
+					var miliseconds = d2-d1;
+					var seconds = miliseconds/1000;
+					var minutes = seconds/60;
+					var hours = minutes/60;
+					var days = hours/24;
+					console.log(days);
+					var total=bed_charges*days;
+					console.log(total);
+					return total;
+				},
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
@@ -210,6 +242,8 @@ define(['app'], function (app) {
 						}
 					}); 
 				},
+				
+			
 				assignData : function(object, formObject){
 					formObject.patient_id = object.id;
 					formObject.mobile = object.mobile;
