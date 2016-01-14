@@ -139,6 +139,7 @@ define(['angular',
 		
 	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams','$notification','$timeout', '$route', '$http', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies, $routeParams, $notification, $timeout, $route,$http) {
 		$rootScope.sqLite = false;
+		//$rootScope.standAlone = true;
 		$rootScope.$routeProviderReference = $routeProviderReference;
 		$rootScope.filterParams = {};
 		

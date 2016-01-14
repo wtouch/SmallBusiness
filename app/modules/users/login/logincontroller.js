@@ -9,8 +9,10 @@ define(['app'], function (app) {
 		
 		//function to login user
 		$scope.insert = function(login){
+			if($rootScope.standAlone) $rootScope.sqLite = false;
 			dataService.post("post/user/login",$scope.login)
 			.then(function(response) {
+				if($rootScope.standAlone) $rootScope.sqLite = true;
 				if(response.status == 'success'){
 					$location.path("/dashboard");
 					dataService.setUserDetails(dataService.parse(response.data));
@@ -20,6 +22,7 @@ define(['app'], function (app) {
 					dataService.setAuth(true);
 					$rootScope.userDetails = dataService.userDetails;
 				}
+				
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Login", response.message);
 			})
@@ -27,8 +30,10 @@ define(['app'], function (app) {
 		
 		//function to forgot password
 		$scope.forgotpass = function(forgot) {
+			if($rootScope.standAlone) $rootScope.sqLite = false;
 			dataService.post("post/user/forgotpass",forgot)
 			.then(function(response) {
+				if($rootScope.standAlone) $rootScope.sqLite = true;
 				if(response.status == 'success'){
 					$scope.forgot = response.data;
 					$location.path("/login");
@@ -44,9 +49,11 @@ define(['app'], function (app) {
 		}
 		// function to change password
 		$scope.changepasswd = function(changepass) {
+			if($rootScope.standAlone) $rootScope.sqLite = false;
 			var urlParams = {reset : $routeParams.resetPassKey}
 			dataService.post("post/user/changepass",changepass,urlParams)
 			.then(function(response) {
+				if($rootScope.standAlone) $rootScope.sqLite = true;
 				if(response.status == 'success'){
 					$scope.changepass = {};
 				}
@@ -61,8 +68,10 @@ define(['app'], function (app) {
 			$scope.changePassword = function(changepass) {
 				var urlParams = {activate : $routeParams.activateKey, email : $routeParams.email};
 				if(changepass != (undefined || "")) angular.extend(urlParams, changepass);
+				if($rootScope.standAlone) $rootScope.sqLite = false;
 				dataService.get("login/activate",urlParams)
 				.then(function(response) {
+					if($rootScope.standAlone) $rootScope.sqLite = true;
 					if(response.status == 'success'){
 						$scope.changepass = {};
 						$scope.activate = true;

@@ -399,8 +399,7 @@ define(['app'], function (app) {
 			
 			
 			obj.rememberPass = function(remb){
-				//$cookieStore.put('auth',remb);
-				sessionStorage.clear();
+				obj.setAuth(remb, 30);
 			}
 			obj.logout = function(){
 				obj.get('/login/logout').then(function(response){
@@ -434,10 +433,15 @@ define(['app'], function (app) {
 					}
 				});
 			}, 1500);
-			obj.setAuth = function (data) {
-				//sessionStorage.auth = data;
-				//return obj.auth =  JSON.parse(sessionStorage.auth);
-				//$cookieStore.put('auth',data);
+			obj.setAuth = function (data, time) {
+				var cookieExp = new Date();
+				var expTime = (time) ? time * 60 * 24 : 15;
+				cookieExp = new Date(cookieExp.setMinutes(cookieExp.getMinutes() + expTime));
+				if($rootScope.sqLite){
+					$cookies.put('auth',data,{expires : cookieExp});
+				}else{
+					$cookies.put('auth',data);
+				}
 				return obj.auth =  ($cookieStore.get('auth'));
 			};
 			obj.setUserDetails = function(data){
