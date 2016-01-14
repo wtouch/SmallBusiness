@@ -3,7 +3,7 @@
 	
 	<div class="row">
 		<div class="col-sm-2">
-		<h4>Staff Attendance</h4>
+		<h4>Staff Holiday</h4>
 		</div>
 		<div class="col-sm-1">
 			<button class="btn btn-primary" ng-click="isCollapsed=!isCollapsed"tooltip-animation="true" tooltip="Add staff Attendance"><span ng-class="(isCollapsed)?'glyphicon glyphicon-minus':'glyphicon glyphicon-plus'"></span></button>
@@ -17,22 +17,22 @@
 					<div class="row">
 						<h5 ng-if="!stock.id">Add Staff Holidays</h5>
 						<h5 ng-if="stock.id">Update Staff Holidays</h5>
-						<form class="form-horizontal" name="addholidayForm" role="form" ng-submit="addholidayForm.$valid" novalidate="novalidate" ng-init="modalOptions.getData(false, false,'staffholidays', 'holidayList', modalOptions.holidayParams, modalOptions)"
+						<form class="form-horizontal" name="addholidayForm" role="form" ng-submit="addholidayForm.$valid" novalidate="novalidate" ng-init="getData(false, false,'staffholidays', 'staffholidays', holidaysParams)">
 								<div class="form-group">
 									<label  for="date" class="col-sm-2 control-label">Date *</label>
 									<div class="col-sm-3">
 											<div class="input-group">
-												<input type="text" class="form-control " placeholder="Date" id="holiday_date" name="holiday_date" ng-model="modalOptions.addholiday.holiday_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addholiday.holiday_date = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addholiday.holiday_date,10); modalOptions.sqlDateFormat(modalOptions.addholiday.holiday_date, modalOptions.addholiday.holiday_date)"/>	
+												<input type="text" class="form-control " placeholder="Date" id="holiday_date" name="holiday_date" ng-model="addholiday.holiday_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="addholiday.holiday_date = staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="setDate(addholiday.holiday_date,10); sqlDateFormat(addholiday.holiday_date, addholiday.holiday_date)"/>	
 												
 												<span class="input-group-btn">
 													<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
 												</span>
 											</div>
-										</div>
+									</div>
 										
 										<label for="holiday_name" class="col-sm-2 control-label">Holiday Name *</label>
 										<div class="col-sm-3">
-											<input type="text" id="holiday_name" class="form-control" name="holiday_name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addholiday.holiday_name"required>
+											<input type="text" id="holiday_name" class="form-control" name="holiday_name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="addholiday.holiday_name"required>
 											
 											 <span class="text-danger"  ng-show="addholidayForm.holiday_name.$error.pattern">Required Field.</span>
 											 
@@ -41,29 +41,25 @@
 											<span class="text-danger" ng-show="addholidayForm.holiday_name.$error.required">Name is required.</span>
 											</span>
 										</div>		
-										<button type="submit" class="btn btn-success"  ng-disabled="addholidayForm.$invalid" ng-click="   modalOptions.postData('staffholidays',modalOptions.addholiday);modalOptions.ok()">Add Holidays</button>
-									</div>	
-							</form>	
-						</div>
+										<button type="submit" class="btn btn-success"  ng-disabled="addholidayForm.$invalid" ng-click="   postData('staffholidays',addholiday);">Add Holidays</button>
+								</div>	
+						</form>	
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="row bottomspace">
-					<div class="col-sm-3">
-						<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="filter('name', searchUser, 'user', 'userList', true)" ng-model="searchUser" placeholder="Search">
-						<input id="search" type="text" class="form-control" ng-if="userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUserGroup)" ng-model="searchUserGroup" placeholder="Search">
-					</div>
-					
-					
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row bottomspace">
+				<div class="col-sm-3">
+					<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="filter('name', searchUser, 'user', 'userList', true)" ng-model="searchUser" placeholder="Search">
+					<input id="search" type="text" class="form-control" ng-if="userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUserGroup)" ng-model="searchUserGroup" placeholder="Search">
 				</div>
 			</div>
-		
-	  
+		</div>
 		<div class="col-sm-2">
 			<div class="bottomspace">
 				<label for="staffList_status" class="control-label" >Staff List Status</label>
@@ -76,17 +72,14 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	
-	<div class="table-responsive" ng-init="getData(false, currentPage, 'staffholidays','staffholidays',staffParams);">
+	<div class="table-responsive" ng-init="getData(false, currentPage, 'staffholidays','staffholidays',holidaysParams);">
 		<div ui-grid="staffholidays"></div>
 	</div>
 	
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'staffholidays','staffholidays',staffParams)"></pagination>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'staffholidays','staffholidays',holidaysParams)"></pagination>
 		<pre>Page: {{currentPage}} / {{numPages}}</pre>
 	</div>	
 </div>
+
 
