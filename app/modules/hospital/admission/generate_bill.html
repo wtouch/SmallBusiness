@@ -98,17 +98,18 @@
 <thead>
 			<th>Sr.No</th>
 			<th>Date</th>
+			<th>Equipment Name</th>
 			<th>Description</th>
 			<th>Charges</th>
 			<th>Net Amount</th>
 		</thead>
 		<tbody>
-			<tr>   <!-- ng-repeat -->
-				<td>1</td>
-				<td>{{}}</td>
-				<td></td>
-				<td>{{}}</td>
-				<td></td>
+			<tr ng-repeat="x in modalOptions.addadmission.equipment_sheet">   
+				<td>{{$index + 1}}</td>
+				<td>{{x.assign_date}}</td>
+				<td>{{x.equipment_name}}</td>
+				<td>{{x.description}}</td>
+				<td>{{equipment_charges}}</td>
 			</tr>
 			<tr>
 				<th colspan='4' class="text-right">Total</th>
@@ -118,22 +119,24 @@
 </table>
 <label>Medicine Details:</label><br><br>
 <table class="table table-hover table-responsive table-bordered">
-<thead>
+		<thead>
 			<th>Sr.No</th>
 			<th>Date</th>
 			<th>Medicine Name</th>
 			<th>Quantity</th>
+			<th>unit</th>
 			<th>Price</th>
 			<th>Net Amount</th>
 		</thead>
 		<tbody>
-			<tr>   <!-- ng-repeat -->
-				<td>1</td>
-				<td>{{}}</td>
-				<td></td>
-				<td>{{}}</td>
-				<td></td>
-				<td></td>
+			<tr ng-repeat="x in modalOptions.addadmission.drug_sheet">   
+			<td>{{$index + 1}}</td>
+			<td>{{x.medicine_used_date}}</td>
+			<td>{{x.medicine_name}}</td>
+			<td>{{x.quantity}}</td>
+			<td>{{x.unit}}</td>
+			<td>{{x.price}}</td>
+			<td>{{x.net_amount}}</td>
 			</tr>
 			<tr>
 				<th colspan='5' class="text-right">Total</th>
