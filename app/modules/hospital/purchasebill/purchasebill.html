@@ -12,13 +12,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="table-responsive" ng-init="getData(false,currentPage, 'stock_transaction', 'billData', billParams); getData(false,false,'party','partyList',partyParams)">
-			 <div ui-grid="billData"></div>
+			
+			<div class="table-responsive" ng-init="getData(false, currentPage, 'bill','billData',billParams);">
+				<div ui-grid="billData"></div>
 			</div>
 			<div class="text-center">				
-				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage,'stock_transaction', 'billData', billParams)"> </pagination>
+				<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'bill','billData',billParams)"></pagination>
 				<pre>Page: {{currentPage}} / {{numPages}}</pre>
-			</div>
+			</div>	
+		
+			
 		</div>
 	</div>
 </div> 
