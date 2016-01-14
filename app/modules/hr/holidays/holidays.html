@@ -1,5 +1,56 @@
 <div class="main-content">
 	<ng-include src="'modules/component/toolbar.html'"></ng-include>
+	
+	<div class="row">
+		<div class="col-sm-2">
+		<h4>Staff Attendance</h4>
+		</div>
+		<div class="col-sm-1">
+			<button class="btn btn-primary" ng-click="isCollapsed=!isCollapsed"tooltip-animation="true" tooltip="Add staff Attendance"><span ng-class="(isCollapsed)?'glyphicon glyphicon-minus':'glyphicon glyphicon-plus'"></span></button>
+		</div>
+	</div>
+<div class="row collapse" collapse="!isCollapsed" style="height: auto;">
+	<div class="col-sm-12">
+		<div class="bottomspace">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row">
+						<h5 ng-if="!stock.id">Add Staff Holidays</h5>
+						<h5 ng-if="stock.id">Update Staff Holidays</h5>
+						<form class="form-horizontal" name="addholidayForm" role="form" ng-submit="addholidayForm.$valid" novalidate="novalidate" ng-init="modalOptions.getData(false, false,'staffholidays', 'holidayList', modalOptions.holidayParams, modalOptions)"
+								<div class="form-group">
+									<label  for="date" class="col-sm-2 control-label">Date *</label>
+									<div class="col-sm-3">
+											<div class="input-group">
+												<input type="text" class="form-control " placeholder="Date" id="holiday_date" name="holiday_date" ng-model="modalOptions.addholiday.holiday_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addholiday.holiday_date = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addholiday.holiday_date,10); modalOptions.sqlDateFormat(modalOptions.addholiday.holiday_date, modalOptions.addholiday.holiday_date)"/>	
+												
+												<span class="input-group-btn">
+													<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
+												</span>
+											</div>
+										</div>
+										
+										<label for="holiday_name" class="col-sm-2 control-label">Holiday Name *</label>
+										<div class="col-sm-3">
+											<input type="text" id="holiday_name" class="form-control" name="holiday_name" placeholder="Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addholiday.holiday_name"required>
+											
+											 <span class="text-danger"  ng-show="addholidayForm.holiday_name.$error.pattern">Required Field.</span>
+											 
+											<span class="help-block" ng-show="addholidayForm.holiday_name.$dirty && addholidayForm.holiday_name.$invalid">
+											
+											<span class="text-danger" ng-show="addholidayForm.holiday_name.$error.required">Name is required.</span>
+											</span>
+										</div>		
+										<button type="submit" class="btn btn-success"  ng-disabled="addholidayForm.$invalid" ng-click="   modalOptions.postData('staffholidays',modalOptions.addholiday);modalOptions.ok()">Add Holidays</button>
+									</div>	
+							</form>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="row bottomspace">
