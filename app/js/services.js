@@ -4,6 +4,25 @@
 
 define(['app'], function (app) {
 	var app =  angular.module('customServices', []);
+	
+	// ui Chart - jqPlot
+	/* app.service('charting', ["$rootScope", function($rootScope){
+		return {
+			pieChartOptions: {
+				seriesDefaults: {
+					// Make this a pie chart.
+					renderer: $.jqplot.PieRenderer,
+					rendererOptions: {
+					// Put data labels on the pie slices.
+					// By default, labels show the percentage of the slice.
+					showDataLabels: true
+				  }
+				},
+				legend: { show:true, location: 'e' }
+			}
+		}
+    }]); */
+	
 	app.service('modalService', ['$modal', function ($modal) {
 
         var modalDefaults = {

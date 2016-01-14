@@ -6,6 +6,7 @@ define(['angular',
 	'ngCookies',
 	'jquery',
 	'uiGrid',
+	'uiChart',
 	'ngSanitize',
 	'routeResolver',
 	'bootstrap',
@@ -15,11 +16,11 @@ define(['angular',
 	'ngSortable',
 	'googleMap',
 	'upload','uploadShim',
-	'css!../lib/ui-grid/ui-grid.min'
+	'css!../lib/ui-grid/ui-grid.min','css!../lib/ui-chart/jquery.jqplot.min'
 ], function(angular, angularRoute, ngCookies, $) {
 	// Declare app level module which depends on views, and components
 	var app =  angular.module('smallBusiness', [
-	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps', 'ui.sortable','ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav','ui.grid.pagination'
+	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps', 'ui.sortable','ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav','ui.grid.pagination','ui.chart'
 	]);
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
                 '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 'uiGmapGoogleMapApiProvider',
@@ -351,4 +352,3 @@ define(['angular',
 	})
 	return app;
 });
-

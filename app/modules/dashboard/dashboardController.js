@@ -12,6 +12,7 @@ define(['app'], function (app) {
 				$rootScope.setRoutes(response);
 			})
 		}
+		
 	 };
 	// Inject controller's dependencies
 	dashboardController.$inject = injectParams;
