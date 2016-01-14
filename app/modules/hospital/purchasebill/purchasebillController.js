@@ -67,7 +67,7 @@ define(['app'], function (app) {
 							+'<option value="2">Partial Paid</option>'
 						+'</select>',
 					cellTemplate : '<span ng-if="row.entity.payment_status==1">Paid</span><span ng-if="row.entity.payment_status==0">Unpaid</span><span ng-if="row.entity.payment_status==2">Partial Paid</span>',
-				},
+				}, 
 				{ name:'total_amount',width:110,enableSorting: false,enableFiltering: false,
 					filterHeaderTemplate: '<input id="total_amount" class="form-control" ng-change="grid.appScope.filter(\'total_amount\', total_amount, \'hospital\', \'billData\',true,grid.appScope.billParams)" ng-model="total_amount" placeholder="Search">',
 					cellTemplate : "<span>{{row.entity.total_amount}}</span>",
@@ -78,7 +78,7 @@ define(['app'], function (app) {
 				{ name:'paid_amount',width:90,enableSorting: false,enableFiltering: false,
 				},
 				{ name:'due_amount',width:100,enableSorting: false,enableFiltering: false,
-				},
+				}, 
 				{
 					name:'manage',width:200,enableSorting: false,enableFiltering: true,
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock_transaction\', \'billData\',false,grid.appScope.billParams)" ng-model="status">'
@@ -166,7 +166,8 @@ define(['app'], function (app) {
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					due_date : $scope.setDate(dataService.sqlDateFormate(), 10, "date"),
-					user_id : $rootScope.userDetails.id
+					user_id : $rootScope.userDetails.id,
+					module_name : 'hospital'
 				},
 				//for generate Invoice
 				generateBill : (data) ? {
@@ -188,11 +189,14 @@ define(['app'], function (app) {
 					user_id : $rootScope.userDetails.id
 				},
 				postData : function(table, input){
+					$rootScope.module = "inventory";
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							$rootScope.module = "hospital";
 						}
 					})
 				},
+				
 				
 				taxCalculate : function(modalOptions){
 					modalOptions.singleparticular.tax = {};
@@ -302,7 +306,8 @@ define(['app'], function (app) {
 							})
 						}
 					})
-				},
+				}, 
+				
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
@@ -400,8 +405,30 @@ define(['app'], function (app) {
 			},
 			cols : ["*, (t0.total_amount - IFNULL(sum(t2.debit_amount),0)) as due_amount"]
 		}
+		
+		$scope.billInventoryParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id,
+				module_name :'hospital'
+			},
+			join : [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "hospital_party",
+					joinOn : {
+						id : "t0.party_id"
+					},
+					cols : ['name, email, phone, address, location, area, city, state, country, pincode,department']
+				}
+			],
+			cols : ["*"]
+		}
 		// For Get (Select Data from DB)
-		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
+		$scope.getData = function(single, page, table, subobj, params, modalOptions, module_name) {
+			if(module_name){
+				$rootScope.module = module_name;
+			}
 			$scope.params = (params) ? params : {
 				where : {
 					status : 1,
@@ -418,9 +445,14 @@ define(['app'], function (app) {
 					}
 				})
 			}
+			
+			//$rootScope.module = "inventory";
+			
 			dataService.get(single,table,$scope.params).then(function(response) {
 				if(response.status == 'success'){
-					if(modalOptions != undefined){
+					
+					$rootScope.module = "hospital";
+					if(modalOptions){
 						modalOptions[subobj] = angular.copy(response.data);
 						modalOptions.totalRecords = response.totalRecords;
 					}else{
@@ -428,7 +460,7 @@ define(['app'], function (app) {
 						$scope.totalRecords = response.totalRecords;
 					}
 				}else{
-					if(modalOptions != undefined){
+					if(modalOptions){
 						modalOptions[subobj] = [];
 						modalOptions.totalRecords = 0;
 					}else{
@@ -438,6 +470,7 @@ define(['app'], function (app) {
 				}
 			});
 		}
+		
 		$scope.filter = function(col, value, table, subobj, search, params){
 			value = (value) ? value : undefined;
 			if(!params) params = {};
