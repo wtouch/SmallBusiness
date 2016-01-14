@@ -36,7 +36,15 @@ define(['app'], function (app) {
 			
 		]
 		
+		/* function for get data from one module into another module
 		
+		$scope.getData1 = function(jfkd,fdjk,fd){
+			$rootScope.module = "hospital";
+			$scope.post(jfkd,fjdk,fjdk,fjdk,function(){
+				$rootScope.module = "hr";
+			});
+		}
+		 */
 		$scope.staffholidays= {
 			enableSorting: true,
 			enableFiltering: true,
@@ -120,7 +128,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-								
+						//	$scope.getData(false, $scope.currentPage, 'staffholidays','staffholidays',$scope.holidaysParams);	
 						}
 					})
 				},
@@ -131,7 +139,9 @@ define(['app'], function (app) {
 			})
 		}
 	
-		
+		$scope.callback = function(response){
+			console.log(response);
+		}
 			
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {

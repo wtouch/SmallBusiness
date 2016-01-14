@@ -5,12 +5,9 @@
 		<div class="col-sm-2">
 		<h4>Staff Attendance</h4>
 		</div>
-		<div class="col-sm-1">
-			<button class="btn btn-primary" ng-click="isCollapsed=!isCollapsed"tooltip-animation="true" tooltip="Add staff Attendance"><span ng-class="(isCollapsed)?'glyphicon glyphicon-minus':'glyphicon glyphicon-plus'"></span></button>
-		</div>
 	</div>
 	
-		<div class="row collapse" collapse="!isCollapsed" style="height: auto;">
+		<div class="row " style="height: auto;">
 				<div class="col-sm-12">
 					<div class="bottomspace">
 						<div class="panel panel-default">
@@ -64,29 +61,20 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="row bottomspace">
-					<div class="col-sm-3">
-						<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="filter('name', searchUser, 'user', 'userList', true)" ng-model="searchUser" placeholder="Search">
-						<input id="search" type="text" class="form-control" ng-if="userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUserGroup)" ng-model="searchUserGroup" placeholder="Search">
+
+		
+	  
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="bottomspace">
+						<label for="page_item" class="control-label">Page Item</label>
+						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'staffattendance', 'staffattendance',staffattendanceParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
+						</select>
 					</div>
 				</div>
 			</div>
-		
-	  
-		<div class="col-sm-2">
-			<div class="bottomspace">
-				<label for="staffList_status" class="control-label" >Staff List Status</label>
-				<select id="staffList_status" class="form-control" ng-change="getData(false, currentPage,'staff', 'staff', staffParams)" ng-model="pageItems">
-					
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-				</select>
-			</div>
-		</div>
-	</div>
+
 	
 	<div class="table-responsive" ng-init="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams);getData(false, false, 'staff','staffParams',staffattendanceParams)">
 		<div ui-grid="staffattendance"></div>

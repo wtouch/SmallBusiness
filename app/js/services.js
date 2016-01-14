@@ -485,7 +485,9 @@ define(['app'], function (app) {
 					})
 				}else{
 					if($rootScope.serverApiV2){
+						console.log($rootScope.module, table);
 						table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
+						console.log($rootScope.module, table);
 						var reqParams = {
 							table : table,
 						}
@@ -619,7 +621,9 @@ define(['app'], function (app) {
 			// For Post (Insert Data into DB)
 			$rootScope.postData = function(table, input, callback) {
 				obj.post(table, input).then(function(response) {
-					callback(response);
+					if(callback){
+						callback(response);
+					}
 				});
 			}
 			
@@ -974,6 +978,7 @@ define(['app'], function (app) {
 					return deferred.promise;
 				},
 				post : function(table, data){
+					
 					table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
 					$rootScope.loading = true;
 					var obj = new selectDbData(table,false);
