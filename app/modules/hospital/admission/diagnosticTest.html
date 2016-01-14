@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3 class="text-center">Diagnostic Test</h3>
 </div>
 <div class="modal-body" ng-init="modalOptions.addadmission.diagnostic = (modalOptions.addadmission.diagnostic) ? modalOptions.addadmission.diagnostic : []">{{modalOptions.diagnostic}}
@@ -32,65 +32,70 @@
 	</table>
 
 	<div class="modal-body">
-		<form class="form-horizontal" name="diagnosticForm" role="form" ng-submit="diagnosticForm.$valid" novalidate="novalidate">
-			<div class="form-group">
-				<label  for="date" class="col-sm-2 control-label">Date*</label>
-				<div class="col-sm-8">
-				
-						<input type="text" class="form-control " placeholder="Date" id="diagnostic_date" name="diagnostic_date" ng-model="modalOptions.diagnostic.diagnostic_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required/>	
-					<span class="input-group-btn">
-					</span>
-					<span class="text-danger"  ng-show="diagnosticForm.diagnostic_date.$error.date">Please enter valid date</span>
-					<span class="help-block" ng-show="diagnosticForm.diagnostic_date.$dirty && diagnosticForm.diagnostic_date.$invalid">
-						<span ng-show="diagnosticForm.diagnostic_date.$error.required"class="text-danger">Date  is required.</span>
-					</span>		
-				</div>
-			</div>
-			<div class="form-group"  ng-init= "modalOptions.getData(false,false,'test','testList',modalOptions.testParams,modalOptions)">
-				<label for="test_type" class="col-sm-2 control-label">Test Type</label>
-				<div class="col-sm-8">					
-				<select id="test_type" name="test_type" class="form-control" 
-				ng-model="modalOptions.diagnostic.test_type" ng-options="item.id as item.test_type for item in modalOptions.testList" ng-change="modalOptions.testParams.where.test_id = modalOptions.addadmission.test_id;modalOptions.getData(false, false,'test', 'testList',modalOptions.testParams, modalOptions)" >
-					<option value="">Select Test Type</option>
-				</select>
-				</div>
-			</div>	
-			
-			<div class="form-group" ng-init= "modalOptions.getData(false,false,'test','testList',modalOptions.testParams,modalOptions)">
-				<label for="test_name" class="col-sm-2 control-label">Test Name</label>
-				<div class="col-sm-8">
-					<select type="text" id="test_name"  placeholder="Enter Your Test Name"  class="form-control" ng-model="modalOptions.diagnostic.test_name" ng-options="item.id as item.test_name for item in modalOptions.testList | filter : {test_type : 'blood test'}" required>
-					<option value="">Select Test Name</option>
-					</select>
-					<span class="text-danger"  ng-show="diagnosticForm.test_name.$error.pattern">Please enter valid test name</span>
-					<span class="help-block" ng-show="diagnosticForm.test_name.$dirty && diagnosticForm.test_name.$invalid">
-						<span ng-show="diagnosticForm.test_name.$error.required"class="text-danger">test name is required.</span>
-					</span>				
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="test_description" class="col-sm-2 control-label">Test Description</label>
-				<div class="col-sm-8">
-					<textarea type="text"  name="test_description" class="form-control" id="test_description" ng-model="modalOptions.diagnostic.test_description" placeholder="Enter Your Description" ng-maxlength="250" > </textarea>
+		<button type="button" class="btn btn-primary" tooltip-animation="true" tooltip="Add case sheet" ng-click="isCollapsed = !isCollapsed"> <span ng-class="(isCollapsed) ? 'glyphicon glyphicon-minus' : 'glyphicon glyphicon-plus'"></span> Diagnostic Test</button>
+	<div collapse="!isCollapsed" class="collapse">
+	<br/>
+			<form class="form-horizontal" name="diagnosticForm" style="border:1px solid #ccc; padding:15px;" role="form" ng-submit="diagnosticForm.$valid" novalidate="novalidate">
+				<div class="form-group">
+					<label  for="date" class="col-sm-2 control-label">Date*</label>
+					<div class="col-sm-8">
 					
-					<span ng-hide="diagnosticForm.diagnostic.test_description.$error.maxlength">{{ 250 - modalOptions.diagnostic.test_description.length + " Chars left"}}</span>
-					<span class="help-danger" ng-show="diagnosticForm.test_description.$dirty &&  diagnosticForm.test_description.$invalid">
-						<span class="text-danger" ng-show="diagnosticForm.test_description.$error.maxlength">Sorry you are exceeding the limit</span>
-					</span>
+							<input type="text" class="form-control " placeholder="Date" id="diagnostic_date" name="diagnostic_date" ng-model="modalOptions.diagnostic.diagnostic_date" datepicker-popup="dd-MM-yyyy" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" close-text="Close" ng-click="opened = !opened" required/>	
+						<span class="input-group-btn">
+						</span>
+						<span class="text-danger"  ng-show="diagnosticForm.diagnostic_date.$error.date">Please enter valid date</span>
+						<span class="help-block" ng-show="diagnosticForm.diagnostic_date.$dirty && diagnosticForm.diagnostic_date.$invalid">
+							<span ng-show="diagnosticForm.diagnostic_date.$error.required"class="text-danger">Date  is required.</span>
+						</span>		
+					</div>
 				</div>
-			</div>
+				<div class="form-group"  ng-init= "modalOptions.getData(false,false,'test','testList',modalOptions.testParams,modalOptions)">
+					<label for="test_type" class="col-sm-2 control-label">Test Type</label>
+					<div class="col-sm-8">					
+					<select id="test_type" name="test_type" class="form-control" 
+					ng-model="modalOptions.diagnostic.test_type" ng-options="item.test_type as item.test_type for item in modalOptions.testList" ng-change="modalOptions.testParams.where.test_id = modalOptions.addadmission.test_id;modalOptions.getData(false, false,'test', 'testList',modalOptions.testParams, modalOptions)" >
+						<option value="">Select Test Type</option>
+					</select>
+					</div>
+				</div>	
+				
+				<div class="form-group" ng-init= "modalOptions.getData(false,false,'test','testList',modalOptions.testParams,modalOptions)">
+					<label for="test_name" class="col-sm-2 control-label">Test Name</label>
+					<div class="col-sm-8">
+						<select type="text" id="test_name"  placeholder="Enter Your Test Name"  class="form-control" ng-model="modalOptions.diagnostic.test_name" ng-options="item.test_name as item.test_name for item in modalOptions.testList | filter : {test_type : 'blood test'}" required>
+						<option value="">Select Test Name</option>
+						</select>
+						<span class="text-danger"  ng-show="diagnosticForm.test_name.$error.pattern">Please enter valid test name</span>
+						<span class="help-block" ng-show="diagnosticForm.test_name.$dirty && diagnosticForm.test_name.$invalid">
+							<span ng-show="diagnosticForm.test_name.$error.required"class="text-danger">test name is required.</span>
+						</span>				
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="test_description" class="col-sm-2 control-label">Test Description</label>
+					<div class="col-sm-8">
+						<textarea type="text"  name="test_description" class="form-control" id="test_description" ng-model="modalOptions.diagnostic.test_description" placeholder="Enter Your Description" ng-maxlength="250" > </textarea>
+						
+						<span ng-hide="diagnosticForm.diagnostic.test_description.$error.maxlength">{{ 250 - modalOptions.diagnostic.test_description.length + " Chars left"}}</span>
+						<span class="help-danger" ng-show="diagnosticForm.test_description.$dirty &&  diagnosticForm.test_description.$invalid">
+							<span class="text-danger" ng-show="diagnosticForm.test_description.$error.maxlength">Sorry you are exceeding the limit</span>
+						</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="dignos_report" class="col-sm-2 control-label">Dignostic Report</label>
+					<input type="file" id="dignos_report" ng-file-select ng-multiple="true" accept="image/jpeg,image/png,image/gif" ng-file-change="modalOptions.uploadMultiple(diagnostic.dignos_report,modalOptions.diagnostic.user_id + path,modalOptions.userDetails.id,modalOptions.diagnostic)" ng-model="dignos_report">
+					<input type="hidden" ng-model="modalOptions.diagnostic.dignos_report">
+				</div>
+			</form>
 			<div class="form-group">
-				<label for="dignos_report" class="col-sm-2 control-label">Dignostic Report</label>
-				<input type="file" id="dignos_report" ng-file-select ng-multiple="true" accept="image/jpeg,image/png,image/gif" ng-file-change="modalOptions.uploadMultiple(diagnostic.dignos_report,modalOptions.diagnostic.user_id + path,modalOptions.userDetails.id,modalOptions.diagnostic)" ng-model="dignos_report">
-				<input type="hidden" ng-model="modalOptions.diagnostic.dignos_report">
-			</div>
-		</form>	
-		<div class="form-group">
-			<div class="col-sm-offset-2 ">
+			<div class="col-sm-offset-9 ">
 				<button type="submit" class="btn btn-success"  ng-disabled="diagnosticForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addadmission.diagnostic, 'diagnostic', modalOptions)" >Add 
 				</button>
 			</div>
+		</div>			
 		</div>
+	
 		<table class="table table-bordered" >
 			<thead>
 				<tr>

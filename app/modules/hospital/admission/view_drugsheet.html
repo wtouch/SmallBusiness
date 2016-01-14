@@ -1,5 +1,5 @@
 <div class="modal-header">
-	<button type="button" class="btn btn-danger pull-right buttondistance" ng-click="modalOptions.close()">Close</button>
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 		<h3 class="text-center">Drugsheet</h3>
 </div>
 <div class="modal-body" ng-init="modalOptions.addadmission.drug_sheet = (modalOptions.addadmission.drug_sheet) ? modalOptions.addadmission.drug_sheet : []">
@@ -34,7 +34,11 @@
 			</tr>
 		</tbody>
 	</table>
-	<form class="form-horizontal" name="adddrug_sheetForm" ng-submit="adddrug_sheetForm.$valid"role="form" ng-submit="adddrug_sheetForm.$valid" novalidate="novalidate">
+	<div class="modal-body">
+		<button type="button" class="btn btn-primary" tooltip-animation="true" tooltip="Add case sheet" ng-click="isCollapsed = !isCollapsed"> <span ng-class="(isCollapsed) ? 'glyphicon glyphicon-minus' : 'glyphicon glyphicon-plus'"></span>Add Drugsheet</button>
+	<div collapse="!isCollapsed" class="collapse">
+	<br/>
+	<form class="form-horizontal" name="adddrug_sheetForm" style="border:1px solid #ccc; padding:15px;" ng-submit="adddrug_sheetForm.$valid"role="form" ng-submit="adddrug_sheetForm.$valid" novalidate="novalidate">
 		<div class="form-group">
 			<label  for="date" class="col-sm-2 control-label">Date*</label>
 			<div class="col-sm-8">
@@ -54,7 +58,7 @@
 			<label for="medicine_name" class="col-sm-2 control-label">Medicine Name *</label>
 			<div class="col-sm-8">					
 				<select id="medicine_name" name="medicine_name" class="form-control" 
-				ng-model="modalOptions.drug_sheet.medicine_name" ng-options="item.id as item.medicine_name for item in modalOptions.medicineList">
+				ng-model="modalOptions.drug_sheet.medicine_name" ng-options="item.medicine_name as item.medicine_name for item in modalOptions.medicineList">
 				<option value="">Select Medicine</option>
 				</select>
 			</div>
@@ -101,12 +105,14 @@
 				</span>				
 			</div>
 		</div>
-	</form>	
-	<div class="form-group">
-		<div class="col-sm-offset-2 ">
+		<div class="form-group">
+		<div class="col-sm-offset-9 ">
 			<button type="submit" class="btn btn-success"ng-disabled="adddrug_sheetForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addadmission.drug_sheet, 'drug_sheet', modalOptions)" >Add 
 			</button>
 		</div>
+	</div>
+	</form>	
+	
 	</div>
 	<table class="table table-bordered" >
 		<thead>

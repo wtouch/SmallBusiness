@@ -4,6 +4,25 @@
 
 define(['app'], function (app) {
 	var app =  angular.module('customServices', []);
+	
+	// ui Chart - jqPlot
+	/* app.service('charting', ["$rootScope", function($rootScope){
+		return {
+			pieChartOptions: {
+				seriesDefaults: {
+					// Make this a pie chart.
+					renderer: $.jqplot.PieRenderer,
+					rendererOptions: {
+					// Put data labels on the pie slices.
+					// By default, labels show the percentage of the slice.
+					showDataLabels: true
+				  }
+				},
+				legend: { show:true, location: 'e' }
+			}
+		}
+    }]); */
+	
 	app.service('modalService', ['$modal', function ($modal) {
 
         var modalDefaults = {
@@ -485,7 +504,9 @@ define(['app'], function (app) {
 					})
 				}else{
 					if($rootScope.serverApiV2){
+						console.log($rootScope.module, table);
 						table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
+						console.log($rootScope.module, table);
 						var reqParams = {
 							table : table,
 						}
@@ -619,7 +640,9 @@ define(['app'], function (app) {
 			// For Post (Insert Data into DB)
 			$rootScope.postData = function(table, input, callback) {
 				obj.post(table, input).then(function(response) {
-					callback(response);
+					if(callback){
+						callback(response);
+					}
 				});
 			}
 			
@@ -974,6 +997,7 @@ define(['app'], function (app) {
 					return deferred.promise;
 				},
 				post : function(table, data){
+					
 					table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
 					$rootScope.loading = true;
 					var obj = new selectDbData(table,false);

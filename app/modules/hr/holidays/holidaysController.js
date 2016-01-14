@@ -36,13 +36,21 @@ define(['app'], function (app) {
 			
 		]
 		
+		/* function for get data from one module into another module
 		
+		$scope.getData1 = function(jfkd,fdjk,fd){
+			$rootScope.module = "hospital";
+			$scope.post(jfkd,fjdk,fjdk,fjdk,function(){
+				$rootScope.module = "hr";
+			});
+		}
+		 */
 		$scope.staffholidays= {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
 				{ name:'SrNo',
-				  width:50,
+				  width:70,
 				  enableSorting: false,
 				  enableFiltering: false, 
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
@@ -52,17 +60,17 @@ define(['app'], function (app) {
 					},
 				{
 				    name:'holiday_date',
-					width:100,
+					width:200,
 					filterHeaderTemplate: '<input id="holiday_date" class="form-control" ng-change="grid.appScope.filter(\'holiday_date\', holiday_date, \'staffholidays\', \'staffholidays\',true)" ng-model="holiday_date" placeholder="date">'
                 },
 				{
 				    name:'holiday_name',
-					width:100,
+					width:300,
 					filterHeaderTemplate: '<input id="holiday_name" class="form-control" ng-change="grid.appScope.filter(\'holiday_name\', holiday_name, \'staffholidays\', \'staffholidays\',true)" ng-model="holiday_name" placeholder="holiday Name">',
                 },
 				
 			    { 
-				 name:'Manage', width:300,
+				 name:'Manage', width:500,
 				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staffholidays\', \'staffholidays\')" ng-model="status">'
 							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
@@ -84,7 +92,7 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "staff", "staff", $scope.staffParams);
+				$scope.getData(false, $scope.currentPage, "staffholidays", "staffholidays", $scope.holidaysParams);
 			}
 		}
 		
@@ -109,7 +117,7 @@ define(['app'], function (app) {
 						
 				}, 
 				getData:$scope.getData,	
-				holidayParams :{
+				holidaysParams :{
 						where : {
 							status : 1,
 							user_id : $rootScope.userDetails.id,
@@ -120,7 +128,7 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-								
+						//	$scope.getData(false, $scope.currentPage, 'staffholidays','staffholidays',$scope.holidaysParams);	
 						}
 					})
 				},
@@ -130,8 +138,10 @@ define(['app'], function (app) {
 				
 			})
 		}
-		
-		
+	
+		$scope.callback = function(response){
+			console.log(response);
+		}
 			
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {

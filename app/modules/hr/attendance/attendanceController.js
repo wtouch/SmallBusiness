@@ -116,8 +116,6 @@ define(['app'], function (app) {
 			
 			cols : ["*"]
 		} 
-		
-		
 		$scope.openstaffattendance = function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal

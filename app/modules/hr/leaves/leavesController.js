@@ -109,15 +109,25 @@ define(['app'], function (app) {
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "staff", "staff", $scope.staffParams);
+				$scope.getData(false, $scope.currentPage, "staffleaves", "staffleaves", $scope.staffleavesParams);
 			}
 		}
 		
-		$scope.staffParams = {
+		$scope.staffleavesParams = {
 			where : {
 				user_id : $rootScope.userDetails.id,
 				status : 1
 			},
+			join: [
+				{
+					joinType : 'INNER JOIN',
+					joinTable : "hr_staff",
+					joinOn : {
+						staff_id : "t0.staff_id"
+					},
+					cols : ['name']
+				}],
+			
 			cols : ["*"]
 		}
 		

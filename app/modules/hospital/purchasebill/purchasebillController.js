@@ -22,6 +22,7 @@ define(['app'], function (app) {
 			popupWin.document.close();
 		}
 		
+		
 		$rootScope.moduleMenus = [
 			{
 				name : "Add Bill",

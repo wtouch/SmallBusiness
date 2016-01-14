@@ -5,12 +5,9 @@
 		<div class="col-sm-2">
 		<h4>Staff Attendance</h4>
 		</div>
-		<div class="col-sm-1">
-			<button class="btn btn-primary" ng-click="isCollapsed=!isCollapsed"tooltip-animation="true" tooltip="Add staff Attendance"><span ng-class="(isCollapsed)?'glyphicon glyphicon-minus':'glyphicon glyphicon-plus'"></span></button>
-		</div>
 	</div>
 	
-		<div class="row collapse" collapse="!isCollapsed" style="height: auto;">
+		<div class="row " style="height: auto;">
 				<div class="col-sm-12">
 					<div class="bottomspace">
 						<div class="panel panel-default">
@@ -22,7 +19,7 @@
 											<div class="form-group" >
 												<label  for="date" >Date *</label>
 													<div class="input-group">
-														<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="modalOptions.staffattendance.attendance_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.staffattendance.attendance_date = modalOptions.attendancedate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.staffattendance.attendance_date,10); modalOptions.sqlDateFormat(modalOptions.staffattendance.attendance_date, modalOptions.staffattendance.attendance_date)"/>	
+														<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="staffattendance.attendance_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="staffattendance.attendance_date = attendancedate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="setDate(staffattendance.attendance_date,10); sqlDateFormat(staffattendance.attendance_date, staffattendance.attendance_date)"/>	
 														
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -30,32 +27,31 @@
 													</div>
 											</div>
 											<div class="form-group" >
-												<div ng-init="modalOptions.getData(false,false,'staff','staff', staffParams, modalOptions)">
+												<div ng-init="getData(false,false,'staff','staff', staffattendance)">
 													<label for="staff_id" > Select Staff* </label>
-													
-														<select id="staff_id" class="form-control" ng-model="modalOptions.staffattendance.staff_id" ng-options="item.id as item.name for item in modalOptions.staff" required>
+														<select id="staff_id" class="form-control" ng-model="staffattendance.staff_id" ng-init="getData(false, currentPage,'staff','staffList',staffattendanceParams)" ng-options="item.id as item.name for item in staff" required>
 															<option value="">Select Staff</option>
 															<option value="1">1</option>
 														</select>
 														<span class="help-block" ng-show="attendanceForm.staff_id.$dirty && attendanceForm.staff_id.$invalid">
 														<span ng-show="attendanceForm.staff_id.$error.required" class="text-danger">user name is required.</span>
 														</span>
-														</div>
+												</div>
 											</div>
 											
 											<div class="form-group">
 												<label for="login_time"  control-label">Login Time</label>
-													<input type="text" id="login_time" class="form-control" name="login_time" ng-model="modalOptions.staffattendance.login_time" required>
+													<input type="text" id="login_time" class="form-control" name="login_time" ng-model="staffattendance.login_time" required>
 											</div>
 											<div class="form-group">
 												<label for="logout_time"  control-label">Logout Time</label>
-													<input type="text" id="logout_time" class="form-control" name="logout_time" ng-model="modalOptions.staffattendance.logout_time" required>
+													<input type="text" id="logout_time" class="form-control" name="logout_time" ng-model="staffattendance.logout_time" required>
 											</div>
 											
 											
 										
 											<div class="form-group">
-												<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid"  ng-click="modalOptions.postData('staffattendance',modalOptions.staffattendance);modalOptions.ok()">Add</button>
+												<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid"  ng-click="postData('staffattendance',staffattendance);">Add</button>
 									</form>
 								</div>
 							</div>
@@ -64,31 +60,47 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="row bottomspace">
-					<div class="col-sm-3">
-						<input id="search" type="text" class="form-control" ng-if="userViews=='userslist'" ng-change="filter('name', searchUser, 'user', 'userList', true)" ng-model="searchUser" placeholder="Search">
-						<input id="search" type="text" class="form-control" ng-if="userViews=='usersgroup'" ng-change="searchFilter('group_name', searchUserGroup)" ng-model="searchUserGroup" placeholder="Search">
+
+		
+	  
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="bottomspace">
+						<label for="page_item" class="control-label">Page Item</label>
+						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'staffattendance', 'staffattendance',staffattendanceParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="col-sm-2">
+					<div class="bottomspace">
+						<label for="page_item" class="control-label">Select Staff</label>
+						<select id="page_item" class="form-control" ng-init="getData(false, currentPage,'staff','staffList',staffattendanceParams)" ng-model="pageItems" ng-options="item.id as item.name for item in staffList">
+							<option value="" selected>Select Staff</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="bottomspace">
+						<label for="page_item" class="control-label">From Date</label>
+							<div class="input-group">
+								<input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened1" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" ng-click="opened1=!opened1"/> 
+							</div>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="bottomspace">
+						<label for="page_item" class="control-label">To Date</label>
+							<div class="input-group">
+								<input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened1" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" ng-click="opened1=!opened1"/> 
+							</div>
 					</div>
 				</div>
 			</div>
-		
-	  
-		<div class="col-sm-2">
-			<div class="bottomspace">
-				<label for="staffList_status" class="control-label" >Staff List Status</label>
-				<select id="staffList_status" class="form-control" ng-change="getData(false, currentPage,'staff', 'staff', staffParams)" ng-model="pageItems">
-					
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-				</select>
-			</div>
-		</div>
-	</div>
+
 	
-	<div class="table-responsive" ng-init="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams);getData(false, false, 'staff','staffParams',staffattendanceParams)">
+	<div class="table-responsive" ng-if="duration.start" ng-init="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams);getData(false, false, 'staff','staffParams',staffattendanceParams)">
 		<div ui-grid="staffattendance"></div>
 	</div>
 	
