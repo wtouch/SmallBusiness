@@ -50,8 +50,8 @@
 								</td>
 								<td>
 									<div class="col-sm-3">
-										<input type="text" id="price" class="form-control" name="price" placeholder="Price" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.price"required>
-										 <span class="text-danger"  ng-show="addbookForm.price.$error.pattern">Text is required.</span>
+										<input type="text" id="price" class="form-control" name="price" placeholder="Price" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addbook.price"required>
+										 <span class="text-danger"  ng-show="addbookForm.price.$error.pattern">Number is required.</span>
 										<span class="help-block" ng-show="addbookForm.price.$dirty && addbookForm.price.$invalid">
 											<span class="text-danger" ng-show="addbookForm.price.$error.required">Required Field.</span>
 										</span>

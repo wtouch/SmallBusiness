@@ -44,12 +44,13 @@
 										<div class="col-sm-2">
 									<label  for="book_name" control-label">Price * </label>
 								
-										<input type="text" id="price" class="form-control" name="price" placeholder="Price" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addbook.price"required>
+										<input type="text" id="price" class="form-control" name="price" placeholder="Price" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addbook.price" required>
 										 <span class="text-danger"  ng-show="addbookForm.price.$error.pattern">Number is required.</span>
 										<span class="help-block" ng-show="addbookForm.price.$dirty && addbookForm.price.$invalid">
 											<span class="text-danger" ng-show="addbookForm.price.$error.required">Required Field.</span>
 										</span>
 									</div>
+									<br>
 									<div class="col-sm-2">
 										<button type="submit" class="btn btn-success" ng-if="!modalOptions.addbook.id" ng-disabled="addbookForm.$invalid" ng-click="   modalOptions.postData('campus_book',modalOptions.addbook);modalOptions.ok()">Add Book </button>
 									</div>

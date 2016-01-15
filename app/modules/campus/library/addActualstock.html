@@ -20,7 +20,8 @@
 			
 				<label for="author" class="col-sm-2 control-label">Author *</label>
 				<div class="col-sm-3">
-					<input type="text" id="author" class="form-control" name="author" required>
+					<input type="text" id="author" class="form-control" name="author" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addactualstock.publisher" required>
+					<span class="text-danger"  ng-show="addactualstockForm.author.$error.pattern">Text is required.</span>
 					<span class="help-block" ng-show="addactualstockForm.author.$dirty && addactualstockForm.author.$invalid">
 						<span class="text-danger" ng-show="addactualstockForm.author.$error.required">Required Field.</span>
 					</span>
