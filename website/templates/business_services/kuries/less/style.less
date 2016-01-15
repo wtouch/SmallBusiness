@@ -39,6 +39,7 @@
 		.logo{
 			height:100px;
 			width:100px;
+			margin-top:5px;
 		}
 			
 	.navbar-default {
@@ -93,13 +94,13 @@
 					background:@color;
 					border-bottom-width: 0;
 					//margin-top:22px;
-					padding: 2px;
+					padding: 0px;
 					list-style: none;
 					text-align: left;
-					margin-top:10px;
+					margin-top:8px;
 					>li{
-						padding : 10px;
-						border-bottom: 1px solid @lightbackcolor;
+						padding : 8px;
+						border-bottom: 1px solid @colorblack;
 						text-indent: 3px;
 						font-size: 18px;
 						font-weight: normal;
@@ -107,20 +108,25 @@
 						>a{
 							color : @colorwhite;
 							&:hover{
-								color : @lightcolor;
+								color : @colorwhite;
 								text-decoration: none; 
 							}
 						}
 						&:hover{
 							-webkit-transition: all 0.4s;
 						}
+						>ul{
+						display:none;
+						
+						}
 					
 						&:hover{
 							ul{
-								display : block;
+								display : none;
 							}
 						}
 					}
+					
 				}
 				&:hover > ul {
 					display: block;
@@ -211,23 +217,19 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
     background-repeat: repeat-x;
 }
-
 h1, h2, h4, h3{
 	color:@color;
     font-style: italic;
     font-weight: normal;
 }
-
-
 footer{
- a{
-	color:@lightcolor;
- }
- a:hover{
-		color:@color;
-		text-decoration:none;
- }
-	
+	 a{
+		color:@lightcolor;
+	 }
+	 a:hover{
+			color:@color;
+			text-decoration:none;
+	 }
 }
 a.email{
 	color:@lightcolor;
@@ -240,39 +242,33 @@ a.email{
     color:@colorwhite;
     background-color: @color;
     border-color: @color;
-		&:hover{
-			color:@colorwhite;;
-			background-color: @lightcolor;
-			border-color: @lightcolor;
-			
-		}
+	&:hover{
+		color:@colorwhite;;
+		background-color: @lightcolor;
+		border-color: @lightcolor;
+	}
 }
 @media (max-width: 320px){
-.carousel-inner>.item{
-				height:235px;
-				width:100%;	
-			img{
-			    height: 235px;
-				 width: 100%;
-				}
-		}
-span.glyphicon.glyphicon-chevron-right,span.glyphicon.glyphicon-chevron-left 
-         		{
-					display: none;
+	.carousel-inner>.item{
+					height:235px;
+					width:100%;	
+				img{
+					height: 235px;
+					 width: 100%;
 					}
-
-
-
-.carousel-indicators li {
-    display: none;
-   
-}  
-.carousel {
-    position:initial;
+			}
+	span.glyphicon.glyphicon-chevron-right,span.glyphicon.glyphicon-chevron-left 
+					{
+						display: none;
+						}
+	.carousel-indicators li {
+		display: none;
+	   
+	}  
+	.carousel {
+		position:initial;
+	}
 }
-}
-
-
 a {
     color: @lightcolor;
     text-decoration: none;
@@ -280,7 +276,6 @@ a {
 		color:@color;		
 	}
 }
-
 .content1{
 	background-image:url('../img/testi.jpg');
 	background-size:100%;
@@ -328,7 +323,14 @@ webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(235, 234, 234);
     margin-left: 31%;
     margin: 10px;
     width: 100px;
-    padding-left: 10px;
+}
+.abc{
+	.panel-default .btn-info{
+    margin-left: 25%;
+	}
+}
+.panel-default .btn-info {
+    padding: 10px;
 }
 .table {
     width: 100%;
@@ -338,4 +340,7 @@ webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(235, 234, 234);
 .bx-wrapper .bx-prev {
     left: 19px !important;
     background: url(http://catalog.wlimg.com/templates-images/12505/12514/controls.png) no-repeat 0 -32px;
+}
+.navbar-default>ul>li>ul{
+display:none;
 }
