@@ -1,95 +1,30 @@
-.featuretab{
-	margin-top : 20px;
-	h3{
-		margin-top : 15px;
-	}
-	.tab-content{
-		border-top : none;
-		position: relative;
-		margin-bottom: 25px;
-		padding : 1px 15px 15px;
-		border-top-left-radius : 0px;
-		border-top-right-radius : 0px;
-	}
-	.nav-tabs{
-		border-bottom: 1px solid @darkbackcolor;
-		li{
-			a{
-				background-color: @color;
-				color : @back;
-				border-color : @lightcolor;
-				transform: translateZ(0);
-				-webkit-backface-visibility: hidden;
-				backface-visibility: hidden;
-				position: relative;
-				transition-property: color;
-				-webkit-transition-duration: 0.3s;
-				transition-duration: 0.3s;
-				&:before, &.active>a{
-					content: "";
-					position: absolute;
-					z-index: -1;
-					top: 0;
-					bottom: 0;
-					left: 0;
-					right: 0;
-					background: @lightcolor;
-					-webkit-transform: scaleX(0);
-					transform: scaleX(0);
-					-webkit-transform-origin: 50%;
-					transform-origin: 50%;
-					-webkit-transition-property: transform;
-					transition-property: transform;
-					-webkit-transition-duration: 0.3s;
-					transition-duration: 0.3s;
-					-webkit-transition-timing-function: ease-out;
-					transition-timing-function: ease-out;
-				}
-				&:hover{
-					background-color: @darkcolor;
-					color : @darkcolor;
-					border-color : @color;
-				}
-				&:hover:before, &:focus:before, &:active:before, &.active>a:hover, &.active>a:focus {
-					-webkit-transform: scaleX(1);
-					transform: scaleX(1);
-				}
-			}
-			&.active>a{
-				color: @darkcolor;
-				background-color: @lightcolor;
-				border: 1px solid @color;
-			}
+.carousel{
+	background:rgba(0, 0, 0, 0.22);;
+	box-shadow:0px 4px 4px  @colorblack;
+	.item{
+		height : 300px;
+		overflow : hidden;
+		img{
+			//margin-left: 50px;
+			min-height : 250px;
+		}
+		h2{
+			color:@darkcolor;
+			text-align:left;
+		}
+		p{
+			color:@colorwhite;
 		}
 	}
 }
-	.carousel{
-			background:rgba(0, 0, 0, 0.22);;
-			box-shadow:0px 4px 4px  @colorblack;
-			.item{
-					height : 300px;
-					overflow : hidden;
-					img{
-						//margin-left: 50px;
-						min-height : 250px;
-					}
-					h2{
-						color:@darkcolor;
-						text-align:left;
-					}
-					p{
-						color:@colorwhite;
-					}
-				}
-		}
-	.carousel-caption {
-			right:50px;
-			h2{
-				color:@darkcolor;
-				text-align:left;
-			}
-			
-		}
+.carousel-caption {
+	right:50px;
+	h2{
+		color:@darkcolor;
+		text-align:left;
+	}
+	
+}
 .carousel-control.left {
 display:none;
 }
@@ -157,7 +92,6 @@ display:none;
 	}
 	.about, .contact{
 		color:@darkbackcolor;
-						
 		.table{
 		margin-top:25px;
 			tbody{
@@ -171,7 +105,6 @@ display:none;
 		}
 	}
 	.about{
-		
 		.table{
 			margin-top: 20px;
 		
@@ -235,7 +168,13 @@ display:none;
 	#googleMap{
 		height:395px;
 	}
-	
+	.enquiry{
+		.subhead {
+			text-shadow: none !important;
+			font-size : 18px;
+			margin-bottom : 20px;
+		}
+	}
 	//testimonials
 	.testimonial, .featrtesti{
 		blockquote{

@@ -2,7 +2,7 @@
 	<h2>Gallery</h2>
 	<div class="row gallery">
 		{% if data.gallery %}
-			{% set category = "" %}
+			{#{% set category = "" %}
 			{% for key, value in data.gallery %}
 			
 				{% if category != value.category %}
@@ -10,17 +10,17 @@
 					{{ category }}
 				{% endif %}
 				
-			{% endfor %}
+			{% endfor %}#}
 			
 			{% for key, value in data.gallery %}
 
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
 				<div class="thumbnail">
 					<img class="img-responsive" src="{{value.image.file_relative_path}}" alt="{{key}}" />
-					<div class="caption">
+					<!-- <div class="caption">
 						<h4>{{value.heading}}</h4>
 						<div class="description">{{ value.description }}</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			{% endfor %}
