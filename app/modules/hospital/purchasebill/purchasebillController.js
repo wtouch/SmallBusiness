@@ -77,8 +77,11 @@ define(['app'], function (app) {
 				},
 				{ name:'paid_amount',width:90,enableSorting: false,enableFiltering: false,
 				},
+				/* { name:'due_amount',width:100,enableSorting: false,enableFiltering: false,
+				},  */
 				{ name:'due_amount',width:100,enableSorting: false,enableFiltering: false,
-				}, 
+				cellTemplate :'<span>{{row.entity.due_amount}}</span>'
+				},
 				{
 					name:'manage',width:200,enableSorting: false,enableFiltering: true,
 					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'stock_transaction\', \'billData\',false,grid.appScope.billParams)" ng-model="status">'
@@ -88,15 +91,16 @@ define(['app'], function (app) {
 						+'</select>',
 					
 					
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/hospital/purchasebill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate : '<a ng-disabled="row.entity.paid_amount > 0" ng-click="grid.appScope.openModal(\'modules/hospital/purchasebill/addbill.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit bill Information"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					
-					+ '<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock_transaction\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					+
 					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openPaybill(\'modules/hospital/purchasebill/payBill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="pay bill Information"> <span class="glyphicon glyphicon-usd"></span></a>'
-							+
+					+
 					'<a ng-disabled="row.entity.due_amount <= 0" ng-click="grid.appScope.openViewbill(\'modules/hospital/purchasebill/viewbill.html\',row.entity)" class="btn btn-info btn-sm" type="button" tooltip-animation="true" tooltip="view bill Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
-							+
+					+
 					'<a ng-click="grid.appScope.openViewreceipt(\'modules/hospital/purchasebill/viewreceipt.html\',row.entity)" class="btn btn-warning btn-sm" type="button" tooltip-animation="true" tooltip="view Receipt Information"> <span class="glyphicon glyphicon-eye-open"></span></a>'
+					+ 
+					'<a type="button" tooltip="Delete stock" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'stock_transaction\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 					
 				}
 			],
@@ -244,6 +248,7 @@ define(['app'], function (app) {
 				addToObject : function(object,data,modalOptions){
 					$rootScope.addToObject(object,modalOptions[data]);
 					modalOptions[data] = {};
+					modalOptions.taxInfo = {}
 				},
 				
 				removeObject : $rootScope.removeObject
@@ -271,7 +276,8 @@ define(['app'], function (app) {
 					},
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					status : 1,
-					type : "bill_payment"
+					type : "bill_payment",
+					module_name : 'hospital'
 				},
 				calcDueAmount : function(modalOptions){
 					modalOptions.payBill.description.due_amount = data.due_amount - modalOptions.payBill.debit_amount;
@@ -295,10 +301,12 @@ define(['app'], function (app) {
 					return modalOptions.payment_status;
 				},
 				postData : function(table,input){
+					$rootScope.module = "inventory";
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
+							$rootScope.module = "hospital";
 							var paymentStatus = {
-								payment_status : (modalOptions.payment_status) ? modalOptions.payment_status : modalOptions.checkPaidStatus(modalOptions.payBill.debit_amount, modalOptions)
+								payment_status : (modalOptions.payment_status) ? modalOptions.payment_status : modalOptions.checkPaidStatus(modalOptions.payBill.debit_amount,modalOptions)
 							}
 							$rootScope.updateData("bill", paymentStatus, data.id, function(response){
 								$scope.getData(false,$scope.currentPage, 'bill', 'billData', $scope.billParams);
@@ -381,7 +389,8 @@ define(['app'], function (app) {
 		$scope.billParams = {
 			where : {
 				status : 1,
-				user_id : $rootScope.userDetails.id
+				user_id : $rootScope.userDetails.id,
+				module_name :'hospital'
 			},
 			join : [
 				{
@@ -393,17 +402,17 @@ define(['app'], function (app) {
 					cols : ['name, email, phone, address, location, area, city, state, country, pincode,department']
 				},{
 					joinType : "left join",
-					joinTable : "hospital_transactions",
+					joinTable : "inventory_transaction",
 					joinOn : {
 						reference_id : "t0.id"
 					},
-					cols : ['debit_amount, IFNULL(sum(t2.debit_amount),0) as paid_amount']
+					cols : ['debit_amount, ROUND(IFNULL(sum(t2.debit_amount),0),2) as paid_amount']
 				}
 			],
 			groupBy : {
 				id : "id"
 			},
-			cols : ["*, (t0.total_amount - IFNULL(sum(t2.debit_amount),0)) as due_amount"]
+			cols : ["*,(ROUND(t0.total_amount - IFNULL(sum(t2.debit_amount),0),2)) as due_amount"]
 		}
 		
 		$scope.billInventoryParams = {

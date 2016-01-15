@@ -6,7 +6,7 @@
 
 <div class="modal-body">
 	<form name="addPurchaseorderForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addPurchaseorderForm.$valid" id="addPurchaseorderForm">
-	{{modalOptions.addPurchaseorder}}
+	
 		<div class=" form-group">
 			<div ng-init="modalOptions.getData(false,false,'party', 'partyList',billParams,modalOptions)">
 			<label for="party_id" class="col-sm-2 control-label"> Select Vendor * </label>
@@ -46,19 +46,13 @@
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" typeahead-template-url="customTemplate.html" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
-								ng-change=""  placeholder="particulars Name"/>
+								<input type="text" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" required 
+								placeholder="particulars Name"/>
 								<span class="help-block" ng-show="addPurchaseorderForm.particular.$dirty && addPurchaseorderForm.particular.$invalid">
 									<span ng-show="addPurchaseorderForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
 								</span> 
 							</td>
-							<script type="text/ng-template" id="customTemplate.html">
-								<a>
-									<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
-									<span><small> ({{match.model.area}} - {{match.model.pincode}})</small></span>
-								</a>
-							</script>
-								
+							
 							<td>
 								<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type"  required>
 									<option value="" selected>Select Type</option>
@@ -85,9 +79,7 @@
 							</td>
 							<td>						
 								<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
-									ng-init="modalOptions.singleparticular.price = 1"
-									
-									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
+									ng-init="modalOptions.singleparticular.price = 1"/>
 									
 								<span class="help-block" ng-show="addPurchaseorderForm.price.$dirty && addPurchaseorderForm.price.$invalid">
 									<span ng-show="addPurchaseorderForm.price.$error.required" class="text-danger">Price Required.</span>
@@ -95,9 +87,7 @@
 								</span>
 							</td>
 							<td>
-								<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  
-											
-								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" required />
+								<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1; modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/" required />
 								<span class="help-block" ng-show="addPurchaseorderForm.quantity.$dirty && addPurchaseorderForm.quantity.$invalid">
 									<span ng-show="addPurchaseorderForm.quantity.$error.required" class="text-danger">Quantity Required</span>
 									<span ng-show="addPurchaseorderForm.quantity.$error.pattern" class="text-danger">Enter number only</span>

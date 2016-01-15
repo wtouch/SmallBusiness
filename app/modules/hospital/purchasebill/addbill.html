@@ -24,7 +24,7 @@
 	</form>
 	<div class="row">
 		<div class="col-sm-12" ng-init="modalOptions.addBill.particular = (modalOptions.addBill.particular) ? modalOptions.addBill.particular : []">
-			<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">	
+			<!-- <form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">	
 				<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
 					<table class="table table-bordered" >
 						<thead>
@@ -92,7 +92,7 @@
 								<td>
 									<!-- <input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  
 												
-									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" required /> -->
+									ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" required /> - ->
 									<input type="text" typeahead-template-url="particularList" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
 									ng-change="modalOptions.singleparticular.quantity = 1; modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * 	modalOptions.singleparticular.quantity)"  placeholder="particulars Name"
 									ng-init="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
@@ -144,7 +144,119 @@
 					</button>
 					<br/>
 				</div>													
-			</form>
+			</form> -->
+			<form name="addbillForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbillForm.$valid" id="addbillForm">
+			<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
+				<table class="table table-bordered" >
+					<thead>
+						<tr>
+							<th>Particular Name</th>
+							<th>Type</th>
+							<th>Category</th>
+							<th>Price</th>
+							<th>Quantity</th>
+							<th>Amount</th>
+							<th>Tax</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<input type="text" typeahead-template-url="particularList" class="form-control" id="particular" name="particular" ng-model="modalOptions.singleparticular.goods_name" typeahead-on-select="modalOptions.assignData($item, modalOptions.singleparticular)" typeahead="stock_items.goods_name for stock_items in modalOptions.getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
+								ng-change="modalOptions.singleparticular.quantity = 1; modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"  placeholder="particulars Name"
+								 ng-init="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
+								<span class="help-block" ng-show="addbillForm.particular.$dirty && addbillForm.particular.$invalid">
+									<span ng-show="addbillForm.particular.$error.required" class="text-danger">Particulars Name is necessary.</span>
+								</span> 
+							</td>
+							<script type="text/ng-template" id="particularList">
+								<a>
+									<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+									<span><small> ({{match.model.goods_type}} - {{match.model.category}})</small></span>
+								</a>
+							</script>
+							
+							<td>
+									<select id="goods_type" class="form-control" name="goods_type"  ng-model="modalOptions.singleparticular.goods_type"  required>
+										<option value="" selected>Select Type</option>
+										<option value="type1" >Type1</option>
+										<option value="type2">Type2</option>
+										<option value="type3">Type3</option>
+										<option value="type4">Type4</option>
+									</select>
+									<span class="help-block" ng-show="addbillForm.goods_type.$dirty && addbillForm.goods_type.$invalid">
+										<span ng-show="addbillForm.goods_type.$error.required" class="text-danger">Required field.</span>
+									</span>	
+							</td>
+							<td>					
+								<select id="category" class="form-control" name="category"  ng-model="modalOptions.singleparticular.category" required>
+									<option value="" selected>Select Category</option>
+									<option value="category1">Category1</option>
+									<option value="category2">Category2</option>
+									<option value="category3">Category3</option>
+									<option value="category4">Category4</option>
+								</select>
+								<span class="help-block" ng-show="addbillForm.category.$dirty && addbillForm.category.$invalid">
+								<span ng-show="addbillForm.category.$error.required" class="text-danger">Required field.</span>
+								</span>	
+							</td>
+							<td>						
+								<input type="text" class="form-control" id="price" name="price" ng-model="modalOptions.singleparticular.price"  placeholder="Price" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required 
+								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)"/>
+									
+								<span class="help-block" ng-show="addbillForm.price.$dirty && addbillForm.price.$invalid">
+									<span ng-show="addbillForm.price.$error.required" class="text-danger">Price Required.</span>
+									<span ng-show="addbillForm.price.$error.pattern" class="text-danger">Enter number only</span>
+								</span>
+							</td>
+							<td>
+								<input type="number" class="form-control" id="quantity" placeholder="Quantity"  name="quantity" ng-model="modalOptions.singleparticular.quantity" ng-init="modalOptions.singleparticular.quantity = 1;  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-pattern="/^[1-9]\d{0,9}(\.\d{0,3}){0,1}$/"  			
+								ng-change="modalOptions.singleparticular.amount = (modalOptions.singleparticular.quantity * modalOptions.singleparticular.price)" required />
+								<span class="help-block" ng-show="addbillForm.quantity.$dirty && addbillForm.quantity.$invalid">
+									<span ng-show="addbillForm.quantity.$error.required" class="text-danger">Quantity Required</span>
+									<span ng-show="addbillForm.quantity.$error.pattern" class="text-danger">Enter number only</span>
+								</span>
+							</td>			
+							<td>		
+								<input type="text" class="form-control" id="amount" name="amount" ng-model="modalOptions.singleparticular.amount" ng-init="  modalOptions.singleparticular.amount = (modalOptions.singleparticular.price * modalOptions.singleparticular.quantity)" ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required readonly  placeholder="Amount" />
+								<span class="help-block" ng-show="addbillForm.amount.$dirty && addbillForm.amount.$invalid">
+									<span ng-show="addbillForm.amount.$error.required" class="text-danger">Total amount Required.</span>
+									<span ng-show="addbillForm.amount.$error.pattern" class="text-danger">Enter numbers only</span>
+								</span>
+							</td>
+							<td>				
+								<button type="button" tooltip="Add Tax" id="tax" class="dropdown dropdown-toggle glyphicon glyphicon-plus" placeholder="Tax" name="tax" value="tax"  ng-click="isCollapsed1 = !isCollapsed1"  ng-pattern="/^\d{0,9}(\.\d{0,2}){0,1}$/" required />
+								</button> 
+									<span class="help-block" ng-show="addbillForm.tax.$dirty && addbillForm.tax.$invalid">
+										<span ng-show="addbillForm.tax.$error.required" class="text-danger">Tax Required.</span>
+										<span ng-show="addbillForm.tax.$error.pattern" class="text-danger">Enter number only</span>
+									</span>
+								<div collapse="!isCollapsed1" style="z-index:2;position:absolute;right:20px;width:155px;top:70px;padding:1px;" class="well">
+										<div class="col-sm-3">
+											<div class="form-group" ng-init="modalOptions.taxInfo = {}">
+												<ul style="list-style-type:none">
+													<li>
+														<div class="checkbox col-sm-3 ">
+															<label ng-repeat="x in userDetails.config.inventory.taxData.tax">
+															<input type="checkbox" ng-model="modalOptions.taxInfo[x.taxName]" ng-change="modalOptions.taxCalculate(modalOptions)" checklist-value="x"/> {{x.displayName}}
+															</label>
+														</div>
+													</li>
+												</ul> 
+											</div>
+										</div>
+									</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- <button type="submit" class=" col-sm-offset-2 btn btn-success" ng-disabled="addbillForm.$invalid" ng-click="modalOptions.addToObject(modalOptions.addBill.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions,'addBill');isCollapsed1 = !isCollapsed1">	+Add This Particular
+				</button> -->
+				<button type="submit" class=" col-sm-offset-2 btn btn-success" ng-click="modalOptions.addToObject(modalOptions.addBill.particular, 'singleparticular', modalOptions);modalOptions.totalCalculate(modalOptions);isCollapsed1 = !isCollapsed1">	+Add This Particular
+					</button>
+				<br/>
+			</div>													
+		</form>
 		</div>
 	</div>
 	<div class="table-responsive" ng-if="modalOptions.addBill.party_id">
