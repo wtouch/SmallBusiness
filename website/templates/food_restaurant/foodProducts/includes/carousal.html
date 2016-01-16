@@ -10,15 +10,17 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
 	{% for key, value in sliderData %}
-		<div class="item {{ (key == 0) ? 'active' }}">
+		<div class="item animation {{ (key == 0) ? 'active' }}">
 		  <div class="row">
 				<div class=" {{ value.title ? 'col-md-6' : 'col-md-12' }}">
 					<img class="img-responsive" src="{{value.image ? value.image : value is iterable ? value.file_relative_path : value}}" alt="{{value.title}}">
 				</div>
 				{% if value.title %}
-				<div class="col-md-6 cap" style="position:relative;top:-200px;">
-					<h2>{{value.title}}</h2>
-					<p>{{value.description}}</p>
+				<div class="col-md-6">
+					<div class="cap">
+						<h2>{{value.title}}</h2>
+						<p>{{value.description}}</p>
+					</div>
 				</div>
 				{% endif %}
 				
