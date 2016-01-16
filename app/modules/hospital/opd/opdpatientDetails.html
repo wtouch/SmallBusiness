@@ -1,7 +1,7 @@
 <div class="modal-body">
 	<div class="form-group" ng-init="modalOptions.getData(false,false,'patient','patient',modalOptions.patientParams,modalOptions)">
 		<label for="patient_id" class="col-sm-2 control-label"> Patient Name * </label>
-		<div class="col-sm-9">{{modalOptions.addopdpatient.patient_id}}
+		<div class="col-sm-9">
 			<input id="patient_name" class="form-control" typeahead-template-url="customTemplate.html" ng-model="patient_name" typeahead="item.patient_name for item in modalOptions.getTypeaheadData('patient','patient_name', $viewValue)" typeahead-on-select="modalOptions.assignData($item, modalOptions.addopdpatient)" 
 				typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required />
 				

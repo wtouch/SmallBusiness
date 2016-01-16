@@ -7,7 +7,7 @@
 		</div>
 	</div>
 	
-		<div class="row " style="height: auto;">
+		<div class="row " style="height: auto;">{{attendance}}
 				<div class="col-sm-12">
 					<div class="bottomspace">
 						<div class="panel panel-default">
@@ -19,7 +19,7 @@
 											<div class="form-group" >
 												<label  for="date" >Date *</label>
 													<div class="input-group">
-														<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="staffattendance.attendance_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="staffattendance.attendance_date = attendancedate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="setDate(staffattendance.attendance_date,10); sqlDateFormat(staffattendance.attendance_date, staffattendance.attendance_date)"/>	
+														<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="attendance.attendance_date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="attendance.attendance_date = attendancedate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="setDate(attendance.attendance_date,10); sqlDateFormat(attendance.attendance_date, attendance.attendance_date)"/>	
 														
 														<span class="input-group-btn">
 															<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -27,31 +27,29 @@
 													</div>
 											</div>
 											<div class="form-group" >
-												<div ng-init="getData(false,false,'staff','staff', staffattendance)">
 													<label for="staff_id" > Select Staff* </label>
-														<select id="staff_id" class="form-control" ng-model="staffattendance.staff_id" ng-init="getData(false, currentPage,'staff','staffList',staffattendanceParams)" ng-options="item.id as item.name for item in staff" required>
-															<option value="">Select Staff</option>
-															<option value="1">1</option>
+														<select id="staff_id" class="form-control" ng-model="attendance.staff_id" ng-init="getData(false, false,'staff','staffList',staffattendanceParams)" ng-options="item.id as item.name for item in staffList" required>
+														<option value="">Select Staff</option>
 														</select>
 														<span class="help-block" ng-show="attendanceForm.staff_id.$dirty && attendanceForm.staff_id.$invalid">
 														<span ng-show="attendanceForm.staff_id.$error.required" class="text-danger">user name is required.</span>
 														</span>
-												</div>
+										
 											</div>
 											
 											<div class="form-group">
 												<label for="login_time"  control-label">Login Time</label>
-													<input type="text" id="login_time" class="form-control" name="login_time" ng-model="staffattendance.login_time" required>
+													<input type="text" id="login_time" class="form-control" name="login_time" ng-model="attendance.login_time" required>
 											</div>
 											<div class="form-group">
 												<label for="logout_time"  control-label">Logout Time</label>
-													<input type="text" id="logout_time" class="form-control" name="logout_time" ng-model="staffattendance.logout_time" required>
+													<input type="text" id="logout_time" class="form-control" name="logout_time" ng-model="attendance.logout_time" required>
 											</div>
 											
 											
 										
 											<div class="form-group">
-												<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid"  ng-click="postData('staffattendance',staffattendance);">Add</button>
+												<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid"  ng-click="postData('staffattendance',attendance,callback);">Add</button>
 									</form>
 								</div>
 							</div>
@@ -75,32 +73,41 @@
 				
 				<div class="col-sm-2">
 					<div class="bottomspace">
-						<label for="page_item" class="control-label">Select Staff</label>
-						<select id="page_item" class="form-control" ng-init="getData(false, currentPage,'staff','staffList',staffattendanceParams)" ng-model="pageItems" ng-options="item.id as item.name for item in staffList">
+						<label for="staffname" class="control-label">Select Staff</label>
+						<select id="staffname" class="form-control" ng-init="getData(false, currentPage,'staff','staffList',staffattendanceParams)" ng-model="staffname" ng-options="item.id as item.name for item in staffList">
 							<option value="" selected>Select Staff</option>
 						</select>
 					</div>
 				</div>
-				<div class="col-sm-2">
+				
+				<div class="col-sm-3" ng-if="staffname">
 					<div class="bottomspace">
-						<label for="page_item" class="control-label">From Date</label>
+						<label for="date2" class="control-label">From Date</label>
 							<div class="input-group">
-								<input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened1" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" ng-click="opened1=!opened1"/> 
+							  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date2" name="date2" datepicker-popup="yyyy-MM-dd" ng-model="fromdate" is-open="opened2" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date2, mode)" ng-init="calcDuration(type, duration)" ng-click="opened2=!opened2"/> 
+							
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="opened2 = !opened2"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
 							</div>
 					</div>
 				</div>
-				<div class="col-sm-2">
-					<div class="bottomspace">
-						<label for="page_item" class="control-label">To Date</label>
+				<div class="col-sm-3" >
+					<div class="bottomspace" >
+						<label for="date1" class="control-label">To Date</label>
 							<div class="input-group">
-								<input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened1" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" ng-click="opened1=!opened1"/> 
+							  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date1" name="date1" datepicker-popup="yyyy-MM-dd" ng-model="todate" is-open="opened3" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date1, mode)" ng-init="calcDuration(type, duration)" ng-click="opened3=!opened3"/> 
+							
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="opened3 = !opened3"><i class="glyphicon glyphicon-calendar"></i></button>
+							</span>
 							</div>
 					</div>
 				</div>
 			</div>
 
 	
-	<div class="table-responsive" ng-if="duration.start" ng-init="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams);getData(false, false, 'staff','staffParams',staffattendanceParams)">
+	<div class="table-responsive" ng-if="todate" ng-init="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams);getData(false, false, 'staff','staffParams',staffattendanceParams)">
 		<div ui-grid="staffattendance"></div>
 	</div>
 	

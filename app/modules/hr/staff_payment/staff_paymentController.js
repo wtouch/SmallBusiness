@@ -24,11 +24,20 @@ define(['app'], function (app) {
 		
 		$rootScope.moduleMenus = [
 			{
-				name : "Staff Payment",
+				name : "Pay by Staff",
 				path : "#/dashboard/hr/staff_payment",
 				events : {
 					click : function(){
-						return $scope.openStaffpayment("modules/hr/staff_payment/addstaff_payment.html");
+						return $scope.openStaffpayment("modules/hr/staff_payment/paybystaff.html");
+					}
+				} 
+			},
+				{
+				name : "Pay for Staff",
+				path : "#/dashboard/hr/staff_payment",
+				events : {
+					click : function(){
+						return $scope.openStaffpayment("modules/hr/staff_payment/payforstaff.html");
 					}
 				} 
 			},
@@ -151,6 +160,25 @@ define(['app'], function (app) {
 					})
 					
 				},
+				
+					staff_paymentParams :(data) ?{
+						where : {
+							user_id : $rootScope.userDetails.id,
+							status : 1
+						},
+						join: [
+							{
+								joinType : 'INNER JOIN',
+								joinTable : "hr_staff",
+								joinOn : {
+									staff_id : "t0.staff_id"
+								},
+								cols : ['name']
+							}],
+						
+						cols : ["*"]
+					} :{},
+		
 				getData:$scope.getData,	
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){

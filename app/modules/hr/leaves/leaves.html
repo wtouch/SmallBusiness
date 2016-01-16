@@ -10,18 +10,16 @@
 			</div>
 		</div>
 		<div class="col-sm-2">
-			<div class="bottomspace">
-				<label for="staffList_status" class="control-label" >Staff List Status</label>
-				<select id="staffList_status" class="form-control" ng-change="getData(false, currentPage,'staff', 'staff', staffParams)" ng-model="pageItems">
-					<option value="10">10</option>
-					<option value="20">20</option>
-					<option value="30">30</option>
-				</select>
-			</div>
+		<div class="bottomspace">
+						<label for="page_item" class="control-label">Page Item</label>
+						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'staffleaves', 'staffleaves',staffleavesParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
+						</select>
+					</div>
 		</div>
 	</div>
 	
-	<div class="table-responsive" ng-init="getData(false, currentPage, 'staffleaves','staffleaves',staffParams);">
+	<div class="table-responsive" ng-init="getData(false, currentPage, 'staffleaves','staffleaves',staffleavesParams);">
 		<div ui-grid="staffleaves"></div>
 	</div>
 	<div class="text-center">				

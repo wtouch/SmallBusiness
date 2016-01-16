@@ -47,7 +47,7 @@ define(['app'], function (app) {
                 }, */
 				{ name:'name',enableSorting: false ,
 				width:150,
-				filterHeaderTemplate: '<select id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'staffattendance\', \'staffattendance\',false,grid.appScope.staffattendanceParams)" ng-model="staff_id" ng-options="item.id as item.name for item in grid.appScope.staffParams">' 
+				filterHeaderTemplate: '<select id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'staffattendance\', \'staffattendance\',false,grid.appScope.staffattendanceParams)" ng-model="staff_id" ng-options="item.id as item.name for item in grid.appScope.staffattendanceParams">' 
 							+'<option value="">Select staff</option>'
 						+'</select>',
 					},
