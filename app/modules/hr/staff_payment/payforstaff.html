@@ -5,22 +5,18 @@
 </div>
 
 <div class="modal-body">
-<form class="form-horizontal" name="staffpaymentForm" role="form" ng-submit="addleaveForm.$valid" novalidate="novalidate">
+
 <!-- {{modalOptions.staffpayment}} -->
+
+
+<form name="staffpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="staffpaymentForm.$valid" > 
+
+
 		<div class="form-group">
-			<label for="select type" class="col-sm-2 control-label">Staff transaction*</label>
-			<div class="col-sm-4">
-					<select id="salary_type" name="salary_type" class="form-control" 
-					ng-model="modalOptions.staffpayment.type">
-					<option value="" selected>select type</option>
-					<option value="staff_credit">Pay by Staff</option>
-					<option value="staff_debit">Pay for Staff</option>
-					</select>
-			</div>
-			<label  for="date" class="col-sm-1 control-label">Date *</label>
-			<div class="col-sm-4">
+			<label  for="date" class="col-sm-2 control-label">Date *</label>
+			<div class="col-sm-9">
 				<div class="input-group">
-					<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="modalOptions.staffpayment.date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.staffpayment.date = modalOptions.staffpaymentdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addleave.leave_date,10); modalOptions.sqlDateFormat(modalOptions.addleave.leave_date, modalOptions.addleave.leave_date)"/>	
+					<input type="text" class="form-control " placeholder="Date" id="attend_date" name="attend_date" ng-model="modalOptions.staffpayment.date" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.staffpayment.attend_date,10); modalOptions.sqlDateFormat(modalOptions.staffpayment.attend_date, modalOptions.staffpayment.attend_date)"/>	
 					
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -29,9 +25,6 @@
 			</div>
 		
 		</div>
-</form>	
-
-<form name="staffpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="staffpaymentForm.$valid" ng-if="modalOptions.staffpayment.type=='staff_debit'"> 
 		<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
 				<label for="reference_id" class="col-sm-2 control-label"> Select Staff* </label>
@@ -178,166 +171,9 @@
 					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
 				</div>
 			</div>		
-		</form>
-		
-<form name="staffpaymentForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="staffpaymentForm.$valid" ng-if="modalOptions.staffpayment.type=='staff_credit'"> 
-			<div class="form-group">
-			<label for="select type" class="col-sm-2 control-label">Select Staff Type*</label>
-			<div class="col-sm-4">
-					<select id="salary_type" name="salary_type" class="form-control" 
-					ng-model="modalOptions.addstaff.staff_type"  ng-options="item.system_name as item.name for item in modalOptions.staff_type.staff.staff_type">
-					<option value="" selected>Select Staff Type</option>
-					
-					</select>
-			</div>
-			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
-				<label for="reference_id" class="col-sm-1 control-label"> Select Staff* </label>
-				<div class="col-sm-4">{{modalOptions.addstaff.staff_type}}
-					<select id="reference_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList | filter : {staff_type = modalOptions.addstaff.staff_type}" required>
-						<option value="">Select Staff</option>
-					</select>
-					<span class="help-block" ng-show="staffpaymentForm.reference_id.$dirty && staffpaymentForm.reference_id.$invalid">
-					<span ng-show="staffpaymentForm.reference_id.$error.required" class="text-danger">user name is required.</span>
-					</span>	
-				</div>
-			</div>
-			</div>
-			<div class="form-group">
-				<label for="category" class="col-sm-2 control-label">Category</label>
-				<div class="col-sm-9">
-					<select id="category" class="form-control" ng-model="modalOptions.staffpayment.category" ng-options="item.system_name as item.name for item in modalOptions.Category.staff.credit" required>
-					<option value="" selected>Category</option>
-					</select>
-				</div>
-				<span class="help-block" ng-show="staffpaymentForm.category.$dirty && staffpaymentForm.category.$invalid">
-					<span ng-show="staffpaymentForm.category.$error.required" class="text-danger">Required field.</span>
-				</span>	
-			</div>
-			<div class="form-group">
-					<label for="account" class="col-sm-2 control-label">Account Name*</label>
-					<div class="col-sm-9">
-						<select id="account" class="form-control" ng-change="modalOptions.getBalance(modalOptions.staffpayment.account_id, modalOptions)" ng-init="modalOptions.getData(false,false,'account','accountList', false, modalOptions)" ng-options="item.id as item.account_name for item in modalOptions.accountList" ng-model="modalOptions.staffpayment.account_id" required>
-						<option value="">Select Account</option>
-						</select>
-						<span class="help-block" ng-show="staffpaymentForm.account.$dirty && staffpaymentForm.account.$invalid">
-							<span ng-show="staffpaymentForm.account.$error.required" class="text-danger">required field.</span>
-						</span>	
-					</div>
-			</div>
-			
-			<div class="form-group" ng-if="modalOptions.previous_balance">
-				<label for="previous_amount" class="col-sm-2 control-label">Previous Amount</label>
-				<div class="col-sm-9">
-					<input type="text" ng-model="modalOptions.previous_balance" id="balance" name="balance" readonly class="form-control"/>			
-					</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="payment_type" class="col-sm-2 control-label">Payment Type </label>
-					<div class="col-sm-9">
-						<select id="payment_type" class="form-control" name="payment_type"  ng-model="modalOptions.staffpayment.payment_type.type" required>
-						<option value="" selected>Select Type</option>
-						<option value="Cash" >Cash</option>
-						<option value="Cheque">Cheque</option>
-						<option value="Net Banking">Net Banking</option>
-						<option value="DD">DD</option>
-						</select>
-						<span class="help-block" ng-show="staffpaymentForm.payment_type.$dirty && staffpaymentForm.payment_type.$invalid">
-							<span ng-show="staffpaymentForm.payment_type.$error.required" class="text-danger">Payment Type is required.</span>
-						</span>	
-					</div>
-			</div> 
-
-			<div class="form-group" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque' || modalOptions.staffpayment.payment_type.type == 'Net Banking' || modalOptions.staffpayment.payment_type.type == 'DD'">
-				<label for="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'"class="col-sm-2 control-label">Transaction No</label>
-				<label for="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" class="col-sm-2 control-label">Check No</label>
-				<label for="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'DD'" class="col-sm-2 control-label">DD No</label>
-					<div class="col-sm-9">
-						<input type="text" id="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Net Banking'" ng-model="modalOptions.staffpayment.payment_type.transaction_No" class="form-control" name="referance_no"   placeholder="Enter Transaction No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
-						<span class="help-block" ng-show="staffpaymentForm.referance_no.$dirty && staffpaymentForm.referance_no.$invalid">
-							<span ng-show="staffpaymentForm.referance_no.$error.required" class="text-danger">Ref No is required.</span>
-							<span ng-show="staffpaymentForm.referance_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
-						</span>
-						<input type="text" id="referance_no" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque'" ng-model="modalOptions.staffpayment.payment_type.check_no" class="form-control" name="cheque_no"   placeholder="Enter Check No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
-						<span class="help-block" ng-show="staffpaymentForm.cheque_no.$dirty && staffpaymentForm.cheque_no.$invalid">
-							<span ng-show="staffpaymentForm.cheque_no.$error.required" class="text-danger">Cheque No is required.</span>
-							<span ng-show="staffpaymentForm.cheque_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
-							
-						</span>
-						<input type="text" id="DD_no" ng-if="modalOptions.staffpayment.payment_type.type == 'DD'" ng-model="modalOptions.staffpayment.payment_type.DD_no" class="form-control" name="DD_no"   placeholder="Enter DD No" ng-pattern="/^\d{0,9}[0-9]$/" required/>
-						<span class="help-block" ng-show="staffpaymentForm.DD_no.$dirty && staffpaymentForm.DD_no.$invalid">
-							<span ng-show="staffpaymentForm.DD_no.$error.required" class="text-danger">DD no required.</span>
-							<span ng-show="staffpaymentForm.DD_no.$error.pattern" class="text-danger">Enter Numbers Only!</span>
-							
-						</span>
-					</div>		
-			</div> 
-			
-			<div class="form-group" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque' || modalOptions.staffpayment.payment_type.type == 'Net Banking' || modalOptions.staffpayment.payment_type.type == 'DD'">
-				<label for="Date" class="col-sm-2 control-label">Date</label>
-				 <div class="col-sm-9">
-					<input type="text" id="date" class="form-control"   ng-model="modalOptions.staffpayment.date" ng-init="modalOptions.staffpayment.date = modalOptions.incomeDate.date"  name="date" 
-					placeholder="date">
-					<span class="text-danger"  ng-show="staffpaymentForm.date.$error.date">Please enter valid   date </span>
-					<span class="help-block" ng-show="staffpaymentForm.date.$dirty && staffpaymentForm.date.$invalid">
-						<span ng-show="staffpaymentForm.date.$error.required"class="text-danger">Date  is required.</span>
-					</span>
-					
-				</div>					
-			</div>
-			
-			<div class="form-group" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque' || modalOptions.staffpayment.payment_type.type == 'Net Banking' || modalOptions.staffpayment.payment_type.type == 'DD'">
-				<label for="Bank" class="col-sm-2 control-label">Bank Name</label>
-					<div class="col-sm-9">
-						<input type="text" id="Bank" ng-model="modalOptions.staffpayment.payment_type.Bank" class="form-control" name="Bank"   placeholder="Enter Bank Name" required/>
-						<span class="text-danger" ng-show="staffpaymentForm.Bank.$dirty && staffpaymentForm.Bank.$invalid">
-							<span ng-show="staffpaymentForm.Bank.$error.required">Bank Name is Required.</span>
-						</span>	
-					</div>		
-			</div>
-			
-			<div class="form-group" ng-if="modalOptions.staffpayment.payment_type.type == 'Cheque' || modalOptions.staffpayment.payment_type.type == 'Net Banking' || modalOptions.staffpayment.payment_type.type == 'DD'">
-				<label for="Branch" class="col-sm-2 control-label">Branch</label>
-					<div class="col-sm-9">
-						<input type="text" id="Branch" ng-model="modalOptions.staffpayment.payment_type.Branch" class="form-control" name="Branch"   placeholder="Enter Branch" required/>
-						<span class="text-danger" ng-show="staffpaymentForm.Branch.$dirty && staffpaymentForm.Branch.$invalid">
-							<span ng-show="staffpaymentForm.Branch.$error.required">Branch Name is Required.</span>
-						</span>	
-					</div>		
-			</div>
-			
-			<div class="form-group">
-				<label  for="credit_amount" class="col-sm-2 control-label">Amount</label>
-					<div class="col-sm-9">
-						<input type="text" id="credit_amount" class="form-control"  ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.staffpayment.credit_amount" ng-change="modalOptions.totalAmount(modalOptions);modalOptions.calcBalance(modalOptions.previous_balance, modalOptions.staffpayment.credit_amount, modalOptions)" name="amount" placeholder="Amount" required />
-						<span class="help-block" ng-show="staffpaymentForm.amount.$dirty && staffpaymentForm.amount.$invalid">
-							<span ng-show="staffpaymentForm.amount.$error.required" class="text-danger">Amount is required.</span>
-							<span ng-show="staffpaymentForm.amount.$error.pattern" class="text-danger">Enter Numbers Only!</span>
-						</span>
-					</div>					
-			</div>
-			<div class="form-group">
-				<label for="description" class="col-sm-2 control-label">Description</label>
-					<div class="col-sm-9">
-						<textarea type="text" id="description" ng-model="modalOptions.staffpayment.description" class="form-control" name="description"   placeholder="Enter Description" ng-maxlength="250" required></textarea>
-						<span ng-hide="staffpaymentForm.description.$error.maxlength">
-								{{ 250 - modalOptions.staffpayment.description.length + " Chars left" }}
-						</span>	
-						 <span class="help-block" ng-show="staffpaymentForm.description.$dirty && staffpaymentForm.description.$invalid">
-								<span class="text-danger" ng-show="staffpaymentForm.description.$error.maxlength">Sorry You are Exceeding the Limit</span>
-								<span ng-show="staffpaymentForm.description.$error.required" class="text-danger">Required Field</span>
-						</span>
-					</div>		
-			</div>
-			
-			<div class="form-group modal-footer">
-				<div class="col-sm-11"><!--   ng-disabled="staffpaymentForm.$invalid" "-->
-					<button type="submit" class="btn btn-success"ng-click="modalOptions.postData('transactions',modalOptions.staffpayment); modalOptions.ok()">Submit</button>
-					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
-				</div>
-			</div>		
 </form>
-</div>
+		
+
 <!-- <div class="modal-footer">
 	
 	<button type="submit" class="btn btn-success" ng-if="!modalOptions.staffpayment.id" ng-disabled="staffpaymentForm.$invalid" ng-click="modalOptions.postData('staff_payment',modalOptions.staffpayment);modalOptions.ok()">Add Payment</button>

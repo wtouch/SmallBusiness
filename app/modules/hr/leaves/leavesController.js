@@ -72,12 +72,12 @@ define(['app'], function (app) {
                 },
 				{
 				    name:'leaves_for',
-					width:150,
+					width:100,
 					filterHeaderTemplate: '<input id="leaves_for" class="form-control" ng-change="grid.appScope.filter(\'leaves_for\', leaves_for, \'staffleaves\', \'staffleaves\',true)" ng-model="leaves_for" placeholder="leaves_for">'
                 },
 				{
 				    name:'type',
-					width:150,
+					width:100,
 					filterHeaderTemplate: '<input id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'staffleaves\', \'staffleaves\',true)" ng-model="type" placeholder="type">'
                 },
 				{
