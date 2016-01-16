@@ -54,11 +54,12 @@ define(['app'], function (app) {
 					width:100,
 					filterHeaderTemplate: '<input id="leave_date" class="form-control" ng-change="grid.appScope.filter(\'leave_date\', leave_date, \'staffleaves\', \'staffleaves\',true)" ng-model="leave_date" placeholder="leave_date">'
                 },
-				{
-				    name:'name',
-					width:100,
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="name">'
-                },
+				{ name:'name',enableSorting: false ,
+				width:150,
+				filterHeaderTemplate: '<select id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'staffleaves\', \'staffleaves\',false,grid.appScope.staffleavesParams)" ng-model="staff_id" ng-options="item.id as item.name for item in grid.appScope.staffleavesParams">' 
+							+'<option value="">Select staff</option>'
+						+'</select>',
+				},
 				{
 				    name:'approved_by',
 					width:100,

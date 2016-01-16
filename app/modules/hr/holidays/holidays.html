@@ -1,15 +1,7 @@
 <div class="main-content">
 	<ng-include src="'modules/component/toolbar.html'"></ng-include>
 	
-	<div class="row">
-		<div class="col-sm-2">
-		<h4>Staff Holiday</h4>
-		</div>
-		<div class="col-sm-1">
-			<button class="btn btn-primary" ng-click="isCollapsed=!isCollapsed"tooltip-animation="true" tooltip="Add staff Attendance"><span ng-class="(isCollapsed)?'glyphicon glyphicon-minus':'glyphicon glyphicon-plus'"></span></button>
-		</div>
-	</div>
-<div class="row collapse" collapse="!isCollapsed" style="height: auto;">
+<div class="row " style="height: auto;">{{addholiday}}
 	<div class="col-sm-12">
 		<div class="bottomspace">
 			<div class="panel panel-default">
@@ -43,6 +35,9 @@
 										</div>		
 										<button type="submit" class="btn btn-success"  ng-disabled="addholidayForm.$invalid" ng-click="   postData('staffholidays',addholiday, callback);">Add Holidays</button>
 								</div>	
+								<input type="text" id="user_id" class="form-control" ng-init="addholiday.user_id = userDetails.id" name="user_id" ng-model="addholiday.user_id" >
+								<input type="text" id="modified_date" class="form-control" ng-init="addholiday.modified_date = dataService.sqlDateFormate()," name="modified_date" ng-model="addholiday.modified_date" >
+								<input type="text" id="user_id" class="form-control" ng-init="addholiday.user_id = userDetails.id" name="user_id" ng-model="addholiday.user_id" >
 						</form>	
 					</div>
 				</div>

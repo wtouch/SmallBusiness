@@ -96,7 +96,14 @@ define(['app'], function (app) {
 			}
 		}
 		
-		
+			$scope.holidaysParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1
+			},
+			
+			cols : ["*"]
+		} 
 		$scope.openAddholiday = function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
@@ -118,11 +125,11 @@ define(['app'], function (app) {
 				}, 
 				getData:$scope.getData,	
 				holidaysParams :{
-						where : {
-							status : 1,
-							user_id : $rootScope.userDetails.id,
-							
-						},
+					where : {
+						status : 1,
+						user_id : $rootScope.userDetails.id,
+						
+					},
 						cols : ["*"]
 					},
 				postData : function(table, input){
