@@ -7,10 +7,10 @@
 					<div class="panel-body">
 						<div class="row">
 								<h5>Add Book</h5>
-										<form name="addbookForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbookForm.$valid">	
+										<form name="addbookForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addbookForm.$valid">	{{addbook}}
 										<div class="col-sm-2">
 										<label  for="book_name" control-label">Book Name * </label>
-											<input type="text" id="book_name" class="form-control" name="book_name" placeholder="Book Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.book_name"required>
+											<input type="text" id="book_name" class="form-control" name="book_name" placeholder="Book Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="addbook.book_name"required>
 											 <span class="text-danger"  ng-show="addbookForm.book_name.$error.pattern">Text is required.</span>
 											<span class="help-block" ng-show="addbookForm.book_name.$dirty && addbookForm.book_name.$invalid">
 												<span class="text-danger" ng-show="addbookForm.book_name.$error.required">Required Field.</span>
@@ -18,7 +18,7 @@
 										</div>
 									<div class="col-sm-2">
 									<label  for="author" control-label">Author Name * </label>
-										<input type="text" id="author" class="form-control" name="author" placeholder="Author Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.author"required>
+										<input type="text" id="author" class="form-control" name="author" placeholder="Author Name" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="addbook.author"required>
 										 <span class="text-danger"  ng-show="addbookForm.author.$error.pattern">Text is required.</span>
 										<span class="help-block" ng-show="addbookForm.author.$dirty && addbookForm.author.$invalid">
 											<span class="text-danger" ng-show="addbookForm.author.$error.required">Required Field.</span>
@@ -26,15 +26,15 @@
 									</div>
 									<div class="col-sm-2">
 									<label  for="book_name" control-label">Publisher * </label>
-										<input type="text" id="publisher" class="form-control" name="publisher" placeholder="Publisher" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.publisher"required>
+										<input type="text" id="publisher" class="form-control" name="publisher" placeholder="Publisher" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="addbook.publisher"required>
 										 <span class="text-danger"  ng-show="addbookForm.publisher.$error.pattern">Text is required.</span>
 										<span class="help-block" ng-show="addbookForm.publisher.$dirty && addbookForm.publisher.$invalid">
 											<span class="text-danger" ng-show="addbookForm.publisher.$error.required">Required Field.</span>
 										</span>
 									</div>
 										<div class="col-sm-2">
-										<label  for="book_name" control-label">Edition * </label>
-										<input type="text" id="edition" class="form-control" name="edition" placeholder="Edition" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="modalOptions.addbook.edition"required>
+										<label  for="edition" control-label">Edition * </label>
+										<input type="text" id="edition" class="form-control" name="edition" placeholder="Edition" ng-pattern="/^[a-zA-Z/ ]*$/" ng-model="addbook.edition"required>
 										 <span class="text-danger"  ng-show="addbookForm.edition.$error.pattern">Text is required.</span>
 										<span class="help-block" ng-show="addbookForm.edition.$dirty && addbookForm.edition.$invalid">
 											<span class="text-danger" ng-show="addbookForm.edition.$error.required">Required Field.</span>
@@ -44,18 +44,17 @@
 										<div class="col-sm-2">
 									<label  for="book_name" control-label">Price * </label>
 								
-										<input type="text" id="price" class="form-control" name="price" placeholder="Price" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="modalOptions.addbook.price" required>
+										<input type="text" id="price" class="form-control" name="price" placeholder="Price" ng-pattern="/^\d{0,9}[0-9]$/" ng-model="addbook.price" required>
 										 <span class="text-danger"  ng-show="addbookForm.price.$error.pattern">Number is required.</span>
 										<span class="help-block" ng-show="addbookForm.price.$dirty && addbookForm.price.$invalid">
 											<span class="text-danger" ng-show="addbookForm.price.$error.required">Required Field.</span>
 										</span>
 									</div>
-									<br>
 									<div class="col-sm-2">
-										<button type="submit" class="btn btn-success" ng-if="!modalOptions.addbook.id" ng-disabled="addbookForm.$invalid" ng-click="   modalOptions.postData('campus_book',modalOptions.addbook);modalOptions.ok()">Add Book </button>
+										<button type="submit" class="btn btn-success" ng-if="!addbook.id" ng-disabled="addbookForm.$invalid" ng-click="   postData('book',addbook,callback);">Add Book </button>
 									</div>
 									<div class="col-sm-2">
-										<button type="submit" class="btn btn-success" ng-if="modalOptions.addbook.id" ng-disabled="addbookForm.$invalid" ng-click="modalOptions.ok(); modalOptions.updateData('campus_book',modalOptions.addbook, modalOptions.addbook.id)">Update Book</button>			
+										<button type="submit" class="btn btn-success" ng-if="addbook.id" ng-disabled="addbookForm.$invalid" ng-click="modalOptions.ok(); updateData('book',addbook, addbook.id)">Update Book</button>			
 									</div>
 						</div>
 					</div>
@@ -66,13 +65,13 @@
 	</div>
 		</div>
 	</div>
-
-	<div class="table-responsive" ng-init="getData(false, currentPage, 'book_transaction_view','bookTransactionList');">
-		<div ui-grid="bookTransactionList"></div>
+{{book}}
+	<div class="table-responsive" ng-init="getData(false,currentPage,'book','book',bookparams);">
+		<div ui-grid="bookList"></div>
 	</div>
 	
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'book_transaction','book_transaction_view',bookParams)"></pagination>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'book','bookList',bookParams)"></pagination>
 		<pre>Page: {{currentPage}} / {{numPages}}</pre>
 	</div>	
 </div>
