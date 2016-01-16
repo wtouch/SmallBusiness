@@ -142,6 +142,7 @@ define(['app'], function (app) {
 					ward_name:data.ward_name,
 					fees:data.fees,
 					ward_charges:data.ward_charges,
+					equipement_charges:data.equipement_charges,
 					bed_number:data.bed_number,
 					//test_description :data.test_description,
 					patient_id:data.patient_id,
@@ -152,7 +153,7 @@ define(['app'], function (app) {
 					type: data.type,
 					guardian_details :data.guardian_details,
 					drug_sheet:data.drug_sheet,
-					patient_name : data.patient_name,
+					//patient_name : data.patient_name,
 					address: data.address,
 					gender : data.gender,
 					dob : data.dob,
@@ -183,6 +184,7 @@ define(['app'], function (app) {
 					admission_date : data.admission_date,
 					discharge_date :data.discharge_date,
 					patient_id:data.patient_id,
+					//patient_name:data.patient_name,
 					mobile: data.mobile,
 					emergency_contact:data.emergency_contact,
 					email : data.email,
@@ -217,7 +219,7 @@ define(['app'], function (app) {
 					var hours = minutes/60;
 					var days = hours/24;
 					console.log(days);
-					var total=bed_charges*days;
+					var total = bed_charges*days;
 					console.log(total);
 					return total;
 				},
@@ -245,7 +247,6 @@ define(['app'], function (app) {
 						}
 					}); 
 				},
-				
 			
 				assignData : function(object, formObject){
 					formObject.patient_id = object.id;
@@ -253,6 +254,30 @@ define(['app'], function (app) {
 					formObject.emergency_contact = object.emergency_contact;
 					formObject.email = object.email;
 					console.log(object);
+				},
+				
+				getTypeaheadDatas : function(table, searchColumn, searchValue){
+					var locationParams = {
+						search : {},
+						cols : ["*"]
+					};
+					locationParams.search[searchColumn] = searchValue;
+					console.log(locationParams);
+					return dataService.get(false, 'equipment', locationParams).then(function(response){
+						console.log(response);
+						if(response.status == 'success'){
+							return response.data;
+						}else{
+							return [];
+						}
+					}); 
+				},
+			
+				assignDatas : function(object, formObject){
+					formObject.equipment_id = object.id;
+					//formObject.equipment_name = object.equipment_name;
+					formObject.emergency_contact = object.emergency_contact;
+					formObject.equipment_charges = object.equipment_charges;
 				},
 				updateData : function(table, input, id){
 					$rootScope.updateData(table, input, id, function(response){
