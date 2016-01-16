@@ -66,7 +66,7 @@ define(['app'], function (app) {
 					  ]
 					},
 					cellTemplate :  
-					'<a ng-click="grid.appScope.openModal(\'modules/hospital/staffattendance/staffattendance.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff attendance" > <span class="glyphicon glyphicon-pencil"></span></a>'
+				'<a ng-click="grid.appScope.editData(row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff attendance"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+
 				
 					'<a type="button" tooltip="Delete staffattendance" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staffattendance\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
@@ -78,6 +78,10 @@ define(['app'], function (app) {
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffattendanceParams);
 			}
+		}
+		$scope.editData = function(object){
+			//$scope.isCollapsed = true;
+			$scope.attendance = object;
 		}
 		$scope.attendance = ($scope.attendance)?
 		$scope.attendance:{
@@ -137,7 +141,7 @@ define(['app'], function (app) {
 					})
 				},
 				
-	/* 	$scope.setTransactionDate = function(transfer){
+	/*$scope.setTransactionDate = function(transfer){
 			$scope.staffattendanceParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
 			+"'"];
 			$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffattendanceParams);
@@ -151,7 +155,7 @@ define(['app'], function (app) {
 				var endtDt = dateE.getFullYear() + "-" + (dateE.getMonth() + 1) + "-" + (dateE.getDate() + 1 );
 				var setDate={ "fromDate" : startDt,"toDate" : endtDt}
 				$scope.setTransactionDate(setDate);
-		}  */
+		} */ 
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {

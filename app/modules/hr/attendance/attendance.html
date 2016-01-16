@@ -13,8 +13,8 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="row">
-							<h5 ng-if="!stock.id">Add Staff Attendance</h5>
-							<h5 ng-if="stock.id">Update Staff Attendance</h5>
+							<h5 ng-if="!attendance.id">Add Staff Attendance</h5>
+							<h5 ng-if="attendance.id">Update Staff Attendance</h5>
 								<form class="form-inline" name="attendanceForm" role="form" ng-submit="attendanceForm.$valid" novalidate="novalidate">
 									<div class="form-group" >
 										<label  for="date" >Date *</label>
@@ -46,7 +46,10 @@
 											<input type="text" id="logout_time" class="form-control" name="logout_time" ng-model="attendance.logout_time" required>
 									</div>		
 									<div class="form-group">
-										<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid"  ng-click="postData('staffattendance',attendance,callback);">Add</button>
+										<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid" ng-if="!attendance.id" ng-click="postData('staffattendance',attendance,callback);">Add</button>
+									</div>
+									<div class="form-group">
+										<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid" ng-if="attendance.id" ng-click="updateData('staffattendance',attendance);">Update</button>
 									</div>
 							</form>	
 					</div>
