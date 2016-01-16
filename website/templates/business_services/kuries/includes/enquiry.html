@@ -5,11 +5,10 @@
 	{% if enquiry.property_category %}
 		<span style="font-size:75%">- ({{enquiry.property_title}})</span>
 	{% endif %}
-	</h3>
-	
+	<h3 class="subhead">News Letter</h3>
 	<div class="panel panel-default">
 		<div class="panel-body" ng-controller="enquiryController">
-		<h3 class="subhead">Send Enquiry </h3>
+		
 			<form class="form-inline" role="form" name="enquiryForm" ng-submit="enquiryForm.$valid" ng-hide="mailSent" novalidate>
 				<div class="form-group">
 						<input type="hidden" class="form-control col-xs-12 col-md-12 col-lg-12" id="user_id" ng-init="enquiry.user_id={{enquiry.user_id}}" ng-model="enquiry.user_id" name="user_id">
