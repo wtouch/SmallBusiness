@@ -16,18 +16,13 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hr";
+		$scope.today = new Date();
+		$scope.todayDt = $scope.today.getFullYear() + "-" + ($scope.today.getMonth() + 1) + "-" + $scope.today.getDate();
+		$scope.duration = {start : $scope.todayDt};
+		$scope.toDate = function(date){
+			return new Date(date);
+		}
 		
-		$http.get("modules/hr/config.json").success(function(response){
-			console.log(response);
-				$scope.staffConfig = response;
-			})
-		
-		$rootScope.moduleMenus = [
-	
-			
-		]
-		
-	
 		$scope.staffattendance = {
 			enableSorting: true,
 			enableFiltering: true,
@@ -40,32 +35,23 @@ define(['app'], function (app) {
 					filter: {
 					}
 				},
-				/* {
-				    name:'name',
-					width:100,
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true)" ng-model="name" placeholder="name">'
-                }, */
-				{ name:'name',enableSorting: false ,
-				width:150,
-				filterHeaderTemplate: '<select id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'staffattendance\', \'staffattendance\',false,grid.appScope.staffattendanceParams)" ng-model="staff_id" ng-options="item.id as item.name for item in grid.appScope.staffattendanceParams">' 
-							+'<option value="">Select staff</option>'
-						+'</select>',
-					},
 				{
 				    name:'attendance_date',
-					width:100,
-					filterHeaderTemplate: '<input id="attendance_date" class="form-control" ng-change="grid.appScope.filter(\'attendance_date\', attendance_date, \'staffattendance\', \'staffattendance\',true)" ng-model="attendance_date" placeholder="attendance_date">'
+					width:200,
+						enableSorting: false,enableFiltering: false,
                 },
-				
+				{
+				    name:'name',
+					width:100,	enableSorting: false,enableFiltering: false,
+					},
 				{
 				    name:'login_time',
-					width:100,
-					filterHeaderTemplate: '<input id="login_time" class="form-control" ng-change="grid.appScope.filter(\'login_time\', login_time, \'staffattendance\', \'staffattendance\',true)" ng-model="login_time" placeholder="login_time">',
+					width:100,	enableSorting: false,enableFiltering: false,
                 },
 				{
 				    name:'logout_time',
-					width:150,
-					filterHeaderTemplate: '<input id="logout_time" class="form-control" ng-change="grid.appScope.filter(\'logout_time\', logout_time, \'staffattendance\', \'staffattendance\',true)" ng-model="logout_time" placeholder="logout_time">'
+					width:150,	enableSorting: false,enableFiltering: false,
+					
                 },
 			    { 
 				 name:'Manage', width:300,
@@ -79,117 +65,97 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					},
-					cellTemplate : 
-					'<a ng-click="grid.appScope.openModal(\'modules/hr/attendance/staffattendance.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate :  
+				'<a ng-click="grid.appScope.editData(row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff attendance"> <span class="glyphicon glyphicon-pencil"></span></a>'
 					+
 				
-					'<a ng-click="grid.appScope.openViewattendance(\'modules/hr/attendance/view_attendence.html\',row.entity)" class="btn btn-primary btn-sm btn" type="button" tooltip-animation="true" tooltip="Attendence"><span class="glyphicon glyphicon-ok"></span></a>'
-					
-					+
 					'<a type="button" tooltip="Delete staffattendance" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staffattendance\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
 		};
-		
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
 				$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffattendanceParams);
 			}
 		}
-		
-		
-		$scope.staffattendanceParams = {
-			where : {
-				user_id : $rootScope.userDetails.id,
-				status : 1
-			},
-			join: [
-				{
-					joinType : 'INNER JOIN',
-					joinTable : "hr_staff",
-					joinOn : {
-						staff_id : "t0.staff_id"
-					},
-					cols : ['name']
-				}],
-			
-			cols : ["*"]
+		$scope.editData = function(object){
+			//$scope.isCollapsed = true;
+			$scope.attendance = object;
+		}
+		$scope.attendance = ($scope.attendance)?
+		$scope.attendance:{
+			user_id : $rootScope.userDetails.id,
+			date : dataService.sqlDateFormate(false,"datetime"),
+			modified_date : dataService.sqlDateFormate(false,"datetime"),
 		} 
-		$scope.openstaffattendance = function(url,data){
-			var modalDefault = {
-				templateUrl: url,	// apply template to modal
-				size : 'lg'
-			};
-			var modalOptions = {
-			attendancedate:dataService.sqlDateFormate(),
-				
-		staffattendanceParams :(data) ?{
+		
+		
+		$scope.staffattendanceParams ={
 			where : {
 				user_id : $rootScope.userDetails.id,
 				status : 1
 			},
-			join: [
+				join: [
 				{
 					joinType : 'INNER JOIN',
 					joinTable : "hr_staff",
 					joinOn : {
-						staff_id : "t0.staff_id"
+						id : "t0.staff_id"
 					},
 					cols : ['name']
-				}],
+				}],  
 			
 			cols : ["*"]
-		} :{},
-		
-				getData:$scope.getData,	
-				postData : function(table, input){
+		} ;
+		 
+		$scope.staffParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+			},
+			cols : ["*"]
+		}  
+			$scope.postData = function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							
+							$scope.getData(false, $scope.currentPage, 'staffattendance','staffattendanceList',$scope.staffattendanceParams);
+							$scope.attendance = {
+								user_id : $rootScope.userDetails.id,
+								date : dataService.sqlDateFormate(false,"datetime"),
+								modified_date : dataService.sqlDateFormate(false,"datetime"),};
+						}
+					})
+			},
+		$scope.updateData = function(table, input, id){
+					console.log(table, input, id);
+						
+					$rootScope.updateData(table, input, id, function(response){
+						if(response.status == "success"){ 
+							$scope.attendance = {
+								user_id : $rootScope.userDetails.id,
+								date : dataService.sqlDateFormate(false,"datetime"),
+								modified_date : dataService.sqlDateFormate(false,"datetime")};
+								$scope.getData(false, $scope.currentPage, 'staffattendance','staffattendanceList',$scope.staffattendanceParams);
 						}
 					})
 				},
 				
-			};
-			modalService.showModal(modalDefault, modalOptions).then(function(){
-				
-			})
+	/*$scope.setTransactionDate = function(transfer){
+			$scope.staffattendanceParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
+			+"'"];
+			$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffattendanceParams);
 		}
 		
-		
-		$scope.openViewattendance = function(url,data){
-				var modalDefault = {
-				templateUrl: url, // apply template to modal
-				size : 'lg'
-				};
-			var modalOptions = {
-				dataS :data,
-				date : dataService.sqlDateFormate(),
-				viewattendance:{
-						user_id : $rootScope.userDetails.id,
-						name:data.name,
-						staff_id : data.staff_id,
-						date : data.date,
-						attendance_date:data.attendance_date,
-						login_time:data.login_time,
-						logout_time:data.logout_time
-					},
-					
-				getData : $scope.getData,
-					attendanceParams : {
-						where : {
-							status : 1,
-							user_id : $rootScope.userDetails.id,
-							staff_id:data.id
-						},
-						cols : ["*"]
-					}
-			};
-			modalService.showModal(modalDefault, modalOptions).then(function(){
-			})
-		}
-		
+		 $scope.calcDuration = function(type, duration){
+			var curDate = new Date();
+			var dateS = new Date(duration.start);
+				var dateE = new Date(duration.end);
+				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
+				var endtDt = dateE.getFullYear() + "-" + (dateE.getMonth() + 1) + "-" + (dateE.getDate() + 1 );
+				var setDate={ "fromDate" : startDt,"toDate" : endtDt}
+				$scope.setTransactionDate(setDate);
+		} */ 
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {

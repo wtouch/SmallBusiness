@@ -375,7 +375,14 @@ define(['app'], function (app) {
 				
 			})
 		}
-										
+		
+		$scope.classParams ={
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status:1,
+			},
+		cols : ["*"]
+		};						
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -396,7 +403,7 @@ define(['app'], function (app) {
 			dataService.get(single,table,$scope.params, subobj, params, modalOptions).then(function(response) {
 				console.log(response);
 				if(response.status == 'success'){
-					if(modalOptions != undefined){
+					if(modalOptions){
 						modalOptions[subobj] = angular.copy(response.data);
 						modalOptions.totalRecords = response.totalRecords;
 					}else{

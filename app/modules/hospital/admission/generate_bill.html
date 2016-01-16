@@ -4,8 +4,8 @@
 		<h3 class="text-center">BILL</h3>
 </div>
  
-<div class="modal-body"  >
-	<div id="view_admission">
+<div class="modal-body">
+	<div id="view_admission">{{modalOptions.view_admission}}
 	<label>Patient Details:</label><br><br>
 	<table class="table table-hover table-responsive table-bordered">
 			<tbody>
@@ -109,7 +109,7 @@
 				<td>{{x.assign_date}}</td>
 				<td>{{x.equipment_name}}</td>
 				<td>{{x.description}}</td>
-				<td>{{equipment_charges}}</td>
+				<td>{{modalOptions.dateDifference(modalOptions.view_admission.assign_date,modalOptions.view_admission.release_date,modalOptions.view_admission.ward_charges)}}</td>
 			</tr>
 			<tr>
 				<th colspan='4' class="text-right">Total</th>
@@ -190,11 +190,11 @@
 						<td>{{modalOptions.view_admission.deposit}}</td>
 					</tr>
 					<tr>
-						<th colspan='5'  class="text-right">Total Amount</th>
+						<th colspan='5' class="text-right">Total Amount</th>
 						<td></td>
 					</tr>
 					<tr>
-						<th colspan='5'  class="text-right">Net Amount</th>
+						<th colspan='5' class="text-right">Net Amount</th>
 						<td></td>
 					</tr>
 					<tr>

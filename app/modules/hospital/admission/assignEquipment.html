@@ -43,16 +43,33 @@
 							<span ng-show="assignEquipementForm.assign_date.$error.required"class="text-danger">Date  is required.</span>
 				</div>
 			</div>
+			
 			<div class="form-group" ng-init= "modalOptions.getData(false,false,'equipment','equipmentList',false,modalOptions)">
 				<label for="equipment_name" class="col-sm-2 control-label">Equipment Name *</label>
 				<div class="col-sm-8">					
-					<select id="equipment_name" name="equipment_name" class="form-control" 
-					ng-model="modalOptions.equipment_sheet.equipment_name" ng-options="item.equipment_name as item.equipment_name for item in modalOptions.equipmentList">
-					<option value="" selected>Select Equipment Name</option>
-				
-					</select>
+					<input typeahead-template-url="customTemplate.html" class="form-control" id="equipment" name="equipment" ng-model="equipment_name" typeahead-on-select="modalOptions.assignDatas($item, modalOptions.equipment_sheet)" typeahead="item.equipment_name for item in modalOptions.getTypeaheadDatas('equipment','equipment_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
+					placeholder="Equipement Name"
+					/>
+					<script type="text/ng-template" id="customTemplate.html">
+						<a>
+							<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span> 
+						</a>
+					</script>
+					
 				</div>
-			</div>	
+			</div>
+			
+			<div class="form-group">
+				<label for="equipment_charges" class="col-sm-2 control-label">equipment_charges*</label>
+					<div class="col-sm-3">
+						<input type="text" id="equipment_charges" name="equipment_charges" class="form-control" ng-model="modalOptions.equipment_sheet.equipment_charges" placeholder="Enter Your equipment_charges Number" ng-pattern="/^[789]\d{9}$/" maxlength="10" required/>
+						<span class="help-block" ng-show="assignEquipementForm.equipment_charges.$dirty && assignEquipementForm.equipment_charges.$invalid">
+							<span ng-show="assignEquipementForm.equipment_charges.$error.required" class="text-danger">equipment_charges Number is required.</span>
+							<span class="text-danger" ng-show="assignEquipementForm.equipment_charges.$error.pattern">Enter valid Contact Number</span>
+						</span>
+					</div>	
+			</div>
+				
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">Description</label>
 				<div class="col-sm-8">
@@ -90,12 +107,12 @@
 			</tr>
 			</tbody>
 		</table>
-	<div class="modal-footer" >
-		<div class="col-sm-offset-2 col-sm-8">
+		<div class="modal-footer" >
+			<div class="col-sm-offset-2 col-sm-8">
 
-			
-			<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success" ng-disabled="assignEquipementForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update</button>
-			<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
+				
+				<button type="submit" ng-if="modalOptions.addadmission.id" class="btn btn-success" ng-disabled="assignEquipementForm.$invalid" ng-click="modalOptions.updateData('admission',modalOptions.addadmission,modalOptions.addadmission.id);modalOptions.ok()">Update</button>
+				<button type="button" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</a>
+			</div>
 		</div>
-	</div>
 </div>
