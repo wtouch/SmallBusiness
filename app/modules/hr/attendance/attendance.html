@@ -78,7 +78,7 @@
 			<div class="bottomspace">
 				<label for="date2" class="control-label">From Date</label>{{duration.start}}
 					<div class="input-group">
-					  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date2" name="date2" datepicker-popup="yyyy-MM-dd" ng-model="fromdate" is-open="opened2" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date2, mode)" ng-init="calcDuration(type, duration)" ng-click="opened2=!opened2"/> 
+					  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date2" name="date2" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened2" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date2, mode)" ng-init="calcDuration(type, duration)" ng-click="opened2=!opened2"/> 
 					
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="opened2 = !opened2"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -86,11 +86,11 @@
 					</div>
 			</div>
 		</div>
-		<div class="col-sm-3">
+		<div class="col-sm-3" >
 			<div class="bottomspace" >
 				<label for="date1" class="control-label">To Date</label>
 					<div class="input-group">
-					  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date1" name="date1" datepicker-popup="yyyy-MM-dd" ng-model="todate" is-open="opened3" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date1, mode)" ng-init="calcDuration(type, duration)" ng-click="opened3=!opened3"/> 
+					  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date1" name="date1" datepicker-popup="yyyy-MM-dd" ng-model="duration.end" is-open="opened3" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date1, mode)" ng-init="calcDuration(type, duration)" ng-click="opened3=!opened3"/> 
 					
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="opened3 = !opened3"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -100,13 +100,13 @@
 		</div>
 	</div>
 
-	
-	<div class="table-responsive" ng-if="todate" ng-init="getData(false, currentPage, 'staffattendance','staffattendanceList',staffattendanceParams);getData(false, false, 'staff','staffList',staffParams)">
-		<div ui-grid="staffattendanceList"></div>
+	{{staffattendanceL}}
+	<div class="table-responsive" ng-if="duration.end" ng-init="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams);getData(false, false, 'staff','staffList',staffParams)">
+		<div ui-grid="staffattendance"></div>
 	</div>
 	
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'staffattendance','staffattendanceList',staffattendanceParams)"></pagination>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams)"></pagination>
 		<pre>Page: {{currentPage}} / {{numPages}}</pre>
 	</div>	
 </div>

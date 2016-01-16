@@ -16,8 +16,14 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hr";
+		$scope.today = new Date();
+		$scope.todayDt = $scope.today.getFullYear() + "-" + ($scope.today.getMonth() + 1) + "-" + $scope.today.getDate();
+		$scope.duration = {start : $scope.todayDt};
+		$scope.toDate = function(date){
+			return new Date(date);
+		}
 		
-		$scope.staffattendanceList = {
+		$scope.staffattendance = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -29,21 +35,23 @@ define(['app'], function (app) {
 					filter: {
 					}
 				},
-				{ name:'name',enableSorting: false, enableFiltering: false,width:150,
-		
-				},
-				{ name:'staff_id',enableSorting: false, enableFiltering: false,width:150,
-		
-				},
 				{
-				   name:'attendance_date',width:200,enableSorting: false, enableFiltering: false,	
-                },
-				
-				{
-				    name:'login_time',width:100,enableSorting: false, enableFiltering: false,	
+				    name:'attendance_date',
+					width:200,
+						enableSorting: false,enableFiltering: false,
                 },
 				{
-				    name:'logout_time',width:150,enableSorting: false, enableFiltering: false,	
+				    name:'name',
+					width:100,	enableSorting: false,enableFiltering: false,
+					},
+				{
+				    name:'login_time',
+					width:100,	enableSorting: false,enableFiltering: false,
+                },
+				{
+				    name:'logout_time',
+					width:150,	enableSorting: false,enableFiltering: false,
+					
                 },
 			    { 
 				 name:'Manage', width:300,
@@ -57,18 +65,18 @@ define(['app'], function (app) {
 					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
 					  ]
 					},
-					cellTemplate : 
-					'<a ng-click="grid.appScope.openModal(\'modules/hr/attendance/staffattendance.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					cellTemplate :  
+					'<a ng-click="grid.appScope.openModal(\'modules/hospital/staffattendance/staffattendance.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit staff attendance" > <span class="glyphicon glyphicon-pencil"></span></a>'
 					+
+				
 					'<a type="button" tooltip="Delete staffattendance" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staffattendance\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
 		};
-		
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendanceList", $scope.staffattendanceParams);
+				$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffattendanceParams);
 			}
 		}
 		$scope.attendance = ($scope.attendance)?
@@ -76,7 +84,7 @@ define(['app'], function (app) {
 			user_id : $rootScope.userDetails.id,
 			date : dataService.sqlDateFormate(false,"datetime"),
 			modified_date : dataService.sqlDateFormate(false,"datetime"),
-		}
+		} 
 		
 		
 		$scope.staffattendanceParams ={
@@ -84,15 +92,15 @@ define(['app'], function (app) {
 				user_id : $rootScope.userDetails.id,
 				status : 1
 			},
-			join: [
+				join: [
 				{
 					joinType : 'INNER JOIN',
 					joinTable : "hr_staff",
 					joinOn : {
-						staff_id : "t0.staff_id"
+						id : "t0.staff_id"
 					},
 					cols : ['name']
-				}],
+				}],  
 			
 			cols : ["*"]
 		} ;
@@ -100,9 +108,7 @@ define(['app'], function (app) {
 		$scope.staffParams = {
 			where : {
 				user_id : $rootScope.userDetails.id,
-
 				status : 1,
-				//staff_id:id
 			},
 			cols : ["*"]
 		}  
@@ -130,13 +136,22 @@ define(['app'], function (app) {
 						}
 					})
 				},
-		/* $scope.calcDuration = function(type, duration){
+				
+	/* 	$scope.setTransactionDate = function(transfer){
+			$scope.staffattendanceParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
+			+"'"];
+			$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffattendanceParams);
+		}
+		
+		 $scope.calcDuration = function(type, duration){
 			var curDate = new Date();
 			var dateS = new Date(duration.start);
 				var dateE = new Date(duration.end);
 				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
 				var endtDt = dateE.getFullYear() + "-" + (dateE.getMonth() + 1) + "-" + (dateE.getDate() + 1 );
-		} */
+				var setDate={ "fromDate" : startDt,"toDate" : endtDt}
+				$scope.setTransactionDate(setDate);
+		}  */
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
