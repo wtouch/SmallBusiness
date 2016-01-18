@@ -14,8 +14,7 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "campus";	
-			
-
+		
 		$rootScope.moduleMenus = [
 			{
 				name : "+",
@@ -62,7 +61,7 @@ define(['app'], function (app) {
 				cols : ["*"]
 			}
 			
-			$scope.bookList={
+ 			$scope.bookList={
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -74,8 +73,7 @@ define(['app'], function (app) {
 					name:'book_name',width:130,
 					enableSorting: false, enableFiltering: true,
 					filterHeaderTemplate: '<input id="book_name" class="form-control" ng-change="grid.appScope.filter(\'book_name\', book_name, \'book\', \'bookList\',true,grid.appScope.bookParams)" ng-model="book_name" placeholder="Book Name">',
-				},
-				{ 
+				},{ 
 					name:'author',width:130,
 					enableSorting: false, enableFiltering: true,
 					filterHeaderTemplate: '<input id="author" class="form-control" ng-change="grid.appScope.filter(\'author\', author, \'book\', \'bookList\',true,grid.appScope.bookParams)" ng-model="author" placeholder="Author Name">',
@@ -108,7 +106,16 @@ define(['app'], function (app) {
 					+'<a ng-click="grid.appScope.openModal(\'modules/campus/library/view_book_transaction.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Book Transaction"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 				]
-			};
+			}; 
+			
+
+			$scope.addbook = ($scope.addbook)?
+			$scope.addbook:{
+				user_id : $rootScope.userDetails.id,
+				date : dataService.sqlDateFormate(false,"datetime"),
+				modified_date : dataService.sqlDateFormate(false,"datetime"),
+			} 
+		
 			$scope.callbackColChange = function(response){
 			console.log(response);
 				if(response.status == "success"){
@@ -121,6 +128,7 @@ define(['app'], function (app) {
 				templateUrl:url,// apply template to modal
 				size:'lg'
 			};
+			
 			var modalOptions={
 				date : $scope.currentDate,
 				addliabrarystock:(data)?{
@@ -132,9 +140,10 @@ define(['app'], function (app) {
 				},	
 				getData:$scope.getData,
 				postData : function(table, input){
+					console.log(table, input);
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'library_stock',$Scope.bookParams);
+							$scope.getData(false, $scope.currentPage, 'library_stock',$scope.bookParams);
 						}
 					}) 
 				},
@@ -170,24 +179,24 @@ define(['app'], function (app) {
 				postData : function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'staff','staffList',$Scope.bookParams);
+							$scope.getData(false, $scope.currentPage, 'actual_stock',$scope.bookParams);
 						}
 					}) 
 				},
 				updateData : function(table, input, id){ 
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage,'staff','staffList',$scope.deptParams);
+							$scope.getData(false, $scope.currentPage,'actual_stock',$scope.bookParams);
 						}
 					})
-					},
+				},
 			};
 			modalService.showModal(modalDefault, modalOptions).then(function(){
 				
 			})
 		}
 					
-					/* add liabrary */
+					/* add book Transation */
 		 $scope.openModal=function(url,data){
 				var modalDefault={
 					templateUrl:url,
@@ -212,17 +221,18 @@ define(['app'], function (app) {
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 				},
 					postData : function(table, input){
-						console.log(table, input);
+						/* console.log(responses); */
 						$rootScope.postData(table, input,function(response){
 							if(response.status == "success"){
-								$scope.getData(false, $scope.currentPage, 'book_transaction','bookList',$Scope.bookParams);
+								$scope.getData(false, $scope.currentPage,'book_transaction',$scope.bookParams);
+							
 							}
 						})
 					},
 					updateData : function(table, input, id){ 
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage,'book_transaction','bookList',$scope.deptParams);
+							$scope.getData(false, $scope.currentPage,'book_transaction',$scope.bookParams);
 						}
 					})
 					},

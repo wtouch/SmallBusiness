@@ -3,17 +3,18 @@
 	<h3  ng-if="!modalOptions.addliabrarystock.id" class="text-center">Library Stock</h3>
 	<h3  ng-if="modalOptions.addliabrarystock.id" class="text-center" >Update Library Stock</h3>
 </div>
+{{modalOptions.addliabrarystock}}
 <div class="modal-body">
 	<form name="addlibrarystockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addlibrarystockForm.$valid">	
 			<div class="form-group">
-			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
-				<label for="staff_id" class="col-sm-2 control-label"> Select Book Name* </label>
+			<div ng-init="modalOptions.getData(false,false,'book','bookList', bookParams, modalOptions)">
+				<label for="book_id" class="col-sm-2 control-label"> Select Book Name* </label>
 				<div class="col-sm-3">
-					<select id="staff_id" class="form-control" ng-model="modalOptions.addliabrarystock.staff_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
-						<option value="">Select Staff</option>
+					<select id="book_id" class="form-control" ng-model="modalOptions.addliabrarystock.book_id" ng-options="item.id as item.name for item in modalOptions.bookList" required>
+						<option value="">Select Book</option>
 					</select>
-					<span class="help-block" ng-show="addlibrarystockForm.staff_id.$dirty && addlibrarystockForm.staff_id.$invalid">
-					<span ng-show="addlibrarystockForm.staff_id.$error.required" class="text-danger">user name is required.</span>
+					<span class="help-block" ng-show="addlibrarystockForm.book_id.$dirty && addlibrarystockForm.book_id.$invalid">
+					<span ng-show="addlibrarystockForm.book_id.$error.required" class="text-danger">user name is required.</span>
 					</span>	
 				</div>
 			</div>

@@ -51,7 +51,7 @@
 										</span>
 									</div>
 									<div class="col-sm-2">
-										<button type="submit" class="btn btn-success" ng-if="!addbook.id" ng-disabled="addbookForm.$invalid" ng-click="   postData('book',addbook,callback);">Add Book </button>
+										<button type="submit" class="btn btn-success" ng-if="!addbook.id" ng-disabled="addbookForm.$invalid" ng-click="postData('book',addbook,callback);">Add Book </button>
 									</div>
 									<div class="col-sm-2">
 										<button type="submit" class="btn btn-success" ng-if="addbook.id" ng-disabled="addbookForm.$invalid" ng-click="modalOptions.ok(); updateData('book',addbook, addbook.id)">Update Book</button>			
@@ -65,13 +65,13 @@
 	</div>
 		</div>
 	</div>
-{{book}}
-	<div class="table-responsive" ng-init="getData(false,currentPage,'book','book',bookparams);">
+{{bookLis}}
+	<div class="table-responsive" ng-init="getData(false,currentPage,'book','bookLis',bookparams)">
 		<div ui-grid="bookList"></div>
 	</div>
 	
 	<div class="text-center">				
-		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'book','bookList',bookParams)"></pagination>
+		<pagination total-items="totalRecords" items-per-page="pageItems"  ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="getData(false, currentPage, 'book','bookLis',bookParams)"></pagination>
 		<pre>Page: {{currentPage}} / {{numPages}}</pre>
 	</div>	
 </div>
