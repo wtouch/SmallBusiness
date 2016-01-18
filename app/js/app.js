@@ -22,10 +22,13 @@ define(['angular',
 	var app =  angular.module('smallBusiness', [
 	  'ngRoute', 'routeResolverServices', 'ui.bootstrap', 'customDirectives', 'customServices', 'customFilters', 'angularFileUpload', 'ngCookies', 'ngSanitize','uiGmapgoogle-maps', 'ui.sortable','ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav','ui.grid.pagination','ui.chart'
 	]);
+	
 	app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider',
                 '$compileProvider', '$filterProvider', '$provide', '$httpProvider', 'uiGmapGoogleMapApiProvider',
 				function($routeProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide, $httpProvider, uiGmapGoogleMapApiProvider) {
 					
+					$httpProvider.defaults.useXDomain = true;
+					delete $httpProvider.defaults.headers.common['X-Requested-With'];
 				uiGmapGoogleMapApiProvider.configure({
 					// key: 'your api key',
 					v: '3.17',
@@ -138,211 +141,212 @@ define(['angular',
 	
 		
 	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams','$notification','$timeout', '$route', '$http', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies, $routeParams, $notification, $timeout, $route,$http) {
-		$rootScope.sqLite = false;
-		//$rootScope.standAlone = true;
-		$rootScope.$routeProviderReference = $routeProviderReference;
-		$rootScope.filterParams = {};
 		
-		$rootScope.setRoutes = function(routes, subModule){
+		dataService.checkAppMode().then(function(data){
 			
-			var routes = (routes) ? routes : (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
+			$rootScope.$routeProviderReference = $routeProviderReference;
+			$rootScope.filterParams = {};
 			
-			if(subModule){
-				var parentPath = "/dashboard/";
-			}else{
-				var parentPath = "/";
-			}
-			
-			if(routes.moduleName){
-				parentPath = "/dashboard/";
-				var moduleRoutes = routes.moduleRoutes;
-				var currentRoutes = (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
-				angular.forEach(moduleRoutes, function(value, key){
-					if(value.childMenu){
-						
-						if(angular.isArray(value.childMenu)){
-							angular.forEach(value.childMenu, function(value){
-								//console.log(value);
-								moduleRoutes.push(value);
-							})
-						}
-						//console.log(value.childMenu);
-					}
-				})
-				//console.log(moduleRoutes);
-				localStorage.module_roots = JSON.stringify(currentRoutes.concat(moduleRoutes));
+			$rootScope.setRoutes = function(routes, subModule){
 				
-			}else{
-				moduleRoutes = routes;
+				var routes = (routes) ? routes : (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
 				
-				var currentRoutes = (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
-				localStorage.module_roots = JSON.stringify(currentRoutes.concat(moduleRoutes));
-				
-				//localStorage.module_roots = JSON.stringify(moduleRoutes);
-			}
-			$rootScope.getRoutes(moduleRoutes, parentPath);
-			//console.log(parentPath, routes);
-		}
-		$rootScope.getRoutes = function(moduleRoutes, parentPath){
-			if(!parentPath) parentPath = "";
-			angular.forEach(moduleRoutes, function(value, key){
-				//console.log(value.controller,value.template,value.label);
-				//if(value.directive){
-					$routeProviderReference.when(parentPath + value.path, route.resolve({controller: value.controller,template: value.template,label: value.label, directive : value.directive, service : value.service, filter : value.filter}, value.modulePath));
-				//}
-			})
-		}
-		//$routeProviderReference.when("/dashboard/inventory", route.resolve({controller: "inventory",template: "inventory",label: "inventory"}, "inventory/"));
-		if(localStorage.module_roots){
-			$rootScope.getRoutes(JSON.parse(localStorage.module_roots), "/dashboard/");
-		}
-		
-		$rootScope.$on("$routeChangeStart", function (event, next, current) {
-			/* if(localStorage.module_roots){
-				$rootScope.getRoutes(JSON.parse(localStorage.module_roots), "/dashboard/");
-			} */
-			$rootScope.module = false;
-			//console.log(localStorage);
-			$rootScope.userDetails = dataService.userDetails;
-			$rootScope.currentSite = location.protocol+'//'+location.hostname;
-			$rootScope.breadcrumbs = breadcrumbs;
-			$rootScope.serverApiV2 = false;
-			$rootScope.moduleMenus = [];
-			$rootScope.currentPath = (next.$$route) ? next.$$route.originalPath : "";
-			if(next.$$route){
-				$rootScope.appConfig = {
-					metaTitle : "Small Business",
-					headerTitle : (next.$$route.label) ? next.$$route.label:"",
-					subTitle : (next.$$route.label) ? next.$$route.label : "",
-					assetPath : '..'
-				};
-			}
-			
-			var nextUrl = (next.$$route) ? next.$$route.originalPath : "";
-			if(nextUrl == '/logout' || dataService.auth == false){
-				dataService.logout();
-				$rootScope.userDetails = null;
-			}
-			
-			if(dataService.auth == false || $rootScope.userDetails == null){
-				var changePassUrl = '"/changepass/'+next.pathParams.resetPassKey+'"';
-				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout' || nextUrl == '/changepass/:resetPassKey' || nextUrl == '/activate/:activateKey/:email/:pass?') {
-				} else {
-					$location.path("/login");
-					$notification.warning("Login", "You are not logged in!");
-				}
-			}else{
-				if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/changepass/:resetPassKey' || nextUrl == '/activate/:activateKey/:email/:pass?') {
-					$location.path("/dashboard");
+				if(subModule){
+					var parentPath = "/dashboard/";
+				}else{
+					var parentPath = "/";
 				}
 				
-			};
-			if($rootScope.userDetails != null){
-				if($rootScope.userDetails.config.modules){
-					var routes = [];
-					angular.forEach($rootScope.userDetails.config.modules, function(value, key){
-						$http.get("modules/"+value.name+"/"+value.name+".json").success(function(response){
-							//console.log(response);
-							var routes = {
-								moduleRoutes : response,
-								moduleName : value.name
-							}
-							$rootScope.setRoutes(routes, true);
-						})
-						$rootScope.setRoutes(value.routes, true);
-					})
-				}
-				if($rootScope.userDetails.group_id == 4){
-					if($rootScope.userDetails.config.addbusiness === undefined){
-						
-						$rootScope.userDetails.config = {
-							addbusiness : false,
-							addbusinessDetails : false,
-							addProducts : false,
-							chooseTemplate : false,
-							requestSite : false
-						}
-						
-						dataService.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
+				if(routes.moduleName){
+					parentPath = "/dashboard/";
+					var moduleRoutes = routes.moduleRoutes;
+					var currentRoutes = (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
+					angular.forEach(moduleRoutes, function(value, key){
+						if(value.childMenu){
 							
-							if(response.status == "success"){
-								dataService.setUserDetails(JSON.stringify($rootScope.userDetails));
-								$rootScope.userDetails = dataService.parse(dataService.userDetails);
+							if(angular.isArray(value.childMenu)){
+								angular.forEach(value.childMenu, function(value){
+									//console.log(value);
+									moduleRoutes.push(value);
+								})
 							}
-						})
+							//console.log(value.childMenu);
+						}
+					})
+					//console.log(moduleRoutes);
+					localStorage.module_roots = JSON.stringify(currentRoutes.concat(moduleRoutes));
+					
+				}else{
+					moduleRoutes = routes;
+					
+					var currentRoutes = (localStorage.module_roots) ? JSON.parse(localStorage.module_roots) : [];
+					localStorage.module_roots = JSON.stringify(currentRoutes.concat(moduleRoutes));
+					
+					//localStorage.module_roots = JSON.stringify(moduleRoutes);
+				}
+				$rootScope.getRoutes(moduleRoutes, parentPath);
+				//console.log(parentPath, routes);
+			}
+			$rootScope.getRoutes = function(moduleRoutes, parentPath){
+				if(!parentPath) parentPath = "";
+				angular.forEach(moduleRoutes, function(value, key){
+					//console.log(value.controller,value.template,value.label);
+					//if(value.directive){
+						$routeProviderReference.when(parentPath + value.path, route.resolve({controller: value.controller,template: value.template,label: value.label, directive : value.directive, service : value.service, filter : value.filter}, value.modulePath));
+					//}
+				})
+			}
+			//$routeProviderReference.when("/dashboard/inventory", route.resolve({controller: "inventory",template: "inventory",label: "inventory"}, "inventory/"));
+			if(localStorage.module_roots){
+				$rootScope.getRoutes(JSON.parse(localStorage.module_roots), "/dashboard/");
+			}
+			
+			$rootScope.$on("$routeChangeStart", function (event, next, current) {
+				/* if(localStorage.module_roots){
+					$rootScope.getRoutes(JSON.parse(localStorage.module_roots), "/dashboard/");
+				} */
+				$rootScope.module = false;
+				//console.log(localStorage);
+				$rootScope.userDetails = dataService.userDetails;
+				$rootScope.currentSite = location.protocol+'//'+location.hostname;
+				$rootScope.breadcrumbs = breadcrumbs;
+				$rootScope.serverApiV2 = false;
+				$rootScope.moduleMenus = [];
+				$rootScope.currentPath = (next.$$route) ? next.$$route.originalPath : "";
+				if(next.$$route){
+					$rootScope.appConfig = {
+						metaTitle : "Small Business",
+						headerTitle : (next.$$route.label) ? next.$$route.label:"",
+						subTitle : (next.$$route.label) ? next.$$route.label : "",
+						assetPath : '..'
+					};
+				}
+				
+				var nextUrl = (next.$$route) ? next.$$route.originalPath : "";
+				if(nextUrl == '/logout' || $cookies.get("auth") == false){
+					dataService.logout();
+					$rootScope.userDetails = null;
+				}
+				
+				if($cookies.get("auth") == false || $rootScope.userDetails == null){
+					var changePassUrl = '"/changepass/'+next.pathParams.resetPassKey+'"';
+					if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/logout' || nextUrl == '/changepass/:resetPassKey' || nextUrl == '/activate/:activateKey/:email/:pass?') {
+					} else {
+						$location.path("/login");
+						$notification.warning("Login", "You are not logged in!");
+					}
+				}else{
+					if (nextUrl == '/forgotpass' || nextUrl == '/register' || nextUrl == '/login' || nextUrl == '/' || nextUrl == '/changepass/:resetPassKey' || nextUrl == '/activate/:activateKey/:email/:pass?') {
+						$location.path("/dashboard");
 					}
 					
-					if($rootScope.userDetails.config.addbusiness == false){
-						$location.path("/dashboard/business/addbusiness");
-						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step active';
-						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
-						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
-						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
-					}else if($rootScope.userDetails.config.addbusinessDetails != true){
-						$location.path("/dashboard/business/adddetails/"+$rootScope.userDetails.config.addbusinessDetails);
-						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step active';
-						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
-						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
-						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
-					}else if($rootScope.userDetails.config.addProducts != true){
-						$location.path("/dashboard/business/products/"+$rootScope.userDetails.config.addProducts);
-						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
-						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step active';
-						
-						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
-						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
-						
-					}else if($rootScope.userDetails.config.chooseTemplate == false){
-						$location.path("/dashboard/templates/listoftemplates");
-						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
-						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';
-						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step active';
-						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
-						
-					}else if($rootScope.userDetails.config.requestSite == false){
-						$location.path("/dashboard/websites/requestnewsite");
-						$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
-						$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';
-						$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step complete';
-						$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step active';
-					}
-				}
-				
-				// For TaxData in user config
-				//console.log($rootScope.userDetails.config);
-				
-				/* if($rootScope.userDetails.config == ""){
-					$rootScope.userDetails.config = {};
-				}
-				if($rootScope.userDetails.config.inventory == undefined) $rootScope.userDetails.config.inventory = {};
-				
-				$rootScope.taxData = {
-					tax : [{
-						taxName : "service_tax",
-						displayName : "Service Tax",
-						taxValue : 14
-					},{
-						taxName : "vat",
-						displayName : "Vat",
-						taxValue : 5
-					}],
-					pan_no : "DIPPS1619D",
-					tin_no : "DIPPS1619DST001"
 				};
-				
-				$rootScope.userDetails.config.inventory.taxData = $rootScope.taxData;
-				
-				dataService.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
-					if(response.status == "success"){
-						dataService.setUserDetails(JSON.stringify($rootScope.userDetails));
-						$rootScope.userDetails = dataService.parse(dataService.userDetails);
+				if($rootScope.userDetails != null){
+					if($rootScope.userDetails.config.modules){
+						var routes = [];
+						angular.forEach($rootScope.userDetails.config.modules, function(value, key){
+							$http.get("modules/"+value.name+"/"+value.name+".json").success(function(response){
+								//console.log(response);
+								var routes = {
+									moduleRoutes : response,
+									moduleName : value.name
+								}
+								$rootScope.setRoutes(routes, true);
+							})
+							$rootScope.setRoutes(value.routes, true);
+						})
 					}
-				}) */
-				
-				//console.log($rootScope.userDetails.config);
-			}
+					if($rootScope.userDetails.group_id == 4){
+						if($rootScope.userDetails.config.addbusiness === undefined){
+							
+							$rootScope.userDetails.config = {
+								addbusiness : false,
+								addbusinessDetails : false,
+								addProducts : false,
+								chooseTemplate : false,
+								requestSite : false
+							}
+							
+							dataService.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
+								
+								if(response.status == "success"){
+									dataService.setUserDetails(JSON.stringify($rootScope.userDetails));
+									$rootScope.userDetails = dataService.parse(dataService.userDetails);
+								}
+							})
+						}
+						
+						if($rootScope.userDetails.config.addbusiness == false){
+							$location.path("/dashboard/business/addbusiness");
+							$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step active';
+							$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
+							$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
+							$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
+						}else if($rootScope.userDetails.config.addbusinessDetails != true){
+							$location.path("/dashboard/business/adddetails/"+$rootScope.userDetails.config.addbusinessDetails);
+							$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step active';
+							$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step disabled';
+							$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
+							$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
+						}else if($rootScope.userDetails.config.addProducts != true){
+							$location.path("/dashboard/business/products/"+$rootScope.userDetails.config.addProducts);
+							$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
+							$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step active';
+							
+							$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step disabled';
+							$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
+							
+						}else if($rootScope.userDetails.config.chooseTemplate == false){
+							$location.path("/dashboard/templates/listoftemplates");
+							$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
+							$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';
+							$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step active';
+							$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step disabled';
+							
+						}else if($rootScope.userDetails.config.requestSite == false){
+							$location.path("/dashboard/websites/requestnewsite");
+							$rootScope.addbusinessClass = 'col-xs-3 bs-wizard-step complete';
+							$rootScope.addProductsClass = 'col-xs-3 bs-wizard-step complete';
+							$rootScope.chooseTemplateClass = 'col-xs-3 bs-wizard-step complete';
+							$rootScope.requestSiteClass = 'col-xs-3 bs-wizard-step active';
+						}
+					}
+					
+					// For TaxData in user config
+					//console.log($rootScope.userDetails.config);
+					
+					/* if($rootScope.userDetails.config == ""){
+						$rootScope.userDetails.config = {};
+					}
+					if($rootScope.userDetails.config.inventory == undefined) $rootScope.userDetails.config.inventory = {};
+					
+					$rootScope.taxData = {
+						tax : [{
+							taxName : "service_tax",
+							displayName : "Service Tax",
+							taxValue : 14
+						},{
+							taxName : "vat",
+							displayName : "Vat",
+							taxValue : 5
+						}],
+						pan_no : "DIPPS1619D",
+						tin_no : "DIPPS1619DST001"
+					};
+					
+					$rootScope.userDetails.config.inventory.taxData = $rootScope.taxData;
+					
+					dataService.put('put/user/'+$rootScope.userDetails.id, {config : $rootScope.userDetails.config}).then(function(response){
+						if(response.status == "success"){
+							dataService.setUserDetails(JSON.stringify($rootScope.userDetails));
+							$rootScope.userDetails = dataService.parse(dataService.userDetails);
+						}
+					}) */
+					
+					//console.log($rootScope.userDetails.config);
+				}
+			});
 		});
-		
 		//(userDetails.config.chooseTemplate=='true')
 	}]);
 	

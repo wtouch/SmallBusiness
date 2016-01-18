@@ -6,7 +6,7 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var loginController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,$routeParams,$notification) {
-		
+		console.log($rootScope.hardwareSerial);
 		//function to login user
 		$scope.insert = function(login){
 			if($rootScope.standAlone) $rootScope.sqLite = false;

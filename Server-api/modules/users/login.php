@@ -36,12 +36,58 @@
 			}
 			// password check with hash encode
 			if(passwordHash::check_password($data['data']['password'],$password)){
-				$sessionObj->setSession($data['data'],$sessionPeriod);
+				
 				if($data['data']['status'] == 0){
 					throw new Exception('Please activate your account to access.');
 				}
 				if($data['data']['baned'] == 1){
 					throw new Exception('Your account is banned, please contact administrator.');
+				}
+				if(isset($input['hardwareSerial'])){
+					if(isset($data['data']['user_permissions']['hardwareSerial'])){
+						$user_permissions['user_permissions'] = $data['data']['user_permissions'];
+						if($input['hardwareSerial'] != $data['data']['user_permissions']['hardwareSerial']){
+							throw new Exception('You have installed this application more than one machine. Please Contact Administrator!');
+						}else{
+							if(isset($user_permissions['user_permissions']['installations']) && !isset($input['installations'])){
+								if(count($user_permissions['user_permissions']['installations']) > 5){
+									throw new Exception('You exceed limit of re-installation. Please Contact Administrator!');
+								}else{
+									$uniqueId = getUniqueId();
+									$user_permissions['user_permissions']['installations'][] = $uniqueId;
+						
+									$installations = $db->update("users", $user_permissions, array("id"=>$data['data']['id']));
+									if($installations["status"] == "success"){
+										$data['data']["installation_id"] = $uniqueId;
+									}
+								}
+							}elseif(isset($input['installations'])){
+								$validLogin = false;
+								foreach($user_permissions['user_permissions']['installations'] as $value){
+									if($value == $input['installations']){
+										$validLogin = true;
+									}
+								}
+								if($validLogin === false){
+									throw new Exception('You are not a valid user to access this app. Please contact administrator!');
+								}
+							}
+						}
+					}else{
+						$user_permissions['user_permissions'] = $data['data']['user_permissions'];
+						$user_permissions['user_permissions']['hardwareSerial'] = $input['hardwareSerial'];
+						$uniqueId = getUniqueId();
+						$user_permissions['user_permissions']['installations'][] = $uniqueId;
+						
+						$putHardwareSerial = $db->update("users", $user_permissions, array("id"=>$data['data']['id']));
+						if($putHardwareSerial["status"] == "success"){
+							$data['data']["installation_id"] = $uniqueId;
+						}
+						
+					}
+					$data['data']['user_permissions'] = $user_permissions['user_permissions'];
+					$sessionObj->setSession($data['data'],$sessionPeriod);
+					
 				}
 				$response["message"] = "You are logged in successfully.";
                 $response["status"] = "success";

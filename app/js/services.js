@@ -344,10 +344,44 @@ define(['app'], function (app) {
 				return tax;
 			}
 			
+			obj.serviceBase = serviceBase;
 			
 			obj.setBase = function(path){
 				serviceBase = path;
+				obj.serviceBase = path;
 			};
+			obj.checkAppMode = function(){
+				var deferred = $q.defer();
+				$http.get("app.json").success(function(response){
+					$rootScope.module = response.app_name;
+					var serialNumber = require('serial-number');
+					serialNumber.preferUUID = true;
+					serialNumber(function (err, value) {
+						$rootScope.hardwareSerial = value;
+						console.log($rootScope.hardwareSerial);
+					});
+					if(response.sqLiteDb){
+						$rootScope.sqLite = response.sqLiteDb;
+						$rootScope.standAlone = true;
+						dbHelper.setDb(response.app_name, response.app_description, 1024 * 1024 * 1024);
+						obj.setBase(response.server_api_path);
+						console.log(serviceBase);
+						if(!localStorage.sqLiteDb){
+							$http.get("modules/" + response.app_name + "/" + response.app_name + ".sql").success(function(response){
+								dbHelper.setDbStructure(response);
+								deferred.resolve(true);
+							})
+						}else{
+							deferred.resolve(true);
+						}
+					}
+					
+				}).error(function(response){
+					console.log(response);
+					deferred.resolve(response);
+				})
+				return deferred.promise;
+			}
 			obj.capitalize = function(string) {
 				return string.charAt(0).toUpperCase() + string.slice(1);
 			}
@@ -402,6 +436,8 @@ define(['app'], function (app) {
 				obj.setAuth(remb, 30);
 			}
 			obj.logout = function(){
+				if($rootScope.standAlone) $rootScope.sqLite = false;
+				console.log(obj.serviceBase);
 				obj.get('/login/logout').then(function(response){
 					$rootScope.LogoutMsg = response;
 					obj.userDetails = null;
@@ -409,6 +445,7 @@ define(['app'], function (app) {
 					obj.removeCookies($cookies);
 					sessionStorage.clear();
 					localStorage.clear();
+					if($rootScope.standAlone) $rootScope.sqLite = true;
 				});
 			};
 			obj.removeCookies = function(cookies){
@@ -965,8 +1002,9 @@ define(['app'], function (app) {
 				setDbStructure : function(structure){
 					var queryString = structure.replace(/^.*COMMIT TRANSACTION.*$/mg, "").replace(/^.*BEGIN TRANSACTION.*$/mg, "").replace(/^.*PRAGMA.*$/mg, "").replace(/^.*--.*$/mg, "").replace(/(\r\n|\n|\r)/gm,'');
 					var queryArray = queryString.split(";");
-					//console.log(queryArray);
-					
+					var data = {};
+					var setDbStructureResult;
+					var deferred = $q.defer();
 					db.transaction(function (tx) {
 					  tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';", [], function (tx, results) {
 						  var len = results.rows.length, i;
@@ -986,21 +1024,26 @@ define(['app'], function (app) {
 								  });
 								});
 							})
+							data.status = "success";
+							data.message = "Data Structure Created Successfully";
+							data.data = null;
+							deferred.resolve(data);
 						  }else{
-							  console.log(len);
+							  console.warn("Database Already Created!");
 						  }
 						
 					  },function(error, er1){
-						  console.log(error, er1);
 							data.status = 'error';
 							data.message = er1.message;
 							data.data = queryString;
 							console.error(data);
 							deferred.resolve(data);
 							obj.resetQueryString();
+							setDbStructureResult = false;
 					  });
 					});
 					
+					return deferred.promise;
 				},
 				put : function(table, data, params){
 					table = ($rootScope.module) ? $rootScope.module+"_"+table : table;
