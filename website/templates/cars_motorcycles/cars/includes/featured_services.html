@@ -1,0 +1,37 @@
+{% autoescape false %}
+{% if featured_products | length >= 2 %}
+	<div class="contentModule featured_services back2">
+		<div class="feature">
+			<h1><i>Featured Services</i></h1>
+		</div>
+		
+		<div class="sections clearfix services">
+		<ul class="bxslider" id="bxslider">
+			{% set break = 0 %}{% set i = 0 %}
+			{% for x in featured_products if break == 0 %}
+				{% if x.type == 'service' %}
+					
+					<li>
+					<a href="services/{{x.product_service_name | replace({' ':'-','/':'_'})}}/{{x.id}}">
+							<img id="img_gallery" class="img-responsive thumbnail" src="{{x.product_image.0.file_relative_path}}" alt="{{x.product_image.0.file_relative_path}}">
+					</a>
+					<!-- <div class="servdesc">
+						<h4>{{x.product_service_name}}</h4>
+						<div class="description">
+							{{ x.description }}
+						</div>
+						
+					</div> -->
+					</li>
+					{% set i = (i + 1) %}
+					{% if i == 4 %}
+						{% set break = 1 %}
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</ul>
+		</div>
+		
+	</div>
+	{% endif %}
+{% endautoescape %}

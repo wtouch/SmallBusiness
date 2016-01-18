@@ -22,18 +22,18 @@ $(document).ready(function(){
 	//})
 	$('.bxslider').bxSlider({
 		mode:'horizontal',
-		slideWidth: 250,
+		slideWidth: 300,
 		minSlides: minSlides,
 		maxSlides: maxSlides,
-		slideMargin: 25,
+		slideMargin: 10,
 		auto: true, 
 		autoDirection:'next',
 		moveSlides: 1,
 		pause:3000,
-		pager:true,
+		pager:false,
 		pagerType:'full',
-		autoControls: true, 
-		controls:true, 
+		autoControls: false, 
+		controls:false, 
 		autoHover:true,
 		speed:1000,
 	});
