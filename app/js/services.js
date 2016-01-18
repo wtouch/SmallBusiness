@@ -779,6 +779,7 @@ define(['app'], function (app) {
 				};
 				this.setColumns = function(params, table, raw){
 					obj.colString = (obj.colString) ? obj.colString : "";
+					if(!params) return;
 					if(params.cols != undefined){
 						if(angular.isArray(params.cols)){
 							angular.forEach(params.cols, function(value, key) {
@@ -960,6 +961,46 @@ define(['app'], function (app) {
 					  });
 					});
 					return deferred.promise;
+				},
+				setDbStructure : function(structure){
+					var queryString = structure.replace(/^.*COMMIT TRANSACTION.*$/mg, "").replace(/^.*BEGIN TRANSACTION.*$/mg, "").replace(/^.*PRAGMA.*$/mg, "").replace(/^.*--.*$/mg, "").replace(/(\r\n|\n|\r)/gm,'');
+					var queryArray = queryString.split(";");
+					//console.log(queryArray);
+					
+					db.transaction(function (tx) {
+					  tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';", [], function (tx, results) {
+						  var len = results.rows.length, i;
+						  if(len<=2){
+							  angular.forEach(queryArray,function(value,key){
+								db.transaction(function (tx) {
+								  tx.executeSql(value, [], function (tx, results) {
+									//console.log(tx, results);
+								  },function(error, er1){
+									  //console.log(error, er1);
+										data.status = 'error';
+										data.message = er1.message;
+										data.data = queryString;
+										//console.error(data);
+										deferred.resolve(data);
+										obj.resetQueryString();
+								  });
+								});
+							})
+						  }else{
+							  console.log(len);
+						  }
+						
+					  },function(error, er1){
+						  console.log(error, er1);
+							data.status = 'error';
+							data.message = er1.message;
+							data.data = queryString;
+							console.error(data);
+							deferred.resolve(data);
+							obj.resetQueryString();
+					  });
+					});
+					
 				},
 				put : function(table, data, params){
 					table = ($rootScope.module) ? $rootScope.module+"_"+table : table;

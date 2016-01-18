@@ -7,50 +7,48 @@
 				<div class="col-sm-2">
 						<div class="bottomspace">
 							<label for="partyList_status" class="control-label">Select Records</label>
-							<select id="partyList_status" class="form-control" ng-model="pageItems" ng-change="getData(false,currentPage, 'transaction','transactionList',transactionParams);"  ng-options="item as item for item in [10,20,30]">
+							<select id="partyList_status" class="form-control" ng-model="pageItems" ng-change="getData(false,currentPage,'transaction','transactionList',transactionParams);"  ng-options="item as item for item in [10,20,30]">
 							<option value="" selected>Select type</option>
 							</select>
 						</div>
 				</div>
 				<div class="col-sm-2">
-			<div class="bottomspace" ng-init="type ='daily';calcDuration(type,duration)">
-				<label for="year" class="control-label" >View Report</label>
-					<select id="year" class="form-control" ng-model="type">
-						<option value="daily">Daily Report</option>	
-						<option value="month">Monthly Report</option>	
-						<option value="year">Yearly Report</option>
-						<option value="custom">Custom Report</option>
-					</select>
-			</div>
-		</div>
-		<div class="col-sm-2" ng-if="type == 'daily'">
-			<div class="bottomspace">
-			<label for="date" class="control-label">Select Date</label>
-				<div class="input-group">
-				  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened1" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" ng-click="opened1=!opened1"/> 
+					<div class="bottomspace" ng-init="type ='daily';calcDuration(type,duration)">
+						<label for="year" class="control-label" >View Report</label>
+							<select id="year" class="form-control" ng-model="type">
+								<option value="daily">Daily Report</option>	
+								<option value="month">Monthly Report</option>	
+								<option value="year">Yearly Report</option>
+								<option value="custom">Custom Report</option>
+							</select>
+					</div>
 				</div>
-			</div>
-		</div>
-		
-		<div class="col-sm-2" ng-if="type == 'month'">
-			<div class="bottomspace">
-			<label for="month" class="control-label">Select Month</label>
-				<select id="month"  class="form-control " ng-model="duration" ng-init="duration = today.getMonth()+ 1;calcDuration(type, duration)" ng-change="calcDuration(type, duration)" ng-options="item.value as item.month for item in [{'month':'January',value:1},{'month':'February',value:2},{'month':'March',value:3},{'month':'April',value:4},{'month':'May',value:5},{'month':'June',value:6},{'month':'July',value:7},{'month':'August',value:8},{'month':'September',value:9},{'month':'October',value:10},{'month':'November',value:11},{'month':'December',value:12}]">
-					<option value="">Select Month</option>
-				</select>
-			</div>
-		</div>
-		
-		<div class="col-sm-2" ng-if="type == 'year'">
-			<div class="bottomspace">
-				<label for="year" class="control-label">View  duration report</label>
-					<select id="year" class="form-control" ng-model="duration" ng-init="duration = today.getFullYear(); calcDuration(type, duration)" ng-options="item as item for item in [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019]"
-					ng-change="calcDuration(type, duration)"> 
-						<option value="">Select Year</option>
-					</select> 
-			</div>
-		</div>
-		<!-- <div  ng-if="type == 'custom'">
+				<div class="col-sm-2" ng-if="type == 'daily'">
+					<div class="bottomspace">
+					<label for="date" class="control-label">Select Date</label>
+						<div class="input-group">
+						  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date" name="date" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened1" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-init="calcDuration(type, duration)" ng-click="opened1=!opened1"/> 
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-2" ng-if="type == 'month'">
+					<div class="bottomspace">
+					<label for="month" class="control-label">Select Month</label>
+						<select id="month"  class="form-control " ng-model="duration" ng-init="duration = today.getMonth()+ 1;calcDuration(type, duration)" ng-change="calcDuration(type, duration)" ng-options="item.value as item.month for item in [{'month':'January',value:1},{'month':'February',value:2},{'month':'March',value:3},{'month':'April',value:4},{'month':'May',value:5},{'month':'June',value:6},{'month':'July',value:7},{'month':'August',value:8},{'month':'September',value:9},{'month':'October',value:10},{'month':'November',value:11},{'month':'December',value:12}]">
+							<option value="">Select Month</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-2" ng-if="type == 'year'">
+					<div class="bottomspace">
+						<label for="year" class="control-label">View  duration report</label>
+							<select id="year" class="form-control" ng-model="duration" ng-init="duration = today.getFullYear(); calcDuration(type, duration)" ng-options="item as item for item in [2010,2011,2012,2013,2014,2015,2016,2017,2018,2019]"
+							ng-change="calcDuration(type, duration)"> 
+								<option value="">Select Year</option>
+							</select> 
+					</div>
+				</div>
+		<div  ng-if="type == 'custom'">
 			<div class="col-sm-2">
 					<div class="bottomspace">
 					<label for="date1" class="control-label">From Date</label>
@@ -75,7 +73,7 @@
 						</p>
 				</div>
 			</div>
-		</div> -->
+		</div>
 				</div>
 				<div class="col-sm-2" ng-if="types == 'income' || types == 'expense'">
 					<label for="category" class="control-label">Select Category</label>
