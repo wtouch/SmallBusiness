@@ -69,12 +69,13 @@ define(['app'], function (app) {
 						+'</select>',
 				},	
 				
-				{ name:'timefrom',enableSorting: false,
-					filterHeaderTemplate: '<input id="timefrom" class="form-control" ng-model="timefrom" placeholder="timefrom">',
+				{ name:'datefrom',enableSorting: false,
+					filterHeaderTemplate: '<input id="datefrom" class="form-control" ng-model="datefrom" placeholder="datefrom">',
+					cellTemplate:'<span>{{row.entity.datefrom}}</span>'
 					
 				}, 
-				{ name:'timeto',enableSorting: false,
-					filterHeaderTemplate: '<input id="timeto" class="form-control" ng-model="timeto" placeholder="timeto">',
+				{ name:'dateto',enableSorting: false,
+					filterHeaderTemplate: '<input id="dateto" class="form-control" ng-model="dateto" placeholder="dateto">',
 					
 				}, 
 				
@@ -117,8 +118,8 @@ define(['app'], function (app) {
 					type:data.type,
 					dept_id : data.dept_id,
 					class_id : data.class_id,
-					timefrom:data.timefrom,
-					timeto:data.timeto
+					datefrom:data.datefrom,
+					dateto:data.dateto
 					
 			} : {
 					user_id : $rootScope.userDetails.user_id,
@@ -130,8 +131,8 @@ define(['app'], function (app) {
 				type:data.type,
 				dept_name :  data.dept_name,
 				class_name: data.class_name,
-				timefrom:data.timefrom,
-				timeto:data.timeto,
+				datefrom:data.datefrom,
+				dateto:data.dateto,
 					
 			}:
 			{

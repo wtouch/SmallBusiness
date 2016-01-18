@@ -33,18 +33,22 @@ define(['app'], function (app) {
 		
 			columnDefs: [
 				{
-					name:'SrNo', 
+					name:'SrNo', width:100,
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 					enableFiltering: false,	
 				},
 				{
-					name:'stock_type',enableSorting: false,enableFiltering: true,
-					filterHeaderTemplate: '<select id="stock_type" class="form-control" ng-change="grid.appScope.filter(\'stock_type\', stock_type, \'stock\', \'stockData\',true, grid.appScope.stockParams)" ng-model="stock_type">' 
-							+'<option value="">Select Type</option>'
-							  +'<option value="1">Equipment</option>'
-						      +'<option value="2">Stationary</option>'
+				name:'stock_type',width:130,enableSorting: false ,
+				filterHeaderTemplate: '<select id="stock_type" class="form-control" ng-change="grid.appScope.filter(\'stock_type\', stock_type, \'stock\', \'stockData\',true, grid.appScope.stockParams)" ng-model="stock_type">'
+		
+							+'<option value="" selected>stock_type</option>'
+							+'<option value="Equipment">Equipment</option>'
+							+'<option value="stationary">stationary</option>'
+							
 						+'</select>',
+					
 				},
+				
 				{
 					name:'name',enableSorting: false,enableFiltering: true,
 					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'vendor_id\',vendor_id, \'stock\', \'stockData\',true, grid.appScope.stockParams)" ng-model="vendor_id" ng-options="item.id as item.name for item in grid.appScope.vendorlist">' 

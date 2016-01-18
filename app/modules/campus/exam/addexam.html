@@ -35,7 +35,7 @@
 			<div class="form-group" ng-init="modalOptions.getData( false, false,'class', 'classList', false, modalOptions) ">
 					<label for="class_name" class="col-sm-2 control-label">Class Name* </label>
 					<div class="col-sm-9">
-						<select id="class_id" class="form-control" ng-model="modalOptions.addexam.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList"  ng-change="modalOptions.classParams.where.class_id = modalOptions.addexam.class_id;modalOptions.getData(false, false,'division','divisionList', modalOptions.classParams, modalOptions)" required>
+						<select id="class_id" class="form-control" ng-model="modalOptions.addexam.class_id" ng-options="item.id as item.class_name for item in modalOptions.classList"  required>
 								<option value="">Select class</option>
 							</select>
 						<span class="help-block" ng-show="addexamform.class_name.$dirty && addexamform.class_name.$invalid">
@@ -45,83 +45,31 @@
 						</span>
 					</div>
 			</div>
-			
-			<!--  <div class="form-group" >
-				
-					<label for="division" class="col-sm-2 control-label">Division * </label>
-					<div class="col-sm-9">
-						<select id="div_id" class="form-control" ng-model="modalOptions.addexam.div_id" ng-options="item.id as item.division_name for item in modalOptions.divisionList"  ng-change="modalOptions.classParams.where.div_id = modalOptions.addexam.div_id;modalOptions.getData(false, false,'subjects','subjectList', modalOptions.classParams, modalOptions)" required>
-							<option value="">Select division</option>
-						</select>
-						<span class="help-block" ng-show="addexamform.div_id.$dirty && addexamform.div_id.$invalid">
-						<span ng-show="addexamform.div_id.$error.required" class="text-danger">division no is required.</span>
-						</span>	
-					</div>
-			</div> -->
 		
-			<!-- <div class="form-group">
-					<label for="subject" class="col-sm-2 control-label"> Subject * </label>
-					<div class="col-sm-9">
-						<select id="sub_id" class="form-control" ng-model="modalOptions.addexam.sub_id" ng-options="item.id as item.sub_name for item in modalOptions.subjectList" ng-change="modalOptions.classParams.where.sub_id=modalOptions.addexam.sub_id" required>
-							<option value="">Select subject</option>
-						</select>
-						<span class="help-block" ng-show="addexamform.sub_id.$dirty && addexamform.sub_id.$invalid">
-						<span ng-show="addexamform.sub_id.$error.required" class="text-danger">subject is required.</span>
-						</span>	
-					</div>
+		<div class="form-group">
+				<label  for="date" class="col-sm-2 control-label">Exam From*</label>
+			<div class="col-sm-3">
+				<div class="input-group">
+					<input type="text" class="form-control " placeholder="Date" id="datefrom" name="datefrom" ng-model="modalOptions.addexam.datefrom" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addexam.datefrom = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened = !opened" ng-change="modalOptions.setDate(modalOptions.addexam.datefrom,10); modalOptions.sqlDateFormat(modalOptions.addexam.datefrom, modalOptions.addexam.datefrom)"/>	
+					
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
 			</div>
-	 -->
-		
-		
-			 <!-- <div class="form-group">
-					<label for="day" class="col-sm-2 control-label">Day*</label>
-					<div class="col-sm-9">
-							<select id="day" name="day" class="form-control" 
-							ng-model="modalOptions.addexam.day"  required="required">
-							<option value="" selected>Select day</option>
-							<option value="sunday">Sunday</option>
-							<option value="monday">Monday</option>
-							<option value="Tuesday">Tuesday</option>
-							<option value="Wednesday">Wednesday</option>
-							<option value="Thursday">Thursday</option>
-							<option value="Friday">Friday</option>
-							<option value="saturday">saturday</option>
-							</select >
-							<span class="help-block" ng-show="addexamform.day.$dirty && addexamform.day.$invalid">
-							<span ng-show="addexamform.day.$error.required"class="text-danger">Select  Day</span>
-							</span>
-					</div>
-			</div>  -->
-		
-			<!-- <div class="form-group">
-				<label  for="date" class="col-sm-2 control-label">Date *</label>
-				<div class="col-sm-6">
-				<input type="text" class="form-control " placeholder="YYYY-DD-MM" id="date" name="date" ng-model="modalOptions.addexam.date"  ng-init="modalOptions.addexam.date=modalOptions.date"
-				datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"  ng-required="true" close-text="Close" ng-click="opened = !opened"/>
-			</div>  
-			</div> 
-			 -->
-			
-			<div class="form-group">
-				<label for="timefrom" class="col-sm-2 control-label">Exam Duration *</label>
-					<div class="col-sm-3">
-						<label for="from" class="col-sm-2 control-label">From</label>
-						<input type="date" name="timefrom" id="timefrom" ng-model="modalOptions.addexam.timefrom" placeholder="Enter time" class="form-control" required>
-						<span class="text-danger"  ng-show="addexamform.timefrom.$error.pattern">Please enter valid time</span>
-						<span class="help-block" ng-show="addexamform.timefrom.$dirty && addexamform.timefrom.$invalid">
-							<span ng-show="addexamform.timefrom.$error.required" class="text-danger">time is required.</span>
-						</span> 
-					</div>
-					<div class="col-sm-3">
-						<label for="to" class="col-sm-2 control-label">To</label>
-						<input type="date" name="timeto" id="timeto" ng-model="modalOptions.addexam.timeto" placeholder="Enter time"  class="form-control" required>
-						<span class="text-danger"  ng-show="addexamform.timeto.$error.pattern">Please enter valid time</span>
-						<span class="help-block" ng-show="addexamform.timeto.$dirty && addexamform.timeto.$invalid">
-							<span ng-show="addexamform.timeto.$error.required" class="text-danger">time is required.</span>
-						</span> 
-					</div>	
+			<label  for="date" class="col-sm-2 control-label">Exam To*</label>
+			<div class="col-sm-3">
+				<div class="input-group">
+					<input type="text" class="form-control " placeholder="Date" id="dateto" name="dateto" ng-model="modalOptions.addexam.dateto" datepicker-popup="{{'dd-MM-yyyy'}}" is-open="opened1" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-init="modalOptions.addexam.dateto = modalOptions.staffdate"  ng-required="true" close-text="Close" ng-click="opened1 = !opened" ng-change="modalOptions.setDate(modalOptions.addexam.dateto,10); modalOptions.sqlDateFormat(modalOptions.addexam.dateto, modalOptions.addexam.dateto)"/>	
+					
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="opened = !opened"><i class="glyphicon glyphicon-calendar"></i></button>
+					</span>
+				</div>
 			</div>
-	
+		</div>
+		
+		
 		<div class="modal-footer">
 			<div class="col-sm-offset-2 ">
 					 <button type="submit" class="btn btn-success" ng-if="!modalOptions.addexam.id" ng-disabled="addexamform.$invalid" ng-click="modalOptions.postData('exam',modalOptions.addexam);modalOptions.ok()">Save</button>

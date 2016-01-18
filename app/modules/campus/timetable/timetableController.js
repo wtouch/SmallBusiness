@@ -70,7 +70,7 @@ define(['app'], function (app) {
 				filterHeaderTemplate: '<select id="room_no" class="form-control" ng-change="grid.appScope.filter(\'room_id\', room_id, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="room_id" ng-options="item.id as item.room_no for item in grid.appScope.roomList">'
 							+'<option value="" selected>Room No</option>'
 						+'</select>',
-					//cellTemplate:'<span>{{row.entity.multipleentries[0].room_id}}</span>'
+					
 				},
 				
 				{ name:'name',width:100,enableSorting: false ,
@@ -86,14 +86,14 @@ define(['app'], function (app) {
 						//cellTemplate:'<span>{{row.entity.multipleentries[0].sub_name}}</span>'
 				},
 				
-				{  name:'date',width:130,
+				/* {  name:'date',width:130,
 				enableSorting: true, enableFiltering: false,
-					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'timetable\', \'timetableList\',true, grid.appScope.timetableList)" ng-model="date" placeholder="date">',
-				},
+					filterHeaderTemplate: '<input id="date" class="form-control" ng-change="grid.appScope.filter(\'date\', date, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="date" placeholder="date">',
+				}, */
 				{
-					name:'day',width:90,
-					enableSorting: false,
-					filterHeaderTemplate: '<select id="day" class="form-control" ng-change="grid.appScope.filter(\'day\', day, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams);ng-model="day">'
+				name:'day',width:130,enableSorting: false ,
+				filterHeaderTemplate: '<select id="day" class="form-control" ng-change="grid.appScope.filter(\'day\', day, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="day">'
+		
 							+'<option value="" selected>day</option>'
 							+'<option value="Sunday">Sunday</option>'
 							+'<option value="Monday">Monday</option>'
@@ -105,12 +105,12 @@ define(['app'], function (app) {
 						+'</select>',
 					
 				},
-				{ name:'timefrom',width:130,	enableSorting: false,
-					filterHeaderTemplate: '<input id="timefrom" class="form-control" ng-model="timefrom" placeholder="timefrom">',
+				{ name:'timefrom',width:130,enableSorting: false,
+					filterHeaderTemplate: '<input id="timefrom" class="form-control" ng-model="timefrom" >',
 					
 				}, 
-				{ name:'timeto',width:130,	enableSorting: false,
-					filterHeaderTemplate: '<input id="timeto" class="form-control" ng-model="timeto" placeholder="timeto">',
+				{ name:'timeto',width:130,enableSorting: false,
+					filterHeaderTemplate: '<input id="timeto" class="form-control" ng-model="timeto">',
 					
 				}, 
 				
@@ -157,7 +157,7 @@ define(['app'], function (app) {
 					sub_id:data.sub_id,
 					room_id:data.room_id,
 					day:data.day,
-					timefrom:data.time,
+					timefrom:data.timefrom,
 					timeto:data.timeto,
 					
 			} : {
