@@ -67,21 +67,11 @@
 				</select>
 			</div>
 		</div>
-		
-		<div class="col-sm-2">
-			<div class="bottomspace">
-				<label for="staffname" class="control-label">Select Staff</label>
-				<select id="staffname" class="form-control" ng-init="getData(false, currentPage,'staff','staffList',staffParams)" ng-model="staffname" ng-options="item.id as item.name for item in staffList">
-					<option value="" selected>Select Staff</option>
-				</select>
-			</div>
-		</div>
-		<!-- ng-change="filter('staff_id', staff_id, 'staffattendance', 'staffattendance', staffattendanceParams)"  -->
-		<div class="col-sm-3" ng-if="staffname">
+		<div class="col-sm-3">
 			<div class="bottomspace">
 				<label for="date2" class="control-label">From Date</label>{{duration.start}}
 					<div class="input-group">
-					  <input class="form-control" type="text" ng-change="calcDuration(type,duration)" id="date2" name="date2" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened2" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date2, mode)" ng-init="calcDuration(type, duration)" ng-click="opened2=!opened2"/> 
+					  <input class="form-control" type="text" id="date2" name="date2" datepicker-popup="yyyy-MM-dd" ng-model="duration.start" is-open="opened2" min-date="minDate" ng-required="true" close-text="Close" datepicker-options="dateOptions" date-disabled="disabled(date2, mode)" ng-init="calcDuration(type, duration)" ng-click="opened2=!opened2"/> 
 					
 					<span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="opened2 = !opened2"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -101,10 +91,20 @@
 					</div>
 			</div>
 		</div>
+		<div class="col-sm-2">
+			<div class="bottomspace">
+				<label for="staffname" class="control-label">Select Staff</label>
+				<select id="staffname" class="form-control" ng-init="getData(false, currentPage,'staff','staffList',staffParams)" ng-model="staffname" ng-options="item.id as item.name for item in staffList" >
+					<option value="" selected>Select Staff</option>
+				</select>
+			</div>
+		</div>
+		<!-- ng-change="filter('staff_id', staff_id, 'staffattendance', 'staffattendance', staffattendanceParams)"  -->
+	
 	</div>
 
 	{{staffattendanceL}}
-	<div class="table-responsive" ng-if="duration.end" ng-init="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams);getData(false, false, 'staff','staffList',staffParams)">
+	<div class="table-responsive"  ng-init="getData(false, currentPage, 'staffattendance','staffattendance',staffattendanceParams);getData(false, false, 'staff','staffList',staffParams)">
 		<div ui-grid="staffattendance"></div>
 	</div>
 	

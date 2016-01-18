@@ -15,7 +15,7 @@ define(['app'], function (app) {
 		$scope.currentPage = 1;
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
-		$rootScope.module = "inventory";
+		$rootScope.module = "hr";
 		
 		$http.get("modules/hr/config.json").success(function(response){
 			console.log(response);

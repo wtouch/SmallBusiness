@@ -89,8 +89,30 @@ define(['app'], function (app) {
 			date : dataService.sqlDateFormate(false,"datetime"),
 			modified_date : dataService.sqlDateFormate(false,"datetime"),
 		} 
+		$scope.transfer = {
+			fromDate : dataService.sqlDateFormate(),
+			toDate :  dataService.sqlDateFormate()
+		};
+		/*$scope.setSummaryDate = function(duration){
+			$scope.staffattendanceParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate($scope.duration.fromDate)+"' AND '" + dataService.sqlDateFormate($scope.duration.toDate) +"'"];	
+		}*/
 		
 		
+		$scope.setTransactionDate = function(transfer){
+			$scope.staffattendanceParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
+			+"'"];
+			$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffattendanceParams);
+		}
+		
+		 $scope.calcDuration = function(type, duration){
+			var curDate = new Date();
+			var dateS = new Date(duration.start);
+				var dateE = new Date(duration.end);
+				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
+				var endtDt = dateE.getFullYear() + "-" + (dateE.getMonth() + 1) + "-" + (dateE.getDate() + 1 );
+				var setDate={ "fromDate" : startDt,"toDate" : endtDt}
+				$scope.setTransactionDate(setDate);
+		} 
 		$scope.staffattendanceParams ={
 			where : {
 				user_id : $rootScope.userDetails.id,
@@ -140,21 +162,7 @@ define(['app'], function (app) {
 					})
 				},
 				
-	/*$scope.setTransactionDate = function(transfer){
-			$scope.staffattendanceParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
-			+"'"];
-			$scope.getData(false, $scope.currentPage, "staffattendance", "staffattendance", $scope.staffattendanceParams);
-		}
-		
-		 $scope.calcDuration = function(type, duration){
-			var curDate = new Date();
-			var dateS = new Date(duration.start);
-				var dateE = new Date(duration.end);
-				var startDt = dateS.getFullYear() + "-" + (dateS.getMonth() + 1) + "-" + dateS.getDate();
-				var endtDt = dateE.getFullYear() + "-" + (dateE.getMonth() + 1) + "-" + (dateE.getDate() + 1 );
-				var setDate={ "fromDate" : startDt,"toDate" : endtDt}
-				$scope.setTransactionDate(setDate);
-		} */ 
+	
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -200,6 +208,10 @@ define(['app'], function (app) {
 				dataService.extendDeep($scope.params, params, response);
 				$scope.getData(false ,$scope.currentPage, table, subobj, $scope.params);
 			})
+			
+			angular.extend($scope.staffattendanceParams, $scope.params);
+			
+			$scope.getData($scope.currentPage,'staffattendance', 'staffattendance', $scope.staffattendanceParams, modalOptions);
 		}
 		$scope.orderBy = function(col, value, table, subobj){
 			if(!$scope.params.orderBy) $scope.params.orderBy = {};
