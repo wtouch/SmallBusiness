@@ -179,7 +179,7 @@ $(document).ready(function(){
 		return false;
 	}
 	var cookieExpiry = new Date();
-	cookieExpiry.setMinutes(cookieExpiry.getMinutes() + 30);
+	cookieExpiry.setMinutes(cookieExpiry.getMinutes() + 86400000);
 	var cookieTime = cookieExpiry.toUTCString();
 	if(getCookie('anim') == false){
 		document.cookie="anim=true; expires=" + cookieTime;
