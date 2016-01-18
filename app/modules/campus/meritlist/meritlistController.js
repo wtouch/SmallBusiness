@@ -59,7 +59,7 @@ define(['app'], function (app) {
 		dueMonth = (dueMonth <= 9) ? '0' + dueMonth : dueMonth;
 		$scope.dueDate = dueDate.getFullYear() + "-" + dueMonth + "-" + dueDate.getDate();
 		
-		$scope.meritList = {
+			$scope.meritList = {
 			enableSorting: true,
 			enableFiltering: true,
 			columnDefs: [
@@ -67,67 +67,80 @@ define(['app'], function (app) {
 					name:'SrNo',width:50,
 					enableSorting: false,
 					enableFiltering: false, 
-					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"
-					
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>"	
+				},
+				{ 
+					name:'student_name',
+					filterHeaderTemplate: '<input id="student_name" class="form-control" ng-change="grid.appScope.filter(\'student_name\', student_name, \'student_view\', \'meritList\',true,grid.appScope.regParams)" ng-model="student_name" placeholder="Student Name">',
+					cellTemplate : "<span>{{row.entity.student_name| capitalize}} </span>"	
+				},
+				{ 
+					name:'address',
+					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'student_view\', \'meritList\',true,grid.appScope.studParams)" ng-model="address" placeholder="Address">'
+				},
+				{ 
+					name:'email_id',width:120,
+					filterHeaderTemplate: '<input id="email_id" class="form-control" ng-change="grid.appScope.filter(\'email_id\', email_id, \'student_view\', \'meritList\',true,grid.appScope.studParams)" ng-model="email_id" placeholder="Email ID">',
+				},
+				{ 
+					name:'Marks',width:100,
+					filterHeaderTemplate: '<input id="education" class="form-control" ng-change="grid.appScope.filter(\'education\', education, \'student_view\', \'meritList\',true,grid.appScope.studParams)" ng-model="education" placeholder="Marks">',
+					cellTemplate : '<span>{{row.entity.education[0].marks}}</span>'
+				},
+				{ 
+					name:'Percentage',width:120,
+					filterHeaderTemplate: '<input id="education" class="form-control" ng-change="grid.appScope.filter(\'education\', education, \'student_view\', \'meritList\',true,grid.appScope.studParams)" ng-model="education" placeholder="Percentage">',
+					cellTemplate : '<span>{{row.entity.education[0].percentage}}</span>'
+				},
+				
+				{ 
+					name:'class_name',enableSorting: false ,
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'student_view\', \'meritList\',true, grid.appScope.studParams)" ng-model="class_id" ng-options="item.class_name as item.class_name for item in grid.appScope.classList">',
+					cellTemplate : "<span>{{row.entity.class_name| capitalize}} </span>"	
+				},
+				{ 
+					name:'Percentage',width:120,
+					filterHeaderTemplate: '<input id="education" class="form-control" ng-change="grid.appScope.filter(\'education\', education, \'student_view\', \'meritList\',true,grid.appScope.studParams)" ng-model="education" placeholder="Percentage">',
+					cellTemplate : '<span>{{row.entity.education[0].percentage}}</span>'
 				},
 				{
-				    name:'student_name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'vendor\', \'vendorlist\', true, grid.appScope.vendorParams)" ng-model="name" placeholder="search">',
-                },
-				{
-				    name:'dept_name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'vendor\', \'vendorlist\', true, grid.appScope.vendorParams)" ng-model="name" placeholder="search">',
-                },
-				{
-				    name:'class_name',
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'vendor\', \'vendorlist\', true, grid.appScope.vendorParams)" ng-model="name" placeholder="search">',
-                },
-				{
-					name:'email_id',
-					filterHeaderTemplate: '<input id="email" class="form-control" ng-change="grid.appScope.filter(\'email\', email, \'vendor\', \'vendorlist\',true, grid.appScope.vendorParams)" ng-model="email" placeholder="search">'
-                },
-				{
-					name:'contact_no',
-					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'vendor\', \'vendorlist\',true, grid.appScope.vendorParams)" ng-model="phone" placeholder="search">'
-                },
-				{
-					name:'cast',
-					filterHeaderTemplate: '<input id="phone" class="form-control" ng-change="grid.appScope.filter(\'phone\', phone, \'vendor\', \'vendorlist\',true, grid.appScope.vendorParams)" ng-model="phone" placeholder="search">'
-                },
-			   {
-				    name:'address',
-					filterHeaderTemplate: '<input id="address" class="form-control" ng-change="grid.appScope.filter(\'address\', address, \'vendor\', \'vendorlist\',true, grid.appScope.vendorParams)" ng-model="address" placeholder="search">',
-                },
-				{
-				    name:'city',
-				    filterHeaderTemplate: '<input id="city" class="form-control" ng-change="grid.appScope.filter(\'city\', city, \'vendor\', \'vendorlist\',true, grid.appScope.vendorParams)" ng-model="city" placeholder="search">', 
-                },
-				{ name:'Manage',width:150,
-					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'vendor\', \'vendorlist\',false, grid.appScope.vendorParams)" ng-model="status">'
-							 +'<option value="" selected>Status</option>' 
+					name:'Manage', 
+					enableSorting: false, 
+					filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'student_view\', \'meritList\',false,grid.appScope.studParams)" ng-model="status">'
+							+'<option value="" selected>Status</option>'
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
-						+'</select>',
-				
-					cellTemplate : '<a ng-click="grid.appScope.openModal(\'modules/campus/vendor/addvendor.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit vendor" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					+ '<a type="button" tooltip="Delete record" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'vendor\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'+ '<a ng-click="grid.appScope.openModal(\'modules/campus/vendor/viewvendor.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view  vendor" > <span class="glyphicon glyphicon glyphicon-eye-open"></span></a>'
-					
+						+'</select>', 
+					filter: {
+					  //type: uiGridConstants.filter.SELECT,
+					  options: [ { value: '1', label: 'Active' }, { value: '0', label: 'Delete' }]
+					} ,
+					cellTemplate : '<a ng-click="grid.appScope.openStudentModal(\'modules/campus/meritlist/admittedStudent.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit Student"> <span class="glyphicon glyphicon-pencil"></span></a>'
+					+ '<a type="button" tooltip="Delete Student" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'student\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					+'<a ng-click="grid.appScope.openModal(\'modules/campus/meritlist/viewStudent.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="View Student"> <span class="glyphicon glyphicon-eye-open"></span></a>'
 				}
 			]
 		};
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				console.log($scope.vendorParams);
-				$scope.getData(false, $scope.currentPage, "registration", "meritlist", $scope.vendorParams);
+				console.log($scope.studParams);
+				$scope.getData(false, $scope.currentPage, "student_view", "meritlist", $scope.studParams);
 			}
 		}
 		$scope.classParams = {
-				where : {
-					status : 1,
-					user_id : $rootScope.userDetails.id
-				},
-				cols : ["*"]
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			},
+			cols : ["*"]
+		};
+		$scope.studParams = {
+			where : {
+				status : 1,
+				user_id : $rootScope.userDetails.id
+			}, 
+			cols : ["*"]
 		};
 	 $scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -179,7 +192,6 @@ define(['app'], function (app) {
 			$scope.params.orderBy[col] = value;
 			$scope.getData($scope.currentPage, table, subobj, $scope.params);
 		}
-	
 	};		
 	// Inject controller's dependencies
 	meritlistController.$inject = injectParams;

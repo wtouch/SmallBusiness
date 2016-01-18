@@ -1,0 +1,33 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
+	<h3  ng-if="!modalOptions.addStudent.id" class="text-center">Add Student</h3>
+	<h3  ng-if="modalOptions.addStudent.id" class="text-center">Update Student</h3>
+</div>
+<div class="modal-body">
+<ul class="nav nav-tabs">			
+		<li role="presentation" ng-class="{active: modalOptions.formPart=='studentPersonalDetails'}">
+			<a ng-click="modalOptions.showFormPart('studentPersonalDetails', modalOptions)">Personal Details</a>
+		</li>	
+		<li role="presentation" ng-class="{active: modalOptions.formPart=='studentEducationalDetails'}">
+			<a ng-click="modalOptions.showFormPart('studentEducationalDetails', modalOptions)">Educational Details</a>
+		</li>
+		<li role="presentation" ng-class="{active: modalOptions.formPart=='studentGardianDetails'}">
+			<a ng-click="modalOptions.showFormPart('studentGardianDetails', modalOptions)">Gardian Details</a>
+		</li>
+		<li role="presentation" ng-class="{active: modalOptions.formPart=='studentAttachmentDetail'}">
+			<a ng-click="modalOptions.showFormPart('studentAttachmentDetail', modalOptions)">Attachments Details</a>
+		</li>
+	</ul>
+<form class="form-horizontal" name="addStudentForm" role="form" ng-submit="addStudentForm.$valid" novalidate="novalidate">
+		<ng-include ng-show="modalOptions.formPart=='studentPersonalDetails'" src="'modules/campus/student/studentPersonalDetails.html'">
+		</ng-include> 
+		<ng-include  ng-show="modalOptions.formPart=='studentEducationalDetails'" src="'modules/campus/student/studentEducationalDetails.html'">
+		</ng-include>
+		<ng-include  ng-show="modalOptions.formPart=='studentGardianDetails'" src="'modules/campus/student/studentGardianDetails.html'">
+		</ng-include>
+		<ng-include  ng-show="modalOptions.formPart=='studentAttachmentDetail'" src="'modules/campus/student/studentAttachmentDetail.html'">
+		</ng-include>
+</form>
+</div>
+
+
