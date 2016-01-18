@@ -49,7 +49,7 @@
 										<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid" ng-if="!attendance.id" ng-click="postData('staffattendance',attendance,callback);">Add</button>
 									</div>
 									<div class="form-group">
-										<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid" ng-if="attendance.id" ng-click="updateData('staffattendance',attendance);">Update</button>
+										<button type="submit" class="btn btn-success" ng-disabled="attendanceForm.$invalid" ng-if="attendance.id" ng-click="updateData('staffattendance',attendance,attendance.id);">Update</button>
 									</div>
 							</form>	
 					</div>
@@ -76,7 +76,7 @@
 				</select>
 			</div>
 		</div>
-		
+		<!-- ng-change="filter('staff_id', staff_id, 'staffattendance', 'staffattendance', staffattendanceParams)"  -->
 		<div class="col-sm-3" ng-if="staffname">
 			<div class="bottomspace">
 				<label for="date2" class="control-label">From Date</label>{{duration.start}}

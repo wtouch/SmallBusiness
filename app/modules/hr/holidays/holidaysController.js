@@ -32,10 +32,14 @@ define(['app'], function (app) {
 					}
 				} 
 			},
-			
-			
 		]
-		
+			
+	$scope.addholiday = ($scope.addholiday)?
+		$scope.addholiday:{
+			user_id : $rootScope.userDetails.id,
+			date : dataService.sqlDateFormate(false,"datetime"),
+			modified_date : dataService.sqlDateFormate(false,"datetime"),
+		} 
 		/* function for get data from one module into another module
 		
 		$scope.getData1 = function(jfkd,fdjk,fd){

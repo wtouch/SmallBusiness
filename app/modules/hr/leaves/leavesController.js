@@ -16,7 +16,12 @@ define(['app'], function (app) {
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
 		$rootScope.module = "hr";
-		
+		$scope.today = new Date();
+		$scope.todayDt = $scope.today.getFullYear() + "-" + ($scope.today.getMonth() + 1) + "-" + $scope.today.getDate();
+		$scope.duration = {start : $scope.todayDt};
+		$scope.toDate = function(date){
+			return new Date(date);
+		}
 		$http.get("modules/hr/config.json").success(function(response){
 			console.log(response);
 				$scope.staffConfig = response;
@@ -51,42 +56,40 @@ define(['app'], function (app) {
 				},
 				{
 				    name:'leave_date',
-					width:100,
+					width:150,
 					filterHeaderTemplate: '<input id="leave_date" class="form-control" ng-change="grid.appScope.filter(\'leave_date\', leave_date, \'staffleaves\', \'staffleaves\',true)" ng-model="leave_date" placeholder="leave_date">'
                 },
 				{ name:'name',enableSorting: false ,
 				width:150,
-				filterHeaderTemplate: '<select id="staff_id" class="form-control" ng-change="grid.appScope.filter(\'staff_id\', staff_id, \'staffleaves\', \'staffleaves\',false,grid.appScope.staffleavesParams)" ng-model="staff_id" ng-options="item.id as item.name for item in grid.appScope.staffleavesParams">' 
-							+'<option value="">Select staff</option>'
-						+'</select>',
+				enableSorting: false,enableFiltering: false,
 				},
 				{
 				    name:'approved_by',
 					width:100,
-					filterHeaderTemplate: '<input id="approved_by" class="form-control" ng-change="grid.appScope.filter(\'approved_by\', approved_by, \'staffleaves\', \'staffleaves\',true)" ng-model="approved_by" placeholder="approved_by">',
+					enableSorting: false,enableFiltering: false,
                 },
 				{
 				    name:'reason',
 					width:150,
-					filterHeaderTemplate: '<input id="reason" class="form-control" ng-change="grid.appScope.filter(\'reason\', reason, \'staffleaves\', \'staffleaves\',true)" ng-model="reason" placeholder="reason">'
+					enableSorting: false,enableFiltering: false,
                 },
 				{
 				    name:'leaves_for',
 					width:100,
-					filterHeaderTemplate: '<input id="leaves_for" class="form-control" ng-change="grid.appScope.filter(\'leaves_for\', leaves_for, \'staffleaves\', \'staffleaves\',true)" ng-model="leaves_for" placeholder="leaves_for">'
+					enableSorting: false,enableFiltering: false,
                 },
 				{
 				    name:'type',
 					width:100,
-					filterHeaderTemplate: '<input id="type" class="form-control" ng-change="grid.appScope.filter(\'type\', type, \'staffleaves\', \'staffleaves\',true)" ng-model="type" placeholder="type">'
+				enableSorting: false,enableFiltering: false,
                 },
 				{
 				    name:'leavestatus',
 					width:150,
-					filterHeaderTemplate: '<input id="leavestatus" class="form-control" ng-change="grid.appScope.filter(\'leavestatus\', leavestatus, \'staffleaves\', \'staffleaves\',true)" ng-model="leavestatus" placeholder="leavestatus">'
+					enableSorting: false,enableFiltering: false,
                 },
 			    { 
-				 name:'Manage', width:300,
+				 name:'Manage', width:100,
 				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staffleaves\', \'staffleaves\')" ng-model="status">'
 							 +'<option value="" selected>--status--</option>' 
 							+'<option value="0">Deleted</option>'
@@ -99,8 +102,7 @@ define(['app'], function (app) {
 					},
 					cellTemplate :  
 					'<a ng-click="grid.appScope.openAddleaves(\'modules/hr/leaves/addleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit leaves" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					+
-					'<a ng-click="grid.appScope.openViewleaves(\'modules/hr/leaves/viewleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="view leaves"><span class="glyphicon glyphicon-eye-open"></span></a>'
+					
 					+
 					'<a type="button" tooltip="Delete staffleaves" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staffleaves\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
@@ -124,7 +126,7 @@ define(['app'], function (app) {
 					joinType : 'INNER JOIN',
 					joinTable : "hr_staff",
 					joinOn : {
-						staff_id : "t0.staff_id"
+					id : "t0.staff_id"
 					},
 					cols : ['name']
 				}],
@@ -144,7 +146,13 @@ define(['app'], function (app) {
 				date:{date : $scope.currentDate},
 				addleave : (data) ? {
 					id : data.id,
-					name : data.name,
+					//leave_date:data.leave_date,
+					type:data.type,
+					approved_by:data.approved_by,
+					leaves_for:data.leaves_for,
+					leavestatus:data.leavestatus,
+					staff_id:data.staff_id,
+					reason:data.reason,
 					//user_id:data.user_id,
 				}:{
 						date : dataService.sqlDateFormate(),
@@ -169,36 +177,11 @@ define(['app'], function (app) {
 			})
 		}
 	
-			$scope.openViewleaves = function(url,data){
-				var modalDefault = {
-				templateUrl: url, // apply template to modal
-				size : 'lg'
-				};
-			var modalOptions = {
-				date : dataService.sqlDateFormate(),
-			viewleaves:{
-						user_id : $rootScope.userDetails.id,
-						name:data.name,
-						staff_id : data.staff_id,
-						date : data.date,
-						//debit_amount:data.debit_amount
-					},
-					
-				getData : $scope.getData,
-					leaveParams : {
-						where : {
-							status : 1,
-							user_id : $rootScope.userDetails.id,
-								staff_id:data.id
-						
-						},
-						cols : ["*"]
-					}
-			};
-			modalService.showModal(modalDefault, modalOptions).then(function(){
-			})
+	$scope.setTransactionDate = function(transfer){
+			$scope.staffleavesParams.whereRaw = ["t0.date BETWEEN '"+dataService.sqlDateFormate(transfer.fromDate)+"' AND '" + dataService.sqlDateFormate(transfer.toDate)
+			+"'"];
+			$scope.getData(false, $scope.currentPage, "staffleaves", "staffleaves", $scope.staffleavesParams);
 		}
-		
 		// For Get (Select Data from DB)
 		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
 			$scope.params = (params) ? params : {
@@ -236,6 +219,21 @@ define(['app'], function (app) {
 					}
 				}
 			});
+		}
+		$scope.calcDuration = function(type, duration){
+			var curDate = new Date();
+				console.log(duration);
+				duration = parseInt(duration);
+				var today = new Date();
+				var start = new Date(today.getFullYear(), (duration - 1), 1);
+				var endt = new Date(today.getFullYear(), (duration - 1) + 1, -1);
+				
+				var startDt = start.getFullYear() +"-" + (start.getMonth() + 1) + "-"+start.getDate();
+				var endtDt = endt.getFullYear() +"-" + (endt.getMonth() + 1) + "-"+ (endt.getDate() + 1);
+		
+			var setDate={ "fromDate" : startDt,"toDate" : endtDt}
+			$scope.setTransactionDate(setDate);
+			
 		}
 		
 		$scope.filter = function(col, value, table, subobj, search){

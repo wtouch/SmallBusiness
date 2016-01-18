@@ -27,26 +27,65 @@ define(['app'], function (app) {
 				name : "Add Salary",
 				path : "#/dashboard/hr/salary",
 				events : {
-					click : function(){
+				click : function(){
 						return $scope.openSalary("modules/hr/salary/addsalary.html");
 					}
 				} 
-			},
-			
-			
+			},	
 		]
 		
-		
+			$scope.staffsalary= {
+			enableSorting: true,
+			enableFiltering: true,
+			columnDefs: [
+				{ name:'SrNo',
+				  width:50,
+				  enableSorting: false,
+				  enableFiltering: false, 
+					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",
+					filter: {
+					}
+				},
+				{
+				    name:'leave_date',
+					width:150,
+					filterHeaderTemplate: '<input id="leave_date" class="form-control" ng-change="grid.appScope.filter(\'leave_date\', leave_date, \'staffleaves\', \'staffleaves\',true)" ng-model="leave_date" placeholder="leave_date">'
+                },
+				{ name:'name',enableSorting: false ,
+				width:150,
+				enableSorting: false,enableFiltering: false,
+				},
+				
+			    { 
+				 name:'Manage', width:100,
+				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staffleaves\', \'staffleaves\')" ng-model="status">'
+							 +'<option value="" selected>--status--</option>' 
+							+'<option value="0">Deleted</option>'
+							+'<option value="1">Active</option>	'
+						+'</select>', 
+				 filter: {
+					   type: uiGridConstants.filter.SELECT,  
+					  selectOptions: [ { value: '1', label: 'Active' }, { value: '0', label: 'Deleted' }
+					  ]
+					},
+					cellTemplate :  
+					'<a ng-click="grid.appScope.openAddleaves(\'modules/hr/leaves/addleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit leaves" > <span class="glyphicon glyphicon-pencil"></span></a>'
+					
+					+
+					'<a type="button" tooltip="Delete staffleaves" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'staffleaves\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+				} 
+			]
+		};	
 		
 		
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
-				$scope.getData(false, $scope.currentPage, "staff", "staff", $scope.staffParams);
+				$scope.getData(false, $scope.currentPage, "transaction", "staffsalary", $scope.staffsalaryParams);
 			}
 		}
+	 
 		
-			
 		
 			$scope.openSalary = function(url, data){
 			var modalDefault = {
@@ -65,11 +104,11 @@ define(['app'], function (app) {
 					status:1
 				},
 				
-				staffleavesParams : {
+				staffsalaryParams : {
 					where : {
 						status : 1,
 						user_id : $rootScope.userDetails.id,
-						staff_id : data.staff_id,
+						//staff_id : data.staff_id,
 						//type : "Unpaid" // staff_dr
 						
 					},

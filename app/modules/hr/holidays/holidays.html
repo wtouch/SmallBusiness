@@ -35,9 +35,7 @@
 										</div>		
 										<button type="submit" class="btn btn-success"  ng-disabled="addholidayForm.$invalid" ng-click="   postData('staffholidays',addholiday, callback);">Add Holidays</button>
 								</div>	
-								<input type="text" id="user_id" class="form-control" ng-init="addholiday.user_id = userDetails.id" name="user_id" ng-model="addholiday.user_id" >
-								<input type="text" id="modified_date" class="form-control" ng-init="addholiday.modified_date = dataService.sqlDateFormate()," name="modified_date" ng-model="addholiday.modified_date" >
-								<input type="text" id="user_id" class="form-control" ng-init="addholiday.user_id = userDetails.id" name="user_id" ng-model="addholiday.user_id" >
+							
 						</form>	
 					</div>
 				</div>
@@ -55,16 +53,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-2">
-			<div class="bottomspace">
-				<label for="staffList_status" class="control-label" >Staff List Status</label>
-				<select id="staffList_status" class="form-control" ng-change="getData(false, currentPage,'staff', 'staff', staffParams)" ng-model="pageItems">
-					
-						<option value="10">10</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-				</select>
-			</div>
+	<div class="col-sm-2">
+		<div class="bottomspace">
+						<label for="page_item" class="control-label">Page Item</label>
+						<select id="page_item" class="form-control" ng-change="getData(false, currentPage,'staffholidays', 'staffholidays',holidaysParams)" ng-model="pageItems" ng-options="item as item for item in [10,20,30]">
+							<option value="" selected>Select type</option>
+						</select>
+					</div>
 		</div>
 	</div>
 	<div class="table-responsive" ng-init="getData(false, currentPage, 'staffholidays','staffholidays',holidaysParams);">

@@ -31,7 +31,7 @@
 			<div ng-init="modalOptions.getData(false,false,'staff','staffList', staffParams, modalOptions)">
 				<label for="reference_id" class="col-sm-1 control-label"> Select Staff* </label>
 				<div class="col-sm-4">{{modalOptions.addstaff.staff_type}}
-					<select id="reference_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList | filter : {staff_type = modalOptions.addstaff.staff_type}" required>
+					<select id="reference_id" class="form-control" ng-model="modalOptions.staffpayment.reference_id" ng-options="item.id as item.name for item in modalOptions.staffList" required>
 						<option value="">Select Staff</option>
 					</select>
 					<span class="help-block" ng-show="staffpaymentForm.reference_id.$dirty && staffpaymentForm.reference_id.$invalid">
@@ -167,15 +167,16 @@
 						</span>
 					</div>		
 			</div>
-			
-			<div class="form-group modal-footer">
-				<div class="col-sm-11"><!--   ng-disabled="staffpaymentForm.$invalid" "-->
-					<button type="submit" class="btn btn-success"ng-click="modalOptions.postData('transactions',modalOptions.staffpayment); modalOptions.ok()">Submit</button>
-					<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
-				</div>
-			</div>		
-</form>
-</div>
+</form>	
+</div>	
+	<div class="form-group modal-footer">
+		<div class="col-sm-11"><!--   ng-disabled="staffpaymentForm.$invalid" "-->
+			<button type="submit" class="btn btn-success"ng-click="modalOptions.postData('transaction',modalOptions.staffpayment); modalOptions.ok()">Submit</button>
+			<button type="reset" class="btn btn-danger" ng-click="modalOptions.close()">Cancel</button>
+		</div>
+	</div>		
+
+
 <!-- <div class="modal-footer">
 	
 	<button type="submit" class="btn btn-success" ng-if="!modalOptions.staffpayment.id" ng-disabled="staffpaymentForm.$invalid" ng-click="modalOptions.postData('staff_payment',modalOptions.staffpayment);modalOptions.ok()">Add Payment</button>

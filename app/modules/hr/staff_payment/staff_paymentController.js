@@ -15,7 +15,7 @@ define(['app'], function (app) {
 		$scope.currentPage = 1;
 		$scope.currentDate = dataService.currentDate;
 		$rootScope.serverApiV2 = true;
-		$rootScope.module = "hr";
+		$rootScope.module = "inventory";
 		
 		$http.get("modules/hr/config.json").success(function(response){
 			console.log(response);
@@ -41,11 +41,7 @@ define(['app'], function (app) {
 					}
 				} 
 			},
-			
-			
 		]
-		
-		
 		$scope.staff_payment= {
 			enableSorting: true,
 			enableFiltering: true,
@@ -62,31 +58,26 @@ define(['app'], function (app) {
 				{
 				    name:'payment_date',
 					width:100,
-					filterHeaderTemplate: '<input id="payment_date" class="form-control" ng-change="grid.appScope.filter(\'payment_date\', payment_date, \'staff_payment\', \'staff_payment\',true)" ng-model="payment_date" placeholder="payment date">'
+					filterHeaderTemplate: '<input id="payment_date" class="form-control" ng-change="grid.appScope.filter(\'payment_date\', payment_date, \'transaction\', \'staff_payment\',true)" ng-model="payment_date" placeholder="payment date">'
                 },
 				{
 				    name:'payment_type',
 					width:100,
-					filterHeaderTemplate: '<input id="payment_type" class="form-control" ng-change="grid.appScope.filter(\'payment_type\', payment_type, \'staff_payment\', \'staff_payment\',true)" ng-model="payment_type" placeholder="payment type">',
-                },
-				{
-				    name:'leaves_for',
-					width:150,
-					filterHeaderTemplate: '<input id="leaves_for" class="form-control" ng-change="grid.appScope.filter(\'leaves_for\', leaves_for, \'staff_payment\', \'staff_payment\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="payment_type" class="form-control" ng-change="grid.appScope.filter(\'payment_type\', payment_type, \'transaction\', \'staff_payment\',true)" ng-model="payment_type" placeholder="payment type">',
                 },
 				{
 				    name:'name',
 					width:150,
-					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff_payment\', \'staff_payment\',true)" ng-model="name" placeholder="name">'
+					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'transaction\', \'staff_payment\',true)" ng-model="name" placeholder="name">'
                 },
 				{
-				    name:'leavestatus',
+				    name:'category',
 					width:150,
-					filterHeaderTemplate: '<input id="leavestatus" class="form-control" ng-change="grid.appScope.filter(\'leavestatus\', leavestatus, \'staff_payment\', \'staff_payment\',true)" ng-model="phone" placeholder="Phone">'
+					filterHeaderTemplate: '<input id="category" class="form-control" ng-change="grid.appScope.filter(\'category\', category, \'transaction\', \'staff_payment\',true)" ng-model="category" placeholder="Search">'
                 },
 			    { 
 				 name:'Manage', width:300,
-				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staff_payment\', \'staff_payment\')" ng-model="status">'
+				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transaction\', \'staff_payment\')" ng-model="status">'
 							 +'<option value="" selected>--Select--</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -120,7 +111,13 @@ define(['app'], function (app) {
 				$scope.getData(false, $scope.currentPage, "staff", "staff", $scope.staffParams);
 			}
 		}
-		
+		$scope.staffParams = {
+			where : {
+				user_id : $rootScope.userDetails.id,
+				status : 1,
+			},
+			cols : ["*"]
+		}  
 		$scope.openStaffpayment= function(url,data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
@@ -154,7 +151,7 @@ define(['app'], function (app) {
 						},
 						cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 					}
-					dataService.get(false,'transactions', accountParams).then(function(response) {
+					dataService.get(false,'transaction', accountParams).then(function(response) {
 						console.log(response);
 						modalOptions.previous_balance = response.data[0].previous_balance;
 					})
@@ -171,7 +168,7 @@ define(['app'], function (app) {
 								joinType : 'INNER JOIN',
 								joinTable : "hr_staff",
 								joinOn : {
-									staff_id : "t0.staff_id"
+									id : "t0.staff_id"
 								},
 								cols : ['name']
 							}],

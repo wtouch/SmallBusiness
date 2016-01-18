@@ -119,7 +119,7 @@ define(['app'], function (app) {
 			$scope.postData = function(table, input){
 					$rootScope.postData(table, input,function(response){
 						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'staffattendance','staffattendanceList',$scope.staffattendanceParams);
+							$scope.getData(false, $scope.currentPage, 'staffattendance','staffattendance',$scope.staffattendanceParams);
 							$scope.attendance = {
 								user_id : $rootScope.userDetails.id,
 								date : dataService.sqlDateFormate(false,"datetime"),
@@ -128,15 +128,14 @@ define(['app'], function (app) {
 					})
 			},
 		$scope.updateData = function(table, input, id){
-					console.log(table, input, id);
-						
+					console.log(table, input, id);	
 					$rootScope.updateData(table, input, id, function(response){
 						if(response.status == "success"){ 
 							$scope.attendance = {
 								user_id : $rootScope.userDetails.id,
 								date : dataService.sqlDateFormate(false,"datetime"),
 								modified_date : dataService.sqlDateFormate(false,"datetime")};
-								$scope.getData(false, $scope.currentPage, 'staffattendance','staffattendanceList',$scope.staffattendanceParams);
+								$scope.getData(false, $scope.currentPage, 'staffattendance','staffattendance',$scope.staffattendanceParams);
 						}
 					})
 				},
