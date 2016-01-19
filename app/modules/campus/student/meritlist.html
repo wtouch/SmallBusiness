@@ -10,16 +10,16 @@
 							<div class="col-sm-6">
 								<h5>Merit Creation Tool</h5>
 								<div class="row">
-									<div class="col-sm-4"ng-init="getData( false, false,'department', 'departmentList', false)">
+									<div class="col-sm-4" ng-init="getData( false, false,'department', 'departmentList',false, false)">
 										<div class="bottomspace">
-											<select id="page_item" class="form-control"ng-model="dept_id" ng-options="item.id as item.dept_name for item in departmentList" ng-change="classParams.where.dept_id = dept_id;getData(false, false,'class','classList',classParams)">
+											<select id="page_item" class="form-control"ng-model="dept_id" ng-options="item.id as item.dept_name for item in departmentList" ng-change="classParams.where.dept_id = dept_id;getData(false, false,'class','classList',classParams,false)">
 												<option value="" selected>Select Department</option>
 											</select>
 										</div>
 									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-4" ng-init="getData(false,false,'class','classList',classParams,false)">
 										<div class="bottomspace">
-											<select id="class" class="form-control" ng-model="classData" ng-options="item as item.class_name for item in classList">
+											<select id="class_name" class="form-control" ng-model="class_name" ng-options="item class_name as item.class_name for item in classList">
 												<option value=""selected>Select Class</option>
 											</select>
 										</div>

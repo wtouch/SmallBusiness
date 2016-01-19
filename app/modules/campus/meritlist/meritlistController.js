@@ -95,8 +95,8 @@ define(['app'], function (app) {
 				
 				{ 
 					name:'class_name',enableSorting: false ,
-					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'student_view\', \'meritList\',true, grid.appScope.studParams)" ng-model="class_id" ng-options="item.class_name as item.class_name for item in grid.appScope.classList">',
-					cellTemplate : "<span>{{row.entity.class_name| capitalize}} </span>"	
+					filterHeaderTemplate: '<select id="name" class="form-control" ng-change="grid.appScope.filter(\'class_id\', class_id, \'student_view\', \'meritList\',true, grid.appScope.studParams)" ng-model="class_id" >',
+				
 				},
 				{ 
 					name:'Percentage',width:120,
