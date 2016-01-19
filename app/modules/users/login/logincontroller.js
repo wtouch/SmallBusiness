@@ -16,8 +16,10 @@ define(['app'], function (app) {
 		//function to login user
 		$scope.insert = function(login){
 			if($rootScope.standAlone) $rootScope.sqLite = false;
-			login.hardwareSerial = $rootScope.hardwareSerial;
-			login.hardwareSerial = "03D40274-0435-05DC-2B06-500700080009";
+			if($rootScope.hardwareSerial){
+				login.hardwareSerial = $rootScope.hardwareSerial;
+			}
+			//login.hardwareSerial = "03D40274-0435-05DC-2B06-500700080009";
 			
 			if(localStorage.installation_id){
 				
