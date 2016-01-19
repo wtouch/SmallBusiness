@@ -47,18 +47,37 @@ define(['app'], function (app) {
 					}
 				},
 				{
-				    name:'leave_date',
-					width:150,
-					filterHeaderTemplate: '<input id="leave_date" class="form-control" ng-change="grid.appScope.filter(\'leave_date\', leave_date, \'staffleaves\', \'staffleaves\',true)" ng-model="leave_date" placeholder="leave_date">'
+				    name:'date',
+					width:100,enableSorting: false,enableFiltering: false
                 },
-				{ name:'name',enableSorting: false ,
-				width:150,
+				{ name:'name',width:100,
 				enableSorting: false,enableFiltering: false,
 				},
+				{ name:'type',width:100,
+				enableSorting: false,enableFiltering: false,
+				},
+				{ name:'category',width:100,
+				enableSorting: false,enableFiltering: false,
+				},
+				{ name:'description.working_day',width:100,
+				enableSorting: false,enableFiltering: false,
+				},
+				{ name:'description.paid_leaves',width:200,
+				enableSorting: false,enableFiltering: false,
 				
+				},
+				{ name:'description.unpaid_leaves',width:100,
+				enableSorting: false,enableFiltering: false,
+				},
+				{ name:'description.cms',width:100,
+				enableSorting: false,enableFiltering: false,
+				},
+				{ name:'description.nsp',width:100,
+				enableSorting: false,enableFiltering: false,
+				},
 			    { 
-				 name:'Manage', width:100,
-				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'staffleaves\', \'staffleaves\')" ng-model="status">'
+				 name:'Manage', width:200,
+				 filterHeaderTemplate: '<select id="status" class="form-control" ng-change="grid.appScope.filter(\'status\', status, \'transaction\', \'staffsalary\')" ng-model="status">'
 							 +'<option value="" selected>--status--</option>' 
 							+'<option value="0">Deleted</option>'
 							+'<option value="1">Active</option>	'
@@ -69,15 +88,18 @@ define(['app'], function (app) {
 					  ]
 					},
 					cellTemplate :  
-					'<a ng-click="grid.appScope.openAddleaves(\'modules/hr/leaves/addleaves.html\',row.entity)" class="btn btn-primary btn-sm" type="button" tooltip-animation="true" tooltip="Edit leaves" > <span class="glyphicon glyphicon-pencil"></span></a>'
-					
+					'<a ng-click="grid.appScope.openPayslip(\'modules/hr/salary/viewpayslip.html\', row.entity)" class="btn btn-primary btn-sm btn btn-warning" type="button" tooltip-animation="true" tooltip="viewpayslip"> <span class="glyphicon glyphicon-eye-open" ></span></a>'
 					+
-					'<a type="button" tooltip="Delete transaction" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'transaction\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
+					'<a type="button" tooltip="Delete salary" ng-class="(row.entity.status==1) ? \'btn btn-success btn-sm\' : \'btn btn-danger btn-sm\'" ng-model="row.entity.status" ng-change="grid.appScope.changeCol(\'transaction\', \'status\',row.entity.status, row.entity.id, grid.appScope.callbackColChange)" btn-checkbox="" btn-checkbox-true="\'1\'" btn-checkbox-false="\'0\'" class="ng-pristine ng-valid active btn btn-success btn-sm"><span class="glyphicon glyphicon-remove"></span></a>'
 				} 
 			]
 		};	
 		
-		
+	/*	$scope.getData1 = function(single, page, table, subobj, params, modalOptions){
+			$rootScope.module = "inventory";
+			$scope.post(jfkd,fjdk,fjdk,fjdk,function(){
+				$rootScope.module = "hr";
+			});*/
 		$scope.callbackColChange = function(response){
 			console.log(response);
 			if(response.status == "success"){
@@ -87,7 +109,7 @@ define(['app'], function (app) {
 	 
 		
 		
-			$scope.openSalary = function(url, data){
+		$scope.openSalary = function(url, data){
 			var modalDefault = {
 				templateUrl: url,	// apply template to modal
 				size : 'lg'
@@ -98,8 +120,8 @@ define(['app'], function (app) {
 				paysalary : {
 					//staff_id : data.staff_id,
 					//salary : data.salary,
-					date : dataService.sqlDateFormate(),
-					modified_date : dataService.sqlDateFormate(),
+					date : dataService.sqlDateFormate(false,"datetime"),
+					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					user_id : $rootScope.userDetails.id,
 					status:1
 				},
@@ -109,8 +131,29 @@ define(['app'], function (app) {
 						status : 1,
 						user_id : $rootScope.userDetails.id,
 						//staff_id : data.staff_id,
+						type : 'staff_debit', // staff_dr
+						category :'Salary',
+						module_name:'inventory'
+					},
+						/* join: [
+								{
+									joinType : 'INNER JOIN',
+									joinTable : "hr_staff",
+									joinOn : {
+										id : "t0.staff_id"
+									},
+									cols : ['name']
+								}],  
+			 */
+					cols : ["*"]
+				},
+				staffParams : {
+					where : {
+						status : 1,
+						user_id : $rootScope.userDetails.id,
+						//staff_id : data.staff_id,
 						//type : "Unpaid" // staff_dr
-						
+						//category:'salary'
 					},
 					cols : ["*"]
 				},
@@ -125,7 +168,7 @@ define(['app'], function (app) {
 					},
 					cols : ["account_id, IFNULL((sum(t0.credit_amount) - sum(t0.debit_amount)),0) as previous_balance"]
 				}
-				dataService.get(false,'transactions', accountParams).then(function(response) {
+				dataService.get(false,'transaction', accountParams).then(function(response) {
 					console.log(response);
 					modalOptions.previous_balance = response.data[0].previous_balance;
 				})
@@ -182,6 +225,7 @@ define(['app'], function (app) {
 				},
 				getData:$scope.getData,	
 				postData : function(table, input){
+				$rootScope.module = "inventory";
 					console.log(table, input);
 							$scope.transData  = {};
 							$scope.transData.user_id=input.user_id;
@@ -192,7 +236,10 @@ define(['app'], function (app) {
 							$scope.transData.debit_amount = input.nsp;
 							$scope.transData.type=input.type;
 							$scope.transData.reference_id=input.staff_id;
+							$scope.transData.category='salary';
+							$scope.transData.payment_type=input.payment_type;
 							$scope.transData.description={
+								salary_date:input.salary_date,
 								working_day:input.working_day,
 								unpaid_leaves:input.unpaid_leaves,
 								paid_leaves:input.paid_leaves,
@@ -211,7 +258,10 @@ define(['app'], function (app) {
 								total:input.total,
 							};
 							console.log($scope.transData);
-							$rootScope.postData("transactions", $scope.transData,function(response){
+							$rootScope.postData("transaction", $scope.transData,function(response){
+								if(response.status == "success"){
+									$rootScope.module = "hr";
+								}
 							});
 						},
 					
@@ -222,9 +272,63 @@ define(['app'], function (app) {
 		}
 		
 	
+		$scope.openPayslip = function(url,data){
+				var modalDefault = {
+				templateUrl: url, // apply template to modal
+				size : 'lg'
+				};
+			var modalOptions = {
+				date : dataService.sqlDateFormate(),
+			viewPayslip:{
+						user_id : $rootScope.userDetails.id,
+						salary:data.salary,
+						name:data.name,
+						staff_id : data.staff_id,
+						date : data.date,
+						//debit_amount:data.debit_amount
+					},
+					
+				getData : $scope.getData,
+				paysalaryParams : {
+						where : {
+							status : 1,
+							user_id : $rootScope.userDetails.id,
+							reference_id : data.id,
+							type : "staff_debit" ,
+							module_name:'inventory'
+						},
+						cols : ["*"]
+					},
+			 myFunction:function(datetime) {
+				 console.log(datetime);
+						var month = new Array();
+						month[0] = "January";
+						month[1] = "February";
+						month[2] = "March";
+						month[3] = "April";
+						month[4] = "May";
+						month[5] = "June";
+						month[6] = "July";
+						month[7] = "August";
+						month[8] = "September";
+						month[9] = "October";
+						month[10] = "November";
+						month[11] = "December";
+					var d = new Date(datetime);
+					var n = month[d.getMonth()];
+					return n;
+					}
+			};
+			modalService.showModal(modalDefault, modalOptions).then(function(){
+			})
+		}
 		
 		// For Get (Select Data from DB)
-		$scope.getData = function(single, page, table, subobj, params, modalOptions) {
+		$scope.getData = function(single, page, table, subobj, params, modalOptions,module_name) {
+			console.log(module_name);
+			if(module_name){
+				$rootScope.module = module_name;
+			}
 			$scope.params = (params) ? params : {
 				where : {
 					status : 1,
@@ -240,10 +344,11 @@ define(['app'], function (app) {
 					}
 				})
 			}
-			dataService.get(single,table,$scope.params, subobj, params, modalOptions).then(function(response) {
-				console.log(response);
+				dataService.get(single,table,$scope.params).then(function(response) {
 				if(response.status == 'success'){
-					if(modalOptions != undefined){
+					
+					$rootScope.module = "inventory";
+					if(modalOptions){
 						modalOptions[subobj] = angular.copy(response.data);
 						modalOptions.totalRecords = response.totalRecords;
 					}else{
@@ -251,7 +356,7 @@ define(['app'], function (app) {
 						$scope.totalRecords = response.totalRecords;
 					}
 				}else{
-					if(modalOptions != undefined){
+					if(modalOptions){
 						modalOptions[subobj] = [];
 						modalOptions.totalRecords = 0;
 					}else{
