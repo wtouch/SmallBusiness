@@ -141,6 +141,9 @@ define(['angular',
 	
 		
 	app.run(['$location', '$rootScope', 'breadcrumbs','dataService','$cookieStore', '$cookies','$routeParams','$notification','$timeout', '$route', '$http', function($location, $rootScope, breadcrumbs, dataService, $cookieStore, $cookies, $routeParams, $notification, $timeout, $route,$http) {
+		if($cookies.get("auth") == "true"){
+			$rootScope.userDetails = dataService.userDetails;
+		}
 		
 		dataService.checkAppMode().then(function(data){
 				
