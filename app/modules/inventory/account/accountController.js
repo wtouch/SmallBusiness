@@ -111,9 +111,7 @@ define(['app'], function (app) {
 					category : data.category,
 					date : data.date
 				} : {
-					date : dataService.sqlDateFormate(),
 					user_id : $rootScope.userDetails.id,
-					date : dataService.sqlDateFormate(),
 					accountdate: dataService.sqlDateFormate(),
 					date : dataService.sqlDateFormate(false,"datetime"),
 					modified_date : dataService.sqlDateFormate(false,"datetime"),

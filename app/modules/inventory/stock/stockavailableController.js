@@ -116,9 +116,11 @@ define(['app'], function (app) {
 					cellTemplate : "<span>{{ (grid.appScope.pageItems * (grid.appScope.currentPage - 1)) + rowRenderIndex + 1}}</span>",enableSorting: false,
 					enableFiltering: false,	
 				},
+				
 				{
 				    name:'goods_name',
-					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'stock\', \'stockList\',true, grid.appScope.stockParams)" ng-model="goods_name" placeholder="search">',
+					width:150,
+					filterHeaderTemplate: '<input id="goods_name" class="form-control" ng-change="grid.appScope.filter(\'goods_name\', goods_name, \'staff\', \'staff\',true, grid.appScope.staffParams)" ng-model="goods_name" placeholder="Name">',
                 },
 					{
 					name:'goods_type',

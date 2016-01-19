@@ -41,29 +41,29 @@ define(['app'], function (app) {
 		}
 		
 		$scope.postData = function(table, input){
-					$rootScope.postData(table, input,function(response){
-						if(response.status == "success"){
-							$scope.getData(false, $scope.currentPage, 'stock_items','stockList',$scope.stockParams);
-							$scope.stock = {
-								user_id : $rootScope.userDetails.id,
-								stockdate : dataService.sqlDateFormate(false,"datetime"),
-								modified_date : dataService.sqlDateFormate(false,"datetime"),};
-						}
-					})
-			},
+			$rootScope.postData(table, input,function(response){
+				if(response.status == "success"){
+					$scope.getData(false, $scope.currentPage, 'stock_items','stockList',$scope.stockParams);
+					$scope.stock = {
+						user_id : $rootScope.userDetails.id,
+						stockdate : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime"),};
+				}
+			})
+		},
 		$scope.updateData = function(table, input, id){
-					console.log(table, input, id);
-						
-					$rootScope.updateData(table, input, id, function(response){
-						if(response.status == "success"){ 
-							$scope.stock = {
-								user_id : $rootScope.userDetails.id,
-								stockdate : dataService.sqlDateFormate(false,"datetime"),
-								modified_date : dataService.sqlDateFormate(false,"datetime")};
-								$scope.getData(false, $scope.currentPage, 'stock_items','stockList',$scope.stockParams);
-						}
-					})
-				},
+			$rootScope.updateData(table, input, id, function(response){
+				
+				if(response.status == "success"){ 
+					//$scope.stock = angular.copy($scope.stock);
+					$scope.stock = {
+						user_id : $rootScope.userDetails.id,
+						stockdate : dataService.sqlDateFormate(false,"datetime"),
+						modified_date : dataService.sqlDateFormate(false,"datetime")};
+						$scope.getData(false, $scope.currentPage, 'stock_items','stockList',$scope.stockParams);
+				}
+			})
+		},
 		$scope.setDate = function(date, days, sql){
 			var curDate = new Date(date);
 			var newDate = curDate.setDate(curDate.getDate() + days);
@@ -87,7 +87,7 @@ define(['app'], function (app) {
 		}
 		$scope.editData = function(object){
 			$scope.isCollapsed = true;
-			$scope.stock = object;
+			$scope.stock = angular.copy(object);
 		}
 		$scope.stockList = {
 			enableSorting: true,

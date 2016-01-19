@@ -1,0 +1,10 @@
+create trigger my_increment
+after insert 
+on inventory_account 
+begin 
+    update inventory_account 
+    set account_id=(select max(account_id) from inventory_account where user_id=new.user_id)+1 
+    where user_id=new.user_id and account_id = 0;
+end;
+
+insert into inventory_account(user_id,account_name)values(1,'SBI');

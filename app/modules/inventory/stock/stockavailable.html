@@ -18,7 +18,7 @@
 						<div class="row">
 								<h5 ng-if="!addstock.id">Add Stock</h5>
 								<h5 ng-if="addstock.id">Update Stock</h5>
-								<form name="addavailablestockForm" class="form-inline" role="form" novalidate="novalidate"ng-submit="addavailablestockForm.$valid" id="addavailablestockForm">
+								<form name="addavailablestockForm" class="form-inline" role="form" novalidate="novalidate" ng-submit="addavailablestockForm.$valid" id="addavailablestockForm">
 									<div class="form-group">
 										<label  for="goods_name">Goods Name</label><br/>
 										<input type="text" typeahead-template-url="stockList" class="form-control" id="particular" name="particular" ng-model="addstock.goods_name" typeahead-on-select="assignData($item,addstock)" typeahead="stock_items.goods_name for stock_items in getTypeaheadData('stock_items','goods_name', $viewValue)" typeahead-loading="locationLoading" typeahead-editable="false" autocomplete="off" required 
@@ -51,10 +51,10 @@
 									</div>
 									<div class="form-group">
 											<br/>
-											<button type="submit" ng-if="!addstock.id" class="btn btn-success" ng-disabled="addavailablestockForm.$invalid" ng-click="postData('stock',addstock)">
+											<button type="submit" ng-if="!addstock.id" class="btn btn-success" ng-click="postData('stock',addstock)">
 												<span>Submit</span>
 											</button>
-											<button type="submit" ng-if="addstock.id" class="btn btn-success" ng-disabled="addavailablestockForm.$invalid" ng-click=" updateData('stock',addstock, addstock.id)">
+											<button type="submit" ng-if="addstock.id" class="btn btn-success" ng-disabled="addavailablestockForm.$invalid" ng-click="updateData('stock',addstock, addstock.id)">
 												<span>Update</span>
 											</button> 
 									</div>
