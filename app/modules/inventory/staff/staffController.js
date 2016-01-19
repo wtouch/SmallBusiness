@@ -89,7 +89,7 @@ define(['app'], function (app) {
 					}
 				},
 				
-					{
+				{
 				    name:'name',
 					width:150,
 					filterHeaderTemplate: '<input id="name" class="form-control" ng-change="grid.appScope.filter(\'name\', name, \'staff\', \'staff\',true, grid.appScope.staffParams)" ng-model="name" placeholder="Name">',
@@ -208,7 +208,6 @@ define(['app'], function (app) {
 					UAN_no:data.UAN_no,
 					marital_status:data.marital_status,
 					gender:data.gender,
-					staff_type:data.staff_type,
 					modified_date : dataService.sqlDateFormate(false,"datetime"),
 					registration_date:data.registration_date
 					} :
