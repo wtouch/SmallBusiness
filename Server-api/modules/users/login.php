@@ -55,7 +55,7 @@
 								}else{
 									$uniqueId = getUniqueId();
 									$user_permissions['user_permissions']['installations'][] = $uniqueId;
-						
+									
 									$installations = $db->update("users", $user_permissions, array("id"=>$data['data']['id']));
 									if($installations["status"] == "success"){
 										$data['data']["installation_id"] = $uniqueId;
