@@ -354,12 +354,12 @@ define(['app'], function (app) {
 				var deferred = $q.defer();
 				$http.get("app.json").success(function(response){
 					$rootScope.module = response.app_name;
-					var serialNumber = require('serial-number');
+					/* var serialNumber = require('serial-number');
 					serialNumber.preferUUID = true;
 					serialNumber(function (err, value) {
 						$rootScope.hardwareSerial = value;
 						console.log($rootScope.hardwareSerial);
-					});
+					}); */
 					if(response.sqLiteDb){
 						$rootScope.sqLite = response.sqLiteDb;
 						$rootScope.standAlone = true;
@@ -444,7 +444,9 @@ define(['app'], function (app) {
 					obj.setAuth(false);
 					obj.removeCookies($cookies);
 					sessionStorage.clear();
-					localStorage.clear();
+					if(!localStorage.installation_id && !localStorage.hardwareSerial){
+						localStorage.clear();
+					}
 					if($rootScope.standAlone) $rootScope.sqLite = true;
 				});
 			};

@@ -6,10 +6,23 @@ define(['app'], function (app) {
 
     // This is controller for this view
 	var loginController = function ($scope,$rootScope,$injector,dataService,$location, $cookieStore, $cookies,$routeParams,$notification) {
-		console.log($rootScope.hardwareSerial);
+		
+		if(localStorage.installation_id && $cookies.get("auth") == 'true'){
+			$location.path("/dashboard");
+		}/* else{
+			$location.path("/login");
+		} */
+		
 		//function to login user
 		$scope.insert = function(login){
 			if($rootScope.standAlone) $rootScope.sqLite = false;
+			login.hardwareSerial = $rootScope.hardwareSerial;
+			login.hardwareSerial = "03D40274-0435-05DC-2B06-500700080009";
+			
+			if(localStorage.installation_id){
+				
+			}
+			
 			dataService.post("post/user/login",$scope.login)
 			.then(function(response) {
 				if($rootScope.standAlone) $rootScope.sqLite = true;
@@ -21,8 +34,11 @@ define(['app'], function (app) {
 					}
 					dataService.setAuth(true);
 					$rootScope.userDetails = dataService.userDetails;
+					if(response.data.installation_id){
+						localStorage.installation_id = response.data.installation_id;
+						localStorage.hardwareSerial = response.data.user_permissions.hardwareSerial;
+					}
 				}
-				
 				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
 				$notification[response.status]("Login", response.message);
 			})

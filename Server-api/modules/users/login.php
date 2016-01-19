@@ -86,9 +86,8 @@
 						
 					}
 					$data['data']['user_permissions'] = $user_permissions['user_permissions'];
-					$sessionObj->setSession($data['data'],$sessionPeriod);
-					
 				}
+				$sessionObj->setSession($data['data'],$sessionPeriod);
 				$response["message"] = "You are logged in successfully.";
                 $response["status"] = "success";
 				$response["data"] = $sessionObj->getSession();
