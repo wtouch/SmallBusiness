@@ -1,5 +1,5 @@
 'use strict';
-
+//controller
 define(['app'], function (app) {
     var injectParams = ['$scope','$rootScope','$injector','modalService','$routeParams' ,'$notification', 'dataService','uiGridConstants','$http'];
     
