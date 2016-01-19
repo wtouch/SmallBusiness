@@ -78,7 +78,13 @@ define(['app'], function (app) {
 					+'<option value="" selected>Staff Name</option>'
 						+'</select>',
 				},	
-				
+				{ 
+					name:'sub_name',enableSorting: false ,
+					filterHeaderTemplate: '<select id="sub_name" class="form-control" ng-change="grid.appScope.filter(\'sub_id\', sub_id, \'timetable\', \'timetableList\',true, grid.appScope.timetableParams)" ng-model="sub_id" ng-options="item.id as item.sub_name for item in grid.appScope.subjectList">' 
+					+'<option value="" selected>subject Name\</option>'
+						+'</select>',
+						cellTemplate:'<span>{{row.entity.sub_name}}</span>'
+				},	
 				{ name:'timefrom',enableSorting: false,
 					filterHeaderTemplate: '<input id="timefrom" class="form-control" ng-model="timefrom" placeholder="timefrom">',
 					cellTemplate:'<span>{{row.entity.timefrom}}</span>'
@@ -125,11 +131,14 @@ define(['app'], function (app) {
 					id : data.id,
 					user_id : data.user_id,
 					timetable_id :data.timetable_id,
-					type:data.type,
 					dept_id : data.dept_id,
 					class_id : data.class_id,
-					datefrom:data.datefrom,
-					dateto:data.dateto
+					div_id:data.div_id,
+					sub_id:data.sub_id,
+					staff_id:data.staff_id,
+					room_id:data.room_id,
+					timefrom:data.timefrom,
+					timeto:data.timeto
 					
 			} : {
 					user_id : $rootScope.userDetails.user_id,
@@ -138,11 +147,14 @@ define(['app'], function (app) {
 					dept_id : 1,
 				},
 				view : (data)?{
-				type:data.type,
 				dept_name :  data.dept_name,
 				class_name: data.class_name,
-				datefrom:data.datefrom,
-				dateto:data.dateto,
+				division_name:data.division_name,
+				room_no:data.room_no,
+				sub_name:data.sub_name,
+				name:data.name,
+				timefrom:data.timefrom,
+				timeto:data.timeto,
 					
 			}:
 			{
