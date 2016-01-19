@@ -3,15 +3,15 @@
 	<h3  ng-if="!modalOptions.addliabrarystock.id" class="text-center">Library Stock</h3>
 	<h3  ng-if="modalOptions.addliabrarystock.id" class="text-center" >Update Library Stock</h3>
 </div>
-{{modalOptions.addliabrarystock}}
+
 <div class="modal-body">
 	<form name="addlibrarystockForm" class="form-horizontal" role="form" novalidate="novalidate" ng-submit="addlibrarystockForm.$valid">	
 			<div class="form-group">
 			<div ng-init="modalOptions.getData(false,false,'book','bookList', bookParams, modalOptions)">
 				<label for="book_id" class="col-sm-2 control-label"> Select Book Name* </label>
 				<div class="col-sm-3">
-					<select id="book_id" class="form-control" ng-model="modalOptions.addliabrarystock.book_id" ng-options="item.id as item.name for item in modalOptions.bookList" required>
-						<option value="">Select Book</option>
+					<select id="book_id" class="form-control" ng-init="modalOptions.getData(false,false,'book','bookList',false,modalOptions)" ng-model="modalOptions.addliabrarystock.book_id" ng-options="item.id as item.book_name for item in modalOptions.bookList" ng-change="author=book.author;modalOptions.addliabrarystock.book_id=book_id" required>
+						<option value="">Select Book</option><!-- ng-change="student_name = student.student_name;modalOptions.addbookTransaction.student_id = student.id" -->
 					</select>
 					<span class="help-block" ng-show="addlibrarystockForm.book_id.$dirty && addlibrarystockForm.book_id.$invalid">
 					<span ng-show="addlibrarystockForm.book_id.$error.required" class="text-danger">user name is required.</span>
@@ -19,28 +19,19 @@
 				</div>
 			</div>
 			
-				<label for="author" class="col-sm-2 control-label">Author *</label>
+				<label for="author" class="col-sm-2 control-label">Author</label>
 				<div class="col-sm-3">
-					<input type="text" id="author" class="form-control" name="author" required>
-					<span class="help-block" ng-show="addlibrarystockForm.author.$dirty && addlibrarystockForm.author.$invalid">
-						<span class="text-danger" ng-show="addlibrarystockForm.author.$error.required">Required Field.</span>
-					</span>
+					<input type="text" id="author" class="form-control" ng-model="author">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="publisher" class="col-sm-2 control-label">Publisher *</label>
+				<label for="publisher" class="col-sm-2 control-label">Publisher</label>
 				<div class="col-sm-3">
-					<input type="text" id="publisher" class="form-control" name="publisher" required>
-					<span class="help-block" ng-show="addlibrarystockForm.publisher.$dirty && addlibrarystockForm.publisher.$invalid">
-						<span class="text-danger" ng-show="addlibrarystockForm.publisher.$error.required">Required Field.</span>
-					</span>
+					<input type="text" id="publisher" class="form-control" name="publisher">
 				</div>
-				<label for="Edition" class="col-sm-2 control-label">Edition *</label>
+				<label for="Edition" class="col-sm-2 control-label">Edition</label>
 				<div class="col-sm-3">
-					<input type="text" id="edition" class="form-control" name="edition" required>
-					<span class="help-block" ng-show="addlibrarystockForm.edition.$dirty && addlibrarystockForm.edition.$invalid">
-						<span class="text-danger" ng-show="addlibrarystockForm.edition.$error.required">Required Field.</span>
-					</span>
+					<input type="text" id="edition" class="form-control" name="edition">
 				</div>
 			</div>
 			<div class="form-group">
@@ -53,21 +44,15 @@
 					</span>
 					
 				</div>
-				<label for="amount" class="col-sm-2 control-label">Amount *</label>
+				<label for="amount" class="col-sm-2 control-label">Amount</label>
 				<div class="col-sm-3">
-					<input type="text" id="amount" class="form-control" name="amount" required>
-					<span class="help-block" ng-show="addlibrarystockForm.amount.$dirty && addlibrarystockForm.amount.$invalid">
-						<span class="text-danger" ng-show="addlibrarystockForm.amount.$error.required">Required Field.</span>
-					</span>
+					<input type="text" id="amount" class="form-control" name="amount">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="price" class="col-sm-2 control-label">Price *</label>
+				<label for="price" class="col-sm-2 control-label">Price</label>
 				<div class="col-sm-3">
-					<input type="text" id="price" class="form-control" name="price" required>
-					<span class="help-block" ng-show="addlibrarystockForm.price.$dirty && addlibrarystockForm.price.$invalid">
-						<span class="text-danger" ng-show="addlibrarystockForm.price.$error.required">Required Field.</span>
-					</span>
+					<input type="text" id="price" class="form-control" name="price">
 				</div>
 			</div>
 			<div class="modal-footer">
