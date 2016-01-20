@@ -1,4 +1,154 @@
 'use strict'; 
+
+// Nodejs encryption of buffers
+	const crypto = require('crypto');
+	var gui = require('nw.gui'),
+		path = require('path'),
+		fs = require('fs'),
+		zlib = require('zlib');
+	var algorithm = 'aes-256-ctr',
+		password = 'd6F3Efeq';
+	
+	var backupUtility = function(){
+		var obj = {};
+		obj.algorithm = 'aes-256-ctr';
+		obj.password = 'd6F3EfeqMakAdChAaLe';
+		obj.setPassword = function(pass){
+			obj.password = pass;
+		}
+		// Backup file with Zip Encrypt
+		obj.backupWithZipEncrypt = function(source,destination, destiFile){
+			if (!fs.existsSync(destination)){
+				fs.mkdirSync(destination);
+			}
+			//console.log(source, destination);
+			// input file
+			var input = fs.createReadStream(source);
+			// zip content
+			var zip = zlib.createGzip();
+			// encrypt content
+			var encrypt = crypto.createCipher(obj.algorithm, obj.password);
+			// write file
+			var output = fs.createWriteStream(destination + destiFile);
+			// start pipe
+			input.pipe(zip).pipe(encrypt).pipe(output);
+			return true;
+		};
+		
+		// Restore File with Unzip and Decrypt
+		obj.restoreWithUnzipDecrypt = function(source,destination,destiFile){
+			if (!fs.existsSync(destination)){
+				fs.mkdirSync(destination);
+			}
+			//console.log(source, destination);
+			// input file
+			var input = fs.createReadStream(source);
+			// unzip content
+			var unzip = zlib.createGunzip();
+			// decrypt content
+			var decrypt = crypto.createDecipher(obj.algorithm, obj.password)
+			// write file
+			var output = fs.createWriteStream(destination + destiFile);
+			// start pipe
+			input.pipe(decrypt).pipe(unzip).pipe(output);
+			return true;
+		};
+		
+		// Get All directories by given source path
+		obj.getDirectories = function(source) {
+		  return fs.readdirSync(source).filter(function(file) {
+			return fs.statSync(path.join(source, file)).isDirectory();
+		  });
+		};
+		
+		// Get All Files inside given directory
+		obj.getFiles = function(folderPath){
+			var files = [];
+			var dirs = obj.getDirectories(folderPath);
+			if(dirs.length >= 1){
+				for(var x in dirs){
+					var fileFromDir = fs.readdirSync(folderPath + dirs[x]);
+					for(var file in fileFromDir){
+						var fileDetails = {
+							path : folderPath + dirs[x] + "/" + fileFromDir[file],
+							filename : fileFromDir[file],
+							dir : dirs[x]
+						}
+						files.push(fileDetails);
+					}
+				}
+				var fileFromDir = fs.readdirSync(folderPath);
+				for(var file in fileFromDir){
+					if(!fs.lstatSync(folderPath + fileFromDir[file]).isDirectory()){
+						var fileDetails = {
+							path : folderPath + fileFromDir[file],
+							filename : fileFromDir[file]
+						}
+						files.push(fileDetails);
+					}
+				}
+			}else{
+				//console.log("fd");
+				var fileFromDir = fs.readdirSync(folderPath);
+				//console.log(fileFromDir);
+				for(var file in fileFromDir){
+					var fileDetails = {
+						path : folderPath + fileFromDir[file],
+						filename : fileFromDir[file]
+					}
+					files.push(fileDetails);
+				}
+			}
+			//console.log(files);
+			return files;
+		};
+		
+		obj.takeBackup = function(source, destination){
+			var allDbFiles = (obj.getFiles(source));
+			if(allDbFiles.length <=0) return false;
+			//console.log(allDbFiles);
+			for(var x in allDbFiles){
+				var file = allDbFiles[x];
+				//console.log(file);
+				var dir = (file.dir) ? file.dir + "/" : "";
+				obj.backupWithZipEncrypt(file.path, destination + dir, file.filename);
+			}
+			return true;
+		};
+		
+		obj.restoreBackup = function(source, destination){
+			
+			if (!fs.existsSync(destination)){
+				fs.mkdirSync(destination);
+			}
+			var allDbFiles = (obj.getFiles(source));
+			if(allDbFiles.length <=0) return false;
+			//console.log(allDbFiles);
+			for(var x in allDbFiles){
+				var file = allDbFiles[x];
+				//console.log(file);
+				var dir = (file.dir) ? file.dir + "/" : "";
+				obj.restoreWithUnzipDecrypt(file.path, destination + dir, file.filename);
+			}
+			return true;
+		}
+		return obj;
+	}
+	
+	var bckUtility = new backupUtility();
+	// Get application data path
+	var source = gui.App.dataPath + "/databases/";
+	
+	// Get current path where app running
+	var execPath = path.dirname( process.execPath );
+	
+	// Where to take backup
+	var destination = execPath+"/backup/";
+
+	//bckUtility.takeBackup(source, destination);
+	//bckUtility.restoreBackup(destination, execPath + "/data/");
+	
+
 var $routeProviderReference;
 var route;
 define(['angular',
