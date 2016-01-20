@@ -368,6 +368,7 @@ define(['app'], function (app) {
 						console.log(serviceBase);
 						if(!localStorage.sqLiteDb){
 							$http.get("modules/" + response.app_name + "/" + response.app_name + ".sql").success(function(response){
+								//console.log(response);
 								dbHelper.setDbStructure(response);
 								deferred.resolve(true);
 							})
@@ -1004,27 +1005,34 @@ define(['app'], function (app) {
 				setDbStructure : function(structure){
 					var queryString = structure.replace(/^.*COMMIT TRANSACTION.*$/mg, "").replace(/^.*BEGIN TRANSACTION.*$/mg, "").replace(/^.*PRAGMA.*$/mg, "").replace(/^.*--.*$/mg, "").replace(/(\r\n|\n|\r)/gm,'');
 					var queryArray = queryString.split(";");
+					//console.log(queryArray);
 					var data = {};
 					var setDbStructureResult;
 					var deferred = $q.defer();
 					db.transaction(function (tx) {
 					  tx.executeSql("SELECT * FROM sqlite_master WHERE type='table';", [], function (tx, results) {
 						  var len = results.rows.length, i;
+						  console.log(len);
 						  if(len<=2){
 							  angular.forEach(queryArray,function(value,key){
-								db.transaction(function (tx) {
-								  tx.executeSql(value, [], function (tx, results) {
-									//console.log(tx, results);
-								  },function(error, er1){
-									  //console.log(error, er1);
-										data.status = 'error';
-										data.message = er1.message;
-										data.data = queryString;
-										//console.error(data);
-										deferred.resolve(data);
-										obj.resetQueryString();
-								  });
-								});
+								  if(value.substring(0, 14) == "CREATE TRIGGER"){
+									//console.log(value);
+									value = value + "; END;"
+								  }
+								if(value.substring(0, 4) != " END"){
+									db.transaction(function (tx) {
+									  tx.executeSql(value, [], function (tx, results) {
+										//console.log(tx, results);
+									  },function(error, er1){
+										  //console.log(error, er1);
+											data.status = 'error';
+											data.message = er1.message;
+											data.data = queryString;
+											//console.error(data);
+											deferred.resolve(data);
+									  });
+									});
+								}
 							})
 							data.status = "success";
 							data.message = "Data Structure Created Successfully";

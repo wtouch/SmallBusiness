@@ -197,6 +197,7 @@ define(['app'], function (app) {
 					type : "tax_payment",
 					user_id : $rootScope.userDetails.id,
 					status : 1,
+					module_name : 'inventory'
 				}, 
 				getTaxAmount : function(taxName,taxAmount){
 					$scope.getData(false, true,'transaction', "tax_payment",$scope.taxParams);
@@ -277,7 +278,8 @@ define(['app'], function (app) {
 					type : "income",
 					user_id : $rootScope.userDetails.id,
 					status : 1,
-					credit_amount : 0
+					credit_amount : 0,
+					module_name : 'inventory'
 				},
 				
 				getBalance : function(accountId, modalOptions) {
@@ -352,7 +354,8 @@ define(['app'], function (app) {
 					type : "expense",
 					user_id : $rootScope.userDetails.id,
 					status : 1,
-					debit_amount : 0
+					debit_amount : 0,
+					module_name : 'inventory'
 				},
 				getBalance : function(accountId, modalOptions) {
 					//console.log(accountId, modalOptions);

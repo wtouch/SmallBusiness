@@ -51,5 +51,50 @@ CREATE TABLE inventory_bill (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NUL
 -- Table: inventory_staffholidays
 CREATE TABLE inventory_staffholidays (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, user_id INTEGER NOT NULL, holiday_id INTEGER NOT NULL, holiday_name VARCHAR (256), holiday_date DATETIME, date DATETIME, modified_date DATETIME, status INTEGER);
 
+CREATE TRIGGER inventory_saffleaves_id AFTER INSERT ON inventory_saffleaves BEGIN UPDATE inventory_saffleaves SET staffleave_id = (SELECT max(staffleave_id) FROM inventory_saffleaves WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: my_trigger
+CREATE TRIGGER my_trigger AFTER INSERT ON inventory_account BEGIN UPDATE inventory_account SET account_id = (SELECT max(account_id) FROM inventory_account WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_transaction
+CREATE TRIGGER inventory_transaction AFTER INSERT ON inventory_transaction BEGIN UPDATE inventory_transaction SET transaction_id = (SELECT max(transaction_id) FROM inventory_transaction WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_purchase_order_id
+CREATE TRIGGER inventory_purchase_order_id AFTER INSERT ON inventory_purchase_order BEGIN UPDATE inventory_purchase_order SET purchase_order_id = (SELECT max(purchase_order_id) FROM inventory_purchase_order WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_quotation
+CREATE TRIGGER inventory_quotation AFTER INSERT ON inventory_quotation BEGIN UPDATE inventory_quotation SET quotation_id = (SELECT max(bill_id) FROM inventory_quotation WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_staffattendance
+CREATE TRIGGER inventory_staffattendance AFTER INSERT ON inventory_staffattendance BEGIN UPDATE inventory_staffattendance SET attendance_id = (SELECT max(attendance_id) FROM inventory_staffattendance WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_staff_staff_id
+CREATE TRIGGER inventory_staff_staff_id AFTER INSERT ON inventory_staff BEGIN UPDATE inventory_staff SET staff_id = (SELECT max(staff_id) FROM inventory_staff WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_stock_stock_id
+CREATE TRIGGER inventory_stock_stock_id AFTER INSERT ON inventory_stock BEGIN UPDATE inventory_stock SET stock_id = (SELECT max(stock_id) FROM inventory_stock WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_invoice_invoice_id
+CREATE TRIGGER inventory_invoice_invoice_id AFTER INSERT ON inventory_invoice BEGIN UPDATE inventory_invoice SET invoice_id = (SELECT max(invoice_id) FROM inventory_invoice WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_tax
+CREATE TRIGGER inventory_tax AFTER INSERT ON inventory_tax BEGIN UPDATE inventory_tax SET tax_id = (SELECT max(tax_id) FROM inventory_tax WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_stock_items
+CREATE TRIGGER inventory_stock_items AFTER INSERT ON inventory_stock_items BEGIN UPDATE inventory_stock_items SET stock_item_id = (SELECT max(stock_item_id) FROM inventory_stock_items WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_bill_bill_id
+CREATE TRIGGER inventory_bill_bill_id AFTER INSERT ON inventory_bill BEGIN UPDATE inventory_bill SET bill_id = (SELECT max(bill_id) FROM inventory_bill WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_staff_payment
+CREATE TRIGGER inventory_staff_payment AFTER INSERT ON inventory_staff_payment BEGIN UPDATE inventory_staff_payment SET staff_payment_id = (SELECT max(staff_payment_id) FROM inventory_staff_payment WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_staffholidays_holiday_id
+CREATE TRIGGER inventory_staffholidays_holiday_id AFTER INSERT ON inventory_staffholidays BEGIN UPDATE inventory_staffholidays SET holiday_id = (SELECT max(holiday_id) FROM inventory_staffholidays WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+-- Trigger: inventory_party_party_id
+CREATE TRIGGER inventory_party_party_id AFTER INSERT ON inventory_party BEGIN UPDATE inventory_party SET party_id = (SELECT max(party_id) FROM inventory_party WHERE user_id=new.user_id) + 1 WHERE id = new.id; END;
+
+
 COMMIT TRANSACTION;
 PRAGMA foreign_keys = on;
