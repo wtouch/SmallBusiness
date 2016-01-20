@@ -18,32 +18,41 @@ define(['app'], function (app) {
 			if($rootScope.standAlone) $rootScope.sqLite = false;
 			if($rootScope.hardwareSerial){
 				login.hardwareSerial = $rootScope.hardwareSerial;
+				login.moduleName = $rootScope.module;
 			}
-			//login.hardwareSerial = "03D40274-0435-05DC-2B06-500700080009";
-			
-			if(localStorage.installation_id){
-				
-			}
-			
-			dataService.post("post/user/login",$scope.login)
-			.then(function(response) {
-				if($rootScope.standAlone) $rootScope.sqLite = true;
-				if(response.status == 'success'){
-					$location.path("/dashboard");
-					dataService.setUserDetails(dataService.parse(response.data));
-					if($scope.login.remember){
-						dataService.rememberPass(true);
-					}
+			if(localStorage.installation_id && localStorage.hardwareSerial){
+				var userDetails = JSON.parse(localStorage.userDetails);
+				console.log(userDetails);
+				if(login.username == userDetails.username){
 					dataService.setAuth(true);
+					dataService.setUserDetails(userDetails);
 					$rootScope.userDetails = dataService.userDetails;
-					if(response.data.installation_id){
-						localStorage.installation_id = response.data.installation_id;
-						localStorage.hardwareSerial = response.data.user_permissions.hardwareSerial;
-					}
+					$location.path("/dashboard");
+				}else{
+					$notification.error("Login", "Incorrect Username or Password!");
 				}
-				if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
-				$notification[response.status]("Login", response.message);
-			})
+			}else{
+				
+				dataService.post("post/user/login",$scope.login)
+				.then(function(response) {
+					if($rootScope.standAlone) $rootScope.sqLite = true;
+					if(response.status == 'success'){
+						$location.path("/dashboard");
+						dataService.setUserDetails(dataService.parse(response.data));
+						if($scope.login.remember){
+							dataService.rememberPass(true);
+						}
+						dataService.setAuth(true);
+						$rootScope.userDetails = dataService.userDetails;
+						if(response.data.installation_id){
+							localStorage.installation_id = response.data.installation_id;
+							localStorage.hardwareSerial = response.data.user_permissions.hardwareSerial;
+						}
+					}
+					if(response.status == undefined) response = {status :"error", message:"Unknown Error"};
+					$notification[response.status]("Login", response.message);
+				})
+			}
 		}
 		
 		//function to forgot password
