@@ -1,15 +1,16 @@
 'use strict'; 
 
 // Nodejs encryption of buffers
-	const crypto = require('crypto');
-	var gui = require('nw.gui'),
-		path = require('path'),
-		fs = require('fs'),
-		zlib = require('zlib');
-	var algorithm = 'aes-256-ctr',
-		password = 'd6F3Efeq';
 	
 	var backupUtility = function(){
+		const crypto = require('crypto');
+		var gui = require('nw.gui'),
+			path = require('path'),
+			fs = require('fs'),
+			zlib = require('zlib');
+		var algorithm = 'aes-256-ctr',
+			password = 'd6F3Efeq';
+	
 		var obj = {};
 		obj.algorithm = 'aes-256-ctr';
 		obj.password = 'd6F3EfeqMakAdChAaLe';
@@ -134,8 +135,8 @@
 		}
 		return obj;
 	}
-	
-	var bckUtility = new backupUtility();
+	/* 
+	//var bckUtility = new backupUtility();
 	// Get application data path
 	var source = gui.App.dataPath + "/databases/";
 	
@@ -147,7 +148,7 @@
 
 	//bckUtility.takeBackup(source, destination);
 	//bckUtility.restoreBackup(destination, execPath + "/data/");
-	
+	 */
 
 var $routeProviderReference;
 var route;
